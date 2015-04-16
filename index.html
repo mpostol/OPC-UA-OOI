@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="Opc-ua-ooi : OPC UA Object Oriented Internet">
@@ -9,70 +9,80 @@
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
     <title>Opc-ua-ooi</title>
-  </head>
+</head>
 
-  <body>
+<body>
 
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/mpostol/OPC-UA-OOI">View on GitHub</a>
+            <a id="forkme_banner" href="https://github.com/mpostol/OPC-UA-OOI">View on GitHub</a>
 
-          <h1 id="project_title">Opc-ua-ooi</h1>
-          <h2 id="project_tagline">OPC UA Object Oriented Internet</h2>
+            <h1 id="project_title">Opc-ua-ooi</h1>
+            <h2 id="project_tagline">OPC UA Object Oriented Internet</h2>
 
             <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/mpostol/OPC-UA-OOI/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/mpostol/OPC-UA-OOI/tarball/master">Download this project as a tar.gz file</a>
+                <a class="zip_download_link" href="https://github.com/mpostol/OPC-UA-OOI/zipball/master">Download this project as a .zip file</a>
+                <a class="tar_download_link" href="https://github.com/mpostol/OPC-UA-OOI/tarball/master">Download this project as a tar.gz file</a>
             </section>
         </header>
     </div>
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
-<a id="charter" class="anchor" href="#charter" aria-hidden="true"><span class="octicon octicon-link"></span></a>CHARTER</h1>
+        <section id="main_content" class="inner">
+            <h1>
+                <a id="charter" class="anchor" href="#charter" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+                CHARTER
+            </h1>
 
-<h2>
-<a id="in-scope" class="anchor" href="#in-scope" aria-hidden="true"><span class="octicon octicon-link"></span></a>In Scope</h2>
+            <h2>
+                <a id="in-scope" class="anchor" href="#in-scope" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+                In Scope
+            </h2>
 
-<p>Today the Internet is used by millions of people to gain access to information resources and services. The widespread use of the HTTP and hypertext makes it possible to freely publish new information and expose it in a context of its description. Unfortunately, this is a human-centric environment that cannot easily be adapted for the application-centric approach, which is required to provide globally distributed enterprise management and real-time process control. In this article new architecture is presented that can be used to provide a generic solution for publishing and updating information in a context that can be used to describe and discover it. It is accomplished by distributing publisher (server) tasks to three classes: (a) information context management using object oriented programming paradigm, (b) a predefined fixed set of services that are used to access the data and meta-date, and (c) a pluggable custom data binding mechanism. It is proposed to implement this architecture using the OPC Unified Architecture - a new emerging industrial integration standard that fulfills these architecture requirements. </p>
+            <p>
+                Today the Internet is used by millions of people to gain access to information resources and services. The widespread use of the HTTP and
+                hypertext makes it possible to freely publish new information and expose it in a context of its description. Unfortunately, this is a human-centric environment that cannot easily be adapted for the application-centric approach, which is required to provide globally distributed enterprise management and real-time process control. In this article new architecture is presented that can be used to provide a generic solution for publishing and updating information in a context that can be used to describe and discover it. It is accomplished by distributing publisher (server) tasks to three classes: (a) information context management using object oriented programming paradigm, (b) a predefined fixed set of services that are used to access the data and meta-date, and (c) a pluggable custom data binding mechanism. It is proposed to implement this architecture using the OPC Unified Architecture - a new emerging industrial integration standard that fulfills these architecture requirements.
+            </p>
 
-<p>That makes the presented approach a real proposal for new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability</p>
+            <p>That makes the presented approach a real proposal for new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability</p>
 
-<p>This project is aimed to workout deliverables supporting Process Data handling over Internet including but not limiting to:</p>
+            <p>This project is aimed to workout deliverables supporting Process Data handling over Internet including but not limiting to:</p>
 
-<ul>
-<li>Data Edition – UI allowing display and edition of any custom data</li>
-<li>Data serialization and deserialization </li>
-<li>Data binding – to define how the process data relate to the real world</li>
-<li>Data Validation </li>
-<li>Data Prototyping  - methods and tools to design custom data types</li>
-<li>Data Discovery – methods and tools to find the data over the network.
-In scope there are also deliverables supporting:</li>
-<li>Exposition of the Process Data in the context of Metadata</li>
-<li>Browsing (using the sematic) of the Metadata to selectively access requested Process Data</li>
-<li>Modeling and representation of the Metadata</li>
-<li>Validation semantic and consistency of the Metadata</li>
-</ul>
+            <ul>
+                <li>Data Edition – UI allowing display and edition of any custom data</li>
+                <li>Data serialization and deserialization </li>
+                <li>Data binding – to define how the process data relate to the real world</li>
+                <li>Data Validation </li>
+                <li>Data Prototyping  - methods and tools to design custom data types</li>
+                <li>Data Discovery – methods and tools to find the data over the network. </li>
+            </ul>
+            <p>In scope there are also deliverables supporting:</p>
+            <ul>
+                <li>Exposition of the Process Data in the context of Metadata</li>
+                <li>Browsing (using the semantic) of the Metadata to selectively access requested Process Data</li>
+                <li>Modeling and representation of the Metadata</li>
+                <li>Validation semantic and consistency of the Metadata</li>
+            </ul>
 
-<h2>
-<a id="out-of-scope" class="anchor" href="#out-of-scope" aria-hidden="true"><span class="octicon octicon-link"></span></a>Out of scope</h2>
+            <h2>
+                <a id="out-of-scope" class="anchor" href="#out-of-scope" aria-hidden="true"><span class="octicon octicon-link"></span></a>Out of scope
+            </h2>
 
-<p>Out of scope is any work on exchanging the Process Data and Metadata over the network. The hope is that the interoperability can be gained as the result of usage of the OPC Unified Architecture international standard. </p>
-      </section>
+            <p>Out of scope is any work on exchanging the Process Data and Metadata over the network. The hope is that the interoperability can be gained as the result of usage of the OPC Unified Architecture international standard. </p>
+        </section>
     </div>
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Opc-ua-ooi maintained by <a href="https://github.com/mpostol">mpostol</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-      </footer>
+        <footer class="inner">
+            <p class="copyright">Opc-ua-ooi maintained by <a href="https://github.com/mpostol">mpostol</a></p>
+            <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+        </footer>
     </div>
 
-    
 
-  </body>
+
+</body>
 </html>

@@ -19,3 +19,4 @@ In scope there are also deliverables supporting:
 
 Out of scope is any work on exchanging the Process Data and Metadata over the network. The hope is that the interoperability can be gained as the result of usage of the OPC Unified Architecture international standard. 
 
+Read more : [My Blog](http://wwww.mpostol.wordpress.com/)

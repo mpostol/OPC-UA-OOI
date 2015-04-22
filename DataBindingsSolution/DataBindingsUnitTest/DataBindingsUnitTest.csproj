@@ -60,13 +60,13 @@
     <Compile Include="InstanceConfigurationBaseUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\DataBindings.csproj">
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataBindings\DataBindings.csproj">
       <Project>{f8db9567-c559-440c-bbcf-e02013f9ab94}</Project>
       <Name>DataBindings</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

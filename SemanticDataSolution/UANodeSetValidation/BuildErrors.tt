@@ -19,7 +19,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       EnvDTE.DTE dte = (EnvDTE.DTE) ((IServiceProvider) this.Host).GetService(typeof(EnvDTE.DTE));
       // Open the prototype document.
       XmlDocument _doc = new XmlDocument();
-      _doc.Load(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(dte.Solution.FullName), @"UANodeSetValidation\BuildErrorsCollection.xml"));
+      _doc.Load(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(dte.Solution.FullName), @"UANodeSetValidation\XML\BuildErrorsCollection.xml"));
       XmlNode _list = _doc.SelectSingleNode("BuildErrorsCollection/ListOfBuildErrors");
       foreach (XmlNode _node in _list.SelectNodes("NamedBuildError"))
       {

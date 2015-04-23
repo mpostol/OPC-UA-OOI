@@ -10,5 +10,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// </summary>
   public class TraceMessage
   {
+    internal static TraceMessage DiagnosticTraceMessage(string p)
+    {
+      throw new NotImplementedException();
+    }
+
+    internal static TraceMessage BuildErrorTraceMessage(BuildError buildError, string p)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

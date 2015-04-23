@@ -38,11 +38,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AddressSpaceContext.cs" />
+    <Compile Include="BuildErrors.partial.cs" />
+    <Compile Include="BuildErrors1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BuildErrors.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions.cs" />
     <Compile Include="IAddressSpaceContext.cs" />
+    <Compile Include="Namespaces.cs" />
+    <Compile Include="NamespaceTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TraceMessage.cs" />
     <Compile Include="UANodeSet.cs" />
+    <Compile Include="UANodeSet.Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BuildErrors.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BuildErrors1.cs</LastGenOutput>
+    </None>
+    <None Include="UANodeSet.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BuildErrorsCollection.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

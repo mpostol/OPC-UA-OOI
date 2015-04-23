@@ -62,7 +62,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return String.Format("{0}:{1}", localizedText[0].Locale, localizedText[0].Value);
     }
     //NodeSet model loader
-    internal const string UADefinedTypesName = @"UAOOI.SemanticData.UANodeSetValidation.Opc.Ua.NodeSet2.xml";
+    internal const string UADefinedTypesName = @"UAOOI.SemanticData.UANodeSetValidation.XML.Opc.Ua.NodeSet2.xml";
     /// <summary>
     /// Loads a schema from an embedded resource.
     /// </summary>

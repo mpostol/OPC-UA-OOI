@@ -51,20 +51,22 @@
     <Compile Include="NamespaceTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TraceMessage.cs" />
-    <Compile Include="UANodeSet.cs" />
-    <Compile Include="UANodeSet.Utils.cs" />
+    <Compile Include="XML\UANodeSet.cs">
+      <DependentUpon>UANodeSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XML\UANodeSet.Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BuildErrors.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BuildErrors1.cs</LastGenOutput>
     </None>
-    <None Include="UANodeSet.xsd">
+    <None Include="XML\UANodeSet.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BuildErrorsCollection.xml" />
+    <Content Include="XML\BuildErrorsCollection.xml" />
     <EmbeddedResource Include="XML\Opc.Ua.NodeSet2.xml" />
   </ItemGroup>
   <ItemGroup>

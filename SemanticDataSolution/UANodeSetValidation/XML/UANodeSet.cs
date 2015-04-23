@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   using System.Xml.Serialization;
 

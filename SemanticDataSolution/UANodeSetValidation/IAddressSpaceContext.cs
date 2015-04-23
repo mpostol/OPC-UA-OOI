@@ -1,7 +1,6 @@
 ﻿
 using System;
-using System.Xml;
-using UAOOI.SemanticData.UANodeSetValidation;
+using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {

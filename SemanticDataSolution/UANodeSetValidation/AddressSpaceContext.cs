@@ -83,7 +83,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private ModelDesignType InternalCreateInstance(Action<IAddressSpaceContext> getNodesFromModel, Action<TraceMessage> traceEvent)
     {
       traceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext.InternalCreateInstance - starting address space compilation."));
-      UANodeSet _standard = Extensions.LoadResource<UANodeSet>(Extensions.UADefinedTypesName);
+      UANodeSet _standard = UANodeSet.ReadUADefinedTypes();
       Debug.Assert(_standard != null);
       ImportNodeSet(_standard, traceEvent, false);
       getNodesFromModel(this);

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CAS.UAOOI.DataBindings
+namespace UAOOI.DataBindings
 {
   /// <summary>
   /// Class InstanceConfigurationBase - provide basic configuration of the 

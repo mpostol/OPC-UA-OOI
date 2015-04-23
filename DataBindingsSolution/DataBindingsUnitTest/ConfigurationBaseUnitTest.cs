@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CAS.UA.IServerConfiguration;
 using System.IO;
+using UAOOI.DataBindings;
 
 namespace CAS.UAOOI.DataBindings.UnitTest
 {

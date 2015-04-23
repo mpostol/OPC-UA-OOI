@@ -7,8 +7,8 @@
     <ProjectGuid>{F8DB9567-C559-440C-BBCF-E02013F9AB94}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CAS.UAOOI.DataBindings</RootNamespace>
-    <AssemblyName>CAS.UAOOIDataBindings</AssemblyName>
+    <RootNamespace>UAOOI.DataBindings</RootNamespace>
+    <AssemblyName>UAOOIDataBindings</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

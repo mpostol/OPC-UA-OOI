@@ -1,6 +1,7 @@
-﻿using System;
+﻿using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CAS.UA.IServerConfiguration;
+using System;
+using UAOOI.DataBindings;
 
 namespace CAS.UAOOI.DataBindings.UnitTest
 {
@@ -12,7 +13,7 @@ namespace CAS.UAOOI.DataBindings.UnitTest
     [ExpectedException(typeof(NotImplementedException))]
     public void ClearConfigurationTestMethod()
     {
-      IInstanceConfiguration _ic = new CAS.UAOOI.DataBindings.InstanceConfigurationBase();
+      IInstanceConfiguration _ic = new InstanceConfigurationBase();
       Assert.IsNotNull(_ic);
       _ic.ClearConfiguration();
     }
@@ -21,7 +22,7 @@ namespace CAS.UAOOI.DataBindings.UnitTest
     [ExpectedException(typeof(NotImplementedException))]
     public void EditTestMethod()
     {
-      IInstanceConfiguration _ic = new CAS.UAOOI.DataBindings.InstanceConfigurationBase();
+      IInstanceConfiguration _ic = new InstanceConfigurationBase();
       Assert.IsNotNull(_ic);
       _ic.Edit();
     }

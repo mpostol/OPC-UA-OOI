@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CAS.UAOOI.DataBindings
+namespace UAOOI.DataBindings
 {
   /// <summary>
   /// Class ConfigurationBase - Provides basic implementation of the <see cref="IConfiguration"/>.
@@ -33,7 +33,7 @@ namespace CAS.UAOOI.DataBindings
     /// <param name="SkipOpeningConfigurationFile">if set to <c>true</c> skip opening configuration file.</param>
     /// <param name="CancelWasPressed">if set to <c>true</c> cancel was pressed.</param>
     /// <exception cref="NotImplementedException"></exception>
-    public void CreateInstanceConfigurations(UA.IServerConfiguration.INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed)
+    public void CreateInstanceConfigurations(CAS.UA.IServerConfiguration.INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed)
     {
       throw new NotImplementedException();
     }

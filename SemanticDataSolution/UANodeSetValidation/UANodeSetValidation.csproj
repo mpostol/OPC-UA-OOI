@@ -45,8 +45,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BuildErrors.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataSerialization\Opc_Ua_Types.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="IAddressSpaceContext.cs" />
+    <Compile Include="IInstanceDesignFactory.cs" />
+    <Compile Include="IListOfChildrenFactory.cs" />
+    <Compile Include="IModellingRuleFactory.cs" />
+    <Compile Include="IParameterFactory.cs" />
+    <Compile Include="IReferenceFactory.cs" />
+    <Compile Include="IUAModelContext.cs" />
+    <Compile Include="IUANodeContex.cs" />
+    <Compile Include="IUAReferenceContext.cs" />
     <Compile Include="Namespaces.cs" />
     <Compile Include="NamespaceTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,6 +69,9 @@
     <None Include="BuildErrors.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BuildErrors1.cs</LastGenOutput>
+    </None>
+    <None Include="DataSerialization\Opc.Ua.Types.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="XML\UANodeSet.xsd">
       <SubType>Designer</SubType>

@@ -52,12 +52,76 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourcesUnitTest.cs" />
+    <None Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.Classes.cs" />
+    <None Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.Classes.cs" />
+    <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.Classes.cs" />
+    <None Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.Classes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UANodeSetValidation\UANodeSetValidation.csproj">
       <Project>{352378a0-8b2e-4679-bb44-fd0bcc8467d9}</Project>
       <Name>UANodeSetValidation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="XMLModels\CorrectModels\DataTypeTest.xml" />
+    <Content Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.NodeSet.xml" />
+    <Content Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.NodeSet2.xml" />
+    <Content Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.PredefinedNodes.xml" />
+    <Content Include="XMLModels\CorrectModels\ObjectTypeTest.xml" />
+    <Content Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.NodeSet.xml" />
+    <Content Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.NodeSet2.xml" />
+    <Content Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.PredefinedNodes.xml" />
+    <Content Include="XMLModels\CorrectModels\ReadMe.txt" />
+    <Content Include="XMLModels\CorrectModels\ReferenceTest.xml" />
+    <Content Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml" />
+    <Content Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml" />
+    <Content Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.PredefinedNodes.xml" />
+    <Content Include="XMLModels\CorrectModels\VariableTypeTest.xml" />
+    <Content Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.NodeSet.xml" />
+    <Content Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.NodeSet2.xml" />
+    <Content Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.PredefinedNodes.xml" />
+    <Content Include="XMLModels\ModelsWithErrors\DanglingReferenceTarget.NodeSet2.xml" />
+    <Content Include="XMLModels\ModelsWithErrors\DeploymentTest.txt" />
+    <Content Include="XMLModels\ModelsWithErrors\DuplicatedNodeId.xml" />
+    <Content Include="XMLModels\ModelsWithErrors\NotSupportedFeature.xml" />
+    <Content Include="XMLModels\ModelsWithErrors\WrongAccessLevel.xml" />
+    <Content Include="XMLModels\ModelsWithErrors\WrongBrowseName.xml" />
+    <Content Include="XMLModels\ModelsWithErrors\WrongDisplayNameLength.xml" />
+    <Content Include="XMLModels\ModelsWithErrors\WrongEventNotifier.xml" />
+    <Content Include="XMLModels\ModelsWithErrors\WrongInverseName.xml" />
+    <Content Include="XMLModels\ModelsWithErrors\WrongNodeId.xml" />
+    <Content Include="XMLModels\ModelsWithErrors\WrongReference2Property.xml" />
+    <Content Include="XMLModels\ModelsWithErrors\WrongValueRank.xml" />
+    <Content Include="XMLModels\ModelsWithErrors\WrongWriteMask.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="XMLModels\CorrectModels\DataTypeTest.csv" />
+    <None Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.NodeSet2.xml.zip" />
+    <None Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.PredefinedNodes.uanodes" />
+    <None Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.Types.bsd" />
+    <None Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.Types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XMLModels\CorrectModels\ObjectTypeTest.csv" />
+    <None Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.PredefinedNodes.uanodes" />
+    <None Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.Types.bsd" />
+    <None Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.Types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XMLModels\CorrectModels\ReferenceTest.csv" />
+    <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.PredefinedNodes.uanodes" />
+    <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.Types.bsd" />
+    <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.Types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XMLModels\CorrectModels\TestModels.uamdsl" />
+    <None Include="XMLModels\CorrectModels\VariableTypeTest.csv" />
+    <None Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.PredefinedNodes.uanodes" />
+    <None Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.Types.bsd" />
+    <None Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.Types.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BuildErrorsCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ListOfBuildErrors>
+    <NamedBuildError>
+      <Focus>XML</Focus>
+      <Identifier>P0-0001010000</Identifier>
+      <Descriptor>The XML attribute or element is not supported and neglected.</Descriptor>
+      <Name>NotSupportedFeature</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
+      <Identifier>P3-0502070000</Identifier>
+      <Descriptor>The value must be less than 0x200000 for the UAVariable and less than 0x400000 for other node types.</Descriptor>
+      <Name>WrongWriteMaskValue</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
+      <Identifier>P3-05020500</Identifier>
+      <Descriptor>The string part of the DisplayName is restricted to 512 characters.</Descriptor>
+      <Name>WrongDisplayNameLength</Name>
+    </NamedBuildError>
+    <!--OLD-->
+    <NamedBuildError>
+      <Focus>Reference</Focus>
+      <Identifier>P3-123456</Identifier>
+      <Descriptor>The reference target doesn't exist.</Descriptor>
+      <Name>DanglingReferenceType</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>Reference</Focus>
+      <Identifier>P3-654321</Identifier>
+      <Descriptor>The node pointed by the ReferenceType doesn't exist.</Descriptor>
+      <Name>DanglingReferenceTarget</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>Reference</Focus>
+      <Identifier>P3-7.10-002</Identifier>
+      <Descriptor>Each Node shall be the TargetNode of at most one Reference of type HasSubtype.</Descriptor>
+      <Name>HasSubtypeMulitarget</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>Reference</Focus>
+      <Identifier>P3-???</Identifier>
+      <Descriptor>Wrong Reference type targeting the Property component.</Descriptor>
+      <Name>WrongReference2Property</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>Reference</Focus>
+      <Identifier>P3-???</Identifier>
+      <Descriptor>Wrong Reference type targeting the Variable component.</Descriptor>
+      <Name>WrongReference2Variable</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>Reference</Focus>
+      <Identifier>P3-???</Identifier>
+      <Descriptor>Wrong Reference type for Method component.</Descriptor>
+      <Name>WrongReference2Method</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
+      <Identifier>P6-0503011400</Identifier>
+      <Descriptor>BrowseName cannot be null string.</Descriptor>
+      <Name>EmptyBrowseName</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
+      <Identifier>P6-0F03000000</Identifier>
+      <Descriptor>SymbolicName contains characters that are not allowed. Only letters, digits or the underscore (‘_’) are permitted.</Descriptor>
+      <Name>WrongSymbolicName</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
+      <Identifier>P3-0505010000</Identifier>
+      <Descriptor>Object NodeClass: EventNotifier is out of range.</Descriptor>
+      <Name>WrongEventNotifier</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
+      <Identifier>P3-0505010001</Identifier>
+      <Descriptor>Object NodeClass: Value of the EventNotifier attribute is not supported.</Descriptor>
+      <Name>EventNotifierValueNotSupported</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
+      <Identifier>P3-0506020000</Identifier>
+      <Descriptor>ValueRank value is out of range.</Descriptor>
+      <Name>WrongValueRank</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
+      <Identifier>P3-0506040000</Identifier>
+      <Descriptor>AccessLevel value is out of range.</Descriptor>
+      <Name>WrongAccessLevel</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
+      <Identifier>P3-0503020000</Identifier>
+      <Descriptor>Unexpected value of the InverseName.</Descriptor>
+      <Name>WrongInverseName</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
+      <Identifier>P3-0502020000</Identifier>
+      <Descriptor>Nodes shall be unambiguously identified using NodeId</Descriptor>
+      <Name>NodeIdDuplicated</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
+      <Identifier>P3-0502020001</Identifier>
+      <Descriptor>NodeId is not defined.</Descriptor>
+      <Name>NodeIdNotDefined</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>XML</Focus>
+      <Identifier>P0-0001020000</Identifier>
+      <Descriptor>Node cannot be null</Descriptor>
+      <Name>NodeCannotBeNil</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NonCategorized</Focus>
+      <Identifier>P0-0002010000</Identifier>
+      <Descriptor>General processing error see trace for details.</Descriptor>
+      <Name>NonCategorized</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>Diagnostic</Focus>
+      <Identifier>P0-0003010000</Identifier>
+      <Descriptor>It is diagnostic information</Descriptor>
+      <Name>DiagnosticInformation</Name>
+    </NamedBuildError>
+  </ListOfBuildErrors>
+</BuildErrorsCollection>

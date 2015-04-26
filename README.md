@@ -19,4 +19,10 @@ In scope there are also deliverables supporting:
 
 Out of scope is any work on exchanging the Process Data and Metadata over the network. The hope is that the interoperability can be gained as the result of usage of the OPC Unified Architecture international standard. 
 
-Read more : [My Blog](http://wwww.mpostol.wordpress.com/)
+I hope it is a good place to prototype and converge the OPC UA communication technology with Semantic Data, Internet Of Things, Plug and Play, Global Data Discovery, Selective Availability, etc. concepts. My goal is to bridge a gap between OPC UA technology and Industrial IT Application Domains. 
+
+Redd more:
+
+[My Blog](http://wwww.mpostol.wordpress.com/)
+
+[About me](https://pl.linkedin.com/in/mpostol)

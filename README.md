@@ -2,7 +2,13 @@
 
 ##What is Object Oriented Internet
 
-Today the Internet is used by millions of people to gain access to information resources and services. The widespread use of the HTTP and hypertext makes it possible to freely publish new information and expose it in a context of its description. Unfortunately, this is a human-centric environment that cannot easily be adapted for the application-centric approach, which is required to provide globally distributed enterprise management and real-time process control. In this article new architecture is presented that can be used to provide a generic solution for publishing and updating information in a context that can be used to describe and discover it. It is accomplished by distributing publisher (server) tasks to three classes: (a) information context management using object oriented programming paradigm, (b) a predefined fixed set of services that are used to access the data and meta-date, and (c) a pluggable custom data binding mechanism. It is proposed to implement this architecture using the OPC Unified Architecture - a new emerging industrial integration standard that fulfills these architecture requirements. 
+Today the Internet is used by millions of people to gain access to information resources and services. The widespread use of the HTTP and hypertext makes it possible to freely publish new information and expose it in a context of its description. Unfortunately, this is a human-centric environment that cannot easily be adapted for the application-centric approach, which is required to provide globally distributed enterprise management and real-time process control. In this project new architecture is is to be reserched that can be used to provide a generic solution for publishing and updating information in a context that can be used to describe and discover it. It is accomplished by distributing publisher (server) tasks to three classes: 
+
+1. information context management using object oriented programming paradigm, 
+2. a predefined fixed set of services that are used to access the data and meta-date, and 
+3.  a pluggable custom data binding mechanism. 
+
+It is proposed to implement this architecture using the OPC Unified Architecture - a new emerging industrial integration standard that fulfills these architecture requirements. 
 
 That makes the presented approach a real proposal for new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability
 

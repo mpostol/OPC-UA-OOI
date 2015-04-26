@@ -23,6 +23,8 @@ I hope it is a good place to prototype and converge the OPC UA communication tec
 
 Redd more:
 
+[WIKI](https://github.com/mpostol/OPC-UA-OOI/wiki)
+
 [My Blog](http://wwww.mpostol.wordpress.com/)
 
 [About me](https://pl.linkedin.com/in/mpostol)

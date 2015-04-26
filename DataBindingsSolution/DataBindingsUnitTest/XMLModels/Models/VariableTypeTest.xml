@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModelDesign xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cas="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ua="http://opcfoundation.org/UA/" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+  <Namespaces>
+    <Namespace Name="cas" Prefix="VariableTypeTest" XmlPrefix="cas">http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest</Namespace>
+    <Namespace Name="ua" XmlPrefix="ua">http://opcfoundation.org/UA/</Namespace>
+  </Namespaces>
+  <VariableType SymbolicName="cas:ComplexVariableType" BaseType="ua:AnalogItemType">
+    <Children>
+      <Property SymbolicName="cas:VariableChild" ModellingRule="Mandatory" DataType="ua:Int32" AccessLevel="Write" />
+    </Children>
+  </VariableType>
+  <VariableType SymbolicName="cas:ArrayVariableType" DataType="ua:Int32" ValueRank="OneOrMoreDimensions" ArrayDimensions="0,0,0" />
+  <VariableType SymbolicName="cas:SimpleVariableWithValueType" DataType="ua:Int32">
+    <DefaultValue>
+      <Int32 xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">1</Int32>
+    </DefaultValue>
+  </VariableType>
+</ModelDesign>

@@ -1,0 +1,34 @@
+<opc:TypeDictionary
+  xmlns:opc="http://opcfoundation.org/BinarySchema/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ua="http://opcfoundation.org/UA/"
+  xmlns:tns="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest"
+  DefaultByteOrder="LittleEndian"
+  TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest"
+>
+  <!-- This File was generated on 2015-04-03 and supports the specifications supported by version 1.2.26.28146 of the OPC UA deliverables. -->
+  <opc:Import Namespace="http://opcfoundation.org/UA/" Location=".BinarySchema.bsd"/>
+
+  <opc:EnumeratedType Name="AbstractEnumerationDataType" LengthInBits="32">
+    <opc:EnumeratedValue Name="Field1" Value="0" />
+    <opc:EnumeratedValue Name="Field2" Value="1" />
+  </opc:EnumeratedType>
+
+  <opc:EnumeratedType Name="EnumerationDataType" LengthInBits="32">
+    <opc:Documentation>Enumeration DataType derived from abstract type</opc:Documentation>
+    <opc:EnumeratedValue Name="Field1" Value="0" />
+    <opc:EnumeratedValue Name="Field2" Value="1" />
+    <opc:EnumeratedValue Name="Field3" Value="1" />
+  </opc:EnumeratedType>
+
+  <opc:StructuredType Name="AbstractStructure" BaseType="ua:ExtensionObject">
+    <opc:Documentation>Abstract structure</opc:Documentation>
+    <opc:Field Name="Number" TypeName="ua:Variant" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="DerivedStructure" BaseType="tns:AbstractStructure">
+    <opc:Field Name="Number" TypeName="ua:Variant" SourceType="tns:AbstractStructure" />
+    <opc:Field Name="Number" TypeName="opc:Int32" />
+  </opc:StructuredType>
+
+</opc:TypeDictionary>

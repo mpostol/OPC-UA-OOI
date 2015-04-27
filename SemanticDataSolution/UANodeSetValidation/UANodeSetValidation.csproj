@@ -60,6 +60,7 @@
     <Compile Include="NamespaceTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TraceMessage.cs" />
+    <Compile Include="UAModelContext.cs" />
     <Compile Include="XML\UANodeSet.cs">
       <DependentUpon>UANodeSet.xsd</DependentUpon>
     </Compile>

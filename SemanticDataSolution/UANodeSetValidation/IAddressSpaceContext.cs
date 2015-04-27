@@ -15,9 +15,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Analyze and imports the <see cref="UANodeSet"/> model.
     /// </summary>
     /// <param name="model">The model to be imported.</param>
-    /// <param name="traceEvent">The trace event.</param>
     /// <param name="validation">If set to <c>true</c> the nodes are validated and progress is traced.</param>
-    void ImportNodeSet(UANodeSet model, Action<TraceMessage> traceEvent, bool validation);
+    void ImportNodeSet(UANodeSet model, bool validation);
     /// <summary>
     /// Exports the namespace table.
     /// </summary>

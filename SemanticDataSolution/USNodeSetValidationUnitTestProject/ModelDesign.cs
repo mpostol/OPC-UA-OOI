@@ -5,7 +5,7 @@ using System.Text;
 
 namespace UAOOI.SemanticData.UnitTest
 {
-  class ModelDesign
+  public class ModelDesign
   {
   }
 }

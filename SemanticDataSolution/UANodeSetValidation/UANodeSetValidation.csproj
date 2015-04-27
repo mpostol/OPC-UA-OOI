@@ -58,6 +58,7 @@
     <Compile Include="IUAReferenceContext.cs" />
     <Compile Include="Namespaces.cs" />
     <Compile Include="NamespaceTable.cs" />
+    <Compile Include="NodeId.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TraceMessage.cs" />
     <Compile Include="UAModelContext.cs" />

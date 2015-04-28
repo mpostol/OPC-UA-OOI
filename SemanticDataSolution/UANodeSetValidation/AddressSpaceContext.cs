@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -20,6 +21,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (traceEvent != null)
         m_TraceEvent = traceEvent;
+      m_NamespaceTable = new NamespaceTable(traceEvent);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext - starting address space compilation."));
       UANodeSet _standard = UANodeSet.ReadUADefinedTypes();
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext - uploading the UA defined types."));
@@ -35,7 +37,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public ModelDesignType CreateInstance(string targetNamespace, Action<IAddressSpaceContext> getNodesFromModel)
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.CreateInstance"));
-      m_NamespaceTable.Append(targetNamespace);
+      m_NamespaceTable.Append(targetNamespace, m_TraceEvent);
       return InternalCreateInstance(getNodesFromModel);
     }
     /// <summary>
@@ -53,7 +55,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "ServerUris is omitted during the import"));
       if (_nodeSet.Extensions != null)
         m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Extensions is omitted during the import"));
-      m_NamespaceTable.Append(_nodeSet.NamespaceUris == null ? Opc.Ua.Namespaces.OpcUa : _nodeSet.NamespaceUris[0]);
+      m_NamespaceTable.Append(_nodeSet.NamespaceUris == null ? Namespaces.OpcUa : _nodeSet.NamespaceUris[0], m_TraceEvent);
       return InternalCreateInstance(context => context.ImportNodeSet(_nodeSet, true));
     }
 
@@ -87,7 +89,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #endregion
 
     #region private
-    private NamespaceTable m_NamespaceTable = new NamespaceTable();
+    private NamespaceTable m_NamespaceTable = null;
     /// <summary>
     /// Create instance internally.
     /// </summary>

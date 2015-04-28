@@ -379,6 +379,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   {
 
     private string stringField;
+    private string p;
+
+    public Guid(string p)
+    {
+      // TODO: Complete member initialization
+      this.p = p;
+    }
 
     /// <uwagi/>
     [System.Xml.Serialization.XmlElementAttribute( IsNullable = true )]

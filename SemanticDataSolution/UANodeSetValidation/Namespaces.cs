@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace Opc.Ua
+namespace UAOOI.SemanticData.UANodeSetValidation
 {
   /// <summary>
   /// Defines constants for all namespaces referenced by the model design.

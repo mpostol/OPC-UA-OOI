@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.XML
+namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {
-  public class NodeId
+  public partial class NodeId
   {
 
     /// <summary>
@@ -30,8 +30,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     public NodeId(uint value)
     {
       m_namespaceIndex = 0;
-      m_identifierType = IdType.Numeric;
-      m_identifier = value;
+      m_identifierType = IdType.Numeric_0;
+      m_identifierPart = value;
     }
     /// <summary>
     /// Initializes a guid node identifier with a namespace index.
@@ -46,8 +46,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     public NodeId(uint value, ushort namespaceIndex)
     {
       m_namespaceIndex = namespaceIndex;
-      m_identifierType = IdType.Numeric;
-      m_identifier = value;
+      m_identifierType = IdType.Numeric_0;
+      m_identifierPart = value;
     }
     /// <summary>
     /// Initializes a string node identifier with a namespace index.
@@ -61,8 +61,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     public NodeId(string value, ushort namespaceIndex)
     {
       m_namespaceIndex = namespaceIndex;
-      m_identifierType = IdType.String;
-      m_identifier = value;
+      m_identifierType = IdType.String_1;
+      m_identifierPart = value;
     }
     /// <summary>
     /// Initializes a guid node identifier.
@@ -74,8 +74,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     public NodeId(Guid value)
     {
       m_namespaceIndex = 0;
-      m_identifierType = IdType.Guid;
-      m_identifier = value;
+      m_identifierType = IdType.Guid_2;
+      m_identifierPart = value;
     }
     /// <summary>
     /// Initializes a guid node identifier.
@@ -88,8 +88,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     public NodeId(Guid value, ushort namespaceIndex)
     {
       m_namespaceIndex = namespaceIndex;
-      m_identifierType = IdType.Guid;
-      m_identifier = value;
+      m_identifierType = IdType.Guid_2;
+      m_identifierPart = value;
     }
     /// <summary>
     /// Initializes a guid node identifier.
@@ -101,13 +101,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     public NodeId(byte[] value)
     {
       m_namespaceIndex = 0;
-      m_identifierType = IdType.Opaque;
-      m_identifier = null;
+      m_identifierType = IdType.Opaque_3;
+      m_identifierPart = null;
       if (value != null)
       {
         byte[] copy = new byte[value.Length];
         Array.Copy(value, copy, value.Length);
-        m_identifier = copy;
+        m_identifierPart = copy;
       }
     }
     /// <summary>
@@ -122,13 +122,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     public NodeId(byte[] value, ushort namespaceIndex)
     {
       m_namespaceIndex = namespaceIndex;
-      m_identifierType = IdType.Opaque;
-      m_identifier = null;
+      m_identifierType = IdType.Opaque_3;
+      m_identifierPart = null;
       if (value != null)
       {
         byte[] copy = new byte[value.Length];
         Array.Copy(value, copy, value.Length);
-        m_identifier = copy;
+        m_identifierPart = copy;
       }
     }
     /// <summary>
@@ -143,7 +143,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       NodeId nodeId = NodeId.Parse(text);
       m_namespaceIndex = nodeId.NamespaceIndex;
       m_identifierType = nodeId.IdType;
-      m_identifier = nodeId.Identifier;
+      m_identifierPart = nodeId.Identifier;
     }
     /// <summary>
     /// Initializes a node identifier with a namespace index.
@@ -159,25 +159,25 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
       if (value is uint)
       {
-        SetIdentifier(IdType.Numeric, value);
+        SetIdentifier(IdType.Numeric_0, value);
         return;
       }
 
       if (value == null || value is string)
       {
-        SetIdentifier(IdType.String, value);
+        SetIdentifier(IdType.String_1, value);
         return;
       }
 
       if (value is Guid)
       {
-        SetIdentifier(IdType.Guid, value);
+        SetIdentifier(IdType.Guid_2, value);
         return;
       }
 
       if (value is byte[])
       {
-        SetIdentifier(IdType.Opaque, value);
+        SetIdentifier(IdType.Opaque_3, value);
         return;
       }
     }
@@ -243,8 +243,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     private void Initialize()
     {
       m_namespaceIndex = 0;
-      m_identifierType = IdType.Numeric;
-      m_identifier = null;
+      m_identifierType = IdType.Numeric_0;
+      m_identifierPart = null;
     }
     /// <summary>
     /// Updates the identifier.
@@ -254,10 +254,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       m_identifierType = idType;
       switch (idType)
       {
-        case IdType.Opaque:
+        case IdType.Opaque_3:
           throw new NotImplementedException(" m_identifier = Utils.Clone(value);");
         default:
-          m_identifier = value;
+          m_identifierPart = value;
           break;
       }
     }
@@ -267,7 +267,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     internal void SetIdentifier(string value, IdType idType)
     {
       m_identifierType = idType;
-      SetIdentifier(IdType.String, value);
+      SetIdentifier(IdType.String_1, value);
     }
     /// The index of the namespace URI in the server's namespace array.
     /// </summary>
@@ -300,46 +300,27 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// <remarks>
     /// Returns the Id in its native format, i.e. UInt, GUID, String etc.
     /// </remarks>
-    public object Identifier
+    public object IdentifierPart
     {
       get
       {
-        if (m_identifier == null)
+        if (m_identifierPart == null)
         {
           switch (m_identifierType)
           {
-            case IdType.Numeric: { return (uint)0; }
-            case IdType.Guid: { return Guid.Empty; }
+            case IdType.Numeric_0: { return (uint)0; }
+            case IdType.Guid_2: { return global::System.Guid.Empty; }
           }
         }
-        return m_identifier;
+        return m_identifierPart;
       }
     }
     //private
     private ushort m_namespaceIndex;
     private IdType m_identifierType;
-    private object m_identifier;
+    private object m_identifierPart;
     private static NodeId s_Null = new NodeId();
 
-  }
-  public enum IdType
-  {
-    /// <summary>
-    /// The identifier is a numeric value. 0 is a null value.
-    /// </summary>
-    Numeric = 0,
-    /// <summary>
-    /// The identifier is a string value. An empty string is a null value.
-    /// </summary>
-    String = 1,
-    /// <summary>
-    /// The identifier is a 16 byte structure. 16 zero bytes is a null value.
-    /// </summary>
-    Guid = 2,
-    /// <summary>
-    /// The identifier is an array of bytes. A zero length array is a null value.
-    /// </summary>
-    Opaque = 3,
   }
 
 }

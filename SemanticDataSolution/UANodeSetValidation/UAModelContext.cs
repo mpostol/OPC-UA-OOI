@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation

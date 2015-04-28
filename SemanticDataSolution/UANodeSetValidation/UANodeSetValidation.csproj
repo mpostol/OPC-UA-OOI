@@ -57,9 +57,9 @@
     <Compile Include="IUANodeContex.cs" />
     <Compile Include="IUAReferenceContext.cs" />
     <Compile Include="Namespaces.cs" />
-    <Compile Include="NamespaceTable.cs" />
+    <Compile Include="Utilities\NamespaceTable.cs" />
     <Compile Include="TraceMessage.cs" />
-    <Compile Include="XML\NodeId.cs" />
+    <Compile Include="DataSerialization\NodeId.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UAModelContext.cs" />
     <Compile Include="ServiceResultException.cs" />

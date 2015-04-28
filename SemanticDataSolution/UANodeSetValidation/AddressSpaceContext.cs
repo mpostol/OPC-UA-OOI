@@ -67,7 +67,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="System.NotImplementedException"></exception>
     public void ImportNodeSet(UANodeSet model, bool validation)
     {
-      throw new NotImplementedException();
+      //string _namespace = model.NamespaceUris == null ? m_NamespaceTable.GetString(0) : model.NamespaceUris[0];
+      //traceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Entering AddressSpaceContext.ImportNodeSet - starting import {0}.", _namespace)));
+      //UAModelContext _modelContext = new UAModelContext(model.Aliases, model.NamespaceUris, this);
+      //traceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - context for imported model is created and starting import nodes."));
+      //foreach (UANode _nd in model.Items)
+      //  this.ImportUANode(_nd, _modelContext, validation ? traceEvent : x => { });
+      //traceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Finishing AddressSpaceContext.ImportNodeSet - imported {0} nodes.", model.Items.Length)));
     }
     /// <summary>
     /// Exports the namespace table.

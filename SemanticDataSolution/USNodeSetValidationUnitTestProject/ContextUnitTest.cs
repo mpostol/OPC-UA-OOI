@@ -5,7 +5,7 @@ using UAOOI.SemanticData.UANodeSetValidation.XML;
 namespace UAOOI.SemanticData.UnitTest
 {
   [TestClass]
-  public class ContextUnitTest
+  public class UAModelContextUnitTest
   {
     [TestMethod]
     [ExpectedException(typeof(System.ArgumentNullException))]

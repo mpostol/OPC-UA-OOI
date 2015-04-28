@@ -9,6 +9,12 @@
     </NamedBuildError>
     <NamedBuildError>
       <Focus>NodeClass</Focus>
+      <Identifier>P0-0605020209</Identifier>
+      <Descriptor>The syntax of the node id is not valid.</Descriptor>
+      <Name>BadNodeIdInvalid</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
       <Identifier>P3-0502070000</Identifier>
       <Descriptor>The value must be less than 0x200000 for the UAVariable and less than 0x400000 for other node types.</Descriptor>
       <Name>WrongWriteMaskValue</Name>

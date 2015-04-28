@@ -15,6 +15,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                     Identifier = "P0-0001010000", 
                     Descriptor = "The XML attribute or element is not supported and neglected." }; } }
     /// <summary>
+    /// Error: P0-0605020209; Focus: NodeClass; The syntax of the node id is not valid.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P0-0605020209.</value>
+    public static BuildError BadNodeIdInvalid { get { return new BuildError() 
+                  { Focus = Focus.NodeClass, 
+                    Identifier = "P0-0605020209", 
+                    Descriptor = "The syntax of the node id is not valid." }; } }
+    /// <summary>
     /// Error: P3-0502070000; Focus: NodeClass; The value must be less than 0x200000 for the UAVariable and less than 0x400000 for other node types.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P3-0502070000.</value>

@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UANodeSetValidation", "UANodeSetValidation\UANodeSetValidation.csproj", "{352378A0-8B2E-4679-BB44-FD0BCC8467D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "USNodeSetValidationUnitTestProject", "USNodeSetValidationUnitTestProject\USNodeSetValidationUnitTestProject.csproj", "{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UANodeSetValidationUnitTestProject", "USNodeSetValidationUnitTestProject\UANodeSetValidationUnitTestProject.csproj", "{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{796E1912-C302-4518-A34F-EFE2695F1E06}"
 	ProjectSection(SolutionItems) = preProject

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace UAOOI.SemanticData.UnitTest
 {
+  /// <summary>
+  /// Class ModelDesign - an stub for the exported class
+  /// </summary>
   public class ModelDesign
   {
   }

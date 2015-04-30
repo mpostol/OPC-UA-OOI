@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Diagnostics;
 using UAOOI.SemanticData.UANodeSetValidation;
 
@@ -10,7 +11,12 @@ namespace UAOOI.SemanticData.UnitTest
     [TestMethod]
     public void ServiceResultExceptionCreateTestMethod()
     {
-      Assert.IsNotNull(new ServiceResultException());
+      ServiceResultException _ex = new ServiceResultException();
+      Assert.IsNotNull(_ex);
+      Assert.IsNull(_ex.InnerException);
+      Assert.IsNull(_ex.TraceMessage);
+      Assert.IsFalse(String.IsNullOrEmpty(_ex.Message), _ex.Message);
+      Assert.AreEqual<string>("Exception of type 'UAOOI.SemanticData.UANodeSetValidation.ServiceResultException' was thrown.", _ex.Message);
     }
     [TestMethod]
     public void ServiceResultExceptionCreateWithMessageTestMethod()

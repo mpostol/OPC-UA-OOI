@@ -50,12 +50,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Helpers\Class1.cs" />
     <Compile Include="UAModelContextUnitTest.cs" />
-    <Compile Include="ModelDesign.cs" />
+    <Compile Include="Helpers\ModelDesign.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourcesUnitTest.cs" />
     <Compile Include="AddressSpaceContextUnitTest.cs" />
-    <Compile Include="TestData.cs" />
+    <Compile Include="Helpers\TestData.cs" />
     <Compile Include="ServiceResultExceptionUnitTest.cs" />
     <None Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.Classes.cs" />

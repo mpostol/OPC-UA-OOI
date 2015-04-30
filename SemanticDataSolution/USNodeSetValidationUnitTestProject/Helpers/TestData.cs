@@ -1,6 +1,6 @@
 ﻿using UAOOI.SemanticData.UANodeSetValidation.XML;
 
-namespace UAOOI.SemanticData.UnitTest
+namespace UAOOI.SemanticData.UnitTest.Helpers
 {
   internal static class TestData
   {

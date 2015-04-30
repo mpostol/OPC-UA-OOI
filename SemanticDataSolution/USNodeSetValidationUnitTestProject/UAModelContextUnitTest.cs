@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.UANodeSetValidation;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
+using UAOOI.SemanticData.UnitTest.Helpers;
 
 namespace UAOOI.SemanticData.UnitTest
 {

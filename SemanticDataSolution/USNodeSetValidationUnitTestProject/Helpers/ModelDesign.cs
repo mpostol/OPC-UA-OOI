@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.SemanticData.UnitTest
+namespace UAOOI.SemanticData.UnitTest.Helpers
 {
   /// <summary>
   /// Class ModelDesign - an stub for the exported class

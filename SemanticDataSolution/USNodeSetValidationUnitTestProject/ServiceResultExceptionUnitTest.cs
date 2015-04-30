@@ -22,7 +22,7 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNull(_ex.InnerException);
       Assert.AreEqual<string>("test message", _ex.Message);
       Assert.IsNotNull(_ex.TraceMessage);
-      Assert.AreEqual<BuildError>(BuildError.BadNodeIdInvalid, _ex.TraceMessage.BuildError);
+      Assert.AreEqual<Focus>(BuildError.BadNodeIdInvalid.Focus, _ex.TraceMessage.BuildError.Focus);
       Assert.AreEqual<TraceEventType>(TraceEventType.Information, _ex.TraceMessage.TraceLevel);
     }
   }

@@ -33,9 +33,8 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNull(_mc.GetAddressSpaceContext);
     }
     [TestMethod]
-    [ExpectedException(typeof(System.ArgumentNullException))]
     public void CreateUAModelContext()
-    {
+    { 
       UANodeSet _tm = TestData.CreateNodeSetModel();
       AddressSpaceContext<ModelDesign> _as = new AddressSpaceContext<ModelDesign>(x => { });
       UAModelContext<ModelDesign> _mc = new UAModelContext<ModelDesign>(_tm.Aliases, _tm.NamespaceUris, _as);

@@ -24,13 +24,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       //OPAQUE
       _ni = NodeId.Parse("ns=1;b=M/RbKBsRVkePCePcx24oRA==");
       Assert.IsNotNull(_ni);
+      //?? Default string - should be not valid ?
+      _ni = NodeId.Parse("M/RbKBsRVkePCePcx24oRA==");
+      Assert.IsNotNull(_ni);
     }
     [TestMethod]
     [ExpectedException(typeof(ServiceResultException))]
     public void NodeIdNonValidNumericTestMethod1()
     {
       NodeId _ni;
-      _ni = NodeId.Parse("ns=10;i=-1"); //this example is in the specification.
+      _ni = NodeId.Parse("ns=10;i=-1"); //this example is in the specification as valid 
     }
     [TestMethod]
     [ExpectedException(typeof(ServiceResultException))]

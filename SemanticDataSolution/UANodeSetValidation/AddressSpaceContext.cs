@@ -13,6 +13,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// </summary>
   public class AddressSpaceContext<ModelDesignType> : IAddressSpaceContext
   {
+    #region creator
     /// <summary>
     /// Initializes a new instance of the <see cref="AddressSpaceContext{ModelDesignType}"/> class.
     /// </summary>
@@ -28,6 +29,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Debug.Assert(_standard != null);
       ImportNodeSet(_standard, false);
     }
+    #endregion    
+
     /// <summary>
     /// Creates the instance of the address space.
     /// </summary>

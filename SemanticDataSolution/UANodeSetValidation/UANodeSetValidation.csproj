@@ -45,23 +45,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BuildErrors.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataSerialization\ExpandedNodeId.cs" />
+    <Compile Include="DataSerialization\Extensions.cs" />
     <Compile Include="DataSerialization\Opc_Ua_Types.cs" />
+    <Compile Include="DataSerialization\QualifiedName.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="IAddressSpaceContext.cs" />
-    <Compile Include="IInstanceDesignFactory.cs" />
-    <Compile Include="IListOfChildrenFactory.cs" />
-    <Compile Include="IModellingRuleFactory.cs" />
-    <Compile Include="IParameterFactory.cs" />
-    <Compile Include="IReferenceFactory.cs" />
     <Compile Include="IUAModelContext.cs" />
     <Compile Include="IUANodeContex.cs" />
     <Compile Include="IUAReferenceContext.cs" />
+    <Compile Include="ModelDesignType.cs" />
     <Compile Include="Namespaces.cs" />
     <Compile Include="TraceMessage.cs" />
     <Compile Include="DataSerialization\NodeId.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UAInformationModel\ModelingRules.cs" />
+    <Compile Include="UAInformationModel\Opc.Ua.Constants.cs" />
     <Compile Include="UAModelContext.cs" />
     <Compile Include="ServiceResultException.cs" />
+    <Compile Include="UANodeContext.cs" />
+    <Compile Include="UAReferenceContext.cs" />
     <Compile Include="Utilities\Class1.cs" />
     <Compile Include="Utilities\NamespaceTable.cs" />
     <Compile Include="XML\UANodeSet.cs">

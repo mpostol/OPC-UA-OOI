@@ -15,13 +15,29 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                     Identifier = "P0-0001010000", 
                     Descriptor = "The XML attribute or element is not supported and neglected." }; } }
     /// <summary>
-    /// Error: P0-0605020209; Focus: NodeClass; The syntax of the node id is not valid.
+    /// Error: P0-0605020210; Focus: NodeClass; The syntax of the ExpandedNodeId is not valid.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P0-0605020210.</value>
+    public static BuildError ExpandedNodeIdInvalidSyntax { get { return new BuildError() 
+                  { Focus = Focus.NodeClass, 
+                    Identifier = "P0-0605020210", 
+                    Descriptor = "The syntax of the ExpandedNodeId is not valid." }; } }
+    /// <summary>
+    /// Error: P0-0605020209; Focus: NodeClass; The syntax of the NodeId is not valid.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P0-0605020209.</value>
-    public static BuildError BadNodeIdInvalid { get { return new BuildError() 
+    public static BuildError NodeIdInvalidSyntax { get { return new BuildError() 
                   { Focus = Focus.NodeClass, 
                     Identifier = "P0-0605020209", 
-                    Descriptor = "The syntax of the node id is not valid." }; } }
+                    Descriptor = "The syntax of the NodeId is not valid." }; } }
+    /// <summary>
+    /// Error: P0-0605020213; Focus: NodeClass; The syntax of the QualifiedName is not valid.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P0-0605020213.</value>
+    public static BuildError QualifiedNameInvalidSyntax { get { return new BuildError() 
+                  { Focus = Focus.NodeClass, 
+                    Identifier = "P0-0605020213", 
+                    Descriptor = "The syntax of the QualifiedName is not valid." }; } }
     /// <summary>
     /// Error: P3-0502070000; Focus: NodeClass; The value must be less than 0x200000 for the UAVariable and less than 0x400000 for other node types.
     /// </summary>

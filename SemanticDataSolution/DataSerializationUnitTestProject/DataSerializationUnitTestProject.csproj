@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NodeIdUnitTest.cs" />
+    <Compile Include="QualifiedNameUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UANodeSetValidation\UANodeSetValidation.csproj">

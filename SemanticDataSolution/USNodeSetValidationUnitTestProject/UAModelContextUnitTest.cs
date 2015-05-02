@@ -13,23 +13,22 @@ namespace UAOOI.SemanticData.UnitTest
     public void CreateUAModelContextNodeAliasNull()
     {
       UANodeSet _tm = TestData.CreateNodeSetModel();
-      AddressSpaceContext<ModelDesign> _as = new AddressSpaceContext<ModelDesign>(x => { });
-      UAModelContext<ModelDesign> _mc = new UAModelContext<ModelDesign>(null, _tm.NamespaceUris, _as);
+      AddressSpaceContext _as = new AddressSpaceContext(x => { });
+      UAModelContext _mc = new UAModelContext(null, _tm.NamespaceUris, _as);
     }
     [TestMethod]
-    [ExpectedException(typeof(System.ArgumentNullException))]
     public void CreateUAModelContextModelNamespaceUrisNull()
     {
       UANodeSet _tm = TestData.CreateNodeSetModel();
-      AddressSpaceContext<ModelDesign> _as = new AddressSpaceContext<ModelDesign>(x => { });
-      UAModelContext<ModelDesign> _mc = new UAModelContext<ModelDesign>(_tm.Aliases, null, _as);
+      AddressSpaceContext _as = new AddressSpaceContext(x => { });
+      UAModelContext _mc = new UAModelContext(_tm.Aliases, null, _as);
     }
     [TestMethod]
     [ExpectedException(typeof(System.ArgumentNullException))]
     public void CreateUAModelContextAddressSpaceContextNull()
     {
       UANodeSet _tm = TestData.CreateNodeSetModel();
-      UAModelContext<ModelDesign> _mc = new UAModelContext<ModelDesign>(_tm.Aliases, _tm.NamespaceUris, null);
+      UAModelContext _mc = new UAModelContext(_tm.Aliases, _tm.NamespaceUris, null);
       Assert.IsNotNull(_mc);
       Assert.IsNull(_mc.GetAddressSpaceContext);
     }
@@ -37,8 +36,8 @@ namespace UAOOI.SemanticData.UnitTest
     public void CreateUAModelContext()
     { 
       UANodeSet _tm = TestData.CreateNodeSetModel();
-      AddressSpaceContext<ModelDesign> _as = new AddressSpaceContext<ModelDesign>(x => { });
-      UAModelContext<ModelDesign> _mc = new UAModelContext<ModelDesign>(_tm.Aliases, _tm.NamespaceUris, _as);
+      AddressSpaceContext _as = new AddressSpaceContext(x => { });
+      UAModelContext _mc = new UAModelContext(_tm.Aliases, _tm.NamespaceUris, _as);
       Assert.IsNotNull(_mc);
       Assert.IsNull(_mc.GetAddressSpaceContext);
     }

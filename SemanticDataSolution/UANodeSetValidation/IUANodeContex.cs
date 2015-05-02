@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -14,7 +15,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="createType">A delegate function to create top level definition for children like methods.</param>
     /// <param name="traceEvent">A delegate action to report and error and trace processing progress.</param>
-    void CalculateNodeReferences(Func<IInstanceDesignFactory, List<string>, IInstanceDesignFactory> createType, Action<TraceMessage> traceEvent); 
+    void CalculateNodeReferences(Func<UAInstance, List<string>, UAInstance> createType, Action<TraceMessage> traceEvent); 
     /// <summary>
     /// Gets the instance of <see cref="UANode"/> of this context source
     /// </summary>
@@ -61,17 +62,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the children of the node.
     /// </summary>
     /// <value>The <see cref="MD.ListOfChildren"/> containing collection of children.</value>
-    IListOfChildrenFactory Children { get; }
+    IUAReferenceContext[] Children { get; }
     /// <summary>
     /// Gets the modeling rule.
     /// </summary>
     /// <value>The modeling rule.</value>
-    IModelingRuleFactory ModelingRule { get; }
+    ModelingRules? ModelingRule { get; }
     /// <summary>
     /// Gets the references.
     /// </summary>
     /// <value>The references of the node.</value>
-    IReferenceFactory[] References { get; }
+    IUAReferenceContext[] References { get; }
 
   }
 }

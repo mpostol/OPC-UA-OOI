@@ -33,7 +33,7 @@ namespace UAOOI.SemanticData.UnitTest.Helpers
     {
       List<TraceMessage> _listOfTraceMessage = new List<TraceMessage>();
       int _diagnosticCounter = 0;
-      TraceHelper.TraceDiagnostic(TraceMessage.BuildErrorTraceMessage(BuildError.BadNodeIdInvalid, "BadNodeIdInvalid"), _listOfTraceMessage, ref _diagnosticCounter);
+      TraceHelper.TraceDiagnostic(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdInvalidSyntax, "NodeIdInvalidSyntax"), _listOfTraceMessage, ref _diagnosticCounter);
       Assert.AreEqual<int>(1, _listOfTraceMessage.Count);
       Assert.AreEqual<int>(0, _diagnosticCounter);
     }

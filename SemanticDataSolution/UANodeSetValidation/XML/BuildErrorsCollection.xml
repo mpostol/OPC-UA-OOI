@@ -9,9 +9,21 @@
     </NamedBuildError>
     <NamedBuildError>
       <Focus>NodeClass</Focus>
+      <Identifier>P0-0605020210</Identifier>
+      <Descriptor>The syntax of the ExpandedNodeId is not valid.</Descriptor>
+      <Name>ExpandedNodeIdInvalidSyntax</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
       <Identifier>P0-0605020209</Identifier>
-      <Descriptor>The syntax of the node id is not valid.</Descriptor>
-      <Name>BadNodeIdInvalid</Name>
+      <Descriptor>The syntax of the NodeId is not valid.</Descriptor>
+      <Name>NodeIdInvalidSyntax</Name>
+    </NamedBuildError>
+    <NamedBuildError>
+      <Focus>NodeClass</Focus>
+      <Identifier>P0-0605020213</Identifier>
+      <Descriptor>The syntax of the QualifiedName is not valid.</Descriptor>
+      <Name>QualifiedNameInvalidSyntax</Name>
     </NamedBuildError>
     <NamedBuildError>
       <Focus>NodeClass</Focus>

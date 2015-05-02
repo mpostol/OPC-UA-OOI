@@ -21,14 +21,14 @@ namespace UAOOI.SemanticData.UnitTest
     [TestMethod]
     public void ServiceResultExceptionCreateWithMessageTestMethod()
     {
-      TraceMessage traceMessage = TraceMessage.BuildErrorTraceMessage(BuildError.BadNodeIdInvalid, "BuildError_BadNodeIdInvalid");
+      TraceMessage traceMessage = TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdInvalidSyntax, "BuildError_BadNodeIdInvalid");
       ServiceResultException _ex = new ServiceResultException(traceMessage, "test message");
       Assert.IsNotNull(_ex);
       Assert.IsNotNull(_ex.TraceMessage);
       Assert.IsNull(_ex.InnerException);
       Assert.AreEqual<string>("test message", _ex.Message);
       Assert.IsNotNull(_ex.TraceMessage);
-      Assert.AreEqual<Focus>(BuildError.BadNodeIdInvalid.Focus, _ex.TraceMessage.BuildError.Focus);
+      Assert.AreEqual<Focus>(BuildError.NodeIdInvalidSyntax.Focus, _ex.TraceMessage.BuildError.Focus);
       Assert.AreEqual<TraceEventType>(TraceEventType.Information, _ex.TraceMessage.TraceLevel);
     }
   }

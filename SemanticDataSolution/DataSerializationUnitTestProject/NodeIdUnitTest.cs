@@ -42,6 +42,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       NodeId _ni;
       _ni = NodeId.Parse("ns=-10;i=01"); //this example is in the specification.
     }
+    [TestMethod]
+    public void NodeIdOperatorTestMethod1()
+    {
+      NodeId _property = new NodeId(Opc.Ua.VariableTypes.PropertyType);
+      Assert.AreNotSame(_property, Opc.Ua.VariableTypeIds.PropertyType);
+      Assert.Inconclusive();
+      Assert.IsTrue(_property == Opc.Ua.VariableTypeIds.PropertyType);
+    }
 
   }
 }

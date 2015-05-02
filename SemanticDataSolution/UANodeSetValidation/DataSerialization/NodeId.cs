@@ -6,9 +6,43 @@ using System.Text;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {
+  /// <summary>
+  /// Stores an identifier for a node in a server's address space.
+  /// </summary>
+  /// <remarks>
+  /// <para>
+  /// <b>Please refer to OPC Specifications</b>:
+  /// <list type="bullet">
+  /// <item><b>Address Space Model</b> section <b>8.2</b></item>
+  /// <item><b>Address Space Model</b> section <b>5.2.2</b></item>
+  /// </list>
+  /// </para>
+  /// <para>
+  /// Stores the id of a Node, which resides within the server's address space.
+  /// <br/></para>
+  /// <para>
+  /// The NodeId can be either:
+  /// <list type="bullet">
+  /// <item><see cref="uint"/></item>
+  /// <item><see cref="Guid"/></item>
+  /// <item><see cref="string"/></item>
+  /// <item><see cref="byte"/>[]</item>
+  /// </list>
+  /// <br/></para>
+  /// <note>
+  /// <b>Important:</b> Keep in mind that the actual ID's of nodes should be unique such that no two
+  /// nodes within an address-space share the same ID's.
+  /// </note>
+  /// <para>
+  /// The NodeId can be assigned to a particular namespace index. This index is merely just a number and does
+  /// not represent some index within a collection that this node has any knowledge of. The assumption is
+  /// that the host of this object will manage that directly.
+  /// <br/></para>
+  /// </remarks>
   public partial class NodeId
   {
 
+    #region constructors
     /// <summary>
     /// Initializes the object with default values.
     /// </summary>
@@ -21,6 +55,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Initialize();
     }
     /// <summary>
+    /// Creates a deep copy of the value.
+    /// </summary>
+    /// <remarks>
+    /// Creates a new NodeId by copying the properties of the node specified in the parameter.
+    /// </remarks>
+    /// <param name="value">The NodeId object whose properties will be copied.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <i>value</i> is null</exception>
+    public NodeId(NodeId value)
+    {
+      if (value == null) throw new ArgumentNullException("value");
+      m_namespaceIndex = value.m_namespaceIndex;
+      m_identifierType = value.m_identifierType;
+      m_identifierPart = value.MemberwiseClone();
+    }
     /// Initializes a numeric node identifier.
     /// </summary>
     /// <remarks>
@@ -71,7 +119,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// Creates a new node whose Id will be a <see cref="Guid"/>.
     /// </remarks>
     /// <param name="value">The new Guid value of this nodes Id.</param>
-    public NodeId(Guid value)
+    public NodeId(System.Guid value)
     {
       m_namespaceIndex = 0;
       m_identifierType = IdType.Guid_2;
@@ -85,7 +133,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// </remarks>
     /// <param name="value">The new Guid value of this nodes Id.</param>
     /// <param name="namespaceIndex">The index of the namespace that this node belongs to</param>
-    public NodeId(Guid value, ushort namespaceIndex)
+    public NodeId(global::System.Guid value, ushort namespaceIndex)
     {
       m_namespaceIndex = namespaceIndex;
       m_identifierType = IdType.Guid_2;
@@ -156,34 +204,64 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     public NodeId(object value, ushort namespaceIndex)
     {
       m_namespaceIndex = namespaceIndex;
-
       if (value is uint)
       {
         SetIdentifier(IdType.Numeric_0, value);
         return;
       }
-
       if (value == null || value is string)
       {
         SetIdentifier(IdType.String_1, value);
         return;
       }
-
       if (value is Guid)
       {
         SetIdentifier(IdType.Guid_2, value);
         return;
       }
-
       if (value is byte[])
       {
         SetIdentifier(IdType.Opaque_3, value);
         return;
       }
     }
+    #endregion
+
+    /// <summary>
+    /// Initializes the object during deserialization.
+    /// </summary>
+    private void Initialize()
+    {
+      m_namespaceIndex = 0;
+      m_identifierType = IdType.Numeric_0;
+      m_identifierPart = null;
+    }
+    /// <summary>
+    /// Converts an integer to a numeric node identifier.
+    /// </summary>
+    /// <param name="value">The <see cref="uint" /> to compare this node to.</param>
+    /// <returns>The <see cref="NodeId"/> object as the result of the conversion.</returns>
+    /// <remarks>Converts an integer to a numeric node identifier for comparisons.</remarks>
+    public static implicit operator NodeId(uint value)
+    {
+      return new NodeId(value);
+    }
     /// <summary>
     /// Returns an instance of a null NodeId.
     /// </summary>
+    /// <summary>
+    /// Checks if the node id represents a 'Null' node id.
+    /// </summary>
+    /// <remarks>
+    /// Returns a true/false value to indicate if the specified NodeId is null.
+    /// </remarks>
+    /// <param name="nodeId">The NodeId to validate</param>
+    public static bool IsNull(NodeId nodeId)
+    {
+      if (nodeId == null)
+        return true;
+      return nodeId.IsNullNodeId;
+    }
     public static NodeId Null
     {
       get { return s_Null; }
@@ -209,7 +287,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
           int index = text.IndexOf(';');
           if (index == -1)
             throw new ServiceResultException
-              (TraceMessage.BuildErrorTraceMessage(BuildError.BadNodeIdInvalid, String.Format("Cannot parse node id text: '{0}'", text)), "BuildError_BadNodeIdInvalid");
+              (TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdInvalidSyntax, String.Format("Cannot parse node id text: '{0}'", text)), "BuildError_BadNodeIdInvalid");
           namespaceIndex = Convert.ToUInt16(text.Substring(3, index - 3), CultureInfo.InvariantCulture);
           text = text.Substring(index + 1);
         }
@@ -234,17 +312,74 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       catch (Exception e)
       {
         throw new ServiceResultException
-          (TraceMessage.BuildErrorTraceMessage(BuildError.BadNodeIdInvalid, String.Format("Cannot parse node id text: '{0}'", text)), "BuildError_BadNodeIdInvalid", e);
+          (TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdInvalidSyntax, String.Format("Cannot parse node id text: '{0}'", text)), "BuildError_BadNodeIdInvalid", e);
       }
     }
+    #region public string Format()
     /// <summary>
-    /// Initializes the object during deserialization.
+    /// Formats a node id as a string.
     /// </summary>
-    private void Initialize()
+    /// <remarks>
+    /// <para>
+    /// Formats a NodeId as a string.
+    /// <br/></para>
+    /// <para>
+    /// An example of this would be:
+    /// <br/></para>
+    /// <para>
+    /// NodeId = "hello123"<br/>
+    /// NamespaceId = 1;<br/>
+    /// <br/> This would translate into:<br/>
+    /// ns=1;s=hello123
+    /// <br/></para>
+    /// </remarks>
+    public string Format()
     {
-      m_namespaceIndex = 0;
-      m_identifierType = IdType.Numeric_0;
-      m_identifierPart = null;
+      StringBuilder buffer = new StringBuilder();
+      Format(buffer);
+      return buffer.ToString();
+    }
+    /// <summary>
+    /// Formats the NodeId as a string and appends it to the buffer.
+    /// </summary>
+    public void Format(StringBuilder buffer)
+    {
+      Format(buffer, Identifier, m_identifierType, m_namespaceIndex);
+    }
+    /// <summary>
+    /// Formats the NodeId as a string and appends it to the buffer.
+    /// </summary>
+    public static void Format(StringBuilder buffer, object identifier, IdType identifierType, ushort namespaceIndex)
+    {
+      if (namespaceIndex != 0)
+        buffer.AppendFormat(CultureInfo.InvariantCulture, "ns={0};", namespaceIndex);
+      // add identifier type prefix.
+      switch (identifierType)
+      {
+        case IdType.Numeric_0:
+          buffer.Append("i=");
+          break;
+        case IdType.String_1:
+          buffer.Append("s=");
+          break;
+        case IdType.Guid_2:
+          buffer.Append("g=");
+          break;
+        case IdType.Opaque_3:
+          buffer.Append("b=");
+          break;
+      }
+      // add identifier.
+      FormatIdentifier(buffer, identifier, identifierType);
+    }
+    #endregion
+
+    /// <summary>
+    /// Updates the namespace index.
+    /// </summary>
+    internal void SetNamespaceIndex(ushort value)
+    {
+      m_namespaceIndex = value;
     }
     /// <summary>
     /// Updates the identifier.
@@ -269,6 +404,148 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_identifierType = idType;
       SetIdentifier(IdType.String_1, value);
     }
+    /// <summary>
+    /// Compares the current instance to the object.
+    /// </summary>
+    /// <remarks>
+    /// Enables this object type to be compared to other types of object.
+    /// </remarks>
+    public int CompareTo(object obj)
+    {
+      // check for null.
+      if (Object.ReferenceEquals(obj, null))
+        return -1;
+      // check for reference comparisons.
+      if (Object.ReferenceEquals(this, obj))
+        return 0;
+      ushort namespaceIndex = this.m_namespaceIndex;
+      IdType idType = this.m_identifierType;
+      object id = null;
+      // check for expanded node ids.
+      NodeId nodeId = obj as NodeId;
+      if (nodeId != null)
+      {
+        namespaceIndex = nodeId.NamespaceIndex;
+        idType = nodeId.IdType;
+        id = nodeId.Identifier;
+      }
+      else
+      {
+        UInt32? uid = obj as UInt32?;
+        // check for numeric contains.
+        if (uid != null)
+        {
+          if (namespaceIndex != 0 || idType != IdType.Numeric_0)
+            return -1;
+          uint id1 = (uint)m_identifierPart;
+          uint id2 = uid.Value;
+          if (id1 == id2)
+            return 0;
+          return (id1 < id2) ? -1 : +1;
+        }
+        ExpandedNodeId expandedId = obj as ExpandedNodeId;
+        if (!Object.ReferenceEquals(expandedId, null))
+        {
+          if (expandedId.IsAbsolute)
+            return -1;
+          namespaceIndex = expandedId.NamespaceIndex;
+          idType = expandedId.IdType;
+          id = expandedId.IdentifierPart;
+        }
+      }
+      // check for different namespace.
+      if (namespaceIndex != m_namespaceIndex)
+        return (m_namespaceIndex < namespaceIndex) ? -1 : +1;
+      // check for different id type.
+      if (idType != m_identifierType)
+        return (m_identifierType < idType) ? -1 : +1;
+      // check for two nulls.
+      if (IdentifierPart == null && id == null)
+        return 0;
+      // check for a single null.
+      if (IdentifierPart == null && id != null)
+      {
+        switch (idType)
+        {
+          case IdType.String_1:
+            string stringId = id as string;
+            if (stringId.Length == 0)
+              return 0;
+            break;
+          case IdType.Opaque_3:
+            byte[] opaqueId = id as byte[];
+            if (opaqueId.Length == 0)
+              return 0;
+            break;
+          case IdType.Numeric_0:
+            uint? numericId = id as uint?;
+            if (numericId.Value == 0)
+              return 0;
+            break;
+        }
+        return -1;
+      }
+      else if (IdentifierPart != null && id == null) // check for a single null.
+      {
+        switch (idType)
+        {
+          case IdType.String_1:
+            string stringId = IdentifierPart as string;
+            if (stringId.Length == 0)
+              return 0;
+            break;
+          case IdType.Opaque_3:
+            byte[] opaqueId = IdentifierPart as byte[];
+            if (opaqueId.Length == 0)
+              return 0;
+            break;
+          case IdType.Numeric_0:
+            uint? numericId = IdentifierPart as uint?;
+            if (numericId.Value == 0)
+              return 0;
+            break;
+        }
+        return +1;
+      }
+      // compare ids.
+      switch (idType)
+      {
+        case IdType.Numeric_0:
+          {
+            uint id1 = (uint)IdentifierPart;
+            uint id2 = (uint)id;
+            if (id1 == id2)
+              return 0;
+            return (id1 < id2) ? -1 : +1;
+          }
+        case IdType.String_1:
+          {
+            string id1 = (string)IdentifierPart;
+            string id2 = (string)id;
+            return String.CompareOrdinal(id1, id2);
+          }
+        case IdType.Guid_2:
+          {
+            System.Guid id1 = (System.Guid)IdentifierPart;
+            return id1.CompareTo(id);
+          }
+        case IdType.Opaque_3:
+          {
+            byte[] id1 = (byte[])IdentifierPart;
+            byte[] id2 = (byte[])id;
+            if (id1.Length == id2.Length)
+            {
+              for (int ii = 0; ii < id1.Length; ii++)
+                if (id1[ii] != id2[ii])
+                  return (id1[ii] < id2[ii]) ? -1 : +1;
+              return 0;
+            }
+            return (id1.Length < id2.Length) ? -1 : +1;
+          }
+      }
+      // invalid id type - should never get here.
+      return +1;
+    }
     /// The index of the namespace URI in the server's namespace array.
     /// </summary>
     /// <remarks>
@@ -284,6 +561,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <remarks>
     /// Returns the type of Id, whether it is:
     /// <list type="bullet">
+    /// <item><see cref="uint"/></item>
     /// <item><see cref="Guid"/></item>
     /// <item><see cref="string"/></item>
     /// <item><see cref="byte"/>[]</item>
@@ -315,7 +593,74 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return m_identifierPart;
       }
     }
-    //private
+    /// <summary>
+    /// Whether the object represents a Null NodeId.
+    /// </summary>
+    /// <remarks>
+    /// Whether the NodeId represents a Null NodeId.
+    /// </remarks>
+    public bool IsNullNodeId
+    {
+      get
+      {
+        // non-zero namespace means it can't be null.
+        if (m_namespaceIndex != 0)
+          return false;
+        // the definition of a null identifier depends on the identifier type.
+        if (IdentifierPart == null)
+          return true;
+        bool _ret = true;
+        switch (m_identifierType)
+        {
+          case IdType.Numeric_0:
+            _ret = !!IdentifierPart.Equals((uint)0);
+            break;
+          case IdType.String_1:
+            _ret = String.IsNullOrEmpty((string)IdentifierPart);
+            break;
+          case IdType.Guid_2:
+            _ret = IdentifierPart.Equals(System.Guid.Empty);
+            break;
+          case IdType.Opaque_3:
+            _ret = !(IdentifierPart != null && ((byte[])IdentifierPart).Length > 0);
+            break;
+        }
+        // must be null.
+        return _ret;
+      }
+    }
+    /// <summary>
+    /// Formats a node id as a string.
+    /// </summary>
+    private static void FormatIdentifier(StringBuilder buffer, object identifier, IdType identifierType)
+    {
+      switch (identifierType)
+      {
+        case IdType.Numeric_0:
+          if (identifier == null)
+          {
+            buffer.Append('0');
+            break;
+          }
+          buffer.AppendFormat(CultureInfo.InvariantCulture, "{0}", identifier);
+          break;
+        case IdType.String_1:
+          buffer.AppendFormat(CultureInfo.InvariantCulture, "{0}", identifier);
+          break;
+        case IdType.Guid_2:
+          if (identifier == null)
+          {
+            buffer.Append(System.Guid.Empty);
+            break;
+          }
+          buffer.AppendFormat(CultureInfo.InvariantCulture, "{0}", identifier);
+          break;
+        case IdType.Opaque_3:
+          if (identifier != null)
+            buffer.AppendFormat(CultureInfo.InvariantCulture, "{0}", Convert.ToBase64String((byte[])identifier));
+          break;
+      }
+    }
     private ushort m_namespaceIndex;
     private IdType m_identifierType;
     private object m_identifierPart;

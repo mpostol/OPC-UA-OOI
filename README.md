@@ -16,11 +16,11 @@ This project is aimed to workout deliverables supporting Process Data handling o
 
 •	Data Edition – UI allowing display and edition of any custom data
 
-•	Data serialization and deserialization 
+•	Data serialization and deserialization - see whitepaper: [Address Space Interchange XML](http://goo.gl/LE64MA)
 
 •	Data binding – to define how the process data relate to the real world
 
-•	Data Validation 
+•	Data Validation - see project [DataSerializationUnitTestProject](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/DataSerializationUnitTestProject)
 
 •	Data Prototyping  - methods and tools to design custom data types
 
@@ -32,9 +32,9 @@ In scope there are also deliverables supporting:
 
 •	Browsing (using the sematic) of the Metadata to selectively access requested Process Data
 
-•	Modeling and representation of the Metadata
+•	Modeling and representation of the Metadata - see whitepaper: [OPC UA Information Model Deployment] (goo.gl/TpAMMh)
 
-•	Validation semantic and consistency of the Metadata
+•	Validation semantic and consistency of the Metadata - see project [UANodeSetValidationUnitTestProject](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/USNodeSetValidationUnitTestProject)
 
 ##Out of scope
 

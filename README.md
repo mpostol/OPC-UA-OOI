@@ -32,7 +32,7 @@ In scope there are also deliverables supporting:
 
 •	Browsing (using the sematic) of the Metadata to selectively access requested Process Data
 
-•	Modeling and representation of the Metadata - see whitepaper: [OPC UA Information Model Deployment] (http://goo.gl/TpAMMh)
+•	Modeling and representation of the Metadata - see whitepaper: [OPC UA Information Model Deployment] (http://goo.gl/HqYjvy)
 
 •	Validation semantic and consistency of the Metadata - see project [UANodeSetValidationUnitTestProject](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/USNodeSetValidationUnitTestProject)
 

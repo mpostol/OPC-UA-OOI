@@ -271,8 +271,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       IEnumerable<UANodeContext> _stubs = from _key in m_NodesDictionary.Keys where _key.NamespaceIndex == 1 select m_NodesDictionary[_key];
       List<IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node as IUANodeContext).ToList();
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("AddressSpaceContext.CreateModelDesign - selected {0} nodes to be added to the model.", _nodes.Count)));
-      throw new NotImplementedException();
-      //ModelDesignFactory.CreateModelDesign(_nodes, this, m_TraceEvent);
+      ModelDesignFactory.CreateModelDesign(_nodes, this, m_TraceEvent);
     }
     internal void GetDerivedInstances(UANodeContext rootNode, List<UANodeContext> list)
     {

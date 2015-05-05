@@ -54,7 +54,8 @@
     <Compile Include="IUAModelContext.cs" />
     <Compile Include="IUANodeContex.cs" />
     <Compile Include="IUAReferenceContext.cs" />
-    <Compile Include="ModelDesignType.cs" />
+    <Compile Include="ModelDesignFactory.cs" />
+    <Compile Include="IExportModelFactory.cs" />
     <Compile Include="Namespaces.cs" />
     <Compile Include="TraceMessage.cs" />
     <Compile Include="DataSerialization\NodeId.cs" />

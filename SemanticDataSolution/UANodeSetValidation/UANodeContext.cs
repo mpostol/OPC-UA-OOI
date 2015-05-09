@@ -55,7 +55,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="createType">delegate function to create top level definition for children like methods.</param>
     /// <param name="traceEvent">A delegate action to report and error and trace processing progress.</param>
-    void IUANodeContext.CalculateNodeReferences(Func<UAInstance, List<string>, UAInstance> createType, Action<TraceMessage> traceEvent)
+    void IUANodeContext.CalculateNodeReferences(IExportModelFactory exportFactory, Action<TraceMessage> traceEvent)
     {
       Errors = new List<BuildError>();
       m_ModelingRule = new Nullable<ModelingRules>();
@@ -107,11 +107,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       m_References = _references.Count == 0 ? null : _references.ToArray<IUAReferenceContext>();
       _children = _children.Where<UAReferenceContext>(x => _derivedChildren == null || !_derivedChildren.ContainsKey(x.TargetNodeContext.UANode.NamePartOfBrowseName())).ToList<UAReferenceContext>();
-      m_Children = _children.Count == 0 ? null : _children.Cast<IUAReferenceContext>().ToArray<IUAReferenceContext>();
-      throw new NotImplementedException();
-      //TODO
-      //foreach (var _child in _children)
-      //     ModelDesignFactory.CreateNodeDesign((a, c) => { c.Add(this.BranchName); return createType(a, c); }, x, x.TargetNodeContext, traceEvent)).Cast<OldModel.InstanceDesign>().ToArray<OldModel.InstanceDesign>());
+      m_Children = _children.Count == 0 ? 
+        null : 
+        _children.Select<UAReferenceContext, IExportNodeFactory>(x => ModelDesignFactory.CreateNodeDesign(exportFactory, x, x.TargetNodeContext, traceEvent)).Cast<IExportInstanceFactory>().ToArray<IExportInstanceFactory>();
     }
     /// <summary>
     /// Converts the <paramref name="nodeId" /> representing instance of <see cref="Opc.Ua.NodeId" /> and returns <see cref="XmlQualifiedName" />
@@ -170,7 +168,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the children of the node.
     /// </summary>
     /// <value>The <see cref="OldModel.ListOfChildren" /> containing collection of children.</value>
-    IUAReferenceContext[] IUANodeContext.Children { get { return m_Children; } }
+    IExportInstanceFactory[] IUANodeContext.Children { get { return m_Children; } }
     #endregion
 
     #region public API
@@ -204,7 +202,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private UAModelContext m_UAModelContext = null;
     private List<BuildError> Errors { get; set; }
     private IUAReferenceContext[] m_References = null;
-    private IUAReferenceContext[] m_Children = null;
+    private IExportInstanceFactory[] m_Children = null;
     private ModelingRules? m_ModelingRule;
     private UANodeContext m_BaseTypeNode;
     private bool m_IsProperty = false;

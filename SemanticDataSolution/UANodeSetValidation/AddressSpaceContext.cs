@@ -128,29 +128,29 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       QualifiedName _qn = modelContext.ImportQualifiedName(browseName, m_NamespaceTable);
       return new XmlQualifiedName(_qn.Name, m_NamespaceTable.GetString(_qn.NamespaceIndex));
     }
-    /// <summary>
-    /// Exports the argument.
-    /// </summary>
-    /// <param name="argument">The argument to be exported.</param>
-    /// <param name="modelContext">The model context.</param>
-    /// <param name="traceEvent">The trace event.</param>
-    /// <returns>Returns an instance of <see cref="OldModel.Parameter" />.</returns>
-    internal ParameterType ExportArgument<ParameterType>(Argument argument, UAModelContext modelContext, Func<Argument, XmlQualifiedName, ParameterType> createParameter)
-    {
-      XmlQualifiedName _dataType = ExportNodeId(argument.DataType.Identifier, Opc.Ua.DataTypeIds.BaseDataType, modelContext, m_TraceEvent);
-      return createParameter(argument, _dataType);
-      //bool _ValueRankSpecified = false;
-      //OldModel.ValueRank _ValueRank = argument.ValueRank.GetValueRank(x => _ValueRankSpecified = x, traceEvent);
-      //return new OldModel.Parameter()
-      //{
-      //  DataType = _dataType,
-      //  Description = argument.Description == null ? null : new OldModel.LocalizedText() { Key = argument.Description.Locale, Value = argument.Description.Text },
-      //  Identifier = 0,
-      //  IdentifierSpecified = false,
-      //  Name = argument.Name,
-      //  ValueRank = _ValueRank,
-      //};
-    }
+    ///// <summary>
+    ///// Exports the argument.
+    ///// </summary>
+    ///// <param name="argument">The argument to be exported.</param>
+    ///// <param name="modelContext">The model context.</param>
+    ///// <param name="traceEvent">The trace event.</param>
+    ///// <returns>Returns an instance of <see cref="OldModel.Parameter" />.</returns>
+    //internal ParameterType ExportArgument<ParameterType>(Argument argument, UAModelContext modelContext, Func<Argument, XmlQualifiedName, ParameterType> createParameter)
+    //{
+    //  XmlQualifiedName _dataType = ExportNodeId(argument.DataType.Identifier, Opc.Ua.DataTypeIds.BaseDataType, modelContext, m_TraceEvent);
+    //  return createParameter(argument, _dataType);
+    //  //bool _ValueRankSpecified = false;
+    //  //OldModel.ValueRank _ValueRank = argument.ValueRank.GetValueRank(x => _ValueRankSpecified = x, traceEvent);
+    //  //return new OldModel.Parameter()
+    //  //{
+    //  //  DataType = _dataType,
+    //  //  Description = argument.Description == null ? null : new OldModel.LocalizedText() { Key = argument.Description.Locale, Value = argument.Description.Text },
+    //  //  Identifier = 0,
+    //  //  IdentifierSpecified = false,
+    //  //  Name = argument.Name,
+    //  //  ValueRank = _ValueRank,
+    //  //};
+    //}
     /// <summary>
     /// Gets the namespace.
     /// </summary>
@@ -271,7 +271,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       IEnumerable<UANodeContext> _stubs = from _key in m_NodesDictionary.Keys where _key.NamespaceIndex == 1 select m_NodesDictionary[_key];
       List<IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node as IUANodeContext).ToList();
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("AddressSpaceContext.CreateModelDesign - selected {0} nodes to be added to the model.", _nodes.Count)));
-      ModelDesignFactory.CreateModelDesign(_nodes, this, m_TraceEvent);
+      ModelDesignFactory.CreateModelDesign(_nodes, factory, this, m_TraceEvent);
     }
     internal void GetDerivedInstances(UANodeContext rootNode, List<UANodeContext> list)
     {

@@ -5,12 +5,12 @@ using System.Xml;
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
 
-  internal enum ReferenceKindEnum { Custom, HasComponent, HasModellingRule, HasTypeDefinition, HierarchicalReferences, HasSubtype, HasProperty };
+  public enum ReferenceKindEnum { Custom, HasComponent, HasModellingRule, HasTypeDefinition, HierarchicalReferences, HasSubtype, HasProperty };
 
   /// <summary>
   /// Interface IReferenceContext - represent context of the interface.
   /// </summary>
-  internal interface IUAReferenceContext
+  public interface IUAReferenceContext
   {
 
     /// <summary>

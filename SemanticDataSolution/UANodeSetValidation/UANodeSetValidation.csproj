@@ -45,12 +45,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BuildErrors.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataSerialization\AttributeValues.cs" />
     <Compile Include="DataSerialization\ExpandedNodeId.cs" />
     <Compile Include="DataSerialization\Extensions.cs" />
     <Compile Include="DataSerialization\Opc_Ua_Types.cs" />
     <Compile Include="DataSerialization\QualifiedName.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="IAddressSpaceContext.cs" />
+    <Compile Include="IExportDataTypeDefinitionFactory.cs" />
+    <Compile Include="IExportDataTypeFactory.cs" />
+    <Compile Include="IExportInstanceFactory.cs" />
+    <Compile Include="IExportMethodnstanceFactory.cs" />
+    <Compile Include="IExportNodeFactory.cs" />
+    <Compile Include="IExportObjectnstanceFactory.cs" />
+    <Compile Include="IExportObjectTypeFactory.cs" />
+    <Compile Include="IExportPropertyInstanceFactory.cs" />
+    <Compile Include="IExportReferenceTypeFactory.cs" />
+    <Compile Include="IExportTypeFactory.cs" />
+    <Compile Include="IExportVariableInstanceFactory.cs" />
+    <Compile Include="IExportVariableTypeFactory.cs" />
+    <Compile Include="IExportViewInstanceFactory.cs" />
     <Compile Include="IUAModelContext.cs" />
     <Compile Include="IUANodeContex.cs" />
     <Compile Include="IUAReferenceContext.cs" />

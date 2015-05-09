@@ -1,4 +1,5 @@
 ﻿
+using Opc.Ua;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -6,6 +7,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml.Serialization;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -56,7 +58,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return node.SymbolicName;
       return node.BrowseName;
     }
-    internal static string ConvertToString(this LocalizedText[] localizedText)
+    internal static string ConvertToString(this XML.LocalizedText[] localizedText)
     {
       if (localizedText == null || localizedText.Length == 0)
         return "Empty LocalizedText";
@@ -81,7 +83,50 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         throw new FileNotFoundException(String.Format(CultureInfo.InvariantCulture, "Could not load resource '{0}' because the exception {1} reports the error {2}.", path, e.GetType().Name, e.Message), e);
       }
     }
+    internal static IExportDataTypeDefinitionFactory[] GetParameters(this DataTypeDefinition dataTypeDefinition, IExportDataTypeFactory nodeDesign, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
+    {
+      if (dataTypeDefinition == null || dataTypeDefinition.Field == null)
+        return null;
+      List<IExportDataTypeDefinitionFactory> _parameters = new List<IExportDataTypeDefinitionFactory>();
+      foreach (DataTypeField _item in dataTypeDefinition.Field)
+      {
+        bool _ValueRankSpecified;
+        IExportDataTypeDefinitionFactory _nP = nodeDesign.NewExportDataTypeDefinitionFactory();
+        _nP.DataType = modelContext.ExportNodeId(_item.DataType, DataTypes.BaseDataType, traceEvent);
+        _nP.Description = _item.Description;
+        _nP.Identifier = _item.Value;
+        _nP.IdentifierSpecified = true;
+        _nP.Name = _item.Name;
+        _nP.ValueRank = _item.ValueRank.GetValueRank(x => _ValueRankSpecified = x, traceEvent);
+        if (_item.Definition != null)
+          throw new NotImplementedException("Definition");
+        _nP.Definition = _item.Definition; //TODO implement recursion 
+        _nP.SymbolicName = _item.SymbolicName;
+        _nP.Value = _item.Value;
+        _parameters.Add(_nP);
+      }
+      return _parameters.ToArray();
+    }
+    internal static XML.LocalizedText[] Truncate(this XML.LocalizedText[] localizedText, int maxLength, Action<TraceMessage> reportError)
+    {
+      if (localizedText == null || localizedText.Length == 0)
+        return null;
+      List<XML.LocalizedText> _ret = new List<XML.LocalizedText>();
+      foreach (XML.LocalizedText _item in localizedText)
+      {
+        if (_item.Value.Length > maxLength)
+        {
+          reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongDisplayNameLength, String.Format
+            ("The localized text starting with '{0}:{1}' of length {2} is too long.", _item.Locale, _item.Value.Substring(0, 20), _item.Value.Length)));
+          XML.LocalizedText _localizedText = new XML.LocalizedText()
+          {
+            Locale = _item.Locale,
+            Value = _item.Value.Substring(0, maxLength)
+          };
+        }
+      }
+      return localizedText;
+    }
 
   }
-
 }

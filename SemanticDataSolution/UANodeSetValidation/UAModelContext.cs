@@ -34,16 +34,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region IAddressSpaceContext
     /// <summary>
-    /// Exports the <see cref="Common.Types.Argument" />.
-    /// </summary>
-    /// <param name="argument">The argument to be exported.</param>
-    /// <param name="traceEvent">An <see cref="Action" /> delegate is used to trace event as the <see cref="TraceMessage" />.</param>
-    /// <returns>Returns an object of <see cref="Opc.Ua.ModelCompiler.Parameter" /> type derived from <see cref="Common.Types.Argument" />.</returns>
-    public ParameterType ExportArgument<ParameterType>(DataSerialization.Argument argument, Action<TraceMessage> traceEvent, Func<Argument, XmlQualifiedName, ParameterType> createParameter)
-    {
-      return m_AddressSpaceContext.ExportArgument(argument, this, createParameter);
-    }
-    /// <summary>
     /// Exports the node identifier.
     /// </summary>
     /// <param name="nodeId">The node identifier as the string.</param>

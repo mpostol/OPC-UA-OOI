@@ -5,6 +5,7 @@ using System.Text;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {
+
   /// <summary>
   /// Stores an identifier for a node in a server's address space.
   /// </summary>
@@ -47,11 +48,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// </summary>
     /// <remarks>
     /// Creates a new instance of the class which will have the default values. The actual
-    /// Node Id will need to be defined as this constructor does not specify the id.
+    /// NodeId will need to be defined as this constructor does not specify the id.
     /// </remarks>
     internal NodeId()
     {
-      Initialize();
+      m_namespaceIndex = 0;
+      m_identifierType = IdType.Numeric_0;
+      m_identifierPart = null;
     }
     /// <summary>
     /// Creates a deep copy of the value.
@@ -226,15 +229,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     }
     #endregion
 
-    /// <summary>
-    /// Initializes the object during deserialization.
-    /// </summary>
-    private void Initialize()
-    {
-      m_namespaceIndex = 0;
-      m_identifierType = IdType.Numeric_0;
-      m_identifierPart = null;
-    }
+    #region public
     /// <summary>
     /// Converts an integer to a numeric node identifier.
     /// </summary>
@@ -314,65 +309,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
           (TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdInvalidSyntax, String.Format("Cannot parse node id text: '{0}'", text)), "BuildError_BadNodeIdInvalid", e);
       }
     }
-    #region public string Format()
-    /// <summary>
-    /// Formats a node id as a string.
-    /// </summary>
-    /// <remarks>
-    /// <para>
-    /// Formats a NodeId as a string.
-    /// <br/></para>
-    /// <para>
-    /// An example of this would be:
-    /// <br/></para>
-    /// <para>
-    /// NodeId = "hello123"<br/>
-    /// NamespaceId = 1;<br/>
-    /// <br/> This would translate into:<br/>
-    /// ns=1;s=hello123
-    /// <br/></para>
-    /// </remarks>
-    public string Format()
-    {
-      StringBuilder buffer = new StringBuilder();
-      Format(buffer);
-      return buffer.ToString();
-    }
-    /// <summary>
-    /// Formats the NodeId as a string and appends it to the buffer.
-    /// </summary>
-    public void Format(StringBuilder buffer)
-    {
-      Format(buffer, Identifier, m_identifierType, m_namespaceIndex);
-    }
-    /// <summary>
-    /// Formats the NodeId as a string and appends it to the buffer.
-    /// </summary>
-    public static void Format(StringBuilder buffer, object identifier, IdType identifierType, ushort namespaceIndex)
-    {
-      if (namespaceIndex != 0)
-        buffer.AppendFormat(CultureInfo.InvariantCulture, "ns={0};", namespaceIndex);
-      // add identifier type prefix.
-      switch (identifierType)
-      {
-        case IdType.Numeric_0:
-          buffer.Append("i=");
-          break;
-        case IdType.String_1:
-          buffer.Append("s=");
-          break;
-        case IdType.Guid_2:
-          buffer.Append("g=");
-          break;
-        case IdType.Opaque_3:
-          buffer.Append("b=");
-          break;
-      }
-      // add identifier.
-      FormatIdentifier(buffer, identifier, identifierType);
-    }
-    #endregion
-
     /// <summary>
     /// Updates the namespace index.
     /// </summary>
@@ -628,6 +564,68 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return _ret;
       }
     }
+    #endregion    
+
+    #region public string Format()
+    /// <summary>
+    /// Formats a node id as a string.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Formats a NodeId as a string.
+    /// <br/></para>
+    /// <para>
+    /// An example of this would be:
+    /// <br/></para>
+    /// <para>
+    /// NodeId = "hello123"<br/>
+    /// NamespaceId = 1;<br/>
+    /// <br/> This would translate into:<br/>
+    /// ns=1;s=hello123
+    /// <br/></para>
+    /// </remarks>
+    public string Format()
+    {
+      StringBuilder buffer = new StringBuilder();
+      Format(buffer);
+      return buffer.ToString();
+    }
+    /// <summary>
+    /// Formats the NodeId as a string and appends it to the buffer.
+    /// </summary>
+    public void Format(StringBuilder buffer)
+    {
+      Format(buffer, Identifier, m_identifierType, m_namespaceIndex);
+    }
+    /// <summary>
+    /// Formats the NodeId as a string and appends it to the buffer.
+    /// </summary>
+    public static void Format(StringBuilder buffer, object identifier, IdType identifierType, ushort namespaceIndex)
+    {
+      if (namespaceIndex != 0)
+        buffer.AppendFormat(CultureInfo.InvariantCulture, "ns={0};", namespaceIndex);
+      // add identifier type prefix.
+      switch (identifierType)
+      {
+        case IdType.Numeric_0:
+          buffer.Append("i=");
+          break;
+        case IdType.String_1:
+          buffer.Append("s=");
+          break;
+        case IdType.Guid_2:
+          buffer.Append("g=");
+          break;
+        case IdType.Opaque_3:
+          buffer.Append("b=");
+          break;
+      }
+      // add identifier.
+      FormatIdentifier(buffer, identifier, identifierType);
+    }
+    #endregion
+
+    #region private
     /// <summary>
     /// Formats a node id as a string.
     /// </summary>
@@ -664,6 +662,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     private IdType m_identifierType;
     private object m_identifierPart;
     private static NodeId s_Null = new NodeId();
+    #endregion
 
   }
 

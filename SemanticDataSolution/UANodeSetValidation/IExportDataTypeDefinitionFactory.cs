@@ -5,7 +5,7 @@ using UAOOI.SemanticData.UANodeSetValidation.XML;
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
 
-  public interface IExportDataTypeDefinitionFactory
+  public interface IExportDataTypeDefinitionFactory: IExportTypeFactory
   {
 
     XmlQualifiedName DataType

@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="uri">The URI.</param>
     void CreateNamespace(string uri);
     NodeFactory NewExportNodeFFactory<NodeFactory>()
-      where NodeFactory:IExportNodeFactory;
+      where NodeFactory: IExportNodeFactory;
 
   }
 }

@@ -1,18 +1,21 @@
-﻿using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
+﻿
+using System.Xml;
+using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
   public interface IExportInstanceFactory : IExportNodeFactory
   {
+
     ModelingRules? ModelingRule
     {
       set;
     }
-    System.Xml.XmlQualifiedName TypeDefinition
+    XmlQualifiedName TypeDefinition
     {
       set;
     }
-    System.Xml.XmlQualifiedName ReferenceType { set; }
+    XmlQualifiedName ReferenceType { set; }
 
   }
 }

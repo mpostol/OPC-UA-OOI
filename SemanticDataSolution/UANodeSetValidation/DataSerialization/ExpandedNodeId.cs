@@ -1,11 +1,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Runtime.Serialization;
 using System.Globalization;
+using System.Text;
 using UAOOI.SemanticData.UANodeSetValidation.Utilities;
-using System.Xml.Serialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {

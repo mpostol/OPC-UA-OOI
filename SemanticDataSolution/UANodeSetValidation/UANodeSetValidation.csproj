@@ -55,7 +55,7 @@
     <Compile Include="IExportDataTypeDefinitionFactory.cs" />
     <Compile Include="IExportDataTypeFactory.cs" />
     <Compile Include="IExportInstanceFactory.cs" />
-    <Compile Include="IExportMethodnstanceFactory.cs" />
+    <Compile Include="IExportMethodInstanceFactory.cs" />
     <Compile Include="IExportNodeFactory.cs" />
     <Compile Include="IExportObjectnstanceFactory.cs" />
     <Compile Include="IExportObjectTypeFactory.cs" />
@@ -80,7 +80,6 @@
     <Compile Include="ServiceResultException.cs" />
     <Compile Include="UANodeContext.cs" />
     <Compile Include="UAReferenceContext.cs" />
-    <Compile Include="Utilities\Class1.cs" />
     <Compile Include="Utilities\NamespaceTable.cs" />
     <Compile Include="XML\UANodeSet.cs">
       <DependentUpon>UANodeSet.xsd</DependentUpon>

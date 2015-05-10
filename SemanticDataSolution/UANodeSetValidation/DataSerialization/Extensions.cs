@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
@@ -11,7 +8,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   /// </summary>
   internal static class Extensions
   {
-    public static string NamePartOfBrowseName(this UANode value)
+    internal static string NamePartOfBrowseName(this UANode value)
     {
       return QualifiedName.Parse(value.BrowseName).Name;
     }

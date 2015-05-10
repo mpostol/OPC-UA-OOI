@@ -98,7 +98,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             _ret = _ViewDesign;
             break;
           case "UAMethod":
-            IExportMethodnstanceFactory _MethodDesign = CreateNode<IExportMethodnstanceFactory, UAMethod>(exportFactory, nodeContext, (x, y) => Update(x, y, parentReference, traceEvent), UpdateInstance, traceEvent);
+            IExportMethodInstanceFactory _MethodDesign = CreateNode<IExportMethodInstanceFactory, UAMethod>(exportFactory, nodeContext, (x, y) => Update(x, y, parentReference, traceEvent), UpdateInstance, traceEvent);
             _ret = _MethodDesign;
             break;
           case "UAVariable":
@@ -120,7 +120,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _ret;
     }
-
     //private
     private static void Update(IExportObjectnstanceFactory nodeDesign, UAObject nodeSet, Action<TraceMessage> traceEvent)
     {
@@ -186,7 +185,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.DefaultValue = nodeSet.Value;
       nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(x => nodeDesign.ValueRankSpecified = x, traceEvent);
     }
-    private static void Update(IExportMethodnstanceFactory nodeDesign, UAMethod nodeContext, IUAReferenceContext parentReference, Action<TraceMessage> traceEvent)
+    private static void Update(IExportMethodInstanceFactory nodeDesign, UAMethod nodeContext, IUAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
       //TODO validate parentReference
       nodeDesign.NonExecutable = !nodeContext.Executable;
@@ -213,11 +212,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       else if (!nodeSet.Symmetric && !nodeSet.IsAbstract && (nodeSet.InverseName == null || !nodeSet.InverseName.Where(x => !String.IsNullOrEmpty(x.Value)).Any()))
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongInverseName, String.Format("If ReferenceType {0} is not symmetric and not abstract the InverseName shall be specified.", nodeSet.NodeIdentifier())));
     }
-    private static void Update(IExportObjectTypeFactory nodeDesign, UAObjectType nodeSet)
-    {
-      //nodeDesign.SupportsEvents = false;
-      //nodeDesign.SupportsEventsSpecified = false;
-    }
+    private static void Update(IExportObjectTypeFactory nodeDesign, UAObjectType nodeSet) { }
     //Validation
     private static ModelDesignType CreateNode<ModelDesignType, NodeSetType>
       (

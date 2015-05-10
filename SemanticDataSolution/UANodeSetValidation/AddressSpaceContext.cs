@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
-using System.Linq;
 using OpcUa = Opc.Ua;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -128,29 +128,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       QualifiedName _qn = modelContext.ImportQualifiedName(browseName, m_NamespaceTable);
       return new XmlQualifiedName(_qn.Name, m_NamespaceTable.GetString(_qn.NamespaceIndex));
     }
-    ///// <summary>
-    ///// Exports the argument.
-    ///// </summary>
-    ///// <param name="argument">The argument to be exported.</param>
-    ///// <param name="modelContext">The model context.</param>
-    ///// <param name="traceEvent">The trace event.</param>
-    ///// <returns>Returns an instance of <see cref="OldModel.Parameter" />.</returns>
-    //internal ParameterType ExportArgument<ParameterType>(Argument argument, UAModelContext modelContext, Func<Argument, XmlQualifiedName, ParameterType> createParameter)
-    //{
-    //  XmlQualifiedName _dataType = ExportNodeId(argument.DataType.Identifier, Opc.Ua.DataTypeIds.BaseDataType, modelContext, m_TraceEvent);
-    //  return createParameter(argument, _dataType);
-    //  //bool _ValueRankSpecified = false;
-    //  //OldModel.ValueRank _ValueRank = argument.ValueRank.GetValueRank(x => _ValueRankSpecified = x, traceEvent);
-    //  //return new OldModel.Parameter()
-    //  //{
-    //  //  DataType = _dataType,
-    //  //  Description = argument.Description == null ? null : new OldModel.LocalizedText() { Key = argument.Description.Locale, Value = argument.Description.Text },
-    //  //  Identifier = 0,
-    //  //  IdentifierSpecified = false,
-    //  //  Name = argument.Name,
-    //  //  ValueRank = _ValueRank,
-    //  //};
-    //}
     /// <summary>
     /// Gets the namespace.
     /// </summary>
@@ -160,19 +137,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return m_NamespaceTable.GetString(namespaceIndex);
     }
     #endregion
-
-    //#region AddressSpaceContextService
-    //protected override OldModel.ModelDesign InternalCreateInstance(Action<IAddressSpaceContext> getNodesFromModel, Action<TraceMessage> traceEvent)
-    //{
-    //  traceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext.InternalCreateInstance - starting address space compilation."));
-    //  m_TraceEvent = traceEvent;
-    //  UANodeSet _standard = Extensions.LoadResource<UANodeSet>(Extensions.UADefinedTypesName);
-    //  Debug.Assert(_standard != null);
-    //  ImportNodeSet(_standard, traceEvent, false);
-    //  getNodesFromModel(this);
-    //  return CreateModelDesign(traceEvent);
-    //}
-    //#endregion
 
     #region private
     //vars

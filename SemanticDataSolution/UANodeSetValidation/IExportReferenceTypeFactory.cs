@@ -4,7 +4,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 {
   public interface IExportReferenceTypeFactory : IExportTypeFactory
   {
-     LocalizedText[] InverseName
+    LocalizedText[] InverseName
     {
       set;
     }
@@ -13,7 +13,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <remarks>Default Value is <b>false</b></remarks>
     /// <value><c>true</c> if symmetric; otherwise, <c>false</c>.</value>
-     bool Symmetric
+    bool Symmetric
     {
       set;
     }

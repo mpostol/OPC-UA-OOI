@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using System;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization

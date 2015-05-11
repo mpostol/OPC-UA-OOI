@@ -17,10 +17,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="model">The model to be imported.</param>
     /// <param name="validation">If set to <c>true</c> the nodes are validated and progress is traced.</param>
     void ImportNodeSet(UANodeSet model, bool validation);
-    /// <summary>
-    /// Exports the namespace table.
-    /// </summary>
-    string[] ExportNamespaceTable();
 
   }
 }

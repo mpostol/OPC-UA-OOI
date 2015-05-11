@@ -18,6 +18,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// </summary>
   public class AddressSpaceContext : IAddressSpaceContext
   {
+    
     #region creator
     /// <summary>
     /// Initializes a new instance of the <see cref="AddressSpaceContext{ModelDesignType}"/> class.
@@ -41,7 +42,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Creates the instance of the address space.
     /// </summary>
     /// <param name="targetNamespace">The target namespace.</param>
-    /// <param name="getNodesFromModel">An action called to get nodes from the information model.</param>
+    /// <param name="getNodesFromModel">Encapsulates an action called to get nodes from the information model.</param>
     /// <returns>An instance of <see cref="ModelDesign.ModelDesign"/> containing the model.</returns>
     public void CreateInstance(string targetNamespace, Action<IAddressSpaceContext> getNodesFromModel, IExportModelFactory factory)
     {
@@ -86,17 +87,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         this.ImportUANode(_nd, _modelContext, validation ? m_TraceEvent : x => { });
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Finishing AddressSpaceContext.ImportNodeSet - imported {0} nodes.", model.Items.Length)));
     }
-    /// <summary>
-    /// Exports the current namespace table containing all namespaces relevant for exported model.
-    /// </summary>
-    /// <returns>System.String[].</returns>
-    string[] IAddressSpaceContext.ExportNamespaceTable()
-    {
-      return m_NamespaceTable.ToArray();
-    }
     #endregion
 
-    #region public
+    #region internal API of this service
     /// <summary>
     /// Converts the <paramref name="nodeId" /> representing instance of <see cref="Opc.Ua.NodeId" /> and returns <see cref="XmlQualifiedName" />
     /// representing the <see cref="UANode.BrowseName" /> of the node pointed out by it.
@@ -138,9 +131,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return m_NamespaceTable.GetString(namespaceIndex);
     }
-    #endregion
-
-    #region internal API of this service
+    /// <summary>
+    /// Exports the current namespace table containing all namespaces relevant for exported model.
+    /// </summary>
+    /// <returns>Array of relevant namespaces as the <see cref="System.String[]"/>.</returns>
+    internal string[] ExportNamespaceTable()
+    {
+      return m_NamespaceTable.ToArray();
+    }
     internal UANodeContext ImportNodeId(string nodeId, UAModelContext modelContext, bool lookupAlias, Action<TraceMessage> traceEvent)
     {
       NodeId _id = modelContext.ImportNodeId(nodeId, m_NamespaceTable, lookupAlias, traceEvent);
@@ -238,9 +236,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext.CreateModelDesign - starting creation of the ModelDesign for the address space."));
       IEnumerable<UANodeContext> _stubs = from _key in m_NodesDictionary.Keys where _key.NamespaceIndex == 1 select m_NodesDictionary[_key];
-      List<IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node as IUANodeContext).ToList();
+      List<UANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("AddressSpaceContext.CreateModelDesign - selected {0} nodes to be added to the model.", _nodes.Count)));
-      ModelDesignFactory.ValidateExportModel(_nodes, factory, this, m_TraceEvent);
+      Validator.ValidateExportModel(_nodes, factory, this, m_TraceEvent);
     }
     internal void GetDerivedInstances(UANodeContext rootNode, List<UANodeContext> list)
     {
@@ -276,4 +274,5 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #endregion
 
   }
+
 }

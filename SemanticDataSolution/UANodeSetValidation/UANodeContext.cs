@@ -13,7 +13,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class UANodeContext.
   /// </summary>
-  internal class UANodeContext : IUANodeContext
+  internal class UANodeContext: IEquatable<UANodeContext>
   {
 
     #region creators
@@ -51,11 +51,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       get { return String.IsNullOrEmpty(this.UANode.SymbolicName) ? this.UANode.NamePartOfBrowseName() : this.UANode.SymbolicName; }
     }
     /// <summary>
-    /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent model <see cref="IAddressSpaceContext.ImportNodeSet" />
+    /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent models <see cref="IAddressSpaceContext.ImportNodeSet" />
     /// </summary>
     /// <param name="createType">delegate function to create top level definition for children like methods.</param>
     /// <param name="traceEvent">A delegate action to report and error and trace processing progress.</param>
-    void IUANodeContext.CalculateNodeReferences(IExportNodeContainer nodeContainer, Action<TraceMessage> traceEvent)
+    internal void CalculateNodeReferences(IExportNodeContainer nodeContainer, Action<TraceMessage> traceEvent)
     {
       Errors = new List<BuildError>();
       m_ModelingRule = new Nullable<ModelingRules>();
@@ -108,7 +108,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_References = _references.Count == 0 ? null : _references.ToArray<IUAReferenceContext>();
       _children = _children.Where<UAReferenceContext>(x => _derivedChildren == null || !_derivedChildren.ContainsKey(x.TargetNodeContext.UANode.NamePartOfBrowseName())).ToList<UAReferenceContext>();
       foreach (UAReferenceContext _rc in _children)
-        ModelDesignFactory.ValidateExportNode(_rc.TargetNodeContext, nodeContainer, _rc, traceEvent);
+        Validator.ValidateExportNode(_rc.TargetNodeContext, nodeContainer, _rc, traceEvent);
     }
     /// <summary>
     /// Converts the <paramref name="nodeId" /> representing instance of <see cref="Opc.Ua.NodeId" /> and returns <see cref="XmlQualifiedName" />
@@ -118,7 +118,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="defaultValue">The default value.</param>
     /// <param name="traceEvent">A delegate action to report an error and trace processing progress.</param>
     /// <returns>An object of <see cref="XmlQualifiedName" /> representing the BrowseName of <see cref="UANode" /> of the node indexed by <paramref name="nodeId" /></returns>
-    XmlQualifiedName IUANodeContext.ExportNodeId(string nodeId, NodeId defaultValue, Action<TraceMessage> traceEvent)
+    internal XmlQualifiedName ExportNodeId(string nodeId, NodeId defaultValue, Action<TraceMessage> traceEvent)
     {
       return m_Context.ExportNodeId(nodeId, defaultValue, m_UAModelContext, traceEvent);
     }
@@ -127,7 +127,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="traceEvent">delegate action to report and error and trace processing progress.</param>
     /// <returns>An object of <see cref="XmlQualifiedName" /> representing the browse name of the node.</returns>
-    XmlQualifiedName IUANodeContext.ExportNodeBrowseName(Action<TraceMessage> traceEvent)
+    internal XmlQualifiedName ExportNodeBrowseName(Action<TraceMessage> traceEvent)
     {
       Debug.Assert(UANode != null, "Processing of undefined node");
       string _broseName = UANode.BrowseName;
@@ -144,7 +144,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <value>An instance of <see cref="XmlQualifiedName"/> representing the base type.</value>
     /// 
-    XmlQualifiedName IUANodeContext.BaseType(Action<TraceMessage> traceEvent)
+    internal XmlQualifiedName BaseType(Action<TraceMessage> traceEvent)
     {
       return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseName(traceEvent);
     }
@@ -152,17 +152,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets a value indicating whether this instance is property.
     /// </summary>
     /// <value><c>true</c> if this instance is property; otherwise, <c>false</c>.</value>
-    bool IUANodeContext.IsProperty { get { return m_IsProperty; } }
+    internal bool IsProperty { get { return m_IsProperty; } }
     /// <summary>
     /// Gets the modeling rule.
     /// </summary>
     /// <value>The modeling rule. Null if valid modeling rule cannot be recognized.</value>
-    ModelingRules? IUANodeContext.ModelingRule { get { return m_ModelingRule; } }
+    internal ModelingRules? ModelingRule { get { return m_ModelingRule; } }
     /// <summary>
     /// Gets the references.
     /// </summary>
     /// <value>The references of the node.</value>
-    IUAReferenceContext[] IUANodeContext.References { get { return m_References; } }
+    internal IUAReferenceContext[] References { get { return m_References; } }
     #endregion
 
     #region public API
@@ -184,8 +184,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     internal NodeId NodeIdContext { get; private set; }
     #endregion
 
-    #region IEquatable<IUANodeContext>
-    public bool Equals(IUANodeContext other)
+    #region IEquatable<UANodeContext>
+    public bool Equals(UANodeContext other)
     {
       return this.NodeIdContext == ((UANodeContext)other).NodeIdContext;
     }

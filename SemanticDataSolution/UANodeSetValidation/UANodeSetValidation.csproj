@@ -67,7 +67,6 @@
     <Compile Include="IExportVariableTypeFactory.cs" />
     <Compile Include="IExportViewInstanceFactory.cs" />
     <Compile Include="IUAModelContext.cs" />
-    <Compile Include="IUANodeContex.cs" />
     <Compile Include="IUAReferenceContext.cs" />
     <Compile Include="ModelDesignFactory.cs" />
     <Compile Include="IExportModelFactory.cs" />

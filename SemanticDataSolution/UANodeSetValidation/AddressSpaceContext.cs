@@ -6,9 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
-using OpcUa = Opc.Ua;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -262,7 +262,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (rootNode.InRecursionChain)
         throw new ArgumentOutOfRangeException("Circular reference");
       rootNode.InRecursionChain = true;
-      IEnumerable<UANodeContext> _derived = m_References.Values.Where<UAReferenceContext>(x => (x.TypeNode.NodeIdContext == OpcUa.ReferenceTypeIds.HasSubtype) && (x.TargetNode == rootNode)).
+      IEnumerable<UANodeContext> _derived = m_References.Values.Where<UAReferenceContext>(x => (x.TypeNode.NodeIdContext == ReferenceTypeIds.HasSubtype) && (x.TargetNode == rootNode)).
                                                       Select<UAReferenceContext, UANodeContext>(x => x.SourceNode);
       inheritanceChain.AddRange(_derived);
       if (_derived.Count<UANodeContext>() > 1)

@@ -17,7 +17,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   {
 
     #region creators
-    internal UANodeContext(AddressSpaceContext addressSpaceContext, UAModelContext modelContext, NodeId nodeId) : this(addressSpaceContext, modelContext, null, nodeId) { }
+    internal UANodeContext(AddressSpaceContext addressSpaceContext, UAModelContext modelContext, NodeId nodeId) : 
+      this(addressSpaceContext, modelContext, null, nodeId) { }
     internal UANodeContext(AddressSpaceContext addressSpaceContext, UAModelContext modelContext, UANode node, NodeId nodeId)
     {
       this.m_Context = addressSpaceContext;
@@ -28,17 +29,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     #endregion
 
-    #region IUANodeContext
+    #region public API
     /// <summary>
     /// Gets the instance of <see cref="UANode" /> of this context source
     /// </summary>
     /// <value>The source UA node from the model.</value>
-    public UANode UANode { get; set; }
+    internal UANode UANode { get; set; }
     /// <summary>
     /// Gets the instance of <see cref="IUAModelContext" />, which the node is defined in.
     /// </summary>
     /// <value>The model context.</value>
-    public IUAModelContext UAModelContext
+    internal IUAModelContext UAModelContext
     {
       get { return m_UAModelContext; }
     }
@@ -46,7 +47,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the branch name to calculate the node path - it is name part of the browse name or symbolic name depending which one is not empty.
     /// </summary>
     /// <value>The name of the path.</value>
-    public string BranchName
+    internal string BranchName
     {
       get { return String.IsNullOrEmpty(this.UANode.SymbolicName) ? this.UANode.NamePartOfBrowseName() : this.UANode.SymbolicName; }
     }
@@ -163,9 +164,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <value>The references of the node.</value>
     internal IUAReferenceContext[] References { get { return m_References; } }
-    #endregion
-
-    #region public API
     internal bool InRecursionChain { get; set; }
     internal void BuildSymbolicId(List<string> path, Action<BuildError> reportError)
     {
@@ -196,18 +194,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private UAModelContext m_UAModelContext = null;
     private List<BuildError> Errors { get; set; }
     private IUAReferenceContext[] m_References = null;
-    //private IExportInstanceFactory[] m_Children = null;
     private ModelingRules? m_ModelingRule;
     private UANodeContext m_BaseTypeNode;
     private bool m_IsProperty = false;
     //methods
     private XmlQualifiedName ExportBrowseName(Action<TraceMessage> traceEvent)
     {
-      if (this.NodeIdContext == Opc.Ua.ObjectTypeIds.BaseObjectType)
+      if (this.NodeIdContext == ObjectTypeIds.BaseObjectType)
         return null;
-      if (this.NodeIdContext == Opc.Ua.VariableTypeIds.BaseDataVariableType)
+      if (this.NodeIdContext == VariableTypeIds.BaseDataVariableType)
         return null;
-      if (this.NodeIdContext == Opc.Ua.VariableTypeIds.PropertyType)
+      if (this.NodeIdContext == VariableTypeIds.PropertyType)
         return null;
       return m_Context.ExportBrowseName(this.NodeIdContext, m_UAModelContext, traceEvent);
     }
@@ -228,7 +225,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     public bool IsPropertyVariableType
     {
-      get { return this.NodeIdContext == Opc.Ua.VariableTypeIds.PropertyType; }
+      get { return this.NodeIdContext == VariableTypeIds.PropertyType; }
     }
     #endregion
 

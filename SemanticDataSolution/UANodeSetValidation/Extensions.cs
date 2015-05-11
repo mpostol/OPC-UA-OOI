@@ -1,5 +1,4 @@
 ﻿
-using Opc.Ua;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,6 +7,7 @@ using System.Reflection;
 using System.Xml.Serialization;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {

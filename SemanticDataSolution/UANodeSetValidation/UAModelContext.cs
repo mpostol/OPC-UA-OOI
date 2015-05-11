@@ -5,7 +5,6 @@ using System.Xml;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
-using OpcUa = Opc.Ua;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {

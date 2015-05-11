@@ -1,11 +1,11 @@
 ﻿
-using Opc.Ua;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -162,7 +162,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(x => nodeDesign.AccessLevelSpecified = x, traceEvent);
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(String.Empty);
-      nodeDesign.DataType = nodeContext.ExportNodeId(nodeSet.DataType, Opc.Ua.DataTypes.Number, traceEvent);//TODO must be DataType, must not be abstract
+      nodeDesign.DataType = nodeContext.ExportNodeId(nodeSet.DataType, DataTypes.Number, traceEvent);//TODO must be DataType, must not be abstract
       nodeDesign.DefaultValue = nodeSet.Value; //TODO must be of type defined by DataType
       nodeDesign.Historizing = nodeSet.Historizing.Export<bool>(false, x => nodeDesign.HistorizingSpecified = x);
       nodeDesign.MinimumSamplingInterval = Convert.ToInt32(nodeSet.MinimumSamplingInterval.Export<double>(0D, x => nodeDesign.MinimumSamplingIntervalSpecified = x));

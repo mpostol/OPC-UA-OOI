@@ -6,7 +6,6 @@ using System.Xml;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
-using OpcUa = Opc.Ua;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -84,15 +83,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Debug.Assert(ReferenceKind == ReferenceKindEnum.HasModellingRule);
       int _targetId = TargetNode.NodeIdContext.NamespaceIndex != 0 ? -1 : Convert.ToInt32(TargetNode.NodeIdContext.Identifier);
       ModelingRules? _ret = new Nullable<ModelingRules>();
-      if (_targetId == OpcUa.Objects.ModellingRule_Mandatory)
+      if (_targetId == Objects.ModellingRule_Mandatory)
         _ret = ModelingRules.Mandatory;
-      else if (_targetId == OpcUa.Objects.ModellingRule_Optional)
+      else if (_targetId == Objects.ModellingRule_Optional)
         _ret = ModelingRules.Optional;
-      else if (_targetId == OpcUa.Objects.ModellingRule_MandatoryPlaceholder)
+      else if (_targetId == Objects.ModellingRule_MandatoryPlaceholder)
         _ret = ModelingRules.MandatoryPlaceholder;
-      else if (_targetId == OpcUa.Objects.ModellingRule_OptionalPlaceholder)
+      else if (_targetId == Objects.ModellingRule_OptionalPlaceholder)
         _ret = ModelingRules.OptionalPlaceholder;
-      else if (_targetId == OpcUa.Objects.ModellingRule_ExposesItsArray)
+      else if (_targetId == Objects.ModellingRule_ExposesItsArray)
         _ret = ModelingRules.OptionalPlaceholder;
       return _ret;
     }
@@ -159,22 +158,22 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       ReferenceKindEnum _ret = default(ReferenceKindEnum);
       switch (TypeNode.NodeIdContext.UintIdentifier())
       {
-        case OpcUa.ReferenceTypes.HierarchicalReferences:
+        case ReferenceTypes.HierarchicalReferences:
           _ret = ReferenceKindEnum.HierarchicalReferences;
           break;
-        case OpcUa.ReferenceTypes.HasComponent:
+        case ReferenceTypes.HasComponent:
           _ret = ReferenceKindEnum.HasComponent;
           break;
-        case OpcUa.ReferenceTypes.HasProperty:
+        case ReferenceTypes.HasProperty:
           _ret = ReferenceKindEnum.HasProperty;
           break;
-        case OpcUa.ReferenceTypes.HasModellingRule:
+        case ReferenceTypes.HasModellingRule:
           _ret = ReferenceKindEnum.HasModellingRule;
           break;
-        case OpcUa.ReferenceTypes.HasTypeDefinition:
+        case ReferenceTypes.HasTypeDefinition:
           _ret = ReferenceKindEnum.HasTypeDefinition;
           break;
-        case OpcUa.ReferenceTypes.HasSubtype:
+        case ReferenceTypes.HasSubtype:
           _ret = ReferenceKindEnum.HasSubtype;
           break;
         default:
@@ -189,16 +188,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       switch (ReferenceKind)
       {
         case ReferenceKindEnum.HasComponent:
-          _default = OpcUa.ReferenceTypeIds.HasComponent;
+          _default = ReferenceTypeIds.HasComponent;
           break;
         case ReferenceKindEnum.HasTypeDefinition:
-          _default = OpcUa.ReferenceTypeIds.HasTypeDefinition;
+          _default = ReferenceTypeIds.HasTypeDefinition;
           break;
         case ReferenceKindEnum.HasSubtype:
-          _default = OpcUa.ReferenceTypeIds.HasSubtype;
+          _default = ReferenceTypeIds.HasSubtype;
           break;
         case ReferenceKindEnum.HasProperty:
-          _default = OpcUa.ReferenceTypeIds.HasProperty;
+          _default = ReferenceTypeIds.HasProperty;
           break;
         default:
           break;

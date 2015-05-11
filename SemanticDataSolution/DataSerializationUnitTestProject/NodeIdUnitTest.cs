@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
 {
@@ -45,9 +46,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
     [TestMethod]
     public void NodeIdOperatorTestMethod1()
     {
-      NodeId _property = new NodeId(Opc.Ua.VariableTypes.PropertyType);
-      Assert.AreNotSame(_property, Opc.Ua.VariableTypeIds.PropertyType);
-      Assert.IsFalse(_property == Opc.Ua.VariableTypeIds.PropertyType); //This class do not support == operator;  consider implementation. 
+      NodeId _property = new NodeId(VariableTypes.PropertyType);
+      Assert.AreNotSame(_property, VariableTypeIds.PropertyType);
+      Assert.IsFalse(_property == VariableTypeIds.PropertyType); //This class do not support == operator;  consider implementation. 
     }
 
   }

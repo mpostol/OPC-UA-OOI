@@ -1,16 +1,11 @@
 ﻿
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  public interface IExportNodeFactory
+  public interface IExportNodeFactory : IExportNodeContainer
   {
     string BrowseName
     {
       set;
-    }
-    IExportInstanceFactory[] Children
-    {
-      set;
-      get;
     }
     XML.LocalizedText[] Description
     {

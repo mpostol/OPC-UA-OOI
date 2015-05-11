@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 {
 
   /// <summary>
-  /// Class AddressSpaceContext - stub class - TBD
+  /// Class AddressSpaceContext - responsible to manage all nodes in the OPc UA Address Space.
   /// </summary>
   public class AddressSpaceContext : IAddressSpaceContext
   {
@@ -36,6 +36,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     #endregion
 
+    #region public API of the service
     /// <summary>
     /// Creates the instance of the address space.
     /// </summary>
@@ -66,6 +67,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_NamespaceTable.Append(_nodeSet.NamespaceUris == null ? Namespaces.OpcUa : _nodeSet.NamespaceUris[0], m_TraceEvent);
       InternalCreateInstance(context => context.ImportNodeSet(_nodeSet, true), factory);
     }
+    #endregion
 
     #region IAddressSpaceContext
     /// <summary>
@@ -138,6 +140,35 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     #endregion
 
+    #region internal API of this service
+    internal UANodeContext ImportNodeId(string nodeId, UAModelContext modelContext, bool lookupAlias, Action<TraceMessage> traceEvent)
+    {
+      NodeId _id = modelContext.ImportNodeId(nodeId, m_NamespaceTable, lookupAlias, traceEvent);
+      UANodeContext _ret;
+      if (!m_NodesDictionary.TryGetValue(_id, out _ret))
+      {
+        _ret = new UANodeContext(this, modelContext, _id);
+        m_NodesDictionary.Add(_id, _ret);
+      }
+      return _ret;
+    }
+    internal XmlQualifiedName ExportBrowseName(NodeId nodeId, UAModelContext modelContext, Action<TraceMessage> traceEvent)
+    {
+      UANodeContext _ret = TryGetUANodeContext(nodeId, traceEvent);
+      if (_ret == null)
+        return null;
+      return ExportQualifiedName(_ret.UANode.BrowseName, modelContext);
+    }
+    internal IEnumerable<UAReferenceContext> GetReferences2Me(UANodeContext index)
+    {
+      return m_References.Values.Where<UAReferenceContext>(x => x.TargetNode == index && x.ParentNode != index);
+    }
+    internal IEnumerable<UAReferenceContext> GetMyReferences(UANodeContext index)
+    {
+      return m_References.Values.Where<UAReferenceContext>(x => (x.ParentNode == index));
+    }
+    #endregion
+
     #region private
     //vars
     private Dictionary<string, UAReferenceContext> m_References = new Dictionary<string, UAReferenceContext>();
@@ -177,17 +208,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
       }
     }
-    internal UANodeContext ImportNodeId(string nodeId, UAModelContext modelContext, bool lookupAlias, Action<TraceMessage> traceEvent)
-    {
-      NodeId _id = modelContext.ImportNodeId(nodeId, m_NamespaceTable, lookupAlias, traceEvent);
-      UANodeContext _ret;
-      if (!m_NodesDictionary.TryGetValue(_id, out _ret))
-      {
-        _ret = new UANodeContext(this, modelContext, _id);
-        m_NodesDictionary.Add(_id, _ret);
-      }
-      return _ret;
-    }
     /// <summary>
     /// Create instance internally.
     /// </summary>
@@ -197,14 +217,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private void InternalCreateInstance(Action<IAddressSpaceContext> getNodesFromModel, IExportModelFactory factory)
     {
       getNodesFromModel(this);
-      CreateModelDesign(factory);
-    }
-    internal XmlQualifiedName ExportBrowseName(NodeId nodeId, UAModelContext modelContext, Action<TraceMessage> traceEvent)
-    {
-      UANodeContext _ret = TryGetUANodeContext(nodeId, traceEvent);
-      if (_ret == null)
-        return null;
-      return ExportQualifiedName(_ret.UANode.BrowseName, modelContext);
+      ExportModel(factory);
     }
     private UANodeContext TryGetUANodeContext(NodeId nodeId, Action<TraceMessage> traceEvent)
     {
@@ -221,21 +234,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _ret;
     }
-    internal IEnumerable<UAReferenceContext> GetReferences2Me(UANodeContext index)
-    {
-      return m_References.Values.Where<UAReferenceContext>(x => x.TargetNode == index && x.ParentNode != index);
-    }
-    internal IEnumerable<UAReferenceContext> GetMyReferences(UANodeContext index)
-    {
-      return m_References.Values.Where<UAReferenceContext>(x => (x.ParentNode == index));
-    }
-    private void CreateModelDesign(IExportModelFactory factory)
+    private void ExportModel(IExportModelFactory factory)
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext.CreateModelDesign - starting creation of the ModelDesign for the address space."));
       IEnumerable<UANodeContext> _stubs = from _key in m_NodesDictionary.Keys where _key.NamespaceIndex == 1 select m_NodesDictionary[_key];
       List<IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node as IUANodeContext).ToList();
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("AddressSpaceContext.CreateModelDesign - selected {0} nodes to be added to the model.", _nodes.Count)));
-      ModelDesignFactory.CreateModelDesign(_nodes, factory, this, m_TraceEvent);
+      ModelDesignFactory.ValidateExportModel(_nodes, factory, this, m_TraceEvent);
     }
     internal void GetDerivedInstances(UANodeContext rootNode, List<UANodeContext> list)
     {

@@ -56,6 +56,7 @@
     <Compile Include="IExportDataTypeFactory.cs" />
     <Compile Include="IExportInstanceFactory.cs" />
     <Compile Include="IExportMethodInstanceFactory.cs" />
+    <Compile Include="IExportNodeContainer.cs" />
     <Compile Include="IExportNodeFactory.cs" />
     <Compile Include="IExportObjectnstanceFactory.cs" />
     <Compile Include="IExportObjectTypeFactory.cs" />

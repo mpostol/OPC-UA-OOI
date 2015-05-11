@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Processes the node references to calculate all relevant properties. Mut be called after finishing import of all the parent model <see cref="IAddressSpaceContext.ImportNodeSet"/>
     /// </summary>
     /// <param name="traceEvent">A delegate action to report and error and trace processing progress.</param>
-    void CalculateNodeReferences(IExportModelFactory exportFactory, Action<TraceMessage> traceEvent);
+    void CalculateNodeReferences(IExportNodeContainer exportFactory, Action<TraceMessage> traceEvent);
     /// <summary>
     /// Gets the instance of <see cref="UANode"/> of this context source
     /// </summary>
@@ -57,10 +57,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="traceEvent">A delegate action to report an error and trace processing progress.</param>
     /// <returns>An object of <see cref="XmlQualifiedName" /> representing the BrowseName of the <see cref="UANode" /> of the node indexed by <paramref name="nodeId" /></returns>
     XmlQualifiedName ExportNodeId(string nodeId, DataSerialization.NodeId defaultValue, Action<TraceMessage> traceEvent);
-    /// <summary>
-    /// Gets the children of the node.
-    /// </summary>
-    IExportInstanceFactory[] Children { get; }
     /// <summary>
     /// Gets the modeling rule.
     /// </summary>

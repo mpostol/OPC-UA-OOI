@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.UnitTest
       AddressSpaceContext _as = new AddressSpaceContext(x => { Helpers.TraceHelper.TraceDiagnostic(x, _trace, ref _diagnosticCounter); });
       Assert.IsNotNull(_as);
       ExportModelFactoryStub _md = new ExportModelFactoryStub();
-      _as.CreateInstance(_ns.NamespaceUris[0], x => x.ImportNodeSet(_ns, true), new ExportModelFactoryStub());
+      _as.CreateInstance(_ns.NamespaceUris[0], x => x.ImportNodeSet(_ns, true), _md);
       Assert.IsNotNull(_md);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
     }
@@ -104,7 +104,6 @@ namespace UAOOI.SemanticData.UnitTest
         {
           set { }
         }
-
         public XmlQualifiedName SymbolicName
         {
           get
@@ -115,10 +114,13 @@ namespace UAOOI.SemanticData.UnitTest
           {
           }
         }
-
         public uint WriteAccess
         {
           set { }
+        }
+        public NodeFactory NewExportNodeFFactory<NodeFactory>() where NodeFactory : IExportNodeFactory
+        {
+          throw new NotImplementedException();
         }
       }
     }

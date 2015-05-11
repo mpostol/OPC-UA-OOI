@@ -1,7 +1,7 @@
 ﻿
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  public interface IExportModelFactory
+  public interface IExportModelFactory : IExportNodeContainer
   {
 
     /// <summary>
@@ -9,8 +9,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="uri">The URI.</param>
     void CreateNamespace(string uri);
-    NodeFactory NewExportNodeFFactory<NodeFactory>()
-      where NodeFactory: IExportNodeFactory;
 
   }
+
 }

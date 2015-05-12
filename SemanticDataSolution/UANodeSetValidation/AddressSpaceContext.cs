@@ -14,63 +14,65 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 {
 
   /// <summary>
-  /// Class AddressSpaceContext - responsible to manage all nodes in the OPc UA Address Space.
+  /// Class AddressSpaceContext - responsible to manage all nodes in the OPC UA Address Space.
   /// </summary>
   public class AddressSpaceContext : IAddressSpaceContext
   {
-    
+
     #region creator
     /// <summary>
     /// Initializes a new instance of the <see cref="AddressSpaceContext{ModelDesignType}"/> class.
     /// </summary>
-    /// <param name="traceEvent">An action to trace the compilation errors.</param>
+    /// <param name="traceEvent">Encapsulates an action to trace the validation issues.</param>
     public AddressSpaceContext(Action<TraceMessage> traceEvent)
     {
       if (traceEvent != null)
         m_TraceEvent = traceEvent;
       m_NamespaceTable = new NamespaceTable(traceEvent);
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext - starting address space compilation."));
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext - starting address space validation."));
       UANodeSet _standard = UANodeSet.ReadUADefinedTypes();
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext - uploading the UA defined types."));
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext - uploading the OPC UA defined types."));
       Debug.Assert(_standard != null);
-      ImportNodeSet(_standard, false);
+      ImportNodeSet(_standard, true);
     }
     #endregion
 
-    #region public API of the service
+    #region IAddressSpaceContext
     /// <summary>
     /// Creates the instance of the address space.
     /// </summary>
     /// <param name="targetNamespace">The target namespace.</param>
     /// <param name="getNodesFromModel">Encapsulates an action called to get nodes from the information model.</param>
     /// <returns>An instance of <see cref="ModelDesign.ModelDesign"/> containing the model.</returns>
-    public void CreateInstance(string targetNamespace, Action<IAddressSpaceContext> getNodesFromModel, IExportModelFactory factory)
+    void IAddressSpaceContext.CreateInstance(string targetNamespace, Action<IAddressSpaceContext> getNodesFromModel, IExportModelFactory factory)
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.CreateInstance"));
       m_NamespaceTable.Append(targetNamespace, m_TraceEvent);
-      InternalCreateInstance(getNodesFromModel, factory);
+      getNodesFromModel(this);
+      ExportModel(factory);
     }
     /// <summary>
     /// Creates the instance.
     /// </summary>
     /// <param name="filePath">The file path.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">filePath;The imported file does not exist</exception>
-    public void CreateInstance(FileInfo filePath, IExportModelFactory factory)
+    void IAddressSpaceContext.CreateInstance(IEnumerable<FileInfo> paths, IExportModelFactory factory)
     {
-      if (!filePath.Exists)
-        throw new FileNotFoundException("The imported file does not exist", filePath.FullName);
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.CreateInstance"));
-      UANodeSet _nodeSet = UANodeSet.ReadXmlFile(filePath.FullName);
-      if (_nodeSet.ServerUris != null)
-        m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "ServerUris is omitted during the import"));
-      if (_nodeSet.Extensions != null)
-        m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Extensions is omitted during the import"));
-      m_NamespaceTable.Append(_nodeSet.NamespaceUris == null ? Namespaces.OpcUa : _nodeSet.NamespaceUris[0], m_TraceEvent);
-      InternalCreateInstance(context => context.ImportNodeSet(_nodeSet, true), factory);
+      foreach (FileInfo _filePath in paths)
+      {
+        if (!_filePath.Exists)
+          throw new FileNotFoundException("The imported file does not exist", _filePath.FullName);
+        m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.CreateInstance"));
+        UANodeSet _nodeSet = UANodeSet.ReadXmlFile(_filePath.FullName);
+        if (_nodeSet.ServerUris != null)
+          m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "ServerUris is omitted during the import"));
+        if (_nodeSet.Extensions != null)
+          m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Extensions is omitted during the import"));
+        m_NamespaceTable.Append(_nodeSet.NamespaceUris == null ? Namespaces.OpcUa : _nodeSet.NamespaceUris[0], m_TraceEvent);
+        ImportNodeSet(_nodeSet, true);
+      }
+      ExportModel(factory);
     }
-    #endregion
-
-    #region IAddressSpaceContext
     /// <summary>
     /// Analyze and imports the <see cref="UANodeSet" /> model.
     /// </summary>
@@ -205,17 +207,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         string _msg = String.Format("ImportUANode {1} is interrupted by exception {0}", _ex.Message, node.NodeId);
         traceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
       }
-    }
-    /// <summary>
-    /// Create instance internally.
-    /// </summary>
-    /// <param name="getNodesFromModel">The action to get nodes from model.</param>
-    /// <param name="traceEvent">The action to trace events.</param>
-    /// <returns></returns>
-    private void InternalCreateInstance(Action<IAddressSpaceContext> getNodesFromModel, IExportModelFactory factory)
-    {
-      getNodesFromModel(this);
-      ExportModel(factory);
     }
     private UANodeContext TryGetUANodeContext(NodeId nodeId, Action<TraceMessage> traceEvent)
     {

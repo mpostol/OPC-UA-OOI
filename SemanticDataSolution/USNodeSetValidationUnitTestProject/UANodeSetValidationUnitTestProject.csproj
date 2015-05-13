@@ -60,6 +60,7 @@
     <Compile Include="AddressSpaceContextUnitTest.cs" />
     <Compile Include="Helpers\TestData.cs" />
     <Compile Include="ServiceResultExceptionUnitTest.cs" />
+    <Compile Include="InformationModelFactoryUnitTest.cs" />
     <None Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.Classes.cs" />

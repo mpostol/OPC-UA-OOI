@@ -41,14 +41,47 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
     public void NodeIdNonValidNumericTestMethod2()
     {
       NodeId _ni;
-      _ni = NodeId.Parse("ns=-10;i=01"); //this example is in the specification.
+      _ni = NodeId.Parse("ns=-10;i=01");
     }
     [TestMethod]
     public void NodeIdOperatorTestMethod1()
     {
       NodeId _property = new NodeId(VariableTypes.PropertyType);
       Assert.AreNotSame(_property, VariableTypeIds.PropertyType);
-      Assert.IsFalse(_property == VariableTypeIds.PropertyType); //This class do not support == operator;  consider implementation. 
+      Assert.IsFalse(_property == VariableTypeIds.PropertyType); //This class do not support == operator;  consider implementation.
+      Assert.IsTrue(_property.Equals(VariableTypeIds.PropertyType));
+    }
+    [TestMethod]
+    public void NodeIdCompareToTestMethod()
+    {
+      NodeId _property = new NodeId(VariableTypes.PropertyType);
+      Assert.AreNotSame(_property, VariableTypeIds.PropertyType);
+      int _res = _property.CompareTo(VariableTypeIds.PropertyType);
+      Assert.AreEqual<int>(0, _res);
+    }
+    [TestMethod]
+    public void NodeIdToStringTestMethod()
+    {
+      NodeId _property = new NodeId(VariableTypes.PropertyType);
+      Assert.AreNotSame(_property, VariableTypeIds.PropertyType);
+      string _res = _property.ToString();
+      Assert.AreEqual<string>("i=68", _res);
+    }
+    [TestMethod]
+    public void NodeIdToStringTestMethod2()
+    {
+      NodeId _property = new NodeId(68, 1);
+      Assert.AreNotSame(_property, VariableTypeIds.PropertyType);
+      string _res = _property.ToString();
+      Assert.AreEqual<string>("ns=1;i=68", _res);
+    }
+    [TestMethod]
+    public void NodeIdToStringTestMethod3()
+    {
+      System.Guid _gd = new System.Guid("e08edc80-e771-43ff-b8f6-1fbb62ae5cda");
+      NodeId _property = new NodeId(_gd, 1);
+      string _res = _property.ToString();
+      Assert.AreEqual<string>("ns=1;g=e08edc80-e771-43ff-b8f6-1fbb62ae5cda", _res);
     }
 
   }

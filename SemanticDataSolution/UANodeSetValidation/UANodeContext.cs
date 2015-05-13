@@ -13,11 +13,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class UANodeContext.
   /// </summary>
-  internal class UANodeContext: IEquatable<UANodeContext>
+  internal class UANodeContext : IEquatable<UANodeContext>
   {
 
     #region creators
-    internal UANodeContext(AddressSpaceContext addressSpaceContext, UAModelContext modelContext, NodeId nodeId) : 
+    internal UANodeContext(AddressSpaceContext addressSpaceContext, UAModelContext modelContext, NodeId nodeId) :
       this(addressSpaceContext, modelContext, null, nodeId) { }
     internal UANodeContext(AddressSpaceContext addressSpaceContext, UAModelContext modelContext, UANode node, NodeId nodeId)
     {
@@ -185,7 +185,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #region IEquatable<UANodeContext>
     public bool Equals(UANodeContext other)
     {
-      return this.NodeIdContext == ((UANodeContext)other).NodeIdContext;
+      return this.NodeIdContext.Equals(other.NodeIdContext);
     }
     #endregion
 

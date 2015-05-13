@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   /// that the host of this object will manage that directly.
   /// <br/></para>
   /// </remarks>
-  public partial class NodeId
+  public partial class NodeId : IComparable, IFormattable, IEquatable<NodeId>
   {
 
     #region constructors
@@ -193,7 +193,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       NodeId nodeId = NodeId.Parse(text);
       m_namespaceIndex = nodeId.NamespaceIndex;
       m_identifierType = nodeId.IdType;
-      m_identifierPart = nodeId.Identifier;
+      m_identifierPart = nodeId.IdentifierPart;
     }
     /// <summary>
     /// Initializes a node identifier with a namespace index.
@@ -256,6 +256,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return true;
       return nodeId.IsNullNodeId;
     }
+    /// <summary>
+    /// Gets the <see cref="NodeId"/> representing <b>null</b>.
+    /// </summary>
+    /// <value>The null.</value>
     public static NodeId Null
     {
       get { return s_Null; }
@@ -339,6 +343,152 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_identifierType = idType;
       SetIdentifier(IdType.String_1, value);
     }
+    /// The index of the namespace URI in the server's namespace array.
+    /// </summary>
+    /// <remarks>
+    /// The index of the namespace URI in the server's namespace array.
+    /// </remarks>
+    public ushort NamespaceIndex
+    {
+      get { return m_namespaceIndex; }
+    }
+    /// <summary>
+    /// The type of node identifier used.
+    /// </summary>
+    /// <remarks>
+    /// Returns the type of Id, whether it is:
+    /// <list type="bullet">
+    /// <item><see cref="uint"/></item>
+    /// <item><see cref="Guid"/></item>
+    /// <item><see cref="string"/></item>
+    /// <item><see cref="byte"/>[]</item>
+    /// </list>
+    /// </remarks>
+    /// <seealso cref="IdType"/>
+    public IdType IdType
+    {
+      get { return m_identifierType; }
+    }
+    /// <summary>
+    /// The node identifier.
+    /// </summary>
+    /// <remarks>
+    /// Returns the Id in its native format, i.e. UInt, GUID, String etc.
+    /// </remarks>
+    public object IdentifierPart
+    {
+      get
+      {
+        if (m_identifierPart == null)
+        {
+          switch (m_identifierType)
+          {
+            case IdType.Numeric_0: { return (uint)0; }
+            case IdType.Guid_2: { return global::System.Guid.Empty; }
+          }
+        }
+        return m_identifierPart;
+      }
+    }
+    /// <summary>
+    /// Whether the object represents a Null NodeId.
+    /// </summary>
+    /// <remarks>
+    /// Whether the NodeId represents a Null NodeId.
+    /// </remarks>
+    public bool IsNullNodeId
+    {
+      get
+      {
+        // non-zero namespace means it can't be null.
+        if (m_namespaceIndex != 0)
+          return false;
+        // the definition of a null identifier depends on the identifier type.
+        if (IdentifierPart == null)
+          return true;
+        bool _ret = true;
+        switch (m_identifierType)
+        {
+          case IdType.Numeric_0:
+            _ret = !!IdentifierPart.Equals((uint)0);
+            break;
+          case IdType.String_1:
+            _ret = String.IsNullOrEmpty((string)IdentifierPart);
+            break;
+          case IdType.Guid_2:
+            _ret = IdentifierPart.Equals(System.Guid.Empty);
+            break;
+          case IdType.Opaque_3:
+            _ret = !(IdentifierPart != null && ((byte[])IdentifierPart).Length > 0);
+            break;
+        }
+        // must be null.
+        return _ret;
+      }
+    }
+
+    #region  Format()
+    /// <summary>
+    /// Formats a node id as a string.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Formats a NodeId as a string.
+    /// <br/></para>
+    /// <para>
+    /// An example of this would be:
+    /// <br/></para>
+    /// <para>
+    /// NodeId = "hello123"<br/>
+    /// NamespaceId = 1;<br/>
+    /// <br/> This would translate into:<br/>
+    /// ns=1;s=hello123
+    /// <br/></para>
+    /// </remarks>
+    public string Format()
+    {
+      StringBuilder buffer = new StringBuilder();
+      Format(buffer);
+      return buffer.ToString();
+    }
+    /// <summary>
+    /// Formats the NodeId as a string and appends it to the buffer.
+    /// </summary>
+    public void Format(StringBuilder buffer)
+    {
+      Format(buffer, IdentifierPart, m_identifierType, m_namespaceIndex);
+    }
+    /// <summary>
+    /// Formats the NodeId as a string and appends it to the buffer.
+    /// </summary>
+    public static void Format(StringBuilder buffer, object identifier, IdType identifierType, ushort namespaceIndex)
+    {
+      if (namespaceIndex != 0)
+        buffer.AppendFormat(CultureInfo.InvariantCulture, "ns={0};", namespaceIndex);
+      // add identifier type prefix.
+      switch (identifierType)
+      {
+        case IdType.Numeric_0:
+          buffer.Append("i=");
+          break;
+        case IdType.String_1:
+          buffer.Append("s=");
+          break;
+        case IdType.Guid_2:
+          buffer.Append("g=");
+          break;
+        case IdType.Opaque_3:
+          buffer.Append("b=");
+          break;
+      }
+      // add identifier.
+      FormatIdentifier(buffer, identifier, identifierType);
+    }
+    #endregion
+
+    #endregion
+
+    #region IComparable
     /// <summary>
     /// Compares the current instance to the object.
     /// </summary>
@@ -362,7 +512,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       {
         namespaceIndex = nodeId.NamespaceIndex;
         idType = nodeId.IdType;
-        id = nodeId.Identifier;
+        id = nodeId.IdentifierPart;
       }
       else
       {
@@ -481,147 +631,29 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       // invalid id type - should never get here.
       return +1;
     }
-    /// The index of the namespace URI in the server's namespace array.
-    /// </summary>
-    /// <remarks>
-    /// The index of the namespace URI in the server's namespace array.
-    /// </remarks>
-    public ushort NamespaceIndex
-    {
-      get { return m_namespaceIndex; }
-    }
-    /// <summary>
-    /// The type of node identifier used.
-    /// </summary>
-    /// <remarks>
-    /// Returns the type of Id, whether it is:
-    /// <list type="bullet">
-    /// <item><see cref="uint"/></item>
-    /// <item><see cref="Guid"/></item>
-    /// <item><see cref="string"/></item>
-    /// <item><see cref="byte"/>[]</item>
-    /// </list>
-    /// </remarks>
-    /// <seealso cref="IdType"/>
-    public IdType IdType
-    {
-      get { return m_identifierType; }
-    }
-    /// <summary>
-    /// The node identifier.
-    /// </summary>
-    /// <remarks>
-    /// Returns the Id in its native format, i.e. UInt, GUID, String etc.
-    /// </remarks>
-    public object IdentifierPart
-    {
-      get
-      {
-        if (m_identifierPart == null)
-        {
-          switch (m_identifierType)
-          {
-            case IdType.Numeric_0: { return (uint)0; }
-            case IdType.Guid_2: { return global::System.Guid.Empty; }
-          }
-        }
-        return m_identifierPart;
-      }
-    }
-    /// <summary>
-    /// Whether the object represents a Null NodeId.
-    /// </summary>
-    /// <remarks>
-    /// Whether the NodeId represents a Null NodeId.
-    /// </remarks>
-    public bool IsNullNodeId
-    {
-      get
-      {
-        // non-zero namespace means it can't be null.
-        if (m_namespaceIndex != 0)
-          return false;
-        // the definition of a null identifier depends on the identifier type.
-        if (IdentifierPart == null)
-          return true;
-        bool _ret = true;
-        switch (m_identifierType)
-        {
-          case IdType.Numeric_0:
-            _ret = !!IdentifierPart.Equals((uint)0);
-            break;
-          case IdType.String_1:
-            _ret = String.IsNullOrEmpty((string)IdentifierPart);
-            break;
-          case IdType.Guid_2:
-            _ret = IdentifierPart.Equals(System.Guid.Empty);
-            break;
-          case IdType.Opaque_3:
-            _ret = !(IdentifierPart != null && ((byte[])IdentifierPart).Length > 0);
-            break;
-        }
-        // must be null.
-        return _ret;
-      }
-    }
-    #endregion    
+    #endregion
 
-    #region public string Format()
+    #region IFormattable
     /// <summary>
-    /// Formats a node id as a string.
+    /// Returns the string representation of a NodeId.
     /// </summary>
     /// <remarks>
-    /// <para>
-    /// Formats a NodeId as a string.
-    /// <br/></para>
-    /// <para>
-    /// An example of this would be:
-    /// <br/></para>
-    /// <para>
-    /// NodeId = "hello123"<br/>
-    /// NamespaceId = 1;<br/>
-    /// <br/> This would translate into:<br/>
-    /// ns=1;s=hello123
-    /// <br/></para>
+    /// Returns the string representation of a NodeId. This is the same as calling
+    /// <see cref="Format()"/>.
     /// </remarks>
-    public string Format()
+    /// <exception cref="FormatException">Thrown when the format is not null</exception>
+    public string ToString(string format, IFormatProvider formatProvider)
     {
-      StringBuilder buffer = new StringBuilder();
-      Format(buffer);
-      return buffer.ToString();
+      if (format == null)
+        return String.Format(formatProvider, "{0}", Format());
+      throw new FormatException(String.Format("Invalid format string: '{0}'.", format));
     }
-    /// <summary>
-    /// Formats the NodeId as a string and appends it to the buffer.
-    /// </summary>
-    public void Format(StringBuilder buffer)
+    #endregion
+
+    #region object
+    public override string ToString()
     {
-      Format(buffer, Identifier, m_identifierType, m_namespaceIndex);
-    }
-    /// <summary>
-    /// Formats the NodeId as a string and appends it to the buffer.
-    /// </summary>
-    public static void Format(StringBuilder buffer, object identifier, IdType identifierType, ushort namespaceIndex)
-    {
-      if (namespaceIndex != 0)
-        buffer.AppendFormat(CultureInfo.InvariantCulture, "ns={0};", namespaceIndex);
-      // add identifier type prefix.
-      switch (identifierType)
-      {
-        case IdType.Numeric_0:
-          buffer.Append("i=");
-          break;
-        case IdType.String_1:
-          buffer.Append("s=");
-          break;
-        case IdType.Guid_2:
-          buffer.Append("g=");
-          break;
-        case IdType.Opaque_3:
-          buffer.Append("b=");
-          break;
-      }
-      // add identifier.
-      FormatIdentifier(buffer, identifier, identifierType);
+      return Format();
     }
     #endregion
 
@@ -664,6 +696,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     private static NodeId s_Null = new NodeId();
     #endregion
 
+    #region IEquatable<NodeId>
+    /// <summary>
+    /// Indicates whether the current object is equal to another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this object.</param>
+    /// <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
+    public bool Equals(NodeId other)
+    {
+      return this.CompareTo(other) == 0;
+    }
+    #endregion
   }
 
 }

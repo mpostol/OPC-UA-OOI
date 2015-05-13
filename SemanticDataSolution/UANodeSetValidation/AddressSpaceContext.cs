@@ -271,7 +271,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     #endregion
 
-
+    #region UnitTestd
+#if DEBUG
+    internal UANodeContext UTTryGetUANodeContext(NodeId nodeId)
+    {
+      return TryGetUANodeContext(nodeId, x => { });
+    }
+#endif
+    #endregion
 
   }
 

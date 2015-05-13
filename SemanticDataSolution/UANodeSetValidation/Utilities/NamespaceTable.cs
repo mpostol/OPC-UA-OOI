@@ -123,8 +123,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
     }
 
     /// <summary>
-    /// Returns the index of the specified namespace uri.
+    /// Returns the index of the specified namespace uri or -1 if it doesn't exist. 
     /// </summary>
+    /// <remarks>The index of the namespace if exist, -1 otherwise.</remarks>
     public int GetIndex(string value)
     {
       lock (m_lock)

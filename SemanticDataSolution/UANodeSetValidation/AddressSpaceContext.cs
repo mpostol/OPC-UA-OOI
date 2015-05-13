@@ -56,19 +56,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="targetNamespace">The target namespace.</param>
     /// <param name="getNodesFromModel">Encapsulates an action called to get nodes from the information model.</param>
     /// <returns>An instance of <see cref="ModelDesign.ModelDesign"/> containing the model.</returns>
-    void IAddressSpaceContext.ImportUANodeSet(string targetNamespace, Action<IAddressSpaceContext> getNodesFromModel, IExportModelFactory factory)
+    void IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.CreateInstance"));
-      m_NamespaceTable.Append(targetNamespace, m_TraceEvent);
-      getNodesFromModel(this);
-      ExportModel(InformationModelFactory);
+      ImportNodeSet(model, true);
     }
     /// <summary>
     /// Creates the instance.
     /// </summary>
     /// <param name="filePath">The file path.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">filePath;The imported file does not exist</exception>
-    void IAddressSpaceContext.ImportUANodeSet(IEnumerable<FileInfo> paths, IExportModelFactory factory)
+    void IAddressSpaceContext.ImportUANodeSet(IEnumerable<FileInfo> paths)
     {
       foreach (FileInfo _filePath in paths)
       {
@@ -83,23 +81,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_NamespaceTable.Append(_nodeSet.NamespaceUris == null ? Namespaces.OpcUa : _nodeSet.NamespaceUris[0], m_TraceEvent);
         ImportNodeSet(_nodeSet, true);
       }
-      ExportModel(InformationModelFactory);
     }
-    /// <summary>
-    /// Analyze and imports the <see cref="UANodeSet" /> model.
-    /// </summary>
-    /// <param name="model">The model to be imported.</param>
-    /// <param name="traceEvent">The trace event.</param>
-    /// <param name="validation">If set to <c>true</c> the nodes are validated and progress is traced.</param>
-    public void ImportNodeSet(UANodeSet model, bool validation)
+    public void ValidateAndExportModel(string targetNamespace)
     {
-      string _namespace = model.NamespaceUris == null ? m_NamespaceTable.GetString(0) : model.NamespaceUris[0];
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Entering AddressSpaceContext.ImportNodeSet - starting import {0}.", _namespace)));
-      UAModelContext _modelContext = new UAModelContext(model.Aliases, model.NamespaceUris, this);
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - context for imported model is created and starting import nodes."));
-      foreach (UANode _nd in model.Items)
-        this.ImportUANode(_nd, _modelContext, validation ? m_TraceEvent : x => { });
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Finishing AddressSpaceContext.ImportNodeSet - imported {0} nodes.", model.Items.Length)));
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext.CreateModelDesign - starting creation of the ModelDesign for the address space."));
+      int _nsIndex = m_NamespaceTable.GetIndex(targetNamespace);
+      if (_nsIndex == -1)
+        throw new ArgumentOutOfRangeException("targetNamespace", "Cannot find this namespace");
+      IEnumerable<UANodeContext> _stubs = from _key in m_NodesDictionary.Keys where _key.NamespaceIndex == 1 select m_NodesDictionary[_key];
+      List<UANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("AddressSpaceContext.CreateModelDesign - selected {0} nodes to be added to the model.", _nodes.Count)));
+      Validator.ValidateExportModel(_nodes, InformationModelFactory, this, m_TraceEvent);
     }
     #endregion
 
@@ -189,6 +181,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private Dictionary<NodeId, UANodeContext> m_NodesDictionary = new Dictionary<NodeId, UANodeContext>();
     private Action<TraceMessage> m_TraceEvent = x => { };
     //methods
+    private void ImportNodeSet(UANodeSet model, bool validation)
+    {
+      string _namespace = model.NamespaceUris == null ? m_NamespaceTable.GetString(0) : model.NamespaceUris[0];
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Entering AddressSpaceContext.ImportNodeSet - starting import {0}.", _namespace)));
+      UAModelContext _modelContext = new UAModelContext(model.Aliases, model.NamespaceUris, this);
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - context for imported model is created and starting import nodes."));
+      foreach (UANode _nd in model.Items)
+        this.ImportUANode(_nd, _modelContext, validation ? m_TraceEvent : x => { });
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Finishing AddressSpaceContext.ImportNodeSet - imported {0} nodes.", model.Items.Length)));
+    }
     private void ImportUANode(UANode node, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       try
@@ -235,14 +237,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return null;
       }
       return _ret;
-    }
-    private void ExportModel(IExportModelFactory factory)
-    {
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext.CreateModelDesign - starting creation of the ModelDesign for the address space."));
-      IEnumerable<UANodeContext> _stubs = from _key in m_NodesDictionary.Keys where _key.NamespaceIndex == 1 select m_NodesDictionary[_key];
-      List<UANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("AddressSpaceContext.CreateModelDesign - selected {0} nodes to be added to the model.", _nodes.Count)));
-      Validator.ValidateExportModel(_nodes, factory, this, m_TraceEvent);
     }
     internal void GetDerivedInstances(UANodeContext rootNode, List<UANodeContext> list)
     {

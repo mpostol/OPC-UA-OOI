@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
@@ -38,25 +39,36 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #endregion
 
     #region IAddressSpaceContext
+    public IExportModelFactory InformationModelFactory
+    {
+      set
+      {
+        if (value == null)
+          m_InformationModelFactory = new InformationModelFactoryBase();
+        else
+          m_InformationModelFactory = value;
+      }
+      private get { return m_InformationModelFactory; }
+    }
     /// <summary>
     /// Creates the instance of the address space.
     /// </summary>
     /// <param name="targetNamespace">The target namespace.</param>
     /// <param name="getNodesFromModel">Encapsulates an action called to get nodes from the information model.</param>
     /// <returns>An instance of <see cref="ModelDesign.ModelDesign"/> containing the model.</returns>
-    void IAddressSpaceContext.CreateInstance(string targetNamespace, Action<IAddressSpaceContext> getNodesFromModel, IExportModelFactory factory)
+    void IAddressSpaceContext.ImportUANodeSet(string targetNamespace, Action<IAddressSpaceContext> getNodesFromModel, IExportModelFactory factory)
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.CreateInstance"));
       m_NamespaceTable.Append(targetNamespace, m_TraceEvent);
       getNodesFromModel(this);
-      ExportModel(factory);
+      ExportModel(InformationModelFactory);
     }
     /// <summary>
     /// Creates the instance.
     /// </summary>
     /// <param name="filePath">The file path.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">filePath;The imported file does not exist</exception>
-    void IAddressSpaceContext.CreateInstance(IEnumerable<FileInfo> paths, IExportModelFactory factory)
+    void IAddressSpaceContext.ImportUANodeSet(IEnumerable<FileInfo> paths, IExportModelFactory factory)
     {
       foreach (FileInfo _filePath in paths)
       {
@@ -71,7 +83,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_NamespaceTable.Append(_nodeSet.NamespaceUris == null ? Namespaces.OpcUa : _nodeSet.NamespaceUris[0], m_TraceEvent);
         ImportNodeSet(_nodeSet, true);
       }
-      ExportModel(factory);
+      ExportModel(InformationModelFactory);
     }
     /// <summary>
     /// Analyze and imports the <see cref="UANodeSet" /> model.
@@ -171,6 +183,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
     //vars
+    private IExportModelFactory m_InformationModelFactory = new InformationModelFactoryBase();
     private Dictionary<string, UAReferenceContext> m_References = new Dictionary<string, UAReferenceContext>();
     private NamespaceTable m_NamespaceTable = null;
     private Dictionary<NodeId, UANodeContext> m_NodesDictionary = new Dictionary<NodeId, UANodeContext>();
@@ -263,6 +276,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       rootNode.InRecursionChain = false;
     }
     #endregion
+
+
 
   }
 

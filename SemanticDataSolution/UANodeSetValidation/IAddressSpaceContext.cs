@@ -25,8 +25,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="targetNamespace">The target namespace.</param>
     /// <param name="getNodesFromModel">Encapsulates an action called to get nodes from the <see cref="UANodeSet" /> model.</param>
     /// <param name="factory">A factory used to export validated model.</param>
-    void CreateInstance(string targetNamespace, Action<IAddressSpaceContext> getNodesFromModel, IExportModelFactory exportFactory);
-    void CreateInstance(IEnumerable<FileInfo> paths, IExportModelFactory factory);
-
+    void ImportUANodeSet(string targetNamespace, Action<IAddressSpaceContext> getNodesFromModel, IExportModelFactory exportFactory);
+    void ImportUANodeSet(IEnumerable<FileInfo> paths, IExportModelFactory factory);
+    IExportModelFactory InformationModelFactory { set; }
   }
 }

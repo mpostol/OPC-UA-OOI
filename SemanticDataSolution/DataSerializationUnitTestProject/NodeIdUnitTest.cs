@@ -127,17 +127,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       _dc.Add(VariableTypeIds.BaseVariableType, VariableTypeIds.BaseVariableType.ToString());
       _dc.Add(VariableTypeIds.PropertyType, VariableTypeIds.PropertyType.ToString());
     }
-    private class EqualityComparer : IEqualityComparer<NodeId>
-    {
-      public bool Equals(NodeId x, NodeId y)
-      {
-        return x.Equals(y);
-      }
-      public int GetHashCode(NodeId obj)
-      {
-        return obj.GetHashCode();
-      }
-    }
+
   }
 
 }

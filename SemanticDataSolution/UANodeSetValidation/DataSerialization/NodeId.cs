@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   /// that the host of this object will manage that directly.
   /// <br/></para>
   /// </remarks>
-  public partial class NodeId : IComparable, IFormattable, IEquatable<NodeId>
+  public partial class NodeId : IFormattable //IEquatable<NodeId>, IComparable, 
   {
 
     #region constructors
@@ -216,7 +216,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         SetIdentifier(IdType.String_1, value);
         return;
       }
-      if (value is Guid)
+      if (value is System.Guid)
       {
         SetIdentifier(IdType.Guid_2, value);
         return;
@@ -297,7 +297,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
           return new NodeId(text.Substring(2), namespaceIndex);
         // parse guid node identifier.
         if (text.StartsWith("g=", StringComparison.Ordinal))
-          return new NodeId(new Guid(text.Substring(2)), namespaceIndex);
+          return new NodeId(new System.Guid(text.Substring(2)), namespaceIndex);
         // parse opaque node identifier.
         if (text.StartsWith("b=", StringComparison.Ordinal))
           return new NodeId(Convert.FromBase64String(text.Substring(2)), namespaceIndex);

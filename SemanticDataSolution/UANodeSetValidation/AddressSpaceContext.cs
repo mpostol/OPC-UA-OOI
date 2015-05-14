@@ -88,7 +88,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       int _nsIndex = m_NamespaceTable.GetIndex(targetNamespace);
       if (_nsIndex == -1)
         throw new ArgumentOutOfRangeException("targetNamespace", "Cannot find this namespace");
-      IEnumerable<UANodeContext> _stubs = from _key in m_NodesDictionary.Keys where _key.NamespaceIndex == 1 select m_NodesDictionary[_key];
+      IEnumerable<UANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == _nsIndex select _key;
       List<UANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("AddressSpaceContext.CreateModelDesign - selected {0} nodes to be added to the model.", _nodes.Count)));
       Validator.ValidateExportModel(_nodes, InformationModelFactory, this, m_TraceEvent);
@@ -149,10 +149,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       NodeId _id = modelContext.ImportNodeId(nodeId, m_NamespaceTable, lookupAlias, traceEvent);
       UANodeContext _ret;
-      if (!m_NodesDictionary.TryGetValue(_id, out _ret))
+      string _idKey = _id.ToString();
+      if (!m_NodesDictionary.TryGetValue(_idKey, out _ret))
       {
         _ret = new UANodeContext(this, modelContext, _id);
-        m_NodesDictionary.Add(_id, _ret);
+        m_NodesDictionary.Add(_idKey, _ret);
       }
       return _ret;
     }
@@ -178,7 +179,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private IExportModelFactory m_InformationModelFactory = new InformationModelFactoryBase();
     private Dictionary<string, UAReferenceContext> m_References = new Dictionary<string, UAReferenceContext>();
     private NamespaceTable m_NamespaceTable = null;
-    private Dictionary<NodeId, UANodeContext> m_NodesDictionary = new Dictionary<NodeId, UANodeContext>();
+    private Dictionary<string, UANodeContext> m_NodesDictionary = new Dictionary<string, UANodeContext>();
     private Action<TraceMessage> m_TraceEvent = x => { };
     //methods
     private void ImportNodeSet(UANodeSet model, bool validation)
@@ -199,15 +200,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeCannotBeNil, "At Importing UANode."));
         NodeId nodeId = modelContext.ImportNodeId(node.NodeId, m_NamespaceTable, false, traceEvent);
         UANodeContext _newNode = null;
-        if (!m_NodesDictionary.TryGetValue(nodeId, out _newNode))
+        string nodeIdKey = nodeId.ToString();
+        if (!m_NodesDictionary.TryGetValue(nodeIdKey, out _newNode))
         {
           _newNode = new UANodeContext(this, modelContext, node, nodeId);
-          m_NodesDictionary.Add(nodeId, _newNode);
+          m_NodesDictionary.Add(nodeIdKey, _newNode);
         }
         else
         {
-          if (m_NodesDictionary[_newNode.NodeIdContext].UANode != null)
-            traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, String.Format("The {0} is already defined.", node.NodeId)));
+          if (_newNode.UANode != null)
+            traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, String.Format("The {0} is already defined.", node.NodeId.ToString())));
           _newNode.UANode = node;
         }
         foreach (Reference _rf in node.References)
@@ -226,7 +228,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private UANodeContext TryGetUANodeContext(NodeId nodeId, Action<TraceMessage> traceEvent)
     {
       UANodeContext _ret;
-      if (!m_NodesDictionary.TryGetValue(nodeId, out _ret))
+      if (!m_NodesDictionary.TryGetValue(nodeId.ToString(), out _ret))
       {
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdNotDefined, String.Format("References to node with NodeId: {0} is omitted during the import.", nodeId)));
         return null;

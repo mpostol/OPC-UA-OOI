@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
 {
@@ -83,6 +85,59 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       string _res = _property.ToString();
       Assert.AreEqual<string>("ns=1;g=e08edc80-e771-43ff-b8f6-1fbb62ae5cda", _res);
     }
-
+    [TestMethod]
+    public void NodeIdDictionaryTestMethod()
+    {
+      Dictionary<NodeId, string> _dc = new Dictionary<NodeId, string>();
+      _dc.Add(VariableTypeIds.PropertyType, VariableTypeIds.PropertyType.ToString());
+      Assert.IsTrue(_dc.ContainsKey(VariableTypeIds.PropertyType));
+    }
+    [TestMethod]
+    public void NodeIdDictionaryTestMethod2()
+    {
+      Dictionary<string, NodeId> _dc = new Dictionary<string, NodeId>();
+      _dc.Add(VariableTypeIds.PropertyType.ToString(), VariableTypeIds.PropertyType);
+      _dc.Add(VariableTypeIds.AnalogItemType.ToString(), VariableTypeIds.AnalogItemType);
+      _dc.Add(VariableTypeIds.ArrayItemType.ToString(), VariableTypeIds.ArrayItemType);
+      _dc.Add(VariableTypeIds.BaseDataVariableType.ToString(), VariableTypeIds.BaseDataVariableType);
+      _dc.Add(VariableTypeIds.BaseVariableType.ToString(), VariableTypeIds.BaseVariableType);
+      NodeId _id = NodeId.Null;
+      string _ni = "g=09087e75-8e5e-499b-954f-f2a9603db28a";
+      Assert.IsTrue(_dc.TryGetValue(VariableTypeIds.PropertyType.ToString(), out _id));
+      Assert.IsFalse(_dc.TryGetValue(NodeId.Parse(_ni).ToString(), out _id));
+      _id = NodeId.Parse(_ni);
+      Assert.IsNotNull(_id);
+      _dc.Add(_id.ToString(), _id);
+      Assert.IsTrue(_dc.TryGetValue(VariableTypeIds.PropertyType.ToString(), out _id));
+      NodeId _nid = NodeId.Parse(_ni);
+      Assert.IsNotNull(_nid);
+      Assert.AreEqual<int>(1, _dc.Where<KeyValuePair<string, NodeId>>(x => x.Key == _nid.ToString()).Count<KeyValuePair<string, NodeId>>());
+      Assert.IsTrue(_dc.TryGetValue(_nid.ToString(), out _id));
+      Assert.IsTrue(_dc.ContainsKey(_nid.ToString()));
+    }
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void NodeIdDictionaryTestMethod3()
+    {
+      Dictionary<NodeId, string> _dc = new Dictionary<NodeId, string>();
+      _dc.Add(VariableTypeIds.PropertyType, VariableTypeIds.PropertyType.ToString());
+      _dc.Add(VariableTypeIds.AnalogItemType, VariableTypeIds.AnalogItemType.ToString());
+      _dc.Add(VariableTypeIds.ArrayItemType, VariableTypeIds.ArrayItemType.ToString());
+      _dc.Add(VariableTypeIds.BaseDataVariableType, VariableTypeIds.BaseDataVariableType.ToString());
+      _dc.Add(VariableTypeIds.BaseVariableType, VariableTypeIds.BaseVariableType.ToString());
+      _dc.Add(VariableTypeIds.PropertyType, VariableTypeIds.PropertyType.ToString());
+    }
+    private class EqualityComparer : IEqualityComparer<NodeId>
+    {
+      public bool Equals(NodeId x, NodeId y)
+      {
+        return x.Equals(y);
+      }
+      public int GetHashCode(NodeId obj)
+      {
+        return obj.GetHashCode();
+      }
+    }
   }
+
 }

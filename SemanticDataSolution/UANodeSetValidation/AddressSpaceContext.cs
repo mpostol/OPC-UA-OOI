@@ -105,7 +105,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="nodeId">The node identifier.</param>
     /// <param name="defaultValue">The default value.</param>
     /// <param name="modelContext">The model context for NodeSet.</param>
-    /// <param name="traceEvent">The trace event.</param>
+    /// <param name="traceEvent">Encapsulates an action used to trace events.</param>
     /// <returns>An object of <see cref="XmlQualifiedName" /> representing the <see cref="UANode.BrowseName" /> of the node indexed by <paramref name="nodeId" /></returns>
     internal XmlQualifiedName ExportNodeId(string nodeId, NodeId defaultValue, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
@@ -123,7 +123,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="browseName">Name of the browse.</param>
     /// <param name="modelContext">The model context.</param>
-    /// <returns>An instance of <see cref="XmlQualifiedName" /> representing <see cref="UANode.BrowseName"/>.</returns>
+    /// <returns>An instance of <see cref="XmlQualifiedName" /> representing <see cref="UANode.BrowseName" />.</returns>
     internal XmlQualifiedName ExportQualifiedName(string browseName, UAModelContext modelContext)
     {
       if (String.IsNullOrEmpty(browseName))
@@ -173,6 +173,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     internal IEnumerable<UAReferenceContext> GetMyReferences(UANodeContext index)
     {
       return m_References.Values.Where<UAReferenceContext>(x => (x.ParentNode == index));
+    }
+    internal void GetDerivedInstances(UANodeContext rootNode, List<UANodeContext> list)
+    {
+      List<UANodeContext> _col = new List<UANodeContext>();
+      _col.Add(rootNode);
+      GetBaseTypes(rootNode, _col);
+      foreach (UANodeContext _type in _col)
+        GetChildren(_type, list);
     }
     #endregion
 
@@ -242,14 +250,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _ret;
     }
-    internal void GetDerivedInstances(UANodeContext rootNode, List<UANodeContext> list)
-    {
-      List<UANodeContext> _col = new List<UANodeContext>();
-      _col.Add(rootNode);
-      GetBaseTypes(rootNode, _col);
-      foreach (UANodeContext _type in _col)
-        GetChildren(_type, list);
-    }
     private void GetChildren(UANodeContext type, List<UANodeContext> instances)
     {
       IEnumerable<UANodeContext> _children = m_References.Values.Where<UAReferenceContext>(x => x.SourceNode == type).
@@ -265,7 +265,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         throw new ArgumentOutOfRangeException("Circular reference");
       rootNode.InRecursionChain = true;
       IEnumerable<UANodeContext> _derived = m_References.Values.Where<UAReferenceContext>(x => (x.TypeNode.NodeIdContext == ReferenceTypeIds.HasSubtype) && (x.TargetNode == rootNode)).
-                                                      Select<UAReferenceContext, UANodeContext>(x => x.SourceNode);
+                                                                Select<UAReferenceContext, UANodeContext>(x => x.SourceNode);
       inheritanceChain.AddRange(_derived);
       if (_derived.Count<UANodeContext>() > 1)
         throw new ArgumentOutOfRangeException("To many subtypes");

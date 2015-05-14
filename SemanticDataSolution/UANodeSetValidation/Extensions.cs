@@ -83,15 +83,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         throw new FileNotFoundException(String.Format(CultureInfo.InvariantCulture, "Could not load resource '{0}' because the exception {1} reports the error {2}.", path, e.GetType().Name, e.Message), e);
       }
     }
-    internal static IExportDataTypeDefinitionFactory[] GetParameters(this DataTypeDefinition dataTypeDefinition, IExportDataTypeFactory nodeDesign, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal static void GetParameters(this DataTypeDefinition dataTypeDefinition, IExportDataTypeDefinitionFactory _definition, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
-      if (dataTypeDefinition == null || dataTypeDefinition.Field == null)
-        return null;
-      List<IExportDataTypeDefinitionFactory> _parameters = new List<IExportDataTypeDefinitionFactory>();
+      if (dataTypeDefinition == null || dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
+        return;
       foreach (DataTypeField _item in dataTypeDefinition.Field)
       {
         bool _ValueRankSpecified;
-        IExportDataTypeDefinitionFactory _nP = nodeDesign.NewExportDataTypeDefinitionFactory();
+        IExportDataTypeFieldFactory _nP = _definition.Field();
         _nP.DataType = modelContext.ExportNodeId(_item.DataType, DataTypes.BaseDataType, traceEvent);
         _nP.Description = _item.Description;
         _nP.Identifier = _item.Value;
@@ -100,12 +99,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _nP.ValueRank = _item.ValueRank.GetValueRank(x => _ValueRankSpecified = x, traceEvent);
         if (_item.Definition != null)
           throw new NotImplementedException("Definition");
-        _nP.Definition = _item.Definition; //TODO implement recursion 
+        _item.Definition.GetParameters(_nP.Definition(), modelContext, traceEvent);
         _nP.SymbolicName = _item.SymbolicName;
         _nP.Value = _item.Value;
-        _parameters.Add(_nP);
       }
-      return _parameters.ToArray();
     }
     internal static XML.LocalizedText[] Truncate(this XML.LocalizedText[] localizedText, int maxLength, Action<TraceMessage> reportError)
     {

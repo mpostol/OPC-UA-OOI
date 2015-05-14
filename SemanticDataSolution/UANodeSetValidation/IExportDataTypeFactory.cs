@@ -1,12 +1,15 @@
 ﻿
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
+  /// <summary>
+  /// Interface IExportDataTypeFactory - 
+  /// </summary>
   public interface IExportDataTypeFactory : IExportTypeFactory
   {
-    IExportDataTypeDefinitionFactory[] Fields
-    {
-      set;
-    }
-    IExportDataTypeDefinitionFactory NewExportDataTypeDefinitionFactory();
+    /// <summary>
+    /// Sets the fields.
+    /// </summary>
+    /// <value>The fields.</value>
+    IExportDataTypeDefinitionFactory Definition();
   }
 }

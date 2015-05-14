@@ -18,7 +18,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="nodeId">The node identifier as the string.</param>
     /// <param name="defaultValue">The default value.</param>
     /// <param name="traceEvent">An <see cref="Action"/> delegate is used to trace event as the <see cref="TraceMessage"/>.</param>
-    /// <returns>The identifier an object of <see cref="System.Xml.XmlQualifiedName" /> or null if <paramref name="nodeId" /> has default value.</returns>
+    /// <returns>The identifier of <see cref="System.Xml.XmlQualifiedName" /> type or null if <paramref name="nodeId" /> has default value.</returns>
     XmlQualifiedName ExportNodeId(string nodeId, uint defaultValue, Action<TraceMessage> traceEvent);
 
   }

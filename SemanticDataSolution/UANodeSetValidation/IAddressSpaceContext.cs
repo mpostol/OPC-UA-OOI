@@ -8,20 +8,31 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 {
 
   /// <summary>
-  /// Interface IAddressSpaceContext - 
+  /// Interface IAddressSpaceContext - represents a service used to buildup OPc UA Address Space
   /// </summary>
   public interface IAddressSpaceContext
   {
 
     /// <summary>
-    /// Validate the address space containing the imported <see cref="UANodeSet"/> models.
+    /// Imports a part of the OPC UA Address Space contained in the imported <see cref="UANodeSet" /> object model.
     /// </summary>
-    /// <param name="targetNamespace">The target namespace.</param>
-    /// <param name="getNodesFromModel">Encapsulates an action called to get nodes from the <see cref="UANodeSet" /> model.</param>
-    /// <param name="factory">A factory used to export validated model.</param>
+    /// <param name="model">The model to be imported.</param>
     void ImportUANodeSet(UANodeSet model);
-    void ImportUANodeSet(IEnumerable<FileInfo> paths);
+    /// <summary>
+    /// Imports a part of the OPC UA Address Space contained in the imported  file <see cref="FileInfo" />.
+    /// </summary>
+    /// <param name="model">The model to be imported.</param>
+    void ImportUANodeSet(FileInfo model);
+    /// <summary>
+    /// Sets the information model factory, which can be used to export the part of the Address Space. If not set or set null an internal stub implementation will be used.
+    /// </summary>
+    /// <remarks>It is defined to handle dependency injection.</remarks>
+    /// <value>The information model factory.</value>
     IExportModelFactory InformationModelFactory { set; }
+    /// <summary>
+    /// Validates and exports the selected model.
+    /// </summary>
+    /// <param name="targetNamespace">The target namespace of the validated model.</param>
     void ValidateAndExportModel(string targetNamespace);
 
   }

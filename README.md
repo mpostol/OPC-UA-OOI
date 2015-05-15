@@ -53,4 +53,5 @@ Redd more:
 [About me on LinkedIn](https://pl.linkedin.com/in/mpostol)
 
 [OPC Foundation](https://opcfoundation.org/)
+
 [Sponsored by commsvr.com](http://www.commsvr.com/)

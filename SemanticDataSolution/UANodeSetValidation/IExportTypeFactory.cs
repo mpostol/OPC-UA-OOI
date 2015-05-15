@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <remarks>Default Value is false</remarks>
     /// <value><c>true</c> if this instance is abstract; otherwise, <c>false</c>.</value>
-
     bool IsAbstract{ set; }
+
   }
 }

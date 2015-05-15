@@ -79,31 +79,31 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         switch (nodeType)
         {
           case "UAReferenceType":
-            CreateNode<IExportReferenceTypeFactory, UAReferenceType>(exportFactory, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateType, traceEvent);
+            CreateNode<IExportReferenceTypeFactory, UAReferenceType>(exportFactory.NewExportNodeFFactory<IExportReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateType, traceEvent);
             break;
           case "UADataType":
-            CreateNode<IExportDataTypeFactory, UADataType>(exportFactory, nodeContext, (x, y) => Update(x, y, nodeContext.UAModelContext, traceEvent), UpdateType, traceEvent);
+            CreateNode<IExportDataTypeFactory, UADataType>(exportFactory.NewExportNodeFFactory<IExportDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext.UAModelContext, traceEvent), UpdateType, traceEvent);
             break;
           case "UAVariableType":
-            CreateNode<IExportVariableTypeFactory, UAVariableType>(exportFactory, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
+            CreateNode<IExportVariableTypeFactory, UAVariableType>(exportFactory.NewExportNodeFFactory<IExportVariableTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
             break;
           case "UAObjectType":
-            CreateNode<IExportObjectTypeFactory, UAObjectType>(exportFactory, nodeContext, Update, UpdateType, traceEvent);
+            CreateNode<IExportObjectTypeFactory, UAObjectType>(exportFactory.NewExportNodeFFactory<IExportObjectTypeFactory>, nodeContext, Update, UpdateType, traceEvent);
             break;
           case "UAView":
-            CreateNode<IExportViewInstanceFactory, UAView>(exportFactory, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
+            CreateNode<IExportViewInstanceFactory, UAView>(exportFactory.NewExportNodeFFactory<IExportViewInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAMethod":
-            CreateNode<IExportMethodInstanceFactory, UAMethod>(exportFactory, nodeContext, (x, y) => Update(x, y, parentReference, traceEvent), UpdateInstance, traceEvent);
+            CreateNode<IExportMethodInstanceFactory, UAMethod>(exportFactory.NewExportNodeFFactory<IExportMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAVariable":
             if (nodeContext.IsProperty)
-              CreateNode<IExportPropertyInstanceFactory, UAVariable>(exportFactory, nodeContext, (x, y) => Update(x, y, parentReference, nodeContext, traceEvent), UpdateInstance, traceEvent);
+              CreateNode<IExportPropertyInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IExportPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, nodeContext, traceEvent), UpdateInstance, traceEvent);
             else
-              CreateNode<IExportVariableInstanceFactory, UAVariable>(exportFactory, nodeContext, (x, y) => Update(x, y, parentReference, nodeContext, traceEvent), UpdateInstance, traceEvent);
+              CreateNode<IExportVariableInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IExportVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, nodeContext, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAObject":
-            CreateNode<IExportObjectnstanceFactory, UAObject>(exportFactory, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
+            CreateNode<IExportObjectnstanceFactory, UAObject>(exportFactory.NewExportNodeFFactory<IExportObjectnstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
             break;
           default:
             Debug.Assert(false, "Wrong node type");
@@ -206,19 +206,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     private static void Update(IExportObjectTypeFactory nodeDesign, UAObjectType nodeSet) { }
     //Validation
-    private static ModelDesignType CreateNode<ModelDesignType, NodeSetType>
+    private static FactoryType CreateNode<FactoryType, NodeSetType>
       (
-        IExportNodeContainer nodeContainer,
+        Func<FactoryType> createNode,
         UANodeContext nodeContext,
-        Action<ModelDesignType, NodeSetType> updateNode,
-        Action<ModelDesignType, NodeSetType, UANodeContext, Action<TraceMessage>> updateBase,
+        Action<FactoryType, NodeSetType> updateNode,
+        Action<FactoryType, NodeSetType, UANodeContext, Action<TraceMessage>> updateBase,
         Action<TraceMessage> traceEvent
       )
-      where ModelDesignType : IExportNodeFactory
+      where FactoryType : IExportNodeFactory
       where NodeSetType : UANode
     {
-      ModelDesignType _nodeDesign = nodeContainer.NewExportNodeFFactory<ModelDesignType>();
-      nodeContext.CalculateNodeReferences(_nodeDesign, traceEvent);
+      FactoryType _nodeFactory = createNode();
+      nodeContext.CalculateNodeReferences(_nodeFactory, traceEvent);
       NodeSetType _nodeSet = (NodeSetType)nodeContext.UANode;
       XmlQualifiedName _browseName = nodeContext.ExportNodeBrowseName(traceEvent);
       string _symbolicName;
@@ -226,18 +226,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _symbolicName = _browseName.Name.ValidateIdentifier(traceEvent);
       else
         _symbolicName = _nodeSet.SymbolicName.ValidateIdentifier(traceEvent);
-      _nodeDesign.BrowseName = _browseName.Name.ExportString(_symbolicName);
-      _nodeDesign.Description = _nodeSet.Description;
-      _nodeDesign.DisplayName = _nodeSet.DisplayName.Truncate(512, traceEvent);
-      _nodeDesign.SymbolicName = new XmlQualifiedName(_symbolicName, _browseName.Namespace);
+      _nodeFactory.BrowseName = _browseName.Name.ExportString(_symbolicName);
+      _nodeFactory.Description = _nodeSet.Description;
+      _nodeFactory.DisplayName = _nodeSet.DisplayName.Truncate(512, traceEvent);
+      _nodeFactory.SymbolicName = new XmlQualifiedName(_symbolicName, _browseName.Namespace);
       Action<UInt32, string> _doReport = (x, y) =>
       {
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongWriteMaskValue, String.Format("The current value is {0:x} of the node type {1}.", x, y)));
       };
-      _nodeDesign.WriteAccess = _nodeSet is UAVariable ? _nodeSet.WriteMask.Validate(0x200000, x => _doReport(x, _nodeSet.GetType().Name)) : _nodeSet.WriteMask.Validate(0x400000, x => _doReport(x, _nodeSet.GetType().Name));
-      updateBase(_nodeDesign, _nodeSet, nodeContext, traceEvent);
-      updateNode(_nodeDesign, _nodeSet);
-      return _nodeDesign;
+      _nodeFactory.WriteAccess = _nodeSet is UAVariable ? _nodeSet.WriteMask.Validate(0x200000, x => _doReport(x, _nodeSet.GetType().Name)) : _nodeSet.WriteMask.Validate(0x400000, x => _doReport(x, _nodeSet.GetType().Name));
+      updateBase(_nodeFactory, _nodeSet, nodeContext, traceEvent);
+      updateNode(_nodeFactory, _nodeSet);
+      return _nodeFactory;
     }
     private static void UpdateType(IExportTypeFactory nodeDesign, UAType nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {

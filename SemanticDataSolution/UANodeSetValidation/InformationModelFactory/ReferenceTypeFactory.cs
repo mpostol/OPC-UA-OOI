@@ -13,12 +13,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     public XML.LocalizedText[] InverseName
     {
       set { }
-
     }
 
     public bool Symmetric
     {
       set { }
     }
+
   }
 }

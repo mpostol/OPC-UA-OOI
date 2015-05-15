@@ -56,11 +56,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="createType">delegate function to create top level definition for children like methods.</param>
     /// <param name="traceEvent">A delegate action to report and error and trace processing progress.</param>
-    internal void CalculateNodeReferences(IExportNodeContainer nodeContainer, Action<TraceMessage> traceEvent)
+    internal void CalculateNodeReferences(IExportNodeFactory nodeContainer, Action<TraceMessage> traceEvent)
     {
       Errors = new List<BuildError>();
       m_ModelingRule = new Nullable<ModelingRules>();
-      List<IUAReferenceContext> _references = new List<IUAReferenceContext>();
+      List<UAReferenceContext> _references = new List<UAReferenceContext>();
       List<UAReferenceContext> _children = new List<UAReferenceContext>();
       Dictionary<string, UANodeContext> _derivedChildren = null;
       foreach (UAReferenceContext _rfx in m_Context.GetMyReferences(this))
@@ -76,13 +76,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               Errors.Add(_err);
             }
             _references.Add(_rfx);
-            //OldModel.Reference _or = new OldModel.Reference()
-            //{
-            //  IsInverse = !_rfx.Reference.IsForward,
-            //  IsOneWay = false, //TODO no info provided; 
-            //  ReferenceType = _ReferenceType,
-            //  TargetId = _rfx.BrowsePath(x => { Errors.Add(x); traceEvent(TraceMessage.BuildErrorTraceMessage(x, "Compilation error")); }),
-            //};
+            IExportReferenceFactory _or = nodeContainer.NewReference();
+            _or.IsInverse = !_rfx.Reference.IsForward;
+            _or.ReferenceType = _ReferenceType;
+            _or.TargetId = _rfx.BrowsePath(x => { Errors.Add(x); traceEvent(TraceMessage.BuildErrorTraceMessage(x, "Compilation error")); });
             break;
           case ReferenceKindEnum.HasComponent:
             if (_rfx.SourceNodeContext == this)
@@ -106,7 +103,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             break;
         }
       }
-      m_References = _references.Count == 0 ? null : _references.ToArray<IUAReferenceContext>();
+      m_References = _references.Count == 0 ? null : _references.ToArray<UAReferenceContext>();
       _children = _children.Where<UAReferenceContext>(x => _derivedChildren == null || !_derivedChildren.ContainsKey(x.TargetNodeContext.UANode.NamePartOfBrowseName())).ToList<UAReferenceContext>();
       foreach (UAReferenceContext _rc in _children)
         Validator.ValidateExportNode(_rc.TargetNodeContext, nodeContainer, _rc, traceEvent);
@@ -159,11 +156,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <value>The modeling rule. Null if valid modeling rule cannot be recognized.</value>
     internal ModelingRules? ModelingRule { get { return m_ModelingRule; } }
-    /// <summary>
-    /// Gets the references.
-    /// </summary>
-    /// <value>The references of the node.</value>
-    internal IUAReferenceContext[] References { get { return m_References; } }
     internal bool InRecursionChain { get; set; }
     internal void BuildSymbolicId(List<string> path, Action<BuildError> reportError)
     {
@@ -193,7 +185,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //vars
     private UAModelContext m_UAModelContext = null;
     private List<BuildError> Errors { get; set; }
-    private IUAReferenceContext[] m_References = null;
+    private UAReferenceContext[] m_References = null;
     private ModelingRules? m_ModelingRule;
     private UANodeContext m_BaseTypeNode;
     private bool m_IsProperty = false;

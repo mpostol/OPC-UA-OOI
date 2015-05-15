@@ -1,4 +1,6 @@
 ﻿
+using System.Xml;
+
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
   public interface IExportNodeFactory : IExportNodeContainer
@@ -10,20 +12,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     XML.LocalizedText[] Description
     {
       set;
-      get;
     }
     XML.LocalizedText[] DisplayName
     {
       set;
     }
 
-    IUAReferenceContext[] References
+    IExportReferenceFactory NewReference();
+
+    XmlQualifiedName SymbolicName
     {
-      set;
-    }
-    System.Xml.XmlQualifiedName SymbolicName
-    {
-      get;
       set;
     }
     /// <summary>

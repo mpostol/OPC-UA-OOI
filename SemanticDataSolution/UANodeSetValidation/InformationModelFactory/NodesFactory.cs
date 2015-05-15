@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
+using System;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  public abstract class NodesFactoryBase : IExportNodeContainer
+  internal abstract class NodesContainer : IExportNodeContainer
   {
     public NodeFactory NewExportNodeFFactory<NodeFactory>() where NodeFactory : IExportNodeFactory
     {

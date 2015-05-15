@@ -64,7 +64,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="parentReference">The reference to parent node.</param>
     /// <param name="traceEvent">The trace event.</param>
     /// <returns>An object of <see cref="IExportNodeFactory"/>.</returns>
-    internal static void ValidateExportNode(UANodeContext nodeContext, IExportNodeContainer exportFactory, IUAReferenceContext parentReference, Action<TraceMessage> traceEvent)
+    internal static void ValidateExportNode(UANodeContext nodeContext, IExportNodeContainer exportFactory, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
       Debug.Assert(nodeContext != null, "UANodeSetFactory.CreateNodeDesign the argument nodeContext is null.");
       if (nodeContext.UANode == null)
@@ -75,7 +75,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       else
       {
-        nodeContext.CalculateNodeReferences(exportFactory, traceEvent);
         string nodeType = nodeContext.UANode.GetType().Name;
         switch (nodeType)
         {
@@ -118,7 +117,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(x => nodeDesign.SupportsEventsSpecified = x, traceEvent);
     }
-    private static void Update(IExportPropertyInstanceFactory nodeDesign, UAVariable nodeSet, IUAReferenceContext parentReference, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
+    private static void Update(IExportPropertyInstanceFactory nodeDesign, UAVariable nodeSet, UAReferenceContext parentReference, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
       try
       {
@@ -138,7 +137,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, String.Format("Cannot resolve the reference for Property because of error {0} at: {1}.", _ex, _ex.StackTrace)));
       }
     }
-    private static void Update(IExportVariableInstanceFactory nodeDesign, UAVariable nodeSet, IUAReferenceContext parentReference, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
+    private static void Update(IExportVariableInstanceFactory nodeDesign, UAVariable nodeSet, UAReferenceContext parentReference, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
       try
       {
@@ -162,8 +161,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(x => nodeDesign.AccessLevelSpecified = x, traceEvent);
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(String.Empty);
-      nodeDesign.DataType = nodeContext.ExportNodeId(nodeSet.DataType, DataTypes.Number, traceEvent);//TODO must be DataType, must not be abstract
-      nodeDesign.DefaultValue = nodeSet.Value; //TODO must be of type defined by DataType
+      nodeDesign.DataType = nodeContext.ExportNodeId(nodeSet.DataType, DataTypes.Number, traceEvent);//TODO add testcase must be DataType, must not be abstract
+      nodeDesign.DefaultValue = nodeSet.Value; //TODO add testcase must be of type defined by DataType
       nodeDesign.Historizing = nodeSet.Historizing.Export<bool>(false, x => nodeDesign.HistorizingSpecified = x);
       nodeDesign.MinimumSamplingInterval = Convert.ToInt32(nodeSet.MinimumSamplingInterval.Export<double>(0D, x => nodeDesign.MinimumSamplingIntervalSpecified = x));
       nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(x => nodeDesign.ValueRankSpecified = x, traceEvent);
@@ -178,15 +177,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.DefaultValue = nodeSet.Value;
       nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(x => nodeDesign.ValueRankSpecified = x, traceEvent);
     }
-    private static void Update(IExportMethodInstanceFactory nodeDesign, UAMethod nodeContext, IUAReferenceContext parentReference, Action<TraceMessage> traceEvent)
+    private static void Update(IExportMethodInstanceFactory nodeDesign, UAMethod nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
-      //TODO validate parentReference
+      //TODO add test case validate parentReference
       nodeDesign.NonExecutable = !nodeContext.Executable;
       nodeDesign.NonExecutableSpecified = !nodeContext.Executable;
     }
     private static void Update(IExportViewInstanceFactory nodeDesign, UAView nodeSet, Action<TraceMessage> traceEvent)
     {
-      nodeDesign.ContainsNoLoops = nodeSet.ContainsNoLoops;//TODO test against the loops.
+      nodeDesign.ContainsNoLoops = nodeSet.ContainsNoLoops;//TODO add test case against the loops in the model.
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(x => { }, traceEvent);
     }
     private static void Update(IExportDataTypeFactory nodeDesign, UADataType nodeSet, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
@@ -219,6 +218,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       where NodeSetType : UANode
     {
       ModelDesignType _nodeDesign = nodeContainer.NewExportNodeFFactory<ModelDesignType>();
+      nodeContext.CalculateNodeReferences(_nodeDesign, traceEvent);
       NodeSetType _nodeSet = (NodeSetType)nodeContext.UANode;
       XmlQualifiedName _browseName = nodeContext.ExportNodeBrowseName(traceEvent);
       string _symbolicName;
@@ -229,7 +229,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       _nodeDesign.BrowseName = _browseName.Name.ExportString(_symbolicName);
       _nodeDesign.Description = _nodeSet.Description;
       _nodeDesign.DisplayName = _nodeSet.DisplayName.Truncate(512, traceEvent);
-      _nodeDesign.References = nodeContext.References;
       _nodeDesign.SymbolicName = new XmlQualifiedName(_symbolicName, _browseName.Namespace);
       Action<UInt32, string> _doReport = (x, y) =>
       {

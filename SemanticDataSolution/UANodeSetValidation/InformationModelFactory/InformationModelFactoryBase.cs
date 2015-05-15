@@ -3,7 +3,7 @@
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
 
-  public class InformationModelFactoryBase : NodesFactoryBase, IExportModelFactory
+  internal class InformationModelFactoryBase : NodesContainer, IExportModelFactory
   {
     public void CreateNamespace(string uri)
     {

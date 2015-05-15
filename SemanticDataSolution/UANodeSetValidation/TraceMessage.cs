@@ -59,7 +59,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
     public string ToString(string format, IFormatProvider formatProvider)
     {
-      //TODO
+      //TODO implement IFormattable
       return this.ToString();
     }
     #endregion

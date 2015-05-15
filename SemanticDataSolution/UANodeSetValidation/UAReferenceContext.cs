@@ -13,7 +13,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class UAReferenceContext.
   /// </summary>
-  internal class UAReferenceContext : IUAReferenceContext
+  internal class UAReferenceContext
   {
     //creator
     internal static UAReferenceContext NewReferenceStub
@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the kind of the reference.
     /// </summary>
     /// <value>The kind of the reference.</value>
-    public ReferenceKindEnum ReferenceKind
+    internal ReferenceKindEnum ReferenceKind
     {
       get { return b_ReferenceKindEnum; }
       private set { b_ReferenceKindEnum = value; }
@@ -50,15 +50,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="modelContext">The model context.</param>
     /// <param name="traceEvent">An <see cref="Action" /> delegate is used to trace event as the <see cref="TraceMessage" />.</param>
     /// <returns>XmlQualifiedName.</returns>
-    public XmlQualifiedName GetReferenceTypeName(IUAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal XmlQualifiedName GetReferenceTypeName(IUAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       if (IsDefault(this.TypeNode.NodeIdContext))
         return null;
       return m_Context.ExportBrowseName(this.TypeNode.NodeIdContext, (UAModelContext)modelContext, traceEvent);
     }
-    #endregion
-
-    #region public
     /// <summary>
     /// Returns the name of the reference target and calculates the Target identifier by traversing the components hierarchical path.
     /// </summary>

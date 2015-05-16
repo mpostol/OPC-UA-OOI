@@ -103,7 +103,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               CreateNode<IExportVariableInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IExportVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, nodeContext, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAObject":
-            CreateNode<IExportObjectnstanceFactory, UAObject>(exportFactory.NewExportNodeFFactory<IExportObjectnstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
+            CreateNode<IExportObjectInstanceFactory, UAObject>(exportFactory.NewExportNodeFFactory<IExportObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
             break;
           default:
             Debug.Assert(false, "Wrong node type");
@@ -113,7 +113,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     //private
-    private static void Update(IExportObjectnstanceFactory nodeDesign, UAObject nodeSet, Action<TraceMessage> traceEvent)
+    private static void Update(IExportObjectInstanceFactory nodeDesign, UAObject nodeSet, Action<TraceMessage> traceEvent)
     {
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(x => nodeDesign.SupportsEventsSpecified = x, traceEvent);
     }

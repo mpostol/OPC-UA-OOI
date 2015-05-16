@@ -7,7 +7,7 @@ using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class ExportReferenceTypeFactory : TypeFactoryBase, IExportReferenceTypeFactory
+  internal class ReferenceTypeFactoryBase : TypeFactoryBase, IExportReferenceTypeFactory
   {
 
     public XML.LocalizedText[] InverseName

@@ -12,6 +12,5 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       set;
     }
 
-    IExportMethodInstanceFactory Clone();
   }
 }

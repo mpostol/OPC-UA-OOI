@@ -10,6 +10,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Sets the fields.
     /// </summary>
     /// <value>The fields.</value>
-    IExportDataTypeDefinitionFactory Definition();
+    IExportDataTypeDefinitionFactory NewDefinition();
   }
 }

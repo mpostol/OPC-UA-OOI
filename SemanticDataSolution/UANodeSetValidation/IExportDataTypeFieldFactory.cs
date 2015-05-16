@@ -13,10 +13,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       set;
     }
-    XML.LocalizedText[] Description
-    {
-      set;
-    }
+    void AddDescription(string localeField, string valueField);
     int Identifier
     {
       set;
@@ -39,7 +36,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// This field is not specified for subtypes of Enumeration.
     /// </summary>
     /// <value>The definition.</value>
-    IExportDataTypeDefinitionFactory Definition();
+    IExportDataTypeDefinitionFactory NewDefinition();
     /// <summary>
     /// The value associated with the field. This field is only specified for subtypes of Enumeration.
     /// </summary>

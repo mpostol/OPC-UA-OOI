@@ -17,9 +17,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       set;
     }
-
     IExportReferenceFactory NewReference();
-
     XmlQualifiedName SymbolicName
     {
       set;

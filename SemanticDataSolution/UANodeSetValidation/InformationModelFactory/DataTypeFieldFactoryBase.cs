@@ -1,47 +1,45 @@
-﻿using System;
-using System.Xml;
+﻿using System.Xml;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
+
   internal class DataTypeFieldFactoryBase : IExportDataTypeFieldFactory
   {
 
     public XmlQualifiedName DataType
     {
-      set {  }
+      set { }
     }
-    public XML.LocalizedText[] Description
-    {
-      set {  }
-    }
+
     public int Identifier
     {
-      set {  }
+      set { }
     }
     public bool IdentifierSpecified
     {
-      set {  }
+      set { }
     }
     public string Name
     {
-      set {  }
+      set { }
     }
     public int ValueRank
     {
       set { }
     }
-    public IExportDataTypeDefinitionFactory Definition()
+    public IExportDataTypeDefinitionFactory NewDefinition()
     {
       return new DataTypeDefinitionFactoryBase();
     }
     public int Value
     {
-      set {  }
+      set { }
     }
     public string SymbolicName
     {
       set { }
     }
+    public void AddDescription(string localeField, string valueField) { }
 
   }
 }

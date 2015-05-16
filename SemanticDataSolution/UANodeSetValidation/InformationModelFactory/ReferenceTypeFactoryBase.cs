@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
-
+﻿
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
   internal class ReferenceTypeFactoryBase : TypeFactoryBase, IExportReferenceTypeFactory
@@ -14,7 +8,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       set { }
     }
-
     public bool Symmetric
     {
       set { }

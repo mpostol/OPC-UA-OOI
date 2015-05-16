@@ -190,7 +190,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     private static void Update(IExportDataTypeFactory nodeDesign, UADataType nodeSet, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
-      nodeSet.Definition.GetParameters(nodeDesign.Definition(), modelContext, traceEvent);
+      nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), modelContext, traceEvent);
     }
     private static void Update(IExportReferenceTypeFactory nodeDesign, UAReferenceType nodeSet, Action<TraceMessage> traceEvent)
     {

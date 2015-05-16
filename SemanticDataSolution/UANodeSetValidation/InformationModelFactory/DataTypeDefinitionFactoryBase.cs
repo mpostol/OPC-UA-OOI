@@ -1,23 +1,22 @@
 ﻿
+using System.Xml;
+
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
   internal class DataTypeDefinitionFactoryBase: IExportDataTypeDefinitionFactory
   {
-    public IExportDataTypeFieldFactory Field()
+    public IExportDataTypeFieldFactory NewField()
     {
       return new DataTypeFieldFactoryBase();
     }
-
-    public System.Xml.XmlQualifiedName Name
+    public XmlQualifiedName Name
     {
       set {  }
     }
-
-    public System.Xml.XmlQualifiedName BaseType
+    public XmlQualifiedName BaseType
     {
       set {  }
     }
-
     public string SymbolicName
     {
       set {  }

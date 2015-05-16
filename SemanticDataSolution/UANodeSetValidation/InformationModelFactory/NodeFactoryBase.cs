@@ -1,4 +1,5 @@
 ﻿
+using System.Xml;
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
   internal class NodeFactoryBase : NodesContainer, IExportNodeFactory
@@ -20,7 +21,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       return new ReferenceFactoryBase();
     }
-    public System.Xml.XmlQualifiedName SymbolicName
+    public XmlQualifiedName SymbolicName
     {
       set { }
     }
@@ -28,5 +29,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       set { }
     }
+
   }
 }

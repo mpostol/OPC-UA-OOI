@@ -12,7 +12,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   public interface IExportDataTypeDefinitionFactory
   {
 
-    IExportDataTypeFieldFactory Field();
+    IExportDataTypeFieldFactory NewField();
     XmlQualifiedName Name
     {
       set;

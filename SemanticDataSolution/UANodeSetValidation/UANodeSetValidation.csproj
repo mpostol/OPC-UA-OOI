@@ -70,13 +70,13 @@
     <Compile Include="IExportVariableTypeFactory.cs" />
     <Compile Include="IExportViewInstanceFactory.cs" />
     <Compile Include="InformationModelFactory\InformationModelFactoryBase.cs" />
-    <Compile Include="InformationModelFactory\NodeFactory.cs" />
+    <Compile Include="InformationModelFactory\NodeFactoryBase.cs" />
     <Compile Include="InformationModelFactory\NodesFactory.cs" />
     <Compile Include="InformationModelFactory\ReferenceFactoryBase.cs" />
     <Compile Include="InformationModelFactory\ReferenceTypeFactory.cs" />
     <Compile Include="InformationModelFactory\TypeFactoryBase.cs" />
     <Compile Include="IUAModelContext.cs" />
-    <Compile Include="IUAReferenceContext.cs" />
+    <Compile Include="ReferenceKindEnum.cs" />
     <Compile Include="ModelDesignFactory.cs" />
     <Compile Include="IExportModelFactory.cs" />
     <Compile Include="Namespaces.cs" />

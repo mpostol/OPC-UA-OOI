@@ -197,6 +197,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
     /// </summary>
     /// <param name="source">The string table to map.</param>
     /// <param name="updateTable">if set to <c>true</c> if missing URIs should be added to the current tables.</param>
+    /// <param name="traceEvent">Encapsulated delegate to the trace event method.</param>
     /// <returns>A list of indexes in the current table.</returns>
     public ushort[] CreateMapping(StringTable source, bool updateTable, Action<TraceMessage> traceEvent)
     {

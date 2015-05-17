@@ -29,7 +29,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// Gets the supports events.
     /// </summary>
     /// <param name="eventNotifier">The event notifier.</param>
-    /// <param name="isSpecified">The <see cref="Action[bool]"/> is called if this value is specified.</param>
+    /// <param name="isSpecified">The <see cref="Action{T}"/> is called if this value is specified.</param>
     /// <param name="traceEvent">The trace event.</param>
     /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
     internal static bool GetSupportsEvents(this byte eventNotifier, Action<bool> isSpecified, Action<TraceMessage> traceEvent)
@@ -56,8 +56,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// </summary>
     /// <param name="valueRank">The value rank.</param>
     /// <param name="specified">if set to <c>true</c> the parameter is specified.</param>
-    /// <param name="traceEvent">An <see cref="Action"/> delegate is used to trace event as the <see cref="TraceMessage"/>.</param>
-    /// <returns>Returns value of <see cref="ModelDesign.ValueRank" />.</returns>
+    /// <param name="traceEvent">An <see cref="Action" /> delegate is used to trace event as the <see cref="TraceMessage" />.</param>
+    /// <returns>Returns validated value.</returns>
     internal static int GetValueRank(this int valueRank, Action<bool> specified, Action<TraceMessage> traceEvent)
     {
       int _vr = -1;

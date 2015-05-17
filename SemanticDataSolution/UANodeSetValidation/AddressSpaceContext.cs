@@ -104,7 +104,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region internal API of this service
     /// <summary>
-    /// Converts the <paramref name="nodeId" /> representing instance of <see cref="Opc.Ua.NodeId" /> and returns <see cref="XmlQualifiedName" />
+    /// Converts the <paramref name="nodeId" /> representing instance of <see cref="NodeId" /> and returns <see cref="XmlQualifiedName" />
     /// representing the <see cref="UANode.BrowseName" /> of the node pointed out by it.
     /// </summary>
     /// <param name="nodeId">The node identifier.</param>
@@ -124,7 +124,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return new XmlQualifiedName(_qn.Name, m_NamespaceTable.GetString(_qn.NamespaceIndex));
     }
     /// <summary>
-    /// Converts the <paramref name="browseName" /> representing <see cref="Opc.Ua.QualifiedName" /> to instance of <see cref="XmlQualifiedName" />.
+    /// Converts the <paramref name="browseName" /> representing <see cref="QualifiedName" /> to instance of <see cref="XmlQualifiedName" />.
     /// </summary>
     /// <param name="browseName">Name of the browse.</param>
     /// <param name="modelContext">The model context.</param>
@@ -147,7 +147,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Exports the current namespace table containing all namespaces relevant for exported model.
     /// </summary>
-    /// <returns>Array of relevant namespaces as the <see cref="System.String[]"/>.</returns>
+    /// <returns>Array of relevant namespaces as the <see cref="System.String"/>.</returns>
     internal string[] ExportNamespaceTable()
     {
       return m_NamespaceTable.ToArray();

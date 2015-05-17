@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   /// that the host of this object will manage that directly.
   /// <br/></para>
   /// </remarks>
-  public partial class NodeId : IFormattable //IEquatable<NodeId>, IComparable, 
+  public partial class NodeId : IFormattable, IEquatable<NodeId>, IComparable
   {
 
     #region constructors
@@ -71,6 +71,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_identifierType = value.m_identifierType;
       m_identifierPart = value.MemberwiseClone();
     }
+    /// <summary>
     /// Initializes a numeric node identifier.
     /// </summary>
     /// <remarks>
@@ -343,6 +344,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_identifierType = idType;
       SetIdentifier(IdType.String_1, value);
     }
+    ///<summary>
     /// The index of the namespace URI in the server's namespace array.
     /// </summary>
     /// <remarks>
@@ -651,6 +653,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     #endregion
 
     #region object
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
     public override string ToString()
     {
       return Format();

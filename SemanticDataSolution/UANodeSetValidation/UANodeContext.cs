@@ -36,7 +36,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <value>The source UA node from the model.</value>
     internal UANode UANode { get; set; }
     /// <summary>
-    /// Gets the instance of <see cref="IUAModelContext" />, which the node is defined in.
+    /// Gets the instance of <see cref="UAModelContext" />, which the node is defined in.
     /// </summary>
     /// <value>The model context.</value>
     internal UAModelContext UAModelContext
@@ -52,9 +52,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       get { return String.IsNullOrEmpty(this.UANode.SymbolicName) ? this.UANode.NamePartOfBrowseName() : this.UANode.SymbolicName; }
     }
     /// <summary>
-    /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent models <see cref="IAddressSpaceContext.ImportNodeSet" />
+    /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent models.
     /// </summary>
-    /// <param name="createType">delegate function to create top level definition for children like methods.</param>
+    /// <param name="nodeContainer">The node container.</param>
     /// <param name="traceEvent">A delegate action to report and error and trace processing progress.</param>
     internal void CalculateNodeReferences(IExportNodeFactory nodeContainer, Action<TraceMessage> traceEvent)
     {
@@ -109,7 +109,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Validator.ValidateExportNode(_rc.TargetNodeContext, nodeContainer, _rc, traceEvent);
     }
     /// <summary>
-    /// Converts the <paramref name="nodeId" /> representing instance of <see cref="Opc.Ua.NodeId" /> and returns <see cref="XmlQualifiedName" />
+    /// Converts the <paramref name="nodeId" /> representing instance of <see cref="NodeId" /> and returns <see cref="XmlQualifiedName" />
     /// representing the BrowseName name <see cref="UANode" /> of the node pointed out by it.
     /// </summary>
     /// <param name="nodeId">The node identifier.</param>

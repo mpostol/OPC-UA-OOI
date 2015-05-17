@@ -50,7 +50,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="modelContext">The model context.</param>
     /// <param name="traceEvent">An <see cref="Action" /> delegate is used to trace event as the <see cref="TraceMessage" />.</param>
     /// <returns>XmlQualifiedName.</returns>
-    internal XmlQualifiedName GetReferenceTypeName(IUAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal XmlQualifiedName GetReferenceTypeName(UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       if (IsDefault(this.TypeNode.NodeIdContext))
         return null;

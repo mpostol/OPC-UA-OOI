@@ -86,7 +86,6 @@
     <Compile Include="InformationModelFactory\VariableInstanceFactoryBase.cs" />
     <Compile Include="InformationModelFactory\VariableTypeFactoryBase.cs" />
     <Compile Include="InformationModelFactory\ViewInstanceFactoryBase.cs" />
-    <Compile Include="IUAModelContext.cs" />
     <Compile Include="ReferenceKindEnum.cs" />
     <Compile Include="Validator.cs" />
     <Compile Include="IExportModelFactory.cs" />

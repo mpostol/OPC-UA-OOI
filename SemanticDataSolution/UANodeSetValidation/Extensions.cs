@@ -83,7 +83,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         throw new FileNotFoundException(String.Format(CultureInfo.InvariantCulture, "Could not load resource '{0}' because the exception {1} reports the error {2}.", path, e.GetType().Name, e.Message), e);
       }
     }
-    internal static void GetParameters(this DataTypeDefinition dataTypeDefinition, IExportDataTypeDefinitionFactory _definition, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal static void GetParameters(this DataTypeDefinition dataTypeDefinition, IExportDataTypeDefinitionFactory _definition, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       if (dataTypeDefinition == null || dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
         return;

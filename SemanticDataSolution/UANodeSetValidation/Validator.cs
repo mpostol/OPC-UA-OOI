@@ -188,7 +188,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.ContainsNoLoops = nodeSet.ContainsNoLoops;//TODO add test case against the loops in the model.
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(x => { }, traceEvent);
     }
-    private static void Update(IExportDataTypeFactory nodeDesign, UADataType nodeSet, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
+    private static void Update(IExportDataTypeFactory nodeDesign, UADataType nodeSet, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), modelContext, traceEvent);
     }

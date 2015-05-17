@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the instance of <see cref="IUAModelContext" />, which the node is defined in.
     /// </summary>
     /// <value>The model context.</value>
-    internal IUAModelContext UAModelContext
+    internal UAModelContext UAModelContext
     {
       get { return m_UAModelContext; }
     }

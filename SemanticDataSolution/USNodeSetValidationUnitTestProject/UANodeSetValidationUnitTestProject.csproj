@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Helpers\TraceHelper.cs" />
     <Compile Include="Helpers\HelpersUnitTest.cs" />
+    <Compile Include="UANodeSetUnitTest.cs" />
     <Compile Include="UAModelContextUnitTest.cs" />
     <Compile Include="Helpers\ModelDesign.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,20 +76,29 @@
   <ItemGroup>
     <Content Include="XMLModels\CorrectModels\DataTypeTest.xml" />
     <Content Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.NodeSet.xml" />
-    <Content Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.NodeSet2.xml" />
+    <Content Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.NodeSet2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.PredefinedNodes.xml" />
     <Content Include="XMLModels\CorrectModels\ObjectTypeTest.xml" />
     <Content Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.NodeSet.xml" />
-    <Content Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.NodeSet2.xml" />
+    <Content Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.NodeSet2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.PredefinedNodes.xml" />
-    <Content Include="XMLModels\CorrectModels\ReadMe.txt" />
     <Content Include="XMLModels\CorrectModels\ReferenceTest.xml" />
-    <Content Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml" />
-    <Content Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml" />
+    <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.PredefinedNodes.xml" />
     <Content Include="XMLModels\CorrectModels\VariableTypeTest.xml" />
     <Content Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.NodeSet.xml" />
-    <Content Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.NodeSet2.xml" />
+    <None Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.NodeSet2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.PredefinedNodes.xml" />
     <Content Include="XMLModels\ModelsWithErrors\DanglingReferenceTarget.NodeSet2.xml" />
     <Content Include="XMLModels\ModelsWithErrors\DeploymentTest.txt" />

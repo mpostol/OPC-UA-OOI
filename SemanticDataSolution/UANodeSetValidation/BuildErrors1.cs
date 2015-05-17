@@ -178,7 +178,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Error: P0-0001020000; Focus: XML; Node cannot be null
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P0-0001020000.</value>
-    public static BuildError NodeCannotBeNil { get { return new BuildError() 
+    public static BuildError NodeCannotBeNull { get { return new BuildError() 
                   { Focus = Focus.XML, 
                     Identifier = "P0-0001020000", 
                     Descriptor = "Node cannot be null" }; } }

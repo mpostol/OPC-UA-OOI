@@ -1,13 +1,14 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UAOOI.SemanticData.UANodeSetValidation;
 using UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 using UAOOI.SemanticData.UnitTest.Helpers;
-
 
 namespace UAOOI.SemanticData.UnitTest
 {
@@ -16,13 +17,39 @@ namespace UAOOI.SemanticData.UnitTest
   {
 
     [TestMethod]
-    public void AddressSpaceContextUTTryGetUANodeContextTestMethod()
+    public void AddressSpaceContextCreatorTestMethod()
     {
       AddressSpaceContext _as = new AddressSpaceContext(x => { });
       Assert.IsNotNull(_as);
       Assert.IsNotNull(_as.UTTryGetUANodeContext(VariableTypes.PropertyType));
     }
-
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void AddressSpaceContextImportUANodeSetNullTestMethod1()
+    {
+      IAddressSpaceContext _as = new AddressSpaceContext(x => { });
+      Assert.IsNotNull(_as);
+      UANodeSet _ns = null;
+      _as.ImportUANodeSet(_ns);
+    }
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void AddressSpaceContextImportUANodeSetNullTestMethod2()
+    {
+      IAddressSpaceContext _as = new AddressSpaceContext(x => { });
+      Assert.IsNotNull(_as);
+      FileInfo _fi = null;
+      _as.ImportUANodeSet(_fi);
+    }
+    [TestMethod]
+    [ExpectedException(typeof(FileNotFoundException))]
+    public void AddressSpaceContextImportUANodeSetNullTestMethod3()
+    {
+      IAddressSpaceContext _as = new AddressSpaceContext(x => { });
+      Assert.IsNotNull(_as);
+      FileInfo _fi = new FileInfo("NotExistingFileName.xml");
+      _as.ImportUANodeSet(_fi);
+    }
     [TestMethod]
     public void AddressSpaceContextUnitTestTestMethod()
     {

@@ -132,7 +132,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (String.IsNullOrEmpty(UANode.BrowseName))
       {
         NodeId _id = NodeId.Parse(UANode.NodeId);
-        _broseName = string.Format("{1}:EmptyBrowseName{0}", _id.Identifier, _id.NamespaceIndex);
+        _broseName = string.Format("{1}:EmptyBrowseName{0}", _id.IdentifierPart, _id.NamespaceIndex);
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, String.Format("New identifier {0} is generated to proceed.", _broseName)));
       }
       return m_Context.ExportQualifiedName(_broseName, m_UAModelContext);

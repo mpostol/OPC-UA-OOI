@@ -78,7 +78,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       Debug.Assert(TargetNode.NodeIdContext.IdType == IdType.Numeric_0);
       Debug.Assert(ReferenceKind == ReferenceKindEnum.HasModellingRule);
-      int _targetId = TargetNode.NodeIdContext.NamespaceIndex != 0 ? -1 : Convert.ToInt32(TargetNode.NodeIdContext.Identifier);
+      int _targetId = TargetNode.NodeIdContext.NamespaceIndex != 0 ? -1 : Convert.ToInt32(TargetNode.NodeIdContext.IdentifierPart);
       ModelingRules? _ret = new Nullable<ModelingRules>();
       if (_targetId == Objects.ModellingRule_Mandatory)
         _ret = ModelingRules.Mandatory;

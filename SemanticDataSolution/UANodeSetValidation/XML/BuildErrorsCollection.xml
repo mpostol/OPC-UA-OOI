@@ -132,7 +132,7 @@
       <Focus>XML</Focus>
       <Identifier>P0-0001020000</Identifier>
       <Descriptor>Node cannot be null</Descriptor>
-      <Name>NodeCannotBeNil</Name>
+      <Name>NodeCannotBeNull</Name>
     </NamedBuildError>
     <NamedBuildError>
       <Focus>NonCategorized</Focus>

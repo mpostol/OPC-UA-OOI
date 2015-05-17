@@ -1,8 +1,10 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
@@ -10,11 +12,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   {
     internal static UANodeSet ReadUADefinedTypes()
     {
-      return ReadXmlFile(m_UADefinedTypesName);
+      return LoadResource(m_UADefinedTypesName);
     }
-    internal static UANodeSet ReadXmlFile(string resourcePath)
+    /// <summary>
+    /// Loads a schema from an embedded resource.
+    /// </summary>
+    private static UANodeSet LoadResource(string path)
     {
-      return resourcePath.LoadResource<UANodeSet>();
+      Assembly assembly = Assembly.GetExecutingAssembly();
+      XmlSerializer _serializer = new XmlSerializer(typeof(UANodeSet));
+      using (StreamReader _stream = new StreamReader(assembly.GetManifestResourceStream(path)))
+        return (UANodeSet)_serializer.Deserialize(_stream);
+    }
+    internal static UANodeSet ReadModellFile(FileInfo path)
+    {
+      XmlSerializer _serializer = new XmlSerializer(typeof(UANodeSet));
+      using (FileStream _stream = new FileStream(path.FullName, FileMode.Open, FileAccess.Read))
+        return (UANodeSet)_serializer.Deserialize(_stream);
     }
 #if DEBUG
     /// <summary>

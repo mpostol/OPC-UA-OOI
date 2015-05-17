@@ -419,7 +419,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     public void Format(StringBuilder buffer)
     {
       if (m_nodeId != null)
-        Format(buffer, m_nodeId.Identifier, m_nodeId.IdType, m_nodeId.NamespaceIndex, m_namespaceUri, m_serverIndex);
+        Format(buffer, m_nodeId.IdentifierPart, m_nodeId.IdType, m_nodeId.NamespaceIndex, m_namespaceUri, m_serverIndex);
       else
         Format(buffer, null, IdType.Numeric_0, 0, m_namespaceUri, m_serverIndex);
     }
@@ -481,7 +481,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       // check for absolute node id.
       if (nodeId.ServerIndex != 0)
       {
-        nodeId.m_nodeId = new NodeId(nodeId.m_nodeId.Identifier, 0);
+        nodeId.m_nodeId = new NodeId(nodeId.m_nodeId.IdentifierPart, 0);
         nodeId.m_namespaceUri = uri;
         return nodeId;
       }

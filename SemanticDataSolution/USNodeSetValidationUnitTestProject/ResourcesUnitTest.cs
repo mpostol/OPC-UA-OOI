@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
 using UAOOI.SemanticData.UANodeSetValidation;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
@@ -6,14 +7,16 @@ namespace UAOOI.SemanticData.UnitTest
 {
 
   [TestClass]
+  [DeploymentItem(@"XMLModels\", @"XMLModels\")]
   public class ResourcesUnitTest
   {
     [TestMethod]
     public void OpcUaNodeSet2TestMethod()
     {
-      UANodeSet _standard = Extensions.LoadResource<UANodeSet>(UANodeSet.UTUADefinedTypesName);
-      Assert.IsNotNull(_standard);
-      Assert.IsNull(_standard.NamespaceUris);
+      FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml");
+      Assert.IsTrue(_testDataFileInfo.Exists);
+      UANodeSet _model = UANodeSet.ReadModellFile(_testDataFileInfo);
+      Assert.IsNotNull(_model);
     }
     [TestMethod]
     public void ReadUADefinedTypesTestMethod()

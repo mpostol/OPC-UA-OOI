@@ -56,11 +56,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (lookupAlias)
         source = LookupAlias(source);
       // parse the string.
-      NodeId _nodeId = NodeId.Parse(LookupAlias(source));
+      NodeId _nodeId = NodeId.Parse(source);
       if (_nodeId.NamespaceIndex > 0)
       {
         ushort namespaceIndex = ImportNamespaceIndex(_nodeId.NamespaceIndex, namespaceUris);
-        _nodeId = new NodeId(_nodeId.Identifier, namespaceIndex);
+        _nodeId = new NodeId(_nodeId.IdentifierPart, namespaceIndex);
       }
       return _nodeId;
     }

@@ -67,25 +67,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return "Empty LocalizedText";
       return String.Format("{0}:{1}", localizedText[0].Locale, localizedText[0].Value);
     }
-    /// <summary>
-    /// Loads a schema from an embedded resource.
-    /// </summary>
-    internal static type LoadResource<type>(this string path)
-    {
-      try
-      {
-        Assembly assembly = Assembly.GetExecutingAssembly();
-        using (StreamReader reader = new StreamReader(assembly.GetManifestResourceStream(path)))
-        {
-          XmlSerializer serializer = new XmlSerializer(typeof(type));
-          return (type)serializer.Deserialize(reader);
-        }
-      }
-      catch (Exception e)
-      {
-        throw new FileNotFoundException(String.Format(CultureInfo.InvariantCulture, "Could not load resource '{0}' because the exception {1} reports the error {2}.", path, e.GetType().Name, e.Message), e);
-      }
-    }
     internal static void GetParameters(this DataTypeDefinition dataTypeDefinition, IExportDataTypeDefinitionFactory _definition, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       if (dataTypeDefinition == null || dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)

@@ -194,7 +194,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     private static void Update(IExportReferenceTypeFactory nodeDesign, UAReferenceType nodeSet, Action<TraceMessage> traceEvent)
     {
-      nodeDesign.InverseName = nodeSet.InverseName;
+      nodeSet.InverseName.ExportLocalizedTextArray(nodeDesign.AddInverseName);
       nodeDesign.Symmetric = nodeSet.Symmetric;
       if (nodeSet.Symmetric && (nodeSet.InverseName != null && nodeSet.InverseName.Where(x => !String.IsNullOrEmpty(x.Value)).Any()))
       {
@@ -227,8 +227,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       else
         _symbolicName = _nodeSet.SymbolicName.ValidateIdentifier(traceEvent);
       _nodeFactory.BrowseName = _browseName.Name.ExportString(_symbolicName);
-      _nodeFactory.Description = _nodeSet.Description;
-      _nodeFactory.DisplayName = _nodeSet.DisplayName.Truncate(512, traceEvent);
+      _nodeSet.Description.ExportLocalizedTextArray(_nodeFactory.AddDescription);
+      _nodeSet.DisplayName.Truncate(512, traceEvent).ExportLocalizedTextArray(_nodeFactory.AddDisplayName);
       _nodeFactory.SymbolicName = new XmlQualifiedName(_symbolicName, _browseName.Namespace);
       Action<UInt32, string> _doReport = (x, y) =>
       {

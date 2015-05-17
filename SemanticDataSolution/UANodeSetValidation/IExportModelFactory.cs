@@ -1,6 +1,7 @@
 ﻿
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
+  public delegate void LocalizedTextFactory(string localeField, string valueField);
   public interface IExportModelFactory : IExportNodeContainer
   {
 

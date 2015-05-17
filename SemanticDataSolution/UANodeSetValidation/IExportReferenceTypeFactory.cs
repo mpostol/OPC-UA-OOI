@@ -4,10 +4,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 {
   public interface IExportReferenceTypeFactory : IExportTypeFactory
   {
-    LocalizedText[] InverseName
-    {
-      set;
-    }
+    
+    void AddInverseName(string localeField, string valueField);
     /// <summary>
     /// Sets a value indicating whether this <see cref="IExportReferenceTypeFactory"/> is symmetric.
     /// </summary>

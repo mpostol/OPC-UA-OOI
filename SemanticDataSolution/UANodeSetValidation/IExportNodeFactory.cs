@@ -9,14 +9,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       set;
     }
-    XML.LocalizedText[] Description
-    {
-      set;
-    }
-    XML.LocalizedText[] DisplayName
-    {
-      set;
-    }
+    void AddDescription(string localeField, string valueField);
+    void AddDisplayName(string localeField, string valueField);
     IExportReferenceFactory NewReference();
     XmlQualifiedName SymbolicName
     {

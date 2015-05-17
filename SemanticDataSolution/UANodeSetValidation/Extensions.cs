@@ -104,8 +104,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _nP.Value = _item.Value;
       }
     }
-    internal static void ExportLocalizedTextArray(this XML.LocalizedText[] text, Action<string, string> factory)
+    internal static void ExportLocalizedTextArray(this XML.LocalizedText[] text, LocalizedTextFactory factory)
     {
+
+      if (text == null || text.Length == 0)
+        return;
       foreach (XML.LocalizedText item in text)
         factory(item.Locale, item.Value);
     }

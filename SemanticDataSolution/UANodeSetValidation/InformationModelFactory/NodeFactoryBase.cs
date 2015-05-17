@@ -9,14 +9,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       set { }
     }
-    public XML.LocalizedText[] Description
-    {
-      set { }
-    }
-    public XML.LocalizedText[] DisplayName
-    {
-      set { }
-    }
     public IExportReferenceFactory NewReference()
     {
       return new ReferenceFactoryBase();
@@ -29,6 +21,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       set { }
     }
+    public void AddDescription(string localeField, string valueField) { }
+    public void AddDisplayName(string localeField, string valueField) { }
 
   }
 }

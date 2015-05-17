@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
+using System.Security.Permissions;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -46,7 +47,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         reportError(value);
       return value & maxValue - 1;
     }
-    internal static string ValidateIdentifier(this string name, Action<TraceMessage> reportError)
+    [SecurityPermissionAttribute(SecurityAction.Demand)]
+    internal static string
+      ValidateIdentifier(this string name, Action<TraceMessage> reportError)
     {
       if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(name))
         reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongSymbolicName, String.Format("SymbolicName: '{0}'.", name)));

@@ -17,7 +17,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class AddressSpaceContext - responsible to manage all nodes in the OPC UA Address Space.
   /// </summary>
-  public class AddressSpaceContext : IAddressSpaceContext
+  sealed public class AddressSpaceContext : IAddressSpaceContext
   {
 
     #region creator
@@ -42,7 +42,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region IAddressSpaceContext
     /// <summary>
-    /// Sets the information model factory, which can be used to export the part of the Address Space. If not set or set null an internal stub implementation will be used.
+    /// Sets the information model factory, which can be used to export a part of the OPC UA Address Space. If not set or set null an internal stub implementation will be used.
     /// </summary>
     /// <value>The information model factory.</value>
     /// <remarks>It is defined to handle dependency injection.</remarks>
@@ -58,7 +58,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       private get { return m_InformationModelFactory; }
     }
     /// <summary>
-    /// Imports a part of the OPC UA Address Space contained in the imported <see cref="UANodeSet" /> object model.
+    /// Imports a part of the OPC UA Address Space contained in the <see cref="UANodeSet" /> object model.
     /// </summary>
     /// <param name="model">The model to be imported.</param>
     void IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
@@ -67,10 +67,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       ImportNodeSet(model, true);
     }
     /// <summary>
-    /// Creates the instance.
+    /// Imports a part of the OPC UA Address Space contained in the file <see cref="FileInfo" />.
     /// </summary>
-    /// <param name="filePath">The file path.</param>
-    /// <exception cref="System.ArgumentOutOfRangeException">filePath;The imported file does not exist.</exception>
+    /// <param name="model">The model to be imported.</param>
+    /// <exception cref="System.IO.FileNotFoundException">The imported file does not exist</exception>
     void IAddressSpaceContext.ImportUANodeSet(FileInfo model)
     {
       if (!model.Exists)
@@ -84,6 +84,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_NamespaceTable.Append(_nodeSet.NamespaceUris == null ? Namespaces.OpcUa : _nodeSet.NamespaceUris[0], m_TraceEvent);
       ImportNodeSet(_nodeSet, true);
     }
+    /// <summary>
+    /// Validates and exports the selected model.
+    /// </summary>
+    /// <param name="targetNamespace">The target namespace of the validated model.</param>
+    /// <exception cref="System.ArgumentOutOfRangeException">targetNamespace;Cannot find this namespace</exception>
     void IAddressSpaceContext.ValidateAndExportModel(string targetNamespace)
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext.CreateModelDesign - starting creation of the ModelDesign for the address space."));

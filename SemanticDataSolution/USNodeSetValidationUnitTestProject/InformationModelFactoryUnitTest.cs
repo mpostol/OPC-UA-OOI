@@ -1,7 +1,7 @@
-﻿using System;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation;
+using UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory;
 
 namespace UAOOI.SemanticData.UnitTest
 {
@@ -9,6 +9,7 @@ namespace UAOOI.SemanticData.UnitTest
   [TestClass]
   public class InformationModelFactoryUnitTest
   {
+
     private static InformationModelFactoryBase m_FactoryBase = null;
 
     [ClassInitialize]

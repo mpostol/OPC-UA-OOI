@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Helpers\TraceHelper.cs" />
     <Compile Include="Helpers\HelpersUnitTest.cs" />
+    <Compile Include="UANodeSetWithErrorsUnitTest.cs" />
     <Compile Include="UANodeSetUnitTest.cs" />
     <Compile Include="UAModelContextUnitTest.cs" />
     <Compile Include="Helpers\ModelDesign.cs" />
@@ -100,19 +101,43 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.PredefinedNodes.xml" />
-    <Content Include="XMLModels\ModelsWithErrors\DanglingReferenceTarget.NodeSet2.xml" />
-    <Content Include="XMLModels\ModelsWithErrors\DeploymentTest.txt" />
-    <Content Include="XMLModels\ModelsWithErrors\DuplicatedNodeId.xml" />
-    <Content Include="XMLModels\ModelsWithErrors\NotSupportedFeature.xml" />
+    <None Include="XMLModels\ModelsWithErrors\DanglingReferenceTarget.NodeSet2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="XMLModels\ModelsWithErrors\DeploymentTest.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="XMLModels\ModelsWithErrors\DuplicatedNodeId.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="XMLModels\ModelsWithErrors\NotSupportedFeature.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="XMLModels\ModelsWithErrors\WrongAccessLevel.xml" />
-    <Content Include="XMLModels\ModelsWithErrors\WrongBrowseName.xml" />
-    <Content Include="XMLModels\ModelsWithErrors\WrongDisplayNameLength.xml" />
-    <Content Include="XMLModels\ModelsWithErrors\WrongEventNotifier.xml" />
-    <Content Include="XMLModels\ModelsWithErrors\WrongInverseName.xml" />
-    <Content Include="XMLModels\ModelsWithErrors\WrongNodeId.xml" />
-    <Content Include="XMLModels\ModelsWithErrors\WrongReference2Property.xml" />
-    <Content Include="XMLModels\ModelsWithErrors\WrongValueRank.xml" />
-    <Content Include="XMLModels\ModelsWithErrors\WrongWriteMask.xml" />
+    <None Include="XMLModels\ModelsWithErrors\WrongBrowseName.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="XMLModels\ModelsWithErrors\WrongDisplayNameLength.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="XMLModels\ModelsWithErrors\WrongEventNotifier.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="XMLModels\ModelsWithErrors\WrongInverseName.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="XMLModels\ModelsWithErrors\WrongNodeId.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="XMLModels\ModelsWithErrors\WrongReference2Property.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="XMLModels\ModelsWithErrors\WrongValueRank.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="XMLModels\ModelsWithErrors\WrongWriteMask.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="XMLModels\CorrectModels\DataTypeTest.csv" />

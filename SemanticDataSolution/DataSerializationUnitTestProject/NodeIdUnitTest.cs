@@ -50,7 +50,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
     {
       NodeId _property = new NodeId(VariableTypes.PropertyType);
       Assert.AreNotSame(_property, VariableTypeIds.PropertyType);
-      Assert.IsFalse(_property == VariableTypeIds.PropertyType); //This class do not support == operator;  consider implementation.
+      Assert.IsTrue(_property == VariableTypeIds.PropertyType);
       Assert.IsTrue(_property.Equals(VariableTypeIds.PropertyType));
     }
     [TestMethod]

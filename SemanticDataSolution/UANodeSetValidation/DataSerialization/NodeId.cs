@@ -428,6 +428,30 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return _ret;
       }
     }
+    /// <summary>
+    /// Returns true if the objects are equal.
+    /// </summary>
+    /// <remarks>
+    /// Returns true if the objects are equal.
+    /// </remarks>
+    public static bool operator ==(NodeId value1, object value2)
+    {
+      if (Object.ReferenceEquals(value1, null))
+        return Object.ReferenceEquals(value2, null);
+      return (value1.CompareTo(value2) == 0);
+    }
+    /// <summary>
+    /// Returns true if the objects are not equal.
+    /// </summary>
+    /// <remarks>
+    /// Returns true if the objects are not equal.
+    /// </remarks>
+    public static bool operator !=(NodeId value1, object value2)
+    {
+      if (Object.ReferenceEquals(value1, null))
+        return !Object.ReferenceEquals(value2, null);
+      return (value1.CompareTo(value2) != 0);
+    }
 
     #region  Format()
     /// <summary>

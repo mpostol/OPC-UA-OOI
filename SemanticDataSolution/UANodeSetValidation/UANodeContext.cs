@@ -215,7 +215,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _ret;
     }
-    public bool IsPropertyVariableType
+    private bool IsPropertyVariableType
     {
       get { return this.NodeIdContext == VariableTypeIds.PropertyType; }
     }

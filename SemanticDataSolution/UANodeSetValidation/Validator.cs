@@ -97,7 +97,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             CreateNode<IExportMethodInstanceFactory, UAMethod>(exportFactory.NewExportNodeFFactory<IExportMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAVariable":
-            if (nodeContext.IsProperty)
+            if (parentReference == null || parentReference.ReferenceKind == ReferenceKindEnum.HasProperty)
               CreateNode<IExportPropertyInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IExportPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, nodeContext, traceEvent), UpdateInstance, traceEvent);
             else
               CreateNode<IExportVariableInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IExportVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, nodeContext, traceEvent), UpdateInstance, traceEvent);
@@ -122,15 +122,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       try
       {
         Update(nodeDesign, nodeSet, nodeContext, traceEvent);
-        Debug.Assert(parentReference != null);
-        if (parentReference == null)
-          traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, "Creating property - wrong reference type"));
-        else
-        {
-          nodeDesign.ReferenceType = parentReference.GetReferenceTypeName(nodeContext.UAModelContext, traceEvent);
-          if (parentReference.ReferenceKind != ReferenceKindEnum.HasProperty)
-            traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, String.Format("Creating Property - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
-        }
+        nodeDesign.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName(nodeContext.UAModelContext, traceEvent);
+        if (!nodeContext.IsProperty)
+          traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, String.Format("Creating Property - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
       }
       catch (Exception _ex)
       {
@@ -142,15 +136,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       try
       {
         Update(nodeDesign, nodeSet, nodeContext, traceEvent);
-        Debug.Assert(parentReference != null);
-        if (parentReference == null)
-          traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, "Creating Variable - wrong reference type"));
-        else
-        {
-          nodeDesign.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName(nodeContext.UAModelContext, traceEvent);
-          if (parentReference.ReferenceKind != ReferenceKindEnum.HasComponent)
-            traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Variable, String.Format("Creating Variable - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
-        }
+        nodeDesign.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName(nodeContext.UAModelContext, traceEvent);
+        if (nodeContext.IsProperty)
+          traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Variable, String.Format("Creating Variable - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
       }
       catch (Exception _ex)
       {

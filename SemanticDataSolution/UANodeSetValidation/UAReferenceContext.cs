@@ -11,11 +11,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 {
 
   /// <summary>
-  /// Class UAReferenceContext.
+  /// Class UAReferenceContext - encapsulates information about a reference
   /// </summary>
   internal class UAReferenceContext
   {
-    //creator
+    #region creator
     internal static UAReferenceContext NewReferenceStub
       (Reference reference, AddressSpaceContext addressSpaceContext, UAModelContext modelContext, UANodeContext parentNode, Action<TraceMessage> traceEvent)
     {
@@ -33,6 +33,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _stb.ReferenceKind = _stb.GetReferenceKind(_stb.TypeNode);
       return _stb;
     }
+    #endregion
 
     #region IReferenceContext
     /// <summary>
@@ -140,13 +141,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #endregion
 
     #region private
-
     //fields
     private bool b_HierarchicalReference;
     private Reference ModelNode;
     private AddressSpaceContext m_Context;
     private ReferenceKindEnum b_ReferenceKindEnum = ReferenceKindEnum.Custom;
-
     //methods
     private ReferenceKindEnum GetReferenceKind(UANodeContext TypeNode)
     {

@@ -19,6 +19,7 @@ namespace UAOOI.SemanticData.UnitTest
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\DeploymentTest.txt");
       Assert.IsTrue(_testDataFileInfo.Exists);
     }
+    private const string m_NameSPace = @"http://commsvr.com/OOIUA/SemanticData/UnitTest/UANodeSetValidationUnitTestProject";
     [TestMethod]
     public void DanglingReferenceTargetTestMethod()
     {
@@ -30,7 +31,7 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(@"http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest");
+      _as.ValidateAndExportModel(m_NameSPace);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
     }
     [TestMethod]
@@ -43,6 +44,8 @@ namespace UAOOI.SemanticData.UnitTest
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSPace);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
     }
     [TestMethod]
@@ -55,6 +58,8 @@ namespace UAOOI.SemanticData.UnitTest
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSPace);
       Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
     }
     [TestMethod]
@@ -67,6 +72,8 @@ namespace UAOOI.SemanticData.UnitTest
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSPace);
       Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
     }
     [TestMethod]
@@ -79,6 +86,8 @@ namespace UAOOI.SemanticData.UnitTest
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSPace);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.IsTrue(_trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0506040000").Any<TraceMessage>());
     }
@@ -92,6 +101,8 @@ namespace UAOOI.SemanticData.UnitTest
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSPace);
       Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual(3, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0503020000").Count<TraceMessage>());
     }
@@ -106,6 +117,8 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSPace);
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.IsTrue(_trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502020000").Any<TraceMessage>());
     }
     [TestMethod]
@@ -118,6 +131,8 @@ namespace UAOOI.SemanticData.UnitTest
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSPace);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.IsTrue(_trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-05020500").Any<TraceMessage>());
     }
@@ -131,6 +146,8 @@ namespace UAOOI.SemanticData.UnitTest
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSPace);
       Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502070000").Count<TraceMessage>());
     }
@@ -144,6 +161,8 @@ namespace UAOOI.SemanticData.UnitTest
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSPace);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P0-0001010000").Count<TraceMessage>());
     }
@@ -155,9 +174,11 @@ namespace UAOOI.SemanticData.UnitTest
       List<TraceMessage> _trace = new List<TraceMessage>();
       int _diagnosticCounter = 0;
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSPace);
+      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P6-0503011400").Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P6-0F03000000").Count<TraceMessage>());
     }
@@ -171,6 +192,8 @@ namespace UAOOI.SemanticData.UnitTest
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSPace);
       Assert.AreEqual<int>(4, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(4, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502020001").Count<TraceMessage>());
     }

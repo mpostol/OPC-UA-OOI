@@ -71,7 +71,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         TraceMessage _traceMessage = TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, "Compilation Error at CreateNodeDesign");
         traceEvent(_traceMessage);
-        CreateModelDesignStub(); //TODO must be implemented
+        CreateModelDesignStub(exportFactory);
       }
       else
       {
@@ -112,7 +112,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
 
-    //private
+    #region private
     private static void Update(IExportObjectInstanceFactory nodeDesign, UAObject nodeSet, Action<TraceMessage> traceEvent)
     {
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(x => nodeDesign.SupportsEventsSpecified = x, traceEvent);
@@ -161,14 +161,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(x => nodeDesign.AccessLevelSpecified = x, traceEvent);
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(String.Empty);
-      nodeDesign.DataType = nodeContext.ExportNodeId(nodeSet.DataType, DataTypes.Number, traceEvent);//TODO add testcase must be DataType, must not be abstract
-      nodeDesign.DefaultValue = nodeSet.Value; //TODO add testcase must be of type defined by DataType
+      nodeDesign.DataType = nodeContext.ExportNodeId(nodeSet.DataType, DataTypes.Number, traceEvent);//TODO add test case must be DataType, must not be abstract
+      nodeDesign.DefaultValue = nodeSet.Value; //TODO add test case must be of type defined by DataType
       nodeDesign.Historizing = nodeSet.Historizing.Export<bool>(false, x => nodeDesign.HistorizingSpecified = x);
       nodeDesign.MinimumSamplingInterval = Convert.ToInt32(nodeSet.MinimumSamplingInterval.Export<double>(0D, x => nodeDesign.MinimumSamplingIntervalSpecified = x));
       nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(x => nodeDesign.ValueRankSpecified = x, traceEvent);
       if (nodeSet.Translation != null)
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "- the Translation element for the UAVariable"));
-      nodeSet.UserAccessLevel = nodeSet.AccessLevel.GetAccessLevel(x => nodeDesign.AccessLevelSpecified = x, traceEvent);
     }
     private static void Update(IExportVariableTypeFactory nodeDesign, UAVariableType nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
@@ -205,7 +204,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongInverseName, String.Format("If ReferenceType {0} is not symmetric and not abstract the InverseName shall be specified.", nodeSet.NodeIdentifier())));
     }
     private static void Update(IExportObjectTypeFactory nodeDesign, UAObjectType nodeSet) { }
-    //Validation
     private static FactoryType CreateNode<FactoryType, NodeSetType>
       (
         Func<FactoryType> createNode,
@@ -252,19 +250,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       //that a tight coupling exists between the Node and its parent (e.g. when the parent is deleted the child is deleted 
       //as well). This information does not appear in the AddressSpace and is intended for use by design tools.
     }
-    //TODO creation of stub should depend on the reference type.
-    private static IExportNodeFactory CreateModelDesignStub()
+    private static void CreateModelDesignStub(IExportNodeContainer factory)
     {
-      //BuildError _err = BuildError.DanglingReferenceTarget;
-      //return new IExportPropertyInstanceFactory()
-      //  {
-      //    BrowseName = _err.Focus.ToString(),
-      //    Description = new OldModel.LocalizedText() { Value = _err.Descriptor, Key = "en-en" },
-      //    DisplayName = new OldModel.LocalizedText() { Value = "ERROR", Key = "en-en" },
-      //    PartNo = 3,
-      //  };
-      throw new NotImplementedException("CreateModelDesignStub");
+      BuildError _err = BuildError.DanglingReferenceTarget;
+      IExportPropertyInstanceFactory _pr = factory.NewExportNodeFFactory<IExportPropertyInstanceFactory>();
+      _pr.BrowseName = string.Format("{0}: #{1}", _err.Focus.ToString(), m_ErrorNumber++);
+      _pr.AddDescription("en-en", _err.Descriptor);
+      _pr.AddDisplayName("en-en", "ERROR");
     }
+    private static int m_ErrorNumber = 0;
+    #endregion
 
   }
 }

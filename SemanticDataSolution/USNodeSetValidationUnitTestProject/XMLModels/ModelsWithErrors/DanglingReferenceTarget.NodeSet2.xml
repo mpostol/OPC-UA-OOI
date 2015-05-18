@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" LastModified="2015-03-26T12:16:49.8035571Z" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
   <NamespaceUris>
-    <Uri>http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest</Uri>
+    <Uri>http://commsvr.com/OOIUA/SemanticData/UnitTest/UANodeSetValidationUnitTestProject</Uri>
   </NamespaceUris>
   <Aliases>
     <Alias Alias="Boolean">i=1</Alias>

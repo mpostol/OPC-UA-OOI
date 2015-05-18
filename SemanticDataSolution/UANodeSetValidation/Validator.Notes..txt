@@ -1,0 +1,19 @@
+﻿Test Name:	WrongValueRankTestMethod
+Test Outcome:	Failed
+Result Message:	Assert.AreEqual failed. Expected:<2>. Actual:<3>.
+Result StandardOutput:	
+Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information Entering AddressSpaceContext creator - starting address space validation.
+Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information AddressSpaceContext - uploading the OPC UA defined types.
+Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information AddressSpaceContext - has bee created successfully.
+Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information Entering AddressSpaceContextService.ImportUANodeSet - importing form file
+Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information Entering AddressSpaceContext.ImportNodeSet - starting import http://commsvr.com/OOIUA/SemanticData/UnitTest/UANodeSetValidationUnitTestProject.
+Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information AddressSpaceContext.ImportNodeSet - context for imported model is created and starting import nodes.
+Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information Finishing AddressSpaceContext.ImportNodeSet - imported 4 nodes.
+Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information Entering AddressSpaceContext.CreateModelDesign - starting creation of the ModelDesign for the address space.
+Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information AddressSpaceContext.CreateModelDesign - selected 3 nodes to be added to the model.
+Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information Entering ModelDesignFactory.CreateModelDesign - starting creation of the ModelDesign for 3 nodes.
+Trace: Information, Error Focus:NodeClass, ErrorID: P3-0506020000 Info: ValueRank value is out of range. The value -4 is not supported
+Trace: Information, Error Focus:Reference, ErrorID: P3-??? Info: Wrong Reference type targeting the Variable component. Creating Variable - wrong reference type HasProperty
+Trace: Information, Error Focus:NodeClass, ErrorID: P3-0506020000 Info: ValueRank value is out of range. The value -4 is not supported
+Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information Finishing ModelDesignFactory.CreateModelDesign - created the ModelDesign containing 3 nodes and 3 errors.
+

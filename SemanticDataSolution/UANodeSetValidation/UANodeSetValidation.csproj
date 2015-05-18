@@ -118,6 +118,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Validator.Notes..txt" />
     <Content Include="XML\BuildErrorsCollection.xml" />
     <EmbeddedResource Include="XML\Opc.Ua.NodeSet2.xml" />
   </ItemGroup>

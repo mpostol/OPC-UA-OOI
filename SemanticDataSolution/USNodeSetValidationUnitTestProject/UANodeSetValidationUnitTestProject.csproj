@@ -113,7 +113,9 @@
     <None Include="XMLModels\ModelsWithErrors\NotSupportedFeature.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="XMLModels\ModelsWithErrors\WrongAccessLevel.xml" />
+    <None Include="XMLModels\ModelsWithErrors\WrongAccessLevel.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="XMLModels\ModelsWithErrors\WrongBrowseName.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

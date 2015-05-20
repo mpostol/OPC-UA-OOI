@@ -2,7 +2,7 @@
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
 
-  public interface IExportViewInstanceFactory : IExportInstanceFactory
+  public interface IViewInstanceFactory : IInstanceFactory
   {
 
     bool SupportsEvents

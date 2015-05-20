@@ -1,7 +1,7 @@
 ﻿
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class ObjectInstanceFactoryBase : InstanceFactoryBase, IExportObjectInstanceFactory
+  internal class ObjectInstanceFactoryBase : InstanceFactoryBase, IObjectInstanceFactory
   {
 
     public bool SupportsEvents

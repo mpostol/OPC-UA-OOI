@@ -7,7 +7,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// Interface IExportDataTypeFieldFactory - The=is interface defines an abstract representation of a field within a 
   /// UADataType that can be used by design tools to automatically create serialization code.
   /// </summary>
-  public interface IExportDataTypeFieldFactory
+  public interface IDataTypeFieldFactory
   {
     XmlQualifiedName DataType
     {
@@ -30,13 +30,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       set;
     }
-    /// <summary>The field is a structure with a layout specified by the <see cref="IExportDataTypeDefinitionFactory"/>. 
+    /// <summary>The field is a structure with a layout specified by the <see cref="IDataTypeDefinitionFactory"/>. 
     /// This field is optional.
     /// This field allows designers to create nested structures without defining a new DataType Node for each structure.
     /// This field is not specified for subtypes of Enumeration.
     /// </summary>
     /// <value>The definition.</value>
-    IExportDataTypeDefinitionFactory NewDefinition();
+    IDataTypeDefinitionFactory NewDefinition();
     /// <summary>
     /// The value associated with the field. This field is only specified for subtypes of Enumeration.
     /// </summary>

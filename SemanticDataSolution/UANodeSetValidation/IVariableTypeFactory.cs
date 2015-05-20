@@ -1,14 +1,15 @@
-﻿
+﻿using System.Xml;
+
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  public interface IExportVariableTypeFactory : IExportTypeFactory
+  public interface IVariableTypeFactory : ITypeFactory
   {
-    System.Xml.XmlElement DefaultValue
+
+    XmlElement DefaultValue
     {
       set;
     }
-
-    System.Xml.XmlQualifiedName DataType
+    XmlQualifiedName DataType
     {
       set;
     }

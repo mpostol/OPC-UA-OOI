@@ -5,7 +5,9 @@ using System.Text;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  public interface IExportPropertyInstanceFactory: IExportVariableInstanceFactory
+  public interface INodeContainer
   {
+    NodeFactory NewExportNodeFFactory<NodeFactory>()
+      where NodeFactory : INodeFactory;
   }
 }

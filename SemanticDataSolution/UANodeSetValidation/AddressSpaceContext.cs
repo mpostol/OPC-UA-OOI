@@ -48,7 +48,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <value>The information model factory.</value>
     /// <remarks>It is defined to handle dependency injection.</remarks>
-    public IExportModelFactory InformationModelFactory
+    public IModelFactory InformationModelFactory
     {
       set
       {
@@ -193,7 +193,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
     //vars
-    private IExportModelFactory m_InformationModelFactory = new InformationModelFactoryBase();
+    private IModelFactory m_InformationModelFactory = new InformationModelFactoryBase();
     private Dictionary<string, UAReferenceContext> m_References = new Dictionary<string, UAReferenceContext>();
     private NamespaceTable m_NamespaceTable = null;
     private Dictionary<string, UANodeContext> m_NodesDictionary = new Dictionary<string, UANodeContext>();

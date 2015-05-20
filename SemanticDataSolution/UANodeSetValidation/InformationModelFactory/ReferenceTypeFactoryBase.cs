@@ -1,7 +1,7 @@
 ﻿
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class ReferenceTypeFactoryBase : TypeFactoryBase, IExportReferenceTypeFactory
+  internal class ReferenceTypeFactoryBase : TypeFactoryBase, IReferenceTypeFactory
   {
 
     public bool Symmetric

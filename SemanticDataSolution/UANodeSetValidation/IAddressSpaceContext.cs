@@ -28,7 +28,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <remarks>It is defined to handle dependency injection.</remarks>
     /// <value>The information model factory.</value>
-    IExportModelFactory InformationModelFactory { set; }
+    IModelFactory InformationModelFactory { set; }
     /// <summary>
     /// Validates and exports the selected model.
     /// </summary>

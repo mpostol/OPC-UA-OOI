@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 

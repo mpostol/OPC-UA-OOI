@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class TypeFactoryBase : NodeFactoryBase, IExportTypeFactory
+  internal class TypeFactoryBase : NodeFactoryBase, ITypeFactory
   {
 
     public XmlQualifiedName BaseType

@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class ReferenceFactoryBase : IExportReferenceFactory
+  internal class ReferenceFactoryBase : IReferenceFactory
   {
 
     public XmlQualifiedName ReferenceType

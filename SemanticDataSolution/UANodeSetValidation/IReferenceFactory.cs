@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  public interface IExportReferenceFactory
+  public interface IReferenceFactory
   {
     
     XmlQualifiedName ReferenceType

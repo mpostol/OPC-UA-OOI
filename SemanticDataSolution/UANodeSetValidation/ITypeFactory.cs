@@ -1,10 +1,12 @@
 ﻿
+using System.Xml;
+
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  public interface IExportTypeFactory : IExportNodeFactory
+  public interface ITypeFactory : INodeFactory
   {
 
-    System.Xml.XmlQualifiedName BaseType { set; }
+    XmlQualifiedName BaseType { set; }
     /// <summary>
     /// Sets a value indicating whether this instance is abstract.
     /// </summary>

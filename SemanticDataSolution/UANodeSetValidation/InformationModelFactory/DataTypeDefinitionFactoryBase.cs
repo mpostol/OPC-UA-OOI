@@ -3,9 +3,9 @@ using System.Xml;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class DataTypeDefinitionFactoryBase: IExportDataTypeDefinitionFactory
+  internal class DataTypeDefinitionFactoryBase: IDataTypeDefinitionFactory
   {
-    public IExportDataTypeFieldFactory NewField()
+    public IDataTypeFieldFactory NewField()
     {
       return new DataTypeFieldFactoryBase();
     }

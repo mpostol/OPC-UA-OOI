@@ -1,7 +1,7 @@
 ﻿
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class ObjectTypeFactoryBase : TypeFactoryBase, IExportObjectTypeFactory
+  internal class ObjectTypeFactoryBase : TypeFactoryBase, IObjectTypeFactory
   {
 
   }

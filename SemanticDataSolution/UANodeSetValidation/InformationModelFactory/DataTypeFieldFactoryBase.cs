@@ -3,7 +3,7 @@
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
 
-  internal class DataTypeFieldFactoryBase : IExportDataTypeFieldFactory
+  internal class DataTypeFieldFactoryBase : IDataTypeFieldFactory
   {
 
     public XmlQualifiedName DataType
@@ -27,7 +27,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       set { }
     }
-    public IExportDataTypeDefinitionFactory NewDefinition()
+    public IDataTypeDefinitionFactory NewDefinition()
     {
       return new DataTypeDefinitionFactoryBase();
     }

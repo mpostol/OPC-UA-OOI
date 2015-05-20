@@ -21,55 +21,55 @@ namespace UAOOI.SemanticData.UnitTest
     [TestMethod]
     public void InformationModelFactoryIExportReferenceTypeFactoryTestMethod()
     {
-      IExportReferenceTypeFactory _new = m_FactoryBase.NewExportNodeFFactory<IExportReferenceTypeFactory>();
+      IReferenceTypeFactory _new = m_FactoryBase.NewExportNodeFFactory<IReferenceTypeFactory>();
       Assert.IsNotNull(_new);
     }
     [TestMethod]
     public void InformationModelFactoryIExportObjectTypeFactoryTestMethod2()
     {
-      IExportObjectTypeFactory _new = m_FactoryBase.NewExportNodeFFactory<IExportObjectTypeFactory>();
+      IObjectTypeFactory _new = m_FactoryBase.NewExportNodeFFactory<IObjectTypeFactory>();
       Assert.IsNotNull(_new);
     }
     [TestMethod]
     public void InformationModelFactoryIExportVariableTypeFactoryTestMethod2()
     {
-      IExportVariableTypeFactory _new = m_FactoryBase.NewExportNodeFFactory<IExportVariableTypeFactory>();
+      IVariableTypeFactory _new = m_FactoryBase.NewExportNodeFFactory<IVariableTypeFactory>();
       Assert.IsNotNull(_new);
     }
     [TestMethod]
     public void InformationModelIExportDataTypeFactoryFactoryTestMethod2()
     {
-      IExportDataTypeFactory _new = m_FactoryBase.NewExportNodeFFactory<IExportDataTypeFactory>();
+      IDataTypeFactory _new = m_FactoryBase.NewExportNodeFFactory<IDataTypeFactory>();
       Assert.IsNotNull(_new);
     }
     [TestMethod]
     public void InformationModelFactoryIExportObjectInstanceFactoryTestMethod2()
     {
-      IExportObjectInstanceFactory _new = m_FactoryBase.NewExportNodeFFactory<IExportObjectInstanceFactory>();
+      IObjectInstanceFactory _new = m_FactoryBase.NewExportNodeFFactory<IObjectInstanceFactory>();
       Assert.IsNotNull(_new);
     }
     [TestMethod]
     public void InformationModelFactoryIExportPropertyInstanceFactoryTestMethod2()
     {
-      IExportPropertyInstanceFactory _new = m_FactoryBase.NewExportNodeFFactory<IExportPropertyInstanceFactory>();
+      IPropertyInstanceFactory _new = m_FactoryBase.NewExportNodeFFactory<IPropertyInstanceFactory>();
       Assert.IsNotNull(_new);
     }
     [TestMethod]
     public void InformationModelFactoryIExportVariableInstanceFactoryTestMethod2()
     {
-      IExportVariableInstanceFactory _new = m_FactoryBase.NewExportNodeFFactory<IExportVariableInstanceFactory>();
+      IVariableInstanceFactory _new = m_FactoryBase.NewExportNodeFFactory<IVariableInstanceFactory>();
       Assert.IsNotNull(_new);
     }
     [TestMethod]
     public void InformationModelFactoryIExportMethodInstanceFactoryTestMethod2()
     {
-      IExportMethodInstanceFactory _new = m_FactoryBase.NewExportNodeFFactory<IExportMethodInstanceFactory>();
+      IMethodInstanceFactory _new = m_FactoryBase.NewExportNodeFFactory<IMethodInstanceFactory>();
       Assert.IsNotNull(_new);
     }
     [TestMethod]
     public void InformationModelFactoryIExportViewInstanceFactoryTestMethod2()
     {
-      IExportViewInstanceFactory _new = m_FactoryBase.NewExportNodeFFactory<IExportViewInstanceFactory>();
+      IViewInstanceFactory _new = m_FactoryBase.NewExportNodeFFactory<IViewInstanceFactory>();
       Assert.IsNotNull(_new);
     }
 

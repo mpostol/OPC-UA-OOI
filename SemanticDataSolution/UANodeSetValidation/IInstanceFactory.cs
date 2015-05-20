@@ -4,7 +4,7 @@ using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  public interface IExportInstanceFactory : IExportNodeFactory
+  public interface IInstanceFactory : INodeFactory
   {
 
     ModelingRules? ModelingRule

@@ -56,7 +56,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="nodeContainer">The node container.</param>
     /// <param name="traceEvent">A delegate action to report and error and trace processing progress.</param>
-    internal void CalculateNodeReferences(IExportNodeFactory nodeContainer, Action<TraceMessage> traceEvent)
+    internal void CalculateNodeReferences(INodeFactory nodeContainer, Action<TraceMessage> traceEvent)
     {
       Errors = new List<BuildError>();
       m_ModelingRule = new Nullable<ModelingRules>();
@@ -76,7 +76,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               Errors.Add(_err);
             }
             _references.Add(_rfx);
-            IExportReferenceFactory _or = nodeContainer.NewReference();
+            IReferenceFactory _or = nodeContainer.NewReference();
             _or.IsInverse = !_rfx.Reference.IsForward;
             _or.ReferenceType = _ReferenceType;
             _or.TargetId = _rfx.BrowsePath(x => { Errors.Add(x); traceEvent(TraceMessage.BuildErrorTraceMessage(x, "Compilation error")); });

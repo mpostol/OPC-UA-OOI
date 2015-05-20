@@ -1,8 +1,10 @@
 ﻿
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  public interface IExportMethodInstanceFactory : IExportInstanceFactory
+  
+  public interface IMethodInstanceFactory : IInstanceFactory
   {
+    
     bool NonExecutable
     {
       set;

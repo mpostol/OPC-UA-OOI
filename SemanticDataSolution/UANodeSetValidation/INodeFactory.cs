@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  public interface IExportNodeFactory : IExportNodeContainer
+  public interface INodeFactory : INodeContainer
   {
     string BrowseName
     {
@@ -11,7 +11,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     void AddDescription(string localeField, string valueField);
     void AddDisplayName(string localeField, string valueField);
-    IExportReferenceFactory NewReference();
+    IReferenceFactory NewReference();
     XmlQualifiedName SymbolicName
     {
       set;

@@ -2,14 +2,14 @@
 using System.Xml;
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class NodeFactoryBase : NodesContainer, IExportNodeFactory
+  internal class NodeFactoryBase : NodesContainer, INodeFactory
   {
 
     public string BrowseName
     {
       set { }
     }
-    public IExportReferenceFactory NewReference()
+    public IReferenceFactory NewReference()
     {
       return new ReferenceFactoryBase();
     }

@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="exportModelFactory">The model export factory.</param>
     /// <param name="addressSpaceContext">The Address Space context.</param>
     /// <param name="traceEvent">The trace event method encapsulation.</param>
-    internal static void ValidateExportModel(IEnumerable<UANodeContext> nodesCollection, IExportModelFactory exportModelFactory, AddressSpaceContext addressSpaceContext, Action<TraceMessage> traceEvent)
+    internal static void ValidateExportModel(IEnumerable<UANodeContext> nodesCollection, IModelFactory exportModelFactory, AddressSpaceContext addressSpaceContext, Action<TraceMessage> traceEvent)
     {
       traceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Entering ModelDesignFactory.CreateModelDesign - starting creation of the ModelDesign for {0} nodes.", nodesCollection.Count<UANodeContext>())));
       List<BuildError> _errors = new List<BuildError>(); //TODO should be added to the model;
@@ -57,14 +57,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       traceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
     }
     /// <summary>
-    /// Validates <paramref name="nodeContext"/> and exports it using an object od <see cref="IExportModelFactory"/>.
+    /// Validates <paramref name="nodeContext"/> and exports it using an object od <see cref="IModelFactory"/>.
     /// </summary>
     /// <param name="nodeContext">The node context to be validated and exported.</param>
     /// <param name="exportFactory">A model export factory.</param>
     /// <param name="parentReference">The reference to parent node.</param>
     /// <param name="traceEvent">The trace event.</param>
-    /// <returns>An object of <see cref="IExportNodeFactory"/>.</returns>
-    internal static void ValidateExportNode(UANodeContext nodeContext, IExportNodeContainer exportFactory, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
+    /// <returns>An object of <see cref="INodeFactory"/>.</returns>
+    internal static void ValidateExportNode(UANodeContext nodeContext, INodeContainer exportFactory, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
       Debug.Assert(nodeContext != null, "UANodeSetFactory.CreateNodeDesign the argument nodeContext is null.");
       if (nodeContext.UANode == null)
@@ -79,31 +79,31 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         switch (nodeType)
         {
           case "UAReferenceType":
-            CreateNode<IExportReferenceTypeFactory, UAReferenceType>(exportFactory.NewExportNodeFFactory<IExportReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateType, traceEvent);
+            CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.NewExportNodeFFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateType, traceEvent);
             break;
           case "UADataType":
-            CreateNode<IExportDataTypeFactory, UADataType>(exportFactory.NewExportNodeFFactory<IExportDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext.UAModelContext, traceEvent), UpdateType, traceEvent);
+            CreateNode<IDataTypeFactory, UADataType>(exportFactory.NewExportNodeFFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext.UAModelContext, traceEvent), UpdateType, traceEvent);
             break;
           case "UAVariableType":
-            CreateNode<IExportVariableTypeFactory, UAVariableType>(exportFactory.NewExportNodeFFactory<IExportVariableTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
+            CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.NewExportNodeFFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
             break;
           case "UAObjectType":
-            CreateNode<IExportObjectTypeFactory, UAObjectType>(exportFactory.NewExportNodeFFactory<IExportObjectTypeFactory>, nodeContext, Update, UpdateType, traceEvent);
+            CreateNode<IObjectTypeFactory, UAObjectType>(exportFactory.NewExportNodeFFactory<IObjectTypeFactory>, nodeContext, Update, UpdateType, traceEvent);
             break;
           case "UAView":
-            CreateNode<IExportViewInstanceFactory, UAView>(exportFactory.NewExportNodeFFactory<IExportViewInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
+            CreateNode<IViewInstanceFactory, UAView>(exportFactory.NewExportNodeFFactory<IViewInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAMethod":
-            CreateNode<IExportMethodInstanceFactory, UAMethod>(exportFactory.NewExportNodeFFactory<IExportMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, traceEvent), UpdateInstance, traceEvent);
+            CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.NewExportNodeFFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAVariable":
             if (parentReference == null || parentReference.ReferenceKind == ReferenceKindEnum.HasProperty)
-              CreateNode<IExportPropertyInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IExportPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, nodeContext, traceEvent), UpdateInstance, traceEvent);
+              CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, nodeContext, traceEvent), UpdateInstance, traceEvent);
             else
-              CreateNode<IExportVariableInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IExportVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, nodeContext, traceEvent), UpdateInstance, traceEvent);
+              CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, nodeContext, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAObject":
-            CreateNode<IExportObjectInstanceFactory, UAObject>(exportFactory.NewExportNodeFFactory<IExportObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
+            CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.NewExportNodeFFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
             break;
           default:
             Debug.Assert(false, "Wrong node type");
@@ -113,11 +113,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     #region private
-    private static void Update(IExportObjectInstanceFactory nodeDesign, UAObject nodeSet, Action<TraceMessage> traceEvent)
+    private static void Update(IObjectInstanceFactory nodeDesign, UAObject nodeSet, Action<TraceMessage> traceEvent)
     {
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(x => nodeDesign.SupportsEventsSpecified = x, traceEvent);
     }
-    private static void Update(IExportPropertyInstanceFactory nodeDesign, UAVariable nodeSet, UAReferenceContext parentReference, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
+    private static void Update(IPropertyInstanceFactory nodeDesign, UAVariable nodeSet, UAReferenceContext parentReference, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
       try
       {
@@ -131,7 +131,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, String.Format("Cannot resolve the reference for Property because of error {0} at: {1}.", _ex, _ex.StackTrace)));
       }
     }
-    private static void Update(IExportVariableInstanceFactory nodeDesign, UAVariable nodeSet, UAReferenceContext parentReference, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
+    private static void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet, UAReferenceContext parentReference, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
       try
       {
@@ -145,7 +145,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, String.Format("Cannot resolve the reference for Variable because of error {0} at: {1}.", _ex, _ex.StackTrace)));
       }
     }
-    private static void Update(IExportVariableInstanceFactory nodeDesign, UAVariable nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
+    private static void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
       nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(x => nodeDesign.AccessLevelSpecified = x, traceEvent);
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(String.Empty);
@@ -157,29 +157,29 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (nodeSet.Translation != null)
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "- the Translation element for the UAVariable"));
     }
-    private static void Update(IExportVariableTypeFactory nodeDesign, UAVariableType nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
+    private static void Update(IVariableTypeFactory nodeDesign, UAVariableType nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(String.Empty);
       nodeDesign.DataType = nodeContext.ExportNodeId(nodeSet.DataType, DataTypes.Number, traceEvent);
       nodeDesign.DefaultValue = nodeSet.Value;
       nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(x => nodeDesign.ValueRankSpecified = x, traceEvent);
     }
-    private static void Update(IExportMethodInstanceFactory nodeDesign, UAMethod nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
+    private static void Update(IMethodInstanceFactory nodeDesign, UAMethod nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
       //TODO add test case validate parentReference
       nodeDesign.NonExecutable = !nodeContext.Executable;
       nodeDesign.NonExecutableSpecified = !nodeContext.Executable;
     }
-    private static void Update(IExportViewInstanceFactory nodeDesign, UAView nodeSet, Action<TraceMessage> traceEvent)
+    private static void Update(IViewInstanceFactory nodeDesign, UAView nodeSet, Action<TraceMessage> traceEvent)
     {
       nodeDesign.ContainsNoLoops = nodeSet.ContainsNoLoops;//TODO add test case against the loops in the model.
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(x => { }, traceEvent);
     }
-    private static void Update(IExportDataTypeFactory nodeDesign, UADataType nodeSet, UAModelContext modelContext, Action<TraceMessage> traceEvent)
+    private static void Update(IDataTypeFactory nodeDesign, UADataType nodeSet, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), modelContext, traceEvent);
     }
-    private static void Update(IExportReferenceTypeFactory nodeDesign, UAReferenceType nodeSet, Action<TraceMessage> traceEvent)
+    private static void Update(IReferenceTypeFactory nodeDesign, UAReferenceType nodeSet, Action<TraceMessage> traceEvent)
     {
       nodeSet.InverseName.ExportLocalizedTextArray(nodeDesign.AddInverseName);
       nodeDesign.Symmetric = nodeSet.Symmetric;
@@ -191,7 +191,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       else if (!nodeSet.Symmetric && !nodeSet.IsAbstract && (nodeSet.InverseName == null || !nodeSet.InverseName.Where(x => !String.IsNullOrEmpty(x.Value)).Any()))
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongInverseName, String.Format("If ReferenceType {0} is not symmetric and not abstract the InverseName shall be specified.", nodeSet.NodeIdentifier())));
     }
-    private static void Update(IExportObjectTypeFactory nodeDesign, UAObjectType nodeSet) { }
+    private static void Update(IObjectTypeFactory nodeDesign, UAObjectType nodeSet) { }
     private static FactoryType CreateNode<FactoryType, NodeSetType>
       (
         Func<FactoryType> createNode,
@@ -200,7 +200,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Action<FactoryType, NodeSetType, UANodeContext, Action<TraceMessage>> updateBase,
         Action<TraceMessage> traceEvent
       )
-      where FactoryType : IExportNodeFactory
+      where FactoryType : INodeFactory
       where NodeSetType : UANode
     {
       FactoryType _nodeFactory = createNode();
@@ -225,12 +225,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       updateNode(_nodeFactory, _nodeSet);
       return _nodeFactory;
     }
-    private static void UpdateType(IExportTypeFactory nodeDesign, UAType nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
+    private static void UpdateType(ITypeFactory nodeDesign, UAType nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
       nodeDesign.BaseType = nodeContext.BaseType(traceEvent);
       nodeDesign.IsAbstract = nodeSet.IsAbstract;
     }
-    private static void UpdateInstance(IExportInstanceFactory nodeDesign, UAInstance nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
+    private static void UpdateInstance(IInstanceFactory nodeDesign, UAInstance nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
       nodeDesign.ModelingRule = nodeContext.ModelingRule;
       nodeDesign.TypeDefinition = nodeContext.BaseType(traceEvent);
@@ -238,10 +238,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       //that a tight coupling exists between the Node and its parent (e.g. when the parent is deleted the child is deleted 
       //as well). This information does not appear in the AddressSpace and is intended for use by design tools.
     }
-    private static void CreateModelDesignStub(IExportNodeContainer factory)
+    private static void CreateModelDesignStub(INodeContainer factory)
     {
       BuildError _err = BuildError.DanglingReferenceTarget;
-      IExportPropertyInstanceFactory _pr = factory.NewExportNodeFFactory<IExportPropertyInstanceFactory>();
+      IPropertyInstanceFactory _pr = factory.NewExportNodeFFactory<IPropertyInstanceFactory>();
       _pr.BrowseName = string.Format("{0}: #{1}", _err.Focus.ToString(), m_ErrorNumber++);
       _pr.AddDescription("en-en", _err.Descriptor);
       _pr.AddDisplayName("en-en", "ERROR");

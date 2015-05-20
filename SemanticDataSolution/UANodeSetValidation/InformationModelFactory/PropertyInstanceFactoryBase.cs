@@ -1,7 +1,7 @@
 ﻿
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class PropertyInstanceFactoryBase: InstanceFactoryBase, IExportPropertyInstanceFactory
+  internal class PropertyInstanceFactoryBase: InstanceFactoryBase, IPropertyInstanceFactory
   {
     public byte AccessLevel
     {

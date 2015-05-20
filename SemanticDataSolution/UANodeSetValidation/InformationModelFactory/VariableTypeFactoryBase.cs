@@ -2,7 +2,7 @@
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class VariableTypeFactoryBase : TypeFactoryBase, IExportVariableTypeFactory
+  internal class VariableTypeFactoryBase : TypeFactoryBase, IVariableTypeFactory
   {
 
     public System.Xml.XmlElement DefaultValue

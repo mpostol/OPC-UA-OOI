@@ -1,7 +1,7 @@
 ﻿
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class InstanceFactoryBase: NodeFactoryBase, IExportInstanceFactory
+  internal class InstanceFactoryBase: NodeFactoryBase, IInstanceFactory
   {
     public UAInformationModel.ModelingRules? ModelingRule
     {

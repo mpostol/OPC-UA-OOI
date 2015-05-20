@@ -1,14 +1,10 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
-using System.Xml.Serialization;
-using UAOOI.SemanticData.UANodeSetValidation.XML;
+using System.Security.Permissions;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
-using System.Security.Permissions;
+using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -67,14 +63,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return "Empty LocalizedText";
       return String.Format("{0}:{1}", localizedText[0].Locale, localizedText[0].Value);
     }
-    internal static void GetParameters(this DataTypeDefinition dataTypeDefinition, IExportDataTypeDefinitionFactory _definition, UAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal static void GetParameters(this DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory _definition, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       if (dataTypeDefinition == null || dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
         return;
       foreach (DataTypeField _item in dataTypeDefinition.Field)
       {
         bool _ValueRankSpecified;
-        IExportDataTypeFieldFactory _nP = _definition.NewField();
+        IDataTypeFieldFactory _nP = _definition.NewField();
         _nP.DataType = modelContext.ExportNodeId(_item.DataType, DataTypes.BaseDataType, traceEvent);
         _item.Description.ExportLocalizedTextArray(_nP.AddDescription);
         _nP.Identifier = _item.Value;

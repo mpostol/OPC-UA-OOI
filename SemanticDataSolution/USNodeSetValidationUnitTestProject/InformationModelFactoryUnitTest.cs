@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation;
 using UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory;
 

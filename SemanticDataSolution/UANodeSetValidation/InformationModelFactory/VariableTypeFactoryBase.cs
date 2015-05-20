@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using System;
+using UAOOI.SemanticData.InformationModelFactory;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
@@ -25,5 +27,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       set { }
     }
+
   }
 }

@@ -1,11 +1,13 @@
 ﻿
+using UAOOI.SemanticData.InformationModelFactory;
+
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class InstanceFactoryBase: NodeFactoryBase, IInstanceFactory
+  internal class InstanceFactoryBase : NodeFactoryBase, IInstanceFactory
   {
-    public UAInformationModel.ModelingRules? ModelingRule
+    public ModelingRules? ModelingRule
     {
-      set {  }
+      set { }
     }
     public System.Xml.XmlQualifiedName TypeDefinition
     {
@@ -13,7 +15,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     }
     public System.Xml.XmlQualifiedName ReferenceType
     {
-      set {  }
+      set { }
     }
   }
 }

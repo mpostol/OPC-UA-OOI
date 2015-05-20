@@ -1,8 +1,7 @@
 ﻿
 using System.Xml;
-using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.InformationModelFactory
 {
   public interface IInstanceFactory : INodeFactory
   {

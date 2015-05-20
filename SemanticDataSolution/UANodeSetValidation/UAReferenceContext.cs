@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
+using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
@@ -15,6 +16,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// </summary>
   internal class UAReferenceContext
   {
+
     #region creator
     internal static UAReferenceContext NewReferenceStub
       (Reference reference, AddressSpaceContext addressSpaceContext, UAModelContext modelContext, UANodeContext parentNode, Action<TraceMessage> traceEvent)

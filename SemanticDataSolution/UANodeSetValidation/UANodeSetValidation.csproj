@@ -53,22 +53,6 @@
     <Compile Include="DataSerialization\QualifiedName.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="IAddressSpaceContext.cs" />
-    <Compile Include="IDataTypeDefinitionFactory.cs" />
-    <Compile Include="IDataTypeFactory.cs" />
-    <Compile Include="IDataTypeFieldFactory.cs" />
-    <Compile Include="IInstanceFactory.cs" />
-    <Compile Include="IMethodInstanceFactory.cs" />
-    <Compile Include="INodeContainer.cs" />
-    <Compile Include="INodeFactory.cs" />
-    <Compile Include="IObjectInstanceFactory.cs" />
-    <Compile Include="IObjectTypeFactory.cs" />
-    <Compile Include="IPropertyInstanceFactory.cs" />
-    <Compile Include="IReferenceFactory.cs" />
-    <Compile Include="IReferenceTypeFactory.cs" />
-    <Compile Include="ITypeFactory.cs" />
-    <Compile Include="IVariableInstanceFactory.cs" />
-    <Compile Include="IVariableTypeFactory.cs" />
-    <Compile Include="IViewInstanceFactory.cs" />
     <Compile Include="InformationModelFactory\DataTypeDefinitionFactoryBase.cs" />
     <Compile Include="InformationModelFactory\DataTypeFactoryBase.cs" />
     <Compile Include="InformationModelFactory\DataTypeFieldFactoryBase.cs" />
@@ -88,12 +72,10 @@
     <Compile Include="InformationModelFactory\ViewInstanceFactoryBase.cs" />
     <Compile Include="ReferenceKindEnum.cs" />
     <Compile Include="Validator.cs" />
-    <Compile Include="IModelFactory.cs" />
     <Compile Include="Namespaces.cs" />
     <Compile Include="TraceMessage.cs" />
     <Compile Include="DataSerialization\NodeId.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UAInformationModel\ModelingRules.cs" />
     <Compile Include="UAInformationModel\Opc.Ua.Constants.cs" />
     <Compile Include="UAModelContext.cs" />
     <Compile Include="ServiceResultException.cs" />
@@ -125,7 +107,12 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\InformationModelFactory\InformationModelFactory.csproj">
+      <Project>{6d20785d-0451-46a9-9ac2-ec66b7c0d18a}</Project>
+      <Name>InformationModelFactory</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

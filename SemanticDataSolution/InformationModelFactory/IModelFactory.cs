@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.InformationModelFactory
 {
   public delegate void LocalizedTextFactory(string localeField, string valueField);
   

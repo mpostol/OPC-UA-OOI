@@ -1,6 +1,9 @@
 ﻿
+using UAOOI.SemanticData.InformationModelFactory;
+
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
+
   internal class ReferenceTypeFactoryBase : TypeFactoryBase, IReferenceTypeFactory
   {
 
@@ -8,8 +11,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       set { }
     }
-    public void AddInverseName(string localeField, string valueField)
-    {
-    }
+    public void AddInverseName(string localeField, string valueField) { }
+
   }
+
 }

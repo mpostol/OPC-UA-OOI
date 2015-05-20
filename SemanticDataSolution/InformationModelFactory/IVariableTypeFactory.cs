@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.InformationModelFactory
 {
   public interface IVariableTypeFactory : ITypeFactory
   {

@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.InformationModelFactory
 {
   public interface IReferenceTypeFactory : ITypeFactory
   {

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Permissions;
+using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
@@ -114,4 +115,5 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
   }
+
 }

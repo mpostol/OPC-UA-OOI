@@ -1,72 +1,64 @@
 ﻿using System.Xml;
+using UAOOI.SemanticData.InformationModelFactory;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class VariableInstanceFactoryBase: InstanceFactoryBase, IVariableInstanceFactory
+
+  internal class VariableInstanceFactoryBase : InstanceFactoryBase, IVariableInstanceFactory
   {
+
     public byte AccessLevel
     {
-      set {  }
+      set { }
     }
-
     public bool AccessLevelSpecified
     {
       set { }
     }
-
     public string ArrayDimensions
     {
-      set {  }
+      set { }
     }
-
     public XmlQualifiedName DataType
     {
-      set {  }
+      set { }
     }
-
     public XmlElement DefaultValue
     {
-      set {  }
+      set { }
     }
-
     public bool Historizing
     {
-      set {  }
+      set { }
     }
-
     public bool HistorizingSpecified
     {
-      set {  }
+      set { }
     }
-
     public int MinimumSamplingInterval
     {
-      set {  }
+      set { }
     }
-
     public bool MinimumSamplingIntervalSpecified
     {
-      set {  }
+      set { }
     }
-
     public byte UserAccessLevel
     {
-      set {  }
+      set { }
     }
-
     public bool UserAccessLevelSpecified
     {
-      set {  }
+      set { }
     }
-
     public int ValueRank
     {
-      set {  }
+      set { }
     }
-
     public bool ValueRankSpecified
     {
       set { }
     }
+
   }
 }

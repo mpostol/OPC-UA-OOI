@@ -1,7 +1,7 @@
 ﻿
 using System.Xml;
 
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.InformationModelFactory
 {
   /// <summary>
   /// Interface IExportDataTypeFieldFactory - The=is interface defines an abstract representation of a field within a 

@@ -1,13 +1,14 @@
 ﻿
+using UAOOI.SemanticData.InformationModelFactory;
+
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
 
   internal class InformationModelFactoryBase : NodesContainer, IModelFactory
   {
-    public void CreateNamespace(string uri)
-    {
-      ;
-    }
+
+    public void CreateNamespace(string uri) { }
+
   }
 
 }

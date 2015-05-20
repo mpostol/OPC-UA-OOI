@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.SemanticData.UANodeSetValidation.UAInformationModel
+namespace UAOOI.SemanticData.InformationModelFactory
 {
   /// <summary>
   /// Enum ModelingRules - represents modeling rules described in Part 3 6.4.4 ModellingRules.

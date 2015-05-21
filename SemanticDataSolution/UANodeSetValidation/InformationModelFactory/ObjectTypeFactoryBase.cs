@@ -3,8 +3,7 @@ using UAOOI.SemanticData.InformationModelFactory;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
-  internal class ObjectTypeFactoryBase : TypeFactoryBase, IObjectTypeFactory
-  {
 
-  }
+  internal class ObjectTypeFactoryBase : TypeFactoryBase, IObjectTypeFactory { }
+
 }

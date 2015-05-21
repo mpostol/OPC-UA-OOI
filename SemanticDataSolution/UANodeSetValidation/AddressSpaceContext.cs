@@ -87,6 +87,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UANodeSet _nodeSet = UANodeSet.ReadModellFile(model);
       ImportNodeSet(_nodeSet);
     }
+    void IAddressSpaceContext.ValidateAndExportModel()
+    {
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext.CreateModelDesign - starting for default namespace"));
+      ValidateAndExportModel(Math.Min(m_NamespaceTable.Count - 1, 0));
+    }
     /// <summary>
     /// Validates and exports the selected model.
     /// </summary>
@@ -94,14 +99,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="System.ArgumentOutOfRangeException">targetNamespace;Cannot find this namespace</exception>
     void IAddressSpaceContext.ValidateAndExportModel(string targetNamespace)
     {
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext.CreateModelDesign - starting creation of the ModelDesign for the address space."));
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering AddressSpaceContext.CreateModelDesign - starting for the namespace {0}.", targetNamespace)));
       int _nsIndex = m_NamespaceTable.GetIndex(targetNamespace);
       if (_nsIndex == -1)
         throw new ArgumentOutOfRangeException("targetNamespace", "Cannot find this namespace");
-      IEnumerable<UANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == _nsIndex select _key;
-      List<UANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("AddressSpaceContext.CreateModelDesign - selected {0} nodes to be added to the model.", _nodes.Count)));
-      Validator.ValidateExportModel(_nodes, InformationModelFactory, this, m_TraceEvent);
+      ValidateAndExportModel(_nsIndex);
     }
     #endregion
 
@@ -284,6 +286,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       else if (_derived.Count<UANodeContext>() == 1)
         GetBaseTypes(_derived.First<UANodeContext>(), inheritanceChain);
       rootNode.InRecursionChain = false;
+    }
+    private void ValidateAndExportModel(int nameSpaceIndex)
+    {
+      IEnumerable<UANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
+      List<UANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("AddressSpaceContext.CreateModelDesign - selected {0} nodes to be added to the model.", _nodes.Count)));
+      Validator.ValidateExportModel(_nodes, InformationModelFactory, this, m_TraceEvent);
     }
     #endregion
 

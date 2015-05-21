@@ -1,5 +1,4 @@
 ﻿
-
 using System.IO;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
@@ -29,6 +28,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <remarks>It is defined to handle dependency injection.</remarks>
     /// <value>The information model factory.</value>
     IModelFactory InformationModelFactory { set; }
+    /// <summary>
+    /// Validates and exports the selected model for the default namespace at index 1 if defined or standard OPC UA.
+    /// </summary>
+    void ValidateAndExportModel();
     /// <summary>
     /// Validates and exports the selected model.
     /// </summary>

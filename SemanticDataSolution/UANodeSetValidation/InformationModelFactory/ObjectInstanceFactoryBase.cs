@@ -1,5 +1,6 @@
 ﻿
 using UAOOI.SemanticData.InformationModelFactory;
+
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
   internal class ObjectInstanceFactoryBase : InstanceFactoryBase, IObjectInstanceFactory
@@ -9,10 +10,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       set { }
     }
-
     public bool SupportsEventsSpecified
     {
       set { }
     }
+
   }
 }

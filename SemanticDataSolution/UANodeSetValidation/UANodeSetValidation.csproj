@@ -30,6 +30,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -95,6 +101,7 @@
     <None Include="DataSerialization\Opc.Ua.Types.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="OPCUAOOIKey.snk" />
     <None Include="XML\UANodeSet.xsd">
       <SubType>Designer</SubType>
     </None>

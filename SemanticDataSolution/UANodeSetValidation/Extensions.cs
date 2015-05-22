@@ -78,14 +78,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _nP.IdentifierSpecified = true;
         _nP.Name = _item.Name;
         _nP.ValueRank = _item.ValueRank.GetValueRank(x => _ValueRankSpecified = x, traceEvent);
-        if (_item.Definition != null)
-        {
-          IDataTypeDefinitionFactory _new = _nP.NewDataTypeDefinitionFactory();
-          _item.Definition.GetParameters(_new, modelContext, traceEvent);
-        }
-        _item.Definition.GetParameters(_nP.NewDefinition(), modelContext, traceEvent);
         _nP.SymbolicName = _item.SymbolicName;
         _nP.Value = _item.Value;
+        if (_item.Definition == null)
+          return;
+        IDataTypeDefinitionFactory _new = _nP.NewDefinition();
+        _item.Definition.GetParameters(_new, modelContext, traceEvent);
       }
     }
     internal static void ExportLocalizedTextArray(this XML.LocalizedText[] text, LocalizedTextFactory factory)

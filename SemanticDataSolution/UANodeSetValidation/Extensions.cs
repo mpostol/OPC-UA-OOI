@@ -79,7 +79,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _nP.Name = _item.Name;
         _nP.ValueRank = _item.ValueRank.GetValueRank(x => _ValueRankSpecified = x, traceEvent);
         if (_item.Definition != null)
-          throw new NotImplementedException("Definition");
+        {
+          IDataTypeDefinitionFactory _new = _nP.NewDataTypeDefinitionFactory();
+          _item.Definition.GetParameters(_new, modelContext, traceEvent);
+        }
         _item.Definition.GetParameters(_nP.NewDefinition(), modelContext, traceEvent);
         _nP.SymbolicName = _item.SymbolicName;
         _nP.Value = _item.Value;

@@ -14,6 +14,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
       set;
     }
     void AddDescription(string localeField, string valueField);
+    IDataTypeDefinitionFactory NewDataTypeDefinitionFactory();
     int Identifier
     {
       set;

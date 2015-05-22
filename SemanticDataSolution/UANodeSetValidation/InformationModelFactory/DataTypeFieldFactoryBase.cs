@@ -40,6 +40,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
       set { }
     }
     public void AddDescription(string localeField, string valueField) { }
+    
+    public IDataTypeDefinitionFactory NewDataTypeDefinitionFactory() { return new DataTypeDefinitionFactoryBase(); }
 
   }
 }

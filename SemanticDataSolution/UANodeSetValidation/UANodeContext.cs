@@ -61,7 +61,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       Errors = new List<BuildError>();
       m_ModelingRule = new Nullable<ModelingRules>();
-      List<UAReferenceContext> _references = new List<UAReferenceContext>();
       List<UAReferenceContext> _children = new List<UAReferenceContext>();
       Dictionary<string, UANodeContext> _derivedChildren = null;
       foreach (UAReferenceContext _rfx in m_Context.GetMyReferences(this))
@@ -76,7 +75,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               traceEvent(TraceMessage.BuildErrorTraceMessage(_err, "Compilation error"));
               Errors.Add(_err);
             }
-            _references.Add(_rfx);
             IReferenceFactory _or = nodeContainer.NewReference();
             _or.IsInverse = !_rfx.Reference.IsForward;
             _or.ReferenceType = _ReferenceType;
@@ -104,7 +102,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             break;
         }
       }
-      m_References = _references.Count == 0 ? null : _references.ToArray<UAReferenceContext>();
       _children = _children.Where<UAReferenceContext>(x => _derivedChildren == null || !_derivedChildren.ContainsKey(x.TargetNodeContext.UANode.NamePartOfBrowseName())).ToList<UAReferenceContext>();
       foreach (UAReferenceContext _rc in _children)
         Validator.ValidateExportNode(_rc.TargetNodeContext, nodeContainer, _rc, traceEvent);
@@ -186,7 +183,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //vars
     private UAModelContext m_UAModelContext = null;
     private List<BuildError> Errors { get; set; }
-    private UAReferenceContext[] m_References = null;
     private ModelingRules? m_ModelingRule;
     private UANodeContext m_BaseTypeNode;
     private bool m_IsProperty = false;

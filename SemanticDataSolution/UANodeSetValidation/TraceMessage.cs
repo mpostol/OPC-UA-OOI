@@ -18,7 +18,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return new TraceMessage(BuildError.DiagnosticInformation, TraceEventType.Verbose, message);
     }
-    internal static TraceMessage BuildErrorTraceMessage(BuildError error, string message)
+    public static TraceMessage BuildErrorTraceMessage(BuildError error, string message)
     {
       return new TraceMessage(error, TraceEventType.Information, message);
     }

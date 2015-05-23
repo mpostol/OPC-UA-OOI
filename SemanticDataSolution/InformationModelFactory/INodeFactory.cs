@@ -5,6 +5,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
 {
   public interface INodeFactory : INodeContainer
   {
+    
     string BrowseName
     {
       set;
@@ -12,6 +13,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     void AddDescription(string localeField, string valueField);
     void AddDisplayName(string localeField, string valueField);
     IReferenceFactory NewReference();
+
     XmlQualifiedName SymbolicName
     {
       set;

@@ -15,11 +15,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       set { }
     }
-    public int ValueRank
-    {
-      set { }
-    }
-    public bool ValueRankSpecified
+    public int? ValueRank
     {
       set { }
     }

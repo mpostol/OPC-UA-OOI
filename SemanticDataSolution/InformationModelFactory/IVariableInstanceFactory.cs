@@ -6,11 +6,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
 
   public interface IVariableInstanceFactory : IInstanceFactory
   {
-    byte AccessLevel
-    {
-      set;
-    }
-    bool AccessLevelSpecified
+    byte? AccessLevel
     {
       set;
     }
@@ -42,19 +38,11 @@ namespace UAOOI.SemanticData.InformationModelFactory
     {
       set;
     }
-    byte UserAccessLevel
+    byte? UserAccessLevel
     {
       set;
     }
-    bool UserAccessLevelSpecified
-    {
-      set;
-    }
-    int ValueRank
-    {
-      set;
-    }
-    bool ValueRankSpecified
+    int? ValueRank
     {
       set;
     }

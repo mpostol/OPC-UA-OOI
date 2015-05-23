@@ -23,7 +23,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       set { }
     }
-    public int ValueRank
+    public int? ValueRank
     {
       set { }
     }

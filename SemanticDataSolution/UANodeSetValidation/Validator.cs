@@ -148,13 +148,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     private static void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
-      nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(x => nodeDesign.AccessLevelSpecified = x, traceEvent);
+      nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(traceEvent);
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(String.Empty);
       nodeDesign.DataType = nodeContext.ExportNodeId(nodeSet.DataType, DataTypes.Number, traceEvent);//TODO add test case must be DataType, must not be abstract
       nodeDesign.DefaultValue = nodeSet.Value; //TODO add test case must be of type defined by DataType
       nodeDesign.Historizing = nodeSet.Historizing.Export<bool>(false, x => nodeDesign.HistorizingSpecified = x);
       nodeDesign.MinimumSamplingInterval = Convert.ToInt32(nodeSet.MinimumSamplingInterval.Export<double>(0D, x => nodeDesign.MinimumSamplingIntervalSpecified = x));
-      nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(x => nodeDesign.ValueRankSpecified = x, traceEvent);
+      nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(traceEvent);
       if (nodeSet.Translation != null)
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "- the Translation element for the UAVariable"));
     }
@@ -163,7 +163,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(String.Empty);
       nodeDesign.DataType = nodeContext.ExportNodeId(nodeSet.DataType, DataTypes.Number, traceEvent);
       nodeDesign.DefaultValue = nodeSet.Value;
-      nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(x => nodeDesign.ValueRankSpecified = x, traceEvent);
+      nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(traceEvent);
     }
     private static void Update(IMethodInstanceFactory nodeDesign, UAMethod nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {

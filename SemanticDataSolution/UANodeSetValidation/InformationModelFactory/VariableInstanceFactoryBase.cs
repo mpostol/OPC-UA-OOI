@@ -7,11 +7,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
   internal class VariableInstanceFactoryBase : InstanceFactoryBase, IVariableInstanceFactory
   {
 
-    public byte AccessLevel
-    {
-      set { }
-    }
-    public bool AccessLevelSpecified
+    public byte? AccessLevel
     {
       set { }
     }
@@ -43,19 +39,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       set { }
     }
-    public byte UserAccessLevel
+    public byte? UserAccessLevel
     {
       set { }
     }
-    public bool UserAccessLevelSpecified
-    {
-      set { }
-    }
-    public int ValueRank
-    {
-      set { }
-    }
-    public bool ValueRankSpecified
+    public int? ValueRank
     {
       set { }
     }

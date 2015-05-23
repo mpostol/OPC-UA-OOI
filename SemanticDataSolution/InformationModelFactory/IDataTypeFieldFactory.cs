@@ -26,7 +26,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     {
       set;
     }
-    int ValueRank
+    int? ValueRank
     {
       set;
     }

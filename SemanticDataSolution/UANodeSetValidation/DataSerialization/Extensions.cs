@@ -41,14 +41,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EventNotifierValueNotSupported, String.Format("EventNotifier value: {0}", eventNotifier)));
       return (eventNotifier & EventNotifiers.SubscribeToEvents) != 0;
     }
-    internal static byte GetAccessLevel(this byte accessLevel, Action<bool> accessLevelSpecified, Action<TraceMessage> traceEvent)
+    internal static byte? GetAccessLevel(this byte accessLevel, Action<TraceMessage> traceEvent)
     {
-      byte _ret = AccessLevels.None;
+      byte? _ret = new Nullable<byte>();
       if (accessLevel <= AccessLevels.CurrentReadOrWrite)
         _ret = accessLevel;
       else
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongAccessLevel, String.Format("The AccessLevel value {0:X} is not supported", accessLevel)));
-      accessLevelSpecified((int)_ret != 1);
       return _ret;
     }
     /// <summary>
@@ -58,19 +57,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <param name="specified">if set to <c>true</c> the parameter is specified.</param>
     /// <param name="traceEvent">An <see cref="Action" /> delegate is used to trace event as the <see cref="TraceMessage" />.</param>
     /// <returns>Returns validated value.</returns>
-    internal static int GetValueRank(this int valueRank, Action<bool> specified, Action<TraceMessage> traceEvent)
+    internal static int? GetValueRank(this int valueRank, Action<TraceMessage> traceEvent)
     {
-      int _vr = -1;
-      bool _specified = true;
+      int? _vr = new Nullable<int>();
       if (valueRank < -2)
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongValueRank, String.Format("The value {0} is not supported", valueRank)));
       else if (valueRank == -3)
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongValueRank, String.Format("The value {0} is not supported", valueRank)));
-      else
+      else if (valueRank != -1)
         _vr = valueRank;
-      if (valueRank == -1)
-        _specified = false;
-      specified(_specified);
       return _vr;
     }
   }

@@ -13,11 +13,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     {
       set;
     }
-    int ValueRank
-    {
-      set;
-    }
-    bool ValueRankSpecified
+    int? ValueRank
     {
       set;
     }

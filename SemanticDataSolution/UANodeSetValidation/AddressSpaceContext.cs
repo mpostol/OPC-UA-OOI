@@ -89,8 +89,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     void IAddressSpaceContext.ValidateAndExportModel()
     {
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext.CreateModelDesign - starting for default namespace"));
-      ValidateAndExportModel(Math.Min(m_NamespaceTable.Count - 1, 0));
+      int _nsi = Math.Max(m_NamespaceTable.Count - 1, 0);
+      string _namespace = m_NamespaceTable.GetString((uint)_nsi);
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", _namespace)));
+      ValidateAndExportModel(_nsi);
     }
     /// <summary>
     /// Validates and exports the selected model.
@@ -99,7 +101,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="System.ArgumentOutOfRangeException">targetNamespace;Cannot find this namespace</exception>
     void IAddressSpaceContext.ValidateAndExportModel(string targetNamespace)
     {
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering AddressSpaceContext.CreateModelDesign - starting for the namespace {0}.", targetNamespace)));
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", targetNamespace)));
       int _nsIndex = m_NamespaceTable.GetIndex(targetNamespace);
       if (_nsIndex == -1)
         throw new ArgumentOutOfRangeException("targetNamespace", "Cannot find this namespace");

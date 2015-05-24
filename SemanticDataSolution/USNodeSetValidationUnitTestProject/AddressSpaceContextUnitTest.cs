@@ -43,7 +43,7 @@ namespace UAOOI.SemanticData.UnitTest
     }
     [TestMethod]
     [ExpectedException(typeof(FileNotFoundException))]
-    public void AddressSpaceContextImportUANodeSetNullTestMethod3()
+    public void AddressSpaceContextNotExistingFileNameTestMethod()
     {
       IAddressSpaceContext _as = new AddressSpaceContext(x => { });
       Assert.IsNotNull(_as);
@@ -51,21 +51,51 @@ namespace UAOOI.SemanticData.UnitTest
       _as.ImportUANodeSet(_fi);
     }
     [TestMethod]
-    public void AddressSpaceContextUnitTestTestMethod()
+    public void AddressSpaceContextValidateAndExportModelTestMethod1()
     {
-      UANodeSet _ns = TestData.CreateNodeSetModel();
+      UANodeSet _ns;
+      List<TraceMessage> _trace;
+      IAddressSpaceContext _as;
+      ValidateAndExportModelPreparation(out _ns, out _trace, out _as);
+      _as.ValidateAndExportModel(_ns.NamespaceUris[0]);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+    }
+    [TestMethod]
+    public void AddressSpaceContextValidateAndExportModelTestMethod2()
+    {
+      UANodeSet _ns;
+      List<TraceMessage> _trace;
+      IAddressSpaceContext _as;
+      ValidateAndExportModelPreparation(out _ns, out _trace, out _as);
+      _as.ValidateAndExportModel();
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+    }
+    [TestMethod]
+    [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
+    public void AddressSpaceContextValidateAndExportModelTestMethod3()
+    {
+      UANodeSet _ns;
+      List<TraceMessage> _trace;
+      IAddressSpaceContext _as;
+      ValidateAndExportModelPreparation(out _ns, out _trace, out _as);
+      _as.ValidateAndExportModel("Not existing namespace");
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+    }
+    //Helpers
+    private static void ValidateAndExportModelPreparation(out UANodeSet _ns, out List<TraceMessage> trace, out IAddressSpaceContext _as)
+    {
+      _ns = TestData.CreateNodeSetModel();
       List<TraceMessage> _trace = new List<TraceMessage>();
       int _diagnosticCounter = 0;
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.IsTrue(_ns.NamespaceUris.Length >= 1, "Wrong test data - NamespaceUris must contain more then 2 items");
-      IAddressSpaceContext _as = new AddressSpaceContext(x => { Helpers.TraceHelper.TraceDiagnostic(x, _trace, ref _diagnosticCounter); });
+      _as = new AddressSpaceContext(x => { Helpers.TraceHelper.TraceDiagnostic(x, _trace, ref _diagnosticCounter); });
       Assert.IsNotNull(_as);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       _as.ImportUANodeSet(_ns);
       Assert.IsNotNull(_ns);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(_ns.NamespaceUris[0]);
-      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      trace = _trace;
     }
 
   }

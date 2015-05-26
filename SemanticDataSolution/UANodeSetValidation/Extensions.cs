@@ -80,7 +80,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _nP.SymbolicName = _item.SymbolicName;
         _nP.Value = _item.Value;
         if (_item.Definition == null)
-          return;
+          continue;
         IDataTypeDefinitionFactory _new = _nP.NewDefinition();
         _item.Definition.GetParameters(_new, modelContext, traceEvent);
       }

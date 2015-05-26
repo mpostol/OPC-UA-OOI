@@ -243,9 +243,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       BuildError _err = BuildError.DanglingReferenceTarget;
       IPropertyInstanceFactory _pr = factory.NewExportNodeFFactory<IPropertyInstanceFactory>();
-      _pr.BrowseName = string.Format("{0}: #{1}", _err.Focus.ToString(), m_ErrorNumber++);
+      _pr.SymbolicName = new XmlQualifiedName(string.Format("{0}{1}", _err.Focus.ToString(), m_ErrorNumber++), "http://commsvr.com/OOIUA/SemanticData/UANodeSetValidation");
       _pr.AddDescription("en-en", _err.Descriptor);
-      _pr.AddDisplayName("en-en", "ERROR");
+      _pr.AddDisplayName("en-en", String.Format("ERROR{0}", m_ErrorNumber));
     }
     private static int m_ErrorNumber = 0;
     #endregion

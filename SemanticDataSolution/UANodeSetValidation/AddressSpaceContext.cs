@@ -293,19 +293,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       IEnumerable<UANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
       List<UANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("AddressSpaceContext.CreateModelDesign - selected {0} nodes to be added to the model.", _nodes.Count)));
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("AddressSpaceContext.ValidateAndExportModel - selected {0} nodes to be added to the model.", _nodes.Count)));
       Validator.ValidateExportModel(_nodes, InformationModelFactory, this, m_TraceEvent);
     }
     #endregion
 
-    #region UnitTestd
 #if DEBUG
+    #region UnitTestd
     internal UANodeContext UTTryGetUANodeContext(NodeId nodeId)
     {
       return TryGetUANodeContext(nodeId, x => { });
     }
-#endif
+    internal List<UANodeContext> UTValidateAndExportModel(int nameSpaceIndex)
+    {
+      return (from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key).ToList<UANodeContext>();
+    }
     #endregion
+#endif
 
   }
 

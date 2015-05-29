@@ -44,7 +44,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     internal static byte? GetAccessLevel(this byte accessLevel, Action<TraceMessage> traceEvent)
     {
       byte? _ret = new Nullable<byte>();
-      if (accessLevel <= AccessLevels.CurrentReadOrWrite)
+      if (accessLevel <= 0x7F)
         _ret = accessLevel;
       else
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongAccessLevel, String.Format("The AccessLevel value {0:X} is not supported", accessLevel)));

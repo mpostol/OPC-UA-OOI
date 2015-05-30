@@ -18,6 +18,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   internal static class Validator
   {
 
+    #region internal API
     /// <summary>
     /// Validates the selected nodes <paramref name="nodesCollection"/> and export it using <paramref name="exportModelFactory"/>.
     /// </summary>
@@ -112,6 +113,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         }
       }
     }
+    #endregion
 
     #region private
     private static void Update(IObjectInstanceFactory nodeDesign, UAObject nodeSet, Action<TraceMessage> traceEvent)
@@ -170,6 +172,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       //TODO add test case validate parentReference
       nodeDesign.NonExecutable = !nodeContext.Executable;
       nodeDesign.NonExecutableSpecified = !nodeContext.Executable;
+      //MethodDeclarationId is ignored
     }
     private static void Update(IViewInstanceFactory nodeDesign, UAView nodeSet, Action<TraceMessage> traceEvent)
     {

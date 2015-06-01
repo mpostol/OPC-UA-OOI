@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InformationModelFactory", "InformationModelFactory\InformationModelFactory.csproj", "{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UAUserInterfaceTypeEditors", "OPCUAUserInterfaceTypeEditors\UAUserInterfaceTypeEditors.csproj", "{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,9 @@
+﻿<Window x:Class="UAUserInterfaceTypeEditorsTestProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:TypeEditors="clr-namespace:UAOOI.SemanticData.TypeEditors;assembly=UAOOI.SemanticDataTypeEditors"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <TypeEditors:StructureEditor/>
+    </Grid>
+</Window>

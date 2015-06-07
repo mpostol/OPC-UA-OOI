@@ -3,9 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UAOOI.SemanticData.TypeEditors"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <local:StructureEditorViewModel/>
+    </UserControl.DataContext>
+    
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <TreeView ItemTemplate="{DynamicResource TreeTemplate}" ItemsSource="{Binding TreeItemsSource}">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate x:Key="TreeTemplate" ItemsSource="{Binding Children}">
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" Margin="4,4,15,4"/>
+                        <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding ReadOnly}" Margin="3" Padding="1">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Return" Command="{Binding ModifyCommand}"/>
+                            </TextBox.InputBindings>
+                        </TextBox>
+                    </StackPanel>
+                    
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="True"/>
+                    <Setter Property="Focusable" Value="False"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
+        </TreeView>
+        
+        <Label Content="Search level:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="23"/>
+        <Button Command="{Binding ReflectCommand}" Content="Reflect" Grid.Column="1" HorizontalAlignment="Left" Margin="13,61,0,0" VerticalAlignment="Top" Width="72" Height="27"/>
+        <TextBox Text="{Binding ReflectionLevel}" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="13,33,0,0" VerticalAlignment="Top" Width="72"/>
+
     </Grid>
 </UserControl>

@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InformationModelFactory", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UAUserInterfaceTypeEditors", "OPCUAUserInterfaceTypeEditors\UAUserInterfaceTypeEditors.csproj", "{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UAUserInterfaceTypeEditorsTestProject", "UAUserInterfaceTypeEditorsTestProject\UAUserInterfaceTypeEditorsTestProject.csproj", "{78E7C102-1933-4FCE-8477-7372E11059F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78E7C102-1933-4FCE-8477-7372E11059F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78E7C102-1933-4FCE-8477-7372E11059F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78E7C102-1933-4FCE-8477-7372E11059F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78E7C102-1933-4FCE-8477-7372E11059F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

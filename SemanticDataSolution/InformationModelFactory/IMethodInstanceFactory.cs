@@ -30,6 +30,18 @@ namespace UAOOI.SemanticData.InformationModelFactory
     {
       set;
     }
+    /// <summary>
+    /// Adds the input argument. The InputArgument specify the input argument of the Method. The Method contains an array of the Argument data type. 
+    /// An empty array indicates that there are no input arguments for the Method.
+    /// </summary>
+    /// <param name="argument">The input argument.</param>
+    void AddInputArgument(IParameter argument);
+    /// <summary>
+    /// Adds the output argument. The OutputArgument specifies the output argument of the Method. The Method contains an array of the Argument data type. 
+    /// An empty array indicates that there are no output arguments for the Method.
+    /// </summary>
+    /// <param name="argument">The output argument.</param>
+    void AddOutputArguments(IParameter argument);
 
   }
 }

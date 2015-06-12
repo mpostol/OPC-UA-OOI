@@ -4,17 +4,9 @@ using System.Xml;
 namespace UAOOI.SemanticData.InformationModelFactory
 {
 
-  public interface IVariableInstanceFactory : IInstanceFactory
+  public interface IVariableInstanceFactory : IInstanceFactory, IDataDescriptor
   {
     byte? AccessLevel
-    {
-      set;
-    }
-    string ArrayDimensions
-    {
-      set;
-    }
-    XmlQualifiedName DataType
     {
       set;
     }
@@ -39,10 +31,6 @@ namespace UAOOI.SemanticData.InformationModelFactory
       set;
     }
     byte? UserAccessLevel
-    {
-      set;
-    }
-    int? ValueRank
     {
       set;
     }

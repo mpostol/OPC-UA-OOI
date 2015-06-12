@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDataDescriptor.cs" />
     <Compile Include="IDataTypeDefinitionFactory.cs" />
     <Compile Include="IDataTypeFactory.cs" />
     <Compile Include="IDataTypeFieldFactory.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="INodeFactory.cs" />
     <Compile Include="IObjectInstanceFactory.cs" />
     <Compile Include="IObjectTypeFactory.cs" />
+    <Compile Include="IParameter.cs" />
     <Compile Include="IPropertyInstanceFactory.cs" />
     <Compile Include="IReferenceFactory.cs" />
     <Compile Include="IReferenceTypeFactory.cs" />

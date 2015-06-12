@@ -170,8 +170,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private static void Update(IMethodInstanceFactory nodeDesign, UAMethod nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
       //TODO add test case validate parentReference
-      nodeDesign.NonExecutable = !nodeContext.Executable;
-      nodeDesign.NonExecutableSpecified = !nodeContext.Executable;
+      nodeDesign.Executable = !nodeContext.Executable ? nodeContext.Executable : new Nullable<bool>();
+      nodeDesign.UserExecutable = !nodeContext.UserExecutable ? nodeContext.UserExecutable : new Nullable<bool>();
       //MethodDeclarationId is ignored
     }
     private static void Update(IViewInstanceFactory nodeDesign, UAView nodeSet, Action<TraceMessage> traceEvent)

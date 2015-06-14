@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
 {

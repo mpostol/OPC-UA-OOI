@@ -78,7 +78,6 @@
     <Compile Include="InformationModelFactory\ViewInstanceFactoryBase.cs" />
     <Compile Include="ReferenceKindEnum.cs" />
     <Compile Include="Validator.cs" />
-    <Compile Include="Namespaces.cs" />
     <Compile Include="TraceMessage.cs" />
     <Compile Include="DataSerialization\NodeId.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

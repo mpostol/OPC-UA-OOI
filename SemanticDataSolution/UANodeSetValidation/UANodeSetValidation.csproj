@@ -59,6 +59,7 @@
     <Compile Include="DataSerialization\QualifiedName.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="IAddressSpaceContext.cs" />
+    <Compile Include="InformationModelFactory\Argument.cs" />
     <Compile Include="InformationModelFactory\DataTypeDefinitionFactoryBase.cs" />
     <Compile Include="InformationModelFactory\DataTypeFactoryBase.cs" />
     <Compile Include="InformationModelFactory\DataTypeFieldFactoryBase.cs" />

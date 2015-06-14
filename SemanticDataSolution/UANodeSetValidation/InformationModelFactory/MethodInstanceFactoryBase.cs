@@ -38,7 +38,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// An empty array indicates that there are no input arguments for the Method.
     /// </summary>
     /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XMLElement" />.</param>
-    public void AddInputArguments(System.Func<System.Xml.XmlElement, IParameter[]> argument)
+    public void AddInputArguments(System.Func<System.Xml.XmlElement, Parameter[]> argument)
     {
       RemoveArguments(BrowseNames.InputArguments, argument);
     }
@@ -47,15 +47,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// An empty array indicates that there are no output arguments for the Method.
     /// </summary>
     /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XMLElement" />.</param>
-    public void AddOutputArguments(System.Func<System.Xml.XmlElement, IParameter[]> argument)
+    public void AddOutputArguments(System.Func<System.Xml.XmlElement, Parameter[]> argument)
     {
       RemoveArguments(BrowseNames.OutputArguments, argument);
     }
     #endregion
     
-    private IParameter[] RemoveArguments(string parameterKind, Func<XmlElement, IParameter[]> getParameters)
+    private Parameter[] RemoveArguments(string parameterKind, Func<XmlElement, Parameter[]> getParameters)
     {
-      IParameter[] _parameters = null;
+      Parameter[] _parameters = null;
       List<NodeFactoryBase> _newChildrenCollection = new List<NodeFactoryBase>();
       foreach (NodeFactoryBase _item in m_Nodes)
       {

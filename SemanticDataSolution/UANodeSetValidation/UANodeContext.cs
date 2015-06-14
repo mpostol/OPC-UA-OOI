@@ -183,9 +183,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       path.Add(BranchName);
     }
     internal NodeId NodeIdContext { get; private set; }
-    internal IParameter[] GetParameters(XmlElement arguments, Action<TraceMessage> traceEvent)
+    internal Parameter[] GetParameters(XmlElement arguments, Action<TraceMessage> traceEvent)
     {
-      List<IParameter> _parameters = new List<IParameter>();
+      List<Parameter> _parameters = new List<Parameter>();
       foreach (Argument _item in arguments.GetParameters())
         _parameters.Add(m_AddressSpaceContext.ExportArgument(_item, m_ModelContext, traceEvent));
       return _parameters.ToArray();

@@ -197,9 +197,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       foreach (UANodeContext _type in _col)
         GetChildren(_type, list);
     }
-    internal IParameter ExportArgument(Argument argument, UAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal Parameter ExportArgument(UAOOI.SemanticData.UANodeSetValidation.DataSerialization.Argument argument, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
-      Parameter _ret = new Parameter()
+      UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory.Argument _ret = new UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory.Argument()
       {
         DataType = ExportNodeId(argument.DataType.Identifier, DataTypeIds.BaseDataType, modelContext, traceEvent),
         Identifier = new Nullable<int>(),
@@ -213,31 +213,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #endregion
 
     #region private
-    //class
-    private class Parameter : IParameter
-    {
-      public string Name
-      {
-        set { }
-      }
-      public int? Identifier
-      {
-        set { }
-      }
-      public XmlQualifiedName DataType
-      {
-        set { }
-      }
-      public string ArrayDimensions
-      {
-        set { }
-      }
-      public int? ValueRank
-      {
-        set { }
-      }
-      public void AddDescription(string localeField, string valueField) { }
-    }
     //vars
     private IModelFactory m_InformationModelFactory = new InformationModelFactoryBase();
     private Dictionary<string, UAReferenceContext> m_References = new Dictionary<string, UAReferenceContext>();

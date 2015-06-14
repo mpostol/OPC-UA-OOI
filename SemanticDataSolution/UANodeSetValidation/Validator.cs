@@ -28,7 +28,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="traceEvent">The trace event method encapsulation.</param>
     internal static void ValidateExportModel(IEnumerable<UANodeContext> nodesCollection, IModelFactory exportModelFactory, AddressSpaceContext addressSpaceContext, Action<TraceMessage> traceEvent)
     {
-      traceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Entering ModelDesignFactory.CreateModelDesign - starting creation of the ModelDesign for {0} nodes.", nodesCollection.Count<UANodeContext>())));
+      traceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Entering Validator.ValidateExportModel - starting creation of the ModelDesign for {0} nodes.", nodesCollection.Count<UANodeContext>())));
       List<BuildError> _errors = new List<BuildError>(); //TODO should be added to the model;
       foreach (string _ns in addressSpaceContext.ExportNamespaceTable())
         exportModelFactory.CreateNamespace(_ns);
@@ -53,9 +53,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         }
       }
       if (_errors.Count == 0)
-        _msg = String.Format("Finishing ModelDesignFactory.CreateModelDesign - created the ModelDesign containing {0} nodes.", _nc);
+        _msg = String.Format("Finishing Validator.ValidateExportModel - the model contains {0} nodes.", _nc);
       else
-        _msg = String.Format("Finishing ModelDesignFactory.CreateModelDesign - created the ModelDesign containing {0} nodes and {1} errors.", _nc, _errors.Count);
+        _msg = String.Format("Finishing Validator.ValidateExportModel - the model contains {0} nodes and {1} errors.", _nc, _errors.Count);
       traceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
     }
     /// <summary>
@@ -68,7 +68,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>An object of <see cref="INodeFactory"/>.</returns>
     internal static void ValidateExportNode(UANodeContext nodeContext, INodeContainer exportFactory, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
-      Debug.Assert(nodeContext != null, "UANodeSetFactory.CreateNodeDesign the argument nodeContext is null.");
+      Debug.Assert(nodeContext != null, "Validator.ValidateExportNode the argument nodeContext is null.");
       if (nodeContext.UANode == null)
       {
         TraceMessage _traceMessage = TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, "Compilation Error at CreateNodeDesign");
@@ -84,7 +84,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.NewExportNodeFFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateType, traceEvent);
             break;
           case "UADataType":
-            CreateNode<IDataTypeFactory, UADataType>(exportFactory.NewExportNodeFFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext.UAModelContext, traceEvent), UpdateType, traceEvent);
+            CreateNode<IDataTypeFactory, UADataType>(exportFactory.NewExportNodeFFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
             break;
           case "UAVariableType":
             CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.NewExportNodeFFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
@@ -96,13 +96,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             CreateNode<IViewInstanceFactory, UAView>(exportFactory.NewExportNodeFFactory<IViewInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAMethod":
-            CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.NewExportNodeFFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, traceEvent), UpdateInstance, traceEvent);
+            CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.NewExportNodeFFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAVariable":
             if (parentReference == null || parentReference.ReferenceKind == ReferenceKindEnum.HasProperty)
-              CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, nodeContext, traceEvent), UpdateInstance, traceEvent);
+              CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             else
-              CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference, nodeContext, traceEvent), UpdateInstance, traceEvent);
+              CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAObject":
             CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.NewExportNodeFFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
@@ -120,7 +120,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(x => nodeDesign.SupportsEventsSpecified = x, traceEvent);
     }
-    private static void Update(IPropertyInstanceFactory nodeDesign, UAVariable nodeSet, UAReferenceContext parentReference, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
+    private static void Update(IPropertyInstanceFactory nodeDesign, UAVariable nodeSet, UANodeContext nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
       try
       {
@@ -134,7 +134,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, String.Format("Cannot resolve the reference for Property because of error {0} at: {1}.", _ex, _ex.StackTrace)));
       }
     }
-    private static void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet, UAReferenceContext parentReference, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
+    private static void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet, UANodeContext nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
       try
       {
@@ -167,11 +167,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.DefaultValue = nodeSet.Value;
       nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(traceEvent);
     }
-    private static void Update(IMethodInstanceFactory nodeDesign, UAMethod nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
+    private static void Update(IMethodInstanceFactory nodeDesign, UAMethod nodeSet, UANodeContext nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
       //TODO add test case validate parentReference
-      nodeDesign.Executable = !nodeContext.Executable ? nodeContext.Executable : new Nullable<bool>();
-      nodeDesign.UserExecutable = !nodeContext.UserExecutable ? nodeContext.UserExecutable : new Nullable<bool>();
+      nodeDesign.Executable = !nodeSet.Executable ? nodeSet.Executable : new Nullable<bool>();
+      nodeDesign.UserExecutable = !nodeSet.UserExecutable ? nodeSet.UserExecutable : new Nullable<bool>();
+      nodeDesign.AddInputArguments(x => nodeContext.GetParameters(x, traceEvent));
+      nodeDesign.AddOutputArguments(x => nodeContext.GetParameters(x, traceEvent));
       //MethodDeclarationId is ignored
     }
     private static void Update(IViewInstanceFactory nodeDesign, UAView nodeSet, Action<TraceMessage> traceEvent)
@@ -179,9 +181,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.ContainsNoLoops = nodeSet.ContainsNoLoops;//TODO add test case against the loops in the model.
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(x => { }, traceEvent);
     }
-    private static void Update(IDataTypeFactory nodeDesign, UADataType nodeSet, UAModelContext modelContext, Action<TraceMessage> traceEvent)
+    private static void Update(IDataTypeFactory nodeDesign, UADataType nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
-      nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), modelContext, traceEvent);
+      nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), nodeContext.UAModelContext, traceEvent);
     }
     private static void Update(IReferenceTypeFactory nodeDesign, UAReferenceType nodeSet, Action<TraceMessage> traceEvent)
     {

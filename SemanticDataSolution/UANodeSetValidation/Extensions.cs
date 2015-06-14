@@ -1,7 +1,12 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Security.Permissions;
+using System.Xml;
+using System.Xml.Serialization;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
@@ -45,8 +50,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return value & maxValue - 1;
     }
     [SecurityPermissionAttribute(SecurityAction.Demand)]
-    internal static string
-      ValidateIdentifier(this string name, Action<TraceMessage> reportError)
+    internal static string ValidateIdentifier(this string name, Action<TraceMessage> reportError)
     {
       if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(name))
         reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongSymbolicName, String.Format("SymbolicName: '{0}'.", name)));
@@ -112,6 +116,38 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         }
       }
       return localizedText;
+    }
+    internal static List<Argument> GetParameters(this XmlElement xmlElement)
+    {
+      ListOfExtensionObject _wrapper = xmlElement.GetObject<ListOfExtensionObject>();
+      Debug.Assert(_wrapper != null);
+      if (_wrapper.ExtensionObject.AsEnumerable<ExtensionObject>().Where<ExtensionObject>(x => !((string)x.TypeId.Identifier).Equals("i=297")).Any())
+        throw new ArgumentOutOfRangeException("ExtensionObject.TypeId.Identifier");
+      List<Argument> _ret = new List<Argument>();
+      foreach (var item in _wrapper.ExtensionObject)
+        _ret.Add(item.Body.GetObject<Argument>());
+      return _ret;
+    }
+    /// <summary>
+    /// Deserialize <see cref="XmlElement"/> object using <see cref="XmlSerializer"/><see.
+    /// </summary>
+    /// <param name="xmlElement">The object to be deserialized.</param>
+    /// <returns>Deserialized object</returns>
+    public static type GetObject<type>(this XmlElement xmlElement)
+    {
+      using (MemoryStream _memoryBuffer = new MemoryStream(1000))
+      {
+        XmlWriterSettings _settings = new XmlWriterSettings() { ConformanceLevel = ConformanceLevel.Fragment };
+        using (XmlWriter wrt = XmlWriter.Create(_memoryBuffer, _settings))
+          xmlElement.WriteTo(wrt);
+        _memoryBuffer.Flush();
+        _memoryBuffer.Position = 0;
+        type _Value;
+        XmlSerializer _serializer = new XmlSerializer(typeof(type));
+        using (XmlReader _reader = XmlReader.Create(_memoryBuffer))
+          _Value = (type)_serializer.Deserialize(_reader);
+        return _Value;
+      }
     }
 
   }

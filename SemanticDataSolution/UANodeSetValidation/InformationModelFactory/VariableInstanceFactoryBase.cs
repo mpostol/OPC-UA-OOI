@@ -21,7 +21,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     }
     public XmlElement DefaultValue
     {
-      set { }
+      set;
+      internal get;
     }
     public bool Historizing
     {

@@ -87,11 +87,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UANodeSet _nodeSet = UANodeSet.ReadModellFile(model);
       ImportNodeSet(_nodeSet);
     }
+    /// <summary>
+    /// Validates and exports the selected model for the default namespace at index 1 if defined or standard OPC UA.
+    /// </summary>
     void IAddressSpaceContext.ValidateAndExportModel()
     {
       int _nsi = Math.Max(m_NamespaceTable.Count - 1, 0);
       string _namespace = m_NamespaceTable.GetString((uint)_nsi);
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", _namespace)));
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Entering AddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", _namespace)));
       ValidateAndExportModel(_nsi);
     }
     /// <summary>
@@ -194,9 +197,47 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       foreach (UANodeContext _type in _col)
         GetChildren(_type, list);
     }
+    internal IParameter ExportArgument(Argument argument, UAModelContext modelContext, Action<TraceMessage> traceEvent)
+    {
+      Parameter _ret = new Parameter()
+      {
+        DataType = ExportNodeId(argument.DataType.Identifier, DataTypeIds.BaseDataType, modelContext, traceEvent),
+        Identifier = new Nullable<int>(),
+        Name = argument.Name,
+        ValueRank = argument.ValueRank.GetValueRank(traceEvent)
+      };
+      if (argument.Description != null)
+        _ret.AddDescription(argument.Description.Locale, argument.Description.Text);
+      return _ret;
+    }
     #endregion
 
     #region private
+    //class
+    private class Parameter : IParameter
+    {
+      public string Name
+      {
+        set { }
+      }
+      public int? Identifier
+      {
+        set { }
+      }
+      public XmlQualifiedName DataType
+      {
+        set { }
+      }
+      public string ArrayDimensions
+      {
+        set { }
+      }
+      public int? ValueRank
+      {
+        set { }
+      }
+      public void AddDescription(string localeField, string valueField) { }
+    }
     //vars
     private IModelFactory m_InformationModelFactory = new InformationModelFactoryBase();
     private Dictionary<string, UAReferenceContext> m_References = new Dictionary<string, UAReferenceContext>();
@@ -229,7 +270,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         string nodeIdKey = nodeId.ToString();
         if (!m_NodesDictionary.TryGetValue(nodeIdKey, out _newNode))
         {
-          _newNode = new UANodeContext(this, modelContext, node, nodeId);
+          _newNode = new UANodeContext(this, modelContext, nodeId, node);
           m_NodesDictionary.Add(nodeIdKey, _newNode);
         }
         else
@@ -310,7 +351,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     #endregion
 #endif
-
   }
 
 }

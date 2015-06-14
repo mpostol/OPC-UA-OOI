@@ -2,6 +2,7 @@
 
 namespace UAOOI.SemanticData.InformationModelFactory
 {
+  
   public interface IParameter: IDataDescriptor
   {
 
@@ -15,6 +16,12 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </summary>
     /// <value>The identifier.</value>
     int? Identifier { set; }
+    /// <summary>
+    /// Adds the localized description of the argument
+    /// </summary>
+    /// <param name="localeField">The locale field.</param>
+    /// <param name="valueField">The value field.</param>
+    void AddDescription(string localeField, string valueField);
 
   }
 }

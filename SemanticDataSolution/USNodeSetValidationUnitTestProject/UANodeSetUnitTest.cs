@@ -108,6 +108,8 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       List<UANodeContext> _nodes = ((AddressSpaceContext)_as).UTValidateAndExportModel(1);
       Assert.AreEqual<int>(nodes, ((AddressSpaceContext)_as).UTValidateAndExportModel(1).Count);
+      _as.ValidateAndExportModel();
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       return _nodes;
     }
     #endregion

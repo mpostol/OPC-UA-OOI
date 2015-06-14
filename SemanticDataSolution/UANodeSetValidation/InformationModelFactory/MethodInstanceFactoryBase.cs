@@ -1,54 +1,75 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
   /// <summary>
-  /// Class MethodInstanceFactoryBase.
+  /// Class MethodInstanceFactoryBase - basic implementation of the <see cref="IMethodInstanceFactory"/>.
   /// </summary>
-  internal class MethodInstanceFactoryBase: InstanceFactoryBase, IMethodInstanceFactory
+  internal class MethodInstanceFactoryBase : InstanceFactoryBase, IMethodInstanceFactory
   {
 
+    #region IMethodInstanceFactory
     /// <summary>
     /// Sets a value indicating whether the Method node is executable (“False” means not executable, “True” means executable), not taking user access rights into account.
     /// If the server cannot get the executable information from the underlying system, it should state that it is executable. If a Method is called, the server should transfer
     /// this request and return the corresponding StatusCode if such a request is rejected.
     /// </summary>
     /// <value><c>true</c> if executable; otherwise, <c>false</c>. Default value is <c>true</c></value>
-    /// <exception cref="System.NotImplementedException"></exception>
     public bool? Executable
     {
-      set { throw new System.NotImplementedException(); }
+      set { }
     }
-
     /// <summary>
     /// Sets a value indicating whether the Method is currently executable taking user access rights into account (“False” means not executable, “True” means executable).
     /// </summary>
     /// <value><c>true</c> if executable by current user; otherwise, <c>false</c>. Default value is <c>true</c></value>
-    /// <exception cref="System.NotImplementedException"></exception>
     public bool? UserExecutable
     {
-      set { throw new System.NotImplementedException(); }
+      set { }
     }
     /// <summary>
-    /// Adds the input argument. The InputArgument specify the input argument of the Method. The Method contains an array of the Argument data type.
+    /// Adds the input arguments. The InputArgument specify the input argument of the Method. The Method contains an array of the Argument data type.
     /// An empty array indicates that there are no input arguments for the Method.
     /// </summary>
-    /// <param name="argument">The input argument.</param>
-    /// <exception cref="System.NotImplementedException"></exception>
-    public void AddInputArgument(IParameter argument)
+    /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XMLElement" />.</param>
+    public void AddInputArguments(System.Func<System.Xml.XmlElement, IParameter[]> argument)
     {
-      throw new System.NotImplementedException();
+      RemoveArguments(BrowseNames.InputArguments, argument);
     }
     /// <summary>
     /// Adds the output argument. The OutputArgument specifies the output argument of the Method. The Method contains an array of the Argument data type.
     /// An empty array indicates that there are no output arguments for the Method.
     /// </summary>
-    /// <param name="argument">The output argument.</param>
-    /// <exception cref="System.NotImplementedException"></exception>
-    public void AddOutputArguments(IParameter argument)
+    /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XMLElement" />.</param>
+    public void AddOutputArguments(System.Func<System.Xml.XmlElement, IParameter[]> argument)
     {
-      throw new System.NotImplementedException();
+      RemoveArguments(BrowseNames.OutputArguments, argument);
     }
+    #endregion
+    
+    private IParameter[] RemoveArguments(string parameterKind, Func<XmlElement, IParameter[]> getParameters)
+    {
+      IParameter[] _parameters = null;
+      List<NodeFactoryBase> _newChildrenCollection = new List<NodeFactoryBase>();
+      foreach (NodeFactoryBase _item in m_Nodes)
+      {
+        if (_item.SymbolicName.Equals(new XmlQualifiedName(parameterKind, Namespaces.OpcUa)))
+        {
+          PropertyInstanceFactoryBase _arg = (PropertyInstanceFactoryBase)_item;
+          _parameters = getParameters(_arg.DefaultValue);
+        }
+        else
+          _newChildrenCollection.Add(_item);
+      }
+      m_Nodes = _newChildrenCollection;
+      return _parameters;
+    }
+
   }
 }

@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using UAOOI.SemanticData.InformationModelFactory;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
@@ -8,7 +9,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
   {
     public NodeFactory NewExportNodeFFactory<NodeFactory>() where NodeFactory : INodeFactory
     {
-      INodeFactory _df = default(NodeFactory);
+      NodeFactoryBase _df = null;
       if (typeof(NodeFactory) == typeof(IReferenceTypeFactory))
         _df = new ReferenceTypeFactoryBase();
       else if (typeof(NodeFactory) == typeof(IObjectTypeFactory))
@@ -29,8 +30,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
         _df = new ViewInstanceFactoryBase();
       else
         throw new NotImplementedException();
-      return (NodeFactory)_df;
+      m_Nodes.Add(_df);
+      return (NodeFactory)(INodeFactory)_df;
     }
+    protected List<NodeFactoryBase> m_Nodes = new List<NodeFactoryBase>();
 
   }
 }

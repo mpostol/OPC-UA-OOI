@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
@@ -137,6 +138,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return namespaceUris.GetIndexOrAppend(_identifier, m_TraceEvent);
     }
     #endregion
+
 
   }
 

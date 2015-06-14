@@ -4,7 +4,7 @@ using System.Xml;
 namespace UAOOI.SemanticData.InformationModelFactory
 {
   /// <summary>
-  /// Interface IExportDataTypeFieldFactory - The=is interface defines an abstract representation of a field within a 
+  /// Interface IExportDataTypeFieldFactory - This interface defines an abstract representation of a field within a 
   /// UADataType that can be used by design tools to automatically create serialization code.
   /// </summary>
   public interface IDataTypeFieldFactory

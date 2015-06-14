@@ -1,9 +1,12 @@
 ﻿
+using System;
+using System.Xml;
+
 namespace UAOOI.SemanticData.InformationModelFactory
 {
 
   /// <summary>
-  /// Interface IMethodInstanceFactory representing a method Method in the Information Model. Methods are lightweight functions, whose scope is bounded by an owning object, 
+  /// Interface IMethodInstanceFactory representing a Method in the Information Model. Methods are lightweight functions, whose scope is bounded by an owning object, 
   /// similar to the methods of a class in object-oriented programming or an owning object type, similar to static methods of a class.
   /// </summary>
   /// <remarks>
@@ -31,17 +34,17 @@ namespace UAOOI.SemanticData.InformationModelFactory
       set;
     }
     /// <summary>
-    /// Adds the input argument. The InputArgument specify the input argument of the Method. The Method contains an array of the Argument data type. 
+    /// Adds the input arguments. The InputArgument specify the input argument of the Method. The Method contains an array of the Argument data type. 
     /// An empty array indicates that there are no input arguments for the Method.
     /// </summary>
-    /// <param name="argument">The input argument.</param>
-    void AddInputArgument(IParameter argument);
+    /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XMLElement"/>.</param>
+    void AddInputArguments(Func<XmlElement, IParameter[]> argument);
     /// <summary>
     /// Adds the output argument. The OutputArgument specifies the output argument of the Method. The Method contains an array of the Argument data type. 
     /// An empty array indicates that there are no output arguments for the Method.
     /// </summary>
-    /// <param name="argument">The output argument.</param>
-    void AddOutputArguments(IParameter argument);
+    /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XMLElement"/>.</param>
+    void AddOutputArguments(Func<XmlElement, IParameter[]> argument);
 
   }
 }

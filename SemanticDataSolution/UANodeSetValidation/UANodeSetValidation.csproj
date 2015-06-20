@@ -102,7 +102,11 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="OPCUAOOIKey.snk" />
+    <None Include="XML\OPCFCTTInformationModelling.Svcutil.cmd" />
     <None Include="XML\UANodeSet.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XML\OPCFCTTInformationModelling.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

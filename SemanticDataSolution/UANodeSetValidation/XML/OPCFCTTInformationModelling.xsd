@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="XMLSchema1"
+    targetNamespace="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/OPCFCTTInformationModelling.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/OPCFCTTInformationModelling.xsd"
+    xmlns:mstns="http://tempuri.org/XMLSchema1.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="UseCases" type="Tests">
+  </xs:element>
+  <xs:complexType  name="Tests">
+    <xs:sequence  >
+      <xs:element name="TestCase" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType >
+          <xs:sequence>
+            <xs:element name="CTT" type="xs:string" minOccurs="0" maxOccurs="1" />
+            <xs:element name="SpecLink" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Step" type="xs:string" minOccurs="0" maxOccurs="1" />
+            <xs:element name="NodeClass" type="xs:string" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Focus" type="xs:string" />
+            <xs:element name="TestCase" type="xs:string" minOccurs="0" maxOccurs="1" />
+            <xs:element name="ExpectedResults" type="xs:string" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Reviewed" type="xs:string" minOccurs="0" maxOccurs="1"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

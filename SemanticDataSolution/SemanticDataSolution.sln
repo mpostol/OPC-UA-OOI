@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSerializationUnitTestPr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{78EDB72A-77B1-4A64-8E76-17E780993017}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\SmartFactory\PR42-SmartFactory\IPR\WebsiteApplication\IPRInteroperability\ERP\Batch.xsd = ..\..\SmartFactory\PR42-SmartFactory\IPR\WebsiteApplication\IPRInteroperability\ERP\Batch.xsd
+		..\..\SmartFactory\PR42-SmartFactory\IPR\WebsiteApplication\IPRInteroperability\ERP\Invoice.XSD = ..\..\SmartFactory\PR42-SmartFactory\IPR\WebsiteApplication\IPRInteroperability\ERP\Invoice.XSD
 		README.MD = README.MD
 	EndProjectSection
 EndProject

@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns1:UseCases xmlns:ns1="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/OPCFCTTInformationModelling.xsd">
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-4.4.2-002</ns1:SpecLink>
+		<ns1:NodeClass>All</ns1:NodeClass>
+		<ns1:Focus>Properties</ns1:Focus>
+		<ns1:TestCase>BrowseNames must be unique in the context of the Parent node.
+Also specified in P3-5.6.3.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-4.4.2-003</ns1:SpecLink>
+		<ns1:NodeClass>All</ns1:NodeClass>
+		<ns1:Focus>Properties</ns1:Focus>
+		<ns1:TestCase>Properties always reside in the same Server.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-4.5.1-001</ns1:SpecLink>
+		<ns1:NodeClass>Object, Variable</ns1:NodeClass>
+		<ns1:Focus>HasTypeDefinition</ns1:Focus>
+		<ns1:TestCase>HasTypeDefinition: reference will point to a TypeDefinitionNode (of some type).</ns1:TestCase>
+		<ns1:ExpectedResults>All Objects and Variables MUST have a HasTypeDefinition reference.
+
+The target NodeId may be in a Remote Server; this is permissable.
+
+The reference must point to an actual type.
+
+A well-known type may not exist in the address-space, i.e. UA Part 3, Part 4, Part 5, Part 8, etc. But, if they are present then they have a numeric Id and are in namespace 0.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-4.5.2-001</ns1:SpecLink>
+		<ns1:NodeClass>Object, Variable</ns1:NodeClass>
+		<ns1:Focus>TypeDefinitionNodes</ns1:Focus>
+		<ns1:TestCase>Must point to an instance; not another type definition.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-4.5.3-001</ns1:SpecLink>
+		<ns1:Focus>SubType</ns1:Focus>
+		<ns1:TestCase>Mandatory items are present.
+Optional items are present and still marked as Optional or Mandatory.</ns1:TestCase>
+		<ns1:ExpectedResults>Any optional items that have become mandatory is permitted.
+Additional Nodes may have been added.
+Data-types may have been made "more specific", e.g. from Number to Int16.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-4.5.4-001</ns1:SpecLink>
+		<ns1:NodeClass>ObjectType, VariableType</ns1:NodeClass>
+		<ns1:Focus>TypeDefinitionNodes</ns1:Focus>
+		<ns1:TestCase>Read the Forward references.</ns1:TestCase>
+		<ns1:ExpectedResults>The BrowseName of the targets are unique and match the names and other rules of their parent type definition.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-4.5.4-002</ns1:SpecLink>
+		<ns1:NodeClass>ObjectType, VariableType</ns1:NodeClass>
+		<ns1:Focus>InstanceDeclaration</ns1:Focus>
+		<ns1:TestCase>Read the Forward references.</ns1:TestCase>
+		<ns1:ExpectedResults>The BrowseName of the targets are unique and match the names and other rules of their parent type definition.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-4.5.4-003</ns1:SpecLink>
+		<ns1:NodeClass>ObjectType, VariableType, ReferenceType</ns1:NodeClass>
+		<ns1:Focus>InstanceDeclaration</ns1:Focus>
+		<ns1:TestCase>Instances derived from an InstanceDeclaration shall be of the same TypeDefinitionNode or a subtype of this TypeDefinitionNode.</ns1:TestCase>
+		<ns1:ExpectedResults>The string-part of the BrowseName is case sensitive.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.2-000</ns1:SpecLink>
+		<ns1:Focus>NodeClass</ns1:Focus>
+		<ns1:TestCase>Structure matches Table 2 (includes data-types etc).
+
+Note to Developer: Table 12 provides a good summary of all other node class types.</ns1:TestCase>
+		<ns1:ExpectedResults>Attributes exist and comply where required. 
+If Optional attributes exist then they comply.</ns1:ExpectedResults>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>n</ns1:CTT>
+		<ns1:SpecLink>P3-5.2.2-001</ns1:SpecLink>
+		<ns1:Focus>NodeClass</ns1:Focus>
+		<ns1:TestCase>Server shall persist the NodeId of a Node, that is, it shall not generate new NodeIds when rebooting. </ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.3.1-000</ns1:SpecLink>
+		<ns1:Focus>ReferenceType</ns1:Focus>
+		<ns1:TestCase>Structure matches Table 4. If this type is found in TypeSystem browsing then (a) check the only References that exist are either HasProperty or HasSubtype.</ns1:TestCase>
+		<ns1:ExpectedResults>Attributes exist and comply where required. 
+If Optional attributes exist then they comply.
+Mandatory Properties exist and comply; optionals are checked if they exist
+References follow the constraints/rules as described.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>Y</ns1:CTT>
+		<ns1:SpecLink>P3-5.3.2-001</ns1:SpecLink>
+		<ns1:Focus>ReferenceType</ns1:Focus>
+		<ns1:TestCase>BrowseName is unique.</ns1:TestCase>
+		<ns1:ExpectedResults>No two references can have the same browse name!</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>Y</ns1:CTT>
+		<ns1:SpecLink>P3-5.3.2-002</ns1:SpecLink>
+		<ns1:Focus>ReferenceType</ns1:Focus>
+		<ns1:TestCase>IsAbstract is set to TRUE means that this type is ONLY defined in the Type System.</ns1:TestCase>
+		<ns1:ExpectedResults>When walking through the address-space no references of this type exist.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.3.2-003</ns1:SpecLink>
+		<ns1:Focus>ReferenceType</ns1:Focus>
+		<ns1:TestCase>Symmetric and InverseName rules.</ns1:TestCase>
+		<ns1:ExpectedResults>When: 
+IsAbstract=N; Symmetric=N then InverseName=Y.
+IsAbstract=Y; Symmetric=Y then InverseName=N.
+IsAbstract=Y; Symmetric=N then InverseName=Y/N (optional).
+IsAbstract=N; Symmetric=Y then InverseName=N.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>Y</ns1:CTT>
+		<ns1:SpecLink>P3-5.3.2-004</ns1:SpecLink>
+		<ns1:Focus>ReferenceType</ns1:Focus>
+		<ns1:TestCase>References (forward and inverse) do not result in an infinite loop.</ns1:TestCase>
+		<ns1:ExpectedResults>For hierarchical references.
+For example: RefA --&gt; RefB --&gt; RefC --&gt; [RefA = not allowed]</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>Y</ns1:CTT>
+		<ns1:SpecLink>P3-5.3.3.2-001</ns1:SpecLink>
+		<ns1:Focus>HasProperty</ns1:Focus>
+		<ns1:TestCase>May only be used on Variable NodeClass types.
+TargetNode is a Property (Variable type).</ns1:TestCase>
+		<ns1:ExpectedResults>Must point to a Type that is actually a Property.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.3.3.3-001</ns1:SpecLink>
+		<ns1:Focus>HasSubtype</ns1:Focus>
+		<ns1:TestCase>Derived types must declare that they are a subtype and specify their parent type.</ns1:TestCase>
+		<ns1:ExpectedResults>Parent types are NOT required to declare the subtypes below them.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.3.3.3-002</ns1:SpecLink>
+		<ns1:Focus>HasSubtype</ns1:Focus>
+		<ns1:TestCase>Multiple inheritence not allowed.</ns1:TestCase>
+		<ns1:ExpectedResults>Only one parent type is permitted.
+Only 1 reference of type IsSubTypeOf is defined for ALL types!</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.4-000</ns1:SpecLink>
+		<ns1:Focus>View</ns1:Focus>
+		<ns1:TestCase>Structure matches Table 5.</ns1:TestCase>
+		<ns1:ExpectedResults>Attributes exist and comply where required. 
+If Optional attributes exist then they comply.
+Properties exist and comply where required; optionals are checked too.
+References follow the constraints/rules as described.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.4-001</ns1:SpecLink>
+		<ns1:Focus>View</ns1:Focus>
+		<ns1:TestCase>HasProperty references are permitted.</ns1:TestCase>
+		<ns1:ExpectedResults>Points to property types.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.4-002</ns1:SpecLink>
+		<ns1:Focus>View</ns1:Focus>
+		<ns1:TestCase>Browse the address-space WITHIN a View, and follow the references; you can't find the Server object.</ns1:TestCase>
+		<ns1:ExpectedResults>The Server object is not available/accessible from a View.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.4-003</ns1:SpecLink>
+		<ns1:Focus>View</ns1:Focus>
+		<ns1:TestCase>Views can be the SourceNode of Hierarchical references only.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.5.1-000</ns1:SpecLink>
+		<ns1:Focus>Object</ns1:Focus>
+		<ns1:TestCase>Structure matches Table 6.</ns1:TestCase>
+		<ns1:ExpectedResults>Attributes exist and comply where required. 
+If Optional attributes exist then they comply.
+Properties exist and comply where required; optionals are checked too.
+References follow the constraints/rules as described.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.5.1-001</ns1:SpecLink>
+		<ns1:Focus>Object</ns1:Focus>
+		<ns1:TestCase>References follow the rules defined in Table 6.
+(Script Developer: one "script" per Reference type for validating the rules are followed)</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.5.3-000</ns1:SpecLink>
+		<ns1:Focus>ObjectType</ns1:Focus>
+		<ns1:TestCase>Structure matches Table 7.</ns1:TestCase>
+		<ns1:ExpectedResults>Attributes exist and comply where required. 
+If Optional attributes exist then they comply.
+Properties exist and comply where required; optionals are checked too.
+References follow the constraints/rules as described.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.6.1-000</ns1:SpecLink>
+		<ns1:Focus>Variable</ns1:Focus>
+		<ns1:TestCase>Structure matches Table 8.</ns1:TestCase>
+		<ns1:ExpectedResults>Attributes exist and comply where required. 
+If Optional attributes exist then they comply.
+Properties exist and comply where required; optionals are checked too.
+References follow the constraints/rules as described.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.6.1-001</ns1:SpecLink>
+		<ns1:Focus>Variable</ns1:Focus>
+		<ns1:TestCase>Instances of this type are either (a) DataVariable (b) Property.</ns1:TestCase>
+		<ns1:ExpectedResults>Verify that references exist, and then follow the inverse reference(s) to make sure that if the current node is a Property (and has the PropertyType reference) then the parent can be anything except a Property.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.6.3-001</ns1:SpecLink>
+		<ns1:Focus>Properties</ns1:Focus>
+		<ns1:TestCase>Shall not be the SourceNode of any hierarchical Reference.</ns1:TestCase>
+		<ns1:ExpectedResults>May be the SourceNode of non-hieararchical references.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.6.3-002</ns1:SpecLink>
+		<ns1:Focus>Properties</ns1:Focus>
+		<ns1:TestCase>Has the type definition reference: PropertyType.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.6.3-003</ns1:SpecLink>
+		<ns1:Focus>Properties</ns1:Focus>
+		<ns1:TestCase>Must be the TargetNode of least one HasProperty reference.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.6.5-000</ns1:SpecLink>
+		<ns1:Focus>VariableType</ns1:Focus>
+		<ns1:TestCase>Structure matches Table 9.</ns1:TestCase>
+		<ns1:ExpectedResults>Attributes exist and comply where required. 
+If Optional attributes exist then they comply.
+Properties exist and comply where required; optionals are checked too.
+References follow the constraints/rules as described.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.7-000</ns1:SpecLink>
+		<ns1:Focus>Method</ns1:Focus>
+		<ns1:TestCase>Structure matches Table 10.</ns1:TestCase>
+		<ns1:ExpectedResults>Attributes exist and comply where required. 
+If Optional attributes exist then they comply.
+Properties exist and comply where required; optionals are checked too.
+References follow the constraints/rules as described.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-5.8.3-000</ns1:SpecLink>
+		<ns1:Focus>DataType</ns1:Focus>
+		<ns1:TestCase>Structure matches Table 11.</ns1:TestCase>
+		<ns1:ExpectedResults>Attributes exist and comply where required. 
+If Optional attributes exist then they comply.
+Properties exist and comply where required; optionals are checked too.
+References follow the constraints/rules as described.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-6.2.1-001</ns1:SpecLink>
+		<ns1:Focus>InstanceDeclaration</ns1:Focus>
+		<ns1:TestCase>Is an Object, Variable, or Method.</ns1:TestCase>
+		<ns1:ExpectedResults>Has a HasModellingRule reference and is the TargetNode of a hierarchical reference from a TypeDefinitionNode, or resolves from a TypeDefinitionNode.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-6.4.4-001</ns1:SpecLink>
+		<ns1:Focus>ModellingRules</ns1:Focus>
+		<ns1:TestCase>NamingRule property exists and contains one of these values (a) Optional (b) Mandatory (c ) Constraint (d) mandatory placeholder (e) optional placeholder.</ns1:TestCase>
+		<ns1:ExpectedResults>Property is required; values are from the enumeration.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-6.4.4-002</ns1:SpecLink>
+		<ns1:Focus>ModellingRules</ns1:Focus>
+		<ns1:TestCase>Properties obey the rules defined in Table 15 and 16.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-7.1-000</ns1:SpecLink>
+		<ns1:Focus>ReferenceType</ns1:Focus>
+		<ns1:TestCase>The inheritence chain matches Figure 24.</ns1:TestCase>
+		<ns1:ExpectedResults>Use just the references in Figure 24; any custom reference types detected should be permitted. 
+
+Note: As we find more types derived from this diagram we can add this to this test-script.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-7.3-001</ns1:SpecLink>
+		<ns1:Focus>HierarchicalReference</ns1:Focus>
+		<ns1:TestCase>The SourceNode and TargetNode cannot point to the same NodeId.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-7.7-001</ns1:SpecLink>
+		<ns1:Focus>HasComponent</ns1:Focus>
+		<ns1:TestCase>IF the Source of this reference is an Object or ObjectType; the Target is used with Objects, DataVariables, or Methods.
+If the Source of this reference is Variable or VariableTypes, then the Target is used with DataVariables.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-7.10-001</ns1:SpecLink>
+		<ns1:Focus>HasSubtype</ns1:Focus>
+		<ns1:TestCase>SourceNode is an ObjectType, VariableType, DataType, or ReferenceType; TargetNode is of the same NodeClass as the SourceNode.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-7.11-001</ns1:SpecLink>
+		<ns1:Focus>Organizes</ns1:Focus>
+		<ns1:TestCase>SourceNode of type Object or View. If an Object then it is of type FolderType or a sub-type.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-7.12-001</ns1:SpecLink>
+		<ns1:Focus>HasModellingRule</ns1:Focus>
+		<ns1:TestCase>SourceNode is an Object, Variable, or Method. The TargetNode is an Object of type ModellingRule or sub-type.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-7.13-001</ns1:SpecLink>
+		<ns1:Focus>HasTypeDefinition</ns1:Focus>
+		<ns1:TestCase>SourceNode is Object or Variable. If Object then TargetNode is an ObjectType; if Variable then TargetNode is VariableType.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-7.14-001</ns1:SpecLink>
+		<ns1:Focus>HasEncoding</ns1:Focus>
+		<ns1:TestCase>SourceNode is DataType. TargetNode is a DataTypeEncodingType or sub-type.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-7.15-001</ns1:SpecLink>
+		<ns1:Focus>HasDescription</ns1:Focus>
+		<ns1:TestCase>SourceNode is DataTypeEncodingType or a sub-type. TargetNode is a DataTypeDescriptionType or sub-type.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-7.16-001</ns1:SpecLink>
+		<ns1:Focus>GeneratesEvent</ns1:Focus>
+		<ns1:TestCase>SourceNode is an ObjectType, VariableType, or Method. TargetNode is an event type that ultimately (not necessarily immediately) derives from BaseEventType.</ns1:TestCase>
+		<ns1:ExpectedResults>Target Node ultimately derives from BaseEventType</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-7.17-001</ns1:SpecLink>
+		<ns1:Focus>AlwaysGeneratesEvent</ns1:Focus>
+		<ns1:TestCase>SourceNode is Method. TargetNode is an event type that ultimately (not necessarily immediately) derives from BaseEventType.</ns1:TestCase>
+		<ns1:ExpectedResults>Target node ultimately derives from BaseEventType</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-7.18-001</ns1:SpecLink>
+		<ns1:Focus>HasEventSource</ns1:Focus>
+		<ns1:TestCase>SourceNode is an Object that represents the source.</ns1:TestCase>
+		<ns1:ExpectedResults>SourceNode exists and the EventNotifier.SubscribeToEvents is TRUE.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-7.19-001</ns1:SpecLink>
+		<ns1:Focus>HasNotifier</ns1:Focus>
+		<ns1:TestCase>SourceNode is an Object or View. TargetNode are Objects. </ns1:TestCase>
+		<ns1:ExpectedResults>SourceNode exists and the EventNotifier.SubscribeToEvents is TRUE.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-8.14</ns1:SpecLink>
+		<ns1:Focus>Enumeration</ns1:Focus>
+		<ns1:TestCase>Any enumeration DataType not directly inheriting (sub-type) from the Enumeration DataType can only restrict the enumeration values of its supertype. That is, it shall neither add enumeration values nor change the text associated to the enumeration value</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-8.33</ns1:SpecLink>
+		<ns1:Focus>Structure</ns1:Focus>
+		<ns1:TestCase>Structured DataTypes shall inherit from the base Structure DataType. This means that you cannot derive from any other structure.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-8.39</ns1:SpecLink>
+		<ns1:Focus>XmlElement</ns1:Focus>
+		<ns1:TestCase>If this type is found then issue a Warning to notify the tester that this type really shouldn't be used, and that a Structure should be used instead.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P5-4.1-001</ns1:SpecLink>
+		<ns1:Focus>NodeId</ns1:Focus>
+		<ns1:TestCase>Standard OPC Foundationd defined types use NamespaceIndex=0.</ns1:TestCase>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>Y</ns1:CTT>
+		<ns1:SpecLink>P5-12-000</ns1:SpecLink>
+		<ns1:Focus>AbstractTypes</ns1:Focus>
+		<ns1:TestCase>Abstract or Composite types like numeric, integer, uinteger etc. must be verified (e.g. uint16 unacceptable when received for a type defined as integer); sub-types may further restrict the type (e.g. parent is Numeric, subtype restricts to int16)</ns1:TestCase>
+		<ns1:ExpectedResults>Applies to: Integer, UInteger, Double, Number, ByteString, DateTime, String, Structure, and Image.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+	<ns1:TestCase>
+		<ns1:CTT>y</ns1:CTT>
+		<ns1:SpecLink>P3-Annex-C</ns1:SpecLink>
+		<ns1:Focus>TypeDictionary Structure</ns1:Focus>
+		<ns1:TestCase>If the type is a custom Structure (i.e. not 'well-known') then decode it according to the TypeDictionary.</ns1:TestCase>
+		<ns1:ExpectedResults>Each decoded 'element' applies with the applicable UA built-in type. If the element is a structure, enumeration, or opaque, then recursively apply the same rules.</ns1:ExpectedResults>
+		<ns1:Reviewed>ok</ns1:Reviewed>
+	</ns1:TestCase>
+</ns1:UseCases>

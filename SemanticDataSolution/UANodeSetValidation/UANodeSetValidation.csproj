@@ -39,6 +39,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -88,6 +89,9 @@
     <Compile Include="UANodeContext.cs" />
     <Compile Include="UAReferenceContext.cs" />
     <Compile Include="Utilities\NamespaceTable.cs" />
+    <Compile Include="XML\OPCFCTTInformationModelling.cs">
+      <DependentUpon>OPCFCTTInformationModelling.xsd</DependentUpon>
+    </Compile>
     <Compile Include="XML\UANodeSet.cs">
       <DependentUpon>UANodeSet.xsd</DependentUpon>
     </Compile>
@@ -103,6 +107,7 @@
     </None>
     <None Include="OPCUAOOIKey.snk" />
     <None Include="XML\OPCFCTTInformationModelling.Svcutil.cmd" />
+    <None Include="XML\OPCFCTTInformationModelling.xltm" />
     <None Include="XML\UANodeSet.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -113,6 +118,7 @@
   <ItemGroup>
     <Content Include="Validator.Notes..txt" />
     <Content Include="XML\BuildErrorsCollection.xml" />
+    <None Include="XML\OPCFCTTInformationModelling.xml" />
     <EmbeddedResource Include="XML\Opc.Ua.NodeSet2.xml" />
   </ItemGroup>
   <ItemGroup>

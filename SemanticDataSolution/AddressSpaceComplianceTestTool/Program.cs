@@ -18,7 +18,7 @@ namespace UAOOI.SemanticData.AddressSpaceTestTool
       }
       catch (Exception ex)
       {
-        Console.WriteLine(String.Format("Program stoped by the exception: {0}", ex.Message));
+        Console.WriteLine(String.Format("Program stopped by the exception: {0}", ex.Message));
       }
       Console.Write("Press Enter to close this window.......");
       Console.Read();

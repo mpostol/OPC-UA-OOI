@@ -39,17 +39,10 @@
       <Descriptor>The string part of the DisplayName is restricted to 512 characters.</Descriptor>
       <Name>WrongDisplayNameLength</Name>
     </NamedBuildError>
-    <!--OLD-->
-    <NamedBuildError>
-      <Focus>Reference</Focus>
-      <Identifier>P3-0654321001</Identifier>
-      <Descriptor>The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist.</Descriptor>
-      <Name>DanglingReferenceType</Name>
-    </NamedBuildError>
     <NamedBuildError>
       <Focus>Diagnostic</Focus>
-      <Identifier>P3-0304040000</Identifier>
-      <Descriptor>The node pointed by the ReferenceType doesn't exist.</Descriptor>
+      <Identifier>P3-0403040000</Identifier>
+      <Descriptor>The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist.</Descriptor>
       <Name>DanglingReferenceTarget</Name>
     </NamedBuildError>
     <NamedBuildError>

@@ -55,21 +55,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                     Identifier = "P3-0502050000", 
                     Descriptor = "The string part of the DisplayName is restricted to 512 characters." }; } }
     /// <summary>
-    /// Error: P3-0654321001; Focus: Reference; The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist.
+    /// Error: P3-0403040000; Focus: Diagnostic; The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist.
     /// </summary>
-    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0654321001.</value>
-    public static BuildError DanglingReferenceType { get { return new BuildError() 
-                  { Focus = Focus.Reference, 
-                    Identifier = "P3-0654321001", 
-                    Descriptor = "The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist." }; } }
-    /// <summary>
-    /// Error: P3-0304040000; Focus: Diagnostic; The node pointed by the ReferenceType doesn't exist.
-    /// </summary>
-    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0304040000.</value>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0403040000.</value>
     public static BuildError DanglingReferenceTarget { get { return new BuildError() 
                   { Focus = Focus.Diagnostic, 
-                    Identifier = "P3-0304040000", 
-                    Descriptor = "The node pointed by the ReferenceType doesn't exist." }; } }
+                    Identifier = "P3-0403040000", 
+                    Descriptor = "The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist." }; } }
     /// <summary>
     /// Error: P3-0710000000; Focus: Reference; Each Node shall be the TargetNode of at most one Reference of type HasSubtype.
     /// </summary>

@@ -71,7 +71,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Debug.Assert(nodeContext != null, "Validator.ValidateExportNode the argument nodeContext is null.");
       if (nodeContext.UANode == null)
       {
-        TraceMessage _traceMessage = TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, "Compilation Error at CreateNodeDesign");
+        TraceMessage _traceMessage = TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, "Compilation Information at CreateNodeDesign");
         traceEvent(_traceMessage);
         CreateModelDesignStub(exportFactory);
       }

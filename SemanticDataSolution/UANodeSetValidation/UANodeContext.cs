@@ -84,8 +84,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             XmlQualifiedName _ReferenceType = _rfx.GetReferenceTypeName(this.m_ModelContext, traceEvent);
             if (_ReferenceType == XmlQualifiedName.Empty)
             {
-              BuildError _err = BuildError.DanglingReferenceType;
-              traceEvent(TraceMessage.BuildErrorTraceMessage(_err, "Compilation error"));
+              BuildError _err = BuildError.DanglingReferenceTarget;
+              traceEvent(TraceMessage.BuildErrorTraceMessage(_err, "Information"));
               Errors.Add(_err);
             }
             IReferenceFactory _or = nodeContainer.NewReference();

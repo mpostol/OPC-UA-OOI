@@ -46,31 +46,31 @@
     </NamedBuildError>
     <NamedBuildError>
       <Focus>Reference</Focus>
-      <Identifier>P3-654321</Identifier>
+      <Identifier>P3-06543210000</Identifier>
       <Descriptor>The node pointed by the ReferenceType doesn't exist.</Descriptor>
       <Name>DanglingReferenceTarget</Name>
     </NamedBuildError>
     <NamedBuildError>
       <Focus>Reference</Focus>
-      <Identifier>P3-7.10-002</Identifier>
+      <Identifier>P3-0710000000</Identifier>
       <Descriptor>Each Node shall be the TargetNode of at most one Reference of type HasSubtype.</Descriptor>
       <Name>HasSubtypeMulitarget</Name>
     </NamedBuildError>
     <NamedBuildError>
       <Focus>Reference</Focus>
-      <Identifier>P3-???</Identifier>
+      <Identifier>P3-0503030201</Identifier>
       <Descriptor>Wrong Reference type targeting the Property component.</Descriptor>
       <Name>WrongReference2Property</Name>
     </NamedBuildError>
     <NamedBuildError>
       <Focus>Reference</Focus>
-      <Identifier>P3-???</Identifier>
-      <Descriptor>Wrong Reference type targeting the Variable component.</Descriptor>
+      <Identifier>P3-0707000000</Identifier>
+      <Descriptor>Wrong Reference type targeting the DataVariable component.</Descriptor>
       <Name>WrongReference2Variable</Name>
     </NamedBuildError>
     <NamedBuildError>
       <Focus>Reference</Focus>
-      <Identifier>P3-???</Identifier>
+      <Identifier>P3-0707000001</Identifier>
       <Descriptor>Wrong Reference type for Method component.</Descriptor>
       <Name>WrongReference2Method</Name>
     </NamedBuildError>

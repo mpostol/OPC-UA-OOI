@@ -63,44 +63,44 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                     Identifier = "P3-123456", 
                     Descriptor = "The reference target doesn't exist." }; } }
     /// <summary>
-    /// Error: P3-654321; Focus: Reference; The node pointed by the ReferenceType doesn't exist.
+    /// Error: P3-06543210000; Focus: Reference; The node pointed by the ReferenceType doesn't exist.
     /// </summary>
-    /// <value>An instance of <see cref="BuildError"/> describing the error P3-654321.</value>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-06543210000.</value>
     public static BuildError DanglingReferenceTarget { get { return new BuildError() 
                   { Focus = Focus.Reference, 
-                    Identifier = "P3-654321", 
+                    Identifier = "P3-06543210000", 
                     Descriptor = "The node pointed by the ReferenceType doesn't exist." }; } }
     /// <summary>
-    /// Error: P3-7.10-002; Focus: Reference; Each Node shall be the TargetNode of at most one Reference of type HasSubtype.
+    /// Error: P3-0710000000; Focus: Reference; Each Node shall be the TargetNode of at most one Reference of type HasSubtype.
     /// </summary>
-    /// <value>An instance of <see cref="BuildError"/> describing the error P3-7.10-002.</value>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0710000000.</value>
     public static BuildError HasSubtypeMulitarget { get { return new BuildError() 
                   { Focus = Focus.Reference, 
-                    Identifier = "P3-7.10-002", 
+                    Identifier = "P3-0710000000", 
                     Descriptor = "Each Node shall be the TargetNode of at most one Reference of type HasSubtype." }; } }
     /// <summary>
-    /// Error: P3-???; Focus: Reference; Wrong Reference type targeting the Property component.
+    /// Error: P3-0503030201; Focus: Reference; Wrong Reference type targeting the Property component.
     /// </summary>
-    /// <value>An instance of <see cref="BuildError"/> describing the error P3-???.</value>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0503030201.</value>
     public static BuildError WrongReference2Property { get { return new BuildError() 
                   { Focus = Focus.Reference, 
-                    Identifier = "P3-???", 
+                    Identifier = "P3-0503030201", 
                     Descriptor = "Wrong Reference type targeting the Property component." }; } }
     /// <summary>
-    /// Error: P3-???; Focus: Reference; Wrong Reference type targeting the Variable component.
+    /// Error: P3-0707000000; Focus: Reference; Wrong Reference type targeting the DataVariable component.
     /// </summary>
-    /// <value>An instance of <see cref="BuildError"/> describing the error P3-???.</value>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0707000000.</value>
     public static BuildError WrongReference2Variable { get { return new BuildError() 
                   { Focus = Focus.Reference, 
-                    Identifier = "P3-???", 
-                    Descriptor = "Wrong Reference type targeting the Variable component." }; } }
+                    Identifier = "P3-0707000000", 
+                    Descriptor = "Wrong Reference type targeting the DataVariable component." }; } }
     /// <summary>
-    /// Error: P3-???; Focus: Reference; Wrong Reference type for Method component.
+    /// Error: P3-0707000001; Focus: Reference; Wrong Reference type for Method component.
     /// </summary>
-    /// <value>An instance of <see cref="BuildError"/> describing the error P3-???.</value>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0707000001.</value>
     public static BuildError WrongReference2Method { get { return new BuildError() 
                   { Focus = Focus.Reference, 
-                    Identifier = "P3-???", 
+                    Identifier = "P3-0707000001", 
                     Descriptor = "Wrong Reference type for Method component." }; } }
     /// <summary>
     /// Error: P6-0503011400; Focus: NodeClass; BrowseName cannot be null string.

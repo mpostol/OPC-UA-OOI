@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<BuildErrorsCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<BuildErrorsCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!--xmlns="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd" -->
   <ListOfBuildErrors>
     <NamedBuildError>
       <Focus>XML</Focus>
@@ -33,14 +35,14 @@
     </NamedBuildError>
     <NamedBuildError>
       <Focus>NodeClass</Focus>
-      <Identifier>P3-05020500</Identifier>
+      <Identifier>P3-0502050000</Identifier>
       <Descriptor>The string part of the DisplayName is restricted to 512 characters.</Descriptor>
       <Name>WrongDisplayNameLength</Name>
     </NamedBuildError>
     <!--OLD-->
     <NamedBuildError>
       <Focus>Reference</Focus>
-      <Identifier>P3-123456</Identifier>
+      <Identifier>P3-06543210001</Identifier>
       <Descriptor>The reference target doesn't exist.</Descriptor>
       <Name>DanglingReferenceType</Name>
     </NamedBuildError>

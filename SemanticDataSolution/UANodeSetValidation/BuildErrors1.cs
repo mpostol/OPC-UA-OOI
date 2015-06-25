@@ -47,20 +47,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                     Identifier = "P3-0502070000", 
                     Descriptor = "The value must be less than 0x200000 for the UAVariable and less than 0x400000 for other node types." }; } }
     /// <summary>
-    /// Error: P3-05020500; Focus: NodeClass; The string part of the DisplayName is restricted to 512 characters.
+    /// Error: P3-0502050000; Focus: NodeClass; The string part of the DisplayName is restricted to 512 characters.
     /// </summary>
-    /// <value>An instance of <see cref="BuildError"/> describing the error P3-05020500.</value>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0502050000.</value>
     public static BuildError WrongDisplayNameLength { get { return new BuildError() 
                   { Focus = Focus.NodeClass, 
-                    Identifier = "P3-05020500", 
+                    Identifier = "P3-0502050000", 
                     Descriptor = "The string part of the DisplayName is restricted to 512 characters." }; } }
     /// <summary>
-    /// Error: P3-123456; Focus: Reference; The reference target doesn't exist.
+    /// Error: P3-06543210001; Focus: Reference; The reference target doesn't exist.
     /// </summary>
-    /// <value>An instance of <see cref="BuildError"/> describing the error P3-123456.</value>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-06543210001.</value>
     public static BuildError DanglingReferenceType { get { return new BuildError() 
                   { Focus = Focus.Reference, 
-                    Identifier = "P3-123456", 
+                    Identifier = "P3-06543210001", 
                     Descriptor = "The reference target doesn't exist." }; } }
     /// <summary>
     /// Error: P3-06543210000; Focus: Reference; The node pointed by the ReferenceType doesn't exist.

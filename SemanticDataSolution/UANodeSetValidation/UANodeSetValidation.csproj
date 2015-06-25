@@ -106,6 +106,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="OPCUAOOIKey.snk" />
+    <None Include="XML\BuildErrorsCollection.xltx" />
+    <None Include="XML\BuildErrorsCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="XML\OPCFCTTInformationModelling.Svcutil.cmd" />
     <None Include="XML\OPCFCTTInformationModelling.xltm" />
     <None Include="XML\UANodeSet.xsd">

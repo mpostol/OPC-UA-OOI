@@ -134,7 +134,7 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       _as.ValidateAndExportModel(m_NameSPace);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      Assert.IsTrue(_trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-05020500").Any<TraceMessage>());
+      Assert.IsTrue(_trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502050000").Any<TraceMessage>());
     }
     [TestMethod]
     public void WrongWriteMaskValue()

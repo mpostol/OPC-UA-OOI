@@ -12,15 +12,19 @@ namespace UAOOI.SemanticData.UnitTest
   [DeploymentItem(@"XMLModels\ModelsWithErrors\", @"ModelsWithErrors\")]
   public class UANodeSetWithErrorsUnitTest
   {
-    #region public
+
+    #region TestMethod
     [TestMethod]
+    [TestCategory("Deployment")]
     public void DeploymentTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\DeploymentTest.txt");
       Assert.IsTrue(_testDataFileInfo.Exists);
     }
-    private const string m_NameSPace = @"http://commsvr.com/OOIUA/SemanticData/UnitTest/UANodeSetValidationUnitTestProject";
+
+    #region Incorrect Model
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void DanglingReferenceTargetTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\DanglingReferenceTarget.NodeSet2.xml");
@@ -31,10 +35,11 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(m_NameSPace);
+      _as.ValidateAndExportModel(m_NameSpace);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
     }
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void ObjectEventNotifierOutOfRangeTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongEventNotifier.xml");
@@ -45,10 +50,11 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(m_NameSPace);
+      _as.ValidateAndExportModel(m_NameSpace);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
     }
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void WrongReference2PropertyTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongReference2Property.xml");
@@ -59,10 +65,11 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(m_NameSPace);
+      _as.ValidateAndExportModel(m_NameSpace);
       Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
     }
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void WrongValueRankTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongValueRank.xml");
@@ -73,10 +80,11 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(m_NameSPace);
+      _as.ValidateAndExportModel(m_NameSpace);
       Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
     }
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void WrongAccessLevelTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongAccessLevel.xml");
@@ -87,11 +95,12 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(m_NameSPace);
+      _as.ValidateAndExportModel(m_NameSpace);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.IsTrue(_trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0506040000").Any<TraceMessage>());
     }
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void WrongInverseNameTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongInverseName.xml");
@@ -102,11 +111,12 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(m_NameSPace);
+      _as.ValidateAndExportModel(m_NameSpace);
       Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual(3, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0503020000").Count<TraceMessage>());
     }
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void DuplicatedNodeIdTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\DuplicatedNodeId.xml");
@@ -117,11 +127,12 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(m_NameSPace);
+      _as.ValidateAndExportModel(m_NameSpace);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.IsTrue(_trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502020000").Any<TraceMessage>());
     }
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void WrongDisplayNameLength()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongDisplayNameLength.xml");
@@ -132,11 +143,12 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(m_NameSPace);
+      _as.ValidateAndExportModel(m_NameSpace);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.IsTrue(_trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502050000").Any<TraceMessage>());
     }
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void WrongWriteMaskValue()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongWriteMask.xml");
@@ -147,11 +159,12 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(m_NameSPace);
+      _as.ValidateAndExportModel(m_NameSpace);
       Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502070000").Count<TraceMessage>());
     }
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void NotSupportedFeature()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\NotSupportedFeature.xml");
@@ -162,11 +175,12 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(m_NameSPace);
+      _as.ValidateAndExportModel(m_NameSpace);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P0-0001010000").Count<TraceMessage>());
     }
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void WrongBrowseName()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongBrowseName.xml");
@@ -177,12 +191,13 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(m_NameSPace);
+      _as.ValidateAndExportModel(m_NameSpace);
       Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P6-0503011400").Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P6-0F03000000").Count<TraceMessage>());
     }
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void WrongNodeId()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongNodeId.xml");
@@ -193,13 +208,16 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_as);
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(m_NameSPace);
+      _as.ValidateAndExportModel(m_NameSpace);
       Assert.AreEqual<int>(4, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(4, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502020001").Count<TraceMessage>());
     }
+
+    #endregion    
     #endregion
 
     #region private
+    private const string m_NameSpace = @"http://commsvr.com/OOIUA/SemanticData/UnitTest/UANodeSetValidationUnitTestProject";
     private void TraceDiagnostic(TraceMessage msg, List<TraceMessage> errors, ref int diagnosticCounter)
     {
       Console.WriteLine(msg.ToString());

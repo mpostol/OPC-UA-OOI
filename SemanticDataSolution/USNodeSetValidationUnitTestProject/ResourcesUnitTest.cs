@@ -12,6 +12,7 @@ namespace UAOOI.SemanticData.UnitTest
   public class ResourcesUnitTest
   {
     [TestMethod]
+    [TestCategory("Code")]
     public void OpcUaNodeSet2TestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml");
@@ -20,6 +21,7 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNotNull(_model);
     }
     [TestMethod]
+    [TestCategory("Code")]
     public void ReadUADefinedTypesTestMethod()
     {
       UANodeSet _standard = UANodeSet.ReadUADefinedTypes();

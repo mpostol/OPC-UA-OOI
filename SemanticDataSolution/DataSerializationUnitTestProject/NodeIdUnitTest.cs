@@ -11,6 +11,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
   {
 
     [TestMethod]
+    [TestCategory("Serialization")]
     public void NodeIdValidTestMethod1()
     {
       //Numeric
@@ -32,6 +33,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       Assert.IsNotNull(_ni);
     }
     [TestMethod]
+    [TestCategory("Serialization")]
     [ExpectedException(typeof(ServiceResultException))]
     public void NodeIdNonValidNumericTestMethod1()
     {
@@ -39,6 +41,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       _ni = NodeId.Parse("ns=10;i=-1"); //this example is in the specification as valid 
     }
     [TestMethod]
+    [TestCategory("Serialization")]
     [ExpectedException(typeof(ServiceResultException))]
     public void NodeIdNonValidNumericTestMethod2()
     {
@@ -46,6 +49,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       _ni = NodeId.Parse("ns=-10;i=01");
     }
     [TestMethod]
+    [TestCategory("Serialization")]
     public void NodeIdOperatorTestMethod1()
     {
       NodeId _property = new NodeId(VariableTypes.PropertyType);
@@ -54,6 +58,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       Assert.IsTrue(_property.Equals(VariableTypeIds.PropertyType));
     }
     [TestMethod]
+    [TestCategory("Serialization")]
     public void NodeIdCompareToTestMethod()
     {
       NodeId _property = new NodeId(VariableTypes.PropertyType);
@@ -62,6 +67,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       Assert.AreEqual<int>(0, _res);
     }
     [TestMethod]
+    [TestCategory("Serialization")]
     public void NodeIdToStringTestMethod()
     {
       NodeId _property = new NodeId(VariableTypes.PropertyType);
@@ -70,6 +76,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       Assert.AreEqual<string>("i=68", _res);
     }
     [TestMethod]
+    [TestCategory("Serialization")]
     public void NodeIdToStringTestMethod2()
     {
       NodeId _property = new NodeId(68, 1);
@@ -78,6 +85,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       Assert.AreEqual<string>("ns=1;i=68", _res);
     }
     [TestMethod]
+    [TestCategory("Serialization")]
     public void NodeIdToStringTestMethod3()
     {
       System.Guid _gd = new System.Guid("e08edc80-e771-43ff-b8f6-1fbb62ae5cda");
@@ -86,6 +94,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       Assert.AreEqual<string>("ns=1;g=e08edc80-e771-43ff-b8f6-1fbb62ae5cda", _res);
     }
     [TestMethod]
+    [TestCategory("Serialization")]
     public void NodeIdDictionaryTestMethod()
     {
       Dictionary<NodeId, string> _dc = new Dictionary<NodeId, string>();
@@ -93,6 +102,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       Assert.IsTrue(_dc.ContainsKey(VariableTypeIds.PropertyType));
     }
     [TestMethod]
+    [TestCategory("Serialization")]
     public void NodeIdDictionaryTestMethod2()
     {
       Dictionary<string, NodeId> _dc = new Dictionary<string, NodeId>();
@@ -116,6 +126,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       Assert.IsTrue(_dc.ContainsKey(_nid.ToString()));
     }
     [TestMethod]
+    [TestCategory("Serialization")]
     [ExpectedException(typeof(ArgumentException))]
     public void NodeIdDictionaryTestMethod3()
     {

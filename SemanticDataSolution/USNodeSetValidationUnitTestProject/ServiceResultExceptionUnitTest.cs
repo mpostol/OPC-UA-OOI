@@ -9,6 +9,7 @@ namespace UAOOI.SemanticData.UnitTest
   public class ServiceResultExceptionUnitTest
   {
     [TestMethod]
+    [TestCategory("Code")]
     public void ServiceResultExceptionCreateTestMethod()
     {
       ServiceResultException _ex = new ServiceResultException();
@@ -19,6 +20,7 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.AreEqual<string>("Exception of type 'UAOOI.SemanticData.UANodeSetValidation.ServiceResultException' was thrown.", _ex.Message);
     }
     [TestMethod]
+    [TestCategory("Code")]
     public void ServiceResultExceptionCreateWithMessageTestMethod()
     {
       TraceMessage traceMessage = TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdInvalidSyntax, "BuildError_BadNodeIdInvalid");

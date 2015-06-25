@@ -5,6 +5,7 @@ using System.IO;
 
 namespace UAOOI.SemanticData.AddressSpaceTestTool.UnitTests
 {
+
   [TestClass]
   [DeploymentItem(@"XMLModels\", @"XMLModels\")]
   public class ValidateFileUnitTest
@@ -53,4 +54,5 @@ namespace UAOOI.SemanticData.AddressSpaceTestTool.UnitTests
       Program.ValidateFile(_testDataFileInfo);
     }
   }
+
 }

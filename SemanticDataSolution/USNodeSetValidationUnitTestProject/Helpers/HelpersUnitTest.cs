@@ -9,7 +9,7 @@ namespace UAOOI.SemanticData.UnitTest.Helpers
   public class HelpersUnitTest
   {
     [TestMethod]
-    [TestCategory("Internal")]
+    [TestCategory("Code")]
     [ExpectedException(typeof(ArgumentNullException))]
     public void TraceDiagnosticTestMethod1()
     {
@@ -18,7 +18,7 @@ namespace UAOOI.SemanticData.UnitTest.Helpers
       TraceHelper.TraceDiagnostic(TraceMessage.DiagnosticTraceMessage("Test string"), _listOfTraceMessage, ref diagnosticCounter);
     }
     [TestMethod]
-    [TestCategory("Internal")]
+    [TestCategory("Code")]
     public void TraceDiagnosticTestMethod2()
     {
       List<TraceMessage> _listOfTraceMessage = new List<TraceMessage>();
@@ -28,7 +28,7 @@ namespace UAOOI.SemanticData.UnitTest.Helpers
       Assert.AreEqual<int>(1, _diagnosticCounter);
     }
     [TestMethod]
-    [TestCategory("Internal")]
+    [TestCategory("Code")]
     public void TraceDiagnosticTestMethod3()
     {
       List<TraceMessage> _listOfTraceMessage = new List<TraceMessage>();

@@ -10,6 +10,7 @@ namespace UAOOI.SemanticData.UnitTest
   {
     [TestMethod]
     [ExpectedException(typeof(System.ArgumentNullException))]
+    [TestCategory("Code")]
     public void CreateUAModelContextNodeAliasNull()
     {
       UANodeSet _tm = TestData.CreateNodeSetModel();
@@ -17,6 +18,7 @@ namespace UAOOI.SemanticData.UnitTest
       UAModelContext _mc = new UAModelContext(null, _tm.NamespaceUris, _as);
     }
     [TestMethod]
+    [TestCategory("Code")]
     public void CreateUAModelContextModelNamespaceUrisNull()
     {
       UANodeSet _tm = TestData.CreateNodeSetModel();
@@ -24,6 +26,7 @@ namespace UAOOI.SemanticData.UnitTest
       UAModelContext _mc = new UAModelContext(_tm.Aliases, null, _as);
     }
     [TestMethod]
+    [TestCategory("Code")]
     [ExpectedException(typeof(System.ArgumentNullException))]
     public void CreateUAModelContextAddressSpaceContextNull()
     {
@@ -33,6 +36,7 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsNull(_mc.GetAddressSpaceContext);
     }
     [TestMethod]
+    [TestCategory("Code")]
     public void CreateUAModelContext()
     { 
       UANodeSet _tm = TestData.CreateNodeSetModel();

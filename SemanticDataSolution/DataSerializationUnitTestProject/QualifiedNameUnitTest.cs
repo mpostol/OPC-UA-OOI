@@ -9,6 +9,7 @@ namespace UAOOI.SemanticData.DataSerialization.UnitTest
   public class QualifiedNameUnitTest
   {
     [TestMethod]
+    [TestCategory("Serialization")]
     public void QualifiedNameTestMethod1()
     {
       string name = "Default Binary";
@@ -19,12 +20,14 @@ namespace UAOOI.SemanticData.DataSerialization.UnitTest
       Assert.AreEqual<string>(_qn.Name, name);
     }
     [TestMethod]
+    [TestCategory("Serialization")]
     public void QualifiedNameParseTestMethod2()
     {
       QualifiedName _qn = QualifiedName.Parse("0:Name");
       Assert.IsNotNull(_qn);
     }
     [TestMethod]
+    [TestCategory("Serialization")]
     public void QualifiedNameParseTestMethod3()
     {
       QualifiedName _qn = QualifiedName.Parse("Name"); //Cannot find information that the NamespaceIndex is optional

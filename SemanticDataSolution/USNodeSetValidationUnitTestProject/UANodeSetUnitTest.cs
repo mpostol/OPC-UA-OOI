@@ -36,6 +36,7 @@ namespace UAOOI.SemanticData.UnitTest
 
     #region TestMethod
     [TestMethod]
+    [TestCategory("Deployment")]
     [ExpectedExceptionAttribute(typeof(System.InvalidOperationException))]
     public void WrongFileNFormatTestMethod()
     {
@@ -49,6 +50,7 @@ namespace UAOOI.SemanticData.UnitTest
       _as.ImportUANodeSet(_testDataFileInfo);
     }
     [TestMethod]
+    [TestCategory("Correct Model")]
     public void UAReferenceTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml");
@@ -58,6 +60,7 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.AreEqual<int>(1, _nodes.Where<UANodeContext>(x => x.UANode is UAType).Count<UANodeContext>());
     }
     [TestMethod]
+    [TestCategory("Correct Model")]
     public void UAObjectTypeTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.NodeSet2.xml");
@@ -67,6 +70,7 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.AreEqual<int>(2, _nodes.Where<UANodeContext>(x => x.UANode is UAType).Count<UANodeContext>());
     }
     [TestMethod]
+    [TestCategory("Correct Model")]
     public void UAVariableTypeTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.NodeSet2.xml");
@@ -76,6 +80,7 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.AreEqual<int>(3, _nodes.Where<UANodeContext>(x => x.UANode is UAType).Count<UANodeContext>());
     }
     [TestMethod]
+    [TestCategory("Correct Model")]
     public void UADataTypeTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\DataTypeTest\DataTypeTest.NodeSet2.xml");

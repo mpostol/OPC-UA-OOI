@@ -8,8 +8,18 @@ namespace UAOOI.SemanticData.AddressSpaceTestTool
   {
     internal static void Main(string[] args)
     {
-      FileInfo _fileToRead = GetFileToRead(args);
-      ValidateFile(_fileToRead);
+
+      try
+      {
+        FileInfo _fileToRead = GetFileToRead(args);
+        ValidateFile(_fileToRead);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(String.Format("Program stoped by the exception: {0}", ex.Message));
+      }
+      Console.Write("Press ENter to close this window.......");
+      Console.Read();
     }
     internal static void ValidateFile(FileInfo _fileToRead)
     {

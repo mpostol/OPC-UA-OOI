@@ -55,6 +55,16 @@
     <None Include="App.config" />
     <None Include="OPCUAOOIKey.snk" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InformationModelFactory\InformationModelFactory.csproj">
+      <Project>{6d20785d-0451-46a9-9ac2-ec66b7c0d18a}</Project>
+      <Name>InformationModelFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UANodeSetValidation\UANodeSetValidation.csproj">
+      <Project>{352378a0-8b2e-4679-bb44-fd0bcc8467d9}</Project>
+      <Name>UANodeSetValidation</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

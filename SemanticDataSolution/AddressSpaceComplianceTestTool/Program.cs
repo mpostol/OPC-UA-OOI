@@ -1,6 +1,8 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.IO;
+using UAOOI.SemanticData.UANodeSetValidation;
 
 namespace UAOOI.SemanticData.AddressSpaceTestTool
 {
@@ -18,16 +20,23 @@ namespace UAOOI.SemanticData.AddressSpaceTestTool
       {
         Console.WriteLine(String.Format("Program stoped by the exception: {0}", ex.Message));
       }
-      Console.Write("Press ENter to close this window.......");
+      Console.Write("Press Enter to close this window.......");
       Console.Read();
     }
     internal static void ValidateFile(FileInfo _fileToRead)
     {
-      throw new NotImplementedException();
+      IAddressSpaceContext _as = new AddressSpaceContext(z => Console.WriteLine(z.ToString()));
+      _as.ImportUANodeSet(_fileToRead);
+      _as.ValidateAndExportModel();
     }
     internal static FileInfo GetFileToRead(string[] args)
     {
-      throw new NotImplementedException();
+      if (args == null || args.Length != 1)
+        throw new ArgumentOutOfRangeException("args", "List of command line arguments is incorrect - enter name of an xml file to be tested.");
+      FileInfo _FileInfo = new FileInfo(args[0]);
+      if (!_FileInfo.Exists)
+        throw new FileNotFoundException(String.Format("FileNotFoundException - the file {0} doesn't exist.", args[0]));
+      return _FileInfo;
     }
   }
 }

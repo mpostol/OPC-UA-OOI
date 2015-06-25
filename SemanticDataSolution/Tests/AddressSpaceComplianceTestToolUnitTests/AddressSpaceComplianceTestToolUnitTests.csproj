@@ -68,6 +68,11 @@
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="XMLModels\DataTypeTest.NodeSet2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

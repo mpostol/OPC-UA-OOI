@@ -89,6 +89,24 @@ namespace UAOOI.SemanticData.UnitTest
       Assert.IsFalse(_nodes.Where<UANodeContext>(x => x.UANode == null).Any<UANodeContext>());
       Assert.AreEqual<int>(4, _nodes.Where<UANodeContext>(x => x.UANode is UAType).Count<UANodeContext>());
     }
+    [TestMethod]
+    [TestCategory("Incorrect Model")]
+    public void DanglingReferenceTargetTestMethod()
+    {
+      FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\DanglingReferenceTarget.NodeSet2.xml");
+      Assert.IsTrue(_testDataFileInfo.Exists);
+      List<UANodeContext> _nodes = ValidationUnitTest(_testDataFileInfo, 2);
+      Assert.IsTrue(_nodes.Where<UANodeContext>(x => x.UANode == null).Any<UANodeContext>());
+      Assert.AreEqual<int>(1, _nodes.Where<UANodeContext>(x => x.UANode is UAType).Count<UANodeContext>());
+      //List<TraceMessage> _trace = new List<TraceMessage>();
+      //int _diagnosticCounter = 0;
+      //IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
+      //Assert.IsNotNull(_as);
+      //_as.ImportUANodeSet(_testDataFileInfo);
+      //Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      //_as.ValidateAndExportModel(m_NameSpace);
+      //Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+    }
     #endregion
 
     #region private

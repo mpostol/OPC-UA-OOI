@@ -25,21 +25,6 @@ namespace UAOOI.SemanticData.UnitTest
     #region Incorrect Model
     [TestMethod]
     [TestCategory("Incorrect Model")]
-    public void DanglingReferenceTargetTestMethod()
-    {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\DanglingReferenceTarget.NodeSet2.xml");
-      Assert.IsTrue(_testDataFileInfo.Exists);
-      List<TraceMessage> _trace = new List<TraceMessage>();
-      int _diagnosticCounter = 0;
-      IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.IsNotNull(_as);
-      _as.ImportUANodeSet(_testDataFileInfo);
-      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-    }
-    [TestMethod]
-    [TestCategory("Incorrect Model")]
     public void ObjectEventNotifierOutOfRangeTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongEventNotifier.xml");

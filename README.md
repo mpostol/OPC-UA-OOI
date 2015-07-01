@@ -46,6 +46,8 @@ I hope it is a good place to prototype and converge the OPC UA communication tec
 
 Redd more:
 
+The paper **Object Oriented Internet** will be presented on the conference [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/inetsapp)
+
 [WIKI of this project](https://github.com/mpostol/OPC-UA-OOI/wiki)
 
 [My Blog: About enablers of future solutions](http://wwww.mpostol.wordpress.com/)

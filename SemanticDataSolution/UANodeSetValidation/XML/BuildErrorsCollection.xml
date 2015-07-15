@@ -1,145 +1,143 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<BuildErrorsCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                       xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                       xmlns="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd" >
-  <ListOfBuildErrors>
-    <NamedBuildError>
-      <Focus>XML</Focus>
-      <Identifier>P0-0001010000</Identifier>
-      <Descriptor>The XML attribute or element is not supported and neglected.</Descriptor>
-      <Name>NotSupportedFeature</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P0-0605020210</Identifier>
-      <Descriptor>The syntax of the ExpandedNodeId is not valid.</Descriptor>
-      <Name>ExpandedNodeIdInvalidSyntax</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P0-0605020209</Identifier>
-      <Descriptor>The syntax of the NodeId is not valid.</Descriptor>
-      <Name>NodeIdInvalidSyntax</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P0-0605020213</Identifier>
-      <Descriptor>The syntax of the QualifiedName is not valid.</Descriptor>
-      <Name>QualifiedNameInvalidSyntax</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P3-0502070000</Identifier>
-      <Descriptor>The value must be less than 0x200000 for the UAVariable and less than 0x400000 for other node types.</Descriptor>
-      <Name>WrongWriteMaskValue</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P3-0502050000</Identifier>
-      <Descriptor>The string part of the DisplayName is restricted to 512 characters.</Descriptor>
-      <Name>WrongDisplayNameLength</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>Diagnostic</Focus>
-      <Identifier>P3-0403040000</Identifier>
-      <Descriptor>The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist.</Descriptor>
-      <Name>DanglingReferenceTarget</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>Reference</Focus>
-      <Identifier>P3-0710000000</Identifier>
-      <Descriptor>Each Node shall be the TargetNode of at most one Reference of type HasSubtype.</Descriptor>
-      <Name>HasSubtypeMulitarget</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>Reference</Focus>
-      <Identifier>P3-0503030201</Identifier>
-      <Descriptor>Wrong Reference type targeting the Property component.</Descriptor>
-      <Name>WrongReference2Property</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>Reference</Focus>
-      <Identifier>P3-0707000000</Identifier>
-      <Descriptor>Wrong Reference type targeting the DataVariable component.</Descriptor>
-      <Name>WrongReference2Variable</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>Reference</Focus>
-      <Identifier>P3-0707000001</Identifier>
-      <Descriptor>Wrong Reference type for Method component.</Descriptor>
-      <Name>WrongReference2Method</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P6-0503011400</Identifier>
-      <Descriptor>BrowseName cannot be null string.</Descriptor>
-      <Name>EmptyBrowseName</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P6-0F03000000</Identifier>
-      <Descriptor>SymbolicName contains characters that are not allowed. Only letters, digits or the underscore (‘_’) are permitted.</Descriptor>
-      <Name>WrongSymbolicName</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P3-0505010000</Identifier>
-      <Descriptor>Object NodeClass: EventNotifier is out of range.</Descriptor>
-      <Name>WrongEventNotifier</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P3-0505010001</Identifier>
-      <Descriptor>Object NodeClass: Value of the EventNotifier attribute is not supported.</Descriptor>
-      <Name>EventNotifierValueNotSupported</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P3-0506020000</Identifier>
-      <Descriptor>ValueRank value is out of range.</Descriptor>
-      <Name>WrongValueRank</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P3-0506040000</Identifier>
-      <Descriptor>AccessLevel value is out of range.</Descriptor>
-      <Name>WrongAccessLevel</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P3-0503020000</Identifier>
-      <Descriptor>Unexpected value of the InverseName.</Descriptor>
-      <Name>WrongInverseName</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P3-0502020000</Identifier>
-      <Descriptor>Nodes shall be unambiguously identified using NodeId</Descriptor>
-      <Name>NodeIdDuplicated</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NodeClass</Focus>
-      <Identifier>P3-0502020001</Identifier>
-      <Descriptor>NodeId is not defined.</Descriptor>
-      <Name>NodeIdNotDefined</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>XML</Focus>
-      <Identifier>P0-0001020000</Identifier>
-      <Descriptor>Node cannot be null</Descriptor>
-      <Name>NodeCannotBeNull</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>NonCategorized</Focus>
-      <Identifier>P0-0002010000</Identifier>
-      <Descriptor>General processing error see trace for details.</Descriptor>
-      <Name>NonCategorized</Name>
-    </NamedBuildError>
-    <NamedBuildError>
-      <Focus>Diagnostic</Focus>
-      <Identifier>P0-0003010000</Identifier>
-      <Descriptor>It is diagnostic information</Descriptor>
-      <Name>DiagnosticInformation</Name>
-    </NamedBuildError>
-  </ListOfBuildErrors>
-</BuildErrorsCollection>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns1:BuildErrorsCollection xmlns:ns1="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd">
+	<ns1:ListOfBuildErrors>
+		<ns1:NamedBuildError>
+			<ns1:Focus>XML</ns1:Focus>
+			<ns1:Identifier>P0-0001010000</ns1:Identifier>
+			<ns1:Descriptor>The XML attribute or element is not supported and neglected.</ns1:Descriptor>
+			<ns1:Name>NotSupportedFeature</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>XML</ns1:Focus>
+			<ns1:Identifier>P0-0001020000</ns1:Identifier>
+			<ns1:Descriptor>Node cannot be null</ns1:Descriptor>
+			<ns1:Name>NodeCannotBeNull</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NonCategorized</ns1:Focus>
+			<ns1:Identifier>P0-0002010000</ns1:Identifier>
+			<ns1:Descriptor>General processing error see trace for details.</ns1:Descriptor>
+			<ns1:Name>NonCategorized</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Diagnostic</ns1:Focus>
+			<ns1:Identifier>P0-0003010000</ns1:Identifier>
+			<ns1:Descriptor>It is diagnostic information</ns1:Descriptor>
+			<ns1:Name>DiagnosticInformation</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P0-0605020209</ns1:Identifier>
+			<ns1:Descriptor>The syntax of the NodeId is not valid.</ns1:Descriptor>
+			<ns1:Name>NodeIdInvalidSyntax</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P0-0605020210</ns1:Identifier>
+			<ns1:Descriptor>The syntax of the ExpandedNodeId is not valid.</ns1:Descriptor>
+			<ns1:Name>ExpandedNodeIdInvalidSyntax</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P0-0605020213</ns1:Identifier>
+			<ns1:Descriptor>The syntax of the QualifiedName is not valid.</ns1:Descriptor>
+			<ns1:Name>QualifiedNameInvalidSyntax</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Diagnostic</ns1:Focus>
+			<ns1:Identifier>P3-0403040000</ns1:Identifier>
+			<ns1:Descriptor>The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist.</ns1:Descriptor>
+			<ns1:Name>DanglingReferenceTarget</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0502020000</ns1:Identifier>
+			<ns1:Descriptor>Nodes shall be unambiguously identified using NodeId</ns1:Descriptor>
+			<ns1:Name>NodeIdDuplicated</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0502020001</ns1:Identifier>
+			<ns1:Descriptor>NodeId is not defined.</ns1:Descriptor>
+			<ns1:Name>NodeIdNotDefined</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0502050000</ns1:Identifier>
+			<ns1:Descriptor>The string part of the DisplayName is restricted to 512 characters.</ns1:Descriptor>
+			<ns1:Name>WrongDisplayNameLength</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0502070000</ns1:Identifier>
+			<ns1:Descriptor>The value must be less than 0x200000 for the UAVariable and less than 0x400000 for other node types.</ns1:Descriptor>
+			<ns1:Name>WrongWriteMaskValue</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0503020000</ns1:Identifier>
+			<ns1:Descriptor>Unexpected value of the InverseName.</ns1:Descriptor>
+			<ns1:Name>WrongInverseName</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0503030201</ns1:Identifier>
+			<ns1:Descriptor>Wrong Reference type targeting the Property component.</ns1:Descriptor>
+			<ns1:Name>WrongReference2Property</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0505010000</ns1:Identifier>
+			<ns1:Descriptor>Object NodeClass: EventNotifier is out of range.</ns1:Descriptor>
+			<ns1:Name>WrongEventNotifier</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0505010001</ns1:Identifier>
+			<ns1:Descriptor>Object NodeClass: Value of the EventNotifier attribute is not supported.</ns1:Descriptor>
+			<ns1:Name>EventNotifierValueNotSupported</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0506020000</ns1:Identifier>
+			<ns1:Descriptor>ValueRank value is out of range.</ns1:Descriptor>
+			<ns1:Name>WrongValueRank</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0506040000</ns1:Identifier>
+			<ns1:Descriptor>AccessLevel value is out of range.</ns1:Descriptor>
+			<ns1:Name>WrongAccessLevel</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0707000000</ns1:Identifier>
+			<ns1:Descriptor>Wrong Reference type targeting the DataVariable component.</ns1:Descriptor>
+			<ns1:Name>WrongReference2Variable</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0707000001</ns1:Identifier>
+			<ns1:Descriptor>Wrong Reference type for Method component.</ns1:Descriptor>
+			<ns1:Name>WrongReference2Method</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0710000000</ns1:Identifier>
+			<ns1:Descriptor>Each Node shall be the TargetNode of at most one Reference of type HasSubtype.</ns1:Descriptor>
+			<ns1:Name>HasSubtypeMulitarget</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P6-0503011400</ns1:Identifier>
+			<ns1:Descriptor>BrowseName cannot be null string.</ns1:Descriptor>
+			<ns1:Name>EmptyBrowseName</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P6-0F03000000</ns1:Identifier>
+			<ns1:Descriptor>SymbolicName contains characters that are not allowed. Only letters, digits or the underscore (‘_’) are permitted.</ns1:Descriptor>
+			<ns1:Name>WrongSymbolicName</ns1:Name>
+		</ns1:NamedBuildError>
+	</ns1:ListOfBuildErrors>
+</ns1:BuildErrorsCollection>

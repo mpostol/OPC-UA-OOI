@@ -18,12 +18,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 <#
       EnvDTE.DTE dte = (EnvDTE.DTE) ((IServiceProvider) this.Host).GetService(typeof(EnvDTE.DTE));
       // Open the prototype document.
-	  string _xsdPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(dte.Solution.FullName), @"UANodeSetValidation\XML\BuildErrorsCollection.xsd");
+	  string _xsdPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(dte.ActiveDocument.FullName), @"XML\BuildErrorsCollection.xsd");
 	  XmlReaderSettings _settings = new XmlReaderSettings();
 	  string _ns = "http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd";
       _settings.Schemas.Add(_ns, _xsdPath);
       _settings.ValidationType = ValidationType.Schema;
-	  string _path = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(dte.Solution.FullName), @"UANodeSetValidation\XML\BuildErrorsCollection.xml");
+	  string _path = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(dte.ActiveDocument.FullName), @"XML\BuildErrorsCollection.xml");
 	  XmlReader _errorsReader = XmlReader.Create(_path, _settings);
       XmlDocument _doc = new XmlDocument();
       _doc.Load(_errorsReader);

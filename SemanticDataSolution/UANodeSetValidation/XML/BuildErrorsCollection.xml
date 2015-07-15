@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BuildErrorsCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                       xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-                       <!--xmlns="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd" >-->
+                       xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                       xmlns="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd" >
   <ListOfBuildErrors>
     <NamedBuildError>
       <Focus>XML</Focus>

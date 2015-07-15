@@ -1,4 +1,4 @@
-﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ assembly name="System.Xml.dll" #>
 <#@ assembly name="EnvDTE" #>
@@ -18,15 +18,24 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 <#
       EnvDTE.DTE dte = (EnvDTE.DTE) ((IServiceProvider) this.Host).GetService(typeof(EnvDTE.DTE));
       // Open the prototype document.
+	  string _xsdPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(dte.Solution.FullName), @"UANodeSetValidation\XML\BuildErrorsCollection.xsd");
+	  XmlReaderSettings _settings = new XmlReaderSettings();
+	  string _ns = "http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd";
+      _settings.Schemas.Add(_ns, _xsdPath);
+      _settings.ValidationType = ValidationType.Schema;
+	  string _path = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(dte.Solution.FullName), @"UANodeSetValidation\XML\BuildErrorsCollection.xml");
+	  XmlReader _errorsReader = XmlReader.Create(_path, _settings);
       XmlDocument _doc = new XmlDocument();
-      _doc.Load(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(dte.Solution.FullName), @"UANodeSetValidation\XML\BuildErrorsCollection.xml"));
-      XmlNode _list = _doc.SelectSingleNode("BuildErrorsCollection/ListOfBuildErrors");
-      foreach (XmlNode _node in _list.SelectNodes("NamedBuildError"))
+      _doc.Load(_errorsReader);
+	  XmlNamespaceManager _nsmgr = new XmlNamespaceManager(_errorsReader.NameTable);
+      _nsmgr.AddNamespace("ns", _ns);
+      XmlNode _list = _doc.SelectSingleNode("//ns:BuildErrorsCollection/ns:ListOfBuildErrors", _nsmgr);
+      foreach (XmlNode _node in _list.SelectNodes("ns:NamedBuildError", _nsmgr))
       {
-        string Name = _node.SelectSingleNode("Name").InnerText; 
-        string Focus = _node.SelectSingleNode("Focus").InnerText;
-        string Identifier = _node.SelectSingleNode("Identifier").InnerText;
-        string Descriptor =  _node.SelectSingleNode("Descriptor").InnerText;
+        string Name = _node.SelectSingleNode("ns:Name", _nsmgr).InnerText; 
+        string Focus = _node.SelectSingleNode("ns:Focus", _nsmgr).InnerText;
+        string Identifier = _node.SelectSingleNode("ns:Identifier", _nsmgr).InnerText;
+        string Descriptor =  _node.SelectSingleNode("ns:Descriptor", _nsmgr).InnerText;
 #>
     /// <summary>
     /// Error: <#=Identifier#>; Focus: <#= Focus #>; <#= Descriptor #>

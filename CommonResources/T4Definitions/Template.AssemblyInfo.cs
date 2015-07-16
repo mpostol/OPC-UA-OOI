@@ -9,6 +9,7 @@
 //_______________________________________________________________
 
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("<Define Assembly Title>")]
 [assembly: AssemblyDescription("DefaultProductName: <Define Assembly Title>")]

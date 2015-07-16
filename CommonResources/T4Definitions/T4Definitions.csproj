@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DDE02168-1EAD-41D9-B5E6-FB101F98AC24}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>T4Definitions</RootNamespace>
     <AssemblyName>T4Definitions</AssemblyName>
@@ -32,8 +32,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="Template.AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Template.AssemblyInfo.cs</LastGenOutput>
@@ -41,11 +43,11 @@
     <None Include="Model.t4" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Template.AssemblyInfo.cs">
+    <None Include="Template.AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Template.AssemblyInfo.tt</DependentUpon>
-    </Compile>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

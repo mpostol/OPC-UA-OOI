@@ -54,7 +54,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// Gets the value rank.
     /// </summary>
     /// <param name="valueRank">The value rank.</param>
-    /// <param name="specified">if set to <c>true</c> the parameter is specified.</param>
     /// <param name="traceEvent">An <see cref="Action" /> delegate is used to trace event as the <see cref="TraceMessage" />.</param>
     /// <returns>Returns validated value.</returns>
     internal static int? GetValueRank(this int valueRank, Action<TraceMessage> traceEvent)

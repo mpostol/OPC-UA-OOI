@@ -11,6 +11,7 @@
 //_______________________________________________________________
 
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("<#=m_AssemblyTitle#>")]
 [assembly: AssemblyDescription("<#=DefaultProductName#>: <#=m_AssemblyTitle#>")]

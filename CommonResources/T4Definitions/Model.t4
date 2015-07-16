@@ -12,5 +12,5 @@ string Phone = "+48 (42) 686 25 47";
 string Owner = "commsvr.com";
 
 //UAOOI.SemanticData.UANodeSetValidation
-string UANodeSetValidationVersion = "0.01.00";
+string UANodeSetValidationVersion = "1.00.01";
 #>

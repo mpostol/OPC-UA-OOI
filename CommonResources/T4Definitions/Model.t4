@@ -1,0 +1,16 @@
+﻿<#+
+//Template
+string DefaultProductName ="DefaultProductName";
+string DefaultProductVersion = "0.00.00";
+//Solution common
+string ProductTrademark = "OPC-UA-OOI";
+string AssemblyCopyright = "Copyright (c) 2015 CommServer";
+string AssemblyCompany = "commsvr.com";
+string Url = "www.commsvr.com";
+string Email = "commserver@cas.eu";
+string Phone = "+48 (42) 686 25 47";
+string Owner = "commsvr.com";
+
+//UAOOI.SemanticData.UANodeSetValidation
+string UANodeSetValidationVersion = "0.01.00";
+#>

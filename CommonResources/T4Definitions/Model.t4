@@ -11,6 +11,7 @@ string Email = "commserver@cas.eu";
 string Phone = "+48 (42) 686 25 47";
 string Owner = "commsvr.com";
 
-//UAOOI.SemanticData.UANodeSetValidation
-string UANodeSetValidationVersion = "1.00.01";
+//UAOOI.SemanticData
+string SemanticDataVersion = "1.00.01";
+string SemanticDataProduct = "OPC UA SemanticData";
 #>

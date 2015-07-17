@@ -59,17 +59,25 @@
   <ItemGroup>
     <Compile Include="Helpers\TraceHelper.cs" />
     <Compile Include="Helpers\HelpersUnitTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssemblyInfo.tt</DependentUpon>
+    </Compile>
     <Compile Include="UANodeSetWithErrorsUnitTest.cs" />
     <Compile Include="UANodeSetUnitTest.cs" />
     <Compile Include="UAModelContextUnitTest.cs" />
     <Compile Include="Helpers\ModelDesign.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourcesUnitTest.cs" />
     <Compile Include="AddressSpaceContextUnitTest.cs" />
     <Compile Include="Helpers\TestData.cs" />
     <Compile Include="ServiceResultExceptionUnitTest.cs" />
     <Compile Include="InformationModelFactoryUnitTest.cs" />
     <None Include="OPCUAOOIKey.snk" />
+    <None Include="Properties\AssemblyInfo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
+    </None>
     <None Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.Classes.cs" />
@@ -179,6 +187,9 @@
     <None Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.Types.xsd">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

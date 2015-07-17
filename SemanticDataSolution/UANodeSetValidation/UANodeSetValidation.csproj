@@ -78,11 +78,16 @@
     <Compile Include="InformationModelFactory\VariableInstanceFactoryBase.cs" />
     <Compile Include="InformationModelFactory\VariableTypeFactoryBase.cs" />
     <Compile Include="InformationModelFactory\ViewInstanceFactoryBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssemblyInfo.tt</DependentUpon>
+    </Compile>
     <Compile Include="ReferenceKindEnum.cs" />
     <Compile Include="Validator.cs" />
     <Compile Include="TraceMessage.cs" />
     <Compile Include="DataSerialization\NodeId.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\!AssemblyInfo.cs" />
     <Compile Include="UAInformationModel\Opc.Ua.Constants.cs" />
     <Compile Include="UAModelContext.cs" />
     <Compile Include="ServiceResultException.cs" />
@@ -106,6 +111,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="OPCUAOOIKey.snk" />
+    <None Include="Properties\AssemblyInfo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
+    </None>
     <None Include="XML\BuildErrorsCollection.xltx" />
     <None Include="XML\BuildErrorsCollection.xsd">
       <SubType>Designer</SubType>

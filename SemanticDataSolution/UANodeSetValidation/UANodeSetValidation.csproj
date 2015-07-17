@@ -87,7 +87,6 @@
     <Compile Include="Validator.cs" />
     <Compile Include="TraceMessage.cs" />
     <Compile Include="DataSerialization\NodeId.cs" />
-    <Compile Include="Properties\!AssemblyInfo.cs" />
     <Compile Include="UAInformationModel\Opc.Ua.Constants.cs" />
     <Compile Include="UAModelContext.cs" />
     <Compile Include="ServiceResultException.cs" />

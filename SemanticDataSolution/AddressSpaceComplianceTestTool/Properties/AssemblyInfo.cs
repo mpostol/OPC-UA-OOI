@@ -13,7 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("AddressSpaceTestTool")]
-[assembly: AssemblyDescription("Command Line OPC UA AS Compliance Test Tool")]
+[assembly: AssemblyDescription("Command Line OPC UA Address Space Compliance Test Tool")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
 [assembly: AssemblyProduct("OPC UA SemanticData")]

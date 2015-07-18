@@ -6,11 +6,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
   internal class ObjectInstanceFactoryBase : InstanceFactoryBase, IObjectInstanceFactory
   {
 
-    public bool SupportsEvents
-    {
-      set { }
-    }
-    public bool SupportsEventsSpecified
+    public bool? SupportsEvents
     {
       set { }
     }

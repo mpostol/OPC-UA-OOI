@@ -32,14 +32,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <param name="isSpecified">The <see cref="Action{T}"/> is called if this value is specified.</param>
     /// <param name="traceEvent">The trace event.</param>
     /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-    internal static bool GetSupportsEvents(this byte eventNotifier, Action<bool> isSpecified, Action<TraceMessage> traceEvent)
+    internal static bool? GetSupportsEvents(this byte eventNotifier, Action<TraceMessage> traceEvent)
     {
-      isSpecified(eventNotifier != 0);
       if (eventNotifier > EventNotifiers.SubscribeToEvents + EventNotifiers.HistoryRead + EventNotifiers.HistoryWrite)
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongEventNotifier, String.Format("EventNotifier value: {0}", eventNotifier)));
       else if (eventNotifier > EventNotifiers.SubscribeToEvents)
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EventNotifierValueNotSupported, String.Format("EventNotifier value: {0}", eventNotifier)));
-      return (eventNotifier & EventNotifiers.SubscribeToEvents) != 0;
+      return eventNotifier != 0 ?(eventNotifier & EventNotifiers.SubscribeToEvents) != 0 : new Nullable<bool>();
     }
     internal static byte? GetAccessLevel(this byte accessLevel, Action<TraceMessage> traceEvent)
     {

@@ -11,11 +11,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       set { }
     }
-    public int Identifier
-    {
-      set { }
-    }
-    public bool IdentifierSpecified
+    public int? Identifier
     {
       set { }
     }

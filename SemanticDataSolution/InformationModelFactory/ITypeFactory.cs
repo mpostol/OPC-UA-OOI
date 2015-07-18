@@ -3,9 +3,16 @@ using System.Xml;
 
 namespace UAOOI.SemanticData.InformationModelFactory
 {
+  /// <summary>
+  /// Interface ITypeFactory - instances implementing this interface supports type definition factoring. 
+  /// </summary>
   public interface ITypeFactory : INodeFactory
   {
 
+    /// <summary>
+    /// Sets the base type of the node.
+    /// </summary>
+    /// <value>The base type represented by the <see cref="XmlQualifiedName"/>.</value>
     XmlQualifiedName BaseType { set; }
     /// <summary>
     /// Sets a value indicating whether this instance is abstract.

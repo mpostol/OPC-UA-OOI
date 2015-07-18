@@ -4,6 +4,9 @@ using System.Xml;
 
 namespace UAOOI.SemanticData.InformationModelFactory
 {
+  /// <summary>
+  /// Interface IDataDescriptor - encapsulates the description of the value.
+  /// </summary>
   public interface IDataDescriptor
   {
     /// <summary>
@@ -13,7 +16,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// <value>The type of the data.</value>
     XmlQualifiedName DataType { set; }
     /// <summary>
-    /// Sets the array dimensions. This PROPERTY specifies the length of each dimension for an array value. It is intended to describe the capability of the Variable, not the current size.
+    /// Sets the array dimensions. This property specifies the length of each dimension for an array value. It is intended to describe the capability of the Variable, not the current size.
     /// The number of elements shall be equal to the value defined by the ValueRank. It shall be null if ValueRank ≤ 0. The value of 0 for an individual dimension indicates that the dimension has 
     /// a variable length. For example, if a Variable is defined by the following C array:
     /// Int32 myArray[346];

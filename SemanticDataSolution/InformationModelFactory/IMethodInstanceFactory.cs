@@ -37,13 +37,13 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// Adds the input arguments. The InputArgument specify the input argument of the Method. The Method contains an array of the Argument data type. 
     /// An empty array indicates that there are no input arguments for the Method.
     /// </summary>
-    /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XMLElement"/>.</param>
+    /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XmlElement"/>.</param>
     void AddInputArguments(Func<XmlElement, Parameter[]> argument);
     /// <summary>
     /// Adds the output argument. The OutputArgument specifies the output argument of the Method. The Method contains an array of the Argument data type. 
     /// An empty array indicates that there are no output arguments for the Method.
     /// </summary>
-    /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XMLElement"/>.</param>
+    /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XmlElement"/>.</param>
     void AddOutputArguments(Func<XmlElement, Parameter[]> argument);
 
   }

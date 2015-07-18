@@ -4,28 +4,44 @@ using System.Xml;
 namespace UAOOI.SemanticData.InformationModelFactory
 {
   /// <summary>
-  /// Interface IExportDataTypeFieldFactory - This interface defines an abstract representation of a field within a 
-  /// UADataType that can be used by design tools to automatically create serialization code.
+  /// Interface IDataTypeFieldFactory - This interface defines a representation of a field within a DataType.
   /// </summary>
   public interface IDataTypeFieldFactory
   {
+    /// <summary>
+    /// Sets the DataType name.
+    /// </summary>
+    /// <value>The type of the data.</value>
     XmlQualifiedName DataType
     {
       set;
     }
+    /// <summary>
+    /// Adds the description for the field in multiple locales
+    /// </summary>
+    /// <param name="localeField">The locale field.</param>
+    /// <param name="valueField">The value field.</param>
     void AddDescription(string localeField, string valueField);
-    int Identifier
+    /// <summary>
+    /// Sets the identifier.
+    /// </summary>
+    /// <value>The identifier.</value>
+    int? Identifier
     {
       set;
     }
-    bool IdentifierSpecified
-    {
-      set;
-    }
+    /// <summary>
+    /// Sets the name for the field that is unique within the <see cref="IDataTypeDefinitionFactory"/>.
+    /// </summary>
+    /// <value>The name for the field.</value>
     string Name
     {
       set;
     }
+    /// <summary>
+    /// Sets the value rank. It shall be Scalar (-1) or a fixed rank Array (>=1). This field is not specified for subtypes of Enumeration.
+    /// </summary>
+    /// <value>The value rank.</value>
     int? ValueRank
     {
       set;
@@ -45,6 +61,11 @@ namespace UAOOI.SemanticData.InformationModelFactory
     {
       set;
     }
+    /// <summary>
+    /// Sets the symbolic name of the field. A symbolic name for the field that can be used in auto-generated code. It should only be 
+    /// specified if the Name cannot be used for this purpose. Only letters, digits or the underscore (‘_’) are permitted.
+    /// </summary>
+    /// <value>The name of the symbolic.</value>
     string SymbolicName
     {
       set;

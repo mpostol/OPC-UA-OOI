@@ -5,7 +5,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
   public interface IViewInstanceFactory : IInstanceFactory
   {
 
-    bool SupportsEvents
+    bool? SupportsEvents
     {
       set;
     }

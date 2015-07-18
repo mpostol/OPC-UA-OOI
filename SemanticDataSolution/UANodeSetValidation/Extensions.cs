@@ -78,7 +78,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _nP.DataType = modelContext.ExportNodeId(_item.DataType, DataTypes.BaseDataType, traceEvent);
         _item.Description.ExportLocalizedTextArray(_nP.AddDescription);
         _nP.Identifier = _item.Value;
-        _nP.IdentifierSpecified = true;
         _nP.Name = _item.Name;
         _nP.ValueRank = _item.ValueRank.GetValueRank(traceEvent);
         _nP.SymbolicName = _item.SymbolicName;

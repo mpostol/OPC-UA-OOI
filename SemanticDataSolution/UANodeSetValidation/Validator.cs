@@ -118,7 +118,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #region private
     private static void Update(IObjectInstanceFactory nodeDesign, UAObject nodeSet, Action<TraceMessage> traceEvent)
     {
-      nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(x => nodeDesign.SupportsEventsSpecified = x, traceEvent);
+      nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(traceEvent);
     }
     private static void Update(IPropertyInstanceFactory nodeDesign, UAVariable nodeSet, UANodeContext nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
@@ -179,7 +179,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private static void Update(IViewInstanceFactory nodeDesign, UAView nodeSet, Action<TraceMessage> traceEvent)
     {
       nodeDesign.ContainsNoLoops = nodeSet.ContainsNoLoops;//TODO add test case against the loops in the model.
-      nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(x => { }, traceEvent);
+      nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(traceEvent);
     }
     private static void Update(IDataTypeFactory nodeDesign, UADataType nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {

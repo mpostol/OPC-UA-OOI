@@ -2,14 +2,15 @@
 namespace UAOOI.SemanticData.InformationModelFactory
 {
   /// <summary>
-  /// Interface IExportDataTypeFactory - 
+  /// Interface IDataTypeFactory - 
   /// </summary>
   public interface IDataTypeFactory : ITypeFactory
   {
     /// <summary>
-    /// Sets the fields.
+    /// Creates new definition of DataType
     /// </summary>
-    /// <value>The fields.</value>
+    /// <value>Returns new object of <see cref="IDataTypeDefinitionFactory"/> type encapsulating DataType Definition.</value>
     IDataTypeDefinitionFactory NewDefinition();
+
   }
 }

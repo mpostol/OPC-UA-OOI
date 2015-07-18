@@ -7,7 +7,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
   internal class ViewInstanceFactoryBase : InstanceFactoryBase, IViewInstanceFactory
   {
 
-    public bool SupportsEvents
+    public bool? SupportsEvents
     {
       set { }
     }

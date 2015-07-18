@@ -129,11 +129,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return _ret;
     }
     /// <summary>
-    /// Deserialize <see cref="XmlElement"/> object using <see cref="XmlSerializer"/><see.
+    /// Deserialize <see cref="XmlElement" /> object using <see cref="XmlSerializer" />
     /// </summary>
+    /// <typeparam name="type">The type of the type.</typeparam>
     /// <param name="xmlElement">The object to be deserialized.</param>
     /// <returns>Deserialized object</returns>
-    public static type GetObject<type>(this XmlElement xmlElement)
+    internal static type GetObject<type>(this XmlElement xmlElement)
     {
       using (MemoryStream _memoryBuffer = new MemoryStream(1000))
       {

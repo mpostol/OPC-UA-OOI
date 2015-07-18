@@ -18,6 +18,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return new TraceMessage(BuildError.DiagnosticInformation, TraceEventType.Verbose, message);
     }
+    /// <summary>
+    /// creates new <see cref="TraceMessage" /> to be used for diagnostic purpose
+    /// </summary>
+    /// <param name="error">The <see cref="BuildError"/> to be added to the <see cref="TraceMessage"/>.</param>
+    /// <param name="message">The new <see cref="TraceMessage" /> containing the <paramref name="message" />.</param>
+    /// <returns>The new <see cref="TraceMessage" /> diagnostic message.</returns>
     public static TraceMessage BuildErrorTraceMessage(BuildError error, string message)
     {
       return new TraceMessage(error, TraceEventType.Information, message);

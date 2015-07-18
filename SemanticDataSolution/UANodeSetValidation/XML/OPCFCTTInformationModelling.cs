@@ -22,7 +22,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     [System.Runtime.Serialization.CollectionDataContractAttribute(Name="Tests", Namespace="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/OPCFCTTInformationModel" +
         "ling.xsd", ItemName="TestCase")]
     [System.SerializableAttribute()]
-    public class Tests : System.Collections.Generic.List<UAOOI.SemanticData.UANodeSetValidation.XML.TestCase>
+    internal class Tests : System.Collections.Generic.List<UAOOI.SemanticData.UANodeSetValidation.XML.TestCase>
     {
     }
     
@@ -31,7 +31,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     [System.Runtime.Serialization.DataContractAttribute(Name="TestCase", Namespace="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/OPCFCTTInformationModel" +
         "ling.xsd")]
     [System.SerializableAttribute()]
-    public partial class TestCase : object, System.Runtime.Serialization.IExtensibleDataObject
+    internal partial class TestCase : object, System.Runtime.Serialization.IExtensibleDataObject
     {
         
         [System.NonSerializedAttribute()]
@@ -60,6 +60,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ReviewedField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdentifierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CommentsField;
+        
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData
         {
             get
@@ -73,7 +79,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string CTT
+        internal string CTT
         {
             get
             {
@@ -86,7 +92,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string SpecLink
+        internal string SpecLink
         {
             get
             {
@@ -99,7 +105,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string Step
+        internal string Step
         {
             get
             {
@@ -112,7 +118,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string NodeClass
+        internal string NodeClass
         {
             get
             {
@@ -125,7 +131,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, EmitDefaultValue=false, Order=4)]
-        public string Focus
+        internal string Focus
         {
             get
             {
@@ -138,7 +144,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(Name="TestCase", EmitDefaultValue=false, Order=5)]
-        public string TestCaseMember
+        internal string TestCaseMember
         {
             get
             {
@@ -151,7 +157,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
-        public string ExpectedResults
+        internal string ExpectedResults
         {
             get
             {
@@ -164,7 +170,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
-        public string Reviewed
+        internal string Reviewed
         {
             get
             {
@@ -173,6 +179,32 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
             set
             {
                 this.ReviewedField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        internal string Identifier
+        {
+            get
+            {
+                return this.IdentifierField;
+            }
+            set
+            {
+                this.IdentifierField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
+        internal string Comments
+        {
+            get
+            {
+                return this.CommentsField;
+            }
+            set
+            {
+                this.CommentsField = value;
             }
         }
     }

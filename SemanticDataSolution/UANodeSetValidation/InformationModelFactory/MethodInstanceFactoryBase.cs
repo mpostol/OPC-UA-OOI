@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
-using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
@@ -37,8 +36,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// Adds the input arguments. The InputArgument specify the input argument of the Method. The Method contains an array of the Argument data type.
     /// An empty array indicates that there are no input arguments for the Method.
     /// </summary>
-    /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XMLElement" />.</param>
-    public void AddInputArguments(System.Func<System.Xml.XmlElement, Parameter[]> argument)
+    /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XmlElement" />.</param>
+    public void AddInputArguments(System.Func<XmlElement, Parameter[]> argument)
     {
       RemoveArguments(BrowseNames.InputArguments, argument);
     }
@@ -46,8 +45,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// Adds the output argument. The OutputArgument specifies the output argument of the Method. The Method contains an array of the Argument data type.
     /// An empty array indicates that there are no output arguments for the Method.
     /// </summary>
-    /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XMLElement" />.</param>
-    public void AddOutputArguments(System.Func<System.Xml.XmlElement, Parameter[]> argument)
+    /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XmlElement" />.</param>
+    public void AddOutputArguments(System.Func<XmlElement, Parameter[]> argument)
     {
       RemoveArguments(BrowseNames.OutputArguments, argument);
     }

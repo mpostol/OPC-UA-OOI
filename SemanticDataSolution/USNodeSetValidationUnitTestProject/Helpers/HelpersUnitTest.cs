@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.UANodeSetValidation;
 using System.Collections.Generic;
 
-namespace UAOOI.SemanticData.UnitTest.Helpers
+namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers
 {
   [TestClass]
   public class HelpersUnitTest

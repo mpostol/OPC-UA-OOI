@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using UAOOI.SemanticData.UANodeSetValidation;
 
-namespace UAOOI.SemanticData.UnitTest
+namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
   [TestClass]
   [DeploymentItem(@"XMLModels\ModelsWithErrors\", @"ModelsWithErrors\")]

@@ -1,9 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.UANodeSetValidation;
+﻿
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
-using UAOOI.SemanticData.UnitTest.Helpers;
 
-namespace UAOOI.SemanticData.UnitTest
+namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
   [TestClass]
   public class UAModelContextUnitTest

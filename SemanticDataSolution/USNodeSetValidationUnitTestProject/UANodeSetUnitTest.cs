@@ -7,7 +7,7 @@ using System.Linq;
 using UAOOI.SemanticData.UANodeSetValidation;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
-namespace UAOOI.SemanticData.UnitTest
+namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
 
   [TestClass]

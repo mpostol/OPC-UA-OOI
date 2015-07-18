@@ -4,12 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UAOOI.SemanticData.UANodeSetValidation;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
+using UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
-using UAOOI.SemanticData.UnitTest.Helpers;
 
-namespace UAOOI.SemanticData.UnitTest
+namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
   [TestClass]
   public class AddressSpaceContextUnitTest

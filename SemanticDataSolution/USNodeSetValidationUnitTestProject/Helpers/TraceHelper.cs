@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UAOOI.SemanticData.UANodeSetValidation;
 
-namespace UAOOI.SemanticData.UnitTest.Helpers
+namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers
 {
   internal static class TraceHelper
   {

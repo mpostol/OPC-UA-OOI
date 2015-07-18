@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using UAOOI.SemanticData.UANodeSetValidation;
 
-namespace UAOOI.SemanticData.UnitTest
+namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
   [TestClass]
   public class ServiceResultExceptionUnitTest

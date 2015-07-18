@@ -4,7 +4,7 @@ using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation;
 using UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory;
 
-namespace UAOOI.SemanticData.UnitTest
+namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
 
   [TestClass]

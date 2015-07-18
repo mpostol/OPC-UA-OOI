@@ -1,9 +1,7 @@
 ﻿
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
-namespace UAOOI.SemanticData.DataSerialization.UnitTest
+namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
 {
   [TestClass]
   public class QualifiedNameUnitTest

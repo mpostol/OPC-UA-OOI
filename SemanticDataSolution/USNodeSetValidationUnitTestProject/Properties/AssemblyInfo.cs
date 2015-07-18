@@ -1,5 +1,5 @@
 ﻿//_______________________________________________________________
-//  Title   : Assembly info for: USNodeSetValidationUnitTestProject
+//  Title   : Assembly info for: UANodeSetValidationUnitTestProject
 //  System  : Microsoft VisualStudio 2013 / C#
 //
 //  Copyright (c) 2015 CommServer
@@ -12,7 +12,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("USNodeSetValidationUnitTestProject")]
+[assembly: AssemblyTitle("UANodeSetValidationUnitTestProject")]
 [assembly: AssemblyDescription("OPC UA NodeSet Validation UnitTests")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]

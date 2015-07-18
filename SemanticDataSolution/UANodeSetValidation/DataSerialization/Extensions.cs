@@ -28,10 +28,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <summary>
     /// Gets the supports events.
     /// </summary>
-    /// <param name="eventNotifier">The event notifier.</param>
-    /// <param name="isSpecified">The <see cref="Action{T}"/> is called if this value is specified.</param>
+    /// <param name="eventNotifier">The event notifier. The EventNotifier represents the mandatory EventNotifier attribute of the Object NodeClass and identifies whether 
+    /// the object can be used to subscribe to events or to read and write the history of the events.</param>
     /// <param name="traceEvent">The trace event.</param>
-    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+    /// <returns><c>true</c> if supports events, <c>false</c> otherwise.</returns>
     internal static bool? GetSupportsEvents(this byte eventNotifier, Action<TraceMessage> traceEvent)
     {
       if (eventNotifier > EventNotifiers.SubscribeToEvents + EventNotifiers.HistoryRead + EventNotifiers.HistoryWrite)

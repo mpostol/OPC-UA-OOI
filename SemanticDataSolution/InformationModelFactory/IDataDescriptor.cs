@@ -39,7 +39,6 @@ namespace UAOOI.SemanticData.InformationModelFactory
     ///  - ScalarOrOneDimension (−3): The value can be a scalar or a one dimensional array.
     ///  NOTE: All build in DataTypes are considered to be scalar, even if they have array-like semantics like ByteString and String.
     /// </summary>
-    /// 
     /// <value>The value rank.</value>
     int? ValueRank { set; }
   }

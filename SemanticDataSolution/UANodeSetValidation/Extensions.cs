@@ -37,11 +37,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return null;
       return String.Compare(value, defaultValue) == 0 ? null : value;
     }
-    internal static type Export<type>(this type value, type defaultValue, Action<bool> isSpecified)
-      where type : IEquatable<type>
+    internal static bool? Export(this bool value, bool defaultValue)
     {
-      isSpecified(!value.Equals(defaultValue));
-      return value;
+      return !value.Equals(defaultValue) ? value : new Nullable<bool>();
+    }
+    internal static int? Export(this double value, double defaultValue)
+    {
+      return !value.Equals(defaultValue) ? Convert.ToInt32(value) : new Nullable<int>();
     }
     internal static UInt32 Validate(this UInt32 value, UInt32 maxValue, Action<UInt32> reportError)
     {

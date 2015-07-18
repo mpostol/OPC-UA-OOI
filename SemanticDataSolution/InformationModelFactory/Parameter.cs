@@ -10,9 +10,18 @@ namespace UAOOI.SemanticData.InformationModelFactory
   /// </summary>
   public class Parameter : IDataDescriptor
   {
+    /// <summary>
+    /// Struct Description - localized description.
+    /// </summary>
     public struct Description
     {
+      /// <summary>
+      /// The locale
+      /// </summary>
       public string Locale;
+      /// <summary>
+      /// The text of Description
+      /// </summary>
       public string Text;
     }
     /// <summary>

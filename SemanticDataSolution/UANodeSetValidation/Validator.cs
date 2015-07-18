@@ -154,8 +154,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(String.Empty);
       nodeDesign.DataType = nodeContext.ExportNodeId(nodeSet.DataType, DataTypes.Number, traceEvent);//TODO add test case must be DataType, must not be abstract
       nodeDesign.DefaultValue = nodeSet.Value; //TODO add test case must be of type defined by DataType
-      nodeDesign.Historizing = nodeSet.Historizing.Export<bool>(false, x => nodeDesign.HistorizingSpecified = x);
-      nodeDesign.MinimumSamplingInterval = Convert.ToInt32(nodeSet.MinimumSamplingInterval.Export<double>(0D, x => nodeDesign.MinimumSamplingIntervalSpecified = x));
+      nodeDesign.Historizing = nodeSet.Historizing.Export(false);
+      nodeDesign.MinimumSamplingInterval = nodeSet.MinimumSamplingInterval.Export(0D);
       nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(traceEvent);
       if (nodeSet.Translation != null)
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "- the Translation element for the UAVariable"));

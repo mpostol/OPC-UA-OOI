@@ -24,19 +24,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
       set;
       internal get;
     }
-    public bool Historizing
+    public bool? Historizing
     {
       set { }
     }
-    public bool HistorizingSpecified
-    {
-      set { }
-    }
-    public int MinimumSamplingInterval
-    {
-      set { }
-    }
-    public bool MinimumSamplingIntervalSpecified
+    public int? MinimumSamplingInterval
     {
       set { }
     }

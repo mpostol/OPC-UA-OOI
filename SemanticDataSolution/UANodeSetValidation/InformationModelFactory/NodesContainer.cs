@@ -7,7 +7,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
   internal abstract class NodesContainer : INodeContainer
   {
-    public NodeFactory NewExportNodeFFactory<NodeFactory>() where NodeFactory : INodeFactory
+    public NodeFactory AddNodeFactory<NodeFactory>() where NodeFactory : INodeFactory
     {
       NodeFactoryBase _df = null;
       if (typeof(NodeFactory) == typeof(IReferenceTypeFactory))

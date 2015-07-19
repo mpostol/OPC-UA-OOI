@@ -9,6 +9,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
   /// </summary>
   public interface IDataDescriptor
   {
+    
     /// <summary>
     /// Sets the type of the data. <see cref="XmlQualifiedName"/> of the DataType definition for the Value. It is not required that the pointed out element is defined in the same document. 
     /// If that is the case many documents must be combined to resolve and validate this reference.
@@ -41,5 +42,6 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </summary>
     /// <value>The value rank.</value>
     int? ValueRank { set; }
+
   }
 }

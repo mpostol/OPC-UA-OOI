@@ -5,7 +5,8 @@ namespace UAOOI.SemanticData.InformationModelFactory
 {
 
   /// <summary>
-  /// Interface IVariableInstanceFactory - 
+  /// Interface IVariableInstanceFactory - In the OPC UA Address Space the Variable NodeClass is used to provide a value, which may be simple or complex. This NodeClass is represented by IVariableInstanceFactory type. 
+  /// A UAVariable is a subtype of the <see cref="IInstanceFactory"/> and <see cref="IDataDescriptor"/>. The type of the Variable is defined by <see cref="IInstanceFactory.TypeDefinition"/>.
   /// </summary>
   public interface IVariableInstanceFactory : IInstanceFactory, IDataDescriptor
   {

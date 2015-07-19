@@ -1,6 +1,4 @@
-﻿using System;
-using System.Xml;
-
+﻿
 namespace UAOOI.SemanticData.InformationModelFactory
 {
   /// <summary>
@@ -13,7 +11,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </summary>
     /// <typeparam name="NodeFactory">The type of the node factory must inherit from <see cref="INodeFactory"/>.</typeparam>
     /// <returns>Returns new object of NodeFactory type.</returns>
-    NodeFactory NewExportNodeFFactory<NodeFactory>()
+    NodeFactory AddNodeFactory<NodeFactory>()
       where NodeFactory : INodeFactory;
   }
 }

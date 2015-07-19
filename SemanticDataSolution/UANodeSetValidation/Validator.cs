@@ -81,31 +81,31 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         switch (nodeType)
         {
           case "UAReferenceType":
-            CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.NewExportNodeFFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateType, traceEvent);
+            CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.AddNodeFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateType, traceEvent);
             break;
           case "UADataType":
-            CreateNode<IDataTypeFactory, UADataType>(exportFactory.NewExportNodeFFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
+            CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
             break;
           case "UAVariableType":
-            CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.NewExportNodeFFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
+            CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.AddNodeFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
             break;
           case "UAObjectType":
-            CreateNode<IObjectTypeFactory, UAObjectType>(exportFactory.NewExportNodeFFactory<IObjectTypeFactory>, nodeContext, Update, UpdateType, traceEvent);
+            CreateNode<IObjectTypeFactory, UAObjectType>(exportFactory.AddNodeFactory<IObjectTypeFactory>, nodeContext, Update, UpdateType, traceEvent);
             break;
           case "UAView":
-            CreateNode<IViewInstanceFactory, UAView>(exportFactory.NewExportNodeFFactory<IViewInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
+            CreateNode<IViewInstanceFactory, UAView>(exportFactory.AddNodeFactory<IViewInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAMethod":
-            CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.NewExportNodeFFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
+            CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.AddNodeFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAVariable":
             if (parentReference == null || parentReference.ReferenceKind == ReferenceKindEnum.HasProperty)
-              CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
+              CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             else
-              CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.NewExportNodeFFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
+              CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             break;
           case "UAObject":
-            CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.NewExportNodeFFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
+            CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.AddNodeFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
             break;
           default:
             Debug.Assert(false, "Wrong node type");
@@ -247,7 +247,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private static void CreateModelDesignStub(INodeContainer factory)
     {
       BuildError _err = BuildError.DanglingReferenceTarget;
-      IPropertyInstanceFactory _pr = factory.NewExportNodeFFactory<IPropertyInstanceFactory>();
+      IPropertyInstanceFactory _pr = factory.AddNodeFactory<IPropertyInstanceFactory>();
       _pr.SymbolicName = new XmlQualifiedName(string.Format("{0}{1}", _err.Focus.ToString(), m_ErrorNumber++), "http://commsvr.com/OOIUA/SemanticData/UANodeSetValidation");
       _pr.AddDescription("en-en", _err.Descriptor);
       _pr.AddDisplayName("en-en", String.Format("ERROR{0}", m_ErrorNumber));

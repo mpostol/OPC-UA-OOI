@@ -55,6 +55,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_namespaceIndex = 0;
       m_identifierType = IdType.Numeric_0;
       m_identifierPart = null;
+      m_GlobalHashCode++;
     }
     /// <summary>
     /// Creates a deep copy of the value.
@@ -678,6 +679,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 
     #region object
     /// <summary>
+    /// Returns a hash code for this instance.
+    /// </summary>
+    /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+    public override int GetHashCode()
+    {
+      return m_HashCode;
+    }
+    /// <summary>
     /// Returns a <see cref="System.String" /> that represents this instance.
     /// </summary>
     /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
@@ -724,6 +733,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     private IdType m_identifierType;
     private object m_identifierPart;
     private static NodeId s_Null = new NodeId();
+    private static int m_GlobalHashCode = 0;
+    private int m_HashCode = m_GlobalHashCode;
     #endregion
 
     #region IEquatable<NodeId>

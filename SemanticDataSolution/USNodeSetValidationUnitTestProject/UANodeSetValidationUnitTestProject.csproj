@@ -73,6 +73,7 @@
     <Compile Include="Helpers\TestData.cs" />
     <Compile Include="ServiceResultExceptionUnitTest.cs" />
     <Compile Include="InformationModelFactoryUnitTest.cs" />
+    <Compile Include="NodeIdUnitTest.cs" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

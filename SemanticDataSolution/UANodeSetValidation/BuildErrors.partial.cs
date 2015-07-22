@@ -27,7 +27,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// The non categorized error, e.g. exception during execution.
     /// </summary>
-    NonCategorized
+    NonCategorized,
+    /// <summary>
+    /// The data encoding errors - the syntax is validated against OPC UA XML encoding
+    /// </summary>
+    DataEncoding
 
   }
   /// <summary>

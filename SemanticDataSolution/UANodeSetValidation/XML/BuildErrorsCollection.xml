@@ -38,8 +38,8 @@
 			<ns1:Name>ExpandedNodeIdInvalidSyntax</ns1:Name>
 		</ns1:NamedBuildError>
 		<ns1:NamedBuildError>
-			<ns1:Focus>NodeClass</ns1:Focus>
-			<ns1:Identifier>P0-0605020213</ns1:Identifier>
+			<ns1:Focus>DataEncoding</ns1:Focus>
+			<ns1:Identifier>P6-0503021400</ns1:Identifier>
 			<ns1:Descriptor>The syntax of the QualifiedName is not valid.</ns1:Descriptor>
 			<ns1:Name>QualifiedNameInvalidSyntax</ns1:Name>
 		</ns1:NamedBuildError>

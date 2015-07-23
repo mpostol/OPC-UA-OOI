@@ -82,15 +82,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         namespaceIndex = ImportNamespaceIndex(_expandedNodeId.NamespaceIndex, namespaceUris);
       return new NodeId(_expandedNodeId.Identifier, namespaceIndex);
     }
-    /// <summary>
-    /// Imports a QualifiedName
-    /// </summary>
-    internal QualifiedName ImportQualifiedName(string source, NamespaceTable namespaceUris)
+    internal QualifiedName ImportQualifiedName(QualifiedName source, NamespaceTable namespaceUris)
     {
-      if (String.IsNullOrEmpty(source))
-        return QualifiedName.Null;
-      QualifiedName _qn = QualifiedName.Parse(source);
-      return new QualifiedName(_qn.Name, ImportNamespaceIndex(_qn.NamespaceIndex, namespaceUris));
+      return new QualifiedName(source.Name, ImportNamespaceIndex(source.NamespaceIndex, namespaceUris));
     }
     internal void AddAlias(NodeIdAlias[] nodeIdAlias)
     {
@@ -115,16 +109,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       string _newId = String.Empty;
       return m_AliasesDictionary.TryGetValue(id, out _newId) ? _newId : id;
     }
-    /// <summary>
-    ///  Imports a NodeId
-    /// </summary>
-    /// <summary>
-    /// Get index of the namespace fro current yje table <paramref name="namespaceUris" />.
-    /// </summary>
-    /// <param name="namespaceIndex">Index of the namespace in source file.</param>
-    /// <param name="namespaceUris">The current namespace uris table.</param>
-    /// <returns>Returns index from <paramref name="namespaceUris"/>.</returns>
-    private ushort ImportNamespaceIndex(ushort namespaceIndex, NamespaceTable namespaceUris)
+    private ushort ImportNamespaceIndex(ushort namespaceIndex, NamespaceTable namespaceUris)//TODO remove namespaceUris and refer to m_AddressSpaceContext
     {
       if (namespaceUris == null)
         throw new ArgumentNullException("namespaceUris");

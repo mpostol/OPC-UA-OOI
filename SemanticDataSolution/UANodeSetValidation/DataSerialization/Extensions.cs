@@ -8,9 +8,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   /// </summary>
   internal static class Extensions
   {
-    internal static string NamePartOfBrowseName(this UANode value)
+    internal static QualifiedName Parse(this string qualifiedName, Action<TraceMessage> traceEvent)
     {
-      return QualifiedName.Parse(value.BrowseName).Name;
+      try
+      {
+        return QualifiedName.Parse(qualifiedName);
+      }
+      catch (ServiceResultException _sre)
+      {
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.QualifiedNameInvalidSyntax, String.Format("Error message: {0}", _sre.Message)));
+        return QualifiedName.Null;
+      }
     }
     /// <summary>
     /// Gets the <see cref="NodeId.IdentifierPart" /> as uint number.
@@ -38,7 +46,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongEventNotifier, String.Format("EventNotifier value: {0}", eventNotifier)));
       else if (eventNotifier > EventNotifiers.SubscribeToEvents)
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EventNotifierValueNotSupported, String.Format("EventNotifier value: {0}", eventNotifier)));
-      return eventNotifier != 0 ?(eventNotifier & EventNotifiers.SubscribeToEvents) != 0 : new Nullable<bool>();
+      return eventNotifier != 0 ? (eventNotifier & EventNotifiers.SubscribeToEvents) != 0 : new Nullable<bool>();
     }
     internal static byte? GetAccessLevel(this byte accessLevel, Action<TraceMessage> traceEvent)
     {

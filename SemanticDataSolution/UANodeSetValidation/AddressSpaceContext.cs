@@ -130,7 +130,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UANodeContext _context = TryGetUANodeContext(_nd, traceEvent);
       if (_context == null)
         return null;
-      QualifiedName _qn = modelContext.ImportQualifiedName(_context.UANode.BrowseName, m_NamespaceTable);
+      QualifiedName _qn = _context.ImportQualifiedName(m_NamespaceTable);
+      //QualifiedName _qn = modelContext.ImportQualifiedName(_context.UANode.BrowseName, m_NamespaceTable);
       return new XmlQualifiedName(_qn.Name, m_NamespaceTable.GetString(_qn.NamespaceIndex));
     }
     /// <summary>
@@ -210,6 +211,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _ret.AddDescription(argument.Description.Locale, argument.Description.Text);
       return _ret;
     }
+
+
     #endregion
 
     #region private
@@ -231,10 +234,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UAModelContext _modelContext = new UAModelContext(model.Aliases, model.NamespaceUris, this);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - context for imported model is created and starting import nodes."));
       foreach (UANode _nd in model.Items)
-        this.ImportUANode(_nd, _modelContext);
+        this.ImportUANode(_nd, _modelContext, m_TraceEvent);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Finishing AddressSpaceContext.ImportNodeSet - imported {0} nodes.", model.Items.Length)));
     }
-    private void ImportUANode(UANode node, UAModelContext modelContext)
+    private void ImportUANode(UANode node, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       try
       {
@@ -245,14 +248,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         string nodeIdKey = nodeId.ToString();
         if (!m_NodesDictionary.TryGetValue(nodeIdKey, out _newNode))
         {
-          _newNode = new UANodeContext(this, modelContext, nodeId, node);
+          _newNode = new UANodeContext(this, modelContext, nodeId, node, traceEvent);
           m_NodesDictionary.Add(nodeIdKey, _newNode);
         }
         else
         {
           if (_newNode.UANode != null)
             m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, String.Format("The {0} is already defined.", node.NodeId.ToString())));
-          _newNode.UANode = node;
+          _newNode.Update( node, traceEvent);
         }
         foreach (Reference _rf in node.References)
         {

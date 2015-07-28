@@ -49,7 +49,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       get { return m_AddressSpaceContext; }
     }
-    internal NodeId ImportNodeId(string source, NamespaceTable namespaceUris, bool lookupAlias, Action<TraceMessage> traceEvent)
+    internal NodeId ImportNodeId(string source, bool lookupAlias, Action<TraceMessage> traceEvent)
     {
       if (String.IsNullOrEmpty(source))
         return NodeId.Null;
@@ -60,12 +60,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       NodeId _nodeId = NodeId.Parse(source);
       if (_nodeId.NamespaceIndex > 0)
       {
-        ushort namespaceIndex = ImportNamespaceIndex(_nodeId.NamespaceIndex, namespaceUris);
+        ushort namespaceIndex = ImportNamespaceIndex(_nodeId.NamespaceIndex);
         _nodeId = new NodeId(_nodeId.IdentifierPart, namespaceIndex);
       }
       return _nodeId;
     }
-    internal NodeId ImportExpandedNodeId(string source, NamespaceTable namespaceUris, bool lookupAlias)
+    internal NodeId ImportExpandedNodeId(string source, bool lookupAlias)
     {
       if (string.IsNullOrEmpty(source))
         return NodeId.Null;
@@ -79,12 +79,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         throw new NotImplementedException();
       ushort namespaceIndex = _expandedNodeId.NamespaceIndex;
       if (_expandedNodeId.NamespaceIndex > 0)
-        namespaceIndex = ImportNamespaceIndex(_expandedNodeId.NamespaceIndex, namespaceUris);
+        namespaceIndex = ImportNamespaceIndex(_expandedNodeId.NamespaceIndex);
       return new NodeId(_expandedNodeId.Identifier, namespaceIndex);
     }
-    internal QualifiedName ImportQualifiedName(QualifiedName source, NamespaceTable namespaceUris)
+    internal QualifiedName ImportQualifiedName(QualifiedName source)
     {
-      return new QualifiedName(source.Name, ImportNamespaceIndex(source.NamespaceIndex, namespaceUris));
+      return new QualifiedName(source.Name, ImportNamespaceIndex(source.NamespaceIndex));
+    }
+    internal XmlQualifiedName ExportQualifiedName(QualifiedName source)
+    {
+      QualifiedName _imported = new QualifiedName(source.Name, ImportNamespaceIndex(source.NamespaceIndex));
+      return new XmlQualifiedName(_imported.Name, m_AddressSpaceContext.GetNamespace(_imported.NamespaceIndex));
     }
     internal void AddAlias(NodeIdAlias[] nodeIdAlias)
     {
@@ -109,20 +114,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       string _newId = String.Empty;
       return m_AliasesDictionary.TryGetValue(id, out _newId) ? _newId : id;
     }
-    private ushort ImportNamespaceIndex(ushort namespaceIndex, NamespaceTable namespaceUris)//TODO remove namespaceUris and refer to m_AddressSpaceContext
+    private ushort ImportNamespaceIndex(ushort namespaceIndex)
     {
-      if (namespaceUris == null)
-        throw new ArgumentNullException("namespaceUris");
-      // nothing special required for indexes 0.
+      // nothing special required for indexes < 0.
       if (namespaceIndex < 1)
         return namespaceIndex;
       // return a bad value if parameters are bad.
       string _identifier = "NameUnknown";
       if (m_ModelNamespaceUris != null || m_ModelNamespaceUris.Length < namespaceIndex - 1)
         _identifier = m_ModelNamespaceUris[namespaceIndex - 1];
-      return namespaceUris.GetIndexOrAppend(_identifier, m_TraceEvent);
+      return m_AddressSpaceContext.GetIndexOrAppend(_identifier, m_TraceEvent);
     }
     #endregion
+
 
 
   }

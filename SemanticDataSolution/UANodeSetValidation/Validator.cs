@@ -120,12 +120,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(traceEvent);
     }
-    private static void Update(IPropertyInstanceFactory nodeDesign, UAVariable nodeSet, UANodeContext nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
+    private static void Update(IPropertyInstanceFactory propertyInstance, UAVariable nodeSet, UANodeContext nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
       try
       {
-        Update(nodeDesign, nodeSet, nodeContext, traceEvent);
-        nodeDesign.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName(nodeContext.UAModelContext, traceEvent);
+        Update(propertyInstance, nodeSet, nodeContext, traceEvent);
+        propertyInstance.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName(traceEvent);
         if (!nodeContext.IsProperty)
           traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, String.Format("Creating Property - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
       }
@@ -134,12 +134,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, String.Format("Cannot resolve the reference for Property because of error {0} at: {1}.", _ex, _ex.StackTrace)));
       }
     }
-    private static void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet, UANodeContext nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
+    private static void Update(IVariableInstanceFactory variableInstance, UAVariable nodeSet, UANodeContext nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
       try
       {
-        Update(nodeDesign, nodeSet, nodeContext, traceEvent);
-        nodeDesign.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName(nodeContext.UAModelContext, traceEvent);
+        Update(variableInstance, nodeSet, nodeContext, traceEvent);
+        variableInstance.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName(traceEvent);
         if (nodeContext.IsProperty)
           traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Variable, String.Format("Creating Variable - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
       }

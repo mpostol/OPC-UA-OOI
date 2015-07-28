@@ -124,13 +124,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>An object of <see cref="XmlQualifiedName" /> representing the <see cref="UANode.BrowseName" /> of the node indexed by <paramref name="nodeId" /></returns>
     internal XmlQualifiedName ExportNodeId(string nodeId, NodeId defaultValue, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
-      NodeId _nd = modelContext.ImportNodeId(nodeId, m_NamespaceTable, true, traceEvent);
+      NodeId _nd = modelContext.ImportNodeId(nodeId, true, traceEvent);
       if (_nd == defaultValue)
         return null;
       UANodeContext _context = TryGetUANodeContext(_nd, traceEvent);
       if (_context == null)
         return null;
-      QualifiedName _qn = _context.ImportQualifiedName(m_NamespaceTable);
+      QualifiedName _qn = _context.ImportBrowseName();
       //QualifiedName _qn = modelContext.ImportQualifiedName(_context.UANode.BrowseName, m_NamespaceTable);
       return new XmlQualifiedName(_qn.Name, m_NamespaceTable.GetString(_qn.NamespaceIndex));
     }
@@ -144,8 +144,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (String.IsNullOrEmpty(browseName))
         return null;
-      QualifiedName _qn = modelContext.ImportQualifiedName(browseName, m_NamespaceTable);
+      QualifiedName _qn = modelContext.ImportQualifiedName(browseName);
       return new XmlQualifiedName(_qn.Name, m_NamespaceTable.GetString(_qn.NamespaceIndex));
+    }
+    internal XmlQualifiedName ExportBrowseName(NodeId nodeId, Action<TraceMessage> traceEvent)
+    {
+      UANodeContext _nodeContext = TryGetUANodeContext(nodeId, traceEvent);
+      if (_nodeContext == null)
+        return null;
+      return _nodeContext.ExportNodeBrowseName(traceEvent);// ExportQualifiedName(_nodeContext.UANode.BrowseName, modelContext);
     }
     /// <summary>
     /// Gets the namespace.
@@ -165,7 +172,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     internal UANodeContext ImportNodeId(string nodeId, UAModelContext modelContext, bool lookupAlias, Action<TraceMessage> traceEvent)
     {
-      NodeId _id = modelContext.ImportNodeId(nodeId, m_NamespaceTable, lookupAlias, traceEvent);
+      NodeId _id = modelContext.ImportNodeId(nodeId, lookupAlias, traceEvent);
       UANodeContext _ret;
       string _idKey = _id.ToString();
       if (!m_NodesDictionary.TryGetValue(_idKey, out _ret))
@@ -174,13 +181,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_NodesDictionary.Add(_idKey, _ret);
       }
       return _ret;
-    }
-    internal XmlQualifiedName ExportBrowseName(NodeId nodeId, UAModelContext modelContext, Action<TraceMessage> traceEvent)
-    {
-      UANodeContext _ret = TryGetUANodeContext(nodeId, traceEvent);
-      if (_ret == null)
-        return null;
-      return ExportQualifiedName(_ret.UANode.BrowseName, modelContext);
     }
     internal IEnumerable<UAReferenceContext> GetReferences2Me(UANodeContext index)
     {
@@ -211,8 +211,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _ret.AddDescription(argument.Description.Locale, argument.Description.Text);
       return _ret;
     }
-
-
+    internal ushort GetIndexOrAppend(string value, Action<TraceMessage> traceEvent)
+    {
+      return m_NamespaceTable.GetIndexOrAppend(value, traceEvent);
+    }
     #endregion
 
     #region private
@@ -243,19 +245,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         if (node == null)
           m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeCannotBeNull, "At Importing UANode."));
-        NodeId nodeId = modelContext.ImportNodeId(node.NodeId, m_NamespaceTable, false, m_TraceEvent);
+        NodeId nodeId = modelContext.ImportNodeId(node.NodeId, false, m_TraceEvent);
         UANodeContext _newNode = null;
         string nodeIdKey = nodeId.ToString();
         if (!m_NodesDictionary.TryGetValue(nodeIdKey, out _newNode))
         {
-          _newNode = new UANodeContext(this, modelContext, nodeId, node, traceEvent);
+          _newNode = new UANodeContext(this, modelContext, nodeId);
+          _newNode.Update(node, traceEvent);
           m_NodesDictionary.Add(nodeIdKey, _newNode);
         }
         else
         {
           if (_newNode.UANode != null)
             m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, String.Format("The {0} is already defined.", node.NodeId.ToString())));
-          _newNode.Update( node, traceEvent);
+          _newNode.Update(node, traceEvent);
         }
         foreach (Reference _rf in node.References)
         {
@@ -329,6 +332,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     #endregion
 #endif
+
   }
 
 }

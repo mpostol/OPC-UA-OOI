@@ -19,14 +19,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region creators
     /// <summary>
-    /// Initializes a new instance of the <see cref="UANodeContext"/> class.
-    /// </summary>
-    /// <param name="addressSpaceContext">The address space context.</param>
-    /// <param name="modelContext">The model context.</param>
-    /// <param name="nodeId">The node identifier.</param>
-    internal UANodeContext(AddressSpaceContext addressSpaceContext, UAModelContext modelContext, NodeId nodeId) :
-      this(addressSpaceContext, modelContext, nodeId, null, x => { }) { }
-    /// <summary>
     /// Initializes a new instance of the <see cref="UANodeContext" /> class.
     /// </summary>
     /// <param name="addressSpaceContext">The address space context.</param>
@@ -34,10 +26,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="nodeId">The node identifier.</param>
     /// <param name="node">The node.</param>
     /// <param name="traceEvent">The <see cref="Action{TraceMessage}"/> encapsulates an action to trace the <see cref="TraceMessage"/>.</param>
-    internal UANodeContext(AddressSpaceContext addressSpaceContext, UAModelContext modelContext, NodeId nodeId, UANode node, Action<TraceMessage> traceEvent)
+    internal UANodeContext(AddressSpaceContext addressSpaceContext, UAModelContext modelContext, NodeId nodeId)
     {
       this.m_AddressSpaceContext = addressSpaceContext;
-      Update(node, traceEvent);
       this.NodeIdContext = nodeId;
       this.m_ModelContext = modelContext;
       this.InRecursionChain = false;
@@ -92,7 +83,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         switch (_rfx.ReferenceKind)
         {
           case ReferenceKindEnum.Custom:
-            XmlQualifiedName _ReferenceType = _rfx.GetReferenceTypeName(this.m_ModelContext, traceEvent);
+            XmlQualifiedName _ReferenceType = _rfx.GetReferenceTypeName(traceEvent);
             if (_ReferenceType == XmlQualifiedName.Empty)
             {
               BuildError _err = BuildError.DanglingReferenceTarget;
@@ -150,14 +141,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     internal XmlQualifiedName ExportNodeBrowseName(Action<TraceMessage> traceEvent)
     {
       Debug.Assert(UANode != null, "Processing of undefined node");
-      string _broseName = UANode.BrowseName;
-      if (String.IsNullOrEmpty(UANode.BrowseName))
+      QualifiedName _broseName = m_BrowseName;
+      Debug.Assert(m_BrowseName != null);
+      if (QualifiedName.IsNull(_broseName))
       {
         NodeId _id = NodeId.Parse(UANode.NodeId);
-        _broseName = string.Format("{1}:EmptyBrowseName{0}", _id.IdentifierPart, _id.NamespaceIndex);
+        _broseName = new QualifiedName(string.Format("{1}:EmptyBrowseName{0}", _id.IdentifierPart, _id.NamespaceIndex));
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, String.Format("New identifier {0} is generated to proceed.", _broseName)));
       }
-      return m_AddressSpaceContext.ExportQualifiedName(_broseName, m_ModelContext);
+      return m_ModelContext.ExportQualifiedName(_broseName);
+    }
+    internal QualifiedName ImportBrowseName()
+    {
+      return m_ModelContext.ImportQualifiedName(m_BrowseName);
     }
     /// <summary>
     /// Gets the the base type.
@@ -213,7 +209,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #region private
     //vars
     private UANode m_UAnode = null;
-    private QualifiedName m_BrowseName = null;
+    private QualifiedName m_BrowseName = QualifiedName.Null;
+    private NodeId m_NodeId = NodeId.Null;
     private UAModelContext m_ModelContext = null;
     private List<BuildError> Errors { get; set; }
     private ModelingRules? m_ModelingRule;
@@ -229,7 +226,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return null;
       if (this.NodeIdContext == VariableTypeIds.PropertyType)
         return null;
-      return m_AddressSpaceContext.ExportBrowseName(this.NodeIdContext, m_ModelContext, traceEvent);
+      return m_AddressSpaceContext.ExportBrowseName(this.NodeIdContext, traceEvent);
     }
     private Dictionary<string, UANodeContext> GetDerivedChildren()
     {
@@ -252,9 +249,5 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #endregion
 
 
-    internal QualifiedName ImportQualifiedName(Utilities.NamespaceTable namespaceTable)
-    {
-      return m_ModelContext.ImportQualifiedName(m_BrowseName, namespaceTable);
-    }
   }
 }

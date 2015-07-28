@@ -53,11 +53,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="modelContext">The model context.</param>
     /// <param name="traceEvent">An <see cref="Action" /> delegate is used to trace event as the <see cref="TraceMessage" />.</param>
     /// <returns>XmlQualifiedName.</returns>
-    internal XmlQualifiedName GetReferenceTypeName(UAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal XmlQualifiedName GetReferenceTypeName(Action<TraceMessage> traceEvent)
     {
       if (IsDefault(this.TypeNode.NodeIdContext))
         return null;
-      return m_Context.ExportBrowseName(this.TypeNode.NodeIdContext, (UAModelContext)modelContext, traceEvent);
+      return m_Context.ExportBrowseName(this.TypeNode.NodeIdContext, traceEvent);
     }
     /// <summary>
     /// Returns the name of the reference target and calculates the Target identifier by traversing the components hierarchical path.

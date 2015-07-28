@@ -122,37 +122,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="modelContext">The model context for NodeSet.</param>
     /// <param name="traceEvent">Encapsulates an action used to trace events.</param>
     /// <returns>An object of <see cref="XmlQualifiedName" /> representing the <see cref="UANode.BrowseName" /> of the node indexed by <paramref name="nodeId" /></returns>
-    internal XmlQualifiedName ExportNodeId(string nodeId, NodeId defaultValue, UAModelContext modelContext, Action<TraceMessage> traceEvent)
-    {
-      NodeId _nd = modelContext.ImportNodeId(nodeId, true, traceEvent);
-      if (_nd == defaultValue)
-        return null;
-      UANodeContext _context = TryGetUANodeContext(_nd, traceEvent);
-      if (_context == null)
-        return null;
-      QualifiedName _qn = _context.ImportBrowseName();
-      //QualifiedName _qn = modelContext.ImportQualifiedName(_context.UANode.BrowseName, m_NamespaceTable);
-      return new XmlQualifiedName(_qn.Name, m_NamespaceTable.GetString(_qn.NamespaceIndex));
-    }
-    /// <summary>
-    /// Converts the <paramref name="browseName" /> representing <see cref="QualifiedName" /> to instance of <see cref="XmlQualifiedName" />.
-    /// </summary>
-    /// <param name="browseName">Name of the browse.</param>
-    /// <param name="modelContext">The model context.</param>
-    /// <returns>An instance of <see cref="XmlQualifiedName" /> representing <see cref="UANode.BrowseName" />.</returns>
-    internal XmlQualifiedName ExportQualifiedName(string browseName, UAModelContext modelContext)
-    {
-      if (String.IsNullOrEmpty(browseName))
-        return null;
-      QualifiedName _qn = modelContext.ImportQualifiedName(browseName);
-      return new XmlQualifiedName(_qn.Name, m_NamespaceTable.GetString(_qn.NamespaceIndex));
-    }
     internal XmlQualifiedName ExportBrowseName(NodeId nodeId, Action<TraceMessage> traceEvent)
     {
-      UANodeContext _nodeContext = TryGetUANodeContext(nodeId, traceEvent);
-      if (_nodeContext == null)
+      UANodeContext _context = TryGetUANodeContext(nodeId, traceEvent);
+      if (_context == null)
         return null;
-      return _nodeContext.ExportNodeBrowseName(traceEvent);// ExportQualifiedName(_nodeContext.UANode.BrowseName, modelContext);
+      return _context.ExportNodeBrowseName(traceEvent);
     }
     /// <summary>
     /// Gets the namespace.
@@ -170,14 +145,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return m_NamespaceTable.ToArray();
     }
-    internal UANodeContext ImportNodeId(string nodeId, UAModelContext modelContext, bool lookupAlias, Action<TraceMessage> traceEvent)
+    internal UANodeContext GetOrCreateNodeContext(NodeId nodeId, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
-      NodeId _id = modelContext.ImportNodeId(nodeId, lookupAlias, traceEvent);
       UANodeContext _ret;
-      string _idKey = _id.ToString();
+      string _idKey = nodeId.ToString();
       if (!m_NodesDictionary.TryGetValue(_idKey, out _ret))
       {
-        _ret = new UANodeContext(this, modelContext, _id);
+        _ret = new UANodeContext(this, modelContext, nodeId);
         m_NodesDictionary.Add(_idKey, _ret);
       }
       return _ret;
@@ -198,11 +172,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       foreach (UANodeContext _type in _col)
         GetChildren(_type, list);
     }
-    internal Parameter ExportArgument(UAOOI.SemanticData.UANodeSetValidation.DataSerialization.Argument argument, UAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal Parameter ExportArgument(DataSerialization.Argument argument, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
-      UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory.Argument _ret = new UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory.Argument()
+      InformationModelFactory.Argument _ret = new InformationModelFactory.Argument()
       {
-        DataType = ExportNodeId(argument.DataType.Identifier, DataTypeIds.BaseDataType, modelContext, traceEvent),
+        DataType = modelContext.ExportBrowseName(argument.DataType.Identifier, DataTypeIds.BaseDataType, traceEvent),
         Identifier = new Nullable<int>(),
         Name = argument.Name,
         ValueRank = argument.ValueRank.GetValueRank(traceEvent)

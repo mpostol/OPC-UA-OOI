@@ -77,7 +77,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       foreach (DataTypeField _item in dataTypeDefinition.Field)
       {
         IDataTypeFieldFactory _nP = _definition.NewField();
-        _nP.DataType = modelContext.ExportNodeId(_item.DataType, DataTypes.BaseDataType, traceEvent);
+        _nP.DataType = modelContext.ExportBrowseName(_item.DataType, DataTypes.BaseDataType, traceEvent);
         _item.Description.ExportLocalizedTextArray(_nP.AddDescription);
         _nP.Identifier = _item.Value;
         _nP.Name = _item.Name;

@@ -24,8 +24,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="addressSpaceContext">The address space context.</param>
     /// <param name="modelContext">The model context.</param>
     /// <param name="nodeId">The node identifier.</param>
-    /// <param name="node">The node.</param>
-    /// <param name="traceEvent">The <see cref="Action{TraceMessage}"/> encapsulates an action to trace the <see cref="TraceMessage"/>.</param>
     internal UANodeContext(AddressSpaceContext addressSpaceContext, UAModelContext modelContext, NodeId nodeId)
     {
       this.m_AddressSpaceContext = addressSpaceContext;
@@ -44,13 +42,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       get { return m_UAnode; }
     }
-    internal void Update(UANode node, Action<TraceMessage> traceEvent)
-    {
-      if (node == null)
-        return;
-      m_UAnode = node;
-      m_BrowseName = node.BrowseName.Parse(traceEvent);
-    }
     /// <summary>
     /// Gets the instance of <see cref="UAModelContext" />, which the node is defined in.
     /// </summary>
@@ -58,6 +49,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     internal UAModelContext UAModelContext
     {
       get { return m_ModelContext; }
+    }
+    internal void Update(UANode node, Action<TraceMessage> traceEvent)
+    {
+      if (node == null)
+        return;
+      m_UAnode = node;
+      QualifiedName _broseName = node.BrowseName.Parse(traceEvent);
+      Debug.Assert(m_BrowseName != null);
+      if (QualifiedName.IsNull(_broseName))
+      {
+        NodeId _id = NodeId.Parse(UANode.NodeId);
+        _broseName = new QualifiedName(string.Format("EmptyBrowseName{0}", _id.IdentifierPart), _id.NamespaceIndex);
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, String.Format("New identifier {0} is generated to proceed.", _broseName)));
+      }
+      m_BrowseName = m_ModelContext.ImportQualifiedName(_broseName);
     }
     /// <summary>
     /// Gets the branch name to calculate the node path - it is name part of the browse name or symbolic name depending which one is not empty.
@@ -129,9 +135,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="defaultValue">The default value.</param>
     /// <param name="traceEvent">A delegate action to report an error and trace processing progress.</param>
     /// <returns>An object of <see cref="XmlQualifiedName" /> representing the BrowseName of <see cref="UANode" /> of the node indexed by <paramref name="nodeId" /></returns>
-    internal XmlQualifiedName ExportNodeId(string nodeId, NodeId defaultValue, Action<TraceMessage> traceEvent)
+    internal XmlQualifiedName ExportBrowseName(string nodeId, NodeId defaultValue, Action<TraceMessage> traceEvent)
     {
-      return m_AddressSpaceContext.ExportNodeId(nodeId, defaultValue, m_ModelContext, traceEvent);
+      return m_ModelContext.ExportBrowseName(nodeId, defaultValue, traceEvent);
     }
     /// <summary>
     /// Exports the browse name of the node.
@@ -140,20 +146,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>An object of <see cref="XmlQualifiedName" /> representing the browse name of the node.</returns>
     internal XmlQualifiedName ExportNodeBrowseName(Action<TraceMessage> traceEvent)
     {
-      Debug.Assert(UANode != null, "Processing of undefined node");
-      QualifiedName _broseName = m_BrowseName;
-      Debug.Assert(m_BrowseName != null);
-      if (QualifiedName.IsNull(_broseName))
-      {
-        NodeId _id = NodeId.Parse(UANode.NodeId);
-        _broseName = new QualifiedName(string.Format("{1}:EmptyBrowseName{0}", _id.IdentifierPart, _id.NamespaceIndex));
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, String.Format("New identifier {0} is generated to proceed.", _broseName)));
-      }
-      return m_ModelContext.ExportQualifiedName(_broseName);
-    }
-    internal QualifiedName ImportBrowseName()
-    {
-      return m_ModelContext.ImportQualifiedName(m_BrowseName);
+      return m_ModelContext.ExportQualifiedName(m_BrowseName);
     }
     /// <summary>
     /// Gets the the base type.

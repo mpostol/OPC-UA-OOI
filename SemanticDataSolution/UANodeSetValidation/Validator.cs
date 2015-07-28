@@ -152,7 +152,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(traceEvent);
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(String.Empty);
-      nodeDesign.DataType = nodeContext.ExportNodeId(nodeSet.DataType, DataTypes.Number, traceEvent);//TODO add test case must be DataType, must not be abstract
+      nodeDesign.DataType = nodeContext.ExportBrowseName(nodeSet.DataType, DataTypes.Number, traceEvent);//TODO add test case must be DataType, must not be abstract
       nodeDesign.DefaultValue = nodeSet.Value; //TODO add test case must be of type defined by DataType
       nodeDesign.Historizing = nodeSet.Historizing.Export(false);
       nodeDesign.MinimumSamplingInterval = nodeSet.MinimumSamplingInterval.Export(0D);
@@ -163,7 +163,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private static void Update(IVariableTypeFactory nodeDesign, UAVariableType nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(String.Empty);
-      nodeDesign.DataType = nodeContext.ExportNodeId(nodeSet.DataType, DataTypes.Number, traceEvent);
+      nodeDesign.DataType = nodeContext.ExportBrowseName(nodeSet.DataType, DataTypes.Number, traceEvent);
       nodeDesign.DefaultValue = nodeSet.Value;
       nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(traceEvent);
     }

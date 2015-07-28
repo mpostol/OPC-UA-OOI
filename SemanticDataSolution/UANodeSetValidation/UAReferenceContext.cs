@@ -21,7 +21,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     internal static UAReferenceContext NewReferenceStub
       (Reference reference, AddressSpaceContext addressSpaceContext, UAModelContext modelContext, UANodeContext parentNode, Action<TraceMessage> traceEvent)
     {
-      UANodeContext targetNode = addressSpaceContext.ImportNodeId(reference.Value, modelContext, true, traceEvent);
+      UANodeContext targetNode = modelContext.GetOrCreateNodeContext(reference.Value, true, traceEvent);
       UAReferenceContext _stb = new UAReferenceContext()
       {
         m_Context = addressSpaceContext,
@@ -29,7 +29,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         SourceNode = reference.IsForward ? parentNode : targetNode,
         ModelNode = reference,
         TargetNode = reference.IsForward ? targetNode : parentNode,
-        TypeNode = addressSpaceContext.ImportNodeId(reference.ReferenceType, modelContext, true, traceEvent),
+        TypeNode = modelContext.GetOrCreateNodeContext(reference.ReferenceType, true, traceEvent),
       };
       if (_stb.TypeNode != null && _stb.TypeNode.NodeIdContext.NamespaceIndex == 0)
         _stb.ReferenceKind = _stb.GetReferenceKind(_stb.TypeNode);

@@ -41,23 +41,31 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="defaultValue">The default value.</param>
     /// <param name="traceEvent">An <see cref="Action" /> delegate is used to trace event as the <see cref="TraceMessage" />.</param>
     /// <returns>The identifier an object of <see cref="System.Xml.XmlQualifiedName" /> or null if <paramref name="nodeId" /> has default value.</returns>
-    internal XmlQualifiedName ExportNodeId(string nodeId, uint defaultValue, Action<TraceMessage> traceEvent)
+    internal XmlQualifiedName ExportBrowseName(string nodeId, NodeId defaultValue, Action<TraceMessage> traceEvent)
     {
-      return m_AddressSpaceContext.ExportNodeId(nodeId, defaultValue, this, traceEvent);
+      NodeId _id = ImportNodeId(nodeId, true, traceEvent);
+      if (_id == defaultValue)
+        return null;
+      return m_AddressSpaceContext.ExportBrowseName(_id, traceEvent);
     }
     internal AddressSpaceContext AddressSpaceContext
     {
       get { return m_AddressSpaceContext; }
     }
-    internal NodeId ImportNodeId(string source, bool lookupAlias, Action<TraceMessage> traceEvent)
+    internal UANodeContext GetOrCreateNodeContext(string nodeId, bool lookupAlias, Action<TraceMessage> traceEvent)
     {
-      if (String.IsNullOrEmpty(source))
+      NodeId _id = ImportNodeId(nodeId, lookupAlias, traceEvent);
+      return m_AddressSpaceContext.GetOrCreateNodeContext(_id, this, traceEvent);
+    }
+    internal NodeId ImportNodeId(string nodeId, bool lookupAlias, Action<TraceMessage> traceEvent)
+    {
+      if (String.IsNullOrEmpty(nodeId))
         return NodeId.Null;
       // lookup alias.
       if (lookupAlias)
-        source = LookupAlias(source);
+        nodeId = LookupAlias(nodeId);
       // parse the string.
-      NodeId _nodeId = NodeId.Parse(source);
+      NodeId _nodeId = NodeId.Parse(nodeId);
       if (_nodeId.NamespaceIndex > 0)
       {
         ushort namespaceIndex = ImportNamespaceIndex(_nodeId.NamespaceIndex);
@@ -65,14 +73,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _nodeId;
     }
-    internal NodeId ImportExpandedNodeId(string source, bool lookupAlias)
+    internal NodeId ImportExpandedNodeId(string nodeId, bool lookupAlias)
     {
-      if (string.IsNullOrEmpty(source))
+      if (string.IsNullOrEmpty(nodeId))
         return NodeId.Null;
       // lookup alias.
       if (lookupAlias)
-        source = LookupAlias(source);
-      ExpandedNodeId _expandedNodeId = ExpandedNodeId.Parse(source);
+        nodeId = LookupAlias(nodeId);
+      ExpandedNodeId _expandedNodeId = ExpandedNodeId.Parse(nodeId);
       if (_expandedNodeId.IsAbsolute)
         throw new NotImplementedException();
       if (_expandedNodeId.ServerIndex > 0)
@@ -88,8 +96,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     internal XmlQualifiedName ExportQualifiedName(QualifiedName source)
     {
-      QualifiedName _imported = new QualifiedName(source.Name, ImportNamespaceIndex(source.NamespaceIndex));
-      return new XmlQualifiedName(_imported.Name, m_AddressSpaceContext.GetNamespace(_imported.NamespaceIndex));
+      return new XmlQualifiedName(source.Name, m_AddressSpaceContext.GetNamespace(source.NamespaceIndex));
     }
     internal void AddAlias(NodeIdAlias[] nodeIdAlias)
     {

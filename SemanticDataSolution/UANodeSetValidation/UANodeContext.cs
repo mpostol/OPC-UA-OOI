@@ -12,7 +12,7 @@ using UAOOI.SemanticData.UANodeSetValidation.XML;
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
   /// <summary>
-  /// Class UANodeContext.
+  /// Class UANodeContext - it wraps the <see cref="UANode"/> and provides functionality to analyze its semantic.
   /// </summary>
   internal class UANodeContext : IEquatable<UANodeContext>
   {
@@ -43,13 +43,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       get { return m_UAnode; }
     }
     /// <summary>
-    /// Gets the instance of <see cref="UAModelContext" />, which the node is defined in.
+    /// Gets the instance of <see cref="UAModelContext" />containing definition of this node.
     /// </summary>
-    /// <value>The model context.</value>
+    /// <value>The model context for this node.</value>
     internal UAModelContext UAModelContext
     {
       get { return m_ModelContext; }
     }
+    /// <summary>
+    /// Updates the specified <see cref="UANodeContext"/> in case the wrapped <see cref="UANode"/> is recognized in the model.
+    /// </summary>
+    /// <param name="node">The node.</param>
+    /// <param name="traceEvent">The trace event.</param>
     internal void Update(UANode node, Action<TraceMessage> traceEvent)
     {
       if (node == null)
@@ -77,7 +82,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent models.
     /// </summary>
     /// <param name="nodeContainer">The node container.</param>
-    /// <param name="traceEvent">A delegate action to report and error and trace processing progress.</param>
+    /// <param name="traceEvent">A delegate action to report an error and trace processing progress.</param>
     internal void CalculateNodeReferences(INodeFactory nodeContainer, Action<TraceMessage> traceEvent)
     {
       Errors = new List<BuildError>();

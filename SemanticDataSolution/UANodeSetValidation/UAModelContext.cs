@@ -98,13 +98,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return new XmlQualifiedName(source.Name, m_AddressSpaceContext.GetNamespace(source.NamespaceIndex));
     }
-    internal void AddAlias(NodeIdAlias[] nodeIdAlias)
+    private void AddAlias(NodeIdAlias[] nodeIdAlias)
     {
       foreach (var _alias in nodeIdAlias)
-      {
-        NodeId _nd = NodeId.Parse(_alias.Value);
         m_AliasesDictionary.Add(_alias.Alias, _alias.Value);
-      }
     }
     #endregion
 
@@ -112,7 +109,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //vars
     private AddressSpaceContext m_AddressSpaceContext;
     private Action<TraceMessage> m_TraceEvent = x => { };
-    internal object GetAddressSpaceContext { get; set; }
     private string[] m_ModelNamespaceUris;
     private Dictionary<string, string> m_AliasesDictionary = new Dictionary<string, string>();
     //methods

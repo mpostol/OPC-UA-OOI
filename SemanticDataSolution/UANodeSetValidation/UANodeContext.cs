@@ -23,7 +23,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="addressSpaceContext">The address space context.</param>
     /// <param name="modelContext">The model context.</param>
-    /// <param name="nodeId">The node identifier.</param>
+    /// <param name="nodeId">The imported form the string node identifier.</param>
     internal UANodeContext(AddressSpaceContext addressSpaceContext, UAModelContext modelContext, NodeId nodeId)
     {
       this.m_AddressSpaceContext = addressSpaceContext;
@@ -182,6 +182,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _connector.BuildSymbolicId(path, reportError);
       path.Add(BranchName);
     }
+    /// <summary>
+    /// Gets the node identifier in this address space context.
+    /// </summary>
+    /// <value>The imported node identifier in this address space context.</value>
     internal NodeId NodeIdContext { get; private set; }
     internal Parameter[] GetParameters(XmlElement arguments, Action<TraceMessage> traceEvent)
     {
@@ -203,7 +207,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //vars
     private UANode m_UAnode = null;
     private QualifiedName m_BrowseName = QualifiedName.Null;
-    private NodeId m_NodeId = NodeId.Null;
     private UAModelContext m_ModelContext = null;
     private List<BuildError> Errors { get; set; }
     private ModelingRules? m_ModelingRule;

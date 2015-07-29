@@ -33,7 +33,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       UANodeSet _tm = TestData.CreateNodeSetModel();
       UAModelContext _mc = new UAModelContext(_tm.Aliases, _tm.NamespaceUris, null);
       Assert.IsNotNull(_mc);
-      Assert.IsNull(_mc.GetAddressSpaceContext);
     }
     [TestMethod]
     [TestCategory("Code")]
@@ -43,7 +42,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       AddressSpaceContext _as = new AddressSpaceContext(x => { });
       UAModelContext _mc = new UAModelContext(_tm.Aliases, _tm.NamespaceUris, _as);
       Assert.IsNotNull(_mc);
-      Assert.IsNull(_mc.GetAddressSpaceContext);
     }
   }
 }

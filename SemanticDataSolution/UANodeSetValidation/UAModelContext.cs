@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
@@ -47,6 +48,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (_id == defaultValue)
         return null;
       return m_AddressSpaceContext.ExportBrowseName(_id, traceEvent);
+    }
+    internal Parameter ExportArgument(DataSerialization.Argument argument, Action<TraceMessage> traceEvent)
+    {
+      XmlQualifiedName _dataType = ExportBrowseName(argument.DataType.Identifier, DataTypeIds.BaseDataType, traceEvent);
+      return m_AddressSpaceContext.ExportArgument(argument, _dataType, traceEvent);
     }
     internal AddressSpaceContext AddressSpaceContext
     {

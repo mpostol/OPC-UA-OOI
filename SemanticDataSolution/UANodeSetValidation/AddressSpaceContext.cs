@@ -127,7 +127,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UANodeContext _context = TryGetUANodeContext(nodeId, traceEvent);
       if (_context == null)
         return null;
-      return _context.ExportNodeBrowseName(traceEvent);
+      return _context.ExportNodeBrowseName();
     }
     /// <summary>
     /// Gets the namespace.
@@ -172,11 +172,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       foreach (UANodeContext _type in _col)
         GetChildren(_type, list);
     }
-    internal Parameter ExportArgument(DataSerialization.Argument argument, UAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal Parameter ExportArgument(DataSerialization.Argument argument, XmlQualifiedName dataType, Action<TraceMessage> traceEvent)
     {
       InformationModelFactory.Argument _ret = new InformationModelFactory.Argument()
       {
-        DataType = modelContext.ExportBrowseName(argument.DataType.Identifier, DataTypeIds.BaseDataType, traceEvent),
+        DataType = dataType,
         Identifier = new Nullable<int>(),
         Name = argument.Name,
         ValueRank = argument.ValueRank.GetValueRank(traceEvent)

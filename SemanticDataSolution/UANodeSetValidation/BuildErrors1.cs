@@ -175,6 +175,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                     Identifier = "P3-0710000000", 
                     Descriptor = "Each Node shall be the TargetNode of at most one Reference of type HasSubtype." }; } }
     /// <summary>
+    /// Error: P3-0710000000; Focus: Reference; Undefined HasTypeDefinition - each Variable and each Object shall be the SourceNode of exactly one HasTypeDefinition Reference.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0710000000.</value>
+    public static BuildError UndefinedHasTypeDefinition { get { return new BuildError() 
+                  { Focus = Focus.Reference, 
+                    Identifier = "P3-0710000000", 
+                    Descriptor = "Undefined HasTypeDefinition - each Variable and each Object shall be the SourceNode of exactly one HasTypeDefinition Reference." }; } }
+    /// <summary>
     /// Error: P6-0503011400; Focus: NodeClass; BrowseName cannot be null string.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P6-0503011400.</value>

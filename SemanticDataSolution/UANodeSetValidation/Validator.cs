@@ -212,7 +212,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       FactoryType _nodeFactory = createNode();
       nodeContext.CalculateNodeReferences(_nodeFactory, traceEvent);
       NodeSetType _nodeSet = (NodeSetType)nodeContext.UANode;
-      XmlQualifiedName _browseName = nodeContext.ExportNodeBrowseName(traceEvent);
+      XmlQualifiedName _browseName = nodeContext.ExportNodeBrowseName();
       string _symbolicName;
       if (String.IsNullOrEmpty(_nodeSet.SymbolicName))
         _symbolicName = _browseName.Name.ValidateIdentifier(traceEvent);

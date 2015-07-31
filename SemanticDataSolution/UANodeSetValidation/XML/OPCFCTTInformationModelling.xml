@@ -384,6 +384,7 @@ If the Source of this reference is Variable or VariableTypes, then the Target is
 		<ns1:Focus>HasTypeDefinition</ns1:Focus>
 		<ns1:TestCase>SourceNode is Object or Variable. If Object then TargetNode is an ObjectType; if Variable then TargetNode is VariableType.</ns1:TestCase>
 		<ns1:Reviewed>ok</ns1:Reviewed>
+		<ns1:Identifier>UndefinedHasTypeDefinition</ns1:Identifier>
 	</ns1:TestCase>
 	<ns1:TestCase>
 		<ns1:CTT>y</ns1:CTT>

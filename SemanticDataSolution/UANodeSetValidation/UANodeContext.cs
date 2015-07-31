@@ -115,10 +115,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case ReferenceKindEnum.HasModellingRule:
             m_ModelingRule = _rfx.GetModelingRule();
             break;
-          case ReferenceKindEnum.HasSubtype:
+          case ReferenceKindEnum.HasSubtype: //TODO Part 3 7.10 HasSubtype - add test cases #35
             m_BaseTypeNode = _rfx.SourceNodeContext;
             break;
-          case ReferenceKindEnum.HasTypeDefinition:
+          case ReferenceKindEnum.HasTypeDefinition: //Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
             m_BaseTypeNode = _rfx.TargetNodeContext;
             _derivedChildren = _rfx.TargetNodeContext.GetDerivedChildren();
             Debug.Assert(!m_IsProperty, "Has property ");
@@ -153,7 +153,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Gets the BrowseName of the BaseType.
     /// </summary>
-    /// <param name="traceEvent">A delegate encapsulates the action to report any errors and trace processing progress.</param>
+    /// <param name="type">if set to <c>true</c> the source node represents type. <c>false</c> if it is an instance.</param>
+    /// <param name="traceEvent">A delegate encapsulates the action to report any error and trace processing progress.</param>
     /// <returns>XmlQualifiedName.</returns>
     /// <value>An instance of <see cref="XmlQualifiedName" /> representing the base type.</value>
     internal XmlQualifiedName BaseType(bool type, Action<TraceMessage> traceEvent)

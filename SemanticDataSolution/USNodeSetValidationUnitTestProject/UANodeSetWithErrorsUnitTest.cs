@@ -194,11 +194,41 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       _as.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(4, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<int>(4, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502020001").Count<TraceMessage>());
+      Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502020001").Count<TraceMessage>());
     }
-
-    #endregion    
+    [TestMethod]
+    public void UndefinedHasSubtypeTestMethod()
+    {
+      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasSubtype.xml");
+      Assert.IsTrue(_testDataFileInfo.Exists);
+      List<TraceMessage> _trace = new List<TraceMessage>();
+      int _diagnosticCounter = 0;
+      IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
+      Assert.IsNotNull(_as);
+      _as.ImportUANodeSet(_testDataFileInfo);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSpace);
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0710000001").Count<TraceMessage>());
+    }
+    [TestMethod]
+    public void UndefinedHasTypeDefinitionTestMethod()
+    {
+      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasTypeDefinition.xml");
+      Assert.IsTrue(_testDataFileInfo.Exists);
+      List<TraceMessage> _trace = new List<TraceMessage>();
+      int _diagnosticCounter = 0;
+      IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
+      Assert.IsNotNull(_as);
+      _as.ImportUANodeSet(_testDataFileInfo);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSpace);
+      Assert.Inconclusive("Instances are not imported - the error is not recognized.");
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0713000000").Count<TraceMessage>());
+    }
+    #endregion
     #endregion
 
     #region private

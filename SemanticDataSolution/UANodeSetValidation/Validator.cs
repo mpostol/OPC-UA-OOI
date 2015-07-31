@@ -233,13 +233,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     private static void UpdateType(ITypeFactory nodeDesign, UAType nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
-      nodeDesign.BaseType = nodeContext.BaseType(traceEvent);
+      nodeDesign.BaseType = nodeContext.BaseType(true, traceEvent);
       nodeDesign.IsAbstract = nodeSet.IsAbstract;
     }
     private static void UpdateInstance(IInstanceFactory nodeDesign, UAInstance nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
       nodeDesign.ModelingRule = nodeContext.ModelingRule;
-      nodeDesign.TypeDefinition = nodeContext.BaseType(traceEvent);
+      nodeDesign.TypeDefinition = nodeContext.BaseType(false, traceEvent);
       //nodeSet.ParentNodeId - The NodeId of the Node that is the parent of the Node within the information model. This field is used to indicate 
       //that a tight coupling exists between the Node and its parent (e.g. when the parent is deleted the child is deleted 
       //as well). This information does not appear in the AddressSpace and is intended for use by design tools.

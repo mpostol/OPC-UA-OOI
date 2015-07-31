@@ -40,22 +40,10 @@
     <Alias Alias="HasEncoding">i=38</Alias>
     <Alias Alias="HasDescription">i=39</Alias>
   </Aliases>
-  <UAVariableType NodeId="ns=1;i=15" BrowseName="1:WrongDataType" DataType="i=123456" ValueRank="3" ArrayDimensions="0,0,0">
-    <DisplayName>Wrong DataType</DisplayName>
+  <UAVariable NodeId="ns=1;i=1" BrowseName="1:ReferenceTypeTest1" >
+    <DisplayName>ReferenceTypeTest #1</DisplayName>
     <References>
-      <Reference ReferenceType="HasSubtype" IsForward="false">i=63</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=46999</Reference>
     </References>
-  </UAVariableType>
-  <UAVariableType NodeId="ns=1;i=16" BrowseName="1:WrongReferenceType" DataType="Int32" ValueRank="3" ArrayDimensions="0,0,0">
-    <DisplayName>Wrong DataType</DisplayName>
-    <References>
-      <Reference ReferenceType="i=234567" IsForward="false">i=63</Reference>
-    </References>
-  </UAVariableType>
-  <UAVariableType NodeId="ns=1;i=17" BrowseName="1:WrongReferenceTypeSyntx" DataType="Int32" ValueRank="3" ArrayDimensions="0,0,0">
-    <DisplayName>Wrong DataType</DisplayName>
-    <References>
-      <Reference ReferenceType="NotDefined" IsForward="false">i=63</Reference>
-    </References>
-  </UAVariableType>
+  </UAVariable>
 </UANodeSet>

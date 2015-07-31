@@ -129,7 +129,13 @@
 		</ns1:NamedBuildError>
 		<ns1:NamedBuildError>
 			<ns1:Focus>Reference</ns1:Focus>
-			<ns1:Identifier>P3-0710000000</ns1:Identifier>
+			<ns1:Identifier>P3-0710000001</ns1:Identifier>
+			<ns1:Descriptor>Undefined HasSubtype  - the target of this reference is not defined.</ns1:Descriptor>
+			<ns1:Name>UndefinedHasSubtype</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0713000000</ns1:Identifier>
 			<ns1:Descriptor>Undefined HasTypeDefinition - each Variable and each Object shall be the SourceNode of exactly one HasTypeDefinition Reference.</ns1:Descriptor>
 			<ns1:Name>UndefinedHasTypeDefinition</ns1:Name>
 		</ns1:NamedBuildError>

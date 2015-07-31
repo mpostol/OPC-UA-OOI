@@ -163,10 +163,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private void TraceErrorUndefinedBaseType(NodeId target, bool type, Action<TraceMessage> traceEvent)
     {
       if (type)
-        ;//TODO handle HasSubtype error.
+      {
+        string _msg = String.Format("BaseType of Id={0} for node {1}", target, this.m_BrowseName);
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasSubtype, _msg));
+      }
       else
       {
-        string _msg = String.Format("baseType of Id={0} for node {1}", target, this.m_BrowseName);
+        string _msg = String.Format("TypeDefinition of Id={0} for node {1}", target, this.m_BrowseName);
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
       }
     }

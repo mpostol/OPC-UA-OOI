@@ -230,7 +230,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (type)
       {
         string _msg = String.Format("BaseType of Id={0} for node {1}", target, this.m_BrowseName);
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasSubtype, _msg));
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasSubtypeTarget, _msg));
       }
       else
       {

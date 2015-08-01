@@ -229,6 +229,24 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0713000000").Count<TraceMessage>());
     }
+    /// <summary>
+    /// Class UndefinedHasComponentTargetTestClass: Handle HasComponent ReferenceType errors. #42
+    /// </summary>
+    [TestMethod]
+    public void UndefinedHasComponentTargetTestMethod()
+    {
+      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasComponentTarget.xml");
+      Assert.IsTrue(_testDataFileInfo.Exists);
+      List<TraceMessage> _trace = new List<TraceMessage>();
+      int _diagnosticCounter = 0;
+      IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
+      Assert.IsNotNull(_as);
+      _as.ImportUANodeSet(_testDataFileInfo);
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(m_NameSpace);
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0707000002").Count<TraceMessage>());
+    }
     #endregion
     #endregion
 

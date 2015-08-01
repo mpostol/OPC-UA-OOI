@@ -108,6 +108,9 @@
     </Content>
     <Content Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.PredefinedNodes.xml" />
     <Content Include="XMLModels\CorrectModels\ReferenceTest.xml" />
+    <Content Include="XMLModels\ModelsWithErrors\UndefinedHasComponentTarget.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="XMLModels\ModelsWithErrors\UndefinedHasSubtype.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

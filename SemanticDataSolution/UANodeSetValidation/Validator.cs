@@ -70,9 +70,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     internal static void ValidateExportNode(UANodeContext nodeContext, INodeContainer exportFactory, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
       Debug.Assert(nodeContext != null, "Validator.ValidateExportNode the argument nodeContext is null.");
+      //TODO Handle HasComponent ReferenceType errors. #42
       if (nodeContext.UANode == null)
       {
-        TraceMessage _traceMessage = TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, "Compilation Information at CreateNodeDesign");
+        TraceMessage _traceMessage = TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasComponentTarget, String.Format("The node {0} is undefined", nodeContext.NodeIdContext));
         traceEvent(_traceMessage);
         CreateModelDesignStub(exportFactory);
       }

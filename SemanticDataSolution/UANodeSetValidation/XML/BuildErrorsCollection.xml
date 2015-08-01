@@ -118,8 +118,14 @@
 		<ns1:NamedBuildError>
 			<ns1:Focus>Reference</ns1:Focus>
 			<ns1:Identifier>P3-0707000001</ns1:Identifier>
-			<ns1:Descriptor>Wrong Reference type for Method component.</ns1:Descriptor>
+			<ns1:Descriptor>Wrong Reference type targeting the Method component.</ns1:Descriptor>
 			<ns1:Name>WrongReference2Method</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0707000002</ns1:Identifier>
+			<ns1:Descriptor>Dangling reference - undefined target of the HasComponent reference.</ns1:Descriptor>
+			<ns1:Name>UndefinedHasComponentTarget</ns1:Name>
 		</ns1:NamedBuildError>
 		<ns1:NamedBuildError>
 			<ns1:Focus>Reference</ns1:Focus>
@@ -130,8 +136,8 @@
 		<ns1:NamedBuildError>
 			<ns1:Focus>Reference</ns1:Focus>
 			<ns1:Identifier>P3-0710000001</ns1:Identifier>
-			<ns1:Descriptor>Undefined HasSubtype  - the target of this reference is not defined.</ns1:Descriptor>
-			<ns1:Name>UndefinedHasSubtype</ns1:Name>
+			<ns1:Descriptor>Dangling reference - undefined target of the HasSubtype reference.</ns1:Descriptor>
+			<ns1:Name>UndefinedHasSubtypeTarget</ns1:Name>
 		</ns1:NamedBuildError>
 		<ns1:NamedBuildError>
 			<ns1:Focus>Reference</ns1:Focus>

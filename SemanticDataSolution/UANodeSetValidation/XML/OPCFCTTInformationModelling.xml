@@ -356,6 +356,7 @@ Note: As we find more types derived from this diagram we can add this to this te
 		<ns1:TestCase>IF the Source of this reference is an Object or ObjectType; the Target is used with Objects, DataVariables, or Methods.
 If the Source of this reference is Variable or VariableTypes, then the Target is used with DataVariables.</ns1:TestCase>
 		<ns1:Reviewed>ok</ns1:Reviewed>
+		<ns1:Identifier>WrongReference2Method; WrongReference2Variable; UndefinedHasComponentTarget</ns1:Identifier>
 	</ns1:TestCase>
 	<ns1:TestCase>
 		<ns1:CTT>y</ns1:CTT>
@@ -363,7 +364,8 @@ If the Source of this reference is Variable or VariableTypes, then the Target is
 		<ns1:Focus>HasSubtype</ns1:Focus>
 		<ns1:TestCase>SourceNode is an ObjectType, VariableType, DataType, or ReferenceType; TargetNode is of the same NodeClass as the SourceNode.</ns1:TestCase>
 		<ns1:Reviewed>ok</ns1:Reviewed>
-		<ns1:Identifier>UndefinedHasSubtype</ns1:Identifier>
+		<ns1:Identifier>UndefinedHasSubtypeTarget
+</ns1:Identifier>
 	</ns1:TestCase>
 	<ns1:TestCase>
 		<ns1:CTT>y</ns1:CTT>

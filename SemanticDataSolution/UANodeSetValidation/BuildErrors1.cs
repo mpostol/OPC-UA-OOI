@@ -159,13 +159,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                     Identifier = "P3-0707000000", 
                     Descriptor = "Wrong Reference type targeting the DataVariable component." }; } }
     /// <summary>
-    /// Error: P3-0707000001; Focus: Reference; Wrong Reference type for Method component.
+    /// Error: P3-0707000001; Focus: Reference; Wrong Reference type targeting the Method component.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P3-0707000001.</value>
     public static BuildError WrongReference2Method { get { return new BuildError() 
                   { Focus = Focus.Reference, 
                     Identifier = "P3-0707000001", 
-                    Descriptor = "Wrong Reference type for Method component." }; } }
+                    Descriptor = "Wrong Reference type targeting the Method component." }; } }
+    /// <summary>
+    /// Error: P3-0707000002; Focus: Reference; Dangling reference - undefined target of the HasComponent reference.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0707000002.</value>
+    public static BuildError UndefinedHasComponentTarget { get { return new BuildError() 
+                  { Focus = Focus.Reference, 
+                    Identifier = "P3-0707000002", 
+                    Descriptor = "Dangling reference - undefined target of the HasComponent reference." }; } }
     /// <summary>
     /// Error: P3-0710000000; Focus: Reference; Each Node shall be the TargetNode of at most one Reference of type HasSubtype.
     /// </summary>
@@ -175,13 +183,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                     Identifier = "P3-0710000000", 
                     Descriptor = "Each Node shall be the TargetNode of at most one Reference of type HasSubtype." }; } }
     /// <summary>
-    /// Error: P3-0710000001; Focus: Reference; Undefined HasSubtype  - the target of this reference is not defined.
+    /// Error: P3-0710000001; Focus: Reference; Dangling reference - undefined target of the HasSubtype reference.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P3-0710000001.</value>
-    public static BuildError UndefinedHasSubtype { get { return new BuildError() 
+    public static BuildError UndefinedHasSubtypeTarget { get { return new BuildError() 
                   { Focus = Focus.Reference, 
                     Identifier = "P3-0710000001", 
-                    Descriptor = "Undefined HasSubtype  - the target of this reference is not defined." }; } }
+                    Descriptor = "Dangling reference - undefined target of the HasSubtype reference." }; } }
     /// <summary>
     /// Error: P3-0713000000; Focus: Reference; Undefined HasTypeDefinition - each Variable and each Object shall be the SourceNode of exactly one HasTypeDefinition Reference.
     /// </summary>

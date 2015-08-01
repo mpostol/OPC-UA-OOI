@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+           xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+           LastModified="2015-04-03T15:25:20.5736134Z" 
+           xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+  <NamespaceUris>
+    <Uri>http://commsvr.com/OOIUA/SemanticData/UnitTest/UANodeSetValidationUnitTestProject</Uri>
+  </NamespaceUris>
+  <Aliases>
+    <Alias Alias="HasComponent">i=47</Alias>
+    <Alias Alias="HasSubtype">i=45</Alias>
+  </Aliases>
+  <UAObjectType NodeId="ns=1;i=196" BrowseName="1:ComplexObjectType">
+    <DisplayName>ComplexObjectType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasComponent">ns=1;i=308</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=2004</Reference>
+    </References>
+  </UAObjectType>
+</UANodeSet>

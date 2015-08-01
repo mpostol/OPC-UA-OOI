@@ -26,7 +26,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="exportModelFactory">The model export factory.</param>
     /// <param name="addressSpaceContext">The Address Space context.</param>
     /// <param name="traceEvent">The trace event method encapsulation.</param>
-    internal static void ValidateExportModel(IEnumerable<UANodeContext> nodesCollection, IModelFactory exportModelFactory, AddressSpaceContext addressSpaceContext, Action<TraceMessage> traceEvent)
+    internal static void ValidateExportModel
+      (IEnumerable<UANodeContext> nodesCollection, IModelFactory exportModelFactory, AddressSpaceContext addressSpaceContext, Action<TraceMessage> traceEvent)
     {
       traceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("Entering Validator.ValidateExportModel - starting creation of the ModelDesign for {0} nodes.", nodesCollection.Count<UANodeContext>())));
       List<BuildError> _errors = new List<BuildError>(); //TODO should be added to the model;

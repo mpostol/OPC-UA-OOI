@@ -224,6 +224,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       _as.ValidateAndExportModel(m_NameSpace);
+      //TODO Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
       Assert.Inconclusive("Instances are not imported - the error is not recognized.");
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0713000000").Count<TraceMessage>());

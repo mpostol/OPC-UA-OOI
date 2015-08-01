@@ -114,14 +114,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region internal API of this service
     /// <summary>
-    /// Converts the <paramref name="nodeId" /> representing instance of <see cref="NodeId" /> and returns <see cref="XmlQualifiedName" />
-    /// representing the <see cref="UANode.BrowseName" /> of the node pointed out by it.
+    /// Search the address space to find the node <paramref name="nodeId" /> and returns <see cref="XmlQualifiedName" />
+    /// encapsulating the <see cref="UANode.BrowseName" /> of this node if exist. Returns<c>null</c> otherwise.
     /// </summary>
-    /// <param name="nodeId">The node identifier.</param>
-    /// <param name="defaultValue">The default value.</param>
-    /// <param name="modelContext">The model context for NodeSet.</param>
+    /// <param name="nodeId">The identifier of the node to find.</param>
     /// <param name="traceEvent">Encapsulates an action used to trace events.</param>
-    /// <returns>An object of <see cref="XmlQualifiedName" /> representing the <see cref="UANode.BrowseName" /> of the node indexed by <paramref name="nodeId" /></returns>
+    /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the <see cref="UANode.BrowseName" /> of the node indexed by <paramref name="nodeId" /></returns>
     internal XmlQualifiedName ExportBrowseName(NodeId nodeId, Action<TraceMessage> traceEvent)
     {
       UANodeContext _context = TryGetUANodeContext(nodeId, traceEvent);

@@ -53,8 +53,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Updates the specified <see cref="UANodeContext"/> in case the wrapped <see cref="UANode"/> is recognized in the model.
     /// </summary>
-    /// <param name="node">The node.</param>
-    /// <param name="traceEvent">A delegate encapsulates the action to report any errors and trace processing progress.</param>
+    /// <param name="node">The node <see cref="UANode"/> containing definition to be added to the model.</param>
+    /// <param name="traceEvent">A delegate <see cref="Action{TraceMessage}"/> encapsulates an action to report any errors and trace processing progress.</param>
     internal void Update(UANode node, Action<TraceMessage> traceEvent)
     {
       if (node == null)
@@ -71,18 +71,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_BrowseName = m_ModelContext.ImportQualifiedName(_broseName);
     }
     /// <summary>
-    /// Gets the branch name to calculate the node path - it is name part of the browse name or symbolic name depending which one is not empty.
-    /// </summary>
-    /// <value>The name of the path.</value>
-    internal string BranchName
-    {
-      get { return String.IsNullOrEmpty(this.UANode.SymbolicName) ? this.m_BrowseName.Name : this.UANode.SymbolicName; }
-    }
-    /// <summary>
     /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent models.
     /// </summary>
     /// <param name="nodeFactory">The node container.</param>
-    /// <param name="traceEvent">A delegate encapsulates the action to report any errors and trace processing progress.</param>
+    /// <param name="traceEvent">A delegate <see cref="Action{TraceMessage}"/> encapsulates an action to report any errors and trace processing progress.</param>
     internal void CalculateNodeReferences(INodeFactory nodeFactory, Action<TraceMessage> traceEvent)
     {
       m_ModelingRule = new Nullable<ModelingRules>();
@@ -102,7 +94,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             IReferenceFactory _or = nodeFactory.NewReference();
             _or.IsInverse = !_rfx.Reference.IsForward;
             _or.ReferenceType = _ReferenceType;
-            _or.TargetId = _rfx.BrowsePath(x => traceEvent(TraceMessage.BuildErrorTraceMessage(x, "Compilation error")));
+            _or.TargetId = _rfx.BrowsePath(traceEvent);
             break;
           case ReferenceKindEnum.HasComponent:
             if (_rfx.SourceNodeContext == this)
@@ -136,16 +128,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="nodeId">The node identifier.</param>
     /// <param name="defaultValue">The default value.</param>
-    /// <param name="traceEvent">A delegate encapsulates the action to report any errors and trace processing progress.</param>
+    /// <param name="traceEvent">A delegate <see cref="Action{TraceMessage}"/> encapsulates an action to report any errors and trace processing progress.</param>
     /// <returns>An object of <see cref="XmlQualifiedName" /> representing the BrowseName of <see cref="UANode" /> of the node indexed by <paramref name="nodeId" /></returns>
     internal XmlQualifiedName ExportBrowseName(string nodeId, NodeId defaultValue, Action<TraceMessage> traceEvent)
     {
       return m_ModelContext.ExportBrowseName(nodeId, defaultValue, traceEvent);
     }
     /// <summary>
-    /// Exports the browse name of the node.
+    /// Exports the browse name of the wrapped node by this instance.
     /// </summary>
-    /// <returns>An object of <see cref="XmlQualifiedName" /> representing the browse name of the node.</returns>
+    /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the BrowseName of the node.</returns>
     internal XmlQualifiedName ExportNodeBrowseName()
     {
       return m_ModelContext.ExportQualifiedName(m_BrowseName);
@@ -161,21 +153,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type, traceEvent));
     }
-    private void TraceErrorUndefinedBaseType(NodeId target, bool type, Action<TraceMessage> traceEvent)
-    {
-      if (type)
-      {
-        string _msg = String.Format("BaseType of Id={0} for node {1}", target, this.m_BrowseName);
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasSubtype, _msg));
-      }
-      else
-      {
-        string _msg = String.Format("TypeDefinition of Id={0} for node {1}", target, this.m_BrowseName);
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
-      }
-    }
     /// <summary>
-    /// Gets a value indicating whether this instance is property.
+    /// Gets a value indicating whether this instance is the property.
     /// </summary>
     /// <value><c>true</c> if this instance is property; otherwise, <c>false</c>.</value>
     internal bool IsProperty { get { return m_IsProperty; } }
@@ -185,7 +164,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <value>The modeling rule. Null if valid modeling rule cannot be recognized.</value>
     internal ModelingRules? ModelingRule { get { return m_ModelingRule; } }
     /// <summary>
-    /// Gets or sets a value indicating whether the node is in recursion chain - selected for analisis secon time.
+    /// Gets or sets a value indicating whether the node is in recursion chain - selected for analysis second time.
     /// </summary>
     /// <value><c>true</c> if the node is in recursion chain; otherwise, <c>false</c>.</value>
     internal bool InRecursionChain { get; set; }
@@ -193,20 +172,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Builds the symbolic identifier.
     /// </summary>
     /// <param name="path">The path.</param>
-    /// <param name="reportError">The report error.</param>
-    internal void BuildSymbolicId(List<string> path, Action<BuildError> reportError)
+    /// <param name="reportError">A delegate <see cref="Action{TraceMessage}"/> encapsulates an action to report any errors and trace processing progress.</param>
+    internal void BuildSymbolicId(List<string> path, Action<TraceMessage> traceEvent)
     {
       if (this.UANode == null)
       {
-        reportError(BuildError.DanglingReferenceTarget);
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, ""));
         return;
       }
       IEnumerable<UAReferenceContext> _parentConnector = m_AddressSpaceContext.GetReferences2Me(this).Where<UAReferenceContext>(x => x.ChildConnector);
       Debug.Assert(_parentConnector.Count<UAReferenceContext>() <= 1);
       UAReferenceContext _connector = _parentConnector.FirstOrDefault<UAReferenceContext>();
       if (_connector != null)
-        _connector.BuildSymbolicId(path, reportError);
-      path.Add(BranchName);
+        _connector.BuildSymbolicId(path, traceEvent);
+      string _BranchName = String.IsNullOrEmpty(this.UANode.SymbolicName) ? this.m_BrowseName.Name : this.UANode.SymbolicName;
+      path.Add(_BranchName);
     }
     /// <summary>
     /// Gets the node identifier in this address space context.
@@ -217,7 +197,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the parameters.
     /// </summary>
     /// <param name="arguments">The <see cref="XmlElement"/> encapsulates the arguments.</param>
-    /// <param name="traceEvent">A delegate encapsulates the action to report any errors and trace processing progress.</param>
+    /// <param name="traceEvent">A delegate <see cref="Action{TraceMessage}"/> encapsulates an action to report any errors and trace processing progress.</param>
     /// <returns>Parameter[].</returns>
     internal Parameter[] GetParameters(XmlElement arguments, Action<TraceMessage> traceEvent)
     {
@@ -245,6 +225,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private bool m_IsProperty = false;
     private AddressSpaceContext m_AddressSpaceContext = default(AddressSpaceContext);
     //methods
+    private void TraceErrorUndefinedBaseType(NodeId target, bool type, Action<TraceMessage> traceEvent)
+    {
+      if (type)
+      {
+        string _msg = String.Format("BaseType of Id={0} for node {1}", target, this.m_BrowseName);
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasSubtype, _msg));
+      }
+      else
+      {
+        string _msg = String.Format("TypeDefinition of Id={0} for node {1}", target, this.m_BrowseName);
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
+      }
+    }
     private XmlQualifiedName ExportBrowseNameBaseType(Action<NodeId> traceEvent)
     {
       //TODO It cannot be the reference type

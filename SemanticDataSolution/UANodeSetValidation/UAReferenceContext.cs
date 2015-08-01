@@ -50,7 +50,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Gets the name of the reference type.
     /// </summary>
-    /// <param name="modelContext">The model context.</param>
     /// <param name="traceEvent">An <see cref="Action" /> delegate is used to trace event as the <see cref="TraceMessage" />.</param>
     /// <returns>XmlQualifiedName.</returns>
     internal XmlQualifiedName GetReferenceTypeName(Action<TraceMessage> traceEvent)
@@ -62,13 +61,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Returns the name of the reference target and calculates the Target identifier by traversing the components hierarchical path.
     /// </summary>
-    /// <param name="reportError">The report error.</param>
+    /// <param name="traceEvent">A delegate <see cref="Action{TraceMessage}"/> encapsulates an action to report any errors and trace processing progress.</param>
     /// <returns><see cref="System.Xml.XmlQualifiedName" />.</returns>
-    internal XmlQualifiedName BrowsePath(Action<BuildError> reportError)
+    internal XmlQualifiedName BrowsePath(Action<TraceMessage> traceEvent)
     {
       List<string> _path = new List<string>();
       var _startingNode = ModelNode.IsForward ? TargetNode : SourceNode;
-      _startingNode.BuildSymbolicId(_path, reportError);
+      _startingNode.BuildSymbolicId(_path, traceEvent);
       string _symbolicId = _path.SymbolicName();
       //return new XmlQualifiedName(_symbolicId, m_Context.m_NamespaceTable.GetString(this.TargetNode.NodeIdContext.NamespaceIndex));
       return new XmlQualifiedName(_symbolicId, m_Context.GetNamespace(this.TargetNode.NodeIdContext.NamespaceIndex));
@@ -105,9 +104,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       get { return b_HierarchicalReference; }
       set { b_HierarchicalReference = value; }
     }
-    internal void BuildSymbolicId(List<string> path, Action<BuildError> reportError)
+    /// <summary>
+    /// Ir recursively builds the symbolic identifier.
+    /// </summary>
+    /// <param name="path">The browse path.</param>
+    /// <param name="traceEvent">A delegate <see cref="Action{TraceMessage}"/> encapsulates an action to report any errors and trace processing progress.</param>
+    internal void BuildSymbolicId(List<string> path, Action<TraceMessage> traceEvent)
     {
-      this.SourceNode.BuildSymbolicId(path, reportError);
+      this.SourceNode.BuildSymbolicId(path, traceEvent);
     }
     internal string Key
     {

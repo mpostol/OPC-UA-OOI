@@ -129,6 +129,12 @@
 		</ns1:NamedBuildError>
 		<ns1:NamedBuildError>
 			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0708000000</ns1:Identifier>
+			<ns1:Descriptor>Dangling reference - undefined target of the HasProperty reference.</ns1:Descriptor>
+			<ns1:Name>UndefinedHasPropertyTarget</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
 			<ns1:Identifier>P3-0710000000</ns1:Identifier>
 			<ns1:Descriptor>Each Node shall be the TargetNode of at most one Reference of type HasSubtype.</ns1:Descriptor>
 			<ns1:Name>HasSubtypeMulitarget</ns1:Name>

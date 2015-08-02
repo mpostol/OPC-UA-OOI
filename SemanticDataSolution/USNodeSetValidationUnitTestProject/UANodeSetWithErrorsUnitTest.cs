@@ -244,8 +244,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       _as.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0707000002").Count<TraceMessage>());
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0708000000").Count<TraceMessage>());
     }
     #endregion
     #endregion

@@ -153,6 +153,7 @@ For example: RefA --&gt; RefB --&gt; RefC --&gt; [RefA = not allowed]</ns1:Expec
 TargetNode is a Property (Variable type).</ns1:TestCase>
 		<ns1:ExpectedResults>Must point to a Type that is actually a Property.</ns1:ExpectedResults>
 		<ns1:Reviewed>ok</ns1:Reviewed>
+		<ns1:Identifier>UndefinedHasPropertyTarget</ns1:Identifier>
 	</ns1:TestCase>
 	<ns1:TestCase>
 		<ns1:CTT>y</ns1:CTT>

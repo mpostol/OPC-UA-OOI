@@ -175,6 +175,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                     Identifier = "P3-0707000002", 
                     Descriptor = "Dangling reference - undefined target of the HasComponent reference." }; } }
     /// <summary>
+    /// Error: P3-0708000000; Focus: Reference; Dangling reference - undefined target of the HasProperty reference.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0708000000.</value>
+    public static BuildError UndefinedHasPropertyTarget { get { return new BuildError() 
+                  { Focus = Focus.Reference, 
+                    Identifier = "P3-0708000000", 
+                    Descriptor = "Dangling reference - undefined target of the HasProperty reference." }; } }
+    /// <summary>
     /// Error: P3-0710000000; Focus: Reference; Each Node shall be the TargetNode of at most one Reference of type HasSubtype.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P3-0710000000.</value>

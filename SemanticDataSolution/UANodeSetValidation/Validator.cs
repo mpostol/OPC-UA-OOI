@@ -73,8 +73,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       //TODO Handle HasComponent ReferenceType errors. #42
       if (nodeContext.UANode == null)
       {
-        //TODO Add 7.8 HasProperty Validation Tests #43
-        TraceMessage _traceMessage = TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasComponentTarget, String.Format("The node {0} is undefined", nodeContext.NodeIdContext));
+        string _msg = String.Format("The node {0} is undefined", nodeContext.NodeIdContext);
+        BuildError _be = null;
+        if (parentReference == null || parentReference.ReferenceKind == ReferenceKindEnum.HasProperty)
+          _be = BuildError.UndefinedHasPropertyTarget;
+        else
+          _be = BuildError.UndefinedHasComponentTarget;
+        TraceMessage _traceMessage = TraceMessage.BuildErrorTraceMessage(_be, _msg);
         traceEvent(_traceMessage);
         CreateModelDesignStub(exportFactory);
       }

@@ -9,10 +9,12 @@
   <Aliases>
     <Alias Alias="HasComponent">i=47</Alias>
     <Alias Alias="HasSubtype">i=45</Alias>
+    <Alias Alias="HasProperty">i=46</Alias>
   </Aliases>
   <UAObjectType NodeId="ns=1;i=196" BrowseName="1:ComplexObjectType">
     <DisplayName>ComplexObjectType</DisplayName>
     <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=14</Reference>
       <Reference ReferenceType="HasComponent">ns=1;i=308</Reference>
       <Reference ReferenceType="HasSubtype" IsForward="false">i=2004</Reference>
     </References>

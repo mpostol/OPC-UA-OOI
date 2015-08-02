@@ -130,9 +130,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.PredefinedNodes.xml" />
-    <None Include="XMLModels\CorrectModels\DanglingReferenceTarget.NodeSet2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="XMLModels\ModelsWithErrors\DeploymentTest.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

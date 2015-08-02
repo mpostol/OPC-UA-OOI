@@ -89,16 +89,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.IsFalse(_nodes.Where<UANodeContext>(x => x.UANode == null).Any<UANodeContext>());
       Assert.AreEqual<int>(4, _nodes.Where<UANodeContext>(x => x.UANode is UAType).Count<UANodeContext>());
     }
-    [TestMethod]
-    [TestCategory("Incorrect Model")]
-    public void DanglingReferenceTargetTestMethod()
-    {
-      FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\DanglingReferenceTarget.NodeSet2.xml");
-      Assert.IsTrue(_testDataFileInfo.Exists);
-      List<UANodeContext> _nodes = ValidationUnitTest(_testDataFileInfo, 2);
-      Assert.IsTrue(_nodes.Where<UANodeContext>(x => x.UANode == null).Any<UANodeContext>());
-      Assert.AreEqual<int>(1, _nodes.Where<UANodeContext>(x => x.UANode is UAType).Count<UANodeContext>());
-    }
     #endregion
 
     #region private

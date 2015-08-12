@@ -2,15 +2,7 @@
 ##CHARTER
 ###What is Object Oriented Internet
 
-Today the Internet is used by millions of people to gain access to information resources and services. The widespread use of the HTTP and hypertext makes it possible to freely publish new information and expose it in a context of its description. Unfortunately, this is a human-centric environment that cannot easily be adapted for the application-centric approach, which is required to provide globally distributed enterprise management and real-time process control. In this project new architecture is to be reserched that can be used to provide a generic solution for publishing and updating information in a context that can be used to describe and discover it. It is accomplished by distributing publisher (server) tasks to three classes: 
-
-1. information context management using object oriented programming paradigm, 
-2. a predefined fixed set of services that are used to access the data and meta-date, and 
-3. a pluggable custom data binding mechanism. 
-
-It is proposed to implement this architecture using the [OPC Unified Architecture](http://goo.gl/y4EHUn) - a new emerging industrial integration standard that fulfills these architecture requirements. 
-
-That makes the presented approach a real proposal for new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability
+In this project C# deliverables supporting a new Machine To Machine (M2M) communication architecture is to be reserched with the goal to provide a generic solution for publishing and updating information in a context that can be used to describe and discover it by software applications. It is implemented based on the [OPC Unified Architecture](http://goo.gl/y4EHUn) - a new emerging industrial integration standard that fulfills the proposed architecture requirements.
 
 This project is aimed to workout deliverables supporting Process Data handling over Internet including but not limiting to:
 
@@ -35,6 +27,8 @@ In scope there are also deliverables supporting:
 •	Modeling and representation of the Metadata - see whitepaper: [OPC UA Information Model Deployment] (http://goo.gl/HqYjvy)
 
 •	Validation semantic and consistency of the Metadata - see project [UANodeSetValidationUnitTestProject](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/USNodeSetValidationUnitTestProject)
+
+The presented approach is a real proposal for new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability.
 
 ###Out of scope
 

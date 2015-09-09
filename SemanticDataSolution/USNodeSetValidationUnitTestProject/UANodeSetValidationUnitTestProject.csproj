@@ -108,7 +108,7 @@
     </Content>
     <Content Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.PredefinedNodes.xml" />
     <Content Include="XMLModels\CorrectModels\ReferenceTest.xml" />
-    <Content Include="XMLModels\ModelsWithErrors\UndefinedHasChildarget.xml">
+    <Content Include="XMLModels\ModelsWithErrors\UndefinedHasChildren.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="XMLModels\ModelsWithErrors\UndefinedHasSubtype.xml">

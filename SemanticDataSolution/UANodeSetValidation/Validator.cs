@@ -92,7 +92,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.AddNodeFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateType, traceEvent);
             break;
           case "UADataType":
-            CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
+            CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext.UAModelContext, traceEvent), UpdateType, traceEvent);
             break;
           case "UAVariableType":
             CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.AddNodeFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
@@ -189,9 +189,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.ContainsNoLoops = nodeSet.ContainsNoLoops;//TODO add test case against the loops in the model.
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(traceEvent);
     }
-    private static void Update(IDataTypeFactory nodeDesign, UADataType nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
+    private static void Update(IDataTypeFactory nodeDesign, UADataType nodeSet, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
-      nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), nodeContext.UAModelContext, traceEvent);
+      nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), modelContext, traceEvent);
     }
     private static void Update(IReferenceTypeFactory nodeDesign, UAReferenceType nodeSet, Action<TraceMessage> traceEvent)
     {
@@ -241,13 +241,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     private static void UpdateType(ITypeFactory nodeDesign, UAType nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
-      nodeDesign.BaseType = nodeContext.BaseType(true, traceEvent);
+      nodeDesign.BaseType = nodeContext.ExportBaseTypeBrowseName(true, traceEvent);
       nodeDesign.IsAbstract = nodeSet.IsAbstract;
     }
     private static void UpdateInstance(IInstanceFactory nodeDesign, UAInstance nodeSet, UANodeContext nodeContext, Action<TraceMessage> traceEvent)
     {
       nodeDesign.ModelingRule = nodeContext.ModelingRule;
-      nodeDesign.TypeDefinition = nodeContext.BaseType(false, traceEvent);
+      nodeDesign.TypeDefinition = nodeContext.ExportBaseTypeBrowseName(false, traceEvent);
       //nodeSet.ParentNodeId - The NodeId of the Node that is the parent of the Node within the information model. This field is used to indicate 
       //that a tight coupling exists between the Node and its parent (e.g. when the parent is deleted the child is deleted 
       //as well). This information does not appear in the AddressSpace and is intended for use by design tools.

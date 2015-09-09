@@ -23,7 +23,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="addressSpaceContext">The address space context.</param>
     /// <param name="modelContext">The model context.</param>
-    /// <param name="nodeId">The imported form the string node identifier.</param>
+    /// <param name="nodeId">An object of <see cref="NodeId"/> that stores an identifier for a node in a server's address space.</param>
     internal UANodeContext(AddressSpaceContext addressSpaceContext, UAModelContext modelContext, NodeId nodeId)
     {
       this.m_AddressSpaceContext = addressSpaceContext;
@@ -51,7 +51,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       get { return m_ModelContext; }
     }
     /// <summary>
-    /// Updates the specified <see cref="UANodeContext"/> in case the wrapped <see cref="UANode"/> is recognized in the model.
+    /// Updates this instance in case the wrapped <see cref="UANode"/> is recognized in the model.
     /// </summary>
     /// <param name="node">The node <see cref="UANode"/> containing definition to be added to the model.</param>
     /// <param name="traceEvent">A delegate <see cref="Action{TraceMessage}"/> encapsulates an action to report any errors and trace processing progress.</param>
@@ -113,7 +113,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case ReferenceKindEnum.HasTypeDefinition: //Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
             m_BaseTypeNode = _rfx.TargetNodeContext;
             _derivedChildren = _rfx.TargetNodeContext.GetDerivedChildren();
-            Debug.Assert(!m_IsProperty, "Has property ");
+            Debug.Assert(!IsProperty, "Has property ");
             m_IsProperty = _rfx.TargetNodeContext.IsPropertyVariableType;
             break;
         }
@@ -143,23 +143,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return m_ModelContext.ExportQualifiedName(m_BrowseName);
     }
     /// <summary>
-    /// Gets the BrowseName of the BaseType.
+    /// Exports the BrowseName of the BaseType.
     /// </summary>
     /// <param name="type">if set to <c>true</c> the source node represents type. <c>false</c> if it is an instance.</param>
     /// <param name="traceEvent">A delegate encapsulates the action to report any error and trace processing progress.</param>
     /// <returns>XmlQualifiedName.</returns>
     /// <value>An instance of <see cref="XmlQualifiedName" /> representing the base type.</value>
-    internal XmlQualifiedName BaseType(bool type, Action<TraceMessage> traceEvent)
+    internal XmlQualifiedName ExportBaseTypeBrowseName(bool type, Action<TraceMessage> traceEvent)
     {
       return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type, traceEvent));
     }
     /// <summary>
-    /// Gets a value indicating whether this instance is the property.
+    /// Gets a value indicating whether this instance is a property.
     /// </summary>
     /// <value><c>true</c> if this instance is property; otherwise, <c>false</c>.</value>
     internal bool IsProperty { get { return m_IsProperty; } }
     /// <summary>
-    /// Gets the modeling rule.
+    /// Gets the modeling rule associated with this node.
     /// </summary>
     /// <value>The modeling rule. Null if valid modeling rule cannot be recognized.</value>
     internal ModelingRules? ModelingRule { get { return m_ModelingRule; } }
@@ -171,8 +171,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Builds the symbolic identifier.
     /// </summary>
-    /// <param name="path">The path.</param>
-    /// <param name="reportError">A delegate <see cref="Action{TraceMessage}"/> encapsulates an action to report any errors and trace processing progress.</param>
+    /// <param name="path">The browse path.</param>
+    /// <param name="traceEvent">A delegate <see cref="Action{TraceMessage}"/> encapsulates an action to report any errors and trace processing progress.</param>
     internal void BuildSymbolicId(List<string> path, Action<TraceMessage> traceEvent)
     {
       if (this.UANode == null)
@@ -189,9 +189,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       path.Add(_BranchName);
     }
     /// <summary>
-    /// Gets the node identifier in this address space context.
+    /// Gets the node identifier.
     /// </summary>
-    /// <value>The imported node identifier in this address space context.</value>
+    /// <value>The imported node identifier.</value>
     internal NodeId NodeIdContext { get; private set; }
     /// <summary>
     /// Gets the parameters.

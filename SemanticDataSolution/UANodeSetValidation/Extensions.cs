@@ -70,13 +70,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return "Empty LocalizedText";
       return String.Format("{0}:{1}", localizedText[0].Locale, localizedText[0].Value);
     }
-    internal static void GetParameters(this DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory _definition, UAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal static void GetParameters(this DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory definition, UAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       if (dataTypeDefinition == null || dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
         return;
       foreach (DataTypeField _item in dataTypeDefinition.Field)
       {
-        IDataTypeFieldFactory _nP = _definition.NewField();
+        IDataTypeFieldFactory _nP = definition.NewField();
         _nP.DataType = modelContext.ExportBrowseName(_item.DataType, DataTypes.BaseDataType, traceEvent);
         _item.Description.ExportLocalizedTextArray(_nP.AddDescription);
         _nP.Identifier = _item.Value;

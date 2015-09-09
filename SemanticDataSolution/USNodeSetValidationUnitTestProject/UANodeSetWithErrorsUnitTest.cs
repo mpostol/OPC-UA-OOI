@@ -235,7 +235,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     [TestMethod]
     public void UndefinedHasComponentTargetTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasChildarget.xml");
+      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasChildren.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
       List<TraceMessage> _trace = new List<TraceMessage>();
       int _diagnosticCounter = 0;

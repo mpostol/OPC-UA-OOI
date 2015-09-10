@@ -5,7 +5,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
 {
 
   /// <summary>
-  /// Interface IDataTypeDefinitionFactory - This interface is used to define subtypes of the Structure or Enumeration standard DataTypes.
+  /// Interface <c>IDataTypeDefinitionFactory</c>  - This interface is used to define subtypes of the Structure or Enumeration standard DataTypes.
   /// It defines an abstract representation of a <see cref="IDataTypeFactory"/> that can be used by design tools to automatically create 
   /// serialization code.
   /// </summary>

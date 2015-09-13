@@ -16,6 +16,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 {
 
   /// <summary>
+  /// Delegate LocalizedTextFactory - encapsulates a method that must be used to create localized text using <paramref name="localeField"/> and <paramref name="valueField"/>
+  /// </summary>
+  /// <param name="localeField">The locale field. This argument is specified as a <see cref="string"/>  that is composed of a language component and a country/region 
+  /// component as specified by RFC 3066. The country/region component is always preceded by a hyphen. The format of the LocaleId string is shown below: 
+  /// <c>
+  /// &lt;language&gt;[-&lt;country/region&gt;], 
+  /// where:
+  ///   &lt;language&gt; is the two letter ISO 639 code for a language,
+  ///   &lt;country/region&gt; is the two letter ISO 3166 code for the country/region.
+  /// </c>
+  /// </param>
+  /// <param name="valueField">The value field.</param>
+  internal delegate void LocalizedTextFactory(string localeField, string valueField);
+
+  /// <summary>
   /// Class Extensions - provides helper functions for this namespace
   /// </summary>
   internal static class Extensions
@@ -90,13 +105,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _item.Definition.GetParameters(_new, modelContext, traceEvent);
       }
     }
-    internal static void ExportLocalizedTextArray(this XML.LocalizedText[] text, LocalizedTextFactory factory)
+    internal static void ExportLocalizedTextArray(this XML.LocalizedText[] text, LocalizedTextFactory createLocalizedText)
     {
 
       if (text == null || text.Length == 0)
         return;
       foreach (XML.LocalizedText item in text)
-        factory(item.Locale, item.Value);
+        createLocalizedText(item.Locale, item.Value);
     }
     internal static XML.LocalizedText[] Truncate(this XML.LocalizedText[] localizedText, int maxLength, Action<TraceMessage> reportError)
     {

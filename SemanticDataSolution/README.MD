@@ -2,7 +2,7 @@
 # Using OPC UA Data Ouside of the Server
 ## Domain Model
 
-![Domain Model](/Media/UADataIntegrationServices.Domain.png)
+![Domain Model](https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/UADataIntegrationServices.Domain.png)
 
 ## UA Semantic Data
 

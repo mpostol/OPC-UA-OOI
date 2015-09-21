@@ -2,7 +2,7 @@
 # Using OPC UA Data Ouside of the Server
 ## Domain Model
 
-![sasa](.\Media\UADataIntegrationServices.Domain.png)
+![Domain Model](\Media\UADataIntegrationServices.Domain.png)
 
 ## UA Semantic Data
 

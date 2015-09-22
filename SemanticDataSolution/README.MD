@@ -68,11 +68,11 @@ OPC UA specification introduces a node notion as an atomic addressable entity th
 
 The **UA Server Services** access data and metadata and makes them available to the **UA Client** using a set of non expandable services compliant with the specification.
 
-The **Address Space Management** activity includes also creation of data bindings with the underlying real-time process (**Raw Data**).  **Data binding** is responsible for coupling  **Raw Data** representing current state/behavior of the underlying real-time process with the appropriate nodes in the address space. **Data Binding**, therefore, is the process that establishes a connection between the Variable node and selected data source. The Value attribute of the Variable node reflects changes when made. It can also mean that when the Value attribute of the Variable is changed, the underlying data will reflect that change.
+The **Address Space Management** activity includes also creation of data bindings with the underlying real-time process (**Raw Data**).  **Data binding** is responsible for coupling  **Raw Data** representing current state/behavior of the underlying real-time process with the appropriate nodes in the address space. **Data Binding**, therefore, is the process that establishes a connection between the *Variable* node and selected data source. The *Value* attribute of the *Variable* node reflects changes when made. It can also mean that when the *Value* attribute of the *Variable* is changed, the underlying data will reflect that change.
 
 Optionally the **Address Space Management** activity may also provide systems integration services supporting the process of bringing together the component external applications (not OPC **UA Server Services** aware) into one system and ensuring that the applications function together as a whole.  It includes but is not limited to linking together different software applications physically or functionally on the basis of common data and metadata compliant with applied *OPC UA Information Models*.  These services should provide the following functions:
 
-* Selection of the Variables (integration data) that are to be made available to the external applications           
+* Selection of the *Variable* nodes (integration data) that are to be made available to the external applications           
 * Distribution and update of the selection set information to the inter-operable parties       
 * Selection of the data exchange channels, i.e. network links, databases, etc.
 * Data security protection services

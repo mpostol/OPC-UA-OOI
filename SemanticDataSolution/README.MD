@@ -3,12 +3,12 @@
 
 ## Domain Model
 
-Main challenge that must be faced up by engineering of the data processing process is preservation of the data semantics at all the stages of this process. This diagram is a domain model, which presents a high level conceptual framework of the **UA Semantic Data** supporting contextual data processing outside of the OPC UA Server. It presents all the major contributors processing the data in context of UA Information Model.
+Main challenge that must be faced up by engineering of the data processing process is preservation of the data semantics at all the stages of this process. This diagram is a domain model, which presents a high level conceptual framework of the **UA Semantic Data** supporting contextual data processing outside of the *OPC UA Server*. It presents all the major contributors processing the data in context of **UA Information Model**.
 
-UA Semantic Data is directly used by the following classes of actors:
-* **Address Space Management** -  part of the OPC UA Server optionally supporting integration services   
-* **UA Client** -  OPC UA Client supporting integration services    
-* **UA Data Application**  -  an application program processing the data in context of the OPC UA metadata without the OPC UA Server session.  
+**UA Semantic Data** is directly used by the following classes of actors:
+* **Address Space Management** -  part of the *OPC UA Server* optionally supporting integration services   
+* **UA Client** -  **OPC UA Client** supporting integration services    
+* **UA Data Application**  -  an application program processing the data in context of the OPC UA metadata without the *OPC UA Server* session.  
 
 Integration services are responsible for exchanging the data and metadata with other parties using:
 * Network communication
@@ -18,7 +18,7 @@ Integration services are responsible for exchanging the data and metadata with o
 
 ## UA Semantic Data
 
-The OPC UA Semantic Data represents the following triple:
+The OPC **UA Semantic Data** represents the following triple:
 
 * Globally Unique Identifier   
 * Data Type as an Entity of the OPC UA Information Model   

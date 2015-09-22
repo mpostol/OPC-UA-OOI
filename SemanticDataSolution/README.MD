@@ -4,6 +4,14 @@
 
 ![Domain Model] (https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/UADataIntegrationServices.Domain.png)
 
+## UA Data Application
+
+OPC **UA Data** Centric **Application** Program (shortened to **UA Data Application**) is any software program designed to perform a specific function directly for the user or for another application programs. Application programs processes (consume and produce) the OPC UA Data according to selected algorithm to meet the user requirements.
+
+The **UA Data Application** gets access to the **UA Semantic Data** as:
+* Networked computer device;
+* Client of DataBase Management System;
+
 ## UA Semantic Data
 
 The OPC UA Semantic Data represents the following triple:

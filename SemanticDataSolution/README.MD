@@ -2,7 +2,7 @@
 # Using OPC UA Data Ouside of the Server
 ## Domain Model
 
-![Domain Model](https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/UADataIntegrationServices.Domain.png)
+![Domain Model] (https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/UADataIntegrationServices.Domain.png)
 
 ## UA Semantic Data
 
@@ -27,6 +27,12 @@ Some scenarios where the OPC UA Semantic Data is used requires that the data is 
 * Integrity
 
 Each node in the OPC UA Address Space is a root of a tree structure created by nodes recursively pointed out by HierarchicalReferences in forward direction. Because each node in this hierarchy is globally recognizable it may be protected as a resource by any independent protection system (for example any Kerberos protocol implementation) supporting authentication and authorization operation and responsible to distribute security tokens used to protect the data as stated above. Hierarchical relationship supports permissions inheritance, i.e. propagation to the children nodes.
+
+## UA Information Model
+
+The description of the OPC UA Information Model is captured in detail in:
+* [OPC Unified Architecture e-book]([http://www.commsvr.com/UAModelDesigner/Index.aspx)
+* [OPC UA Information Model Deployment]( http://www.cas.internetdsl.pl/commserver/P_DowloadCenter/P_Publications/20140301EN_DeploymentInformationModel.pdf)
 
 # Projects Description
 

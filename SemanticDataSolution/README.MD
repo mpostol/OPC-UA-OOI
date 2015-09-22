@@ -25,6 +25,8 @@ The OPC **UA Semantics Data** represents the following triple:
 * Data Type as an Entity of the *OPC UA Information Model*
 * Data Object in Context of *OPC UA Address Space*
 
+TBD #47: Define Globally Unique Identifier using terms: NamespaceUri, BrowseName, BrowsePath, SymbolicName.
+
 Any data object is always just a stream of bits. To understand the binary data we must have defined a data type – a description how to create an appropriate bits pattern. Simplifying, the data type determines a set of valid values and rules needed to assign the information (understand the data) to a selected bits pattern.
 
 OPC UA specification provides additional possibility to define meaning of the data, i.e. exposing the data in the context of metadata. In this case the data is made available as the *Value* attribute of the *Variable* node and surrounded by other nodes creating part of relationship.
@@ -84,13 +86,13 @@ The underlying process **Raw Data** may also be processed by any **Application**
 
 ### UA Client
 
-TBD
+TBD #47:
 
 # OPC UA Semantic Data Deployment
 
-## Waht id OPC UA Semantic Data Deployment
+## Waht is OPC UA Semantic Data Deployment
 
-TBD
+TBD #48: move the following sections to separate document
 
 ## Projects Description
 

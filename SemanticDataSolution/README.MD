@@ -1,16 +1,20 @@
 
 # Using OPC UA Data Ouside of the Server
+
 ## Domain Model
 
+Main challenge that must be faced up by engineering of the data processing process is preservation of the data semantics at all the stages of this process. This diagram is a domain model, which presents a high level conceptual framework of the **UA Semantic Data** supporting contextual data processing outside of the OPC UA Server. It presents all the major contributors processing the data in context of UA Information Model.
+
+UA Semantic Data is directly used by the following classes of actors:
+* **Address Space Management** -  part of the OPC UA Server optionally supporting integration services   
+* **UA Client** -  OPC UA Client supporting integration services    
+* **UA Data Application**  -  an application program processing the data in context of the OPC UA metadata without the OPC UA Server session.  
+
+Integration services are responsible for exchanging the data and metadata with other parties using:
+* Network communication
+* Database access   
+
 ![Domain Model] (https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/UADataIntegrationServices.Domain.png)
-
-## UA Data Application
-
-OPC **UA Data** Centric **Application** Program (shortened to **UA Data Application**) is any software program designed to perform a specific function directly for the user or for another application programs. Application programs processes (consume and produce) the OPC UA Data according to selected algorithm to meet the user requirements.
-
-The **UA Data Application** gets access to the **UA Semantic Data** as:
-* Networked computer device;
-* Client of DataBase Management System;
 
 ## UA Semantic Data
 
@@ -34,7 +38,24 @@ Some scenarios where the OPC UA Semantic Data is used requires that the data is 
 * Non-repudiation
 * Integrity
 
-Each node in the OPC UA Address Space is a root of a tree structure created by nodes recursively pointed out by HierarchicalReferences in forward direction. Because each node in this hierarchy is globally recognizable it may be protected as a resource by any independent protection system (for example any Kerberos protocol implementation) supporting authentication and authorization operation and responsible to distribute security tokens used to protect the data as stated above. Hierarchical relationship supports permissions inheritance, i.e. propagation to the children nodes.
+Each node in the OPC UA Address Space is a root of a tree structure created by nodes recursively pointed out by HierarchicalReferences in forward direction. Because each node in this hierarchy is globally recognizable it may be protected as a resource by any independent protection system (for example any Kerberos protocol implementation) supporting authentication and authorization operation and responsible to distribute security tokens used to protect the data as stated above. Hierarchical relationship supports permissions inheritance, i.e. permissions propagation to the children nodes.
+## Interoperable parties
+
+### UA Data Application
+
+OPC **UA Data** Centric **Application** Program (shortened to **UA Data Application**) is any software program designed to perform a specific function directly for the user or for another application programs. Application programs processes (consume and produce) the OPC UA Data according to selected algorithm to meet the user requirements.
+
+The **UA Data Application** gets access to the **UA Semantic Data** as:
+* Networked computer device;
+* Client of DataBase Management System;
+
+### Address Space Management
+
+TBD
+
+### UA Client
+
+TBD
 
 ## UA Information Model
 

@@ -86,40 +86,10 @@ The underlying process **Raw Data** may also be processed by any **Application**
 
 ### UA Client
 
-TBD #47:
+TBD #47: 
 
 # OPC UA Semantic Data Deployment
 
-## Waht is OPC UA Semantic Data Deployment
+TBD Whht is OPC UA Semantic Data Deployment
 
-TBD #48: move the following sections to separate document
-
-## Projects Description
-
-### UANodeSetValidation library
-
-#### Description
-
-The [UANodeSetValidation](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANodeSetValidation) project is aimed to validate UANodeSet xml files.
-To validate a new model add the code to the [USNodeSetValidationUnitTestProject](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/USNodeSetValidationUnitTestProject)
-and XML file to the XMLModels in this project. If the validation test does not recognize an error the code in the UANodeSetValidation must be improved.
-In this case add issue or modify the code on your fork and add purge request after finishing.
-
-#### Public API
-
-Public API of the [UANodeSetValidation](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANodeSetValidation) is described by the interface:
-*IAddressSpaceContext*
-
-This interface may be used for dependency injection.
-
-### AddressSpaceComplianceTestTool tool
-
-TBD
-
-### InformationModelFactory library
-
-TBD
-
-## Tests projects
-
-TBD
+The detailed description of the solution content is captured in the document [Content Description](./Readme.SemanticDataDeplyment.MD)

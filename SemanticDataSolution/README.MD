@@ -3,9 +3,9 @@
 
 ## Domain Model
 
-Main challenge that must be faced up by engineering of the data processing process is preservation of the data semantics at all the stages of this process. This diagram is a domain model, which presents a high level conceptual framework of the OPC **UA Semantics Data** supporting contextual data processing outside of the *OPC UA Server*. It presents all the major contributors processing the data in context of **UA Information Model**.
+Main challenge that must be faced up by engineering of the data processing process is preservation of the data semantics at all the stages of this process, i.e. to manipulate the data meaningfully. This diagram is a domain model, which presents a high level conceptual framework of the OPC **UA Semantic Data** supporting contextual data processing outside of the *OPC UA Server*. It presents all the major contributors processing the data in context of **UA Information Model**.
 
-**UA Semantics Data** is directly used by the following classes of actors:
+**UA Semantic Data** is directly used by the following classes of actors:
 * **Address Space Management** -  part of the *OPC UA Server* optionally supporting integration services
 * **UA Client** -  custom OPC **UA Client** supporting additionally integration services
 * **UA Data Application** - an application program processing the data in context of the OPC UA metadata without the *OPC UA Server* session.
@@ -17,25 +17,35 @@ Integration services are responsible for exchanging the data and metadata with o
 
 ![Domain Model] (https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/UADataIntegrationServices.Domain.png)
 
-## UA Semantics Data
+## UA Semantic Data
 
-The OPC **UA Semantics Data** represents the following triple:
+The OPC **UA Semantic Data** represents the following triple:
 
-* Globally Unique Identifier   
-* Data Type as an Entity of the *OPC UA Information Model*
-* Data Object in Context of *OPC UA Address Space*
+* Uniform Resource Identifier (URI)
+* Type as an entity of the *OPC UA Information Model*
+* A set of related nodes in the context of *OPC UA Address Space*
+
+ Using the URI as a standard for global identifiers allows for a worldwide reference for any data. This means that we can tell when any two applications anywhere in the world are referring to the same data. It could answer the question when is a data in one location the same data as a data in another location? Using URI, therefore, we can introduce the notion of the global data identity. The data identity allows creation of variety of dictionaries collecting supplementary information independently and outside of the server Address Space context.
+
+ Value of the data can change in time. It is worth nothing that in the presented concept if two instances of the data has the same URI it does not mean that both have the same value, i.e. the same bits pattern. For example if we are measuring the temperature in the output pipe of the selected boiler with the 1 second interval, we are getting a new value every second. The URI cannot be used to distinguish instances among each other, but still it could be used to use common key and sign each value, and finally send it over the wire to a destination application. The destination application can use recognizable key (indexed by the URI) retrieved from a dictionary and check the data against the not-repudiation security scenario.
+
+To associate the type and the data the URI must be defined unambiguously in context of the selected *OPC UA Information Model*. 
+
 
 TBD #47: Define Globally Unique Identifier using terms: NamespaceUri, BrowseName, BrowsePath, SymbolicName.
+
+TBD Using the URI as a standard for global identifiers allows for a worldwide reference for any symbol. This means that we can tell when any two people anywhere in the world are referring to the same thing.
+
 
 Any data object is always just a stream of bits. To understand the binary data we must have defined a data type – a description how to create an appropriate bits pattern. Simplifying, the data type determines a set of valid values and rules needed to assign the information (understand the data) to a selected bits pattern.
 
 OPC UA specification provides additional possibility to define meaning of the data, i.e. exposing the data in the context of metadata. In this case the data is made available as the *Value* attribute of the *Variable* node and surrounded by other nodes creating part of relationship.
 
-Unique identifier and both methods of data meaning definition makeup a concept of OPC **UA Semantics Data**. Again this concept can be implemented using the *OPC UA Information Model* to define types and *OPC UA Address Space Model* to expose the data in the context of metadata.
+Unique identifier and both methods of data meaning definition makeup a concept of OPC **UA Semantic Data**. Again this concept can be implemented using the *OPC UA Information Model* to define types and *OPC UA Address Space Model* to expose the data in the context of metadata.
 
-To keep all benefits of the OPC **UA Semantics Data** concept the remote end users (UA Data Application) are interested to process the data using relevant part of the *OPC UA Address Space*.
+To keep all benefits of the OPC **UA Semantic Data** concept the remote end users (UA Data Application) are interested to process the data using relevant part of the *OPC UA Address Space*.
 
-Some scenarios where the OPC **UA Semantics Data** is used requires that the data is protected against:
+Some scenarios where the OPC **UA Semantic Data** is used requires that the data is protected against:
 
 * Unauthorized Access  
 * Non-repudiation
@@ -53,9 +63,9 @@ The description of the *OPC UA Information Model* is captured in detail in:
 
 ### UA Data Application
 
-OPC **UA Data** Centric **Application** Program (shortened to **UA Data Application**) is any software program designed to perform a specific function directly for the user or for another application programs. Application programs processes (consume and produce) the OPC **UA Semantics Data** according to selected algorithm to meet the user requirements.
+OPC **UA Data** Centric **Application** Program (shortened to **UA Data Application**) is any software program designed to perform a specific function directly for the user or for another application programs. Application programs processes (consume and produce) the OPC **UA Semantic Data** according to selected algorithm to meet the user requirements.
 
-The **UA Data Application** gets access to the **UA Semantics Data** as:
+The **UA Data Application** gets access to the **UA Semantic Data** as:
 * Networked computer device;
 * Client of Database Management System;
 
@@ -86,7 +96,7 @@ The underlying process **Raw Data** may also be processed by any **Application**
 
 ### UA Client
 
-TBD #47: 
+TBD #47:
 
 # OPC UA Semantic Data Deployment
 

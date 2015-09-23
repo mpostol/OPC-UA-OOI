@@ -5,7 +5,7 @@
 
 ## AddressSpaceComplianceTestTool
 
-It is command line application aimed to validate XML files compliant with the [NodeSet schema] defined in Part 6 of the OPC UA Specification.
+It is command line application aimed to validate XML files compliant with the [UANodeSet schema](https://opcfoundation.org/UA/2011/03/UANodeSet.xsd) defined in Part 6 of the OPC UA Specification. The description of this schema is captured in the document [Address Space Interchange XML](http://goo.gl/LE64MA)
 
 ## Libraries
 

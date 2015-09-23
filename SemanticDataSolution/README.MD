@@ -19,31 +19,39 @@ Integration services are responsible for exchanging the data and metadata with o
 
 ## UA Semantic Data
 
+### Concept
+
 The OPC **UA Semantic Data** represents the following triple:
 
 * Uniform Resource Identifier (URI)
 * Type as an entity of the *OPC UA Information Model*
 * A set of related nodes in the context of *OPC UA Address Space*
 
- Using the URI as a standard for global identifiers allows for a worldwide reference for any data. This means that we can tell when any two applications anywhere in the world are referring to the same data. It could answer the question when is a data in one location the same data as a data in another location? Using URI, therefore, we can introduce the notion of the global data identity. The data identity allows creation of variety of dictionaries collecting supplementary information independently and outside of the server Address Space context.
 
- Value of the data can change in time. It is worth nothing that in the presented concept if two instances of the data has the same URI it does not mean that both have the same value, i.e. the same bits pattern. For example if we are measuring the temperature in the output pipe of the selected boiler with the 1 second interval, we are getting a new value every second. The URI cannot be used to distinguish instances among each other, but still it could be used to use common key and sign each value, and finally send it over the wire to a destination application. The destination application can use recognizable key (indexed by the URI) retrieved from a dictionary and check the data against the not-repudiation security scenario.
+Using the URI as a standard for global identifiers allows for a worldwide reference for any data. This means that we can tell when any two applications anywhere in the world are referring to the same data. It could answer the question when is a data in one location the same data as a data in another location? Using URI, therefore, we can introduce the notion of the global data identity. The data identity allows creation of variety of dictionaries collecting supplementary information independently and outside of the server Address Space context.
 
-To associate the type and the data the URI must be defined unambiguously in context of the selected *OPC UA Information Model*. 
+Value of the data can change in time. It is worth nothing that in the presented concept if two instances of the data has the same URI it does not mean that both have the same value, i.e. the same bits pattern. For example if we are measuring the temperature in the output pipe of the selected boiler with the 1 second interval, we are getting a new value every second. The URI cannot be used to distinguish instances among each other, but still it could be used to use common key and sign each value, and finally send it over the wire to a destination application. The destination application can use recognizable key (indexed by the URI) retrieved from a dictionary and check the data against the not-repudiation security scenario.
 
+Any data object is always just a stream of bits. To understand the binary data we must have defined a data type – a description how to create an appropriate bits pattern. Simplifying, the data type determines a set of valid values and rules needed to assign the information (understand the data) to a selected bits pattern. OPC UA specification provides additional possibility to define meaning of the data, i.e. exposing the data in the context of metadata. In this case the data is made available as the *Value* attribute of the *Variable* node and surrounded by other nodes creating part of relationship. A well defined set of interconnected nodes we can be recognized as a complex data ([to learn more visit: OPC UA Makes Complex Data Processing Possible](https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/)). Complex in this context means that the type must additionally define a relationship between the components of the binary data, i.e. how to selectively get a component of the complex data. To associate the type and the data the URI must be defined unambiguously in context of the selected *OPC UA Information Model*.
 
-TBD #47: Define Globally Unique Identifier using terms: NamespaceUri, BrowseName, BrowsePath, SymbolicName.
+To promote data processing against type definitions we shall assume that types of the complex data are stable and therefore may not be preserved in the data instance provided a precise nodes selection rules are defined and observed. To meet this requirement, any **UA Semantic Data** instance is a set of nodes organized as the tree structure defined recursively as a collection of nodes (starting at a root node), where each node called parent is the root of subtree, i.e. all nodes that has "part of" relationship called children. The collection of children may be empty and in this case the node is called leaf. In this definition “part of” means that the parent has a HasProperty or HasComponent Reference to its children. This type of references prevent loops.
 
-TBD Using the URI as a standard for global identifiers allows for a worldwide reference for any symbol. This means that we can tell when any two people anywhere in the world are referring to the same thing.
+For any OPC Information Model the proposed above selection rule unambiguously yields a set of nodes that can make up the **UA Semantic Data** instance. The URI of this instance is the following couple
 
+* Selected URI for the root element that qualifies the symbolic name part
+* Symbolic name of the root element
 
-Any data object is always just a stream of bits. To understand the binary data we must have defined a data type – a description how to create an appropriate bits pattern. Simplifying, the data type determines a set of valid values and rules needed to assign the information (understand the data) to a selected bits pattern.
+The OPC UA information modelling concept is based on domains [to learn more visit: OPC UA Information Model Deployment]( http://www.cas.internetdsl.pl/commserver/P_DowloadCenter/P_Publications/20140301EN_DeploymentInformationModel.pdf). A domain is a named self-contained collection of definitions. Any domain name is URI and  must be globally unique - it is an identification string that defines a realm of administrative autonomy and authority of responsibility. Type definition from one domain may inherit from type definitions located in other domains. To avoid circular references domains should be organized in layers, which expand step by step the basic model provided by the *OPC UA Specification*. The URI for the information modeldefined by the standard is http://opcfoundation.org/UA/. To make URI for the nodes defined by the standard unique the server URL shall be used instead.
 
-OPC UA specification provides additional possibility to define meaning of the data, i.e. exposing the data in the context of metadata. In this case the data is made available as the *Value* attribute of the *Variable* node and surrounded by other nodes creating part of relationship.
+The symbolic name of each Node is its BrowseName, or, when it is part of another Node, the BrowseName of the other Node, a "\_", and the BrowseName of itself. As above in this case “part of” means that the whole has a HasProperty or HasComponent Reference to its part. Since all Nodes not being part of another Node have a unique name, the symbolic name is unique.
+
+For example, the ServerType defined in the specification has the symbolic name “ServerType”. One of its InstanceDeclarations would be identified as “ServerType_ServerCapabilities”. Since this Object is complex, another InstanceDeclaration of the ServerType is “ServerType_ServerCapabilities.MinSupportedSampleRate”. The Server Object is based on the ServerType and has the symbolic name “Server”. Therefore, the instance based on the InstanceDeclaration described above has the symbolic name “Server_ServerCapabilities_MinSupportedSampleRate”.
 
 Unique identifier and both methods of data meaning definition makeup a concept of OPC **UA Semantic Data**. Again this concept can be implemented using the *OPC UA Information Model* to define types and *OPC UA Address Space Model* to expose the data in the context of metadata.
 
-To keep all benefits of the OPC **UA Semantic Data** concept the remote end users (UA Data Application) are interested to process the data using relevant part of the *OPC UA Address Space*.
+To keep all benefits of the OPC **UA Semantic Data** concept the remote end users (**UA Data Application**) are interested to process the data using relevant part of the *OPC UA Address Space*.
+
+### Data Security
 
 Some scenarios where the OPC **UA Semantic Data** is used requires that the data is protected against:
 
@@ -51,7 +59,12 @@ Some scenarios where the OPC **UA Semantic Data** is used requires that the data
 * Non-repudiation
 * Integrity
 
-Each node in the *OPC UA Address Space* is a root of a tree structure created by nodes recursively pointed out by HierarchicalReferences in forward direction. Because each node in this hierarchy is globally recognizable it may be protected as a resource by any independent protection system (for example any Kerberos protocol implementation) supporting authentication and authorization operation and responsible to distribute security tokens used to protect the data as stated above. Hierarchical relationship supports permissions inheritance, i.e. permissions propagation to the children nodes.
+Because any **UA Semantic Data** instance is a uniquely named standalone entity the security can be provide in context of the data but not in context of the server the data is exposed by.
+Each node in the **UA Semantic Data** is a root of a tree structure created by nodes recursively pointed out by HierarchicalReferences in forward direction. Because each node in this hierarchy is globally recognizable it may be protected as a resource by any independent protection system (for example any Kerberos protocol implementation) supporting authentication and authorization operation and responsible to distribute security tokens used to protect the data as stated above. Hierarchical relationship supports permissions inheritance, i.e. permissions propagation to the children nodes.
+
+### Discoverable Data
+
+TBD #47
 
 ## UA Information Model
 

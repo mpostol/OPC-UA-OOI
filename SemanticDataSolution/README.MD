@@ -74,7 +74,7 @@ In distributed systems the **UA Data Application** and **UA Client** (see diagra
 1. discover the server using the resource (**UA Semantic Data**) unique domain based indentifier;
 2. browse or update the data.
 
-**Cheleng 1** - A HMI prepared in advance to display state of boilers formally described by the *BoilerType* shall display the *Boiler `#1`* state
+**Challenge 1** - A HMI prepared in advance to display state of boilers formally described by the *BoilerType* shall display the *Boiler `#1`* state
 
 For this scenario we can apply the following work-flow:
 
@@ -82,7 +82,7 @@ For this scenario we can apply the following work-flow:
 2. Establishes *OPC UA Session* with the discovery server and gets all needed informations
 3. Establishes *OPC UA Session* with the destination *OPC UA Server* to subscribe for requested data and events.
 
-**Cheleng 2** - A smart power meter (*AMQP Client*) shall expose in an *OPC UA Address Space* (also *AMQP Client*) current values related to *Consumer `#1`*
+**Challenge 2** - A smart power meter (*AMQP Client*) shall expose in an *OPC UA Address Space* (also *AMQP Client*) current values related to *Consumer `#1`*
 
 For this scenario we can apply the following work-flow:
 
@@ -90,7 +90,7 @@ For this scenario we can apply the following work-flow:
 2. *OPC UA Server* gets the message from AMQP Queue and using the URI of the *Consumer `#1`* exposes the data (updates *Value* attributes of relevant *Variable* *Nodes*) related to a virtual meter for *Consumer `#1`* in his *OPC UA Address Space*.
 
 The Data discovery mechanism is part of the broader concept described in the document[
-OPC Unified Architecture - Object Oriented Internet](../README.MD), but its detailed description is out of scope of the this document. 
+OPC Unified Architecture - Object Oriented Internet](../README.md), but its detailed description is out of scope of the this document.
 
 ## UA Information Model
 
@@ -135,7 +135,16 @@ The underlying process **Raw Data** may also be processed by any **Application**
 
 ### UA Client
 
-TBD #47:
+It is an embedded part of the **OPC UA Client**. **OPC UA Client** shall be compliant with Part 4. It consumes all not optional services required by the Part 4 of the specification and must be compliant with the selected existing profile. To get data from the *OPC UA Server* it must establish the session.
+
+Optionally the **OPC UA Client** activity may also provide systems integration services supporting the process of bringing together the component external applications (not OPC UA Server Services aware) into one system and ensuring that the applications function together as a whole.  It includes but is not limited to linking together different software applications physically or functionally on the basis of common data and metadata compliant with applied OPC UA Information Models.  These services should provide the following functions:
+
+* Selection of the Variables (integration data) that are to be made available to the external applications
+* Selection of the data exchange channels, i.e. network links, databases, etc.
+* Data security protection services
+* Data discovery support services
+
+Optionally the **OPC UA Client** may also support importing and exporting services of the data to external semantics (**Raw Data**).
 
 # OPC UA Semantic Data Deployment
 

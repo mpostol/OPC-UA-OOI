@@ -51,6 +51,8 @@ Unique identifier and both methods of data meaning definition makeup a concept o
 
 To keep all benefits of the OPC **UA Semantic Data** concept the remote end users (**UA Data Application**) are interested to process the data using relevant part of the *OPC UA Address Space*.
 
+The **UA Semantic Data** may be used to implement the **Data Security** and **Discoverable Data** concepts.
+
 ### Data Security
 
 Some scenarios where the OPC **UA Semantic Data** is used requires that the data is protected against:
@@ -59,12 +61,36 @@ Some scenarios where the OPC **UA Semantic Data** is used requires that the data
 * Non-repudiation
 * Integrity
 
-Because any **UA Semantic Data** instance is a uniquely named standalone entity the security can be provide in context of the data but not in context of the server the data is exposed by.
+Because any **UA Semantic Data** instance is a uniquely named standalone entity the security can be provided in context of the data but not in context of the server the data is exposed by.
+
 Each node in the **UA Semantic Data** is a root of a tree structure created by nodes recursively pointed out by HierarchicalReferences in forward direction. Because each node in this hierarchy is globally recognizable it may be protected as a resource by any independent protection system (for example any Kerberos protocol implementation) supporting authentication and authorization operation and responsible to distribute security tokens used to protect the data as stated above. Hierarchical relationship supports permissions inheritance, i.e. permissions propagation to the children nodes.
+
+For example if OPC UA Server prepares the data representing current state of the Boiler `#1` it gets the protection key using the URI of this data from a dictionary and send the data say over the AMQP to AMQP clients. The clients using the URI of the Boiler `#1` browse local dictionaries (e.g. configuration files) to get appropriate key to follow the selected protection scenario. Synchronization of the dictionaries is user dependent mechanism.
 
 ### Discoverable Data
 
-TBD #47
+In distributed systems the **UA Data Application** and **UA Client** (see diagram above) is interested to get access to or update the data and it may not care about which particular server provides the data. In this case the data must be discoverable over the network. The **UA Semantic Data** can be used to solve this requirement. In this approach the URI of the data can be used as a key to browse the *UA Semantic Data Domain Name Server* (sdDNS) to find recursively destination *OPC UA Server* exposing the requested data. In this scenario we can use well know two steps process:
+
+1. discover the server using the resource (**UA Semantic Data**) unique domain based indentifier;
+2. browse or update the data.
+
+**Cheleng 1** - A HMI prepared in advance to display state of boilers formally described by the *BoilerType* shall display the *Boiler `#1`* state
+
+For this scenario we can apply the following work-flow:
+
+1. HMI (*OPC UA Client*) using URI of the *Boiler `#1`* browses *UA Semantic Data Domain Name Server* starting form a local one to find a discovery server having all needed information about an *OPC UA Server* exposing *Boiler `#1`* *Object Node* representing a physical object named *Boiler `#1`*
+2. Establishes *OPC UA Session* with the discovery server and gets all needed informations
+3. Establishes *OPC UA Session* with the destination *OPC UA Server* to subscribe for requested data and events.
+
+**Cheleng 2** - A smart power meter (*AMQP Client*) shall expose in an *OPC UA Address Space* (also *AMQP Client*) current values related to *Consumer `#1`*
+
+For this scenario we can apply the following work-flow:
+
+1. The meter using preconfigured URI of the *Consumer `#1`* reads the needed information about the destination *OPC UA Server* from a configuration file, prepares new AMQP Message, and finally sends it using the *AMQP Broker*
+2. *OPC UA Server* gets the message from AMQP Queue and using the URI of the *Consumer `#1`* exposes the data (updates *Value* attributes of relevant *Variable* *Nodes*) related to a virtual meter for *Consumer `#1`* in his *OPC UA Address Space*.
+
+The Data discovery mechanism is part of the broader concept described in the document[
+OPC Unified Architecture - Object Oriented Internet](../README.MD), but its detailed description is out of scope of the this document. 
 
 ## UA Information Model
 

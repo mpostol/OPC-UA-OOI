@@ -65,7 +65,27 @@ Because any **UA Semantic Data** instance is a uniquely named standalone entity 
 
 Each node in the **UA Semantic Data** is a root of a tree structure created by nodes recursively pointed out by HierarchicalReferences in forward direction. Because each node in this hierarchy is globally recognizable it may be protected as a resource by any independent protection system (for example any Kerberos protocol implementation) supporting authentication and authorization operation and responsible to distribute security tokens used to protect the data as stated above. Hierarchical relationship supports permissions inheritance, i.e. permissions propagation to the children nodes.
 
-For example if *OPC UA Server* prepares the data representing current state of the Boiler `#1` it gets the protection security token using the URI of this data from a dictionary and send the data say over the AMQP to AMQP clients. The clients using the URI of the Boiler `#1` browse local dictionaries (e.g. configuration files) to get appropriate security token to follow the selected protection scenario. Synchronization of the dictionaries is user dependent mechanism and does not require *OPC UA Server* engagement.
+**Challenge 1**: A server want to send information out to a large number of thin HMI devices in a local network - creation simultaneous OPC UA sessions is impractical or impossible
+
+For this scenario we can apply the following work-flow:
+
+1. *OPC UA Server* prepares an UDP message representing current state of the Boiler `#1` and if needed it gets the protection security token using the URI of this data from an external dictionary
+2. *OPC UA Server*  multicast (one-to-many distribution) using UDP/IP protocol to remote consumers (e.g. thin HMI devices)
+3. Using the BoileType a HMI device can be prepared in advance to display the state of a boiler and configured against the URI to display information about the Boiler `#1` - no *OPC UA Server* session is required but BoileType must be known (no communication) in advance from appropriate *OPC UA Information Model*
+4. Using prconfigured URI HMI lerns from the message that it contains information about Boiler `#1`, otherwise neglects the message (local filtering approach)
+5. HMI browses local dictionaries (e.g. configuration files) to get appropriate security token to follow the selected protection scenario. Synchronization of the dictionaries is user dependent mechanism and does not require *OPC UA Server* engagement.
+6. HMI updates the screen using the message content and it is done.
+
+**Challenge 2**: A smart power meter - *AMQP Client* `(~123 USD)` shall expose in an *OPC UA Address Space* (also supporting embedded *AMQP Client*) current values related to *Consumer `#1`*. Because there are ~165 000 meters that must be handled establishing so many simultaneous OPC UA session over the Internet is impractical or even impossible.
+
+For this scenario we can apply the following work-flow:
+
+1. The meter (AMQP client) reads the information (related only to the AMQP connectivity) about the destination AMQP client (embedded part of the *OPC UA Server*) from his configuration file
+2. Prepared in advance using the SmartPowerMeterType the meter device creates new AMQP message adding the URI of the *Consumer `#1`* and signs it using private key - no *OPC UA Server* session is required but SmartPowerMeterType must be known (no communication) in advance from appropriate *OPC UA Information Model* (OPC UA interoperability is required)
+3. Finally the meter sends the message using an AMQP broker - cloud approach
+4. Embeded AMQP client of the *OPC UA Server* reads the message from the AMQP Queue and using the URI of the *Consumer `#1`* browse a global directory to find the sender certificate and get public key to implement non-repudiation security algorithm (we are talking not only about power, but also about money !)
+5. Finally *OPC UA Server* exposes the data (updates *Value* attributes of relevant *Variable* *Nodes*) related to a virtual meter for *Consumer `#1`* in his **Address Space Management** component
+6. *OPC UA Clients* connected to this server are updated over the sessions using standard subscription mechanism
 
 ### Discoverable Data
 
@@ -74,22 +94,16 @@ In distributed systems the **UA Data Application** and **UA Client** (see diagra
 1. discover the server using the resource (**UA Semantic Data**) unique domain based indentifier - URI;
 2. browse or update the data.
 
-**Challenge 1** - A HMI prepared in advance to display state of boilers formally described by the *BoilerType* shall display the *Boiler `#1`* state
+**Challenge 1**: A HMI prepared in advance to display state of boilers formally described by the *BoilerType* shall display the *Boiler `#1`* state but the server exposing the data is unknown and may change occasionally (e.g. non transparent redundancy)
 
 For this scenario we can apply the following work-flow:
 
 1. HMI (*OPC UA Client*) using URI of the *Boiler `#1`* browses *UA Semantic Data Domain Name Server* (expanded version of GDS) starting form a local one to find a discovery server having all needed information about an *OPC UA Server* exposing *Boiler `#1`* *Object Node* representing a physical object named *Boiler `#1`*
 2. Establishes *OPC UA Session* with the discovery server and gets all needed informations
 3. Establishes *OPC UA Session* with the destination *OPC UA Server* to subscribe for requested data and events.
+4. In case the current server has been shouted down repeats the procedure starting from 1.
 
-**Challenge 2** - A smart power meter (*AMQP Client*) shall expose in an *OPC UA Address Space* (also *AMQP Client*) current values related to *Consumer `#1`*
-
-For this scenario we can apply the following work-flow:
-
-1. The meter using preconfigured URI of the *Consumer `#1`* reads the needed information about the destination *OPC UA Server* from a configuration file, prepares new AMQP Message, and finally sends it using the *AMQP Broker*
-2. *OPC UA Server* gets the message from AMQP Queue and using the URI of the *Consumer `#1`* exposes the data (updates *Value* attributes of relevant *Variable* *Nodes*) related to a virtual meter for *Consumer `#1`* in his *OPC UA Address Space*.
-
-The Data discovery mechanism is part of the broader concept described in the document [OPC Unified Architecture - Object Oriented Internet](../README.md), but its detailed description is out of scope of the this document.
+The Data discovery mechanism is part of the broader concept captured in the document [OPC Unified Architecture - Object Oriented Internet](../README.md), but its detailed description is out of scope of the this document.
 
 ## UA Information Model
 

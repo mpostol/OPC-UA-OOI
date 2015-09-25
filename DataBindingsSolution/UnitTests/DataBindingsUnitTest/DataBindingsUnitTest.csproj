@@ -67,7 +67,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataBindings\DataBindings.csproj">
+    <ProjectReference Include="..\..\DataBindings\DataBindings.csproj">
       <Project>{f8db9567-c559-440c-bbcf-e02013f9ab94}</Project>
       <Name>DataBindings</Name>
     </ProjectReference>

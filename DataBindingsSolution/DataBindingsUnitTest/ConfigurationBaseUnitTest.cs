@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using UAOOI.DataBindings;
 
-namespace CAS.UAOOI.DataBindings.UnitTest
+namespace UAOOI.DataBindings.UnitTest
 {
   [TestClass]
   public class ConfigurationBaseUnitTest

@@ -3,7 +3,7 @@ using CAS.UA.IServerConfiguration;
 using System;
 using System.Xml;
 
-namespace CAS.UAOOI.DataBindings.UnitTest
+namespace UAOOI.DataBindings.UnitTest
 {
   /// <summary>
   /// Class NodeDescriptor provides test implementation of the <see cref="INodeDescriptor"/>

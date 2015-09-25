@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("<#= DataBindingsVersion #>.*")]
 [assembly: AssemblyFileVersion("<#= DataBindingsVersion #>")]
 
-<#@ include file = "..\..\..\CommonResources\T4Definitions\Model.t4" #>
+<#@ include file = "..\..\..\..\CommonResources\T4Definitions\Model.t4" #>
 <#+
 string m_AssemblyTitle = "DataBindingsUnitTest";
 #>

@@ -18,7 +18,7 @@ namespace UAOOI.DataBindings
     /// Creates the default configuration.
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    public void CreateDefaultConfiguration()
+    public virtual void CreateDefaultConfiguration()
     {
       throw new NotImplementedException();
     }
@@ -30,7 +30,7 @@ namespace UAOOI.DataBindings
     /// <param name="SkipOpeningConfigurationFile">if set to <c>true</c> skip opening configuration file.</param>
     /// <param name="CancelWasPressed">if set to <c>true</c> cancel was pressed.</param>
     /// <exception cref="NotImplementedException"></exception>
-    public void CreateInstanceConfigurations(CAS.UA.IServerConfiguration.INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed)
+    public virtual void CreateInstanceConfigurations(CAS.UA.IServerConfiguration.INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed)
     {
       throw new NotImplementedException();
     }
@@ -40,7 +40,7 @@ namespace UAOOI.DataBindings
     /// </summary>
     /// <value>The default name of the file.</value>
     /// <exception cref="NotImplementedException"></exception>
-    public string DefaultFileName
+    public virtual string DefaultFileName
     {
       get { throw new NotImplementedException(); }
     }
@@ -50,7 +50,7 @@ namespace UAOOI.DataBindings
     /// </summary>
     /// <returns>Represents a window or dialog box that makes up an application's user interface to be used to edit configuration file.</returns>
     /// <exception cref="NotImplementedException"></exception>
-    public void EditConfiguration()
+    public virtual void EditConfiguration()
     {
       throw new NotImplementedException();
     }
@@ -61,7 +61,7 @@ namespace UAOOI.DataBindings
     /// <param name="descriptor">Provides identifying description of the node to be configured.</param>
     /// <returns>Returned object provides access to the instance node configuration edition functionality.</returns>
     /// <exception cref="NotImplementedException"></exception>
-    public IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
+    public virtual IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
     {
       throw new NotImplementedException();
     }
@@ -71,7 +71,7 @@ namespace UAOOI.DataBindings
     /// </summary>
     /// <param name="configurationFile">The configuration file.</param>
     /// <exception cref="NotImplementedException"></exception>
-    public void ReadConfiguration(System.IO.FileInfo configurationFile)
+    public virtual void ReadConfiguration(System.IO.FileInfo configurationFile)
     {
       throw new NotImplementedException();
     }
@@ -83,7 +83,7 @@ namespace UAOOI.DataBindings
     /// <param name="configurationFile">The configuration file.</param>
     /// <exception cref="NotImplementedException"></exception>
     /// <remarks><paramref name="solutionFilePath" /> is to be used to create relative file path to configuration files used by the plug-in.</remarks>
-    public void SaveConfiguration(string solutionFilePath, System.IO.FileInfo configurationFile)
+    public virtual void SaveConfiguration(string solutionFilePath, System.IO.FileInfo configurationFile)
     {
       throw new NotImplementedException();
     }

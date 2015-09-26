@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressSpaceComplianceTestT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4Definitions", "..\CommonResources\T4Definitions\T4Definitions.csproj", "{DDE02168-1EAD-41D9-B5E6-FB101F98AC24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManagement", "DataManagement\DataManagement.csproj", "{7F4DED4E-5933-4229-B9CC-51DA49678904}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,10 @@ Global
 		{DDE02168-1EAD-41D9-B5E6-FB101F98AC24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDE02168-1EAD-41D9-B5E6-FB101F98AC24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDE02168-1EAD-41D9-B5E6-FB101F98AC24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F4DED4E-5933-4229-B9CC-51DA49678904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F4DED4E-5933-4229-B9CC-51DA49678904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F4DED4E-5933-4229-B9CC-51DA49678904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F4DED4E-5933-4229-B9CC-51DA49678904}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

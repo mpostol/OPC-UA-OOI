@@ -89,7 +89,7 @@ For this scenario we can apply the following work-flow:
 
 ### Discoverable Data
 
-In distributed systems the **UA Data Application** and **UA Client** (see diagram above) is interested to get access to or update the data and it may not care about which particular server provides the data. In this case the data must be discoverable over the network. The **UA Semantic Data** can be used to meet this requirement. In this approach the URI of the data can be used as a key to browse the *UA Semantic Data Domain Name Server* (sdDNS) to find recursively destination *OPC UA Server* exposing the requested data. In this scenario we can use well know two steps process:
+In distributed systems the **UA Data Application** and **UA Client** (see diagram above) is interested to get access to or update the data and it may not care about which particular server provides the data. In this case the data must be discoverable over the network. The **UA Semantic Data** can be used to meet this requirement. In this approach the URI of the data can be used as a key to browse the *Global Data Discovery System* (GDDS - expanded version of GDS) to find recursively destination *OPC UA Server* exposing the requested data. In this scenario we can use well know two steps process:
 
 1. discover the server using the resource (**UA Semantic Data**) unique domain based indentifier - URI;
 2. browse or update the data.
@@ -98,7 +98,7 @@ In distributed systems the **UA Data Application** and **UA Client** (see diagra
 
 For this scenario we can apply the following work-flow:
 
-1. HMI (*OPC UA Client*) using URI of the *Boiler `#1`* browses *UA Semantic Data Domain Name Server* (expanded version of GDS) starting form a local one to find a discovery server having all needed information about an *OPC UA Server* exposing *Boiler `#1`* *Object Node* representing a physical object named *Boiler `#1`*
+1. HMI (*OPC UA Client*) using URI of the *Boiler `#1`* browses recursively *Global Data Discovery System* starting form a local server to find a discovery server having all needed information about the *OPC UA Server* exposing *Boiler `#1`* *Object Node* representing a physical object named *Boiler `#1`*
 2. Establishes *OPC UA Session* with the discovery server and gets all needed informations
 3. Establishes *OPC UA Session* with the destination *OPC UA Server* to subscribe for requested data and events.
 4. In case the current server has been shouted down repeats the procedure starting from 1.

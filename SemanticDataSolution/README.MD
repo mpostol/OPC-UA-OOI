@@ -164,3 +164,5 @@ Optionally the **OPC UA Client** may also support importing and exporting servic
 Meaningful processing of the *OPC UA Data* by variety of applications is important part of broader concept described in the document [OPC Unified Architecture - Object Oriented Internet](../README.md).
 
 The detailed description of this solution content is captured in the document [Content Description](./Readme.SemanticDataDeplyment.MD). The solution contains projects supporting deployment of the presented in this document concept.
+
+The code illustrating the **UA Semantic Data** paradigm implementation is in the project [DataManagement](./DataManagement).

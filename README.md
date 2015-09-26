@@ -4,6 +4,8 @@
 
 In this project C# deliverables supporting a new Machine To Machine (M2M) communication architecture is to be reserched with the goal to provide a generic solution for publishing and updating information in a context that can be used to describe and discover it by software applications. It is implemented based on the [OPC Unified Architecture](http://goo.gl/y4EHUn) - a new emerging industrial integration standard that fulfills the proposed architecture requirements.
 
+The `SemanticDataSolution` folder contains projects related to support the [OPC UA Data Processing Outside of the Server](./README.MD). Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
+
 This project is aimed to workout deliverables supporting Process Data handling over Internet including but not limiting to:
 
 •	Data Edition – UI allowing display and edition of any custom data
@@ -22,7 +24,7 @@ In scope there are also deliverables supporting:
 
 •	Exposition of the Process Data in the context of Metadata [OPC UA Address Space Model Designer](http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx)
 
-•	Browsing (using the sematic) of the Metadata to selectively access requested Process Data
+•	Browsing (using the sematics) of the Metadata to selectively access requested Process Data
 
 •	Modeling and representation of the Metadata - see whitepaper: [OPC UA Information Model Deployment] (http://goo.gl/HqYjvy)
 
@@ -36,7 +38,7 @@ Out of scope is any work on exchanging the Process Data and Metadata over the ne
 
 ###Conclusion
 
-I hope it is a good place to prototype and converge the OPC UA communication technology with Semantic Data, Internet Of Things, Plug and Play, Global Data Discovery, Selective Availability, etc. concepts. My goal is to bridge a gap between OPC UA technology and Industrial IT Application Domains. 
+I hope it is a good place to prototype and converge the OPC UA communication technology with Semantic Data, Semantc Web, Internet Of Things, Plug and Play, Global Data Discovery, Selective Availability, etc. concepts. My goal is to bridge a gap between OPC UA technology and Industrial IT Application Domains. 
 
 Redd more:
 

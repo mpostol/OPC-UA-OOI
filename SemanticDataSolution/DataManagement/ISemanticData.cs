@@ -6,7 +6,7 @@ namespace UAOOI.SemanticData.DataManagement
   /// <summary>
   /// Interface IDataInstance - represents a data item conforming  to the UA Semantic Data paradigm. 
   /// </summary>
-  public interface IDataInstance
+  public interface ISemanticData
   {
 
     /// <summary>
@@ -62,7 +62,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// </note>
     /// <para>
     /// In the Address Space of the server the NodeId can be assigned to a particular namespace index. The assumption is
-    /// that the host of this object will manage that directly using the <see cref="IDataInstance.Identifier"/>.
+    /// that the host of this object will manage that directly using the <see cref="ISemanticData.Identifier"/>.
     /// <br/></para>
     /// </remarks>
     IComparable NodeId { get; }

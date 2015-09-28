@@ -10,18 +10,19 @@ namespace UAOOI.SemanticData.DataManagement
   {
 
     /// <summary>
-    /// Gets the global unique identifier of the data instance as an object representation a uniform resource identifier <see cref="Uri"/>. 
+    /// Gets the global unique identifier of the Information Model providing definition of the 
+    /// Semantic Data as an object representation a uniform resource identifier <see cref="Uri"/>.
     /// </summary>
     ///<remarks>
-    /// Using the URI as a standard for global identifiers allows for a worldwide reference for any data. 
-    /// This means that we can tell when any two applications anywhere in the world are referring to the same data. 
+    /// Using the URI as a standard for global identifiers allows for a worldwide reference for any data defined by the OPC UA Information Model. 
+    /// This means that we can tell when any two applications anywhere in the world are referring to the same data.
     /// Using URI, therefore, we can introduce the notion of the global data identity. The data identity allows creation of variety of dictionaries collecting 
     /// supplementary information independently and outside of the server Address Space context.
     ///</remarks>
     /// <value>An object of <see cref="Uri"/> capturing the global unique identifier of this data instance.</value>
     Uri Identifier { get; }
     /// <summary>
-    /// Gets the symbolic name of the instance node that is root of hierarchy of nodes creating the Semantic Data instance.
+    /// Gets the symbolic name of the instance node that is root of hierarchy of nodes creating the Semantic Data.
     /// </summary>
     /// <remarks>
     /// <para>

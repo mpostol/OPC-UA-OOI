@@ -62,13 +62,13 @@ Value of the data can change in time. It is worth noting that, in the presented 
 For this scenario we can apply the following work-flow:
 
 1. The server instantiates the OPC UA Information Model for the crud oil refinery process and starts listening for UDP messages containing the   **UA Semantic Data** instances
-2. The `Flow meter #A-4321` device supporting Modnus RTU is equipped with a Modbus => **UA Semantic Data** gateway (lightweight plug converter - actually converting Modbus responses into the UDP/IP frame according to the Pub/Sub specyfication - price is important !)
+2. The `Flow meter #A-4321` device supporting Modbus RTU is equipped with a Modbus => **UA Semantic Data** gateway (lightweight plug converter - actually converting Modbus responses into the UDP/IP frame according to the Pub/Sub specification - price is relevant!)
 3. Using the OPC UA Information Model of the process the meter creates partial data instance containing value of the `InputFlow` `Variable` defined somewhere in the model
 4. Using local private key of the device the payload is signed and sent to the server.
 5. Embedded UDP receiver of the **Address Space Management** on the server side reads the message from the network and, using the URI of the `Flow meter #A-4321`, browses a global directory to find the sender certificate and get the public key to implement payload integrity check
 6. Finally, *OPC UA Server* exposes the data (updates `Value` attributes of the relevant `Variable` nodes) related to a virtual meter for `Flow meter #A-4321` in his **Address Space Management** component (i.e. in the Address Space instantiated according to the Information Model used to configure the device)
 7. *OPC UA Clients* connected to this server are updated over the sessions using the standard subscription mechanism
-8. In case the `Flow meter #A-4321` device is replaced for some reasons the new one also has to update relevant properties and *OPC UA Clients* can adopt the behavior using new values (e.g. engineering units) and expose also the device identification data, e.g serial number, model, etc. The device must be quipped with a gateway supporting its field level protocol or directly supporting the **UA Semantic Data** implementation.
+8. In case the `Flow meter #A-4321` device is replaced for some reasons the new one also has to update relevant properties and *OPC UA Clients* can adopt the behavior using new values (e.g. engineering units) and expose also the device identification data, e.g serial number, model, etc. The device must be equipped with a gateway supporting its field level protocol or directly supporting the **UA Semantic Data** implementation.
 
 ### Data Security
 

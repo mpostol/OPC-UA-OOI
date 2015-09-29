@@ -23,6 +23,18 @@ namespace UAOOI.SemanticData.DataManagement
     ISemanticDataItemConfiguration DefaultConfiguration { get; }
     ISemanticDataItemConfiguration this[string SymbolicName] { get; set; }
   }
+  public interface IProducer : IAssociation
+  {
+    IProducerConfiguration Configuration { get; }
+    void AddMessageWriter(IMessageWriter messageWriter, Func<IMessageHandler> messageHandler);
+    void RemoveMessageWriter(IMessageHandler messageHandler);
+  }
+  public interface IConsumer : IAssociation
+  {
+    IProducerConfiguration Configuration { get; }
+    void AddMessageReader(IMessageReader messageWriter, Func<IMessageHandler> messageHandler);
+    void RemoveMessageReader(IMessageHandler messageHandler);
+  }
   public interface ISemanticDataItemConfiguration
   {
     bool State { get; }
@@ -37,21 +49,8 @@ namespace UAOOI.SemanticData.DataManagement
     /// <remarks>It must be method because the operation may be executed asynchronously</remarks>
     void Disable();
   }
-  public interface IProducer : IAssociation
-  {
-    IProducerConfiguration Configuration { get; }
-    void AddMessageWriter(IMessageWriter messageWriter, Func<IMessageHandler> messageHandler);
-    void RemoveMessageWriter(IMessageHandler messageHandler);
-  }
-  public interface IConsumer : IAssociation
-  {
-    IProducerConfiguration Configuration { get; }
-    void AddMessageWriter(IMessageReader messageWriter, Func<IMessageHandler> messageHandler);
-    void RemoveMessageWriter(IMessageHandler messageHandler);
-  }
-  public interface IConfiguration
-  {
-  }
+
+  public interface IConfiguration  {}
   public interface IProducerConfiguration : IConfiguration
   {
 

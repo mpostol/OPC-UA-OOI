@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4Definitions", "..\CommonR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManagement", "DataManagement\DataManagement.csproj", "{7F4DED4E-5933-4229-B9CC-51DA49678904}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManagementUnitTest", "Tests\DataManagementUnitTest\DataManagementUnitTest.csproj", "{F7C29437-0923-449C-B4E9-36653A55C3E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{7F4DED4E-5933-4229-B9CC-51DA49678904}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F4DED4E-5933-4229-B9CC-51DA49678904}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F4DED4E-5933-4229-B9CC-51DA49678904}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7C29437-0923-449C-B4E9-36653A55C3E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7C29437-0923-449C-B4E9-36653A55C3E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7C29437-0923-449C-B4E9-36653A55C3E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7C29437-0923-449C-B4E9-36653A55C3E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,5 +93,6 @@ Global
 		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
 		{37D26B63-74FE-45C6-9F61-251BDF69EDF7} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
 		{DDE02168-1EAD-41D9-B5E6-FB101F98AC24} = {78EDB72A-77B1-4A64-8E76-17E780993017}
+		{F7C29437-0923-449C-B4E9-36653A55C3E5} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
 	EndGlobalSection
 EndGlobal

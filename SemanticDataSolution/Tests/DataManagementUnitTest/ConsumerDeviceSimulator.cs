@@ -7,6 +7,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   /// </summary>
   internal class ConsumerDeviceSimulator
   {
+    
     internal UDPSimulator ReadConfiguration()
     {
       m_UDPSimulator = new UDPSimulator(this);

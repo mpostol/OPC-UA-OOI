@@ -18,10 +18,6 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     /// <param name="association">The association.</param>
     void RemoveAssociation(IAssociation association);
-    /// <summary>
-    /// Remove all association and shutdown all services gracefully.
-    /// </summary>
-    void Shutdown();
 
   }
 }

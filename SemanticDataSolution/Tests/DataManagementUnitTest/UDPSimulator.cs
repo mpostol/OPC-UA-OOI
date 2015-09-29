@@ -4,7 +4,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
   internal class UDPSimulator
   {
-    public UDPSimulator(ConsumerDeviceSimulator consumer)
+    internal UDPSimulator(ConsumerDeviceSimulator consumer)
     {
       m_Consumer = consumer;
     }

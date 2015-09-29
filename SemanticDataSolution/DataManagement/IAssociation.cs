@@ -49,8 +49,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// <remarks>It must be method because the operation may be executed asynchronously</remarks>
     void Disable();
   }
-
-  public interface IConfiguration  {}
+  public interface IConfiguration { }
   public interface IProducerConfiguration : IConfiguration
   {
 
@@ -69,16 +68,32 @@ namespace UAOOI.SemanticData.DataManagement
   public interface IAssociationState
   {
   }
-  public interface IMessageWriter
+  public interface IMessageWriter : IMessageHandler
   {
+
   }
-  public interface IMessageReader
+  public interface IMessageReader : IMessageHandler
   {
 
   }
   public interface IMessageHandler
   {
+    
     event EventHandler<MessageHandlerEventArgs> messageHandlerStatusChanged;
+    /// <summary>
+    /// The property provides the current operational state of the <see cref="IMessageHandler"/> Object.
+    /// </summary>
+    /// <value>The handler state <see cref="HandlerStat"/>.</value>
+    HandlerStat HandlerState { get; }
+    /// <summary>
+    /// This method is used to enable a configured <see cref="IMessageHandler"/> object. If a normal operation is possible, the state changes into <see cref="HandlerStat.Operational"/> state. 
+    /// In the case of an error situation, the state changes into <see cref="HandlerStat.Error"/>. The operation is rejected if the current <paramref name="HandlerState"/>  is not <see cref="HandlerStat.Disabled"/>.
+    /// </summary>
+    void Enable();
+    /// <summary>
+    /// Disables this instance.
+    /// </summary>
+    void Disable();
   }
   public class MessageHandlerEventArgs : EventArgs
   {
@@ -86,5 +101,24 @@ namespace UAOOI.SemanticData.DataManagement
   public class AssociationStateChangedEventArgs : EventArgs
   {
 
+  }
+  public enum HandlerStat
+  {
+    /// <summary>
+    /// The handler is not configured and cannot be enabled.
+    /// </summary>
+    NoConfiguration,
+    /// <summary>
+    /// The handler is configured but currently disabled.
+    /// </summary>
+    Disabled,
+    /// <summary>
+    /// The handler is operational.
+    /// </summary>
+    Operational,
+    /// <summary>
+    /// The handler is in an error state.
+    /// </summary>
+    Error
   }
 }

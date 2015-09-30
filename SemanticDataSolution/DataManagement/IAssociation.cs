@@ -6,7 +6,7 @@ namespace UAOOI.SemanticData.DataManagement
   /// <summary>
   /// Interface IAssociation - it is represents PubSubConnectionType and contains all information related to communication protocols.
   /// </summary>
-  public interface IAssociation : IComparable, IEnumerable<string>
+  public interface IAssociation : IComparable
   {
     ISemanticData DataDescriptor { get; }
     /// <summary>
@@ -67,6 +67,17 @@ namespace UAOOI.SemanticData.DataManagement
   }
   public interface IAssociationState
   {
+    HandlerStat State { get; }
+    /// <summary>
+    /// This method is used to enable a configured <see cref="IAssociation"/> object. If a normal operation is possible, the state changes into <see cref="HandlerStat.Operational"/> state. 
+    /// In the case of an error situation, the state changes into <see cref="HandlerStat.Error"/>. The operation is rejected if the current <paramref name="HandlerState"/>  is not <see cref="HandlerStat.Disabled"/>.
+    /// </summary>
+    void Enable();
+    /// <summary>
+    /// This method is used to disable an oready enabled <see cref="IAssociation"/> object.
+    /// This method call shall be rejected if the current State is <see cref="HandlerStat.Disabled"/> or <see cref="HandlerStat.NoConfiguration"/>.
+    /// </summary>
+    void Disable(); 
   }
   public interface IMessageWriter : IMessageHandler
   {
@@ -78,7 +89,6 @@ namespace UAOOI.SemanticData.DataManagement
   }
   public interface IMessageHandler
   {
-    
     event EventHandler<MessageHandlerEventArgs> messageHandlerStatusChanged;
     /// <summary>
     /// The property provides the current operational state of the <see cref="IMessageHandler"/> Object.
@@ -91,9 +101,10 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     void Enable();
     /// <summary>
-    /// Disables this instance.
+    /// This method is used to disable a PubSub Object.
+    /// This method call shall be rejected if the current State is <see cref="HandlerStat.Disabled"/> or <see cref="HandlerStat.NoConfiguration"/>.
     /// </summary>
-    void Disable();
+    void Disable(); 
   }
   public class MessageHandlerEventArgs : EventArgs
   {

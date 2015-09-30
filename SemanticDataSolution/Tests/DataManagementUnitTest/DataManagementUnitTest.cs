@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -68,14 +70,21 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       throw new NotImplementedException();
     }
-    public System.Collections.Generic.IEnumerator<string> GetEnumerator()
+    public IEnumerator<string> GetEnumerator()
     {
       throw new NotImplementedException();
     }
-    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    {
+      throw new NotImplementedException();
+    }
+    public void Disable()
+    {
+      throw new NotImplementedException();
+    }
+    public void Enable()
     {
       throw new NotImplementedException();
     }
   }
-
 }

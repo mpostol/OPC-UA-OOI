@@ -19,7 +19,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// Gets the address as the end point description.
     /// </summary>
     /// <value>The network end point description.</value>
-    IEndPointConfiguration Address { get; }
+    IEndPointConfiguration Address { get; set; }
     ISemanticDataItemConfiguration DefaultConfiguration { get; }
     ISemanticDataItemConfiguration this[string SymbolicName] { get; set; }
   }
@@ -67,17 +67,17 @@ namespace UAOOI.SemanticData.DataManagement
   }
   public interface IAssociationState
   {
-    HandlerStat State { get; }
+    HandlerState State { get; }
     /// <summary>
-    /// This method is used to enable a configured <see cref="IAssociation"/> object. If a normal operation is possible, the state changes into <see cref="HandlerStat.Operational"/> state. 
-    /// In the case of an error situation, the state changes into <see cref="HandlerStat.Error"/>. The operation is rejected if the current <paramref name="HandlerState"/>  is not <see cref="HandlerStat.Disabled"/>.
+    /// This method is used to enable a configured <see cref="IAssociation"/> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational"/> state. 
+    /// In the case of an error situation, the state changes into <see cref="HandlerState.Error"/>. The operation is rejected if the current <paramref name="HandlerState"/>  is not <see cref="HandlerState.Disabled"/>.
     /// </summary>
     void Enable();
     /// <summary>
     /// This method is used to disable an oready enabled <see cref="IAssociation"/> object.
-    /// This method call shall be rejected if the current State is <see cref="HandlerStat.Disabled"/> or <see cref="HandlerStat.NoConfiguration"/>.
+    /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled"/> or <see cref="HandlerState.NoConfiguration"/>.
     /// </summary>
-    void Disable(); 
+    void Disable();
   }
   public interface IMessageWriter : IMessageHandler
   {
@@ -93,27 +93,31 @@ namespace UAOOI.SemanticData.DataManagement
     /// <summary>
     /// The property provides the current operational state of the <see cref="IMessageHandler"/> Object.
     /// </summary>
-    /// <value>The handler state <see cref="HandlerStat"/>.</value>
-    HandlerStat HandlerState { get; }
+    /// <value>The handler state <see cref="HandlerState"/>.</value>
+    HandlerState HandlerState { get; }
     /// <summary>
-    /// This method is used to enable a configured <see cref="IMessageHandler"/> object. If a normal operation is possible, the state changes into <see cref="HandlerStat.Operational"/> state. 
-    /// In the case of an error situation, the state changes into <see cref="HandlerStat.Error"/>. The operation is rejected if the current <paramref name="HandlerState"/>  is not <see cref="HandlerStat.Disabled"/>.
+    /// This method is used to enable a configured <see cref="IMessageHandler"/> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational"/> state. 
+    /// In the case of an error situation, the state changes into <see cref="HandlerState.Error"/>. The operation is rejected if the current <paramref name="HandlerState"/>  is not <see cref="HandlerState.Disabled"/>.
     /// </summary>
     void Enable();
     /// <summary>
     /// This method is used to disable a PubSub Object.
-    /// This method call shall be rejected if the current State is <see cref="HandlerStat.Disabled"/> or <see cref="HandlerStat.NoConfiguration"/>.
+    /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled"/> or <see cref="HandlerState.NoConfiguration"/>.
     /// </summary>
-    void Disable(); 
+    void Disable();
   }
   public class MessageHandlerEventArgs : EventArgs
   {
   }
   public class AssociationStateChangedEventArgs : EventArgs
   {
-
+    public AssociationStateChangedEventArgs(IAssociationState state)
+    {
+      State = state;
+    }
+    public IAssociationState State {get; private set;}
   }
-  public enum HandlerStat
+  public enum HandlerState
   {
     /// <summary>
     /// The handler is not configured and cannot be enabled.

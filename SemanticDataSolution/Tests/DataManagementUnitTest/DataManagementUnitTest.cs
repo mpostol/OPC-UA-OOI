@@ -34,6 +34,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
   internal class TestAssociation : IAssociation
   {
+    public TestAssociation()
+    {
+      Address = null;
+    }
     public ISemanticData DataDescriptor
     {
       get { throw new NotImplementedException(); }
@@ -42,19 +46,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       get { throw new NotImplementedException(); }
     }
-
     public event EventHandler<AssociationStateChangedEventArgs> StateChangedEventHandler;
-
-    public IEndPointConfiguration Address
-    {
-      get { throw new NotImplementedException(); }
-    }
-
     public ISemanticDataItemConfiguration DefaultConfiguration
     {
       get { throw new NotImplementedException(); }
     }
-
     public ISemanticDataItemConfiguration this[string SymbolicName]
     {
       get
@@ -74,10 +70,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       throw new NotImplementedException();
     }
-    IEnumerator System.Collections.IEnumerable.GetEnumerator()
-    {
-      throw new NotImplementedException();
-    }
     public void Disable()
     {
       throw new NotImplementedException();
@@ -85,6 +77,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void Enable()
     {
       throw new NotImplementedException();
+    }
+    public IEndPointConfiguration Address
+    {
+      get;
+      set;
     }
   }
 }

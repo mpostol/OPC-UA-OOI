@@ -36,7 +36,7 @@ namespace UAOOI.SemanticData.DataManagement
       int _idx = m_IAssociation.IndexOf(association);
       if (_idx == -1)
         throw new ArgumentOutOfRangeException("association");
-      if (m_IAssociation[_idx].State.State == HandlerStat.Operational)
+      if (m_IAssociation[_idx].State.State == HandlerState.Operational)
         m_IAssociation[_idx].State.Disable();
       Debug.Assert(m_IAssociation.Remove(association));
     }

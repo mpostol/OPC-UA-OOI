@@ -13,13 +13,24 @@ namespace UAOOI.SemanticData.DataManagement
   {
 
     #region constructor
-    public Association(ISemanticData data, string aliasName)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Association" /> class.
+    /// </summary>
+    /// <param name="data">The UA Semantic Data triple representation.</param>
+    /// <param name="aliasName">A readable alias name for this instance to be used on User Interface.</param>
+    /// <exception cref="System.NullReferenceException">
+    /// data argument must not be null
+    /// or
+    /// aliasName argument must not be null
+    /// </exception>
+    /// <exception cref="System.ArgumentOutOfRangeException">aliasName;aliasName must be unique</exception>
+    public Association(ISemanticData data, DataSet members, string aliasName)
     {
       if (data == null)
-        throw new NullReferenceException("data");
+        throw new NullReferenceException("data argument must not be null");
       DataDescriptor = data;
       if (String.IsNullOrEmpty(aliasName))
-        throw new NullReferenceException("aliasName");
+        throw new NullReferenceException("aliasName argument must not be null");
       if (m_AssociationsDictionary.ContainsKey(aliasName))
         throw new ArgumentOutOfRangeException("aliasName", "aliasName must be unique");
       m_AssociationsDictionary.Add(aliasName, this);
@@ -44,6 +55,10 @@ namespace UAOOI.SemanticData.DataManagement
       get;
       private set;
     }
+    /// <summary>
+    /// Gets the current operational state of this instance
+    /// </summary>
+    /// <value>The state <see cref="IAssociationState"/> of this instance .</value>
     public IAssociationState State
     {
       get { return p_State; }

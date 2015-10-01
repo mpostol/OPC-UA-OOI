@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Association.cs" />
+    <Compile Include="DataSet.cs" />
     <Compile Include="HandlerState.cs" />
     <Compile Include="IAssociation.cs" />
     <Compile Include="IAssociationState.cs" />

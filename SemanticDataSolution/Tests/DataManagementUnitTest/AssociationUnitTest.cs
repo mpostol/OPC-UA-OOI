@@ -56,10 +56,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ISemanticData _testISemanticData = new TestISemanticData();
       Assert.IsNotNull(_testISemanticData);
-      TestAssociation _nt = new TestAssociation(_testISemanticData, "AssociationCreatorTestMethod4");
+      TestAssociation _nt = new TestAssociation(_testISemanticData, "AssociationCompareToTestMethod1");
       Assert.IsNotNull(_nt);
       Assert.AreEqual<int>(0, _nt.CompareTo(_nt));
-      TestAssociation _nt1 = new TestAssociation(_testISemanticData, "AssociationCreatorTestMethod3");
+      TestAssociation _nt1 = new TestAssociation(_testISemanticData, "AssociationCompareToTestMethod0");
       Assert.IsNotNull(_nt);
       Assert.AreEqual<int>(-1, _nt1.CompareTo(_nt));
       Assert.AreEqual<int>(1, _nt.CompareTo(_nt1));
@@ -141,11 +141,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #region private
     private class TestAssociation : Association
     {
-      public TestAssociation(ISemanticData data, string aliasName, bool sucess)
-        : base(data, aliasName)
+      public TestAssociation(ISemanticData data, string aliasName, bool success)
+        : base(data, null, aliasName)
       {
         Address = null;
-        m_Success = sucess;
+        m_Success = success;
       }
       public TestAssociation(ISemanticData data, string aliasName)
         : this(data, aliasName, true)

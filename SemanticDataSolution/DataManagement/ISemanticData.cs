@@ -4,8 +4,14 @@ using System;
 namespace UAOOI.SemanticData.DataManagement
 {
   /// <summary>
-  /// Interface IDataInstance - represents a data item conforming  to the UA Semantic Data paradigm. 
+  /// Interface ISemanticData - represents a data item conforming  to the UA Semantic Data paradigm. 
   /// </summary>
+  /// <remarks>
+  /// <para>
+  /// more about the UA Semantic Data concept cab be found in the:
+  /// <a href="https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/README.MD">OPC UA Data Processing Outside the Server</a>
+  /// </para>
+  /// </remarks>
   public interface ISemanticData
   {
 

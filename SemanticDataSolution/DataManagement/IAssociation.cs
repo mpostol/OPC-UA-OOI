@@ -14,6 +14,9 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     /// <value>The state.</value>
     IAssociationState State { get; }
+    /// <summary>
+    /// Occurs when state of this instance changed.
+    /// </summary>
     event EventHandler<AssociationStateChangedEventArgs> StateChangedEventHandler;
     /// <summary>
     /// Gets the address as the end point description.
@@ -65,20 +68,7 @@ namespace UAOOI.SemanticData.DataManagement
   public interface IEndPointConfiguration
   {
   }
-  public interface IAssociationState
-  {
-    HandlerState State { get; }
-    /// <summary>
-    /// This method is used to enable a configured <see cref="IAssociation"/> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational"/> state. 
-    /// In the case of an error situation, the state changes into <see cref="HandlerState.Error"/>. The operation is rejected if the current <paramref name="HandlerState"/>  is not <see cref="HandlerState.Disabled"/>.
-    /// </summary>
-    void Enable();
-    /// <summary>
-    /// This method is used to disable an oready enabled <see cref="IAssociation"/> object.
-    /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled"/> or <see cref="HandlerState.NoConfiguration"/>.
-    /// </summary>
-    void Disable();
-  }
+
   public interface IMessageWriter : IMessageHandler
   {
 
@@ -117,23 +107,5 @@ namespace UAOOI.SemanticData.DataManagement
     }
     public IAssociationState State {get; private set;}
   }
-  public enum HandlerState
-  {
-    /// <summary>
-    /// The handler is not configured and cannot be enabled.
-    /// </summary>
-    NoConfiguration,
-    /// <summary>
-    /// The handler is configured but currently disabled.
-    /// </summary>
-    Disabled,
-    /// <summary>
-    /// The handler is operational.
-    /// </summary>
-    Operational,
-    /// <summary>
-    /// The handler is in an error state.
-    /// </summary>
-    Error
-  }
+
 }

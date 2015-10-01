@@ -23,6 +23,7 @@ namespace UAOOI.SemanticData.DataManagement
       if (m_AssociationsDictionary.ContainsKey(aliasName))
         throw new ArgumentOutOfRangeException("aliasName", "aliasName must be unique");
       m_AssociationsDictionary.Add(aliasName, this);
+      m_AliasName = aliasName;
       p_State = new AssociationStateNoConfiguration(this);
       DefaultConfiguration = GetDefaultConfiguration();
       Address = null;
@@ -30,7 +31,14 @@ namespace UAOOI.SemanticData.DataManagement
     #endregion
 
     #region IAssociation
+    /// <summary>
+    /// Occurs when state of this instance changed.
+    /// </summary>
     public event EventHandler<AssociationStateChangedEventArgs> StateChangedEventHandler;
+    /// <summary>
+    /// Gets the data descriptor captured by an <see cref="ISemanticData"/> instance.
+    /// </summary>
+    /// <value>The <see cref="ISemanticData"/> instance representing UA Semantic Data triple https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/README.MD. </value>
     public ISemanticData DataDescriptor
     {
       get;
@@ -62,23 +70,39 @@ namespace UAOOI.SemanticData.DataManagement
         m_ConfigurationDictionary[SymbolicName] = value;
       }
     }
+    /// <summary>
+    /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
+    /// </summary>
+    /// <param name="obj">An object to compare with this instance.</param>
+    /// <returns>A value that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance precedes <paramref name="obj" /> in the sort order. Zero This instance occurs in the same position in the sort order as <paramref name="obj" />. Greater than zero This instance follows <paramref name="obj" /> in the sort order.</returns>
     public int CompareTo(object obj)
     {
-      return ((Association)obj).m_AliasName.CompareTo(m_AliasName);
+      return m_AliasName.CompareTo(((Association)obj).m_AliasName);
+    }
+    #endregion
+
+    #region override Object
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this object alias name.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance alias name.</returns>
+    public override string ToString()
+    {
+      return m_AliasName;
     }
     #endregion
 
     #region interna API
-    internal void Initialize()
+    public void Initialize()
     {
       try
       {
         InitializeCommunication();
+        State = new AssociationStateDisabled(this);
       }
-      catch (Exception ex)
+      catch (Exception)
       {
         State = new AssociationStateError(this);
-        throw ex;
       }
     }
     #endregion
@@ -130,7 +154,7 @@ namespace UAOOI.SemanticData.DataManagement
       }
       public override void Disable()
       {
-        base.Enable();
+        base.Disable();
       }
     }
     private class AssociationStateNoConfiguration : AssociationStateBaseBase
@@ -175,10 +199,10 @@ namespace UAOOI.SemanticData.DataManagement
         return;
       _locEven(this, args);
     }
-    #endregion
     protected abstract void InitializeCommunication();
     protected abstract void OnEnabling();
     protected abstract void OnDisabling();
+    #endregion
 
   }
 

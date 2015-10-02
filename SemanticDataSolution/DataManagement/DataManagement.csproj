@@ -59,6 +59,7 @@
     <Compile Include="HandlerState.cs" />
     <Compile Include="IAssociation.cs" />
     <Compile Include="IAssociationState.cs" />
+    <Compile Include="IBinding.cs" />
     <Compile Include="IBindingFactory.cs" />
     <Compile Include="ISemanticData.cs" />
     <Compile Include="IIntegrationServices.cs" />

@@ -56,7 +56,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ConsumerDeviceSimulator.cs" />
+    <Compile Include="Simulator\ConsumerDeviceSimulator.cs" />
     <Compile Include="DataManagementUnitTest.cs" />
     <Compile Include="Simulator\PersistenConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,6 +64,7 @@
     <Compile Include="UDPSimulator.cs" />
     <Compile Include="AssociationUnitTest.cs" />
     <Compile Include="ConfigurationUnitTest.cs" />
+    <Compile Include="BindingUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

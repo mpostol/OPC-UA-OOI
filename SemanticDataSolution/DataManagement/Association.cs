@@ -47,7 +47,7 @@ namespace UAOOI.SemanticData.DataManagement
     }
     private void ProcessDatSet(DataSet dataSet)
     {
-      m_ProcessDataBindings = dataSet.Members.Select<DataMember, Binding>(x => dataSet.BrokerFactory.GetDataBroker(x.ProcessValueName)).ToArray<Binding>();
+      m_ProcessDataBindings = dataSet.Members.Select<DataMember, IBinding>(x => dataSet.BrokerFactory.GetDataBroker(x.ProcessValueName)).ToArray<IBinding>();
     }
     #endregion
 
@@ -216,7 +216,7 @@ namespace UAOOI.SemanticData.DataManagement
     //var
     private Dictionary<string, ISemanticDataItemConfiguration> m_ItemConfigurationDictionary = new Dictionary<string, ISemanticDataItemConfiguration>();
     private Dictionary<string, ISemanticData> m_AliasDictionary = new Dictionary<string, ISemanticData>();
-    private Binding[] m_ProcessDataBindings = null;
+    private IBinding[] m_ProcessDataBindings = null;
     private IAssociationState p_State = null;
     private string m_AliasName = string.Empty;
     private static Dictionary<ISemanticData, Association> m_ISemanticDataDictionary = new Dictionary<ISemanticData, Association>();

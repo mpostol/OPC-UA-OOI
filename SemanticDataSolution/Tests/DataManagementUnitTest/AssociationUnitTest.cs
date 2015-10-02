@@ -177,11 +177,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         return new DataSet(new DataBrokerFactory() { }, _dsc.Members);
       }
     }
-    private class DataBrokerFactory : IDataBrokerFactory
+    private class DataBrokerFactory : IBindingFactory
     {
-      public DataBroker GetDataBroker(string variableName)
+      public Binding GetDataBroker(string variableName)
       {
-        return new DataBroker() { };
+        return new Binding() { };
       }
     }
     private class TestISemanticData : ISemanticData

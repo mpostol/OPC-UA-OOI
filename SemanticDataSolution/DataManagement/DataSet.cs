@@ -7,7 +7,7 @@ namespace UAOOI.SemanticData.DataManagement
 
   public class DataSet
   {
-    public DataSet(IDataBrokerFactory brokerFactory, DataMemberConfiguration[] members)
+    public DataSet(IBindingFactory brokerFactory, DataMemberConfiguration[] members)
     {
       if (brokerFactory == null)
         throw new System.ArgumentNullException("brokerFactory must not be null");
@@ -17,7 +17,7 @@ namespace UAOOI.SemanticData.DataManagement
       Members = members.Select<DataMemberConfiguration, DataMember>(x => new DataMember() { ProcessValueName = x.ProcessValueName, SymbolicName = x.SymbolicName }).ToArray<DataMember>();
     }
     public DataMember[] Members { get; private set; }
-    public IDataBrokerFactory BrokerFactory { get; private set; }
+    public IBindingFactory BrokerFactory { get; private set; }
   }
   public class DataMember
   {

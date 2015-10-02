@@ -47,7 +47,7 @@ namespace UAOOI.SemanticData.DataManagement
     }
     private void ProcessDatSet(DataSet dataSet)
     {
-      m_ProcessDataBindings = dataSet.Members.Select<DataMember, DataBroker>(x => dataSet.brokerFactory.GetDataBroker(x.ProcessValueName)).ToArray<DataBroker>();
+      m_ProcessDataBindings = dataSet.Members.Select<DataMember, DataBroker>(x => dataSet.BrokerFactory.GetDataBroker(x.ProcessValueName)).ToArray<DataBroker>();
     }
     #endregion
 

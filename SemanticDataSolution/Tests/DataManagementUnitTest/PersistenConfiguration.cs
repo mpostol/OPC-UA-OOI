@@ -35,14 +35,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private static DataMemberConfiguration GetDataMember()
     {
-      return new DataMemberConfiguration() { ProcessValueName = "ProcessValueName".AddId(DataMembeId), SymbolicName = "SymbolicName".AddId(DataMembeId) };
+      return new DataMemberConfiguration() { ProcessValueName = "ProcessValueName".AddId(DataMemberId), SymbolicName = "SymbolicName".AddId(DataMemberId) };
     }
     private static int AssociationId { get { return p_AssociationId++; } }
     private static int DataSetId { get { return p_DataSet++; } }
-    public static int DataMembeId { get { return p_DataMembeId; } }
+    public static int DataMemberId { get { return p_DataMemberId; } }
     private static int p_AssociationId = 0;
     private static int p_DataSet = 0;
-    private static int p_DataMembeId = 0;
+    private static int p_DataMemberId = 0;
   }
   internal static class StringExtensions
   {

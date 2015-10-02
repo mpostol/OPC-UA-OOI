@@ -56,15 +56,17 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_Association")]
     public void AssociationCompareToTestMethod()
     {
-      ISemanticData _testISemanticData = new TestISemanticData();
-      Assert.IsNotNull(_testISemanticData);
-      TestAssociation _nt = new TestAssociation(_testISemanticData, "AssociationCompareToTestMethod1");
-      Assert.IsNotNull(_nt);
-      Assert.AreEqual<int>(0, _nt.CompareTo(_nt));
-      TestAssociation _nt1 = new TestAssociation(_testISemanticData, "AssociationCompareToTestMethod0");
-      Assert.IsNotNull(_nt);
-      Assert.AreEqual<int>(-1, _nt1.CompareTo(_nt));
-      Assert.AreEqual<int>(1, _nt.CompareTo(_nt1));
+      ISemanticData _testISemanticData0 = new TestISemanticData("TestISemanticData1", 0);
+      Assert.IsNotNull(_testISemanticData0);
+      TestAssociation _nt0 = new TestAssociation(_testISemanticData0, "AssociationCompareToTestMethod0");
+      Assert.IsNotNull(_nt0);
+      Assert.AreEqual<int>(0, _nt0.CompareTo(_nt0));
+      ISemanticData _testISemanticData1 = new TestISemanticData("TestISemanticData0", 0);
+      Assert.IsNotNull(_testISemanticData1);
+      TestAssociation _nt1 = new TestAssociation(_testISemanticData1, "AssociationCompareToTestMethod1");
+      Assert.IsNotNull(_nt1);
+      Assert.AreEqual<int>(1, _nt1.CompareTo(_nt0));
+      Assert.AreEqual<int>(-1, _nt0.CompareTo(_nt1));
     }
     [TestMethod]
     [TestCategory("DataManagement_Association")]
@@ -172,7 +174,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       private static DataSet GetDataSet()
       {
         DataSetConfiguration _dsc = PersistentConfiguration.GetDataSet();
-        return new DataSet(new DataBrokerFactory(), _dsc.Members);
+        return new DataSet(new DataBrokerFactory() { }, _dsc.Members);
       }
     }
     private class DataBrokerFactory : IDataBrokerFactory
@@ -184,18 +186,33 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class TestISemanticData : ISemanticData
     {
+      public TestISemanticData()
+        : this("SymbolicName".AddId(_count), _count)
+      {
+        _count++;
+      }
+      public TestISemanticData(string symbolicName, IComparable nodeId)
+      {
+        Identifier = new Uri(@"Http://commsvr.com");
+        SymbolicName = symbolicName;
+        NodeId = nodeId;
+      }
       public Uri Identifier
       {
-        get { return new Uri(@"Http://commsvr.com"); }
+        get;
+        private set;
       }
       public string SymbolicName
       {
-        get { throw new NotImplementedException(); }
+        get;
+        private set;
       }
       public IComparable NodeId
       {
-        get { throw new NotImplementedException(); }
+        get;
+        private set;
       }
+      private static int _count = 0;
     }
     private class TestISemanticDataItemConfiguration : ISemanticDataItemConfiguration
     {

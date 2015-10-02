@@ -6,7 +6,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   /// Class ConsumerDeviceSimulator - simulates a device that consumes data provided using the integration services.
   /// It could be for example HMI or PLC.
   /// </summary>
-  internal class ConsumerDeviceSimulator
+  internal class ConsumerDeviceSimulator: IBindingFactory
   {
 
     internal UDPSimulator ReadConfiguration()
@@ -19,7 +19,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       byte[] _buffer = m_UDPSimulator.Receive();
       predicate(_buffer);
     }
-
+    public Binding GetDataBroker(string variableName)
+    {
+      throw new NotImplementedException();
+    }
     private UDPSimulator m_UDPSimulator = null;
   }
 }

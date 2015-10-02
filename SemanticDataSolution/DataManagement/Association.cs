@@ -17,12 +17,11 @@ namespace UAOOI.SemanticData.DataManagement
     /// Initializes a new instance of the <see cref="Association" /> class.
     /// </summary>
     /// <param name="data">The UA Semantic Data triple representation.</param>
+    /// <param name="members">The members. </param>
     /// <param name="aliasName">A readable alias name for this instance to be used on User Interface.</param>
-    /// <exception cref="System.NullReferenceException">
-    /// data argument must not be null
+    /// <exception cref="System.NullReferenceException">data argument must not be null
     /// or
-    /// aliasName argument must not be null
-    /// </exception>
+    /// aliasName argument must not be null</exception>
     /// <exception cref="System.ArgumentOutOfRangeException">aliasName;aliasName must be unique</exception>
     public Association(ISemanticData data, DataSet members, string aliasName)
     {
@@ -33,6 +32,8 @@ namespace UAOOI.SemanticData.DataManagement
         throw new NullReferenceException("aliasName argument must not be null");
       if (m_AssociationsDictionary.ContainsKey(aliasName))
         throw new ArgumentOutOfRangeException("aliasName", "aliasName must be unique");
+      if (members == null)
+        throw new NullReferenceException("members argument must not be null");
       m_AssociationsDictionary.Add(aliasName, this);
       m_AliasName = aliasName;
       p_State = new AssociationStateNoConfiguration(this);

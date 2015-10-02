@@ -7,7 +7,7 @@ namespace UAOOI.SemanticData.DataManagement
 {
   public class DataSet
   {
-    DataMember[] Members;
+    public DataMember[] Members;
   }
   public class DataMember
   {

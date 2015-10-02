@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
+using UAOOI.SemanticData.DataManagement.Configuration;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -142,7 +144,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class TestAssociation : Association
     {
       public TestAssociation(ISemanticData data, string aliasName, bool success)
-        : base(data, TestDataSet.GetTestDataSet(), aliasName)
+        : base(data, GetDataSet(), aliasName)
       {
         Address = null;
         m_Success = success;
@@ -167,6 +169,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       protected override void OnEnabling() { }
       protected override void OnDisabling() { }
       private bool m_Success = false;
+      private static DataSet GetDataSet()
+      {
+        DataSetConfiguration _dsc = PersistentConfiguration.GetDataSet();
+        return new DataSet()
+        {
+          Members = _dsc.Members.Select<DataMemberConfiguration, DataMember>(x => new DataMember() { ProcessValueName = x.ProcessValueName, SymbolicName = x.SymbolicName }).ToArray<DataMember>()
+        };
+      }
     }
     private class TestISemanticData : ISemanticData
     {
@@ -198,21 +208,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         throw new NotImplementedException();
       }
     }
-    private class TestDataSet : DataSet
-    {
-      internal static TestDataSet GetTestDataSet()
-      {
-        TestDataSet _ret = new TestDataSet();
-        _ret.Members = new DataMember[] 
-        {
-          new DataMember() { ProcessValueName = "Value #1", SymbolicName="a_b_a" }, 
-          new DataMember() { ProcessValueName = "Value #2", SymbolicName="a_b_b" },
-          new DataMember() { ProcessValueName = "Value #3", SymbolicName="a_b_c" }, 
-          new DataMember() { ProcessValueName = "Value #4", SymbolicName="a_b_d" }
-        };
-        return _ret;
-      }
-    }
+
     #endregion
 
   }

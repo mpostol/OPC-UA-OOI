@@ -9,6 +9,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   public class DataManagementUnitTest
   {
     [TestMethod]
+    [TestCategory("DataManagement")]
     public void IntegrationServicesCreatorTestMethod()
     {
       IntegrationServices _is = new IntegrationServices();
@@ -16,6 +17,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     [TestMethod]
     [ExpectedException(typeof(NullReferenceException))]
+    [TestCategory("DataManagement")]
     public void IntegrationServicesRemoveAssociationNullTestMethod()
     {
       IntegrationServices _is = new IntegrationServices();
@@ -24,6 +26,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     [TestMethod]
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    [TestCategory("DataManagement")]
     public void IntegrationServicesRemoveAssociationNotRegisteredTestMethod()
     {
       IntegrationServices _is = new IntegrationServices();
@@ -84,4 +87,5 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       set;
     }
   }
+
 }

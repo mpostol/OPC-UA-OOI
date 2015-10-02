@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Association.cs" />
+    <Compile Include="Configuration\AssociationConfiguration.cs" />
+    <Compile Include="Configuration\ConfigurationData.cs" />
+    <Compile Include="Configuration\ConfigurationData.static.cs" />
+    <Compile Include="Configuration\DataMemberConfiguration.cs" />
+    <Compile Include="Configuration\DataSetConfiguration.cs" />
     <Compile Include="DataSet.cs" />
     <Compile Include="HandlerState.cs" />
     <Compile Include="IAssociation.cs" />

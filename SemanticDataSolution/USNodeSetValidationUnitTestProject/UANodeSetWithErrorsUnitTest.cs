@@ -198,6 +198,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502020001").Count<TraceMessage>());
     }
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void UndefinedHasSubtypeTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasSubtype.xml");
@@ -213,6 +214,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0710000001").Count<TraceMessage>());
     }
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void UndefinedHasTypeDefinitionTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasTypeDefinition.xml");
@@ -233,6 +235,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     /// Class UndefinedHasComponentTargetTestClass: Handle HasComponent ReferenceType errors. #42
     /// </summary>
     [TestMethod]
+    [TestCategory("Incorrect Model")]
     public void UndefinedHasComponentTargetTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasChildren.xml");

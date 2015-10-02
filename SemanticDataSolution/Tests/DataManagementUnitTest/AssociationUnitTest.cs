@@ -172,10 +172,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       private static DataSet GetDataSet()
       {
         DataSetConfiguration _dsc = PersistentConfiguration.GetDataSet();
-        return new DataSet()
-        {
-          Members = _dsc.Members.Select<DataMemberConfiguration, DataMember>(x => new DataMember() { ProcessValueName = x.ProcessValueName, SymbolicName = x.SymbolicName }).ToArray<DataMember>()
-        };
+        return new DataSet(new DataBrokerFactory(), _dsc.Members);
+      }
+    }
+    private class DataBrokerFactory : IDataBrokerFactory
+    {
+      public DataBroker GetDataBroker(string variableName)
+      {
+        return new DataBroker() { };
       }
     }
     private class TestISemanticData : ISemanticData

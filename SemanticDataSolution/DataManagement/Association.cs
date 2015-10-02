@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace UAOOI.SemanticData.DataManagement
 {
@@ -30,15 +31,23 @@ namespace UAOOI.SemanticData.DataManagement
       DataDescriptor = data;
       if (String.IsNullOrEmpty(aliasName))
         throw new NullReferenceException("aliasName argument must not be null");
-      if (m_AssociationsDictionary.ContainsKey(aliasName))
-        throw new ArgumentOutOfRangeException("aliasName", "aliasName must be unique");
+      if (m_ISemanticDataDictionary.ContainsKey(data))
+        throw new ArgumentOutOfRangeException("data", "data must be unique");
+      m_ISemanticDataDictionary.Add(data, this);
       if (members == null)
         throw new NullReferenceException("members argument must not be null");
-      m_AssociationsDictionary.Add(aliasName, this);
+      if (m_AliasDictionary.ContainsKey(aliasName))
+        throw new ArgumentOutOfRangeException("aliasName", "aliasName must be unique");
       m_AliasName = aliasName;
+      m_AliasDictionary.Add(m_AliasName, data);
       p_State = new AssociationStateNoConfiguration(this);
       DefaultConfiguration = GetDefaultConfiguration();
       Address = null;
+      ProcessDatSet(members);
+    }
+    private void ProcessDatSet(DataSet dataSet)
+    {
+      m_ProcessDataBindings = dataSet.Members.Select<DataMember, DataBroker>(x => dataSet.brokerFactory.GetDataBroker(x.ProcessValueName)).ToArray<DataBroker>();
     }
     #endregion
 
@@ -79,11 +88,11 @@ namespace UAOOI.SemanticData.DataManagement
     {
       get
       {
-        return m_ConfigurationDictionary[SymbolicName];
+        return m_ItemConfigurationDictionary[SymbolicName];
       }
       set
       {
-        m_ConfigurationDictionary[SymbolicName] = value;
+        m_ItemConfigurationDictionary[SymbolicName] = value;
       }
     }
     /// <summary>
@@ -124,6 +133,7 @@ namespace UAOOI.SemanticData.DataManagement
     #endregion
 
     #region private
+    //class
     private abstract class AssociationStateBaseBase : IAssociationState
     {
       public AssociationStateBaseBase(Association host)
@@ -203,11 +213,14 @@ namespace UAOOI.SemanticData.DataManagement
         throw new InvalidOperationException("Disable call is not allowed in the Error state.");
       }
     }
+    //var
+    private Dictionary<string, ISemanticDataItemConfiguration> m_ItemConfigurationDictionary = new Dictionary<string, ISemanticDataItemConfiguration>();
+    private Dictionary<string, ISemanticData> m_AliasDictionary = new Dictionary<string, ISemanticData>();
+    private DataBroker[] m_ProcessDataBindings = null;
     private IAssociationState p_State = null;
     private string m_AliasName = string.Empty;
-    private Dictionary<string, ISemanticDataItemConfiguration> m_ConfigurationDictionary = new Dictionary<string, ISemanticDataItemConfiguration>();
-    private static Dictionary<string, Association> m_AssociationsDictionary = new Dictionary<string, Association>();
-    protected abstract ISemanticDataItemConfiguration GetDefaultConfiguration();
+    private static Dictionary<ISemanticData, Association> m_ISemanticDataDictionary = new Dictionary<ISemanticData, Association>();
+    //methods
     protected void RaiseStateChangedEventHandler(AssociationStateChangedEventArgs args)
     {
       EventHandler<AssociationStateChangedEventArgs> _locEven = StateChangedEventHandler;
@@ -215,6 +228,7 @@ namespace UAOOI.SemanticData.DataManagement
         return;
       _locEven(this, args);
     }
+    protected abstract ISemanticDataItemConfiguration GetDefaultConfiguration();
     protected abstract void InitializeCommunication();
     protected abstract void OnEnabling();
     protected abstract void OnDisabling();

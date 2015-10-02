@@ -43,7 +43,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private static int p_AssociationId = 0;
     private static int p_DataSet = 0;
     private static int p_DataMembeId = 0;
-
   }
   internal static class StringExtensions
   {

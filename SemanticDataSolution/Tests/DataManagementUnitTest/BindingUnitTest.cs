@@ -61,6 +61,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         return new Binding<string>(x => Buffer = x);
       }
       public string Buffer = null;
+
+
+      public string RepositoryGroup
+      {
+        get { throw new NotImplementedException(); }
+      }
     }
     private class RecordingRepository : IBindingFactory
     {
@@ -72,6 +78,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         return new Binding<string>(x => Buffer = x);
       }
       public string Buffer = null;
+      public string RepositoryGroup
+      {
+        get { throw new NotImplementedException(); }
+      }
     }
     // Simple business object.
     private class Recording

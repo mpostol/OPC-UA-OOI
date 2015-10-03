@@ -23,6 +23,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       throw new NotImplementedException();
     }
+    public string RepositoryGroup
+    {
+      get { throw new NotImplementedException(); }
+    }
+
     private UDPSimulator m_UDPSimulator = null;
+
   }
 }

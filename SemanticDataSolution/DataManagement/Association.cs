@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UAOOI.SemanticData.DataManagement.Configuration;
 
 namespace UAOOI.SemanticData.DataManagement
 {
@@ -24,7 +25,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// or
     /// aliasName argument must not be null</exception>
     /// <exception cref="System.ArgumentOutOfRangeException">aliasName;aliasName must be unique</exception>
-    public Association(ISemanticData data, DataSet members, string aliasName)
+    public Association(ISemanticData data, DataSetConfiguration members, string aliasName, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
     {
       if (data == null)
         throw new NullReferenceException("data argument must not be null");
@@ -43,11 +44,7 @@ namespace UAOOI.SemanticData.DataManagement
       p_State = new AssociationStateNoConfiguration(this);
       DefaultConfiguration = GetDefaultConfiguration();
       Address = null;
-      ProcessDatSet(members);
-    }
-    private void ProcessDatSet(DataSet dataSet)
-    {
-      m_ProcessDataBindings = dataSet.Members.Select<DataMember, IBinding>(x => dataSet.BrokerFactory.GetBinding(x.ProcessValueName)).ToArray<IBinding>();
+      m_ProcessDataBindings = members.Members.Select<DataMemberConfiguration, IBinding>(x => x.DataMemberFactory(members, bindingFactory, encodingFactory)).ToArray<IBinding>();
     }
     #endregion
 

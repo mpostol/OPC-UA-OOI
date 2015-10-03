@@ -15,6 +15,12 @@ namespace UAOOI.SemanticData.DataManagement
     /// is updated periodically by a data produced - user of the <see cref="IBinding"/> object.</param>
     /// <returns>Returns an object implementing the <see cref="IBinding"/> interface that can be used to update selected variable on the factory side.</returns>
     IBinding GetBinding(string variableName);
+    /// <summary>
+    /// Gets the name of the repository group to profile the configuration behavior, e.g. select encoders. 
+    /// The configuration of the repositories belong to the same group are handled according to the same profile.
+    /// </summary>
+    /// <value>The name of the repository group. </value>
+    string RepositoryGroup { get; }
   
   }
 

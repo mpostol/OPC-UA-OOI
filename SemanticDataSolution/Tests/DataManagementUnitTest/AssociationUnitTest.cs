@@ -146,7 +146,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class TestAssociation : Association
     {
       public TestAssociation(ISemanticData data, string aliasName, bool success)
-        : base(data, GetDataSet(), aliasName)
+        : base(data, PersistentConfiguration.GetDataSet(), aliasName, new IBF(), new IEF())
       {
         Address = null;
         m_Success = success;
@@ -171,17 +171,17 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       protected override void OnEnabling() { }
       protected override void OnDisabling() { }
       private bool m_Success = false;
-      private static DataSet GetDataSet()
-      {
-        DataSetConfiguration _dsc = PersistentConfiguration.GetDataSet();
-        return new DataSet(new DataBrokerFactory() { }, _dsc.Members);
-      }
+
     }
     private class DataBrokerFactory : IBindingFactory
     {
       public IBinding GetBinding(string variableName)
       {
         return new Binding<int>(x => { });
+      }
+      public string RepositoryGroup
+      {
+        get { throw new NotImplementedException(); }
       }
     }
     private class TestISemanticData : ISemanticData
@@ -229,7 +229,57 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         throw new NotImplementedException();
       }
     }
+    private class IBF : IBindingFactory
+    {
 
+      public IBinding GetBinding(string variableName)
+      {
+        return new MyBinding();
+      }
+
+      public string RepositoryGroup
+      {
+        get { throw new NotImplementedException(); }
+      }
+      private class MyBinding : IBinding
+      {
+
+        public System.Windows.Data.IValueConverter Converter
+        {
+          set {  }
+        }
+
+        public Type TargetType
+        {
+          get { throw new NotImplementedException(); }
+        }
+
+        public object Parameter
+        {
+          set {  }
+        }
+
+        public System.Globalization.CultureInfo Culture
+        {
+          set {  }
+        }
+
+        public void Assign2Repository(object value)
+        {
+          throw new NotImplementedException();
+        }
+      }
+    }
+    private class IEF : IEncodingFactory
+    {
+
+      public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
+      {
+        converter.Culture = null;
+        converter.Converter = null;
+        converter.Parameter = null;
+      }
+    }
     #endregion
 
   }

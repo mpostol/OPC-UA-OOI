@@ -8,6 +8,7 @@ namespace UAOOI.SemanticData.DataManagement.Configuration
   {
     [DataMember]
     public DataMemberConfiguration[] Members { get; set; }
+    public string RepositoryGroup { get; set; }
 
   }
 }

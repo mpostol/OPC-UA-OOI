@@ -55,12 +55,12 @@
     <Compile Include="Configuration\DataMemberConfiguration.cs" />
     <Compile Include="Configuration\DataSetConfiguration.cs" />
     <Compile Include="Binding.cs" />
-    <Compile Include="DataSet.cs" />
     <Compile Include="HandlerState.cs" />
     <Compile Include="IAssociation.cs" />
     <Compile Include="IAssociationState.cs" />
     <Compile Include="IBinding.cs" />
     <Compile Include="IBindingFactory.cs" />
+    <Compile Include="IEncodingFactory.cs" />
     <Compile Include="ISemanticData.cs" />
     <Compile Include="IIntegrationServices.cs" />
     <Compile Include="IntegrationServicesBase.cs" />

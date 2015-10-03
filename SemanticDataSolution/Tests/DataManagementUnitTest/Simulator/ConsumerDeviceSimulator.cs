@@ -19,7 +19,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       byte[] _buffer = m_UDPSimulator.Receive();
       predicate(_buffer);
     }
-    public IBinding GetDataBroker(string variableName)
+    public IBinding GetBinding(string variableName)
     {
       throw new NotImplementedException();
     }

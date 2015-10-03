@@ -179,7 +179,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class DataBrokerFactory : IBindingFactory
     {
-      public IBinding GetDataBroker(string variableName)
+      public IBinding GetBinding(string variableName)
       {
         return new Binding<int>(x => { });
       }

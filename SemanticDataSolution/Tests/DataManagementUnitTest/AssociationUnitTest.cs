@@ -175,13 +175,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class DataBrokerFactory : IBindingFactory
     {
-      public IBinding GetBinding(string variableName)
+      public IBinding GetBinding(string repositoryGroup, string variableName)
       {
         return new Binding<int>(x => { });
-      }
-      public string RepositoryGroup
-      {
-        get { throw new NotImplementedException(); }
       }
     }
     private class TestISemanticData : ISemanticData
@@ -232,14 +228,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class IBF : IBindingFactory
     {
 
-      public IBinding GetBinding(string variableName)
+      public IBinding GetBinding(string repositoryGroup, string variableName)
       {
         return new MyBinding();
-      }
-
-      public string RepositoryGroup
-      {
-        get { throw new NotImplementedException(); }
       }
       private class MyBinding : IBinding
       {
@@ -269,6 +260,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           throw new NotImplementedException();
         }
       }
+
     }
     private class IEF : IEncodingFactory
     {

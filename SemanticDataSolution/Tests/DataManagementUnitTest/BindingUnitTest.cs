@@ -22,22 +22,22 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_Binding")]
     public void DataRepositoryTestMethod()
     {
-      DataRepository _repo = new DataRepository();
-      IBinding _nb = _repo.GetBinding(DataRepository.name);
+      DataRepository _rpo = new DataRepository();
+      IBinding _nb = _rpo.GetBinding(String.Empty, DataRepository.name);
       Assert.IsNotNull(_nb);
       Assert.IsNotNull(_nb.TargetType);
       _nb.Converter = null;
       Assert.AreSame(typeof(string), _nb.TargetType);
       string _testValue = "123wjkqjwkqjwjqjwqwjwqkwqjw";
       _nb.Assign2Repository(_testValue);
-      Assert.AreEqual<string>(_testValue, _repo.Buffer);
+      Assert.AreEqual<string>(_testValue, _rpo.Buffer);
     }
     [TestMethod]
     [TestCategory("DataManagement_Binding")]
     public void RecordingRepositoryTestMethod()
     {
       RecordingRepository _rpo = new RecordingRepository();
-      IBinding _nb = _rpo.GetBinding(DataRepository.name);
+      IBinding _nb = _rpo.GetBinding(String.Empty, DataRepository.name);
       Assert.IsNotNull(_nb);
       Assert.IsNotNull(_nb.TargetType);
       _nb.Converter = new DateFormatter();
@@ -54,33 +54,23 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class DataRepository : IBindingFactory
     {
       public const string name = "variableName";
-      public IBinding GetBinding(string variableName)
+      public string Buffer = null;
+      public IBinding GetBinding(string repositoryGroup, string variableName)
       {
         if (variableName != name)
           throw new ArgumentOutOfRangeException();
         return new Binding<string>(x => Buffer = x);
-      }
-      public string Buffer = null;
-
-
-      public string RepositoryGroup
-      {
-        get { throw new NotImplementedException(); }
       }
     }
     private class RecordingRepository : IBindingFactory
     {
       public const string name = "variableName";
-      public IBinding GetBinding(string variableName)
+      public string Buffer = null;
+      public IBinding GetBinding(string repositoryGroup, string variableName)
       {
         if (variableName != name)
           throw new ArgumentOutOfRangeException();
         return new Binding<string>(x => Buffer = x);
-      }
-      public string Buffer = null;
-      public string RepositoryGroup
-      {
-        get { throw new NotImplementedException(); }
       }
     }
     // Simple business object.

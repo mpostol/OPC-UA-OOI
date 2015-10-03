@@ -8,7 +8,7 @@ namespace UAOOI.SemanticData.DataManagement.Configuration
   {
     internal IBinding DataMemberFactory(DataSetConfiguration parent, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
     {
-      IBinding _binding = bindingFactory.GetBinding(this.ProcessValueName);
+      IBinding _binding = bindingFactory.GetBinding(parent.RepositoryGroup, this.ProcessValueName);
       encodingFactory.UpdateValueConverter(_binding, parent.RepositoryGroup, this.SourceEncoding);
       return _binding;
     }

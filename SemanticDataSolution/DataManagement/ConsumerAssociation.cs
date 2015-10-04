@@ -7,7 +7,7 @@ namespace UAOOI.SemanticData.DataManagement
   public class ConsumerAssociation : Association
   {
     public ConsumerAssociation
-      (ISemanticData data, DataSetConfiguration members, string aliasName, IBindingFactory bindingFactory, IEncodingFactory encodingFactory, ISemanticDataItemConfiguration itemConfiguration) :
+      (ISemanticData data, string aliasName, DataSetConfiguration members, IBindingFactory bindingFactory, IEncodingFactory encodingFactory, ISemanticDataItemConfiguration itemConfiguration) :
       base(data, aliasName)
     {
       if (itemConfiguration == null)
@@ -18,13 +18,13 @@ namespace UAOOI.SemanticData.DataManagement
       m_ProcessDataBindings = members.Members.Select<DataMemberConfiguration, IBinding>(x => x.GetBinding4DataMember(members, bindingFactory, encodingFactory)).ToArray<IBinding>();
     }
     internal IProducerConfiguration Configuration { get; private set; }
-    internal void AddMessageReader(IMessageReader messageWriter, Func<IMessageHandler> messageHandler)
+    internal void AddMessageReader(IMessageReader messageReader)
     {
-      throw new NotImplementedException();
+      messageReader.messageHandlerStatusChanged += MessageHandler;
     }
-    internal void RemoveMessageReader(IMessageHandler messageHandler)
+    internal void RemoveMessageReader(IMessageReader messageReader)
     {
-      throw new NotImplementedException();
+      messageReader.messageHandlerStatusChanged -= MessageHandler;
     }
     public override IEndPointConfiguration Address
     {
@@ -40,6 +40,16 @@ namespace UAOOI.SemanticData.DataManagement
 
     //private
     private IBinding[] m_ProcessDataBindings = null;
+    private void MessageHandler(object sender, MessageEventArg messageArg)
+    {
+      if (!this.IAmResponsible(messageArg.MessageContent))
+        return;
+      messageArg.MessageContent.UpdateMyValues(x => m_ProcessDataBindings[x]);
+    }
+    private bool IAmResponsible(Message p)
+    {
+      throw new NotImplementedException();
+    }
     private ISemanticDataItemConfiguration m_SemanticDataItemConfiguration;
 
     protected override ISemanticDataItemConfiguration GetDefaultConfiguration()
@@ -62,4 +72,6 @@ namespace UAOOI.SemanticData.DataManagement
       throw new NotImplementedException();
     }
   }
+
+
 }

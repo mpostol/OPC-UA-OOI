@@ -65,6 +65,8 @@
     <Compile Include="ISemanticData.cs" />
     <Compile Include="IIntegrationServices.cs" />
     <Compile Include="IntegrationServicesBase.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="MessageEventArg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

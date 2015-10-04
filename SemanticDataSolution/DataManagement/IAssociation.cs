@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 
 namespace UAOOI.SemanticData.DataManagement
@@ -26,7 +27,7 @@ namespace UAOOI.SemanticData.DataManagement
     ISemanticDataItemConfiguration DefaultConfiguration { get; }
     ISemanticDataItemConfiguration this[string SymbolicName] { get; set; }
   }
-  public interface IProducer : IAssociation
+  internal interface IProducer : IAssociation
   {
     IProducerConfiguration Configuration { get; }
     void AddMessageWriter(IMessageWriter messageWriter, Func<IMessageHandler> messageHandler);
@@ -65,17 +66,17 @@ namespace UAOOI.SemanticData.DataManagement
   {
   }
 
-  public interface IMessageWriter : IMessageHandler
+  internal interface IMessageWriter : IMessageHandler
   {
 
   }
-  public interface IMessageReader : IMessageHandler
+  internal interface IMessageReader : IMessageHandler
   {
 
   }
-  public interface IMessageHandler
+  internal interface IMessageHandler
   {
-    event EventHandler<MessageHandlerEventArgs> messageHandlerStatusChanged;
+    event EventHandler<MessageEventArg> messageHandlerStatusChanged;
     /// <summary>
     /// The property provides the current operational state of the <see cref="IMessageHandler"/> Object.
     /// </summary>
@@ -91,9 +92,6 @@ namespace UAOOI.SemanticData.DataManagement
     /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled"/> or <see cref="HandlerState.NoConfiguration"/>.
     /// </summary>
     void Disable();
-  }
-  public class MessageHandlerEventArgs : EventArgs
-  {
   }
   public class AssociationStateChangedEventArgs : EventArgs
   {

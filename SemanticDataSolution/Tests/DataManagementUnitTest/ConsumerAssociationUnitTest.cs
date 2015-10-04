@@ -11,7 +11,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [ExpectedException(typeof(NotImplementedException))]
     public void ConsumerAssociationCtorTestMethod()
     {
-      ConsumerAssociation _ca = new ConsumerAssociation(new TestISemanticData(), PersistentConfiguration.GetDataSet(), "ConsumerAssociationCtorTestMethod", new IBF(), new IEF(), new IC());
+      ConsumerAssociation _ca = new ConsumerAssociation(new TestISemanticData(), "ConsumerAssociationCtorTestMethod", PersistentConfiguration.GetDataSet(), new IBF(), new IEF(), new IC());
       Assert.IsNotNull(_ca);
     }
     private class TestISemanticData : ISemanticData

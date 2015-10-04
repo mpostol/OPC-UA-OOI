@@ -264,7 +264,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class IEF : IEncodingFactory
     {
-
       public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
       {
         converter.Culture = null;

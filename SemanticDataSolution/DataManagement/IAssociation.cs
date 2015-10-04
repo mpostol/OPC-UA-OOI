@@ -32,12 +32,7 @@ namespace UAOOI.SemanticData.DataManagement
     void AddMessageWriter(IMessageWriter messageWriter, Func<IMessageHandler> messageHandler);
     void RemoveMessageWriter(IMessageHandler messageHandler);
   }
-  public interface IConsumer : IAssociation
-  {
-    IProducerConfiguration Configuration { get; }
-    void AddMessageReader(IMessageReader messageWriter, Func<IMessageHandler> messageHandler);
-    void RemoveMessageReader(IMessageHandler messageHandler);
-  }
+
   public interface ISemanticDataItemConfiguration
   {
     bool State { get; }
@@ -61,6 +56,7 @@ namespace UAOOI.SemanticData.DataManagement
   {
 
   }
+
   /// <summary>
   /// Interface IEndPointConfiguration - Represents the current network attachment parameters.
   /// Depending on the role of the <see cref="IAssociation"/> it describes: remote or local end point.

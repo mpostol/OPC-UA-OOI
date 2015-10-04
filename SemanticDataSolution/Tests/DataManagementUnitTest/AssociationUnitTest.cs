@@ -146,7 +146,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class TestAssociation : Association
     {
       public TestAssociation(ISemanticData data, string aliasName, bool success)
-        : base(data, PersistentConfiguration.GetDataSet(), aliasName, new IBF(), new IEF())
+        : base(data, aliasName)
       {
         Address = null;
         m_Success = success;
@@ -223,52 +223,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public void Disable()
       {
         throw new NotImplementedException();
-      }
-    }
-    private class IBF : IBindingFactory
-    {
-
-      public IBinding GetBinding(string repositoryGroup, string variableName)
-      {
-        return new MyBinding();
-      }
-      private class MyBinding : IBinding
-      {
-
-        public System.Windows.Data.IValueConverter Converter
-        {
-          set {  }
-        }
-
-        public Type TargetType
-        {
-          get { throw new NotImplementedException(); }
-        }
-
-        public object Parameter
-        {
-          set {  }
-        }
-
-        public System.Globalization.CultureInfo Culture
-        {
-          set {  }
-        }
-
-        public void Assign2Repository(object value)
-        {
-          throw new NotImplementedException();
-        }
-      }
-
-    }
-    private class IEF : IEncodingFactory
-    {
-      public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
-      {
-        converter.Culture = null;
-        converter.Converter = null;
-        converter.Parameter = null;
       }
     }
     #endregion

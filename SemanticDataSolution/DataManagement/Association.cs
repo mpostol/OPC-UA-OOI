@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// or
     /// aliasName argument must not be null</exception>
     /// <exception cref="System.ArgumentOutOfRangeException">aliasName;aliasName must be unique</exception>
-    public Association(ISemanticData data, DataSetConfiguration members, string aliasName, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
+    public Association(ISemanticData data, string aliasName)
     {
       if (data == null)
         throw new NullReferenceException("data argument must not be null");
@@ -34,8 +34,6 @@ namespace UAOOI.SemanticData.DataManagement
       if (m_ISemanticDataDictionary.ContainsKey(data))
         throw new ArgumentOutOfRangeException("data", "data must be unique");
       m_ISemanticDataDictionary.Add(data, this);
-      if (members == null)
-        throw new NullReferenceException("members argument must not be null");
       if (m_AliasDictionary.ContainsKey(aliasName))
         throw new ArgumentOutOfRangeException("aliasName", "aliasName must be unique");
       m_AliasName = aliasName;
@@ -43,7 +41,6 @@ namespace UAOOI.SemanticData.DataManagement
       p_State = new AssociationStateNoConfiguration(this);
       DefaultConfiguration = GetDefaultConfiguration();
       Address = null;
-      m_ProcessDataBindings = members.Members.Select<DataMemberConfiguration, IBinding>(x => x.GetBinding4DataMember(members, bindingFactory, encodingFactory)).ToArray<IBinding>();
     }
     #endregion
 
@@ -212,7 +209,6 @@ namespace UAOOI.SemanticData.DataManagement
     //var
     private Dictionary<string, ISemanticDataItemConfiguration> m_ItemConfigurationDictionary = new Dictionary<string, ISemanticDataItemConfiguration>();
     private Dictionary<string, ISemanticData> m_AliasDictionary = new Dictionary<string, ISemanticData>();
-    private IBinding[] m_ProcessDataBindings = null;
     private IAssociationState p_State = null;
     private string m_AliasName = string.Empty;
     private static Dictionary<ISemanticData, Association> m_ISemanticDataDictionary = new Dictionary<ISemanticData, Association>();

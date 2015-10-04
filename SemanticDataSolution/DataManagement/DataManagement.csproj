@@ -55,6 +55,7 @@
     <Compile Include="Configuration\DataMemberConfiguration.cs" />
     <Compile Include="Configuration\DataSetConfiguration.cs" />
     <Compile Include="Binding.cs" />
+    <Compile Include="ConsumerAssociation.cs" />
     <Compile Include="HandlerState.cs" />
     <Compile Include="IAssociation.cs" />
     <Compile Include="IAssociationState.cs" />

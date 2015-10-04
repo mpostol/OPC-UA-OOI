@@ -26,6 +26,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       _ief.UpdateValueConverter(_ibf, String.Empty, String.Empty);
       _ibf.Assign2Repository(null);
     }
+    //private
     private class IEF : IEncodingFactory
     {
       public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)

@@ -43,7 +43,7 @@ namespace UAOOI.SemanticData.DataManagement
       p_State = new AssociationStateNoConfiguration(this);
       DefaultConfiguration = GetDefaultConfiguration();
       Address = null;
-      m_ProcessDataBindings = members.Members.Select<DataMemberConfiguration, IBinding>(x => x.DataMemberFactory(members, bindingFactory, encodingFactory)).ToArray<IBinding>();
+      m_ProcessDataBindings = members.Members.Select<DataMemberConfiguration, IBinding>(x => x.GetBinding4DataMember(members, bindingFactory, encodingFactory)).ToArray<IBinding>();
     }
     #endregion
 

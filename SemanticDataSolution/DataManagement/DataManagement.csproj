@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Association.cs" />
+    <Compile Include="AssociationStateChangedEventArgs.cs" />
     <Compile Include="Configuration\AssociationConfiguration.cs" />
     <Compile Include="Configuration\ConfigurationData.cs" />
     <Compile Include="Configuration\ConfigurationData.static.cs" />

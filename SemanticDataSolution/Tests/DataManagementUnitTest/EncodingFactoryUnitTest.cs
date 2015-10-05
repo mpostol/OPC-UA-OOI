@@ -78,6 +78,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.IsNotNull(Parameter);
         Assert.IsNotNull(Culture);
       }
+      public void OnEnabling()
+      {
+        throw new NotImplementedException();
+      }
+
+      public void OnDisabling()
+      {
+        throw new NotImplementedException();
+      }
     }
   }
 }

@@ -98,25 +98,24 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       TestAssociation _nt = new TestAssociation(_testISemanticData, "AssociationInitializeMethod");
       Assert.IsNotNull(_nt);
       int _eventsCount = 0;
-      IAssociationState _lastState = null;
+      HandlerState _lastState = default(HandlerState);
       _nt.StateChangedEventHandler += (x, y) => { _eventsCount++; _lastState = y.State; };
       Assert.AreEqual<HandlerState>(HandlerState.NoConfiguration, _nt.State.State);
       Assert.AreEqual<int>(0, _eventsCount);
-      Assert.IsNull(_lastState);
       _nt.Initialize();
       Assert.AreEqual<int>(1, _eventsCount);
       Assert.IsNotNull(_lastState);
-      Assert.AreEqual<HandlerState>(HandlerState.Disabled, _lastState.State);
+      Assert.AreEqual<HandlerState>(HandlerState.Disabled, _lastState);
       Assert.AreEqual<HandlerState>(HandlerState.Disabled, _nt.State.State);
       _nt.State.Enable();
       Assert.AreEqual<int>(2, _eventsCount);
       Assert.IsNotNull(_lastState);
-      Assert.AreEqual<HandlerState>(HandlerState.Operational, _lastState.State);
+      Assert.AreEqual<HandlerState>(HandlerState.Operational, _lastState);
       Assert.AreEqual<HandlerState>(HandlerState.Operational, _nt.State.State);
       _nt.State.Disable();
       Assert.AreEqual<int>(3, _eventsCount);
       Assert.IsNotNull(_lastState);
-      Assert.AreEqual<HandlerState>(HandlerState.Disabled, _lastState.State);
+      Assert.AreEqual<HandlerState>(HandlerState.Disabled, _lastState);
       Assert.AreEqual<HandlerState>(HandlerState.Disabled, _nt.State.State);
     }
     [TestMethod]
@@ -129,13 +128,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       TestAssociation _nt = new TestAssociation(_testISemanticData, "AssociationInitializeMethod2", false);
       Assert.IsNotNull(_nt);
       int _eventsCount = 0;
-      IAssociationState _lastState = null;
+      HandlerState _lastState = default(HandlerState);
       _nt.StateChangedEventHandler += (x, y) => { _eventsCount++; _lastState = y.State; };
       Assert.AreEqual<HandlerState>(HandlerState.NoConfiguration, _nt.State.State);
       _nt.Initialize();
       Assert.AreEqual<int>(1, _eventsCount);
       Assert.IsNotNull(_lastState);
-      Assert.AreEqual<HandlerState>(HandlerState.Error, _lastState.State);
+      Assert.AreEqual<HandlerState>(HandlerState.Error, _lastState);
       Assert.AreEqual<HandlerState>(HandlerState.Error, _nt.State.State);
       _nt.State.Enable();
     }

@@ -20,7 +20,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// </param>
     public Binding(Action<type> assign)
     {
-      TargetType = typeof(type);
+      m_TargetType = typeof(type);
       m_Assign = assign;
     }
     #region IBinding
@@ -28,12 +28,12 @@ namespace UAOOI.SemanticData.DataManagement
     /// Gets the type of the repository a variable that is to be updated using <see cref="IBinding.Assign2Repository" />.
     /// </summary>
     /// <value>The type of the repository target variable of the binding.</value>
-    public Type TargetType { get; private set; }
+    Type IBinding.TargetType { get { return m_TargetType; } }
     /// <summary>
     /// Sets the converter, which is used to provide a way to apply custom logic to a binding.
     /// </summary>
     /// <value>The converter as an instance of the <see cref="IValueConverter" />.</value>
-    public IValueConverter Converter { private get; set; }
+    IValueConverter IBinding.Converter { set { m_Converter = value; } }
     /// <summary>
     /// Sets an optional parameter to be used in the converter logic.
     /// </summary>
@@ -58,17 +58,33 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="value">The value.</param>
     public virtual void Assign2Repository(object value)
     {
-      if (Converter == null)
+      if (m_Converter == null)
         m_Assign((type)value);
       else
-        m_Assign((type)Converter.Convert(value, TargetType, Parameter, Culture));
+        m_Assign((type)m_Converter.Convert(value, m_TargetType, Parameter, Culture));
     }
+    #endregion
+
+    #region public API
+    public HandlerState HandlerState { get { return m_HandlerState; } }
+    public event EventHandler<AssociationStateChangedEventArgs> StateChangedEventHandler;
     #endregion
 
     #region private
     private Action<type> m_Assign;
+    private Type m_TargetType;
+    private IValueConverter m_Converter;
+    private HandlerState m_HandlerState = HandlerState.Operational;
     #endregion
+    void IBinding.OnEnabling()
+    {
+      throw new NotImplementedException();
+    }
 
+    void IBinding.OnDisabling()
+    {
+      throw new NotImplementedException();
+    }
   }
 
 }

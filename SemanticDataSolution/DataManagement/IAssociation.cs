@@ -87,13 +87,5 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     void Disable();
   }
-  public class AssociationStateChangedEventArgs : EventArgs
-  {
-    public AssociationStateChangedEventArgs(IAssociationState state)
-    {
-      State = state;
-    }
-    public IAssociationState State {get; private set;}
-  }
 
 }

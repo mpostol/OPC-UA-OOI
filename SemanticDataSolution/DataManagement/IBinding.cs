@@ -38,7 +38,14 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     /// <param name="value">The value.</param>
     void Assign2Repository(object value);
-
+    /// <summary>
+    /// Marks the process value enabled - signal that the update of the value is expected.
+    /// </summary>
+    void OnEnabling();
+    /// <summary>
+    /// Marks the process value disabled - signal that the value will not be updated.
+    /// </summary>
+    void OnDisabling();
   }
 
 }

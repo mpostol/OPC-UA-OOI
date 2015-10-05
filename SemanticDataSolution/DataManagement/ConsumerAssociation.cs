@@ -5,7 +5,7 @@ using UAOOI.SemanticData.DataManagement.Configuration;
 
 namespace UAOOI.SemanticData.DataManagement
 {
-  public class ConsumerAssociation : Association
+  internal class ConsumerAssociation : Association
   {
 
     /// <summary>
@@ -72,12 +72,13 @@ namespace UAOOI.SemanticData.DataManagement
 
     protected override void OnEnabling()
     {
-      throw new NotImplementedException();
+      foreach (IBinding _va in m_ProcessDataBindings)
+        _va.OnEnabling();
     }
-
     protected override void OnDisabling()
     {
-      throw new NotImplementedException();
+      foreach (IBinding _va in m_ProcessDataBindings)
+        _va.OnDisabling();
     }
   }
 

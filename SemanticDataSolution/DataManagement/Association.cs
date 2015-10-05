@@ -9,8 +9,9 @@ namespace UAOOI.SemanticData.DataManagement
 
   /// <summary>
   /// Class Association - provides basic implementation od the <see cref="IAssociation"/>
+  /// It represents configuration and bindings to the external resources.
   /// </summary>
-  public abstract class Association : IComparable
+  internal abstract class Association : IComparable
   {
 
     #region constructor
@@ -43,7 +44,7 @@ namespace UAOOI.SemanticData.DataManagement
     }
     #endregion
 
-    #region IAssociation
+    #region API
     /// <summary>
     /// Occurs when state of this instance changed.
     /// </summary>
@@ -67,7 +68,7 @@ namespace UAOOI.SemanticData.DataManagement
       private set
       {
         p_State = value;
-        RaiseStateChangedEventHandler(new AssociationStateChangedEventArgs(value));
+        RaiseStateChangedEventHandler(new AssociationStateChangedEventArgs(value.State));
       }
     }
     public ISemanticDataItemConfiguration DefaultConfiguration
@@ -86,6 +87,9 @@ namespace UAOOI.SemanticData.DataManagement
         m_ItemConfigurationDictionary[SymbolicName] = value;
       }
     }
+    #endregion
+
+    #region IComparable
     /// <summary>
     /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
     /// </summary>

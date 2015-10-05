@@ -77,6 +77,17 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         {
           throw new NotImplementedException();
         }
+
+
+        public void OnEnabling()
+        {
+          throw new NotImplementedException();
+        }
+
+        public void OnDisabling()
+        {
+          throw new NotImplementedException();
+        }
       }
 
     }

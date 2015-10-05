@@ -5,7 +5,14 @@ OPC UA Data Processing Outside the Server](https://github.com/mpostol/OPC-UA-OOI
 
 The code is tested using the Unit Test located in the project: https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/Tests/DataManagementUnitTest
 
+
 The project is in development stage -  major changes are expected.
+
+#Architecture#
+
+The library is designed to be a foundation for developing application programs that are parties of message centric communication pattern. The diagram presents relationship between the `DataMangement` library and other communication parties where the library is expanded to provide custom functionality.
+
+![Architecture] (https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/DataManagementGeneralization.png)
 
 #Asumptions#
 
@@ -14,6 +21,7 @@ The project is in development stage -  major changes are expected.
 
 # Remarks #
 ## Bindings and encodings implementation ##
+
 Binding between the local repository (e.g. HMI Screen, Server Address Space) and the message content items is provided by the `IBinding` interface and its basic implementation `Binding` class. This class is responsible to decode the data from the format used to construct the message to the local type. See definition for details:
 [IBinding](https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/DataManagement/IBinding.cs).
 It is expected that the value conversion (decoding) is provided by an instance of the IValueConverter class. If it is not applicable the [Adapter patern](http://www.dofactory.com/net/adapter-design-pattern) must be used.

@@ -40,7 +40,6 @@ namespace UAOOI.SemanticData.DataManagement
       m_AliasName = aliasName;
       m_AliasDictionary.Add(m_AliasName, data);
       p_State = new AssociationStateNoConfiguration(this);
-      DefaultConfiguration = GetDefaultConfiguration();
     }
     #endregion
 
@@ -69,22 +68,6 @@ namespace UAOOI.SemanticData.DataManagement
       {
         p_State = value;
         RaiseStateChangedEventHandler(new AssociationStateChangedEventArgs(value.State));
-      }
-    }
-    public ISemanticDataItemConfiguration DefaultConfiguration
-    {
-      get;
-      private set;
-    }
-    public ISemanticDataItemConfiguration this[string SymbolicName]
-    {
-      get
-      {
-        return m_ItemConfigurationDictionary[SymbolicName];
-      }
-      set
-      {
-        m_ItemConfigurationDictionary[SymbolicName] = value;
       }
     }
     #endregion
@@ -209,7 +192,6 @@ namespace UAOOI.SemanticData.DataManagement
       }
     }
     //var
-    private Dictionary<string, ISemanticDataItemConfiguration> m_ItemConfigurationDictionary = new Dictionary<string, ISemanticDataItemConfiguration>();
     private Dictionary<string, ISemanticData> m_AliasDictionary = new Dictionary<string, ISemanticData>();
     private IAssociationState p_State = null;
     private string m_AliasName = string.Empty;
@@ -222,7 +204,6 @@ namespace UAOOI.SemanticData.DataManagement
         return;
       _locEven(this, args);
     }
-    protected abstract ISemanticDataItemConfiguration GetDefaultConfiguration();
     protected abstract void InitializeCommunication();
     protected abstract void OnEnabling();
     protected abstract void OnDisabling();

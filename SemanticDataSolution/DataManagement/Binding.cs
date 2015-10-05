@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Globalization;
 using System.Windows.Data;
 
 namespace UAOOI.SemanticData.DataManagement
@@ -38,30 +39,42 @@ namespace UAOOI.SemanticData.DataManagement
     /// Sets an optional parameter to be used in the converter logic.
     /// </summary>
     /// <value>The parameter to be used by the <see cref="IBinding.Converter" />.</value>
-    public object Parameter
+    object IBinding.Parameter
     {
-      set;
-      private get;
+      set { m_Parameter = value; }
     }
     /// <summary>
     /// Sets the culture of the conversion.
     /// </summary>
     /// <value>The culture as an instance of the <see cref="CultureInfo" /> to be used by the <see cref="IBinding.Converter" />.</value>
-    public System.Globalization.CultureInfo Culture
+    CultureInfo IBinding.Culture
     {
-      set;
-      private get;
+      set { m_Culture = value; }
+    }
+    /// <summary>
+    /// Marks the process value enabled - signal that the update of the value is expected.
+    /// </summary>
+    void IBinding.OnEnabling()
+    {
+      RaiseHandlerState(HandlerState.Operational);
+    }
+    /// <summary>
+    /// Marks the process value disabled - signal that the value will not be updated.
+    /// </summary>
+    void IBinding.OnDisabling()
+    {
+      RaiseHandlerState(HandlerState.Disabled);
     }
     /// <summary>
     /// Assigns the <paramref name="value" /> to the associated variable hosted by the target repository.
     /// </summary>
-    /// <param name="value">The value.</param>
-    public virtual void Assign2Repository(object value)
+    /// <param name="value">The value to be assigned to the precess variable.</param>
+    void IBinding.Assign2Repository(object value)
     {
       if (m_Converter == null)
         m_Assign((type)value);
       else
-        m_Assign((type)m_Converter.Convert(value, m_TargetType, Parameter, Culture));
+        m_Assign((type)m_Converter.Convert(value, m_TargetType, m_Parameter, m_Culture));
     }
     #endregion
 
@@ -74,17 +87,16 @@ namespace UAOOI.SemanticData.DataManagement
     private Action<type> m_Assign;
     private Type m_TargetType;
     private IValueConverter m_Converter;
+    private CultureInfo m_Culture;
     private HandlerState m_HandlerState = HandlerState.Operational;
+    private object m_Parameter;
+    private void RaiseHandlerState(HandlerState state)
+    {
+      EventHandler<AssociationStateChangedEventArgs> _hc = StateChangedEventHandler;
+      if (_hc != null)
+        _hc(this, new AssociationStateChangedEventArgs(state));
+    }
     #endregion
-    void IBinding.OnEnabling()
-    {
-      throw new NotImplementedException();
-    }
-
-    void IBinding.OnDisabling()
-    {
-      throw new NotImplementedException();
-    }
   }
 
 }

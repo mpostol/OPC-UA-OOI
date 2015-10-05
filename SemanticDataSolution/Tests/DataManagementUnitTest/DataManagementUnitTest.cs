@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,34 +43,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
 
     }
-    public ISemanticData DataDescriptor
-    {
-      get { throw new NotImplementedException(); }
-    }
-    public IAssociationState State
-    {
-      get { throw new NotImplementedException(); }
-    }
-    public event EventHandler<AssociationStateChangedEventArgs> StateChangedEventHandler;
-    public ISemanticDataItemConfiguration DefaultConfiguration
-    {
-      get { throw new NotImplementedException(); }
-    }
-    public ISemanticDataItemConfiguration this[string SymbolicName]
-    {
-      get
-      {
-        throw new NotImplementedException();
-      }
-      set
-      {
-        throw new NotImplementedException();
-      }
-    }
-    public int CompareTo(object obj)
-    {
-      throw new NotImplementedException();
-    }
     public IEnumerator<string> GetEnumerator()
     {
       throw new NotImplementedException();
@@ -81,10 +54,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void Enable()
     {
       throw new NotImplementedException();
-    }
-    protected override ISemanticDataItemConfiguration GetDefaultConfiguration()
-    {
-      return null;
     }
     protected override void InitializeCommunication()
     {

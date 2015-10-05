@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
@@ -10,9 +11,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_ConsumerAssociation")]
     public void ConsumerAssociationCtorTestMethod()
     {
-      ConsumerAssociation _ca = new ConsumerAssociation(new TestISemanticData(), "ConsumerAssociationCtorTestMethod", PersistentConfiguration.GetDataSet(), new IBF(), new IEF(), new IC());
+      ConsumerAssociation _ca = new ConsumerAssociation(new TestISemanticData(), "ConsumerAssociationCtorTestMethod", PersistentConfiguration.GetDataSet(), new IBF(), new IEF());
       Assert.IsNotNull(_ca);
     }
+
     private class TestISemanticData : ISemanticData
     {
       public TestISemanticData()
@@ -52,38 +54,30 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       private class MyBinding : IBinding
       {
-
         public System.Windows.Data.IValueConverter Converter
         {
           set { }
         }
-
         public Type TargetType
         {
           get { throw new NotImplementedException(); }
         }
-
         public object Parameter
         {
           set { }
         }
-
         public System.Globalization.CultureInfo Culture
         {
           set { }
         }
-
         public void Assign2Repository(object value)
         {
           throw new NotImplementedException();
         }
-
-
         public void OnEnabling()
         {
           throw new NotImplementedException();
         }
-
         public void OnDisabling()
         {
           throw new NotImplementedException();
@@ -100,23 +94,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         converter.Parameter = null;
       }
     }
-    private class IC : ISemanticDataItemConfiguration
-    {
 
-      public bool State
-      {
-        get { throw new NotImplementedException(); }
-      }
-
-      public void Enable()
-      {
-        throw new NotImplementedException();
-      }
-
-      public void Disable()
-      {
-        throw new NotImplementedException();
-      }
-    }
   }
 }

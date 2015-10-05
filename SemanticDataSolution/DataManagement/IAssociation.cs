@@ -28,25 +28,7 @@ namespace UAOOI.SemanticData.DataManagement
     //ISemanticDataItemConfiguration this[string SymbolicName] { get; set; }
   }
 
-  public interface ISemanticDataItemConfiguration
-  {
-    bool State { get; }
-    /// <summary>
-    /// Enables this instance.
-    /// </summary>
-    /// <remarks>It must be method because the operation may be executed asynchronously</remarks>
-    void Enable();
-    /// <summary>
-    /// Disables this instance.
-    /// </summary>
-    /// <remarks>It must be method because the operation may be executed asynchronously</remarks>
-    void Disable();
-  }
   public interface IConfiguration { }
-  public interface IProducerConfiguration : IConfiguration
-  {
-
-  }
   public interface IConsumerConfiguration : IConfiguration
   {
 

@@ -46,7 +46,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_nt);
       Assert.IsNotNull(_nt.DataDescriptor);
       Assert.IsNotNull(_nt.DataDescriptor.Identifier);
-      Assert.IsNotNull(_nt.DefaultConfiguration);
       Assert.IsNotNull(_nt.State);
       Assert.AreEqual<HandlerState>(HandlerState.NoConfiguration, _nt.State.State);
       Assert.AreEqual<string>(_alias, _nt.ToString());
@@ -151,10 +150,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public TestAssociation(ISemanticData data, string aliasName)
         : this(data, aliasName, true)
       { }
-      protected override ISemanticDataItemConfiguration GetDefaultConfiguration()
-      {
-        return new TestISemanticDataItemConfiguration();
-      }
       protected override void InitializeCommunication()
       {
         if (!m_Success)
@@ -201,21 +196,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         private set;
       }
       private static int _count = 0;
-    }
-    private class TestISemanticDataItemConfiguration : ISemanticDataItemConfiguration
-    {
-      public bool State
-      {
-        get { throw new NotImplementedException(); }
-      }
-      public void Enable()
-      {
-        throw new NotImplementedException();
-      }
-      public void Disable()
-      {
-        throw new NotImplementedException();
-      }
     }
     #endregion
 

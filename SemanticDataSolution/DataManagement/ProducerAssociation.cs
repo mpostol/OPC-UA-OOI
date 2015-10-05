@@ -8,18 +8,13 @@ namespace UAOOI.SemanticData.DataManagement
     public ProducerAssociation(ISemanticData data, string aliasName)
       : base(data, aliasName)
     {
-      throw new NotFiniteNumberException();
+      throw new NotImplementedException();
     }
     internal void AddMessageWriter(IMessageWriter messageWriter, Func<IMessageHandler> messageHandler)
     {
-      throw new NotFiniteNumberException();
+      throw new NotImplementedException();
     }
     void RemoveMessageWriter(IMessageHandler messageHandler)
-    {
-      throw new NotFiniteNumberException();
-    }
-
-    protected override ISemanticDataItemConfiguration GetDefaultConfiguration()
     {
       throw new NotImplementedException();
     }
@@ -38,6 +33,5 @@ namespace UAOOI.SemanticData.DataManagement
     {
       throw new NotImplementedException();
     }
-    private IProducerConfiguration Configuration { get; set; }
   }
 }

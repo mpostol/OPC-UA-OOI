@@ -1,18 +1,21 @@
 # Introduction #
 
-This project i aimed to provide a prototype library for Part 14 using the concept described in the [
+This project is aimed to provide a library for Part 14 using the concept described in the [
 OPC UA Data Processing Outside the Server](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution#opc-ua-data-processing-outside-the-server)
 
 The code is tested using the Unit Test located in the project: https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/Tests/DataManagementUnitTest
 
-
-The project is in development stage -  major changes are expected.
+The project is in development stage - major changes are expected.
 
 #Architecture#
 
 The library is designed to be a foundation for developing application programs that are parties of message centric communication pattern. The diagram presents relationship between the `DataMangement` library and other communication parties where the library is expanded to provide custom functionality.
 
 ![Architecture] (https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/DataManagementGeneralization.png)
+
+In figure below the relationship between this library and external libraries is presented. Any application engaging the DataManagemnet is composed using the dependency injection pattern.
+
+![Architecture] (https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/DataManagementExternalLibraries.png)
 
 #Asumptions#
 

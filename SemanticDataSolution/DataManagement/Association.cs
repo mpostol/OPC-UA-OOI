@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.DataManagement
   /// <summary>
   /// Class Association - provides basic implementation od the <see cref="IAssociation"/>
   /// </summary>
-  public abstract class Association : IAssociation
+  public abstract class Association : IComparable
   {
 
     #region constructor
@@ -40,7 +40,6 @@ namespace UAOOI.SemanticData.DataManagement
       m_AliasDictionary.Add(m_AliasName, data);
       p_State = new AssociationStateNoConfiguration(this);
       DefaultConfiguration = GetDefaultConfiguration();
-      Address = null;
     }
     #endregion
 
@@ -71,7 +70,6 @@ namespace UAOOI.SemanticData.DataManagement
         RaiseStateChangedEventHandler(new AssociationStateChangedEventArgs(value));
       }
     }
-    public abstract IEndPointConfiguration Address { get; set; }
     public ISemanticDataItemConfiguration DefaultConfiguration
     {
       get;

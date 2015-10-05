@@ -35,11 +35,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
   }
 
-  internal class TestAssociation : IAssociation
+  internal class TestAssociation : Association
   {
     public TestAssociation()
+      : base(null, String.Empty)
     {
-      Address = null;
     }
     public ISemanticData DataDescriptor
     {
@@ -81,11 +81,28 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       throw new NotImplementedException();
     }
-    public IEndPointConfiguration Address
+
+
+    protected override ISemanticDataItemConfiguration GetDefaultConfiguration()
     {
-      get;
-      set;
+      throw new NotImplementedException();
     }
+
+    protected override void InitializeCommunication()
+    {
+      throw new NotImplementedException();
+    }
+
+    protected override void OnEnabling()
+    {
+      throw new NotImplementedException();
+    }
+
+    protected override void OnDisabling()
+    {
+      throw new NotImplementedException();
+    }
+
   }
 
 }

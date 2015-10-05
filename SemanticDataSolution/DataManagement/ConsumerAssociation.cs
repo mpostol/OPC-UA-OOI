@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Linq;
 using UAOOI.SemanticData.DataManagement.Configuration;
 
@@ -6,10 +7,27 @@ namespace UAOOI.SemanticData.DataManagement
 {
   public class ConsumerAssociation : Association
   {
-    public ConsumerAssociation
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ConsumerAssociation"/> class.
+    /// </summary>
+    /// <param name="data">The data.</param>
+    /// <param name="aliasName">Name of the alias.</param>
+    /// <param name="members">The members.</param>
+    /// <param name="bindingFactory">The binding factory.</param>
+    /// <param name="encodingFactory">The encoding factory.</param>
+    /// <param name="itemConfiguration">The item configuration.</param>
+    /// <exception cref="System.NullReferenceException">
+    /// itemConfiguration argument must not be null
+    /// or
+    /// members argument must not be null
+    /// </exception>
+    internal ConsumerAssociation
       (ISemanticData data, string aliasName, DataSetConfiguration members, IBindingFactory bindingFactory, IEncodingFactory encodingFactory, ISemanticDataItemConfiguration itemConfiguration) :
       base(data, aliasName)
     {
+      if (itemConfiguration == null)
+        throw new NullReferenceException("itemConfiguration argument must not be null");
       if (itemConfiguration == null)
         throw new NullReferenceException("itemConfiguration argument must not be null");
       m_SemanticDataItemConfiguration = itemConfiguration;
@@ -26,17 +44,7 @@ namespace UAOOI.SemanticData.DataManagement
     {
       messageReader.messageHandlerStatusChanged -= MessageHandler;
     }
-    public override IEndPointConfiguration Address
-    {
-      get
-      {
-        throw new NotImplementedException();
-      }
-      set
-      {
-        throw new NotImplementedException();
-      }
-    }
+
 
     //private
     private IBinding[] m_ProcessDataBindings = null;

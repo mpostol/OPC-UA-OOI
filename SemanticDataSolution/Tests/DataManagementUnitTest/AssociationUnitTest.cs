@@ -148,7 +148,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public TestAssociation(ISemanticData data, string aliasName, bool success)
         : base(data, aliasName)
       {
-        Address = null;
         m_Success = success;
       }
       public TestAssociation(ISemanticData data, string aliasName)
@@ -157,11 +156,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       protected override ISemanticDataItemConfiguration GetDefaultConfiguration()
       {
         return new TestISemanticDataItemConfiguration();
-      }
-      public override IEndPointConfiguration Address
-      {
-        get;
-        set;
       }
       protected override void InitializeCommunication()
       {

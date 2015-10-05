@@ -19,7 +19,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="association">The association to be added to collection of associations managed by the interface instance.</param>
     /// <param name="name">The name of the association.</param>
     /// <exception cref="System.NotImplementedException"></exception>
-    public void AddAssociation(IAssociation association, string name)
+    internal void AddAssociation(Association association, string name)
     {
       throw new System.NotImplementedException();
     }
@@ -29,7 +29,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     /// <param name="association">The association.</param>
     /// <exception cref="System.NotImplementedException"></exception>
-    public void RemoveAssociation(IAssociation association)
+    internal void RemoveAssociation(Association association)
     {
       if (association == null)
         throw new NullReferenceException("association");
@@ -53,7 +53,7 @@ namespace UAOOI.SemanticData.DataManagement
     }
     #endregion
 
-    private List<IAssociation> m_IAssociation = new List<IAssociation>();
+    private List<Association> m_IAssociation = new List<Association>();
 
   }
 }

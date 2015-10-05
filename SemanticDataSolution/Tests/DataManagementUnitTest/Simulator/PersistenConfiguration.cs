@@ -37,7 +37,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       return new DataMemberConfiguration() { ProcessValueName = "ProcessValueName".AddId(DataMemberId), SymbolicName = "SymbolicName".AddId(DataMemberId) };
     }
-    private static int AssociationId { get { return p_AssociationId++; } }
+    internal static int AssociationId { get { return p_AssociationId++; } }
     private static int DataSetId { get { return p_DataSet++; } }
     public static int DataMemberId { get { return p_DataMemberId; } }
     private static int p_AssociationId = 0;

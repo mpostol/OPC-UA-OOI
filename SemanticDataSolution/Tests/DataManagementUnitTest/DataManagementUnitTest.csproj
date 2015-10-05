@@ -68,6 +68,7 @@
     <Compile Include="BindingUnitTest.cs" />
     <Compile Include="EncodingFactoryUnitTest.cs" />
     <Compile Include="ConsumerAssociationUnitTest.cs" />
+    <Compile Include="ProducerAssociationUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

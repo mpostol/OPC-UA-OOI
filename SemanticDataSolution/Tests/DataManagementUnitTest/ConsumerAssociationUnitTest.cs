@@ -8,7 +8,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   {
     [TestMethod]
     [TestCategory("DataManagement_ConsumerAssociation")]
-    [ExpectedException(typeof(NotImplementedException))]
     public void ConsumerAssociationCtorTestMethod()
     {
       ConsumerAssociation _ca = new ConsumerAssociation(new TestISemanticData(), "ConsumerAssociationCtorTestMethod", PersistentConfiguration.GetDataSet(), new IBF(), new IEF(), new IC());

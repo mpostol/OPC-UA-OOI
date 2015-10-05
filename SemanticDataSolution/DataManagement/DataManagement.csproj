@@ -68,6 +68,7 @@
     <Compile Include="Message.cs" />
     <Compile Include="MessageEventArg.cs" />
     <Compile Include="MessageHandler.cs" />
+    <Compile Include="ProducerAssociation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

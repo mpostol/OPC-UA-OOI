@@ -38,8 +38,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   internal class TestAssociation : Association
   {
     public TestAssociation()
-      : base(null, String.Empty)
+      : base(new SD(), "DataManagementUnitTest".AddId(PersistentConfiguration.AssociationId))
     {
+
     }
     public ISemanticData DataDescriptor
     {
@@ -81,28 +82,40 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       throw new NotImplementedException();
     }
-
-
     protected override ISemanticDataItemConfiguration GetDefaultConfiguration()
     {
-      throw new NotImplementedException();
+      return null;
     }
-
     protected override void InitializeCommunication()
     {
       throw new NotImplementedException();
     }
-
     protected override void OnEnabling()
     {
       throw new NotImplementedException();
     }
-
     protected override void OnDisabling()
     {
       throw new NotImplementedException();
     }
 
+    private class SD : ISemanticData
+    {
+      public Uri Identifier
+      {
+        get { throw new NotImplementedException(); }
+      }
+
+      public string SymbolicName
+      {
+        get { throw new NotImplementedException(); }
+      }
+
+      public IComparable NodeId
+      {
+        get { throw new NotImplementedException(); }
+      }
+    }
   }
 
 }

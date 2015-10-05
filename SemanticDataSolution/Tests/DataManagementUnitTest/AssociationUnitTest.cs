@@ -44,7 +44,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_testISemanticData);
       TestAssociation _nt = new TestAssociation(_testISemanticData, _alias);
       Assert.IsNotNull(_nt);
-      Assert.IsNull(_nt.Address);
       Assert.IsNotNull(_nt.DataDescriptor);
       Assert.IsNotNull(_nt.DataDescriptor.Identifier);
       Assert.IsNotNull(_nt.DefaultConfiguration);

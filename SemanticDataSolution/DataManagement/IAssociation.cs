@@ -27,12 +27,6 @@ namespace UAOOI.SemanticData.DataManagement
     //ISemanticDataItemConfiguration DefaultConfiguration { get; }
     //ISemanticDataItemConfiguration this[string SymbolicName] { get; set; }
   }
-  internal interface IProducer : IAssociation
-  {
-    IProducerConfiguration Configuration { get; }
-    void AddMessageWriter(IMessageWriter messageWriter, Func<IMessageHandler> messageHandler);
-    void RemoveMessageWriter(IMessageHandler messageHandler);
-  }
 
   public interface ISemanticDataItemConfiguration
   {

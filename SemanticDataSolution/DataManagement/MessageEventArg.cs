@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
+using System;
 
 namespace UAOOI.SemanticData.DataManagement
 {
-  internal class MessageEventArg : System.EventArgs
+  public class MessageEventArg : EventArgs
   {
-    internal Message MessageContent { get; set; }
+    public MessageEventArg(Message newMessage)
+    {
+      MessageContent = newMessage;
+    }
+    internal Message MessageContent { get; private set; }
   }
 }

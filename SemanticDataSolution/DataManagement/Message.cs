@@ -6,7 +6,7 @@ namespace UAOOI.SemanticData.DataManagement
   /// <summary>
   /// Class Message - place holder to implement the message send over the wire.
   /// </summary>
-  internal class Message
+  public class Message
   {
     
     public Message(object[] messageContent)

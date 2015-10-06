@@ -33,6 +33,8 @@ namespace UAOOI.SemanticData.DataManagement
     }
     internal void AddMessageHandler(string alias, IMessageHandler messageHandler)
     {
+      if (!this.ContainsKey(alias))
+        return;
       Association _ass = this[alias];
       _ass.AddMessageHandler(messageHandler);
     }
@@ -49,7 +51,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// <summary>
     /// Class SemanticData - private implementation of the <see cref="ISemanticData"/>
     /// </summary>
-    //TODO consider intenal implementation
+    //TODO consider internal implementation
     private class SemanticData : ISemanticData
     {
       public SemanticData(Uri identifier, string symbolicName, IComparable nodeId)

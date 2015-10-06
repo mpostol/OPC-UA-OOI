@@ -26,13 +26,13 @@ namespace UAOOI.SemanticData.DataManagement
     public void Initialize()
     {
       if (BindingFactory == null)
-        throw new ArgumentNullException();
+        throw new ArgumentNullException("BindingFactory");
       if (EncodingFactory == null)
-        throw new ArgumentNullException();
+        throw new ArgumentNullException("EncodingFactory");
       if (MessageHandlerFactory == null)
-        throw new ArgumentNullException();
+        throw new ArgumentNullException("MessageHandlerFactory");
       if (ConfigurationFactory == null)
-        throw new ArgumentNullException();
+        throw new ArgumentNullException("ConfigurationFactory");
       ConfigurationData _configuration = ConfigurationFactory.GetConfiguration();
       AssociationsCollection = AssociationsCollection.CreateAssociations(_configuration.Associations, BindingFactory, EncodingFactory);
       ConfigurationFactory.OnAssociationConfigurationChange += AssociationsCollection.OnConfigurationChangeHandler;
@@ -44,6 +44,10 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     public void Run()
     {
+      if (AssociationsCollection == null)
+        throw new ArgumentNullException("AssociationsCollection");
+      if (MessageHandlersCollection == null)
+        throw new ArgumentNullException("MessageHandlersCollection");
       this.AssociationsCollection.Initialize();
       this.MessageHandlersCollection.Run();
     }

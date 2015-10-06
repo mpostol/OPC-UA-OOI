@@ -43,7 +43,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private static ConfigurationData Create()
     {
-      return PersistentConfiguration.LocalConfiguration;
+      return PersistentConfiguration.GetLocalConfiguration();
     }
 
   }

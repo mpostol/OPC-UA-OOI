@@ -10,16 +10,35 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   internal static class PersistentConfiguration
   {
 
-    internal static ConfigurationData LocalConfiguration = new ConfigurationData()
+    internal static ConfigurationData GetLocalConfiguration()
     {
-      Associations = new AssociationConfiguration[] { GetAssociationConfiguration(), GetAssociationConfiguration(), GetAssociationConfiguration() }
-    };
+      return new ConfigurationData()
+        {
+          Associations = new AssociationConfiguration[] { GetAssociationConfiguration(), GetAssociationConfiguration(), GetAssociationConfiguration() },
+          MessageTransport = new MessageTransportConfiguration[] { GetMessageTransportConfiguration(), GetMessageTransportConfiguration(), GetMessageTransportConfiguration() }
+
+        };
+    }
+
+    private static MessageTransportConfiguration GetMessageTransportConfiguration()
+    {
+      return new MessageTransportConfiguration()
+      {
+        Associations = new string[] { "Associations".AddId(AssociationId) },
+        Configuration = null,
+        Name = "Name".AddId(MessageTransportId),
+        TransportRole = AssociationRole.Consumer
+      };
+    }
     internal static AssociationConfiguration GetAssociationConfiguration()
     {
-      return new AssociationConfiguration() { Alias = "Alias".AddId(AssociationId), 
-                                              DataSet = GetDataSet(), 
-                                              DataSymbolicName = "DataSymbolicName".AddId(AssociationId), 
-                                              InformationModelURI = "InformationModelURI".AddId(AssociationId) };
+      return new AssociationConfiguration()
+      {
+        Alias = "Alias".AddId(AssociationId),
+        DataSet = GetDataSet(),
+        DataSymbolicName = "DataSymbolicName".AddId(AssociationId),
+        InformationModelURI = "http://www.commsvr.com".AddId(AssociationId)
+      };
     }
     internal static DataSetConfiguration GetDataSet()
     {
@@ -33,6 +52,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       return new DataMemberConfiguration() { ProcessValueName = "ProcessValueName".AddId(DataMemberId), SymbolicName = "SymbolicName".AddId(DataMemberId) };
     }
+    internal static int MessageTransportId { get { return p_MessageTransportId++; } }
+    private static int p_MessageTransportId;
     internal static int AssociationId { get { return p_AssociationId++; } }
     private static int DataSetId { get { return p_DataSet++; } }
     public static int DataMemberId { get { return p_DataMemberId; } }

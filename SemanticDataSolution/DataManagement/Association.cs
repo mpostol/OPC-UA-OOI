@@ -17,14 +17,19 @@ namespace UAOOI.SemanticData.DataManagement
     #region constructor
     /// <summary>
     /// Initializes a new instance of the <see cref="Association" /> class.
+    /// The class captures all bindings between the message content and local resources.
     /// </summary>
     /// <param name="data">The UA Semantic Data triple representation.</param>
-    /// <param name="members">The members. </param>
-    /// <param name="aliasName">A readable alias name for this instance to be used on User Interface.</param>
+    /// <param name="aliasName">
+    /// A readable alias name for this instance to be used on User Interface. Must be unique.
+    /// Depending on the implementation this name is used to filter packages against the destination.
+    /// </param>
     /// <exception cref="System.NullReferenceException">data argument must not be null
     /// or
     /// aliasName argument must not be null</exception>
-    /// <exception cref="System.ArgumentOutOfRangeException">aliasName;aliasName must be unique</exception>
+    /// <exception cref="System.ArgumentOutOfRangeException">
+    /// aliasName; aliasName must be unique
+    /// </exception>
     public Association(ISemanticData data, string aliasName)
     {
       if (data == null)
@@ -105,6 +110,10 @@ namespace UAOOI.SemanticData.DataManagement
         State = new AssociationStateError(this);
       }
     }
+    /// <summary>
+    /// Adds the message handler. It must initialize binding between the <see cref="IMessageHandler"/> and the local data resources.
+    /// </summary>
+    /// <param name="messageHandler">The message handler.</param>
     internal protected abstract void AddMessageHandler(IMessageHandler messageHandler);
     #endregion
 

@@ -43,10 +43,10 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     /// <param name="sender">The sender.</param>
     /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-    /// <exception cref="System.NotImplementedException"> ir is intentionally not implemented - it is placeholder for further development in case there need be.</exception>
+    /// <exception cref="System.NotImplementedException"> It is intentionally not implemented - it is placeholder for further development in case there need be.</exception>
     internal static void OnConfigurationChangeHandler(object sender, EventArgs e)
     {
-      throw new NotImplementedException();
+      throw new NotImplementedException("It is intentionally not implemented ");
     }
     /// <summary>
     /// Class SemanticData - private implementation of the <see cref="ISemanticData"/>

@@ -12,17 +12,54 @@ namespace UAOOI.SemanticData.DataManagement
   {
 
     #region Injection points
+    /// <summary>
+    /// Gets or sets the binding factory.
+    /// </summary>
+    /// <value>The binding factory.</value>
     public IBindingFactory BindingFactory { get; set; }
+    /// <summary>
+    /// Gets or sets the encoding factory.
+    /// </summary>
+    /// <value>The encoding factory.</value>
     public IEncodingFactory EncodingFactory { get; set; }
+    /// <summary>
+    /// Gets or sets the message handler factory.
+    /// </summary>
+    /// <value>The message handler factory.</value>
     public IMessageHandlerFactory MessageHandlerFactory { get; set; }
+    /// <summary>
+    /// Gets or sets the configuration factory.
+    /// </summary>
+    /// <value>The configuration factory.</value>
     public IConfigurationFactory ConfigurationFactory { get; set; }
     #endregion
+
     #region Internal control entry points
+    /// <summary>
+    /// Gets the associations collection.
+    /// </summary>
+    /// <value>The associations collection.</value>
     internal AssociationsCollection AssociationsCollection { get; private set; }
+    /// <summary>
+    /// Gets the message handlers collection.
+    /// </summary>
+    /// <value>The message handlers collection.</value>
     internal MessageHandlersCollection MessageHandlersCollection { get; private set; }
     #endregion
 
     #region Master Controll functioanlity
+    /// <summary>
+    /// Initializes the data set infrastructure.
+    /// </summary>
+    /// <exception cref="System.ArgumentNullException">
+    /// BindingFactory
+    /// or
+    /// EncodingFactory
+    /// or
+    /// MessageHandlerFactory
+    /// or
+    /// ConfigurationFactory
+    /// </exception>
     public void Initialize()
     {
       if (BindingFactory == null)

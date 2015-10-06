@@ -19,22 +19,18 @@ namespace UAOOI.SemanticData.DataManagement
     {
       throw new NotImplementedException();
     }
-
     protected override void InitializeCommunication()
     {
       throw new NotImplementedException();
     }
-
     protected override void OnEnabling()
     {
       throw new NotImplementedException();
     }
-
     protected override void OnDisabling()
     {
       throw new NotImplementedException();
     }
-
     protected internal override void AddMessageHandler(IMessageHandler messageHandler)
     {
       throw new NotImplementedException();

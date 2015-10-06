@@ -31,7 +31,11 @@ namespace UAOOI.SemanticData.DataManagement
       }
       return _collection;
     }
-
+    internal void AddMessageHandler(string alias, IMessageHandler messageHandler)
+    {
+      Association _ass = this[alias];
+      _ass.AddMessageHandler(messageHandler);
+    }
     /// <summary>
     /// Class SemanticData - private implementation of the <see cref="ISemanticData"/>
     /// </summary>

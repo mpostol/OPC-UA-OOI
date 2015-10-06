@@ -26,16 +26,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       TestAssociation _nt = new TestAssociation(_testISemanticData, null);
     }
     [TestMethod]
-    [ExpectedException(typeof(ArgumentOutOfRangeException))]
-    [TestCategory("DataManagement_Association")]
-    public void AssociationCreatorTestMethod3()
-    {
-      ISemanticData _testISemanticData = new TestISemanticData();
-      Assert.IsNotNull(_testISemanticData);
-      TestAssociation _nt = new TestAssociation(_testISemanticData, "allisName");
-      _nt = new TestAssociation(_testISemanticData, "allisName");
-    }
-    [TestMethod]
     [TestCategory("DataManagement_Association")]
     public void AssociationCreatorTestMethod4()
     {
@@ -159,6 +149,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       protected override void OnDisabling() { }
       private bool m_Success = false;
 
+
+      protected internal override void AddMessageHandler(IMessageHandler messageHandler)
+      {
+        throw new NotImplementedException();
+      }
     }
     private class DataBrokerFactory : IBindingFactory
     {

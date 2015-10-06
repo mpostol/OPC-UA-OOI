@@ -85,6 +85,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         get { throw new NotImplementedException(); }
       }
     }
+
+    protected internal override void AddMessageHandler(IMessageHandler messageHandler)
+    {
+      throw new NotImplementedException();
+    }
   }
 
 }

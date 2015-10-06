@@ -34,5 +34,10 @@ namespace UAOOI.SemanticData.DataManagement
     {
       throw new NotImplementedException();
     }
+
+    protected internal override void AddMessageHandler(IMessageHandler messageHandler)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

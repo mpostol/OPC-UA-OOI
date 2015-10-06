@@ -32,9 +32,6 @@ namespace UAOOI.SemanticData.DataManagement
       DataDescriptor = data;
       if (String.IsNullOrEmpty(aliasName))
         throw new NullReferenceException("aliasName argument must not be null");
-      if (m_ISemanticDataDictionary.ContainsKey(data))
-        throw new ArgumentOutOfRangeException("data", "data must be unique");
-      m_ISemanticDataDictionary.Add(data, this);
       if (m_AliasDictionary.ContainsKey(aliasName))
         throw new ArgumentOutOfRangeException("aliasName", "aliasName must be unique");
       m_AliasName = aliasName;
@@ -108,6 +105,7 @@ namespace UAOOI.SemanticData.DataManagement
         State = new AssociationStateError(this);
       }
     }
+    internal protected abstract void AddMessageHandler(IMessageHandler messageHandler);
     #endregion
 
     #region private
@@ -195,7 +193,6 @@ namespace UAOOI.SemanticData.DataManagement
     private Dictionary<string, ISemanticData> m_AliasDictionary = new Dictionary<string, ISemanticData>();
     private IAssociationState p_State = null;
     private string m_AliasName = string.Empty;
-    private static Dictionary<ISemanticData, Association> m_ISemanticDataDictionary = new Dictionary<ISemanticData, Association>();
     //methods
     protected void RaiseStateChangedEventHandler(AssociationStateChangedEventArgs args)
     {
@@ -208,6 +205,7 @@ namespace UAOOI.SemanticData.DataManagement
     protected abstract void OnEnabling();
     protected abstract void OnDisabling();
     #endregion
+
 
   }
 

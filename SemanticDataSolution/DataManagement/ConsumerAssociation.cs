@@ -33,12 +33,20 @@ namespace UAOOI.SemanticData.DataManagement
     #endregion
 
     #region API
+    protected internal override void AddMessageHandler(IMessageHandler messageHandler)
+    {
+      AddMessageReader(messageHandler as IMessageReader);
+    }
     internal void AddMessageReader(IMessageReader messageReader)
     {
+      if (messageReader == null)
+        throw new ArgumentNullException("messageReader");
       messageReader.messageHandlerStatusChanged += MessageHandler;
     }
     internal void RemoveMessageReader(IMessageReader messageReader)
     {
+      if (messageReader == null)
+        throw new ArgumentNullException("messageReader");
       messageReader.messageHandlerStatusChanged -= MessageHandler;
     }
     #endregion

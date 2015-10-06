@@ -33,9 +33,15 @@ namespace UAOOI.SemanticData.DataManagement
       }
       return _collection;
     }
+    /// <summary>
+    /// Handles the configuration modifications.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+    /// <exception cref="System.NotImplementedException">It is intentionally not implemented</exception>
     internal void OnConfigurationChangeHandler(object sender, EventArgs e)
     {
-      throw new NotImplementedException();
+      throw new NotImplementedException("It is intentionally not implemented");
     }
     private MessageHandlersCollection()
       : base()

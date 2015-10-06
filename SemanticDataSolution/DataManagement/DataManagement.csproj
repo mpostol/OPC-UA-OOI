@@ -59,11 +59,13 @@
     <Compile Include="Binding.cs" />
     <Compile Include="Configuration\MessageTransportConfiguration.cs" />
     <Compile Include="ConsumerAssociation.cs" />
+    <Compile Include="DataManagementSetup.cs" />
     <Compile Include="HandlerState.cs" />
     <Compile Include="IAssociation.cs" />
     <Compile Include="IAssociationState.cs" />
     <Compile Include="IBinding.cs" />
     <Compile Include="IBindingFactory.cs" />
+    <Compile Include="IConfigurationFactory.cs" />
     <Compile Include="IEncodingFactory.cs" />
     <Compile Include="IMessageHandlerFactory.cs" />
     <Compile Include="ISemanticData.cs" />
@@ -78,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

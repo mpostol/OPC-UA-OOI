@@ -28,12 +28,4 @@ namespace UAOOI.SemanticData.DataManagement
     //ISemanticDataItemConfiguration this[string SymbolicName] { get; set; }
   }
 
-  public interface IConfiguration { }
-  public interface IConsumerConfiguration : IConfiguration
-  {
-
-  }
-
-
-
 }

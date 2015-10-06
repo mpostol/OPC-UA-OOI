@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.DataManagement
       _ass.AddMessageHandler(messageHandler);
     }
     /// <summary>
-    /// Handles the the configuration modifications.
+    /// Handles the configuration modifications.
     /// </summary>
     /// <param name="sender">The sender.</param>
     /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>

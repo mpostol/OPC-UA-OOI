@@ -12,7 +12,7 @@ namespace UAOOI.SemanticData.DataManagement.Configuration
     public string Alias { get; set; }
     public string InformationModelURI { get; set; }
     public string DataSymbolicName { get; set; }
-    public DataSetConfiguration[] DataSets { get; set; }
+    public DataSetConfiguration DataSet { get; set; }
 
   }
   public enum AssociationRole { Consumer, Producer }

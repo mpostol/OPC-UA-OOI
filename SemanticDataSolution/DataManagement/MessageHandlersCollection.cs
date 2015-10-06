@@ -5,11 +5,11 @@ using UAOOI.SemanticData.DataManagement.Configuration;
 
 namespace UAOOI.SemanticData.DataManagement
 {
-  internal class MessageHandlerCollection : Dictionary<string, IMessageHandler>
+  internal class MessageHandlersCollection : Dictionary<string, IMessageHandler>
   {
-    internal static MessageHandlerCollection CreateMessageHandlers(Configuration.MessageTransportConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, Action<string, IMessageHandler> addMessageHandler)
+    internal static MessageHandlersCollection CreateMessageHandlers(Configuration.MessageTransportConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, Action<string, IMessageHandler> addMessageHandler)
     {
-      MessageHandlerCollection _collection = new MessageHandlerCollection();
+      MessageHandlersCollection _collection = new MessageHandlersCollection();
       foreach (Configuration.MessageTransportConfiguration item in configuration)
       {
         if (_collection.ContainsKey(item.Name))
@@ -17,10 +17,10 @@ namespace UAOOI.SemanticData.DataManagement
         IMessageHandler _handler = null;
         switch (item.TransportRole)
         {
-          case TransportRole.Consumer:
+          case AssociationRole.Consumer:
             _handler = messageHandlerFactory.GetIMessageReader(item.Name, item.Configuration);
             break;
-          case TransportRole.Publisher:
+          case AssociationRole.Producer:
             _handler = messageHandlerFactory.GetIMessageWriter(item.Name, item.Configuration);
             break;
           default:
@@ -32,7 +32,7 @@ namespace UAOOI.SemanticData.DataManagement
       }
       return _collection;
     }
-    private MessageHandlerCollection()
+    private MessageHandlersCollection()
       : base()
     { }
   }

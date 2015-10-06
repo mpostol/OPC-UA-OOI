@@ -1,11 +1,12 @@
 ﻿
 using System;
+using UAOOI.SemanticData.DataManagement.Configuration;
 
 namespace UAOOI.SemanticData.DataManagement
 {
   internal class ProducerAssociation : Association
   {
-    public ProducerAssociation(ISemanticData data, string aliasName)
+    public ProducerAssociation(ISemanticData data, string aliasName, DataSetConfiguration members, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
       : base(data, aliasName)
     {
       throw new NotImplementedException();

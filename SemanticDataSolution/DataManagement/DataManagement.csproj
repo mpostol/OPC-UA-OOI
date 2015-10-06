@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Association.cs" />
+    <Compile Include="AssociationsCollection.cs" />
     <Compile Include="AssociationStateChangedEventArgs.cs" />
     <Compile Include="Configuration\AssociationConfiguration.cs" />
     <Compile Include="Configuration\ConfigurationData.cs" />
@@ -71,7 +72,7 @@
     <Compile Include="Message.cs" />
     <Compile Include="MessageEventArg.cs" />
     <Compile Include="IMessageHandler.cs" />
-    <Compile Include="MessageHandlerCollection.cs" />
+    <Compile Include="MessageHandlersCollection.cs" />
     <Compile Include="ProducerAssociation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

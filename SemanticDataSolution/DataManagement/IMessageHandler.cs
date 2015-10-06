@@ -1,14 +1,15 @@
-﻿using System;
+﻿
+using System;
 
 namespace UAOOI.SemanticData.DataManagement
 {
-  /// <summary>
-  /// Interface IEndPointConfiguration - Represents the current network attachment parameters.
-  /// Depending on the role of the <see cref="IAssociation"/> it describes: remote or local end point.
-  /// </summary>
-  public interface IEndPointConfiguration
-  {
-  }
+  ///// <summary>
+  ///// Interface IEndPointConfiguration - Represents the current network attachment parameters.
+  ///// Depending on the role of the <see cref="IAssociation"/> it describes: remote or local end point.
+  ///// </summary>
+  //public interface IEndPointConfiguration
+  //{
+  //}
   public interface IMessageWriter : IMessageHandler
   {
   }

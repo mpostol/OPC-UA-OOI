@@ -12,19 +12,9 @@ namespace UAOOI.SemanticData.DataManagement.Configuration
     public string Name { get; set; }
     public string[] Associations { get; set; }
     public XmlElement Configuration { get; set; }
-    public TransportRole TransportRole { get; set; }
+    public AssociationRole TransportRole { get; set; }
 
   }
 
-  public enum TransportRole
-  {
-    /// <summary>
-    /// The message transport role is consumer 
-    /// </summary>
-    Consumer,
-    /// <summary>
-    /// The message transport role is publisher
-    /// </summary>
-    Publisher
-  }
+
 }

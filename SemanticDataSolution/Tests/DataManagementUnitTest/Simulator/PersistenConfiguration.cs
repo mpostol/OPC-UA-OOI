@@ -17,13 +17,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     internal static AssociationConfiguration GetAssociationConfiguration()
     {
       return new AssociationConfiguration() { Alias = "Alias".AddId(AssociationId), 
-                                              DataSets = GetDataSets(), 
+                                              DataSet = GetDataSet(), 
                                               DataSymbolicName = "DataSymbolicName".AddId(AssociationId), 
                                               InformationModelURI = "InformationModelURI".AddId(AssociationId) };
-    }
-    internal static DataSetConfiguration[] GetDataSets()
-    {
-      return new DataSetConfiguration[] { GetDataSet(), GetDataSet(), GetDataSet() };
     }
     internal static DataSetConfiguration GetDataSet()
     {

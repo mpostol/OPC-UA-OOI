@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using global::UAOOI.SemanticData.DataManagement.Configuration;
 
@@ -20,20 +21,17 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       foreach (AssociationConfiguration _ac in associationConfiguration)
       {
-        Assert.IsNotNull(_ac.DataSets);
+        Assert.IsNotNull(_ac.DataSet);
         Assert.IsFalse(String.IsNullOrEmpty(_ac.Alias));
         Assert.IsFalse(String.IsNullOrEmpty(_ac.DataSymbolicName));
         Assert.IsFalse(String.IsNullOrEmpty(_ac.InformationModelURI));
-        TestDataSets(_ac.DataSets);
+        TestDataSets(_ac.DataSet);
       }
     }
-    private void TestDataSets(DataSetConfiguration[] dataSetConfiguration)
+    private void TestDataSets(DataSetConfiguration dataSetConfiguration)
     {
-      foreach (DataSetConfiguration _dsc in dataSetConfiguration)
-      {
-        Assert.IsNotNull(_dsc.Members);
-        TestMembers(_dsc.Members);
-      }
+      Assert.IsNotNull(dataSetConfiguration.Members);
+      TestMembers(dataSetConfiguration.Members);
     }
     private void TestMembers(DataMemberConfiguration[] dataMemberConfiguration)
     {

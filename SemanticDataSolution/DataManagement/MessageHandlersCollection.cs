@@ -7,7 +7,8 @@ namespace UAOOI.SemanticData.DataManagement
 {
   internal class MessageHandlersCollection : Dictionary<string, IMessageHandler>
   {
-    internal static MessageHandlersCollection CreateMessageHandlers(Configuration.MessageTransportConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, Action<string, IMessageHandler> addMessageHandler)
+    internal static MessageHandlersCollection CreateMessageHandlers
+      (Configuration.MessageTransportConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, Action<string, IMessageHandler> addMessageHandler)
     {
       MessageHandlersCollection _collection = new MessageHandlersCollection();
       foreach (Configuration.MessageTransportConfiguration item in configuration)
@@ -32,8 +33,18 @@ namespace UAOOI.SemanticData.DataManagement
       }
       return _collection;
     }
+    internal void OnConfigurationChangeHandler(object sender, EventArgs e)
+    {
+      throw new NotImplementedException();
+    }
     private MessageHandlersCollection()
       : base()
     { }
+
+
+    internal void Run()
+    {
+      throw new NotImplementedException();
+    }
   }
 }

@@ -1,4 +1,7 @@
 ﻿
+using System;
+using UAOOI.SemanticData.DataManagement.Configuration;
+
 namespace UAOOI.SemanticData.DataManagement
 {
   /// <summary>
@@ -13,20 +16,36 @@ namespace UAOOI.SemanticData.DataManagement
     public IEncodingFactory EncodingFactory { get; set; }
     public IMessageHandlerFactory MessageHandlerFactory { get; set; }
     public IConfigurationFactory ConfigurationFactory { get; set; }
-    #endregion    
+    #endregion
     #region Internal control entry points
     internal AssociationsCollection AssociationsCollection { get; private set; }
     internal MessageHandlersCollection MessageHandlersCollection { get; private set; }
     #endregion
 
-    #region Master Controll functioanlity 
+    #region Master Controll functioanlity
     public void Initialize()
     {
-      throw new System.NotImplementedException();
+      if (BindingFactory == null)
+        throw new ArgumentNullException();
+      if (EncodingFactory == null)
+        throw new ArgumentNullException();
+      if (MessageHandlerFactory == null)
+        throw new ArgumentNullException();
+      if (ConfigurationFactory == null)
+        throw new ArgumentNullException();
+      ConfigurationData _configuration = ConfigurationFactory.GetConfiguration();
+      AssociationsCollection = AssociationsCollection.CreateAssociations(_configuration.Associations, BindingFactory, EncodingFactory);
+      ConfigurationFactory.OnAssociationConfigurationChange += AssociationsCollection.OnConfigurationChangeHandler;
+      MessageHandlersCollection = MessageHandlersCollection.CreateMessageHandlers(_configuration.MessageTransport, MessageHandlerFactory, AssociationsCollection.AddMessageHandler);
+      ConfigurationFactory.OnMessageHandlerConfigurationChange += MessageHandlersCollection.OnConfigurationChangeHandler;
     }
+    /// <summary>
+    /// Initialize and enable all associations ans start pumping the data 
+    /// </summary>
     public void Run()
     {
-      throw new System.NotImplementedException();
+      this.AssociationsCollection.Initialize();
+      this.MessageHandlersCollection.Run();
     }
     #endregion
   }

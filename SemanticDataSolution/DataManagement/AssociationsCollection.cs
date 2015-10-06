@@ -37,6 +37,16 @@ namespace UAOOI.SemanticData.DataManagement
       _ass.AddMessageHandler(messageHandler);
     }
     /// <summary>
+    /// Handles the the configuration modifications.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+    /// <exception cref="System.NotImplementedException"> ir is intentionally not implemented - it is placeholder for further development in case there need be.</exception>
+    internal static void OnConfigurationChangeHandler(object sender, EventArgs e)
+    {
+      throw new NotImplementedException();
+    }
+    /// <summary>
     /// Class SemanticData - private implementation of the <see cref="ISemanticData"/>
     /// </summary>
     //TODO consider intenal implementation
@@ -63,5 +73,9 @@ namespace UAOOI.SemanticData.DataManagement
     }
     private AssociationsCollection() { }
 
+    internal void Initialize()
+    {
+      throw new NotImplementedException();
+    }
   }
 }

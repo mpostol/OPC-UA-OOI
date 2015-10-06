@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
@@ -19,7 +20,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     [TestMethod]
     [TestCategory("DataManagement_DataManagementSetup")]
-    [ExpectedException(typeof(NotImplementedException))]
+    [ExpectedException(typeof(ArgumentNullException))]
     public void InitializeTestMethod()
     {
       DataManagementSetup _ndm = new DataManagementSetup();
@@ -28,7 +29,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     [TestMethod]
     [TestCategory("DataManagement_DataManagementSetup")]
-    [ExpectedException(typeof(NotImplementedException))]
+    [ExpectedException(typeof(NullReferenceException))]
     public void RunTestMethod()
     {
       DataManagementSetup _ndm = new DataManagementSetup();

@@ -72,6 +72,7 @@
     <Compile Include="ConsumerAssociationUnitTest.cs" />
     <Compile Include="ProducerAssociationUnitTest.cs" />
     <Compile Include="DataManagementSetupUnitTest.cs" />
+    <Compile Include="PeriodicDataMessageUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

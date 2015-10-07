@@ -12,27 +12,28 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       m_MessageContent = messageContent;
     }
-    internal void UpdateMyValues(Func<int, IBinding> update)
+    public PeriodicDataMessage(object[] messageContent, Guid guid): this (messageContent)
+    {
+      m_Guid = guid;
+    }
+    public void UpdateMyValues(Func<int, IBinding> update)
     {
       UInt64 _mask = 0x1;
       int _associationIndex = 0;
       for (int i = 0; i < m_MessageContent.Length; i++)
       {
-        if ((m_filter & _mask) == 1)
+        if ((m_filter & _mask) > 0)
           update(_associationIndex).Assign2Repository(m_MessageContent[i]);
         _associationIndex++;
         _mask = _mask << 1;
       }
     }
-    private UInt64 m_filter = UInt64.MaxValue;
-    private object[] m_MessageContent;
-    void IPeriodicDataMessage.UpdateMyValues(Func<int, IBinding> update)
-    {
-      throw new NotImplementedException();
-    }
     public bool IAmDestination(ISemanticData dataId)
     {
-      throw new NotImplementedException();
+      return dataId.Guid == m_Guid;
     }
+    private UInt64 m_filter = UInt64.MaxValue;
+    private Guid m_Guid;
+    private object[] m_MessageContent;
   }
 }

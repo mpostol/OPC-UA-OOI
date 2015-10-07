@@ -3,20 +3,35 @@ using System;
 
 namespace UAOOI.SemanticData.DataManagement
 {
-  ///// <summary>
-  ///// Interface IEndPointConfiguration - Represents the current network attachment parameters.
-  ///// Depending on the role of the <see cref="IAssociation"/> it describes: remote or local end point.
-  ///// </summary>
-  //public interface IEndPointConfiguration
-  //{
-  //}
+
+  /// <summary>
+  /// Interface IMessageWriter - provides functionality supporting sending the messages over the wire.
+  /// </summary>
   public interface IMessageWriter : IMessageHandler
   {
+
+    /// <summary>
+    /// Sends the specified message using association transport protocol.
+    /// </summary>
+    /// <param name="message">The message.</param>
+    void Send(Message message);
+
   }
+  /// <summary>
+  /// Interface IMessageReader - provides functionality supporting reading the messages from the wire.
+  /// </summary>
   public interface IMessageReader : IMessageHandler
   {
-    event EventHandler<MessageEventArg> messageHandlerStatusChanged;
+    
+    /// <summary>
+    /// Occurs when an asynchronous operation to read a new message completes.
+    /// </summary>
+    event EventHandler<MessageEventArg> ReadMessageCompleted;
+
   }
+  /// <summary>
+  /// Interface IMessageHandler - provides basic functionality handling messages communication over the wire.
+  /// </summary>
   public interface IMessageHandler
   {
 
@@ -34,4 +49,5 @@ namespace UAOOI.SemanticData.DataManagement
     void AttachToNetwork();
 
   }
+
 }

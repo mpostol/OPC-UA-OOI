@@ -54,7 +54,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       private class MR: IMessageReader
       {
 
-        public event EventHandler<MessageEventArg> messageHandlerStatusChanged;
 
         public IAssociationState State
         {
@@ -65,6 +64,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         {
           throw new NotImplementedException();
         }
+
+        public event EventHandler<MessageEventArg> ReadMessageCompleted;
       }
     }
     private class EF : IEncodingFactory

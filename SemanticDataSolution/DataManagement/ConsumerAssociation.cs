@@ -41,13 +41,13 @@ namespace UAOOI.SemanticData.DataManagement
     {
       if (messageReader == null)
         throw new ArgumentNullException("messageReader");
-      messageReader.messageHandlerStatusChanged += MessageHandler;
+      messageReader.ReadMessageCompleted += MessageHandler;
     }
     internal void RemoveMessageReader(IMessageReader messageReader)
     {
       if (messageReader == null)
         throw new ArgumentNullException("messageReader");
-      messageReader.messageHandlerStatusChanged -= MessageHandler;
+      messageReader.ReadMessageCompleted -= MessageHandler;
     }
     #endregion
 

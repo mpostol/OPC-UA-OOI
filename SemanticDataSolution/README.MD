@@ -14,9 +14,17 @@ The main challenge that must be faced up by engineering of data processing is th
 Integration services are responsible for exchanging the data and metadata with other parties using:
 
 * Network communication
-* Database access   
+* External database archival   
 
 ![Domain Model] (https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/UADataIntegrationServices.Domain.png)
+
+## Network communication
+
+An example of transferring the UA Semantic Data over the network is message centric data transport standardized by the OPC UA Specification Part 14 Pub/sub Draft 1.04.08. This concept have been implemented in the project [DataManagement](./DataManagement#introduction). This project provides a library that can be used as a foundation of the communication infrastructure deployment. 
+
+## External database archival
+
+This **UA Semantic Data** can also be used to transfer data from the OPC UA environment to Data Based Management System for further processing by Enterprise Management BI systems.
 
 ## UA Semantic Data
 

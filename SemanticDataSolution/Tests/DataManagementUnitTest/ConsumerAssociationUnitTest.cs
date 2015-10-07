@@ -9,9 +9,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   {
     [TestMethod]
     [TestCategory("DataManagement_ConsumerAssociation")]
-    public void ConsumerAssociationCtorTestMethod()
+    public void ConsumerAssociationCreatorTestMethod()
     {
-      ConsumerAssociation _ca = new ConsumerAssociation(new TestISemanticData(), "ConsumerAssociationCtorTestMethod", Guid.NewGuid(), PersistentConfiguration.GetDataSet(), new IBF(), new IEF());
+      ConsumerAssociation _ca = new ConsumerAssociation(new TestISemanticData(), "ConsumerAssociationCreatorTestMethod", PersistentConfiguration.GetDataSet(), new IBF(), new IEF());
       Assert.IsNotNull(_ca);
     }
 
@@ -42,6 +42,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         get;
         private set;
+      }
+      public Guid Guid
+      {
+        get { return Guid.NewGuid(); }
       }
       private static int _count = 0;
     }

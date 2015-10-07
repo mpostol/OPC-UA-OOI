@@ -19,26 +19,29 @@ namespace UAOOI.SemanticData.DataManagement
     /// Initializes a new instance of the <see cref="Association" /> class.
     /// The class captures all bindings between the message content and local resources.
     /// </summary>
-    /// <param name="data">The UA Semantic Data triple representation.</param>
+    /// <param name="data">The UA Semantic Data triple representation. It id not used by current implementation.</param>
     /// <param name="aliasName">A readable alias name for this instance to be used on User Interface.
     /// Depending on the implementation this name is used to filter packages against the destination.</param>
-    /// <param name="id">The identifier.</param>
+    /// <param name="id">The identifier of the DataSet selected to be processes by this instance.</param>
     /// <exception cref="System.NullReferenceException">
     /// data argument must not be null
     /// or
     /// aliasName argument must not be null
     /// </exception>
+    /// <remarks>
+    /// The DataSet has the following identifiers
+    ///  - <see cref="Association.DataDescriptor"/>: not used by current implementation
+    ///  - <see cref="Association.AssociationId"/>: <see cref="Guid"/> generated for the 
+    ///  - <see cref="Association.DataDescriptor"/>: not used by current implementation
+    /// </remarks>
     /// <exception cref="System.ArgumentOutOfRangeException">id; id must not be empty</exception>
-    internal Association(ISemanticData data, string aliasName, Guid id)
+    internal Association(ISemanticData data, string aliasName)
     {
       if (data == null)
         throw new NullReferenceException("data argument must not be null");
       DataDescriptor = data;
       if (String.IsNullOrEmpty(aliasName))
         throw new NullReferenceException("aliasName argument must not be null");
-      m_AliasName = aliasName;
-      if (id == Guid.Empty)
-        throw new ArgumentOutOfRangeException("id", "id must not be empty");
       m_AliasName = aliasName;
       p_State = new AssociationStateNoConfiguration(this);
     }
@@ -101,7 +104,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// <returns>A value that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance precedes <paramref name="obj" /> in the sort order. Zero This instance occurs in the same position in the sort order as <paramref name="obj" />. Greater than zero This instance follows <paramref name="obj" /> in the sort order.</returns>
     public int CompareTo(object obj)
     {
-      return m_AliasName.CompareTo(((Association)obj).m_AliasName);
+      return DataDescriptor.Guid.CompareTo(((Association)obj).DataDescriptor.Guid);
     }
     #endregion
 
@@ -204,11 +207,6 @@ namespace UAOOI.SemanticData.DataManagement
 
     #region protected
     /// <summary>
-    /// Gets the association identifier.
-    /// </summary>
-    /// <value>The association identifier.</value>
-    protected Guid AssociationId { get; private set; }
-    /// <summary>
     /// Raises the state changed event handler.
     /// </summary>
     /// <param name="args">The <see cref="AssociationStateChangedEventArgs"/> instance containing the event data.</param>
@@ -231,7 +229,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// Called when the association is disabling.
     /// </summary>
     protected abstract void OnDisabling();
-    #endregion    
+    #endregion
 
   }
 

@@ -4,7 +4,7 @@ using System;
 namespace UAOOI.SemanticData.DataManagement
 {
   /// <summary>
-  /// Interface ISemanticData - represents a data item conforming  to the UA Semantic Data paradigm. 
+  /// Interface ISemanticData - represents a data item conforming to the UA Semantic Data paradigm. 
   /// </summary>
   /// <remarks>
   /// <para>
@@ -12,7 +12,7 @@ namespace UAOOI.SemanticData.DataManagement
   /// <a href="https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/README.MD">OPC UA Data Processing Outside the Server</a>
   /// </para>
   /// </remarks>
-  public interface ISemanticData
+  public interface ISemanticData : IDataUniqueIdentifier
   {
 
     /// <summary>

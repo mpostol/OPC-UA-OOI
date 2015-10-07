@@ -66,6 +66,7 @@
     <Compile Include="IBinding.cs" />
     <Compile Include="IBindingFactory.cs" />
     <Compile Include="IConfigurationFactory.cs" />
+    <Compile Include="IDataUniqueIdentifier.cs" />
     <Compile Include="IEncodingFactory.cs" />
     <Compile Include="IMessageHandlerFactory.cs" />
     <Compile Include="ISemanticData.cs" />

@@ -30,7 +30,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       throw new NotImplementedException();
     }
-    public bool IAmDestination(Guid associationId)
+    public bool IAmDestination(ISemanticData dataId)
     {
       throw new NotImplementedException();
     }

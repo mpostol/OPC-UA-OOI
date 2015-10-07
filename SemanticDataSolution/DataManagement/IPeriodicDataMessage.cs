@@ -11,11 +11,11 @@ namespace UAOOI.SemanticData.DataManagement
   {
 
     /// <summary>
-    /// Updates my values - implementati.
+    /// Updates my values - implementation .
     /// </summary>
     /// <param name="update">The update.</param>
     void UpdateMyValues(Func<int, IBinding> update);
-    bool IAmDestination(Guid associationId);
+    bool IAmDestination(ISemanticData dataId);
 
   }
 }

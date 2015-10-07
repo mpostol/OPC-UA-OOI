@@ -37,6 +37,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_nt.DataDescriptor);
       Assert.IsNotNull(_nt.DataDescriptor.Identifier);
       Assert.IsNotNull(_nt.State);
+      Assert.AreNotEqual<Guid>(Guid.Empty, _nt.Id);
       Assert.AreEqual<HandlerState>(HandlerState.NoConfiguration, _nt.State.State);
       Assert.AreEqual<string>(_alias, _nt.ToString());
     }
@@ -133,7 +134,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class TestAssociation : Association
     {
       public TestAssociation(ISemanticData data, string aliasName, bool success)
-        : base(data, aliasName, Guid.NewGuid())
+        : base(data, aliasName)
       {
         m_Success = success;
       }
@@ -148,8 +149,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       protected override void OnEnabling() { }
       protected override void OnDisabling() { }
       private bool m_Success = false;
-
-
+      public Guid Id { get { return this.DataDescriptor.Guid; } }
       protected internal override void AddMessageHandler(IMessageHandler messageHandler)
       {
         throw new NotImplementedException();
@@ -174,6 +174,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Identifier = new Uri(@"Http://commsvr.com");
         SymbolicName = symbolicName;
         NodeId = nodeId;
+        Guid = Guid.NewGuid();
       }
       public Uri Identifier
       {
@@ -191,6 +192,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         private set;
       }
       private static int _count = 0;
+
+      public Guid Guid
+      {
+        get;
+        private set;
+      }
     }
     #endregion
 

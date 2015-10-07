@@ -32,14 +32,14 @@ namespace UAOOI.SemanticData.DataManagement
       {
         if (_collection.ContainsKey(_ax.Alias))
           throw new ArgumentOutOfRangeException("Alias", "Alias of any Association must be unique");
-        SemanticData _newSemanticData = new SemanticData(new Uri(_ax.InformationModelURI), _ax.DataSymbolicName, null);
+        SemanticData _newSemanticData = new SemanticData(new Uri(_ax.InformationModelURI), _ax.DataSymbolicName, null, _ax.Id);
         switch (_ax.AssociationRole)
         {
           case AssociationRole.Consumer:
-            _newAssociation = new ConsumerAssociation(_newSemanticData, _ax.Alias, _ax.Id, _ax.DataSet, bindingFactory, encodingFactory);
+            _newAssociation = new ConsumerAssociation(_newSemanticData, _ax.Alias, _ax.DataSet, bindingFactory, encodingFactory);
             break;
           case AssociationRole.Producer:
-            _newAssociation = new ProducerAssociation(_newSemanticData, _ax.Alias, _ax.Id, _ax.DataSet, bindingFactory, encodingFactory);
+            _newAssociation = new ProducerAssociation(_newSemanticData, _ax.Alias, _ax.DataSet, bindingFactory, encodingFactory);
             break;
           default:
             break;
@@ -104,7 +104,7 @@ namespace UAOOI.SemanticData.DataManagement
     //TODO consider internal implementation
     private class SemanticData : ISemanticData
     {
-      public SemanticData(Uri identifier, string symbolicName, IComparable nodeId)
+      public SemanticData(Uri identifier, string symbolicName, IComparable nodeId, Guid Guid)
       {
         Identifier = identifier;
         SymbolicName = symbolicName;
@@ -121,6 +121,11 @@ namespace UAOOI.SemanticData.DataManagement
         private set;
       }
       public IComparable NodeId
+      {
+        get;
+        private set;
+      }
+      public Guid Guid
       {
         get;
         private set;

@@ -12,7 +12,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [ExpectedException(typeof(NotImplementedException))]
     public void ProducerAssociationCreatorTestMethod()
     {
-      ProducerAssociation _npa = new ProducerAssociation(new SD(), "DataManagement_ProducerAssociation", Guid.NewGuid(), PersistentConfiguration.GetDataSet(), new IBF(), new IEF());
+      ProducerAssociation _npa = new ProducerAssociation(new SD(), "DataManagement_ProducerAssociation", PersistentConfiguration.GetDataSet(), new IBF(), new IEF());
       Assert.IsNotNull(_npa);
     }
     private class SD : ISemanticData
@@ -21,15 +21,17 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         get { throw new NotImplementedException(); }
       }
-
       public string SymbolicName
       {
         get { throw new NotImplementedException(); }
       }
-
       public IComparable NodeId
       {
         get { throw new NotImplementedException(); }
+      }
+      public Guid Guid
+      {
+        get { return Guid.NewGuid(); }
       }
     }
     private class IBF : IBindingFactory

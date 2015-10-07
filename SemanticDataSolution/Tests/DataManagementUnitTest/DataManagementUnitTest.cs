@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   internal class TestAssociation : Association
   {
     public TestAssociation()
-      : base(new SD(), "DataManagementUnitTest".AddId(PersistentConfiguration.AssociationId), Guid.NewGuid()) { }
+      : base(new SD(), "DataManagementUnitTest".AddId(PersistentConfiguration.AssociationId)) { }
     public IEnumerator<string> GetEnumerator()
     {
       throw new NotImplementedException();
@@ -78,6 +78,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
 
       public IComparable NodeId
+      {
+        get { throw new NotImplementedException(); }
+      }
+
+      public Guid Guid
       {
         get { throw new NotImplementedException(); }
       }

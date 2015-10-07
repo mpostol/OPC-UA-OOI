@@ -25,8 +25,8 @@ namespace UAOOI.SemanticData.DataManagement
     /// <exception cref="System.NullReferenceException">itemConfiguration argument must not be null
     /// or
     /// members argument must not be null</exception>
-    internal ConsumerAssociation(ISemanticData data, string aliasName, Guid id, DataSetConfiguration members, IBindingFactory bindingFactory, IEncodingFactory encodingFactory) :
-      base(data, aliasName, id)
+    internal ConsumerAssociation(ISemanticData data, string aliasName, DataSetConfiguration members, IBindingFactory bindingFactory, IEncodingFactory encodingFactory) :
+      base(data, aliasName)
     {
       m_ProcessDataBindings = members.Members.Select<DataMemberConfiguration, IBinding>(x => x.GetBinding4DataMember(members, bindingFactory, encodingFactory)).ToArray<IBinding>();
     }
@@ -74,7 +74,7 @@ namespace UAOOI.SemanticData.DataManagement
     {
       if (this.State.State != HandlerState.Operational)
         return;
-      if (!messageArg.MessageContent.IAmDestination(this.AssociationId))
+      if (!messageArg.MessageContent.IAmDestination(this.DataDescriptor))
         return;
       messageArg.MessageContent.UpdateMyValues(x => m_ProcessDataBindings[x]);
     }

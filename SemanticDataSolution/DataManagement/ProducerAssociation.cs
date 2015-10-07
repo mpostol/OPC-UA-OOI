@@ -6,8 +6,8 @@ namespace UAOOI.SemanticData.DataManagement
 {
   internal class ProducerAssociation : Association
   {
-    public ProducerAssociation(ISemanticData data, string aliasName, DataSetConfiguration members, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
-      : base(data, aliasName)
+    public ProducerAssociation(ISemanticData data, string aliasName, Guid id, DataSetConfiguration members, IBindingFactory bindingFactory, IEncodingFactory encodingFactory )
+      : base(data, aliasName, id)
     {
       throw new NotImplementedException();
     }

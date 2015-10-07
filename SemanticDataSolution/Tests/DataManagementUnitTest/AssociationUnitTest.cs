@@ -133,7 +133,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class TestAssociation : Association
     {
       public TestAssociation(ISemanticData data, string aliasName, bool success)
-        : base(data, aliasName)
+        : base(data, aliasName, Guid.NewGuid())
       {
         m_Success = success;
       }

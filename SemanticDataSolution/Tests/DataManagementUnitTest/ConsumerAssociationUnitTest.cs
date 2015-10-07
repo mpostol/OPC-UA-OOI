@@ -11,7 +11,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_ConsumerAssociation")]
     public void ConsumerAssociationCtorTestMethod()
     {
-      ConsumerAssociation _ca = new ConsumerAssociation(new TestISemanticData(), "ConsumerAssociationCtorTestMethod", PersistentConfiguration.GetDataSet(), new IBF(), new IEF());
+      ConsumerAssociation _ca = new ConsumerAssociation(new TestISemanticData(), "ConsumerAssociationCtorTestMethod", Guid.NewGuid(), PersistentConfiguration.GetDataSet(), new IBF(), new IEF());
       Assert.IsNotNull(_ca);
     }
 

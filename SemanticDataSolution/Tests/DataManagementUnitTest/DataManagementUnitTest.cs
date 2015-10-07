@@ -39,10 +39,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   internal class TestAssociation : Association
   {
     public TestAssociation()
-      : base(new SD(), "DataManagementUnitTest".AddId(PersistentConfiguration.AssociationId))
-    {
-
-    }
+      : base(new SD(), "DataManagementUnitTest".AddId(PersistentConfiguration.AssociationId), Guid.NewGuid()) { }
     public IEnumerator<string> GetEnumerator()
     {
       throw new NotImplementedException();

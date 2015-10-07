@@ -71,7 +71,7 @@
     <Compile Include="ISemanticData.cs" />
     <Compile Include="IIntegrationServices.cs" />
     <Compile Include="IntegrationServices.cs" />
-    <Compile Include="Message.cs" />
+    <Compile Include="IPeriodicDataMessage.cs" />
     <Compile Include="MessageEventArg.cs" />
     <Compile Include="IMessageHandler.cs" />
     <Compile Include="MessageHandlersCollection.cs" />

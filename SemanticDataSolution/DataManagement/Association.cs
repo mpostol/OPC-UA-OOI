@@ -20,27 +20,26 @@ namespace UAOOI.SemanticData.DataManagement
     /// The class captures all bindings between the message content and local resources.
     /// </summary>
     /// <param name="data">The UA Semantic Data triple representation.</param>
-    /// <param name="aliasName">
-    /// A readable alias name for this instance to be used on User Interface. Must be unique.
-    /// Depending on the implementation this name is used to filter packages against the destination.
-    /// </param>
-    /// <exception cref="System.NullReferenceException">data argument must not be null
+    /// <param name="aliasName">A readable alias name for this instance to be used on User Interface.
+    /// Depending on the implementation this name is used to filter packages against the destination.</param>
+    /// <param name="id">The identifier.</param>
+    /// <exception cref="System.NullReferenceException">
+    /// data argument must not be null
     /// or
-    /// aliasName argument must not be null</exception>
-    /// <exception cref="System.ArgumentOutOfRangeException">
-    /// aliasName; aliasName must be unique
+    /// aliasName argument must not be null
     /// </exception>
-    public Association(ISemanticData data, string aliasName)
+    /// <exception cref="System.ArgumentOutOfRangeException">id; id must not be empty</exception>
+    internal Association(ISemanticData data, string aliasName, Guid id)
     {
       if (data == null)
         throw new NullReferenceException("data argument must not be null");
       DataDescriptor = data;
       if (String.IsNullOrEmpty(aliasName))
         throw new NullReferenceException("aliasName argument must not be null");
-      if (m_AliasDictionary.ContainsKey(aliasName))
-        throw new ArgumentOutOfRangeException("aliasName", "aliasName must be unique");
       m_AliasName = aliasName;
-      m_AliasDictionary.Add(m_AliasName, data);
+      if (id == Guid.Empty)
+        throw new ArgumentOutOfRangeException("id", "id must not be empty");
+      m_AliasName = aliasName;
       p_State = new AssociationStateNoConfiguration(this);
     }
     #endregion
@@ -49,12 +48,12 @@ namespace UAOOI.SemanticData.DataManagement
     /// <summary>
     /// Occurs when state of this instance changed.
     /// </summary>
-    public event EventHandler<AssociationStateChangedEventArgs> StateChangedEventHandler;
+    internal event EventHandler<AssociationStateChangedEventArgs> StateChangedEventHandler;
     /// <summary>
     /// Gets the data descriptor captured by an <see cref="ISemanticData"/> instance.
     /// </summary>
     /// <value>The <see cref="ISemanticData"/> instance representing UA Semantic Data triple https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/README.MD. </value>
-    public ISemanticData DataDescriptor
+    internal ISemanticData DataDescriptor
     {
       get;
       private set;
@@ -63,7 +62,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// Gets the current operational state of this instance
     /// </summary>
     /// <value>The state <see cref="IAssociationState"/> of this instance .</value>
-    public IAssociationState State
+    internal IAssociationState State
     {
       get { return p_State; }
       private set
@@ -72,6 +71,26 @@ namespace UAOOI.SemanticData.DataManagement
         RaiseStateChangedEventHandler(new AssociationStateChangedEventArgs(value.State));
       }
     }
+    /// <summary>
+    /// Initializes this instance.
+    /// </summary>
+    internal void Initialize()
+    {
+      try
+      {
+        InitializeCommunication();
+        State = new AssociationStateDisabled(this);
+      }
+      catch (Exception)
+      {
+        State = new AssociationStateError(this);
+      }
+    }
+    /// <summary>
+    /// Adds the message handler. It must initialize binding between the <see cref="IMessageHandler"/> and the local data resources.
+    /// </summary>
+    /// <param name="messageHandler">The message handler.</param>
+    internal protected abstract void AddMessageHandler(IMessageHandler messageHandler);
     #endregion
 
     #region IComparable
@@ -95,26 +114,6 @@ namespace UAOOI.SemanticData.DataManagement
     {
       return m_AliasName;
     }
-    #endregion
-
-    #region interna API
-    public void Initialize()
-    {
-      try
-      {
-        InitializeCommunication();
-        State = new AssociationStateDisabled(this);
-      }
-      catch (Exception)
-      {
-        State = new AssociationStateError(this);
-      }
-    }
-    /// <summary>
-    /// Adds the message handler. It must initialize binding between the <see cref="IMessageHandler"/> and the local data resources.
-    /// </summary>
-    /// <param name="messageHandler">The message handler.</param>
-    internal protected abstract void AddMessageHandler(IMessageHandler messageHandler);
     #endregion
 
     #region private
@@ -199,10 +198,20 @@ namespace UAOOI.SemanticData.DataManagement
       }
     }
     //var
-    private Dictionary<string, ISemanticData> m_AliasDictionary = new Dictionary<string, ISemanticData>();
     private IAssociationState p_State = null;
     private string m_AliasName = string.Empty;
-    //methods
+    #endregion
+
+    #region protected
+    /// <summary>
+    /// Gets the association identifier.
+    /// </summary>
+    /// <value>The association identifier.</value>
+    protected Guid AssociationId { get; private set; }
+    /// <summary>
+    /// Raises the state changed event handler.
+    /// </summary>
+    /// <param name="args">The <see cref="AssociationStateChangedEventArgs"/> instance containing the event data.</param>
     protected void RaiseStateChangedEventHandler(AssociationStateChangedEventArgs args)
     {
       EventHandler<AssociationStateChangedEventArgs> _locEven = StateChangedEventHandler;
@@ -210,11 +219,19 @@ namespace UAOOI.SemanticData.DataManagement
         return;
       _locEven(this, args);
     }
+    /// <summary>
+    /// Initializes the communication.
+    /// </summary>
     protected abstract void InitializeCommunication();
+    /// <summary>
+    /// Called when the association is enabling.
+    /// </summary>
     protected abstract void OnEnabling();
+    /// <summary>
+    /// Called when the association is disabling.
+    /// </summary>
     protected abstract void OnDisabling();
-    #endregion
-
+    #endregion    
 
   }
 

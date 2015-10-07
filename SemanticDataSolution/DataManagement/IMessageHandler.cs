@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// Sends the specified message using association transport protocol.
     /// </summary>
     /// <param name="message">The message.</param>
-    void Send(Message message);
+    void Send(IPeriodicDataMessage message);
 
   }
   /// <summary>

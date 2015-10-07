@@ -35,8 +35,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       return new AssociationConfiguration()
       {
         Alias = "Alias".AddId(AssociationId),
+        AssociationRole = Configuration.AssociationRole.Consumer,
         DataSet = GetDataSet(),
         DataSymbolicName = "DataSymbolicName".AddId(AssociationId),
+        Id = Guid.NewGuid(),
         InformationModelURI = "http://www.commsvr.com".AddId(AssociationId)
       };
     }

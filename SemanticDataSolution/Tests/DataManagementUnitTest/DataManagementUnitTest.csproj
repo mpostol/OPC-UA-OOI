@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Simulator\ConsumerDeviceSimulator.cs" />
     <Compile Include="DataManagementUnitTest.cs" />
+    <Compile Include="Simulator\PeriodicDataMessage.cs" />
     <Compile Include="Simulator\PersistenConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConsumerDeviceSimulatorUnitTest.cs" />

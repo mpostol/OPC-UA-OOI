@@ -2,7 +2,7 @@
 namespace UAOOI.SemanticData.DataManagement
 {
   /// <summary>
-  /// Interface IAssociationState - encapsulates state of the hosting instance. 
+  /// Interface IAssociationState - encapsulates the state machine implementation governing this instance behavior.
   /// The provided functionality behavior depends on the current value returned by the <see cref="IAssociationState.State"/> property.
   /// </summary>
   public interface IAssociationState

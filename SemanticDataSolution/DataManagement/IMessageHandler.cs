@@ -19,20 +19,19 @@ namespace UAOOI.SemanticData.DataManagement
   }
   public interface IMessageHandler
   {
+
     /// <summary>
-    /// The property provides the current operational state of the <see cref="IMessageHandler"/> Object.
+    /// Gets the the state machine for the the <see cref="IMessageHandler"/> instance.
     /// </summary>
-    /// <value>The handler state <see cref="HandlerState"/>.</value>
-    HandlerState HandlerState { get; }
+    /// <value>An object of <see cref="IAssociationState"/> providing implementation of the machine state governing this instance behavior.</value>
+    IAssociationState State { get; }
     /// <summary>
-    /// This method is used to enable a configured <see cref="IMessageHandler"/> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational"/> state. 
-    /// In the case of an error situation, the state changes into <see cref="HandlerState.Error"/>. The operation is rejected if the current <paramref name="HandlerState"/>  is not <see cref="HandlerState.Disabled"/>.
+    /// Attaches to network - initialize the underlying protocol stack and establish the connection with the broker is applicable.
     /// </summary>
-    void Enable();
-    /// <summary>
-    /// This method is used to disable a PubSub Object.
-    /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled"/> or <see cref="HandlerState.NoConfiguration"/>.
-    /// </summary>
-    void Disable();
+    /// <remarks>
+    /// Depending on the message transport layer type implementation of this function varies. 
+    /// </remarks>
+    void AttachToNetwork();
+
   }
 }

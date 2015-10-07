@@ -53,16 +53,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       private class MR: IMessageReader
       {
+
         public event EventHandler<MessageEventArg> messageHandlerStatusChanged;
-        public HandlerState HandlerState
+
+        public IAssociationState State
         {
           get { throw new NotImplementedException(); }
         }
-        public void Enable()
-        {
-          throw new NotImplementedException();
-        }
-        public void Disable()
+
+        public void AttachToNetwork()
         {
           throw new NotImplementedException();
         }

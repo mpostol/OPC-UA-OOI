@@ -5,6 +5,9 @@ using UAOOI.SemanticData.DataManagement.Configuration;
 
 namespace UAOOI.SemanticData.DataManagement
 {
+  /// <summary>
+  /// Class MessageHandlersCollection - represents collection of communication channels involved in handling selected message centric transport providers.
+  /// </summary>
   internal class MessageHandlersCollection : Dictionary<string, IMessageHandler>
   {
     internal static MessageHandlersCollection CreateMessageHandlers
@@ -43,14 +46,20 @@ namespace UAOOI.SemanticData.DataManagement
     {
       throw new NotImplementedException("It is intentionally not implemented");
     }
+    /// <summary>
+    /// Runs this instance.
+    /// </summary>
+    internal void Run()
+    {
+      foreach (IMessageHandler _mx in this.Values)
+      {
+        _mx.AttachToNetwork();
+        _mx.State.Enable();
+      }
+    }
     private MessageHandlersCollection()
       : base()
     { }
 
-
-    internal void Run()
-    {
-      throw new NotImplementedException();
-    }
   }
 }

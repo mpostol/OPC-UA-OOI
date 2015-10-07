@@ -45,17 +45,17 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_Association")]
     public void AssociationCompareToTestMethod()
     {
-      ISemanticData _testISemanticData0 = new TestISemanticData("TestISemanticData1", 0);
+      ISemanticData _testISemanticData0 = new TestISemanticData("TestISemanticData1", 0, Guid.Parse(@"{9912B722-304D-438F-8538-3C6F98068E66}"));
       Assert.IsNotNull(_testISemanticData0);
       TestAssociation _nt0 = new TestAssociation(_testISemanticData0, "AssociationCompareToTestMethod0");
       Assert.IsNotNull(_nt0);
       Assert.AreEqual<int>(0, _nt0.CompareTo(_nt0));
-      ISemanticData _testISemanticData1 = new TestISemanticData("TestISemanticData0", 0);
+      ISemanticData _testISemanticData1 = new TestISemanticData("TestISemanticData0", 0, Guid.Parse(@"{9912B722-304D-438F-8538-3C6F98068E65}"));
       Assert.IsNotNull(_testISemanticData1);
       TestAssociation _nt1 = new TestAssociation(_testISemanticData1, "AssociationCompareToTestMethod1");
       Assert.IsNotNull(_nt1);
-      Assert.AreEqual<int>(1, _nt1.CompareTo(_nt0));
-      Assert.AreEqual<int>(-1, _nt0.CompareTo(_nt1));
+      Assert.AreEqual<int>(-1, _nt1.CompareTo(_nt0));
+      Assert.AreEqual<int>(1, _nt0.CompareTo(_nt1));
     }
     [TestMethod]
     [TestCategory("DataManagement_Association")]
@@ -170,11 +170,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         _count++;
       }
       public TestISemanticData(string symbolicName, IComparable nodeId)
+        : this(symbolicName, nodeId, Guid.NewGuid())
       {
         Identifier = new Uri(@"Http://commsvr.com");
         SymbolicName = symbolicName;
         NodeId = nodeId;
-        Guid = Guid.NewGuid();
+      }
+      public TestISemanticData(string symbolicName, IComparable nodeId, Guid newGuid)
+      {
+        Guid = newGuid;
       }
       public Uri Identifier
       {
@@ -192,7 +196,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         private set;
       }
       private static int _count = 0;
-
       public Guid Guid
       {
         get;

@@ -79,7 +79,14 @@ namespace UAOOI.SemanticData.DataManagement
     #endregion
 
     #region public API
+    /// <summary>
+    /// Gets the state of the handler.
+    /// </summary>
+    /// <value>The state of the handler.</value>
     public HandlerState HandlerState { get { return m_HandlerState; } }
+    /// <summary>
+    /// Occurs when state changes].
+    /// </summary>
     public event EventHandler<AssociationStateChangedEventArgs> StateChangedEventHandler;
     #endregion
 

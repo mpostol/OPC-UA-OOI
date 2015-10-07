@@ -1,10 +1,10 @@
-﻿using System;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-using UAOOI.SemanticData.DataManagement.Configuration;
+using System;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
+
   [TestClass]
   public class AssociationUnitTest
   {
@@ -202,4 +202,5 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #endregion
 
   }
+
 }

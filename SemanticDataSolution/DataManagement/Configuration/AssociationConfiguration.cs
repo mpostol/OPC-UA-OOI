@@ -15,6 +15,6 @@ namespace UAOOI.SemanticData.DataManagement.Configuration
     public DataSetConfiguration DataSet { get; set; }
     public Guid Id { get; set; }
   }
-
   public enum AssociationRole { Consumer, Producer }
+
 }

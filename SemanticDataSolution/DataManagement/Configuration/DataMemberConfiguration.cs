@@ -19,9 +19,9 @@ namespace UAOOI.SemanticData.DataManagement.Configuration
     /// <param name="bindingFactory">The binding factory.</param>
     /// <param name="encodingFactory">The encoding factory.</param>
     /// <returns>IBinding.</returns>
-    internal IBinding GetBinding4DataMember(DataSetConfiguration parent, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
+    internal IConsumerBinding GetBinding4DataMember(DataSetConfiguration parent, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
     {
-      IBinding _binding = bindingFactory.GetBinding(parent.RepositoryGroup, this.ProcessValueName);
+      IConsumerBinding _binding = bindingFactory.GetConsumerBinding(parent.RepositoryGroup, this.ProcessValueName);
       encodingFactory.UpdateValueConverter(_binding, parent.RepositoryGroup, this.SourceEncoding);
       return _binding;
     }

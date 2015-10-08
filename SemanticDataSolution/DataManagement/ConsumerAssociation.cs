@@ -18,7 +18,6 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     /// <param name="data">The data.</param>
     /// <param name="aliasName">Name of the alias.</param>
-    /// <param name="id">The identifier of the consumer.</param>
     /// <param name="members">The members.</param>
     /// <param name="bindingFactory">The binding factory.</param>
     /// <param name="encodingFactory">The encoding factory.</param>
@@ -28,7 +27,7 @@ namespace UAOOI.SemanticData.DataManagement
     internal ConsumerAssociation(ISemanticData data, string aliasName, DataSetConfiguration members, IBindingFactory bindingFactory, IEncodingFactory encodingFactory) :
       base(data, aliasName)
     {
-      m_ProcessDataBindings = members.Members.Select<DataMemberConfiguration, IBinding>(x => x.GetBinding4DataMember(members, bindingFactory, encodingFactory)).ToArray<IBinding>();
+      m_ProcessDataBindings = members.Members.Select<DataMemberConfiguration, IConsumerBinding>(x => x.GetBinding4DataMember(members, bindingFactory, encodingFactory)).ToArray<IConsumerBinding>();
     }
     #endregion
 
@@ -69,7 +68,7 @@ namespace UAOOI.SemanticData.DataManagement
     #endregion
 
     #region private
-    private IBinding[] m_ProcessDataBindings = null;
+    private IConsumerBinding[] m_ProcessDataBindings = null;
     private void MessageHandler(object sender, MessageEventArg messageArg)
     {
       if (this.State.State != HandlerState.Operational)

@@ -19,10 +19,9 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     /// <param name="assign">This parameters captures a delegate that will be used to update the destination variable hosted by a repository. 
     /// </param>
-    public Binding(Action<type> assign)
+    public Binding()
     {
       m_TargetType = typeof(type);
-      m_Assign = assign;
     }
     #region IBinding
     /// <summary>
@@ -65,17 +64,6 @@ namespace UAOOI.SemanticData.DataManagement
     {
       RaiseHandlerState(HandlerState.Disabled);
     }
-    /// <summary>
-    /// Assigns the <paramref name="value" /> to the associated variable hosted by the target repository.
-    /// </summary>
-    /// <param name="value">The value to be assigned to the precess variable.</param>
-    void IBinding.Assign2Repository(object value)
-    {
-      if (m_Converter == null)
-        m_Assign((type)value);
-      else
-        m_Assign((type)m_Converter.Convert(value, m_TargetType, m_Parameter, m_Culture));
-    }
     #endregion
 
     #region public API
@@ -91,12 +79,11 @@ namespace UAOOI.SemanticData.DataManagement
     #endregion
 
     #region private
-    private Action<type> m_Assign;
-    private Type m_TargetType;
-    private IValueConverter m_Converter;
-    private CultureInfo m_Culture;
+    protected Type m_TargetType;
+    protected IValueConverter m_Converter;
+    protected CultureInfo m_Culture;
     private HandlerState m_HandlerState = HandlerState.Operational;
-    private object m_Parameter;
+    protected object m_Parameter;
     private void RaiseHandlerState(HandlerState state)
     {
       EventHandler<AssociationStateChangedEventArgs> _hc = StateChangedEventHandler;

@@ -1,15 +1,16 @@
 ﻿
 using System;
+using System.Linq;
 using UAOOI.SemanticData.DataManagement.Configuration;
 
 namespace UAOOI.SemanticData.DataManagement
 {
   internal class ProducerAssociation : Association
   {
-    public ProducerAssociation(ISemanticData data, string aliasName, DataSetConfiguration members, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
+    internal ProducerAssociation(ISemanticData data, string aliasName, DataSetConfiguration members, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
       : base(data, aliasName)
     {
-      throw new NotImplementedException();
+      m_ProcessDataBindings = members.Members.Select<DataMemberConfiguration, IBinding>(x => x.GetBinding4DataMember(members, bindingFactory, encodingFactory)).ToArray<IBinding>();
     }
     internal void AddMessageWriter(IMessageWriter messageWriter, Func<IMessageHandler> messageHandler)
     {
@@ -35,5 +36,7 @@ namespace UAOOI.SemanticData.DataManagement
     {
       throw new NotImplementedException();
     }
+    private IBinding[] m_ProcessDataBindings = null;
+
   }
 }

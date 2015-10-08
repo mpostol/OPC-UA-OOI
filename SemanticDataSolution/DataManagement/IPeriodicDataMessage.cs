@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// Updates my values - implementation .
     /// </summary>
     /// <param name="update">The update.</param>
-    void UpdateMyValues(Func<int, IBinding> update);
+    void UpdateMyValues(Func<int, IConsumerBinding> update);
     /// <summary>
     /// Check if the message destination is the data set described by the <see cref="ISemanticData"/> .
     /// </summary>

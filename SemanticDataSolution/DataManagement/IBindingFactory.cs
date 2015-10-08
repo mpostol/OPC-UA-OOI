@@ -17,7 +17,8 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="variableName">Unique in the context in factory object name of a variable. The name is used to identify the destination variable hosted by the factory. The destination variable
     /// is updated periodically by a data produced - user of the <see cref="IBinding" /> object.</param>
     /// <returns>Returns an object implementing the <see cref="IBinding" /> interface that can be used to update selected variable on the factory side.</returns>
-    IBinding GetBinding(string repositoryGroup, string variableName);
+    IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName);
+    IProducerBinding GetProducerBinding(string repositoryGroup, string variableName);
   
   }
 

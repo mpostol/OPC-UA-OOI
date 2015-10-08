@@ -60,6 +60,7 @@
     <Compile Include="Binding.cs" />
     <Compile Include="Configuration\MessageTransportConfiguration.cs" />
     <Compile Include="ConsumerAssociation.cs" />
+    <Compile Include="ConsumerBinding.cs" />
     <Compile Include="DataManagementSetup.cs" />
     <Compile Include="HandlerState.cs" />
     <Compile Include="IAssociation.cs" />
@@ -67,9 +68,11 @@
     <Compile Include="IBinding.cs" />
     <Compile Include="IBindingFactory.cs" />
     <Compile Include="IConfigurationFactory.cs" />
+    <Compile Include="IConsumerBinding.cs" />
     <Compile Include="IDataUniqueIdentifier.cs" />
     <Compile Include="IEncodingFactory.cs" />
     <Compile Include="IMessageHandlerFactory.cs" />
+    <Compile Include="IProducerBinding.cs" />
     <Compile Include="ISemanticData.cs" />
     <Compile Include="IIntegrationServices.cs" />
     <Compile Include="IntegrationServices.cs" />

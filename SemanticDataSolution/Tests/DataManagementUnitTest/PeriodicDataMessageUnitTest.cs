@@ -1,9 +1,9 @@
 ﻿
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
-using System.Windows.Data;
+using System;
 using System.Globalization;
+using System.Windows.Data;
+using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -31,13 +31,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_PeriodicDataMessage")]
     public void UpdateMyValuesTestMethod()
     {
-      Object[] _buffor = new object[2];
+      Object[] _buffer = new object[2];
       Guid _guid = Guid.NewGuid();
       PeriodicDataMessage _newMessage = new PeriodicDataMessage(new object[] { 1, "string" }, _guid);
       Assert.IsNotNull(_newMessage);
-      _newMessage.UpdateMyValues(x => new Binding(y => _buffor[x] = y));
-      Assert.AreEqual<int>(1, (int)_buffor[0]);
-      Assert.AreEqual<string>("string", (string)_buffor[1]);
+      _newMessage.UpdateMyValues(x => new Binding(y => _buffer[x] = y));
+      Assert.AreEqual<int>(1, (int)_buffer[0]);
+      Assert.AreEqual<string>("string", (string)_buffer[1]);
     }
     private class Binding : IBinding
     {
@@ -106,7 +106,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         private set;
       }
     }
-
 
   }
 }

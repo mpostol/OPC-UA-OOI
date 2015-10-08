@@ -27,7 +27,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       string _testValue = "1231221431423421";
       _pr.Modify(_testValue);
       Assert.IsTrue(_bn.NewValue);
-      Assert.AreEqual<string>(_testValue, (string)_bn.GetNewValue());
+      Assert.AreEqual<string>(_testValue, (string)_bn.GetFromRepository());
       Assert.IsFalse(_bn.NewValue);
     }
     [TestMethod]
@@ -44,15 +44,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       string _testValue = "1231221431423421";
       _pr.Modify(_testValue);
       Assert.IsTrue(_bn.NewValue);
-      Assert.AreEqual<string>(_testValue, (string)_bn.GetNewValue());
+      Assert.AreEqual<string>(_testValue, (string)_bn.GetFromRepository());
       Assert.IsFalse(_bn.NewValue);
-      Assert.AreEqual<string>(_testValue, (string)_bn.GetNewValue());
+      Assert.AreEqual<string>(_testValue, (string)_bn.GetFromRepository());
       Assert.IsFalse(_bn.NewValue);
     }
 
     private class ProducerBindingFactor : IBindingFactory
     {
-      private ValueClas<string> _value = new ValueClas<string>();
+      private ValueClass<string> _value = new ValueClass<string>();
 
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
@@ -61,19 +61,28 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
       {
         var _ret = new ProducerBinding<string>(() => _value.Value);
-        _value.PropertyChanged += _ret.OnNewValue;
+        _value.PropertyChanged += (x, y) => _ret.OnNewValue();
         return _ret;
       }
-      private class ProducerBinding<type> : IProducerBinding
+      public class ProducerBinding<type> : Binding<type>, IProducerBinding
       {
-        public ProducerBinding()
+
+        #region constructor
+        protected ProducerBinding()
         {
 
         }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProducerBinding{type}"/> class.
+        /// </summary>
+        /// <param name="getValue">Captures a delegate used to assign new value to local resources.</param>
         public ProducerBinding(Func<type> getValue)
         {
           m_GetValue = getValue;
         }
+        #endregion
+
+        #region IProducerBinding
         bool IProducerBinding.NewValue
         {
           get
@@ -81,20 +90,51 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
             return b_NewValue;
           }
         }
-        object IProducerBinding.GetNewValue()
+        object IProducerBinding.GetFromRepository()
         {
           b_NewValue = false;
-          return m_GetValue();
+          if (this.m_Converter == null)
+            return m_GetValue();
+          else
+            return (type)m_Converter.Convert(m_GetValue(), m_TargetType, m_Parameter, m_Culture);
         }
         public event PropertyChangedEventHandler PropertyChanged;
-        internal void OnNewValue(object sender, PropertyChangedEventArgs e)
+        #endregion
+
+        internal void OnNewValue()
         {
           PropertyChanged.RaiseHandler<bool>(true, ref b_NewValue, "NewValue", this);
         }
-        private Func<type> m_GetValue;
+
+        protected Func<type> m_GetValue;
         private bool b_NewValue;
+
       }
-      internal class ValueClas<type> : INotifyPropertyChanged
+      public class ProducerBindingMonitoredValue<type> : ProducerBinding<type>
+      {
+        public ProducerBindingMonitoredValue()
+          : base()
+        {
+          m_GetValue = () => MonitoredValue;
+        }
+        public type MonitoredValue
+        {
+          get
+          {
+            return b_MyProperty;
+          }
+          set
+          {
+            if (Object.Equals(b_MyProperty, value))
+              return;
+            b_MyProperty = value;
+            OnNewValue();
+          }
+        }
+        private type b_MyProperty;
+
+      }
+      internal class ValueClass<type> : INotifyPropertyChanged
       {
         public type Value
         {

@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<int>(1, (int)_buffer[0]);
       Assert.AreEqual<string>("string", (string)_buffer[1]);
     }
-    private class Binding : IBinding
+    private class Binding : IConsumerBinding
     {
       public Binding(Action<object> action)
       {

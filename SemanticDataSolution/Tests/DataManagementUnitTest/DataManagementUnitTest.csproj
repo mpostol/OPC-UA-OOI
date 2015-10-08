@@ -67,7 +67,7 @@
     <Compile Include="UDPSimulator.cs" />
     <Compile Include="AssociationUnitTest.cs" />
     <Compile Include="ConfigurationUnitTest.cs" />
-    <Compile Include="BindingUnitTest.cs" />
+    <Compile Include="ConsumerBindingUnitTest.cs" />
     <Compile Include="EncodingFactoryUnitTest.cs" />
     <Compile Include="ConsumerAssociationUnitTest.cs" />
     <Compile Include="ProducerAssociationUnitTest.cs" />

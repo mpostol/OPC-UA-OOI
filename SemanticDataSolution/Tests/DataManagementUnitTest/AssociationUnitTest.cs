@@ -157,10 +157,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class DataBrokerFactory : IBindingFactory
     {
-      public IBinding GetBinding(string repositoryGroup, string variableName)
+
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
-        return new Binding<int>(x => { });
+        return new ConsumerBinding<int>(x => { });
       }
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+      {
+        throw new NotImplementedException();
+      }
+
     }
     private class TestISemanticData : ISemanticData
     {

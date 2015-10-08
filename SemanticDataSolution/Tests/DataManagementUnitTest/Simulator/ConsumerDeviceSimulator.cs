@@ -10,7 +10,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   {
 
     #region IBindingFactory
-    public IBinding GetBinding(string repositoryGroup, string variableName)
+    public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
+    {
+      throw new NotImplementedException();
+    }
+    public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
     {
       throw new NotImplementedException();
     }
@@ -26,9 +30,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       byte[] _buffer = m_UDPSimulator.Receive();
       predicate(_buffer);
     }
-
     private UDPSimulator m_UDPSimulator = null;
-
-
   }
 }

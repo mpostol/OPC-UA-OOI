@@ -52,11 +52,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class IBF : IBindingFactory
     {
 
-      public IBinding GetBinding(string repositoryGroup, string variableName)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
         return new MyBinding();
       }
-      private class MyBinding : IBinding
+      private class MyBinding : IConsumerBinding
       {
         public System.Windows.Data.IValueConverter Converter
         {
@@ -88,6 +88,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         }
       }
 
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+      {
+        throw new NotImplementedException();
+      }
     }
     private class IEF : IEncodingFactory
     {

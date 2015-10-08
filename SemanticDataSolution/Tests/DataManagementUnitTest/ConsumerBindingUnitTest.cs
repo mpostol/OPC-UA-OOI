@@ -7,7 +7,7 @@ using System.Windows.Data;
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
   [TestClass]
-  public class BindingUnitTest
+  public class ConsumerBindingUnitTest
   {
 
     #region TestMethods
@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_Binding")]
     public void TestMethod1()
     {
-      Binding<int> _nb = new Binding<int>(x => { });
+      ConsumerBinding<int> _nb = new ConsumerBinding<int>(x => { });
       Assert.IsNotNull(_nb);
     }
     [TestMethod]
@@ -23,7 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void DataRepositoryTestMethod()
     {
       DataRepository _rpo = new DataRepository();
-      IBinding _nb = _rpo.GetBinding(String.Empty, DataRepository.name);
+      IConsumerBinding _nb = _rpo.GetConsumerBinding(String.Empty, DataRepository.name);
       Assert.IsNotNull(_nb);
       Assert.IsNotNull(_nb.TargetType);
       _nb.Converter = null;
@@ -37,7 +37,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void RecordingRepositoryTestMethod()
     {
       RecordingRepository _rpo = new RecordingRepository();
-      IBinding _nb = _rpo.GetBinding(String.Empty, DataRepository.name);
+      IConsumerBinding _nb = _rpo.GetConsumerBinding(String.Empty, DataRepository.name);
       Assert.IsNotNull(_nb);
       Assert.IsNotNull(_nb.TargetType);
       _nb.Converter = new DateFormatter();
@@ -55,22 +55,30 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       public const string name = "variableName";
       public string Buffer = null;
-      public IBinding GetBinding(string repositoryGroup, string variableName)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
         if (variableName != name)
           throw new ArgumentOutOfRangeException();
-        return new Binding<string>(x => Buffer = x);
+        return new ConsumerBinding<string>(x => Buffer = x);
+      }
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+      {
+        throw new NotImplementedException();
       }
     }
     private class RecordingRepository : IBindingFactory
     {
       public const string name = "variableName";
       public string Buffer = null;
-      public IBinding GetBinding(string repositoryGroup, string variableName)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
         if (variableName != name)
           throw new ArgumentOutOfRangeException();
-        return new Binding<string>(x => Buffer = x);
+        return new ConsumerBinding<string>(x => Buffer = x);
+      }
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+      {
+        throw new NotImplementedException();
       }
     }
     // Simple business object.

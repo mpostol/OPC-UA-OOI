@@ -16,7 +16,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       m_Guid = guid;
     }
-    public void UpdateMyValues(Func<int, IBinding> update)
+    public void UpdateMyValues(Func<int, IConsumerBinding> update)
     {
       UInt64 _mask = 0x1;
       int _associationIndex = 0;
@@ -35,5 +35,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     private UInt64 m_filter = UInt64.MaxValue;
     private Guid m_Guid;
     private object[] m_MessageContent;
+
   }
 }

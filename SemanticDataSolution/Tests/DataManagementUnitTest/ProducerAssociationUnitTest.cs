@@ -9,7 +9,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
     [TestMethod]
     [TestCategory("DataManagement_ProducerAssociation")]
-    [ExpectedException(typeof(NotImplementedException))]
     public void ProducerAssociationCreatorTestMethod()
     {
       ProducerAssociation _npa = new ProducerAssociation(new SD(), "DataManagement_ProducerAssociation", PersistentConfiguration.GetDataSet(), new IBF(), new IEF());
@@ -37,11 +36,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class IBF : IBindingFactory
     {
 
-      public IBinding GetBinding(string repositoryGroup, string variableName)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
         return new MyBinding();
       }
-      private class MyBinding : IBinding
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+      {
+        throw new NotImplementedException();
+      }
+
+      private class MyBinding : IConsumerBinding
       {
         public System.Windows.Data.IValueConverter Converter
         {

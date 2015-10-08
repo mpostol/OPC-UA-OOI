@@ -51,7 +51,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
-      private class MR: IMessageReader
+      private class MR : IMessageReader
       {
 
 
@@ -89,11 +89,18 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class BF : IBindingFactory
     {
-      public IBinding GetBinding(string repositoryGroup, string variableName)
+      #region IBindingFactory
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
         return new Binding();
       }
-      private class Binding : IBinding
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+      {
+        throw new NotImplementedException();
+      }
+      #endregion
+
+      private class Binding : IConsumerBinding
       {
         public System.Windows.Data.IValueConverter Converter
         {
@@ -105,11 +112,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         }
         public object Parameter
         {
-          set {  }
+          set { }
         }
         public System.Globalization.CultureInfo Culture
         {
-          set {  }
+          set { }
         }
         public void Assign2Repository(object value)
         {
@@ -124,6 +131,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           throw new NotImplementedException();
         }
       }
+
     }
 
   }

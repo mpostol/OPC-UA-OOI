@@ -18,16 +18,16 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     /// <param name="data">The data.</param>
     /// <param name="aliasName">Name of the alias.</param>
-    /// <param name="members">The members.</param>
+    /// <param name="dataSetConfiguration">The members.</param>
     /// <param name="bindingFactory">The binding factory.</param>
     /// <param name="encodingFactory">The encoding factory.</param>
     /// <exception cref="System.NullReferenceException">itemConfiguration argument must not be null
     /// or
     /// members argument must not be null</exception>
-    internal ConsumerAssociation(ISemanticData data, string aliasName, DataSetConfiguration members, IBindingFactory bindingFactory, IEncodingFactory encodingFactory) :
+    internal ConsumerAssociation(ISemanticData data, string aliasName, DataSetConfiguration dataSetConfiguration, IBindingFactory bindingFactory, IEncodingFactory encodingFactory) :
       base(data, aliasName)
     {
-      m_ProcessDataBindings = members.Members.Select<DataMemberConfiguration, IConsumerBinding>(x => x.GetBinding4DataMember(members, bindingFactory, encodingFactory)).ToArray<IConsumerBinding>();
+      m_ProcessDataBindings = dataSetConfiguration.Members.Select<DataMemberConfiguration, IConsumerBinding>(x => x.GetConsumerBinding4DataMember(dataSetConfiguration, bindingFactory, encodingFactory)).ToArray<IConsumerBinding>();
     }
     #endregion
 

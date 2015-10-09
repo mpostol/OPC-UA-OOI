@@ -5,7 +5,7 @@ using UAOOI.SemanticData.DataManagement.Configuration;
 namespace UAOOI.SemanticData.DataManagement
 {
   /// <summary>
-  /// Class DataManagementSetup -it is place holder to gather all external injection points used to initialize 
+  /// Class DataManagementSetup - it is place holder to gather all external injection points used to initialize 
   /// the communication and bind to local resources.
   /// </summary>
   public class DataManagementSetup

@@ -99,7 +99,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       private ValueClass<string> _value = new ValueClass<string>();
       private ProducerBindingMonitoredValue<string> _monitoredValue = new ProducerBindingMonitoredValue<string>("ProducerBindingMonitoredValue._monitoredValue");
-
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
         throw new NotImplementedException();
@@ -159,7 +158,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         private type b_MyProperty;
 
       }
-
       internal class ValueClass<type> : INotifyPropertyChanged
       {
         public type Value

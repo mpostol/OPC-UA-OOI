@@ -11,11 +11,10 @@ namespace UAOOI.SemanticData.DataManagement
   {
 
     /// <summary>
-    /// Sends the specified message using association transport protocol.
+    /// Sends the data described by a data set collection to remote destination.
     /// </summary>
-    /// <param name="message">The message.</param>
-    void Send(IPeriodicDataMessage message);
-
+    /// <param name="producerBinding">Encapsulates functionality used by the <see cref="IMessageWriter"/> to collect all the data (data set items) required to prepare new message and send it over the network.</param>
+    void Send(Func<int, IProducerBinding> producerBinding);
   }
   /// <summary>
   /// Interface IMessageReader - provides functionality supporting reading the messages from the wire.

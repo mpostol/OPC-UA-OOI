@@ -13,15 +13,28 @@ namespace UAOOI.SemanticData.DataManagement.Configuration
   {
 
     /// <summary>
-    /// Gets the binding4 data member.
+    /// Gets the <see cref="IConsumerBinding"/> instance for data member.
+    /// </summary>
+    /// <param name="parent">The parent object containing collection of the DataSet members on the consumer side.</param>
+    /// <param name="bindingFactory">The binding factory.</param>
+    /// <param name="encodingFactory">The encoding factory.</param>
+    /// <returns>An instance of <see cref="IConsumerBinding"/> type.</returns>
+    internal IConsumerBinding GetConsumerBinding4DataMember(DataSetConfiguration parent, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
+    {
+      IConsumerBinding _binding = bindingFactory.GetConsumerBinding(parent.RepositoryGroup, this.ProcessValueName);
+      encodingFactory.UpdateValueConverter(_binding, parent.RepositoryGroup, this.SourceEncoding);
+      return _binding;
+    }
+    /// <summary>
+    /// Gets the consumer binding for data member.
     /// </summary>
     /// <param name="parent">The parent.</param>
     /// <param name="bindingFactory">The binding factory.</param>
     /// <param name="encodingFactory">The encoding factory.</param>
-    /// <returns>IBinding.</returns>
-    internal IConsumerBinding GetBinding4DataMember(DataSetConfiguration parent, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
+    /// <returns>An instance of <see cref="IProducerBinding"/> type.</returns>
+    internal IProducerBinding GetProducerBinding4DataMember(DataSetConfiguration parent, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
     {
-      IConsumerBinding _binding = bindingFactory.GetConsumerBinding(parent.RepositoryGroup, this.ProcessValueName);
+      IProducerBinding _binding = bindingFactory.GetProducerBinding(parent.RepositoryGroup, this.ProcessValueName);
       encodingFactory.UpdateValueConverter(_binding, parent.RepositoryGroup, this.SourceEncoding);
       return _binding;
     }

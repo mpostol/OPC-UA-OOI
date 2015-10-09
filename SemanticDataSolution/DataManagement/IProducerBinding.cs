@@ -5,8 +5,7 @@ namespace UAOOI.SemanticData.DataManagement
 {
   
   /// <summary>
-  /// Interface IProducerBinding - provide a basic implementation of the <see cref="IProducerBinding"/> interface.
-  /// It is used by the producer to get data from data repository.
+  /// Interface IProducerBinding - provide a definition of an object to be used by the producer to get data from data repository.
   /// </summary>
   public interface IProducerBinding : IBinding, INotifyPropertyChanged
   {

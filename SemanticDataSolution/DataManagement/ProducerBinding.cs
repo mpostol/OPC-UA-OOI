@@ -14,20 +14,17 @@ namespace UAOOI.SemanticData.DataManagement
 
     #region constructor
     /// <summary>
-    /// Initializes a new instance of the <see cref="ProducerBinding{type}"/> class.
+    /// Initializes a new instance of the <see cref="ProducerBinding{type}" /> class.
     /// </summary>
-    /// <remarks>
-    /// The <see cref="ProducerBinding{type}.GetReadValueDelegate"/> that captures a delegate used to assign new value to local variable in the data repository.
-    /// </remarks>
-    protected ProducerBinding()
-    {
-      GetReadValueDelegate = () => default(type);
-    }
+    /// <param name="valueName">Name of the "repository group" and "variable" separated by "."</param>
+    /// <remarks>The <see cref="ProducerBinding{type}.GetReadValueDelegate" /> that captures a delegate used to assign new value to local variable in the data repository.</remarks>
+    protected ProducerBinding(string valueName) : this(valueName, () => default(type)) { }
     /// <summary>
-    /// Initializes a new instance of the <see cref="ProducerBinding{type}"/> class.
+    /// Initializes a new instance of the <see cref="ProducerBinding{type}" /> class.
     /// </summary>
+    /// <param name="valueName">Name of the variable in the repository that is placeholder of the value.</param>
     /// <param name="getValue">Captures a delegate used to assign new value to local resources.</param>
-    public ProducerBinding(Func<type> getValue)
+    public ProducerBinding(string valueName, Func<type> getValue)
     {
       GetReadValueDelegate = getValue;
     }
@@ -69,7 +66,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     public void OnNewValue()
     {
-      PropertyChanged.RaiseHandler<bool>(true, ref b_NewValue, "NewValue", this);
+      PropertyChanged.RaiseHandler<bool>(true, ref b_NewValue, "m_VariableName", this);
     }
     #endregion
 
@@ -80,6 +77,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// <value>The <see cref="Func{type}"/> delegate used to read value from repository.</value>
     protected virtual Func<type> GetReadValueDelegate { private set; get; }
     private bool b_NewValue;
+    private string m_VariableName;
     #endregion
 
   }

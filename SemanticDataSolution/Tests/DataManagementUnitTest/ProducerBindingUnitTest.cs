@@ -98,7 +98,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class ProducerBindingFactory : IBindingFactory
     {
       private ValueClass<string> _value = new ValueClass<string>();
-      private ProducerBindingMonitoredValue<string> _monitoredValue = new ProducerBindingMonitoredValue<string>();
+      private ProducerBindingMonitoredValue<string> _monitoredValue = new ProducerBindingMonitoredValue<string>("ProducerBindingMonitoredValue._monitoredValue");
 
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
@@ -108,7 +108,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         if (repositoryGroup == "ProducerBinding")
         {
-          ProducerBinding<string> _ret = new ProducerBinding<string>(() => _value.Value);
+          ProducerBinding<string> _ret = new ProducerBinding<string>("ProducerBinding._value", () => _value.Value);
           _value.PropertyChanged += (x, y) => _ret.OnNewValue();
           return _ret;
         }
@@ -119,8 +119,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
       public class ProducerBindingMonitoredValue<type> : ProducerBinding<type>
       {
-        public ProducerBindingMonitoredValue()
-          : base()
+        public ProducerBindingMonitoredValue(string valueName)
+          : base(valueName)
         { }
         public type MonitoredValue
         {

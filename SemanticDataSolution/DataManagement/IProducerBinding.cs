@@ -17,9 +17,9 @@ namespace UAOOI.SemanticData.DataManagement
     /// <value><c>true</c> if the new value is available in repository; otherwise, <c>false</c>.</value>
     bool NewValue { get; }
     /// <summary>
-    /// Gets the new value and resets the flag <see cref="IProducerBinding"/>.
+    /// Gets the new value and resets the flag <see cref="IProducerBinding.NewValue"/>.
     /// </summary>
-    /// <returns>System.Object.</returns>
+    /// <returns>Current value in the repository <see cref="System.Object"/>.</returns>
     object GetFromRepository();
 
   }

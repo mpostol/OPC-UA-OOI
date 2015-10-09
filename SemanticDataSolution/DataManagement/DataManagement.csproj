@@ -82,6 +82,7 @@
     <Compile Include="IMessageHandler.cs" />
     <Compile Include="MessageHandlersCollection.cs" />
     <Compile Include="ProducerAssociation.cs" />
+    <Compile Include="ProducerBinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

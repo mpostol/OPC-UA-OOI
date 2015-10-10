@@ -74,6 +74,7 @@
     <Compile Include="DataManagementSetupUnitTest.cs" />
     <Compile Include="PeriodicDataMessageUnitTest.cs" />
     <Compile Include="ProducerBindingUnitTest.cs" />
+    <Compile Include="PersistentConfigurationUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

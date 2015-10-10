@@ -1,5 +1,7 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -42,7 +44,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
       {
-        throw new NotImplementedException();
+        string _key = String.Format("{0}.{1}", repositoryGroup, variableName);
+        IProducerBinding _npb = new ProducerBindingMonitoredValue<object>(_key);
+        m_Repository.Add(_key, _npb);
+        return _npb;
       }
 
       private class MyBinding : IConsumerBinding
@@ -76,7 +81,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           throw new NotImplementedException();
         }
       }
-
+      private Dictionary<string, IProducerBinding> m_Repository = new Dictionary<string, IProducerBinding>();
+      public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
     }
     private class IEF : IEncodingFactory
     {
@@ -87,7 +93,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         converter.Parameter = null;
       }
     }
-
   }
-
 }
+
+

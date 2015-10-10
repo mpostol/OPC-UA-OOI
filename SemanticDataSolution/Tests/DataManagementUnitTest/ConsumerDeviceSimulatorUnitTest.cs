@@ -9,7 +9,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   public class ConsumerDeviceSimulatorUnitTest
   {
     [TestMethod]
-    [TestCategory("ConsumerDeviceSimulator")]
+    [TestCategory("DataManagement_ConsumerDeviceSimulator")]
     public void ReadConfigurationTestMethod()
     {
       ConsumerDeviceSimulator _consumer = new ConsumerDeviceSimulator();

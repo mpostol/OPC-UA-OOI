@@ -19,7 +19,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
         };
     }
-
     private static MessageTransportConfiguration GetMessageTransportConfiguration()
     {
       return new MessageTransportConfiguration()
@@ -44,7 +43,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     internal static DataSetConfiguration GetDataSet()
     {
-      return new DataSetConfiguration() { Members = GetMembers() };
+      return new DataSetConfiguration() { Members = GetMembers(), RepositoryGroup = "RepositoryGroup".AddId(DataMemberId) };
     }
     private static DataMemberConfiguration[] GetMembers()
     {
@@ -52,13 +51,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private static DataMemberConfiguration GetDataMember()
     {
-      return new DataMemberConfiguration() { ProcessValueName = "ProcessValueName".AddId(DataMemberId), SymbolicName = "SymbolicName".AddId(DataMemberId) };
+      return new DataMemberConfiguration() { ProcessValueName = "ProcessValueName".AddId(DataMemberId), SymbolicName = "SymbolicName".AddId(DataMemberId), SourceEncoding = "SourceEncoding".AddId(DataMemberId) };
     }
     internal static int MessageTransportId { get { return p_MessageTransportId++; } }
     private static int p_MessageTransportId;
     internal static int AssociationId { get { return p_AssociationId++; } }
     private static int DataSetId { get { return p_DataSet++; } }
-    public static int DataMemberId { get { return p_DataMemberId; } }
+    public static int DataMemberId { get { return p_DataMemberId++; } }
     private static int p_AssociationId = 0;
     private static int p_DataSet = 0;
     private static int p_DataMemberId = 0;

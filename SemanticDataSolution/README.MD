@@ -16,11 +16,14 @@ Integration services are responsible for exchanging the data and metadata with o
 * Network communication
 * External database archival   
 
-![Domain Model] (https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/UADataIntegrationServices.Domain.png)
+![Domain Model] (./Media/UADataIntegrationServices.Domain.png)
+
+'Configuration' represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library provide helper classes that must be used to gather all required information to instantiate the communication infrastructure and start pumping the data.
 
 ## Network communication
 
-An example of transferring the UA Semantic Data over the network is message centric data transport standardized by the OPC UA Specification Part 14 Pub/sub Draft 1.04.08. This concept have been implemented in the project [DataManagement](./DataManagement#introduction). This project provides a library that can be used as a foundation of the communication infrastructure deployment. 
+An example of transferring the UA Semantic Data over the network is message centric data transport standardized by the OPC UA Specification Part 14 Pub/sub Draft 1.04.08. This concept have been implemented in the project [DataManagement](./DataManagement#introduction). This project provides a library that can be used as a foundation of the communication infrastructure deployment. The description of its architecture is captured in
+[UA SemanticData Message Centric Communication](./README.MessageCentricCommunication.md#ua-semanticdata-message-centric-communication).
 
 ## External database archival
 

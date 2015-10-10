@@ -27,6 +27,7 @@ namespace UAOOI.SemanticData.DataManagement
     public ProducerBinding(string valueName, Func<type> getValue)
     {
       GetReadValueDelegate = getValue;
+      m_VariableName = valueName;
     }
     #endregion
 
@@ -60,9 +61,9 @@ namespace UAOOI.SemanticData.DataManagement
     public event PropertyChangedEventHandler PropertyChanged;
     #endregion
 
-    #region internal API
+    #region API
     /// <summary>
-    /// Called when the new value is available in the repository.
+    /// Must be called by the repository logic to signal that the new value is available in the repository.
     /// </summary>
     public void OnNewValue()
     {

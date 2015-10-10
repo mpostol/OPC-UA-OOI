@@ -20,7 +20,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="oldValue">The old value to replace (and the value holder).</param>
     /// <param name="propertyName">The property's name as required by <see cref="PropertyChangedEventArgs"/>.</param>
     /// <param name="sender">The object to be appointed as the executioner of the handler.</param>
-    /// <returns>A boolean value that indicates if the new value was truly different from the old value according to <see cref="Object.Equals"/>.</returns>
+    /// <returns>A boolean value that indicates if the new value was truly different from the old value according to <see cref="Object.Equals(object, object)"/>.</returns>
     public static bool RaiseHandler<T>(this PropertyChangedEventHandler handler, T newValue, ref T oldValue, string propertyName, object sender)
     {
       bool changed = !Object.Equals(oldValue, newValue);

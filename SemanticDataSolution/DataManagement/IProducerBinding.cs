@@ -20,6 +20,6 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     /// <returns>Current value in the repository <see cref="System.Object"/>.</returns>
     object GetFromRepository();
-
+  
   }
 }

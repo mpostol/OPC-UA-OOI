@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UAOOI.SemanticData.DataManagement
+namespace UAOOI.SemanticData.DataManagement.DataRepository
 {
   /// <summary>
   /// Class ProducerBindingMonitoredValue - it implements the <see cref="ProducerBinding{type}"/> as a placeholder of the value to send over the network by the producer.

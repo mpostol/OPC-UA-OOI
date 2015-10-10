@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel;
 
-namespace UAOOI.SemanticData.DataManagement
+namespace UAOOI.SemanticData.DataManagement.DataRepository
 {
   /// <summary>
   /// Class ProducerBinding - provides a basic implementation of the <see cref="IProducerBinding"/> interface.

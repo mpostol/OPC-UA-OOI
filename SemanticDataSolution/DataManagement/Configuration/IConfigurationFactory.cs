@@ -2,7 +2,7 @@
 using System;
 using UAOOI.SemanticData.DataManagement.Configuration;
 
-namespace UAOOI.SemanticData.DataManagement
+namespace UAOOI.SemanticData.DataManagement.Configuration
 {
   /// <summary>
   /// Interface IConfigurationFactory provides functionality to provide the configuration. 

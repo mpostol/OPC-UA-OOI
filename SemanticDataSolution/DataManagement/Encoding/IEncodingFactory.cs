@@ -1,8 +1,7 @@
 ﻿
-using System;
-using System.Windows.Data;
+using UAOOI.SemanticData.DataManagement.DataRepository;
 
-namespace UAOOI.SemanticData.DataManagement
+namespace UAOOI.SemanticData.DataManagement.Encoding
 {
   /// <summary>
   /// Interface IEncodingFactory - provides functionality to lookup a dictionary containing value converters.

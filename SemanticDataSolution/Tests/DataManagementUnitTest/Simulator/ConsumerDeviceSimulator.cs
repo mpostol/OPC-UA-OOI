@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using System;
+using UAOOI.SemanticData.DataManagement.DataRepository;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {

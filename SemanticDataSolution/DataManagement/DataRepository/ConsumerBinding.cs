@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace UAOOI.SemanticData.DataManagement
+namespace UAOOI.SemanticData.DataManagement.DataRepository
 {
 
   /// <summary>

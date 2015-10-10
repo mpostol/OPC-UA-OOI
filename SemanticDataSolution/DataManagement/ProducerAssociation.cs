@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using UAOOI.SemanticData.DataManagement.Configuration;
+using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.DataManagement.Encoding;
+using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement
 {
@@ -91,7 +94,6 @@ namespace UAOOI.SemanticData.DataManagement
       foreach (IMessageWriter _mwx in m_MessageWriter)
         _mwx.Send(x => m_ProcessDataBindings[x]);
     }
-
     #endregion
 
   }

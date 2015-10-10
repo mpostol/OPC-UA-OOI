@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Globalization;
 using System.Windows.Data;
+using UAOOI.SemanticData.DataManagement.DataRepository;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {

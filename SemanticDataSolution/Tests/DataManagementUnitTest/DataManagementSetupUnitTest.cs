@@ -1,8 +1,11 @@
 ﻿
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Xml;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.DataManagement.Configuration;
+using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.DataManagement.Encoding;
+using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {

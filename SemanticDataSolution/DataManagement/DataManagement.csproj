@@ -57,39 +57,42 @@
     <Compile Include="Configuration\ConfigurationData.static.cs" />
     <Compile Include="Configuration\DataMemberConfiguration.cs" />
     <Compile Include="Configuration\DataSetConfiguration.cs" />
-    <Compile Include="Binding.cs" />
+    <Compile Include="DataRepository\Binding.cs" />
     <Compile Include="Configuration\MessageTransportConfiguration.cs" />
     <Compile Include="ConsumerAssociation.cs" />
-    <Compile Include="ConsumerBinding.cs" />
+    <Compile Include="DataRepository\ConsumerBinding.cs" />
     <Compile Include="DataManagementSetup.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="HandlerState.cs" />
     <Compile Include="IAssociation.cs" />
     <Compile Include="IAssociationState.cs" />
-    <Compile Include="IBinding.cs" />
-    <Compile Include="IBindingFactory.cs" />
-    <Compile Include="IConfigurationFactory.cs" />
-    <Compile Include="IConsumerBinding.cs" />
+    <Compile Include="DataRepository\IBinding.cs" />
+    <Compile Include="DataRepository\IBindingFactory.cs" />
+    <Compile Include="Configuration\IConfigurationFactory.cs" />
+    <Compile Include="DataRepository\IConsumerBinding.cs" />
     <Compile Include="IDataUniqueIdentifier.cs" />
-    <Compile Include="IEncodingFactory.cs" />
-    <Compile Include="IMessageHandlerFactory.cs" />
-    <Compile Include="IProducerBinding.cs" />
+    <Compile Include="Encoding\IEncodingFactory.cs" />
+    <Compile Include="MessageHandling\IMessageHandlerFactory.cs" />
+    <Compile Include="DataRepository\IProducerBinding.cs" />
     <Compile Include="ISemanticData.cs" />
     <Compile Include="IIntegrationServices.cs" />
     <Compile Include="IntegrationServices.cs" />
     <Compile Include="IPeriodicDataMessage.cs" />
     <Compile Include="MessageEventArg.cs" />
-    <Compile Include="IMessageHandler.cs" />
+    <Compile Include="MessageHandling\IMessageHandler.cs" />
     <Compile Include="MessageHandlersCollection.cs" />
+    <Compile Include="MessageHandling\IMessageReader.cs" />
+    <Compile Include="MessageHandling\IMessageWriter.cs" />
     <Compile Include="ProducerAssociation.cs" />
-    <Compile Include="ProducerBinding.cs" />
-    <Compile Include="ProducerBindingMonitoredValue.cs" />
+    <Compile Include="DataRepository\ProducerBinding.cs" />
+    <Compile Include="DataRepository\ProducerBindingMonitoredValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />
     <None Include="README.md" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

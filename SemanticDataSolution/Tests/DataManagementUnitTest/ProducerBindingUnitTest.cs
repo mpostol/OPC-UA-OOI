@@ -1,7 +1,8 @@
 ﻿
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.ComponentModel;
+using UAOOI.SemanticData.DataManagement.DataRepository;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {

@@ -2,4 +2,4 @@
 
 The architecture is presented in the following figure.
 
-! (![Domain Model] (./Media/MessageCentricCommunication.Domain.png)
+![Domain Model] (./Media/MessageCentricCommunication.Domain.png)

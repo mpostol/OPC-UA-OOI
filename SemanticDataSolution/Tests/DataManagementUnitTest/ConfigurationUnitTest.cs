@@ -2,6 +2,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using global::UAOOI.SemanticData.DataManagement.Configuration;
+using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {

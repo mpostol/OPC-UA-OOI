@@ -2,7 +2,7 @@
 using System;
 using global::UAOOI.SemanticData.DataManagement.Configuration;
 
-namespace UAOOI.SemanticData.DataManagement.UnitTest
+namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 {
   /// <summary>
   /// Class PersistentConfiguration - simulates a persistent configuration, like EEPROM, file, etc.
@@ -53,7 +53,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       return new DataMemberConfiguration() { ProcessValueName = "ProcessValueName".AddId(DataMemberId), SymbolicName = "SymbolicName".AddId(DataMemberId), SourceEncoding = "SourceEncoding".AddId(DataMemberId) };
     }
-    internal static int MessageTransportId { get { return p_MessageTransportId++; } }
+    private static int MessageTransportId { get { return p_MessageTransportId++; } }
     private static int p_MessageTransportId;
     internal static int AssociationId { get { return p_AssociationId++; } }
     private static int DataSetId { get { return p_DataSet++; } }
@@ -61,6 +61,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private static int p_AssociationId = 0;
     private static int p_DataSet = 0;
     private static int p_DataMemberId = 0;
+
   }
   internal static class StringExtensions
   {

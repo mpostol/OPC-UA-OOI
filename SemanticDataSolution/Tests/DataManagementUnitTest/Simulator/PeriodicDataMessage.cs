@@ -7,14 +7,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
   /// <summary>
   /// Class PeriodicDataMessage - very simple example how to implement <see cref="IPeriodicDataMessage"/>
   /// </summary>
-  internal class PeriodicDataMessage: IPeriodicDataMessage
+  internal class PeriodicDataMessage : IPeriodicDataMessage
   {
     public PeriodicDataMessage(object[] messageContent)
+      : this(messageContent, Guid.NewGuid())
+    {
+    }
+    public PeriodicDataMessage(object[] messageContent, Guid guid)
     {
       m_MessageContent = messageContent;
-    }
-    public PeriodicDataMessage(object[] messageContent, Guid guid): this (messageContent)
-    {
       m_Guid = guid;
     }
     public void UpdateMyValues(Func<int, IConsumerBinding> update)

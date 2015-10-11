@@ -4,6 +4,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.DataManagement.Configuration;
 using System.Collections.Generic;
+using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {

@@ -2,9 +2,10 @@
 
 To realize the [*UA Semantic Data*](../SemanticDataSolution#opc-ua-data-processing-outside-the-server) paradigm in practice **UA Data Application** must get access to the data in context of type definition in compliance with the OPC UA *Information Model*. This article summarize the research on architecture of infrastructure supporting access the data using *Message Centric* communication pattern. The proposed architecture is presented in the following figure.
 
-! (![Domain Model] (./Media/MessageCentricCommunication.Domain.png)
+![Domain Model] (./Media/MessageCentricCommunication.Domain.png)
 
 The architecture contains the following classes directly involved in the data processing:
+
 1. **UA Data Application** - a program application that processes OPC UA Data available out of band, i.e. without necessity to create OPC UA session
 2. OPC **UA Client** - a program application that processes OPC UA Data available over the created OPC UA session using the standard services
 3. **UA Server Services** - typical part of any OPC UA server that provides standard services.

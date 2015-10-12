@@ -22,8 +22,10 @@ Integration services are responsible for exchanging the data and metadata with o
 
 ## Network communication
 
-An example of transferring the UA Semantic Data over the network is message centric data transport standardized by the OPC UA Specification Part 14 Pub/sub Draft 1.04.08. This concept have been implemented in the project [DataManagement](./DataManagement#introduction). This project provides a library that can be used as a foundation of the communication infrastructure deployment. The description of its architecture is captured in
+An example of transferring the UA Semantic Data over the network is message centric data transport standardized by the OPC UA Specification Part 14 Pub/sub Draft 1.04.08. The description of its architecture is captured in
 [UA SemanticData Message Centric Communication](./README.MessageCentricCommunication.md#ua-semanticdata-message-centric-communication).
+
+This concept have been implemented in the project [DataManagement](./DataManagement#introduction). This project provides a SDK library that can be used as a foundation of the communication infrastructure deployment.
 
 ## External database archival
 

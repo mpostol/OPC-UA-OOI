@@ -7,6 +7,8 @@ OPC UA Data Processing Outside the Server](https://github.com/mpostol/OPC-UA-OOI
 
 The code is tested using the Unit Test located in the project: [DataManagementUnitTest](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/Tests/DataManagementUnitTest)
 
+The preliminary code help documentation is here: http://www.commsvr.com/Download/DataManagement/Index.html
+
 The project is in development stage - major changes are expected.
 
 ## Architecture

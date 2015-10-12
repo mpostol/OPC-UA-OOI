@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Simulator\ConsumerDeviceSimulator.cs" />
     <Compile Include="DataManagementUnitTest.cs" />
+    <Compile Include="Simulator\OPCUAServerSimulator.cs" />
     <Compile Include="Simulator\PeriodicDataMessage.cs" />
     <Compile Include="Simulator\PersistenConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="PeriodicDataMessageUnitTest.cs" />
     <Compile Include="ProducerBindingUnitTest.cs" />
     <Compile Include="PersistentConfigurationUnitTest.cs" />
+    <Compile Include="OPCUAServerProducerSimulatorUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

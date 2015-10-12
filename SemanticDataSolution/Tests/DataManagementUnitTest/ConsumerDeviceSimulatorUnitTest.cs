@@ -13,6 +13,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #region test part
     [TestMethod]
     [TestCategory("DataManagement_ConsumerDeviceSimulator")]
+    [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void ConsumerDeviceSimulatorTestMethod()
     {
       DataManagementSetup _consumer = ConsumerDeviceSimulator.CreateDevice(new MessageHandlerFactory());
@@ -22,6 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_consumer.EncodingFactory);
       Assert.IsNotNull(_consumer.MessageHandlerFactory);
       Assert.IsNull(_consumer.MessageHandlersCollection);
+      _consumer.Initialize();
       //UDPSimulator _transport = _consumer.ReadConfiguration();
       //byte[] _buffer = new byte[] { 0x1, 0x5, 0x12 };
       //bool _messageOK = false;

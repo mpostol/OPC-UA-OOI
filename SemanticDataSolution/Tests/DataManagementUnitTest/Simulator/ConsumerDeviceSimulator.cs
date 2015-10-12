@@ -32,13 +32,45 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       /// </summary>
       /// <returns>Am object of <see cref="ConfigurationData" /> type capturing the communication configuration.</returns>
       /// <exception cref="System.NotImplementedException"></exception>
-      public Configuration.ConfigurationData GetConfiguration()
+      public ConfigurationData GetConfiguration()
       {
-        throw new NotImplementedException();
+        return new ConfigurationData() { Associations = GetAssociations(), MessageTransport = GetMessageTransport() };
+      }
+      private MessageTransportConfiguration[] GetMessageTransport()
+      {
+        return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { Associations = GetTransportAssociations(), 
+                                                                                           Configuration = null, 
+                                                                                           Name = "MessageTransportConfiguration", 
+                                                                                           TransportRole = AssociationRole.Consumer } };
+      }
+      private string[] GetTransportAssociations()
+      {
+        return new string[1] { m_AssociationName };
+      }
+      private AssociationConfiguration[] GetAssociations()
+      {
+        return new AssociationConfiguration[] { new AssociationConfiguration() { Alias = m_AssociationName, 
+                                                                                 AssociationRole = AssociationRole.Consumer, DataSet = GetDataSet(), 
+                                                                                 DataSymbolicName = "DataSymbolicName", 
+                                                                                 Id = Guid.NewGuid(), 
+                                                                                 InformationModelURI= "https://github.com/mpostol/OPC-UA-OOI"  
+        } };
+      }
+
+      private DataSetConfiguration GetDataSet()
+      {
+        return new DataSetConfiguration() { Members = GetMembers(), RepositoryGroup = "MVVMSimulator" };
+      }
+      private DataMemberConfiguration[] GetMembers()
+      {
+        return new DataMemberConfiguration[]
+        {
+          new DataMemberConfiguration() { ProcessValueName = "Value1", SourceEncoding = "string", SymbolicName = "Value1" },
+          new DataMemberConfiguration() { ProcessValueName = "Value2", SourceEncoding = "double", SymbolicName = "Value2" },
+        };
       }
       public event EventHandler<EventArgs> OnAssociationConfigurationChange;
       public event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
-
     }
 
     private class MVVMSimulator : IBindingFactory
@@ -72,7 +104,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
           Value1 = new ConsumerBindingMonitoredValue<string>();
           return Value1;
         }
-        else if (variableName == "Value1")
+        else if (variableName == "Value2")
         {
           Value2 = new ConsumerBindingMonitoredValue<double>();
           return Value1;
@@ -114,7 +146,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
       {
-        throw new NotImplementedException();
+        if (repositoryGroup != m_RepositoryGroup)
+          throw new ArgumentOutOfRangeException("repositoryGroup");
       }
     }
     internal UDPSimulator ReadConfiguration()
@@ -128,5 +161,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       predicate(_buffer);
     }
     private UDPSimulator m_UDPSimulator = null;
+    private const string m_AssociationName = "Association1";
+    private const string m_RepositoryGroup = "repositoryGroup";
+
   }
 }

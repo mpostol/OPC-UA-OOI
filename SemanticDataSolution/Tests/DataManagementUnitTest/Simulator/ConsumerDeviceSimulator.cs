@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.ComponentModel;
 using UAOOI.SemanticData.DataManagement.Configuration;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 
@@ -15,7 +16,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     internal static DataManagementSetup CreateDevice(MessageHandling.IMessageHandlerFactory communicationFactory)
     {
       DataManagementSetup _ret = new ConsumerDeviceSimulator();
-      _ret.ConfigurationFactory = new ConfigurationFactory();
+      _ret.ConfigurationFactory = new MyConfigurationFactory();
       _ret.BindingFactory = new MVVMSimulator();
       _ret.EncodingFactory = new EncodingFactory();
       _ret.MessageHandlerFactory = communicationFactory;
@@ -24,7 +25,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     /// <summary>
     /// Class ConfigurationFactory.
     /// </summary>
-    private class ConfigurationFactory : IConfigurationFactory
+    private class MyConfigurationFactory : IConfigurationFactory
     {
       /// <summary>
       /// Gets the configuration.
@@ -39,18 +40,77 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       public event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
 
     }
-    private class MVVMSimulator: IBindingFactory
+
+    private class MVVMSimulator : IBindingFactory
     {
+      ScreeViewModel _viewModel = new ScreeViewModel();
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
-        throw new NotImplementedException();
+        if (repositoryGroup != "MVVMSimulator")
+          throw new ArgumentNullException("repositoryGroup");
+        return _viewModel.GetConsumerBinding(variableName);
       }
       public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
       {
         throw new NotImplementedException();
       }
     }
-    private class EncodingFactory: Encoding.IEncodingFactory
+    private class ScreeViewModel : INotifyPropertyChanged
+    {
+
+      #region API
+      /// <summary>
+      /// Helper method that gets the consumer binding.
+      /// </summary>
+      /// <param name="variableName">Name of the variable.</param>
+      /// <returns>IConsumerBinding.</returns>
+      /// <exception cref="System.ArgumentOutOfRangeException">variableName</exception>
+      internal IConsumerBinding GetConsumerBinding(string variableName)
+      {
+        if (variableName == "Value1")
+        {
+          Value1 = new ConsumerBindingMonitoredValue<string>();
+          return Value1;
+        }
+        else if (variableName == "Value1")
+        {
+          Value2 = new ConsumerBindingMonitoredValue<double>();
+          return Value1;
+        }
+        throw new ArgumentOutOfRangeException("variableName");
+      }
+      #endregion
+
+      #region ViewModel implementation
+      public ConsumerBindingMonitoredValue<string> Value1
+      {
+        get
+        {
+          return b_Value1;
+        }
+        set
+        {
+          PropertyChanged.RaiseHandler<ConsumerBindingMonitoredValue<string>>(value, ref b_Value1, "Value1", this);
+        }
+      }
+      public ConsumerBindingMonitoredValue<double> Value2
+      {
+        get
+        {
+          return b_Value2;
+        }
+        set
+        {
+          PropertyChanged.RaiseHandler<ConsumerBindingMonitoredValue<double>>(value, ref b_Value2, "Value2", this);
+        }
+      }
+      private ConsumerBindingMonitoredValue<string> b_Value1;
+      private ConsumerBindingMonitoredValue<double> b_Value2;
+      public event PropertyChangedEventHandler PropertyChanged;
+
+      #endregion
+    }
+    private class EncodingFactory : Encoding.IEncodingFactory
     {
       public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
       {

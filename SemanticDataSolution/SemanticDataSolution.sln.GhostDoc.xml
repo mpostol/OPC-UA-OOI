@@ -11,16 +11,16 @@
     <IgnoreFiles>
     </IgnoreFiles>
   </SpellChecker>
-<HelpConfigurations selected="HelpFile">
+<HelpConfigurations selected="DataMenagement">
   <HelpConfiguration name="HelpFile">
     <OutputPath>.\Help</OutputPath>
     <HelpFileName>SemanticDataSolution</HelpFileName>
     <ImageFolderPath />
     <HtmlFormats>
-      <HtmlHelp>true</HtmlHelp>
+      <HtmlHelp>false</HtmlHelp>
       <MSHelpViewer>false</MSHelpViewer>
       <MSHelp2>false</MSHelp2>
-      <Website>false</Website>
+      <Website>true</Website>
     </HtmlFormats>
     <IncludeScopes>
       <Public>true</Public>
@@ -35,7 +35,36 @@
     <ResolveCrefLinks>true</ResolveCrefLinks>
     <HeaderText />
     <FooterText />
-    <SelectedProjects />
+    <SelectedProjects>
+      <SelectedProject>DataManagement</SelectedProject>
+    </SelectedProjects>
+  </HelpConfiguration>
+  <HelpConfiguration name="DataMenagement">
+    <OutputPath>.\DataManagement\bin\HelpDocumentation</OutputPath>
+    <HelpFileName />
+    <ImageFolderPath />
+    <HtmlFormats>
+      <HtmlHelp>false</HtmlHelp>
+      <MSHelpViewer>false</MSHelpViewer>
+      <MSHelp2>false</MSHelp2>
+      <Website>true</Website>
+    </HtmlFormats>
+    <IncludeScopes>
+      <Public>true</Public>
+      <Internal>false</Internal>
+      <Protected>false</Protected>
+      <Private>false</Private>
+      <Inherited>true</Inherited>
+      <InheritedFromReferences>true</InheritedFromReferences>
+      <EnableTags>false</EnableTags>
+      <TagList />
+    </IncludeScopes>
+    <ResolveCrefLinks>true</ResolveCrefLinks>
+    <HeaderText>Part 14 PubSub SDK</HeaderText>
+    <FooterText>www.commsvr.com</FooterText>
+    <SelectedProjects>
+      <SelectedProject>DataManagement</SelectedProject>
+    </SelectedProjects>
   </HelpConfiguration>
 </HelpConfigurations>
 </GhostDoc>

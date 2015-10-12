@@ -16,9 +16,9 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// Initializes a new instance of the <see cref="ConsumerBinding{type}"/> class.
     /// </summary>
     /// <param name="assign">Captures a delegate used to assign new value to local resources.</param>
-    internal ConsumerBinding(Action<type> assign)
+    public ConsumerBinding(Action<type> assign)
     {
-      m_Assign = assign;
+      GetActionDelegate = assign;
     }
 
     #region IConsumerBinding
@@ -29,14 +29,17 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     void IConsumerBinding.Assign2Repository(object value)
     {
       if (this.m_Converter == null)
-        m_Assign((type)value);
+        GetActionDelegate((type)value);
       else
-        m_Assign((type)m_Converter.Convert(value, m_TargetType, m_Parameter, m_Culture));
+        GetActionDelegate((type)m_Converter.Convert(value, m_TargetType, m_Parameter, m_Culture));
     }
     #endregion
 
     #region private
-    private Action<type> m_Assign;
+    protected virtual Action<type> GetActionDelegate { set; get; }
+    protected ConsumerBinding()
+      : this(x => { })
+    { }
     #endregion
 
   }

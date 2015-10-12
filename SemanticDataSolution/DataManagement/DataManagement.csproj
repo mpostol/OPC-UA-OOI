@@ -62,6 +62,7 @@
     <Compile Include="ConsumerAssociation.cs" />
     <Compile Include="DataRepository\ConsumerBinding.cs" />
     <Compile Include="DataManagementSetup.cs" />
+    <Compile Include="DataRepository\ConsumerBindingMonitoredValue.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="HandlerState.cs" />
     <Compile Include="IAssociation.cs" />

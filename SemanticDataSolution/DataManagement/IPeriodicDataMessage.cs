@@ -17,9 +17,9 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="update">The update.</param>
     void UpdateMyValues(Func<int, IConsumerBinding> update);
     /// <summary>
-    /// Check if the message destination is the data set described by the <see cref="ISemanticData"/> .
+    /// Check if the message destination is the data set described by the <paramref name="dataId"/> of type <see cref="ISemanticData"/>.
     /// </summary>
-    /// <param name="dataId">The data identifier.</param>
+    /// <param name="dataId">The data identifier <see cref="ISemanticData"/>.</param>
     /// <returns><c>true</c> if <paramref name="dataId"/> is the destination of the message, <c>false</c> otherwise.</returns>
     bool IAmDestination(ISemanticData dataId);
 

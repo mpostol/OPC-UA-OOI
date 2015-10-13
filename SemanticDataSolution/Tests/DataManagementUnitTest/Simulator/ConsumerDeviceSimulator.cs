@@ -1,9 +1,9 @@
 ﻿
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.ComponentModel;
 using UAOOI.SemanticData.DataManagement.Configuration;
 using UAOOI.SemanticData.DataManagement.DataRepository;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
@@ -15,6 +15,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
   internal class ConsumerDeviceSimulator : DataManagementSetup
   {
 
+    #region creator of the ConsumerDeviceSimulator
     internal static DataManagementSetup CreateDevice(IMessageHandlerFactory communicationFactory, Guid dataSetGuid)
     {
       AssociationConfigurationId = dataSetGuid;
@@ -25,11 +26,36 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       _ret.MessageHandlerFactory = communicationFactory;
       return _ret;
     }
+    #endregion
+
+    #region tests instrumentation
+    /// <summary>
+    /// Checks the consistency of the all items in the <see cref="AssociationsCollection"/> colection.
+    /// </summary>
+    internal void CheckConsistency()
+    {
+      foreach (ConsumerAssociation _item in AssociationsCollection.Values)
+        CheckConsistency(_item);
+    }
+    private void CheckConsistency(ConsumerAssociation _item)
+    {
+
+      Assert.AreEqual(HandlerState.Operational, _item.State.State);
+      Assert.AreEqual<Guid>(AssociationConfigurationId, _item.DataDescriptor.Guid);
+      Assert.AreEqual<string>(AssociationConfigurationInformationModelURI, _item.DataDescriptor.Identifier.ToString());
+      Assert.AreEqual<string>(AssociationConfigurationDataSymbolicName, _item.DataDescriptor.SymbolicName);
+
+    }
+    #endregion
+
+    #region Factories set
     /// <summary>
     /// Class ConfigurationFactory.
     /// </summary>
     private class MyConfigurationFactory : IConfigurationFactory
     {
+
+      #region IConfigurationFactory
       /// <summary>
       /// Gets the configuration.
       /// </summary>
@@ -39,6 +65,17 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         return new ConfigurationData() { Associations = GetAssociations(), MessageTransport = GetMessageTransport() };
       }
+      /// <summary>
+      /// Occurs after the association configuration has been changed.
+      /// </summary>
+      public event EventHandler<EventArgs> OnAssociationConfigurationChange;
+      /// <summary>
+      /// Occurs after the communication configuration has been changed.
+      /// </summary>
+      public event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
+      #endregion
+
+      #region configuration
       private MessageTransportConfiguration[] GetMessageTransport()
       {
         return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { Associations = GetTransportAssociations(), 
@@ -68,110 +105,61 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         return new DataMemberConfiguration[]
         {
-          new DataMemberConfiguration() { ProcessValueName = "Value1", SourceEncoding = "string", SymbolicName = "Value1" },
-          new DataMemberConfiguration() { ProcessValueName = "Value2", SourceEncoding = "double", SymbolicName = "Value2" },
+          new DataMemberConfiguration() { ProcessValueName = "Value1", SourceEncoding = "System.String", SymbolicName = "Value1" },
+          new DataMemberConfiguration() { ProcessValueName = "Value2", SourceEncoding = "System.Double", SymbolicName = "Value2" },
         };
       }
-      public event EventHandler<EventArgs> OnAssociationConfigurationChange;
-      public event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
+      #endregion
 
     }
+    /// <summary>
+    /// Class MVVMSimulator it is simulator of a component providing user interface constructed according to the Model View ViewModel pattern
+    /// </summary>
     private class MVVMSimulator : IBindingFactory
     {
-      ScreeViewModel _viewModel = new ScreeViewModel();
+
+      #region IBindingFactory
+      /// <summary>
+      /// Gets the binding captured by an instance of the <see cref="IConsumerBinding" /> type used by the consumer to save the data in the data repository.
+      /// </summary>
+      /// <param name="repositoryGroup">It is the name of a repository group profiling the configuration behavior, e.g. encoders selection.
+      /// The configuration of the repositories belong to the same group are handled according to the same profile.</param>
+      /// <param name="variableName">The name of a variable that is the ultimate destination of the values recovered from messages. Must be unique in the context of the repositories group.
+      /// is updated periodically by a data produced - user of the <see cref="IBinding" /> object.</param>
+      /// <returns>Returns an object implementing the <see cref="IBinding" /> interface that can be used to update selected variable on the factory side.</returns>
+      /// <exception cref="System.ArgumentNullException">repositoryGroup</exception>
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
         if (repositoryGroup != m_RepositoryGroup)
           throw new ArgumentNullException("repositoryGroup");
         return _viewModel.GetConsumerBinding(variableName);
       }
+      /// <summary>
+      /// Gets the producer binding.
+      /// </summary>
+      /// <param name="repositoryGroup">The repository group.</param>
+      /// <param name="variableName">Name of the variable.</param>
+      /// <returns>IProducerBinding.</returns>
+      /// <exception cref="System.NotImplementedException"></exception>
       public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
       {
         throw new NotImplementedException();
       }
-    }
-    private class ScreeViewModel : INotifyPropertyChanged
-    {
-
-      #region API
-      /// <summary>
-      /// Helper method that gets the consumer binding.
-      /// </summary>
-      /// <param name="variableName">Name of the variable.</param>
-      /// <returns>IConsumerBinding.</returns>
-      /// <exception cref="System.ArgumentOutOfRangeException">variableName</exception>
-      internal IConsumerBinding GetConsumerBinding(string variableName)
-      {
-        if (variableName == "Value1")
-        {
-          Value1 = new ConsumerBindingMonitoredValue<string>();
-          return Value1;
-        }
-        else if (variableName == "Value2")
-        {
-          Value2 = new ConsumerBindingMonitoredValue<double>();
-          return Value2;
-        }
-        throw new ArgumentOutOfRangeException("variableName");
-      }
       #endregion
 
-      #region ViewModel implementation
-      public ConsumerBindingMonitoredValue<string> Value1
-      {
-        get
-        {
-          return b_Value1;
-        }
-        set
-        {
-          PropertyChanged.RaiseHandler<ConsumerBindingMonitoredValue<string>>(value, ref b_Value1, "Value1", this);
-        }
-      }
-      public ConsumerBindingMonitoredValue<double> Value2
-      {
-        get
-        {
-          return b_Value2;
-        }
-        set
-        {
-          PropertyChanged.RaiseHandler<ConsumerBindingMonitoredValue<double>>(value, ref b_Value2, "Value2", this);
-        }
-      }
-      private ConsumerBindingMonitoredValue<string> b_Value1;
-      private ConsumerBindingMonitoredValue<double> b_Value2;
-      public event PropertyChangedEventHandler PropertyChanged;
+      private ScreeViewModel _viewModel = new ScreeViewModel();
 
-      #endregion
     }
-    private class MyEncodingFactory : Encoding.IEncodingFactory
+    private class MyEncodingFactory : IEncodingFactory
     {
       public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
       {
         if (repositoryGroup != m_RepositoryGroup)
           throw new ArgumentOutOfRangeException("repositoryGroup");
+        Assert.AreEqual<string>(sourceEncoding, converter.TargetType.ToString());
       }
     }
-    internal void ThreadSimulator(Action<byte[]> predicate)
-    {
-      byte[] _buffer = m_UDPSimulator.Receive();
-      predicate(_buffer);
-    }
-    private UDPSimulator m_UDPSimulator = null;
-    internal void CheckConsistency()
-    {
-      foreach (ConsumerAssociation _item in AssociationsCollection.Values)
-        CheckConsistency(_item);
-    }
-    private void CheckConsistency(ConsumerAssociation _item)
-    {
-
-      Assert.AreEqual(HandlerState.Operational, _item.State.State);
-      Assert.AreEqual<Guid>(AssociationConfigurationId, _item.DataDescriptor.Guid);
-      Assert.AreEqual<string>(AssociationConfigurationInformationModelURI, _item.DataDescriptor.Identifier.ToString());
-      Assert.AreEqual<string>(AssociationConfigurationDataSymbolicName, _item.DataDescriptor.SymbolicName);
-    }
+    #endregion
 
     #region preconfigured settings
     private const string AssociationConfigurationAlias = "Association1";

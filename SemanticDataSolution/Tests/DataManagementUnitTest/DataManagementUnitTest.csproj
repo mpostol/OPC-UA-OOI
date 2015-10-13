@@ -65,7 +65,7 @@
     <Compile Include="Simulator\PersistenConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConsumerDeviceSimulatorUnitTest.cs" />
-    <Compile Include="UDPSimulator.cs" />
+    <Compile Include="Simulator\ScreeViewModel.cs" />
     <Compile Include="AssociationUnitTest.cs" />
     <Compile Include="ConfigurationUnitTest.cs" />
     <Compile Include="ConsumerBindingUnitTest.cs" />

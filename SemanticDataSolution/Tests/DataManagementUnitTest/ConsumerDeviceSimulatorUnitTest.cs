@@ -6,9 +6,11 @@ using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
+
   [TestClass]
   public class ConsumerDeviceSimulatorUnitTest
   {
+
     #region test part
     [TestMethod]
     [TestCategory("DataManagement_ConsumerDeviceSimulator")]
@@ -31,11 +33,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       CheckConsistency(_consumer.MessageHandlersCollection);
       _mhf.CheckConsistency();
       _mhf.SendData();
-      //UDPSimulator _transport = _consumer.ReadConfiguration();
-      //byte[] _buffer = new byte[] { 0x1, 0x5, 0x12 };
-      //bool _messageOK = false;
-      //_transport.Write(_buffer, x => _messageOK = _buffer.AsEnumerable<byte>().SequenceEqual<byte>(x));
-      //Assert.IsTrue(_messageOK);
     }
     [TestMethod]
     [TestCategory("DataManagement_ConsumerDeviceSimulator")]

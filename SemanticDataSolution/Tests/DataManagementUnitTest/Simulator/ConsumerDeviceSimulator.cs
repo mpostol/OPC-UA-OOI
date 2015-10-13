@@ -3,6 +3,8 @@ using System;
 using System.ComponentModel;
 using UAOOI.SemanticData.DataManagement.Configuration;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 {
@@ -13,12 +15,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
   internal class ConsumerDeviceSimulator : DataManagementSetup
   {
 
-    internal static DataManagementSetup CreateDevice(MessageHandling.IMessageHandlerFactory communicationFactory)
+    internal static DataManagementSetup CreateDevice(IMessageHandlerFactory communicationFactory, Guid dataSetGuid)
     {
+      AssociationConfigurationId = dataSetGuid;
       DataManagementSetup _ret = new ConsumerDeviceSimulator();
       _ret.ConfigurationFactory = new MyConfigurationFactory();
       _ret.BindingFactory = new MVVMSimulator();
-      _ret.EncodingFactory = new EncodingFactory();
+      _ret.EncodingFactory = new MyEncodingFactory();
       _ret.MessageHandlerFactory = communicationFactory;
       return _ret;
     }
@@ -45,21 +48,21 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
       private string[] GetTransportAssociations()
       {
-        return new string[1] { m_AssociationName };
+        return new string[1] { AssociationConfigurationAlias };
       }
       private AssociationConfiguration[] GetAssociations()
       {
-        return new AssociationConfiguration[] { new AssociationConfiguration() { Alias = m_AssociationName, 
-                                                                                 AssociationRole = AssociationRole.Consumer, DataSet = GetDataSet(), 
-                                                                                 DataSymbolicName = "DataSymbolicName", 
-                                                                                 Id = Guid.NewGuid(), 
-                                                                                 InformationModelURI= "https://github.com/mpostol/OPC-UA-OOI"  
+        return new AssociationConfiguration[] { new AssociationConfiguration() { Alias = AssociationConfigurationAlias, 
+                                                                                 AssociationRole = AssociationRole.Consumer, 
+                                                                                 DataSet = GetDataSet(), 
+                                                                                 DataSymbolicName = "DataSymbolicName",
+                                                                                 Id = AssociationConfigurationId,
+                                                                                 InformationModelURI= AssociationConfigurationInformationModelURI  
         } };
       }
-
       private DataSetConfiguration GetDataSet()
       {
-        return new DataSetConfiguration() { Members = GetMembers(), RepositoryGroup = "MVVMSimulator" };
+        return new DataSetConfiguration() { Members = GetMembers(), RepositoryGroup = m_RepositoryGroup };
       }
       private DataMemberConfiguration[] GetMembers()
       {
@@ -71,14 +74,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
       public event EventHandler<EventArgs> OnAssociationConfigurationChange;
       public event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
-    }
 
+    }
     private class MVVMSimulator : IBindingFactory
     {
       ScreeViewModel _viewModel = new ScreeViewModel();
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
-        if (repositoryGroup != "MVVMSimulator")
+        if (repositoryGroup != m_RepositoryGroup)
           throw new ArgumentNullException("repositoryGroup");
         return _viewModel.GetConsumerBinding(variableName);
       }
@@ -107,7 +110,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
         else if (variableName == "Value2")
         {
           Value2 = new ConsumerBindingMonitoredValue<double>();
-          return Value1;
+          return Value2;
         }
         throw new ArgumentOutOfRangeException("variableName");
       }
@@ -142,7 +145,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 
       #endregion
     }
-    private class EncodingFactory : Encoding.IEncodingFactory
+    private class MyEncodingFactory : Encoding.IEncodingFactory
     {
       public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
       {
@@ -150,19 +153,33 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
           throw new ArgumentOutOfRangeException("repositoryGroup");
       }
     }
-    internal UDPSimulator ReadConfiguration()
-    {
-      m_UDPSimulator = new UDPSimulator(this);
-      return m_UDPSimulator;
-    }
     internal void ThreadSimulator(Action<byte[]> predicate)
     {
       byte[] _buffer = m_UDPSimulator.Receive();
       predicate(_buffer);
     }
     private UDPSimulator m_UDPSimulator = null;
-    private const string m_AssociationName = "Association1";
+    internal void CheckConsistency()
+    {
+      foreach (ConsumerAssociation _item in AssociationsCollection.Values)
+        CheckConsistency(_item);
+    }
+    private void CheckConsistency(ConsumerAssociation _item)
+    {
+
+      Assert.AreEqual(HandlerState.Operational, _item.State.State);
+      Assert.AreEqual<Guid>(AssociationConfigurationId, _item.DataDescriptor.Guid);
+      Assert.AreEqual<string>(AssociationConfigurationInformationModelURI, _item.DataDescriptor.Identifier.ToString());
+      Assert.AreEqual<string>(AssociationConfigurationDataSymbolicName, _item.DataDescriptor.SymbolicName);
+    }
+
+    #region preconfigured settings
+    private const string AssociationConfigurationAlias = "Association1";
     private const string m_RepositoryGroup = "repositoryGroup";
+    private static Guid AssociationConfigurationId = Guid.NewGuid();
+    private const string AssociationConfigurationDataSymbolicName = "DataSymbolicName";
+    private const string AssociationConfigurationInformationModelURI = "https://github.com/mpostol/OPC-UA-OOI";
+    #endregion
 
   }
 }

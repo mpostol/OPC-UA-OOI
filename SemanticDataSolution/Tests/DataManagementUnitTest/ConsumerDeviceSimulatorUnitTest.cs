@@ -1,9 +1,8 @@
 ﻿
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
+using System;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
+using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -13,10 +12,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #region test part
     [TestMethod]
     [TestCategory("DataManagement_ConsumerDeviceSimulator")]
-    [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void ConsumerDeviceSimulatorTestMethod()
     {
-      DataManagementSetup _consumer = ConsumerDeviceSimulator.CreateDevice(new MessageHandlerFactory());
+      Guid DataSetGuid = Guid.NewGuid();
+      MessageHandlerFactory _mhf = new MessageHandlerFactory(DataSetGuid);
+      DataManagementSetup _consumer = ConsumerDeviceSimulator.CreateDevice(_mhf, DataSetGuid);
       Assert.IsNull(_consumer.AssociationsCollection);
       Assert.IsNotNull(_consumer.BindingFactory);
       Assert.IsNotNull(_consumer.ConfigurationFactory);
@@ -24,6 +24,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_consumer.MessageHandlerFactory);
       Assert.IsNull(_consumer.MessageHandlersCollection);
       _consumer.Initialize();
+      _consumer.Run();
+      Assert.AreEqual<int>(1, _consumer.AssociationsCollection.Count);
+      Assert.AreEqual<int>(1, _consumer.MessageHandlersCollection.Count);
+      ((ConsumerDeviceSimulator)_consumer).CheckConsistency();
+      CheckConsistency(_consumer.MessageHandlersCollection);
+      _mhf.CheckConsistency();
+      _mhf.SendData();
       //UDPSimulator _transport = _consumer.ReadConfiguration();
       //byte[] _buffer = new byte[] { 0x1, 0x5, 0x12 };
       //bool _messageOK = false;
@@ -44,7 +51,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [ExpectedException(typeof(NotImplementedException))]
     public void MessageHandlerFactoryCreatorWriteTestMethod()
     {
-      IMessageHandlerFactory _nmf = new MessageHandlerFactory();
+      IMessageHandlerFactory _nmf = new MessageHandlerFactory(Guid.NewGuid());
       Assert.IsNotNull(_nmf);
       IMessageWriter _nmr = _nmf.GetIMessageWriter("UDP", null);
     }
@@ -54,25 +61,72 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class MessageHandlerFactory : IMessageHandlerFactory
     {
 
-      internal MessageHandlerFactory()
+      internal MessageHandlerFactory(Guid dataSetGuid)
       {
-        this.MyMessageReader = new MessageReader();
+        this.MyMessageReader = new MessageReader(dataSetGuid);
       }
+      internal MessageHandlerFactory() : this(Guid.NewGuid()) { }
       internal class MessageReader : IMessageReader
       {
-
+        public MessageReader(Guid dataSetGuid)
+        {
+          State = new MyState();
+          DataSetGuid = dataSetGuid;
+        }
         #region IMessageReader
         public event EventHandler<MessageEventArg> ReadMessageCompleted;
+        private bool m_HaveBeenActivated;
         public IAssociationState State
         {
-          get { throw new NotImplementedException(); }
+          get;
+          private set;
         }
         public void AttachToNetwork()
         {
-          throw new NotImplementedException();
+          m_HaveBeenActivated = true;
         }
         #endregion
-
+        private class MyState : IAssociationState
+        {
+          public MyState()
+          {
+            State = HandlerState.Disabled;
+          }
+          public HandlerState State
+          {
+            get;
+            private set;
+          }
+          public void Enable()
+          {
+            if (State != HandlerState.Disabled)
+              throw new ArgumentException("Wrong state");
+            State = HandlerState.Operational;
+          }
+          public void Disable()
+          {
+            if (State != HandlerState.Operational)
+              throw new ArgumentException("Wrong state");
+            State = HandlerState.Disabled;
+          }
+        }
+        internal void CheckConsistency()
+        {
+          Assert.IsNotNull(State);
+          Assert.AreEqual<HandlerState>(HandlerState.Operational, State.State);
+          Assert.IsNotNull(ReadMessageCompleted);
+          Assert.IsTrue(m_HaveBeenActivated);
+        }
+        internal void SendData()
+        {
+          ReadMessageCompleted(this, new MessageEventArg(CreateMessage()));
+        }
+        private PeriodicDataMessage CreateMessage()
+        {
+          PeriodicDataMessage _ret = new PeriodicDataMessage(new object[] { "123", 1.23 }, DataSetGuid);
+          return _ret;
+        }
+        public Guid DataSetGuid { get; set; }
       }
       internal MessageReader MyMessageReader { get; set; }
 
@@ -87,6 +141,20 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       #endregion
 
+      internal void CheckConsistency()
+      {
+        Assert.IsNotNull(MyMessageReader);
+      }
+      internal void SendData()
+      {
+        MyMessageReader.SendData();
+      }
+
+    }
+    private void CheckConsistency(MessageHandlersCollection messageHandlersCollection)
+    {
+      foreach (MessageHandlerFactory.MessageReader _item in messageHandlersCollection.Values)
+        _item.CheckConsistency();
     }
     #endregion
 

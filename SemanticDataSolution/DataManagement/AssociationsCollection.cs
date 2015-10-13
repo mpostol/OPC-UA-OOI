@@ -107,11 +107,12 @@ namespace UAOOI.SemanticData.DataManagement
     //TODO consider internal implementation
     private class SemanticData : ISemanticData
     {
-      public SemanticData(Uri identifier, string symbolicName, IComparable nodeId, Guid Guid)
+      public SemanticData(Uri identifier, string symbolicName, IComparable nodeId, Guid guid)
       {
         Identifier = identifier;
         SymbolicName = symbolicName;
         NodeId = NodeId;
+        Guid = guid;
       }
       public Uri Identifier
       {

@@ -2,8 +2,10 @@
 
 ## Introduction
 
-This project is aimed to provide a library for Part 14 using the concept described in the [
+This project is aimed to provide a library for Part 14 PubSub Draft 1.04. using the concept described in the [
 OPC UA Data Processing Outside the Server](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution#opc-ua-data-processing-outside-the-server)
+
+For more in-depth information about creating UA Applications exchanging data over the network, see [Getting Started Tutorial](./READMEGettingStartedTutorial.md)
 
 The code is tested using the Unit Test located in the project: [DataManagementUnitTest](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/Tests/DataManagementUnitTest)
 
@@ -25,8 +27,6 @@ In figure below the relationship between this library and external libraries is 
 
 * It is assumed that the data consumer is lightweight and may support limited encoding/decoding functionality. The functionality will be  provided as a plug-in library injected at run time. EncodingDecoding is recognizable using a pair of: name recovered from the Type object and OPC UA DataType represented by its URI.
 * Data binding - it is assumed that the binding of Local repositories/variables and messages content items is provided by the configuration. It could be also provided at runtime by updating the configuration using any external mechanism.
-
-## Remarks
 
 ### Bindings and encodings implementation ##
 

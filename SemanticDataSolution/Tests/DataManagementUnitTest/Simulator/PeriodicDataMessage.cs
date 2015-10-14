@@ -6,7 +6,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 {
 
   /// <summary>
-  /// Class PeriodicDataMessage - very simple encodingless example of how to implement <see cref="IPeriodicDataMessage"/>.
+  /// Class PeriodicDataMessage - very simple in memory no encodings example of how to implement <see cref="IPeriodicDataMessage"/>.
   /// </summary>
   internal class PeriodicDataMessage : IPeriodicDataMessage
   {

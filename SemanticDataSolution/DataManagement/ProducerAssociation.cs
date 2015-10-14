@@ -31,7 +31,7 @@ namespace UAOOI.SemanticData.DataManagement
     {
       IProducerBinding[] _pb =
         dataSetConfiguration.Members.Select<DataMemberConfiguration, IProducerBinding>
-        ( (x) =>
+        ((x) =>
         {
           IProducerBinding _ret = x.GetProducerBinding4DataMember(dataSetConfiguration, bindingFactory, encodingFactory);
           _ret.PropertyChanged += ProcessDataBindings_CollectionChanged;
@@ -51,7 +51,7 @@ namespace UAOOI.SemanticData.DataManagement
     {
       if (messageWriter == null)
         throw new ArgumentNullException("messageReader");
-      if (! m_MessageWriter.Exists(x => x.Equals(messageWriter)))
+      if (!m_MessageWriter.Exists(x => x.Equals(messageWriter)))
         m_MessageWriter.Add(messageWriter);
     }
     /// <summary>
@@ -92,7 +92,7 @@ namespace UAOOI.SemanticData.DataManagement
     private void ProcessDataBindings_CollectionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
       foreach (IMessageWriter _mwx in m_MessageWriter)
-        _mwx.Send(x => m_ProcessDataBindings[x]);
+        _mwx.Send(x => m_ProcessDataBindings[x], m_ProcessDataBindings.Count);
     }
     #endregion
 

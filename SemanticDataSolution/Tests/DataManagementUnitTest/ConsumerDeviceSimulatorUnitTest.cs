@@ -17,7 +17,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void ConsumerDeviceSimulatorTestMethod()
     {
       Guid DataSetGuid = Guid.NewGuid();
-      MessageHandlerFactory _mhf = new MessageHandlerFactory(DataSetGuid);
+      MyMessageHandlerFactory _mhf = new MyMessageHandlerFactory(DataSetGuid);
       DataManagementSetup _consumer = ConsumerDeviceSimulator.CreateDevice(_mhf, DataSetGuid);
       Assert.IsNull(_consumer.AssociationsCollection);
       Assert.IsNotNull(_consumer.BindingFactory);
@@ -30,7 +30,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<int>(1, _consumer.AssociationsCollection.Count);
       Assert.AreEqual<int>(1, _consumer.MessageHandlersCollection.Count);
       ((ConsumerDeviceSimulator)_consumer).CheckConsistency();
-      CheckConsistency(_consumer.MessageHandlersCollection);
       _mhf.CheckConsistency();
       _mhf.SendData();
     }
@@ -38,7 +37,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_ConsumerDeviceSimulator")]
     public void MessageHandlerFactoryCreatorReadTestMethod()
     {
-      IMessageHandlerFactory _nmf = new MessageHandlerFactory();
+      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(Guid.NewGuid());
       Assert.IsNotNull(_nmf);
       IMessageReader _nmr = _nmf.GetIMessageReader("UDP", null);
       Assert.IsNotNull(_nmr);
@@ -48,88 +47,28 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [ExpectedException(typeof(NotImplementedException))]
     public void MessageHandlerFactoryCreatorWriteTestMethod()
     {
-      IMessageHandlerFactory _nmf = new MessageHandlerFactory(Guid.NewGuid());
+      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(Guid.NewGuid());
       Assert.IsNotNull(_nmf);
       IMessageWriter _nmr = _nmf.GetIMessageWriter("UDP", null);
     }
     #endregion
 
     #region private
-    private class MessageHandlerFactory : IMessageHandlerFactory
+    private class MyMessageHandlerFactory : IMessageHandlerFactory
     {
 
-      internal MessageHandlerFactory(Guid dataSetGuid)
+      #region creator
+      internal MyMessageHandlerFactory(Guid dataSetGuid)
       {
         this.MyMessageReader = new MessageReader(dataSetGuid);
       }
-      internal MessageHandlerFactory() : this(Guid.NewGuid()) { }
-      internal class MessageReader : IMessageReader
-      {
-        public MessageReader(Guid dataSetGuid)
-        {
-          State = new MyState();
-          DataSetGuid = dataSetGuid;
-        }
-        #region IMessageReader
-        public event EventHandler<MessageEventArg> ReadMessageCompleted;
-        private bool m_HaveBeenActivated;
-        public IAssociationState State
-        {
-          get;
-          private set;
-        }
-        public void AttachToNetwork()
-        {
-          m_HaveBeenActivated = true;
-        }
-        #endregion
-        private class MyState : IAssociationState
-        {
-          public MyState()
-          {
-            State = HandlerState.Disabled;
-          }
-          public HandlerState State
-          {
-            get;
-            private set;
-          }
-          public void Enable()
-          {
-            if (State != HandlerState.Disabled)
-              throw new ArgumentException("Wrong state");
-            State = HandlerState.Operational;
-          }
-          public void Disable()
-          {
-            if (State != HandlerState.Operational)
-              throw new ArgumentException("Wrong state");
-            State = HandlerState.Disabled;
-          }
-        }
-        internal void CheckConsistency()
-        {
-          Assert.IsNotNull(State);
-          Assert.AreEqual<HandlerState>(HandlerState.Operational, State.State);
-          Assert.IsNotNull(ReadMessageCompleted);
-          Assert.IsTrue(m_HaveBeenActivated);
-        }
-        internal void SendData()
-        {
-          ReadMessageCompleted(this, new MessageEventArg(CreateMessage()));
-        }
-        private PeriodicDataMessage CreateMessage()
-        {
-          PeriodicDataMessage _ret = new PeriodicDataMessage(new object[] { "123", 1.23 }, DataSetGuid);
-          return _ret;
-        }
-        public Guid DataSetGuid { get; set; }
-      }
-      internal MessageReader MyMessageReader { get; set; }
+      #endregion
 
       #region IMessageHandlerFactory
       public IMessageReader GetIMessageReader(string name, System.Xml.XmlElement configuration)
       {
+        Assert.AreEqual("UDP", name);
+        Assert.IsNull(configuration);
         return this.MyMessageReader;
       }
       public IMessageWriter GetIMessageWriter(string name, System.Xml.XmlElement configuration)
@@ -138,6 +77,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       #endregion
 
+      #region testing environment
       internal void CheckConsistency()
       {
         Assert.IsNotNull(MyMessageReader);
@@ -146,14 +86,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         MyMessageReader.SendData();
       }
+      #endregion
 
-    }
-    private void CheckConsistency(MessageHandlersCollection messageHandlersCollection)
-    {
-      foreach (MessageHandlerFactory.MessageReader _item in messageHandlersCollection.Values)
-        _item.CheckConsistency();
+      #region private
+      private MessageReader MyMessageReader { get; set; }
+      #endregion
+
     }
     #endregion
 
   }
+
+
 }

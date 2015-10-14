@@ -147,9 +147,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class MessageWriter : IMessageWriter
     {
       internal bool IsOk = false;
-      public void Send(Func<int, IProducerBinding> producerBinding)
+      public void Send(Func<int, IProducerBinding> producerBinding, int length)
       {
         IsOk = true;
+        Assert.AreEqual<int>(2, length);
       }
       public IAssociationState State
       {

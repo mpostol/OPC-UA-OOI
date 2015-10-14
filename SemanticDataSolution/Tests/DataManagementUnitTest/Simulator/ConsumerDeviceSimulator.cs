@@ -8,6 +8,7 @@ using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 {
+
   /// <summary>
   /// Class ConsumerDeviceSimulator - simulates a device that consumes data provided using the integration services.
   /// It could be for example HMI or PLC.
@@ -16,14 +17,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
   {
 
     #region creator of the ConsumerDeviceSimulator
-    internal static DataManagementSetup CreateDevice(IMessageHandlerFactory communicationFactory, Guid dataSetGuid)
+    internal static DataManagementSetup CreateDevice(IMessageHandlerFactory messageHandlerFactory, Guid dataSetGuid)
     {
       AssociationConfigurationId = dataSetGuid;
       DataManagementSetup _ret = new ConsumerDeviceSimulator();
       _ret.ConfigurationFactory = new MyConfigurationFactory();
-      _ret.BindingFactory = new MVVMSimulator();
+      _ret.BindingFactory = new MVVMSimulatorFactory();
       _ret.EncodingFactory = new MyEncodingFactory();
-      _ret.MessageHandlerFactory = communicationFactory;
+      _ret.MessageHandlerFactory = messageHandlerFactory;
       return _ret;
     }
     #endregion
@@ -36,6 +37,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       foreach (ConsumerAssociation _item in AssociationsCollection.Values)
         CheckConsistency(_item);
+      foreach ( MessageReader _item in MessageHandlersCollection.Values)
+        _item.CheckConsistency();
     }
     private void CheckConsistency(ConsumerAssociation _item)
     {
@@ -80,12 +83,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { Associations = GetTransportAssociations(), 
                                                                                            Configuration = null, 
-                                                                                           Name = "MessageTransportConfiguration", 
+                                                                                           Name = "UDP", 
                                                                                            TransportRole = AssociationRole.Consumer } };
       }
       private string[] GetTransportAssociations()
       {
-        return new string[1] { AssociationConfigurationAlias };
+        return new string[] { AssociationConfigurationAlias };
       }
       private AssociationConfiguration[] GetAssociations()
       {
@@ -115,7 +118,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     /// <summary>
     /// Class MVVMSimulator it is simulator of a component providing user interface constructed according to the Model View ViewModel pattern
     /// </summary>
-    private class MVVMSimulator : IBindingFactory
+    private class MVVMSimulatorFactory : IBindingFactory
     {
 
       #region IBindingFactory
@@ -132,7 +135,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         if (repositoryGroup != m_RepositoryGroup)
           throw new ArgumentNullException("repositoryGroup");
-        return _viewModel.GetConsumerBinding(variableName);
+        return m_ViewModel.GetConsumerBinding(variableName);
       }
       /// <summary>
       /// Gets the producer binding.
@@ -147,7 +150,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
       #endregion
 
-      private ScreeViewModel _viewModel = new ScreeViewModel();
+      private ScreeViewModel m_ViewModel = new ScreeViewModel();
 
     }
     private class MyEncodingFactory : IEncodingFactory
@@ -162,12 +165,110 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     #endregion
 
     #region preconfigured settings
+    private static Guid AssociationConfigurationId;
     private const string AssociationConfigurationAlias = "Association1";
     private const string m_RepositoryGroup = "repositoryGroup";
-    private static Guid AssociationConfigurationId = Guid.NewGuid();
     private const string AssociationConfigurationDataSymbolicName = "DataSymbolicName";
     private const string AssociationConfigurationInformationModelURI = "https://github.com/mpostol/OPC-UA-OOI";
     #endregion
 
   }
+
+  internal class MessageReader : IMessageReader
+  {
+    public MessageReader(Guid dataSetGuid)
+    {
+      State = new MyState();
+      DataSetGuid = dataSetGuid;
+    }
+
+    #region IMessageReader
+    public event EventHandler<MessageEventArg> ReadMessageCompleted;
+    public IAssociationState State
+    {
+      get;
+      private set;
+    }
+    public void AttachToNetwork()
+    {
+      m_HaveBeenActivated = true;
+    }
+    #endregion
+
+    #region testing environment
+    internal void SendData()
+    {
+      ReadMessageCompleted(this, new MessageEventArg(CreateMessage()));
+    }
+    internal void CheckConsistency()
+    {
+      Assert.IsNotNull(State);
+      Assert.AreEqual<HandlerState>(HandlerState.Operational, State.State);
+      Assert.IsNotNull(ReadMessageCompleted);
+      Assert.IsTrue(m_HaveBeenActivated);
+    }
+    #endregion
+
+    #region private
+    /// <summary>
+    /// Class MyState.
+    /// </summary>
+    private class MyState : IAssociationState
+    {
+
+      /// <summary>
+      /// Initializes a new instance of the <see cref="MyState"/> class.
+      /// </summary>
+      public MyState()
+      {
+        State = HandlerState.Disabled;
+      }
+      /// <summary>
+      /// Gets the current state <see cref="HandlerState" /> of the <see cref="Association" /> instance.
+      /// </summary>
+      /// <value>The state of <see cref="HandlerState" /> type.</value>
+      public HandlerState State
+      {
+        get;
+        private set;
+      }
+      /// <summary>
+      /// This method is used to enable a configured <see cref="Association" /> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational" /> state.
+      /// In the case of an error situation, the state changes into <see cref="HandlerState.Error" />. The operation is rejected if the current <see cref="State" />  is not <see cref="HandlerState.Disabled" />.
+      /// </summary>
+      /// <exception cref="System.ArgumentException">Wrong state</exception>
+      public void Enable()
+      {
+        if (State != HandlerState.Disabled)
+          throw new ArgumentException("Wrong state");
+        State = HandlerState.Operational;
+      }
+      /// <summary>
+      /// This method is used to disable an already enabled <see cref="IAssociation" /> object.
+      /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled" /> or <see cref="HandlerState.NoConfiguration" />.
+      /// </summary>
+      /// <exception cref="System.ArgumentException">Wrong state</exception>
+      public void Disable()
+      {
+        if (State != HandlerState.Operational)
+          throw new ArgumentException("Wrong state");
+        State = HandlerState.Disabled;
+      }
+
+    }
+    /// <summary>
+    /// Creates the message.
+    /// </summary>
+    /// <returns>PeriodicDataMessage.</returns>
+    private PeriodicDataMessage CreateMessage()
+    {
+      PeriodicDataMessage _ret = new PeriodicDataMessage(new object[] { "123", 1.23 }, DataSetGuid);
+      return _ret;
+    }
+    private Guid DataSetGuid { get; set; }
+    private bool m_HaveBeenActivated;
+    #endregion
+
+  }
+
 }

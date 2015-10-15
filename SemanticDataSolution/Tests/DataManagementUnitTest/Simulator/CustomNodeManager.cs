@@ -26,8 +26,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       else
         throw new ArgumentOutOfRangeException("variableName");
     }
-    private DataRepository.ProducerBindingMonitoredValue<string> Value1 { get; set; }
-    private DataRepository.ProducerBindingMonitoredValue<double> Value2 { get; set; }
+    private ProducerBindingMonitoredValue<string> Value1 { get; set; }
+    private ProducerBindingMonitoredValue<double> Value2 { get; set; }
 
     #region test environment
     internal void Update(object value, string name)

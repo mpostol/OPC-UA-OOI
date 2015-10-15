@@ -77,7 +77,6 @@
     <Compile Include="DataRepository\IProducerBinding.cs" />
     <Compile Include="ISemanticData.cs" />
     <Compile Include="IIntegrationServices.cs" />
-    <Compile Include="IntegrationServices.cs" />
     <Compile Include="IPeriodicDataMessage.cs" />
     <Compile Include="MessageEventArg.cs" />
     <Compile Include="MessageHandling\IMessageHandler.cs" />

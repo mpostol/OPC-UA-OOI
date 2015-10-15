@@ -149,7 +149,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       #endregion
 
       #region private
-      private CustomNodesManager m_CustomNodesManager = new CustomNodesManager();
+      private CustomNodeManager m_CustomNodesManager = new CustomNodeManager();
       #endregion
 
       #region testing environment

@@ -8,7 +8,7 @@ using UAOOI.SemanticData.DataManagement.DataRepository;
 namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 {
 
-  internal class CustomNodesManager
+  internal class CustomNodeManager
   {
 
     internal IProducerBinding GetProducerBinding(string variableName)

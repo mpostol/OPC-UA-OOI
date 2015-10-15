@@ -14,3 +14,4 @@ The class `ConsumerDeviceSimulator` is an implementation of an application like 
 ## How to: Implement producer role for OPC UA server
 
 The class `OPCUAServerProducerSimulator` captures implementation of an interface between the library and an object supporting  **Address Space Management** functionality.
+The **Address Space Management** is represented by the class `CustomNodeManager` that instantiates the server address space, i.e. creates the nodes and binds the nodes with underlying external behavior. The example contains two `Value` attributes implemented as an instance of class `ProducerBindingMonitoredValue`. Modification of the `ProducerBindingMonitoredValue<type>.MonitoredValue` provides notification to the message handling machine state that new value is available.

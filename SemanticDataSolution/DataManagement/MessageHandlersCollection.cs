@@ -11,8 +11,15 @@ namespace UAOOI.SemanticData.DataManagement
   /// </summary>
   internal class MessageHandlersCollection : Dictionary<string, IMessageHandler>
   {
-    internal static MessageHandlersCollection CreateMessageHandlers
-      (Configuration.MessageTransportConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, Action<string, IMessageHandler> addMessageHandler)
+    /// <summary>
+    /// Creates the message handlers.
+    /// </summary>
+    /// <param name="configuration">The configuration.</param>
+    /// <param name="messageHandlerFactory">The message handler factory.</param>
+    /// <param name="addMessageHandler">The add message handler.</param>
+    /// <returns>MessageHandlersCollection.</returns>
+    /// <exception cref="System.ArgumentOutOfRangeException">Name;Duplicated transport name</exception>
+    internal static MessageHandlersCollection CreateMessageHandlers(MessageTransportConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, Action<string, IMessageHandler> addMessageHandler)
     {
       MessageHandlersCollection _collection = new MessageHandlersCollection();
       foreach (Configuration.MessageTransportConfiguration item in configuration)

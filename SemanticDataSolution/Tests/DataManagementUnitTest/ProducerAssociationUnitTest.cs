@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.Encoding;
@@ -19,7 +18,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_ProducerAssociation")]
     public void ProducerAssociationCreatorTestMethod()
     {
-      ProducerAssociation _npa = new ProducerAssociation(new SD(), "DataManagement_ProducerAssociation", PersistentConfiguration.GetDataSet(), new IBF(Repository), new IEF());
+      ProducerAssociation _npa = new ProducerAssociation(new SemanticData(), "DataManagement_ProducerAssociation", PersistentConfiguration.GetDataSet(), new BindingFactory(Repository), new IEF());
       Assert.IsNotNull(_npa);
       Assert.IsTrue(Repository.Count > 0);
       ProducerBindingMonitoredValue<object>[] _values = Repository.Values.Cast<ProducerBindingMonitoredValue<object>>().ToArray<ProducerBindingMonitoredValue<object>>();
@@ -35,35 +34,30 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsTrue(((IProducerBinding)_values[0]).NewValue);
       Assert.IsTrue(_mw.IsOk);
     }
-
-    private static void PropertyChangedTestMethod(ProducerBindingMonitoredValue<object> _values)
+    [TestMethod]
+    [TestCategory("DataManagement_ConsumerAssociation")]
+    public void ConsumerAssociationCreatorTestMethod()
     {
-      bool _isOk = false;
-      Assert.IsFalse(_isOk);
-      Assert.IsFalse(((IProducerBinding)_values).NewValue);
-      _values.PropertyChanged += (x, y) => _isOk = true;
-      _values.MonitoredValue = "new value";
-      Assert.IsTrue(_isOk);
-      ((IProducerBinding)_values).GetFromRepository();
-      _isOk = false;
-      _values.MonitoredValue = "new value";
-      Assert.IsFalse(_isOk);
-      _values.MonitoredValue = "";
-      Assert.IsTrue(_isOk);
+      ConsumerAssociation _ca = new ConsumerAssociation(new SemanticData(), "ConsumerAssociationCreatorTestMethod", PersistentConfiguration.GetDataSet(), new BindingFactory(Repository), new IEF());
+      Assert.IsNotNull(_ca);
     }
     [TestMethod]
     [TestCategory("DataManagement_ProducerAssociation")]
     [ExpectedException(typeof(ArgumentNullException))]
     public void AddMessageWriterTestMethod()
     {
-      ProducerAssociation _npa = new ProducerAssociation(new SD(), "DataManagement_ProducerAssociation", PersistentConfiguration.GetDataSet(), new IBF(Repository), new IEF());
+      ProducerAssociation _npa = new ProducerAssociation(new SemanticData(), "DataManagement_ProducerAssociation", PersistentConfiguration.GetDataSet(), new BindingFactory(Repository), new IEF());
       Assert.IsNotNull(_npa);
       Assert.IsTrue(Repository.Count > 0);
       _npa.AddMessageWriter(null);
     }
 
+
     #region private
-    private class SD : ISemanticData
+    /// <summary>
+    /// Class SemanticData.
+    /// </summary>
+    private class SemanticData : ISemanticData
     {
       public Uri Identifier
       {
@@ -82,15 +76,18 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         get { return Guid.NewGuid(); }
       }
     }
-    private class IBF : IBindingFactory
+    private class BindingFactory : IBindingFactory
     {
-      public IBF(Dictionary<string, IProducerBinding> repository)
+      public BindingFactory(Dictionary<string, IBinding> repository)
       {
         m_Repository = repository;
       }
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
-        return new MyBinding();
+        IConsumerBinding _ncb = new ConsumerBindingMonitoredValue<object>();
+        string _key = String.Format("{0}.{1}", repositoryGroup, variableName);
+        m_Repository.Add(_key, _ncb);
+        return _ncb;
       }
       public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
       {
@@ -99,42 +96,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_Repository.Add(_key, _npb);
         return _npb;
       }
-
-      private class MyBinding : IConsumerBinding
-      {
-        public System.Windows.Data.IValueConverter Converter
-        {
-          set { }
-        }
-        public Type TargetType
-        {
-          get { throw new NotImplementedException(); }
-        }
-        public object Parameter
-        {
-          set { }
-        }
-        public System.Globalization.CultureInfo Culture
-        {
-          set { }
-        }
-        public void Assign2Repository(object value)
-        {
-          throw new NotImplementedException();
-        }
-        public void OnEnabling()
-        {
-          throw new NotImplementedException();
-        }
-        public void OnDisabling()
-        {
-          throw new NotImplementedException();
-        }
-      }
-      private Dictionary<string, IProducerBinding> m_Repository = new Dictionary<string, IProducerBinding>();
-      public event PropertyChangedEventHandler PropertyChanged;
+      private Dictionary<string, IBinding> m_Repository = new Dictionary<string, IBinding>();
     }
-    private Dictionary<string, IProducerBinding> Repository = new Dictionary<string, IProducerBinding>();
+    private Dictionary<string, IBinding> Repository = new Dictionary<string, IBinding>();
     private class IEF : IEncodingFactory
     {
       public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
@@ -160,6 +124,21 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
+    }
+    private static void PropertyChangedTestMethod(ProducerBindingMonitoredValue<object> _values)
+    {
+      bool _isOk = false;
+      Assert.IsFalse(_isOk);
+      Assert.IsFalse(((IProducerBinding)_values).NewValue);
+      _values.PropertyChanged += (x, y) => _isOk = true;
+      _values.MonitoredValue = "new value";
+      Assert.IsTrue(_isOk);
+      ((IProducerBinding)_values).GetFromRepository();
+      _isOk = false;
+      _values.MonitoredValue = "new value";
+      Assert.IsFalse(_isOk);
+      _values.MonitoredValue = "";
+      Assert.IsTrue(_isOk);
     }
     #endregion
 

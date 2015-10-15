@@ -72,7 +72,6 @@
     <Compile Include="ConfigurationUnitTest.cs" />
     <Compile Include="ConsumerBindingUnitTest.cs" />
     <Compile Include="EncodingFactoryUnitTest.cs" />
-    <Compile Include="ConsumerAssociationUnitTest.cs" />
     <Compile Include="ProducerAssociationUnitTest.cs" />
     <Compile Include="DataManagementSetupUnitTest.cs" />
     <Compile Include="PeriodicDataMessageUnitTest.cs" />

@@ -3,6 +3,7 @@ using System;
 
 namespace UAOOI.SemanticData.DataManagement
 {
+
   /// <summary>
   /// Interface ISemanticData - represents a data item conforming to the UA Semantic Data paradigm. 
   /// </summary>
@@ -75,4 +76,5 @@ namespace UAOOI.SemanticData.DataManagement
     IComparable NodeId { get; }
 
   }
+
 }

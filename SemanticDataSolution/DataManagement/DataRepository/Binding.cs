@@ -23,6 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     {
       m_TargetType = typeof(type);
     }
+
     #region IBinding
     /// <summary>
     /// Gets the type of the repository a variable that is to be updated using <see cref="IBinding.Assign2Repository" />.

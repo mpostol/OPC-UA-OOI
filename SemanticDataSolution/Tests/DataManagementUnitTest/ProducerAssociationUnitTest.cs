@@ -150,7 +150,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public void Send(Func<int, IProducerBinding> producerBinding, int length)
       {
         IsOk = true;
-        Assert.AreEqual<int>(2, length);
+        Assert.AreEqual<int>(3, length);
       }
       public IAssociationState State
       {

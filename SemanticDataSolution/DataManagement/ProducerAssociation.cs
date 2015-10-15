@@ -29,7 +29,7 @@ namespace UAOOI.SemanticData.DataManagement
     internal ProducerAssociation(ISemanticData data, string aliasName, DataSetConfiguration dataSetConfiguration, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
       : base(data, aliasName)
     {
-      IProducerBinding[] _pb =
+      m_ProcessDataBindings =
         dataSetConfiguration.Members.Select<DataMemberConfiguration, IProducerBinding>
         ((x) =>
         {
@@ -37,7 +37,6 @@ namespace UAOOI.SemanticData.DataManagement
           _ret.PropertyChanged += ProcessDataBindings_CollectionChanged;
           return _ret;
         }).ToArray<IProducerBinding>();
-      m_ProcessDataBindings = new ObservableCollection<IProducerBinding>(m_ProcessDataBindings.AsEnumerable<IProducerBinding>());
     }
     #endregion
 
@@ -88,11 +87,11 @@ namespace UAOOI.SemanticData.DataManagement
       AddMessageWriter(messageHandler as IMessageWriter);
     }
     private List<IMessageWriter> m_MessageWriter = new List<IMessageWriter>();
-    private ObservableCollection<IProducerBinding> m_ProcessDataBindings = new ObservableCollection<IProducerBinding>();
+    private IProducerBinding[] m_ProcessDataBindings;
     private void ProcessDataBindings_CollectionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
       foreach (IMessageWriter _mwx in m_MessageWriter)
-        _mwx.Send(x => m_ProcessDataBindings[x], m_ProcessDataBindings.Count);
+        _mwx.Send(x => m_ProcessDataBindings[x], m_ProcessDataBindings.Length);
     }
     #endregion
 

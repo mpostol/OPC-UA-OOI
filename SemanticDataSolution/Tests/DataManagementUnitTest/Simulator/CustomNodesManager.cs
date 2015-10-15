@@ -23,11 +23,37 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
         Value2 = new ProducerBindingMonitoredValue<double>(variableName);
         return Value2;
       }
-      throw new ArgumentOutOfRangeException("variableName");
+      else
+        throw new ArgumentOutOfRangeException("variableName");
     }
-
     private DataRepository.ProducerBindingMonitoredValue<string> Value1 { get; set; }
     private DataRepository.ProducerBindingMonitoredValue<double> Value2 { get; set; }
+
+    #region test environment
+    internal void Update(object value, string name)
+    {
+      if (name == "Value1")
+      {
+        if (Value1.HandlerState != HandlerState.Operational)
+          throw new ArgumentOutOfRangeException("Wrong HandlerState");
+        if (((IProducerBinding)Value1).TargetType != value.GetType())
+          throw new ArgumentOutOfRangeException("Wrong type");
+        if ("Value1" != name)
+          throw new ArgumentOutOfRangeException("Wrong name");
+        Value1.MonitoredValue = (string)value;
+      }
+      else if (name == "Value2")
+      {
+        if (Value1.HandlerState != HandlerState.Operational)
+          throw new ArgumentOutOfRangeException("Wrong HandlerState");
+        if (((IProducerBinding)Value2).TargetType != value.GetType())
+          throw new ArgumentOutOfRangeException("Wrong type");
+        if ("Value2" != name)
+          throw new ArgumentOutOfRangeException("Wrong name");
+        Value2.MonitoredValue = (double)value;
+      }
+    }
+    #endregion
 
   }
 }

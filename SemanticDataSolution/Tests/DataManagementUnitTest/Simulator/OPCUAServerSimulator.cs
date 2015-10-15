@@ -14,6 +14,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
   /// </summary>
   internal class OPCUAServerProducerSimulator : DataManagementSetup
   {
+    #region creator
     internal static DataManagementSetup CreateDevice(IMessageHandlerFactory messageHandlerFactory, Guid dataSetGuid)
     {
       AssociationConfigurationId = dataSetGuid;
@@ -24,9 +25,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       _ret.MessageHandlerFactory = messageHandlerFactory;
       return _ret;
     }
+    #endregion
 
+    #region testing environment
     /// <summary>
-    /// Checks the consistency of the all items in the <see cref="AssociationsCollection"/> colection.
+    /// Checks the consistency of the all items in the <see cref="AssociationsCollection"/> collection.
     /// </summary>
     internal void CheckConsistency()
     {
@@ -44,6 +47,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       Assert.AreEqual<string>(AssociationConfigurationDataSymbolicName, _item.DataDescriptor.SymbolicName);
 
     }
+    internal void Update(object value, string name)
+    {
+      ((MyBindingFFactory)this.BindingFactory).Update(value, name);
+    }
+    #endregion
 
     #region Factories set
     /// <summary>
@@ -140,7 +148,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
       #endregion
 
+      #region private
       private CustomNodesManager m_CustomNodesManager = new CustomNodesManager();
+      #endregion
+
+      #region testing environment
+      internal void Update(object value, string name)
+      {
+        m_CustomNodesManager.Update(value, name);
+      }
+      #endregion
 
     }
     private class MyEncodingFactory : IEncodingFactory

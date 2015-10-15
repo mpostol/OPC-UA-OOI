@@ -30,8 +30,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<int>(1, _producer.MessageHandlersCollection.Count);
       ((OPCUAServerProducerSimulator)_producer).CheckConsistency();
       _mhf.CheckConsistency();
-      _mhf.SendData();
-
+      ((OPCUAServerProducerSimulator)_producer).Update("Value1", "Value1");
     }
     [TestMethod]
     [TestCategory("DataManagement_ConsumerDeviceSimulator")]
@@ -79,18 +78,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
       #region private
       private IMessageWriter MessageWriter { get; set; }
-
       #endregion
 
       #region test environment
       internal void CheckConsistency()
       {
-        throw new NotImplementedException();
+        Assert.IsNotNull(MessageWriter);
       }
-      internal void SendData()
-      {
-        throw new NotImplementedException();
-      } 
       #endregion
     }
     #endregion

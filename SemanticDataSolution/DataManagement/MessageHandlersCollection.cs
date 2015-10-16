@@ -47,6 +47,9 @@ namespace UAOOI.SemanticData.DataManagement
     /// <summary>
     /// Handles the configuration modifications.
     /// </summary>
+    /// <note>
+    /// It is intentionally not implemented
+    /// </note>
     /// <param name="sender">The sender.</param>
     /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
     /// <exception cref="System.NotImplementedException">It is intentionally not implemented</exception>
@@ -55,7 +58,8 @@ namespace UAOOI.SemanticData.DataManagement
       throw new NotImplementedException("It is intentionally not implemented");
     }
     /// <summary>
-    /// Runs this instance.
+    /// Runs this instance. 
+    /// It call <see cref="IMessageHandler.AttachToNetwork"/> and enables data pumping by enabling the the state of all <see cref="IMessageHandler"/> added to this collection.
     /// </summary>
     internal void Run()
     {

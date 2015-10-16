@@ -19,7 +19,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// <value>The converter as an instance of the <see cref="IValueConverter"/>.</value>
     IValueConverter Converter { set; }
     /// <summary>
-    /// Gets the type of the repository a variable that is to be updated using <see cref="IBinding.Assign2Repository"/>.
+    /// Gets the type of the variable repository.
     /// </summary>
     /// <value>The type of the repository target variable of the binding.</value>
     Type TargetType { get; }

@@ -117,6 +117,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         public object Parameter
         {
           set { }
+          get { return null; }
         }
         public System.Globalization.CultureInfo Culture
         {

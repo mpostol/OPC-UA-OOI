@@ -25,7 +25,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       IEF _ief = new IEF();
       Assert.IsNotNull(_ief);
-      IBF _ibf = new IBF();
+      MyBinding _ibf = new MyBinding();
       _ief.UpdateValueConverter(_ibf, String.Empty, String.Empty);
       _ibf.Assign2Repository(null);
     }
@@ -54,7 +54,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         throw new NotImplementedException();
       }
     }
-    private class IBF : IBinding
+    private class MyBinding : IBinding
     {
       public System.Windows.Data.IValueConverter Converter
       {
@@ -68,7 +68,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public object Parameter
       {
         set;
-        private get;
+        get;
       }
       public System.Globalization.CultureInfo Culture
       {
@@ -85,7 +85,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
-
       public void OnDisabling()
       {
         throw new NotImplementedException();

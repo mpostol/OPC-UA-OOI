@@ -15,6 +15,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   public class AssociationUnitTest
   {
     #region test
+
+    #region Association
     [TestMethod]
     [ExpectedException(typeof(NullReferenceException))]
     [TestCategory("DataManagement_Association")]
@@ -134,8 +136,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<HandlerState>(HandlerState.Error, _nt.State.State);
       _nt.State.Enable();
     }
+    #endregion
+
+    #region ProducerAssociation
     [TestMethod]
-    [TestCategory("DataManagement_ProducerAssociation")]
+    [TestCategory("DataManagement_Association")]
     public void ProducerAssociationCreatorTestMethod()
     {
       ProducerAssociation _npa = new ProducerAssociation(new SemanticData(), "DataManagement_ProducerAssociation", PersistentConfiguration.GetDataSet(), new BindingFactory(Repository), new IEF());
@@ -155,14 +160,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsTrue(_mw.IsOk);
     }
     [TestMethod]
-    [TestCategory("DataManagement_ConsumerAssociation")]
-    public void ConsumerAssociationCreatorTestMethod()
-    {
-      ConsumerAssociation _ca = new ConsumerAssociation(new SemanticData(), "ConsumerAssociationCreatorTestMethod", PersistentConfiguration.GetDataSet(), new BindingFactory(Repository), new IEF());
-      Assert.IsNotNull(_ca);
-    }
-    [TestMethod]
-    [TestCategory("DataManagement_ProducerAssociation")]
+    [TestCategory("DataManagement_Association")]
     [ExpectedException(typeof(ArgumentNullException))]
     public void AddMessageWriterTestMethod()
     {
@@ -171,6 +169,17 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsTrue(Repository.Count > 0);
       _npa.AddMessageWriter(null);
     }
+    #endregion
+
+    #region ConsumerAssociation
+    [TestMethod]
+    [TestCategory("DataManagement_Association")]
+    public void ConsumerAssociationCreatorTestMethod()
+    {
+      ConsumerAssociation _ca = new ConsumerAssociation(new SemanticData(), "ConsumerAssociationCreatorTestMethod", PersistentConfiguration.GetDataSet(), new BindingFactory(Repository), new IEF());
+      Assert.IsNotNull(_ca);
+    }
+    #endregion
 
     #endregion
 
@@ -252,9 +261,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         private set;
       }
     }
-    
-    #endregion
-    #region private
     /// <summary>
     /// Class SemanticData.
     /// </summary>
@@ -326,19 +332,21 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         throw new NotImplementedException();
       }
     }
-    private static void PropertyChangedTestMethod(ProducerBindingMonitoredValue<object> _values)
+    private static void PropertyChangedTestMethod(ProducerBindingMonitoredValue<object> values)
     {
       bool _isOk = false;
       Assert.IsFalse(_isOk);
-      Assert.IsFalse(((IProducerBinding)_values).NewValue);
-      _values.PropertyChanged += (x, y) => _isOk = true;
-      _values.MonitoredValue = "new value";
+      Assert.IsFalse(((IProducerBinding)values).NewValue);
+      values.PropertyChanged += (x, y) => _isOk = true;
+      values.MonitoredValue = "new value";
       Assert.IsTrue(_isOk);
-      ((IProducerBinding)_values).GetFromRepository();
+      Assert.IsTrue(((IProducerBinding)values).NewValue);
+      ((IProducerBinding)values).GetFromRepository();
+      Assert.IsFalse(((IProducerBinding)values).NewValue);
       _isOk = false;
-      _values.MonitoredValue = "new value";
+      values.MonitoredValue = "new value";
       Assert.IsFalse(_isOk);
-      _values.MonitoredValue = "";
+      values.MonitoredValue = "";
       Assert.IsTrue(_isOk);
     }
     #endregion

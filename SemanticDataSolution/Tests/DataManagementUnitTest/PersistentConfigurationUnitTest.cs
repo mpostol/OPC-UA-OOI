@@ -11,6 +11,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   [TestClass]
   public class PersistentConfigurationUnitTest
   {
+    
+    #region TestMethod
     [TestMethod]
     [TestCategory("DataManagement_PersistentConfiguration")]
     public void GetLocalConfigurationTestMethod()
@@ -19,6 +21,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       TestConfiguration(_cnf.Associations);
       TestConfiguration(_cnf.MessageTransport);
     }
+    #endregion
+
+    #region private
     private void TestConfiguration(MessageTransportConfiguration[] messageTransportConfiguration)
     {
       foreach (MessageTransportConfiguration _item in messageTransportConfiguration)
@@ -61,6 +66,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private static Dictionary<string, AssociationConfiguration> AssociationConfigurationDictionary = new Dictionary<string, AssociationConfiguration>();
     private static Dictionary<Guid, AssociationConfiguration> AssociationConfigurationGuidDictionary = new Dictionary<Guid, AssociationConfiguration>();
     private static Dictionary<string, DataSetConfiguration> RepositoryGroupDictionary = new Dictionary<string, DataSetConfiguration>();
+    #endregion
 
   }
 }

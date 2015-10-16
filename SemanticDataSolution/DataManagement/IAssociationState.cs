@@ -19,7 +19,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     void Enable();
     /// <summary>
-    /// This method is used to disable an already enabled <see cref="IAssociation"/> object.
+    /// This method is used to disable an already enabled <see cref="Association"/> object.
     /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled"/> or <see cref="HandlerState.NoConfiguration"/>.
     /// </summary>
     void Disable();

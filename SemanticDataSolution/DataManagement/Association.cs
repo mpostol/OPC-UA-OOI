@@ -6,7 +6,7 @@ namespace UAOOI.SemanticData.DataManagement
 {
 
   /// <summary>
-  /// Class Association - provides basic implementation od the <see cref="IAssociation"/>
+  /// Class Association - provides basic implementation of the association between the data set and message centric communication infrastructure.
   /// It represents configuration and bindings to the external resources.
   /// </summary>
   internal abstract class Association : IComparable

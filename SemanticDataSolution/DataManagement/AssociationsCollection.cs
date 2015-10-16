@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.DataManagement
 {
 
   /// <summary>
-  /// Class AssociationsCollection - a dictionary containing all <see cref="Association"/>
+  /// Class AssociationsCollection - a dictionary containing all <see cref="Association"/> instances
   /// </summary>
   /// <Note>
   /// Current implementation does not support deletion of the <see cref="Association"/>. If the association is not longer needed call Disable on the <see cref="Association.State"/> object.

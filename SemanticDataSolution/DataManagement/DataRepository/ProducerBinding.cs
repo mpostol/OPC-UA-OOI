@@ -53,7 +53,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
       if (this.m_Converter == null)
         return GetReadValueDelegate();
       else
-        return (type)m_Converter.Convert(GetReadValueDelegate(), m_TargetType, m_Parameter, m_Culture);
+        return (type)m_Converter.ConvertBack(GetReadValueDelegate(), m_TargetType, m_Parameter, m_Culture);
     }
     /// <summary>
     /// Occurs when a property value changes.

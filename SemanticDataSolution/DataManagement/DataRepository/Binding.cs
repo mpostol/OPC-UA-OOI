@@ -36,12 +36,13 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// <value>The converter as an instance of the <see cref="IValueConverter" />.</value>
     IValueConverter IBinding.Converter { set { m_Converter = value; } }
     /// <summary>
-    /// Sets an optional parameter to be used in the converter logic.
+    /// Gets or sets an optional parameter to be used in the converter logic or serialization process.
     /// </summary>
-    /// <value>The parameter to be used by the <see cref="IBinding.Converter" />.</value>
+    /// <value>The parameter to be used by the <see cref="IBinding.Converter" /> or by serialization process.</value>
     object IBinding.Parameter
     {
       set { m_Parameter = value; }
+      get { return m_Parameter; }
     }
     /// <summary>
     /// Sets the culture of the conversion.

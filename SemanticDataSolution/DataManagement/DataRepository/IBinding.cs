@@ -27,7 +27,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// Sets an optional parameter to be used in the converter logic.
     /// </summary>
     /// <value>The parameter to be used by the <see cref="IBinding.Converter"/>.</value>
-    object Parameter { set; }
+    object Parameter { get; set; }
     /// <summary>
     /// Sets the culture of the conversion.
     /// </summary>

@@ -12,7 +12,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_BinaryMessageWriter")]
     public void CreatorTestMethod1()
     {
-      UDPMessageWriter _bmw = new UDPMessageWriter();
+      TypesMessageWriter _bmw = new TypesMessageWriter();
       Assert.IsNotNull(_bmw);
       _bmw.AttachToNetwork();
       Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
@@ -22,12 +22,35 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void ObjectTestMethod()
     {
-      UDPMessageWriter _bmw = new UDPMessageWriter();
+      TypesMessageWriter _bmw = new TypesMessageWriter();
       _bmw.AttachToNetwork();
       ProducerBinding _binding = new ProducerBinding();
       _binding.Value = new TestClass();
       ((IMessageWriter)_bmw).Send(x => _binding, 1);
     }
+    [TestMethod]
+    [TestCategory("DataManagement_BinaryMessageWriter")]
+    [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    public void NullableTestMethod()
+    {
+      TypesMessageWriter _bmw = new TypesMessageWriter();
+      _bmw.AttachToNetwork();
+      ProducerBinding _binding = new ProducerBinding();
+      _binding.Value = new Nullable<float>();
+      ((IMessageWriter)_bmw).Send(x => _binding, 1);
+    }
+    [TestMethod]
+    [TestCategory("DataManagement_BinaryMessageWriter")]
+    public void SendTestMethod()
+    {
+      TypesMessageWriter _bmw = new TypesMessageWriter();
+      _bmw.AttachToNetwork();
+      ProducerBinding _binding = new ProducerBinding();
+      _binding.Value = String.Empty;
+      object[] _values = new object[] { (ulong)123, (uint)123, (ushort)123, "123", (float)123, (sbyte)123, (long)123, (int)123, (short)123, (double)123, (decimal)123, new DateTime(123, 10, 1), (byte)123, true, 'A', new byte[] { 1, 2, 3 } };
+      ((IMessageWriter)_bmw).Send((x) => { _binding.Value = _values[x]; return _binding; }, _values.Length);
+    }
+
     private class TestClass
     { }
     private class ProducerBinding : IProducerBinding
@@ -76,14 +99,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       #endregion
 
     }
-    public abstract class BinaryMessageWriter : IMessageWriter
+
+    public abstract class MessageWriterBase : IMessageWriter
     {
 
-      public BinaryMessageWriter()
-      {
-        State = new MyState();
-      }
       #region IMessageWriter
+      /// <summary>
+      /// Sends the specified producer binding.
+      /// </summary>
+      /// <param name="producerBinding">The producer binding.</param>
+      /// <param name="length">The length.</param>
       public void Send(Func<int, IProducerBinding> producerBinding, int length)
       {
         if (State.State != HandlerState.Operational)
@@ -93,23 +118,21 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         {
           IProducerBinding _pb = producerBinding(i);
           object _value = _pb.GetFromRepository();
+          if (_value == null)
+            throw new ArgumentOutOfRangeException("Impossible to convert null value");
           Type _type = _value.GetType();
           if (_type == typeof(byte[]))
             Write((byte[])_value, _pb.Parameter);
           else if (!IsIConvertible(_value, _pb.Parameter))
-            throw new ArgumentOutOfRangeException(string.Format("Imposible to convert {0}", _value));
+            throw new ArgumentOutOfRangeException(string.Format("Impossible to convert {0}", _value));
         }
       }
-      public IAssociationState State
+      public abstract IAssociationState State
       {
         get;
-        private set;
+        protected set;
       }
-      public void AttachToNetwork()
-      {
-        Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
-        State.Enable();
-      }
+      public abstract void AttachToNetwork();
       #endregion
 
       #region private
@@ -133,53 +156,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       protected abstract void WriteChar(char value, object parameter);
       protected abstract void Write(byte[] value, object parameter);
       #endregion
-
-      /// <summary>
-      /// Class MyState.
-      /// </summary>
-      private class MyState : IAssociationState
-      {
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MyState"/> class.
-        /// </summary>
-        public MyState()
-        {
-          State = HandlerState.Disabled;
-        }
-        /// <summary>
-        /// Gets the current state <see cref="HandlerState" /> of the <see cref="Association" /> instance.
-        /// </summary>
-        /// <value>The state of <see cref="HandlerState" /> type.</value>
-        public HandlerState State
-        {
-          get;
-          private set;
-        }
-        /// <summary>
-        /// This method is used to enable a configured <see cref="Association" /> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational" /> state.
-        /// In the case of an error situation, the state changes into <see cref="HandlerState.Error" />. The operation is rejected if the current <see cref="State" />  is not <see cref="HandlerState.Disabled" />.
-        /// </summary>
-        /// <exception cref="System.ArgumentException">Wrong state</exception>
-        public void Enable()
-        {
-          if (State != HandlerState.Disabled)
-            throw new ArgumentException("Wrong state");
-          State = HandlerState.Operational;
-        }
-        /// <summary>
-        /// This method is used to disable an already enabled <see cref="Association" /> object.
-        /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled" /> or <see cref="HandlerState.NoConfiguration" />.
-        /// </summary>
-        /// <exception cref="System.ArgumentException">Wrong state</exception>
-        public void Disable()
-        {
-          if (State != HandlerState.Operational)
-            throw new ArgumentException("Wrong state");
-          State = HandlerState.Disabled;
-        }
-
-      }
 
       private bool IsIConvertible(object value, object parameter)
       {
@@ -246,97 +222,148 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
 
       #endregion
+
     }
-    public class UDPMessageWriter : BinaryMessageWriter
+    public class TypesMessageWriter : MessageWriterBase
     {
 
-      private System.IO.BinaryWriter m_BinaryWriter;
+      #region creator
+      public TypesMessageWriter()
+      {
+        State = new MyState();
+      }
+      #endregion
 
+      #region BinaryMessageWriter
+      public override IAssociationState State
+      {
+        get;
+        protected set;
+      }
+      public override void AttachToNetwork()
+      {
+        Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
+        State.Enable();
+      }
       protected override void WriteUInt64(ulong value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(ulong));
       }
-
       protected override void WriteUInt32(uint value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(uint));
       }
-
       protected override void WriteUInt16(ushort value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(ushort));
       }
-
       protected override void WriteString(string value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(string));
       }
-
       protected override void WriteSingle(float value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(float));
       }
-
       protected override void WriteSByte(sbyte value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(sbyte));
       }
-
       protected override void WriteInt64(long value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(long));
       }
-
       protected override void WriteInt32(int value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(int));
       }
-
       protected override void WriteInt16(short value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(short));
       }
-
       protected override void WriteDouble(double value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(double));
       }
-
       protected override void WriteDecimal(decimal value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(decimal));
       }
-
-      protected override void WriteDateTime(DateTime dateTime, object parameter)
+      protected override void WriteDateTime(DateTime value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(DateTime));
       }
-
       protected override void WriteByte(byte value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(byte));
       }
-
       protected override void WriteBool(bool value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(bool));
       }
-
       protected override void WriteChar(char value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(char));
       }
-
       protected override void Write(byte[] value, object parameter)
       {
-        throw new NotImplementedException();
+        Assert.IsInstanceOfType(value, typeof(byte[]));
       }
-
       protected override void CreateMessage(int length)
       {
-        MeassageCreated = true;
+        MassageCreated = true;
       }
-      internal bool MeassageCreated = false;
+      internal bool MassageCreated = false;
+      #endregion
+
+      private System.IO.BinaryWriter m_BinaryWriter;
+      /// <summary>
+      /// Class MyState.
+      /// </summary>
+      private class MyState : IAssociationState
+      {
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MyState"/> class.
+        /// </summary>
+        public MyState()
+        {
+          State = HandlerState.Disabled;
+        }
+        /// <summary>
+        /// Gets the current state <see cref="HandlerState" /> of the <see cref="Association" /> instance.
+        /// </summary>
+        /// <value>The state of <see cref="HandlerState" /> type.</value>
+        public HandlerState State
+        {
+          get;
+          private set;
+        }
+        /// <summary>
+        /// This method is used to enable a configured <see cref="Association" /> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational" /> state.
+        /// In the case of an error situation, the state changes into <see cref="HandlerState.Error" />. The operation is rejected if the current <see cref="State" />  is not <see cref="HandlerState.Disabled" />.
+        /// </summary>
+        /// <exception cref="System.ArgumentException">Wrong state</exception>
+        public void Enable()
+        {
+          if (State != HandlerState.Disabled)
+            throw new ArgumentException("Wrong state");
+          State = HandlerState.Operational;
+        }
+        /// <summary>
+        /// This method is used to disable an already enabled <see cref="Association" /> object.
+        /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled" /> or <see cref="HandlerState.NoConfiguration" />.
+        /// </summary>
+        /// <exception cref="System.ArgumentException">Wrong state</exception>
+        public void Disable()
+        {
+          if (State != HandlerState.Operational)
+            throw new ArgumentException("Wrong state");
+          State = HandlerState.Disabled;
+        }
+
+      }
+
     }
   }
 }

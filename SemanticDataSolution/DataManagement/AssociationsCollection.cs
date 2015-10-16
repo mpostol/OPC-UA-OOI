@@ -15,6 +15,9 @@ namespace UAOOI.SemanticData.DataManagement
   /// <Note>
   /// Current implementation does not support deletion of the <see cref="Association"/>. If the association is not longer needed call Disable on the <see cref="Association.State"/> object.
   /// </Note>
+  /// <Note>
+  /// Current implementation does not support handling of the configuration changes.
+  /// </Note>
   internal class AssociationsCollection : Dictionary<string, Association>
   {
 
@@ -94,7 +97,7 @@ namespace UAOOI.SemanticData.DataManagement
         }
         catch (Exception)
         {
-          //TODO add error handler to provide feedback to the user, e.g. message in the log file - intensionally not implemented. 
+          //TODO tracking add exception handling to provide feedback to the user, e.g. message in the log file - intensionally not implemented. 
         }
       };
     }

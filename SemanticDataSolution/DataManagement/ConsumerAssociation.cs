@@ -78,7 +78,7 @@ namespace UAOOI.SemanticData.DataManagement
         return;
       if (!messageArg.MessageContent.IAmDestination(this.DataDescriptor))
         return;
-      messageArg.MessageContent.UpdateMyValues(x => m_ProcessDataBindings[x]);
+      messageArg.MessageContent.UpdateMyValues(x => m_ProcessDataBindings[x], m_ProcessDataBindings.Length);
     }
     #endregion
 

@@ -1,8 +1,9 @@
-﻿using System;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.DataManagement.MessageHandling;
-using UAOOI.SemanticData.DataManagement.DataRepository;
+using System;
 using System.IO;
+using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -13,7 +14,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
     #region TestMethod
     [TestMethod]
-    [TestCategory("DataManagement_BinaryMessageWriter")]
+    [TestCategory("DataManagement_MessageWriter")]
     public void CreatorTestMethod1()
     {
       TypesMessageWriter _bmw = new TypesMessageWriter();
@@ -22,7 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
     }
     [TestMethod]
-    [TestCategory("DataManagement_BinaryMessageWriter")]
+    [TestCategory("DataManagement_MessageWriter")]
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void ObjectTestMethod()
     {
@@ -33,7 +34,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       ((IMessageWriter)_bmw).Send(x => _binding, 1);
     }
     [TestMethod]
-    [TestCategory("DataManagement_BinaryMessageWriter")]
+    [TestCategory("DataManagement_MessageWriter")]
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void NullableTestMethod()
     {
@@ -45,7 +46,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       ((IMessageWriter)_bmw).Send(x => _binding, 1);
     }
     [TestMethod]
-    [TestCategory("DataManagement_BinaryMessageWriter")]
+    [TestCategory("DataManagement_MessageWriter")]
     public void SendTestMethod()
     {
       TypesMessageWriter _bmw = new TypesMessageWriter();
@@ -58,7 +59,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual(m_TestValues.Length, _sentItems);
     }
     [TestMethod]
-    [TestCategory("DataManagement_BinaryMessageWriter")]
+    [TestCategory("DataManagement_MessageWriter")]
     public void BinaryMessageWriterTestMethod()
     {
       BinaryMessageWriter _bmw = new BinaryMessageWriter();
@@ -333,16 +334,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         if (value.Kind == DateTimeKind.Local)
           value = value.ToUniversalTime();
-        long _ticks = value.Ticks;
-        if (_ticks >= DateTime.MaxValue.Ticks)
-          _ticks = Int64.MaxValue;
-        else
-        {
-          _ticks -= s_TimeBase.Ticks;
-          if (_ticks <= 0)
-            _ticks = 0;
-        }
-        m_BinaryWriter.Write(_ticks);
+        m_BinaryWriter.Write(CommonDefinitions.GetUADataTimeTicks(value));
       }
       protected override void WriteByte(byte value, object parameter)
       {
@@ -364,7 +356,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
       #region private
       //vars
-      private static readonly DateTime s_TimeBase = new DateTime(1601, 1, 1); //base DateTime to calculate tiskc sent over wire.
       private BinaryWriter m_BinaryWriter;
       private MemoryStream m_Output;
       //methods

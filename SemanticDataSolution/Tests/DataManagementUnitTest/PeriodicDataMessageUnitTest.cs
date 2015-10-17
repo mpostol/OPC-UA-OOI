@@ -36,7 +36,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Guid _guid = Guid.NewGuid();
       PeriodicDataMessage _newMessage = new PeriodicDataMessage(new object[] { 1, "string" }, _guid);
       Assert.IsNotNull(_newMessage);
-      _newMessage.UpdateMyValues(x => new Binding(y => _buffer[x] = y));
+      _newMessage.UpdateMyValues(x => new Binding(y => _buffer[x] = y), _buffer.Length);
       Assert.AreEqual<int>(1, (int)_buffer[0]);
       Assert.AreEqual<string>("string", (string)_buffer[1]);
     }

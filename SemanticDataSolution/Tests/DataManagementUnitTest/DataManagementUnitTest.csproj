@@ -64,6 +64,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CommonDefinitions.cs" />
     <Compile Include="Simulator\ConsumerDeviceSimulator.cs" />
     <Compile Include="Simulator\CustomNodeManager.cs" />
     <Compile Include="Simulator\OPCUAServerSimulator.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="PersistentConfigurationUnitTest.cs" />
     <Compile Include="OPCUAServerProducerSimulatorUnitTest.cs" />
     <Compile Include="MessageWriterUnitTest.cs" />
+    <Compile Include="MessageReaderBaseTestClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

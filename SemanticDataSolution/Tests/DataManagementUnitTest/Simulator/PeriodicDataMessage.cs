@@ -32,7 +32,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     #endregion
 
     #region IPeriodicDataMessage
-    public void UpdateMyValues(Func<int, IConsumerBinding> update)
+    public void UpdateMyValues(Func<int, IConsumerBinding> update, int length)
     {
       UInt64 _mask = 0x1;
       int _associationIndex = 0;

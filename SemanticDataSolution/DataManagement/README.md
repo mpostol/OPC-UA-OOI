@@ -19,9 +19,11 @@ The library is designed to be a foundation for developing application programs t
 
 ![Architecture] (https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/DataManagementGeneralization.png)
 
-In figure below the relationship between this library and external libraries is presented. Any application engaging the DataManagemnet is composed using the dependency injection pattern.
+In figure below the relationship between this library and external libraries is presented. Any application engaging the **DataManagemnet** is composed using the dependency injection pattern.
 
-![Architecture] (https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/DataManagementExternalLibraries.png)
+![Architecture](./Media/DataManagementExternalLibraries.png)
+
+**Configuration** represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library provide helper classes that must be used to gather all required information to instantiate the communication infrastructure and start pumping the data.
 
 ## Assumptions
 

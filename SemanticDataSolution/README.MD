@@ -14,11 +14,11 @@ The main challenge that must be faced up by engineering of data processing is th
 Integration services are responsible for exchanging the data and metadata with other parties using:
 
 * Network communication
+* JSON gateway
+* XML gateway
 * External database archival   
 
 ![Domain Model] (./Media/UADataIntegrationServices.Domain.png)
-
-'Configuration' represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library provide helper classes that must be used to gather all required information to instantiate the communication infrastructure and start pumping the data.
 
 ## Network communication
 

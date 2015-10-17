@@ -35,6 +35,22 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreSame(_reader, _sender);
       Assert.AreSame(_reader, _message.MessageContent);
     }
+    [TestMethod]
+    [TestCategory("DataManagement_MessageWriter")]
+    public void IAmDestinationTestMethod()
+    {
+      TestMessageReaderBase _reader = new TestMessageReaderBase();
+      _reader.AttachToNetwork();
+      object _sender = null;
+      MessageEventArg _message = null;
+      _reader.ReadMessageCompleted += (x, y) => { _sender = x; _message = y; };
+      Assert.IsNull(_message);
+      SemanticData _id = new SemanticData(null, "SymbolicName", 123, Guid.NewGuid());
+      _reader.GetMessageTest(_id);
+      Assert.IsNotNull(_message);
+      Assert.IsTrue(_message.MessageContent.IAmDestination(_id));
+    }
+
     public abstract class MessageReaderBase : IMessageReader, IPeriodicDataMessage
     {
 
@@ -44,10 +60,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         get;
         protected set;
       }
-      bool IPeriodicDataMessage.IAmDestination(ISemanticData dataId)
-      {
-        throw new NotImplementedException();
-      }
+      public abstract bool IAmDestination(ISemanticData dataId);
       public abstract void AttachToNetwork();
       public event EventHandler<MessageEventArg> ReadMessageCompleted;
       #endregion
@@ -252,11 +265,22 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         get;
         protected set;
       }
+      public override bool IAmDestination(ISemanticData dataId)
+      {
+        return dataId.Guid == m_SemanticData.Guid;
+      }
       #endregion
 
       #region private
       private int m_NumberOfAttachToNetwork;
+      private SemanticData m_SemanticData;
       #endregion
+
+      internal void GetMessageTest(SemanticData semanticData)
+      {
+        m_SemanticData = semanticData;
+        base.GetMessageTest();
+      }
 
     }
     private class MyState : IAssociationState
@@ -302,7 +326,36 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
 
     }
-
+    private class SemanticData : ISemanticData
+    {
+      public SemanticData(Uri identifier, string symbolicName, IComparable nodeId, Guid guid)
+      {
+        Identifier = identifier;
+        SymbolicName = symbolicName;
+        NodeId = nodeId;
+        Guid = guid;
+      }
+      public Uri Identifier
+      {
+        get;
+        private set;
+      }
+      public string SymbolicName
+      {
+        get;
+        private set;
+      }
+      public IComparable NodeId
+      {
+        get;
+        private set;
+      }
+      public Guid Guid
+      {
+        get;
+        private set;
+      }
+    }
   }
 
 }

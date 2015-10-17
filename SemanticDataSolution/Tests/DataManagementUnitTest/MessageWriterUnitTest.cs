@@ -8,7 +8,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
 
   [TestClass]
-  public class BinaryMessageWriterUnitTest
+  public class MessageWriterUnitTest
   {
 
     #region TestMethod

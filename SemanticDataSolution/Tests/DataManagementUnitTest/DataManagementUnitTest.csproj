@@ -81,7 +81,7 @@
     <Compile Include="ProducerBindingUnitTest.cs" />
     <Compile Include="PersistentConfigurationUnitTest.cs" />
     <Compile Include="OPCUAServerProducerSimulatorUnitTest.cs" />
-    <Compile Include="BinaryMessageWriterUnitTest.cs" />
+    <Compile Include="MessageWriterUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

@@ -83,7 +83,7 @@
     <Compile Include="PersistentConfigurationUnitTest.cs" />
     <Compile Include="OPCUAServerProducerSimulatorUnitTest.cs" />
     <Compile Include="MessageWriterUnitTest.cs" />
-    <Compile Include="MessageReaderBaseTestClass.cs" />
+    <Compile Include="MessageReaderTestClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

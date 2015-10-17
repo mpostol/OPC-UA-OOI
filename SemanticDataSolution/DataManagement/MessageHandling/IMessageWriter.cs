@@ -4,6 +4,7 @@ using UAOOI.SemanticData.DataManagement.DataRepository;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
+
   /// <summary>
   /// Interface IMessageWriter - provides functionality supporting sending the messages over the wire.
   /// </summary>

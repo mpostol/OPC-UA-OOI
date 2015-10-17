@@ -100,16 +100,23 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
     }
 
+    /// <summary>
+    /// Class MessageWriterBase - helper class that provides basic implementation of the <see cref="IMessageWriter"/>
+    /// </summary>
     public abstract class MessageWriterBase : IMessageWriter
     {
 
       #region IMessageWriter
       /// <summary>
-      /// Sends the specified producer binding.
+      /// Sends the data described by a data set collection to remote destination.
       /// </summary>
-      /// <param name="producerBinding">The producer binding.</param>
-      /// <param name="length">The length.</param>
-      public void Send(Func<int, IProducerBinding> producerBinding, int length)
+      /// <param name="producerBinding">Encapsulates functionality used by the <see cref="IMessageWriter" /> to collect all the data (data set items) required to prepare new message and send it over the network.</param>
+      /// <param name="length">Number of items to be send used to calculate the length of the message.</param>
+      /// <exception cref="System.ArgumentOutOfRangeException">
+      /// Impossible to convert null value
+      /// or
+      /// </exception>
+      void IMessageWriter.Send(Func<int, IProducerBinding> producerBinding, int length)
       {
         if (State.State != HandlerState.Operational)
           return;
@@ -126,18 +133,28 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           else if (!IsIConvertible(_value, _pb.Parameter))
             throw new ArgumentOutOfRangeException(string.Format("Impossible to convert {0}", _value));
         }
+        SendMessage();
       }
+      /// <summary>
+      /// If implemented in derived class gets the the state machine for this instance.
+      /// </summary>
+      /// <value>An object of <see cref="IAssociationState" /> providing implementation of the state machine governing this instance behavior.</value>
       public abstract IAssociationState State
       {
         get;
         protected set;
       }
+      /// <summary>
+      /// Attaches to network - initialize the underlying protocol stack and establish the connection with the broker is applicable.
+      /// </summary>
+      /// <remarks>Depending on the message transport layer type implementation of this function varies.</remarks>
       public abstract void AttachToNetwork();
       #endregion
 
       #region private
 
       #region Writer
+      protected abstract void SendMessage();
       protected abstract void CreateMessage(int length);
       protected abstract void WriteUInt64(ulong value, object parameter);
       protected abstract void WriteUInt32(uint value, object parameter);
@@ -363,6 +380,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         }
 
       }
+      protected override void SendMessage()
+      {
+      }
+
 
     }
   }

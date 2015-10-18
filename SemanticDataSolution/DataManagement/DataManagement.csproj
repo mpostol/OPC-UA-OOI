@@ -81,6 +81,7 @@
     <Compile Include="MessageHandlersCollection.cs" />
     <Compile Include="MessageHandling\IMessageReader.cs" />
     <Compile Include="MessageHandling\IMessageWriter.cs" />
+    <Compile Include="MessageHandling\MessageReaderBase.cs" />
     <Compile Include="MessageHandling\MessageWriterBase.cs" />
     <Compile Include="ProducerAssociation.cs" />
     <Compile Include="DataRepository\ProducerBinding.cs" />
@@ -90,6 +91,7 @@
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />
     <None Include="README.md" />
+    <None Include="READMEGettingStartedTutorial.md" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

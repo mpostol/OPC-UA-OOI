@@ -12,7 +12,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   {
 
     /// <summary>
-    /// Gets the the state machine for the the <see cref="IMessageHandler"/> instance.
+    /// Gets the state machine for the the <see cref="IMessageHandler"/> instance.
     /// </summary>
     /// <value>An object of <see cref="IAssociationState"/> providing implementation of the state machine governing this instance behavior.</value>
     IAssociationState State { get; }

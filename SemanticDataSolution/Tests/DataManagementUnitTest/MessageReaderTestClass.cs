@@ -3,6 +3,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using System.IO;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -29,7 +30,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       _reader.ReadMessageCompleted += (x, y) => { _sender = x; _message = y; };
       Assert.IsNull(_sender);
       Assert.IsNull(_message);
-      _reader.GetMessageTest();
+      _reader.GetMessageTest(SemanticData.GetSemanticDataTest());
       Assert.IsNotNull(_sender);
       Assert.IsNotNull(_message);
       Assert.AreSame(_reader, _sender);
@@ -45,141 +46,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       MessageEventArg _message = null;
       _reader.ReadMessageCompleted += (x, y) => { _sender = x; _message = y; };
       Assert.IsNull(_message);
-      SemanticData _id = new SemanticData(null, "SymbolicName", 123, Guid.NewGuid());
+      SemanticData _id = SemanticData.GetSemanticDataTest();
       _reader.GetMessageTest(_id);
       Assert.IsNotNull(_message);
       Assert.IsTrue(_message.MessageContent.IAmDestination(_id));
     }
 
-    public abstract class MessageReaderBase : IMessageReader, IPeriodicDataMessage
-    {
-
-      #region IMessageReader
-      public abstract IAssociationState State
-      {
-        get;
-        protected set;
-      }
-      public abstract bool IAmDestination(ISemanticData dataId);
-      public abstract void AttachToNetwork();
-      public event EventHandler<MessageEventArg> ReadMessageCompleted;
-      #endregion
-
-      #region IPeriodicDataMessage
-      void IPeriodicDataMessage.UpdateMyValues(Func<int, IConsumerBinding> update, int length)
-      {
-        UInt64 _mask = 0x1;
-        int _associationIndex = 0;
-        for (int i = 0; i < length; i++)
-        {
-          if ((ContentFilter & _mask) > 0)
-          {
-            IConsumerBinding _binding = update(_associationIndex);
-            Read(_binding);
-          }
-          _associationIndex++;
-          _mask = _mask << 1;
-        }
-      }
-      private void Read(IConsumerBinding binding)
-      {
-        if (!IsValueIConvertible(binding))
-          throw new ArgumentOutOfRangeException(string.Format("Impossible to convert the type {0}", binding.TargetType.Name));
-      }
-      private bool IsValueIConvertible(IConsumerBinding binding)
-      {
-        object _value = null;
-        System.IO.BinaryReader _r = null;
-        switch (Type.GetTypeCode(binding.TargetType))
-        {
-          case TypeCode.Boolean:
-            _value = ReadBoolean();
-            break;
-          case TypeCode.Byte:
-            _value = ReadByte();
-            break;
-          case TypeCode.Char:
-            _value = ReadChar();
-            break;
-          case TypeCode.DBNull:
-            return false;
-          case TypeCode.DateTime:
-            _value = CommonDefinitions.GetUADateTime(_r.ReadInt64());
-            break;
-          case TypeCode.Decimal:
-            return false;
-          case TypeCode.Double:
-            _value = ReadDouble();
-            break;
-          case TypeCode.Empty:
-            return false;
-          case TypeCode.Int16:
-            _value = ReadInt16();
-            break;
-          case TypeCode.Int32:
-            _value = ReadInt32();
-            break;
-          case TypeCode.Int64:
-            _value = ReadInt64();
-            break;
-          case TypeCode.Object:
-            return false;
-          case TypeCode.SByte:
-            _value = ReadSByte();
-            break;
-          case TypeCode.Single:
-            _value = ReadSingle();
-            break;
-          case TypeCode.String:
-            _value = ReadString();
-            break;
-          case TypeCode.UInt16:
-            _value = ReadUInt16();
-            break;
-          case TypeCode.UInt32:
-            _value = ReadUInt32();
-            break;
-          case TypeCode.UInt64:
-            _value = ReadUInt64();
-            break;
-          default:
-            return false;
-        }
-        binding.Assign2Repository(_value);
-        return true;
-      }
-      #endregion
-
-      protected abstract object ReadUInt64();
-      protected abstract object ReadUInt32();
-      protected abstract object ReadUInt16();
-      protected abstract object ReadString();
-      protected abstract object ReadSingle();
-      protected abstract object ReadSByte();
-      protected abstract object ReadInt64();
-      protected abstract object ReadInt32();
-      protected abstract object ReadInt16();
-      protected abstract object ReadDouble();
-      protected abstract object ReadChar();
-      protected abstract object ReadByte();
-      protected abstract object ReadBoolean();
-      protected abstract ulong ContentFilter { get; set; }
-      protected void RaiseReadMessageCompleted()
-      {
-        EventHandler<MessageEventArg> _handler = ReadMessageCompleted;
-        if (_handler == null)
-          return;
-        ReadMessageCompleted(this, new MessageEventArg(this));
-      }
-
-      #region test instrumentation
-      internal virtual void GetMessageTest()
-      {
-        Assert.IsNotNull(ReadMessageCompleted);
-        this.RaiseReadMessageCompleted();
-      }
-      #endregion
-    }
     private class TestMessageReaderBase : MessageReaderBase
     {
 
@@ -243,6 +115,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
+      protected override DateTime ReadDateTime()
+      {
+        return CommonDefinitions.GetUADateTime(m_BinaryReader.ReadInt64());
+      }
       protected override ulong ContentFilter
       {
         get
@@ -272,6 +148,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       #endregion
 
       #region private
+      private BinaryReader m_BinaryReader;
       private int m_NumberOfAttachToNetwork;
       private SemanticData m_SemanticData;
       #endregion
@@ -279,8 +156,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       internal void GetMessageTest(SemanticData semanticData)
       {
         m_SemanticData = semanticData;
-        base.GetMessageTest();
+        this.RaiseReadMessageCompleted();
       }
+
 
     }
     private class MyState : IAssociationState
@@ -328,6 +206,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class SemanticData : ISemanticData
     {
+      internal static SemanticData GetSemanticDataTest()
+      {
+        return new SemanticData(null, "SymbolicName", 123, Guid.NewGuid());
+      }
       public SemanticData(Uri identifier, string symbolicName, IComparable nodeId, Guid guid)
       {
         Identifier = identifier;

@@ -40,7 +40,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       SendMessage();
     }
     /// <summary>
-    /// If implemented in derived class gets the the state machine for this instance.
+    /// If implemented in derived class gets the state machine for this instance.
     /// </summary>
     /// <value>An object of <see cref="IAssociationState" /> providing implementation of the state machine governing this instance behavior.</value>
     public abstract IAssociationState State
@@ -58,8 +58,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #region private
 
     #region Writer
-    protected abstract void SendMessage();
-    protected abstract void CreateMessage(int length);
     protected abstract void WriteUInt64(ulong value, object parameter);
     protected abstract void WriteUInt32(uint value, object parameter);
     protected abstract void WriteUInt16(ushort value, object parameter);
@@ -78,6 +76,8 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected abstract void Write(byte[] value, object parameter);
     #endregion
 
+    protected abstract void SendMessage();
+    protected abstract void CreateMessage(int length);
     private bool IsValueIConvertible(object value, object parameter)
     {
       IConvertible _cv = value as IConvertible;

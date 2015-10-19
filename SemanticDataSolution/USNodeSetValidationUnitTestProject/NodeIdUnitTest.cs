@@ -17,6 +17,8 @@ namespace UAOOI.SemanticData.UnitTest
       for (int i = 0; i < 5000; i++)
       {
         NodeId _nid = (uint)_random.Next(0, int.MaxValue);
+        if (_dic.ContainsKey(_nid))
+          continue;
         _dic.Add(_nid, _nid);
       }
       Assert.IsTrue(true);

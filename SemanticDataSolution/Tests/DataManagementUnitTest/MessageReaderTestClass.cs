@@ -54,9 +54,94 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_message);
       Assert.IsTrue(_message.MessageContent.IAmDestination(_id));
     }
+    [TestMethod]
+    [TestCategory("DataManagement_MessageReader")]
+    public void BinaryMessageReaderTestMethod()
+    {
+      ISemanticData _semanticData = SemanticData.GetSemanticDataTest();
+      BinaryMessageReader _reader = new BinaryMessageReader(_semanticData);
+      Assert.IsNotNull(_reader);
+      Assert.AreEqual<int>(0, _reader.m_NumberOfSentBytes);
+      Assert.AreEqual<int>(0, _reader.m_NumberOfAttachToNetwork);
+      Assert.AreEqual<int>(0, _reader.m_NumberOfSentMessages);
+      Assert.AreEqual<HandlerState>(HandlerState.Disabled, _reader.State.State);
+      _reader.AttachToNetwork();
+      Assert.AreEqual<HandlerState>(HandlerState.Operational, _reader.State.State);
+      Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
+      Assert.AreEqual<int>(0, _reader.m_NumberOfSentBytes);
+      Assert.AreEqual<int>(0, _reader.m_NumberOfSentMessages);
+      MessageEventArg e = null;
+      object[] _buffer = new object[CommonDefinitions.TestValues.Length];
+      IConsumerBinding[] _bindings = new IConsumerBinding[_buffer.Length];
+      Action<object, int> _assign = (x, y) => _buffer[y] = x;
+      for (int i = 0; i < _buffer.Length; i++)
+        _bindings[i] = new ConsumerBinding(i, _assign, CommonDefinitions.TestValues[i].GetType());
+      int _redItems = 0;
+      _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _semanticData, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
+      _reader.Send(CommonDefinitions.GetTestBinaryArray());
+      Assert.AreEqual<int>(_buffer.Length, _redItems);
+      object[] _shouldBeInBuffer = CommonDefinitions.TestValues;
+      Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
+      // CollectionAssert.AreEquivalent(_shouldBeInBuffer, _buffer); use linq
+    }
+    private void _reader_ReadMessageCompleted(object sender, MessageEventArg e, ISemanticData dataId, Func<int, IConsumerBinding> update, int length)
+    {
+      if (!e.MessageContent.IAmDestination(dataId))
+        return;
+      e.MessageContent.UpdateMyValues(update, length);
+    }
     #endregion
 
     #region private
+    private class ConsumerBinding : IConsumerBinding
+    {
+      public ConsumerBinding(int index, Action<object, int> assignAction, Type targetType)
+      {
+        m_AssignAction = assignAction;
+        m_Index = index;
+        TargetType = targetType;
+      }
+      public void Assign2Repository(object value)
+      {
+        m_AssignAction(value, m_Index);
+      }
+      public System.Windows.Data.IValueConverter Converter
+      {
+        set { throw new NotImplementedException(); }
+      }
+      public Type TargetType
+      {
+        get;
+        private set;
+      }
+      public object Parameter
+      {
+        get
+        {
+          throw new NotImplementedException();
+        }
+        set
+        {
+          throw new NotImplementedException();
+        }
+      }
+      public System.Globalization.CultureInfo Culture
+      {
+        set { throw new NotImplementedException(); }
+      }
+      public void OnEnabling()
+      {
+        throw new NotImplementedException();
+      }
+      public void OnDisabling()
+      {
+        throw new NotImplementedException();
+      }
+
+      private Action<object, int> m_AssignAction;
+      private int m_Index;
+
+    }
     private class TestMessageReaderBase : MessageReaderBase
     {
 
@@ -128,13 +213,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         get
         {
-          throw new NotImplementedException();
-        }
-        set
-        {
-          throw new NotImplementedException();
+          return ulong.MaxValue;
         }
       }
+      protected override object ReadDecimal()
+      {
+        throw new NotImplementedException();
+      }
+
       public override void AttachToNetwork()
       {
         Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
@@ -164,6 +250,119 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         this.RaiseReadMessageCompleted();
       }
 
+
+
+    }
+    private class BinaryMessageReader : MessageReaderBase
+    {
+
+      #region creator
+      public BinaryMessageReader(ISemanticData semanticData)
+      {
+        State = new MyState();
+        m_SemanticData = semanticData;
+      }
+      #endregion
+
+      public override IAssociationState State
+      {
+        get;
+        protected set;
+      }
+      public override void AttachToNetwork()
+      {
+        Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
+        State.Enable();
+        m_NumberOfAttachToNetwork++;
+      }
+      public override bool IAmDestination(ISemanticData dataId)
+      {
+        return dataId.Guid == m_SemanticData.Guid;
+      }
+      protected override object ReadUInt64()
+      {
+        return m_Reader.ReadInt64();
+      }
+      protected override object ReadUInt32()
+      {
+        return m_Reader.ReadInt32();
+      }
+      protected override object ReadUInt16()
+      {
+        return m_Reader.ReadUInt16();
+      }
+      protected override object ReadString()
+      {
+        return m_Reader.ReadString();
+      }
+      protected override object ReadSingle()
+      {
+        return m_Reader.ReadSingle();
+      }
+      protected override object ReadSByte()
+      {
+        return m_Reader.ReadSByte();
+      }
+      protected override object ReadInt64()
+      {
+        return m_Reader.ReadInt64();
+      }
+      protected override object ReadInt32()
+      {
+        return m_Reader.ReadInt32();
+      }
+      protected override object ReadInt16()
+      {
+        return m_Reader.ReadInt16();
+      }
+      protected override object ReadDouble()
+      {
+        return m_Reader.ReadDouble();
+      }
+      protected override object ReadDecimal()
+      {
+        return Convert.ToInt64(m_Reader.ReadInt64());
+      }
+      protected override object ReadChar()
+      {
+        return Convert.ToInt64(m_Reader.ReadChar());
+      }
+      protected override object ReadByte()
+      {
+        return Convert.ToInt64(m_Reader.ReadByte());
+      }
+      protected override object ReadBoolean()
+      {
+        return m_Reader.ReadBoolean();
+      }
+      protected override DateTime ReadDateTime()
+      {
+        return CommonDefinitions.GetUADateTime(m_Reader.ReadInt64());
+      }
+      protected override ulong ContentFilter
+      {
+        get
+        {
+          return ulong.MaxValue;
+        }
+      }
+
+      private BinaryReader m_Reader = null;
+      private ISemanticData m_SemanticData;
+
+      #region tetst instrumentation
+      internal int m_NumberOfSentBytes = 0;
+      internal int m_NumberOfAttachToNetwork = 0;
+      internal int m_NumberOfSentMessages = 0;
+      internal void Send(byte[] buffer)
+      {
+        MemoryStream _strem = new MemoryStream(buffer, 0, buffer.Length);
+        m_Reader = new BinaryReader(_strem);
+        base.RaiseReadMessageCompleted();
+        m_Reader.Dispose();
+        m_Reader = null;
+      }
+      #endregion
 
     }
     private class MyState : IAssociationState

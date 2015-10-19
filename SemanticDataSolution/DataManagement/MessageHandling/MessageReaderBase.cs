@@ -75,13 +75,14 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected abstract object ReadByte();
     protected abstract object ReadBoolean();
     protected abstract DateTime ReadDateTime();
+    protected abstract object ReadDecimal();
     #endregion
 
     /// <summary>
     /// Gets or sets the content filter.
     /// </summary>
     /// <value>The content filter.</value>
-    protected abstract ulong ContentFilter { get; set; }
+    protected abstract ulong ContentFilter { get; }
     protected void RaiseReadMessageCompleted()
     {
       EventHandler<MessageEventArg> _handler = ReadMessageCompleted;
@@ -115,7 +116,8 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           _value = ReadDateTime();
           break;
         case TypeCode.Decimal:
-          return false;
+          _value = ReadDecimal();
+          break;
         case TypeCode.Double:
           _value = ReadDouble();
           break;
@@ -156,6 +158,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       binding.Assign2Repository(_value);
       return true;
     }
+
     #endregion
 
   }

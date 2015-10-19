@@ -7,9 +7,12 @@ using System.IO;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
+
   [TestClass]
   public class MessageReaderTestClass
   {
+
+    #region TestMethod
     [TestMethod]
     [TestCategory("DataManagement_MessageReader")]
     public void CreatorTestMethod()
@@ -20,7 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
     }
     [TestMethod]
-    [TestCategory("DataManagement_MessageWriter")]
+    [TestCategory("DataManagement_MessageReader")]
     public void ReadMessageCompletedTestMethod()
     {
       TestMessageReaderBase _reader = new TestMessageReaderBase();
@@ -37,7 +40,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreSame(_reader, _message.MessageContent);
     }
     [TestMethod]
-    [TestCategory("DataManagement_MessageWriter")]
+    [TestCategory("DataManagement_MessageReader")]
     public void IAmDestinationTestMethod()
     {
       TestMessageReaderBase _reader = new TestMessageReaderBase();
@@ -51,7 +54,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_message);
       Assert.IsTrue(_message.MessageContent.IAmDestination(_id));
     }
+    #endregion
 
+    #region private
     private class TestMessageReaderBase : MessageReaderBase
     {
 
@@ -238,6 +243,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         private set;
       }
     }
+    #endregion
+
   }
 
 }

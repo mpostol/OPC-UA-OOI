@@ -72,11 +72,10 @@
     <Compile Include="DataRepository\IConsumerBinding.cs" />
     <Compile Include="IDataUniqueIdentifier.cs" />
     <Compile Include="Encoding\IEncodingFactory.cs" />
+    <Compile Include="MessageEventArg.cs" />
     <Compile Include="MessageHandling\IMessageHandlerFactory.cs" />
     <Compile Include="DataRepository\IProducerBinding.cs" />
     <Compile Include="ISemanticData.cs" />
-    <Compile Include="IPeriodicDataMessage.cs" />
-    <Compile Include="MessageEventArg.cs" />
     <Compile Include="MessageHandling\IMessageHandler.cs" />
     <Compile Include="MessageHandlersCollection.cs" />
     <Compile Include="MessageHandling\IMessageReader.cs" />

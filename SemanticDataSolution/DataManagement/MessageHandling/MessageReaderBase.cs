@@ -4,10 +4,11 @@ using UAOOI.SemanticData.DataManagement.DataRepository;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
+
   /// <summary>
   /// Class MessageReaderBase - helper class providing basic implementation of the <see cref="IMessageReader"/> interface
   /// </summary>
-  public abstract class MessageReaderBase : IMessageReader, IPeriodicDataMessage
+  public abstract class MessageReaderBase : IMessageReader
   {
 
     #region IMessageReader
@@ -29,9 +30,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Occurs when an asynchronous operation to read a new message completes.
     /// </summary>
     public event EventHandler<MessageEventArg> ReadMessageCompleted;
-    #endregion
-
-    #region IPeriodicDataMessage
     /// <summary>
     /// Check if the message destination is the data set described by the <paramref name="dataId" /> of type <see cref="ISemanticData" />.
     /// </summary>
@@ -43,7 +41,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     /// <param name="update">Captures a delegated used to update the consumer variables using values decoded form the message.</param>
     /// <param name="length">Number of items in the data set.</param>
-    void IPeriodicDataMessage.UpdateMyValues(Func<int, IConsumerBinding> update, int length)
+    void IMessageReader.UpdateMyValues(Func<int, IConsumerBinding> update, int length)
     {
       UInt64 _mask = 0x1;
       int _associationIndex = 0;
@@ -76,8 +74,13 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected abstract object ReadChar();
     protected abstract object ReadByte();
     protected abstract object ReadBoolean();
+    protected abstract DateTime ReadDateTime();
     #endregion
 
+    /// <summary>
+    /// Gets or sets the content filter.
+    /// </summary>
+    /// <value>The content filter.</value>
     protected abstract ulong ContentFilter { get; set; }
     protected void RaiseReadMessageCompleted()
     {
@@ -153,9 +156,8 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       binding.Assign2Repository(_value);
       return true;
     }
-
-    protected abstract DateTime ReadDateTime();
     #endregion
 
   }
+
 }

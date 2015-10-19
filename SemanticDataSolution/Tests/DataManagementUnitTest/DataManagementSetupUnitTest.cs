@@ -70,6 +70,17 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         }
 
         public event EventHandler<MessageEventArg> ReadMessageCompleted;
+
+
+        public void UpdateMyValues(Func<int, IConsumerBinding> update, int length)
+        {
+          throw new NotImplementedException();
+        }
+
+        public bool IAmDestination(ISemanticData dataId)
+        {
+          throw new NotImplementedException();
+        }
       }
     }
     private class EF : IEncodingFactory

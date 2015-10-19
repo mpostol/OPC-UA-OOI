@@ -1,5 +1,6 @@
 ﻿
 using System;
+using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement
 {
@@ -17,7 +18,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="newMessage">The new message to be processed by the consumer or a producer outcome to be 
     /// sent over the network by the underlying message transport protocol.
     /// </param>
-    public MessageEventArg(IPeriodicDataMessage newMessage)
+    public MessageEventArg(IMessageReader newMessage)
     {
       MessageContent = newMessage;
     }
@@ -26,7 +27,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// sent over the network by the underlying message transport protocol.
     /// </summary>
     /// <value>The content of the message.</value>
-    internal IPeriodicDataMessage MessageContent { get; private set; }
+    internal IMessageReader MessageContent { get; private set; }
 
   }
 }

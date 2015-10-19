@@ -37,7 +37,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       foreach (ConsumerAssociation _item in AssociationsCollection.Values)
         CheckConsistency(_item);
-      foreach ( MessageReader _item in MessageHandlersCollection.Values)
+      foreach (MessageReader _item in MessageHandlersCollection.Values)
         _item.CheckConsistency();
     }
     private void CheckConsistency(ConsumerAssociation _item)
@@ -179,7 +179,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     public MessageReader(Guid dataSetGuid)
     {
       State = new MyState();
-      DataSetGuid = dataSetGuid;
+      m_DataSetGuid = dataSetGuid;
     }
 
     #region IMessageReader
@@ -193,12 +193,24 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       m_HaveBeenActivated = true;
     }
+    public void UpdateMyValues(Func<int, IConsumerBinding> update, int length)
+    {
+      for (int i = 0; i < length; i++)
+      {
+        IConsumerBinding _bind = update(i);
+        _bind.Assign2Repository(m_Message[i]);
+      }
+    }
+    public bool IAmDestination(ISemanticData dataId)
+    {
+      return dataId.Guid == m_DataSetGuid;
+    }
     #endregion
 
     #region testing environment
     internal void SendData()
     {
-      ReadMessageCompleted(this, new MessageEventArg(CreateMessage()));
+      ReadMessageCompleted(this, new MessageEventArg(this));
     }
     internal void CheckConsistency()
     {
@@ -210,9 +222,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     #endregion
 
     #region private
-    /// <summary>
-    /// Class MyState.
-    /// </summary>
     private class MyState : IAssociationState
     {
 
@@ -256,16 +265,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
 
     }
-    /// <summary>
-    /// Creates the message.
-    /// </summary>
-    /// <returns>PeriodicDataMessage.</returns>
-    private PeriodicDataMessage CreateMessage()
-    {
-      PeriodicDataMessage _ret = new PeriodicDataMessage(new object[] { "123", 1.23 }, DataSetGuid);
-      return _ret;
-    }
-    private Guid DataSetGuid { get; set; }
+    private object[] m_Message = new object[] { "123", 1.23 };
+    private Guid m_DataSetGuid { get; set; }
     private bool m_HaveBeenActivated;
     #endregion
 

@@ -359,7 +359,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       protected override void WriteDateTime(DateTime value, object parameter)
       {
-        m_BinaryWriter.Write(CommonDefinitions.GetUADataTimeTicks(value));
+        m_BinaryWriter.Write(global::UAOOI.SemanticData.DataManagement.MessageHandling.CommonDefinitions.GetUADataTimeTicks(value));
       }
       protected override void WriteByte(byte value, object parameter)
       {

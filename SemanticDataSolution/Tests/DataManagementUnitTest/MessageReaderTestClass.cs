@@ -59,7 +59,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void BinaryMessageReaderTestMethod()
     {
       ISemanticData _semanticData = SemanticData.GetSemanticDataTest();
-      BinaryMessageDecoder _reader = new BinaryMessageDecoder();
+      BinaryMessageFrameDecoder _reader = new BinaryMessageFrameDecoder();
       Assert.IsNotNull(_reader);
       Assert.AreEqual<int>(0, _reader.m_NumberOfSentBytes);
       Assert.AreEqual<int>(0, _reader.m_NumberOfAttachToNetwork);
@@ -87,15 +87,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
       Assert.AreEqual<string>(String.Join(",", _shouldBeInBuffer), String.Join(",", _buffer));
     }
+    #endregion
+
+    #region private
     private void _reader_ReadMessageCompleted(object sender, MessageEventArg e, ISemanticData dataId, Func<int, IConsumerBinding> update, int length)
     {
       if (!e.MessageContent.IAmDestination(dataId))
         return;
       e.MessageContent.UpdateMyValues(update, length);
     }
-    #endregion
-
-    #region private
     private class ConsumerBinding : IConsumerBinding
     {
       public ConsumerBinding(int index, Action<object, int> assignAction, Type targetType)
@@ -210,7 +210,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       protected override DateTime ReadDateTime()
       {
-        return CommonDefinitions.GetUADateTime(m_BinaryReader.ReadInt64());
+        return global::UAOOI.SemanticData.DataManagement.MessageHandling.CommonDefinitions.GetUADateTime(m_BinaryReader.ReadInt64());
       }
       protected override Decimal ReadDecimal()
       {
@@ -335,20 +335,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #endregion
 
     #region To be promoted to the codebase
-    /// <summary>
-    /// Class BinaryMessageDecoder - provides message content binary decoding functionality
-    /// </summary>
-    public class BinaryMessageDecoder : MessageReaderBase
+    public class BinaryMessageFrameDecoder : BinaryMessageDecoder
     {
 
-      #region creator
-      public BinaryMessageDecoder()
+      public BinaryMessageFrameDecoder()
       {
         State = new MyState();
       }
-      #endregion
 
-      #region MessageReaderBase
+      #region BinaryMessageDecoder
       public override IAssociationState State
       {
         get;
@@ -369,79 +364,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         return dataId.Guid == m_SemanticData.Guid;
       }
-      
-      public override ulong ContentMask
-      {
-        get
-        {
-          return ulong.MaxValue;
-        }
-      }
 
-      protected override UInt64 ReadUInt64()
-      {
-        return m_Reader.ReadUInt64();
-      }
-      protected override UInt32 ReadUInt32()
-      {
-        return m_Reader.ReadUInt32();
-      }
-      protected override UInt16 ReadUInt16()
-      {
-        return m_Reader.ReadUInt16();
-      }
-      protected override String ReadString()
-      {
-        return m_Reader.ReadString();
-      }
-      protected override Single ReadSingle()
-      {
-        return m_Reader.ReadSingle();
-      }
-      protected override SByte ReadSByte()
-      {
-        return m_Reader.ReadSByte();
-      }
-      protected override Int64 ReadInt64()
-      {
-        return m_Reader.ReadInt64();
-      }
-      protected override Int32 ReadInt32()
-      {
-        return m_Reader.ReadInt32();
-      }
-      protected override Int16 ReadInt16()
-      {
-        return m_Reader.ReadInt16();
-      }
-      protected override Double ReadDouble()
-      {
-        return m_Reader.ReadDouble();
-      }
-      protected override Decimal ReadDecimal()
-      {
-        return Convert.ToDecimal(m_Reader.ReadInt64());
-      }
-      protected override char ReadChar()
-      {
-        return m_Reader.ReadChar();
-      }
-      protected override Byte ReadByte()
-      {
-        return m_Reader.ReadByte();
-      }
-      protected override Boolean ReadBoolean()
-      {
-        return m_Reader.ReadBoolean();
-      }
-      protected override DateTime ReadDateTime()
-      {
-        return CommonDefinitions.GetUADateTime(m_Reader.ReadInt64());
-      }
       #endregion
 
-      private BinaryReader m_Reader = null;
+      #region Message frame
+      public override ulong ContentMask
+      {
+        get { return ulong.MaxValue; }
+      }
       private ISemanticData m_SemanticData;
+      #endregion
 
       #region tetst instrumentation
       internal int m_NumberOfSentBytes = 0;
@@ -452,15 +384,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_NumberOfSentMessages++;
         m_NumberOfSentBytes += buffer.Length;
         m_SemanticData = semanticData;
-        MemoryStream _stream = new MemoryStream(buffer, 0, buffer.Length);
-        m_Reader = new BinaryReader(_stream);
+        CreateReader(buffer);
+
         base.RaiseReadMessageCompleted();
-        m_Reader.Dispose();
-        m_Reader = null;
+        DisposeReader();
       }
       #endregion
 
     }
+
 
     #endregion
   }

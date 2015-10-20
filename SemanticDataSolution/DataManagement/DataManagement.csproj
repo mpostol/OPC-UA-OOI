@@ -73,6 +73,8 @@
     <Compile Include="IDataUniqueIdentifier.cs" />
     <Compile Include="Encoding\IEncodingFactory.cs" />
     <Compile Include="MessageEventArg.cs" />
+    <Compile Include="MessageHandling\BinaryMessageDecoder.cs" />
+    <Compile Include="MessageHandling\CommonDefinition.cs" />
     <Compile Include="MessageHandling\IMessageHandlerFactory.cs" />
     <Compile Include="DataRepository\IProducerBinding.cs" />
     <Compile Include="ISemanticData.cs" />

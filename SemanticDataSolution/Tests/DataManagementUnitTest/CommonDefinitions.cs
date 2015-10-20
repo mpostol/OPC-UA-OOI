@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       ticks += TimeBase.Ticks;
       if (ticks >= DateTime.MaxValue.Ticks)
         return DateTime.MaxValue;
-      if (ticks <= CommonDefinitions.TimeBase.Ticks)
+      if (ticks < CommonDefinitions.TimeBase.Ticks)
         return DateTime.MinValue;
       return new DateTime(ticks, DateTimeKind.Utc);
     }

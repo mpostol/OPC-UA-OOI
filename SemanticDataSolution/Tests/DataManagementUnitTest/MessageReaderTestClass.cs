@@ -1,9 +1,10 @@
 ﻿
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.DataManagement.MessageHandling;
-using UAOOI.SemanticData.DataManagement.DataRepository;
+using System;
 using System.IO;
+using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.DataManagement.MessageHandling;
+using System.Linq;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -82,7 +83,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<int>(_buffer.Length, _redItems);
       object[] _shouldBeInBuffer = CommonDefinitions.TestValues;
       Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
-      // CollectionAssert.AreEquivalent(_shouldBeInBuffer, _buffer); use linq
+      Assert.AreEqual<string>(String.Join(",", _shouldBeInBuffer), String.Join(",", _buffer));
     }
     private void _reader_ReadMessageCompleted(object sender, MessageEventArg e, ISemanticData dataId, Func<int, IConsumerBinding> update, int length)
     {
@@ -153,55 +154,55 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       #endregion
 
       #region MessageReaderBase
-      protected override object ReadUInt64()
+      protected override UInt64 ReadUInt64()
       {
         throw new NotImplementedException();
       }
-      protected override object ReadUInt32()
+      protected override UInt32 ReadUInt32()
       {
         throw new NotImplementedException();
       }
-      protected override object ReadUInt16()
+      protected override UInt16 ReadUInt16()
       {
         throw new NotImplementedException();
       }
-      protected override object ReadString()
+      protected override String ReadString()
       {
         throw new NotImplementedException();
       }
-      protected override object ReadSingle()
+      protected override Single ReadSingle()
       {
         throw new NotImplementedException();
       }
-      protected override object ReadSByte()
+      protected override SByte ReadSByte()
       {
         throw new NotImplementedException();
       }
-      protected override object ReadInt64()
+      protected override Int64 ReadInt64()
       {
         throw new NotImplementedException();
       }
-      protected override object ReadInt32()
+      protected override Int32 ReadInt32()
       {
         throw new NotImplementedException();
       }
-      protected override object ReadInt16()
+      protected override Int16 ReadInt16()
       {
         throw new NotImplementedException();
       }
-      protected override object ReadDouble()
+      protected override Double ReadDouble()
       {
         throw new NotImplementedException();
       }
-      protected override object ReadChar()
+      protected override Char ReadChar()
       {
         throw new NotImplementedException();
       }
-      protected override object ReadByte()
+      protected override Byte ReadByte()
       {
         throw new NotImplementedException();
       }
-      protected override object ReadBoolean()
+      protected override Boolean ReadBoolean()
       {
         throw new NotImplementedException();
       }
@@ -209,16 +210,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         return CommonDefinitions.GetUADateTime(m_BinaryReader.ReadInt64());
       }
+      protected override Decimal ReadDecimal()
+      {
+        throw new NotImplementedException();
+      }
       protected override ulong ContentFilter
       {
         get
         {
           return ulong.MaxValue;
         }
-      }
-      protected override object ReadDecimal()
-      {
-        throw new NotImplementedException();
       }
 
       public override void AttachToNetwork()
@@ -236,6 +237,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         return dataId.Guid == m_SemanticData.Guid;
       }
+
       #endregion
 
       #region private
@@ -279,59 +281,59 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         return dataId.Guid == m_SemanticData.Guid;
       }
-      protected override object ReadUInt64()
+      protected override UInt64 ReadUInt64()
       {
-        return m_Reader.ReadInt64();
+        return m_Reader.ReadUInt64();
       }
-      protected override object ReadUInt32()
+      protected override UInt32 ReadUInt32()
       {
-        return m_Reader.ReadInt32();
+        return m_Reader.ReadUInt32();
       }
-      protected override object ReadUInt16()
+      protected override UInt16 ReadUInt16()
       {
         return m_Reader.ReadUInt16();
       }
-      protected override object ReadString()
+      protected override String ReadString()
       {
         return m_Reader.ReadString();
       }
-      protected override object ReadSingle()
+      protected override Single ReadSingle()
       {
         return m_Reader.ReadSingle();
       }
-      protected override object ReadSByte()
+      protected override SByte ReadSByte()
       {
         return m_Reader.ReadSByte();
       }
-      protected override object ReadInt64()
+      protected override Int64 ReadInt64()
       {
         return m_Reader.ReadInt64();
       }
-      protected override object ReadInt32()
+      protected override Int32 ReadInt32()
       {
         return m_Reader.ReadInt32();
       }
-      protected override object ReadInt16()
+      protected override Int16 ReadInt16()
       {
         return m_Reader.ReadInt16();
       }
-      protected override object ReadDouble()
+      protected override Double ReadDouble()
       {
         return m_Reader.ReadDouble();
       }
-      protected override object ReadDecimal()
+      protected override Decimal ReadDecimal()
       {
-        return Convert.ToInt64(m_Reader.ReadInt64());
+        return Convert.ToDecimal(m_Reader.ReadInt64());
       }
-      protected override object ReadChar()
+      protected override char ReadChar()
       {
-        return Convert.ToInt64(m_Reader.ReadChar());
+        return m_Reader.ReadChar();
       }
-      protected override object ReadByte()
+      protected override Byte ReadByte()
       {
-        return Convert.ToInt64(m_Reader.ReadByte());
+        return m_Reader.ReadByte();
       }
-      protected override object ReadBoolean()
+      protected override Boolean ReadBoolean()
       {
         return m_Reader.ReadBoolean();
       }

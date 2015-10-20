@@ -78,7 +78,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; }, CommonDefinitions.TestValues.Length);
       Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
       Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
-      Assert.AreEqual<int>(67, _writer.m_NumberOfSentBytes);
+      Assert.AreEqual<int>(64, _writer.m_NumberOfSentBytes);
       Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
       byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArray();
       byte[] _isInBuffer = _writer.Buffer;

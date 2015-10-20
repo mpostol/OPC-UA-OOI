@@ -61,21 +61,21 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #region private
 
     #region Reader
-    protected abstract object ReadUInt64();
-    protected abstract object ReadUInt32();
-    protected abstract object ReadUInt16();
-    protected abstract object ReadString();
-    protected abstract object ReadSingle();
-    protected abstract object ReadSByte();
-    protected abstract object ReadInt64();
-    protected abstract object ReadInt32();
-    protected abstract object ReadInt16();
-    protected abstract object ReadDouble();
-    protected abstract object ReadChar();
-    protected abstract object ReadByte();
-    protected abstract object ReadBoolean();
+    protected abstract UInt64 ReadUInt64();
+    protected abstract UInt32 ReadUInt32();
+    protected abstract UInt16 ReadUInt16();
+    protected abstract String ReadString();
+    protected abstract Single ReadSingle();
+    protected abstract SByte ReadSByte();
+    protected abstract Int64 ReadInt64();
+    protected abstract Int32 ReadInt32();
+    protected abstract Int16 ReadInt16();
+    protected abstract Double ReadDouble();
+    protected abstract char ReadChar();
+    protected abstract Byte ReadByte();
+    protected abstract Boolean ReadBoolean();
     protected abstract DateTime ReadDateTime();
-    protected abstract object ReadDecimal();
+    protected abstract Decimal ReadDecimal();
     #endregion
 
     /// <summary>

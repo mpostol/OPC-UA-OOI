@@ -57,21 +57,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       private class MR : IMessageReader
       {
-
-
         public IAssociationState State
         {
           get { throw new NotImplementedException(); }
         }
-
         public void AttachToNetwork()
         {
           throw new NotImplementedException();
         }
 
         public event EventHandler<MessageEventArg> ReadMessageCompleted;
-
-
         public void UpdateMyValues(Func<int, IConsumerBinding> update, int length)
         {
           throw new NotImplementedException();
@@ -80,6 +75,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         public bool IAmDestination(ISemanticData dataId)
         {
           throw new NotImplementedException();
+        }
+        public ulong ContentMask
+        {
+          get { throw new NotImplementedException(); }
         }
       }
     }

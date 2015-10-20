@@ -318,7 +318,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class MessageWriter : IMessageWriter
     {
       internal bool IsOk = false;
-      public void Send(Func<int, IProducerBinding> producerBinding, int length)
+      public void Send(Func<int, IProducerBinding> producerBinding, int length, ulong contentMask)
       {
         IsOk = true;
         Assert.AreEqual<int>(3, length);
@@ -330,6 +330,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public void AttachToNetwork()
       {
         throw new NotImplementedException();
+      }
+      public ulong ContentMask
+      {
+        get { throw new NotImplementedException(); }
       }
     }
     private static void PropertyChangedTestMethod(ProducerBindingMonitoredValue<object> values)

@@ -13,6 +13,15 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 
     #region IMessageReader
     /// <summary>
+    /// Gets the content mask. The content mast read from the message or provided by the writer.
+    /// The order of the bits starting from the least significant bit matches the order of the data items
+    /// within the data set.
+    /// </summary>
+    /// <value>The content mask is represented as unsigned number <see cref="UInt64" />. 
+    /// The value is provided by the message.
+    /// The order of the bits starting from the least significant bit matches the order of the data items within the data set.</value>
+    public abstract ulong ContentMask { get; }
+    /// <summary>
     ///  If implemented in derived class gets the state machine for this instance.
     /// </summary>
     /// <value>An object of <see cref="IAssociationState" /> providing implementation of the state machine governing this instance behavior.</value>
@@ -44,15 +53,13 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     void IMessageReader.UpdateMyValues(Func<int, IConsumerBinding> update, int length)
     {
       UInt64 _mask = 0x1;
-      int _associationIndex = 0;
       for (int i = 0; i < length; i++)
       {
-        if ((ContentFilter & _mask) > 0)
+        if ((ContentMask & _mask) > 0)
         {
-          IConsumerBinding _binding = update(_associationIndex);
+          IConsumerBinding _binding = update(i);
           Read(_binding);
         }
-        _associationIndex++;
         _mask = _mask << 1;
       }
     }
@@ -78,13 +85,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected abstract Decimal ReadDecimal();
     #endregion
 
-    /// <summary>
-    /// Gets or sets the content filter.
-    /// </summary>
-    /// <value>The content filter.</value>
-    protected abstract ulong ContentFilter { get; }
     protected void RaiseReadMessageCompleted()
     {
+      if (this.State.State != HandlerState.Operational)
+        return;
       EventHandler<MessageEventArg> _handler = ReadMessageCompleted;
       if (_handler == null)
         return;
@@ -160,6 +164,8 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     }
 
     #endregion
+
+
 
   }
 

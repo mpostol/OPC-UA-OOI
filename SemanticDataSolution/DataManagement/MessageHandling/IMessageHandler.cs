@@ -23,6 +23,15 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Depending on the message transport layer type implementation of this function varies. 
     /// </remarks>
     void AttachToNetwork();
+    /// <summary>
+    /// Gets the content mask. The content mast read from the message or provided by the writer.
+    /// The order of the bits starting from the least significant bit matches the order of the data items 
+    /// within the data set.
+    /// </summary>
+    /// <value>The content mask represented as unsigned number <see cref="UInt64"/>. The order of the bits starting from the least significant 
+    /// bit matches the order of the data items within the data set.
+    /// </value>
+    UInt64 ContentMask { get; }
 
   }
 

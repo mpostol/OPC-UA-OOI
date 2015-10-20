@@ -205,6 +205,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       return dataId.Guid == m_DataSetGuid;
     }
+    public ulong ContentMask
+    {
+      get { throw new NotImplementedException(); }
+    }
     #endregion
 
     #region testing environment

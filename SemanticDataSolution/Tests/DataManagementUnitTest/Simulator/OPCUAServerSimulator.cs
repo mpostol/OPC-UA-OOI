@@ -190,12 +190,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     }
 
     #region IMessageWriter
+    public ulong ContentMask
+    {
+      get { throw new NotImplementedException(); }
+    }
     /// <summary>
     /// Sends the data described by a data set collection to remote destination.
     /// </summary>
     /// <param name="producerBinding">Encapsulates functionality used by the <see cref="IMessageWriter" /> to collect all the data (data set items) required to prepare new message and send it over the network.</param>
     /// <exception cref="System.NotImplementedException"></exception>
-    public void Send(Func<int, IProducerBinding> producerBinding, int length)
+    public void Send(Func<int, IProducerBinding> producerBinding, int length, ulong contentMask)
     {
       if (length > 2)
         throw new ArgumentOutOfRangeException("length");

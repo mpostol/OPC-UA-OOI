@@ -31,7 +31,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       _bmw.AttachToNetwork();
       ProducerBinding _binding = new ProducerBinding();
       _binding.Value = new TestClass();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1);
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue);
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
@@ -43,7 +43,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
       ProducerBinding _binding = new ProducerBinding();
       _binding.Value = new Nullable<float>();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1);
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue);
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
@@ -55,14 +55,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       ProducerBinding _binding = new ProducerBinding();
       _binding.Value = String.Empty;
       int _sentItems = 0;
-      ((IMessageWriter)_bmw).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; }, CommonDefinitions.TestValues.Length);
+      ((IMessageWriter)_bmw).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; }, CommonDefinitions.TestValues.Length, UInt64.MaxValue);
       Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
     public void BinaryMessageWriterTestMethod()
     {
-      BinaryMessageWriter _writer = new BinaryMessageWriter();
+      BinaryMessageEncoder _writer = new BinaryMessageEncoder();
       Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
       Assert.AreEqual<int>(0, _writer.m_NumberOfAttachToNetwork);
       Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
@@ -75,7 +75,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       ProducerBinding _binding = new ProducerBinding();
       _binding.Value = String.Empty;
       int _sentItems = 0;
-      ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; }, CommonDefinitions.TestValues.Length);
+      ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; }, CommonDefinitions.TestValues.Length, UInt64.MaxValue);
       Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
       Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
       Assert.AreEqual<int>(64, _writer.m_NumberOfSentBytes);
@@ -215,10 +215,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         Assert.IsInstanceOfType(value, typeof(char));
       }
-      protected override void Write(byte[] value, object parameter)
-      {
-        Assert.IsInstanceOfType(value, typeof(byte[]));
-      }
       protected override void CreateMessage(int length)
       {
         MassageCreated = true;
@@ -231,11 +227,61 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       #endregion
 
     }
-    private class BinaryMessageWriter : MessageWriterBase
+    private class MyState : IAssociationState
+    {
+
+      /// <summary>
+      /// Initializes a new instance of the <see cref="MyState"/> class.
+      /// </summary>
+      public MyState()
+      {
+        State = HandlerState.Disabled;
+      }
+      /// <summary>
+      /// Gets the current state <see cref="HandlerState" /> of the <see cref="Association" /> instance.
+      /// </summary>
+      /// <value>The state of <see cref="HandlerState" /> type.</value>
+      public HandlerState State
+      {
+        get;
+        private set;
+      }
+      /// <summary>
+      /// This method is used to enable a configured <see cref="Association" /> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational" /> state.
+      /// In the case of an error situation, the state changes into <see cref="HandlerState.Error" />. The operation is rejected if the current <see cref="State" />  is not <see cref="HandlerState.Disabled" />.
+      /// </summary>
+      /// <exception cref="System.ArgumentException">Wrong state</exception>
+      public void Enable()
+      {
+        if (State != HandlerState.Disabled)
+          throw new ArgumentException("Wrong state");
+        State = HandlerState.Operational;
+      }
+      /// <summary>
+      /// This method is used to disable an already enabled <see cref="Association" /> object.
+      /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled" /> or <see cref="HandlerState.NoConfiguration" />.
+      /// </summary>
+      /// <exception cref="System.ArgumentException">Wrong state</exception>
+      public void Disable()
+      {
+        if (State != HandlerState.Operational)
+          throw new ArgumentException("Wrong state");
+        State = HandlerState.Disabled;
+      }
+
+    }
+    #endregion
+
+    #region to be promoted to the codebase
+
+    /// <summary>
+    /// Class BinaryMessageEncoder - provides message content binary encoding functionality
+    /// </summary>
+    public class BinaryMessageEncoder : MessageWriterBase
     {
 
       #region creator
-      public BinaryMessageWriter()
+      public BinaryMessageEncoder()
       {
         State = new MyState();
       }
@@ -327,10 +373,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         m_BinaryWriter.Write(value);
       }
-      protected override void Write(byte[] value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
       #endregion
 
       #region private
@@ -353,51 +395,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       #endregion
 
     }
-    private class MyState : IAssociationState
-    {
 
-      /// <summary>
-      /// Initializes a new instance of the <see cref="MyState"/> class.
-      /// </summary>
-      public MyState()
-      {
-        State = HandlerState.Disabled;
-      }
-      /// <summary>
-      /// Gets the current state <see cref="HandlerState" /> of the <see cref="Association" /> instance.
-      /// </summary>
-      /// <value>The state of <see cref="HandlerState" /> type.</value>
-      public HandlerState State
-      {
-        get;
-        private set;
-      }
-      /// <summary>
-      /// This method is used to enable a configured <see cref="Association" /> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational" /> state.
-      /// In the case of an error situation, the state changes into <see cref="HandlerState.Error" />. The operation is rejected if the current <see cref="State" />  is not <see cref="HandlerState.Disabled" />.
-      /// </summary>
-      /// <exception cref="System.ArgumentException">Wrong state</exception>
-      public void Enable()
-      {
-        if (State != HandlerState.Disabled)
-          throw new ArgumentException("Wrong state");
-        State = HandlerState.Operational;
-      }
-      /// <summary>
-      /// This method is used to disable an already enabled <see cref="Association" /> object.
-      /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled" /> or <see cref="HandlerState.NoConfiguration" />.
-      /// </summary>
-      /// <exception cref="System.ArgumentException">Wrong state</exception>
-      public void Disable()
-      {
-        if (State != HandlerState.Operational)
-          throw new ArgumentException("Wrong state");
-        State = HandlerState.Disabled;
-      }
-
-    }
     #endregion
-
   }
 
 }

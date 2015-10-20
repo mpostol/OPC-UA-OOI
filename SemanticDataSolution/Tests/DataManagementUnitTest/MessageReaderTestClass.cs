@@ -4,7 +4,6 @@ using System;
 using System.IO;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
-using System.Linq;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -60,7 +59,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void BinaryMessageReaderTestMethod()
     {
       ISemanticData _semanticData = SemanticData.GetSemanticDataTest();
-      BinaryMessageReader _reader = new BinaryMessageReader(_semanticData);
+      BinaryMessageDecoder _reader = new BinaryMessageDecoder();
       Assert.IsNotNull(_reader);
       Assert.AreEqual<int>(0, _reader.m_NumberOfSentBytes);
       Assert.AreEqual<int>(0, _reader.m_NumberOfAttachToNetwork);
@@ -79,7 +78,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         _bindings[i] = new ConsumerBinding(i, _assign, CommonDefinitions.TestValues[i].GetType());
       int _redItems = 0;
       _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _semanticData, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
-      _reader.Send(CommonDefinitions.GetTestBinaryArray());
+      _reader.ReadMessage(CommonDefinitions.GetTestBinaryArray(), _semanticData);
+      Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
+      Assert.AreEqual<int>(64, _reader.m_NumberOfSentBytes);
+      Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
       Assert.AreEqual<int>(_buffer.Length, _redItems);
       object[] _shouldBeInBuffer = CommonDefinitions.TestValues;
       Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
@@ -214,7 +216,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
-      protected override ulong ContentFilter
+      public override ulong ContentMask
       {
         get
         {
@@ -251,120 +253,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_SemanticData = semanticData;
         this.RaiseReadMessageCompleted();
       }
-
-
-
-    }
-    private class BinaryMessageReader : MessageReaderBase
-    {
-
-      #region creator
-      public BinaryMessageReader(ISemanticData semanticData)
-      {
-        State = new MyState();
-        m_SemanticData = semanticData;
-      }
-      #endregion
-
-      public override IAssociationState State
-      {
-        get;
-        protected set;
-      }
-      public override void AttachToNetwork()
-      {
-        Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
-        State.Enable();
-        m_NumberOfAttachToNetwork++;
-      }
-      public override bool IAmDestination(ISemanticData dataId)
-      {
-        return dataId.Guid == m_SemanticData.Guid;
-      }
-      protected override UInt64 ReadUInt64()
-      {
-        return m_Reader.ReadUInt64();
-      }
-      protected override UInt32 ReadUInt32()
-      {
-        return m_Reader.ReadUInt32();
-      }
-      protected override UInt16 ReadUInt16()
-      {
-        return m_Reader.ReadUInt16();
-      }
-      protected override String ReadString()
-      {
-        return m_Reader.ReadString();
-      }
-      protected override Single ReadSingle()
-      {
-        return m_Reader.ReadSingle();
-      }
-      protected override SByte ReadSByte()
-      {
-        return m_Reader.ReadSByte();
-      }
-      protected override Int64 ReadInt64()
-      {
-        return m_Reader.ReadInt64();
-      }
-      protected override Int32 ReadInt32()
-      {
-        return m_Reader.ReadInt32();
-      }
-      protected override Int16 ReadInt16()
-      {
-        return m_Reader.ReadInt16();
-      }
-      protected override Double ReadDouble()
-      {
-        return m_Reader.ReadDouble();
-      }
-      protected override Decimal ReadDecimal()
-      {
-        return Convert.ToDecimal(m_Reader.ReadInt64());
-      }
-      protected override char ReadChar()
-      {
-        return m_Reader.ReadChar();
-      }
-      protected override Byte ReadByte()
-      {
-        return m_Reader.ReadByte();
-      }
-      protected override Boolean ReadBoolean()
-      {
-        return m_Reader.ReadBoolean();
-      }
-      protected override DateTime ReadDateTime()
-      {
-        return CommonDefinitions.GetUADateTime(m_Reader.ReadInt64());
-      }
-      protected override ulong ContentFilter
-      {
-        get
-        {
-          return ulong.MaxValue;
-        }
-      }
-
-      private BinaryReader m_Reader = null;
-      private ISemanticData m_SemanticData;
-
-      #region tetst instrumentation
-      internal int m_NumberOfSentBytes = 0;
-      internal int m_NumberOfAttachToNetwork = 0;
-      internal int m_NumberOfSentMessages = 0;
-      internal void Send(byte[] buffer)
-      {
-        MemoryStream _strem = new MemoryStream(buffer, 0, buffer.Length);
-        m_Reader = new BinaryReader(_strem);
-        base.RaiseReadMessageCompleted();
-        m_Reader.Dispose();
-        m_Reader = null;
-      }
-      #endregion
 
     }
     private class MyState : IAssociationState
@@ -446,6 +334,135 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     #endregion
 
+    #region To be promoted to the codebase
+    /// <summary>
+    /// Class BinaryMessageDecoder - provides message content binary decoding functionality
+    /// </summary>
+    public class BinaryMessageDecoder : MessageReaderBase
+    {
+
+      #region creator
+      public BinaryMessageDecoder()
+      {
+        State = new MyState();
+      }
+      #endregion
+
+      #region MessageReaderBase
+      public override IAssociationState State
+      {
+        get;
+        protected set;
+      }
+      public override void AttachToNetwork()
+      {
+        Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
+        State.Enable();
+        m_NumberOfAttachToNetwork++;
+      }
+      /// <summary>
+      /// Check if the message destination is the data set described by the <paramref name="dataId" /> of type <see cref="ISemanticData" />.
+      /// </summary>
+      /// <param name="dataId">The data identifier <see cref="ISemanticData" />.</param>
+      /// <returns><c>true</c> if <paramref name="dataId" /> is the destination of the message, <c>false</c> otherwise.</returns>
+      public override bool IAmDestination(ISemanticData dataId)
+      {
+        return dataId.Guid == m_SemanticData.Guid;
+      }
+      
+      public override ulong ContentMask
+      {
+        get
+        {
+          return ulong.MaxValue;
+        }
+      }
+
+      protected override UInt64 ReadUInt64()
+      {
+        return m_Reader.ReadUInt64();
+      }
+      protected override UInt32 ReadUInt32()
+      {
+        return m_Reader.ReadUInt32();
+      }
+      protected override UInt16 ReadUInt16()
+      {
+        return m_Reader.ReadUInt16();
+      }
+      protected override String ReadString()
+      {
+        return m_Reader.ReadString();
+      }
+      protected override Single ReadSingle()
+      {
+        return m_Reader.ReadSingle();
+      }
+      protected override SByte ReadSByte()
+      {
+        return m_Reader.ReadSByte();
+      }
+      protected override Int64 ReadInt64()
+      {
+        return m_Reader.ReadInt64();
+      }
+      protected override Int32 ReadInt32()
+      {
+        return m_Reader.ReadInt32();
+      }
+      protected override Int16 ReadInt16()
+      {
+        return m_Reader.ReadInt16();
+      }
+      protected override Double ReadDouble()
+      {
+        return m_Reader.ReadDouble();
+      }
+      protected override Decimal ReadDecimal()
+      {
+        return Convert.ToDecimal(m_Reader.ReadInt64());
+      }
+      protected override char ReadChar()
+      {
+        return m_Reader.ReadChar();
+      }
+      protected override Byte ReadByte()
+      {
+        return m_Reader.ReadByte();
+      }
+      protected override Boolean ReadBoolean()
+      {
+        return m_Reader.ReadBoolean();
+      }
+      protected override DateTime ReadDateTime()
+      {
+        return CommonDefinitions.GetUADateTime(m_Reader.ReadInt64());
+      }
+      #endregion
+
+      private BinaryReader m_Reader = null;
+      private ISemanticData m_SemanticData;
+
+      #region tetst instrumentation
+      internal int m_NumberOfSentBytes = 0;
+      internal int m_NumberOfAttachToNetwork = 0;
+      internal int m_NumberOfSentMessages = 0;
+      internal void ReadMessage(byte[] buffer, ISemanticData semanticData)
+      {
+        m_NumberOfSentMessages++;
+        m_NumberOfSentBytes += buffer.Length;
+        m_SemanticData = semanticData;
+        MemoryStream _stream = new MemoryStream(buffer, 0, buffer.Length);
+        m_Reader = new BinaryReader(_stream);
+        base.RaiseReadMessageCompleted();
+        m_Reader.Dispose();
+        m_Reader = null;
+      }
+      #endregion
+
+    }
+
+    #endregion
   }
 
 }

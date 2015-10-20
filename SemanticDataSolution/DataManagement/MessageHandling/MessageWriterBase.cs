@@ -12,6 +12,18 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 
     #region IMessageWriter
     /// <summary>
+    /// Gets the content mask. The content mast read from the message or provided by the writer.
+    /// The order of the bits starting from the least significant bit matches the order of the data items
+    /// within the data set.
+    /// </summary>
+    /// <value>The content mask represented as unsigned number <see cref="UInt64" />. The order of the bits starting from the least significant
+    /// bit matches the order of the data items within the data set.</value>
+    public ulong ContentMask
+    {
+      get;
+      private set;
+    }
+    /// <summary>
     /// Sends the data described by a data set collection to remote destination.
     /// </summary>
     /// <param name="producerBinding">Encapsulates functionality used by the <see cref="IMessageWriter" /> to collect all the data (data set items) required to prepare new message and send it over the network.</param>
@@ -20,22 +32,26 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Impossible to convert null value
     /// or
     /// </exception>
-    void IMessageWriter.Send(Func<int, IProducerBinding> producerBinding, int length)
+    void IMessageWriter.Send(Func<int, IProducerBinding> producerBinding, int length, ulong contentMask)
     {
       if (State.State != HandlerState.Operational)
         return;
+      ContentMask = contentMask;
       CreateMessage(length);
+      UInt64 _mask = 0x1;
       for (int i = 0; i < length; i++)
       {
-        IProducerBinding _pb = producerBinding(i);
-        object _value = _pb.GetFromRepository();
-        if (_value == null)
-          throw new ArgumentOutOfRangeException("Impossible to convert null value");
-        Type _type = _value.GetType();
-        if (_type == typeof(byte[]))
-          Write((byte[])_value, _pb.Parameter);
-        else if (!IsValueIConvertible(_value, _pb.Parameter))
-          throw new ArgumentOutOfRangeException(string.Format("Impossible to convert {0}", _value));
+        if ((ContentMask & _mask) > 0)
+        {
+          IProducerBinding _pb = producerBinding(i);
+          object _value = _pb.GetFromRepository();
+          if (_value == null)
+            throw new ArgumentOutOfRangeException("Impossible to convert null value");
+          Type _type = _value.GetType();
+          if (!IsValueIConvertible(_value, _pb.Parameter))
+            throw new ArgumentOutOfRangeException(string.Format("Impossible to convert {0}", _value));
+        }
+        _mask = _mask << 1;
       }
       SendMessage();
     }
@@ -73,7 +89,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected abstract void WriteByte(byte value, object parameter);
     protected abstract void WriteBool(bool value, object parameter);
     protected abstract void WriteChar(char value, object parameter);
-    protected abstract void Write(byte[] value, object parameter);
     #endregion
 
     protected abstract void SendMessage();

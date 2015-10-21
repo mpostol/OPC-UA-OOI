@@ -91,8 +91,8 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected abstract void WriteChar(char value, object parameter);
     #endregion
 
-    protected abstract void SendMessage();
     protected abstract void CreateMessage(int length);
+    protected abstract void SendMessage();
     private bool IsValueIConvertible(object value, object parameter)
     {
       IConvertible _cv = value as IConvertible;

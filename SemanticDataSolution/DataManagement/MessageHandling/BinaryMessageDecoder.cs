@@ -4,12 +4,13 @@ using System.IO;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
+
   /// <summary>
   /// Class BinaryMessageDecoder - provides message content binary decoding functionality
   /// </summary>
   /// <remarks>
-  /// <note>Implements only simple value types. Structural types must be implemented after more details in the spec will 
-  /// be available.</note>
+  /// <note>Implements only simple value types. Structural types must be implemented after more details will 
+  /// be available in the spec.</note>
   /// </remarks>
   public abstract class BinaryMessageDecoder : MessageReaderBase
   {
@@ -82,6 +83,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #endregion
 
     #region private
+    private BinaryReader m_Reader = null;
     /// <summary>
     /// Initializes a new instance of the  <see cref="System.IO.BinaryReader"/> class based on the buffer and using UTF-8 encoding.
     /// </summary>
@@ -99,8 +101,8 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       m_Reader.Dispose();
       m_Reader = null;
     }
-    private BinaryReader m_Reader = null;
     #endregion
 
   }
+
 }

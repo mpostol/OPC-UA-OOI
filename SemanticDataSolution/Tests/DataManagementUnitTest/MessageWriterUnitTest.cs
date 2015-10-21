@@ -62,7 +62,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_MessageWriter")]
     public void BinaryMessageWriterTestMethod()
     {
-      BinaryMessageEncoder _writer = new BinaryMessageEncoder();
+      BinaryMessagePackageEncoder _writer = new BinaryMessagePackageEncoder();
       Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
       Assert.AreEqual<int>(0, _writer.m_NumberOfAttachToNetwork);
       Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
@@ -81,8 +81,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<int>(64, _writer.m_NumberOfSentBytes);
       Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
       byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArray();
-      byte[] _isInBuffer = _writer.Buffer;
-      CollectionAssert.AreEqual(_writer.Buffer, _shouldBeInBuffer);
+      CollectionAssert.AreEqual(_writer.m_Buffer, _shouldBeInBuffer);
     }
     #endregion
 
@@ -273,21 +272,17 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #endregion
 
     #region to be promoted to the codebase
-
-    /// <summary>
-    /// Class BinaryMessageEncoder - provides message content binary encoding functionality
-    /// </summary>
-    public class BinaryMessageEncoder : MessageWriterBase
+    public class BinaryMessagePackageEncoder : BinaryMessageEncoder
     {
 
       #region creator
-      public BinaryMessageEncoder()
+      public BinaryMessagePackageEncoder()
       {
         State = new MyState();
       }
       #endregion
 
-      #region MessageWriterBase
+      #region MyRegion
       public override IAssociationState State
       {
         get;
@@ -299,91 +294,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         State.Enable();
         m_NumberOfAttachToNetwork++;
       }
-      protected override void SendMessage()
+      protected override void EncodeHeaders()
       {
-        Assert.IsNotNull(m_BinaryWriter);
-        m_BinaryWriter.Close();
-        SendMessage(m_Output.ToArray());
-        m_BinaryWriter.Dispose();
-        m_BinaryWriter = null;
+        //TODO must be implemented after definition of the details by the specyficatiopn;
       }
-
-      protected override void CreateMessage(int length)
-      {
-        m_Output = new MemoryStream();
-        m_BinaryWriter = new BinaryWriter(m_Output);
-      }
-      protected override void WriteUInt64(ulong value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
-      protected override void WriteUInt32(uint value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
-      protected override void WriteUInt16(ushort value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
-      protected override void WriteString(string value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
-      protected override void WriteSingle(float value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
-      protected override void WriteSByte(sbyte value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
-      protected override void WriteInt64(long value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
-      protected override void WriteInt32(int value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
-      protected override void WriteInt16(short value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
-      protected override void WriteDouble(double value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
-      protected override void WriteDecimal(decimal value, object parameter)
-      {
-        m_BinaryWriter.Write(Convert.ToInt64(value));
-      }
-      protected override void WriteDateTime(DateTime value, object parameter)
-      {
-        m_BinaryWriter.Write(global::UAOOI.SemanticData.DataManagement.MessageHandling.CommonDefinitions.GetUADataTimeTicks(value));
-      }
-      protected override void WriteByte(byte value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
-      protected override void WriteBool(bool value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
-      protected override void WriteChar(char value, object parameter)
-      {
-        m_BinaryWriter.Write(value);
-      }
-      #endregion
-
-      #region private
-      //vars
-      private BinaryWriter m_BinaryWriter;
-      private MemoryStream m_Output;
-      //methods
-      protected virtual void SendMessage(byte[] buffer)
+      protected override void SendMessage(byte[] buffer)
       {
         m_NumberOfSentMessages++;
         m_NumberOfSentBytes += buffer.Length;
+        m_Buffer = new byte[buffer.Length];
+        buffer.CopyTo(m_Buffer, 0);
       }
       #endregion
 
@@ -391,7 +311,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       internal int m_NumberOfSentMessages = 0;
       internal int m_NumberOfSentBytes = 0;
       internal int m_NumberOfAttachToNetwork;
-      internal byte[] Buffer { get { return m_Output.ToArray(); } }
+      internal byte[] m_Buffer = null;
       #endregion
 
     }

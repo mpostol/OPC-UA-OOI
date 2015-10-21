@@ -59,7 +59,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void BinaryMessageReaderTestMethod()
     {
       ISemanticData _semanticData = SemanticData.GetSemanticDataTest();
-      BinaryMessageFrameDecoder _reader = new BinaryMessageFrameDecoder();
+      BinaryMessagePackageDecoder _reader = new BinaryMessagePackageDecoder();
       Assert.IsNotNull(_reader);
       Assert.AreEqual<int>(0, _reader.m_NumberOfSentBytes);
       Assert.AreEqual<int>(0, _reader.m_NumberOfAttachToNetwork);
@@ -335,10 +335,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #endregion
 
     #region To be promoted to the codebase
-    public class BinaryMessageFrameDecoder : BinaryMessageDecoder
+    public class BinaryMessagePackageDecoder : BinaryMessageDecoder
     {
 
-      public BinaryMessageFrameDecoder()
+      public BinaryMessagePackageDecoder()
       {
         State = new MyState();
       }

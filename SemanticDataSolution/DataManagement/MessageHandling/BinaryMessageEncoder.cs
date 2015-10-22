@@ -93,7 +93,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       Debug.Assert(m_BinaryWriter != null);
       m_BinaryWriter.Close();
-      SendMessage(m_Output.ToArray());
+      DoUDPSend(m_Output.ToArray());
       DisposeWriter();
     }
     #endregion
@@ -116,7 +116,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Sends the message.
     /// </summary>
     /// <param name="buffer">The buffer with the message content.</param>
-    protected abstract void SendMessage(byte[] buffer);
+    protected abstract void DoUDPSend(byte[] buffer);
     #endregion
 
   }

@@ -1,9 +1,11 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.IO;
+using System.Net;
+using System.Net.Sockets;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
+using System.Linq;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -62,7 +64,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_MessageWriter")]
     public void BinaryMessageWriterTestMethod()
     {
-      BinaryMessagePackageEncoder _writer = new BinaryMessagePackageEncoder();
+      BinaryMessagePackageEncoder _writer = new BinaryMessagePackageEncoder("localhost");
       Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
       Assert.AreEqual<int>(0, _writer.m_NumberOfAttachToNetwork);
       Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
@@ -81,7 +83,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<int>(64, _writer.m_NumberOfSentBytes);
       Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
       byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArray();
-      CollectionAssert.AreEqual(_writer.m_Buffer, _shouldBeInBuffer);
+      CollectionAssert.AreEqual(_writer.DoUDPRead(), _shouldBeInBuffer);
     }
     #endregion
 
@@ -276,13 +278,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
 
       #region creator
-      public BinaryMessagePackageEncoder()
+      public BinaryMessagePackageEncoder(string host)
       {
         State = new MyState();
+        m_Host = host;
       }
       #endregion
 
-      #region MyRegion
+      #region BinaryMessageEncoder
       public override IAssociationState State
       {
         get;
@@ -290,28 +293,110 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       public override void AttachToNetwork()
       {
+        // Get first IPAddress in list return by DNS.
+        // Get DNS host information.
+        m_HostInfo = Dns.GetHostEntry(m_Host);
+        // Get the DNS IP addresses associated with the host.
+        Assert.AreEqual<int>(2, m_HostInfo.AddressList.Length);
+        m_IPAddresses = m_HostInfo.AddressList.AsEnumerable<IPAddress>().Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
+        Assert.IsNotNull(m_IPAddresses);
+        m_UdpClient = new UdpClient(m_Port);
         Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
         State.Enable();
         m_NumberOfAttachToNetwork++;
       }
       protected override void EncodeHeaders()
       {
-        //TODO must be implemented after definition of the details by the specyficatiopn;
+        //TODO must be implemented after definition of the details by the specification;
       }
-      protected override void SendMessage(byte[] buffer)
+      protected override void DoUDPSend(byte[] buffer)
       {
         m_NumberOfSentMessages++;
         m_NumberOfSentBytes += buffer.Length;
-        m_Buffer = new byte[buffer.Length];
-        buffer.CopyTo(m_Buffer, 0);
+        try
+        {
+          IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, m_Port);
+          m_UdpClient.Send(buffer, buffer.Length, _IPEndPoint);
+        }
+        catch (SocketException e)
+        {
+          Console.WriteLine("SocketException caught!!!");
+          Console.WriteLine("Source : " + e.Source);
+          Console.WriteLine("Message : " + e.Message);
+          throw;
+        }
+        catch (ArgumentNullException e)
+        {
+          Console.WriteLine("ArgumentNullException caught!!!");
+          Console.WriteLine("Source : " + e.Source);
+          Console.WriteLine("Message : " + e.Message);
+          throw;
+        }
+        catch (NullReferenceException e)
+        {
+          Console.WriteLine("NullReferenceException caught!!!");
+          Console.WriteLine("Source : " + e.Source);
+          Console.WriteLine("Message : " + e.Message);
+          throw;
+        }
+        catch (Exception e)
+        {
+          Console.WriteLine("Exception caught!!!");
+          Console.WriteLine("Source : " + e.Source);
+          Console.WriteLine("Message : " + e.Message);
+          throw;
+        }
       }
+      #endregion
+
+      #region private
+      private UdpClient m_UdpClient;
+      private IPAddress m_IPAddresses;
+      private IPHostEntry m_HostInfo;
+      private int m_Port = 4800;
+      private string m_Host;
       #endregion
 
       #region tetst instrumentation
       internal int m_NumberOfSentMessages = 0;
       internal int m_NumberOfSentBytes = 0;
       internal int m_NumberOfAttachToNetwork;
-      internal byte[] m_Buffer = null;
+      internal byte[] DoUDPRead()
+      {
+        Byte[] _receiverBytes = new Byte[256];
+        try
+        {
+          IPEndPoint _IPEndPoint = null;
+          _receiverBytes = m_UdpClient.Receive(ref _IPEndPoint);
+          Assert.IsNotNull(_IPEndPoint);
+        } // End of the try block.
+        catch (SocketException e)
+        {
+          Console.WriteLine("SocketException caught!!!");
+          Console.WriteLine("Source : " + e.Source);
+          Console.WriteLine("Message : " + e.Message);
+        }
+        catch (ArgumentNullException e)
+        {
+          Console.WriteLine("ArgumentNullException caught!!!");
+          Console.WriteLine("Source : " + e.Source);
+          Console.WriteLine("Message : " + e.Message);
+        }
+        catch (NullReferenceException e)
+        {
+          Console.WriteLine("NullReferenceException caught!!!");
+          Console.WriteLine("Source : " + e.Source);
+          Console.WriteLine("Message : " + e.Message);
+        }
+        catch (Exception e)
+        {
+          Console.WriteLine("Exception caught!!!");
+          Console.WriteLine("Source : " + e.Source);
+          Console.WriteLine("Message : " + e.Message);
+        }
+        return _receiverBytes;
+
+      }
       #endregion
 
     }

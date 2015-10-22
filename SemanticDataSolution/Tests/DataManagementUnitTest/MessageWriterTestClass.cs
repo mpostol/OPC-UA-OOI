@@ -11,7 +11,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
 
   [TestClass]
-  public class MessageWriterUnitTest
+  public class MessageWriterTestClass
   {
 
     #region TestMethod

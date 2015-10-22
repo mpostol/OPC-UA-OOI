@@ -15,6 +15,8 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   public abstract class BinaryMessageDecoder : MessageReaderBase
   {
 
+    #region MessageReaderBase
+
     #region decoder
     /// <summary>
     /// Reads an 8-byte unsigned integer from the message and advances the position by eight bytes.
@@ -79,6 +81,20 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected override DateTime ReadDateTime()
     {
       return CommonDefinitions.GetUADateTime(m_Reader.ReadInt64());
+    }
+    #endregion
+
+    /// <summary>
+    /// Gets the content mask. The content mast read from the message or provided by the writer.
+    /// The order of the bits starting from the least significant bit matches the order of the data items
+    /// within the data set.
+    /// </summary>
+    /// <value>The content mask is represented as unsigned number <see cref="UInt64" />.
+    /// The value is provided by the message.
+    /// The order of the bits starting from the least significant bit matches the order of the data items within the data set.</value>
+    public override ulong ContentMask
+    {
+      get { return ulong.MaxValue; } //TODO must be implemented - get it from message.
     }
     #endregion
 

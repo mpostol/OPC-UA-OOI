@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>IDE0001</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -80,7 +81,7 @@
     <Compile Include="ProducerBindingUnitTest.cs" />
     <Compile Include="PersistentConfigurationUnitTest.cs" />
     <Compile Include="OPCUAServerProducerSimulatorUnitTest.cs" />
-    <Compile Include="MessageWriterUnitTest.cs" />
+    <Compile Include="MessageWriterTestClass.cs" />
     <Compile Include="MessageReaderTestClass.cs" />
   </ItemGroup>
   <ItemGroup>

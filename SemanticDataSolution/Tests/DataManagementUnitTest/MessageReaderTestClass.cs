@@ -2,12 +2,21 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using System.Net;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
+using System.Linq;
+using System.Net.Sockets;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
+  [TestClass]
+  public class MyTestClass
+  {
 
+  }
   [TestClass]
   public class MessageReaderTestClass
   {
@@ -58,34 +67,38 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_MessageReader")]
     public void BinaryMessageReaderTestMethod()
     {
+      int _port = 35678;
       ISemanticData _semanticData = SemanticData.GetSemanticDataTest();
-      BinaryMessagePackageDecoder _reader = new BinaryMessagePackageDecoder();
-      Assert.IsNotNull(_reader);
-      Assert.AreEqual<int>(0, _reader.m_NumberOfSentBytes);
-      Assert.AreEqual<int>(0, _reader.m_NumberOfAttachToNetwork);
-      Assert.AreEqual<int>(0, _reader.m_NumberOfSentMessages);
-      Assert.AreEqual<HandlerState>(HandlerState.Disabled, _reader.State.State);
-      _reader.AttachToNetwork();
-      Assert.AreEqual<HandlerState>(HandlerState.Operational, _reader.State.State);
-      Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
-      Assert.AreEqual<int>(0, _reader.m_NumberOfSentBytes);
-      Assert.AreEqual<int>(0, _reader.m_NumberOfSentMessages);
-      MessageEventArg e = null;
-      object[] _buffer = new object[CommonDefinitions.TestValues.Length];
-      IConsumerBinding[] _bindings = new IConsumerBinding[_buffer.Length];
-      Action<object, int> _assign = (x, y) => _buffer[y] = x;
-      for (int i = 0; i < _buffer.Length; i++)
-        _bindings[i] = new ConsumerBinding(i, _assign, CommonDefinitions.TestValues[i].GetType());
-      int _redItems = 0;
-      _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _semanticData, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
-      _reader.ReadMessage(CommonDefinitions.GetTestBinaryArray(), _semanticData);
-      Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
-      Assert.AreEqual<int>(64, _reader.m_NumberOfSentBytes);
-      Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
-      Assert.AreEqual<int>(_buffer.Length, _redItems);
-      object[] _shouldBeInBuffer = CommonDefinitions.TestValues;
-      Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
-      Assert.AreEqual<string>(String.Join(",", _shouldBeInBuffer), String.Join(",", _buffer));
+      using (BinaryUDPPackageReader _reader = new BinaryUDPPackageReader(_port))
+      {
+        Assert.IsNotNull(_reader);
+        Assert.AreEqual<int>(0, _reader.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(0, _reader.m_NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(0, _reader.m_NumberOfSentMessages);
+        Assert.AreEqual<HandlerState>(HandlerState.Disabled, _reader.State.State);
+        _reader.AttachToNetwork();
+        Assert.AreEqual<HandlerState>(HandlerState.Operational, _reader.State.State);
+        Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(0, _reader.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(0, _reader.m_NumberOfSentMessages);
+        MessageEventArg e = null;
+        object[] _buffer = new object[CommonDefinitions.TestValues.Length];
+        IConsumerBinding[] _bindings = new IConsumerBinding[_buffer.Length];
+        Action<object, int> _assign = (x, y) => _buffer[y] = x;
+        for (int i = 0; i < _buffer.Length; i++)
+          _bindings[i] = new ConsumerBinding(i, _assign, CommonDefinitions.TestValues[i].GetType());
+        int _redItems = 0;
+        _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _semanticData, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
+        _reader.SendUDPMessage(CommonDefinitions.GetTestBinaryArray(), _semanticData, _port);
+        Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(64, _reader.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
+        Thread.Sleep(100);
+        Assert.AreEqual<int>(_buffer.Length, _redItems);
+        object[] _shouldBeInBuffer = CommonDefinitions.TestValues;
+        Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
+        Assert.AreEqual<string>(String.Join(",", _shouldBeInBuffer), String.Join(",", _buffer));
+      }
     }
     #endregion
 
@@ -335,12 +348,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #endregion
 
     #region To be promoted to the codebase
-    public class BinaryMessagePackageDecoder : BinaryMessageDecoder
+    public class BinaryUDPPackageReader : BinaryMessageDecoder, IDisposable
     {
 
-      public BinaryMessagePackageDecoder()
+      public BinaryUDPPackageReader(int port)
       {
         State = new MyState();
+        m_UdpClient = new UdpClient(port);
       }
 
       #region BinaryMessageDecoder
@@ -354,6 +368,26 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
         State.Enable();
         m_NumberOfAttachToNetwork++;
+        m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
+      }
+      private void m_ReceiveAsyncCallback(IAsyncResult asyncResult)
+      {
+        //UdpClient u = (UdpClient)((UdpState)(ar.AsyncState)).u;
+        //IPEndPoint e = (IPEndPoint)((UdpState)(ar.AsyncState)).e;
+        IPEndPoint _UEndPoint = null;
+        Byte[] _receiveBytes = null;
+        try
+        {
+          _receiveBytes = m_UdpClient.EndReceive(asyncResult, ref _UEndPoint);
+          CreateReader(_receiveBytes);
+          ReadPackageHeaders();
+          RaiseReadMessageCompleted();
+          DisposeReader();
+          m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
+        }
+        catch (ObjectDisposedException)
+        {
+        }
       }
       /// <summary>
       /// Check if the message destination is the data set described by the <paramref name="dataId" /> of type <see cref="ISemanticData" />.
@@ -364,30 +398,42 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         return dataId.Guid == m_SemanticData.Guid;
       }
-
       #endregion
 
       #region Message frame
-      public override ulong ContentMask
-      {
-        get { return ulong.MaxValue; }
-      }
       private ISemanticData m_SemanticData;
+      private void ReadPackageHeaders()
+      {
+        //TODO throw new NotImplementedException();
+      }
       #endregion
 
       #region tetst instrumentation
       internal int m_NumberOfSentBytes = 0;
       internal int m_NumberOfAttachToNetwork = 0;
       internal int m_NumberOfSentMessages = 0;
-      internal void ReadMessage(byte[] buffer, ISemanticData semanticData)
+      private readonly UdpClient m_UdpClient;
+
+      internal void SendUDPMessage(byte[] buffer, ISemanticData semanticData, int _RemoteHostPortNumber)
       {
+        string m_RemoteHostName = "localhost";
+        // Get DNS host information.
+        IPHostEntry m_HostInfo = Dns.GetHostEntry(m_RemoteHostName);
+        // Get the DNS IP addresses associated with the host.
+        Assert.AreEqual<int>(2, m_HostInfo.AddressList.Length);
+        // Get first IPAddress in list return by DNS.
+        IPAddress m_IPAddresses = m_HostInfo.AddressList.Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
+        Assert.IsNotNull(m_IPAddresses);
+        IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, _RemoteHostPortNumber);
+        UdpClient _myClient = new UdpClient();
+        _myClient.Send(buffer, buffer.Length, _IPEndPoint);
         m_NumberOfSentMessages++;
         m_NumberOfSentBytes += buffer.Length;
         m_SemanticData = semanticData;
-        CreateReader(buffer);
-
-        base.RaiseReadMessageCompleted();
-        DisposeReader();
+      }
+      public void Dispose()
+      {
+        m_UdpClient.Close();
       }
       #endregion
 

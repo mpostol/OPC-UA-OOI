@@ -64,7 +64,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_MessageWriter")]
     public void BinaryMessageWriterTestMethod()
     {
-      BinaryUDPPackageWriter _writer = new BinaryUDPPackageWriter("localhost");
+      int _port = 35678;
+      BinaryUDPPackageWriter _writer = new BinaryUDPPackageWriter("localhost", _port);
       Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
       Assert.AreEqual<int>(0, _writer.m_NumberOfAttachToNetwork);
       Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
@@ -229,60 +230,61 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
     }
   }
-    internal class MyState : IAssociationState
+  internal class MyState : IAssociationState
+  {
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MyState"/> class.
+    /// </summary>
+    public MyState()
     {
-
-      /// <summary>
-      /// Initializes a new instance of the <see cref="MyState"/> class.
-      /// </summary>
-      public MyState()
-      {
-        State = HandlerState.Disabled;
-      }
-      /// <summary>
-      /// Gets the current state <see cref="HandlerState" /> of the <see cref="Association" /> instance.
-      /// </summary>
-      /// <value>The state of <see cref="HandlerState" /> type.</value>
-      public HandlerState State
-      {
-        get;
-        private set;
-      }
-      /// <summary>
-      /// This method is used to enable a configured <see cref="Association" /> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational" /> state.
-      /// In the case of an error situation, the state changes into <see cref="HandlerState.Error" />. The operation is rejected if the current <see cref="State" />  is not <see cref="HandlerState.Disabled" />.
-      /// </summary>
-      /// <exception cref="System.ArgumentException">Wrong state</exception>
-      public void Enable()
-      {
-        if (State != HandlerState.Disabled)
-          throw new ArgumentException("Wrong state");
-        State = HandlerState.Operational;
-      }
-      /// <summary>
-      /// This method is used to disable an already enabled <see cref="Association" /> object.
-      /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled" /> or <see cref="HandlerState.NoConfiguration" />.
-      /// </summary>
-      /// <exception cref="System.ArgumentException">Wrong state</exception>
-      public void Disable()
-      {
-        if (State != HandlerState.Operational)
-          throw new ArgumentException("Wrong state");
-        State = HandlerState.Disabled;
-      }
-
+      State = HandlerState.Disabled;
     }
-    #endregion
+    /// <summary>
+    /// Gets the current state <see cref="HandlerState" /> of the <see cref="Association" /> instance.
+    /// </summary>
+    /// <value>The state of <see cref="HandlerState" /> type.</value>
+    public HandlerState State
+    {
+      get;
+      private set;
+    }
+    /// <summary>
+    /// This method is used to enable a configured <see cref="Association" /> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational" /> state.
+    /// In the case of an error situation, the state changes into <see cref="HandlerState.Error" />. The operation is rejected if the current <see cref="State" />  is not <see cref="HandlerState.Disabled" />.
+    /// </summary>
+    /// <exception cref="System.ArgumentException">Wrong state</exception>
+    public void Enable()
+    {
+      if (State != HandlerState.Disabled)
+        throw new ArgumentException("Wrong state");
+      State = HandlerState.Operational;
+    }
+    /// <summary>
+    /// This method is used to disable an already enabled <see cref="Association" /> object.
+    /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled" /> or <see cref="HandlerState.NoConfiguration" />.
+    /// </summary>
+    /// <exception cref="System.ArgumentException">Wrong state</exception>
+    public void Disable()
+    {
+      if (State != HandlerState.Operational)
+        throw new ArgumentException("Wrong state");
+      State = HandlerState.Disabled;
+    }
+
+  }
+  #endregion
 
   #region to be promoted to the codebase
   public class BinaryUDPPackageWriter : BinaryMessageEncoder
   {
 
     #region creator
-    public BinaryUDPPackageWriter(string remoteHostName)
+    public BinaryUDPPackageWriter(string remoteHostName, int port)
     {
       State = new MyState();
       m_RemoteHostName = remoteHostName;
+      m_Port = port;
     }
     #endregion
 
@@ -299,7 +301,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       // Get the DNS IP addresses associated with the host.
       Assert.AreEqual<int>(2, m_HostInfo.AddressList.Length);
       // Get first IPAddress in list return by DNS.
-      m_IPAddresses = m_HostInfo.AddressList.AsEnumerable<IPAddress>().Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
+      m_IPAddresses = m_HostInfo.AddressList.Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
       Assert.IsNotNull(m_IPAddresses);
       m_UdpClient = new UdpClient(m_Port);
       Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);

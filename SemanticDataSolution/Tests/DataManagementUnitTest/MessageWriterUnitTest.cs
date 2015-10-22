@@ -64,7 +64,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_MessageWriter")]
     public void BinaryMessageWriterTestMethod()
     {
-      BinaryMessagePackageEncoder _writer = new BinaryMessagePackageEncoder("localhost");
+      BinaryUDPPackageWriter _writer = new BinaryUDPPackageWriter("localhost");
       Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
       Assert.AreEqual<int>(0, _writer.m_NumberOfAttachToNetwork);
       Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
@@ -228,7 +228,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       #endregion
 
     }
-    private class MyState : IAssociationState
+  }
+    internal class MyState : IAssociationState
     {
 
       /// <summary>
@@ -273,135 +274,134 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     #endregion
 
-    #region to be promoted to the codebase
-    public class BinaryMessagePackageEncoder : BinaryMessageEncoder
+  #region to be promoted to the codebase
+  public class BinaryUDPPackageWriter : BinaryMessageEncoder
+  {
+
+    #region creator
+    public BinaryUDPPackageWriter(string remoteHostName)
     {
+      State = new MyState();
+      m_RemoteHostName = remoteHostName;
+    }
+    #endregion
 
-      #region creator
-      public BinaryMessagePackageEncoder(string host)
+    #region BinaryMessageEncoder
+    public override IAssociationState State
+    {
+      get;
+      protected set;
+    }
+    public override void AttachToNetwork()
+    {
+      // Get DNS host information.
+      m_HostInfo = Dns.GetHostEntry(m_RemoteHostName);
+      // Get the DNS IP addresses associated with the host.
+      Assert.AreEqual<int>(2, m_HostInfo.AddressList.Length);
+      // Get first IPAddress in list return by DNS.
+      m_IPAddresses = m_HostInfo.AddressList.AsEnumerable<IPAddress>().Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
+      Assert.IsNotNull(m_IPAddresses);
+      m_UdpClient = new UdpClient(m_Port);
+      Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
+      State.Enable();
+      m_NumberOfAttachToNetwork++;
+    }
+    protected override void EncodeHeaders()
+    {
+      //TODO must be implemented after definition of the details by the specification;
+    }
+    protected override void SendMessage(byte[] buffer)
+    {
+      m_NumberOfSentMessages++;
+      m_NumberOfSentBytes += buffer.Length;
+      try
       {
-        State = new MyState();
-        m_Host = host;
+        IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, m_Port);
+        m_UdpClient.Send(buffer, buffer.Length, _IPEndPoint);
       }
-      #endregion
+      catch (SocketException e)
+      {
+        Console.WriteLine("SocketException caught!!!");
+        Console.WriteLine("Source : " + e.Source);
+        Console.WriteLine("Message : " + e.Message);
+        throw;
+      }
+      catch (ArgumentNullException e)
+      {
+        Console.WriteLine("ArgumentNullException caught!!!");
+        Console.WriteLine("Source : " + e.Source);
+        Console.WriteLine("Message : " + e.Message);
+        throw;
+      }
+      catch (NullReferenceException e)
+      {
+        Console.WriteLine("NullReferenceException caught!!!");
+        Console.WriteLine("Source : " + e.Source);
+        Console.WriteLine("Message : " + e.Message);
+        throw;
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine("Exception caught!!!");
+        Console.WriteLine("Source : " + e.Source);
+        Console.WriteLine("Message : " + e.Message);
+        throw;
+      }
+    }
+    #endregion
 
-      #region BinaryMessageEncoder
-      public override IAssociationState State
-      {
-        get;
-        protected set;
-      }
-      public override void AttachToNetwork()
-      {
-        // Get first IPAddress in list return by DNS.
-        // Get DNS host information.
-        m_HostInfo = Dns.GetHostEntry(m_Host);
-        // Get the DNS IP addresses associated with the host.
-        Assert.AreEqual<int>(2, m_HostInfo.AddressList.Length);
-        m_IPAddresses = m_HostInfo.AddressList.AsEnumerable<IPAddress>().Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
-        Assert.IsNotNull(m_IPAddresses);
-        m_UdpClient = new UdpClient(m_Port);
-        Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
-        State.Enable();
-        m_NumberOfAttachToNetwork++;
-      }
-      protected override void EncodeHeaders()
-      {
-        //TODO must be implemented after definition of the details by the specification;
-      }
-      protected override void DoUDPSend(byte[] buffer)
-      {
-        m_NumberOfSentMessages++;
-        m_NumberOfSentBytes += buffer.Length;
-        try
-        {
-          IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, m_Port);
-          m_UdpClient.Send(buffer, buffer.Length, _IPEndPoint);
-        }
-        catch (SocketException e)
-        {
-          Console.WriteLine("SocketException caught!!!");
-          Console.WriteLine("Source : " + e.Source);
-          Console.WriteLine("Message : " + e.Message);
-          throw;
-        }
-        catch (ArgumentNullException e)
-        {
-          Console.WriteLine("ArgumentNullException caught!!!");
-          Console.WriteLine("Source : " + e.Source);
-          Console.WriteLine("Message : " + e.Message);
-          throw;
-        }
-        catch (NullReferenceException e)
-        {
-          Console.WriteLine("NullReferenceException caught!!!");
-          Console.WriteLine("Source : " + e.Source);
-          Console.WriteLine("Message : " + e.Message);
-          throw;
-        }
-        catch (Exception e)
-        {
-          Console.WriteLine("Exception caught!!!");
-          Console.WriteLine("Source : " + e.Source);
-          Console.WriteLine("Message : " + e.Message);
-          throw;
-        }
-      }
-      #endregion
+    #region private
+    private UdpClient m_UdpClient;
+    private IPAddress m_IPAddresses;
+    private IPHostEntry m_HostInfo;
+    private int m_Port = 4800;
+    private string m_RemoteHostName;
+    #endregion
 
-      #region private
-      private UdpClient m_UdpClient;
-      private IPAddress m_IPAddresses;
-      private IPHostEntry m_HostInfo;
-      private int m_Port = 4800;
-      private string m_Host;
-      #endregion
-
-      #region tetst instrumentation
-      internal int m_NumberOfSentMessages = 0;
-      internal int m_NumberOfSentBytes = 0;
-      internal int m_NumberOfAttachToNetwork;
-      internal byte[] DoUDPRead()
+    #region tetst instrumentation
+    internal int m_NumberOfSentMessages = 0;
+    internal int m_NumberOfSentBytes = 0;
+    internal int m_NumberOfAttachToNetwork;
+    internal byte[] DoUDPRead()
+    {
+      Byte[] _receiverBytes = new Byte[256];
+      try
       {
-        Byte[] _receiverBytes = new Byte[256];
-        try
-        {
-          IPEndPoint _IPEndPoint = null;
-          _receiverBytes = m_UdpClient.Receive(ref _IPEndPoint);
-          Assert.IsNotNull(_IPEndPoint);
-        } // End of the try block.
-        catch (SocketException e)
-        {
-          Console.WriteLine("SocketException caught!!!");
-          Console.WriteLine("Source : " + e.Source);
-          Console.WriteLine("Message : " + e.Message);
-        }
-        catch (ArgumentNullException e)
-        {
-          Console.WriteLine("ArgumentNullException caught!!!");
-          Console.WriteLine("Source : " + e.Source);
-          Console.WriteLine("Message : " + e.Message);
-        }
-        catch (NullReferenceException e)
-        {
-          Console.WriteLine("NullReferenceException caught!!!");
-          Console.WriteLine("Source : " + e.Source);
-          Console.WriteLine("Message : " + e.Message);
-        }
-        catch (Exception e)
-        {
-          Console.WriteLine("Exception caught!!!");
-          Console.WriteLine("Source : " + e.Source);
-          Console.WriteLine("Message : " + e.Message);
-        }
-        return _receiverBytes;
-
+        IPEndPoint _IPEndPoint = null;
+        _receiverBytes = m_UdpClient.Receive(ref _IPEndPoint);
+        Assert.IsNotNull(_IPEndPoint);
+      } // End of the try block.
+      catch (SocketException e)
+      {
+        Console.WriteLine("SocketException caught!!!");
+        Console.WriteLine("Source : " + e.Source);
+        Console.WriteLine("Message : " + e.Message);
       }
-      #endregion
+      catch (ArgumentNullException e)
+      {
+        Console.WriteLine("ArgumentNullException caught!!!");
+        Console.WriteLine("Source : " + e.Source);
+        Console.WriteLine("Message : " + e.Message);
+      }
+      catch (NullReferenceException e)
+      {
+        Console.WriteLine("NullReferenceException caught!!!");
+        Console.WriteLine("Source : " + e.Source);
+        Console.WriteLine("Message : " + e.Message);
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine("Exception caught!!!");
+        Console.WriteLine("Source : " + e.Source);
+        Console.WriteLine("Message : " + e.Message);
+      }
+      return _receiverBytes;
 
     }
-
     #endregion
+
   }
+
+  #endregion
 
 }

@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />
+    <None Include="Writers.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DataManagement\DataManagement.csproj">

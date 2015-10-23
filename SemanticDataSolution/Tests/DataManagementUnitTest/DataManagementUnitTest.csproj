@@ -60,7 +60,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -83,6 +85,7 @@
     <Compile Include="OPCUAServerProducerSimulatorUnitTest.cs" />
     <Compile Include="MessageWriterTestClass.cs" />
     <Compile Include="MessageReaderTestClass.cs" />
+    <Compile Include="UABinaryWriterUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

@@ -86,6 +86,8 @@
     <Compile Include="MessageHandling\IMessageWriter.cs" />
     <Compile Include="MessageHandling\MessageReaderBase.cs" />
     <Compile Include="MessageHandling\MessageWriterBase.cs" />
+    <Compile Include="MessageHandling\UABinaryReader.cs" />
+    <Compile Include="MessageHandling\UABinaryWriter.cs" />
     <Compile Include="ProducerAssociation.cs" />
     <Compile Include="DataRepository\ProducerBinding.cs" />
     <Compile Include="DataRepository\ProducerBindingMonitoredValue.cs" />

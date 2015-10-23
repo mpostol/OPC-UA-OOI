@@ -11,17 +11,26 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #region TestMethod
     [TestMethod]
     [TestCategory("DataManagement_PackageHeaderUnitTest")]
-    public void ProducerPackageHeaderCreatorTestMethod()
+    public void ProducerPackageHeaderTestMethod()
     {
       HeaderWriterTest _writer = new HeaderWriterTest();
       PackageHeader _header = PackageHeader.GetProducerPackageHeader(_writer);
       Assert.IsNotNull(_header);
-      _header.Synchonize();
+      _header.Synchronize();
       Assert.AreEqual<byte>(0, _header.MessageCount);
       Assert.AreEqual<long>(20, _writer.m_Position);
       _header.MessageCount = 0xff;
       Assert.AreEqual<long>(20, _writer.m_Position);
       Assert.AreEqual<byte>(255, _header.MessageCount);
+    }
+    [TestMethod]
+    public void ConsumerPackageHeaderTestMethod()
+    {
+      HeaderReaderTest _reader = new HeaderReaderTest();
+      PackageHeader _header = PackageHeader.GetConsumerPackageHeader(_reader);
+      Assert.IsNotNull(_header);
+      _header.Synchronize();
+
     }
     #endregion
 
@@ -58,10 +67,31 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       internal long m_Position = 0;
       #endregion
     }
+    private class HeaderReaderTest : IHeaderReader
+    {
+      public byte ReadByte()
+      {
+        m_position++;
+        return 0xff;
+      }
+      public Guid ReadGuid()
+      {
+        m_position += 16;
+        return Guid.NewGuid();
+      }
+      internal int m_position = 0;
+    }
     #endregion
+
   }
 
   #region To be promoted
+  [Flags]
+  public enum MessageFlag
+  {
+    Metadata = 0x0,
+    PeriodicData = 0x1,
+  }
   public interface IHeaderWriter
   {
     /// <summary>
@@ -86,12 +116,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     /// <param name="value">The <see cref="Guid"/> value to write.</param>
     void Write(Guid value);
   }
-
-  [Flags]
-  public enum MessageFlag
+  public interface IHeaderReader
   {
-    Metadata = 0x0,
-    PeriodicData = 0x1,
+    Guid ReadGuid();
+    byte ReadByte();
   }
   public abstract class PackageHeader
   {
@@ -100,7 +128,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       return new ProducerPackageHeader(writer);
     }
 
-    public abstract void Synchonize();
+    public static PackageHeader GetConsumerPackageHeader(IHeaderReader reader)
+    {
+      return new ConsumerPackageHeader(reader);
+    }
+    public abstract void Synchronize();
 
     #region Header
     public abstract Guid PublisherId { get; set; }
@@ -111,6 +143,44 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #endregion
 
     #region private
+    private class ConsumerPackageHeader : PackageHeader
+    {
+
+      public ConsumerPackageHeader(IHeaderReader reader) : base()
+      {
+        m_Reader = reader;
+      }
+      public override byte MessageCount
+      {
+        get; set;
+      }
+      public override byte MessageFlags
+      {
+        get; set;
+      }
+      public override byte ProtocolVersion
+      {
+        get; set;
+      }
+      public override Guid PublisherId
+      {
+        get; set;
+      }
+      public override byte SecurityTokenId
+      {
+        get; set;
+      }
+      public override void Synchronize()
+      {
+        PublisherId = m_Reader.ReadGuid();
+        MessageFlags = m_Reader.ReadByte();
+        ProtocolVersion = m_Reader.ReadByte();
+        SecurityTokenId = m_Reader.ReadByte();
+        MessageCount = m_Reader.ReadByte();
+      }
+
+      private IHeaderReader m_Reader;
+    }
     private class ProducerPackageHeader : PackageHeader
     {
 
@@ -155,7 +225,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         get; set;
       }
-      public override void Synchonize()
+      public override void Synchronize()
       {
         m_Writer.Write(PublisherId);
         m_Writer.Write(MessageFlags);

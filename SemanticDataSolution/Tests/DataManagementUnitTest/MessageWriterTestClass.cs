@@ -65,26 +65,28 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void BinaryMessageWriterTestMethod()
     {
       int _port = 35678;
-      BinaryUDPPackageWriter _writer = new BinaryUDPPackageWriter("localhost", _port);
-      Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
-      Assert.AreEqual<int>(0, _writer.m_NumberOfAttachToNetwork);
-      Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
-      Assert.AreEqual<HandlerState>(HandlerState.Disabled, _writer.State.State);
-      _writer.AttachToNetwork();
-      Assert.AreEqual<HandlerState>(HandlerState.Operational, _writer.State.State);
-      Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
-      Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
-      Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
-      ProducerBinding _binding = new ProducerBinding();
-      _binding.Value = String.Empty;
-      int _sentItems = 0;
-      ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; }, CommonDefinitions.TestValues.Length, UInt64.MaxValue);
-      Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
-      Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
-      Assert.AreEqual<int>(64, _writer.m_NumberOfSentBytes);
-      Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
-      byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArray();
-      CollectionAssert.AreEqual(_writer.DoUDPRead(), _shouldBeInBuffer);
+      using (BinaryUDPPackageWriter _writer = new BinaryUDPPackageWriter("localhost", _port))
+      {
+        Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(0, _writer.m_NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
+        Assert.AreEqual<HandlerState>(HandlerState.Disabled, _writer.State.State);
+        _writer.AttachToNetwork();
+        Assert.AreEqual<HandlerState>(HandlerState.Operational, _writer.State.State);
+        Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
+        ProducerBinding _binding = new ProducerBinding();
+        _binding.Value = String.Empty;
+        int _sentItems = 0;
+        ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; }, CommonDefinitions.TestValues.Length, UInt64.MaxValue);
+        Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
+        Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(64, _writer.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
+        byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArray();
+        CollectionAssert.AreEqual(_writer.DoUDPRead(), _shouldBeInBuffer);
+      }
     }
     #endregion
 
@@ -276,7 +278,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   #endregion
 
   #region to be promoted to the codebase
-  public class BinaryUDPPackageWriter : BinaryMessageEncoder
+  public class BinaryUDPPackageWriter : BinaryMessageEncoder, IDisposable
   {
 
     #region creator
@@ -399,6 +401,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       return _receiverBytes;
 
+    }
+    public void Dispose()
+    {
+      m_UdpClient.Close();
     }
     #endregion
 

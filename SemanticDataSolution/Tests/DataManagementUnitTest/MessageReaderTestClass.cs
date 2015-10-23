@@ -425,8 +425,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         IPAddress m_IPAddresses = m_HostInfo.AddressList.Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
         Assert.IsNotNull(m_IPAddresses);
         IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, _RemoteHostPortNumber);
-        UdpClient _myClient = new UdpClient();
-        _myClient.Send(buffer, buffer.Length, _IPEndPoint);
+        using (UdpClient _myClient = new UdpClient())
+          _myClient.Send(buffer, buffer.Length, _IPEndPoint);
         m_NumberOfSentMessages++;
         m_NumberOfSentBytes += buffer.Length;
         m_SemanticData = semanticData;

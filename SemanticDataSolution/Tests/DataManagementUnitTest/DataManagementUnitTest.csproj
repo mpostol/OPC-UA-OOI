@@ -86,6 +86,7 @@
     <Compile Include="MessageWriterTestClass.cs" />
     <Compile Include="MessageReaderTestClass.cs" />
     <Compile Include="UABinaryWriterUnitTest.cs" />
+    <Compile Include="PackageHeaderUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

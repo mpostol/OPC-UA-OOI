@@ -277,8 +277,20 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   }
   #endregion
 
+  public abstract class BinaryPackageEncoder : BinaryMessageEncoder
+  {
+
+    //TODO public PackageHeader Header { get; set; }
+
+    #region BinaryMessageEncoder
+    protected override void EncodeHeaders()
+    {
+      //TODO must be implemented after definition of the details by the specification;
+    }
+    #endregion
+  }
   #region to be promoted to the codebase
-  public class BinaryUDPPackageWriter : BinaryMessageEncoder, IDisposable
+  public class BinaryUDPPackageWriter : BinaryPackageEncoder, IDisposable
   {
 
     #region creator
@@ -309,10 +321,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
       State.Enable();
       m_NumberOfAttachToNetwork++;
-    }
-    protected override void EncodeHeaders()
-    {
-      //TODO must be implemented after definition of the details by the specification;
     }
     protected override void SendMessage(byte[] buffer)
     {

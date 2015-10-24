@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UAOOI.SemanticData.DataManagement.MessageHandling
+﻿namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
   /// <summary>
   /// Class BinaryPackageEncoder - OPC UA binary package encoder.

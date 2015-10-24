@@ -7,16 +7,11 @@ using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using System.Linq;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
-  [TestClass]
-  public class MyTestClass
-  {
-
-  }
   [TestClass]
   public class MessageReaderTestClass
   {
@@ -93,7 +88,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
         Assert.AreEqual<int>(84, _reader.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
-        Thread.Sleep(100);
+        Thread.Sleep(1500);
         Assert.AreEqual<int>(_buffer.Length, _redItems);
         object[] _shouldBeInBuffer = CommonDefinitions.TestValues;
         Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
@@ -232,6 +227,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
+      public override Guid ReadGuid()
+      {
+        throw new NotImplementedException();
+      }
+
       public override ulong ContentMask
       {
         get
@@ -355,7 +355,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public class BinaryUDPPackageReader : BinaryPackageDecoder, IDisposable
     {
 
-      public BinaryUDPPackageReader(int port)
+      public BinaryUDPPackageReader(int port) : base()
       {
         State = new MyState();
         m_UdpClient = new UdpClient(port);
@@ -366,6 +366,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         get;
         protected set;
+      }
+
+      protected override UABinaryReader UABinaryReader
+      {
+        get { return m_UABinaryReader; }
       }
       public override void AttachToNetwork()
       {
@@ -378,21 +383,28 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         //UdpClient u = (UdpClient)((UdpState)(ar.AsyncState)).u;
         //IPEndPoint e = (IPEndPoint)((UdpState)(ar.AsyncState)).e;
-        IPEndPoint _UEndPoint = null;
-        Byte[] _receiveBytes = null;
+        m_Events.Add("Entering m_ReceiveAsyncCallback");
         try
         {
+          IPEndPoint _UEndPoint = null;
+          Byte[] _receiveBytes = null;
           _receiveBytes = m_UdpClient.EndReceive(asyncResult, ref _UEndPoint);
-          CreateReader(_receiveBytes);
-          ReadPackageHeaders();
-          RaiseReadMessageCompleted();
-          DisposeReader();
+          m_Events.Add(String.Format("Received length ={0}", _receiveBytes == null ? -1: _receiveBytes.Length) );
+          MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
+          m_UABinaryReader = new UABinaryReader(_stream);
+          OnNewPackageArrived();
+          m_UABinaryReader.Dispose();
+          m_UABinaryReader = null;
+          m_Events.Add("BeginReceive");
           m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
         }
-        catch (ObjectDisposedException)
+        catch (ObjectDisposedException _ex)
         {
+          m_Events.Add(String.Format("ObjectDisposedException ={0}", _ex.Message ));
         }
+        m_Events.Add("Exiting m_ReceiveAsyncCallback");
       }
+
       /// <summary>
       /// Check if the message destination is the data set described by the <paramref name="dataId" /> of type <see cref="ISemanticData" />.
       /// </summary>
@@ -409,10 +421,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       #endregion
 
       #region tetst instrumentation
+      internal List<string> m_Events = new List<string>();
       internal int m_NumberOfSentBytes = 0;
       internal int m_NumberOfAttachToNetwork = 0;
       internal int m_NumberOfSentMessages = 0;
       private readonly UdpClient m_UdpClient;
+      private UABinaryReader m_UABinaryReader = null;
 
       internal void SendUDPMessage(byte[] buffer, ISemanticData semanticData, int _RemoteHostPortNumber)
       {
@@ -440,6 +454,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
 
     #endregion
+
   }
 
 }

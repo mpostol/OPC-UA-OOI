@@ -83,6 +83,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected abstract Boolean ReadBoolean();
     protected abstract DateTime ReadDateTime();
     protected abstract Decimal ReadDecimal();
+    public abstract Guid ReadGuid();
     #endregion
 
     protected void RaiseReadMessageCompleted()

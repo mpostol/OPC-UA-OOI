@@ -11,14 +11,47 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// </summary>
   /// <remarks>
   /// <note>
-  /// Implements only simple value types. Structural types must be implemented after more details  will 
+  /// Implements only simple value types. Structural types must be implemented after more details will 
   /// be available in the spec.
   /// </note>
   /// </remarks>
-  public abstract class BinaryMessageEncoder : MessageWriterBase
+  public abstract class BinaryMessageEncoder : MessageWriterBase, IBinaryHeaderWriter
   {
 
     #region MessageWriterBase
+
+    #region IBinaryHeaderWriter
+    /// <summary>
+    /// Sets the position within the current stream.
+    /// </summary>
+    /// <param name="offset">
+    /// A byte offset relative to origin.
+    /// </param>
+    /// <param name="origin">
+    /// A field of <see cref="System.IO.SeekOrigin"/> indicating the reference point from which the new position is to be obtained..
+    /// </param>
+    /// <returns>The position with the current stream as <see cref="System.Int64"/>.</returns>
+    public long Seek(int offset, SeekOrigin origin)
+    {
+      return m_BinaryWriter.Seek(offset, origin);
+    }
+    /// <summary>
+    /// Writes an unsigned byte to the current stream and advances the stream position by one byte.
+    /// </summary>
+    /// <param name="value">TThe unsigned <see cref="byte"/> to write./param>
+    public void Write(byte value)
+    {
+      m_BinaryWriter.Write(value);
+    }
+    /// <summary>
+    /// Writes a <see cref="Guid"/> to the current stream as a 16-element byte array that contains the value and advances the stream position by 16 bytes.
+    /// </summary>
+    /// <param name="value">The <see cref="Guid"/> value to write.</param>
+    public void Write(Guid value)
+    {
+      m_BinaryWriter.Write(value);
+    }
+    #endregion    
 
     #region Encoder
     protected override void WriteUInt64(ulong value, object parameter)
@@ -83,40 +116,56 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     }
     #endregion
 
+    /// <summary>
+    /// Creates the message.
+    /// </summary>
+    /// <param name="length">The length.</param>
     protected override void CreateMessage(int length)
     {
       m_Output = new MemoryStream();
-      m_BinaryWriter = new BinaryWriter(m_Output);
-      EncodeHeaders();
+      m_BinaryWriter = new UABinaryWriter(m_Output);
+      EncodePackageHeaders();
     }
     protected override void SendMessage()
     {
       Debug.Assert(m_BinaryWriter != null);
+      SendPackage();
+
+      #region To be moved to the package
       m_BinaryWriter.Close();
       SendMessage(m_Output.ToArray());
       DisposeWriter();
+      #endregion
     }
+
     #endregion
 
-    #region private
-    //vars
-    private MemoryStream m_Output;
-    private BinaryWriter m_BinaryWriter;
-    //methods
-    /// <summary>
-    /// Encodes the headers of the message.
-    /// </summary>
-    protected abstract void EncodeHeaders();
-    private void DisposeWriter()
-    {
-      m_BinaryWriter.Dispose();
-      m_BinaryWriter = null;
-    }
+    #region abstract
     /// <summary>
     /// Sends the message.
     /// </summary>
     /// <param name="buffer">The buffer with the message content.</param>
     protected abstract void SendMessage(byte[] buffer);
+    /// <summary>
+    /// Sends the package.
+    /// </summary>
+    protected abstract void SendPackage();
+    /// <summary>
+    /// If implemented in the derived class encodes the headers of the package.
+    /// </summary>
+    protected abstract void EncodePackageHeaders();
+    #endregion    
+    
+    #region private
+    //vars
+    private MemoryStream m_Output;
+    private UABinaryWriter m_BinaryWriter;  //TODO move to package encoder.
+    //methods
+    private void DisposeWriter()
+    {
+      m_BinaryWriter.Dispose();
+      m_BinaryWriter = null;
+    }
     #endregion
 
   }

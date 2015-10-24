@@ -25,7 +25,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     /// <param name="writer">The writer.</param>
     /// <returns>PackageHeader.</returns>
-    public static PackageHeader GetProducerPackageHeader(IHeaderWriter writer)
+    public static PackageHeader GetProducerPackageHeader(IBinaryHeaderWriter writer)
     {
       return new ProducerPackageHeader(writer);
     }
@@ -34,7 +34,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     /// <param name="reader">The reader.</param>
     /// <returns>PackageHeader.</returns>
-    public static PackageHeader GetConsumerPackageHeader(IHeaderReader reader)
+    public static PackageHeader GetConsumerPackageHeader(IBinaryHeaderReader reader)
     {
       return new ConsumerPackageHeader(reader);
     }
@@ -77,7 +77,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
 
       #region constructor
-      public ConsumerPackageHeader(IHeaderReader reader) : base()
+      public ConsumerPackageHeader(IBinaryHeaderReader reader) : base()
       {
         m_Reader = reader;
       }
@@ -115,25 +115,29 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       #endregion
 
       #region private
-      private IHeaderReader m_Reader;
+      private IBinaryHeaderReader m_Reader;
       #endregion
 
     }
     private class ProducerPackageHeader : PackageHeader
     {
       #region constructor
-      public ProducerPackageHeader(IHeaderWriter writer) : base()
+      public ProducerPackageHeader(IBinaryHeaderWriter writer) : base()
       {
         m_Writer = writer;
-        PublisherId = Guid.NewGuid();
+        PublisherId = CommonDefinitions.ProducerId;
         b_MessageCount = 0;
         MessageFlags = Convert.ToByte(MessageFlag.PeriodicData);
-        ProtocolVersion = 0;
+        ProtocolVersion = CommonDefinitions.ProtocolVersion;
         SecurityTokenId = 0;
       }
       #endregion
 
       #region PackageHeader
+      /// <summary>
+      /// Gets or sets the number of messages contained in the packet.
+      /// </summary>
+      /// <value>The message count.</value>
       public override byte MessageCount
       {
         get
@@ -145,27 +149,46 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           if (value == b_MessageCount)
             return;
           b_MessageCount = value;
-          SavePosition();
+          SetPosition(m_MessageCountPosition);
           m_Writer.Write(b_MessageCount);
           RestorePosition();
         }
       }
+      /// <summary>
+      /// Gets or sets the message flags.
+      /// </summary>
+      /// <value>The message flags.</value>
       public override byte MessageFlags
       {
         get; set;
       }
+      /// <summary>
+      /// Gets or sets the protocol version.
+      /// </summary>
+      /// <value>The protocol version.</value>
       public override byte ProtocolVersion
       {
         get; set;
       }
+      /// <summary>
+      /// Gets or sets the identifier of producer that sends the data.
+      /// </summary>
+      /// <value>The <see cref="Guid" /> representing the producer.</value>
       public override Guid PublisherId
       {
         get; set;
       }
+      /// <summary>
+      /// Gets or sets the security token identifier.
+      /// </summary>
+      /// <value>The security token identifier.</value>
       public override byte SecurityTokenId
       {
         get; set;
       }
+      /// <summary>
+      /// Synchronizes this instance content with the header.
+      /// </summary>
       public override void Synchronize()
       {
         m_Writer.Write(PublisherId);
@@ -179,19 +202,21 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 
       #region private
       //vars
-      private IHeaderWriter m_Writer;
-      private long m_MessageCountPosition = 0;
+      private IBinaryHeaderWriter m_Writer;
+      private int m_MessageCountPosition = 0;
       private byte b_MessageCount = 0;
-      private long m_CurrentPosition = 0;
       //methods
-      private long SavePosition()
+      private int SavePosition()
       {
-        m_CurrentPosition = m_Writer.Seek(0, SeekOrigin.Current);
-        return m_CurrentPosition;
+        return Convert.ToInt32(m_Writer.Seek(0, SeekOrigin.Current));
+      }
+      private void SetPosition(int offset)
+      {
+        m_Writer.Seek(offset, SeekOrigin.Begin);
       }
       private long RestorePosition()
       {
-        return m_Writer.Seek((int)m_CurrentPosition, SeekOrigin.Begin);
+        return m_Writer.Seek(0, SeekOrigin.End);
       }
       #endregion
 

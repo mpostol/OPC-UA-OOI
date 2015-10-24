@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
@@ -25,6 +26,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<byte>(255, _header.MessageCount);
     }
     [TestMethod]
+    [TestCategory("DataManagement_PackageHeaderUnitTest")]
     public void ConsumerPackageHeaderTestMethod()
     {
       HeaderReaderTest _reader = new HeaderReaderTest();
@@ -32,6 +34,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_header);
       _header.Synchronize();
       Assert.AreEqual<byte>(0xff, _header.MessageCount);
+      Assert.AreEqual<byte>(0xff, _header.MessageFlags);
+      Assert.AreEqual<byte>(0xff, _header.ProtocolVersion);
+      Assert.AreEqual<byte>(0xff, _header.SecurityTokenId);
+      Assert.AreEqual<Guid>(MessageHandling.CommonDefinitions.ProducerId, _header.PublisherId);
       Assert.AreEqual<long>(20, _reader.Position);
       _header.MessageCount = 0x0;
       Assert.AreEqual<long>(20, _reader.Position);
@@ -40,7 +46,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #endregion
 
     #region private 
-    private class HeaderWriterTest : IHeaderWriter
+    private class HeaderWriterTest : IBinaryHeaderWriter
     {
       public long Seek(int offset, SeekOrigin origin)
       {
@@ -55,7 +61,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
               throw new ArgumentOutOfRangeException("Position");
             break;
           case SeekOrigin.End:
-            throw new NotImplementedException();
+            Position = End + offset;
+            if (Position < 0)
+              throw new ArgumentOutOfRangeException("Position");
+            break;
         };
         return Position;
       }
@@ -67,9 +76,20 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         Position++;
       }
-      internal long Position = 0;
+      internal long End = 0;
+      internal long Position
+      {
+        get { return b_Position; }
+        set
+        {
+          b_Position = value;
+          if (b_Position > End)
+            End = Position;
+        }
+      }
+      private long b_Position = 0;
     }
-    private class HeaderReaderTest : IHeaderReader
+    private class HeaderReaderTest : IBinaryHeaderReader
     {
       public byte ReadByte()
       {
@@ -79,7 +99,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public Guid ReadGuid()
       {
         Position += 16;
-        return Guid.NewGuid();
+        return MessageHandling.CommonDefinitions.ProducerId;
       }
       internal int Position = 0;
     }
@@ -87,9 +107,4 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
   }
 
-  #region To be promoted
-
-
-
-  #endregion
 }

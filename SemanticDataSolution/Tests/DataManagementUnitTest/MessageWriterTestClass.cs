@@ -62,7 +62,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
-    public void BinaryMessageWriterTestMethod()
+    public void BinaryUDPPackageWriterTestMethod()
     {
       int _port = 35678;
       using (BinaryUDPPackageWriter _writer = new BinaryUDPPackageWriter("localhost", _port))
@@ -82,10 +82,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; }, CommonDefinitions.TestValues.Length, UInt64.MaxValue);
         Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
         Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(64, _writer.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(84, _writer.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
         byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArray();
-        CollectionAssert.AreEqual(_writer.DoUDPRead(), _shouldBeInBuffer);
+        byte[] _outputBuffer = _writer.DoUDPRead();
+        CollectionAssert.AreEqual(_outputBuffer, _shouldBeInBuffer);
       }
     }
     #endregion
@@ -279,15 +280,26 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
   public abstract class BinaryPackageEncoder : BinaryMessageEncoder
   {
-
-    //TODO public PackageHeader Header { get; set; }
+    public BinaryPackageEncoder()
+    {
+      Header = PackageHeader.GetProducerPackageHeader(this);
+    }
+    /// <summary>
+    /// Gets or sets the header of the package.
+    /// </summary>
+    /// <value>The header <see cref="PackageHeader"/>.</value>
+    public PackageHeader Header { get; set; }
 
     #region BinaryMessageEncoder
-    protected override void EncodeHeaders()
+    /// <summary>
+    /// Encodes the headers.
+    /// </summary>
+    protected override void EncodePackageHeaders()
     {
-      //TODO must be implemented after definition of the details by the specification;
+      Header.Synchronize();
     }
     #endregion
+
   }
 
   #region to be promoted to the codebase
@@ -325,7 +337,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     protected override void SendMessage(byte[] buffer)
     {
-      m_NumberOfSentMessages++;
       m_NumberOfSentBytes += buffer.Length;
       try
       {
@@ -360,6 +371,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Console.WriteLine("Message : " + e.Message);
         throw;
       }
+    }
+    protected override void SendPackage()
+    {
+      m_NumberOfSentMessages++;
+      this.Header.MessageCount = Convert.ToByte(m_NumberOfSentMessages);
     }
     #endregion
 
@@ -415,6 +431,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       m_UdpClient.Close();
     }
+
     #endregion
 
   }

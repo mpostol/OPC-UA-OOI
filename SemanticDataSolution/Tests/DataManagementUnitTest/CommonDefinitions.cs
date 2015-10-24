@@ -6,11 +6,18 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
   internal static class CommonDefinitions
   {
-    
+
     internal static byte[] GetTestBinaryArray()
     {
-      return new byte[]	
+      return new byte[]
       {
+          //Package header
+          0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16, //guid - PublisherId
+          0x01,                                               //byte MessageFlags
+          0x00,                                               //byte ProtocolVersion
+          0x00,                                               //byte SecurityTokenId
+          0x01,                                               //byte MessageCount
+          //Message content
           0x7b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //UInt64
           0x7b, 0x00, 0x00, 0x00,                             //UInt32
           0x7b, 0x00,                                         //UInt16
@@ -28,13 +35,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           0x41,                                               //Char
           //0x01, 0x02, 0x03,                                   //byte[]
       };
-
     }
-    internal static object[] TestValues = new object[] 
-      { 
-        (ulong)123, (uint)123, (ushort)123, "123", 
-        (float)123, (sbyte)123, (long)123, (int)123, 
-        (short)123, (double)123, (decimal)123, new DateTime(1601, 1, 1), 
+    internal static object[] TestValues = new object[]
+      {
+        (ulong)123, (uint)123, (ushort)123, "123",
+        (float)123, (sbyte)123, (long)123, (int)123,
+        (short)123, (double)123, (decimal)123, new DateTime(1601, 1, 1),
         (byte)123, true, 'A'}; //, new byte[] { 1, 2, 3 } };
   }
 }

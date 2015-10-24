@@ -8,7 +8,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// <summary>
   /// Interface IHeaderWriter - instance of this interface is used to manage the message and package headers content by the writer.
   /// </summary>
-  public interface IHeaderWriter
+  public interface IBinaryHeaderWriter
   {
     
     /// <summary>

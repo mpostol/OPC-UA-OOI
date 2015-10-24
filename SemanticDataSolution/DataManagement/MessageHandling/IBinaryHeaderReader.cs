@@ -4,9 +4,9 @@ using System;
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
   /// <summary>
-  /// Interface IHeaderReader - instance of this interface is used to manage the message and package headers content by the reader.
+  /// Interface IBinaryHeaderReader - instance of this interface is used to manage the message and package headers content by the binary reader.
   /// </summary>
-  public interface IHeaderReader
+  public interface IBinaryHeaderReader
   {
 
     /// <summary>

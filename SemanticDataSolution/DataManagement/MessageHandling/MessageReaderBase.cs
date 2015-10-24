@@ -79,7 +79,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected abstract Int16 ReadInt16();
     protected abstract Double ReadDouble();
     protected abstract char ReadChar();
-    protected abstract Byte ReadByte();
+    public abstract Byte ReadByte();
     protected abstract Boolean ReadBoolean();
     protected abstract DateTime ReadDateTime();
     protected abstract Decimal ReadDecimal();

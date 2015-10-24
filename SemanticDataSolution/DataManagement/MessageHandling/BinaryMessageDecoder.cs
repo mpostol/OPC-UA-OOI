@@ -12,8 +12,15 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// <note>Implements only simple value types. Structural types must be implemented after more details will 
   /// be available in the spec.</note>
   /// </remarks>
-  public abstract class BinaryMessageDecoder : MessageReaderBase
+  public abstract class BinaryMessageDecoder : MessageReaderBase, IBinaryHeaderReader
   {
+
+    #region IBinaryHeaderReader
+    public Guid ReadGuid()
+    {
+      return m_Reader.ReadGuid();
+    }
+    #endregion
 
     #region MessageReaderBase
 
@@ -70,7 +77,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       return m_Reader.ReadChar();
     }
-    protected override Byte ReadByte()
+    public override Byte ReadByte()
     {
       return m_Reader.ReadByte();
     }
@@ -99,7 +106,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #endregion
 
     #region private
-    private BinaryReader m_Reader = null;
+    private UABinaryReader m_Reader = null;
     /// <summary>
     /// Initializes a new instance of the  <see cref="System.IO.BinaryReader"/> class based on the buffer and using UTF-8 encoding.
     /// </summary>
@@ -107,7 +114,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected void CreateReader(byte[] buffer)
     {
       MemoryStream _stream = new MemoryStream(buffer, 0, buffer.Length);
-      m_Reader = new BinaryReader(_stream);
+      m_Reader = new UABinaryReader(_stream);
     }
     /// <summary>
     /// Releases all resources used by the instance of the  <see cref="System.IO.BinaryReader"/> class used to manage content of the current message.
@@ -117,6 +124,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       m_Reader.Dispose();
       m_Reader = null;
     }
+
     #endregion
 
   }

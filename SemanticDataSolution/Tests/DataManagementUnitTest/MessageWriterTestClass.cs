@@ -278,29 +278,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   }
   #endregion
 
-  public abstract class BinaryPackageEncoder : BinaryMessageEncoder
-  {
-    public BinaryPackageEncoder()
-    {
-      Header = PackageHeader.GetProducerPackageHeader(this);
-    }
-    /// <summary>
-    /// Gets or sets the header of the package.
-    /// </summary>
-    /// <value>The header <see cref="PackageHeader"/>.</value>
-    public PackageHeader Header { get; set; }
 
-    #region BinaryMessageEncoder
-    /// <summary>
-    /// Encodes the headers.
-    /// </summary>
-    protected override void EncodePackageHeaders()
-    {
-      Header.Synchronize();
-    }
-    #endregion
-
-  }
 
   #region to be promoted to the codebase
   public class BinaryUDPPackageWriter : BinaryPackageEncoder, IDisposable

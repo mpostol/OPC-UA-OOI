@@ -65,7 +65,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageReader")]
-    public void BinaryMessageReaderTestMethod()
+    public void BinaryUDPPackageReaderTestMethod()
     {
       int _port = 35678;
       ISemanticData _semanticData = SemanticData.GetSemanticDataTest();
@@ -91,13 +91,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _semanticData, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
         _reader.SendUDPMessage(CommonDefinitions.GetTestBinaryArray(), _semanticData, _port);
         Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(64, _reader.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(84, _reader.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
         Thread.Sleep(100);
         Assert.AreEqual<int>(_buffer.Length, _redItems);
         object[] _shouldBeInBuffer = CommonDefinitions.TestValues;
         Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
         Assert.AreEqual<string>(String.Join(",", _shouldBeInBuffer), String.Join(",", _buffer));
+        Assert.AreEqual<Guid>(MessageHandling.CommonDefinitions.ProducerId, _reader.Header.PublisherId);
+        Assert.AreEqual<byte>(MessageHandling.CommonDefinitions.ProtocolVersion, _reader.Header.ProtocolVersion);
+        Assert.AreEqual<byte>(1, _reader.Header.MessageCount);
       }
     }
     #endregion
@@ -213,7 +216,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
-      protected override Byte ReadByte()
+      public override Byte ReadByte()
       {
         throw new NotImplementedException();
       }
@@ -348,7 +351,35 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #endregion
 
     #region To be promoted to the codebase
-    public class BinaryUDPPackageReader : BinaryMessageDecoder, IDisposable
+    /// <summary>
+    /// Class BinaryPackageDecoder - OPC UA binary package decoder.
+    /// </summary>
+    public abstract class BinaryPackageDecoder : BinaryMessageDecoder
+    {
+
+      /// <summary>
+      /// Initializes a new instance of the <see cref="BinaryPackageDecoder"/> class.
+      /// </summary>
+      public BinaryPackageDecoder()
+      {
+        Header = PackageHeader.GetConsumerPackageHeader(this);
+      }
+
+      /// <summary>
+      /// Gets or sets the header of the package.
+      /// </summary>
+      /// <value>The header <see cref="PackageHeader"/>.</value>
+      public PackageHeader Header { get; set; }
+
+      #region private
+      protected void ReadPackageHeaders()
+      {
+        Header.Synchronize();
+      }
+      #endregion
+
+    }
+    public class BinaryUDPPackageReader : BinaryPackageDecoder, IDisposable
     {
 
       public BinaryUDPPackageReader(int port)
@@ -402,10 +433,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
       #region Message frame
       private ISemanticData m_SemanticData;
-      private void ReadPackageHeaders()
-      {
-        //TODO throw new NotImplementedException();
-      }
       #endregion
 
       #region tetst instrumentation

@@ -76,6 +76,7 @@
     <Compile Include="MessageEventArg.cs" />
     <Compile Include="MessageHandling\BinaryMessageDecoder.cs" />
     <Compile Include="MessageHandling\BinaryMessageEncoder.cs" />
+    <Compile Include="MessageHandling\BinaryPackageDecoder.cs" />
     <Compile Include="MessageHandling\BinaryPackageEncoder.cs" />
     <Compile Include="MessageHandling\CommonDefinition.cs" />
     <Compile Include="MessageHandling\IBinaryHeaderReader.cs" />

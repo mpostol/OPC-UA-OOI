@@ -74,6 +74,7 @@
     <Compile Include="IDataUniqueIdentifier.cs" />
     <Compile Include="Encoding\IEncodingFactory.cs" />
     <Compile Include="MessageEventArg.cs" />
+    <Compile Include="MessageHandling\BinaryEncoder.cs" />
     <Compile Include="MessageHandling\BinaryMessageDecoder.cs" />
     <Compile Include="MessageHandling\BinaryMessageEncoder.cs" />
     <Compile Include="MessageHandling\BinaryPackageDecoder.cs" />

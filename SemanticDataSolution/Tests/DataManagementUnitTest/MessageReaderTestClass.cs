@@ -88,7 +88,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
         Assert.AreEqual<int>(84, _reader.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
-        Thread.Sleep(1500);
+        Thread.Sleep(150);
         Assert.AreEqual<int>(_buffer.Length, _redItems);
         object[] _shouldBeInBuffer = CommonDefinitions.TestValues;
         Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
@@ -352,7 +352,116 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
     #region To be promoted to the codebase
 
-    public class BinaryUDPPackageReader : BinaryPackageDecoder, IDisposable
+    public abstract class BinaryDecoder : BinaryPackageDecoder, IDisposable
+    {
+
+      #region IDisposable Support
+      private bool disposedValue = false; // To detect redundant calls
+      protected virtual void Dispose(bool disposing)
+      {
+        if (!disposedValue)
+        {
+          if (disposing)
+          {
+            UABinaryReader _lc = m_UABinaryReader;
+            if (_lc != null)
+              _lc.Close();
+            m_UABinaryReader = null;
+          }
+          disposedValue = true;
+        }
+      }
+      // This code added to correctly implement the disposable pattern.
+      public void Dispose()
+      {
+        // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        Dispose(true);
+      }
+      #endregion
+
+      #region BinaryMessageDecoder
+      /// <summary>
+      /// Reads an 8-byte unsigned integer from the message and advances the position by eight bytes.
+      /// </summary>
+      /// <returns>An 8-byte unsigned integer <see cref="UInt64"/> read from this message. .</returns>
+      protected override UInt64 ReadUInt64()
+      {
+        return m_UABinaryReader.ReadUInt64();
+      }
+      protected override UInt32 ReadUInt32()
+      {
+        return m_UABinaryReader.ReadUInt32();
+      }
+      protected override UInt16 ReadUInt16()
+      {
+        return m_UABinaryReader.ReadUInt16();
+      }
+      protected override String ReadString()
+      {
+        return m_UABinaryReader.ReadString();
+      }
+      protected override Single ReadSingle()
+      {
+        return m_UABinaryReader.ReadSingle();
+      }
+      protected override SByte ReadSByte()
+      {
+        return m_UABinaryReader.ReadSByte();
+      }
+      protected override Int64 ReadInt64()
+      {
+        return m_UABinaryReader.ReadInt64();
+      }
+      protected override Int32 ReadInt32()
+      {
+        return m_UABinaryReader.ReadInt32();
+      }
+      protected override Int16 ReadInt16()
+      {
+        return m_UABinaryReader.ReadInt16();
+      }
+      protected override Double ReadDouble()
+      {
+        return m_UABinaryReader.ReadDouble();
+      }
+      protected override Decimal ReadDecimal()
+      {
+        return Convert.ToDecimal(m_UABinaryReader.ReadInt64());
+      }
+      protected override char ReadChar()
+      {
+        return m_UABinaryReader.ReadChar();
+      }
+      public override Byte ReadByte()
+      {
+        return m_UABinaryReader.ReadByte();
+      }
+      protected override Boolean ReadBoolean()
+      {
+        return m_UABinaryReader.ReadBoolean();
+      }
+      protected override DateTime ReadDateTime()
+      {
+        return m_UABinaryReader.ReadDateTime();
+      }
+      public override Guid ReadGuid()
+      {
+        return m_UABinaryReader.ReadGuid();
+      }
+      #endregion
+
+      protected void OnNewFrameArrived(UABinaryReader uABinaryReader)
+      {
+        m_UABinaryReader = uABinaryReader;
+        OnNewPackageArrived();
+        m_UABinaryReader.Dispose();
+        m_UABinaryReader = null; ;
+      }
+      private UABinaryReader m_UABinaryReader;
+
+    }
+
+    public sealed class BinaryUDPPackageReader : BinaryDecoder
     {
 
       public BinaryUDPPackageReader(int port) : base()
@@ -368,10 +477,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         protected set;
       }
 
-      protected override UABinaryReader UABinaryReader
-      {
-        get { return m_UABinaryReader; }
-      }
       public override void AttachToNetwork()
       {
         Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
@@ -389,18 +494,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           IPEndPoint _UEndPoint = null;
           Byte[] _receiveBytes = null;
           _receiveBytes = m_UdpClient.EndReceive(asyncResult, ref _UEndPoint);
-          m_Events.Add(String.Format("Received length ={0}", _receiveBytes == null ? -1: _receiveBytes.Length) );
+          m_Events.Add(String.Format("Received length ={0}", _receiveBytes == null ? -1 : _receiveBytes.Length));
           MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
-          m_UABinaryReader = new UABinaryReader(_stream);
-          OnNewPackageArrived();
-          m_UABinaryReader.Dispose();
-          m_UABinaryReader = null;
+          base.OnNewFrameArrived(new UABinaryReader(_stream));
+
           m_Events.Add("BeginReceive");
           m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
         }
         catch (ObjectDisposedException _ex)
         {
-          m_Events.Add(String.Format("ObjectDisposedException ={0}", _ex.Message ));
+          m_Events.Add(String.Format("ObjectDisposedException ={0}", _ex.Message));
         }
         m_Events.Add("Exiting m_ReceiveAsyncCallback");
       }
@@ -426,7 +529,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       internal int m_NumberOfAttachToNetwork = 0;
       internal int m_NumberOfSentMessages = 0;
       private readonly UdpClient m_UdpClient;
-      private UABinaryReader m_UABinaryReader = null;
 
       internal void SendUDPMessage(byte[] buffer, ISemanticData semanticData, int _RemoteHostPortNumber)
       {
@@ -445,9 +547,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_NumberOfSentBytes += buffer.Length;
         m_SemanticData = semanticData;
       }
-      public void Dispose()
+      protected override void Dispose(bool disposing)
       {
-        m_UdpClient.Close();
+        base.Dispose(disposing);
+        if (disposing)
+          m_UdpClient.Close();
+
       }
       #endregion
 

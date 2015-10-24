@@ -77,6 +77,8 @@
     <Compile Include="MessageHandling\BinaryMessageDecoder.cs" />
     <Compile Include="MessageHandling\BinaryMessageEncoder.cs" />
     <Compile Include="MessageHandling\CommonDefinition.cs" />
+    <Compile Include="MessageHandling\IHeaderReader.cs" />
+    <Compile Include="MessageHandling\IHeaderWriter.cs" />
     <Compile Include="MessageHandling\IMessageHandlerFactory.cs" />
     <Compile Include="DataRepository\IProducerBinding.cs" />
     <Compile Include="ISemanticData.cs" />
@@ -84,8 +86,10 @@
     <Compile Include="MessageHandlersCollection.cs" />
     <Compile Include="MessageHandling\IMessageReader.cs" />
     <Compile Include="MessageHandling\IMessageWriter.cs" />
+    <Compile Include="MessageHandling\MessageFlag.cs" />
     <Compile Include="MessageHandling\MessageReaderBase.cs" />
     <Compile Include="MessageHandling\MessageWriterBase.cs" />
+    <Compile Include="MessageHandling\PackageHeader.cs" />
     <Compile Include="MessageHandling\UABinaryReader.cs" />
     <Compile Include="MessageHandling\UABinaryWriter.cs" />
     <Compile Include="ProducerAssociation.cs" />

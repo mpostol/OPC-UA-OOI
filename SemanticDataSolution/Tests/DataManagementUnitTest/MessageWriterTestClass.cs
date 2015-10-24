@@ -289,6 +289,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     #endregion
   }
+
   #region to be promoted to the codebase
   public class BinaryUDPPackageWriter : BinaryPackageEncoder, IDisposable
   {

@@ -89,6 +89,16 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected abstract void WriteByte(byte value, object parameter);
     protected abstract void WriteBool(bool value, object parameter);
     protected abstract void WriteChar(char value, object parameter);
+    /// <summary>
+    /// Writes an unsigned byte to the current stream and advances the stream position by one byte.
+    /// </summary>
+    /// <param name="value">TThe unsigned <see cref="byte"/> to write./param>
+    public abstract void Write(byte value);
+    /// <summary>
+    /// Writes a <see cref="Guid"/> to the current stream as a 16-element byte array that contains the value and advances the stream position by 16 bytes.
+    /// </summary>
+    /// <param name="value">The <see cref="Guid"/> value to write.</param>
+    public abstract void Write(Guid value);
     #endregion
 
     protected abstract void CreateMessage(int length);

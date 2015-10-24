@@ -18,9 +18,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_header);
       _header.Synchronize();
       Assert.AreEqual<byte>(0, _header.MessageCount);
-      Assert.AreEqual<long>(20, _writer.m_Position);
+      Assert.AreEqual<long>(20, _writer.Position);
       _header.MessageCount = 0xff;
-      Assert.AreEqual<long>(20, _writer.m_Position);
+      Assert.AreEqual<long>(20, _writer.Position);
       Assert.AreEqual<byte>(255, _header.MessageCount);
     }
     [TestMethod]
@@ -30,7 +30,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       PackageHeader _header = PackageHeader.GetConsumerPackageHeader(_reader);
       Assert.IsNotNull(_header);
       _header.Synchronize();
-
+      Assert.AreEqual<byte>(0xff, _header.MessageCount);
+      Assert.AreEqual<long>(20, _reader.Position);
+      _header.MessageCount = 0x0;
+      Assert.AreEqual<long>(20, _reader.Position);
+      Assert.AreEqual<byte>(0x0, _header.MessageCount);
     }
     #endregion
 
@@ -42,56 +46,65 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         switch (origin)
         {
           case SeekOrigin.Begin:
-            m_Position = offset;
+            Position = offset;
             break;
           case SeekOrigin.Current:
-            m_Position += offset;
-            if (m_Position < 0)
+            Position += offset;
+            if (Position < 0)
               throw new ArgumentOutOfRangeException("Position");
             break;
           case SeekOrigin.End:
             throw new NotImplementedException();
         };
-        return m_Position;
+        return Position;
       }
       public void Write(Guid value)
       {
-        m_Position += 16;
+        Position += 16;
       }
       public void Write(byte value)
       {
-        m_Position++;
+        Position++;
       }
-
-      #region private
-      internal long m_Position = 0;
-      #endregion
+      internal long Position = 0;
     }
     private class HeaderReaderTest : IHeaderReader
     {
       public byte ReadByte()
       {
-        m_position++;
+        Position++;
         return 0xff;
       }
       public Guid ReadGuid()
       {
-        m_position += 16;
+        Position += 16;
         return Guid.NewGuid();
       }
-      internal int m_position = 0;
+      internal int Position = 0;
     }
     #endregion
 
   }
 
   #region To be promoted
+  /// <summary>
+  /// Enum MessageFlag - the message control bits.
+  /// </summary>
   [Flags]
   public enum MessageFlag
   {
+    /// <summary>
+    /// The metadata - not implemented 
+    /// </summary>
     Metadata = 0x0,
+    /// <summary>
+    /// The periodic data
+    /// </summary>
     PeriodicData = 0x1,
   }
+  /// <summary>
+  /// Interface IHeaderWriter - instance of this interface is used to manage the message and package headers content by the writer.
+  /// </summary>
   public interface IHeaderWriter
   {
     /// <summary>
@@ -116,40 +129,93 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     /// <param name="value">The <see cref="Guid"/> value to write.</param>
     void Write(Guid value);
   }
+  /// <summary>
+  /// Interface IHeaderReader - instance of this interface is used to manage the message and package headers content by the reader.
+  /// </summary>
   public interface IHeaderReader
   {
     Guid ReadGuid();
     byte ReadByte();
   }
+  /// <summary>
+  /// Class PackageHeader - represent information in the protocol package header.
+  /// </summary>
+  /// <remarks>
+  /// #98: PackageHeader - mus be refined
+  /// Because the specification is subject of further development this class mus be refined according to further protocol modification.
+  /// The following topics must be addressed:
+  /// * PublisherId - how to use it and it is static so exchange it is waste of bandwidth.
+  /// * Naming convention publisher => producer; subscriber => consumer
+  /// * SecurityTokenId - how to use it, how to define it if producer is not OPC UA Server, why exchange it over the wire
+  /// </remarks>
   public abstract class PackageHeader
   {
+
+    #region public API
+    /// <summary>
+    /// Gets the producer package header.
+    /// </summary>
+    /// <param name="writer">The writer.</param>
+    /// <returns>PackageHeader.</returns>
     public static PackageHeader GetProducerPackageHeader(IHeaderWriter writer)
     {
       return new ProducerPackageHeader(writer);
     }
-
+    /// <summary>
+    /// Gets the consumer package header.
+    /// </summary>
+    /// <param name="reader">The reader.</param>
+    /// <returns>PackageHeader.</returns>
     public static PackageHeader GetConsumerPackageHeader(IHeaderReader reader)
     {
       return new ConsumerPackageHeader(reader);
     }
+    /// <summary>
+    /// Synchronizes this instance content with the header.
+    /// </summary>
     public abstract void Synchronize();
-
+    #endregion
+    
     #region Header
+    /// <summary>
+    /// Gets or sets the identifier of producer that sends the data.
+    /// </summary>
+    /// <value>The <see cref="Guid"/> representing the producer.</value>
     public abstract Guid PublisherId { get; set; }
+    /// <summary>
+    /// Gets or sets the message flags.
+    /// </summary>
+    /// <value>The message flags.</value>
     public abstract byte MessageFlags { get; set; }
+    /// <summary>
+    /// Gets or sets the protocol version.
+    /// </summary>
+    /// <value>The protocol version.</value>
     public abstract byte ProtocolVersion { get; set; }
+    /// <summary>
+    /// Gets or sets the security token identifier.
+    /// </summary>
+    /// <value>The security token identifier.</value>
     public abstract byte SecurityTokenId { get; set; }
+    /// <summary>
+    /// Gets or sets the number of messages contained in the packet.
+    /// </summary>
+    /// <value>The message count.</value>
     public abstract byte MessageCount { get; set; }
     #endregion
 
-    #region private
+    #region private implementation
     private class ConsumerPackageHeader : PackageHeader
     {
 
+      #region constructor
       public ConsumerPackageHeader(IHeaderReader reader) : base()
       {
         m_Reader = reader;
       }
+      #endregion
+
+      #region PackageHeader
       public override byte MessageCount
       {
         get; set;
@@ -178,12 +244,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         SecurityTokenId = m_Reader.ReadByte();
         MessageCount = m_Reader.ReadByte();
       }
+      #endregion
 
+      #region private
       private IHeaderReader m_Reader;
+      #endregion
+
     }
     private class ProducerPackageHeader : PackageHeader
     {
-
+      #region constructor
       public ProducerPackageHeader(IHeaderWriter writer) : base()
       {
         m_Writer = writer;
@@ -193,6 +263,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         ProtocolVersion = 0;
         SecurityTokenId = 0;
       }
+      #endregion
+
+      #region PackageHeader
       public override byte MessageCount
       {
         get
@@ -234,6 +307,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_MessageCountPosition = SavePosition();
         m_Writer.Write(MessageCount);
       }
+      #endregion
 
       #region private
       //vars

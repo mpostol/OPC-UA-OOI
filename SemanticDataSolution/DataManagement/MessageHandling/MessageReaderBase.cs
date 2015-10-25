@@ -86,6 +86,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     public abstract Guid ReadGuid();
     #endregion
 
+    /// <summary>
+    /// Raises the read message completed event.
+    /// </summary>
     protected void RaiseReadMessageCompleted()
     {
       if (this.State.State != HandlerState.Operational)

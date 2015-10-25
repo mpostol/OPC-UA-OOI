@@ -1,7 +1,6 @@
 ﻿
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
@@ -10,7 +9,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   public class PackageHeaderUnitTest
   {
 
-    #region TestMethod
     [TestMethod]
     [TestCategory("DataManagement_PackageHeaderUnitTest")]
     public void ProducerPackageHeaderTestMethod()
@@ -43,67 +41,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<long>(20, _reader.Position);
       Assert.AreEqual<byte>(0x0, _header.MessageCount);
     }
-    #endregion
-
-    #region private 
-    private class HeaderWriterTest : IBinaryHeaderWriter
-    {
-      public long Seek(int offset, SeekOrigin origin)
-      {
-        switch (origin)
-        {
-          case SeekOrigin.Begin:
-            Position = offset;
-            break;
-          case SeekOrigin.Current:
-            Position += offset;
-            if (Position < 0)
-              throw new ArgumentOutOfRangeException("Position");
-            break;
-          case SeekOrigin.End:
-            Position = End + offset;
-            if (Position < 0)
-              throw new ArgumentOutOfRangeException("Position");
-            break;
-        };
-        return Position;
-      }
-      public void Write(Guid value)
-      {
-        Position += 16;
-      }
-      public void Write(byte value)
-      {
-        Position++;
-      }
-      internal long End = 0;
-      internal long Position
-      {
-        get { return b_Position; }
-        set
-        {
-          b_Position = value;
-          if (b_Position > End)
-            End = Position;
-        }
-      }
-      private long b_Position = 0;
-    }
-    private class HeaderReaderTest : IBinaryHeaderReader
-    {
-      public byte ReadByte()
-      {
-        Position++;
-        return 0xff;
-      }
-      public Guid ReadGuid()
-      {
-        Position += 16;
-        return MessageHandling.CommonDefinitions.ProducerId;
-      }
-      internal int Position = 0;
-    }
-    #endregion
 
   }
 

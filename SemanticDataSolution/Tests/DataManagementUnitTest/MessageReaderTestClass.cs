@@ -89,7 +89,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
         Assert.AreEqual<int>(84, _reader.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
-        Thread.Sleep(150);
+        Thread.Sleep(250);
         Assert.AreEqual<int>(_buffer.Length, _redItems);
         object[] _shouldBeInBuffer = CommonDefinitions.TestValues;
         Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);

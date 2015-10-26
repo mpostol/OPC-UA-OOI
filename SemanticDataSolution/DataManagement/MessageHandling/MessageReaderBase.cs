@@ -17,10 +17,12 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// The order of the bits starting from the least significant bit matches the order of the data items
     /// within the data set.
     /// </summary>
+    /// <remarks>Must be added to teh message.</remarks>
     /// <value>The content mask is represented as unsigned number <see cref="UInt64" />. 
     /// The value is provided by the message.
-    /// The order of the bits starting from the least significant bit matches the order of the data items within the data set.</value>
-    public abstract ulong ContentMask { get; }
+    /// The order of the bits starting from the least significant bit matches the order of the data items within the data set.
+    /// </value>
+    public abstract ulong ContentMask { get; } //TODO Must be added to teh message.
     /// <summary>
     ///  If implemented in derived class gets the state machine for this instance.
     /// </summary>
@@ -31,7 +33,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       protected set;
     }
     /// <summary>
-    /// Attaches to network - initialize the underlying protocol stack and establish the connection with the broker is applicable.
+    /// Attaches this instance to the network - initialize the underlying protocol stack and establish the connection with the broker if applicable.
     /// </summary>
     /// <remarks>Depending on the message transport layer type implementation of this function varies.</remarks>
     public abstract void AttachToNetwork();
@@ -85,6 +87,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     public abstract Byte ReadByte();
     protected abstract Boolean ReadBoolean();
     protected abstract DateTime ReadDateTime();
+    /// <summary>
+    /// Reads the decimal.
+    /// </summary>
+    /// <remarks>Only OPC UA types are allowed. To be removed.</remarks>
+    /// <returns>Decimal.</returns>
     protected abstract Decimal ReadDecimal();
     public abstract Guid ReadGuid();
     #endregion
@@ -176,8 +183,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     }
 
     #endregion
-
-
 
   }
 

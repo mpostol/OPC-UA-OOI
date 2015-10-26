@@ -375,13 +375,20 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_Trace = trace;
       }
 
-      #region BinaryMessageDecoder
+      #region BinaryDecoder
+
+      /// <summary>
+      /// Gets or sets the state.
+      /// </summary>
+      /// <value>The state.</value>
       public override IAssociationState State
       {
         get;
         protected set;
       }
-
+      /// <summary>
+      /// Attaches to network.
+      /// </summary>
       public override void AttachToNetwork()
       {
         Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
@@ -389,6 +396,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_NumberOfAttachToNetwork++;
         m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
       }
+      /// <summary>
+      /// Implements <see cref="AsyncCallback"/> for UDP begin receive.
+      /// </summary>
+      /// <param name="asyncResult">The asynchronous result.</param>
       private void m_ReceiveAsyncCallback(IAsyncResult asyncResult)
       {
         m_Trace("Entering m_ReceiveAsyncCallback");
@@ -416,7 +427,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
       #endregion
 
-      #region Message frame
+      #region private
       private ISemanticData m_SemanticData;
       #endregion
 

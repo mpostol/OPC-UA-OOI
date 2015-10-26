@@ -5,7 +5,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
 
   /// <summary>
-  /// Class BinaryMessageDecoder - provides message content binary decoding functionality
+  /// Class BinaryMessageDecoder - provides message content binary decoding functionality.
   /// </summary>
   /// <remarks>
   /// <note>Implements only simple value types. Structural types must be implemented after more details will 

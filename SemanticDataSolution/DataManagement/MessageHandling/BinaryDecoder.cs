@@ -16,17 +16,16 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
     protected virtual void Dispose(bool disposing)
     {
-      if (!disposedValue)
+      if (disposedValue)
+        return;
+      if (disposing)
       {
-        if (disposing)
-        {
-          UABinaryReader _lc = m_UABinaryReader;
-          if (_lc != null)
-            _lc.Close();
-          m_UABinaryReader = null;
-        }
-        disposedValue = true;
+        UABinaryReader _lc = m_UABinaryReader;
+        if (_lc != null)
+          _lc.Close();
+        m_UABinaryReader = null;
       }
+      disposedValue = true;
     }
     // This code added to correctly implement the disposable pattern.
     /// <summary>
@@ -84,6 +83,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       return m_UABinaryReader.ReadDouble();
     }
+    /// <summary>
+    /// Reads the decimal.
+    /// </summary>
+    /// <remarks>Here only OPC UA types shall be serialized. The type between OPC UA types and local types should be performed elsewhere. </remarks>
+    /// <returns>Decimal.</returns>
     protected override Decimal ReadDecimal()
     {
       return Convert.ToDecimal(m_UABinaryReader.ReadInt64());
@@ -114,7 +118,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Called when new frame has arrived.
     /// </summary>
-    /// <param name="uaBinaryReader">The UA binary reader <see cref="UABinaryReader"/>.</param>
+    /// <param name="uaBinaryReader">
+    /// The UA binary reader an instance of <see cref="UABinaryReader"/> 
+    /// created after new frame has been arrived.
+    /// </param>
+    /// <remarks> Just after processing the object is disposed.</remarks>
     protected void OnNewFrameArrived(UABinaryReader uaBinaryReader)
     {
       m_UABinaryReader = uaBinaryReader;

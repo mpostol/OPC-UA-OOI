@@ -1,4 +1,5 @@
-﻿namespace UAOOI.SemanticData.DataManagement.MessageHandling
+﻿
+namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
   /// <summary>
   /// Class BinaryPackageDecoder - OPC UA binary package decoder.
@@ -26,7 +27,7 @@
 
     #region private
     /// <summary>
-    /// Called by the network handler and start analyzing new package by awaking all readers waiting for the messages by raising the event.
+    /// Called by the network handler to start analyzing new package by waking up all readers waiting for the messages by raising the event.
     /// </summary>
     protected void OnNewPackageArrived()
     {

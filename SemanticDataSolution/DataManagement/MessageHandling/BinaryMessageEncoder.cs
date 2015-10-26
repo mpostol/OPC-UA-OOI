@@ -6,7 +6,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
 
   /// <summary>
-  /// Class BinaryMessageEncoder - provides message content binary encoding functionality
+  /// Class BinaryMessageEncoder - provides message content binary encoding functionality.
   /// </summary>
   /// <remarks>
   /// <note>
@@ -27,7 +27,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 
     #region IBinaryHeaderWriter
     /// <summary>
-    /// Sets the position within the current stream.
+    /// If implemented by the derived class sets the position within the wrapped stream.
     /// </summary>
     /// <param name="offset">
     /// A byte offset relative to origin.
@@ -55,10 +55,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="dataSetId">The data set identifier.</param>
     protected override void CreateMessage(int length, Guid dataSetId)
     {
+      OnMessageAdding();
       //Create message header and placeholder for further header content.
       MessageHeader.DataSetId = dataSetId;
       MessageHeader.Synchronize();
-      OnMessageAdding();
     }
     /// <summary>
     /// Sends the message - evaluates condition if send the package.
@@ -78,7 +78,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Called when new message is adding to the package payload.
     /// </summary>
     protected abstract void OnMessageAdding();
-
     /// <summary>
     /// Called when the current message has been added and is ready to be sent out.
     /// </summary>

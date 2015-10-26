@@ -13,10 +13,12 @@ The main challenge that must be faced up by engineering of data processing is th
 
 Integration services are responsible for exchanging the data and metadata with other parties using:
 
-* Network communication
-* JSON gateway
-* XML gateway
-* External database archival   
+* Network communication - provides message centric distribution mechanism of the strong typed data
+* JSON gateway - ii factories objects using the message content and serializes them into the JSON text representation for further processing
+* XML gateway - ii factories objects using the message content and serializes them into XML text representation for further processing
+* External database archival - collects data received in the messages and archives it in the database
+
+In all the cases above the destination representation, i.e. message content, object types and database schema can be prepared in advance at design stage using the OPC UA Information Model.
 
 ![Domain Model] (./Media/UADataIntegrationServices.Domain.png)
 
@@ -26,6 +28,8 @@ An example of transferring the UA Semantic Data over the network is message cent
 [UA SemanticData Message Centric Communication](./README.MessageCentricCommunication.md#ua-semanticdata-message-centric-communication).
 
 This concept have been implemented in the project [DataManagement](./DataManagement#introduction). This project provides a SDK library that can be used as a foundation of the communication infrastructure deployment.
+
+The [UANetworkingReferenceApplication](../UANetworkingReferenceApplication) contains a reference WPF application.
 
 ## External database archival
 

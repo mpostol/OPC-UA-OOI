@@ -70,7 +70,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public Guid ReadGuid()
     {
       m_Position += 16;
-      return CommonDefinitions.ProducerId;
+      return CommonDefinitions.TestGuid;
     }
     internal long m_Position = 0;
 

@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       long _startPosition = 10;
       HeaderWriterTest _writer = new HeaderWriterTest(_startPosition);
-      PackageHeader _header = PackageHeader.GetProducerPackageHeader(_writer, CommonDefinitions.ProducerId);
+      PackageHeader _header = PackageHeader.GetProducerPackageHeader(_writer, CommonDefinitions.TestGuid);
       Assert.IsNotNull(_header);
       _header.Synchronize();
       Assert.AreEqual<byte>(0, _header.MessageCount);
@@ -37,7 +37,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<byte>(0xff, _header.MessageFlags);
       Assert.AreEqual<byte>(0xff, _header.ProtocolVersion);
       Assert.AreEqual<byte>(0xff, _header.SecurityTokenId);
-      Assert.AreEqual<Guid>(CommonDefinitions.ProducerId, _header.PublisherId);
+      Assert.AreEqual<Guid>(CommonDefinitions.TestGuid, _header.PublisherId);
       Assert.AreEqual<long>(m_StartPosition + 20, _reader.m_Position);
       _header.MessageCount = 0x0;
       Assert.AreEqual<long>(m_StartPosition + 20, _reader.m_Position);

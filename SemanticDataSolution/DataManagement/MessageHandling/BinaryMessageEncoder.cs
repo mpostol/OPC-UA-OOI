@@ -17,10 +17,14 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   public abstract class BinaryMessageEncoder : MessageWriterBase, IBinaryHeaderWriter
   {
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BinaryMessageEncoder"/> class.
+    /// </summary>
     public BinaryMessageEncoder()
     {
       MessageHeader = MessageHeader.GetProducerMessageHeader(this);
     }
+
     #region IBinaryHeaderWriter
     /// <summary>
     /// Sets the position within the current stream.
@@ -33,12 +37,15 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </param>
     /// <returns>The position with the current stream as <see cref="System.Int64"/>.</returns>
     public abstract long Seek(int offset, SeekOrigin origin);
-    #endregion    
+    #endregion
+
+    #region Header
     /// <summary>
     /// Gets or sets the message header.
     /// </summary>
     /// <value>The message header.</value>
     public MessageHeader MessageHeader { get; set; }
+    #endregion
 
     #region MessageWriterBase
     /// <summary>

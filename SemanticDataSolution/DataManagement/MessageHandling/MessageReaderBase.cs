@@ -44,7 +44,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     /// <param name="dataId">The data identifier <see cref="ISemanticData" />.</param>
     /// <returns><c>true</c> if <paramref name="dataId" /> is the destination of the message, <c>false</c> otherwise.</returns>
-    public abstract bool IAmDestination(ISemanticData dataId);
+    bool IMessageReader.IAmDestination(ISemanticData dataId)
+    {
+      return dataId.Guid == MessageHeader.DataSetId;
+    }
     /// <summary>
     /// Updates my values using inverse of control pattern.
     /// </summary>
@@ -86,6 +89,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     public abstract Guid ReadGuid();
     #endregion
 
+    /// <summary>
+    /// Gets the message header.
+    /// </summary>
+    /// <value>The message header <see cref="MessageHeader"/>.</value>
+    public abstract MessageHeader MessageHeader { get; }
     /// <summary>
     /// Raises the read message completed event.
     /// </summary>

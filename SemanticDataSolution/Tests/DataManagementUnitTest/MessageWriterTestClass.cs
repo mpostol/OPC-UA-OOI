@@ -83,7 +83,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         ProducerBinding _binding = new ProducerBinding();
         _binding.Value = String.Empty;
         int _sentItems = 0;
-        Guid m_Guid = CommonDefinitions.ProducerId;
+        Guid m_Guid = CommonDefinitions.TestGuid;
         ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
                                        CommonDefinitions.TestValues.Length,
                                        UInt64.MaxValue,
@@ -336,7 +336,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   {
 
     #region creator
-    public BinaryUDPPackageWriter(string remoteHostName, int port) : base(CommonDefinitions.ProducerId)
+    public BinaryUDPPackageWriter(string remoteHostName, int port) : base(CommonDefinitions.TestGuid)
     {
       State = new MyState();
       m_RemoteHostName = remoteHostName;

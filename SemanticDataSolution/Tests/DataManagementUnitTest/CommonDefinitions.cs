@@ -41,7 +41,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     /// <summary>
     /// The producer identifier - should be moved to the configuration - see spec for current definition.
     /// </summary>
-    public static readonly Guid ProducerId = new Guid("A6195DF3-0B30-4C25-8BF8-45B076402116");
+    internal static readonly Guid TestGuid = new Guid("A6195DF3-0B30-4C25-8BF8-45B076402116");
     internal static object[] TestValues = new object[]
       {
         (ulong)123, (uint)123, (ushort)123, "123",

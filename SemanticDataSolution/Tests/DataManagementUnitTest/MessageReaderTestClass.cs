@@ -94,7 +94,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         object[] _shouldBeInBuffer = CommonDefinitions.TestValues;
         Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
         Assert.AreEqual<string>(String.Join(",", _shouldBeInBuffer), String.Join(",", _buffer));
-        Assert.AreEqual<Guid>(CommonDefinitions.ProducerId, _reader.Header.PublisherId);
+        Assert.AreEqual<Guid>(CommonDefinitions.TestGuid, _reader.Header.PublisherId);
         Assert.AreEqual<byte>(MessageHandling.CommonDefinitions.ProtocolVersion, _reader.Header.ProtocolVersion);
         Assert.AreEqual<byte>(1, _reader.Header.MessageCount);
         Assert.AreEqual<int>(4, m_Events.Count);
@@ -169,6 +169,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public TestMessageReaderBase()
       {
         State = new MyState();
+        m_MessageHeader = MessageHeader.GetConsumerMessageHeader(null);
       }
       #endregion
 
@@ -257,14 +258,19 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         get;
         protected set;
       }
-      public override bool IAmDestination(ISemanticData dataId)
+
+      public override MessageHeader MessageHeader
       {
-        return dataId.Guid == m_SemanticData.Guid;
+        get
+        {
+          return m_MessageHeader;
+        }
       }
 
       #endregion
 
       #region private
+      private MessageHeader m_MessageHeader;
       private BinaryReader m_BinaryReader;
       private int m_NumberOfAttachToNetwork;
       private SemanticData m_SemanticData;
@@ -273,7 +279,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       internal void GetMessageTest(SemanticData semanticData)
       {
         m_SemanticData = semanticData;
-        this.RaiseReadMessageCompleted();
+        m_MessageHeader.DataSetId = m_SemanticData.Guid;
+        RaiseReadMessageCompleted();
       }
 
     }
@@ -324,7 +331,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       internal static SemanticData GetSemanticDataTest()
       {
-        return new SemanticData(null, "SymbolicName", 123, Guid.NewGuid());
+        return new SemanticData(null, "SymbolicName", 123, CommonDefinitions.TestGuid);
       }
       public SemanticData(Uri identifier, string symbolicName, IComparable nodeId, Guid guid)
       {
@@ -407,15 +414,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_Trace("Exiting m_ReceiveAsyncCallback");
       }
 
-      /// <summary>
-      /// Check if the message destination is the data set described by the <paramref name="dataId" /> of type <see cref="ISemanticData" />.
-      /// </summary>
-      /// <param name="dataId">The data identifier <see cref="ISemanticData" />.</param>
-      /// <returns><c>true</c> if <paramref name="dataId" /> is the destination of the message, <c>false</c> otherwise.</returns>
-      public override bool IAmDestination(ISemanticData dataId)
-      {
-        return dataId.Guid == m_SemanticData.Guid;
-      }
       #endregion
 
       #region Message frame

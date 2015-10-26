@@ -32,7 +32,7 @@
     {
       Header.Synchronize();
       for (int i = Header.MessageCount; i > 0; i--)
-        RaiseReadMessageCompleted();
+        OnNewMessageArrived();
     }
     #endregion
 

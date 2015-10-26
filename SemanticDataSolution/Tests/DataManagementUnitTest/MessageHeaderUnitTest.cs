@@ -30,7 +30,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_header);
       _header.Synchronize();
       Assert.AreEqual<long>(16, _reader.m_Position);
-      Assert.AreEqual<Guid>(CommonDefinitions.ProducerId, _header.DataSetId);
+      Assert.AreEqual<Guid>(CommonDefinitions.TestGuid, _header.DataSetId);
       _header.Synchronize();
       Assert.AreEqual<long>(32, _reader.m_Position);
     }

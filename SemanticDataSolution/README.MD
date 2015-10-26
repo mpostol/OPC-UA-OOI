@@ -29,7 +29,7 @@ An example of transferring the UA Semantic Data over the network is message cent
 
 This concept have been implemented in the project [DataManagement](./DataManagement#introduction). This project provides a SDK library that can be used as a foundation of the communication infrastructure deployment.
 
-The [UANetworkingReferenceApplication](../UANetworkingReferenceApplication) contains a reference WPF application.
+The [UANetworkingReferenceApplication](./UANetworkingReferenceApplication) contains a reference WPF application.
 
 ## External database archival
 

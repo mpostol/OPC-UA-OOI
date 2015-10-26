@@ -17,6 +17,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           0x00,                                               //byte ProtocolVersion
           0x00,                                               //byte SecurityTokenId
           0x01,                                               //byte MessageCount
+          //Message header
+          0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16, //guid - PublisherId
           //Message content
           0x7b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //UInt64
           0x7b, 0x00, 0x00, 0x00,                             //UInt32
@@ -36,6 +38,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           //0x01, 0x02, 0x03,                                   //byte[]
       };
     }
+    /// <summary>
+    /// The producer identifier - should be moved to the configuration - see spec for current definition.
+    /// </summary>
+    public static readonly Guid ProducerId = new Guid("A6195DF3-0B30-4C25-8BF8-45B076402116");
     internal static object[] TestValues = new object[]
       {
         (ulong)123, (uint)123, (ushort)123, "123",

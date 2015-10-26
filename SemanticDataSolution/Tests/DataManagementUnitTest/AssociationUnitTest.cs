@@ -318,7 +318,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class MessageWriter : IMessageWriter
     {
       internal bool IsOk = false;
-      public void Send(Func<int, IProducerBinding> producerBinding, int length, ulong contentMask)
+      public void Send(Func<int, IProducerBinding> producerBinding, int length, ulong contentMask, ISemanticData semanticData)
       {
         IsOk = true;
         Assert.AreEqual<int>(3, length);

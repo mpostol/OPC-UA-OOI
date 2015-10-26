@@ -30,14 +30,15 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="length">Number of items to be send used to calculate the length of the message.</param>
     /// <param name="contentMask">The content mask represented as unsigned number <see cref="UInt64" />. The order of the bits starting from the least significant
     /// bit matches the order of the data items within the data set.</param>
+    /// <param name="semanticData">An instance of <see cref="ISemanticData" /> that represents a data item conforming to the UA Semantic Data paradigm.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">Impossible to convert null value
     /// or</exception>
-    void IMessageWriter.Send(Func<int, IProducerBinding> producerBinding, int length, ulong contentMask)
+    void IMessageWriter.Send(Func<int, IProducerBinding> producerBinding, int length, ulong contentMask, ISemanticData semanticData)
     {
       if (State.State != HandlerState.Operational)
         return;
       ContentMask = contentMask;
-      CreateMessage(length);
+      CreateMessage(length, semanticData.Guid);
       UInt64 _mask = 0x1;
       for (int i = 0; i < length; i++)
       {
@@ -101,7 +102,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     public abstract void Write(Guid value);
     #endregion
 
-    protected abstract void CreateMessage(int length);
+    protected abstract void CreateMessage(int length, Guid dataSetId);
     protected abstract void SendMessage();
     private bool IsValueIConvertible(object value, object parameter)
     {

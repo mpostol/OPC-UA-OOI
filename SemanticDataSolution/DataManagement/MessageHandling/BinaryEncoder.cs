@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryEncoder"/> class wrapper of <see cref="UABinaryWriter"/> supporting OPC UA binary encoding..
     /// </summary>
-    public BinaryEncoder()
+    public BinaryEncoder(Guid producerId) : base(producerId)
     {
       CreateUABinaryWriter();
     }

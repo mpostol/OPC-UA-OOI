@@ -6,7 +6,6 @@ using System.Net.Sockets;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using System.Linq;
-using System.IO;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -34,7 +33,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       _bmw.AttachToNetwork();
       ProducerBinding _binding = new ProducerBinding();
       _binding.Value = new TestClass();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue);
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, new SemanticDataTest(Guid.NewGuid()));
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
@@ -46,7 +45,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
       ProducerBinding _binding = new ProducerBinding();
       _binding.Value = new Nullable<float>();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue);
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, new SemanticDataTest(Guid.NewGuid()));
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
@@ -58,7 +57,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       ProducerBinding _binding = new ProducerBinding();
       _binding.Value = String.Empty;
       int _sentItems = 0;
-      ((IMessageWriter)_bmw).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; }, CommonDefinitions.TestValues.Length, UInt64.MaxValue);
+      ((IMessageWriter)_bmw).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
+                                   CommonDefinitions.TestValues.Length,
+                                   UInt64.MaxValue,
+                                   new SemanticDataTest(Guid.NewGuid())
+                                   );
       Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
     }
     [TestMethod]
@@ -80,10 +83,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         ProducerBinding _binding = new ProducerBinding();
         _binding.Value = String.Empty;
         int _sentItems = 0;
-        ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; }, CommonDefinitions.TestValues.Length, UInt64.MaxValue);
+        Guid m_Guid = CommonDefinitions.ProducerId;
+        ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
+                                       CommonDefinitions.TestValues.Length,
+                                       UInt64.MaxValue,
+                                       new SemanticDataTest(m_Guid));
         Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
         Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(84, _writer.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(100, _writer.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
         byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArray();
         byte[] _outputBuffer = _writer.DoUDPRead();
@@ -221,7 +228,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         Assert.IsInstanceOfType(value, typeof(char));
       }
-      protected override void CreateMessage(int length)
+      protected override void CreateMessage(int length, Guid dataSetId)
       {
         MassageCreated = true;
       }
@@ -234,6 +241,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
+
       #endregion
 
       #region test infrastructure
@@ -241,7 +249,42 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       #endregion
 
     }
+    internal class SemanticDataTest : ISemanticData
+    {
+      public SemanticDataTest(Guid guid)
+      {
+        Guid = guid;
+      }
+      public Guid Guid
+      {
+        get; private set;
+      }
+      public Uri Identifier
+      {
+        get
+        {
+          throw new NotImplementedException();
+        }
+      }
+      public IComparable NodeId
+      {
+        get
+        {
+          throw new NotImplementedException();
+        }
+      }
+      public string SymbolicName
+      {
+        get
+        {
+          throw new NotImplementedException();
+        }
+      }
+    }
+    #endregion
+
   }
+
   internal class MyState : IAssociationState
   {
 
@@ -285,16 +328,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
 
   }
-  #endregion
+
 
   #region to be promoted to the codebase
-
 
   public sealed class BinaryUDPPackageWriter : BinaryEncoder
   {
 
     #region creator
-    public BinaryUDPPackageWriter(string remoteHostName, int port) : base()
+    public BinaryUDPPackageWriter(string remoteHostName, int port) : base(CommonDefinitions.ProducerId)
     {
       State = new MyState();
       m_RemoteHostName = remoteHostName;

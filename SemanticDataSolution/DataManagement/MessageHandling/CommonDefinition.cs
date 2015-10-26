@@ -14,10 +14,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// The protocol version used in the package header. move it to configuration.
     /// </summary>
     public static readonly byte ProtocolVersion = 0x0;
-    /// <summary>
-    /// The producer identifier - should be moved to the configuration - see spec for current definition.
-    /// </summary>
-    public static readonly Guid ProducerId = new Guid("A6195DF3-0B30-4C25-8BF8-45B076402116");
     #endregion
 
     /// <summary>

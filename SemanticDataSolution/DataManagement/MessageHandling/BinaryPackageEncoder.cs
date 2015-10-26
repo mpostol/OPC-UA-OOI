@@ -10,9 +10,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryPackageEncoder"/> class.
     /// </summary>
-    public BinaryPackageEncoder()
+    public BinaryPackageEncoder(Guid producerId)
     {
-      Header = PackageHeader.GetProducerPackageHeader(this);
+      Header = PackageHeader.GetProducerPackageHeader(this, producerId);
     }
     /// <summary>
     /// Gets or sets the header of the package.

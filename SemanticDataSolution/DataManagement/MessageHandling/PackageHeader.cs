@@ -24,10 +24,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Gets the producer package header.
     /// </summary>
     /// <param name="writer">The writer.</param>
+    /// <param name="producerId">The producer identifier.</param>
     /// <returns>PackageHeader.</returns>
-    public static PackageHeader GetProducerPackageHeader(IBinaryHeaderWriter writer)
+    public static PackageHeader GetProducerPackageHeader(IBinaryHeaderWriter writer, Guid producerId)
     {
-      return new ProducerPackageHeader(writer);
+      return new ProducerPackageHeader(writer, producerId);
     }
     /// <summary>
     /// Gets the consumer package header.
@@ -122,10 +123,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     private class ProducerPackageHeader : PackageHeader
     {
       #region constructor
-      public ProducerPackageHeader(IBinaryHeaderWriter writer) : base()
+      public ProducerPackageHeader(IBinaryHeaderWriter writer, Guid producerId) : base()
       {
         m_Writer = writer;
-        PublisherId = CommonDefinitions.ProducerId;
+        PublisherId = producerId;
         b_MessageCount = 0;
         MessageFlags = Convert.ToByte(MessageFlag.PeriodicData);
         ProtocolVersion = CommonDefinitions.ProtocolVersion;

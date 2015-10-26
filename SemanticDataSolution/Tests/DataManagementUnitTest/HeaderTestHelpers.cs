@@ -1,5 +1,5 @@
-﻿using System;
-
+﻿
+using System;
 using System.IO;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 
@@ -8,6 +8,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
   internal class HeaderWriterTest : IBinaryHeaderWriter
   {
+    public HeaderWriterTest(long startPosition)
+    {
+      b_Position = startPosition;
+    }
+    public HeaderWriterTest() : this(0) { }
     public long Seek(int offset, SeekOrigin origin)
     {
       switch (origin)
@@ -51,17 +56,24 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   }
   internal class HeaderReaderTest : IBinaryHeaderReader
   {
+
+    public HeaderReaderTest(long startPosition)
+    {
+      m_Position = startPosition;
+    }
+    public HeaderReaderTest() : this(0) { }
     public byte ReadByte()
     {
-      Position++;
+      m_Position++;
       return 0xff;
     }
     public Guid ReadGuid()
     {
-      Position += 16;
-      return MessageHandling.CommonDefinitions.ProducerId;
+      m_Position += 16;
+      return CommonDefinitions.ProducerId;
     }
-    internal int Position = 0;
+    internal long m_Position = 0;
+
   }
 
 }

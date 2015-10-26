@@ -199,7 +199,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     /// </summary>
     /// <param name="producerBinding">Encapsulates functionality used by the <see cref="IMessageWriter" /> to collect all the data (data set items) required to prepare new message and send it over the network.</param>
     /// <exception cref="System.NotImplementedException"></exception>
-    public void Send(Func<int, IProducerBinding> producerBinding, int length, ulong contentMask)
+    public void Send(Func<int, IProducerBinding> producerBinding, int length, ulong contentMask, ISemanticData semanticData)
     {
       if (length > 2)
         throw new ArgumentOutOfRangeException("length");

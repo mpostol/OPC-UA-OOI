@@ -90,7 +90,7 @@ namespace UAOOI.SemanticData.DataManagement
     private void ProcessDataBindings_CollectionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
       foreach (IMessageWriter _mwx in m_MessageWriter)
-        _mwx.Send(x => m_ProcessDataBindings[x], m_ProcessDataBindings.Length, UInt64.MaxValue);
+        _mwx.Send(x => m_ProcessDataBindings[x], m_ProcessDataBindings.Length, UInt64.MaxValue, DataDescriptor);
     }
     #endregion
 

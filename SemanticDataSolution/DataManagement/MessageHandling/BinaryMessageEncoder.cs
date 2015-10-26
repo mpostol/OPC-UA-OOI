@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.IO;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
@@ -15,7 +16,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// </remarks>
   public abstract class BinaryMessageEncoder : MessageWriterBase, IBinaryHeaderWriter
   {
-    
+
+    public BinaryMessageEncoder()
+    {
+      MessageHeader = MessageHeader.GetProducerMessageHeader(this);
+    }
     #region IBinaryHeaderWriter
     /// <summary>
     /// Sets the position within the current stream.
@@ -29,15 +34,23 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <returns>The position with the current stream as <see cref="System.Int64"/>.</returns>
     public abstract long Seek(int offset, SeekOrigin origin);
     #endregion    
+    /// <summary>
+    /// Gets or sets the message header.
+    /// </summary>
+    /// <value>The message header.</value>
+    public MessageHeader MessageHeader { get; set; }
 
     #region MessageWriterBase
     /// <summary>
     /// Creates and prepares new the message.
     /// </summary>
     /// <param name="length">The length.</param>
-    protected override void CreateMessage(int length)
+    /// <param name="dataSetId">The data set identifier.</param>
+    protected override void CreateMessage(int length, Guid dataSetId)
     {
       //Create message header and placeholder for further header content.
+      MessageHeader.DataSetId = dataSetId;
+      MessageHeader.Synchronize();
       OnMessageAdding();
     }
     /// <summary>

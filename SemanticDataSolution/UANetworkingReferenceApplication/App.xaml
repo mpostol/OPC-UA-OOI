@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
     </Application.Resources>
+
 </Application>

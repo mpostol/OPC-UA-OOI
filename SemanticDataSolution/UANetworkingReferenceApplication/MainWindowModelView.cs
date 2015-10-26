@@ -1,16 +1,22 @@
 ﻿
 using System;
 using System.ComponentModel;
+using System.Threading;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 
-namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
+namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 {
 
   /// <summary>
-  /// Class ScreeViewModel - this class demonstrates how to create bindings to the properties that are holders of values in the Model View ViewModel pattern.
+  /// Class MainWindowModelView - this class demonstrates how to create bindings to the properties that are holders of values in the 
+  /// Model View ViewModel pattern.
   /// </summary>
-  internal class ScreeViewModel : INotifyPropertyChanged 
+  internal class MainWindowModelView : INotifyPropertyChanged, IModelViewBindingFactory
   {
+
+    public MainWindowModelView()
+    {
+    }
 
     #region API
     /// <summary>
@@ -23,7 +29,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       if (variableName == "Value1")
       {
-        Value1 = new ConsumerBindingMonitoredValue<string>();
+        Value1 = new ConsumerBindingMonitoredValue<DateTime>();
         return Value1;
       }
       else if (variableName == "Value2")
@@ -35,12 +41,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     }
     #endregion
 
-    #region INotifyPropertyChanged
-    public event PropertyChangedEventHandler PropertyChanged;
-    #endregion
-
     #region ViewModel implementation
-    public ConsumerBindingMonitoredValue<string> Value1
+    /// <summary>
+    /// Gets or sets the value1 - an example of OPC UA data binded to the <see cref="System.Windows.Controls.TextBox"/>.
+    /// </summary>
+    /// <value>The value1 represented by the <see cref="ConsumerBindingMonitoredValue"/>.</value>
+    public ConsumerBindingMonitoredValue<DateTime> Value1
     {
       get
       {
@@ -48,7 +54,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
       set
       {
-        PropertyChanged.RaiseHandler<ConsumerBindingMonitoredValue<string>>(value, ref b_Value1, "Value1", this);
+        PropertyChanged.RaiseHandler<ConsumerBindingMonitoredValue<DateTime>>(value, ref b_Value1, "Value1", this);
       }
     }
     public ConsumerBindingMonitoredValue<double> Value2
@@ -62,8 +68,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
         PropertyChanged.RaiseHandler<ConsumerBindingMonitoredValue<double>>(value, ref b_Value2, "Value2", this);
       }
     }
-    private ConsumerBindingMonitoredValue<string> b_Value1;
+    private ConsumerBindingMonitoredValue<DateTime> b_Value1;
     private ConsumerBindingMonitoredValue<double> b_Value2;
+    #endregion
+
+    #region INotifyPropertyChanged
+    public event PropertyChangedEventHandler PropertyChanged;
     #endregion
 
   }

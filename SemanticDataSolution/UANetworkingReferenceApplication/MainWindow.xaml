@@ -4,15 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
+        xmlns:code="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+  <Window.DataContext>
+    <code:MainWindowModelView/>
+  </Window.DataContext>
   <Grid>
-
     <Grid.RowDefinitions>
       <RowDefinition></RowDefinition>
       <RowDefinition></RowDefinition>
     </Grid.RowDefinitions>
-    <Label Grid.Row="0" >Consumer:</Label>
+    <Grid Grid.Row="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" ></RowDefinition>
+        <RowDefinition Height="Auto" ></RowDefinition>
+      </Grid.RowDefinitions>
+      <Label Grid.Row="0" >Consumer:</Label>
+      <TextBox Grid.Row="1" x:Name="textBox" Text="{Binding Path=Value1.Value, FallbackValue= ?????  }" />
+    </Grid>
     <Label Grid.Row="1" >Producer:</Label>
   </Grid>
 </Window>

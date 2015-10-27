@@ -8,13 +8,14 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
   /// </summary>
   public partial class App : Application
   {
-    protected override void OnLoadCompleted(NavigationEventArgs e)
+    void App_Startup(object sender, StartupEventArgs e)
     {
-      Application _ca = Current;
-      IModelViewBindingFactory _cbf = (IModelViewBindingFactory)_ca.MainWindow.DataContext;
+      // Open a window
+      MainWindow window = new MainWindow();
+      IModelViewBindingFactory _cbf = (IModelViewBindingFactory)window.DataContext;
       Consumer.OPCUADataModel _model = new Consumer.OPCUADataModel() { ModelViewBindingFactory = _cbf };
       _model.Run();
-      base.OnLoadCompleted(e);
+      window.Show();
     }
   }
 }

@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.ComponentModel;
-using System.Threading;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
@@ -16,6 +15,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 
     public MainWindowModelView()
     {
+      b_UDPPort = Properties.Settings.Default.UDPPort;
     }
 
     #region API
@@ -41,7 +41,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     }
     #endregion
 
-    #region ModelView implementation
+    #region User INterface - ModelView implementation
     /// <summary>
     /// Gets or sets the value1 - an example of OPC UA data binded to the <see cref="System.Windows.Controls.TextBox"/>.
     /// </summary>
@@ -72,6 +72,24 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         PropertyChanged.RaiseHandler<ConsumerBindingMonitoredValue<double>>(value, ref b_Value2, "Value2", this);
       }
     }
+    /// <summary>
+    /// Gets or sets the UDP port.
+    /// </summary>
+    /// <value>The UDP port.</value>
+    public int UDPPort
+    {
+      get
+      {
+        return b_UDPPort;
+      }
+      set
+      {
+        if (PropertyChanged.RaiseHandler<int>(value, ref b_UDPPort, "UDPPort", this))
+          Properties.Settings.Default.UDPPort = value;
+      }
+    }
+    //private part
+    private int b_UDPPort;
     private ConsumerBindingMonitoredValue<DateTime> b_Value1;
     private ConsumerBindingMonitoredValue<double> b_Value2;
     #endregion

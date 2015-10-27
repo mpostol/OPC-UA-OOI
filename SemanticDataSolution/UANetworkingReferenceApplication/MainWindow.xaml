@@ -20,7 +20,10 @@
         <RowDefinition Height="Auto" ></RowDefinition>
         <RowDefinition Height="Auto" ></RowDefinition>
       </Grid.RowDefinitions>
-      <Label Grid.Row="0" >Consumer:</Label>
+      <StackPanel Orientation="Horizontal">
+        <Label Grid.Row="0" >Consumer UDP port: </Label>
+        <TextBox Grid.Row="0" Text="{Binding Path=UDPPort, FallbackValue= ______  }" />
+      </StackPanel>
       <TextBox Grid.Row="1" x:Name="textBox" Text="{Binding Path=Value1.Value, FallbackValue= ?????  }" />
     </Grid>
     <Label Grid.Row="1" >Producer:</Label>

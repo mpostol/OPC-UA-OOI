@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Navigation;
+using UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 {
@@ -8,14 +11,31 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
   /// </summary>
   public partial class App : Application
   {
-    void App_Startup(object sender, StartupEventArgs e)
+
+    /// <summary>
+    /// Handles the Startup event of the App control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="StartupEventArgs"/> instance containing the event data.</param>
+    private void App_Startup(object sender, StartupEventArgs e)
     {
       // Open a window
       MainWindow window = new MainWindow();
       IModelViewBindingFactory _cbf = (IModelViewBindingFactory)window.DataContext;
-      Consumer.OPCUADataModel _model = new Consumer.OPCUADataModel() { ModelViewBindingFactory = _cbf };
-      _model.Run();
+      ConsumerDataManagementSetup.CreateDevice(_cbf, x => m_DisposableCollection.Add(x));
       window.Show();
     }
+    /// <summary>
+    /// Handles the Exit event of the App control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="ExitEventArgs"/> instance containing the event data.</param>
+    private void App_Exit(object sender, ExitEventArgs e)
+    {
+      foreach (IDisposable _toDispose in m_DisposableCollection)
+        _toDispose.Dispose();
+    }
+    private List<IDisposable> m_DisposableCollection = new List<IDisposable>();
+
   }
 }

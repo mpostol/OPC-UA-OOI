@@ -69,7 +69,9 @@
     <Compile Include="CommonDefinitions.cs" />
     <Compile Include="Consumer\ConsumerConfiguration.cs" />
     <Compile Include="Consumer\ConsumerConfigurationFactory.cs" />
-    <Compile Include="Consumer\OPCUADataModel.cs" />
+    <Compile Include="Consumer\ConsumerDataManagementSetup.cs" />
+    <Compile Include="Consumer\ConsumerMessageHandlerFactory.cs" />
+    <Compile Include="Consumer\MainWindowModel.cs" />
     <Compile Include="IModelViewBindingFactory.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

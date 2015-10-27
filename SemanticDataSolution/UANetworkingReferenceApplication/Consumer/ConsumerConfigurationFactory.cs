@@ -10,7 +10,15 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
   /// <remarks>In production release it shall be replaced by reading a configuration file.</remarks>
   internal class ConsumerConfigurationFactory : ConfigurationFactoryBase
   {
-    
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ConsumerConfigurationFactory"/> class.
+    /// </summary>
+    public ConsumerConfigurationFactory()
+    {
+      Loader = ConsumerConfiguration.Load;
+    }
+
     #region ConfigurationFactoryBase
     ///// <summary>
     ///// Occurs after the association configuration has been changed.

@@ -22,5 +22,17 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("34567")]
+        public int UDPPort {
+            get {
+                return ((int)(this["UDPPort"]));
+            }
+            set {
+                this["UDPPort"] = value;
+            }
+        }
     }
 }

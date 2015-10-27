@@ -8,11 +8,19 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
   /// </summary>
   internal interface IModelViewBindingFactory
   {
+
+    /// <summary>
+    /// Gets or sets the UDP port number.
+    /// </summary>
+    /// <value>The UDP port number.</value>
+    int UDPPort { get; set; }
+
     /// <summary>
     /// Gets the consumer binding.
     /// </summary>
     /// <param name="propertyName">Name of the property to be binded.</param>
     /// <returns>IConsumerBinding.</returns>
     IConsumerBinding GetConsumerBinding(string propertyName);
+
   }
 }

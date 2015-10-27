@@ -79,8 +79,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       #region private
       private class MyState : IAssociationState
       {
-        private BinaryUDPPackageReader m_Parent;
 
+        #region IAssociationState
         /// <summary>
         /// Initializes a new instance of the <see cref="MyState"/> class.
         /// </summary>
@@ -122,6 +122,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
           State = HandlerState.Disabled;
           m_Parent.Dispose();
         }
+        #endregion
+
+        private BinaryUDPPackageReader m_Parent;
 
       }
       private UdpClient m_UdpClient;

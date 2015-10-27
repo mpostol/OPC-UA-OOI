@@ -1,38 +1,51 @@
 ﻿using System;
 using UAOOI.SemanticData.DataManagement.Configuration;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
+namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 {
   /// <summary>
-  /// Class ConsumerConfiguration - contains manually created local configuration 
+  /// Class Configuration - contains hardcoded local configuration
   /// </summary>
-  internal static class ConsumerConfiguration
+  /// <remarks>In production environment it shall be replaced by reading a configuration file.</remarks>
+  internal static class Configuration
   {
+
     /// <summary>
     /// Created the configuration from the local data.
     /// </summary>
     /// <remarks>In production release shall be replaced by reading from the file.</remarks>
     /// <returns>ConfigurationData.</returns>
-    internal static ConfigurationData Load()
+    internal static ConfigurationData LoadConsumer()
     {
-      return new ConfigurationData() { Associations = GetAssociations(), MessageTransport = GetMessageTransport() };
+      return new ConfigurationData() { Associations = GetAssociations(AssociationRole.Consumer), MessageTransport = GetMessageTransport( AssociationRole.Consumer) };
     }
+    /// <summary>
+    /// Created the configuration from the local data.
+    /// </summary>
+    /// <remarks>In production release shall be replaced by reading from the file.</remarks>
+    /// <returns>ConfigurationData.</returns>
+    internal static ConfigurationData LoadProducer()
+    {
+      return new ConfigurationData() { Associations = GetAssociations(AssociationRole.Producer), MessageTransport = GetMessageTransport( AssociationRole.Producer) };
+    }
+    internal static Guid AssociationConfigurationId = new Guid(Properties.Settings.Default.AssociationConfigurationId);
+
     #region configuration
-    private static MessageTransportConfiguration[] GetMessageTransport()
+    private static MessageTransportConfiguration[] GetMessageTransport(AssociationRole associationRole)
     {
       return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { Associations = GetTransportAssociations(),
                                                                                          Configuration = null,
                                                                                          Name = "UDP",
-                                                                                         TransportRole = AssociationRole.Consumer } };
+                                                                                         TransportRole = associationRole } };
     }
     private static string[] GetTransportAssociations()
     {
       return new string[] { AssociationConfigurationAlias };
     }
-    private static AssociationConfiguration[] GetAssociations()
+    private static AssociationConfiguration[] GetAssociations(AssociationRole associationRole)
     {
       return new AssociationConfiguration[] { new AssociationConfiguration() { Alias = AssociationConfigurationAlias,
-                                                                               AssociationRole = AssociationRole.Consumer,
+                                                                               AssociationRole = associationRole,
                                                                                DataSet = GetDataSet(),
                                                                                DataSymbolicName = "DataSymbolicName",
                                                                                Id = AssociationConfigurationId,
@@ -54,7 +67,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     #endregion
 
     #region preconfigured settings
-    private static Guid AssociationConfigurationId;
     private const string AssociationConfigurationAlias = "Association1";
     private const string m_RepositoryGroup = "repositoryGroup";
     private const string AssociationConfigurationDataSymbolicName = "DataSymbolicName";

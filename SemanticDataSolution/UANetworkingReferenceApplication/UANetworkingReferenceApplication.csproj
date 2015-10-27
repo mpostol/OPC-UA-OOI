@@ -67,7 +67,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CommonDefinitions.cs" />
-    <Compile Include="Consumer\ConsumerConfiguration.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="Consumer\ConsumerConfigurationFactory.cs" />
     <Compile Include="Consumer\ConsumerDataManagementSetup.cs" />
     <Compile Include="Consumer\ConsumerMessageHandlerFactory.cs" />
@@ -80,6 +80,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowModelView.cs" />
+    <Compile Include="Producer\CustomNodeManager.cs" />
+    <Compile Include="Producer\OPCUAServerProducerSimulator.cs" />
+    <Compile Include="Producer\ProducerConfigurationFactory.cs" />
+    <Compile Include="Producer\ProducerMessageHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -113,6 +117,7 @@
       <Name>DataManagement</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

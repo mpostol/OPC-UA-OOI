@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
@@ -56,4 +53,5 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     #endregion
 
   }
+
 }

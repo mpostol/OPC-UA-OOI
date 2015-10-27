@@ -5,5 +5,8 @@
     <Setting Name="UDPPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">34567</Value>
     </Setting>
+    <Setting Name="AssociationConfigurationId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C1F53FFB-6552-4CCC-84C9-F847147CDC85</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

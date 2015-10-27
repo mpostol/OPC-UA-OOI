@@ -67,6 +67,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CommonDefinitions.cs" />
+    <Compile Include="Consumer\ConsumerConfiguration.cs" />
+    <Compile Include="Consumer\ConsumerConfigurationFactory.cs" />
     <Compile Include="Consumer\OPCUADataModel.cs" />
     <Compile Include="IModelViewBindingFactory.cs" />
     <Compile Include="MainWindow.xaml.cs">

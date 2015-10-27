@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     public event PropertyChangedEventHandler PropertyChanged;
     #endregion
 
-    #region ViewModel implementation
+    #region ModelView implementation
     public ConsumerBindingMonitoredValue<string> Value1
     {
       get

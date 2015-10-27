@@ -21,7 +21,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       AssociationConfigurationId = dataSetGuid;
       DataManagementSetup _ret = new ConsumerDeviceSimulator();
-      _ret.ConfigurationFactory = new MyConfigurationFactory();
+      _ret.ConfigurationFactory = new ConsumerConfigurationFactory();
       _ret.BindingFactory = new MVVMSimulatorFactory();
       _ret.EncodingFactory = new MyEncodingFactory();
       _ret.MessageHandlerFactory = messageHandlerFactory;
@@ -55,30 +55,35 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     /// <summary>
     /// Class ConfigurationFactory.
     /// </summary>
-    private class MyConfigurationFactory : IConfigurationFactory
+    private class ConsumerConfigurationFactory : ConfigurationFactoryBase
     {
 
-      #region IConfigurationFactory
+      public ConsumerConfigurationFactory()
+      {
+        this.Loader = m_GetConfiguration;
+      }
+
+      #region ConfigurationFactoryBase
+      ///// <summary>
+      ///// Occurs after the association configuration has been changed.
+      ///// </summary>
+      public override event EventHandler<EventArgs> OnAssociationConfigurationChange;
+      ///// <summary>
+      ///// Occurs after the communication configuration has been changed.
+      ///// </summary>
+      public override event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
+      #endregion
+
+      #region configuration
       /// <summary>
       /// Gets the configuration.
       /// </summary>
       /// <returns>Am object of <see cref="ConfigurationData" /> type capturing the communication configuration.</returns>
       /// <exception cref="System.NotImplementedException"></exception>
-      public ConfigurationData GetConfiguration()
+      private ConfigurationData m_GetConfiguration()
       {
         return new ConfigurationData() { Associations = GetAssociations(), MessageTransport = GetMessageTransport() };
       }
-      /// <summary>
-      /// Occurs after the association configuration has been changed.
-      /// </summary>
-      public event EventHandler<EventArgs> OnAssociationConfigurationChange;
-      /// <summary>
-      /// Occurs after the communication configuration has been changed.
-      /// </summary>
-      public event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
-      #endregion
-
-      #region configuration
       private MessageTransportConfiguration[] GetMessageTransport()
       {
         return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { Associations = GetTransportAssociations(), 

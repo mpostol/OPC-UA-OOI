@@ -9,10 +9,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 
     /// <summary>
     /// Extension method that sets a new value in a variable and then executes the event handler if the new value
-    /// differs from the old one.  Used to easily implement INotifyPropeprtyChanged.
+    /// differs from the old one.  Used to easily implement <see cref="INotifyPropertyChanged"/>.
     /// </summary>
     /// <typeparam name="T">The type of values being handled (usually the type of the property).</typeparam>
-    /// <param name="handler">The event handler to execute in the event of actual value change.</param>
+    /// <param name="handler">The event handler <see cref="PropertyChangedEventHandler"/> to execute in the event of actual value change.</param>
     /// <param name="newValue">The new value to set.</param>
     /// <param name="oldValue">The old value to replace (and the value holder).</param>
     /// <param name="propertyName">The property's name as required by <typeparamref name="System.ComponentModel.PropertyChangedEventArgs"/>.</param>

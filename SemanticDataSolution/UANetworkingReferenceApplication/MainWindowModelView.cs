@@ -41,7 +41,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     }
     #endregion
 
-    #region ViewModel implementation
+    #region ModelView implementation
     /// <summary>
     /// Gets or sets the value1 - an example of OPC UA data binded to the <see cref="System.Windows.Controls.TextBox"/>.
     /// </summary>
@@ -57,6 +57,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         PropertyChanged.RaiseHandler<ConsumerBindingMonitoredValue<DateTime>>(value, ref b_Value1, "Value1", this);
       }
     }
+    /// <summary>
+    /// Gets or sets the value2 - an example of OPC UA data binded to the <see cref="System.Windows.Controls.TextBox"/>.
+    /// </summary>
+    /// <value>The value2.</value>
     public ConsumerBindingMonitoredValue<double> Value2
     {
       get

@@ -18,14 +18,33 @@
     <Grid Grid.Row="0">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto" ></RowDefinition>
-        <RowDefinition Height="Auto" ></RowDefinition>
+        <RowDefinition Height="*" ></RowDefinition>
       </Grid.RowDefinitions>
-      <StackPanel Orientation="Horizontal">
-        <Label Grid.Row="0" >Consumer UDP port: </Label>
-        <TextBox Grid.Row="0" Text="{Binding Path=UDPPort, FallbackValue= ______  }" />
+      <StackPanel Orientation="Horizontal" Margin="20" Grid.Row="0">
+        <Label  >Consumer UDP port:</Label>
+        <TextBox Text="{Binding Path=UDPPort, FallbackValue= ______  }" />
       </StackPanel>
-      <TextBox Grid.Row="1" x:Name="textBox" Text="{Binding Path=Value1.Value, FallbackValue= ?????  }" />
+      <StackPanel Orientation="Vertical"  Grid.Row="1" >
+        <TextBox Text="{Binding Path=Value1.Value, FallbackValue=  ?????, Mode=OneWay }" ToolTip="Time transmitted from remote station, UTC because of UA Encoding." />
+        <TextBox Text="{Binding Path=Value2.Value, FallbackValue=  ?????, Mode=OneWay }" ToolTip="Random floating-point number between 0.0 and 1.0 transmitted from remote station."/>
+      </StackPanel>
     </Grid>
-    <Label Grid.Row="1" >Producer:</Label>
+    <StackPanel Orientation="Vertical" Grid.Row="1" >
+      <Label Margin="20" >Producer:</Label>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0">
+          <Label >Packages Sent:</Label>
+          <Label >Bytes Sent:</Label>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1">
+          <TextBox Text="{Binding Path=PackagesSent,  FallbackValue=?????, Mode=OneWay}" ToolTip="Packages sent by the producer"/>
+          <TextBox  Text="{Binding Path=BytesSent,  FallbackValue=?????, Mode=OneWay }" ToolTip="Bytes sent by the producer"/>
+        </StackPanel>
+      </Grid>
+    </StackPanel>
   </Grid>
 </Window>

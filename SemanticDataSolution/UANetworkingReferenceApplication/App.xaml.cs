@@ -20,9 +20,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     {
       // Open a window
       MainWindow window = new MainWindow();
-      IModelViewBindingFactory _cbf = (IModelViewBindingFactory)window.DataContext;
+      MainWindowModelView _cbf = (MainWindowModelView)window.DataContext;
       Consumer.ConsumerDataManagementSetup.CreateDevice(_cbf, x => m_DisposableCollection.Add(x));
-      Producer.OPCUAServerProducerSimulator.CreateDevice(x => m_DisposableCollection.Add(x), y => m_Log.Add(y));
+      Producer.OPCUAServerProducerSimulator.CreateDevice(x => m_DisposableCollection.Add(x), y => m_Log.Add(y), _cbf);
       window.Show();
     }
     /// <summary>
@@ -34,8 +34,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     {
       foreach (IDisposable _toDispose in m_DisposableCollection)
         _toDispose.Dispose();
+      ReferenceApplication.Properties.Settings.Default.Save();
     }
     private List<IDisposable> m_DisposableCollection = new List<IDisposable>();
     private List<string> m_Log = new List<string>();
+
   }
 }

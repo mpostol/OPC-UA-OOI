@@ -13,11 +13,13 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
   internal class ProducerMessageHandlerFactory : IMessageHandlerFactory
   {
 
-    public ProducerMessageHandlerFactory(Action<IDisposable> toDispose, Action<string> trace)
+    public ProducerMessageHandlerFactory(Action<IDisposable> toDispose, Action<string> trace, IProducerModelView modelView)
     {
       m_ToDispose = toDispose;
       m_Trace = trace;
+      m_ModelView = modelView;
     }
+
     #region IMessageHandlerFactory
     /// <summary>
     /// Gets the new instance of <see cref="IMessageReader"/>.
@@ -39,7 +41,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// <returns>An instance of <see cref="IMessageWriter"/>.</returns>
     IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, XmlElement configuration)
     {
-      BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(RemoteHostName, UDPPortNumber, ProducerId, m_Trace);
+      BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(RemoteHostName, UDPPortNumber, ProducerId, m_Trace, m_ModelView);
       m_ToDispose(_ret);
       return _ret;
     }
@@ -79,17 +81,21 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// <summary>
     /// Class BinaryUDPPackageWriter - custom implementation of the <see cref="BinaryEncoder"/> using UDP protocol.
     /// </summary>
+    private IProducerModelView m_ModelView { get; set; }
     private class BinaryUDPPackageWriter : BinaryEncoder
     {
 
       #region creator
-      public BinaryUDPPackageWriter(string remoteHostName, int remotePort, Guid producerId, Action<string> trace) : base(producerId)
+      public BinaryUDPPackageWriter(string remoteHostName, int remotePort, Guid producerId, Action<string> trace, IProducerModelView modelView) : base(producerId)
       {
         m_Trace = trace;
+        m_ModelView = modelView;
         State = new MyState(this);
         m_RemoteHostName = remoteHostName;
         m_remotePort = remotePort;
         trace("Created BinaryUDPPackageWriter");
+        modelView.BytesSent = 0;
+        modelView.PackagesSent = 0;
       }
       #endregion
 
@@ -111,7 +117,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
         try
         {
           m_NumberOfSentBytes += buffer.Length;
+          m_ModelView.BytesSent = m_NumberOfSentBytes;
           m_NumberOfSentMessages++;
+          m_ModelView.PackagesSent = m_NumberOfSentMessages;
           IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, m_remotePort);
           m_UdpClient.Send(buffer, buffer.Length, _IPEndPoint);
           _msg = String.Format("After Send m_NumberOfSentBytes = {0}, m_NumberOfSentMessages = {1}", m_NumberOfSentBytes, m_NumberOfSentMessages);
@@ -237,6 +245,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       internal int m_NumberOfSentMessages = 0;
       internal int m_NumberOfSentBytes = 0;
       internal int m_NumberOfAttachToNetwork;
+      private IProducerModelView m_ModelView;
       #endregion
 
     }

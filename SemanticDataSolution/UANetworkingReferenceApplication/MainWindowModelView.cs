@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
   /// Class MainWindowModelView - this class demonstrates how to create bindings to the properties that are holders of values in the 
   /// Model View ViewModel pattern.
   /// </summary>
-  internal class MainWindowModelView : INotifyPropertyChanged, IModelViewBindingFactory
+  internal class MainWindowModelView : INotifyPropertyChanged, IModelViewBindingFactory, IProducerModelView
   {
 
     public MainWindowModelView()
@@ -94,9 +94,61 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     private ConsumerBindingMonitoredValue<double> b_Value2;
     #endregion
 
+    #region Producer user interface
+    public int BytesSent
+    {
+      get
+      {
+        return b_BytesSent;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<int>(value, ref b_BytesSent, "BytesSent", this);
+      }
+    }
+    private int b_BytesSent;
+    public int PackagesSent
+    {
+      get
+      {
+        return b_PackagesSent;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<int>(value, ref b_PackagesSent, "PackagesSent", this);
+      }
+    }
+    private int b_PackagesSent;
+    public string RemoteHost
+    {
+      get
+      {
+        return b_RemoteHost;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<string>(value, ref b_RemoteHost, "RemoteHost", this);
+      }
+    }
+    private string b_RemoteHost;
+    public int RemotePort
+    {
+      get
+      {
+        return b_RemotePort;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<int>(value, ref b_RemotePort, "RemotePort", this);
+      }
+    }
+    private int b_RemotePort;
+    #endregion
+
     #region INotifyPropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
     #endregion
 
   }
+
 }

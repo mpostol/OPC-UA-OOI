@@ -67,6 +67,8 @@ namespace UAOOI.SemanticData.DataManagement
     #endregion
 
     #region private
+    private object mLockObject = new object();
+    bool m_Busy = false;
     protected override void InitializeCommunication()
     {
       //Do nothing;
@@ -89,8 +91,13 @@ namespace UAOOI.SemanticData.DataManagement
     private IProducerBinding[] m_ProcessDataBindings;
     private void ProcessDataBindings_CollectionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
+      if (m_Busy)
+        return;
+      m_Busy = true;
       foreach (IMessageWriter _mwx in m_MessageWriter)
-        _mwx.Send(x => m_ProcessDataBindings[x], m_ProcessDataBindings.Length, UInt64.MaxValue, DataDescriptor);
+        lock (mLockObject)
+          _mwx.Send(x => m_ProcessDataBindings[x], m_ProcessDataBindings.Length, UInt64.MaxValue, DataDescriptor);
+      m_Busy = false;
     }
     #endregion
 

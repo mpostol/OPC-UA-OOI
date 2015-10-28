@@ -8,5 +8,11 @@
     <Setting Name="AssociationConfigurationId" Type="System.String" Scope="User">
       <Value Profile="(Default)">C1F53FFB-6552-4CCC-84C9-F847147CDC85</Value>
     </Setting>
+    <Setting Name="RemoteHostName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">localhost</Value>
+    </Setting>
+    <Setting Name="ProducerId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">6D481513-444F-40FB-826D-4706AFD05E2F</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -46,5 +46,29 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
                 this["AssociationConfigurationId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
+        public string RemoteHostName {
+            get {
+                return ((string)(this["RemoteHostName"]));
+            }
+            set {
+                this["RemoteHostName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6D481513-444F-40FB-826D-4706AFD05E2F")]
+        public string ProducerId {
+            get {
+                return ((string)(this["ProducerId"]));
+            }
+            set {
+                this["ProducerId"] = value;
+            }
+        }
     }
 }

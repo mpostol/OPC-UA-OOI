@@ -1,7 +1,9 @@
-﻿using System;
+﻿
+using System;
 
 namespace UAOOI.SemanticData.DataManagement.DataRepository
 {
+
   /// <summary>
   /// Class ProducerBindingMonitoredValue - it implements the <see cref="ProducerBinding{type}"/> as a placeholder of the value to send over the network by the producer.
   /// </summary>
@@ -27,7 +29,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
       }
       set
       {
-        if (Object.Equals(b_MyProperty, value))
+        if (Equals(b_MyProperty, value))
           return;
         b_MyProperty = value;
         OnNewValue();

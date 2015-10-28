@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       MainWindowModel _model = new MainWindowModel() { ModelViewBindingFactory = bindingFactory };
       _ret.BindingFactory = _model;
       _ret.EncodingFactory = _model;
-      _ret.MessageHandlerFactory = new ConsumerMessageHandlerFactory(toDispose, bindingFactory.UDPPort);
+      _ret.MessageHandlerFactory = new ConsumerMessageHandlerFactory(toDispose);
       _ret.Initialize();
       _ret.Run();
       return _ret;

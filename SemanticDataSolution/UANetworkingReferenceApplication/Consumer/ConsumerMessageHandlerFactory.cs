@@ -14,10 +14,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
   {
 
     #region creator
-    public ConsumerMessageHandlerFactory(Action<IDisposable> toDispose, int udpPortNumber)
+    public ConsumerMessageHandlerFactory(Action<IDisposable> toDispose)
     {
-      this.toDispose = toDispose;
-      UDPPortNumber = udpPortNumber;
+      this.m_ToDispose = toDispose;
     }
     #endregion
 
@@ -25,7 +24,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     public IMessageReader GetIMessageReader(string name, XmlElement configuration)
     {
       BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(UDPPortNumber, z => { });
-      toDispose(_ret);
+      m_ToDispose(_ret);
       return _ret;
     }
     public IMessageWriter GetIMessageWriter(string name, XmlElement configuration)
@@ -34,7 +33,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     }
     #endregion
 
-    internal int UDPPortNumber { get; set; }
+    internal int UDPPortNumber
+    {
+      get { return Properties.Settings.Default.UDPPort; }
+    }
 
     #region private
     private sealed class BinaryUDPPackageReader : BinaryDecoder
@@ -170,8 +172,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       #endregion
 
     }
-    private Action<IDisposable> toDispose;
+    private Action<IDisposable> m_ToDispose;
     #endregion
 
   }
+
 }

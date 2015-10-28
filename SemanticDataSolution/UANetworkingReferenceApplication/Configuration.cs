@@ -3,8 +3,10 @@ using UAOOI.SemanticData.DataManagement.Configuration;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 {
+
+  #region API
   /// <summary>
-  /// Class Configuration - contains hardcoded local configuration
+  /// Class Configuration - contains hard coded local configuration
   /// </summary>
   /// <remarks>In production environment it shall be replaced by reading a configuration file.</remarks>
   internal static class Configuration
@@ -17,7 +19,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     /// <returns>ConfigurationData.</returns>
     internal static ConfigurationData LoadConsumer()
     {
-      return new ConfigurationData() { Associations = GetAssociations(AssociationRole.Consumer), MessageTransport = GetMessageTransport( AssociationRole.Consumer) };
+      return new ConfigurationData() { Associations = GetAssociations(AssociationRole.Consumer), MessageTransport = GetMessageTransport(AssociationRole.Consumer) };
     }
     /// <summary>
     /// Created the configuration from the local data.
@@ -26,9 +28,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     /// <returns>ConfigurationData.</returns>
     internal static ConfigurationData LoadProducer()
     {
-      return new ConfigurationData() { Associations = GetAssociations(AssociationRole.Producer), MessageTransport = GetMessageTransport( AssociationRole.Producer) };
+      return new ConfigurationData() { Associations = GetAssociations(AssociationRole.Producer), MessageTransport = GetMessageTransport(AssociationRole.Producer) };
     }
     internal static Guid AssociationConfigurationId = new Guid(Properties.Settings.Default.AssociationConfigurationId);
+    #endregion
 
     #region configuration
     private static MessageTransportConfiguration[] GetMessageTransport(AssociationRole associationRole)
@@ -70,7 +73,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     private const string AssociationConfigurationAlias = "Association1";
     private const string m_RepositoryGroup = "repositoryGroup";
     private const string AssociationConfigurationDataSymbolicName = "DataSymbolicName";
-    private const string AssociationConfigurationInformationModelURI = "https://github.com/mpostol/OPC-UA-OOI";
+    private const string AssociationConfigurationInformationModelURI = @"https://github.com/mpostol/OPC-UA-OOI";
     #endregion
 
 

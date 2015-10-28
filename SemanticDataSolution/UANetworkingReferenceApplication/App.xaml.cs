@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Navigation;
-using UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 {
@@ -22,7 +21,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       // Open a window
       MainWindow window = new MainWindow();
       IModelViewBindingFactory _cbf = (IModelViewBindingFactory)window.DataContext;
-      ConsumerDataManagementSetup.CreateDevice(_cbf, x => m_DisposableCollection.Add(x));
+      Consumer.ConsumerDataManagementSetup.CreateDevice(_cbf, x => m_DisposableCollection.Add(x));
+      Producer.OPCUAServerProducerSimulator.CreateDevice(x => m_DisposableCollection.Add(x));
       window.Show();
     }
     /// <summary>

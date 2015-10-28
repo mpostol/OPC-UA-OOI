@@ -329,7 +329,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
   }
 
-
   #region to be promoted to the codebase
 
   public sealed class BinaryUDPPackageWriter : BinaryEncoder

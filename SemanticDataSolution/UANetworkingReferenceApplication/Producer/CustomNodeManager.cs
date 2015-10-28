@@ -82,8 +82,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     {
       if (Value1.HandlerState == HandlerState.Operational)
         Value1.MonitoredValue = DateTime.Now;
-      if (Value2.HandlerState == HandlerState.Operational)
-        Value2.MonitoredValue = m_Random.NextDouble();
+      //if (Value2.HandlerState == HandlerState.Operational)
+      //  Value2.MonitoredValue = m_Random.NextDouble();
     }
   }
 

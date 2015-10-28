@@ -10,14 +10,14 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
   internal class OPCUAServerProducerSimulator : DataManagementSetup
   {
     #region creator
-    internal static void CreateDevice(Action<IDisposable> toDispose)
+    internal static void CreateDevice(Action<IDisposable> toDispose, Action<string> trace)
     {
       Current = new OPCUAServerProducerSimulator();
       Current.ConfigurationFactory = new ProducerConfigurationFactory();
       CustomNodeManager _simulator = new CustomNodeManager();
       Current.BindingFactory = _simulator;
       Current.EncodingFactory = _simulator;
-      Current.MessageHandlerFactory = new ProducerMessageHandlerFactory(toDispose);
+      Current.MessageHandlerFactory = new ProducerMessageHandlerFactory(toDispose, trace);
       Current.Initialize();
       Current.Run();
     }

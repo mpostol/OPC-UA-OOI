@@ -8,19 +8,34 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
   {
 
     #region creator of the ConsumerDeviceSimulator
-    internal static ConsumerDataManagementSetup CreateDevice(IModelViewBindingFactory bindingFactory, Action<IDisposable> toDispose)
+    /// <summary>
+    /// Creates the device (e.g. HMI) simulator.
+    /// </summary>
+    /// <param name="bindingFactory">The binding factory.</param>
+    /// <param name="toDispose">
+    /// To dispose captures functionality to create a collection of disposable objects. 
+    /// The objects are disposed when application exits.
+    /// </param>
+    /// <returns>ConsumerDataManagementSetup.</returns>
+    internal static void CreateDevice(IModelViewBindingFactory bindingFactory, Action<IDisposable> toDispose)
     {
-      ConsumerDataManagementSetup _ret = new ConsumerDataManagementSetup();
-      _ret.ConfigurationFactory = new ConsumerConfigurationFactory();
+      Current = new ConsumerDataManagementSetup();
+      Current.ConfigurationFactory = new ConsumerConfigurationFactory();
       MainWindowModel _model = new MainWindowModel() { ModelViewBindingFactory = bindingFactory };
-      _ret.BindingFactory = _model;
-      _ret.EncodingFactory = _model;
-      _ret.MessageHandlerFactory = new ConsumerMessageHandlerFactory(toDispose);
-      _ret.Initialize();
-      _ret.Run();
-      return _ret;
+      Current.BindingFactory = _model;
+      Current.EncodingFactory = _model;
+      Current.MessageHandlerFactory = new ConsumerMessageHandlerFactory(toDispose);
+      Current.Initialize();
+      Current.Run();
     }
     #endregion
+
+    /// <summary>
+    /// Singleton implementation - gets the current instance of this class.
+    /// </summary>
+    /// <value>The current.</value>
+    public static ConsumerDataManagementSetup Current { get; private set; }
+
 
   }
 }

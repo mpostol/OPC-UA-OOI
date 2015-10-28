@@ -1,7 +1,7 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Navigation;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 {
@@ -22,7 +22,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       MainWindow window = new MainWindow();
       IModelViewBindingFactory _cbf = (IModelViewBindingFactory)window.DataContext;
       Consumer.ConsumerDataManagementSetup.CreateDevice(_cbf, x => m_DisposableCollection.Add(x));
-      Producer.OPCUAServerProducerSimulator.CreateDevice(x => m_DisposableCollection.Add(x));
+      Producer.OPCUAServerProducerSimulator.CreateDevice(x => m_DisposableCollection.Add(x), y => m_Log.Add(y));
       window.Show();
     }
     /// <summary>
@@ -36,6 +36,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         _toDispose.Dispose();
     }
     private List<IDisposable> m_DisposableCollection = new List<IDisposable>();
-
+    private List<string> m_Log = new List<string>();
   }
 }

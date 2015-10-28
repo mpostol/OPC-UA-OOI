@@ -10,10 +10,20 @@ using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 {
+  /// <summary>
+  /// Class ConsumerMessageHandlerFactory - implements <see cref="IMessageHandlerFactory"/> 
+  /// </summary>
   internal class ConsumerMessageHandlerFactory : IMessageHandlerFactory
   {
 
     #region creator
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ConsumerMessageHandlerFactory"/> class.
+    /// </summary>
+    /// <param name="toDispose">
+    /// To dispose captures functionality to create a collection of disposable objects. 
+    /// The objects are disposed when application exits.
+    /// </param>
     public ConsumerMessageHandlerFactory(Action<IDisposable> toDispose)
     {
       this.m_ToDispose = toDispose;
@@ -21,27 +31,56 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     #endregion
 
     #region IMessageHandlerFactory
-    public IMessageReader GetIMessageReader(string name, XmlElement configuration)
+    /// <summary>
+    /// Gets the new instance of <see cref="IMessageReader"/>.
+    /// </summary>
+    /// <param name="name">The name of the reader.</param>
+    /// <param name="configuration">The configuration of the reader.</param>
+    /// <returns>An instance of <see cref="IMessageReader"/>.</returns>
+    IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, XmlElement configuration)
     {
       BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(UDPPortNumber, z => { });
       m_ToDispose(_ret);
       return _ret;
     }
-    public IMessageWriter GetIMessageWriter(string name, XmlElement configuration)
+    /// <summary>
+    /// Gets the new instance of <see cref="IMessageWriter"/>.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="configuration">The configuration.</param>
+    /// <remarks>It is intentionally not implemented</remarks>
+    /// <returns>An instance of <see cref="IMessageWriter"/>.</returns>
+    /// <exception cref="System.NotImplementedException"></exception>
+    IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, XmlElement configuration)
     {
       throw new NotImplementedException();
     }
     #endregion
-
+    
+    #region API
+    /// <summary>
+    /// Gets the listen to UDP port number.
+    /// </summary>
+    /// <value>The UDP port number.</value>
     internal int UDPPortNumber
     {
       get { return Properties.Settings.Default.UDPPort; }
     }
+    #endregion
 
     #region private
+    /// <summary>
+    /// Class BinaryUDPPackageReader - custom implementation of the <see cref="BinaryDecoder"/> using UDP protocol.. 
+    /// This class cannot be inherited.
+    /// </summary>
     private sealed class BinaryUDPPackageReader : BinaryDecoder
     {
 
+      /// <summary>
+      /// Initializes a new instance of the <see cref="BinaryUDPPackageReader"/> class.
+      /// </summary>
+      /// <param name="port">The port.</param>
+      /// <param name="trace">The trace.</param>
       public BinaryUDPPackageReader(int port, Action<string> trace) : base()
       {
         State = new MyState(this);
@@ -73,12 +112,17 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       protected override void Dispose(bool disposing)
       {
         base.Dispose(disposing);
-        if (disposing)
-          m_UdpClient.Close();
+        if (!disposing)
+          return;
+        if (m_UdpClient == null)
+          return;
+        m_UdpClient.Close();
+        m_UdpClient = null;
       }
       #endregion
 
       #region private
+      //types
       private class MyState : IAssociationState
       {
 
@@ -129,6 +173,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
         private BinaryUDPPackageReader m_Parent;
 
       }
+      //vars
       private UdpClient m_UdpClient;
       private int m_UDPPort;
       private Action<string> m_Trace;
@@ -160,6 +205,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
         }
         m_Trace("Exiting m_ReceiveAsyncCallback");
       }
+      //Methods
       private void OnEnable()
       {
         m_UdpClient = new UdpClient(m_UDPPort);

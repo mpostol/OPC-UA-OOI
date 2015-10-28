@@ -13,18 +13,33 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
   internal class ProducerMessageHandlerFactory : IMessageHandlerFactory
   {
 
-    public ProducerMessageHandlerFactory(Action<IDisposable> toDispose)
+    public ProducerMessageHandlerFactory(Action<IDisposable> toDispose, Action<string> trace)
     {
-      this.m_ToDispose = toDispose;
+      m_ToDispose = toDispose;
+      m_Trace = trace;
     }
     #region IMessageHandlerFactory
-    public IMessageReader GetIMessageReader(string name, XmlElement configuration)
+    /// <summary>
+    /// Gets the new instance of <see cref="IMessageReader"/>.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="configuration">The configuration.</param>
+    /// <remarks>It is intentionally not implemented</remarks>
+    /// <returns>An instance of <see cref="IMessageReader"/>.</returns>
+    /// <exception cref="System.NotImplementedException"></exception>
+    IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, XmlElement configuration)
     {
       throw new NotImplementedException();
     }
-    public IMessageWriter GetIMessageWriter(string name, XmlElement configuration)
+    /// <summary>
+    /// Gets the i message writer.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="configuration">The configuration.</param>
+    /// <returns>An instance of <see cref="IMessageWriter"/>.</returns>
+    IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, XmlElement configuration)
     {
-      BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(RemoteHostName, UDPPortNumber, ProducerId);
+      BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(RemoteHostName, UDPPortNumber, ProducerId, m_Trace);
       m_ToDispose(_ret);
       return _ret;
     }
@@ -59,15 +74,22 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       }
     }
     #endregion
+
+    #region private
+    /// <summary>
+    /// Class BinaryUDPPackageWriter - custom implementation of the <see cref="BinaryEncoder"/> using UDP protocol.
+    /// </summary>
     private class BinaryUDPPackageWriter : BinaryEncoder
     {
 
       #region creator
-      public BinaryUDPPackageWriter(string remoteHostName, int remotePort, Guid producerId) : base(producerId)
+      public BinaryUDPPackageWriter(string remoteHostName, int remotePort, Guid producerId, Action<string> trace) : base(producerId)
       {
+        m_Trace = trace;
         State = new MyState(this);
         m_RemoteHostName = remoteHostName;
         m_remotePort = remotePort;
+        trace("Created BinaryUDPPackageWriter");
       }
       #endregion
 
@@ -79,51 +101,40 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       }
       public override void AttachToNetwork()
       {
-        // Get DNS host information.
-        m_remoteHostInfo = Dns.GetHostEntry(m_RemoteHostName);
-        // Get the DNS IP addresses associated with the host.
-        // Get first IPAddress in list return by DNS.
-        m_IPAddresses = m_remoteHostInfo.AddressList.Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
-        Debug.Assert(m_IPAddresses != null);
-        m_UdpClient = new UdpClient();
+        m_Trace("Entering AttachToNetwork");
         m_NumberOfAttachToNetwork++;
       }
       protected override void SendFrame(byte[] buffer)
       {
-        m_NumberOfSentBytes += buffer.Length;
-        m_NumberOfSentMessages++;
+        string _msg = String.Format("Entering SendFrame buffer.Length = {0}", buffer.Length);
+        m_Trace(_msg);
         try
         {
+          m_NumberOfSentBytes += buffer.Length;
+          m_NumberOfSentMessages++;
           IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, m_remotePort);
           m_UdpClient.Send(buffer, buffer.Length, _IPEndPoint);
+          _msg = String.Format("After Send m_NumberOfSentBytes = {0}, m_NumberOfSentMessages = {1}", m_NumberOfSentBytes, m_NumberOfSentMessages);
         }
         catch (SocketException e)
         {
-          Console.WriteLine("SocketException caught!!!");
-          Console.WriteLine("Source : " + e.Source);
-          Console.WriteLine("Message : " + e.Message);
-          throw;
+          _msg = String.Format("SocketException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
         }
         catch (ArgumentNullException e)
         {
-          Console.WriteLine("ArgumentNullException caught!!!");
-          Console.WriteLine("Source : " + e.Source);
-          Console.WriteLine("Message : " + e.Message);
-          throw;
+          _msg = String.Format("ArgumentNullException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
         }
         catch (NullReferenceException e)
         {
-          Console.WriteLine("NullReferenceException caught!!!");
-          Console.WriteLine("Source : " + e.Source);
-          Console.WriteLine("Message : " + e.Message);
-          throw;
+          _msg = String.Format("NullReferenceException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
         }
         catch (Exception e)
         {
-          Console.WriteLine("Exception caught!!!");
-          Console.WriteLine("Source : " + e.Source);
-          Console.WriteLine("Message : " + e.Message);
-          throw;
+          _msg = String.Format("Exception caught!!! Source : {0} Message : {1}", e.Source, e.Message);
+        }
+        finally
+        {
+          m_Trace(_msg);
         }
       }
       /// <summary>
@@ -132,10 +143,17 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
       protected override void Dispose(bool disposing)
       {
+        string _msg = String.Format("Entering Dispose disposing = {0}", disposing);
+        m_Trace(_msg);
         base.Dispose(disposing);
         if (!disposing)
           return;
+        if (m_UdpClient == null)
+          return;
+        _msg = "Closing UdpClient";
+        m_Trace(_msg);
         m_UdpClient.Close();
+        m_UdpClient = null;
       }
       #endregion
 
@@ -197,10 +215,21 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       private IPHostEntry m_remoteHostInfo;
       private int m_remotePort = 4800;
       private string m_RemoteHostName;
+      private Action<string> m_Trace;
       //Methods
       private void OnEnable()
       {
-        AttachToNetwork();
+        m_Trace("Entering OnEnable");
+        Debug.Assert(m_UdpClient == null);
+        // Get DNS host information.
+        m_remoteHostInfo = Dns.GetHostEntry(m_RemoteHostName);
+        // Get the DNS IP addresses associated with the host.
+        // Get first IPAddress in list return by DNS.
+        m_IPAddresses = m_remoteHostInfo.AddressList.Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
+        Debug.Assert(m_IPAddresses != null);
+        m_UdpClient = new UdpClient();
+        string _msg = String.Format("Created UdpClient for m_RemoteHostName: {0} Ip : {1}", m_RemoteHostName, m_IPAddresses.ToString());
+        m_Trace("Created To the Network");
       }
       #endregion
 
@@ -212,6 +241,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
 
     }
     private Action<IDisposable> m_ToDispose;
+    private Action<string> m_Trace;
+    #endregion
 
   }
 }

@@ -32,6 +32,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// </summary>
     /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="variableName">Name of the variable.</param>
+    /// <remarks>It is intentionally not implemented.</remarks>
     /// <returns>IProducerBinding.</returns>
     /// <exception cref="System.NotImplementedException"></exception>
     public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)

@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     {
       Value1 = new ProducerBindingMonitoredValue<DateTime>(m_Variable1Name);
       Value2 = new ProducerBindingMonitoredValue<double>(m_Variable2Name);
-      m_Timer = new Timer(TimerCallback, null, 0, 500);
+      m_Timer = new Timer(TimerCallback, null, 1000, 500);
     }
 
     #region IBindingFactory

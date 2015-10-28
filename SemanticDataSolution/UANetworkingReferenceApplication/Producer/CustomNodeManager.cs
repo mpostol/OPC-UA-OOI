@@ -8,14 +8,27 @@ using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
 {
-  internal class CustomNodeManager : IBindingFactory, IEncodingFactory
+  internal class CustomNodeManager : IBindingFactory, IEncodingFactory, IDisposable
   {
     public CustomNodeManager()
     {
       Value1 = new ProducerBindingMonitoredValue<DateTime>(m_Variable1Name);
       Value2 = new ProducerBindingMonitoredValue<double>(m_Variable2Name);
-      m_Timer = new Timer(TimerCallback, null, 1000, 500);
     }
+
+    /// <summary>
+    /// Run this instance - stuarts pumping the data.
+    /// </summary>
+    internal void Run()
+    {
+      m_Timer = new Timer(TimerCallback, null, 0, 500);
+    }
+    #region IDisposable
+    public void Dispose()
+    {
+      m_Timer.Change(Timeout.Infinite, Timeout.Infinite);
+    }
+    #endregion    
 
     #region IBindingFactory
     /// <summary>

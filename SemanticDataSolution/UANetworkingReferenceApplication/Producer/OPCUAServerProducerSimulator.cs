@@ -15,11 +15,13 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       Current = new OPCUAServerProducerSimulator();
       Current.ConfigurationFactory = new ProducerConfigurationFactory();
       CustomNodeManager _simulator = new CustomNodeManager();
+      toDispose(_simulator);
       Current.BindingFactory = _simulator;
       Current.EncodingFactory = _simulator;
       Current.MessageHandlerFactory = new ProducerMessageHandlerFactory(toDispose, trace);
       Current.Initialize();
       Current.Run();
+      _simulator.Run();
     }
     #endregion
     /// <summary>

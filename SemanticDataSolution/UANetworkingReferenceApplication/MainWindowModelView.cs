@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.ComponentModel;
+using System.Windows.Input;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
@@ -147,6 +148,32 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       }
     }
     private int b_RemotePort;
+    public ICommand ProducerRestart
+    {
+      get
+      {
+        return b_ProducerRestart;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ProducerRestart, "ProducerRestart", this);
+      }
+    }
+    private ICommand b_ProducerRestart;
+    public string ProducerErrorMessage
+    {
+      get
+      {
+        return b_ProducerErrorMessage;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<string>(value, ref b_ProducerErrorMessage, "ProducerErrorMessage", this);
+      }
+    }
+    private string b_ProducerErrorMessage;
+
+
     #endregion
 
     #region INotifyPropertyChanged

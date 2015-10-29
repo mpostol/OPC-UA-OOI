@@ -26,7 +26,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     #region IDisposable
     public void Dispose()
     {
-      m_Timer.Change(Timeout.Infinite, Timeout.Infinite);
+      if (m_Timer != null)
+        m_Timer.Change(Timeout.Infinite, Timeout.Infinite);
     }
     #endregion    
 

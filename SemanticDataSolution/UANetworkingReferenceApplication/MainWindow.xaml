@@ -41,6 +41,7 @@
           <Label Height="30">Bytes Sent</Label>
           <Label Height="30">Remote Host Name</Label>
           <Label Height="30">Remote Port Number</Label>
+          <Label Height="30">Producer status</Label>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1">
           <TextBox Height="30" Text="{Binding Path=PackagesSent,  FallbackValue=?????, Mode=OneWay}" ToolTip="Packages sent by the producer"/>

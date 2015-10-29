@@ -118,37 +118,40 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       }
       protected override void SendFrame(byte[] buffer)
       {
-        string _msg = String.Format("Entering SendFrame buffer.Length = {0}", buffer.Length);
-        m_Trace(_msg);
-        try
+        lock (this)
         {
-          m_NumberOfSentBytes += buffer.Length;
-          m_ModelView.BytesSent = m_NumberOfSentBytes;
-          m_NumberOfSentMessages++;
-          m_ModelView.PackagesSent = m_NumberOfSentMessages;
-          IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, m_remotePort);
-          m_UdpClient.Send(buffer, buffer.Length, _IPEndPoint);
-          _msg = String.Format("After Send m_NumberOfSentBytes = {0}, m_NumberOfSentMessages = {1}", m_NumberOfSentBytes, m_NumberOfSentMessages);
-        }
-        catch (SocketException e)
-        {
-          _msg = String.Format("SocketException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
-        }
-        catch (ArgumentNullException e)
-        {
-          _msg = String.Format("ArgumentNullException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
-        }
-        catch (NullReferenceException e)
-        {
-          _msg = String.Format("NullReferenceException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
-        }
-        catch (Exception e)
-        {
-          _msg = String.Format("Exception caught!!! Source : {0} Message : {1}", e.Source, e.Message);
-        }
-        finally
-        {
+          string _msg = String.Format("Entering SendFrame buffer.Length = {0}", buffer.Length);
           m_Trace(_msg);
+          try
+          {
+            m_NumberOfSentBytes += buffer.Length;
+            m_ModelView.BytesSent = m_NumberOfSentBytes;
+            m_NumberOfSentMessages++;
+            m_ModelView.PackagesSent = m_NumberOfSentMessages;
+            IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, m_remotePort);
+            m_UdpClient.Send(buffer, buffer.Length, _IPEndPoint);
+            _msg = String.Format("After Send m_NumberOfSentBytes = {0}, m_NumberOfSentMessages = {1}", m_NumberOfSentBytes, m_NumberOfSentMessages);
+          }
+          catch (SocketException e)
+          {
+            _msg = String.Format("SocketException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
+          }
+          catch (ArgumentNullException e)
+          {
+            _msg = String.Format("ArgumentNullException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
+          }
+          catch (NullReferenceException e)
+          {
+            _msg = String.Format("NullReferenceException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
+          }
+          catch (Exception e)
+          {
+            _msg = String.Format("Exception caught!!! Source : {0} Message : {1}", e.Source, e.Message);
+          }
+          finally
+          {
+            m_Trace(_msg);
+          }
         }
       }
       /// <summary>
@@ -159,15 +162,18 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       {
         string _msg = String.Format("Entering Dispose disposing = {0}", disposing);
         m_Trace(_msg);
-        base.Dispose(disposing);
-        if (!disposing)
-          return;
-        if (m_UdpClient == null)
-          return;
-        _msg = "Closing UdpClient";
-        m_Trace(_msg);
-        m_UdpClient.Close();
-        m_UdpClient = null;
+        lock (this)
+        {
+          base.Dispose(disposing);
+          if (!disposing)
+            return;
+          if (m_UdpClient == null)
+            return;
+          _msg = "Closing UdpClient";
+          m_Trace(_msg);
+          m_UdpClient.Close();
+          m_UdpClient = null;
+        }
       }
       #endregion
 

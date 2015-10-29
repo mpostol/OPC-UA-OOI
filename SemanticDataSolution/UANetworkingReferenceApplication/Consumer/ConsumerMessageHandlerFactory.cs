@@ -18,14 +18,16 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 
     #region creator
     /// <summary>
-    /// Initializes a new instance of the <see cref="ConsumerMessageHandlerFactory"/> class.
+    /// Initializes a new instance of the <see cref="ConsumerMessageHandlerFactory" /> class.
     /// </summary>
-    /// <param name="toDispose">
-    /// To dispose captures functionality to create a collection of disposable objects. 
-    /// The objects are disposed when application exits.
-    /// </param>
-    public ConsumerMessageHandlerFactory(Action<IDisposable> toDispose)
+    /// <param name="toDispose">To dispose captures functionality to create a collection of disposable objects.
+    /// The objects are disposed when application exits.</param>
+    /// <param name="m_ModelView">The ModelView instance for this object.</param>
+    /// <param name="m_Trace">The delegate capturing logging functionality.</param>
+    public ConsumerMessageHandlerFactory(Action<IDisposable> toDispose, IConsumerModelView m_ModelView, Action<string> m_Trace)
     {
+      this.m_ParentModelView = m_ModelView;
+      this.m_Trace = m_Trace;
       this.m_ToDispose = toDispose;
     }
     #endregion
@@ -39,8 +41,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// <returns>An instance of <see cref="IMessageReader"/>.</returns>
     IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, XmlElement configuration)
     {
-      BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(UDPPortNumber, z => { });
+      BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(UDPPortNumber, m_Trace) { m_ModelView = m_ParentModelView };
       m_ToDispose(_ret);
+      m_Trace(String.Format("Created BinaryUDPPackageReader UDPPortNumber = {0}", UDPPortNumber));
       return _ret;
     }
     /// <summary>
@@ -56,7 +59,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       throw new NotImplementedException();
     }
     #endregion
-    
+
     #region API
     /// <summary>
     /// Gets the listen to UDP port number.
@@ -111,6 +114,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
       protected override void Dispose(bool disposing)
       {
+        m_Trace("Entering Dispose");
         base.Dispose(disposing);
         if (!disposing)
           return;
@@ -121,6 +125,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       }
       #endregion
 
+      internal IConsumerModelView m_ModelView;
       #region private
       //types
       private class MyState : IAssociationState
@@ -174,6 +179,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 
       }
       //vars
+      private int m_NumberOfBytes = 0;
+      private int m_NumberOfPackages = 0;
       private UdpClient m_UdpClient;
       private int m_UDPPort;
       private Action<string> m_Trace;
@@ -187,8 +194,11 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
         try
         {
           IPEndPoint _UEndPoint = null;
-          Byte[] _receiveBytes = null;
-          _receiveBytes = m_UdpClient.EndReceive(asyncResult, ref _UEndPoint);
+          Byte[] _receiveBytes = m_UdpClient.EndReceive(asyncResult, ref _UEndPoint);
+          m_NumberOfPackages++;
+          m_NumberOfBytes += _receiveBytes.Length;
+          m_ModelView.ConsumerFramesReceived = m_NumberOfPackages;
+          m_ModelView.ConsumerBytesReceived = m_NumberOfBytes;
           m_Trace(String.Format("Received length ={0}", _receiveBytes == null ? -1 : _receiveBytes.Length));
           MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
           base.OnNewFrameArrived(new UABinaryReader(_stream));
@@ -219,6 +229,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 
     }
     private Action<IDisposable> m_ToDispose;
+    private IConsumerModelView m_ParentModelView;
+    private Action<string> m_Trace;
     #endregion
 
   }

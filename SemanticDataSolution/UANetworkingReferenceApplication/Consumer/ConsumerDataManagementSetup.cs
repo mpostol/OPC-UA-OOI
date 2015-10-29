@@ -1,10 +1,13 @@
 ﻿
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 using UAOOI.SemanticData.DataManagement;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 {
-  internal class ConsumerDataManagementSetup : DataManagementSetup
+  internal sealed class ConsumerDataManagementSetup : DataManagementSetup, IDisposable
   {
 
     #region creator of the ConsumerDeviceSimulator
@@ -16,26 +19,86 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// To dispose captures functionality to create a collection of disposable objects. 
     /// The objects are disposed when application exits.
     /// </param>
-    /// <returns>ConsumerDataManagementSetup.</returns>
-    internal static void CreateDevice(IModelViewBindingFactory bindingFactory, Action<IDisposable> toDispose)
+    internal static void CreateDevice(IConsumerModelView modelView, Action<IDisposable> toDispose)
     {
       Current = new ConsumerDataManagementSetup();
-      Current.ConfigurationFactory = new ConsumerConfigurationFactory();
-      MainWindowModel _model = new MainWindowModel() { ModelViewBindingFactory = bindingFactory };
-      Current.BindingFactory = _model;
-      Current.EncodingFactory = _model;
-      Current.MessageHandlerFactory = new ConsumerMessageHandlerFactory(toDispose);
-      Current.Initialize();
-      Current.Run();
+      toDispose(Current);
+      Current.m_ModelView = modelView;
+      modelView.ConsumerLog = new ObservableCollection<string>();
+      Current.m_Trace = x => modelView.ConsumerLog.Add(x);
+      modelView.ConsumerUpdateConfiguration = new RestartCommand(Current.Restart);
+      Current.Setup();
     }
     #endregion
 
+    #region IDisposable
+    public void Dispose()
+    {
+      m_Trace("Entering Dispose");
+      foreach (IDisposable _2Dispose in m_ToDispose)
+        _2Dispose.Dispose();
+      m_ToDispose.Clear();
+    }
+    #endregion
+
+    #region API
     /// <summary>
     /// Singleton implementation - gets the current instance of this class.
     /// </summary>
     /// <value>The current.</value>
-    public static ConsumerDataManagementSetup Current { get; private set; }
+    internal static ConsumerDataManagementSetup Current { get; private set; }
+    #endregion
 
+    #region private
+    private class RestartCommand : ICommand
+    {
+      public RestartCommand(Action restart)
+      {
+        m_restart = restart;
+      }
+      public event EventHandler CanExecuteChanged;
+      public bool CanExecute(object parameter)
+      {
+        return true;
+      }
+      public void Execute(object parameter)
+      {
+        m_restart();
+      }
+      private Action m_restart;
+    }
+    private List<IDisposable> m_ToDispose = new List<IDisposable>();
+    private Action<string> m_Trace;
+    private IConsumerModelView m_ModelView;
+    private void Setup()
+    {
+      try
+      {
+        m_Trace("Entering Setup");
+        Current.ConfigurationFactory = new ConsumerConfigurationFactory();
+        MainWindowModel _model = new MainWindowModel() { ModelViewBindingFactory = m_ModelView };
+        Current.BindingFactory = _model;
+        Current.EncodingFactory = _model;
+        Current.MessageHandlerFactory = new ConsumerMessageHandlerFactory(x => m_ToDispose.Add(x), m_ModelView, m_Trace);
+        m_Trace("Initialize consumer engine.");
+        Current.Initialize();
+        m_Trace("On start receiving UDP frames.");
+        Current.Run();
+        m_ModelView.ConsumerErrorMessage = "Running";
+      }
+      catch (Exception ex)
+      {
+        m_ModelView.ConsumerErrorMessage = String.Format("Error: {0}", ex.Message);
+        Dispose();
+      }
+    }
+    private void Restart()
+    {
+      m_Trace("Entering Restart");
+      Dispose();
+      Setup();
+    }
+    #endregion
 
   }
 }

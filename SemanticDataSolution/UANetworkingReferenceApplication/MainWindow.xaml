@@ -6,50 +6,84 @@
         xmlns:local="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
         xmlns:code="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="525">
+        Title="OPC UA Part 14 PubSub Reference Application" Height="700" Width="500" MinHeight="700" MinWidth="500">
   <Window.DataContext>
     <code:MainWindowModelView/>
   </Window.DataContext>
+  <Window.Resources>
+    <Style x:Key="Title" TargetType="{x:Type Label}">
+      <Setter Property="FontSize" Value="21.333"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Margin" Value="20"/>
+    </Style>
+    <Style x:Key="Label" TargetType="{x:Type Label}">
+      <Setter Property="Height" Value="30"/>
+    </Style>
+    <Style x:Key="TextBox" TargetType="{x:Type Control}">
+      <Setter Property="Height" Value="30"/>
+    </Style>
+  </Window.Resources>
   <Grid>
     <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="*"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
-    <Grid Grid.Row="0">
+    <Grid Grid.Row="0"  Background="#FF06F711" VerticalAlignment="Stretch" >
       <Grid.RowDefinitions>
-        <RowDefinition Height="Auto" ></RowDefinition>
-        <RowDefinition Height="*" ></RowDefinition>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
-      <StackPanel Orientation="Horizontal" Margin="20" Grid.Row="0">
-        <Label  >Consumer UDP port:</Label>
-        <TextBox Text="{Binding Path=UDPPort, FallbackValue= ______  }" />
-      </StackPanel>
-      <StackPanel Orientation="Vertical"  Grid.Row="1" >
-        <TextBox Text="{Binding Path=Value1.Value, FallbackValue=  ?????, Mode=OneWay }" ToolTip="Time transmitted from remote station, UTC because of UA Encoding." />
-        <TextBox Text="{Binding Path=Value2.Value, FallbackValue=  ?????, Mode=OneWay }" ToolTip="Random floating-point number between 0.0 and 1.0 transmitted from remote station."/>
-      </StackPanel>
+      <Label Grid.Row="0" Style="{StaticResource Title}">Consumer</Label>
+      <Grid  Grid.Row="1">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0">
+          <Label Style="{StaticResource Label}" >Received: Remote UTC time</Label>
+          <Label Style="{StaticResource Label}">Received: Random floating-point</Label>
+          <Label Style="{StaticResource Label}">Packages Received</Label>
+          <Label Style="{StaticResource Label}">Bytes Received</Label>
+          <Label Style="{StaticResource Label}">Local UDP port</Label>
+          <Label Style="{StaticResource Label}">Consumer status</Label>
+        </StackPanel>
+        <StackPanel Orientation="Vertical"  Grid.Column="1" Grid.Row="0">
+          <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=Value1.Value, FallbackValue=  ?????, Mode=OneWay }" ToolTip="Time transmitted from remote station, UTC because of UA Encoding." />
+          <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=Value2.Value, FallbackValue=  ?????, Mode=OneWay }" ToolTip="Random floating-point number between 0.0 and 1.0 transmitted from remote station."/>
+          <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=ConsumerFramesReceived,  FallbackValue=?????, Mode=OneWay}" ToolTip="Packages sent by the producer"/>
+          <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path=ConsumerBytesReceived,  FallbackValue=?????, Mode=OneWay }" ToolTip="Bytes sent by the producer"/>
+          <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=UDPPort, FallbackValue= ______  }" />
+          <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path=ConsumerErrorMessage, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
+          <Button  Style="{StaticResource TextBox}" Command="{Binding Path=ConsumerUpdateConfiguration}" >Update Configuration</Button>
+        </StackPanel>
+        <ListBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=ConsumerLog}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"  />
+      </Grid>
     </Grid>
-    <StackPanel Orientation="Vertical" Grid.Row="1" >
-      <Label Margin="20" >Producer:</Label>
+    <StackPanel Orientation="Vertical" Grid.Row="1" Background="#FF0AC3F9" >
+      <Label Style="{StaticResource Title}" >Producer:</Label>
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="Auto"/>
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" Grid.Column="0">
-          <Label Height="30" >Packages Sent</Label>
-          <Label Height="30">Bytes Sent</Label>
-          <Label Height="30">Remote Host Name</Label>
-          <Label Height="30">Remote Port Number</Label>
-          <Label Height="30">Producer status</Label>
+        <StackPanel  Margin="10" Orientation="Vertical" Grid.Column="0">
+          <Label Style="{StaticResource Label}" >Packages Sent</Label>
+          <Label Style="{StaticResource Label}">Bytes Sent</Label>
+          <Label Style="{StaticResource Label}">Remote Host Name</Label>
+          <Label Style="{StaticResource Label}">Remote Port Number</Label>
+          <Label Style="{StaticResource Label}">Producer status</Label>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Column="1">
-          <TextBox Height="30" Text="{Binding Path=PackagesSent,  FallbackValue=?????, Mode=OneWay}" ToolTip="Packages sent by the producer"/>
-          <TextBox  Height="30" Text="{Binding Path=BytesSent,  FallbackValue=?????, Mode=OneWay }" ToolTip="Bytes sent by the producer"/>
-          <TextBox  Height="30" Text="{Binding Path= RemoteHost,  FallbackValue=?????, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
-          <TextBox  Height="30" Text="{Binding Path= RemotePort,  FallbackValue=?????, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
-          <TextBox  Height="30" Text="{Binding Path=ProducerErrorMessage, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
-          <Button Height="30" Command="{Binding Path=ProducerRestart}" >Update Configuration</Button>
+        <StackPanel Margin="10" Orientation="Vertical" Grid.Column="1">
+          <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=PackagesSent,  FallbackValue=?????, Mode=OneWay}" ToolTip="Packages sent by the producer"/>
+          <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path=BytesSent,  FallbackValue=?????, Mode=OneWay }" ToolTip="Bytes sent by the producer"/>
+          <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path= RemoteHost,  FallbackValue=?????, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
+          <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path= RemotePort,  FallbackValue=?????, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
+          <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path=ProducerErrorMessage, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
+          <Button  Style="{StaticResource TextBox}" Command="{Binding Path=ProducerRestart}" >Update Configuration</Button>
         </StackPanel>
       </Grid>
     </StackPanel>

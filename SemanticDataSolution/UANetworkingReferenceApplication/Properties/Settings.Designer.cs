@@ -25,7 +25,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("34567")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4840")]
         public int UDPPort {
             get {
                 return ((int)(this["UDPPort"]));
@@ -73,7 +73,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("34567")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4840")]
         public int RemoteUDPPortNumber {
             get {
                 return ((int)(this["RemoteUDPPortNumber"]));

@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
   /// <summary>
   /// Class OPCUAServerProducerSimulator simulates interface to internal <see cref="CustomNodeManager"/> class.
   /// </summary>
-  internal class OPCUAServerProducerSimulator : DataManagementSetup, IDisposable
+  internal sealed class OPCUAServerProducerSimulator : DataManagementSetup, IDisposable
   {
     #region creator
     internal static void CreateDevice(Action<IDisposable> toDispose, Action<string> trace, IProducerModelView modelView)

@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using UAOOI.SemanticData.DataManagement.DataRepository;
@@ -11,7 +12,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
   /// Class MainWindowModelView - this class demonstrates how to create bindings to the properties that are holders of OPC UA values in the 
   /// Model View ViewModel pattern.
   /// </summary>
-  internal class MainWindowModelView : INotifyPropertyChanged, IModelViewBindingFactory, IProducerModelView
+  internal class MainWindowModelView : INotifyPropertyChanged, IModelViewBindingFactory, IProducerModelView, IConsumerModelView
   {
 
     public MainWindowModelView()
@@ -91,7 +92,67 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
           Properties.Settings.Default.UDPPort = value;
       }
     }
+    public int ConsumerBytesReceived
+    {
+      get
+      {
+        return b_ConsumerBytesReceived;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<int>(value, ref b_ConsumerBytesReceived, "ConsumerBytesReceived", this);
+      }
+    }
+    public int ConsumerFramesReceived
+    {
+      get
+      {
+        return b_ConsumerFramesReceived;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<int>(value, ref b_ConsumerFramesReceived, "ConsumerFramesReceived", this);
+      }
+    }
+    public ICommand ConsumerUpdateConfiguration
+    {
+      get
+      {
+        return b_ConsumerUpdateConfiguration;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ConsumerUpdateConfiguration, "ConsumerUpdateConfiguration", this);
+      }
+    }
+    public string ConsumerErrorMessage
+    {
+      get
+      {
+        return b_ConsumerErrorMessage;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<string>(value, ref b_ConsumerErrorMessage, "ConsumerErrorMessage", this);
+      }
+    }
+    public ObservableCollection<string> ConsumerLog
+    {
+      get
+      {
+        return b_ConsumerLog;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<ObservableCollection<string>>(value, ref b_ConsumerLog, "ConsumerLog", this);
+      }
+    }
     //private part
+    private ObservableCollection<string> b_ConsumerLog;
+    private string b_ConsumerErrorMessage;
+    private ICommand b_ConsumerUpdateConfiguration;
+    private int b_ConsumerFramesReceived;
+    private int b_ConsumerBytesReceived;
     private int b_UDPPort;
     private ConsumerBindingMonitoredValue<DateTime> b_Value1;
     private ConsumerBindingMonitoredValue<double> b_Value2;
@@ -109,7 +170,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         PropertyChanged.RaiseHandler<int>(value, ref b_BytesSent, "BytesSent", this);
       }
     }
-    private int b_BytesSent;
     public int PackagesSent
     {
       get
@@ -121,7 +181,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         PropertyChanged.RaiseHandler<int>(value, ref b_PackagesSent, "PackagesSent", this);
       }
     }
-    private int b_PackagesSent;
     public string RemoteHost
     {
       get
@@ -134,7 +193,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
           Properties.Settings.Default.RemoteHostName = value;
       }
     }
-    private string b_RemoteHost;
     public int RemotePort
     {
       get
@@ -147,7 +205,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
           Properties.Settings.Default.RemoteUDPPortNumber = value;
       }
     }
-    private int b_RemotePort;
     public ICommand ProducerRestart
     {
       get
@@ -159,7 +216,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         PropertyChanged.RaiseHandler<ICommand>(value, ref b_ProducerRestart, "ProducerRestart", this);
       }
     }
-    private ICommand b_ProducerRestart;
     public string ProducerErrorMessage
     {
       get
@@ -171,6 +227,12 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         PropertyChanged.RaiseHandler<string>(value, ref b_ProducerErrorMessage, "ProducerErrorMessage", this);
       }
     }
+    //private part
+    private int b_BytesSent;
+    private int b_PackagesSent;
+    private string b_RemoteHost;
+    private int b_RemotePort;
+    private ICommand b_ProducerRestart;
     private string b_ProducerErrorMessage;
 
 

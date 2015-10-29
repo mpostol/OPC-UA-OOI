@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="UDPPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">34567</Value>
+      <Value Profile="(Default)">4840</Value>
     </Setting>
     <Setting Name="AssociationConfigurationId" Type="System.String" Scope="User">
       <Value Profile="(Default)">C1F53FFB-6552-4CCC-84C9-F847147CDC85</Value>
@@ -15,7 +15,7 @@
       <Value Profile="(Default)">6D481513-444F-40FB-826D-4706AFD05E2F</Value>
     </Setting>
     <Setting Name="RemoteUDPPortNumber" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">34567</Value>
+      <Value Profile="(Default)">4840</Value>
     </Setting>
   </Settings>
 </SettingsFile>

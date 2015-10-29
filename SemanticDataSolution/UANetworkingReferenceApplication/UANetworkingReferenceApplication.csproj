@@ -73,6 +73,7 @@
     <Compile Include="Consumer\ConsumerDataManagementSetup.cs" />
     <Compile Include="Consumer\ConsumerMessageHandlerFactory.cs" />
     <Compile Include="Consumer\MainWindowModel.cs" />
+    <Compile Include="IConsumerModelView.cs" />
     <Compile Include="IModelViewBindingFactory.cs" />
     <Compile Include="IProducerModelView.cs" />
     <Compile Include="MainWindow.xaml.cs">

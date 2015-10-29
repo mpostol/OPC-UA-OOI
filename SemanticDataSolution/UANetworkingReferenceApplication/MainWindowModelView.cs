@@ -7,7 +7,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 {
 
   /// <summary>
-  /// Class MainWindowModelView - this class demonstrates how to create bindings to the properties that are holders of values in the 
+  /// Class MainWindowModelView - this class demonstrates how to create bindings to the properties that are holders of OPC UA values in the 
   /// Model View ViewModel pattern.
   /// </summary>
   internal class MainWindowModelView : INotifyPropertyChanged, IModelViewBindingFactory, IProducerModelView
@@ -16,6 +16,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     public MainWindowModelView()
     {
       b_UDPPort = Properties.Settings.Default.UDPPort;
+      b_RemoteHost = Properties.Settings.Default.RemoteHostName;
+      b_RemotePort = Properties.Settings.Default.RemoteUDPPortNumber;
     }
 
     #region API
@@ -41,7 +43,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     }
     #endregion
 
-    #region User INterface - ModelView implementation
+    #region Consumer User Interface - ModelView implementation
     /// <summary>
     /// Gets or sets the value1 - an example of OPC UA data binded to the <see cref="System.Windows.Controls.TextBox"/>.
     /// </summary>
@@ -127,7 +129,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<string>(value, ref b_RemoteHost, "RemoteHost", this);
+        if (PropertyChanged.RaiseHandler<string>(value, ref b_RemoteHost, "RemoteHost", this))
+          Properties.Settings.Default.RemoteHostName = value;
       }
     }
     private string b_RemoteHost;
@@ -139,7 +142,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<int>(value, ref b_RemotePort, "RemotePort", this);
+        if (PropertyChanged.RaiseHandler<int>(value, ref b_RemotePort, "RemotePort", this))
+          Properties.Settings.Default.RemoteUDPPortNumber = value;
       }
     }
     private int b_RemotePort;

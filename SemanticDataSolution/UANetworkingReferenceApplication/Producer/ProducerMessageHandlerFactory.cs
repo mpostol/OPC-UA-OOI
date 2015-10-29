@@ -13,6 +13,12 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
   internal class ProducerMessageHandlerFactory : IMessageHandlerFactory
   {
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ProducerMessageHandlerFactory"/> class.
+    /// </summary>
+    /// <param name="toDispose">To dispose.</param>
+    /// <param name="trace">The trace.</param>
+    /// <param name="modelView">The <see cref="IProducerModelView"/> instance implementing ModelView layer in the MVVM programming pattern.</param>
     public ProducerMessageHandlerFactory(Action<IDisposable> toDispose, Action<string> trace, IProducerModelView modelView)
     {
       m_ToDispose = toDispose;
@@ -54,7 +60,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// <value>The UDP port number.</value>
     internal int UDPPortNumber
     {
-      get { return Properties.Settings.Default.UDPPort; }
+      get { return Properties.Settings.Default.RemoteUDPPortNumber; }
     }
     /// <summary>
     /// Gets the URL of the remote host.

@@ -14,5 +14,8 @@
     <Setting Name="ProducerId" Type="System.String" Scope="User">
       <Value Profile="(Default)">6D481513-444F-40FB-826D-4706AFD05E2F</Value>
     </Setting>
+    <Setting Name="RemoteUDPPortNumber" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">34567</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

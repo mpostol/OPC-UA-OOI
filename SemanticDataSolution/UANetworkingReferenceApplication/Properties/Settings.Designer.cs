@@ -70,5 +70,17 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
                 this["ProducerId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("34567")]
+        public int RemoteUDPPortNumber {
+            get {
+                return ((int)(this["RemoteUDPPortNumber"]));
+            }
+            set {
+                this["RemoteUDPPortNumber"] = value;
+            }
+        }
     }
 }

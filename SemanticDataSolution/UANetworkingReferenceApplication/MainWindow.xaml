@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
         xmlns:code="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="500" Width="525">
   <Window.DataContext>
     <code:MainWindowModelView/>
   </Window.DataContext>
   <Grid>
     <Grid.RowDefinitions>
-      <RowDefinition></RowDefinition>
-      <RowDefinition></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
+      <RowDefinition Height="*"></RowDefinition>
     </Grid.RowDefinitions>
     <Grid Grid.Row="0">
       <Grid.RowDefinitions>
@@ -37,12 +37,16 @@
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0">
-          <Label >Packages Sent:</Label>
-          <Label >Bytes Sent:</Label>
+          <Label Height="30" >Packages Sent</Label>
+          <Label Height="30">Bytes Sent</Label>
+          <Label Height="30">Remote Host Name</Label>
+          <Label Height="30">Remote Port Number</Label>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1">
-          <TextBox Text="{Binding Path=PackagesSent,  FallbackValue=?????, Mode=OneWay}" ToolTip="Packages sent by the producer"/>
-          <TextBox  Text="{Binding Path=BytesSent,  FallbackValue=?????, Mode=OneWay }" ToolTip="Bytes sent by the producer"/>
+          <TextBox Height="30" Text="{Binding Path=PackagesSent,  FallbackValue=?????, Mode=OneWay}" ToolTip="Packages sent by the producer"/>
+          <TextBox  Height="30" Text="{Binding Path=BytesSent,  FallbackValue=?????, Mode=OneWay }" ToolTip="Bytes sent by the producer"/>
+          <TextBox  Height="30" Text="{Binding Path= RemoteHost,  FallbackValue=?????, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
+          <TextBox  Height="30" Text="{Binding Path= RemotePort,  FallbackValue=?????, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
         </StackPanel>
       </Grid>
     </StackPanel>

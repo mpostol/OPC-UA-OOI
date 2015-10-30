@@ -42,10 +42,10 @@ namespace UAOOI.SemanticData.DataManagement
         switch (_ax.AssociationRole)
         {
           case AssociationRole.Consumer:
-            _newAssociation = new ConsumerAssociation(_newSemanticData, _ax.Alias, _ax.DataSet, bindingFactory, encodingFactory);
+            _newAssociation = new ConsumerAssociation(_newSemanticData, _ax.Alias, _ax, bindingFactory, encodingFactory);
             break;
           case AssociationRole.Producer:
-            _newAssociation = new ProducerAssociation(_newSemanticData, _ax.Alias, _ax.DataSet, bindingFactory, encodingFactory);
+            _newAssociation = new ProducerAssociation(_newSemanticData, _ax.Alias, _ax, bindingFactory, encodingFactory);
             break;
           default:
             break;

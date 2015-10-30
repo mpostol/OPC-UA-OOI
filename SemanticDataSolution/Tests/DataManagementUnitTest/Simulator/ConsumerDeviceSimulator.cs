@@ -86,9 +86,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
       private MessageTransportConfiguration[] GetMessageTransport()
       {
-        return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { Associations = GetTransportAssociations(), 
-                                                                                           Configuration = null, 
-                                                                                           Name = "UDP", 
+        return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { Associations = GetTransportAssociations(),
+                                                                                           Configuration = null,
+                                                                                           Name = "UDP",
                                                                                            TransportRole = AssociationRole.Consumer } };
       }
       private string[] GetTransportAssociations()
@@ -97,17 +97,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
       private AssociationConfiguration[] GetAssociations()
       {
-        return new AssociationConfiguration[] { new AssociationConfiguration() { Alias = AssociationConfigurationAlias, 
-                                                                                 AssociationRole = AssociationRole.Consumer, 
-                                                                                 DataSet = GetDataSet(), 
-                                                                                 DataSymbolicName = "DataSymbolicName",
-                                                                                 Id = AssociationConfigurationId,
-                                                                                 InformationModelURI= AssociationConfigurationInformationModelURI  
+        return new AssociationConfiguration[] {
+          new AssociationConfiguration()
+          { Alias = AssociationConfigurationAlias,
+            AssociationRole = AssociationRole.Consumer,
+            DataSet = GetMembers(),
+            DataSymbolicName = "DataSymbolicName",
+            Id = AssociationConfigurationId,
+            InformationModelURI= AssociationConfigurationInformationModelURI,
+            RepositoryGroup = m_RepositoryGroup
         } };
-      }
-      private DataSetConfiguration GetDataSet()
-      {
-        return new DataSetConfiguration() { Members = GetMembers(), RepositoryGroup = m_RepositoryGroup };
       }
       private DataMemberConfiguration[] GetMembers()
       {

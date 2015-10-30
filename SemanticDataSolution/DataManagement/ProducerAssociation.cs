@@ -25,14 +25,14 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="dataSetConfiguration">The data set configuration.</param>
     /// <param name="bindingFactory">The binding factory.</param>
     /// <param name="encodingFactory">The encoding factory.</param>
-    internal ProducerAssociation(ISemanticData data, string aliasName, DataSetConfiguration dataSetConfiguration, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
+    internal ProducerAssociation(ISemanticData data, string aliasName, AssociationConfiguration dataSetConfiguration, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
       : base(data, aliasName)
     {
       m_ProcessDataBindings =
-        dataSetConfiguration.Members.Select<DataMemberConfiguration, IProducerBinding>
+        dataSetConfiguration.DataSet.Select<DataMemberConfiguration, IProducerBinding>
         ((x) =>
         {
-          IProducerBinding _ret = x.GetProducerBinding4DataMember(dataSetConfiguration, bindingFactory, encodingFactory);
+          IProducerBinding _ret = x.GetProducerBinding4DataMember(dataSetConfiguration.RepositoryGroup, bindingFactory, encodingFactory);
           _ret.PropertyChanged += ProcessDataBindings_CollectionChanged;
           return _ret;
         }).ToArray<IProducerBinding>();

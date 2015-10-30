@@ -49,15 +49,12 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     {
       return new AssociationConfiguration[] { new AssociationConfiguration() { Alias = AssociationConfigurationAlias,
                                                                                AssociationRole = associationRole,
-                                                                               DataSet = GetDataSet(),
+                                                                               DataSet = GetMembers(),
                                                                                DataSymbolicName = "DataSymbolicName",
                                                                                Id = AssociationConfigurationId,
+                                                                               RepositoryGroup = m_RepositoryGroup,
                                                                                InformationModelURI= AssociationConfigurationInformationModelURI
         } };
-    }
-    private static DataSetConfiguration GetDataSet()
-    {
-      return new DataSetConfiguration() { Members = GetMembers(), RepositoryGroup = m_RepositoryGroup };
     }
     private static DataMemberConfiguration[] GetMembers()
     {

@@ -35,17 +35,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         Alias = "Alias".AddId(AssociationId),
         AssociationRole = Configuration.AssociationRole.Consumer,
-        DataSet = GetDataSet(),
+        DataSet = GetMembers(),
         DataSymbolicName = "DataSymbolicName".AddId(AssociationId),
         Id = Guid.NewGuid(),
+        RepositoryGroup = "RepositoryGroup".AddId(DataMemberId),
         InformationModelURI = "http://www.commsvr.com".AddId(AssociationId)
       };
     }
-    internal static DataSetConfiguration GetDataSet()
-    {
-      return new DataSetConfiguration() { Members = GetMembers(), RepositoryGroup = "RepositoryGroup".AddId(DataMemberId) };
-    }
-    private static DataMemberConfiguration[] GetMembers()
+    internal static DataMemberConfiguration[] GetMembers()
     {
       return new DataMemberConfiguration[] { GetDataMember(), GetDataMember(), GetDataMember() };
     }

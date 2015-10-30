@@ -143,7 +143,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_Association")]
     public void ProducerAssociationCreatorTestMethod()
     {
-      ProducerAssociation _npa = new ProducerAssociation(new SemanticData(), "DataManagement_ProducerAssociation", PersistentConfiguration.GetDataSet(), new BindingFactory(Repository), new IEF());
+      ProducerAssociation _npa = new ProducerAssociation(new SemanticData(), "DataManagement_ProducerAssociation", PersistentConfiguration.GetAssociationConfiguration(), new BindingFactory(Repository), new IEF());
       Assert.IsNotNull(_npa);
       Assert.IsTrue(Repository.Count > 0);
       ProducerBindingMonitoredValue<object>[] _values = Repository.Values.Cast<ProducerBindingMonitoredValue<object>>().ToArray<ProducerBindingMonitoredValue<object>>();
@@ -164,7 +164,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [ExpectedException(typeof(ArgumentNullException))]
     public void AddMessageWriterTestMethod()
     {
-      ProducerAssociation _npa = new ProducerAssociation(new SemanticData(), "DataManagement_ProducerAssociation", PersistentConfiguration.GetDataSet(), new BindingFactory(Repository), new IEF());
+      ProducerAssociation _npa = new ProducerAssociation(new SemanticData(), "DataManagement_ProducerAssociation", PersistentConfiguration.GetAssociationConfiguration(), new BindingFactory(Repository), new IEF());
       Assert.IsNotNull(_npa);
       Assert.IsTrue(Repository.Count > 0);
       _npa.AddMessageWriter(null);
@@ -176,7 +176,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_Association")]
     public void ConsumerAssociationCreatorTestMethod()
     {
-      ConsumerAssociation _ca = new ConsumerAssociation(new SemanticData(), "ConsumerAssociationCreatorTestMethod", PersistentConfiguration.GetDataSet(), new BindingFactory(Repository), new IEF());
+      ConsumerAssociation _ca = new ConsumerAssociation(new SemanticData(), "ConsumerAssociationCreatorTestMethod", PersistentConfiguration.GetAssociationConfiguration(), new BindingFactory(Repository), new IEF());
       Assert.IsNotNull(_ca);
     }
     #endregion

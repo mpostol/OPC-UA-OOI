@@ -15,29 +15,29 @@ namespace UAOOI.SemanticData.DataManagement.Configuration
   {
 
     /// <summary>
-    /// Gets the <see cref="IConsumerBinding"/> instance for data member.
+    /// Gets the <see cref="IConsumerBinding" /> instance for data member.
     /// </summary>
-    /// <param name="parent">The parent object containing collection of the DataSet members on the consumer side.</param>
+    /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="bindingFactory">The binding factory.</param>
     /// <param name="encodingFactory">The encoding factory.</param>
-    /// <returns>An instance of <see cref="IConsumerBinding"/> type.</returns>
-    internal IConsumerBinding GetConsumerBinding4DataMember(DataSetConfiguration parent, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
+    /// <returns>An instance of <see cref="IConsumerBinding" /> type.</returns>
+    internal IConsumerBinding GetConsumerBinding4DataMember(string repositoryGroup, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
     {
-      IConsumerBinding _binding = bindingFactory.GetConsumerBinding(parent.RepositoryGroup, this.ProcessValueName);
-      encodingFactory.UpdateValueConverter(_binding, parent.RepositoryGroup, this.SourceEncoding);
+      IConsumerBinding _binding = bindingFactory.GetConsumerBinding(repositoryGroup, this.ProcessValueName);
+      encodingFactory.UpdateValueConverter(_binding, repositoryGroup, this.SourceEncoding);
       return _binding;
     }
     /// <summary>
     /// Gets the consumer binding for data member.
     /// </summary>
-    /// <param name="parent">The parent.</param>
+    /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="bindingFactory">The binding factory.</param>
     /// <param name="encodingFactory">The encoding factory.</param>
-    /// <returns>An instance of <see cref="IProducerBinding"/> type.</returns>
-    internal IProducerBinding GetProducerBinding4DataMember(DataSetConfiguration parent, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
+    /// <returns>An instance of <see cref="IProducerBinding" /> type.</returns>
+    internal IProducerBinding GetProducerBinding4DataMember(string repositoryGroup, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
     {
-      IProducerBinding _binding = bindingFactory.GetProducerBinding(parent.RepositoryGroup, this.ProcessValueName);
-      encodingFactory.UpdateValueConverter(_binding, parent.RepositoryGroup, this.SourceEncoding);
+      IProducerBinding _binding = bindingFactory.GetProducerBinding(repositoryGroup, this.ProcessValueName);
+      encodingFactory.UpdateValueConverter(_binding, repositoryGroup, this.SourceEncoding);
       return _binding;
     }
     /// <summary>

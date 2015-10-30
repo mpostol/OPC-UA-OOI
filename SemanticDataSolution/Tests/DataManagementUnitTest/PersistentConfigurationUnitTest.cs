@@ -1,6 +1,5 @@
 ﻿
 using System;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.DataManagement.Configuration;
 using System.Collections.Generic;
@@ -43,14 +42,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         AssociationConfigurationDictionary.Add(_acx.Alias, _acx);
         Uri _nu = new Uri(_acx.InformationModelURI);
         Assert.IsFalse(String.IsNullOrEmpty(_acx.DataSymbolicName));
-        TestDataSet(_acx.DataSet);
+        TestDataSet(_acx);
         AssociationConfigurationGuidDictionary.Add(_acx.Id, _acx);
       }
     }
-    private void TestDataSet(DataSetConfiguration dataSetConfiguration)
+    private void TestDataSet(AssociationConfiguration dataSetConfiguration)
     {
       RepositoryGroupDictionary.Add(dataSetConfiguration.RepositoryGroup, dataSetConfiguration);
-      TestConfiguration(dataSetConfiguration.Members);
+      TestConfiguration(dataSetConfiguration.DataSet);
     }
     private void TestConfiguration(DataMemberConfiguration[] dataMemberConfiguration)
     {
@@ -65,7 +64,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private static Dictionary<string, string> AssociationsDictionary = new Dictionary<string, string>();
     private static Dictionary<string, AssociationConfiguration> AssociationConfigurationDictionary = new Dictionary<string, AssociationConfiguration>();
     private static Dictionary<Guid, AssociationConfiguration> AssociationConfigurationGuidDictionary = new Dictionary<Guid, AssociationConfiguration>();
-    private static Dictionary<string, DataSetConfiguration> RepositoryGroupDictionary = new Dictionary<string, DataSetConfiguration>();
+    private static Dictionary<string, AssociationConfiguration> RepositoryGroupDictionary = new Dictionary<string, AssociationConfiguration>();
     #endregion
 
   }

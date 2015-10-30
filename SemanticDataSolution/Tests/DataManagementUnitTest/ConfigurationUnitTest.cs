@@ -26,13 +26,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.IsFalse(String.IsNullOrEmpty(_ac.Alias));
         Assert.IsFalse(String.IsNullOrEmpty(_ac.DataSymbolicName));
         Assert.IsFalse(String.IsNullOrEmpty(_ac.InformationModelURI));
-        TestDataSets(_ac.DataSet);
+        TestDataSets(_ac);
       }
     }
-    private void TestDataSets(DataSetConfiguration dataSetConfiguration)
+    private void TestDataSets(AssociationConfiguration dataSetConfiguration)
     {
-      Assert.IsNotNull(dataSetConfiguration.Members);
-      TestMembers(dataSetConfiguration.Members);
+      Assert.IsNotNull(dataSetConfiguration.DataSet);
+      TestMembers(dataSetConfiguration.DataSet);
     }
     private void TestMembers(DataMemberConfiguration[] dataMemberConfiguration)
     {

@@ -96,15 +96,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         return new AssociationConfiguration[] { new AssociationConfiguration() { Alias = AssociationConfigurationAlias, 
                                                                                  AssociationRole = AssociationRole.Producer, 
-                                                                                 DataSet = GetDataSet(), 
+                                                                                 DataSet = GetMembers(), 
                                                                                  DataSymbolicName = "DataSymbolicName",
                                                                                  Id = AssociationConfigurationId,
+                                                                                 RepositoryGroup = m_RepositoryGroup,
                                                                                  InformationModelURI= AssociationConfigurationInformationModelURI  
         } };
-      }
-      private DataSetConfiguration GetDataSet()
-      {
-        return new DataSetConfiguration() { Members = GetMembers(), RepositoryGroup = m_RepositoryGroup };
       }
       private DataMemberConfiguration[] GetMembers()
       {

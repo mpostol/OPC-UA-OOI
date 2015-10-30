@@ -14,7 +14,7 @@ By the user interface (UI) remote host name and port numbers can be modified. Us
 
 The topics contained in this section are intended to give you quick exposure to the **UA Data Application** network based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to create **UA Data Application** producer and consumer applications.
 
-Both roles uses the same data set configuration provided by the `Configuration` class. After changing the configuration the code must be rebuilt. The remote host name/port number and the consumer port name are provided by the application configuration and may be changed using the UI.
+Both roles uses the same data set configuration provided by the `Configuration` class. After changing the configuration the code must be rebuilt. The remote host name/port number and the consumer port number are provided by the application configuration and may be changed using the UI.
 
 ### How to implement the consumer role for WPF application
 

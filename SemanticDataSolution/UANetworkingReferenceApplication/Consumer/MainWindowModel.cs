@@ -1,6 +1,5 @@
 ﻿
 using System;
-using System.Threading;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.Encoding;
 
@@ -9,7 +8,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
   internal class MainWindowModel: IBindingFactory, IEncodingFactory
   {
 
-    internal IModelViewBindingFactory ModelViewBindingFactory { get; set; }
+    internal IConsumerViewModel ViewModelBindingFactory { get; set; }
 
     #region IBindingFactory
     /// <summary>
@@ -25,7 +24,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentNullException("repositoryGroup");
-      return ModelViewBindingFactory.GetConsumerBinding(variableName);
+      return ViewModelBindingFactory.GetConsumerBinding(variableName);
     }
     /// <summary>
     /// Gets the producer binding.

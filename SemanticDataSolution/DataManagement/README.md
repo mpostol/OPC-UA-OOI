@@ -49,4 +49,6 @@ The library provides basic implementation of the `Message` class that supports p
 
 ## Testing
 
-See how it works in the unir test class: [BindingUnitTest](https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Tests/DataManagementUnitTest/BindingUnitTest.cs).
+See how it works in the unit test class: [BindingUnitTest](../Tests/DataManagementUnitTest/BindingUnitTest.cs).
+
+The [UANetworkingReferenceApplication](../UANetworkingReferenceApplication#ua-data-example-application) contains a reference WPF application.

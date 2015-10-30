@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="OPC UA Part 14 PubSub Reference Application" Height="700" Width="500" MinHeight="700" MinWidth="500" Icon="PrepareProcess.ico">
   <Window.DataContext>
-    <code:MainWindowModelView/>
+    <code:MainWindowViewModel/>
   </Window.DataContext>
   <Window.Resources>
     <Style x:Key="Title" TargetType="{x:Type Label}">

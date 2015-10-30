@@ -1,13 +1,10 @@
 ﻿
+using System.Windows.Input;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 {
-
-  /// <summary>
-  /// Interface IModelViewBindingFactory - if implemented by the ModelView class is used to created binding to UA Data received from the network.
-  /// </summary>
-  internal interface IModelViewBindingFactory
+  internal interface IConsumerViewModel
   {
 
     /// <summary>
@@ -16,6 +13,12 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     /// <param name="propertyName">Name of the property to be binded.</param>
     /// <returns>IConsumerBinding.</returns>
     IConsumerBinding GetConsumerBinding(string propertyName);
+    int ConsumerBytesReceived { get; set; }
+    int ConsumerFramesReceived { get; set; }
+    ICommand ConsumerUpdateConfiguration { get; set; }
+    int UDPPort { get; set; }
+    string ConsumerErrorMessage { get; set; }
+    void Trace(string message);
 
   }
 }

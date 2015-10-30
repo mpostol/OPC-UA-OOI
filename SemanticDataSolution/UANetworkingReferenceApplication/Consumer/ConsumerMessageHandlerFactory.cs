@@ -22,11 +22,11 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// </summary>
     /// <param name="toDispose">To dispose captures functionality to create a collection of disposable objects.
     /// The objects are disposed when application exits.</param>
-    /// <param name="m_ModelView">The ModelView instance for this object.</param>
+    /// <param name="m_ViewModel">The ViewModel instance for this object.</param>
     /// <param name="m_Trace">The delegate capturing logging functionality.</param>
-    public ConsumerMessageHandlerFactory(Action<IDisposable> toDispose, IConsumerModelView m_ModelView, Action<string> m_Trace)
+    public ConsumerMessageHandlerFactory(Action<IDisposable> toDispose, IConsumerViewModel m_ViewModel, Action<string> m_Trace)
     {
-      this.m_ParentModelView = m_ModelView;
+      this.m_ParentViewModel = m_ViewModel;
       this.m_Trace = m_Trace;
       this.m_ToDispose = toDispose;
     }
@@ -41,7 +41,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// <returns>An instance of <see cref="IMessageReader"/>.</returns>
     IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, XmlElement configuration)
     {
-      BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(UDPPortNumber, m_Trace) { m_ModelView = m_ParentModelView };
+      BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(UDPPortNumber, m_Trace) { m_ViewModel = m_ParentViewModel };
       m_ToDispose(_ret);
       m_Trace(String.Format("Created BinaryUDPPackageReader UDPPortNumber = {0}", UDPPortNumber));
       return _ret;
@@ -125,7 +125,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       }
       #endregion
 
-      internal IConsumerModelView m_ModelView;
+      internal IConsumerViewModel m_ViewModel;
       #region private
       //types
       private class MyState : IAssociationState
@@ -197,8 +197,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
           Byte[] _receiveBytes = m_UdpClient.EndReceive(asyncResult, ref _UEndPoint);
           m_NumberOfPackages++;
           m_NumberOfBytes += _receiveBytes.Length;
-          m_ModelView.ConsumerFramesReceived = m_NumberOfPackages;
-          m_ModelView.ConsumerBytesReceived = m_NumberOfBytes;
+          m_ViewModel.ConsumerFramesReceived = m_NumberOfPackages;
+          m_ViewModel.ConsumerBytesReceived = m_NumberOfBytes;
           m_Trace(String.Format("Received length ={0}", _receiveBytes == null ? -1 : _receiveBytes.Length));
           MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
           base.OnNewFrameArrived(new UABinaryReader(_stream));
@@ -229,7 +229,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 
     }
     private Action<IDisposable> m_ToDispose;
-    private IConsumerModelView m_ParentModelView;
+    private IConsumerViewModel m_ParentViewModel;
     private Action<string> m_Trace;
     #endregion
 

@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 {
-  internal interface IProducerModelView
+  internal interface IProducerViewModel
   {
     int BytesSent { get; set; }
     int PackagesSent { get; set; }

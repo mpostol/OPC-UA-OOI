@@ -20,7 +20,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       GalaSoft.MvvmLight.Threading.DispatcherHelper.Initialize();
       // Open a window
       MainWindow window = new MainWindow();
-      MainWindowModelView _cbf = (MainWindowModelView)window.DataContext;
+      MainWindowViewModel _cbf = (MainWindowViewModel)window.DataContext;
       Consumer.ConsumerDataManagementSetup.CreateDevice(_cbf, x => m_DisposableCollection.Add(x));
       Producer.OPCUAServerProducerSimulator.CreateDevice(x => m_DisposableCollection.Add(x), y => m_Log.Add(y), _cbf);
       window.Show();

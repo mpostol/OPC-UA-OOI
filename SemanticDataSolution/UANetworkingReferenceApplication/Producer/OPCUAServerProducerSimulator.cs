@@ -13,12 +13,12 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
   internal sealed class OPCUAServerProducerSimulator : DataManagementSetup, IDisposable
   {
     #region creator
-    internal static void CreateDevice(Action<IDisposable> toDispose, Action<string> trace, IProducerModelView modelView)
+    internal static void CreateDevice(Action<IDisposable> toDispose, Action<string> trace, IProducerViewModel ViewModel)
     {
       Current = new OPCUAServerProducerSimulator();
       toDispose(Current);
       Current.m_Trace = trace;
-      Current.m_ModelView = modelView;
+      Current.m_ViewModel = ViewModel;
       Current.Setup();
     }
     #endregion
@@ -60,26 +60,26 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     }
     private List<IDisposable> m_ToDispose = new List<IDisposable>();
     private Action<string> m_Trace;
-    private IProducerModelView m_ModelView;
+    private IProducerViewModel m_ViewModel;
     private void Setup()
     {
       try
       {
-        m_ModelView.ProducerRestart = new RestartCommand(Current.Restart);
+        m_ViewModel.ProducerRestart = new RestartCommand(Current.Restart);
         Current.ConfigurationFactory = new ProducerConfigurationFactory();
         CustomNodeManager _simulator = new CustomNodeManager();
         m_ToDispose.Add(_simulator);
         Current.BindingFactory = _simulator;
         Current.EncodingFactory = _simulator;
-        Current.MessageHandlerFactory = new ProducerMessageHandlerFactory(x => m_ToDispose.Add(x), m_Trace, m_ModelView);
+        Current.MessageHandlerFactory = new ProducerMessageHandlerFactory(x => m_ToDispose.Add(x), m_Trace, m_ViewModel);
         Current.Initialize();
         Current.Run();
         _simulator.Run();
-        m_ModelView.ProducerErrorMessage = "Running";
+        m_ViewModel.ProducerErrorMessage = "Running";
       }
       catch (Exception ex)
       {
-        m_ModelView.ProducerErrorMessage = String.Format("Error: {0}", ex.Message);
+        m_ViewModel.ProducerErrorMessage = String.Format("Error: {0}", ex.Message);
         Dispose();
       }
     }

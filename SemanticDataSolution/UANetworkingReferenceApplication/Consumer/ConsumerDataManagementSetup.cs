@@ -18,12 +18,12 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// To dispose captures functionality to create a collection of disposable objects. 
     /// The objects are disposed when application exits.
     /// </param>
-    internal static void CreateDevice(IConsumerModelView modelView, Action<IDisposable> toDispose)
+    internal static void CreateDevice(IConsumerViewModel ViewModel, Action<IDisposable> toDispose)
     {
       Current = new ConsumerDataManagementSetup();
       toDispose(Current);
-      Current.m_ModelView = modelView;
-      modelView.ConsumerUpdateConfiguration = new RestartCommand(Current.Restart);
+      Current.m_ViewModel = ViewModel;
+      ViewModel.ConsumerUpdateConfiguration = new RestartCommand(Current.Restart);
       Current.Setup();
     }
     #endregion
@@ -31,7 +31,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     #region IDisposable
     public void Dispose()
     {
-      m_ModelView.Trace("Entering Dispose");
+      m_ViewModel.Trace("Entering Dispose");
       foreach (IDisposable _2Dispose in m_ToDispose)
         _2Dispose.Dispose();
       m_ToDispose.Clear();
@@ -65,32 +65,32 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       private Action m_restart;
     }
     private List<IDisposable> m_ToDispose = new List<IDisposable>();
-    private IConsumerModelView m_ModelView;
+    private IConsumerViewModel m_ViewModel;
     private void Setup()
     {
       try
       {
-        m_ModelView.Trace("Entering Setup");
+        m_ViewModel.Trace("Entering Setup");
         Current.ConfigurationFactory = new ConsumerConfigurationFactory();
-        MainWindowModel _model = new MainWindowModel() { ModelViewBindingFactory = m_ModelView };
+        MainWindowModel _model = new MainWindowModel() { ViewModelBindingFactory = m_ViewModel };
         Current.BindingFactory = _model;
         Current.EncodingFactory = _model;
-        Current.MessageHandlerFactory = new ConsumerMessageHandlerFactory(x => m_ToDispose.Add(x), m_ModelView, m_ModelView.Trace);
-        m_ModelView.Trace("Initialize consumer engine.");
+        Current.MessageHandlerFactory = new ConsumerMessageHandlerFactory(x => m_ToDispose.Add(x), m_ViewModel, m_ViewModel.Trace);
+        m_ViewModel.Trace("Initialize consumer engine.");
         Current.Initialize();
-        m_ModelView.Trace("On start receiving UDP frames.");
+        m_ViewModel.Trace("On start receiving UDP frames.");
         Current.Run();
-        m_ModelView.ConsumerErrorMessage = "Running";
+        m_ViewModel.ConsumerErrorMessage = "Running";
       }
       catch (Exception ex)
       {
-        m_ModelView.ConsumerErrorMessage = String.Format("Error: {0}", ex.Message);
+        m_ViewModel.ConsumerErrorMessage = String.Format("Error: {0}", ex.Message);
         Dispose();
       }
     }
     private void Restart()
     {
-      m_ModelView.Trace("Entering Restart");
+      m_ViewModel.Trace("Entering Restart");
       Dispose();
       Setup();
     }

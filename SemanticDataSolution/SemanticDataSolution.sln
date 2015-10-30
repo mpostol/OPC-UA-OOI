@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UANetworkingReferenceApplic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architecture", "{D538BF73-285D-4E99-835B-6CD7AE870163}"
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "UANetworkingArchitecture", "Architecture\ModelingProject\UANetworkingArchitecture\UANetworkingArchitecture.modelproj", "{90E262B4-C902-468B-9FCA-0D694B0BBF76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{F0ACCB28-AE0D-4E19-94FA-7BE3044F1EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0ACCB28-AE0D-4E19-94FA-7BE3044F1EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0ACCB28-AE0D-4E19-94FA-7BE3044F1EEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90E262B4-C902-468B-9FCA-0D694B0BBF76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90E262B4-C902-468B-9FCA-0D694B0BBF76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90E262B4-C902-468B-9FCA-0D694B0BBF76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90E262B4-C902-468B-9FCA-0D694B0BBF76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,5 +108,6 @@ Global
 		{37D26B63-74FE-45C6-9F61-251BDF69EDF7} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
 		{DDE02168-1EAD-41D9-B5E6-FB101F98AC24} = {78EDB72A-77B1-4A64-8E76-17E780993017}
 		{F7C29437-0923-449C-B4E9-36653A55C3E5} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
+		{90E262B4-C902-468B-9FCA-0D694B0BBF76} = {D538BF73-285D-4E99-835B-6CD7AE870163}
 	EndGlobalSection
 EndGlobal

@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using UAOOI.SemanticData.DataManagement.Configuration;
 using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
@@ -95,10 +94,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         return new string[] { AssociationConfigurationAlias };
       }
-      private AssociationConfiguration[] GetAssociations()
+      private DataSetConfiguration[] GetAssociations()
       {
-        return new AssociationConfiguration[] {
-          new AssociationConfiguration()
+        return new DataSetConfiguration[] {
+          new DataSetConfiguration()
           { Alias = AssociationConfigurationAlias,
             AssociationRole = AssociationRole.Consumer,
             DataSet = GetMembers(),

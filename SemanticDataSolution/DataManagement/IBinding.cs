@@ -3,7 +3,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace UAOOI.SemanticData.DataManagement.DataRepository
+namespace UAOOI.SemanticData.DataManagement
 {
 
   /// <summary>

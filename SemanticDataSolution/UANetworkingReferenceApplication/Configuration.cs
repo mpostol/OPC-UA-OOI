@@ -45,9 +45,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     {
       return new string[] { AssociationConfigurationAlias };
     }
-    private static AssociationConfiguration[] GetAssociations(AssociationRole associationRole)
+    private static DataSetConfiguration[] GetAssociations(AssociationRole associationRole)
     {
-      return new AssociationConfiguration[] { new AssociationConfiguration() { Alias = AssociationConfigurationAlias,
+      return new DataSetConfiguration[] { new DataSetConfiguration() { Alias = AssociationConfigurationAlias,
                                                                                AssociationRole = associationRole,
                                                                                DataSet = GetMembers(),
                                                                                DataSymbolicName = "DataSymbolicName",

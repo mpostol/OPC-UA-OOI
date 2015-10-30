@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.DataManagement.Configuration
   {
 
     [DataMember]
-    public AssociationConfiguration[] Associations { get; set; }
+    public DataSetConfiguration[] Associations { get; set; }
     [DataMember]
     public MessageTransportConfiguration[] MessageTransport { get; set; }
 

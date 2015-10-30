@@ -1,6 +1,7 @@
 ﻿
+using UAOOI.SemanticData.DataManagement.DataRepository;
 
-namespace UAOOI.SemanticData.DataManagement.DataRepository
+namespace UAOOI.SemanticData.DataManagement
 {
 
   /// <summary>

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UAOOI.SemanticData.DataManagement.Configuration;
 using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement
@@ -20,12 +19,12 @@ namespace UAOOI.SemanticData.DataManagement
     /// <summary>
     /// Initializes a new instance of the <see cref="ProducerAssociation"/> class.
     /// </summary>
-    /// <param name="data">The semanti data description.</param>
+    /// <param name="data">The semantic data description.</param>
     /// <param name="aliasName">Name of the alias - .</param>
     /// <param name="dataSetConfiguration">The data set configuration.</param>
     /// <param name="bindingFactory">The binding factory.</param>
     /// <param name="encodingFactory">The encoding factory.</param>
-    internal ProducerAssociation(ISemanticData data, string aliasName, AssociationConfiguration dataSetConfiguration, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
+    internal ProducerAssociation(ISemanticData data, string aliasName, DataSetConfiguration dataSetConfiguration, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
       : base(data, aliasName)
     {
       m_ProcessDataBindings =

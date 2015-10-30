@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using UAOOI.SemanticData.DataManagement.Configuration;
-using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement
@@ -30,11 +28,11 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="encodingFactory">The encoding factory responsible to updated the created <see cref="IBinding"/> by provisioning all information necessary for encoding/decoding including <see cref="IValueConverter"/>.</param>
     /// <returns>New dictionary of type <see cref="AssociationsCollection"/>.</returns>
     /// <exception cref="System.ArgumentOutOfRangeException">Alias; Alias of any <see cref="Association"/> must be unique.</exception>
-    internal static AssociationsCollection CreateAssociations(AssociationConfiguration[] configuration, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
+    internal static AssociationsCollection CreateAssociations(DataSetConfiguration[] configuration, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
     {
       AssociationsCollection _collection = new AssociationsCollection();
       Association _newAssociation = null;
-      foreach (AssociationConfiguration _ax in configuration)
+      foreach (DataSetConfiguration _ax in configuration)
       {
         if (_collection.ContainsKey(_ax.Alias))
           throw new ArgumentOutOfRangeException("Alias", "Alias of any Association must be unique");

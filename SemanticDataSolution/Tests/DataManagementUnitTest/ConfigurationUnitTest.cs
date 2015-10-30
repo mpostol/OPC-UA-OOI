@@ -18,9 +18,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_cnf.Associations);
       TestAssociations(_cnf.Associations);
     }
-    private void TestAssociations(AssociationConfiguration[] associationConfiguration)
+    private void TestAssociations(DataSetConfiguration[] associationConfiguration)
     {
-      foreach (AssociationConfiguration _ac in associationConfiguration)
+      foreach (DataSetConfiguration _ac in associationConfiguration)
       {
         Assert.IsNotNull(_ac.DataSet);
         Assert.IsFalse(String.IsNullOrEmpty(_ac.Alias));
@@ -29,7 +29,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         TestDataSets(_ac);
       }
     }
-    private void TestDataSets(AssociationConfiguration dataSetConfiguration)
+    private void TestDataSets(DataSetConfiguration dataSetConfiguration)
     {
       Assert.IsNotNull(dataSetConfiguration.DataSet);
       TestMembers(dataSetConfiguration.DataSet);

@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Threading;
 using UAOOI.SemanticData.DataManagement;
 using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
 {

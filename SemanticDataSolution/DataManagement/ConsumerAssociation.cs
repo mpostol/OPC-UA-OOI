@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using UAOOI.SemanticData.DataManagement.Configuration;
 using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement
@@ -27,7 +26,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// <exception cref="System.NullReferenceException">itemConfiguration argument must not be null
     /// or
     /// members argument must not be null</exception>
-    internal ConsumerAssociation(ISemanticData data, string aliasName, AssociationConfiguration dataSetConfiguration, IBindingFactory bindingFactory, IEncodingFactory encodingFactory) :
+    internal ConsumerAssociation(ISemanticData data, string aliasName, DataSetConfiguration dataSetConfiguration, IBindingFactory bindingFactory, IEncodingFactory encodingFactory) :
       base(data, aliasName)
     {
       m_ProcessDataBindings = dataSetConfiguration.DataSet.Select<DataMemberConfiguration, IConsumerBinding>(x => x.GetConsumerBinding4DataMember(dataSetConfiguration.RepositoryGroup, bindingFactory, encodingFactory)).ToArray<IConsumerBinding>();

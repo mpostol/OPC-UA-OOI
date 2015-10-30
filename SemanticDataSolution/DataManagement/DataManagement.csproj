@@ -54,24 +54,26 @@
     <Compile Include="AssociationsCollection.cs" />
     <Compile Include="AssociationStateChangedEventArgs.cs" />
     <Compile Include="Configuration\AssociationConfiguration.cs" />
+    <Compile Include="Configuration\AssociationRole.cs" />
     <Compile Include="Configuration\ConfigurationData.cs" />
     <Compile Include="Configuration\ConfigurationData.static.cs" />
     <Compile Include="Configuration\ConfigurationFactoryBase.cs" />
     <Compile Include="Configuration\DataMemberConfiguration.cs" />
+    <Compile Include="Configuration\DataMemberConfiguration.helpers.cs" />
     <Compile Include="Configuration\DataSetConfiguration.cs" />
-    <Compile Include="Configuration\IConfigurationFactory.cs" />
+    <Compile Include="IConfigurationFactory.cs" />
     <Compile Include="DataRepository\Binding.cs" />
     <Compile Include="Configuration\MessageTransportConfiguration.cs" />
     <Compile Include="ConsumerAssociation.cs" />
     <Compile Include="DataRepository\ConsumerBinding.cs" />
     <Compile Include="DataManagementSetup.cs" />
     <Compile Include="DataRepository\ConsumerBindingMonitoredValue.cs" />
-    <Compile Include="Encoding\IEncodingFactory.cs" />
+    <Compile Include="IEncodingFactory.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="HandlerState.cs" />
     <Compile Include="IAssociationState.cs" />
-    <Compile Include="DataRepository\IBinding.cs" />
-    <Compile Include="DataRepository\IBindingFactory.cs" />
+    <Compile Include="IBinding.cs" />
+    <Compile Include="IBindingFactory.cs" />
     <Compile Include="DataRepository\IConsumerBinding.cs" />
     <Compile Include="IDataUniqueIdentifier.cs" />
     <Compile Include="MessageEventArg.cs" />
@@ -108,7 +110,9 @@
     <None Include="README.md" />
     <None Include="READMEGettingStartedTutorial.md" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Encoding\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

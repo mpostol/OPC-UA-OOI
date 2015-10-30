@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       return new ConfigurationData()
         {
-          Associations = new AssociationConfiguration[] { GetAssociationConfiguration(), GetAssociationConfiguration(), GetAssociationConfiguration() },
+          Associations = new DataSetConfiguration[] { GetAssociationConfiguration(), GetAssociationConfiguration(), GetAssociationConfiguration() },
           MessageTransport = new MessageTransportConfiguration[] { GetMessageTransportConfiguration(), GetMessageTransportConfiguration(), GetMessageTransportConfiguration() }
 
         };
@@ -29,9 +29,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
         TransportRole = AssociationRole.Consumer
       };
     }
-    internal static AssociationConfiguration GetAssociationConfiguration()
+    internal static DataSetConfiguration GetAssociationConfiguration()
     {
-      return new AssociationConfiguration()
+      return new DataSetConfiguration()
       {
         Alias = "Alias".AddId(AssociationId),
         AssociationRole = Configuration.AssociationRole.Consumer,

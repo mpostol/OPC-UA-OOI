@@ -49,6 +49,6 @@ The library provides basic implementation of the `Message` class that supports p
 
 ## Testing
 
-See how it works in the unit test class: [BindingUnitTest](../Tests/DataManagementUnitTest/BindingUnitTest.cs).
+See how it works in the unit test class: [BindingUnitTest](../Tests/DataManagementUnitTest).
 
 The [UANetworkingReferenceApplication](../UANetworkingReferenceApplication#ua-data-example-application) contains a reference WPF application.

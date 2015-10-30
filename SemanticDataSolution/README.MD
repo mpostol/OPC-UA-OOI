@@ -18,7 +18,7 @@ Integration services are responsible for exchanging the data and metadata with o
 * XML gateway - ii factories objects using the message content and serializes them into XML text representation for further processing
 * External database archival - collects data received in the messages and archives it in the database
 
-In all the cases above the destination representation, i.e. message content, object types and database schema can be prepared in advance at design stage using the OPC UA Information Model.
+In all the cases above the destination representation, i.e. message content, object types and database schema can be prepared in advance at design time using the OPC UA Information Model.
 
 ![Domain Model] (./Media/UADataIntegrationServices.Domain.png)
 

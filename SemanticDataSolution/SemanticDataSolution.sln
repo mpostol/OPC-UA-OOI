@@ -40,6 +40,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManagementUnitTest", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UANetworkingReferenceApplication", "UANetworkingReferenceApplication\UANetworkingReferenceApplication.csproj", "{F0ACCB28-AE0D-4E19-94FA-7BE3044F1EEB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architecture", "{D538BF73-285D-4E99-835B-6CD7AE870163}"
+	ProjectSection(SolutionItems) = preProject
+		Architecture\UAOOI.UANetworkingReferenceApplication.dgml = Architecture\UAOOI.UANetworkingReferenceApplication.dgml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

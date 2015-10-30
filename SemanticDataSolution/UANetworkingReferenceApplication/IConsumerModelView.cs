@@ -1,5 +1,4 @@
 ﻿
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
@@ -11,8 +10,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     ICommand ConsumerUpdateConfiguration { get; set; }
     int UDPPort { get; set; }
     string ConsumerErrorMessage { get; set; }
-    ObservableCollection<string> ConsumerLog { get; set; }
-
+    void Trace(string message);
 
   }
 }

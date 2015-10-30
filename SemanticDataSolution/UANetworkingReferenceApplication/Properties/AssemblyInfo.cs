@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("UAOOI.UANetworkingReferenceApplication")]
 [assembly: AssemblyDescription("UAOOI SemanticData UA-Networking Reference Application.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("mpostol")]
+[assembly: AssemblyCompany("mpostol commsvr.com")]
 [assembly: AssemblyProduct("UAOOI")]
 [assembly: AssemblyCopyright("Copyright commsvr.com ©  2015")]
 [assembly: AssemblyTrademark("")]

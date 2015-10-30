@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
         xmlns:code="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
         mc:Ignorable="d"
-        Title="OPC UA Part 14 PubSub Reference Application" Height="700" Width="500" MinHeight="700" MinWidth="500">
+        Title="OPC UA Part 14 PubSub Reference Application" Height="700" Width="500" MinHeight="700" MinWidth="500" Icon="PrepareProcess.ico">
   <Window.DataContext>
     <code:MainWindowModelView/>
   </Window.DataContext>

@@ -10,7 +10,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
   /// </summary>
   public partial class App : Application
   {
-
     /// <summary>
     /// Handles the Startup event of the App control.
     /// </summary>
@@ -18,6 +17,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     /// <param name="e">The <see cref="StartupEventArgs"/> instance containing the event data.</param>
     private void App_Startup(object sender, StartupEventArgs e)
     {
+      GalaSoft.MvvmLight.Threading.DispatcherHelper.Initialize();
       // Open a window
       MainWindow window = new MainWindow();
       MainWindowModelView _cbf = (MainWindowModelView)window.DataContext;

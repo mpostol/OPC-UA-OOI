@@ -20,6 +20,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       b_UDPPort = Properties.Settings.Default.UDPPort;
       b_RemoteHost = Properties.Settings.Default.RemoteHostName;
       b_RemotePort = Properties.Settings.Default.RemoteUDPPortNumber;
+      b_ConsumerLog = new ObservableCollection<string>();
     }
 
     #region API
@@ -44,7 +45,14 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       throw new ArgumentOutOfRangeException("variableName");
     }
     #endregion
-
+    /// <summary>
+    /// Add the message to the <see cref="MainWindowModelView.ConsumerLog"/>.
+    /// </summary>
+    /// <param name="message">The message to be added to the log <see cref="MainWindowModelView.ConsumerLog"/>.</param>
+    public void Trace(string message)
+    {
+      GalaSoft.MvvmLight.Threading.DispatcherHelper.RunAsync((() => ConsumerLog.Add(message)));
+    }
     #region Consumer User Interface - ModelView implementation
     /// <summary>
     /// Gets or sets the value1 - an example of OPC UA data binded to the <see cref="System.Windows.Controls.TextBox"/>.

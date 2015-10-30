@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 using UAOOI.SemanticData.DataManagement;
 
@@ -24,8 +23,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       Current = new ConsumerDataManagementSetup();
       toDispose(Current);
       Current.m_ModelView = modelView;
-      modelView.ConsumerLog = new ObservableCollection<string>();
-      Current.m_Trace = x => modelView.ConsumerLog.Add(x);
       modelView.ConsumerUpdateConfiguration = new RestartCommand(Current.Restart);
       Current.Setup();
     }
@@ -34,7 +31,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     #region IDisposable
     public void Dispose()
     {
-      m_Trace("Entering Dispose");
+      m_ModelView.Trace("Entering Dispose");
       foreach (IDisposable _2Dispose in m_ToDispose)
         _2Dispose.Dispose();
       m_ToDispose.Clear();
@@ -68,21 +65,20 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       private Action m_restart;
     }
     private List<IDisposable> m_ToDispose = new List<IDisposable>();
-    private Action<string> m_Trace;
     private IConsumerModelView m_ModelView;
     private void Setup()
     {
       try
       {
-        m_Trace("Entering Setup");
+        m_ModelView.Trace("Entering Setup");
         Current.ConfigurationFactory = new ConsumerConfigurationFactory();
         MainWindowModel _model = new MainWindowModel() { ModelViewBindingFactory = m_ModelView };
         Current.BindingFactory = _model;
         Current.EncodingFactory = _model;
-        Current.MessageHandlerFactory = new ConsumerMessageHandlerFactory(x => m_ToDispose.Add(x), m_ModelView, m_Trace);
-        m_Trace("Initialize consumer engine.");
+        Current.MessageHandlerFactory = new ConsumerMessageHandlerFactory(x => m_ToDispose.Add(x), m_ModelView, m_ModelView.Trace);
+        m_ModelView.Trace("Initialize consumer engine.");
         Current.Initialize();
-        m_Trace("On start receiving UDP frames.");
+        m_ModelView.Trace("On start receiving UDP frames.");
         Current.Run();
         m_ModelView.ConsumerErrorMessage = "Running";
       }
@@ -94,7 +90,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     }
     private void Restart()
     {
-      m_Trace("Entering Restart");
+      m_ModelView.Trace("Entering Restart");
       Dispose();
       Setup();
     }

@@ -29,7 +29,7 @@ The Model layer in the MVVM pattern is implemented by classes located in the `Co
 
 ### How to: Implement producer role for OPC UA server
 
-The class `CustomNodeManager` captures implementation of an interface between the library and an object supporting  **Address Space Management** (described in  [OPC UA Data Processing Outside the Server](../#concept)) functionality in the typical OPC UA server. The **Address Space Management** instantiates the server address space, i.e. creates the nodes and binds the nodes with underlying external behavior. The example contains two `Value` attributes implemented as an instance of class `ProducerBindingMonitoredValue`. Modification of the `ProducerBindingMonitoredValue<type>.MonitoredValue` provides notification to the message handling machine state that new value is available.
+The class `CustomNodeManager` captures implementation of an interface between the library and an object supporting  **Address Space Management** (described in  [OPC UA Data Processing Outside the Server](../#concept)) functionality in the typical OPC UA server. The **Address Space Management** instantiates the server address space, i.e. creates the nodes and binds the nodes with underlying external behavior. The example contains two `Value` attributes implemented as an instance of class `ProducerBindingMonitoredValue`. Modification of the `ProducerBindingMonitoredValue<type>.MonitoredValue` provides notification to the message handling state machine that a new value is available.
 
 In the pre-release version the class `CustomNodeManager` simulates underlying process using random numbers and current time.
 

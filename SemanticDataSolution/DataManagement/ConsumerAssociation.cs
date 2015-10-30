@@ -19,17 +19,16 @@ namespace UAOOI.SemanticData.DataManagement
     /// Initializes a new instance of the <see cref="ConsumerAssociation" /> class.
     /// </summary>
     /// <param name="data">The data.</param>
-    /// <param name="aliasName">Name of the alias.</param>
-    /// <param name="dataSetConfiguration">The members.</param>
+    /// <param name="dataSet">The members.</param>
     /// <param name="bindingFactory">The binding factory.</param>
     /// <param name="encodingFactory">The encoding factory.</param>
     /// <exception cref="System.NullReferenceException">itemConfiguration argument must not be null
     /// or
     /// members argument must not be null</exception>
-    internal ConsumerAssociation(ISemanticData data, string aliasName, DataSetConfiguration dataSetConfiguration, IBindingFactory bindingFactory, IEncodingFactory encodingFactory) :
-      base(data, aliasName)
+    internal ConsumerAssociation(ISemanticData data, DataSetConfiguration dataSet, IBindingFactory bindingFactory, IEncodingFactory encodingFactory) :
+      base(data, dataSet.AssociationName)
     {
-      m_ProcessDataBindings = dataSetConfiguration.DataSet.Select<DataMemberConfiguration, IConsumerBinding>(x => x.GetConsumerBinding4DataMember(dataSetConfiguration.RepositoryGroup, bindingFactory, encodingFactory)).ToArray<IConsumerBinding>();
+      m_ProcessDataBindings = dataSet.DataSet.Select<DataMemberConfiguration, IConsumerBinding>(x => x.GetConsumerBinding4DataMember(dataSet.RepositoryGroup, bindingFactory, encodingFactory)).ToArray<IConsumerBinding>();
     }
     #endregion
 

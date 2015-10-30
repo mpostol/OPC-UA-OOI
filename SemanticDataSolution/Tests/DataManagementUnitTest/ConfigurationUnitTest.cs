@@ -23,7 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       foreach (DataSetConfiguration _ac in associationConfiguration)
       {
         Assert.IsNotNull(_ac.DataSet);
-        Assert.IsFalse(String.IsNullOrEmpty(_ac.Alias));
+        Assert.IsFalse(String.IsNullOrEmpty(_ac.AssociationName));
         Assert.IsFalse(String.IsNullOrEmpty(_ac.DataSymbolicName));
         Assert.IsFalse(String.IsNullOrEmpty(_ac.InformationModelURI));
         TestDataSets(_ac);

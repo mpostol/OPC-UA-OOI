@@ -19,7 +19,7 @@ namespace UAOOI.SemanticData.DataManagement.Configuration
     [DataMember]
     public AssociationRole AssociationRole { get; set; }
     [DataMember]
-    public string Alias { get; set; }
+    public string AssociationName { get; set; }
     /// <summary>
     /// Gets or sets the repository group - add groping possibility to the configuration if this configuration is common for large number of devices.
     /// </summary>

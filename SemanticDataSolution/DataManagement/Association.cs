@@ -20,19 +20,13 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="data">The UA Semantic Data triple representation. It id not used by current implementation.</param>
     /// <param name="aliasName">A readable alias name for this instance to be used on User Interface.
     /// Depending on the implementation this name is used to filter packages against the destination.</param>
-    /// <param name="id">The identifier of the DataSet selected to be processes by this instance.</param>
-    /// <exception cref="System.NullReferenceException">
-    /// data argument must not be null
+    /// <exception cref="System.NullReferenceException">data argument must not be null
     /// or
-    /// aliasName argument must not be null
-    /// </exception>
-    /// <remarks>
-    /// The DataSet has the following identifiers
-    ///  - <see cref="Association.DataDescriptor"/>: not used by current implementation
-    ///  - <see cref="Association.AssociationId"/>: <see cref="Guid"/> generated for the 
-    ///  - <see cref="Association.DataDescriptor"/>: not used by current implementation
-    /// </remarks>
-    /// <exception cref="System.ArgumentOutOfRangeException">id; id must not be empty</exception>
+    /// aliasName argument must not be null</exception>
+    /// <exception cref="System.ArgumentOutOfRangeException">data argument must not be null
+    /// or
+    /// aliasName argument must not be null</exception>
+    /// <remarks>The DataSet has the following identifiers <see cref="Association.DataDescriptor" />
     internal Association(ISemanticData data, string aliasName)
     {
       if (data == null)

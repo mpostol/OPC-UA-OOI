@@ -39,8 +39,8 @@ namespace UAOOI.SemanticData.DataManagement
             break;
         }
         _collection.Add(item.Name, _handler);
-        foreach (string _association in item.Associations)
-          addMessageHandler(_association, _handler);
+        foreach (string _associationName in item.AssociationNames)
+          addMessageHandler(_associationName, _handler);
       }
       return _collection;
     }

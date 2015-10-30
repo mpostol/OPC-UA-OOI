@@ -81,11 +81,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       /// <exception cref="System.NotImplementedException"></exception>
       private ConfigurationData m_GetConfiguration()
       {
-        return new ConfigurationData() { Associations = GetAssociations(), MessageTransport = GetMessageTransport() };
+        return new ConfigurationData() { Associations = GetAssociations(), MessageHandlers = GetMessageTransport() };
       }
       private MessageTransportConfiguration[] GetMessageTransport()
       {
-        return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { Associations = GetTransportAssociations(),
+        return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { AssociationNames = GetTransportAssociations(),
                                                                                            Configuration = null,
                                                                                            Name = "UDP",
                                                                                            TransportRole = AssociationRole.Consumer } };
@@ -98,7 +98,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         return new DataSetConfiguration[] {
           new DataSetConfiguration()
-          { Alias = AssociationConfigurationAlias,
+          { AssociationName = AssociationConfigurationAlias,
             AssociationRole = AssociationRole.Consumer,
             DataSet = GetMembers(),
             DataSymbolicName = "DataSymbolicName",

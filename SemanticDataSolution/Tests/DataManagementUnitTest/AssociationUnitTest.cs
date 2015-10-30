@@ -175,7 +175,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_Association")]
     public void ConsumerAssociationCreatorTestMethod()
     {
-      ConsumerAssociation _ca = new ConsumerAssociation(new SemanticData(), "ConsumerAssociationCreatorTestMethod", PersistentConfiguration.GetAssociationConfiguration(), new BindingFactory(Repository), new IEF());
+      ConsumerAssociation _ca = new ConsumerAssociation(new SemanticData(), PersistentConfiguration.GetAssociationConfiguration(), new BindingFactory(Repository), new IEF());
       Assert.IsNotNull(_ca);
     }
     #endregion

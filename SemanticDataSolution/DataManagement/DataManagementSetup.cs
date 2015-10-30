@@ -74,7 +74,7 @@ namespace UAOOI.SemanticData.DataManagement
       ConfigurationData _configuration = ConfigurationFactory.GetConfiguration();
       AssociationsCollection = AssociationsCollection.CreateAssociations(_configuration.Associations, BindingFactory, EncodingFactory);
       ConfigurationFactory.OnAssociationConfigurationChange += AssociationsCollection.OnConfigurationChangeHandler;
-      MessageHandlersCollection = MessageHandlersCollection.CreateMessageHandlers(_configuration.MessageTransport, MessageHandlerFactory, AssociationsCollection.AddMessageHandler);
+      MessageHandlersCollection = MessageHandlersCollection.CreateMessageHandlers(_configuration.MessageHandlers, MessageHandlerFactory, AssociationsCollection.AddMessageHandler);
       ConfigurationFactory.OnMessageHandlerConfigurationChange += MessageHandlersCollection.OnConfigurationChangeHandler;
     }
     /// <summary>

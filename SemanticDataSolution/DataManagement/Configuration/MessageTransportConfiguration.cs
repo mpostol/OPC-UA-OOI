@@ -10,11 +10,10 @@ namespace UAOOI.SemanticData.DataManagement.Configuration
   {
     
     public string Name { get; set; }
-    public string[] Associations { get; set; }
+    public string[] AssociationNames { get; set; }
     public XmlElement Configuration { get; set; }
     public AssociationRole TransportRole { get; set; }
 
   }
-
 
 }

@@ -32,39 +32,39 @@ namespace UAOOI.SemanticData.DataManagement
     {
       AssociationsCollection _collection = new AssociationsCollection();
       Association _newAssociation = null;
-      foreach (DataSetConfiguration _ax in configuration)
+      foreach (DataSetConfiguration _dataSet in configuration)
       {
-        if (_collection.ContainsKey(_ax.Alias))
+        if (_collection.ContainsKey(_dataSet.AssociationName))
           throw new ArgumentOutOfRangeException("Alias", "Alias of any Association must be unique");
-        SemanticData _newSemanticData = new SemanticData(new Uri(_ax.InformationModelURI), _ax.DataSymbolicName, null, _ax.Id);
-        switch (_ax.AssociationRole)
+        SemanticData _newSemanticData = new SemanticData(new Uri(_dataSet.InformationModelURI), _dataSet.DataSymbolicName, null, _dataSet.Id);
+        switch (_dataSet.AssociationRole)
         {
           case AssociationRole.Consumer:
-            _newAssociation = new ConsumerAssociation(_newSemanticData, _ax.Alias, _ax, bindingFactory, encodingFactory);
+            _newAssociation = new ConsumerAssociation(_newSemanticData, _dataSet, bindingFactory, encodingFactory);
             break;
           case AssociationRole.Producer:
-            _newAssociation = new ProducerAssociation(_newSemanticData, _ax.Alias, _ax, bindingFactory, encodingFactory);
+            _newAssociation = new ProducerAssociation(_newSemanticData, _dataSet.AssociationName, _dataSet, bindingFactory, encodingFactory);
             break;
           default:
             break;
         }
-        _collection.Add(_ax.Alias, _newAssociation);
+        _collection.Add(_dataSet.AssociationName, _newAssociation);
       }
       return _collection;
     }
     /// <summary>
-    /// Adds the message handler to the selected by the <paramref name="associationAlias" />.
+    /// Adds the message handler to the selected by the <paramref name="associationName" />.
     /// </summary>
     /// <remarks>
-    /// If this dictionary does not contain the <paramref name="associationAlias"/> key the request is skipped - no action is undertaken.
+    /// If this dictionary does not contain the <paramref name="associationName"/> key the request is skipped - no action is undertaken.
     /// </remarks>
-    /// <param name="associationAlias">The association alias.</param>
+    /// <param name="associationName">The association alias.</param>
     /// <param name="messageHandler">The message handler to be associated.</param>
-    internal void AddMessageHandler(string associationAlias, IMessageHandler messageHandler)
+    internal void AddMessageHandler(string associationName, IMessageHandler messageHandler)
     {
-      if (!this.ContainsKey(associationAlias))
+      if (!this.ContainsKey(associationName))
         return;
-      Association _ass = this[associationAlias];
+      Association _ass = this[associationName];
       _ass.AddMessageHandler(messageHandler);
     }
     /// <summary>

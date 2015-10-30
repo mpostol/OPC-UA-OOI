@@ -1,10 +1,8 @@
 ﻿
-using System;
 using System.Runtime.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.Configuration
 {
-  [Serializable]
   [DataContract]
   public partial class ConfigurationData
   {
@@ -12,7 +10,7 @@ namespace UAOOI.SemanticData.DataManagement.Configuration
     [DataMember]
     public DataSetConfiguration[] Associations { get; set; }
     [DataMember]
-    public MessageTransportConfiguration[] MessageTransport { get; set; }
+    public MessageTransportConfiguration[] MessageHandlers { get; set; }
 
   }
 }

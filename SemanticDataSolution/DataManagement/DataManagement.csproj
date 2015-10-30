@@ -53,14 +53,13 @@
     <Compile Include="Association.cs" />
     <Compile Include="AssociationsCollection.cs" />
     <Compile Include="AssociationStateChangedEventArgs.cs" />
-    <Compile Include="Configuration\AssociationConfiguration.cs" />
+    <Compile Include="Configuration\DataSetConfiguration.cs" />
     <Compile Include="Configuration\AssociationRole.cs" />
     <Compile Include="Configuration\ConfigurationData.cs" />
     <Compile Include="Configuration\ConfigurationData.static.cs" />
     <Compile Include="Configuration\ConfigurationFactoryBase.cs" />
     <Compile Include="Configuration\DataMemberConfiguration.cs" />
     <Compile Include="Configuration\DataMemberConfiguration.helpers.cs" />
-    <Compile Include="Configuration\DataSetConfiguration.cs" />
     <Compile Include="IConfigurationFactory.cs" />
     <Compile Include="DataRepository\Binding.cs" />
     <Compile Include="Configuration\MessageTransportConfiguration.cs" />

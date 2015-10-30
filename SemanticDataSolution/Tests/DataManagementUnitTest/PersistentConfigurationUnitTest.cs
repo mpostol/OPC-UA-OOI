@@ -18,7 +18,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ConfigurationData _cnf = PersistentConfiguration.GetLocalConfiguration();
       TestConfiguration(_cnf.Associations);
-      TestConfiguration(_cnf.MessageTransport);
+      TestConfiguration(_cnf.MessageHandlers);
     }
     #endregion
 
@@ -30,7 +30,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private void TestConfiguration(MessageTransportConfiguration _item)
     {
-      foreach (string _ax in _item.Associations)
+      foreach (string _ax in _item.AssociationNames)
         AssociationsDictionary.Add(_ax, _ax);
       MessageTransportConfigurationDictionary.Add(_item.Name, _item);
       Assert.IsNull(_item.Configuration);
@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       foreach (DataSetConfiguration _acx in associationConfiguration)
       {
-        AssociationConfigurationDictionary.Add(_acx.Alias, _acx);
+        AssociationConfigurationDictionary.Add(_acx.AssociationName, _acx);
         Uri _nu = new Uri(_acx.InformationModelURI);
         Assert.IsFalse(String.IsNullOrEmpty(_acx.DataSymbolicName));
         TestDataSet(_acx);

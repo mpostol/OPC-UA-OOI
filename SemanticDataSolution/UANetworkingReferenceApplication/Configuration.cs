@@ -19,7 +19,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     /// <returns>ConfigurationData.</returns>
     internal static ConfigurationData LoadConsumer()
     {
-      return new ConfigurationData() { Associations = GetAssociations(AssociationRole.Consumer), MessageTransport = GetMessageTransport(AssociationRole.Consumer) };
+      return new ConfigurationData() { Associations = GetAssociations(AssociationRole.Consumer), MessageHandlers = GetMessageTransport(AssociationRole.Consumer) };
     }
     /// <summary>
     /// Created the configuration from the local data.
@@ -28,7 +28,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     /// <returns>ConfigurationData.</returns>
     internal static ConfigurationData LoadProducer()
     {
-      return new ConfigurationData() { Associations = GetAssociations(AssociationRole.Producer), MessageTransport = GetMessageTransport(AssociationRole.Producer) };
+      return new ConfigurationData() { Associations = GetAssociations(AssociationRole.Producer), MessageHandlers = GetMessageTransport(AssociationRole.Producer) };
     }
     internal static Guid AssociationConfigurationId = new Guid(Properties.Settings.Default.AssociationConfigurationId);
     #endregion
@@ -36,7 +36,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     #region configuration
     private static MessageTransportConfiguration[] GetMessageTransport(AssociationRole associationRole)
     {
-      return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { Associations = GetTransportAssociations(),
+      return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { AssociationNames = GetTransportAssociations(),
                                                                                          Configuration = null,
                                                                                          Name = "UDP",
                                                                                          TransportRole = associationRole } };
@@ -47,7 +47,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     }
     private static DataSetConfiguration[] GetAssociations(AssociationRole associationRole)
     {
-      return new DataSetConfiguration[] { new DataSetConfiguration() { Alias = AssociationConfigurationAlias,
+      return new DataSetConfiguration[] { new DataSetConfiguration() { AssociationName = AssociationConfigurationAlias,
                                                                                AssociationRole = associationRole,
                                                                                DataSet = GetMembers(),
                                                                                DataSymbolicName = "DataSymbolicName",

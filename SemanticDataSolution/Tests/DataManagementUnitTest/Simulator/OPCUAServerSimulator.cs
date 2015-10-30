@@ -67,7 +67,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       /// <exception cref="System.NotImplementedException"></exception>
       public ConfigurationData GetConfiguration()
       {
-        return new ConfigurationData() { Associations = GetAssociations(), MessageTransport = GetMessageTransport() };
+        return new ConfigurationData() { Associations = GetAssociations(), MessageHandlers = GetMessageTransport() };
       }
       /// <summary>
       /// Occurs after the association configuration has been changed.
@@ -82,7 +82,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       #region configuration
       private MessageTransportConfiguration[] GetMessageTransport()
       {
-        return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { Associations = GetTransportAssociations(), 
+        return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { AssociationNames = GetTransportAssociations(), 
                                                                                            Configuration = null, 
                                                                                            Name = "UDP", 
                                                                                            TransportRole = AssociationRole.Producer } };
@@ -93,7 +93,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
       private DataSetConfiguration[] GetAssociations()
       {
-        return new DataSetConfiguration[] { new DataSetConfiguration() { Alias = AssociationConfigurationAlias, 
+        return new DataSetConfiguration[] { new DataSetConfiguration() { AssociationName = AssociationConfigurationAlias, 
                                                                                  AssociationRole = AssociationRole.Producer, 
                                                                                  DataSet = GetMembers(), 
                                                                                  DataSymbolicName = "DataSymbolicName",

@@ -1,18 +1,16 @@
-﻿
-using System;
-using System.Xml;
-
-namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
+﻿namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
-  
-  [Serializable]
-  public class MessageTransportConfiguration
+
+  /// <summary>
+  /// Class MessageTransportConfiguration - provide configuration for transport used to transfer messages over the wire.
+  /// </summary>
+  public partial class MessageTransportConfiguration
   {
     
-    public string Name { get; set; }
-    public string[] AssociationNames { get; set; }
-    public XmlElement Configuration { get; set; }
-    public AssociationRole TransportRole { get; set; }
+    //public string Name { get; set; }
+    //public string[] AssociationNames { get; set; }
+    //public XmlElement Configuration { get; set; }
+    //public AssociationRole TransportRole { get; set; }
 
   }
 

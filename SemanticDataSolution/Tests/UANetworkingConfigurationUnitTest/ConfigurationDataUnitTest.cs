@@ -1,13 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 {
+
   [TestClass]
   public class ConfigurationDataUnitTest
   {
     [TestMethod]
-    [TestCategory("Configuration_LoadTestMethod")]
+    [TestCategory("Configuration_ConfigurationDataUnitTest")]
     public void LoadTestMethod()
     {
       LocalConfigurationData _configuration = ConfigurationData.Load<LocalConfigurationData>(LocalConfigurationData.Loader);

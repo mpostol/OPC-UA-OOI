@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd"
+           xmlns="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">
+  <xs:element name="ConfigurationData" nillable="true" type="ConfigurationData" />
+  <xs:complexType name="ConfigurationData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Associations" type="ArrayOfDataSetConfiguration" />
+      <xs:element minOccurs="0" maxOccurs="1" name="MessageHandlers" type="ArrayOfMessageTransportConfiguration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfDataSetConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DataSetConfiguration" nillable="true">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="AssociationRole" type="AssociationRole" />
+            <xs:element minOccurs="0" maxOccurs="1" name="AssociationName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="RepositoryGroup" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="InformationModelURI" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="DataSymbolicName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="DataSet" type="ArrayOfDataMemberConfiguration" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Guid" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:annotation>
+    <xs:documentation>
+      Enum AssociationRole - enumerates UA Data Application roles. Depending on the role the DataSetConfiguration may be associated with appropriate MessageTransportConfiguration reading or writing data.
+      </xs:documentation>
+  </xs:annotation>
+  <xs:simpleType name="AssociationRole">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Consumer" />
+      <xs:enumeration value="Producer" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfDataMemberConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DataMemberConfiguration" nillable="true">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="SymbolicName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="ProcessValueName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="SourceEncoding" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfMessageTransportConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MessageTransportConfiguration" nillable="true" type="MessageTransportConfiguration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MessageTransportConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AssociationNames" nillable="false" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Configuration">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:any />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="TransportRole" type="AssociationRole" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

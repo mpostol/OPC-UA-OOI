@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System.Runtime.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.Configuration
 {
@@ -8,7 +7,7 @@ namespace UAOOI.SemanticData.DataManagement.Configuration
   /// Class DataMemberConfiguration - provides all necessary information to create binding between a local process value (PLC register, element on the screen, etc) with a Variable node exposed by an 
   /// OPC UA Server. Adding both to the configuration make the same configuration reusable by the OPC UA Server, OPC UA Client and UA application. 
   /// </summary>
-  [Serializable]
+  [DataContract]
   public partial class DataMemberConfiguration
   {
 

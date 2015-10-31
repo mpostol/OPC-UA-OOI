@@ -2,8 +2,8 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("UAOOI.SemanticData.UANetworking.Configuration")]
-[assembly: AssemblyDescription("UA Data Application Configuration")]
+[assembly: AssemblyTitle("UAOOI.SemanticData.UANetworking.Configuration.UnitTest")]
+[assembly: AssemblyDescription("UA Data Application Configuration UnitTests")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("mpostol commsvr.com")]
 [assembly: AssemblyProduct("UAOOI")]
@@ -11,6 +11,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: Guid("e28e0880-03aa-4d1b-a820-41b04e766019")]
+[assembly: Guid("81ddd889-3223-4f24-8b65-dd5c57886994")]
 [assembly: AssemblyVersion("1.0.0.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

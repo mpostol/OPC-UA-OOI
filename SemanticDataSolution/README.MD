@@ -25,7 +25,7 @@ Integration services are responsible for exchanging the data and metadata with o
 
 * **UA Data Networking** - provides message centric distribution mechanism of the strong typed data
 * **UA Data Archival** - collects data received in the messages and archives it in the database
-* **UA Data Cloud Gateway** - it simplifies creation of a bridge to the cloud that enables data to stream from industrial equipment to a cloud messaging endpoint such as (Azure Event Hubs)[http://azure.microsoft.com/en-us/services/event-hubs/].
+* **UA Data Cloud Gateway** - it simplifies creation of a bridge to the cloud that enables data to stream from industrial equipment to a cloud messaging endpoint such as [Azure Event Hubs](http://azure.microsoft.com/en-us/services/event-hubs/).
 * **UA Data JSON Gateway** - ii factories objects using the message content and serializes them into the JSON text representation for further processing
 * **UA Data XML Gateway** - ii factories objects using the message content and serializes them into XML text representation for further processing
 
@@ -34,9 +34,7 @@ In all the cases above the destination representation, i.e. message content, obj
 **UA Data Networking** is an example of transferring the UA Semantic Data over the network using message centric data transport standardized by the OPC UA Specification Part 14 Pub/sub Draft 1.04.08. The description of its architecture is captured in
 [UA SemanticData Message Centric Communication](./README.MessageCentricCommunication.md#ua-semanticdata-message-centric-communication).
 
-This concept have been implemented in the project [DataManagement](./DataManagement#introduction). This project provides an SDK library that can be used as a foundation of the communication infrastructure deployment.
-
-The [UANetworkingReferenceApplication](./UANetworkingReferenceApplication#ua-data-example-application) contains a reference WPF application.
+This concept have been implemented in the project [DataManagement](./DataManagement#introduction). This project provides an SDK library that can be used as a foundation of the communication infrastructure deployment. The [UANetworkingReferenceApplication](./UANetworkingReferenceApplication#ua-data-example-application) contains a reference WPF application.
 
 The **UA Data Archival** can also be used to transfer data from the OPC UA environment to Data Based Management System for further processing by Enterprise Management BI systems.
 

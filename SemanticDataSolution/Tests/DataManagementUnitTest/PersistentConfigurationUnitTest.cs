@@ -1,9 +1,9 @@
 ﻿
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.DataManagement.Configuration;
 using System.Collections.Generic;
 using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {

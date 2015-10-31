@@ -1,8 +1,8 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using UAOOI.SemanticData.DataManagement.Configuration;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement
 {

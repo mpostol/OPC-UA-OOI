@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UAOOI.SemanticData.DataManagement</RootNamespace>
     <AssemblyName>UAOOI.SemanticData.DataManagement</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,16 +54,9 @@
     <Compile Include="Association.cs" />
     <Compile Include="AssociationsCollection.cs" />
     <Compile Include="AssociationStateChangedEventArgs.cs" />
-    <Compile Include="Configuration\DataSetConfiguration.cs" />
-    <Compile Include="Configuration\AssociationRole.cs" />
-    <Compile Include="Configuration\ConfigurationData.cs" />
-    <Compile Include="Configuration\ConfigurationData.static.cs" />
-    <Compile Include="Configuration\ConfigurationFactoryBase.cs" />
-    <Compile Include="Configuration\DataMemberConfiguration.cs" />
-    <Compile Include="Configuration\DataMemberConfiguration.helpers.cs" />
-    <Compile Include="IConfigurationFactory.cs" />
+    <Compile Include="DataMemberConfiguration.helpers.cs" />
+    <Compile Include="DataRepository\IBinding.cs" />
     <Compile Include="DataRepository\Binding.cs" />
-    <Compile Include="Configuration\MessageTransportConfiguration.cs" />
     <Compile Include="ConsumerAssociation.cs" />
     <Compile Include="DataRepository\ConsumerBinding.cs" />
     <Compile Include="DataManagementSetup.cs" />
@@ -71,7 +65,6 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="HandlerState.cs" />
     <Compile Include="IAssociationState.cs" />
-    <Compile Include="IBinding.cs" />
     <Compile Include="IBindingFactory.cs" />
     <Compile Include="DataRepository\IConsumerBinding.cs" />
     <Compile Include="IDataUniqueIdentifier.cs" />
@@ -111,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Encoding\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UANetworkingConfiguration\UANetworkingConfiguration.csproj">
+      <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
+      <Name>UANetworkingConfiguration</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

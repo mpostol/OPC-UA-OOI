@@ -1,6 +1,6 @@
 ﻿
 using System;
-using global::UAOOI.SemanticData.DataManagement.Configuration;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 {
@@ -34,7 +34,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       return new DataSetConfiguration()
       {
         AssociationName = "Alias".AddId(AssociationId),
-        AssociationRole = Configuration.AssociationRole.Consumer,
+        AssociationRole = AssociationRole.Consumer,
         DataSet = GetMembers(),
         DataSymbolicName = "DataSymbolicName".AddId(AssociationId),
         Id = Guid.NewGuid(),

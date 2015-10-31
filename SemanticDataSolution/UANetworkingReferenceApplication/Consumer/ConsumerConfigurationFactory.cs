@@ -1,6 +1,6 @@
 ﻿
 using System;
-using UAOOI.SemanticData.DataManagement.Configuration;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 {

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement.Configuration
+namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
 
   /// <summary>

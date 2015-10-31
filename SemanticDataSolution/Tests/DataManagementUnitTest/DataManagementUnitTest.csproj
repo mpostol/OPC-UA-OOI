@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UAOOI.SemanticData.DataManagement.UnitTest</RootNamespace>
     <AssemblyName>UAOOI.SemanticData.DataManagementUnitTest</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -16,6 +16,7 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>True</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -98,6 +99,10 @@
     <ProjectReference Include="..\..\DataManagement\DataManagement.csproj">
       <Project>{7f4ded4e-5933-4229-b9cc-51da49678904}</Project>
       <Name>DataManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UANetworkingConfiguration\UANetworkingConfiguration.csproj">
+      <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
+      <Name>UANetworkingConfiguration</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

@@ -1,9 +1,9 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using UAOOI.SemanticData.DataManagement.Configuration;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 {
@@ -30,7 +30,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 
     #region tests instrumentation
     /// <summary>
-    /// Checks the consistency of the all items in the <see cref="AssociationsCollection"/> colection.
+    /// Checks the consistency of the all items in the <see cref="AssociationsCollection"/> collection.
     /// </summary>
     internal void CheckConsistency()
     {

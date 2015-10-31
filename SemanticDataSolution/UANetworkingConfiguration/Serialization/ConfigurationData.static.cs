@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UAOOI.SemanticData.DataManagement.Configuration
+namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
   
   public partial class ConfigurationData

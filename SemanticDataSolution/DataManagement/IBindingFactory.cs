@@ -1,5 +1,4 @@
-﻿
-using UAOOI.SemanticData.DataManagement.DataRepository;
+﻿using UAOOI.SemanticData.DataManagement.DataRepository;
 
 namespace UAOOI.SemanticData.DataManagement
 {

@@ -1,9 +1,10 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using UAOOI.SemanticData.DataManagement.Configuration;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
+using UAOOI.SemanticData.UANetworking.Configuration;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 {

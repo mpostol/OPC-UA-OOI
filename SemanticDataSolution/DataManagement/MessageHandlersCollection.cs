@@ -1,8 +1,8 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using UAOOI.SemanticData.DataManagement.Configuration;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement
 {
@@ -22,7 +22,7 @@ namespace UAOOI.SemanticData.DataManagement
     internal static MessageHandlersCollection CreateMessageHandlers(MessageTransportConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, Action<string, IMessageHandler> addMessageHandler)
     {
       MessageHandlersCollection _collection = new MessageHandlersCollection();
-      foreach (Configuration.MessageTransportConfiguration item in configuration)
+      foreach (MessageTransportConfiguration item in configuration)
       {
         if (_collection.ContainsKey(item.Name))
           throw new ArgumentOutOfRangeException("Name", "Duplicated transport name");

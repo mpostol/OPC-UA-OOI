@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UAOOI.SemanticData.DataManagement.Configuration
+namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
   /// <summary>
   /// Class ConfigurationFactory - provides basic implementation of the <see cref="IConfigurationFactory"/>.

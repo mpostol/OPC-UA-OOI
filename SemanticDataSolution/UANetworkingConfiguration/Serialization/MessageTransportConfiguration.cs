@@ -2,7 +2,7 @@
 using System;
 using System.Xml;
 
-namespace UAOOI.SemanticData.DataManagement.Configuration
+namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
   
   [Serializable]

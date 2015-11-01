@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema elementFormDefault="qualified"
-           xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd"
-           xmlns="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="ConfigurationData" nillable="true" type="ConfigurationData" />
   <xs:complexType name="ConfigurationData">
     <xs:sequence>
@@ -57,7 +54,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="ExtensionDataObject" />
       <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="AssociationNamesArrayOfString" type="ArrayOfString" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AssociationNames" type="ArrayOfString" />
       <xs:element minOccurs="0" maxOccurs="1" name="Configuration">
         <xs:complexType>
           <xs:sequence>

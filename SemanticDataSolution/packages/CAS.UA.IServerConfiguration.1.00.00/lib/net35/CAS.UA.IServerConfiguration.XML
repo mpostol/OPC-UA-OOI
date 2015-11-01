@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CAS.UA.IServerConfiguration</name>
+    </assembly>
+    <members>
+        <member name="T:CAS.UA.IServerConfiguration.IInstanceConfiguration">
+            <summary>
+            Provides access to the instance node configuration editor
+            </summary>
+        </member>
+        <member name="M:CAS.UA.IServerConfiguration.IInstanceConfiguration.Edit">
+            <summary>
+            Edits this instance.
+            </summary>
+        </member>
+        <member name="M:CAS.UA.IServerConfiguration.IInstanceConfiguration.ClearConfiguration">
+            <summary>
+            Create new empty data bindings configuration for this instance node to store proprietary information of the UA server.
+            </summary>
+        </member>
+        <member name="T:CAS.UA.IServerConfiguration.INodeDescriptor">
+            <summary>
+            Provides description of the node to be configured.
+            </summary>
+        </member>
+        <member name="P:CAS.UA.IServerConfiguration.INodeDescriptor.NodeIdentifier">
+            <summary>
+            Gets the node unique identifier, i.e. the browse path.
+            </summary>
+            <value>The node identifier.</value>
+        </member>
+        <member name="P:CAS.UA.IServerConfiguration.INodeDescriptor.DataType">
+            <summary>
+            Gets the type of the node of of the Variable NodeClass
+            </summary>
+            <value>The type of the data.</value>
+        </member>
+        <member name="P:CAS.UA.IServerConfiguration.INodeDescriptor.NodeClass">
+            <summary>
+            Gets the node class.
+            </summary>
+            <value>The node class.</value>
+        </member>
+        <member name="P:CAS.UA.IServerConfiguration.INodeDescriptor.InstanceDeclaration">
+            <summary>
+            Gets a value indicating whether it is instance declaration - may have many instances in the created address space.
+            </summary>
+            <value><c>true</c> if the node is instance declaration; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:CAS.UA.IServerConfiguration.INodeDescriptor.BindingDescription">
+            <summary>
+            Gets the binding description that allows the editor to create automatically bindings.
+            </summary>
+            <value>The binding description.</value>
+        </member>
+        <member name="T:CAS.UA.IServerConfiguration.InstanceNodeClassesEnum">
+            <summary>
+            Enumeration of the node classes that can be a source of process data.
+            </summary>
+        </member>
+        <member name="F:CAS.UA.IServerConfiguration.InstanceNodeClassesEnum.Object">
+            <summary>
+            Object NodeClasses
+            </summary>
+        </member>
+        <member name="F:CAS.UA.IServerConfiguration.InstanceNodeClassesEnum.Variable">
+            <summary>
+            Variable NodeClasses
+            </summary>
+        </member>
+        <member name="F:CAS.UA.IServerConfiguration.InstanceNodeClassesEnum.Method">
+            <summary>
+            Method NodeClasses
+            </summary>
+        </member>
+        <member name="F:CAS.UA.IServerConfiguration.InstanceNodeClassesEnum.View">
+            <summary>
+            View NodeClasses
+            </summary>
+        </member>
+        <member name="F:CAS.UA.IServerConfiguration.InstanceNodeClassesEnum.NotDefined">
+            <summary>
+            Not defined or nor relevant
+            </summary>
+        </member>
+        <member name="T:CAS.UA.IServerConfiguration.IConfiguration">
+            <summary>
+            Gets access to the server configuration file editor.
+            </summary>
+        </member>
+        <member name="M:CAS.UA.IServerConfiguration.IConfiguration.CreateDefaultConfiguration">
+            <summary>
+            Creates the default configuration.
+            </summary>
+        </member>
+        <member name="M:CAS.UA.IServerConfiguration.IConfiguration.ReadConfiguration(System.IO.FileInfo)">
+            <summary>
+            Reads the configuration.
+            </summary>
+            <param name="configurationFile">The configuration file.</param>
+        </member>
+        <member name="M:CAS.UA.IServerConfiguration.IConfiguration.EditConfiguration">
+            <summary>
+            Gets the configuration editor - user interface to edit the plug-in configuration file.
+            </summary>
+            <returns>
+            Represents a window or dialog box that makes up an application's user interface to be used to edit configuration file.
+            </returns>
+        </member>
+        <member name="M:CAS.UA.IServerConfiguration.IConfiguration.SaveConfiguration(System.String,System.IO.FileInfo)">
+            <summary>
+            Saves the configuration file to a specified location.
+            </summary>
+            <param name="solutionFilePath">The solution file path.</param>
+            <param name="configurationFile">The configuration file.</param>
+            <remarks><paramref name="solutionFilePath"/> is to be used to create relative file path to configuration files used by the plug-in.</remarks>
+        </member>
+        <member name="M:CAS.UA.IServerConfiguration.IConfiguration.GetInstanceConfiguration(CAS.UA.IServerConfiguration.INodeDescriptor)">
+            <summary>
+            Gets the instance to be used by a user to configure the selected node.
+            </summary>
+            <param name="descriptor">Provides identifying description of the node to be configured.</param>
+            <returns>
+            Returned object provides access to the instance node configuration edition functionality.
+            </returns>
+        </member>
+        <member name="M:CAS.UA.IServerConfiguration.IConfiguration.CreateInstanceConfigurations(CAS.UA.IServerConfiguration.INodeDescriptor[],System.Boolean,System.Boolean@)">
+            <summary>
+            Creates automatically the instance configurations on the best effort basis.
+            </summary>
+            <param name="descriptors">The descriptors of nodes.</param>
+            <param name="SkipOpeningConfigurationFile">if set to <c>true</c> skip opening configuration file.</param>
+            <param name="CancelWasPressed">if set to <c>true</c> cancel was pressed.</param>
+        </member>
+        <member name="E:CAS.UA.IServerConfiguration.IConfiguration.OnModified">
+            <summary>
+            Occurs any time the configuration is modified.
+            </summary>
+        </member>
+        <member name="P:CAS.UA.IServerConfiguration.IConfiguration.DefaultFileName">
+            <summary>
+            Gets the default name of the file.
+            </summary>
+            <value>The default name of the file.</value>
+        </member>
+        <member name="T:CAS.UA.IServerConfiguration.UAServerConfigurationEventArgs">
+            <summary>
+            Instance of this class provides more information on the type of the changes made in the server configuration.
+            </summary>
+        </member>
+        <member name="M:CAS.UA.IServerConfiguration.UAServerConfigurationEventArgs.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CAS.UA.IServerConfiguration.UAServerConfigurationEventArgs"/> class.
+            </summary>
+            <param name="fileChanged">
+            if set to <c>true</c> indicated that the configuration file has been changed 
+            and user interface must be regenerated.
+            </param>
+        </member>
+        <member name="P:CAS.UA.IServerConfiguration.UAServerConfigurationEventArgs.ConfigurationFileChanged">
+            <summary>
+            Gets or sets a value indicating whether the configuration file has been changed.
+            </summary>
+            <value>
+            	<c>true</c> if the configuration file has benn changed; otherwise, <c>false</c>.
+            </value>
+        </member>
+    </members>
+</doc>

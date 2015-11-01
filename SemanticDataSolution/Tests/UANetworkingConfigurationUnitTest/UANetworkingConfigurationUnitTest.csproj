@@ -62,7 +62,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConfigurationDataUnitTest.cs" />
-    <Compile Include="DataSetConfigurationUnitTest.cs" />
+    <Compile Include="SerializationUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

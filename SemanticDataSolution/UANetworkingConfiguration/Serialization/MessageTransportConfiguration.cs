@@ -1,4 +1,5 @@
-﻿namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
+﻿
+namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
 
   /// <summary>
@@ -6,12 +7,21 @@
   /// </summary>
   public partial class MessageTransportConfiguration
   {
-    
-    //public string Name { get; set; }
-    //public string[] AssociationNames { get; set; }
-    //public XmlElement Configuration { get; set; }
-    //public AssociationRole TransportRole { get; set; }
+
+    /// <summary>
+    /// Gets or sets the association names.
+    /// </summary>
+    /// <value>The association names.</value>
+    public string[] AssociationNames
+    {
+      get { return AssociationNamesArrayOfString.ToArray(); }
+      set
+      {
+        ArrayOfString _associations = new ArrayOfString();
+        _associations.AddRange(value);
+        AssociationNamesArrayOfString = _associations;
+      }
+    }
 
   }
-
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ConfigurationData xmlns="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">
+  <ExtensionData />
+  <Associations>
+    <DataSetConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+    <DataSetConfiguration>
+      <ExtensionData />
+      <AssociationRole>Consumer</AssociationRole>
+      <AssociationName>AssociationName1</AssociationName>
+      <RepositoryGroup>RepositoryGroup1</RepositoryGroup>
+      <InformationModelURI>InformationModelURI1</InformationModelURI>
+      <DataSymbolicName>DataSymbolicName1</DataSymbolicName>
+      <DataSet>
+        <DataMemberConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+        <DataMemberConfiguration>
+          <ExtensionData />
+          <SymbolicName>SymbolicName1</SymbolicName>
+          <ProcessValueName>ProcessValueName1</ProcessValueName>
+          <SourceEncoding>SourceEncoding1</SourceEncoding>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+      </DataSet>
+      <Guid>Guid1</Guid>
+    </DataSetConfiguration>
+    <DataSetConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+  </Associations>
+  <MessageHandlers>
+    <MessageTransportConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+    <MessageTransportConfiguration>
+      <ExtensionData />
+      <Name>Name1</Name>
+      <AssociationNamesArrayOfString>
+        <string xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+        <string>string1</string>
+        <string xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+      </AssociationNamesArrayOfString>
+      <Configuration>
+        <ConfigurationData>
+          
+        </ConfigurationData>
+      </Configuration>
+      <TransportRole>Consumer</TransportRole>
+    </MessageTransportConfiguration>
+    <MessageTransportConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+  </MessageHandlers>
+</ConfigurationData>

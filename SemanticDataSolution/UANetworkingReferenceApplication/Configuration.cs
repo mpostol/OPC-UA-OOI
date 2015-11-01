@@ -4,7 +4,6 @@ using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 {
 
-  #region API
   /// <summary>
   /// Class Configuration - contains hard coded local configuration
   /// </summary>
@@ -12,6 +11,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
   internal static class Configuration
   {
 
+    #region API
     /// <summary>
     /// Created the configuration from the local data.
     /// </summary>

@@ -21,7 +21,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     [TestCategory("Configuration_ConfigurationDataUnitTest")]
     public void ConfigurationDataConsumerTestMethod()
     {
-      ConfigurationData _consumer = Configuration.LoadConsumer();
+      ConfigurationData _consumer = ReferenceConfiguration.LoadConsumer();
       FileInfo _consumerFile = new FileInfo(@"ConfigurationDataConsumer.xml");
       DataBindings.Serializers.DataContractSerializers.Save<ConfigurationData>(_consumerFile, _consumer, (x, y, z) => { Console.WriteLine(z); });
     }
@@ -29,7 +29,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     [TestCategory("Configuration_ConfigurationDataUnitTest")]
     public void ConfigurationDataProducerTestMethod()
     {
-      ConfigurationData _Producer = Configuration.LoadProducer();
+      ConfigurationData _Producer = ReferenceConfiguration.LoadProducer();
       FileInfo _consumerFile = new FileInfo(@"ConfigurationDataProducer.xml");
       DataBindings.Serializers.DataContractSerializers.Save<ConfigurationData>(_consumerFile, _Producer, (x, y, z) => { Console.WriteLine(z); });
     }
@@ -45,7 +45,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 
       }
     }
-    internal static class Configuration
+    internal static class ReferenceConfiguration
     {
 
       #region API

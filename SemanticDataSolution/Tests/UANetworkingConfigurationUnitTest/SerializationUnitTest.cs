@@ -50,7 +50,32 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       DataContractSerializers.Save<ConfigurationData>(_2Write, _cd, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); });
       Console.WriteLine(_message);
     }
-
+    [TestMethod]
+    [TestCategory("Configuration_SerializationUnitTest")]
+    public void ConfigurationDataConsumerXmlTestMethod()
+    {
+      FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");
+      Assert.IsTrue(_configFile.Exists);
+      string _message = null;
+      ConfigurationData _cd = DataContractSerializers.Load<ConfigurationData>(_configFile, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); });
+      Console.WriteLine(_message);
+      Assert.IsNotNull(_cd);
+      Assert.IsFalse(String.IsNullOrEmpty(_message));
+      Assert.IsTrue(_message.Contains(_configFile.FullName));
+    }
+    [TestMethod]
+    [TestCategory("Configuration_SerializationUnitTest")]
+    public void ConfigurationDataProducerXmlTestMethod()
+    {
+      FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataProducer.xml");
+      Assert.IsTrue(_configFile.Exists);
+      string _message = null;
+      ConfigurationData _cd = DataContractSerializers.Load<ConfigurationData>(_configFile, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); });
+      Console.WriteLine(_message);
+      Assert.IsNotNull(_cd);
+      Assert.IsFalse(String.IsNullOrEmpty(_message));
+      Assert.IsTrue(_message.Contains(_configFile.FullName));
+    }
   }
 
 }

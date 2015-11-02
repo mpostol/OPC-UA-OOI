@@ -79,9 +79,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestData\ConfigurationData.xml">
+    <None Include="TestData\ConfigurationData.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
+    <None Include="TestData\ConfigurationDataConsumer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\ConfigurationDataProducer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

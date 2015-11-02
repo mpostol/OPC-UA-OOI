@@ -8,7 +8,8 @@ By the user interface (UI) remote host name and port numbers can be modified. Us
 
 ## Application installation
 
-**TBD** after releasing the application will be available as installation package.
+The application installation package is available here:
+[CAS.UAOOI.UANetworkingDemo](http://www.commsvr.com/COInstal/UANetworking/uand.html)
 
 ## Getting Started Tutorial
 

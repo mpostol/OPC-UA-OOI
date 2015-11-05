@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Diagnostics;
 using System.IO;
 using UAOOI.DataBindings.Serializers;
-using System.Diagnostics;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 {
@@ -28,7 +28,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     [TestCategory("Configuration_SerializationUnitTest")]
     public void AssociationNamesTestMethod()
     {
-      MessageTransportConfiguration _transport = new MessageTransportConfiguration();
+      MessageHandlerConfiguration _transport = new MessageHandlerConfiguration();
       string[] _refArray = new string[] { "First", "Second", "Third" };
       _transport.AssociationNames = _refArray;
       CollectionAssert.AreEqual(_transport.AssociationNames, _refArray);
@@ -41,7 +41,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationData.xml");
       Assert.IsTrue(_configFile.Exists);
       string _message = null;
-      ConfigurationData _cd = DataContractSerializers.Load<ConfigurationData>(_configFile, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); });
+      ConfigurationData _cd = ConfigurationData.Load<ConfigurationData>(() => DataContractSerializers.Load<ConfigurationData>(_configFile, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); }));
       Console.WriteLine(_message);
       Assert.IsNotNull(_cd);
       Assert.IsFalse(String.IsNullOrEmpty(_message));
@@ -57,7 +57,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");
       Assert.IsTrue(_configFile.Exists);
       string _message = null;
-      ConfigurationData _cd = DataContractSerializers.Load<ConfigurationData>(_configFile, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); });
+      ConfigurationData _cd = ConfigurationData.Load<ConfigurationData>(() => DataContractSerializers.Load<ConfigurationData>(_configFile, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); }));
       Console.WriteLine(_message);
       Assert.IsNotNull(_cd);
       Assert.IsFalse(String.IsNullOrEmpty(_message));
@@ -70,7 +70,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataProducer.xml");
       Assert.IsTrue(_configFile.Exists);
       string _message = null;
-      ConfigurationData _cd = DataContractSerializers.Load<ConfigurationData>(_configFile, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); });
+      ConfigurationData _cd = ConfigurationData.Load<ConfigurationData>(() => DataContractSerializers.Load<ConfigurationData>(_configFile, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); }));
       Console.WriteLine(_message);
       Assert.IsNotNull(_cd);
       Assert.IsFalse(String.IsNullOrEmpty(_message));

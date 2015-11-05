@@ -15,8 +15,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ConfigurationData _cnf = ConfigurationData.Load(Create);
       Assert.IsNotNull(_cnf);
-      Assert.IsNotNull(_cnf.Associations);
-      TestAssociations(_cnf.Associations);
+      Assert.IsNotNull(_cnf.DataSets);
+      TestAssociations(_cnf.DataSets);
     }
     private void TestAssociations(DataSetConfiguration[] associationConfiguration)
     {

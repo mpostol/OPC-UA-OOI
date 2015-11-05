@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.ConfigurationData">
+    <Position X="1.5" Y="1.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAEAEAQAACAAAAAAIAQAAAAAEgAAAAQIAAAA=</HashCode>
+      <FileName>Serialization\ConfigurationData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="DataSets" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgACAAAAAACAAAAAAAAASgAAAEAABACOAAAABgMABAQ=</HashCode>
+      <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="DataSet" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageHandlerConfiguration" Collapsed="true">
+    <Position X="7.5" Y="4" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAASgAAAAAAAAAQAAIAAAAAEggAAEAIAAAA=</HashCode>
+      <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AssociationNames" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataMemberConfiguration" Collapsed="true">
+    <Position X="11.75" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAQBABAAAgAAEAAAAAAAAAAAAAEAAAAAAIAAAA=</HashCode>
+      <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.String" Collapsed="true">
+    <Position X="11.75" Y="4" Width="2.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

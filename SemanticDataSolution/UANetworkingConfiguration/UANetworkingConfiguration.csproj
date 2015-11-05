@@ -38,6 +38,7 @@
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CAS.UA.IServerConfiguration, Version=1.0.0.32204, Culture=neutral, PublicKeyToken=8832ff1a67ea61a3" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,25 +52,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Serialization\ConfigurationData.static.cs" />
+    <Compile Include="Serialization\ConfigurationData.cs">
+      <DependentUpon>ConfigurationData.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Serialization\ConfigurationData.xsd.cs">
       <DependentUpon>ConfigurationData.xsd</DependentUpon>
     </Compile>
     <Compile Include="Serialization\ConfigurationFactoryBase.cs" />
     <Compile Include="Serialization\DataMemberConfiguration.cs" />
     <Compile Include="Serialization\DataSetConfiguration.cs" />
-    <Compile Include="Serialization\DataSetConfiguration.helpers.cs" />
     <Compile Include="IConfigurationFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\MessageTransportConfiguration.cs" />
+    <Compile Include="UANetworkingConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />
+    <None Include="ReadMe.md" />
+    <None Include="Serialization\ConfigurationData.cd" />
     <None Include="Serialization\ConfigurationData.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Serialization\GoCS.cmd" />
     <None Include="Serialization\GoXSD.cmd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataBindingsSolution\DataBindings\DataBindings.csproj">
+      <Project>{f8db9567-c559-440c-bbcf-e02013f9ab94}</Project>
+      <Name>DataBindings</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

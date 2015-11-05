@@ -56,7 +56,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       /// <returns>ConfigurationData.</returns>
       internal static ConfigurationData LoadConsumer()
       {
-        return new ConfigurationData() { Associations = GetAssociations(AssociationRole.Consumer), MessageHandlers = GetMessageTransport(AssociationRole.Consumer) };
+        return new ConfigurationData() { DataSets = GetAssociations(AssociationRole.Consumer), MessageHandlers = GetMessageTransport(AssociationRole.Consumer) };
       }
       /// <summary>
       /// Created the configuration from the local data.
@@ -65,14 +65,14 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       /// <returns>ConfigurationData.</returns>
       internal static ConfigurationData LoadProducer()
       {
-        return new ConfigurationData() { Associations = GetAssociations(AssociationRole.Producer), MessageHandlers = GetMessageTransport(AssociationRole.Producer) };
+        return new ConfigurationData() { DataSets = GetAssociations(AssociationRole.Producer), MessageHandlers = GetMessageTransport(AssociationRole.Producer) };
       }
       #endregion
 
       #region configuration
-      private static MessageTransportConfiguration[] GetMessageTransport(AssociationRole associationRole)
+      private static MessageHandlerConfiguration[] GetMessageTransport(AssociationRole associationRole)
       {
-        return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { AssociationNames = GetTransportAssociations(),
+        return new MessageHandlerConfiguration[] { new MessageHandlerConfiguration() { AssociationNames = GetTransportAssociations(),
                                                                                          Configuration = null,
                                                                                          Name = "UDP",
                                                                                          TransportRole = associationRole } };

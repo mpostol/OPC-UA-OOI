@@ -5,7 +5,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
   /// <summary>
   /// Class MessageTransportConfiguration - provide configuration for transport used to transfer messages over the wire.
   /// </summary>
-  public partial class MessageTransportConfiguration
+  public partial class MessageHandlerConfiguration
   {
 
     /// <summary>

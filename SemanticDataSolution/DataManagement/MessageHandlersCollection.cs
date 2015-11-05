@@ -19,10 +19,10 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="addMessageHandler">The add message handler.</param>
     /// <returns>MessageHandlersCollection.</returns>
     /// <exception cref="System.ArgumentOutOfRangeException">Name;Duplicated transport name</exception>
-    internal static MessageHandlersCollection CreateMessageHandlers(MessageTransportConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, Action<string, IMessageHandler> addMessageHandler)
+    internal static MessageHandlersCollection CreateMessageHandlers(MessageHandlerConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, Action<string, IMessageHandler> addMessageHandler)
     {
       MessageHandlersCollection _collection = new MessageHandlersCollection();
-      foreach (MessageTransportConfiguration item in configuration)
+      foreach (MessageHandlerConfiguration item in configuration)
       {
         if (_collection.ContainsKey(item.Name))
           throw new ArgumentOutOfRangeException("Name", "Duplicated transport name");

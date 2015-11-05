@@ -17,18 +17,18 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void GetLocalConfigurationTestMethod()
     {
       ConfigurationData _cnf = PersistentConfiguration.GetLocalConfiguration();
-      TestConfiguration(_cnf.Associations);
+      TestConfiguration(_cnf.DataSets);
       TestConfiguration(_cnf.MessageHandlers);
     }
     #endregion
 
     #region private
-    private void TestConfiguration(MessageTransportConfiguration[] messageTransportConfiguration)
+    private void TestConfiguration(MessageHandlerConfiguration[] messageTransportConfiguration)
     {
-      foreach (MessageTransportConfiguration _item in messageTransportConfiguration)
+      foreach (MessageHandlerConfiguration _item in messageTransportConfiguration)
         TestConfiguration(_item);
     }
-    private void TestConfiguration(MessageTransportConfiguration _item)
+    private void TestConfiguration(MessageHandlerConfiguration _item)
     {
       foreach (string _ax in _item.AssociationNames)
         AssociationsDictionary.Add(_ax, _ax);
@@ -60,7 +60,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.IsFalse(String.IsNullOrEmpty(_dmx.SymbolicName));
       }
     }
-    private static Dictionary<string, MessageTransportConfiguration> MessageTransportConfigurationDictionary = new Dictionary<string, MessageTransportConfiguration>();
+    private static Dictionary<string, MessageHandlerConfiguration> MessageTransportConfigurationDictionary = new Dictionary<string, MessageHandlerConfiguration>();
     private static Dictionary<string, string> AssociationsDictionary = new Dictionary<string, string>();
     private static Dictionary<string, DataSetConfiguration> AssociationConfigurationDictionary = new Dictionary<string, DataSetConfiguration>();
     private static Dictionary<Guid, DataSetConfiguration> AssociationConfigurationGuidDictionary = new Dictionary<Guid, DataSetConfiguration>();

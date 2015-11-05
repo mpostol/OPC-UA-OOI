@@ -73,7 +73,7 @@ namespace UAOOI.SemanticData.DataManagement
       if (ConfigurationFactory == null)
         throw new ArgumentNullException("ConfigurationFactory");
       ConfigurationData _configuration = ConfigurationFactory.GetConfiguration();
-      AssociationsCollection = AssociationsCollection.CreateAssociations(_configuration.Associations, BindingFactory, EncodingFactory);
+      AssociationsCollection = AssociationsCollection.CreateAssociations(_configuration.DataSets, BindingFactory, EncodingFactory);
       ConfigurationFactory.OnAssociationConfigurationChange += AssociationsCollection.OnConfigurationChangeHandler;
       MessageHandlersCollection = MessageHandlersCollection.CreateMessageHandlers(_configuration.MessageHandlers, MessageHandlerFactory, AssociationsCollection.AddMessageHandler);
       ConfigurationFactory.OnMessageHandlerConfigurationChange += MessageHandlersCollection.OnConfigurationChangeHandler;

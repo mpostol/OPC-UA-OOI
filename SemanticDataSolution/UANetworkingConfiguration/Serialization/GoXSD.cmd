@@ -1,4 +1,4 @@
-xsd.exe ..\bin\Debug\UAOOI.SemanticDataUANetworkingConfiguration.dll /t:UAOOI.SemanticData.UANetworking.Configuration.Serialization.ConfigurationData
+ewm xsd.exe ..\bin\Debug\UAOOI.SemanticDataUANetworkingConfiguration.dll /t:UAOOI.SemanticData.UANetworking.Configuration.Serialization.ConfigurationData
 rem https://msdn.microsoft.com/en-us/library/aa347733(v=vs.110).aspx
 rem Svcutil ..\bin\Debug\UAOOI.SemanticDataUANetworkingConfiguration.dll /collectionType:UAOOI.SemanticData.UANetworking.Configuration.Serialization.ConfigurationData /N:http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd,UAOOI.SemanticData.UANetworking.Configuration.Serialization /o:ConfigurationData.!.xsd /dconly /s /serializer:DataContractSerializer 
-rem Svcutil ..\bin\Debug\UAOOI.SemanticDataUANetworkingConfiguration.dll /t:metadata /dconly
+Svcutil ..\bin\Debug\UAOOI.SemanticDataUANetworkingConfiguration.dll  /t:metadata /dconly /d:xsd

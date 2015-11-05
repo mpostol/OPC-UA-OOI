@@ -14,14 +14,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       return new ConfigurationData()
         {
-          Associations = new DataSetConfiguration[] { GetAssociationConfiguration(), GetAssociationConfiguration(), GetAssociationConfiguration() },
-          MessageHandlers = new MessageTransportConfiguration[] { GetMessageTransportConfiguration(), GetMessageTransportConfiguration(), GetMessageTransportConfiguration() }
+          DataSets = new DataSetConfiguration[] { GetAssociationConfiguration(), GetAssociationConfiguration(), GetAssociationConfiguration() },
+          MessageHandlers = new MessageHandlerConfiguration[] { GetMessageTransportConfiguration(), GetMessageTransportConfiguration(), GetMessageTransportConfiguration() }
 
         };
     }
-    private static MessageTransportConfiguration GetMessageTransportConfiguration()
+    private static MessageHandlerConfiguration GetMessageTransportConfiguration()
     {
-      return new MessageTransportConfiguration()
+      return new MessageHandlerConfiguration()
       {
         AssociationNames = new string[] { "Associations".AddId(AssociationId) },
         Configuration = null,

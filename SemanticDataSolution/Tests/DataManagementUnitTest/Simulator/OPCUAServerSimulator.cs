@@ -68,7 +68,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       /// <exception cref="System.NotImplementedException"></exception>
       public ConfigurationData GetConfiguration()
       {
-        return new ConfigurationData() { Associations = GetAssociations(), MessageHandlers = GetMessageTransport() };
+        return new ConfigurationData() { DataSets = GetAssociations(), MessageHandlers = GetMessageTransport() };
       }
       /// <summary>
       /// Occurs after the association configuration has been changed.
@@ -81,9 +81,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       #endregion
 
       #region configuration
-      private MessageTransportConfiguration[] GetMessageTransport()
+      private MessageHandlerConfiguration[] GetMessageTransport()
       {
-        return new MessageTransportConfiguration[] { new MessageTransportConfiguration() { AssociationNames = GetTransportAssociations(), 
+        return new MessageHandlerConfiguration[] { new MessageHandlerConfiguration() { AssociationNames = GetTransportAssociations(), 
                                                                                            Configuration = null, 
                                                                                            Name = "UDP", 
                                                                                            TransportRole = AssociationRole.Producer } };

@@ -29,13 +29,10 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.ExtensionDataObject ExtensionData1Field;
+        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration[] DataSetsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration[] AssociationsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageTransportConfiguration[] MessageHandlersField;
+        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageHandlerConfiguration[] MessageHandlersField;
         
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData
         {
@@ -49,34 +46,21 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(Name="ExtensionData", EmitDefaultValue=false)]
-        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.ExtensionDataObject ExtensionData1
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration[] DataSets
         {
             get
             {
-                return this.ExtensionData1Field;
+                return this.DataSetsField;
             }
             set
             {
-                this.ExtensionData1Field = value;
+                this.DataSetsField = value;
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration[] Associations
-        {
-            get
-            {
-                return this.AssociationsField;
-            }
-            set
-            {
-                this.AssociationsField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageTransportConfiguration[] MessageHandlers
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageHandlerConfiguration[] MessageHandlers
         {
             get
             {
@@ -91,30 +75,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ExtensionDataObject", Namespace="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
-        "d")]
-    [System.SerializableAttribute()]
-    public partial class ExtensionDataObject : object, System.Runtime.Serialization.IExtensibleDataObject
-    {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DataSetConfiguration", Namespace="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
         "d")]
     [System.SerializableAttribute()]
@@ -123,9 +83,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.ExtensionDataObject ExtensionData1Field;
         
         private UAOOI.SemanticData.UANetworking.Configuration.Serialization.AssociationRole AssociationRoleField;
         
@@ -159,20 +116,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(Name="ExtensionData", EmitDefaultValue=false)]
-        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.ExtensionDataObject ExtensionData1
-        {
-            get
-            {
-                return this.ExtensionData1Field;
-            }
-            set
-            {
-                this.ExtensionData1Field = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public UAOOI.SemanticData.UANetworking.Configuration.Serialization.AssociationRole AssociationRole
         {
             get
@@ -185,7 +129,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
         public string AssociationName
         {
             get
@@ -198,7 +142,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
         public string RepositoryGroup
         {
             get
@@ -211,7 +155,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
         public string InformationModelURI
         {
             get
@@ -224,7 +168,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
         public string DataSymbolicName
         {
             get
@@ -237,7 +181,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
         public UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataMemberConfiguration[] DataSet
         {
             get
@@ -250,7 +194,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
         public string Guid
         {
             get
@@ -269,14 +213,11 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     [System.Runtime.Serialization.DataContractAttribute(Name="MessageTransportConfiguration", Namespace="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
         "d")]
     [System.SerializableAttribute()]
-    public partial class MessageTransportConfiguration : object, System.Runtime.Serialization.IExtensibleDataObject
+    public partial class MessageHandlerConfiguration : object, System.Runtime.Serialization.IExtensibleDataObject
     {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.ExtensionDataObject ExtensionData1Field;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -301,19 +242,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(Name="ExtensionData", EmitDefaultValue=false)]
-        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.ExtensionDataObject ExtensionData1
-        {
-            get
-            {
-                return this.ExtensionData1Field;
-            }
-            set
-            {
-                this.ExtensionData1Field = value;
-            }
-        }
-        
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
         public string Name
         {
@@ -327,7 +255,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
         public UAOOI.SemanticData.UANetworking.Configuration.Serialization.ArrayOfString AssociationNamesArrayOfString
         {
             get
@@ -340,7 +268,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
         public System.Xml.XmlElement Configuration
         {
             get
@@ -353,7 +281,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
         public UAOOI.SemanticData.UANetworking.Configuration.Serialization.AssociationRole TransportRole
         {
             get
@@ -392,9 +320,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.ExtensionDataObject ExtensionData1Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SymbolicNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -415,19 +340,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(Name="ExtensionData", EmitDefaultValue=false)]
-        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.ExtensionDataObject ExtensionData1
-        {
-            get
-            {
-                return this.ExtensionData1Field;
-            }
-            set
-            {
-                this.ExtensionData1Field = value;
-            }
-        }
-        
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
         public string SymbolicName
         {
@@ -441,7 +353,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
         public string ProcessValueName
         {
             get
@@ -454,7 +366,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
         public string SourceEncoding
         {
             get

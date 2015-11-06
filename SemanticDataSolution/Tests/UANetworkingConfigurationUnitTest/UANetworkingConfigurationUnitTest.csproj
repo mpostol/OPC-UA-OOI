@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConfigurationDataUnitTest.cs" />
+    <Compile Include="ReferenceConfiguration.cs" />
     <Compile Include="SerializationUnitTest.cs" />
     <Compile Include="UANetworkingConfigurationUnitTest.cs" />
   </ItemGroup>

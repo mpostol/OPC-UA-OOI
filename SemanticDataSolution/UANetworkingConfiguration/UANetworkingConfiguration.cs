@@ -5,18 +5,27 @@ using System.IO;
 using CAS.UA.IServerConfiguration;
 using UAOOI.DataBindings;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using System.Linq;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration
 {
   public class UANetworkingConfiguration : ConfigurationBase
   {
+
+    #region API
+    public UANetworkingConfiguration()
+    {
+      DefaultConfigurationLoader = NewConfigurationData;
+    }
     public ConfigurationData CurrentConfiguration { get; private set; }
     public Action<TraceEventType, int, string> Tracer { get; set; }
+    public Func<ConfigurationData> DefaultConfigurationLoader { get; set; }
+    #endregion
 
     #region ConfigurationBase
     public override void CreateDefaultConfiguration()
     {
-      CurrentConfiguration = ConfigurationData.CreateDefault();
+      CurrentConfiguration = ConfigurationData.Load<ConfigurationData>(DefaultConfigurationLoader);
       RaiseOnChangeEvent(true);
     }
     public override void ReadConfiguration(FileInfo configurationFile)
@@ -40,14 +49,20 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     public override IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
     {
       if (descriptor == null)
-        throw new ArgumentNullException(nameof(descriptor)); 
+        throw new ArgumentNullException(nameof(descriptor));
       if (CurrentConfiguration == null)
         return null;
-      return CurrentConfiguration.GetInstanceConfiguration(descriptor);
+      return CurrentConfiguration.GetInstanceConfiguration(descriptor).FirstOrDefault<IInstanceConfiguration>();
     }
     #endregion
 
+    #region privat
     private FileInfo m_ConfigurationFile;
+    private ConfigurationData NewConfigurationData()
+    {
+      return ConfigurationData.CreateDefault();
+    }
+    #endregion
 
   }
 }

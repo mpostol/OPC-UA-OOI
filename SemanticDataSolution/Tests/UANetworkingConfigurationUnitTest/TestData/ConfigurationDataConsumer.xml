@@ -1,5 +1,5 @@
 ﻿<ConfigurationData xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">
-  <Associations>
+  <DataSets>
     <DataSetConfiguration>
       <AssociationRole>Consumer</AssociationRole>
       <AssociationName>Association1</AssociationName>
@@ -19,15 +19,22 @@
         </DataMemberConfiguration>
       </DataSet>
       <Guid>c1f53ffb-6552-4ccc-84c9-f847147cdc85</Guid>
+      <Root>
+        <BindingDescription>BindingDescription</BindingDescription>
+        <DataType>ns.name</DataType>
+        <InstanceDeclaration>false</InstanceDeclaration>
+        <NodeClass>Object</NodeClass>
+        <NodeIdentifier>NodeIdentifier.NodeIdentifierNamespace</NodeIdentifier>
+      </Root>
     </DataSetConfiguration>
-  </Associations>
+  </DataSets>
   <MessageHandlers>
-    <MessageTransportConfiguration>
+    <MessageHandlerConfiguration>
       <Name>UDP</Name>
       <AssociationNamesArrayOfString>
         <string>Association1</string>
       </AssociationNamesArrayOfString>
       <TransportRole>Consumer</TransportRole>
-    </MessageTransportConfiguration>
+    </MessageHandlerConfiguration>
   </MessageHandlers>
 </ConfigurationData>

@@ -1,12 +1,13 @@
 ﻿using CAS.UA.IServerConfiguration;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
   public partial class ConfigurationData
   {
     public static ConfigurationData CurrentConfigurationData { get; private set; }
-
     /// <summary>
     /// Loads the specified loader.
     /// </summary>
@@ -23,24 +24,17 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     {
       return new ConfigurationData() { DataSets = new DataSetConfiguration[] { }, MessageHandlers = new MessageHandlerConfiguration[] { } };
     }
-    internal IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
+    internal IEnumerable<IInstanceConfiguration> GetInstanceConfiguration(INodeDescriptor descriptor)
     {
-      //InstanceConfiguration sourceIC = new DataSetConfiguration(descriptor);
-      //InstanceConfiguration ic = null;
-      //if (Dictionary.TryGetValue(sourceIC.NodeDescriptor, out ic))
-      //  return ic;
-      //else
-      //{
-      //  Dictionary.Add(sourceIC.NodeDescriptor, sourceIC);
-      //  return sourceIC;
-      //}
-      throw new NotImplementedException();
+      return DataSets.Where<DataSetConfiguration>(x => x.Root.CompareTo(descriptor) == 0);
     }
 
+    #region private
     private void Initialize()
     {
       //TODO throw new NotImplementedException();
     }
+    #endregion
 
   }
 }

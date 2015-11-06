@@ -9,383 +9,390 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Runtime.Serialization.ContractNamespaceAttribute("http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
-    "d", ClrNamespace="UAOOI.SemanticData.UANetworking.Configuration.Serialization")]
+    "d", ClrNamespace = "UAOOI.SemanticData.UANetworking.Configuration.Serialization")]
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
-    using System.Runtime.Serialization;
-    using System;
-    
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ConfigurationData", Namespace="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
+  using System.Runtime.Serialization;
+  using System;
+  using CAS.UA.IServerConfiguration;
+
+  [System.Diagnostics.DebuggerStepThroughAttribute()]
+  [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+  [System.Runtime.Serialization.DataContractAttribute(Name = "ConfigurationData", Namespace = "http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
         "d")]
-    [System.SerializableAttribute()]
-    public partial class ConfigurationData : object, System.Runtime.Serialization.IExtensibleDataObject
+  [System.SerializableAttribute()]
+  public partial class ConfigurationData : object, System.Runtime.Serialization.IExtensibleDataObject
+  {
+
+    [System.NonSerializedAttribute()]
+    private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration[] DataSetsField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageHandlerConfiguration[] MessageHandlersField;
+
+    public System.Runtime.Serialization.ExtensionDataObject ExtensionData
     {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration[] DataSetsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageHandlerConfiguration[] MessageHandlersField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration[] DataSets
-        {
-            get
-            {
-                return this.DataSetsField;
-            }
-            set
-            {
-                this.DataSetsField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageHandlerConfiguration[] MessageHandlers
-        {
-            get
-            {
-                return this.MessageHandlersField;
-            }
-            set
-            {
-                this.MessageHandlersField = value;
-            }
-        }
+      get
+      {
+        return this.extensionDataField;
+      }
+      set
+      {
+        this.extensionDataField = value;
+      }
     }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DataSetConfiguration", Namespace="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
-        "d")]
-    [System.SerializableAttribute()]
-    public partial class DataSetConfiguration : object, System.Runtime.Serialization.IExtensibleDataObject
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false)]
+    public UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration[] DataSets
     {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.AssociationRole AssociationRoleField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AssociationNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RepositoryGroupField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string InformationModelURIField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DataSymbolicNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataMemberConfiguration[] DataSetField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string GuidField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.AssociationRole AssociationRole
-        {
-            get
-            {
-                return this.AssociationRoleField;
-            }
-            set
-            {
-                this.AssociationRoleField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string AssociationName
-        {
-            get
-            {
-                return this.AssociationNameField;
-            }
-            set
-            {
-                this.AssociationNameField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string RepositoryGroup
-        {
-            get
-            {
-                return this.RepositoryGroupField;
-            }
-            set
-            {
-                this.RepositoryGroupField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string InformationModelURI
-        {
-            get
-            {
-                return this.InformationModelURIField;
-            }
-            set
-            {
-                this.InformationModelURIField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
-        public string DataSymbolicName
-        {
-            get
-            {
-                return this.DataSymbolicNameField;
-            }
-            set
-            {
-                this.DataSymbolicNameField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
-        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataMemberConfiguration[] DataSet
-        {
-            get
-            {
-                return this.DataSetField;
-            }
-            set
-            {
-                this.DataSetField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
-        public string Guid
-        {
-            get
-            {
-                return this.GuidField;
-            }
-            set
-            {
-                this.GuidField = value;
-            }
-        }
+      get
+      {
+        return this.DataSetsField;
+      }
+      set
+      {
+        this.DataSetsField = value;
+      }
     }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MessageTransportConfiguration", Namespace="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
-        "d")]
-    [System.SerializableAttribute()]
-    public partial class MessageHandlerConfiguration : object, System.Runtime.Serialization.IExtensibleDataObject
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false)]
+    public UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageHandlerConfiguration[] MessageHandlers
     {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.ArrayOfString AssociationNamesArrayOfStringField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Xml.XmlElement ConfigurationField;
-        
-        private UAOOI.SemanticData.UANetworking.Configuration.Serialization.AssociationRole TransportRoleField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string Name
-        {
-            get
-            {
-                return this.NameField;
-            }
-            set
-            {
-                this.NameField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.ArrayOfString AssociationNamesArrayOfString
-        {
-            get
-            {
-                return this.AssociationNamesArrayOfStringField;
-            }
-            set
-            {
-                this.AssociationNamesArrayOfStringField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public System.Xml.XmlElement Configuration
-        {
-            get
-            {
-                return this.ConfigurationField;
-            }
-            set
-            {
-                this.ConfigurationField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
-        public UAOOI.SemanticData.UANetworking.Configuration.Serialization.AssociationRole TransportRole
-        {
-            get
-            {
-                return this.TransportRoleField;
-            }
-            set
-            {
-                this.TransportRoleField = value;
-            }
-        }
+      get
+      {
+        return this.MessageHandlersField;
+      }
+      set
+      {
+        this.MessageHandlersField = value;
+      }
     }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AssociationRole", Namespace="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
-        "d")]
-    public enum AssociationRole : int
+  }
+
+  [System.Runtime.Serialization.DataContractAttribute(Name = "DataSetConfiguration", Namespace = CommonDefinitions.Namespace)]
+  [System.SerializableAttribute()]
+  public partial class DataSetConfiguration : object, System.Runtime.Serialization.IExtensibleDataObject
+  {
+
+    [System.NonSerializedAttribute()]
+    private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+
+    private UAOOI.SemanticData.UANetworking.Configuration.Serialization.AssociationRole AssociationRoleField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private string AssociationNameField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private string RepositoryGroupField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private string InformationModelURIField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private string DataSymbolicNameField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataMemberConfiguration[] DataSetField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private string GuidField;
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private NodeDescriptor RootField;
+
+    public System.Runtime.Serialization.ExtensionDataObject ExtensionData
     {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Consumer = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Producer = 1,
+      get
+      {
+        return this.extensionDataField;
+      }
+      set
+      {
+        this.extensionDataField = value;
+      }
     }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DataMemberConfiguration", Namespace="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
-        "d")]
-    [System.SerializableAttribute()]
-    public partial class DataMemberConfiguration : object, System.Runtime.Serialization.IExtensibleDataObject
+
+    [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true)]
+    public UAOOI.SemanticData.UANetworking.Configuration.Serialization.AssociationRole AssociationRole
     {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SymbolicNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ProcessValueNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SourceEncodingField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string SymbolicName
-        {
-            get
-            {
-                return this.SymbolicNameField;
-            }
-            set
-            {
-                this.SymbolicNameField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string ProcessValueName
-        {
-            get
-            {
-                return this.ProcessValueNameField;
-            }
-            set
-            {
-                this.ProcessValueNameField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string SourceEncoding
-        {
-            get
-            {
-                return this.SourceEncodingField;
-            }
-            set
-            {
-                this.SourceEncodingField = value;
-            }
-        }
+      get
+      {
+        return this.AssociationRoleField;
+      }
+      set
+      {
+        this.AssociationRoleField = value;
+      }
     }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ArrayOfString", Namespace="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
-        "d", ItemName="string")]
-    [System.SerializableAttribute()]
-    public class ArrayOfString : System.Collections.Generic.List<string>
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 1)]
+    public string AssociationName
     {
+      get
+      {
+        return this.AssociationNameField;
+      }
+      set
+      {
+        this.AssociationNameField = value;
+      }
     }
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 2)]
+    public string RepositoryGroup
+    {
+      get
+      {
+        return this.RepositoryGroupField;
+      }
+      set
+      {
+        this.RepositoryGroupField = value;
+      }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 3)]
+    public string InformationModelURI
+    {
+      get
+      {
+        return this.InformationModelURIField;
+      }
+      set
+      {
+        this.InformationModelURIField = value;
+      }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 4)]
+    public string DataSymbolicName
+    {
+      get
+      {
+        return this.DataSymbolicNameField;
+      }
+      set
+      {
+        this.DataSymbolicNameField = value;
+      }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 5)]
+    public UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataMemberConfiguration[] DataSet
+    {
+      get
+      {
+        return this.DataSetField;
+      }
+      set
+      {
+        this.DataSetField = value;
+      }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 6)]
+    public string Guid
+    {
+      get
+      {
+        return this.GuidField;
+      }
+      set
+      {
+        this.GuidField = value;
+      }
+    }
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 7, IsRequired = true)]
+    [System.Xml.Serialization.XmlElementAttribute( IsNullable = false )]
+    public NodeDescriptor Root
+    {
+      get { return RootField; }
+      set { RootField = value; }
+    }
+
+  }
+
+  [System.Diagnostics.DebuggerStepThroughAttribute()]
+  [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+  [System.Runtime.Serialization.DataContractAttribute(Name = "MessageTransportConfiguration", Namespace = "http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
+      "d")]
+  [System.SerializableAttribute()]
+  public partial class MessageHandlerConfiguration : object, System.Runtime.Serialization.IExtensibleDataObject
+  {
+
+    [System.NonSerializedAttribute()]
+    private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private string NameField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private UAOOI.SemanticData.UANetworking.Configuration.Serialization.ArrayOfString AssociationNamesArrayOfStringField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private System.Xml.XmlElement ConfigurationField;
+
+    private UAOOI.SemanticData.UANetworking.Configuration.Serialization.AssociationRole TransportRoleField;
+
+    public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+    {
+      get
+      {
+        return this.extensionDataField;
+      }
+      set
+      {
+        this.extensionDataField = value;
+      }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false)]
+    public string Name
+    {
+      get
+      {
+        return this.NameField;
+      }
+      set
+      {
+        this.NameField = value;
+      }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 1)]
+    public UAOOI.SemanticData.UANetworking.Configuration.Serialization.ArrayOfString AssociationNamesArrayOfString
+    {
+      get
+      {
+        return this.AssociationNamesArrayOfStringField;
+      }
+      set
+      {
+        this.AssociationNamesArrayOfStringField = value;
+      }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 2)]
+    public System.Xml.XmlElement Configuration
+    {
+      get
+      {
+        return this.ConfigurationField;
+      }
+      set
+      {
+        this.ConfigurationField = value;
+      }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true, Order = 3)]
+    public UAOOI.SemanticData.UANetworking.Configuration.Serialization.AssociationRole TransportRole
+    {
+      get
+      {
+        return this.TransportRoleField;
+      }
+      set
+      {
+        this.TransportRoleField = value;
+      }
+    }
+  }
+
+  [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+  [System.Runtime.Serialization.DataContractAttribute(Name = "AssociationRole", Namespace = "http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
+      "d")]
+  public enum AssociationRole : int
+  {
+
+    [System.Runtime.Serialization.EnumMemberAttribute()]
+    Consumer = 0,
+
+    [System.Runtime.Serialization.EnumMemberAttribute()]
+    Producer = 1,
+  }
+
+  [System.Diagnostics.DebuggerStepThroughAttribute()]
+  [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+  [System.Runtime.Serialization.DataContractAttribute(Name = "DataMemberConfiguration", Namespace = "http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
+      "d")]
+  [System.SerializableAttribute()]
+  public partial class DataMemberConfiguration : object, System.Runtime.Serialization.IExtensibleDataObject
+  {
+
+    [System.NonSerializedAttribute()]
+    private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private string SymbolicNameField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private string ProcessValueNameField;
+
+    [System.Runtime.Serialization.OptionalFieldAttribute()]
+    private string SourceEncodingField;
+
+    public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+    {
+      get
+      {
+        return this.extensionDataField;
+      }
+      set
+      {
+        this.extensionDataField = value;
+      }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false)]
+    public string SymbolicName
+    {
+      get
+      {
+        return this.SymbolicNameField;
+      }
+      set
+      {
+        this.SymbolicNameField = value;
+      }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 1)]
+    public string ProcessValueName
+    {
+      get
+      {
+        return this.ProcessValueNameField;
+      }
+      set
+      {
+        this.ProcessValueNameField = value;
+      }
+    }
+
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 2)]
+    public string SourceEncoding
+    {
+      get
+      {
+        return this.SourceEncodingField;
+      }
+      set
+      {
+        this.SourceEncodingField = value;
+      }
+    }
+  }
+
+  [System.Diagnostics.DebuggerStepThroughAttribute()]
+  [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+  [System.Runtime.Serialization.CollectionDataContractAttribute(Name = "ArrayOfString", Namespace = "http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
+      "d", ItemName = "string")]
+  [System.SerializableAttribute()]
+  public class ArrayOfString : System.Collections.Generic.List<string>
+  {
+  }
 }

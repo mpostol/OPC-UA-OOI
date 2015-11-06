@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
-using CAS.UA.IServerConfiguration;
 using System.Xml;
+using UAOOI.DataBindings;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 {
@@ -17,6 +19,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     {
       UANetworkingConfiguration _newConfiguration = new UANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
+      Assert.IsNotNull(_newConfiguration.DefaultConfigurationLoader);
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
@@ -25,6 +28,12 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       UANetworkingConfiguration _newConfiguration = new UANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
       _newConfiguration.CreateDefaultConfiguration();
+      Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
+      ConfigurationData _CurrentConfiguration = _newConfiguration.CurrentConfiguration;
+      Assert.IsNotNull(_CurrentConfiguration.DataSets);
+      Assert.AreEqual<int>(0, _CurrentConfiguration.DataSets.Length);
+      Assert.IsNotNull(_CurrentConfiguration.MessageHandlers);
+      Assert.AreEqual<int>(0, _CurrentConfiguration.MessageHandlers.Length);
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
@@ -60,55 +69,98 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
-    public void GetInstanceConfigurationTestMethod()
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void GetInstanceConfigurationNullTestMethod()
+    {
+      UANetworkingConfiguration _newConfiguration = new UANetworkingConfiguration();
+      Assert.IsNotNull(_newConfiguration);
+      IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(null);
+    }
+    [TestMethod]
+    [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
+    public void GetInstanceConfigurationNoConfigurationTestMethod()
     {
       UANetworkingConfiguration _newConfiguration = new UANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
       INodeDescriptor _nd = new NodeDescriptor();
-      _newConfiguration.GetInstanceConfiguration(_nd);
+      IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
+      Assert.IsNull(_newInstanceConfiguration);
     }
-
-    private class NodeDescriptor : INodeDescriptor
+    [TestMethod]
+    [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
+    public void GetInstanceConfigurationTestMethod()
     {
-      public string BindingDescription
-      {
-        get
-        {
-          throw new NotImplementedException();
-        }
-      }
-
-      public XmlQualifiedName DataType
-      {
-        get
-        {
-          throw new NotImplementedException();
-        }
-      }
-
-      public bool InstanceDeclaration
-      {
-        get
-        {
-          throw new NotImplementedException();
-        }
-      }
-
-      public InstanceNodeClassesEnum NodeClass
-      {
-        get
-        {
-          throw new NotImplementedException();
-        }
-      }
-
-      public XmlQualifiedName NodeIdentifier
-      {
-        get
-        {
-          throw new NotImplementedException();
-        }
-      }
+      //create hard coded configuration 
+      UANetworkingConfiguration _newConfiguration = new UANetworkingConfiguration();
+      Assert.IsNotNull(_newConfiguration);
+      _newConfiguration.DefaultConfigurationLoader = ReferenceConfiguration.LoadConsumer;
+      bool _ConfigurationFileChanged = false;
+      _newConfiguration.OnModified += (x, y) => { Assert.IsTrue(y.ConfigurationFileChanged); _ConfigurationFileChanged = y.ConfigurationFileChanged; };
+      _newConfiguration.CreateDefaultConfiguration();
+      Assert.IsTrue(_ConfigurationFileChanged);
+      Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
+      //test GetInstanceConfiguration
+      INodeDescriptor _nd = new NodeDescriptor() { NodeIdentifier = new System.Xml.XmlQualifiedName("NodeDescriptor", "NodeDescriptorNS") };
+      IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
+      Assert.IsNotNull(_newInstanceConfiguration);
     }
+    private class NodeDescriptor : NodeDescriptorBase
+    {
+      public override string BindingDescription
+      {
+        get
+        {
+          throw new NotImplementedException();
+        }
+
+        set
+        {
+          throw new NotImplementedException();
+        }
+      }
+
+      public override XmlQualifiedName DataType
+      {
+        get
+        {
+          throw new NotImplementedException();
+        }
+
+        set
+        {
+          throw new NotImplementedException();
+        }
+      }
+      public override bool InstanceDeclaration
+      {
+        get
+        {
+          throw new NotImplementedException();
+        }
+
+        set
+        {
+          throw new NotImplementedException();
+        }
+      }
+      public override InstanceNodeClassesEnum NodeClass
+      {
+        get
+        {
+          throw new NotImplementedException();
+        }
+
+        set
+        {
+          throw new NotImplementedException();
+        }
+      }
+      public override XmlQualifiedName NodeIdentifier
+      {
+        get; set;
+      }
+
+    }
+
   }
 }

@@ -48,6 +48,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.IsTrue(_message.Contains(_configFile.FullName));
       FileInfo _2Write = new FileInfo(@"TestData\ConfigurationData.bak");
       DataContractSerializers.Save<ConfigurationData>(_2Write, _cd, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); });
+      FileInfo _2Test = new FileInfo(@"TestData\ConfigurationData.bak");
+      Assert.IsTrue(_2Test.Exists);
       Console.WriteLine(_message);
     }
     [TestMethod]

@@ -88,5 +88,9 @@ namespace UAOOI.DataBindings.UnitTest
         RaiseOnChangeEvent(true);
       }
     }
+    private class DerivedNodeDescriptor : NodeDescriptor
+    {
+
+    }
   }
 }

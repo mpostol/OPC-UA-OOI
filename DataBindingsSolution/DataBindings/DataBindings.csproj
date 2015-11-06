@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="InstanceConfigurationBase.cs" />
     <Compile Include="ConfigurationBase.cs" />
+    <Compile Include="NodeDescriptorBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

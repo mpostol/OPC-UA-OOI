@@ -1,12 +1,10 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.DataBindings.Serializers;
-using System.Runtime.Serialization;
 using System.IO;
+using System.Runtime.Serialization;
+using UAOOI.DataBindings.Serializers;
 
-namespace CAS.UAOOI.DataBindings.UnitTest
+namespace UAOOI.DataBindings.UnitTest
 {
   /// <summary>
   /// Summary description for DataContractSerializersUnitTest

@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration
 {
-  public class UANetworkingConfiguration : ConfigurationBase
+  public abstract class UANetworkingConfiguration : ConfigurationBase
   {
 
     #region API
@@ -42,10 +42,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
       m_ConfigurationFile = configurationFile;
       RaiseOnChangeEvent(true);
     }
-    public override void EditConfiguration()
-    {
-      throw new NotImplementedException();
-    }
     public override IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
     {
       if (descriptor == null)
@@ -54,17 +50,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
         return null;
       return CurrentConfiguration.GetInstanceConfiguration(descriptor).FirstOrDefault<IInstanceConfiguration>();
     }
-    public override void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed)
-    {
-      base.CreateInstanceConfigurations(descriptors, SkipOpeningConfigurationFile, out CancelWasPressed);
-    }
-    protected override string DefaultConfigurationFileName
-    {
-      get
-      {
-        return Properties.Settings.Default.Default_ConfigurationFileName;
-      }
-    }
     #endregion
 
     #region privat
@@ -72,6 +57,13 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     private ConfigurationData NewConfigurationData()
     {
       return ConfigurationData.CreateDefault();
+    }
+    protected override string DefaultConfigurationFileName
+    {
+      get
+      {
+        return Properties.Settings.Default.Default_ConfigurationFileName;
+      }
     }
     #endregion
 

@@ -20,10 +20,7 @@ namespace UAOOI.DataBindings
     /// Creates the default configuration.
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    public virtual void CreateDefaultConfiguration()
-    {
-      throw new NotImplementedException();
-    }
+    public abstract void CreateDefaultConfiguration();
     /// <summary>
     /// Creates automatically the instance configurations on the best effort basis.
     /// </summary>
@@ -31,10 +28,7 @@ namespace UAOOI.DataBindings
     /// <param name="SkipOpeningConfigurationFile">if set to <c>true</c> skip opening configuration file.</param>
     /// <param name="CancelWasPressed">if set to <c>true</c> cancel was pressed.</param>
     /// <exception cref="NotImplementedException"></exception>
-    public virtual void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed)
-    {
-      throw new NotImplementedException();
-    }
+    public abstract void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed);
     /// <summary>
     /// Gets the default name of the file.
     /// </summary>
@@ -59,19 +53,13 @@ namespace UAOOI.DataBindings
     /// <param name="descriptor">Provides identifying description of the node to be configured.</param>
     /// <returns>Returned object provides access to the instance node configuration edition functionality.</returns>
     /// <exception cref="NotImplementedException"></exception>
-    public virtual IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
-    {
-      throw new NotImplementedException();
-    }
+    public abstract IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor);
     /// <summary>
     /// Reads the configuration.
     /// </summary>
     /// <param name="configurationFile">The configuration file.</param>
     /// <exception cref="NotImplementedException"></exception>
-    public virtual void ReadConfiguration(FileInfo configurationFile)
-    {
-      throw new NotImplementedException();
-    }
+    public abstract void ReadConfiguration(FileInfo configurationFile);
     /// <summary>
     /// Saves the configuration file to a specified location.
     /// </summary>
@@ -79,11 +67,10 @@ namespace UAOOI.DataBindings
     /// <param name="configurationFile">The configuration file.</param>
     /// <exception cref="NotImplementedException"></exception>
     /// <remarks><paramref name="solutionFilePath" /> is to be used to create relative file path to configuration files used by the plug-in.</remarks>
-    public virtual void SaveConfiguration(string solutionFilePath, FileInfo configurationFile)
-    {
-      throw new NotImplementedException();
-    }
+    public abstract void SaveConfiguration(string solutionFilePath, FileInfo configurationFile);
     #endregion
+
+    #region private
     /// <summary>
     /// Raises the on change event.
     /// </summary>
@@ -97,6 +84,7 @@ namespace UAOOI.DataBindings
     /// </summary>
     /// <value>The default name of the configuration file.</value>
     protected abstract string DefaultConfigurationFileName { get; }
+    #endregion
 
   }
 }

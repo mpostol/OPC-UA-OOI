@@ -1,7 +1,7 @@
-﻿using CAS.UA.IServerConfiguration;
+﻿
+using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using UAOOI.DataBindings;
 using System;
 
 namespace UAOOI.DataBindings.UnitTest
@@ -9,66 +9,19 @@ namespace UAOOI.DataBindings.UnitTest
   [TestClass]
   public class ConfigurationBaseUnitTest
   {
+
     [TestMethod]
-    [ExpectedException(typeof(System.NotImplementedException))]
-    public void CreateDefaultConfigurationTestMethod()
-    {
-      ConfigurationBase _mc = new DerivedTest();
-      Assert.IsNotNull(_mc);
-      _mc.CreateDefaultConfiguration();
-    }
-    [TestMethod]
-    [ExpectedException(typeof(System.NotImplementedException))]
-    public void CreateInstanceConfigurationsTestMethod()
-    {
-      ConfigurationBase _mc = new DerivedTest();
-      Assert.IsNotNull(_mc);
-      bool cancelWasPressed = false;
-      _mc.CreateInstanceConfigurations(new NodeDescriptor[] { NodeDescriptor.GetTestInstance(), NodeDescriptor.GetTestInstance() }, true, out cancelWasPressed);
-    }
-    [TestMethod]
-    [ExpectedException(typeof(System.NotImplementedException))]
+    [TestCategory("DataBindings_ConfigurationBaseUnitTest")]
     public void DefaultFileNameTestMethod()
     {
       ConfigurationBase _mc = new DerivedTest();
       Assert.IsNotNull(_mc);
-      string _dfn = _mc.DefaultFileName;
+      string _fileName = _mc.DefaultFileName;
+      FileInfo _fi = new FileInfo(_fileName);
+      Assert.AreEqual<string>(".uasconfig", _fi.Extension);
     }
     [TestMethod]
-    [ExpectedException(typeof(System.NotImplementedException))]
-    public void EditConfigurationTestMethod()
-    {
-      ConfigurationBase _mc = new DerivedTest();
-      Assert.IsNotNull(_mc);
-      _mc.EditConfiguration();
-    }
-    [TestMethod]
-    [ExpectedException(typeof(System.NotImplementedException))]
-    public void GetInstanceConfigurationTestMethod()
-    {
-      ConfigurationBase _mc = new DerivedTest();
-      Assert.IsNotNull(_mc);
-      IInstanceConfiguration _ic = _mc.GetInstanceConfiguration(NodeDescriptor.GetTestInstance());
-    }
-    [TestMethod]
-    [ExpectedException(typeof(System.NotImplementedException))]
-    public void ReadConfigurationTestMethod()
-    {
-      ConfigurationBase _mc = new DerivedTest();
-      Assert.IsNotNull(_mc);
-      FileInfo _fi = new FileInfo(@"BleBle.txt");
-      Assert.IsFalse(_fi.Exists);
-      _mc.ReadConfiguration(_fi);
-    }
-    [TestMethod]
-    [ExpectedException(typeof(System.NotImplementedException))]
-    public void SaveConfigurationTestMethod()
-    {
-      ConfigurationBase _mc = new DerivedTest();
-      Assert.IsNotNull(_mc);
-      _mc.SaveConfiguration(@"solutionFilePath", new FileInfo(@"configurationFile"));
-    }
-    [TestMethod]
+    [TestCategory("DataBindings_ConfigurationBaseUnitTest")]
     public void RaiseOnChangeNullTestMethod()
     {
       DerivedTest _instance = new DerivedTest();
@@ -76,21 +29,47 @@ namespace UAOOI.DataBindings.UnitTest
       _instance.OnModified += (x, y) => Assert.IsTrue(y.ConfigurationFileChanged);
       _instance.RaiseOnChangeEventCall();
     }
-    private class DerivedTest: ConfigurationBase
+
+    #region private
+    private class DerivedTest : ConfigurationBase
     {
+      protected override string DefaultConfigurationFileName
+      {
+        get
+        {
+          return "DefaultConfigurationFileName";
+        }
+      }
+      public override void CreateDefaultConfiguration()
+      {
+        throw new NotImplementedException();
+      }
+      public override void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed)
+      {
+        throw new NotImplementedException();
+      }
       public override void EditConfiguration()
       {
         throw new NotImplementedException();
       }
-
+      public override IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
+      {
+        throw new NotImplementedException();
+      }
+      public override void ReadConfiguration(FileInfo configurationFile)
+      {
+        throw new NotImplementedException();
+      }
+      public override void SaveConfiguration(string solutionFilePath, FileInfo configurationFile)
+      {
+        throw new NotImplementedException();
+      }
       internal void RaiseOnChangeEventCall()
       {
         RaiseOnChangeEvent(true);
       }
     }
-    private class DerivedNodeDescriptor : NodeDescriptor
-    {
+    #endregion
 
-    }
   }
 }

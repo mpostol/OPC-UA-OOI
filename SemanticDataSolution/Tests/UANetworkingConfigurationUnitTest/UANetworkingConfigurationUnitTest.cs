@@ -9,24 +9,28 @@ using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 {
+
   [TestClass]
   [DeploymentItem(@"TestData\", @"TestData\")]
   public class UANetworkingConfigurationUnitTest
   {
 
+    #region TestClass
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void CreatorTestMethod()
     {
-      UANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
+      DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
       Assert.IsNotNull(_newConfiguration.DefaultConfigurationLoader);
+      Assert.IsNotNull(_newConfiguration.Tracer);
+      _newConfiguration.Tracer(System.Diagnostics.TraceEventType.Verbose, 0, "Do nothing and keep alive.");
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void CreateDefaultConfigurationTestMethod()
     {
-      UANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
+      DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
       _newConfiguration.CreateDefaultConfiguration();
       Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
@@ -40,7 +44,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void ReadSaveConfigurationTestMethod()
     {
-      UANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
+      DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationData.xml");
       Assert.IsTrue(_configFile.Exists);
@@ -57,14 +61,15 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       _newConfiguration.SaveConfiguration(String.Empty, _fi);
       Assert.IsTrue(_ConfigurationFileChanged);
       Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
-
+      _fi.Refresh();
+      Assert.IsTrue(_fi.Exists);
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     [ExpectedException(typeof(ArgumentNullException))]
     public void GetInstanceConfigurationNullTestMethod()
     {
-      UANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
+      DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
       IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(null);
     }
@@ -72,7 +77,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void GetInstanceConfigurationNoConfigurationTestMethod()
     {
-      UANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
+      DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
       INodeDescriptor _nd = new NodeDescriptor();
       IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
@@ -83,7 +88,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     public void GetInstanceConfigurationTestMethod()
     {
       //create hard coded configuration 
-      UANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
+      DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
       _newConfiguration.DefaultConfigurationLoader = ReferenceConfiguration.LoadConsumer;
       bool _ConfigurationFileChanged = false;
@@ -100,12 +105,13 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void DefaultFileNameTestMethod()
     {
-      UANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
+      DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
       string _fileName = _newConfiguration.DefaultFileName;
       FileInfo _fi = new FileInfo(_fileName);
       Assert.AreEqual<string>(".uasconfig", _fi.Extension);
     }
+    #endregion
 
     #region private
     private class NodeDescriptor : NodeDescriptorBase
@@ -165,7 +171,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       }
 
     }
-    private class DerivedUANetworkingConfiguration : UANetworkingConfiguration
+    private class DerivedUANetworkingConfiguration : UANetworkingConfiguration<ConfigurationData>
     {
       public override void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed)
       {

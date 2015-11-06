@@ -9,28 +9,30 @@ using System.Linq;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration
 {
-  public abstract class UANetworkingConfiguration : ConfigurationBase
+  public abstract class UANetworkingConfiguration<ConfigurationDataType> : ConfigurationBase
+    where ConfigurationDataType : ConfigurationData, new()
   {
 
     #region API
     public UANetworkingConfiguration()
     {
       DefaultConfigurationLoader = NewConfigurationData;
+      Tracer += (x, y, z) => { };
     }
-    public ConfigurationData CurrentConfiguration { get; private set; }
+    public ConfigurationDataType CurrentConfiguration { get; private set; }
     public Action<TraceEventType, int, string> Tracer { get; set; }
-    public Func<ConfigurationData> DefaultConfigurationLoader { get; set; }
+    public Func<ConfigurationDataType> DefaultConfigurationLoader { get; set; }
     #endregion
 
     #region ConfigurationBase
     public override void CreateDefaultConfiguration()
     {
-      CurrentConfiguration = ConfigurationData.Load<ConfigurationData>(DefaultConfigurationLoader);
+      CurrentConfiguration = ConfigurationData.Load<ConfigurationDataType>(DefaultConfigurationLoader);
       RaiseOnChangeEvent(true);
     }
     public override void ReadConfiguration(FileInfo configurationFile)
     {
-      CurrentConfiguration = ConfigurationData.Load<ConfigurationData>(() => DataBindings.Serializers.DataContractSerializers.Load<ConfigurationData>(configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z)));
+      CurrentConfiguration = ConfigurationData.Load<ConfigurationDataType>(() => DataBindings.Serializers.DataContractSerializers.Load<ConfigurationDataType>(configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z)));
       m_ConfigurationFile = configurationFile;
       RaiseOnChangeEvent(true);
     }
@@ -54,9 +56,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
 
     #region privat
     private FileInfo m_ConfigurationFile;
-    private ConfigurationData NewConfigurationData()
+    private ConfigurationDataType NewConfigurationData()
     {
-      return ConfigurationData.CreateDefault();
+      return new ConfigurationDataType() { DataSets = new DataSetConfiguration[] { }, MessageHandlers = new MessageHandlerConfiguration[] { } };
     }
     protected override string DefaultConfigurationFileName
     {

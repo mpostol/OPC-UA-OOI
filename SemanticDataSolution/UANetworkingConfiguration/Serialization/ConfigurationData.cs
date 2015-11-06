@@ -20,10 +20,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       _configuration.Initialize();
       return _configuration;
     }
-    internal static ConfigurationData CreateDefault()
-    {
-      return new ConfigurationData() { DataSets = new DataSetConfiguration[] { }, MessageHandlers = new MessageHandlerConfiguration[] { } };
-    }
     internal IEnumerable<IInstanceConfiguration> GetInstanceConfiguration(INodeDescriptor descriptor)
     {
       return DataSets.Where<DataSetConfiguration>(x => x.Root.CompareTo(descriptor) == 0);

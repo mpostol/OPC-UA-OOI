@@ -54,6 +54,17 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
         return null;
       return CurrentConfiguration.GetInstanceConfiguration(descriptor).FirstOrDefault<IInstanceConfiguration>();
     }
+    public override void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed)
+    {
+      base.CreateInstanceConfigurations(descriptors, SkipOpeningConfigurationFile, out CancelWasPressed);
+    }
+    public override string DefaultFileName
+    {
+      get
+      {
+        return base.DefaultFileName;
+      }
+    }
     #endregion
 
     #region privat

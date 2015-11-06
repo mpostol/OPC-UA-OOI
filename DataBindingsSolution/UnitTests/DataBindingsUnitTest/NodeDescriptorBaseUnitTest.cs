@@ -26,7 +26,7 @@ namespace UAOOI.DataBindings.UnitTest
       Assert.IsNotNull(_new);
       Assert.IsNotNull(_new.NodeIdentifier);
       Assert.AreEqual<int>(0, _new.CompareTo(_Other));
-      Assert.AreNotEqual<NodeDescriptorBase>(_new, _Other);
+      Assert.AreEqual<NodeDescriptorBase>(_new, _Other);
     }
     [TestMethod]
     [TestCategory("DataBindings_NodeDescriptorBaseUnitTest")]
@@ -39,7 +39,7 @@ namespace UAOOI.DataBindings.UnitTest
       Assert.IsNotNull(_new);
       Assert.IsNotNull(_new.NodeIdentifier);
       Assert.AreEqual<int>(_new.GetHashCode(_new), _other.GetHashCode(_other));
-      Assert.AreNotEqual<NodeDescriptorBase>(_new, _other);
+      Assert.AreEqual<NodeDescriptorBase>(_new, _other);
     }
     [TestMethod]
     [TestCategory("DataBindings_NodeDescriptorBaseUnitTest")]
@@ -53,11 +53,11 @@ namespace UAOOI.DataBindings.UnitTest
       Assert.IsNotNull(_new);
       Assert.IsNotNull(_new.NodeIdentifier);
       Assert.AreEqual<int>(0, _new.CompareTo(_Other));
-      Assert.AreNotEqual<NodeDescriptorBase>(_new, _Other);
+      Assert.AreEqual<NodeDescriptorBase>(_new, _Other);
       Dictionary<NodeDescriptorBase, NodeDescriptorBase> _newDic = new Dictionary<NodeDescriptorBase, NodeDescriptorBase>();
       _newDic.Add(_new, _new);
       Assert.IsTrue(_newDic.ContainsKey(_new));
-      Assert.IsFalse(_newDic.ContainsKey(_Other));  //Looks like framework error
+      Assert.IsTrue(_newDic.ContainsKey(_Other));
       _newDic.Add(_new, _Other);
     }
   }

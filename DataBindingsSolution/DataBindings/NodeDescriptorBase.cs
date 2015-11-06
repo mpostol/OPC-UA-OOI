@@ -50,7 +50,7 @@ namespace UAOOI.DataBindings
     /// <returns><c>true</c> if the specified objects are equal; otherwise, false.</returns>
     public static bool operator ==(NodeDescriptorBase x, NodeDescriptorBase y)
     {
-      if (x.Equals(null) && y.Equals(null))
+      if (Object.Equals(x, null) && Object.Equals(y, null))
         return true;
       if (Object.Equals(x, null) || Object.Equals(y, null))
         return false;
@@ -157,7 +157,12 @@ namespace UAOOI.DataBindings
     /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
     public override bool Equals(object obj)
     {
-      return CompareTo((INodeDescriptor)obj) == 0;
+      if (Object.Equals(obj, null))
+        return false;
+      NodeDescriptorBase _other = obj as NodeDescriptorBase;
+      if (Object.Equals(_other, null))
+        throw new ArgumentException(nameof(obj));
+      return CompareTo(_other) == 0;
     }
     #endregion
 

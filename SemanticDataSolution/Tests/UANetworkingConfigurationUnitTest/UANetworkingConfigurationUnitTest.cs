@@ -104,6 +104,25 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
       Assert.IsNotNull(_newInstanceConfiguration);
     }
+    [TestMethod]
+    [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
+    [ExpectedException(typeof(NotImplementedException))]
+    public void CreateInstanceConfigurationsTestMethod()
+    {
+      UANetworkingConfiguration _newConfiguration = new UANetworkingConfiguration();
+      Assert.IsNotNull(_newConfiguration);
+      bool CancelWasPressed = false;
+      _newConfiguration.CreateInstanceConfigurations(null, false, out CancelWasPressed);
+    }
+    [TestMethod]
+    [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
+    [ExpectedException(typeof(NotImplementedException))]
+    public void DefaultFileNameTestMethod()
+    {
+      UANetworkingConfiguration _newConfiguration = new UANetworkingConfiguration();
+      Assert.IsNotNull(_newConfiguration);
+      string _fileName = _newConfiguration.DefaultFileName;
+    }
     private class NodeDescriptor : NodeDescriptorBase
     {
       public override string BindingDescription

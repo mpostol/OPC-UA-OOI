@@ -58,11 +58,11 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     {
       base.CreateInstanceConfigurations(descriptors, SkipOpeningConfigurationFile, out CancelWasPressed);
     }
-    public override string DefaultFileName
+    protected override string DefaultConfigurationFileName
     {
       get
       {
-        return base.DefaultFileName;
+        return Properties.Settings.Default.Default_ConfigurationFileName;
       }
     }
     #endregion

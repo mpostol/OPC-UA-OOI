@@ -42,7 +42,10 @@ namespace UAOOI.DataBindings
     /// <exception cref="NotImplementedException"></exception>
     public virtual string DefaultFileName
     {
-      get { throw new NotImplementedException(); }
+      get
+      {
+        return String.Format("{0}.{1}", DefaultConfigurationFileName, Properties.Settings.Default.DefaultConfigurationFileNametExtension);
+      }
     }
     /// <summary>
     /// Gets the configuration editor - user interface to edit the plug-in configuration file.
@@ -89,6 +92,11 @@ namespace UAOOI.DataBindings
     {
       OnModified?.Invoke(this, new UAServerConfigurationEventArgs(configurationFileChanged));
     }
+    /// <summary>
+    /// Gets the default name of the configuration file.
+    /// </summary>
+    /// <value>The default name of the configuration file.</value>
+    protected abstract string DefaultConfigurationFileName { get; }
 
   }
 }

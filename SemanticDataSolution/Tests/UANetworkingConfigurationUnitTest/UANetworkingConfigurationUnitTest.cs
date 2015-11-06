@@ -116,12 +116,13 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
-    [ExpectedException(typeof(NotImplementedException))]
     public void DefaultFileNameTestMethod()
     {
       UANetworkingConfiguration _newConfiguration = new UANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
       string _fileName = _newConfiguration.DefaultFileName;
+      FileInfo _fi = new FileInfo(_fileName);
+      Assert.AreEqual<string>(".uasconfig", _fi.Extension);
     }
     private class NodeDescriptor : NodeDescriptorBase
     {

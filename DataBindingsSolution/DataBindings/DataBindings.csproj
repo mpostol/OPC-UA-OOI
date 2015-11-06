@@ -66,9 +66,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Serializers\DataContractSerializers.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Help\ASModelDesigner.chm" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
@@ -84,6 +90,10 @@
     <None Include="Properties\DataBindings.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DataBindings.nuspec</LastGenOutput>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

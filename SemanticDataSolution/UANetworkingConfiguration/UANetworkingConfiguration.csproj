@@ -53,6 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonDefinitions.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Serialization\ConfigurationData.cs">
       <DependentUpon>ConfigurationData.xsd</DependentUpon>
     </Compile>
@@ -69,7 +74,12 @@
     <Compile Include="UANetworkingConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="OPCUAOOIKey.snk" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="ReadMe.md" />
     <None Include="Serialization\ConfigurationData.cd" />
     <None Include="Serialization\ConfigurationData.xsd">

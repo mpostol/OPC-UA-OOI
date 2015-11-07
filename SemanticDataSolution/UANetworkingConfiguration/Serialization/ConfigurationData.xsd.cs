@@ -50,7 +50,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 
     [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false)]
     [System.Xml.Serialization.XmlElementAttribute(IsNullable = false)]
-    public UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration[] DataSets
+    public DataSetConfiguration[] DataSets
     {
       get
       {

@@ -1,6 +1,7 @@
 ﻿
 using CAS.UA.IServerConfiguration;
 using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace UAOOI.DataBindings
@@ -8,8 +9,46 @@ namespace UAOOI.DataBindings
   /// <summary>
   /// Class ConfigurationBase - Provides basic implementation of the <see cref="IConfiguration"/>.
   /// </summary>
-  public abstract class ConfigurationBase : IConfiguration
+  public abstract class ConfigurationBase<ConfigurationDataType> : IConfiguration
   {
+
+    #region API
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ConfigurationBase{ConfigurationDataType}"/> class. 
+    /// Default configuration is loade.
+    /// </summary>
+    public ConfigurationBase(Func<ConfigurationDataType> configurationLoader)
+    {
+      Tracer += (x, y, z) => { };
+      DefaultConfigurationLoader = configurationLoader;
+      CreateDefaultConfiguration();
+    }
+    /// <summary>
+    /// Gets or sets the current configuration <typeparamref name="ConfigurationDataType"/>.
+    /// </summary>
+    /// <value>The current configuration as instance of <typeparamref name="ConfigurationDataType"/>.</value>
+    public ConfigurationDataType CurrentConfiguration
+    {
+      get { return m_CurrentConfiguration; }
+      set
+      {
+        if (Object.Equals(CurrentConfiguration, value))
+          return;
+        m_CurrentConfiguration = value;
+        RaiseOnChangeEvent(true);
+      }
+    }
+    /// <summary>
+    /// Gets or sets the instnace of delegate capturing tracer functionality.
+    /// </summary>
+    /// <value>The delegaye of <see cref="Action{TraceEventType, Int32, String}"/>tracer.</value>
+    public Action<TraceEventType, int, string> Tracer { get; set; }
+    /// <summary>
+    /// Gets or sets the default configuration loader.
+    /// </summary>
+    /// <value>The default configuration loader <see cref="Func{ConfigurationDataType}"/>.</value>
+    public Func<ConfigurationDataType> DefaultConfigurationLoader { private get; set; }
+    #endregion
 
     #region IConfiguration
     /// <summary>
@@ -20,7 +59,10 @@ namespace UAOOI.DataBindings
     /// Creates the default configuration.
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    public abstract void CreateDefaultConfiguration();
+    public void CreateDefaultConfiguration()
+    {
+      CurrentConfiguration = DefaultConfigurationLoader();
+    }
     /// <summary>
     /// Creates automatically the instance configurations on the best effort basis.
     /// </summary>
@@ -30,10 +72,9 @@ namespace UAOOI.DataBindings
     /// <exception cref="NotImplementedException"></exception>
     public abstract void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed);
     /// <summary>
-    /// Gets the default name of the file.
+    /// Gets the default name of the file created from the name provided by the derived class and extension set in the assemply configuration file.
     /// </summary>
     /// <value>The default name of the file.</value>
-    /// <exception cref="NotImplementedException"></exception>
     public virtual string DefaultFileName
     {
       get
@@ -71,11 +112,12 @@ namespace UAOOI.DataBindings
     #endregion
 
     #region private
+    private ConfigurationDataType m_CurrentConfiguration;
     /// <summary>
     /// Raises the on change event.
     /// </summary>
     /// <param name="configurationFileChanged">if set to <c>true</c> [configuration file changed].</param>
-    protected void RaiseOnChangeEvent(bool configurationFileChanged)
+    private void RaiseOnChangeEvent(bool configurationFileChanged)
     {
       OnModified?.Invoke(this, new UAServerConfigurationEventArgs(configurationFileChanged));
     }

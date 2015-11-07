@@ -12,37 +12,48 @@ namespace UAOOI.DataBindings.UnitTest
 
     [TestMethod]
     [TestCategory("DataBindings_ConfigurationBaseUnitTest")]
+    public void CreatorTestMethod()
+    {
+      DerivedTest _newConfiguration = new DerivedTest();
+      Assert.IsNotNull(_newConfiguration);
+      Assert.IsNotNull(_newConfiguration.Tracer);
+      _newConfiguration.Tracer(System.Diagnostics.TraceEventType.Verbose, 0, "Do nothing and keep alive.");
+    }
+    [TestMethod]
+    [TestCategory("DataBindings_ConfigurationBaseUnitTest")]
     public void DefaultFileNameTestMethod()
     {
-      ConfigurationBase _mc = new DerivedTest();
+      DerivedTest _mc = new DerivedTest();
       Assert.IsNotNull(_mc);
       string _fileName = _mc.DefaultFileName;
       FileInfo _fi = new FileInfo(_fileName);
       Assert.AreEqual<string>(".uasconfig", _fi.Extension);
+      Assert.AreEqual<string>("DefaultConfigurationFileName.uasconfig", _fi.Name);
     }
     [TestMethod]
     [TestCategory("DataBindings_ConfigurationBaseUnitTest")]
     public void RaiseOnChangeNullTestMethod()
     {
       DerivedTest _instance = new DerivedTest();
-      _instance.RaiseOnChangeEventCall();
-      _instance.OnModified += (x, y) => Assert.IsTrue(y.ConfigurationFileChanged);
-      _instance.RaiseOnChangeEventCall();
+      int _OnModifiedCalled = 0;
+      _instance.OnModified += (x, y) => { Assert.IsTrue(y.ConfigurationFileChanged); _OnModifiedCalled++; };
+      _instance.CurrentConfiguration = new ConfigurationData();
+      Assert.AreEqual<int>(1, _OnModifiedCalled);
+      _instance.CurrentConfiguration = _instance.CurrentConfiguration;
+      Assert.AreEqual<int>(1, _OnModifiedCalled);
     }
 
     #region private
-    private class DerivedTest : ConfigurationBase
+    private class ConfigurationData { }
+    private class DerivedTest : ConfigurationBase<ConfigurationData>
     {
+      public DerivedTest() : base(() => null) { }
       protected override string DefaultConfigurationFileName
       {
         get
         {
           return "DefaultConfigurationFileName";
         }
-      }
-      public override void CreateDefaultConfiguration()
-      {
-        throw new NotImplementedException();
       }
       public override void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed)
       {
@@ -64,10 +75,7 @@ namespace UAOOI.DataBindings.UnitTest
       {
         throw new NotImplementedException();
       }
-      internal void RaiseOnChangeEventCall()
-      {
-        RaiseOnChangeEvent(true);
-      }
+
     }
     #endregion
 

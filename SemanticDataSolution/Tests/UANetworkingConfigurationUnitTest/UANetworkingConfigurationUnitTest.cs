@@ -22,7 +22,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     {
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
-      Assert.IsNotNull(_newConfiguration.DefaultConfigurationLoader);
       Assert.IsNotNull(_newConfiguration.Tracer);
       _newConfiguration.Tracer(System.Diagnostics.TraceEventType.Verbose, 0, "Do nothing and keep alive.");
     }
@@ -59,7 +58,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       FileInfo _fi = new FileInfo(@"BleBle.txt");
       Assert.IsFalse(_fi.Exists);
       _newConfiguration.SaveConfiguration(String.Empty, _fi);
-      Assert.IsTrue(_ConfigurationFileChanged);
+      Assert.IsFalse(_ConfigurationFileChanged);
       Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
       _fi.Refresh();
       Assert.IsTrue(_fi.Exists);
@@ -110,6 +109,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       string _fileName = _newConfiguration.DefaultFileName;
       FileInfo _fi = new FileInfo(_fileName);
       Assert.AreEqual<string>(".uasconfig", _fi.Extension);
+      Assert.AreEqual<string>("UANetworkingConfiguration.uasconfig", _fi.Name);
     }
     #endregion
 

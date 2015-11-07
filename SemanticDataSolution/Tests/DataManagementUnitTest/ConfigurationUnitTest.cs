@@ -13,7 +13,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_Configuration")]
     public void ConfigurationDataCreateTestMethod()
     {
-      ConfigurationData _cnf = ConfigurationData.Load(Create);
+      ConfigurationData _cnf = ConfigurationData.Load<ConfigurationData>(Create);
       Assert.IsNotNull(_cnf);
       Assert.IsNotNull(_cnf.DataSets);
       TestAssociations(_cnf.DataSets);

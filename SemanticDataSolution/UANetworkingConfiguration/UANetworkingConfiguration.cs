@@ -1,10 +1,11 @@
 ﻿
+using CAS.UA.IServerConfiguration;
 using System;
 using System.IO;
-using CAS.UA.IServerConfiguration;
-using UAOOI.DataBindings;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 using System.Linq;
+using UAOOI.DataBindings;
+using UAOOI.DataBindings.Serializers;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration
 {
@@ -12,21 +13,25 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     where ConfigurationDataType : ConfigurationData, new()
   {
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UANetworkingConfiguration{ConfigurationDataType}"/> class.
+    /// </summary>
     public UANetworkingConfiguration() :
       base(NewConfigurationData)
     { }
     #region ConfigurationBase
+    /// <summary>
+    /// Reads the configuration.
+    /// </summary>
+    /// <param name="configurationFile">The configuration <see cref="FileInfo"/> instance.</param>
     public override void ReadConfiguration(FileInfo configurationFile)
     {
-      CurrentConfiguration = ConfigurationData.Load<ConfigurationDataType>(() => DataBindings.Serializers.DataContractSerializers.Load<ConfigurationDataType>(configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z)));
-      m_ConfigurationFile = configurationFile;
+      CurrentConfiguration = ConfigurationData.Load<ConfigurationDataType>(() => DataContractSerializers.Load<ConfigurationDataType>(configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z)));
     }
     public override void SaveConfiguration(string solutionFilePath, FileInfo configurationFile)
     {
-      DataBindings.Serializers.DataContractSerializers.Save<ConfigurationData>(configurationFile, CurrentConfiguration, (x, y, z) => Tracer?.Invoke(x, y, z));
-      if (m_ConfigurationFile != null && configurationFile.FullName.CompareTo(m_ConfigurationFile.FullName) == 0)
-        return;
-      m_ConfigurationFile = configurationFile;
+      ConfigurationData.Save<ConfigurationDataType>
+        (CurrentConfiguration, configuration => DataContractSerializers.Save<ConfigurationData>(configurationFile, configuration, (x, y, z) => Tracer?.Invoke(x, y, z)));
     }
     public override IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
     {
@@ -39,7 +44,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     #endregion
 
     #region privat
-    private FileInfo m_ConfigurationFile;
     private static ConfigurationDataType NewConfigurationData()
     {
       return new ConfigurationDataType() { DataSets = new DataSetConfiguration[] { }, MessageHandlers = new MessageHandlerConfiguration[] { } };

@@ -1,0 +1,36 @@
+﻿<ConfigurationData xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">
+  <DataSets>
+    <DataSetConfiguration>
+      <AssociationRole>Consumer</AssociationRole>
+      <AssociationName>Association1</AssociationName>
+      <RepositoryGroup>repositoryGroup</RepositoryGroup>
+      <InformationModelURI>https://github.com/mpostol/OPC-UA-OOI</InformationModelURI>
+      <DataSymbolicName>DataSymbolicName</DataSymbolicName>
+      <DataSet>
+        <DataMemberConfiguration>
+          <SymbolicName>Value1</SymbolicName>
+          <ProcessValueName>Value1</ProcessValueName>
+          <SourceEncoding>System.DateTime</SourceEncoding>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>Value2</SymbolicName>
+          <ProcessValueName>Value2</ProcessValueName>
+          <SourceEncoding>System.Double</SourceEncoding>
+        </DataMemberConfiguration>
+      </DataSet>
+      <Guid>c1f53ffb-6552-4ccc-84c9-f847147cdc85</Guid>
+      <Root>
+        <q:NodeIdentifier xmlns:d5p1="NodeDescriptorNS" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d5p1:NodeDescriptor</q:NodeIdentifier>
+      </Root>
+    </DataSetConfiguration>
+  </DataSets>
+  <MessageHandlers>
+    <MessageHandlerConfiguration>
+      <Name>UDP</Name>
+      <AssociationNamesArrayOfString>
+        <string>Association1</string>
+      </AssociationNamesArrayOfString>
+      <TransportRole>Consumer</TransportRole>
+    </MessageHandlerConfiguration>
+  </MessageHandlers>
+</ConfigurationData>

@@ -115,7 +115,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CommonDefinitions.cs" />
-    <Compile Include="Configuration.cs" />
     <Compile Include="Consumer\ConsumerConfigurationFactory.cs" />
     <Compile Include="Consumer\ConsumerDataManagementSetup.cs" />
     <Compile Include="Consumer\ConsumerMessageHandlerFactory.cs" />
@@ -164,6 +163,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DataBindingsSolution\DataBindings\DataBindings.csproj">
+      <Project>{f8db9567-c559-440c-bbcf-e02013f9ab94}</Project>
+      <Name>DataBindings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataManagement\DataManagement.csproj">
       <Project>{7f4ded4e-5933-4229-b9cc-51da49678904}</Project>
       <Name>DataManagement</Name>
@@ -187,6 +190,14 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ConfigurationDataConsumer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ConfigurationDataProducer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

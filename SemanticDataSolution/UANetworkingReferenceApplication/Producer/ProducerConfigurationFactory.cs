@@ -1,6 +1,9 @@
 ﻿
 using System;
+using System.IO;
+using UAOOI.DataBindings.Serializers;
 using UAOOI.SemanticData.UANetworking.Configuration;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
 {
@@ -16,7 +19,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// </summary>
     public ProducerConfigurationFactory()
     {
-      Loader = Configuration.LoadProducer;
+      Loader = LoadConfig;
     }
 
     #region ConfigurationFactoryBase
@@ -29,6 +32,12 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// </summary>
     public override event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
     #endregion
+
+    private static ConfigurationData LoadConfig()
+    {
+      FileInfo _configurationFile = new FileInfo(Properties.Settings.Default.ProducerConfigurationFileName);
+      return ConfigurationData.Load<ConfigurationData>(() => DataContractSerializers.Load<ConfigurationData>(_configurationFile, (x, y, z) => { }));
+    }
 
   }
 }

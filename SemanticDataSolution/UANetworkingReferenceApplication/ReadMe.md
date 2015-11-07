@@ -2,7 +2,10 @@
 
 ## Introduction
 
-This project implements an example of the **UA Data Application** supporting producer and consumer roles simultaneously. Both roles are implemented as independent threads that have common user interface for diagnostic and configuration purpose. In this pre-release version the application uses the hard-coded configuration. The producer sends current time and a random floating-point number between 0.0 and 1.0 contained in messages. Because of OPC UA encoding applied the time is converted to UTC.
+This project implements an example of the **UA Data Application** supporting producer and consumer roles simultaneously. Both roles are implemented as independent threads that have common user interface for diagnostic and configuration purpose. The producer sends current time and a random floating-point number between 0.0 and 1.0 contained in messages. Because of OPC UA encoding applied the time is converted to UTC. Each role has independent configuration file as follows:
+
+* Producer: `ConfigurationDataProducer.xml`
+* Consumer: `ConfigurationDataConsumer.xml`
 
 By the user interface (UI) remote host name and port numbers can be modified. Use the update buttons to start communication with the new settings. The user interface provides also some diagnostic information.
 

@@ -17,5 +17,11 @@
     <Setting Name="RemoteUDPPortNumber" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">4840</Value>
     </Setting>
+    <Setting Name="ConsumerConfigurationFileName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ConfigurationDataConsumer.xml</Value>
+    </Setting>
+    <Setting Name="ProducerConfigurationFileName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ConfigurationDataProducer.xml</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

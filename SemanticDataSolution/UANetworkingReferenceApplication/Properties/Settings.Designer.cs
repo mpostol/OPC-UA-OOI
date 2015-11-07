@@ -82,5 +82,23 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
                 this["RemoteUDPPortNumber"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ConfigurationDataConsumer.xml")]
+        public string ConsumerConfigurationFileName {
+            get {
+                return ((string)(this["ConsumerConfigurationFileName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ConfigurationDataProducer.xml")]
+        public string ProducerConfigurationFileName {
+            get {
+                return ((string)(this["ProducerConfigurationFileName"]));
+            }
+        }
     }
 }

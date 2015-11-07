@@ -70,6 +70,7 @@
     <Compile Include="ReferenceConfiguration.cs" />
     <Compile Include="SerializationUnitTest.cs" />
     <Compile Include="UANetworkingConfigurationUnitTest.cs" />
+    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Help\ASModelDesigner.chm" />

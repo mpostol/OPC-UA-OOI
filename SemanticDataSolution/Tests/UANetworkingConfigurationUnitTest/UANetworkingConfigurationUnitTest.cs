@@ -3,6 +3,7 @@ using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Xml;
 using UAOOI.DataBindings;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
@@ -111,6 +112,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.AreEqual<string>(".uasconfig", _fi.Extension);
       Assert.AreEqual<string>("UANetworkingConfiguration.uasconfig", _fi.Name);
     }
+
     #endregion
 
     #region private

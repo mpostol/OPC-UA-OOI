@@ -72,6 +72,7 @@
     <Compile Include="Serialization\MessageTransportConfiguration.cs" />
     <Compile Include="Serialization\NodeDescriptor.cs" />
     <Compile Include="UANetworkingConfiguration.cs" />
+    <Compile Include="UANetworkingConfigurationEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

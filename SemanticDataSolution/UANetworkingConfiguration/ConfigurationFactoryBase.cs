@@ -1,7 +1,8 @@
 ﻿
 using System;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
+namespace UAOOI.SemanticData.UANetworking.Configuration
 {
   /// <summary>
   /// Class ConfigurationFactory - provides basic implementation of the <see cref="IConfigurationFactory"/>.
@@ -14,7 +15,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// Gets the configuration.
     /// </summary>
     /// <returns>Am object of <see cref="ConfigurationData" /> type capturing the communication configuration.</returns>
-    /// <exception cref="System.NotImplementedException"></exception>
     public ConfigurationData GetConfiguration()
     {
       return ConfigurationData.Load(Loader);

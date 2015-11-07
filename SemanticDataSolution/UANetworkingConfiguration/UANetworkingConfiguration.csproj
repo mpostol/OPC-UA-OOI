@@ -64,7 +64,7 @@
     <Compile Include="Serialization\ConfigurationData.xsd.cs">
       <DependentUpon>ConfigurationData.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Serialization\ConfigurationFactoryBase.cs" />
+    <Compile Include="ConfigurationFactoryBase.cs" />
     <Compile Include="Serialization\DataMemberConfiguration.cs" />
     <Compile Include="Serialization\DataSetConfiguration.cs" />
     <Compile Include="IConfigurationFactory.cs" />

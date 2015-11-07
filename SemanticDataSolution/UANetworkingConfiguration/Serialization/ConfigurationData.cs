@@ -30,13 +30,18 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// </summary>
     /// <typeparam name="ConfigurationDataType">The type of the configuration instance to be saved.</typeparam>
     /// <param name="configuration">The configuration object of <typeparamref name="ConfigurationDataType"/> type </param>
-    /// <param name="saver">The delegate <see cref="Action{ConfigurationDataType}"/> capturing the funtionality used to save the <paramref name="configuration"/>.</param>
+    /// <param name="saver">The delegate <see cref="Action{ConfigurationDataType}"/> capturing the functionality used to save the <paramref name="configuration"/>.</param>
     internal static void Save<ConfigurationDataType>(ConfigurationDataType configuration, Action<ConfigurationDataType> saver)
       where ConfigurationDataType : Serialization.ConfigurationData
     {
       configuration.OnSaving();
       saver(configuration);
     }
+    /// <summary>
+    /// Gets the instance configuration - collection of data sets represented as the <see cref="IInstanceConfiguration"/>.
+    /// </summary>
+    /// <param name="descriptor">The descriptor.</param>
+    /// <returns>IEnumerable&lt;IInstanceConfiguration&gt;.</returns>
     internal IEnumerable<IInstanceConfiguration> GetInstanceConfiguration(INodeDescriptor descriptor)
     {
       return DataSets.Where<DataSetConfiguration>(x => x.Root.CompareTo(descriptor) == 0);

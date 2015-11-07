@@ -15,7 +15,7 @@ namespace UAOOI.DataBindings
     #region API
     /// <summary>
     /// Initializes a new instance of the <see cref="ConfigurationBase{ConfigurationDataType}"/> class. 
-    /// Default configuration is loade.
+    /// Default configuration is loader.
     /// </summary>
     public ConfigurationBase(Func<ConfigurationDataType> configurationLoader)
     {

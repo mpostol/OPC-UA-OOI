@@ -16,12 +16,14 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
   using System.Runtime.Serialization;
   using System;
   using CAS.UA.IServerConfiguration;
+  using System.Xml.Serialization;
 
   [System.Diagnostics.DebuggerStepThroughAttribute()]
   [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-  [System.Runtime.Serialization.DataContractAttribute(Name = "ConfigurationData", Namespace = "http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
-        "d")]
+  [System.Runtime.Serialization.DataContractAttribute(Name = "ConfigurationData", Namespace = CommonDefinitions.Namespace)]
   [System.SerializableAttribute()]
+  [XmlRoot(Namespace = CommonDefinitions.Namespace)]
+  //[XmlType(Namespace = CommonDefinitions.Namespace)]
   public partial class ConfigurationData : object, System.Runtime.Serialization.IExtensibleDataObject
   {
 
@@ -47,6 +49,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     }
 
     [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false)]
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = false)]
     public UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration[] DataSets
     {
       get
@@ -60,6 +63,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     }
 
     [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false)]
+    [System.Xml.Serialization.XmlElementAttribute(IsNullable = false)]
     public UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageHandlerConfiguration[] MessageHandlers
     {
       get
@@ -181,7 +185,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     }
 
     [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 5)]
-    public UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataMemberConfiguration[] DataSet
+    public DataMemberConfiguration[] DataSet
     {
       get
       {
@@ -205,8 +209,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         this.GuidField = value;
       }
     }
-    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 7, IsRequired = true)]
-    [System.Xml.Serialization.XmlElementAttribute( IsNullable = false )]
+    [DataMemberAttribute(EmitDefaultValue = false, Order = 7, IsRequired = true)]
+    [XmlElementAttribute(IsNullable = false)]
     public NodeDescriptor Root
     {
       get { return RootField; }
@@ -217,7 +221,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 
   [System.Diagnostics.DebuggerStepThroughAttribute()]
   [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-  [System.Runtime.Serialization.DataContractAttribute(Name = "MessageTransportConfiguration", Namespace = "http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
+  [System.Runtime.Serialization.DataContractAttribute(Name = "MessageHandlerConfiguration", Namespace = "http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xs" +
       "d")]
   [System.SerializableAttribute()]
   public partial class MessageHandlerConfiguration : object, System.Runtime.Serialization.IExtensibleDataObject

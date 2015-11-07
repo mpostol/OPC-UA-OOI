@@ -17,8 +17,6 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// <summary>
     /// Initializes a new instance of the <see cref="Binding{type}"/> class.
     /// </summary>
-    /// <param name="assign">This parameters captures a delegate that will be used to update the destination variable hosted by a repository. 
-    /// </param>
     public Binding()
     {
       m_TargetType = typeof(type);

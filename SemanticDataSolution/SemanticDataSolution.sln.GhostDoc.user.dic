@@ -5,6 +5,7 @@ Deserializes
 eeprom
 Fallback
 Metadata
+mpostol
 Namespaces
 sbyte
 typeparamref

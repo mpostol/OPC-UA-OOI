@@ -44,7 +44,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// <returns>IEnumerable&lt;IInstanceConfiguration&gt;.</returns>
     internal IEnumerable<IInstanceConfiguration> GetInstanceConfiguration(INodeDescriptor descriptor)
     {
-      return DataSets.Where<DataSetConfiguration>(x => x.Root.CompareTo(descriptor) == 0);
+      return DataSets.Where<DataSetConfiguration>(x => x.Root.CreateWrapper().CompareTo(descriptor) == 0);
     }
 
     #region private

@@ -23,16 +23,16 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     public void ConfigurationDataConsumerTestMethod()
     {
       ConfigurationData _consumer = ReferenceConfiguration.LoadConsumer();
-      FileInfo _consumerFile = new FileInfo(@"ConfigurationDataConsumer.xml");
-      DataBindings.Serializers.DataContractSerializers.Save<ConfigurationData>(_consumerFile, _consumer, (x, y, z) => { Console.WriteLine(z); });
+      FileInfo _consumerFile = new FileInfo(@"ConfigurationDataConsumer.coded.xml");
+      DataContractSerializers.Save<ConfigurationData>(_consumerFile, _consumer, (x, y, z) => { Console.WriteLine(z); });
     }
     [TestMethod]
     [TestCategory("Configuration_ConfigurationDataUnitTest")]
     public void ConfigurationDataProducerTestMethod()
     {
       ConfigurationData _Producer = ReferenceConfiguration.LoadProducer();
-      FileInfo _consumerFile = new FileInfo(@"ConfigurationDataProducer.xml");
-      DataBindings.Serializers.DataContractSerializers.Save<ConfigurationData>(_consumerFile, _Producer, (x, y, z) => { Console.WriteLine(z); });
+      FileInfo _consumerFile = new FileInfo(@"ConfigurationDataProducer.coded.xml");
+      DataContractSerializers.Save<ConfigurationData>(_consumerFile, _Producer, (x, y, z) => { Console.WriteLine(z); });
     }
     [TestMethod]
     [TestCategory("Configuration_ConfigurationDataUnitTest")]

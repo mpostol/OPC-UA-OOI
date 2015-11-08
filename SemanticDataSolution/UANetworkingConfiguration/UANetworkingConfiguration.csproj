@@ -41,6 +41,7 @@
     <Reference Include="CAS.UA.IServerConfiguration, Version=1.0.0.32204, Culture=neutral, PublicKeyToken=8832ff1a67ea61a3" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows" />
@@ -53,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonDefinitions.cs" />
+    <Compile Include="IConfigurationEditor.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

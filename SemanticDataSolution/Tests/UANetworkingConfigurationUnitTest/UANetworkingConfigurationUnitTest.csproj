@@ -48,6 +48,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <Choose>
@@ -70,7 +71,7 @@
     <Compile Include="ReferenceConfiguration.cs" />
     <Compile Include="SerializationUnitTest.cs" />
     <Compile Include="UANetworkingConfigurationUnitTest.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="UANetworkingConfigurationEditorUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Help\ASModelDesigner.chm" />

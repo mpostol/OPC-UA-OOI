@@ -2,7 +2,9 @@
 
 ## Introduction
 
-This project implements an example of the **UA Data Application** supporting producer and consumer roles simultaneously. Both roles are implemented as independent threads that have common user interface for diagnostic and configuration purpose. The producer sends current time and a random floating-point number between 0.0 and 1.0 contained in messages. Because of OPC UA encoding applied the time is converted to UTC. Each role has independent configuration file as follows:
+This project is aimed at implementing an example of the **UA Data Application** supporting producer and consumer roles simultaneously. The purpose of the **Example Application** is to demonstrate the concepts and syntax of the PubSub implementation, rather than to necessarily provide a realistic scenario for its use. For more extensive examples, see the [OPC UA Data Processing Outside the Server](../SemanticDataSolution#opc-ua-data-processing-outside-the-server).
+
+Both roles are implemented as independent threads that have common user interface for diagnostic and configuration purpose. The producer sends current time and a random floating-point number between 0.0 and 1.0 contained in messages. Because of OPC UA encoding applied the time is converted to UTC. Each role has independent configuration file as follows:
 
 * Producer: `ConfigurationDataProducer.xml`
 * Consumer: `ConfigurationDataConsumer.xml`

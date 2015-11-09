@@ -26,6 +26,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       GetIServerConfiguration(_fileInfo, out _pluginAssembly, out _serverConfiguration);
       Assert.IsNotNull(_pluginAssembly);
       Assert.IsNotNull(_serverConfiguration);
+      UANetworkingConfigurationEditor _editor = (UANetworkingConfigurationEditor)_serverConfiguration;
+      Assert.IsNotNull(_editor);
+      Assert.IsNotNull(_editor.ConfigurationEditor);
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]

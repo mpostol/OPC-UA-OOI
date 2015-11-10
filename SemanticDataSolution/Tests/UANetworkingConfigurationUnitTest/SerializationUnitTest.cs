@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -78,6 +79,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.IsFalse(String.IsNullOrEmpty(_message));
       Assert.IsTrue(_message.Contains(_configFile.FullName));
     }
+
   }
 
 }

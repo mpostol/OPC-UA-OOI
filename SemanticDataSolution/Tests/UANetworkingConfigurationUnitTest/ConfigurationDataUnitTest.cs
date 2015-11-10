@@ -24,8 +24,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.IsNotNull(_configuration);
     }
     [TestMethod]
-    [TestCategory("Configuration_ConfigurationDataUnitTest")]
-    public void ConfigurationDataConsumerTestMethod()
+    [TestCategory("Configuration_ConfigurationDataConsumerTestMethodXml")]
+    public void ConfigurationDataConsumerTestMethodXml()
     {
       ConfigurationData _consumer = ReferenceConfiguration.LoadConsumer();
       FileInfo _fileInfo = new FileInfo(@"ConfigurationDataConsumer.coded.xml");
@@ -46,6 +46,30 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.IsTrue(_fileInfo.Exists);
       ConfigurationData _mirror = XmlDataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { Console.WriteLine(z); });
       Compare(_Producer, _mirror);
+    }
+    [TestMethod]
+    [TestCategory("Configuration_ConfigurationDataConsumerTestMethodJson")]
+    public void ConfigurationDataConsumerTestMethodJson()
+    {
+      ConfigurationData _consumer = ReferenceConfiguration.LoadConsumer();
+      FileInfo _fileInfo = new FileInfo(@"ConfigurationDataConsumer.coded.json");
+      JSONDataContractSerializers.Save<ConfigurationData>(_fileInfo, _consumer, (x, y, z) => { Console.WriteLine(z); });
+      _fileInfo.Refresh();
+      Assert.IsTrue(_fileInfo.Exists);
+      ConfigurationData _mirror = JSONDataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { Console.WriteLine(z); });
+      Compare(_consumer, _mirror);
+    }
+    [TestMethod]
+    [TestCategory("Configuration_ConfigurationDataProducerTestMethodJson")]
+    public void ConfigurationDataProducerTestMethodJson()
+    {
+      ConfigurationData _consumer = ReferenceConfiguration.LoadProducer();
+      FileInfo _fileInfo = new FileInfo(@"ConfigurationDataProducer.coded.json");
+      JSONDataContractSerializers.Save<ConfigurationData>(_fileInfo, _consumer, (x, y, z) => { Console.WriteLine(z); });
+      _fileInfo.Refresh();
+      Assert.IsTrue(_fileInfo.Exists);
+      ConfigurationData _mirror = JSONDataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { Console.WriteLine(z); });
+      Compare(_consumer, _mirror);
     }
     [TestMethod]
     [TestCategory("Configuration_ConfigurationDataUnitTest")]

@@ -1,8 +1,8 @@
-﻿using System;
+﻿
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Json;
-using System.Text;
 using System.Xml;
 using UAOOI.DataBindings.Properties;
 
@@ -27,11 +27,11 @@ namespace UAOOI.DataBindings.Serializers
     {
       if (!fileToRead.Exists)
         throw new ArgumentOutOfRangeException(nameof(fileToRead));
-      using (XmlTextReader reader = new XmlTextReader(fileToRead.Open(FileMode.Open, FileAccess.Read)))
+      using (FileStream reader = fileToRead.Open(FileMode.Open))
       {
-        
+
         DataContractJsonSerializer _serializer = new DataContractJsonSerializer(typeof(type));
-        type _graph = _serializer.ReadObject(reader, false) as type;
+        type _graph = _serializer.ReadObject(reader) as type;
         trace(TraceEventType.Verbose, 52, String.Format(Resources.InformationFileOpened, fileToRead.FullName));
         return _graph;
       }
@@ -53,7 +53,7 @@ namespace UAOOI.DataBindings.Serializers
         throw new ArgumentNullException(nameof(graph));
       DataContractJsonSerializer _deserializer = new DataContractJsonSerializer(typeof(type));
       Formatting _formatting = new Formatting() { };
-      using (XmlTextWriter _writer = new XmlTextWriter(fileToWrite.Open(FileMode.Create, FileAccess.Write), Encoding.UTF8) { Formatting = Formatting.Indented, Indentation = 2 })
+      using (FileStream _writer = fileToWrite.Open( FileMode.Create))
         _deserializer.WriteObject(_writer, graph);
       trace(TraceEventType.Verbose, 52, String.Format(Resources.InformationFileSaved, fileToWrite.FullName));
     }

@@ -61,15 +61,15 @@ namespace UAOOI.DataBindings.UnitTest
     public void JSONSerializerTestMethod1()
     {
       // Create a new instance of the Person class and serialize it to an XML file.
-      CSharpSelectedTypesEncoding p1 = new CSharpSelectedTypesEncoding();
-      string fileName = "DataContractExample.json";
-      JSONDataContractSerializers.Save<CSharpSelectedTypesEncoding>(new FileInfo(fileName), p1, (x, y, z) => Assert.AreEqual(System.Diagnostics.TraceEventType.Verbose, x));
-      FileInfo _newFile = new FileInfo(fileName);
+      CSharpSelectedTypesEncoding _p1 = new CSharpSelectedTypesEncoding();
+      string _fileName = "DataContractExample.json";
+      JSONDataContractSerializers.Save<CSharpSelectedTypesEncoding>(new FileInfo(_fileName), _p1, (x, y, z) => Assert.AreEqual(System.Diagnostics.TraceEventType.Verbose, x));
+      FileInfo _newFile = new FileInfo(_fileName);
       Assert.IsTrue(_newFile.Exists);
-      CSharpSelectedTypesEncoding p2 = JSONDataContractSerializers.Load<CSharpSelectedTypesEncoding>
-        (new FileInfo(fileName), (x, y, z) => Assert.AreEqual<System.Diagnostics.TraceEventType>(System.Diagnostics.TraceEventType.Verbose, x));
-      Assert.IsNotNull(p2);
-      p1.AreEqual(p2);
+      CSharpSelectedTypesEncoding _p2 = JSONDataContractSerializers.Load<CSharpSelectedTypesEncoding>
+        (new FileInfo(_fileName), (x, y, z) => Assert.AreEqual<System.Diagnostics.TraceEventType>(System.Diagnostics.TraceEventType.Verbose, x));
+      Assert.IsNotNull(_p2);
+      _p1.AreEqual(_p2);
     }
 
   }

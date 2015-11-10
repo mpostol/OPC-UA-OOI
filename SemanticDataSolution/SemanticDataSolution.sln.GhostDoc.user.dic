@@ -4,6 +4,7 @@ deserializer
 Deserializes
 eeprom
 Fallback
+Json
 Metadata
 mpostol
 Namespaces

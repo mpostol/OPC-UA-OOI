@@ -33,12 +33,12 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// <param name="configurationFile">The file <see cref="FileInfo"/> containing the configuration data of the UANetworking application.</param>
     public override void ReadConfiguration(FileInfo configurationFile)
     {
-      CurrentConfiguration = ConfigurationData.Load<ConfigurationDataType>(() => DataContractSerializers.Load<ConfigurationDataType>(configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z)));
+      CurrentConfiguration = ConfigurationData.Load<ConfigurationDataType>(() => XmlDataContractSerializers.Load<ConfigurationDataType>(configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z)));
     }
     public override void SaveConfiguration(string solutionFilePath, FileInfo configurationFile)
     {
       ConfigurationData.Save<ConfigurationDataType>
-        (CurrentConfiguration, configuration => DataContractSerializers.Save<ConfigurationData>(configurationFile, configuration, (x, y, z) => Tracer?.Invoke(x, y, z)));
+        (CurrentConfiguration, configuration => XmlDataContractSerializers.Save<ConfigurationData>(configurationFile, configuration, (x, y, z) => Tracer?.Invoke(x, y, z)));
     }
     public override IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
     {

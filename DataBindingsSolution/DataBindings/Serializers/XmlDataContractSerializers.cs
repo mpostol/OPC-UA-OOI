@@ -11,7 +11,7 @@ namespace UAOOI.DataBindings.Serializers
   /// <summary>
   /// Class DataContractSerializers- helper function to serialize or deserialize an object of the specified type using <see cref="DataContractSerializer"/>.
   /// </summary>
-  public static class DataContractSerializers
+  public static class XmlDataContractSerializers
   {
 
     /// <summary>

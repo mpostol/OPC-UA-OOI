@@ -29,10 +29,10 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     {
       ConfigurationData _consumer = ReferenceConfiguration.LoadConsumer();
       FileInfo _fileInfo = new FileInfo(@"ConfigurationDataConsumer.coded.xml");
-      DataContractSerializers.Save<ConfigurationData>(_fileInfo, _consumer, (x, y, z) => { Console.WriteLine(z); });
+      XmlDataContractSerializers.Save<ConfigurationData>(_fileInfo, _consumer, (x, y, z) => { Console.WriteLine(z); });
       _fileInfo.Refresh();
       Assert.IsTrue(_fileInfo.Exists);
-      ConfigurationData _mirror = DataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { Console.WriteLine(z); });
+      ConfigurationData _mirror = XmlDataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { Console.WriteLine(z); });
       Compare(_consumer, _mirror);
     }
     [TestMethod]
@@ -41,10 +41,10 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     {
       ConfigurationData _Producer = ReferenceConfiguration.LoadProducer();
       FileInfo _fileInfo = new FileInfo(@"ConfigurationDataProducer.coded.xml");
-      DataContractSerializers.Save<ConfigurationData>(_fileInfo, _Producer, (x, y, z) => { Console.WriteLine(z); });
+      XmlDataContractSerializers.Save<ConfigurationData>(_fileInfo, _Producer, (x, y, z) => { Console.WriteLine(z); });
       _fileInfo.Refresh();
       Assert.IsTrue(_fileInfo.Exists);
-      ConfigurationData _mirror = DataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { Console.WriteLine(z); });
+      ConfigurationData _mirror = XmlDataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { Console.WriteLine(z); });
       Compare(_Producer, _mirror);
     }
     [TestMethod]

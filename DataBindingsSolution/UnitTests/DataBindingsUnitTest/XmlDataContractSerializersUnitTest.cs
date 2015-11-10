@@ -65,10 +65,10 @@ namespace UAOOI.DataBindings.UnitTest
       // Create a new instance of the Person class and serialize it to an XML file.
       CSharpSelectedTypesEncoding p1 = new CSharpSelectedTypesEncoding();
       string fileName = "DataContractExample.xml";
-      DataContractSerializers.Save<CSharpSelectedTypesEncoding>(new FileInfo(fileName), p1, (x, y, z) => Assert.AreEqual(System.Diagnostics.TraceEventType.Verbose, x));
+      XmlDataContractSerializers.Save<CSharpSelectedTypesEncoding>(new FileInfo(fileName), p1, (x, y, z) => Assert.AreEqual(System.Diagnostics.TraceEventType.Verbose, x));
       FileInfo _newFile = new FileInfo(fileName);
       Assert.IsTrue(_newFile.Exists);
-      CSharpSelectedTypesEncoding p2 = DataContractSerializers.Load<CSharpSelectedTypesEncoding>(new FileInfo(fileName), (x, y, z) => Assert.AreEqual<System.Diagnostics.TraceEventType>(System.Diagnostics.TraceEventType.Verbose, x));
+      CSharpSelectedTypesEncoding p2 = XmlDataContractSerializers.Load<CSharpSelectedTypesEncoding>(new FileInfo(fileName), (x, y, z) => Assert.AreEqual<System.Diagnostics.TraceEventType>(System.Diagnostics.TraceEventType.Verbose, x));
       Assert.IsNotNull(p2);
       p1.AreEqual(p2);
 

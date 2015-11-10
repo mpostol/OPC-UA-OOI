@@ -74,7 +74,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Serializers\DataContractSerializers.cs" />
+    <Compile Include="Serializers\XmlDataContractSerializers.cs" />
     <Compile Include="Serializers\JSONDataContractSerializers.cs" />
   </ItemGroup>
   <ItemGroup>

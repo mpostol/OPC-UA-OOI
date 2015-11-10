@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using System.Runtime.Serialization;
 using UAOOI.DataBindings.Serializers;
 
 namespace UAOOI.DataBindings.UnitTest
@@ -10,9 +9,9 @@ namespace UAOOI.DataBindings.UnitTest
   /// Summary description for DataContractSerializersUnitTest
   /// </summary>
   [TestClass]
-  public class DataContractSerializersUnitTest
+  public class XmlDataContractSerializersUnitTest
   {
-    public DataContractSerializersUnitTest()
+    public XmlDataContractSerializersUnitTest()
     {
       //
       // TODO: Add constructor logic here
@@ -60,55 +59,20 @@ namespace UAOOI.DataBindings.UnitTest
     #endregion
 
     [TestMethod]
-    public void SerializerTestMethod1()
+    [TestCategory("DataBindings_XmlSerializerTestMethod")]
+    public void XmlSerializerTestMethod()
     {
       // Create a new instance of the Person class and serialize it to an XML file.
-      Person p1 = new Person("Mary", 1);
+      CSharpSelectedTypesEncoding p1 = new CSharpSelectedTypesEncoding();
       string fileName = "DataContractExample.xml";
-      DataContractSerializers.Save<Person>(new FileInfo(fileName), p1, (x, y, z) => Assert.AreEqual(System.Diagnostics.TraceEventType.Verbose, x));
+      DataContractSerializers.Save<CSharpSelectedTypesEncoding>(new FileInfo(fileName), p1, (x, y, z) => Assert.AreEqual(System.Diagnostics.TraceEventType.Verbose, x));
       FileInfo _newFile = new FileInfo(fileName);
       Assert.IsTrue(_newFile.Exists);
-      Person p2 = DataContractSerializers.Load<Person>(new FileInfo(fileName), (x, y, z) => Assert.AreEqual<System.Diagnostics.TraceEventType>(System.Diagnostics.TraceEventType.Verbose, x));
+      CSharpSelectedTypesEncoding p2 = DataContractSerializers.Load<CSharpSelectedTypesEncoding>(new FileInfo(fileName), (x, y, z) => Assert.AreEqual<System.Diagnostics.TraceEventType>(System.Diagnostics.TraceEventType.Verbose, x));
       Assert.IsNotNull(p2);
-      Assert.AreEqual<int>(p1.ID, p2.ID);
-      Assert.AreEqual<string>(p1.Name, p2.Name);
-    }
-
-    #region private part
-    // Set the Name and Namespace properties to new values.
-    [DataContract(Name = "Customer", Namespace = "http://www.commsvr.com/UAOOI/DataBindings/UnitTest")]
-    private class Person : IExtensibleDataObject
-    {
-      public Person() { }
-      // To implement the IExtensibleDataObject interface, you must also implement the ExtensionData property.
-      private ExtensionDataObject extensionDataObjectValue;
-      public ExtensionDataObject ExtensionData
-      {
-        get
-        {
-          return extensionDataObjectValue;
-        }
-        set
-        {
-          extensionDataObjectValue = value;
-        }
-      }
-
-      [DataMember(Name = "CustName")]
-      internal string Name;
-
-      [DataMember(Name = "CustID")]
-      internal int ID;
-
-      public Person(string newName, int newID)
-      {
-        Name = newName;
-        ID = newID;
-      }
+      p1.AreEqual(p2);
 
     }
-    #endregion
-
   }
 }
 

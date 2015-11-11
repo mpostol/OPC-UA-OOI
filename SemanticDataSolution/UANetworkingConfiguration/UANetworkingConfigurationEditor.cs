@@ -2,6 +2,7 @@
 using CAS.UA.IServerConfiguration;
 using System;
 using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration
@@ -17,7 +18,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     public UANetworkingConfigurationEditor()
     {
       b_ConfigurationEditor = new ConfigurationEditorBase();
+      ComposeParts();
     }
+
     #region UANetworkingConfiguration<ConfigurationData>
     /// <summary>
     /// Creates automatically the instance configurations on the best effort basis.
@@ -46,8 +49,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
         throw new ArgumentNullException(nameof(ConfigurationEditor), "Configuration Editor is unavailable.");
       ConfigurationEditor.EditConfiguration(CurrentConfiguration);
     }
-    #endregion    
+    #endregion
 
+    #region MEF injection points
     /// <summary>
     /// Gets or sets the configuration editor - an access point to the external component.
     /// </summary>
@@ -58,8 +62,34 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
       get { return b_ConfigurationEditor; }
       set { b_ConfigurationEditor = value; }
     }
+    /// <summary>
+    /// Gets or sets the trace source - an access point to the external component.
+    /// </summary>
+    /// <value>The trace source.</value>
+    [Import(typeof(IConfigurationEditor))]
+    public ITraceSource TraceSource
+    {
+      get { return b_TraceSource; }
+      set { b_TraceSource = value; }
+    }
+    #endregion
 
+    #region private
+    private ITraceSource b_TraceSource;
     private IConfigurationEditor b_ConfigurationEditor;
+    private CompositionContainer m_Container;
+    private void ComposeParts()
+    {
+      //An aggregate catalog that combines multiple catalogs
+      var catalog = new AggregateCatalog();
+      //Adds all the parts found in the same assembly as the UANetworkingConfigurationEditorUnitTest class
+      catalog.Catalogs.Add(new AssemblyCatalog(typeof(UANetworkingConfigurationEditor).Assembly));
+      //Create the CompositionContainer with the parts in the catalog
+      m_Container = new CompositionContainer(catalog);
+      //Fill the imports of this object
+      this.m_Container.ComposeParts(this);
+    }
+    #endregion
 
   }
 }

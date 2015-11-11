@@ -3,7 +3,6 @@ using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Reflection;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
@@ -17,6 +16,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
+    [ExpectedException(typeof(ApplicationException))]
     public void GetIServerConfigurationTestMethod()
     {
       FileInfo _fileInfo = new FileInfo("UAOOI.SemanticDataUANetworkingConfiguration.dll");
@@ -30,41 +30,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.IsNotNull(_editor);
       Assert.IsNotNull(_editor.ConfigurationEditor);
     }
-    [TestMethod]
-    [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
-    public void ComposePartsTestMethod()
-    {
-      ComposeParts();
-      Assert.IsNotNull(m_Container);
-      Assert.IsNotNull(m_Container.Catalog);
-      m_Container.Dispose();
-      Assert.IsNotNull(MyConfiguration);
-      UANetworkingConfigurationEditor _editor = (UANetworkingConfigurationEditor)MyConfiguration;
-      Assert.IsNotNull(_editor.ConfigurationEditor);
-    }
-
-    private void ComposeParts()
-    {
-      //An aggregate catalog that combines multiple catalogs
-      var catalog = new AggregateCatalog();
-      //Adds all the parts found in the same assembly as the UANetworkingConfigurationEditorUnitTest class
-      catalog.Catalogs.Add(new AssemblyCatalog(typeof(UANetworkingConfigurationEditorUnitTest).Assembly));
-      catalog.Catalogs.Add(new AssemblyCatalog(typeof(UANetworkingConfigurationEditor).Assembly));
-      //Create the CompositionContainer with the parts in the catalog
-      m_Container = new CompositionContainer(catalog);
-      //Fill the imports of this object
-      try
-      {
-        this.m_Container.ComposeParts(this);
-      }
-      catch (CompositionException compositionException)
-      {
-        Assert.Fail(compositionException.ToString());
-      }
-    }
-    [Import(typeof(IConfiguration))]
-    public IConfiguration MyConfiguration { get; set; }
-    private CompositionContainer m_Container;
     private static void GetIServerConfiguration(FileInfo info, out Assembly pluginAssembly, out IConfiguration serverConfiguration)
     {
       string iName = typeof(IConfiguration).ToString();

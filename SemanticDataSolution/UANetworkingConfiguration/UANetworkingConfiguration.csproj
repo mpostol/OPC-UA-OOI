@@ -57,6 +57,7 @@
     <Compile Include="CommonDefinitions.cs" />
     <Compile Include="ConfigurationEditorBase.cs" />
     <Compile Include="IConfigurationEditor.cs" />
+    <Compile Include="ITraceSource.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

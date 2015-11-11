@@ -1,13 +1,13 @@
 ﻿
+using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UAOOI.DataBindings.Serializers;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 using System.Linq;
 using System.Xml;
-using CAS.UA.IServerConfiguration;
+using UAOOI.DataBindings.Serializers;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 {
@@ -17,66 +17,21 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
   {
     #region TestMethod
     [TestMethod]
-    [TestCategory("Configuration_ConfigurationDataUnitTest")]
-    public void LoadTestMethod()
+    [TestCategory("Configuration_LoadSaveTestMethodUnitTest")]
+    public void LoadSaveTestMethod()
     {
       LocalConfigurationData _configuration = ConfigurationData.Load<LocalConfigurationData>(LocalConfigurationData.Loader);
       Assert.IsNotNull(_configuration);
-    }
-    [TestMethod]
-    [TestCategory("Configuration_ConfigurationDataConsumerTestMethodXml")]
-    public void ConfigurationDataConsumerTestMethodXml()
-    {
-      ConfigurationData _consumer = ReferenceConfiguration.LoadConsumer();
-      FileInfo _fileInfo = new FileInfo(@"ConfigurationDataConsumer.coded.xml");
-      XmlDataContractSerializers.Save<ConfigurationData>(_fileInfo, _consumer, (x, y, z) => { Console.WriteLine(z); });
-      _fileInfo.Refresh();
-      Assert.IsTrue(_fileInfo.Exists);
-      ConfigurationData _mirror = XmlDataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { Console.WriteLine(z); });
-      Compare(_consumer, _mirror);
-    }
-    [TestMethod]
-    [TestCategory("Configuration_ConfigurationDataUnitTest")]
-    public void ConfigurationDataProducerTestMethod()
-    {
-      ConfigurationData _Producer = ReferenceConfiguration.LoadProducer();
-      FileInfo _fileInfo = new FileInfo(@"ConfigurationDataProducer.coded.xml");
-      XmlDataContractSerializers.Save<ConfigurationData>(_fileInfo, _Producer, (x, y, z) => { Console.WriteLine(z); });
-      _fileInfo.Refresh();
-      Assert.IsTrue(_fileInfo.Exists);
-      ConfigurationData _mirror = XmlDataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { Console.WriteLine(z); });
-      Compare(_Producer, _mirror);
-    }
-    [TestMethod]
-    [TestCategory("Configuration_ConfigurationDataConsumerTestMethodJson")]
-    public void ConfigurationDataConsumerTestMethodJson()
-    {
-      ConfigurationData _consumer = ReferenceConfiguration.LoadConsumer();
-      FileInfo _fileInfo = new FileInfo(@"ConfigurationDataConsumer.coded.json");
-      JSONDataContractSerializers.Save<ConfigurationData>(_fileInfo, _consumer, (x, y, z) => { Console.WriteLine(z); });
-      _fileInfo.Refresh();
-      Assert.IsTrue(_fileInfo.Exists);
-      ConfigurationData _mirror = JSONDataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { Console.WriteLine(z); });
-      Compare(_consumer, _mirror);
-    }
-    [TestMethod]
-    [TestCategory("Configuration_ConfigurationDataProducerTestMethodJson")]
-    public void ConfigurationDataProducerTestMethodJson()
-    {
-      ConfigurationData _consumer = ReferenceConfiguration.LoadProducer();
-      FileInfo _fileInfo = new FileInfo(@"ConfigurationDataProducer.coded.json");
-      JSONDataContractSerializers.Save<ConfigurationData>(_fileInfo, _consumer, (x, y, z) => { Console.WriteLine(z); });
-      _fileInfo.Refresh();
-      Assert.IsTrue(_fileInfo.Exists);
-      ConfigurationData _mirror = JSONDataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { Console.WriteLine(z); });
-      Compare(_consumer, _mirror);
-    }
-    [TestMethod]
-    [TestCategory("Configuration_ConfigurationDataUnitTest")]
-    public void ConfigurationDataOnSaveTestMethod()
-    {
-      LocalConfigurationData _configuration = new LocalConfigurationData();
       LocalConfigurationData.Save<LocalConfigurationData>(_configuration, (x) => { Assert.AreEqual(1, x.OnSavingCount); });
+    }
+    [TestMethod]
+    [TestCategory("Configuration_SaveLoadTestMethodTestMethod")]
+    public void SaveLoadTestMethod()
+    {
+      SaveLoadConfigurationData(Role.Consumer, SerializerType.Xml);
+      SaveLoadConfigurationData(Role.Consumer, SerializerType.Json);
+      SaveLoadConfigurationData(Role.Producer, SerializerType.Xml);
+      SaveLoadConfigurationData(Role.Producer, SerializerType.Json);
     }
     [TestMethod]
     [TestCategory("Configuration_ConfigurationDataUnitTest")]
@@ -145,6 +100,31 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.AreEqual<InstanceNodeClassesEnum>(item1.NodeClass, item2.NodeClass);
       Assert.AreEqual<XmlQualifiedName>(item1.NodeIdentifier, item2.NodeIdentifier);
       Assert.AreEqual<string>(item1.ToString(), item2.ToString());
+    }
+    private enum Role { Producer, Consumer };
+    private void SaveLoadConfigurationData(Role role, SerializerType serializer)
+    {
+      string _fileName = @"ConfigurationData{0}.coded.{1}";
+      string _extension = serializer == SerializerType.Xml ? "xml" : "json";
+      ConfigurationData _configuration = ReferenceConfiguration.LoadConsumer();
+      _fileName = String.Format(_fileName, role, _extension);
+      switch (role)
+      {
+        case Role.Producer:
+          _configuration = ReferenceConfiguration.LoadProducer();
+          break;
+        case Role.Consumer:
+          _configuration = ReferenceConfiguration.LoadConsumer();
+          break;
+        default:
+          break;
+      }
+      FileInfo _fileInfo = new FileInfo(_fileName);
+      ConfigurationData.Save<ConfigurationData>(_configuration, serializer, _fileInfo, (x, y, z) => { Console.WriteLine(z); });
+      _fileInfo.Refresh();
+      Assert.IsTrue(_fileInfo.Exists);
+      ConfigurationData _mirror = ConfigurationData.Load<ConfigurationData>(serializer, _fileInfo, (x, y, z) => { Console.WriteLine(z); });
+      Compare(_configuration, _mirror);
     }
     #endregion
   }

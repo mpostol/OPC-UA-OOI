@@ -2,7 +2,10 @@
 using CAS.UA.IServerConfiguration;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using UAOOI.DataBindings.Serializers;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
@@ -25,6 +28,18 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       _configuration.OnLoaded();
       return _configuration;
     }
+    public static ConfigurationDataType Load<ConfigurationDataType>(SerializerType serializer, FileInfo configurationFile, Action<TraceEventType, int, string> trace)
+      where ConfigurationDataType : Serialization.ConfigurationData, new()
+    {
+      Func<FileInfo, Action<TraceEventType, int, string>, ConfigurationDataType> _loader = null;
+      if (serializer == SerializerType.Xml)
+        _loader = (file, tracer) => XmlDataContractSerializers.Load<ConfigurationDataType>(file, tracer);
+      else
+        _loader = (conf, tracer) => JSONDataContractSerializers.Load<ConfigurationDataType>(conf, tracer);
+      ConfigurationDataType _configuration = _loader(configurationFile, (x, y, z) => trace?.Invoke(x, y, z));
+      _configuration.OnLoaded();
+      return _configuration;
+    }
     /// <summary>
     /// Save the <paramref name="configuration" /> using specified delegate <paramref name="saver" />.
     /// </summary>
@@ -36,6 +51,17 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     {
       configuration.OnSaving();
       saver(configuration);
+    }
+    internal static void Save<ConfigurationDataType>(ConfigurationDataType configuration, SerializerType serializer, FileInfo configurationFile, Action<TraceEventType, int, string> trace)
+      where ConfigurationDataType : Serialization.ConfigurationData
+    {
+      configuration.OnSaving();
+      Action<FileInfo, ConfigurationDataType, Action<TraceEventType, int, string>> _saver = null;
+      if (serializer == SerializerType.Xml)
+        _saver = (conf, file, tracer) => XmlDataContractSerializers.Save<ConfigurationData>(conf, file, tracer);
+      else
+        _saver = (conf, file, tracer) => JSONDataContractSerializers.Save<ConfigurationData>(conf, file, tracer);
+      _saver(configurationFile, configuration, (x, y, z) => trace?.Invoke(x, y, z));
     }
     /// <summary>
     /// Gets the instance configuration - collection of data sets represented as the <see cref="IInstanceConfiguration"/>.

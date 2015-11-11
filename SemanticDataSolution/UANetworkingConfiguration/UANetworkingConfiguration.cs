@@ -33,12 +33,11 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// <param name="configurationFile">The file <see cref="FileInfo"/> containing the configuration data of the UANetworking application.</param>
     public override void ReadConfiguration(FileInfo configurationFile)
     {
-      CurrentConfiguration = ConfigurationData.Load<ConfigurationDataType>(() => XmlDataContractSerializers.Load<ConfigurationDataType>(configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z)));
+      CurrentConfiguration = ConfigurationData.Load<ConfigurationDataType>(Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z));
     }
     public override void SaveConfiguration(string solutionFilePath, FileInfo configurationFile)
     {
-      ConfigurationData.Save<ConfigurationDataType>
-        (CurrentConfiguration, configuration => XmlDataContractSerializers.Save<ConfigurationData>(configurationFile, configuration, (x, y, z) => Tracer?.Invoke(x, y, z)));
+      ConfigurationData.Save<ConfigurationDataType>(CurrentConfiguration, Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z));
     }
     public override IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
     {
@@ -56,7 +55,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
       return new ConfigurationDataType() { DataSets = new DataSetConfiguration[] { }, MessageHandlers = new MessageHandlerConfiguration[] { } };
     }
     /// <summary>
-    /// Gets the default name of the configuration file from the application seetings.
+    /// Gets the default name of the configuration file from the application settings.
     /// </summary>
     /// <value>The default name of the configuration file.</value>
     protected override string DefaultConfigurationFileName

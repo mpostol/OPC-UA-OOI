@@ -34,5 +34,17 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Properties {
                 this["Default_ConfigurationFileName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("xml")]
+        public string Serializer {
+            get {
+                return ((string)(this["Serializer"]));
+            }
+            set {
+                this["Serializer"] = value;
+            }
+        }
     }
 }

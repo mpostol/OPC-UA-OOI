@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     {
       MessageBox.Show("CreateInstanceConfigurations is not implemented yet", "Library functionality", MessageBoxButton.OK, MessageBoxImage.Question);
     }
-    public void EditConfiguration(ConfigurationData configuration)
+    public virtual void EditConfiguration(ConfigurationData configuration)
     {
       MessageBox.Show("CreateInstanceConfigurations is not implemented yet", "Library functionality", MessageBoxButton.OK, MessageBoxImage.Question);
     }

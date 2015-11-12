@@ -15,6 +15,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
   public class UANetworkingConfigurationEditor : UANetworkingConfiguration<ConfigurationData>
   {
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UANetworkingConfigurationEditor"/> class.
+    /// </summary>
     public UANetworkingConfigurationEditor()
     {
       b_ConfigurationEditor = new ConfigurationEditorBase();

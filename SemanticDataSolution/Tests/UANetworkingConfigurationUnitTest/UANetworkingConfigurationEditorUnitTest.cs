@@ -6,6 +6,8 @@ using System.ComponentModel.Composition;
 using System.IO;
 using System.Reflection;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using System.ComponentModel.Composition.Hosting;
+using System.Diagnostics;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 {
@@ -19,6 +21,21 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     public void GetIServerConfigurationTestMethod()
     {
       FileInfo _fileInfo = new FileInfo("UAOOI.SemanticDataUANetworkingConfiguration.dll");
+      Assert.IsTrue(_fileInfo.Exists);
+      Assembly _pluginAssembly = null;
+      IConfiguration _serverConfiguration = null;
+      GetIServerConfiguration(_fileInfo, out _pluginAssembly, out _serverConfiguration);
+      Assert.IsNotNull(_pluginAssembly);
+      Assert.IsNotNull(_serverConfiguration);
+      UANetworkingConfigurationEditor _editor = (UANetworkingConfigurationEditor)_serverConfiguration;
+      Assert.IsNotNull(_editor);
+      Assert.IsNotNull(_editor.ConfigurationEditor);
+    }
+    [TestMethod]
+    [TestCategory("Configuration_GetMyIServerConfigurationTestMethod")]
+    public void GetMyIServerConfigurationTestMethod()
+    {
+      FileInfo _fileInfo = new FileInfo("UANetworkingConfigurationUnitTest.dll");
       Assert.IsTrue(_fileInfo.Exists);
       Assembly _pluginAssembly = null;
       IConfiguration _serverConfiguration = null;
@@ -48,16 +65,34 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     }
   }
   [Export(typeof(IConfigurationEditor))]
-  public class ConfigurationEditor : IConfigurationEditor
+  public class ConfigurationEditor : ConfigurationEditorBase
   {
-    public void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, Action<bool> CancelWasPressed)
+    public override void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, Action<bool> CancelWasPressed)
     {
       throw new NotImplementedException();
     }
-
-    public void EditConfiguration(ConfigurationData configuration)
+    public override void EditConfiguration(ConfigurationData configuration)
     {
       throw new NotImplementedException();
+    }
+  }
+  [Export(typeof(ITraceSource))]
+  public class MyTraceSourceBase : TraceSourceBase
+  {
+    public override void TraceData(TraceEventType eventType, int id, object data)
+    {
+      base.TraceData(eventType, id, data);
+    }
+  }
+  public class MyUANetworkingConfigurationEditor : UANetworkingConfigurationEditor
+  {
+    protected override AggregateCatalog CreateAggregateCatalog()
+    {
+      AggregateCatalog catalog = new AggregateCatalog();
+      //Adds all the parts found in the same assembly as the UANetworkingConfigurationEditorUnitTest class
+      catalog.Catalogs.Add(new AssemblyCatalog(typeof(MyUANetworkingConfigurationEditor).Assembly));
+      //catalog.Catalogs.Add(new DirectoryCatalog(@".\Extensions"));
+      return catalog;
     }
   }
 

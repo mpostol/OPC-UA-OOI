@@ -66,7 +66,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// Gets or sets the trace source - an access point to the external component.
     /// </summary>
     /// <value>The trace source.</value>
-    [Import(typeof(IConfigurationEditor))]
+    [Import(typeof(ITraceSource))]
     public ITraceSource TraceSource
     {
       get { return b_TraceSource; }
@@ -81,13 +81,23 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     private void ComposeParts()
     {
       //An aggregate catalog that combines multiple catalogs
-      var catalog = new AggregateCatalog();
-      //Adds all the parts found in the same assembly as the UANetworkingConfigurationEditorUnitTest class
-      catalog.Catalogs.Add(new AssemblyCatalog(typeof(UANetworkingConfigurationEditor).Assembly));
+      AggregateCatalog catalog = CreateAggregateCatalog();
       //Create the CompositionContainer with the parts in the catalog
       m_Container = new CompositionContainer(catalog);
       //Fill the imports of this object
       this.m_Container.ComposeParts(this);
+    }
+    /// <summary>
+    /// Creates the aggregate catalog.
+    /// </summary>
+    /// <returns>AggregateCatalog.</returns>
+    protected virtual AggregateCatalog CreateAggregateCatalog()
+    {
+      AggregateCatalog catalog = new AggregateCatalog();
+      //Adds all the parts found in the same assembly as the UANetworkingConfigurationEditorUnitTest class
+      catalog.Catalogs.Add(new AssemblyCatalog(typeof(UANetworkingConfigurationEditor).Assembly));
+      //catalog.Catalogs.Add(new DirectoryCatalog(@".\Extensions"));
+      return catalog;
     }
     #endregion
 

@@ -16,7 +16,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
-    [ExpectedException(typeof(ApplicationException))]
     public void GetIServerConfigurationTestMethod()
     {
       FileInfo _fileInfo = new FileInfo("UAOOI.SemanticDataUANetworkingConfiguration.dll");

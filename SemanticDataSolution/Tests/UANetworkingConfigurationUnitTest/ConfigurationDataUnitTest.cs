@@ -20,7 +20,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     [TestCategory("Configuration_LoadSaveTestMethodUnitTest")]
     public void LoadSaveTestMethod()
     {
-      LocalConfigurationData _configuration = ConfigurationData.Load<LocalConfigurationData>(LocalConfigurationData.Loader);
+      LocalConfigurationData _configuration = ConfigurationData.Load<LocalConfigurationData>(LocalConfigurationData.Loader, () => { });
       Assert.IsNotNull(_configuration);
       LocalConfigurationData.Save<LocalConfigurationData>(_configuration, (x) => { Assert.AreEqual(1, x.OnSavingCount); });
     }
@@ -38,7 +38,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     public void ConfigurationDataOnLoadTestMethod()
     {
       LocalConfigurationData _configuration = new LocalConfigurationData();
-      LocalConfigurationData _new = LocalConfigurationData.Load<LocalConfigurationData>(() => _configuration);
+      LocalConfigurationData _new = LocalConfigurationData.Load<LocalConfigurationData>(() => _configuration, () => { });
       Assert.AreEqual(1, _configuration.OnLoadedCount);
     }
     #endregion
@@ -123,7 +123,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       ConfigurationData.Save<ConfigurationData>(_configuration, serializer, _fileInfo, (x, y, z) => { Console.WriteLine(z); });
       _fileInfo.Refresh();
       Assert.IsTrue(_fileInfo.Exists);
-      ConfigurationData _mirror = ConfigurationData.Load<ConfigurationData>(serializer, _fileInfo, (x, y, z) => { Console.WriteLine(z); });
+      ConfigurationData _mirror = ConfigurationData.Load<ConfigurationData>(serializer, _fileInfo, (x, y, z) => { Console.WriteLine(z); }, () => { });
       Compare(_configuration, _mirror);
     }
     #endregion

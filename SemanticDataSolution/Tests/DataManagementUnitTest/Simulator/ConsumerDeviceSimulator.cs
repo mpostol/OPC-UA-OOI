@@ -116,6 +116,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
           new DataMemberConfiguration() { ProcessValueName = "Value2", SourceEncoding = "System.Double", SymbolicName = "Value2" },
         };
       }
+      protected override void RaiseEvents()
+      {
+        OnAssociationConfigurationChange?.Invoke(this, EventArgs.Empty);
+        OnMessageHandlerConfigurationChange?.Invoke(this, EventArgs.Empty);
+      }
       #endregion
 
     }

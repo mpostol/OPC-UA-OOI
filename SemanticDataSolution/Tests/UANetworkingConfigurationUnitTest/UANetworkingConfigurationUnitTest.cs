@@ -85,6 +85,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       INodeDescriptor _nd = new NodeDescriptor();
       IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
       Assert.IsNotNull(_newInstanceConfiguration);
+      IInstanceConfiguration _nxtInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
+      Assert.AreSame(_newInstanceConfiguration, _nxtInstanceConfiguration);
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]

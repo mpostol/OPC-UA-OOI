@@ -17,7 +17,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// <returns>Am object of <see cref="ConfigurationData" /> type capturing the communication configuration.</returns>
     public ConfigurationData GetConfiguration()
     {
-      return ConfigurationData.Load(Loader);
+      return ConfigurationData.Load(Loader, RaiseEvents);
     }
     /// <summary>
     /// Occurs after the association configuration has been changed.
@@ -35,6 +35,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// <remarks>Allows late binding - injection point of the configuration loader.</remarks>
     /// <value>The loader that is to be used to create or load new instance of <see cref="ConfigurationData"/>.</value>
     public Func<ConfigurationData> Loader { get; set; }
+    protected abstract void RaiseEvents();
 
   }
 }

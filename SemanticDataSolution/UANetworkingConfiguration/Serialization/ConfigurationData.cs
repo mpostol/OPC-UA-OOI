@@ -16,20 +16,25 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
   /// </summary>
   public partial class ConfigurationData
   {
+
+    #region API
     /// <summary>
-    /// Creates the <typeparam name="ConfigurationDataType"/> instance using specified loader.
+    /// Creates the <typeparam name="ConfigurationDataType" /> instance using specified loader.
     /// </summary>
-    /// <param name="loader">The delegate <see cref="Func{ConfigurationDataType}"/> capturing the loader of functionality 
-    /// of the class derived from <see cref="ConfigurationData"/>.</param>
-    /// <returns>An instance of <typeparam name="ConfigurationDataType"/> derived from <see cref="ConfigurationData"/>.</returns>
-    internal static ConfigurationDataType Load<ConfigurationDataType>(Func<ConfigurationDataType> loader)
+    /// <typeparam name="ConfigurationDataType">The type of the configuration data type.</typeparam>
+    /// <param name="loader">The delegate <see cref="Func{ConfigurationDataType}" /> capturing the loader of functionality
+    /// of the class derived from <see cref="ConfigurationData" />.</param>
+    /// <param name="onChanged">A delegate <see cref="Action"/> encapsulating operation called when this instance is changed.</param>
+    /// <returns>An instance of <typeparam name="ConfigurationDataType" /> derived from <see cref="ConfigurationData" />.</returns>
+    internal static ConfigurationDataType Load<ConfigurationDataType>(Func<ConfigurationDataType> loader, Action onChanged)
       where ConfigurationDataType : Serialization.ConfigurationData
     {
       ConfigurationDataType _configuration = loader();
+      _configuration.m_OnChanged = onChanged;
       _configuration.OnLoaded();
       return _configuration;
     }
-    public static ConfigurationDataType Load<ConfigurationDataType>(SerializerType serializer, FileInfo configurationFile, Action<TraceEventType, int, string> trace)
+    public static ConfigurationDataType Load<ConfigurationDataType>(SerializerType serializer, FileInfo configurationFile, Action<TraceEventType, int, string> trace, Action onChanged)
       where ConfigurationDataType : Serialization.ConfigurationData, new()
     {
       Func<FileInfo, Action<TraceEventType, int, string>, ConfigurationDataType> _loader = null;
@@ -38,6 +43,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       else
         _loader = (conf, tracer) => JSONDataContractSerializers.Load<ConfigurationDataType>(conf, tracer);
       ConfigurationDataType _configuration = _loader(configurationFile, (x, y, z) => trace?.Invoke(x, y, z));
+      _configuration.m_OnChanged = onChanged;
       _configuration.OnLoaded();
       return _configuration;
     }
@@ -77,10 +83,15 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         DataSetConfiguration _new = DataSetConfiguration.Create(descriptor);
         b_DataSetConfigurationList.Add(_new);
         _nodes = new DataSetConfiguration[] { _new };
+        m_OnChanged();
       }
       return _nodes;
     }
+    
+    #endregion
+
     #region private
+    Action m_OnChanged = () => { };
     private List<DataSetConfiguration> DataSetsList
     {
       get

@@ -35,7 +35,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// <value>The identifier.</value>
     [XmlIgnore]
     public Guid Id { get { return XmlConvert.ToGuid(Guid); } set { Guid = XmlConvert.ToString(value); } }
-
     internal static DataSetConfiguration Create(INodeDescriptor descriptor)
     {
       if (descriptor == null)
@@ -63,6 +62,15 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       return _new;
     }
     #endregion
-
+    #region Object
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+    public override string ToString()
+    {
+      return $"{this.Root.NodeClass} : {this.DataSymbolicName}";
+    }
+    #endregion
   }
 }

@@ -33,7 +33,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// <param name="configurationFile">The file <see cref="FileInfo"/> containing the configuration data of the UANetworking application.</param>
     public override void ReadConfiguration(FileInfo configurationFile)
     {
-      CurrentConfiguration = ConfigurationData.Load<ConfigurationDataType>(Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z));
+      CurrentConfiguration = ConfigurationData.Load<ConfigurationDataType>
+        (Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z), () => RaiseOnChangeEvent(true));
     }
     public override void SaveConfiguration(string solutionFilePath, FileInfo configurationFile)
     {

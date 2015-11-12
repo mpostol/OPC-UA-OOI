@@ -32,10 +32,15 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// </summary>
     public override event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
     #endregion
-    private static ConfigurationData LoadConfig()
+    private ConfigurationData LoadConfig()
     {
       FileInfo _configurationFile = new FileInfo(Properties.Settings.Default.ConsumerConfigurationFileName);
-      return ConfigurationData.Load<ConfigurationData>(() => XmlDataContractSerializers.Load<ConfigurationData>(_configurationFile, (x, y, z) => { }));
+      return ConfigurationData.Load<ConfigurationData>(() => XmlDataContractSerializers.Load<ConfigurationData>(_configurationFile, (x, y, z) => { }), () => RaiseEvents());
+    }
+    protected override void RaiseEvents()
+    {
+      OnAssociationConfigurationChange?.Invoke(this, EventArgs.Empty);
+      OnMessageHandlerConfigurationChange?.Invoke(this, EventArgs.Empty);
     }
   }
 }

@@ -71,10 +71,26 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// <returns>IEnumerable&lt;IInstanceConfiguration&gt;.</returns>
     internal IEnumerable<IInstanceConfiguration> GetInstanceConfiguration(INodeDescriptor descriptor)
     {
-      return DataSets.Where<DataSetConfiguration>(x => x.Root.CreateWrapper().CompareTo(descriptor) == 0);
+      IEnumerable<IInstanceConfiguration> _nodes = DataSetsList.Where<DataSetConfiguration>(x => x.Root.CreateWrapper().CompareTo(descriptor) == 0);
+      if (!_nodes.Any<IInstanceConfiguration>())
+      {
+        DataSetConfiguration _new = DataSetConfiguration.Create(descriptor);
+        b_DataSetConfigurationList.Add(_new);
+        _nodes = new DataSetConfiguration[] { _new };
+      }
+      return _nodes;
     }
-
     #region private
+    private List<DataSetConfiguration> DataSetsList
+    {
+      get
+      {
+        if (b_DataSetConfigurationList == null)
+          b_DataSetConfigurationList = new List<DataSetConfiguration>(DataSets);
+        return b_DataSetConfigurationList;
+      }
+    }
+    private List<DataSetConfiguration> b_DataSetConfigurationList;
     /// <summary>
     /// Called when the configuration is loaded.
     /// </summary>
@@ -82,7 +98,12 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// <summary>
     /// Called before the saving the configuration.
     /// </summary>
-    protected virtual void OnSaving() { }
+    protected virtual void OnSaving()
+    {
+      if (b_DataSetConfigurationList == null)
+        return;
+      DataSets = b_DataSetConfigurationList.ToArray<DataSetConfiguration>();
+    }
     #endregion
 
   }

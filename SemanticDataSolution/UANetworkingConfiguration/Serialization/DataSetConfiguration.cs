@@ -35,6 +35,33 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// <value>The identifier.</value>
     [XmlIgnore]
     public Guid Id { get { return XmlConvert.ToGuid(Guid); } set { Guid = XmlConvert.ToString(value); } }
+
+    internal static DataSetConfiguration Create(INodeDescriptor descriptor)
+    {
+      if (descriptor == null)
+        throw new ArgumentNullException(nameof(descriptor));
+      if (descriptor.NodeIdentifier == null || descriptor.NodeIdentifier.IsEmpty)
+        throw new ArgumentNullException(nameof(descriptor.NodeIdentifier));
+      DataSetConfiguration _new = new DataSetConfiguration()
+      {
+        AssociationName = descriptor.NodeIdentifier.ToString(),
+        AssociationRole = AssociationRole.Producer,
+        DataSet = new DataMemberConfiguration[0],
+        DataSymbolicName = descriptor.NodeIdentifier.ToString(),
+        ExtensionData = null,
+        Id = System.Guid.NewGuid(),
+        RepositoryGroup = "[RepositoryGroup]",
+        Root = new NodeDescriptor()
+        {
+          BindingDescription = descriptor.BindingDescription,
+          DataType = descriptor.DataType,
+          InstanceDeclaration = descriptor.InstanceDeclaration,
+          NodeClass = descriptor.NodeClass,
+          NodeIdentifier = descriptor.NodeIdentifier
+        }
+      };
+      return _new;
+    }
     #endregion
 
   }

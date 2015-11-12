@@ -73,6 +73,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.IsNotNull(_newConfiguration);
       IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(null);
     }
+    /// <summary>
+    /// Gets the instance configuration no configuration test method.
+    /// </summary>
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void GetInstanceConfigurationNoConfigurationTestMethod()
@@ -81,7 +84,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.IsNotNull(_newConfiguration);
       INodeDescriptor _nd = new NodeDescriptor();
       IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
-      Assert.IsNull(_newInstanceConfiguration);
+      Assert.IsNotNull(_newInstanceConfiguration);
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
@@ -118,60 +121,34 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     #region private
     private class NodeDescriptor : NodeDescriptorBase
     {
+      public NodeDescriptor()
+      {
+        NodeIdentifier = new XmlQualifiedName(DateTime.Today.ToString(), "UAOOI.SemanticData.UANetworking.Configuration.UnitTest");
+        BindingDescription = NodeIdentifier.Name;
+        DataType = new XmlQualifiedName("DataType", "UAOOI.SemanticData.UANetworking.Configuration.UnitTest");
+        InstanceDeclaration = false;
+        NodeClass = InstanceNodeClassesEnum.Object;
+      }
       public override string BindingDescription
       {
-        get
-        {
-          throw new NotImplementedException();
-        }
-
-        set
-        {
-          throw new NotImplementedException();
-        }
+        get; set;
       }
-
       public override XmlQualifiedName DataType
       {
-        get
-        {
-          throw new NotImplementedException();
-        }
-
-        set
-        {
-          throw new NotImplementedException();
-        }
+        get; set;
       }
       public override bool InstanceDeclaration
       {
-        get
-        {
-          throw new NotImplementedException();
-        }
-
-        set
-        {
-          throw new NotImplementedException();
-        }
+        get; set; 
       }
       public override InstanceNodeClassesEnum NodeClass
       {
-        get
-        {
-          throw new NotImplementedException();
-        }
-
-        set
-        {
-          throw new NotImplementedException();
-        }
+        get; set;
       }
       public override XmlQualifiedName NodeIdentifier
       {
         get; set;
       }
-
     }
     private class DerivedUANetworkingConfiguration : UANetworkingConfiguration<ConfigurationData>
     {

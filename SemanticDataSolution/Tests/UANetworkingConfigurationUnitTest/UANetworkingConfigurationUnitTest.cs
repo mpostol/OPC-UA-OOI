@@ -86,7 +86,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
       Assert.IsNotNull(_newInstanceConfiguration);
       IInstanceConfiguration _nxtInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
-      Assert.AreSame(_newInstanceConfiguration, _nxtInstanceConfiguration);
+      Assert.AreNotSame(_newInstanceConfiguration, _nxtInstanceConfiguration);
+      Assert.AreEqual<string>(_newInstanceConfiguration.ToString(), _nxtInstanceConfiguration.ToString());
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
@@ -155,6 +156,12 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     }
     private class DerivedUANetworkingConfiguration : UANetworkingConfiguration<ConfigurationData>
     {
+      public DerivedUANetworkingConfiguration()
+      {
+        InstanceConfigurationFactory = new Exports.InstanceConfigurationFactory();
+        TraceSource = new Exports.TraceSourceBase();
+        ConfigurationEditor = new Exports.ConfigurationEditorBase();
+      }
       public override void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed)
       {
         throw new NotImplementedException();

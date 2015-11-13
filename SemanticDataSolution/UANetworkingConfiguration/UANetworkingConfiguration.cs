@@ -1,8 +1,8 @@
 ﻿
 using CAS.UA.IServerConfiguration;
 using System;
+using System.ComponentModel.Composition;
 using System.IO;
-using System.Linq;
 using UAOOI.DataBindings;
 using UAOOI.DataBindings.Serializers;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
@@ -46,11 +46,37 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
         throw new ArgumentNullException(nameof(descriptor));
       if (CurrentConfiguration == null)
         return null;
-      return CurrentConfiguration.GetInstanceConfiguration(descriptor).FirstOrDefault<IInstanceConfiguration>();
+      return InstanceConfigurationFactory.GetIInstanceConfiguration(CurrentConfiguration.GetInstanceConfiguration(descriptor), CurrentConfiguration.MessageHandlers);
     }
+    #endregion
+    #region MEF injection points
+    /// <summary>
+    /// Gets or sets the configuration editor - an access point to the external component.
+    /// </summary>
+    /// <value>The configuration editor.</value>
+    [Import(typeof(IConfigurationEditor))]
+    public IConfigurationEditor ConfigurationEditor
+    {
+      get { return b_ConfigurationEditor; }
+      set { b_ConfigurationEditor = value; }
+    }
+    /// <summary>
+    /// Gets or sets the trace source - an access point to the external component.
+    /// </summary>
+    /// <value>The trace source.</value>
+    [Import(typeof(ITraceSource))]
+    public ITraceSource TraceSource
+    {
+      get { return b_TraceSource; }
+      set { b_TraceSource = value; }
+    }
+    [Import(typeof(IInstanceConfigurationFactory))]
+    public IInstanceConfigurationFactory InstanceConfigurationFactory { get; set; }
     #endregion
 
     #region privat
+    private ITraceSource b_TraceSource;
+    private IConfigurationEditor b_ConfigurationEditor;
     private static ConfigurationDataType NewConfigurationData()
     {
       return new ConfigurationDataType() { DataSets = new DataSetConfiguration[] { }, MessageHandlers = new MessageHandlerConfiguration[] { } };
@@ -69,4 +95,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     #endregion
 
   }
+
 }
+

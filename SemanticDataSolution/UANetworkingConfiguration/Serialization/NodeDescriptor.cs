@@ -120,12 +120,20 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
           return m_repository.NodeClass;
         }
       }
+      [DisplayName("Name")]
+      [Description("The node unique identifier.")]
+      [Category("Node")]
+      [ReadOnly(true)]
       public override XmlQualifiedName NodeIdentifier
       {
         get
         {
           return m_repository.NodeIdentifier;
         }
+      }
+      public override string ToString()
+      {
+        return $"{NodeClass}:{NodeIdentifier}";
       }
       private NodeDescriptor m_repository;
     }

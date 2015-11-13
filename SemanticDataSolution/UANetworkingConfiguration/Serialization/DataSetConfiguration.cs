@@ -14,19 +14,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
   /// Current value can be loaded from the local configuration or obtained using meta-data exchange centric communication mechanism.
   /// For example it could be read from a file or discovered using OPC UA session from OPC UA server.
   /// </summary>
-  public partial class DataSetConfiguration : IInstanceConfiguration
+  public partial class DataSetConfiguration
   {
-
-    #region IInstanceConfiguration
-    public void ClearConfiguration()
-    {
-      throw new NotImplementedException();
-    }
-    public void Edit()
-    {
-      throw new NotImplementedException();
-    }
-    #endregion
 
     #region API
     /// <summary>
@@ -41,6 +30,14 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         throw new ArgumentNullException(nameof(descriptor));
       if (descriptor.NodeIdentifier == null || descriptor.NodeIdentifier.IsEmpty)
         throw new ArgumentNullException(nameof(descriptor.NodeIdentifier));
+      NodeDescriptor _newRoot = new NodeDescriptor()
+      {
+        BindingDescription = descriptor.BindingDescription,
+        DataType = descriptor.DataType,
+        InstanceDeclaration = descriptor.InstanceDeclaration,
+        NodeClass = descriptor.NodeClass,
+        NodeIdentifier = descriptor.NodeIdentifier
+      };
       DataSetConfiguration _new = new DataSetConfiguration()
       {
         AssociationName = descriptor.NodeIdentifier.ToString(),
@@ -50,14 +47,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         ExtensionData = null,
         Id = System.Guid.NewGuid(),
         RepositoryGroup = "[RepositoryGroup]",
-        Root = new NodeDescriptor()
-        {
-          BindingDescription = descriptor.BindingDescription,
-          DataType = descriptor.DataType,
-          InstanceDeclaration = descriptor.InstanceDeclaration,
-          NodeClass = descriptor.NodeClass,
-          NodeIdentifier = descriptor.NodeIdentifier
-        }
+        Root = _newRoot,
       };
       return _new;
     }

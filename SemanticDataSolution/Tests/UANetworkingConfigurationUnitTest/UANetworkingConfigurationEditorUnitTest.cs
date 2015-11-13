@@ -2,12 +2,9 @@
 using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Reflection;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
-using System.ComponentModel.Composition.Hosting;
-using System.Diagnostics;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 {
@@ -62,26 +59,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
           {
             throw new ApplicationException(String.Format("The server configuration plug-in {0}/{1} cannot be loaded. Contact the vendor to get current version of this component", pluginType.FullName, info.Name), _ex);
           }
-    }
-  }
-  [Export(typeof(IConfigurationEditor))]
-  public class ConfigurationEditor : ConfigurationEditorBase
-  {
-    public override void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, Action<bool> CancelWasPressed)
-    {
-      throw new NotImplementedException();
-    }
-    public override void EditConfiguration(ConfigurationData configuration)
-    {
-      throw new NotImplementedException();
-    }
-  }
-  [Export(typeof(ITraceSource))]
-  public class MyTraceSourceBase : TraceSourceBase
-  {
-    public override void TraceData(TraceEventType eventType, int id, object data)
-    {
-      base.TraceData(eventType, id, data);
     }
   }
   public class MyUANetworkingConfigurationEditor : UANetworkingConfigurationEditor

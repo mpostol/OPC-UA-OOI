@@ -20,10 +20,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// </summary>
     public UANetworkingConfigurationEditor()
     {
-      b_ConfigurationEditor = new ConfigurationEditorBase();
       ComposeParts();
     }
-
     #region UANetworkingConfiguration<ConfigurationData>
     /// <summary>
     /// Creates automatically the instance configurations on the best effort basis.
@@ -54,32 +52,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     }
     #endregion
 
-    #region MEF injection points
-    /// <summary>
-    /// Gets or sets the configuration editor - an access point to the external component.
-    /// </summary>
-    /// <value>The configuration editor.</value>
-    [Import(typeof(IConfigurationEditor))]
-    public IConfigurationEditor ConfigurationEditor
-    {
-      get { return b_ConfigurationEditor; }
-      set { b_ConfigurationEditor = value; }
-    }
-    /// <summary>
-    /// Gets or sets the trace source - an access point to the external component.
-    /// </summary>
-    /// <value>The trace source.</value>
-    [Import(typeof(ITraceSource))]
-    public ITraceSource TraceSource
-    {
-      get { return b_TraceSource; }
-      set { b_TraceSource = value; }
-    }
-    #endregion
-
     #region private
-    private ITraceSource b_TraceSource;
-    private IConfigurationEditor b_ConfigurationEditor;
     private CompositionContainer m_Container;
     private void ComposeParts()
     {
@@ -98,7 +71,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     {
       AggregateCatalog catalog = new AggregateCatalog();
       //Adds all the parts found in the same assembly as the UANetworkingConfigurationEditorUnitTest class
-      catalog.Catalogs.Add(new AssemblyCatalog(typeof(UANetworkingConfigurationEditor).Assembly));
+      catalog.Catalogs.Add(new DirectoryCatalog(System.IO.Path.GetDirectoryName(typeof(UANetworkingConfigurationEditor).Assembly.Location)));
       //catalog.Catalogs.Add(new DirectoryCatalog(@".\Extensions"));
       return catalog;
     }

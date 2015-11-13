@@ -57,6 +57,7 @@
     <Compile Include="CommonDefinitions.cs" />
     <Compile Include="ConfigurationEditorBase.cs" />
     <Compile Include="IConfigurationEditor.cs" />
+    <Compile Include="IInstanceConfigurationFactory.cs" />
     <Compile Include="ITraceSource.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -76,7 +77,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\MessageTransportConfiguration.cs" />
     <Compile Include="Serialization\NodeDescriptor.cs" />
-    <Compile Include="TraceSourceBase.cs" />
     <Compile Include="UANetworkingConfiguration.cs" />
     <Compile Include="UANetworkingConfigurationEditor.cs" />
   </ItemGroup>

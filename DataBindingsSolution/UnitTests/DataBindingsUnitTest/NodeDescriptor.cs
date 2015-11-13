@@ -17,7 +17,7 @@ namespace UAOOI.DataBindings.UnitTest
     /// <returns>NodeDescriptor.</returns>
     internal static NodeDescriptor GetTestInstance()
     {
-      return new NodeDescriptor() { NodeIdentifier = GetDefaultNodeIdentifier() };
+      return new NodeDescriptor() { b_NodeIdentifier = GetDefaultNodeIdentifier() };
     }
     internal static XmlQualifiedName GetDefaultNodeIdentifier()
     {
@@ -34,11 +34,6 @@ namespace UAOOI.DataBindings.UnitTest
       {
         throw new NotImplementedException();
       }
-
-      set
-      {
-        throw new NotImplementedException();
-      }
     }
     /// <summary>
     /// Gets the type of the node of of the Variable NodeClass
@@ -48,11 +43,6 @@ namespace UAOOI.DataBindings.UnitTest
     public override XmlQualifiedName DataType
     {
       get
-      {
-        throw new NotImplementedException();
-      }
-
-      set
       {
         throw new NotImplementedException();
       }
@@ -68,11 +58,6 @@ namespace UAOOI.DataBindings.UnitTest
       {
         throw new NotImplementedException();
       }
-
-      set
-      {
-        throw new NotImplementedException();
-      }
     }
     /// <summary>
     /// Gets the node class.
@@ -85,11 +70,6 @@ namespace UAOOI.DataBindings.UnitTest
       {
         throw new NotImplementedException();
       }
-
-      set
-      {
-        throw new NotImplementedException();
-      }
     }
     /// <summary>
     /// Gets the node unique identifier, i.e. the browse path.
@@ -98,8 +78,9 @@ namespace UAOOI.DataBindings.UnitTest
     /// <exception cref="System.NotImplementedException"></exception>
     public override XmlQualifiedName NodeIdentifier
     {
-      get; set;
+      get { return b_NodeIdentifier; } 
     }
+    private XmlQualifiedName  b_NodeIdentifier = null;
 
   }
 }

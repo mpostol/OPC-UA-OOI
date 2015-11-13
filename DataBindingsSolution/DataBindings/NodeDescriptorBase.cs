@@ -18,27 +18,27 @@ namespace UAOOI.DataBindings
     /// Gets the binding description that allows the editor to create automatically bindings.
     /// </summary>
     /// <value>The binding description.</value>
-    public abstract string BindingDescription { get; set; }
+    public abstract string BindingDescription { get; }
     /// <summary>
     /// Gets the type of the node of the Variable NodeClass
     /// </summary>
     /// <value>The type of the data as instance of <see cref="XmlQualifiedName"/>.</value>
-    public abstract XmlQualifiedName DataType { get; set; }
+    public abstract XmlQualifiedName DataType { get; }
     /// <summary>
     /// Gets a value indicating whether it is instance declaration - may have many instances in the created address space.
     /// </summary>
     /// <value><c>true</c> if it is instance declaration; otherwise, <c>false</c>.</value>
-    public abstract bool InstanceDeclaration { get; set; }
+    public abstract bool InstanceDeclaration { get; }
     /// <summary>
     /// Gets the node class.
     /// </summary>
     /// <value>The node class <see cref="InstanceNodeClassesEnum"/>.</value>
-    public abstract InstanceNodeClassesEnum NodeClass { get; set; }
+    public abstract InstanceNodeClassesEnum NodeClass { get; }
     /// <summary>
     /// Gets the node unique identifier, i.e. the symbolic path.
     /// </summary>
     /// <value>The node identifier.</value>
-    public abstract XmlQualifiedName NodeIdentifier { get; set; }
+    public abstract XmlQualifiedName NodeIdentifier { get; }
     #endregion
 
     #region operators

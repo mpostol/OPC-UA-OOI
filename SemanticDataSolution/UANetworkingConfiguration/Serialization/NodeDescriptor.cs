@@ -83,7 +83,10 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     #endregion
 
     #region private
-    private class NodeDescriptorWrapper : NodeDescriptorBase, System.ComponentModel.INotifyPropertyChanged
+    /// <summary>
+    /// Class NodeDescriptorWrapper - read only wrapper of the node descriptor
+    /// </summary>
+    private class NodeDescriptorWrapper : NodeDescriptorBase
     {
       public NodeDescriptorWrapper(NodeDescriptor repository)
       {
@@ -95,20 +98,12 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         {
           return m_repository.BindingDescription;
         }
-        set
-        {
-          PropertyChanged.RaiseHandler<string>(value, m_repository.BindingDescription, x => m_repository.BindingDescription = x, "BindingDescription", this);
-        }
       }
       public override XmlQualifiedName DataType
       {
         get
         {
           return m_repository.DataType;
-        }
-        set
-        {
-          PropertyChanged.RaiseHandler<XmlQualifiedName>(value, m_repository.DataType, x => m_repository.DataType = x, "DataType", this);
         }
       }
       public override bool InstanceDeclaration
@@ -117,20 +112,12 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         {
           return m_repository.InstanceDeclaration;
         }
-        set
-        {
-          PropertyChanged.RaiseHandler<bool>(value, m_repository.InstanceDeclaration, x => m_repository.InstanceDeclaration = x, "InstanceDeclaration", this);
-        }
       }
       public override InstanceNodeClassesEnum NodeClass
       {
         get
         {
           return m_repository.NodeClass;
-        }
-        set
-        {
-          PropertyChanged.RaiseHandler<InstanceNodeClassesEnum>(value, m_repository.NodeClass, x => m_repository.NodeClass = x, "NodeClass", this);
         }
       }
       public override XmlQualifiedName NodeIdentifier
@@ -139,15 +126,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         {
           return m_repository.NodeIdentifier;
         }
-        set
-        {
-          PropertyChanged.RaiseHandler<XmlQualifiedName>(value, m_repository.NodeIdentifier, x => m_repository.NodeIdentifier = x, "NodeIdentifier", this);
-        }
       }
-      public event PropertyChangedEventHandler PropertyChanged;
       private NodeDescriptor m_repository;
     }
-
     private string BindingDescriptionField;
     private XmlQualifiedName DataTypeField;
     private bool InstanceDeclarationField;

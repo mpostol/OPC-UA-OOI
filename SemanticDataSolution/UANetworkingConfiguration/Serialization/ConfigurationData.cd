@@ -9,13 +9,13 @@
     <AssociationLine Name="MessageHandlers" Type="UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageHandlerConfiguration" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="4" Y="2.75" />
-        <Point X="4.396" Y="2.75" />
-        <Point X="4.396" Y="6.412" />
+        <Point X="4.5" Y="2.75" />
+        <Point X="4.5" Y="6.412" />
         <Point X="6" Y="6.412" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAgAAAAEAEAQAgCAAAAAAIAQAAAAAEgAAAAQIAAAA=</HashCode>
+      <HashCode>AAABgIJAAEAEAAAAQAAAAIAAAQAAAAAEgAAAAQIAAAA=</HashCode>
       <FileName>Serialization\ConfigurationData.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -31,7 +31,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AgACAAAAAACAACAAAAAATgAAAEAABACOAAAABgMABAQ=</HashCode>
+      <HashCode>AgACAAAAAACAACAEAAAATgAAAEAABECOAAAABgMABAQ=</HashCode>
       <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -64,10 +64,9 @@
   <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.NodeDescriptor" Collapsed="true">
     <Position X="11.75" Y="2.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAQCAAAIAAAAAAAEAEAABAAAAAAgAAAAIAAAEAgA=</HashCode>
+      <HashCode>AAAAAQCAAAIAAAAAAAEAEAABAAAAAggAAAAIAAAEAgA=</HashCode>
       <FileName>Serialization\NodeDescriptor.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

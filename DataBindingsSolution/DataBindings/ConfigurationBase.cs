@@ -112,7 +112,7 @@ namespace UAOOI.DataBindings
     /// <summary>
     /// Raises the on change event.
     /// </summary>
-    /// <param name="configurationFileChanged">if set to <c>true</c> [configuration file changed].</param>
+    /// <param name="configurationFileChanged">if set to <c>true</c> the configuration file changed, false if content changed.</param>
     protected void RaiseOnChangeEvent(bool configurationFileChanged)
     {
       OnModified?.Invoke(this, new UAServerConfigurationEventArgs(configurationFileChanged));

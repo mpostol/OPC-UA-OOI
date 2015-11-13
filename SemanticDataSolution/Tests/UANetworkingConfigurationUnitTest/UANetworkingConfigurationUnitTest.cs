@@ -102,7 +102,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.IsTrue(_ConfigurationFileChanged);
       Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
       //test GetInstanceConfiguration
-      INodeDescriptor _nd = new NodeDescriptor() { NodeIdentifier = new System.Xml.XmlQualifiedName("NodeDescriptor", "NodeDescriptorNS") };
+      INodeDescriptor _nd = new NodeDescriptor(new XmlQualifiedName("NodeDescriptor", "NodeDescriptorNS"));
       IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
       Assert.IsNotNull(_newInstanceConfiguration);
     }
@@ -117,15 +117,15 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.AreEqual<string>(".uasconfig", _fi.Extension);
       Assert.AreEqual<string>("UANetworkingConfiguration.uasconfig", _fi.Name);
     }
-
     #endregion
 
     #region private
     private class NodeDescriptor : NodeDescriptorBase
     {
-      public NodeDescriptor()
+      public NodeDescriptor() : this(new XmlQualifiedName(DateTime.Today.ToString(), "UAOOI.SemanticData.UANetworking.Configuration.UnitTest")) { }
+      public NodeDescriptor(XmlQualifiedName nodeIdentifier)
       {
-        NodeIdentifier = new XmlQualifiedName(DateTime.Today.ToString(), "UAOOI.SemanticData.UANetworking.Configuration.UnitTest");
+        b_NodeIdentifier = nodeIdentifier;
         BindingDescription = NodeIdentifier.Name;
         DataType = new XmlQualifiedName("DataType", "UAOOI.SemanticData.UANetworking.Configuration.UnitTest");
         InstanceDeclaration = false;
@@ -133,24 +133,25 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       }
       public override string BindingDescription
       {
-        get; set;
+        get;
       }
       public override XmlQualifiedName DataType
       {
-        get; set;
+        get;
       }
       public override bool InstanceDeclaration
       {
-        get; set; 
+        get;
       }
       public override InstanceNodeClassesEnum NodeClass
       {
-        get; set;
+        get;
       }
       public override XmlQualifiedName NodeIdentifier
       {
-        get; set;
+        get { return b_NodeIdentifier; }
       }
+      XmlQualifiedName b_NodeIdentifier = null;
     }
     private class DerivedUANetworkingConfiguration : UANetworkingConfiguration<ConfigurationData>
     {

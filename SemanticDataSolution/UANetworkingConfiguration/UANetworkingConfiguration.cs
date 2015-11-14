@@ -36,10 +36,20 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
       CurrentConfiguration = ConfigurationData.Load<ConfigurationDataType>
         (Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z), () => RaiseOnChangeEvent(true));
     }
+    /// <summary>
+    /// Saves the configuration.
+    /// </summary>
+    /// <param name="solutionFilePath">The solution file path.</param>
+    /// <param name="configurationFile">The configuration file.</param>
     public override void SaveConfiguration(string solutionFilePath, FileInfo configurationFile)
     {
       ConfigurationData.Save<ConfigurationDataType>(CurrentConfiguration, Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z));
     }
+    /// <summary>
+    /// Gets the instance configuration.
+    /// </summary>
+    /// <param name="descriptor">The descriptor.</param>
+    /// <returns>An instance of <see cref="CAS.UA.IServerConfiguration.IInstanceConfiguration"/>.</returns>
     public override IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
     {
       if (descriptor == null)
@@ -49,6 +59,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
       return InstanceConfigurationFactory.GetIInstanceConfiguration(CurrentConfiguration.GetInstanceConfiguration(descriptor), CurrentConfiguration.MessageHandlers);
     }
     #endregion
+
     #region MEF injection points
     /// <summary>
     /// Gets or sets the configuration editor - an access point to the external component.
@@ -70,6 +81,10 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
       get { return b_TraceSource; }
       set { b_TraceSource = value; }
     }
+    /// <summary>
+    /// Gets or sets the instance configuration factory.
+    /// </summary>
+    /// <value>The instance configuration factory.</value>
     [Import(typeof(IInstanceConfigurationFactory))]
     public IInstanceConfigurationFactory InstanceConfigurationFactory { get; set; }
     #endregion

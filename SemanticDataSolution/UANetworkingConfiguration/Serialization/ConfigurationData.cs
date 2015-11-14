@@ -75,23 +75,17 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// </summary>
     /// <param name="descriptor">The descriptor.</param>
     /// <returns>IEnumerable&lt;IInstanceConfiguration&gt;.</returns>
-    internal IEnumerable<DataSetConfiguration> GetInstanceConfiguration(INodeDescriptor descriptor)
+    internal DataSetConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
     {
-      IEnumerable<DataSetConfiguration> _nodes = DataSetsList.Where<DataSetConfiguration>(x => x.Root.CreateWrapper().CompareTo(descriptor) == 0);
-      if (!_nodes.Any<DataSetConfiguration>())
-      {
-        DataSetConfiguration _new = DataSetConfiguration.Create(descriptor);
-        b_DataSetConfigurationList.Add(_new);
-        _nodes = new DataSetConfiguration[] { _new };
-        m_OnChanged();
-      }
-      return _nodes;
+      DataSetConfiguration _node = DataSetsList.Where<DataSetConfiguration>(x => x.Root.CreateWrapper().CompareTo(descriptor) == 0).FirstOrDefault< DataSetConfiguration>();
+      if (_node == null)
+        _node = DataSetConfiguration.Create(descriptor);
+      return _node;
     }
-    
     #endregion
 
     #region private
-    Action m_OnChanged = () => { };
+    private Action m_OnChanged = () => { };
     private List<DataSetConfiguration> DataSetsList
     {
       get

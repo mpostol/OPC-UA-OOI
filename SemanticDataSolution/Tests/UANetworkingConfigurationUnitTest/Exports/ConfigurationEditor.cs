@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest.Exports
     }
     public virtual void EditConfiguration(ConfigurationData configuration)
     {
-      MessageBox.Show("CreateInstanceConfigurations is not implemented yet", "Library functionality", MessageBoxButton.OK, MessageBoxImage.Question);
+      MessageBox.Show("EditConfiguration is not implemented yet", "Library functionality", MessageBoxButton.OK, MessageBoxImage.Question);
     }
   }
 }

@@ -32,7 +32,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     [TestCategory("Configuration_GetMyIServerConfigurationTestMethod")]
     public void GetMyIServerConfigurationTestMethod()
     {
-      FileInfo _fileInfo = new FileInfo("UANetworkingConfigurationUnitTest.dll");
+      FileInfo _fileInfo = new FileInfo("UAOOI.SemanticDataUANetworkingConfiguration.dll");
       Assert.IsTrue(_fileInfo.Exists);
       Assembly _pluginAssembly = null;
       IConfiguration _serverConfiguration = null;
@@ -59,17 +59,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
           {
             throw new ApplicationException(String.Format("The server configuration plug-in {0}/{1} cannot be loaded. Contact the vendor to get current version of this component", pluginType.FullName, info.Name), _ex);
           }
-    }
-  }
-  public class MyUANetworkingConfigurationEditor : UANetworkingConfigurationEditor
-  {
-    protected override AggregateCatalog CreateAggregateCatalog()
-    {
-      AggregateCatalog catalog = new AggregateCatalog();
-      //Adds all the parts found in the same assembly as the UANetworkingConfigurationEditorUnitTest class
-      catalog.Catalogs.Add(new AssemblyCatalog(typeof(MyUANetworkingConfigurationEditor).Assembly));
-      //catalog.Catalogs.Add(new DirectoryCatalog(@".\Extensions"));
-      return catalog;
     }
   }
 

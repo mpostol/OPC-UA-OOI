@@ -57,23 +57,12 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     private void ComposeParts()
     {
       //An aggregate catalog that combines multiple catalogs
-      AggregateCatalog catalog = CreateAggregateCatalog();
+      AggregateCatalog _catalog = new AggregateCatalog();
       //Create the CompositionContainer with the parts in the catalog
-      m_Container = new CompositionContainer(catalog);
+      _catalog.Catalogs.Add(new DirectoryCatalog(System.IO.Path.GetDirectoryName(typeof(UANetworkingConfigurationEditor).Assembly.Location)));
+      m_Container = new CompositionContainer(_catalog);
       //Fill the imports of this object
       this.m_Container.ComposeParts(this);
-    }
-    /// <summary>
-    /// Creates the aggregate catalog.
-    /// </summary>
-    /// <returns>AggregateCatalog.</returns>
-    protected virtual AggregateCatalog CreateAggregateCatalog()
-    {
-      AggregateCatalog catalog = new AggregateCatalog();
-      //Adds all the parts found in the same assembly as the UANetworkingConfigurationEditorUnitTest class
-      catalog.Catalogs.Add(new DirectoryCatalog(System.IO.Path.GetDirectoryName(typeof(UANetworkingConfigurationEditor).Assembly.Location)));
-      //catalog.Catalogs.Add(new DirectoryCatalog(@".\Extensions"));
-      return catalog;
     }
     #endregion
 

@@ -1,4 +1,7 @@
 ﻿
+using System.Linq;
+using System.Xml.Serialization;
+
 namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
 
@@ -12,6 +15,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// Gets or sets the association names.
     /// </summary>
     /// <value>The association names.</value>
+    [XmlIgnore]
     public string[] AssociationNames
     {
       get { return AssociationNamesArrayOfString.ToArray(); }
@@ -22,6 +26,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         AssociationNamesArrayOfString = _associations;
       }
     }
-
+    internal bool Associated(string associationName)
+    {
+      return AssociationNamesArrayOfString.Where<string>( x=> x == associationName).Any<string>();
+    }
   }
 }

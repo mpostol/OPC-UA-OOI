@@ -1,5 +1,4 @@
 ﻿
-
 using CAS.UA.IServerConfiguration;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UAOOI.DataBindings.Serializers;
+using System.Collections.ObjectModel;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
@@ -47,12 +47,15 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       _configuration.OnLoaded();
       return _configuration;
     }
-    /// <summary>
-    /// Save the <paramref name="configuration" /> using specified delegate <paramref name="saver" />.
-    /// </summary>
-    /// <typeparam name="ConfigurationDataType">The type of the configuration instance to be saved.</typeparam>
-    /// <param name="configuration">The configuration object of <typeparamref name="ConfigurationDataType"/> type </param>
-    /// <param name="saver">The delegate <see cref="Action{ConfigurationDataType}"/> capturing the functionality used to save the <paramref name="configuration"/>.</param>
+    internal ObservableCollection<MessageHandlerConfiguration> GetMessageHandlers()
+    {
+      if (m_ObservableMessageHandlers == null)
+      {
+        m_ObservableMessageHandlers = new ObservableCollection<MessageHandlerConfiguration>(MessageHandlers);
+        m_ObservableMessageHandlers.CollectionChanged += M_MessageHandlers_CollectionChanged;
+      }
+      return m_ObservableMessageHandlers;
+    }
     internal static void Save<ConfigurationDataType>(ConfigurationDataType configuration, Action<ConfigurationDataType> saver)
       where ConfigurationDataType : Serialization.ConfigurationData
     {
@@ -77,7 +80,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// <returns>IEnumerable&lt;IInstanceConfiguration&gt;.</returns>
     internal DataSetConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
     {
-      DataSetConfiguration _node = DataSetsList.Where<DataSetConfiguration>(x => x.Root.CreateWrapper().CompareTo(descriptor) == 0).FirstOrDefault< DataSetConfiguration>();
+      DataSetConfiguration _node = DataSetsList.Where<DataSetConfiguration>(x => x.Root.CreateWrapper().CompareTo(descriptor) == 0).FirstOrDefault<DataSetConfiguration>();
       if (_node == null)
         _node = DataSetConfiguration.Create(descriptor);
       return _node;
@@ -85,7 +88,18 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     #endregion
 
     #region private
-    private Action m_OnChanged = () => { };
+    private bool m_PendingChages = false;
+    private bool m_MessageHandlersCollectionChanged = false;
+    private void PendingChanges()
+    {
+      m_PendingChages = true;
+      m_OnChanged();
+    }
+    private void M_MessageHandlers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+      m_MessageHandlersCollectionChanged = true;
+      m_OnChanged();
+    }
     private List<DataSetConfiguration> DataSetsList
     {
       get
@@ -96,6 +110,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       }
     }
     private List<DataSetConfiguration> b_DataSetConfigurationList;
+    private ObservableCollection<MessageHandlerConfiguration> m_ObservableMessageHandlers;
+    private Action m_OnChanged;
     /// <summary>
     /// Called when the configuration is loaded.
     /// </summary>
@@ -107,7 +123,10 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     {
       if (b_DataSetConfigurationList == null)
         return;
-      DataSets = b_DataSetConfigurationList.ToArray<DataSetConfiguration>();
+      if (m_PendingChages)
+        DataSets = b_DataSetConfigurationList.ToArray<DataSetConfiguration>();
+      if (m_MessageHandlersCollectionChanged)
+        MessageHandlers = m_ObservableMessageHandlers.Select<ICloneable, MessageHandlerConfiguration>(x => (MessageHandlerConfiguration)x.Clone()).ToArray<MessageHandlerConfiguration>();
     }
     #endregion
 

@@ -1,4 +1,5 @@
-﻿using CAS.UA.IServerConfiguration;
+﻿
+using CAS.UA.IServerConfiguration;
 using System;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 

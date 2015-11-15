@@ -34,7 +34,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     public override void ReadConfiguration(FileInfo configurationFile)
     {
       CurrentConfiguration = ConfigurationData.Load<ConfigurationDataType>
-        (Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z), () => RaiseOnChangeEvent(true));
+        (Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z), () => RaiseOnChangeEvent(true));
     }
     /// <summary>
     /// Saves the configuration.
@@ -43,7 +43,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// <param name="configurationFile">The configuration file.</param>
     public override void SaveConfiguration(string solutionFilePath, FileInfo configurationFile)
     {
-      ConfigurationData.Save<ConfigurationDataType>(CurrentConfiguration, Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => Tracer?.Invoke(x, y, z));
+      ConfigurationData.Save<ConfigurationDataType>(CurrentConfiguration, Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z));
     }
     /// <summary>
     /// Gets the instance configuration.
@@ -56,7 +56,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
         throw new ArgumentNullException(nameof(descriptor));
       if (CurrentConfiguration == null)
         return null;
-      return InstanceConfigurationFactory.GetIInstanceConfiguration(CurrentConfiguration.GetInstanceConfiguration(descriptor), CurrentConfiguration.MessageHandlers);
+      return InstanceConfigurationFactory.GetIInstanceConfiguration(CurrentConfiguration.GetInstanceConfiguration(descriptor), CurrentConfiguration.GetMessageHandlers(), TraceSource.TraceData, () => this.RaiseOnChangeEvent(false));
     }
     #endregion
 

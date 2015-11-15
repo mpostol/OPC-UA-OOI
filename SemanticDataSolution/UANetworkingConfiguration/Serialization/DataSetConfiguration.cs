@@ -52,6 +52,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       return _new;
     }
     #endregion
+
     #region Object
     /// <summary>
     /// Returns a <see cref="System.String" /> that represents this instance.

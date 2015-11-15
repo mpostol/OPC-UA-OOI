@@ -23,8 +23,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     {
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
-      Assert.IsNotNull(_newConfiguration.Tracer);
-      _newConfiguration.Tracer(System.Diagnostics.TraceEventType.Verbose, 0, "Do nothing and keep alive.");
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]

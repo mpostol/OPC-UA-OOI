@@ -19,7 +19,6 @@ namespace UAOOI.DataBindings
     /// </summary>
     public ConfigurationBase(Func<ConfigurationDataType> configurationLoader)
     {
-      Tracer += (x, y, z) => { };
       DefaultConfigurationLoader = configurationLoader;
       CreateDefaultConfiguration();
     }
@@ -38,11 +37,6 @@ namespace UAOOI.DataBindings
         RaiseOnChangeEvent(true);
       }
     }
-    /// <summary>
-    /// Gets or sets the instnace of delegate capturing tracer functionality.
-    /// </summary>
-    /// <value>The delegaye of <see cref="Action{TraceEventType, Int32, String}"/>tracer.</value>
-    public Action<TraceEventType, int, string> Tracer { get; set; }
     /// <summary>
     /// Gets or sets the default configuration loader.
     /// </summary>

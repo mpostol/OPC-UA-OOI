@@ -1,8 +1,8 @@
 ﻿
 using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
 using System;
+using System.IO;
 
 namespace UAOOI.DataBindings.UnitTest
 {
@@ -10,14 +10,13 @@ namespace UAOOI.DataBindings.UnitTest
   public class ConfigurationBaseUnitTest
   {
 
+    #region TestMethod
     [TestMethod]
     [TestCategory("DataBindings_ConfigurationBaseUnitTest")]
     public void CreatorTestMethod()
     {
       DerivedTest _newConfiguration = new DerivedTest();
       Assert.IsNotNull(_newConfiguration);
-      Assert.IsNotNull(_newConfiguration.Tracer);
-      _newConfiguration.Tracer(System.Diagnostics.TraceEventType.Verbose, 0, "Do nothing and keep alive.");
     }
     [TestMethod]
     [TestCategory("DataBindings_ConfigurationBaseUnitTest")]
@@ -42,7 +41,8 @@ namespace UAOOI.DataBindings.UnitTest
       _instance.CurrentConfiguration = _instance.CurrentConfiguration;
       Assert.AreEqual<int>(1, _OnModifiedCalled);
     }
-
+    #endregion
+    
     #region private
     private class ConfigurationData { }
     private class DerivedTest : ConfigurationBase<ConfigurationData>

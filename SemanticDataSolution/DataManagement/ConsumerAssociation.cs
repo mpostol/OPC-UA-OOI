@@ -28,7 +28,7 @@ namespace UAOOI.SemanticData.DataManagement
     internal ConsumerAssociation(ISemanticData data, DataSetConfiguration dataSet, IBindingFactory bindingFactory, IEncodingFactory encodingFactory) :
       base(data, dataSet.AssociationName)
     {
-      m_ProcessDataBindings = dataSet.DataSet.Select<DataMemberConfiguration, IConsumerBinding>(x => x.GetConsumerBinding4DataMember(dataSet.RepositoryGroup, bindingFactory, encodingFactory)).ToArray<IConsumerBinding>();
+      m_ProcessDataBindings = dataSet.DataSet.Select<FieldMetaData, IConsumerBinding>(x => x.GetConsumerBinding4DataMember(dataSet.RepositoryGroup, bindingFactory, encodingFactory)).ToArray<IConsumerBinding>();
     }
     #endregion
 

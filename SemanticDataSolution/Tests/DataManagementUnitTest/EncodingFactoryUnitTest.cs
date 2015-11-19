@@ -1,8 +1,10 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Globalization;
 using System.Windows.Data;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -16,7 +18,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       IEF _ief = new IEF();
       Assert.IsNotNull(_ief);
-      _ief.UpdateValueConverter(null, String.Empty, String.Empty);
+      _ief.UpdateValueConverter(null, String.Empty,  BuiltInType.Null);
     }
     [TestMethod]
     [TestCategory("DataManagement_IEncodingFactory")]
@@ -25,19 +27,19 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       IEF _ief = new IEF();
       Assert.IsNotNull(_ief);
       MyBinding _ibf = new MyBinding();
-      _ief.UpdateValueConverter(_ibf, String.Empty, String.Empty);
+      _ief.UpdateValueConverter(_ibf, String.Empty, BuiltInType.Null);
       _ibf.Assign2Repository(null);
     }
     //private
     private class IEF : IEncodingFactory
     {
-      public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
+      public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
       {
         if (converter == null)
           throw new NotImplementedException();
         converter.Parameter = "Conversion parameter";
         converter.Converter = new IVC();
-        converter.Culture = System.Globalization.CultureInfo.InvariantCulture;
+        converter.Culture = CultureInfo.InvariantCulture;
       }
     }
     private class IVC : IValueConverter
@@ -60,7 +62,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         set;
         private get;
       }
-      public Type TargetType
+      public BuiltInType TargetType
       {
         get { throw new NotImplementedException(); }
       }
@@ -89,5 +91,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         throw new NotImplementedException();
       }
     }
+
   }
 }

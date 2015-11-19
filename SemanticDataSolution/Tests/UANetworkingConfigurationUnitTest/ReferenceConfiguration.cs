@@ -52,12 +52,12 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
           Root = new NodeDescriptor(  ) { NodeIdentifier = new System.Xml.XmlQualifiedName("NodeDescriptor", "NodeDescriptorNS")  }
         } };
     }
-    private static DataMemberConfiguration[] GetMembers()
+    private static FieldMetaData[] GetMembers()
     {
-      return new DataMemberConfiguration[]
+      return new FieldMetaData[]
       {
-          new DataMemberConfiguration() { ProcessValueName = "Value1", SourceEncoding = "System.DateTime", SymbolicName = "Value1" },
-          new DataMemberConfiguration() { ProcessValueName = "Value2", SourceEncoding = "System.Double", SymbolicName = "Value2" },
+          new FieldMetaData() { ProcessValueName = "Value1", SourceEncoding =  BuiltInType.DateTime, SymbolicName = "Value1" },
+          new FieldMetaData() { ProcessValueName = "Value2", SourceEncoding =  BuiltInType.Double, SymbolicName = "Value2" },
       };
     }
     #endregion

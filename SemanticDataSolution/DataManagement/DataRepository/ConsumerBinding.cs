@@ -1,5 +1,6 @@
 ﻿
 using System;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.DataRepository
 {
@@ -13,10 +14,11 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
   {
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ConsumerBinding{type}"/> class.
+    /// Initializes a new instance of the <see cref="ConsumerBinding{type}" /> class.
     /// </summary>
     /// <param name="assign">Captures a delegate used to assign new value to local resources.</param>
-    public ConsumerBinding(Action<type> assign)
+    /// <param name="targetType">Type of the remote target value.</param>
+    public ConsumerBinding(Action<type> assign, BuiltInType targetType) : base(targetType)
     {
       GetActionDelegate = assign;
     }
@@ -31,14 +33,14 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
       if (this.m_Converter == null)
         GetActionDelegate((type)value);
       else
-        GetActionDelegate((type)m_Converter.Convert(value, m_TargetType, m_Parameter, m_Culture));
+        GetActionDelegate((type)m_Converter.Convert(value, typeof(type), m_Parameter, m_Culture));
     }
     #endregion
 
     #region private
     protected virtual Action<type> GetActionDelegate { set; get; }
     protected ConsumerBinding()
-      : this(x => { })
+      : this(x => { }, BuiltInType.Null)
     { }
     #endregion
 

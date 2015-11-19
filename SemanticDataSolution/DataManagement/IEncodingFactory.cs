@@ -1,4 +1,5 @@
 ﻿using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement
 {
@@ -16,7 +17,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="converter">The converter.</param>
     /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="sourceEncoding">The source encoding.</param>
-    void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding);
+    void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding);
 
   }
 }

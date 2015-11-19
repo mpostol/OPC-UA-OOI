@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.ComponentModel;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -99,7 +100,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class ProducerBindingFactory : IBindingFactory
     {
       private ValueClass<string> _value = new ValueClass<string>();
-      private ProducerBindingMonitoredValue<string> _monitoredValue = new ProducerBindingMonitoredValue<string>("ProducerBindingMonitoredValue._monitoredValue");
+      private ProducerBindingMonitoredValue<string> _monitoredValue = new ProducerBindingMonitoredValue<string>("ProducerBindingMonitoredValue._monitoredValue", BuiltInType.String);
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
         throw new NotImplementedException();
@@ -108,7 +109,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         if (repositoryGroup == "ProducerBinding")
         {
-          ProducerBinding<string> _ret = new ProducerBinding<string>("ProducerBinding._value", () => _value.Value);
+          ProducerBinding<string> _ret = new ProducerBinding<string>("ProducerBinding._value", () => _value.Value, BuiltInType.String);
           _value.PropertyChanged += (x, y) => _ret.OnNewValue();
           return _ret;
         }

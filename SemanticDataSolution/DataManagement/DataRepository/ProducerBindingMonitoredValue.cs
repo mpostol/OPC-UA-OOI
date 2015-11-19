@@ -1,5 +1,6 @@
 ﻿
 using System;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.DataRepository
 {
@@ -14,8 +15,10 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// Initializes a new instance of the <see cref="ProducerBinding{type}" /> class.
     /// </summary>
     /// <param name="valueName">Name of the "repository group" and "variable" separated by "."</param>
-    public ProducerBindingMonitoredValue(string valueName)
-      : base(valueName)
+    /// <param name="targetType">Type of the target.</param>
+    /// <remarks>The <see cref="ProducerBinding{type}.GetReadValueDelegate" /> that captures a delegate used to assign new value to local variable in the data repository.</remarks>
+    public ProducerBindingMonitoredValue(string valueName, BuiltInType targetType)
+      : base(valueName, targetType)
     { }
     /// <summary>
     /// Gets or sets the monitored value - it is placeholder of the variable in the repository.

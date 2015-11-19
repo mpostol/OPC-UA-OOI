@@ -6,6 +6,7 @@ using System.Linq;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -212,7 +213,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
       {
-        return new ConsumerBinding<int>(x => { });
+        return new ConsumerBinding<int>(x => { }, BuiltInType.Int32);
       }
       public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
       {
@@ -298,7 +299,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
       {
         string _key = String.Format("{0}.{1}", repositoryGroup, variableName);
-        IProducerBinding _npb = new ProducerBindingMonitoredValue<object>(_key);
+        IProducerBinding _npb = new ProducerBindingMonitoredValue<object>(_key, BuiltInType.Null);
         m_Repository.Add(_key, _npb);
         return _npb;
       }
@@ -307,7 +308,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private Dictionary<string, IBinding> Repository = new Dictionary<string, IBinding>();
     private class IEF : IEncodingFactory
     {
-      public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
+      public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
       {
         converter.Culture = null;
         converter.Converter = null;

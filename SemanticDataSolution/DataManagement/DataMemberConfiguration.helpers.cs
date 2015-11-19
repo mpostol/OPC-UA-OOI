@@ -13,7 +13,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="bindingFactory">The binding factory.</param>
     /// <param name="encodingFactory">The encoding factory.</param>
     /// <returns>An instance of <see cref="IConsumerBinding" /> type.</returns>
-    internal static IConsumerBinding GetConsumerBinding4DataMember(this DataMemberConfiguration member, string repositoryGroup, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
+    internal static IConsumerBinding GetConsumerBinding4DataMember(this FieldMetaData member, string repositoryGroup, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
     {
       IConsumerBinding _binding = bindingFactory.GetConsumerBinding(repositoryGroup, member.ProcessValueName);
       encodingFactory.UpdateValueConverter(_binding, repositoryGroup, member.SourceEncoding);
@@ -27,7 +27,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="bindingFactory">The binding factory.</param>
     /// <param name="encodingFactory">The encoding factory.</param>
     /// <returns>An instance of <see cref="IProducerBinding" /> type.</returns>
-    internal static IProducerBinding GetProducerBinding4DataMember(this DataMemberConfiguration member, string repositoryGroup, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
+    internal static IProducerBinding GetProducerBinding4DataMember(this FieldMetaData member, string repositoryGroup, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
     {
       IProducerBinding _binding = bindingFactory.GetProducerBinding(repositoryGroup, member.ProcessValueName);
       encodingFactory.UpdateValueConverter(_binding, repositoryGroup, member.SourceEncoding);

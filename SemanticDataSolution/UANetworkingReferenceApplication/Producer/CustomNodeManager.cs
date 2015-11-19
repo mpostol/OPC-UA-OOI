@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading;
 using UAOOI.SemanticData.DataManagement;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
 {
@@ -11,8 +12,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
   {
     public CustomNodeManager()
     {
-      Value1 = new ProducerBindingMonitoredValue<DateTime>(m_Variable1Name);
-      Value2 = new ProducerBindingMonitoredValue<double>(m_Variable2Name);
+      Value1 = new ProducerBindingMonitoredValue<DateTime>(m_Variable1Name, BuiltInType.DateTime);
+      Value2 = new ProducerBindingMonitoredValue<double>(m_Variable2Name, BuiltInType.Double);
     }
 
     /// <summary>
@@ -76,7 +77,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="sourceEncoding">The source encoding.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">repositoryGroup</exception>
-    void IEncodingFactory.UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
+    void IEncodingFactory.UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentOutOfRangeException("repositoryGroup");

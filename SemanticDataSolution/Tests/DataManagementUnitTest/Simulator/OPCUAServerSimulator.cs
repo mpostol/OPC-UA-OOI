@@ -103,12 +103,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
                                                                                  InformationModelURI= AssociationConfigurationInformationModelURI  
         } };
       }
-      private DataMemberConfiguration[] GetMembers()
+      private FieldMetaData[] GetMembers()
       {
-        return new DataMemberConfiguration[]
+        return new FieldMetaData[]
         {
-          new DataMemberConfiguration() { ProcessValueName = "Value1", SourceEncoding = "System.String", SymbolicName = "Value1" },
-          new DataMemberConfiguration() { ProcessValueName = "Value2", SourceEncoding = "System.Double", SymbolicName = "Value2" },
+          new FieldMetaData() { ProcessValueName = "Value1", SourceEncoding = BuiltInType.String, SymbolicName = "Value1" },
+          new FieldMetaData() { ProcessValueName = "Value2", SourceEncoding = BuiltInType.Double, SymbolicName = "Value2" },
         };
       }
       #endregion
@@ -159,11 +159,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     }
     private class MyEncodingFactory : IEncodingFactory
     {
-      public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
+
+      public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
       {
         if (repositoryGroup != m_RepositoryGroup)
           throw new ArgumentOutOfRangeException("repositoryGroup");
-        Assert.AreEqual<string>(sourceEncoding, converter.TargetType.ToString());
+        Assert.AreEqual<BuiltInType>(sourceEncoding, converter.TargetType);
       }
     }
     #endregion

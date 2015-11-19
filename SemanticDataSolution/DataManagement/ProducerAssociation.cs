@@ -28,7 +28,7 @@ namespace UAOOI.SemanticData.DataManagement
       : base(data, dataSet.AssociationName)
     {
       m_ProcessDataBindings =
-        dataSet.DataSet.Select<DataMemberConfiguration, IProducerBinding>
+        dataSet.DataSet.Select<FieldMetaData, IProducerBinding>
         ((x) =>
         {
           IProducerBinding _ret = x.GetProducerBinding4DataMember(dataSet.RepositoryGroup, bindingFactory, encodingFactory);

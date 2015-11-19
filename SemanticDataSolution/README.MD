@@ -79,11 +79,11 @@ As it was defined above any **UA Semantic Data** represents a well defined set o
 
 Value of the data can change in time. It is worth noting that, in the presented concept, if two instances of the data have the same URI it does not mean that both have the same value, i.e. the same bits pattern. For example, if we are measuring the temperature in an output pipe of a selected boiler at 1 second intervals, we are getting a new value (creating new data instance) every second. The URI cannot be used to distinguish data instances, but still it could be used to apply a common key and sign each value and, finally, send it over the wire to a destination application. The destination application can use a recognizable key (indexed by the URI) retrieved from a dictionary and check the data against a not-repudiation security scenario.
 
-**Challenge 1**: An *OPC UA Server* exposed 123456 values representing the crud oil refinery process. To make the server maintainable its configuration has to be self-adoptable (zero-configuration, zero-device drivers required)
+**Challenge 1**: An *OPC UA Server* exposed 123456 values representing the crude oil refinery process. To make the server maintainable its configuration has to be self-adoptable (zero-configuration, zero-device drivers required)
 
 For this scenario we can apply the following work-flow:
 
-1. The server instantiates the OPC UA Information Model for the crud oil refinery process and starts listening for UDP messages containing the   **UA Semantic Data** instances
+1. The server instantiates the OPC UA Information Model for the crude oil refinery process and starts listening for UDP messages containing the   **UA Semantic Data** instances
 2. The `Flow meter #A-4321` device supporting Modbus RTU is equipped with a Modbus => **UA Semantic Data** gateway (lightweight plug converter - actually converting Modbus responses into the UDP/IP frame according to the Pub/Sub specification - price is relevant!)
 3. Using the OPC UA Information Model of the process the meter creates partial data instance containing value of the `InputFlow` `Variable` defined somewhere in the model
 4. Using local private key of the device the payload is signed and sent to the server.

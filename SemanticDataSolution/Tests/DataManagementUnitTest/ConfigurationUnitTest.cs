@@ -34,9 +34,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(dataSetConfiguration.DataSet);
       TestMembers(dataSetConfiguration.DataSet);
     }
-    private void TestMembers(DataMemberConfiguration[] dataMemberConfiguration)
+    private void TestMembers(FieldMetaData[] dataMemberConfiguration)
     {
-      foreach (DataMemberConfiguration _dmc in dataMemberConfiguration)
+      foreach (FieldMetaData _dmc in dataMemberConfiguration)
       {
         Assert.IsFalse(String.IsNullOrEmpty(_dmc.ProcessValueName));
         Assert.IsFalse(String.IsNullOrEmpty(_dmc.SymbolicName));

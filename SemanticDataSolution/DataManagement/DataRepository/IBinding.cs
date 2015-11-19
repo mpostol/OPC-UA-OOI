@@ -2,6 +2,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.DataRepository
 {
@@ -22,7 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// Gets the type of the variable repository.
     /// </summary>
     /// <value>The type of the repository target variable of the binding.</value>
-    Type TargetType { get; }
+    BuiltInType TargetType { get; }
     /// <summary>
     /// Sets an optional parameter to be used in the converter logic.
     /// </summary>

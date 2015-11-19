@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using System.Linq;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -119,7 +120,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         set { throw new NotImplementedException(); }
       }
-      public Type TargetType
+      public BuiltInType TargetType
       {
         get { throw new NotImplementedException(); }
       }

@@ -51,12 +51,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       RepositoryGroupDictionary.Add(dataSetConfiguration.RepositoryGroup, dataSetConfiguration);
       TestConfiguration(dataSetConfiguration.DataSet);
     }
-    private void TestConfiguration(DataMemberConfiguration[] dataMemberConfiguration)
+    private void TestConfiguration(FieldMetaData[] dataMemberConfiguration)
     {
-      foreach (DataMemberConfiguration _dmx in dataMemberConfiguration)
+      foreach (FieldMetaData _dmx in dataMemberConfiguration)
       {
         Assert.IsFalse(String.IsNullOrEmpty(_dmx.ProcessValueName));
-        Assert.IsFalse(String.IsNullOrEmpty(_dmx.SourceEncoding));
+        Assert.AreNotEqual<BuiltInType>( BuiltInType.Null, _dmx.SourceEncoding);
         Assert.IsFalse(String.IsNullOrEmpty(_dmx.SymbolicName));
       }
     }

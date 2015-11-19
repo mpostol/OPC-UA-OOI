@@ -42,13 +42,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
         InformationModelURI = "http://www.commsvr.com".AddId(AssociationId)
       };
     }
-    internal static DataMemberConfiguration[] GetMembers()
+    internal static FieldMetaData[] GetMembers()
     {
-      return new DataMemberConfiguration[] { GetDataMember(), GetDataMember(), GetDataMember() };
+      return new FieldMetaData[] { GetDataMember(), GetDataMember(), GetDataMember() };
     }
-    private static DataMemberConfiguration GetDataMember()
+    private static FieldMetaData GetDataMember()
     {
-      return new DataMemberConfiguration() { ProcessValueName = "ProcessValueName".AddId(DataMemberId), SymbolicName = "SymbolicName".AddId(DataMemberId), SourceEncoding = "SourceEncoding".AddId(DataMemberId) };
+      return new FieldMetaData() { ProcessValueName = "ProcessValueName".AddId(DataMemberId), SymbolicName = "SymbolicName".AddId(DataMemberId), SourceEncoding =  BuiltInType.String };
     }
     private static int MessageTransportId { get { return p_MessageTransportId++; } }
     private static int p_MessageTransportId;

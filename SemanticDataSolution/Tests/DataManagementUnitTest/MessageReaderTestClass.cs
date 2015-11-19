@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Threading;
 using System.Collections.Generic;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -82,12 +83,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         IConsumerBinding[] _bindings = new IConsumerBinding[_buffer.Length];
         Action<object, int> _assign = (x, y) => _buffer[y] = x;
         for (int i = 0; i < _buffer.Length; i++)
-          _bindings[i] = new ConsumerBinding(i, _assign, CommonDefinitions.TestValues[i].GetType());
+          _bindings[i] = new ConsumerBinding(i, _assign, Type.GetTypeCode(CommonDefinitions.TestValues[i].GetType()));
         int _redItems = 0;
         _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _semanticData, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
         _reader.SendUDPMessage(CommonDefinitions.GetTestBinaryArray(), _semanticData, _port);
         Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(100, _reader.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(91, _reader.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
         Thread.Sleep(1500);
         Assert.AreEqual<int>(_buffer.Length, _redItems);
@@ -115,11 +116,60 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class ConsumerBinding : IConsumerBinding
     {
-      public ConsumerBinding(int index, Action<object, int> assignAction, Type targetType)
+      public ConsumerBinding(int index, Action<object, int> assignAction, TypeCode targetType)
       {
         m_AssignAction = assignAction;
         m_Index = index;
-        TargetType = targetType;
+        TargetType = GetTargetType(targetType);
+      }
+      private BuiltInType GetTargetType(TypeCode targetType)
+      {
+        BuiltInType _ret = default(BuiltInType);
+        switch (targetType)
+        {
+          case TypeCode.Boolean:
+            _ret = BuiltInType.Boolean;
+            break;
+          case TypeCode.SByte:
+            _ret = BuiltInType.SByte;
+            break;
+          case TypeCode.Byte:
+            _ret = BuiltInType.Byte;
+            break;
+          case TypeCode.Int16:
+            _ret = BuiltInType.Int16;
+            break;
+          case TypeCode.UInt16:
+            _ret = BuiltInType.UInt16;
+            break;
+          case TypeCode.Int32:
+            _ret = BuiltInType.Int32;
+            break;
+          case TypeCode.UInt32:
+            _ret = BuiltInType.UInt32;
+            break;
+          case TypeCode.Int64:
+            _ret = BuiltInType.Int64;
+            break;
+          case TypeCode.UInt64:
+            _ret = BuiltInType.UInt64;
+            break;
+          case TypeCode.Single:
+            _ret = BuiltInType.Float;
+            break;
+          case TypeCode.Double:
+            _ret = BuiltInType.Double;
+            break;
+          case TypeCode.DateTime:
+            _ret = BuiltInType.DateTime;
+            break;
+          case TypeCode.String:
+            _ret = BuiltInType.String;
+            break;
+          default:
+            throw new ArgumentOutOfRangeException(nameof(targetType));
+        }
+        return _ret;
       }
       public void Assign2Repository(object value)
       {
@@ -129,7 +179,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         set { throw new NotImplementedException(); }
       }
-      public Type TargetType
+      public BuiltInType TargetType
       {
         get;
         private set;
@@ -420,7 +470,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         }
         catch (Exception _ex)
         {
-          m_Trace(String.Format("Exception {0}, message = {1}", _ex,GetType().Name, _ex.Message));
+          m_Trace(String.Format("Exception {0}, message = {1}", _ex, GetType().Name, _ex.Message));
         }
         m_Trace("Exiting m_ReceiveAsyncCallback");
       }

@@ -2,6 +2,7 @@
 using System;
 using UAOOI.SemanticData.DataManagement;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 {
@@ -52,7 +53,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// or
     /// sourceEncoding
     /// </exception>
-    public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
+    public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentOutOfRangeException("repositoryGroup");

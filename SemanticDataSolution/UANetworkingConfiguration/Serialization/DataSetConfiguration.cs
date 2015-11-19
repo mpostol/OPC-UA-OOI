@@ -42,7 +42,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       {
         AssociationName = descriptor.NodeIdentifier.ToString(),
         AssociationRole = AssociationRole.Producer,
-        DataSet = new DataMemberConfiguration[0],
+        DataSet = new FieldMetaData[0],
         DataSymbolicName = descriptor.NodeIdentifier.ToString(),
         ExtensionData = null,
         Id = System.Guid.NewGuid(),

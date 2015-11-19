@@ -84,7 +84,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class EF : IEncodingFactory
     {
-      public void UpdateValueConverter(IBinding converter, string repositoryGroup, string sourceEncoding)
+      public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
       {
         converter.Converter = null;
         converter.Culture = null;
@@ -120,9 +120,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         {
           set { }
         }
-        public Type TargetType
+        public BuiltInType TargetType
         {
-          get { return this.GetType(); }
+          get { return BuiltInType.Null; }
         }
         public object Parameter
         {

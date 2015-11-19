@@ -6,6 +6,9 @@
   /// OPC UA Server. Adding both to the configuration make the same configuration reusable by the OPC UA Server, OPC UA Client and UA application. 
   /// </summary>
 
-  public partial class DataMemberConfiguration { }
+  public partial class FieldMetaData
+  {
+
+  }
 
 }

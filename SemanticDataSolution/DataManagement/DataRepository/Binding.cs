@@ -2,6 +2,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.DataRepository
 {
@@ -14,20 +15,23 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
   /// </summary>
   public class Binding<type> : IBinding
   {
+
+    #region constructor
     /// <summary>
     /// Initializes a new instance of the <see cref="Binding{type}"/> class.
     /// </summary>
-    public Binding()
+    public Binding(BuiltInType targetType)
     {
-      m_TargetType = typeof(type);
+      m_TargetType = targetType;
     }
+    #endregion
 
     #region IBinding
     /// <summary>
     /// Gets the type of the data set item.
     /// </summary>
     /// <value>The type of the repository target variable of the binding.</value>
-    Type IBinding.TargetType { get { return m_TargetType; } }
+    BuiltInType IBinding.TargetType { get { return m_TargetType; } }
     /// <summary>
     /// Sets the converter, which is used to provide a way to apply custom logic to a binding.
     /// </summary>
@@ -79,7 +83,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     #endregion
 
     #region private
-    protected Type m_TargetType;
+    protected BuiltInType m_TargetType;
     protected IValueConverter m_Converter;
     protected CultureInfo m_Culture;
     private HandlerState m_HandlerState = HandlerState.Operational;

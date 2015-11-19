@@ -1,6 +1,7 @@
 ﻿
 using System;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
@@ -116,72 +117,74 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     private void Read(IConsumerBinding binding)
     {
       if (!IsValueIConvertible(binding))
-        throw new ArgumentOutOfRangeException(string.Format("Impossible to convert the type {0}", binding.TargetType.Name));
+        throw new ArgumentOutOfRangeException(string.Format("Impossible to convert the type {0}", binding.TargetType));
     }
     private bool IsValueIConvertible(IConsumerBinding binding)
     {
       object _value = null;
-      System.IO.BinaryReader _r = null;
-      switch (Type.GetTypeCode(binding.TargetType))
+      switch (binding.TargetType)
       {
-        case TypeCode.Boolean:
+        case BuiltInType.Null:
+          return false;
+        case BuiltInType.Boolean:
           _value = ReadBoolean();
           break;
-        case TypeCode.Byte:
-          _value = ReadByte();
-          break;
-        case TypeCode.Char:
-          _value = ReadChar();
-          break;
-        case TypeCode.DBNull:
-          return false;
-        case TypeCode.DateTime:
-          _value = ReadDateTime();
-          break;
-        case TypeCode.Decimal:
-          _value = ReadDecimal();
-          break;
-        case TypeCode.Double:
-          _value = ReadDouble();
-          break;
-        case TypeCode.Empty:
-          return false;
-        case TypeCode.Int16:
-          _value = ReadInt16();
-          break;
-        case TypeCode.Int32:
-          _value = ReadInt32();
-          break;
-        case TypeCode.Int64:
-          _value = ReadInt64();
-          break;
-        case TypeCode.Object:
-          return false;
-        case TypeCode.SByte:
+        case BuiltInType.SByte:
           _value = ReadSByte();
           break;
-        case TypeCode.Single:
-          _value = ReadSingle();
+        case BuiltInType.Byte:
+          _value = ReadByte();
           break;
-        case TypeCode.String:
-          _value = ReadString();
+        case BuiltInType.Int16:
+          _value = ReadInt16();
           break;
-        case TypeCode.UInt16:
+        case BuiltInType.UInt16:
           _value = ReadUInt16();
           break;
-        case TypeCode.UInt32:
+        case BuiltInType.Int32:
+          _value = ReadInt32();
+          break;
+        case BuiltInType.UInt32:
           _value = ReadUInt32();
           break;
-        case TypeCode.UInt64:
+        case BuiltInType.Int64:
+          _value = ReadInt64();
+          break;
+        case BuiltInType.UInt64:
           _value = ReadUInt64();
           break;
+        case BuiltInType.Float:
+          _value = ReadSingle();
+          break;
+        case BuiltInType.Double:
+          _value = ReadDouble();
+          break;
+        case BuiltInType.String:
+          _value = ReadString();
+          break;
+        case BuiltInType.DateTime:
+          _value = ReadDateTime();
+          break;
+        case BuiltInType.Guid:
+          _value = ReadGuid();
+          break;
+        case BuiltInType.ByteString:
+        case BuiltInType.XmlElement:
+        case BuiltInType.NodeId:
+        case BuiltInType.ExpandedNodeId:
+        case BuiltInType.StatusCode:
+        case BuiltInType.QualifiedName:
+        case BuiltInType.LocalizedText:
+        case BuiltInType.ExtensionObject:
+        case BuiltInType.DataValue:
+        case BuiltInType.Variant:
+        case BuiltInType.DiagnosticInfo:
         default:
           return false;
       }
       binding.Assign2Repository(_value);
       return true;
     }
-
     #endregion
 
   }

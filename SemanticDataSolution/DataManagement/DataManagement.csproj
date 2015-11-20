@@ -61,6 +61,8 @@
     <Compile Include="DataRepository\ConsumerBinding.cs" />
     <Compile Include="DataManagementSetup.cs" />
     <Compile Include="DataRepository\ConsumerBindingMonitoredValue.cs" />
+    <Compile Include="Encoding\IBinaryDecoder.cs" />
+    <Compile Include="Encoding\UABinaryDecoder.cs" />
     <Compile Include="IEncodingFactory.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="HandlerState.cs" />
@@ -98,13 +100,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="MessageHandling\MessageHandling.cd" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="README.md" />
     <None Include="READMEGettingStartedTutorial.md" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Encoding\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\UANetworkingConfiguration\UANetworkingConfiguration.csproj">
       <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>

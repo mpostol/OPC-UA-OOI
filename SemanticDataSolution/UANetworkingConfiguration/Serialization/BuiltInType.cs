@@ -113,7 +113,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// A diagnostic information associated with a result code.
     /// </summary>
     DiagnosticInfo = 25,
-
+    Enumeration = 26,
   }
 
 }

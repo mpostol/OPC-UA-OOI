@@ -83,15 +83,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       return m_UABinaryReader.ReadDouble();
     }
-    /// <summary>
-    /// Reads the decimal.
-    /// </summary>
-    /// <remarks>Here only OPC UA types shall be serialized. The type between OPC UA types and local types should be performed elsewhere. </remarks>
-    /// <returns>Decimal.</returns>
-    protected override Decimal ReadDecimal()
-    {
-      return Convert.ToDecimal(m_UABinaryReader.ReadInt64());
-    }
     protected override char ReadChar()
     {
       return m_UABinaryReader.ReadChar();

@@ -88,12 +88,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     public abstract Byte ReadByte();
     protected abstract Boolean ReadBoolean();
     protected abstract DateTime ReadDateTime();
-    /// <summary>
-    /// Reads the decimal.
-    /// </summary>
-    /// <remarks>Only OPC UA types are allowed. To be removed.</remarks>
-    /// <returns>Decimal.</returns>
-    protected abstract Decimal ReadDecimal();
     public abstract Guid ReadGuid();
     #endregion
 

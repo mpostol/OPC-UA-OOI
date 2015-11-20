@@ -17,7 +17,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName");
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName", BuiltInType.String);
       Assert.IsNotNull(_bn);
     }
     [TestMethod]
@@ -26,7 +26,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName");
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName", BuiltInType.String);
       Assert.IsNotNull(_bn);
       string _testValue = "1231221431423421";
       _pr.Modify(_testValue);
@@ -40,7 +40,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName");
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName", BuiltInType.String);
       Assert.IsNotNull(_bn);
       Assert.IsFalse(_bn.NewValue);
       _pr.Modify("654321");
@@ -59,7 +59,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName");
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", BuiltInType.String);
       Assert.IsNotNull(_bn);
     }
     [TestMethod]
@@ -68,7 +68,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName");
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", BuiltInType.String);
       Assert.IsNotNull(_bn);
       string _testValue = "1231221431423421";
       _pr.Modify(_testValue);
@@ -82,7 +82,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName");
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", BuiltInType.String);
       Assert.IsNotNull(_bn);
       Assert.IsFalse(_bn.NewValue);
       _pr.Modify("654321");
@@ -101,15 +101,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       private ValueClass<string> _value = new ValueClass<string>();
       private ProducerBindingMonitoredValue<string> _monitoredValue = new ProducerBindingMonitoredValue<string>("ProducerBindingMonitoredValue._monitoredValue", BuiltInType.String);
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         throw new NotImplementedException();
       }
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         if (repositoryGroup == "ProducerBinding")
         {
-          ProducerBinding<string> _ret = new ProducerBinding<string>("ProducerBinding._value", () => _value.Value, BuiltInType.String);
+          Assert.AreEqual<BuiltInType>(BuiltInType.String, encoding);
+          ProducerBinding<string> _ret = new ProducerBinding<string>("ProducerBinding._value", () => _value.Value, encoding);
           _value.PropertyChanged += (x, y) => _ret.OnNewValue();
           return _ret;
         }
@@ -160,7 +161,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       //  private type b_MyProperty;
 
       //}
-      
+
       internal class ValueClass<type> : INotifyPropertyChanged
       {
         public type Value

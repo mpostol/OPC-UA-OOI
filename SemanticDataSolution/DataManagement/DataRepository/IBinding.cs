@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
@@ -20,10 +18,10 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// <value>The converter as an instance of the <see cref="IValueConverter"/>.</value>
     IValueConverter Converter { set; }
     /// <summary>
-    /// Gets the type of the variable repository.
+    /// Gets the type of the message field encoding.
     /// </summary>
-    /// <value>The type of the repository target variable of the binding.</value>
-    BuiltInType TargetType { get; }
+    /// <value>The <see cref="BuiltInType"/>of the message field encoding.</value>
+    BuiltInType Encoding { get; }
     /// <summary>
     /// Sets an optional parameter to be used in the converter logic.
     /// </summary>

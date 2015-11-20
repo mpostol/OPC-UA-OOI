@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.ComponentModel;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.DataRepository
 {
@@ -19,14 +20,14 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// <param name="valueName">Name of the "repository group" and "variable" separated by "."</param>
     /// <param name="targetType">Type of the target.</param>
     /// <remarks>The <see cref="ProducerBinding{type}.GetReadValueDelegate" /> that captures a delegate used to assign new value to local variable in the data repository.</remarks>
-    protected ProducerBinding(string valueName, UANetworking.Configuration.Serialization.BuiltInType targetType) : this(valueName, () => default(type), targetType ) { }
+    protected ProducerBinding(string valueName, BuiltInType targetType) : this(valueName, () => default(type), targetType ) { }
     /// <summary>
     /// Initializes a new instance of the <see cref="ProducerBinding{type}" /> class.
     /// </summary>
     /// <param name="valueName">Name of the variable in the repository that is placeholder of the value.</param>
     /// <param name="getValue">Captures a delegate used to assign new value to local resources.</param>
     /// <param name="targetType">Type of the target.</param>
-    public ProducerBinding(string valueName, Func<type> getValue, UANetworking.Configuration.Serialization.BuiltInType targetType) : base(targetType)
+    public ProducerBinding(string valueName, Func<type> getValue, BuiltInType targetType) : base(targetType)
     {
       GetReadValueDelegate = getValue;
       m_VariableName = valueName;
@@ -55,7 +56,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
       if (this.m_Converter == null)
         return GetReadValueDelegate();
       else
-        return (type)m_Converter.ConvertBack(GetReadValueDelegate(), typeof(type), m_Parameter, m_Culture);
+        return m_Converter.ConvertBack(GetReadValueDelegate(), typeof(type), m_Parameter, m_Culture);
     }
     /// <summary>
     /// Occurs when a property value changes.

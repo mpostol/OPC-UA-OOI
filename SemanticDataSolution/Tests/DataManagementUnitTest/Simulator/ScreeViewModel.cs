@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 {
@@ -19,16 +20,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     /// <param name="variableName">Name of the variable.</param>
     /// <returns>IConsumerBinding.</returns>
     /// <exception cref="System.ArgumentOutOfRangeException">variableName</exception>
-    public IConsumerBinding GetConsumerBinding(string variableName)
+    public IConsumerBinding GetConsumerBinding(string variableName, BuiltInType encoding)
     {
       if (variableName == "Value1")
       {
-        Value1 = new ConsumerBindingMonitoredValue<string>();
+        Value1 = new ConsumerBindingMonitoredValue<string>(encoding);
         return Value1;
       }
       else if (variableName == "Value2")
       {
-        Value2 = new ConsumerBindingMonitoredValue<double>();
+        Value2 = new ConsumerBindingMonitoredValue<double>(encoding);
         return Value2;
       }
       throw new ArgumentOutOfRangeException("variableName");
@@ -64,6 +65,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     }
     private ConsumerBindingMonitoredValue<string> b_Value1;
     private ConsumerBindingMonitoredValue<double> b_Value2;
+
     #endregion
 
   }

@@ -39,9 +39,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// The configuration of the repositories belong to the same group are handled according to the same profile.</param>
     /// <param name="variableName">The name of a variable that is the ultimate destination of the values recovered from messages. Must be unique in the context of the repositories group.
     /// is updated periodically by a data produced - user of the <see cref="IBinding" /> object.</param>
+    /// <param name="encoding">The encoding.</param>
     /// <returns>Returns an object implementing the <see cref="IBinding" /> interface that can be used to update selected variable on the factory side.</returns>
     /// <exception cref="System.NotImplementedException"></exception>
-    public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
+    public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
     {
       throw new NotImplementedException();
     }
@@ -50,9 +51,12 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// </summary>
     /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="variableName">Name of the variable.</param>
+    /// <param name="encoding">The encoding.</param>
     /// <returns>IProducerBinding.</returns>
+    /// <exception cref="System.ArgumentNullException">repositoryGroup</exception>
+    /// <exception cref="System.ArgumentOutOfRangeException">variableName</exception>
     /// <exception cref="System.NotImplementedException"></exception>
-    public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+    public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentNullException("repositoryGroup");
@@ -81,7 +85,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentOutOfRangeException("repositoryGroup");
-      Debug.Assert(sourceEncoding.CompareTo(converter.TargetType.ToString()) == 0);
+      Debug.Assert(sourceEncoding == converter.Encoding);
     }
     #endregion
 

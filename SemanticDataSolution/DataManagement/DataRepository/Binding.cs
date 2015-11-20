@@ -18,20 +18,21 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
 
     #region constructor
     /// <summary>
-    /// Initializes a new instance of the <see cref="Binding{type}"/> class.
+    /// Initializes a new instance of the <see cref="Binding{type}" /> class.
     /// </summary>
-    public Binding(BuiltInType targetType)
+    /// <param name="encoding">The <see cref="BuiltInType"/>of the message field encoding.</param>
+    public Binding(BuiltInType encoding)
     {
-      m_TargetType = targetType;
+      m_MessageEncoding = encoding;
     }
     #endregion
 
     #region IBinding
     /// <summary>
-    /// Gets the type of the data set item.
+    /// Gets the type of the message field encoding.
     /// </summary>
-    /// <value>The type of the repository target variable of the binding.</value>
-    BuiltInType IBinding.TargetType { get { return m_TargetType; } }
+    /// <value>The <see cref="BuiltInType" />of the message field encoding.</value>
+    BuiltInType IBinding.Encoding { get { return m_MessageEncoding; } }
     /// <summary>
     /// Sets the converter, which is used to provide a way to apply custom logic to a binding.
     /// </summary>
@@ -83,7 +84,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     #endregion
 
     #region private
-    protected BuiltInType m_TargetType;
+    protected BuiltInType m_MessageEncoding;
     protected IValueConverter m_Converter;
     protected CultureInfo m_Culture;
     private HandlerState m_HandlerState = HandlerState.Operational;

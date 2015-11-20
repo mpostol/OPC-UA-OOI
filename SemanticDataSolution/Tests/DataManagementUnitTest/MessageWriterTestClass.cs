@@ -91,7 +91,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
                                        new SemanticDataTest(m_Guid));
         Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
         Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(100, _writer.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(91, _writer.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
         byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArray();
         byte[] _outputBuffer = _writer.DoUDPRead();
@@ -120,7 +120,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         set { throw new NotImplementedException(); }
       }
-      public BuiltInType TargetType
+      public BuiltInType Encoding
       {
         get { throw new NotImplementedException(); }
       }

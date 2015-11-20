@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 {
@@ -25,21 +26,22 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 
     #region API
     /// <summary>
-    /// Helper method that creates the consumer binding. 
+    /// Helper method that creates the consumer binding.
     /// </summary>
     /// <param name="variableName">Name of the variable.</param>
+    /// <param name="encoding">The encoding.</param>
     /// <returns>IConsumerBinding.</returns>
     /// <exception cref="System.ArgumentOutOfRangeException">variableName</exception>
-    public IConsumerBinding GetConsumerBinding(string variableName)
+    public IConsumerBinding GetConsumerBinding(string variableName, BuiltInType encoding)
     {
       if (variableName == "Value1")
       {
-        Value1 = new ConsumerBindingMonitoredValue<DateTime>();
+        Value1 = new ConsumerBindingMonitoredValue<DateTime>(encoding);
         return Value1;
       }
       else if (variableName == "Value2")
       {
-        Value2 = new ConsumerBindingMonitoredValue<double>();
+        Value2 = new ConsumerBindingMonitoredValue<double>(encoding);
         return Value2;
       }
       throw new ArgumentOutOfRangeException("variableName");

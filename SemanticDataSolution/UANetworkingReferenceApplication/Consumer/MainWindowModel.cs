@@ -21,11 +21,11 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// is updated periodically by a data produced - user of the <see cref="IBinding" /> object.</param>
     /// <returns>Returns an object implementing the <see cref="IBinding" /> interface that can be used to update selected variable on the factory side.</returns>
     /// <exception cref="System.ArgumentNullException">repositoryGroup</exception>
-    public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
+    public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentNullException("repositoryGroup");
-      return ViewModelBindingFactory.GetConsumerBinding(variableName);
+      return ViewModelBindingFactory.GetConsumerBinding(variableName, encoding);
     }
     /// <summary>
     /// Gets the producer binding.
@@ -35,7 +35,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// <remarks>It is intentionally not implemented.</remarks>
     /// <returns>IProducerBinding.</returns>
     /// <exception cref="System.NotImplementedException"></exception>
-    public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+    public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
     {
       throw new NotImplementedException();
     }
@@ -53,11 +53,11 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// or
     /// sourceEncoding
     /// </exception>
-    public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
+    public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType encoding)
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentOutOfRangeException("repositoryGroup");
-      if (sourceEncoding.CompareTo(converter.TargetType.ToString()) != 0)
+      if (encoding != converter.Encoding)
         throw new ArgumentOutOfRangeException("sourceEncoding");
     }
     #endregion

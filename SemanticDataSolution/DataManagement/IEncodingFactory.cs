@@ -14,10 +14,10 @@ namespace UAOOI.SemanticData.DataManagement
     /// <summary>
     /// Updates the value converter.
     /// </summary>
-    /// <param name="converter">The converter.</param>
+    /// <param name="binding">An object responsible transfer the value between the message and ultimated destination in the repository.</param>
     /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="sourceEncoding">The source encoding.</param>
-    void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding);
+    void UpdateValueConverter(IBinding binding, string repositoryGroup, BuiltInType sourceEncoding);
 
   }
 }

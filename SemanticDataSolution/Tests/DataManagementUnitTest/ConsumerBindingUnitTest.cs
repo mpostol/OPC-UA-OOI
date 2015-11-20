@@ -25,11 +25,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void DataRepositoryTestMethod()
     {
       DataRepository _rpo = new DataRepository();
-      IConsumerBinding _nb = _rpo.GetConsumerBinding(String.Empty, DataRepository.name);
+      IConsumerBinding _nb = _rpo.GetConsumerBinding(String.Empty, DataRepository.name, BuiltInType.String);
       Assert.IsNotNull(_nb);
-      Assert.IsNotNull(_nb.TargetType);
+      Assert.IsNotNull(_nb.Encoding);
       _nb.Converter = null;
-      Assert.AreEqual<BuiltInType>(BuiltInType.String, _nb.TargetType);
+      Assert.AreEqual<BuiltInType>(BuiltInType.String, _nb.Encoding);
       string _testValue = "123wjkqjwkqjwjqjwqwjwqkwqjw";
       _nb.Assign2Repository(_testValue);
       Assert.AreEqual<string>(_testValue, _rpo.Buffer);
@@ -39,11 +39,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void RecordingRepositoryTestMethod()
     {
       RecordingRepository _rpo = new RecordingRepository();
-      IConsumerBinding _nb = _rpo.GetConsumerBinding(String.Empty, DataRepository.name);
+      IConsumerBinding _nb = _rpo.GetConsumerBinding(String.Empty, DataRepository.name, BuiltInType.String);
       Assert.IsNotNull(_nb);
-      Assert.IsNotNull(_nb.TargetType);
+      Assert.IsNotNull(_nb.Encoding);
       _nb.Converter = new DateFormatter();
-      Assert.AreEqual<BuiltInType>(BuiltInType.String, _nb.TargetType);
+      Assert.AreEqual<BuiltInType>(BuiltInType.String, _nb.Encoding);
       DateTime _dt = new DateTime(2008, 2, 5);
       Recording _testValue = new Recording("Chris Sells", "Chris Sells Live", _dt);
       _nb.Assign2Repository(_testValue);
@@ -57,13 +57,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       public const string name = "variableName";
       public string Buffer = null;
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         if (variableName != name)
           throw new ArgumentOutOfRangeException();
-        return new ConsumerBinding<string>(x => Buffer = x, BuiltInType.String);
+        return new ConsumerBinding<string>(x => Buffer = x, encoding);
       }
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         throw new NotImplementedException();
       }
@@ -72,13 +72,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       public const string name = "variableName";
       public string Buffer = null;
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         if (variableName != name)
           throw new ArgumentOutOfRangeException();
-        return new ConsumerBinding<string>(x => Buffer = x, BuiltInType.String);
+        return new ConsumerBinding<string>(x => Buffer = x, encoding);
       }
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         throw new NotImplementedException();
       }

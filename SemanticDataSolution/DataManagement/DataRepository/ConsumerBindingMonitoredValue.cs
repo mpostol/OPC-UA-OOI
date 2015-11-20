@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.ComponentModel;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.DataRepository
 {
@@ -45,14 +46,14 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// Initializes a new instance of the <see cref="ConsumerBindingMonitoredValue{type}" /> class.
     /// It is used if the GetActionDelegate of teh base class is overridden.
     /// </summary>
-    public ConsumerBindingMonitoredValue()
-      : base()
+    public ConsumerBindingMonitoredValue(BuiltInType targetType)
+      : base(targetType)
     { }
     /// <summary>
     /// Gets or sets the get a delegate encapsulating operation called to assign new value to the destination variable by the binding machine.
     /// </summary>
     /// <value>The get action delegate.</value>
-    protected override Action<type> GetActionDelegate
+    protected override Action<type> AssignValueToRepository
     {
       get
       {
@@ -60,7 +61,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
       }
       set
       {
-        base.GetActionDelegate = value;
+        base.AssignValueToRepository = value;
       }
     }
     #endregion

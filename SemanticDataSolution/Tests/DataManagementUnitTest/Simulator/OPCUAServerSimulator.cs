@@ -107,8 +107,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         return new FieldMetaData[]
         {
-          new FieldMetaData() { ProcessValueName = "Value1", SourceEncoding = BuiltInType.String, SymbolicName = "Value1" },
-          new FieldMetaData() { ProcessValueName = "Value2", SourceEncoding = BuiltInType.Double, SymbolicName = "Value2" },
+          new FieldMetaData() { ProcessValueName = "Value1", Encoding = BuiltInType.String, SymbolicName = "Value1" },
+          new FieldMetaData() { ProcessValueName = "Value2", Encoding = BuiltInType.Double, SymbolicName = "Value2" },
         };
       }
       #endregion
@@ -126,7 +126,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       /// is updated periodically by a data produced - user of the <see cref="IBinding" /> object.</param>
       /// <returns>Returns an object implementing the <see cref="IBinding" /> interface that can be used to update selected variable on the factory side.</returns>
       /// <exception cref="System.NotImplementedException"></exception>
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         throw new NotImplementedException();
       }
@@ -135,13 +135,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       /// </summary>
       /// <param name="repositoryGroup">The repository group.</param>
       /// <param name="variableName">Name of the variable.</param>
+      /// <param name="encoding">The encoding.</param>
       /// <returns>IProducerBinding.</returns>
+      /// <exception cref="System.ArgumentNullException">repositoryGroup</exception>
       /// <exception cref="System.NotImplementedException"></exception>
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         if (repositoryGroup != m_RepositoryGroup)
           throw new ArgumentNullException("repositoryGroup");
-        return m_CustomNodesManager.GetProducerBinding(variableName);
+        return m_CustomNodesManager.GetProducerBinding(variableName, encoding);
       }
       #endregion
 
@@ -164,7 +166,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         if (repositoryGroup != m_RepositoryGroup)
           throw new ArgumentOutOfRangeException("repositoryGroup");
-        Assert.AreEqual<BuiltInType>(sourceEncoding, converter.TargetType);
+        Assert.AreEqual<BuiltInType>(sourceEncoding, converter.Encoding);
       }
     }
     #endregion

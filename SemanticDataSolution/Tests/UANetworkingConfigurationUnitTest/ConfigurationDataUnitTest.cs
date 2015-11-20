@@ -3,6 +3,7 @@ using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -13,19 +14,50 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 {
 
   [TestClass]
+  [DeploymentItem(@"TestData\", @"TestData\")]
   public class ConfigurationDataUnitTest
   {
     #region TestMethod
     [TestMethod]
-    [TestCategory("Configuration_LoadSaveTestMethodUnitTest")]
+    [TestCategory("Configuration_ConfigurationDataUnitTest")]
     public void LoadSaveTestMethod()
     {
       LocalConfigurationData _configuration = ConfigurationData.Load<LocalConfigurationData>(LocalConfigurationData.Loader, () => { });
       Assert.IsNotNull(_configuration);
-      LocalConfigurationData.Save<LocalConfigurationData>(_configuration, (x) => { Assert.AreEqual(1, x.OnSavingCount); });
+      Assert.AreEqual<int>(1, _configuration.OnLoadedCount);
+      Assert.AreEqual<int>(0, _configuration.OnSavingCount);
+      LocalConfigurationData.Save<LocalConfigurationData>(_configuration, (x) => { Assert.AreEqual<int>(1, x.OnSavingCount); });
     }
+    //[TestMethod]
+    //[TestCategory("Configuration_SerializationUnitTest")]
+    //public void ConfigurationDataConsumerXmlTestMethod()
+    //{
+    //  FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");
+    //  Assert.IsTrue(_configFile.Exists);
+    //  string _message = null;
+    //  ConfigurationData _cd = ConfigurationData.Load<ConfigurationData>
+    //    (() => XmlDataContractSerializers.Load<ConfigurationData>(_configFile, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); }), () => { });
+    //  Console.WriteLine(_message);
+    //  Assert.IsNotNull(_cd);
+    //  Assert.IsFalse(String.IsNullOrEmpty(_message));
+    //  Assert.IsTrue(_message.Contains(_configFile.FullName));
+    //}
+    //[TestMethod]
+    //[TestCategory("Configuration_SerializationUnitTest")]
+    //public void ConfigurationDataProducerXmlTestMethod()
+    //{
+    //  FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataProducer.xml");
+    //  Assert.IsTrue(_configFile.Exists);
+    //  string _message = null;
+    //  ConfigurationData _cd = ConfigurationData.Load<ConfigurationData>
+    //    (() => XmlDataContractSerializers.Load<ConfigurationData>(_configFile, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); }), () => { });
+    //  Console.WriteLine(_message);
+    //  Assert.IsNotNull(_cd);
+    //  Assert.IsFalse(String.IsNullOrEmpty(_message));
+    //  Assert.IsTrue(_message.Contains(_configFile.FullName));
+    //}
     [TestMethod]
-    [TestCategory("Configuration_SaveLoadTestMethodTestMethod")]
+    [TestCategory("Configuration_ConfigurationDataUnitTest")]
     public void SaveLoadTestMethod()
     {
       SaveLoadConfigurationData(Role.Consumer, SerializerType.Xml);
@@ -34,12 +66,13 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       SaveLoadConfigurationData(Role.Producer, SerializerType.Json);
     }
     [TestMethod]
-    [TestCategory("Configuration_ConfigurationDataUnitTest")]
-    public void ConfigurationDataOnLoadTestMethod()
+    [TestCategory("Configuration_SerializationUnitTest")]
+    public void LoadUsingSerializerTestMethod()
     {
-      LocalConfigurationData _configuration = new LocalConfigurationData();
-      LocalConfigurationData _new = LocalConfigurationData.Load<LocalConfigurationData>(() => _configuration, () => { });
-      Assert.AreEqual(1, _configuration.OnLoadedCount);
+      LoadUsingSerializer(Role.Consumer, SerializerType.Xml);
+      LoadUsingSerializer(Role.Consumer, SerializerType.Json);
+      LoadUsingSerializer(Role.Producer, SerializerType.Xml);
+      LoadUsingSerializer(Role.Producer, SerializerType.Json);
     }
     #endregion
 
@@ -104,10 +137,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     private enum Role { Producer, Consumer };
     private void SaveLoadConfigurationData(Role role, SerializerType serializer)
     {
-      string _fileName = @"ConfigurationData{0}.coded.{1}";
-      string _extension = serializer == SerializerType.Xml ? "xml" : "json";
-      ConfigurationData _configuration = ReferenceConfiguration.LoadConsumer();
-      _fileName = String.Format(_fileName, role, _extension);
+      FileInfo _fileInfo = GetFileName(role, serializer, @"ConfigurationData{0}.{1}");
+      ConfigurationData _configuration = null;
       switch (role)
       {
         case Role.Producer:
@@ -119,13 +150,41 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
         default:
           break;
       }
-      FileInfo _fileInfo = new FileInfo(_fileName);
       ConfigurationData.Save<ConfigurationData>(_configuration, serializer, _fileInfo, (x, y, z) => { Console.WriteLine(z); });
       _fileInfo.Refresh();
       Assert.IsTrue(_fileInfo.Exists);
       ConfigurationData _mirror = ConfigurationData.Load<ConfigurationData>(serializer, _fileInfo, (x, y, z) => { Console.WriteLine(z); }, () => { });
       Compare(_configuration, _mirror);
     }
+    private void LoadUsingSerializer(Role role, SerializerType serializer)
+    {
+      FileInfo _fileInfo = GetFileName(role, serializer, @"TestData\ConfigurationData{0}.{1}");
+      Assert.IsTrue(_fileInfo.Exists, _fileInfo.ToString());
+      ConfigurationData _cd = null;
+      string _message = null;
+      switch (serializer)
+      {
+        case SerializerType.Json:
+          _cd = ConfigurationData.Load<ConfigurationData>
+            (() => JSONDataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); }), () => { });
+          break;
+        case SerializerType.Xml:
+          _cd = ConfigurationData.Load<ConfigurationData>
+            (() => XmlDataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); }), () => { });
+          break;
+      }
+      Console.WriteLine(_message);
+      Assert.IsNotNull(_cd);
+      Assert.IsFalse(String.IsNullOrEmpty(_message));
+      Assert.IsTrue(_message.Contains(_fileInfo.FullName));
+    }
+    private static FileInfo GetFileName(Role role, SerializerType serializer, string fileNameTemplate)
+    {
+      string _extension = serializer == SerializerType.Xml ? "xml" : "json";
+      string _fileName = String.Format(fileNameTemplate, role, _extension);
+      return new FileInfo(_fileName);
+    }
     #endregion
   }
 }
+

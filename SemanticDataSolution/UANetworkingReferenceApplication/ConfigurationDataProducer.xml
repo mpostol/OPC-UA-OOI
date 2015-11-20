@@ -10,18 +10,29 @@
         <DataMemberConfiguration>
           <SymbolicName>Value1</SymbolicName>
           <ProcessValueName>Value1</ProcessValueName>
-          <SourceEncoding>System.DateTime</SourceEncoding>
+          <Encoding>DateTime</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>Value2</SymbolicName>
           <ProcessValueName>Value2</ProcessValueName>
-          <SourceEncoding>System.Double</SourceEncoding>
+          <Encoding>Double</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         </DataMemberConfiguration>
       </DataSet>
       <Guid>c1f53ffb-6552-4ccc-84c9-f847147cdc85</Guid>
       <Root>
         <q:NodeIdentifier xmlns:d5p1="NodeDescriptorNS" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d5p1:NodeDescriptor</q:NodeIdentifier>
       </Root>
+      <PublishingInterval>1000</PublishingInterval>
+      <MaxBufferTime>100</MaxBufferTime>
+      <ConfigurationGuid>d3dea20a-1f65-4744-abf5-3d8120960d7b</ConfigurationGuid>
+      <ConfigurationVersion>
+        <MajorVersion>0</MajorVersion>
+        <MinorVersion>0</MinorVersion>
+      </ConfigurationVersion>
     </DataSetConfiguration>
   </DataSets>
   <MessageHandlers>

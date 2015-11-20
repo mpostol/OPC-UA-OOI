@@ -89,7 +89,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         converter.Converter = null;
         converter.Culture = null;
         converter.Parameter = null;
-        Assert.IsNotNull(converter.TargetType);
+        Assert.IsNotNull(converter.Encoding);
       }
     }
     private class CF : IConfigurationFactory
@@ -104,11 +104,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class BF : IBindingFactory
     {
       #region IBindingFactory
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         return new Binding();
       }
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         throw new NotImplementedException();
       }
@@ -120,7 +120,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         {
           set { }
         }
-        public BuiltInType TargetType
+        public BuiltInType Encoding
         {
           get { return BuiltInType.Null; }
         }

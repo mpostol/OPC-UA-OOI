@@ -16,7 +16,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [ExpectedException(typeof(NotImplementedException))]
     public void UpdateValueConverterTestMethod1()
     {
-      IEF _ief = new IEF();
+      EncodingFactory _ief = new EncodingFactory();
       Assert.IsNotNull(_ief);
       _ief.UpdateValueConverter(null, String.Empty,  BuiltInType.Null);
     }
@@ -24,14 +24,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_IEncodingFactory")]
     public void UpdateValueConverterTestMethod2()
     {
-      IEF _ief = new IEF();
+      EncodingFactory _ief = new EncodingFactory();
       Assert.IsNotNull(_ief);
       MyBinding _ibf = new MyBinding();
       _ief.UpdateValueConverter(_ibf, String.Empty, BuiltInType.Null);
       _ibf.Assign2Repository(null);
     }
     //private
-    private class IEF : IEncodingFactory
+    private class EncodingFactory : IEncodingFactory
     {
       public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
       {
@@ -45,6 +45,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class IVC : IValueConverter
     {
 
+      /// <summary>
+      /// Converts the specified value.
+      /// </summary>
+      /// <param name="value">The value.</param>
+      /// <param name="targetType">Type of the target.</param>
+      /// <param name="parameter">The parameter.</param>
+      /// <param name="culture">The culture.</param>
+      /// <returns>System.Object.</returns>
+      /// <exception cref="System.NotImplementedException"></exception>
       public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
       {
         throw new NotImplementedException();
@@ -62,7 +71,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         set;
         private get;
       }
-      public BuiltInType TargetType
+      public BuiltInType Encoding
       {
         get { throw new NotImplementedException(); }
       }

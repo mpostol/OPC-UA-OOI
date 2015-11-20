@@ -22,9 +22,6 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="dataSet">The members.</param>
     /// <param name="bindingFactory">The binding factory.</param>
     /// <param name="encodingFactory">The encoding factory.</param>
-    /// <exception cref="System.NullReferenceException">itemConfiguration argument must not be null
-    /// or
-    /// members argument must not be null</exception>
     internal ConsumerAssociation(ISemanticData data, DataSetConfiguration dataSet, IBindingFactory bindingFactory, IEncodingFactory encodingFactory) :
       base(data, dataSet.AssociationName)
     {

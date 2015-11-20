@@ -17,10 +17,10 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// Initializes a new instance of the <see cref="ConsumerBinding{type}" /> class.
     /// </summary>
     /// <param name="assign">Captures a delegate used to assign new value to local resources.</param>
-    /// <param name="targetType">Type of the remote target value.</param>
-    public ConsumerBinding(Action<type> assign, BuiltInType targetType) : base(targetType)
+    /// <param name="encoding">The <see cref="BuiltInType"/>of the message field encoding.</param>
+    public ConsumerBinding(Action<type> assign, BuiltInType encoding) : base(encoding)
     {
-      GetActionDelegate = assign;
+      AssignValueToRepository = assign;
     }
 
     #region IConsumerBinding
@@ -31,16 +31,24 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     void IConsumerBinding.Assign2Repository(object value)
     {
       if (this.m_Converter == null)
-        GetActionDelegate((type)value);
+        AssignValueToRepository((type)value);
       else
-        GetActionDelegate((type)m_Converter.Convert(value, typeof(type), m_Parameter, m_Culture));
+        AssignValueToRepository((type)m_Converter.Convert(value, typeof(type), m_Parameter, m_Culture));
     }
     #endregion
 
     #region private
-    protected virtual Action<type> GetActionDelegate { set; get; }
-    protected ConsumerBinding()
-      : this(x => { }, BuiltInType.Null)
+    /// <summary>
+    /// Gets or sets the assign value to repository delegate.
+    /// </summary>
+    /// <value>The assign value to repository.</value>
+    protected virtual Action<type> AssignValueToRepository { set; get; }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ConsumerBinding{type}"/> class.
+    /// </summary>
+    /// <param name="encoding">The <see cref="BuiltInType"/>of the message field encoding.</param>
+    protected ConsumerBinding(BuiltInType encoding)
+      : this(x => { }, encoding)
     { }
     #endregion
 

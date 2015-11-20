@@ -267,7 +267,31 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
   }
   public class ConfigurationVersionDataType
   {
-    //TODO - red form the spec
+    private byte MajorVersionField;
+    private byte MinorVersionField;
+
+    /// <summary>
+    /// Gets or sets the major version. The major number reflects the primary format of the DataSet and must be equal in both Producer and Consumer.
+    /// Removing fields from the DataSet, reordering fields, adding fields in between other fields or a DataType change in fields shall result in an update of the MajorVersion. 
+    /// The initial value for the MajorVersion is 0. If the MajorVersion is incremented, the MinorVersion shall be set to 0.
+    /// An overflow of the MajorVersion is treated like any other major version change and requires a meta data exchange.
+    /// </summary>
+    /// <value>The major version.</value>
+    public byte MajorVersion
+    {
+      get { return MajorVersionField; }
+      set { MajorVersionField = value; }
+    }
+    /// <summary>
+    /// Gets or sets the minor version. The minor number reflects backward compatible changes of the DataSet like adding a field at the end of the DataSet.
+    /// The initial value for the MinorVersion is 0. The MajorVersion shall be incremented after an overflow of the MinorVersion.
+    /// </summary>
+    /// <value>The minor version.</value>
+    public byte MinorVersion
+    {
+      get { return MinorVersionField; }
+      set { MinorVersionField = value; }
+    }
   }
   [System.Diagnostics.DebuggerStepThroughAttribute()]
   [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -438,7 +462,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// </remarks>
     /// <value>The source encoding.</value>
     [DataMemberAttribute(EmitDefaultValue = false, Order = 2)]
-    public BuiltInType SourceEncoding
+    public BuiltInType Encoding
     {
       get
       {

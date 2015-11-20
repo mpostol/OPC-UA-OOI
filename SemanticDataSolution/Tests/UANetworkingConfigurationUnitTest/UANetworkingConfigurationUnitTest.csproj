@@ -75,7 +75,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConfigurationDataUnitTest.cs" />
     <Compile Include="ReferenceConfiguration.cs" />
-    <Compile Include="SerializationUnitTest.cs" />
     <Compile Include="UANetworkingConfigurationUnitTest.cs" />
     <Compile Include="UANetworkingConfigurationEditorUnitTest.cs" />
   </ItemGroup>
@@ -95,10 +94,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="TestData\ConfigurationData.xml">
+    <None Include="TestData\ConfigurationDataConsumer.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestData\ConfigurationDataConsumer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\ConfigurationDataProducer.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestData\ConfigurationDataProducer.xml">

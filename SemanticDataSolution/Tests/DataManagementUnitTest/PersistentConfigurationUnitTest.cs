@@ -56,7 +56,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       foreach (FieldMetaData _dmx in dataMemberConfiguration)
       {
         Assert.IsFalse(String.IsNullOrEmpty(_dmx.ProcessValueName));
-        Assert.AreNotEqual<BuiltInType>( BuiltInType.Null, _dmx.SourceEncoding);
+        Assert.AreNotEqual<BuiltInType>( BuiltInType.Null, _dmx.Encoding);
         Assert.IsFalse(String.IsNullOrEmpty(_dmx.SymbolicName));
       }
     }

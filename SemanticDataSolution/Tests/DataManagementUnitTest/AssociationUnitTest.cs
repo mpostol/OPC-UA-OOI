@@ -211,11 +211,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class DataBrokerFactory : IBindingFactory
     {
 
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
-        return new ConsumerBinding<int>(x => { }, BuiltInType.Int32);
+        return new ConsumerBinding<int>(x => { }, encoding);
       }
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         throw new NotImplementedException();
       }
@@ -289,17 +289,17 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         m_Repository = repository;
       }
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
-        IConsumerBinding _ncb = new ConsumerBindingMonitoredValue<object>();
+        IConsumerBinding _ncb = new ConsumerBindingMonitoredValue<object>(encoding);
         string _key = String.Format("{0}.{1}", repositoryGroup, variableName);
         m_Repository.Add(_key, _ncb);
         return _ncb;
       }
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName)
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         string _key = String.Format("{0}.{1}", repositoryGroup, variableName);
-        IProducerBinding _npb = new ProducerBindingMonitoredValue<object>(_key, BuiltInType.Null);
+        IProducerBinding _npb = new ProducerBindingMonitoredValue<object>(_key, encoding);
         m_Repository.Add(_key, _npb);
         return _npb;
       }

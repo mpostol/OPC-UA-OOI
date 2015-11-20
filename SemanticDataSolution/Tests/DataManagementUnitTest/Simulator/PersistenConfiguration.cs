@@ -48,7 +48,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     }
     private static FieldMetaData GetDataMember()
     {
-      return new FieldMetaData() { ProcessValueName = "ProcessValueName".AddId(DataMemberId), SymbolicName = "SymbolicName".AddId(DataMemberId), SourceEncoding =  BuiltInType.String };
+      return new FieldMetaData() { ProcessValueName = "ProcessValueName".AddId(DataMemberId), SymbolicName = "SymbolicName".AddId(DataMemberId), Encoding =  BuiltInType.String };
     }
     private static int MessageTransportId { get { return p_MessageTransportId++; } }
     private static int p_MessageTransportId;

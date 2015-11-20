@@ -117,12 +117,12 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     private void Read(IConsumerBinding binding)
     {
       if (!IsValueIConvertible(binding))
-        throw new ArgumentOutOfRangeException(string.Format("Impossible to convert the type {0}", binding.TargetType));
+        throw new ArgumentOutOfRangeException(string.Format("Impossible to convert the type {0}", binding.Encoding));
     }
     private bool IsValueIConvertible(IConsumerBinding binding)
     {
       object _value = null;
-      switch (binding.TargetType)
+      switch (binding.Encoding)
       {
         case BuiltInType.Null:
           return false;

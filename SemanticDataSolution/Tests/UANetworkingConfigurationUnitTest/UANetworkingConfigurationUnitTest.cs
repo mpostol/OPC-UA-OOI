@@ -44,7 +44,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     {
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
-      FileInfo _configFile = new FileInfo(@"TestData\ConfigurationData.xml");
+      FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");
       Assert.IsTrue(_configFile.Exists);
       bool _ConfigurationFileChanged = false;
       _newConfiguration.OnModified += (x, y) => { Assert.IsTrue(y.ConfigurationFileChanged); _ConfigurationFileChanged = y.ConfigurationFileChanged; };

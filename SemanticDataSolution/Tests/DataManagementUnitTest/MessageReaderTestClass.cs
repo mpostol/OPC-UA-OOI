@@ -116,11 +116,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class ConsumerBinding : IConsumerBinding
     {
+
       public ConsumerBinding(int index, Action<object, int> assignAction, TypeCode targetType)
       {
         m_AssignAction = assignAction;
         m_Index = index;
-        TargetType = GetTargetType(targetType);
+        Encoding = GetTargetType(targetType);
       }
       private BuiltInType GetTargetType(TypeCode targetType)
       {
@@ -179,7 +180,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         set { throw new NotImplementedException(); }
       }
-      public BuiltInType TargetType
+      public BuiltInType Encoding
       {
         get;
         private set;
@@ -207,7 +208,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
-
       private Action<object, int> m_AssignAction;
       private int m_Index;
 

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.IO;
+using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
@@ -35,7 +36,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     /// <param name="reader">The reader.</param>
     /// <returns>PackageHeader.</returns>
-    public static PackageHeader GetConsumerPackageHeader(IBinaryHeaderReader reader)
+    public static PackageHeader GetConsumerPackageHeader(IBinaryDecoder reader)
     {
       return new ConsumerPackageHeader(reader);
     }
@@ -78,7 +79,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
 
       #region constructor
-      public ConsumerPackageHeader(IBinaryHeaderReader reader) : base()
+      public ConsumerPackageHeader(IBinaryDecoder reader) : base()
       {
         m_Reader = reader;
       }
@@ -116,7 +117,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       #endregion
 
       #region private
-      private IBinaryHeaderReader m_Reader;
+      private IBinaryDecoder m_Reader;
       #endregion
 
     }

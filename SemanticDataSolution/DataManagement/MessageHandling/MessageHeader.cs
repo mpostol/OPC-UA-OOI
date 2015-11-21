@@ -1,5 +1,6 @@
 ﻿
 using System;
+using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
@@ -23,9 +24,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Gets the consumer message header.
     /// </summary>
-    /// <param name="reader">The reader <see cref="IBinaryHeaderReader"/> used to read the header data from the message.</param>
+    /// <param name="reader">The reader <see cref="IBinaryDecoder"/> used to read the header data from the message.</param>
     /// <returns>MessageHeader.</returns>
-    public static MessageHeader GetConsumerMessageHeader(IBinaryHeaderReader reader)
+    public static MessageHeader GetConsumerMessageHeader(IBinaryDecoder reader)
     {
       return new ConsumerMessageHeader(reader);
     }
@@ -62,7 +63,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     }
     private class ConsumerMessageHeader : MessageHeader
     {
-      public ConsumerMessageHeader(IBinaryHeaderReader reader)
+      public ConsumerMessageHeader(IBinaryDecoder reader)
       {
         m_reader = reader;
       }
@@ -74,7 +75,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         DataSetId = m_reader.ReadGuid();
       }
-      private IBinaryHeaderReader m_reader;
+      private IBinaryDecoder m_reader;
     }
     private MessageHeader() { }
     #endregion

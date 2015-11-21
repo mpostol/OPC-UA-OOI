@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.IO;
+using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
@@ -54,7 +55,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private long b_Position = 0;
   }
-  internal class HeaderReaderTest : IBinaryHeaderReader
+  internal class HeaderReaderTest : IBinaryDecoder
   {
 
     public HeaderReaderTest(long startPosition)
@@ -72,6 +73,71 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       m_Position += 16;
       return CommonDefinitions.TestGuid;
     }
+    int IBinaryDecoder.ReadInt32()
+    {
+      throw new NotImplementedException();
+    }
+
+    bool IBinaryDecoder.ReadBoolean()
+    {
+      throw new NotImplementedException();
+    }
+
+    sbyte IBinaryDecoder.ReadSByte()
+    {
+      throw new NotImplementedException();
+    }
+
+    short IBinaryDecoder.ReadInt16()
+    {
+      throw new NotImplementedException();
+    }
+
+    ushort IBinaryDecoder.ReadUInt16()
+    {
+      throw new NotImplementedException();
+    }
+
+    uint IBinaryDecoder.ReadUInt32()
+    {
+      throw new NotImplementedException();
+    }
+
+    long IBinaryDecoder.ReadInt64()
+    {
+      throw new NotImplementedException();
+    }
+
+    ulong IBinaryDecoder.ReadUInt64()
+    {
+      throw new NotImplementedException();
+    }
+
+    float IBinaryDecoder.ReadSingle()
+    {
+      throw new NotImplementedException();
+    }
+
+    double IBinaryDecoder.ReadDouble()
+    {
+      throw new NotImplementedException();
+    }
+
+    string IBinaryDecoder.ReadString()
+    {
+      throw new NotImplementedException();
+    }
+
+    DateTime IBinaryDecoder.ReadDateTime()
+    {
+      throw new NotImplementedException();
+    }
+
+    public byte[] ReadBytes(int count)
+    {
+      throw new NotImplementedException();
+    }
+
     internal long m_Position = 0;
 
   }

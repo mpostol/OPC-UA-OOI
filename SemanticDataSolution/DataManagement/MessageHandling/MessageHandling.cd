@@ -3,7 +3,7 @@
   <Class Name="UAOOI.SemanticData.DataManagement.MessageHandling.MessageReaderBase" Collapsed="true">
     <Position X="3" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAQAAQCAwAARAgCAAAAwCAgACACg0AAAEARFAQAAAA=</HashCode>
+      <HashCode>AAAQAAQCAQAARAgCAAAAwCAgACACg0AAAEARFAQAAAA=</HashCode>
       <FileName>MessageHandling\MessageReaderBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -36,7 +36,6 @@
     <ShowAsAssociation>
       <Property Name="MessageHeader" />
     </ShowAsAssociation>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="UAOOI.SemanticData.DataManagement.MessageHandling.BinaryPackageDecoder" Collapsed="true">
     <Position X="3" Y="7.25" Width="2" />
@@ -107,13 +106,6 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MessageHandling\IMessageWriter.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="UAOOI.SemanticData.DataManagement.MessageHandling.IBinaryHeaderReader">
-    <Position X="0.75" Y="3.5" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAA=</HashCode>
-      <FileName>MessageHandling\IBinaryHeaderReader.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

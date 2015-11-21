@@ -1,6 +1,7 @@
 ﻿
 using System;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
@@ -9,7 +10,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// <summary>
   /// Class MessageReaderBase - helper class providing basic implementation of the <see cref="IMessageReader"/> interface
   /// </summary>
-  public abstract class MessageReaderBase : IMessageReader
+  public abstract class MessageReaderBase : IMessageReader, IBinaryDecoder
   {
 
     #region IMessageReader
@@ -71,31 +72,32 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     }
     #endregion
 
-    #region private
-
-    #region Reader
-    protected abstract UInt64 ReadUInt64();
-    protected abstract UInt32 ReadUInt32();
-    protected abstract UInt16 ReadUInt16();
-    protected abstract String ReadString();
-    protected abstract Single ReadSingle();
-    protected abstract SByte ReadSByte();
-    protected abstract Int64 ReadInt64();
-    protected abstract Int32 ReadInt32();
-    protected abstract Int16 ReadInt16();
-    protected abstract Double ReadDouble();
-    protected abstract char ReadChar();
+    #region IBinaryDecoder
+    public abstract UInt64 ReadUInt64();
+    public abstract UInt32 ReadUInt32();
+    public abstract UInt16 ReadUInt16();
+    public abstract String ReadString();
+    public abstract Single ReadSingle();
+    public abstract SByte ReadSByte();
+    public abstract Int64 ReadInt64();
+    public abstract Int32 ReadInt32();
+    public abstract Int16 ReadInt16();
+    public abstract Double ReadDouble();
+    public abstract char ReadChar();
     public abstract Byte ReadByte();
-    protected abstract Boolean ReadBoolean();
-    protected abstract DateTime ReadDateTime();
+    public abstract Boolean ReadBoolean();
+    public abstract DateTime ReadDateTime();
     public abstract Guid ReadGuid();
+    public abstract byte[] ReadBytes(int count);
     #endregion
 
     /// <summary>
     /// Gets the message header.
     /// </summary>
     /// <value>The message header <see cref="MessageHeader"/>.</value>
-    public abstract MessageHeader MessageHeader { get; }
+    protected abstract MessageHeader MessageHeader { get; }
+
+    #region private
     /// <summary>
     /// Raises the read message completed event.
     /// </summary>
@@ -110,16 +112,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     }
     private void Read(IConsumerBinding binding)
     {
-      if (!IsValueIConvertible(binding))
-        throw new ArgumentOutOfRangeException(string.Format("Impossible to convert the type {0}", binding.Encoding));
-    }
-    private bool IsValueIConvertible(IConsumerBinding binding)
-    {
       object _value = null;
       switch (binding.Encoding)
       {
-        case BuiltInType.Null:
-          return false;
         case BuiltInType.Boolean:
           _value = ReadBoolean();
           break;
@@ -163,21 +158,43 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           _value = ReadGuid();
           break;
         case BuiltInType.ByteString:
+          UABinaryDecoder.ReadByteString(this);
+          break;
         case BuiltInType.XmlElement:
+          _value = UABinaryDecoder.ReadXmlElement(this);
+          break;
         case BuiltInType.NodeId:
+          _value = UABinaryDecoder.ReadNodeId(this);
+          break;
         case BuiltInType.ExpandedNodeId:
+          _value = UABinaryDecoder.ReadExpandedNodeId(this);
+          break;
         case BuiltInType.StatusCode:
+          _value = UABinaryDecoder.ReadStatusCode(this);
+          break;
         case BuiltInType.QualifiedName:
+          _value = UABinaryDecoder.ReadQualifiedName(this);
+          break;
         case BuiltInType.LocalizedText:
+          _value = UABinaryDecoder.ReadLocalizedText(this);
+          break;
         case BuiltInType.ExtensionObject:
+          _value = UABinaryDecoder.ReadExtensionObject(this);
+          break;
         case BuiltInType.DataValue:
+          _value = UABinaryDecoder.ReadDataValue(this);
+          break;
         case BuiltInType.Variant:
+          Variant _ret = UABinaryDecoder.ReadVariant(this);
+          _value = _ret.Value;
+          break;
         case BuiltInType.DiagnosticInfo:
+          _value = UABinaryDecoder.ReadDiagnosticInfo(this);
+          break;
         default:
-          return false;
+          throw new ArgumentOutOfRangeException(string.Format("Impossible to convert the type {0}", binding.Encoding));
       }
       binding.Assign2Repository(_value);
-      return true;
     }
     #endregion
 

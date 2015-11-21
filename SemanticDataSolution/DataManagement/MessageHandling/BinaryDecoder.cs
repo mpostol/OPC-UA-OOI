@@ -43,47 +43,47 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Reads an 8-byte unsigned integer from the message and advances the position by eight bytes.
     /// </summary>
     /// <returns>An 8-byte unsigned integer <see cref="UInt64"/> read from this message. .</returns>
-    protected override UInt64 ReadUInt64()
+    public override UInt64 ReadUInt64()
     {
       return m_UABinaryReader.ReadUInt64();
     }
-    protected override UInt32 ReadUInt32()
+    public override UInt32 ReadUInt32()
     {
       return m_UABinaryReader.ReadUInt32();
     }
-    protected override UInt16 ReadUInt16()
+    public override UInt16 ReadUInt16()
     {
       return m_UABinaryReader.ReadUInt16();
     }
-    protected override String ReadString()
+    public override String ReadString()
     {
       return m_UABinaryReader.ReadString();
     }
-    protected override Single ReadSingle()
+    public override Single ReadSingle()
     {
       return m_UABinaryReader.ReadSingle();
     }
-    protected override SByte ReadSByte()
+    public override SByte ReadSByte()
     {
       return m_UABinaryReader.ReadSByte();
     }
-    protected override Int64 ReadInt64()
+    public override Int64 ReadInt64()
     {
       return m_UABinaryReader.ReadInt64();
     }
-    protected override Int32 ReadInt32()
+    public override Int32 ReadInt32()
     {
       return m_UABinaryReader.ReadInt32();
     }
-    protected override Int16 ReadInt16()
+    public override Int16 ReadInt16()
     {
       return m_UABinaryReader.ReadInt16();
     }
-    protected override Double ReadDouble()
+    public override Double ReadDouble()
     {
       return m_UABinaryReader.ReadDouble();
     }
-    protected override char ReadChar()
+    public override char ReadChar()
     {
       return m_UABinaryReader.ReadChar();
     }
@@ -91,11 +91,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       return m_UABinaryReader.ReadByte();
     }
-    protected override Boolean ReadBoolean()
+    public override Boolean ReadBoolean()
     {
       return m_UABinaryReader.ReadBoolean();
     }
-    protected override DateTime ReadDateTime()
+    public override DateTime ReadDateTime()
     {
       return m_UABinaryReader.ReadDateTime();
     }
@@ -103,6 +103,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       return m_UABinaryReader.ReadGuid();
     }
+    public override byte[] ReadBytes(int count)
+    {
+      return m_UABinaryReader.ReadBytes(count);
+    }
+
     #endregion
 
     #region private

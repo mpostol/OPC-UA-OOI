@@ -224,47 +224,47 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       #endregion
 
       #region MessageReaderBase
-      protected override UInt64 ReadUInt64()
+      public override UInt64 ReadUInt64()
       {
         throw new NotImplementedException();
       }
-      protected override UInt32 ReadUInt32()
+      public override UInt32 ReadUInt32()
       {
         throw new NotImplementedException();
       }
-      protected override UInt16 ReadUInt16()
+      public override UInt16 ReadUInt16()
       {
         throw new NotImplementedException();
       }
-      protected override String ReadString()
+      public override String ReadString()
       {
         throw new NotImplementedException();
       }
-      protected override Single ReadSingle()
+      public override Single ReadSingle()
       {
         throw new NotImplementedException();
       }
-      protected override SByte ReadSByte()
+      public override SByte ReadSByte()
       {
         throw new NotImplementedException();
       }
-      protected override Int64 ReadInt64()
+      public override Int64 ReadInt64()
       {
         throw new NotImplementedException();
       }
-      protected override Int32 ReadInt32()
+      public override Int32 ReadInt32()
       {
         throw new NotImplementedException();
       }
-      protected override Int16 ReadInt16()
+      public override Int16 ReadInt16()
       {
         throw new NotImplementedException();
       }
-      protected override Double ReadDouble()
+      public override Double ReadDouble()
       {
         throw new NotImplementedException();
       }
-      protected override Char ReadChar()
+      public override Char ReadChar()
       {
         throw new NotImplementedException();
       }
@@ -272,17 +272,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
-      protected override Boolean ReadBoolean()
+      public override Boolean ReadBoolean()
       {
         throw new NotImplementedException();
       }
-      protected override DateTime ReadDateTime()
+      public override DateTime ReadDateTime()
       {
         return global::UAOOI.SemanticData.DataManagement.MessageHandling.CommonDefinitions.GetUADateTime(m_BinaryReader.ReadInt64());
-      }
-      protected override Decimal ReadDecimal()
-      {
-        throw new NotImplementedException();
       }
       public override Guid ReadGuid()
       {
@@ -309,7 +305,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         protected set;
       }
 
-      public override MessageHeader MessageHeader
+      protected override MessageHeader MessageHeader
       {
         get
         {
@@ -333,6 +329,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         RaiseReadMessageCompleted();
       }
 
+      public override byte[] ReadBytes(int count)
+      {
+        throw new NotImplementedException();
+      }
     }
     private class MyState : IAssociationState
     {
@@ -512,6 +512,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           m_UdpClient.Close();
 
       }
+
       #endregion
 
     }

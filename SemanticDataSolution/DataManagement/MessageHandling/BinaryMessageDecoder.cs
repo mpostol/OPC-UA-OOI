@@ -11,7 +11,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// <note>Implements only simple value types. Structural types must be implemented after more details will 
   /// be available in the spec.</note>
   /// </remarks>
-  public abstract class BinaryMessageDecoder : MessageReaderBase, IBinaryHeaderReader
+  public abstract class BinaryMessageDecoder : MessageReaderBase
   {
 
     #region constructor
@@ -41,7 +41,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Gets or sets the message header.
     /// </summary>
     /// <value>The message header.</value>
-    public override MessageHeader MessageHeader { get { return b_MessageHeader; } }
+    protected override MessageHeader MessageHeader { get { return b_MessageHeader; } }
     #endregion
 
     #region private

@@ -38,7 +38,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     }
     #endregion
 
-    #region BinaryMessageDecoder
+    #region BinaryPackageDecoder
     /// <summary>
     /// Reads an 8-byte unsigned integer from the message and advances the position by eight bytes.
     /// </summary>
@@ -107,7 +107,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       return m_UABinaryReader.ReadBytes(count);
     }
-
     #endregion
 
     #region private

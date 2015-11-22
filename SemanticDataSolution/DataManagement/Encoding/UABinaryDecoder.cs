@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
@@ -6,452 +7,297 @@ using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.Encoding
 {
+
   /// <summary>
   /// The possible values for Variant encoding bits.
   /// </summary>
-  [Flags]
-  internal enum VariantEncodingMask
-  {
-    /// <summary>
-    /// True if an array of values is encoded.
-    /// </summary>
-    IsArray = 0x80,
-    /// <summary>
-    /// True if the Array Dimensions field is encoded
-    /// </summary>
-    ArrayDimensionsPresents = 0x40,
-    /// <summary>
-    /// The type mask of the Built-in Type Id
-    /// </summary>
-    TypeIdMask = 0x3F
-  }
   internal static class UABinaryDecoder
   {
 
-    internal static Variant ReadVariant(IBinaryDecoder encoder)
+    internal static IVariant ReadVariant(IBinaryDecoder encoder)
     {
-      byte encodingByte = encoder.ReadByte();
+      byte encodingByte = encoder.ReadByte(); //Read the EncodingMask
       Variant value = null;
-        BuiltInType builtInType = (BuiltInType)(encodingByte & (byte)VariantEncodingMask.TypeIdMask);
+      BuiltInType builtInType = (BuiltInType)(encodingByte & (byte)VariantEncodingMask.TypeIdMask);
       if ((encodingByte & (byte)VariantEncodingMask.IsArray) != 0)
       {
-        // read the array length.
+        // read the ArrayLength field.
         int length = encoder.ReadInt32();
         if (length < 0)
           return value;
         Array array = null;
-        array = GetArray(encoder, encodingByte, length, builtInType);
-        if (array == null)
-          throw new ArgumentOutOfRangeException($"Cannot decode array in Variant object (0x{encodingByte:X2}).");
+        array = ReadArray(encoder, encodingByte, length, builtInType); //Read Value field
+        List<Int32> _dimensions = null;
         if ((encodingByte & (byte)VariantEncodingMask.ArrayDimensionsPresents) != 0)
-        {
-          List<Int32> dimensions = ReadInt32Array(encoder);
-          if (dimensions != null && dimensions.Count > 0)
-            value = new Variant(new Matrix(array, builtInType, dimensions.ToArray()));
-          else
-            value = new Variant(new Matrix(array, builtInType));
-        }
+           _dimensions = ReadInt32Array(encoder); //Read ArrayDimensions field
+        if (_dimensions != null && _dimensions.Count > 0)
+          value = new Variant(new Matrix(array, builtInType, _dimensions.ToArray()));
         else
-          value = new Variant(array);
+          value = new Variant(new Matrix(array, builtInType));
       }
       else
-        ReadValue(encoder, builtInType, value);
+        value = ReadValue(encoder, builtInType);
       return value;
     }
     internal static byte[] ReadBytes(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-
-    internal static DataValue ReadDataValue(IBinaryDecoder encoder)
+    internal static IDataValue ReadDataValue(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-
-    internal static ExtensionObject ReadExtensionObject(IBinaryDecoder encoder)
+    internal static IExtensionObject ReadExtensionObject(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-
-    internal static LocalizedText ReadLocalizedText(IBinaryDecoder encoder)
+    internal static ILocalizedText ReadLocalizedText(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-
-    internal static QualifiedName ReadQualifiedName(IBinaryDecoder encoder)
+    internal static IQualifiedName ReadQualifiedName(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-
-    internal static StatusCode ReadStatusCode(IBinaryDecoder encoder)
+    internal static IStatusCode ReadStatusCode(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-
-    internal static ExpandedNodeId ReadExpandedNodeId(IBinaryDecoder encoder)
+    internal static IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-
-    internal static NodeId ReadNodeId(IBinaryDecoder encoder)
+    internal static INodeId ReadNodeId(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-
     internal static XmlElement ReadXmlElement(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-    private static List<int> ReadInt32Array(IBinaryDecoder encoder)
+    internal static IDiagnosticInfo ReadDiagnosticInfo(MessageReaderBase messageReaderBase)
     {
       throw new NotImplementedException();
     }
-
-    #region private
-    private static void ReadValue(IBinaryDecoder encoder, BuiltInType encodingByte, Variant value)
-    {
-      switch ((BuiltInType)encodingByte)
-      {
-        case BuiltInType.Null:
-          value.Value = null;
-          break;
-        case BuiltInType.Boolean:
-          value.Set(encoder.ReadBoolean());
-          break;
-        case BuiltInType.SByte:
-          value.Set(encoder.ReadSByte());
-          break;
-        case BuiltInType.Byte:
-          value.Set(encoder.ReadByte());
-          break;
-        case BuiltInType.Int16:
-          value.Set(encoder.ReadInt16());
-          break;
-        case BuiltInType.UInt16:
-          value.Set(encoder.ReadUInt16());
-          break;
-        case BuiltInType.Int32:
-        case BuiltInType.Enumeration:
-          value.Set(encoder.ReadInt32());
-          break;
-        case BuiltInType.UInt32:
-          value.Set(encoder.ReadUInt32());
-          break;
-        case BuiltInType.Int64:
-          value.Set(encoder.ReadInt64());
-          break;
-        case BuiltInType.UInt64:
-          value.Set(encoder.ReadUInt64());
-          break;
-        case BuiltInType.Float:
-          value.Set(encoder.ReadSingle());
-          break;
-        case BuiltInType.Double:
-          value.Set(encoder.ReadDouble());
-          break;
-        case BuiltInType.String:
-          value.Set(encoder.ReadString());
-          break;
-        case BuiltInType.DateTime:
-          value.Set(encoder.ReadDateTime());
-          break;
-        case BuiltInType.Guid:
-          value.Set(encoder.ReadGuid());
-          break;
-        case BuiltInType.ByteString:
-          value.Set(ReadBytes(encoder));
-          break;
-        case BuiltInType.XmlElement:
-          value.Set(ReadXmlElement(encoder));
-          break;
-        case BuiltInType.NodeId:
-          value.Set(ReadNodeId(encoder));
-          break;
-        case BuiltInType.ExpandedNodeId:
-          value.Set(ReadExpandedNodeId(encoder));
-          break;
-        case BuiltInType.StatusCode:
-          value.Set(ReadStatusCode(encoder));
-          break;
-        case BuiltInType.QualifiedName:
-          value.Set(ReadQualifiedName(encoder));
-          break;
-        case BuiltInType.LocalizedText:
-          value.Set(ReadLocalizedText(encoder));
-          break;
-        case BuiltInType.ExtensionObject:
-          value.Set(ReadExtensionObject(encoder));
-          break;
-        case BuiltInType.DataValue:
-          value.Set(ReadDataValue(encoder));
-          break;
-        default:
-          throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{encodingByte:X2}).");
-      }
-    }
-
-    private static Array GetArray(IBinaryDecoder encoder, byte encodingByte, int length, BuiltInType builtInType)
-    {
-      switch (builtInType)
-      {
-        case BuiltInType.Boolean:
-          return ReadArray<bool>(encoder, length, encoder.ReadBoolean);
-        case BuiltInType.SByte:
-          return ReadArray<sbyte>(encoder, length, encoder.ReadSByte);
-        case BuiltInType.Byte:
-          return ReadArray<byte>(encoder, length, encoder.ReadByte);
-        case BuiltInType.Int16:
-          return ReadArray<short>(encoder, length, encoder.ReadInt16);
-        case BuiltInType.UInt16:
-          return ReadArray<ushort>(encoder, length, encoder.ReadUInt16);
-        case BuiltInType.Int32:
-        case BuiltInType.Enumeration:
-          return ReadArray<int>(encoder, length, encoder.ReadInt32);
-        case BuiltInType.UInt32:
-          return ReadArray<uint>(encoder, length, encoder.ReadUInt32);
-        case BuiltInType.Int64:
-          return ReadArray<long>(encoder, length, encoder.ReadInt64);
-        case BuiltInType.UInt64:
-          return ReadArray<ulong>(encoder, length, encoder.ReadUInt64);
-        case BuiltInType.Float:
-          return ReadArray<float>(encoder, length, encoder.ReadSingle);
-        case BuiltInType.Double:
-          return ReadArray<double>(encoder, length, encoder.ReadDouble);
-        case BuiltInType.String:
-          return ReadArray<string>(encoder, length, encoder.ReadString);
-        case BuiltInType.DateTime:
-          return ReadArray<DateTime>(encoder, length, encoder.ReadDateTime);
-        case BuiltInType.Guid:
-          return ReadArray<Guid>(encoder, length, encoder.ReadGuid);
-        case BuiltInType.ByteString:
-          return ReadArray<byte>(encoder, length, encoder.ReadByte);
-        case BuiltInType.XmlElement:
-          return ReadArray<XmlElement>(encoder, length, () => ReadXmlElement(encoder));
-        case BuiltInType.NodeId:
-          return ReadArray<NodeId>(encoder, length, () => ReadNodeId(encoder));
-        case BuiltInType.ExpandedNodeId:
-          return ReadArray<ExpandedNodeId>(encoder, length, () => ReadExpandedNodeId(encoder));
-        case BuiltInType.StatusCode:
-          return ReadArray<StatusCode>(encoder, length, () => ReadStatusCode(encoder));
-        case BuiltInType.QualifiedName:
-          return ReadArray<QualifiedName>(encoder, length, () => ReadQualifiedName(encoder));
-        case BuiltInType.LocalizedText:
-          return ReadArray<LocalizedText>(encoder, length, () => ReadLocalizedText(encoder));
-        case BuiltInType.ExtensionObject:
-          return ReadArray<ExtensionObject>(encoder, length, () => ReadExtensionObject(encoder));
-        case BuiltInType.DataValue:
-          return ReadArray<DataValue>(encoder, length, () => ReadDataValue(encoder));
-        case BuiltInType.Variant:
-          return ReadArray<Variant>(encoder, length, () => ReadVariant(encoder));
-        default:
-          throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{encodingByte:X2}).");
-      }
-    }
-
-    internal static object ReadDiagnosticInfo(MessageReaderBase messageReaderBase)
-    {
-      throw new NotImplementedException();
-    }
-
     internal static void ReadByteString(MessageReaderBase messageReaderBase)
     {
       throw new NotImplementedException();
     }
 
-    private static Array ReadArray<type>(IBinaryDecoder encoder, int length, Func<type> read)
+    #region private
+    //types
+    [Flags]
+    private enum VariantEncodingMask
     {
-      Array array;
+      /// <summary>
+      /// True if an array of values is encoded.
+      /// </summary>
+      IsArray = 0x80,
+      /// <summary>
+      /// True if the Array Dimensions field is encoded
+      /// </summary>
+      ArrayDimensionsPresents = 0x40,
+      /// <summary>
+      /// The type mask of the Built-in Type Id
+      /// </summary>
+      TypeIdMask = 0x3F
+    }
+    private class Variant : IVariant
+    {
+      internal Variant(object value, UATypeInfo type)
+      {
+        Value = value;
+        UATypeInfo = type;
+      }
+      public Variant(object value, BuiltInType type) : this(value, new UATypeInfo(type)) { }
+      public Variant(Matrix value) : this(value, value.TypeInfo) { }
+      public object Value
+      {
+        get; private set;
+      }
+      public UATypeInfo UATypeInfo
+      {
+        get; private set;
+      }
+
+    }
+    private class Matrix : IMatrix
+    {
+
+      /// <summary>
+      /// Initializes a new instance of the <see cref="Matrix"/> class with a multidimensional array.
+      /// </summary>
+      /// <param name="array">The array.</param>
+      /// <param name="builtInType">Type of the built in.</param>
+      public Matrix(Array array, BuiltInType builtInType) : this(array, builtInType, array.Length) { }
+      /// <summary>
+      /// Initializes a new instance of the <see cref="Matrix"/> class with a one dimensional array and a list of dimensions.
+      /// </summary>
+      /// <param name="array">The array.</param>
+      /// <param name="builtInType">Type of the built in.</param>
+      /// <param name="dimensions">The value.</param>
+      public Matrix(Array array, BuiltInType builtInType, params int[] dimensions)
+      {
+        Elements = array;
+        Dimensions = dimensions;
+        m_BuiltInType = builtInType;
+        int _length = 1;
+        for (int _ix = 0; _ix < dimensions.Length; _ix++)
+          _length *= dimensions[_ix];
+        if (_length != Dimensions.Length)
+          throw new ArgumentException("The number of elements in the array does not match the dimensions.");
+        TypeInfo = new UATypeInfo(builtInType, Dimensions.Length);
+      }
+      #region IMatrix
+      public int[] Dimensions
+      {
+        get; private set;
+      }
+      public Array Elements
+      {
+        get; private set;
+      }
+      public UATypeInfo TypeInfo { get; private set; }
+      #endregion
+
+      private BuiltInType m_BuiltInType;
+
+    }
+    //vars
+    private static int MaxArrayLength = 2;
+    //methods
+    private static List<int> ReadInt32Array(IBinaryDecoder encoder)
+    {
+      int length = encoder.ReadInt32();
+      if (length < 0)
+        return null;
+      if (MaxArrayLength > 0 && MaxArrayLength < length)
+        throw new ArgumentOutOfRangeException(nameof(MaxArrayLength), $"Unsupported array length {length}");
+      List<Int32> values = new List<Int32>(length);
+      for (int ii = 0; ii < length; ii++)
+        values.Add(encoder.ReadInt32());
+      return values;
+    }
+    private static Variant ReadValue(IBinaryDecoder encoder, BuiltInType encodingByte)
+    {
+      switch (encodingByte)
+      {
+        case BuiltInType.Boolean:
+          return new Variant(encoder.ReadBoolean(), encodingByte);
+        case BuiltInType.SByte:
+          return new Variant(encoder.ReadSByte(), encodingByte);
+        case BuiltInType.Byte:
+          return new Variant(encoder.ReadByte(), encodingByte);
+        case BuiltInType.Int16:
+          return new Variant(encoder.ReadInt16(), encodingByte);
+        case BuiltInType.UInt16:
+          return new Variant(encoder.ReadUInt16(), encodingByte);
+        case BuiltInType.Int32:
+        case BuiltInType.Enumeration:
+          return new Variant(encoder.ReadInt32(), encodingByte);
+        case BuiltInType.UInt32:
+          return new Variant(encoder.ReadUInt32(), encodingByte);
+        case BuiltInType.Int64:
+          return new Variant(encoder.ReadInt64(), encodingByte);
+        case BuiltInType.UInt64:
+          return new Variant(encoder.ReadUInt64(), encodingByte);
+        case BuiltInType.Float:
+          return new Variant(encoder.ReadSingle(), encodingByte);
+        case BuiltInType.Double:
+          return new Variant(encoder.ReadDouble(), encodingByte);
+        case BuiltInType.String:
+          return new Variant(encoder.ReadString(), encodingByte);
+        case BuiltInType.DateTime:
+          return new Variant(encoder.ReadDateTime(), encodingByte);
+        case BuiltInType.Guid:
+          return new Variant(encoder.ReadGuid(), encodingByte);
+        case BuiltInType.ByteString:
+          return new Variant(ReadBytes(encoder), encodingByte);
+        case BuiltInType.XmlElement:
+          return new Variant(ReadXmlElement(encoder), encodingByte);
+        case BuiltInType.NodeId:
+          return new Variant(ReadNodeId(encoder), encodingByte);
+        case BuiltInType.ExpandedNodeId:
+          return new Variant(ReadExpandedNodeId(encoder), encodingByte);
+        case BuiltInType.StatusCode:
+          return new Variant(ReadStatusCode(encoder), encodingByte);
+        case BuiltInType.QualifiedName:
+          return new Variant(ReadQualifiedName(encoder), encodingByte);
+        case BuiltInType.LocalizedText:
+          return new Variant(ReadLocalizedText(encoder), encodingByte);
+        case BuiltInType.ExtensionObject:
+          return new Variant(ReadExtensionObject(encoder), encodingByte);
+        case BuiltInType.DataValue:
+          return new Variant(ReadDataValue(encoder), encodingByte);
+        default:
+          throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{encodingByte:X2}).");
+      }
+    }
+    private static Array ReadArray(IBinaryDecoder encoder, byte encodingByte, int length, BuiltInType builtInType)
+    {
+      switch (builtInType)
+      {
+        case BuiltInType.Boolean:
+          return ReadArray<bool>(length, encoder.ReadBoolean);
+        case BuiltInType.SByte:
+          return ReadArray<sbyte>(length, encoder.ReadSByte);
+        case BuiltInType.Byte:
+          return ReadArray<byte>(length, encoder.ReadByte);
+        case BuiltInType.Int16:
+          return ReadArray<short>(length, encoder.ReadInt16);
+        case BuiltInType.UInt16:
+          return ReadArray<ushort>(length, encoder.ReadUInt16);
+        case BuiltInType.Int32:
+        case BuiltInType.Enumeration:
+          return ReadArray<int>(length, encoder.ReadInt32);
+        case BuiltInType.UInt32:
+          return ReadArray<uint>(length, encoder.ReadUInt32);
+        case BuiltInType.Int64:
+          return ReadArray<long>(length, encoder.ReadInt64);
+        case BuiltInType.UInt64:
+          return ReadArray<ulong>(length, encoder.ReadUInt64);
+        case BuiltInType.Float:
+          return ReadArray<float>(length, encoder.ReadSingle);
+        case BuiltInType.Double:
+          return ReadArray<double>(length, encoder.ReadDouble);
+        case BuiltInType.String:
+          return ReadArray<string>(length, encoder.ReadString);
+        case BuiltInType.DateTime:
+          return ReadArray<DateTime>(length, encoder.ReadDateTime);
+        case BuiltInType.Guid:
+          return ReadArray<Guid>(length, encoder.ReadGuid);
+        case BuiltInType.ByteString:
+          return ReadArray<byte>(length, encoder.ReadByte);
+        case BuiltInType.XmlElement:
+          return ReadArray<XmlElement>(length, () => ReadXmlElement(encoder));
+        case BuiltInType.NodeId:
+          return ReadArray<INodeId>(length, () => ReadNodeId(encoder));
+        case BuiltInType.ExpandedNodeId:
+          return ReadArray<IExpandedNodeId>(length, () => ReadExpandedNodeId(encoder));
+        case BuiltInType.StatusCode:
+          return ReadArray<IStatusCode>(length, () => ReadStatusCode(encoder));
+        case BuiltInType.QualifiedName:
+          return ReadArray<IQualifiedName>(length, () => ReadQualifiedName(encoder));
+        case BuiltInType.LocalizedText:
+          return ReadArray<ILocalizedText>(length, () => ReadLocalizedText(encoder));
+        case BuiltInType.ExtensionObject:
+          return ReadArray<IExtensionObject>(length, () => ReadExtensionObject(encoder));
+        case BuiltInType.DataValue:
+          return ReadArray<IDataValue>(length, () => ReadDataValue(encoder));
+        case BuiltInType.Variant:
+          return ReadArray<IVariant>(length, () => ReadVariant(encoder));
+        default:
+          throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{encodingByte:X2}).");
+      }
+    }
+    private static Array ReadArray<type>(int length, Func<type> readValue)
+    {
       type[] values = new type[length];
       for (int ii = 0; ii < values.Length; ii++)
-        values[ii] = read();
-      array = values;
+        values[ii] = readValue();
+      Array array = values;
       return array;
     }
     #endregion
-  }
-  internal class Variant
-  {
-    private Array array;
-    private Matrix matrix;
-    public Variant(Array array)
-    {
-      this.array = array;
-    }
-    public Variant(Matrix matrix)
-    {
-      this.matrix = matrix;
-    }
-    public object Value { get; internal set; }
-    internal void Set(byte[] value)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(sbyte value)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(short value)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(int value)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(long value)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(float value)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(string value)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(Guid guid)
-    {
-      throw new NotImplementedException();
-    }
-
-    internal void Set(XmlElement[] xmlElement)
-    {
-      throw new NotImplementedException();
-    }
-
-    internal void Set(ExpandedNodeId[] expandedNodeId)
-    {
-      throw new NotImplementedException();
-    }
-
-    internal void Set(QualifiedName[] qualifiedName)
-    {
-      throw new NotImplementedException();
-    }
-
-    internal void Set(ExtensionObject[] extensionObject)
-    {
-      throw new NotImplementedException();
-    }
-
-    internal void Set(DataValue[] dataValue)
-    {
-      throw new NotImplementedException();
-    }
-
-    internal void Set(LocalizedText[] localizedText)
-    {
-      throw new NotImplementedException();
-    }
-
-    internal void Set(StatusCode[] statusCode)
-    {
-      throw new NotImplementedException();
-    }
-
-    internal void Set(NodeId[] nodeId)
-    {
-      throw new NotImplementedException();
-    }
-
-    internal void Set(XmlElement xmlElement)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(DateTime dateTime)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(double value)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(ulong value)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(uint value)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(ushort value)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(byte value)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(bool value)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(NodeId nodeId)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(QualifiedName qualifiedName)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(StatusCode statusCode)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(ExpandedNodeId expandedNodeId)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(LocalizedText localizedText)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(ExtensionObject extensionObject)
-    {
-      throw new NotImplementedException();
-    }
-    internal void Set(DataValue dataValue)
-    {
-      throw new NotImplementedException();
-    }
-  }
-  internal class NodeId { }
-  internal class ExpandedNodeId { }
-  internal class StatusCode { }
-  class QualifiedName
-  {
-
-  }
-  class LocalizedText
-  {
-
-  }
-  class ExtensionObject
-  {
-
-  }
-  class DataValue
-  {
-
-  }
-  class Matrix
-  {
-    private Array array;
-    private BuiltInType builtInType;
-    private int[] v;
-
-    public Matrix(Array array, BuiltInType builtInType)
-    {
-      this.array = array;
-      this.builtInType = builtInType;
-    }
-
-    public Matrix(Array array, BuiltInType builtInType, int[] value)
-    {
-      this.array = array;
-      this.builtInType = builtInType;
-      this.v = v;
-    }
   }
 }

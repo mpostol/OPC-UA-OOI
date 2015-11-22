@@ -91,13 +91,12 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     public abstract byte[] ReadBytes(int count);
     #endregion
 
+    #region private
     /// <summary>
     /// Gets the message header.
     /// </summary>
     /// <value>The message header <see cref="MessageHeader"/>.</value>
     protected abstract MessageHeader MessageHeader { get; }
-
-    #region private
     /// <summary>
     /// Raises the read message completed event.
     /// </summary>
@@ -185,7 +184,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           _value = UABinaryDecoder.ReadDataValue(this);
           break;
         case BuiltInType.Variant:
-          Variant _ret = UABinaryDecoder.ReadVariant(this);
+          IVariant _ret = UABinaryDecoder.ReadVariant(this);
           _value = _ret.Value;
           break;
         case BuiltInType.DiagnosticInfo:

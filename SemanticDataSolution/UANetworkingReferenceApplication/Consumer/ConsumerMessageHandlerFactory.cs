@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Xml;
 using UAOOI.SemanticData.DataManagement;
+using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
@@ -22,13 +23,13 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// </summary>
     /// <param name="toDispose">To dispose captures functionality to create a collection of disposable objects.
     /// The objects are disposed when application exits.</param>
-    /// <param name="m_ViewModel">The ViewModel instance for this object.</param>
-    /// <param name="m_Trace">The delegate capturing logging functionality.</param>
-    public ConsumerMessageHandlerFactory(Action<IDisposable> toDispose, IConsumerViewModel m_ViewModel, Action<string> m_Trace)
+    /// <param name="viewModel">The ViewModel instance for this object.</param>
+    /// <param name="trace">The delegate capturing logging functionality.</param>
+    public ConsumerMessageHandlerFactory(Action<IDisposable> toDispose, IConsumerViewModel viewModel, Action<string> trace)
     {
-      this.m_ParentViewModel = m_ViewModel;
-      this.m_Trace = m_Trace;
-      this.m_ToDispose = toDispose;
+      m_ParentViewModel = viewModel;
+      m_Trace = trace;
+      m_ToDispose = toDispose;
     }
     #endregion
 
@@ -39,9 +40,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// <param name="name">The name of the reader.</param>
     /// <param name="configuration">The configuration of the reader.</param>
     /// <returns>An instance of <see cref="IMessageReader"/>.</returns>
-    IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, XmlElement configuration)
+    IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, XmlElement configuration, IUADecoder uaDecoder)
     {
-      BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(UDPPortNumber, m_Trace) { m_ViewModel = m_ParentViewModel };
+      BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(uaDecoder, UDPPortNumber, m_Trace) { m_ViewModel = m_ParentViewModel };
       m_ToDispose(_ret);
       m_Trace(String.Format("Created BinaryUDPPackageReader UDPPortNumber = {0}", UDPPortNumber));
       return _ret;
@@ -84,7 +85,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       /// </summary>
       /// <param name="port">The port.</param>
       /// <param name="trace">The trace.</param>
-      public BinaryUDPPackageReader(int port, Action<string> trace) : base()
+      public BinaryUDPPackageReader(IUADecoder uaDecoder, int port, Action<string> trace) : base(uaDecoder)
       {
         State = new MyState(this);
         m_Trace = trace;

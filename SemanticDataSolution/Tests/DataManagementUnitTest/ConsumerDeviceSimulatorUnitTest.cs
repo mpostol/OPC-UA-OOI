@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
+using System.Xml;
+using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -39,7 +41,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(Guid.NewGuid());
       Assert.IsNotNull(_nmf);
-      IMessageReader _nmr = _nmf.GetIMessageReader("UDP", null);
+      IMessageReader _nmr = _nmf.GetIMessageReader("UDP", null, null);
       Assert.IsNotNull(_nmr);
     }
     [TestMethod]
@@ -65,11 +67,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       #endregion
 
       #region IMessageHandlerFactory
-      public IMessageReader GetIMessageReader(string name, System.Xml.XmlElement configuration)
+      public IMessageReader GetIMessageReader(string name, System.Xml.XmlElement configuration, IUADecoder uaDecoder)
       {
         Assert.AreEqual("UDP", name);
         Assert.IsNull(configuration);
-        return this.MyMessageReader;
+        Assert.IsNull(uaDecoder);
+        return MyMessageReader;
       }
       public IMessageWriter GetIMessageWriter(string name, System.Xml.XmlElement configuration)
       {
@@ -86,6 +89,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         MyMessageReader.SendData();
       }
+
       #endregion
 
       #region private

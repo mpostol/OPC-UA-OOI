@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.Encoding

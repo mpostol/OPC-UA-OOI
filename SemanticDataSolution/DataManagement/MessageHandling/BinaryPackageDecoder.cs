@@ -1,4 +1,6 @@
 ﻿
+using UAOOI.SemanticData.DataManagement.Encoding;
+
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
   /// <summary>
@@ -11,7 +13,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryPackageDecoder"/> class.
     /// </summary>
-    public BinaryPackageDecoder()
+    public BinaryPackageDecoder(IUADecoder uaDecoder) : base(uaDecoder)
     {
       Header = PackageHeader.GetConsumerPackageHeader(this);
     }

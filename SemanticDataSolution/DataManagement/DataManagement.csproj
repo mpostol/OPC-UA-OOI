@@ -71,6 +71,7 @@
     <Compile Include="Encoding\INodeId.cs" />
     <Compile Include="Encoding\IQualifiedName.cs" />
     <Compile Include="Encoding\IStatusCode.cs" />
+    <Compile Include="Encoding\IUADecoder.cs" />
     <Compile Include="Encoding\UABinaryDecoder.cs" />
     <Compile Include="Encoding\IVariant.cs" />
     <Compile Include="IEncodingFactory.cs" />

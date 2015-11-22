@@ -216,7 +216,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
 
       #region creator
-      public TestMessageReaderBase()
+      public TestMessageReaderBase() : base(new Encoding.UABinaryDecoder())
       {
         State = new MyState();
         m_MessageHeader = MessageHeader.GetConsumerMessageHeader(null);
@@ -418,7 +418,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public sealed class BinaryUDPPackageReader : BinaryDecoder
     {
 
-      public BinaryUDPPackageReader(int port, Action<string> trace) : base()
+      public BinaryUDPPackageReader(int port, Action<string> trace) : base(new Encoding.UABinaryDecoder())
       {
         State = new MyState();
         m_UdpClient = new UdpClient(port);

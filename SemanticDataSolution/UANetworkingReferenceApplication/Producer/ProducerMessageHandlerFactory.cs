@@ -7,6 +7,7 @@ using UAOOI.SemanticData.DataManagement;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using System.Linq;
 using System.Diagnostics;
+using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
 {
@@ -35,7 +36,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// <remarks>It is intentionally not implemented</remarks>
     /// <returns>An instance of <see cref="IMessageReader"/>.</returns>
     /// <exception cref="System.NotImplementedException"></exception>
-    IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, XmlElement configuration)
+    IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, XmlElement configuration, IUADecoder uaDecoder)
     {
       throw new NotImplementedException();
     }

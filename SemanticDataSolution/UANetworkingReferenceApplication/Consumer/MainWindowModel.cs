@@ -2,11 +2,12 @@
 using System;
 using UAOOI.SemanticData.DataManagement;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 {
-  internal class MainWindowModel: IBindingFactory, IEncodingFactory
+  internal class MainWindowModel : IBindingFactory, IEncodingFactory
   {
 
     internal IConsumerViewModel ViewModelBindingFactory { get; set; }
@@ -60,8 +61,16 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       if (encoding != converter.Encoding)
         throw new ArgumentOutOfRangeException("sourceEncoding");
     }
+    public IUADecoder UADecoder
+    {
+      get
+      {
+        return m_UADecoder;
+      }
+    }
     #endregion
 
+    private readonly IUADecoder m_UADecoder = new UABinaryDecoder();
     private const string m_RepositoryGroup = "repositoryGroup";
 
   }

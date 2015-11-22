@@ -13,6 +13,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   public abstract class MessageReaderBase : IMessageReader, IBinaryDecoder
   {
 
+    public MessageReaderBase(IUADecoder uaDecoder)
+    {
+
+    }
     #region IMessageReader
     /// <summary>
     /// Gets the content mask. The content mast read from the message or provided by the writer.
@@ -109,6 +113,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         return;
       ReadMessageCompleted(this, new MessageEventArg(this));
     }
+    private IUADecoder UABinaryDecoder { get; set; }
     private void Read(IConsumerBinding binding)
     {
       object _value = null;

@@ -16,10 +16,11 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     /// <param name="configuration">The configuration.</param>
     /// <param name="messageHandlerFactory">The message handler factory.</param>
+    /// <param name="encodingFactory">The encoding factory that provides functionality to lookup a dictionary containing value converters..</param>
     /// <param name="addMessageHandler">The add message handler.</param>
     /// <returns>MessageHandlersCollection.</returns>
     /// <exception cref="System.ArgumentOutOfRangeException">Name;Duplicated transport name</exception>
-    internal static MessageHandlersCollection CreateMessageHandlers(MessageHandlerConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, Action<string, IMessageHandler> addMessageHandler)
+    internal static MessageHandlersCollection CreateMessageHandlers(MessageHandlerConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, IEncodingFactory encodingFactory, Action<string, IMessageHandler> addMessageHandler)
     {
       MessageHandlersCollection _collection = new MessageHandlersCollection();
       foreach (MessageHandlerConfiguration item in configuration)
@@ -30,7 +31,7 @@ namespace UAOOI.SemanticData.DataManagement
         switch (item.TransportRole)
         {
           case AssociationRole.Consumer:
-            _handler = messageHandlerFactory.GetIMessageReader(item.Name, item.Configuration);
+            _handler = messageHandlerFactory.GetIMessageReader(item.Name, item.Configuration, encodingFactory.UADecoder);
             break;
           case AssociationRole.Producer:
             _handler = messageHandlerFactory.GetIMessageWriter(item.Name, item.Configuration);

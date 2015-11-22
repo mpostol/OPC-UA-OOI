@@ -4,6 +4,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
@@ -41,6 +42,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         converter.Converter = new IVC();
         converter.Culture = CultureInfo.InvariantCulture;
       }
+      public IUADecoder UADecoder
+      {
+        get
+        {
+          return m_UADecoder;
+        }
+      }
+      private readonly IUADecoder m_UADecoder = new UABinaryDecoder();
     }
     private class IVC : IValueConverter
     {

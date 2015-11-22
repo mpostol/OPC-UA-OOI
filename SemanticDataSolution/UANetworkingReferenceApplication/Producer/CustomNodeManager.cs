@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading;
 using UAOOI.SemanticData.DataManagement;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
@@ -87,6 +88,14 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
         throw new ArgumentOutOfRangeException("repositoryGroup");
       Debug.Assert(sourceEncoding == converter.Encoding);
     }
+    /// <summary>
+    /// Gets the ua decoder.
+    /// </summary>
+    /// <value>The ua decoder.</value>
+    IUADecoder IEncodingFactory.UADecoder
+    {
+      get { return m_UADecoder; }
+    }
     #endregion
 
     private ProducerBindingMonitoredValue<DateTime> Value1 { get; set; }
@@ -103,6 +112,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       if (Value2.HandlerState == HandlerState.Operational)
         Value2.MonitoredValue = m_Random.NextDouble();
     }
+    private readonly IUADecoder m_UADecoder = new UABinaryDecoder();
   }
 
 }

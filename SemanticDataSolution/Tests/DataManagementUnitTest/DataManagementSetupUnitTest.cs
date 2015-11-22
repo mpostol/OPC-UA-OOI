@@ -7,6 +7,7 @@ using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
 using UAOOI.SemanticData.UANetworking.Configuration;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -47,7 +48,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class MF : IMessageHandlerFactory
     {
-      public IMessageReader GetIMessageReader(string name, XmlElement configuration)
+      public IMessageReader GetIMessageReader(string name, XmlElement configuration, IUADecoder uaDecoder)
       {
         return new MR();
       }
@@ -84,6 +85,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class EF : IEncodingFactory
     {
+      public IUADecoder UADecoder
+      {
+        get { return m_IUADecoder; }
+      }
       public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
       {
         converter.Converter = null;
@@ -91,6 +96,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         converter.Parameter = null;
         Assert.IsNotNull(converter.Encoding);
       }
+      private IUADecoder m_IUADecoder = new Encoding.UABinaryDecoder();
+
     }
     private class CF : IConfigurationFactory
     {

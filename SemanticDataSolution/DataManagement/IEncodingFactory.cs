@@ -1,4 +1,6 @@
-﻿using UAOOI.SemanticData.DataManagement.DataRepository;
+﻿
+using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement
@@ -18,6 +20,12 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="sourceEncoding">The source encoding.</param>
     void UpdateValueConverter(IBinding binding, string repositoryGroup, BuiltInType sourceEncoding);
+
+    /// <summary>
+    /// Gets the decoder that provides methods to be used to decode OPC UA Built-in types..
+    /// </summary>
+    /// <value>The object implementing <see cref="IUADecoder"/> interface.</value>
+    IUADecoder UADecoder { get; }
 
   }
 }

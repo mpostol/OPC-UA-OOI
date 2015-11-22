@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.UANetworking.Configuration;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
@@ -168,6 +169,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
           throw new ArgumentOutOfRangeException("repositoryGroup");
         Assert.AreEqual<BuiltInType>(sourceEncoding, converter.Encoding);
       }
+      public IUADecoder UADecoder
+      {
+        get
+        {
+          return m_UADecoder;
+        }
+      }
+
+      private readonly IUADecoder m_UADecoder = new UABinaryDecoder();
     }
     #endregion
 

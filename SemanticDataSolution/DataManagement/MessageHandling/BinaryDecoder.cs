@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using System;
+using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
@@ -7,7 +9,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// </summary>
   public abstract class BinaryDecoder : BinaryPackageDecoder, IDisposable
   {
-
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BinaryPackageDecoder" /> class is to be used by the package level decoding.
+    /// </summary>
+    /// <param name="uaDecoder">The ua decoder to be used fo decode UA Built-in data types.</param>
+    public BinaryDecoder(IUADecoder uaDecoder) : base(uaDecoder) { }
     #region IDisposable Support
     private bool disposedValue = false; // To detect redundant calls
     /// <summary>

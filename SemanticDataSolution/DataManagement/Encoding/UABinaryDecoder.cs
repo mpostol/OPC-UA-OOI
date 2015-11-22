@@ -8,13 +8,10 @@ using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 namespace UAOOI.SemanticData.DataManagement.Encoding
 {
 
-  /// <summary>
-  /// The possible values for Variant encoding bits.
-  /// </summary>
-  internal static class UABinaryDecoder
+  public class UABinaryDecoder : IUADecoder
   {
 
-    internal static IVariant ReadVariant(IBinaryDecoder encoder)
+    public IVariant ReadVariant(IBinaryDecoder encoder)
     {
       byte encodingByte = encoder.ReadByte(); //Read the EncodingMask
       Variant value = null;
@@ -39,47 +36,47 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         value = ReadValue(encoder, builtInType);
       return value;
     }
-    internal static byte[] ReadBytes(IBinaryDecoder encoder)
+    public byte[] ReadBytes(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-    internal static IDataValue ReadDataValue(IBinaryDecoder encoder)
+    public IDataValue ReadDataValue(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-    internal static IExtensionObject ReadExtensionObject(IBinaryDecoder encoder)
+    public IExtensionObject ReadExtensionObject(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-    internal static ILocalizedText ReadLocalizedText(IBinaryDecoder encoder)
+    public ILocalizedText ReadLocalizedText(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-    internal static IQualifiedName ReadQualifiedName(IBinaryDecoder encoder)
+    public IQualifiedName ReadQualifiedName(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-    internal static IStatusCode ReadStatusCode(IBinaryDecoder encoder)
+    public IStatusCode ReadStatusCode(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-    internal static IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder encoder)
+    public IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-    internal static INodeId ReadNodeId(IBinaryDecoder encoder)
+    public INodeId ReadNodeId(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-    internal static XmlElement ReadXmlElement(IBinaryDecoder encoder)
+    public XmlElement ReadXmlElement(IBinaryDecoder encoder)
     {
       throw new NotImplementedException();
     }
-    internal static IDiagnosticInfo ReadDiagnosticInfo(MessageReaderBase messageReaderBase)
+    public IDiagnosticInfo ReadDiagnosticInfo(MessageReaderBase messageReaderBase)
     {
       throw new NotImplementedException();
     }
-    internal static void ReadByteString(MessageReaderBase messageReaderBase)
+    public void ReadByteString(MessageReaderBase messageReaderBase)
     {
       throw new NotImplementedException();
     }
@@ -164,9 +161,9 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
 
     }
     //vars
-    private static int MaxArrayLength = 2;
+    private int MaxArrayLength = 2;
     //methods
-    private static List<int> ReadInt32Array(IBinaryDecoder encoder)
+    private List<int> ReadInt32Array(IBinaryDecoder encoder)
     {
       int length = encoder.ReadInt32();
       if (length < 0)
@@ -178,7 +175,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         values.Add(encoder.ReadInt32());
       return values;
     }
-    private static Variant ReadValue(IBinaryDecoder encoder, BuiltInType encodingByte)
+    private Variant ReadValue(IBinaryDecoder encoder, BuiltInType encodingByte)
     {
       switch (encodingByte)
       {
@@ -233,7 +230,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{encodingByte:X2}).");
       }
     }
-    private static Array ReadArray(IBinaryDecoder encoder, byte encodingByte, int length, BuiltInType builtInType)
+    private Array ReadArray(IBinaryDecoder encoder, byte encodingByte, int length, BuiltInType builtInType)
     {
       switch (builtInType)
       {
@@ -290,7 +287,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{encodingByte:X2}).");
       }
     }
-    private static Array ReadArray<type>(int length, Func<type> readValue)
+    private Array ReadArray<type>(int length, Func<type> readValue)
     {
       type[] values = new type[length];
       for (int ii = 0; ii < values.Length; ii++)

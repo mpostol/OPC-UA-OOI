@@ -7,6 +7,7 @@ using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -308,12 +309,19 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private Dictionary<string, IBinding> Repository = new Dictionary<string, IBinding>();
     private class IEF : IEncodingFactory
     {
+      public IUADecoder UADecoder
+      {
+        get { return m_UADecoder; }
+      }
+
       public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
       {
         converter.Culture = null;
         converter.Converter = null;
         converter.Parameter = null;
       }
+      private readonly IUADecoder m_UADecoder = new UABinaryDecoder();
+
     }
     private class MessageWriter : IMessageWriter
     {

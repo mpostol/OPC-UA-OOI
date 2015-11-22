@@ -41,7 +41,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(Guid.NewGuid());
       Assert.IsNotNull(_nmf);
-      IMessageReader _nmr = _nmf.GetIMessageReader("UDP", null, null);
+      IMessageReader _nmr = _nmf.GetIMessageReader("UDP", null, new Encoding.UABinaryDecoder());
       Assert.IsNotNull(_nmr);
     }
     [TestMethod]
@@ -71,7 +71,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         Assert.AreEqual("UDP", name);
         Assert.IsNull(configuration);
-        Assert.IsNull(uaDecoder);
+        Assert.IsNotNull(uaDecoder);
         return MyMessageReader;
       }
       public IMessageWriter GetIMessageWriter(string name, System.Xml.XmlElement configuration)

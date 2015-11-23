@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Xml;
 using UAOOI.SemanticData.DataManagement;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.Encoding;
@@ -7,10 +8,16 @@ using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 {
+
+  /// <summary>
+  /// Class MainWindowModel - consumer of the data send over the wire using the UAOOI.SemanticData.DataManagement framework.
+  /// </summary>
   internal class MainWindowModel : IBindingFactory, IEncodingFactory
   {
 
+    #region API
     internal IConsumerViewModel ViewModelBindingFactory { get; set; }
+    #endregion
 
     #region IBindingFactory
     /// <summary>
@@ -70,8 +77,61 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     }
     #endregion
 
-    private readonly IUADecoder m_UADecoder = new UABinaryDecoder();
+    #region private
+    /// <summary>
+    /// Class UABinaryDecoderImplementation - limited implementation of the <see cref="Encoding.UABinaryDecoder"/> for the testing purpose only.
+    /// </summary>
+    private class UABinaryDecoderImplementation : UABinaryDecoder
+    {
+      public override byte[] ReadBytes(IBinaryDecoder decoder)
+      {
+        throw new NotImplementedException();
+      }
+      public override void ReadByteString(IBinaryDecoder decoder)
+      {
+        throw new NotImplementedException();
+      }
+      public override IDataValue ReadDataValue(IBinaryDecoder decoder)
+      {
+        throw new NotImplementedException();
+      }
+      public override IDiagnosticInfo ReadDiagnosticInfo(IBinaryDecoder decoder)
+      {
+        throw new NotImplementedException();
+      }
+      public override IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder decoder)
+      {
+        throw new NotImplementedException();
+      }
+      public override IExtensionObject ReadExtensionObject(IBinaryDecoder decoder)
+      {
+        throw new NotImplementedException();
+      }
+      public override ILocalizedText ReadLocalizedText(IBinaryDecoder decoder)
+      {
+        throw new NotImplementedException();
+      }
+      public override INodeId ReadNodeId(IBinaryDecoder decoder)
+      {
+        throw new NotImplementedException();
+      }
+      public override IQualifiedName ReadQualifiedName(IBinaryDecoder decoder)
+      {
+        throw new NotImplementedException();
+      }
+      public override IStatusCode ReadStatusCode(IBinaryDecoder decoder)
+      {
+        throw new NotImplementedException();
+      }
+      public override XmlElement ReadXmlElement(IBinaryDecoder decoder)
+      {
+        throw new NotImplementedException();
+      }
+    }
+    private readonly IUADecoder m_UADecoder = new UABinaryDecoderImplementation();
     private const string m_RepositoryGroup = "repositoryGroup";
+    #endregion
 
   }
+
 }

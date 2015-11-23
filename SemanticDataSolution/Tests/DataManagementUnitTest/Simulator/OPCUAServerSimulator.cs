@@ -177,7 +177,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
         }
       }
 
-      private readonly IUADecoder m_UADecoder = new UABinaryDecoder();
+      private readonly IUADecoder m_UADecoder = new Helpers.UABinaryDecoderImplementation();
     }
     #endregion
 

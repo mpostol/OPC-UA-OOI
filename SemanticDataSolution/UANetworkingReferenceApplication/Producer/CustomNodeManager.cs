@@ -9,14 +9,23 @@ using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
 {
+
+  /// <summary>
+  /// Class CustomNodeManager - it is simulator producing data to be sent over the wire using message centric communication provided 
+  /// by the UAOOI.SemanticData.DataManagement framework.
+  /// </summary>
   internal class CustomNodeManager : IBindingFactory, IEncodingFactory, IDisposable
   {
+
+    #region constructors
     public CustomNodeManager()
     {
       Value1 = new ProducerBindingMonitoredValue<DateTime>(m_Variable1Name, BuiltInType.DateTime);
       Value2 = new ProducerBindingMonitoredValue<double>(m_Variable2Name, BuiltInType.Double);
     }
+    #endregion
 
+    #region API
     /// <summary>
     /// Run this instance - stuarts pumping the data.
     /// </summary>
@@ -24,6 +33,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     {
       m_Timer = new Timer(TimerCallback, null, 0, 500);
     }
+    #endregion
+
     #region IDisposable
     public void Dispose()
     {
@@ -94,10 +105,11 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// <value>The ua decoder.</value>
     IUADecoder IEncodingFactory.UADecoder
     {
-      get { return m_UADecoder; }
+      get { return null; }
     }
     #endregion
 
+    #region private
     private ProducerBindingMonitoredValue<DateTime> Value1 { get; set; }
     private ProducerBindingMonitoredValue<double> Value2 { get; set; }
     private const string m_Variable1Name = "Value1";
@@ -112,7 +124,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       if (Value2.HandlerState == HandlerState.Operational)
         Value2.MonitoredValue = m_Random.NextDouble();
     }
-    private readonly IUADecoder m_UADecoder = new UABinaryDecoder();
+
+    #endregion
+
   }
 
 }

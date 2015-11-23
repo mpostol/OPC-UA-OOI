@@ -1,9 +1,9 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
-using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -40,7 +40,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(Guid.NewGuid());
       Assert.IsNotNull(_nmf);
-      IMessageReader _nmr = _nmf.GetIMessageReader("UDP", null, new Encoding.UABinaryDecoder());
+      IMessageReader _nmr = _nmf.GetIMessageReader("UDP", null, new Helpers.UABinaryDecoderImplementation());
       Assert.IsNotNull(_nmr);
     }
     [TestMethod]
@@ -99,6 +99,5 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #endregion
 
   }
-
 
 }

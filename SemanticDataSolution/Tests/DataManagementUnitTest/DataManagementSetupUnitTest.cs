@@ -3,14 +3,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Xml;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
 using UAOOI.SemanticData.UANetworking.Configuration;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
-using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
+
   [TestClass]
   public class DataManagementSetupUnitTest
   {
@@ -96,7 +97,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         converter.Parameter = null;
         Assert.IsNotNull(converter.Encoding);
       }
-      private IUADecoder m_IUADecoder = new Encoding.UABinaryDecoder();
+      private IUADecoder m_IUADecoder = new Helpers.UABinaryDecoderImplementation();
 
     }
     private class CF : IConfigurationFactory

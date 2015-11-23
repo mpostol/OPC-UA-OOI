@@ -1,10 +1,9 @@
 ﻿
 using System.Xml;
-using UAOOI.SemanticData.DataManagement.MessageHandling;
 
 namespace UAOOI.SemanticData.DataManagement.Encoding
 {
-  
+
   /// <summary>
   /// Interface IUADecoder - if implemented provides methods to be used to decode OPC UA Built-in types.
   /// </summary>
@@ -12,9 +11,9 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
   {
 
     byte[] ReadBytes(IBinaryDecoder encoder);
-    void ReadByteString(MessageReaderBase messageReaderBase);
+    void ReadByteString(IBinaryDecoder messageReaderBase);
     IDataValue ReadDataValue(IBinaryDecoder encoder);
-    IDiagnosticInfo ReadDiagnosticInfo(MessageReaderBase messageReaderBase);
+    IDiagnosticInfo ReadDiagnosticInfo(IBinaryDecoder messageReaderBase);
     IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder encoder);
     IExtensionObject ReadExtensionObject(IBinaryDecoder encoder);
     ILocalizedText ReadLocalizedText(IBinaryDecoder encoder);

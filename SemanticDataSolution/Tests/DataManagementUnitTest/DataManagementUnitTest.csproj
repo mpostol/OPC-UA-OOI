@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="CommonDefinitions.cs" />
     <Compile Include="HeaderTestHelpers.cs" />
+    <Compile Include="Helpers\UABinaryDecoderImplementation.cs" />
     <Compile Include="Simulator\ConsumerDeviceSimulator.cs" />
     <Compile Include="Simulator\CustomNodeManager.cs" />
     <Compile Include="Simulator\OPCUAServerSimulator.cs" />

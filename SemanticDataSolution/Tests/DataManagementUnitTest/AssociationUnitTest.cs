@@ -320,7 +320,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         converter.Converter = null;
         converter.Parameter = null;
       }
-      private readonly IUADecoder m_UADecoder = new UABinaryDecoder();
+      private readonly IUADecoder m_UADecoder = new Helpers.UABinaryDecoderImplementation();
 
     }
     private class MessageWriter : IMessageWriter

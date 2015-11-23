@@ -216,7 +216,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
 
       #region creator
-      public TestMessageReaderBase() : base(new Encoding.UABinaryDecoder())
+      public TestMessageReaderBase() : base(new Helpers.UABinaryDecoderImplementation())
       {
         State = new MyState();
         m_MessageHeader = MessageHeader.GetConsumerMessageHeader(null);
@@ -276,15 +276,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
-      public override DateTime ReadDateTime()
-      {
-        return global::UAOOI.SemanticData.DataManagement.MessageHandling.CommonDefinitions.GetUADateTime(m_BinaryReader.ReadInt64());
-      }
       public override Guid ReadGuid()
       {
         throw new NotImplementedException();
       }
-
       public override ulong ContentMask
       {
         get
@@ -292,7 +287,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           return ulong.MaxValue;
         }
       }
-
+      public override byte[] ReadBytes(int count)
+      {
+        throw new NotImplementedException();
+      }
+      public override DateTime ReadDateTime()
+      {
+        throw new NotImplementedException();
+      }
       public override void AttachToNetwork()
       {
         Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
@@ -317,7 +319,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
       #region private
       private MessageHeader m_MessageHeader;
-      private BinaryReader m_BinaryReader;
       private int m_NumberOfAttachToNetwork;
       private SemanticData m_SemanticData;
       #endregion
@@ -329,10 +330,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         RaiseReadMessageCompleted();
       }
 
-      public override byte[] ReadBytes(int count)
-      {
-        throw new NotImplementedException();
-      }
     }
     private class MyState : IAssociationState
     {
@@ -418,7 +415,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public sealed class BinaryUDPPackageReader : BinaryDecoder
     {
 
-      public BinaryUDPPackageReader(int port, Action<string> trace) : base(new Encoding.UABinaryDecoder())
+      public BinaryUDPPackageReader(int port, Action<string> trace) : base(new Helpers.UABinaryDecoderImplementation())
       {
         State = new MyState();
         m_UdpClient = new UdpClient(port);

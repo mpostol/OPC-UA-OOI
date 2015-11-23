@@ -2,13 +2,21 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
-using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.Encoding
 {
 
-  public class UABinaryDecoder : IUADecoder
+  /// <summary>
+  /// Class UABinaryDecoder - basic implementation of the <see cref="IUADecoder"/> that provides methods to be used to decode selected set of the OPC UA Built-in types.
+  /// </summary>
+  /// <remarks>
+  /// <note>
+  /// It is expected that full featured implementation of this call will be injected by the user by this library. 
+  /// The library supports decoding only primitive types.
+  /// </note>
+  /// </remarks>
+  public abstract class UABinaryDecoder : IUADecoder
   {
 
     public IVariant ReadVariant(IBinaryDecoder encoder)
@@ -36,50 +44,17 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         value = ReadValue(encoder, builtInType);
       return value;
     }
-    public byte[] ReadBytes(IBinaryDecoder encoder)
-    {
-      throw new NotImplementedException();
-    }
-    public IDataValue ReadDataValue(IBinaryDecoder encoder)
-    {
-      throw new NotImplementedException();
-    }
-    public IExtensionObject ReadExtensionObject(IBinaryDecoder encoder)
-    {
-      throw new NotImplementedException();
-    }
-    public ILocalizedText ReadLocalizedText(IBinaryDecoder encoder)
-    {
-      throw new NotImplementedException();
-    }
-    public IQualifiedName ReadQualifiedName(IBinaryDecoder encoder)
-    {
-      throw new NotImplementedException();
-    }
-    public IStatusCode ReadStatusCode(IBinaryDecoder encoder)
-    {
-      throw new NotImplementedException();
-    }
-    public IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder encoder)
-    {
-      throw new NotImplementedException();
-    }
-    public INodeId ReadNodeId(IBinaryDecoder encoder)
-    {
-      throw new NotImplementedException();
-    }
-    public XmlElement ReadXmlElement(IBinaryDecoder encoder)
-    {
-      throw new NotImplementedException();
-    }
-    public IDiagnosticInfo ReadDiagnosticInfo(MessageReaderBase messageReaderBase)
-    {
-      throw new NotImplementedException();
-    }
-    public void ReadByteString(MessageReaderBase messageReaderBase)
-    {
-      throw new NotImplementedException();
-    }
+    public abstract byte[] ReadBytes(IBinaryDecoder decoder);
+    public abstract IDataValue ReadDataValue(IBinaryDecoder decoder);
+    public abstract IExtensionObject ReadExtensionObject(IBinaryDecoder decoder);
+    public abstract ILocalizedText ReadLocalizedText(IBinaryDecoder decoder);
+    public abstract IQualifiedName ReadQualifiedName(IBinaryDecoder decoder);
+    public abstract IStatusCode ReadStatusCode(IBinaryDecoder decoder);
+    public abstract IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder decoder);
+    public abstract INodeId ReadNodeId(IBinaryDecoder decoder);
+    public abstract XmlElement ReadXmlElement(IBinaryDecoder decoder);
+    public abstract IDiagnosticInfo ReadDiagnosticInfo(IBinaryDecoder decoder);
+    public abstract void ReadByteString(IBinaryDecoder decoder);
 
     #region private
     //types
@@ -297,4 +272,5 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     }
     #endregion
   }
+
 }

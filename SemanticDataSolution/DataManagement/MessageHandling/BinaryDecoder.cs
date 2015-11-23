@@ -9,11 +9,14 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// </summary>
   public abstract class BinaryDecoder : BinaryPackageDecoder, IDisposable
   {
+    #region creators
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryPackageDecoder" /> class is to be used by the package level decoding.
     /// </summary>
     /// <param name="uaDecoder">The ua decoder to be used fo decode UA Built-in data types.</param>
     public BinaryDecoder(IUADecoder uaDecoder) : base(uaDecoder) { }
+    #endregion
+
     #region IDisposable Support
     private bool disposedValue = false; // To detect redundant calls
     /// <summary>
@@ -33,10 +36,12 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       }
       disposedValue = true;
     }
-    // This code added to correctly implement the disposable pattern.
     /// <summary>
     /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
     /// </summary>
+    /// <remarks>
+    /// This code added to correctly implement the disposable pattern.
+    /// </remarks>
     public void Dispose()
     {
       // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
@@ -120,8 +125,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Called when new frame has arrived.
     /// </summary>
     /// <param name="uaBinaryReader">
-    /// The UA binary reader an instance of <see cref="UABinaryReader"/> 
-    /// created after new frame has been arrived.
+    /// The UA binary reader an instance of <see cref="UABinaryReader"/> created after new frame has been arrived.
     /// </param>
     /// <remarks> Just after processing the object is disposed.</remarks>
     protected void OnNewFrameArrived(UABinaryReader uaBinaryReader)

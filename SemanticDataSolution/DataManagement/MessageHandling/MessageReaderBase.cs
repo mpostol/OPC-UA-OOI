@@ -13,10 +13,14 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   public abstract class MessageReaderBase : IMessageReader, IBinaryDecoder
   {
 
-    public MessageReaderBase(IUADecoder uaDecoder)
-    {
+    #region creator
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MessageReaderBase"/> class.
+    /// </summary>
+    /// <param name="uaDecoder">The decoder that provides methods to be used to decode OPC UA Built-in types.</param>
+    public MessageReaderBase(IUADecoder uaDecoder) { }
+    #endregion
 
-    }
     #region IMessageReader
     /// <summary>
     /// Gets the content mask. The content mast read from the message or provided by the writer.

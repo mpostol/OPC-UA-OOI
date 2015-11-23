@@ -8,6 +8,7 @@ using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
+
   [TestClass]
   public class OPCUAServerProducerSimulatorUnitTest
   {

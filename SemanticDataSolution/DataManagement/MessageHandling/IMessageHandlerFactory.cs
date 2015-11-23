@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="name">The name of the reader.</param>
     /// <param name="configuration">The configuration of the object implementing the <see cref="IMessageReader" />.</param>
     /// <param name="uaDecoder">The decoder that provides methods to be used to decode OPC UA Built-in types..</param>
-    /// <returns>An object implementing <see cref="IMessageReader"/> that provides functionality supporting reading the messages from the wire..</returns>
+    /// <returns>An object implementing <see cref="IMessageReader"/> that provides functionality supporting reading the messages from the wire.</returns>
     IMessageReader GetIMessageReader(string name, XmlElement configuration, Encoding.IUADecoder uaDecoder);
     /// <summary>
     /// Gets the message writer.

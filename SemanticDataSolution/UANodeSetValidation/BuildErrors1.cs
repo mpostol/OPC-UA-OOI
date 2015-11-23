@@ -222,6 +222,70 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                   { Focus = Focus.NodeClass, 
                     Identifier = "P6-0F03000000", 
                     Descriptor = "SymbolicName contains characters that are not allowed. Only letters, digits or the underscore (‘_’) are permitted." }; } }
+    /// <summary>
+    /// Error: P3-XXXXX00000; Focus: DataType; Abstract DataType of the field of a concrete structure is not permitted.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-XXXXX00000.</value>
+    public static BuildError AbstractDataTypeOfField { get { return new BuildError() 
+                  { Focus = Focus.DataType, 
+                    Identifier = "P3-XXXXX00000", 
+                    Descriptor = "Abstract DataType of the field of a concrete structure is not permitted." }; } }
+    /// <summary>
+    /// Error: P3-XXXXX00000; Focus: DataType; All fields must be present in derived Structure DataType.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-XXXXX00000.</value>
+    public static BuildError MissingFieldInDerivedStructure { get { return new BuildError() 
+                  { Focus = Focus.DataType, 
+                    Identifier = "P3-XXXXX00000", 
+                    Descriptor = "All fields must be present in derived Structure DataType." }; } }
+    /// <summary>
+    /// Error: P3-XXXXX00000; Focus: DataType; Wrong DataType of field derived from Structure.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-XXXXX00000.</value>
+    public static BuildError WrongDerivedFieldData { get { return new BuildError() 
+                  { Focus = Focus.DataType, 
+                    Identifier = "P3-XXXXX00000", 
+                    Descriptor = "Wrong DataType of field derived from Structure." }; } }
+    /// <summary>
+    /// Error: P3-0508010000; Focus: DataType; It is not permitted for two DataTypes to point to the same DataTypeEncoding.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0508010000.</value>
+    public static BuildError WrongDataType2DataTypeEncodingReference { get { return new BuildError() 
+                  { Focus = Focus.DataType, 
+                    Identifier = "P3-0508010000", 
+                    Descriptor = "It is not permitted for two DataTypes to point to the same DataTypeEncoding." }; } }
+    /// <summary>
+    /// Error: P3-0508010000; Focus: DataType; The DataTypeEncoding Object shall point to exactly one Variable of type DataTypeDescriptionType
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0508010000.</value>
+    public static BuildError WrongDataTypeEncoding2DataTypeDescriptionReference { get { return new BuildError() 
+                  { Focus = Focus.DataType, 
+                    Identifier = "P3-0508010000", 
+                    Descriptor = "The DataTypeEncoding Object shall point to exactly one Variable of type DataTypeDescriptionType" }; } }
+    /// <summary>
+    /// Error: P3-0508010000; Focus: DataType; The DataTypeDescription Variable shall belong to a DataTypeDictionary Variable.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0508010000.</value>
+    public static BuildError WrongDataTypeDescription2DataTypeDictionaryReference { get { return new BuildError() 
+                  { Focus = Focus.DataType, 
+                    Identifier = "P3-0508010000", 
+                    Descriptor = "The DataTypeDescription Variable shall belong to a DataTypeDictionary Variable." }; } }
+    /// <summary>
+    /// Error: P3-0508030000; Focus: DataType; Only concrete Structured DataTypes may use HasEncoding References. Abstract, Built-in, Enumeration, and Simple DataTypes are not allowed to be the SourceNode of a HasEncoding Reference.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0508030000.</value>
+    public static BuildError AbstractDataType2HasEncodingReference { get { return new BuildError() 
+                  { Focus = Focus.DataType, 
+                    Identifier = "P3-0508030000", 
+                    Descriptor = "Only concrete Structured DataTypes may use HasEncoding References. Abstract, Built-in, Enumeration, and Simple DataTypes are not allowed to be the SourceNode of a HasEncoding Reference." }; } }
+    /// <summary>
+    /// Error: P3-0508030000; Focus: DataType; Each concrete Structured DataType shall point to at least one DataTypeEncoding Object with the BrowseName “Default Binary” or “Default XML” having the NamespaceIndex 0.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0508030000.</value>
+    public static BuildError ConcreteDataType2HasEncodingReference { get { return new BuildError() 
+                  { Focus = Focus.DataType, 
+                    Identifier = "P3-0508030000", 
+                    Descriptor = "Each concrete Structured DataType shall point to at least one DataTypeEncoding Object with the BrowseName “Default Binary” or “Default XML” having the NamespaceIndex 0." }; } }
 
 
   }

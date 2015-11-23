@@ -29,9 +29,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     NonCategorized,
     /// <summary>
-    /// The data encoding errors - the syntax is validated against OPC UA XML encoding
+    /// The data encoding errors - the syntax is validated against OPC UA XML encoding.
     /// </summary>
-    DataEncoding
+    DataEncoding,
+    /// <summary>
+    /// The data type definition error - eny error that relates to custom DataType definion.
+    /// </summary>
+    DataType
 
   }
   /// <summary>

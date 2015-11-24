@@ -10,18 +10,17 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
   public interface IUADecoder
   {
 
-    byte[] ReadBytes(IBinaryDecoder encoder);
-    void ReadByteString(IBinaryDecoder messageReaderBase);
-    IDataValue ReadDataValue(IBinaryDecoder encoder);
-    IDiagnosticInfo ReadDiagnosticInfo(IBinaryDecoder messageReaderBase);
-    IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder encoder);
-    IExtensionObject ReadExtensionObject(IBinaryDecoder encoder);
-    ILocalizedText ReadLocalizedText(IBinaryDecoder encoder);
-    INodeId ReadNodeId(IBinaryDecoder encoder);
-    IQualifiedName ReadQualifiedName(IBinaryDecoder encoder);
-    XmlElement ReadXmlElement(IBinaryDecoder encoder);
-    IStatusCode ReadStatusCode(IBinaryDecoder encoder);
-    IVariant ReadVariant(IBinaryDecoder encoder);
+    byte[] ReadByteString(IBinaryDecoder decoder);
+    IDataValue ReadDataValue(IBinaryDecoder decoder);
+    IDiagnosticInfo ReadDiagnosticInfo(IBinaryDecoder decoder);
+    IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder decoder);
+    IExtensionObject ReadExtensionObject(IBinaryDecoder decoder);
+    ILocalizedText ReadLocalizedText(IBinaryDecoder decoder);
+    INodeId ReadNodeId(IBinaryDecoder decoder);
+    IQualifiedName ReadQualifiedName(IBinaryDecoder decoder);
+    XmlElement ReadXmlElement(IBinaryDecoder decoder);
+    IStatusCode ReadStatusCode(IBinaryDecoder decoder);
+    IVariant ReadVariant(IBinaryDecoder decoder);
 
   }
 }

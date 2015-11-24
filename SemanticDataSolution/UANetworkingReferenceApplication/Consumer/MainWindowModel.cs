@@ -79,15 +79,11 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 
     #region private
     /// <summary>
-    /// Class UABinaryDecoderImplementation - limited implementation of the <see cref="Encoding.UABinaryDecoder"/> for the testing purpose only.
+    /// Class UABinaryDecoderImplementation - limited implementation of the <see cref="UABinaryDecoder"/> for the testing purpose only.
     /// </summary>
     private class UABinaryDecoderImplementation : UABinaryDecoder
     {
-      public override byte[] ReadBytes(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public override void ReadByteString(IBinaryDecoder decoder)
+      public override byte[] ReadByteString(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();
       }

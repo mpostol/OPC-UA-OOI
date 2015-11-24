@@ -15,6 +15,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
   /// </summary>
   internal class OPCUAServerProducerSimulator : DataManagementSetup
   {
+
     #region creator
     internal static DataManagementSetup CreateDevice(IMessageHandlerFactory messageHandlerFactory, Guid dataSetGuid)
     {

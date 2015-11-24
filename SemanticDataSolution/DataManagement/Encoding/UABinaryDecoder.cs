@@ -19,61 +19,48 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
   public abstract class UABinaryDecoder : IUADecoder
   {
 
-    public IVariant ReadVariant(IBinaryDecoder encoder)
+    /// <summary>
+    /// Reads the variant using the provided <see cref="IBinaryDecoder"/>.
+    /// </summary>
+    /// <param name="decoder">The decoder to be used to read <see cref="IVariant"/> from the inmput byte stream.</param>
+    /// <returns>Returns am instance of the <see cref="IVariant"/> encapsulating the received value.</returns>
+    public IVariant ReadVariant(IBinaryDecoder decoder)
     {
-      byte encodingByte = encoder.ReadByte(); //Read the EncodingMask
+      byte encodingByte = decoder.ReadByte(); //Read the EncodingMask
+      if (encodingByte == 0x0)
+        return null;
       Variant value = null;
       BuiltInType builtInType = (BuiltInType)(encodingByte & (byte)VariantEncodingMask.TypeIdMask);
-      if ((encodingByte & (byte)VariantEncodingMask.IsArray) != 0)
+      if ((encodingByte & (byte)VariantEncodingMask.IsArray) == 0)
+        value = ReadValue(decoder, builtInType);
+      else
       {
-        // read the ArrayLength field.
-        int length = encoder.ReadInt32();
+        int length = decoder.ReadInt32();
         if (length < 0)
           return value;
-        Array array = null;
-        array = ReadArray(encoder, encodingByte, length, builtInType); //Read Value field
+        Array array = ReadArray(decoder, length, builtInType);
         List<Int32> _dimensions = null;
         if ((encodingByte & (byte)VariantEncodingMask.ArrayDimensionsPresents) != 0)
-           _dimensions = ReadInt32Array(encoder); //Read ArrayDimensions field
+          _dimensions = ReadDimensions(decoder);
         if (_dimensions != null && _dimensions.Count > 0)
           value = new Variant(new Matrix(array, builtInType, _dimensions.ToArray()));
         else
           value = new Variant(new Matrix(array, builtInType));
       }
-      else
-        value = ReadValue(encoder, builtInType);
       return value;
     }
-    public abstract byte[] ReadBytes(IBinaryDecoder decoder);
+    public abstract byte[] ReadByteString(IBinaryDecoder decoder);
     public abstract IDataValue ReadDataValue(IBinaryDecoder decoder);
+    public abstract IDiagnosticInfo ReadDiagnosticInfo(IBinaryDecoder decoder);
+    public abstract IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder decoder);
     public abstract IExtensionObject ReadExtensionObject(IBinaryDecoder decoder);
     public abstract ILocalizedText ReadLocalizedText(IBinaryDecoder decoder);
-    public abstract IQualifiedName ReadQualifiedName(IBinaryDecoder decoder);
-    public abstract IStatusCode ReadStatusCode(IBinaryDecoder decoder);
-    public abstract IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder decoder);
     public abstract INodeId ReadNodeId(IBinaryDecoder decoder);
+    public abstract IQualifiedName ReadQualifiedName(IBinaryDecoder decoder);
     public abstract XmlElement ReadXmlElement(IBinaryDecoder decoder);
-    public abstract IDiagnosticInfo ReadDiagnosticInfo(IBinaryDecoder decoder);
-    public abstract void ReadByteString(IBinaryDecoder decoder);
+    public abstract IStatusCode ReadStatusCode(IBinaryDecoder decoder);
 
     #region private
-    //types
-    [Flags]
-    private enum VariantEncodingMask
-    {
-      /// <summary>
-      /// True if an array of values is encoded.
-      /// </summary>
-      IsArray = 0x80,
-      /// <summary>
-      /// True if the Array Dimensions field is encoded
-      /// </summary>
-      ArrayDimensionsPresents = 0x40,
-      /// <summary>
-      /// The type mask of the Built-in Type Id
-      /// </summary>
-      TypeIdMask = 0x3F
-    }
     private class Variant : IVariant
     {
       internal Variant(object value, UATypeInfo type)
@@ -136,20 +123,11 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
 
     }
     //vars
+    /// <summary>
+    /// The maximum array length - could be used to apply license volume limits.
+    /// </summary>
     private int MaxArrayLength = 2;
     //methods
-    private List<int> ReadInt32Array(IBinaryDecoder encoder)
-    {
-      int length = encoder.ReadInt32();
-      if (length < 0)
-        return null;
-      if (MaxArrayLength > 0 && MaxArrayLength < length)
-        throw new ArgumentOutOfRangeException(nameof(MaxArrayLength), $"Unsupported array length {length}");
-      List<Int32> values = new List<Int32>(length);
-      for (int ii = 0; ii < length; ii++)
-        values.Add(encoder.ReadInt32());
-      return values;
-    }
     private Variant ReadValue(IBinaryDecoder encoder, BuiltInType encodingByte)
     {
       switch (encodingByte)
@@ -184,7 +162,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         case BuiltInType.Guid:
           return new Variant(encoder.ReadGuid(), encodingByte);
         case BuiltInType.ByteString:
-          return new Variant(ReadBytes(encoder), encodingByte);
+          return new Variant(ReadByteString(encoder), encodingByte);
         case BuiltInType.XmlElement:
           return new Variant(ReadXmlElement(encoder), encodingByte);
         case BuiltInType.NodeId:
@@ -205,7 +183,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{encodingByte:X2}).");
       }
     }
-    private Array ReadArray(IBinaryDecoder encoder, byte encodingByte, int length, BuiltInType builtInType)
+    private Array ReadArray(IBinaryDecoder encoder, int length, BuiltInType builtInType)
     {
       switch (builtInType)
       {
@@ -259,7 +237,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         case BuiltInType.Variant:
           return ReadArray<IVariant>(length, () => ReadVariant(encoder));
         default:
-          throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{encodingByte:X2}).");
+          throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{(int)builtInType:X2}).");
       }
     }
     private Array ReadArray<type>(int length, Func<type> readValue)
@@ -270,7 +248,19 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       Array array = values;
       return array;
     }
+    private List<int> ReadDimensions(IBinaryDecoder encoder)
+    {
+      int length = encoder.ReadInt32();
+      if (length < 0)
+        return null;
+      if (MaxArrayLength > 0 && MaxArrayLength < length)
+        throw new ArgumentOutOfRangeException(nameof(MaxArrayLength), $"Unsupported array length {length}");
+      List<Int32> values = new List<Int32>(length);
+      for (int ii = 0; ii < length; ii++)
+        values.Add(encoder.ReadInt32());
+      return values;
+    }
     #endregion
-  }
 
+  }
 }

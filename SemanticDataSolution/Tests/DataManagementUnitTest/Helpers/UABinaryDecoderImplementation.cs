@@ -13,11 +13,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Helpers
   {
 
     #region Encoding.UABinaryDecoder
-    public override byte[] ReadBytes(IBinaryDecoder decoder)
-    {
-      throw new NotImplementedException();
-    }
-    public override void ReadByteString(IBinaryDecoder decoder)
+    public override byte[] ReadByteString(IBinaryDecoder decoder)
     {
       throw new NotImplementedException();
     }

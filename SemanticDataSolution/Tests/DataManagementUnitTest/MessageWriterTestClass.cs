@@ -7,6 +7,7 @@ using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using System.Linq;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -38,13 +39,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
-    [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    [ExpectedException(typeof(NullReferenceException))]
     public void NullableTestMethod()
     {
       TypesMessageWriter _bmw = new TypesMessageWriter();
       _bmw.AttachToNetwork();
       Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
-      ProducerBinding _binding = new ProducerBinding();
+      ProducerBinding _binding = new ProducerBinding(BuiltInType.Float);
       _binding.Value = new Nullable<float>();
       ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, new SemanticDataTest(Guid.NewGuid()));
     }
@@ -70,7 +71,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void BinaryUDPPackageWriterTestMethod()
     {
       int _port = 35678;
-      using (BinaryUDPPackageWriter _writer = new BinaryUDPPackageWriter("localhost", _port))
+      using (BinaryUDPPackageWriter _writer = new BinaryUDPPackageWriter("localhost", _port, new Helpers.UABinaryEncoderImplementation()))
       {
         Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
         Assert.AreEqual<int>(0, _writer.m_NumberOfAttachToNetwork);
@@ -106,7 +107,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
 
       internal object Value;
+      private BuiltInType _builtInType;
 
+      public ProducerBinding(BuiltInType builtInType)
+      {
+        _builtInType = builtInType;
+      }
+      public ProducerBinding() { }
       #region IProducerBinding
       public bool NewValue
       {
@@ -122,7 +129,43 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       public BuiltInType Encoding
       {
-        get { throw new NotImplementedException(); }
+        get
+        {
+          if (Value == null)
+            return _builtInType;
+          switch (Type.GetTypeCode(Value.GetType()))
+          {
+            case TypeCode.Boolean:
+              return BuiltInType.Boolean;
+            case TypeCode.SByte:
+              return BuiltInType.SByte;
+            case TypeCode.Byte:
+              return BuiltInType.Byte;
+            case TypeCode.Int16:
+              return BuiltInType.Int16;
+            case TypeCode.UInt16:
+              return BuiltInType.UInt16;
+            case TypeCode.Int32:
+              return BuiltInType.Int32;
+            case TypeCode.UInt32:
+              return BuiltInType.UInt32;
+            case TypeCode.Int64:
+              return BuiltInType.Int64;
+            case TypeCode.UInt64:
+              return BuiltInType.UInt64;
+            case TypeCode.Single:
+              return BuiltInType.Float;
+            case TypeCode.Double:
+              return BuiltInType.Double;
+            case TypeCode.DateTime:
+              return BuiltInType.DateTime;
+            case TypeCode.String:
+              return BuiltInType.String;
+            default:
+              throw new ArgumentOutOfRangeException(nameof(Value));
+          }
+          throw new ArgumentOutOfRangeException(nameof(Value));
+        }
       }
       public object Parameter
       {
@@ -152,7 +195,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
 
       #region creator
-      public TypesMessageWriter()
+      public TypesMessageWriter() : base(new Helpers.UABinaryEncoderImplementation())
       {
         State = new MyState();
       }
@@ -169,80 +212,67 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
         State.Enable();
       }
-      protected override void WriteUInt64(ulong value, object parameter)
+      public override void WriteUInt64(ulong value)
       {
         Assert.IsInstanceOfType(value, typeof(ulong));
       }
-      protected override void WriteUInt32(uint value, object parameter)
+      public override void WriteUInt32(uint value)
       {
         Assert.IsInstanceOfType(value, typeof(uint));
       }
-      protected override void WriteUInt16(ushort value, object parameter)
+      public override void WriteUInt16(ushort value)
       {
         Assert.IsInstanceOfType(value, typeof(ushort));
       }
-      protected override void WriteString(string value, object parameter)
+      public override void WriteString(string value)
       {
         Assert.IsInstanceOfType(value, typeof(string));
       }
-      protected override void WriteSingle(float value, object parameter)
+      public override void WriteSingle(float value)
       {
         Assert.IsInstanceOfType(value, typeof(float));
       }
-      protected override void WriteSByte(sbyte value, object parameter)
+      public override void WriteSByte(sbyte value)
       {
         Assert.IsInstanceOfType(value, typeof(sbyte));
       }
-      protected override void WriteInt64(long value, object parameter)
+      public override void WriteInt64(long value)
       {
         Assert.IsInstanceOfType(value, typeof(long));
       }
-      protected override void WriteInt32(int value, object parameter)
+      public override void WriteInt32(int value)
       {
         Assert.IsInstanceOfType(value, typeof(int));
       }
-      protected override void WriteInt16(short value, object parameter)
+      public override void WriteInt16(short value)
       {
         Assert.IsInstanceOfType(value, typeof(short));
       }
-      protected override void WriteDouble(double value, object parameter)
+      public override void WriteDouble(double value)
       {
         Assert.IsInstanceOfType(value, typeof(double));
       }
-      protected override void WriteDecimal(decimal value, object parameter)
-      {
-        Assert.IsInstanceOfType(value, typeof(decimal));
-      }
-      protected override void WriteDateTime(DateTime value, object parameter)
-      {
-        Assert.IsInstanceOfType(value, typeof(DateTime));
-      }
-      protected override void WriteByte(byte value, object parameter)
+      public override void WriteByte(byte value)
       {
         Assert.IsInstanceOfType(value, typeof(byte));
       }
-      protected override void WriteBool(bool value, object parameter)
+      public override void WriteBoolean(bool value)
       {
         Assert.IsInstanceOfType(value, typeof(bool));
-      }
-      protected override void WriteChar(char value, object parameter)
-      {
-        Assert.IsInstanceOfType(value, typeof(char));
       }
       protected override void CreateMessage(int length, Guid dataSetId)
       {
         MassageCreated = true;
       }
       protected override void SendMessage() { }
-      public override void Write(byte value)
+      public override void WriteGuid(Guid value)
       {
         throw new NotImplementedException();
       }
-      public override void Write(Guid value)
+      public override void WriteBytes(byte[] value)
       {
         throw new NotImplementedException();
       }
-
       #endregion
 
       #region test infrastructure
@@ -336,7 +366,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   {
 
     #region creator
-    public BinaryUDPPackageWriter(string remoteHostName, int port) : base(CommonDefinitions.TestGuid)
+    public BinaryUDPPackageWriter(string remoteHostName, int port, IUAEncoder uaEncoder) : base(CommonDefinitions.TestGuid, uaEncoder)
     {
       State = new MyState();
       m_RemoteHostName = remoteHostName;

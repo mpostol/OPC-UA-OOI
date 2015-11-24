@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using System;
+using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
@@ -10,7 +12,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryPackageEncoder"/> class.
     /// </summary>
-    public BinaryPackageEncoder(Guid producerId)
+    public BinaryPackageEncoder(Guid producerId, IUAEncoder uaEncoder) : base(uaEncoder)
     {
       Header = PackageHeader.GetProducerPackageHeader(this, producerId);
     }

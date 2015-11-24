@@ -85,9 +85,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       #region configuration
       private MessageHandlerConfiguration[] GetMessageTransport()
       {
-        return new MessageHandlerConfiguration[] { new MessageHandlerConfiguration() { AssociationNames = GetTransportAssociations(), 
-                                                                                           Configuration = null, 
-                                                                                           Name = "UDP", 
+        return new MessageHandlerConfiguration[] { new MessageHandlerConfiguration() { AssociationNames = GetTransportAssociations(),
+                                                                                           Configuration = null,
+                                                                                           Name = "UDP",
                                                                                            TransportRole = AssociationRole.Producer } };
       }
       private string[] GetTransportAssociations()
@@ -96,13 +96,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
       private DataSetConfiguration[] GetAssociations()
       {
-        return new DataSetConfiguration[] { new DataSetConfiguration() { AssociationName = AssociationConfigurationAlias, 
-                                                                                 AssociationRole = AssociationRole.Producer, 
-                                                                                 DataSet = GetMembers(), 
+        return new DataSetConfiguration[] { new DataSetConfiguration() { AssociationName = AssociationConfigurationAlias,
+                                                                                 AssociationRole = AssociationRole.Producer,
+                                                                                 DataSet = GetMembers(),
                                                                                  DataSymbolicName = "DataSymbolicName",
                                                                                  Id = AssociationConfigurationId,
                                                                                  RepositoryGroup = m_RepositoryGroup,
-                                                                                 InformationModelURI= AssociationConfigurationInformationModelURI  
+                                                                                 InformationModelURI= AssociationConfigurationInformationModelURI
         } };
       }
       private FieldMetaData[] GetMembers()
@@ -172,13 +172,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
       public IUADecoder UADecoder
       {
-        get
-        {
-          return m_UADecoder;
-        }
+        get { return m_UADecoder; }
+      }
+      public IUAEncoder UAEncoder
+      {
+        get { return m_UAEncoder; }
       }
 
       private readonly IUADecoder m_UADecoder = new Helpers.UABinaryDecoderImplementation();
+      private readonly IUAEncoder m_UAEncoder = new Helpers.UABinaryEncoderImplementation();
+
     }
     #endregion
 

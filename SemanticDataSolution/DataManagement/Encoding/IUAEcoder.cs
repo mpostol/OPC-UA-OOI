@@ -1,15 +1,17 @@
 ﻿
+using System;
 using System.Xml;
 
 namespace UAOOI.SemanticData.DataManagement.Encoding
 {
 
   /// <summary>
-  /// Interface IUAEncoder - if implemented provides methods to be used to decode OPC UA Built-in types.
+  /// Interface IUAEncoder - if implemented provides methods to be used to encode OPC UA Built-in types.
   /// </summary>
   public interface IUAEncoder
   {
 
+    void WriteDateTime(IBinaryEncoder encoder, DateTime value);
     void WriteByteString(IBinaryEncoder encoder, byte[]  value);
     void WriteDataValue(IBinaryEncoder encoder, IDataValue value);
     void WriteDiagnosticInfo(IBinaryEncoder encoder, IDiagnosticInfo  value);

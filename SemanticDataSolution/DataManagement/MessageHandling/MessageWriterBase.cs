@@ -1,14 +1,30 @@
 ﻿
 using System;
+using System.Xml;
 using UAOOI.SemanticData.DataManagement.DataRepository;
+using UAOOI.SemanticData.DataManagement.Encoding;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
   /// <summary>
-  /// Class MessageWriterBase - helper class that provides basic implementation of the <see cref="IMessageWriter"/>
+  /// Class MessageWriterBase - helper class that provides basic implementation of the <see cref="IMessageWriter"/>.
   /// </summary>
-  public abstract class MessageWriterBase : IMessageWriter
+  public abstract class MessageWriterBase : IMessageWriter, IBinaryEncoder
   {
+
+    #region creator
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MessageWriterBase"/> class providing basic implementation of the <see cref="IMessageWriter"/>.
+    /// </summary>
+    /// <param name="uaEncoder">The ua encoder.</param>
+    public MessageWriterBase(IUAEncoder uaEncoder)
+    {
+      if (uaEncoder == null)
+        throw new ArgumentNullException(nameof(uaEncoder));
+      m_UAEncoder = uaEncoder;
+    }
+    #endregion
 
     #region IMessageWriter
     /// <summary>
@@ -45,17 +61,13 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         if ((ContentMask & _mask) > 0)
         {
           IProducerBinding _pb = producerBinding(i);
-          object _value = _pb.GetFromRepository();
-          if (_value == null)
-            throw new ArgumentOutOfRangeException("Impossible to convert null value");
-          Type _type = _value.GetType();
-          if (!IsValueIConvertible(_value, _pb.Parameter))
-            throw new ArgumentOutOfRangeException(string.Format("Impossible to convert {0}", _value));
+          WriteValue(_pb);
         }
         _mask = _mask << 1;
       }
       SendMessage();
     }
+
     /// <summary>
     /// If implemented in derived class gets the state machine for this instance.
     /// </summary>
@@ -72,103 +84,123 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     public abstract void AttachToNetwork();
     #endregion
 
-    #region private
-
-    #region Writer
-    protected abstract void WriteUInt64(ulong value, object parameter);
-    protected abstract void WriteUInt32(uint value, object parameter);
-    protected abstract void WriteUInt16(ushort value, object parameter);
-    protected abstract void WriteString(string value, object parameter);
-    protected abstract void WriteSingle(float value, object parameter);
-    protected abstract void WriteSByte(sbyte value, object parameter);
-    protected abstract void WriteInt64(long value, object parameter);
-    protected abstract void WriteInt32(int value, object parameter);
-    protected abstract void WriteInt16(short value, object parameter);
-    protected abstract void WriteDouble(double value, object parameter);
-    protected abstract void WriteDecimal(decimal value, object parameter);
-    protected abstract void WriteDateTime(DateTime dateTime, object parameter);
-    protected abstract void WriteByte(byte value, object parameter);
-    protected abstract void WriteBool(bool value, object parameter);
-    protected abstract void WriteChar(char value, object parameter);
-    /// <summary>
-    /// Writes an unsigned byte to the current stream and advances the stream position by one byte.
-    /// </summary>
-    /// <param name="value">TThe unsigned <see cref="byte"/> to write./param>
-    public abstract void Write(byte value);
+    #region IBinaryEncoder
+    public abstract void WriteUInt64(ulong value);
+    public abstract void WriteUInt32(uint value);
+    public abstract void WriteUInt16(ushort value);
+    public abstract void WriteString(string value);
+    public abstract void WriteSingle(float value);
+    public abstract void WriteSByte(sbyte value);
+    public abstract void WriteInt64(long value);
+    public abstract void WriteInt32(int value);
+    public abstract void WriteInt16(short value);
+    public abstract void WriteDouble(double value);
+    public abstract void WriteBoolean(bool value);
     /// <summary>
     /// Writes a <see cref="Guid"/> to the current stream as a 16-element byte array that contains the value and advances the stream position by 16 bytes.
     /// </summary>
     /// <param name="value">The <see cref="Guid"/> value to write.</param>
-    public abstract void Write(Guid value);
+    public abstract void WriteGuid(Guid value);
+    public abstract void WriteBytes(byte[] value);
+    /// <summary>
+    /// Writes an unsigned byte to the current stream and advances the stream position by one byte.
+    /// </summary>
+    /// <param name="value">TThe unsigned <see cref="byte"/> to write./param>
+    public abstract void WriteByte(byte value);
     #endregion
 
+    #region private
     protected abstract void CreateMessage(int length, Guid dataSetId);
     protected abstract void SendMessage();
-    private bool IsValueIConvertible(object value, object parameter)
+    private IUAEncoder m_UAEncoder;
+    private void WriteValue(IProducerBinding _pb)
     {
-      IConvertible _cv = value as IConvertible;
-      if (_cv == null)
-        return false;
-      switch (_cv.GetTypeCode())
+      object value = _pb.GetFromRepository();
+      switch (_pb.Encoding)
       {
-        case TypeCode.Boolean:
-          WriteBool((Boolean)value, parameter);
+        case BuiltInType.Boolean:
+          WriteBoolean((Boolean)value);
           break;
-        case TypeCode.Byte:
-          WriteByte((Byte)value, parameter);
+        case BuiltInType.SByte:
+          WriteSByte((SByte)value);
           break;
-        case TypeCode.Char:
-          WriteChar((Char)value, parameter);
+        case BuiltInType.Byte:
+          WriteByte((Byte)value);
           break;
-        case TypeCode.DBNull:
-          throw new ArgumentOutOfRangeException("the value cannot be TypeCode.DBNull");
-        case TypeCode.DateTime:
-          WriteDateTime((DateTime)value, parameter);
+        case BuiltInType.DateTime:
+          m_UAEncoder.WriteDateTime(this, (DateTime)value);
           break;
-        case TypeCode.Decimal:
-          WriteDecimal((Decimal)value, parameter);
+        case BuiltInType.Double:
+          WriteDouble((Double)value);
           break;
-        case TypeCode.Double:
-          WriteDouble((Double)value, parameter);
+        case BuiltInType.Int16:
+          WriteInt16((Int16)value);
           break;
-        case TypeCode.Empty:
-          throw new ArgumentOutOfRangeException("the value cannot be TypeCode.Empty");
-        case TypeCode.Int16:
-          WriteInt16((Int16)value, parameter);
+        case BuiltInType.Enumeration:
+        case BuiltInType.Int32:
+          WriteInt32((Int32)value);
           break;
-        case TypeCode.Int32:
-          WriteInt32((Int32)value, parameter);
+        case BuiltInType.Int64:
+          WriteInt64((Int64)value);
           break;
-        case TypeCode.Int64:
-          WriteInt64((Int64)value, parameter);
+        case BuiltInType.Float:
+          WriteSingle((Single)value);
           break;
-        case TypeCode.Object:
-          return false;
-        case TypeCode.SByte:
-          WriteSByte((SByte)value, parameter);
+        case BuiltInType.String:
+          WriteString((String)value);
           break;
-        case TypeCode.Single:
-          WriteSingle((Single)value, parameter);
+        case BuiltInType.UInt16:
+          WriteUInt16((UInt16)value);
           break;
-        case TypeCode.String:
-          WriteString((String)value, parameter);
+        case BuiltInType.UInt32:
+          WriteUInt32((UInt32)value);
           break;
-        case TypeCode.UInt16:
-          WriteUInt16((UInt16)value, parameter);
+        case BuiltInType.UInt64:
+          WriteUInt64((UInt64)value);
           break;
-        case TypeCode.UInt32:
-          WriteUInt32((UInt32)value, parameter);
+        case BuiltInType.Guid:
+          WriteGuid((Guid)value);
           break;
-        case TypeCode.UInt64:
-          WriteUInt64((UInt64)value, parameter);
+        case BuiltInType.ByteString:
+          m_UAEncoder.WriteByteString(this, (byte[])value);
           break;
+        case BuiltInType.XmlElement:
+          m_UAEncoder.WriteXmlElement(this, (XmlElement)value);
+          break;
+        case BuiltInType.NodeId:
+          m_UAEncoder.WriteNodeId(this, (INodeId)value);
+          break;
+        case BuiltInType.ExpandedNodeId:
+          m_UAEncoder.WriteExpandedNodeId(this, (IExpandedNodeId)value);
+          break;
+        case BuiltInType.StatusCode:
+          m_UAEncoder.WriteStatusCode(this, (IStatusCode)value);
+          break;
+        case BuiltInType.QualifiedName:
+          m_UAEncoder.WriteQualifiedName(this, (IQualifiedName)value);
+          break;
+        case BuiltInType.LocalizedText:
+          m_UAEncoder.WriteLocalizedText(this, (ILocalizedText)value);
+          break;
+        case BuiltInType.ExtensionObject:
+          m_UAEncoder.WriteExtensionObject(this, (IExtensionObject)value);
+          break;
+        case BuiltInType.DataValue:
+          m_UAEncoder.WriteDataValue(this, (IDataValue)value);
+          break;
+        case BuiltInType.Variant:
+          m_UAEncoder.WriteVariant(this, (IVariant)value);
+          break;
+        case BuiltInType.DiagnosticInfo:
+          m_UAEncoder.WriteDiagnosticInfo(this, (IDiagnosticInfo)value);
+          break;
+        case BuiltInType.Null:
         default:
-          return false;
+          throw new ArgumentOutOfRangeException($"Impossible to convert {value} of type {_pb.Encoding}");
       }
-      return true;
     }
-
     #endregion
 
   }
+
 }

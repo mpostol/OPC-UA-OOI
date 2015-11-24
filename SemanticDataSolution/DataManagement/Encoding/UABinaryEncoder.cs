@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.Encoding
@@ -13,6 +14,10 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
   {
 
     #region public API
+    public virtual void WriteDateTime(IBinaryEncoder encoder, DateTime value)
+    {
+      encoder.WriteInt64(CommonDefinitions.GetUADataTimeTicks(value));
+    }
     public abstract void WriteByteString(IBinaryEncoder encoder, byte[] value);
     public abstract void WriteDataValue(IBinaryEncoder encoder, IDataValue value);
     public abstract void WriteDiagnosticInfo(IBinaryEncoder encoder, IDiagnosticInfo value);
@@ -26,8 +31,8 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     /// Writes the variant using provided encoder <see cref="IBinaryEncoder"/>
     /// </summary>
     /// <param name="encoder">The encoder to write the value encapsulated in this instance.</param>
-    /// <param name="value">The value to be ecoded as an instance of <see cref="IVariant"/>.</param>
-    public void WriteVariant(IBinaryEncoder encoder, IVariant value)
+    /// <param name="value">The value to be encoded as an instance of <see cref="IVariant"/>.</param>
+    public virtual void WriteVariant(IBinaryEncoder encoder, IVariant value)
     {
       // check for null.
       if (value.Value == null || value.UATypeInfo == null || value.UATypeInfo.BuiltInType == BuiltInType.Null)
@@ -65,6 +70,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       }
     }
     public abstract void WriteXmlElement(IBinaryEncoder encoder, XmlElement value);
+    public abstract void WriteGuid(IBinaryEncoder encoder, Guid value);
     #endregion
 
     #region private
@@ -114,7 +120,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           encoder.WriteString((String)value);
           return;
         case BuiltInType.DateTime:
-          encoder.WriteDateTime((DateTime)value);
+          WriteDateTime(encoder, (DateTime)value);
           return;
         case BuiltInType.Guid:
           encoder.WriteGuid((Guid)value);
@@ -202,7 +208,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           WriteArray<String>(encoder, value, encoder.WriteString);
           break;
         case BuiltInType.DateTime:
-          WriteArray<DateTime>(encoder, value, encoder.WriteDateTime);
+          WriteArray<DateTime>(encoder, value, x => WriteDateTime(encoder, x));
           break;
         case BuiltInType.Guid:
           WriteArray<Guid>(encoder, value, encoder.WriteGuid);

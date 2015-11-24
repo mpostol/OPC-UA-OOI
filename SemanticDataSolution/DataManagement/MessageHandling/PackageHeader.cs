@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// Class PackageHeader - represent information in the protocol package header.
   /// </summary>
   /// <remarks>
-  /// #98: PackageHeader - mus be refined
+  /// #98: PackageHeader - must be refined
   /// Because the specification is subject of further development this class mus be refined according to further protocol modification.
   /// The following topics must be addressed:
   /// * PublisherId - how to use it and it is static so exchange it is waste of bandwidth.
@@ -152,7 +152,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
             return;
           b_MessageCount = value;
           SetPosition(m_MessageCountPosition);
-          m_Writer.Write(b_MessageCount);
+          m_Writer.WriteByte(b_MessageCount);
           RestorePosition();
         }
       }
@@ -193,12 +193,12 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       /// </summary>
       public override void Synchronize()
       {
-        m_Writer.Write(PublisherId);
-        m_Writer.Write(MessageFlags);
-        m_Writer.Write(ProtocolVersion);
-        m_Writer.Write(SecurityTokenId);
+        m_Writer.WriteGuid(PublisherId);
+        m_Writer.WriteByte(MessageFlags);
+        m_Writer.WriteByte(ProtocolVersion);
+        m_Writer.WriteByte(SecurityTokenId);
         m_MessageCountPosition = SavePosition();
-        m_Writer.Write(MessageCount);
+        m_Writer.WriteByte(MessageCount);
       }
       #endregion
 

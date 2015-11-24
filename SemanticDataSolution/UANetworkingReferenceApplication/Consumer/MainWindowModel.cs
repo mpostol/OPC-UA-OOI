@@ -75,6 +75,13 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
         return m_UADecoder;
       }
     }
+    public IUAEncoder UAEncoder
+    {
+      get
+      {
+        throw new NotImplementedException();
+      }
+    }
     #endregion
 
     #region private

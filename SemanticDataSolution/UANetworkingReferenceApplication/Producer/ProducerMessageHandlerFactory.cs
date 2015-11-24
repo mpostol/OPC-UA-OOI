@@ -46,9 +46,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// <param name="name">The name.</param>
     /// <param name="configuration">The configuration.</param>
     /// <returns>An instance of <see cref="IMessageWriter"/>.</returns>
-    IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, XmlElement configuration)
+    IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, XmlElement configuration, IUAEncoder uaEncoder)
     {
-      BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(RemoteHostName, UDPPortNumber, ProducerId, m_Trace, m_ViewModel);
+      BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(RemoteHostName, UDPPortNumber, ProducerId, m_Trace, m_ViewModel, uaEncoder);
       m_ToDispose(_ret);
       return _ret;
     }
@@ -93,7 +93,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     {
 
       #region creator
-      public BinaryUDPPackageWriter(string remoteHostName, int remotePort, Guid producerId, Action<string> trace, IProducerViewModel ViewModel) : base(producerId)
+      public BinaryUDPPackageWriter(string remoteHostName, int remotePort, Guid producerId, Action<string> trace, IProducerViewModel ViewModel, IUAEncoder uaEncoder) : base(producerId, uaEncoder)
       {
         m_Trace = trace;
         m_ViewModel = ViewModel;

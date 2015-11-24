@@ -53,7 +53,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         return new MR();
       }
-      public IMessageWriter GetIMessageWriter(string name, XmlElement configuration)
+      public IMessageWriter GetIMessageWriter(string name, XmlElement configuration, IUAEncoder uaEncoder)
       {
         throw new NotImplementedException();
       }
@@ -89,6 +89,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public IUADecoder UADecoder
       {
         get { return m_IUADecoder; }
+      }
+      public IUAEncoder UAEncoder
+      {
+        get
+        {
+          throw new NotImplementedException();
+        }
       }
       public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
       {

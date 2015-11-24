@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 
     #region creator
     /// <summary>
-    /// Initializes a new instance of the <see cref="MessageReaderBase"/> class.
+    /// Initializes a new instance of the <see cref="MessageReaderBase"/> class providing basic implementation of the <see cref="IMessageReader"/> interface.
     /// </summary>
     /// <param name="uaDecoder">The decoder that provides methods to be used to decode OPC UA Built-in types.</param>
     public MessageReaderBase(IUADecoder uaDecoder) { }
@@ -73,7 +73,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         if ((ContentMask & _mask) > 0)
         {
           IConsumerBinding _binding = update(i);
-          Read(_binding);
+          ReadValue(_binding);
         }
         _mask = _mask << 1;
       }
@@ -118,7 +118,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       ReadMessageCompleted(this, new MessageEventArg(this));
     }
     private IUADecoder UABinaryDecoder { get; set; }
-    private void Read(IConsumerBinding binding)
+    private void ReadValue(IConsumerBinding binding)
     {
       object _value = null;
       switch (binding.Encoding)

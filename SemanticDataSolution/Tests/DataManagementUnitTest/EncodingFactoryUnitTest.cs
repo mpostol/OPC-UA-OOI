@@ -49,6 +49,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           return m_UADecoder;
         }
       }
+      public IUAEncoder UAEncoder
+      {
+        get
+        {
+          throw new NotImplementedException();
+        }
+      }
       private readonly IUADecoder m_UADecoder = new Helpers.UABinaryDecoderImplementation();
     }
     private class IVC : IValueConverter

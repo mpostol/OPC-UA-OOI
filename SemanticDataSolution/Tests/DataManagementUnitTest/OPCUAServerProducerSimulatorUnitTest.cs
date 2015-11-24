@@ -41,7 +41,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(Guid.NewGuid());
       Assert.IsNotNull(_nmf);
-      IMessageWriter _nmr = _nmf.GetIMessageWriter("UDP", null);
+      IMessageWriter _nmr = _nmf.GetIMessageWriter("UDP", null, null);
       Assert.IsNotNull(_nmr);
     }
     [TestMethod]
@@ -71,11 +71,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
-      public MessageHandling.IMessageWriter GetIMessageWriter(string name, System.Xml.XmlElement configuration)
+      public MessageHandling.IMessageWriter GetIMessageWriter(string name, System.Xml.XmlElement configuration, IUAEncoder uaEncoder)
       {
         Assert.AreEqual("UDP", name);
         Assert.IsNull(configuration);
-        return this.MessageWriter;
+        return MessageWriter;
       }
       #endregion
 
@@ -88,8 +88,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         Assert.IsNotNull(MessageWriter);
       }
-
       #endregion
+
     }
     #endregion
 

@@ -35,7 +35,7 @@ namespace UAOOI.SemanticData.DataManagement
             _handler = messageHandlerFactory.GetIMessageReader(item.Name, item.Configuration, encodingFactory.UADecoder);
             break;
           case AssociationRole.Producer:
-            _handler = messageHandlerFactory.GetIMessageWriter(item.Name, item.Configuration);
+            _handler = messageHandlerFactory.GetIMessageWriter(item.Name, item.Configuration, encodingFactory.UAEncoder);
             break;
           default:
             break;

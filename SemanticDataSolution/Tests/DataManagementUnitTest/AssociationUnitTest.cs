@@ -313,7 +313,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         get { return m_UADecoder; }
       }
-
+      public IUAEncoder UAEncoder
+      {
+        get
+        {
+          throw new NotImplementedException();
+        }
+      }
       public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
       {
         converter.Culture = null;

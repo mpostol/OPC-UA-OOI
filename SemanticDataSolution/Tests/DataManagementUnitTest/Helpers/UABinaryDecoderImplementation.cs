@@ -7,9 +7,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Helpers
 {
 
   /// <summary>
-  /// Class UABinaryDecoderImplementation - limited implementation of the <see cref="Encoding.UABinaryDecoder"/> for the testing purpose only.
+  /// Class UABinaryDecoderImplementation - limited implementation of the <see cref="UABinaryDecoder"/> for the testing purpose only.
   /// </summary>
-  internal class UABinaryDecoderImplementation : Encoding.UABinaryDecoder
+  internal class UABinaryDecoderImplementation : UABinaryDecoder
   {
 
     #region Encoding.UABinaryDecoder

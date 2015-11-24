@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+using System.Xml;
 using UAOOI.SemanticData.DataManagement;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.Encoding;
@@ -107,16 +108,75 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     {
       get { return null; }
     }
+    public IUAEncoder UAEncoder
+    {
+      get { return m_IUAEncoder; }
+    }
     #endregion
 
     #region private
+    //types
+    /// <summary>
+    /// Class UABinaryEncoderImplementation - limited implementation of the <see cref="UABinaryEncoder"/> for the testing purpose only.
+    /// </summary>
+    private class UABinaryEncoderImplementation : UABinaryEncoder
+    {
+      public override void WriteByteString(IBinaryEncoder encoder, byte[] value)
+      {
+        throw new NotImplementedException();
+      }
+      public override void WriteDataValue(IBinaryEncoder encoder, IDataValue value)
+      {
+        throw new NotImplementedException();
+      }
+      public override void WriteDiagnosticInfo(IBinaryEncoder encoder, IDiagnosticInfo value)
+      {
+        throw new NotImplementedException();
+      }
+      public override void WriteExpandedNodeId(IBinaryEncoder encoder, IExpandedNodeId value)
+      {
+        throw new NotImplementedException();
+      }
+      public override void WriteExtensionObject(IBinaryEncoder encoder, IExtensionObject value)
+      {
+        throw new NotImplementedException();
+      }
+      public override void WriteGuid(IBinaryEncoder encoder, Guid value)
+      {
+        throw new NotImplementedException();
+      }
+      public override void WriteLocalizedText(IBinaryEncoder encoder, ILocalizedText value)
+      {
+        throw new NotImplementedException();
+      }
+      public override void WriteNodeId(IBinaryEncoder encoder, INodeId value)
+      {
+        throw new NotImplementedException();
+      }
+      public override void WriteQualifiedName(IBinaryEncoder encoder, IQualifiedName value)
+      {
+        throw new NotImplementedException();
+      }
+      public override void WriteStatusCode(IBinaryEncoder encoder, IStatusCode value)
+      {
+        throw new NotImplementedException();
+      }
+      public override void WriteXmlElement(IBinaryEncoder encoder, XmlElement value)
+      {
+        throw new NotImplementedException();
+      }
+    }
+    //simulator vars
     private ProducerBindingMonitoredValue<DateTime> Value1 { get; set; }
     private ProducerBindingMonitoredValue<double> Value2 { get; set; }
+    //vars
     private const string m_Variable1Name = "Value1";
     private const string m_Variable2Name = "Value2";
     private const string m_RepositoryGroup = "repositoryGroup";
     private Timer m_Timer;
     private Random m_Random = new Random();
+    private readonly IUAEncoder m_IUAEncoder = new UABinaryEncoderImplementation();
+    //methods
     private void TimerCallback(object state)
     {
       if (Value1.HandlerState == HandlerState.Operational)
@@ -124,7 +184,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       if (Value2.HandlerState == HandlerState.Operational)
         Value2.MonitoredValue = m_Random.NextDouble();
     }
-
     #endregion
 
   }

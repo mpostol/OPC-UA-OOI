@@ -57,7 +57,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       }
       public override void Synchronize()
       {
-        m_writer.Write(DataSetId);
+        m_writer.WriteGuid(DataSetId);
       }
       private IBinaryHeaderWriter m_writer;
     }

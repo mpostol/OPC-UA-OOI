@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.IO;
+using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
@@ -20,7 +21,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryMessageEncoder"/> class.
     /// </summary>
-    public BinaryMessageEncoder()
+    public BinaryMessageEncoder(IUAEncoder uaEncoder) : base(uaEncoder)
     {
       MessageHeader = MessageHeader.GetProducerMessageHeader(this);
     }

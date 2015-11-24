@@ -55,7 +55,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// <remarks>It is intentionally not implemented</remarks>
     /// <returns>An instance of <see cref="IMessageWriter"/>.</returns>
     /// <exception cref="System.NotImplementedException"></exception>
-    IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, XmlElement configuration)
+    IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, XmlElement configuration, IUAEncoder uaEncoder)
     {
       throw new NotImplementedException();
     }

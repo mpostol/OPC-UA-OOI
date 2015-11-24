@@ -1,5 +1,6 @@
 ﻿
 using System.Xml;
+using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
@@ -13,16 +14,17 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     /// <param name="name">The name of the reader.</param>
     /// <param name="configuration">The configuration of the object implementing the <see cref="IMessageReader" />.</param>
-    /// <param name="uaDecoder">The decoder that provides methods to be used to decode OPC UA Built-in types..</param>
+    /// <param name="uaDecoder">The decoder that provides methods to be used to decode OPC UA Built-in types.</param>
     /// <returns>An object implementing <see cref="IMessageReader"/> that provides functionality supporting reading the messages from the wire.</returns>
-    IMessageReader GetIMessageReader(string name, XmlElement configuration, Encoding.IUADecoder uaDecoder);
+    IMessageReader GetIMessageReader(string name, XmlElement configuration, IUADecoder uaDecoder);
     /// <summary>
     /// Gets the message writer.
     /// </summary>
     /// <param name="name">The name.</param>
     /// <param name="configuration">The configuration of the object implementing the <see cref="IMessageWriter"/>.</param>
-    /// <returns>IMessageWriter.</returns>
-    IMessageWriter GetIMessageWriter(string name, XmlElement configuration);
+    /// <param name="uaEncoder">The encoder that provides methods to be used to encode OPC UA Built-in types.</param>
+    /// <returns>An object implementing <see cref="IMessageWriter"/> that provides functionality supporting sending the messages over the wire.</returns>
+    IMessageWriter GetIMessageWriter(string name, XmlElement configuration, IUAEncoder uaEncoder);
 
   }
 }

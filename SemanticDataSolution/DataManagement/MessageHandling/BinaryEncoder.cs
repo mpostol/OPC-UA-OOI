@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.IO;
+using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
@@ -14,7 +15,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryEncoder"/> class wrapper of <see cref="UABinaryWriter"/> supporting OPC UA binary encoding..
     /// </summary>
-    public BinaryEncoder(Guid producerId) : base(producerId)
+    public BinaryEncoder(Guid producerId, IUAEncoder uaEncoder) : base(producerId, uaEncoder)
     {
       CreateUABinaryWriter();
     }
@@ -50,63 +51,47 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #region BinaryPackageEncoder
 
     #region BinaryWriter
-    protected override void WriteUInt64(ulong value, object parameter)
+    public override void WriteUInt64(ulong value)
     {
       m_BinaryWriter.Write(value);
     }
-    protected override void WriteUInt32(uint value, object parameter)
+    public override void WriteUInt32(uint value)
     {
       m_BinaryWriter.Write(value);
     }
-    protected override void WriteUInt16(ushort value, object parameter)
+    public override void WriteUInt16(ushort value)
     {
       m_BinaryWriter.Write(value);
     }
-    protected override void WriteString(string value, object parameter)
+    public override void WriteString(string value)
     {
       m_BinaryWriter.Write(value);
     }
-    protected override void WriteSingle(float value, object parameter)
+    public override void WriteSingle(float value)
     {
       m_BinaryWriter.Write(value);
     }
-    protected override void WriteSByte(sbyte value, object parameter)
+    public override void WriteSByte(sbyte value)
     {
       m_BinaryWriter.Write(value);
     }
-    protected override void WriteInt64(long value, object parameter)
+    public override void WriteInt64(long value)
     {
       m_BinaryWriter.Write(value);
     }
-    protected override void WriteInt32(int value, object parameter)
+    public override void WriteInt32(int value)
     {
       m_BinaryWriter.Write(value);
     }
-    protected override void WriteInt16(short value, object parameter)
+    public override void WriteInt16(short value)
     {
       m_BinaryWriter.Write(value);
     }
-    protected override void WriteDouble(double value, object parameter)
+    public override void WriteDouble(double value)
     {
       m_BinaryWriter.Write(value);
     }
-    protected override void WriteDecimal(decimal value, object parameter)
-    {
-      m_BinaryWriter.Write(Convert.ToInt64(value));
-    }
-    protected override void WriteDateTime(DateTime value, object parameter)
-    {
-      m_BinaryWriter.Write(global::UAOOI.SemanticData.DataManagement.MessageHandling.CommonDefinitions.GetUADataTimeTicks(value));
-    }
-    protected override void WriteByte(byte value, object parameter)
-    {
-      m_BinaryWriter.Write(value);
-    }
-    protected override void WriteBool(bool value, object parameter)
-    {
-      m_BinaryWriter.Write(value);
-    }
-    protected override void WriteChar(char value, object parameter)
+    public override void WriteBoolean(bool value)
     {
       m_BinaryWriter.Write(value);
     }
@@ -114,7 +99,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Writes an unsigned byte to the current stream and advances the stream position by one byte.
     /// </summary>
     /// <param name="value">TThe unsigned <see cref="byte"/> to write./param>
-    public override void Write(byte value)
+    public override void WriteByte(byte value)
     {
       m_BinaryWriter.Write(value);
     }
@@ -122,7 +107,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Writes a <see cref="Guid"/> to the current stream as a 16-element byte array that contains the value and advances the stream position by 16 bytes.
     /// </summary>
     /// <param name="value">The <see cref="Guid"/> value to write.</param>
-    public override void Write(Guid value)
+    public override void WriteGuid(Guid value)
+    {
+      m_BinaryWriter.Write(value);
+    }
+    public override void WriteBytes(byte[] value)
     {
       m_BinaryWriter.Write(value);
     }

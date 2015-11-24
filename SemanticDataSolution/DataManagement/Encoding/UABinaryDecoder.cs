@@ -22,7 +22,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     /// <summary>
     /// Reads the variant using the provided <see cref="IBinaryDecoder"/>.
     /// </summary>
-    /// <param name="decoder">The decoder to be used to read <see cref="IVariant"/> from the inmput byte stream.</param>
+    /// <param name="decoder">The decoder to be used to read <see cref="IVariant"/> from the input byte stream.</param>
     /// <returns>Returns am instance of the <see cref="IVariant"/> encapsulating the received value.</returns>
     public IVariant ReadVariant(IBinaryDecoder decoder)
     {

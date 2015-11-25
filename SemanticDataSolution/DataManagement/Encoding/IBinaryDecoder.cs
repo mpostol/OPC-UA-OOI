@@ -24,13 +24,8 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     float ReadSingle();
     double ReadDouble();
     string ReadString();
-    //TODO - remove from this interface - only method supported by the platform shall be here.
-    DateTime ReadDateTime();
-    /// <summary>
-    /// Reads the <see cref="Guid"/> from UA Binary encoded as a 16-element byte array that contains the value and advances the stream position by 16 bytes.<see cref="System.IO.Stream"/>.
-    /// </summary>
-    /// <returns>The <see cref="Guid"/> decoded from the <see cref="System.IO.Stream"/>.</returns>
-    Guid ReadGuid();
     byte[] ReadBytes(int count);
+    Guid ReadGuid();
+
   }
 }

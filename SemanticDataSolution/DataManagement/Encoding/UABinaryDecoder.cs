@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.Encoding
@@ -19,6 +20,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
   public abstract class UABinaryDecoder : IUADecoder
   {
 
+    #region IUADecoder - supported types
     /// <summary>
     /// Reads the variant using the provided <see cref="IBinaryDecoder"/>.
     /// </summary>
@@ -49,6 +51,27 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       }
       return value;
     }
+    /// <summary>
+    /// Reads the <see cref="Guid"/> from UA binary encoded as a 16-element byte array that contains the value and advances the stream position by 16 bytes.
+    /// </summary>
+    /// <returns>The <see cref="Guid"/> decoded from the UA binary encoded <see cref="Stream"/>.</returns>
+    public Guid ReadGuid(IBinaryDecoder decoder)
+    {
+      int m_EncodedGuidLength = 16;
+      byte[] bytes = decoder.ReadBytes(m_EncodedGuidLength);
+      return new Guid(bytes);
+    }
+    /// <summary>
+    /// Reads the <see cref="DateTime"/> from UA binary encoded as <see cref="Int64"/> that contains the value and advances the stream position by 8 bytes.
+    /// </summary>
+    /// <returns>The <see cref="DateTime "/> decoded from the UA binary encoded <see cref="Stream"/>.</returns>
+    public DateTime ReadDateTime(IBinaryDecoder decoder)
+    {
+      return CommonDefinitions.GetUADateTime(decoder.ReadInt64());
+    }
+    #endregion
+
+    #region IUADecoder - unsupported types
     public abstract byte[] ReadByteString(IBinaryDecoder decoder);
     public abstract IDataValue ReadDataValue(IBinaryDecoder decoder);
     public abstract IDiagnosticInfo ReadDiagnosticInfo(IBinaryDecoder decoder);
@@ -59,6 +82,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     public abstract IQualifiedName ReadQualifiedName(IBinaryDecoder decoder);
     public abstract XmlElement ReadXmlElement(IBinaryDecoder decoder);
     public abstract IStatusCode ReadStatusCode(IBinaryDecoder decoder);
+    #endregion
 
     #region private
     private class Variant : IVariant
@@ -158,9 +182,9 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         case BuiltInType.String:
           return new Variant(encoder.ReadString(), encodingByte);
         case BuiltInType.DateTime:
-          return new Variant(encoder.ReadDateTime(), encodingByte);
+          return new Variant(ReadDateTime(encoder), encodingByte);
         case BuiltInType.Guid:
-          return new Variant(encoder.ReadGuid(), encodingByte);
+          return new Variant(ReadGuid(encoder), encodingByte);
         case BuiltInType.ByteString:
           return new Variant(ReadByteString(encoder), encodingByte);
         case BuiltInType.XmlElement:
@@ -213,7 +237,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         case BuiltInType.String:
           return ReadArray<string>(length, encoder.ReadString);
         case BuiltInType.DateTime:
-          return ReadArray<DateTime>(length, encoder.ReadDateTime);
+          return ReadArray<DateTime>(length, () => ReadDateTime(encoder));
         case BuiltInType.Guid:
           return ReadArray<Guid>(length, encoder.ReadGuid);
         case BuiltInType.ByteString:

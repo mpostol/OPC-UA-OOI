@@ -6,7 +6,7 @@ using UAOOI.SemanticData.DataManagement.Encoding;
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
   /// <summary>
-  /// Class BinaryEncoder - wrapper of <see cref="UABinaryWriter"/> supporting OPC UA binary encoding.
+  /// Class BinaryEncoder - wrapper of <see cref="BinaryWriter"/> supporting OPC UA binary encoding.
   /// </summary>
   public abstract class BinaryEncoder : BinaryPackageEncoder, IDisposable
   {
@@ -103,14 +103,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       m_BinaryWriter.Write(value);
     }
-    /// <summary>
-    /// Writes a <see cref="Guid"/> to the current stream as a 16-element byte array that contains the value and advances the stream position by 16 bytes.
-    /// </summary>
-    /// <param name="value">The <see cref="Guid"/> value to write.</param>
-    public override void WriteGuid(Guid value)
-    {
-      m_BinaryWriter.Write(value);
-    }
     public override void WriteBytes(byte[] value)
     {
       m_BinaryWriter.Write(value);
@@ -146,7 +138,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #region private
     //vars
     private MemoryStream m_Output;
-    private UABinaryWriter m_BinaryWriter;
+    private BinaryWriter m_BinaryWriter;
     //methods
     /// <summary>
     /// Sends the message.
@@ -161,7 +153,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     private void CreateUABinaryWriter()
     {
       m_Output = new MemoryStream();
-      m_BinaryWriter = new UABinaryWriter(m_Output);
+      m_BinaryWriter = new BinaryWriter(m_Output);
       EncodePackageHeaders();
     }
     #endregion

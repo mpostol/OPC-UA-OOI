@@ -18,7 +18,12 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Initializes a new instance of the <see cref="MessageReaderBase"/> class providing basic implementation of the <see cref="IMessageReader"/> interface.
     /// </summary>
     /// <param name="uaDecoder">The decoder that provides methods to be used to decode OPC UA Built-in types.</param>
-    public MessageReaderBase(IUADecoder uaDecoder) { }
+    public MessageReaderBase(IUADecoder uaDecoder)
+    {
+      if (uaDecoder == null)
+        throw new ArgumentNullException(nameof(uaDecoder));
+      m_UADecoder = uaDecoder;
+    }
     #endregion
 
     #region IMessageReader
@@ -94,12 +99,19 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     public abstract char ReadChar();
     public abstract Byte ReadByte();
     public abstract Boolean ReadBoolean();
-    public abstract DateTime ReadDateTime();
-    public abstract Guid ReadGuid();
     public abstract byte[] ReadBytes(int count);
+    public DateTime ReadDateTime()
+    {
+      return m_UADecoder.ReadDateTime(this);
+    }
+    public Guid ReadGuid()
+    {
+      return m_UADecoder.ReadGuid(this);
+    }
     #endregion
 
     #region private
+    private IUADecoder m_UADecoder;
     /// <summary>
     /// Gets the message header.
     /// </summary>
@@ -117,7 +129,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         return;
       ReadMessageCompleted(this, new MessageEventArg(this));
     }
-    private IUADecoder UABinaryDecoder { get; set; }
     private void ReadValue(IConsumerBinding binding)
     {
       object _value = null;
@@ -166,38 +177,38 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           _value = ReadGuid();
           break;
         case BuiltInType.ByteString:
-          UABinaryDecoder.ReadByteString(this);
+          m_UADecoder.ReadByteString(this);
           break;
         case BuiltInType.XmlElement:
-          _value = UABinaryDecoder.ReadXmlElement(this);
+          _value = m_UADecoder.ReadXmlElement(this);
           break;
         case BuiltInType.NodeId:
-          _value = UABinaryDecoder.ReadNodeId(this);
+          _value = m_UADecoder.ReadNodeId(this);
           break;
         case BuiltInType.ExpandedNodeId:
-          _value = UABinaryDecoder.ReadExpandedNodeId(this);
+          _value = m_UADecoder.ReadExpandedNodeId(this);
           break;
         case BuiltInType.StatusCode:
-          _value = UABinaryDecoder.ReadStatusCode(this);
+          _value = m_UADecoder.ReadStatusCode(this);
           break;
         case BuiltInType.QualifiedName:
-          _value = UABinaryDecoder.ReadQualifiedName(this);
+          _value = m_UADecoder.ReadQualifiedName(this);
           break;
         case BuiltInType.LocalizedText:
-          _value = UABinaryDecoder.ReadLocalizedText(this);
+          _value = m_UADecoder.ReadLocalizedText(this);
           break;
         case BuiltInType.ExtensionObject:
-          _value = UABinaryDecoder.ReadExtensionObject(this);
+          _value = m_UADecoder.ReadExtensionObject(this);
           break;
         case BuiltInType.DataValue:
-          _value = UABinaryDecoder.ReadDataValue(this);
+          _value = m_UADecoder.ReadDataValue(this);
           break;
         case BuiltInType.Variant:
-          IVariant _ret = UABinaryDecoder.ReadVariant(this);
+          IVariant _ret = m_UADecoder.ReadVariant(this);
           _value = _ret.Value;
           break;
         case BuiltInType.DiagnosticInfo:
-          _value = UABinaryDecoder.ReadDiagnosticInfo(this);
+          _value = m_UADecoder.ReadDiagnosticInfo(this);
           break;
         default:
           throw new ArgumentOutOfRangeException(string.Format("Impossible to convert the type {0}", binding.Encoding));

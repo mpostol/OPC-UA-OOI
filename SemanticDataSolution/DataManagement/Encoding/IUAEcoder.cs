@@ -23,6 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     void WriteXmlElement(IBinaryEncoder encoder, XmlElement value);
     void WriteStatusCode(IBinaryEncoder encoder, IStatusCode value);
     void WriteVariant(IBinaryEncoder encoder, IVariant  value);
+    void WriteGuid(IBinaryEncoder encoder, Guid value);
 
   }
 

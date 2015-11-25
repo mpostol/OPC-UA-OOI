@@ -265,10 +265,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         MassageCreated = true;
       }
       protected override void SendMessage() { }
-      public override void WriteGuid(Guid value)
-      {
-        throw new NotImplementedException();
-      }
       public override void WriteBytes(byte[] value)
       {
         throw new NotImplementedException();

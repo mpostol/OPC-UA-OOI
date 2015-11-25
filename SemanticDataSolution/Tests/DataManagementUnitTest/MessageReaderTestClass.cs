@@ -276,10 +276,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
-      public override Guid ReadGuid()
-      {
-        throw new NotImplementedException();
-      }
       public override ulong ContentMask
       {
         get
@@ -291,10 +287,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
-      public override DateTime ReadDateTime()
-      {
-        throw new NotImplementedException();
-      }
+
       public override void AttachToNetwork()
       {
         Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);

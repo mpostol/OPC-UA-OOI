@@ -67,7 +67,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       }
       SendMessage();
     }
-
     /// <summary>
     /// If implemented in derived class gets the state machine for this instance.
     /// </summary>
@@ -100,7 +99,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Writes a <see cref="Guid"/> to the current stream as a 16-element byte array that contains the value and advances the stream position by 16 bytes.
     /// </summary>
     /// <param name="value">The <see cref="Guid"/> value to write.</param>
-    public abstract void WriteGuid(Guid value);
+    public void WriteGuid(Guid value)
+    {
+      m_UAEncoder.WriteGuid(this, value);
+    }
     public abstract void WriteBytes(byte[] value);
     /// <summary>
     /// Writes an unsigned byte to the current stream and advances the stream position by one byte.

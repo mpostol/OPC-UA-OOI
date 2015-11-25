@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Xml;
 
 namespace UAOOI.SemanticData.DataManagement.Encoding
@@ -9,7 +10,12 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
   /// </summary>
   public interface IUADecoder
   {
-
+    /// <summary>
+    /// Reads the <see cref="Guid"/> from UA Binary encoded as a 16-element byte array that contains the value and advances the input message position by 16 bytes.
+    /// </summary>
+    /// <returns>The <see cref="Guid"/> decoded from the input message.</returns>
+    Guid ReadGuid(IBinaryDecoder decoder);
+    DateTime ReadDateTime(IBinaryDecoder decoder);
     byte[] ReadByteString(IBinaryDecoder decoder);
     IDataValue ReadDataValue(IBinaryDecoder decoder);
     IDiagnosticInfo ReadDiagnosticInfo(IBinaryDecoder decoder);

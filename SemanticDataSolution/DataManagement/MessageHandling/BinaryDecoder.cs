@@ -106,14 +106,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       return m_UABinaryReader.ReadBoolean();
     }
-    public override DateTime ReadDateTime()
-    {
-      return m_UABinaryReader.ReadDateTime();
-    }
-    public override Guid ReadGuid()
-    {
-      return m_UABinaryReader.ReadGuid();
-    }
     public override byte[] ReadBytes(int count)
     {
       return m_UABinaryReader.ReadBytes(count);

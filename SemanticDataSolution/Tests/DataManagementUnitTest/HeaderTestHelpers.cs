@@ -194,11 +194,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       throw new NotImplementedException();
     }
 
-    DateTime IBinaryDecoder.ReadDateTime()
-    {
-      throw new NotImplementedException();
-    }
-
     public byte[] ReadBytes(int count)
     {
       throw new NotImplementedException();

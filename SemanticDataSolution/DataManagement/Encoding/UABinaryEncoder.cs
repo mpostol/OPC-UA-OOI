@@ -13,20 +13,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
   public abstract class UABinaryEncoder : IUAEncoder
   {
 
-    #region public API
-    public virtual void WriteDateTime(IBinaryEncoder encoder, DateTime value)
-    {
-      encoder.WriteInt64(CommonDefinitions.GetUADataTimeTicks(value));
-    }
-    public abstract void WriteByteString(IBinaryEncoder encoder, byte[] value);
-    public abstract void WriteDataValue(IBinaryEncoder encoder, IDataValue value);
-    public abstract void WriteDiagnosticInfo(IBinaryEncoder encoder, IDiagnosticInfo value);
-    public abstract void WriteExpandedNodeId(IBinaryEncoder encoder, IExpandedNodeId value);
-    public abstract void WriteExtensionObject(IBinaryEncoder encoder, IExtensionObject value);
-    public abstract void WriteLocalizedText(IBinaryEncoder encoder, ILocalizedText value);
-    public abstract void WriteNodeId(IBinaryEncoder encoder, INodeId value);
-    public abstract void WriteQualifiedName(IBinaryEncoder encoder, IQualifiedName value);
-    public abstract void WriteStatusCode(IBinaryEncoder encoder, IStatusCode value);
+    #region IUAEncoder - supported types
     /// <summary>
     /// Writes the variant using provided encoder <see cref="IBinaryEncoder"/>
     /// </summary>
@@ -69,8 +56,32 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         }
       }
     }
+    public virtual void WriteDateTime(IBinaryEncoder encoder, DateTime value)
+    {
+      encoder.WriteInt64(CommonDefinitions.GetUADataTimeTicks(value));
+    }
+    /// <summary>
+    /// Writes a <see cref="Guid" /> to the current stream as a 16-element byte array that contains the value and advances the stream position by 16 bytes.
+    /// </summary>
+    /// <param name="encoder">The encoder to write the value encapsulated in this instance.</param>
+    /// <param name="value">The value to be encoded as an instance of <see cref="Guid"/>.</param>
+    public virtual void WriteGuid(IBinaryEncoder encoder, Guid value)
+    {
+      encoder.WriteBytes(value.ToByteArray());
+    }
+    #endregion
+
+    #region IUAEncoder - unsupported types - should be implemented by comercial products.
+    public abstract void WriteByteString(IBinaryEncoder encoder, byte[] value);
+    public abstract void WriteDataValue(IBinaryEncoder encoder, IDataValue value);
+    public abstract void WriteDiagnosticInfo(IBinaryEncoder encoder, IDiagnosticInfo value);
+    public abstract void WriteExpandedNodeId(IBinaryEncoder encoder, IExpandedNodeId value);
+    public abstract void WriteExtensionObject(IBinaryEncoder encoder, IExtensionObject value);
+    public abstract void WriteLocalizedText(IBinaryEncoder encoder, ILocalizedText value);
+    public abstract void WriteNodeId(IBinaryEncoder encoder, INodeId value);
+    public abstract void WriteQualifiedName(IBinaryEncoder encoder, IQualifiedName value);
+    public abstract void WriteStatusCode(IBinaryEncoder encoder, IStatusCode value);
     public abstract void WriteXmlElement(IBinaryEncoder encoder, XmlElement value);
-    public abstract void WriteGuid(IBinaryEncoder encoder, Guid value);
     #endregion
 
     #region private

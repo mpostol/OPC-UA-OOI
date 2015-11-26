@@ -141,10 +141,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       {
         throw new NotImplementedException();
       }
-      public override void WriteGuid(IBinaryEncoder encoder, Guid value)
-      {
-        throw new NotImplementedException();
-      }
       public override void WriteLocalizedText(IBinaryEncoder encoder, ILocalizedText value)
       {
         throw new NotImplementedException();

@@ -20,6 +20,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// The time base DateTime to calculate ticks sent over wire for UA binary representation.
     /// </summary>
     public static readonly DateTime TimeBase = new DateTime(1601, 1, 1); //
+    public static readonly DateTime TimeBaseMaxValue = new DateTime(9999, 12, 31, 23, 59, 59); //
     /// <summary>
     /// Decode the UA date and time form ticks.
     /// </summary>
@@ -46,7 +47,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       if (value.Kind == DateTimeKind.Local)
         value = value.ToUniversalTime();
       long _ticks = value.Ticks;
-      if (_ticks >= DateTime.MaxValue.Ticks)
+      if (_ticks >= TimeBaseMaxValue.Ticks)
         _ticks = Int64.MaxValue;
       else
       {

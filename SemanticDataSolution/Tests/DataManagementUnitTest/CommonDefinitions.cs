@@ -1,5 +1,6 @@
 ﻿
 using System;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -38,15 +39,28 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           //0x01, 0x02, 0x03,                                   //byte[]
       };
     }
+    internal struct DateTimeVariantEncoding
+    {
+      internal DateTime dateTime;
+      internal byte[] encoding;
+    }
+    internal static readonly DateTime TestMinimalDateTime = new DateTime(1601, 1, 1);
+    internal static readonly DateTime TestMaximumDateTime = new DateTime(9999, 12, 31, 23, 59, 59);
+    internal static readonly Guid TestGuid = new Guid("A6195DF3-0B30-4C25-8BF8-45B076402116");
+    internal static DateTimeVariantEncoding[] DateTimeTestingValues = new DateTimeVariantEncoding[]
+    {
+      new DateTimeVariantEncoding() {  dateTime = TestMinimalDateTime, encoding = new byte[] { (byte)BuiltInType.DateTime, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } },
+      new DateTimeVariantEncoding() {  dateTime = TestMaximumDateTime, encoding = new byte[] { (byte)BuiltInType.DateTime, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7f } },
+      new DateTimeVariantEncoding() {  dateTime = new DateTime(9999, 12, 31, 23, 59, 58), encoding = new byte[] { (byte)BuiltInType.DateTime, 0x00, 0x13, 0x8f,0xd0, 0x5e, 0x5a, 0xc8, 0x24 } }
+    };
     /// <summary>
     /// The producer identifier - should be moved to the configuration - see spec for current definition.
     /// </summary>
-    internal static readonly Guid TestGuid = new Guid("A6195DF3-0B30-4C25-8BF8-45B076402116");
     internal static object[] TestValues = new object[]
       {
         (ulong)123, (uint)123, (ushort)123, "123",
         (float)123, (sbyte)123, (long)123, (int)123,
-        (short)123, (double)123, /*(decimal)123,*/ new DateTime(1601, 1, 1),
+        (short)123, (double)123, /*(decimal)123,*/ TestMinimalDateTime,
         (byte)123, true/*, 'A'*/}; //, new byte[] { 1, 2, 3 } };
   }
 }

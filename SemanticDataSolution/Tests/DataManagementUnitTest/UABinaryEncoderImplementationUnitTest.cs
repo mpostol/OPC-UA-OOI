@@ -3,12 +3,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using UAOOI.SemanticData.DataManagement.Encoding;
 using System.Xml;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using System.Linq;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
   [TestClass]
   public class UABinaryEncoderImplementationUnitTest
   {
+    #region TestMethod
     [TestMethod]
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
     [ExpectedException(typeof(NotImplementedException))]
@@ -45,6 +48,47 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Guid _recoveredGuid = new Guid(_EncodedGuid);
       Assert.AreEqual<Guid>(_Guid, _recoveredGuid);
     }
+    [TestMethod]
+    [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
+    public void VariantGuidTestMethod()
+    {
+      MemoryStream _stream = new MemoryStream();
+      TestBinaryWriter _buffer = new TestBinaryWriter(_stream);
+      Assert.IsNotNull(_buffer);
+      byte[] _EncodedVGuid = null;
+      Variant _variant = new Variant { UATypeInfo = new UATypeInfo(BuiltInType.Guid), Value = CommonDefinitions.TestGuid };
+      _buffer.WriteVariant(_buffer, _variant);
+      _buffer.Close();
+      _EncodedVGuid = _stream.ToArray();
+      Assert.IsNotNull(_EncodedVGuid);
+      Assert.AreEqual<int>(17, _EncodedVGuid.Length);
+      ArraySegment<byte> _segment = new ArraySegment<byte>(_EncodedVGuid, 1, 16);
+      Assert.AreEqual<byte>((byte)BuiltInType.Guid, _EncodedVGuid[0]);
+      CollectionAssert.AreEqual(CommonDefinitions.TestGuid.ToByteArray(), _segment.ToList<byte>());
+    }
+    [TestMethod]
+    [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
+    public void VariantDateTimeTestMethod()
+    {
+      foreach (CommonDefinitions.DateTimeVariantEncoding _dtx in CommonDefinitions.DateTimeTestingValues)
+      {
+        MemoryStream _stream = new MemoryStream();
+        TestBinaryWriter _buffer = new TestBinaryWriter(_stream);
+        Assert.IsNotNull(_buffer);
+        byte[] _EncodedVGuid = null;
+        Variant _variant = new Variant { UATypeInfo = new UATypeInfo(BuiltInType.DateTime), Value = _dtx.dateTime };
+        _buffer.WriteVariant(_buffer, _variant);
+        _buffer.Close();
+        _EncodedVGuid = _stream.ToArray();
+        Assert.IsNotNull(_EncodedVGuid);
+        Assert.AreEqual<int>(9, _EncodedVGuid.Length);
+        Assert.AreEqual<byte>((byte)BuiltInType.DateTime, _EncodedVGuid[0]);
+        CollectionAssert.AreEqual(_dtx.encoding, _EncodedVGuid.ToList<byte>());
+      }
+    }
+    #endregion
+
+    #region testing instrumentation
     private class TestBinaryWriter : BinaryWriter, Encoding.IBinaryEncoder, IUAEncoder
     {
       public TestBinaryWriter(Stream output) : base(output)
@@ -168,6 +212,19 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       IUAEncoder _encoder = new Helpers.UABinaryEncoderImplementation();
     }
+    private class Variant : IVariant
+    {
+      public UATypeInfo UATypeInfo
+      {
+        get; set;
+      }
+
+      public object Value
+      {
+        get; set;
+      }
+    }
+    #endregion
 
   }
 }

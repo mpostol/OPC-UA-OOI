@@ -125,10 +125,12 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       {
         throw new NotImplementedException();
       }
+
       public override void WriteDataValue(IBinaryEncoder encoder, IDataValue value)
       {
         throw new NotImplementedException();
       }
+
       public override void WriteDiagnosticInfo(IBinaryEncoder encoder, IDiagnosticInfo value)
       {
         throw new NotImplementedException();

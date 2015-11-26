@@ -1,11 +1,12 @@
 ﻿
 using System;
+using System.IO;
 using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
   /// <summary>
-  /// Class BinaryDecoder - wrapper of <see cref="UABinaryReader"/> supporting OPC UA binary encoding.
+  /// Class BinaryDecoder - wrapper of <see cref="BinaryReader"/> supporting OPC UA binary encoding.
   /// </summary>
   public abstract class BinaryDecoder : BinaryPackageDecoder, IDisposable
   {
@@ -29,7 +30,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         return;
       if (disposing)
       {
-        UABinaryReader _lc = m_UABinaryReader;
+        BinaryReader _lc = m_UABinaryReader;
         if (_lc != null)
           _lc.Close();
         m_UABinaryReader = null;
@@ -120,14 +121,14 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// The UA binary reader an instance of <see cref="UABinaryReader"/> created after new frame has been arrived.
     /// </param>
     /// <remarks> Just after processing the object is disposed.</remarks>
-    protected void OnNewFrameArrived(UABinaryReader uaBinaryReader)
+    protected void OnNewFrameArrived(BinaryReader uaBinaryReader)
     {
       m_UABinaryReader = uaBinaryReader;
       OnNewPackageArrived();
       m_UABinaryReader.Dispose();
       m_UABinaryReader = null; ;
     }
-    private UABinaryReader m_UABinaryReader;
+    private BinaryReader m_UABinaryReader;
     #endregion
 
   }

@@ -436,6 +436,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_NumberOfAttachToNetwork++;
         m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
       }
+      #endregion
+
+      #region private
       /// <summary>
       /// Implements <see cref="AsyncCallback"/> for UDP begin receive.
       /// </summary>
@@ -450,7 +453,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           _receiveBytes = m_UdpClient.EndReceive(asyncResult, ref _UEndPoint);
           m_Trace(String.Format("Received length ={0}", _receiveBytes == null ? -1 : _receiveBytes.Length));
           MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
-          OnNewFrameArrived(new UABinaryReader(_stream));
+          OnNewFrameArrived(new BinaryReader(_stream));
           m_Trace("BeginReceive");
           m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
         }
@@ -465,9 +468,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_Trace("Exiting m_ReceiveAsyncCallback");
       }
 
-      #endregion
-
-      #region private
       private ISemanticData m_SemanticData;
       #endregion
 

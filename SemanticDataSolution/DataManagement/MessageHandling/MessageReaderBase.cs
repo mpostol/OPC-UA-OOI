@@ -23,6 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       if (uaDecoder == null)
         throw new ArgumentNullException(nameof(uaDecoder));
       m_UADecoder = uaDecoder;
+      m_ReadValueDelegate = ReadValueVariant;
     }
     #endregion
 
@@ -78,7 +79,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         if ((ContentMask & _mask) > 0)
         {
           IConsumerBinding _binding = update(i);
-          ReadValue(_binding);
+          m_ReadValueDelegate(_binding);
         }
         _mask = _mask << 1;
       }
@@ -111,7 +112,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #endregion
 
     #region private
+    //vars
     private IUADecoder m_UADecoder;
+    private Action<IConsumerBinding> m_ReadValueDelegate = null;
+    //methods
     /// <summary>
     /// Gets the message header.
     /// </summary>
@@ -129,10 +133,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         return;
       ReadMessageCompleted(this, new MessageEventArg(this));
     }
-    private void ReadValue(IConsumerBinding binding)
+    private void ReadValue(IConsumerBinding consumerBinding)
     {
       object _value = null;
-      switch (binding.Encoding)
+      switch (consumerBinding.Encoding)
       {
         case BuiltInType.Boolean:
           _value = ReadBoolean();
@@ -204,16 +208,20 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           _value = m_UADecoder.ReadDataValue(this);
           break;
         case BuiltInType.Variant:
-          IVariant _ret = m_UADecoder.ReadVariant(this);
-          _value = _ret.Value;
+          _value = m_UADecoder.ReadVariant(this);
           break;
         case BuiltInType.DiagnosticInfo:
           _value = m_UADecoder.ReadDiagnosticInfo(this);
           break;
         default:
-          throw new ArgumentOutOfRangeException(string.Format("Impossible to convert the type {0}", binding.Encoding));
+          throw new ArgumentOutOfRangeException(string.Format("Impossible to convert the type {0}", consumerBinding.Encoding));
       }
-      binding.Assign2Repository(_value);
+      consumerBinding.Assign2Repository(_value);
+    }
+    private void ReadValueVariant(IConsumerBinding consumerBinding)
+    {
+      IVariant _ret = m_UADecoder.ReadVariant(this);
+      consumerBinding.Assign2Repository(_ret.Value);
     }
     #endregion
 

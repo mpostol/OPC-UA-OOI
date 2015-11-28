@@ -38,21 +38,18 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       }
       else
       {
-        if (value.UATypeInfo.ValueRank >= 0)
+        IMatrix matrix = null;
+        _encodingByte |= (byte)VariantEncodingMask.IsArray;
+        if (value.UATypeInfo.ValueRank > 1)
         {
-          IMatrix matrix = null;
-          _encodingByte |= (byte)VariantEncodingMask.IsArray;
-          if (value.UATypeInfo.ValueRank > 1)
-          {
-            _encodingByte |= (byte)VariantEncodingMask.ArrayDimensionsPresents;
-            matrix = (IMatrix)valueToEncode;
-            valueToEncode = matrix.Elements;
-          }
-          encoder.Write(_encodingByte);
-          WriteArray(encoder, value.UATypeInfo.BuiltInType, valueToEncode);
-          if (value.UATypeInfo.ValueRank > 1)
-            WriteDimensions(encoder, matrix.Dimensions);
+          _encodingByte |= (byte)VariantEncodingMask.ArrayDimensionsPresents;
+          matrix = (IMatrix)valueToEncode;
+          valueToEncode = matrix.Elements;
         }
+        encoder.Write(_encodingByte);
+        WriteArray(encoder, value.UATypeInfo.BuiltInType, valueToEncode);
+        if (value.UATypeInfo.ValueRank > 1)
+          WriteDimensions(encoder, matrix.Dimensions);
       }
     }
     public virtual void Write(IBinaryEncoder encoder, DateTime value)

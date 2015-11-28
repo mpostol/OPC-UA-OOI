@@ -39,6 +39,34 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           //0x01, 0x02, 0x03,                                   //byte[]
       };
     }
+    internal static byte[] GetTestBinaryArrayVariant()
+    {
+      return new byte[]
+      {
+          //Package header
+          0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16, //guid - PublisherId
+          0x01,                                               //byte MessageFlags
+          0x00,                                               //byte ProtocolVersion
+          0x00,                                               //byte SecurityTokenId
+          0x01,                                               //byte MessageCount
+          //Message header
+          0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16, //guid - PublisherId
+          //Message content
+          (byte)BuiltInType.UInt64, 0x7b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,    //UInt64
+          (byte)BuiltInType.UInt32, 0x7b, 0x00, 0x00, 0x00,                            //UInt32
+          (byte)BuiltInType.UInt16, 0x7b, 0x00,                                        //UInt16
+          (byte)BuiltInType.String, 0x03, 0x31, 0x32, 0x33,                            //string
+          (byte)BuiltInType.Float, 0x00, 0x00, 0xf6, 0x42,                             //Float
+          (byte)BuiltInType.SByte, 0x7b,                                               //sbyte
+          (byte)BuiltInType.Int64, 0x7b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //Int64
+          (byte)BuiltInType.Int32, 0x7b, 0x00, 0x00, 0x00,                             //Int32
+          (byte)BuiltInType.Int16, 0x7b, 0x00,                                         //Int16
+          (byte)BuiltInType.Double, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x5e, 0x40,    //Double
+          (byte)BuiltInType.DateTime, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  //DateTime
+          (byte)BuiltInType.Byte, 0x7b,                                                //Byte
+          (byte)BuiltInType.Boolean, 0x01,                                             //boolean
+      };
+    }
     internal struct DateTimeVariantEncoding
     {
       internal DateTime dateTime;

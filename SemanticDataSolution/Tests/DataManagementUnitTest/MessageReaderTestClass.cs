@@ -86,9 +86,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           _bindings[i] = new ConsumerBinding(i, _assign, Type.GetTypeCode(CommonDefinitions.TestValues[i].GetType()));
         int _redItems = 0;
         _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _semanticData, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
-        _reader.SendUDPMessage(CommonDefinitions.GetTestBinaryArray(), _semanticData, _port);
+        _reader.SendUDPMessage(CommonDefinitions.GetTestBinaryArrayVariant(), _semanticData, _port);
         Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(91, _reader.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(104, _reader.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
         Thread.Sleep(1500);
         Assert.AreEqual<int>(_buffer.Length, _redItems);

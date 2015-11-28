@@ -23,6 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       if (uaEncoder == null)
         throw new ArgumentNullException(nameof(uaEncoder));
       m_UAEncoder = uaEncoder;
+      m_WriteValueDelegate = WriteValueVariant;
     }
     #endregion
 
@@ -61,7 +62,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         if ((ContentMask & _mask) > 0)
         {
           IProducerBinding _pb = producerBinding(i);
-          WriteValue(_pb);
+          m_WriteValueDelegate(_pb);
         }
         _mask = _mask << 1;
       }
@@ -112,13 +113,56 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #endregion
 
     #region private
+    //types
+    private class Variant : IVariant
+    {
+      public Variant(UATypeInfo typeInfo, object value)
+      {
+        switch (typeInfo.BuiltInType)
+        {
+          case BuiltInType.Null:
+            throw new ArgumentOutOfRangeException(nameof(typeInfo), "Null is not permitted in the Variant");
+          case BuiltInType.Boolean:
+          case BuiltInType.SByte:
+          case BuiltInType.Byte:
+          case BuiltInType.Int16:
+          case BuiltInType.UInt16:
+          case BuiltInType.Int32:
+          case BuiltInType.UInt32:
+          case BuiltInType.Int64:
+          case BuiltInType.UInt64:
+          case BuiltInType.Float:
+          case BuiltInType.Double:
+          case BuiltInType.String:
+          case BuiltInType.DateTime:
+            if (value == null)
+              throw new NullReferenceException("Value type cannot be null.");
+            break;
+          default:
+            break;
+        }
+        UATypeInfo = typeInfo;
+        Value = value;
+      }
+      public UATypeInfo UATypeInfo
+      {
+        get; private set;
+      }
+      public object Value
+      {
+        get; private set;
+      }
+    }
+    //vars
+    private IUAEncoder m_UAEncoder;
+    private Action<IProducerBinding> m_WriteValueDelegate = null;
+    //methods
     protected abstract void CreateMessage(int length, Guid dataSetId);
     protected abstract void SendMessage();
-    private IUAEncoder m_UAEncoder;
-    private void WriteValue(IProducerBinding _pb)
+    private void WriteValue(IProducerBinding producerBinding)
     {
-      object value = _pb.GetFromRepository();
-      switch (_pb.Encoding)
+      object value = producerBinding.GetFromRepository();
+      switch (producerBinding.Encoding)
       {
         case BuiltInType.Boolean:
           Write((Boolean)value);
@@ -198,8 +242,14 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           break;
         case BuiltInType.Null:
         default:
-          throw new ArgumentOutOfRangeException($"Impossible to convert {value} of type {_pb.Encoding}");
+          throw new ArgumentOutOfRangeException($"Impossible to convert {value} of type {producerBinding.Encoding}");
       }
+    }
+    private void WriteValueVariant(IProducerBinding producerBinding)
+    {
+      object value = producerBinding.GetFromRepository();
+      Variant _variant = new Variant(new UATypeInfo(producerBinding.Encoding), value);
+      m_UAEncoder.Write(this, _variant);
     }
     #endregion
 

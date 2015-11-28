@@ -121,45 +121,45 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// </summary>
     private class UABinaryEncoderImplementation : UABinaryEncoder
     {
-      public override void WriteByteString(IBinaryEncoder encoder, byte[] value)
+      public override void Write(IBinaryEncoder encoder, byte[] value)
       {
         throw new NotImplementedException();
       }
 
-      public override void WriteDataValue(IBinaryEncoder encoder, IDataValue value)
+      public override void Write(IBinaryEncoder encoder, IDataValue value)
       {
         throw new NotImplementedException();
       }
 
-      public override void WriteDiagnosticInfo(IBinaryEncoder encoder, IDiagnosticInfo value)
+      public override void Write(IBinaryEncoder encoder, IDiagnosticInfo value)
       {
         throw new NotImplementedException();
       }
-      public override void WriteExpandedNodeId(IBinaryEncoder encoder, IExpandedNodeId value)
+      public override void Write(IBinaryEncoder encoder, IExpandedNodeId value)
       {
         throw new NotImplementedException();
       }
-      public override void WriteExtensionObject(IBinaryEncoder encoder, IExtensionObject value)
+      public override void Write(IBinaryEncoder encoder, IExtensionObject value)
       {
         throw new NotImplementedException();
       }
-      public override void WriteLocalizedText(IBinaryEncoder encoder, ILocalizedText value)
+      public override void Write(IBinaryEncoder encoder, ILocalizedText value)
       {
         throw new NotImplementedException();
       }
-      public override void WriteNodeId(IBinaryEncoder encoder, INodeId value)
+      public override void Write(IBinaryEncoder encoder, INodeId value)
       {
         throw new NotImplementedException();
       }
-      public override void WriteQualifiedName(IBinaryEncoder encoder, IQualifiedName value)
+      public override void Write(IBinaryEncoder encoder, IQualifiedName value)
       {
         throw new NotImplementedException();
       }
-      public override void WriteStatusCode(IBinaryEncoder encoder, IStatusCode value)
+      public override void Write(IBinaryEncoder encoder, IStatusCode value)
       {
         throw new NotImplementedException();
       }
-      public override void WriteXmlElement(IBinaryEncoder encoder, XmlElement value)
+      public override void Write(IBinaryEncoder encoder, XmlElement value)
       {
         throw new NotImplementedException();
       }

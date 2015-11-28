@@ -152,7 +152,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
             return;
           b_MessageCount = value;
           SetPosition(m_MessageCountPosition);
-          m_Writer.WriteByte(b_MessageCount);
+          m_Writer.Write(b_MessageCount);
           RestorePosition();
         }
       }
@@ -193,12 +193,12 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       /// </summary>
       public override void Synchronize()
       {
-        m_Writer.WriteGuid(PublisherId);
-        m_Writer.WriteByte(MessageFlags);
-        m_Writer.WriteByte(ProtocolVersion);
-        m_Writer.WriteByte(SecurityTokenId);
+        m_Writer.Write(PublisherId);
+        m_Writer.Write(MessageFlags);
+        m_Writer.Write(ProtocolVersion);
+        m_Writer.Write(SecurityTokenId);
         m_MessageCountPosition = SavePosition();
-        m_Writer.WriteByte(MessageCount);
+        m_Writer.Write(MessageCount);
       }
       #endregion
 

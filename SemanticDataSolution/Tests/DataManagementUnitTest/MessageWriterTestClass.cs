@@ -212,51 +212,51 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
         State.Enable();
       }
-      public override void WriteUInt64(ulong value)
+      public override void Write(ulong value)
       {
         Assert.IsInstanceOfType(value, typeof(ulong));
       }
-      public override void WriteUInt32(uint value)
+      public override void Write(uint value)
       {
         Assert.IsInstanceOfType(value, typeof(uint));
       }
-      public override void WriteUInt16(ushort value)
+      public override void Write(ushort value)
       {
         Assert.IsInstanceOfType(value, typeof(ushort));
       }
-      public override void WriteString(string value)
+      public override void Write(string value)
       {
         Assert.IsInstanceOfType(value, typeof(string));
       }
-      public override void WriteSingle(float value)
+      public override void Write(float value)
       {
         Assert.IsInstanceOfType(value, typeof(float));
       }
-      public override void WriteSByte(sbyte value)
+      public override void Write(sbyte value)
       {
         Assert.IsInstanceOfType(value, typeof(sbyte));
       }
-      public override void WriteInt64(long value)
+      public override void Write(long value)
       {
         Assert.IsInstanceOfType(value, typeof(long));
       }
-      public override void WriteInt32(int value)
+      public override void Write(int value)
       {
         Assert.IsInstanceOfType(value, typeof(int));
       }
-      public override void WriteInt16(short value)
+      public override void Write(short value)
       {
         Assert.IsInstanceOfType(value, typeof(short));
       }
-      public override void WriteDouble(double value)
+      public override void Write(double value)
       {
         Assert.IsInstanceOfType(value, typeof(double));
       }
-      public override void WriteByte(byte value)
+      public override void Write(byte value)
       {
         Assert.IsInstanceOfType(value, typeof(byte));
       }
-      public override void WriteBoolean(bool value)
+      public override void Write(bool value)
       {
         Assert.IsInstanceOfType(value, typeof(bool));
       }
@@ -265,7 +265,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         MassageCreated = true;
       }
       protected override void SendMessage() { }
-      public override void WriteBytes(byte[] value)
+      public override void Write(byte[] value)
       {
         throw new NotImplementedException();
       }
@@ -357,7 +357,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   }
 
   #region to be promoted to the codebase
-
   public sealed class BinaryUDPPackageWriter : BinaryEncoder
   {
 
@@ -489,7 +488,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #endregion
 
   }
-
   #endregion
 
 }

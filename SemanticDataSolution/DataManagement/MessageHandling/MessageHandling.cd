@@ -3,7 +3,7 @@
   <Class Name="UAOOI.SemanticData.DataManagement.MessageHandling.MessageReaderBase" Collapsed="true">
     <Position X="3" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAQAAQCAQAARAgCAAAAwCAAACACg0QAAGARFAQAAAA=</HashCode>
+      <HashCode>AAAQAAQCAQAARAgCAAAAwCAAAGACg0QAAEARFAQAAAA=</HashCode>
       <FileName>MessageHandling\MessageReaderBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -11,7 +11,7 @@
   <Class Name="UAOOI.SemanticData.DataManagement.MessageHandling.MessageWriterBase" Collapsed="true">
     <Position X="9.75" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>QgAAAAABAQAAAAAAViEAQYEAQAAAAAKgAAAABQQAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAACAAQYAAAAAAAACAAAAABQUAAAA=</HashCode>
       <FileName>MessageHandling\MessageWriterBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -68,7 +68,7 @@
   <Class Name="UAOOI.SemanticData.DataManagement.MessageHandling.BinaryEncoder" Collapsed="true">
     <Position X="9.75" Y="8.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AgIAAAABASAAAAQAXoEAAAEAQAAAAEIgAAAAAQAAAAA=</HashCode>
+      <HashCode>AAIAAAAAACAAAAQAGIAAAAAAQAAAAEAAAAAAAAEAAAA=</HashCode>
       <FileName>MessageHandling\BinaryEncoder.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -88,7 +88,7 @@
     </TypeIdentifier>
   </Class>
   <Interface Name="UAOOI.SemanticData.DataManagement.MessageHandling.IMessageHandler" Collapsed="true">
-    <Position X="6.5" Y="1.75" Width="1.5" />
+    <Position X="6.5" Y="1.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAABAQAAAA=</HashCode>
       <FileName>MessageHandling\IMessageHandler.cs</FileName>

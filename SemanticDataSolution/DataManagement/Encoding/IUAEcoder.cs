@@ -11,19 +11,19 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
   public interface IUAEncoder
   {
 
-    void WriteDateTime(IBinaryEncoder encoder, DateTime value);
-    void WriteByteString(IBinaryEncoder encoder, byte[]  value);
-    void WriteDataValue(IBinaryEncoder encoder, IDataValue value);
-    void WriteDiagnosticInfo(IBinaryEncoder encoder, IDiagnosticInfo  value);
-    void WriteExpandedNodeId(IBinaryEncoder encoder, IExpandedNodeId value);
-    void WriteExtensionObject(IBinaryEncoder encoder, IExtensionObject value);
-    void WriteLocalizedText(IBinaryEncoder encoder, ILocalizedText value);
-    void WriteNodeId(IBinaryEncoder encoder, INodeId value);
-    void WriteQualifiedName(IBinaryEncoder encoder, IQualifiedName value);
-    void WriteXmlElement(IBinaryEncoder encoder, XmlElement value);
-    void WriteStatusCode(IBinaryEncoder encoder, IStatusCode value);
-    void WriteVariant(IBinaryEncoder encoder, IVariant  value);
-    void WriteGuid(IBinaryEncoder encoder, Guid value);
+    void Write(IBinaryEncoder encoder, DateTime value);
+    void Write(IBinaryEncoder encoder, byte[]  value);
+    void Write(IBinaryEncoder encoder, IDataValue value);
+    void Write(IBinaryEncoder encoder, IDiagnosticInfo  value);
+    void Write(IBinaryEncoder encoder, IExpandedNodeId value);
+    void Write(IBinaryEncoder encoder, IExtensionObject value);
+    void Write(IBinaryEncoder encoder, ILocalizedText value);
+    void Write(IBinaryEncoder encoder, INodeId value);
+    void Write(IBinaryEncoder encoder, IQualifiedName value);
+    void Write(IBinaryEncoder encoder, XmlElement value);
+    void Write(IBinaryEncoder encoder, IStatusCode value);
+    void Write(IBinaryEncoder encoder, IVariant  value);
+    void Write(IBinaryEncoder encoder, Guid value);
 
   }
 

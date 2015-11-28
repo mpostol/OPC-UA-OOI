@@ -38,70 +38,70 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       };
       return Position;
     }
-    public void WriteGuid(Guid value)
+    public void Write(Guid value)
     {
       Position += 16;
     }
-    public void WriteByte(byte value)
+    public void Write(byte value)
     {
       Position++;
     }
-    public void WriteInt32(int value)
+    public void Write(int value)
     {
       throw new NotImplementedException();
     }
 
-    public void WriteBoolean(bool value)
+    public void Write(bool value)
     {
       throw new NotImplementedException();
     }
 
-    public void WriteSByte(sbyte value)
+    public void Write(sbyte value)
     {
       throw new NotImplementedException();
     }
 
-    public void WriteInt16(short value)
+    public void Write(short value)
     {
       throw new NotImplementedException();
     }
 
-    public void WriteUInt16(ushort value)
+    public void Write(ushort value)
     {
       throw new NotImplementedException();
     }
 
-    public void WriteUInt32(uint value)
+    public void Write(uint value)
     {
       throw new NotImplementedException();
     }
 
-    public void WriteInt64(long value)
+    public void Write(long value)
     {
       throw new NotImplementedException();
     }
 
-    public void WriteUInt64(ulong value)
+    public void Write(ulong value)
     {
       throw new NotImplementedException();
     }
 
-    public void WriteSingle(float value)
+    public void Write(float value)
     {
       throw new NotImplementedException();
     }
 
-    public void WriteDouble(double value)
+    public void Write(double value)
     {
       throw new NotImplementedException();
     }
 
-    public void WriteString(string value)
+    public void Write(string value)
     {
       throw new NotImplementedException();
     }
 
-    public void WriteBytes(byte[] value)
+    public void Write(byte[] value)
     {
       throw new NotImplementedException();
     } 

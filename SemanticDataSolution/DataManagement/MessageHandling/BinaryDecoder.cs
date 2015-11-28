@@ -118,7 +118,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Called when new frame has arrived.
     /// </summary>
     /// <param name="uaBinaryReader">
-    /// The UA binary reader an instance of <see cref="UABinaryReader"/> created after new frame has been arrived.
+    /// The UA binary reader an instance of <see cref="BinaryReader"/> created after new frame has been arrived.
     /// </param>
     /// <remarks> Just after processing the object is disposed.</remarks>
     protected void OnNewFrameArrived(BinaryReader uaBinaryReader)

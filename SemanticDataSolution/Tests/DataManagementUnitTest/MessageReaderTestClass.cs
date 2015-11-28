@@ -402,113 +402,110 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
     }
     #endregion
+  }
 
-    #region To be promoted to the codebase
+  #region To be promoted to the codebase
+  public sealed class BinaryUDPPackageReader : BinaryDecoder
+  {
 
-    public sealed class BinaryUDPPackageReader : BinaryDecoder
+    public BinaryUDPPackageReader(int port, Action<string> trace) : base(new Helpers.UABinaryDecoderImplementation())
     {
+      State = new MyState();
+      m_UdpClient = new UdpClient(port);
+      m_Trace = trace;
+    }
 
-      public BinaryUDPPackageReader(int port, Action<string> trace) : base(new Helpers.UABinaryDecoderImplementation())
-      {
-        State = new MyState();
-        m_UdpClient = new UdpClient(port);
-        m_Trace = trace;
-      }
+    #region BinaryDecoder
 
-      #region BinaryDecoder
+    /// <summary>
+    /// Gets or sets the state.
+    /// </summary>
+    /// <value>The state.</value>
+    public override IAssociationState State
+    {
+      get;
+      protected set;
+    }
+    /// <summary>
+    /// Attaches to network.
+    /// </summary>
+    public override void AttachToNetwork()
+    {
+      Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
+      State.Enable();
+      m_NumberOfAttachToNetwork++;
+      m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
+    }
+    #endregion
 
-      /// <summary>
-      /// Gets or sets the state.
-      /// </summary>
-      /// <value>The state.</value>
-      public override IAssociationState State
+    #region private
+    /// <summary>
+    /// Implements <see cref="AsyncCallback"/> for UDP begin receive.
+    /// </summary>
+    /// <param name="asyncResult">The asynchronous result.</param>
+    private void m_ReceiveAsyncCallback(IAsyncResult asyncResult)
+    {
+      m_Trace("Entering m_ReceiveAsyncCallback");
+      try
       {
-        get;
-        protected set;
-      }
-      /// <summary>
-      /// Attaches to network.
-      /// </summary>
-      public override void AttachToNetwork()
-      {
-        Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
-        State.Enable();
-        m_NumberOfAttachToNetwork++;
+        IPEndPoint _UEndPoint = null;
+        Byte[] _receiveBytes = null;
+        _receiveBytes = m_UdpClient.EndReceive(asyncResult, ref _UEndPoint);
+        m_Trace(String.Format("Received length ={0}", _receiveBytes == null ? -1 : _receiveBytes.Length));
+        MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
+        OnNewFrameArrived(new BinaryReader(_stream, System.Text.Encoding.UTF8));
+        m_Trace("BeginReceive");
         m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
       }
-      #endregion
-
-      #region private
-      /// <summary>
-      /// Implements <see cref="AsyncCallback"/> for UDP begin receive.
-      /// </summary>
-      /// <param name="asyncResult">The asynchronous result.</param>
-      private void m_ReceiveAsyncCallback(IAsyncResult asyncResult)
+      catch (ObjectDisposedException _ex)
       {
-        m_Trace("Entering m_ReceiveAsyncCallback");
-        try
-        {
-          IPEndPoint _UEndPoint = null;
-          Byte[] _receiveBytes = null;
-          _receiveBytes = m_UdpClient.EndReceive(asyncResult, ref _UEndPoint);
-          m_Trace(String.Format("Received length ={0}", _receiveBytes == null ? -1 : _receiveBytes.Length));
-          MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
-          OnNewFrameArrived(new BinaryReader(_stream));
-          m_Trace("BeginReceive");
-          m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
-        }
-        catch (ObjectDisposedException _ex)
-        {
-          m_Trace(String.Format("ObjectDisposedException = {0}", _ex.Message));
-        }
-        catch (Exception _ex)
-        {
-          m_Trace(String.Format("Exception {0}, message = {1}", _ex, GetType().Name, _ex.Message));
-        }
-        m_Trace("Exiting m_ReceiveAsyncCallback");
+        m_Trace(String.Format("ObjectDisposedException = {0}", _ex.Message));
       }
-
-      private ISemanticData m_SemanticData;
-      #endregion
-
-      #region tetst instrumentation
-      internal int m_NumberOfSentBytes = 0;
-      internal int m_NumberOfAttachToNetwork = 0;
-      internal int m_NumberOfSentMessages = 0;
-      private readonly UdpClient m_UdpClient;
-      private Action<string> m_Trace;
-
-      internal void SendUDPMessage(byte[] buffer, ISemanticData semanticData, int _RemoteHostPortNumber)
+      catch (Exception _ex)
       {
-        string m_RemoteHostName = "localhost";
-        // Get DNS host information.
-        IPHostEntry m_HostInfo = Dns.GetHostEntry(m_RemoteHostName);
-        // Get the DNS IP addresses associated with the host.
-        Assert.AreEqual<int>(2, m_HostInfo.AddressList.Length);
-        // Get first IPAddress in list return by DNS.
-        IPAddress m_IPAddresses = m_HostInfo.AddressList.Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
-        Assert.IsNotNull(m_IPAddresses);
-        IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, _RemoteHostPortNumber);
-        using (UdpClient _myClient = new UdpClient())
-          _myClient.Send(buffer, buffer.Length, _IPEndPoint);
-        m_NumberOfSentMessages++;
-        m_NumberOfSentBytes += buffer.Length;
-        m_SemanticData = semanticData;
+        m_Trace(String.Format("Exception {0}, message = {1}", _ex, GetType().Name, _ex.Message));
       }
-      protected override void Dispose(bool disposing)
-      {
-        base.Dispose(disposing);
-        if (disposing)
-          m_UdpClient.Close();
+      m_Trace("Exiting m_ReceiveAsyncCallback");
+    }
 
-      }
+    private ISemanticData m_SemanticData;
+    #endregion
 
-      #endregion
+    #region tetst instrumentation
+    internal int m_NumberOfSentBytes = 0;
+    internal int m_NumberOfAttachToNetwork = 0;
+    internal int m_NumberOfSentMessages = 0;
+    private readonly UdpClient m_UdpClient;
+    private Action<string> m_Trace;
+
+    internal void SendUDPMessage(byte[] buffer, ISemanticData semanticData, int _RemoteHostPortNumber)
+    {
+      string m_RemoteHostName = "localhost";
+      // Get DNS host information.
+      IPHostEntry m_HostInfo = Dns.GetHostEntry(m_RemoteHostName);
+      // Get the DNS IP addresses associated with the host.
+      Assert.AreEqual<int>(2, m_HostInfo.AddressList.Length);
+      // Get first IPAddress in list return by DNS.
+      IPAddress m_IPAddresses = m_HostInfo.AddressList.Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
+      Assert.IsNotNull(m_IPAddresses);
+      IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, _RemoteHostPortNumber);
+      using (UdpClient _myClient = new UdpClient())
+        _myClient.Send(buffer, buffer.Length, _IPEndPoint);
+      m_NumberOfSentMessages++;
+      m_NumberOfSentBytes += buffer.Length;
+      m_SemanticData = semanticData;
+    }
+    protected override void Dispose(bool disposing)
+    {
+      base.Dispose(disposing);
+      if (disposing)
+        m_UdpClient.Close();
 
     }
 
     #endregion
 
   }
+  #endregion
 
 }

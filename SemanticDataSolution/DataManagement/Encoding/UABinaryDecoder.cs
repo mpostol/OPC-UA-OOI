@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
-using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.Encoding

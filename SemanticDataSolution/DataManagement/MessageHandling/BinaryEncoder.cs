@@ -22,12 +22,17 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #endregion
 
     #region IDisposable
-    // Flag: Has Dispose already been called?
+    /// <summary>
+    /// Flag: Has Dispose already been called?
+    /// </summary>
     bool disposed = false;
-    // Public implementation of Dispose pattern callable by consumers.
+    // 
     /// <summary>
     /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
     /// </summary>
+    /// Public implementation of Dispose pattern callable by consumers.
+    /// <remarks>
+    /// </remarks>
     public void Dispose()
     {
       Dispose(true);
@@ -51,47 +56,47 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #region BinaryPackageEncoder
 
     #region BinaryWriter
-    public override void WriteUInt64(ulong value)
+    public override void Write(ulong value)
     {
       m_BinaryWriter.Write(value);
     }
-    public override void WriteUInt32(uint value)
+    public override void Write(uint value)
     {
       m_BinaryWriter.Write(value);
     }
-    public override void WriteUInt16(ushort value)
+    public override void Write(ushort value)
     {
       m_BinaryWriter.Write(value);
     }
-    public override void WriteString(string value)
+    public override void Write(string value)
     {
       m_BinaryWriter.Write(value);
     }
-    public override void WriteSingle(float value)
+    public override void Write(float value)
     {
       m_BinaryWriter.Write(value);
     }
-    public override void WriteSByte(sbyte value)
+    public override void Write(sbyte value)
     {
       m_BinaryWriter.Write(value);
     }
-    public override void WriteInt64(long value)
+    public override void Write(long value)
     {
       m_BinaryWriter.Write(value);
     }
-    public override void WriteInt32(int value)
+    public override void Write(int value)
     {
       m_BinaryWriter.Write(value);
     }
-    public override void WriteInt16(short value)
+    public override void Write(short value)
     {
       m_BinaryWriter.Write(value);
     }
-    public override void WriteDouble(double value)
+    public override void Write(double value)
     {
       m_BinaryWriter.Write(value);
     }
-    public override void WriteBoolean(bool value)
+    public override void Write(bool value)
     {
       m_BinaryWriter.Write(value);
     }
@@ -99,11 +104,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Writes an unsigned byte to the current stream and advances the stream position by one byte.
     /// </summary>
     /// <param name="value">TThe unsigned <see cref="byte"/> to write./param>
-    public override void WriteByte(byte value)
+    public override void Write(byte value)
     {
       m_BinaryWriter.Write(value);
     }
-    public override void WriteBytes(byte[] value)
+    public override void Write(byte[] value)
     {
       m_BinaryWriter.Write(value);
     }
@@ -114,9 +119,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// A byte offset relative to origin.
     /// </param>
     /// <param name="origin">
-    /// A field of <see cref="System.IO.SeekOrigin"/> indicating the reference point from which the new position is to be obtained..
+    /// A field of <see cref="SeekOrigin"/> indicating the reference point from which the new position is to be obtained..
     /// </param>
-    /// <returns>The position with the current stream as <see cref="System.Int64"/>.</returns>
+    /// <returns>The position with the current stream as <see cref="Int64"/>.</returns>
     public override long Seek(int offset, SeekOrigin origin)
     {
       return m_BinaryWriter.Seek(offset, origin);

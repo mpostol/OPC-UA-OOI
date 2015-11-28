@@ -13,23 +13,23 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     /// Writes the next byte from the current stream and advances the current position of the stream by one byte.
     /// </summary>
     /// <returns>The next <see cref="System.Byte"/> Write from the current stream.</returns>
-    void WriteByte(byte value);
-    void WriteInt32(int value);
-    void WriteBoolean(bool value);
-    void WriteSByte(sbyte value);
-    void WriteInt16(short value);
-    void WriteUInt16(ushort value);
-    void WriteUInt32(uint value);
-    void WriteInt64(long value);
-    void WriteUInt64(ulong value);
-    void WriteSingle(float value);
-    void WriteDouble(double value);
-    void WriteString(string value);
+    void Write(byte value);
+    void Write(int value);
+    void Write(bool value);
+    void Write(sbyte value);
+    void Write(short value);
+    void Write(ushort value);
+    void Write(uint value);
+    void Write(long value);
+    void Write(ulong value);
+    void Write(float value);
+    void Write(double value);
+    void Write(string value);
     /// <summary>
     /// Writes the <see cref="Guid"/> from UA Binary encoded as a 16-element byte array that contains the value and advances the stream position by 16 bytes.<see cref="System.IO.Stream"/>.
     /// </summary>
     /// <returns>The <see cref="Guid"/> object encoded from the message.</returns>
-    void WriteGuid(Guid value);
-    void WriteBytes(byte[]  value);
+    void Write(Guid value);
+    void Write(byte[]  value);
   }
 }

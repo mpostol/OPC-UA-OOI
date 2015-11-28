@@ -84,31 +84,31 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #endregion
 
     #region IBinaryEncoder
-    public abstract void WriteUInt64(ulong value);
-    public abstract void WriteUInt32(uint value);
-    public abstract void WriteUInt16(ushort value);
-    public abstract void WriteString(string value);
-    public abstract void WriteSingle(float value);
-    public abstract void WriteSByte(sbyte value);
-    public abstract void WriteInt64(long value);
-    public abstract void WriteInt32(int value);
-    public abstract void WriteInt16(short value);
-    public abstract void WriteDouble(double value);
-    public abstract void WriteBoolean(bool value);
+    public abstract void Write(ulong value);
+    public abstract void Write(uint value);
+    public abstract void Write(ushort value);
+    public abstract void Write(string value);
+    public abstract void Write(float value);
+    public abstract void Write(sbyte value);
+    public abstract void Write(long value);
+    public abstract void Write(int value);
+    public abstract void Write(short value);
+    public abstract void Write(double value);
+    public abstract void Write(bool value);
     /// <summary>
     /// Writes a <see cref="Guid"/> to the current stream as a 16-element byte array that contains the value and advances the stream position by 16 bytes.
     /// </summary>
     /// <param name="value">The <see cref="Guid"/> value to write.</param>
-    public void WriteGuid(Guid value)
+    public void Write(Guid value)
     {
-      m_UAEncoder.WriteGuid(this, value);
+      m_UAEncoder.Write(this, value);
     }
-    public abstract void WriteBytes(byte[] value);
+    public abstract void Write(byte[] value);
     /// <summary>
     /// Writes an unsigned byte to the current stream and advances the stream position by one byte.
     /// </summary>
     /// <param name="value">TThe unsigned <see cref="byte"/> to write./param>
-    public abstract void WriteByte(byte value);
+    public abstract void Write(byte value);
     #endregion
 
     #region private
@@ -121,80 +121,80 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       switch (_pb.Encoding)
       {
         case BuiltInType.Boolean:
-          WriteBoolean((Boolean)value);
+          Write((Boolean)value);
           break;
         case BuiltInType.SByte:
-          WriteSByte((SByte)value);
+          Write((SByte)value);
           break;
         case BuiltInType.Byte:
-          WriteByte((Byte)value);
+          Write((Byte)value);
           break;
         case BuiltInType.DateTime:
-          m_UAEncoder.WriteDateTime(this, (DateTime)value);
+          m_UAEncoder.Write(this, (DateTime)value);
           break;
         case BuiltInType.Double:
-          WriteDouble((Double)value);
+          Write((Double)value);
           break;
         case BuiltInType.Int16:
-          WriteInt16((Int16)value);
+          Write((Int16)value);
           break;
         case BuiltInType.Enumeration:
         case BuiltInType.Int32:
-          WriteInt32((Int32)value);
+          Write((Int32)value);
           break;
         case BuiltInType.Int64:
-          WriteInt64((Int64)value);
+          Write((Int64)value);
           break;
         case BuiltInType.Float:
-          WriteSingle((Single)value);
+          Write((Single)value);
           break;
         case BuiltInType.String:
-          WriteString((String)value);
+          Write((String)value);
           break;
         case BuiltInType.UInt16:
-          WriteUInt16((UInt16)value);
+          Write((UInt16)value);
           break;
         case BuiltInType.UInt32:
-          WriteUInt32((UInt32)value);
+          Write((UInt32)value);
           break;
         case BuiltInType.UInt64:
-          WriteUInt64((UInt64)value);
+          Write((UInt64)value);
           break;
         case BuiltInType.Guid:
-          WriteGuid((Guid)value);
+          Write((Guid)value);
           break;
         case BuiltInType.ByteString:
-          m_UAEncoder.WriteByteString(this, (byte[])value);
+          m_UAEncoder.Write(this, (byte[])value);
           break;
         case BuiltInType.XmlElement:
-          m_UAEncoder.WriteXmlElement(this, (XmlElement)value);
+          m_UAEncoder.Write(this, (XmlElement)value);
           break;
         case BuiltInType.NodeId:
-          m_UAEncoder.WriteNodeId(this, (INodeId)value);
+          m_UAEncoder.Write(this, (INodeId)value);
           break;
         case BuiltInType.ExpandedNodeId:
-          m_UAEncoder.WriteExpandedNodeId(this, (IExpandedNodeId)value);
+          m_UAEncoder.Write(this, (IExpandedNodeId)value);
           break;
         case BuiltInType.StatusCode:
-          m_UAEncoder.WriteStatusCode(this, (IStatusCode)value);
+          m_UAEncoder.Write(this, (IStatusCode)value);
           break;
         case BuiltInType.QualifiedName:
-          m_UAEncoder.WriteQualifiedName(this, (IQualifiedName)value);
+          m_UAEncoder.Write(this, (IQualifiedName)value);
           break;
         case BuiltInType.LocalizedText:
-          m_UAEncoder.WriteLocalizedText(this, (ILocalizedText)value);
+          m_UAEncoder.Write(this, (ILocalizedText)value);
           break;
         case BuiltInType.ExtensionObject:
-          m_UAEncoder.WriteExtensionObject(this, (IExtensionObject)value);
+          m_UAEncoder.Write(this, (IExtensionObject)value);
           break;
         case BuiltInType.DataValue:
-          m_UAEncoder.WriteDataValue(this, (IDataValue)value);
+          m_UAEncoder.Write(this, (IDataValue)value);
           break;
         case BuiltInType.Variant:
-          m_UAEncoder.WriteVariant(this, (IVariant)value);
+          m_UAEncoder.Write(this, (IVariant)value);
           break;
         case BuiltInType.DiagnosticInfo:
-          m_UAEncoder.WriteDiagnosticInfo(this, (IDiagnosticInfo)value);
+          m_UAEncoder.Write(this, (IDiagnosticInfo)value);
           break;
         case BuiltInType.Null:
         default:

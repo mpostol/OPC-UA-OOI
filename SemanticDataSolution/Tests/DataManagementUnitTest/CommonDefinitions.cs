@@ -47,6 +47,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     internal static readonly DateTime TestMinimalDateTime = new DateTime(1601, 1, 1);
     internal static readonly DateTime TestMaximumDateTime = new DateTime(9999, 12, 31, 23, 59, 59);
     internal static readonly Guid TestGuid = new Guid("A6195DF3-0B30-4C25-8BF8-45B076402116");
+    internal static readonly byte[] TestGuidVariant = new byte[] { (byte)BuiltInType.Guid, 0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16 };
     internal static DateTimeVariantEncoding[] DateTimeTestingValues = new DateTimeVariantEncoding[]
     {
       new DateTimeVariantEncoding() {  dateTime = TestMinimalDateTime, encoding = new byte[] { (byte)BuiltInType.DateTime, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } },

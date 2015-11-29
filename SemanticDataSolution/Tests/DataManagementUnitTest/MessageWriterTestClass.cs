@@ -361,7 +361,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   {
 
     #region creator
-    public BinaryUDPPackageWriter(string remoteHostName, int port, IUAEncoder uaEncoder) : base(CommonDefinitions.TestGuid, uaEncoder)
+    public BinaryUDPPackageWriter(string remoteHostName, int port, IUAEncoder uaEncoder) : base(CommonDefinitions.TestGuid, uaEncoder, new UInt32[] { 0xFFFF })
     {
       State = new MyState();
       m_RemoteHostName = remoteHostName;

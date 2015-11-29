@@ -106,7 +106,8 @@
     <Compile Include="MessageHandling\MessageHeader.cs" />
     <Compile Include="MessageHandling\MessageReaderBase.cs" />
     <Compile Include="MessageHandling\MessageWriterBase.cs" />
-    <Compile Include="MessageHandling\PackageHeader.cs" />
+    <Compile Include="MessageHandling\PacketHeader.cs" />
+    <Compile Include="MessageHandling\PacketFlags.cs" />
     <Compile Include="ProducerAssociation.cs" />
     <Compile Include="DataRepository\ProducerBinding.cs" />
     <Compile Include="DataRepository\ProducerBindingMonitoredValue.cs" />

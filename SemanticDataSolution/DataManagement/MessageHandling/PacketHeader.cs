@@ -1,7 +1,10 @@
 ﻿
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using UAOOI.SemanticData.DataManagement.Encoding;
+using System.Collections.ObjectModel;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
@@ -17,7 +20,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// * Naming convention publisher => producer; subscriber => consumer
   /// * SecurityTokenId - how to use it, how to define it if producer is not OPC UA Server, why exchange it over the wire
   /// </remarks>
-  public abstract class PackageHeader
+  public abstract class PacketHeader
   {
 
     #region public API
@@ -26,71 +29,79 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     /// <param name="writer">The writer.</param>
     /// <param name="producerId">The producer identifier.</param>
-    /// <returns>PackageHeader.</returns>
-    public static PackageHeader GetProducerPackageHeader(IBinaryHeaderWriter writer, Guid producerId)
+    /// <param name="dataSetWriterIds">The data set writer ids list. The size of the list must be equal to the <see cref="PacketHeader.MessageCount"/>.</param>
+    /// <returns>An instance of the <see cref="PacketHeader"/>.</returns>
+    public static PacketHeader GetProducerPackageHeader(IBinaryHeaderWriter writer, Guid producerId, IList<UInt32> dataSetWriterIds)
     {
-      return new ProducerPackageHeader(writer, producerId);
+      return new ProducerPackageHeader(writer, producerId, dataSetWriterIds);
     }
     /// <summary>
     /// Gets the consumer package header.
     /// </summary>
     /// <param name="reader">The reader.</param>
     /// <returns>PackageHeader.</returns>
-    public static PackageHeader GetConsumerPackageHeader(IBinaryDecoder reader)
+    public static PacketHeader GetConsumerPackageHeader(IBinaryDecoder reader)
     {
       return new ConsumerPackageHeader(reader);
     }
     /// <summary>
     /// Synchronizes this instance content with the header.
     /// </summary>
-    public abstract void Synchronize();
+    public abstract void WritePacketHeader();
     #endregion
 
     #region Header
     /// <summary>
-    /// Gets or sets the identifier of producer that sends the data.
+    /// If implemented gets or sets the identifier of producer that sends the data.
     /// </summary>
     /// <value>The <see cref="Guid"/> representing the producer.</value>
     public abstract Guid PublisherId { get; set; }
     /// <summary>
-    /// Gets or sets the message flags.
-    /// </summary>
-    /// <value>The message flags.</value>
-    public abstract byte MessageFlags { get; set; }
-    /// <summary>
-    /// Gets or sets the protocol version.
+    /// If implemented gets or sets the protocol version.
     /// </summary>
     /// <value>The protocol version.</value>
     public abstract byte ProtocolVersion { get; set; }
     /// <summary>
-    /// Gets or sets the security token identifier.
+    /// If implemented gets or sets the packet flags.
+    /// </summary>
+    /// <value>The packet flags.</value>
+    public abstract byte PacketFlags { get; set; }
+    /// <summary>
+    /// If implemented gets or sets the security token identifier.
     /// </summary>
     /// <value>The security token identifier.</value>
     public abstract byte SecurityTokenId { get; set; }
     /// <summary>
-    /// Gets or sets the number of messages contained in the packet.
+    /// If implemented gets or sets the number of messages contained in the packet.
     /// </summary>
     /// <value>The message count.</value>
-    public abstract byte MessageCount { get; set; }
+    public abstract byte MessageCount { get; }
+    /// <summary>
+    /// If implemented gets or sets the data set writer ids list. The size of the list is defined by the <see cref="PacketHeader.MessageCount"/>.
+    /// It identifies the publisher and the message writer responsible for sending Messages for the DataSet.
+    /// </summary>
+    /// <value>The data set writer ids.</value>
+    public abstract ReadOnlyCollection<UInt32> DataSetWriterIds { get; }
     #endregion
 
     #region private implementation
-    private class ConsumerPackageHeader : PackageHeader
+    private class ConsumerPackageHeader : PacketHeader
     {
 
       #region constructor
       public ConsumerPackageHeader(IBinaryDecoder reader) : base()
       {
         m_Reader = reader;
+        ReadPacketHeader();
       }
       #endregion
 
       #region PackageHeader
       public override byte MessageCount
       {
-        get; set;
+        get { return m_MessageCount; }
       }
-      public override byte MessageFlags
+      public override byte PacketFlags
       {
         get; set;
       }
@@ -106,32 +117,52 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         get; set;
       }
-      public override void Synchronize()
+      public override ReadOnlyCollection<UInt32> DataSetWriterIds
       {
-        PublisherId = m_Reader.ReadGuid();
-        MessageFlags = m_Reader.ReadByte();
-        ProtocolVersion = m_Reader.ReadByte();
-        SecurityTokenId = m_Reader.ReadByte();
-        MessageCount = m_Reader.ReadByte();
+        get { return m_DataSetWriterIds; }
+      }
+      public override void WritePacketHeader()
+      {
+        throw new ApplicationException("Consumer packet is read oinly");
       }
       #endregion
 
       #region private
       private IBinaryDecoder m_Reader;
+      private ReadOnlyCollection<uint> m_DataSetWriterIds;
+      private byte m_MessageCount;
+      private void ReadPacketHeader()
+      {
+        PublisherId = m_Reader.ReadGuid();
+        ProtocolVersion = m_Reader.ReadByte();
+        PacketFlags = m_Reader.ReadByte();
+        SecurityTokenId = m_Reader.ReadByte();
+        m_MessageCount = m_Reader.ReadByte();
+        List<UInt32> _ids = new List<uint>();
+        for (int i = 0; i < MessageCount; i++)
+          _ids.Add(m_Reader.ReadUInt32());
+        m_DataSetWriterIds = new ReadOnlyCollection<UInt32>(_ids);
+      }
       #endregion
 
     }
-    private class ProducerPackageHeader : PackageHeader
+    private class ProducerPackageHeader : PacketHeader
     {
       #region constructor
-      public ProducerPackageHeader(IBinaryHeaderWriter writer, Guid producerId) : base()
+      public ProducerPackageHeader(IBinaryHeaderWriter writer, Guid producerId, IList<UInt32> dataSetWriterIds) : base()
       {
+        if (writer == null)
+          throw new ArgumentNullException(nameof(writer));
         m_Writer = writer;
         PublisherId = producerId;
-        b_MessageCount = 0;
-        MessageFlags = Convert.ToByte(MessageFlag.PeriodicData);
+        PacketFlags = Convert.ToByte(PacketFlagsDefinitions.PacketFlagsMessageType.RegularMessages);
         ProtocolVersion = CommonDefinitions.ProtocolVersion;
         SecurityTokenId = 0;
+        m_PackageBeginPosition = SavePosition();
+        int _packageLength = m_PackageHeaderLength + dataSetWriterIds.Count * 4;
+        writer.Seek(_packageLength, SeekOrigin.Current);
+        DataSetWriterIds = new ReadOnlyCollection<uint>(dataSetWriterIds);
+        MessageCount = Convert.ToByte(DataSetWriterIds.Count);
       }
       #endregion
 
@@ -142,25 +173,13 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       /// <value>The message count.</value>
       public override byte MessageCount
       {
-        get
-        {
-          return b_MessageCount;
-        }
-        set
-        {
-          if (value == b_MessageCount)
-            return;
-          b_MessageCount = value;
-          SetPosition(m_MessageCountPosition);
-          m_Writer.Write(b_MessageCount);
-          RestorePosition();
-        }
+        get;
       }
       /// <summary>
       /// Gets or sets the message flags.
       /// </summary>
       /// <value>The message flags.</value>
-      public override byte MessageFlags
+      public override byte PacketFlags
       {
         get; set;
       }
@@ -188,25 +207,37 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         get; set;
       }
+      public override ReadOnlyCollection<UInt32> DataSetWriterIds
+      {
+        get;
+      }
       /// <summary>
       /// Synchronizes this instance content with the header.
       /// </summary>
-      public override void Synchronize()
+      public override void WritePacketHeader()
       {
+        SetPosition(m_PackageBeginPosition);
+        Debug.Assert(DataSetWriterIds != null);
+        Debug.Assert(DataSetWriterIds.Count == MessageCount);
         m_Writer.Write(PublisherId);
-        m_Writer.Write(MessageFlags);
         m_Writer.Write(ProtocolVersion);
+        m_Writer.Write(PacketFlags);
         m_Writer.Write(SecurityTokenId);
-        m_MessageCountPosition = SavePosition();
         m_Writer.Write(MessageCount);
+        if (MessageCount == 0)
+          return;
+        for (int i = 0; i < DataSetWriterIds.Count; i++)
+          m_Writer.Write(DataSetWriterIds[i]);
+        RestorePosition();
       }
       #endregion
 
       #region private
       //vars
       private IBinaryHeaderWriter m_Writer;
-      private int m_MessageCountPosition = 0;
-      private byte b_MessageCount = 0;
+      private int m_PackageBeginPosition = 0;
+      private const int m_PackageHeaderLength = 20;
+
       //methods
       private int SavePosition()
       {

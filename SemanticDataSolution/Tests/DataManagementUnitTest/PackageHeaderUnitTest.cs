@@ -15,33 +15,46 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       long _startPosition = 10;
       HeaderWriterTest _writer = new HeaderWriterTest(_startPosition);
-      PackageHeader _header = PackageHeader.GetProducerPackageHeader(_writer, CommonDefinitions.TestGuid);
+      PacketHeader _header = PacketHeader.GetProducerPackageHeader(_writer, CommonDefinitions.TestGuid, new UInt32[] { 0xFFFF });
       Assert.IsNotNull(_header);
-      _header.Synchronize();
-      Assert.AreEqual<byte>(0, _header.MessageCount);
-      Assert.AreEqual<long>(_startPosition + 20, _writer.Position);
-      _header.MessageCount = 0xff;
-      Assert.AreEqual<long>(_startPosition + 20, _writer.Position);
-      Assert.AreEqual<byte>(255, _header.MessageCount);
+      Assert.AreEqual<UInt32>(0xFFFF, _header.DataSetWriterIds[0]);
+      Assert.AreEqual<byte>(1, _header.MessageCount);
+      Assert.AreEqual<long>(_startPosition + 24, _writer.Position);
+      _writer.Write(0xCCCC);
+      _writer.Write(0xCCCC);
+      _writer.Write(0xCCCC);
+      _writer.Write(0xCCCC);
+      _header.WritePacketHeader();
+      Assert.AreEqual<byte>(1, _header.MessageCount);
+      Assert.AreEqual<long>(_startPosition + 24 + 16, _writer.Position);
+      _header.WritePacketHeader();
+      Assert.AreEqual<long>(_startPosition + 24 + 16, _writer.Position);
+      _writer.Write(0xCCCC);
+      Assert.AreEqual<long>(_startPosition + 24 + 20, _writer.Position);
     }
-
+    [TestMethod]
+    [TestCategory("DataManagement_PackageHeaderUnitTest")]
+    [ExpectedException(typeof(ApplicationException))]
+    public void ConsumerWritePacketHeaderTestMethod()
+    {
+      HeaderReaderTest _reader = new HeaderReaderTest(m_StartPosition);
+      PacketHeader _header = PacketHeader.GetConsumerPackageHeader(_reader);
+      Assert.IsNotNull(_header);
+      _header.WritePacketHeader();
+    }
     [TestMethod]
     [TestCategory("DataManagement_PackageHeaderUnitTest")]
     public void ConsumerPackageHeaderTestMethod()
     {
       HeaderReaderTest _reader = new HeaderReaderTest(m_StartPosition);
-      PackageHeader _header = PackageHeader.GetConsumerPackageHeader(_reader);
+      PacketHeader _header = PacketHeader.GetConsumerPackageHeader(_reader);
       Assert.IsNotNull(_header);
-      _header.Synchronize();
-      Assert.AreEqual<byte>(0xff, _header.MessageCount);
-      Assert.AreEqual<byte>(0xff, _header.MessageFlags);
-      Assert.AreEqual<byte>(0xff, _header.ProtocolVersion);
-      Assert.AreEqual<byte>(0xff, _header.SecurityTokenId);
+      Assert.AreEqual<byte>((byte)((byte)m_StartPosition + 16), _header.ProtocolVersion);
+      Assert.AreEqual<byte>((byte)((byte)m_StartPosition + 17), _header.PacketFlags);
+      Assert.AreEqual<byte>((byte)((byte)m_StartPosition + 18), _header.SecurityTokenId);
+      Assert.AreEqual<byte>((byte)((byte)m_StartPosition + 19), _header.MessageCount);
       Assert.AreEqual<Guid>(CommonDefinitions.TestGuid, _header.PublisherId);
-      Assert.AreEqual<long>(m_StartPosition + 20, _reader.m_Position);
-      _header.MessageCount = 0x0;
-      Assert.AreEqual<long>(m_StartPosition + 20, _reader.m_Position);
-      Assert.AreEqual<byte>(0x0, _header.MessageCount);
+      Assert.AreEqual<long>(m_StartPosition + 20 + (m_StartPosition + 19) * 4, _reader.m_Position);
     }
 
     long m_StartPosition = 10;

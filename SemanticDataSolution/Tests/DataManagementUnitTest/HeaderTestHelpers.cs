@@ -9,6 +9,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
   internal class HeaderWriterTest : IBinaryHeaderWriter
   {
+
     #region constructor
     public HeaderWriterTest(long startPosition)
     {
@@ -48,63 +49,52 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     public void Write(int value)
     {
-      throw new NotImplementedException();
+      Position += 4;
     }
-
     public void Write(bool value)
     {
       throw new NotImplementedException();
     }
-
     public void Write(sbyte value)
     {
       throw new NotImplementedException();
     }
-
     public void Write(short value)
     {
       throw new NotImplementedException();
     }
-
     public void Write(ushort value)
     {
       throw new NotImplementedException();
     }
-
     public void Write(uint value)
     {
-      throw new NotImplementedException();
+      Position += 4;
     }
-
     public void Write(long value)
     {
       throw new NotImplementedException();
     }
-
     public void Write(ulong value)
     {
       throw new NotImplementedException();
     }
-
     public void Write(float value)
     {
       throw new NotImplementedException();
     }
-
     public void Write(double value)
     {
       throw new NotImplementedException();
     }
-
     public void Write(string value)
     {
       throw new NotImplementedException();
     }
-
     public void Write(byte[] value)
     {
       throw new NotImplementedException();
-    } 
+    }
     #endregion
 
     internal long End = 0;
@@ -131,8 +121,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public HeaderReaderTest() : this(0) { }
     public byte ReadByte()
     {
+      byte _pos = Convert.ToByte(m_Position);
       m_Position++;
-      return 0xff;
+      return _pos;
     }
     public Guid ReadGuid()
     {
@@ -141,64 +132,56 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     int IBinaryDecoder.ReadInt32()
     {
-      throw new NotImplementedException();
+      int _pos = Convert.ToInt32(m_Position);
+      m_Position += 4;
+      return _pos;
     }
-
     bool IBinaryDecoder.ReadBoolean()
     {
       throw new NotImplementedException();
     }
-
     sbyte IBinaryDecoder.ReadSByte()
     {
       throw new NotImplementedException();
     }
-
     short IBinaryDecoder.ReadInt16()
     {
       throw new NotImplementedException();
     }
-
     ushort IBinaryDecoder.ReadUInt16()
     {
       throw new NotImplementedException();
     }
-
     uint IBinaryDecoder.ReadUInt32()
     {
-      throw new NotImplementedException();
+      uint _pos = Convert.ToUInt32(m_Position);
+      m_Position += 4;
+      return _pos;
     }
-
     long IBinaryDecoder.ReadInt64()
     {
       throw new NotImplementedException();
     }
-
     ulong IBinaryDecoder.ReadUInt64()
     {
       throw new NotImplementedException();
     }
-
     float IBinaryDecoder.ReadSingle()
     {
       throw new NotImplementedException();
     }
-
     double IBinaryDecoder.ReadDouble()
     {
       throw new NotImplementedException();
     }
-
     string IBinaryDecoder.ReadString()
     {
       throw new NotImplementedException();
     }
-
     public byte[] ReadBytes(int count)
     {
       throw new NotImplementedException();
     }
-
     internal long m_Position = 0;
 
   }

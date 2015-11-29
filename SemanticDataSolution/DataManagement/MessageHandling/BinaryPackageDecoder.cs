@@ -15,16 +15,16 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     public BinaryPackageDecoder(IUADecoder uaDecoder) : base(uaDecoder)
     {
-      Header = PackageHeader.GetConsumerPackageHeader(this);
+      Header = PacketHeader.GetConsumerPackageHeader(this);
     }
     #endregion
 
     #region API
     /// <summary>
-    /// Gets or sets the header <see cref="PackageHeader"/> of the package. The header is retrieved from the message after arriving.
+    /// Gets or sets the header <see cref="PacketHeader"/> of the package. The header is retrieved from the message after arriving.
     /// </summary>
-    /// <value>The header <see cref="PackageHeader"/>.</value>
-    public PackageHeader Header { get; set; }
+    /// <value>The header <see cref="PacketHeader"/>.</value>
+    public PacketHeader Header { get; set; }
     #endregion
 
     #region private
@@ -33,7 +33,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     protected void OnNewPackageArrived()
     {
-      Header.Synchronize();
+      Header.WritePacketHeader();
       for (int i = Header.MessageCount; i > 0; i--)
         OnNewMessageArrived();
     }

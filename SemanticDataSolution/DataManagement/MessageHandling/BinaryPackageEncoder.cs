@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
@@ -12,30 +13,26 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryPackageEncoder"/> class.
     /// </summary>
-    public BinaryPackageEncoder(Guid producerId, IUAEncoder uaEncoder) : base(uaEncoder)
+    public BinaryPackageEncoder(Guid producerId, IUAEncoder uaEncoder, IList<UInt32> dataSetWriterIds) : base(uaEncoder)
     {
-      Header = PackageHeader.GetProducerPackageHeader(this, producerId);
+      Header = PacketHeader.GetProducerPackageHeader(this, producerId, dataSetWriterIds);
     }
     /// <summary>
     /// Gets or sets the header of the package.
     /// </summary>
-    /// <value>The header <see cref="PackageHeader"/>.</value>
-    public PackageHeader Header { get; set; }
+    /// <value>The header <see cref="PacketHeader"/>.</value>
+    public PacketHeader Header { get; set; }
 
     #region BinaryMessageEncoder
     /// <summary>
     /// Called when new message is adding to the package payload.
     /// </summary>
-    protected override void OnMessageAdding()
-    {
-      m_NumberOfSentMessages++;
-    }
+    protected override void OnMessageAdding() { }
     /// <summary>
     /// Called when the current message has been added and is ready to be sent out.
     /// </summary>
     protected override void OnMessageAdded()
     {
-      this.Header.MessageCount = Convert.ToByte(m_NumberOfSentMessages);
       SendFrame();
     }
     #endregion
@@ -46,15 +43,13 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Begins sending the frame.
     /// </summary>
     protected abstract void SendFrame();
-    private int m_NumberOfSentMessages = 0;
     //methods
     /// <summary>
     /// Encodes the headers.
     /// </summary>
     protected void EncodePackageHeaders()
     {
-      m_NumberOfSentMessages = 0;
-      Header.Synchronize();
+      Header.WritePacketHeader();
     }
     #endregion
 

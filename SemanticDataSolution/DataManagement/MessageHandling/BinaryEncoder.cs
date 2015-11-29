@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UAOOI.SemanticData.DataManagement.Encoding;
 
@@ -15,7 +16,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryEncoder"/> class wrapper of <see cref="UABinaryWriter"/> supporting OPC UA binary encoding..
     /// </summary>
-    public BinaryEncoder(Guid producerId, IUAEncoder uaEncoder) : base(producerId, uaEncoder)
+    public BinaryEncoder(Guid producerId, IUAEncoder uaEncoder, IList<UInt32> dataSetWriterIds) : base(producerId, uaEncoder, dataSetWriterIds)
     {
       CreateUABinaryWriter();
     }

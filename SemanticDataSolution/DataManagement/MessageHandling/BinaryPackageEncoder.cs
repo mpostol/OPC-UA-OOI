@@ -11,12 +11,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   public abstract class BinaryPackageEncoder : BinaryMessageEncoder
   {
     /// <summary>
-    /// Initializes a new instance of the <see cref="BinaryPackageEncoder"/> class.
+    /// Initializes a new instance of the <see cref="BinaryPackageEncoder" /> class.
     /// </summary>
-    public BinaryPackageEncoder(Guid producerId, IUAEncoder uaEncoder, IList<UInt32> dataSetWriterIds) : base(uaEncoder)
-    {
-      Header = PacketHeader.GetProducerPackageHeader(this, producerId, dataSetWriterIds);
-    }
+    /// <param name="uaEncoder">The ua encoder.</param>
+    public BinaryPackageEncoder(IUAEncoder uaEncoder) : base(uaEncoder) { }
     /// <summary>
     /// Gets or sets the header of the package.
     /// </summary>
@@ -47,8 +45,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Encodes the headers.
     /// </summary>
-    protected void EncodePackageHeaders()
+    protected void EncodePackageHeaders(Guid producerId, IList<UInt32> dataSetWriterIds)
     {
+      Header = PacketHeader.GetProducerPackageHeader(this, producerId, dataSetWriterIds);
       Header.WritePacketHeader();
     }
     #endregion

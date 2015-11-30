@@ -13,10 +13,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryPackageDecoder"/> class.
     /// </summary>
-    public BinaryPackageDecoder(IUADecoder uaDecoder) : base(uaDecoder)
-    {
-      Header = PacketHeader.GetConsumerPackageHeader(this);
-    }
+    public BinaryPackageDecoder(IUADecoder uaDecoder) : base(uaDecoder) { }
     #endregion
 
     #region API
@@ -33,7 +30,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     protected void OnNewPackageArrived()
     {
-      Header.WritePacketHeader();
+      Header = PacketHeader.GetConsumerPackageHeader(this);
       for (int i = Header.MessageCount; i > 0; i--)
         OnNewMessageArrived();
     }

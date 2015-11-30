@@ -92,7 +92,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
                                        new SemanticDataTest(m_Guid));
         Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
         Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(104, _writer.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(108, _writer.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
         byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArrayVariant();
         byte[] _outputBuffer = _writer.DoUDPRead();
@@ -361,7 +361,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   {
 
     #region creator
-    public BinaryUDPPackageWriter(string remoteHostName, int port, IUAEncoder uaEncoder) : base(CommonDefinitions.TestGuid, uaEncoder, new UInt32[] { 0xFFFF })
+    public BinaryUDPPackageWriter(string remoteHostName, int port, IUAEncoder uaEncoder) : base(uaEncoder, CommonDefinitions.TestGuid, new UInt32[] { 0xFFFFFFFF })
     {
       State = new MyState();
       m_RemoteHostName = remoteHostName;

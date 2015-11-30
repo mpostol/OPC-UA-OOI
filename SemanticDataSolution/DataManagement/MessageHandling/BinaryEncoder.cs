@@ -16,8 +16,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryEncoder"/> class wrapper of <see cref="UABinaryWriter"/> supporting OPC UA binary encoding..
     /// </summary>
-    public BinaryEncoder(Guid producerId, IUAEncoder uaEncoder, IList<UInt32> dataSetWriterIds) : base(producerId, uaEncoder, dataSetWriterIds)
+    public BinaryEncoder(IUAEncoder uaEncoder, Guid producerId, IList<UInt32> dataSetWriterIds) : base(uaEncoder)
     {
+      m_producerId = producerId;
+      m_dataSetWriterIds = dataSetWriterIds;
       CreateUABinaryWriter();
     }
     #endregion
@@ -145,6 +147,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     //vars
     private MemoryStream m_Output;
     private BinaryWriter m_BinaryWriter;
+    private Guid m_producerId;
+    private IList<uint> m_dataSetWriterIds;
+
     //methods
     /// <summary>
     /// Sends the message.
@@ -160,7 +165,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       m_Output = new MemoryStream();
       m_BinaryWriter = new BinaryWriter(m_Output);
-      EncodePackageHeaders();
+      EncodePackageHeaders(m_producerId, m_dataSetWriterIds);
     }
     #endregion
 

@@ -123,7 +123,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       }
       public override void WritePacketHeader()
       {
-        throw new ApplicationException("Consumer packet is read oinly");
+        throw new ApplicationException("Consumer packet is read only");
       }
       #endregion
 

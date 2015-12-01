@@ -110,6 +110,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     /// <param name="value">TThe unsigned <see cref="byte"/> to write./param>
     public abstract void Write(byte value);
+    public void Write(DateTime value)
+    {
+      m_UAEncoder.Write(this, value);
+    }
     #endregion
 
     #region private

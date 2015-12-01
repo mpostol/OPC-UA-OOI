@@ -38,7 +38,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// The value is provided by the message.
     /// The order of the bits starting from the least significant bit matches the order of the data items within the data set.
     /// </value>
-    public abstract ulong ContentMask { get; } //TODO Must be added to teh message.
+    public abstract ulong ContentMask { get; } //TODO Must be added to the message.
     /// <summary>
     ///  If implemented in derived class gets the state machine for this instance.
     /// </summary>

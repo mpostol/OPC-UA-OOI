@@ -26,6 +26,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     string ReadString();
     byte[] ReadBytes(int count);
     Guid ReadGuid();
+    DateTime ReadDateTime();
 
   }
 }

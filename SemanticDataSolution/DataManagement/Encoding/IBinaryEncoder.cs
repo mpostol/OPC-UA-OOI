@@ -3,7 +3,7 @@ using System;
 
 namespace UAOOI.SemanticData.DataManagement.Encoding
 {
- 
+
   /// <summary>
   /// Interface IBinaryDecoder - instance of this interface is used to decode the message and package headers content using binary encoding.
   /// </summary>
@@ -30,6 +30,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     /// </summary>
     /// <returns>The <see cref="Guid"/> object encoded from the message.</returns>
     void Write(Guid value);
-    void Write(byte[]  value);
+    void Write(byte[] value);
+    void Write(DateTime value);
   }
 }

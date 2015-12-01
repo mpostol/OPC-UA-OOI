@@ -101,6 +101,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         _encoder.Write(this, value);
       }
+      public void Write(DateTime value)
+      {
+        throw new NotImplementedException();
+      }
       #endregion
 
       #region IUAEncoder

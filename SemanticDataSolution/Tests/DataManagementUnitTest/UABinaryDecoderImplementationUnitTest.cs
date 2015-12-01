@@ -144,6 +144,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         return ReadGuid(this);
       }
+      public DateTime ReadDateTime()
+      {
+        throw new NotImplementedException();
+      }
       #endregion
 
       #region private

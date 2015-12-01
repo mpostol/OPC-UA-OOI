@@ -102,7 +102,6 @@
     <Compile Include="MessageHandling\IMessageHandlerFactory.cs" />
     <Compile Include="MessageHandling\IMessageReader.cs" />
     <Compile Include="MessageHandling\IMessageWriter.cs" />
-    <Compile Include="MessageHandling\MessageFlag.cs" />
     <Compile Include="MessageHandling\MessageHeader.cs" />
     <Compile Include="MessageHandling\MessageReaderBase.cs" />
     <Compile Include="MessageHandling\MessageWriterBase.cs" />

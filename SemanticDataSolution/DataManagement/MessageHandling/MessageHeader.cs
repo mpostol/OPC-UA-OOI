@@ -104,6 +104,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <value>The type of the message.</value>
     public abstract MessageTypeEnum MessageType { get; set; }
     /// <summary>
+    /// Gets or sets the message flags.
+    /// </summary>
+    /// <value>The message flags are not defined yet.</value>
+    public abstract Byte MessageFlags { get; set; }
+    /// <summary>
     /// Gets or sets the message sequence number.
     /// </summary>
     /// <remarks>
@@ -122,6 +127,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     /// <value>The time the Data was collected..</value>
     public abstract DateTime TimeStamp { get; set; }
+    /// <summary>
+    /// Gets or sets the field count.
+    /// </summary>
+    /// <value>Number of fields of the DataSet contained in the Message.</value>
+    public abstract UInt16 FieldCount { get; set; }
     #endregion
 
     #region private
@@ -148,6 +158,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         get; set;
       }
+      public override byte MessageFlags
+      {
+        get; set;
+      }
       public override ushort MessageSequenceNumber
       {
         get; set;
@@ -160,15 +174,22 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         get; set;
       }
+      public override ushort FieldCount
+      {
+        get; set;
+      }
+
       public override void Synchronize()
       {
         m_writer.Write(DataSetId);
         m_writer.Write(MessageLength);
         m_writer.Write((byte)MessageType);
+        m_writer.Write(MessageFlags);
         m_writer.Write(MessageSequenceNumber);
         m_writer.Write(ConfigurationVersion.MajorVersion);
         m_writer.Write(ConfigurationVersion.MinorVersion);
         m_writer.Write(TimeStamp);
+        m_writer.Write(FieldCount);
       }
       #endregion
 
@@ -192,12 +213,15 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         get; set;
       }
-
       public override ushort MessageLength
       {
         get; set;
       }
       public override MessageTypeEnum MessageType
+      {
+        get; set;
+      }
+      public override byte MessageFlags
       {
         get; set;
       }
@@ -213,16 +237,24 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         get; set;
       }
+      public override ushort FieldCount
+      {
+        get; set;
+      }
+
+
       public override void Synchronize()
       {
-        ConfigurationVersionDataType _cv = new ConfigurationVersionDataType() { MajorVersion= 0, MinorVersion = 0 };
+        ConfigurationVersionDataType _cv = new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 };
         DataSetId = m_reader.ReadGuid();
         MessageLength = m_reader.ReadUInt16();
         MessageType = (MessageTypeEnum)m_reader.ReadByte();
+        MessageFlags = m_reader.ReadByte();
         MessageSequenceNumber = m_reader.ReadUInt16();
         _cv.MajorVersion = m_reader.ReadByte();
         _cv.MinorVersion = m_reader.ReadByte();
         TimeStamp = m_reader.ReadDateTime();
+        FieldCount = m_reader.ReadUInt16();
         ConfigurationVersion = _cv;
       }
       #endregion

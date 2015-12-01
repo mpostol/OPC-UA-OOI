@@ -15,7 +15,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       b_Position = startPosition;
     }
-    public HeaderWriterTest() : this(0) { }
+    public HeaderWriterTest( Action<Int64> callback ) : this(0)
+    {
+      m_callBack = callback;
+    }
     #endregion
 
     #region IBinaryHeaderWriter
@@ -41,22 +44,27 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     public void Write(Guid value)
     {
+      m_callBack(Position);
       Position += 16;
     }
     public void Write(byte value)
     {
+      m_callBack(Position);
       Position++;
     }
     public void Write(int value)
     {
+      m_callBack(Position);
       Position += 4;
     }
     public void Write(bool value)
     {
+      m_callBack(Position);
       throw new NotImplementedException();
     }
     public void Write(sbyte value)
     {
+      m_callBack(Position);
       throw new NotImplementedException();
     }
     public void Write(short value)
@@ -65,10 +73,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     public void Write(ushort value)
     {
-      throw new NotImplementedException();
+      m_callBack(Position);
+      Position += 2;
     }
     public void Write(uint value)
     {
+      m_callBack(Position);
       Position += 4;
     }
     public void Write(long value)
@@ -95,6 +105,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       throw new NotImplementedException();
     }
+    public void Write(DateTime value)
+    {
+      m_callBack(Position);
+      Position += 8;
+    }
     #endregion
 
     internal long End = 0;
@@ -109,6 +124,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
     }
     private long b_Position = 0;
+    private Action<Int64> m_callBack = null;
 
   }
   internal class HeaderReaderTest : IBinaryDecoder
@@ -150,7 +166,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     ushort IBinaryDecoder.ReadUInt16()
     {
-      throw new NotImplementedException();
+      ushort _pos = Convert.ToUInt16(m_Position);
+      m_Position += 2;
+      return _pos;
     }
     uint IBinaryDecoder.ReadUInt32()
     {
@@ -182,6 +200,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       throw new NotImplementedException();
     }
+    public DateTime ReadDateTime()
+    {
+      m_Position += 8;
+      return CommonDefinitions.TestMinimalDateTime;
+    }
+
     internal long m_Position = 0;
 
   }

@@ -25,7 +25,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     public BinaryMessageEncoder(IUAEncoder uaEncoder) : base(uaEncoder)
     {
-      MessageHeader = MessageHeader.GetProducerMessageHeader(this); //TODO move it to CreateMessage
     }
 
     #region IBinaryHeaderWriter
@@ -51,24 +50,18 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #endregion
 
     #region MessageWriterBase
-    /// <summary>
-    /// Creates and prepares new the message.
-    /// </summary>
-    /// <param name="length">The length.</param>
-    /// <param name="dataSetId">The data set identifier.</param>
     protected override void CreateMessage(int length, Guid dataSetId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp)
     {
       OnMessageAdding();
+      MessageHeader = MessageHeader.GetProducerMessageHeader(this);
       //Create message header and placeholder for further header content.
       MessageHeader.DataSetId = dataSetId;
       MessageHeader.ConfigurationVersion = m_ConfigurationVersion;
       MessageHeader.FieldCount = fieldCount;
       MessageHeader.MessageFlags = m_MessageFlags;
-      MessageHeader.MessageLength = 0; //TODO must be calculated
       MessageHeader.MessageSequenceNumber = messageSequenceNumber;
       MessageHeader.MessageType = MessageHeader.MessageTypeEnum.DataKeyFrame;
       MessageHeader.TimeStamp = timeStamp;
-      MessageHeader.Synchronize(); //TODO move it to the SendMessage
     }
     /// <summary>
     /// Sends the message - evaluates condition if send the package.
@@ -78,6 +71,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </remarks>
     protected override void SendMessage()
     {
+      MessageHeader.Synchronize();
       OnMessageAdded();
       //TODO sign and encrypt the message.
     }

@@ -17,7 +17,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       HeaderWriterTest _writer = new HeaderWriterTest(x => Assert.AreEqual<long>(_position[_fieldNumber++], x));
       MessageHeader _header = MessageHeader.GetProducerMessageHeader(_writer);
       Assert.IsNotNull(_header);
-      _header.MessageLength = 0;
       _header.MessageType = MessageHeader.MessageTypeEnum.DataDeltaFrame;
       _header.MessageSequenceNumber = 8;
       _header.ConfigurationVersion = new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 6, MinorVersion = 7 };

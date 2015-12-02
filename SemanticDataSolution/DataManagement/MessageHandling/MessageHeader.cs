@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.IO;
 using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
@@ -97,7 +98,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Gets or sets the length of the message.
     /// </summary>
     /// <value>The length of the message data structure including the header information and length field.</value>
-    public abstract UInt16 MessageLength { get; set; }
+    public abstract UInt16 MessageLength { get; }
     /// <summary>
     /// Gets or sets the type of the message.
     /// </summary>
@@ -141,7 +142,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       #region creator
       public ProducerMessageHeader(IBinaryHeaderWriter writer)
       {
-        this.m_writer = writer;
+        m_HeaderWriter = new HeaderWriter(writer, m_PackageHeaderLength);
       }
       #endregion
 
@@ -152,7 +153,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       }
       public override ushort MessageLength
       {
-        get; set;
+        get { throw new NotImplementedException(); }
       }
       public override MessageTypeEnum MessageType
       {
@@ -178,23 +179,27 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         get; set;
       }
-
       public override void Synchronize()
       {
-        m_writer.Write(DataSetId);
-        m_writer.Write(MessageLength);
-        m_writer.Write((byte)MessageType);
-        m_writer.Write(MessageFlags);
-        m_writer.Write(MessageSequenceNumber);
-        m_writer.Write(ConfigurationVersion.MajorVersion);
-        m_writer.Write(ConfigurationVersion.MinorVersion);
-        m_writer.Write(TimeStamp);
-        m_writer.Write(FieldCount);
+        m_HeaderWriter.WriteHeader(WriteHeader);
       }
       #endregion
 
       #region private
-      private IBinaryHeaderWriter m_writer;
+      private const ushort m_PackageHeaderLength = 18;
+      private HeaderWriter m_HeaderWriter;
+      private void WriteHeader(IBinaryHeaderWriter writer, ushort messageLength)
+      {
+        writer.Write(DataSetId);
+        writer.Write(messageLength);
+        writer.Write((byte)MessageType);
+        writer.Write(MessageFlags);
+        writer.Write(MessageSequenceNumber);
+        writer.Write(ConfigurationVersion.MajorVersion);
+        writer.Write(ConfigurationVersion.MinorVersion);
+        writer.Write(TimeStamp);
+        writer.Write(FieldCount);
+      }
       #endregion
 
     }
@@ -215,7 +220,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       }
       public override ushort MessageLength
       {
-        get; set;
+        get { return m_MessageLength; } 
       }
       public override MessageTypeEnum MessageType
       {
@@ -241,13 +246,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         get; set;
       }
-
-
       public override void Synchronize()
       {
         ConfigurationVersionDataType _cv = new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 };
         DataSetId = m_reader.ReadGuid();
-        MessageLength = m_reader.ReadUInt16();
+        m_MessageLength = m_reader.ReadUInt16();
         MessageType = (MessageTypeEnum)m_reader.ReadByte();
         MessageFlags = m_reader.ReadByte();
         MessageSequenceNumber = m_reader.ReadUInt16();
@@ -261,6 +264,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 
       #region private
       private IBinaryDecoder m_reader;
+      private ushort m_MessageLength;
       #endregion
 
     }

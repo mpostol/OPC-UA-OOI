@@ -35,7 +35,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       _bmw.AttachToNetwork();
       ProducerBinding _binding = new ProducerBinding();
       _binding.Value = new TestClass();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, new SemanticDataTest(Guid.NewGuid()));
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, new SemanticDataTest(Guid.NewGuid()), 0, DateTime.UtcNow);
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
@@ -47,7 +47,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
       ProducerBinding _binding = new ProducerBinding(BuiltInType.Float);
       _binding.Value = new Nullable<float>();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, new SemanticDataTest(Guid.NewGuid()));
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, new SemanticDataTest(Guid.NewGuid()), 0, DateTime.UtcNow);
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
@@ -60,9 +60,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       _binding.Value = String.Empty;
       int _sentItems = 0;
       ((IMessageWriter)_bmw).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
-                                   CommonDefinitions.TestValues.Length,
+                                   Convert.ToUInt16(CommonDefinitions.TestValues.Length),
                                    UInt64.MaxValue,
-                                   new SemanticDataTest(Guid.NewGuid())
+                                   new SemanticDataTest(Guid.NewGuid()),
+                                   0,
+                                   DateTime.UtcNow
                                    );
       Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
     }
@@ -87,9 +89,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         int _sentItems = 0;
         Guid m_Guid = CommonDefinitions.TestGuid;
         ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
-                                       CommonDefinitions.TestValues.Length,
+                                       Convert.ToUInt16(CommonDefinitions.TestValues.Length),
                                        UInt64.MaxValue,
-                                       new SemanticDataTest(m_Guid));
+                                       new SemanticDataTest(m_Guid),
+                                       0,
+                                       DateTime.UtcNow
+                                       );
         Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
         Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
         Assert.AreEqual<int>(126, _writer.m_NumberOfSentBytes);
@@ -260,7 +265,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         Assert.IsInstanceOfType(value, typeof(bool));
       }
-      protected override void CreateMessage(int length, Guid dataSetId)
+      protected override void CreateMessage(int length, Guid dataSetId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp)
       {
         MassageCreated = true;
       }

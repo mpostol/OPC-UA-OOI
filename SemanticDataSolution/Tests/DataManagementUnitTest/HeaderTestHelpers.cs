@@ -11,14 +11,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   {
 
     #region constructor
-    public HeaderWriterTest(long startPosition)
+    public HeaderWriterTest(Action<Int64> callback, long startPosition)
     {
       b_Position = startPosition;
-    }
-    public HeaderWriterTest( Action<Int64> callback ) : this(0)
-    {
       m_callBack = callback;
     }
+    public HeaderWriterTest(Action<Int64> callback) : this(callback, 0) { }
     #endregion
 
     #region IBinaryHeaderWriter

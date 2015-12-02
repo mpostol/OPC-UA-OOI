@@ -18,8 +18,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="length">Number of items to be send used to calculate the length of the message.</param>
     /// <param name="contentMask">The content mask represented as unsigned number <see cref="UInt64" />. The order of the bits starting from the least significant
     /// bit matches the order of the data items within the data set.</param>
-    /// <param name="semanticData">An instance of <see cref="ISemanticData"/> that represents a data item conforming to the UA Semantic Data paradigm.</param>
-    void Send(Func<int, IProducerBinding> producerBinding, int length, ulong contentMask, ISemanticData semanticData);
+    /// <param name="semanticData">An instance of <see cref="ISemanticData" /> that represents a data item conforming to the UA Semantic Data paradigm.</param>
+    /// <param name="messageSequenceNumber">The message sequence number. A monotonically increasing sequence number assigned by the publisher to each message sent.</param>
+    /// <param name="timeStamp">The time stamp - the time the Data was collected.</param>
+    void Send(Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, ISemanticData semanticData, ushort messageSequenceNumber, DateTime timeStamp);
 
   }
 }

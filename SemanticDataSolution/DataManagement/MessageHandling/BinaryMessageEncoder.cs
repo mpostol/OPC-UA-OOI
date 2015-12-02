@@ -17,13 +17,15 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// </remarks>
   public abstract class BinaryMessageEncoder : MessageWriterBase, IBinaryHeaderWriter
   {
+    private MessageHeader.ConfigurationVersionDataType m_ConfigurationVersion;
+    private byte m_MessageFlags;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryMessageEncoder"/> class.
     /// </summary>
     public BinaryMessageEncoder(IUAEncoder uaEncoder) : base(uaEncoder)
     {
-      MessageHeader = MessageHeader.GetProducerMessageHeader(this);
+      MessageHeader = MessageHeader.GetProducerMessageHeader(this); //TODO move it to CreateMessage
     }
 
     #region IBinaryHeaderWriter
@@ -54,12 +56,19 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     /// <param name="length">The length.</param>
     /// <param name="dataSetId">The data set identifier.</param>
-    protected override void CreateMessage(int length, Guid dataSetId)
+    protected override void CreateMessage(int length, Guid dataSetId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp)
     {
       OnMessageAdding();
       //Create message header and placeholder for further header content.
       MessageHeader.DataSetId = dataSetId;
-      MessageHeader.Synchronize();
+      MessageHeader.ConfigurationVersion = m_ConfigurationVersion;
+      MessageHeader.FieldCount = fieldCount;
+      MessageHeader.MessageFlags = m_MessageFlags;
+      MessageHeader.MessageLength = 0; //TODO must be calculated
+      MessageHeader.MessageSequenceNumber = messageSequenceNumber;
+      MessageHeader.MessageType = MessageHeader.MessageTypeEnum.DataKeyFrame;
+      MessageHeader.TimeStamp = timeStamp;
+      MessageHeader.Synchronize(); //TODO move it to the SendMessage
     }
     /// <summary>
     /// Sends the message - evaluates condition if send the package.
@@ -83,6 +92,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Called when the current message has been added and is ready to be sent out.
     /// </summary>
     protected abstract void OnMessageAdded();
+
     #endregion    
 
   }

@@ -50,12 +50,12 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="semanticData">An instance of <see cref="ISemanticData" /> that represents a data item conforming to the UA Semantic Data paradigm.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">Impossible to convert null value
     /// or</exception>
-    void IMessageWriter.Send(Func<int, IProducerBinding> producerBinding, int length, ulong contentMask, ISemanticData semanticData)
+    void IMessageWriter.Send(Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, ISemanticData semanticData, ushort messageSequenceNumber, DateTime timeStamp)
     {
       if (State.State != HandlerState.Operational)
         return;
       ContentMask = contentMask;
-      CreateMessage(length, semanticData.Guid);
+      CreateMessage(length, semanticData.Guid, length, messageSequenceNumber, timeStamp);
       UInt64 _mask = 0x1;
       for (int i = 0; i < length; i++)
       {
@@ -161,7 +161,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     private IUAEncoder m_UAEncoder;
     private Action<IProducerBinding> m_WriteValueDelegate = null;
     //methods
-    protected abstract void CreateMessage(int length, Guid dataSetId);
+    protected abstract void CreateMessage(int length, Guid dataSetId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp);
     protected abstract void SendMessage();
     private void WriteValue(IProducerBinding producerBinding)
     {

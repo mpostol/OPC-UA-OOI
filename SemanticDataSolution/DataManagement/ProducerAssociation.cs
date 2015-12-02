@@ -67,7 +67,8 @@ namespace UAOOI.SemanticData.DataManagement
 
     #region private
     private object mLockObject = new object();
-    bool m_Busy = false;
+    private bool m_Busy = false;
+    private ushort m_MessageSequenceNumber = 0;
     protected override void InitializeCommunication()
     {
       //Do nothing;
@@ -95,8 +96,15 @@ namespace UAOOI.SemanticData.DataManagement
       m_Busy = true;
       foreach (IMessageWriter _mwx in m_MessageWriter)
         lock (mLockObject)
-          _mwx.Send(x => m_ProcessDataBindings[x], m_ProcessDataBindings.Length, UInt64.MaxValue, DataDescriptor);
+          _mwx.Send(x => m_ProcessDataBindings[x], Convert.ToUInt16(m_ProcessDataBindings.Length), UInt64.MaxValue, DataDescriptor, IntRollOver(m_MessageSequenceNumber), DateTime.UtcNow);
       m_Busy = false;
+    }
+    private static ushort IntRollOver(ushort value)
+    {
+      if (value == ushort.MaxValue)
+        return 0;
+      else
+        return value++;
     }
     #endregion
 

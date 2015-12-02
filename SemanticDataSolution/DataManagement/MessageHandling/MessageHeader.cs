@@ -125,7 +125,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Gets or sets the time stamp of th data contained in the message.
     /// </summary>
-    /// <value>The time the Data was collected..</value>
+    /// <value>The time the Data was collected.</value>
     public abstract DateTime TimeStamp { get; set; }
     /// <summary>
     /// Gets or sets the field count.

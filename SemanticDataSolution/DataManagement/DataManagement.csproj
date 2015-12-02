@@ -94,7 +94,7 @@
     <Compile Include="MessageHandling\BinaryPackageDecoder.cs" />
     <Compile Include="MessageHandling\BinaryPackageEncoder.cs" />
     <Compile Include="MessageHandling\CommonDefinition.cs" />
-    <Compile Include="MessageHandling\Header.cs" />
+    <Compile Include="MessageHandling\HeaderWriter.cs" />
     <Compile Include="MessageHandling\IBinaryHeaderWriter.cs" />
     <Compile Include="DataRepository\IProducerBinding.cs" />
     <Compile Include="ISemanticData.cs" />

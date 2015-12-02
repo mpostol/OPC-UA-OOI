@@ -43,19 +43,23 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       return new byte[]
       {
-          //Package header
+          //Package header 0-23
           0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16, //guid - PublisherId
           0x00,                                               //byte MessageFlags
           0x00,                                               //byte ProtocolVersion
           0x00,                                               //byte SecurityTokenId
           0x01,                                               //byte MessageCount
           0xFF, 0xFF, 0xFF, 0xFF,                             //DataSetWriterIds UInt32[MessageCount]
-          //Message header
+          //Message header 24-41
           0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16, //guid - PublisherId
-          0x0, 16, 16+2, 16+3, 0, 16+4, 16+6, 16+7,
+          68, 00,                                             // MessageLength
+          01,                                                 //MessageType 
+          0,                                                  // MessageFlags
+          0, 0,                                               //MessageSequenceNumber 
+          0, 0,                                               //ConfigurationVersion
           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //TimeStamp
-          0, 16+16,
-          //Message content
+          13, 0,                                              // FieldCount
+          //Message content 58 - 124
           (byte)BuiltInType.UInt64, 0x7b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,    //UInt64
           (byte)BuiltInType.UInt32, 0x7b, 0x00, 0x00, 0x00,                            //UInt32
           (byte)BuiltInType.UInt16, 0x7b, 0x00,                                        //UInt16

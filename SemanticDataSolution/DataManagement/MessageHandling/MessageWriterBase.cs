@@ -55,7 +55,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       if (State.State != HandlerState.Operational)
         return;
       ContentMask = contentMask;
-      CreateMessage(length, semanticData.Guid, length, messageSequenceNumber, timeStamp);
+      CreateMessage(semanticData.Guid, length, messageSequenceNumber, timeStamp);
       UInt64 _mask = 0x1;
       for (int i = 0; i < length; i++)
       {
@@ -161,7 +161,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     private IUAEncoder m_UAEncoder;
     private Action<IProducerBinding> m_WriteValueDelegate = null;
     //methods
-    protected abstract void CreateMessage(int length, Guid dataSetId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp);
+    protected abstract void CreateMessage(Guid dataSetId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp);
     protected abstract void SendMessage();
     private void WriteValue(IProducerBinding producerBinding)
     {

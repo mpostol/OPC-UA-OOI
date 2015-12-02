@@ -93,7 +93,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
                                        UInt64.MaxValue,
                                        new SemanticDataTest(m_Guid),
                                        0,
-                                       DateTime.UtcNow
+                                       CommonDefinitions.TestMinimalDateTime
                                        );
         Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
         Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
@@ -265,7 +265,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         Assert.IsInstanceOfType(value, typeof(bool));
       }
-      protected override void CreateMessage(int length, Guid dataSetId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp)
+      protected override void CreateMessage(Guid dataSetId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp)
       {
         MassageCreated = true;
       }

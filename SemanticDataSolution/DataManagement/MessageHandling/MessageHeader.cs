@@ -186,7 +186,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       #endregion
 
       #region private
-      private const ushort m_PackageHeaderLength = 18;
+      private const ushort m_PackageHeaderLength = 18 + 16;
       private HeaderWriter m_HeaderWriter;
       private void WriteHeader(IBinaryHeaderWriter writer, ushort messageLength)
       {

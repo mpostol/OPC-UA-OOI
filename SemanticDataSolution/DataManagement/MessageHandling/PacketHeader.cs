@@ -235,7 +235,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       #region private
       //vars
       private HeaderWriter m_HeaderWriter;
-      private int m_PackageBeginPosition = 0;
       private const ushort m_PackageHeaderLength = 20;
       #endregion
 

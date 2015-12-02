@@ -88,7 +88,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _semanticData, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
         _reader.SendUDPMessage(CommonDefinitions.GetTestBinaryArrayVariant(), _semanticData, _port);
         Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(108, _reader.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(126, _reader.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
         Thread.Sleep(1500);
         Assert.AreEqual<int>(_buffer.Length, _redItems);

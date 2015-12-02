@@ -153,16 +153,14 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         if (writer == null)
           throw new ArgumentNullException(nameof(writer));
-        m_Writer = writer;
         PublisherId = producerId;
         PacketFlags = Convert.ToByte(PacketFlagsDefinitions.PacketFlagsMessageType.RegularMessages);
         ProtocolVersion = CommonDefinitions.ProtocolVersion;
         SecurityTokenId = 0;
-        m_PackageBeginPosition = SavePosition();
-        int _packageLength = m_PackageHeaderLength + dataSetWriterIds.Count * 4;
-        writer.Seek(_packageLength, SeekOrigin.Current);
         DataSetWriterIds = new ReadOnlyCollection<uint>(dataSetWriterIds);
         MessageCount = Convert.ToByte(DataSetWriterIds.Count);
+        ushort _packageLength = Convert.ToUInt16(m_PackageHeaderLength + dataSetWriterIds.Count * 4);
+        m_HeaderWriter = new HeaderWriter(writer, _packageLength);
       }
       #endregion
 
@@ -216,7 +214,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       /// </summary>
       public override void WritePacketHeader()
       {
-        SetPosition(m_PackageBeginPosition);
+        m_HeaderWriter. WriteHeader(WriteHeader);
+      }
+      private void WriteHeader(IBinaryHeaderWriter m_Writer, ushort dataLength)
+      {
         Debug.Assert(DataSetWriterIds != null);
         Debug.Assert(DataSetWriterIds.Count == MessageCount);
         m_Writer.Write(PublisherId);
@@ -228,29 +229,14 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           return;
         for (int i = 0; i < DataSetWriterIds.Count; i++)
           m_Writer.Write(DataSetWriterIds[i]);
-        RestorePosition();
       }
       #endregion
 
       #region private
       //vars
-      private IBinaryHeaderWriter m_Writer;
+      private HeaderWriter m_HeaderWriter;
       private int m_PackageBeginPosition = 0;
-      private const int m_PackageHeaderLength = 20;
-
-      //methods
-      private int SavePosition()
-      {
-        return Convert.ToInt32(m_Writer.Seek(0, SeekOrigin.Current));
-      }
-      private void SetPosition(int offset)
-      {
-        m_Writer.Seek(offset, SeekOrigin.Begin);
-      }
-      private long RestorePosition()
-      {
-        return m_Writer.Seek(0, SeekOrigin.End);
-      }
+      private const ushort m_PackageHeaderLength = 20;
       #endregion
 
     }

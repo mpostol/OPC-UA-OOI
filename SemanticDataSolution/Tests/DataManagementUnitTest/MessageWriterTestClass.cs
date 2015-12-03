@@ -265,7 +265,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         Assert.IsInstanceOfType(value, typeof(bool));
       }
-      protected override void CreateMessage(Guid dataSetId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp)
+      protected override void CreateMessage(uint dataSetWriterId, Guid dataSetId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp)
       {
         MassageCreated = true;
       }
@@ -366,7 +366,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   {
 
     #region creator
-    public BinaryUDPPackageWriter(string remoteHostName, int port, IUAEncoder uaEncoder) : base(uaEncoder, CommonDefinitions.TestGuid, new UInt32[] { 0xFFFFFFFF })
+    public BinaryUDPPackageWriter(string remoteHostName, int port, IUAEncoder uaEncoder) : base(uaEncoder, CommonDefinitions.TestGuid)
     {
       State = new MyState();
       m_RemoteHostName = remoteHostName;
@@ -490,6 +490,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         return;
       m_UdpClient.Close();
     }
+
     #endregion
 
   }

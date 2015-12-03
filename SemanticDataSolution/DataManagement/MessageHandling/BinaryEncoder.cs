@@ -14,13 +14,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 
     #region creator
     /// <summary>
-    /// Initializes a new instance of the <see cref="BinaryEncoder"/> class wrapper of <see cref="UABinaryWriter"/> supporting OPC UA binary encoding..
+    /// Initializes a new instance of the <see cref="BinaryEncoder"/> class wrapper of <see cref="BinaryWriter"/> supporting OPC UA binary encoding..
     /// </summary>
-    public BinaryEncoder(IUAEncoder uaEncoder, Guid producerId, IList<UInt32> dataSetWriterIds) : base(uaEncoder)
+    public BinaryEncoder(IUAEncoder uaEncoder, Guid producerId) : base(uaEncoder)
     {
       m_producerId = producerId;
-      m_dataSetWriterIds = dataSetWriterIds;
-      CreateUABinaryWriter();
     }
     #endregion
 
@@ -61,47 +59,47 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #region BinaryWriter
     public override void Write(ulong value)
     {
-      m_BinaryWriter.Write(value);
+      m_binaryWriter.Write(value);
     }
     public override void Write(uint value)
     {
-      m_BinaryWriter.Write(value);
+      m_binaryWriter.Write(value);
     }
     public override void Write(ushort value)
     {
-      m_BinaryWriter.Write(value);
+      m_binaryWriter.Write(value);
     }
     public override void Write(string value)
     {
-      m_BinaryWriter.Write(value);
+      m_binaryWriter.Write(value);
     }
     public override void Write(float value)
     {
-      m_BinaryWriter.Write(value);
+      m_binaryWriter.Write(value);
     }
     public override void Write(sbyte value)
     {
-      m_BinaryWriter.Write(value);
+      m_binaryWriter.Write(value);
     }
     public override void Write(long value)
     {
-      m_BinaryWriter.Write(value);
+      m_binaryWriter.Write(value);
     }
     public override void Write(int value)
     {
-      m_BinaryWriter.Write(value);
+      m_binaryWriter.Write(value);
     }
     public override void Write(short value)
     {
-      m_BinaryWriter.Write(value);
+      m_binaryWriter.Write(value);
     }
     public override void Write(double value)
     {
-      m_BinaryWriter.Write(value);
+      m_binaryWriter.Write(value);
     }
     public override void Write(bool value)
     {
-      m_BinaryWriter.Write(value);
+      m_binaryWriter.Write(value);
     }
     /// <summary>
     /// Writes an unsigned byte to the current stream and advances the stream position by one byte.
@@ -109,11 +107,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="value">TThe unsigned <see cref="byte"/> to write./param>
     public override void Write(byte value)
     {
-      m_BinaryWriter.Write(value);
+      m_binaryWriter.Write(value);
     }
     public override void Write(byte[] value)
     {
-      m_BinaryWriter.Write(value);
+      m_binaryWriter.Write(value);
     }
     /// <summary>
     /// Sets the position within the current stream.
@@ -127,7 +125,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <returns>The position with the current stream as <see cref="Int64"/>.</returns>
     public override long Seek(int offset, SeekOrigin origin)
     {
-      return m_BinaryWriter.Seek(offset, origin);
+      return m_binaryWriter.Seek(offset, origin);
     }
     #endregion
 
@@ -136,21 +134,24 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     protected override void SendFrame()
     {
-      m_BinaryWriter.Close();
-      SendFrame(m_Output.ToArray());
+      m_binaryWriter.Close();
+      SendFrame(m_output.ToArray());
       DisposeWriter();
-      CreateUABinaryWriter();
     }
     #endregion
 
     #region private
     //vars
-    private MemoryStream m_Output;
-    private BinaryWriter m_BinaryWriter;
+    private MemoryStream m_output;
+    private BinaryWriter m_binaryWriter;
     private Guid m_producerId;
-    private IList<uint> m_dataSetWriterIds;
 
     //methods
+    protected override void OnMessageAdding(uint dataSetWriterId)
+    {
+      CreateUABinaryWriter(new uint[] { dataSetWriterId });
+      base.OnMessageAdding(dataSetWriterId);
+    }
     /// <summary>
     /// Sends the message.
     /// </summary>
@@ -158,13 +159,17 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected abstract void SendFrame(byte[] buffer);
     private void DisposeWriter()
     {
-      m_BinaryWriter.Dispose();
-      m_BinaryWriter = null;
+      if (m_binaryWriter == null)
+        return;
+      m_binaryWriter.Dispose();
+      m_output.Close();
+      m_binaryWriter = null;
+      m_output = null;
     }
-    private void CreateUABinaryWriter()
+    private void CreateUABinaryWriter(IList<uint> m_dataSetWriterIds)
     {
-      m_Output = new MemoryStream();
-      m_BinaryWriter = new BinaryWriter(m_Output);
+      m_output = new MemoryStream();
+      m_binaryWriter = new BinaryWriter(m_output);
       EncodePackageHeaders(m_producerId, m_dataSetWriterIds);
     }
     #endregion

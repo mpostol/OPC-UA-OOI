@@ -55,7 +55,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       if (State.State != HandlerState.Operational)
         return;
       ContentMask = contentMask;
-      CreateMessage(semanticData.Guid, length, messageSequenceNumber, timeStamp);
+      CreateMessage(ToUInt32(semanticData.GetHashCode()), semanticData.Guid, length, messageSequenceNumber, timeStamp);
       UInt64 _mask = 0x1;
       for (int i = 0; i < length; i++)
       {
@@ -161,7 +161,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     private IUAEncoder m_UAEncoder;
     private Action<IProducerBinding> m_WriteValueDelegate = null;
     //methods
-    protected abstract void CreateMessage(Guid dataSetId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp);
+    protected abstract void CreateMessage(UInt32 dataSetWriterId, Guid dataSetId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp);
     protected abstract void SendMessage();
     private void WriteValue(IProducerBinding producerBinding)
     {
@@ -254,6 +254,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       object value = producerBinding.GetFromRepository();
       Variant _variant = new Variant(new UATypeInfo(producerBinding.Encoding), value);
       m_UAEncoder.Write(this, _variant);
+    }
+    private uint ToUInt32(int value)
+    {
+      return value < 0 ? Convert.ToUInt32(UInt32.MaxValue + value) : Convert.ToUInt32(value);
     }
     #endregion
 

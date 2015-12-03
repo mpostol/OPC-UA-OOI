@@ -25,7 +25,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Called when new message is adding to the package payload.
     /// </summary>
-    protected override void OnMessageAdding() { }
+    protected override void OnMessageAdding(uint dataSetWriterIds)
+    {
+    }
     /// <summary>
     /// Called when the current message has been added and is ready to be sent out.
     /// </summary>

@@ -49,7 +49,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           0x00,                                               //byte ProtocolVersion
           0x00,                                               //byte SecurityTokenId
           0x01,                                               //byte MessageCount
-          0xFF, 0xFF, 0xFF, 0xFF,                             //DataSetWriterIds UInt32[MessageCount]
+          0xf1, 0x30, 0x0c, 0x02,                             //DataSetWriterIds UInt32[MessageCount]
           //Message header 24-41
           0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16, //guid - PublisherId
           68, 00,                                             // MessageLength

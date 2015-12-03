@@ -114,6 +114,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Association.cd" />
     <None Include="MessageHandling\MessageHandling.cd" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="README.md" />

@@ -6,32 +6,44 @@
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
+    <AssociationLine Name="DataSets" Type="UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration" FixedFromPoint="true">
+      <Path>
+        <Point X="4" Y="2.25" />
+        <Point X="6" Y="2.25" />
+      </Path>
+    </AssociationLine>
     <AssociationLine Name="MessageHandlers" Type="UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageHandlerConfiguration" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="4" Y="2.75" />
-        <Point X="4.5" Y="2.75" />
-        <Point X="4.5" Y="6.412" />
-        <Point X="6" Y="6.412" />
+        <Point X="2.938" Y="3.122" />
+        <Point X="2.938" Y="7.337" />
+        <Point X="6" Y="7.337" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="DataSetsList" Type="UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration" FixedFromPoint="true">
+      <Path>
+        <Point X="4" Y="2.688" />
+        <Point X="6" Y="2.688" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAABgIJAAEAEAAAAQAAAAIAAAQAAAAAEgAAAAQIAAAA=</HashCode>
+      <HashCode>AAABgIJAGEAEAIAIQAAAAIAAAQgAAAAEgAAIAQIAAAA=</HashCode>
       <FileName>Serialization\ConfigurationData.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Property Name="DataSets" />
       <Property Name="MessageHandlers" />
+      <Property Name="DataSetsList" />
     </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration">
-    <Position X="6" Y="1.75" Width="2.5" />
+    <Position X="6" Y="1.75" Width="2.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AgACAAAAAACAACAEAAAATgAAAEAABECOAAAABgMABAQ=</HashCode>
+      <HashCode>AqACAAAoAACAACAEAEAATgAAAEgABECMAAAAAgMABIQ=</HashCode>
       <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -42,23 +54,18 @@
     </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataMemberConfiguration" Collapsed="true">
-    <Position X="11.75" Y="1.75" Width="2.5" />
-    <TypeIdentifier>
-      <HashCode>AAIAAAAQBABAAAgAAEAAAAAAAAAAAAAEAAAAAAIAAAA=</HashCode>
-      <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageHandlerConfiguration">
-    <Position X="6" Y="5.25" Width="2.5" />
+    <Position X="6" Y="6.25" Width="3" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAACAAAAAASgAAAAAAAAAQAAIAAAAAEggAAEAIAAAA=</HashCode>
+      <HashCode>ACAACAAAAAASgAAAAAAAAAQAAIAAAAAEggAAEAIAABA=</HashCode>
       <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="AssociationNamesArrayOfString" />
+    </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.NodeDescriptor" Collapsed="true">
@@ -67,6 +74,19 @@
       <HashCode>AAAAAQCAAAIAAAAAAAEAEAABAAAAAggAAAAIAAAEAgA=</HashCode>
       <FileName>Serialization\NodeDescriptor.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.FieldMetaData" Collapsed="true">
+    <Position X="11.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIEAAAAhABAAAgAAEAAAAAAgAAAAAAEAAAAIAIAAAA=</HashCode>
+      <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.String" Collapsed="true">
+    <Position X="11.25" Y="6.25" Width="2.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

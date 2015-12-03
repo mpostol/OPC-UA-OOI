@@ -2,11 +2,11 @@
 using CAS.UA.IServerConfiguration;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UAOOI.DataBindings.Serializers;
-using System.Collections.ObjectModel;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {

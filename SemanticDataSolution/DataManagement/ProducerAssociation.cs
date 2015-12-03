@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
@@ -89,17 +90,18 @@ namespace UAOOI.SemanticData.DataManagement
     }
     private List<IMessageWriter> m_MessageWriter = new List<IMessageWriter>();
     private IProducerBinding[] m_ProcessDataBindings;
-    private void ProcessDataBindings_CollectionChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    private void ProcessDataBindings_CollectionChanged(object sender, PropertyChangedEventArgs e)
     {
       if (m_Busy)
         return;
       m_Busy = true;
       foreach (IMessageWriter _mwx in m_MessageWriter)
         lock (mLockObject)
-          _mwx.Send(x => m_ProcessDataBindings[x], Convert.ToUInt16(m_ProcessDataBindings.Length), UInt64.MaxValue, DataDescriptor, IntRollOver(m_MessageSequenceNumber), DateTime.UtcNow);
+          _mwx.Send(x => m_ProcessDataBindings[x], Convert.ToUInt16(m_ProcessDataBindings.Length), UInt64.MaxValue, DataDescriptor, m_MessageSequenceNumber, DateTime.UtcNow);
       m_Busy = false;
+      IncRollOver(m_MessageSequenceNumber);
     }
-    private static ushort IntRollOver(ushort value)
+    private static ushort IncRollOver(ushort value)
     {
       if (value == ushort.MaxValue)
         return 0;

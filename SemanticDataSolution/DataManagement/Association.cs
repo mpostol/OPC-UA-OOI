@@ -113,9 +113,9 @@ namespace UAOOI.SemanticData.DataManagement
 
     #region private
     //class
-    private abstract class AssociationStateBaseBase : IAssociationState
+    private abstract class AssociationStateBase : IAssociationState
     {
-      public AssociationStateBaseBase(Association host)
+      public AssociationStateBase(Association host)
       {
         m_Host = host;
       }
@@ -132,7 +132,7 @@ namespace UAOOI.SemanticData.DataManagement
       }
       protected Association m_Host { get; private set; }
     }
-    private class AssociationStateDisabled : AssociationStateBaseBase
+    private class AssociationStateDisabled : AssociationStateBase
     {
       public AssociationStateDisabled(Association host)
         : base(host)
@@ -147,7 +147,7 @@ namespace UAOOI.SemanticData.DataManagement
         throw new InvalidOperationException("Disable call is not allowed in the Disabled state");
       }
     }
-    private class AssociationStateOperational : AssociationStateBaseBase
+    private class AssociationStateOperational : AssociationStateBase
     {
       public AssociationStateOperational(Association host)
         : base(host)
@@ -162,7 +162,7 @@ namespace UAOOI.SemanticData.DataManagement
         base.Disable();
       }
     }
-    private class AssociationStateNoConfiguration : AssociationStateBaseBase
+    private class AssociationStateNoConfiguration : AssociationStateBase
     {
       public AssociationStateNoConfiguration(Association host)
         : base(host)
@@ -177,7 +177,7 @@ namespace UAOOI.SemanticData.DataManagement
         throw new InvalidOperationException("Disable call is not allowed in the NoConfiguration state.");
       }
     }
-    private class AssociationStateError : AssociationStateBaseBase
+    private class AssociationStateError : AssociationStateBase
     {
       public AssociationStateError(Association host)
         : base(host)

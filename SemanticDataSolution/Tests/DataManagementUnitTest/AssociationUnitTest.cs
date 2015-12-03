@@ -200,10 +200,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         if (!m_Success)
           throw new InvalidOperationException("Wrong configuration");
       }
+      public Guid Id { get { return DataDescriptor.Guid; } }
       protected override void OnEnabling() { }
       protected override void OnDisabling() { }
       private bool m_Success = false;
-      public Guid Id { get { return this.DataDescriptor.Guid; } }
       protected internal override void AddMessageHandler(IMessageHandler messageHandler)
       {
         throw new NotImplementedException();

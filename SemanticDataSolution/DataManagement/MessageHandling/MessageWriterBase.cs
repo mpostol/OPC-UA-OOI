@@ -55,7 +55,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       if (State.State != HandlerState.Operational)
         return;
       ContentMask = contentMask;
-      CreateMessage(ToUInt32(semanticData.GetHashCode()), semanticData.Guid, length, messageSequenceNumber, timeStamp);
+      CreateMessage(ToUInt32(semanticData.ToString().GetHashCode()), semanticData.Guid, length, messageSequenceNumber, timeStamp);
       UInt64 _mask = 0x1;
       for (int i = 0; i < length; i++)
       {

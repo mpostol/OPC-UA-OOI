@@ -240,6 +240,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       Assert.IsNotNull(m_HaveSendData);
       Assert.IsTrue(m_HaveBeenActivated);
     }
+
+
     private bool m_HaveBeenActivated = false;
     private bool m_HaveSendData;
     private Object[] m_Buffer = null;

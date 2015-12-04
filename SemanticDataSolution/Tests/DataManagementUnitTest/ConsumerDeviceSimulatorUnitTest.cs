@@ -17,7 +17,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_ConsumerDeviceSimulator")]
     public void ConsumerDeviceSimulatorTestMethod()
     {
-      Guid DataSetGuid = Guid.NewGuid();
+      UInt32 DataSetGuid = UInt32.MaxValue;
       MyMessageHandlerFactory _mhf = new MyMessageHandlerFactory(DataSetGuid);
       DataManagementSetup _consumer = ConsumerDeviceSimulator.CreateDevice(_mhf, DataSetGuid);
       Assert.IsNull(_consumer.AssociationsCollection);
@@ -38,7 +38,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_ConsumerDeviceSimulator")]
     public void MessageHandlerFactoryCreatorReadTestMethod()
     {
-      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(Guid.NewGuid());
+      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(UInt32.MaxValue);
       Assert.IsNotNull(_nmf);
       IMessageReader _nmr = _nmf.GetIMessageReader("UDP", null, new Helpers.UABinaryDecoderImplementation());
       Assert.IsNotNull(_nmr);
@@ -48,7 +48,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [ExpectedException(typeof(NotImplementedException))]
     public void MessageHandlerFactoryCreatorWriteTestMethod()
     {
-      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(Guid.NewGuid());
+      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(UInt32.MaxValue);
       Assert.IsNotNull(_nmf);
       IMessageWriter _nmr = _nmf.GetIMessageWriter("UDP", null, null);
     }
@@ -59,7 +59,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
 
       #region creator
-      internal MyMessageHandlerFactory(Guid dataSetGuid)
+      internal MyMessageHandlerFactory(UInt32 dataSetGuid)
       {
         this.MyMessageReader = new MessageReader(dataSetGuid);
       }

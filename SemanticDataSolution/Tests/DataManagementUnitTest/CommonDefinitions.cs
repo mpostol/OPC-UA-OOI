@@ -49,9 +49,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           0x00,                                               //byte ProtocolVersion
           0x00,                                               //byte SecurityTokenId
           0x01,                                               //byte MessageCount
-          0x4d, 0x8d, 0xd1, 0x4a,                             //DataSetWriterIds UInt32[MessageCount]
+          127, 75, 251 , 186,                                 //DataSetWriterIds UInt32[MessageCount]
           //Message header 24-41
-          0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16, //guid - PublisherId
+          //0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16, //guid - PublisherId
           68, 00,                                             // MessageLength
           01,                                                 //MessageType 
           0,                                                  // MessageFlags
@@ -75,6 +75,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           (byte)BuiltInType.Boolean, 0x01,                                             //boolean
       };
     }
+    internal const uint DataSetId = 3137031039;
     internal struct DateTimeVariantEncoding
     {
       internal DateTime dateTime;

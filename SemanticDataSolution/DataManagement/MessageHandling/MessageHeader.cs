@@ -90,11 +90,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       DataSetMetadata = 0x5,
     }
     /// <summary>
-    /// Gets or sets the data set identifier <see cref="Guid"/>.
-    /// </summary>
-    /// <value>The <see cref="Guid"/> data set identifier.</value>
-    public abstract Guid DataSetId { get; set; }
-    /// <summary>
     /// Gets or sets the length of the message.
     /// </summary>
     /// <value>The length of the message data structure including the header information and length field.</value>
@@ -147,10 +142,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       #endregion
 
       #region MessageHeader
-      public override Guid DataSetId
-      {
-        get; set;
-      }
       public override ushort MessageLength
       {
         get { throw new NotImplementedException(); }
@@ -186,11 +177,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       #endregion
 
       #region private
-      private const ushort m_PackageHeaderLength = 18 + 16;
+      private const ushort m_PackageHeaderLength = 18;
       private HeaderWriter m_HeaderWriter;
       private void WriteHeader(IBinaryHeaderWriter writer, ushort messageLength)
       {
-        writer.Write(DataSetId);
         writer.Write(messageLength);
         writer.Write((byte)MessageType);
         writer.Write(MessageFlags);
@@ -214,10 +204,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       #endregion
 
       #region MessageHeader
-      public override Guid DataSetId
-      {
-        get; set;
-      }
       public override ushort MessageLength
       {
         get { return m_MessageLength; } 
@@ -249,7 +235,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       public override void Synchronize()
       {
         ConfigurationVersionDataType _cv = new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 };
-        DataSetId = m_reader.ReadGuid();
         m_MessageLength = m_reader.ReadUInt16();
         MessageType = (MessageTypeEnum)m_reader.ReadByte();
         MessageFlags = m_reader.ReadByte();

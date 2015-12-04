@@ -109,7 +109,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           encoder.Write((Int32)value);
           return;
         case BuiltInType.UInt32:
-          encoder.Write((UInt32)value);
+          encoder.Write((System.UInt32)value);
           return;
         case BuiltInType.Int64:
           encoder.Write((Int64)value);
@@ -197,7 +197,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           WriteArray<Int32>(encoder, value, encoder.Write);
           break;
         case BuiltInType.UInt32:
-          WriteArray<UInt32>(encoder, value, encoder.Write);
+          WriteArray<System.UInt32>(encoder, value, encoder.Write);
           break;
         case BuiltInType.Int64:
           WriteArray<Int64>(encoder, value, encoder.Write);

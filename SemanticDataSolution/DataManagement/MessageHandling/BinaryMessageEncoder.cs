@@ -50,12 +50,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #endregion
 
     #region MessageWriterBase
-    protected override void CreateMessage(UInt32 dataSetWriterId, Guid dataSetId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp)
+    protected override void CreateMessage(UInt32 dataSetWriterId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp)
     {
       OnMessageAdding(dataSetWriterId);
       MessageHeader = MessageHeader.GetProducerMessageHeader(this);
       //Create message header and placeholder for further header content.
-      MessageHeader.DataSetId = dataSetId;
       MessageHeader.ConfigurationVersion = m_ConfigurationVersion;
       MessageHeader.FieldCount = fieldCount;
       MessageHeader.MessageFlags = m_MessageFlags;

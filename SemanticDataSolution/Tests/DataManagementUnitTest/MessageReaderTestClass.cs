@@ -38,35 +38,21 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       _reader.ReadMessageCompleted += (x, y) => { _sender = x; _message = y; };
       Assert.IsNull(_sender);
       Assert.IsNull(_message);
-      _reader.GetMessageTest(SemanticData.GetSemanticDataTest());
+      _reader.GetMessageTest(123);
       Assert.IsNotNull(_sender);
       Assert.IsNotNull(_message);
       Assert.AreSame(_reader, _sender);
       Assert.AreSame(_reader, _message.MessageContent);
-    }
-    [TestMethod]
-    [TestCategory("DataManagement_MessageReader")]
-    public void IAmDestinationTestMethod()
-    {
-      TestMessageReaderBase _reader = new TestMessageReaderBase();
-      _reader.AttachToNetwork();
-      object _sender = null;
-      MessageEventArg _message = null;
-      _reader.ReadMessageCompleted += (x, y) => { _sender = x; _message = y; };
-      Assert.IsNull(_message);
-      SemanticData _id = SemanticData.GetSemanticDataTest();
-      _reader.GetMessageTest(_id);
-      Assert.IsNotNull(_message);
-      Assert.IsTrue(_message.MessageContent.IAmDestination(_id));
+      Assert.AreEqual<UInt32>(123, _message.DataSetId);
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageReader")]
     public void BinaryUDPPackageReaderTestMethod()
     {
       int _port = 35678;
-      ISemanticData _semanticData = SemanticData.GetSemanticDataTest();
-      List<string> m_Events = new List<string>();
-      using (BinaryUDPPackageReader _reader = new BinaryUDPPackageReader(_port, z => m_Events.Add(z)))
+      UInt32 _dataId = CommonDefinitions.DataSetId;
+      List<string> _Events = new List<string>();
+      using (BinaryUDPPackageReader _reader = new BinaryUDPPackageReader(_port, z => _Events.Add(z)))
       {
         Assert.IsNotNull(_reader);
         Assert.AreEqual<int>(0, _reader.m_NumberOfSentBytes);
@@ -85,12 +71,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         for (int i = 0; i < _buffer.Length; i++)
           _bindings[i] = new ConsumerBinding(i, _assign, Type.GetTypeCode(CommonDefinitions.TestValues[i].GetType()));
         int _redItems = 0;
-        _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _semanticData, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
-        _reader.SendUDPMessage(CommonDefinitions.GetTestBinaryArrayVariant(), _semanticData, _port);
+        _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _dataId, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
+        _reader.SendUDPMessage(CommonDefinitions.GetTestBinaryArrayVariant(), _dataId, _port);
         Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(126, _reader.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(110, _reader.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
         Thread.Sleep(1500);
+        foreach (string _item in _Events)
+          Console.WriteLine(_item);
         Assert.AreEqual<int>(_buffer.Length, _redItems);
         object[] _shouldBeInBuffer = CommonDefinitions.TestValues;
         Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
@@ -98,20 +86,18 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreEqual<Guid>(CommonDefinitions.TestGuid, _reader.Header.PublisherId);
         Assert.AreEqual<byte>(MessageHandling.CommonDefinitions.ProtocolVersion, _reader.Header.ProtocolVersion);
         Assert.AreEqual<byte>(1, _reader.Header.MessageCount);
-        Assert.AreEqual<int>(4, m_Events.Count);
+        Assert.AreEqual<int>(3, _Events.Count);
       }
       Thread.Sleep(150);
-      Assert.AreEqual<int>(7, m_Events.Count);
-      foreach (string item in m_Events)
-        Console.WriteLine(item);
+      Assert.AreEqual<int>(3, _Events.Count);
     }
     #endregion
 
     #region private
-    private void _reader_ReadMessageCompleted(object sender, MessageEventArg e, ISemanticData dataId, Func<int, IConsumerBinding> update, int length)
+    private void _reader_ReadMessageCompleted(object sender, MessageEventArg e, UInt32 dataId, Func<int, IConsumerBinding> update, int length)
     {
-      if (!e.MessageContent.IAmDestination(dataId))
-        return;
+      Assert.AreEqual<uint>(dataId, e.DataSetId);
+      //  return;
       e.MessageContent.UpdateMyValues(update, length);
     }
     private class ConsumerBinding : IConsumerBinding
@@ -219,7 +205,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public TestMessageReaderBase() : base(new Helpers.UABinaryDecoderImplementation())
       {
         State = new MyState();
-        m_MessageHeader = MessageHeader.GetConsumerMessageHeader(null);
+        m_MessageHeader = MessageHeader.GetConsumerMessageHeader(this);
       }
       #endregion
 
@@ -287,7 +273,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
-
       public override void AttachToNetwork()
       {
         Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
@@ -299,7 +284,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         get;
         protected set;
       }
-
       protected override MessageHeader MessageHeader
       {
         get
@@ -307,22 +291,17 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           return m_MessageHeader;
         }
       }
-
       #endregion
 
       #region private
       private MessageHeader m_MessageHeader;
       private int m_NumberOfAttachToNetwork;
-      private SemanticData m_SemanticData;
       #endregion
 
-      internal void GetMessageTest(SemanticData semanticData)
+      internal void GetMessageTest(UInt32 dataSetId)
       {
-        m_SemanticData = semanticData;
-        m_MessageHeader.DataSetId = m_SemanticData.Guid;
-        RaiseReadMessageCompleted();
+        RaiseReadMessageCompleted(dataSetId);
       }
-
     }
     private class MyState : IAssociationState
     {
@@ -417,7 +396,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
 
     #region BinaryDecoder
-
     /// <summary>
     /// Gets or sets the state.
     /// </summary>
@@ -455,8 +433,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_Trace(String.Format("Received length ={0}", _receiveBytes == null ? -1 : _receiveBytes.Length));
         MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
         OnNewFrameArrived(new BinaryReader(_stream, System.Text.Encoding.UTF8));
-        m_Trace("BeginReceive");
-        m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
+        //m_Trace("BeginReceive");
+        //m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
       }
       catch (ObjectDisposedException _ex)
       {
@@ -469,7 +447,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       m_Trace("Exiting m_ReceiveAsyncCallback");
     }
 
-    private ISemanticData m_SemanticData;
+    private UInt32 m_SemanticData;
     #endregion
 
     #region tetst instrumentation
@@ -479,7 +457,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private readonly UdpClient m_UdpClient;
     private Action<string> m_Trace;
 
-    internal void SendUDPMessage(byte[] buffer, ISemanticData semanticData, int _RemoteHostPortNumber)
+    internal void SendUDPMessage(byte[] buffer, UInt32 semanticData, int _RemoteHostPortNumber)
     {
       string m_RemoteHostName = "localhost";
       // Get DNS host information.
@@ -503,6 +481,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_UdpClient.Close();
 
     }
+
 
     #endregion
 

@@ -31,8 +31,8 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected void OnNewPackageArrived()
     {
       Header = PacketHeader.GetConsumerPackageHeader(this);
-      for (int i = Header.MessageCount; i > 0; i--)
-        OnNewMessageArrived();
+      for (int i = 0; i < Header.MessageCount; i++)
+        OnNewMessageArrived(Header.DataSetWriterIds[i]);
     }
     #endregion
 

@@ -67,14 +67,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         {
           throw new NotImplementedException();
         }
-
         public event EventHandler<MessageEventArg> ReadMessageCompleted;
         public void UpdateMyValues(Func<int, IConsumerBinding> update, int length)
         {
           throw new NotImplementedException();
         }
-
-        public bool IAmDestination(ISemanticData dataId)
+        public bool CheckDestination(uint dataId)
         {
           throw new NotImplementedException();
         }

@@ -99,14 +99,7 @@ namespace UAOOI.SemanticData.DataManagement
         lock (mLockObject)
           _mwx.Send(x => m_ProcessDataBindings[x], Convert.ToUInt16(m_ProcessDataBindings.Length), UInt64.MaxValue, DataDescriptor, m_MessageSequenceNumber, DateTime.UtcNow);
       m_Busy = false;
-      IncRollOver(m_MessageSequenceNumber);
-    }
-    private static ushort IncRollOver(ushort value)
-    {
-      if (value == ushort.MaxValue)
-        return 0;
-      else
-        return value++;
+      m_MessageSequenceNumber.IncRollOver();
     }
     #endregion
 

@@ -50,10 +50,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Called when there is a new message in the package that is to be processed.
     /// </summary>
-    protected void OnNewMessageArrived()
+    protected void OnNewMessageArrived(uint dataSetId)
     {
       MessageHeader.Synchronize();
-      RaiseReadMessageCompleted();
+      RaiseReadMessageCompleted(dataSetId);
     }
     #endregion
 

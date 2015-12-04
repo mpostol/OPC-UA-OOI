@@ -71,7 +71,7 @@ namespace UAOOI.SemanticData.DataManagement
     {
       if (this.State.State != HandlerState.Operational)
         return;
-      if (!messageArg.MessageContent.IAmDestination(this.DataDescriptor))
+      if (messageArg.DataSetId != CommonDefinitions.ToUInt32(this.DataDescriptor.Guid))
         return;
       messageArg.MessageContent.UpdateMyValues(x => m_ProcessDataBindings[x], m_ProcessDataBindings.Length);
     }

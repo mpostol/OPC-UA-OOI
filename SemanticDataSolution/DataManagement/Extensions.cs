@@ -35,6 +35,18 @@ namespace UAOOI.SemanticData.DataManagement
       //Signal what happened. 
       return changed;
     }
+    /// <summary>
+    /// Increment the <see cref="ushort"/> with the roll over.
+    /// </summary>
+    /// <param name="value">The value to be incremented.</param>
+    /// <returns>The incremented value.</returns>
+    internal static ushort IncRollOver(this ushort value)
+    {
+      if (value == ushort.MaxValue)
+        return 0;
+      else
+        return ++value;
+    }
   }
 
 }

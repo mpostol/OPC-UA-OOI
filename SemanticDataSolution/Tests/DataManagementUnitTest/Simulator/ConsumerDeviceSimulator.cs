@@ -18,7 +18,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
   {
 
     #region creator of the ConsumerDeviceSimulator
-    internal static DataManagementSetup CreateDevice(IMessageHandlerFactory messageHandlerFactory, Guid dataSetGuid)
+    internal static DataManagementSetup CreateDevice(IMessageHandlerFactory messageHandlerFactory, UInt32 dataSetGuid)
     {
       AssociationConfigurationId = dataSetGuid;
       DataManagementSetup _ret = new ConsumerDeviceSimulator();
@@ -45,7 +45,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
 
       Assert.AreEqual(HandlerState.Operational, _item.State.State);
-      Assert.AreEqual<Guid>(AssociationConfigurationId, _item.DataDescriptor.Guid);
+      //Assert.AreEqual<UInt32>(AssociationConfigurationId, _item.DataDescriptor.Guid);
       Assert.AreEqual<string>(AssociationConfigurationInformationModelURI, _item.DataDescriptor.Identifier.ToString());
       Assert.AreEqual<string>(AssociationConfigurationDataSymbolicName, _item.DataDescriptor.SymbolicName);
 
@@ -104,7 +104,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
             AssociationRole = AssociationRole.Consumer,
             DataSet = GetMembers(),
             DataSymbolicName = "DataSymbolicName",
-            Id = AssociationConfigurationId,
+            Id = Guid.NewGuid(),
             InformationModelURI= AssociationConfigurationInformationModelURI,
             RepositoryGroup = m_RepositoryGroup
         } };
@@ -192,7 +192,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     #endregion
 
     #region preconfigured settings
-    private static Guid AssociationConfigurationId;
+    private static UInt32 AssociationConfigurationId = UInt32.MaxValue;
     private const string AssociationConfigurationAlias = "Association1";
     private const string m_RepositoryGroup = "repositoryGroup";
     private const string AssociationConfigurationDataSymbolicName = "DataSymbolicName";
@@ -203,7 +203,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 
   internal class MessageReader : IMessageReader
   {
-    public MessageReader(Guid dataSetGuid)
+    public MessageReader(UInt32 dataSetGuid)
     {
       State = new MyState();
       m_DataSetGuid = dataSetGuid;
@@ -228,9 +228,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
         _bind.Assign2Repository(m_Message[i]);
       }
     }
-    public bool IAmDestination(ISemanticData dataId)
+    public bool CheckDestination(UInt32 dataId)
     {
-      return dataId.Guid == m_DataSetGuid;
+      return dataId == m_DataSetGuid;
     }
     public ulong ContentMask
     {
@@ -241,7 +241,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     #region testing environment
     internal void SendData()
     {
-      ReadMessageCompleted(this, new MessageEventArg(this));
+      ReadMessageCompleted(this, new MessageEventArg(this, UInt32.MaxValue));
     }
     internal void CheckConsistency()
     {
@@ -297,7 +297,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 
     }
     private object[] m_Message = new object[] { "123", 1.23 };
-    private Guid m_DataSetGuid { get; set; }
+    private UInt32 m_DataSetGuid { get; set; }
     private bool m_HaveBeenActivated;
     #endregion
 

@@ -94,6 +94,7 @@
     <Compile Include="UABinaryEncoderImplementationUnitTest.cs" />
     <Compile Include="UABinaryDecoderImplementationUnitTest.cs" />
     <Compile Include="HeaderWriterUnitTest.cs" />
+    <Compile Include="ExtensionsUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

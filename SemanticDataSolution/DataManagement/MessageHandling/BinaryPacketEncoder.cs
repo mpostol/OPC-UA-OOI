@@ -6,28 +6,26 @@ using UAOOI.SemanticData.DataManagement.Encoding;
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
   /// <summary>
-  /// Class BinaryPackageEncoder - OPC UA binary package encoder.
+  /// Class BinaryPacketEncoder - OPC UA binary packet encoder.
   /// </summary>
-  public abstract class BinaryPackageEncoder : BinaryMessageEncoder
+  public abstract class BinaryPacketEncoder : BinaryMessageEncoder
   {
     /// <summary>
-    /// Initializes a new instance of the <see cref="BinaryPackageEncoder" /> class.
+    /// Initializes a new instance of the <see cref="BinaryPacketEncoder" /> class.
     /// </summary>
     /// <param name="uaEncoder">The ua encoder.</param>
-    public BinaryPackageEncoder(IUAEncoder uaEncoder) : base(uaEncoder) { }
+    public BinaryPacketEncoder(IUAEncoder uaEncoder) : base(uaEncoder) { }
     /// <summary>
-    /// Gets or sets the header of the package.
+    /// Gets or sets the header of the packet.
     /// </summary>
     /// <value>The header <see cref="PacketHeader"/>.</value>
     public PacketHeader Header { get; set; }
 
     #region BinaryMessageEncoder
     /// <summary>
-    /// Called when new message is adding to the package payload.
+    /// Called when new message is adding to the packet payload.
     /// </summary>
-    protected override void OnMessageAdding(uint dataSetWriterIds)
-    {
-    }
+    protected override void OnMessageAdding(uint dataSetWriterIds) { }
     /// <summary>
     /// Called when the current message has been added and is ready to be sent out.
     /// </summary>
@@ -47,9 +45,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Encodes the headers.
     /// </summary>
-    protected void EncodePackageHeaders(Guid producerId, IList<UInt32> dataSetWriterIds)
+    protected void EncodePacketHeaders(Guid producerId, IList<UInt32> dataSetWriterIds)
     {
-      Header = PacketHeader.GetProducerPackageHeader(this, producerId, dataSetWriterIds);
+      Header = PacketHeader.GetProducerPacketHeader(this, producerId, dataSetWriterIds);
       Header.WritePacketHeader();
     }
     #endregion

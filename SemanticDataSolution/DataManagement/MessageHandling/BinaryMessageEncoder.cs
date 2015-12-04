@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// be available in the spec.
   /// </note>
   /// </remarks>
-  public abstract class BinaryMessageEncoder : MessageWriterBase, IBinaryHeaderWriter
+  public abstract class BinaryMessageEncoder : MessageWriterBase, IBinaryHeaderEncoder
   {
     private MessageHeader.ConfigurationVersionDataType m_ConfigurationVersion;
     private byte m_MessageFlags;

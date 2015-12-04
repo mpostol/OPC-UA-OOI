@@ -16,9 +16,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Gets the producer message header.
     /// </summary>
-    /// <param name="writer">The writer <see cref="IBinaryHeaderWriter"/> to populate the payload with the header information.</param>
+    /// <param name="writer">The writer <see cref="IBinaryHeaderEncoder"/> to populate the payload with the header information.</param>
     /// <returns>MessageHeader.</returns>
-    public static MessageHeader GetProducerMessageHeader(IBinaryHeaderWriter writer)
+    public static MessageHeader GetProducerMessageHeader(IBinaryHeaderEncoder writer)
     {
       return new ProducerMessageHeader(writer);
     }
@@ -135,7 +135,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
 
       #region creator
-      public ProducerMessageHeader(IBinaryHeaderWriter writer)
+      public ProducerMessageHeader(IBinaryHeaderEncoder writer)
       {
         m_HeaderWriter = new HeaderWriter(writer, m_PackageHeaderLength);
       }
@@ -179,7 +179,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       #region private
       private const ushort m_PackageHeaderLength = 18;
       private HeaderWriter m_HeaderWriter;
-      private void WriteHeader(IBinaryHeaderWriter writer, ushort messageLength)
+      private void WriteHeader(IBinaryHeaderEncoder writer, ushort messageLength)
       {
         writer.Write(messageLength);
         writer.Write((byte)MessageType);

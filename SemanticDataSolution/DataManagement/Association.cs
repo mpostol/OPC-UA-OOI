@@ -19,8 +19,8 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     /// <param name="data">The UA Semantic Data triple representation. It id not used by current implementation.</param>
     /// <param name="aliasName">A readable alias name for this instance to be used on User Interface.
-    /// Depending on the implementation this name is used to filter packages against the destination.</param>
-    /// <exception cref="System.NullReferenceException">data argument must not be null
+    /// Depending on the implementation this name is used to filter packets against the destination.</param>
+    /// <exception cref="NullReferenceException">data argument must not be null
     /// or
     /// aliasName argument must not be null</exception>
     /// <exception cref="System.ArgumentOutOfRangeException">data argument must not be null

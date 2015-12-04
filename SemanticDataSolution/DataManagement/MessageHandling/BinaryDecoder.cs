@@ -8,11 +8,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// <summary>
   /// Class BinaryDecoder - wrapper of <see cref="BinaryReader"/> supporting OPC UA binary encoding.
   /// </summary>
-  public abstract class BinaryDecoder : BinaryPackageDecoder, IDisposable
+  public abstract class BinaryDecoder : BinaryPacketDecoder, IDisposable
   {
     #region creators
     /// <summary>
-    /// Initializes a new instance of the <see cref="BinaryPackageDecoder" /> class is to be used by the package level decoding.
+    /// Initializes a new instance of the <see cref="BinaryPacketDecoder" /> class is to be used by the packet level decoding.
     /// </summary>
     /// <param name="uaDecoder">The ua decoder to be used fo decode UA Built-in data types.</param>
     public BinaryDecoder(IUADecoder uaDecoder) : base(uaDecoder) { }
@@ -50,7 +50,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     }
     #endregion
 
-    #region BinaryPackageDecoder
+    #region BinaryPacketDecoder
     /// <summary>
     /// Reads an 8-byte unsigned integer from the message and advances the position by eight bytes.
     /// </summary>
@@ -124,7 +124,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected void OnNewFrameArrived(BinaryReader uaBinaryReader)
     {
       m_UABinaryReader = uaBinaryReader;
-      OnNewPackageArrived();
+      OnNewPacketArrived();
       m_UABinaryReader.Dispose();
       m_UABinaryReader = null; ;
     }

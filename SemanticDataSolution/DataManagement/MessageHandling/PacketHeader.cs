@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using UAOOI.SemanticData.DataManagement.Encoding;
 using System.Collections.ObjectModel;
 
@@ -10,39 +9,31 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
 
   /// <summary>
-  /// Class PackageHeader - represent information in the protocol package header.
+  /// Class PacketHeader - represent information in the protocol packet header.
   /// </summary>
-  /// <remarks>
-  /// #98: PackageHeader - must be refined
-  /// Because the specification is subject of further development this class mus be refined according to further protocol modification.
-  /// The following topics must be addressed:
-  /// * PublisherId - how to use it and it is static so exchange it is waste of bandwidth.
-  /// * Naming convention publisher => producer; subscriber => consumer
-  /// * SecurityTokenId - how to use it, how to define it if producer is not OPC UA Server, why exchange it over the wire
-  /// </remarks>
   public abstract class PacketHeader
   {
 
     #region public API
     /// <summary>
-    /// Gets the producer package header.
+    /// Gets the producer packet header.
     /// </summary>
-    /// <param name="writer">The writer.</param>
+    /// <param name="encoder">The writer.</param>
     /// <param name="producerId">The producer identifier.</param>
     /// <param name="dataSetWriterIds">The data set writer ids list. The size of the list must be equal to the <see cref="PacketHeader.MessageCount"/>.</param>
     /// <returns>An instance of the <see cref="PacketHeader"/>.</returns>
-    public static PacketHeader GetProducerPackageHeader(IBinaryHeaderWriter writer, Guid producerId, IList<System.UInt32> dataSetWriterIds)
+    public static PacketHeader GetProducerPacketHeader(IBinaryHeaderEncoder encoder, Guid producerId, IList<UInt32> dataSetWriterIds)
     {
-      return new ProducerHeader(writer, producerId, dataSetWriterIds);
+      return new ProducerHeader(encoder, producerId, dataSetWriterIds);
     }
     /// <summary>
-    /// Gets the consumer package header.
+    /// Gets the consumer packet header.
     /// </summary>
-    /// <param name="reader">The reader.</param>
-    /// <returns>PackageHeader.</returns>
-    public static PacketHeader GetConsumerPackageHeader(IBinaryDecoder reader)
+    /// <param name="decoder">The reader.</param>
+    /// <returns>New instance of the <see cref="PacketHeader"/>.</returns>
+    public static PacketHeader GetConsumerPacketHeader(IBinaryDecoder decoder)
     {
-      return new ConsumerHeader(reader);
+      return new ConsumerHeader(decoder);
     }
     /// <summary>
     /// Synchronizes this instance content with the header.
@@ -96,7 +87,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       }
       #endregion
 
-      #region PackageHeader
+      #region PacketHeader
       public override byte MessageCount
       {
         get { return m_MessageCount; }
@@ -148,8 +139,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     }
     private class ProducerHeader : PacketHeader
     {
+
       #region constructor
-      public ProducerHeader(IBinaryHeaderWriter writer, Guid producerId, IList<System.UInt32> dataSetWriterIds) : base()
+      public ProducerHeader(IBinaryHeaderEncoder writer, Guid producerId, IList<System.UInt32> dataSetWriterIds) : base()
       {
         if (writer == null)
           throw new ArgumentNullException(nameof(writer));
@@ -159,12 +151,12 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         SecurityTokenId = 0;
         DataSetWriterIds = new ReadOnlyCollection<uint>(dataSetWriterIds);
         MessageCount = Convert.ToByte(DataSetWriterIds.Count);
-        ushort _packageLength = Convert.ToUInt16(m_PackageHeaderLength + dataSetWriterIds.Count * 4);
-        m_HeaderWriter = new HeaderWriter(writer, _packageLength);
+        ushort _packetLength = Convert.ToUInt16(m_PacketHeaderLength + dataSetWriterIds.Count * 4);
+        m_HeaderWriter = new HeaderWriter(writer, _packetLength);
       }
       #endregion
 
-      #region PackageHeader
+      #region PacketHeader
       /// <summary>
       /// Gets or sets the number of messages contained in the packet.
       /// </summary>
@@ -216,7 +208,14 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         m_HeaderWriter. WriteHeader(WriteHeader);
       }
-      private void WriteHeader(IBinaryHeaderWriter m_Writer, ushort dataLength)
+      #endregion
+
+      #region private
+      //vars
+      private HeaderWriter m_HeaderWriter;
+      private const ushort m_PacketHeaderLength = 20;
+      //methods
+      private void WriteHeader(IBinaryHeaderEncoder m_Writer, ushort dataLength)
       {
         Debug.Assert(DataSetWriterIds != null);
         Debug.Assert(DataSetWriterIds.Count == MessageCount);
@@ -230,12 +229,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         for (int i = 0; i < DataSetWriterIds.Count; i++)
           m_Writer.Write(DataSetWriterIds[i]);
       }
-      #endregion
-
-      #region private
-      //vars
-      private HeaderWriter m_HeaderWriter;
-      private const ushort m_PackageHeaderLength = 20;
       #endregion
 
     }

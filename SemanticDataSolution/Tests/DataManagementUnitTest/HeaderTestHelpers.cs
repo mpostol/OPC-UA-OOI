@@ -7,7 +7,7 @@ using UAOOI.SemanticData.DataManagement.MessageHandling;
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
 
-  internal class HeaderWriterTest : IBinaryHeaderWriter
+  internal class HeaderWriterTest : IBinaryHeaderEncoder
   {
 
     #region constructor

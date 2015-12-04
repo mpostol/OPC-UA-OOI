@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       long _startPosition = 10;
       HeaderWriterTest _writer = new HeaderWriterTest(x => { }, _startPosition);
-      PacketHeader _header = PacketHeader.GetProducerPackageHeader(_writer, CommonDefinitions.TestGuid, new System.UInt32[] { 0xFFFF });
+      PacketHeader _header = PacketHeader.GetProducerPacketHeader(_writer, CommonDefinitions.TestGuid, new System.UInt32[] { 0xFFFF });
       Assert.IsNotNull(_header);
       Assert.AreEqual<System.UInt32>(0xFFFF, _header.DataSetWriterIds[0]);
       Assert.AreEqual<byte>(1, _header.MessageCount);
@@ -38,7 +38,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void ConsumerWritePacketHeaderTestMethod()
     {
       HeaderReaderTest _reader = new HeaderReaderTest(m_StartPosition);
-      PacketHeader _header = PacketHeader.GetConsumerPackageHeader(_reader);
+      PacketHeader _header = PacketHeader.GetConsumerPacketHeader(_reader);
       Assert.IsNotNull(_header);
       _header.WritePacketHeader();
     }
@@ -47,7 +47,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void ConsumerPackageHeaderTestMethod()
     {
       HeaderReaderTest _reader = new HeaderReaderTest(m_StartPosition);
-      PacketHeader _header = PacketHeader.GetConsumerPackageHeader(_reader);
+      PacketHeader _header = PacketHeader.GetConsumerPacketHeader(_reader);
       Assert.IsNotNull(_header);
       Assert.AreEqual<byte>((byte)((byte)m_StartPosition + 16), _header.ProtocolVersion);
       Assert.AreEqual<byte>((byte)((byte)m_StartPosition + 17), _header.PacketFlags);

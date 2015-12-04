@@ -16,7 +16,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     /// <param name="writer">The writer.</param>
     /// <param name="headerLength">Length of the packet.</param>
-    internal HeaderWriter(IBinaryHeaderWriter writer, ushort headerLength)
+    internal HeaderWriter(IBinaryHeaderEncoder writer, ushort headerLength)
     {
       m_Length = headerLength;
       m_Writer = writer;
@@ -27,7 +27,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Writes the header.
     /// </summary>
     /// <param name="writeHeader">The write header delegate encapsulating functionality used to update the header content.</param>
-    internal void WriteHeader(Action<IBinaryHeaderWriter, ushort> writeHeader)
+    internal void WriteHeader(Action<IBinaryHeaderEncoder, ushort> writeHeader)
     {
       long m_CurrentPosition = SetPosition(Convert.ToInt32(m_BeginPosition));
       writeHeader(m_Writer, DataLength(m_CurrentPosition));
@@ -37,7 +37,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 
     #region private
     //vars
-    private IBinaryHeaderWriter m_Writer;
+    private IBinaryHeaderEncoder m_Writer;
     private ushort m_Length;
     private long m_BeginPosition;
     //methods

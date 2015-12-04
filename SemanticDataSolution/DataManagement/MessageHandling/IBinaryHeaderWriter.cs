@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.IO;
 using UAOOI.SemanticData.DataManagement.Encoding;
 
@@ -6,9 +7,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {
 
   /// <summary>
-  /// Interface IHeaderWriter - instance of this interface is used to manage the message and package headers content by the writer.
+  /// Interface IBinaryHeaderEncoder - instance of this interface is used to manage the message and packet headers content on the producer side.
   /// </summary>
-  public interface IBinaryHeaderWriter: IBinaryEncoder
+  public interface IBinaryHeaderEncoder: IBinaryEncoder
   {
     
     /// <summary>
@@ -18,9 +19,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// A byte offset relative to origin.
     /// </param>
     /// <param name="origin">
-    /// A field of <see cref="System.IO.SeekOrigin"/> indicating the reference point from which the new position is to be obtained..
+    /// A field of <see cref="SeekOrigin"/> indicating the reference point from which the new position is to be obtained..
     /// </param>
-    /// <returns>The position with the current stream as <see cref="System.Int64"/>.</returns>
+    /// <returns>The position with the current stream as <see cref="Int64"/>.</returns>
     long Seek(int offset, SeekOrigin origin);
 
   }

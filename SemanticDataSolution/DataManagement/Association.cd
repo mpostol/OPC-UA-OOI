@@ -2,34 +2,6 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="UAOOI.SemanticData.DataManagement.Association" Collapsed="true">
     <Position X="6.75" Y="2" Width="1.5" />
-    <NestedTypes>
-      <Class Name="UAOOI.SemanticData.DataManagement.Association.AssociationStateBase" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Association.cs</NewMemberFileName>
-        </TypeIdentifier>
-        <Lollipop Position="0.2" />
-      </Class>
-      <Class Name="UAOOI.SemanticData.DataManagement.Association.AssociationStateDisabled" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Association.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="UAOOI.SemanticData.DataManagement.Association.AssociationStateOperational" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Association.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="UAOOI.SemanticData.DataManagement.Association.AssociationStateNoConfiguration" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Association.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="UAOOI.SemanticData.DataManagement.Association.AssociationStateError" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Association.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAAAQAMBAgAAQQEAAAAAEAAAAAEAAAAAEAABAAAAAA=</HashCode>
       <FileName>Association.cs</FileName>
@@ -56,7 +28,7 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAQAAAFJAgAEAAAAABAAAgACAAEAAAAAAAAAAQEAAA=</HashCode>
+      <HashCode>AAAAAAAFJAgAEAAAAABAAAgACAAEAAAAAAAAAAQEAAA=</HashCode>
       <FileName>ProducerAssociation.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -69,14 +41,6 @@
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
-    <NestedTypes>
-      <Class Name="UAOOI.SemanticData.DataManagement.AssociationsCollection.SemanticData" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>AssociationsCollection.cs</NewMemberFileName>
-        </TypeIdentifier>
-        <Lollipop Position="0.2" />
-      </Class>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAgAAQAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AssociationsCollection.cs</FileName>

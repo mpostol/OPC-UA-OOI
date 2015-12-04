@@ -48,7 +48,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #region private
     private MessageHeader b_MessageHeader;
     /// <summary>
-    /// Called when there is a new message in the package that is to be processed.
+    /// Called when there is a new message in the packet that is to be processed.
     /// </summary>
     protected void OnNewMessageArrived(uint dataSetId)
     {

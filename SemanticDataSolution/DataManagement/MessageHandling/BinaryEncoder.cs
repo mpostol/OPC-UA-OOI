@@ -9,7 +9,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// <summary>
   /// Class BinaryEncoder - wrapper of <see cref="BinaryWriter"/> supporting OPC UA binary encoding.
   /// </summary>
-  public abstract class BinaryEncoder : BinaryPackageEncoder, IDisposable
+  public abstract class BinaryEncoder : BinaryPacketEncoder, IDisposable
   {
 
     #region creator
@@ -170,7 +170,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       m_output = new MemoryStream();
       m_binaryWriter = new BinaryWriter(m_output);
-      EncodePackageHeaders(m_producerId, m_dataSetWriterIds);
+      EncodePacketHeaders(m_producerId, m_dataSetWriterIds);
     }
     #endregion
 

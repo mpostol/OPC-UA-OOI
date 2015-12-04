@@ -68,10 +68,20 @@
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.SemanticData.DataManagement.MessageHandling.BinaryPacketDecoder" Collapsed="true">
-    <Position X="3.25" Y="7.25" Width="1.5" />
+    <Position X="3" Y="7.25" Width="2" />
     <TypeIdentifier>
       <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MessageHandling\BinaryPacketDecoder.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Header" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="UAOOI.SemanticData.DataManagement.MessageHandling.BinaryPacketEncoder" Collapsed="true">
+    <Position X="9.75" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAIAAAAAAQAQAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MessageHandling\BinaryPacketEncoder.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Header" />

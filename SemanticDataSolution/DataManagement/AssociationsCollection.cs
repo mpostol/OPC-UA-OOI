@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 

@@ -2,6 +2,34 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="UAOOI.SemanticData.DataManagement.Association" Collapsed="true">
     <Position X="6.75" Y="2" Width="1.5" />
+    <NestedTypes>
+      <Class Name="UAOOI.SemanticData.DataManagement.Association.AssociationStateBase" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Association.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+      <Class Name="UAOOI.SemanticData.DataManagement.Association.AssociationStateDisabled" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Association.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="UAOOI.SemanticData.DataManagement.Association.AssociationStateOperational" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Association.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="UAOOI.SemanticData.DataManagement.Association.AssociationStateNoConfiguration" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Association.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="UAOOI.SemanticData.DataManagement.Association.AssociationStateError" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Association.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAAAQAMBAgAAQQEAAAAAEAAAAAEAAAAAEAABAAAAAA=</HashCode>
       <FileName>Association.cs</FileName>
@@ -9,7 +37,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="UAOOI.SemanticData.DataManagement.ConsumerAssociation" Collapsed="true">
-    <Position X="5.5" Y="3.25" Width="1.75" />
+    <Position X="5.5" Y="3.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAFBAgAAAAAEAAAAAAAAQAEAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ConsumerAssociation.cs</FileName>
@@ -19,12 +47,12 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="UAOOI.SemanticData.DataManagement.ProducerAssociation" Collapsed="true">
-    <Position X="8" Y="3.25" Width="1.75" />
+    <Position X="7.75" Y="3.25" Width="2" />
     <AssociationLine Name="m_ProcessDataBindings" Type="UAOOI.SemanticData.DataManagement.DataRepository.IProducerBinding" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="8.875" Y="3.941" />
-        <Point X="8.875" Y="4.469" />
-        <Point X="11.5" Y="4.469" />
+        <Point X="8.75" Y="3.941" />
+        <Point X="8.75" Y="4.469" />
+        <Point X="11.25" Y="4.469" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -37,34 +65,76 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="UAOOI.SemanticData.DataManagement.AssociationsCollection" Collapsed="true">
-    <Position X="6.75" Y="4.75" Width="2.25" />
+    <Position X="6.5" Y="4.75" Width="2.25" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
+    <NestedTypes>
+      <Class Name="UAOOI.SemanticData.DataManagement.AssociationsCollection.SemanticData" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>AssociationsCollection.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAgAAQAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AssociationsCollection.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="UAOOI.SemanticData.DataManagement.MessageHandling.IMessageWriter" Collapsed="true">
-    <Position X="11.5" Y="3.25" Width="2" />
+    <Position X="11.25" Y="3.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MessageHandling\IMessageWriter.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="UAOOI.SemanticData.DataManagement.DataRepository.IProducerBinding" Collapsed="true">
-    <Position X="11.5" Y="4.25" Width="2" />
+    <Position X="11.25" Y="4.25" Width="2.25" />
+    <InheritanceLine Type="UAOOI.SemanticData.DataManagement.DataRepository.IBinding" FixedToPoint="true">
+      <Path>
+        <Point X="7.75" Y="6" />
+        <Point X="7.75" Y="5.7" />
+        <Point X="11.5" Y="5.7" />
+        <Point X="11.5" Y="5.07" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="System.ComponentModel.INotifyPropertyChanged" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="14" Y="6" />
+        <Point X="14" Y="5.643" />
+        <Point X="13.062" Y="5.643" />
+        <Point X="13.062" Y="5.07" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAQAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DataRepository\IProducerBinding.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="UAOOI.SemanticData.DataManagement.DataRepository.IConsumerBinding" Collapsed="true">
-    <Position X="1.75" Y="3.25" Width="1.75" />
+    <Position X="2" Y="3.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>DataRepository\IConsumerBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="UAOOI.SemanticData.DataManagement.DataRepository.IBinding" Collapsed="true">
+    <Position X="7" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAARAAAAAAAAAAAAAAAgQAUAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataRepository\IBinding.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="System.ComponentModel.INotifyPropertyChanged" Collapsed="true">
+    <Position X="13" Y="6" Width="2" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="UAOOI.SemanticData.DataManagement.MessageHandling.IMessageHandler" Collapsed="true">
+    <Position X="13.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAABAQAAAA=</HashCode>
+      <FileName>MessageHandling\IMessageHandler.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

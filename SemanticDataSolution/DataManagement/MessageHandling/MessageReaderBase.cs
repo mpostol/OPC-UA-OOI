@@ -23,7 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       if (uaDecoder == null)
         throw new ArgumentNullException(nameof(uaDecoder));
       m_UADecoder = uaDecoder;
-      m_ReadValueDelegate = ReadValueVariant;
+      m_ReadValueDelegate = ReadValueVariant; //TODO Variant encoding must be configurable https://github.com/mpostol/OPC-UA-OOI/issues/134
     }
     #endregion
 
@@ -57,15 +57,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Occurs when an asynchronous operation to read a new message completes.
     /// </summary>
     public event EventHandler<MessageEventArg> ReadMessageCompleted;
-    /// <summary>
-    /// Check if the message destination is the data set described by the <paramref name="dataId" /> of type <see cref="ISemanticData" />.
-    /// </summary>
-    /// <param name="dataId">The data identifier <see cref="ISemanticData" />.</param>
-    /// <returns><c>true</c> if <paramref name="dataId" /> is the destination of the message, <c>false</c> otherwise.</returns>
-    bool IMessageReader.IAmDestination(ISemanticData dataId)
-    {
-      return dataId.Guid == MessageHeader.DataSetId;
-    }
     /// <summary>
     /// Updates my values using inverse of control pattern.
     /// </summary>
@@ -124,14 +115,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Raises the read message completed event.
     /// </summary>
-    protected void RaiseReadMessageCompleted()
+    protected void RaiseReadMessageCompleted(UInt32 dataSetId)
     {
       if (this.State.State != HandlerState.Operational)
         return;
-      EventHandler<MessageEventArg> _handler = ReadMessageCompleted;
-      if (_handler == null)
-        return;
-      ReadMessageCompleted(this, new MessageEventArg(this));
+      ReadMessageCompleted?.Invoke(this, new MessageEventArg(this, dataSetId));
     }
     private void ReadValue(IConsumerBinding consumerBinding)
     {

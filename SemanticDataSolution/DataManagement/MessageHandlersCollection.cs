@@ -24,25 +24,29 @@ namespace UAOOI.SemanticData.DataManagement
       (MessageHandlerConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, IEncodingFactory encodingFactory, Action<string, IMessageHandler> addMessageHandler)
     {
       MessageHandlersCollection _collection = new MessageHandlersCollection();
-      foreach (MessageHandlerConfiguration item in configuration)
+      foreach (MessageHandlerConfiguration _configuration in configuration)
       {
-        if (_collection.ContainsKey(item.Name))
+        if (_collection.ContainsKey(_configuration.Name))
           throw new ArgumentOutOfRangeException("Name", "Duplicated transport name");
         IMessageHandler _handler = null;
-        switch (item.TransportRole)
+        switch (_configuration.TransportRole)  //TODO:DataSetWriterId must be configurable https://github.com/mpostol/OPC-UA-OOI/issues/136
         {
           case AssociationRole.Consumer:
-            _handler = messageHandlerFactory.GetIMessageReader(item.Name, item.Configuration, encodingFactory.UADecoder);
+            MessageReaderConfiguration _readerConfiguration = (MessageReaderConfiguration)_configuration;
+            _handler = messageHandlerFactory.GetIMessageReader(_configuration.Name, _configuration.Configuration, encodingFactory.UADecoder);
+            foreach (ConsumerAssociationConfiguration _consumerAssociation in _readerConfiguration.ConsumerAssociationConfigurations)
+              addMessageHandler(_consumerAssociation.AssociationName, _handler);
             break;
           case AssociationRole.Producer:
-            _handler = messageHandlerFactory.GetIMessageWriter(item.Name, item.Configuration, encodingFactory.UAEncoder);
+            MessageWriterConfiguration _writerConfiguration = (MessageWriterConfiguration)_configuration;
+            _handler = messageHandlerFactory.GetIMessageWriter(_configuration.Name, _configuration.Configuration, encodingFactory.UAEncoder);
+            foreach (ProducerAssociationConfiguration _producerAssociation in _writerConfiguration.ProducerAssociationConfigurations)
+              addMessageHandler(_producerAssociation.AssociationName, _handler);
             break;
           default:
             break;
         }
-        _collection.Add(item.Name, _handler);
-        foreach (string _associationName in item.AssociationNames)
-          addMessageHandler(_associationName, _handler);
+        _collection.Add(_configuration.Name, _handler);
       }
       return _collection;
     }

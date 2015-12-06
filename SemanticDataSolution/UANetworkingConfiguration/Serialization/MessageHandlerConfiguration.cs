@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.Linq;
-using System.Xml.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
@@ -9,24 +8,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
   /// <summary>
   /// Class MessageTransportConfiguration - provide configuration for transport used to transfer messages over the wire.
   /// </summary>
-  public partial class MessageHandlerConfiguration: ICloneable
+  public abstract partial class MessageHandlerConfiguration : ICloneable
   {
 
-    /// <summary>
-    /// Gets or sets the association names.
-    /// </summary>
-    /// <value>The association names.</value>
-    [XmlIgnore]
-    public string[] AssociationNames
-    {
-      get { return AssociationNamesArrayOfString.ToArray(); }
-      set
-      {
-        ArrayOfString _associations = new ArrayOfString();
-        _associations.AddRange(value);
-        AssociationNamesArrayOfString = _associations;
-      }
-    }
     /// <summary>
     /// Creates a new object that is a copy of the current instance.
     /// </summary>
@@ -41,9 +25,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// </summary>
     /// <param name="associationName">Name of the association.</param>
     /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-    internal bool Associated(string associationName)
-    {
-      return AssociationNamesArrayOfString.Where<string>( x=> x == associationName).Any<string>();
-    }
+    internal abstract bool Associated(string associationName);
   }
 }

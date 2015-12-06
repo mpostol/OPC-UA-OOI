@@ -87,14 +87,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
       private MessageHandlerConfiguration[] GetMessageTransport()
       {
-        return new MessageHandlerConfiguration[] { new MessageHandlerConfiguration() { AssociationNames = GetTransportAssociations(),
-                                                                                           Configuration = null,
-                                                                                           Name = "UDP",
-                                                                                           TransportRole = AssociationRole.Consumer } };
+        return new MessageHandlerConfiguration[] { new MessageReaderConfiguration() { ConsumerAssociationConfigurations = GetTransportAssociations(),
+                                                                                       Configuration = null,
+                                                                                       Name = "UDP",
+                                                                                       TransportRole = AssociationRole.Consumer } };
       }
-      private string[] GetTransportAssociations()
+      private ConsumerAssociationConfiguration[] GetTransportAssociations()
       {
-        return new string[] { AssociationConfigurationAlias };
+        return new ConsumerAssociationConfiguration[] { new ConsumerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = UInt32.MaxValue, PublisherId = Guid.NewGuid() } };
       }
       private DataSetConfiguration[] GetAssociations()
       {

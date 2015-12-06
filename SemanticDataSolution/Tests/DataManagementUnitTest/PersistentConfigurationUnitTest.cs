@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   [TestClass]
   public class PersistentConfigurationUnitTest
   {
-    
+
     #region TestMethod
     [TestMethod]
     [TestCategory("DataManagement_PersistentConfiguration")]
@@ -26,12 +26,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private void TestConfiguration(MessageHandlerConfiguration[] messageTransportConfiguration)
     {
       foreach (MessageHandlerConfiguration _item in messageTransportConfiguration)
-        TestConfiguration(_item);
+        TestConfiguration((MessageReaderConfiguration)_item);
     }
-    private void TestConfiguration(MessageHandlerConfiguration _item)
+    private void TestConfiguration(MessageReaderConfiguration _item)
     {
-      foreach (string _ax in _item.AssociationNames)
-        AssociationsDictionary.Add(_ax, _ax);
+      foreach (ConsumerAssociationConfiguration _ax in _item.ConsumerAssociationConfigurations)
+        AssociationsDictionary.Add(_ax.AssociationName, _ax);
       MessageTransportConfigurationDictionary.Add(_item.Name, _item);
       Assert.IsNull(_item.Configuration);
     }
@@ -56,12 +56,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       foreach (FieldMetaData _dmx in dataMemberConfiguration)
       {
         Assert.IsFalse(String.IsNullOrEmpty(_dmx.ProcessValueName));
-        Assert.AreNotEqual<BuiltInType>( BuiltInType.Null, _dmx.Encoding);
+        Assert.AreNotEqual<BuiltInType>(BuiltInType.Null, _dmx.Encoding);
         Assert.IsFalse(String.IsNullOrEmpty(_dmx.SymbolicName));
       }
     }
     private static Dictionary<string, MessageHandlerConfiguration> MessageTransportConfigurationDictionary = new Dictionary<string, MessageHandlerConfiguration>();
-    private static Dictionary<string, string> AssociationsDictionary = new Dictionary<string, string>();
+    private static Dictionary<string, AssociationConfiguration> AssociationsDictionary = new Dictionary<string, AssociationConfiguration>();
     private static Dictionary<string, DataSetConfiguration> AssociationConfigurationDictionary = new Dictionary<string, DataSetConfiguration>();
     private static Dictionary<Guid, DataSetConfiguration> AssociationConfigurationGuidDictionary = new Dictionary<Guid, DataSetConfiguration>();
     private static Dictionary<string, DataSetConfiguration> RepositoryGroupDictionary = new Dictionary<string, DataSetConfiguration>();

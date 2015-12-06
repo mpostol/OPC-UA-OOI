@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     /// <returns>ConfigurationData.</returns>
     internal static ConfigurationData LoadConsumer()
     {
-      return new ConfigurationData() { DataSets = GetDataSetConfigurations(AssociationRole.Consumer), MessageHandlers = GetMessageTransport(AssociationRole.Consumer) };
+      return new ConfigurationData() { DataSets = GetDataSetConfigurations(AssociationRole.Consumer), MessageHandlers = GetMessageHandlers(AssociationRole.Consumer) };
     }
     /// <summary>
     /// Created the configuration from the local data.
@@ -24,25 +24,38 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     /// <returns>ConfigurationData.</returns>
     internal static ConfigurationData LoadProducer()
     {
-      return new ConfigurationData() { DataSets = GetDataSetConfigurations(AssociationRole.Producer), MessageHandlers = GetMessageTransport(AssociationRole.Producer) };
+      return new ConfigurationData() { DataSets = GetDataSetConfigurations(AssociationRole.Producer), MessageHandlers = GetMessageHandlers(AssociationRole.Producer) };
     }
     #endregion
 
     #region configuration
-    private static MessageHandlerConfiguration[] GetMessageTransport(AssociationRole associationRole)
+    private static MessageHandlerConfiguration[] GetMessageHandlers(AssociationRole associationRole)
     {
-      return new MessageHandlerConfiguration[] 
-      { new MessageHandlerConfiguration()
-        { AssociationNames = GetTransportAssociations(),
+      MessageHandlerConfiguration[] _ret = null;
+      switch (associationRole)
+      {
+        case AssociationRole.Consumer:
+          _ret = new MessageReaderConfiguration[] { new MessageReaderConfiguration() { ConsumerAssociationConfigurations = GetConsumerAssociationConfiguration(),
           Configuration = null,
           Name = "UDP",
-          TransportRole = associationRole
-        }
-      };
+          TransportRole = associationRole }};
+          break;
+        case AssociationRole.Producer:
+          _ret = new MessageWriterConfiguration[] { new MessageWriterConfiguration() {  ProducerAssociationConfigurations = GetProducerAssociationConfiguration(),
+          Configuration = null,
+          Name = "UDP",
+          TransportRole = associationRole }};
+          break;
+      }
+      return _ret;
     }
-    private static string[] GetTransportAssociations()
+    private static ConsumerAssociationConfiguration[] GetConsumerAssociationConfiguration()
     {
-      return new string[] { AssociationConfigurationAlias };
+      return new ConsumerAssociationConfiguration[] { new ConsumerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = DefaultDataSetWriterId, PublisherId = DefaultAssociationConfigurationId } };
+    }
+    private static ProducerAssociationConfiguration[] GetProducerAssociationConfiguration()
+    {
+      return new ProducerAssociationConfiguration[] { new ProducerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = DefaultDataSetWriterId } };
     }
     private static DataSetConfiguration[] GetDataSetConfigurations(AssociationRole associationRole)
     {
@@ -79,6 +92,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     private const string AssociationConfigurationDataSymbolicName = "DataSymbolicName";
     private const string AssociationConfigurationInformationModelURI = @"https://github.com/mpostol/OPC-UA-OOI";
     private static readonly Guid DefaultAssociationConfigurationId = new Guid("C1F53FFB-6552-4CCC-84C9-F847147CDC85");
+    private const UInt32 DefaultDataSetWriterId = 12345;
     private static Guid m_ConfigurationGuid = new Guid("D3DEA20A-1F65-4744-ABF5-3D8120960D7B");
     #endregion
 

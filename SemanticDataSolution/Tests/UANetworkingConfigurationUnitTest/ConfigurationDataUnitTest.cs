@@ -28,42 +28,16 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.AreEqual<int>(0, _configuration.OnSavingCount);
       LocalConfigurationData.Save<LocalConfigurationData>(_configuration, (x) => { Assert.AreEqual<int>(1, x.OnSavingCount); });
     }
-    //[TestMethod]
-    //[TestCategory("Configuration_SerializationUnitTest")]
-    //public void ConfigurationDataConsumerXmlTestMethod()
-    //{
-    //  FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");
-    //  Assert.IsTrue(_configFile.Exists);
-    //  string _message = null;
-    //  ConfigurationData _cd = ConfigurationData.Load<ConfigurationData>
-    //    (() => XmlDataContractSerializers.Load<ConfigurationData>(_configFile, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); }), () => { });
-    //  Console.WriteLine(_message);
-    //  Assert.IsNotNull(_cd);
-    //  Assert.IsFalse(String.IsNullOrEmpty(_message));
-    //  Assert.IsTrue(_message.Contains(_configFile.FullName));
-    //}
-    //[TestMethod]
-    //[TestCategory("Configuration_SerializationUnitTest")]
-    //public void ConfigurationDataProducerXmlTestMethod()
-    //{
-    //  FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataProducer.xml");
-    //  Assert.IsTrue(_configFile.Exists);
-    //  string _message = null;
-    //  ConfigurationData _cd = ConfigurationData.Load<ConfigurationData>
-    //    (() => XmlDataContractSerializers.Load<ConfigurationData>(_configFile, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); }), () => { });
-    //  Console.WriteLine(_message);
-    //  Assert.IsNotNull(_cd);
-    //  Assert.IsFalse(String.IsNullOrEmpty(_message));
-    //  Assert.IsTrue(_message.Contains(_configFile.FullName));
-    //}
     [TestMethod]
     [TestCategory("Configuration_ConfigurationDataUnitTest")]
     public void SaveLoadTestMethod()
     {
+
       SaveLoadConfigurationData(Role.Consumer, SerializerType.Xml);
       SaveLoadConfigurationData(Role.Consumer, SerializerType.Json);
       SaveLoadConfigurationData(Role.Producer, SerializerType.Xml);
       SaveLoadConfigurationData(Role.Producer, SerializerType.Json);
+
     }
     [TestMethod]
     [TestCategory("Configuration_SerializationUnitTest")]
@@ -100,11 +74,55 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
         OnSavingCount++;
       }
     }
-    private void Compare(ConfigurationData _consumer, ConfigurationData _mirror)
+    private void Compare(ConfigurationData source, ConfigurationData mirror)
     {
-      Assert.AreEqual<int>(_consumer.DataSets.Length, _mirror.DataSets.Length);
-      Assert.AreEqual<int>(_consumer.MessageHandlers.Length, _mirror.MessageHandlers.Length);
-      Compare(_consumer.DataSets, _mirror.DataSets);
+      Assert.AreEqual<int>(source.DataSets.Length, mirror.DataSets.Length);
+      Compare(source.DataSets, mirror.DataSets);
+      Assert.AreEqual<int>(source.MessageHandlers.Length, mirror.MessageHandlers.Length);
+      Compare(source.MessageHandlers, mirror.MessageHandlers);
+    }
+    private void Compare(MessageHandlerConfiguration[] source, MessageHandlerConfiguration[] mirror)
+    {
+      Dictionary<string, MessageHandlerConfiguration> _mirror2Dictionary = mirror.ToDictionary<MessageHandlerConfiguration, string>(x => x.Name);
+      foreach (MessageHandlerConfiguration _configItem in source)
+        Compare(_configItem, _mirror2Dictionary[_configItem.Name]);
+    }
+    private void Compare(MessageHandlerConfiguration source, MessageHandlerConfiguration mirror)
+    {
+      switch (source.TransportRole)
+      {
+        case AssociationRole.Consumer:
+          CompareMessageReaderConfiguration((MessageReaderConfiguration)source, (MessageReaderConfiguration)mirror);
+          break;
+        case AssociationRole.Producer:
+          CompareMessageWriterConfiguration((MessageWriterConfiguration)source, (MessageWriterConfiguration)mirror);
+          break;
+      }
+    }
+    private void CompareMessageWriterConfiguration(MessageWriterConfiguration source, MessageWriterConfiguration mirror)
+    {
+      Assert.AreEqual<AssociationRole>(source.TransportRole, mirror.TransportRole);
+      Dictionary<string, ProducerAssociationConfiguration> _mirror2Dictionary = mirror.ProducerAssociationConfigurations.ToDictionary<ProducerAssociationConfiguration, string>(x => x.AssociationName);
+      foreach (ProducerAssociationConfiguration _item in source.ProducerAssociationConfigurations)
+        Compare(_item, _mirror2Dictionary[_item.AssociationName]);
+    }
+    private void CompareMessageReaderConfiguration(MessageReaderConfiguration source, MessageReaderConfiguration mirror)
+    {
+      Assert.AreEqual<AssociationRole>(source.TransportRole, mirror.TransportRole);
+      Dictionary<string, ConsumerAssociationConfiguration> _mirror2Dictionary = mirror.ConsumerAssociationConfigurations.ToDictionary<ConsumerAssociationConfiguration, string>(x => x.AssociationName);
+      foreach (ConsumerAssociationConfiguration _item in source.ConsumerAssociationConfigurations)
+        Compare(_item, _mirror2Dictionary[_item.AssociationName]);
+    }
+    private void Compare(ProducerAssociationConfiguration source, ProducerAssociationConfiguration mirror)
+    {
+      Assert.AreEqual<string>(source.AssociationName, mirror.AssociationName);
+      Assert.AreEqual<UInt32>(source.DataSetWriterId, mirror.DataSetWriterId);
+    }
+    private void Compare(ConsumerAssociationConfiguration source, ConsumerAssociationConfiguration mirror)
+    {
+      Assert.AreEqual<string>(source.AssociationName, mirror.AssociationName);
+      Assert.AreEqual<UInt32>(source.DataSetWriterId, mirror.DataSetWriterId);
+      Assert.AreEqual<Guid>(source.PublisherId, mirror.PublisherId);
     }
     private void Compare(DataSetConfiguration[] dataSets1, DataSetConfiguration[] dataSets2)
     {

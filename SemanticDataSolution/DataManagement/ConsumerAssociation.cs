@@ -25,15 +25,11 @@ namespace UAOOI.SemanticData.DataManagement
     internal ConsumerAssociation(ISemanticData data, DataSetConfiguration dataSet, IBindingFactory bindingFactory, IEncodingFactory encodingFactory) :
       base(data, dataSet.AssociationName)
     {
-      m_ProcessDataBindings = dataSet.DataSet.Select<FieldMetaData, IConsumerBinding>(x => x.GetConsumerBinding4DataMember(dataSet.RepositoryGroup, bindingFactory, encodingFactory)).ToArray<IConsumerBinding>();
+      m_DataSetBindings = dataSet.DataSet.Select<FieldMetaData, IConsumerBinding>(x => x.GetConsumerBinding4DataMember(dataSet.RepositoryGroup, bindingFactory, encodingFactory)).ToArray<IConsumerBinding>();
     }
     #endregion
 
     #region API
-    protected internal override void AddMessageHandler(IMessageHandler messageHandler)
-    {
-      AddMessageReader(messageHandler as IMessageReader);
-    }
     internal void AddMessageReader(IMessageReader messageReader)
     {
       if (messageReader == null)
@@ -53,27 +49,31 @@ namespace UAOOI.SemanticData.DataManagement
     {
       //Do nothing;
     }
+    protected internal override void AddMessageHandler(IMessageHandler messageHandler)
+    {
+      AddMessageReader(messageHandler as IMessageReader);
+    }
     protected override void OnEnabling()
     {
-      foreach (IBinding _va in m_ProcessDataBindings)
+      foreach (IBinding _va in m_DataSetBindings)
         _va.OnEnabling();
     }
     protected override void OnDisabling()
     {
-      foreach (IBinding _va in m_ProcessDataBindings)
+      foreach (IBinding _va in m_DataSetBindings)
         _va.OnDisabling();
     }
     #endregion
 
     #region private
-    private IConsumerBinding[] m_ProcessDataBindings = null;
+    private IConsumerBinding[] m_DataSetBindings = null;
     private void MessageHandler(object sender, MessageEventArg messageArg)
     {
       if (this.State.State != HandlerState.Operational)
         return;
       if (messageArg.DataSetId != CommonDefinitions.ToUInt32(this.DataDescriptor.Guid))
         return;
-      messageArg.MessageContent.UpdateMyValues(x => m_ProcessDataBindings[x], m_ProcessDataBindings.Length);
+      messageArg.MessageContent.UpdateMyValues(x => m_DataSetBindings[x], m_DataSetBindings.Length);
     }
     #endregion
 

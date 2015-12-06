@@ -39,16 +39,16 @@
   <Class Name="UAOOI.SemanticData.DataManagement.ConsumerAssociation" Collapsed="true">
     <Position X="5.5" Y="3.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAFBAgAAAAAEAAAAAAAAQAEAAAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAAAAAEBAgAAAAAEAAAAAAAAQAEAAAAAAAAAAAoAAA=</HashCode>
       <FileName>ConsumerAssociation.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Field Name="m_ProcessDataBindings" />
+      <Field Name="m_DataSetBindings" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="UAOOI.SemanticData.DataManagement.ProducerAssociation" Collapsed="true">
     <Position X="7.75" Y="3.25" Width="2" />
-    <AssociationLine Name="m_ProcessDataBindings" Type="UAOOI.SemanticData.DataManagement.DataRepository.IProducerBinding" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="m_DataSetBindings" Type="UAOOI.SemanticData.DataManagement.DataRepository.IProducerBinding" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="8.75" Y="3.941" />
         <Point X="8.75" Y="4.469" />
@@ -56,12 +56,12 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAFJAgAEAAAAABAAAgACAAEAAAAAAAAAAQEAAA=</HashCode>
+      <HashCode>AAAAAAAEBAgAEAAAAABAAAgACAAEAAAAAAAAAAQkAAA=</HashCode>
       <FileName>ProducerAssociation.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Field Name="m_MessageWriter" />
-      <Field Name="m_ProcessDataBindings" />
+      <Field Name="m_DataSetBindings" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="UAOOI.SemanticData.DataManagement.AssociationsCollection" Collapsed="true">
@@ -69,14 +69,6 @@
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
-    <NestedTypes>
-      <Class Name="UAOOI.SemanticData.DataManagement.AssociationsCollection.SemanticData" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>AssociationsCollection.cs</NewMemberFileName>
-        </TypeIdentifier>
-        <Lollipop Position="0.2" />
-      </Class>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAgAAQAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AssociationsCollection.cs</FileName>

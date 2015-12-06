@@ -13,17 +13,17 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     internal static ConfigurationData GetLocalConfiguration()
     {
       return new ConfigurationData()
-        {
-          DataSets = new DataSetConfiguration[] { GetAssociationConfiguration(), GetAssociationConfiguration(), GetAssociationConfiguration() },
-          MessageHandlers = new MessageHandlerConfiguration[] { GetMessageTransportConfiguration(), GetMessageTransportConfiguration(), GetMessageTransportConfiguration() }
-
-        };
-    }
-    private static MessageHandlerConfiguration GetMessageTransportConfiguration()
-    {
-      return new MessageHandlerConfiguration()
       {
-        AssociationNames = new string[] { "Associations".AddId(AssociationId) },
+        DataSets = new DataSetConfiguration[] { GetAssociationConfiguration(), GetAssociationConfiguration(), GetAssociationConfiguration() },
+        MessageHandlers = new MessageHandlerConfiguration[] { GetMessageReaderConfiguration(), GetMessageReaderConfiguration(), GetMessageReaderConfiguration() }
+
+      };
+    }
+    private static MessageHandlerConfiguration GetMessageReaderConfiguration()
+    {
+      return new MessageReaderConfiguration()
+      {
+        ConsumerAssociationConfigurations = new ConsumerAssociationConfiguration[] { new ConsumerAssociationConfiguration() { AssociationName = "Associations".AddId(AssociationId), DataSetWriterId = UInt32.MaxValue, PublisherId = Guid.NewGuid() } },
         Configuration = null,
         Name = "Name".AddId(MessageTransportId),
         TransportRole = AssociationRole.Consumer
@@ -48,7 +48,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     }
     private static FieldMetaData GetDataMember()
     {
-      return new FieldMetaData() { ProcessValueName = "ProcessValueName".AddId(DataMemberId), SymbolicName = "SymbolicName".AddId(DataMemberId), Encoding =  BuiltInType.String };
+      return new FieldMetaData() { ProcessValueName = "ProcessValueName".AddId(DataMemberId), SymbolicName = "SymbolicName".AddId(DataMemberId), Encoding = BuiltInType.String };
     }
     private static int MessageTransportId { get { return p_MessageTransportId++; } }
     private static int p_MessageTransportId;

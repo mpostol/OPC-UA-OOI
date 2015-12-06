@@ -85,24 +85,24 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       #region configuration
       private MessageHandlerConfiguration[] GetMessageTransport()
       {
-        return new MessageHandlerConfiguration[] { new MessageHandlerConfiguration() { AssociationNames = GetTransportAssociations(),
-                                                                                           Configuration = null,
-                                                                                           Name = "UDP",
-                                                                                           TransportRole = AssociationRole.Producer } };
+        return new MessageWriterConfiguration[] { new MessageWriterConfiguration() { ProducerAssociationConfigurations = GetTransportAssociations(),
+                                                                                     Configuration = null,
+                                                                                     Name = "UDP",
+                                                                                     TransportRole = AssociationRole.Producer } };
       }
-      private string[] GetTransportAssociations()
+      private ProducerAssociationConfiguration[] GetTransportAssociations()
       {
-        return new string[] { AssociationConfigurationAlias };
+        return new ProducerAssociationConfiguration[] { new ProducerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = UInt32.MaxValue } };
       }
       private DataSetConfiguration[] GetAssociations()
       {
         return new DataSetConfiguration[] { new DataSetConfiguration() { AssociationName = AssociationConfigurationAlias,
-                                                                                 AssociationRole = AssociationRole.Producer,
-                                                                                 DataSet = GetMembers(),
-                                                                                 DataSymbolicName = "DataSymbolicName",
-                                                                                 Id = AssociationConfigurationId,
-                                                                                 RepositoryGroup = m_RepositoryGroup,
-                                                                                 InformationModelURI= AssociationConfigurationInformationModelURI
+                                                                         AssociationRole = AssociationRole.Producer,
+                                                                         DataSet = GetMembers(),
+                                                                         DataSymbolicName = "DataSymbolicName",
+                                                                         Id = AssociationConfigurationId,
+                                                                         RepositoryGroup = m_RepositoryGroup,
+                                                                         InformationModelURI= AssociationConfigurationInformationModelURI
         } };
       }
       private FieldMetaData[] GetMembers()

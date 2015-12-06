@@ -55,9 +55,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 
     #region Object
     /// <summary>
-    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// Returns a <see cref="String" /> that represents this instance.
     /// </summary>
-    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+    /// <returns>A <see cref="String" /> that represents this instance.</returns>
     public override string ToString()
     {
       return $"{this.Root.NodeClass} : {this.DataSymbolicName}";

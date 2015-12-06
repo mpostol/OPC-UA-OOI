@@ -1,28 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.ConfigurationData">
-    <Position X="1.5" Y="1.5" Width="2.5" />
+  <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.ConfigurationData" Collapsed="true">
+    <Position X="1.25" Y="2.5" Width="2.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <AssociationLine Name="DataSets" Type="UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration" FixedFromPoint="true">
       <Path>
-        <Point X="4" Y="2.25" />
-        <Point X="6" Y="2.25" />
+        <Point X="3.75" Y="2.812" />
+        <Point X="6" Y="2.812" />
       </Path>
     </AssociationLine>
     <AssociationLine Name="MessageHandlers" Type="UAOOI.SemanticData.UANetworking.Configuration.Serialization.MessageHandlerConfiguration" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="2.938" Y="3.122" />
-        <Point X="2.938" Y="7.337" />
+        <Point X="2.688" Y="3.062" />
+        <Point X="2.688" Y="7.337" />
         <Point X="6" Y="7.337" />
-      </Path>
-    </AssociationLine>
-    <AssociationLine Name="DataSetsList" Type="UAOOI.SemanticData.UANetworking.Configuration.Serialization.DataSetConfiguration" FixedFromPoint="true">
-      <Path>
-        <Point X="4" Y="2.688" />
-        <Point X="6" Y="2.688" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -32,7 +26,6 @@
     <ShowAsCollectionAssociation>
       <Property Name="DataSets" />
       <Property Name="MessageHandlers" />
-      <Property Name="DataSetsList" />
     </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>
@@ -60,23 +53,20 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ACAACAAAAAASgAAAAAAAAAQAAIAAAAAEggAAEAIAABA=</HashCode>
+      <HashCode>ACAAAQAAAAAQgAAAAAAAAAQAAIAAAAAEgAAIEAIAABA=</HashCode>
       <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
     </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Property Name="AssociationNamesArrayOfString" />
-    </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.NodeDescriptor" Collapsed="true">
-    <Position X="11.75" Y="2.75" Width="2.5" />
+    <Position X="9.75" Y="2.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAQCAAAIAAAAAAAEAEAABAAAAAggAAAAIAAAEAgA=</HashCode>
       <FileName>Serialization\NodeDescriptor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.SemanticData.UANetworking.Configuration.Serialization.FieldMetaData" Collapsed="true">
-    <Position X="11.75" Y="1.75" Width="1.5" />
+    <Position X="9.75" Y="1.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAIEAAAAhABAAAgAAEAAAAAAgAAAAAAEAAAAIAIAAAA=</HashCode>
       <FileName>Serialization\ConfigurationData.xsd.cs</FileName>

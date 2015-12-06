@@ -28,12 +28,12 @@ namespace UAOOI.SemanticData.DataManagement
     internal ProducerAssociation(ISemanticData data, string aliasName, DataSetConfiguration dataSet, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
       : base(data, dataSet.AssociationName)
     {
-      m_ProcessDataBindings =
+      m_DataSetBindings =
         dataSet.DataSet.Select<FieldMetaData, IProducerBinding>
         ((x) =>
         {
           IProducerBinding _ret = x.GetProducerBinding4DataMember(dataSet.RepositoryGroup, bindingFactory, encodingFactory);
-          _ret.PropertyChanged += ProcessDataBindings_CollectionChanged;
+          _ret.PropertyChanged += ProducerBinding_PropertyChanged;
           return _ret;
         }).ToArray<IProducerBinding>();
     }
@@ -67,37 +67,39 @@ namespace UAOOI.SemanticData.DataManagement
     #endregion
 
     #region private
+    //vars
+    private List<IMessageWriter> m_MessageWriter = new List<IMessageWriter>();
+    private IProducerBinding[] m_DataSetBindings;
     private object mLockObject = new object();
     private bool m_Busy = false;
     private ushort m_MessageSequenceNumber = 0;
+    //methods
     protected override void InitializeCommunication()
     {
       //Do nothing;
     }
     protected override void OnEnabling()
     {
-      foreach (IProducerBinding _pbx in m_ProcessDataBindings)
+      foreach (IProducerBinding _pbx in m_DataSetBindings)
         _pbx.OnEnabling();
     }
     protected override void OnDisabling()
     {
-      foreach (IProducerBinding _pbx in m_ProcessDataBindings)
+      foreach (IProducerBinding _pbx in m_DataSetBindings)
         _pbx.OnDisabling();
     }
     protected internal override void AddMessageHandler(IMessageHandler messageHandler)
     {
       AddMessageWriter(messageHandler as IMessageWriter);
     }
-    private List<IMessageWriter> m_MessageWriter = new List<IMessageWriter>();
-    private IProducerBinding[] m_ProcessDataBindings;
-    private void ProcessDataBindings_CollectionChanged(object sender, PropertyChangedEventArgs e)
+    private void ProducerBinding_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
       if (m_Busy)
         return;
       m_Busy = true;
       foreach (IMessageWriter _mwx in m_MessageWriter)
         lock (mLockObject)
-          _mwx.Send(x => m_ProcessDataBindings[x], Convert.ToUInt16(m_ProcessDataBindings.Length), UInt64.MaxValue, DataDescriptor, m_MessageSequenceNumber, DateTime.UtcNow);
+          _mwx.Send(x => m_DataSetBindings[x], Convert.ToUInt16(m_DataSetBindings.Length), UInt64.MaxValue, DataDescriptor, m_MessageSequenceNumber, DateTime.UtcNow);
       m_Busy = false;
       m_MessageSequenceNumber.IncRollOver();
     }

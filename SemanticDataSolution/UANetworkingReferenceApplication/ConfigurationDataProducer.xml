@@ -36,12 +36,15 @@
     </DataSetConfiguration>
   </DataSets>
   <MessageHandlers>
-    <MessageHandlerConfiguration>
+    <MessageHandlerConfiguration i:type="MessageWriterConfiguration">
       <Name>UDP</Name>
-      <AssociationNamesArrayOfString>
-        <string>Association1</string>
-      </AssociationNamesArrayOfString>
       <TransportRole>Producer</TransportRole>
+      <ProducerAssociationConfigurations>
+        <ProducerAssociationConfiguration>
+          <AssociationName>Association1</AssociationName>
+          <DataSetWriterId>12345</DataSetWriterId>
+        </ProducerAssociationConfiguration>
+      </ProducerAssociationConfigurations>
     </MessageHandlerConfiguration>
   </MessageHandlers>
 </ConfigurationData>

@@ -25,6 +25,10 @@ In figure below the relationship between this library and external libraries is 
 
 **Configuration** represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library provide helper classes that must be used to gather all required information to instantiate the communication infrastructure and start pumping the data.
 
+In figure below the relationship of the internal implementation with the overall domain model is presented.
+
+![Architecture](../Media/UADataIntegrationServices.UADataManagementClasses.png)
+
 ## Assumptions
 
 * It is assumed that the data consumer is lightweight and may support limited encoding/decoding functionality. The functionality will be  provided as a plug-in library injected at run time. EncodingDecoding is recognizable using a pair of: name recovered from the Type object and OPC UA DataType represented by its URI.
@@ -42,6 +46,10 @@ Message Transport will not be implemented as the library part. This functionalit
 * `IMessageHandler`: provides basic functionality handling messages communication over the wire.
 * `IMessageReader`: provides functionality supporting reading the messages from the wire.
 * `IMessageWriter`: provides functionality supporting sending the messages over the wire.
+
+The library provides basic implementation of the above mentioned interfaces. In following diagram an implementation provided by the library is presented.
+
+![Architecture](../Media/UADataIntegrationServices.UADataManagementClasses.MessageHandling.png)
 
 Hope is that the abstraction will support any types of message based communication layer.
 The library provides basic implementation of the `Message` class that supports package level encoding/decoding functionality.

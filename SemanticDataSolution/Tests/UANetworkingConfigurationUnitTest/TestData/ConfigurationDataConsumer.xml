@@ -36,12 +36,16 @@
     </DataSetConfiguration>
   </DataSets>
   <MessageHandlers>
-    <MessageHandlerConfiguration>
+    <MessageHandlerConfiguration i:type="MessageReaderConfiguration">
       <Name>UDP</Name>
-      <AssociationNamesArrayOfString>
-        <string>Association1</string>
-      </AssociationNamesArrayOfString>
       <TransportRole>Consumer</TransportRole>
+      <ConsumerAssociationConfigurations>
+        <ConsumerAssociationConfiguration>
+          <AssociationName>Association1</AssociationName>
+          <DataSetWriterId>12345</DataSetWriterId>
+          <PublisherId>c1f53ffb-6552-4ccc-84c9-f847147cdc85</PublisherId>
+        </ConsumerAssociationConfiguration>
+      </ConsumerAssociationConfigurations>
     </MessageHandlerConfiguration>
   </MessageHandlers>
 </ConfigurationData>

@@ -37,7 +37,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       SaveLoadConfigurationData(Role.Consumer, SerializerType.Json);
       SaveLoadConfigurationData(Role.Producer, SerializerType.Xml);
       SaveLoadConfigurationData(Role.Producer, SerializerType.Json);
-
     }
     [TestMethod]
     [TestCategory("Configuration_SerializationUnitTest")]
@@ -83,6 +82,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     }
     private void Compare(MessageHandlerConfiguration[] source, MessageHandlerConfiguration[] mirror)
     {
+      Assert.IsNotNull(source);
+      Assert.IsNotNull(mirror);
       Dictionary<string, MessageHandlerConfiguration> _mirror2Dictionary = mirror.ToDictionary<MessageHandlerConfiguration, string>(x => x.Name);
       foreach (MessageHandlerConfiguration _configItem in source)
         Compare(_configItem, _mirror2Dictionary[_configItem.Name]);
@@ -101,6 +102,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     }
     private void CompareMessageWriterConfiguration(MessageWriterConfiguration source, MessageWriterConfiguration mirror)
     {
+      Assert.IsNotNull(source);
+      Assert.IsNotNull(mirror);
       Assert.AreEqual<AssociationRole>(source.TransportRole, mirror.TransportRole);
       Dictionary<string, ProducerAssociationConfiguration> _mirror2Dictionary = mirror.ProducerAssociationConfigurations.ToDictionary<ProducerAssociationConfiguration, string>(x => x.AssociationName);
       foreach (ProducerAssociationConfiguration _item in source.ProducerAssociationConfigurations)
@@ -108,13 +111,22 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     }
     private void CompareMessageReaderConfiguration(MessageReaderConfiguration source, MessageReaderConfiguration mirror)
     {
+      Assert.IsNotNull(source);
+      Assert.IsNotNull(mirror);
       Assert.AreEqual<AssociationRole>(source.TransportRole, mirror.TransportRole);
+      Assert.IsNotNull(mirror.ConsumerAssociationConfigurations);
       Dictionary<string, ConsumerAssociationConfiguration> _mirror2Dictionary = mirror.ConsumerAssociationConfigurations.ToDictionary<ConsumerAssociationConfiguration, string>(x => x.AssociationName);
+      Assert.IsNotNull(source.ConsumerAssociationConfigurations);
       foreach (ConsumerAssociationConfiguration _item in source.ConsumerAssociationConfigurations)
+      {
+        Assert.IsTrue(_mirror2Dictionary.ContainsKey(_item.AssociationName));
         Compare(_item, _mirror2Dictionary[_item.AssociationName]);
+      }
     }
     private void Compare(ProducerAssociationConfiguration source, ProducerAssociationConfiguration mirror)
     {
+      Assert.IsNotNull(source);
+      Assert.IsNotNull(mirror);
       Assert.AreEqual<string>(source.AssociationName, mirror.AssociationName);
       Assert.AreEqual<UInt32>(source.DataSetWriterId, mirror.DataSetWriterId);
     }

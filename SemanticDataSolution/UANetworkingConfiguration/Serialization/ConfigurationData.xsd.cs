@@ -54,6 +54,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 
     [DataMemberAttribute(EmitDefaultValue = false)]
     [XmlElementAttribute(IsNullable = false)]
+    [XmlArray(IsNullable = false)]
+    [XmlArrayItem(Type = typeof(MessageWriterConfiguration), ElementName = "MessageWriterConfiguration") ]
+    [XmlArrayItem(Type = typeof(MessageReaderConfiguration), ElementName = "MessageReaderConfiguration")]
     public MessageHandlerConfiguration[] MessageHandlers
     {
       get
@@ -322,18 +325,24 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
   {
     private ProducerAssociationConfiguration[] ProducerAssociationConfigurationField;
 
-    [XmlArray(ElementName = "ProducerAssociationConfigurations", Namespace = CommonDefinitions.Namespace)]
+    [DataMemberAttribute(EmitDefaultValue = false)]
+    [XmlArray(ElementName = "ProducerAssociationConfigurations")]
     public ProducerAssociationConfiguration[] ProducerAssociationConfigurations
     {
       get { return ProducerAssociationConfigurationField; }
       set { ProducerAssociationConfigurationField = value; }
     }
+
   }
-  [DataContractAttribute(Name = "MessageReaderConfiguration", Namespace = CommonDefinitions.Namespace)]
+  [DataContractAttribute(Name = "MessageReaderConfiguration")]
   [SerializableAttribute()]
   public partial class MessageReaderConfiguration : MessageHandlerConfiguration
   {
+
     private ConsumerAssociationConfiguration[] ConsumerAssociationConfigurationsFields;
+
+    [DataMemberAttribute(EmitDefaultValue = false)]
+    [XmlArray(ElementName = "ConsumerAssociationConfigurations")]
     public ConsumerAssociationConfiguration[] ConsumerAssociationConfigurations
     {
       get { return ConsumerAssociationConfigurationsFields; }
@@ -341,7 +350,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     }
 
   }
-  [DataContractAttribute(Name = "MessageHandlerConfiguration", Namespace = CommonDefinitions.Namespace)]
+  //[DataContractAttribute(Name = "MessageHandlerConfiguration", Namespace = CommonDefinitions.Namespace)]
+  [DataContractAttribute()]
   [KnownType(typeof(MessageReaderConfiguration))]
   [KnownType(typeof(MessageWriterConfiguration))]
   [SerializableAttribute()]

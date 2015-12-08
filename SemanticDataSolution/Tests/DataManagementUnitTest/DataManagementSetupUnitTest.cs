@@ -49,11 +49,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class MF : IMessageHandlerFactory
     {
-      public IMessageReader GetIMessageReader(string name, XmlElement configuration, IUADecoder uaDecoder)
+      public IMessageReader GetIMessageReader(string name, MessageChannelConfiguration configuration, IUADecoder uaDecoder)
       {
         return new MR();
       }
-      public IMessageWriter GetIMessageWriter(string name, XmlElement configuration, IUAEncoder uaEncoder)
+      public IMessageWriter GetIMessageWriter(string name, MessageChannelConfiguration configuration, IUAEncoder uaEncoder)
       {
         throw new NotImplementedException();
       }

@@ -53,7 +53,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ACAAAQAAAAAQgAAAAAAAAAQAAIAAAAAEgAAIEAIAABA=</HashCode>
+      <HashCode>ACAAAAAAAAAQgAAAAAAAAAQAAIAAAAAEgAAAEAIAABA=</HashCode>
       <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

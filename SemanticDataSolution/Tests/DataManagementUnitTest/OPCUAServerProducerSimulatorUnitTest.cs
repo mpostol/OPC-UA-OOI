@@ -1,10 +1,10 @@
 ﻿
 using System;
-using System.Xml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -67,11 +67,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       #endregion
 
       #region IMessageHandlerFactory
-      public MessageHandling.IMessageReader GetIMessageReader(string name, System.Xml.XmlElement configuration, IUADecoder uaDecoder)
+      public MessageHandling.IMessageReader GetIMessageReader(string name, MessageChannelConfiguration configuration, IUADecoder uaDecoder)
       {
         throw new NotImplementedException();
       }
-      public MessageHandling.IMessageWriter GetIMessageWriter(string name, System.Xml.XmlElement configuration, IUAEncoder uaEncoder)
+      public MessageHandling.IMessageWriter GetIMessageWriter(string name, MessageChannelConfiguration configuration, IUAEncoder uaEncoder)
       {
         Assert.AreEqual("UDP", name);
         Assert.IsNull(configuration);

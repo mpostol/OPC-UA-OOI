@@ -4,6 +4,7 @@ using System;
 using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -66,14 +67,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       #endregion
 
       #region IMessageHandlerFactory
-      public IMessageReader GetIMessageReader(string name, System.Xml.XmlElement configuration, IUADecoder uaDecoder)
+      public IMessageReader GetIMessageReader(string name, MessageChannelConfiguration configuration, IUADecoder uaDecoder)
       {
         Assert.AreEqual("UDP", name);
         Assert.IsNull(configuration);
         Assert.IsNotNull(uaDecoder);
         return MyMessageReader;
       }
-      public IMessageWriter GetIMessageWriter(string name, System.Xml.XmlElement configuration, IUAEncoder uaEncoder)
+      public IMessageWriter GetIMessageWriter(string name, MessageChannelConfiguration configuration, IUAEncoder uaEncoder)
       {
         throw new NotImplementedException();
       }

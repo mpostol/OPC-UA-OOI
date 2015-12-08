@@ -8,6 +8,7 @@ using System.Xml;
 using UAOOI.SemanticData.DataManagement;
 using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 {
@@ -40,7 +41,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// <param name="name">The name of the reader.</param>
     /// <param name="configuration">The configuration of the reader.</param>
     /// <returns>An instance of <see cref="IMessageReader"/>.</returns>
-    IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, XmlElement configuration, IUADecoder uaDecoder)
+    IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, MessageChannelConfiguration configuration, IUADecoder uaDecoder)
     {
       BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(uaDecoder, UDPPortNumber, m_Trace) { m_ViewModel = m_ParentViewModel };
       m_ToDispose(_ret);
@@ -55,7 +56,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// <remarks>It is intentionally not implemented</remarks>
     /// <returns>An instance of <see cref="IMessageWriter"/>.</returns>
     /// <exception cref="System.NotImplementedException"></exception>
-    IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, XmlElement configuration, IUAEncoder uaEncoder)
+    IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, MessageChannelConfiguration configuration, IUAEncoder uaEncoder)
     {
       throw new NotImplementedException();
     }

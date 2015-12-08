@@ -2,12 +2,12 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
-using System.Xml;
 using UAOOI.SemanticData.DataManagement;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using System.Linq;
 using System.Diagnostics;
 using UAOOI.SemanticData.DataManagement.Encoding;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
 {
@@ -36,7 +36,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// <remarks>It is intentionally not implemented</remarks>
     /// <returns>An instance of <see cref="IMessageReader"/>.</returns>
     /// <exception cref="System.NotImplementedException"></exception>
-    IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, XmlElement configuration, IUADecoder uaDecoder)
+    IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, MessageChannelConfiguration configuration, IUADecoder uaDecoder)
     {
       throw new NotImplementedException();
     }
@@ -46,7 +46,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// <param name="name">The name.</param>
     /// <param name="configuration">The configuration.</param>
     /// <returns>An instance of <see cref="IMessageWriter"/>.</returns>
-    IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, XmlElement configuration, IUAEncoder uaEncoder)
+    IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, MessageChannelConfiguration configuration, IUAEncoder uaEncoder)
     {
       BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(RemoteHostName, UDPPortNumber, ProducerId, m_Trace, m_ViewModel, uaEncoder);
       m_ToDispose(_ret);

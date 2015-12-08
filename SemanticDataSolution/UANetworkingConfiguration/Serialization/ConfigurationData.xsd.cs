@@ -17,15 +17,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
   public partial class ConfigurationData : object, IExtensibleDataObject
   {
 
-    [System.NonSerializedAttribute()]
     private ExtensionDataObject extensionDataField;
-
-    [OptionalFieldAttribute()]
     private DataSetConfiguration[] DataSetsField;
-
-    [OptionalFieldAttribute()]
     private MessageHandlerConfiguration[] MessageHandlersField;
-
     public ExtensionDataObject ExtensionData
     {
       get
@@ -52,8 +46,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       }
     }
 
-    [DataMemberAttribute(EmitDefaultValue = false)]
-    [XmlElementAttribute(IsNullable = false)]
+    [DataMemberAttribute(EmitDefaultValue = true)]
+    //[XmlElementAttribute(IsNullable = false)]
     [XmlArray(IsNullable = false)]
     [XmlArrayItem(Type = typeof(MessageWriterConfiguration), ElementName = "MessageWriterConfiguration") ]
     [XmlArrayItem(Type = typeof(MessageReaderConfiguration), ElementName = "MessageReaderConfiguration")]
@@ -360,10 +354,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 
     [System.NonSerializedAttribute()]
     private ExtensionDataObject extensionDataField;
-    [OptionalFieldAttribute()]
     private string NameField;
-    [OptionalFieldAttribute()]
-    private XmlElement ConfigurationField;
+    private MessageChannelConfiguration ConfigurationField;
     private AssociationRole TransportRoleField;
 
     public ExtensionDataObject ExtensionData
@@ -390,7 +382,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       }
     }
     [DataMemberAttribute(EmitDefaultValue = false, Order = 2)]
-    public XmlElement Configuration
+    public MessageChannelConfiguration Configuration
     {
       get
       {
@@ -415,7 +407,11 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     }
 
   }
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+  [DataContractAttribute(Name = "MessageChannelConfiguration", Namespace = CommonDefinitions.Namespace)]
+  public class MessageChannelConfiguration
+  {
+
+  }
   [DataContractAttribute(Name = "AssociationRole", Namespace = CommonDefinitions.Namespace)]
   public enum AssociationRole : int
   {
@@ -433,20 +429,16 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
   public partial class FieldMetaData : object, IExtensibleDataObject
   {
 
-    [System.NonSerializedAttribute()]
+    #region private
     private ExtensionDataObject extensionDataField;
-
-    [OptionalFieldAttribute()]
     private string SymbolicNameField;
-
-    [OptionalFieldAttribute()]
     private string ProcessValueNameField;
-
-    [OptionalFieldAttribute()]
     private BuiltInType SourceEncodingField;
-    [OptionalFieldAttribute()]
     private int[] ArrayDimensionsField;
+    private int ValueRankField;
+    #endregion
 
+    #region public
     public ExtensionDataObject ExtensionData
     {
       get
@@ -540,7 +532,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       get { return ArrayDimensionsField; }
       set { ArrayDimensionsField = value; }
     }
-    private int ValueRankField;
-  }
+    #endregion
 
+  }
 }

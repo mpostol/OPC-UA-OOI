@@ -15,7 +15,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("<#=m_AssemblyTitle#>")]
-[assembly: AssemblyDescription("<#=SemanticDataProduct#>: <#=m_AssemblyTitle#>")]
+[assembly: AssemblyDescription("<#=SemanticDataProduct#>: Library supporting management of Semantic Data")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("<#=AssemblyCompany#>")]
 [assembly: AssemblyProduct("<#=SemanticDataProduct#>")]

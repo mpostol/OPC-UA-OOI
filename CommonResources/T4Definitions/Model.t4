@@ -13,7 +13,7 @@ string Phone = "+48 (42) 686 25 47";
 string Owner = "commsvr.com";
 
 //UAOOI.SemanticData
-string SemanticDataVersion = "1.00.01";
+string SemanticDataVersion = "1.00.09";
 string SemanticDataProduct = "OPC UA SemanticData";
 
 //UAOOI.DataBindings

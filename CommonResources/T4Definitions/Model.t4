@@ -2,6 +2,7 @@
 //Template
 string DefaultProductName ="DefaultProductName";
 string DefaultProductVersion = "0.00.00";
+
 //Solution common
 string ProductTrademark = "OPC-UA-OOI";
 string AssemblyCopyright = "Copyright (c) 2015 CommServer";

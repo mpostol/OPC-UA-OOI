@@ -2,7 +2,7 @@
 <#@ output extension=".cs" #>
 //_______________________________________________________________
 //  Title   : Assembly info for: <#=m_AssemblyTitle#>
-//  System  : Microsoft VisualStudio 2013 / C#
+//  System  : Microsoft VisualStudio 2015 / C#
 //
 //  <#=AssemblyCopyright#>
 //  <#=Phone#>

@@ -226,7 +226,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Error: P3-XXXXX00000; Focus: DataType; Abstract DataType of the field of a concrete structure is not permitted.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P3-XXXXX00000.</value>
-    public static BuildError AbstractDataTypeOfField { get { return new BuildError() 
+    public static BuildError FieldAbstractDataType { get { return new BuildError() 
                   { Focus = Focus.DataType, 
                     Identifier = "P3-XXXXX00000", 
                     Descriptor = "Abstract DataType of the field of a concrete structure is not permitted." }; } }

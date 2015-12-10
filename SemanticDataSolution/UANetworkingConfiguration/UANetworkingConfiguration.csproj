@@ -58,6 +58,11 @@
     <Compile Include="IConfigurationEditor.cs" />
     <Compile Include="IInstanceConfigurationFactory.cs" />
     <Compile Include="ITraceSource.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssemblyInfo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -73,7 +78,6 @@
     <Compile Include="Serialization\DataMemberConfiguration.cs" />
     <Compile Include="Serialization\DataSetConfiguration.cs" />
     <Compile Include="IConfigurationFactory.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\MessageReaderConfiguration.cs" />
     <Compile Include="Serialization\MessageHandlerConfiguration.cs" />
     <Compile Include="Serialization\MessageWriterConfiguration.cs" />
@@ -107,6 +111,15 @@
       <Project>{f8db9567-c559-440c-bbcf-e02013f9ab94}</Project>
       <Name>DataBindings</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\AssemblyInfo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

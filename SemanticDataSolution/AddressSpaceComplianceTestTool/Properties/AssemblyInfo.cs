@@ -1,6 +1,6 @@
 ﻿//_______________________________________________________________
 //  Title   : Assembly info for: AddressSpaceTestTool
-//  System  : Microsoft VisualStudio 2013 / C#
+//  System  : Microsoft VisualStudio 2015 / C#
 //
 //  Copyright (c) 2015 CommServer
 //  +48 (42) 686 25 47

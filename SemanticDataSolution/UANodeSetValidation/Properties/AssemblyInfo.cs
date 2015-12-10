@@ -1,6 +1,6 @@
 ﻿//_______________________________________________________________
 //  Title   : Assembly info for: USNodeSetValidation
-//  System  : Microsoft VisualStudio 2013 / C#
+//  System  : Microsoft VisualStudio 2015 / C#
 //
 //  Copyright (c) 2015 CommServer
 //  +48 (42) 686 25 47
@@ -21,7 +21,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("OPC-UA-OOI")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: Guid("00867667-6c38-4678-b801-8ae89b906614")]
 [assembly: AssemblyVersion("1.00.01.*")]
 [assembly: AssemblyFileVersion("1.00.01")]
 [assembly: InternalsVisibleToAttribute("UAOOI.SemanticDataUnitTest, PublicKey=00240000048000009400000006020000002400005253413100040000010001005b97a0972ff6b1" +

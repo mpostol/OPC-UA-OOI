@@ -6,12 +6,12 @@ using UAOOI.SemanticData.DataManagement.MessageHandling;
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
   [TestClass]
-  public class PackageHeaderUnitTest
+  public class PacketHeaderUnitTest
   {
 
     [TestMethod]
-    [TestCategory("DataManagement_PackageHeaderUnitTest")]
-    public void ProducerPackageHeaderTestMethod()
+    [TestCategory("DataManagement_PacketHeaderUnitTest")]
+    public void ProducerPacketHeaderTestMethod()
     {
       long _startPosition = 10;
       HeaderWriterTest _writer = new HeaderWriterTest(x => { }, _startPosition);
@@ -33,7 +33,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<long>(_startPosition + 24 + 20, _writer.Position);
     }
     [TestMethod]
-    [TestCategory("DataManagement_PackageHeaderUnitTest")]
+    [TestCategory("DataManagement_PacketHeaderUnitTest")]
     [ExpectedException(typeof(ApplicationException))]
     public void ConsumerWritePacketHeaderTestMethod()
     {
@@ -43,8 +43,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       _header.WritePacketHeader();
     }
     [TestMethod]
-    [TestCategory("DataManagement_PackageHeaderUnitTest")]
-    public void ConsumerPackageHeaderTestMethod()
+    [TestCategory("DataManagement_PacketHeaderUnitTest")]
+    public void ConsumerPacketHeaderTestMethod()
     {
       HeaderReaderTest _reader = new HeaderReaderTest(m_StartPosition);
       PacketHeader _header = PacketHeader.GetConsumerPacketHeader(_reader);

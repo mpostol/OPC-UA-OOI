@@ -89,7 +89,7 @@
     <Compile Include="OPCUAServerProducerSimulatorUnitTest.cs" />
     <Compile Include="MessageWriterTestClass.cs" />
     <Compile Include="MessageReaderTestClass.cs" />
-    <Compile Include="PackageHeaderUnitTest.cs" />
+    <Compile Include="PacketHeaderUnitTest.cs" />
     <Compile Include="MessageHeaderUnitTest.cs" />
     <Compile Include="UABinaryEncoderImplementationUnitTest.cs" />
     <Compile Include="UABinaryDecoderImplementationUnitTest.cs" />

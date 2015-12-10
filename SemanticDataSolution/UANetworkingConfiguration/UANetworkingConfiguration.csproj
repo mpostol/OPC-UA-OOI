@@ -98,6 +98,9 @@
     </None>
     <None Include="Serialization\GoCS.cmd" />
     <None Include="Serialization\GoXSD.cmd" />
+    <None Include="Serialization\wsdl.types.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DataBindingsSolution\DataBindings\DataBindings.csproj">

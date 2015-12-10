@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 using System;
 using System.Xml.Serialization;
-using System.Xml;
 
 [assembly: ContractNamespaceAttribute("http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd", ClrNamespace = "UAOOI.SemanticData.UANetworking.Configuration.Serialization")]
 
@@ -20,6 +19,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     private ExtensionDataObject extensionDataField;
     private DataSetConfiguration[] DataSetsField;
     private MessageHandlerConfiguration[] MessageHandlersField;
+
     public ExtensionDataObject ExtensionData
     {
       get
@@ -31,7 +31,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         this.extensionDataField = value;
       }
     }
-
     [DataMemberAttribute(EmitDefaultValue = false)]
     [XmlElementAttribute(IsNullable = false)]
     public DataSetConfiguration[] DataSets
@@ -45,9 +44,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         this.DataSetsField = value;
       }
     }
-
     [DataMemberAttribute(EmitDefaultValue = true)]
-    //[XmlElementAttribute(IsNullable = false)]
     [XmlArray(IsNullable = false)]
     [XmlArrayItem(Type = typeof(MessageWriterConfiguration), ElementName = "MessageWriterConfiguration") ]
     [XmlArrayItem(Type = typeof(MessageReaderConfiguration), ElementName = "MessageReaderConfiguration")]

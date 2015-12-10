@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd" elementFormDefault="qualified" targetNamespace="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://microsoft.com/wsdl/types/" />
+  <xs:simpleType name="guid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+    </xs:restriction>
+  </xs:simpleType>
   <xs:element name="ConfigurationData" nillable="true" type="tns:ConfigurationData" />
   <xs:complexType name="ConfigurationData">
     <xs:sequence>
@@ -23,7 +27,7 @@
       <xs:element minOccurs="0" maxOccurs="1" name="Root" type="tns:NodeDescriptor" />
       <xs:element minOccurs="1" maxOccurs="1" name="PublishingInterval" type="xs:double" />
       <xs:element minOccurs="1" maxOccurs="1" name="MaxBufferTime" type="xs:double" />
-      <xs:element minOccurs="1" maxOccurs="1" name="ConfigurationGuid" xmlns:q1="http://microsoft.com/wsdl/types/" type="q1:guid" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ConfigurationGuid" type="tns:guid" />
       <xs:element minOccurs="0" maxOccurs="1" name="ConfigurationVersion" type="tns:ConfigurationVersionDataType" />
     </xs:sequence>
   </xs:complexType>
@@ -150,7 +154,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:AssociationConfiguration">
         <xs:sequence>
-          <xs:element minOccurs="1" maxOccurs="1" name="PublisherId" xmlns:q2="http://microsoft.com/wsdl/types/" type="q2:guid" />
+          <xs:element minOccurs="1" maxOccurs="1" name="PublisherId" type="tns:guid" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

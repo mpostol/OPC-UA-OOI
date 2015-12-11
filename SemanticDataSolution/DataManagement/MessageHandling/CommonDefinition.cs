@@ -13,7 +13,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// The protocol version used in the package header. move it to configuration.
     /// </summary>
-    public static readonly byte ProtocolVersion = 0x0;
+    public static readonly byte ProtocolVersion = 110;
     #endregion
     internal static uint ToUInt32(Guid value)
     {

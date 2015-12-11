@@ -12,15 +12,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       return new byte[]
       {
-          //Package header 0-23
+          //Package header 0-25
           0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16, //guid - PublisherId
+          110,                                                //byte ProtocolVersion
           0x00,                                               //byte MessageFlags
-          0x00,                                               //byte ProtocolVersion
           0x00,                                               //byte SecurityTokenId
+          1,                                                  //byte NonceLength
+          0xCC,                                               //Byte[NonceLength] Nonce 
           0x01,                                               //byte MessageCount
-          127, 75, 251 , 186,                                 //DataSetWriterIds UInt32[MessageCount]
-          //Message header 24-41
-          //0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16, //guid - PublisherId
+          127, 75, 251 , 186,                                 //UInt32[MessageCount] DataSetWriterIds
+          //Message header 26-43
           68, 00,                                             // MessageLength
           01,                                                 //MessageType 
           0,                                                  // MessageFlags
@@ -28,7 +29,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           0, 0,                                               //ConfigurationVersion
           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //TimeStamp
           13, 0,                                              // FieldCount
-          //Message content 58 - 124
+          //Message content 60 - 126
           (byte)BuiltInType.UInt64, 0x7b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,    //UInt64
           (byte)BuiltInType.UInt32, 0x7b, 0x00, 0x00, 0x00,                            //UInt32
           (byte)BuiltInType.UInt16, 0x7b, 0x00,                                        //UInt16
@@ -44,6 +45,44 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           (byte)BuiltInType.Boolean, 0x01,                                             //boolean
       };
     }
+    internal static byte[] GetTestBinaryArrayVariant4Consumer()
+    {
+      return new byte[]
+      {
+          //Package header 0-25
+          0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16, //guid - PublisherId
+          110,                                                //byte ProtocolVersion
+          0x00,                                               //byte MessageFlags
+          0x00,                                               //byte SecurityTokenId
+          0,                                                  //byte NonceLength
+          //0xCC,                                             Byte[NonceLength] Nonce 
+          0x01,                                               //byte MessageCount
+          127, 75, 251 , 186,                                 //UInt32[MessageCount] DataSetWriterIds
+          //Message header 26-43
+          68, 00,                                             // MessageLength
+          01,                                                 //MessageType 
+          0,                                                  // MessageFlags
+          0, 0,                                               //MessageSequenceNumber 
+          0, 0,                                               //ConfigurationVersion
+          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //TimeStamp
+          13, 0,                                              // FieldCount
+          //Message content 60 - 126
+          (byte)BuiltInType.UInt64, 0x7b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,    //UInt64
+          (byte)BuiltInType.UInt32, 0x7b, 0x00, 0x00, 0x00,                            //UInt32
+          (byte)BuiltInType.UInt16, 0x7b, 0x00,                                        //UInt16
+          (byte)BuiltInType.String, 0x03, 0x31, 0x32, 0x33,                            //string
+          (byte)BuiltInType.Float, 0x00, 0x00, 0xf6, 0x42,                             //Float
+          (byte)BuiltInType.SByte, 0x7b,                                               //sbyte
+          (byte)BuiltInType.Int64, 0x7b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //Int64
+          (byte)BuiltInType.Int32, 0x7b, 0x00, 0x00, 0x00,                             //Int32
+          (byte)BuiltInType.Int16, 0x7b, 0x00,                                         //Int16
+          (byte)BuiltInType.Double, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x5e, 0x40,    //Double
+          (byte)BuiltInType.DateTime, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  //DateTime
+          (byte)BuiltInType.Byte, 0x7b,                                                //Byte
+          (byte)BuiltInType.Boolean, 0x01,                                             //boolean
+      };
+    }
+
     internal const uint DataSetId = 3137031039;
     internal struct DateTimeVariantEncoding
     {

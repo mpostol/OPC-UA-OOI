@@ -63,6 +63,16 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <value>The security token identifier.</value>
     public abstract byte SecurityTokenId { get; set; }
     /// <summary>
+    /// Gets or sets the length of the nonce used to initialize the encryption algorithm..
+    /// </summary>
+    /// <value>The length of the nonce.</value>
+    public byte NonceLength { get; set; }
+    /// <summary>
+    /// Gets or sets the nonce a cryptographically random number used for exactly one packet.
+    /// </summary>
+    /// <value>The nonce as the array of <see cref="byte"/>.</value>
+    public byte[] Nonce { get; set; }
+    /// <summary>
     /// If implemented gets or sets the number of messages contained in the packet.
     /// </summary>
     /// <value>The message count.</value>
@@ -128,6 +138,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         ProtocolVersion = m_Reader.ReadByte();
         PacketFlags = m_Reader.ReadByte();
         SecurityTokenId = m_Reader.ReadByte();
+        NonceLength = m_Reader.ReadByte();
+        Nonce = new byte[NonceLength];
+        for (int i = 0; i < NonceLength; i++)
+          Nonce[i] = m_Reader.ReadByte();
         m_MessageCount = m_Reader.ReadByte();
         List<System.UInt32> _ids = new List<uint>();
         for (int i = 0; i < MessageCount; i++)
@@ -149,6 +163,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         PacketFlags = Convert.ToByte(PacketFlagsDefinitions.PacketFlagsMessageType.RegularMessages);
         ProtocolVersion = CommonDefinitions.ProtocolVersion;
         SecurityTokenId = 0;
+        NonceLength = 0;
         DataSetWriterIds = new ReadOnlyCollection<uint>(dataSetWriterIds);
         MessageCount = Convert.ToByte(DataSetWriterIds.Count);
         ushort _packetLength = Convert.ToUInt16(m_PacketHeaderLength + dataSetWriterIds.Count * 4);
@@ -206,7 +221,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       /// </summary>
       public override void WritePacketHeader()
       {
-        m_HeaderWriter. WriteHeader(WriteHeader);
+        m_HeaderWriter.WriteHeader(WriteHeader);
       }
       #endregion
 
@@ -223,6 +238,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         m_Writer.Write(ProtocolVersion);
         m_Writer.Write(PacketFlags);
         m_Writer.Write(SecurityTokenId);
+        m_Writer.Write(NonceLength);
+        for (int i = 0; i < NonceLength; i++)
+          m_Writer.Write(Nonce[i]);
         m_Writer.Write(MessageCount);
         if (MessageCount == 0)
           return;

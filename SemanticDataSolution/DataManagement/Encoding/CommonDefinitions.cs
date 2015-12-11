@@ -48,6 +48,17 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       }
       return _ticks;
     }
+    /// <summary>
+    /// Reads the <see cref="Guid"/> form a buffer using <see cref="IBinaryDecoder"/>.
+    /// </summary>
+    /// <param name="decoder">The decoder to be used to recover data from a buffer.</param>
+    /// <returns>Guid.</returns>
+    internal static Guid ReadGuid(this IBinaryDecoder decoder)
+    {
+      int m_EncodedGuidLength = 16;
+      byte[] bytes = decoder.ReadBytes(m_EncodedGuidLength);
+      return new Guid(bytes);
+    }
 
   }
 

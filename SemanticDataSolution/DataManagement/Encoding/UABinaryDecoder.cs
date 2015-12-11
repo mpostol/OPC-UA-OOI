@@ -51,15 +51,14 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       return value;
     }
     /// <summary>
-    /// Reads the <see cref="Guid"/> from UA binary encoded as a 16-element byte array that contains the value and advances the stream position by 16 bytes.
+    /// Reads the <see cref="Guid"/> from UA binary encoded stream as a 16-element byte array that contains the value.
     /// </summary>
-    /// <returns>The <see cref="Guid"/> decoded from the UA binary encoded <see cref="Stream"/>.</returns>
+    /// <returns>The <see cref="Guid"/> decoded from a buffer encoded as the UA binary.</returns>
     public Guid ReadGuid(IBinaryDecoder decoder)
     {
-      int m_EncodedGuidLength = 16;
-      byte[] bytes = decoder.ReadBytes(m_EncodedGuidLength);
-      return new Guid(bytes);
+      return CommonDefinitions.ReadGuid(decoder);
     }
+
     /// <summary>
     /// Reads the <see cref="DateTime"/> from UA binary encoded as <see cref="Int64"/> that contains the value and advances the stream position by 8 bytes.
     /// </summary>
@@ -84,6 +83,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     #endregion
 
     #region private
+    //types
     private class Variant : IVariant
     {
       internal Variant(object value, UATypeInfo type)

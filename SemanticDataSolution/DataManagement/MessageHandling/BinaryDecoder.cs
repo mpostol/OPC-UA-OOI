@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryPacketDecoder" /> class is to be used by the packet level decoding.
     /// </summary>
-    /// <param name="uaDecoder">The ua decoder to be used fo decode UA Built-in data types.</param>
+    /// <param name="uaDecoder">The UA decoder to be used fo decode UA Built-in data types.</param>
     public BinaryDecoder(IUADecoder uaDecoder) : base(uaDecoder) { }
     #endregion
 

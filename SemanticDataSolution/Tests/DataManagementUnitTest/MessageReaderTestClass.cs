@@ -10,6 +10,8 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Collections.Generic;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using System.Globalization;
+using System.Windows.Data;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -79,12 +81,22 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Thread.Sleep(1500);
         foreach (string _item in _Events)
           Console.WriteLine(_item);
+        //test packet content
+        Assert.AreEqual<Guid>(CommonDefinitions.TestGuid, _reader.Header.PublisherId);
+        Assert.AreEqual<byte>(MessageHandling.CommonDefinitions.ProtocolVersion, _reader.Header.ProtocolVersion);
+        Assert.AreEqual<byte>(0, _reader.Header.PacketFlags);
+        Assert.AreEqual<UInt32>(0, _reader.Header.SecurityTokenId);
+        Assert.AreEqual<ushort>(1, _reader.Header.NonceLength);
+        Assert.AreEqual<int>(1, _reader.Header.Nonce.Length);
+        Assert.AreEqual<byte>(0xcc, _reader.Header.Nonce[0]);
+        Assert.AreEqual<ushort>(1, _reader.Header.MessageCount);
+        Assert.AreEqual<int>(1, _reader.Header.DataSetWriterIds.Count);
+        Assert.AreEqual<UInt32>(CommonDefinitions.DataSetId, _reader.Header.DataSetWriterIds[0]);
+
         Assert.AreEqual<int>(_buffer.Length, _redItems);
         object[] _shouldBeInBuffer = CommonDefinitions.TestValues;
         Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
         Assert.AreEqual<string>(String.Join(",", _shouldBeInBuffer), String.Join(",", _buffer));
-        Assert.AreEqual<Guid>(CommonDefinitions.TestGuid, _reader.Header.PublisherId);
-        Assert.AreEqual<byte>(MessageHandling.CommonDefinitions.ProtocolVersion, _reader.Header.ProtocolVersion);
         Assert.AreEqual<byte>(1, _reader.Header.MessageCount);
         Assert.AreEqual<int>(3, _Events.Count);
       }
@@ -162,7 +174,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         m_AssignAction(value, m_Index);
       }
-      public System.Windows.Data.IValueConverter Converter
+      public IValueConverter Converter
       {
         set { throw new NotImplementedException(); }
       }
@@ -182,7 +194,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           throw new NotImplementedException();
         }
       }
-      public System.Globalization.CultureInfo Culture
+      public CultureInfo Culture
       {
         set { throw new NotImplementedException(); }
       }

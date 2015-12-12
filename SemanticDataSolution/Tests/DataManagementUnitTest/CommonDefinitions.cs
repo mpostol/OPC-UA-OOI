@@ -20,11 +20,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           1,                                                  //byte NonceLength
           0xCC,                                               //Byte[NonceLength] Nonce 
           0x01,                                               //byte MessageCount
-          127, 75, 251 , 186,                                 //UInt32[MessageCount] DataSetWriterIds
+          0x7F, 0x4B, 0xFB , 0xBA,                            //UInt32[MessageCount] DataSetWriterIds
           //Message header 26-43
+          0x1,                                                //MessageType 
+          0x1,                                                //EncodingFlags
           68, 00,                                             // MessageLength
-          01,                                                 //MessageType 
-          0,                                                  // MessageFlags
           0, 0,                                               //MessageSequenceNumber 
           0, 0,                                               //ConfigurationVersion
           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //TimeStamp
@@ -59,9 +59,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           0x01,                                               //byte MessageCount
           127, 75, 251 , 186,                                 //UInt32[MessageCount] DataSetWriterIds
           //Message header 26-43
-          68, 00,                                             // MessageLength
-          01,                                                 //MessageType 
-          0,                                                  // MessageFlags
+          0x1,                                                //MessageType 
+          0x1,                                                //EncodingFlags
+          68, 00,                                             //MessageLength
           0, 0,                                               //MessageSequenceNumber 
           0, 0,                                               //ConfigurationVersion
           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //TimeStamp

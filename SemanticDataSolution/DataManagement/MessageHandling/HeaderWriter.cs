@@ -47,7 +47,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <returns>Calculated message data length.</returns>
     private ushort DataLength(long currentPosition)
     {
-      return Convert.ToUInt16(currentPosition - m_BeginPosition - m_Length);
+      return Convert.ToUInt16(currentPosition - m_BeginPosition);
     }
     private long SetPosition(int offset)
     {

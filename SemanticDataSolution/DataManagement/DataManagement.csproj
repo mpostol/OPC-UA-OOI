@@ -94,6 +94,7 @@
     <Compile Include="MessageHandling\BinaryPacketDecoder.cs" />
     <Compile Include="MessageHandling\BinaryPacketEncoder.cs" />
     <Compile Include="MessageHandling\CommonDefinition.cs" />
+    <Compile Include="MessageHandling\FieldEncodingEnum.cs" />
     <Compile Include="MessageHandling\HeaderWriter.cs" />
     <Compile Include="MessageHandling\IBinaryHeaderWriter.cs" />
     <Compile Include="DataRepository\IProducerBinding.cs" />
@@ -104,7 +105,9 @@
     <Compile Include="MessageHandling\IMessageReader.cs" />
     <Compile Include="MessageHandling\IMessageWriter.cs" />
     <Compile Include="MessageHandling\MessageHeader.cs" />
+    <Compile Include="MessageHandling\MessageLengthEnum.cs" />
     <Compile Include="MessageHandling\MessageReaderBase.cs" />
+    <Compile Include="MessageHandling\MessageTypeEnum.cs" />
     <Compile Include="MessageHandling\MessageWriterBase.cs" />
     <Compile Include="MessageHandling\PacketHeader.cs" />
     <Compile Include="MessageHandling\PacketFlags.cs" />

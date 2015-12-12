@@ -11,8 +11,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 
     #region creator
     /// <summary>
-    /// Initializes a new instance of the <see cref="BinaryPacketDecoder"/> class.
+    /// Initializes a new instance of the <see cref="BinaryPacketDecoder" /> class.
     /// </summary>
+    /// <param name="uaDecoder">The UA decoder.</param>
     public BinaryPacketDecoder(IUADecoder uaDecoder) : base(uaDecoder) { }
     #endregion
 

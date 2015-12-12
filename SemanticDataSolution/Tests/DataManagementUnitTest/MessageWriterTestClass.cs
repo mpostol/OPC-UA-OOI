@@ -84,16 +84,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
         Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
         Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
-        ProducerBinding _binding = new ProducerBinding();
-        _binding.Value = String.Empty;
+        ProducerBinding _binding = new ProducerBinding() { Value = String.Empty };
         int _sentItems = 0;
         Guid m_Guid = CommonDefinitions.TestGuid;
         ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
-                                       Convert.ToUInt16(CommonDefinitions.TestValues.Length),
-                                       UInt64.MaxValue,
-                                       new SemanticDataTest(m_Guid),
-                                       0,
-                                       CommonDefinitions.TestMinimalDateTime
+                                        Convert.ToUInt16(CommonDefinitions.TestValues.Length),
+                                        UInt64.MaxValue,
+                                        new SemanticDataTest(m_Guid),
+                                        0,
+                                        CommonDefinitions.TestMinimalDateTime
                                        );
         Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
         Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);

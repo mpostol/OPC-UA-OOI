@@ -17,14 +17,17 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
   /// </remarks>
   public abstract class BinaryMessageEncoder : MessageWriterBase, IBinaryHeaderEncoder
   {
-    private MessageHeader.ConfigurationVersionDataType m_ConfigurationVersion;
-    private byte m_MessageFlags;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="BinaryMessageEncoder"/> class.
+    /// Initializes a new instance of the <see cref="BinaryMessageEncoder" /> class.
     /// </summary>
-    public BinaryMessageEncoder(IUAEncoder uaEncoder) : base(uaEncoder)
+    /// <param name="uaEncoder">The UA encoder.</param>
+    /// <param name="encoding">The encoding.</param>
+    /// <param name="lengthFieldType">Type of the length field.</param>
+    public BinaryMessageEncoder(IUAEncoder uaEncoder, FieldEncodingEnum encoding, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder)
     {
+      m_Encoding = encoding;
+      m_lengthFieldType = lengthFieldType;
     }
 
     #region IBinaryHeaderWriter
@@ -50,16 +53,15 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #endregion
 
     #region MessageWriterBase
-    protected override void CreateMessage(UInt32 dataSetWriterId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp)
+    protected override void CreateMessage(uint dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
     {
       OnMessageAdding(dataSetWriterId);
-      MessageHeader = MessageHeader.GetProducerMessageHeader(this);
+      MessageHeader = MessageHeader.GetProducerMessageHeader(this, m_Encoding, m_lengthFieldType);
       //Create message header and placeholder for further header content.
-      MessageHeader.ConfigurationVersion = m_ConfigurationVersion;
+      MessageHeader.ConfigurationVersion = configurationVersion;
       MessageHeader.FieldCount = fieldCount;
-      MessageHeader.MessageFlags = m_MessageFlags;
-      MessageHeader.MessageSequenceNumber = messageSequenceNumber;
-      MessageHeader.MessageType = MessageHeader.MessageTypeEnum.DataKeyFrame;
+      MessageHeader.MessageSequenceNumber = sequenceNumber;
+      MessageHeader.MessageType = MessageTypeEnum.DataKeyFrame;
       MessageHeader.TimeStamp = timeStamp;
     }
     /// <summary>
@@ -77,6 +79,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #endregion
 
     #region private
+    private FieldEncodingEnum m_Encoding;
+    private MessageLengthFieldTypeEnum m_lengthFieldType;
+
     /// <summary>
     /// Called when new message is adding to the package payload.
     /// </summary>

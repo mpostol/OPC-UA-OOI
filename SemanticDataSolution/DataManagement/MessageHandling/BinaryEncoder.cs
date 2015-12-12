@@ -14,9 +14,13 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 
     #region creator
     /// <summary>
-    /// Initializes a new instance of the <see cref="BinaryEncoder"/> class wrapper of <see cref="BinaryWriter"/> supporting OPC UA binary encoding..
+    /// Initializes a new instance of the <see cref="BinaryEncoder" /> class wrapper of <see cref="BinaryWriter" /> supporting OPC UA binary encoding..
     /// </summary>
-    public BinaryEncoder(IUAEncoder uaEncoder, Guid producerId) : base(uaEncoder)
+    /// <param name="uaEncoder">The ua encoder.</param>
+    /// <param name="producerId">The producer identifier.</param>
+    /// <param name="encoding">The encoding.</param>
+    /// <param name="lengthFieldType">Type of the length field.</param>
+    public BinaryEncoder(IUAEncoder uaEncoder, Guid producerId, FieldEncodingEnum encoding, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder, encoding, lengthFieldType)
     {
       m_producerId = producerId;
     }

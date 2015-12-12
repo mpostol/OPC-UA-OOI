@@ -73,6 +73,8 @@ namespace UAOOI.SemanticData.DataManagement
     private object mLockObject = new object();
     private bool m_Busy = false;
     private ushort m_MessageSequenceNumber = 0;
+    //TODO Handle Configuration Version  #140 at: https://github.com/mpostol/OPC-UA-OOI/issues/140
+    private MessageHeader.ConfigurationVersionDataType m_ConfigurationVersion = new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 };
     //methods
     protected override void InitializeCommunication()
     {
@@ -99,7 +101,7 @@ namespace UAOOI.SemanticData.DataManagement
       m_Busy = true;
       foreach (IMessageWriter _mwx in m_MessageWriter)
         lock (mLockObject)
-          _mwx.Send(x => m_DataSetBindings[x], Convert.ToUInt16(m_DataSetBindings.Length), UInt64.MaxValue, DataDescriptor, m_MessageSequenceNumber, DateTime.UtcNow);
+          _mwx.Send(x => m_DataSetBindings[x], Convert.ToUInt16(m_DataSetBindings.Length), UInt64.MaxValue, DataDescriptor, m_MessageSequenceNumber, DateTime.UtcNow, m_ConfigurationVersion);
       m_Busy = false;
       m_MessageSequenceNumber.IncRollOver();
     }

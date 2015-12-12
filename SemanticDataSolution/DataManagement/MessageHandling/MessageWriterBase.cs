@@ -48,14 +48,18 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="contentMask">The content mask represented as unsigned number <see cref="UInt64" />. The order of the bits starting from the least significant
     /// bit matches the order of the data items within the data set.</param>
     /// <param name="semanticData">An instance of <see cref="ISemanticData" /> that represents a data item conforming to the UA Semantic Data paradigm.</param>
+    /// <param name="messageSequenceNumber">The message sequence number. A monotonically increasing sequence number assigned by the publisher to each message sent.</param>
+    /// <param name="timeStamp">The time stamp - the time the Data was collected.</param>
+    /// <param name="configurationVersion">The configuration version.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">Impossible to convert null value
     /// or</exception>
-    void IMessageWriter.Send(Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, ISemanticData semanticData, ushort messageSequenceNumber, DateTime timeStamp)
+    void IMessageWriter.Send
+      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, ISemanticData semanticData, ushort messageSequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
     {
       if (State.State != HandlerState.Operational)
         return;
       ContentMask = contentMask;
-      CreateMessage(CommonDefinitions.ToUInt32(semanticData.Guid), length, messageSequenceNumber, timeStamp);
+      CreateMessage(CommonDefinitions.ToUInt32(semanticData.Guid), length, messageSequenceNumber, timeStamp, configurationVersion);
       UInt64 _mask = 0x1;
       for (int i = 0; i < length; i++)
       {
@@ -161,7 +165,16 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     private IUAEncoder m_UAEncoder;
     private Action<IProducerBinding> m_WriteValueDelegate = null;
     //methods
-    protected abstract void CreateMessage(UInt32 dataSetWriterId, ushort fieldCount, ushort messageSequenceNumber, DateTime timeStamp);
+    /// <summary>
+    /// Creates the message.
+    /// </summary>
+    /// <param name="dataSetWriterId">The data set writer identifier.</param>
+    /// <param name="fieldCount">The field count.</param>
+    /// <param name="sequenceNumber">The sequence number.</param>
+    /// <param name="timeStamp">The time stamp.</param>
+    /// <param name="configurationVersion">The configuration version.</param>
+    protected abstract void CreateMessage
+      (UInt32 dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion);
     protected abstract void SendMessage();
     private void WriteValue(IProducerBinding producerBinding)
     {

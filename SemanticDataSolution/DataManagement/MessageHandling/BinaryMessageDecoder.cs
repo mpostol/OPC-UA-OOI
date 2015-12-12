@@ -17,8 +17,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 
     #region constructor
     /// <summary>
-    /// Initializes a new instance of the <see cref="BinaryMessageDecoder"/> class.
+    /// Initializes a new instance of the <see cref="BinaryMessageDecoder" /> class.
     /// </summary>
+    /// <param name="uaDecoder">The decoder that provides methods to be used to decode OPC UA Built-in types.</param>
     public BinaryMessageDecoder(IUADecoder uaDecoder) : base(uaDecoder)
     {
       b_MessageHeader = MessageHeader.GetConsumerMessageHeader(this);

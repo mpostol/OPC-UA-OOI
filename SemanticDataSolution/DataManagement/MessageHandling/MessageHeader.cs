@@ -318,7 +318,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         m_MessageType = (MessageTypeEnum)m_reader.ReadByte();
         m_EncodingFlags = m_reader.ReadByte();
-        switch ((MessageLengthFieldTypeEnum)(EncodingFlags & EncodingFlagsMessageLengthMask))
+        switch ((MessageLengthFieldTypeEnum)(m_EncodingFlags & EncodingFlagsMessageLengthMask))
         {
           case MessageLengthFieldTypeEnum.OneByte:
             m_MessageLength = m_reader.ReadByte();

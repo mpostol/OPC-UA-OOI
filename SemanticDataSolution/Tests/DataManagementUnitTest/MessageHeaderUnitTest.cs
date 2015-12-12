@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       long _fieldNumber = 0;
       long[] _position = new long[] { 0, 1, 2, 3, 5, 6, 7, 15 };
       HeaderWriterTest _writer = new HeaderWriterTest(x => Assert.AreEqual<long>(_position[_fieldNumber++], x));
-      MessageHeader _header = MessageHeader.GetProducerMessageHeader(_writer);
+      MessageHeader _header = MessageHeader.GetProducerMessageHeader(_writer, FieldEncodingEnum.VariantFieldEncoding, MessageLengthFieldTypeEnum.TwoBytes);
       Assert.IsNotNull(_header);
       //Default values
       Assert.AreEqual<ushort>(0, (byte)_header.MessageType);

@@ -93,7 +93,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     {
 
       #region creator
-      public BinaryUDPPackageWriter(string remoteHostName, int remotePort, Guid producerId, Action<string> trace, IProducerViewModel ViewModel, IUAEncoder uaEncoder) : base(uaEncoder, producerId)
+      public BinaryUDPPackageWriter
+        (string remoteHostName, int remotePort, Guid producerId, Action<string> trace, IProducerViewModel ViewModel, IUAEncoder uaEncoder) :
+          base(uaEncoder, producerId, FieldEncodingEnum.VariantFieldEncoding, MessageLengthFieldTypeEnum.TwoBytes)
       {
         m_Trace = trace;
         m_ViewModel = ViewModel;

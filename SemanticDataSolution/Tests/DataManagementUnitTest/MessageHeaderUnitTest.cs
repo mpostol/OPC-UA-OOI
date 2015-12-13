@@ -47,6 +47,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_MessageHeaderUnitTest")]
     public void ProducerMessageLengthTestMethod1()
     {
+      string m_Date = System.DateTime.Today.ToShortDateString();
       byte[] _output = null;
       using (MemoryStream _outputStream = new MemoryStream())
       using (HeaderBinaryWriter _writer = new HeaderBinaryWriter(_outputStream))

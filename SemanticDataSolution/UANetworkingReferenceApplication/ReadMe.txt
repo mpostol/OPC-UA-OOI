@@ -13,8 +13,11 @@ Assembly Date:          2015-12-13
 
 Version History 
 Assembly Version:       1.00.09
+Assembly Date:          2015-11-02
 
 The main changes and new functionalities are listed below:
+1. Initial release
+2. It support the protocol version 1.09
 
 
 

@@ -14,10 +14,13 @@ The schema of the configuration files is available at:  [ConfigurationData.xsd](
 By the user interface (UI) remote host name and port numbers can be modified. Use the update buttons to start communication with the new settings. The user interface provides also some diagnostic information.
 
 ## Version History
+
 Assembly Version:       1.00.09
+
 Assembly Date:          2015-11-02
 
 The main changes and new functionalities are listed below:
+
 1. Initial release
 2. It support the protocol version 1.09
 

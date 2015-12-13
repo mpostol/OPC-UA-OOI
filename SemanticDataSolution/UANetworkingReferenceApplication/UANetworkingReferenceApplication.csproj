@@ -160,6 +160,7 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="ReadMe.md" />
+    <None Include="ReadMe.old" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -204,6 +205,15 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
     </Content>
+    <Content Include="ReadMe.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ReadMe.txt</LastGenOutput>
+    </Content>
+    <Resource Include="ReadMe.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReadMe.tt</DependentUpon>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -56,12 +56,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     protected override void CreateMessage(uint dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
     {
       OnMessageAdding(dataSetWriterId);
-      MessageHeader = MessageHeader.GetProducerMessageHeader(this, m_Encoding, m_lengthFieldType);
+      MessageHeader = MessageHeader.GetProducerMessageHeader(this, m_Encoding, m_lengthFieldType, MessageTypeEnum.DataKeyFrame);
       //Create message header and placeholder for further header content.
       MessageHeader.ConfigurationVersion = configurationVersion;
       MessageHeader.FieldCount = fieldCount;
       MessageHeader.MessageSequenceNumber = sequenceNumber;
-      MessageHeader.MessageType = MessageTypeEnum.DataKeyFrame;
       MessageHeader.TimeStamp = timeStamp;
     }
     /// <summary>

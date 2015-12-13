@@ -2,6 +2,8 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
+using System.IO;
+using System.Linq;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -12,26 +14,81 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_MessageHeaderUnitTest")]
     public void ProducerMessageHeaderTestMethod1()
     {
-      long _fieldNumber = 0;
-      long[] _position = new long[] { 0, 1, 2, 3, 5, 6, 7, 15 };
-      HeaderWriterTest _writer = new HeaderWriterTest(x => Assert.AreEqual<long>(_position[_fieldNumber++], x));
-      MessageHeader _header = MessageHeader.GetProducerMessageHeader(_writer, FieldEncodingEnum.VariantFieldEncoding, MessageLengthFieldTypeEnum.TwoBytes);
-      Assert.IsNotNull(_header);
-      //Default values
-      Assert.AreEqual<ushort>(0, (byte)_header.MessageType);
-      Assert.AreEqual<ushort>(1, _header.EncodingFlags);
-      Assert.AreEqual<UInt32>(0, _header.MessageLength);
-      Assert.AreEqual<ushort>(0, _header.MessageSequenceNumber);
-      Assert.AreEqual<ushort>(0, _header.ConfigurationVersion.MajorVersion);
-      Assert.AreEqual<ushort>(0, _header.ConfigurationVersion.MinorVersion);
-      _header.MessageType = MessageTypeEnum.DataDeltaFrame;
-      _header.MessageSequenceNumber = 8;
-      _header.ConfigurationVersion = new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 6, MinorVersion = 7 };
-      _header.TimeStamp = CommonDefinitions.TestMinimalDateTime;
-      _header.FieldCount = 16;
-      _header.Synchronize();
-      Assert.AreEqual<long>(8, _fieldNumber);
-      Assert.AreEqual<long>(17, _writer.Position);
+      byte[] _output = null;
+      using (MemoryStream _outputStream = new MemoryStream())
+      using (HeaderBinaryWriter _writer = new HeaderBinaryWriter(_outputStream))
+      {
+        MessageHeader _header = MessageHeader.GetProducerMessageHeader(_writer, FieldEncodingEnum.VariantFieldEncoding, MessageLengthFieldTypeEnum.TwoBytes, MessageTypeEnum.DataDeltaFrame);
+        Assert.IsNotNull(_header);
+        //Default values
+        Assert.AreEqual<ushort>(1, _header.EncodingFlags);
+        Assert.AreEqual<MessageTypeEnum>(MessageTypeEnum.DataDeltaFrame, _header.MessageType);
+        Assert.AreEqual<ushort>(0, _header.MessageSequenceNumber);
+        Assert.AreEqual<ushort>(0, _header.ConfigurationVersion.MajorVersion);
+        Assert.AreEqual<ushort>(0, _header.ConfigurationVersion.MinorVersion);
+        SetupProducerHeaderFields(_header);
+        _header.Synchronize();
+        _writer.Flush();
+        _output = _outputStream.ToArray();
+      }
+      Assert.AreEqual<int>(18, _output.Length);
+      byte[] _expected = new byte[] {
+        0x02, //MessageType 
+        0x01, //EncodingFlags
+        0x12, 0x00, // MessageLength
+        0x08, 0x00, //MessageSequenceNumber
+        0x06, 0x07, //ConfigurationVersion
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, //TimeStamp
+        0x10, 0x00 // FieldCount
+      };
+      CollectionAssert.AreEqual(_expected, _output);
+    }
+    [TestMethod]
+    [TestCategory("DataManagement_MessageHeaderUnitTest")]
+    public void ProducerMessageLengthTestMethod1()
+    {
+      byte[] _output = null;
+      using (MemoryStream _outputStream = new MemoryStream())
+      using (HeaderBinaryWriter _writer = new HeaderBinaryWriter(_outputStream))
+      {
+        MessageHeader _header = MessageHeader.GetProducerMessageHeader(_writer, FieldEncodingEnum.VariantFieldEncoding, MessageLengthFieldTypeEnum.TwoBytes, MessageTypeEnum.DataDeltaFrame);
+        Assert.IsNotNull(_header);
+        SetupProducerHeaderFields(_header);
+        _writer.Write(UInt32.MaxValue);
+        _writer.Write(UInt32.MaxValue);
+        _writer.Write(UInt32.MaxValue);
+        _writer.Write(UInt32.MaxValue);
+        _writer.Write(UInt32.MaxValue);
+        _writer.Write(UInt32.MaxValue);
+        _writer.Write(UInt32.MaxValue);
+        _writer.Write(UInt32.MaxValue);
+        _writer.Write(UInt32.MaxValue);
+        _writer.Write(UInt32.MaxValue);
+        _header.Synchronize();
+        _writer.Flush();
+        _output = _outputStream.ToArray();
+      }
+      Assert.AreEqual<int>(58, _output.Length);
+      byte[] _expected = new byte[] {
+        0x02, //MessageType 
+        0x01, //EncodingFlags
+        0x3A, 0x00, // MessageLength
+        0x08, 0x00, // MessageSequenceNumber
+        0x06, 0x07, // ConfigurationVersion
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, //TimeStamp
+        0x10, 0x00, // FieldCount
+        0xFF, 0xFF, 0xFF, 0xFF,
+        0xFF, 0xFF, 0xFF, 0xFF,
+        0xFF, 0xFF, 0xFF, 0xFF,
+        0xFF, 0xFF, 0xFF, 0xFF,
+        0xFF, 0xFF, 0xFF, 0xFF,
+        0xFF, 0xFF, 0xFF, 0xFF,
+        0xFF, 0xFF, 0xFF, 0xFF,
+        0xFF, 0xFF, 0xFF, 0xFF,
+        0xFF, 0xFF, 0xFF, 0xFF,
+        0xFF, 0xFF, 0xFF, 0xFF
+      };
+      CollectionAssert.AreEqual(_expected, _output);
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageHeaderUnitTest")]
@@ -52,5 +109,26 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<long>(8, _reader.m_Position);
     }
 
+    #region instrumentation
+    private class HeaderBinaryWriter : BinaryWriter, IBinaryHeaderEncoder
+    {
+      public HeaderBinaryWriter(Stream output) : base(output) { }
+      public void Write(DateTime value)
+      {
+        Write(Encoding.CommonDefinitions.GetUADataTimeTicks(value));
+      }
+      public void Write(Guid value)
+      {
+        Write(value.ToByteArray());
+      }
+    }
+    private static void SetupProducerHeaderFields(MessageHeader _header)
+    {
+      _header.MessageSequenceNumber = 8;
+      _header.ConfigurationVersion = new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 6, MinorVersion = 7 };
+      _header.TimeStamp = CommonDefinitions.TestMinimalDateTime;
+      _header.FieldCount = 16;
+    }
+    #endregion
   }
 }

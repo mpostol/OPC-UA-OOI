@@ -61,12 +61,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           //Message header 26-43
           0x1,                                                //MessageType 
           0x1,                                                //EncodingFlags
-          68, 00,                                             //MessageLength
+          0x56, 00,                                             //MessageLength
           0, 0,                                               //MessageSequenceNumber 
           0, 0,                                               //ConfigurationVersion
           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //TimeStamp
           13, 0,                                              // FieldCount
-          //Message content 60 - 126
+          //Message content 43 - 110
           (byte)BuiltInType.UInt64, 0x7b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,    //UInt64
           (byte)BuiltInType.UInt32, 0x7b, 0x00, 0x00, 0x00,                            //UInt32
           (byte)BuiltInType.UInt16, 0x7b, 0x00,                                        //UInt16

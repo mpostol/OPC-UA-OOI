@@ -19,10 +19,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="writer">The writer <see cref="IBinaryHeaderEncoder" /> to populate the payload with the header information.</param>
     /// <param name="encoding">The encoding.</param>
     /// <param name="lengthFieldType">Type of the length field in the the message header.</param>
+    /// <param name="messageType">Type of the message.</param>
     /// <returns>MessageHeader.</returns>
-    internal static MessageHeader GetProducerMessageHeader(IBinaryHeaderEncoder writer, FieldEncodingEnum encoding, MessageLengthFieldTypeEnum lengthFieldType)
+    internal static MessageHeader GetProducerMessageHeader(IBinaryHeaderEncoder writer, FieldEncodingEnum encoding, MessageLengthFieldTypeEnum lengthFieldType, MessageTypeEnum messageType)
     {
-      return new ProducerMessageHeader(writer, encoding, lengthFieldType);
+      return new ProducerMessageHeader(writer, encoding, lengthFieldType, messageType);
     }
     /// <summary>
     /// Gets the consumer message header.
@@ -69,7 +70,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Gets or sets the type of the message.
     /// </summary>
     /// <value>The type of the message.</value>
-    public abstract MessageTypeEnum MessageType { get; set; }
+    public abstract MessageTypeEnum MessageType { get; }
     /// <summary>
     /// Gets or sets the encoding flags.
     /// </summary>
@@ -115,8 +116,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
 
       #region creator
-      public ProducerMessageHeader(IBinaryHeaderEncoder writer, FieldEncodingEnum encoding, MessageLengthFieldTypeEnum lengthFieldType)
+      public ProducerMessageHeader(IBinaryHeaderEncoder writer, FieldEncodingEnum encoding, MessageLengthFieldTypeEnum lengthFieldType, MessageTypeEnum messageType)
       {
+        m_MessageType = messageType;
         m_Encoding = encoding;
         m_lengthFieldType = lengthFieldType;
         m_HeaderWriter = new HeaderWriter(writer, PackageHeaderLength());
@@ -127,13 +129,13 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       #region MessageHeader
       public override MessageTypeEnum MessageType
       {
-        get; set;
+        get { return m_MessageType; }
       }
       public override byte EncodingFlags
       {
         get
         {
-          return (byte)((byte)m_Encoding & (byte)m_lengthFieldType);
+          return (byte)((byte)m_Encoding | (byte)m_lengthFieldType);
         }
       }
       /// <summary>
@@ -172,11 +174,13 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       private HeaderWriter m_HeaderWriter;
       FieldEncodingEnum m_Encoding = FieldEncodingEnum.VariantFieldEncoding;
       MessageLengthFieldTypeEnum m_lengthFieldType = MessageLengthFieldTypeEnum.TwoBytes;
+      private MessageTypeEnum m_MessageType;
+
       //methods
       private ushort PackageHeaderLength()
       {
         ushort _length = 6;
-        switch ((MessageLengthFieldTypeEnum)(EncodingFlags & EncodingFlagsMessageLengthMask))
+        switch (m_lengthFieldType)
         {
           case MessageLengthFieldTypeEnum.OneByte:
             _length += 1;
@@ -188,7 +192,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
             _length += 4;
             break;
         }
-        switch (MessageType)
+        switch (m_MessageType)
         {
           case MessageTypeEnum.DataKeyFrame:
           case MessageTypeEnum.DataDeltaFrame:
@@ -260,7 +264,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           AssertSynchronized();
           return m_MessageType;
         }
-        set { throw new ApplicationException(m_OperationIsNotApplicableMessage); }
       }
       public override byte EncodingFlags
       {

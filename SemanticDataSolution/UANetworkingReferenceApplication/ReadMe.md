@@ -9,7 +9,17 @@ Both roles are implemented as independent threads that have common user interfac
 * Producer: `ConfigurationDataProducer.xml`
 * Consumer: `ConfigurationDataConsumer.xml`
 
+The schema of the configuration files is available at:  [ConfigurationData.xsd](../../SemanticDataSolution/UANetworkingConfiguration/Serialization/ConfigurationData.xsd) and detailed description of the configuration is captured in the document [UA Data Networking Configuration](../../SemanticDataSolution/UANetworkingConfiguration#ua-data-networking-configuration).
+
 By the user interface (UI) remote host name and port numbers can be modified. Use the update buttons to start communication with the new settings. The user interface provides also some diagnostic information.
+
+## Version History
+Assembly Version:       1.00.09
+Assembly Date:          2015-11-02
+
+The main changes and new functionalities are listed below:
+1. Initial release
+2. It support the protocol version 1.09
 
 ## Application installation
 

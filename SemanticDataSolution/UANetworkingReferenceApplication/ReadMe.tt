@@ -1,0 +1,27 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+The documentation is available online at: https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANetworkingReferenceApplication#ua-data-example-application
+
+Current release:
+
+Assembly Title:         <#=m_AssemblyTitle#>
+Assembly Description:   <#=SemanticDataProduct#>: UAOOI SemanticData UA-Networking Reference Application.
+Assembly Company:       <#=AssemblyCompany#>
+Assembly Product:       <#=SemanticDataProduct#>
+Assembly Copyright:     <#=AssemblyCopyright#>
+Assembly Trademark:     <#=ProductTrademark#>
+Assembly Version:       <#=SemanticDataVersion#>
+Assembly Date:          <#=m_Date#>
+
+<#@ include file = "Readme.old" #>
+
+<#@ include file = "..\..\CommonResources\T4Definitions\Model.t4" #>
+<#+
+string m_AssemblyTitle = "UAOOI.UANetworkingReferenceApplication";
+string m_Date = System.DateTime.Today.ToShortDateString();
+#>
+

@@ -22,46 +22,46 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     #region constructors
     public CustomNodeManager()
     {
-      ValueBoolean = new ProducerBindingMonitoredValue<Boolean>(m_Variable1Name, BuiltInType.Boolean);
+      ValueBoolean = new ProducerBindingMonitoredValue<Boolean>(nameof(ValueBoolean), BuiltInType.Boolean) { MonitoredValue = false };
       AddBinding(ValueBoolean, nameof(ValueBoolean), () => ValueBoolean.MonitoredValue = Inc(ValueBoolean.MonitoredValue));
 
-      ValueByte = new ProducerBindingMonitoredValue<Byte>(m_Variable1Name, BuiltInType.Byte);
+      ValueByte = new ProducerBindingMonitoredValue<Byte>(nameof(ValueByte), BuiltInType.Byte) { MonitoredValue = Byte.MinValue };
       AddBinding(ValueByte, nameof(ValueByte), () => ValueByte.MonitoredValue = Inc(ValueByte.MonitoredValue));
 
-      ValueDateTime = new ProducerBindingMonitoredValue<DateTime>(m_Variable1Name, BuiltInType.DateTime);
+      ValueDateTime = new ProducerBindingMonitoredValue<DateTime>(nameof(ValueDateTime), BuiltInType.DateTime) { MonitoredValue = DateTime.Now };
       AddBinding(ValueDateTime, nameof(ValueDateTime), () => ValueDateTime.MonitoredValue = Inc(ValueDateTime.MonitoredValue));
 
-      ValueDouble = new ProducerBindingMonitoredValue<double>(m_Variable2Name, BuiltInType.Double);
+      ValueDouble = new ProducerBindingMonitoredValue<double>(nameof(ValueDouble), BuiltInType.Double) { MonitoredValue = 0 };
       AddBinding(ValueDouble, nameof(ValueDouble), () => ValueDouble.MonitoredValue = Inc(ValueDouble.MonitoredValue));
 
-      ValueFloat = new ProducerBindingMonitoredValue<float>(m_Variable1Name, BuiltInType.Float);
+      ValueFloat = new ProducerBindingMonitoredValue<float>(nameof(ValueFloat), BuiltInType.Float) { MonitoredValue = float.MinValue };
       AddBinding(ValueFloat, nameof(ValueFloat), () => ValueFloat.MonitoredValue = Inc(ValueFloat.MonitoredValue));
 
-      ValueGuid = new ProducerBindingMonitoredValue<Guid>(m_Variable1Name, BuiltInType.Guid);
+      ValueGuid = new ProducerBindingMonitoredValue<Guid>(nameof(ValueGuid), BuiltInType.Guid) { MonitoredValue = Guid.NewGuid() };
       AddBinding(ValueGuid, nameof(ValueGuid), () => ValueGuid.MonitoredValue = Inc(ValueGuid.MonitoredValue));
 
-      ValueInt16 = new ProducerBindingMonitoredValue<Int16>(m_Variable1Name, BuiltInType.Int16);
-      AddBinding(ValueBoolean, nameof(ValueInt16), () => ValueInt16.MonitoredValue = Inc(ValueInt16.MonitoredValue));
+      ValueInt16 = new ProducerBindingMonitoredValue<Int16>(nameof(ValueInt16), BuiltInType.Int16) { MonitoredValue = Int16.MinValue };
+      AddBinding(ValueInt16, nameof(ValueInt16), () => ValueInt16.MonitoredValue = Inc(ValueInt16.MonitoredValue));
 
-      ValueInt32 = new ProducerBindingMonitoredValue<Int32>(m_Variable1Name, BuiltInType.Int32);
+      ValueInt32 = new ProducerBindingMonitoredValue<Int32>(nameof(ValueInt32), BuiltInType.Int32) { MonitoredValue = Int32.MinValue };
       AddBinding(ValueInt32, nameof(ValueInt32), () => ValueInt32.MonitoredValue = Inc(ValueInt32.MonitoredValue));
 
-      ValueInt64 = new ProducerBindingMonitoredValue<Int64>(m_Variable1Name, BuiltInType.Int64);
+      ValueInt64 = new ProducerBindingMonitoredValue<Int64>(nameof(ValueInt64), BuiltInType.Int64) { MonitoredValue = Int64.MinValue };
       AddBinding(ValueInt64, nameof(ValueInt64), () => ValueInt64.MonitoredValue = Inc(ValueInt64.MonitoredValue));
 
-      ValueSByte = new ProducerBindingMonitoredValue<SByte>(m_Variable1Name, BuiltInType.SByte);
+      ValueSByte = new ProducerBindingMonitoredValue<SByte>(nameof(ValueSByte), BuiltInType.SByte) { MonitoredValue = SByte.MinValue };
       AddBinding(ValueSByte, nameof(ValueSByte), () => ValueSByte.MonitoredValue = Inc(ValueSByte.MonitoredValue));
 
-      ValueString = new ProducerBindingMonitoredValue<String>(m_Variable1Name, BuiltInType.String);
+      ValueString = new ProducerBindingMonitoredValue<String>(nameof(ValueString), BuiltInType.String) { MonitoredValue = String.Empty };
       AddBinding(ValueString, nameof(ValueString), () => ValueString.MonitoredValue = Inc(ValueString.MonitoredValue));
 
-      ValueUInt16 = new ProducerBindingMonitoredValue<UInt16>(m_Variable1Name, BuiltInType.UInt16);
+      ValueUInt16 = new ProducerBindingMonitoredValue<UInt16>(nameof(ValueUInt16), BuiltInType.UInt16) { MonitoredValue = UInt16.MinValue };
       AddBinding(ValueUInt16, nameof(ValueUInt16), () => ValueUInt16.MonitoredValue = Inc(ValueUInt16.MonitoredValue));
 
-      ValueUInt32 = new ProducerBindingMonitoredValue<UInt32>(m_Variable1Name, BuiltInType.UInt32);
+      ValueUInt32 = new ProducerBindingMonitoredValue<UInt32>(nameof(ValueUInt32), BuiltInType.UInt32) { MonitoredValue = UInt32.MinValue };
       AddBinding(ValueUInt32, nameof(ValueUInt32), () => ValueUInt32.MonitoredValue = Inc(ValueUInt32.MonitoredValue));
 
-      ValueUInt64 = new ProducerBindingMonitoredValue<UInt32>(m_Variable1Name, BuiltInType.UInt64);
+      ValueUInt64 = new ProducerBindingMonitoredValue<UInt32>(nameof(ValueUInt64), BuiltInType.UInt64) { MonitoredValue = UInt32.MinValue };
       AddBinding(ValueUInt64, nameof(ValueUInt64), () => ValueUInt64.MonitoredValue = Inc(ValueUInt64.MonitoredValue));
     }
     #endregion
@@ -294,7 +294,14 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     }
     private void TimerCallback(object state)
     {
-      m_TimeEven?.Invoke(this, EventArgs.Empty);
+      try
+      {
+        m_TimeEven?.Invoke(this, EventArgs.Empty);
+      }
+      catch (Exception ex)
+      {
+
+      }
       //if (ValueDateTime.HandlerState == HandlerState.Operational)
       //  ValueDateTime.MonitoredValue = DateTime.Now;
       //if (Value2.HandlerState == HandlerState.Operational)

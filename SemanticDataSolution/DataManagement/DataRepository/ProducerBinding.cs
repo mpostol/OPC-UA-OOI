@@ -70,7 +70,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// </summary>
     public void OnNewValue()
     {
-      PropertyChanged.RaiseHandler<bool>(true, ref b_NewValue, "m_VariableName", this);
+      PropertyChanged.RaiseHandler<bool>(true, ref b_NewValue, m_VariableName, this);
     }
     #endregion
 

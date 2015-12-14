@@ -45,7 +45,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0">
           <Label Style="{StaticResource Label}" >Received: Remote UTC time</Label>
-          <Label Style="{StaticResource Label}">Received: Random floating-point</Label>
+          <Label Style="{StaticResource Label}">Received: Int32 Counts from MinVal</Label>
           <Label Style="{StaticResource Label}">Packages Received</Label>
           <Label Style="{StaticResource Label}">Bytes Received</Label>
           <Label Style="{StaticResource Label}">Local UDP port</Label>

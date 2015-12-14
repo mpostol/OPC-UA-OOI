@@ -15,9 +15,9 @@
           <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         </DataMemberConfiguration>
         <DataMemberConfiguration>
-          <SymbolicName>ValueDouble</SymbolicName>
-          <ProcessValueName>ValueDouble</ProcessValueName>
-          <Encoding>Double</Encoding>
+          <SymbolicName>ValueInt32</SymbolicName>
+          <ProcessValueName>ValueInt32</ProcessValueName>
+          <Encoding>Int32</Encoding>
           <ValueRank>-1</ValueRank>
           <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         </DataMemberConfiguration>

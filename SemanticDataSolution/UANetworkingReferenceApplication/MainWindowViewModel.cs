@@ -42,8 +42,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       }
       else if (variableName == "Value2")
       {
-        Value2 = new ConsumerBindingMonitoredValue<double>(encoding);
-        Value2.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<Double>)x).Value.ToString()}");
+        Value2 = new ConsumerBindingMonitoredValue<Int32>(encoding);
+        Value2.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<Int32>)x).Value.ToString()}");
         return Value2;
       }
       else
@@ -148,7 +148,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     /// Gets or sets the value2 - an example of OPC UA data binded to the <see cref="System.Windows.Controls.TextBox"/>.
     /// </summary>
     /// <value>The value2.</value>
-    public ConsumerBindingMonitoredValue<double> Value2
+    public ConsumerBindingMonitoredValue<Int32> Value2
     {
       get
       {
@@ -156,7 +156,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ConsumerBindingMonitoredValue<double>>(value, ref b_Value2, "Value2", this);
+        PropertyChanged.RaiseHandler<ConsumerBindingMonitoredValue<Int32>>(value, ref b_Value2, "Value2", this);
       }
     }
     /// <summary>
@@ -238,7 +238,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     private int b_ConsumerBytesReceived;
     private int b_UDPPort;
     private ConsumerBindingMonitoredValue<DateTime> b_Value1;
-    private ConsumerBindingMonitoredValue<double> b_Value2;
+    private ConsumerBindingMonitoredValue<Int32> b_Value2;
     #endregion
 
     #region Producer user interface

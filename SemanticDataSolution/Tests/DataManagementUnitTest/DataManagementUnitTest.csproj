@@ -96,6 +96,7 @@
     <Compile Include="HeaderWriterUnitTest.cs" />
     <Compile Include="ExtensionsUnitTest.cs" />
     <Compile Include="ProducerBindingMonitoredValueUnitTest.cs" />
+    <Compile Include="ProducerAssociationUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

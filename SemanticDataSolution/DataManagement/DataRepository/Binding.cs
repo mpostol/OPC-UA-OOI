@@ -37,15 +37,15 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// Sets the converter, which is used to provide a way to apply custom logic to a binding.
     /// </summary>
     /// <value>The converter as an instance of the <see cref="IValueConverter" />.</value>
-    IValueConverter IBinding.Converter { set { m_Converter = value; } }
+    IValueConverter IBinding.Converter { set { Converter = value; } }
     /// <summary>
     /// Gets or sets an optional parameter to be used in the converter logic or serialization process.
     /// </summary>
     /// <value>The parameter to be used by the <see cref="IBinding.Converter" /> or by serialization process.</value>
     object IBinding.Parameter
     {
-      set { m_Parameter = value; }
-      get { return m_Parameter; }
+      set { Parameter = value; }
+      get { return Parameter; }
     }
     /// <summary>
     /// Sets the culture of the conversion.
@@ -53,7 +53,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// <value>The culture as an instance of the <see cref="CultureInfo" /> to be used by the <see cref="IBinding.Converter" />.</value>
     CultureInfo IBinding.Culture
     {
-      set { m_Culture = value; }
+      set { Culture = value; }
     }
     /// <summary>
     /// Marks the process value enabled - signal that the update of the value is expected.
@@ -84,11 +84,29 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     #endregion
 
     #region private
-    protected BuiltInType m_MessageEncoding;
-    protected IValueConverter m_Converter;
-    protected CultureInfo m_Culture;
+    private BuiltInType m_MessageEncoding;
+    /// <summary>
+    /// Sets the converter, which is used to provide a way to apply custom logic to a binding.
+    /// </summary>
+    /// <value>The converter as an instance of the <see cref="IValueConverter" />.</value>
+    protected IValueConverter Converter
+    {
+      get; private set;
+    }
+    /// <summary>
+    /// Gets the culture.
+    /// </summary>
+    /// <value>The culture.</value>
+    protected CultureInfo Culture { get; private set; }
+    /// <summary>
+    /// Sets an optional parameter to be used in the converter logic.
+    /// </summary>
+    /// <value>The parameter to be used by the <see cref="IBinding.Converter" />.</value>
+    protected object Parameter
+    {
+      get; private set;
+    }
     private HandlerState m_HandlerState = HandlerState.Operational;
-    protected object m_Parameter;
     private void RaiseHandlerState(HandlerState state)
     {
       EventHandler<AssociationStateChangedEventArgs> _hc = StateChangedEventHandler;

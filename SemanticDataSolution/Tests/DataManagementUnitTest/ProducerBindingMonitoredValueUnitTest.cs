@@ -1,32 +1,30 @@
-﻿
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.ComponentModel;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using System.ComponentModel;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
   [TestClass]
-  public class ProducerBindingUnitTest
+  public class ProducerBindingMonitoredValueUnitTest
   {
-    #region tests
     [TestMethod]
-    [TestCategory("DataManagement_ProducerBindingUnitTest")]
-    public void CreatorTestMethod1()
+    [TestCategory("DataManagement_ProducerBindingMonitoredValueUnitTest")]
+    public void CreatorTestMethod2()
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName", BuiltInType.String);
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", BuiltInType.String);
       Assert.IsNotNull(_bn);
     }
     [TestMethod]
-    [TestCategory("DataManagement_ProducerBindingUnitTest")]
-    public void GetNewValueTestMethod()
+    [TestCategory("DataManagement_ProducerBindingMonitoredValueUnitTest")]
+    public void GetNewValueTestMethod2()
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName", BuiltInType.String);
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", BuiltInType.String);
       Assert.IsNotNull(_bn);
       string _testValue = "1231221431423421";
       _pr.Modify(_testValue);
@@ -35,48 +33,29 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsFalse(_bn.NewValue);
     }
     [TestMethod]
-    [TestCategory("DataManagement_ProducerBindingUnitTest")]
-    public void NewValueTestMethod()
+    [TestCategory("DataManagement_ProducerBindingMonitoredValueUnitTest")]
+    public void NewValueTestMethod2()
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName", BuiltInType.String);
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", BuiltInType.String);
       Assert.IsNotNull(_bn);
-      int _changeCounter = 0;
-      _bn.PropertyChanged += (x, y) => _changeCounter++;
       Assert.IsFalse(_bn.NewValue);
-      Assert.AreEqual<int>(0, _changeCounter);
       _pr.Modify("654321");
       Assert.IsTrue(_bn.NewValue);
-      Assert.AreEqual<int>(1, _changeCounter);
       string _testValue = "1231221431423421";
       _pr.Modify(_testValue);
       Assert.IsTrue(_bn.NewValue);
-      Assert.AreEqual<int>(1, _changeCounter);
       Assert.AreEqual<string>(_testValue, (string)_bn.GetFromRepository());
       Assert.IsFalse(_bn.NewValue);
-      Assert.AreEqual<int>(1, _changeCounter);
       Assert.AreEqual<string>(_testValue, (string)_bn.GetFromRepository());
       Assert.IsFalse(_bn.NewValue);
-      _pr.Modify(_testValue);
-      Assert.IsFalse(_bn.NewValue);
-      Assert.AreEqual<int>(1, _changeCounter);
-      _testValue = "987654321";
-      _pr.Modify(_testValue);
-      Assert.IsTrue(_bn.NewValue);
-      Assert.AreEqual<int>(2, _changeCounter);
-      Assert.AreEqual<string>(_testValue, (string)_bn.GetFromRepository());
     }
 
-    private void _bn_PropertyChanged(object sender, PropertyChangedEventArgs e)
-    {
-      throw new NotImplementedException();
-    }
-
-    #endregion
     private class ProducerBindingFactory : IBindingFactory
     {
-      #region IBindingFactory
+      private ValueClass<string> _value = new ValueClass<string>();
+      private ProducerBindingMonitoredValue<string> _monitoredValue = new ProducerBindingMonitoredValue<string>("ProducerBindingMonitoredValue._monitoredValue", BuiltInType.String);
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         throw new NotImplementedException();
@@ -90,13 +69,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           _value.PropertyChanged += (x, y) => _ret.OnNewValue();
           return _ret;
         }
+        else if (repositoryGroup == "ProducerBindingMonitoredValue")
+          return _monitoredValue;
         throw new ArgumentOutOfRangeException("repositoryGroup");
       }
 
-      #endregion
-      private ValueClass<string> _value = new ValueClass<string>();
-
-      #region test instrumentation
       internal class ValueClass<type> : INotifyPropertyChanged
       {
         public type Value
@@ -117,10 +94,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       internal void Modify(string value)
       {
         _value.Value = value;
+        _monitoredValue.MonitoredValue = value;
       }
 
-      #endregion
     }
   }
-
 }

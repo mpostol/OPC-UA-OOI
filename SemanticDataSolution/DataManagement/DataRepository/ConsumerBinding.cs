@@ -30,10 +30,10 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// <param name="value">The value to be assigned to the precess variable.</param>
     void IConsumerBinding.Assign2Repository(object value)
     {
-      if (this.m_Converter == null)
+      if (this.Converter == null)
         AssignValueToRepository((type)value);
       else
-        AssignValueToRepository((type)m_Converter.Convert(value, typeof(type), m_Parameter, m_Culture));
+        AssignValueToRepository((type)Converter.Convert(value, typeof(type), Parameter, Culture));
     }
     #endregion
 

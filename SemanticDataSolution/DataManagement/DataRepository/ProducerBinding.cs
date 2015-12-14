@@ -53,10 +53,10 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     object IProducerBinding.GetFromRepository()
     {
       b_NewValue = false;
-      if (this.m_Converter == null)
+      if (this.Converter == null)
         return GetReadValueDelegate();
       else
-        return m_Converter.ConvertBack(GetReadValueDelegate(), typeof(type), m_Parameter, m_Culture);
+        return Converter.ConvertBack(GetReadValueDelegate(), typeof(type), Parameter, Culture);
     }
     /// <summary>
     /// Occurs when a property value changes.

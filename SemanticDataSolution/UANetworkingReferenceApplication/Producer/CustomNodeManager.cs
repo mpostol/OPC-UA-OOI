@@ -31,10 +31,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       ValueDateTime = new ProducerBindingMonitoredValue<DateTime>(nameof(ValueDateTime), BuiltInType.DateTime) { MonitoredValue = DateTime.Now };
       AddBinding(ValueDateTime, nameof(ValueDateTime), () => ValueDateTime.MonitoredValue = Inc(ValueDateTime.MonitoredValue));
 
-      ValueDouble = new ProducerBindingMonitoredValue<double>(nameof(ValueDouble), BuiltInType.Double) { MonitoredValue = 0 };
+      ValueDouble = new ProducerBindingMonitoredValue<double>(nameof(ValueDouble), BuiltInType.Double) { MonitoredValue = -10 };
       AddBinding(ValueDouble, nameof(ValueDouble), () => ValueDouble.MonitoredValue = Inc(ValueDouble.MonitoredValue));
 
-      ValueFloat = new ProducerBindingMonitoredValue<float>(nameof(ValueFloat), BuiltInType.Float) { MonitoredValue = float.MinValue };
+      ValueFloat = new ProducerBindingMonitoredValue<float>(nameof(ValueFloat), BuiltInType.Float) { MonitoredValue = -10 };
       AddBinding(ValueFloat, nameof(ValueFloat), () => ValueFloat.MonitoredValue = Inc(ValueFloat.MonitoredValue));
 
       ValueGuid = new ProducerBindingMonitoredValue<Guid>(nameof(ValueGuid), BuiltInType.Guid) { MonitoredValue = Guid.NewGuid() };

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Timers;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
@@ -13,7 +14,7 @@ namespace UAOOI.SemanticData.DataManagement
   /// <summary>
   /// Class ProducerAssociation - implements the association for the producer side.
   /// </summary>
-  internal class ProducerAssociation : Association
+  internal class ProducerAssociation : Association, IDisposable
   {
 
     #region creator
@@ -36,6 +37,9 @@ namespace UAOOI.SemanticData.DataManagement
           _ret.PropertyChanged += ProducerBinding_PropertyChanged;
           return _ret;
         }).ToArray<IProducerBinding>();
+      m_Timer = new Timer(1000) { AutoReset = true };
+      m_Timer.Elapsed += M_Timer_Elapsed;
+      m_Timer.Start();
     }
     #endregion
 
@@ -49,8 +53,9 @@ namespace UAOOI.SemanticData.DataManagement
     {
       if (messageWriter == null)
         throw new ArgumentNullException("messageReader");
-      if (!m_MessageWriter.Exists(x => x.Equals(messageWriter)))
-        m_MessageWriter.Add(messageWriter);
+      if (m_MessageWriter.Exists(x => x.Equals(messageWriter)))
+        return;
+      m_MessageWriter.Add(messageWriter);
     }
     /// <summary>
     /// Removes the message writer.
@@ -68,10 +73,11 @@ namespace UAOOI.SemanticData.DataManagement
 
     #region private
     //vars
+    private Timer m_Timer;
     private List<IMessageWriter> m_MessageWriter = new List<IMessageWriter>();
     private IProducerBinding[] m_DataSetBindings;
     private object mLockObject = new object();
-    private bool m_Busy = false;
+    private bool m_Modified = false;
     private ushort m_MessageSequenceNumber = 0;
     //TODO Handle Configuration Version  #140 at: https://github.com/mpostol/OPC-UA-OOI/issues/140
     private MessageHeader.ConfigurationVersionDataType m_ConfigurationVersion = new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 };
@@ -96,15 +102,49 @@ namespace UAOOI.SemanticData.DataManagement
     }
     private void ProducerBinding_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-      if (m_Busy)
-        return;
-      m_Busy = true;
+      m_Modified = true;
+    }
+    private void M_Timer_Elapsed(object sender, ElapsedEventArgs e)
+    {
+      //if (!m_Modified)
+      //  return;
+      Send();
+    }
+    private void Send()
+    {
       foreach (IMessageWriter _mwx in m_MessageWriter)
         lock (mLockObject)
           _mwx.Send(x => m_DataSetBindings[x], Convert.ToUInt16(m_DataSetBindings.Length), UInt64.MaxValue, DataDescriptor, m_MessageSequenceNumber, DateTime.UtcNow, m_ConfigurationVersion);
-      m_Busy = false;
+      m_Modified = false;
       m_MessageSequenceNumber.IncRollOver();
+      m_Modified = false;
     }
+
+    #region IDisposable Support
+    private bool disposedValue = false; // To detect redundant calls
+    protected virtual void Dispose(bool disposing)
+    {
+      if (!disposedValue)
+      {
+        if (disposing)
+          m_Timer.Dispose();
+        disposedValue = true;
+      }
+    }
+    // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+    // ~ProducerAssociation() {
+    //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+    //   Dispose(false);
+    // }
+    // This code added to correctly implement the disposable pattern.
+    public void Dispose()
+    {
+      // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+      Dispose(true);
+      // TODO: uncomment the following line if the finalizer is overridden above.
+      // GC.SuppressFinalize(this);
+    }
+    #endregion
     #endregion
 
   }

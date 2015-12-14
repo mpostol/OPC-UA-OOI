@@ -37,25 +37,98 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       if (variableName == "Value1")
       {
         Value1 = new ConsumerBindingMonitoredValue<DateTime>(encoding);
+        Value1.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<DateTime>)x).Value.ToString()}");
         return Value1;
       }
       else if (variableName == "Value2")
       {
         Value2 = new ConsumerBindingMonitoredValue<double>(encoding);
+        Value2.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<Double>)x).Value.ToString()}");
         return Value2;
       }
-      throw new ArgumentOutOfRangeException("variableName");
+      else
+      {
+        IConsumerBinding _return = null;
+        switch (encoding)
+        {
+          case BuiltInType.Boolean:
+            _return = AddBinding<Boolean>(variableName, BuiltInType.Boolean);
+            break;
+          case BuiltInType.SByte:
+            _return = AddBinding<SByte>(variableName, BuiltInType.SByte);
+            break;
+          case BuiltInType.Byte:
+            _return = AddBinding<Byte>(variableName, BuiltInType.Byte);
+            break;
+          case BuiltInType.Int16:
+            _return = AddBinding<Int16>(variableName, BuiltInType.Int16);
+            break;
+          case BuiltInType.UInt16:
+            _return = AddBinding<UInt16>(variableName, BuiltInType.UInt16);
+            break;
+          case BuiltInType.Int32:
+            _return = AddBinding<Int32>(variableName, BuiltInType.Int32);
+            break;
+          case BuiltInType.UInt32:
+            _return = AddBinding<UInt32>(variableName, BuiltInType.UInt32);
+            break;
+          case BuiltInType.Int64:
+            _return = AddBinding<Int64>(variableName, BuiltInType.Int64);
+            break;
+          case BuiltInType.UInt64:
+            _return = AddBinding<UInt64>(variableName, BuiltInType.UInt64);
+            break;
+          case BuiltInType.Float:
+            _return = AddBinding<float>(variableName, BuiltInType.Float);
+            break;
+          case BuiltInType.Double:
+            _return = AddBinding<Double>(variableName, BuiltInType.Double);
+            break;
+          case BuiltInType.String:
+            _return = AddBinding<String>(variableName, BuiltInType.String);
+            break;
+          case BuiltInType.DateTime:
+            _return = AddBinding<DateTime>(variableName, BuiltInType.DateTime);
+            break;
+          case BuiltInType.Guid:
+            _return = AddBinding<Guid>(variableName, BuiltInType.Guid);
+            break;
+          case BuiltInType.Null:
+          case BuiltInType.ByteString:
+          case BuiltInType.XmlElement:
+          case BuiltInType.NodeId:
+          case BuiltInType.ExpandedNodeId:
+          case BuiltInType.StatusCode:
+          case BuiltInType.QualifiedName:
+          case BuiltInType.LocalizedText:
+          case BuiltInType.ExtensionObject:
+          case BuiltInType.DataValue:
+          case BuiltInType.Variant:
+          case BuiltInType.DiagnosticInfo:
+          case BuiltInType.Enumeration:
+          default:
+            throw new ArgumentOutOfRangeException("encoding");
+        }
+        return _return;
+      }
     }
     #endregion
+    private IConsumerBinding AddBinding<type>(string variableName, BuiltInType encoding)
+    {
+      ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(encoding);
+      _return.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).Value.ToString()}");
+      return _return;
+    }
+
+    #region IConsumerViewModel Consumer User Interface ViewModel implementation
     /// <summary>
     /// Add the message to the <see cref="MainWindowViewModel.ConsumerLog"/>.
     /// </summary>
     /// <param name="message">The message to be added to the log <see cref="MainWindowViewModel.ConsumerLog"/>.</param>
     public void Trace(string message)
     {
-      GalaSoft.MvvmLight.Threading.DispatcherHelper.RunAsync((() => ConsumerLog.Add(message)));
+      GalaSoft.MvvmLight.Threading.DispatcherHelper.RunAsync((() => ConsumerLog.Insert(0, message)));
     }
-    #region Consumer User Interface - ViewModel implementation
     /// <summary>
     /// Gets or sets the value1 - an example of OPC UA data binded to the <see cref="System.Windows.Controls.TextBox"/>.
     /// </summary>

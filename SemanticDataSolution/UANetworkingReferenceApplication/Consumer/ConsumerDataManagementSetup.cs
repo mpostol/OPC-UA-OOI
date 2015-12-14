@@ -84,7 +84,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       }
       catch (Exception ex)
       {
-        m_ViewModel.ConsumerErrorMessage = String.Format("Error: {0}", ex.Message);
+        string _errorMessage = $"Error: {ex.Message}";
+        m_ViewModel.Trace(_errorMessage);
+        m_ViewModel.ConsumerErrorMessage = _errorMessage;
         Dispose();
       }
     }

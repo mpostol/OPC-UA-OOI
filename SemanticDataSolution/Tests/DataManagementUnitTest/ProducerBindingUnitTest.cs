@@ -10,6 +10,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   [TestClass]
   public class ProducerBindingUnitTest
   {
+
     #region tests
     [TestMethod]
     [TestCategory("DataManagement_ProducerBindingUnitTest")]
@@ -67,13 +68,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.AreEqual<int>(2, _changeCounter);
       Assert.AreEqual<string>(_testValue, (string)_bn.GetFromRepository());
     }
-
-    private void _bn_PropertyChanged(object sender, PropertyChangedEventArgs e)
-    {
-      throw new NotImplementedException();
-    }
-
     #endregion
+
+    #region private
     private class ProducerBindingFactory : IBindingFactory
     {
       #region IBindingFactory
@@ -92,9 +89,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         }
         throw new ArgumentOutOfRangeException("repositoryGroup");
       }
-
-      #endregion
       private ValueClass<string> _value = new ValueClass<string>();
+      #endregion
 
       #region test instrumentation
       internal class ValueClass<type> : INotifyPropertyChanged
@@ -118,9 +114,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         _value.Value = value;
       }
-
       #endregion
     }
+    #endregion
+
   }
 
 }

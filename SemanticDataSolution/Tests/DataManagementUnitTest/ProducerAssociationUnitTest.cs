@@ -68,7 +68,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         string _key = String.Format("{0}.{1}", repositoryGroup, variableName);
-        IProducerBinding _npb = new ProducerBindingMonitoredValue<object>(_key, encoding);
+        ProducerBindingMonitoredValue<object> _npb = new ProducerBindingMonitoredValue<object>(_key, encoding);
+        _npb.MonitoredValue = Guid.NewGuid();
         m_Repository.Add(_key, _npb);
         return _npb;
       }

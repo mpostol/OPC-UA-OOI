@@ -55,6 +55,7 @@ namespace UAOOI.SemanticData.DataManagement
         throw new ArgumentNullException("messageReader");
       if (m_MessageWriter.Exists(x => x.Equals(messageWriter)))
         return;
+      m_Modified = true;
       m_MessageWriter.Add(messageWriter);
     }
     /// <summary>
@@ -77,7 +78,7 @@ namespace UAOOI.SemanticData.DataManagement
     private List<IMessageWriter> m_MessageWriter = new List<IMessageWriter>();
     private IProducerBinding[] m_DataSetBindings;
     private object mLockObject = new object();
-    private bool m_Modified = false;
+    private bool m_Modified = true;
     private ushort m_MessageSequenceNumber = 0;
     //TODO Handle Configuration Version  #140 at: https://github.com/mpostol/OPC-UA-OOI/issues/140
     private MessageHeader.ConfigurationVersionDataType m_ConfigurationVersion = new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 };
@@ -106,18 +107,17 @@ namespace UAOOI.SemanticData.DataManagement
     }
     private void M_Timer_Elapsed(object sender, ElapsedEventArgs e)
     {
-      //if (!m_Modified)
-      //  return;
+      if (!m_Modified)
+        return;
       Send();
+      m_Modified = false;
     }
     private void Send()
     {
       foreach (IMessageWriter _mwx in m_MessageWriter)
         lock (mLockObject)
           _mwx.Send(x => m_DataSetBindings[x], Convert.ToUInt16(m_DataSetBindings.Length), UInt64.MaxValue, DataDescriptor, m_MessageSequenceNumber, DateTime.UtcNow, m_ConfigurationVersion);
-      m_Modified = false;
       m_MessageSequenceNumber.IncRollOver();
-      m_Modified = false;
     }
 
     #region IDisposable Support

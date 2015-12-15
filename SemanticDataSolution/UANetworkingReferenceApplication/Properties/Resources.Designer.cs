@@ -59,5 +59,32 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigurationDataConsumer.xml.
+        /// </summary>
+        internal static string ConfigurationDataConsumerFileName {
+            get {
+                return ResourceManager.GetString("ConfigurationDataConsumerFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ConfigurationDataProducer.xml.
+        /// </summary>
+        internal static string ConfigurationDataProducerFileName {
+            get {
+                return ResourceManager.GetString("ConfigurationDataProducerFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANetworkingReferenceApplication#ua-data-example-application.
+        /// </summary>
+        internal static string HelpDocumentationUrl {
+            get {
+                return ResourceManager.GetString("HelpDocumentationUrl", resourceCulture);
+            }
+        }
     }
 }

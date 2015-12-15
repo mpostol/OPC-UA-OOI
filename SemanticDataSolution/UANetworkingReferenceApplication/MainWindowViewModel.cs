@@ -2,6 +2,10 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Windows;
 using System.Windows.Input;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
@@ -22,6 +26,12 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       b_RemoteHost = Properties.Settings.Default.RemoteHostName;
       b_RemotePort = Properties.Settings.Default.RemoteUDPPortNumber;
       b_ConsumerLog = new ObservableCollection<string>();
+      b_ConfigurationFolder = new ConfigurationFolderCommand();
+      b_HelpDocumentation = new HelpDocumentationCommand();
+      b_OpenConsumerConfiguration = new OpenFileCommand(Properties.Resources.ConfigurationDataConsumerFileName);
+     b_OpenProducerConfiguration = new OpenFileCommand(Properties.Resources.ConfigurationDataProducerFileName);
+      String _version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+      b_WindowTitle = $"OPC UA Example Application Rel. {_version} supporting PubSup protocol 1.10";
     }
 
     #region API
@@ -113,12 +123,74 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       }
     }
     #endregion
-    private IConsumerBinding AddBinding<type>(string variableName, BuiltInType encoding)
+
+    #region Window
+
+    public string WindowTitle
     {
-      ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(encoding);
-      _return.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).Value.ToString()}");
-      return _return;
+      get
+      {
+        return b_WindowTitle;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<string>(value, ref b_WindowTitle, "WindowTitle", this);
+      }
     }
+    private string b_WindowTitle;
+    #endregion
+
+    #region menu
+    public ICommand OpenConsumerConfiguration
+    {
+      get
+      {
+        return b_OpenConsumerConfiguration;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<ICommand>(value, ref b_OpenConsumerConfiguration, "OpenConsumerConfiguration", this);
+      }
+    }
+    public ICommand OpenProducerConfiguration
+    {
+      get
+      {
+        return b_OpenProducerConfiguration;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<ICommand>(value, ref b_OpenProducerConfiguration, "OpenProducerConfiguration", this);
+      }
+    }
+    public ICommand HelpDocumentation
+    {
+      get
+      {
+        return b_HelpDocumentation;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<ICommand>(value, ref b_HelpDocumentation, "HelpDocumentation", this);
+      }
+    }
+    public ICommand ConfigurationFolder
+    {
+      get
+      {
+        return b_ConfigurationFolder;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ConfigurationFolder, "ConfigurationFolder", this);
+      }
+    }
+    //private
+    private ICommand b_OpenProducerConfiguration;
+    private ICommand b_OpenConsumerConfiguration;
+    private ICommand b_ConfigurationFolder;
+    private ICommand b_HelpDocumentation;
+    #endregion
 
     #region IConsumerViewModel Consumer User Interface ViewModel implementation
     /// <summary>
@@ -317,12 +389,94 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     private int b_RemotePort;
     private ICommand b_ProducerRestart;
     private string b_ProducerErrorMessage;
-
-
     #endregion
 
     #region INotifyPropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
+    #endregion
+
+    #region private
+    private class OpenFileCommand : ICommand
+    {
+      private string m_FileName;
+
+      public OpenFileCommand(string fileName)
+      {
+        m_FileName = fileName;
+      }
+      public event EventHandler CanExecuteChanged;
+      public bool CanExecute(object parameter)
+      {
+        return true;
+      }
+      public void Execute(object parameter)
+      {
+        string path = string.Empty;
+        try
+        {
+          path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+          using (Process process = Process.Start(Path.Combine(path, m_FileName))) { }
+        }
+        catch (Exception _ex)
+        {
+          MessageBox.Show($"An error occurs during opening the file {path}. Error message: {_ex}", "Problem with opening a file !", MessageBoxButton.OK, MessageBoxImage.Error);
+          return;
+        }
+      }
+    }
+    private class HelpDocumentationCommand : ICommand
+    {
+      public event EventHandler CanExecuteChanged;
+      public bool CanExecute(object parameter)
+      {
+        return true;
+      }
+      public void Execute(object parameter)
+      {
+        try
+        {
+          using (Process process = Process.Start(Properties.Resources.HelpDocumentationUrl)) { }
+        }
+        catch (Exception _ex)
+        {
+          MessageBox.Show($"An error occurs during opening the help documentation: {_ex}", "Problem with help documentation !", MessageBoxButton.OK, MessageBoxImage.Error);
+          return;
+        }
+      }
+    }
+    private class ConfigurationFolderCommand : ICommand
+    {
+      public event EventHandler CanExecuteChanged;
+      public bool CanExecute(object parameter)
+      {
+        return true;
+      }
+      public void Execute(object parameter)
+      {
+        string path = string.Empty;
+        try
+        {
+          path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+          using (Process process = Process.Start(@path)) { }
+        }
+        catch (Win32Exception)
+        {
+          MessageBox.Show($"No configuration folder exists at: {path}.", "No Log folder !", MessageBoxButton.OK, MessageBoxImage.Stop);
+          return;
+        }
+        catch (Exception _ex)
+        {
+          MessageBox.Show($"An error occurs during opening the folder {_ex}", "Problem with log folder !", MessageBoxButton.OK, MessageBoxImage.Error);
+          return;
+        }
+      }
+    }
+    private IConsumerBinding AddBinding<type>(string variableName, BuiltInType encoding)
+    {
+      ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(encoding);
+      _return.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).Value.ToString()}");
+      return _return;
+    }
     #endregion
 
   }

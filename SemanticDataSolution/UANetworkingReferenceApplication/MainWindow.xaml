@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
         xmlns:code="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
         mc:Ignorable="d"
-        Title="OPC UA Part 14 PubSub Reference Application" Height="700" Width="500" MinHeight="700" MinWidth="500" Icon="PrepareProcess.ico">
+        Title="{Binding Path=WindowTitle}" Height="800" Width="500" MinHeight="700" MinWidth="500" Icon="PrepareProcess.ico">
   <Window.DataContext>
     <code:MainWindowViewModel/>
   </Window.DataContext>
@@ -25,10 +25,25 @@
   </Window.Resources>
   <Grid>
     <Grid.RowDefinitions>
+      <RowDefinition Height="20"></RowDefinition>
       <RowDefinition Height="*"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
-    <Grid Grid.Row="0"  Background="#FF06F711" VerticalAlignment="Stretch" >
+    <DockPanel Grid.Row="0" LastChildFill="True">
+      <Menu x:Name="menu" Height="20" HorizontalAlignment="Left" Width="Auto" DockPanel.Dock="Right" ToolTip="Available actions">
+        <MenuItem Header="File" >
+          <MenuItem Header="Open Consumer Configuration" Command="{Binding Path=OpenConsumerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor."/>
+          <MenuItem Header="Open Producer Configuration" Command="{Binding Path=OpenProducerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor." />
+        </MenuItem>
+        <MenuItem Header="Actions" ToolTip="Available actions">
+          <MenuItem Header="Consumer Update Configuration" Command="{Binding Path=ConsumerUpdateConfiguration}" ToolTip="Updates the consumer configuration and restarts the data receiving process"/>
+          <MenuItem Header="Producer Update Configuration" Command="{Binding Path=ProducerRestart}" ToolTip="Updates the producer configuration and restarts the data pumping process" />
+          <MenuItem Header="Configuration folder" Command="{Binding Path=ConfigurationFolder}" ToolTip="Open folder containing configuration files" />
+        </MenuItem>
+        <MenuItem Header="Help" ToolTip="Opens the project website" Command="{Binding Path=HelpDocumentation}" />
+      </Menu>
+    </DockPanel>
+    <Grid Grid.Row="1"  Background="#FF06F711" VerticalAlignment="Stretch" >
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="*"/>
@@ -63,7 +78,7 @@
         <ListBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=ConsumerLog}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"  />
       </Grid>
     </Grid>
-    <StackPanel Orientation="Vertical" Grid.Row="1" Background="#FF0AC3F9" >
+    <StackPanel Orientation="Vertical" Grid.Row="2" Background="#FF0AC3F9" >
       <Label Style="{StaticResource Title}" >Producer:</Label>
       <Grid>
         <Grid.ColumnDefinitions>

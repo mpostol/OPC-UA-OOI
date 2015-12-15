@@ -101,10 +101,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
             _return = AddBinding<UInt64>(_name, Inc, UInt64.MinValue, BuiltInType.UInt64);
             break;
           case BuiltInType.Float:
-            _return = AddBinding<float>(_name, Inc, -10, BuiltInType.Float);
+            _return = AddBinding<float>(_name, Inc, -10.12345678f, BuiltInType.Float);
             break;
           case BuiltInType.Double:
-            _return = AddBinding<Double>(_name, Inc, -10, BuiltInType.Double);
+            _return = AddBinding<Double>(_name, Inc, -10.12345678, BuiltInType.Double);
             break;
           case BuiltInType.String:
             _return = AddBinding<String>(_name, Inc, String.Empty, BuiltInType.String);
@@ -222,7 +222,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     #region Inc methods
     private static string Inc(string monitoredValue)
     {
-      return $"Hello World; Here now is: {DateTime.Now.ToShortDateString()}";
+      return $"Hello World; Now is: {DateTime.Now.ToLongTimeString()}";
     }
     private static Guid Inc(Guid monitoredValue)
     {

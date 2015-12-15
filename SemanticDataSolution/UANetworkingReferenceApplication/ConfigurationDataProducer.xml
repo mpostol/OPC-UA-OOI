@@ -49,6 +49,69 @@
           <ValueRank>-1</ValueRank>
           <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueInt64</SymbolicName>
+          <ProcessValueName>ValueInt64</ProcessValueName>
+          <Encoding>Int64</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueSByte</SymbolicName>
+          <ProcessValueName>ValueSByte</ProcessValueName>
+          <Encoding>SByte</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueUInt16</SymbolicName>
+          <ProcessValueName>ValueUInt16</ProcessValueName>
+          <Encoding>UInt16</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueUInt32</SymbolicName>
+          <ProcessValueName>ValueUInt32</ProcessValueName>
+          <Encoding>UInt32</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueUInt64</SymbolicName>
+          <ProcessValueName>ValueUInt64</ProcessValueName>
+          <Encoding>UInt64</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueFloat</SymbolicName>
+          <ProcessValueName>ValueFloat</ProcessValueName>
+          <Encoding>Float</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueDouble</SymbolicName>
+          <ProcessValueName>ValueDouble</ProcessValueName>
+          <Encoding>Double</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueString</SymbolicName>
+          <ProcessValueName>ValueString</ProcessValueName>
+          <Encoding>String</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueGuid</SymbolicName>
+          <ProcessValueName>ValueGuid</ProcessValueName>
+          <Encoding>Guid</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
       </DataSet>
       <Guid>c1f53ffb-6552-4ccc-84c9-f847147cdc85</Guid>
       <Root>

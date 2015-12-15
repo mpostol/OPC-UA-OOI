@@ -17,16 +17,14 @@ By the user interface (UI) remote host name and port numbers can be modified. Th
 
 ## Version History
 
-Assembly Version:       1.00.10
-Assembly Date:          2015-12-15
+Assembly Version:       1.00.10; Assembly Date:          2015-12-15
 
 The main changes and new functionalities are listed below:
+
 1. It supports the protocol version 1.10
 2. It is ready for IOP
 
-Assembly Version:       1.00.09
-
-Assembly Date:          2015-11-02
+Assembly Version:       1.00.09; Assembly Date:          2015-11-02
 
 The main changes and new functionalities are listed below:
 

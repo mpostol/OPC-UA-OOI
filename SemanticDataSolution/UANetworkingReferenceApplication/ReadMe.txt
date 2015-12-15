@@ -11,6 +11,10 @@ Assembly Trademark:     OPC-UA-OOI
 Assembly Version:       1.00.10
 Assembly Date:          2015-12-15
 
+The main changes and new functionalities are listed below:
+1. It supports the protocol version 1.10
+2. It is ready for IOP 
+
 Version History 
 Assembly Version:       1.00.09
 Assembly Date:          2015-12-13

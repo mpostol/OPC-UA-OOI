@@ -17,6 +17,10 @@ Assembly Trademark:     <#=ProductTrademark#>
 Assembly Version:       <#=SemanticDataVersion#>
 Assembly Date:          <#=m_Date#>
 
+The main changes and new functionalities are listed below:
+1. It supports the protocol version 1.10
+2. It is ready for IOP 
+
 <#@ include file = "Readme.old" #>
 
 <#@ include file = "..\..\CommonResources\T4Definitions\Model.t4" #>

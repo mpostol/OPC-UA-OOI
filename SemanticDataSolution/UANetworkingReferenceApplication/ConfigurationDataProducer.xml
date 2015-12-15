@@ -21,6 +21,34 @@
           <ValueRank>-1</ValueRank>
           <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueByte</SymbolicName>
+          <ProcessValueName>ValueByte</ProcessValueName>
+          <Encoding>Byte</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueBoolean</SymbolicName>
+          <ProcessValueName>ValueBoolean</ProcessValueName>
+          <Encoding>Boolean</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueInt16</SymbolicName>
+          <ProcessValueName>ValueInt16</ProcessValueName>
+          <Encoding>Int16</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueInt32_2</SymbolicName>
+          <ProcessValueName>ValueInt32_</ProcessValueName>
+          <Encoding>Int32</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
       </DataSet>
       <Guid>c1f53ffb-6552-4ccc-84c9-f847147cdc85</Guid>
       <Root>

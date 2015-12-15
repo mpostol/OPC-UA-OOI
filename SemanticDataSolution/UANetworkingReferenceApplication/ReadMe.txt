@@ -8,12 +8,12 @@ Assembly Company:       commsvr.com
 Assembly Product:       OPC UA SemanticData
 Assembly Copyright:     Copyright (c) 2015 CommServer
 Assembly Trademark:     OPC-UA-OOI
-Assembly Version:       1.00.09
-Assembly Date:          2015-12-13
+Assembly Version:       1.00.10
+Assembly Date:          2015-12-15
 
 Version History 
 Assembly Version:       1.00.09
-Assembly Date:          2015-11-02
+Assembly Date:          2015-12-13
 
 The main changes and new functionalities are listed below:
 1. Initial release

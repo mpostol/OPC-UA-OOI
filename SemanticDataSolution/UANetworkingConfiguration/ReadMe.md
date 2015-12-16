@@ -1,10 +1,11 @@
 # UA Data Networking Configuration
 
+## Introduction
 This library contains types that supports the configuration management. The configuration may be read to or write from the xml or json file.
 
 Open issues are gruped by the milestone: [UANetworkingConfiguration - development](https://github.com/mpostol/OPC-UA-OOI/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22UANetworkingConfiguration+-+development%22)
 
-By design it is a plug-in or using modern terminology application composition part.
+By design it is a plug-in or using modern terminology application composition part of the library desribed in [# OPC UA DataManagement Library](../../SemanticDataSolution/DataManagement).
 
 It is good opportunity to review your requirements (if you have any) against the proposed solution. I hope the interface is ready to fulfill the following design time scenarios allowing for configuration in context of selected Information Model/Address Space:
 
@@ -16,17 +17,20 @@ It is good opportunity to review your requirements (if you have any) against the
 
 It is my opinion, but option 4 and 5 are only theoretically possible, because in real installations OPC server is untouchable artefact, but in lab it is just Modeler and cannot be used as run time configuration tool.
 
-Examples how to use the library you can find in the Unit Tests aimed to test selected scenarios. 
+Examples how to use the library you can find in the Unit Tests aimed to test selected scenarios.
 At run time it can be used as the primary source of configuration for any OPC UA Data Application and OPC UA Server supporting PubSub role. In this case the application configuration may:
 * be derived from the proposed one
 * be expanded by the proposed one
 
-Let me know if it works for you and if not how to converge proposed solution and your expectations. 
+Let me know if it works for you and if not how to converge proposed solution and your expectations.
 The project seems to be very important prototyping workspace to answer the question how far we can go with the configuration (design time approach) in context of the following problems we have:
 
 1. Message content definition, i.e. items selected to be distributed (or fields, variables, values, etc.  – nor sure about terminology)
-2. Metadata distribution – preparation of the consumer to be able to decode the messages, 
+2. Metadata distribution – preparation of the consumer to be able to decode the messages,
 3. Privileges/Permissions management in context of the distributed data as the primary resource (subject) for any OPC UA data processing application and in context of the message handlers as the data access communication channels (infrastructure).
 4. Security tokens distribution to support all scenarios mentioned in 3
 
+## Schema description
 
+The schema of the configuration files is available at:  [ConfigurationData.xsd](./Serialization/ConfigurationData.xsd) and detailed description of the configuration is captured in the
+following chapters.

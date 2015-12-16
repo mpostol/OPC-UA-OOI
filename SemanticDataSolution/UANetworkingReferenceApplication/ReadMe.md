@@ -22,7 +22,7 @@ Assembly Version:       1.00.10; Assembly Date:          2015-12-15
 The main changes and new functionalities are listed below:
 
 1. It supports the protocol version 1.10
-2. It is ready for IOP
+2. It is ready for IOP - implements selected test cases described in PubSub_Proto_test_matrix_v0.4_docx. DataSet fields collection and destination address/port is configurable.
 
 Assembly Version:       1.00.09; Assembly Date:          2015-11-02
 

@@ -1,9 +1,8 @@
-# Project Content
+# OPC UA DataManagement Library
 
 ## Introduction
 
-This project is aimed to provide a library for Part 14 PubSub Draft 1.04. using the concept described in the [
-OPC UA Data Processing Outside the Server](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution#opc-ua-data-processing-outside-the-server)
+This project is aimed to provide a library for Part 14 PubSub Draft 1.04. using the concept described in the [OPC UA Data Processing Outside the Server](../../SemanticDataSolution#opc-ua-data-processing-outside-the-server)
 
 For more in-depth information about creating UA Applications exchanging data over the network, see [Getting Started Tutorial](./READMEGettingStartedTutorial.md#getting-started-tutorial)
 

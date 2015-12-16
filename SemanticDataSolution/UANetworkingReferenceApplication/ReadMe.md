@@ -17,6 +17,13 @@ By the user interface (UI) remote host name and port numbers can be modified. Th
 
 ## Version History
 
+Assembly Version:       1.00.11
+Assembly Date:          2015-12-16
+
+The main changes and new functionalities are listed below:
+
+1. It is bug fix release - DataSetWriter must be encoded as UInt16 (https://github.com/mpostol/OPC-UA-OOI/issues/144).
+
 Assembly Version:       1.00.10; Assembly Date:          2015-12-15
 
 The main changes and new functionalities are listed below:

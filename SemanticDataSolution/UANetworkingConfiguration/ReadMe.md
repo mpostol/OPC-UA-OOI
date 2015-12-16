@@ -5,7 +5,7 @@ This library contains types that supports the configuration management. The conf
 
 Open issues are gruped by the milestone: [UANetworkingConfiguration - development](https://github.com/mpostol/OPC-UA-OOI/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22UANetworkingConfiguration+-+development%22)
 
-By design it is a plug-in or using modern terminology application composition part of the library desribed in [# OPC UA DataManagement Library](../../SemanticDataSolution/DataManagement).
+By design it is a plug-in or using modern terminology application composition part of the library described in [OPC UA DataManagement Library](../../SemanticDataSolution/DataManagement#opc-ua-datamanagement-library).
 
 It is good opportunity to review your requirements (if you have any) against the proposed solution. I hope the interface is ready to fulfill the following design time scenarios allowing for configuration in context of selected Information Model/Address Space:
 

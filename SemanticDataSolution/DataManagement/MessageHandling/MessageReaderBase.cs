@@ -106,6 +106,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     //vars
     private IUADecoder m_UADecoder;
     private Action<IConsumerBinding> m_ReadValueDelegate = null;
+    /// <summary>
+    /// Gets the publisher identifier.
+    /// </summary>
+    /// <value>The publisher identifier.</value>
+    protected abstract Guid PublisherId { get; }
     //methods
     /// <summary>
     /// Gets the message header.
@@ -115,11 +120,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Raises the read message completed event.
     /// </summary>
-    protected void RaiseReadMessageCompleted(UInt32 dataSetId)
+    protected void RaiseReadMessageCompleted(UInt16 dataSetId)
     {
       if (this.State.State != HandlerState.Operational)
         return;
-      ReadMessageCompleted?.Invoke(this, new MessageEventArg(this, dataSetId));
+      ReadMessageCompleted?.Invoke(this, new MessageEventArg(this, dataSetId, PublisherId));
     }
     private void ReadValue(IConsumerBinding consumerBinding)
     {

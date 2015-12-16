@@ -35,7 +35,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       _bmw.AttachToNetwork();
       ProducerBinding _binding = new ProducerBinding();
       _binding.Value = new TestClass();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, new SemanticDataTest(Guid.NewGuid()), 0, DateTime.UtcNow, new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, ushort.MaxValue, 0, DateTime.UtcNow, new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
@@ -47,7 +47,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
       ProducerBinding _binding = new ProducerBinding(BuiltInType.Float);
       _binding.Value = new Nullable<float>();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, new SemanticDataTest(Guid.NewGuid()), 0, DateTime.UtcNow, new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, ushort.MaxValue, 0, DateTime.UtcNow, new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
@@ -62,7 +62,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       ((IMessageWriter)_bmw).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
                                    Convert.ToUInt16(CommonDefinitions.TestValues.Length),
                                    UInt64.MaxValue,
-                                   new SemanticDataTest(Guid.NewGuid()),
+                                   ushort.MaxValue,
                                    0,
                                    DateTime.UtcNow,
                                    new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 }
@@ -91,13 +91,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
                                         Convert.ToUInt16(CommonDefinitions.TestValues.Length),
                                         UInt64.MaxValue,
-                                        new SemanticDataTest(m_Guid),
+                                        CommonDefinitions.DataSetId,
                                         0,
                                         CommonDefinitions.TestMinimalDateTime, new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 }
                                        );
         Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
         Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(111, _writer.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(109, _writer.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
         byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArrayVariant4Consumer();
         byte[] _outputBuffer = _writer.DoUDPRead();
@@ -265,7 +265,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         Assert.IsInstanceOfType(value, typeof(bool));
       }
-      protected override void CreateMessage(uint dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
+      protected override void CreateMessage(ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
       {
         MassageCreated = true;
       }
@@ -274,6 +274,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         throw new NotImplementedException();
       }
+
       #endregion
 
       #region test infrastructure

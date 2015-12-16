@@ -1,6 +1,7 @@
 ﻿
 using System;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement
 {
@@ -82,10 +83,14 @@ namespace UAOOI.SemanticData.DataManagement
       }
     }
     /// <summary>
-    /// Adds the message handler. It must initialize binding between the <see cref="IMessageHandler"/> and the local data resources.
+    /// Adds the message handler. It must initialize binding between the <see cref="IMessageHandler" /> and the local data resources.
     /// </summary>
     /// <param name="messageHandler">The message handler.</param>
-    internal protected abstract void AddMessageHandler(IMessageHandler messageHandler);
+    /// <param name="configuration">The configuration.</param>
+    internal protected virtual void AddMessageHandler(IMessageHandler messageHandler, AssociationConfiguration configuration)
+    {
+      DataSetId = configuration.DataSetWriterId;
+    }
     #endregion
 
     #region IComparable
@@ -198,6 +203,11 @@ namespace UAOOI.SemanticData.DataManagement
     #endregion
 
     #region protected
+    /// <summary>
+    /// Gets the data set identifier.
+    /// </summary>
+    /// <value>The data set identifier.</value>
+    protected UInt16 DataSetId { get; private set; }
     /// <summary>
     /// Raises the state changed event handler.
     /// </summary>

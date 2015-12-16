@@ -23,7 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       return new MessageReaderConfiguration()
       {
-        ConsumerAssociationConfigurations = new ConsumerAssociationConfiguration[] { new ConsumerAssociationConfiguration() { AssociationName = "Associations".AddId(AssociationId), DataSetWriterId = UInt32.MaxValue, PublisherId = Guid.NewGuid() } },
+        ConsumerAssociationConfigurations = new ConsumerAssociationConfiguration[] { new ConsumerAssociationConfiguration() { AssociationName = "Associations".AddId(AssociationId), DataSetWriterId = UInt16.MaxValue, PublisherId = Guid.NewGuid() } },
         Configuration = null,
         Name = "Name".AddId(MessageTransportId),
         TransportRole = AssociationRole.Consumer

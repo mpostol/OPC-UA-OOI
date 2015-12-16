@@ -22,7 +22,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="producerId">The producer identifier.</param>
     /// <param name="dataSetWriterIds">The data set writer ids list. The size of the list must be equal to the <see cref="PacketHeader.MessageCount"/>.</param>
     /// <returns>An instance of the <see cref="PacketHeader"/>.</returns>
-    public static PacketHeader GetProducerPacketHeader(IBinaryHeaderEncoder encoder, Guid producerId, IList<UInt32> dataSetWriterIds)
+    public static PacketHeader GetProducerPacketHeader(IBinaryHeaderEncoder encoder, Guid producerId, IList<UInt16> dataSetWriterIds)
     {
       return new ProducerHeader(encoder, producerId, dataSetWriterIds);
     }
@@ -82,7 +82,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// It identifies the publisher and the message writer responsible for sending Messages for the DataSet.
     /// </summary>
     /// <value>The data set writer ids.</value>
-    public abstract ReadOnlyCollection<System.UInt32> DataSetWriterIds { get; }
+    public abstract ReadOnlyCollection<System.UInt16> DataSetWriterIds { get; }
     #endregion
 
     #region private implementation
@@ -118,7 +118,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         get; set;
       }
-      public override ReadOnlyCollection<System.UInt32> DataSetWriterIds
+      public override ReadOnlyCollection<UInt16> DataSetWriterIds
       {
         get { return m_DataSetWriterIds; }
       }
@@ -130,7 +130,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
 
       #region private
       private IBinaryDecoder m_Reader;
-      private ReadOnlyCollection<uint> m_DataSetWriterIds;
+      private ReadOnlyCollection<UInt16> m_DataSetWriterIds;
       private byte m_MessageCount;
       private void ReadPacketHeader()
       {
@@ -143,10 +143,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         for (int i = 0; i < NonceLength; i++)
           Nonce[i] = m_Reader.ReadByte();
         m_MessageCount = m_Reader.ReadByte();
-        List<System.UInt32> _ids = new List<uint>();
+        List<UInt16> _ids = new List<UInt16>();
         for (int i = 0; i < MessageCount; i++)
-          _ids.Add(m_Reader.ReadUInt32());
-        m_DataSetWriterIds = new ReadOnlyCollection<System.UInt32>(_ids);
+          _ids.Add(m_Reader.ReadUInt16());
+        m_DataSetWriterIds = new ReadOnlyCollection<UInt16>(_ids);
       }
       #endregion
 
@@ -155,7 +155,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
 
       #region constructor
-      public ProducerHeader(IBinaryHeaderEncoder writer, Guid producerId, IList<System.UInt32> dataSetWriterIds) : base()
+      public ProducerHeader(IBinaryHeaderEncoder writer, Guid producerId, IList<UInt16> dataSetWriterIds) : base()
       {
         if (writer == null)
           throw new ArgumentNullException(nameof(writer));
@@ -164,9 +164,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         ProtocolVersion = CommonDefinitions.ProtocolVersion;
         SecurityTokenId = 0;
         NonceLength = 0;
-        DataSetWriterIds = new ReadOnlyCollection<uint>(dataSetWriterIds);
+        DataSetWriterIds = new ReadOnlyCollection<UInt16>(dataSetWriterIds);
         MessageCount = Convert.ToByte(DataSetWriterIds.Count);
-        ushort _packetLength = Convert.ToUInt16(m_PacketHeaderLength + dataSetWriterIds.Count * 4);
+        ushort _packetLength = Convert.ToUInt16(m_PacketHeaderLength + dataSetWriterIds.Count * 2);
         m_HeaderWriter = new HeaderWriter(writer, _packetLength);
       }
       #endregion
@@ -212,7 +212,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       {
         get; set;
       }
-      public override ReadOnlyCollection<System.UInt32> DataSetWriterIds
+      public override ReadOnlyCollection<UInt16> DataSetWriterIds
       {
         get;
       }

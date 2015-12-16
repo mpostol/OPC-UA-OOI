@@ -53,7 +53,15 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #endregion
 
     #region MessageWriterBase
-    protected override void CreateMessage(uint dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
+    /// <summary>
+    /// Creates the message.
+    /// </summary>
+    /// <param name="dataSetWriterId">The data set writer identifier.</param>
+    /// <param name="fieldCount">The field count.</param>
+    /// <param name="sequenceNumber">The sequence number.</param>
+    /// <param name="timeStamp">The time stamp.</param>
+    /// <param name="configurationVersion">The configuration version.</param>
+    protected override void CreateMessage(UInt16 dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
     {
       OnMessageAdding(dataSetWriterId);
       MessageHeader = MessageHeader.GetProducerMessageHeader(this, m_Encoding, m_lengthFieldType, MessageTypeEnum.DataKeyFrame);
@@ -84,7 +92,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Called when new message is adding to the package payload.
     /// </summary>
-    protected abstract void OnMessageAdding(UInt32 dataSetWriterIds);
+    protected abstract void OnMessageAdding(UInt16 dataSetWriterIds);
     /// <summary>
     /// Called when the current message has been added and is ready to be sent out.
     /// </summary>

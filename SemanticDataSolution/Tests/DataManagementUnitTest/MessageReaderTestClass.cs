@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_MessageReader")]
     public void CreatorTestMethod()
     {
-      TestMessageReaderBase _bmw = new TestMessageReaderBase();
+      TestMessageReaderBase _bmw = new TestMessageReaderBase(Guid.NewGuid());
       Assert.IsNotNull(_bmw);
       _bmw.AttachToNetwork();
       Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
@@ -33,7 +33,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_MessageReader")]
     public void ReadMessageCompletedTestMethod()
     {
-      TestMessageReaderBase _reader = new TestMessageReaderBase();
+      TestMessageReaderBase _reader = new TestMessageReaderBase(Guid.NewGuid());
       _reader.AttachToNetwork();
       object _sender = null;
       MessageEventArg _message = null;
@@ -76,7 +76,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _dataId, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
         _reader.SendUDPMessage(CommonDefinitions.GetTestBinaryArrayVariant(), _dataId, _port);
         Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(112, _reader.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(110, _reader.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
         Thread.Sleep(1500);
         foreach (string _item in _Events)
@@ -214,10 +214,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
 
       #region creator
-      public TestMessageReaderBase() : base(new Helpers.UABinaryDecoderImplementation())
+      public TestMessageReaderBase(Guid publisherId) : base(new Helpers.UABinaryDecoderImplementation())
       {
         State = new MyState();
         m_MessageHeader = MessageHeader.GetConsumerMessageHeader(this);
+        m_PublisherId = publisherId;
       }
       #endregion
 
@@ -303,14 +304,19 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           return m_MessageHeader;
         }
       }
+      protected override Guid PublisherId
+      {
+        get { return m_PublisherId; }
+      }
       #endregion
 
       #region private
       private MessageHeader m_MessageHeader;
       private int m_NumberOfAttachToNetwork;
+      private Guid m_PublisherId;
       #endregion
 
-      internal void GetMessageTest(UInt32 dataSetId)
+      internal void GetMessageTest(UInt16 dataSetId)
       {
         RaiseReadMessageCompleted(dataSetId);
       }

@@ -20,7 +20,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       using (MemoryStream _stream = new MemoryStream())
       using (PacketWriter _writer = new PacketWriter(_stream))
       {
-        PacketHeader _header = PacketHeader.GetProducerPacketHeader(_writer, CommonDefinitions.TestGuid, new UInt32[] { CommonDefinitions.DataSetId });
+        PacketHeader _header = PacketHeader.GetProducerPacketHeader(_writer, CommonDefinitions.TestGuid, new UInt16[] { CommonDefinitions.DataSetId });
         Assert.IsNotNull(_header);
         Assert.AreEqual<Byte>(110, _header.ProtocolVersion);
         Assert.AreEqual<Guid>(CommonDefinitions.TestGuid, _header.PublisherId);
@@ -32,14 +32,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         _writer.Flush();
         _result = _stream.ToArray();
       }
-      byte[] _expected = new ArraySegment<byte>(CommonDefinitions.GetTestBinaryArrayVariant(), 0, 26).ToArray<byte>();
+      byte[] _expected = new ArraySegment<byte>(CommonDefinitions.GetTestBinaryArrayVariant(), 0, 24).ToArray<byte>();
       CollectionAssert.AreEqual(_expected, _result);
     }
     [TestMethod]
     [TestCategory("DataManagement_PacketHeaderUnitTest")]
     public void GetConsumerPacketHeaderTestMethod()
     {
-      using (MemoryStream _stream = new MemoryStream(new ArraySegment<byte>(CommonDefinitions.GetTestBinaryArrayVariant(), 0, 26).ToArray<byte>()))
+      using (MemoryStream _stream = new MemoryStream(new ArraySegment<byte>(CommonDefinitions.GetTestBinaryArrayVariant(), 0, 24).ToArray<byte>()))
       using (PacketReader _reader = new PacketReader(_stream))
       {
         PacketHeader _header = PacketHeader.GetConsumerPacketHeader(_reader);
@@ -51,14 +51,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreEqual<Byte>(1, _header.NonceLength);
         CollectionAssert.AreEqual(new byte[] { 0xcc }, _header.Nonce);
         Assert.AreEqual<Byte>(1, _header.MessageCount);
-        CollectionAssert.AreEqual(new UInt32[] { CommonDefinitions.DataSetId }, _header.DataSetWriterIds);
+        CollectionAssert.AreEqual(new UInt16[] { CommonDefinitions.DataSetId }, _header.DataSetWriterIds);
       }
     }
     [TestCategory("DataManagement_PacketHeaderUnitTest")]
     public void ProducerPacketHeaderTestMethod()
     {
       HeaderWriterTest _writer = new HeaderWriterTest(x => { }, m_StartPosition);
-      PacketHeader _header = PacketHeader.GetProducerPacketHeader(_writer, CommonDefinitions.TestGuid, new System.UInt32[] { 0xFFFF });
+      PacketHeader _header = PacketHeader.GetProducerPacketHeader(_writer, CommonDefinitions.TestGuid, new UInt16[] { 0xFFFF });
       Assert.IsNotNull(_header);
       Assert.AreEqual<System.UInt32>(0xFFFF, _header.DataSetWriterIds[0]);
       Assert.AreEqual<byte>(1, _header.MessageCount);

@@ -21,7 +21,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// <returns>MessageHandlersCollection.</returns>
     /// <exception cref="System.ArgumentOutOfRangeException">Name;Duplicated transport name</exception>
     internal static MessageHandlersCollection CreateMessageHandlers
-      (MessageHandlerConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, IEncodingFactory encodingFactory, Action<string, IMessageHandler> addMessageHandler)
+      (MessageHandlerConfiguration[] configuration, IMessageHandlerFactory messageHandlerFactory, IEncodingFactory encodingFactory, Action<IMessageHandler, AssociationConfiguration> addMessageHandler)
     {
       MessageHandlersCollection _collection = new MessageHandlersCollection();
       foreach (MessageHandlerConfiguration _configuration in configuration)
@@ -35,13 +35,13 @@ namespace UAOOI.SemanticData.DataManagement
             MessageReaderConfiguration _readerConfiguration = (MessageReaderConfiguration)_configuration;
             _handler = messageHandlerFactory.GetIMessageReader(_configuration.Name, _configuration.Configuration, encodingFactory.UADecoder);
             foreach (ConsumerAssociationConfiguration _consumerAssociation in _readerConfiguration.ConsumerAssociationConfigurations)
-              addMessageHandler(_consumerAssociation.AssociationName, _handler);
+              addMessageHandler(_handler, _consumerAssociation);
             break;
           case AssociationRole.Producer:
             MessageWriterConfiguration _writerConfiguration = (MessageWriterConfiguration)_configuration;
             _handler = messageHandlerFactory.GetIMessageWriter(_configuration.Name, _configuration.Configuration, encodingFactory.UAEncoder);
             foreach (ProducerAssociationConfiguration _producerAssociation in _writerConfiguration.ProducerAssociationConfigurations)
-              addMessageHandler(_producerAssociation.AssociationName, _handler);
+              addMessageHandler(_handler, _producerAssociation);
             break;
           default:
             break;

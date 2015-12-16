@@ -18,10 +18,12 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="newMessage">The new message to be processed by the consumer or a producer outcome to be
     /// sent over the network by the underlying message transport protocol.</param>
     /// <param name="dataSetId">The data set identifier.</param>
-    public MessageEventArg(IMessageReader newMessage, UInt32 dataSetId)
+    /// <param name="producerId">The producer identifier.</param>
+    public MessageEventArg(IMessageReader newMessage, UInt16 dataSetId, Guid producerId)
     {
       MessageContent = newMessage;
       DataSetId = dataSetId;
+      ProducerId = producerId;
     }
     /// <summary>
     /// Gets the content of the just received message to be processed by the consumer or a producer outcome to be 
@@ -34,6 +36,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// </summary>
     /// <value>The data set identifier.</value>
     internal UInt32 DataSetId { get; private set; }
+    internal Guid ProducerId { get; private set; }
 
   }
 }

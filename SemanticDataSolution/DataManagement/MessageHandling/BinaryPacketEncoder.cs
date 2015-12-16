@@ -27,7 +27,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Called when new message is adding to the packet payload.
     /// </summary>
-    protected override void OnMessageAdding(uint dataSetWriterIds) { }
+    protected override void OnMessageAdding(UInt16 dataSetWriterIds) { }
     /// <summary>
     /// Called when the current message has been added and is ready to be sent out.
     /// </summary>
@@ -47,7 +47,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Encodes the headers.
     /// </summary>
-    protected void EncodePacketHeaders(Guid producerId, IList<UInt32> dataSetWriterIds)
+    protected void EncodePacketHeaders(Guid producerId, IList<UInt16> dataSetWriterIds)
     {
       Header = PacketHeader.GetProducerPacketHeader(this, producerId, dataSetWriterIds);
       Header.WritePacketHeader();

@@ -120,7 +120,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       internal int IsOk = 0;
       public void Send
-        (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, ISemanticData semanticData, ushort messageSequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
+        (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, ushort dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
       {
         IsOk++;
         Assert.AreEqual<int>(3, length);

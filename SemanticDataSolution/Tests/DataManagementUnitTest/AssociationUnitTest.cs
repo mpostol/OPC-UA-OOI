@@ -171,7 +171,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       protected override void OnEnabling() { }
       protected override void OnDisabling() { }
       private bool m_Success = false;
-      protected internal override void AddMessageHandler(IMessageHandler messageHandler)
+      protected internal override void AddMessageHandler(IMessageHandler messageHandler, AssociationConfiguration configuration)
       {
         throw new NotImplementedException();
       }

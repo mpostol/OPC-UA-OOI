@@ -94,7 +94,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
       private ConsumerAssociationConfiguration[] GetTransportAssociations()
       {
-        return new ConsumerAssociationConfiguration[] { new ConsumerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = UInt32.MaxValue, PublisherId = Guid.NewGuid() } };
+        return new ConsumerAssociationConfiguration[] { new ConsumerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = UInt16.MaxValue, PublisherId = Guid.NewGuid() } };
       }
       private DataSetConfiguration[] GetAssociations()
       {
@@ -241,7 +241,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     #region testing environment
     internal void SendData()
     {
-      ReadMessageCompleted(this, new MessageEventArg(this, UInt32.MaxValue));
+      ReadMessageCompleted(this, new MessageEventArg(this, UInt16.MaxValue, Guid.NewGuid()));
     }
     internal void CheckConsistency()
     {

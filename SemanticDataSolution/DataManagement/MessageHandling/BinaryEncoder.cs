@@ -151,9 +151,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     private Guid m_producerId;
 
     //methods
-    protected override void OnMessageAdding(uint dataSetWriterId)
+    protected override void OnMessageAdding(UInt16 dataSetWriterId)
     {
-      CreateUABinaryWriter(new uint[] { dataSetWriterId });
+      CreateUABinaryWriter(new UInt16[] { dataSetWriterId });
       base.OnMessageAdding(dataSetWriterId);
     }
     /// <summary>
@@ -170,7 +170,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       m_binaryWriter = null;
       m_output = null;
     }
-    private void CreateUABinaryWriter(IList<uint> m_dataSetWriterIds)
+    private void CreateUABinaryWriter(IList<UInt16> m_dataSetWriterIds)
     {
       m_output = new MemoryStream();
       m_binaryWriter = new BinaryWriter(m_output);

@@ -34,3 +34,17 @@ The project seems to be very important prototyping workspace to answer the quest
 
 The schema of the configuration files is available at:  [ConfigurationData.xsd](./Serialization/ConfigurationData.xsd) and detailed description of the configuration is captured in the
 following chapters.
+### 'ConfigurationData`
+
+Element of the `ConfigurationData` contains the configuration of the application. The application can implement many roles at the same time. This element is collection of the:
+
+* `DataSetConfiguration` - configuration of the data to be send over the network
+* `MessageHandlerConfiguration` - configuration of the communication channels to be used to distribute the data.
+
+#### `DataSetConfiguration`
+
+/// Class <see cref="DataSetConfiguration"/> represent a data set as a collection of members to be used as a description to populate (encode) messages sent over the wire 
+/// or analyze (decode) the message read from the wire to retrieve data items. For the senders it also provides criteria on when to forward the new message using the message
+/// writers associated with this set of data. All communication parties must use the same <see cref="DataSetConfiguration"/> description to decode the message content.
+/// Current value can be loaded from the local configuration or obtained using meta-data exchange centric communication mechanism.
+/// For example it could be read from a file or discovered using OPC UA session from OPC UA server.

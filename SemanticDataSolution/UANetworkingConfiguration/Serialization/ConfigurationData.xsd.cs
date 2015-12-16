@@ -280,7 +280,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
   {
 
     private string AssociationNameField;
-    private UInt32 DataSetWriterIdField;
+    private UInt16 DataSetWriterIdField;
 
     [DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
     public string AssociationName
@@ -289,11 +289,12 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       set { AssociationNameField = value; }
     }
     [DataMemberAttribute(EmitDefaultValue = false, Order = 1)]
-    public UInt32 DataSetWriterId
+    public UInt16 DataSetWriterId
     {
       get { return DataSetWriterIdField; }
       set { DataSetWriterIdField = value; }
     }
+
   }
   [DataContractAttribute(Name = "ProducerAssociationConfiguration", Namespace = CommonDefinitions.Namespace)]
   [SerializableAttribute()]

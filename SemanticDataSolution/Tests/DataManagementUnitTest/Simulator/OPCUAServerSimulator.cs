@@ -92,7 +92,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       }
       private ProducerAssociationConfiguration[] GetTransportAssociations()
       {
-        return new ProducerAssociationConfiguration[] { new ProducerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = UInt32.MaxValue } };
+        return new ProducerAssociationConfiguration[] { new ProducerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = UInt16.MaxValue } };
       }
       private DataSetConfiguration[] GetAssociations()
       {
@@ -208,7 +208,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       get { throw new NotImplementedException(); }
     }
-    public void Send(Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, ISemanticData semanticData, ushort messageSequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
+
+    public void Send
+      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, ushort dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
     {
       if (length > 2)
         throw new ArgumentOutOfRangeException("length");

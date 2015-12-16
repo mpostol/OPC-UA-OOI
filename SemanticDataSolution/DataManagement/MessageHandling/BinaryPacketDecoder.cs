@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UAOOI.SemanticData.DataManagement.Encoding;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
@@ -34,6 +35,13 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       Header = PacketHeader.GetConsumerPacketHeader(this);
       for (int i = 0; i < Header.MessageCount; i++)
         OnNewMessageArrived(Header.DataSetWriterIds[i]);
+    }
+    protected override Guid PublisherId
+    {
+      get
+      {
+        return Header.PublisherId;
+      }
     }
     #endregion
 

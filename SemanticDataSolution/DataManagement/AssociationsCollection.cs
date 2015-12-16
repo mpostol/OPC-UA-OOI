@@ -54,19 +54,17 @@ namespace UAOOI.SemanticData.DataManagement
       return _collection;
     }
     /// <summary>
-    /// Adds the message handler to the selected by the <paramref name="associationName" />.
+    /// Adds the message handler to the selected by the <see cref="AssociationConfiguration.AssociationName"/>.
     /// </summary>
-    /// <remarks>
-    /// If this dictionary does not contain the <paramref name="associationName"/> key the request is skipped - no action is undertaken.
-    /// </remarks>
-    /// <param name="associationName">The association alias.</param>
     /// <param name="messageHandler">The message handler to be associated.</param>
-    internal void AddMessageHandler(string associationName, IMessageHandler messageHandler)
+    /// <param name="configuration">The configuration.</param>
+    /// <remarks>If this dictionary does not contain the <see cref="AssociationConfiguration.AssociationName"/> key the request is skipped - no action is undertaken.</remarks>
+    internal void AddMessageHandler(IMessageHandler messageHandler, AssociationConfiguration configuration)
     {
-      if (!this.ContainsKey(associationName))
+      if (!this.ContainsKey(configuration.AssociationName))
         return;
-      Association _ass = this[associationName];
-      _ass.AddMessageHandler(messageHandler);
+      Association _ass = this[configuration.AssociationName];
+      _ass.AddMessageHandler(messageHandler, configuration);
     }
     /// <summary>
     /// Handles the configuration modifications.

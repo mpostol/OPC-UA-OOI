@@ -51,7 +51,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Called when there is a new message in the packet that is to be processed.
     /// </summary>
-    protected void OnNewMessageArrived(uint dataSetId)
+    protected void OnNewMessageArrived(UInt16 dataSetId)
     {
       MessageHeader.Synchronize();
       RaiseReadMessageCompleted(dataSetId);

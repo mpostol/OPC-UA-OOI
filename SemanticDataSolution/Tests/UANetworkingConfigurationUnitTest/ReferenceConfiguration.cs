@@ -92,7 +92,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     private const string AssociationConfigurationDataSymbolicName = "DataSymbolicName";
     private const string AssociationConfigurationInformationModelURI = @"https://github.com/mpostol/OPC-UA-OOI";
     private static readonly Guid DefaultAssociationConfigurationId = new Guid("C1F53FFB-6552-4CCC-84C9-F847147CDC85");
-    private const UInt32 DefaultDataSetWriterId = 12345;
+    private const UInt16 DefaultDataSetWriterId = 12345;
     private static Guid m_ConfigurationGuid = new Guid("D3DEA20A-1F65-4744-ABF5-3D8120960D7B");
     #endregion
 

@@ -19,8 +19,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           0x00,                                               //byte SecurityTokenId
           1,                                                  //byte NonceLength
           0xCC,                                               //Byte[NonceLength] Nonce 
-          0x01,                                               //byte MessageCount
-          0x7F, 0x4B, 0xFB , 0xBA,                            //UInt32[MessageCount] DataSetWriterIds
+          0x01,                                               //UInt16 MessageCount
+          0x7F, 0x4B,                                        //UInt32[MessageCount] DataSetWriterIds
           //Message header 26-43
           0x1,                                                //MessageType 
           0x1,                                                //EncodingFlags
@@ -49,19 +49,19 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       return new byte[]
       {
-          //Package header 0-25
+          //Package header 0-22
           0xf3, 0x5d, 0x19, 0xa6, 0x30, 0x0b, 0x25, 0x4c, 0x8b, 0xf8, 0x45, 0xb0, 0x76, 0x40, 0x21, 0x16, //guid - PublisherId
           110,                                                //byte ProtocolVersion
           0x00,                                               //byte MessageFlags
           0x00,                                               //byte SecurityTokenId
           0,                                                  //byte NonceLength
-          //0xCC,                                             Byte[NonceLength] Nonce 
+          //0xCC,                                             //Byte[NonceLength] Nonce 
           0x01,                                               //byte MessageCount
-          127, 75, 251 , 186,                                 //UInt32[MessageCount] DataSetWriterIds
-          //Message header 26-43
+          0x7F, 0x4B,                                         //UInt16[MessageCount] DataSetWriterIds
+          //Message header
           0x1,                                                //MessageType 
           0x1,                                                //EncodingFlags
-          0x56, 00,                                             //MessageLength
+          0x56, 00,                                           //MessageLength
           0, 0,                                               //MessageSequenceNumber 
           0, 0,                                               //ConfigurationVersion
           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //TimeStamp
@@ -83,7 +83,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       };
     }
 
-    internal const uint DataSetId = 3137031039;
+    internal const UInt16 DataSetId = 19327;
     internal struct DateTimeVariantEncoding
     {
       internal DateTime dateTime;

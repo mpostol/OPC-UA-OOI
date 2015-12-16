@@ -79,6 +79,7 @@ namespace UAOOI.SemanticData.DataManagement
     private IProducerBinding[] m_DataSetBindings;
     private object mLockObject = new object();
     private bool m_Modified = true;
+    private Object m_lock = new object();
     private ushort m_MessageSequenceNumber = 0;
     //TODO Handle Configuration Version  #140 at: https://github.com/mpostol/OPC-UA-OOI/issues/140
     private MessageHeader.ConfigurationVersionDataType m_ConfigurationVersion = new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 };
@@ -97,27 +98,34 @@ namespace UAOOI.SemanticData.DataManagement
       foreach (IProducerBinding _pbx in m_DataSetBindings)
         _pbx.OnDisabling();
     }
-    protected internal override void AddMessageHandler(IMessageHandler messageHandler)
+    protected internal override void AddMessageHandler(IMessageHandler messageHandler, AssociationConfiguration configuration)
     {
+      base.AddMessageHandler(messageHandler, configuration);
       AddMessageWriter(messageHandler as IMessageWriter);
     }
     private void ProducerBinding_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-      m_Modified = true;
+      lock (m_lock)
+      {
+        m_Modified = true;
+      }
     }
     private void M_Timer_Elapsed(object sender, ElapsedEventArgs e)
     {
-      if (!m_Modified)
-        return;
+      lock (m_lock)
+      {
+        if (!m_Modified)
+          return;
+        m_Modified = false;
+      }
       Send();
-      m_Modified = false;
     }
     private void Send()
     {
       foreach (IMessageWriter _mwx in m_MessageWriter)
         lock (mLockObject)
-          _mwx.Send(x => m_DataSetBindings[x], Convert.ToUInt16(m_DataSetBindings.Length), UInt64.MaxValue, DataDescriptor, m_MessageSequenceNumber, DateTime.UtcNow, m_ConfigurationVersion);
-      m_MessageSequenceNumber.IncRollOver();
+          _mwx.Send(x => m_DataSetBindings[x], Convert.ToUInt16(m_DataSetBindings.Length), UInt64.MaxValue, DataSetId, m_MessageSequenceNumber, DateTime.UtcNow, m_ConfigurationVersion);
+      m_MessageSequenceNumber = m_MessageSequenceNumber.IncRollOver();
     }
 
     #region IDisposable Support

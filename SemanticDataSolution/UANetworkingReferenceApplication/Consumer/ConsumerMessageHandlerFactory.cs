@@ -203,7 +203,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
           m_ViewModel.ConsumerFramesReceived = m_NumberOfPackages;
           m_ViewModel.ConsumerBytesReceived = m_NumberOfBytes;
           int _length = _receiveBytes == null ? -1 : _receiveBytes.Length;
-          m_Trace($"Message[{_length}]: {String.Join(", ", new ArraySegment<byte>(_receiveBytes, 0, 80).Select<byte, string>(x => x.ToString("X")).ToArray<string>())}");
+          m_Trace($"Message[{_length}]: {String.Join(", ", new ArraySegment<byte>(_receiveBytes, 0, Math.Min(_receiveBytes.Length, 80)).Select<byte, string>(x => x.ToString("X")).ToArray<string>())}");
           MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
           base.OnNewFrameArrived(new BinaryReader(_stream, System.Text.Encoding.UTF8));
           m_Trace("BeginReceive");

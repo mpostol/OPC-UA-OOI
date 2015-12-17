@@ -1,4 +1,5 @@
 ﻿The documentation is available online at: https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANetworkingReferenceApplication#ua-data-example-application
+The installation package is available here: http://www.commsvr.com/COInstal/UANetworking/uand.html
 
 Current release:
 
@@ -9,11 +10,23 @@ Assembly Product:       OPC UA SemanticData
 Assembly Copyright:     Copyright (c) 2015 CommServer
 Assembly Trademark:     OPC-UA-OOI
 Assembly Version:       1.00.11
-Assembly Date:          2015-12-16
+Assembly Date:          2015-12-17
 
 The main changes and new functionalities are listed below:
 1. It is bug fix release - DataSetWriter must be encoded as UInt16 (https://github.com/mpostol/OPC-UA-OOI/issues/144).
 
+For assistance, contact:
+
+Mariusz Postol
+CAS
+mailto://mpostol@cas.eu
+
+Copyright (C) 2015, commserver.com LODZ POLAND
+TEL: +48 (42) 686 25 47
+mailto://commserver@cas.eu
+http://commserver.com
+
+  
 Version History 
 
 Assembly Version:       1.00.10

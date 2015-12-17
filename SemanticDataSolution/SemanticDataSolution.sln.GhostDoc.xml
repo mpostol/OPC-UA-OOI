@@ -63,9 +63,9 @@
     <HeaderText>Part 14 PubSub SDK</HeaderText>
     <FooterText>www.commsvr.com</FooterText>
     <SelectedProjects>
+      <SelectedProject>DataBindings</SelectedProject>
       <SelectedProject>UANetworkingConfiguration</SelectedProject>
       <SelectedProject>DataManagement</SelectedProject>
-      <SelectedProject>DataBindings</SelectedProject>
     </SelectedProjects>
   </HelpConfiguration>
 </HelpConfigurations>

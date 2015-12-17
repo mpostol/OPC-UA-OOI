@@ -15,7 +15,14 @@ The schema of the configuration files is available at:  [ConfigurationData.xsd](
 
 By the user interface (UI) remote host name and port numbers can be modified. The IP address is resolved using DNS. Use the update buttons to start communication to apply new settings. The user interface provides also some diagnostic information. All received values are logged and displayed as the list with the time prefix. Two first fields are displayed in the text boxes and they must not be removed from configuration.
 
-## Version History
+## Application
+
+### Application installation
+
+The application installation package is available here:
+[CAS.UAOOI.UANetworkingDemo](http://www.commsvr.com/COInstal/UANetworking/uand.html)
+
+### Version History
 
 Assembly Version:       1.00.11
 Assembly Date:          2015-12-16
@@ -37,11 +44,6 @@ The main changes and new functionalities are listed below:
 
 1. Initial release
 2. It support the protocol version 1.09
-
-## Application installation
-
-The application installation package is available here:
-[CAS.UAOOI.UANetworkingDemo](http://www.commsvr.com/COInstal/UANetworking/uand.html)
 
 ## Getting Started Tutorial
 

@@ -7,6 +7,8 @@ In this project C# deliverables supporting a new Machine To Machine (M2M) commun
 The [Object Oriented Internet](https://fedcsis.org/proceedings/2015/pliks/160.pdf) article published in **Proceedings of the Federated Conference on
 Computer Science and Information Systems** captures description of this idea. 
 
+##Content
+
 The `SemanticDataSolution` folder contains projects related to support the [OPC UA Data Processing Outside of the Server](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution#opc-ua-data-processing-outside-the-server). Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
 
 This project is aimed to workout deliverables supporting Process Data handling over Internet including but not limiting to:

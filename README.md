@@ -45,7 +45,7 @@ Out of scope is any work on exchanging the Process Data and Metadata over the ne
 
 I hope it is a good place to prototype and converge the OPC UA communication technology with Semantic Data, Semantc Web, Internet Of Things, Plug and Play, Global Data Discovery, Selective Availability, etc. concepts. My goal is to bridge a gap between OPC UA technology and Industrial IT Application Domains.
 
-Redd more:
+##Redd more
 
 The paper [**Object Oriented Internet**](https://fedcsis.org/proceedings/2015/pliks/160.pdf) has been presented on the conference [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp).
 

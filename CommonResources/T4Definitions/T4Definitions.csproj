@@ -36,6 +36,11 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <None Include="ReleaseNoteTemplate.md">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReleaseNoteTemplate.tt</DependentUpon>
+    </None>
     <None Include="Template.AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Template.AssemblyInfo.cs</LastGenOutput>
@@ -54,6 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ReleaseTask.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ReleaseNoteTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ReleaseNoteTemplate.md</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

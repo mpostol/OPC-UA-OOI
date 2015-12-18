@@ -8,15 +8,15 @@
       <DataSymbolicName>DataSymbolicName</DataSymbolicName>
       <DataSet>
         <DataMemberConfiguration>
-          <SymbolicName>ValueDateTime</SymbolicName>
-          <ProcessValueName>ValueDateTime</ProcessValueName>
+          <SymbolicName>Value1</SymbolicName>
+          <ProcessValueName>Value1</ProcessValueName>
           <Encoding>DateTime</Encoding>
           <ValueRank>-1</ValueRank>
           <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         </DataMemberConfiguration>
         <DataMemberConfiguration>
-          <SymbolicName>ValueInt32</SymbolicName>
-          <ProcessValueName>ValueInt32</ProcessValueName>
+          <SymbolicName>Value2</SymbolicName>
+          <ProcessValueName>Value2</ProcessValueName>
           <Encoding>Int32</Encoding>
           <ValueRank>-1</ValueRank>
           <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
@@ -43,8 +43,8 @@
           <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         </DataMemberConfiguration>
         <DataMemberConfiguration>
-          <SymbolicName>ValueInt32_2</SymbolicName>
-          <ProcessValueName>ValueInt32_</ProcessValueName>
+          <SymbolicName>ValueInt32</SymbolicName>
+          <ProcessValueName>ValueInt32</ProcessValueName>
           <Encoding>Int32</Encoding>
           <ValueRank>-1</ValueRank>
           <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />

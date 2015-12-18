@@ -21,6 +21,26 @@
           <ValueRank>-1</ValueRank>
           <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         </DataMemberConfiguration>
+      </DataSet>
+      <Guid>c1f53ffb-6552-4ccc-84c9-f847147cdc85</Guid>
+      <Root>
+        <q:NodeIdentifier xmlns:d5p1="NodeDescriptorNS" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d5p1:NodeDescriptor</q:NodeIdentifier>
+      </Root>
+      <PublishingInterval>1000</PublishingInterval>
+      <MaxBufferTime>100</MaxBufferTime>
+      <ConfigurationGuid>d3dea20a-1f65-4744-abf5-3d8120960d7b</ConfigurationGuid>
+      <ConfigurationVersion>
+        <MajorVersion>0</MajorVersion>
+        <MinorVersion>0</MinorVersion>
+      </ConfigurationVersion>
+    </DataSetConfiguration>
+    <DataSetConfiguration>
+      <AssociationRole>Producer</AssociationRole>
+      <AssociationName>Association2</AssociationName>
+      <RepositoryGroup>repositoryGroup</RepositoryGroup>
+      <InformationModelURI>https://github.com/mpostol/OPC-UA-OOI</InformationModelURI>
+      <DataSymbolicName>DataSymbolicName</DataSymbolicName>
+      <DataSet>
         <DataMemberConfiguration>
           <SymbolicName>ValueByte</SymbolicName>
           <ProcessValueName>ValueByte</ProcessValueName>
@@ -134,6 +154,10 @@
         <ProducerAssociationConfiguration>
           <AssociationName>Association1</AssociationName>
           <DataSetWriterId>12345</DataSetWriterId>
+        </ProducerAssociationConfiguration>
+        <ProducerAssociationConfiguration>
+          <AssociationName>Association2</AssociationName>
+          <DataSetWriterId>54321</DataSetWriterId>
         </ProducerAssociationConfiguration>
       </ProducerAssociationConfigurations>
     </MessageHandlerConfiguration>

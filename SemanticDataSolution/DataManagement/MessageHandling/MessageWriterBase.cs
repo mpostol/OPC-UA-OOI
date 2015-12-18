@@ -56,21 +56,24 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     void IMessageWriter.Send
       (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, UInt16 dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
     {
-      if (State.State != HandlerState.Operational)
-        return;
-      ContentMask = contentMask;
-      CreateMessage(dataSetWriterId, length, messageSequenceNumber, timeStamp, configurationVersion);
-      UInt64 _mask = 0x1;
-      for (int i = 0; i < length; i++)
+      lock (this)
       {
-        if ((ContentMask & _mask) > 0)
+        if (State.State != HandlerState.Operational)
+          return;
+        ContentMask = contentMask;
+        CreateMessage(dataSetWriterId, length, messageSequenceNumber, timeStamp, configurationVersion);
+        UInt64 _mask = 0x1;
+        for (int i = 0; i < length; i++)
         {
-          IProducerBinding _pb = producerBinding(i);
-          m_WriteValueDelegate(_pb);
+          if ((ContentMask & _mask) > 0)
+          {
+            IProducerBinding _pb = producerBinding(i);
+            m_WriteValueDelegate(_pb);
+          }
+          _mask = _mask << 1;
         }
-        _mask = _mask << 1;
+        SendMessage();
       }
-      SendMessage();
     }
     /// <summary>
     /// If implemented in derived class gets the state machine for this instance.

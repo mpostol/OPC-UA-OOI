@@ -7,7 +7,7 @@
       <InformationModelURI>https://github.com/mpostol/OPC-UA-OOI</InformationModelURI>
       <DataSymbolicName>DataSymbolicName</DataSymbolicName>
       <DataSet>
-        <DataMemberConfiguration>
+        <!--<DataMemberConfiguration>
           <SymbolicName>Value1</SymbolicName>
           <ProcessValueName>Value1</ProcessValueName>
           <Encoding>DateTime</Encoding>
@@ -20,22 +20,91 @@
           <Encoding>Int32</Encoding>
           <ValueRank>-1</ValueRank>
           <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        </DataMemberConfiguration>
+        </DataMemberConfiguration>-->
+        <!--
+Simple/Item_1=ns=2;s=Demo.Dynamic.Scalar.Boolean
+Simple/Item_2=ns=2;s=Demo.Dynamic.Scalar.Boolean
+Simple/Item_3=ns=2;s=Demo.Dynamic.Scalar.Boolean
+Simple/Item_4=ns=2;s=Demo.Dynamic.Scalar.Int32
+Simple/Item_5=ns=2;s=Demo.Dynamic.Scalar.Int32
+Simple/Item_6=ns=2;s=Demo.Dynamic.Scalar.Int32
+Simple/Item_7=ns=2;s=Demo.Dynamic.Scalar.Int32
+Simple/Item_8=ns=2;s=Demo.Dynamic.Scalar.DateTime
+Simple/Item_9=ns=2;s=Demo.Dynamic.Scalar.DateTime
+Simple/Item_10=ns=2;s=Demo.Dynamic.Scalar.DateTime        
+-->
         <DataMemberConfiguration>
-          <SymbolicName>ValueByte</SymbolicName>
-          <ProcessValueName>ValueByte</ProcessValueName>
-          <Encoding>Byte</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ValueBoolean</SymbolicName>
-          <ProcessValueName>ValueBoolean</ProcessValueName>
+          <SymbolicName>ValueBoolean1</SymbolicName>
+          <ProcessValueName>ValueBoolean1</ProcessValueName>
           <Encoding>Boolean</Encoding>
           <ValueRank>-1</ValueRank>
           <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
         </DataMemberConfiguration>
         <DataMemberConfiguration>
+          <SymbolicName>ValueBoolean2</SymbolicName>
+          <ProcessValueName>ValueBoolean2</ProcessValueName>
+          <Encoding>Boolean</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueBoolean3</SymbolicName>
+          <ProcessValueName>ValueBoolean3</ProcessValueName>
+          <Encoding>Boolean</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueInt32_1</SymbolicName>
+          <ProcessValueName>ValueInt32_1</ProcessValueName>
+          <Encoding>Int32</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueByte_2</SymbolicName>
+          <ProcessValueName>ValueByte_2</ProcessValueName>
+          <Encoding>Int32</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueInt32_3</SymbolicName>
+          <ProcessValueName>ValueInt32_3</ProcessValueName>
+          <Encoding>Int32</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>ValueInt32_4</SymbolicName>
+          <ProcessValueName>ValueInt32_4</ProcessValueName>
+          <Encoding>Int32</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>Value1</SymbolicName>
+          <ProcessValueName>Value1</ProcessValueName>
+          <Encoding>DateTime</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>Value1_1</SymbolicName>
+          <ProcessValueName>Value1_1</ProcessValueName>
+          <Encoding>DateTime</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>Value1_2</SymbolicName>
+          <ProcessValueName>Value1_2</ProcessValueName>
+          <Encoding>DateTime</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+
+        <!--<DataMemberConfiguration>
           <SymbolicName>ValueInt16</SymbolicName>
           <ProcessValueName>ValueInt16</ProcessValueName>
           <Encoding>Int16</Encoding>
@@ -111,7 +180,7 @@
           <Encoding>Guid</Encoding>
           <ValueRank>-1</ValueRank>
           <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        </DataMemberConfiguration>
+        </DataMemberConfiguration>-->
       </DataSet>
       <Guid>c1f53ffb-6552-4ccc-84c9-f847147cdc85</Guid>
       <Root>
@@ -133,8 +202,8 @@
       <ConsumerAssociationConfigurations>
         <ConsumerAssociationConfiguration>
           <AssociationName>Association1</AssociationName>
-          <DataSetWriterId>12345</DataSetWriterId>
-          <PublisherId>6D481513-444F-40FB-826D-4706AFD05E2F</PublisherId>
+          <DataSetWriterId>1</DataSetWriterId>
+          <PublisherId>d80d81dd-96e6-4560-850e-154f9181307c</PublisherId>
         </ConsumerAssociationConfiguration>
       </ConsumerAssociationConfigurations>
     </MessageHandlerConfiguration>

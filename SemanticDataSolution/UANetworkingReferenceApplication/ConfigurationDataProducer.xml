@@ -8,6 +8,13 @@
       <DataSymbolicName>DataSymbolicName</DataSymbolicName>
       <DataSet>
         <DataMemberConfiguration>
+          <SymbolicName>BoolToggle</SymbolicName>
+          <ProcessValueName>BoolToggle</ProcessValueName>
+          <Encoding>Boolean</Encoding>
+          <ValueRank>-1</ValueRank>
+          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
           <SymbolicName>Value1</SymbolicName>
           <ProcessValueName>Value1</ProcessValueName>
           <Encoding>DateTime</Encoding>

@@ -26,10 +26,16 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       b_RemoteHost = Properties.Settings.Default.RemoteHostName;
       b_RemotePort = Properties.Settings.Default.RemoteUDPPortNumber;
       b_ConsumerLog = new ObservableCollection<string>();
+      //Menu Files
       b_ConfigurationFolder = new ConfigurationFolderCommand();
-      b_HelpDocumentation = new HelpDocumentationCommand();
+      b_HelpDocumentation = new WebDocumentationCommand(Properties.Resources.HelpDocumentationUrl);
+      //Menu Actions
       b_OpenConsumerConfiguration = new OpenFileCommand(Properties.Resources.ConfigurationDataConsumerFileName);
-     b_OpenProducerConfiguration = new OpenFileCommand(Properties.Resources.ConfigurationDataProducerFileName);
+      b_OpenProducerConfiguration = new OpenFileCommand(Properties.Resources.ConfigurationDataProducerFileName);
+      //Menu Help
+      b_ReadMe = new OpenFileCommand(Properties.Resources.ReadMeFileName);
+      b_TermsOfService = new WebDocumentationCommand(Properties.Resources.TermsOfServiceUrl);
+      b_ViewLicense = new WebDocumentationCommand(Properties.Resources.ViewLicenseUrl);
       String _version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
       b_WindowTitle = $"OPC UA Example Application Rel. {_version} supporting PubSup protocol 1.10";
     }
@@ -185,7 +191,43 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         PropertyChanged.RaiseHandler<ICommand>(value, ref b_ConfigurationFolder, "ConfigurationFolder", this);
       }
     }
+    public ICommand ReadMe
+    {
+      get
+      {
+        return b_ReadMe;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ReadMe, "ReadMe", this);
+      }
+    }
+    public ICommand ViewLicense
+    {
+      get
+      {
+        return b_ViewLicense;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ViewLicense, "ViewLicense", this);
+      }
+    }
+    public ICommand TermsOfService
+    {
+      get
+      {
+        return b_TermsOfService;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<ICommand>(value, ref b_TermsOfService, "TermsOfService", this);
+      }
+    }
     //private
+    private ICommand b_TermsOfService;
+    private ICommand b_ViewLicense;
+    private ICommand b_ReadMe;
     private ICommand b_OpenProducerConfiguration;
     private ICommand b_OpenConsumerConfiguration;
     private ICommand b_ConfigurationFolder;
@@ -424,8 +466,13 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         }
       }
     }
-    private class HelpDocumentationCommand : ICommand
+    private class WebDocumentationCommand : ICommand
     {
+
+      public WebDocumentationCommand(string url)
+      {
+        m_URL = url;
+      }
       public event EventHandler CanExecuteChanged;
       public bool CanExecute(object parameter)
       {
@@ -435,14 +482,16 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       {
         try
         {
-          using (Process process = Process.Start(Properties.Resources.HelpDocumentationUrl)) { }
+          using (Process process = Process.Start(m_URL)) { }
         }
         catch (Exception _ex)
         {
-          MessageBox.Show($"An error occurs during opening the help documentation: {_ex}", "Problem with help documentation !", MessageBoxButton.OK, MessageBoxImage.Error);
+          MessageBox.Show($"An error occurs during opening the web page at: {_ex}", "Problem with the website!", MessageBoxButton.OK, MessageBoxImage.Error);
           return;
         }
       }
+      private readonly string m_URL;
+
     }
     private class ConfigurationFolderCommand : ICommand
     {

@@ -32,15 +32,20 @@
     <DockPanel Grid.Row="0" LastChildFill="True">
       <Menu x:Name="menu" Height="20" HorizontalAlignment="Left" Width="Auto" DockPanel.Dock="Right" ToolTip="Available actions">
         <MenuItem Header="File" >
-          <MenuItem Header="Open Consumer Configuration" Command="{Binding Path=OpenConsumerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor."/>
-          <MenuItem Header="Open Producer Configuration" Command="{Binding Path=OpenProducerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor." />
+          <MenuItem Header="Consumer Configuration" Command="{Binding Path=OpenConsumerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor."/>
+          <MenuItem Header="Producer Configuration" Command="{Binding Path=OpenProducerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor." />
         </MenuItem>
         <MenuItem Header="Actions" ToolTip="Available actions">
-          <MenuItem Header="Consumer Update Configuration" Command="{Binding Path=ConsumerUpdateConfiguration}" ToolTip="Updates the consumer configuration and restarts the data receiving process"/>
-          <MenuItem Header="Producer Update Configuration" Command="{Binding Path=ProducerRestart}" ToolTip="Updates the producer configuration and restarts the data pumping process" />
-          <MenuItem Header="Configuration folder" Command="{Binding Path=ConfigurationFolder}" ToolTip="Open folder containing configuration files" />
+          <MenuItem Header="Update Consumer Configuration" Command="{Binding Path=ConsumerUpdateConfiguration}" ToolTip="Updates the consumer configuration and restarts the data receiving process"/>
+          <MenuItem Header="Update Producer Configuration" Command="{Binding Path=ProducerRestart}" ToolTip="Updates the producer configuration and restarts the data pumping process" />
+          <MenuItem Header="Open Configuration folder" Command="{Binding Path=ConfigurationFolder}" ToolTip="Open folder containing configuration files" />
         </MenuItem>
-        <MenuItem Header="Help" ToolTip="Opens the project website" Command="{Binding Path=HelpDocumentation}" />
+        <MenuItem Header="Help" ToolTip="Get more about the software." >
+          <MenuItem Header="Home page" Command="{Binding Path=HelpDocumentation}" ToolTip="Opens the project website" />
+          <MenuItem Header="Release Notes" Command="{Binding Path=ReadMe}" ToolTip="Opens the release notes file." />
+          <MenuItem Header="Terms of Service" Command="{Binding Path=TermsOfService}" ToolTip="Opens the GitHub Terms of Service."/>
+          <MenuItem Header="License" Command="{Binding Path=ViewLicense}" ToolTip="Opens the application license."/>
+        </MenuItem>
       </Menu>
     </DockPanel>
     <Grid Grid.Row="1"  Background="#FF06F711" VerticalAlignment="Stretch" >

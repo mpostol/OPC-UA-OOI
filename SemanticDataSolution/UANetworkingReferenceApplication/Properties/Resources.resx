@@ -126,4 +126,13 @@
   <data name="HelpDocumentationUrl" xml:space="preserve">
     <value>https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANetworkingReferenceApplication#ua-data-example-application</value>
   </data>
+  <data name="ReadMeFileName" xml:space="preserve">
+    <value>ReadMe.txt</value>
+  </data>
+  <data name="TermsOfServiceUrl" xml:space="preserve">
+    <value>https://help.github.com/articles/github-terms-of-service/</value>
+  </data>
+  <data name="ViewLicenseUrl" xml:space="preserve">
+    <value>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</value>
+  </data>
 </root>

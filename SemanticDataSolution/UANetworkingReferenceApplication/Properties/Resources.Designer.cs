@@ -86,5 +86,32 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
                 return ResourceManager.GetString("HelpDocumentationUrl", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ReadMe.txt.
+        /// </summary>
+        internal static string ReadMeFileName {
+            get {
+                return ResourceManager.GetString("ReadMeFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://help.github.com/articles/github-terms-of-service/.
+        /// </summary>
+        internal static string TermsOfServiceUrl {
+            get {
+                return ResourceManager.GetString("TermsOfServiceUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md.
+        /// </summary>
+        internal static string ViewLicenseUrl {
+            get {
+                return ResourceManager.GetString("ViewLicenseUrl", resourceCulture);
+            }
+        }
     }
 }

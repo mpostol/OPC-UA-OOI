@@ -65,12 +65,13 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         UInt64 _mask = 0x1;
         for (int i = 0; i < length; i++)
         {
-          if ((ContentMask & _mask) > 0)
-          {
-            IProducerBinding _pb = producerBinding(i);
-            m_WriteValueDelegate(_pb);
-          }
-          _mask = _mask << 1;
+          //TODO: Implement ContentMask https://github.com/mpostol/OPC-UA-OOI/issues/89
+          //if ((ContentMask & _mask) > 0)
+          //{
+          IProducerBinding _pb = producerBinding(i);
+          m_WriteValueDelegate(_pb);
+          //}
+          //_mask = _mask << 1;
         }
         SendMessage();
       }

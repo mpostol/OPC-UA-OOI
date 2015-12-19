@@ -24,6 +24,17 @@ The application installation package is available here:
 
 ### Version History
 
+Deyailed description is available at: https://github.com/mpostol/OPC-UA-OOI/commits/master
+
+Assembly Version:       1.00.13
+Assembly Date:          2015-12-19
+
+The main changes and new functionalities are listed below:
+
+1. It is bug fix release:
+ - Raise condition if there are many DataSets
+ - Improved documentation and application user intrface
+
 Assembly Version:       1.00.11
 Assembly Date:          2015-12-16
 

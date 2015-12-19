@@ -19,8 +19,14 @@ Assembly Version:       <#=SemanticDataVersion#>
 Assembly Date:          <#=m_Date#>
 
 The main changes and new functionalities are listed below:
-1. It is bug fix release - DataSetWriter must be encoded as UInt16 (https://github.com/mpostol/OPC-UA-OOI/issues/144).
 
+1. It is bug fix release:
+ - Raise condition if there are many DataSets
+ - Improved documentation and application user intrface
+
+Deyailed description is available at: https://github.com/mpostol/OPC-UA-OOI/commits/master
+
+_____________________________________________________________________________________________
 For assistance, contact:
 
 Mariusz Postol

@@ -21,8 +21,8 @@ using System.Windows;
 [assembly: AssemblyTrademark("OPC-UA-OOI")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("1.00.11.*")]
-[assembly: AssemblyFileVersion("1.00.11")]
+[assembly: AssemblyVersion("1.00.13.*")]
+[assembly: AssemblyFileVersion("1.00.13")]
 
 //In order to begin building localizable applications, set 
 //<UICulture>CultureYouAreCodingWith</UICulture> in your .csproj file

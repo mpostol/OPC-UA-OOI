@@ -18,7 +18,7 @@ The main changes and new functionalities are listed below:
  - Raise condition if there are many DataSets
  - Improved documentation and application user intrface
 
-Deyailed description is available at: https://github.com/mpostol/OPC-UA-OOI/commits/master
+Detailed description is available at: https://github.com/mpostol/OPC-UA-OOI/commits/master
 
 _____________________________________________________________________________________________
 For assistance, contact:

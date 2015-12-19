@@ -15,7 +15,9 @@ Let me know if it works for you and if not how to converge proposed solution and
 
 ### Run time
 
-At run time it can be used as the primary source of configuration for any standalone OPC *UA Data Application* and OPC UA Server supporting PubSub role. In this case the application configuration may:
+By design it is a plug-in or using modern terminology application composition part of the library described in [OPC UA DataManagement Library](../../SemanticDataSolution/DataManagement#opc-ua-datamanagement-library)  and at run time it can be used as the primary source of configuration for any standalone OPC *UA Data Application* and OPC UA Server supporting PubSub role.
+
+In this case the application configuration may:
 
 * be derived from the proposed one
 * be expanded by the proposed one
@@ -24,9 +26,8 @@ The proposed solution supports also possibility to handle the configuration chan
 
 ### Design time
 
-By design it is a plug-in or using modern terminology application composition part of the library described in [OPC UA DataManagement Library](../../SemanticDataSolution/DataManagement#opc-ua-datamanagement-library).
 
-It is good opportunity to review your requirements (if you have any) against the proposed solution. I hope the interface is ready to fulfill the following design time scenarios allowing for configuration in context of selected OPC Information Model/Address Space:
+I hope the interface is ready to fulfill the following design time scenarios allowing for configuration in context of selected OPC Information Model/Address Space:
 
 1. Plug in to a modeler (UA Information Model design tool) as the configuration editor tool (preferred for me) - now it is compatible with the [Address Space Model Designer](http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx)
 2. OPC UA Server as an local editor – using server local GUI, Address Space and the UANetworkingConfiguration plug-in (in this case OPC UA server is just modeler)
@@ -35,6 +36,8 @@ It is good opportunity to review your requirements (if you have any) against the
 5. OPC UA Server as a remote dedicated editor – using PubSub Information Model/UANetworkingConfiguration plug-in on the server side, and  dedicated (configuration editor GUI) PubSub configuration OPC UA Clint as the remote configuration tool (let me stress it is the only scenario using PubSub Information Model) – it is rather run time approach.
 
 It is my opinion, but options 4 and 5 are only theoretically possible, because in real installations OPC server is untouchable artifact, but in a lab it is just Modeler and cannot be used as run time configuration tool.
+
+It is good opportunity to review your requirements (if you have any) against the proposed solution.
 
 ## Configuration content
 

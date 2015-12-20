@@ -8,4 +8,4 @@
 * Update the help documentation
 * Publish the code help documentation
 * New release front page
-* Update the documentation
+* Update the release documentation

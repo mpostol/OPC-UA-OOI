@@ -45,8 +45,7 @@ The Nuget packages are available at:
 Current release:
 
 * Assembly Product:       OPC UA SemanticData
-* Assembly Version:       1.00.11
-* Assembly Date:          2015-12-18
+* Assembly Version:       1.00.13
 
 # Library UAOOI.DataBindings
 
@@ -64,7 +63,6 @@ The most important project for this library release are as follows:
 
 * Assembly Product:       OPC UA DataBindings
 * Assembly Version:       1.00.03
-* Assembly Date:          2015-12-18
 
 ## Contact
 

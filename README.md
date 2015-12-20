@@ -1,13 +1,13 @@
-#OPC Unified Architecture - Object Oriented Internet
-##CHARTER
-###What is Object Oriented Internet
+# OPC Unified Architecture - Object Oriented Internet
+## CHARTER
+### What is Object Oriented Internet
 
 In this project C# deliverables supporting a new Machine To Machine (M2M) communication architecture is to be reserched with the goal to provide a generic solution for publishing and updating information in a context that can be used to describe and discover it by software applications. It is implemented based on the [OPC Unified Architecture](http://goo.gl/y4EHUn) - a new emerging industrial integration standard that fulfills the proposed architecture requirements.
 
 The [Object Oriented Internet](https://fedcsis.org/proceedings/2015/pliks/160.pdf) article published in **Proceedings of the Federated Conference on
-Computer Science and Information Systems** captures description of this idea. 
+Computer Science and Information Systems** captures description of this idea.
 
-##Content
+## Content
 
 The `SemanticDataSolution` folder contains projects related to support the [OPC UA Data Processing Outside of the Server](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution#opc-ua-data-processing-outside-the-server). Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
 
@@ -37,15 +37,15 @@ In scope there are also deliverables supporting:
 
 The presented approach is a real proposal for new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability.
 
-###Out of scope
+### Out of scope
 
 Out of scope is any work on exchanging the Process Data and Metadata over the network. The hope is that the interoperability can be gained as the result of usage of the OPC Unified Architecture international standard.
 
-###Conclusion
+### Conclusion
 
 I hope it is a good place to prototype and converge the OPC UA communication technology with Semantic Data, Semantc Web, Internet Of Things, Plug and Play, Global Data Discovery, Selective Availability, etc. concepts. My goal is to bridge a gap between OPC UA technology and Industrial IT Application Domains.
 
-##Redd more
+## Read more
 
 The paper [**Object Oriented Internet**](https://fedcsis.org/proceedings/2015/pliks/160.pdf) has been presented on the conference [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp).
 

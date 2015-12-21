@@ -122,6 +122,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     private UdpClient m_UdpClient;
     private int m_UDPPort;
     private Action<string> m_Trace;
+    private bool m_ExclusiveAddressUse = false;
+
     /// <summary>
     /// Implements <see cref="AsyncCallback"/> for UDP begin receive.
     /// </summary>
@@ -138,7 +140,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
         m_ViewModel.ConsumerFramesReceived = m_NumberOfPackages;
         m_ViewModel.ConsumerBytesReceived = m_NumberOfBytes;
         int _length = _receiveBytes == null ? -1 : _receiveBytes.Length;
-        m_Trace($"Message[{_length}]: {String.Join(", ", new ArraySegment<byte>(_receiveBytes, 0, Math.Min(_receiveBytes.Length, 80)).Select<byte, string>(x => x.ToString("X")).ToArray<string>())}");
+        m_Trace($"Message<{_UEndPoint.Address.ToString()}:{_UEndPoint.Port}[{_length}]>: {String.Join(", ", new ArraySegment<byte>(_receiveBytes, 0, Math.Min(_receiveBytes.Length, 80)).Select<byte, string>(x => x.ToString("X")).ToArray<string>())}");
         MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
         base.OnNewFrameArrived(new BinaryReader(_stream, System.Text.Encoding.UTF8));
         m_Trace("BeginReceive");
@@ -157,7 +159,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     //Methods
     private void OnEnable()
     {
-      m_UdpClient = new UdpClient(m_UDPPort);
+      m_UdpClient = new UdpClient();
+      m_UdpClient.ExclusiveAddressUse = m_ExclusiveAddressUse;
+      IPEndPoint _ep = new IPEndPoint(IPAddress.Any, m_UDPPort);
+      m_UdpClient.Client.Bind(_ep);
       m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
     }
     private void OnDisable()

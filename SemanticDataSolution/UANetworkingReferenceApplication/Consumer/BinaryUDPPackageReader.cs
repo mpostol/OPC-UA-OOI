@@ -122,7 +122,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     private UdpClient m_UdpClient;
     private int m_UDPPort;
     private Action<string> m_Trace;
-    private bool m_ExclusiveAddressUse = true;
+    private bool m_ReuseAddress = true;
 
     /// <summary>
     /// Implements <see cref="AsyncCallback"/> for UDP begin receive.
@@ -160,9 +160,14 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     private void OnEnable()
     {
       m_UdpClient = new UdpClient();
-      m_UdpClient.ExclusiveAddressUse = m_ExclusiveAddressUse;
+      m_UdpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, m_ReuseAddress);
+      //m_UdpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.MulticastLoopback, true);
+      m_UdpClient.ExclusiveAddressUse = !m_ReuseAddress;
+      //m_UdpClient.MulticastLoopback = true;
       IPEndPoint _ep = new IPEndPoint(IPAddress.Any, m_UDPPort);
       m_UdpClient.Client.Bind(_ep);
+      IPAddress _multicast = IPAddress.Parse("239.0.0.1");
+      m_UdpClient.JoinMulticastGroup(_multicast);
       m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
     }
     private void OnDisable()
@@ -173,9 +178,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 
     #region Debug instrumentation
     [Conditional("DEBUG")]
-    public void ExclusiveAddressUse(bool value)
+    public void SetReuseAddress(bool value)
     {
-      m_ExclusiveAddressUse = value;
+      m_ReuseAddress = value;
     }
     [Conditional("DEBUG")]
     public void CallOnEnable()

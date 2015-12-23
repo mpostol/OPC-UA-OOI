@@ -122,7 +122,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     private UdpClient m_UdpClient;
     private int m_UDPPort;
     private Action<string> m_Trace;
-    private bool m_ExclusiveAddressUse = false;
+    private bool m_ExclusiveAddressUse = true;
 
     /// <summary>
     /// Implements <see cref="AsyncCallback"/> for UDP begin receive.
@@ -168,6 +168,19 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     private void OnDisable()
     {
       Dispose();
+    }
+    #endregion
+
+    #region Debug instrumentation
+    [Conditional("DEBUG")]
+    public void ExclusiveAddressUse(bool value)
+    {
+      m_ExclusiveAddressUse = value;
+    }
+    [Conditional("DEBUG")]
+    public void CallOnEnable()
+    {
+      OnEnable();
     }
     #endregion
 

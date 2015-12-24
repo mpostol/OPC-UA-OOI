@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -17,17 +18,20 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
   internal sealed class BinaryUDPPackageReader : BinaryDecoder
   {
 
+    #region creator
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryUDPPackageReader"/> class.
     /// </summary>
     /// <param name="port">The port.</param>
     /// <param name="trace">The trace.</param>
-    public BinaryUDPPackageReader(IUADecoder uaDecoder, int port, Action<string> trace) : base(uaDecoder)
+    public BinaryUDPPackageReader(IUADecoder uaDecoder, int port, Action<string> trace, IConsumerViewModel viewModel) : base(uaDecoder)
     {
       State = new MyState(this);
       m_Trace = trace;
       m_UDPPort = port;
+      m_ViewModel = viewModel;
     }
+    #endregion
 
     #region BinaryDecoder
     /// <summary>
@@ -60,10 +64,37 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
         return;
       m_UdpClient.Close();
       m_UdpClient = null;
+      m_MulticastGroup = null;
     }
     #endregion
 
-    internal IConsumerViewModel m_ViewModel;
+    #region API
+    internal bool ReuseAddress
+    {
+      get { return m_ReuseAddress; }
+      set
+      {
+        if (State.State == HandlerState.Operational)
+          throw new InvalidOperationException($"{nameof(ReuseAddress)} cannot be set the object is in Operational state");
+        m_ReuseAddress = value;
+      }
+    }
+    internal IPAddress MulticastGroup
+    {
+      get { return m_MulticastGroup; }
+      set
+      {
+        if (State.State == HandlerState.Operational)
+          throw new InvalidOperationException($"{nameof(MulticastGroup)} cannot be set the object is in Operational state");
+        m_MulticastGroup = value;
+      }
+    }
+    public UdpClient Client
+    {
+      get { return m_UdpClient; }
+    }
+    #endregion
+
     #region private
     //types
     private class MyState : IAssociationState
@@ -117,13 +148,14 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 
     }
     //vars
+    private IConsumerViewModel m_ViewModel = null;
     private int m_NumberOfBytes = 0;
     private int m_NumberOfPackages = 0;
     private UdpClient m_UdpClient;
     private int m_UDPPort;
     private Action<string> m_Trace;
     private bool m_ReuseAddress = true;
-
+    private IPAddress m_MulticastGroup = null;
     /// <summary>
     /// Implements <see cref="AsyncCallback"/> for UDP begin receive.
     /// </summary>
@@ -131,10 +163,13 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     private void m_ReceiveAsyncCallback(IAsyncResult asyncResult)
     {
       m_Trace("Entering m_ReceiveAsyncCallback");
+      //if (!asyncResult.IsCompleted)
+      //  return;
       try
       {
+        UdpClient _client = (UdpClient)asyncResult.AsyncState;
         IPEndPoint _UEndPoint = null;
-        Byte[] _receiveBytes = m_UdpClient.EndReceive(asyncResult, ref _UEndPoint);
+        Byte[] _receiveBytes = _client.EndReceive(asyncResult, ref _UEndPoint);
         m_NumberOfPackages++;
         m_NumberOfBytes += _receiveBytes.Length;
         m_ViewModel.ConsumerFramesReceived = m_NumberOfPackages;
@@ -142,9 +177,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
         int _length = _receiveBytes == null ? -1 : _receiveBytes.Length;
         m_Trace($"Message<{_UEndPoint.Address.ToString()}:{_UEndPoint.Port} [{_length}]>: {String.Join(", ", new ArraySegment<byte>(_receiveBytes, 0, Math.Min(_receiveBytes.Length, 80)).Select<byte, string>(x => x.ToString("X")).ToArray<string>())}");
         MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
-        base.OnNewFrameArrived(new BinaryReader(_stream, System.Text.Encoding.UTF8));
+        OnNewFrameArrived(new BinaryReader(_stream, System.Text.Encoding.UTF8));
         m_Trace("BeginReceive");
-        m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
+        m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), m_UdpClient);
       }
       catch (ObjectDisposedException _ex)
       {
@@ -160,32 +195,17 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     private void OnEnable()
     {
       m_UdpClient = new UdpClient();
-      m_UdpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, m_ReuseAddress);
-      //m_UdpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.MulticastLoopback, true);
-      m_UdpClient.ExclusiveAddressUse = !m_ReuseAddress;
-      //m_UdpClient.MulticastLoopback = true;
+      m_UdpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, ReuseAddress);
+      m_UdpClient.ExclusiveAddressUse = !ReuseAddress;
       IPEndPoint _ep = new IPEndPoint(IPAddress.Any, m_UDPPort);
       m_UdpClient.Client.Bind(_ep);
-      IPAddress _multicast = IPAddress.Parse("239.0.0.1");
-      m_UdpClient.JoinMulticastGroup(_multicast);
-      m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
+      if (m_MulticastGroup != null)
+        m_UdpClient.JoinMulticastGroup(m_MulticastGroup);
+      m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), m_UdpClient);
     }
     private void OnDisable()
     {
       Dispose();
-    }
-    #endregion
-
-    #region Debug instrumentation
-    [Conditional("DEBUG")]
-    public void SetReuseAddress(bool value)
-    {
-      m_ReuseAddress = value;
-    }
-    [Conditional("DEBUG")]
-    public void CallOnEnable()
-    {
-      OnEnable();
     }
     #endregion
 

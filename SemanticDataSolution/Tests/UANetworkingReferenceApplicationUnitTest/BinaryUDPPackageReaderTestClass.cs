@@ -3,6 +3,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.DataManagement.Encoding;
 using System.Xml;
+using System.Net;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
 {
@@ -10,21 +11,24 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
   public class BinaryUDPPackageReaderTestClass
   {
 
+    #region TestMethod
     [TestMethod]
     [TestCategory("ReferenceApplication_BinaryUDPPackageReaderTestClass")]
     public void CreatorTestMethod()
     {
-      bool _ExclusiveAddressUse = false;
-      using (Consumer.BinaryUDPPackageReader _reader1 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x)))
+      bool _ExclusiveAddressUse = true;
+      using (Consumer.BinaryUDPPackageReader _reader1 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x), null))
       {
         Assert.IsNotNull(_reader1);
-        _reader1.SetReuseAddress(_ExclusiveAddressUse);
-        _reader1.CallOnEnable();
+        _reader1.ReuseAddress = _ExclusiveAddressUse;
+        _reader1.MulticastGroup = IPAddress.Parse("239.0.0.1");
+        _reader1.State.Enable();
+        Assert.IsNotNull(_reader1.MulticastGroup);
       }
-      using (Consumer.BinaryUDPPackageReader _reader1 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x)))
+      using (Consumer.BinaryUDPPackageReader _reader1 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x), null))
       {
         Assert.IsNotNull(_reader1);
-        _reader1.CallOnEnable();
+        _reader1.State.Enable();
       }
     }
     [TestMethod]
@@ -32,16 +36,16 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
     public void ExclusiveAddressUseTrueTestMethod()
     {
       bool _ExclusiveAddressUse = true;
-      using (Consumer.BinaryUDPPackageReader _reader1 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x)))
+      using (Consumer.BinaryUDPPackageReader _reader1 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x), null))
       {
         Assert.IsNotNull(_reader1);
-        _reader1.SetReuseAddress(_ExclusiveAddressUse);
-        _reader1.CallOnEnable();
-        using (Consumer.BinaryUDPPackageReader _reader2 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x)))
+        _reader1.ReuseAddress = _ExclusiveAddressUse;
+        _reader1.State.Enable();
+        using (Consumer.BinaryUDPPackageReader _reader2 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x), null))
         {
           Assert.IsNotNull(_reader2);
-          _reader1.SetReuseAddress(_ExclusiveAddressUse);
-          _reader2.CallOnEnable();
+          _reader2.ReuseAddress = _ExclusiveAddressUse;
+          _reader2.State.Enable();
         }
       }
     }
@@ -51,19 +55,56 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
     public void ExclusiveAddressUseFalseTestMethod()
     {
       bool _ExclusiveAddressUse = false;
-      using (Consumer.BinaryUDPPackageReader _reader1 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x)))
+      using (Consumer.BinaryUDPPackageReader _reader1 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x), null))
       {
         Assert.IsNotNull(_reader1);
-        _reader1.SetReuseAddress(_ExclusiveAddressUse);
-        _reader1.CallOnEnable();
-        using (Consumer.BinaryUDPPackageReader _reader2 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x)))
+        _reader1.ReuseAddress = _ExclusiveAddressUse;
+        _reader1.State.Enable();
+        using (Consumer.BinaryUDPPackageReader _reader2 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x), null))
         {
           Assert.IsNotNull(_reader2);
-          _reader1.SetReuseAddress(_ExclusiveAddressUse);
-          _reader2.CallOnEnable();
+          _reader2.ReuseAddress = _ExclusiveAddressUse;
+          _reader2.State.Enable();
         }
       }
     }
+    [TestMethod]
+    [TestCategory("ReferenceApplication_BinaryUDPPackageReaderTestClass")]
+    [ExpectedException(typeof(InvalidOperationException))]
+    public void ExclusiveAddressOperationalTestMethod()
+    {
+      bool _ExclusiveAddressUse = true;
+      using (Consumer.BinaryUDPPackageReader _reader1 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x), null))
+      {
+        Assert.IsNotNull(_reader1);
+        _reader1.ReuseAddress = _ExclusiveAddressUse;
+        _reader1.State.Enable();
+        _reader1.ReuseAddress = _ExclusiveAddressUse;
+      }
+    }
+    [TestMethod]
+    [TestCategory("ReferenceApplication_BinaryUDPPackageReaderTestClass")]
+    [ExpectedException(typeof(InvalidOperationException))]
+    public void ExclusiveMulticastGroupTestMethod()
+    {
+      bool _ExclusiveAddressUse = true;
+      using (Consumer.BinaryUDPPackageReader _reader1 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x), null))
+      {
+        try
+        {
+          Assert.IsNotNull(_reader1);
+          _reader1.ReuseAddress = _ExclusiveAddressUse;
+          _reader1.MulticastGroup = IPAddress.Parse("239.0.0.1");
+          _reader1.State.Enable();
+        }
+        catch (Exception)
+        {
+          Assert.Fail();
+        }
+        _reader1.MulticastGroup = IPAddress.Parse("239.0.0.1"); 
+      }
+    }
+    #endregion
 
     #region test instrumentation
     private class UADecoder : IUADecoder

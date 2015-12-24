@@ -37,7 +37,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// <returns>An instance of <see cref="IMessageReader"/>.</returns>
     IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, MessageChannelConfiguration configuration, IUADecoder uaDecoder)
     {
-      BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(uaDecoder, UDPPortNumber, m_Trace) { m_ViewModel = m_ParentViewModel };
+      BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(uaDecoder, UDPPortNumber, m_Trace, m_ParentViewModel); 
       m_ToDispose(_ret);
       m_Trace(String.Format("Created BinaryUDPPackageReader UDPPortNumber = {0}", UDPPortNumber));
       return _ret;

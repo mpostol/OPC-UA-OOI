@@ -3,12 +3,16 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using UAOOI.SemanticData.DataManagement.DataRepository;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.SemanticData.UANetworking.ReferenceApplication.Controls;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
 {
@@ -26,6 +30,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       b_RemoteHost = Properties.Settings.Default.RemoteHostName;
       b_RemotePort = Properties.Settings.Default.RemoteUDPPortNumber;
       b_ConsumerLog = new ObservableCollection<string>();
+      b_MulticastGroup = Properties.Settings.Default.DefaultMulticastGroup;
+      b_MulticastGroupSelection = false;
       //Menu Files
       b_ConfigurationFolder = new ConfigurationFolderCommand();
       b_HelpDocumentation = new WebDocumentationCommand(Properties.Resources.HelpDocumentationUrl);
@@ -131,7 +137,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     #endregion
 
     #region Window
-
     public string WindowTitle
     {
       get
@@ -235,6 +240,32 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     #endregion
 
     #region IConsumerViewModel Consumer User Interface ViewModel implementation
+    public IPAddress MulticastGroupIPAddress
+    {
+      get
+      {
+        try
+        {
+          if (!MulticastGroupSelection)
+            return null;
+          Controls.IPAddressValidationRule _vr = new IPAddressValidationRule();
+          ValidationResult _res = _vr.Validate(MulticastGroup, CultureInfo.InvariantCulture);
+          if (!_res.IsValid)
+          {
+            Trace($"Removed multicast grop because of error {_res.ErrorContent}");
+            MulticastGroupSelection = false;
+            return null;
+          }
+          Trace($"Applied muticast group: {MulticastGroup}"); 
+          return IPAddress.Parse(MulticastGroup);
+        }
+        catch (Exception)
+        {
+          MulticastGroupSelection = false;
+          return null;
+        }
+      }
+    }
     /// <summary>
     /// Add the message to the <see cref="MainWindowViewModel.ConsumerLog"/>.
     /// </summary>
@@ -344,7 +375,31 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         PropertyChanged.RaiseHandler<ObservableCollection<string>>(value, ref b_ConsumerLog, "ConsumerLog", this);
       }
     }
+    public string MulticastGroup
+    {
+      get
+      {
+        return b_MulticastGroup;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<string>(value, ref b_MulticastGroup, "MulticastGroup", this);
+      }
+    }
+    public bool MulticastGroupSelection
+    {
+      get
+      {
+        return b_MulticastGroupSelection;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<bool>(value, ref b_MulticastGroupSelection, "MulticastGroupSelection", this);
+      }
+    }
     //private part
+    private bool b_MulticastGroupSelection;
+    private string b_MulticastGroup;
     private ObservableCollection<string> b_ConsumerLog;
     private string b_ConsumerErrorMessage;
     private ICommand b_ConsumerUpdateConfiguration;
@@ -424,6 +479,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         PropertyChanged.RaiseHandler<string>(value, ref b_ProducerErrorMessage, "ProducerErrorMessage", this);
       }
     }
+
     //private part
     private int b_BytesSent;
     private int b_PackagesSent;

@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="UAOOI.SemanticData.UANetworking.ReferenceApplication.Controls.IPAddressControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" BorderThickness="0" >
+  <Grid Height="Auto" >
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition  Width="Auto"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" LastChildFill="True" Height="Auto">
+      <CheckBox VerticalAlignment="Center"></CheckBox>
+      <Label Content="Multicast" Margin="0"/>
+    </DockPanel>
+    <TextBox Text="123" Grid.Column="0" Grid.Row="1"  Name="txtboxFirstPart" TextChanged="txtbox_TextChanged" MaxLength="3" BorderThickness="0" TabIndex="1" VerticalContentAlignment="Bottom" PreviewKeyDown="txtboxFirstPart_PreviewKeyDown" PreviewKeyUp="txtboxFirstPart_PreviewKeyUp" />
+    <Label Content="." Grid.Column="1" Grid.Row="1"   Name="label1" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom"  />
+    <TextBox Text="234" Name="txtboxSecondPart" Grid.Column="2" Grid.Row="1" MaxLength="3" TextChanged="txtbox_TextChanged" BorderThickness="0" TabIndex="2" VerticalContentAlignment="Bottom" KeyDown="txtboxSecondPart_KeyDown" PreviewKeyUp="txtboxSecondPart_PreviewKeyUp" />
+    <Label Content="." Grid.Column="3" Grid.Row="1" Name="label2" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" />
+    <TextBox  Text="345" Name="txtboxThridPart" Grid.Column="4" Grid.Row="1" MaxLength="3" TextChanged="txtbox_TextChanged" BorderThickness="0" TabIndex="3" VerticalContentAlignment="Bottom"  KeyDown="txtboxThridPart_KeyDown" PreviewKeyUp="txtboxThridPart_PreviewKeyUp" />
+    <Label Content="." Grid.Column="5" Grid.Row="1" Name="label3" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" />
+    <TextBox Text="456" x:Name="txtboxFourthPart" Grid.Column="6" Grid.Row="1" MaxLength="3" TextChanged="txtbox_TextChanged" BorderThickness="0" TabIndex="4" VerticalContentAlignment="Bottom" />
+  </Grid>
+</UserControl>

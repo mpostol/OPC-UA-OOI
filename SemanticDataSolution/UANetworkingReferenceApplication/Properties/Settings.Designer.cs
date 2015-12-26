@@ -100,5 +100,17 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
                 return ((string)(this["ProducerConfigurationFileName"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("139.255.255.1")]
+        public string DefaultMulticastGroup {
+            get {
+                return ((string)(this["DefaultMulticastGroup"]));
+            }
+            set {
+                this["DefaultMulticastGroup"] = value;
+            }
+        }
     }
 }

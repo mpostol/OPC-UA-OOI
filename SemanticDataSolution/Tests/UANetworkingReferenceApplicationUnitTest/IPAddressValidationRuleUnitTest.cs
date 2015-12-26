@@ -43,9 +43,25 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
     {
       IPAddressValidationRule _vr = new Controls.IPAddressValidationRule();
       Assert.IsNotNull(_vr);
-      ValidationResult _res = _vr.Validate("139.255.255.1", System.Globalization.CultureInfo.InvariantCulture);
+      ValidationResult _res = _vr.Validate("239.255.255.1", System.Globalization.CultureInfo.InvariantCulture);
       Assert.IsTrue(_res.IsValid);
       Assert.IsNull(_res.ErrorContent);
+      _res = _vr.Validate("239.255.255.255", System.Globalization.CultureInfo.InvariantCulture);
+      Assert.IsTrue(_res.IsValid);
+      Assert.IsNull(_res.ErrorContent);
+      _res = _vr.Validate("224.0.0.0", System.Globalization.CultureInfo.InvariantCulture);
+      Assert.IsTrue(_res.IsValid);
+      Assert.IsNull(_res.ErrorContent);
+      _res = _vr.Validate("240.255.255.255", System.Globalization.CultureInfo.InvariantCulture);
+      Assert.IsFalse(_res.IsValid);
+      Assert.IsNotNull(_res.ErrorContent);
+      _res = _vr.Validate("223.0.0.0", System.Globalization.CultureInfo.InvariantCulture);
+      Assert.IsFalse(_res.IsValid);
+      Assert.IsNotNull(_res.ErrorContent);
+      _res = _vr.Validate("FF01:0:0:0:0:0:0:BAC0", System.Globalization.CultureInfo.InvariantCulture);
+      Assert.IsFalse(_res.IsValid);
+      Assert.IsNotNull(_res.ErrorContent);
+      Assert.IsTrue(((string)_res.ErrorContent).Contains("The address family"));
     }
     [TestMethod]
     [TestCategory("ReferenceApplication_IPAddressValidationRuleUnitTest")]

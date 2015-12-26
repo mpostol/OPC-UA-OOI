@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
         xmlns:code="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
         mc:Ignorable="d"
-        Title="{Binding Path=WindowTitle}" Height="800" Width="500" MinHeight="700" MinWidth="500" Icon="PrepareProcess.ico">
+        Title="{Binding Path=WindowTitle}" Height="800" Width="500"  MinHeight="700" MinWidth="500" Icon="PrepareProcess.ico" WindowStartupLocation="CenterOwner" WindowState="Maximized">
   <Window.DataContext>
     <code:MainWindowViewModel/>
   </Window.DataContext>
@@ -20,6 +20,7 @@
     <Style x:Key="TextBox" TargetType="{x:Type Control}">
       <Setter Property="VerticalAlignment" Value="Center"/>
       <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Height" Value="28"/>
     </Style>
     <Style x:Key="ValidatedTextBox" TargetType="{x:Type Control}" >
       <Setter Property="VerticalAlignment" Value="Center"/>
@@ -80,18 +81,14 @@
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0">
-          <Label Style="{StaticResource TextBox}" >Received: Remote UTC time</Label>
-          <Label Style="{StaticResource TextBox}" >Received: Int32 Counts from MinVal</Label>
           <Label Style="{StaticResource TextBox}" >Packages Received</Label>
           <Label Style="{StaticResource TextBox}" >Bytes Received</Label>
           <Label Style="{StaticResource TextBox}" >UDP port and multicast group</Label>
           <Label Style="{StaticResource TextBox}" >Consumer status</Label>
         </StackPanel>
         <StackPanel Orientation="Vertical"  Grid.Column="1" Grid.Row="0">
-          <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=Value1.Value, FallbackValue=  ?????, Mode=OneWay }" ToolTip="Time transmitted from remote station, UTC because of UA Encoding." />
-          <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=Value2.Value, FallbackValue=  ?????, Mode=OneWay }" ToolTip="A number transmitted from producer."/>
-          <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=ConsumerFramesReceived,  FallbackValue=?????, Mode=OneWay}" ToolTip="Packages received by the consumer from all sources"/>
-          <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path=ConsumerBytesReceived,  FallbackValue=?????, Mode=OneWay }" ToolTip="Bytes received by the consumer from all sources"/>
+          <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=ConsumerFramesReceived, FallbackValue=?????, Mode=OneWay}" ToolTip="Packages received by the consumer from all sources"/>
+          <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=ConsumerReceivedBytes, FallbackValue=?????, Mode=OneWay }" ToolTip="Bytes received by the consumer from all sources"/>
           <DockPanel LastChildFill="True"  >
             <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=UDPPort, FallbackValue= ______  }" />
             <CheckBox VerticalAlignment="Center" Name="x_MulticastIsChecked" IsChecked="{Binding Path=MulticastGroupSelection}" Content="join group:" ToolTip="Check to join the selected multicast group." Margin="0,0,20,0" />

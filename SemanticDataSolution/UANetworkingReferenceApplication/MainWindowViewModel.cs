@@ -31,7 +31,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       b_RemotePort = Properties.Settings.Default.RemoteUDPPortNumber;
       b_ConsumerLog = new ObservableCollection<string>();
       b_MulticastGroup = Properties.Settings.Default.DefaultMulticastGroup;
-      b_MulticastGroupSelection = false;
+      b_MulticastGroupSelection = Properties.Settings.Default.JoinMulticastGroup;
       //Menu Files
       b_ConfigurationFolder = new ConfigurationFolderCommand();
       b_HelpDocumentation = new WebDocumentationCommand(Properties.Resources.HelpDocumentationUrl);
@@ -45,96 +45,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       String _version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
       b_WindowTitle = $"OPC UA Example Application Rel. {_version} supporting PubSup protocol 1.10";
     }
-
-    #region API
-    /// <summary>
-    /// Helper method that creates the consumer binding.
-    /// </summary>
-    /// <param name="variableName">Name of the variable.</param>
-    /// <param name="encoding">The encoding.</param>
-    /// <returns>IConsumerBinding.</returns>
-    /// <exception cref="System.ArgumentOutOfRangeException">variableName</exception>
-    public IConsumerBinding GetConsumerBinding(string variableName, BuiltInType encoding)
-    {
-      if (variableName == "Value1")
-      {
-        Value1 = new ConsumerBindingMonitoredValue<DateTime>(encoding);
-        Value1.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<DateTime>)x).Value.ToString()}");
-        return Value1;
-      }
-      else if (variableName == "Value2")
-      {
-        Value2 = new ConsumerBindingMonitoredValue<Int32>(encoding);
-        Value2.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<Int32>)x).Value.ToString()}");
-        return Value2;
-      }
-      else
-      {
-        IConsumerBinding _return = null;
-        switch (encoding)
-        {
-          case BuiltInType.Boolean:
-            _return = AddBinding<Boolean>(variableName, BuiltInType.Boolean);
-            break;
-          case BuiltInType.SByte:
-            _return = AddBinding<SByte>(variableName, BuiltInType.SByte);
-            break;
-          case BuiltInType.Byte:
-            _return = AddBinding<Byte>(variableName, BuiltInType.Byte);
-            break;
-          case BuiltInType.Int16:
-            _return = AddBinding<Int16>(variableName, BuiltInType.Int16);
-            break;
-          case BuiltInType.UInt16:
-            _return = AddBinding<UInt16>(variableName, BuiltInType.UInt16);
-            break;
-          case BuiltInType.Int32:
-            _return = AddBinding<Int32>(variableName, BuiltInType.Int32);
-            break;
-          case BuiltInType.UInt32:
-            _return = AddBinding<UInt32>(variableName, BuiltInType.UInt32);
-            break;
-          case BuiltInType.Int64:
-            _return = AddBinding<Int64>(variableName, BuiltInType.Int64);
-            break;
-          case BuiltInType.UInt64:
-            _return = AddBinding<UInt64>(variableName, BuiltInType.UInt64);
-            break;
-          case BuiltInType.Float:
-            _return = AddBinding<float>(variableName, BuiltInType.Float);
-            break;
-          case BuiltInType.Double:
-            _return = AddBinding<Double>(variableName, BuiltInType.Double);
-            break;
-          case BuiltInType.String:
-            _return = AddBinding<String>(variableName, BuiltInType.String);
-            break;
-          case BuiltInType.DateTime:
-            _return = AddBinding<DateTime>(variableName, BuiltInType.DateTime);
-            break;
-          case BuiltInType.Guid:
-            _return = AddBinding<Guid>(variableName, BuiltInType.Guid);
-            break;
-          case BuiltInType.Null:
-          case BuiltInType.ByteString:
-          case BuiltInType.XmlElement:
-          case BuiltInType.NodeId:
-          case BuiltInType.ExpandedNodeId:
-          case BuiltInType.StatusCode:
-          case BuiltInType.QualifiedName:
-          case BuiltInType.LocalizedText:
-          case BuiltInType.ExtensionObject:
-          case BuiltInType.DataValue:
-          case BuiltInType.Variant:
-          case BuiltInType.DiagnosticInfo:
-          case BuiltInType.Enumeration:
-          default:
-            throw new ArgumentOutOfRangeException("encoding");
-        }
-        return _return;
-      }
-    }
-    #endregion
 
     #region Window
     public string WindowTitle
@@ -239,31 +149,80 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     private ICommand b_HelpDocumentation;
     #endregion
 
-    #region IConsumerViewModel Consumer User Interface ViewModel implementation
-    public IPAddress MulticastGroupIPAddress
+    #region IConsumerViewModel 
+    /// <summary>
+    /// Saves the consumer user settings.
+    /// </summary>
+    public void SaveConsumerUserSettings()
+    {
+      Properties.Settings.Default.UDPPort = UDPPort;
+      IPAddress _ma = GetMulticastGroupIPAddress();
+      if (_ma == null)
+        Properties.Settings.Default.JoinMulticastGroup = false;
+      else
+      {
+        Properties.Settings.Default.JoinMulticastGroup = true;
+        Properties.Settings.Default.DefaultMulticastGroup = _ma.ToString();
+      }
+    }
+    /// <summary>
+    /// Gets or sets the consumer received bytes.
+    /// </summary>
+    /// <value>The consumer received bytes.</value>
+    public int ConsumerReceivedBytes
     {
       get
       {
-        try
-        {
-          if (!MulticastGroupSelection)
-            return null;
-          Controls.IPAddressValidationRule _vr = new IPAddressValidationRule();
-          ValidationResult _res = _vr.Validate(MulticastGroup, CultureInfo.InvariantCulture);
-          if (!_res.IsValid)
-          {
-            Trace($"Removed multicast grop because of error {_res.ErrorContent}");
-            MulticastGroupSelection = false;
-            return null;
-          }
-          Trace($"Applied muticast group: {MulticastGroup}"); 
-          return IPAddress.Parse(MulticastGroup);
-        }
-        catch (Exception)
-        {
-          MulticastGroupSelection = false;
-          return null;
-        }
+        return b_ConsumerBytesReceived;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<int>(value, ref b_ConsumerBytesReceived, "ConsumerReceivedBytes", this);
+      }
+    }
+    /// <summary>
+    /// Gets or sets the number of consumer received frames .
+    /// </summary>
+    /// <value>The consumer frames received.</value>
+    public int ConsumerFramesReceived
+    {
+      get
+      {
+        return b_ConsumerFramesReceived;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<int>(value, ref b_ConsumerFramesReceived, "ConsumerFramesReceived", this);
+      }
+    }
+    /// <summary>
+    /// Gets or sets the consumer update configuration command.
+    /// </summary>
+    /// <value>The consumer update configuration <see cref="ICommand" />.</value>
+    public ICommand ConsumerUpdateConfiguration
+    {
+      get
+      {
+        return b_ConsumerUpdateConfiguration;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ConsumerUpdateConfiguration, "ConsumerUpdateConfiguration", this);
+      }
+    }
+    /// <summary>
+    /// Gets or sets the last consumer error message.
+    /// </summary>
+    /// <value>The consumer error message.</value>
+    public string ConsumerErrorMessage
+    {
+      get
+      {
+        return b_ConsumerErrorMessage;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<string>(value, ref b_ConsumerErrorMessage, "ConsumerErrorMessage", this);
       }
     }
     /// <summary>
@@ -275,35 +234,80 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       GalaSoft.MvvmLight.Threading.DispatcherHelper.RunAsync((() => ConsumerLog.Insert(0, message)));
     }
     /// <summary>
-    /// Gets or sets the value1 - an example of OPC UA data binded to the <see cref="System.Windows.Controls.TextBox"/>.
+    /// Helper method that creates the consumer binding.
     /// </summary>
-    /// <value>The value1 represented by the <see cref="ConsumerBindingMonitoredValue"/>.</value>
-    public ConsumerBindingMonitoredValue<DateTime> Value1
+    /// <param name="variableName">Name of the variable.</param>
+    /// <param name="encoding">The encoding.</param>
+    /// <returns>IConsumerBinding.</returns>
+    /// <exception cref="System.ArgumentOutOfRangeException">variableName</exception>
+    public IConsumerBinding GetConsumerBinding(string variableName, BuiltInType encoding)
     {
-      get
+      IConsumerBinding _return = null;
+      switch (encoding)
       {
-        return b_Value1;
+        case BuiltInType.Boolean:
+          _return = AddBinding<Boolean>(variableName, BuiltInType.Boolean);
+          break;
+        case BuiltInType.SByte:
+          _return = AddBinding<SByte>(variableName, BuiltInType.SByte);
+          break;
+        case BuiltInType.Byte:
+          _return = AddBinding<Byte>(variableName, BuiltInType.Byte);
+          break;
+        case BuiltInType.Int16:
+          _return = AddBinding<Int16>(variableName, BuiltInType.Int16);
+          break;
+        case BuiltInType.UInt16:
+          _return = AddBinding<UInt16>(variableName, BuiltInType.UInt16);
+          break;
+        case BuiltInType.Int32:
+          _return = AddBinding<Int32>(variableName, BuiltInType.Int32);
+          break;
+        case BuiltInType.UInt32:
+          _return = AddBinding<UInt32>(variableName, BuiltInType.UInt32);
+          break;
+        case BuiltInType.Int64:
+          _return = AddBinding<Int64>(variableName, BuiltInType.Int64);
+          break;
+        case BuiltInType.UInt64:
+          _return = AddBinding<UInt64>(variableName, BuiltInType.UInt64);
+          break;
+        case BuiltInType.Float:
+          _return = AddBinding<float>(variableName, BuiltInType.Float);
+          break;
+        case BuiltInType.Double:
+          _return = AddBinding<Double>(variableName, BuiltInType.Double);
+          break;
+        case BuiltInType.String:
+          _return = AddBinding<String>(variableName, BuiltInType.String);
+          break;
+        case BuiltInType.DateTime:
+          _return = AddBinding<DateTime>(variableName, BuiltInType.DateTime);
+          break;
+        case BuiltInType.Guid:
+          _return = AddBinding<Guid>(variableName, BuiltInType.Guid);
+          break;
+        case BuiltInType.Null:
+        case BuiltInType.ByteString:
+        case BuiltInType.XmlElement:
+        case BuiltInType.NodeId:
+        case BuiltInType.ExpandedNodeId:
+        case BuiltInType.StatusCode:
+        case BuiltInType.QualifiedName:
+        case BuiltInType.LocalizedText:
+        case BuiltInType.ExtensionObject:
+        case BuiltInType.DataValue:
+        case BuiltInType.Variant:
+        case BuiltInType.DiagnosticInfo:
+        case BuiltInType.Enumeration:
+        default:
+          throw new ArgumentOutOfRangeException("encoding");
       }
-      set
-      {
-        PropertyChanged.RaiseHandler<ConsumerBindingMonitoredValue<DateTime>>(value, ref b_Value1, "Value1", this);
-      }
+      return _return;
     }
-    /// <summary>
-    /// Gets or sets the value2 - an example of OPC UA data binded to the <see cref="System.Windows.Controls.TextBox"/>.
-    /// </summary>
-    /// <value>The value2.</value>
-    public ConsumerBindingMonitoredValue<Int32> Value2
-    {
-      get
-      {
-        return b_Value2;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<ConsumerBindingMonitoredValue<Int32>>(value, ref b_Value2, "Value2", this);
-      }
-    }
+    #endregion
+
+    #region Consumer ViewModel implementation
     /// <summary>
     /// Gets or sets the UDP port.
     /// </summary>
@@ -316,52 +320,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       }
       set
       {
-        if (PropertyChanged.RaiseHandler<int>(value, ref b_UDPPort, "UDPPort", this))
-          Properties.Settings.Default.UDPPort = value;
-      }
-    }
-    public int ConsumerBytesReceived
-    {
-      get
-      {
-        return b_ConsumerBytesReceived;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<int>(value, ref b_ConsumerBytesReceived, "ConsumerBytesReceived", this);
-      }
-    }
-    public int ConsumerFramesReceived
-    {
-      get
-      {
-        return b_ConsumerFramesReceived;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<int>(value, ref b_ConsumerFramesReceived, "ConsumerFramesReceived", this);
-      }
-    }
-    public ICommand ConsumerUpdateConfiguration
-    {
-      get
-      {
-        return b_ConsumerUpdateConfiguration;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ConsumerUpdateConfiguration, "ConsumerUpdateConfiguration", this);
-      }
-    }
-    public string ConsumerErrorMessage
-    {
-      get
-      {
-        return b_ConsumerErrorMessage;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<string>(value, ref b_ConsumerErrorMessage, "ConsumerErrorMessage", this);
+        PropertyChanged.RaiseHandler<int>(value, ref b_UDPPort, "UDPPort", this);
       }
     }
     public ObservableCollection<string> ConsumerLog
@@ -397,20 +356,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         PropertyChanged.RaiseHandler<bool>(value, ref b_MulticastGroupSelection, "MulticastGroupSelection", this);
       }
     }
-    //private part
-    private bool b_MulticastGroupSelection;
-    private string b_MulticastGroup;
-    private ObservableCollection<string> b_ConsumerLog;
-    private string b_ConsumerErrorMessage;
-    private ICommand b_ConsumerUpdateConfiguration;
-    private int b_ConsumerFramesReceived;
-    private int b_ConsumerBytesReceived;
-    private int b_UDPPort;
-    private ConsumerBindingMonitoredValue<DateTime> b_Value1;
-    private ConsumerBindingMonitoredValue<Int32> b_Value2;
     #endregion
 
-    #region Producer user interface
+    #region Producer ViewModel implementation
     public int BytesSent
     {
       get
@@ -479,14 +427,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         PropertyChanged.RaiseHandler<string>(value, ref b_ProducerErrorMessage, "ProducerErrorMessage", this);
       }
     }
-
-    //private part
-    private int b_BytesSent;
-    private int b_PackagesSent;
-    private string b_RemoteHost;
-    private int b_RemotePort;
-    private ICommand b_ProducerRestart;
-    private string b_ProducerErrorMessage;
     #endregion
 
     #region INotifyPropertyChanged
@@ -494,6 +434,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     #endregion
 
     #region private
+    //types
     private class OpenFileCommand : ICommand
     {
       private string m_FileName;
@@ -576,12 +517,59 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         }
       }
     }
+    //vars
+    //Consumer private part
+    private bool b_MulticastGroupSelection;
+    private string b_MulticastGroup;
+    private ObservableCollection<string> b_ConsumerLog;
+    private string b_ConsumerErrorMessage;
+    private ICommand b_ConsumerUpdateConfiguration;
+    private int b_ConsumerFramesReceived;
+    private int b_ConsumerBytesReceived;
+    private int b_UDPPort;
+    //producer private part
+    private int b_BytesSent;
+    private int b_PackagesSent;
+    private string b_RemoteHost;
+    private int b_RemotePort;
+    private ICommand b_ProducerRestart;
+    private string b_ProducerErrorMessage;
+    //methods
     private IConsumerBinding AddBinding<type>(string variableName, BuiltInType encoding)
     {
       ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(encoding);
       _return.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).Value.ToString()}");
       return _return;
     }
+    private IPAddress GetMulticastGroupIPAddress()
+    {
+      try
+      {
+        if (!MulticastGroupSelection)
+          return null;
+        Controls.IPAddressValidationRule _vr = new IPAddressValidationRule();
+        ValidationResult _res = _vr.Validate(MulticastGroup, CultureInfo.InvariantCulture);
+        if (!_res.IsValid)
+        {
+          Trace($"Removed multicast group because of error {_res.ErrorContent}");
+          MulticastGroupSelection = false;
+          return null;
+        }
+        return IPAddress.Parse(MulticastGroup);
+      }
+      catch (Exception _ex)
+      {
+        Trace($"Removed multicast group because of exception: {_ex.GetType().Name} with the message: {_ex.Message}");
+        MulticastGroupSelection = false;
+        return null;
+      }
+    }
+#if DEBUG
+    internal IPAddress DebugGetMulticastGroupIPAddress()
+    {
+      return GetMulticastGroupIPAddress();
+    }
+#endif
     #endregion
 
   }

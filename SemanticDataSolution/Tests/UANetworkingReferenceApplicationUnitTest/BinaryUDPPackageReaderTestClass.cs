@@ -4,6 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.DataManagement.Encoding;
 using System.Xml;
 using System.Net;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
 {
@@ -88,7 +90,8 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
     public void ExclusiveMulticastGroupTestMethod()
     {
       bool _ExclusiveAddressUse = true;
-      using (Consumer.BinaryUDPPackageReader _reader1 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => Console.WriteLine(x), null))
+      List<string> _traceList = new List<string>();
+      using (Consumer.BinaryUDPPackageReader _reader1 = new Consumer.BinaryUDPPackageReader(new UADecoder(), 4840, x => _traceList.Add(x), null))
       {
         try
         {
@@ -96,12 +99,17 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
           _reader1.ReuseAddress = _ExclusiveAddressUse;
           _reader1.MulticastGroup = IPAddress.Parse("239.0.0.1");
           _reader1.State.Enable();
+          Thread.Sleep(200);
+          foreach (string _item in _traceList)
+            Console.WriteLine(_item);
         }
-        catch (Exception)
+        catch (Exception _ex)
         {
+          Assert.IsNotNull(_ex);
           Assert.Fail();
         }
-        _reader1.MulticastGroup = IPAddress.Parse("239.0.0.1"); 
+        Assert.AreEqual<int>(2, _traceList.Count);
+        _reader1.MulticastGroup = IPAddress.Parse("239.0.0.1");
       }
     }
     #endregion

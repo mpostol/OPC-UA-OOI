@@ -132,7 +132,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
             m_NumberOfSentMessages++;
             m_ViewModel.PackagesSent = m_NumberOfSentMessages;
             IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, m_remotePort);
-            m_UdpClient.Send(buffer, buffer.Length, _IPEndPoint);
+            m_UdpClient.Send(buffer, buffer.Length, _IPEndPoint); //TODO https://github.com/mpostol/OPC-UA-OOI/issues/155
             _msg = String.Format("After Send m_NumberOfSentBytes = {0}, m_NumberOfSentMessages = {1}", m_NumberOfSentBytes, m_NumberOfSentMessages);
           }
           catch (SocketException e)

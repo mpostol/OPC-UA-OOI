@@ -95,6 +95,15 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     }
     #endregion
 
+    #region override
+    public override string ToString()
+    {
+      string _multicastGroupMessage = m_MulticastGroup == null ? $"multicast off" : $"joined multicast: {m_MulticastGroup}";
+      string _reuseAddressMessage = m_ReuseAddress ? "Address is reused" : "Address is not reused.";
+      return $"BinaryUDPPackageReader UPD Port: {m_UDPPort} {_multicastGroupMessage} {_reuseAddressMessage}";
+    }
+    #endregion
+
     #region private
     //types
     private class MyState : IAssociationState
@@ -173,7 +182,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
         m_NumberOfPackages++;
         m_NumberOfBytes += _receiveBytes.Length;
         m_ViewModel.ConsumerFramesReceived = m_NumberOfPackages;
-        m_ViewModel.ConsumerBytesReceived = m_NumberOfBytes;
+        m_ViewModel.ConsumerReceivedBytes = m_NumberOfBytes;
         int _length = _receiveBytes == null ? -1 : _receiveBytes.Length;
         m_Trace($"Message<{_UEndPoint.Address.ToString()}:{_UEndPoint.Port} [{_length}]>: {String.Join(", ", new ArraySegment<byte>(_receiveBytes, 0, Math.Min(_receiveBytes.Length, 80)).Select<byte, string>(x => x.ToString("X")).ToArray<string>())}");
         MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
@@ -200,7 +209,11 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       IPEndPoint _ep = new IPEndPoint(IPAddress.Any, m_UDPPort);
       m_UdpClient.Client.Bind(_ep);
       if (m_MulticastGroup != null)
+      {
+        m_Trace($"Joining the multicast group: {m_MulticastGroup}");
         m_UdpClient.JoinMulticastGroup(m_MulticastGroup);
+      }
+      m_Trace(ToString());
       m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), m_UdpClient);
     }
     private void OnDisable()

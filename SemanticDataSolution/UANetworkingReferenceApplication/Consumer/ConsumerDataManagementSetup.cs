@@ -53,6 +53,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       {
         m_restart = restart;
       }
+      /// <summary>
+      /// Occurs when changes occur that affect whether or not the command should execute.
+      /// </summary>
       public event EventHandler CanExecuteChanged;
       public bool CanExecute(object parameter)
       {
@@ -93,6 +96,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     private void Restart()
     {
       m_ViewModel.Trace("Entering Restart");
+      m_ViewModel.SaveConsumerUserSettings();
       Dispose();
       Setup();
     }

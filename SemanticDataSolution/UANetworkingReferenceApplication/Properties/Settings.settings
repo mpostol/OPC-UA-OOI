@@ -24,7 +24,13 @@
       <Value Profile="(Default)">ConfigurationDataProducer.xml</Value>
     </Setting>
     <Setting Name="DefaultMulticastGroup" Type="System.String" Scope="User">
-      <Value Profile="(Default)">139.255.255.1</Value>
+      <Value Profile="(Default)">239.255.255.1</Value>
+    </Setting>
+    <Setting Name="JoinMulticastGroup" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ReuseAddress" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

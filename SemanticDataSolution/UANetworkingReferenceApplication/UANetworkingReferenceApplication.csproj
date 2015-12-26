@@ -105,11 +105,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Consumer\BinaryUDPPackageReader.cs" />
-    <Compile Include="Controls\IPAddressControlViewModel.cs" />
-    <Compile Include="Controls\Constants.cs" />
-    <Compile Include="Controls\IPAddressControl.xaml.cs">
-      <DependentUpon>IPAddressControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\IPAddressValidationRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
@@ -118,10 +113,6 @@
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="Controls\IPAddressControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

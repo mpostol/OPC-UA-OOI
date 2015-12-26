@@ -103,13 +103,37 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("139.255.255.1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("239.255.255.1")]
         public string DefaultMulticastGroup {
             get {
                 return ((string)(this["DefaultMulticastGroup"]));
             }
             set {
                 this["DefaultMulticastGroup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool JoinMulticastGroup {
+            get {
+                return ((bool)(this["JoinMulticastGroup"]));
+            }
+            set {
+                this["JoinMulticastGroup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ReuseAddress {
+            get {
+                return ((bool)(this["ReuseAddress"]));
+            }
+            set {
+                this["ReuseAddress"] = value;
             }
         }
     }

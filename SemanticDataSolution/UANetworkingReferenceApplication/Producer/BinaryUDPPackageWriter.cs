@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using UAOOI.SemanticData.DataManagement;
 using UAOOI.SemanticData.DataManagement.Encoding;
 using UAOOI.SemanticData.DataManagement.MessageHandling;
@@ -28,9 +25,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       State = new MyState(this);
       m_RemoteHostName = remoteHostName;
       m_remotePort = remotePort;
-      trace("Created BinaryUDPPackageWriter");
       ViewModel.BytesSent = 0;
       ViewModel.PackagesSent = 0;
+      trace("Created BinaryUDPPackageWriter");
     }
     #endregion
 
@@ -61,7 +58,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
           m_NumberOfSentMessages++;
           m_ViewModel.PackagesSent = m_NumberOfSentMessages;
           IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, m_remotePort);
-          _UdpClient.Send(buffer, buffer.Length, _IPEndPoint); //TODO https://github.com/mpostol/OPC-UA-OOI/issues/155
+          _UdpClient.Send(buffer, buffer.Length, _IPEndPoint);
           _traceMessage = String.Format("After Send m_NumberOfSentBytes = {0}, m_NumberOfSentMessages = {1}", m_NumberOfSentBytes, m_NumberOfSentMessages);
         }
         catch (SocketException e)
@@ -164,7 +161,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     //vars
     private UdpClient m_UdpClient;
     private IPAddress m_IPAddresses;
-    private IPHostEntry m_remoteHostInfo;
     private int m_remotePort = 4800;
     private string m_RemoteHostName;
     private Action<string> m_Trace;
@@ -174,10 +170,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
       m_Trace("Entering OnEnable");
       Debug.Assert(m_UdpClient == null);
       // Get DNS host information.
-      m_remoteHostInfo = Dns.GetHostEntry(m_RemoteHostName);
+      IPAddress[] _remoteHostAddresses = Dns.GetHostAddresses(m_RemoteHostName);
       // Get the DNS IP addresses associated with the host.
       // Get first IPAddress in list return by DNS.
-      m_IPAddresses = m_remoteHostInfo.AddressList.Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
+      m_IPAddresses = _remoteHostAddresses.Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
       Debug.Assert(m_IPAddresses != null);
       m_UdpClient = new UdpClient();
       string _msg = String.Format("Created UdpClient for m_RemoteHostName: {0} Ip : {1}", m_RemoteHostName, m_IPAddresses.ToString());

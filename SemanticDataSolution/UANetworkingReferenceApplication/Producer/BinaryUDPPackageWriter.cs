@@ -49,8 +49,11 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     {
       lock (this)
       {
-        string _msg = String.Format("Entering SendFrame buffer.Length = {0}", buffer.Length);
-        m_Trace(_msg);
+        string _traceMessage = String.Format("Entering SendFrame buffer.Length = {0}", buffer.Length);
+        m_Trace(_traceMessage);
+        UdpClient _UdpClient = m_UdpClient;
+        if (_UdpClient == null)
+          return;
         try
         {
           m_NumberOfSentBytes += buffer.Length;
@@ -58,28 +61,28 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
           m_NumberOfSentMessages++;
           m_ViewModel.PackagesSent = m_NumberOfSentMessages;
           IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, m_remotePort);
-          m_UdpClient.Send(buffer, buffer.Length, _IPEndPoint); //TODO https://github.com/mpostol/OPC-UA-OOI/issues/155
-          _msg = String.Format("After Send m_NumberOfSentBytes = {0}, m_NumberOfSentMessages = {1}", m_NumberOfSentBytes, m_NumberOfSentMessages);
+          _UdpClient.Send(buffer, buffer.Length, _IPEndPoint); //TODO https://github.com/mpostol/OPC-UA-OOI/issues/155
+          _traceMessage = String.Format("After Send m_NumberOfSentBytes = {0}, m_NumberOfSentMessages = {1}", m_NumberOfSentBytes, m_NumberOfSentMessages);
         }
         catch (SocketException e)
         {
-          _msg = String.Format("SocketException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
+          _traceMessage = String.Format("SocketException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
         }
         catch (ArgumentNullException e)
         {
-          _msg = String.Format("ArgumentNullException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
+          _traceMessage = String.Format("ArgumentNullException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
         }
         catch (NullReferenceException e)
         {
-          _msg = String.Format("NullReferenceException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
+          _traceMessage = String.Format("NullReferenceException caught!!! Source : {0} Message : {1}", e.Source, e.Message);
         }
         catch (Exception e)
         {
-          _msg = String.Format("Exception caught!!! Source : {0} Message : {1}", e.Source, e.Message);
+          _traceMessage = String.Format("Exception caught!!! Source : {0} Message : {1}", e.Source, e.Message);
         }
         finally
         {
-          m_Trace(_msg);
+          m_Trace(_traceMessage);
         }
       }
     }

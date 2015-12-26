@@ -13,12 +13,12 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
   internal sealed class OPCUAServerProducerSimulator : DataManagementSetup, IDisposable
   {
     #region creator
-    internal static void CreateDevice(Action<IDisposable> toDispose, Action<string> trace, IProducerViewModel ViewModel)
+    internal static void CreateDevice(IProducerViewModel viewModel, Action<IDisposable> toDispose, Action<string> trace)
     {
       Current = new OPCUAServerProducerSimulator();
       toDispose(Current);
       Current.m_Trace = trace;
-      Current.m_ViewModel = ViewModel;
+      Current.m_ViewModel = viewModel;
       Current.Setup();
     }
     #endregion

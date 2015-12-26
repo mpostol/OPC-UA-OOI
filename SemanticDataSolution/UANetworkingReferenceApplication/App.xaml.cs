@@ -22,7 +22,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
       MainWindow window = new MainWindow();
       MainWindowViewModel _cbf = (MainWindowViewModel)window.DataContext;
       Consumer.ConsumerDataManagementSetup.CreateDevice(_cbf, x => m_DisposableCollection.Add(x));
-      Producer.OPCUAServerProducerSimulator.CreateDevice(x => m_DisposableCollection.Add(x), y => m_Log.Add(y), _cbf);
+      Producer.OPCUAServerProducerSimulator.CreateDevice(_cbf, x => m_DisposableCollection.Add(x), y => m_Log.Add(y));
       window.Show();
     }
     /// <summary>

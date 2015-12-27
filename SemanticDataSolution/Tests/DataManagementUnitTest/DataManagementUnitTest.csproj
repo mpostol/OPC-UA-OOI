@@ -97,6 +97,7 @@
     <Compile Include="ExtensionsUnitTest.cs" />
     <Compile Include="ProducerBindingMonitoredValueUnitTest.cs" />
     <Compile Include="ProducerAssociationUnitTest.cs" />
+    <Compile Include="BinaryDecoderUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OPCUAOOIKey.snk" />

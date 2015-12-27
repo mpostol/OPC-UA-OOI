@@ -35,9 +35,9 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <value>The content mask is represented as unsigned number <see cref="UInt64" />.
     /// The value is provided by the message.
     /// The order of the bits starting from the least significant bit matches the order of the data items within the data set.</value>
-    public override ulong ContentMask
+    public override ulong ContentMask //TODO must be implemented - get it from message.
     {
-      get { return ulong.MaxValue; } //TODO must be implemented - get it from message.
+      get { return ulong.MaxValue; } 
     }
     /// <summary>
     /// Gets or sets the message header.

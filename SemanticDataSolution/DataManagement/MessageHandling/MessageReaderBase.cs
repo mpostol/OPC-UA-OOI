@@ -23,7 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       if (uaDecoder == null)
         throw new ArgumentNullException(nameof(uaDecoder));
       m_UADecoder = uaDecoder;
-      m_ReadValueDelegate = ReadValueVariant; //TODO Variant encoding must be configurable https://github.com/mpostol/OPC-UA-OOI/issues/134
+      m_ReadValueDelegate = ReadValueVariant; 
     }
     #endregion
 
@@ -64,14 +64,25 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="length">Number of items in the data set.</param>
     void IMessageReader.UpdateMyValues(Func<int, IConsumerBinding> update, int length)
     {
-      UInt64 _mask = 0x1;
+      //UInt64 _mask = 0x1;
       for (int i = 0; i < length; i++)
       {
         //TODO: Implement ContentMask https://github.com/mpostol/OPC-UA-OOI/issues/89
         //if ((ContentMask & _mask) > 0)
         //{
         IConsumerBinding _binding = update(i);
-        m_ReadValueDelegate(_binding);
+        switch (MessageHeader.FieldsEncoding)
+        {
+          case FieldEncodingEnum.VariantFieldEncoding:
+            ReadValueVariant(_binding);
+            break;
+          case FieldEncodingEnum.CompressedFieldEncoding:
+            ReadValue(_binding);
+            break;
+          case FieldEncodingEnum.DataValueFieldEncoding:
+            ReadDataValue(_binding);
+            break;
+        }
         //}
         //_mask = _mask << 1;
       }
@@ -215,7 +226,16 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     private void ReadValueVariant(IConsumerBinding consumerBinding)
     {
       IVariant _ret = m_UADecoder.ReadVariant(this);
+      AssertTypeMach(_ret.UATypeInfo, consumerBinding.Encoding);
       consumerBinding.Assign2Repository(_ret.Value);
+    }
+    private void ReadDataValue(IConsumerBinding _binding)
+    {
+      throw new NotImplementedException();
+    }
+    private void AssertTypeMach(UATypeInfo uATypeInfo, BuiltInType encoding)
+    {
+      //TODO MessageReaderBase.AssertTypeMach - must be implemented
     }
     #endregion
 

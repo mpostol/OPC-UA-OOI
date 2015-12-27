@@ -29,7 +29,7 @@ namespace UAOOI.SemanticData.DataManagement
         if (_collection.ContainsKey(_configuration.Name))
           throw new ArgumentOutOfRangeException("Name", "Duplicated transport name");
         IMessageHandler _handler = null;
-        switch (_configuration.TransportRole)  //TODO:DataSetWriterId must be configurable https://github.com/mpostol/OPC-UA-OOI/issues/136
+        switch (_configuration.TransportRole)
         {
           case AssociationRole.Consumer:
             MessageReaderConfiguration _readerConfiguration = (MessageReaderConfiguration)_configuration;

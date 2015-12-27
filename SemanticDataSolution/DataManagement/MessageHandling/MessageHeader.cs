@@ -105,6 +105,14 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     /// <value>Number of fields of the DataSet contained in the Message.</value>
     public abstract UInt16 FieldCount { get; set; }
+    /// <summary>
+    /// Gets the fields encoding.
+    /// </summary>
+    /// <value>The value of type <see cref="FieldEncodingEnum"/> representing fields encoding.</value>
+    public FieldEncodingEnum FieldsEncoding
+    {
+      get { return (FieldEncodingEnum)(EncodingFlags & EncodingFlagsFieldEncodingMask); }
+    }
     #endregion
 
     #region private
@@ -172,8 +180,8 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       #region private
       //vars
       private HeaderWriter m_HeaderWriter;
-      FieldEncodingEnum m_Encoding = FieldEncodingEnum.VariantFieldEncoding;
-      MessageLengthFieldTypeEnum m_lengthFieldType = MessageLengthFieldTypeEnum.TwoBytes;
+      private FieldEncodingEnum m_Encoding = FieldEncodingEnum.VariantFieldEncoding;
+      private MessageLengthFieldTypeEnum m_lengthFieldType = MessageLengthFieldTypeEnum.TwoBytes;
       private MessageTypeEnum m_MessageType;
 
       //methods

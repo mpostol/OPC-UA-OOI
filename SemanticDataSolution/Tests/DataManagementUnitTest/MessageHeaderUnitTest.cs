@@ -108,6 +108,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       //Assert.AreEqual<ushort>(16, _header.FieldCount);
       //Assert.AreEqual<DateTime>(CommonDefinitions.TestMinimalDateTime, _header.TimeStamp);
       Assert.AreEqual<long>(8, _reader.m_Position);
+      Assert.AreEqual<FieldEncodingEnum>(FieldEncodingEnum.VariantFieldEncoding, _header.FieldsEncoding);
     }
 
     #region instrumentation

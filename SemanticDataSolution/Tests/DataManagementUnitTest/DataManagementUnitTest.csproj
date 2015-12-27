@@ -88,7 +88,7 @@
     <Compile Include="PersistentConfigurationUnitTest.cs" />
     <Compile Include="OPCUAServerProducerSimulatorUnitTest.cs" />
     <Compile Include="MessageWriterTestClass.cs" />
-    <Compile Include="MessageReaderTestClass.cs" />
+    <Compile Include="MessageReaderBaseTestClass.cs" />
     <Compile Include="PacketHeaderUnitTest.cs" />
     <Compile Include="MessageHeaderUnitTest.cs" />
     <Compile Include="UABinaryEncoderImplementationUnitTest.cs" />

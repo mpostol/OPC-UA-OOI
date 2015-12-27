@@ -385,7 +385,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       #endregion
 
     }
-    private MessageHeader() { }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MessageHeader"/> class.
+    /// </summary>
+    protected MessageHeader() { }
     #endregion
 
   }

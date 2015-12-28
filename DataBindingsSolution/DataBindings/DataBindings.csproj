@@ -26,6 +26,7 @@
     <DocumentationFile>bin\Debug\UAOOI.DataBindings.XML</DocumentationFile>
     <NoWarn>IDE0001,IDE0002,IDE0003</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

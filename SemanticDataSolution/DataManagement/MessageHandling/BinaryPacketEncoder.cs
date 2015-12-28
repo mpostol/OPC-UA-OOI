@@ -16,7 +16,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="uaEncoder">The ua encoder.</param>
     /// <param name="encoding">The encoding.</param>
     /// <param name="lengthFieldType">Type of the length field in the the message header.</param>
-    public BinaryPacketEncoder(IUAEncoder uaEncoder, FieldEncodingEnum encoding, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder, encoding, lengthFieldType) { }
+    public BinaryPacketEncoder(IUAEncoder uaEncoder, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder, lengthFieldType) { }
     /// <summary>
     /// Gets or sets the header of the packet.
     /// </summary>

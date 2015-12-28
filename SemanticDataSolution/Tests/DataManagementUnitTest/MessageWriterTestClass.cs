@@ -35,7 +35,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       _bmw.AttachToNetwork();
       ProducerBinding _binding = new ProducerBinding();
       _binding.Value = new TestClass();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, ushort.MaxValue, 0, DateTime.UtcNow, new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, FieldEncodingEnum.VariantFieldEncoding, ushort.MaxValue, 0, DateTime.UtcNow, new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
@@ -47,7 +47,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
       ProducerBinding _binding = new ProducerBinding(BuiltInType.Float);
       _binding.Value = new Nullable<float>();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, ushort.MaxValue, 0, DateTime.UtcNow, new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, FieldEncodingEnum.VariantFieldEncoding, ushort.MaxValue, 0,  DateTime.UtcNow, new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
@@ -62,6 +62,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       ((IMessageWriter)_bmw).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
                                    Convert.ToUInt16(CommonDefinitions.TestValues.Length),
                                    UInt64.MaxValue,
+                                   FieldEncodingEnum.VariantFieldEncoding,
                                    ushort.MaxValue,
                                    0,
                                    DateTime.UtcNow,
@@ -89,8 +90,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         int _sentItems = 0;
         Guid m_Guid = CommonDefinitions.TestGuid;
         ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
-                                        Convert.ToUInt16(CommonDefinitions.TestValues.Length),
-                                        UInt64.MaxValue,
+                                        Convert.ToUInt16(CommonDefinitions.TestValues.Length), 
+                                        UInt64.MaxValue, 
+                                        FieldEncodingEnum.VariantFieldEncoding,
                                         CommonDefinitions.DataSetId,
                                         0,
                                         CommonDefinitions.TestMinimalDateTime, new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 }
@@ -265,7 +267,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         Assert.IsInstanceOfType(value, typeof(bool));
       }
-      protected override void CreateMessage(ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
+      protected override void CreateMessage(FieldEncodingEnum encoding, ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
       {
         MassageCreated = true;
       }
@@ -367,7 +369,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   {
 
     #region creator
-    public BinaryUDPPackageWriter(string remoteHostName, int port, IUAEncoder uaEncoder) : base(uaEncoder, CommonDefinitions.TestGuid, FieldEncodingEnum.VariantFieldEncoding, MessageLengthFieldTypeEnum.TwoBytes)
+    public BinaryUDPPackageWriter(string remoteHostName, int port, IUAEncoder uaEncoder) : base(uaEncoder, CommonDefinitions.TestGuid, MessageLengthFieldTypeEnum.TwoBytes)
     {
       State = new MyState();
       m_RemoteHostName = remoteHostName;

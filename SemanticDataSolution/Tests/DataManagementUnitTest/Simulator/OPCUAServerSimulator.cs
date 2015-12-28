@@ -208,9 +208,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
       get { throw new NotImplementedException(); }
     }
-
     public void Send
-      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, ushort dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
+      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, ushort dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
     {
       if (length > 2)
         throw new ArgumentOutOfRangeException("length");
@@ -242,7 +241,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       Assert.IsNotNull(m_HaveSendData);
       Assert.IsTrue(m_HaveBeenActivated);
     }
-
     private bool m_HaveBeenActivated = false;
     private bool m_HaveSendData;
     private Object[] m_Buffer = null;

@@ -18,9 +18,8 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </summary>
     /// <param name="uaEncoder">The ua encoder.</param>
     /// <param name="producerId">The producer identifier.</param>
-    /// <param name="encoding">The encoding.</param>
     /// <param name="lengthFieldType">Type of the length field.</param>
-    public BinaryEncoder(IUAEncoder uaEncoder, Guid producerId, FieldEncodingEnum encoding, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder, encoding, lengthFieldType)
+    public BinaryEncoder(IUAEncoder uaEncoder, Guid producerId, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder, lengthFieldType)
     {
       m_producerId = producerId;
     }

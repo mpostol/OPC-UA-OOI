@@ -23,7 +23,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       if (uaEncoder == null)
         throw new ArgumentNullException(nameof(uaEncoder));
       m_UAEncoder = uaEncoder;
-      m_WriteValueDelegate = WriteValueVariant;
     }
     #endregion
 
@@ -47,6 +46,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="length">Number of items to be send used to calculate the length of the message.</param>
     /// <param name="contentMask">The content mask represented as unsigned number <see cref="UInt64" />. The order of the bits starting from the least significant
     /// bit matches the order of the data items within the data set.</param>
+    /// <param name="encoding">The encoding.</param>
     /// <param name="dataSetWriterId">The data set identifier.</param>
     /// <param name="messageSequenceNumber">The message sequence number. A monotonically increasing sequence number assigned by the publisher to each message sent.</param>
     /// <param name="timeStamp">The time stamp - the time the Data was collected.</param>
@@ -54,28 +54,41 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <exception cref="System.ArgumentOutOfRangeException">Impossible to convert null value
     /// or</exception>
     void IMessageWriter.Send
-      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, UInt16 dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
+      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, UInt16 dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
     {
       lock (this)
       {
         if (State.State != HandlerState.Operational)
           return;
         ContentMask = contentMask;
-        CreateMessage(dataSetWriterId, length, messageSequenceNumber, timeStamp, configurationVersion);
-        UInt64 _mask = 0x1;
+       
+        CreateMessage(encoding, dataSetWriterId, length, messageSequenceNumber, timeStamp, configurationVersion);
+        //UInt64 _mask = 0x1;
         for (int i = 0; i < length; i++)
         {
           //TODO: Implement ContentMask https://github.com/mpostol/OPC-UA-OOI/issues/89
           //if ((ContentMask & _mask) > 0)
           //{
           IProducerBinding _pb = producerBinding(i);
-          m_WriteValueDelegate(_pb);
+          switch (encoding)
+          {
+            case FieldEncodingEnum.VariantFieldEncoding:
+              WriteValueVariant(_pb);
+              break;
+            case FieldEncodingEnum.CompressedFieldEncoding:
+              WriteValue(_pb);
+              break;
+            case FieldEncodingEnum.DataValueFieldEncoding:
+              WriteDataValue(_pb);
+              break;
+          }
           //}
           //_mask = _mask << 1;
         }
         SendMessage();
       }
     }
+
     /// <summary>
     /// If implemented in derived class gets the state machine for this instance.
     /// </summary>
@@ -167,18 +180,21 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     }
     //vars
     private IUAEncoder m_UAEncoder;
-    private Action<IProducerBinding> m_WriteValueDelegate = null;
     //methods
     /// <summary>
     /// Creates the message.
     /// </summary>
+    /// <param name="encoding">The selected encoding for the message.</param>
     /// <param name="dataSetWriterId">The data set writer identifier.</param>
     /// <param name="fieldCount">The field count.</param>
     /// <param name="sequenceNumber">The sequence number.</param>
     /// <param name="timeStamp">The time stamp.</param>
     /// <param name="configurationVersion">The configuration version.</param>
     protected abstract void CreateMessage
-      (UInt16 dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion);
+      (FieldEncodingEnum encoding, UInt16 dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion);
+    /// <summary>
+    /// Finalize preparation and sends the message.
+    /// </summary>
     protected abstract void SendMessage();
     private void WriteValue(IProducerBinding producerBinding)
     {
@@ -271,6 +287,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       object value = producerBinding.GetFromRepository();
       Variant _variant = new Variant(new UATypeInfo(producerBinding.Encoding), value);
       m_UAEncoder.Write(this, _variant);
+    }
+    private void WriteDataValue(IProducerBinding _pb)
+    {
+      throw new NotImplementedException();
     }
     #endregion
 

@@ -24,9 +24,8 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="uaEncoder">The UA encoder.</param>
     /// <param name="encoding">The encoding.</param>
     /// <param name="lengthFieldType">Type of the length field.</param>
-    public BinaryMessageEncoder(IUAEncoder uaEncoder, FieldEncodingEnum encoding, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder)
+    public BinaryMessageEncoder(IUAEncoder uaEncoder, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder)
     {
-      m_Encoding = encoding;
       m_lengthFieldType = lengthFieldType;
     }
 
@@ -56,15 +55,16 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <summary>
     /// Creates the message.
     /// </summary>
+    /// <param name="encoding">The selected encoding for the message.</param>
     /// <param name="dataSetWriterId">The data set writer identifier.</param>
     /// <param name="fieldCount">The field count.</param>
     /// <param name="sequenceNumber">The sequence number.</param>
     /// <param name="timeStamp">The time stamp.</param>
     /// <param name="configurationVersion">The configuration version.</param>
-    protected override void CreateMessage(UInt16 dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
+    protected override void CreateMessage(FieldEncodingEnum encoding, ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
     {
       OnMessageAdding(dataSetWriterId);
-      MessageHeader = MessageHeader.GetProducerMessageHeader(this, m_Encoding, m_lengthFieldType, MessageTypeEnum.DataKeyFrame);
+      MessageHeader = MessageHeader.GetProducerMessageHeader(this, encoding, m_lengthFieldType, MessageTypeEnum.DataKeyFrame);
       //Create message header and placeholder for further header content.
       MessageHeader.ConfigurationVersion = configurationVersion;
       MessageHeader.FieldCount = fieldCount;
@@ -86,7 +86,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #endregion
 
     #region private
-    private FieldEncodingEnum m_Encoding;
     private MessageLengthFieldTypeEnum m_lengthFieldType;
 
     /// <summary>

@@ -81,6 +81,7 @@ namespace UAOOI.SemanticData.DataManagement
     private bool m_Modified = true;
     private Object m_lock = new object();
     private ushort m_MessageSequenceNumber = 0;
+    private FieldEncodingEnum m_Encoding;
     //TODO Handle Configuration Version  #140 at: https://github.com/mpostol/OPC-UA-OOI/issues/140
     private MessageHeader.ConfigurationVersionDataType m_ConfigurationVersion = new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 };
     //methods
@@ -101,6 +102,8 @@ namespace UAOOI.SemanticData.DataManagement
     protected internal override void AddMessageHandler(IMessageHandler messageHandler, AssociationConfiguration configuration)
     {
       base.AddMessageHandler(messageHandler, configuration);
+      ProducerAssociationConfiguration _conf = (ProducerAssociationConfiguration)configuration;
+      m_Encoding = FieldEncodingEnum.CompressedFieldEncoding; //TODO FieldEncodingEnum - add to configuration #152 https://github.com/mpostol/OPC-UA-OOI/issues/152
       AddMessageWriter(messageHandler as IMessageWriter);
     }
     private void ProducerBinding_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -124,12 +127,13 @@ namespace UAOOI.SemanticData.DataManagement
     {
       foreach (IMessageWriter _mwx in m_MessageWriter)
         lock (mLockObject)
-          _mwx.Send(x => m_DataSetBindings[x], Convert.ToUInt16(m_DataSetBindings.Length), UInt64.MaxValue, DataSetId, m_MessageSequenceNumber, DateTime.UtcNow, m_ConfigurationVersion);
+          _mwx.Send(x => m_DataSetBindings[x], Convert.ToUInt16(m_DataSetBindings.Length), UInt64.MaxValue, m_Encoding, DataSetId, m_MessageSequenceNumber, DateTime.UtcNow, m_ConfigurationVersion);
       m_MessageSequenceNumber = m_MessageSequenceNumber.IncRollOver();
     }
 
     #region IDisposable Support
     private bool disposedValue = false; // To detect redundant calls
+
     protected virtual void Dispose(bool disposing)
     {
       if (!disposedValue)

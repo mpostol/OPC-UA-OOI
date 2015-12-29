@@ -891,14 +891,17 @@
         <ProducerAssociationConfiguration>
           <AssociationName>Simple</AssociationName>
           <DataSetWriterId>12345</DataSetWriterId>
+          <FieldEncoding>VariantFieldEncoding</FieldEncoding>
         </ProducerAssociationConfiguration>
         <ProducerAssociationConfiguration>
           <AssociationName>AllTypes</AssociationName>
           <DataSetWriterId>54321</DataSetWriterId>
+          <FieldEncoding>VariantFieldEncoding</FieldEncoding>
         </ProducerAssociationConfiguration>
         <ProducerAssociationConfiguration>
           <AssociationName>MassTest</AssociationName>
           <DataSetWriterId>4321</DataSetWriterId>
+          <FieldEncoding>VariantFieldEncoding</FieldEncoding>
         </ProducerAssociationConfiguration>
       </ProducerAssociationConfigurations>
     </MessageHandlerConfiguration>

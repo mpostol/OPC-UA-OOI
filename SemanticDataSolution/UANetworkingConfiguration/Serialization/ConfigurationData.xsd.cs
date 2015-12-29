@@ -46,7 +46,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     }
     [DataMemberAttribute(EmitDefaultValue = true)]
     [XmlArray(IsNullable = false)]
-    [XmlArrayItem(Type = typeof(MessageWriterConfiguration), ElementName = "MessageWriterConfiguration") ]
+    [XmlArrayItem(Type = typeof(MessageWriterConfiguration), ElementName = "MessageWriterConfiguration")]
     [XmlArrayItem(Type = typeof(MessageReaderConfiguration), ElementName = "MessageReaderConfiguration")]
     public MessageHandlerConfiguration[] MessageHandlers
     {
@@ -298,7 +298,16 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
   }
   [DataContractAttribute(Name = "ProducerAssociationConfiguration", Namespace = CommonDefinitions.Namespace)]
   [SerializableAttribute()]
-  public partial class ProducerAssociationConfiguration : AssociationConfiguration { }
+  public partial class ProducerAssociationConfiguration : AssociationConfiguration
+  {
+    FieldEncodingEnum FieldEncodingField;
+    [DataMemberAttribute(EmitDefaultValue = true, IsRequired = true, Order = 1)]
+    public FieldEncodingEnum FieldEncoding
+    {
+      get { return FieldEncodingField; }
+      set { FieldEncodingField = value; }
+    }
+  }
   [DataContractAttribute(Name = "ConsumerAssociationConfiguration", Namespace = CommonDefinitions.Namespace)]
   [SerializableAttribute()]
   public partial class ConsumerAssociationConfiguration : AssociationConfiguration

@@ -55,7 +55,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     }
     private static ProducerAssociationConfiguration[] GetProducerAssociationConfiguration()
     {
-      return new ProducerAssociationConfiguration[] { new ProducerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = DefaultDataSetWriterId } };
+      return new ProducerAssociationConfiguration[] { new ProducerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = DefaultDataSetWriterId, FieldEncoding = FieldEncodingEnum.VariantFieldEncoding } };
     }
     private static DataSetConfiguration[] GetDataSetConfigurations(AssociationRole associationRole)
     {

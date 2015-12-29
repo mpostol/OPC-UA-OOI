@@ -43,6 +43,7 @@
         <ProducerAssociationConfiguration>
           <AssociationName>Association1</AssociationName>
           <DataSetWriterId>12345</DataSetWriterId>
+          <FieldEncoding>VariantFieldEncoding</FieldEncoding>
         </ProducerAssociationConfiguration>
       </ProducerAssociationConfigurations>
     </MessageHandlerConfiguration>

@@ -103,7 +103,7 @@ namespace UAOOI.SemanticData.DataManagement
     {
       base.AddMessageHandler(messageHandler, configuration);
       ProducerAssociationConfiguration _configuration = (ProducerAssociationConfiguration)configuration;
-      m_Encoding = FieldEncodingEnum.CompressedFieldEncoding; //TODO FieldEncodingEnum - add to configuration #152 https://github.com/mpostol/OPC-UA-OOI/issues/152
+      m_Encoding = _configuration.FieldEncoding;
       AddMessageWriter(messageHandler as IMessageWriter);
     }
     private void ProducerBinding_PropertyChanged(object sender, PropertyChangedEventArgs e)

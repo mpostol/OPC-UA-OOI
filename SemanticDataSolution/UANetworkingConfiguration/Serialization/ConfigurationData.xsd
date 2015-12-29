@@ -162,14 +162,25 @@
   <xs:complexType name="AssociationConfiguration">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="1" name="AssociationName" type="xs:string" />
-      <xs:element minOccurs="1" maxOccurs="1" name="DataSetWriterId" type="xs:unsignedInt" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DataSetWriterId" type="xs:unsignedShort" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ProducerAssociationConfiguration">
     <xs:complexContent mixed="false">
-      <xs:extension base="tns:AssociationConfiguration" />
+      <xs:extension base="tns:AssociationConfiguration">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="FieldEncoding" type="tns:FieldEncodingEnum" />
+        </xs:sequence>
+      </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  <xs:simpleType name="FieldEncodingEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="VariantFieldEncoding" />
+      <xs:enumeration value="CompressedFieldEncoding" />
+      <xs:enumeration value="DataValueFieldEncoding" />
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name="ArrayOfProducerAssociationConfiguration">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ProducerAssociationConfiguration" nillable="true" type="tns:ProducerAssociationConfiguration" />

@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using UAOOI.SemanticData.DataManagement.Encoding;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.MessageHandling
 {

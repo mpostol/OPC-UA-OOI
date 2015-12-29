@@ -102,7 +102,7 @@ namespace UAOOI.SemanticData.DataManagement
     protected internal override void AddMessageHandler(IMessageHandler messageHandler, AssociationConfiguration configuration)
     {
       base.AddMessageHandler(messageHandler, configuration);
-      ProducerAssociationConfiguration _conf = (ProducerAssociationConfiguration)configuration;
+      ProducerAssociationConfiguration _configuration = (ProducerAssociationConfiguration)configuration;
       m_Encoding = FieldEncodingEnum.CompressedFieldEncoding; //TODO FieldEncodingEnum - add to configuration #152 https://github.com/mpostol/OPC-UA-OOI/issues/152
       AddMessageWriter(messageHandler as IMessageWriter);
     }
@@ -133,7 +133,6 @@ namespace UAOOI.SemanticData.DataManagement
 
     #region IDisposable Support
     private bool disposedValue = false; // To detect redundant calls
-
     protected virtual void Dispose(bool disposing)
     {
       if (!disposedValue)
@@ -157,6 +156,7 @@ namespace UAOOI.SemanticData.DataManagement
       // GC.SuppressFinalize(this);
     }
     #endregion
+
     #endregion
 
   }

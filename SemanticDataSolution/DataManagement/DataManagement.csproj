@@ -95,7 +95,6 @@
     <Compile Include="MessageHandling\BinaryPacketDecoder.cs" />
     <Compile Include="MessageHandling\BinaryPacketEncoder.cs" />
     <Compile Include="MessageHandling\CommonDefinition.cs" />
-    <Compile Include="MessageHandling\FieldEncodingEnum.cs" />
     <Compile Include="MessageHandling\HeaderWriter.cs" />
     <Compile Include="MessageHandling\IBinaryHeaderWriter.cs" />
     <Compile Include="DataRepository\IProducerBinding.cs" />

@@ -79,6 +79,7 @@
     <Compile Include="Serialization\DataMemberConfiguration.cs" />
     <Compile Include="Serialization\DataSetConfiguration.cs" />
     <Compile Include="IConfigurationFactory.cs" />
+    <Compile Include="Serialization\FieldEncodingEnum.cs" />
     <Compile Include="Serialization\MessageReaderConfiguration.cs" />
     <Compile Include="Serialization\MessageHandlerConfiguration.cs" />
     <Compile Include="Serialization\MessageWriterConfiguration.cs" />

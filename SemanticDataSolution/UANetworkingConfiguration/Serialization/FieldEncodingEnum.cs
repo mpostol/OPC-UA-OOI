@@ -1,6 +1,7 @@
-﻿using System;
+﻿
+using System;
 
-namespace UAOOI.SemanticData.DataManagement.MessageHandling
+namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
   /// <summary>
   /// Enum FieldEncodingEnum - 

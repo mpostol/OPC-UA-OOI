@@ -29,6 +29,7 @@ namespace UAOOI.SemanticData.DataManagement
     internal ProducerAssociation(ISemanticData data, string aliasName, DataSetConfiguration dataSet, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
       : base(data, dataSet.AssociationName)
     {
+      m_ConfigurationVersion = dataSet.ConfigurationVersion;
       m_DataSetBindings =
         dataSet.DataSet.Select<FieldMetaData, IProducerBinding>
         ((x) =>
@@ -83,7 +84,7 @@ namespace UAOOI.SemanticData.DataManagement
     private ushort m_MessageSequenceNumber = 0;
     private FieldEncodingEnum m_Encoding;
     //TODO Handle Configuration Version  #140 at: https://github.com/mpostol/OPC-UA-OOI/issues/140
-    private MessageHeader.ConfigurationVersionDataType m_ConfigurationVersion = new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 };
+    private ConfigurationVersionDataType m_ConfigurationVersion = null;
     //methods
     protected override void InitializeCommunication()
     {

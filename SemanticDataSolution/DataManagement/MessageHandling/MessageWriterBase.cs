@@ -54,7 +54,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <exception cref="System.ArgumentOutOfRangeException">Impossible to convert null value
     /// or</exception>
     void IMessageWriter.Send
-      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, UInt16 dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
+      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, UInt16 dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
     {
       lock (this)
       {
@@ -190,8 +190,8 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="sequenceNumber">The sequence number.</param>
     /// <param name="timeStamp">The time stamp.</param>
     /// <param name="configurationVersion">The configuration version.</param>
-    protected abstract void CreateMessage
-      (FieldEncodingEnum encoding, UInt16 dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion);
+    internal protected abstract void CreateMessage
+      (FieldEncodingEnum encoding, UInt16 dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion);
     /// <summary>
     /// Finalize preparation and sends the message.
     /// </summary>

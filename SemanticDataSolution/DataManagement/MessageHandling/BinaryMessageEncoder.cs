@@ -49,7 +49,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// Gets or sets the message header.
     /// </summary>
     /// <value>The message header.</value>
-    public MessageHeader MessageHeader { get; set; }
+    internal MessageHeader MessageHeader { get; set; }
     #endregion
 
     #region MessageWriterBase
@@ -62,12 +62,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="sequenceNumber">The sequence number.</param>
     /// <param name="timeStamp">The time stamp.</param>
     /// <param name="configurationVersion">The configuration version.</param>
-    protected override void CreateMessage(FieldEncodingEnum encoding, ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
+    internal protected override void CreateMessage(FieldEncodingEnum encoding, ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
     {
       OnMessageAdding(dataSetWriterId);
-      MessageHeader = MessageHeader.GetProducerMessageHeader(this, encoding, m_lengthFieldType, MessageTypeEnum.DataKeyFrame);
+      MessageHeader = MessageHeader.GetProducerMessageHeader(this, encoding, m_lengthFieldType, MessageTypeEnum.DataKeyFrame, configurationVersion);
       //Create message header and placeholder for further header content.
-      MessageHeader.ConfigurationVersion = configurationVersion;
       MessageHeader.FieldCount = fieldCount;
       MessageHeader.MessageSequenceNumber = sequenceNumber;
       MessageHeader.TimeStamp = timeStamp;

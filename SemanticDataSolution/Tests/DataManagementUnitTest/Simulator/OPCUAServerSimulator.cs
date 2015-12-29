@@ -209,7 +209,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       get { throw new NotImplementedException(); }
     }
     public void Send
-      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, ushort dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion)
+      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, ushort dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
     {
       if (length > 2)
         throw new ArgumentOutOfRangeException("length");

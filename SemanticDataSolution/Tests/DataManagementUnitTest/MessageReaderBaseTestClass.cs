@@ -375,7 +375,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
             throw new NotImplementedException();
           }
 
-          set
+          internal set
           {
             throw new NotImplementedException();
           }
@@ -394,7 +394,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
             throw new NotImplementedException();
           }
 
-          set
+          internal set
           {
             throw new NotImplementedException();
           }
@@ -413,7 +413,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
             throw new NotImplementedException();
           }
 
-          set
+          internal set
           {
             throw new NotImplementedException();
           }
@@ -432,7 +432,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
             throw new NotImplementedException();
           }
 
-          set
+          internal set
           {
             throw new NotImplementedException();
           }
@@ -458,7 +458,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     //vars
     private const byte m_TestValue = 0xca;
-    //meyhods
+    //methods
     private IConsumerBinding update(int arg)
     {
       Assert.AreEqual<int>(0, arg);

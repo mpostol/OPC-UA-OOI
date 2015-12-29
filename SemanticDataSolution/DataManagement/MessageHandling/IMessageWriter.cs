@@ -25,7 +25,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="timeStamp">The time stamp - the time the Data was collected.</param>
     /// <param name="configurationVersion">The configuration version.</param>
     void Send
-      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, UInt16 dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, MessageHeader.ConfigurationVersionDataType configurationVersion); //TODO semanticData => DataSetId
+      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, UInt16 dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion);
 
   }
 }

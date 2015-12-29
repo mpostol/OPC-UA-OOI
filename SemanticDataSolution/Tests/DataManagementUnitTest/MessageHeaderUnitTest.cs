@@ -19,14 +19,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       using (MemoryStream _outputStream = new MemoryStream())
       using (HeaderBinaryWriter _writer = new HeaderBinaryWriter(_outputStream))
       {
-        MessageHeader _header = MessageHeader.GetProducerMessageHeader(_writer, FieldEncodingEnum.VariantFieldEncoding, MessageLengthFieldTypeEnum.TwoBytes, MessageTypeEnum.DataDeltaFrame);
+        MessageHeader _header = MessageHeader.GetProducerMessageHeader
+          (_writer, FieldEncodingEnum.VariantFieldEncoding, MessageLengthFieldTypeEnum.TwoBytes, MessageTypeEnum.DataDeltaFrame, new ConfigurationVersionDataType() { MajorVersion = 7, MinorVersion = 8 });
         Assert.IsNotNull(_header);
         //Default values
         Assert.AreEqual<ushort>(1, _header.EncodingFlags);
         Assert.AreEqual<MessageTypeEnum>(MessageTypeEnum.DataDeltaFrame, _header.MessageType);
         Assert.AreEqual<ushort>(0, _header.MessageSequenceNumber);
-        Assert.AreEqual<ushort>(0, _header.ConfigurationVersion.MajorVersion);
-        Assert.AreEqual<ushort>(0, _header.ConfigurationVersion.MinorVersion);
+        Assert.AreEqual<ushort>(7, _header.ConfigurationVersion.MajorVersion);
+        Assert.AreEqual<ushort>(8, _header.ConfigurationVersion.MinorVersion);
         SetupProducerHeaderFields(_header);
         _header.Synchronize();
         _writer.Flush();
@@ -53,7 +54,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       using (MemoryStream _outputStream = new MemoryStream())
       using (HeaderBinaryWriter _writer = new HeaderBinaryWriter(_outputStream))
       {
-        MessageHeader _header = MessageHeader.GetProducerMessageHeader(_writer, FieldEncodingEnum.VariantFieldEncoding, MessageLengthFieldTypeEnum.TwoBytes, MessageTypeEnum.DataDeltaFrame);
+        MessageHeader _header = MessageHeader.GetProducerMessageHeader
+          (_writer, FieldEncodingEnum.VariantFieldEncoding, MessageLengthFieldTypeEnum.TwoBytes, MessageTypeEnum.DataDeltaFrame, new ConfigurationVersionDataType() { MajorVersion = 7, MinorVersion = 8 });
         Assert.IsNotNull(_header);
         SetupProducerHeaderFields(_header);
         _writer.Write(UInt32.MaxValue);
@@ -128,7 +130,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private static void SetupProducerHeaderFields(MessageHeader _header)
     {
       _header.MessageSequenceNumber = 8;
-      _header.ConfigurationVersion = new MessageHeader.ConfigurationVersionDataType() { MajorVersion = 6, MinorVersion = 7 };
+      _header.ConfigurationVersion = new ConfigurationVersionDataType() { MajorVersion = 6, MinorVersion = 7 };
       _header.TimeStamp = CommonDefinitions.TestMinimalDateTime;
       _header.FieldCount = 16;
     }

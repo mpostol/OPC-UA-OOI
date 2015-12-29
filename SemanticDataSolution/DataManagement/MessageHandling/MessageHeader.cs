@@ -21,10 +21,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// <param name="encoding">The encoding.</param>
     /// <param name="lengthFieldType">Type of the length field in the the message header.</param>
     /// <param name="messageType">Type of the message.</param>
+    /// <param name="configurationVersion">The configuration version.</param>
     /// <returns>MessageHeader.</returns>
-    internal static MessageHeader GetProducerMessageHeader(IBinaryHeaderEncoder writer, FieldEncodingEnum encoding, MessageLengthFieldTypeEnum lengthFieldType, MessageTypeEnum messageType)
+    internal static MessageHeader GetProducerMessageHeader(IBinaryHeaderEncoder writer, FieldEncodingEnum encoding, MessageLengthFieldTypeEnum lengthFieldType, MessageTypeEnum messageType, ConfigurationVersionDataType configurationVersion)
     {
-      return new ProducerMessageHeader(writer, encoding, lengthFieldType, messageType);
+      return new ProducerMessageHeader(writer, encoding, lengthFieldType, messageType, configurationVersion);
     }
     /// <summary>
     /// Gets the consumer message header.
@@ -42,31 +43,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     #endregion
 
     #region Header
-    /// <summary>
-    /// struct ConfigurationVersionDataType - this data type is used to indicate configuration changes in the information send by the message producer.
-    /// </summary>
-    public struct ConfigurationVersionDataType
-    {
-      /// <summary>
-      /// Gets or sets the major version. 
-      /// </summary>
-      /// <remarks>
-      /// The major number reflects the primary format of the DataSet and must be equal for both producer and consumer.
-      /// Removing fields from the DataSet, reordering fields, adding fields in between other fields or a DataType 
-      /// change in fields shall result in an update of the MajorVersion. The initial value for the MajorVersion is 0. 
-      /// If the MajorVersion is incremented, the MinorVersion shall be set to 0.
-      /// An overflow of the MajorVersion is treated like any other major version change and requires a meta data exchange.
-      /// </remarks>
-      /// <value>The major version.</value>
-      public byte MajorVersion { get; set; }
-      /// <summary>
-      /// Gets or sets the minor version.
-      /// </summary>
-      /// <remarks>The minor number reflects backward compatible changes of the DataSet like adding a field at the end of the DataSet.
-      /// The initial value for the MinorVersion is 0. The MajorVersion shall be incremented after an overflow of the MinorVersion.</remarks>
-      /// <value>The minor version.</value>
-      public byte MinorVersion { get; set; }
-    }
     /// <summary>
     /// Gets or sets the type of the message.
     /// </summary>
@@ -90,22 +66,22 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     /// </remarks>
     /// <value>The message sequence number. A monotonically increasing sequence number assigned by the publisher to each message sent.
     /// </value>
-    public abstract UInt16 MessageSequenceNumber { get; set; }
+    public abstract UInt16 MessageSequenceNumber { get; internal set; }
     /// <summary>
     /// Gets or sets the configuration version.
     /// </summary>
     /// <value>The configuration version used as consistency check for the metadata about the published variables.</value>
-    public abstract ConfigurationVersionDataType ConfigurationVersion { get; set; }
+    public abstract ConfigurationVersionDataType ConfigurationVersion { get; internal set; }
     /// <summary>
     /// Gets or sets the time stamp of th data contained in the message.
     /// </summary>
     /// <value>The time the Data was collected.</value>
-    public abstract DateTime TimeStamp { get; set; }
+    public abstract DateTime TimeStamp { get; internal set; }
     /// <summary>
     /// Gets or sets the field count.
     /// </summary>
     /// <value>Number of fields of the DataSet contained in the Message.</value>
-    public abstract UInt16 FieldCount { get; set; }
+    public abstract UInt16 FieldCount { get; internal set; }
     /// <summary>
     /// Gets the fields encoding.
     /// </summary>
@@ -125,13 +101,14 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
 
       #region creator
-      public ProducerMessageHeader(IBinaryHeaderEncoder writer, FieldEncodingEnum encoding, MessageLengthFieldTypeEnum lengthFieldType, MessageTypeEnum messageType)
+      public ProducerMessageHeader(IBinaryHeaderEncoder writer, FieldEncodingEnum encoding, MessageLengthFieldTypeEnum lengthFieldType, MessageTypeEnum messageType, ConfigurationVersionDataType configurationVersion)
       {
         m_MessageType = messageType;
         m_Encoding = encoding;
         m_lengthFieldType = lengthFieldType;
         m_HeaderWriter = new HeaderWriter(writer, PackageHeaderLength());
         MessageSequenceNumber = 0;
+        ConfigurationVersion = configurationVersion;
       }
       #endregion
 
@@ -158,19 +135,19 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       }
       public override UInt16 MessageSequenceNumber
       {
-        get; set;
+        get; internal set;
       }
       public override ConfigurationVersionDataType ConfigurationVersion
       {
-        get; set;
+        get; internal set;
       }
       public override DateTime TimeStamp
       {
-        get; set;
+        get; internal set;
       }
       public override ushort FieldCount
       {
-        get; set;
+        get; internal set;
       }
       internal override void Synchronize()
       {
@@ -297,7 +274,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           AssertSynchronized();
           return m_MessageSequenceNumber;
         }
-        set { throw new ApplicationException(m_OperationIsNotApplicableMessage); }
+        internal set { throw new ApplicationException(m_OperationIsNotApplicableMessage); }
       }
       public override ConfigurationVersionDataType ConfigurationVersion
       {
@@ -306,7 +283,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           AssertSynchronized();
           return m_ConfigurationVersion;
         }
-        set { throw new ApplicationException(m_OperationIsNotApplicableMessage); }
+        internal set { throw new ApplicationException(m_OperationIsNotApplicableMessage); }
       }
       public override DateTime TimeStamp
       {
@@ -315,7 +292,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           AssertSynchronized();
           return m_TimeStamp;
         }
-        set { throw new ApplicationException(m_OperationIsNotApplicableMessage); }
+        internal set { throw new ApplicationException(m_OperationIsNotApplicableMessage); }
       }
       public override ushort FieldCount
       {
@@ -324,7 +301,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           AssertSynchronized();
           return m_FieldCount;
         }
-        set { throw new ApplicationException(m_OperationIsNotApplicableMessage); }
+        internal set { throw new ApplicationException(m_OperationIsNotApplicableMessage); }
       }
       internal override void Synchronize()
       {

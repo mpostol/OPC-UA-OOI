@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
 
     #region IUAEncoder - supported types
     /// <summary>
-    /// Writes the variant using provided encoder <see cref="IBinaryEncoder"/>
+    /// Writes the <see cref="IVariant"/> using provided encoder <see cref="IBinaryEncoder"/>
     /// </summary>
     /// <param name="encoder">The encoder to write the value encapsulated in this instance.</param>
     /// <param name="value">The value to be encoded as an instance of <see cref="IVariant"/>.</param>
@@ -52,6 +52,11 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           WriteDimensions(encoder, matrix.Dimensions);
       }
     }
+    /// <summary>
+    /// Writes <see cref="DateTime" /> using the provided encoder <see cref="IBinaryEncoder" />.
+    /// </summary>
+    /// <param name="encoder">The encoder - an object implementing the <see cref="IBinaryEncoder" /> interface.</param>
+    /// <param name="value">The value to be encoded.</param>
     public virtual void Write(IBinaryEncoder encoder, DateTime value)
     {
       encoder.Write(CommonDefinitions.GetUADataTimeTicks(value));
@@ -65,23 +70,79 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     {
       encoder.Write(value.ToByteArray());
     }
+    /// <summary>
+    /// Writes the <c>ByteString</c> using the provided encoder <see cref="IBinaryEncoder" />.
+    /// </summary>
+    /// <param name="encoder">The encoder and an object implementing the <see cref="IBinaryEncoder" /> interface.</param>
+    /// <param name="value">The value to be encoded.</param>
+    public virtual void Write(IBinaryEncoder encoder, byte[] value)
+    {
+      if (value == null)
+        encoder.Write((Int32)(-1));
+      else
+        encoder.Write((Int32)value.Length);
+      encoder.Write(value);
+    }
     #endregion
 
     #region IUAEncoder - unsupported types - should be implemented by comercial products.
-    public abstract void Write(IBinaryEncoder encoder, byte[] value);
+    /// <summary>
+    /// Writes <see cref="IDataValue" /> using the provided encoder <see cref="IBinaryEncoder" />.
+    /// </summary>
+    /// <param name="encoder">The encoder - an object implementing the <see cref="IBinaryEncoder" /> interface.</param>
+    /// <param name="value">The value to be encoded.</param>
     public abstract void Write(IBinaryEncoder encoder, IDataValue value);
+    /// <summary>
+    /// Writes <see cref="IDiagnosticInfo" /> using the provided encoder <see cref="IBinaryEncoder" />.
+    /// </summary>
+    /// <param name="encoder">The encoder - an object implementing the <see cref="IBinaryEncoder" /> interface.</param>
+    /// <param name="value">The value to be encoded.</param>
     public abstract void Write(IBinaryEncoder encoder, IDiagnosticInfo value);
+    /// <summary>
+    /// Writes <see cref="IExpandedNodeId" /> using the provided encoder <see cref="IBinaryEncoder" />.
+    /// </summary>
+    /// <param name="encoder">The encoder - an object implementing the <see cref="IBinaryEncoder" /> interface.</param>
+    /// <param name="value">The value to be encoded.</param>
     public abstract void Write(IBinaryEncoder encoder, IExpandedNodeId value);
+    /// <summary>
+    /// Writes <see cref="ILocalizedText" /> using the provided encoder <see cref="IBinaryEncoder" />.
+    /// </summary>
+    /// <param name="encoder">The encoder - an object implementing the <see cref="IBinaryEncoder" /> interface.</param>
+    /// <param name="value">The value to be encoded.</param>
     public abstract void Write(IBinaryEncoder encoder, IExtensionObject value);
+    /// <summary>
+    /// Writes <see cref="DateTime" /> using the provided encoder <see cref="IBinaryEncoder" />.
+    /// </summary>
+    /// <param name="encoder">The encoder - an object implementing the <see cref="IBinaryEncoder" /> interface.</param>
+    /// <param name="value">The value to be encoded.</param>
     public abstract void Write(IBinaryEncoder encoder, ILocalizedText value);
+    /// <summary>
+    /// Writes <see cref="INodeId" /> using the provided encoder <see cref="IBinaryEncoder" />.
+    /// </summary>
+    /// <param name="encoder">The encoder - an object implementing the <see cref="IBinaryEncoder" /> interface.</param>
+    /// <param name="value">The value to be encoded.</param>
     public abstract void Write(IBinaryEncoder encoder, INodeId value);
+    /// <summary>
+    /// Writes <see cref="IQualifiedName" /> using the provided encoder <see cref="IBinaryEncoder" />.
+    /// </summary>
+    /// <param name="encoder">The encoder - an object implementing the <see cref="IBinaryEncoder" /> interface.</param>
+    /// <param name="value">The value to be encoded.</param>
     public abstract void Write(IBinaryEncoder encoder, IQualifiedName value);
+    /// <summary>
+    /// Writes <see cref="IStatusCode" /> using the provided encoder <see cref="IBinaryEncoder" />.
+    /// </summary>
+    /// <param name="encoder">The encoder - an object implementing the <see cref="IBinaryEncoder" /> interface.</param>
+    /// <param name="value">The value to be encoded.</param>
     public abstract void Write(IBinaryEncoder encoder, IStatusCode value);
+    /// <summary>
+    /// Writes <see cref="XmlElement" /> using the provided encoder <see cref="IBinaryEncoder" />.
+    /// </summary>
+    /// <param name="encoder">The encoder - an object implementing the <see cref="IBinaryEncoder" /> interface.</param>
+    /// <param name="value">The value to be encoded.</param>
     public abstract void Write(IBinaryEncoder encoder, XmlElement value);
     #endregion
 
     #region private
-    //vars
     /// <summary>
     /// The maximum array length - could be used to apply license volume limits
     /// </summary>

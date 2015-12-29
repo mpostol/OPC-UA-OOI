@@ -10,10 +10,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Helpers
   /// </summary>
   internal class UABinaryEncoderImplementation : UABinaryEncoder
   {
-    public override void Write(IBinaryEncoder encoder, byte[] value)
-    {
-      throw new NotImplementedException();
-    }
     public override void Write(IBinaryEncoder encoder, IDataValue value)
     {
       throw new NotImplementedException();

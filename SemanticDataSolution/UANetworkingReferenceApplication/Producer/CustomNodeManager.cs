@@ -170,15 +170,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// </summary>
     private class UABinaryEncoderImplementation : UABinaryEncoder
     {
-      public override void Write(IBinaryEncoder encoder, byte[] value)
-      {
-        throw new NotImplementedException();
-      }
       public override void Write(IBinaryEncoder encoder, IDataValue value)
       {
         throw new NotImplementedException();
       }
-
       public override void Write(IBinaryEncoder encoder, IDiagnosticInfo value)
       {
         throw new NotImplementedException();

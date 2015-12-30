@@ -21,10 +21,10 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
 
     #region IUADecoder - supported types
     /// <summary>
-    /// Reads the variant using the provided <see cref="IBinaryDecoder"/>.
+    /// Reads an instance of <see cref="IVariant" /> from UA Binary encoded stream.
     /// </summary>
-    /// <param name="decoder">The decoder to be used to read <see cref="IVariant"/> from the input byte stream.</param>
-    /// <returns>Returns am instance of the <see cref="IVariant"/> encapsulating the received value.</returns>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="IVariant" /> decoded from the UA binary stream of bytes.</returns>
     public IVariant ReadVariant(IBinaryDecoder decoder)
     {
       byte encodingByte = decoder.ReadByte(); //Read the EncodingMask
@@ -51,34 +51,91 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       return value;
     }
     /// <summary>
-    /// Reads the <see cref="Guid"/> from UA binary encoded stream as a 16-element byte array that contains the value.
+    /// Reads the <see cref="Guid" /> from UA Binary encoded as a 16-element byte array that contains the value and advances the input message position by 16 bytes.
     /// </summary>
-    /// <returns>The <see cref="Guid"/> decoded from a buffer encoded as the UA binary.</returns>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="Guid" /> decoded from the input message.</returns>
     public Guid ReadGuid(IBinaryDecoder decoder)
     {
       return CommonDefinitions.ReadGuid(decoder);
     }
-
     /// <summary>
-    /// Reads the <see cref="DateTime"/> from UA binary encoded as <see cref="Int64"/> that contains the value and advances the stream position by 8 bytes.
+    /// Reads the <see cref="DateTime" /> from UA binary encoded stream of bytes as <see cref="Int64" /> that contains the value and advances the stream position by 8 bytes.
     /// </summary>
-    /// <returns>The <see cref="DateTime "/> decoded from the UA binary encoded <see cref="Stream"/>.</returns>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="DateTime " /> decoded from the UA binary stream of bytes.</returns>
     public DateTime ReadDateTime(IBinaryDecoder decoder)
     {
       return CommonDefinitions.GetUADateTime(decoder.ReadInt64());
     }
+    /// <summary>
+    /// Reads the string od bytes from UA Binary encoded as a 16-element byte array that contains the value.
+    /// </summary>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="System.Byte" /> array decoded from the UA binary stream of bytes.</returns>
+    public byte[] ReadByteString(IBinaryDecoder decoder)
+    {
+      Int32 _length = decoder.ReadInt32();
+      if (_length < 0)
+        return null;
+      return decoder.ReadBytes(_length);
+    }
     #endregion
 
     #region IUADecoder - unsupported types
-    public abstract byte[] ReadByteString(IBinaryDecoder decoder);
+    /// <summary>
+    /// If implemented by a derived class reads an instance of <see cref="IDataValue" /> from UA Binary encoded stream.
+    /// </summary>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="IDataValue" /> decoded from the UA binary stream of bytes.</returns>
     public abstract IDataValue ReadDataValue(IBinaryDecoder decoder);
+    /// <summary>
+    /// If implemented by a derived class reads an instance of <see cref="IDiagnosticInfo" /> from UA Binary encoded stream.
+    /// </summary>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="IDiagnosticInfo" /> decoded from the UA binary stream of bytes.</returns>
     public abstract IDiagnosticInfo ReadDiagnosticInfo(IBinaryDecoder decoder);
+    /// <summary>
+    /// If implemented by a derived class reads an instance of <see cref="IExpandedNodeId" /> from UA Binary encoded stream.
+    /// </summary>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="IExpandedNodeId" /> decoded from the UA binary stream of bytes.</returns>
     public abstract IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder decoder);
+    /// <summary>
+    /// If implemented by a derived class reads an instance of <see cref="IExtensionObject" /> from UA Binary encoded stream.
+    /// </summary>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="IExtensionObject" /> decoded from the UA binary stream of bytes.</returns>
     public abstract IExtensionObject ReadExtensionObject(IBinaryDecoder decoder);
+    /// <summary>
+    /// If implemented by a derived class reads an instance of <see cref="ILocalizedText" /> from UA Binary encoded stream.
+    /// </summary>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="ILocalizedText" /> decoded from the UA binary stream of bytes.</returns>
     public abstract ILocalizedText ReadLocalizedText(IBinaryDecoder decoder);
+    /// <summary>
+    /// If implemented by a derived class reads an instance of <see cref="INodeId" /> from UA Binary encoded stream.
+    /// </summary>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="INodeId" /> decoded from the UA binary stream of bytes.</returns>
     public abstract INodeId ReadNodeId(IBinaryDecoder decoder);
+    /// <summary>
+    /// If implemented by a derived class reads an instance of <see cref="IQualifiedName" /> from UA Binary encoded stream.
+    /// </summary>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="IQualifiedName" /> decoded from the UA binary stream of bytes.</returns>
     public abstract IQualifiedName ReadQualifiedName(IBinaryDecoder decoder);
+    /// <summary>
+    /// If implemented by a derived class reads an instance of <see cref="XmlElement" /> from UA Binary encoded stream.
+    /// </summary>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="XmlElement" /> decoded from the UA binary stream of bytes.</returns>
     public abstract XmlElement ReadXmlElement(IBinaryDecoder decoder);
+    /// <summary>
+    /// If implemented by a derived class reads an instance of <see cref="IStatusCode" /> from UA Binary encoded stream.
+    /// </summary>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="IStatusCode" /> decoded from the UA binary stream of bytes.</returns>
     public abstract IStatusCode ReadStatusCode(IBinaryDecoder decoder);
     #endregion
 

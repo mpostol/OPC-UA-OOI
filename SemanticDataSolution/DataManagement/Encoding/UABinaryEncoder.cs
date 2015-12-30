@@ -80,8 +80,10 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       if (value == null)
         encoder.Write((Int32)(-1));
       else
+      {
         encoder.Write((Int32)value.Length);
-      encoder.Write(value);
+        encoder.Write(value);
+      }
     }
     #endregion
 

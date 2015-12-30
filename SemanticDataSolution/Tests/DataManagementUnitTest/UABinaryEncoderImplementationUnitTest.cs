@@ -15,12 +15,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #region TestMethod
     [TestMethod]
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
-    [ExpectedException(typeof(NotImplementedException))]
     public void WriteByteStringTestMethod()
     {
       using (var _stream = new MemoryStream())
       using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
-        _buffer.Write(_buffer, (byte[])null);
+      {
+        _buffer.Write(_buffer, new byte[10]);
+        _buffer.Close();
+        byte[] _Encoded = _stream.ToArray();
+        Assert.AreEqual<int>(14, _Encoded.Length);
+      }
     }
     [TestMethod]
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]

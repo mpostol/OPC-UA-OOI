@@ -90,10 +90,6 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// </summary>
     private class UABinaryDecoderImplementation : UABinaryDecoder
     {
-      public override byte[] ReadByteString(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
       public override IDataValue ReadDataValue(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();

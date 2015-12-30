@@ -115,8 +115,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
           case BuiltInType.Guid:
             _return = AddBinding<Guid>(_name, Inc, Guid.NewGuid(), BuiltInType.Guid);
             break;
-          case BuiltInType.Null:
           case BuiltInType.ByteString:
+            _return = AddBinding<byte[]>(_name, Inc, new byte[] { 0 }, BuiltInType.ByteString);
+            break;
+          case BuiltInType.Null:
           case BuiltInType.XmlElement:
           case BuiltInType.NodeId:
           case BuiltInType.ExpandedNodeId:
@@ -266,6 +268,13 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     private static byte Inc(byte monitoredValue)
     {
       return monitoredValue == byte.MaxValue ? byte.MinValue : (byte)(monitoredValue + 1);
+    }
+    private static byte[] Inc(byte[] monitoredValue)
+    {
+      byte[] _ret = new byte[Math.Min(monitoredValue.Length + 1, 254)];
+      for (byte i = 0; i < _ret.Length; i++)
+        _ret[i] = i;
+      return _ret;
     }
     private static bool Inc(bool monitoredValue)
     {

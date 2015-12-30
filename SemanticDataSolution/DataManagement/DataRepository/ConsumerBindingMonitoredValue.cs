@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.ComponentModel;
+using System.Linq;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.DataRepository
@@ -41,7 +42,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     public event PropertyChangedEventHandler PropertyChanged;
     #endregion
 
-    #region ConsumerBinding
+    #region creator
     /// <summary>
     /// Initializes a new instance of the <see cref="ConsumerBindingMonitoredValue{type}" /> class.
     /// It is used if the GetActionDelegate of teh base class is overridden.
@@ -63,6 +64,50 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
       {
         base.AssignValueToRepository = value;
       }
+    }
+    #endregion
+
+    #region override object
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+    public override string ToString()
+    {
+      switch (Encoding)
+      {
+        case BuiltInType.Null:
+        case BuiltInType.Boolean:
+        case BuiltInType.SByte:
+        case BuiltInType.Byte:
+        case BuiltInType.Int16:
+        case BuiltInType.UInt16:
+        case BuiltInType.Int32:
+        case BuiltInType.UInt32:
+        case BuiltInType.Int64:
+        case BuiltInType.UInt64:
+        case BuiltInType.Float:
+        case BuiltInType.Double:
+        case BuiltInType.String:
+        case BuiltInType.DateTime:
+        case BuiltInType.Guid:
+        case BuiltInType.XmlElement:
+        case BuiltInType.NodeId:
+        case BuiltInType.ExpandedNodeId:
+        case BuiltInType.StatusCode:
+        case BuiltInType.QualifiedName:
+        case BuiltInType.LocalizedText:
+        case BuiltInType.ExtensionObject:
+        case BuiltInType.DataValue:
+        case BuiltInType.Variant:
+        case BuiltInType.DiagnosticInfo:
+        case BuiltInType.Enumeration:
+          return Value.ToString();
+        case BuiltInType.ByteString:
+          byte[] _value = (byte[])(object)Value;
+          return $"[{String.Join(", ", new ArraySegment<byte>(_value, 0, Math.Min(_value.Length, 80)).Select<byte, string>(x => x.ToString("X")).ToArray<string>())}]";
+      }
+      return base.ToString();
     }
     #endregion
 

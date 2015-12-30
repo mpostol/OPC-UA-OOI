@@ -13,12 +13,12 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
   /// It captures an association targeted a variable that is to be updated by the user of this instance.
   /// It is assumed that the repository implements the <see cref="IBindingFactory"/> interface and is the factory of this instance.
   /// </summary>
-  public class Binding<type> : IBinding
+  public class Binding : IBinding
   {
 
     #region constructor
     /// <summary>
-    /// Initializes a new instance of the <see cref="Binding{type}" /> class.
+    /// Initializes a new instance of the <see cref="Binding" /> class.
     /// </summary>
     /// <param name="encoding">The <see cref="BuiltInType"/>of the message field encoding.</param>
     public Binding(BuiltInType encoding)
@@ -32,7 +32,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// Gets the type of the message field encoding.
     /// </summary>
     /// <value>The <see cref="BuiltInType" />of the message field encoding.</value>
-    BuiltInType IBinding.Encoding { get { return m_MessageEncoding; } }
+    public BuiltInType Encoding { get { return m_MessageEncoding; } }
     /// <summary>
     /// Sets the converter, which is used to provide a way to apply custom logic to a binding.
     /// </summary>

@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
   /// It is an helper class to construct an object used by the consumer to save the data in the data repository.
   /// </summary>
   /// <typeparam name="type">The type of the type.</typeparam>
-  public class ConsumerBinding<type> : Binding<type>, IConsumerBinding
+  public class ConsumerBinding<type> : Binding, IConsumerBinding
   {
 
     /// <summary>

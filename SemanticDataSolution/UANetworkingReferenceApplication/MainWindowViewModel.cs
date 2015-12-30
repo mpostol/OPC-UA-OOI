@@ -287,8 +287,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
         case BuiltInType.Guid:
           _return = AddBinding<Guid>(variableName, BuiltInType.Guid);
           break;
-        case BuiltInType.Null:
         case BuiltInType.ByteString:
+          _return = AddBinding<byte[]>(variableName, BuiltInType.ByteString);
+          break;
+        case BuiltInType.Null:
         case BuiltInType.XmlElement:
         case BuiltInType.NodeId:
         case BuiltInType.ExpandedNodeId:
@@ -538,7 +540,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     private IConsumerBinding AddBinding<type>(string variableName, BuiltInType encoding)
     {
       ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(encoding);
-      _return.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).Value.ToString()}");
+      _return.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).ToString()}");
       return _return;
     }
     private IPAddress GetMulticastGroupIPAddress()

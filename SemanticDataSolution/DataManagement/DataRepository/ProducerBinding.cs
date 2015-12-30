@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
   /// It is used by the producer to get data from data repository.
   /// </summary>
   /// <typeparam name="type">The type of the object in the repository.</typeparam>
-  public class ProducerBinding<type> : Binding<type>, IProducerBinding
+  public class ProducerBinding<type> : Binding, IProducerBinding
   {
 
     #region constructor

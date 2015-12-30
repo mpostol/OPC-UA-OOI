@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Association.cd" />
+    <None Include="DataRepository\IBinding.cd" />
     <None Include="MessageHandling\MessageHandling.cd" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="README.md" />

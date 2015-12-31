@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           //Message header 26-43
           0x1,                                                //MessageType 
           0x1,                                                //EncodingFlags
-          68, 00,                                             // MessageLength
+          71, 00,                                             // MessageLength
           0, 0,                                               //MessageSequenceNumber 
           0, 0,                                               //ConfigurationVersion
           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //TimeStamp
@@ -33,7 +33,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           (byte)BuiltInType.UInt64, 0x7b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,    //UInt64
           (byte)BuiltInType.UInt32, 0x7b, 0x00, 0x00, 0x00,                            //UInt32
           (byte)BuiltInType.UInt16, 0x7b, 0x00,                                        //UInt16
-          (byte)BuiltInType.String, 0x03, 0x31, 0x32, 0x33,                            //string
+          (byte)BuiltInType.String, 0x03,  0x00, 0x00, 0x00, 0x31, 0x32, 0x33,         //string
           (byte)BuiltInType.Float, 0x00, 0x00, 0xf6, 0x42,                             //Float
           (byte)BuiltInType.SByte, 0x7b,                                               //sbyte
           (byte)BuiltInType.Int64, 0x7b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //Int64
@@ -61,7 +61,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           //Message header
           0x1,                                                //MessageType 
           0x1,                                                //EncodingFlags
-          0x56, 00,                                           //MessageLength
+          0x59, 00,                                           //MessageLength
           0, 0,                                               //MessageSequenceNumber 
           0, 0,                                               //ConfigurationVersion
           0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //TimeStamp
@@ -70,7 +70,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           (byte)BuiltInType.UInt64, 0x7b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,    //UInt64
           (byte)BuiltInType.UInt32, 0x7b, 0x00, 0x00, 0x00,                            //UInt32
           (byte)BuiltInType.UInt16, 0x7b, 0x00,                                        //UInt16
-          (byte)BuiltInType.String, 0x03, 0x31, 0x32, 0x33,                            //string
+          (byte)BuiltInType.String, 0x03, 0x00, 0x00, 0x00, 0x31, 0x32, 0x33,          //string
           (byte)BuiltInType.Float, 0x00, 0x00, 0xf6, 0x42,                             //Float
           (byte)BuiltInType.SByte, 0x7b,                                               //sbyte
           (byte)BuiltInType.Int64, 0x7b, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //Int64

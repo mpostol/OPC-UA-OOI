@@ -292,6 +292,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         {
           throw new NotImplementedException();
         }
+        public string ReadString(IBinaryDecoder decoder)
+        {
+          throw new NotImplementedException();
+        }
         public IVariant ReadVariant(IBinaryDecoder decoder)
         {
           return new TestVariant();

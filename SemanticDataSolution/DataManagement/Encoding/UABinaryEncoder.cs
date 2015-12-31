@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Xml;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
@@ -84,6 +85,22 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         encoder.Write((Int32)value.Length);
         encoder.Write(value);
       }
+    }
+    /// <summary>
+    /// Encodes the <see cref="string" /> as a sequence of UTF8 characters without a null terminator and preceded by the length in bytes.
+    /// The length in bytes is encoded as Int32. A value of −1 is used to indicate a ‘null’ string.
+    /// </summary>
+    /// <param name="encoder">The encoder <see cref="IBinaryEncoder" /> to write the value encapsulated in this instance.</param>
+    /// <param name="value">The value to be encoded as an instance of <see cref="Guid" />.</param>
+    public void Write(IBinaryEncoder encoder, string value)
+    {
+      if (value == null)
+      {
+        encoder.Write((Int32)(-1));
+        return;
+      }
+      byte[] _bytes = new UTF8Encoding().GetBytes(value);
+      Write(encoder, _bytes);
     }
     #endregion
 
@@ -187,7 +204,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           encoder.Write((Double)value);
           return;
         case BuiltInType.String:
-          encoder.Write((String)value);
+          Write(encoder, (String)value);
           return;
         case BuiltInType.DateTime:
           Write(encoder, (DateTime)value);
@@ -275,7 +292,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           WriteArray<Double>(encoder, value, encoder.Write);
           break;
         case BuiltInType.String:
-          WriteArray<String>(encoder, value, encoder.Write);
+          WriteArray<String>(encoder, value, x => Write(encoder, x));
           break;
         case BuiltInType.DateTime:
           WriteArray<DateTime>(encoder, value, x => Write(encoder, x));

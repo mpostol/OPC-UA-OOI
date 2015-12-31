@@ -24,7 +24,6 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     void Write(ulong value);
     void Write(float value);
     void Write(double value);
-    void Write(string value);
     /// <summary>
     /// Writes the <see cref="Guid"/> from UA Binary encoded as a 16-element byte array that contains the value and advances the stream position by 16 bytes.<see cref="System.IO.Stream"/>.
     /// </summary>

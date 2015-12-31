@@ -72,10 +72,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       m_binaryWriter.Write(value);
     }
-    public override void Write(string value)
-    {
-      m_binaryWriter.Write(value);
-    }
     public override void Write(float value)
     {
       m_binaryWriter.Write(value);

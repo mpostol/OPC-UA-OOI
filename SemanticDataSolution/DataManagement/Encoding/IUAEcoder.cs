@@ -86,9 +86,17 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     /// <summary>
     /// Writes a <see cref="Guid" /> to the current stream as a 16-element byte array that contains the value and advances the stream position by 16 bytes.
     /// </summary>
-    /// <param name="encoder">The encoder to write the value encapsulated in this instance.</param>
+    /// <param name="encoder">The encoder <see cref="IBinaryEncoder"/> to write the value encapsulated in this instance.</param>
     /// <param name="value">The value to be encoded as an instance of <see cref="Guid"/>.</param>
     void Write(IBinaryEncoder encoder, Guid value);
+    /// <summary>
+    /// Encodes the <see cref="string"/> as a sequence of UTF8 characters without a null terminator and preceded by the length in bytes.
+    /// The length in bytes is encoded as Int32. A value of −1 is used to indicate a ‘null’ string.
+    /// </summary>
+    /// <param name="encoder">The encoder <see cref="IBinaryEncoder"/> to write the value encapsulated in this instance.</param>
+    /// <param name="value">The value to be encoded as an instance of <see cref="Guid"/>.</param>
+    void Write(IBinaryEncoder encoder, string value);
+
   }
 
 }

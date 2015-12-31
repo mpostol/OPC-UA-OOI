@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Xml;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
@@ -79,6 +80,21 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       if (_length < 0)
         return null;
       return decoder.ReadBytes(_length);
+    }
+    /// <summary>
+    /// Reads the <see cref="string" /> from UA binary encoded stream of bytes encoded as a sequence of UTF8 characters without a null terminator and preceded by the length in bytes.
+    /// The length in bytes is encoded as Int32. A value of −1 is used to indicate a ‘null’ string.
+    /// </summary>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder" /> to be used to read form the stream.</param>
+    /// <returns>The <see cref="string" /> decoded from the UA binary stream of bytes.</returns>
+    /// <exception cref="System.NotImplementedException"></exception>
+    public string ReadString(IBinaryDecoder decoder)
+    {
+      int length = decoder.ReadInt32();
+      if (length == -1)
+        return null;
+      byte[] bytes = decoder.ReadBytes(length);
+      return new UTF8Encoding().GetString(bytes, 0, bytes.Length);
     }
     #endregion
 
@@ -236,7 +252,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         case BuiltInType.Double:
           return new Variant(encoder.ReadDouble(), encodingByte);
         case BuiltInType.String:
-          return new Variant(encoder.ReadString(), encodingByte);
+          return new Variant(ReadString(encoder), encodingByte);
         case BuiltInType.DateTime:
           return new Variant(ReadDateTime(encoder), encodingByte);
         case BuiltInType.Guid:
@@ -260,7 +276,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         case BuiltInType.DataValue:
           return new Variant(ReadDataValue(encoder), encodingByte);
         default:
-          throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{encodingByte:X2}).");
+          throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{encodingByte:X}).");
       }
     }
     private Array ReadArray(IBinaryDecoder encoder, int length, BuiltInType builtInType)
@@ -291,7 +307,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         case BuiltInType.Double:
           return ReadArray<double>(length, encoder.ReadDouble);
         case BuiltInType.String:
-          return ReadArray<string>(length, encoder.ReadString);
+          return ReadArray<string>(length, () => ReadString(encoder));
         case BuiltInType.DateTime:
           return ReadArray<DateTime>(length, () => ReadDateTime(encoder));
         case BuiltInType.Guid:

@@ -137,6 +137,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreSame(this, decoder);
         return m_UABinaryDecoder.ReadXmlElement(decoder);
       }
+      public string ReadString(IBinaryDecoder decoder)
+      {
+        Assert.AreSame(this, decoder);
+        return m_UABinaryDecoder.ReadString(decoder);
+      }
+
       #endregion
 
       #region IBinaryDecoder

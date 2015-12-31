@@ -99,7 +99,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
                                        );
         Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
         Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(109, _writer.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(112, _writer.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
         byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArrayVariant4Consumer();
         byte[] _outputBuffer = _writer.DoUDPRead();
@@ -231,10 +231,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         Assert.IsInstanceOfType(value, typeof(ushort));
       }
-      public override void Write(string value)
-      {
-        Assert.IsInstanceOfType(value, typeof(string));
-      }
       public override void Write(float value)
       {
         Assert.IsInstanceOfType(value, typeof(float));
@@ -267,16 +263,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         Assert.IsInstanceOfType(value, typeof(bool));
       }
+      public override void Write(byte[] value)
+      {
+        Assert.IsInstanceOfType(value, typeof(byte[]));
+      }
       internal protected override void CreateMessage(FieldEncodingEnum encoding, ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
       {
         MassageCreated = true;
       }
       protected override void SendMessage() { }
-      public override void Write(byte[] value)
-      {
-        throw new NotImplementedException();
-      }
-
       #endregion
 
       #region test infrastructure

@@ -109,7 +109,6 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     public abstract void Write(ulong value);
     public abstract void Write(uint value);
     public abstract void Write(ushort value);
-    public abstract void Write(string value);
     public abstract void Write(float value);
     public abstract void Write(sbyte value);
     public abstract void Write(long value);
@@ -230,7 +229,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           Write((Single)value);
           break;
         case BuiltInType.String:
-          Write((String)value);
+          m_UAEncoder.Write(this, (String)value);
           break;
         case BuiltInType.UInt16:
           Write((UInt16)value);
@@ -292,6 +291,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       throw new NotImplementedException();
     }
+
     #endregion
 
   }

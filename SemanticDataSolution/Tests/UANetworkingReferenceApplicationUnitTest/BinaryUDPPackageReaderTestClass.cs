@@ -172,11 +172,14 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
         throw new NotImplementedException();
       }
 
+      public string ReadString(IBinaryDecoder decoder)
+      {
+        throw new NotImplementedException();
+      }
       public IVariant ReadVariant(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();
       }
-
       public XmlElement ReadXmlElement(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();

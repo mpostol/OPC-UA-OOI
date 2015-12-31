@@ -23,11 +23,18 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     /// <returns>The <see cref="DateTime "/> decoded from the UA binary stream of bytes.</returns>
     DateTime ReadDateTime(IBinaryDecoder decoder);
     /// <summary>
-    /// Reads the string od bytes from UA Binary encoded as a 16-element byte array that contains the value.
+    /// Reads the string of <see cref="System.Byte"/> from UA Binary encoded as a 16-element byte array that contains the value.
     /// </summary>
     /// <param name="decoder">The decoder <see cref="IBinaryDecoder"/> to be used to read form the stream.</param>
     /// <returns>The <see cref="System.Byte"/> array decoded from the UA binary stream of bytes.</returns>
     byte[] ReadByteString(IBinaryDecoder decoder);
+    /// <summary>
+    /// Reads the <see cref="string"/> from UA binary encoded stream of bytes encoded as a sequence of UTF8 characters without a null terminator and preceded by the length in bytes.
+    /// The length in bytes is encoded as Int32. A value of −1 is used to indicate a ‘null’ string.
+    /// </summary>
+    /// <param name="decoder">The decoder <see cref="IBinaryDecoder"/> to be used to read form the stream.</param>
+    /// <returns>The <see cref="string"/> decoded from the UA binary stream of bytes.</returns>
+    string ReadString(IBinaryDecoder decoder);
     /// <summary>
     /// Reads an instance of <see cref="IDataValue"/> from UA Binary encoded stream.
     /// </summary>

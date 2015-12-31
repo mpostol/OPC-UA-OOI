@@ -171,6 +171,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreSame(this, encoder);
         _encoder.Write(this, value);
       }
+
+      public void Write(IBinaryEncoder encoder, string value)
+      {
+        Assert.AreSame(this, encoder);
+        _encoder.Write(this, value);
+      }
       #endregion
 
       #region private 

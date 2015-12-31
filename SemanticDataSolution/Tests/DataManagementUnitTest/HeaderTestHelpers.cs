@@ -190,10 +190,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       throw new NotImplementedException();
     }
-    string IBinaryDecoder.ReadString()
-    {
-      throw new NotImplementedException();
-    }
     public byte[] ReadBytes(int count)
     {
       throw new NotImplementedException();

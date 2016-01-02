@@ -188,3 +188,6 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 *.docx
+/SemanticDataSolution/packages
+/DataBindingsSolution/packages
+/DataBindingsSolution/.nuget/NuGet.exe

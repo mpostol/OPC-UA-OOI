@@ -54,6 +54,10 @@
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Presentation" />
     <Reference Include="System.Xml" />
+    <Reference Include="UAOOI.DataBindings, Version=1.0.3.26793, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\DataBindingsSolution\DataBindings\bin\Release\UAOOI.DataBindings.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -84,10 +88,6 @@
     <None Include="OPCUAOOIKey.snk" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\DataBindingsSolution\DataBindings\DataBindings.csproj">
-      <Project>{f8db9567-c559-440c-bbcf-e02013f9ab94}</Project>
-      <Name>DataBindings</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\UANetworkingConfiguration\UANetworkingConfiguration.csproj">
       <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
       <Name>UANetworkingConfiguration</Name>

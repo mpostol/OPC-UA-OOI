@@ -53,6 +53,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UAOOI.DataBindings, Version=1.0.3.27778, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DataBindingsSolution\DataBindings\bin\Release\UAOOI.DataBindings.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonDefinitions.cs" />
@@ -107,12 +111,6 @@
     <None Include="Serialization\wsdl.types.xsd">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\DataBindingsSolution\DataBindings\DataBindings.csproj">
-      <Project>{f8db9567-c559-440c-bbcf-e02013f9ab94}</Project>
-      <Name>DataBindings</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AssemblyInfo.tt">

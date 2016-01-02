@@ -96,6 +96,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UAOOI.DataBindings">
+      <HintPath>..\..\DataBindingsSolution\DataBindings\bin\Release\UAOOI.DataBindings.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -113,8 +116,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -170,10 +171,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DataBindingsSolution\DataBindings\DataBindings.csproj">
-      <Project>{f8db9567-c559-440c-bbcf-e02013f9ab94}</Project>
-      <Name>DataBindings</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataManagement\DataManagement.csproj">
       <Project>{7f4ded4e-5933-4229-b9cc-51da49678904}</Project>
       <Name>DataManagement</Name>

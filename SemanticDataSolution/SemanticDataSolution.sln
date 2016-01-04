@@ -17,12 +17,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSerializationUnitTestProject", "DataSerializationUnitTestProject\DataSerializationUnitTestProject.csproj", "{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{78EDB72A-77B1-4A64-8E76-17E780993017}"
-	ProjectSection(SolutionItems) = preProject
-		TestResults\PubSub_Tests\2015_12_21_PubSubDemo_Draft_0_10\2015_12_21_PubSubDemo_Draft_0_10\pubsubconfig.ini = TestResults\PubSub_Tests\2015_12_21_PubSubDemo_Draft_0_10\2015_12_21_PubSubDemo_Draft_0_10\pubsubconfig.ini
-		README.MD = README.MD
-		Readme.SemanticDataDeplyment.MD = Readme.SemanticDataDeplyment.MD
-		UANetworkingReferenceApplication\bin\Debug\UANetworkingReferenceApplication.log = UANetworkingReferenceApplication\bin\Debug\UANetworkingReferenceApplication.log
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InformationModelFactory", "InformationModelFactory\InformationModelFactory.csproj", "{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}"
 EndProject

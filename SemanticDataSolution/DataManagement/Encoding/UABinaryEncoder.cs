@@ -39,18 +39,20 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       }
       else
       {
-        IMatrix matrix = null;
+        IMatrix _matrix = null;
         _encodingByte |= (byte)VariantEncodingMask.IsArray;
         if (value.UATypeInfo.ValueRank > 1)
         {
           _encodingByte |= (byte)VariantEncodingMask.ArrayDimensionsPresents;
-          matrix = (IMatrix)valueToEncode;
-          valueToEncode = matrix.Elements;
+          _matrix = valueToEncode as IMatrix;
+          if (_matrix == null)
+            throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(value.Value)} must be {nameof(IMatrix)} and cannot be null");
+          valueToEncode = _matrix.Elements;
         }
         encoder.Write(_encodingByte);
         WriteArray(encoder, value.UATypeInfo.BuiltInType, valueToEncode);
         if (value.UATypeInfo.ValueRank > 1)
-          WriteDimensions(encoder, matrix.Dimensions);
+          WriteDimensions(encoder, _matrix.Dimensions);
       }
     }
     /// <summary>
@@ -165,7 +167,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     /// <summary>
     /// The maximum array length - could be used to apply license volume limits
     /// </summary>
-    protected int MaxArrayLength = 2;
+    protected int MaxArrayLength = byte.MaxValue;
     private void WriteValue(IBinaryEncoder encoder, BuiltInType builtInType, object value)
     {
       switch (builtInType)

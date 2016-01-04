@@ -28,6 +28,91 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     [TestMethod]
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
+    [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    public void ArrayLengthOutOfRangeTestClass()
+    {
+      using (MemoryStream _stream = new MemoryStream())
+      using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
+      {
+        Assert.IsNotNull(_buffer);
+        Int32[] _value = new Int32[byte.MaxValue + 1];
+        Variant _variant = new Variant { UATypeInfo = new UATypeInfo(BuiltInType.Int32, 1), Value = _value };
+        _buffer.Write(_buffer, _variant);
+      }
+    }
+    [TestMethod]
+    [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
+    [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    public void ArrayNoImatrixTestClass()
+    {
+      using (MemoryStream _stream = new MemoryStream())
+      using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
+      {
+        Assert.IsNotNull(_buffer);
+        Int32[] _value = new Int32[byte.MaxValue + 1];
+        Variant _variant = new Variant { UATypeInfo = new UATypeInfo(BuiltInType.Int32, 2), Value = _value };
+        _buffer.Write(_buffer, _variant);
+      }
+    }
+    [TestMethod]
+    [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
+    public void ArrayOneDimensionTestClass()
+    {
+      WriteArrayOneDimension(0);
+      WriteArrayOneDimension(1);
+    }
+    [TestMethod]
+    [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
+    public void ArrayMultidimensionTestMethod()
+    {
+      Assert.Inconclusive();
+      byte[] _EncodedValue = null;
+      using (MemoryStream _stream = new MemoryStream())
+      using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
+      {
+        Assert.IsNotNull(_buffer);
+        Int32[] _dimensions = new Int32[] { 3, 4 };
+        Array _array = Array.CreateInstance(typeof(Int32), _dimensions);
+        Assert.AreEqual<int>(_dimensions.Length, _array.Rank);
+        int _value = 0;
+        for (int _rank = 0; _rank < _dimensions.Length; _rank++)
+        {
+          for (int _x = 0; _x < _dimensions[0]; _x++)
+            for (int _y = 0; _y < _dimensions[1]; _y++)
+              _array.SetValue(_value, _x, _y);
+        }
+        UATypeInfo _uaTypeInfo = new UATypeInfo(BuiltInType.Int32, _dimensions.Length);
+        Variant _variant = new Variant { UATypeInfo = _uaTypeInfo, Value = new Matrix(_dimensions, _array, _uaTypeInfo) };
+        _buffer.Write(_buffer, _variant);
+        _buffer.Close();
+        _EncodedValue = _stream.ToArray();
+      }
+      Assert.IsNotNull(_EncodedValue);
+      Assert.AreEqual<int>(25, _EncodedValue.Length);
+    }
+    private class Matrix : IMatrix
+    {
+      public Matrix(int[] dimensions, Array elements, UATypeInfo typeInfo)
+      {
+        Dimensions = dimensions;
+        Elements = elements;
+        TypeInfo = typeInfo;
+      }
+      public int[] Dimensions
+      {
+        get; private set;
+      }
+      public Array Elements
+      {
+        get; private set;
+      }
+      public UATypeInfo TypeInfo
+      {
+        get; private set;
+      }
+    }
+    [TestMethod]
+    [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
     [ExpectedException(typeof(NotImplementedException))]
     public void WriteDataValueTestMethod()
     {
@@ -39,15 +124,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
     public void GuidTestMethod()
     {
-      MemoryStream _stream = new MemoryStream();
-      TestBinaryWriter _buffer = new TestBinaryWriter(_stream);
-      Assert.IsNotNull(_buffer);
       byte[] _EncodedGuid = null;
-      Guid _Guid;
-      _Guid = Guid.NewGuid();
-      _buffer.Write(_Guid);
-      _buffer.Close();
-      _EncodedGuid = _stream.ToArray();
+      Guid _Guid = Guid.NewGuid();
+      using (MemoryStream _stream = new MemoryStream())
+      using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
+      {
+        Assert.IsNotNull(_buffer);
+        _buffer.Write(_Guid);
+        _buffer.Close();
+        _EncodedGuid = _stream.ToArray();
+      }
       Assert.IsNotNull(_EncodedGuid);
       Assert.AreEqual<int>(16, _EncodedGuid.Length);
       Guid _recoveredGuid = new Guid(_EncodedGuid);
@@ -57,14 +143,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
     public void VariantGuidTestMethod()
     {
-      MemoryStream _stream = new MemoryStream();
-      TestBinaryWriter _buffer = new TestBinaryWriter(_stream);
-      Assert.IsNotNull(_buffer);
       byte[] _EncodedVGuid = null;
-      Variant _variant = new Variant { UATypeInfo = new UATypeInfo(BuiltInType.Guid), Value = CommonDefinitions.TestGuid };
-      _buffer.Write(_buffer, _variant);
-      _buffer.Close();
-      _EncodedVGuid = _stream.ToArray();
+      using (MemoryStream _stream = new MemoryStream())
+      using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
+      {
+        Assert.IsNotNull(_buffer);
+        Variant _variant = new Variant { UATypeInfo = new UATypeInfo(BuiltInType.Guid), Value = CommonDefinitions.TestGuid };
+        _buffer.Write(_buffer, _variant);
+        _buffer.Close();
+        _EncodedVGuid = _stream.ToArray();
+      }
       Assert.IsNotNull(_EncodedVGuid);
       Assert.AreEqual<int>(17, _EncodedVGuid.Length);
       ArraySegment<byte> _segment = new ArraySegment<byte>(_EncodedVGuid, 1, 16);
@@ -190,11 +278,32 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         get; set;
       }
-
       public object Value
       {
         get; set;
       }
+
+    }
+    private static void WriteArrayOneDimension(int rank)
+    {
+      byte[] _EncodedValue = null;
+      using (MemoryStream _stream = new MemoryStream())
+      using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
+      {
+        Assert.IsNotNull(_buffer);
+        Int32[] _value = new Int32[] { 0, 1, 2, 3, 4 };
+        Variant _variant = new Variant { UATypeInfo = new UATypeInfo(BuiltInType.Int32, rank), Value = _value };
+        _buffer.Write(_buffer, _variant);
+        _buffer.Close();
+        _EncodedValue = _stream.ToArray();
+      }
+      Assert.IsNotNull(_EncodedValue);
+      Assert.AreEqual<int>(25, _EncodedValue.Length);
+      Assert.AreEqual<int>(0, _EncodedValue[5]);
+      Assert.AreEqual<int>(1, _EncodedValue[9]);
+      Assert.AreEqual<int>(2, _EncodedValue[13]);
+      Assert.AreEqual<int>(3, _EncodedValue[17]);
+      Assert.AreEqual<int>(4, _EncodedValue[21]);
     }
     #endregion
 

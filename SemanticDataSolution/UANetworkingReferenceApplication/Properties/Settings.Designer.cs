@@ -61,7 +61,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("6D481513-444F-40FB-826D-4706AFD05E2F")]
+        [global::System.Configuration.DefaultSettingValueAttribute("d80d81dd-96e6-4560-850e-154f9181307c")]
         public string ProducerId {
             get {
                 return ((string)(this["ProducerId"]));

@@ -12,7 +12,7 @@
       <Value Profile="(Default)">localhost</Value>
     </Setting>
     <Setting Name="ProducerId" Type="System.String" Scope="User">
-      <Value Profile="(Default)">6D481513-444F-40FB-826D-4706AFD05E2F</Value>
+      <Value Profile="(Default)">d80d81dd-96e6-4560-850e-154f9181307c</Value>
     </Setting>
     <Setting Name="RemoteUDPPortNumber" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">4840</Value>

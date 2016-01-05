@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     #region TestMethod
     [TestMethod]
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
-    public void WriteByteStringTestMethod()
+    public void WriteByteStringTest()
     {
       using (var _stream = new MemoryStream())
       using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
@@ -29,7 +29,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestMethod]
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
-    public void ArrayLengthOutOfRangeTestClass()
+    public void ArrayLengthOutOfRangeTest()
     {
       using (MemoryStream _stream = new MemoryStream())
       using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
@@ -43,7 +43,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestMethod]
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
-    public void ArrayNoImatrixTestClass()
+    public void ArrayNoIMatrixTest()
     {
       using (MemoryStream _stream = new MemoryStream())
       using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
@@ -56,14 +56,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     [TestMethod]
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
-    public void ArrayOneDimensionTestClass()
+    public void ArrayOneDimensionTest()
     {
       WriteArrayOneDimension(0);
       WriteArrayOneDimension(1);
     }
     [TestMethod]
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
-    public void ArrayMultidimensionTestMethod()
+    public void ArrayMultiDimensionTest()
     {
       Assert.Inconclusive();
       byte[] _EncodedValue = null;
@@ -298,6 +298,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         _EncodedValue = _stream.ToArray();
       }
       Assert.IsNotNull(_EncodedValue);
+      string _EncodedValueString = String.Join(", ", _EncodedValue);
+      string _expectedString = "134, 5, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 0, 0";
+      Assert.AreEqual<string>(_expectedString, _EncodedValueString);
       Assert.AreEqual<int>(25, _EncodedValue.Length);
       Assert.AreEqual<int>(0, _EncodedValue[5]);
       Assert.AreEqual<int>(1, _EncodedValue[9]);

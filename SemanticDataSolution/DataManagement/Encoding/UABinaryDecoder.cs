@@ -199,7 +199,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         int _length = 1;
         for (int _ix = 0; _ix < dimensions.Length; _ix++)
           _length *= dimensions[_ix];
-        if (_length != Dimensions.Length)
+        if (_length != array.Length)
           throw new ArgumentException("The number of elements in the array does not match the dimensions.");
         TypeInfo = new UATypeInfo(builtInType, Dimensions.Length);
       }

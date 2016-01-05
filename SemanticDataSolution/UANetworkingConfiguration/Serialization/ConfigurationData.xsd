@@ -47,7 +47,12 @@
       <xs:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
       <xs:element minOccurs="0" maxOccurs="1" name="SymbolicName" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="ProcessValueName" type="xs:string" />
-      <xs:element minOccurs="1" maxOccurs="1" name="Encoding" type="tns:BuiltInType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeInformation" type="tns:UATypeInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UATypeInfo">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="BuiltInType" type="tns:BuiltInType" />
       <xs:element minOccurs="1" maxOccurs="1" name="ValueRank" type="xs:int" />
       <xs:element minOccurs="0" maxOccurs="1" name="ArrayDimensions" type="tns:ArrayOfInt" />
     </xs:sequence>

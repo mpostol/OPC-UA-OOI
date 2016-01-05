@@ -15,8 +15,8 @@ namespace UAOOI.SemanticData.DataManagement
     /// <returns>An instance of <see cref="IConsumerBinding" /> type.</returns>
     internal static IConsumerBinding GetConsumerBinding4DataMember(this FieldMetaData member, string repositoryGroup, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
     {
-      IConsumerBinding _binding = bindingFactory.GetConsumerBinding(repositoryGroup, member.ProcessValueName, member.Encoding);
-      encodingFactory.UpdateValueConverter(_binding, repositoryGroup, member.Encoding);
+      IConsumerBinding _binding = bindingFactory.GetConsumerBinding(repositoryGroup, member.ProcessValueName, member.TypeInformation);
+      encodingFactory.UpdateValueConverter(_binding, repositoryGroup, member.TypeInformation);
       return _binding;
     }
     /// <summary>
@@ -29,8 +29,8 @@ namespace UAOOI.SemanticData.DataManagement
     /// <returns>An instance of <see cref="IProducerBinding" /> type.</returns>
     internal static IProducerBinding GetProducerBinding4DataMember(this FieldMetaData member, string repositoryGroup, IBindingFactory bindingFactory, IEncodingFactory encodingFactory)
     {
-      IProducerBinding _binding = bindingFactory.GetProducerBinding(repositoryGroup, member.ProcessValueName, member.Encoding);
-      encodingFactory.UpdateValueConverter(_binding, repositoryGroup, member.Encoding);
+      IProducerBinding _binding = bindingFactory.GetProducerBinding(repositoryGroup, member.ProcessValueName, member.TypeInformation);
+      encodingFactory.UpdateValueConverter(_binding, repositoryGroup, member.TypeInformation);
       return _binding;
     }
 

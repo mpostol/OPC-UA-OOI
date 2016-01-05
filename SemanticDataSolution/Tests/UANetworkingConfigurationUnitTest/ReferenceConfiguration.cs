@@ -80,8 +80,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     {
       return new FieldMetaData[]
       {
-        new FieldMetaData() { ProcessValueName = "Value1", Encoding =  BuiltInType.DateTime, SymbolicName = "Value1",  ValueRank= -1, ArrayDimensions = new int[] { }  },
-        new FieldMetaData() { ProcessValueName = "Value2", Encoding =  BuiltInType.Double, SymbolicName = "Value2",  ValueRank= -1, ArrayDimensions = new int[] { }  },
+        new FieldMetaData() { ProcessValueName = "Value1", TypeInformation = new UATypeInfo( BuiltInType.DateTime), SymbolicName = "Value1" },
+        new FieldMetaData() { ProcessValueName = "Value2", TypeInformation =  new UATypeInfo( BuiltInType.Double), SymbolicName = "Value2" },
       };
     }
     #endregion

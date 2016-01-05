@@ -109,8 +109,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         return new FieldMetaData[]
         {
-          new FieldMetaData() { ProcessValueName = "Value1", Encoding = BuiltInType.String, SymbolicName = "Value1" },
-          new FieldMetaData() { ProcessValueName = "Value2", Encoding = BuiltInType.Double, SymbolicName = "Value2" },
+          new FieldMetaData() { ProcessValueName = "Value1", TypeInformation = new UATypeInfo( BuiltInType.String), SymbolicName = "Value1" },
+          new FieldMetaData() { ProcessValueName = "Value2", TypeInformation = new UATypeInfo( BuiltInType.Double), SymbolicName = "Value2" },
         };
       }
       #endregion
@@ -119,33 +119,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     {
 
       #region IBindingFactory
-      /// <summary>
-      /// Gets the binding captured by an instance of the <see cref="IConsumerBinding" /> type used by the consumer to save the data in the data repository.
-      /// </summary>
-      /// <param name="repositoryGroup">It is the name of a repository group profiling the configuration behavior, e.g. encoders selection.
-      /// The configuration of the repositories belong to the same group are handled according to the same profile.</param>
-      /// <param name="variableName">The name of a variable that is the ultimate destination of the values recovered from messages. Must be unique in the context of the repositories group.
-      /// is updated periodically by a data produced - user of the <see cref="IBinding" /> object.</param>
-      /// <returns>Returns an object implementing the <see cref="IBinding" /> interface that can be used to update selected variable on the factory side.</returns>
-      /// <exception cref="System.NotImplementedException"></exception>
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
       {
         throw new NotImplementedException();
       }
-      /// <summary>
-      /// Gets the producer binding.
-      /// </summary>
-      /// <param name="repositoryGroup">The repository group.</param>
-      /// <param name="variableName">Name of the variable.</param>
-      /// <param name="encoding">The encoding.</param>
-      /// <returns>IProducerBinding.</returns>
-      /// <exception cref="System.ArgumentNullException">repositoryGroup</exception>
-      /// <exception cref="System.NotImplementedException"></exception>
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
       {
         if (repositoryGroup != m_RepositoryGroup)
           throw new ArgumentNullException("repositoryGroup");
-        return m_CustomNodesManager.GetProducerBinding(variableName, encoding);
+        return m_CustomNodesManager.GetProducerBinding(processValueName, fieldTypeInfo.BuiltInType);
       }
       #endregion
 
@@ -158,18 +140,20 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         m_CustomNodesManager.Update(value, name);
       }
+
       #endregion
 
     }
     private class MyEncodingFactory : IEncodingFactory
     {
 
-      public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
+      public void UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
       {
         if (repositoryGroup != m_RepositoryGroup)
           throw new ArgumentOutOfRangeException("repositoryGroup");
-        Assert.AreEqual<BuiltInType>(sourceEncoding, converter.Encoding);
+        Assert.AreEqual<BuiltInType>(sourceEncoding.BuiltInType, binding.Encoding);
       }
+
       public IUADecoder UADecoder
       {
         get { return m_UADecoder; }

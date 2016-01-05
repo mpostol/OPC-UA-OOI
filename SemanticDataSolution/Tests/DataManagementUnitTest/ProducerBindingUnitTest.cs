@@ -18,7 +18,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName", BuiltInType.String);
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName", new UATypeInfo(BuiltInType.String));
       Assert.IsNotNull(_bn);
     }
     [TestMethod]
@@ -27,7 +27,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName", BuiltInType.String);
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName", new UATypeInfo(BuiltInType.String));
       Assert.IsNotNull(_bn);
       string _testValue = "1231221431423421";
       _pr.Modify(_testValue);
@@ -41,7 +41,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName", BuiltInType.String);
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBinding", "variableName", new UATypeInfo(BuiltInType.String));
       Assert.IsNotNull(_bn);
       int _changeCounter = 0;
       _bn.PropertyChanged += (x, y) => _changeCounter++;
@@ -74,16 +74,16 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class ProducerBindingFactory : IBindingFactory
     {
       #region IBindingFactory
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
       {
         throw new NotImplementedException();
       }
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
       {
         if (repositoryGroup == "ProducerBinding")
         {
-          Assert.AreEqual<BuiltInType>(BuiltInType.String, encoding);
-          ProducerBinding<string> _ret = new ProducerBinding<string>("ProducerBinding._value", () => _value.Value, encoding);
+          Assert.AreEqual<BuiltInType>(BuiltInType.String, fieldTypeInfo.BuiltInType);
+          ProducerBinding<string> _ret = new ProducerBinding<string>("ProducerBinding._value", () => _value.Value, fieldTypeInfo.BuiltInType);
           _value.PropertyChanged += (x, y) => _ret.OnNewValue();
           return _ret;
         }
@@ -114,6 +114,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         _value.Value = value;
       }
+
       #endregion
     }
     #endregion

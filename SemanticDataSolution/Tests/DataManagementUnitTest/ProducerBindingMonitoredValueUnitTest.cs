@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", BuiltInType.String);
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", new UATypeInfo(BuiltInType.String));
       Assert.IsNotNull(_bn);
     }
     [TestMethod]
@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", BuiltInType.String);
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", new UATypeInfo(BuiltInType.String));
       Assert.IsNotNull(_bn);
       string _testValue = "1231221431423421";
       _pr.Modify(_testValue);
@@ -38,7 +38,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", BuiltInType.String);
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", new UATypeInfo(BuiltInType.String));
       Assert.IsNotNull(_bn);
       int _changeCounter = 0;
       _bn.PropertyChanged += (x, y) => _changeCounter++;
@@ -71,7 +71,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", BuiltInType.String);
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", new UATypeInfo(BuiltInType.String));
       Assert.IsNotNull(_bn);
       Assert.IsFalse(_bn.NewValue);
       _pr.Modify("654321");
@@ -92,7 +92,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       ProducerBindingFactory _pr = new ProducerBindingFactory();
       Assert.IsNotNull(_pr);
-      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", BuiltInType.String);
+      IProducerBinding _bn = _pr.GetProducerBinding("ProducerBindingMonitoredValue", "variableName", new UATypeInfo(BuiltInType.String));
       Assert.IsNotNull(_bn);
       Assert.IsFalse(_bn.NewValue);
       _pr.Modify("654321");
@@ -112,11 +112,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class ProducerBindingFactory : IBindingFactory
     {
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
       {
         throw new NotImplementedException();
       }
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
       {
         if (repositoryGroup == "ProducerBindingMonitoredValue")
           return _monitoredValue;

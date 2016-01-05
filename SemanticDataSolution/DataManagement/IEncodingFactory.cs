@@ -19,7 +19,7 @@ namespace UAOOI.SemanticData.DataManagement
     /// <param name="binding">An object responsible to transfer the value between the message and ultimate destination in the repository.</param>
     /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="sourceEncoding">The source encoding.</param>
-    void UpdateValueConverter(IBinding binding, string repositoryGroup, BuiltInType sourceEncoding);
+    void UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding);
     /// <summary>
     /// Gets the decoder that provides methods to be used to decode OPC UA Built-in types.
     /// </summary>

@@ -32,11 +32,11 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     [TestCategory("Configuration_ConfigurationDataUnitTest")]
     public void SaveLoadTestMethod()
     {
-
       SaveLoadConfigurationData(Role.Consumer, SerializerType.Xml);
       SaveLoadConfigurationData(Role.Consumer, SerializerType.Json);
       SaveLoadConfigurationData(Role.Producer, SerializerType.Xml);
       SaveLoadConfigurationData(Role.Producer, SerializerType.Json);
+      //Assert.Fail();
     }
     [TestMethod]
     [TestCategory("Configuration_SerializationUnitTest")]

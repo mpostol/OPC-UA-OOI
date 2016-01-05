@@ -178,16 +178,19 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     private class DataBrokerFactory : IBindingFactory
     {
-
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo field)
       {
-        return new ConsumerBinding<int>(x => { }, encoding);
+        return new ConsumerBinding<int>(x => { }, field.BuiltInType);
       }
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, UATypeInfo encoding)
       {
         throw new NotImplementedException();
       }
 
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+      {
+        throw new NotImplementedException();
+      }
     }
     private class TestISemanticData : ISemanticData
     {
@@ -257,10 +260,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         m_Repository = repository;
       }
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo field)
       {
-        IConsumerBinding _ncb = new ConsumerBindingMonitoredValue<object>(encoding);
-        string _key = String.Format("{0}.{1}", repositoryGroup, variableName);
+        IConsumerBinding _ncb = new ConsumerBindingMonitoredValue<object>(field.BuiltInType);
+        string _key = String.Format("{0}.{1}", repositoryGroup, processValueName);
         m_Repository.Add(_key, _ncb);
         return _ncb;
       }
@@ -271,6 +275,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_Repository.Add(_key, _npb);
         return _npb;
       }
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, UATypeInfo encoding)
+      {
+        throw new NotImplementedException();
+      }
+
       private Dictionary<string, IBinding> m_Repository = new Dictionary<string, IBinding>();
     }
     private Dictionary<string, IBinding> Repository = new Dictionary<string, IBinding>();
@@ -287,11 +296,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           throw new NotImplementedException();
         }
       }
-      public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
+      public void UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
       {
-        converter.Culture = null;
-        converter.Converter = null;
-        converter.Parameter = null;
+        Assert.IsNotNull(binding);
+        binding.Culture = null;
+        binding.Converter = null;
+        binding.Parameter = null;
       }
       private readonly IUADecoder m_UADecoder = new Helpers.UABinaryDecoderImplementation();
 

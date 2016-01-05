@@ -25,7 +25,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void DataRepositoryTestMethod()
     {
       DataRepository _rpo = new DataRepository();
-      IConsumerBinding _nb = _rpo.GetConsumerBinding(String.Empty, DataRepository.name, BuiltInType.String);
+      IConsumerBinding _nb = _rpo.GetConsumerBinding(String.Empty, DataRepository.name, new UATypeInfo(BuiltInType.String));
       Assert.IsNotNull(_nb);
       Assert.IsNotNull(_nb.Encoding);
       _nb.Converter = null;
@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void RecordingRepositoryTestMethod()
     {
       RecordingRepository _rpo = new RecordingRepository();
-      IConsumerBinding _nb = _rpo.GetConsumerBinding(String.Empty, DataRepository.name, BuiltInType.String);
+      IConsumerBinding _nb = _rpo.GetConsumerBinding(String.Empty, DataRepository.name, new UATypeInfo(BuiltInType.String));
       Assert.IsNotNull(_nb);
       Assert.IsNotNull(_nb.Encoding);
       _nb.Converter = new DateFormatter();
@@ -57,26 +57,33 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       public const string name = "variableName";
       public string Buffer = null;
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
       {
-        if (variableName != name)
+        if (processValueName != name)
           throw new ArgumentOutOfRangeException();
-        return new ConsumerBinding<string>(x => Buffer = x, encoding);
+        return new ConsumerBinding<string>(x => Buffer = x, fieldTypeInfo.BuiltInType);
       }
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
       {
         throw new NotImplementedException();
       }
     }
     private class RecordingRepository : IBindingFactory
     {
+
       public const string name = "variableName";
       public string Buffer = null;
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo field)
       {
-        if (variableName != name)
+        if (processValueName != name)
           throw new ArgumentOutOfRangeException();
-        return new ConsumerBinding<string>(x => Buffer = x, encoding);
+        return new ConsumerBinding<string>(x => Buffer = x, field.BuiltInType);
+      }
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo encoding)
+      {
+        throw new NotImplementedException();
       }
       public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {

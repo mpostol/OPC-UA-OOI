@@ -14,33 +14,23 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
   {
     [TestMethod]
     [TestCategory("DataManagement_IEncodingFactory")]
-    [ExpectedException(typeof(NotImplementedException))]
-    public void UpdateValueConverterTestMethod1()
-    {
-      EncodingFactory _ief = new EncodingFactory();
-      Assert.IsNotNull(_ief);
-      _ief.UpdateValueConverter(null, String.Empty,  BuiltInType.Null);
-    }
-    [TestMethod]
-    [TestCategory("DataManagement_IEncodingFactory")]
     public void UpdateValueConverterTestMethod2()
     {
       EncodingFactory _ief = new EncodingFactory();
       Assert.IsNotNull(_ief);
       MyBinding _ibf = new MyBinding();
-      _ief.UpdateValueConverter(_ibf, String.Empty, BuiltInType.Null);
+      _ief.UpdateValueConverter(_ibf, String.Empty, new UATypeInfo(BuiltInType.Null));
       _ibf.Assign2Repository(null);
     }
     //private
     private class EncodingFactory : IEncodingFactory
     {
-      public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
+      public void UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
       {
-        if (converter == null)
-          throw new NotImplementedException();
-        converter.Parameter = "Conversion parameter";
-        converter.Converter = new IVC();
-        converter.Culture = CultureInfo.InvariantCulture;
+        Assert.IsNotNull(binding);
+        binding.Parameter = "Conversion parameter";
+        binding.Converter = new IVC();
+        binding.Culture = CultureInfo.InvariantCulture;
       }
       public IUADecoder UADecoder
       {

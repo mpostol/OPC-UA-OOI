@@ -89,7 +89,7 @@
     <Compile Include="Serialization\MessageWriterConfiguration.cs" />
     <Compile Include="Serialization\NodeDescriptor.cs" />
     <Compile Include="Serialization\BuiltInType.cs" />
-    <Compile Include="Serialization\TypeInfo.cs" />
+    <Compile Include="Serialization\UATypeInfo.cs" />
     <Compile Include="Serialization\ValueRanks.cs" />
     <Compile Include="UANetworkingConfiguration.cs" />
     <Compile Include="UANetworkingConfigurationEditor.cs" />

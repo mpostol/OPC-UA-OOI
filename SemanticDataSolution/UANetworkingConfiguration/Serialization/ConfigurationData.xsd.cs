@@ -8,7 +8,6 @@ using System.Xml.Serialization;
 namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
 
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
   [DataContractAttribute(Name = "ConfigurationData", Namespace = CommonDefinitions.Namespace)]
   [System.SerializableAttribute()]
   [XmlRoot(Namespace = CommonDefinitions.Namespace)]
@@ -167,7 +166,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         this.DataSymbolicNameField = value;
       }
     }
-    [DataMemberAttribute(EmitDefaultValue = false, Order = 5)]
+    [DataMemberAttribute(EmitDefaultValue = false, Order = 5, IsRequired = true)]
     public FieldMetaData[] DataSet
     {
       get
@@ -417,7 +416,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
   [DataContractAttribute(Name = "MessageChannelConfiguration", Namespace = CommonDefinitions.Namespace)]
   public class MessageChannelConfiguration
   {
-
   }
   [DataContractAttribute(Name = "AssociationRole", Namespace = CommonDefinitions.Namespace)]
   public enum AssociationRole : int
@@ -429,8 +427,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     [EnumMemberAttribute()]
     Producer = 1,
   }
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+
   [DataContractAttribute(Name = "DataMemberConfiguration", Namespace = CommonDefinitions.Namespace)]
   [System.SerializableAttribute()]
   public partial class FieldMetaData : object, IExtensibleDataObject
@@ -440,9 +437,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     private ExtensionDataObject extensionDataField;
     private string SymbolicNameField;
     private string ProcessValueNameField;
-    private BuiltInType SourceEncodingField;
-    private int[] ArrayDimensionsField;
-    private int ValueRankField;
+    private UATypeInfo m_TypeInfo;
     #endregion
 
     #region public
@@ -461,7 +456,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// Gets or sets the name of the field.
     /// </summary>
     /// <value>The name of the field.</value>
-    [DataMemberAttribute(EmitDefaultValue = false)]
+    [DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
     public string SymbolicName
     {
       get
@@ -485,59 +480,11 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         this.ProcessValueNameField = value;
       }
     }
-    /// <summary>
-    /// Gets or sets the source encoding information.  
-    /// </summary>
-    /// <remarks>
-    /// TODO it must provide information about built in data type or it should be a TypeDescriptor - see how it is serialized.
-    /// </remarks>
-    /// <value>The source encoding.</value>
-    [DataMemberAttribute(EmitDefaultValue = false, Order = 2)]
-    public BuiltInType Encoding
+    [DataMemberAttribute(EmitDefaultValue = false, IsRequired = true, Order = 2)]
+    public UATypeInfo TypeInformation
     {
-      get
-      {
-        return this.SourceEncodingField;
-      }
-      set
-      {
-        this.SourceEncodingField = value;
-      }
-    }
-    /// <summary>
-    /// Gets or sets the array dimensions. Indicates whether the dataType is an array and how many dimensions the array has.
-    /// It may have the following values:
-    /// n > 1: the dataType is an array with the specified number of dimensions.
-    /// OneDimension(1): The dataType is an array with one dimension.
-    /// OneOrMoreDimensions (0): The dataType is an array with one or more dimensions.
-    /// Scalar (−1): The dataType is not an array.
-    /// Any (−2): The dataType can be a scalar or an array with any number of dimensions.
-    /// ScalarOrOneDimension(−3): The dataType can be a scalar or a one dimensional array.
-    /// </summary>
-    /// <remarks>
-    /// <note>
-    /// NOTE All DataTypes are considered to be scalar, even if they have array-like semantics like ByteString and String.
-    /// </note>
-    /// </remarks>
-    /// <value>The array dimensions.</value>
-    [DataMemberAttribute(EmitDefaultValue = false, Order = 3)]
-    public int ValueRank
-    {
-      get { return ValueRankField; }
-      set { ValueRankField = value; }
-    }
-    /// <summary>
-    /// Gets or sets the array dimensions - Specifies the length of each dimension for an array dataType. 
-    /// It is intended to describe the capability of the dataType, not the current size.
-    /// The number of elements shall be equal to the value of the valueRank.Shall be null if valueRank ≤ 0.
-    /// A value of 0 for an individual dimension indicates that the dimension has a variable length.
-    /// </summary>
-    /// <value>The array dimensions.</value>
-    [DataMemberAttribute(EmitDefaultValue = false, Order = 4)]
-    public int[] ArrayDimensions
-    {
-      get { return ArrayDimensionsField; }
-      set { ArrayDimensionsField = value; }
+      get { return m_TypeInfo; }
+      set { m_TypeInfo = value; }
     }
     #endregion
 

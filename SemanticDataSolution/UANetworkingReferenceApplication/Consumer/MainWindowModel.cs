@@ -21,19 +21,20 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 
     #region IBindingFactory
     /// <summary>
-    /// Gets the binding captured by an instance of the <see cref="IConsumerBinding" /> type used by the consumer to save the data in the data repository.
+    /// Gets the binding captured by an instance of the <see cref="T:UAOOI.SemanticData.DataManagement.DataRepository.IConsumerBinding" /> type used by the consumer to save the data in the data repository.
     /// </summary>
     /// <param name="repositoryGroup">It is the name of a repository group profiling the configuration behavior, e.g. encoders selection.
-    /// The configuration of the repositories belong to the same group are handled according to the same profile.</param>
-    /// <param name="variableName">The name of a variable that is the ultimate destination of the values recovered from messages. Must be unique in the context of the repositories group.
-    /// is updated periodically by a data produced - user of the <see cref="IBinding" /> object.</param>
-    /// <returns>Returns an object implementing the <see cref="IBinding" /> interface that can be used to update selected variable on the factory side.</returns>
+    /// The configuration of the repositories belonging to the same group are handled according to the same profile.</param>
+    /// <param name="processValueName">The name of a variable that is the ultimate destination of the values recovered from messages.
+    /// Must be unique in the context of the group named by <paramref name="repositoryGroup" />.</param>
+    /// <param name="fieldTypeInfo">The field metadata definition represented as an object of <see cref="T:UAOOI.SemanticData.UANetworking.Configuration.Serialization.UATypeInfo" />.</param>
+    /// <returns>Returns an object implementing the <see cref="T:UAOOI.SemanticData.DataManagement.DataRepository.IConsumerBinding" /> interface that can be used to update selected variable on the factory side.</returns>
     /// <exception cref="System.ArgumentNullException">repositoryGroup</exception>
-    public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+    public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentNullException("repositoryGroup");
-      return ViewModelBindingFactory.GetConsumerBinding(variableName, encoding);
+      return ViewModelBindingFactory.GetConsumerBinding(processValueName, fieldTypeInfo.BuiltInType);
     }
     /// <summary>
     /// Gets the producer binding.
@@ -43,7 +44,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// <remarks>It is intentionally not implemented.</remarks>
     /// <returns>IProducerBinding.</returns>
     /// <exception cref="System.NotImplementedException"></exception>
-    public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+    public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
       throw new NotImplementedException();
     }
@@ -61,11 +62,11 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     /// or
     /// sourceEncoding
     /// </exception>
-    public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType encoding)
+    public void UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentOutOfRangeException("repositoryGroup");
-      if (encoding != converter.Encoding)
+      if (sourceEncoding.BuiltInType != binding.Encoding)
         throw new ArgumentOutOfRangeException("sourceEncoding");
     }
     public IUADecoder UADecoder

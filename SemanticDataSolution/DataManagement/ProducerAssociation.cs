@@ -32,9 +32,9 @@ namespace UAOOI.SemanticData.DataManagement
       m_ConfigurationVersion = dataSet.ConfigurationVersion;
       m_DataSetBindings =
         dataSet.DataSet.Select<FieldMetaData, IProducerBinding>
-        ((x) =>
+        ((_fieldMetadata) =>
         {
-          IProducerBinding _ret = x.GetProducerBinding4DataMember(dataSet.RepositoryGroup, bindingFactory, encodingFactory);
+          IProducerBinding _ret = _fieldMetadata.GetProducerBinding4DataMember(dataSet.RepositoryGroup, bindingFactory, encodingFactory);
           _ret.PropertyChanged += ProducerBinding_PropertyChanged;
           return _ret;
         }).ToArray<IProducerBinding>();

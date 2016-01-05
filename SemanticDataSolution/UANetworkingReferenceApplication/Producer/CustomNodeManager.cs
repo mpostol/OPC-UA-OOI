@@ -48,7 +48,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// <param name="encoding">The encoding.</param>
     /// <returns>Returns an object implementing the <see cref="IBinding" /> interface that can be used to update selected variable on the factory side.</returns>
     /// <exception cref="System.NotImplementedException"></exception>
-    public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+    IConsumerBinding IBindingFactory.GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
       throw new NotImplementedException();
     }
@@ -62,16 +62,16 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// <exception cref="System.ArgumentNullException">repositoryGroup</exception>
     /// <exception cref="System.ArgumentOutOfRangeException">variableName</exception>
     /// <exception cref="System.NotImplementedException"></exception>
-    public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+    IProducerBinding IBindingFactory.GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentNullException("repositoryGroup");
-      string _name = $"{ repositoryGroup}.{ variableName}";
+      string _name = $"{ repositoryGroup}.{ processValueName}";
       IProducerBinding _return = null;
-      if (m_NodesDictionary.ContainsKey(variableName))
-        _return = m_NodesDictionary[variableName];
+      if (m_NodesDictionary.ContainsKey(processValueName))
+        _return = m_NodesDictionary[processValueName];
       else
-        switch (encoding)
+        switch (fieldTypeInfo.BuiltInType)
         {
           case BuiltInType.Boolean:
             _return = AddBinding<Boolean>(_name, Inc, false, BuiltInType.Boolean);
@@ -141,27 +141,35 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// <summary>
     /// Updates the value converter.
     /// </summary>
-    /// <param name="converter">The converter.</param>
+    /// <param name="binding">An object responsible to transfer the value between the message and ultimate destination in the repository.</param>
     /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="sourceEncoding">The source encoding.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">repositoryGroup</exception>
-    void IEncodingFactory.UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
+    void IEncodingFactory.UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentOutOfRangeException("repositoryGroup");
-      Debug.Assert(sourceEncoding == converter.Encoding);
+      Debug.Assert(sourceEncoding.BuiltInType == binding.Encoding);
     }
     /// <summary>
     /// Gets the ua decoder.
     /// </summary>
     /// <value>The ua decoder.</value>
-    IUADecoder IEncodingFactory.UADecoder
-    {
-      get { return null; }
-    }
     public IUAEncoder UAEncoder
     {
       get { return m_IUAEncoder; }
+    }
+    /// <summary>
+    /// Gets the decoder that provides methods to be used to decode OPC UA Built-in types.
+    /// </summary>
+    /// <value>The object implementing <see cref="T:UAOOI.SemanticData.DataManagement.Encoding.IUADecoder" /> interface.</value>
+    /// <exception cref="System.NotImplementedException"></exception>
+    public IUADecoder UADecoder
+    {
+      get
+      {
+        throw new NotImplementedException();
+      }
     }
     #endregion
 

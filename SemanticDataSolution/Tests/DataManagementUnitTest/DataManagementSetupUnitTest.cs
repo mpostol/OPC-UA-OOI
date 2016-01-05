@@ -95,12 +95,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           throw new NotImplementedException();
         }
       }
-      public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
+      public void UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
       {
-        converter.Converter = null;
-        converter.Culture = null;
-        converter.Parameter = null;
-        Assert.IsNotNull(converter.Encoding);
+        binding.Converter = null;
+        binding.Culture = null;
+        binding.Parameter = null;
+        Assert.IsNotNull(binding.Encoding);
       }
       private IUADecoder m_IUADecoder = new Helpers.UABinaryDecoderImplementation();
 
@@ -117,9 +117,13 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     private class BF : IBindingFactory
     {
       #region IBindingFactory
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo field)
       {
         return new Binding();
+      }
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo encoding)
+      {
+        throw new NotImplementedException();
       }
       public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {

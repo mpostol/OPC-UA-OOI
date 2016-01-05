@@ -8,18 +8,20 @@
       <DataSymbolicName>DataSymbolicName</DataSymbolicName>
       <DataSet>
         <DataMemberConfiguration>
-          <SymbolicName>Value1</SymbolicName>
           <ProcessValueName>Value1</ProcessValueName>
-          <Encoding>DateTime</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <SymbolicName>Value1</SymbolicName>
+          <TypeInformation>
+            <BuiltInType>DateTime</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
-          <SymbolicName>Value2</SymbolicName>
           <ProcessValueName>Value2</ProcessValueName>
-          <Encoding>Double</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <SymbolicName>Value2</SymbolicName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
       </DataSet>
       <Guid>c1f53ffb-6552-4ccc-84c9-f847147cdc85</Guid>

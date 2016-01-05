@@ -58,21 +58,22 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         m_Repository = repository;
       }
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo field)
       {
-        IConsumerBinding _ncb = new ConsumerBindingMonitoredValue<object>(encoding);
-        string _key = String.Format("{0}.{1}", repositoryGroup, variableName);
+        IConsumerBinding _ncb = new ConsumerBindingMonitoredValue<object>(field.BuiltInType);
+        string _key = String.Format("{0}.{1}", repositoryGroup, processValueName);
         m_Repository.Add(_key, _ncb);
         return _ncb;
       }
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo encoding)
       {
-        string _key = String.Format("{0}.{1}", repositoryGroup, variableName);
-        ProducerBindingMonitoredValue<object> _npb = new ProducerBindingMonitoredValue<object>(_key, encoding);
+        string _key = String.Format("{0}.{1}", repositoryGroup, processValueName);
+        ProducerBindingMonitoredValue<object> _npb = new ProducerBindingMonitoredValue<object>(_key, encoding.BuiltInType);
         _npb.MonitoredValue = Guid.NewGuid();
         m_Repository.Add(_key, _npb);
         return _npb;
       }
+
       private Dictionary<string, IBinding> m_Repository = new Dictionary<string, IBinding>();
     }
     private class EncodingFactory : IEncodingFactory
@@ -88,11 +89,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           throw new NotImplementedException();
         }
       }
-      public void UpdateValueConverter(IBinding converter, string repositoryGroup, BuiltInType sourceEncoding)
+      public void UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
       {
-        converter.Culture = null;
-        converter.Converter = null;
-        converter.Parameter = null;
+        binding.Culture = null;
+        binding.Converter = null;
+        binding.Parameter = null;
       }
       private readonly IUADecoder m_UADecoder = new Helpers.UABinaryDecoderImplementation();
 

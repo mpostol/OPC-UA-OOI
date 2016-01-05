@@ -195,7 +195,6 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       {
         Elements = array;
         Dimensions = dimensions;
-        m_BuiltInType = builtInType;
         int _length = 1;
         for (int _ix = 0; _ix < dimensions.Length; _ix++)
           _length *= dimensions[_ix];
@@ -214,8 +213,6 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       }
       public UATypeInfo TypeInfo { get; private set; }
       #endregion
-
-      private BuiltInType m_BuiltInType;
 
     }
     //vars

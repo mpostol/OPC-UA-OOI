@@ -10,30 +10,34 @@
         <DataMemberConfiguration>
           <SymbolicName>BoolToggle</SymbolicName>
           <ProcessValueName>BoolToggle</ProcessValueName>
-          <Encoding>Boolean</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>Boolean</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueInt32</SymbolicName>
           <ProcessValueName>ValueInt32</ProcessValueName>
-          <Encoding>Int32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>Int32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>Int32Fast</SymbolicName>
           <ProcessValueName>Int32Fast</ProcessValueName>
-          <Encoding>Int32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>Int32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueDateTime</SymbolicName>
           <ProcessValueName>ValueDateTime</ProcessValueName>
-          <Encoding>DateTime</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>DateTime</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
       </DataSet>
       <Guid>c1f53ffb-6552-4ccc-84c9-f847147cdc85</Guid>
@@ -58,107 +62,122 @@
         <DataMemberConfiguration>
           <SymbolicName>ValueBoolean</SymbolicName>
           <ProcessValueName>ValueBoolean</ProcessValueName>
-          <Encoding>Boolean</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>Boolean</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueByte</SymbolicName>
           <ProcessValueName>ValueByte</ProcessValueName>
-          <Encoding>Byte</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>Byte</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueInt16</SymbolicName>
           <ProcessValueName>ValueInt16</ProcessValueName>
-          <Encoding>Int16</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>Int16</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueInt32</SymbolicName>
           <ProcessValueName>ValueInt32</ProcessValueName>
-          <Encoding>Int32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>Int32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueInt64</SymbolicName>
           <ProcessValueName>ValueInt64</ProcessValueName>
-          <Encoding>Int64</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>Int64</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueSByte</SymbolicName>
           <ProcessValueName>ValueSByte</ProcessValueName>
-          <Encoding>SByte</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>SByte</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueUInt16</SymbolicName>
           <ProcessValueName>ValueUInt16</ProcessValueName>
-          <Encoding>UInt16</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt16</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueUInt32</SymbolicName>
           <ProcessValueName>ValueUInt32</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueUInt64</SymbolicName>
           <ProcessValueName>ValueUInt64</ProcessValueName>
-          <Encoding>UInt64</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt64</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueFloat</SymbolicName>
           <ProcessValueName>ValueFloat</ProcessValueName>
-          <Encoding>Float</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>Float</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueDouble</SymbolicName>
           <ProcessValueName>ValueDouble</ProcessValueName>
-          <Encoding>Double</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueString</SymbolicName>
           <ProcessValueName>ValueString</ProcessValueName>
-          <Encoding>String</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>String</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueByteString</SymbolicName>
           <ProcessValueName>ValueByteString</ProcessValueName>
-          <Encoding>ByteString</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>ByteString</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueGuid</SymbolicName>
           <ProcessValueName>ValueGuid</ProcessValueName>
-          <Encoding>Guid</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>Guid</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>ValueDateTime</SymbolicName>
           <ProcessValueName>ValueDateTime</ProcessValueName>
-          <Encoding>DateTime</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>DateTime</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
       </DataSet>
       <Guid>c1f53ffb-6552-4ccc-84c9-f847147cdc85</Guid>
@@ -183,711 +202,811 @@
         <DataMemberConfiguration>
           <SymbolicName>MassTest_00</SymbolicName>
           <ProcessValueName>MassTest_00</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_01</SymbolicName>
           <ProcessValueName>MassTest_01</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_02</SymbolicName>
           <ProcessValueName>MassTest_02</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_03</SymbolicName>
           <ProcessValueName>MassTest_03</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_04</SymbolicName>
           <ProcessValueName>MassTest_04</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_05</SymbolicName>
           <ProcessValueName>MassTest_05</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_06</SymbolicName>
           <ProcessValueName>MassTest_06</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_07</SymbolicName>
           <ProcessValueName>MassTest_07</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_08</SymbolicName>
           <ProcessValueName>MassTest_08</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_09</SymbolicName>
           <ProcessValueName>MassTest_09</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
 
         <DataMemberConfiguration>
           <SymbolicName>MassTest_10</SymbolicName>
           <ProcessValueName>MassTest_10</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_11</SymbolicName>
           <ProcessValueName>MassTest_11</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_12</SymbolicName>
           <ProcessValueName>MassTest_12</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_13</SymbolicName>
           <ProcessValueName>MassTest_13</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_14</SymbolicName>
           <ProcessValueName>MassTest_14</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_15</SymbolicName>
           <ProcessValueName>MassTest_15</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_16</SymbolicName>
           <ProcessValueName>MassTest_16</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_17</SymbolicName>
           <ProcessValueName>MassTest_17</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_18</SymbolicName>
           <ProcessValueName>MassTest_18</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_19</SymbolicName>
           <ProcessValueName>MassTest_19</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
 
         <DataMemberConfiguration>
           <SymbolicName>MassTest_20</SymbolicName>
           <ProcessValueName>MassTest_20</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_21</SymbolicName>
           <ProcessValueName>MassTest_21</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_22</SymbolicName>
           <ProcessValueName>MassTest_22</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_23</SymbolicName>
           <ProcessValueName>MassTest_23</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_24</SymbolicName>
           <ProcessValueName>MassTest_24</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_25</SymbolicName>
           <ProcessValueName>MassTest_25</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_26</SymbolicName>
           <ProcessValueName>MassTest_26</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_27</SymbolicName>
           <ProcessValueName>MassTest_27</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_28</SymbolicName>
           <ProcessValueName>MassTest_28</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_29</SymbolicName>
           <ProcessValueName>MassTest_29</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
 
         <DataMemberConfiguration>
           <SymbolicName>MassTest_30</SymbolicName>
           <ProcessValueName>MassTest_30</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_31</SymbolicName>
           <ProcessValueName>MassTest_31</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_32</SymbolicName>
           <ProcessValueName>MassTest_32</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_33</SymbolicName>
           <ProcessValueName>MassTest_33</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_34</SymbolicName>
           <ProcessValueName>MassTest_34</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_35</SymbolicName>
           <ProcessValueName>MassTest_35</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_36</SymbolicName>
           <ProcessValueName>MassTest_36</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_37</SymbolicName>
           <ProcessValueName>MassTest_37</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_38</SymbolicName>
           <ProcessValueName>MassTest_38</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_39</SymbolicName>
           <ProcessValueName>MassTest_39</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
 
         <DataMemberConfiguration>
           <SymbolicName>MassTest_40</SymbolicName>
           <ProcessValueName>MassTest_40</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_41</SymbolicName>
           <ProcessValueName>MassTest_41</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_42</SymbolicName>
           <ProcessValueName>MassTest_42</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_43</SymbolicName>
           <ProcessValueName>MassTest_43</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_44</SymbolicName>
           <ProcessValueName>MassTest_44</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_45</SymbolicName>
           <ProcessValueName>MassTest_45</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_46</SymbolicName>
           <ProcessValueName>MassTest_46</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_47</SymbolicName>
           <ProcessValueName>MassTest_47</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_48</SymbolicName>
           <ProcessValueName>MassTest_48</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_49</SymbolicName>
           <ProcessValueName>MassTest_49</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
 
         <DataMemberConfiguration>
           <SymbolicName>MassTest_50</SymbolicName>
           <ProcessValueName>MassTest_50</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_51</SymbolicName>
           <ProcessValueName>MassTest_51</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_52</SymbolicName>
           <ProcessValueName>MassTest_52</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_53</SymbolicName>
           <ProcessValueName>MassTest_53</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_54</SymbolicName>
           <ProcessValueName>MassTest_54</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_55</SymbolicName>
           <ProcessValueName>MassTest_55</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_56</SymbolicName>
           <ProcessValueName>MassTest_56</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_57</SymbolicName>
           <ProcessValueName>MassTest_57</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_58</SymbolicName>
           <ProcessValueName>MassTest_58</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_59</SymbolicName>
           <ProcessValueName>MassTest_59</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
 
         <DataMemberConfiguration>
           <SymbolicName>MassTest_60</SymbolicName>
           <ProcessValueName>MassTest_60</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_61</SymbolicName>
           <ProcessValueName>MassTest_61</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_62</SymbolicName>
           <ProcessValueName>MassTest_62</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_63</SymbolicName>
           <ProcessValueName>MassTest_63</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_64</SymbolicName>
           <ProcessValueName>MassTest_64</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_65</SymbolicName>
           <ProcessValueName>MassTest_65</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_66</SymbolicName>
           <ProcessValueName>MassTest_66</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_67</SymbolicName>
           <ProcessValueName>MassTest_67</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_68</SymbolicName>
           <ProcessValueName>MassTest_68</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_69</SymbolicName>
           <ProcessValueName>MassTest_69</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
 
         <DataMemberConfiguration>
           <SymbolicName>MassTest_70</SymbolicName>
           <ProcessValueName>MassTest_70</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_71</SymbolicName>
           <ProcessValueName>MassTest_71</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_72</SymbolicName>
           <ProcessValueName>MassTest_72</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_73</SymbolicName>
           <ProcessValueName>MassTest_73</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_74</SymbolicName>
           <ProcessValueName>MassTest_74</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_75</SymbolicName>
           <ProcessValueName>MassTest_75</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_76</SymbolicName>
           <ProcessValueName>MassTest_76</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_77</SymbolicName>
           <ProcessValueName>MassTest_77</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_78</SymbolicName>
           <ProcessValueName>MassTest_78</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_79</SymbolicName>
           <ProcessValueName>MassTest_79</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
 
         <DataMemberConfiguration>
           <SymbolicName>MassTest_80</SymbolicName>
           <ProcessValueName>MassTest_80</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_81</SymbolicName>
           <ProcessValueName>MassTest_81</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_82</SymbolicName>
           <ProcessValueName>MassTest_82</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_83</SymbolicName>
           <ProcessValueName>MassTest_83</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_84</SymbolicName>
           <ProcessValueName>MassTest_84</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_85</SymbolicName>
           <ProcessValueName>MassTest_85</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_86</SymbolicName>
           <ProcessValueName>MassTest_86</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_87</SymbolicName>
           <ProcessValueName>MassTest_87</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_88</SymbolicName>
           <ProcessValueName>MassTest_88</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_89</SymbolicName>
           <ProcessValueName>MassTest_89</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
 
         <DataMemberConfiguration>
           <SymbolicName>MassTest_90</SymbolicName>
           <ProcessValueName>MassTest_90</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_91</SymbolicName>
           <ProcessValueName>MassTest_91</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_92</SymbolicName>
           <ProcessValueName>MassTest_92</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_93</SymbolicName>
           <ProcessValueName>MassTest_93</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_94</SymbolicName>
           <ProcessValueName>MassTest_94</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_95</SymbolicName>
           <ProcessValueName>MassTest_95</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_96</SymbolicName>
           <ProcessValueName>MassTest_96</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_97</SymbolicName>
           <ProcessValueName>MassTest_97</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_98</SymbolicName>
           <ProcessValueName>MassTest_98</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
           <SymbolicName>MassTest_99</SymbolicName>
           <ProcessValueName>MassTest_99</ProcessValueName>
-          <Encoding>UInt32</Encoding>
-          <ValueRank>-1</ValueRank>
-          <ArrayDimensions xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
         </DataMemberConfiguration>
 
       </DataSet>

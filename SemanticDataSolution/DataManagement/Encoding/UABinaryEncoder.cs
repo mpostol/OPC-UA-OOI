@@ -31,28 +31,25 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       byte _encodingByte = (byte)value.UATypeInfo.BuiltInType;
       if (value.UATypeInfo.BuiltInType == BuiltInType.Enumeration)
         _encodingByte = (byte)BuiltInType.Int32;
-      object valueToEncode = value.Value;
       if (value.UATypeInfo.ValueRank < 0)
       {
         encoder.Write(_encodingByte);
-        WriteValue(encoder, value.UATypeInfo.BuiltInType, valueToEncode);
+        WriteValue(encoder, value.UATypeInfo.BuiltInType, value.Value);
       }
       else
       {
-        IMatrix _matrix = null;
         _encodingByte |= (byte)VariantEncodingMask.IsArray;
-        if (value.UATypeInfo.ValueRank > 1)
+        Array _array = null;
+        if (value.Value != null)
         {
-          _encodingByte |= (byte)VariantEncodingMask.ArrayDimensionsPresents;
-          _matrix = valueToEncode as IMatrix;
-          if (_matrix == null)
+          _array = value.Value as Array;
+          if (_array == null)
             throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(value.Value)} must be {nameof(IMatrix)} and cannot be null");
-          valueToEncode = _matrix.Elements;
+          if (_array.Rank > 1)
+            _encodingByte |= (byte)VariantEncodingMask.ArrayDimensionsPresents;
         }
         encoder.Write(_encodingByte);
-        WriteArray(encoder, value.UATypeInfo.BuiltInType, valueToEncode);
-        if (value.UATypeInfo.ValueRank > 1)
-          WriteDimensions(encoder, _matrix.Dimensions);
+        WriteArray(encoder, value.UATypeInfo.BuiltInType, _array);
       }
     }
     /// <summary>
@@ -255,7 +252,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           throw new ArgumentOutOfRangeException($"Cannot encode unknown type in Variant object (0x{builtInType:X2}).");
       }
     }
-    private void WriteArray(IBinaryEncoder encoder, BuiltInType builtInType, object value)
+    private void WriteArray(IBinaryEncoder encoder, BuiltInType builtInType, Array value)
     {
       switch (builtInType)
       {
@@ -340,36 +337,24 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           break;
       };
     }
-    private void WriteArray<type>(IBinaryEncoder encoder, object values, Action<type> writeValue)
+    private void WriteArray<type>(IBinaryEncoder encoder, Array array, Action<type> writeValue)
     {
-      type[] _array = values as type[];
-      if (WriteArrayLength(encoder, _array))
-        return;
-      for (int ii = 0; ii < _array.Length; ii++)
-        writeValue(_array[ii]);
-    }
-    private bool WriteArrayLength<type>(IBinaryEncoder encoder, IList<type> values)
-    {
-      // check for null.
-      if (values == null)
+      if (array == null)
       {
         encoder.Write(-1);
-        return true;
-      }
-      if (MaxArrayLength > 0 && MaxArrayLength < values.Count)
-        throw new ArgumentOutOfRangeException(nameof(MaxArrayLength), $"MaxArrayLength {MaxArrayLength} < {values.Count}");
-      // write length.
-      encoder.Write(values.Count);
-      return values.Count == 0;
-    }
-    private void WriteDimensions(IBinaryEncoder encoder, int[] dimensions)
-    {
-      // write dimensions array length.
-      if (WriteArrayLength(encoder, dimensions))
         return;
-      // write dimensions.
-      for (int ii = 0; ii < dimensions.Length; ii++)
-        encoder.Write(dimensions[ii]);
+      }
+      if (MaxArrayLength > 0 && MaxArrayLength < array.Length)
+        throw new ArgumentOutOfRangeException(nameof(MaxArrayLength), $"MaxArrayLength {MaxArrayLength} < {array.Length}");
+      encoder.Write(array.Length);
+      //for (int ii = 0; ii < values.Length; ii++)
+      foreach (type item in array)
+        writeValue(item);
+      if (array.Rank == 1)
+        return;
+      encoder.Write(array.Rank);
+      for (int ii = 0; ii < array.Rank; ii++)
+        encoder.Write(array.GetLength(ii));
     }
     #endregion
 

@@ -42,20 +42,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     [TestMethod]
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
-    [ExpectedException(typeof(ArgumentOutOfRangeException))]
-    public void ArrayNoIMatrixTest()
-    {
-      using (MemoryStream _stream = new MemoryStream())
-      using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
-      {
-        Assert.IsNotNull(_buffer);
-        Int32[] _value = new Int32[byte.MaxValue + 1];
-        Variant _variant = new Variant { UATypeInfo = new UATypeInfo(BuiltInType.Int32, 2), Value = _value };
-        _buffer.Write(_buffer, _variant);
-      }
-    }
-    [TestMethod]
-    [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
     public void ArrayOneDimensionTest()
     {
       WriteArrayOneDimension(0);
@@ -65,30 +51,24 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
     public void ArrayMultiDimensionTest()
     {
-      Assert.Inconclusive();
       byte[] _EncodedValue = null;
       using (MemoryStream _stream = new MemoryStream())
       using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
       {
         Assert.IsNotNull(_buffer);
-        Int32[] _dimensions = new Int32[] { 3, 4 };
-        Array _array = Array.CreateInstance(typeof(Int32), _dimensions);
+        Int32[] _dimensions = new Int32[] { 2, 2 };
+        Int32[,] _array = new Int32[,] { { 0, 1 }, { 2, 3 } };
+        Assert.AreEqual<int>(2, _array.Rank);
+        Assert.AreEqual<int>(4, _array.Length);
         Assert.AreEqual<int>(_dimensions.Length, _array.Rank);
-        int _value = 0;
-        for (int _rank = 0; _rank < _dimensions.Length; _rank++)
-        {
-          for (int _x = 0; _x < _dimensions[0]; _x++)
-            for (int _y = 0; _y < _dimensions[1]; _y++)
-              _array.SetValue(_value, _x, _y);
-        }
-        UATypeInfo _uaTypeInfo = new UATypeInfo(BuiltInType.Int32, _dimensions.Length);
-        Variant _variant = new Variant { UATypeInfo = _uaTypeInfo, Value = new Matrix(_dimensions, _array, _uaTypeInfo) };
+        UATypeInfo _uaTypeInfo = new UATypeInfo(BuiltInType.Int32, _dimensions.Length) { ArrayDimensions = _dimensions };
+        Variant _variant = new Variant { UATypeInfo = _uaTypeInfo, Value = _array };
         _buffer.Write(_buffer, _variant);
         _buffer.Close();
         _EncodedValue = _stream.ToArray();
       }
       Assert.IsNotNull(_EncodedValue);
-      Assert.AreEqual<int>(25, _EncodedValue.Length);
+      Assert.AreEqual<int>(33, _EncodedValue.Length);
     }
     private class Matrix : IMatrix
     {

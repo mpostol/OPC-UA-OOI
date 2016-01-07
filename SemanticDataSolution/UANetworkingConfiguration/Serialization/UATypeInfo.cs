@@ -37,6 +37,11 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       m_builtInType = builtInType;
       m_valueRank = valueRank;
     }
+
+    public UATypeInfo(UATypeInfo encoding)
+    {
+      this.encoding = encoding;
+    }
     #endregion
 
     #region properties
@@ -91,6 +96,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     private BuiltInType m_builtInType;
     private int m_valueRank;
     private int[] m_ArrayDimensionsField;
+    private UATypeInfo encoding;
     #endregion
 
   }

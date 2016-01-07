@@ -89,7 +89,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
             _return = AddBinding<UInt16>(_name, Inc, UInt16.MinValue, BuiltInType.UInt16);
             break;
           case BuiltInType.Int32:
-            _return = AddBinding<Int32>(_name, Inc, Int32.MinValue, BuiltInType.Int32);
+            _return = fieldTypeInfo.ValueRank == 0 ? AddBinding<Int32>(_name, Inc, Int32.MinValue, BuiltInType.Int32) : AddBinding<Int32[]>(_name, Inc, new Int32[] { 0 }, BuiltInType.Int32);
             break;
           case BuiltInType.UInt32:
             _return = AddBinding<UInt32>(_name, Inc, UInt32.MinValue, BuiltInType.UInt32);
@@ -280,6 +280,13 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     private static byte[] Inc(byte[] monitoredValue)
     {
       byte[] _ret = new byte[Math.Min(monitoredValue.Length + 1, 254)];
+      for (byte i = 0; i < _ret.Length; i++)
+        _ret[i] = i;
+      return _ret;
+    }
+    private static Int32[] Inc(Int32[] monitoredValue)
+    {
+      Int32[] _ret = new Int32[Math.Min(monitoredValue.Length + 1, 254)];
       for (byte i = 0; i < _ret.Length; i++)
         _ret[i] = i;
       return _ret;

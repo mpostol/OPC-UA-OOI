@@ -49,8 +49,36 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
             _encodingByte |= (byte)VariantEncodingMask.ArrayDimensionsPresents;
         }
         encoder.Write(_encodingByte);
-        WriteArray(encoder, value.UATypeInfo.BuiltInType, _array);
+        EncodeArray(encoder, value.UATypeInfo.BuiltInType, _array);
       }
+    }
+    /// <summary>
+    /// Encodes the <see cref="Array" /> directly if the array is one dimensional or as <see cref="UANetworking.Configuration.Serialization.BuiltInType.Variant" /> otherwise.
+    /// </summary>
+    /// <typeparam name="type">The type of the array element  type.</typeparam>
+    /// <param name="encoder">The encoder <see cref="IBinaryEncoder" /> to write the value encapsulated in this instance.</param>
+    /// <param name="value">The value to be encoded as an instance of <see cref="Array" />.</param>
+    /// <param name="writeValue">Thi delegate encapsulates binary encoding functionality.</param>
+    /// <param name="builtInType"><see cref="BuiltInType" /> of the array item to be encoded in case of variant.</param>
+    public void WriteArray<type>(IBinaryEncoder encoder, Array value, Action<type> writeValue, BuiltInType builtInType)
+    {
+      if (value == null)
+      {
+        encoder.Write((byte)0);
+        return;
+      }
+      byte _encodingByte = (byte)builtInType;
+      if (value.Rank > 1)
+      {
+        //Encode it as the Variant
+        if (builtInType == BuiltInType.Enumeration)
+          _encodingByte = (byte)BuiltInType.Int32;
+        _encodingByte |= (byte)VariantEncodingMask.IsArray;
+        if (value.Rank > 1)
+          _encodingByte |= (byte)VariantEncodingMask.ArrayDimensionsPresents;
+        encoder.Write(_encodingByte);
+      }
+      EncodeArray<type>(encoder.Write, value, writeValue);
     }
     /// <summary>
     /// Writes <see cref="DateTime" /> using the provided encoder <see cref="IBinaryEncoder" />.
@@ -252,109 +280,109 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           throw new ArgumentOutOfRangeException($"Cannot encode unknown type in Variant object (0x{builtInType:X2}).");
       }
     }
-    private void WriteArray(IBinaryEncoder encoder, BuiltInType builtInType, Array value)
+    private void EncodeArray(IBinaryEncoder encoder, BuiltInType builtInType, Array value)
     {
       switch (builtInType)
       {
         case BuiltInType.Boolean:
-          WriteArray<Boolean>(encoder, value, encoder.Write);
+          EncodeArray<Boolean>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.SByte:
-          WriteArray<SByte>(encoder, value, encoder.Write);
+          EncodeArray<SByte>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.Byte:
-          WriteArray<Byte>(encoder, value, encoder.Write);
+          EncodeArray<Byte>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.Int16:
-          WriteArray<Int16>(encoder, value, encoder.Write);
+          EncodeArray<Int16>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.UInt16:
-          WriteArray<UInt16>(encoder, value, encoder.Write);
+          EncodeArray<UInt16>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.Int32:
         case BuiltInType.Enumeration:
-          WriteArray<Int32>(encoder, value, encoder.Write);
+          EncodeArray<Int32>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.UInt32:
-          WriteArray<System.UInt32>(encoder, value, encoder.Write);
+          EncodeArray<System.UInt32>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.Int64:
-          WriteArray<Int64>(encoder, value, encoder.Write);
+          EncodeArray<Int64>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.UInt64:
-          WriteArray<UInt64>(encoder, value, encoder.Write);
+          EncodeArray<UInt64>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.Float:
-          WriteArray<Single>(encoder, value, encoder.Write);
+          EncodeArray<Single>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.Double:
-          WriteArray<Double>(encoder, value, encoder.Write);
+          EncodeArray<Double>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.String:
-          WriteArray<String>(encoder, value, x => Write(encoder, x));
+          EncodeArray<String>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.DateTime:
-          WriteArray<DateTime>(encoder, value, x => Write(encoder, x));
+          EncodeArray<DateTime>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.Guid:
-          WriteArray<Guid>(encoder, value, encoder.Write);
+          EncodeArray<Guid>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.ByteString:
-          WriteArray<Byte>(encoder, value, encoder.Write);
+          EncodeArray<Byte>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.XmlElement:
-          WriteArray<XmlElement>(encoder, value, x => Write(encoder, x));
+          EncodeArray<XmlElement>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.NodeId:
-          WriteArray<INodeId>(encoder, value, x => Write(encoder, x));
+          EncodeArray<INodeId>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.ExpandedNodeId:
-          WriteArray<IExpandedNodeId>(encoder, value, x => Write(encoder, x));
+          EncodeArray<IExpandedNodeId>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.StatusCode:
-          WriteArray<IStatusCode>(encoder, value, x => Write(encoder, x));
+          EncodeArray<IStatusCode>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.QualifiedName:
-          WriteArray<IQualifiedName>(encoder, value, x => Write(encoder, x));
+          EncodeArray<IQualifiedName>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.LocalizedText:
-          WriteArray<ILocalizedText>(encoder, value, x => Write(encoder, x));
+          EncodeArray<ILocalizedText>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.ExtensionObject:
-          WriteArray<IExtensionObject>(encoder, value, x => Write(encoder, x));
+          EncodeArray<IExtensionObject>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.DataValue:
-          WriteArray<IDataValue>(encoder, value, x => Write(encoder, x));
+          EncodeArray<IDataValue>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.Variant:
-          WriteArray<IVariant>(encoder, value, x => Write(encoder, x));
+          EncodeArray<IVariant>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.DiagnosticInfo:
-          WriteArray<IDiagnosticInfo>(encoder, value, x => Write(encoder, x));
+          EncodeArray<IDiagnosticInfo>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.Null:
         default:
           break;
       };
     }
-    private void WriteArray<type>(IBinaryEncoder encoder, Array array, Action<type> writeValue)
+    private void EncodeArray<type>(Action<Int32> encoderInt32, Array array, Action<type> writeValue)
     {
       if (array == null)
       {
-        encoder.Write(-1);
+        encoderInt32(-1);
         return;
       }
       if (MaxArrayLength > 0 && MaxArrayLength < array.Length)
         throw new ArgumentOutOfRangeException(nameof(MaxArrayLength), $"MaxArrayLength {MaxArrayLength} < {array.Length}");
-      encoder.Write(array.Length);
+      encoderInt32(array.Length);
       //for (int ii = 0; ii < values.Length; ii++)
       foreach (type item in array)
         writeValue(item);
       if (array.Rank == 1)
         return;
-      encoder.Write(array.Rank);
+      encoderInt32(array.Rank);
       for (int ii = 0; ii < array.Rank; ii++)
-        encoder.Write(array.GetLength(ii));
+        encoderInt32(array.GetLength(ii));
     }
     #endregion
 

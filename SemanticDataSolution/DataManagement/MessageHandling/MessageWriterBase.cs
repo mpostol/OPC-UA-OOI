@@ -61,7 +61,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
         if (State.State != HandlerState.Operational)
           return;
         ContentMask = contentMask;
-       
+
         CreateMessage(encoding, dataSetWriterId, length, messageSequenceNumber, timeStamp, configurationVersion);
         //UInt64 _mask = 0x1;
         for (int i = 0; i < length; i++)
@@ -198,7 +198,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     private void WriteValue(IProducerBinding producerBinding)
     {
       object value = producerBinding.GetFromRepository();
-      switch (producerBinding.Encoding)
+      switch (producerBinding.Encoding.BuiltInType)
       {
         case BuiltInType.Boolean:
           Write((Boolean)value);
@@ -220,7 +220,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           break;
         case BuiltInType.Enumeration:
         case BuiltInType.Int32:
-          Write((Int32)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            Write((Int32)value);
+          else
+            m_UAEncoder.WriteArray<Int32>(this, (Array)value, Write, BuiltInType.Int32);
           break;
         case BuiltInType.Int64:
           Write((Int64)value);

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Xml;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.DataManagement.Encoding
 {
@@ -96,6 +97,15 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     /// <param name="encoder">The encoder <see cref="IBinaryEncoder"/> to write the value encapsulated in this instance.</param>
     /// <param name="value">The value to be encoded as an instance of <see cref="Guid"/>.</param>
     void Write(IBinaryEncoder encoder, string value);
+    /// <summary>
+    /// Encodes the <see cref="Array" /> directly if the array is one dimensional or as <see cref="UANetworking.Configuration.Serialization.BuiltInType.Variant" /> otherwise.
+    /// </summary>
+    /// <typeparam name="type">The type of the array element type.</typeparam>
+    /// <param name="encoder">The encoder <see cref="IBinaryEncoder" /> to write the value encapsulated in this instance.</param>
+    /// <param name="value">The value to be encoded as an instance of <see cref="Array" />.</param>
+    /// <param name="writeValue">This delegate encapsulates binary encoding functionality of the array element.</param>
+    /// <param name="builtInType"><see cref="BuiltInType"/> of the array item to be encoded in case the array is multidimensional and must be encoded as the variant.</param>
+    void WriteArray<type>(IBinaryEncoder encoder, Array value, Action<type> writeValue, BuiltInType builtInType);
 
   }
 

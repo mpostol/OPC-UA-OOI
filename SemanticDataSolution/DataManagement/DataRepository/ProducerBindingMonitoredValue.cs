@@ -17,7 +17,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// <param name="valueName">Name of the "repository group" and "variable" separated by "."</param>
     /// <param name="targetType">Type of the target.</param>
     /// <remarks>The <see cref="ProducerBinding{type}.GetReadValueDelegate" /> that captures a delegate used to assign new value to local variable in the data repository.</remarks>
-    public ProducerBindingMonitoredValue(string valueName, BuiltInType targetType)
+    public ProducerBindingMonitoredValue(string valueName, UATypeInfo targetType)
       : base(valueName, targetType)
     { }
     /// <summary>

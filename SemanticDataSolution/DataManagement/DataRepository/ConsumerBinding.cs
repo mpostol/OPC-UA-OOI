@@ -17,8 +17,8 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// Initializes a new instance of the <see cref="ConsumerBinding{type}" /> class.
     /// </summary>
     /// <param name="assign">Captures a delegate used to assign new value to local resources.</param>
-    /// <param name="encoding">The <see cref="BuiltInType"/>of the message field encoding.</param>
-    public ConsumerBinding(Action<type> assign, BuiltInType encoding) : base(encoding)
+    /// <param name="encoding">The <see cref="UATypeInfo"/> of the message field encoding.</param>
+    public ConsumerBinding(Action<type> assign, UATypeInfo encoding) : base(encoding)
     {
       AssignValueToRepository = assign;
     }
@@ -46,8 +46,8 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// <summary>
     /// Initializes a new instance of the <see cref="ConsumerBinding{type}"/> class.
     /// </summary>
-    /// <param name="encoding">The <see cref="BuiltInType"/>of the message field encoding.</param>
-    protected ConsumerBinding(BuiltInType encoding)
+    /// <param name="encoding">The <see cref="UATypeInfo"/>of the message field encoding.</param>
+    protected ConsumerBinding(UATypeInfo encoding)
       : this(x => { }, encoding)
     { }
     #endregion

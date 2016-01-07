@@ -20,8 +20,8 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// <summary>
     /// Gets the type of the message field encoding.
     /// </summary>
-    /// <value>The <see cref="BuiltInType"/>of the message field encoding.</value>
-    BuiltInType Encoding { get; }
+    /// <value>The <see cref="UATypeInfo"/>of the message field encoding.</value>
+    UATypeInfo Encoding { get; }
     /// <summary>
     /// Sets an optional parameter to be used in the converter logic.
     /// </summary>

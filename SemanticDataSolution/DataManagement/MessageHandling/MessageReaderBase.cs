@@ -23,7 +23,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       if (uaDecoder == null)
         throw new ArgumentNullException(nameof(uaDecoder));
       m_UADecoder = uaDecoder;
-      m_ReadValueDelegate = ReadValueVariant; 
+      m_ReadValueDelegate = ReadValueVariant;
     }
     #endregion
 
@@ -141,7 +141,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     private void ReadValue(IConsumerBinding consumerBinding)
     {
       object _value = null;
-      switch (consumerBinding.Encoding)
+      switch (consumerBinding.Encoding.BuiltInType)
       {
         case BuiltInType.Boolean:
           _value = ReadBoolean();
@@ -159,7 +159,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           _value = ReadUInt16();
           break;
         case BuiltInType.Int32:
-          _value = ReadInt32();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = ReadInt32();
+          else
+            _value = m_UADecoder.ReadArray(this, ReadInt32, consumerBinding.Encoding);
           break;
         case BuiltInType.UInt32:
           _value = ReadUInt32();
@@ -233,7 +236,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       throw new NotImplementedException();
     }
-    private void AssertTypeMach(UATypeInfo uATypeInfo, BuiltInType encoding)
+    private void AssertTypeMach(UATypeInfo uATypeInfo, UATypeInfo encoding)
     {
       //TODO MessageReaderBase.AssertTypeMach - must be implemented
     }

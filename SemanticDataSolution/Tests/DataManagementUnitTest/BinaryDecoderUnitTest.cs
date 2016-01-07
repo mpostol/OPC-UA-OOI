@@ -144,7 +144,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         set { throw new NotImplementedException(); }
       }
-      public BuiltInType Encoding
+      public UATypeInfo Encoding
       {
         get;
         private set;

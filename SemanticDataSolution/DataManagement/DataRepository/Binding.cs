@@ -21,7 +21,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// Initializes a new instance of the <see cref="Binding" /> class.
     /// </summary>
     /// <param name="encoding">The <see cref="BuiltInType"/>of the message field encoding.</param>
-    public Binding(BuiltInType encoding)
+    public Binding(UATypeInfo encoding)
     {
       m_MessageEncoding = encoding;
     }
@@ -32,7 +32,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     /// Gets the type of the message field encoding.
     /// </summary>
     /// <value>The <see cref="BuiltInType" />of the message field encoding.</value>
-    public BuiltInType Encoding { get { return m_MessageEncoding; } }
+    public UATypeInfo Encoding { get { return m_MessageEncoding; } }
     /// <summary>
     /// Sets the converter, which is used to provide a way to apply custom logic to a binding.
     /// </summary>
@@ -84,7 +84,7 @@ namespace UAOOI.SemanticData.DataManagement.DataRepository
     #endregion
 
     #region private
-    private BuiltInType m_MessageEncoding;
+    private UATypeInfo m_MessageEncoding;
     /// <summary>
     /// Sets the converter, which is used to provide a way to apply custom logic to a binding.
     /// </summary>

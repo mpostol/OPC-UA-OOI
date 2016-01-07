@@ -37,10 +37,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         value = ReadValue(decoder, builtInType);
       else
       {
-        int length = decoder.ReadInt32();
-        if (length < 0)
-          return value;
-        Array array = ReadArray(decoder, length, builtInType);
+        Array array = DecodeArray(decoder, builtInType);
         List<Int32> _dimensions = null;
         if ((encodingByte & (byte)VariantEncodingMask.ArrayDimensionsPresents) != 0)
           _dimensions = ReadDimensions(decoder);
@@ -50,6 +47,29 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           value = new Variant(new Matrix(array, builtInType));
       }
       return value;
+    }
+    /// <summary>
+    /// Reads an array of the specified type <paramref name="uaTypeInfo" /> and wraps it in the <see cref="IMatrix" /> object.
+    /// </summary>
+    /// <typeparam name="type">The type of the <see cref="IMatrix.Elements" /> element.</typeparam>
+    /// <param name="decoder">The decoder to be used to recover the array from the binary stream.</param>
+    /// <param name="readValue">This delegate encapsulates binary decoding functionality of the array element.</param>
+    /// <param name="uaTypeInfo"><see cref="BuiltInType" /> of the array to be decoded used in case the array is multidimensional and must be decoded as the variant.</param>
+    /// <returns>An instance of <see cref="IMatrix" /> capturing the an array recovered from the message.</returns>
+    /// <exception cref="System.ArgumentOutOfRangeException">Encountered unexpected array rank.</exception>
+    public IMatrix ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, UATypeInfo uaTypeInfo)
+    {
+      IMatrix _ret = null;
+      if (uaTypeInfo.ValueRank == 1)
+        _ret = new Matrix(DecodeArray<type>(decoder.ReadInt32, readValue), uaTypeInfo.BuiltInType);
+      else if (uaTypeInfo.ValueRank > 1)
+      {
+        IVariant _variant = ReadVariant(decoder);
+        _ret = (IMatrix)_variant.Value;
+      }
+      else
+        throw new ArgumentOutOfRangeException($"{nameof(uaTypeInfo.ValueRank)}", $"{nameof(uaTypeInfo)} must represent an array and {nameof(uaTypeInfo.ValueRank)} >= 1 ");
+      return _ret;
     }
     /// <summary>
     /// Reads the <see cref="Guid" /> from UA Binary encoded as a 16-element byte array that contains the value and advances the input message position by 16 bytes.
@@ -276,65 +296,68 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{encodingByte:X}).");
       }
     }
-    private Array ReadArray(IBinaryDecoder encoder, int length, BuiltInType builtInType)
+    private Array DecodeArray(IBinaryDecoder decoder, BuiltInType builtInType)
     {
       switch (builtInType)
       {
         case BuiltInType.Boolean:
-          return ReadArray<bool>(length, encoder.ReadBoolean);
+          return DecodeArray<bool>(decoder.ReadInt32, decoder.ReadBoolean);
         case BuiltInType.SByte:
-          return ReadArray<sbyte>(length, encoder.ReadSByte);
+          return DecodeArray<sbyte>(decoder.ReadInt32, decoder.ReadSByte);
         case BuiltInType.Byte:
-          return ReadArray<byte>(length, encoder.ReadByte);
+          return DecodeArray<byte>(decoder.ReadInt32, decoder.ReadByte);
         case BuiltInType.Int16:
-          return ReadArray<short>(length, encoder.ReadInt16);
+          return DecodeArray<short>(decoder.ReadInt32, decoder.ReadInt16);
         case BuiltInType.UInt16:
-          return ReadArray<ushort>(length, encoder.ReadUInt16);
+          return DecodeArray<ushort>(decoder.ReadInt32, decoder.ReadUInt16);
         case BuiltInType.Int32:
         case BuiltInType.Enumeration:
-          return ReadArray<int>(length, encoder.ReadInt32);
+          return DecodeArray<int>(decoder.ReadInt32, decoder.ReadInt32);
         case BuiltInType.UInt32:
-          return ReadArray<uint>(length, encoder.ReadUInt32);
+          return DecodeArray<uint>(decoder.ReadInt32, decoder.ReadUInt32);
         case BuiltInType.Int64:
-          return ReadArray<long>(length, encoder.ReadInt64);
+          return DecodeArray<long>(decoder.ReadInt32, decoder.ReadInt64);
         case BuiltInType.UInt64:
-          return ReadArray<ulong>(length, encoder.ReadUInt64);
+          return DecodeArray<ulong>(decoder.ReadInt32, decoder.ReadUInt64);
         case BuiltInType.Float:
-          return ReadArray<float>(length, encoder.ReadSingle);
+          return DecodeArray<float>(decoder.ReadInt32, decoder.ReadSingle);
         case BuiltInType.Double:
-          return ReadArray<double>(length, encoder.ReadDouble);
+          return DecodeArray<double>(decoder.ReadInt32, decoder.ReadDouble);
         case BuiltInType.String:
-          return ReadArray<string>(length, () => ReadString(encoder));
+          return DecodeArray<string>(decoder.ReadInt32, () => ReadString(decoder));
         case BuiltInType.DateTime:
-          return ReadArray<DateTime>(length, () => ReadDateTime(encoder));
+          return DecodeArray<DateTime>(decoder.ReadInt32, () => ReadDateTime(decoder));
         case BuiltInType.Guid:
-          return ReadArray<Guid>(length, encoder.ReadGuid);
+          return DecodeArray<Guid>(decoder.ReadInt32, decoder.ReadGuid);
         case BuiltInType.ByteString:
-          return ReadArray<byte>(length, encoder.ReadByte);
+          return DecodeArray<byte>(decoder.ReadInt32, decoder.ReadByte);
         case BuiltInType.XmlElement:
-          return ReadArray<XmlElement>(length, () => ReadXmlElement(encoder));
+          return DecodeArray<XmlElement>(decoder.ReadInt32, () => ReadXmlElement(decoder));
         case BuiltInType.NodeId:
-          return ReadArray<INodeId>(length, () => ReadNodeId(encoder));
+          return DecodeArray<INodeId>(decoder.ReadInt32, () => ReadNodeId(decoder));
         case BuiltInType.ExpandedNodeId:
-          return ReadArray<IExpandedNodeId>(length, () => ReadExpandedNodeId(encoder));
+          return DecodeArray<IExpandedNodeId>(decoder.ReadInt32, () => ReadExpandedNodeId(decoder));
         case BuiltInType.StatusCode:
-          return ReadArray<IStatusCode>(length, () => ReadStatusCode(encoder));
+          return DecodeArray<IStatusCode>(decoder.ReadInt32, () => ReadStatusCode(decoder));
         case BuiltInType.QualifiedName:
-          return ReadArray<IQualifiedName>(length, () => ReadQualifiedName(encoder));
+          return DecodeArray<IQualifiedName>(decoder.ReadInt32, () => ReadQualifiedName(decoder));
         case BuiltInType.LocalizedText:
-          return ReadArray<ILocalizedText>(length, () => ReadLocalizedText(encoder));
+          return DecodeArray<ILocalizedText>(decoder.ReadInt32, () => ReadLocalizedText(decoder));
         case BuiltInType.ExtensionObject:
-          return ReadArray<IExtensionObject>(length, () => ReadExtensionObject(encoder));
+          return DecodeArray<IExtensionObject>(decoder.ReadInt32, () => ReadExtensionObject(decoder));
         case BuiltInType.DataValue:
-          return ReadArray<IDataValue>(length, () => ReadDataValue(encoder));
+          return DecodeArray<IDataValue>(decoder.ReadInt32, () => ReadDataValue(decoder));
         case BuiltInType.Variant:
-          return ReadArray<IVariant>(length, () => ReadVariant(encoder));
+          return DecodeArray<IVariant>(decoder.ReadInt32, () => ReadVariant(decoder));
         default:
           throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{(int)builtInType:X2}).");
       }
     }
-    private Array ReadArray<type>(int length, Func<type> readValue)
+    private Array DecodeArray<type>(Func<Int32> readInt32, Func<type> readValue)
     {
+      int length = readInt32();
+      if (length < 0)
+        return null;
       type[] values = new type[length];
       for (int ii = 0; ii < values.Length; ii++)
         values[ii] = readValue();

@@ -122,7 +122,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           return _monitoredValue;
         throw new ArgumentOutOfRangeException("repositoryGroup");
       }
-      private ProducerBindingMonitoredValue<string> _monitoredValue = new ProducerBindingMonitoredValue<string>("ProducerBindingMonitoredValue._monitoredValue", BuiltInType.String);
+      private ProducerBindingMonitoredValue<string> _monitoredValue = new ProducerBindingMonitoredValue<string>("ProducerBindingMonitoredValue._monitoredValue", new UATypeInfo(BuiltInType.String));
       internal void Modify(string value)
       {
         _monitoredValue.MonitoredValue = value;

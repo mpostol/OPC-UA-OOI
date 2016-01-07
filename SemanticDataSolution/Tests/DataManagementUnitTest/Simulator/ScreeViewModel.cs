@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
   /// <summary>
   /// Class ScreeViewModel - this class demonstrates how to create bindings to the properties that are holders of values in the Model View ViewModel pattern.
   /// </summary>
-  internal class ScreeViewModel : INotifyPropertyChanged 
+  internal class ScreeViewModel : INotifyPropertyChanged
   {
 
     #region API
@@ -22,14 +22,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
     /// <exception cref="System.ArgumentOutOfRangeException">variableName</exception>
     public IConsumerBinding GetConsumerBinding(string variableName, BuiltInType encoding)
     {
+      UATypeInfo _uaTypeInfo = new UATypeInfo(encoding);
       if (variableName == "Value1")
       {
-        Value1 = new ConsumerBindingMonitoredValue<string>(encoding);
+        Value1 = new ConsumerBindingMonitoredValue<string>(_uaTypeInfo);
         return Value1;
       }
       else if (variableName == "Value2")
       {
-        Value2 = new ConsumerBindingMonitoredValue<double>(encoding);
+        Value2 = new ConsumerBindingMonitoredValue<double>(_uaTypeInfo);
         return Value2;
       }
       throw new ArgumentOutOfRangeException("variableName");

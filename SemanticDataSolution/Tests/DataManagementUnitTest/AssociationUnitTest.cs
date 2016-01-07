@@ -180,7 +180,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     {
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo field)
       {
-        return new ConsumerBinding<int>(x => { }, field.BuiltInType);
+        return new ConsumerBinding<int>(x => { }, new UATypeInfo(field.BuiltInType));
       }
       public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, UATypeInfo encoding)
       {
@@ -263,7 +263,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
 
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo field)
       {
-        IConsumerBinding _ncb = new ConsumerBindingMonitoredValue<object>(field.BuiltInType);
+        IConsumerBinding _ncb = new ConsumerBindingMonitoredValue<object>(new UATypeInfo(field.BuiltInType));
         string _key = String.Format("{0}.{1}", repositoryGroup, processValueName);
         m_Repository.Add(_key, _ncb);
         return _ncb;
@@ -271,7 +271,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public IProducerBinding GetProducerBinding(string repositoryGroup, string variableName, BuiltInType encoding)
       {
         string _key = String.Format("{0}.{1}", repositoryGroup, variableName);
-        IProducerBinding _npb = new ProducerBindingMonitoredValue<object>(_key, encoding);
+        IProducerBinding _npb = new ProducerBindingMonitoredValue<object>(_key, new UATypeInfo(encoding));
         m_Repository.Add(_key, _npb);
         return _npb;
       }

@@ -239,11 +239,14 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreSame(this, encoder);
         _encoder.Write(this, value);
       }
-
       public void Write(IBinaryEncoder encoder, string value)
       {
         Assert.AreSame(this, encoder);
         _encoder.Write(this, value);
+      }
+      public void WriteArray<type>(IBinaryEncoder encoder, Array value, Action<type> writeValue, BuiltInType builtInType)
+      {
+        throw new NotImplementedException();
       }
       #endregion
 

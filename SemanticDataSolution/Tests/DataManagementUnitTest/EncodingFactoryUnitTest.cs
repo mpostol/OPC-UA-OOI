@@ -77,7 +77,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         set;
         private get;
       }
-      public BuiltInType Encoding
+      public UATypeInfo Encoding
       {
         get { throw new NotImplementedException(); }
       }

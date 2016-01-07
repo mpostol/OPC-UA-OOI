@@ -153,7 +153,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         if (repositoryGroup != m_RepositoryGroup)
           throw new ArgumentOutOfRangeException("repositoryGroup");
-        Assert.AreEqual<BuiltInType>(sourceEncoding.BuiltInType, binding.Encoding);
+        Assert.AreEqual<BuiltInType>(sourceEncoding.BuiltInType, binding.Encoding.BuiltInType);
       }
       public IUADecoder UADecoder
       {

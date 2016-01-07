@@ -60,7 +60,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo field)
       {
-        IConsumerBinding _ncb = new ConsumerBindingMonitoredValue<object>(field.BuiltInType);
+        IConsumerBinding _ncb = new ConsumerBindingMonitoredValue<object>(field);
         string _key = String.Format("{0}.{1}", repositoryGroup, processValueName);
         m_Repository.Add(_key, _ncb);
         return _ncb;
@@ -68,7 +68,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo encoding)
       {
         string _key = String.Format("{0}.{1}", repositoryGroup, processValueName);
-        ProducerBindingMonitoredValue<object> _npb = new ProducerBindingMonitoredValue<object>(_key, encoding.BuiltInType);
+        ProducerBindingMonitoredValue<object> _npb = new ProducerBindingMonitoredValue<object>(_key, new UATypeInfo(encoding.BuiltInType));
         _npb.MonitoredValue = Guid.NewGuid();
         m_Repository.Add(_key, _npb);
         return _npb;

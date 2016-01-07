@@ -121,6 +121,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         _builtInType = builtInType;
       }
       public ProducerBinding() { }
+
       #region IProducerBinding
       public bool NewValue
       {
@@ -134,40 +135,40 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         set { throw new NotImplementedException(); }
       }
-      public BuiltInType Encoding
+      public UATypeInfo Encoding
       {
         get
         {
           if (Value == null)
-            return _builtInType;
+            return new UATypeInfo( _builtInType);
           switch (Type.GetTypeCode(Value.GetType()))
           {
             case TypeCode.Boolean:
-              return BuiltInType.Boolean;
+              return new UATypeInfo(BuiltInType.Boolean);
             case TypeCode.SByte:
-              return BuiltInType.SByte;
+              return new UATypeInfo(BuiltInType.SByte);
             case TypeCode.Byte:
-              return BuiltInType.Byte;
+              return new UATypeInfo(BuiltInType.Byte);
             case TypeCode.Int16:
-              return BuiltInType.Int16;
+              return new UATypeInfo(BuiltInType.Int16);
             case TypeCode.UInt16:
-              return BuiltInType.UInt16;
+              return new UATypeInfo(BuiltInType.UInt16);
             case TypeCode.Int32:
-              return BuiltInType.Int32;
+              return new UATypeInfo(BuiltInType.Int32);
             case TypeCode.UInt32:
-              return BuiltInType.UInt32;
+              return new UATypeInfo(BuiltInType.UInt32);
             case TypeCode.Int64:
-              return BuiltInType.Int64;
+              return new UATypeInfo(BuiltInType.Int64);
             case TypeCode.UInt64:
-              return BuiltInType.UInt64;
+              return new UATypeInfo(BuiltInType.UInt64);
             case TypeCode.Single:
-              return BuiltInType.Float;
+              return new UATypeInfo(BuiltInType.Float);
             case TypeCode.Double:
-              return BuiltInType.Double;
+              return new UATypeInfo(BuiltInType.Double);
             case TypeCode.DateTime:
-              return BuiltInType.DateTime;
+              return new UATypeInfo(BuiltInType.DateTime);
             case TypeCode.String:
-              return BuiltInType.String;
+              return new UATypeInfo(BuiltInType.String);
             default:
               throw new ArgumentOutOfRangeException(nameof(Value));
           }

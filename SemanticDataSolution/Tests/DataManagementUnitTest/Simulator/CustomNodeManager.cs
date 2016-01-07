@@ -11,14 +11,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
 
     internal IProducerBinding GetProducerBinding(string variableName, BuiltInType encoding)
     {
+      UATypeInfo _uaTypeInfo = new UATypeInfo(encoding);
       if (variableName == "Value1")
       {
-        Value1 = new ProducerBindingMonitoredValue<string>(variableName, encoding);
+        Value1 = new ProducerBindingMonitoredValue<string>(variableName, new UATypeInfo(_uaTypeInfo));
         return Value1;
       }
       else if (variableName == "Value2")
       {
-        Value2 = new ProducerBindingMonitoredValue<double>(variableName, encoding);
+        Value2 = new ProducerBindingMonitoredValue<double>(variableName, _uaTypeInfo);
         return Value2;
       }
       else
@@ -35,7 +36,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         if (Value1.HandlerState != HandlerState.Operational)
           throw new ArgumentOutOfRangeException("Wrong HandlerState");
-        if (((IProducerBinding)Value1).Encoding != BuiltInType.String)
+        if (((IProducerBinding)Value1).Encoding.BuiltInType != BuiltInType.String)
           throw new ArgumentOutOfRangeException("Wrong type");
         if ("Value1" != name)
           throw new ArgumentOutOfRangeException("Wrong name");
@@ -45,7 +46,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       {
         if (Value1.HandlerState != HandlerState.Operational)
           throw new ArgumentOutOfRangeException("Wrong HandlerState");
-        if (((IProducerBinding)Value2).Encoding != BuiltInType.Double)
+        if (((IProducerBinding)Value2).Encoding.BuiltInType != BuiltInType.Double)
           throw new ArgumentOutOfRangeException("Wrong type");
         if ("Value2" != name)
           throw new ArgumentOutOfRangeException("Wrong name");

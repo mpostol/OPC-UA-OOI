@@ -137,9 +137,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         {
           set { }
         }
-        public BuiltInType Encoding
+        public UATypeInfo Encoding
         {
-          get { return BuiltInType.Null; }
+          get { return null; }
         }
         public object Parameter
         {

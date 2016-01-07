@@ -17,7 +17,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_Binding")]
     public void TestMethod1()
     {
-      ConsumerBinding<int> _nb = new ConsumerBinding<int>(x => { }, BuiltInType.Null);
+      ConsumerBinding<int> _nb = new ConsumerBinding<int>(x => { }, new UATypeInfo(BuiltInType.Null));
       Assert.IsNotNull(_nb);
     }
     [TestMethod]
@@ -29,7 +29,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_nb);
       Assert.IsNotNull(_nb.Encoding);
       _nb.Converter = null;
-      Assert.AreEqual<BuiltInType>(BuiltInType.String, _nb.Encoding);
+      Assert.AreEqual<BuiltInType>(BuiltInType.String, _nb.Encoding.BuiltInType);
       string _testValue = "123wjkqjwkqjwjqjwqwjwqkwqjw";
       _nb.Assign2Repository(_testValue);
       Assert.AreEqual<string>(_testValue, _rpo.Buffer);
@@ -43,7 +43,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_nb);
       Assert.IsNotNull(_nb.Encoding);
       _nb.Converter = new DateFormatter();
-      Assert.AreEqual<BuiltInType>(BuiltInType.String, _nb.Encoding);
+      Assert.AreEqual<BuiltInType>(BuiltInType.String, _nb.Encoding.BuiltInType);
       DateTime _dt = new DateTime(2008, 2, 5);
       Recording _testValue = new Recording("Chris Sells", "Chris Sells Live", _dt);
       _nb.Assign2Repository(_testValue);
@@ -62,7 +62,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         if (processValueName != name)
           throw new ArgumentOutOfRangeException();
-        return new ConsumerBinding<string>(x => Buffer = x, fieldTypeInfo.BuiltInType);
+        return new ConsumerBinding<string>(x => Buffer = x, fieldTypeInfo);
       }
       public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
       {
@@ -79,7 +79,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         if (processValueName != name)
           throw new ArgumentOutOfRangeException();
-        return new ConsumerBinding<string>(x => Buffer = x, field.BuiltInType);
+        return new ConsumerBinding<string>(x => Buffer = x, new UATypeInfo(field.BuiltInType));
       }
       public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo encoding)
       {

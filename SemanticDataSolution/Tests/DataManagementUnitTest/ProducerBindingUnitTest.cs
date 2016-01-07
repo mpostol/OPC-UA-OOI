@@ -83,7 +83,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         if (repositoryGroup == "ProducerBinding")
         {
           Assert.AreEqual<BuiltInType>(BuiltInType.String, fieldTypeInfo.BuiltInType);
-          ProducerBinding<string> _ret = new ProducerBinding<string>("ProducerBinding._value", () => _value.Value, fieldTypeInfo.BuiltInType);
+          ProducerBinding<string> _ret = new ProducerBinding<string>("ProducerBinding._value", () => _value.Value, new UATypeInfo(fieldTypeInfo.BuiltInType));
           _value.PropertyChanged += (x, y) => _ret.OnNewValue();
           return _ret;
         }

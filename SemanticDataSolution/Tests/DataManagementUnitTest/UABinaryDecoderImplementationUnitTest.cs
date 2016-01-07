@@ -171,7 +171,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreSame(this, decoder);
         return m_UABinaryDecoder.ReadString(decoder);
       }
-
+      public IMatrix ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, UATypeInfo uaTypeInfo)
+      {
+        throw new NotImplementedException();
+      }
       #endregion
 
       #region IBinaryDecoder

@@ -112,11 +112,11 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           throw new NotImplementedException();
         }
       }
-      public BuiltInType Encoding
+      public UATypeInfo Encoding
       {
         get
         {
-          return BuiltInType.Byte;
+          return new UATypeInfo(BuiltInType.Byte);
         }
       }
       public object Parameter
@@ -248,6 +248,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       //types
       private class UADecoder : IUADecoder
       {
+        public IMatrix ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, UATypeInfo uaTypeInfo)
+        {
+          throw new NotImplementedException();
+        }
         public byte[] ReadByteString(IBinaryDecoder decoder)
         {
           throw new NotImplementedException();

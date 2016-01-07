@@ -85,7 +85,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         m_AssignAction = assignAction;
         m_Index = index;
-        Encoding = GetTargetType(targetType);
+        Encoding = new UATypeInfo(GetTargetType(targetType));
       }
       private BuiltInType GetTargetType(TypeCode targetType)
       {

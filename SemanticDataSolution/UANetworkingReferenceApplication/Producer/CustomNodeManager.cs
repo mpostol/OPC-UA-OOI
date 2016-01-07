@@ -149,7 +149,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentOutOfRangeException("repositoryGroup");
-      Debug.Assert(sourceEncoding.BuiltInType == binding.Encoding);
+      Debug.Assert(sourceEncoding.BuiltInType == binding.Encoding.BuiltInType);
     }
     /// <summary>
     /// Gets the ua decoder.
@@ -298,7 +298,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     #endregion    
     private IProducerBinding AddBinding<type>(string key, Func<type, type> increment, type defaultValue, BuiltInType builtInType)
     {
-      ProducerBindingMonitoredValue<type> binding = new ProducerBindingMonitoredValue<type>(key, builtInType) { MonitoredValue = defaultValue };
+      ProducerBindingMonitoredValue<type> binding = new ProducerBindingMonitoredValue<type>(key, new UATypeInfo( builtInType) ) { MonitoredValue = defaultValue };
       m_NodesDictionary.Add(key, binding);
       m_TimeEven += (x, y) => binding.MonitoredValue = increment(binding.MonitoredValue);
       return binding;

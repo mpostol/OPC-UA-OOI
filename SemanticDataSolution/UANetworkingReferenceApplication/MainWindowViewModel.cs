@@ -539,7 +539,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     //methods
     private IConsumerBinding AddBinding<type>(string variableName, BuiltInType encoding)
     {
-      ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(encoding);
+      ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(new UATypeInfo(encoding));
       _return.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).ToString()}");
       return _return;
     }

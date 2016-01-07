@@ -6,6 +6,7 @@ using System.Xml;
 using System.Net;
 using System.Collections.Generic;
 using System.Threading;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
 {
@@ -117,11 +118,14 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
     #region test instrumentation
     private class UADecoder : IUADecoder
     {
+      public IMatrix ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, UATypeInfo uaTypeInfo)
+      {
+        throw new NotImplementedException();
+      }
       public byte[] ReadByteString(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();
       }
-
       public IDataValue ReadDataValue(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();

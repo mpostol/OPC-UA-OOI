@@ -66,7 +66,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentOutOfRangeException("repositoryGroup");
-      if (sourceEncoding.BuiltInType != binding.Encoding)
+      if (sourceEncoding.BuiltInType != binding.Encoding.BuiltInType)
         throw new ArgumentOutOfRangeException("sourceEncoding");
     }
     public IUADecoder UADecoder

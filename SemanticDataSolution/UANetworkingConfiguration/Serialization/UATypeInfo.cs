@@ -32,15 +32,21 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// </summary>
     /// <param name="builtInType">Type of the an OPC UA entity.</param>
     /// <param name="valueRank">The value rank.</param>
-    public UATypeInfo(BuiltInType builtInType, int valueRank)
+    public UATypeInfo(BuiltInType builtInType, int valueRank) : this(builtInType, valueRank, null) { }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UATypeInfo"/> class.
+    /// </summary>
+    /// <param name="builtInType">Type of the built in.</param>
+    /// <param name="valueRank">The value rank.</param>
+    /// <param name="arrayDimensions">The array dimensions.</param>
+    /// <exception cref="System.ArgumentOutOfRangeException">$for {nameof(valueRank)} == {valueRank} {nameof(ArrayDimensions)} must be provided.</exception>
+    public UATypeInfo(BuiltInType builtInType, int valueRank, int[] arrayDimensions)
     {
+      if ((valueRank == 0 || valueRank > 1) && (arrayDimensions == null || arrayDimensions.Length == 0))
+        throw new ArgumentOutOfRangeException(nameof(valueRank), $"for {nameof(valueRank)} == {valueRank} {nameof(ArrayDimensions)} must be provided.");
       m_builtInType = builtInType;
       m_valueRank = valueRank;
-    }
-
-    public UATypeInfo(UATypeInfo encoding)
-    {
-      this.encoding = encoding;
+      m_ArrayDimensionsField = (arrayDimensions == null || arrayDimensions.Length == 0) ? null : (int[])arrayDimensions.Clone();
     }
     #endregion
 
@@ -96,7 +102,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     private BuiltInType m_builtInType;
     private int m_valueRank;
     private int[] m_ArrayDimensionsField;
-    private UATypeInfo encoding;
     #endregion
 
   }

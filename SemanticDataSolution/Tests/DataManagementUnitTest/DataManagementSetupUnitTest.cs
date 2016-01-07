@@ -100,7 +100,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         binding.Converter = null;
         binding.Culture = null;
         binding.Parameter = null;
-        Assert.IsNotNull(binding.Encoding);
+        Assert.IsNotNull(binding);
       }
       private IUADecoder m_IUADecoder = new Helpers.UABinaryDecoderImplementation();
 

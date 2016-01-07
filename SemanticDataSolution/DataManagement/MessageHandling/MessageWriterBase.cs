@@ -287,7 +287,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     private void WriteValueVariant(IProducerBinding producerBinding)
     {
       object value = producerBinding.GetFromRepository();
-      Variant _variant = new Variant(new UATypeInfo(producerBinding.Encoding), value);
+      Variant _variant = new Variant(producerBinding.Encoding, value);
       m_UAEncoder.Write(this, _variant);
     }
     private void WriteDataValue(IProducerBinding _pb)

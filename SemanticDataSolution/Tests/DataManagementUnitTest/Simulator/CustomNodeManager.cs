@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
       UATypeInfo _uaTypeInfo = new UATypeInfo(encoding);
       if (variableName == "Value1")
       {
-        Value1 = new ProducerBindingMonitoredValue<string>(variableName, new UATypeInfo(_uaTypeInfo));
+        Value1 = new ProducerBindingMonitoredValue<string>(variableName, _uaTypeInfo);
         return Value1;
       }
       else if (variableName == "Value2")

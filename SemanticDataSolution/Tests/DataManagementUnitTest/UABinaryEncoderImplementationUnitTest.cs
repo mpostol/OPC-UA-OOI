@@ -61,7 +61,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreEqual<int>(2, _array.Rank);
         Assert.AreEqual<int>(4, _array.Length);
         Assert.AreEqual<int>(_dimensions.Length, _array.Rank);
-        UATypeInfo _uaTypeInfo = new UATypeInfo(BuiltInType.Int32, _dimensions.Length) { ArrayDimensions = _dimensions };
+        UATypeInfo _uaTypeInfo = new UATypeInfo(BuiltInType.Int32, _dimensions.Length, _dimensions);
         Variant _variant = new Variant { UATypeInfo = _uaTypeInfo, Value = _array };
         _buffer.Write(_buffer, _variant);
         _buffer.Close();
@@ -275,7 +275,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         Assert.IsNotNull(_buffer);
         Int32[] _value = new Int32[] { 0, 1, 2, 3, 4 };
-        Variant _variant = new Variant { UATypeInfo = new UATypeInfo(BuiltInType.Int32, rank), Value = _value };
+        Variant _variant = new Variant { UATypeInfo = new UATypeInfo(BuiltInType.Int32, rank, new int[] { _value.Length }), Value = _value };
         _buffer.Write(_buffer, _variant);
         _buffer.Close();
         _EncodedValue = _stream.ToArray();

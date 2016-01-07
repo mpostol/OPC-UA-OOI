@@ -89,7 +89,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
             _return = AddBinding<UInt16>(_name, Inc, UInt16.MinValue, BuiltInType.UInt16);
             break;
           case BuiltInType.Int32:
-            _return = fieldTypeInfo.ValueRank == 0 ? AddBinding<Int32>(_name, Inc, Int32.MinValue, BuiltInType.Int32) : AddBinding<Int32[]>(_name, Inc, new Int32[] { 0 }, BuiltInType.Int32);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<Int32>(_name, Inc, Int32.MinValue, BuiltInType.Int32) : AddBinding<Int32[]>(_name, Inc, new Int32[] { 0 }, BuiltInType.Int32);
             break;
           case BuiltInType.UInt32:
             _return = AddBinding<UInt32>(_name, Inc, UInt32.MinValue, BuiltInType.UInt32);

@@ -82,6 +82,7 @@
     <Compile Include="ReferenceConfiguration.cs" />
     <Compile Include="UANetworkingConfigurationUnitTest.cs" />
     <Compile Include="UANetworkingConfigurationEditorUnitTest.cs" />
+    <Compile Include="UATypeInfoUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Help\ASModelDesigner.chm" />

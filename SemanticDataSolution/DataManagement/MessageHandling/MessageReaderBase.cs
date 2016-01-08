@@ -144,19 +144,34 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       switch (consumerBinding.Encoding.BuiltInType)
       {
         case BuiltInType.Boolean:
-          _value = ReadBoolean();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = ReadBoolean();
+          else
+            _value = m_UADecoder.ReadArray(this, ReadBoolean, consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.SByte:
-          _value = ReadSByte();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = ReadSByte();
+          else
+            _value = m_UADecoder.ReadArray(this, ReadSByte, consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.Byte:
-          _value = ReadByte();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = ReadByte();
+          else
+            _value = m_UADecoder.ReadArray(this, ReadByte, consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.Int16:
-          _value = ReadInt16();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = ReadInt16();
+          else
+            _value = m_UADecoder.ReadArray(this, ReadInt16, consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.UInt16:
-          _value = ReadUInt16();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = ReadUInt16();
+          else
+            _value = m_UADecoder.ReadArray(this, ReadUInt16, consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.Int32:
           if (consumerBinding.Encoding.ValueRank < 0)
@@ -165,61 +180,118 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
             _value = m_UADecoder.ReadArray(this, ReadInt32, consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.UInt32:
-          _value = ReadUInt32();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = ReadUInt32();
+          else
+            _value = m_UADecoder.ReadArray(this, ReadUInt32, consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.Int64:
-          _value = ReadInt64();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = ReadInt64();
+          else
+            _value = m_UADecoder.ReadArray(this, ReadInt64, consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.UInt64:
-          _value = ReadUInt64();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = ReadUInt64();
+          else
+            _value = m_UADecoder.ReadArray(this, ReadUInt64, consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.Float:
-          _value = ReadSingle();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = ReadSingle();
+          else
+            _value = m_UADecoder.ReadArray(this, ReadSingle, consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.Double:
-          _value = ReadDouble();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = ReadDouble();
+          else
+            _value = m_UADecoder.ReadArray(this, ReadDouble, consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.String:
-          _value = ReadString();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = m_UADecoder.ReadString(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadString(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.DateTime:
-          _value = ReadDateTime();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = m_UADecoder.ReadDateTime(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadDateTime(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.Guid:
-          _value = ReadGuid();
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = m_UADecoder.ReadGuid(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadGuid(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.ByteString:
-          m_UADecoder.ReadByteString(this);
+          if (consumerBinding.Encoding.ValueRank < 0)
+            m_UADecoder.ReadByteString(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadByteString(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.XmlElement:
-          _value = m_UADecoder.ReadXmlElement(this);
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = m_UADecoder.ReadXmlElement(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadXmlElement(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.NodeId:
-          _value = m_UADecoder.ReadNodeId(this);
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = m_UADecoder.ReadNodeId(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadNodeId(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.ExpandedNodeId:
-          _value = m_UADecoder.ReadExpandedNodeId(this);
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = m_UADecoder.ReadExpandedNodeId(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadExpandedNodeId(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.StatusCode:
-          _value = m_UADecoder.ReadStatusCode(this);
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = m_UADecoder.ReadStatusCode(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadStatusCode(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.QualifiedName:
-          _value = m_UADecoder.ReadQualifiedName(this);
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = m_UADecoder.ReadQualifiedName(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadQualifiedName(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.LocalizedText:
-          _value = m_UADecoder.ReadLocalizedText(this);
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = m_UADecoder.ReadLocalizedText(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadLocalizedText(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.ExtensionObject:
-          _value = m_UADecoder.ReadExtensionObject(this);
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = m_UADecoder.ReadExtensionObject(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadExtensionObject(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.DataValue:
-          _value = m_UADecoder.ReadDataValue(this);
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = m_UADecoder.ReadDataValue(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadDataValue(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.Variant:
-          _value = m_UADecoder.ReadVariant(this);
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = m_UADecoder.ReadVariant(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadVariant(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.DiagnosticInfo:
-          _value = m_UADecoder.ReadDiagnosticInfo(this);
+          if (consumerBinding.Encoding.ValueRank < 0)
+            _value = m_UADecoder.ReadDiagnosticInfo(this);
+          else
+            _value = m_UADecoder.ReadArray(this, () => m_UADecoder.ReadDiagnosticInfo(this), consumerBinding.Encoding.ValueRank > 1);
           break;
         default:
           throw new ArgumentOutOfRangeException(string.Format("Impossible to convert the type {0}", consumerBinding.Encoding));

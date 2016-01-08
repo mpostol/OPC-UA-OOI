@@ -201,22 +201,40 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       switch (producerBinding.Encoding.BuiltInType)
       {
         case BuiltInType.Boolean:
-          Write((Boolean)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            Write((Boolean)value);
+          else
+            m_UAEncoder.WriteArray<Boolean>(this, (Array)value, Write, BuiltInType.Boolean);
           break;
         case BuiltInType.SByte:
-          Write((SByte)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            Write((SByte)value);
+          else
+            m_UAEncoder.WriteArray<SByte>(this, (Array)value, Write, BuiltInType.SByte);
           break;
         case BuiltInType.Byte:
-          Write((Byte)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            Write((Byte)value);
+          else
+            m_UAEncoder.WriteArray<Byte>(this, (Array)value, Write, BuiltInType.Byte);
           break;
         case BuiltInType.DateTime:
-          m_UAEncoder.Write(this, (DateTime)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (DateTime)value);
+          else
+            m_UAEncoder.WriteArray<DateTime>(this, (Array)value, Write, BuiltInType.DateTime);
           break;
         case BuiltInType.Double:
-          Write((Double)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            Write((Double)value);
+          else
+            m_UAEncoder.WriteArray<Double>(this, (Array)value, Write, BuiltInType.Double);
           break;
         case BuiltInType.Int16:
-          Write((Int16)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            Write((Int16)value);
+          else
+            m_UAEncoder.WriteArray<Int16>(this, (Array)value, Write, BuiltInType.Int16);
           break;
         case BuiltInType.Enumeration:
         case BuiltInType.Int32:
@@ -226,58 +244,112 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
             m_UAEncoder.WriteArray<Int32>(this, (Array)value, Write, BuiltInType.Int32);
           break;
         case BuiltInType.Int64:
-          Write((Int64)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            Write((Int64)value);
+          else
+            m_UAEncoder.WriteArray<Int64>(this, (Array)value, Write, BuiltInType.Int64);
           break;
         case BuiltInType.Float:
-          Write((Single)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            Write((Single)value);
+          else
+            m_UAEncoder.WriteArray<Single>(this, (Array)value, Write, BuiltInType.Float);
           break;
         case BuiltInType.String:
-          m_UAEncoder.Write(this, (String)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (String)value);
+          else
+            m_UAEncoder.WriteArray<String>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.String);
           break;
         case BuiltInType.UInt16:
-          Write((UInt16)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            Write((UInt16)value);
+          else
+            m_UAEncoder.WriteArray<UInt16>(this, (Array)value, Write, BuiltInType.UInt16);
           break;
         case BuiltInType.UInt32:
-          Write((UInt32)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            Write((UInt32)value);
+          else
+            m_UAEncoder.WriteArray<UInt32>(this, (Array)value, Write, BuiltInType.UInt32);
           break;
         case BuiltInType.UInt64:
-          Write((UInt64)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            Write((UInt64)value);
+          else
+            m_UAEncoder.WriteArray<UInt64>(this, (Array)value, Write, BuiltInType.UInt64);
           break;
         case BuiltInType.Guid:
-          Write((Guid)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (Guid)value);
+          else
+            m_UAEncoder.WriteArray<Guid>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.Guid);
           break;
         case BuiltInType.ByteString:
-          m_UAEncoder.Write(this, (byte[])value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (byte[])value);
+          else
+            m_UAEncoder.WriteArray<byte[]>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.ByteString);
           break;
         case BuiltInType.XmlElement:
-          m_UAEncoder.Write(this, (XmlElement)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (XmlElement)value);
+          else
+            m_UAEncoder.WriteArray<XmlElement>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.XmlElement);
           break;
         case BuiltInType.NodeId:
-          m_UAEncoder.Write(this, (INodeId)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (INodeId)value);
+          else
+            m_UAEncoder.WriteArray<INodeId>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.NodeId);
           break;
         case BuiltInType.ExpandedNodeId:
-          m_UAEncoder.Write(this, (IExpandedNodeId)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (IExpandedNodeId)value);
+          else
+            m_UAEncoder.WriteArray<IExpandedNodeId>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.ExpandedNodeId);
           break;
         case BuiltInType.StatusCode:
-          m_UAEncoder.Write(this, (IStatusCode)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (IStatusCode)value);
+          else
+            m_UAEncoder.WriteArray<IStatusCode>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.StatusCode);
           break;
         case BuiltInType.QualifiedName:
-          m_UAEncoder.Write(this, (IQualifiedName)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (IQualifiedName)value);
+          else
+            m_UAEncoder.WriteArray<IQualifiedName>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.QualifiedName);
           break;
         case BuiltInType.LocalizedText:
-          m_UAEncoder.Write(this, (ILocalizedText)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (ILocalizedText)value);
+          else
+            m_UAEncoder.WriteArray<ILocalizedText>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.LocalizedText);
           break;
         case BuiltInType.ExtensionObject:
-          m_UAEncoder.Write(this, (IExtensionObject)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (IExtensionObject)value);
+          else
+            m_UAEncoder.WriteArray<IExtensionObject>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.ExtensionObject);
           break;
         case BuiltInType.DataValue:
-          m_UAEncoder.Write(this, (IDataValue)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (IDataValue)value);
+          else
+            m_UAEncoder.WriteArray<IDataValue>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.DataValue);
           break;
         case BuiltInType.Variant:
-          m_UAEncoder.Write(this, (IVariant)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (IVariant)value);
+          else
+            m_UAEncoder.WriteArray<IVariant>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.Variant);
           break;
         case BuiltInType.DiagnosticInfo:
-          m_UAEncoder.Write(this, (IDiagnosticInfo)value);
+          if (producerBinding.Encoding.ValueRank < 0)
+            m_UAEncoder.Write(this, (IDiagnosticInfo)value);
+          else
+            m_UAEncoder.WriteArray<IDiagnosticInfo>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.DiagnosticInfo);
           break;
         case BuiltInType.Null:
         default:

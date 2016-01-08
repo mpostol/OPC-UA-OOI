@@ -189,6 +189,8 @@
         </DataMemberConfiguration>
 
         <!--arrays all types out of scope -->
+        <!-- uncomment aas needed - all have been self tested
+        
         <DataMemberConfiguration>
           <SymbolicName>ArrayBoolean</SymbolicName>
           <ProcessValueName>ArrayBoolean</ProcessValueName>
@@ -310,6 +312,7 @@
           </TypeInformation>
         </DataMemberConfiguration>
 
+        -->
         <!--out of scope-->
 
       </DataSet>

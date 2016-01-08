@@ -212,6 +212,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         m_NumberOfAttachToNetwork++;
         m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), null);
       }
+      protected override void Trace(string message)
+      {
+        throw new NotImplementedException();
+      }
       #endregion
 
       #region private
@@ -278,6 +282,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
           m_UdpClient.Close();
 
       }
+
 
 
       #endregion

@@ -242,6 +242,15 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       {
         get { return m_PublisherId; }
       }
+      internal void GetMessageTest(UInt16 dataSetId)
+      {
+        RaiseReadMessageCompleted(dataSetId);
+      }
+
+      protected override bool EndOfMessage()
+      {
+        return false;
+      }
       #endregion
 
       #region private
@@ -457,9 +466,10 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       #endregion
 
       #region test instrumentation
-      internal void GetMessageTest(UInt16 dataSetId)
+
+      protected override void Trace(string message)
       {
-        RaiseReadMessageCompleted(dataSetId);
+        throw new NotImplementedException();
       }
       #endregion
 

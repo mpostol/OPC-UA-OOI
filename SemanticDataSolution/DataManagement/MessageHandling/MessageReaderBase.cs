@@ -162,7 +162,7 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
           if (consumerBinding.Encoding.ValueRank < 0)
             _value = ReadInt32();
           else
-            _value = m_UADecoder.ReadArray(this, ReadInt32, consumerBinding.Encoding);
+            _value = m_UADecoder.ReadArray(this, ReadInt32, consumerBinding.Encoding.ValueRank > 1);
           break;
         case BuiltInType.UInt32:
           _value = ReadUInt32();

@@ -37,14 +37,8 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         value = ReadValue(decoder, builtInType);
       else
       {
-        Array array = DecodeArray(decoder, builtInType);
-        List<Int32> _dimensions = null;
-        if ((encodingByte & (byte)VariantEncodingMask.ArrayDimensionsPresents) != 0)
-          _dimensions = ReadDimensions(decoder);
-        if (_dimensions != null && _dimensions.Count > 0)
-          value = new Variant(new Matrix(array, builtInType, _dimensions.ToArray()));
-        else
-          value = new Variant(new Matrix(array, builtInType));
+        Array array = DecodeArray(decoder, builtInType, ((encodingByte & (byte)VariantEncodingMask.ArrayDimensionsPresents) != 0));
+        value = new Variant(array, builtInType);
       }
       return value;
     }
@@ -54,21 +48,19 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     /// <typeparam name="type">The type of the <see cref="IMatrix.Elements" /> element.</typeparam>
     /// <param name="decoder">The decoder to be used to recover the array from the binary stream.</param>
     /// <param name="readValue">This delegate encapsulates binary decoding functionality of the array element.</param>
-    /// <param name="uaTypeInfo"><see cref="BuiltInType" /> of the array to be decoded used in case the array is multidimensional and must be decoded as the variant.</param>
+    /// <param name="arrayDimensionsPresents">if set to <c>true</c> the rank of the array is greater than 1 and dimensions are present in the encoded stream.</param>
     /// <returns>An instance of <see cref="IMatrix" /> capturing the an array recovered from the message.</returns>
     /// <exception cref="System.ArgumentOutOfRangeException">Encountered unexpected array rank.</exception>
-    public IMatrix ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, UATypeInfo uaTypeInfo)
+    public Array ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, bool arrayDimensionsPresents)
     {
-      IMatrix _ret = null;
-      if (uaTypeInfo.ValueRank == 1)
-        _ret = new Matrix(DecodeArray<type>(decoder.ReadInt32, readValue), uaTypeInfo.BuiltInType);
-      else if (uaTypeInfo.ValueRank > 1)
+      Array _ret = null;
+      if (!arrayDimensionsPresents)
+        _ret = DecodeArray<type>(decoder, readValue, arrayDimensionsPresents);
+      else
       {
         IVariant _variant = ReadVariant(decoder);
-        _ret = (IMatrix)_variant.Value;
+        _ret = (Array)_variant.Value;
       }
-      else
-        throw new ArgumentOutOfRangeException($"{nameof(uaTypeInfo.ValueRank)}", $"{nameof(uaTypeInfo)} must represent an array and {nameof(uaTypeInfo.ValueRank)} >= 1 ");
       return _ret;
     }
     /// <summary>
@@ -179,13 +171,8 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     //types
     private class Variant : IVariant
     {
-      internal Variant(object value, UATypeInfo type)
-      {
-        Value = value;
-        UATypeInfo = type;
-      }
+      public Variant(Array value, BuiltInType type) : this(value, new UATypeInfo(type, value.Rank)) { }
       public Variant(object value, BuiltInType type) : this(value, new UATypeInfo(type)) { }
-      public Variant(Matrix value) : this(value, value.TypeInfo) { }
       public object Value
       {
         get; private set;
@@ -194,48 +181,12 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
       {
         get; private set;
       }
-
+      private Variant(object value, UATypeInfo type)
+      {
+        Value = value;
+        UATypeInfo = type;
+      }
     }
-    private class Matrix : IMatrix
-    {
-
-      /// <summary>
-      /// Initializes a new instance of the <see cref="Matrix"/> class with a multidimensional array.
-      /// </summary>
-      /// <param name="array">The array.</param>
-      /// <param name="builtInType">Type of the built in.</param>
-      public Matrix(Array array, BuiltInType builtInType) : this(array, builtInType, array.Length) { }
-      /// <summary>
-      /// Initializes a new instance of the <see cref="Matrix"/> class with a one dimensional array and a list of dimensions.
-      /// </summary>
-      /// <param name="array">The array.</param>
-      /// <param name="builtInType">Type of the built in.</param>
-      /// <param name="dimensions">The value.</param>
-      public Matrix(Array array, BuiltInType builtInType, params int[] dimensions)
-      {
-        Elements = array;
-        Dimensions = dimensions;
-        int _length = 1;
-        for (int _ix = 0; _ix < dimensions.Length; _ix++)
-          _length *= dimensions[_ix];
-        if (_length != array.Length)
-          throw new ArgumentException("The number of elements in the array does not match the dimensions.");
-        TypeInfo = new UATypeInfo(builtInType, Dimensions.Length);
-      }
-      #region IMatrix
-      public int[] Dimensions
-      {
-        get; private set;
-      }
-      public Array Elements
-      {
-        get; private set;
-      }
-      public UATypeInfo TypeInfo { get; private set; }
-      #endregion
-
-    }
-    //vars
     /// <summary>
     /// The maximum array length - could be used to apply license volume limits.
     /// </summary>
@@ -296,85 +247,98 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{encodingByte:X}).");
       }
     }
-    private Array DecodeArray(IBinaryDecoder decoder, BuiltInType builtInType)
+    private Array DecodeArray(IBinaryDecoder decoder, BuiltInType builtInType, bool arrayDimensionsPresents)
     {
       switch (builtInType)
       {
         case BuiltInType.Boolean:
-          return DecodeArray<bool>(decoder.ReadInt32, decoder.ReadBoolean);
+          return DecodeArray<bool>(decoder, decoder.ReadBoolean, arrayDimensionsPresents);
         case BuiltInType.SByte:
-          return DecodeArray<sbyte>(decoder.ReadInt32, decoder.ReadSByte);
+          return DecodeArray<sbyte>(decoder, decoder.ReadSByte, arrayDimensionsPresents);
         case BuiltInType.Byte:
-          return DecodeArray<byte>(decoder.ReadInt32, decoder.ReadByte);
+          return DecodeArray<byte>(decoder, decoder.ReadByte, arrayDimensionsPresents);
         case BuiltInType.Int16:
-          return DecodeArray<short>(decoder.ReadInt32, decoder.ReadInt16);
+          return DecodeArray<short>(decoder, decoder.ReadInt16, arrayDimensionsPresents);
         case BuiltInType.UInt16:
-          return DecodeArray<ushort>(decoder.ReadInt32, decoder.ReadUInt16);
+          return DecodeArray<ushort>(decoder, decoder.ReadUInt16, arrayDimensionsPresents);
         case BuiltInType.Int32:
         case BuiltInType.Enumeration:
-          return DecodeArray<int>(decoder.ReadInt32, decoder.ReadInt32);
+          return DecodeArray<int>(decoder, decoder.ReadInt32, arrayDimensionsPresents);
         case BuiltInType.UInt32:
-          return DecodeArray<uint>(decoder.ReadInt32, decoder.ReadUInt32);
+          return DecodeArray<uint>(decoder, decoder.ReadUInt32, arrayDimensionsPresents);
         case BuiltInType.Int64:
-          return DecodeArray<long>(decoder.ReadInt32, decoder.ReadInt64);
+          return DecodeArray<long>(decoder, decoder.ReadInt64, arrayDimensionsPresents);
         case BuiltInType.UInt64:
-          return DecodeArray<ulong>(decoder.ReadInt32, decoder.ReadUInt64);
+          return DecodeArray<ulong>(decoder, decoder.ReadUInt64, arrayDimensionsPresents);
         case BuiltInType.Float:
-          return DecodeArray<float>(decoder.ReadInt32, decoder.ReadSingle);
+          return DecodeArray<float>(decoder, decoder.ReadSingle, arrayDimensionsPresents);
         case BuiltInType.Double:
-          return DecodeArray<double>(decoder.ReadInt32, decoder.ReadDouble);
+          return DecodeArray<double>(decoder, decoder.ReadDouble, arrayDimensionsPresents);
         case BuiltInType.String:
-          return DecodeArray<string>(decoder.ReadInt32, () => ReadString(decoder));
+          return DecodeArray<string>(decoder, () => ReadString(decoder), arrayDimensionsPresents);
         case BuiltInType.DateTime:
-          return DecodeArray<DateTime>(decoder.ReadInt32, () => ReadDateTime(decoder));
+          return DecodeArray<DateTime>(decoder, () => ReadDateTime(decoder), arrayDimensionsPresents);
         case BuiltInType.Guid:
-          return DecodeArray<Guid>(decoder.ReadInt32, decoder.ReadGuid);
+          return DecodeArray<Guid>(decoder, decoder.ReadGuid, arrayDimensionsPresents);
         case BuiltInType.ByteString:
-          return DecodeArray<byte>(decoder.ReadInt32, decoder.ReadByte);
+          return DecodeArray<byte>(decoder, decoder.ReadByte, arrayDimensionsPresents);
         case BuiltInType.XmlElement:
-          return DecodeArray<XmlElement>(decoder.ReadInt32, () => ReadXmlElement(decoder));
+          return DecodeArray<XmlElement>(decoder, () => ReadXmlElement(decoder), arrayDimensionsPresents);
         case BuiltInType.NodeId:
-          return DecodeArray<INodeId>(decoder.ReadInt32, () => ReadNodeId(decoder));
+          return DecodeArray<INodeId>(decoder, () => ReadNodeId(decoder), arrayDimensionsPresents);
         case BuiltInType.ExpandedNodeId:
-          return DecodeArray<IExpandedNodeId>(decoder.ReadInt32, () => ReadExpandedNodeId(decoder));
+          return DecodeArray<IExpandedNodeId>(decoder, () => ReadExpandedNodeId(decoder), arrayDimensionsPresents);
         case BuiltInType.StatusCode:
-          return DecodeArray<IStatusCode>(decoder.ReadInt32, () => ReadStatusCode(decoder));
+          return DecodeArray<IStatusCode>(decoder, () => ReadStatusCode(decoder), arrayDimensionsPresents);
         case BuiltInType.QualifiedName:
-          return DecodeArray<IQualifiedName>(decoder.ReadInt32, () => ReadQualifiedName(decoder));
+          return DecodeArray<IQualifiedName>(decoder, () => ReadQualifiedName(decoder), arrayDimensionsPresents);
         case BuiltInType.LocalizedText:
-          return DecodeArray<ILocalizedText>(decoder.ReadInt32, () => ReadLocalizedText(decoder));
+          return DecodeArray<ILocalizedText>(decoder, () => ReadLocalizedText(decoder), arrayDimensionsPresents);
         case BuiltInType.ExtensionObject:
-          return DecodeArray<IExtensionObject>(decoder.ReadInt32, () => ReadExtensionObject(decoder));
+          return DecodeArray<IExtensionObject>(decoder, () => ReadExtensionObject(decoder), arrayDimensionsPresents);
         case BuiltInType.DataValue:
-          return DecodeArray<IDataValue>(decoder.ReadInt32, () => ReadDataValue(decoder));
+          return DecodeArray<IDataValue>(decoder, () => ReadDataValue(decoder), arrayDimensionsPresents);
         case BuiltInType.Variant:
-          return DecodeArray<IVariant>(decoder.ReadInt32, () => ReadVariant(decoder));
+          return DecodeArray<IVariant>(decoder, () => ReadVariant(decoder), arrayDimensionsPresents);
         default:
           throw new ArgumentOutOfRangeException($"Cannot decode unknown type in Variant object (0x{(int)builtInType:X2}).");
       }
     }
-    private Array DecodeArray<type>(Func<Int32> readInt32, Func<type> readValue)
+    private Array DecodeArray<type>(IBinaryDecoder decoder, Func<type> readValue, bool arrayDimensionsPresents)
     {
-      int length = readInt32();
+      int length = decoder.ReadInt32();
       if (length < 0)
-        return null;
+        throw new ArgumentOutOfRangeException(nameof(length));
+      Array _ret;
       type[] values = new type[length];
-      for (int ii = 0; ii < values.Length; ii++)
+      for (int ii = 0; ii < length; ii++)
         values[ii] = readValue();
-      Array array = values;
-      return array;
+      int[] _dimensions = null;
+      if (arrayDimensionsPresents)
+      {
+        _dimensions = ReadDimensions(decoder);
+        _ret = Array.CreateInstance(typeof(type), _dimensions);
+        CopyValues(_ret, values);
+      }
+      else
+        _ret = values;
+      return _ret;
     }
-    private List<int> ReadDimensions(IBinaryDecoder encoder)
+    private void CopyValues<type>(Array _ret, type[] values)
     {
-      int length = encoder.ReadInt32();
+      throw new NotImplementedException();
+    }
+    private int[] ReadDimensions(IBinaryDecoder decoder)
+    {
+      int length = decoder.ReadInt32();
       if (length < 0)
         return null;
       if (MaxArrayLength > 0 && MaxArrayLength < length)
         throw new ArgumentOutOfRangeException(nameof(MaxArrayLength), $"Unsupported array length {length}");
       List<Int32> values = new List<Int32>(length);
       for (int ii = 0; ii < length; ii++)
-        values.Add(encoder.ReadInt32());
-      return values;
+        values.Add(decoder.ReadInt32());
+      return values.ToArray();
     }
     #endregion
 

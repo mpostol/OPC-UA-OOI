@@ -69,27 +69,8 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       Assert.IsNotNull(_EncodedValue);
       Assert.AreEqual<int>(33, _EncodedValue.Length);
-    }
-    private class Matrix : IMatrix
-    {
-      public Matrix(int[] dimensions, Array elements, UATypeInfo typeInfo)
-      {
-        Dimensions = dimensions;
-        Elements = elements;
-        TypeInfo = typeInfo;
-      }
-      public int[] Dimensions
-      {
-        get; private set;
-      }
-      public Array Elements
-      {
-        get; private set;
-      }
-      public UATypeInfo TypeInfo
-      {
-        get; private set;
-      }
+      string _content = String.Join(", ", _EncodedValue);
+      Assert.AreEqual<string>("198, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0", _content);
     }
     [TestMethod]
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]

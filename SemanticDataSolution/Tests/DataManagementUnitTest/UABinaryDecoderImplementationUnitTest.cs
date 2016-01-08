@@ -56,22 +56,40 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     public void ArrayOneDimensionCompressedTest()
     {
       byte[] _testArray = new byte[] { 5, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 0, 0 };
-      IMatrix _EncodedArray = null;
+      Array _EncodedArray = null;
       using (MemoryStream _stream = new MemoryStream(_testArray))
       using (TestBinaryReader _buffer = new TestBinaryReader(_stream))
       {
         Assert.IsNotNull(_buffer);
-        _EncodedArray = _buffer.ReadArray<Int32>(_buffer, _buffer.ReadInt32, new UATypeInfo(BuiltInType.Int32, 1, null));
+        _EncodedArray = _buffer.ReadArray<Int32>(_buffer, _buffer.ReadInt32, false);
         _buffer.Close();
       }
       Assert.IsNotNull(_EncodedArray);
-      Assert.AreEqual<BuiltInType>(BuiltInType.Int32, _EncodedArray.TypeInfo.BuiltInType);
-      Assert.AreEqual<int>(1, _EncodedArray.TypeInfo.ValueRank);
-      Assert.IsInstanceOfType(_EncodedArray.Elements, typeof(Array));
-      Array _value = _EncodedArray.Elements as Array;
-      Assert.AreEqual<int>(1, _value.Rank);
-      Assert.AreEqual<int>(5, _value.GetLength(0));
-      CollectionAssert.AreEqual(new Int32[] { 0, 1, 2, 3, 4 }, _value);
+      Assert.AreEqual<int>(1, _EncodedArray.Rank);
+      Assert.IsInstanceOfType(_EncodedArray, typeof(Array));
+      Assert.AreEqual<int>(5, _EncodedArray.GetLength(0));
+      CollectionAssert.AreEqual(new Int32[] { 0, 1, 2, 3, 4 }, _EncodedArray);
+    }
+    [TestMethod]
+    [TestCategory("DataManagement_UABinaryDecoderImplementationUnitTest")]
+    [ExpectedException(typeof(NotImplementedException))]
+    public void ArrayMultiDimensionTest()
+    {
+      byte[] _testArray = new byte[] { 198, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 };
+      Array _EncodedArray = null;
+      using (MemoryStream _stream = new MemoryStream(_testArray))
+      using (TestBinaryReader _buffer = new TestBinaryReader(_stream))
+      {
+        Assert.IsNotNull(_buffer);
+        _EncodedArray = _buffer.ReadArray<Int32>(_buffer, _buffer.ReadInt32, true);
+        Assert.Fail();
+        _buffer.Close();
+      }
+      Assert.IsNotNull(_EncodedArray);
+      Assert.AreEqual<int>(2, _EncodedArray.Rank);
+      Assert.IsInstanceOfType(_EncodedArray, typeof(Array));
+      Assert.AreEqual<int>(4, _EncodedArray.Length);
+      CollectionAssert.AreEqual(new Int32[] { 0, 1, 2, 3 }, _EncodedArray);
     }
     [TestMethod]
     [TestCategory("DataManagement_UABinaryDecoderImplementationUnitTest")]
@@ -89,13 +107,12 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       Assert.IsNotNull(_EncodedArray);
       Assert.AreEqual<BuiltInType>(BuiltInType.Int32, _EncodedArray.UATypeInfo.BuiltInType);
       Assert.AreEqual<int>(1, _EncodedArray.UATypeInfo.ValueRank);
-      Assert.IsInstanceOfType(_EncodedArray.Value, typeof(IMatrix));
-      IMatrix _value = _EncodedArray.Value as IMatrix;
-      Assert.AreEqual<BuiltInType>(BuiltInType.Int32, _value.TypeInfo.BuiltInType);
-      Assert.AreEqual<int>(1, _value.TypeInfo.ValueRank);
-      Assert.AreEqual<int>(1, _value.Dimensions.Length);
-      Assert.AreEqual<int>(5, _value.Dimensions[0]);
-      CollectionAssert.AreEqual(new Int32[] { 0, 1, 2, 3, 4 }, _value.Elements);
+      Assert.IsInstanceOfType(_EncodedArray.Value, typeof(Array));
+      Array _value = _EncodedArray.Value as Array;
+      Assert.IsNotNull(_value);
+      Assert.AreEqual<int>(1, _value.Rank);
+      Assert.AreEqual<int>(5, _value.GetLength(0));
+      CollectionAssert.AreEqual(new Int32[] { 0, 1, 2, 3, 4 }, _value);
     }
     [TestMethod]
     [TestCategory("DataManagement_UABinaryDecoderImplementationUnitTest")]
@@ -192,9 +209,9 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         Assert.AreSame(this, decoder);
         return m_UABinaryDecoder.ReadString(decoder);
       }
-      public IMatrix ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, UATypeInfo uaTypeInfo)
+      public Array ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, bool arrayDimensionsPresents)
       {
-        return m_UABinaryDecoder.ReadArray<type>(decoder, readValue, uaTypeInfo);
+        return m_UABinaryDecoder.ReadArray<type>(decoder, readValue, arrayDimensionsPresents);
       }
       #endregion
 

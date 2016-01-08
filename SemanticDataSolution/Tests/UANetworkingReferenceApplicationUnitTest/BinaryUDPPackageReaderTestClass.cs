@@ -118,7 +118,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
     #region test instrumentation
     private class UADecoder : IUADecoder
     {
-      public IMatrix ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, UATypeInfo uaTypeInfo)
+      public Array ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, bool arrayDimensionsPresents)
       {
         throw new NotImplementedException();
       }

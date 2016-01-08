@@ -70,7 +70,6 @@
     <Compile Include="Encoding\IExtensionObject.cs" />
     <Compile Include="Encoding\IBinaryDecoder.cs" />
     <Compile Include="Encoding\ILocalizedText.cs" />
-    <Compile Include="Encoding\IMatrix.cs" />
     <Compile Include="Encoding\INodeId.cs" />
     <Compile Include="Encoding\IQualifiedName.cs" />
     <Compile Include="Encoding\IStatusCode.cs" />

@@ -44,7 +44,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         {
           _array = value.Value as Array;
           if (_array == null)
-            throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(value.Value)} must be {nameof(IMatrix)} and cannot be null");
+            throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(value.Value)} must be of the {nameof(Array)} type and cannot be null");
           if (_array.Rank > 1)
             _encodingByte |= (byte)VariantEncodingMask.ArrayDimensionsPresents;
         }

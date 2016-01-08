@@ -97,13 +97,13 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
     /// <returns>The <see cref="IVariant"/> decoded from the UA binary stream of bytes.</returns>
     IVariant ReadVariant(IBinaryDecoder decoder);
     /// <summary>
-    /// Reads an array of the specified type <paramref name="uaTypeInfo"/> and wraps it in the <see cref="IMatrix"/> object.
+    /// Reads an array of the specified type <paramref name="uaTypeInfo" /> and wraps it in the <see cref="IMatrix" /> object.
     /// </summary>
-    /// <typeparam name="type">The type of the <see cref="IMatrix.Elements"/> element.</typeparam>
+    /// <typeparam name="type">The type of the <see cref="IMatrix.Elements" /> element.</typeparam>
     /// <param name="decoder">The decoder to be used to recover the array from the binary stream.</param>
     /// <param name="readValue">This delegate encapsulates binary decoding functionality of the array element.</param>
-    /// <param name="uaTypeInfo"><see cref="BuiltInType"/> of the array to be decoded used in case the array is multidimensional and must be decoded as the variant.</param>
-    /// <returns>An instance of <see cref="IMatrix"/> capturing the an array recovered from the message.</returns>
-    IMatrix ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, UATypeInfo uaTypeInfo);
+    /// <param name="arrayDimensionsPresents">if set to <c>true</c> the rank of the array is greater than 1 and dimensions are present in the encoded stream.</param>
+    /// <returns>An instance of <see cref="IMatrix" /> capturing the an array recovered from the message.</returns>
+    Array ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, bool arrayDimensionsPresents);
   }
 }

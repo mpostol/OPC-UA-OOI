@@ -74,49 +74,49 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
         switch (fieldTypeInfo.BuiltInType)
         {
           case BuiltInType.Boolean:
-            _return = AddBinding<Boolean>(_name, Inc, false, BuiltInType.Boolean);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<Boolean>(_name, Inc, false, fieldTypeInfo) : AddBinding<Boolean[]>(_name, x => Inc(y => (y & 1) == 0, x.Length), new bool[] { false }, fieldTypeInfo);
             break;
           case BuiltInType.SByte:
-            _return = AddBinding<SByte>(_name, Inc, sbyte.MinValue, BuiltInType.SByte);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<SByte>(_name, Inc, sbyte.MinValue, fieldTypeInfo) : AddBinding<sbyte[]>(_name, x => Inc(y => (sbyte)y, x.Length), new sbyte[] { sbyte.MinValue }, fieldTypeInfo);
             break;
           case BuiltInType.Byte:
-            _return = AddBinding<Byte>(_name, Inc, Byte.MinValue, BuiltInType.Byte);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<Byte>(_name, Inc, Byte.MinValue, fieldTypeInfo) : AddBinding<Byte[]>(_name, x => Inc(y => (Byte)y, x.Length), new Byte[] { Byte.MinValue }, fieldTypeInfo);
             break;
           case BuiltInType.Int16:
-            _return = AddBinding<Int16>(_name, Inc, Int16.MinValue, BuiltInType.Int16);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<Int16>(_name, Inc, Int16.MinValue, fieldTypeInfo) : AddBinding<Int16[]>(_name, x => Inc(y => (Int16)y, x.Length), new Int16[] { Int16.MinValue }, fieldTypeInfo);
             break;
           case BuiltInType.UInt16:
-            _return = AddBinding<UInt16>(_name, Inc, UInt16.MinValue, BuiltInType.UInt16);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<UInt16>(_name, Inc, UInt16.MinValue, fieldTypeInfo) : AddBinding<UInt16[]>(_name, x => Inc(y => (UInt16)y, x.Length), new UInt16[] { UInt16.MinValue }, fieldTypeInfo);
             break;
           case BuiltInType.Int32:
-            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<Int32>(_name, Inc, Int32.MinValue, BuiltInType.Int32) : AddBinding<Int32[]>(_name, Inc, new Int32[] { 0 }, BuiltInType.Int32);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<Int32>(_name, Inc, Int32.MinValue, fieldTypeInfo) : AddBinding<Int32[]>(_name, x => Inc(y => (Int32)y, x.Length), new Int32[] { Int32.MinValue }, fieldTypeInfo);
             break;
           case BuiltInType.UInt32:
-            _return = AddBinding<UInt32>(_name, Inc, UInt32.MinValue, BuiltInType.UInt32);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<UInt32>(_name, Inc, UInt32.MinValue, fieldTypeInfo) : AddBinding<UInt32[]>(_name, x => Inc(y => (UInt32)y, x.Length), new UInt32[] { UInt32.MinValue }, fieldTypeInfo);
             break;
           case BuiltInType.Int64:
-            _return = AddBinding<Int64>(_name, Inc, Int64.MinValue, BuiltInType.Int64);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<Int64>(_name, Inc, Int64.MinValue, fieldTypeInfo) : AddBinding<Int64[]>(_name, x => Inc(y => (Int64)y, x.Length), new Int64[] { 0 }, fieldTypeInfo);
             break;
           case BuiltInType.UInt64:
-            _return = AddBinding<UInt64>(_name, Inc, UInt64.MinValue, BuiltInType.UInt64);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<UInt64>(_name, Inc, UInt64.MinValue, fieldTypeInfo) : AddBinding<UInt64[]>(_name, x => Inc(y => (UInt64)y, x.Length), new UInt64[] { 0 }, fieldTypeInfo);
             break;
           case BuiltInType.Float:
-            _return = AddBinding<float>(_name, Inc, -10.12345678f, BuiltInType.Float);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<float>(_name, Inc, -10.12345678f, fieldTypeInfo) : AddBinding<float[]>(_name, x => Inc(y => (float)y, x.Length), new float[] { -10.12345678f }, fieldTypeInfo);
             break;
           case BuiltInType.Double:
-            _return = AddBinding<Double>(_name, Inc, -10.12345678, BuiltInType.Double);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<Double>(_name, Inc, -10.12345678, fieldTypeInfo) : AddBinding<Double[]>(_name, x => Inc(y => (Double)y, x.Length), new Double[] { 0 }, fieldTypeInfo);
             break;
           case BuiltInType.String:
-            _return = AddBinding<String>(_name, Inc, String.Empty, BuiltInType.String);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<String>(_name, Inc, String.Empty, fieldTypeInfo) : AddBinding<String[]>(_name, x => Inc(y => $"#{y}", x.Length), new String[] {}, fieldTypeInfo);
             break;
           case BuiltInType.DateTime:
-            _return = AddBinding<DateTime>(_name, Inc, DateTime.Now, BuiltInType.DateTime);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<DateTime>(_name, Inc, DateTime.Now, fieldTypeInfo) : AddBinding<DateTime[]>(_name, x => Inc(y => DateTime.Now, x.Length), new DateTime[] { }, fieldTypeInfo);
             break;
           case BuiltInType.Guid:
-            _return = AddBinding<Guid>(_name, Inc, Guid.NewGuid(), BuiltInType.Guid);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<Guid>(_name, Inc, Guid.NewGuid(), fieldTypeInfo) : AddBinding<Guid[]>(_name, x => Inc(y => Guid.NewGuid(), x.Length), new Guid[] { }, fieldTypeInfo);
             break;
           case BuiltInType.ByteString:
-            _return = AddBinding<byte[]>(_name, Inc, new byte[] { 0 }, BuiltInType.ByteString);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<byte[]>(_name, Inc, new byte[] { 0 }, fieldTypeInfo) : AddBinding<byte[][]>(_name, x => Inc(y => new byte[] { 0, 1, 2, 3, 4 }, x.Length), new byte[][] { new byte[] { } }, fieldTypeInfo);
             break;
           case BuiltInType.Null:
           case BuiltInType.XmlElement:
@@ -284,21 +284,21 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
         _ret[i] = i;
       return _ret;
     }
-    private static Int32[] Inc(Int32[] monitoredValue)
-    {
-      Int32[] _ret = new Int32[Math.Min(monitoredValue.Length + 1, 254)];
-      for (byte i = 0; i < _ret.Length; i++)
-        _ret[i] = i;
-      return _ret;
-    }
     private static bool Inc(bool monitoredValue)
     {
       return !monitoredValue;
     }
-    #endregion    
-    private IProducerBinding AddBinding<type>(string key, Func<type, type> increment, type defaultValue, BuiltInType builtInType)
+    private static type[] Inc<type>(Func<byte, type> incrementItem, int previousLength)
     {
-      ProducerBindingMonitoredValue<type> binding = new ProducerBindingMonitoredValue<type>(key, new UATypeInfo( builtInType) ) { MonitoredValue = defaultValue };
+      type[] _ret = new type[Math.Min(previousLength + 1, 254)];
+      for (byte i = 0; i < _ret.Length; i++)
+        _ret[i] = incrementItem(i);
+      return _ret;
+    }
+    #endregion    
+    private IProducerBinding AddBinding<type>(string key, Func<type, type> increment, type defaultValue, UATypeInfo typeInfo)
+    {
+      ProducerBindingMonitoredValue<type> binding = new ProducerBindingMonitoredValue<type>(key, typeInfo) { MonitoredValue = defaultValue };
       m_NodesDictionary.Add(key, binding);
       m_TimeEven += (x, y) => binding.MonitoredValue = increment(binding.MonitoredValue);
       return binding;

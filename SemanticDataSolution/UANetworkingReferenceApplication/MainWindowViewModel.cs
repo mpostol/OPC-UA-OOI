@@ -237,58 +237,105 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     /// Helper method that creates the consumer binding.
     /// </summary>
     /// <param name="variableName">Name of the variable.</param>
-    /// <param name="encoding">The encoding.</param>
+    /// <param name="typeInfo">The encoding.</param>
     /// <returns>IConsumerBinding.</returns>
     /// <exception cref="System.ArgumentOutOfRangeException">variableName</exception>
-    public IConsumerBinding GetConsumerBinding(string variableName, BuiltInType encoding)
+    public IConsumerBinding GetConsumerBinding(string variableName, UATypeInfo typeInfo)
     {
       IConsumerBinding _return = null;
-      switch (encoding)
+      if (typeInfo.ValueRank == 0 || typeInfo.ValueRank > 1)
+        throw new ArgumentOutOfRangeException(nameof(typeInfo.ValueRank));
+      switch (typeInfo.BuiltInType)
       {
         case BuiltInType.Boolean:
-          _return = AddBinding<Boolean>(variableName, BuiltInType.Boolean);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<Boolean>(variableName, typeInfo);
+          else
+            _return = AddBinding<Boolean[]>(variableName, typeInfo);
           break;
         case BuiltInType.SByte:
-          _return = AddBinding<SByte>(variableName, BuiltInType.SByte);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<SByte>(variableName, typeInfo);
+          else
+            _return = AddBinding<SByte[]>(variableName, typeInfo);
           break;
         case BuiltInType.Byte:
-          _return = AddBinding<Byte>(variableName, BuiltInType.Byte);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<Byte>(variableName, typeInfo);
+          else
+            _return = AddBinding<Byte[]>(variableName, typeInfo);
           break;
         case BuiltInType.Int16:
-          _return = AddBinding<Int16>(variableName, BuiltInType.Int16);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<Int16>(variableName, typeInfo);
+          else
+            _return = AddBinding<Int16[]>(variableName, typeInfo);
           break;
         case BuiltInType.UInt16:
-          _return = AddBinding<UInt16>(variableName, BuiltInType.UInt16);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<UInt16>(variableName, typeInfo);
+          else
+            _return = AddBinding<UInt16[]>(variableName, typeInfo);
           break;
         case BuiltInType.Int32:
-          _return = AddBinding<Int32>(variableName, BuiltInType.Int32);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<Int32>(variableName, typeInfo);
+          else
+            _return = AddBinding<Int32[]>(variableName, typeInfo);
           break;
         case BuiltInType.UInt32:
-          _return = AddBinding<UInt32>(variableName, BuiltInType.UInt32);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<UInt32>(variableName, typeInfo);
+          else
+            _return = AddBinding<UInt32[]>(variableName, typeInfo);
           break;
         case BuiltInType.Int64:
-          _return = AddBinding<Int64>(variableName, BuiltInType.Int64);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<Int64>(variableName, typeInfo);
+          else
+            _return = AddBinding<Int64[]>(variableName, typeInfo);
           break;
         case BuiltInType.UInt64:
-          _return = AddBinding<UInt64>(variableName, BuiltInType.UInt64);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<UInt64>(variableName, typeInfo);
+          else
+            _return = AddBinding<UInt64[]>(variableName, typeInfo);
           break;
         case BuiltInType.Float:
-          _return = AddBinding<float>(variableName, BuiltInType.Float);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<float>(variableName, typeInfo);
+          else
+            _return = AddBinding<float[]>(variableName, typeInfo);
           break;
         case BuiltInType.Double:
-          _return = AddBinding<Double>(variableName, BuiltInType.Double);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<Double>(variableName, typeInfo);
+          else
+            _return = AddBinding<Double[]>(variableName, typeInfo);
           break;
         case BuiltInType.String:
-          _return = AddBinding<String>(variableName, BuiltInType.String);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<String>(variableName, typeInfo);
+          else
+            _return = AddBinding<String[]>(variableName, typeInfo);
           break;
         case BuiltInType.DateTime:
-          _return = AddBinding<DateTime>(variableName, BuiltInType.DateTime);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<DateTime>(variableName, typeInfo);
+          else
+            _return = AddBinding<DateTime[]>(variableName, typeInfo);
           break;
         case BuiltInType.Guid:
-          _return = AddBinding<Guid>(variableName, BuiltInType.Guid);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<Guid>(variableName, typeInfo);
+          else
+            _return = AddBinding<Guid[]>(variableName, typeInfo);
           break;
         case BuiltInType.ByteString:
-          _return = AddBinding<byte[]>(variableName, BuiltInType.ByteString);
+          if (typeInfo.ValueRank < 0)
+            _return = AddBinding<byte[]>(variableName, typeInfo);
+          else
+            _return = AddBinding<byte[][]>(variableName, typeInfo);
           break;
         case BuiltInType.Null:
         case BuiltInType.XmlElement:
@@ -537,9 +584,9 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     private ICommand b_ProducerRestart;
     private string b_ProducerErrorMessage;
     //methods
-    private IConsumerBinding AddBinding<type>(string variableName, BuiltInType encoding)
+    private IConsumerBinding AddBinding<type>(string variableName, UATypeInfo typeInfo)
     {
-      ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(new UATypeInfo(encoding));
+      ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(typeInfo);
       _return.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).ToString()}");
       return _return;
     }

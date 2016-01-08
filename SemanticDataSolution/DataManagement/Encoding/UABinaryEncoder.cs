@@ -328,7 +328,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           EncodeArray<Guid>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.ByteString:
-          EncodeArray<Byte>(encoder.Write, value, encoder.Write);
+          EncodeArray<Byte[]>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.XmlElement:
           EncodeArray<XmlElement>(encoder.Write, value, x => Write(encoder, x));

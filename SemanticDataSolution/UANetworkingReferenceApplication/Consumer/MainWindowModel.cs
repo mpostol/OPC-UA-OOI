@@ -34,7 +34,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     {
       if (repositoryGroup != m_RepositoryGroup)
         throw new ArgumentNullException("repositoryGroup");
-      return ViewModelBindingFactory.GetConsumerBinding(processValueName, fieldTypeInfo.BuiltInType);
+      return ViewModelBindingFactory.GetConsumerBinding(processValueName, fieldTypeInfo);
     }
     /// <summary>
     /// Gets the producer binding.

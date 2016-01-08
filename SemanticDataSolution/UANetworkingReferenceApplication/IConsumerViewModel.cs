@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
     /// <param name="variableName">Name of the variable.</param>
     /// <param name="encoding">The encoding.</param>
     /// <returns>An object implementing <see cref="IConsumerBinding"/>.</returns>
-    IConsumerBinding GetConsumerBinding(string variableName, BuiltInType encoding);
+    IConsumerBinding GetConsumerBinding(string variableName, UATypeInfo encoding);
     /// <summary>
     /// Saves the consumer user settings.
     /// </summary>

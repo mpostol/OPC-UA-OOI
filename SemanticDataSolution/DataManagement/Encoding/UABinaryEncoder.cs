@@ -304,7 +304,7 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           EncodeArray<Int32>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.UInt32:
-          EncodeArray<System.UInt32>(encoder.Write, value, encoder.Write);
+          EncodeArray<UInt32>(encoder.Write, value, encoder.Write);
           break;
         case BuiltInType.Int64:
           EncodeArray<Int64>(encoder.Write, value, encoder.Write);
@@ -325,10 +325,10 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
           EncodeArray<DateTime>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.Guid:
-          EncodeArray<Guid>(encoder.Write, value, encoder.Write);
+          EncodeArray<Guid>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.ByteString:
-          EncodeArray<Byte[]>(encoder.Write, value, encoder.Write);
+          EncodeArray<Byte[]>(encoder.Write, value, x => Write(encoder, x));
           break;
         case BuiltInType.XmlElement:
           EncodeArray<XmlElement>(encoder.Write, value, x => Write(encoder, x));

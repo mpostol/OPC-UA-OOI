@@ -279,9 +279,9 @@ namespace UAOOI.SemanticData.DataManagement.Encoding
         case BuiltInType.DateTime:
           return DecodeArray<DateTime>(decoder, () => ReadDateTime(decoder), arrayDimensionsPresents);
         case BuiltInType.Guid:
-          return DecodeArray<Guid>(decoder, decoder.ReadGuid, arrayDimensionsPresents);
+          return DecodeArray<Guid>(decoder, () => ReadGuid(decoder), arrayDimensionsPresents);
         case BuiltInType.ByteString:
-          return DecodeArray<byte>(decoder, decoder.ReadByte, arrayDimensionsPresents);
+          return DecodeArray<byte[]>(decoder, () => ReadByteString(decoder), arrayDimensionsPresents);
         case BuiltInType.XmlElement:
           return DecodeArray<XmlElement>(decoder, () => ReadXmlElement(decoder), arrayDimensionsPresents);
         case BuiltInType.NodeId:

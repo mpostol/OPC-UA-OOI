@@ -122,6 +122,47 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     [TestMethod]
     [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
+    public void VariantByteStringTestMethod()
+    {
+      byte[] _EncodedValue = null;
+      using (MemoryStream _stream = new MemoryStream())
+      using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
+      {
+        Assert.IsNotNull(_buffer);
+        Variant _variant = new Variant { UATypeInfo = new UATypeInfo(BuiltInType.ByteString), Value = new byte[] { 0, 1, 2, 3, 4 } };
+        _buffer.Write(_buffer, _variant);
+        _buffer.Close();
+        _EncodedValue = _stream.ToArray();
+      }
+      Assert.IsNotNull(_EncodedValue);
+      Assert.AreEqual<int>(10, _EncodedValue.Length);
+      Assert.AreEqual<byte>((byte)BuiltInType.ByteString, _EncodedValue[0]);
+      string _content = String.Join(", ", _EncodedValue);
+      Assert.AreEqual<string>("15, 5, 0, 0, 0, 0, 1, 2, 3, 4", _content);
+    }
+    [TestMethod]
+    [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
+    public void VariantArrayOfByteStringsTestMethod()
+    {
+      byte[] _EncodedValue = null;
+      using (MemoryStream _stream = new MemoryStream())
+      using (TestBinaryWriter _buffer = new TestBinaryWriter(_stream))
+      {
+        Assert.IsNotNull(_buffer);
+        Variant _variant = new Variant { UATypeInfo = new UATypeInfo(BuiltInType.ByteString, 1), Value = new byte[][] { new byte[] { 0, 1, 2, 3, 4 }, new byte[] { 5, 6, 7, 8, 9 } } };
+        _buffer.Write(_buffer, _variant);
+        _buffer.Close();
+        _EncodedValue = _stream.ToArray();
+      }
+      Assert.IsNotNull(_EncodedValue);
+      Assert.AreEqual<int>(23, _EncodedValue.Length);
+      Assert.AreEqual<byte>((byte)((byte)BuiltInType.ByteString | (byte)VariantEncodingMask.IsArray), _EncodedValue[0]);
+      string _content = String.Join(", ", _EncodedValue);
+      Assert.AreEqual<string>("143, 2, 0, 0, 0, 5, 0, 0, 0, 0, 1, 2, 3, 4, 5, 0, 0, 0, 5, 6, 7, 8, 9", _content);
+    }
+
+    [TestMethod]
+    [TestCategory("DataManagement_UABinaryEncoderImplementationUnitTest")]
     public void VariantDateTimeTestMethod()
     {
       foreach (CommonDefinitions.DateTimeVariantEncoding _dtx in CommonDefinitions.DateTimeTestingValues)

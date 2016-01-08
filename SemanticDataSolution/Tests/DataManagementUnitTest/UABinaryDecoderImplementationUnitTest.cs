@@ -116,6 +116,32 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     [TestMethod]
     [TestCategory("DataManagement_UABinaryDecoderImplementationUnitTest")]
+    public void ArrayOneDimensionByteStringVariantTest()
+    {
+      byte[] _testArray = new byte[] { 143, 2, 0, 0, 0, 5, 0, 0, 0, 0, 1, 2, 3, 4, 5, 0, 0, 0, 5, 6, 7, 8, 9 };
+      IVariant _EncodedArray = null;
+      using (MemoryStream _stream = new MemoryStream(_testArray))
+      using (TestBinaryReader _buffer = new TestBinaryReader(_stream))
+      {
+        Assert.IsNotNull(_buffer);
+        _EncodedArray = _buffer.ReadVariant(_buffer);
+        _buffer.Close();
+      }
+      Assert.IsNotNull(_EncodedArray);
+      Assert.AreEqual<BuiltInType>(BuiltInType.ByteString, _EncodedArray.UATypeInfo.BuiltInType);
+      Assert.AreEqual<int>(1, _EncodedArray.UATypeInfo.ValueRank);
+      Assert.IsInstanceOfType(_EncodedArray.Value, typeof(Array));
+      Array _value = _EncodedArray.Value as Array;
+      Assert.IsNotNull(_value);
+      Assert.AreEqual<int>(1, _value.Rank);
+      Assert.AreEqual<int>(2, _value.GetLength(0));
+      byte[][] _recovered = (byte[][])_value;
+      byte[][] _expected = new byte[][] { new byte[] { 0, 1, 2, 3, 4 }, new byte[] { 5, 6, 7, 8, 9 } };
+      for (int i = 0; i < _value.Rank; i++)
+        CollectionAssert.AreEqual(_expected[i], _recovered[i]);
+    }
+    [TestMethod]
+    [TestCategory("DataManagement_UABinaryDecoderImplementationUnitTest")]
     public void VariantDateTimeTestMethod()
     {
       foreach (CommonDefinitions.DateTimeVariantEncoding _dtx in CommonDefinitions.DateTimeTestingValues)

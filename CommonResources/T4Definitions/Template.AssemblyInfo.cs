@@ -2,7 +2,7 @@
 //  Title   : Assembly info for: <Define Assembly Title>
 //  System  : Microsoft VisualStudio 2015 / C#
 //
-//  Copyright (c) 2015 CommServer
+//  Copyright (c) 2016 CommServer
 //  +48 (42) 686 25 47
 //  commserver@cas.eu
 //  www.commsvr.com
@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
 [assembly: AssemblyProduct("DefaultProductName")]
-[assembly: AssemblyCopyright("Copyright (c) 2015 CommServer")]
+[assembly: AssemblyCopyright("Copyright (c) 2016 CommServer")]
 [assembly: AssemblyTrademark("OPC-UA-OOI")]
 [assembly: AssemblyCulture("")]
 [assembly: Guid("<GUID>")]

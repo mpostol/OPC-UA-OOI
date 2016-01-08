@@ -45,7 +45,7 @@ The Nuget packages are available at:
 Current release:
 
 * Assembly Product:       OPC UA SemanticData
-* Assembly Version:       1.00.13
+* Assembly Version:       1.00.14
 
 # Library UAOOI.DataBindings
 
@@ -55,14 +55,14 @@ Data binding library contains classes, interfaces, and value types that may be u
 
 ### Deliverables
 
-The most important project for this library release are as follows:
+The most important projects for this library release are as follows:
 
 * [Data Bindings Solution Library](https://github.com/mpostol/OPC-UA-OOI/tree/master/DataBindingsSolution)
 
 ### Versions
 
 * Assembly Product:       OPC UA DataBindings
-* Assembly Version:       1.00.03
+* Assembly Version:       1.1.0
 
 ## Contact
 
@@ -72,5 +72,5 @@ Mariusz Postol
 [Contact](http://www.commsvr.com/tabid/85/language/en-US/Default.aspx)
 http://www.commsvr.com/
 
-Copyright (C) 2015, commsvr.com LODZ POLAND
+Copyright (C) 2016, commsvr.com LODZ POLAND
 

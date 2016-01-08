@@ -61,7 +61,7 @@ Data binding library contains classes, interfaces, and value types that may be u
 
 ### Deliverables
 
-The most important project for this library release are as follows:
+The most important projects for this library release are as follows:
 
 * [Data Bindings Solution Library](https://github.com/mpostol/OPC-UA-OOI/tree/master/DataBindingsSolution)
 
@@ -78,7 +78,7 @@ Mariusz Postol
 [Contact](http://www.commsvr.com/tabid/85/language/en-US/Default.aspx)
 http://www.commsvr.com/
 
-Copyright (C) 2015, commsvr.com LODZ POLAND
+Copyright (C) 2016, commsvr.com LODZ POLAND
 
 <#@ include file = "Model.t4" #>
 <#+

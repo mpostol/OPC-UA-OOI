@@ -1,4 +1,14 @@
-﻿Version History 
+﻿Version History
+
+Assembly Version:       1.00.13
+Assembly Date:          2015-12-23
+
+The main changes and new functionalities are listed below:
+
+1. It is bug fix release:
+ - Raise condition if there are many DataSets
+ - Improved documentation and application user intrface
+ 
 
 Assembly Version:       1.00.11
 Assembly Date:          2015-12-18

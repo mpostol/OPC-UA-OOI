@@ -2,7 +2,7 @@
 //  Title   : Assembly info for: UAOOI.UANetworkingReferenceApplication
 //  System  : Microsoft VisualStudio 2015 / C#
 //
-//  Copyright (c) 2015 CommServer
+//  Copyright (c) 2016 CommServer
 //  +48 (42) 686 25 47
 //  commserver@cas.eu
 //  www.commsvr.com
@@ -18,12 +18,12 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
 [assembly: AssemblyProduct("OPC UA SemanticData")]
-[assembly: AssemblyCopyright("Copyright (c) 2015 CommServer")]
+[assembly: AssemblyCopyright("Copyright (c) 2016 CommServer")]
 [assembly: AssemblyTrademark("OPC-UA-OOI")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("1.00.13.*")]
-[assembly: AssemblyFileVersion("1.00.13")]
+[assembly: AssemblyVersion("1.00.14.*")]
+[assembly: AssemblyFileVersion("1.00.14")]
 [assembly: InternalsVisibleTo(
   "UAOOI.UANetworkingReferenceApplicationUnitTest, PublicKey=" +
     "00240000048000009400000006020000002400005253413100040000010001005b97a0972ff6b13a" +

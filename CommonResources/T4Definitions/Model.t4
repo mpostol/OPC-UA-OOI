@@ -5,7 +5,7 @@ string DefaultProductVersion = "0.00.00";
 
 //Solution common
 string ProductTrademark = "OPC-UA-OOI";
-string AssemblyCopyright = "Copyright (c) 2015 CommServer";
+string AssemblyCopyright = "Copyright (c) 2016 CommServer";
 string AssemblyCompany = "commsvr.com";
 string Url = "www.commsvr.com";
 string Email = "commserver@cas.eu";
@@ -13,7 +13,7 @@ string Phone = "+48 (42) 686 25 47";
 string Owner = "commsvr.com";
 
 //UAOOI.SemanticData
-string SemanticDataVersion = "1.00.13";
+string SemanticDataVersion = "1.00.14";
 string SemanticDataProduct = "OPC UA SemanticData";
 
 //UAOOI.DataBindings

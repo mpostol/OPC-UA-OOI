@@ -53,7 +53,29 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     }
     [TestMethod]
     [TestCategory("DataManagement_UABinaryDecoderImplementationUnitTest")]
-    public void ArrayOneDimensionTest()
+    public void ArrayOneDimensionCompressedTest()
+    {
+      byte[] _testArray = new byte[] { 5, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 0, 0 };
+      IMatrix _EncodedArray = null;
+      using (MemoryStream _stream = new MemoryStream(_testArray))
+      using (TestBinaryReader _buffer = new TestBinaryReader(_stream))
+      {
+        Assert.IsNotNull(_buffer);
+        _EncodedArray = _buffer.ReadArray<Int32>(_buffer, _buffer.ReadInt32, new UATypeInfo(BuiltInType.Int32, 1, null));
+        _buffer.Close();
+      }
+      Assert.IsNotNull(_EncodedArray);
+      Assert.AreEqual<BuiltInType>(BuiltInType.Int32, _EncodedArray.TypeInfo.BuiltInType);
+      Assert.AreEqual<int>(1, _EncodedArray.TypeInfo.ValueRank);
+      Assert.IsInstanceOfType(_EncodedArray.Elements, typeof(Array));
+      Array _value = _EncodedArray.Elements as Array;
+      Assert.AreEqual<int>(1, _value.Rank);
+      Assert.AreEqual<int>(5, _value.GetLength(0));
+      CollectionAssert.AreEqual(new Int32[] { 0, 1, 2, 3, 4 }, _value);
+    }
+    [TestMethod]
+    [TestCategory("DataManagement_UABinaryDecoderImplementationUnitTest")]
+    public void ArrayOneDimensionVariantTest()
     {
       byte[] _testArray = new byte[] { 134, 5, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 4, 0, 0, 0 };
       IVariant _EncodedArray = null;
@@ -64,7 +86,6 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
         _EncodedArray = _buffer.ReadVariant(_buffer);
         _buffer.Close();
       }
-      Assert.IsNotNull(_EncodedArray);
       Assert.IsNotNull(_EncodedArray);
       Assert.AreEqual<BuiltInType>(BuiltInType.Int32, _EncodedArray.UATypeInfo.BuiltInType);
       Assert.AreEqual<int>(1, _EncodedArray.UATypeInfo.ValueRank);
@@ -173,7 +194,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
       }
       public IMatrix ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, UATypeInfo uaTypeInfo)
       {
-        throw new NotImplementedException();
+        return m_UABinaryDecoder.ReadArray<type>(decoder, readValue, uaTypeInfo);
       }
       #endregion
 

@@ -67,6 +67,11 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
       //UInt64 _mask = 0x1;
       for (int i = 0; i < length; i++)
       {
+        if (EndOfMessage())
+        {
+          Trace($"Unexpected end of message while reading #{i} element.");
+          break;
+        }
         //TODO: Implement ContentMask https://github.com/mpostol/OPC-UA-OOI/issues/89
         //if ((ContentMask & _mask) > 0)
         //{
@@ -118,6 +123,16 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     //vars
     private IUADecoder m_UADecoder;
     private Action<IConsumerBinding> m_ReadValueDelegate = null;
+    /// <summary>
+    /// Signals the end of message.
+    /// </summary>
+    /// <returns><c>true</c> if there is end of message condition, <c>false</c> otherwise.</returns>
+    protected abstract bool EndOfMessage();
+    /// <summary>
+    /// If implemented by the derived class traces the specified message.
+    /// </summary>
+    /// <param name="message">The message.</param>
+    protected abstract void Trace(string message);
     /// <summary>
     /// Gets the publisher identifier.
     /// </summary>

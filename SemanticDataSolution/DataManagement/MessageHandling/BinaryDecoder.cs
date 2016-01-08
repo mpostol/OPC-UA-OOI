@@ -111,6 +111,10 @@ namespace UAOOI.SemanticData.DataManagement.MessageHandling
     {
       return m_UABinaryReader.ReadBytes(count);
     }
+    protected override bool EndOfMessage()
+    {
+      return m_UABinaryReader.BaseStream.Position == m_UABinaryReader.BaseStream.Length;
+    }
     #endregion
 
     #region private

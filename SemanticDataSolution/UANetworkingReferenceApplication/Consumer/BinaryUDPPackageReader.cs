@@ -102,6 +102,10 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
       string _reuseAddressMessage = m_ReuseAddress ? "Address is reused" : "Address is not reused.";
       return $"BinaryUDPPackageReader UPD Port: {m_UDPPort} {_multicastGroupMessage} {_reuseAddressMessage}";
     }
+    protected override void Trace(string message)
+    {
+      m_Trace(message);
+    }
     #endregion
 
     #region private

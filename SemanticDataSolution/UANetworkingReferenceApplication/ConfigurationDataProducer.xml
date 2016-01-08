@@ -179,14 +179,14 @@
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
-        <!--<DataMemberConfiguration>
+        <DataMemberConfiguration>
           <SymbolicName>UInt32Array</SymbolicName>
           <ProcessValueName>UInt32Array</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
             <ValueRank>1</ValueRank>
           </TypeInformation>
-        </DataMemberConfiguration>-->
+        </DataMemberConfiguration>
 
         <!--arrays all types out of scope -->
         <!-- uncomment aas needed - all have been self tested

@@ -8,6 +8,13 @@ The schema of the configuration files is available at:  [ConfigurationData.xsd](
 
 ## Version History
 
+Assembly Version:       1.00.15
+Assembly Date:          Saturday, January 9, 2016
+
+The main changes and new functionalities are listed below:
+
+1. Published Nuget package to decouple dependent projects: Address Space Model Designer, UAOOI.SemanticData.
+The Nuget package is available here: https://www.nuget.org/packages/UAOOI.DataBindings/
 
 
 ## Getting Started Tutorial

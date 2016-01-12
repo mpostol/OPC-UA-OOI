@@ -35,15 +35,12 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("C1F53FFB-6552-4CCC-84C9-F847147CDC85")]
         public string AssociationConfigurationId {
             get {
                 return ((string)(this["AssociationConfigurationId"]));
-            }
-            set {
-                this["AssociationConfigurationId"] = value;
             }
         }
         
@@ -59,15 +56,12 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("d80d81dd-96e6-4560-850e-154f9181307c")]
         public string ProducerId {
             get {
                 return ((string)(this["ProducerId"]));
-            }
-            set {
-                this["ProducerId"] = value;
             }
         }
         

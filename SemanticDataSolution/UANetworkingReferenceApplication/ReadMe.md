@@ -26,6 +26,20 @@ The application installation package is available here:
 
 Detailed description is available at: https://github.com/mpostol/OPC-UA-OOI/commits/master
 
+Assembly Version:       1.00.16
+Assembly Date:          2016-01-09
+
+The main changes and new functionalities are listed below:
+
+1. IP Multi-cast support - it is configurable on the UI
+2. Arrays and `ByteString` support - array can be configured in the configuration file
+3. Configuration updated to meet the interoperability testing requirements
+4. Improved diagnostic - added log file tracing details related to the UDP protocol communication
+5. Added new unit tests
+5. Improved tracking to the text list available on the user interface.
+7. Fixed problems with reloading Nuget packages
+6. fixed many errors.
+
 Assembly Version:       1.00.13
 Assembly Date:          2015-12-19
 

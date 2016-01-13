@@ -56,14 +56,13 @@
       <Private>false</Private>
       <Inherited>true</Inherited>
       <InheritedFromReferences>true</InheritedFromReferences>
-      <EnableTags>false</EnableTags>
-      <TagList />
+      <EnableTags>true</EnableTags>
+      <TagList>OPC UA, commsvr, UAOOI, Object Oriented Internet</TagList>
     </IncludeScopes>
     <ResolveCrefLinks>true</ResolveCrefLinks>
-    <HeaderText>Part 14 PubSub SDK</HeaderText>
+    <HeaderText>OPC UA Part 14 PubSub SDK Rel 1.0.16</HeaderText>
     <FooterText>www.commsvr.com</FooterText>
     <SelectedProjects>
-      <SelectedProject>DataBindings</SelectedProject>
       <SelectedProject>UANetworkingConfiguration</SelectedProject>
       <SelectedProject>DataManagement</SelectedProject>
     </SelectedProjects>

@@ -3,7 +3,7 @@ using CAS.UA.IServerConfiguration;
 using System;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration
+namespace UAOOI.DataBindings
 {
   public interface IConfigurationEditor
   {

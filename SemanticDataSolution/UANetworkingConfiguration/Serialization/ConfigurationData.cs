@@ -46,7 +46,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       _configuration.OnLoaded();
       return _configuration;
     }
-    internal ObservableCollection<MessageHandlerConfiguration> GetMessageHandlers()
+    public ObservableCollection<MessageHandlerConfiguration> GetMessageHandlers()
     {
       if (m_ObservableMessageHandlers == null)
       {
@@ -77,7 +77,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// </summary>
     /// <param name="descriptor">The descriptor.</param>
     /// <returns>IEnumerable&lt;IInstanceConfiguration&gt;.</returns>
-    internal DataSetConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
+    public DataSetConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
     {
       DataSetConfiguration _node = DataSetsList.Where<DataSetConfiguration>(x => x.Root.CreateWrapper().CompareTo(descriptor) == 0).FirstOrDefault<DataSetConfiguration>();
       if (_node == null)

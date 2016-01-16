@@ -50,13 +50,19 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UAOOI.SemanticDataUANetworkingConfiguration">
+      <HintPath>..\..\SemanticDataSolution\UANetworkingConfiguration\bin\Debug\UAOOI.SemanticDataUANetworkingConfiguration.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IConfigurationEditor.cs" />
+    <Compile Include="IInstanceConfigurationFactory.cs" />
     <Compile Include="InstanceConfigurationBase.cs" />
     <Compile Include="ConfigurationBase.cs" />
     <Compile Include="NodeDescriptorBase.cs" />
@@ -75,6 +81,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="UANetworkingConfigurationEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

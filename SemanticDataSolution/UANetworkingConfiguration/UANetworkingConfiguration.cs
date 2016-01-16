@@ -43,20 +43,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     {
       ConfigurationData.Save<ConfigurationDataType>(CurrentConfiguration, Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z));
     }
-    //TODO Move to DataBinding
-    ///// <summary>
-    ///// Gets the instance configuration.
-    ///// </summary>
-    ///// <param name="descriptor">The descriptor.</param>
-    ///// <returns>An instance of <see cref="CAS.UA.IServerConfiguration.IInstanceConfiguration"/>.</returns>
-    //public IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
-    //{
-    //  if (descriptor == null)
-    //    throw new ArgumentNullException(nameof(descriptor));
-    //  if (CurrentConfiguration == null)
-    //    return null;
-    //  return InstanceConfigurationFactory.GetIInstanceConfiguration(CurrentConfiguration.GetInstanceConfiguration(descriptor), CurrentConfiguration.GetMessageHandlers(), TraceSource.TraceData, () => this.RaiseOnChangeEvent(false));
-    //}
     /// <summary>
     /// Gets or sets the current configuration <typeparamref name="ConfigurationDataType"/>.
     /// </summary>
@@ -76,20 +62,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// Occurs any time the configuration is modified.
     /// </summary>
     public event EventHandler<UAServerConfigurationEventArgs> OnModified;
-
     #endregion
-    //TODO move MEF injection 
-    //#region MEF injection points
-    ///// <summary>
-    ///// Gets or sets the configuration editor - an access point to the external component.
-    ///// </summary>
-    ///// <value>The configuration editor.</value>
-    //[Import(typeof(IConfigurationEditor))]
-    //public IConfigurationEditor ConfigurationEditor
-    //{
-    //  get { return b_ConfigurationEditor; }
-    //  set { b_ConfigurationEditor = value; }
-    //}
+
+    #region MEF composition
     /// <summary>
     /// Gets or sets the trace source - an access point to the external component.
     /// </summary>
@@ -100,18 +75,11 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
       get { return b_TraceSource; }
       set { b_TraceSource = value; }
     }
-    ///// <summary>
-    ///// Gets or sets the instance configuration factory.
-    ///// </summary>
-    ///// <value>The instance configuration factory.</value>
-    //[Import(typeof(IInstanceConfigurationFactory))]
-    //public IInstanceConfigurationFactory InstanceConfigurationFactory { get; set; }
-    //#endregion
-
+    #endregion    
+    
     #region privat
     private ConfigurationDataType m_CurrentConfiguration;
     private ITraceSource b_TraceSource;
-    //private IConfigurationEditor b_ConfigurationEditor;
     private static ConfigurationDataType NewConfigurationData()
     {
       return new ConfigurationDataType() { DataSets = new DataSetConfiguration[] { }, MessageHandlers = new MessageHandlerConfiguration[] { } };
@@ -135,7 +103,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     {
       OnModified?.Invoke(this, new UAServerConfigurationEventArgs(configurationFileChanged));
     }
-
     #endregion
 
   }

@@ -14,8 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{796E19
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSerializationUnitTestProject", "DataSerializationUnitTestProject\DataSerializationUnitTestProject.csproj", "{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{78EDB72A-77B1-4A64-8E76-17E780993017}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InformationModelFactory", "InformationModelFactory\InformationModelFactory.csproj", "{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}"
@@ -46,6 +44,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UANetworkingConfigurationUn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UANetworkingReferenceApplicationUnitTest", "Tests\UANetworkingReferenceApplicationUnitTest\UANetworkingReferenceApplicationUnitTest.csproj", "{ED278519-D497-47AE-8EB1-5826904AF6B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSerializationUnitTestProject", "Tests\DataSerializationUnitTestProject\DataSerializationUnitTestProject.csproj", "{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,10 +60,6 @@ Global
 		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -112,18 +108,22 @@ Global
 		{ED278519-D497-47AE-8EB1-5826904AF6B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED278519-D497-47AE-8EB1-5826904AF6B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED278519-D497-47AE-8EB1-5826904AF6B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
-		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
 		{37D26B63-74FE-45C6-9F61-251BDF69EDF7} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
 		{DDE02168-1EAD-41D9-B5E6-FB101F98AC24} = {78EDB72A-77B1-4A64-8E76-17E780993017}
 		{F7C29437-0923-449C-B4E9-36653A55C3E5} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
 		{90E262B4-C902-468B-9FCA-0D694B0BBF76} = {D538BF73-285D-4E99-835B-6CD7AE870163}
 		{81DDD889-3223-4F24-8B65-DD5C57886994} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
 		{ED278519-D497-47AE-8EB1-5826904AF6B1} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
+		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
 	EndGlobalSection
 EndGlobal

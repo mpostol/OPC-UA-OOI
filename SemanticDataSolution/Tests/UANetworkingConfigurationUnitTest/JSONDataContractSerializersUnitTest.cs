@@ -1,17 +1,15 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using UAOOI.DataBindings.Serializers;
+using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
 
-namespace UAOOI.DataBindings.UnitTest
+namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 {
-  /// <summary>
-  /// Summary description for DataContractSerializersUnitTest
-  /// </summary>
   [TestClass]
-  public class XmlDataContractSerializersUnitTest
+  public class JSONDataContractSerializersUnitTest
   {
-    public XmlDataContractSerializersUnitTest()
+
+    public JSONDataContractSerializersUnitTest()
     {
       //
       // TODO: Add constructor logic here
@@ -60,20 +58,20 @@ namespace UAOOI.DataBindings.UnitTest
 
     [TestMethod]
     [TestCategory("DataBindings_XmlSerializerTestMethod")]
-    public void XmlSerializerTestMethod()
+    public void JSONSerializerTestMethod1()
     {
-
       // Create a new instance of the Person class and serialize it to an XML file.
       CSharpSelectedTypesEncoding _p1 = new CSharpSelectedTypesEncoding();
-      string _fileName = "DataContractExample.xml";
-      XmlDataContractSerializers.Save<CSharpSelectedTypesEncoding>(new FileInfo(_fileName), _p1, (x, y, z) => Assert.AreEqual(System.Diagnostics.TraceEventType.Verbose, x));
+      string _fileName = "DataContractExample.json";
+      JSONDataContractSerializers.Save<CSharpSelectedTypesEncoding>(new FileInfo(_fileName), _p1, (x, y, z) => Assert.AreEqual(System.Diagnostics.TraceEventType.Verbose, x));
       FileInfo _newFile = new FileInfo(_fileName);
       Assert.IsTrue(_newFile.Exists);
-      CSharpSelectedTypesEncoding _p2 = XmlDataContractSerializers.Load<CSharpSelectedTypesEncoding>(new FileInfo(_fileName), (x, y, z) => Assert.AreEqual<System.Diagnostics.TraceEventType>(System.Diagnostics.TraceEventType.Verbose, x));
+      CSharpSelectedTypesEncoding _p2 = JSONDataContractSerializers.Load<CSharpSelectedTypesEncoding>
+        (new FileInfo(_fileName), (x, y, z) => Assert.AreEqual<System.Diagnostics.TraceEventType>(System.Diagnostics.TraceEventType.Verbose, x));
       Assert.IsNotNull(_p2);
       _p1.AreEqual(_p2);
-
     }
+
   }
 }
 

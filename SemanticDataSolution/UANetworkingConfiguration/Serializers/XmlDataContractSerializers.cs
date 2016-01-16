@@ -4,9 +4,9 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
-using UAOOI.DataBindings.Properties;
+using UAOOI.SemanticData.UANetworking.Configuration.Properties;
 
-namespace UAOOI.DataBindings.Serializers
+namespace UAOOI.SemanticData.UANetworking.Configuration.Serializers
 {
   /// <summary>
   /// Class DataContractSerializers- helper function to serialize or deserialize an object of the specified type using <see cref="DataContractSerializer"/>.

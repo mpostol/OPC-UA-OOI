@@ -51,7 +51,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <Choose>
@@ -69,8 +68,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CSharpSelectedTypesEncoding.cs" />
-    <Compile Include="XmlDataContractSerializersUnitTest.cs" />
     <Compile Include="NodeDescriptor.cs" />
     <Compile Include="ConfigurationBaseUnitTest.cs" />
     <Compile Include="InstanceConfigurationBaseUnitTest.cs" />
@@ -80,7 +77,6 @@
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
     <Compile Include="NodeDescriptorBaseUnitTest.cs" />
-    <Compile Include="JSONDataContractSerializersUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DataBindings\DataBindings.csproj">

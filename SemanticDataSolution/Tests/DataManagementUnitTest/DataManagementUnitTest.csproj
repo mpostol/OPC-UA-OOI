@@ -45,10 +45,6 @@
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CAS.UA.IServerConfiguration, Version=1.0.0.32204, Culture=neutral, PublicKeyToken=8832ff1a67ea61a3, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CAS.UA.IServerConfiguration.1.00.00\lib\net35\CAS.UA.IServerConfiguration.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -57,10 +53,6 @@
     <Reference Include="System.ServiceModel.Channels" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
-    <Reference Include="UAOOI.DataBindings, Version=1.0.15.30327, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UAOOI.DataBindings.1.00.15\lib\net461\UAOOI.DataBindings.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
@@ -110,9 +102,7 @@
     <Compile Include="ConsumerBindingMonitoredValueUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Help\ASModelDesigner.chm" />
     <None Include="OPCUAOOIKey.snk" />
-    <None Include="packages.config" />
     <None Include="Writers.cd" />
   </ItemGroup>
   <ItemGroup>

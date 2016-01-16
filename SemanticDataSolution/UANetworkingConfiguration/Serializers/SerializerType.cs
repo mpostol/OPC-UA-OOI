@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.DataBindings.Serializers
+namespace UAOOI.SemanticData.UANetworking.Configuration.Serializers
 {
   /// <summary>
   /// Enum SerializerType - enumerates available serializers

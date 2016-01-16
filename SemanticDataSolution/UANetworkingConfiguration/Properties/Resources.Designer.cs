@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UAOOI.DataBindings.Properties {
+namespace UAOOI.SemanticData.UANetworking.Configuration.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace UAOOI.DataBindings.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UAOOI.DataBindings.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UAOOI.SemanticData.UANetworking.Configuration.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,24 @@ namespace UAOOI.DataBindings.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File: {0} has benn opened..
+        /// </summary>
+        internal static string InformationFileOpened {
+            get {
+                return ResourceManager.GetString("InformationFileOpened", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File: {0} is saved..
+        /// </summary>
+        internal static string InformationFileSaved {
+            get {
+                return ResourceManager.GetString("InformationFileSaved", resourceCulture);
             }
         }
     }

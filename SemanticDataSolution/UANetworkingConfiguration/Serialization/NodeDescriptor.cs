@@ -3,7 +3,6 @@ using CAS.UA.IServerConfiguration;
 using System;
 using System.Runtime.Serialization;
 using System.Xml;
-using UAOOI.DataBindings;
 using System.ComponentModel;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
@@ -18,7 +17,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// Creates the wrapper of this instance.
     /// </summary>
     /// <returns>An instance of <see cref="NodeDescriptorBase"/>.</returns>
-    internal NodeDescriptorBase CreateWrapper()
+    internal IComparable CreateWrapper()
     {
       return new NodeDescriptorWrapper(this);
     }
@@ -33,11 +32,11 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     {
       get
       {
-        return BindingDescriptionField;
+        return m_BindingDescriptionField;
       }
       set
       {
-        BindingDescriptionField = value;
+        m_BindingDescriptionField = value;
       }
     }
     /// <summary>
@@ -47,8 +46,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     [DataMemberAttribute(EmitDefaultValue = false, Order = 2)]
     public XmlQualifiedName DataType
     {
-      get { return DataTypeField; }
-      set { DataTypeField = value; }
+      get { return m_DataTypeField; }
+      set { m_DataTypeField = value; }
     }
     /// <summary>
     /// Gets or sets a value indicating whether [instance declaration].
@@ -57,8 +56,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     [DataMemberAttribute(EmitDefaultValue = false, Order = 3)]
     public bool InstanceDeclaration
     {
-      get { return InstanceDeclarationField; }
-      set { InstanceDeclarationField = value; }
+      get { return m_InstanceDeclarationField; }
+      set { m_InstanceDeclarationField = value; }
     }
     /// <summary>
     /// Gets or sets the node class.
@@ -67,8 +66,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     [DataMemberAttribute(EmitDefaultValue = false, Order = 4)]
     public InstanceNodeClassesEnum NodeClass
     {
-      get { return NodeClassField; }
-      set { NodeClassField = value; }
+      get { return m_NodeClassField; }
+      set { m_NodeClassField = value; }
     }
     /// <summary>
     /// Gets or sets the node identifier.
@@ -77,8 +76,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     [DataMemberAttribute(EmitDefaultValue = false, Order = 5)]
     public XmlQualifiedName NodeIdentifier
     {
-      get { return NodeIdentifierField; }
-      set { NodeIdentifierField = value; }
+      get { return m_NodeIdentifierField; }
+      set { m_NodeIdentifierField = value; }
     }
     #endregion
 
@@ -86,34 +85,34 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// <summary>
     /// Class NodeDescriptorWrapper - read only wrapper of the node descriptor
     /// </summary>
-    private class NodeDescriptorWrapper : NodeDescriptorBase
+    private class NodeDescriptorWrapper : INodeDescriptor, IComparable
     {
       public NodeDescriptorWrapper(NodeDescriptor repository)
       {
         m_repository = repository;
       }
-      public override string BindingDescription
+      public string BindingDescription
       {
         get
         {
           return m_repository.BindingDescription;
         }
       }
-      public override XmlQualifiedName DataType
+      public XmlQualifiedName DataType
       {
         get
         {
           return m_repository.DataType;
         }
       }
-      public override bool InstanceDeclaration
+      public bool InstanceDeclaration
       {
         get
         {
           return m_repository.InstanceDeclaration;
         }
       }
-      public override InstanceNodeClassesEnum NodeClass
+      public InstanceNodeClassesEnum NodeClass
       {
         get
         {
@@ -124,7 +123,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       [Description("The node unique identifier.")]
       [Category("Node")]
       [ReadOnly(true)]
-      public override XmlQualifiedName NodeIdentifier
+      public XmlQualifiedName NodeIdentifier
       {
         get
         {
@@ -135,13 +134,22 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       {
         return $"{NodeClass}:{NodeIdentifier}";
       }
+
+      #region IComparable
+      public int CompareTo(object obj)
+      {
+        throw new NotImplementedException();
+      }
+      #endregion
+
       private NodeDescriptor m_repository;
+
     }
-    private string BindingDescriptionField;
-    private XmlQualifiedName DataTypeField;
-    private bool InstanceDeclarationField;
-    private InstanceNodeClassesEnum NodeClassField;
-    private XmlQualifiedName NodeIdentifierField;
+    private string m_BindingDescriptionField;
+    private XmlQualifiedName m_DataTypeField;
+    private bool m_InstanceDeclarationField;
+    private InstanceNodeClassesEnum m_NodeClassField;
+    private XmlQualifiedName m_NodeIdentifierField;
     #endregion
 
   }

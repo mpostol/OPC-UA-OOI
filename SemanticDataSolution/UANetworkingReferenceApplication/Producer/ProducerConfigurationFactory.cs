@@ -1,9 +1,9 @@
 ﻿
 using System;
 using System.IO;
-using UAOOI.DataBindings.Serializers;
 using UAOOI.SemanticData.UANetworking.Configuration;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
 
 namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
 {

@@ -97,11 +97,11 @@
     <None Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.Classes.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InformationModelFactory\InformationModelFactory.csproj">
+    <ProjectReference Include="..\..\InformationModelFactory\InformationModelFactory.csproj">
       <Project>{6d20785d-0451-46a9-9ac2-ec66b7c0d18a}</Project>
       <Name>InformationModelFactory</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UANodeSetValidation\UANodeSetValidation.csproj">
+    <ProjectReference Include="..\..\UANodeSetValidation\UANodeSetValidation.csproj">
       <Project>{352378a0-8b2e-4679-bb44-fd0bcc8467d9}</Project>
       <Name>UANodeSetValidation</Name>
     </ProjectReference>

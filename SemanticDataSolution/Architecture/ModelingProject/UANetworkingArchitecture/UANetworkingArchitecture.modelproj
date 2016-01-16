@@ -22,6 +22,12 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
   <ItemGroup>
+    <Content Include="UAOOI.UANetworkingReferenceApplication.dgml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UAOOI.UANodesetValidation.dgml">
+      <SubType>Content</SubType>
+    </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="Configuration.classdiagram">
       <SubType>Content</SubType>

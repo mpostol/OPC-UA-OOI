@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="UAOOI.SemanticData.UANetworking.Configuration.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Default_ConfigurationFileName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">UANetworkingConfiguration</Value>
-    </Setting>
     <Setting Name="Serializer" Type="System.String" Scope="User">
       <Value Profile="(Default)">xml</Value>
     </Setting>

@@ -31,5 +31,17 @@ namespace UAOOI.DataBindings.Properties {
                 return ((string)(this["DefaultConfigurationFileNametExtension"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("UANetworkingConfiguration")]
+        public string DefaultConfigurationFileName {
+            get {
+                return ((string)(this["DefaultConfigurationFileName"]));
+            }
+            set {
+                this["DefaultConfigurationFileName"] = value;
+            }
+        }
     }
 }

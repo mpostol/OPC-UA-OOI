@@ -106,17 +106,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     //  IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
     //  Assert.IsNotNull(_newInstanceConfiguration);
     //}
-    [TestMethod]
-    [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
-    public void DefaultFileNameTestMethod()
-    {
-      DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
-      Assert.IsNotNull(_newConfiguration);
-      string _fileName = _newConfiguration.DefaultConfigurationFileName;
-      FileInfo _fi = new FileInfo(_fileName);
-      Assert.AreEqual<string>("", _fi.Extension);
-      Assert.AreEqual<string>("UANetworkingConfiguration", _fi.Name);
-    }
     #endregion
 
     #region private

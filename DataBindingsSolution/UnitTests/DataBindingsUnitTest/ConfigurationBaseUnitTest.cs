@@ -19,18 +19,6 @@ namespace UAOOI.DataBindings.UnitTest
       DerivedTest _newConfiguration = new DerivedTest();
       Assert.IsNotNull(_newConfiguration);
     }
-    // TODO move 
-    //[TestMethod]
-    //[TestCategory("DataBindings_ConfigurationBaseUnitTest")]
-    //public void DefaultFileNameTestMethod()
-    //{
-    //  DerivedTest _mc = new DerivedTest();
-    //  Assert.IsNotNull(_mc);
-    //  string _fileName = _mc.DefaultFileName;
-    //  FileInfo _fi = new FileInfo(_fileName);
-    //  Assert.AreEqual<string>(".uasconfig", _fi.Extension);
-    //  Assert.AreEqual<string>("DefaultConfigurationFileName.uasconfig", _fi.Name);
-    //}
     [TestMethod]
     [TestCategory("DataBindings_ConfigurationBaseUnitTest")]
     public void RaiseOnChangeNullTestMethod()

@@ -42,6 +42,18 @@ namespace UAOOI.DataBindings.UnitTest
       Assert.IsNotNull(_editor);
       Assert.IsNotNull(_editor.ConfigurationEditor);
     }
+    [TestMethod]
+    [TestCategory("DataBindings_UANetworkingConfigurationEditor")]
+    public void DefaultFileNameTestMethod()
+    {
+      UANetworkingConfigurationEditor _mc = new UANetworkingConfigurationEditor();
+      Assert.IsNotNull(_mc);
+      string _fileName = _mc.DefaultFileName;
+      FileInfo _fi = new FileInfo(_fileName);
+      Assert.AreEqual<string>(".uasconfig", _fi.Extension);
+      Assert.AreEqual<string>("UANetworkingConfiguration.uasconfig", _fi.Name);
+    }
+
     private static void GetIServerConfiguration(FileInfo info, out Assembly pluginAssembly, out IConfiguration serverConfiguration)
     {
       string iName = typeof(IConfiguration).ToString();
@@ -62,3 +74,4 @@ namespace UAOOI.DataBindings.UnitTest
   }
 
 }
+

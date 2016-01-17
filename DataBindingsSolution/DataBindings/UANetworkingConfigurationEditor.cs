@@ -60,14 +60,14 @@ namespace UAOOI.DataBindings
       ConfigurationEditor.EditConfiguration(CurrentConfiguration);
     }
     /// <summary>
-    /// Gets the default name of the file created from the name provided by the derived class and extension set in the assembly configuration file.
+    /// Gets the default name of the file created from the name provided the assembly configuration file.
     /// </summary>
-    /// <value>The default name of the file.</value>
+    /// <value>The default name of the file - <c>UANetworkingConfiguration.uasconfig</c> if not changed.</value>
     public override string DefaultFileName
     {
       get
       {
-        return String.Format("{0}.{1}", DefaultConfigurationFileName, Properties.Settings.Default.DefaultConfigurationFileNametExtension);
+        return String.Format("{0}.{1}", Properties.Settings.Default.DefaultConfigurationFileName, Properties.Settings.Default.DefaultConfigurationFileNametExtension);
       }
     }
     /// <summary>

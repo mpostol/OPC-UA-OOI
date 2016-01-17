@@ -62,17 +62,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// Occurs any time the configuration is modified.
     /// </summary>
     public event EventHandler<UAServerConfigurationEventArgs> OnModified;
-    /// <summary>
-    /// Gets the default name of the configuration file from the application settings.
-    /// </summary>
-    /// <value>The default name of the configuration file.</value>
-    public string DefaultConfigurationFileName
-    {
-      get
-      {
-        return Properties.Settings.Default.Default_ConfigurationFileName;
-      }
-    }
     #endregion
 
     #region MEF composition

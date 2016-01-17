@@ -25,18 +25,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("UANetworkingConfiguration")]
-        public string Default_ConfigurationFileName {
-            get {
-                return ((string)(this["Default_ConfigurationFileName"]));
-            }
-            set {
-                this["Default_ConfigurationFileName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("xml")]
         public string Serializer {
             get {

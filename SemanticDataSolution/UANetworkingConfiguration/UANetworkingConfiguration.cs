@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// </summary>
     /// <param name="solutionFilePath">The solution file path.</param>
     /// <param name="configurationFile">The configuration file.</param>
-    public void SaveConfiguration(string solutionFilePath, FileInfo configurationFile)
+    public void SaveConfiguration(FileInfo configurationFile)
     {
       ConfigurationData.Save<ConfigurationDataType>(CurrentConfiguration, Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z));
     }
@@ -62,6 +62,17 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// Occurs any time the configuration is modified.
     /// </summary>
     public event EventHandler<UAServerConfigurationEventArgs> OnModified;
+    /// <summary>
+    /// Gets the default name of the configuration file from the application settings.
+    /// </summary>
+    /// <value>The default name of the configuration file.</value>
+    public string DefaultConfigurationFileName
+    {
+      get
+      {
+        return Properties.Settings.Default.Default_ConfigurationFileName;
+      }
+    }
     #endregion
 
     #region MEF composition
@@ -75,26 +86,11 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
       get { return b_TraceSource; }
       set { b_TraceSource = value; }
     }
-    #endregion    
-    
+    #endregion
+
     #region privat
     private ConfigurationDataType m_CurrentConfiguration;
     private ITraceSource b_TraceSource;
-    private static ConfigurationDataType NewConfigurationData()
-    {
-      return new ConfigurationDataType() { DataSets = new DataSetConfiguration[] { }, MessageHandlers = new MessageHandlerConfiguration[] { } };
-    }
-    /// <summary>
-    /// Gets the default name of the configuration file from the application settings.
-    /// </summary>
-    /// <value>The default name of the configuration file.</value>
-    protected string DefaultConfigurationFileName
-    {
-      get
-      {
-        return Properties.Settings.Default.Default_ConfigurationFileName;
-      }
-    }
     /// <summary>
     /// Raises the on change event.
     /// </summary>

@@ -7,8 +7,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml;
-using UAOOI.DataBindings.Serializers;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 {

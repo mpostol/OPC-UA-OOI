@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using UAOOI.DataBindings.Serializers;
+using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 {

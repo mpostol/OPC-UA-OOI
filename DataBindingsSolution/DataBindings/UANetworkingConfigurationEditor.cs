@@ -22,6 +22,8 @@ namespace UAOOI.DataBindings
     public UANetworkingConfigurationEditor()
     {
       ComposeParts();
+      DefaultConfigurationLoader = NewConfigurationData;
+      CreateDefaultConfiguration();
     }
 
     #region IConfiguration
@@ -57,7 +59,7 @@ namespace UAOOI.DataBindings
       ConfigurationEditor.EditConfiguration(CurrentConfiguration);
     }
     /// <summary>
-    /// Gets the default name of the file created from the name provided by the derived class and extension set in the assemply configuration file.
+    /// Gets the default name of the file created from the name provided by the derived class and extension set in the assembly configuration file.
     /// </summary>
     /// <value>The default name of the file.</value>
     public virtual string DefaultFileName
@@ -127,7 +129,10 @@ namespace UAOOI.DataBindings
       //Fill the imports of this object
       this.m_Container.ComposeParts(this);
     }
-
+    private static ConfigurationData NewConfigurationData()
+    {
+      return new ConfigurationData() { DataSets = new DataSetConfiguration[] { }, MessageHandlers = new MessageHandlerConfiguration[] { } };
+    }
 
     #endregion
 

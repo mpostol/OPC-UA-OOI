@@ -9,15 +9,14 @@ namespace UAOOI.DataBindings
   /// </summary>
   public abstract class ConfigurationBase<ConfigurationDataType>// : IConfiguration
   {
-
+    //TODO - to be removed 
     /// <summary>
     /// Initializes a new instance of the <see cref="ConfigurationBase{ConfigurationDataType}"/> class. 
     /// Default configuration is loader.
     /// </summary>
     public ConfigurationBase(Func<ConfigurationDataType> configurationLoader)
     {
-      //DefaultConfigurationLoader = configurationLoader;
-      //CreateDefaultConfiguration();
+      //TODO - fine where it was used:
     }
 
   }

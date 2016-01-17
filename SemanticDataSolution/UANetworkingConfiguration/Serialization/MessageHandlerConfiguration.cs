@@ -25,6 +25,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// </summary>
     /// <param name="associationName">Name of the association.</param>
     /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-    internal abstract bool Associated(string associationName);
+    public abstract bool Associated(string associationName);
   }
 }

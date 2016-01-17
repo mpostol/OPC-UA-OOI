@@ -59,6 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonDefinitions.cs" />
+    <Compile Include="Exports\Class1.cs" />
+    <Compile Include="Exports\TraceSourceBase.cs" />
     <Compile Include="ITraceSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>

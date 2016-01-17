@@ -3,7 +3,6 @@ using CAS.UA.IServerConfiguration;
 using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using UAOOI.SemanticData.UANetworking.Configuration;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 using System.IO;
 
@@ -17,6 +16,7 @@ namespace UAOOI.DataBindings
   public class UANetworkingConfigurationEditor : ConfigurationBase<ConfigurationData>
   {
 
+    #region API
     /// <summary>
     /// Initializes a new instance of the <see cref="UANetworkingConfigurationEditor"/> class.
     /// </summary>
@@ -27,7 +27,7 @@ namespace UAOOI.DataBindings
       CreateDefaultConfiguration();
     }
 
-    #region IConfiguration
+    #region ConfigurationBase
     /// <summary>
     /// Creates the default configuration.
     /// </summary>
@@ -70,15 +70,6 @@ namespace UAOOI.DataBindings
         return String.Format("{0}.{1}", DefaultConfigurationFileName, Properties.Settings.Default.DefaultConfigurationFileNametExtension);
       }
     }
-    #endregion
-
-    /// <summary>
-    /// Gets or sets the default configuration loader.
-    /// </summary>
-    /// <value>The default configuration loader <see cref="Func{ConfigurationDataType}"/>.</value>
-    public Func<ConfigurationData> DefaultConfigurationLoader { private get; set; }
-
-    #region UANetworkingConfiguration<ConfigurationData>
     /// <summary>
     /// Creates automatically the instance configurations on the best effort basis.
     /// </summary>
@@ -123,6 +114,12 @@ namespace UAOOI.DataBindings
     /// <value>The instance configuration factory.</value>
     [Import(typeof(IInstanceConfigurationFactory))]
     public IInstanceConfigurationFactory InstanceConfigurationFactory { get; set; }
+    #endregion
+    /// <summary>
+    /// Gets or sets the default configuration loader.
+    /// </summary>
+    /// <value>The default configuration loader <see cref="Func{ConfigurationDataType}"/>.</value>
+    public Func<ConfigurationData> DefaultConfigurationLoader { private get; set; }
     #endregion
 
     #region private

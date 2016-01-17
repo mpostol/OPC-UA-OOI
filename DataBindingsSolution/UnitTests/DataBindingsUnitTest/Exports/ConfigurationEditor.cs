@@ -2,10 +2,9 @@
 using CAS.UA.IServerConfiguration;
 using System;
 using System.ComponentModel.Composition;
-using System.Windows;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest.Exports
+namespace UAOOI.DataBindings.UnitTest.Exports
 {
 
   /// <summary>
@@ -22,7 +21,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest.Exports
     /// <param name="CancelWasPressed">The cancel was pressed.</param>
     public virtual void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, Action<bool> CancelWasPressed)
     {
-      MessageBox.Show("CreateInstanceConfigurations is not implemented yet", "Library functionality", MessageBoxButton.OK, MessageBoxImage.Question);
+      throw new NotFiniteNumberException("CreateInstanceConfigurations is not implemented yet");
+      //MessageBox.Show("CreateInstanceConfigurations is not implemented yet", "Library functionality", MessageBoxButton.OK, MessageBoxImage.Question);
     }
     /// <summary>
     /// Open configuration editor.
@@ -30,7 +30,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest.Exports
     /// <param name="configuration">The configuration.</param>
     public virtual void EditConfiguration(ConfigurationData configuration)
     {
-      MessageBox.Show("EditConfiguration is not implemented yet", "Library functionality", MessageBoxButton.OK, MessageBoxImage.Question);
+      throw new NotImplementedException("EditConfiguration is not implemented yet");
+      //MessageBox.Show("EditConfiguration is not implemented yet", "Library functionality", MessageBoxButton.OK, MessageBoxImage.Question);
     }
 
   }

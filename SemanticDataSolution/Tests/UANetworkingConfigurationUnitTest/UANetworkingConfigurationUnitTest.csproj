@@ -52,8 +52,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows" />
-    <Reference Include="System.Windows.Presentation" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <Choose>
@@ -72,7 +70,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CSharpSelectedTypesEncoding.cs" />
-    <Compile Include="Exports\TraceSourceBase.cs" />
     <Compile Include="JSONDataContractSerializersUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConfigurationDataUnitTest.cs" />

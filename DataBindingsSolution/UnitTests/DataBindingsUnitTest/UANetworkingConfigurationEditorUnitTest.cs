@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
+namespace UAOOI.DataBindings.UnitTest
 {
 
   [TestClass]
@@ -13,25 +13,25 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
   {
 
     [TestMethod]
-    [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
+    [TestCategory("DataBindings_UANetworkingConfigurationEditor")]
     public void GetIServerConfigurationTestMethod()
     {
-      FileInfo _fileInfo = new FileInfo("UAOOI.SemanticDataUANetworkingConfiguration.dll");
+      FileInfo _fileInfo = new FileInfo("UAOOI.DataBindings.dll");
       Assert.IsTrue(_fileInfo.Exists);
       Assembly _pluginAssembly = null;
       IConfiguration _serverConfiguration = null;
       GetIServerConfiguration(_fileInfo, out _pluginAssembly, out _serverConfiguration);
       Assert.IsNotNull(_pluginAssembly);
       Assert.IsNotNull(_serverConfiguration);
-      -oUANetworkingConfigurationEditor _editor = (UANetworkingConfigurationEditor)_serverConfiguration;
+      UANetworkingConfigurationEditor _editor = (UANetworkingConfigurationEditor)_serverConfiguration;
       Assert.IsNotNull(_editor);
       Assert.IsNotNull(_editor.ConfigurationEditor);
     }
     [TestMethod]
-    [TestCategory("Configuration_GetMyIServerConfigurationTestMethod")]
+    [TestCategory("DataBindings_UANetworkingConfigurationEditor")]
     public void GetMyIServerConfigurationTestMethod()
     {
-      FileInfo _fileInfo = new FileInfo("UAOOI.SemanticDataUANetworkingConfiguration.dll");
+      FileInfo _fileInfo = new FileInfo("UAOOI.DataBindings.dll");
       Assert.IsTrue(_fileInfo.Exists);
       Assembly _pluginAssembly = null;
       IConfiguration _serverConfiguration = null;

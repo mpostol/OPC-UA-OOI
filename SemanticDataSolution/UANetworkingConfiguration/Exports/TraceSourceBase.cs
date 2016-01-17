@@ -2,7 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest.Exports
+namespace UAOOI.SemanticData.UANetworking.Configuration.Exports
 {
   [Export(typeof(ITraceSource))]
   [PartCreationPolicy(CreationPolicy.Shared)]

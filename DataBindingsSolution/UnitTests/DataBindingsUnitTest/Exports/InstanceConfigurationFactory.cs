@@ -5,10 +5,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Windows;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest.Exports
+namespace UAOOI.DataBindings.UnitTest.Exports
 {
   [Export(typeof(IInstanceConfigurationFactory))]
   public class InstanceConfigurationFactory : IInstanceConfigurationFactory
@@ -27,15 +26,21 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest.Exports
         DataSetConfiguration = dataSet;
         PropertyChanged += (x, y) => onModification();
       }
+      /// <summary>
+      /// Occurs when a property value changes.
+      /// </summary>
       public event PropertyChangedEventHandler PropertyChanged;
+
       #region IInstanceConfiguration
       public void ClearConfiguration()
       {
-        MessageBox.Show("ClearConfiguration for IInstanceConfigurations is not implemented yet", "Library functionality", MessageBoxButton.OK, MessageBoxImage.Question);
+        throw new NotImplementedException("ClearConfiguration for IInstanceConfigurations is not implemented yet");
+        //MessageBox.Show("ClearConfiguration for IInstanceConfigurations is not implemented yet", "Library functionality", MessageBoxButton.OK, MessageBoxImage.Question);
       }
       public void Edit()
       {
-        MessageBox.Show("Edit for IInstanceConfigurations is not implemented yet", "Library functionality", MessageBoxButton.OK, MessageBoxImage.Question);
+        throw new NotImplementedException("Edit for IInstanceConfigurations is not implemented yet");
+        //MessageBox.Show("Edit for IInstanceConfigurations is not implemented yet", "Library functionality", MessageBoxButton.OK, MessageBoxImage.Question);
       }
       #endregion
 

@@ -52,6 +52,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.XML" />
+    <Reference Include="UAOOI.SemanticDataUANetworkingConfiguration">
+      <HintPath>..\..\..\SemanticDataSolution\UANetworkingConfiguration\bin\Debug\UAOOI.SemanticDataUANetworkingConfiguration.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">

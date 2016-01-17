@@ -74,7 +74,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     /// <summary>
     /// Gets the instance configuration no configuration test method.
     /// </summary>
-    //todo - MOVE
+    //TODO - MOVE
     //[TestMethod]
     //[TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     //public void GetInstanceConfigurationNoConfigurationTestMethod()

@@ -5,6 +5,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using UAOOI.SemanticData.UANetworking.Configuration;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using System.IO;
 
 namespace UAOOI.DataBindings
 {
@@ -13,7 +14,7 @@ namespace UAOOI.DataBindings
   /// Class UANetworkingConfigurationEditor - 
   /// </summary>
   [Export(typeof(IConfiguration))]
-  public class UANetworkingConfigurationEditor : UANetworkingConfiguration<ConfigurationData>, IConfiguration
+  public class UANetworkingConfigurationEditor : ConfigurationBase<ConfigurationData>
   {
 
     /// <summary>
@@ -30,7 +31,7 @@ namespace UAOOI.DataBindings
     /// <summary>
     /// Creates the default configuration.
     /// </summary>
-    public void CreateDefaultConfiguration()
+    public override void CreateDefaultConfiguration()
     {
       CurrentConfiguration = DefaultConfigurationLoader();
     }
@@ -39,7 +40,7 @@ namespace UAOOI.DataBindings
     /// </summary>
     /// <param name="descriptor">Provides identifying description of the node to be configured.</param>
     /// <returns>Returned object provides access to the instance node configuration edition functionality.</returns>
-    public IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
+    public override IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
     {
       if (descriptor == null)
         throw new ArgumentNullException(nameof(descriptor));
@@ -52,7 +53,7 @@ namespace UAOOI.DataBindings
     /// </summary>
     /// <returns>Represents a window or dialog box that makes up an application's user interface to be used to edit configuration file.</returns>
     /// <exception cref="System.ArgumentNullException">Configuration Editor is unavailable.</exception>
-    public void EditConfiguration()
+    public override void EditConfiguration()
     {
       if (ConfigurationEditor == null)
         throw new ArgumentNullException(nameof(ConfigurationEditor), "Configuration Editor is unavailable.");
@@ -62,7 +63,7 @@ namespace UAOOI.DataBindings
     /// Gets the default name of the file created from the name provided by the derived class and extension set in the assembly configuration file.
     /// </summary>
     /// <value>The default name of the file.</value>
-    public virtual string DefaultFileName
+    public override string DefaultFileName
     {
       get
       {
@@ -85,7 +86,7 @@ namespace UAOOI.DataBindings
     /// <param name="SkipOpeningConfigurationFile">if set to <c>true</c> skip opening configuration file.</param>
     /// <param name="CancelWasPressed">if set to <c>true</c> cancel was pressed.</param>
     /// <exception cref="System.ArgumentNullException">Configuration Editor is unavailable.</exception>
-    public void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed)
+    public override void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, out bool CancelWasPressed)
     {
       CancelWasPressed = false;
       if (ConfigurationEditor == null)
@@ -93,6 +94,15 @@ namespace UAOOI.DataBindings
       bool _CancelWasPressed = false;
       ConfigurationEditor.CreateInstanceConfigurations(descriptors, SkipOpeningConfigurationFile, x => _CancelWasPressed = x);
       CancelWasPressed = _CancelWasPressed;
+    }
+    /// <summary>
+    /// Saves the configuration.
+    /// </summary>
+    /// <param name="solutionFilePath">The solution file path.</param>
+    /// <param name="configurationFile">The configuration file.</param>
+    public override void SaveConfiguration(string solutionFilePath, FileInfo configurationFile)
+    {
+      base.SaveConfiguration(configurationFile);
     }
     #endregion
 
@@ -113,7 +123,6 @@ namespace UAOOI.DataBindings
     /// <value>The instance configuration factory.</value>
     [Import(typeof(IInstanceConfigurationFactory))]
     public IInstanceConfigurationFactory InstanceConfigurationFactory { get; set; }
-
     #endregion
 
     #region private
@@ -133,7 +142,6 @@ namespace UAOOI.DataBindings
     {
       return new ConfigurationData() { DataSets = new DataSetConfiguration[] { }, MessageHandlers = new MessageHandlerConfiguration[] { } };
     }
-
     #endregion
 
   }

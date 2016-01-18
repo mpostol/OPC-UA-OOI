@@ -3,8 +3,8 @@ using CAS.UA.IServerConfiguration;
 using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 using System.IO;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.DataBindings
 {

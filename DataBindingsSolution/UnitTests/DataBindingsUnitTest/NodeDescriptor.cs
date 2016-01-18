@@ -78,9 +78,11 @@ namespace UAOOI.DataBindings.UnitTest
     /// <exception cref="System.NotImplementedException"></exception>
     public override XmlQualifiedName NodeIdentifier
     {
-      get { return b_NodeIdentifier; } 
+      get { return b_NodeIdentifier; }
     }
-    private XmlQualifiedName  b_NodeIdentifier = null;
+
+    private NodeDescriptor() { }
+    private XmlQualifiedName b_NodeIdentifier = null;
 
   }
 }

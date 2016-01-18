@@ -22,21 +22,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
     }
-    //TODO to be moved to DataBinding
-    //[TestMethod]
-    //[TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
-    //public void CreateDefaultConfigurationTestMethod()
-    //{
-    //  DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
-    //  Assert.IsNotNull(_newConfiguration);
-    //  _newConfiguration.CreateDefaultConfiguration();
-    //  Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
-    //  ConfigurationData _CurrentConfiguration = _newConfiguration.CurrentConfiguration;
-    //  Assert.IsNotNull(_CurrentConfiguration.DataSets);
-    //  Assert.AreEqual<int>(0, _CurrentConfiguration.DataSets.Length);
-    //  Assert.IsNotNull(_CurrentConfiguration.MessageHandlers);
-    //  Assert.AreEqual<int>(0, _CurrentConfiguration.MessageHandlers.Length);
-    //}
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void ReadSaveConfigurationTestMethod()
@@ -61,51 +46,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       _fi.Refresh();
       Assert.IsTrue(_fi.Exists);
     }
-    //TODO to be moved to DataBinding
-    //[TestMethod]
-    //[TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
-    //[ExpectedException(typeof(ArgumentNullException))]
-    //public void GetInstanceConfigurationNullTestMethod()
-    //{
-    //  DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
-    //  Assert.IsNotNull(_newConfiguration);
-    //  IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(null);
-    //}
-    /// <summary>
-    /// Gets the instance configuration no configuration test method.
-    /// </summary>
-    //TODO - MOVE
-    //[TestMethod]
-    //[TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
-    //public void GetInstanceConfigurationNoConfigurationTestMethod()
-    //{
-    //  DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
-    //  Assert.IsNotNull(_newConfiguration);
-    //  NodeDescriptor _nd = new NodeDescriptor();
-    //  IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
-    //  Assert.IsNotNull(_newInstanceConfiguration);
-    //  IInstanceConfiguration _nxtInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
-    //  Assert.AreNotSame(_newInstanceConfiguration, _nxtInstanceConfiguration);
-    //  Assert.AreEqual<string>(_newInstanceConfiguration.ToString(), _nxtInstanceConfiguration.ToString());
-    //}
-    //[TestMethod]
-    //[TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
-    //public void GetInstanceConfigurationTestMethod()
-    //{
-    //  //create hard coded configuration 
-    //  DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
-    //  Assert.IsNotNull(_newConfiguration);
-    //  _newConfiguration.DefaultConfigurationLoader = ReferenceConfiguration.LoadConsumer;
-    //  bool _ConfigurationFileChanged = false;
-    //  _newConfiguration.OnModified += (x, y) => { Assert.IsTrue(y.ConfigurationFileChanged); _ConfigurationFileChanged = y.ConfigurationFileChanged; };
-    //  _newConfiguration.CreateDefaultConfiguration();
-    //  Assert.IsTrue(_ConfigurationFileChanged);
-    //  Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
-    //  //test GetInstanceConfiguration
-    //  INodeDescriptor _nd = new NodeDescriptor(new XmlQualifiedName("NodeDescriptor", "NodeDescriptorNS"));
-    //  IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
-    //  Assert.IsNotNull(_newInstanceConfiguration);
-    //}
     #endregion
 
     #region private

@@ -32,7 +32,7 @@ namespace UAOOI.DataBindings.UnitTest
     {
       get
       {
-        throw new NotImplementedException();
+        return "BindingDescription";
       }
     }
     /// <summary>
@@ -44,7 +44,7 @@ namespace UAOOI.DataBindings.UnitTest
     {
       get
       {
-        throw new NotImplementedException();
+        return new XmlQualifiedName("DataType", "NameSpace");
       }
     }
     /// <summary>
@@ -56,7 +56,7 @@ namespace UAOOI.DataBindings.UnitTest
     {
       get
       {
-        throw new NotImplementedException();
+        return false;
       }
     }
     /// <summary>
@@ -68,7 +68,7 @@ namespace UAOOI.DataBindings.UnitTest
     {
       get
       {
-        throw new NotImplementedException();
+        return InstanceNodeClassesEnum.Object;
       }
     }
     /// <summary>

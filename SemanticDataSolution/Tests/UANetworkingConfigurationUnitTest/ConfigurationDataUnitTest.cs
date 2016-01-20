@@ -20,6 +20,16 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     #region TestMethod
     [TestMethod]
     [TestCategory("Configuration_ConfigurationDataUnitTest")]
+    public void AfterCreationTest()
+    {
+      ConfigurationData _newOne = new ConfigurationData();
+      Assert.IsNull(_newOne.DataSets);
+      Assert.IsNull(_newOne.ExtensionData);
+      Assert.AreSame(_newOne, _newOne.GetConfigurationData());
+      Assert.IsNull(_newOne.MessageHandlers);
+    }
+    [TestMethod]
+    [TestCategory("Configuration_ConfigurationDataUnitTest")]
     public void LoadSaveTestMethod()
     {
       LocalConfigurationData _configuration = ConfigurationData.Load<LocalConfigurationData>(LocalConfigurationData.Loader, () => { });

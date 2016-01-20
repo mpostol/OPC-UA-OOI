@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonDefinitions.cs" />
+    <Compile Include="IConfigurationDataFactory.cs" />
     <Compile Include="ITraceSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>

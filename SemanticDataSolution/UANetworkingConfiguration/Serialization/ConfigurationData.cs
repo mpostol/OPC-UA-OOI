@@ -13,7 +13,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
   /// <summary>
   /// Class ConfigurationData - contains configuration data of the UANetworking application.
   /// </summary>
-  public partial class ConfigurationData
+  public partial class ConfigurationData: IConfigurationDataFactory
   {
 
     #region API
@@ -83,6 +83,13 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
       if (_node == null)
         _node = DataSetConfiguration.Create(descriptor);
       return _node;
+    }
+    #endregion
+
+    #region IConfigurationDataFactory
+    public ConfigurationData GetConfigurationData()
+    {
+      return this;
     }
     #endregion
 

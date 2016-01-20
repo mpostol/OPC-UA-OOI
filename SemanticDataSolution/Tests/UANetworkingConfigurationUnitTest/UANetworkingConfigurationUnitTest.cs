@@ -21,6 +21,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     {
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
+      Assert.IsNull(_newConfiguration.CurrentConfiguration);
+      Assert.IsNotNull(_newConfiguration.TraceSource);
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]

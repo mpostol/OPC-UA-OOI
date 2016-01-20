@@ -1,6 +1,5 @@
 ﻿
 using CAS.UA.IServerConfiguration;
-using System;
 using System.Xml;
 
 namespace UAOOI.DataBindings.UnitTest

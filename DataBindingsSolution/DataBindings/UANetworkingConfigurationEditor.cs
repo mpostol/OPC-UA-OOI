@@ -13,7 +13,7 @@ namespace UAOOI.DataBindings
   /// Class UANetworkingConfigurationEditor - 
   /// </summary>
   [Export(typeof(IConfiguration))]
-  public class UANetworkingConfigurationEditor : ConfigurationBase<ConfigurationData>
+  public class UANetworkingConfigurationEditor : ConfigurationBase<ConfigurationData>, IDisposable
   {
 
     #region API
@@ -26,6 +26,16 @@ namespace UAOOI.DataBindings
       DefaultConfigurationLoader = NewConfigurationData;
       CreateDefaultConfiguration();
     }
+
+    #region IDisposable
+    /// <summary>
+    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
+    public void Dispose()
+    {
+      ((IDisposable)m_Container).Dispose();
+    }
+    #endregion
 
     #region ConfigurationBase
     /// <summary>
@@ -115,6 +125,7 @@ namespace UAOOI.DataBindings
     [Import(typeof(IInstanceConfigurationFactory))]
     public IInstanceConfigurationFactory InstanceConfigurationFactory { get; set; }
     #endregion
+
     /// <summary>
     /// Gets or sets the default configuration loader.
     /// </summary>
@@ -139,6 +150,7 @@ namespace UAOOI.DataBindings
     {
       return new ConfigurationData() { DataSets = new DataSetConfiguration[] { }, MessageHandlers = new MessageHandlerConfiguration[] { } };
     }
+
     #endregion
 
   }

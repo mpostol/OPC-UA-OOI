@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Exports\ConfigurationEditor.cs" />
     <Compile Include="Exports\InstanceConfigurationFactory.cs" />
+    <Compile Include="Exports\TraceSourceBase.cs" />
     <Compile Include="NodeDescriptor.cs" />
     <Compile Include="ConfigurationBaseUnitTest.cs" />
     <Compile Include="InstanceConfigurationBaseUnitTest.cs" />

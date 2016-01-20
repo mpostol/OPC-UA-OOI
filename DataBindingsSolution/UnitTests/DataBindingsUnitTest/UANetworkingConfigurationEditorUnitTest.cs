@@ -13,6 +13,7 @@ namespace UAOOI.DataBindings.UnitTest
   public class UANetworkingConfigurationEditorUnitTest
   {
 
+    #region Test Methods
     [TestMethod]
     [TestCategory("DataBindings_UANetworkingConfigurationEditor")]
     public void GetIServerConfigurationTestMethod()
@@ -30,18 +31,14 @@ namespace UAOOI.DataBindings.UnitTest
     }
     [TestMethod]
     [TestCategory("DataBindings_UANetworkingConfigurationEditor")]
-    public void GetMyIServerConfigurationTestMethod()
+    public void AfterCreationStateTest()
     {
-      FileInfo _fileInfo = new FileInfo("UAOOI.DataBindings.dll");
-      Assert.IsTrue(_fileInfo.Exists);
-      Assembly _pluginAssembly = null;
-      IConfiguration _serverConfiguration = null;
-      GetIServerConfiguration(_fileInfo, out _pluginAssembly, out _serverConfiguration);
-      Assert.IsNotNull(_pluginAssembly);
-      Assert.IsNotNull(_serverConfiguration);
-      UANetworkingConfigurationEditor _editor = (UANetworkingConfigurationEditor)_serverConfiguration;
-      Assert.IsNotNull(_editor);
-      Assert.IsNotNull(_editor.ConfigurationEditor);
+      UANetworkingConfigurationEditor _mc = new UANetworkingConfigurationEditor();
+      Assert.IsNotNull(_mc.ConfigurationEditor);
+      Assert.IsNotNull(_mc.CurrentConfiguration);
+      Assert.IsFalse(String.IsNullOrEmpty(_mc.DefaultFileName));
+      Assert.IsNotNull(_mc.InstanceConfigurationFactory);
+      Assert.IsNotNull(_mc.TraceSource);
     }
     [TestMethod]
     [TestCategory("DataBindings_UANetworkingConfigurationEditor")]
@@ -83,32 +80,28 @@ namespace UAOOI.DataBindings.UnitTest
     {
       UANetworkingConfigurationEditor _newConfiguration = new UANetworkingConfigurationEditor();
       Assert.IsNotNull(_newConfiguration);
-      NodeDescriptor _nd =  NodeDescriptor.GetTestInstance();
+      NodeDescriptor _nd = NodeDescriptor.GetTestInstance();
       IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
       Assert.IsNotNull(_newInstanceConfiguration);
       IInstanceConfiguration _nxtInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
       Assert.AreNotSame(_newInstanceConfiguration, _nxtInstanceConfiguration);
       Assert.AreEqual<string>(_newInstanceConfiguration.ToString(), _nxtInstanceConfiguration.ToString());
     }
-    //[TestMethod]
-    //[TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
-    //public void GetInstanceConfigurationTestMethod()
-    //{
-    //  //create hard coded configuration 
-    //  DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
-    //  Assert.IsNotNull(_newConfiguration);
-    //  _newConfiguration.DefaultConfigurationLoader = ReferenceConfiguration.LoadConsumer;
-    //  bool _ConfigurationFileChanged = false;
-    //  _newConfiguration.OnModified += (x, y) => { Assert.IsTrue(y.ConfigurationFileChanged); _ConfigurationFileChanged = y.ConfigurationFileChanged; };
-    //  _newConfiguration.CreateDefaultConfiguration();
-    //  Assert.IsTrue(_ConfigurationFileChanged);
-    //  Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
-    //  //test GetInstanceConfiguration
-    //  INodeDescriptor _nd = new NodeDescriptor(new XmlQualifiedName("NodeDescriptor", "NodeDescriptorNS"));
-    //  IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(_nd);
-    //  Assert.IsNotNull(_newInstanceConfiguration);
-    //}
+    [TestMethod]
+    [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
+    public void OnModifiedTestMethod()
+    {
+      UANetworkingConfigurationEditor _newConfiguration = new UANetworkingConfigurationEditor();
+      Assert.IsNotNull(_newConfiguration);
+      bool _ConfigurationFileChanged = false;
+      _newConfiguration.OnModified += (x, y) => { Assert.IsTrue(y.ConfigurationFileChanged); _ConfigurationFileChanged = y.ConfigurationFileChanged; };
+      _newConfiguration.CreateDefaultConfiguration();
+      Assert.IsTrue(_ConfigurationFileChanged);
+      Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
+    }
+    #endregion
 
+    #region test instrumentation
     private static void GetIServerConfiguration(FileInfo info, out Assembly pluginAssembly, out IConfiguration serverConfiguration)
     {
       string iName = typeof(IConfiguration).ToString();
@@ -126,6 +119,8 @@ namespace UAOOI.DataBindings.UnitTest
             throw new ApplicationException(String.Format("The server configuration plug-in {0}/{1} cannot be loaded. Contact the vendor to get current version of this component", pluginType.FullName, info.Name), _ex);
           }
     }
+    #endregion
+
   }
 
 }

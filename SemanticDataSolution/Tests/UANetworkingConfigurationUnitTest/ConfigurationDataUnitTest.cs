@@ -62,26 +62,27 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     #region private
     private class LocalConfigurationData : ConfigurationData
     {
-      #region test data
-      internal int OnLoadedCount = 0;
-      internal int OnSavingCount = 0;
-
-      #endregion
       internal static LocalConfigurationData Loader()
       {
         return new LocalConfigurationData();
       }
-      internal LocalConfigurationData() { }
-      protected override void OnLoaded()
+      public LocalConfigurationData() { }
+      public override void OnLoaded()
       {
         base.OnLoaded();
         OnLoadedCount++;
       }
-      protected override void OnSaving()
+      public override void OnSaving()
       {
         base.OnSaving();
         OnSavingCount++;
       }
+
+      #region test instrumentation
+      internal int OnLoadedCount = 0;
+      internal int OnSavingCount = 0;
+      #endregion
+
     }
     private void Compare(ConfigurationData source, ConfigurationData mirror)
     {

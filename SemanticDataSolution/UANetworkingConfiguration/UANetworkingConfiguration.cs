@@ -13,15 +13,14 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
   /// </summary>
   /// <typeparam name="ConfigurationDataType">The type of the configuration data type.</typeparam>
   public abstract class UANetworkingConfiguration<ConfigurationDataType>
-      where ConfigurationDataType : ConfigurationData, new()
+      where ConfigurationDataType : class, IConfigurationDataFactory, new()
   {
 
     #region constructor
     /// <summary>
     /// Initializes a new instance of the <see cref="UANetworkingConfiguration{ConfigurationDataType}"/> class.
     /// </summary>
-    public UANetworkingConfiguration() //:base(NewConfigurationData)
-    { }
+    public UANetworkingConfiguration() { }
     #endregion
 
     #region ConfigurationBase
@@ -62,6 +61,14 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// Occurs any time the configuration is modified.
     /// </summary>
     public event EventHandler<UAServerConfigurationEventArgs> OnModified;
+    /// <summary>
+    /// Gets the configuration data.
+    /// </summary>
+    /// <value>The configuration data.</value>
+    public ConfigurationData ConfigurationData
+    {
+      get { return CurrentConfiguration.GetConfigurationData(); }
+    }
     #endregion
 
     #region MEF composition

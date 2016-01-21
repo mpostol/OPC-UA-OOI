@@ -3,7 +3,9 @@ using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Xml;
+using System.Xml.Serialization;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
@@ -64,6 +66,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       }
       XmlQualifiedName b_NodeIdentifier = null;
     }
+    [DataContractAttribute(Name = "ConfigurationData", Namespace = CommonDefinitions.Namespace)]
+    [System.SerializableAttribute()]
+    [XmlRoot(Namespace = CommonDefinitions.Namespace)]
     private class DerivedUANetworkingConfiguration : UANetworkingConfiguration<ConfigurationData>
     {
       public DerivedUANetworkingConfiguration()

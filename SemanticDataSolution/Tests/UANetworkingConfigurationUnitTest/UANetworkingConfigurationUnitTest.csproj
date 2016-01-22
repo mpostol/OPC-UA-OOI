@@ -23,7 +23,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;IDE0001,IDE0002,IDE0003</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>IDE0001,IDE0002,IDE0003</NoWarn>
@@ -77,6 +77,7 @@
     <Compile Include="ReferenceConfiguration.cs" />
     <Compile Include="UANetworkingConfigurationUnitTest.cs" />
     <Compile Include="UATypeInfoUnitTest.cs" />
+    <Compile Include="ConfigurationFactoryBaseUnitTest.cs" />
     <Compile Include="XmlDataContractSerializersUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>

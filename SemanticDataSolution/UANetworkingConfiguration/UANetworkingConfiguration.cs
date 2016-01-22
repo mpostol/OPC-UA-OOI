@@ -67,7 +67,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// <value>The configuration data.</value>
     public ConfigurationData ConfigurationData
     {
-      get { return CurrentConfiguration.GetConfigurationData(); }
+      get { return CurrentConfiguration?.GetConfigurationData(); }
     }
     #endregion
 

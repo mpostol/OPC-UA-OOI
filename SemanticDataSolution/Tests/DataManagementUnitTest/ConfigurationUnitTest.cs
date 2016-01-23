@@ -3,7 +3,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
-using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
+using UAOOI.SemanticData.UANetworking.Configuration;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {

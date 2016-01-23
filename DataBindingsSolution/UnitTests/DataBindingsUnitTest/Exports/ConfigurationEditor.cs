@@ -21,7 +21,7 @@ namespace UAOOI.DataBindings.UnitTest.Exports
     /// <param name="CancelWasPressed">The cancel was pressed.</param>
     public virtual void CreateInstanceConfigurations(INodeDescriptor[] descriptors, bool SkipOpeningConfigurationFile, Action<bool> CancelWasPressed)
     {
-      throw new NotFiniteNumberException("CreateInstanceConfigurations is not implemented yet");
+      throw new NotImplementedException("CreateInstanceConfigurations is not implemented yet");
       //MessageBox.Show("CreateInstanceConfigurations is not implemented yet", "Library functionality", MessageBoxButton.OK, MessageBoxImage.Question);
     }
     /// <summary>

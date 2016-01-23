@@ -1,4 +1,5 @@
-﻿using CAS.UA.IServerConfiguration;
+﻿
+using CAS.UA.IServerConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -64,7 +65,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     internal static void Save<ConfigurationDataType>(ConfigurationDataType configuration, SerializerType serializer, FileInfo configurationFile, Action<TraceEventType, int, string> trace)
       where ConfigurationDataType : class, IConfigurationDataFactory, new()
     {
-      configuration.OnSaving();
+      configuration?.OnSaving();
       Action<FileInfo, ConfigurationDataType, Action<TraceEventType, int, string>> _saver = null;
       if (serializer == SerializerType.Xml)
         _saver = (conf, file, tracer) => XmlDataContractSerializers.Save<ConfigurationDataType>(conf, file, tracer);
@@ -116,6 +117,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     #region private
     private bool m_PendingChages = false;
     private bool m_MessageHandlersCollectionChanged = false;
+    private List<DataSetConfiguration> b_DataSetConfigurationList;
+    private ObservableCollection<MessageHandlerConfiguration> m_ObservableMessageHandlers;
     private void PendingChanges()
     {
       m_PendingChages = true;
@@ -135,10 +138,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
         return b_DataSetConfigurationList;
       }
     }
-
-
-    private List<DataSetConfiguration> b_DataSetConfigurationList;
-    private ObservableCollection<MessageHandlerConfiguration> m_ObservableMessageHandlers;
     #endregion
 
   }

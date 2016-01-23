@@ -40,6 +40,8 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// <param name="configurationFile">The configuration file.</param>
     public void SaveConfiguration(FileInfo configurationFile)
     {
+      if (CurrentConfiguration == null)
+        throw new ArgumentNullException(nameof(CurrentConfiguration));
       ConfigurationData.Save<ConfigurationDataType>(CurrentConfiguration, Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z));
     }
     /// <summary>

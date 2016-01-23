@@ -68,39 +68,57 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void CurrentConfigurationNullTest()
+    {
+      UANetworkingConfigurationConfigurationDataWrapper _newConfiguration = new UANetworkingConfigurationConfigurationDataWrapper();
+      _newConfiguration.CurrentConfiguration = null;
+      FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataWrapperNull.xml");
+      Assert.IsFalse(_configFile.Exists);
+      _newConfiguration.SaveConfiguration(_configFile);
+    }
+    [TestMethod]
+    [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
+    [ExpectedException(typeof(System.Runtime.Serialization.SerializationException))]
+    public void ConfigurationDataNullTest()
+    {
+      UANetworkingConfigurationConfigurationDataWrapper _newConfiguration = new UANetworkingConfigurationConfigurationDataWrapper();
+      _newConfiguration.CurrentConfiguration.ConfigurationData = null;
+      FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataWrapper.ConfigurationDataNull.xml");
+      Assert.IsFalse(_configFile.Exists);
+      _newConfiguration.SaveConfiguration(_configFile);
+    }
+    [TestMethod]
+    [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void ReadSaveConfigurationDataWrapperTest()
     {
       UANetworkingConfigurationConfigurationDataWrapper _newConfiguration = new UANetworkingConfigurationConfigurationDataWrapper();
+      Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnLoadedCount);
       bool _ConfigurationFileChanged = false;
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataWrapper.xml");
       Assert.IsFalse(_configFile.Exists);
+      Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnSavingCount);
       _newConfiguration.SaveConfiguration(_configFile);
+      
+      //on SaveConfiguration tests
       Assert.AreEqual<int>(1, _newConfiguration.CurrentConfiguration.OnSavingCount);
       Assert.IsFalse(_ConfigurationFileChanged);
       Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
       _configFile.Refresh();
       Assert.IsTrue(_configFile.Exists);
-      Assert.Fail();
+      Assert.IsNotNull(_newConfiguration.ConfigurationData);
+      Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnLoadedCount);
 
+      //prepare ReadConfiguration
+      _newConfiguration.OnModified += (x, y) => { Assert.IsTrue(y.ConfigurationFileChanged); _ConfigurationFileChanged = y.ConfigurationFileChanged; };
+      _newConfiguration.ReadConfiguration(_configFile);
 
-      //Assert.IsTrue(_configFile.Exists);
-      //bool _ConfigurationFileChanged = false;
-      //Assert.IsNull(_newConfiguration.ConfigurationData);
-      //_newConfiguration.OnModified += (x, y) => { Assert.IsTrue(y.ConfigurationFileChanged); _ConfigurationFileChanged = y.ConfigurationFileChanged; };
-      //_newConfiguration.ReadConfiguration(_configFile);
-      //Assert.IsTrue(_ConfigurationFileChanged);
-      //Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
-      //Assert.IsNotNull(_newConfiguration.ConfigurationData);
-
-      ////SaveConfiguration
-      //_ConfigurationFileChanged = false;
-      //FileInfo _fi = new FileInfo(@"BleBle.txt");
-      //Assert.IsFalse(_fi.Exists);
-      //_newConfiguration.SaveConfiguration(_fi);
-      //Assert.IsFalse(_ConfigurationFileChanged);
-      //Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
-      //_fi.Refresh();
-      //Assert.IsTrue(_fi.Exists);
+      //on ReadConfiguration test
+      Assert.IsTrue(_ConfigurationFileChanged);
+      Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
+      Assert.IsNotNull(_newConfiguration.ConfigurationData);
+      Assert.AreEqual<int>(1, _newConfiguration.CurrentConfiguration.OnLoadedCount);
+      Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnSavingCount);
     }
     #endregion
 
@@ -143,7 +161,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       }
       public void OnLoaded()
       {
-        throw new NotImplementedException();
+        OnLoadedCount++;
       }
       public void OnSaving()
       {
@@ -151,18 +169,12 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       }
       public Action OnChanged
       {
-        get
-        {
-          throw new NotImplementedException();
-        }
-        set
-        {
-          throw new NotImplementedException();
-        }
+        get; set;
       }
       #endregion
 
       internal int OnSavingCount = 0;
+      internal int OnLoadedCount = 0;
       private CompositionContainer m_Container = null;
 
     }

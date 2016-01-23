@@ -2,7 +2,6 @@
 using CAS.UA.IServerConfiguration;
 using System.IO;
 using UAOOI.SemanticData.UANetworking.Configuration;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 using System;
 
 namespace UAOOI.DataBindings

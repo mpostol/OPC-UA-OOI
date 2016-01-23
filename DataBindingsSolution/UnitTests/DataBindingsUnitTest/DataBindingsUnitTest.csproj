@@ -52,6 +52,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.XML" />
     <Reference Include="UAOOI.SemanticDataUANetworkingConfiguration">
       <HintPath>..\..\..\SemanticDataSolution\UANetworkingConfiguration\bin\Debug\UAOOI.SemanticDataUANetworkingConfiguration.dll</HintPath>

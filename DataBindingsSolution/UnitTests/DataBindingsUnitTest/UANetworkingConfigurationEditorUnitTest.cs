@@ -40,6 +40,24 @@ namespace UAOOI.DataBindings.UnitTest
     }
     [TestMethod]
     [TestCategory("DataBindings_UANetworkingConfigurationEditor")]
+    [ExpectedException(typeof(NotImplementedException))]
+    public void EditConfigurationTest()
+    {
+      UANetworkingConfigurationEditor _mc = new UANetworkingConfigurationEditor();
+      _mc.EditConfiguration();
+    }
+    [TestMethod]
+    [TestCategory("DataBindings_UANetworkingConfigurationEditor")]
+    [ExpectedException(typeof(NotImplementedException))]
+    public void GetInstanceConfigurationTest()
+    {
+      UANetworkingConfigurationEditor _mc = new UANetworkingConfigurationEditor();
+      IInstanceConfiguration _ic = _mc.GetInstanceConfiguration(new NodeDescriptorBase() { NodeIdentifier = new System.Xml.XmlQualifiedName("TestNodeIdentifier", "UAOOI.DataBindings.UnitTest") });
+      Assert.IsNotNull(_ic);
+      _ic.Edit();
+    }
+    [TestMethod]
+    [TestCategory("DataBindings_UANetworkingConfigurationEditor")]
     public void DefaultFileNameTestMethod()
     {
       UANetworkingConfigurationEditor _mc = new UANetworkingConfigurationEditor();

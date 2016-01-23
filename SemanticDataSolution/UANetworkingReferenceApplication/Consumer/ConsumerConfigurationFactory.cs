@@ -35,7 +35,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
     private ConfigurationData LoadConfig()
     {
       FileInfo _configurationFile = new FileInfo(Properties.Settings.Default.ConsumerConfigurationFileName);
-      return ConfigurationData.Load<ConfigurationData>(() => XmlDataContractSerializers.Load<ConfigurationData>(_configurationFile, (x, y, z) => { }), () => RaiseEvents());
+      return ConfigurationDataFactoryIO.Load<ConfigurationData>(() => XmlDataContractSerializers.Load<ConfigurationData>(_configurationFile, (x, y, z) => { }), () => RaiseEvents());
     }
     protected override void RaiseEvents()
     {

@@ -30,7 +30,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// <param name="configurationFile">The file <see cref="FileInfo"/> containing the configuration data of the UANetworking application.</param>
     public void ReadConfiguration(FileInfo configurationFile)
     {
-      CurrentConfiguration = ConfigurationData.Load<ConfigurationDataType>
+      CurrentConfiguration = ConfigurationDataFactoryIO.Load<ConfigurationDataType>
         (Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z), () => RaiseOnChangeEvent(true));
     }
     /// <summary>
@@ -42,7 +42,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     {
       if (CurrentConfiguration == null)
         throw new ArgumentNullException(nameof(CurrentConfiguration));
-      ConfigurationData.Save<ConfigurationDataType>(CurrentConfiguration, Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z));
+      ConfigurationDataFactoryIO.Save<ConfigurationDataType>(CurrentConfiguration, Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z));
     }
     /// <summary>
     /// Gets or sets the current configuration <typeparamref name="ConfigurationDataType"/>.

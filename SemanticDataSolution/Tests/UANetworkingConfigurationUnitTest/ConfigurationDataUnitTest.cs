@@ -32,11 +32,11 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     [TestCategory("Configuration_ConfigurationDataUnitTest")]
     public void LoadSaveTestMethod()
     {
-      LocalConfigurationData _configuration = ConfigurationData.Load<LocalConfigurationData>(LocalConfigurationData.Loader, () => { });
+      LocalConfigurationData _configuration = ConfigurationDataFactoryIO.Load<LocalConfigurationData>(LocalConfigurationData.Loader, () => { });
       Assert.IsNotNull(_configuration);
       Assert.AreEqual<int>(1, _configuration.OnLoadedCount);
       Assert.AreEqual<int>(0, _configuration.OnSavingCount);
-      LocalConfigurationData.Save<LocalConfigurationData>(_configuration, (x) => { Assert.AreEqual<int>(1, x.OnSavingCount); });
+      ConfigurationDataFactoryIO.Save<LocalConfigurationData>(_configuration, (x) => { Assert.AreEqual<int>(1, x.OnSavingCount); });
     }
     [TestMethod]
     [TestCategory("Configuration_ConfigurationDataUnitTest")]
@@ -189,12 +189,12 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
           _configuration = ReferenceConfiguration.LoadConsumer();
           break;
         default:
-          break;
+           break;
       }
-      ConfigurationData.Save<ConfigurationData>(_configuration, serializer, _fileInfo, (x, y, z) => { Console.WriteLine(z); });
+      ConfigurationDataFactoryIO.Save<ConfigurationData>(_configuration, serializer, _fileInfo, (x, y, z) => { Console.WriteLine(z); });
       _fileInfo.Refresh();
       Assert.IsTrue(_fileInfo.Exists);
-      ConfigurationData _mirror = ConfigurationData.Load<ConfigurationData>(serializer, _fileInfo, (x, y, z) => { Console.WriteLine(z); }, () => { });
+      ConfigurationData _mirror = ConfigurationDataFactoryIO.Load<ConfigurationData>(serializer, _fileInfo, (x, y, z) => { Console.WriteLine(z); }, () => { });
       Compare(_configuration, _mirror);
     }
     private void LoadUsingSerializer(Role role, SerializerType serializer)
@@ -206,11 +206,11 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       switch (serializer)
       {
         case SerializerType.Json:
-          _cd = ConfigurationData.Load<ConfigurationData>
+          _cd = ConfigurationDataFactoryIO.Load<ConfigurationData>
             (() => JSONDataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); }), () => { });
           break;
         case SerializerType.Xml:
-          _cd = ConfigurationData.Load<ConfigurationData>
+          _cd = ConfigurationDataFactoryIO.Load<ConfigurationData>
             (() => XmlDataContractSerializers.Load<ConfigurationData>(_fileInfo, (x, y, z) => { _message = z; Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, x); }), () => { });
           break;
       }

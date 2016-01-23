@@ -1,6 +1,7 @@
 ﻿
 using System;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration
 {
@@ -17,7 +18,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// <returns>Am object of <see cref="ConfigurationData" /> type capturing the communication configuration.</returns>
     public ConfigurationData GetConfiguration()
     {
-      return ConfigurationData.Load(Loader, RaiseEvents);
+      return ConfigurationDataFactoryIO.Load(Loader, RaiseEvents);
     }
     /// <summary>
     /// Occurs after the association configuration has been changed.

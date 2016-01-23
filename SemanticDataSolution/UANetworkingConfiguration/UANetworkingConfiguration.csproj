@@ -94,6 +94,7 @@
     <Compile Include="Serialization\BuiltInType.cs" />
     <Compile Include="Serialization\UATypeInfo.cs" />
     <Compile Include="Serialization\ValueRanks.cs" />
+    <Compile Include="Serializers\ConfigurationDataFactoryIO.cs" />
     <Compile Include="Serializers\JSONDataContractSerializers.cs" />
     <Compile Include="Serializers\SerializerType.cs" />
     <Compile Include="Serializers\XmlDataContractSerializers.cs" />

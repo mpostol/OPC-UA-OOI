@@ -3,6 +3,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
 
 namespace UAOOI.SemanticData.DataManagement.UnitTest
 {
@@ -13,7 +14,7 @@ namespace UAOOI.SemanticData.DataManagement.UnitTest
     [TestCategory("DataManagement_Configuration")]
     public void ConfigurationDataCreateTestMethod()
     {
-      ConfigurationData _cnf = ConfigurationData.Load<ConfigurationData>(Create, () => { });
+      ConfigurationData _cnf = ConfigurationDataFactoryIO.Load<ConfigurationData>(Create, () => { });
       Assert.IsNotNull(_cnf);
       Assert.IsNotNull(_cnf.DataSets);
       TestAssociations(_cnf.DataSets);

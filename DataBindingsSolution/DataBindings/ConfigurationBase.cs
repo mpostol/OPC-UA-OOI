@@ -11,7 +11,7 @@ namespace UAOOI.DataBindings
   /// Class ConfigurationBase - Provides basic implementation of the <see cref="IConfiguration"/>.
   /// </summary>
   public abstract class ConfigurationBase<ConfigurationDataType> : UANetworkingConfiguration<ConfigurationDataType>, IConfiguration
-    where ConfigurationDataType : ConfigurationData, new()
+    where ConfigurationDataType : class, IConfigurationDataFactory, new()
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="ConfigurationBase{ConfigurationDataType}"/> class.

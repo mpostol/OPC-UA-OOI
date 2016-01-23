@@ -3,6 +3,7 @@ using CAS.UA.IServerConfiguration;
 using System.IO;
 using UAOOI.SemanticData.UANetworking.Configuration;
 using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using System;
 
 namespace UAOOI.DataBindings
 {
@@ -12,6 +13,19 @@ namespace UAOOI.DataBindings
   public abstract class ConfigurationBase<ConfigurationDataType> : UANetworkingConfiguration<ConfigurationDataType>, IConfiguration
     where ConfigurationDataType : ConfigurationData, new()
   {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ConfigurationBase{ConfigurationDataType}"/> class.
+    /// </summary>
+    public ConfigurationBase()
+    {
+      base.OnModified += (x, y) => { OnModified?.Invoke(x, new UAServerConfigurationEventArgs(true)); };
+    }
+    /// <summary>
+    /// Occurs any time the configuration is modified.
+    /// </summary>
+    /// <exception cref="System.NotImplementedException">
+    /// </exception>
+    public new event EventHandler<UAServerConfigurationEventArgs> OnModified;
     /// <summary>
     /// Gets the default name of the file.
     /// </summary>
@@ -46,6 +60,5 @@ namespace UAOOI.DataBindings
     /// <param name="configurationFile">The configuration file.</param>
     /// <remarks><paramref name="solutionFilePath" /> is to be used to create relative file path to configuration files used by the plug-in.</remarks>
     public abstract void SaveConfiguration(string solutionFilePath, FileInfo configurationFile);
-
   }
 }

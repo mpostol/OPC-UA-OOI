@@ -1,5 +1,4 @@
 ﻿
-using CAS.UA.IServerConfiguration;
 using System;
 using System.Xml;
 using System.Xml.Serialization;
@@ -24,7 +23,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// <value>The identifier.</value>
     [XmlIgnore]
     public Guid Id { get { return XmlConvert.ToGuid(Guid); } set { Guid = XmlConvert.ToString(value); } }
-    internal static DataSetConfiguration Create(INodeDescriptor descriptor)
+    internal static DataSetConfiguration Create(NodeDescriptor descriptor)
     {
       if (descriptor == null)
         throw new ArgumentNullException(nameof(descriptor));

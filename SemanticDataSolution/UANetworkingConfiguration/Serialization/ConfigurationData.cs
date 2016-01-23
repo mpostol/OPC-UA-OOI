@@ -1,12 +1,8 @@
 ﻿
-using CAS.UA.IServerConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
 {
@@ -32,7 +28,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// </summary>
     /// <param name="descriptor">The descriptor.</param>
     /// <returns>IEnumerable&lt;IInstanceConfiguration&gt;.</returns>
-    public DataSetConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
+    public DataSetConfiguration GetInstanceConfiguration(NodeDescriptor descriptor)
     {
       DataSetConfiguration _node = DataSetsList.Where<DataSetConfiguration>(x => x.Root.CreateWrapper().CompareTo(descriptor) == 0).FirstOrDefault<DataSetConfiguration>();
       if (_node == null)

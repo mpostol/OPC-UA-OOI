@@ -1,5 +1,4 @@
 ﻿
-using CAS.UA.IServerConfiguration;
 using System;
 using System.Runtime.Serialization;
 using System.Xml;
@@ -85,7 +84,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
     /// <summary>
     /// Class NodeDescriptorWrapper - read only wrapper of the node descriptor
     /// </summary>
-    private class NodeDescriptorWrapper : INodeDescriptor, IComparable
+    private class NodeDescriptorWrapper : NodeDescriptor, IComparable
     {
       public NodeDescriptorWrapper(NodeDescriptor repository)
       {

@@ -91,7 +91,7 @@ namespace UAOOI.DataBindings.UnitTest
       UANetworkingConfigurationEditor _newConfiguration = new UANetworkingConfigurationEditor();
       Assert.IsNotNull(_newConfiguration);
       bool _ConfigurationFileChanged = false;
-      _newConfiguration.OnModified += (x, y) => { Assert.IsTrue(y.ConfigurationFileChanged); _ConfigurationFileChanged = y.ConfigurationFileChanged; };
+      _newConfiguration.OnModified += (x, y) => { _ConfigurationFileChanged = true; };
       _newConfiguration.CreateDefaultConfiguration();
       Assert.IsTrue(_ConfigurationFileChanged);
       Assert.IsNotNull(_newConfiguration.CurrentConfiguration);

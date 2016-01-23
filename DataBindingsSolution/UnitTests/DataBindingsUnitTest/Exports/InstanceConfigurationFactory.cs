@@ -68,7 +68,6 @@ namespace UAOOI.DataBindings.UnitTest.Exports
       {
         return $"Configuration of: {DataSetConfiguration} associated with {String.Join(", ", AssociatedMessageHandlers.Select<MessageHandlerConfiguration, string>(x => x.Name))}";
       }
-
       #endregion
 
     }

@@ -56,7 +56,8 @@ namespace UAOOI.DataBindings
         throw new ArgumentNullException(nameof(descriptor));
       if (CurrentConfiguration == null)
         return null;
-      return InstanceConfigurationFactory.GetIInstanceConfiguration(CurrentConfiguration.GetInstanceConfiguration(descriptor), CurrentConfiguration.GetMessageHandlers(), TraceSource.TraceData, () => this.RaiseOnChangeEvent(false));
+      NodeDescriptorBase _nd = NodeDescriptorBase.Clone(descriptor);
+      return InstanceConfigurationFactory.GetIInstanceConfiguration(CurrentConfiguration.GetInstanceConfiguration(_nd), CurrentConfiguration.GetMessageHandlers(), TraceSource.TraceData, () => this.RaiseOnChangeEvent());
     }
     /// <summary>
     /// Gets the configuration editor - user interface to edit the plug-in configuration file.

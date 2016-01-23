@@ -2,7 +2,7 @@
 using CAS.UA.IServerConfiguration;
 using System;
 using System.Collections.Generic;
-using System.Xml;
+using Configuration = UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.DataBindings
 {
@@ -10,37 +10,78 @@ namespace UAOOI.DataBindings
   /// Class NodeDescriptorBase - provides description of the node to be configured.
   /// </summary>
   [Serializable]
-  public abstract class NodeDescriptorBase : INodeDescriptor, IComparable<INodeDescriptor>, IEqualityComparer<NodeDescriptorBase>
+  public class NodeDescriptorBase : Configuration.NodeDescriptor, INodeDescriptor, IComparable<INodeDescriptor>, IEqualityComparer<NodeDescriptorBase>
   {
 
     #region INodeDescriptor
     /// <summary>
-    /// Gets the binding description that allows the editor to create automatically bindings.
-    /// </summary>
-    /// <value>The binding description.</value>
-    public abstract string BindingDescription { get; }
-    /// <summary>
-    /// Gets the type of the node of the Variable NodeClass
-    /// </summary>
-    /// <value>The type of the data as instance of <see cref="XmlQualifiedName"/>.</value>
-    public abstract XmlQualifiedName DataType { get; }
-    /// <summary>
-    /// Gets a value indicating whether it is instance declaration - may have many instances in the created address space.
-    /// </summary>
-    /// <value><c>true</c> if it is instance declaration; otherwise, <c>false</c>.</value>
-    public abstract bool InstanceDeclaration { get; }
-    /// <summary>
     /// Gets the node class.
     /// </summary>
-    /// <value>The node class <see cref="InstanceNodeClassesEnum"/>.</value>
-    public abstract InstanceNodeClassesEnum NodeClass { get; }
-    /// <summary>
-    /// Gets the node unique identifier, i.e. the symbolic path.
-    /// </summary>
-    /// <value>The node identifier.</value>
-    public abstract XmlQualifiedName NodeIdentifier { get; }
+    /// <value>The node class.</value>
+    //TODO must be refactored 
+    public new CAS.UA.IServerConfiguration.InstanceNodeClassesEnum NodeClass
+    {
+      get
+      {
+        InstanceNodeClassesEnum _ret = InstanceNodeClassesEnum.NotDefined;
+        switch (base.NodeClass)
+        {
+          case Configuration.InstanceNodeClassesEnum.Object:
+            _ret = InstanceNodeClassesEnum.Object;
+            break;
+          case Configuration.InstanceNodeClassesEnum.Variable:
+            _ret = InstanceNodeClassesEnum.Variable;
+            break;
+          case Configuration.InstanceNodeClassesEnum.Method:
+            _ret = InstanceNodeClassesEnum.Method;
+            break;
+          case Configuration.InstanceNodeClassesEnum.View:
+            _ret = InstanceNodeClassesEnum.View;
+            break;
+          case Configuration.InstanceNodeClassesEnum.NotDefined:
+            _ret = InstanceNodeClassesEnum.NotDefined;
+            break;
+        }
+        return _ret;
+      }
+      set
+      {
+        Configuration.InstanceNodeClassesEnum _ret = Configuration.InstanceNodeClassesEnum.NotDefined;
+        switch (value)
+        {
+          case InstanceNodeClassesEnum.Object:
+            _ret = Configuration.InstanceNodeClassesEnum.Object;
+            break;
+          case InstanceNodeClassesEnum.Variable:
+            _ret = Configuration.InstanceNodeClassesEnum.Variable;
+            break;
+          case InstanceNodeClassesEnum.Method:
+            _ret = Configuration.InstanceNodeClassesEnum.Method;
+            break;
+          case InstanceNodeClassesEnum.View:
+            _ret = Configuration.InstanceNodeClassesEnum.View;
+            break;
+          case InstanceNodeClassesEnum.NotDefined:
+            _ret = Configuration.InstanceNodeClassesEnum.NotDefined;
+            break;
+        }
+        base.NodeClass = _ret;
+      }
+    }
     #endregion
 
+    internal static NodeDescriptorBase Clone(INodeDescriptor descriptor)
+    {
+      NodeDescriptorBase _ret = new NodeDescriptorBase()
+      {
+        BindingDescription = descriptor.BindingDescription,
+        DataType = descriptor.DataType,
+        InstanceDeclaration = descriptor.InstanceDeclaration,
+        NodeClass = descriptor.NodeClass,
+        NodeIdentifier = descriptor.NodeIdentifier
+      };
+      return _ret;
+    }
     #region operators
     /// <summary>
     /// Implements the == operator.

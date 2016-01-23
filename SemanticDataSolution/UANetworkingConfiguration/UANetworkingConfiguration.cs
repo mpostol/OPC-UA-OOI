@@ -1,5 +1,4 @@
 ﻿
-using CAS.UA.IServerConfiguration;
 using System;
 using System.ComponentModel.Composition;
 using System.IO;
@@ -31,7 +30,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     public void ReadConfiguration(FileInfo configurationFile)
     {
       CurrentConfiguration = ConfigurationDataFactoryIO.Load<ConfigurationDataType>
-        (Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z), () => RaiseOnChangeEvent(true));
+        (Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z), () => RaiseOnChangeEvent());
     }
     /// <summary>
     /// Saves the configuration.
@@ -56,13 +55,13 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
         if (Object.Equals(CurrentConfiguration, value))
           return;
         m_CurrentConfiguration = value;
-        RaiseOnChangeEvent(true);
+        RaiseOnChangeEvent();
       }
     }
     /// <summary>
     /// Occurs any time the configuration is modified.
     /// </summary>
-    public event EventHandler<UAServerConfigurationEventArgs> OnModified;
+    public event EventHandler<EventArgs> OnModified;
     /// <summary>
     /// Gets the configuration data.
     /// </summary>
@@ -93,9 +92,9 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// Raises the on change event.
     /// </summary>
     /// <param name="configurationFileChanged">if set to <c>true</c> the configuration file changed, false if content changed.</param>
-    protected void RaiseOnChangeEvent(bool configurationFileChanged)
+    protected void RaiseOnChangeEvent()
     {
-      OnModified?.Invoke(this, new UAServerConfigurationEventArgs(configurationFileChanged));
+      OnModified?.Invoke(this, EventArgs.Empty);
     }
     #endregion
 

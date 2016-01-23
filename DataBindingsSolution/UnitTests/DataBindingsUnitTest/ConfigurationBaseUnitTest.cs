@@ -25,14 +25,14 @@ namespace UAOOI.DataBindings.UnitTest
     {
       DerivedTest _instance = new DerivedTest();
       int _OnModifiedCalled = 0;
-      _instance.OnModified += (x, y) => { Assert.IsTrue(y.ConfigurationFileChanged); _OnModifiedCalled++; };
+      _instance.OnModified += (x, y) => _OnModifiedCalled++;
       _instance.CurrentConfiguration = new ConfigurationData();
       Assert.AreEqual<int>(1, _OnModifiedCalled);
       _instance.CurrentConfiguration = _instance.CurrentConfiguration;
       Assert.AreEqual<int>(1, _OnModifiedCalled);
     }
     #endregion
-    
+
     #region private
     private class DerivedTest : ConfigurationBase<ConfigurationData>
     {

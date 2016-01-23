@@ -50,7 +50,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.IsTrue(_configFile.Exists);
       bool _ConfigurationFileChanged = false;
       Assert.IsNull(_newConfiguration.ConfigurationData);
-      _newConfiguration.OnModified += (x, y) => { Assert.IsTrue(y.ConfigurationFileChanged); _ConfigurationFileChanged = y.ConfigurationFileChanged; };
+      _newConfiguration.OnModified += (x, y) => { _ConfigurationFileChanged = true; };
       _newConfiguration.ReadConfiguration(_configFile);
       Assert.IsTrue(_ConfigurationFileChanged);
       Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
@@ -99,7 +99,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.IsFalse(_configFile.Exists);
       Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnSavingCount);
       _newConfiguration.SaveConfiguration(_configFile);
-      
+
       //on SaveConfiguration tests
       Assert.AreEqual<int>(1, _newConfiguration.CurrentConfiguration.OnSavingCount);
       Assert.IsFalse(_ConfigurationFileChanged);
@@ -110,7 +110,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
       Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnLoadedCount);
 
       //prepare ReadConfiguration
-      _newConfiguration.OnModified += (x, y) => { Assert.IsTrue(y.ConfigurationFileChanged); _ConfigurationFileChanged = y.ConfigurationFileChanged; };
+      _newConfiguration.OnModified += (x, y) => { _ConfigurationFileChanged = true; };
       _newConfiguration.ReadConfiguration(_configFile);
 
       //on ReadConfiguration test

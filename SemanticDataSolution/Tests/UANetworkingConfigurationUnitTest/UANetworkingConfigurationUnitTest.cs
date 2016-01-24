@@ -1,13 +1,12 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
-using System;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using UAOOI.SemanticData.UANetworking.Configuration.UnitTest.Exports;
+using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
 {
@@ -135,16 +134,6 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
         ConfigurationData = ReferenceConfiguration.LoadConsumer();
       }
 
-      internal void ComposeParts()
-      {
-        //An aggregate catalog that combines multiple catalogs
-        AggregateCatalog _catalog = new AggregateCatalog();
-        //Create the CompositionContainer with the parts in the catalog
-        _catalog.Catalogs.Add(new DirectoryCatalog(System.IO.Path.GetDirectoryName(typeof(UANetworkingConfigurationUnitTest).Assembly.Location)));
-        m_Container = new CompositionContainer(_catalog);
-        //Fill the imports of this object
-        m_Container.ComposeParts(this);
-      }
       private ConfigurationData m_ConfigurationDataWrapperField;
 
       [DataMember(EmitDefaultValue = false, IsRequired = true)]
@@ -180,11 +169,24 @@ namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
     }
     private class UANetworkingConfigurationConfigurationDataWrapper : UANetworkingConfiguration<ConfigurationDataWrapper>
     {
+      private CompositionContainer m_Container;
+
       public UANetworkingConfigurationConfigurationDataWrapper()
       {
-        TraceSource = new TraceSourceBase();
+        ComposeParts();
         this.CurrentConfiguration = new ConfigurationDataWrapper();
       }
+      internal void ComposeParts()
+      {
+        //An aggregate catalog that combines multiple catalogs
+        AggregateCatalog _catalog = new AggregateCatalog();
+        //Create the CompositionContainer with the parts in the catalog
+        _catalog.Catalogs.Add(new DirectoryCatalog(System.IO.Path.GetDirectoryName(typeof(UANetworkingConfigurationUnitTest).Assembly.Location)));
+        m_Container = new CompositionContainer(_catalog);
+        //Fill the imports of this object
+        m_Container.ComposeParts(this);
+      }
+
     }
     private class DerivedUANetworkingConfiguration : UANetworkingConfiguration<ConfigurationData>
     {

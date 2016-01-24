@@ -87,7 +87,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
 
     #region privat
     private ConfigurationDataType m_CurrentConfiguration;
-    private ITraceSource b_TraceSource;
+    private ITraceSource b_TraceSource ;
     /// <summary>
     /// Raises the on change event.
     /// </summary>

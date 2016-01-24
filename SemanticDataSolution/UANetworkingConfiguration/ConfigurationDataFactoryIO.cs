@@ -2,8 +2,9 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.Serializers
+namespace UAOOI.SemanticData.UANetworking.Configuration
 {
   internal static class ConfigurationDataFactoryIO
   {

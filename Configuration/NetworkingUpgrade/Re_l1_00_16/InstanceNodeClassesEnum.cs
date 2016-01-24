@@ -1,0 +1,31 @@
+﻿
+namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
+{
+  /// <summary>
+  /// Enumeration of the node classes that can be a source of process data.
+  /// </summary>
+  public enum InstanceNodeClassesEnum
+  {
+    /// <summary>
+    /// Object NodeClasses
+    /// </summary>
+    Object,
+    /// <summary>
+    /// Variable NodeClasses
+    /// </summary>
+    Variable,
+    /// <summary>
+    /// Method NodeClasses
+    /// </summary>
+    Method,
+    /// <summary>
+    /// View NodeClasses
+    /// </summary>
+    View,
+    /// <summary>
+    /// Not defined or nor relevant
+    /// </summary>
+    NotDefined
+
+  }
+}

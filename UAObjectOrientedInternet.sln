@@ -5,13 +5,6 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UANodeSetValidation", "SemanticDataSolution\UANodeSetValidation\UANodeSetValidation.csproj", "{352378A0-8B2E-4679-BB44-FD0BCC8467D9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{796E1912-C302-4518-A34F-EFE2695F1E06}"
-	ProjectSection(SolutionItems) = preProject
-		SemanticDataSolution\.nuget\NuGet.Config = SemanticDataSolution\.nuget\NuGet.Config
-		SemanticDataSolution\.nuget\NuGet.exe = SemanticDataSolution\.nuget\NuGet.exe
-		SemanticDataSolution\.nuget\NuGet.targets = SemanticDataSolution\.nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{78EDB72A-77B1-4A64-8E76-17E780993017}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InformationModelFactory", "SemanticDataSolution\InformationModelFactory\InformationModelFactory.csproj", "{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}"
@@ -61,6 +54,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Common\Infrastructure\Infrastructure.csproj", "{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FD944437-F604-43B6-8DB8-9365D1C3722E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkingUpgradeUnitTest", "Configuration\Tests\NetworkingUpgradeUnitTest\NetworkingUpgradeUnitTest.csproj", "{F2ED1AC0-2F78-4506-ADFD-0BC88A6C616D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkingUpgrade", "Configuration\NetworkingUpgrade\NetworkingUpgrade.csproj", "{BEBE131A-C931-4C2C-9F9E-ED0D0B75DF26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -144,12 +141,19 @@ Global
 		{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2ED1AC0-2F78-4506-ADFD-0BC88A6C616D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2ED1AC0-2F78-4506-ADFD-0BC88A6C616D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2ED1AC0-2F78-4506-ADFD-0BC88A6C616D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2ED1AC0-2F78-4506-ADFD-0BC88A6C616D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEBE131A-C931-4C2C-9F9E-ED0D0B75DF26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEBE131A-C931-4C2C-9F9E-ED0D0B75DF26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEBE131A-C931-4C2C-9F9E-ED0D0B75DF26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEBE131A-C931-4C2C-9F9E-ED0D0B75DF26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{796E1912-C302-4518-A34F-EFE2695F1E06} = {78EDB72A-77B1-4A64-8E76-17E780993017}
 		{37D26B63-74FE-45C6-9F61-251BDF69EDF7} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
 		{DDE02168-1EAD-41D9-B5E6-FB101F98AC24} = {78EDB72A-77B1-4A64-8E76-17E780993017}
 		{F7C29437-0923-449C-B4E9-36653A55C3E5} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
@@ -165,5 +169,7 @@ Global
 		{C5F00673-1BDE-45A7-826B-C7E8F517398C} = {FD944437-F604-43B6-8DB8-9365D1C3722E}
 		{8817A671-ABB8-463A-A8A3-DDCFE781A6B6} = {6F7A6A18-FF7B-4D3B-8B1F-BD525E065174}
 		{FD944437-F604-43B6-8DB8-9365D1C3722E} = {6F7A6A18-FF7B-4D3B-8B1F-BD525E065174}
+		{F2ED1AC0-2F78-4506-ADFD-0BC88A6C616D} = {B58E5262-0DEA-4096-8409-7B118711D8DF}
+		{BEBE131A-C931-4C2C-9F9E-ED0D0B75DF26} = {2148B4AF-8B02-45C3-89E7-AEACAE448DDA}
 	EndGlobalSection
 EndGlobal

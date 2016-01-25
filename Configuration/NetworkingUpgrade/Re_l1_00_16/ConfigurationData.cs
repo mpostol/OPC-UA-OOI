@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using UAOOI.SemanticData.UANetworking.Configuration;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
 namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
 {

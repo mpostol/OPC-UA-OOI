@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Configuration">
+  <logicalClassDesignerModelMoniker Id="6879d0fa-866b-4fdb-b5e7-3529db2bac29" />
+  <nestedChildShapes>
+    <packageShape Id="388ee5b8-ebeb-4eab-89e5-3f0c445adef8" absoluteBounds="1.75, 3.625, 1.5, 1" customColor="255, 249, 230" hideQualifiedName="false">
+      <packageMoniker Id="2ee72c6a-1947-434f-8ffe-06b9e054f1c4" LastKnownName="Common" />
+    </packageShape>
+    <packageShape Id="98972415-cf2d-48f0-b1a6-872c68b85616" absoluteBounds="2.125, 5.875, 2.125, 1" customColor="255, 249, 230" hideQualifiedName="false">
+      <packageMoniker Id="7783391c-a188-4b3c-81aa-f0c54f14c658" LastKnownName="Configuration" />
+    </packageShape>
+    <dependencyConnector edgePoints="[(2.6875 : 4.625); (2.6875 : 5.875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <dependencyMoniker Id="6fad8aca-7f04-441e-be01-0d714f732529" />
+      <relativeChildShapes />
+      <nodes>
+        <packageShapeMoniker Id="388ee5b8-ebeb-4eab-89e5-3f0c445adef8" />
+        <packageShapeMoniker Id="98972415-cf2d-48f0-b1a6-872c68b85616" />
+      </nodes>
+    </dependencyConnector>
+    <packageShape Id="32e600e2-2a6f-40d3-919d-e4b7e6b50b20" absoluteBounds="2.75, 1, 2, 1" customColor="255, 249, 230" hideQualifiedName="false">
+      <packageMoniker Id="0a1a98d0-2b2f-4873-a71f-40aada3105c9" LastKnownName="Networking" />
+    </packageShape>
+    <dependencyConnector edgePoints="[(3.78125 : 2); (3.78125 : 6.14300346374512)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <dependencyMoniker Id="5769522b-af44-4166-a0ca-ccd1af50eb56" />
+      <relativeChildShapes />
+      <nodes>
+        <packageShapeMoniker Id="32e600e2-2a6f-40d3-919d-e4b7e6b50b20" />
+        <packageShapeMoniker Id="98972415-cf2d-48f0-b1a6-872c68b85616" />
+      </nodes>
+    </dependencyConnector>
+    <dependencyConnector edgePoints="[(3.02441860465116 : 2); (3.02441860465116 : 2.375); (2.54807692307692 : 2.375); (2.54807692307692 : 3.625)]" manuallyRouted="true" fixedFrom="Caller" fixedTo="Caller" customColor="Black">
+      <dependencyMoniker Id="77d59f25-255a-4bb5-82b3-1b3ed5b2ca6e" />
+      <relativeChildShapes />
+      <nodes>
+        <packageShapeMoniker Id="32e600e2-2a6f-40d3-919d-e4b7e6b50b20" />
+        <packageShapeMoniker Id="388ee5b8-ebeb-4eab-89e5-3f0c445adef8" />
+      </nodes>
+    </dependencyConnector>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="22348d21-bdd4-4e5a-9283-7be9c0f814b8"
+  name="Networking" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <suppliersInternal>
+    <dependency
+      Id="68290e12-6501-40bf-abcd-52cde41130a1">
+      <packageMoniker
+        Id="9f91b48e-9889-49d2-ab4d-1a89a1a59dba"
+        LastKnownName="Configuration"
+        LastKnownLocation="Package_2321.uml" />
+    </dependency>
+    <dependency
+      Id="a5d60c89-02bb-4e9d-b425-e467fd8c77be">
+      <packageMoniker
+        Id="4224f8d5-96b3-47ac-8169-44b1e5518092"
+        LastKnownName="Common"
+        LastKnownLocation="Package_2319.uml" />
+    </dependency>
+  </suppliersInternal>
+</package>

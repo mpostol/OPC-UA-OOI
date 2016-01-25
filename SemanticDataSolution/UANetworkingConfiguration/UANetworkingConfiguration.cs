@@ -11,7 +11,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
   /// Class UANetworkingConfiguration - Provides implementation of the <see cref="ConfigurationBase{ConfigurationDataType}"/> for the UANetworking application.
   /// </summary>
   /// <typeparam name="ConfigurationDataType">The type of the configuration data type.</typeparam>
-  public abstract class UANetworkingConfiguration<ConfigurationDataType>
+  public class UANetworkingConfiguration<ConfigurationDataType>
       where ConfigurationDataType : class, IConfigurationDataFactory, new()
   {
 

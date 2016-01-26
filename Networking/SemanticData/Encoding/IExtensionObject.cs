@@ -1,7 +1,7 @@
 ﻿
 using System.Xml;
 
-namespace UAOOI.SemanticData.DataManagement.Encoding
+namespace UAOOI.Networking.SemanticData.Encoding
 {
   /// <summary>
   /// Interface ExtensionObject - An object used to wrap data types that the receiver may not understand.

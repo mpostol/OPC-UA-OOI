@@ -1,7 +1,7 @@
 ﻿
 using System.Windows.Input;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
+namespace UAOOI.Networking.ReferenceApplication
 {
   internal interface IProducerViewModel
   {

@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.SemanticData.DataManagement.MessageHandling
+namespace UAOOI.Networking.SemanticData.MessageHandling
 {
   /// <summary>
   /// Enum MessageLengthFieldTypeEnum - defines the type of the length field in the message header.

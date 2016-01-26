@@ -1,12 +1,12 @@
 ﻿
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.DataManagement.MessageHandling;
+using UAOOI.Networking.SemanticData.MessageHandling;
 using System.IO;
 using System.Linq;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement.UnitTest
+namespace UAOOI.Networking.SemanticData.UnitTest
 {
   [TestClass]
   public class MessageHeaderUnitTest

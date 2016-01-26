@@ -1,4 +1,4 @@
-﻿namespace UAOOI.SemanticData.DataManagement.Encoding
+﻿namespace UAOOI.Networking.SemanticData.Encoding
 {
   /// <summary>
   /// Interface QualifiedName - if implemented represents a name qualified with a namespace.

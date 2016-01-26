@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.SemanticData.DataManagement
+namespace UAOOI.Networking.SemanticData
 {
   /// <summary>
   /// Interface IAssociationState - encapsulates the state machine implementation governing this instance behavior.

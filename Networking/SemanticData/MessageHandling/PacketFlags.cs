@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UAOOI.SemanticData.DataManagement.MessageHandling
+namespace UAOOI.Networking.SemanticData.MessageHandling
 {
   /// <summary>
   /// Class PacketFlagsDefinitions - contains definitions related to the package flags.

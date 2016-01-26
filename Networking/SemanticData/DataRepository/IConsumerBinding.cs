@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.SemanticData.DataManagement.DataRepository
+namespace UAOOI.Networking.SemanticData.DataRepository
 {
   /// <summary>
   /// Interface IConsumerBinding - provide a basic implementation of the <see cref="IProducerBinding"/> interface.

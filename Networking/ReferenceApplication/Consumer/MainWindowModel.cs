@@ -1,16 +1,16 @@
 ﻿
 using System;
 using System.Xml;
-using UAOOI.SemanticData.DataManagement;
-using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.DataManagement.Encoding;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Networking.SemanticData;
+using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Networking.SemanticData.Encoding;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
+namespace UAOOI.Networking.ReferenceApplication.Consumer
 {
 
   /// <summary>
-  /// Class MainWindowModel - consumer of the data send over the wire using the UAOOI.SemanticData.DataManagement framework.
+  /// Class MainWindowModel - consumer of the data send over the wire using the UAOOI.Networking.SemanticData framework.
   /// </summary>
   internal class MainWindowModel : IBindingFactory, IEncodingFactory
   {
@@ -21,14 +21,14 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
 
     #region IBindingFactory
     /// <summary>
-    /// Gets the binding captured by an instance of the <see cref="T:UAOOI.SemanticData.DataManagement.DataRepository.IConsumerBinding" /> type used by the consumer to save the data in the data repository.
+    /// Gets the binding captured by an instance of the <see cref="T:UAOOI.Networking.SemanticData.DataRepository.IConsumerBinding" /> type used by the consumer to save the data in the data repository.
     /// </summary>
     /// <param name="repositoryGroup">It is the name of a repository group profiling the configuration behavior, e.g. encoders selection.
     /// The configuration of the repositories belonging to the same group are handled according to the same profile.</param>
     /// <param name="processValueName">The name of a variable that is the ultimate destination of the values recovered from messages.
     /// Must be unique in the context of the group named by <paramref name="repositoryGroup" />.</param>
-    /// <param name="fieldTypeInfo">The field metadata definition represented as an object of <see cref="T:UAOOI.SemanticData.UANetworking.Configuration.Serialization.UATypeInfo" />.</param>
-    /// <returns>Returns an object implementing the <see cref="T:UAOOI.SemanticData.DataManagement.DataRepository.IConsumerBinding" /> interface that can be used to update selected variable on the factory side.</returns>
+    /// <param name="fieldTypeInfo">The field metadata definition represented as an object of <see cref="T:UAOOI.Configuration.Networking.Serialization.UATypeInfo" />.</param>
+    /// <returns>Returns an object implementing the <see cref="T:UAOOI.Networking.SemanticData.DataRepository.IConsumerBinding" /> interface that can be used to update selected variable on the factory side.</returns>
     /// <exception cref="System.ArgumentNullException">repositoryGroup</exception>
     public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {

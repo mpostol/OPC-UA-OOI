@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
+namespace UAOOI.Configuration.Networking.Serialization
 {
 
   /// <summary>

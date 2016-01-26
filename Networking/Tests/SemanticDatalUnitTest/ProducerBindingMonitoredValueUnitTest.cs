@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Configuration.Networking.Serialization;
 using System.ComponentModel;
 
-namespace UAOOI.SemanticData.DataManagement.UnitTest
+namespace UAOOI.Networking.SemanticData.UnitTest
 {
   [TestClass]
   public class ProducerBindingMonitoredValueUnitTest

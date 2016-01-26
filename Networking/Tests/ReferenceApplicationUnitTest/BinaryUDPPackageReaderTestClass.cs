@@ -1,14 +1,13 @@
 ﻿
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.DataManagement.Encoding;
+using UAOOI.Networking.SemanticData.Encoding;
 using System.Xml;
 using System.Net;
 using System.Collections.Generic;
 using System.Threading;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
+namespace UAOOI.Networking.ReferenceApplication.UnitTest
 {
   [TestClass]
   public class BinaryUDPPackageReaderTestClass

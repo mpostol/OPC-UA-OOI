@@ -1,11 +1,11 @@
 ﻿
 using System;
 using System.Net;
-using UAOOI.SemanticData.DataManagement.Encoding;
-using UAOOI.SemanticData.DataManagement.MessageHandling;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Networking.SemanticData.Encoding;
+using UAOOI.Networking.SemanticData.MessageHandling;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
+namespace UAOOI.Networking.ReferenceApplication.Consumer
 {
   /// <summary>
   /// Class ConsumerMessageHandlerFactory - implements <see cref="IMessageHandlerFactory"/> 

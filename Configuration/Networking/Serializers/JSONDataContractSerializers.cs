@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Xml;
-using UAOOI.SemanticData.UANetworking.Configuration.Properties;
+using UAOOI.Configuration.Networking.Properties;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.Serializers
+namespace UAOOI.Configuration.Networking.Serializers
 {
   /// <summary>
   /// Class DataContractSerializers- helper function to serialize or deserialize an object of the specified type using <see cref="DataContractJsonSerializer"/>.

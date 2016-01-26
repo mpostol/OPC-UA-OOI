@@ -1,9 +1,9 @@
 ﻿
 using System;
 using System.Xml;
-using UAOOI.SemanticData.DataManagement.Encoding;
+using UAOOI.Networking.SemanticData.Encoding;
 
-namespace UAOOI.SemanticData.DataManagement.UnitTest.Helpers
+namespace UAOOI.Networking.SemanticData.UnitTest.Helpers
 {
 
   /// <summary>

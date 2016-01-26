@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel;
 
-namespace UAOOI.SemanticData.DataManagement
+namespace UAOOI.Networking.SemanticData
 {
   /// <summary>
   /// Class Extensions - provides a set of static helper methods for this library.

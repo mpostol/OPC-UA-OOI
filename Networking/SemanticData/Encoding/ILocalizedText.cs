@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.SemanticData.DataManagement.Encoding
+namespace UAOOI.Networking.SemanticData.Encoding
 {
   /// <summary>
   /// Interface ILocalizedText - human readable qualified with a locale.

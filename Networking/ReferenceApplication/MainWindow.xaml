@@ -1,11 +1,11 @@
-﻿<Window x:Class="UAOOI.SemanticData.UANetworking.ReferenceApplication.MainWindow"
-        xmlns:Controls="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication.Controls"
+﻿<Window x:Class="UAOOI.Networking.ReferenceApplication.MainWindow"
+        xmlns:Controls="clr-namespace:UAOOI.Networking.ReferenceApplication.Controls"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
-        xmlns:code="clr-namespace:UAOOI.SemanticData.UANetworking.ReferenceApplication"
+        xmlns:local="clr-namespace:UAOOI.Networking.ReferenceApplication"
+        xmlns:code="clr-namespace:UAOOI.Networking.ReferenceApplication"
         mc:Ignorable="d"
         Title="{Binding Path=WindowTitle}" Height="800" Width="500"  MinHeight="700" MinWidth="500" Icon="PrepareProcess.ico" WindowStartupLocation="CenterOwner" WindowState="Maximized">
   <Window.DataContext>

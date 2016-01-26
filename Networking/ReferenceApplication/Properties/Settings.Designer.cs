@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
+namespace UAOOI.Networking.ReferenceApplication.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

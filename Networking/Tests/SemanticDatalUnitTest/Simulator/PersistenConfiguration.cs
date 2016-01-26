@@ -1,8 +1,8 @@
 ﻿
 using System;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
+namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
 {
   /// <summary>
   /// Class PersistentConfiguration - simulates a persistent configuration, like EEPROM, file, etc.

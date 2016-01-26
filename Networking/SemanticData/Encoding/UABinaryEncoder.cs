@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement.Encoding
+namespace UAOOI.Networking.SemanticData.Encoding
 {
   /// <summary>
   /// Class UABinaryEncoder - basic implementation of the <see cref="IUAEncoder"/> that provides methods to be used to encode selected set of the OPC UA Built-in types.

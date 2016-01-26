@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("UAOOI.SemanticData.UANetworking.Configuration.UnitTest")]
+[assembly: AssemblyTitle("UAOOI.Configuration.Networking.UnitTest")]
 [assembly: AssemblyDescription("UA Data Application Configuration UnitTests")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("mpostol commsvr.com")]

@@ -3,13 +3,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Net;
 using System.Net.Sockets;
-using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.DataManagement.MessageHandling;
+using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Networking.SemanticData.MessageHandling;
 using System.Linq;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
-using UAOOI.SemanticData.DataManagement.Encoding;
+using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.SemanticData.Encoding;
 
-namespace UAOOI.SemanticData.DataManagement.UnitTest
+namespace UAOOI.Networking.SemanticData.UnitTest
 {
 
   [TestClass]

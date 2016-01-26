@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 using System.Xml.Serialization;
 
-[assembly: ContractNamespaceAttribute("http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd", ClrNamespace = "UAOOI.SemanticData.UANetworking.Configuration.Serialization")]
+[assembly: ContractNamespaceAttribute("http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd", ClrNamespace = "UAOOI.Configuration.Networking.Serialization")]
 
 namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
 {

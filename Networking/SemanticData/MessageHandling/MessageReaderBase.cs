@@ -1,10 +1,10 @@
 ﻿
 using System;
-using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.DataManagement.Encoding;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Networking.SemanticData.Encoding;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement.MessageHandling
+namespace UAOOI.Networking.SemanticData.MessageHandling
 {
 
   /// <summary>

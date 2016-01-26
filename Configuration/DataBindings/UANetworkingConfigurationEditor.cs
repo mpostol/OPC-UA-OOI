@@ -4,9 +4,9 @@ using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.DataBindings
+namespace UAOOI.Configuration.DataBindings
 {
 
   /// <summary>

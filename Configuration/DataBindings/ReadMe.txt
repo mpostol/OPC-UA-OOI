@@ -3,14 +3,14 @@
 
 Current release:
 
-Assembly Title:         UAOOI.DataBindings
+Assembly Title:         UAOOI.Configuration.DataBindings
 Assembly Description:   OPC UA DataBindings Library.
 Assembly Company:       commsvr.com
 Assembly Product:       OPC UA DataBindings
 Assembly Copyright:     Copyright (c) 2016 CommServer
 Assembly Trademark:     OPC-UA-OOI
 Assembly Version:       2.0.0
-Assembly Date:          2016-01-16
+Assembly Date:          2016-01-26
 
 The main changes and new functionalities are listed below:
 
@@ -37,7 +37,7 @@ Assembly Date:          Saturday, January 9, 2016
 The main changes and new functionalities are listed below:
 
 1. Published Nuget package to decouple dependent projects: Address Space Model Designer, UAOOI.SemanticData.
-The Nuget package is available here: https://www.nuget.org/packages/UAOOI.DataBindings/
+The Nuget package is available here: https://www.nuget.org/packages/UAOOI.Configuration.DataBindings/
 
 
 

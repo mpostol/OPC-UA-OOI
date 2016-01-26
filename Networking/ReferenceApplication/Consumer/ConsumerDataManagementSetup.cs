@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using UAOOI.SemanticData.DataManagement;
+using UAOOI.Networking.SemanticData;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
+namespace UAOOI.Networking.ReferenceApplication.Consumer
 {
   internal sealed class ConsumerDataManagementSetup : DataManagementSetup, IDisposable
   {

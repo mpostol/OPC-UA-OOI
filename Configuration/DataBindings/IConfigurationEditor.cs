@@ -1,9 +1,9 @@
 ﻿
 using CAS.UA.IServerConfiguration;
 using System;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.DataBindings
+namespace UAOOI.Configuration.DataBindings
 {
   /// <summary>
   /// Interface IConfigurationEditor - describes an injection point to be used to compose en external editor. 

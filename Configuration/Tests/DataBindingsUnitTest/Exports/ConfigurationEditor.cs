@@ -2,9 +2,9 @@
 using CAS.UA.IServerConfiguration;
 using System;
 using System.ComponentModel.Composition;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.DataBindings.UnitTest.Exports
+namespace UAOOI.Configuration.DataBindings.UnitTest.Exports
 {
 
   /// <summary>

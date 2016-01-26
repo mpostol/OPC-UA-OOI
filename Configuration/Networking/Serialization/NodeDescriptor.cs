@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using System.Xml;
 using System.ComponentModel;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
+namespace UAOOI.Configuration.Networking.Serialization
 {
 
   [DataContractAttribute(Name = "NodeDescriptor", Namespace = CommonDefinitions.Namespace)]

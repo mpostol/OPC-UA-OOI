@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace UAOOI.DataBindings.UnitTest
+namespace UAOOI.Configuration.DataBindings.UnitTest
 {
   [TestClass]
   public class NodeDescriptorBaseUnitTest

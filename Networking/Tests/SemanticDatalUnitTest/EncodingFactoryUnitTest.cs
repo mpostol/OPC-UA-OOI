@@ -3,11 +3,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.DataManagement.Encoding;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Networking.SemanticData.Encoding;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement.UnitTest
+namespace UAOOI.Networking.SemanticData.UnitTest
 {
   [TestClass]
   public class EncodingFactoryUnitTest

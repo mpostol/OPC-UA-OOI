@@ -1,8 +1,8 @@
 ﻿
 using System;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement.UnitTest
+namespace UAOOI.Networking.SemanticData.UnitTest
 {
 
   internal static class CommonDefinitions

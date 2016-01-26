@@ -1,9 +1,9 @@
 ﻿
-using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.DataManagement.Encoding;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Networking.SemanticData.Encoding;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement
+namespace UAOOI.Networking.SemanticData
 {
   /// <summary>
   /// Interface IEncodingFactory - provides functionality to lookup a dictionary containing value converters.

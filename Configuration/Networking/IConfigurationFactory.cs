@@ -1,8 +1,8 @@
 ﻿
 using System;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration
+namespace UAOOI.Configuration.Networking
 {
   /// <summary>
   /// Interface IConfigurationFactory provides functionality to provide the configuration. 

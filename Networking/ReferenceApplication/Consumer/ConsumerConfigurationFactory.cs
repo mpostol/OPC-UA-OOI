@@ -1,11 +1,11 @@
 ﻿
 using System;
 using System.IO;
-using UAOOI.SemanticData.UANetworking.Configuration;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
-using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
+using UAOOI.Configuration.Networking;
+using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Configuration.Networking.Serializers;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Consumer
+namespace UAOOI.Networking.ReferenceApplication.Consumer
 {
   /// <summary>
   /// Class ConsumerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase"/> for the UA Data consumer.

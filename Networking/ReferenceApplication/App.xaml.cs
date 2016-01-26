@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
+namespace UAOOI.Networking.ReferenceApplication
 {
   /// <summary>
   /// Interaction logic for App.xaml

@@ -38,7 +38,7 @@ http://www.commsvr.com/
 <#@ include file = "Readme.old" #>
 <#@ include file = "..\..\CommonResources\T4Definitions\Model.t4" #>
 <#+
-string m_AssemblyTitle = "UAOOI.DataBindings";
+string m_AssemblyTitle = "UAOOI.Configuration.DataBindings";
 string m_Date = System.DateTime.Today.ToShortDateString();
 string m_Year = System.DateTime.Today.Year.ToString();
 #>

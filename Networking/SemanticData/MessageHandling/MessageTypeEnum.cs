@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.SemanticData.DataManagement.MessageHandling
+namespace UAOOI.Networking.SemanticData.MessageHandling
 {
   /// <summary>
   /// Enum MessageTypeEnum - The type of the message.

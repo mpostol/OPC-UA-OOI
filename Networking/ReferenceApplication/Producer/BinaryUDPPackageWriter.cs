@@ -3,11 +3,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using UAOOI.SemanticData.DataManagement;
-using UAOOI.SemanticData.DataManagement.Encoding;
-using UAOOI.SemanticData.DataManagement.MessageHandling;
+using UAOOI.Networking.SemanticData;
+using UAOOI.Networking.SemanticData.Encoding;
+using UAOOI.Networking.SemanticData.MessageHandling;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
+namespace UAOOI.Networking.ReferenceApplication.Producer
 {
   /// <summary>
   /// Class BinaryUDPPackageWriter - custom implementation of the <see cref="BinaryEncoder"/> using UDP protocol.

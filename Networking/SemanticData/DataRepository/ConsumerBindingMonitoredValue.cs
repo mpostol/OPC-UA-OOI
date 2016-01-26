@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement.DataRepository
+namespace UAOOI.Networking.SemanticData.DataRepository
 {
   /// <summary>
   /// Class ConsumerBindingMonitoredValue. This class cannot be inherited.

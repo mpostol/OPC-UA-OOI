@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
+namespace UAOOI.Configuration.Networking.Serialization
 {
 
   /// <summary>

@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration
+namespace UAOOI.Configuration.Networking
 {
   /// <summary>
   /// Class CommonDefinitions - contains common definition.

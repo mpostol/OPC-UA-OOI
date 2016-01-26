@@ -3,7 +3,7 @@ using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace UAOOI.DataBindings.UnitTest
+namespace UAOOI.Configuration.DataBindings.UnitTest
 {
   [TestClass]
   public class InstanceConfigurationBaseUnitTest

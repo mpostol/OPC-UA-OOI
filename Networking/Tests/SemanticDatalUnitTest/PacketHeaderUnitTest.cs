@@ -2,11 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
-using UAOOI.SemanticData.DataManagement.Encoding;
-using UAOOI.SemanticData.DataManagement.MessageHandling;
+using UAOOI.Networking.SemanticData.Encoding;
+using UAOOI.Networking.SemanticData.MessageHandling;
 using System.Linq;
 
-namespace UAOOI.SemanticData.DataManagement.UnitTest
+namespace UAOOI.Networking.SemanticData.UnitTest
 {
   [TestClass]
   public class PacketHeaderUnitTest

@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16;
-using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
-using NewConfigurationData = UAOOI.SemanticData.UANetworking.Configuration.Serialization.ConfigurationData;
+using UAOOI.Configuration.Networking.Serializers;
+using NewConfigurationData = UAOOI.Configuration.Networking.Serialization.ConfigurationData;
 
 namespace UAOOI.Configuration.Networking.Upgrade.UnitTest
 {

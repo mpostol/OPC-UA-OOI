@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace UAOOI.SemanticData.DataManagement.Encoding
+namespace UAOOI.Networking.SemanticData.Encoding
 {
   /// <summary>
   /// Interface IBinaryDecoder - instance of this interface is used to decode the message and package headers content using binary encoding.

@@ -1,9 +1,9 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.UANetworking.ReferenceApplication.Controls;
 using System.Windows.Controls;
+using UAOOI.Networking.ReferenceApplication.Controls;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
+namespace UAOOI.Networking.ReferenceApplication.UnitTest
 {
   [TestClass]
   public class IPAddressValidationRuleUnitTest

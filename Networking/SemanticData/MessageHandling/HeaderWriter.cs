@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace UAOOI.SemanticData.DataManagement.MessageHandling
+namespace UAOOI.Networking.SemanticData.MessageHandling
 {
   /// <summary>
   /// Class HeaderWriter - helper class supporting writing headers content.

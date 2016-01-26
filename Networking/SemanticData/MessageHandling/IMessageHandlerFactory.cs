@@ -1,9 +1,9 @@
 ﻿
 using System.Xml;
-using UAOOI.SemanticData.DataManagement.Encoding;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Networking.SemanticData.Encoding;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement.MessageHandling
+namespace UAOOI.Networking.SemanticData.MessageHandling
 {
   /// <summary>
   /// Interface IMessageHandlerFactory - creates objects supporting messages handling over the wire.

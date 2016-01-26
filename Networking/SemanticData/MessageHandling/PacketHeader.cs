@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using UAOOI.SemanticData.DataManagement.Encoding;
+using UAOOI.Networking.SemanticData.Encoding;
 using System.Collections.ObjectModel;
 
-namespace UAOOI.SemanticData.DataManagement.MessageHandling
+namespace UAOOI.Networking.SemanticData.MessageHandling
 {
 
   /// <summary>

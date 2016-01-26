@@ -1,8 +1,8 @@
 ﻿
-using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement
+namespace UAOOI.Networking.SemanticData
 {
 
   /// <summary>

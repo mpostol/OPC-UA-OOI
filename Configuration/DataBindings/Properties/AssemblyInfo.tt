@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 
 <#@ include file = "..\..\..\CommonResources\T4Definitions\Model.t4" #>
 <#+
-string m_AssemblyTitle = "UAOOI.DataBindings";
+string m_AssemblyTitle = "UAOOI.Configuration.DataBindings";
 #>

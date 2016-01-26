@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.SemanticData.DataManagement
+namespace UAOOI.Networking.SemanticData
 {
 
   /// <summary>

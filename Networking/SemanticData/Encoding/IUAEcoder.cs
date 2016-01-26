@@ -1,9 +1,9 @@
 ﻿
 using System;
 using System.Xml;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement.Encoding
+namespace UAOOI.Networking.SemanticData.Encoding
 {
 
   /// <summary>

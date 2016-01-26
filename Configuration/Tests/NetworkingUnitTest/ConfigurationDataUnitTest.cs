@@ -6,10 +6,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
-using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
+using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Configuration.Networking.Serializers;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
+namespace UAOOI.Configuration.Networking.UnitTest
 {
 
   [TestClass]

@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.SemanticData.DataManagement.Encoding
+namespace UAOOI.Networking.SemanticData.Encoding
 {
   /// <summary>
   /// Class DiagnosticInfo - A <see cref="IDiagnosticInfo"/> structure is described in Part 4. 

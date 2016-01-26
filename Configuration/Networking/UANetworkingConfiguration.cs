@@ -2,10 +2,10 @@
 using System;
 using System.ComponentModel.Composition;
 using System.IO;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
-using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
+using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Configuration.Networking.Serializers;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration
+namespace UAOOI.Configuration.Networking
 {
   /// <summary>
   /// Class UANetworkingConfiguration - Provides implementation of the <see cref="ConfigurationBase{ConfigurationDataType}"/> for the UANetworking application.

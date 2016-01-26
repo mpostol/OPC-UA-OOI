@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DirectedGraph DataVirtualized="True" FilterState="CodeMap_SolutionFolder" Layout="Sugiyama" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
   <Nodes>
-    <Node Id="@10" Category="CodeSchema_Assembly" AssemblyTimestamp="11/07/2015 13:21:39" Bounds="25.7606727394675,41.4269478163262,286.33,25" CodeSchemaProperty_StrongName="UAOOI.SemanticData.DataManagement, Version=1.0.0.25849, Culture=neutral, PublicKeyToken=deede3c2df331bb0" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(7f4ded4e-5933-4229-b9cc-51da49678904.OutputPath)" Group="Collapsed" Label="UAOOI.SemanticData.DataManagement.dll" UseManualLocation="True">
+    <Node Id="@10" Category="CodeSchema_Assembly" AssemblyTimestamp="11/07/2015 13:21:39" Bounds="25.7606727394675,41.4269478163262,286.33,25" CodeSchemaProperty_StrongName="UAOOI.Networking.SemanticData, Version=1.0.0.25849, Culture=neutral, PublicKeyToken=deede3c2df331bb0" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(7f4ded4e-5933-4229-b9cc-51da49678904.OutputPath)" Group="Collapsed" Label="UAOOI.Networking.SemanticData.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
     <Node Id="@2" Category="CodeSchema_Assembly" AssemblyTimestamp="11/07/2015 13:21:42" Bounds="251.706144653262,-26.5731521836738,312.086666666667,25" CodeSchemaProperty_StrongName="UAOOI.UANetworkingReferenceApplication, Version=1.0.0.25851, Culture=neutral, PublicKeyToken=deede3c2df331bb0" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(f0accb28-ae0d-4e19-94fa-7be3044f1eeb.OutputPath)" Group="Collapsed" Label="UAOOI.UANetworkingReferenceApplication.exe" UseManualLocation="True">
@@ -334,8 +334,8 @@
     </Style>
   </Styles>
   <Paths>
-    <Path Id="7f4ded4e-5933-4229-b9cc-51da49678904.OutputPath" Value="C:\VS\Projects\OPC-UA-OOI\SemanticDataSolution\DataManagement\bin\Debug\UAOOI.SemanticData.DataManagement.dll" />
-    <Path Id="7f4ded4e-5933-4229-b9cc-51da49678904.OutputPathUri" Value="file:///C:/VS/Projects/OPC-UA-OOI/SemanticDataSolution/DataManagement/bin/Debug/UAOOI.SemanticData.DataManagement.dll" />
+    <Path Id="7f4ded4e-5933-4229-b9cc-51da49678904.OutputPath" Value="C:\VS\Projects\OPC-UA-OOI\SemanticDataSolution\DataManagement\bin\Debug\UAOOI.Networking.SemanticData.dll" />
+    <Path Id="7f4ded4e-5933-4229-b9cc-51da49678904.OutputPathUri" Value="file:///C:/VS/Projects/OPC-UA-OOI/SemanticDataSolution/DataManagement/bin/Debug/UAOOI.Networking.SemanticData.dll" />
     <Path Id="e28e0880-03aa-4d1b-a820-41b04e766019.OutputPath" Value="C:\VS\Projects\OPC-UA-OOI\SemanticDataSolution\UANetworkingConfiguration\bin\Debug\UAOOI.SemanticDataUANetworkingConfiguration.dll" />
     <Path Id="e28e0880-03aa-4d1b-a820-41b04e766019.OutputPathUri" Value="file:///C:/VS/Projects/OPC-UA-OOI/SemanticDataSolution/UANetworkingConfiguration/bin/Debug/UAOOI.SemanticDataUANetworkingConfiguration.dll" />
     <Path Id="f0accb28-ae0d-4e19-94fa-7be3044f1eeb.OutputPath" Value="C:\VS\Projects\OPC-UA-OOI\SemanticDataSolution\UANetworkingReferenceApplication\bin\Debug\UAOOI.UANetworkingReferenceApplication.exe" />

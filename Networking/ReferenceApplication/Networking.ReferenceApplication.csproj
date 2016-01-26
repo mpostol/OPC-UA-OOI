@@ -7,8 +7,8 @@
     <ProjectGuid>{F0ACCB28-AE0D-4E19-94FA-7BE3044F1EEB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UAOOI.SemanticData.UANetworking.ReferenceApplication</RootNamespace>
-    <AssemblyName>UAOOI.UANetworkingReferenceApplication</AssemblyName>
+    <RootNamespace>UAOOI.Networking.ReferenceApplication</RootNamespace>
+    <AssemblyName>UAOOI.Networking.ReferenceApplication</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -54,7 +54,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>UAOOI.SemanticData.UANetworking.ReferenceApplication.App</StartupObject>
+    <StartupObject>UAOOI.Networking.ReferenceApplication.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>PrepareProcess.ico</ApplicationIcon>

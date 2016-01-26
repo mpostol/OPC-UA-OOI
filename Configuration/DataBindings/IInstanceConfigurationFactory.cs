@@ -3,9 +3,9 @@ using CAS.UA.IServerConfiguration;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.DataBindings
+namespace UAOOI.Configuration.DataBindings
 {
 
   /// <summary>

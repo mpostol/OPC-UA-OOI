@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest
+namespace UAOOI.Networking.ReferenceApplication.UnitTest
 {
   [TestClass]
   public class MainWindowViewModelUnitTest

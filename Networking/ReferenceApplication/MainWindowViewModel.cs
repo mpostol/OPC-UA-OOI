@@ -10,11 +10,11 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
-using UAOOI.SemanticData.UANetworking.ReferenceApplication.Controls;
+using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.ReferenceApplication.Controls;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
+namespace UAOOI.Networking.ReferenceApplication
 {
 
   /// <summary>

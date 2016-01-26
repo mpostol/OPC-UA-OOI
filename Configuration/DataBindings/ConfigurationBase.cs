@@ -1,10 +1,10 @@
 ﻿
 using CAS.UA.IServerConfiguration;
 using System.IO;
-using UAOOI.SemanticData.UANetworking.Configuration;
+using UAOOI.Configuration.Networking;
 using System;
 
-namespace UAOOI.DataBindings
+namespace UAOOI.Configuration.DataBindings
 {
   /// <summary>
   /// Class ConfigurationBase - Provides basic implementation of the <see cref="IConfiguration"/>.

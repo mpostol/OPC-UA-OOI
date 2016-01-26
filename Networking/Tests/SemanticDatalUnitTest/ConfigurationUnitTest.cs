@@ -1,11 +1,11 @@
 ﻿
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.DataManagement.UnitTest.Simulator;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
-using UAOOI.SemanticData.UANetworking.Configuration;
+using UAOOI.Networking.SemanticData.UnitTest.Simulator;
+using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Configuration.Networking;
 
-namespace UAOOI.SemanticData.DataManagement.UnitTest
+namespace UAOOI.Networking.SemanticData.UnitTest
 {
   [TestClass]
   public class ConfigurationUnitTest

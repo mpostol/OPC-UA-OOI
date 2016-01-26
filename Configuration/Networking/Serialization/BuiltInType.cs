@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
+namespace UAOOI.Configuration.Networking.Serialization
 {
   /// <summary>
   /// The set of built-in data types for UA type descriptions - see Part 6 5.1.2.

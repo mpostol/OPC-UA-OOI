@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
+namespace UAOOI.Configuration.Networking.Serialization
 {
   /// <summary>
   /// Class UATypeInfo - stores information about an OPC UA Type.

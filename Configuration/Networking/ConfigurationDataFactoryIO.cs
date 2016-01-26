@@ -2,11 +2,11 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
+using UAOOI.Configuration.Networking.Serializers;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration
+namespace UAOOI.Configuration.Networking
 {
-  internal static class ConfigurationDataFactoryIO
+  public static class ConfigurationDataFactoryIO
   {
     /// <summary>
     /// Creates the <typeparam name="ConfigurationDataType" /> instance using specified loader.
@@ -16,7 +16,7 @@ namespace UAOOI.SemanticData.UANetworking.Configuration
     /// of the class derived from <see cref="ConfigurationData" />.</param>
     /// <param name="onChanged">A delegate <see cref="Action"/> encapsulating operation called when this instance is changed.</param>
     /// <returns>An instance of <typeparam name="ConfigurationDataType" /> derived from <see cref="ConfigurationData" />.</returns>
-    internal static ConfigurationDataType Load<ConfigurationDataType>(Func<ConfigurationDataType> loader, Action onChanged)
+    public static ConfigurationDataType Load<ConfigurationDataType>(Func<ConfigurationDataType> loader, Action onChanged)
       where ConfigurationDataType : class, IConfigurationDataFactory, new()
     {
       ConfigurationDataType _configuration = loader();

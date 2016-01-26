@@ -6,8 +6,8 @@
     <ProjectGuid>{ED278519-D497-47AE-8EB1-5826904AF6B1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UAOOI.SemanticData.UANetworking.ReferenceApplication.UnitTest</RootNamespace>
-    <AssemblyName>UAOOI.UANetworkingReferenceApplicationUnitTest</AssemblyName>
+    <RootNamespace>UAOOI.Networking.ReferenceApplication.UnitTest</RootNamespace>
+    <AssemblyName>UAOOI.Networking.ReferenceApplication.UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

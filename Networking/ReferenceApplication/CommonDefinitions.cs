@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
+namespace UAOOI.Networking.ReferenceApplication
 {
   internal static class CommonDefinitions
   {

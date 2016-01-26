@@ -1,9 +1,9 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using UAOOI.SemanticData.UANetworking.Configuration.Serializers;
+using UAOOI.Configuration.Networking.Serializers;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
+namespace UAOOI.Configuration.Networking.UnitTest
 {
   /// <summary>
   /// Summary description for DataContractSerializersUnitTest

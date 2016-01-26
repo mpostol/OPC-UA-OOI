@@ -3,9 +3,9 @@ using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.DataBindings.UnitTest
+namespace UAOOI.Configuration.DataBindings.UnitTest
 {
   [TestClass]
   public class ConfigurationBaseUnitTest

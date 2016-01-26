@@ -5,9 +5,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.DataBindings.UnitTest.Exports
+namespace UAOOI.Configuration.DataBindings.UnitTest.Exports
 {
   [Export(typeof(IInstanceConfigurationFactory))]
   public class InstanceConfigurationFactory : IInstanceConfigurationFactory

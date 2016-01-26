@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UAOOI.SemanticData.DataManagement.Encoding
+namespace UAOOI.Networking.SemanticData.Encoding
 {
 
   internal static class CommonDefinitions

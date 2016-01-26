@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
+namespace UAOOI.Configuration.Networking.UnitTest
 {
   // Set the Name and Namespace properties to new values.
   [DataContract(Name = "CSharpJsonEncoding", Namespace = "http://www.commsvr.com/UAOOI/DataBindings/UnitTest")]

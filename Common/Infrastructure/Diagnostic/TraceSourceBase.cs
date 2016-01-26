@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.Composition;
 using System.Diagnostics;
-using UAOOI.SemanticData.UANetworking.Configuration;
+using UAOOI.Configuration.Networking;
 
 namespace UAOOI.Common.Infrastructure.Diagnostic
 {

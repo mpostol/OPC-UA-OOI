@@ -1,13 +1,13 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.DataManagement.MessageHandling;
-using UAOOI.SemanticData.UANetworking.Configuration;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
-using UAOOI.SemanticData.DataManagement.Encoding;
+using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Networking.SemanticData.MessageHandling;
+using UAOOI.Configuration.Networking;
+using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.SemanticData.Encoding;
 
-namespace UAOOI.SemanticData.DataManagement.UnitTest.Simulator
+namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
 {
 
   /// <summary>

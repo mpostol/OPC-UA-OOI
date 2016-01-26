@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
+namespace UAOOI.Networking.ReferenceApplication.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UAOOI.SemanticData.UANetworking.ReferenceApplication.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("UAOOI.Networking.ReferenceApplication.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

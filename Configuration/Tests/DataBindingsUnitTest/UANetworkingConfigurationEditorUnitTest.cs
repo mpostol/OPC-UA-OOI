@@ -4,9 +4,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Reflection;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.DataBindings.UnitTest
+namespace UAOOI.Configuration.DataBindings.UnitTest
 {
 
   [TestClass]
@@ -18,7 +18,7 @@ namespace UAOOI.DataBindings.UnitTest
     [TestCategory("DataBindings_UANetworkingConfigurationEditor")]
     public void GetIServerConfigurationTestMethod()
     {
-      FileInfo _fileInfo = new FileInfo("UAOOI.DataBindings.dll");
+      FileInfo _fileInfo = new FileInfo("UAOOI.Configuration.DataBindings.dll");
       Assert.IsTrue(_fileInfo.Exists);
       Assembly _pluginAssembly = null;
       IConfiguration _serverConfiguration = null;
@@ -52,7 +52,7 @@ namespace UAOOI.DataBindings.UnitTest
     public void GetInstanceConfigurationTest()
     {
       UANetworkingConfigurationEditor _mc = new UANetworkingConfigurationEditor();
-      IInstanceConfiguration _ic = _mc.GetInstanceConfiguration(new NodeDescriptorBase() { NodeIdentifier = new System.Xml.XmlQualifiedName("TestNodeIdentifier", "UAOOI.DataBindings.UnitTest") });
+      IInstanceConfiguration _ic = _mc.GetInstanceConfiguration(new NodeDescriptorBase() { NodeIdentifier = new System.Xml.XmlQualifiedName("TestNodeIdentifier", "UAOOI.Configuration.DataBindings.UnitTest") });
       Assert.IsNotNull(_ic);
       _ic.Edit();
     }

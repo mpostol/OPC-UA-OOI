@@ -1,8 +1,8 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.DataManagement.MessageHandling;
+using UAOOI.Networking.SemanticData.MessageHandling;
 
-namespace UAOOI.SemanticData.DataManagement.UnitTest
+namespace UAOOI.Networking.SemanticData.UnitTest
 {
   [TestClass]
   public class HeaderWriterUnitTest

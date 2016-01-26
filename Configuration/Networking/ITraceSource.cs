@@ -1,7 +1,7 @@
 ﻿
 using System.Diagnostics;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration
+namespace UAOOI.Configuration.Networking
 {
   public interface ITraceSource
   {

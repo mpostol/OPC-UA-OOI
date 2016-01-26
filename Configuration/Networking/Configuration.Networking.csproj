@@ -7,8 +7,8 @@
     <ProjectGuid>{E28E0880-03AA-4D1B-A820-41B04E766019}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UAOOI.SemanticData.UANetworking.Configuration</RootNamespace>
-    <AssemblyName>UAOOI.SemanticDataUANetworkingConfiguration</AssemblyName>
+    <RootNamespace>UAOOI.Configuration.Networking</RootNamespace>
+    <AssemblyName>UAOOI.Configuration.Networking</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

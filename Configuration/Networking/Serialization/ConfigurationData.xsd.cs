@@ -3,9 +3,9 @@ using System.Runtime.Serialization;
 using System;
 using System.Xml.Serialization;
 
-[assembly: ContractNamespaceAttribute("http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd", ClrNamespace = "UAOOI.SemanticData.UANetworking.Configuration.Serialization")]
+[assembly: ContractNamespaceAttribute("http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd", ClrNamespace = "UAOOI.Configuration.Networking.Serialization")]
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
+namespace UAOOI.Configuration.Networking.Serialization
 {
 
   [DataContractAttribute(Name = "ConfigurationData", Namespace = CommonDefinitions.Namespace)]

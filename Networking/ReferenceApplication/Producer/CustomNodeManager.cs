@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Xml;
-using UAOOI.SemanticData.DataManagement;
-using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.DataManagement.Encoding;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Networking.SemanticData;
+using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Networking.SemanticData.Encoding;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
+namespace UAOOI.Networking.ReferenceApplication.Producer
 {
 
   /// <summary>
   /// Class CustomNodeManager - it is simulator producing data to be sent over the wire using message centric communication provided 
-  /// by the UAOOI.SemanticData.DataManagement framework.
+  /// by the UAOOI.Networking.SemanticData framework.
   /// </summary>
   internal class CustomNodeManager : IBindingFactory, IEncodingFactory, IDisposable
   {
@@ -162,7 +162,7 @@ namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
     /// <summary>
     /// Gets the decoder that provides methods to be used to decode OPC UA Built-in types.
     /// </summary>
-    /// <value>The object implementing <see cref="T:UAOOI.SemanticData.DataManagement.Encoding.IUADecoder" /> interface.</value>
+    /// <value>The object implementing <see cref="T:UAOOI.Networking.SemanticData.Encoding.IUADecoder" /> interface.</value>
     /// <exception cref="System.NotImplementedException"></exception>
     public IUADecoder UADecoder
     {

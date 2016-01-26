@@ -1,9 +1,9 @@
 ﻿
 using System;
 using System.ComponentModel;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement.DataRepository
+namespace UAOOI.Networking.SemanticData.DataRepository
 {
   /// <summary>
   /// Class ProducerBinding - provides a basic implementation of the <see cref="IProducerBinding"/> interface.

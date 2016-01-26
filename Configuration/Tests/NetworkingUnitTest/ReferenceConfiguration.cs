@@ -1,8 +1,8 @@
 ﻿
 using System;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
+namespace UAOOI.Configuration.Networking.UnitTest
 {
   internal static class ReferenceConfiguration
   {

@@ -1,5 +1,5 @@
 ﻿//_______________________________________________________________
-//  Title   : Assembly info for: UAOOI.DataBindings
+//  Title   : Assembly info for: UAOOI.Configuration.DataBindings
 //  System  : Microsoft VisualStudio 2015 / C#
 //
 //  Copyright (c) 2016 CommServer
@@ -12,7 +12,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("UAOOI.DataBindings")]
+[assembly: AssemblyTitle("UAOOI.Configuration.DataBindings")]
 [assembly: AssemblyDescription("OPC UA DataBindings Library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]

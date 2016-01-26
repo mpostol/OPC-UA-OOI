@@ -2,9 +2,9 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.DataManagement.DataRepository
+namespace UAOOI.Networking.SemanticData.DataRepository
 {
 
   /// <summary>

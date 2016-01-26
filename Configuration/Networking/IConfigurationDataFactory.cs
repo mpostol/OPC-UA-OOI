@@ -1,9 +1,9 @@
 ﻿
 using System;
 using System.Runtime.Serialization;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration
+namespace UAOOI.Configuration.Networking
 {
   /// <summary>
   /// Interface IConfigurationDataFactory - creates an instance of <see cref="ConfigurationData"/>

@@ -1,4 +1,4 @@
-﻿namespace UAOOI.SemanticData.DataManagement.Encoding
+﻿namespace UAOOI.Networking.SemanticData.Encoding
 {
   /// <summary>
   /// Interface ExpandedNodeId - extends a node id by adding a complete namespace URI.

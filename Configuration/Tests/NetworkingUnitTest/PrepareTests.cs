@@ -1,7 +1,7 @@
 ﻿
 using UAOOI.Common.Infrastructure.Diagnostic;
 
-namespace UAOOI.SemanticData.UANetworking.Configuration.UnitTest
+namespace UAOOI.Configuration.Networking.UnitTest
 {
   public class PrepareTests
   {

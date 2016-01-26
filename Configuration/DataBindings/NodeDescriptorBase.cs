@@ -2,15 +2,14 @@
 using CAS.UA.IServerConfiguration;
 using System;
 using System.Collections.Generic;
-using Configuration = UAOOI.SemanticData.UANetworking.Configuration.Serialization;
 
-namespace UAOOI.DataBindings
+namespace UAOOI.Configuration.DataBindings
 {
   /// <summary>
   /// Class NodeDescriptorBase - provides description of the node to be configured.
   /// </summary>
   [Serializable]
-  public class NodeDescriptorBase : Configuration.NodeDescriptor, INodeDescriptor, IComparable<INodeDescriptor>, IEqualityComparer<NodeDescriptorBase>
+  public class NodeDescriptorBase : Networking.Serialization.NodeDescriptor, INodeDescriptor, IComparable<INodeDescriptor>, IEqualityComparer<NodeDescriptorBase>
   {
 
     #region INodeDescriptor
@@ -26,19 +25,19 @@ namespace UAOOI.DataBindings
         InstanceNodeClassesEnum _ret = InstanceNodeClassesEnum.NotDefined;
         switch (base.NodeClass)
         {
-          case Configuration.InstanceNodeClassesEnum.Object:
+          case Configuration.Networking.Serialization.InstanceNodeClassesEnum.Object:
             _ret = InstanceNodeClassesEnum.Object;
             break;
-          case Configuration.InstanceNodeClassesEnum.Variable:
+          case Configuration.Networking.Serialization.InstanceNodeClassesEnum.Variable:
             _ret = InstanceNodeClassesEnum.Variable;
             break;
-          case Configuration.InstanceNodeClassesEnum.Method:
+          case Configuration.Networking.Serialization.InstanceNodeClassesEnum.Method:
             _ret = InstanceNodeClassesEnum.Method;
             break;
-          case Configuration.InstanceNodeClassesEnum.View:
+          case Configuration.Networking.Serialization.InstanceNodeClassesEnum.View:
             _ret = InstanceNodeClassesEnum.View;
             break;
-          case Configuration.InstanceNodeClassesEnum.NotDefined:
+          case Configuration.Networking.Serialization.InstanceNodeClassesEnum.NotDefined:
             _ret = InstanceNodeClassesEnum.NotDefined;
             break;
         }
@@ -46,23 +45,23 @@ namespace UAOOI.DataBindings
       }
       set
       {
-        Configuration.InstanceNodeClassesEnum _ret = Configuration.InstanceNodeClassesEnum.NotDefined;
+        Configuration.Networking.Serialization.InstanceNodeClassesEnum _ret = Configuration.Networking.Serialization.InstanceNodeClassesEnum.NotDefined;
         switch (value)
         {
           case InstanceNodeClassesEnum.Object:
-            _ret = Configuration.InstanceNodeClassesEnum.Object;
+            _ret = Configuration.Networking.Serialization.InstanceNodeClassesEnum.Object;
             break;
           case InstanceNodeClassesEnum.Variable:
-            _ret = Configuration.InstanceNodeClassesEnum.Variable;
+            _ret = Configuration.Networking.Serialization.InstanceNodeClassesEnum.Variable;
             break;
           case InstanceNodeClassesEnum.Method:
-            _ret = Configuration.InstanceNodeClassesEnum.Method;
+            _ret = Configuration.Networking.Serialization.InstanceNodeClassesEnum.Method;
             break;
           case InstanceNodeClassesEnum.View:
-            _ret = Configuration.InstanceNodeClassesEnum.View;
+            _ret = Configuration.Networking.Serialization.InstanceNodeClassesEnum.View;
             break;
           case InstanceNodeClassesEnum.NotDefined:
-            _ret = Configuration.InstanceNodeClassesEnum.NotDefined;
+            _ret = Configuration.Networking.Serialization.InstanceNodeClassesEnum.NotDefined;
             break;
         }
         base.NodeClass = _ret;

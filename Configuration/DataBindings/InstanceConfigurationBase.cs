@@ -1,7 +1,7 @@
 ﻿using CAS.UA.IServerConfiguration;
 using System;
 
-namespace UAOOI.DataBindings
+namespace UAOOI.Configuration.DataBindings
 {
   /// <summary>
   /// Class InstanceConfigurationBase - provide basic configuration of the 

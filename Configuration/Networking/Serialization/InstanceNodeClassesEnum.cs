@@ -1,4 +1,4 @@
-﻿namespace UAOOI.SemanticData.UANetworking.Configuration.Serialization
+﻿namespace UAOOI.Configuration.Networking.Serialization
 {
   /// <summary>
   /// Enumeration of the node classes that can be a source of process data.

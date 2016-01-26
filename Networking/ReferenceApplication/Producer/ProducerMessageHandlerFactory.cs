@@ -2,14 +2,14 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
-using UAOOI.SemanticData.DataManagement;
-using UAOOI.SemanticData.DataManagement.MessageHandling;
+using UAOOI.Networking.SemanticData;
+using UAOOI.Networking.SemanticData.MessageHandling;
 using System.Linq;
 using System.Diagnostics;
-using UAOOI.SemanticData.DataManagement.Encoding;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Networking.SemanticData.Encoding;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication.Producer
+namespace UAOOI.Networking.ReferenceApplication.Producer
 {
   internal class ProducerMessageHandlerFactory : IMessageHandlerFactory
   {

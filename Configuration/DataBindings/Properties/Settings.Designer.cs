@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UAOOI.DataBindings.Properties {
+namespace UAOOI.Configuration.DataBindings.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
+namespace UAOOI.Networking.ReferenceApplication
 {
   /// <summary>
   /// Interaction logic for MainWindow.xaml

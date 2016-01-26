@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using UAOOI.SemanticData.UANetworking.Configuration;
+using UAOOI.Configuration.Networking;
 
 namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
 {
@@ -52,7 +52,7 @@ namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
       OnChanged();
     }
 
-    SemanticData.UANetworking.Configuration.Serialization.ConfigurationData IConfigurationDataFactory.GetConfigurationData()
+    Configuration.Networking.Serialization.ConfigurationData IConfigurationDataFactory.GetConfigurationData()
     {
       throw new NotImplementedException();
     }

@@ -1,9 +1,9 @@
 ﻿
 using System.Windows.Input;
-using UAOOI.SemanticData.DataManagement.DataRepository;
-using UAOOI.SemanticData.UANetworking.Configuration.Serialization;
+using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.SemanticData.UANetworking.ReferenceApplication
+namespace UAOOI.Networking.ReferenceApplication
 {
   internal interface IConsumerViewModel
   {

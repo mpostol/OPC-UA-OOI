@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel;
 
-namespace UAOOI.SemanticData.DataManagement.DataRepository
+namespace UAOOI.Networking.SemanticData.DataRepository
 {
   
   /// <summary>

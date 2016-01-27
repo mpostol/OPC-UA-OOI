@@ -13,7 +13,7 @@
         <RequireRestoreConsent Condition=" '$(RequireRestoreConsent)' != 'false' ">true</RequireRestoreConsent>
 
         <!-- Download NuGet.exe if it does not already exist -->
-        <DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">false</DownloadNuGetExe>
+        <DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">true</DownloadNuGetExe>
     </PropertyGroup>
 
     <ItemGroup Condition=" '$(PackageSources)' == '' ">
@@ -44,7 +44,7 @@
       <PackagesConfig Condition="Exists('$(MSBuildProjectDirectory)\packages.config')">$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
       <PackagesConfig Condition="Exists('$(PackagesProjectConfig)')">$(PackagesProjectConfig)</PackagesConfig>
     </PropertyGroup>
-    
+
     <PropertyGroup>
         <!-- NuGet command -->
         <NuGetExePath Condition=" '$(NuGetExePath)' == '' ">$(NuGetToolsPath)\NuGet.exe</NuGetExePath>
@@ -93,7 +93,7 @@
         <DownloadNuGet OutputFilename="$(NuGetExePath)" Condition=" '$(DownloadNuGetExe)' == 'true' AND !Exists('$(NuGetExePath)')" />
     </Target>
 
-    <Target Name="RestorePackages" DependsOnTargets="CheckPrerequisites">        
+    <Target Name="RestorePackages" DependsOnTargets="CheckPrerequisites">
         <Exec Command="$(RestoreCommand)"
               Condition="'$(OS)' != 'Windows_NT' And Exists('$(PackagesConfig)')" />
 

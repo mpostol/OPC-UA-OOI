@@ -94,6 +94,9 @@
     <Compile Include="UANodeContext.cs" />
     <Compile Include="UAReferenceContext.cs" />
     <Compile Include="Utilities\NamespaceTable.cs" />
+    <Compile Include="XML\OPCBinarySchema.cs">
+      <DependentUpon>OPCBinarySchema.xsd</DependentUpon>
+    </Compile>
     <Compile Include="XML\OPCFCTTInformationModelling.cs">
       <DependentUpon>OPCFCTTInformationModelling.xsd</DependentUpon>
     </Compile>
@@ -119,8 +122,10 @@
     <None Include="XML\BuildErrorsCollection.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="XML\GoCS.OPCBinarySchema.cmd" />
     <None Include="XML\OPCFCTTInformationModelling.Svcutil.cmd" />
     <None Include="XML\OPCFCTTInformationModelling.xltm" />
+    <None Include="XML\Readme.md" />
     <None Include="XML\UANodeSet.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -131,6 +136,9 @@
   <ItemGroup>
     <Content Include="Validator.Notes..txt" />
     <Content Include="XML\BuildErrorsCollection.xml" />
+    <None Include="XML\OPCBinarySchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="XML\OPCFCTTInformationModelling.xml" />
     <EmbeddedResource Include="XML\Opc.Ua.NodeSet2.xml" />
   </ItemGroup>

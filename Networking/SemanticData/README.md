@@ -1,4 +1,4 @@
-# OPC UA DataManagement Library
+# Networking of SemanticData Library
 
 ## Introduction
 
@@ -52,6 +52,10 @@ The library provides basic implementation of the above mentioned interfaces. In 
 
 Hope is that the abstraction will support any types of message based communication layer.
 The library provides basic implementation of the `Message` class that supports package level encoding/decoding functionality.
+
+### Messages Sequence
+
+![Sequence Diagram](Media/MessagesLoop.png)
 
 ## Testing
 

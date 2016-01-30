@@ -20,13 +20,13 @@ The library is designed to be a foundation for developing application programs t
 
 In figure below the relationship between this library and external libraries is presented. Any application engaging the **DataManagemnet** is composed using the dependency injection pattern.
 
-![Architecture](../Media/DataManagementExternalLibraries.png)
+![Architecture](../../Media/DataManagementExternalLibraries.png)
 
 **Configuration** represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [UA Data Networking Configuration](../UANetworkingConfiguration#ua-data-networking-configuration) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data.
 
 In figure below the relationship of the internal implementation with the overall domain model is presented.
 
-![Architecture](../Media/UADataIntegrationServices.UADataManagementClasses.png)
+![Architecture](../../Media/UADataIntegrationServices.UADataManagementClasses.png)
 
 ## Assumptions
 
@@ -59,6 +59,6 @@ The library provides basic implementation of the `Message` class that supports p
 
 ## Testing
 
-See how it works in the unit test class: [BindingUnitTest](../Tests/DataManagementUnitTest).
+See how it works in the unit test class: [BindingUnitTest](../Tests/SemanticDatalUnitTest).
 
 The [UANetworkingReferenceApplication](../UANetworkingReferenceApplication#ua-data-example-application) contains a reference WPF application.

@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Xml;
+using System.Xml.Schema;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.Serializers;
 
@@ -55,6 +57,29 @@ namespace UAOOI.Configuration.Networking.UnitTest
       LoadUsingSerializer(Role.Consumer, SerializerType.Json);
       LoadUsingSerializer(Role.Producer, SerializerType.Xml);
       LoadUsingSerializer(Role.Producer, SerializerType.Json);
+    }
+
+    [TestMethod]
+    [TestCategory("Configuration_SerializationUnitTest")]
+    public void ExportXSD()
+    {
+
+      //create schema
+      XsdDataContractExporter _exporter = new XsdDataContractExporter();
+      Type _ConfigurationDataType = typeof(ConfigurationData);
+      Assert.IsTrue(_exporter.CanExport(_ConfigurationDataType));
+
+      _exporter.Export(_ConfigurationDataType);
+      Console.WriteLine("number of schemas: {0}", _exporter.Schemas.Count);
+      Console.WriteLine();
+
+      //write out the schema
+      XmlSchemaSet _Schemas = _exporter.Schemas;
+      XmlQualifiedName XmlNameValue = _exporter.GetRootElementName(_ConfigurationDataType);
+      string EmployeeNameSpace = XmlNameValue.Namespace;
+      foreach (XmlSchema _schema in _Schemas.Schemas(EmployeeNameSpace))
+        _schema.Write(Console.Out);
+
     }
     #endregion
 
@@ -188,7 +213,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
           _configuration = ReferenceConfiguration.LoadConsumer();
           break;
         default:
-           break;
+          break;
       }
       ConfigurationDataFactoryIO.Save<ConfigurationData>(_configuration, serializer, _fileInfo, (x, y, z) => { Console.WriteLine(z); });
       _fileInfo.Refresh();

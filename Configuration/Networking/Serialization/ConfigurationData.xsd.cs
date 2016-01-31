@@ -1,6 +1,6 @@
 ﻿
-using System.Runtime.Serialization;
 using System;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 [assembly: ContractNamespaceAttribute("http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd", ClrNamespace = "UAOOI.Configuration.Networking.Serialization")]
@@ -9,7 +9,7 @@ namespace UAOOI.Configuration.Networking.Serialization
 {
 
   [DataContractAttribute(Name = "ConfigurationData", Namespace = CommonDefinitions.Namespace)]
-  [System.SerializableAttribute()]
+  [SerializableAttribute()]
   [XmlRoot(Namespace = CommonDefinitions.Namespace)]
   //[XmlType(Namespace = CommonDefinitions.Namespace)]
   public partial class ConfigurationData : object, IExtensibleDataObject
@@ -18,6 +18,7 @@ namespace UAOOI.Configuration.Networking.Serialization
     private ExtensionDataObject extensionDataField;
     private DataSetConfiguration[] DataSetsField;
     private MessageHandlerConfiguration[] MessageHandlersField;
+    private TypeDictionary[] TypeDictionariesField;
 
     public ExtensionDataObject ExtensionData
     {
@@ -30,7 +31,8 @@ namespace UAOOI.Configuration.Networking.Serialization
         this.extensionDataField = value;
       }
     }
-    [DataMemberAttribute(EmitDefaultValue = false)]
+
+    [DataMemberAttribute(EmitDefaultValue = true, IsRequired = true)]
     [XmlElementAttribute(IsNullable = false)]
     public DataSetConfiguration[] DataSets
     {
@@ -43,7 +45,8 @@ namespace UAOOI.Configuration.Networking.Serialization
         this.DataSetsField = value;
       }
     }
-    [DataMemberAttribute(EmitDefaultValue = true)]
+
+    [DataMemberAttribute(EmitDefaultValue = true, IsRequired = true)]
     [XmlArray(IsNullable = false)]
     [XmlArrayItem(Type = typeof(MessageWriterConfiguration), ElementName = "MessageWriterConfiguration")]
     [XmlArrayItem(Type = typeof(MessageReaderConfiguration), ElementName = "MessageReaderConfiguration")]
@@ -59,15 +62,23 @@ namespace UAOOI.Configuration.Networking.Serialization
       }
     }
 
+    [DataMemberAttribute(EmitDefaultValue = true, IsRequired = false)]
+    [XmlArray(IsNullable = true)]
+    public TypeDictionary[] TypeDictionaries
+    {
+      get { return TypeDictionariesField; }
+      set { TypeDictionariesField = value; }
+    }
+
   }
 
   [DataContractAttribute(Name = "DataSetConfiguration", Namespace = CommonDefinitions.Namespace)]
-  [System.SerializableAttribute()]
+  [SerializableAttribute()]
   public partial class DataSetConfiguration : object, IExtensibleDataObject
   {
 
     #region private
-    [System.NonSerializedAttribute()]
+    [NonSerializedAttribute()]
     private ExtensionDataObject extensionDataField;
     private AssociationRole AssociationRoleField;
     [OptionalFieldAttribute()]
@@ -118,7 +129,7 @@ namespace UAOOI.Configuration.Networking.Serialization
         this.AssociationRoleField = value;
       }
     }
-    [DataMemberAttribute(EmitDefaultValue = false, Order = 1)]
+    [DataMemberAttribute(EmitDefaultValue = false, Order = 1, IsRequired = true)]
     public string AssociationName
     {
       get
@@ -358,7 +369,7 @@ namespace UAOOI.Configuration.Networking.Serialization
   public partial class MessageHandlerConfiguration : object, IExtensibleDataObject
   {
 
-    [System.NonSerializedAttribute()]
+    [NonSerializedAttribute()]
     private ExtensionDataObject extensionDataField;
     private string NameField;
     private MessageChannelConfiguration ConfigurationField;
@@ -429,7 +440,7 @@ namespace UAOOI.Configuration.Networking.Serialization
   }
 
   [DataContractAttribute(Name = "DataMemberConfiguration", Namespace = CommonDefinitions.Namespace)]
-  [System.SerializableAttribute()]
+  [SerializableAttribute()]
   public partial class FieldMetaData : object, IExtensibleDataObject
   {
 

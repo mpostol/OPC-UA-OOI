@@ -89,6 +89,7 @@
     <Compile Include="Serialization\MessageWriterConfiguration.cs" />
     <Compile Include="Serialization\NodeDescriptor.cs" />
     <Compile Include="Serialization\BuiltInType.cs" />
+    <Compile Include="Serialization\TypeDictionary.cs" />
     <Compile Include="Serialization\UATypeInfo.cs" />
     <Compile Include="Serialization\ValueRanks.cs" />
     <Compile Include="ConfigurationDataFactoryIO.cs" />
@@ -111,6 +112,9 @@
     </None>
     <None Include="Serialization\GoCS.cmd" />
     <None Include="Serialization\GoXSD.cmd" />
+    <None Include="Serialization\schema.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AssemblyInfo.tt">

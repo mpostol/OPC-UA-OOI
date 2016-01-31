@@ -8,16 +8,16 @@
       <DataSymbolicName>DataSymbolicName</DataSymbolicName>
       <DataSet>
         <DataMemberConfiguration>
-          <ProcessValueName>Value1</ProcessValueName>
           <SymbolicName>Value1</SymbolicName>
+          <ProcessValueName>Value1</ProcessValueName>
           <TypeInformation>
             <BuiltInType>DateTime</BuiltInType>
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
-          <ProcessValueName>Value2</ProcessValueName>
           <SymbolicName>Value2</SymbolicName>
+          <ProcessValueName>Value2</ProcessValueName>
           <TypeInformation>
             <BuiltInType>Double</BuiltInType>
             <ValueRank>-1</ValueRank>
@@ -50,4 +50,14 @@
       </ProducerAssociationConfigurations>
     </MessageHandlerConfiguration>
   </MessageHandlers>
+  <TypeDictionaries>
+    <TypeDictionary>
+      <AnyAttr xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" i:nil="true" />
+      <DefaultByteOrder>BigEndian</DefaultByteOrder>
+      <DefaultByteOrderSpecified>false</DefaultByteOrderSpecified>
+      <Import i:nil="true" />
+      <Items i:nil="true" />
+      <TargetNamespace>http://commsvr.com/UAOOI/Configuration/Networking/UnitTest/TargetNamespace.xsd</TargetNamespace>
+    </TypeDictionary>
+  </TypeDictionaries>
 </ConfigurationData>

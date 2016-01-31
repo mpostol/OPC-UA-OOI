@@ -15,8 +15,9 @@ namespace UAOOI.Configuration.Networking.UnitTest
     /// <returns>ConfigurationData.</returns>
     internal static ConfigurationData LoadConsumer()
     {
-      return new ConfigurationData() { DataSets = GetDataSetConfigurations(AssociationRole.Consumer), MessageHandlers = GetMessageHandlers(AssociationRole.Consumer) };
+      return new ConfigurationData() { DataSets = GetDataSetConfigurations(AssociationRole.Consumer), MessageHandlers = GetMessageHandlers(AssociationRole.Consumer), TypeDictionaries = TypeDictionaries() };
     }
+
     /// <summary>
     /// Created the configuration from the local data.
     /// </summary>
@@ -24,7 +25,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
     /// <returns>ConfigurationData.</returns>
     internal static ConfigurationData LoadProducer()
     {
-      return new ConfigurationData() { DataSets = GetDataSetConfigurations(AssociationRole.Producer), MessageHandlers = GetMessageHandlers(AssociationRole.Producer) };
+      return new ConfigurationData() { DataSets = GetDataSetConfigurations(AssociationRole.Producer), MessageHandlers = GetMessageHandlers(AssociationRole.Producer), TypeDictionaries  = TypeDictionaries()};
     }
     #endregion
 
@@ -57,6 +58,11 @@ namespace UAOOI.Configuration.Networking.UnitTest
     {
       return new ProducerAssociationConfiguration[] { new ProducerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = DefaultDataSetWriterId, FieldEncoding = FieldEncodingEnum.VariantFieldEncoding } };
     }
+    private static TypeDictionary[] TypeDictionaries()
+    {
+      return new TypeDictionary[] { new TypeDictionary() { DefaultByteOrderSpecified = false, TargetNamespace = "http://commsvr.com/UAOOI/Configuration/Networking/UnitTest/TargetNamespace.xsd",  } };
+    }
+
     private static DataSetConfiguration[] GetDataSetConfigurations(AssociationRole associationRole)
     {
       return new DataSetConfiguration[]

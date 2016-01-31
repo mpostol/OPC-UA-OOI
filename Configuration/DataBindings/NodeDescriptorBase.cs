@@ -81,6 +81,7 @@ namespace UAOOI.Configuration.DataBindings
       };
       return _ret;
     }
+
     #region operators
     /// <summary>
     /// Implements the == operator.

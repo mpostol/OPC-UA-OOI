@@ -1,8 +1,8 @@
 ﻿
 using CAS.UA.IServerConfiguration;
+using System;
 using System.IO;
 using UAOOI.Configuration.Networking;
-using System;
 
 namespace UAOOI.Configuration.DataBindings
 {
@@ -59,5 +59,6 @@ namespace UAOOI.Configuration.DataBindings
     /// <param name="configurationFile">The configuration file.</param>
     /// <remarks><paramref name="solutionFilePath" /> is to be used to create relative file path to configuration files used by the plug-in.</remarks>
     public abstract void SaveConfiguration(string solutionFilePath, FileInfo configurationFile);
+
   }
 }

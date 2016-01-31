@@ -10,6 +10,7 @@ namespace UAOOI.Configuration.Networking.Upgrade.UnitTest
   public class Re_l1_00_16UnitTest
   {
     [TestMethod]
+    [DeploymentItem(@"TestingData\", @"TestingData\")]
     public void AfterCreationStateTest()
     {
       ConfigurationData _newInstance = new ConfigurationData();

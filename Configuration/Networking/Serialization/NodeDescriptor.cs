@@ -1,8 +1,8 @@
 ﻿
 using System;
+using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Xml;
-using System.ComponentModel;
 
 namespace UAOOI.Configuration.Networking.Serialization
 {

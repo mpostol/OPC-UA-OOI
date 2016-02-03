@@ -118,6 +118,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
     </None>
+    <None Include="README.MD" />
     <None Include="XML\BuildErrorsCollection.xltx" />
     <None Include="XML\BuildErrorsCollection.xsd">
       <SubType>Designer</SubType>

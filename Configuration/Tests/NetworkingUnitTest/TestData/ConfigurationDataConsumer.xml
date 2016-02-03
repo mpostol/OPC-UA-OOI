@@ -52,11 +52,31 @@
   </MessageHandlers>
   <TypeDictionaries>
     <TypeDictionary>
-      <AnyAttr xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" i:nil="true" />
-      <DefaultByteOrder>BigEndian</DefaultByteOrder>
-      <DefaultByteOrderSpecified>false</DefaultByteOrderSpecified>
-      <Import i:nil="true" />
-      <Items i:nil="true" />
+      <Items>
+        <TypeDescription i:type="StructuredType">
+          <Name>StructuredTypeName</Name>
+          <Field>
+            <FieldType>
+              <Name>FieldName1</Name>
+              <SwitchField i:nil="true" />
+              <SwitchOperand>Equals</SwitchOperand>
+              <SwitchOperandSpecified>false</SwitchOperandSpecified>
+              <SwitchValue>0</SwitchValue>
+              <SwitchValueSpecified>false</SwitchValueSpecified>
+              <q:TypeName xmlns:d8p1="http://opcfoundation.org/UA/" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d8p1:Int32</q:TypeName>
+            </FieldType>
+            <FieldType>
+              <Name>FieldName2</Name>
+              <SwitchField i:nil="true" />
+              <SwitchOperand>Equals</SwitchOperand>
+              <SwitchOperandSpecified>false</SwitchOperandSpecified>
+              <SwitchValue>0</SwitchValue>
+              <SwitchValueSpecified>false</SwitchValueSpecified>
+              <q:TypeName xmlns:d8p1="http://opcfoundation.org/UA/" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d8p1:Int32</q:TypeName>
+            </FieldType>
+          </Field>
+        </TypeDescription>
+      </Items>
       <TargetNamespace>http://commsvr.com/UAOOI/Configuration/Networking/UnitTest/TargetNamespace.xsd</TargetNamespace>
     </TypeDictionary>
   </TypeDictionaries>

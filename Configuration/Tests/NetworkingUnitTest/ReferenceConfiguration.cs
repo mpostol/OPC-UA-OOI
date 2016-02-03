@@ -77,8 +77,40 @@ namespace UAOOI.Configuration.Networking.UnitTest
         StructureKind = StructureKindEnum.Structure,
         Field = GetFields()
       };
-      return new TypeDescription[] { _ret };
+      TypeDescription _retEnum = new EnumeratedType()
+      {
+        Name = "EnumeratedTypeName",
+        EnumeratedValues = GetEnumeratedValue()
+      };
+      return new TypeDescription[] { _ret, _retEnum };
     }
+    private static EnumeratedValue[] GetEnumeratedValue()
+    {
+      List<EnumeratedValue> _ret = new List<EnumeratedValue>();
+      _ret.Add(new EnumeratedValue()
+      {
+        Documentation =
+          new LocalizedText[] { new LocalizedText() { Locale = "en-us", Value = "Documentation" }, new LocalizedText() { Locale = "pl-pl", Value = "Dokumentacja" } },
+        Name = "Field1",
+        Value = 0,
+      });
+      _ret.Add(new EnumeratedValue()
+      {
+        Documentation =
+          new LocalizedText[] { new LocalizedText() { Locale = "en-us", Value = "Documentation" }, new LocalizedText() { Locale = "pl-pl", Value = "Dokumentacja" } },
+        Name = "Field2",
+        Value = 1,
+      });
+      _ret.Add(new EnumeratedValue()
+      {
+        Documentation =
+          new LocalizedText[] { new LocalizedText() { Locale = "en-us", Value = "Documentation" }, new LocalizedText() { Locale = "pl-pl", Value = "Dokumentacja" } },
+        Name = "Field3",
+        Value = 2,
+      });
+      return _ret.ToArray<EnumeratedValue>();
+    }
+
     private static FieldType[] GetFields()
     {
       List<FieldType> _fields = new List<FieldType>();
@@ -137,7 +169,18 @@ namespace UAOOI.Configuration.Networking.UnitTest
       if (source is StructuredType)
         Compare((StructuredType)source, (StructuredType)mirror);
       else
-        Assert.Fail();
+        Compare((EnumeratedType)source, (EnumeratedType)mirror);
+    }
+    private static void Compare(EnumeratedType source, EnumeratedType mirror)
+    {
+      Assert.AreEqual<string>(source.Name, mirror.Name);
+      CompareArrays<EnumeratedValue>(source.EnumeratedValues, mirror.EnumeratedValues, x => x.Name, CompareEnumeratedValue);
+    }
+    private static void CompareEnumeratedValue(EnumeratedValue source, EnumeratedValue mirror)
+    {
+      Assert.AreEqual<string>(source.Name, mirror.Name);
+      Assert.AreEqual<int>(source.Value, mirror.Value);
+      CompareArrays<LocalizedText>(source.Documentation, mirror.Documentation, x => x.Locale, (x, y) => Assert.AreEqual<string>(x.Value, y.Value));
     }
     private static void Compare(StructuredType source, StructuredType mirror)
     {
@@ -264,6 +307,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
     private static readonly Guid DefaultAssociationConfigurationId = new Guid("C1F53FFB-6552-4CCC-84C9-F847147CDC85");
     private const UInt16 DefaultDataSetWriterId = 12345;
     private static Guid m_ConfigurationGuid = new Guid("D3DEA20A-1F65-4744-ABF5-3D8120960D7B");
+    private static object _ret;
     #endregion
 
   }

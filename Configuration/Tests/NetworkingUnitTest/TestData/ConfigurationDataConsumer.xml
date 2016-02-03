@@ -77,6 +77,53 @@
           </Field>
           <StructureKind>Structure</StructureKind>
         </TypeDescription>
+        <TypeDescription i:type="EnumeratedType">
+          <Name>EnumeratedTypeName</Name>
+          <EnumeratedValues>
+            <EnumeratedValue>
+              <Documentation>
+                <LocalizedText>
+                  <Locale>en-us</Locale>
+                  <Value>Documentation</Value>
+                </LocalizedText>
+                <LocalizedText>
+                  <Locale>pl-pl</Locale>
+                  <Value>Dokumentacja</Value>
+                </LocalizedText>
+              </Documentation>
+              <Name>Field1</Name>
+              <Value>0</Value>
+            </EnumeratedValue>
+            <EnumeratedValue>
+              <Documentation>
+                <LocalizedText>
+                  <Locale>en-us</Locale>
+                  <Value>Documentation</Value>
+                </LocalizedText>
+                <LocalizedText>
+                  <Locale>pl-pl</Locale>
+                  <Value>Dokumentacja</Value>
+                </LocalizedText>
+              </Documentation>
+              <Name>Field2</Name>
+              <Value>1</Value>
+            </EnumeratedValue>
+            <EnumeratedValue>
+              <Documentation>
+                <LocalizedText>
+                  <Locale>en-us</Locale>
+                  <Value>Documentation</Value>
+                </LocalizedText>
+                <LocalizedText>
+                  <Locale>pl-pl</Locale>
+                  <Value>Dokumentacja</Value>
+                </LocalizedText>
+              </Documentation>
+              <Name>Field3</Name>
+              <Value>2</Value>
+            </EnumeratedValue>
+          </EnumeratedValues>
+        </TypeDescription>
       </Items>
       <TargetNamespace>http://commsvr.com/UAOOI/Configuration/Networking/UnitTest/TargetNamespace.xsd</TargetNamespace>
     </TypeDictionary>

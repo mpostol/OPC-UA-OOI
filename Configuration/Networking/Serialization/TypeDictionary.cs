@@ -50,6 +50,53 @@ namespace UAOOI.Configuration.Networking.Serialization
   //      this.textField = value;
   //    }
   //  }
+  /// <remarks/>
+  [SerializableAttribute()]
+  [XmlTypeAttribute(Namespace = CommonDefinitions.Namespace)]
+  [DataContractAttribute(Name = "LocalizedText", Namespace = CommonDefinitions.Namespace)]
+  public partial class LocalizedText
+  {
+
+    private string localeField;
+
+    private string valueField;
+
+    public LocalizedText()
+    {
+      this.localeField = "";
+    }
+
+    /// <remarks/>
+    [XmlAttributeAttribute()]
+    [DefaultValueAttribute("")]
+    [DataMember]
+    public string Locale
+    {
+      get
+      {
+        return this.localeField;
+      }
+      set
+      {
+        this.localeField = value;
+      }
+    }
+
+    /// <remarks/>
+    [XmlTextAttribute()]
+    [DataMember]
+    public string Value
+    {
+      get
+      {
+        return this.valueField;
+      }
+      set
+      {
+        this.valueField = value;
+      }
+    }
+  }
 
   ///// <remarks/>
   //[XmlAnyAttributeAttribute()]
@@ -352,84 +399,87 @@ namespace UAOOI.Configuration.Networking.Serialization
 
   }
 
-  ///// <remarks/>
-  //[SerializableAttribute()]
-  //[XmlTypeAttribute(Namespace = CommonDefinitions.Namespace)]
-  //[DataContractAttribute(Name = "EnumeratedValue", Namespace = CommonDefinitions.Namespace)]
-  //public partial class EnumeratedValue
-  //{
+  /// <remarks/>
+  [SerializableAttribute()]
+  [XmlTypeAttribute(Namespace = CommonDefinitions.Namespace)]
+  [DataContractAttribute(Name = "EnumeratedValue", Namespace = CommonDefinitions.Namespace)]
+  public partial class EnumeratedValue
+  {
 
-  //  //private Documentation documentationField;
+    private LocalizedText[] documentationField;
+    private string nameField;
+    private int valueField;
+    //private bool valueFieldSpecified;
 
-  //  private string nameField;
+    /// <remarks/>
+    [DataMember]
+    public LocalizedText[] Documentation
+    {
+      get
+      {
+        return this.documentationField;
+      }
+      set
+      {
+        this.documentationField = value;
+      }
+    }
+    /// <remarks/>
+    [XmlAttributeAttribute()]
+    [DataMember]
+    public string Name
+    {
+      get
+      {
+        return this.nameField;
+      }
+      set
+      {
+        this.nameField = value;
+      }
+    }
 
-  //  private int valueField;
+    /// <summary>
+    /// Gets or sets the value associated with the field.
+    /// </summary>
+    /// <value>The value associated with the field.</value>
+    [XmlAttributeAttribute()]
+    [DataMember]
+    public int Value
+    {
+      get
+      {
+        return this.valueField;
+      }
+      set
+      {
+        this.valueField = value;
+      }
+    }
 
-  //  private bool valueFieldSpecified;
-
-  ///// <remarks/>
-  //public Documentation Documentation
-  //{
-  //  get
-  //  {
-  //    return this.documentationField;
-  //  }
-  //  set
-  //  {
-  //    this.documentationField = value;
-  //  }
-  //}
-
-  //  /// <remarks/>
-  //  [XmlAttributeAttribute()]
-  //  public string Name
-  //  {
-  //    get
-  //    {
-  //      return this.nameField;
-  //    }
-  //    set
-  //    {
-  //      this.nameField = value;
-  //    }
-  //  }
-
-  //  /// <remarks/>
-  //  [XmlAttributeAttribute()]
-  //  public int Value
-  //  {
-  //    get
-  //    {
-  //      return this.valueField;
-  //    }
-  //    set
-  //    {
-  //      this.valueField = value;
-  //    }
-  //  }
-
-  //  /// <remarks/>
-  //  [XmlIgnoreAttribute()]
-  //  public bool ValueSpecified
-  //  {
-  //    get
-  //    {
-  //      return this.valueFieldSpecified;
-  //    }
-  //    set
-  //    {
-  //      this.valueFieldSpecified = value;
-  //    }
-  //  }
-  //}
+    ///// <remarks/>
+    //[XmlIgnoreAttribute()]
+    //[DataMember]
+    //public bool ValueSpecified
+    //{
+    //  get
+    //  {
+    //    return this.valueFieldSpecified;
+    //  }
+    //  set
+    //  {
+    //    this.valueFieldSpecified = value;
+    //  }
+    //}
+  }
 
   /// <remarks/>
   [XmlIncludeAttribute(typeof(StructuredType))]
   //[XmlIncludeAttribute(typeof(OpaqueType))]
-  //[XmlIncludeAttribute(typeof(EnumeratedType))]
+  [XmlIncludeAttribute(typeof(EnumeratedType))]
   [KnownType(typeof(StructuredType))]
   //[KnownType(typeof(OpaqueType))]
-  //[KnownType(typeof(EnumeratedType))]
+  [KnownType(typeof(EnumeratedType))]
   [SerializableAttribute()]
   [XmlTypeAttribute(Namespace = CommonDefinitions.Namespace)]
   [DataContractAttribute(Name = "TypeDescription", Namespace = CommonDefinitions.Namespace)]
@@ -662,31 +712,31 @@ namespace UAOOI.Configuration.Networking.Serialization
   //  }
   //}
 
-  ///// <remarks/>
-  //[SerializableAttribute()]
-  //[XmlTypeAttribute(Namespace = CommonDefinitions.Namespace)]
-  //[DataContractAttribute(Name = "EnumeratedType", Namespace = CommonDefinitions.Namespace)]
-  //public partial class EnumeratedType : OpaqueType
-  //{
+  /// <remarks/>
+  [SerializableAttribute()]
+  [XmlTypeAttribute(Namespace = CommonDefinitions.Namespace)]
+  [DataContractAttribute(Name = "EnumeratedType", Namespace = CommonDefinitions.Namespace)]
+  public partial class EnumeratedType : TypeDescription
+  {
 
-  //  private EnumeratedValue[] enumeratedValueField;
+    private EnumeratedValue[] enumeratedValueField;
 
-  //  /// <remarks/>
-  //  [XmlElementAttribute("EnumeratedValue")]
-  //  [DataMember]
-  //  public EnumeratedValue[] EnumeratedValue
-  //  {
-  //    get
-  //    {
-  //      return this.enumeratedValueField;
-  //    }
-  //    set
-  //    {
-  //      this.enumeratedValueField = value;
-  //    }
-  //  }
+    /// <remarks/>
+    [XmlElementAttribute("EnumeratedValues")]
+    [DataMember]
+    public EnumeratedValue[] EnumeratedValues
+    {
+      get
+      {
+        return this.enumeratedValueField;
+      }
+      set
+      {
+        this.enumeratedValueField = value;
+      }
+    }
 
-  //}
+  }
 
   ///// <remarks/>
   //[SerializableAttribute()]

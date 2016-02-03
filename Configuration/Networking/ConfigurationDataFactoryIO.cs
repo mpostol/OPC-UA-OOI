@@ -14,7 +14,7 @@ namespace UAOOI.Configuration.Networking
     /// <typeparam name="ConfigurationDataType">The type of the configuration data type.</typeparam>
     /// <param name="loader">The delegate <see cref="Func{ConfigurationDataType}" /> capturing the loader of functionality
     /// of the class derived from <see cref="ConfigurationData" />.</param>
-    /// <param name="onChanged">A delegate <see cref="Action"/> encapsulating operation called when this instance is changed.</param>
+    /// <param name="onChanged">A delegate <see cref="Action" /> encapsulating operation called when this instance is changed.</param>
     /// <returns>An instance of <typeparam name="ConfigurationDataType" /> derived from <see cref="ConfigurationData" />.</returns>
     public static ConfigurationDataType Load<ConfigurationDataType>(Func<ConfigurationDataType> loader, Action onChanged)
       where ConfigurationDataType : class, IConfigurationDataFactory, new()

@@ -75,6 +75,7 @@
               <q:TypeName xmlns:d8p1="http://opcfoundation.org/UA/" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d8p1:Int32</q:TypeName>
             </FieldType>
           </Field>
+          <StructureKind>Structure</StructureKind>
         </TypeDescription>
       </Items>
       <TargetNamespace>http://commsvr.com/UAOOI/Configuration/Networking/UnitTest/TargetNamespace.xsd</TargetNamespace>

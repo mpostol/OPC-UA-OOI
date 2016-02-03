@@ -74,6 +74,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
       TypeDescription _ret = new StructuredType()
       {
         Name = "StructuredTypeName",
+        StructureKind = StructureKindEnum.Structure,
         Field = GetFields()
       };
       return new TypeDescription[] { _ret };
@@ -140,6 +141,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
     }
     private static void Compare(StructuredType source, StructuredType mirror)
     {
+      Assert.AreEqual<StructureKindEnum>(source.StructureKind, mirror.StructureKind);
       CompareArrays<FieldType>(source.Field, mirror.Field, x => x.Name, CompareFieldType);
     }
     private static void CompareFieldType(FieldType source, FieldType mirror)

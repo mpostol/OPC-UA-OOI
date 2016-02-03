@@ -51,20 +51,20 @@ namespace UAOOI.Configuration.Networking.Serialization
   //    }
   //  }
 
-    ///// <remarks/>
-    //[XmlAnyAttributeAttribute()]
-    //[DataMember]
-    //public XmlAttribute[] AnyAttr
-    //{
-    //  get
-    //  {
-    //    return this.anyAttrField;
-    //  }
-    //  set
-    //  {
-    //    this.anyAttrField = value;
-    //  }
-    //}
+  ///// <remarks/>
+  //[XmlAnyAttributeAttribute()]
+  //[DataMember]
+  //public XmlAttribute[] AnyAttr
+  //{
+  //  get
+  //  {
+  //    return this.anyAttrField;
+  //  }
+  //  set
+  //  {
+  //    this.anyAttrField = value;
+  //  }
+  //}
 
   //}
 
@@ -367,18 +367,18 @@ namespace UAOOI.Configuration.Networking.Serialization
 
   //  private bool valueFieldSpecified;
 
-    ///// <remarks/>
-    //public Documentation Documentation
-    //{
-    //  get
-    //  {
-    //    return this.documentationField;
-    //  }
-    //  set
-    //  {
-    //    this.documentationField = value;
-    //  }
-    //}
+  ///// <remarks/>
+  //public Documentation Documentation
+  //{
+  //  get
+  //  {
+  //    return this.documentationField;
+  //  }
+  //  set
+  //  {
+  //    this.documentationField = value;
+  //  }
+  //}
 
   //  /// <remarks/>
   //  [XmlAttributeAttribute()]
@@ -545,6 +545,7 @@ namespace UAOOI.Configuration.Networking.Serialization
   {
 
     private FieldType[] fieldField;
+    private StructureKindEnum StructureKindField;
 
     /// <remarks/>
     [XmlElementAttribute("Field")]
@@ -560,8 +561,41 @@ namespace UAOOI.Configuration.Networking.Serialization
         this.fieldField = value;
       }
     }
-  }
 
+    /// <exclude />
+    [XmlElementAttribute("StructureKind")]
+    [DataMember(EmitDefaultValue = true, IsRequired = true)]
+    public StructureKindEnum StructureKind
+    {
+      get { return StructureKindField; }
+      set { StructureKindField = value; }
+    }
+
+  }
+  /// <summary>
+  /// Enum StructureKindEnum - An enumeration that specifies the structure kind.
+  /// </summary>
+  [SerializableAttribute()]
+  [XmlTypeAttribute(Namespace = CommonDefinitions.Namespace)]
+  [DataContractAttribute(Name = "StructureKindEnum", Namespace = CommonDefinitions.Namespace)]
+  public enum StructureKindEnum
+  {
+    /// <summary>
+    /// A regular structure without optional fields.
+    /// </summary>
+    [EnumMemberAttribute()]
+    Structure,
+    /// <summary>
+    /// The structure with optional fields.
+    /// </summary>
+    [EnumMemberAttribute()]
+    StructureWithOptionalFields,
+    /// <summary>
+    /// The union - one of the fields defined is encoded into a value.
+    /// </summary>
+    [EnumMemberAttribute()]
+    Union
+  }
   /// <remarks/>
   //[XmlIncludeAttribute(typeof(EnumeratedType))]
   //[SerializableAttribute()]

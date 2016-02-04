@@ -1,8 +1,6 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using UAOOI.Configuration.Networking;
 
 namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
 {
@@ -15,10 +13,10 @@ namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
 
 
     #region IConfigurationDataFactory
-    public ConfigurationData GetConfigurationData()
-    {
-      return this;
-    }
+    /// <summary>
+    /// Gets or sets the the delegate capturing functionality tha is executed when the configuration is changing.
+    /// </summary>
+    /// <value>The m_ on changed.</value>
     public Action OnChanged
     {
       get; set;
@@ -34,29 +32,27 @@ namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
     {
       throw new NotImplementedException("The configuration is read only");
     }
-    #endregion
-
-    #region private
-    private bool m_PendingChages = false;
-    private bool m_MessageHandlersCollectionChanged = false;
-    private List<DataSetConfiguration> b_DataSetConfigurationList;
-    private ObservableCollection<MessageHandlerConfiguration> m_ObservableMessageHandlers;
-    private void PendingChanges()
-    {
-      m_PendingChages = true;
-      OnChanged();
-    }
-    private void M_MessageHandlers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-    {
-      m_MessageHandlersCollectionChanged = true;
-      OnChanged();
-    }
-
+    /// <summary>
+    /// Gets and instance of <see cref="T:UAOOI.Configuration.Networking.Serialization.ConfigurationData" />.
+    /// </summary>
+    /// <returns>Returns an instance of <see cref="T:UAOOI.Configuration.Networking.Serialization.ConfigurationData" />.</returns>
+    /// <exception cref="NotImplementedException"></exception>
     Configuration.Networking.Serialization.ConfigurationData IConfigurationDataFactory.GetConfigurationData()
     {
       throw new NotImplementedException();
     }
+    #endregion
 
+    #region private
+    private List<DataSetConfiguration> b_DataSetConfigurationList;
+    private void PendingChanges()
+    {
+      OnChanged();
+    }
+    private void M_MessageHandlers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+      OnChanged();
+    }
     private List<DataSetConfiguration> DataSetsList
     {
       get
@@ -69,5 +65,4 @@ namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
     #endregion
 
   }
-
 }

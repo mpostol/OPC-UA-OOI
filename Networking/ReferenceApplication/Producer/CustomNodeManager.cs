@@ -107,7 +107,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
             _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<Double>(_name, Inc, -10.12345678, fieldTypeInfo) : AddBinding<Double[]>(_name, x => Inc(y => (Double)y, x.Length), new Double[] { 0 }, fieldTypeInfo);
             break;
           case BuiltInType.String:
-            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<String>(_name, Inc, String.Empty, fieldTypeInfo) : AddBinding<String[]>(_name, x => Inc(y => $"#{y}", x.Length), new String[] {}, fieldTypeInfo);
+            _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<String>(_name, Inc, String.Empty, fieldTypeInfo) : AddBinding<String[]>(_name, x => Inc(y => $"#{y}", x.Length), new String[] { }, fieldTypeInfo);
             break;
           case BuiltInType.DateTime:
             _return = fieldTypeInfo.ValueRank < 0 ? AddBinding<DateTime>(_name, Inc, DateTime.Now, fieldTypeInfo) : AddBinding<DateTime[]>(_name, x => Inc(y => DateTime.Now, x.Length), new DateTime[] { }, fieldTypeInfo);
@@ -309,9 +309,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       {
         m_TimeEven?.Invoke(this, EventArgs.Empty);
       }
-      catch (Exception ex)
-      {
-      }
+      catch (Exception) { }
     }
     #endregion
 

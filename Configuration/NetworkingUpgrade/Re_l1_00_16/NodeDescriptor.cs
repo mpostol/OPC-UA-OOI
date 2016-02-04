@@ -2,7 +2,6 @@
 using System;
 using System.Runtime.Serialization;
 using System.Xml;
-using System.ComponentModel;
 
 namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
 {
@@ -11,15 +10,6 @@ namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
   [SerializableAttribute()]
   public partial class NodeDescriptor
   {
-
-    /// <summary>
-    /// Creates the wrapper of this instance.
-    /// </summary>
-    /// <returns>An instance of <see cref="NodeDescriptorBase"/>.</returns>
-    internal IComparable CreateWrapper()
-    {
-      return new NodeDescriptorWrapper(this);
-    }
 
     #region INodeDescriptor
     /// <summary>
@@ -81,69 +71,6 @@ namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
     #endregion
 
     #region private
-    /// <summary>
-    /// Class NodeDescriptorWrapper - read only wrapper of the node descriptor
-    /// </summary>
-    private class NodeDescriptorWrapper : NodeDescriptor, IComparable
-    {
-      public NodeDescriptorWrapper(NodeDescriptor repository)
-      {
-        m_repository = repository;
-      }
-      public string BindingDescription
-      {
-        get
-        {
-          return m_repository.BindingDescription;
-        }
-      }
-      public XmlQualifiedName DataType
-      {
-        get
-        {
-          return m_repository.DataType;
-        }
-      }
-      public bool InstanceDeclaration
-      {
-        get
-        {
-          return m_repository.InstanceDeclaration;
-        }
-      }
-      public InstanceNodeClassesEnum NodeClass
-      {
-        get
-        {
-          return m_repository.NodeClass;
-        }
-      }
-      [DisplayName("Name")]
-      [Description("The node unique identifier.")]
-      [Category("Node")]
-      [ReadOnly(true)]
-      public XmlQualifiedName NodeIdentifier
-      {
-        get
-        {
-          return m_repository.NodeIdentifier;
-        }
-      }
-      public override string ToString()
-      {
-        return $"{NodeClass}:{NodeIdentifier}";
-      }
-
-      #region IComparable
-      public int CompareTo(object obj)
-      {
-        throw new NotImplementedException();
-      }
-      #endregion
-
-      private NodeDescriptor m_repository;
-
-    }
     private string m_BindingDescriptionField;
     private XmlQualifiedName m_DataTypeField;
     private bool m_InstanceDeclarationField;

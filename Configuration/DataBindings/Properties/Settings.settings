@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="UAOOI.Configuration.DataBindings.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DefaultConfigurationFileNametExtension" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">uasconfig</Value>
+    </Setting>
+    <Setting Name="DefaultConfigurationFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">UANetworkingConfiguration</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

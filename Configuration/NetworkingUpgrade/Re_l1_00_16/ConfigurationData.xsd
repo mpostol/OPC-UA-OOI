@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd" elementFormDefault="qualified" targetNamespace="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="guid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ConfigurationData" nillable="true" type="tns:ConfigurationData" />
+  <xs:complexType name="ConfigurationData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DataSets" type="tns:DataSetConfiguration" />
+      <xs:element minOccurs="0" maxOccurs="1" name="MessageHandlers" type="tns:ArrayOfChoice1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExtensionDataObject" />
+  <xs:complexType name="DataSetConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+      <xs:element minOccurs="1" maxOccurs="1" name="AssociationRole" type="tns:AssociationRole" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AssociationName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RepositoryGroup" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="InformationModelURI" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DataSymbolicName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DataSet" type="tns:ArrayOfFieldMetaData" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Guid" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Root" type="tns:NodeDescriptor" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PublishingInterval" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="MaxBufferTime" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ConfigurationGuid" type="tns:guid" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ConfigurationVersion" type="tns:ConfigurationVersionDataType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AssociationRole">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Consumer" />
+      <xs:enumeration value="Producer" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfFieldMetaData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FieldMetaData" nillable="true" type="tns:FieldMetaData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FieldMetaData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SymbolicName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ProcessValueName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeInformation" type="tns:UATypeInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UATypeInfo">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="BuiltInType" type="tns:BuiltInType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ValueRank" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ArrayDimensions" type="tns:ArrayOfInt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="BuiltInType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Null" />
+      <xs:enumeration value="Boolean" />
+      <xs:enumeration value="SByte" />
+      <xs:enumeration value="Byte" />
+      <xs:enumeration value="Int16" />
+      <xs:enumeration value="UInt16" />
+      <xs:enumeration value="Int32" />
+      <xs:enumeration value="UInt32" />
+      <xs:enumeration value="Int64" />
+      <xs:enumeration value="UInt64" />
+      <xs:enumeration value="Float" />
+      <xs:enumeration value="Double" />
+      <xs:enumeration value="String" />
+      <xs:enumeration value="DateTime" />
+      <xs:enumeration value="Guid" />
+      <xs:enumeration value="ByteString" />
+      <xs:enumeration value="XmlElement" />
+      <xs:enumeration value="NodeId" />
+      <xs:enumeration value="ExpandedNodeId" />
+      <xs:enumeration value="StatusCode" />
+      <xs:enumeration value="QualifiedName" />
+      <xs:enumeration value="LocalizedText" />
+      <xs:enumeration value="ExtensionObject" />
+      <xs:enumeration value="DataValue" />
+      <xs:enumeration value="Variant" />
+      <xs:enumeration value="DiagnosticInfo" />
+      <xs:enumeration value="Enumeration" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfInt">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="int" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NodeDescriptor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="BindingDescription" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DataType" type="xs:QName" />
+      <xs:element minOccurs="1" maxOccurs="1" name="InstanceDeclaration" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="NodeClass" type="tns:InstanceNodeClassesEnum" />
+      <xs:element minOccurs="0" maxOccurs="1" name="NodeIdentifier" type="xs:QName" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="InstanceNodeClassesEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Object" />
+      <xs:enumeration value="Variable" />
+      <xs:enumeration value="Method" />
+      <xs:enumeration value="View" />
+      <xs:enumeration value="NotDefined" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ConfigurationVersionDataType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="MajorVersion" type="xs:unsignedByte" />
+      <xs:element minOccurs="1" maxOccurs="1" name="MinorVersion" type="xs:unsignedByte" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfChoice1">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="MessageWriterConfiguration" nillable="true" type="tns:MessageWriterConfiguration" />
+      <xs:element minOccurs="1" maxOccurs="1" name="MessageReaderConfiguration" nillable="true" type="tns:MessageReaderConfiguration" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="MessageWriterConfiguration">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MessageHandlerConfiguration">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="ProducerAssociationConfigurations" type="tns:ArrayOfProducerAssociationConfiguration" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MessageHandlerConfiguration" abstract="true">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Configuration" type="tns:MessageChannelConfiguration" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TransportRole" type="tns:AssociationRole" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MessageChannelConfiguration" />
+  <xs:complexType name="MessageReaderConfiguration">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MessageHandlerConfiguration">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="ConsumerAssociationConfigurations" type="tns:ArrayOfConsumerAssociationConfiguration" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfConsumerAssociationConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConsumerAssociationConfiguration" nillable="true" type="tns:ConsumerAssociationConfiguration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConsumerAssociationConfiguration">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AssociationConfiguration">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="PublisherId" type="tns:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AssociationConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="AssociationName" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DataSetWriterId" type="xs:unsignedShort" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProducerAssociationConfiguration">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AssociationConfiguration">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="FieldEncoding" type="tns:FieldEncodingEnum" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="FieldEncodingEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="VariantFieldEncoding" />
+      <xs:enumeration value="CompressedFieldEncoding" />
+      <xs:enumeration value="DataValueFieldEncoding" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfProducerAssociationConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProducerAssociationConfiguration" nillable="true" type="tns:ProducerAssociationConfiguration" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,138 @@
+﻿<Window x:Class="UAOOI.Networking.ReferenceApplication.MainWindow"
+        xmlns:Controls="clr-namespace:UAOOI.Networking.ReferenceApplication.Controls"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UAOOI.Networking.ReferenceApplication"
+        xmlns:code="clr-namespace:UAOOI.Networking.ReferenceApplication"
+        mc:Ignorable="d"
+        Title="{Binding Path=WindowTitle}" Height="800" Width="500"  MinHeight="700" MinWidth="500" Icon="PrepareProcess.ico" WindowStartupLocation="CenterOwner" WindowState="Maximized">
+  <Window.DataContext>
+    <code:MainWindowViewModel/>
+  </Window.DataContext>
+  <Window.Resources>
+    <Style x:Key="Title" TargetType="{x:Type Label}">
+      <Setter Property="FontSize" Value="21.333"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Margin" Value="20"/>
+    </Style>
+    <Style x:Key="TextBox" TargetType="{x:Type Control}">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Height" Value="28"/>
+    </Style>
+    <Style x:Key="ValidatedTextBox" TargetType="{x:Type Control}" >
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Style.Triggers>
+        <Trigger Property="Validation.HasError" Value="true">
+          <!--<Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>-->
+          <Setter Property="ToolTip" Value="The entered IP address is not valid."/>
+          <Setter Property="Background" Value="Pink"/>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+    <ControlTemplate x:Key="ValidationTemplate">
+      <DockPanel LastChildFill="True">
+        <TextBlock Foreground="Red" Background="Yellow" Margin="5,0" ToolTip="IP Address is invalid" HorizontalAlignment="Center"  > ! </TextBlock>
+        <AdornedElementPlaceholder />
+      </DockPanel>
+    </ControlTemplate>
+  </Window.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="20"></RowDefinition>
+      <RowDefinition Height="*"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
+    </Grid.RowDefinitions>
+    <DockPanel Grid.Row="0" LastChildFill="True">
+      <Menu x:Name="menu" Height="20" HorizontalAlignment="Left" Width="Auto" DockPanel.Dock="Right" ToolTip="Available actions">
+        <MenuItem Header="File" >
+          <MenuItem Header="Consumer Configuration" Command="{Binding Path=OpenConsumerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor."/>
+          <MenuItem Header="Producer Configuration" Command="{Binding Path=OpenProducerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor." />
+        </MenuItem>
+        <MenuItem Header="Actions" ToolTip="Available actions">
+          <MenuItem Header="Update Consumer Configuration" Command="{Binding Path=ConsumerUpdateConfiguration}" ToolTip="Updates the consumer configuration and restarts the data receiving process"/>
+          <MenuItem Header="Update Producer Configuration" Command="{Binding Path=ProducerRestart}" ToolTip="Updates the producer configuration and restarts the data pumping process" />
+          <MenuItem Header="Open Configuration folder" Command="{Binding Path=ConfigurationFolder}" ToolTip="Open folder containing configuration files" />
+        </MenuItem>
+        <MenuItem Header="Help" ToolTip="Get more about the software." >
+          <MenuItem Header="Home page" Command="{Binding Path=HelpDocumentation}" ToolTip="Opens the project website" />
+          <MenuItem Header="Release Notes" Command="{Binding Path=ReadMe}" ToolTip="Opens the release notes file." />
+          <MenuItem Header="Terms of Service" Command="{Binding Path=TermsOfService}" ToolTip="Opens the GitHub Terms of Service."/>
+          <MenuItem Header="License" Command="{Binding Path=ViewLicense}" ToolTip="Opens the application license."/>
+        </MenuItem>
+      </Menu>
+    </DockPanel>
+    <Grid Grid.Row="1"  Background="#FF06F711" VerticalAlignment="Stretch" >
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <Label Grid.Row="0" Style="{StaticResource Title}">Consumer</Label>
+      <Grid  Grid.Row="1">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0">
+          <Label Style="{StaticResource TextBox}" >Packages Received</Label>
+          <Label Style="{StaticResource TextBox}" >Bytes Received</Label>
+          <Label Style="{StaticResource TextBox}" >UDP port and multicast group</Label>
+          <Label Style="{StaticResource TextBox}" >Consumer status</Label>
+        </StackPanel>
+        <StackPanel Orientation="Vertical"  Grid.Column="1" Grid.Row="0">
+          <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=ConsumerFramesReceived, FallbackValue=?????, Mode=OneWay}" ToolTip="Packages received by the consumer from all sources"/>
+          <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=ConsumerReceivedBytes, FallbackValue=?????, Mode=OneWay }" ToolTip="Bytes received by the consumer from all sources"/>
+          <DockPanel LastChildFill="True"  >
+            <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=UDPPort, FallbackValue= ______  }" />
+            <CheckBox VerticalAlignment="Center" Name="x_MulticastIsChecked" IsChecked="{Binding Path=MulticastGroupSelection}" Content="join group:" ToolTip="Check to join the selected multicast group." Margin="0,0,20,0" />
+            <TextBox Style="{StaticResource ValidatedTextBox}" IsEnabled="{Binding ElementName=x_MulticastIsChecked, Path=IsChecked}" ToolTip="The multicast IP address of the group you want to join." 
+                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}" >
+              <TextBox.Text>
+                <Binding Path="MulticastGroup" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                  <Binding.ValidationRules>
+                    <Controls:IPAddressValidationRule />
+                  </Binding.ValidationRules>
+                  <Binding.FallbackValue>139.255.255.999</Binding.FallbackValue>
+                </Binding>
+              </TextBox.Text>
+            </TextBox>
+          </DockPanel>
+          <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path=ConsumerErrorMessage, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
+          <Button  Style="{StaticResource TextBox}" Command="{Binding Path=ConsumerUpdateConfiguration}" >Update Configuration</Button>
+        </StackPanel>
+        <ListBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=ConsumerLog}" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"  />
+      </Grid>
+    </Grid>
+    <StackPanel Orientation="Vertical" Grid.Row="2" Background="#FF0AC3F9" >
+      <Label Style="{StaticResource Title}" >Producer:</Label>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel  Margin="10" Orientation="Vertical" Grid.Column="0">
+          <Label Style="{StaticResource TextBox}" >Packages Sent</Label>
+          <Label Style="{StaticResource TextBox}">Bytes Sent</Label>
+          <Label Style="{StaticResource TextBox}">Remote Host Name</Label>
+          <Label Style="{StaticResource TextBox}">Remote Port Number</Label>
+          <Label Style="{StaticResource TextBox}">Producer status</Label>
+        </StackPanel>
+        <StackPanel Margin="10" Orientation="Vertical" Grid.Column="1">
+          <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=PackagesSent,  FallbackValue=?????, Mode=OneWay}" ToolTip="Packages sent by the producer"/>
+          <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path=BytesSent,  FallbackValue=?????, Mode=OneWay }" ToolTip="Bytes sent by the producer"/>
+          <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path= RemoteHost,  FallbackValue=?????, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
+          <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path= RemotePort,  FallbackValue=?????, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
+          <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path=ProducerErrorMessage, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
+          <Button  Style="{StaticResource TextBox}" Command="{Binding Path=ProducerRestart}" >Update Configuration</Button>
+        </StackPanel>
+      </Grid>
+    </StackPanel>
+  </Grid>
+</Window>

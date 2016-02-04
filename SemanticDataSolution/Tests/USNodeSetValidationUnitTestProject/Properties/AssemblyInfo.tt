@@ -1,0 +1,33 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+//_______________________________________________________________
+//  Title   : Assembly info for: <#=m_AssemblyTitle#>
+//  System  : Microsoft VisualStudio 2015 / C#
+//
+//  <#=AssemblyCopyright#>
+//  <#=Phone#>
+//  <#=Email#>
+//  <#=Url#>
+//_______________________________________________________________
+
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+[assembly: AssemblyTitle("<#=m_AssemblyTitle#>")]
+[assembly: AssemblyDescription("OPC UA NodeSet Validation UnitTests")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("<#=AssemblyCompany#>")]
+[assembly: AssemblyProduct("<#=SemanticDataProduct#>")]
+[assembly: AssemblyCopyright("<#=AssemblyCopyright#>")]
+[assembly: AssemblyTrademark("<#=ProductTrademark#>")]
+[assembly: AssemblyCulture("")]
+[assembly: ComVisible(false)]
+[assembly: Guid("deea592b-285a-47db-afbc-b1e2efac8ab3")]
+[assembly: AssemblyVersion("<#= SemanticDataVersion #>.*")]
+[assembly: AssemblyFileVersion("<#= SemanticDataVersion #>")]
+
+<#@ include file = "..\..\..\..\CommonResources\T4Definitions\Model.t4" #>
+<#+
+string m_AssemblyTitle = "UANodeSetValidationUnitTestProject";
+#>

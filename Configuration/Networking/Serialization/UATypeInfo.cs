@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Runtime.Serialization;
+using System.Xml;
 
 namespace UAOOI.Configuration.Networking.Serialization
 {
@@ -96,12 +97,23 @@ namespace UAOOI.Configuration.Networking.Serialization
       get { return m_ArrayDimensionsField; }
       set { m_ArrayDimensionsField = value; }
     }
+    /// <summary>
+    /// Gets or sets the name of the type.
+    /// </summary>
+    /// <value>The instance of <see cref="XmlQualifiedName"/> representing globally unique name of the type.</value>
+    [DataMemberAttribute(EmitDefaultValue = true, IsRequired = false)]
+    public XmlQualifiedName TypeName
+    {
+      get { return TypeNameField; }
+      set { TypeNameField = value; }
+    }
     #endregion
 
     #region private
     private BuiltInType m_builtInType;
     private int m_valueRank;
     private int[] m_ArrayDimensionsField;
+    private System.Xml.XmlQualifiedName TypeNameField;
     #endregion
 
   }

@@ -152,7 +152,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
     internal static void Compare(ConfigurationData source, ConfigurationData mirror)
     {
       Assert.AreEqual<int>(source.DataSets.Length, mirror.DataSets.Length);
-      Compare(source.DataSets, mirror.DataSets);
+      CompareArrays<DataSetConfiguration>(source.DataSets, mirror.DataSets, x => x.AssociationName, CompareDataSetConfiguration);
       Assert.AreEqual<int>(source.MessageHandlers.Length, mirror.MessageHandlers.Length);
       Compare(source.MessageHandlers, mirror.MessageHandlers);
       CompareArrays<TypeDictionary>(source.TypeDictionaries, mirror.TypeDictionaries, x => x.TargetNamespace, CompareTypeDictionary);
@@ -269,20 +269,55 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.AreEqual<UInt32>(source.DataSetWriterId, mirror.DataSetWriterId);
       Assert.AreEqual<Guid>(source.PublisherId, mirror.PublisherId);
     }
-    private static void Compare(DataSetConfiguration[] dataSets1, DataSetConfiguration[] dataSets2)
+    private static void CompareDataSetConfiguration(DataSetConfiguration source, DataSetConfiguration mirror)
     {
-      Dictionary<string, DataSetConfiguration> _dataSets2Dictionary = dataSets2.ToDictionary<DataSetConfiguration, string>(x => x.AssociationName);
-      foreach (DataSetConfiguration item in dataSets1)
-        Compare(item, _dataSets2Dictionary[item.AssociationName]);
+      Assert.AreEqual<string>(source.AssociationName, mirror.AssociationName);
+      Assert.AreEqual<AssociationRole>(source.AssociationRole, mirror.AssociationRole);
+      Assert.AreEqual<Guid>(source.ConfigurationGuid, mirror.ConfigurationGuid);
+      Compare(source.ConfigurationVersion, mirror.ConfigurationVersion);
+      Assert.AreEqual<string>(source.DataSymbolicName, mirror.DataSymbolicName);
+      CompareArrays<FieldMetaData>(source.DataSet, mirror.DataSet, x => x.SymbolicName, CompareFieldMetaData);
+      Assert.AreEqual<string>(source.Guid, mirror.Guid);
+      Assert.AreEqual<Guid>(source.Id, mirror.Id);
+      Assert.AreEqual<string>(source.InformationModelURI, mirror.InformationModelURI);
+      Assert.AreEqual<double>(source.MaxBufferTime, mirror.MaxBufferTime);
+      Assert.AreEqual<double>(source.PublishingInterval, mirror.PublishingInterval);
+      Assert.AreEqual<string>(source.RepositoryGroup, mirror.RepositoryGroup);
+      Compare(source.Root, mirror.Root);
     }
-    private static void Compare(DataSetConfiguration item1, DataSetConfiguration item2)
+    private static void Compare(ConfigurationVersionDataType source, ConfigurationVersionDataType mirror)
     {
-      Assert.AreEqual<AssociationRole>(item1.AssociationRole, item2.AssociationRole);
-      Assert.AreEqual<string>(item1.DataSymbolicName, item2.DataSymbolicName);
-      Assert.AreEqual<string>(item1.Guid, item2.Guid);
-      Assert.AreEqual<string>(item1.InformationModelURI, item2.InformationModelURI);
-      Assert.AreEqual<string>(item1.RepositoryGroup, item2.RepositoryGroup);
-      Compare(item1.Root, item2.Root);
+      Assert.IsNotNull(source);
+      Assert.IsNotNull(mirror);
+      Assert.AreEqual<int>(source.MajorVersion, mirror.MajorVersion);
+      Assert.AreEqual<int>(source.MinorVersion, mirror.MinorVersion);
+    }
+    private static void CompareFieldMetaData(FieldMetaData source, FieldMetaData mirror)
+    {
+      Assert.AreEqual<string>(source.ProcessValueName, mirror.ProcessValueName);
+      Assert.AreEqual<string>(source.SymbolicName, mirror.SymbolicName);
+      Compare(source.TypeInformation, mirror.TypeInformation);
+    }
+    private static void Compare(UATypeInfo source, UATypeInfo mirror)
+    {
+      Assert.IsNotNull(source);
+      Assert.IsNotNull(mirror);
+      CollectionAssert.AreEqual(source.ArrayDimensions, mirror.ArrayDimensions);
+      Assert.AreEqual<BuiltInType>(source.BuiltInType, mirror.BuiltInType);
+      Compare(source.TypeName, mirror.TypeName);
+      Assert.AreEqual<int>(source.ValueRank, mirror.ValueRank);
+    }
+    private static void Compare(XmlQualifiedName source, XmlQualifiedName mirror)
+    {
+      if (source == null && mirror == null)
+        return;
+      Assert.IsNotNull(source);
+      Assert.IsNotNull(mirror);
+      if (source.IsEmpty && mirror.IsEmpty)
+        return;
+      Assert.AreEqual<bool>(source.IsEmpty, mirror.IsEmpty);
+      Assert.AreEqual<string>(source.Name, mirror.Name);
+      Assert.AreEqual<string>(source.Namespace, mirror.Namespace);
     }
     private static void Compare(NodeDescriptor item1, NodeDescriptor item2)
     {
@@ -297,8 +332,8 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.AreEqual<XmlQualifiedName>(item1.NodeIdentifier, item2.NodeIdentifier);
       Assert.AreEqual<string>(item1.ToString(), item2.ToString());
     }
-
     #endregion
+
     #region preconfigured settings
     private const string AssociationConfigurationAlias = "Association1";
     private const string m_RepositoryGroup = "repositoryGroup";

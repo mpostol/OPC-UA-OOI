@@ -56,7 +56,7 @@ namespace UAOOI.Configuration.Networking.Serialization
     /// The built-in type.
     /// </summary>
     /// <value>The type of any value represented by this instance.</value>
-    [DataMemberAttribute(EmitDefaultValue = false)]
+    [DataMemberAttribute(EmitDefaultValue = true, IsRequired = true)]
     public BuiltInType BuiltInType
     {
       get { return m_builtInType; }

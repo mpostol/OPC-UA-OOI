@@ -110,7 +110,6 @@ namespace UAOOI.Configuration.Networking.UnitTest
       });
       return _ret.ToArray<EnumeratedValue>();
     }
-
     private static FieldType[] GetFields()
     {
       List<FieldType> _fields = new List<FieldType>();
@@ -141,8 +140,8 @@ namespace UAOOI.Configuration.Networking.UnitTest
     {
       return new FieldMetaData[]
       {
-        new FieldMetaData() { ProcessValueName = "Value1", TypeInformation = new UATypeInfo( BuiltInType.DateTime), SymbolicName = "Value1" },
-        new FieldMetaData() { ProcessValueName = "Value2", TypeInformation =  new UATypeInfo( BuiltInType.Double), SymbolicName = "Value2" },
+        new FieldMetaData() { ProcessValueName = "Value1", TypeInformation = new UATypeInfo( BuiltInType.DateTime) { TypeName = new System.Xml.XmlQualifiedName("Value1Name", "Value1NS") } , SymbolicName = "Value1" },
+        new FieldMetaData() { ProcessValueName = "Value2", TypeInformation =  new UATypeInfo( BuiltInType.Double)  { TypeName = new System.Xml.XmlQualifiedName("Value2Name", "Value2NS") }, SymbolicName = "Value2" },
       };
     }
     #endregion

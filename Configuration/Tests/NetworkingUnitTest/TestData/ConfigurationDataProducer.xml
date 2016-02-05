@@ -12,6 +12,7 @@
           <ProcessValueName>Value1</ProcessValueName>
           <TypeInformation>
             <BuiltInType>DateTime</BuiltInType>
+            <q:TypeName xmlns:d7p1="Value1NS" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d7p1:Value1Name</q:TypeName>
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -20,6 +21,7 @@
           <ProcessValueName>Value2</ProcessValueName>
           <TypeInformation>
             <BuiltInType>Double</BuiltInType>
+            <q:TypeName xmlns:d7p1="Value2NS" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d7p1:Value2Name</q:TypeName>
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>

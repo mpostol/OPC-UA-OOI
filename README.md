@@ -19,7 +19,7 @@ This project is aimed to workout deliverables supporting Process Data handling o
 
 •	Data binding – to define how the process data relate to the real world
 
-•	Data Validation - see project [DataSerializationUnitTestProject](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/DataSerializationUnitTestProject)
+•	Data Validation - see project description [OPC UA NodeSet Validation](../SemanticDataSolution/UANodeSetValidation)
 
 •	Data Prototyping  - methods and tools to design custom data types
 

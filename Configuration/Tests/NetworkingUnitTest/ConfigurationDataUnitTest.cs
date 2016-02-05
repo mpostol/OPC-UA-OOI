@@ -63,7 +63,6 @@ namespace UAOOI.Configuration.Networking.UnitTest
     [TestCategory("Configuration_SerializationUnitTest")]
     public void ExportXSD()
     {
-
       //create schema
       XsdDataContractExporter _exporter = new XsdDataContractExporter();
       Type _ConfigurationDataType = typeof(ConfigurationData);
@@ -79,7 +78,6 @@ namespace UAOOI.Configuration.Networking.UnitTest
       string EmployeeNameSpace = XmlNameValue.Namespace;
       foreach (XmlSchema _schema in _Schemas.Schemas(EmployeeNameSpace))
         _schema.Write(Console.Out);
-
     }
     #endregion
 

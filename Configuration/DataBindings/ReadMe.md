@@ -4,7 +4,7 @@
 
 This project is aimed at implementing an editor of the **UA Data Application** configuration file. For more extensive examples, see the [OPC UA Data Processing Outside the Server](../../SemanticDataSolution#opc-ua-data-processing-outside-the-server).
 
-The schema of the configuration files is available at:  [ConfigurationData.xsd](../../SemanticDataSolution/UANetworkingConfiguration/Serialization/ConfigurationData.xsd) and detailed description of the configuration is captured in the document [UA Data Networking Configuration](../../SemanticDataSolution/UANetworkingConfiguration#ua-data-networking-configuration).
+The schema of the configuration files is available at:  [ConfigurationData.xsd](../../Configuration/Networking/Serialization/ConfigurationData.xsd) and detailed description of the configuration is captured in the document [UA Data Networking Configuration](../../Configuration/Networking/Serialization#ua-data-networking-configuration).
 
 ## Version History
 

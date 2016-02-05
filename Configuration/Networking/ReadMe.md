@@ -15,7 +15,7 @@ Let me know if it works for you and if not how to converge proposed solution and
 
 ### Run time
 
-By design it is a plug-in or using modern terminology application composition part of the library described in [OPC UA DataManagement Library](../../SemanticDataSolution/DataManagement#opc-ua-datamanagement-library)  and at run time it can be used as the primary source of configuration for any standalone OPC *UA Data Application* and OPC UA Server supporting PubSub role.
+By design it is a plug-in or using modern terminology application composition part of the library described in [OPC UA DataManagement Library](../../Networking/SemanticData#networking-of-semanticdata-library)  and at run time it can be used as the primary source of configuration for any standalone OPC *UA Data Application* and OPC UA Server supporting PubSub role.
 
 In this case the application configuration may:
 
@@ -43,7 +43,7 @@ It is good opportunity to review your requirements (if you have any) against the
 
 The detailed description of the configuration files content is captured in the documentation at: [ConfigurationData](http://www.commsvr.com/Download/DataManagement/?topic=html/24749307.htm).
 
-The XML schema of the configuration files is available at:  [ConfigurationData.xsd](./Serialization/ConfigurationData.xsd). Intentionally data producers and consumers use the same schema for configuration files. It makes it easier to harmonize these roles configuration and supports two roles in one application.
+The XML schema of the configuration files is available at: [ConfigurationData.xsd](./Serialization/ConfigurationData.xsd). Intentionally data producers and consumers use the same schema for configuration files. It makes it easier to harmonize these roles configuration and supports two roles in one application.
 
 ## Further work
 

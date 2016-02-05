@@ -22,7 +22,7 @@ Main aim of this namespace is to support engineering of data processing in conte
 
 #### UA Data Example Application
 
-The description of this application is available at: [UA Data Example Application](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANetworkingReferenceApplication#ua-data-example-application).
+The description of this application is available at: [UA Data Example Application](../../Networking/ReferenceApplication#ua-data-example-application).
 
 The installation package is available at: http://www.commsvr.com/COInstal/UANetworking/uand.html
 
@@ -33,7 +33,7 @@ This release contains modifications required to start interoperability testing a
 The most important projects for this library release are as follows:
 
 * [OPC UA DataManagement Library](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/DataManagement#opc-ua-datamanagement-library)
-* [UA Data Networking Configuration](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANetworkingConfiguration#ua-data-networking-configuration)
+* [UA Data Networking Configuration](https://github.com/mpostol/OPC-UA-OOI/tree/master/Configuration/Networkingn#ua-data-networking-configuration)
 * [OPC UA NodeSet Validation](https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/UANodeSetValidation/README.MD#opc-ua-nodeset-validation)
 
 The Nuget packages are available at:

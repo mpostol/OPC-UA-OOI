@@ -6,7 +6,7 @@ This project is aimed to provide a library for Part 14 PubSub Draft 1.04. using 
 
 For more in-depth information about creating UA Applications exchanging data over the network, see [Getting Started Tutorial](./READMEGettingStartedTutorial.md#getting-started-tutorial)
 
-The code is tested using the Unit Test located in the project: [DataManagementUnitTest](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/Tests/DataManagementUnitTest)
+The code is tested using the Unit Test located in the project: [Networking.SemanticData.UnitTest](../Networking/Tests/SemanticDatalUnitTest)
 
 The preliminary code help documentation is here: http://www.commsvr.com/Download/DataManagement/Index.html
 
@@ -16,17 +16,17 @@ The project is in development stage - major changes are expected.
 
 The library is designed to be a foundation for developing application programs that are parties of message centric communication pattern. The diagram presents relationship between the `DataMangement` library and other communication parties where the library is expanded to provide custom functionality.
 
-![Architecture] (https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/Media/DataManagementGeneralization.png)
+![Architecture] (../../CommonResources/Media/DataManagementGeneralization.png)
 
 In figure below the relationship between this library and external libraries is presented. Any application engaging the **DataManagemnet** is composed using the dependency injection pattern.
 
-![Architecture](../../SemanticDataSolution/Media/DataManagementExternalLibraries.png)
+![Architecture](../../CommonResources/Media/DataManagementExternalLibraries.png)
 
 **Configuration** represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [UA Data Networking Configuration](../UANetworkingConfiguration#ua-data-networking-configuration) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data.
 
 In figure below the relationship of the internal implementation with the overall domain model is presented.
 
-![Architecture](../../SemanticDataSolution/Media/UADataIntegrationServices.UADataManagementClasses.png)
+![Architecture](../../CommonResources/Media/UADataIntegrationServices.UADataManagementClasses.png)
 
 ## Assumptions
 
@@ -55,7 +55,7 @@ The library provides basic implementation of the `Message` class that supports p
 
 ### Messages Sequence
 
-![Sequence Diagram](Media/MessagesLoop.png)
+![Sequence Diagram](../../CommonResources/Media/MessagesLoop.png)
 
 ## Testing
 

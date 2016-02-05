@@ -11,7 +11,7 @@ Each role uses independent configuration file as follows:
 * Producer: `ConfigurationDataProducer.xml`
 * Consumer: `ConfigurationDataConsumer.xml`
 
-The schema of the configuration files is available at:  [ConfigurationData.xsd](../../SemanticDataSolution/UANetworkingConfiguration/Serialization/ConfigurationData.xsd) and detailed description of the configuration is captured in the document [UA Data Networking Configuration](../../SemanticDataSolution/UANetworkingConfiguration#ua-data-networking-configuration).
+The schema of the configuration files is available at:  [ConfigurationData.xsd](../../Configuration/Networkingn/Serialization/ConfigurationData.xsd) and detailed description of the configuration is captured in the document [UA Data Networking Configuration](../../Configuration/Networkingn#ua-data-networking-configuration).
 
 By the user interface (UI) remote host name and port numbers can be modified. The IP address is resolved using DNS. Use the update buttons to start communication to apply new settings. The user interface provides also some diagnostic information. All received values are logged and displayed as the list with the time prefix.
 

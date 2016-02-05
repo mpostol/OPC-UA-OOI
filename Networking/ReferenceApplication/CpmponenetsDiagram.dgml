@@ -337,7 +337,7 @@
     <Path Id="7f4ded4e-5933-4229-b9cc-51da49678904.OutputPath" Value="C:\VS\Projects\OPC-UA-OOI\SemanticDataSolution\DataManagement\bin\Debug\UAOOI.Networking.SemanticData.dll" />
     <Path Id="7f4ded4e-5933-4229-b9cc-51da49678904.OutputPathUri" Value="file:///C:/VS/Projects/OPC-UA-OOI/SemanticDataSolution/DataManagement/bin/Debug/UAOOI.Networking.SemanticData.dll" />
     <Path Id="e28e0880-03aa-4d1b-a820-41b04e766019.OutputPath" Value="C:\VS\Projects\OPC-UA-OOI\SemanticDataSolution\UANetworkingConfiguration\bin\Debug\UAOOI.SemanticDataUANetworkingConfiguration.dll" />
-    <Path Id="e28e0880-03aa-4d1b-a820-41b04e766019.OutputPathUri" Value="file:///C:/VS/Projects/OPC-UA-OOI/SemanticDataSolution/UANetworkingConfiguration/bin/Debug/UAOOI.SemanticDataUANetworkingConfiguration.dll" />
+    <Path Id="e28e0880-03aa-4d1b-a820-41b04e766019.OutputPathUri" Value="file:///C:/VS/Projects/OPC-UA-OOI/Configuration/Networkingn/bin/Debug/UAOOI.SemanticDataUANetworkingConfiguration.dll" />
     <Path Id="f0accb28-ae0d-4e19-94fa-7be3044f1eeb.OutputPath" Value="C:\VS\Projects\OPC-UA-OOI\SemanticDataSolution\UANetworkingReferenceApplication\bin\Debug\UAOOI.UANetworkingReferenceApplication.exe" />
     <Path Id="f0accb28-ae0d-4e19-94fa-7be3044f1eeb.OutputPathUri" Value="file:///C:/VS/Projects/OPC-UA-OOI/SemanticDataSolution/UANetworkingReferenceApplication/bin/Debug/UAOOI.UANetworkingReferenceApplication.exe" />
     <Path Id="f8db9567-c559-440c-bbcf-e02013f9ab94.OutputPath" Value="C:\VS\Projects\OPC-UA-OOI\DataBindingsSolution\DataBindings\bin\Debug\UAOOI.DataBindings.dll" />

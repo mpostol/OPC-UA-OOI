@@ -61,4 +61,4 @@ The library provides basic implementation of the `Message` class that supports p
 
 See how it works in the unit test class: [BindingUnitTest](../Tests/SemanticDatalUnitTest).
 
-The [UANetworkingReferenceApplication](../Networking/ReferenceApplication#ua-data-example-application) contains a reference WPF application.
+The [UA Data Example Application](../Networking/ReferenceApplication#ua-data-example-application) contains a reference WPF application.

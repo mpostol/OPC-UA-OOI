@@ -1,1 +1,1 @@
-This folder contains test projects for the solution.
+This folder contains unit tests used to validate the code and the validation engine.

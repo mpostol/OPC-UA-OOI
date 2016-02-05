@@ -34,7 +34,7 @@ In all the cases above the destination representation, i.e. message content, obj
 **UA Data Networking** is an example of transferring the UA Semantic Data over the network using message centric data transport standardized by the OPC UA Specification Part 14 Pub/sub Draft 1.04.08. The description of its architecture is captured in
 [UA SemanticData Message Centric Communication](./README.MessageCentricCommunication.md#ua-semanticdata-message-centric-communication).
 
-This concept has been implemented in the project [DataManagement](./DataManagement#introduction). This project provides an SDK library that can be used as a foundation of the communication infrastructure deployment. The [UANetworkingReferenceApplication](./UANetworkingReferenceApplication#ua-data-example-application) contains a reference WPF application.
+This concept has been implemented in the project [Networking of SemanticData Library](./Networking/SemanticData#networking-of-semanticdata-library). This project provides an SDK library that can be used as a foundation of the communication infrastructure deployment. The [UANetworkingReferenceApplication](./UANetworkingReferenceApplication#ua-data-example-application) contains a reference WPF application.
 
 The **UA Data Archival** can also be used to transfer data from the OPC UA environment to Data Based Management System for further processing by Enterprise Management BI systems.
 

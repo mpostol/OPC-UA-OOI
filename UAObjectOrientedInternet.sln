@@ -6,6 +6,12 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UANodeSetValidation", "SemanticDataSolution\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj", "{352378A0-8B2E-4679-BB44-FD0BCC8467D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".CommonResources", ".CommonResources", "{78EDB72A-77B1-4A64-8E76-17E780993017}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		SemanticDataSolution\README.MD = SemanticDataSolution\README.MD
+		SemanticDataSolution\README.MessageCentricCommunication.md = SemanticDataSolution\README.MessageCentricCommunication.md
+		SemanticDataSolution\Readme.SemanticDataDeplyment.MD = SemanticDataSolution\Readme.SemanticDataDeplyment.MD
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.InformationModelFactory", "SemanticDataSolution\InformationModelFactory\SemanticData.InformationModelFactory.csproj", "{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}"
 EndProject

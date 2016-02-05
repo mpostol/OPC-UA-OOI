@@ -15,7 +15,7 @@ Let me know if it works for you and if not how to converge proposed solution and
 
 ### Run time
 
-By design it is a plug-in or using modern terminology application composition part of the library described in [OPC UA DataManagement Library](../../Networking/SemanticData#networking-of-semanticdata-library)  and at run time it can be used as the primary source of configuration for any standalone OPC *UA Data Application* and OPC UA Server supporting PubSub role.
+By design it is a plug-in or using modern terminology application composition part of the library described in [Networking of SemanticData Library](../../Networking/SemanticData#networking-of-semanticdata-library)  and at run time it can be used as the primary source of configuration for any standalone OPC *UA Data Application* and OPC UA Server supporting PubSub role.
 
 In this case the application configuration may:
 

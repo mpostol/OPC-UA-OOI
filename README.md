@@ -9,7 +9,7 @@ Computer Science and Information Systems** captures description of this idea.
 
 ## Content
 
-The `SemanticDataSolution` folder contains projects related to support the [OPC UA Data Processing Outside of the Server](h./SemanticDataSolution#opc-ua-data-processing-outside-the-server). Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
+The `SemanticDataSolution` folder contains projects related to support the [OPC UA Data Processing Outside of the Server](./SemanticDataSolution#opc-ua-data-processing-outside-the-server). Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
 
 This project is aimed to workout deliverables supporting Process Data handling over Internet including but not limiting to:
 
@@ -33,7 +33,7 @@ In scope there are also deliverables supporting:
 
 •	Modeling and representation of the Metadata - see whitepaper: [OPC UA Information Model Deployment] (http://goo.gl/HqYjvy)
 
-•	Validation semantic and consistency of the Metadata - see project [USNodeSetValidationUnitTestProject ](./SemanticDataSolution/Tests/USNodeSetValidationUnitTestProject \)
+•	Validation semantic and consistency of the Metadata - see project [USNodeSetValidationUnitTestProject](./SemanticDataSolution/Tests/USNodeSetValidationUnitTestProject)
 
 The presented approach is a real proposal for new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability.
 

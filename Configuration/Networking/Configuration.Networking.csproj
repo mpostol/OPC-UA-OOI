@@ -112,7 +112,7 @@
     </None>
     <None Include="Serialization\GoCS.cmd" />
     <None Include="Serialization\GoXSD.cmd" />
-    <None Include="Serialization\schema.xsd">
+    <None Include="Serialization\ConfigurationData.XsdDataContractExporter.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

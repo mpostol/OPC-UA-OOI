@@ -14,7 +14,6 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// Initializes a new instance of the <see cref="BinaryPacketEncoder" /> class.
     /// </summary>
     /// <param name="uaEncoder">The ua encoder.</param>
-    /// <param name="encoding">The encoding.</param>
     /// <param name="lengthFieldType">Type of the length field in the the message header.</param>
     public BinaryPacketEncoder(IUAEncoder uaEncoder, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder, lengthFieldType) { }
     /// <summary>
@@ -27,6 +26,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// <summary>
     /// Called when new message is adding to the packet payload.
     /// </summary>
+    /// <param name="dataSetWriterIds">The data set writer ids.</param>
     protected override void OnMessageAdding(UInt16 dataSetWriterIds) { }
     /// <summary>
     /// Called when the current message has been added and is ready to be sent out.

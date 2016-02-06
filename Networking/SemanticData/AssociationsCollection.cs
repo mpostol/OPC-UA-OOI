@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Configuration.Networking.Serialization;
+using System.Windows.Data;
 
 namespace UAOOI.Networking.SemanticData
 {

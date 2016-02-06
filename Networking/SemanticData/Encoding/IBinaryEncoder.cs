@@ -12,8 +12,15 @@ namespace UAOOI.Networking.SemanticData.Encoding
     /// <summary>
     /// Writes the next byte from the current stream and advances the current position of the stream by one byte.
     /// </summary>
-    /// <returns>The next <see cref="System.Byte"/> Write from the current stream.</returns>
+    /// <param name="value">The value.</param>
+    /// <returns>The next <see cref="System.Byte" /> Write from the current stream.</returns>
     void Write(byte value);
+    /// <summary>
+    ///  Writes a four-byte signed integer to the current stream and advances the stream position by four bytes.
+    /// </summary>
+    /// <param name="value">he four-byte signed integer to write.</param>
+    /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
+    /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
     void Write(int value);
     void Write(bool value);
     void Write(sbyte value);

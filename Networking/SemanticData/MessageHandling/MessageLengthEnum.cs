@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace UAOOI.Networking.SemanticData.MessageHandling
 {
   /// <summary>
@@ -12,11 +14,11 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// </summary>
     OneByte = 0x0,
     /// <summary>
-    /// The field type is <see cref=UInt16"/>
+    /// The field type is <see cref="UInt16"/>
     /// </summary>
     TwoBytes = 0x1,
     /// <summary>
-    /// The field type is <see cref=UInt32"/>
+    /// The field type is <see cref="UInt32"/>
     /// </summary>
     FourBytes = 0x2,
     /// <summary>

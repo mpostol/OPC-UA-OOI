@@ -15,6 +15,7 @@ namespace UAOOI.Configuration.Networking.Serialization
   public partial class ConfigurationData : object, IExtensibleDataObject
   {
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2235:MarkAllNonSerializableFields")]
     private ExtensionDataObject extensionDataField;
     private DataSetConfiguration[] DataSetsField;
     private MessageHandlerConfiguration[] MessageHandlersField;
@@ -254,6 +255,8 @@ namespace UAOOI.Configuration.Networking.Serialization
     #endregion
 
   }
+  [Serializable]
+  [DataContractAttribute(Name = "ConfigurationVersionDataType", Namespace = CommonDefinitions.Namespace)]
   public class ConfigurationVersionDataType
   {
     private byte MajorVersionField;
@@ -266,6 +269,7 @@ namespace UAOOI.Configuration.Networking.Serialization
     /// An overflow of the MajorVersion is treated like any other major version change and requires a meta data exchange.
     /// </summary>
     /// <value>The major version.</value>
+    [DataMemberAttribute(EmitDefaultValue = true, IsRequired = true )]
     public byte MajorVersion
     {
       get { return MajorVersionField; }
@@ -276,6 +280,7 @@ namespace UAOOI.Configuration.Networking.Serialization
     /// The initial value for the MinorVersion is 0. The MajorVersion shall be incremented after an overflow of the MinorVersion.
     /// </summary>
     /// <value>The minor version.</value>
+    [DataMemberAttribute(EmitDefaultValue = true, IsRequired = true)]
     public byte MinorVersion
     {
       get { return MinorVersionField; }
@@ -425,6 +430,7 @@ namespace UAOOI.Configuration.Networking.Serialization
 
   }
   [DataContractAttribute(Name = "MessageChannelConfiguration", Namespace = CommonDefinitions.Namespace)]
+  [Serializable]
   public class MessageChannelConfiguration
   {
   }
@@ -445,6 +451,7 @@ namespace UAOOI.Configuration.Networking.Serialization
   {
 
     #region private
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2235:MarkAllNonSerializableFields")]
     private ExtensionDataObject extensionDataField;
     private string SymbolicNameField;
     private string ProcessValueNameField;

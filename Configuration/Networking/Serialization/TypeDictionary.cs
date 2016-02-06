@@ -128,13 +128,13 @@ namespace UAOOI.Configuration.Networking.Serialization
 
     private XmlQualifiedName typeNameField;
 
-    private uint lengthField;
+    //private uint lengthField;
 
-    private bool lengthFieldSpecified;
+    //private bool lengthFieldSpecified;
 
-    private string lengthFieldField;
+    //private string lengthFieldField;
 
-    private bool isLengthInBytesField;
+    //private bool isLengthInBytesField;
 
     private string switchFieldField;
 
@@ -146,13 +146,13 @@ namespace UAOOI.Configuration.Networking.Serialization
 
     private bool switchOperandFieldSpecified;
 
-    private byte[] terminatorField;
+    //private byte[] terminatorField;
 
     //private XmlAttribute[] anyAttrField;
 
     public FieldType()
     {
-      this.isLengthInBytesField = false;
+      //this.isLengthInBytesField = false;
     }
 
     ///// <remarks/>

@@ -84,12 +84,16 @@ namespace UAOOI.Configuration.Networking.Serialization
     /// <summary>
     /// Class NodeDescriptorWrapper - read only wrapper of the node descriptor
     /// </summary>
-    private class NodeDescriptorWrapper : NodeDescriptor, IComparable
+    private class NodeDescriptorWrapper : IComparable
     {
       public NodeDescriptorWrapper(NodeDescriptor repository)
       {
         m_repository = repository;
       }
+      /// <summary>
+      /// Gets or sets the binding description.
+      /// </summary>
+      /// <value>The binding description.</value>
       public string BindingDescription
       {
         get
@@ -97,6 +101,10 @@ namespace UAOOI.Configuration.Networking.Serialization
           return m_repository.BindingDescription;
         }
       }
+      /// <summary>
+      /// Gets or sets the type of the data.
+      /// </summary>
+      /// <value>The type of the data.</value>
       public XmlQualifiedName DataType
       {
         get
@@ -129,12 +137,22 @@ namespace UAOOI.Configuration.Networking.Serialization
           return m_repository.NodeIdentifier;
         }
       }
+      /// <summary>
+      /// Returns a <see cref="System.String" /> that represents this instance.
+      /// </summary>
+      /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
       public override string ToString()
       {
         return $"{NodeClass}:{NodeIdentifier}";
       }
 
       #region IComparable
+      /// <summary>
+      /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
+      /// </summary>
+      /// <param name="obj">An object to compare with this instance.</param>
+      /// <returns>A value that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance precedes <paramref name="obj" /> in the sort order. Zero This instance occurs in the same position in the sort order as <paramref name="obj" />. Greater than zero This instance follows <paramref name="obj" /> in the sort order.</returns>
+      /// <exception cref="NotImplementedException"></exception>
       public int CompareTo(object obj)
       {
         throw new NotImplementedException();

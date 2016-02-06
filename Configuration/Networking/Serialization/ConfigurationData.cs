@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Xml.Serialization;
 
 namespace UAOOI.Configuration.Networking.Serialization
 {
@@ -38,10 +39,19 @@ namespace UAOOI.Configuration.Networking.Serialization
     #endregion
 
     #region IConfigurationDataFactory
+    /// <summary>
+    /// Gets and instance of <see cref="ConfigurationData" />.
+    /// </summary>
+    /// <returns>Returns an instance of <see cref="ConfigurationData" />.</returns>
     public ConfigurationData GetConfigurationData()
     {
       return this;
     }
+    /// <summary>
+    /// Gets or sets the the delegate capturing functionality tha is executed when the configuration is changing.
+    /// </summary>
+    /// <value>The m_ on changed.</value>
+    [XmlIgnore]
     public Action OnChanged
     {
       get; set;

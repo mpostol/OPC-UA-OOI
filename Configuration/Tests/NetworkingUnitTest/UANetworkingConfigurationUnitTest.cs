@@ -164,7 +164,6 @@ namespace UAOOI.Configuration.Networking.UnitTest
 
       internal int OnSavingCount = 0;
       internal int OnLoadedCount = 0;
-      private CompositionContainer m_Container = null;
 
     }
     private class UANetworkingConfigurationConfigurationDataWrapper : UANetworkingConfiguration<ConfigurationDataWrapper>

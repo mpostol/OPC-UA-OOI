@@ -61,7 +61,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
 
     [TestMethod]
     [TestCategory("Configuration_SerializationUnitTest")]
-    public void ExportXSD()
+    public void ExportXSDUsingDataContractExporter()
     {
       //create schema
       XsdDataContractExporter _exporter = new XsdDataContractExporter();

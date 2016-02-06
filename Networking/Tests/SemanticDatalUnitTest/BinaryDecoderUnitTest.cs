@@ -39,7 +39,6 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
         Assert.AreEqual<int>(0, _reader.m_NumberOfSentBytes);
         Assert.AreEqual<int>(0, _reader.m_NumberOfSentMessages);
-        MessageEventArg e = null;
         object[] _buffer = new object[CommonDefinitions.TestValues.Length];
         IConsumerBinding[] _bindings = new IConsumerBinding[_buffer.Length];
         Action<object, int> _assign = (x, y) => _buffer[y] = x;

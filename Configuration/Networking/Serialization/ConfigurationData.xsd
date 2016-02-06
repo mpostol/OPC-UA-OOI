@@ -11,6 +11,7 @@
       <xs:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
       <xs:element minOccurs="0" maxOccurs="unbounded" name="DataSets" type="tns:DataSetConfiguration" />
       <xs:element minOccurs="0" maxOccurs="1" name="MessageHandlers" type="tns:ArrayOfChoice1" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TypeDictionaries" nillable="true" type="tns:ArrayOfTypeDictionary" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ExtensionDataObject" />
@@ -55,6 +56,7 @@
       <xs:element minOccurs="1" maxOccurs="1" name="BuiltInType" type="tns:BuiltInType" />
       <xs:element minOccurs="1" maxOccurs="1" name="ValueRank" type="xs:int" />
       <xs:element minOccurs="0" maxOccurs="1" name="ArrayDimensions" type="tns:ArrayOfInt" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeName" type="xs:QName" />
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="BuiltInType">
@@ -191,4 +193,81 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ProducerAssociationConfiguration" nillable="true" type="tns:ProducerAssociationConfiguration" />
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="ArrayOfTypeDictionary">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TypeDictionary" nillable="true">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="StructuredType" type="tns:StructuredType" />
+          </xs:sequence>
+          <xs:attribute name="TargetNamespace" type="xs:string" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StructuredType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TypeDescription">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Field" type="tns:FieldType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="StructureKind" type="tns:StructureKindEnum" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TypeDescription">
+    <xs:attribute name="Name" type="xs:NCName" />
+  </xs:complexType>
+  <xs:complexType name="EnumeratedType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TypeDescription">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="EnumeratedValues" type="tns:EnumeratedValue" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EnumeratedValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Documentation" type="tns:ArrayOfLocalizedText" />
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" />
+    <xs:attribute name="Value" type="xs:int" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ArrayOfLocalizedText">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LocalizedText" nillable="true" type="tns:LocalizedText" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LocalizedText">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute default="" name="Locale" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="FieldType">
+    <xs:attribute name="Name" type="xs:string" />
+    <xs:attribute name="TypeName" type="xs:QName" />
+    <xs:attribute name="SwitchField" type="xs:string" />
+    <xs:attribute name="SwitchValue" type="xs:unsignedInt" />
+    <xs:attribute name="SwitchOperand" type="tns:SwitchOperand" />
+  </xs:complexType>
+  <xs:simpleType name="SwitchOperand">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Equals" />
+      <xs:enumeration value="GreaterThan" />
+      <xs:enumeration value="LessThan" />
+      <xs:enumeration value="GreaterThanOrEqual" />
+      <xs:enumeration value="LessThanOrEqual" />
+      <xs:enumeration value="NotEqual" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="StructureKindEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Structure" />
+      <xs:enumeration value="StructureWithOptionalFields" />
+      <xs:enumeration value="Union" />
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>

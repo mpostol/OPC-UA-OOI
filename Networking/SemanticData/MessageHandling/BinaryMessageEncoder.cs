@@ -23,7 +23,6 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// Initializes a new instance of the <see cref="BinaryMessageEncoder" /> class.
     /// </summary>
     /// <param name="uaEncoder">The UA encoder.</param>
-    /// <param name="encoding">The encoding.</param>
     /// <param name="lengthFieldType">Type of the length field.</param>
     public BinaryMessageEncoder(IUAEncoder uaEncoder, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder)
     {

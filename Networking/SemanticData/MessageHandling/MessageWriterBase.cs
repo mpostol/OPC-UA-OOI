@@ -128,7 +128,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// <summary>
     /// Writes an unsigned byte to the current stream and advances the stream position by one byte.
     /// </summary>
-    /// <param name="value">TThe unsigned <see cref="byte"/> to write./param>
+    /// <param name="value">TThe unsigned <see cref="byte"/> to write.</param>
     public abstract void Write(byte value);
     public void Write(DateTime value)
     {

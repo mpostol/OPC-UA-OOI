@@ -98,7 +98,7 @@ namespace UAOOI.Networking.SemanticData.Encoding
     /// <param name="value">The value to be encoded as an instance of <see cref="Guid"/>.</param>
     void Write(IBinaryEncoder encoder, string value);
     /// <summary>
-    /// Encodes the <see cref="Array" /> directly if the array is one dimensional or as <see cref="UANetworking.Configuration.Serialization.BuiltInType.Variant" /> otherwise.
+    /// Encodes the <see cref="Array" /> directly if the array is one dimensional or as <see cref="Variant" /> otherwise.
     /// </summary>
     /// <typeparam name="type">The type of the array element type.</typeparam>
     /// <param name="encoder">The encoder <see cref="IBinaryEncoder" /> to write the value encapsulated in this instance.</param>

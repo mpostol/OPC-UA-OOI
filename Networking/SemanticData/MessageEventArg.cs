@@ -6,7 +6,7 @@ namespace UAOOI.Networking.SemanticData
 {
 
   /// <summary>
-  /// Class MessageEventArg - class representing an event that contains new <see cref="Message"/> to be processed by the consumer or a producer outcome to be 
+  /// Class MessageEventArg - class representing an event that contains new <see cref="IMessageReader"/> to be processed by the consumer or a producer outcome to be 
   /// sent over the network by the underlying message transport protocol..
   /// </summary>
   public class MessageEventArg : EventArgs

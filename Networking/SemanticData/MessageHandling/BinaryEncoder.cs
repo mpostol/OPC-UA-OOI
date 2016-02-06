@@ -100,10 +100,6 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     {
       m_binaryWriter.Write(value);
     }
-    /// <summary>
-    /// Writes an unsigned byte to the current stream and advances the stream position by one byte.
-    /// </summary>
-    /// <param name="value">TThe unsigned <see cref="byte"/> to write./param>
     public override void Write(byte value)
     {
       m_binaryWriter.Write(value);

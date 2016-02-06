@@ -43,14 +43,13 @@ namespace UAOOI.Networking.SemanticData.Encoding
       return value;
     }
     /// <summary>
-    /// Reads an array of the specified type <paramref name="uaTypeInfo" /> and wraps it in the <see cref="IMatrix" /> object.
+    /// Reads an array of the specified type <typeparamref name="type"/> and wraps it in the <see cref="Array" /> object.
     /// </summary>
-    /// <typeparam name="type">The type of the <see cref="IMatrix.Elements" /> element.</typeparam>
+    /// <typeparam name="type">The type of the <see cref="Array" /> element.</typeparam>
     /// <param name="decoder">The decoder to be used to recover the array from the binary stream.</param>
     /// <param name="readValue">This delegate encapsulates binary decoding functionality of the array element.</param>
     /// <param name="arrayDimensionsPresents">if set to <c>true</c> the rank of the array is greater than 1 and dimensions are present in the encoded stream.</param>
-    /// <returns>An instance of <see cref="IMatrix" /> capturing the an array recovered from the message.</returns>
-    /// <exception cref="System.ArgumentOutOfRangeException">Encountered unexpected array rank.</exception>
+    /// <returns>An instance of <see cref="Array" /> capturing the an array recovered from the message.</returns>
     public Array ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, bool arrayDimensionsPresents)
     {
       Array _ret = null;

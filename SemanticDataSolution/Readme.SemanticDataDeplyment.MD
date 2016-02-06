@@ -45,8 +45,4 @@ TBD
 ### USNodeSetValidationUnitTestProject
 TBD
 
-## Resources
 
-### Media
-
-This folder contains files referred to by the documentation.

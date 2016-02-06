@@ -11,7 +11,7 @@ The main challenge that must be faced up by engineering of data processing is th
 * **UA Client** -  custom OPC **UA Client** supporting integration services
 * **UA Data Application** - an application program processing the data in the context of the OPC UA metadata without the *OPC UA Server* session.
 
-![Domain Model] (./Media/UADataIntegrationServices.Domain.png)
+![Domain Model](../CommonResources/Media/UADataIntegrationServices.Domain.png)
 
 **Address Space Management** and **UA Client** are typical components for OPC UA technology. Description of the **UA Data Application** architecture is captured in the next section.
 
@@ -19,7 +19,7 @@ The main challenge that must be faced up by engineering of data processing is th
 
 **UA Data Application** is a framework that provides integration services. The diagram below shows an example how the  **UA Data Application** may be expanded to implement integration services in context of selected Industrial IT technologies.
 
-![UA Data Application] (./Media/UADataIntegrationServices.UADataApplication.png)
+![UA Data Application](../CommonResources/Media/UADataIntegrationServices.UADataApplication.png)
 
 Integration services are responsible for exchanging the data and metadata with other parties using varieties of applications including but not limiting to:
 

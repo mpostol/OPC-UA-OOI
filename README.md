@@ -33,7 +33,7 @@ In scope there are also deliverables supporting:
 
 •	Modeling and representation of the Metadata - see whitepaper: [OPC UA Information Model Deployment] (http://goo.gl/HqYjvy)
 
-•	Validation semantic and consistency of the Metadata - see project [USNodeSetValidationUnitTestProject](./SemanticDataSolution/Tests/USNodeSetValidationUnitTestProject)
+•	Validation of the semantics and consistency of the Metadata - see project [USNodeSetValidationUnitTestProject](./SemanticDataSolution/Tests/USNodeSetValidationUnitTestProject)
 
 The presented approach is a real proposal for new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability.
 

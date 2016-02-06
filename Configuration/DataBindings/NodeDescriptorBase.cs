@@ -196,13 +196,14 @@ namespace UAOOI.Configuration.DataBindings
     /// </summary>
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+    /// <exception cref="ArgumentException"></exception>
     public override bool Equals(object obj)
     {
       if (Object.Equals(obj, null))
         return false;
       NodeDescriptorBase _other = obj as NodeDescriptorBase;
       if (Object.Equals(_other, null))
-        throw new ArgumentException(nameof(obj));
+        return false;
       return CompareTo(_other) == 0;
     }
     #endregion

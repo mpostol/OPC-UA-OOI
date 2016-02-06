@@ -13,7 +13,7 @@ namespace UAOOI.Configuration.DataBindings
   /// Class UANetworkingConfigurationEditor - 
   /// </summary>
   [Export(typeof(IConfiguration))]
-  public class UANetworkingConfigurationEditor : ConfigurationBase<ConfigurationData>, IDisposable
+  public sealed class UANetworkingConfigurationEditor : ConfigurationBase<ConfigurationData>, IDisposable
   {
 
     #region API
@@ -50,6 +50,7 @@ namespace UAOOI.Configuration.DataBindings
     /// </summary>
     /// <param name="descriptor">Provides identifying description of the node to be configured.</param>
     /// <returns>Returned object provides access to the instance node configuration edition functionality.</returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public override IInstanceConfiguration GetInstanceConfiguration(INodeDescriptor descriptor)
     {
       if (descriptor == null)

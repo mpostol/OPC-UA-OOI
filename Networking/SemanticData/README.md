@@ -6,7 +6,7 @@ This project is aimed to provide a library for Part 14 PubSub Draft 1.04. using 
 
 For more in-depth information about creating UA Applications exchanging data over the network, see [Getting Started Tutorial](./READMEGettingStartedTutorial.md#getting-started-tutorial)
 
-The code is tested using the Unit Test located in the project: [Networking.SemanticData.UnitTest](../Networking/Tests/SemanticDatalUnitTest)
+The code is tested using the Unit Test located in the project: [Networking.SemanticData.UnitTest](../../Networking/Tests/SemanticDatalUnitTest)
 
 The preliminary code help documentation is here: http://www.commsvr.com/Download/DataManagement/Index.html
 
@@ -48,17 +48,17 @@ Message Transport will not be implemented as the library part. This functionalit
 
 The library provides basic implementation of the above mentioned interfaces. In following diagram an implementation provided by the library is presented.
 
-![Architecture](../Media/UADataIntegrationServices.UADataManagementClasses.MessageHandling.png)
+![Architecture](../../CommonResources/Media/UADataIntegrationServices.UADataManagementClasses.MessageHandling.png)
 
 Hope is that the abstraction will support any types of message based communication layer.
 The library provides basic implementation of the `Message` class that supports package level encoding/decoding functionality.
 
 ### Messages Sequence
 
-![Sequence Diagram](../../CommonResources/Media/MessagesLoop.png)
+![Sequence Diagram](../../Networking/SemanticData/Media/MessagesLoop.png)
 
 ## Testing
 
-See how it works in the unit test class: [BindingUnitTest](../Tests/SemanticDatalUnitTest).
+See how it works in the unit test class: [Networking.SemanticData.UnitTest](../Tests/SemanticDatalUnitTest).
 
-The [UA Data Example Application](../Networking/ReferenceApplication#ua-data-example-application) contains a reference WPF application.
+The [UA Data Example Application](../../Networking/ReferenceApplication#ua-data-example-application) contains a reference WPF application.

@@ -204,4 +204,5 @@ Meaningful processing of the *OPC UA Data* by variety of applications is an impo
 
 A detailed description of this solution is captured in the document [Content Description](./Readme.SemanticDataDeplyment.MD). The solution contains projects supporting deployment of the concept presented in this document.
 
-The code illustrating the **UA Semantic Data** paradigm implementation can be found in the project [DataManagement](./DataManagement).
+The code illustrating the **UA Semantic Data** paradigm implementation can be found in the project [Networking of SemanticData Library](../Networking/SemanticData#networking-of-semanticdata-library).
+

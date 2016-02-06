@@ -22,7 +22,7 @@ In figure below the relationship between this library and external libraries is 
 
 ![Architecture](../../CommonResources/Media/DataManagementExternalLibraries.png)
 
-**Configuration** represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [UA Data Networking Configuration](../UANetworkingConfiguration#ua-data-networking-configuration) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data.
+**Configuration** represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [UA Data Networking Configuration](../../Configuration/Networking#ua-data-networking-configuration) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data.
 
 In figure below the relationship of the internal implementation with the overall domain model is presented.
 

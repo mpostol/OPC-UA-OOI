@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>UAOOI.Configuration.DataBindings</id>
-    <version>2.0.0</version>
-    <title>OPC UA DataBindings Library</title>
+    <version>2.0.0-Alpha</version>
+    <title>UAOOI.Configuration.DataBindings - OPC UA DataBindings Library</title>
     <authors>commsvr.com</authors>
     <owners>commsvr.com</owners>
     <projectUrl>https://github.com/mpostol/OPC-UA-OOI/tree/master/DataBindingsSolution</projectUrl>
@@ -11,14 +11,14 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <developmentDependency>false</developmentDependency>
     <description>
-      OPC UA Object Oriented Internet (UAOOI) DataBindings library is library dedicated to create a plug-in aimed to support configuration of any application based on OPC UA Information Model.
+      OPC UA Object Oriented Internet (UAOOI) DataBindings library is dedicated to create a plug-in aimed at editing of the configuration of any application based on OPC UA Information Model.
       It allows also to add data binding to the configuration. It is part of the project supporting OPC UA Object Oriented Internet paradigm.
     </description>
     <summary>
-      UAOOI DataBindings Library
+      UAOOI Configuration DataBindings Library
     </summary>
     <releaseNotes>
-      It is released for `SemanticDataSolution` as its consistent part of the `SemanticDataSolution`.
+      It is working pre0release
     </releaseNotes>
     <copyright>Copyright (c) 2016 CommServer</copyright>
     <tags>Object Oriented Internet, OPC UA, CommServer, ASMD, Address Space Model Designer.</tags>
@@ -27,7 +27,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="lib\net35\_._" target="lib\net35\_._" />
+        <file src="lib\net461\_._" target="lib\net461\_._" />
   </files>
 </package>
 

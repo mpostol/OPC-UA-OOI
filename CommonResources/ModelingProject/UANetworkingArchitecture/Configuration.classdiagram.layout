@@ -2,13 +2,13 @@
 <logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Configuration">
   <logicalClassDesignerModelMoniker Id="6879d0fa-866b-4fdb-b5e7-3529db2bac29" />
   <nestedChildShapes>
-    <packageShape Id="388ee5b8-ebeb-4eab-89e5-3f0c445adef8" absoluteBounds="1.25, 5.25, 1.5, 1" customColor="255, 249, 230" hideQualifiedName="false">
+    <packageShape Id="388ee5b8-ebeb-4eab-89e5-3f0c445adef8" absoluteBounds="1.25, 4.75, 1.5, 1" customColor="255, 249, 230" hideQualifiedName="false">
       <packageMoniker Id="2ee72c6a-1947-434f-8ffe-06b9e054f1c4" LastKnownName="Common" />
     </packageShape>
     <packageShape Id="98972415-cf2d-48f0-b1a6-872c68b85616" absoluteBounds="2.875, 3, 2.125, 1" customColor="255, 249, 230" hideQualifiedName="false">
       <packageMoniker Id="7783391c-a188-4b3c-81aa-f0c54f14c658" LastKnownName="Configuration" />
     </packageShape>
-    <dependencyConnector edgePoints="[(3.9375 : 4); (3.9375 : 5.75); (2.75 : 5.75)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <dependencyConnector edgePoints="[(3.9375 : 4); (3.9375 : 5.25); (2.75 : 5.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
       <dependencyMoniker Id="30d56e66-f483-447d-bced-2300490620fd" />
       <relativeChildShapes />
       <nodes>
@@ -27,7 +27,7 @@
         <packageShapeMoniker Id="98972415-cf2d-48f0-b1a6-872c68b85616" />
       </nodes>
     </dependencyConnector>
-    <dependencyConnector edgePoints="[(3.02441860465116 : 2); (3.02441860465116 : 2.375); (2.04807692307692 : 2.375); (2.04807692307692 : 5.25)]" manuallyRouted="true" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
+    <dependencyConnector edgePoints="[(3.02441860465116 : 2); (3.02441860465116 : 2.375); (2.04807692307692 : 2.375); (2.04807692307692 : 4.75)]" manuallyRouted="true" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black">
       <dependencyMoniker Id="77d59f25-255a-4bb5-82b3-1b3ed5b2ca6e" />
       <relativeChildShapes />
       <nodes>

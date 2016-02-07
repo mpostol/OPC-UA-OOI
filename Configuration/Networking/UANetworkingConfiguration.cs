@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.IO;
+using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.Serializers;
 
@@ -91,7 +92,6 @@ namespace UAOOI.Configuration.Networking
     /// <summary>
     /// Raises the on change event.
     /// </summary>
-    /// <param name="configurationFileChanged">if set to <c>true</c> the configuration file changed, false if content changed.</param>
     protected void RaiseOnChangeEvent()
     {
       OnModified?.Invoke(this, EventArgs.Empty);

@@ -1,8 +1,11 @@
 ﻿
 using System.Diagnostics;
 
-namespace UAOOI.Configuration.Networking
+namespace UAOOI.Common.Infrastructure.Diagnostic
 {
+  /// <summary>
+  /// Interface ITraceSource - defines trace source.
+  /// </summary>
   public interface ITraceSource
   {
 

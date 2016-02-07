@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="CommonDefinitions.cs" />
     <Compile Include="IConfigurationDataFactory.cs" />
-    <Compile Include="ITraceSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -131,7 +130,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj">
+      <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
+      <Name>Common.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

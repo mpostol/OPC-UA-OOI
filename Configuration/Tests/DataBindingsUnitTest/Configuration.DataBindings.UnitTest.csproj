@@ -84,6 +84,10 @@
     <Compile Include="UANetworkingConfigurationEditorUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Infrastructure\Common.Infrastructure.csproj">
+      <Project>{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}</Project>
+      <Name>Common.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DataBindings\Configuration.DataBindings.csproj">
       <Project>{f8db9567-c559-440c-bbcf-e02013f9ab94}</Project>
       <Name>Configuration.DataBindings</Name>

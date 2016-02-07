@@ -4,17 +4,17 @@
     <logicalClassDesignerModelHasPackages>
       <package Id="2ee72c6a-1947-434f-8ffe-06b9e054f1c4" name="Common">
         <elementDefinition Id="4224f8d5-96b3-47ac-8169-44b1e5518092" />
-        <suppliersInternal>
-          <dependency Id="6fad8aca-7f04-441e-be01-0d714f732529">
-            <packageMoniker Id="7783391c-a188-4b3c-81aa-f0c54f14c658" LastKnownName="Configuration" />
-            <elementDefinition Id="02a0a60a-be85-4381-acea-9e00c212b477" />
-          </dependency>
-        </suppliersInternal>
       </package>
     </logicalClassDesignerModelHasPackages>
     <logicalClassDesignerModelHasPackages>
       <package Id="7783391c-a188-4b3c-81aa-f0c54f14c658" name="Configuration">
         <elementDefinition Id="9f91b48e-9889-49d2-ab4d-1a89a1a59dba" />
+        <suppliersInternal>
+          <dependency Id="30d56e66-f483-447d-bced-2300490620fd">
+            <packageMoniker Id="2ee72c6a-1947-434f-8ffe-06b9e054f1c4" LastKnownName="Common" />
+            <elementDefinition Id="2957255e-31cf-4ddb-b3c9-b8d3833d4a23" />
+          </dependency>
+        </suppliersInternal>
       </package>
     </logicalClassDesignerModelHasPackages>
     <logicalClassDesignerModelHasPackages>

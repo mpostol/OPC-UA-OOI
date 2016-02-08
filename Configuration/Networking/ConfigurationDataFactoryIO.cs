@@ -2,20 +2,24 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.Serializers;
 
 namespace UAOOI.Configuration.Networking
 {
+  /// <summary>
+  /// Class ConfigurationDataFactoryIO - Input/Output helper operation to retrieve/save configuration data.
+  /// </summary>
   public static class ConfigurationDataFactoryIO
   {
     /// <summary>
-    /// Creates the <typeparam name="ConfigurationDataType" /> instance using specified loader.
+    /// Loads the <typeparamref name="ConfigurationDataType" /> instance using specified loader.
     /// </summary>
     /// <typeparam name="ConfigurationDataType">The type of the configuration data type.</typeparam>
-    /// <param name="loader">The delegate <see cref="Func{ConfigurationDataType}" /> capturing the loader of functionality
+    /// <param name="loader">The delegate <see cref="Func{ConfigurationDataType}" /> capturing the loader functionality
     /// of the class derived from <see cref="ConfigurationData" />.</param>
     /// <param name="onChanged">A delegate <see cref="Action" /> encapsulating operation called when this instance is changed.</param>
-    /// <returns>An instance of <typeparam name="ConfigurationDataType" /> derived from <see cref="ConfigurationData" />.</returns>
+    /// <returns>An instance of <typeparamref name="ConfigurationDataType"/> derived from <see cref="ConfigurationData" />.</returns>
     public static ConfigurationDataType Load<ConfigurationDataType>(Func<ConfigurationDataType> loader, Action onChanged)
       where ConfigurationDataType : class, IConfigurationDataFactory, new()
     {
@@ -24,6 +28,15 @@ namespace UAOOI.Configuration.Networking
       _configuration.OnLoaded();
       return _configuration;
     }
+    /// <summary>
+    /// Loads the <typeparamref name="ConfigurationDataType" /> instance using specified loader.
+    /// </summary>
+    /// <typeparam name="ConfigurationDataType">The type of the configuration data type.</typeparam>
+    /// <param name="serializer">The serializer.</param>
+    /// <param name="configurationFile">The configuration file.</param>
+    /// <param name="trace">The trace.</param>
+    /// <param name="onChanged">The on changed.</param>
+    /// <returns>ConfigurationDataType.</returns>
     public static ConfigurationDataType Load<ConfigurationDataType>(SerializerType serializer, FileInfo configurationFile, Action<TraceEventType, int, string> trace, Action onChanged)
       where ConfigurationDataType : class, IConfigurationDataFactory, new()
     {

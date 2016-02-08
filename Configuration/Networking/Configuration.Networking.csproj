@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <NoWarn>IDE0001,IDE0002,IDE0003</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <DocumentationFile>bin\Debug\UAOOI.Configuration.Networking.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

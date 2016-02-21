@@ -13,15 +13,16 @@
   </SpellChecker>
 <HelpConfigurations selected="HelpFile">
   <HelpConfiguration name="HelpFile">
-    <OutputPath>.\Help</OutputPath>
+    <OutputPath>..\..\..\Windows\Temp\UAOOI.ObjectOrientedInternet</OutputPath>
     <CleanupOutputPath>true</CleanupOutputPath>
     <HelpFileName>UAObjectOrientedInternet</HelpFileName>
     <ImageFolderPath />
+    <Theme>FlatGray</Theme>
     <HtmlFormats>
-      <HtmlHelp>true</HtmlHelp>
+      <HtmlHelp>false</HtmlHelp>
       <MSHelpViewer>false</MSHelpViewer>
       <MSHelp2>false</MSHelp2>
-      <Website>false</Website>
+      <Website>true</Website>
     </HtmlFormats>
     <IncludeScopes>
       <Public>true</Public>
@@ -35,13 +36,25 @@
     </IncludeScopes>
     <SyntaxLanguages>
       <CSharp>true</CSharp>
-      <VisualBasic>true</VisualBasic>
-      <CPlusPlus>true</CPlusPlus>
+      <VisualBasic>false</VisualBasic>
+      <CPlusPlus>false</CPlusPlus>
     </SyntaxLanguages>
     <ResolveCrefLinks>true</ResolveCrefLinks>
-    <HeaderText />
-    <FooterText />
-    <SelectedProjects />
+    <HeaderText>UAOOI.ObjectOrientedInternet</HeaderText>
+    <FooterText>Rel 2 prerelease</FooterText>
+    <SelectedProjects>
+      <SelectedProject>Common.Infrastructure</SelectedProject>
+      <SelectedProject>Configuration.Networking</SelectedProject>
+      <SelectedProject>Configuration.DataBindings</SelectedProject>
+      <SelectedProject>SemanticData.InformationModelFactory</SelectedProject>
+      <SelectedProject>SemanticData.UANodeSetValidation</SelectedProject>
+      <SelectedProject>SemanticData.TypeEditors</SelectedProject>
+      <SelectedProject>Configuration.Networking.Upgrade</SelectedProject>
+      <SelectedProject>Networking.SemanticData</SelectedProject>
+      <SelectedProject>Common.Infrastructure</SelectedProject>
+      <SelectedProject>Common.Infrastructure</SelectedProject>
+      <SelectedProject>Common.Infrastructure</SelectedProject>
+    </SelectedProjects>
   </HelpConfiguration>
 </HelpConfigurations>
 <GeneralProperties>

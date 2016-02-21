@@ -21,7 +21,7 @@ namespace UAOOI.Configuration.DataBindings.UnitTest
       Assert.IsNotNull(_newConfiguration);
       Assert.IsNull(_newConfiguration.ConfigurationData);
       Assert.IsNull(_newConfiguration.CurrentConfiguration);
-      Assert.IsNull(_newConfiguration.TraceSource);
+      Assert.IsNotNull(_newConfiguration.TraceSource);
     }
     [TestMethod]
     [TestCategory("DataBindings_ConfigurationBaseUnitTest")]

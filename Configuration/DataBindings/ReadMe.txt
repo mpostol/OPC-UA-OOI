@@ -10,7 +10,7 @@ Assembly Product:       OPC UA DataBindings
 Assembly Copyright:     Copyright (c) 2016 CommServer
 Assembly Trademark:     OPC-UA-OOI
 Assembly Version:       2.0.0
-Assembly Date:          2016-01-26
+Assembly Date:          2016-02-21
 
 The main changes and new functionalities are listed below:
 

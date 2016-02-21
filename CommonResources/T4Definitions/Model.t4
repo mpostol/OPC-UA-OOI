@@ -18,7 +18,7 @@ string SemanticDataProduct = "OPC UA SemanticData";
 
 //UAOOI.DataBindings
 string DataBindingsVersion = "2.0.0";
-string DataBindingsPrerelease = "-Alpha";
+string DataBindingsPrerelease = "-Bravo";
 string DataBindingsProduct = "OPC UA DataBindings";
 
 //Note: 

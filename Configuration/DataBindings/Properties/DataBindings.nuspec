@@ -2,11 +2,11 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>UAOOI.Configuration.DataBindings</id>
-    <version>2.0.0-Alpha</version>
+    <version>2.0.0-Bravo</version>
     <title>UAOOI.Configuration.DataBindings - OPC UA DataBindings Library</title>
     <authors>commsvr.com</authors>
     <owners>commsvr.com</owners>
-    <projectUrl>http://www.commsvr.com/download/DataManagement/</projectUrl>
+    <projectUrl>http://www.commsvr.com/download/file:///C:/Windows/Temp/UAOOI.ObjectOrientedInternet/?topic=tml/1410155241.htm</projectUrl>
     <licenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <developmentDependency>false</developmentDependency>

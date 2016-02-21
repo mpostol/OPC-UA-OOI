@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.IO;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Configuration.Networking.Serialization;
@@ -20,7 +21,10 @@ namespace UAOOI.Configuration.Networking
     /// <summary>
     /// Initializes a new instance of the <see cref="UANetworkingConfiguration{ConfigurationDataType}"/> class.
     /// </summary>
-    public UANetworkingConfiguration() { }
+    public UANetworkingConfiguration()
+    {
+      TraceSource = new TraceSourceDefault();
+    }
     #endregion
 
     #region ConfigurationBase
@@ -36,8 +40,8 @@ namespace UAOOI.Configuration.Networking
     /// <summary>
     /// Saves the configuration.
     /// </summary>
-    /// <param name="solutionFilePath">The solution file path.</param>
     /// <param name="configurationFile">The configuration file.</param>
+    /// <exception cref="ArgumentNullException"></exception>
     public void SaveConfiguration(FileInfo configurationFile)
     {
       if (CurrentConfiguration == null)
@@ -76,8 +80,9 @@ namespace UAOOI.Configuration.Networking
     #region MEF composition
     /// <summary>
     /// Gets or sets the trace source - an access point to the external component.
+    /// By default an empty private implementation (do nothing) of the <see cref="ITraceSource"/> is provided.
     /// </summary>
-    /// <value>The trace source.</value>
+    /// <value>The trace source - an implementation of the <see cref="ITraceSource"/>.</value>
     [Import(typeof(ITraceSource))]
     public ITraceSource TraceSource
     {
@@ -87,6 +92,17 @@ namespace UAOOI.Configuration.Networking
     #endregion
 
     #region privat
+    private class TraceSourceDefault : ITraceSource
+    {
+      /// <summary>
+      /// Writes trace data to the trace listeners in the <see cref="P:System.Diagnostics.TraceSource.Listeners" /> collection using the specified <paramref name="eventType" />,
+      /// event identifier <paramref name="id" />, and trace <paramref name="data" />.
+      /// </summary>
+      /// <param name="eventType">One of the enumeration values that specifies the event type of the trace data.</param>
+      /// <param name="id">A numeric identifier for the event.</param>
+      /// <param name="data">The trace data.</param>
+      public void TraceData(TraceEventType eventType, int id, object data) { }
+    }
     private ConfigurationDataType m_CurrentConfiguration;
     private ITraceSource b_TraceSource ;
     /// <summary>

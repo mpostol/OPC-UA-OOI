@@ -25,7 +25,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.IsNotNull(_newConfiguration);
       Assert.IsNull(_newConfiguration.ConfigurationData);
       Assert.IsNull(_newConfiguration.CurrentConfiguration);
-      Assert.IsNull(_newConfiguration.TraceSource);
+      Assert.IsNotNull(_newConfiguration.TraceSource);
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
@@ -35,7 +35,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.IsNotNull(_newConfiguration);
       Assert.IsNull(_newConfiguration.ConfigurationData);
       Assert.IsNull(_newConfiguration.CurrentConfiguration);
-      Assert.IsNull(_newConfiguration.TraceSource);
+      Assert.IsNotNull(_newConfiguration.TraceSource);
       _newConfiguration.ComposeParts();
       Assert.IsNotNull(_newConfiguration.TraceSource);
     }

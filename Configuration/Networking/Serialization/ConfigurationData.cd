@@ -12,15 +12,8 @@
         <Point X="7.75" Y="2.865" />
       </Path>
     </AssociationLine>
-    <AssociationLine Name="MessageHandlers" Type="UAOOI.Configuration.Networking.Serialization.MessageHandlerConfiguration" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="5.688" Y="3.758" />
-        <Point X="5.688" Y="7.337" />
-        <Point X="7.75" Y="7.337" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAABAABAGUAEAIAIQAAAAIAAEQgAAAAEgAAIAQIAAAA=</HashCode>
+      <HashCode>AAABAABAGUAEAIAIQAAAAIIAEQgAAAEEgAAIAQIAAAA=</HashCode>
       <FileName>Serialization\ConfigurationData.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -56,10 +49,13 @@
       <HashCode>ACAAAAAAAAAQgAAAAAAAAAQAAIAAAAAEgAAAEAIAABA=</HashCode>
       <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Configuration" />
+    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="UAOOI.Configuration.Networking.Serialization.NodeDescriptor">
-    <Position X="11" Y="4" Width="2" />
+    <Position X="11.25" Y="4" Width="2" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -77,7 +73,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.Configuration.Networking.Serialization.FieldMetaData">
-    <Position X="11" Y="1.75" Width="2" />
+    <Position X="11.25" Y="1.75" Width="2" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -130,6 +126,13 @@
     </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UAOOI.Configuration.Networking.Serialization.MessageChannelConfiguration" Collapsed="true">
+    <Position X="11.25" Y="7.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
     </TypeIdentifier>
   </Class>

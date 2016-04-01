@@ -79,6 +79,7 @@
       <DependentUpon>ConfigurationData.xsd</DependentUpon>
     </Compile>
     <Compile Include="ConfigurationFactoryBase.cs" />
+    <Compile Include="Serialization\ConfigurationVersionDataType.cs" />
     <Compile Include="Serialization\DataMemberConfiguration.cs" />
     <Compile Include="Serialization\DataSetConfiguration.cs" />
     <Compile Include="IConfigurationFactory.cs" />

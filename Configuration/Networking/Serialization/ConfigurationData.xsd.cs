@@ -257,7 +257,7 @@ namespace UAOOI.Configuration.Networking.Serialization
   }
   [Serializable]
   [DataContractAttribute(Name = "ConfigurationVersionDataType", Namespace = CommonDefinitions.Namespace)]
-  public class ConfigurationVersionDataType
+  public partial class ConfigurationVersionDataType
   {
     private byte MajorVersionField;
     private byte MinorVersionField;

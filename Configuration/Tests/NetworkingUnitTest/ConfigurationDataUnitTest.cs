@@ -79,6 +79,12 @@ namespace UAOOI.Configuration.Networking.UnitTest
       foreach (XmlSchema _schema in _Schemas.Schemas(EmployeeNameSpace))
         _schema.Write(Console.Out);
     }
+    [TestMethod]
+    public void ConfigurationVersionDataTypeTestMethod()
+    {
+      ConfigurationVersionDataType _newInstance = new ConfigurationVersionDataType() { MajorVersion = 1, MinorVersion = 2 };
+      Assert.AreEqual<string>("1.2", _newInstance.ToString());
+    }
     #endregion
 
     #region private

@@ -1,15 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="UAOOI.Configuration.Networking.Serialization.ConfigurationData">
-    <Position X="4.25" Y="1.75" Width="2.5" />
+    <Position X="4" Y="1.75" Width="2.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <AssociationLine Name="DataSets" Type="UAOOI.Configuration.Networking.Serialization.DataSetConfiguration" FixedFromPoint="true">
       <Path>
-        <Point X="6.75" Y="2.767" />
-        <Point X="7.75" Y="2.767" />
+        <Point X="6.5" Y="2" />
+        <Point X="7.75" Y="2" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="MessageHandlers" Type="UAOOI.Configuration.Networking.Serialization.MessageHandlerConfiguration">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.346" Y="0.954" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="TypeDictionaries" Type="UAOOI.Configuration.Networking.Serialization.TypeDictionary" FixedFromPoint="true">
+      <Path>
+        <Point X="4" Y="2" />
+        <Point X="2.75" Y="2" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -29,6 +40,18 @@
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
+    <AssociationLine Name="DataSet" Type="UAOOI.Configuration.Networking.Serialization.FieldMetaData" FixedFromPoint="true">
+      <Path>
+        <Point X="10" Y="2.062" />
+        <Point X="11" Y="2.062" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Root" Type="UAOOI.Configuration.Networking.Serialization.NodeDescriptor" FixedFromPoint="true">
+      <Path>
+        <Point X="10" Y="4.188" />
+        <Point X="11" Y="4.188" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AqACAAAoAACAACAEAEAATgAAAEgABECMAAAAAgMABIQ=</HashCode>
       <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
@@ -42,7 +65,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="UAOOI.Configuration.Networking.Serialization.MessageHandlerConfiguration">
-    <Position X="7.75" Y="6.25" Width="2.25" />
+    <Position X="4.25" Y="5" Width="2.25" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
@@ -57,7 +80,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="UAOOI.Configuration.Networking.Serialization.NodeDescriptor">
-    <Position X="11.25" Y="4" Width="2.25" />
+    <Position X="11" Y="4" Width="2.25" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -75,7 +98,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.Configuration.Networking.Serialization.FieldMetaData">
-    <Position X="11.25" Y="1.75" Width="2.25" />
+    <Position X="11" Y="1.75" Width="2.25" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -86,7 +109,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="UAOOI.Configuration.Networking.Serialization.MessageWriterConfiguration">
-    <Position X="5.75" Y="9.5" Width="3" />
+    <Position X="2.5" Y="8" Width="2.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -99,7 +122,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="UAOOI.Configuration.Networking.Serialization.MessageReaderConfiguration">
-    <Position X="9" Y="9.5" Width="3" />
+    <Position X="5.5" Y="8" Width="2.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -112,7 +135,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="UAOOI.Configuration.Networking.Serialization.ProducerAssociationConfiguration">
-    <Position X="0.75" Y="9.5" Width="2.5" />
+    <Position X="2.5" Y="10.25" Width="2.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -122,7 +145,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.Configuration.Networking.Serialization.ConsumerAssociationConfiguration">
-    <Position X="14.5" Y="9.5" Width="3" />
+    <Position X="5.5" Y="10.25" Width="2.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -132,16 +155,42 @@
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.Configuration.Networking.Serialization.MessageChannelConfiguration" Collapsed="true">
-    <Position X="11.25" Y="7.5" Width="2.25" />
+    <Position X="7.75" Y="6" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="UAOOI.Configuration.Networking.Serialization.TypeDictionary" Collapsed="true">
-    <Position X="1.25" Y="3" Width="1.5" />
+  <Class Name="UAOOI.Configuration.Networking.Serialization.TypeDictionary">
+    <Position X="1" Y="1.75" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAACAAAAAAAAAAAAAAAAAAAAAAAAgAQAAA=</HashCode>
+      <FileName>Serialization\TypeDictionary.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Items" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="UAOOI.Configuration.Networking.Serialization.AssociationConfiguration">
+    <Position X="4.25" Y="12.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAQAAAAAAAAAAACAAAAAAAAAABAA=</HashCode>
+      <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UAOOI.Configuration.Networking.Serialization.TypeDescription">
+    <Position X="1" Y="3.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Serialization\TypeDictionary.cs</FileName>
     </TypeIdentifier>
   </Class>

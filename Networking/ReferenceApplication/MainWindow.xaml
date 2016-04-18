@@ -35,11 +35,14 @@
     </Style>
     <ControlTemplate x:Key="ValidationTemplate">
       <DockPanel LastChildFill="True">
-        <TextBlock Foreground="Red" Background="Yellow" Margin="5,0" ToolTip="IP Address is invalid" HorizontalAlignment="Center"  > ! </TextBlock>
+        <TextBlock Foreground="Red" Background="Yellow" Margin="5,0" ToolTip="IP Address is invalid" HorizontalAlignment="Center"  > !</TextBlock>
         <AdornedElementPlaceholder />
       </DockPanel>
     </ControlTemplate>
   </Window.Resources>
+  <Window.CommandBindings>
+    <CommandBinding Command="SystemCommands.CloseWindowCommand" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute" />
+  </Window.CommandBindings>
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="20"></RowDefinition>
@@ -51,6 +54,11 @@
         <MenuItem Header="File" >
           <MenuItem Header="Consumer Configuration" Command="{Binding Path=OpenConsumerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor."/>
           <MenuItem Header="Producer Configuration" Command="{Binding Path=OpenProducerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor." />
+          <MenuItem Header="Exit" Command="SystemCommands.CloseWindowCommand" ToolTip="Exit Application" >
+            <MenuItem.InputBindings >
+              <KeyBinding Key="F4" Modifiers="Alt" />
+            </MenuItem.InputBindings>
+          </MenuItem>
         </MenuItem>
         <MenuItem Header="Actions" ToolTip="Available actions">
           <MenuItem Header="Update Consumer Configuration" Command="{Binding Path=ConsumerUpdateConfiguration}" ToolTip="Updates the consumer configuration and restarts the data receiving process"/>

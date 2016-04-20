@@ -55,10 +55,21 @@
           <MenuItem Header="Consumer Configuration" Command="{Binding Path=OpenConsumerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor."/>
           <MenuItem Header="Producer Configuration" Command="{Binding Path=OpenProducerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor." />
           <MenuItem Header="Exit" Command="SystemCommands.CloseWindowCommand" ToolTip="Exit Application" >
+            <MenuItem.Icon>
+              <Image Source="Icons\action_Cancel_16xLG.png" />
+            </MenuItem.Icon>
             <MenuItem.InputBindings >
               <KeyBinding Key="F4" Modifiers="Alt" />
             </MenuItem.InputBindings>
           </MenuItem>
+        </MenuItem>
+        <MenuItem Header="Edit">
+          <MenuItem Command="ApplicationCommands.Copy"/>
+          <MenuItem Command="ApplicationCommands.Cut"/>
+          <MenuItem Command="ApplicationCommands.Paste"/>
+          <MenuItem Command="ApplicationCommands.Undo"/>
+          <MenuItem Command="ApplicationCommands.Redo"/>
+          <MenuItem Command="ApplicationCommands.SelectAll"/>
         </MenuItem>
         <MenuItem Header="Actions" ToolTip="Available actions">
           <MenuItem Header="Update Consumer Configuration" Command="{Binding Path=ConsumerUpdateConfiguration}" ToolTip="Updates the consumer configuration and restarts the data receiving process"/>

@@ -61,7 +61,7 @@ For any *OPC Information Model* the selection rule proposed above unambiguously 
 * Selected URI for a root element that qualifies the symbolic name part
 * Symbolic name of a root element
 
-The OPC UA information modeling concept is based on domains [to learn more visit: OPC UA Information Model Deployment]( http://www.cas.internetdsl.pl/commserver/P_DowloadCenter/P_Publications/20140301EN_DeploymentInformationModel.pdf). A domain is a named self-contained collection of definitions. Any domain name is URI and  must be globally unique - it is an identification string that defines a realm of administrative autonomy and authority of responsibility. The type definition from one domain may inherit from type definitions located in other domains. To avoid circular references, domains should be organized in layers, which expand step by step the basic model provided by the *OPC UA Specification*. The URI for the information model defined by the standard is `http://opcfoundation.org/UA/`. To make URI for the nodes defined by the standard unique, the server URL shall be used instead.
+The OPC UA information modeling concept is based on domains [to learn more visit: OPC UA Information Model Deployment](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf). A domain is a named self-contained collection of definitions. Any domain name is URI and  must be globally unique - it is an identification string that defines a realm of administrative autonomy and authority of responsibility. The type definition from one domain may inherit from type definitions located in other domains. To avoid circular references, domains should be organized in layers, which expand step by step the basic model provided by the *OPC UA Specification*. The URI for the information model defined by the standard is `http://opcfoundation.org/UA/`. To make URI for the nodes defined by the standard unique, the server URL shall be used instead.
 
 The symbolic name of each node is its `BrowseName`, or, when it is a part of another node, the `BrowseName` of the other node, a `"_"`, and the `BrowseName` of itself. It applies recursively. “Part of” means that the whole has a `HasProperty` or `HasComponent` reference to its part. Since all nodes not being the part of another node have a unique name, the symbolic name is unique. Any root element must not be an instance declaration. An instance declaration is an Object, Variable or Method that is the target node of a hierarchical reference from a type definition mode or another instance declaration.
 
@@ -148,7 +148,7 @@ The data discovery mechanism is a part of the broader concept captured in the do
 
 The description of the *OPC UA Information Model* is captured in details in in the:
 * [OPC Unified Architecture e-book](http://www.commsvr.com/UAModelDesigner/Index.aspx)
-* [OPC UA Information Model Deployment]( http://www.cas.internetdsl.pl/commserver/P_DowloadCenter/P_Publications/20140301EN_DeploymentInformationModel.pdf)
+* [OPC UA Information Model Deployment](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf)
 
 ## Interoperable parties
 

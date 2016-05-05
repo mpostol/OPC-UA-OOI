@@ -15,7 +15,7 @@ This project is aimed to workout deliverables supporting Process Data handling o
 
 •	Data Edition – UI allowing display and edition of any custom data
 
-•	Data serialization and deserialization - see whitepaper: [Address Space Interchange XML](http://goo.gl/LE64MA)
+•	Data serialization and deserialization - see whitepaper: [Address Space Interchange XML](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf)
 
 •	Data binding – to define how the process data relate to the real world
 
@@ -31,7 +31,7 @@ In scope there are also deliverables supporting:
 
 •	Browsing (using the sematics) of the Metadata to selectively access requested Process Data
 
-•	Modeling and representation of the Metadata - see whitepaper: [OPC UA Information Model Deployment] (http://goo.gl/HqYjvy)
+•	Modeling and representation of the Metadata - see whitepaper: [OPC UA Information Model Deployment](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf)
 
 •	Validation of the semantics and consistency of the Metadata - see project [USNodeSetValidationUnitTestProject](./SemanticDataSolution/Tests/USNodeSetValidationUnitTestProject)
 

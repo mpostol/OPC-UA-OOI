@@ -9,7 +9,7 @@ The **Libraries** offer functionally supporting creation and validation of the O
 
 ## AddressSpaceComplianceTestTool
 
-It is command line application aimed to validate XML files compliant with the [UANodeSet schema](https://opcfoundation.org/UA/2011/03/UANodeSet.xsd) defined in Part 6 of the OPC UA Specification. The description of this schema is captured in the document [Address Space Interchange XML](http://goo.gl/LE64MA)
+It is command line application aimed to validate XML files compliant with the [UANodeSet schema](https://opcfoundation.org/UA/2011/03/UANodeSet.xsd) defined in Part 6 of the OPC UA Specification. The description of this schema is captured in the document [Address Space Interchange XML](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf)
 
 ## Libraries
 
@@ -32,7 +32,7 @@ TBD
 
 ### OPCUAUserInterfaceTypeEditors
 
-This projects shall provide a custom design-time experience for OPC UA types by implementing a user interface (UI) type editor. All works related to development of XAML User Controls with the goal to edit OPC UA values represented as objects of custom type. The build in data types are described in the document:[Address Space Interchange XML](http://goo.gl/LE64MA).
+This projects shall provide a custom design-time experience for OPC UA types by implementing a user interface (UI) type editor. All works related to development of XAML User Controls with the goal to edit OPC UA values represented as objects of custom type. The build in data types are described in the document:[Address Space Interchange XML](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf).
 The MVVM is to be used as the deign pattern in this project.
 
 Detailed description of this project is captured in the document: [OPCUAUserInterfaceTypeEditors/README.MD](./OPCUAUserInterfaceTypeEditors/README.MD)

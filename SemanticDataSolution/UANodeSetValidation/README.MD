@@ -4,6 +4,6 @@ This project support validation of the OPC UA Address Space captured in the xml 
 
 ##Read more
 
-[Address Space Interchange XML](http://goo.gl/LE64MA)
+[Address Space Interchange XML](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf)
 
 [OPC Unified Architecture eBook](http://goo.gl/y4EHUn)

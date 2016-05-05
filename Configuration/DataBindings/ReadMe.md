@@ -19,7 +19,7 @@ The Nuget package is available here: https://www.nuget.org/packages/UAOOI.Config
 
 ## Getting Started Tutorial
 
-The topics contained in this section are intended to give you quick exposure to the **UA Data Application** network based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to create **UA Data Application** configuration custom editor. The editor is to be used by a universal tool supporting OPC UA Information Model design process. For mor information on deploying OPC UA Information Model read the document: [OPC UA Information Model Deployment](http://www.cas.internetdsl.pl/commserver/P_DowloadCenter/P_Publications/20140301EN_DeploymentInformationModel.pdf)
+The topics contained in this section are intended to give you quick exposure to the **UA Data Application** network based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to create **UA Data Application** configuration custom editor. The editor is to be used by a universal tool supporting OPC UA Information Model design process. For mor information on deploying OPC UA Information Model read the document: [OPC UA Information Model Deployment](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf)
 
 The configuration files are managed using the `UAOOI.Configuration.Networking` component.
 

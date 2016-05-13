@@ -2,7 +2,7 @@
 
 To realize the [*UA Semantic Data*](../SemanticDataSolution#opc-ua-data-processing-outside-the-server) paradigm in practice **UA Data Application** must get access to the data in the context of type definition in compliance with the OPC UA *Information Model*. This article summarizes research on the architecture of infrastructure supporting access to the data using a *Message Centric* communication pattern. The proposed architecture is presented in the following figure.
 
-![Domain Model](./Media/MessageCentricCommunication.Domain.png)
+![Domain Model](../CommonResources//Media/MessageCentricCommunication.Domain.png)
 
 The architecture contains the following classes directly involved in the data processing:
 

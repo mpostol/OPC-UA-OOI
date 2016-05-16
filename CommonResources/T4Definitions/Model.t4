@@ -14,12 +14,13 @@ string Owner = "commsvr.com";
 
 //UAOOI.SemanticData
 string SemanticDataVersion = "2.0.0";
-string SemanticDataProduct = "OPC UA SemanticData";
+string SemanticDataPrerelease = "-Alpha";
+string SemanticDataProduct = "OPC UA OOI SemanticData";
 
 //UAOOI.DataBindings
 string DataBindingsVersion = "2.0.0";
 string DataBindingsPrerelease = "-Bravo";
-string DataBindingsProduct = "OPC UA DataBindings";
+string DataBindingsProduct = "OPC UA OOI DataBindings";
 
 //Note: 
 //Alpha, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, 

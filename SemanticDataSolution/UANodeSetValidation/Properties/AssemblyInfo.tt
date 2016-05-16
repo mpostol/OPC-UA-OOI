@@ -15,7 +15,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("<#=m_AssemblyTitle#>")]
-[assembly: AssemblyDescription("OPC UA NodeSet Validation library")]
+[assembly: AssemblyDescription("OPC UA OOI NodeSet Validation library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("<#=AssemblyCompany#>")]
 [assembly: AssemblyProduct("<#=SemanticDataProduct#>")]
@@ -33,5 +33,5 @@ using System.Runtime.InteropServices;
 
 <#@ include file = "..\..\..\CommonResources\T4Definitions\Model.t4" #>
 <#+
-string m_AssemblyTitle = "USNodeSetValidation";
+string m_AssemblyTitle = "UAOOI.SemanticData.UANodeSetValidation";
 #>

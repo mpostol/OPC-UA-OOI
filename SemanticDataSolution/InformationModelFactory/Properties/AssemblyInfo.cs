@@ -1,5 +1,5 @@
 ﻿//_______________________________________________________________
-//  Title   : Assembly info for: InformationModelFactory
+//  Title   : Assembly info for: UAOOI.SemanticData.InformationModelFactory
 //  System  : Microsoft VisualStudio 2015 / C#
 //
 //  Copyright (c) 2016 CommServer
@@ -12,11 +12,11 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("InformationModelFactory")]
+[assembly: AssemblyTitle("UAOOI.SemanticData.InformationModelFactory")]
 [assembly: AssemblyDescription("OPC UA Information Model Factory Library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
-[assembly: AssemblyProduct("OPC UA SemanticData")]
+[assembly: AssemblyProduct("OPC UA OOI SemanticData")]
 [assembly: AssemblyCopyright("Copyright (c) 2016 CommServer")]
 [assembly: AssemblyTrademark("OPC-UA-OOI")]
 [assembly: AssemblyCulture("")]

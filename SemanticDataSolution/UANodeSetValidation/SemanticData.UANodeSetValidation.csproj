@@ -30,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\UAOOI.SemanticDataUANodeSetValidation.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -118,6 +119,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
     </None>
+    <None Include="Properties\UANodeSetValidation.Nuget.nuspec">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UANodeSetValidation.Nuget.tt</DependentUpon>
+    </None>
     <None Include="README.MD" />
     <None Include="XML\BuildErrorsCollection.xltx" />
     <None Include="XML\BuildErrorsCollection.xsd">
@@ -135,6 +141,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Properties\UANodeSetValidation.Nuget.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UANodeSetValidation.Nuget.nuspec</LastGenOutput>
+    </Content>
     <Content Include="Validator.Notes..txt" />
     <Content Include="XML\BuildErrorsCollection.xml" />
     <None Include="XML\OPCBinarySchema.xsd">

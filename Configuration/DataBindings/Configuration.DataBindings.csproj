@@ -94,6 +94,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataBindings.tt</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataBindings.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

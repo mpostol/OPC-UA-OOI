@@ -28,5 +28,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("<#= SemanticDataVersion #>")]
 <#@ include file = "..\..\..\CommonResources\T4Definitions\Model.t4" #>
 <#+
-string m_AssemblyTitle = "InformationModelFactory";
+string m_AssemblyTitle = "UAOOI.SemanticData.InformationModelFactory";
 #>

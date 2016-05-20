@@ -22,7 +22,7 @@ namespace UAOOI.Configuration.Networking.Serialization
     /// </summary>
     /// <value>The identifier.</value>
     [XmlIgnore]
-    public Guid Id { get { return XmlConvert.ToGuid(Guid); } set { Guid = XmlConvert.ToString(value); } }
+    public Guid Id { get { return String.IsNullOrEmpty(Guid) ? System.Guid.Empty : XmlConvert.ToGuid(Guid); } set { Guid = XmlConvert.ToString(value); } }
     internal static DataSetConfiguration Create(NodeDescriptor descriptor)
     {
       if (descriptor == null)

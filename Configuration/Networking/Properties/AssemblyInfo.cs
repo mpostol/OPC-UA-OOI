@@ -13,10 +13,10 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("UAOOI.Configuration.Networking")]
-[assembly: AssemblyDescription("OPC UA SemanticData: UA Data Application Configuration")]
+[assembly: AssemblyDescription("OPC UA OOI SemanticData: UA Data Application Configuration")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
-[assembly: AssemblyProduct("OPC UA SemanticData")]
+[assembly: AssemblyProduct("OPC UA OOI SemanticData")]
 [assembly: AssemblyCopyright("Copyright (c) 2016 CommServer")]
 [assembly: AssemblyTrademark("OPC-UA-OOI")]
 [assembly: AssemblyCulture("")]

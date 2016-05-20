@@ -14,7 +14,7 @@ string Owner = "commsvr.com";
 
 //UAOOI.SemanticData
 string SemanticDataVersion = "2.0.0";
-string SemanticDataPrerelease = "-Alpha";
+string SemanticDataPrerelease = "-Bravo";
 string SemanticDataProduct = "OPC UA OOI SemanticData";
 
 //UAOOI.DataBindings

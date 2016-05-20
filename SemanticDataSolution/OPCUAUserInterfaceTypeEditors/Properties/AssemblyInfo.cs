@@ -18,7 +18,7 @@ using System.Windows;
 [assembly: AssemblyDescription("OPC UA User Interface Type Editors Library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
-[assembly: AssemblyProduct("OPC UA SemanticData")]
+[assembly: AssemblyProduct("OPC UA OOI SemanticData")]
 [assembly: AssemblyCopyright("Copyright (c) 2016 CommServer")]
 [assembly: AssemblyTrademark("OPC-UA-OOI")]
 [assembly: AssemblyCulture("")]

@@ -13,10 +13,10 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("SemanticData DataManagement")]
-[assembly: AssemblyDescription("OPC UA SemanticData: Library supporting management of Semantic Data")]
+[assembly: AssemblyDescription("OPC UA OOI SemanticData: Library supporting management of Semantic Data")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
-[assembly: AssemblyProduct("OPC UA SemanticData")]
+[assembly: AssemblyProduct("OPC UA OOI SemanticData")]
 [assembly: AssemblyCopyright("Copyright (c) 2016 CommServer")]
 [assembly: AssemblyTrademark("OPC-UA-OOI")]
 [assembly: AssemblyCulture("")]

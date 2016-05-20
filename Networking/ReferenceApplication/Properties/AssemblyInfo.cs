@@ -14,10 +14,10 @@ using System.Runtime.InteropServices;
 using System.Windows;
 
 [assembly: AssemblyTitle("UAOOI.UANetworkingReferenceApplication")]
-[assembly: AssemblyDescription("OPC UA SemanticData: UAOOI SemanticData UA-Networking Reference Application.")]
+[assembly: AssemblyDescription("OPC UA OOI SemanticData: UAOOI SemanticData UA-Networking Reference Application.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
-[assembly: AssemblyProduct("OPC UA SemanticData")]
+[assembly: AssemblyProduct("OPC UA OOI SemanticData")]
 [assembly: AssemblyCopyright("Copyright (c) 2016 CommServer")]
 [assembly: AssemblyTrademark("OPC-UA-OOI")]
 [assembly: AssemblyCulture("")]

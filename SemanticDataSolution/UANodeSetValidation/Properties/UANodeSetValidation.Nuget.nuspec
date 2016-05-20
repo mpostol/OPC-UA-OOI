@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>UAOOI.SemanticData.UANodeSetValidation</id>
-    <version>2.0.0-Alpha</version>
+    <version>2.0.0-Bravo</version>
     <title>UAOOI.SemanticData.UANodeSetValidation - OPC UA OOI NodeSet validation</title>
     <authors>commsvr.com</authors>
     <owners>commsvr.com</owners>

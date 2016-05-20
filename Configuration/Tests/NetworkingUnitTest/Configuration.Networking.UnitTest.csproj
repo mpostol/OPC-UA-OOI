@@ -74,6 +74,7 @@
     <Compile Include="UANetworkingConfigurationUnitTest.cs" />
     <Compile Include="UATypeInfoUnitTest.cs" />
     <Compile Include="ConfigurationFactoryBaseUnitTest.cs" />
+    <Compile Include="DataSetConfigurationUnitTest.cs" />
     <Compile Include="XmlDataContractSerializersUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>

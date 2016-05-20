@@ -123,6 +123,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UANodeSetValidation.Nuget.tt</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="README.MD" />
     <None Include="XML\BuildErrorsCollection.xltx" />
@@ -144,6 +145,7 @@
     <Content Include="Properties\UANodeSetValidation.Nuget.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>UANodeSetValidation.Nuget.nuspec</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Validator.Notes..txt" />
     <Content Include="XML\BuildErrorsCollection.xml" />

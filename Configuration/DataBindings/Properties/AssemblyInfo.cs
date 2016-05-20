@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("OPC UA DataBindings Library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
-[assembly: AssemblyProduct("OPC UA DataBindings")]
+[assembly: AssemblyProduct("OPC UA OOI DataBindings")]
 [assembly: AssemblyCopyright("Copyright (c) 2016 CommServer")]
 [assembly: AssemblyTrademark("OPC-UA-OOI")]
 [assembly: AssemblyCulture("")]

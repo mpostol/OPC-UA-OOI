@@ -6,11 +6,11 @@ Current release:
 Assembly Title:         UAOOI.Configuration.DataBindings
 Assembly Description:   OPC UA DataBindings Library.
 Assembly Company:       commsvr.com
-Assembly Product:       OPC UA DataBindings
+Assembly Product:       OPC UA OOI DataBindings
 Assembly Copyright:     Copyright (c) 2016 CommServer
 Assembly Trademark:     OPC-UA-OOI
 Assembly Version:       2.0.0
-Assembly Date:          2016-02-21
+Assembly Date:          2016-05-20
 
 The main changes and new functionalities are listed below:
 

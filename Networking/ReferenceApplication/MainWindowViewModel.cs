@@ -36,8 +36,8 @@ namespace UAOOI.Networking.ReferenceApplication
       b_ConfigurationFolder = new ConfigurationFolderCommand();
       b_HelpDocumentation = new WebDocumentationCommand(Properties.Resources.HelpDocumentationUrl);
       //Menu Actions
-      b_OpenConsumerConfiguration = new OpenFileCommand(Properties.Resources.ConfigurationDataConsumerFileName);
-      b_OpenProducerConfiguration = new OpenFileCommand(Properties.Resources.ConfigurationDataProducerFileName);
+      b_OpenConsumerConfiguration = new ConfigurationEditorOpenCommand(Properties.Resources.ConfigurationDataConsumerFileName);
+      b_OpenProducerConfiguration = new ConfigurationEditorOpenCommand(Properties.Resources.ConfigurationDataProducerFileName);
       //Menu Help
       b_ReadMe = new OpenFileCommand(Properties.Resources.ReadMeFileName);
       b_TermsOfService = new WebDocumentationCommand(Properties.Resources.TermsOfServiceUrl);
@@ -484,34 +484,6 @@ namespace UAOOI.Networking.ReferenceApplication
 
     #region private
     //types
-    private class OpenFileCommand : ICommand
-    {
-      private string m_FileName;
-
-      public OpenFileCommand(string fileName)
-      {
-        m_FileName = fileName;
-      }
-      public event EventHandler CanExecuteChanged;
-      public bool CanExecute(object parameter)
-      {
-        return true;
-      }
-      public void Execute(object parameter)
-      {
-        string path = string.Empty;
-        try
-        {
-          path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-          using (Process process = Process.Start(Path.Combine(path, m_FileName))) { }
-        }
-        catch (Exception _ex)
-        {
-          MessageBox.Show($"An error occurs during opening the file {path}. Error message: {_ex}", "Problem with opening a file !", MessageBoxButton.OK, MessageBoxImage.Error);
-          return;
-        }
-      }
-    }
     private class WebDocumentationCommand : ICommand
     {
 

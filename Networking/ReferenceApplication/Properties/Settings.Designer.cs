@@ -130,5 +130,17 @@ namespace UAOOI.Networking.ReferenceApplication.Properties {
                 this["ReuseAddress"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ConfigurationEditor\\UAOOI.Configuration.DataBindings.dll")]
+        public string ConfigurationEditorPlugInSybfolder {
+            get {
+                return ((string)(this["ConfigurationEditorPlugInSybfolder"]));
+            }
+            set {
+                this["ConfigurationEditorPlugInSybfolder"] = value;
+            }
+        }
     }
 }

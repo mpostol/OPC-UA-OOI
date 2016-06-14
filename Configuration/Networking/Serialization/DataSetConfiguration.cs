@@ -22,7 +22,7 @@ namespace UAOOI.Configuration.Networking.Serialization
     /// </summary>
     /// <value>The identifier.</value>
     [XmlIgnore]
-    public Guid Id { get { return String.IsNullOrEmpty(Guid) ? System.Guid.Empty : XmlConvert.ToGuid(Guid); } set { Guid = XmlConvert.ToString(value); } }
+    public Guid Id { get { return String.IsNullOrEmpty(this.Guid) ? System.Guid.Empty : XmlConvert.ToGuid(this.Guid); } set { Guid = XmlConvert.ToString(value); } }
     internal static DataSetConfiguration Create(NodeDescriptor descriptor)
     {
       if (descriptor == null)
@@ -62,5 +62,6 @@ namespace UAOOI.Configuration.Networking.Serialization
       return $"{this.Root.NodeClass} : {this.DataSymbolicName}";
     }
     #endregion
+
   }
 }

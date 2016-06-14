@@ -2,36 +2,8 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="UAOOI.Networking.SemanticData.Association" Collapsed="true">
     <Position X="6.75" Y="2" Width="1.5" />
-    <NestedTypes>
-      <Class Name="UAOOI.Networking.SemanticData.Association.AssociationStateBase" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Association.cs</NewMemberFileName>
-        </TypeIdentifier>
-        <Lollipop Position="0.2" />
-      </Class>
-      <Class Name="UAOOI.Networking.SemanticData.Association.AssociationStateDisabled" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Association.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="UAOOI.Networking.SemanticData.Association.AssociationStateOperational" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Association.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="UAOOI.Networking.SemanticData.Association.AssociationStateNoConfiguration" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Association.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="UAOOI.Networking.SemanticData.Association.AssociationStateError" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Association.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAQAMBAgAAQQEAAAAAEAAAAAEAAAAAEAABAAAAAA=</HashCode>
+      <HashCode>AAAAAQAMBAgAAQQEAAAAAEAAAAAEAAAAAEAABAAAQAA=</HashCode>
       <FileName>Association.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -39,7 +11,7 @@
   <Class Name="UAOOI.Networking.SemanticData.ConsumerAssociation" Collapsed="true">
     <Position X="5.5" Y="3.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEBAgAAAAAEAAAAAAAAQAEAAAAAAAAAAAoAAA=</HashCode>
+      <HashCode>AAAAAAAEBAgAAAABEAAAAAAAAQAEAAAAAAAAAAAoAAA=</HashCode>
       <FileName>ConsumerAssociation.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -56,13 +28,14 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAEBAgAEAAAAABAAAgACAAEAAAAAAAAAAQkAAA=</HashCode>
+      <HashCode>AAAAAAAEBCgAEAAAAGBAAAgICAAEAQABEAAAAgQkAAQ=</HashCode>
       <FileName>ProducerAssociation.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Field Name="m_MessageWriter" />
       <Field Name="m_DataSetBindings" />
     </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="UAOOI.Networking.SemanticData.AssociationsCollection" Collapsed="true">
     <Position X="6.5" Y="4.75" Width="2.25" />
@@ -93,10 +66,10 @@
     </InheritanceLine>
     <InheritanceLine Type="System.ComponentModel.INotifyPropertyChanged" ManuallyRouted="true" FixedToPoint="true">
       <Path>
-        <Point X="14" Y="6" />
-        <Point X="14" Y="5.643" />
-        <Point X="13.062" Y="5.643" />
-        <Point X="13.062" Y="5.07" />
+        <Point X="12.5" Y="6" />
+        <Point X="12.5" Y="5.643" />
+        <Point X="12.5" Y="5.643" />
+        <Point X="12.5" Y="5.07" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -119,7 +92,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="System.ComponentModel.INotifyPropertyChanged" Collapsed="true">
-    <Position X="13" Y="6" Width="2" />
+    <Position X="11.5" Y="6" Width="2" />
     <TypeIdentifier />
   </Interface>
   <Interface Name="UAOOI.Networking.SemanticData.MessageHandling.IMessageHandler" Collapsed="true">

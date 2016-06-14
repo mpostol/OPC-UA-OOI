@@ -43,11 +43,6 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
 
     #region Header
     /// <summary>
-    /// If implemented gets or sets the identifier of producer that sends the data.
-    /// </summary>
-    /// <value>The <see cref="Guid"/> representing the producer.</value>
-    public abstract Guid PublisherId { get; set; }
-    /// <summary>
     /// If implemented gets or sets the protocol version.
     /// </summary>
     /// <value>The protocol version.</value>
@@ -56,12 +51,17 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// If implemented gets or sets the packet flags.
     /// </summary>
     /// <value>The packet flags.</value>
-    public abstract byte PacketFlags { get; set; }
+    public abstract byte NetworkMessageFlags { get; set; }
+    /// <summary>
+    /// If implemented gets or sets the identifier of producer that sends the data.
+    /// </summary>
+    /// <value>The <see cref="Guid"/> representing the producer.</value>
+    public abstract Guid PublisherId { get; set; }
     /// <summary>
     /// If implemented gets or sets the security token identifier.
     /// </summary>
     /// <value>The security token identifier.</value>
-    public abstract byte SecurityTokenId { get; set; }
+    public abstract UInt32 SecurityTokenId { get; set; }
     /// <summary>
     /// Gets or sets the length of the nonce used to initialize the encryption algorithm..
     /// </summary>
@@ -82,7 +82,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// It identifies the publisher and the message writer responsible for sending Messages for the DataSet.
     /// </summary>
     /// <value>The data set writer ids.</value>
-    public abstract ReadOnlyCollection<System.UInt16> DataSetWriterIds { get; }
+    public abstract ReadOnlyCollection<UInt16> DataSetWriterIds { get; }
     #endregion
 
     #region private implementation
@@ -102,7 +102,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       {
         get { return m_MessageCount; }
       }
-      public override byte PacketFlags
+      public override byte NetworkMessageFlags
       {
         get; set;
       }
@@ -114,7 +114,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       {
         get; set;
       }
-      public override byte SecurityTokenId
+      public override UInt32 SecurityTokenId
       {
         get; set;
       }
@@ -134,10 +134,10 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       private byte m_MessageCount;
       private void ReadPacketHeader()
       {
-        PublisherId = m_Reader.ReadGuid();
         ProtocolVersion = m_Reader.ReadByte();
-        PacketFlags = m_Reader.ReadByte();
-        SecurityTokenId = m_Reader.ReadByte();
+        NetworkMessageFlags = m_Reader.ReadByte();
+        PublisherId = m_Reader.ReadGuid();
+        SecurityTokenId = m_Reader.ReadUInt32();
         NonceLength = m_Reader.ReadByte();
         Nonce = new byte[NonceLength];
         for (int i = 0; i < NonceLength; i++)
@@ -160,7 +160,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
         if (writer == null)
           throw new ArgumentNullException(nameof(writer));
         PublisherId = producerId;
-        PacketFlags = Convert.ToByte(PacketFlagsDefinitions.PacketFlagsMessageType.RegularMessages);
+        NetworkMessageFlags = Convert.ToByte(PacketFlagsDefinitions.NetworkMessageType.RegularMessages);
         ProtocolVersion = CommonDefinitions.ProtocolVersion;
         SecurityTokenId = 0;
         NonceLength = 0;
@@ -184,7 +184,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       /// Gets or sets the message flags.
       /// </summary>
       /// <value>The message flags.</value>
-      public override byte PacketFlags
+      public override byte NetworkMessageFlags
       {
         get; set;
       }
@@ -208,7 +208,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       /// Gets or sets the security token identifier.
       /// </summary>
       /// <value>The security token identifier.</value>
-      public override byte SecurityTokenId
+      public override UInt32 SecurityTokenId
       {
         get; set;
       }
@@ -234,9 +234,9 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       {
         Debug.Assert(DataSetWriterIds != null);
         Debug.Assert(DataSetWriterIds.Count == MessageCount);
-        m_Writer.Write(PublisherId);
         m_Writer.Write(ProtocolVersion);
-        m_Writer.Write(PacketFlags);
+        m_Writer.Write(NetworkMessageFlags);
+        m_Writer.Write(PublisherId);
         m_Writer.Write(SecurityTokenId);
         m_Writer.Write(NonceLength);
         for (int i = 0; i < NonceLength; i++)

@@ -3,7 +3,7 @@
   <Class Name="UAOOI.Networking.SemanticData.MessageHandling.MessageReaderBase" Collapsed="true">
     <Position X="3" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAQAAQCAQAARAgCAAAAwCAAAGAKA0QAAEARFAQAACA=</HashCode>
+      <HashCode>AAgQAAQCAQEARAgCAAAAwCAAAWAKA1QAAEARFAQAASA=</HashCode>
       <FileName>MessageHandling\MessageReaderBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -11,7 +11,7 @@
   <Class Name="UAOOI.Networking.SemanticData.MessageHandling.MessageWriterBase" Collapsed="true">
     <Position X="9.75" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAAIAAAAAACAAQYAAAAAAAACAAAAABQUAAAA=</HashCode>
+      <HashCode>gAAAAAAAAAAAAAAAACAAQYAAAAAAAASAAAAABQUAAAA=</HashCode>
       <FileName>MessageHandling\MessageWriterBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -19,7 +19,7 @@
   <Class Name="UAOOI.Networking.SemanticData.MessageHandling.BinaryMessageEncoder" Collapsed="true">
     <Position X="9.75" Y="5.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAAICCAAAAQAAAAAgACAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAQAAAAAAAAQAAICCAAAAAAAAAAgACAAAAAAAAAAAA=</HashCode>
       <FileName>MessageHandling\BinaryMessageEncoder.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -40,7 +40,7 @@
   <Class Name="UAOOI.Networking.SemanticData.MessageHandling.BinaryDecoder" Collapsed="true">
     <Position X="3" Y="8.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQCACAAAQgCAAAAgAAAADACAUAAAEAREgAAAAA=</HashCode>
+      <HashCode>AAAAAAQCACEAAQgCAAAAgAAAADACAUAAAEAREgAAAAA=</HashCode>
       <FileName>MessageHandling\BinaryDecoder.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -55,22 +55,34 @@
   </Class>
   <Class Name="UAOOI.Networking.SemanticData.MessageHandling.MessageHeader" Collapsed="true">
     <Position X="6.5" Y="5.75" Width="1.5" />
+    <NestedTypes>
+      <Class Name="UAOOI.Networking.SemanticData.MessageHandling.MessageHeader.ProducerMessageHeader" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MessageHandling\MessageHeader.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="UAOOI.Networking.SemanticData.MessageHandling.MessageHeader.ConsumerMessageHeader" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MessageHandling\MessageHeader.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AIAAAACAAIAEAAAAAQBAAAAAIAAAAAAAIAAAAAAAAgA=</HashCode>
+      <HashCode>AIAAAACAIgAEAAAAAQBAAAAAIAAYAAAAIAAAAAAAAgA=</HashCode>
       <FileName>MessageHandling\MessageHeader.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.Networking.SemanticData.MessageHandling.PacketHeader" Collapsed="true">
     <Position X="6.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAQAAAAAAAAAAAAAAgAIQAAAAAAAIALAAAAAAA=</HashCode>
+      <HashCode>gAAAAAAQAAAAAAAAAAAAAAgAIQAAAAAAQIALAAAACAA=</HashCode>
       <FileName>MessageHandling\PacketHeader.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.Networking.SemanticData.MessageHandling.BinaryPacketDecoder" Collapsed="true">
     <Position X="3" Y="7.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MessageHandling\BinaryPacketDecoder.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

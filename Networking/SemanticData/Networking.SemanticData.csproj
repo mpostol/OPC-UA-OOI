@@ -109,7 +109,7 @@
     <Compile Include="MessageHandling\MessageTypeEnum.cs" />
     <Compile Include="MessageHandling\MessageWriterBase.cs" />
     <Compile Include="MessageHandling\PacketHeader.cs" />
-    <Compile Include="MessageHandling\PacketFlags.cs" />
+    <Compile Include="MessageHandling\NetworkMessageFlags.cs" />
     <Compile Include="ProducerAssociation.cs" />
     <Compile Include="DataRepository\ProducerBinding.cs" />
     <Compile Include="DataRepository\ProducerBindingMonitoredValue.cs" />

@@ -2,9 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using System.Linq;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
-using System.Linq;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
 {
@@ -24,7 +24,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         Assert.IsNotNull(_header);
         Assert.AreEqual<Byte>(110, _header.ProtocolVersion);
         Assert.AreEqual<Guid>(CommonDefinitions.TestGuid, _header.PublisherId);
-        _header.PacketFlags = 0;
+        _header.NetworkMessageFlags = 0;
         _header.SecurityTokenId = 0;
         _header.NonceLength = 1;
         _header.Nonce = new byte[] { 0xcc };
@@ -32,22 +32,22 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         _writer.Flush();
         _result = _stream.ToArray();
       }
-      byte[] _expected = new ArraySegment<byte>(CommonDefinitions.GetTestBinaryArrayVariant(), 0, 24).ToArray<byte>();
+      byte[] _expected = new ArraySegment<byte>(CommonDefinitions.GetTestBinaryArrayVariant(), 0, 27).ToArray<byte>();
       CollectionAssert.AreEqual(_expected, _result);
     }
     [TestMethod]
     [TestCategory("DataManagement_PacketHeaderUnitTest")]
     public void GetConsumerPacketHeaderTestMethod()
     {
-      using (MemoryStream _stream = new MemoryStream(new ArraySegment<byte>(CommonDefinitions.GetTestBinaryArrayVariant(), 0, 24).ToArray<byte>()))
+      using (MemoryStream _stream = new MemoryStream(new ArraySegment<byte>(CommonDefinitions.GetTestBinaryArrayVariant(), 0, 27).ToArray<byte>()))
       using (PacketReader _reader = new PacketReader(_stream))
       {
         PacketHeader _header = PacketHeader.GetConsumerPacketHeader(_reader);
         Assert.IsNotNull(_header);
         Assert.AreEqual<Guid>(CommonDefinitions.TestGuid, _header.PublisherId);
         Assert.AreEqual<Byte>(110, _header.ProtocolVersion);
-        Assert.AreEqual<Byte>(0, _header.PacketFlags);
-        Assert.AreEqual<Byte>(0, _header.SecurityTokenId);
+        Assert.AreEqual<Byte>(0, _header.NetworkMessageFlags);
+        Assert.AreEqual<UInt32>(0, _header.SecurityTokenId);
         Assert.AreEqual<Byte>(1, _header.NonceLength);
         CollectionAssert.AreEqual(new byte[] { 0xcc }, _header.Nonce);
         Assert.AreEqual<Byte>(1, _header.MessageCount);
@@ -85,6 +85,9 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       Assert.IsNotNull(_header);
       _header.WritePacketHeader();
     }
+    /// <summary>
+    /// Consumers the packet header test method.
+    /// </summary>
     [TestMethod]
     [TestCategory("DataManagement_PacketHeaderUnitTest")]
     public void ConsumerPacketHeaderTestMethod()
@@ -92,10 +95,10 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       HeaderReaderTest _reader = new HeaderReaderTest(m_StartPosition);
       PacketHeader _header = PacketHeader.GetConsumerPacketHeader(_reader);
       Assert.IsNotNull(_header);
-      Assert.AreEqual<byte>((byte)((byte)m_StartPosition + 16), _header.ProtocolVersion);
-      Assert.AreEqual<byte>((byte)((byte)m_StartPosition + 17), _header.PacketFlags);
-      Assert.AreEqual<byte>((byte)((byte)m_StartPosition + 18), _header.SecurityTokenId);
-      Assert.AreEqual<byte>((byte)((byte)m_StartPosition + 19), _header.NonceLength);
+      Assert.AreEqual<byte>((byte)((byte)m_StartPosition + 0), _header.ProtocolVersion);
+      Assert.AreEqual<byte>((byte)((byte)m_StartPosition + 1), _header.NetworkMessageFlags);
+      Assert.AreEqual<UInt32>((UInt32)m_StartPosition + 18, _header.SecurityTokenId);
+      Assert.AreEqual<byte>((byte)((byte)m_StartPosition + 22), _header.NonceLength);
       Assert.AreEqual<Guid>(CommonDefinitions.TestGuid, _header.PublisherId);
     }
 

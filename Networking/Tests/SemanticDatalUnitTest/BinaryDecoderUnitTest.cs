@@ -48,7 +48,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _dataId, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
         _reader.SendUDPMessage(CommonDefinitions.GetTestBinaryArrayVariant(), _dataId, _port);
         Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(113, _reader.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(116, _reader.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
         Thread.Sleep(1500);
         foreach (string _item in _Events)
@@ -56,7 +56,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         //test packet content
         Assert.AreEqual<Guid>(CommonDefinitions.TestGuid, _reader.Header.PublisherId);
         Assert.AreEqual<byte>(MessageHandling.CommonDefinitions.ProtocolVersion, _reader.Header.ProtocolVersion);
-        Assert.AreEqual<byte>(0, _reader.Header.PacketFlags);
+        Assert.AreEqual<byte>(0, _reader.Header.NetworkMessageFlags);
         Assert.AreEqual<UInt32>(0, _reader.Header.SecurityTokenId);
         Assert.AreEqual<ushort>(1, _reader.Header.NonceLength);
         Assert.AreEqual<int>(1, _reader.Header.Nonce.Length);

@@ -99,7 +99,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
                                        );
         Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
         Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(112, _writer.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(115, _writer.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
         byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArrayVariant4Consumer();
         byte[] _outputBuffer = _writer.DoUDPRead();

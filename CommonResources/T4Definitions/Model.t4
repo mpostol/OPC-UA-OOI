@@ -22,6 +22,11 @@ string DataBindingsVersion = "2.0.0";
 string DataBindingsPrerelease = "-Bravo";
 string DataBindingsProduct = "OPC UA OOI DataBindings";
 
+//UAOOI.Networking
+string NetworkingDataVersion = "3.0.0";
+string NetworkingDataPrerelease = "-Charlie";
+string NetworkingDataProduct = "OPC UA OOI Networking";
+
 //Note: 
 //Alpha, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, 
 //Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango,

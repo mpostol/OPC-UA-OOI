@@ -35,15 +35,6 @@ namespace UAOOI.Networking.ReferenceApplication.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C1F53FFB-6552-4CCC-84C9-F847147CDC85")]
-        public string AssociationConfigurationId {
-            get {
-                return ((string)(this["AssociationConfigurationId"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("localhost")]

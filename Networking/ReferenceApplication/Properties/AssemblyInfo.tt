@@ -16,16 +16,16 @@ using System.Runtime.InteropServices;
 using System.Windows;
 
 [assembly: AssemblyTitle("<#=m_AssemblyTitle#>")]
-[assembly: AssemblyDescription("<#=SemanticDataProduct#>: UAOOI SemanticData UA-Networking Reference Application.")]
+[assembly: AssemblyDescription("<#=NetworkingDataProduct#>: UAOOI SemanticData UA-Networking Reference Application.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("<#=AssemblyCompany#>")]
-[assembly: AssemblyProduct("<#=SemanticDataProduct#>")]
+[assembly: AssemblyProduct("<#=NetworkingDataProduct#>")]
 [assembly: AssemblyCopyright("<#=AssemblyCopyright#>")]
 [assembly: AssemblyTrademark("<#=ProductTrademark#>")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("<#= SemanticDataVersion #>.*")]
-[assembly: AssemblyFileVersion("<#= SemanticDataVersion #>")]
+[assembly: AssemblyVersion("<#= NetworkingDataVersion #>.*")]
+[assembly: AssemblyFileVersion("<#= NetworkingDataVersion #>")]
 [assembly: InternalsVisibleTo(
   "UAOOI.Networking.ReferenceApplication.UnitTest, PublicKey=" +
     "00240000048000009400000006020000002400005253413100040000010001005b97a0972ff6b13a" +

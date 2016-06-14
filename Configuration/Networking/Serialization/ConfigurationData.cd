@@ -20,7 +20,7 @@
     <AssociationLine Name="TypeDictionaries" Type="UAOOI.Configuration.Networking.Serialization.TypeDictionary" FixedFromPoint="true">
       <Path>
         <Point X="4" Y="2" />
-        <Point X="2.75" Y="2" />
+        <Point X="2.5" Y="2" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -162,7 +162,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.Configuration.Networking.Serialization.TypeDictionary">
-    <Position X="1" Y="1.75" Width="1.75" />
+    <Position X="0.75" Y="1.75" Width="1.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -185,7 +185,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.Configuration.Networking.Serialization.TypeDescription">
-    <Position X="1" Y="3.5" Width="1.75" />
+    <Position X="0.75" Y="3.5" Width="1.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>

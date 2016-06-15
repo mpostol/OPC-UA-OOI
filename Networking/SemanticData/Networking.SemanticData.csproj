@@ -132,6 +132,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
     </Content>
+    <None Include="READMEDataDiscoveryAndBinding.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj">

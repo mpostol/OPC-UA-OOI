@@ -47,6 +47,7 @@
         <ProducerAssociationConfiguration>
           <AssociationName>Association1</AssociationName>
           <DataSetWriterId>12345</DataSetWriterId>
+          <PublisherId>c1f53ffb-6552-4ccc-84c9-f847147cdc85</PublisherId>
           <FieldEncoding>VariantFieldEncoding</FieldEncoding>
         </ProducerAssociationConfiguration>
       </ProducerAssociationConfigurations>

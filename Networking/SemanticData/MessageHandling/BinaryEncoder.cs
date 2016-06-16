@@ -17,12 +17,8 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// Initializes a new instance of the <see cref="BinaryEncoder" /> class wrapper of <see cref="BinaryWriter" /> supporting OPC UA binary encoding..
     /// </summary>
     /// <param name="uaEncoder">The ua encoder.</param>
-    /// <param name="producerId">The producer identifier.</param>
     /// <param name="lengthFieldType">Type of the length field.</param>
-    public BinaryEncoder(IUAEncoder uaEncoder, Guid producerId, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder, lengthFieldType)
-    {
-      m_producerId = producerId;
-    }
+    public BinaryEncoder(IUAEncoder uaEncoder, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder, lengthFieldType) { }
     #endregion
 
     #region IDisposable
@@ -139,13 +135,17 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     //vars
     private MemoryStream m_output;
     private BinaryWriter m_binaryWriter;
-    private Guid m_producerId;
 
     //methods
-    protected override void OnMessageAdding(UInt16 dataSetWriterId)
+    /// <summary>
+    /// Called when new message is adding to the package payload.
+    /// </summary>
+    /// <param name="producerId">The producer identifier.</param>
+    /// <param name="dataSetWriterId">The data set writer identifier - must be unique in context of <paramref name="producerId" />.</param>
+    protected override void OnMessageAdding(Guid producerId, ushort dataSetWriterId)
     {
-      CreateUABinaryWriter(new UInt16[] { dataSetWriterId });
-      base.OnMessageAdding(dataSetWriterId);
+      CreateUABinaryWriter(producerId, new UInt16[] { dataSetWriterId });
+      base.OnMessageAdding(producerId, dataSetWriterId);
     }
     /// <summary>
     /// Sends the message.
@@ -161,11 +161,11 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       m_binaryWriter = null;
       m_output = null;
     }
-    private void CreateUABinaryWriter(IList<UInt16> m_dataSetWriterIds)
+    private void CreateUABinaryWriter(Guid producerId, IList<UInt16> dataSetWriterIds)
     {
       m_output = new MemoryStream();
       m_binaryWriter = new BinaryWriter(m_output);
-      EncodePacketHeaders(m_producerId, m_dataSetWriterIds);
+      EncodePacketHeaders(producerId, dataSetWriterIds);
     }
     #endregion
 

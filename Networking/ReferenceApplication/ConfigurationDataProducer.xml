@@ -1167,16 +1167,19 @@
         <ProducerAssociationConfiguration>
           <AssociationName>Simple</AssociationName>
           <DataSetWriterId>1</DataSetWriterId>
+          <PublisherId>d80d81dd-96e6-4560-850e-154f9181307c</PublisherId>
           <FieldEncoding>VariantFieldEncoding</FieldEncoding>
         </ProducerAssociationConfiguration>
         <ProducerAssociationConfiguration>
           <AssociationName>AllTypes</AssociationName>
           <DataSetWriterId>2</DataSetWriterId>
+          <PublisherId>d80d81dd-96e6-4560-850e-154f9181307c</PublisherId>
           <FieldEncoding>VariantFieldEncoding</FieldEncoding>
         </ProducerAssociationConfiguration>
         <ProducerAssociationConfiguration>
           <AssociationName>MassTest</AssociationName>
           <DataSetWriterId>3</DataSetWriterId>
+          <PublisherId>d80d81dd-96e6-4560-850e-154f9181307c</PublisherId>
           <FieldEncoding>VariantFieldEncoding</FieldEncoding>
         </ProducerAssociationConfiguration>
       </ProducerAssociationConfigurations>

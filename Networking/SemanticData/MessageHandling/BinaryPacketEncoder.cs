@@ -24,10 +24,11 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
 
     #region BinaryMessageEncoder
     /// <summary>
-    /// Called when new message is adding to the packet payload.
+    /// Called when new message is adding to the package payload.
     /// </summary>
-    /// <param name="dataSetWriterIds">The data set writer ids.</param>
-    protected override void OnMessageAdding(UInt16 dataSetWriterIds) { }
+    /// <param name="producerId">The producer identifier.</param>
+    /// <param name="dataSetWriterId">The data set writer identifier - must be unique in context of <paramref name="producerId" />.</param>
+    protected override void OnMessageAdding(Guid producerId, ushort dataSetWriterId) { }
     /// <summary>
     /// Called when the current message has been added and is ready to be sent out.
     /// </summary>

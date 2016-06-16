@@ -47,14 +47,15 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// <param name="contentMask">The content mask represented as unsigned number <see cref="UInt64" />. The order of the bits starting from the least significant
     /// bit matches the order of the data items within the data set.</param>
     /// <param name="encoding">The encoding.</param>
-    /// <param name="dataSetWriterId">The data set identifier.</param>
+    /// <param name="dataSelector">The data selector.</param>
     /// <param name="messageSequenceNumber">The message sequence number. A monotonically increasing sequence number assigned by the publisher to each message sent.</param>
     /// <param name="timeStamp">The time stamp - the time the Data was collected.</param>
     /// <param name="configurationVersion">The configuration version.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">Impossible to convert null value
     /// or</exception>
     void IMessageWriter.Send
-      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, UInt16 dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
+      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, DataSelector dataSelector,
+       ushort messageSequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
     {
       lock (this)
       {
@@ -62,7 +63,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
           return;
         ContentMask = contentMask;
 
-        CreateMessage(encoding, dataSetWriterId, length, messageSequenceNumber, timeStamp, configurationVersion);
+        CreateMessage(encoding, dataSelector.PublisherId, dataSelector.DataSetWriterId, length, messageSequenceNumber, timeStamp, configurationVersion);
         //UInt64 _mask = 0x1;
         for (int i = 0; i < length; i++)
         {
@@ -184,13 +185,14 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// Creates the message.
     /// </summary>
     /// <param name="encoding">The selected encoding for the message.</param>
+    /// <param name="prodicerId">The prodicer identifier.</param>
     /// <param name="dataSetWriterId">The data set writer identifier.</param>
     /// <param name="fieldCount">The field count.</param>
     /// <param name="sequenceNumber">The sequence number.</param>
     /// <param name="timeStamp">The time stamp.</param>
     /// <param name="configurationVersion">The configuration version.</param>
     internal protected abstract void CreateMessage
-      (FieldEncodingEnum encoding, UInt16 dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion);
+      (FieldEncodingEnum encoding, Guid prodicerId, UInt16 dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion);
     /// <summary>
     /// Finalize preparation and sends the message.
     /// </summary>

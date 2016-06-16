@@ -48,7 +48,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     /// <returns>An instance of <see cref="IMessageWriter"/>.</returns>
     IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, MessageChannelConfiguration configuration, IUAEncoder uaEncoder)
     {
-      BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(RemoteHostName, UDPPortNumber, ProducerId, m_Trace, m_ViewModel, uaEncoder);
+      BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(RemoteHostName, UDPPortNumber, m_Trace, m_ViewModel, uaEncoder);
       m_ToDispose(_ret);
       return _ret;
     }
@@ -70,17 +70,6 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     internal string RemoteHostName
     {
       get { return Properties.Settings.Default.RemoteHostName; }
-    }
-    /// <summary>
-    /// Gets the producer identifier.
-    /// </summary>
-    /// <value>The producer identifier.</value>
-    internal Guid ProducerId
-    {
-      get
-      {
-        return new Guid(Properties.Settings.Default.ProducerId);
-      }
     }
     #endregion
 

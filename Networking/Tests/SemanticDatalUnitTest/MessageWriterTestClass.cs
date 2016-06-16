@@ -35,7 +35,8 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       _bmw.AttachToNetwork();
       ProducerBinding _binding = new ProducerBinding();
       _binding.Value = new TestClass();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, FieldEncodingEnum.VariantFieldEncoding, ushort.MaxValue, 0, DateTime.UtcNow, new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, FieldEncodingEnum.VariantFieldEncoding, TestDataSelector, 0, DateTime.UtcNow,
+        new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
@@ -47,7 +48,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
       ProducerBinding _binding = new ProducerBinding(BuiltInType.Float);
       _binding.Value = new Nullable<float>();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, FieldEncodingEnum.VariantFieldEncoding, ushort.MaxValue, 0,  DateTime.UtcNow, new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, FieldEncodingEnum.VariantFieldEncoding, TestDataSelector, 0, DateTime.UtcNow, new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
@@ -63,7 +64,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
                                    Convert.ToUInt16(CommonDefinitions.TestValues.Length),
                                    UInt64.MaxValue,
                                    FieldEncodingEnum.VariantFieldEncoding,
-                                   ushort.MaxValue,
+                                   TestDataSelector,
                                    0,
                                    DateTime.UtcNow,
                                    new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 }
@@ -89,11 +90,12 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         ProducerBinding _binding = new ProducerBinding() { Value = String.Empty };
         int _sentItems = 0;
         Guid m_Guid = CommonDefinitions.TestGuid;
+        DataSelector _testDataSelector = new DataSelector() { DataSetWriterId = CommonDefinitions.DataSetId, PublisherId = CommonDefinitions.TestGuid  };
         ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
-                                        Convert.ToUInt16(CommonDefinitions.TestValues.Length), 
-                                        UInt64.MaxValue, 
+                                        Convert.ToUInt16(CommonDefinitions.TestValues.Length),
+                                        UInt64.MaxValue,
                                         FieldEncodingEnum.VariantFieldEncoding,
-                                        CommonDefinitions.DataSetId,
+                                        _testDataSelector,
                                         0,
                                         CommonDefinitions.TestMinimalDateTime, new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 }
                                        );
@@ -110,6 +112,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
 
     #region private
     private class TestClass { }
+    private readonly DataSelector TestDataSelector = new DataSelector() { PublisherId = Guid.NewGuid(), DataSetWriterId = UInt16.MaxValue };
     private class ProducerBinding : IProducerBinding
     {
 
@@ -140,7 +143,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         get
         {
           if (Value == null)
-            return new UATypeInfo( _builtInType);
+            return new UATypeInfo(_builtInType);
           switch (Type.GetTypeCode(Value.GetType()))
           {
             case TypeCode.Boolean:
@@ -268,7 +271,8 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       {
         Assert.IsInstanceOfType(value, typeof(byte[]));
       }
-      internal protected override void CreateMessage(FieldEncodingEnum encoding, ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
+      protected internal override void CreateMessage
+        (FieldEncodingEnum encoding, Guid prodicerId, ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
       {
         MassageCreated = true;
       }
@@ -365,7 +369,8 @@ namespace UAOOI.Networking.SemanticData.UnitTest
   {
 
     #region creator
-    public BinaryUDPPackageWriter(string remoteHostName, int port, IUAEncoder uaEncoder) : base(uaEncoder, CommonDefinitions.TestGuid, MessageLengthFieldTypeEnum.TwoBytes)
+    public BinaryUDPPackageWriter(string remoteHostName, int port, IUAEncoder uaEncoder) :
+      base(uaEncoder, MessageLengthFieldTypeEnum.TwoBytes)
     {
       State = new MyState();
       m_RemoteHostName = remoteHostName;

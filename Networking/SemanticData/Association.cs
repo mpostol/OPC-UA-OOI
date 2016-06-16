@@ -89,8 +89,8 @@ namespace UAOOI.Networking.SemanticData
     /// <param name="configuration">The configuration.</param>
     internal protected virtual void AddMessageHandler(IMessageHandler messageHandler, AssociationConfiguration configuration)
     {
-      DataSetId = configuration.DataSetWriterId;
-    }
+      DataSetId = new DataSelector() { DataSetWriterId = configuration.DataSetWriterId, PublisherId = configuration.PublisherId };
+      }
     #endregion
 
     #region IComparable
@@ -207,7 +207,7 @@ namespace UAOOI.Networking.SemanticData
     /// Gets the data set identifier.
     /// </summary>
     /// <value>The data set identifier.</value>
-    protected UInt16 DataSetId { get; private set; }
+    protected DataSelector DataSetId { get; private set; }
     /// <summary>
     /// Raises the state changed event handler.
     /// </summary>

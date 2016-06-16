@@ -47,15 +47,6 @@ namespace UAOOI.Networking.ReferenceApplication.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("d80d81dd-96e6-4560-850e-154f9181307c")]
-        public string ProducerId {
-            get {
-                return ((string)(this["ProducerId"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("4840")]

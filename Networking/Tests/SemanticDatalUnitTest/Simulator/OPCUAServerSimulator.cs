@@ -188,12 +188,34 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
     }
 
     #region IMessageWriter
+    /// <summary>
+    /// Gets the content mask. The content mast read from the message or provided by the writer.
+    /// The order of the bits starting from the least significant bit matches the order of the data items
+    /// within the data set.
+    /// </summary>
+    /// <value>The content mask represented as unsigned number <see cref="T:System.UInt64" />. The order of the bits starting from the least significant
+    /// bit matches the order of the data items within the data set.</value>
+    /// <exception cref="System.NotImplementedException"></exception>
     public ulong ContentMask
     {
       get { throw new NotImplementedException(); }
     }
+    /// <summary>
+    /// Sends the data described by a data set collection to remote destination.
+    /// </summary>
+    /// <param name="producerBinding">Encapsulates functionality used by the <see cref="T:UAOOI.Networking.SemanticData.MessageHandling.IMessageWriter" /> to collect all the data (data set items) required to prepare new message and send it over the network.</param>
+    /// <param name="length">Number of items to be send used to calculate the length of the message.</param>
+    /// <param name="contentMask">The content mask represented as unsigned number <see cref="T:System.UInt64" />. The order of the bits starting from the least significant
+    /// bit matches the order of the data items within the data set.</param>
+    /// <param name="encoding">The encoding.</param>
+    /// <param name="dataSelector">The data selector.</param>
+    /// <param name="messageSequenceNumber">The message sequence number. A monotonically increasing sequence number assigned by the publisher to each message sent.</param>
+    /// <param name="timeStamp">The time stamp - the time the Data was collected.</param>
+    /// <param name="configurationVersion">The configuration version.</param>
+    /// <exception cref="ArgumentOutOfRangeException">length</exception>
     public void Send
-      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, ushort dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
+      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, DataSelector 
+       dataSelector, ushort messageSequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
     {
       if (length > 2)
         throw new ArgumentOutOfRangeException("length");
@@ -225,6 +247,8 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
       Assert.IsNotNull(m_HaveSendData);
       Assert.IsTrue(m_HaveBeenActivated);
     }
+
+
     private bool m_HaveBeenActivated = false;
     private bool m_HaveSendData;
     private Object[] m_Buffer = null;

@@ -52,7 +52,6 @@ namespace UAOOI.Networking.SemanticData
     protected internal override void AddMessageHandler(IMessageHandler messageHandler, AssociationConfiguration configuration)
     {
       base.AddMessageHandler(messageHandler, configuration);
-      m_ProducerId = ((ConsumerAssociationConfiguration)configuration).PublisherId;
       AddMessageReader(messageHandler as IMessageReader);
     }
     protected override void OnEnabling()
@@ -69,12 +68,11 @@ namespace UAOOI.Networking.SemanticData
 
     #region private
     private IConsumerBinding[] m_DataSetBindings = null;
-    private Guid m_ProducerId;
     private void MessageHandler(object sender, MessageEventArg messageArg)
     {
       if (this.State.State != HandlerState.Operational)
         return;
-      if ((messageArg.DataSetId) != DataSetId || (messageArg.ProducerId != m_ProducerId))
+      if ((messageArg.DataSetId) != DataSetId.DataSetWriterId || (messageArg.ProducerId != DataSetId.PublisherId))
         return;
       messageArg.MessageContent.UpdateMyValues(x => m_DataSetBindings[x], m_DataSetBindings.Length);
     }

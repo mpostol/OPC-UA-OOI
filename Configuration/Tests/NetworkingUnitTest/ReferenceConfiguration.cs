@@ -63,7 +63,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
     }
     private static ProducerAssociationConfiguration[] GetProducerAssociationConfiguration()
     {
-      return new ProducerAssociationConfiguration[] { new ProducerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = DefaultDataSetWriterId, FieldEncoding = FieldEncodingEnum.VariantFieldEncoding } };
+      return new ProducerAssociationConfiguration[] { new ProducerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = DefaultDataSetWriterId, PublisherId = DefaultAssociationConfigurationId, FieldEncoding = FieldEncodingEnum.VariantFieldEncoding } };
     }
     private static TypeDictionary[] TypeDictionaries()
     {
@@ -261,6 +261,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.IsNotNull(mirror);
       Assert.AreEqual<string>(source.AssociationName, mirror.AssociationName);
       Assert.AreEqual<UInt32>(source.DataSetWriterId, mirror.DataSetWriterId);
+      Assert.AreEqual<Guid>(source.PublisherId, mirror.PublisherId);
     }
     private static void Compare(ConsumerAssociationConfiguration source, ConsumerAssociationConfiguration mirror)
     {

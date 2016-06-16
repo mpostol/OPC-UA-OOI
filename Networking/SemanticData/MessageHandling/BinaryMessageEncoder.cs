@@ -56,14 +56,16 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// Creates the message.
     /// </summary>
     /// <param name="encoding">The selected encoding for the message.</param>
+    /// <param name="prodicerId">The prodicer identifier.</param>
     /// <param name="dataSetWriterId">The data set writer identifier.</param>
     /// <param name="fieldCount">The field count.</param>
     /// <param name="sequenceNumber">The sequence number.</param>
     /// <param name="timeStamp">The time stamp.</param>
     /// <param name="configurationVersion">The configuration version.</param>
-    internal protected override void CreateMessage(FieldEncodingEnum encoding, ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
+    internal protected override void CreateMessage
+      (FieldEncodingEnum encoding, Guid prodicerId, ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
     {
-      OnMessageAdding(dataSetWriterId);
+      OnMessageAdding(prodicerId, dataSetWriterId);
       MessageHeader = MessageHeader.GetProducerMessageHeader(this, encoding, m_lengthFieldType, MessageTypeEnum.DataKeyFrame, configurationVersion);
       //Create message header and placeholder for further header content.
       MessageHeader.FieldCount = fieldCount;
@@ -86,16 +88,16 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
 
     #region private
     private MessageLengthFieldTypeEnum m_lengthFieldType;
-
     /// <summary>
     /// Called when new message is adding to the package payload.
     /// </summary>
-    protected abstract void OnMessageAdding(UInt16 dataSetWriterIds);
+    /// <param name="producerId">The producer identifier.</param>
+    /// <param name="dataSetWriterId">The data set writer identifier - must be unique in context of <paramref name="producerId"/>.</param>
+    protected abstract void OnMessageAdding(Guid producerId, UInt16 dataSetWriterId);
     /// <summary>
     /// Called when the current message has been added and is ready to be sent out.
     /// </summary>
     protected abstract void OnMessageAdded();
-
     #endregion    
 
   }

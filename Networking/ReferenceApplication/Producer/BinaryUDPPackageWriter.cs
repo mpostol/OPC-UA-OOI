@@ -16,8 +16,8 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
   {
 
     #region creator
-    public BinaryUDPPackageWriter
-      (string remoteHostName, int remotePort, Guid producerId, Action<string> trace, IProducerViewModel ViewModel, IUAEncoder uaEncoder) : base(uaEncoder, producerId, MessageLengthFieldTypeEnum.TwoBytes)
+    public BinaryUDPPackageWriter(string remoteHostName, int remotePort, Action<string> trace, IProducerViewModel ViewModel, IUAEncoder uaEncoder) : 
+      base(uaEncoder, MessageLengthFieldTypeEnum.TwoBytes)
     {
       m_Trace = trace;
       m_ViewModel = ViewModel;

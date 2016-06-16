@@ -121,7 +121,8 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     {
       internal int IsOk = 0;
       public void Send
-        (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, ushort dataSetWriterId, ushort messageSequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
+        (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, DataSelector dataSelector, 
+         ushort messageSequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
       {
         IsOk++;
         Assert.AreEqual<int>(3, length);

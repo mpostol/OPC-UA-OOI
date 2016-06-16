@@ -37,7 +37,7 @@ In figure below the relationship of the internal implementation with the overall
 
 ### Data management and binding
 
-Description of the domain model of the data management and binding is covered in the article [Data management and binding](/READMEDataDiscoveryAndBinding.md).
+Description of the domain model of the data management and binding is covered in the article [Data management and binding](./READMEDataDiscoveryAndBinding.md).
 
 ### Bindings and encodings implementation
 

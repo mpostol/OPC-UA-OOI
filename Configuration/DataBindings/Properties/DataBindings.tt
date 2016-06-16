@@ -4,7 +4,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id><#=m_AssemblyTitle#></id>
-    <version><#= DataBindingsVersion #><#= DataBindingsPrerelease #></version>
+    <version><#= ConfigurationVersion #><#= ConfigurationPrerelease #></version>
     <title><#=m_AssemblyTitle#> - OPC UA DataBindings Library</title>
     <authors><#=AssemblyCompany#></authors>
     <owners><#=Owner#></owners>

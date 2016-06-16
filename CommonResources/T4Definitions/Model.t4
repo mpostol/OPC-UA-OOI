@@ -17,10 +17,10 @@ string SemanticDataVersion = "2.0.0";
 string SemanticDataPrerelease = "-Bravo";
 string SemanticDataProduct = "OPC UA OOI SemanticData";
 
-//UAOOI.DataBindings
-string DataBindingsVersion = "2.0.0";
-string DataBindingsPrerelease = "-Bravo";
-string DataBindingsProduct = "OPC UA OOI DataBindings";
+//UAOOI.Configuration
+string ConfigurationVersion = "2.0.1";
+string ConfigurationPrerelease = "-Charlie";
+string ConfigurationProduct = "OPC UA OOI Configuration";
 
 //UAOOI.Networking
 string NetworkingDataVersion = "3.0.0";

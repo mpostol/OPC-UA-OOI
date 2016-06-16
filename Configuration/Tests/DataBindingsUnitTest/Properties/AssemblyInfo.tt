@@ -18,14 +18,14 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("OPC UA DataBindings UtitTests")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("<#=AssemblyCompany#>")]
-[assembly: AssemblyProduct("<#=DataBindingsProduct#>")]
+[assembly: AssemblyProduct("<#=ConfigurationProduct#>")]
 [assembly: AssemblyCopyright("<#=AssemblyCopyright#>")]
 [assembly: AssemblyTrademark("<#=ProductTrademark#>")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("73e0467b-131e-4a9f-8986-cb00f6c58f62")]
-[assembly: AssemblyVersion("<#= DataBindingsVersion #>.*")]
-[assembly: AssemblyFileVersion("<#= DataBindingsVersion #>")]
+[assembly: AssemblyVersion("<#= ConfigurationVersion #>.*")]
+[assembly: AssemblyFileVersion("<#= ConfigurationVersion #>")]
 
 <#@ include file = "..\..\..\..\CommonResources\T4Definitions\Model.t4" #>
 <#+

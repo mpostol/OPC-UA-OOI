@@ -159,17 +159,14 @@
   </xs:complexType>
   <xs:complexType name="ConsumerAssociationConfiguration">
     <xs:complexContent mixed="false">
-      <xs:extension base="tns:AssociationConfiguration">
-        <xs:sequence>
-          <xs:element minOccurs="1" maxOccurs="1" name="PublisherId" type="tns:guid" />
-        </xs:sequence>
-      </xs:extension>
+      <xs:extension base="tns:AssociationConfiguration" />
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="AssociationConfiguration">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="1" name="AssociationName" type="xs:string" />
       <xs:element minOccurs="1" maxOccurs="1" name="DataSetWriterId" type="xs:unsignedShort" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PublisherId" type="tns:guid" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ProducerAssociationConfiguration">

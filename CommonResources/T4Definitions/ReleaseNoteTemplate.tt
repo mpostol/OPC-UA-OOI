@@ -71,8 +71,8 @@ The Nuget package is available at:
 
 ### Versions
 
-* Assembly Product:       <#= DataBindingsProduct #>
-* Assembly Version:       <#= DataBindingsVersion #>
+* Assembly Product:       <#= ConfigurationProduct #>
+* Assembly Version:       <#= ConfigurationVersion #>
 
 ## Contact
 

@@ -12,10 +12,10 @@ Current release:
 Assembly Title:         <#=m_AssemblyTitle#>
 Assembly Description:   OPC UA DataBindings Library.
 Assembly Company:       <#=AssemblyCompany#>
-Assembly Product:       <#=DataBindingsProduct#>
+Assembly Product:       <#=ConfigurationProduct#>
 Assembly Copyright:     <#=AssemblyCopyright#>
 Assembly Trademark:     <#=ProductTrademark#>
-Assembly Version:       <#=DataBindingsVersion#>
+Assembly Version:       <#=ConfigurationVersion#>
 Assembly Date:          <#=m_Date#>
 
 The main changes and new functionalities are listed below:

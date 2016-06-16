@@ -269,7 +269,7 @@ namespace UAOOI.Configuration.Networking.Serialization
     /// An overflow of the MajorVersion is treated like any other major version change and requires a meta data exchange.
     /// </summary>
     /// <value>The major version.</value>
-    [DataMemberAttribute(EmitDefaultValue = true, IsRequired = true )]
+    [DataMemberAttribute(EmitDefaultValue = true, IsRequired = true)]
     public byte MajorVersion
     {
       get { return MajorVersionField; }
@@ -296,6 +296,7 @@ namespace UAOOI.Configuration.Networking.Serialization
 
     private string AssociationNameField;
     private UInt16 DataSetWriterIdField;
+    private Guid PublisherIdField;
 
     [DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
     public string AssociationName
@@ -308,6 +309,12 @@ namespace UAOOI.Configuration.Networking.Serialization
     {
       get { return DataSetWriterIdField; }
       set { DataSetWriterIdField = value; }
+    }
+    [DataMemberAttribute(EmitDefaultValue = false, Order = 2)]
+    public Guid PublisherId
+    {
+      get { return PublisherIdField; }
+      set { PublisherIdField = value; }
     }
 
   }
@@ -326,15 +333,7 @@ namespace UAOOI.Configuration.Networking.Serialization
   [DataContractAttribute(Name = "ConsumerAssociationConfiguration", Namespace = CommonDefinitions.Namespace)]
   [SerializableAttribute()]
   public partial class ConsumerAssociationConfiguration : AssociationConfiguration
-  {
-    private Guid PublisherIdField;
-    [DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
-    public Guid PublisherId
-    {
-      get { return PublisherIdField; }
-      set { PublisherIdField = value; }
-    }
-  }
+  { }
   [DataContractAttribute(Name = "MessageWriterConfiguration", Namespace = CommonDefinitions.Namespace)]
   [SerializableAttribute()]
   public partial class MessageWriterConfiguration : MessageHandlerConfiguration

@@ -65,8 +65,8 @@ The Nuget package is available at:
 
 ### Versions
 
-* Assembly Product:       OPC UA OOI DataBindings
-* Assembly Version:       2.0.0
+* Assembly Product:       OPC UA OOI Configuration
+* Assembly Version:       2.0.1
 
 ## Contact
 

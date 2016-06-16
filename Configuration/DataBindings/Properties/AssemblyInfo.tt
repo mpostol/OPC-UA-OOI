@@ -18,14 +18,14 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("OPC UA DataBindings Library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("<#=AssemblyCompany#>")]
-[assembly: AssemblyProduct("<#=DataBindingsProduct#>")]
+[assembly: AssemblyProduct("<#=ConfigurationProduct#>")]
 [assembly: AssemblyCopyright("<#=AssemblyCopyright#>")]
 [assembly: AssemblyTrademark("<#=ProductTrademark#>")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("bc6960f9-d096-49a0-a8d1-c5d194e54370")]
-[assembly: AssemblyVersion("<#= DataBindingsVersion #>.*")]
-[assembly: AssemblyFileVersion("<#= DataBindingsVersion #>")]
+[assembly: AssemblyVersion("<#= ConfigurationVersion #>.*")]
+[assembly: AssemblyFileVersion("<#= ConfigurationVersion #>")]
 
 <#@ include file = "..\..\..\CommonResources\T4Definitions\Model.t4" #>
 <#+

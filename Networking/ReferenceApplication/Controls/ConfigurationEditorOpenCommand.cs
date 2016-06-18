@@ -42,21 +42,20 @@ namespace UAOOI.Networking.ReferenceApplication.Controls
     /// <summary>
     /// Defines the method to be called when the command is invoked.
     /// </summary>
-    /// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+    /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
     public void Execute(object parameter)
     {
       string _filePath = string.Empty;
+      IConfiguration _editor = null;
       try
       {
         string _asseblyLocatioen = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
         _filePath = Path.Combine(_asseblyLocatioen, m_FileName);
         FileInfo _configurationFileInfo = new FileInfo(_filePath);
         if (!_configurationFileInfo.Exists)
           throw new FileNotFoundException();
         string _editorPath = Path.Combine(_asseblyLocatioen, Properties.Settings.Default.ConfigurationEditorPlugInSybfolder);
         FileInfo _editorFileInfo = new FileInfo(_editorPath);
-        IConfiguration _editor = null;
         if (_editorFileInfo.Exists)
           _editor = CreateInstance(_editorFileInfo);
         if (_editor != null)
@@ -71,6 +70,12 @@ namespace UAOOI.Networking.ReferenceApplication.Controls
       {
         MessageBox.Show($"An error occurs during opening the file {_filePath}. Error message: {_ex}", "Problem with opening a file !", MessageBoxButton.OK, MessageBoxImage.Error);
         return;
+      }
+      finally
+      {
+        IDisposable _toDispose = _editor as IDisposable;
+        if (_toDispose != null)
+          _toDispose.Dispose();
       }
     }
     #endregion

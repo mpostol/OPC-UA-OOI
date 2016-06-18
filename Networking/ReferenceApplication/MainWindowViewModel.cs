@@ -24,6 +24,10 @@ namespace UAOOI.Networking.ReferenceApplication
   internal class MainWindowViewModel : INotifyPropertyChanged, IProducerViewModel, IConsumerViewModel
   {
 
+    #region constructors
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
+    /// </summary>
     public MainWindowViewModel()
     {
       b_UDPPort = Properties.Settings.Default.UDPPort;
@@ -45,6 +49,7 @@ namespace UAOOI.Networking.ReferenceApplication
       String _version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
       b_WindowTitle = $"OPC UA Example Application Rel. {_version} supporting PubSup protocol 1.10";
     }
+    #endregion
 
     #region Window
     public string WindowTitle

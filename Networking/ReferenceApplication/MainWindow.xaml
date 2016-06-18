@@ -7,7 +7,11 @@
         xmlns:local="clr-namespace:UAOOI.Networking.ReferenceApplication"
         xmlns:code="clr-namespace:UAOOI.Networking.ReferenceApplication"
         mc:Ignorable="d"
-        Title="{Binding Path=WindowTitle}" Height="800" Width="500"  MinHeight="700" MinWidth="500" Icon="PrepareProcess.ico" WindowStartupLocation="CenterOwner" WindowState="Maximized">
+        Title="{Binding Path=WindowTitle}" 
+        Height="800" Width="500"  MinHeight="700" MinWidth="500" Icon="PrepareProcess.ico" 
+        WindowStartupLocation="CenterOwner" 
+        WindowState="Maximized"
+        Loaded="Window_Loaded">
   <Window.DataContext>
     <code:MainWindowViewModel/>
   </Window.DataContext>

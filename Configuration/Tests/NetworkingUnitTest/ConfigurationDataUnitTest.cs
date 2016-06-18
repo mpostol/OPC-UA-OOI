@@ -28,6 +28,8 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.IsNull(_newOne.ExtensionData);
       Assert.AreSame(_newOne, _newOne.GetConfigurationData());
       Assert.IsNull(_newOne.MessageHandlers);
+      Assert.IsNull(_newOne.OnChanged);
+      Assert.IsNull(_newOne.TypeDictionaries);
     }
     [TestMethod]
     [TestCategory("Configuration_ConfigurationDataUnitTest")]

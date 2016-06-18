@@ -112,6 +112,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Consumer\BinaryUDPPackageReader.cs" />
+    <Compile Include="Controls\INotification.cs" />
+    <Compile Include="Controls\InteractionRequestedEventArgs.cs" />
     <Compile Include="Controls\ConfigurationEditorOpenCommand.cs" />
     <Compile Include="Controls\IPAddressValidationRule.cs" />
     <Compile Include="Controls\OpenFileCommand.cs" />
@@ -121,6 +123,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
+    <Compile Include="SaveFileConfirmation.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

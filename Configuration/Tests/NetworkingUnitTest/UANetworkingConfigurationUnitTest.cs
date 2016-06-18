@@ -41,7 +41,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
-    public void ReadSaveConfigurationTest()
+    public void ReadConfigurationTest()
     {
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       _newConfiguration.ComposeParts();
@@ -55,8 +55,38 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
       Assert.IsNotNull(_newConfiguration.ConfigurationData);
 
+    }
+    [TestMethod]
+    [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
+    public void OnChangedConfigurationTest()
+    {
+      DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
+      _newConfiguration.ComposeParts();
+      FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");
+      Assert.IsTrue(_configFile.Exists);
+      bool _ConfigurationFileChanged = false;
+      Assert.IsNull(_newConfiguration.ConfigurationData);
+      _newConfiguration.ReadConfiguration(_configFile);
+      Assert.IsNotNull(_newConfiguration.ConfigurationData);
+      _newConfiguration.OnModified += (x, y) => { _ConfigurationFileChanged = true; };
+      Assert.IsNotNull(_newConfiguration.ConfigurationData.OnChanged);
+      _newConfiguration.ConfigurationData.OnChanged();
+      Assert.IsTrue(_ConfigurationFileChanged);
+    }
+    [TestMethod]
+    [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
+    public void ReadSaveConfigurationTest()
+    {
+      DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
+      _newConfiguration.ComposeParts();
+      FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");
+      Assert.IsNull(_newConfiguration.ConfigurationData);
+      _newConfiguration.ReadConfiguration(_configFile);
+      Assert.IsNotNull(_newConfiguration.ConfigurationData);
+
       //SaveConfiguration
-      _ConfigurationFileChanged = false;
+      bool _ConfigurationFileChanged = false;
+      _newConfiguration.OnModified += (x, y) => { _ConfigurationFileChanged = true; };
       FileInfo _fi = new FileInfo(@"BleBle.txt");
       Assert.IsFalse(_fi.Exists);
       _newConfiguration.SaveConfiguration(_fi);

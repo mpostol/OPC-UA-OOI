@@ -40,14 +40,22 @@ namespace UAOOI.Networking.ReferenceApplication
       b_ConfigurationFolder = new ConfigurationFolderCommand();
       b_HelpDocumentation = new WebDocumentationCommand(Properties.Resources.HelpDocumentationUrl);
       //Menu Actions
-      b_OpenConsumerConfiguration = new ConfigurationEditorOpenCommand(Properties.Resources.ConfigurationDataConsumerFileName);
-      b_OpenProducerConfiguration = new ConfigurationEditorOpenCommand(Properties.Resources.ConfigurationDataProducerFileName);
+      b_OpenConsumerConfiguration = new ConfigurationEditorOpenCommand(Properties.Resources.ConfigurationDataConsumerFileName, SaveResponse);
+      b_OpenProducerConfiguration = new ConfigurationEditorOpenCommand(Properties.Resources.ConfigurationDataProducerFileName, SaveResponse);
       //Menu Help
       b_ReadMe = new OpenFileCommand(Properties.Resources.ReadMeFileName);
       b_TermsOfService = new WebDocumentationCommand(Properties.Resources.TermsOfServiceUrl);
       b_ViewLicense = new WebDocumentationCommand(Properties.Resources.ViewLicenseUrl);
       String _version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
       b_WindowTitle = $"OPC UA Example Application Rel. {_version} supporting PubSup protocol 1.10";
+    }
+
+    private FileInfo SaveResponse(FileInfo arg)
+    {
+      FileInfo _ret = null;
+      SaveFileConfirmation _newFileInfo = new SaveFileConfirmation() { Title = "Save configuration file", FilePath = arg.FullName };
+      SaveFileInteractionEvent?.Invoke(this, new InteractionRequestedEventArgs(_newFileInfo, () => _ret = String.IsNullOrEmpty(_newFileInfo.FilePath) ?  null  : new FileInfo(_newFileInfo.FilePath)));
+      return _ret;
     }
     #endregion
 
@@ -63,6 +71,7 @@ namespace UAOOI.Networking.ReferenceApplication
         PropertyChanged.RaiseHandler<string>(value, ref b_WindowTitle, "WindowTitle", this);
       }
     }
+    internal event EventHandler<Controls.InteractionRequestedEventArgs> SaveFileInteractionEvent;
     private string b_WindowTitle;
     #endregion
 

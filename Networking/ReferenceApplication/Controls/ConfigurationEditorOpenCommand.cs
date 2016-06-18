@@ -17,12 +17,15 @@ namespace UAOOI.Networking.ReferenceApplication.Controls
   public class ConfigurationEditorOpenCommand : ICommand
   {
     /// <summary>
-    /// Initializes a new instance of the <see cref="ConfigurationEditorOpenCommand"/> class.
+    /// Initializes a new instance of the <see cref="ConfigurationEditorOpenCommand" /> class.
     /// </summary>
     /// <param name="fileName">Name of the file to be edited.</param>
-    public ConfigurationEditorOpenCommand(string fileName)
+    /// <param name="saveResponse">Delegate capturing functionality to go back to the caller and collect information if and where the modified configuration is to be saved. 
+    /// If the function return null the save operation must be skipped.</param>
+    public ConfigurationEditorOpenCommand(string fileName, Func<FileInfo, FileInfo> saveResponse)
     {
       m_FileName = fileName;
+      m_SaveResponse = saveResponse;
     }
 
     #region ICommand
@@ -60,8 +63,16 @@ namespace UAOOI.Networking.ReferenceApplication.Controls
           _editor = CreateInstance(_editorFileInfo);
         if (_editor != null)
         {
+          bool _configurationChanged = false;
           _editor.ReadConfiguration(_configurationFileInfo);
+          _editor.OnModified += (x, y) => _configurationChanged = true;
           _editor.EditConfiguration();
+          if (_configurationChanged)
+          {
+            FileInfo _res = m_SaveResponse(_configurationFileInfo);
+            if (_res != null)
+              _editor.SaveConfiguration(String.Empty, _res);
+          }
         }
         else
           using (Process process = Process.Start(Path.Combine(_filePath, m_FileName))) { }
@@ -78,9 +89,12 @@ namespace UAOOI.Networking.ReferenceApplication.Controls
           _toDispose.Dispose();
       }
     }
+
     #endregion
 
+    #region private
     private string m_FileName;
+    private Func<FileInfo, FileInfo> m_SaveResponse;
     private static IConfiguration CreateInstance(FileInfo assemblyFile)
     {
       Assembly _pluginAssembly = Assembly.LoadFrom(assemblyFile.FullName);
@@ -96,5 +110,7 @@ namespace UAOOI.Networking.ReferenceApplication.Controls
         }
       return _serverConfiguration;
     }
+    #endregion
+
   }
 }

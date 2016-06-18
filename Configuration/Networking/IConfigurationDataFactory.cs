@@ -1,6 +1,5 @@
 ﻿
 using System;
-using System.Runtime.Serialization;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.Networking

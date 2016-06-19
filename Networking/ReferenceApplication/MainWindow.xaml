@@ -56,8 +56,8 @@
     <DockPanel Grid.Row="0" LastChildFill="True">
       <Menu x:Name="menu" Height="20" HorizontalAlignment="Left" Width="Auto" DockPanel.Dock="Right" ToolTip="Available actions">
         <MenuItem Header="File" >
-          <MenuItem Header="Consumer Configuration" Command="{Binding Path=OpenConsumerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor."/>
-          <MenuItem Header="Producer Configuration" Command="{Binding Path=OpenProducerConfiguration}" ToolTip="Opens the configuration file of the consumer in the default xml editor." />
+          <MenuItem Header="Edit Consumer Configuration" Command="{Binding Path=OpenConsumerConfiguration}" ToolTip="Edit consumer configuration."/>
+          <MenuItem Header="Edit Producer Configuration" Command="{Binding Path=OpenProducerConfiguration}" ToolTip="Edit producer configuration." />
           <MenuItem Header="Exit" Command="SystemCommands.CloseWindowCommand" ToolTip="Exit Application" >
             <MenuItem.Icon>
               <Image Source="Icons\action_Cancel_16xLG.png" />

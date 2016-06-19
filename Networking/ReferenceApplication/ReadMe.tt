@@ -9,28 +9,25 @@ The installation package is available here: http://www.commsvr.com/COInstal/UANe
 
 Current release:
 
-Assembly Title:         <#=m_AssemblyTitle#>
-Assembly Description:   <#=SemanticDataProduct#>: UAOOI SemanticData UA-Networking Reference Application.
+Assembly Title:         <#=NetworkingDataProduct#>
+Assembly Description:   UAOOI SemanticData UA-Networking Reference Application.
 Assembly Company:       <#=AssemblyCompany#>
 Assembly Product:       <#=SemanticDataProduct#>
 Assembly Copyright:     <#=AssemblyCopyright#>
 Assembly Trademark:     <#=ProductTrademark#>
-Assembly Version:       <#=SemanticDataVersion#>
+Assembly Version:       <#=NetworkingDataVersion#><#=NetworkingDataPrerelease#>
 Assembly Date:          <#=m_Date#>
 
 The main changes and new functionalities are listed below:
 
-1. IP Multi-cast support - it is configurable on the UI
-2. Arrays and `ByteString` support - array can be configured in the configuration file
-3. Configuration updated to meet the interoperability testing requirements
-4. Improved diagnostic - added log file tracing details related to the UDP protocol communication
-5. Added new unit tests
-5. Improved tracking to the text list available on the user interface.
-7. Fixed problems with reloading Nuget packages
-6. fixed many errors.
+1. Updated the library up to new Pub/Sub Draft 14 with new protocol revision 140
+2. Added support of many published (different PublisherId) by an application at the same time. Changed the configuration schema.
+3. Added support for any external configuration file editor. Released and tested with CAS.CommServerUAOOI.ConfigurationEditor.dll
+4. Improved plug-in functionality for external logging component.
+5. Rearranged project folders structure and improved documentation.
+6. Many bug fixes and improvements.
 
 Detailed description is available at: https://github.com/mpostol/OPC-UA-OOI/commits/master
-
 _____________________________________________________________________________________________
 For assistance, contact:
 
@@ -44,9 +41,8 @@ mailto://commserver@cas.eu
 http://www.commsvr.com/
 
 <#@ include file = "Readme.old" #>
-
 <#@ include file = "..\..\CommonResources\T4Definitions\Model.t4" #>
+
 <#+
-string m_AssemblyTitle = "UAOOI.UANetworkingReferenceApplication";
 string m_Date = System.DateTime.Today.ToShortDateString();
 #>

@@ -3,28 +3,25 @@ The installation package is available here: http://www.commsvr.com/COInstal/UANe
 
 Current release:
 
-Assembly Title:         UAOOI.UANetworkingReferenceApplication
-Assembly Description:   OPC UA OOI SemanticData: UAOOI SemanticData UA-Networking Reference Application.
+Assembly Title:         OPC UA OOI Networking
+Assembly Description:   UAOOI SemanticData UA-Networking Reference Application.
 Assembly Company:       commsvr.com
 Assembly Product:       OPC UA OOI SemanticData
 Assembly Copyright:     Copyright (c) 2016 CommServer
 Assembly Trademark:     OPC-UA-OOI
-Assembly Version:       2.0.0
-Assembly Date:          2016-06-16
+Assembly Version:       2.0.0-Charlie
+Assembly Date:          2016-06-19
 
 The main changes and new functionalities are listed below:
 
-1. IP Multi-cast support - it is configurable on the UI
-2. Arrays and `ByteString` support - array can be configured in the configuration file
-3. Configuration updated to meet the interoperability testing requirements
-4. Improved diagnostic - added log file tracing details related to the UDP protocol communication
-5. Added new unit tests
-5. Improved tracking to the text list available on the user interface.
-7. Fixed problems with reloading Nuget packages
-6. fixed many errors.
+1. Updated the library up to new Pub/Sub Draft 14 with new protocol revision 140
+2. Added support of many published (different PublisherId) by an application at the same time. Changed the configuration schema.
+3. Added support for any external configuration file editor. Released and tested with CAS.CommServerUAOOI.ConfigurationEditor.dll
+4. Improved plug-in functionality for external logging component.
+5. Rearranged project folders structure and improved documentation.
+6. Many bug fixes and improvements.
 
 Detailed description is available at: https://github.com/mpostol/OPC-UA-OOI/commits/master
-
 _____________________________________________________________________________________________
 For assistance, contact:
 
@@ -38,6 +35,20 @@ mailto://commserver@cas.eu
 http://www.commsvr.com/
 
 Version History
+
+Assembly Version:       1.00.16
+Assembly Date:          2016-01-09
+
+The main changes and new functionalities are listed below:
+
+1. IP Multi-cast support - it is configurable on the UI
+2. Arrays and `ByteString` support - array can be configured in the configuration file
+3. Configuration updated to meet the interoperability testing requirements
+4. Improved diagnostic - added log file tracing details related to the UDP protocol communication
+5. Added new unit tests
+5. Improved tracking to the text list available on the user interface.
+7. Fixed problems with reloading Nuget packages
+6. fixed many errors.
 
 Assembly Version:       1.00.13
 Assembly Date:          2015-12-23

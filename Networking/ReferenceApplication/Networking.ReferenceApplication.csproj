@@ -201,6 +201,11 @@
     <Content Include="ConfigurationDataProducer.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="ReadMe.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReadMe.tt</DependentUpon>
+    </Resource>
     <Resource Include="Icons\action_Cancel_16xLG.png" />
     <None Include="ConfigurationEditor\Readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -212,12 +217,6 @@
     <Content Include="ReadMe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ReadMe.txt</LastGenOutput>
-    </Content>
-    <Content Include="ReadMe.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReadMe.tt</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>

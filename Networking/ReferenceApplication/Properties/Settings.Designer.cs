@@ -116,12 +116,12 @@ namespace UAOOI.Networking.ReferenceApplication.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("ConfigurationEditor\\UAOOI.Configuration.DataBindings.dll")]
-        public string ConfigurationEditorPlugInSybfolder {
+        public string ConfigurationEditorPlugInFilePath {
             get {
-                return ((string)(this["ConfigurationEditorPlugInSybfolder"]));
+                return ((string)(this["ConfigurationEditorPlugInFilePath"]));
             }
             set {
-                this["ConfigurationEditorPlugInSybfolder"] = value;
+                this["ConfigurationEditorPlugInFilePath"] = value;
             }
         }
     }

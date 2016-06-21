@@ -57,7 +57,7 @@ namespace UAOOI.Networking.ReferenceApplication.Controls
         FileInfo _configurationFileInfo = new FileInfo(_filePath);
         if (!_configurationFileInfo.Exists)
           throw new FileNotFoundException();
-        string _editorPath = Path.Combine(_asseblyLocatioen, Properties.Settings.Default.ConfigurationEditorPlugInSybfolder);
+        string _editorPath = Path.Combine(_asseblyLocatioen, Properties.Settings.Default.ConfigurationEditorPlugInFilePath);
         FileInfo _editorFileInfo = new FileInfo(_editorPath);
         if (_editorFileInfo.Exists)
           _editor = CreateInstance(_editorFileInfo);
@@ -75,7 +75,7 @@ namespace UAOOI.Networking.ReferenceApplication.Controls
           }
         }
         else
-          using (Process process = Process.Start(Path.Combine(_filePath, m_FileName))) { }
+          using (Process process = Process.Start(_filePath)) { }
       }
       catch (Exception _ex)
       {

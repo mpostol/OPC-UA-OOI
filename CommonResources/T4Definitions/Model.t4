@@ -23,8 +23,8 @@ string ConfigurationPrerelease = "-Charlie";
 string ConfigurationProduct = "OPC UA OOI Configuration";
 
 //UAOOI.Networking
-string NetworkingDataVersion = "2.0.0";
-string NetworkingDataPrerelease = "-Charlie";
+string NetworkingDataVersion = "2.0.1";
+string NetworkingDataPrerelease = "-Delta";
 string NetworkingDataProduct = "OPC UA OOI Networking";
 
 //Note: 

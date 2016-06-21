@@ -26,7 +26,7 @@
     <Setting Name="ReuseAddress" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="ConfigurationEditorPlugInSybfolder" Type="System.String" Scope="User">
+    <Setting Name="ConfigurationEditorPlugInFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">ConfigurationEditor\UAOOI.Configuration.DataBindings.dll</Value>
     </Setting>
   </Settings>

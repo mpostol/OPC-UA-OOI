@@ -20,7 +20,7 @@
       UAOOI Configuration DataBindings Library
     </summary>
     <releaseNotes>
-      It is working pre0release
+      It is working prerelease
     </releaseNotes>
     <copyright><#=AssemblyCopyright#></copyright>
     <tags>Object Oriented Internet, OPC UA, CommServer, ASMD, Address Space Model Designer.</tags>

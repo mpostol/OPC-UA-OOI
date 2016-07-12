@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UANodeSetValidation", "SemanticDataSolution\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj", "{352378A0-8B2E-4679-BB44-FD0BCC8467D9}"
 EndProject
@@ -68,6 +68,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.ReferenceApplication.UnitTest", "Networking\Tests\ReferenceApplicationUnitTest\Networking.ReferenceApplication.UnitTest.csproj", "{ED278519-D497-47AE-8EB1-5826904AF6B1}"
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "UANetworkingArchitecture", "CommonResources\ModelingProject\UANetworkingArchitecture\UANetworkingArchitecture.modelproj", "{90E262B4-C902-468B-9FCA-0D694B0BBF76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataDiscover", "DataDiscover", "{069B930C-EF5B-4943-AA82-0F56C33CF3DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

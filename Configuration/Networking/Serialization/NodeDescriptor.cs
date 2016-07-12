@@ -155,7 +155,7 @@ namespace UAOOI.Configuration.Networking.Serialization
       /// <exception cref="NotImplementedException"></exception>
       public int CompareTo(object obj)
       {
-        throw new NotImplementedException();
+        return this.ToString().CompareTo(obj.ToString());
       }
       #endregion
 

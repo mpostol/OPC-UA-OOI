@@ -22,7 +22,7 @@ Design time data discovery process is illustrated in the activity diagram:
 The startup process of an **UA Data Application** is illustrated in the activity diagram:
 * ![StartupActivityDiagram](../CommonResources/Media/DataDiscovery.StartupActivityDiagram.png)
 
-The proposed concept is scalable and could be used in local and global scope depending on the available resources.
+The proposed concept is scalable and could be used in local and global scope depending on the available resources. A domain model describing a scenario where this approach is applicable is covered in the document [Domain Model of the Global Data Discovery](./DomainModel.md).
 
 # Data semantics
 

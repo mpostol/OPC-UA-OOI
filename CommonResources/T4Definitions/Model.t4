@@ -12,6 +12,12 @@ string Email = "commserver@cas.eu";
 string Phone = "+48 (42) 686 25 47";
 string Owner = "commsvr.com";
 
+//UAOOI.DataDiscovery
+string DataDiscoveryTitle = "UAOOI.DataDiscovery";
+string DataDiscoveryVersion = "1.0.0";
+string DataDiscoveryPrerelease = "-Alpha";
+string DataDiscoveryProduct = "OPC UA OOI Global Data Discovery";
+
 //UAOOI.SemanticData
 string SemanticDataVersion = "2.0.0";
 string SemanticDataPrerelease = "-Bravo";

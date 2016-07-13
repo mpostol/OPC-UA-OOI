@@ -1,0 +1,43 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+
+The documentation is available online at: TBD
+
+Current release:
+
+Assembly Title:         <#=m_AssemblyTitle#>
+Assembly Description:   <#=DataDiscoveryProduct#>.
+Assembly Company:       <#=AssemblyCompany#>
+Assembly Product:       <#=DataDiscoveryProduct#>
+Assembly Copyright:     <#=AssemblyCopyright#>
+Assembly Trademark:     <#=ProductTrademark#>
+Assembly Version:       <#=DataDiscoveryVersion#><#=DataDiscoveryPrerelease#>
+Assembly Date:          <#=m_Date#>
+
+The main changes and new functionalities are listed below:
+
+1.
+
+____________________________________________________________________________________________
+For assistance, contact:
+
+Mariusz Postol
+CAS
+mailto://mpostol@cas.eu
+
+Copyright (C) <#=m_Year#>, commsvr.com LODZ POLAND
+TEL: +48 (42) 686 25 47
+mailto://commserver@cas.eu
+http://www.commsvr.com/
+
+<#@ include file = "Readme.old" #>
+<#@ include file = "..\..\CommonResources\T4Definitions\Model.t4" #>
+<#+
+string m_AssemblyTitle = "UAOOI.DataDiscovery.DiscoveryServices";
+string m_Date = System.DateTime.Today.ToShortDateString();
+string m_Year = System.DateTime.Today.Year.ToString();
+#>

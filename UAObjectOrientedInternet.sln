@@ -69,7 +69,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.ReferenceApplica
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "UANetworkingArchitecture", "CommonResources\ModelingProject\UANetworkingArchitecture\UANetworkingArchitecture.modelproj", "{90E262B4-C902-468B-9FCA-0D694B0BBF76}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataDiscover", "DataDiscover", "{069B930C-EF5B-4943-AA82-0F56C33CF3DD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataDiscovery", "DataDiscovery", "{069B930C-EF5B-4943-AA82-0F56C33CF3DD}"
+	ProjectSection(SolutionItems) = preProject
+		DataDiscovery\DomainModel.md = DataDiscovery\DomainModel.md
+		DataDiscovery\Readme.md = DataDiscovery\Readme.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDiscovery.DiscoveryServices", "DataDiscovery\DiscoveryServices\DataDiscovery.DiscoveryServices.csproj", "{DD1A7EC2-FF25-4D35-9D0A-5BB626E61D17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDiscovery.DiscoveryServices.UnitTest", "DataDiscovery\Tests\DiscoveryServices.UnitTest\DataDiscovery.DiscoveryServices.UnitTest.csproj", "{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,6 +169,14 @@ Global
 		{90E262B4-C902-468B-9FCA-0D694B0BBF76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90E262B4-C902-468B-9FCA-0D694B0BBF76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90E262B4-C902-468B-9FCA-0D694B0BBF76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD1A7EC2-FF25-4D35-9D0A-5BB626E61D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD1A7EC2-FF25-4D35-9D0A-5BB626E61D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD1A7EC2-FF25-4D35-9D0A-5BB626E61D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD1A7EC2-FF25-4D35-9D0A-5BB626E61D17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -191,5 +207,7 @@ Global
 		{F7C29437-0923-449C-B4E9-36653A55C3E5} = {19A61D68-0ECA-4093-AEE5-370BC3CE777C}
 		{ED278519-D497-47AE-8EB1-5826904AF6B1} = {19A61D68-0ECA-4093-AEE5-370BC3CE777C}
 		{90E262B4-C902-468B-9FCA-0D694B0BBF76} = {78EDB72A-77B1-4A64-8E76-17E780993017}
+		{DD1A7EC2-FF25-4D35-9D0A-5BB626E61D17} = {069B930C-EF5B-4943-AA82-0F56C33CF3DD}
+		{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE} = {069B930C-EF5B-4943-AA82-0F56C33CF3DD}
 	EndGlobalSection
 EndGlobal

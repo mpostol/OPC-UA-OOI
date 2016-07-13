@@ -4,7 +4,7 @@
 
 In this approach, the URI of the OPC UA **Information Model** is to be used as a unique key to browse the *Global Data Discovery System* (GDDS – an expanded version of GDS) to find recursively the destination *OPC UA Server* or *UA Data Application* exposing the requested data.
 
-The main assumption of the concept are covered in the document:
+The main assumptions of the concept are covered in the document:
 [Discoverable Data](https://github.com/mpostol/OPC-UA-OOI/blob/88943207bd375c12785578ecccf60b564963e6e3/SemanticDataSolution/README.MD#discoverable-data)
 
 The URI syntax is described in the document: [Uniform Resource Identifier (URI): Generic Syntax](http://tools.ietf.org/html/rfc3986).
@@ -17,10 +17,10 @@ The **Data Discovery** procedure may be applied to the following scenarios:
 
 Design time data discovery process is illustrated in the activity diagram:
 
-* [Design Time Activities](https://raw.githubusercontent.com/mpostol/OPC-UA-OOI/master/CommonResources/Media/DataDiscovery.Design%20Time%20Activities.png)
+* ![Design Time Activities](../CommonResources/Media/DataDiscovery.Design%20Time%20Activities.png)
 
 The startup process of an **UA Data Application** is illustrated in the activity diagram:
-* [StartupActivityDiagram](https://raw.githubusercontent.com/mpostol/OPC-UA-OOI/master/CommonResources/Media/DataDiscovery.StartupActivityDiagram.png)
+* ![StartupActivityDiagram](../CommonResources/Media/DataDiscovery.StartupActivityDiagram.png)
 
 The proposed concept is scalable and could be used in local and global scope depending on the available resources.
 

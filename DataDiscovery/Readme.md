@@ -13,7 +13,7 @@ The **Data Discovery** procedure may be applied to the following scenarios:
 
 * **Design time data discovery** - all about using data definition (OPC UA Information Model - semantics) to configure data bindings and data distribution over the wire.
 * **Startup process** - all about bootstrapping process of the **UA Data Application**.
-* **Operational time scenarios** - all about dynamic data definitions and security stuff management (certificates, keys)
+* **Operational time** - all about dynamic data definitions and security stuff management (certificates, keys)
 
 Design time data discovery process is illustrated in the activity diagram:
 
@@ -29,7 +29,7 @@ The proposed concept is scalable and could be used in local and global scope dep
 In the discovery process the semantics of the data is layered as follows:
 1. Value encoding (serialization), e.g. double, Int32, Boolean,
 2. Value meaning, e.g. pressure, temperature, flow, etc.
-3. Values relation, e.g. boiler object type
+3. Values relation, e.g. boiler object type containing relation between drum, input pipe and flow neater.
 4. Process – data source, e.g. set of boilers: `Boiler #1`, `Boiler #i`, ...., `Boiler #N` located at…..
 
 Semantics of the data is expressed using types. Process data is available as the Variables described by types.
@@ -39,7 +39,7 @@ Semantics of the data is expressed using types. Process data is available as the
 > * the data types - to get meaning and design data management and processing
 > * the data values - to get current process state and control it
 
-# URI authority resolver
+# URI resolver
 
 ```
         foo://example.com:8042/over/there?name=ferret#nose
@@ -52,7 +52,7 @@ It is assumed that the **Data Domain** description is provided by the discovery 
 The main challenge is where the recursive resolution process shall start. It seems we have the following options:
 
 1. Direct - the URI is URL of the XML/Json files containing all definitions required to configure application.
-2. Authority is DNS entry (more: [DOMAIN NAMES - CONCEPTS AND FACILITIES
+2. Authority part of the model URI is a DNS entry (more: [DOMAIN NAMES - CONCEPTS AND FACILITIES
 ](https://tools.ietf.org/html/rfc1034) )  in the information model URI zone – on promise services.  
 3. A selected root HTTP services, e.g. in the opcfoundation.com domain.
 

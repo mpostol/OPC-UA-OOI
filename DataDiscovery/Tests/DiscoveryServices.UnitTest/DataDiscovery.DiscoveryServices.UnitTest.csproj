@@ -25,7 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoWarn>IDE0001, IDE0003</NoWarn>
+    <NoWarn>IDE0001, IDE0002, IDE0003</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -53,7 +53,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -72,11 +74,17 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
     </Content>
-    <Content Include="TestData\DomainDescriptor.xml" />
+    <None Include="TestData\DomainDescriptor.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="TestData\root.zone\commsvr.com\DomainDescriptor.xml" />
     <Content Include="TestData\root.zone\commsvr.com\ua\Examples\BoilersSet\DomainDescriptor.xml" />
-    <Content Include="TestData\root.zone\commsvr.com\ua\Examples\BoilersSet\DomainModel.xml" />
-    <Content Include="TestData\root.zone\DomainDescriptor.xml" />
+    <Content Include="TestData\root.zone\commsvr.com\ua\Examples\BoilersSet\DomainModel.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="TestData\root.zone\DomainDescriptor.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="TestData\DomainModel.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -94,6 +102,7 @@
     </Compile>
     <Compile Include="TestData\commsvr.com.UA.Examples.BoilersSet.DomainModel.cs" />
     <Compile Include="TestData\RootDomainDescriptorFactory.cs" />
+    <Compile Include="DomainDescriptorUnitTest.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

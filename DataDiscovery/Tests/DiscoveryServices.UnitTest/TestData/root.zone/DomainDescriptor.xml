@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DomainDescriptor xmlns="http://commsvr.com/UAOOI/DataDiscovery/DiscoveryServices/Models/DomainDescriptor.xsd">
-  <Description>Starting point for discovery propcess with the purpose of resolving Uri and get DomainModel record</Description>
+  <Description>Starting point for discovery process with the purpose of resolving Uri and get DomainModel record</Description>
   <UrlPattern>http://localhost/root.zone/#authority#/DomainDescriptor.xml</UrlPattern>
   <NextStepRecordType>DomainDescriptor</NextStepRecordType>
 </DomainDescriptor>

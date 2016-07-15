@@ -2,6 +2,7 @@
 using CUAOOI.DataDiscovery.DiscoveryServices.UnitTest.TestData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -14,47 +15,24 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest
   {
 
     [TestMethod]
-    public void ResolveUriTestMethod()
+    public void RGetHTTPResponseAsyncTestMethod()
     {
-      DomainDescriptor _rootDomainDescriptor = RootDomainDescriptorFactory.GetRootDomainDescriptor();
-      Uri _resolution = _rootDomainDescriptor.ResolveUri(m_ModelUri);
-      Assert.AreEqual<string>(m_ExpectedFirsRoundUrl, _resolution.ToString());
-      string _fn = "RootDomainDescriptor.xml";
-      FileInfo _fi = new FileInfo($@"TestData\{_fn}");
-      using (Stream _outputStream = _fi.Create())
-      {
-        XmlSerializer _serializer = new XmlSerializer(typeof(DomainDescriptor));
-        _serializer.Serialize(_outputStream, _rootDomainDescriptor);
-      }
-      _fi.Refresh();
-      Assert.IsTrue(_fi.Exists);
-      Assert.IsTrue(_fi.Length > 0);
-      DomainDescriptor _tc;
-      using (Stream _descriptionStream = _fi.OpenRead())
-      {
-        XmlSerializer _serializer = new XmlSerializer(typeof(DomainDescriptor));
-        _tc = (DomainDescriptor)_serializer.Deserialize(_descriptionStream);
-        Assert.IsNotNull(_tc);
-      }
+      DomainDescriptor _tc = null;
+      DataDiscoveryServices.GetHTTPResponse<DomainDescriptor>(m_RootUrl, DebugLog, x => _tc = x);
+      Assert.IsNotNull(_tc);
       Assert.IsTrue(_tc.Description.Contains("Starting point"));
       Assert.AreEqual<RecordType>(RecordType.DomainDescriptor, _tc.NextStepRecordType);
-      Assert.AreEqual<string>("http://localhost/opc/#authority#/DomainDescriptor.xml", _tc.UrlPattern);
-      _resolution = _tc.ResolveUri(m_ModelUri);
-      Assert.AreEqual<string>(m_ExpectedFirsRoundUrl, _resolution.ToString());
+      Assert.AreEqual<string>("http://localhost/root.zone/#authority#/DomainDescriptor.xml", _tc.UrlPattern);
+      Uri _resolution = _tc.ResolveUri(m_ModelUri);
+      Assert.AreEqual<string>("http://localhost/root.zone/commsvr.com/DomainDescriptor.xml", _resolution.ToString());
     }
-    //[TestMethod]
-    //public void ResolveDomainDescriptionAsyncTestMethod()
-    //{
-    //  Task<DomainDescriptor> _task = ResolveDomainDescriptionAsync<DomainDescriptor>(m_RootUrl);
-    //  _task.Wait(TimeSpan.FromSeconds(10));
-    //  DomainDescriptor _tc = _task.Result;
-    //  Assert.IsNotNull(_tc);
-    //  Assert.IsTrue(_tc.Description.Contains("Starting point"));
-    //  Assert.AreEqual<RecordType>(RecordType.DomainDescriptor, _tc.NextStepRecordType);
-    //  Assert.AreEqual<string>("http://localhost/opc/#authority#/DomainDescriptor.xml", _tc.UrlPattern);
-    //  Uri _resolution = _tc.ResolveUri(m_ModelUri);
-    //  Assert.AreEqual<string>(m_ExpectedFirsRoundUrl, _resolution.ToString());
-    //}
+    [TestMethod]
+    [ExpectedException(typeof(System.AggregateException))]
+    public void GetHTTPResponseAsyncRetryCountErrorTestMethod()
+    {
+      DomainDescriptor _tc = null;
+      DataDiscoveryServices.GetHTTPResponse<DomainDescriptor>(new Uri("http://localhost/alfa.bravo.xml"), DebugLog, x => _tc = x);
+    }
     //TODO test consistency accusing local files
     //[TestMethod]
     //public void RecursiveResolveDomainDescriptionTestMethod()
@@ -113,18 +91,20 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest
     [TestMethod]
     public void ResolveDomainModelAsyncTestMethod()
     {
-      Task<DomainModel> _DomainModelTask = DataDiscoveryServices.ResolveDomainModelAsync
-        ( m_ModelUri, 
-          (x, y, z) => { System.Diagnostics.Debug.WriteLine($"ResolveDomainModelAsync log: message: {x}, level: {y}, priority: {z}"); }
-        );
+      Task<DomainModel> _DomainModelTask = DataDiscoveryServices.ResolveDomainModelAsync(m_ModelUri, m_RootUrl, DebugLog);
       _DomainModelTask.Wait(TimeSpan.FromSeconds(10));
       DomainModel _model = _DomainModelTask.Result;
       Assert.IsNotNull(_model);
     }
 
-    Uri m_RootUrl = new Uri(@"http://localhost/opc/DomainDescriptor.xml");
-    Uri m_ModelUri = new Uri(@"http://commsvr.com/UA/Examples/BoilersSet");
-    string m_ExpectedFirsRoundUrl = @"http://localhost/opc/commsvr.com/DomainDescriptor.xml";
+    //tests instrumentation
+    private Uri m_RootUrl = new Uri(@"https://raw.githubusercontent.com/mpostol/OPC-UA-OOI/master/DataDiscovery/Tests/DiscoveryServices.UnitTest/TestData/root.zone/DomainDescriptor.xml");
+    private Uri m_ModelUri = new Uri(@"http://commsvr.com/UA/Examples/BoilersSet");
+    private string m_ExpectedFirsRoundUrl = @"http://localhost/opc/commsvr.com/DomainDescriptor.xml";
+    private void DebugLog(string message, TraceEventType eventType, Priority priority)
+    {
+      Debug.WriteLine($"ResolveDomainModelAsync log: message: {message}, level: {eventType}, priority: {priority}");
+    }
 
   }
 }

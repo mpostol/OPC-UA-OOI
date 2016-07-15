@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DomainDescriptor xmlns="http://commsvr.com/UAOOI/DataDiscovery/DiscoveryServices/Models/DomainDescriptor.xsd">
+  <Description>Boiler test domain model.</Description>
+  <UrlPattern>http://localhost/root.zone/#authority#/#path#/DomainModel.xml</UrlPattern>
+  <NextStepRecordType>DomainModel</NextStepRecordType>
+</DomainDescriptor>

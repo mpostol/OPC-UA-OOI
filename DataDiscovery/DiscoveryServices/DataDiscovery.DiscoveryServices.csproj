@@ -48,7 +48,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Models\DomainDescriptor.GoCS.cmd" />
+    <None Include="Models\DomainDescriptor.GoXSD.cmd" />
+    <None Include="Models\DomainDescriptor.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Models\DomainModel.GoCS.cmd" />
+    <None Include="Models\DomainModel.GoXSD.cmd" />
+    <None Include="Models\DomainModel.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="OPCUAOOIKey.snk" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Readme.md" />
     <None Include="ReadMe.old" />
   </ItemGroup>
@@ -71,10 +86,21 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataDiscoveryServices.cs" />
+    <Compile Include="Models\DomainDescriptor.cs" />
+    <Compile Include="Models\DomainDescriptor.xsd.cs" />
+    <Compile Include="Models\DomainModel.cs" />
+    <Compile Include="Models\DomainModel.xsd.cs" />
+    <Compile Include="Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

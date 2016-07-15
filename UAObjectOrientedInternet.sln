@@ -79,6 +79,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDiscovery.DiscoveryServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDiscovery.DiscoveryServices.UnitTest", "DataDiscovery\Tests\DiscoveryServices.UnitTest\DataDiscovery.DiscoveryServices.UnitTest.csproj", "{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E3C23D75-E017-46B0-BDAA-6D98C14A9CCA}"
+	ProjectSection(SolutionItems) = preProject
+		..\CommServer.UA.OOI\CommServer.UA.OOI\OOI.ConfigurationEditor\app.config = ..\CommServer.UA.OOI\CommServer.UA.OOI\OOI.ConfigurationEditor\app.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

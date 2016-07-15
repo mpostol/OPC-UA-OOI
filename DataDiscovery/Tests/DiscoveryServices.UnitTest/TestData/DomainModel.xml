@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DomainModel xmlns="http://http://commsvr.com/UAOOI/DataDiscovery/DiscoveryServices/Models/DomainModel.xsd">
+  <AliasName>AliasName1</AliasName>
+  <DomainModelUriString>DomainModelUriString1</DomainModelUriString>
+  <DomainModelGuidString>DomainModelGuidString1</DomainModelGuidString>
+  <Description>Description1</Description>
+  <SemanticsDataCollection>
+    <SemanticsDataIndex>
+      <SymbolicName>SymbolicName1</SymbolicName>
+      <Index>0</Index>
+      <DataSet>
+        <FieldMetaData>
+          <ExtensionData />
+          <SymbolicName>SymbolicName1</SymbolicName>
+          <ProcessValueName>ProcessValueName1</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Null</BuiltInType>
+            <ValueRank>1</ValueRank>
+            <ArrayDimensions>
+              <int>1</int>
+              <int>-2147483647</int>
+              <int>2147483647</int>
+            </ArrayDimensions>
+            <TypeName>qname1</TypeName>
+          </TypeInformation>
+        </FieldMetaData>
+        <FieldMetaData>
+          <ExtensionData />
+          <SymbolicName>SymbolicName2</SymbolicName>
+          <ProcessValueName>ProcessValueName2</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Boolean</BuiltInType>
+            <ValueRank>-2147483647</ValueRank>
+            <ArrayDimensions>
+              <int>0</int>
+              <int>2</int>
+              <int>-2147483646</int>
+            </ArrayDimensions>
+            <TypeName>qname2</TypeName>
+          </TypeInformation>
+        </FieldMetaData>
+        <FieldMetaData>
+          <ExtensionData />
+          <SymbolicName>SymbolicName3</SymbolicName>
+          <ProcessValueName>ProcessValueName3</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>SByte</BuiltInType>
+            <ValueRank>2147483647</ValueRank>
+            <ArrayDimensions>
+              <int>2147483646</int>
+              <int>-1</int>
+              <int>3</int>
+            </ArrayDimensions>
+            <TypeName>qname3</TypeName>
+          </TypeInformation>
+        </FieldMetaData>
+      </DataSet>
+    </SemanticsDataIndex>
+    <SemanticsDataIndex>
+      <SymbolicName>SymbolicName2</SymbolicName>
+      <Index>65535</Index>
+      <DataSet>
+        <FieldMetaData>
+          <ExtensionData />
+          <SymbolicName>SymbolicName4</SymbolicName>
+          <ProcessValueName>ProcessValueName4</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Byte</BuiltInType>
+            <ValueRank>0</ValueRank>
+            <ArrayDimensions>
+              <int>-2147483645</int>
+              <int>2147483645</int>
+              <int>-2</int>
+            </ArrayDimensions>
+            <TypeName>qname4</TypeName>
+          </TypeInformation>
+        </FieldMetaData>
+        <FieldMetaData>
+          <ExtensionData />
+          <SymbolicName>SymbolicName5</SymbolicName>
+          <ProcessValueName>ProcessValueName5</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Int16</BuiltInType>
+            <ValueRank>2</ValueRank>
+            <ArrayDimensions>
+              <int>4</int>
+              <int>-2147483644</int>
+              <int>2147483644</int>
+            </ArrayDimensions>
+            <TypeName>qname5</TypeName>
+          </TypeInformation>
+        </FieldMetaData>
+        <FieldMetaData>
+          <ExtensionData />
+          <SymbolicName>SymbolicName6</SymbolicName>
+          <ProcessValueName>ProcessValueName6</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>UInt16</BuiltInType>
+            <ValueRank>-2147483646</ValueRank>
+            <ArrayDimensions>
+              <int>-3</int>
+              <int>5</int>
+              <int>-2147483643</int>
+            </ArrayDimensions>
+            <TypeName>qname6</TypeName>
+          </TypeInformation>
+        </FieldMetaData>
+      </DataSet>
+    </SemanticsDataIndex>
+    <SemanticsDataIndex>
+      <SymbolicName>SymbolicName3</SymbolicName>
+      <Index>1</Index>
+      <DataSet>
+        <FieldMetaData>
+          <ExtensionData />
+          <SymbolicName>SymbolicName7</SymbolicName>
+          <ProcessValueName>ProcessValueName7</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Int32</BuiltInType>
+            <ValueRank>2147483646</ValueRank>
+            <ArrayDimensions>
+              <int>2147483643</int>
+              <int>-4</int>
+              <int>6</int>
+            </ArrayDimensions>
+            <TypeName>qname7</TypeName>
+          </TypeInformation>
+        </FieldMetaData>
+        <FieldMetaData>
+          <ExtensionData />
+          <SymbolicName>SymbolicName8</SymbolicName>
+          <ProcessValueName>ProcessValueName8</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <ValueRank>-1</ValueRank>
+            <ArrayDimensions>
+              <int>-2147483642</int>
+              <int>2147483642</int>
+              <int>-5</int>
+            </ArrayDimensions>
+            <TypeName>qname8</TypeName>
+          </TypeInformation>
+        </FieldMetaData>
+        <FieldMetaData>
+          <ExtensionData />
+          <SymbolicName>SymbolicName9</SymbolicName>
+          <ProcessValueName>ProcessValueName9</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Int64</BuiltInType>
+            <ValueRank>3</ValueRank>
+            <ArrayDimensions>
+              <int>7</int>
+              <int>-2147483641</int>
+              <int>2147483641</int>
+            </ArrayDimensions>
+            <TypeName>qname9</TypeName>
+          </TypeInformation>
+        </FieldMetaData>
+      </DataSet>
+    </SemanticsDataIndex>
+  </SemanticsDataCollection>
+  <UniversalAddressSpaceLocator>UniversalAddressSpaceLocator1</UniversalAddressSpaceLocator>
+  <UniversalAuthorizationServerLocator>UniversalAuthorizationServerLocator1</UniversalAuthorizationServerLocator>
+  <TypeDictionaries>
+    <TypeDictionary TargetNamespace="TargetNamespace1">
+      <StructuredType Name="NcName1">
+        <Field Name="Name1" TypeName="qname1" SwitchField="SwitchField1" SwitchValue="0" SwitchOperand="Equals" />
+        <Field Name="Name2" TypeName="qname2" SwitchField="SwitchField2" SwitchValue="4294967295" SwitchOperand="GreaterThan" />
+        <Field Name="Name3" TypeName="qname3" SwitchField="SwitchField3" SwitchValue="1" SwitchOperand="LessThan" />
+        <StructureKind>Structure</StructureKind>
+      </StructuredType>
+      <StructuredType Name="NcName2">
+        <Field Name="Name4" TypeName="qname4" SwitchField="SwitchField4" SwitchValue="4294967294" SwitchOperand="GreaterThanOrEqual" />
+        <Field Name="Name5" TypeName="qname5" SwitchField="SwitchField5" SwitchValue="2" SwitchOperand="LessThanOrEqual" />
+        <Field Name="Name6" TypeName="qname6" SwitchField="SwitchField6" SwitchValue="4294967293" SwitchOperand="NotEqual" />
+        <StructureKind>StructureWithOptionalFields</StructureKind>
+      </StructuredType>
+      <StructuredType Name="NcName3">
+        <Field Name="Name7" TypeName="qname7" SwitchField="SwitchField7" SwitchValue="3" SwitchOperand="Equals" />
+        <Field Name="Name8" TypeName="qname8" SwitchField="SwitchField8" SwitchValue="4294967292" SwitchOperand="GreaterThan" />
+        <Field Name="Name9" TypeName="qname9" SwitchField="SwitchField9" SwitchValue="4" SwitchOperand="LessThan" />
+        <StructureKind>Union</StructureKind>
+      </StructuredType>
+    </TypeDictionary>
+    <TypeDictionary TargetNamespace="TargetNamespace2">
+      <StructuredType Name="NcName4">
+        <Field Name="Name10" TypeName="qname10" SwitchField="SwitchField10" SwitchValue="4294967291" SwitchOperand="GreaterThanOrEqual" />
+        <Field Name="Name11" TypeName="qname11" SwitchField="SwitchField11" SwitchValue="5" SwitchOperand="LessThanOrEqual" />
+        <Field Name="Name12" TypeName="qname12" SwitchField="SwitchField12" SwitchValue="4294967290" SwitchOperand="NotEqual" />
+        <StructureKind>Structure</StructureKind>
+      </StructuredType>
+      <StructuredType Name="NcName5">
+        <Field Name="Name13" TypeName="qname13" SwitchField="SwitchField13" SwitchValue="6" SwitchOperand="Equals" />
+        <Field Name="Name14" TypeName="qname14" SwitchField="SwitchField14" SwitchValue="4294967289" SwitchOperand="GreaterThan" />
+        <Field Name="Name15" TypeName="qname15" SwitchField="SwitchField15" SwitchValue="7" SwitchOperand="LessThan" />
+        <StructureKind>StructureWithOptionalFields</StructureKind>
+      </StructuredType>
+      <StructuredType Name="NcName6">
+        <Field Name="Name16" TypeName="qname16" SwitchField="SwitchField16" SwitchValue="4294967288" SwitchOperand="GreaterThanOrEqual" />
+        <Field Name="Name17" TypeName="qname17" SwitchField="SwitchField17" SwitchValue="8" SwitchOperand="LessThanOrEqual" />
+        <Field Name="Name18" TypeName="qname18" SwitchField="SwitchField18" SwitchValue="4294967287" SwitchOperand="NotEqual" />
+        <StructureKind>Union</StructureKind>
+      </StructuredType>
+    </TypeDictionary>
+    <TypeDictionary TargetNamespace="TargetNamespace3">
+      <StructuredType Name="NcName7">
+        <Field Name="Name19" TypeName="qname19" SwitchField="SwitchField19" SwitchValue="9" SwitchOperand="Equals" />
+        <Field Name="Name20" TypeName="qname20" SwitchField="SwitchField20" SwitchValue="4294967286" SwitchOperand="GreaterThan" />
+        <Field Name="Name21" TypeName="qname21" SwitchField="SwitchField21" SwitchValue="10" SwitchOperand="LessThan" />
+        <StructureKind>Structure</StructureKind>
+      </StructuredType>
+      <StructuredType Name="NcName8">
+        <Field Name="Name22" TypeName="qname22" SwitchField="SwitchField22" SwitchValue="4294967285" SwitchOperand="GreaterThanOrEqual" />
+        <Field Name="Name23" TypeName="qname23" SwitchField="SwitchField23" SwitchValue="11" SwitchOperand="LessThanOrEqual" />
+        <Field Name="Name24" TypeName="qname24" SwitchField="SwitchField24" SwitchValue="4294967284" SwitchOperand="NotEqual" />
+        <StructureKind>StructureWithOptionalFields</StructureKind>
+      </StructuredType>
+      <StructuredType Name="NcName9">
+        <Field Name="Name25" TypeName="qname25" SwitchField="SwitchField25" SwitchValue="12" SwitchOperand="Equals" />
+        <Field Name="Name26" TypeName="qname26" SwitchField="SwitchField26" SwitchValue="4294967283" SwitchOperand="GreaterThan" />
+        <Field Name="Name27" TypeName="qname27" SwitchField="SwitchField27" SwitchValue="13" SwitchOperand="LessThan" />
+        <StructureKind>Union</StructureKind>
+      </StructuredType>
+    </TypeDictionary>
+  </TypeDictionaries>
+</DomainModel>

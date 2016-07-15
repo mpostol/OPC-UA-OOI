@@ -1,0 +1,1 @@
+xsd.exe ..\bin\Debug\CASUAOOI.DataDiscovery.DiscoveryServices.dll /t:UAOOI.DataDiscovery.DiscoveryServices.Models.DomainDescriptor

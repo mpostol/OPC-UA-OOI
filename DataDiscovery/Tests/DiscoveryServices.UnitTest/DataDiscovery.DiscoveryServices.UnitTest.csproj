@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -71,16 +72,28 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
     </Content>
+    <Content Include="TestData\DomainDescriptor.xml" />
+    <Content Include="TestData\root.zone\commsvr.com\DomainDescriptor.xml" />
+    <Content Include="TestData\root.zone\commsvr.com\ua\Examples\BoilersSet\DomainDescriptor.xml" />
+    <Content Include="TestData\root.zone\commsvr.com\ua\Examples\BoilersSet\DomainModel.xml" />
+    <Content Include="TestData\root.zone\DomainDescriptor.xml" />
+    <None Include="TestData\DomainModel.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataDiscoveryServicesUnitTest.cs" />
+    <Compile Include="DomainModelUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
+    <Compile Include="TestData\commsvr.com.UA.Examples.BoilersSet.DomainModel.cs" />
+    <Compile Include="TestData\RootDomainDescriptorFactory.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

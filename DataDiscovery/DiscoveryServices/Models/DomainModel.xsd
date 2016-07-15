@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://http://commsvr.com/UAOOI/DataDiscovery/DiscoveryServices/Models/DomainModel.xsd" 
+           elementFormDefault="qualified" 
+           targetNamespace="http://http://commsvr.com/UAOOI/DataDiscovery/DiscoveryServices/Models/DomainModel.xsd" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="DomainModel" nillable="true" type="tns:DomainModel" />
+  <xs:complexType name="DomainModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="AliasName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DomainModelUriString" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DomainModelGuidString" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SemanticsDataCollection" type="tns:ArrayOfSemanticsDataIndex" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UniversalAddressSpaceLocator" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UniversalAuthorizationServerLocator" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeDictionaries" type="tns:ArrayOfTypeDictionary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfSemanticsDataIndex">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SemanticsDataIndex" type="tns:SemanticsDataIndex" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SemanticsDataIndex">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="SymbolicName" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Index" type="xs:unsignedShort" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DataSet" type="tns:ArrayOfFieldMetaData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfFieldMetaData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FieldMetaData" type="tns:FieldMetaData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FieldMetaData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ExtensionData" type="tns:ExtensionDataObject" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SymbolicName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ProcessValueName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeInformation" type="tns:UATypeInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExtensionDataObject" />
+  <xs:complexType name="UATypeInfo">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="BuiltInType" type="tns:BuiltInType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ValueRank" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ArrayDimensions" type="tns:ArrayOfInt" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeName" type="xs:QName" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="BuiltInType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Null" />
+      <xs:enumeration value="Boolean" />
+      <xs:enumeration value="SByte" />
+      <xs:enumeration value="Byte" />
+      <xs:enumeration value="Int16" />
+      <xs:enumeration value="UInt16" />
+      <xs:enumeration value="Int32" />
+      <xs:enumeration value="UInt32" />
+      <xs:enumeration value="Int64" />
+      <xs:enumeration value="UInt64" />
+      <xs:enumeration value="Float" />
+      <xs:enumeration value="Double" />
+      <xs:enumeration value="String" />
+      <xs:enumeration value="DateTime" />
+      <xs:enumeration value="Guid" />
+      <xs:enumeration value="ByteString" />
+      <xs:enumeration value="XmlElement" />
+      <xs:enumeration value="NodeId" />
+      <xs:enumeration value="ExpandedNodeId" />
+      <xs:enumeration value="StatusCode" />
+      <xs:enumeration value="QualifiedName" />
+      <xs:enumeration value="LocalizedText" />
+      <xs:enumeration value="ExtensionObject" />
+      <xs:enumeration value="DataValue" />
+      <xs:enumeration value="Variant" />
+      <xs:enumeration value="DiagnosticInfo" />
+      <xs:enumeration value="Enumeration" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfInt">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="int" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfTypeDictionary">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TypeDictionary" type="tns:TypeDictionary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TypeDictionary">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StructuredType" type="tns:StructuredType" />
+    </xs:sequence>
+    <xs:attribute name="TargetNamespace" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="StructuredType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TypeDescription">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Field" type="tns:StructuredTypeField" />
+          <xs:element minOccurs="1" maxOccurs="1" name="StructureKind" type="tns:StructureKindEnum" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TypeDescription">
+    <xs:attribute name="Name" type="xs:NCName" />
+  </xs:complexType>
+  <xs:complexType name="EnumeratedType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TypeDescription">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="EnumeratedValues" type="tns:EnumeratedValue" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EnumeratedValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Documentation" type="tns:ArrayOfLocalizedText" />
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" />
+    <xs:attribute name="Value" type="xs:int" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ArrayOfLocalizedText">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LocalizedText" nillable="true" type="tns:LocalizedText" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LocalizedText">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute default="" name="Locale" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="StructuredTypeField">
+    <xs:attribute name="Name" type="xs:string" />
+    <xs:attribute name="TypeName" type="xs:QName" />
+    <xs:attribute name="SwitchField" type="xs:string" />
+    <xs:attribute name="SwitchValue" type="xs:unsignedInt" />
+    <xs:attribute name="SwitchOperand" type="tns:SwitchOperand" />
+  </xs:complexType>
+  <xs:simpleType name="SwitchOperand">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Equals" />
+      <xs:enumeration value="GreaterThan" />
+      <xs:enumeration value="LessThan" />
+      <xs:enumeration value="GreaterThanOrEqual" />
+      <xs:enumeration value="LessThanOrEqual" />
+      <xs:enumeration value="NotEqual" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="StructureKindEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Structure" />
+      <xs:enumeration value="StructureWithOptionalFields" />
+      <xs:enumeration value="Union" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

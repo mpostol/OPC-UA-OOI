@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://commsvr.com/UAOOI/DataDiscovery/DiscoveryServices/Models/DomainDescriptor.xsd" elementFormDefault="qualified" 
+           targetNamespace="http://commsvr.com/UAOOI/DataDiscovery/DiscoveryServices/Models/DomainDescriptor.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="DomainDescriptor" nillable="true">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" name="UrlPattern" type="xs:string" />
+        <xs:element minOccurs="1" maxOccurs="1" name="NextStepRecordType" type="tns:RecordType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="RecordType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DomainModel" />
+      <xs:enumeration value="DomainDescriptor" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

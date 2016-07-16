@@ -33,7 +33,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest
         _service.AreEqualsDomainDescriptors
           (
             DomainDescriptorFactory.Iteration2DomainDescriptor(),
-            new Uri(@"https://raw.githubusercontent.com/mpostol/OPC-UA-OOI/master/DataDiscovery/Tests/DiscoveryServices.UnitTest/TestData/root.zone/commsvr.com/ua/Examples/BoilersSet/DomainDescriptor.xml"),
+            new Uri(@"https://raw.githubusercontent.com/mpostol/OPC-UA-OOI/master/DataDiscovery/Tests/DiscoveryServices.UnitTest/TestData/root.zone/commsvr.com/UA/Examples/BoilersSet/DomainDescriptor.xml"),
             (x, y, z) => { _messages++; DebugLog(x, y, z); }
           );
         Assert.AreEqual<int>(3, _messages);
@@ -49,39 +49,6 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest
         _service.GetHTTPResponse<DomainDescriptor>(new Uri("http://localhost/alfa.bravo.xml"), DebugLog, x => _tc = x);
       }
     }
-    //TODO test consistency accusing local files
-    //[TestMethod]
-    //public void RecursiveResolveDomainDescriptionTestMethod()
-    //{
-    //  Task<DomainDescriptor> _DomainDescriptorTask = ResolveDomainDescriptionAsync<DomainDescriptor>(m_RootUrl);
-    //  _DomainDescriptorTask.Wait(TimeSpan.FromSeconds(10));
-    //  DomainDescriptor _tc = _DomainDescriptorTask.Result;
-    //  Uri _resolution = _tc.ResolveUri(m_ModelUri);
-
-    //  _DomainDescriptorTask = ResolveDomainDescriptionAsync<DomainDescriptor>(_resolution);
-    //  _DomainDescriptorTask.Wait(TimeSpan.FromSeconds(10));
-    //  _tc = _DomainDescriptorTask.Result;
-    //  Assert.IsNotNull(_tc);
-    //  Assert.IsTrue(_tc.Description.Contains("commsvr.com"));
-    //  Assert.AreEqual<RecordType>(RecordType.DomainDescriptor, _tc.NextStepRecordType);
-    //  Assert.AreEqual<string>("http://localhost/opc/#authority#/#path#/DomainDescriptor.xml", _tc.UrlPattern);
-
-    //  _resolution = _tc.ResolveUri(m_ModelUri);
-    //  _DomainDescriptorTask = ResolveDomainDescriptionAsync<DomainDescriptor>(_resolution);
-    //  _DomainDescriptorTask.Wait(TimeSpan.FromSeconds(10));
-    //  _tc = _DomainDescriptorTask.Result;
-    //  Assert.IsNotNull(_tc);
-    //  Assert.IsTrue(_tc.Description.Contains("Boiler test domain model"));
-    //  Assert.AreEqual<RecordType>(RecordType.DomainModel, _tc.NextStepRecordType);
-    //  Assert.AreEqual<string>("http://localhost/opc/#authority#/#path#/DomainModel.xml", _tc.UrlPattern);
-
-    //  _resolution = _tc.ResolveUri(m_ModelUri);
-    //  Task<DomainModel> _DomainModelTask = ResolveDomainDescriptionAsync<DomainModel>(_resolution);
-    //  _DomainModelTask.Wait(TimeSpan.FromSeconds(10));
-    //  DomainModel _tm = _DomainModelTask.Result;
-    //  Assert.IsNotNull(_tm);
-    //}
-
     [TestMethod]
     public void ResolveDomainModelAsyncTestMethod()
     {

@@ -52,8 +52,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest
       AreEqualsDomainDescriptors(_referenceDomainDescriptor, @"root.zone\commsvr.com\DomainDescriptor.xml");
 
       _referenceDomainDescriptor = DomainDescriptorFactory.Iteration2DomainDescriptor();
-      AreEqualsDomainDescriptors(_referenceDomainDescriptor, @"root.zone\commsvr.com\ua\Examples\BoilersSet\DomainDescriptor.xml");
-
+      AreEqualsDomainDescriptors(_referenceDomainDescriptor, @"root.zone\commsvr.com\UA\Examples\BoilersSet\DomainDescriptor.xml");
     }
     [TestMethod]
     [DeploymentItem(@"TestData\", @"TestData\")]
@@ -74,7 +73,6 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest
 
     //instrumentation
     Uri m_ModelUri = new Uri(@"http://commsvr.com/UA/Examples/BoilersSet");
-
     private static void AreEqualsDomainDescriptors(DomainDescriptor _rootDomainDescriptor, string fileName)
     {
       FileInfo _fi = new FileInfo($@"TestData\{fileName}");

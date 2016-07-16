@@ -18,7 +18,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
     /// Resolves address and reads the <see cref="DomainModel"/> record as an asynchronous operation.
     /// </summary>
     /// <param name="modelUri">The model URI.</param>
-    /// <param name="rootZoneUrl">The root zone URL whre the resolving process shall start.</param>
+    /// <param name="rootZoneUrl">The root zone URL where the resolving process shall start.</param>
     /// <param name="log"><see cref="Action{T1, T2, T3}"/> encapsulating tracing functionality .</param>
     /// <returns>Task{DomainModel}.</returns>
     /// <exception cref="InvalidOperationException">Too many iteration in the resolving process.</exception>
@@ -56,7 +56,6 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
     {
       using (HttpClient _client = new HttpClient())
       {
-        //_client.BaseAddress = address;
         _client.MaxResponseContentBufferSize = Int32.MaxValue;
         _client.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)");
         //_client.DefaultRequestHeaders.Accept.Clear();
@@ -89,7 +88,6 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
         } while (true);
       }
     }
-
     //UnitTest instrumentation
     [System.Diagnostics.Conditional("DEBUG")]
     internal static void GetHTTPResponse<T>(Uri m_RootUrl, Action<string, TraceEventType, Priority> debugLog, Action<T> getResult)

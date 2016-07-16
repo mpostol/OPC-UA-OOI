@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DomainDescriptor xmlns="http://commsvr.com/UAOOI/DataDiscovery/DiscoveryServices/Models/DomainDescriptor.xsd">
-  <Description>Root entry for commsvr.com.</Description>
-  <UrlPattern>http://localhost/root.zone/#authority#/#path#/DomainDescriptor.xml</UrlPattern>
+  <Description>Iteration #1 DomainDescriptor record - root entry for commsvr.com.</Description>
+  <UrlPattern>https://raw.githubusercontent.com/mpostol/OPC-UA-OOI/master/DataDiscovery/Tests/DiscoveryServices.UnitTest/TestData/root.zone/#authority#/#path#/DomainDescriptor.xml</UrlPattern>
   <NextStepRecordType>DomainDescriptor</NextStepRecordType>
 </DomainDescriptor>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DomainDescriptor xmlns="http://commsvr.com/UAOOI/DataDiscovery/DiscoveryServices/Models/DomainDescriptor.xsd">
-  <Description>Boiler test domain model.</Description>
-  <UrlPattern>http://localhost/root.zone/#authority#/#path#/DomainModel.xml</UrlPattern>
+  <Description>Iteration #2 DomainDescriptor record - Boiler test domain model.</Description>
+  <UrlPattern>https://raw.githubusercontent.com/mpostol/OPC-UA-OOI/master/DataDiscovery/Tests/DiscoveryServices.UnitTest/TestData/root.zone/#authority#/#path#/DomainModel.xml</UrlPattern>
   <NextStepRecordType>DomainModel</NextStepRecordType>
 </DomainDescriptor>

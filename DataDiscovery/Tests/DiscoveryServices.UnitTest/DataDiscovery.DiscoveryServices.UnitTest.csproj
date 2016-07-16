@@ -77,11 +77,16 @@
     <None Include="TestData\DomainDescriptor.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="TestData\root.zone\commsvr.com\DomainDescriptor.xml" />
-    <Content Include="TestData\root.zone\commsvr.com\ua\Examples\BoilersSet\DomainDescriptor.xml" />
-    <Content Include="TestData\root.zone\commsvr.com\ua\Examples\BoilersSet\DomainModel.xml">
+    <None Include="TestData\root.zone\commsvr.com\DomainDescriptor.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\root.zone\commsvr.com\ua\Examples\BoilersSet\DomainDescriptor.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\root.zone\commsvr.com\ua\Examples\BoilersSet\DomainModel.xml">
       <SubType>Designer</SubType>
-    </Content>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="TestData\root.zone\DomainDescriptor.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -101,7 +106,7 @@
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
     <Compile Include="TestData\commsvr.com.UA.Examples.BoilersSet.DomainModel.cs" />
-    <Compile Include="TestData\RootDomainDescriptorFactory.cs" />
+    <Compile Include="TestData\DomainDescriptorFactory.cs" />
     <Compile Include="DomainDescriptorUnitTest.cs" />
   </ItemGroup>
   <Choose>

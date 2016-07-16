@@ -80,6 +80,12 @@
     <None Include="TestData\root.zone\commsvr.com\DomainDescriptor.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="TestData\root.zone\commsvr.com\UA\Examples\BoilersSet\DomainDescriptor.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\root.zone\commsvr.com\UA\Examples\BoilersSet\DomainModel.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="TestData\root.zone\DomainDescriptor.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

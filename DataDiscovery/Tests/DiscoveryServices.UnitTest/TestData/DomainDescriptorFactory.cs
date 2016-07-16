@@ -1,7 +1,7 @@
 ﻿
 using UAOOI.DataDiscovery.DiscoveryServices.Models;
 
-namespace CUAOOI.DataDiscovery.DiscoveryServices.UnitTest.TestData
+namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest.TestData
 {
 
   internal static class DomainDescriptorFactory

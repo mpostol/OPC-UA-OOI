@@ -3,7 +3,7 @@ using System;
 using System.Xml;
 using UAOOI.DataDiscovery.DiscoveryServices.Models;
 
-namespace CUAOOI.DataDiscovery.DiscoveryServices.UnitTest.TestData
+namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest.TestData
 {
   public static class ReferenceDomainModel
   {

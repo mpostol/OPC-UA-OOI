@@ -22,14 +22,5 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/root.zone/DomainDescriptor.xml")]
-        public string DataDiscoveryRootServiceUrl {
-            get {
-                return ((string)(this["DataDiscoveryRootServiceUrl"]));
-            }
-        }
     }
 }

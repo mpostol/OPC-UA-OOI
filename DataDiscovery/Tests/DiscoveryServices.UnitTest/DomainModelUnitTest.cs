@@ -1,11 +1,11 @@
 ﻿
-using CUAOOI.DataDiscovery.DiscoveryServices.UnitTest.TestData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using UAOOI.DataDiscovery.DiscoveryServices.Models;
+using UAOOI.DataDiscovery.DiscoveryServices.UnitTest.TestData;
 
 namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest
 {

@@ -1,9 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="UAOOI.DataDiscovery.DiscoveryServices.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
   <Profiles />
-  <Settings>
-    <Setting Name="DataDiscoveryRootServiceUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://localhost/root.zone/DomainDescriptor.xml</Value>
-    </Setting>
-  </Settings>
+  <Settings />
 </SettingsFile>

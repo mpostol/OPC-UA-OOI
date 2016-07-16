@@ -12,7 +12,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
   /// <summary>
   /// Class DataDiscoveryServices - provides functionality supporting Global Data Discovery resolution.
   /// </summary>
-  public class DataDiscoveryServices
+  public class DataDiscoveryServices : IDisposable
   {
     /// <summary>
     /// Resolves address and reads the <see cref="DomainModel"/> record as an asynchronous operation.
@@ -22,11 +22,11 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
     /// <param name="log"><see cref="Action{T1, T2, T3}"/> encapsulating tracing functionality .</param>
     /// <returns>Task{DomainModel}.</returns>
     /// <exception cref="InvalidOperationException">Too many iteration in the resolving process.</exception>
-    public static async Task<DomainModel> ResolveDomainModelAsync(Uri modelUri, Uri rootZoneUrl, Action<string, TraceEventType, Priority> log)
+    public async Task<DomainModel> ResolveDomainModelAsync(Uri modelUri, Uri rootZoneUrl, Action<string, TraceEventType, Priority> log)
     {
       log($"Starting resolving address of the domain model descriptor for the model Uri {modelUri}", TraceEventType.Verbose, Priority.Low);
       DomainDescriptor _lastDomainDescriptor = new DomainDescriptor() { NextStepRecordType = RecordType.DomainDescriptor };
-      Uri _nextUri = new Uri(Properties.Settings.Default.DataDiscoveryRootServiceUrl);
+      Uri _nextUri = rootZoneUrl;
       int _iteration = 0;
       do
       {
@@ -44,6 +44,38 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
       log($"Successfuly received and decoded the requested DomainModel record: {_nextUri}", TraceEventType.Verbose, Priority.Low);
       return _model;
     }
+
+    #region IDisposable Support
+    private bool disposedValue = false; // To detect redundant calls
+    private HttpClient m_Client = new HttpClient() { MaxResponseContentBufferSize = Int32.MaxValue };
+    /// <summary>
+    /// Releases unmanaged and - optionally - managed resources.
+    /// </summary>
+    /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+    protected virtual void Dispose(bool disposing)
+    {
+      if (!disposedValue)
+      {
+        if (disposing)
+          m_Client.Dispose();
+        // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+        // TODO: set large fields to null.
+        disposedValue = true;
+      }
+    }
+    // This code added to correctly implement the disposable pattern.
+    /// <summary>
+    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
+    public void Dispose()
+    {
+      // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+      Dispose(true);
+      // TODO: uncomment the following line if the finalizer is overridden above.
+      // GC.SuppressFinalize(this);
+    }
+    #endregion
+
     /// <summary>
     /// Resolve domain description as an asynchronous operation.
     /// </summary>
@@ -51,51 +83,51 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
     /// <param name="address">The address of the discovery service.</param>
     /// <param name="log">Encapsulates the log operation.</param>
     /// <returns>Task{TResult}</returns>
-    private static async Task<TResult> GetHTTPResponseAsync<TResult>(Uri address, Action<string, TraceEventType, Priority> log)
+    private async Task<TResult> GetHTTPResponseAsync<TResult>(Uri address, Action<string, TraceEventType, Priority> log)
       where TResult : class, new()
     {
-      using (HttpClient _client = new HttpClient())
+      m_Client.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)");
+      //_client.DefaultRequestHeaders.Accept.Clear();
+      //_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("opc/application/json"));
+      int _retryCount = 0;
+      do
       {
-        _client.MaxResponseContentBufferSize = Int32.MaxValue;
-        _client.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)");
-        //_client.DefaultRequestHeaders.Accept.Clear();
-        //_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("opc/application/json"));
-        int _retryCount = 0;
-        do
+        try
         {
-          try
+          using (HttpResponseMessage _Message = await m_Client.GetAsync(address))
           {
-            using (HttpResponseMessage _Message = await _client.GetAsync(address))
+            _Message.EnsureSuccessStatusCode();
+            using (Task<Stream> _descriptionStream = _Message.Content.ReadAsStreamAsync())
             {
-              _Message.EnsureSuccessStatusCode();
-              using (Task<Stream> _descriptionStream = _Message.Content.ReadAsStreamAsync())
-              {
-                XmlSerializer _serializer = new XmlSerializer(typeof(TResult));
-                Stream _description = await _descriptionStream;
-                TResult _newDescription = (TResult)_serializer.Deserialize(_description);
-                return _newDescription;
-              }
-            };
-          }
-          catch (Exception _ex)
-          {
-            log($"Error for {address} in {nameof(GetHTTPResponseAsync)} retry ={_retryCount}: {_ex.Message} ", TraceEventType.Error, Priority.Medium);
-            if (_retryCount < 3)
-              _retryCount++;
-            else
-              throw;
-          }
-        } while (true);
-      }
+              XmlSerializer _serializer = new XmlSerializer(typeof(TResult));
+              Stream _description = await _descriptionStream;
+              TResult _newDescription = (TResult)_serializer.Deserialize(_description);
+              return _newDescription;
+            }
+          };
+        }
+        catch (Exception _ex)
+        {
+          log($"Error for {address} in {nameof(GetHTTPResponseAsync)} retry ={_retryCount}: {_ex.Message} ", TraceEventType.Error, Priority.Medium);
+          if (_retryCount < 3)
+            _retryCount++;
+          else
+            throw;
+        }
+      } while (true);
+
     }
+
     //UnitTest instrumentation
     [System.Diagnostics.Conditional("DEBUG")]
-    internal static void GetHTTPResponse<T>(Uri m_RootUrl, Action<string, TraceEventType, Priority> debugLog, Action<T> getResult)
+    internal void GetHTTPResponse<T>(Uri address, Action<string, TraceEventType, Priority> debugLog, Action<T> getResult)
             where T : class, new()
     {
-      Task<T> _task = GetHTTPResponseAsync<T>(m_RootUrl, debugLog);
+      Task<T> _task = GetHTTPResponseAsync<T>(address, debugLog);
       _task.Wait();
       getResult(_task.Result);
     }
+
+
   }
 }

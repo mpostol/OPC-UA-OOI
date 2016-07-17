@@ -9,8 +9,8 @@ Assembly Company:       commsvr.com
 Assembly Product:       OPC UA OOI Configuration
 Assembly Copyright:     Copyright (c) 2016 CommServer
 Assembly Trademark:     OPC-UA-OOI
-Assembly Version:       2.0.1
-Assembly Date:          2016-06-21
+Assembly Version:       2.0.3
+Assembly Date:          2016-07-17
 
 The main changes and new functionalities are listed below:
 

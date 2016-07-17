@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>UAOOI.Configuration.Networking</id>
+    <version>2.0.3-Delta</version>
+    <title>UAOOI.Configuration.Networking - UA Data Application Configuration</title>
+    <authors>commsvr.com</authors>
+    <owners>commsvr.com</owners>
+    <projectUrl>http://www.commsvr.com/download/UAOOI.ObjectOrientedInternet/?topic=html/1410155241.htm</projectUrl>
+    <licenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <developmentDependency>false</developmentDependency>
+    <description>
+      OPC UA Object Oriented Internet (UAOOI) UAOOI.Configuration.Networking library is dedicated to create a plug-in aimed at provisioning
+      configuration of any application based on OPC UA Information Model.
+      It is part of the project supporting OPC UA Object Oriented Internet paradigm.
+    </description>
+    <summary>
+      UAOOI Configuration Networking Library
+    </summary>
+    <releaseNotes>
+      It is working prerelease
+    </releaseNotes>
+    <copyright>Copyright (c) 2016 CommServer</copyright>
+    <tags>Object Oriented Internet, OPC UA, CommServer, ASMD, Address Space Model Designer.</tags>
+  </metadata>
+  <files>
+        <file src="lib\net461\_._" target="lib\net461\_._" />
+  </files>
+</package>
+

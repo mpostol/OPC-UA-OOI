@@ -44,6 +44,14 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+    <Reference Include="UAOOI.Common.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Configuration.Networking.2.0.3-Delta\lib\net461\UAOOI.Common.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UAOOI.Configuration.Networking, Version=2.0.3.25935, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Configuration.Networking.2.0.3-Delta\lib\net461\UAOOI.Configuration.Networking.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -74,6 +82,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
     </Content>
+    <None Include="packages.config" />
     <None Include="TestData\DomainDescriptor.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -107,6 +116,7 @@
     <Compile Include="TestData\commsvr.com.UA.Examples.BoilersSet.DomainModel.cs" />
     <Compile Include="TestData\DomainDescriptorFactory.cs" />
     <Compile Include="DomainDescriptorUnitTest.cs" />
+    <Compile Include="FieldMetaDataUnitTest.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

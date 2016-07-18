@@ -14,6 +14,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
   /// </summary>
   public class DataDiscoveryServices : IDisposable
   {
+    #region public API
     /// <summary>
     /// Resolves address and reads the <see cref="DomainModel"/> record as an asynchronous operation.
     /// </summary>
@@ -44,6 +45,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
       log($"Successfuly received and decoded the requested DomainModel record: {_nextUri}", TraceEventType.Verbose, Priority.Low);
       return _model;
     }
+    #endregion
 
     #region IDisposable Support
     private bool disposedValue = false; // To detect redundant calls
@@ -58,8 +60,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
       {
         if (disposing)
           m_Client.Dispose();
-        // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-        // TODO: set large fields to null.
+        m_Client = null;
         disposedValue = true;
       }
     }
@@ -69,13 +70,11 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
     /// </summary>
     public void Dispose()
     {
-      // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
       Dispose(true);
-      // TODO: uncomment the following line if the finalizer is overridden above.
-      // GC.SuppressFinalize(this);
     }
     #endregion
 
+    #region private
     /// <summary>
     /// Resolve domain description as an asynchronous operation.
     /// </summary>
@@ -115,9 +114,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
             throw;
         }
       } while (true);
-
     }
-
     //UnitTest instrumentation
     [System.Diagnostics.Conditional("DEBUG")]
     internal void GetHTTPResponse<T>(Uri address, Action<string, TraceEventType, Priority> debugLog, Action<T> getResult)
@@ -127,7 +124,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
       _task.Wait();
       getResult(_task.Result);
     }
-
+    #endregion
 
   }
 }

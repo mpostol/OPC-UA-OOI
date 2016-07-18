@@ -38,10 +38,6 @@
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CAS.UA.IServerConfiguration, Version=1.0.0.32204, Culture=neutral, PublicKeyToken=8832ff1a67ea61a3, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CAS.UA.IServerConfiguration.1.00.00\lib\net35\CAS.UA.IServerConfiguration.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -61,8 +57,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Help\ASModelDesigner.chm" />
     <None Include="Models\DomainDescriptor.GoCS.cmd" />
     <None Include="Models\DomainDescriptor.GoXSD.cmd" />
     <None Include="Models\DomainDescriptor.xsd">
@@ -75,10 +69,6 @@
     </None>
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Readme.md" />
     <None Include="ReadMe.old" />
   </ItemGroup>
@@ -102,10 +92,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataDiscoveryServices.cs" />
-    <Compile Include="Models\DomainDescriptor.cs" />
-    <Compile Include="Models\DomainDescriptor.xsd.cs" />
-    <Compile Include="Models\DomainModel.cs" />
-    <Compile Include="Models\DomainModel.xsd.cs" />
+    <Compile Include="Models\Converters.cs" />
+    <Compile Include="Models\DomainDescriptor.cs">
+      <DependentUpon>DomainDescriptor.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DomainDescriptor.xsd.cs">
+      <DependentUpon>DomainDescriptor.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DomainModel.cs">
+      <DependentUpon>DomainModel.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DomainModel.xsd.cs">
+      <DependentUpon>DomainModel.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Models\FieldMetaData.cs" />
     <Compile Include="Models\SemanticsDataIndex.cs" />
     <Compile Include="Models\UATypeInfo.cs" />
@@ -114,11 +113,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

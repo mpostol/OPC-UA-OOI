@@ -23,9 +23,13 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.Models
       };
       return _newUATypeInfo;
     }
-    internal Serialization.UATypeInfo Clone()
+    /// <summary>
+    /// Clones this instance and factor the object of <see cref="Serialization.UATypeInfo"/>.
+    /// </summary>
+    /// <returns>An instance of the <see cref="Serialization.UATypeInfo"/> derived from this instance.</returns>
+    public Serialization.UATypeInfo Clone()
     {
-      Serialization.UATypeInfo _newUATypeInfo = new Serialization.UATypeInfo( (Serialization.BuiltInType)Convert.ToUInt16(BuiltInType), 
+      Serialization.UATypeInfo _newUATypeInfo = new Serialization.UATypeInfo( BuiltInType.ToBuiltInType(), 
                                                                               ValueRank, 
                                                                               ArrayDimensions == null ? null : ArrayDimensions.Select<int, int>(x => x).ToArray<int>())
       {

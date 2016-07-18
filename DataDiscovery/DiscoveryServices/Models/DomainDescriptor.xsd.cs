@@ -7,6 +7,13 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.Models
 {
   public partial class DomainDescriptor
   {
+    /// <summary>
+    /// Resolves the URL of the service providing resources describing the data domain using path template and the <paramref name="modelUri"/>.
+    /// </summary>
+    /// <param name="modelUri">The model URI.</param>
+    /// <returns>An instance of <see cref="Uri"/> encapsulating URL of the service responsible to return expected record. It uses regular expression to replace 
+    /// the key words <c>#authority#</c> and <c>#path#</c> in the <see cref="DomainDescriptor.UrlPattern"/> by appropriate parts of the  
+    /// <paramref name="modelUri"/>. It is next hope in the resolving process.</returns>
     internal Uri ResolveUri(Uri modelUri)
     {
       Regex _regex = new Regex("#authority#");

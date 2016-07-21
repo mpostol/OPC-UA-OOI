@@ -117,7 +117,6 @@
     <Compile Include="TestData\commsvr.com.UA.Examples.BoilersSet.DomainModel.cs" />
     <Compile Include="TestData\DomainDescriptorFactory.cs" />
     <Compile Include="DomainDescriptorUnitTest.cs" />
-    <Compile Include="FieldMetaDataUnitTest.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

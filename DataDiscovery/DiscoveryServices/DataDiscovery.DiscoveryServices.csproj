@@ -47,14 +47,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="UAOOI.Common.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UAOOI.Configuration.Networking.2.0.3-Delta\lib\net461\UAOOI.Common.Infrastructure.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="UAOOI.Configuration.Networking, Version=2.0.3.25935, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UAOOI.Configuration.Networking.2.0.3-Delta\lib\net461\UAOOI.Configuration.Networking.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\DomainDescriptor.GoCS.cmd" />
@@ -68,7 +60,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="OPCUAOOIKey.snk" />
-    <None Include="packages.config" />
     <None Include="Readme.md" />
     <None Include="ReadMe.old" />
   </ItemGroup>
@@ -92,7 +83,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataDiscoveryServices.cs" />
-    <Compile Include="Models\Converters.cs" />
     <Compile Include="Models\DomainDescriptor.cs">
       <DependentUpon>DomainDescriptor.xsd</DependentUpon>
     </Compile>
@@ -105,9 +95,7 @@
     <Compile Include="Models\DomainModel.xsd.cs">
       <DependentUpon>DomainModel.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Models\FieldMetaData.cs" />
     <Compile Include="Models\SemanticsDataIndex.cs" />
-    <Compile Include="Models\UATypeInfo.cs" />
     <Compile Include="Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>

@@ -60,6 +60,11 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="OPCUAOOIKey.snk" />
+    <None Include="Properties\UAOOI.DataDiscovery.DiscoveryServices.nuspec">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UAOOI.DataDiscovery.DiscoveryServices.tt</DependentUpon>
+    </None>
     <None Include="Readme.md" />
     <None Include="ReadMe.old" />
   </ItemGroup>
@@ -67,6 +72,10 @@
     <Content Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
+    </Content>
+    <Content Include="Properties\UAOOI.DataDiscovery.DiscoveryServices.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UAOOI.DataDiscovery.DiscoveryServices.nuspec</LastGenOutput>
     </Content>
     <Content Include="ReadMe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

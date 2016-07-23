@@ -54,6 +54,14 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.XML" />
+    <Reference Include="UAOOI.Common.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Configuration.Networking.2.0.3-Delta\lib\net461\UAOOI.Common.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UAOOI.Configuration.Networking, Version=2.0.3.25935, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Configuration.Networking.2.0.3-Delta\lib\net461\UAOOI.Configuration.Networking.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -84,17 +92,9 @@
     <Compile Include="UANetworkingConfigurationEditorUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Infrastructure\Common.Infrastructure.csproj">
-      <Project>{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}</Project>
-      <Name>Common.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\DataBindings\Configuration.DataBindings.csproj">
       <Project>{f8db9567-c559-440c-bbcf-e02013f9ab94}</Project>
       <Name>Configuration.DataBindings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Networking\Configuration.Networking.csproj">
-      <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
-      <Name>Configuration.Networking</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

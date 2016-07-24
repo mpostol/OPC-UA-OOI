@@ -1898,7 +1898,7 @@
       </DataSet>
     </SemanticsDataIndex>
   </SemanticsDataCollection>
-  <UniversalAddressSpaceLocator>http://localhost/opc/Commsvr.UA.Examples.BoilersSet.NodeSet2.xml</UniversalAddressSpaceLocator>
+  <UniversalAddressSpaceLocator>https://raw.githubusercontent.com/mpostol/OPC-UA-OOI/master/DataDiscovery/Tests/DiscoveryServices.UnitTest/TestData/root.zone/commsvr.com/UA/Examples/BoilersSet/Commsvr.UA.Examples.BoilersSet.NodeSet2.xml</UniversalAddressSpaceLocator>
   <UniversalAuthorizationServerLocator>http://localhost/opc/Commsvr.UA.Examples.BoilersSet.OTPTable.xml</UniversalAuthorizationServerLocator>
   <TypeDictionaries>
     <TypeDictionary TargetNamespace="http://opcfoundation.org/UA/">

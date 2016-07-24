@@ -63,6 +63,16 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest
         Assert.IsNotNull(_newDescription);
       }
     }
+    [TestMethod]
+    public void TestDataFolderContentTestMethod()
+    {
+      FileInfo _fi = new FileInfo(@"TestData\root.zone\commsvr.com\UA\Examples\BoilersSet\DomainModel.xml");
+      Assert.IsTrue(_fi.Exists);
+      _fi = new FileInfo(@"TestData\root.zone\commsvr.com\UA\Examples\BoilersSet\DomainDescriptor.xml");
+      Assert.IsTrue(_fi.Exists);
+      _fi = new FileInfo(@"TestData\root.zone\commsvr.com\UA\Examples\BoilersSet\Commsvr.UA.Examples.BoilersSet.NodeSet2.xml");
+      Assert.IsTrue(_fi.Exists);
+    }
     private class TypeDictionaryWitKey
     {
       public string Key;

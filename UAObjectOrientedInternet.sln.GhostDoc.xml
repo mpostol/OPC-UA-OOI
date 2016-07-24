@@ -16,7 +16,6 @@
     <OutputPath>..\..\..\Windows\Temp\UAOOI.ObjectOrientedInternet</OutputPath>
     <CleanupOutputPath>true</CleanupOutputPath>
     <HelpFileName>UAObjectOrientedInternet</HelpFileName>
-    <HelpFileNamingMethod>MemberName</HelpFileNamingMethod>
     <ImageFolderPath />
     <Theme>FlatGray</Theme>
     <HtmlFormats>

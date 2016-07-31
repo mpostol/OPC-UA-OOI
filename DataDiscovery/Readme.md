@@ -27,6 +27,7 @@ The proposed concept is scalable and could be used in local and global scope dep
 # Data semantics
 
 In the discovery process the semantics of the data is layered as follows:
+
 1. Value encoding (serialization), e.g. double, Int32, Boolean,
 2. Value meaning, e.g. pressure, temperature, flow, etc.
 3. Values relation, e.g. boiler object type containing relation between drum, input pipe and flow neater.

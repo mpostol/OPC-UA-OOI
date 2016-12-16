@@ -10,7 +10,7 @@ The following diagram presents domain model of the **Data Discovery** concept.
 
 ![Design Time Activities](https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/DataDiscovery.DomainModel.png) .
 
-On the diagram the the following artifacts is distinguished:
+On the diagram the the following artifacts are distinguished:
 
 * *Generic Process* - *Control Agency* (e.g. Pollution Control Agency) prepares a *Generic Process* information model to meet monitoring requirements.
 * *Asset* - *Asset Vendor* (e.g. boilers vendor) adapts the *Generic Process* model and creates derived *Asset* model to meet the product requirements with the purpose of continuous development and real time control.

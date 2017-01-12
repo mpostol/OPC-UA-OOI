@@ -51,8 +51,6 @@ The paper [**Object Oriented Internet**](https://fedcsis.org/proceedings/2015/pl
 
 [WIKI of this project](https://github.com/mpostol/OPC-UA-OOI/wiki)
 
-[Code Help Documentation](http://www.commsvr.com/download/UAOOI.ObjectOrientedInternet/) - note the documentation is not under the version control and is updated only after major changes. 
-
 [My Blog: About enablers of future solutions](http://wwww.mpostol.wordpress.com/)
 
 [About me on LinkedIn](https://pl.linkedin.com/in/mpostol)

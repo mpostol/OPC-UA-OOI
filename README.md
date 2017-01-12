@@ -24,6 +24,7 @@ This project is aimed to workout deliverables supporting Process Data handling o
 •	Data Prototyping  - methods and tools to design custom data types
 
 •	[Data Discovery – methods and tools to find the data over the network](./DataDiscovery)
+
 In scope there are also deliverables supporting:
 
 •	Exposition of the Process Data in the context of Metadata [OPC UA Address Space Model Designer](http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx)

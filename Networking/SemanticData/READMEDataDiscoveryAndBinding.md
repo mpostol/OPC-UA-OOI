@@ -2,7 +2,7 @@
 
 The diagram below provides very generic overview of the responsibilities that must be implemented by the UA Application:
 
-![Architecture] (../../CommonResources/Media/UADataNetworking.DataManagementBinding.DomainModel.png)
+![Architecture](../../CommonResources/Media/UADataNetworking.DataManagementBinding.DomainModel.png)
 
 * `UA Data Networking` - represents a software exchanging the data using protocol compliant with the OPC UA Part 14 Pub/Sub and binding the data with the underlaying process.
 * `MessageHandler` - represents a selected transport protocol supporting unsolicited data distribution or a middle-ware supporting publication/subscription message exchange communication pattern.

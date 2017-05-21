@@ -1,5 +1,7 @@
-# OPC Unified Architecture - Object Oriented Internet
+# Object Oriented Internet
+
 ## CHARTER
+
 ### What is Object Oriented Internet
 
 In this project C# deliverables supporting a new Machine To Machine (M2M) communication architecture is to be reserched with the goal to provide a generic solution for publishing and updating information in a context that can be used to describe and discover it by software applications. It is implemented based on the [OPC Unified Architecture](http://goo.gl/y4EHUn) - a new emerging industrial integration standard that fulfills the proposed architecture requirements.

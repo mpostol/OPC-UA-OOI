@@ -127,6 +127,7 @@
     <None Include="OPCUAOOIKey.snk" />
     <None Include="README.md" />
     <None Include="READMEGettingStartedTutorial.md" />
+    <None Include="README_MQTTMapping.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AssemblyInfo.tt">

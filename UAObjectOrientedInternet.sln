@@ -7,6 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UANodeSetValid
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".CommonResources", ".CommonResources", "{78EDB72A-77B1-4A64-8E76-17E780993017}"
 	ProjectSection(SolutionItems) = preProject
+		How2Contribute.md = How2Contribute.md
 		README.md = README.md
 		SemanticDataSolution\README.MD = SemanticDataSolution\README.MD
 		SemanticDataSolution\README.MessageCentricCommunication.md = SemanticDataSolution\README.MessageCentricCommunication.md
@@ -78,11 +79,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDiscovery.DiscoveryServices", "DataDiscovery\DiscoveryServices\DataDiscovery.DiscoveryServices.csproj", "{DD1A7EC2-FF25-4D35-9D0A-5BB626E61D17}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDiscovery.DiscoveryServices.UnitTest", "DataDiscovery\Tests\DiscoveryServices.UnitTest\DataDiscovery.DiscoveryServices.UnitTest.csproj", "{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E3C23D75-E017-46B0-BDAA-6D98C14A9CCA}"
-	ProjectSection(SolutionItems) = preProject
-		..\CommServer.UA.OOI\CommServer.UA.OOI\OOI.ConfigurationEditor\app.config = ..\CommServer.UA.OOI\CommServer.UA.OOI\OOI.ConfigurationEditor\app.config
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -124,7 +124,7 @@ Anyway, because the OPC UA Specification doesn't provide any requirements in thi
 The article [Networking of SemanticData Library](README.md#message-transport) the section *Message Transport* contains description covering instruction for the external MQTT handling components. An example how to implement the Transport layer for the UDP protocol is illustrated by the project [UA Data Example Application](../ReferenceApplication). This application uses two implementation of the `IMessageHandlerFactory`:
 
 * `ConsumerMessageHandlerFactory` - to create communication infrastructure for the consumer role
-* `ProducerMessageHandlerFactory` - to create communication infrastructure for the consumer role
+* `ProducerMessageHandlerFactory` - to create communication infrastructure for the producer role
 
 It has been implements by the following classes providing the required interfaces:
 

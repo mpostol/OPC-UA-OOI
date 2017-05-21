@@ -2,7 +2,11 @@
  
 ## Motivation
 
-Main goal of this document is to provide instruction on how to expand the transport layer for OOI Networking of the **Semantic Data** over the Message Queue Telemetry Transport (MQTT) to be compliant with the specification mentioned in the section *Normative references*. Implementation of the `Messages` exchange over the MQTT protocol is out of the scope of this project. The library is intentionaly designed to use any transport protocol meeting some basic requirements using external components. External components implementing MQTT connectivity can be seamlessly integrated with this SDK using dependency injection concept. Instruction for implementer are covered in the section *Notices for Implementer*. 
+Main goal of this document is to provide instruction on how to expand the transport layer for OOI Networking of the **Semantic Data** over the Message Queue Telemetry Transport (MQTT) to be compliant with the specification mentioned in the section *Normative references*. Implementation of the `Messages` exchange over the MQTT protocol is out of the scope of this project. The library is intentionaly designed to use any transport protocol meeting some basic requirements using external components. External components implementing MQTT connectivity can be seamlessly integrated with this SDK using dependency injection concept ilustrated by the following domain model:
+
+![](../../CommonResources/Media/DataManagementExternalLibraries.png)
+
+Instruction for implementer are covered in the section *Notices for Implementer*. 
 
 ## Normative references
 

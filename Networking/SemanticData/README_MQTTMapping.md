@@ -13,7 +13,7 @@ Instruction for implementer are covered in the section *Notices for Implementer*
 The following documents, in whole or in part, are normatively referenced in this document and are indispensable for its application.
 
 1. [OASIS Standards MQTT Version 3.1.1 specification](http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/mqtt-v3.1.1.html)
-2. [OPC Unified Architecture Specification Part 14: PubSub Release Candidate 1.04.24 February 9, 2017]()
+2. [OPC Unified Architecture Specification Part 14: PubSub Release Candidate 1.04.24 February 9, 2017](https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/)
 
 ## Introduction
 

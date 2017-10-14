@@ -1,13 +1,13 @@
 ﻿
-using CAS.UA.IServerConfiguration;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using CAS.UA.IServerConfiguration;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings.UnitTest
 {
-  [TestClass]
+    [TestClass]
   [DeploymentItem(@"..\NetworkingUnitTest\TestData\", @"TestData\")]
   public class ConfigurationBaseUnitTest
   {

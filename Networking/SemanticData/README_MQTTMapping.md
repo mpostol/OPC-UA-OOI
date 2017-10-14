@@ -95,7 +95,7 @@ OPC UA PubSub interoperability doesn't depend on any functionality provided by t
 	 2. naming
 	 2. security
 	 3. addressing
-	 4. `Qualitry of Service` 
+	 4. `Quality of Service` 
 	 5. other
 
 ### Messages transport

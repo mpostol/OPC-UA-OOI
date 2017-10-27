@@ -1,16 +1,16 @@
 ﻿
 using System;
-using System.Net;
-using System.Net.Sockets;
-using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.MessageHandling;
-using System.Linq;
-using System.Diagnostics;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Networking.ReferenceApplication.Producer
 {
+  /// <summary>
+  /// Class ProducerMessageHandlerFactory
+  /// </summary>
+  /// <seealso cref="UAOOI.Networking.SemanticData.MessageHandling.IMessageHandlerFactory" />
+  //TODO IMessageHandlerFactory - move implementation to separate library #218
   internal class ProducerMessageHandlerFactory : IMessageHandlerFactory
   {
 

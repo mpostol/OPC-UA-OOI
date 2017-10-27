@@ -10,6 +10,7 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
   /// <summary>
   /// Class ConsumerMessageHandlerFactory - implements <see cref="IMessageHandlerFactory"/> 
   /// </summary>
+  //TODO IMessageHandlerFactory - move implementation to separate library #218
   internal class ConsumerMessageHandlerFactory : IMessageHandlerFactory
   {
 

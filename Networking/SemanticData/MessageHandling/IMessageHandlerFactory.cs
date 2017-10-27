@@ -1,5 +1,4 @@
 ﻿
-using System.Xml;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Configuration.Networking.Serialization;
 

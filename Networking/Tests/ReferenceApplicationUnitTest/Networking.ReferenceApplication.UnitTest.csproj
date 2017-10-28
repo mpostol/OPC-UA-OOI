@@ -83,7 +83,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BinaryUDPPackageReaderTestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IPAddressValidationRuleUnitTest.cs" />
     <Compile Include="MainWindowViewModelUnitTest.cs" />

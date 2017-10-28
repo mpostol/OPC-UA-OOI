@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UANodeSetValidation", "SemanticDataSolution\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj", "{352378A0-8B2E-4679-BB44-FD0BCC8467D9}"
 EndProject
@@ -79,6 +79,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDiscovery.DiscoveryServices", "DataDiscovery\DiscoveryServices\DataDiscovery.DiscoveryServices.csproj", "{DD1A7EC2-FF25-4D35-9D0A-5BB626E61D17}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDiscovery.DiscoveryServices.UnitTest", "DataDiscovery\Tests\DiscoveryServices.UnitTest\DataDiscovery.DiscoveryServices.UnitTest.csproj", "{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.UDPMessageHandler", "Networking\UDPMessageHandler\Networking.UDPMessageHandler.csproj", "{D2EB89F9-321E-46E4-BA79-679138B82B23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.UDPMessageHandler.UnitTest", "Networking\Tests\UDPMessageHandler.UnitTest\Networking.UDPMessageHandler.UnitTest.csproj", "{ECF931DE-F5F3-4752-AA1B-847F7ED414D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -178,6 +182,14 @@ Global
 		{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2EB89F9-321E-46E4-BA79-679138B82B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2EB89F9-321E-46E4-BA79-679138B82B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2EB89F9-321E-46E4-BA79-679138B82B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2EB89F9-321E-46E4-BA79-679138B82B23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECF931DE-F5F3-4752-AA1B-847F7ED414D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECF931DE-F5F3-4752-AA1B-847F7ED414D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECF931DE-F5F3-4752-AA1B-847F7ED414D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECF931DE-F5F3-4752-AA1B-847F7ED414D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -210,5 +222,10 @@ Global
 		{90E262B4-C902-468B-9FCA-0D694B0BBF76} = {78EDB72A-77B1-4A64-8E76-17E780993017}
 		{DD1A7EC2-FF25-4D35-9D0A-5BB626E61D17} = {069B930C-EF5B-4943-AA82-0F56C33CF3DD}
 		{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE} = {069B930C-EF5B-4943-AA82-0F56C33CF3DD}
+		{D2EB89F9-321E-46E4-BA79-679138B82B23} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
+		{ECF931DE-F5F3-4752-AA1B-847F7ED414D1} = {19A61D68-0ECA-4093-AEE5-370BC3CE777C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9388D93E-9AA9-40EE-A0C6-F096265079B2}
 	EndGlobalSection
 EndGlobal

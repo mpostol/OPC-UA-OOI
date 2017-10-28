@@ -4,12 +4,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
 
-namespace UAOOI.Networking.ReferenceApplication.Consumer
+namespace UAOOI.Networking.UDPMessageHandler
 {
   /// <summary>
   /// Class BinaryUDPPackageReader - custom implementation of the <see cref="BinaryDecoder"/> using UDP protocol.. 
@@ -24,16 +25,16 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     /// </summary>
     /// <param name="port">The port.</param>
     /// <param name="trace">The trace.</param>
-    public BinaryUDPPackageReader(IUADecoder uaDecoder, int port, Action<string> trace, IConsumerViewModel viewModel) : base(uaDecoder)
+    public BinaryUDPPackageReader(IUADecoder uaDecoder, int port, Action<string> trace) : base(uaDecoder)
     {
       State = new MyState(this);
       m_Trace = trace;
       m_UDPPort = port;
-      m_ViewModel = viewModel;
     }
     #endregion
 
     #region BinaryDecoder
+    public event EventHandler<UdpStatisticsEventArgs> UdpStatisticsEvent;
     /// <summary>
     /// Gets or sets the state.
     /// </summary>
@@ -161,7 +162,7 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
 
     }
     //vars
-    private IConsumerViewModel m_ViewModel = null;
+    //private IConsumerViewModel m_ViewModel = null;
     private int m_NumberOfBytes = 0;
     private int m_NumberOfPackages = 0;
     private UdpClient m_UdpClient;
@@ -169,6 +170,7 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     private Action<string> m_Trace;
     private bool m_ReuseAddress = true;
     private IPAddress m_MulticastGroup = null;
+    private IPGlobalProperties m_Properties = IPGlobalProperties.GetIPGlobalProperties();
     /// <summary>
     /// Implements <see cref="AsyncCallback"/> for UDP begin receive.
     /// </summary>
@@ -185,13 +187,14 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
         Byte[] _receiveBytes = _client.EndReceive(asyncResult, ref _UEndPoint);
         m_NumberOfPackages++;
         m_NumberOfBytes += _receiveBytes.Length;
-        m_ViewModel.ConsumerFramesReceived = m_NumberOfPackages;
-        m_ViewModel.ConsumerReceivedBytes = m_NumberOfBytes;
+        //m_ViewModel.ConsumerFramesReceived = m_NumberOfPackages;
+        //m_ViewModel.ConsumerReceivedBytes = m_NumberOfBytes;
         int _length = _receiveBytes == null ? -1 : _receiveBytes.Length;
         m_Trace($"Message<{_UEndPoint.Address.ToString()}:{_UEndPoint.Port} [{_length}]>: {String.Join(", ", new ArraySegment<byte>(_receiveBytes, 0, Math.Min(_receiveBytes.Length, 80)).Select<byte, string>(x => x.ToString("X")).ToArray<string>())}");
         MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
         OnNewFrameArrived(new BinaryReader(_stream, System.Text.Encoding.UTF8));
         m_Trace("BeginReceive");
+        UdpStatisticsEvent?.Invoke(this, new UdpStatisticsEventArgs(m_Properties.GetUdpIPv4Statistics()));
         m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), m_UdpClient);
       }
       catch (ObjectDisposedException _ex)

@@ -7,10 +7,10 @@ Assembly Title:         OPC UA OOI Networking
 Assembly Description:   UAOOI SemanticData UA-Networking Reference Application.
 Assembly Company:       commsvr.com
 Assembly Product:       OPC UA OOI SemanticData
-Assembly Copyright:     Copyright (c) 2016 CommServer
+Assembly Copyright:     Copyright (c) 2017 CommServer
 Assembly Trademark:     OPC-UA-OOI
-Assembly Version:       2.0.1-Delta
-Assembly Date:          2016-07-17
+Assembly Version:       3.0.0-Delta
+Assembly Date:          2017-10-28
 
 The main changes and new functionalities are listed below:
 

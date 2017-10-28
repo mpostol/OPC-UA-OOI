@@ -5,13 +5,12 @@ using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.Networking.ReferenceApplication.Consumer
+namespace UAOOI.Networking.UDPMessageHandler
 {
   /// <summary>
   /// Class ConsumerMessageHandlerFactory - implements <see cref="IMessageHandlerFactory"/> 
   /// </summary>
-  //TODO IMessageHandlerFactory - move implementation to separate library #218
-  internal class ConsumerMessageHandlerFactory : IMessageHandlerFactory
+  public class ConsumerMessageHandlerFactory : IMessageHandlerFactory
   {
 
     #region creator
@@ -22,14 +21,24 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     /// The objects are disposed when application exits.</param>
     /// <param name="viewModel">The ViewModel instance for this object.</param>
     /// <param name="trace">The delegate capturing logging functionality.</param>
-    public ConsumerMessageHandlerFactory(Action<IDisposable> toDispose, IConsumerViewModel viewModel, Action<string> trace)
+    public ConsumerMessageHandlerFactory(Action<IDisposable> toDispose, Action<string> trace)
     {
-      m_ParentViewModel = viewModel;
       m_Trace = trace;
       m_ToDispose = toDispose;
     }
     #endregion
+    class UDPReaderConfiguration
+    {
+      public UDPReaderConfiguration(MessageChannelConfiguration configuration)
+      {
+        throw new NotImplementedException();
+      }
+      public int UDPPortNumber { get; set; }
+      public bool JoinMulticastGroup { get; set; }
+      public string DefaultMulticastGroup { get; set; }
+      public bool ReuseAddress { get; set; }
 
+    }
     #region IMessageHandlerFactory
     /// <summary>
     /// Gets the new instance of <see cref="IMessageReader"/>.
@@ -39,11 +48,12 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     /// <returns>An instance of <see cref="IMessageReader"/>.</returns>
     IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, MessageChannelConfiguration configuration, IUADecoder uaDecoder)
     {
-      BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(uaDecoder, UDPPortNumber, m_Trace, m_ParentViewModel);
+      UDPReaderConfiguration _configuration = new UDPReaderConfiguration(configuration);
+      BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(uaDecoder, _configuration.UDPPortNumber, m_Trace);
       m_ToDispose(_ret);
-      if (Properties.Settings.Default.JoinMulticastGroup)
-        _ret.MulticastGroup = IPAddress.Parse(Properties.Settings.Default.DefaultMulticastGroup);
-      _ret.ReuseAddress = Properties.Settings.Default.ReuseAddress;
+      if (_configuration.JoinMulticastGroup)
+        _ret.MulticastGroup = IPAddress.Parse(_configuration.DefaultMulticastGroup);
+      _ret.ReuseAddress = _configuration.ReuseAddress;
       return _ret;
     }
     /// <summary>
@@ -60,20 +70,8 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     }
     #endregion
 
-    #region API
-    /// <summary>
-    /// Gets the listen to UDP port number.
-    /// </summary>
-    /// <value>The UDP port number.</value>
-    internal int UDPPortNumber
-    {
-      get { return Properties.Settings.Default.UDPPort; }
-    }
-    #endregion
-
     #region private
     private Action<IDisposable> m_ToDispose;
-    private IConsumerViewModel m_ParentViewModel;
     private Action<string> m_Trace;
     #endregion
 

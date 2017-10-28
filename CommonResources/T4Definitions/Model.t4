@@ -5,12 +5,13 @@ string DefaultProductVersion = "0.00.00";
 
 //Solution common
 string ProductTrademark = "OPC-UA-OOI";
-string AssemblyCopyright = "Copyright (c) 2016 CommServer";
+string AssemblyCopyright = "Copyright (c) 2017 CommServer";
 string AssemblyCompany = "commsvr.com";
 string Url = "www.commsvr.com";
 string Email = "commserver@cas.eu";
-string Phone = "+48 (42) 686 25 47";
+string Phone = "+48 608 619 899";
 string Owner = "commsvr.com";
+string RepositoryVersion = "3.0.0"; //increment on the same position as the group version
 
 //UAOOI.DataDiscovery
 string DataDiscoveryTitle = "UAOOI.DataDiscovery";
@@ -29,7 +30,7 @@ string ConfigurationPrerelease = "-Delta";
 string ConfigurationProduct = "OPC UA OOI Configuration";
 
 //UAOOI.Networking
-string NetworkingDataVersion = "2.0.1";
+string NetworkingDataVersion = "3.0.0";
 string NetworkingDataPrerelease = "-Delta";
 string NetworkingDataProduct = "OPC UA OOI Networking";
 

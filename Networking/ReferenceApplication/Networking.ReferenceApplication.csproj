@@ -111,7 +111,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Consumer\BinaryUDPPackageReader.cs" />
     <Compile Include="Controls\INotification.cs" />
     <Compile Include="Controls\InteractionRequestedEventArgs.cs" />
     <Compile Include="Controls\ConfigurationEditorOpenCommand.cs" />
@@ -135,7 +134,6 @@
     <Compile Include="CommonDefinitions.cs" />
     <Compile Include="Consumer\ConsumerConfigurationFactory.cs" />
     <Compile Include="Consumer\ConsumerDataManagementSetup.cs" />
-    <Compile Include="Consumer\ConsumerMessageHandlerFactory.cs" />
     <Compile Include="Consumer\MainWindowModel.cs" />
     <Compile Include="IConsumerViewModel.cs" />
     <Compile Include="IProducerViewModel.cs" />
@@ -230,6 +228,10 @@
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj">
       <Project>{7f4ded4e-5933-4229-b9cc-51da49678904}</Project>
       <Name>Networking.SemanticData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UDPMessageHandler\Networking.UDPMessageHandler.csproj">
+      <Project>{D2EB89F9-321E-46E4-BA79-679138B82B23}</Project>
+      <Name>Networking.UDPMessageHandler</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

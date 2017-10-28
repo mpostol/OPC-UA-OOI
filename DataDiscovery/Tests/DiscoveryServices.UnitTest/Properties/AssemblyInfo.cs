@@ -2,8 +2,8 @@
 //  Title   : Assembly info for: UAOOI.DataDiscovery.DiscoveryServices.UnitTest
 //  System  : Microsoft VisualStudio 2015 / C#
 //
-//  Copyright (c) 2016 CommServer
-//  +48 (42) 686 25 47
+//  Copyright (c) 2017 CommServer
+//  +48 608 619 899
 //  commserver@cas.eu
 //  www.commsvr.com
 //_______________________________________________________________
@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
 [assembly: AssemblyProduct("OPC UA OOI Global Data Discovery")]
-[assembly: AssemblyCopyright("Copyright (c) 2016 CommServer")]
+[assembly: AssemblyCopyright("Copyright (c) 2017 CommServer")]
 [assembly: AssemblyTrademark("OPC-UA-OOI")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

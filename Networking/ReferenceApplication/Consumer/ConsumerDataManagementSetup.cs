@@ -79,7 +79,7 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
         MainWindowModel _model = new MainWindowModel() { ViewModelBindingFactory = m_ViewModel };
         Current.BindingFactory = _model;
         Current.EncodingFactory = _model;
-        Current.MessageHandlerFactory = new ConsumerMessageHandlerFactory(x => m_ToDispose.Add(x), m_ViewModel.Trace);
+        Current.MessageHandlerFactory = new MessageHandlerFactory(x => m_ToDispose.Add(x), m_ViewModel.Trace);
         m_ViewModel.Trace("Initialize consumer engine.");
         Current.Initialize();
         m_ViewModel.Trace("On start receiving UDP frames.");

@@ -10,18 +10,18 @@ namespace UAOOI.Networking.UDPMessageHandler
   /// <summary>
   /// Class ConsumerMessageHandlerFactory - implements <see cref="IMessageHandlerFactory"/> 
   /// </summary>
-  public class ConsumerMessageHandlerFactory : IMessageHandlerFactory
+  public class MessageHandlerFactory : IMessageHandlerFactory
   {
 
     #region creator
     /// <summary>
-    /// Initializes a new instance of the <see cref="ConsumerMessageHandlerFactory" /> class.
+    /// Initializes a new instance of the <see cref="MessageHandlerFactory" /> class.
     /// </summary>
     /// <param name="toDispose">To dispose captures functionality to create a collection of disposable objects.
     /// The objects are disposed when application exits.</param>
     /// <param name="viewModel">The ViewModel instance for this object.</param>
     /// <param name="trace">The delegate capturing logging functionality.</param>
-    public ConsumerMessageHandlerFactory(Action<IDisposable> toDispose, Action<string> trace)
+    public MessageHandlerFactory(Action<IDisposable> toDispose, Action<string> trace)
     {
       m_Trace = trace;
       m_ToDispose = toDispose;
@@ -39,7 +39,15 @@ namespace UAOOI.Networking.UDPMessageHandler
       public bool ReuseAddress { get; set; }
 
     }
-    #region IMessageHandlerFactory
+    class UDPWriterConfiguration
+    {
+      public UDPWriterConfiguration(MessageChannelConfiguration configuration)
+      {
+      }
+      internal int UDPPortNumber { get; set; }
+      internal string RemoteHostName { get; set; }
+    }
+    #region 
     /// <summary>
     /// Gets the new instance of <see cref="IMessageReader"/>.
     /// </summary>
@@ -66,7 +74,10 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// <exception cref="System.NotImplementedException"></exception>
     IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, MessageChannelConfiguration configuration, IUAEncoder uaEncoder)
     {
-      throw new NotImplementedException();
+      UDPWriterConfiguration _configuration = new UDPWriterConfiguration(configuration);
+      BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(_configuration.RemoteHostName, _configuration.UDPPortNumber, m_Trace, uaEncoder);
+      m_ToDispose(_ret);
+      return _ret;
     }
     #endregion
 

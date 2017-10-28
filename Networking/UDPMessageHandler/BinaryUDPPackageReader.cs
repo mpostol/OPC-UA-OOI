@@ -34,6 +34,9 @@ namespace UAOOI.Networking.UDPMessageHandler
     #endregion
 
     #region BinaryDecoder
+    /// <summary>
+    /// Occurs when new package is received and processed.
+    /// </summary>
     public event EventHandler<UdpStatisticsEventArgs> UdpStatisticsEvent;
     /// <summary>
     /// Gets or sets the state.

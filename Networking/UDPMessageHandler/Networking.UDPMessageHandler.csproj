@@ -47,7 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryUDPPackageReader.cs" />
-    <Compile Include="ConsumerMessageHandlerFactory.cs" />
+    <Compile Include="BinaryUDPPackageWriter.cs" />
+    <Compile Include="MessageHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

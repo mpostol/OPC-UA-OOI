@@ -7,7 +7,7 @@ using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
 
-namespace UAOOI.Networking.ReferenceApplication.Producer
+namespace UAOOI.Networking.UDPMessageHandler
 {
   /// <summary>
   /// Class BinaryUDPPackageWriter - custom implementation of the <see cref="BinaryEncoder"/> using UDP protocol.
@@ -16,16 +16,13 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
   {
 
     #region creator
-    public BinaryUDPPackageWriter(string remoteHostName, int remotePort, Action<string> trace, IProducerViewModel ViewModel, IUAEncoder uaEncoder) : 
+    public BinaryUDPPackageWriter(string remoteHostName, int remotePort, Action<string> trace, IUAEncoder uaEncoder) :
       base(uaEncoder, MessageLengthFieldTypeEnum.TwoBytes)
     {
       m_Trace = trace;
-      m_ViewModel = ViewModel;
       State = new MyState(this);
       m_RemoteHostName = remoteHostName;
       m_remotePort = remotePort;
-      ViewModel.BytesSent = 0;
-      ViewModel.PackagesSent = 0;
       trace("Created BinaryUDPPackageWriter");
     }
     #endregion
@@ -53,9 +50,9 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
         try
         {
           m_NumberOfSentBytes += buffer.Length;
-          m_ViewModel.BytesSent = m_NumberOfSentBytes;
+          //m_ViewModel.BytesSent = m_NumberOfSentBytes;
           m_NumberOfSentMessages++;
-          m_ViewModel.PackagesSent = m_NumberOfSentMessages;
+          //m_ViewModel.PackagesSent = m_NumberOfSentMessages;
           IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, m_remotePort);
           _UdpClient.Send(buffer, buffer.Length, _IPEndPoint);
           _traceMessage = String.Format("After Send m_NumberOfSentBytes = {0}, m_NumberOfSentMessages = {1}", m_NumberOfSentBytes, m_NumberOfSentMessages);
@@ -176,7 +173,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       Debug.Assert(m_IPAddresses != null);
       m_UdpClient = new UdpClient();
       string _msg = String.Format("Created UdpClient for m_RemoteHostName: {0} Ip : {1}", m_RemoteHostName, m_IPAddresses.ToString());
-      m_Trace("Created To the Network");
+      m_Trace("Attached to the Network");
     }
     #endregion
 
@@ -184,7 +181,6 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     internal int m_NumberOfSentMessages = 0;
     internal int m_NumberOfSentBytes = 0;
     internal int m_NumberOfAttachToNetwork;
-    private IProducerViewModel m_ViewModel;
     #endregion
 
   }

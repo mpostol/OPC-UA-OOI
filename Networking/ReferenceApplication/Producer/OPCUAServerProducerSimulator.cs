@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 using UAOOI.Networking.SemanticData;
+using UAOOI.Networking.UDPMessageHandler;
 
 namespace UAOOI.Networking.ReferenceApplication.Producer
 {
@@ -71,7 +72,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
         m_ToDispose.Add(_simulator);
         Current.BindingFactory = _simulator;
         Current.EncodingFactory = _simulator;
-        Current.MessageHandlerFactory = new ProducerMessageHandlerFactory(x => m_ToDispose.Add(x), m_Trace, m_ViewModel);
+        Current.MessageHandlerFactory = new MessageHandlerFactory(x => m_ToDispose.Add(x), m_Trace);
         Current.Initialize();
         Current.Run();
         _simulator.Run();

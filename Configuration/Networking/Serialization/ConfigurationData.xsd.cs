@@ -432,6 +432,8 @@ namespace UAOOI.Configuration.Networking.Serialization
   [Serializable]
   public class MessageChannelConfiguration
   {
+    [DataMemberAttribute(IsRequired = false, Order = 0)]
+    public string ChannelConfiguration { get; set; }
   }
   [DataContractAttribute(Name = "AssociationRole", Namespace = CommonDefinitions.Namespace)]
   public enum AssociationRole : int

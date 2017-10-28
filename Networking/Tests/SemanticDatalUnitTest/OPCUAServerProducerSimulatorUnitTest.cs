@@ -67,11 +67,11 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       #endregion
 
       #region IMessageHandlerFactory
-      public MessageHandling.IMessageReader GetIMessageReader(string name, MessageChannelConfiguration configuration, IUADecoder uaDecoder)
+      public MessageHandling.IMessageReader GetIMessageReader(string name, string configuration, IUADecoder uaDecoder)
       {
         throw new NotImplementedException();
       }
-      public MessageHandling.IMessageWriter GetIMessageWriter(string name, MessageChannelConfiguration configuration, IUAEncoder uaEncoder)
+      public MessageHandling.IMessageWriter GetIMessageWriter(string name, string configuration, IUAEncoder uaEncoder)
       {
         Assert.AreEqual("UDP", name);
         Assert.IsNull(configuration);

@@ -1,10 +1,9 @@
 ﻿
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Networking.SemanticData.UnitTest.Simulator;
-using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
 {
@@ -67,14 +66,14 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       #endregion
 
       #region IMessageHandlerFactory
-      public IMessageReader GetIMessageReader(string name, MessageChannelConfiguration configuration, IUADecoder uaDecoder)
+      public IMessageReader GetIMessageReader(string name, string configuration, IUADecoder uaDecoder)
       {
         Assert.AreEqual("UDP", name);
         Assert.IsNull(configuration);
         Assert.IsNotNull(uaDecoder);
         return MyMessageReader;
       }
-      public IMessageWriter GetIMessageWriter(string name, MessageChannelConfiguration configuration, IUAEncoder uaEncoder)
+      public IMessageWriter GetIMessageWriter(string name, string configuration, IUAEncoder uaEncoder)
       {
         throw new NotImplementedException();
       }

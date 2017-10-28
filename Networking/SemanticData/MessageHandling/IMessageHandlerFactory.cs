@@ -1,6 +1,5 @@
 ﻿
 using UAOOI.Networking.SemanticData.Encoding;
-using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Networking.SemanticData.MessageHandling
 {
@@ -16,7 +15,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// <param name="configuration">The configuration of the object implementing the <see cref="IMessageReader" />.</param>
     /// <param name="uaDecoder">The decoder that provides methods to be used to decode OPC UA Built-in types.</param>
     /// <returns>An object implementing <see cref="IMessageReader"/> that provides functionality supporting reading the messages from the wire.</returns>
-    IMessageReader GetIMessageReader(string name, MessageChannelConfiguration configuration, IUADecoder uaDecoder);
+    IMessageReader GetIMessageReader(string name, string configuration, IUADecoder uaDecoder);
     /// <summary>
     /// Gets the message writer.
     /// </summary>
@@ -24,7 +23,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// <param name="configuration">The configuration of the object implementing the <see cref="IMessageWriter"/>.</param>
     /// <param name="uaEncoder">The encoder that provides methods to be used to encode OPC UA Built-in types.</param>
     /// <returns>An object implementing <see cref="IMessageWriter"/> that provides functionality supporting sending the messages over the wire.</returns>
-    IMessageWriter GetIMessageWriter(string name, MessageChannelConfiguration configuration, IUAEncoder uaEncoder);
+    IMessageWriter GetIMessageWriter(string name, string configuration, IUAEncoder uaEncoder);
 
   }
 }

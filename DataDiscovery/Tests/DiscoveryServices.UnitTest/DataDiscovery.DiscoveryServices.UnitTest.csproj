@@ -60,6 +60,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
+      <Link>DependencyValidation1.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
     <None Include="OPCUAOOIKey.snk" />
   </ItemGroup>
   <ItemGroup>

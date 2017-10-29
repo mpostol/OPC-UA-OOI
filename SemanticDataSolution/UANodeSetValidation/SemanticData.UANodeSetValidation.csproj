@@ -107,6 +107,10 @@
     <Compile Include="XML\UANodeSet.Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
+      <Link>DependencyValidation1.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
     <None Include="BuildErrors.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BuildErrors1.cs</LastGenOutput>

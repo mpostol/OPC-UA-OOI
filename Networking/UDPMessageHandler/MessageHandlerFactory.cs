@@ -12,7 +12,7 @@ namespace UAOOI.Networking.UDPMessageHandler
   public class MessageHandlerFactory : IMessageHandlerFactory
   {
 
-    #region creator
+    #region constructor
     /// <summary>
     /// Initializes a new instance of the <see cref="MessageHandlerFactory" /> class.
     /// </summary>
@@ -26,6 +26,11 @@ namespace UAOOI.Networking.UDPMessageHandler
       m_ToDispose = toDispose;
     }
     #endregion
+
+    #region IMessageHandlerFactory
+    /// <summary>
+    /// Class UDPReaderConfiguration encapsulating configuration for <see cref="IMessageHandlerFactory.GetIMessageReader"/>.
+    /// </summary>
     internal class UDPReaderConfiguration
     {
       internal static UDPReaderConfiguration Parse(string configuration)
@@ -52,23 +57,6 @@ namespace UAOOI.Networking.UDPMessageHandler
       private UDPReaderConfiguration() { }
 
     }
-    internal class UDPWriterConfiguration
-    {
-      internal static UDPWriterConfiguration Parse(string configuration)
-      {
-        throw new NotImplementedException();
-      }
-      internal int UDPPortNumber { get; set; }
-      internal string RemoteHostName { get; set; }
-      public override string ToString()
-      {
-        return $"{UDPPortNumber},{RemoteHostName}";
-      }
-
-      private UDPWriterConfiguration() { }
-
-    }
-    #region 
     /// <summary>
     /// Gets the message reader.
     /// </summary>
@@ -85,6 +73,31 @@ namespace UAOOI.Networking.UDPMessageHandler
         _ret.MulticastGroup = IPAddress.Parse(_configuration.DefaultMulticastGroup);
       _ret.ReuseAddress = _configuration.ReuseAddress;
       return _ret;
+    }
+    /// <summary>
+    /// Class UDPWriterConfiguration encapsulating configuration for <see cref="IMessageHandlerFactory.GetIMessageWriter"/>.
+    /// </summary>
+    internal class UDPWriterConfiguration
+    {
+      internal static UDPWriterConfiguration Parse(string configuration)
+      {
+        string[] _parameters = configuration.Split(',');
+        if (_parameters.Length != 2)
+          throw new ArgumentException($"Wrong number of parameter {_parameters.Length} but expected 4");
+        UDPWriterConfiguration _ret = new UDPWriterConfiguration();
+        _ret.UDPPortNumber = int.Parse(_parameters[0]);
+        _ret.RemoteHostName = _parameters[1];
+        return _ret;
+      }
+      internal int UDPPortNumber { get; set; }
+      internal string RemoteHostName { get; set; }
+      public override string ToString()
+      {
+        return $"{UDPPortNumber},{RemoteHostName}";
+      }
+
+      private UDPWriterConfiguration() { }
+
     }
     /// <summary>
     /// Gets the new instance of <see cref="IMessageWriter"/>.

@@ -100,6 +100,10 @@
     <Compile Include="UANetworkingConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
+      <Link>DependencyValidation1.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
     <None Include="app.config" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />

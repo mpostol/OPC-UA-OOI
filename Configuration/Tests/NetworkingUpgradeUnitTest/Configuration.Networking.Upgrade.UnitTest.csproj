@@ -65,6 +65,10 @@
     <Compile Include="Re_l1_00_16UnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
+      <Link>DependencyValidation1.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
     <None Include="OPCUAOOIKey.snk" />
   </ItemGroup>
   <ItemGroup>

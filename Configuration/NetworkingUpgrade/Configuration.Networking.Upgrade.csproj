@@ -59,6 +59,10 @@
     <Compile Include="Re_l1_00_16\ValueRanks.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
+      <Link>DependencyValidation1.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
     <None Include="packages.config" />
     <None Include="Re_l1_00_16\ConfigurationData.xsd">
       <SubType>Designer</SubType>

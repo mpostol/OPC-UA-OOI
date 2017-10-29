@@ -82,6 +82,10 @@
     <Compile Include="UANetworkingConfigurationEditor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
+      <Link>DependencyValidation1.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
     <None Include="app.config" />
     <None Include="Help\ASModelDesigner.chm" />
     <None Include="OPCUAOOIKey.snk" />

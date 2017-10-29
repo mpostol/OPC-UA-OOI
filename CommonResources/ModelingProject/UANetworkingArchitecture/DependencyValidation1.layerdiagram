@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="e7d5c888-d529-4a52-8367-7f7971e5c1d8" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="fdd9438f-ecca-4280-9cf0-d1d5cbff63ef" name="UAOOI.Networking.UnitTest">
+      <childLayers>
+        <layer Id="8e1e80de-2254-4a0b-a056-2486a2dd5096" name="UAOOI.Networking.UDPMessageHandler.UnitTest">
+          <references>
+            <reference Id="5ce56728-27af-47d8-b788-ac748de5cdd5" name="UAOOI.Networking.UDPMessageHandler.UnitTest">
+              <ArtifactNode Label="UAOOI.Networking.UDPMessageHandler.UnitTest" Category="CodeSchema_Namespace" Id="(Namespace=UAOOI.Networking.UDPMessageHandler.UnitTest)" />
+              <ExpandedNode Id="(Namespace=UAOOI.Networking.UDPMessageHandler.UnitTest)" Label="UAOOI.Networking.UDPMessageHandler.UnitTest" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="1d5c0cb1-bd7f-44ca-b06a-2af3d417ab92" name="UAOOI.Networking.SemanticData.UnitTest.dll">
+          <references>
+            <reference Id="34f57450-fba5-4f53-b6a8-f3d2e0d4b5de" name="UAOOI.Networking.SemanticData.UnitTest.dll">
+              <ArtifactNode Label="UAOOI.Networking.SemanticData.UnitTest.dll" Category="CodeSchema_Assembly" Id="(Assembly=../../../Networking/Tests/SemanticDatalUnitTest/bin/Debug/UAOOI.Networking.SemanticData.UnitTest.dll)" />
+              <ExpandedNode Id="(Assembly=UAOOI.Networking.SemanticData.UnitTest)" Label="UAOOI.Networking.SemanticData.UnitTest.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="f77723cd-1873-40ba-8338-7be79f79f2ba" name="UAOOI.Networking.ReferenceApplication.UnitTest.dll">
+          <references>
+            <reference Id="3820b507-9b39-4460-9a44-8ec13804a3b3" name="UAOOI.Networking.ReferenceApplication.UnitTest.dll">
+              <ArtifactNode Label="UAOOI.Networking.ReferenceApplication.UnitTest.dll" Category="CodeSchema_Assembly" Id="(Assembly=../../../Networking/Tests/ReferenceApplicationUnitTest/bin/Debug/UAOOI.Networking.ReferenceApplication.UnitTest.dll)" />
+              <ExpandedNode Id="(Assembly=UAOOI.Networking.ReferenceApplication.UnitTest)" Label="UAOOI.Networking.ReferenceApplication.UnitTest.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+  </layers>
+</layerModel>

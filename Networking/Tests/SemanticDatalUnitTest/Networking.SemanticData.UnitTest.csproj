@@ -103,7 +103,12 @@
     <Compile Include="ConsumerBindingMonitoredValueUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
+      <Link>DependencyValidation1.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
     <None Include="OPCUAOOIKey.snk" />
+    <None Include="packages.config" />
     <None Include="Writers.cd" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +120,10 @@
       <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
       <Name>Configuration.Networking</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
+    <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

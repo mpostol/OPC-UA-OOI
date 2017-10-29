@@ -121,6 +121,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
+      <Link>DependencyValidation1.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
     <None Include="Association.cd" />
     <None Include="DataRepository\IBinding.cd" />
     <None Include="MessageHandling\MessageHandling.cd" />

@@ -49,6 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
+      <Link>DependencyValidation1.layerdiagram</Link>
+      <Visible>False</Visible>
+    </AdditionalFiles>
     <None Include="Models\DomainDescriptor.GoCS.cmd" />
     <None Include="Models\DomainDescriptor.GoXSD.cmd" />
     <None Include="Models\DomainDescriptor.xsd">

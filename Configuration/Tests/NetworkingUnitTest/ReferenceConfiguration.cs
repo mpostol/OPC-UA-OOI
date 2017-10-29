@@ -44,13 +44,13 @@ namespace UAOOI.Configuration.Networking.UnitTest
       {
         case AssociationRole.Consumer:
           _ret = new MessageReaderConfiguration[] { new MessageReaderConfiguration() { ConsumerAssociationConfigurations = GetConsumerAssociationConfiguration(),
-          Configuration = null,
+          Configuration = new MessageChannelConfiguration() { ChannelConfiguration  = "4840,True,239.255.255.1,True" },
           Name = "UDP",
           TransportRole = associationRole }};
           break;
         case AssociationRole.Producer:
           _ret = new MessageWriterConfiguration[] { new MessageWriterConfiguration() {  ProducerAssociationConfigurations = GetProducerAssociationConfiguration(),
-          Configuration = null,
+          Configuration = new MessageChannelConfiguration () { ChannelConfiguration = "4840,localhost" },
           Name = "UDP",
           TransportRole = associationRole }};
           break;

@@ -402,7 +402,7 @@ namespace UAOOI.Configuration.Networking.Serialization
         this.NameField = value;
       }
     }
-    [DataMemberAttribute(EmitDefaultValue = false, Order = 2)]
+    [DataMemberAttribute(EmitDefaultValue = true, IsRequired = true, Order = 2)]
     public MessageChannelConfiguration Configuration
     {
       get

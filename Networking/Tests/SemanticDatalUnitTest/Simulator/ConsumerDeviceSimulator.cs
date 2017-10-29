@@ -88,7 +88,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
       private MessageHandlerConfiguration[] GetMessageTransport()
       {
         return new MessageHandlerConfiguration[] { new MessageReaderConfiguration() { ConsumerAssociationConfigurations = GetTransportAssociations(),
-                                                                                       Configuration = null,
+                                                                                       Configuration = new MessageChannelConfiguration(),
                                                                                        Name = "UDP",
                                                                                        TransportRole = AssociationRole.Consumer } };
       }

@@ -86,7 +86,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
       private MessageHandlerConfiguration[] GetMessageTransport()
       {
         return new MessageWriterConfiguration[] { new MessageWriterConfiguration() { ProducerAssociationConfigurations = GetTransportAssociations(),
-                                                                                     Configuration = null,
+                                                                                     Configuration = new MessageChannelConfiguration() { ChannelConfiguration = "4840,localhost" },
                                                                                      Name = "UDP",
                                                                                      TransportRole = AssociationRole.Producer } };
       }
@@ -103,7 +103,8 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
                                                                          Id = AssociationConfigurationId,
                                                                          RepositoryGroup = m_RepositoryGroup,
                                                                          InformationModelURI= AssociationConfigurationInformationModelURI
-        } };
+                                                                       }
+        };
       }
       private FieldMetaData[] GetMembers()
       {
@@ -214,7 +215,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
     /// <param name="configurationVersion">The configuration version.</param>
     /// <exception cref="ArgumentOutOfRangeException">length</exception>
     public void Send
-      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, DataSelector 
+      (Func<int, IProducerBinding> producerBinding, ushort length, ulong contentMask, FieldEncodingEnum encoding, DataSelector
        dataSelector, ushort messageSequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
     {
       if (length > 2)

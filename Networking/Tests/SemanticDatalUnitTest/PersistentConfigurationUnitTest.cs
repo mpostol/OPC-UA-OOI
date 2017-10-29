@@ -33,7 +33,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       foreach (ConsumerAssociationConfiguration _ax in _item.ConsumerAssociationConfigurations)
         AssociationsDictionary.Add(_ax.AssociationName, _ax);
       MessageTransportConfigurationDictionary.Add(_item.Name, _item);
-      Assert.IsNull(_item.Configuration);
+      Assert.IsNotNull(_item.Configuration);
     }
     private void TestConfiguration(DataSetConfiguration[] associationConfiguration)
     {

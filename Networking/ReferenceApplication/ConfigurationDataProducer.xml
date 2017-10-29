@@ -1162,6 +1162,9 @@
   <MessageHandlers>
     <MessageHandlerConfiguration i:type="MessageWriterConfiguration">
       <Name>UDP</Name>
+      <Configuration>
+        <ChannelConfiguration>4840,localhost</ChannelConfiguration>
+      </Configuration>
       <TransportRole>Producer</TransportRole>
       <ProducerAssociationConfigurations>
         <ProducerAssociationConfiguration>

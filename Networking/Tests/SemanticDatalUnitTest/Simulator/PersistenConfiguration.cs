@@ -24,7 +24,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
       return new MessageReaderConfiguration()
       {
         ConsumerAssociationConfigurations = new ConsumerAssociationConfiguration[] { new ConsumerAssociationConfiguration() { AssociationName = "Associations".AddId(AssociationId), DataSetWriterId = UInt16.MaxValue, PublisherId = Guid.NewGuid() } },
-        Configuration = null,
+        Configuration = new MessageChannelConfiguration() { ChannelConfiguration = "4840,True,239.255.255.1,True" },
         Name = "Name".AddId(MessageTransportId),
         TransportRole = AssociationRole.Consumer
       };

@@ -40,10 +40,6 @@ namespace UAOOI.Networking.ReferenceApplication
     /// <param name="encoding">The encoding.</param>
     /// <returns>An object implementing <see cref="IConsumerBinding"/>.</returns>
     IConsumerBinding GetConsumerBinding(string variableName, UATypeInfo encoding);
-    /// <summary>
-    /// Saves the consumer user settings.
-    /// </summary>
-    void SaveConsumerUserSettings();
 
   }
 

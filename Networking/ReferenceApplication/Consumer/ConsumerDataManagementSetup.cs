@@ -97,7 +97,6 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     private void Restart()
     {
       m_ViewModel.Trace("Entering Restart");
-      m_ViewModel.SaveConsumerUserSettings();
       Dispose();
       Setup();
     }

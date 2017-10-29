@@ -3,16 +3,14 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.ReferenceApplication.Controls;
+using UAOOI.Networking.SemanticData.DataRepository;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
@@ -30,12 +28,7 @@ namespace UAOOI.Networking.ReferenceApplication
     /// </summary>
     public MainWindowViewModel()
     {
-      b_UDPPort = Properties.Settings.Default.UDPPort;
-      b_RemoteHost = Properties.Settings.Default.RemoteHostName;
-      b_RemotePort = Properties.Settings.Default.RemoteUDPPortNumber;
       b_ConsumerLog = new ObservableCollection<string>();
-      b_MulticastGroup = Properties.Settings.Default.DefaultMulticastGroup;
-      b_MulticastGroupSelection = Properties.Settings.Default.JoinMulticastGroup;
       //Menu Files
       b_ConfigurationFolder = new ConfigurationFolderCommand();
       b_HelpDocumentation = new WebDocumentationCommand(Properties.Resources.HelpDocumentationUrl);
@@ -164,21 +157,6 @@ namespace UAOOI.Networking.ReferenceApplication
     #endregion
 
     #region IConsumerViewModel 
-    /// <summary>
-    /// Saves the consumer user settings.
-    /// </summary>
-    public void SaveConsumerUserSettings()
-    {
-      Properties.Settings.Default.UDPPort = UDPPort;
-      IPAddress _ma = GetMulticastGroupIPAddress();
-      if (_ma == null)
-        Properties.Settings.Default.JoinMulticastGroup = false;
-      else
-      {
-        Properties.Settings.Default.JoinMulticastGroup = true;
-        Properties.Settings.Default.DefaultMulticastGroup = _ma.ToString();
-      }
-    }
     /// <summary>
     /// Gets or sets the consumer received bytes.
     /// </summary>
@@ -371,21 +349,6 @@ namespace UAOOI.Networking.ReferenceApplication
     #endregion
 
     #region Consumer ViewModel implementation
-    /// <summary>
-    /// Gets or sets the UDP port.
-    /// </summary>
-    /// <value>The UDP port.</value>
-    public int UDPPort
-    {
-      get
-      {
-        return b_UDPPort;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<int>(value, ref b_UDPPort, "UDPPort", this);
-      }
-    }
     public ObservableCollection<string> ConsumerLog
     {
       get
@@ -395,28 +358,6 @@ namespace UAOOI.Networking.ReferenceApplication
       set
       {
         PropertyChanged.RaiseHandler<ObservableCollection<string>>(value, ref b_ConsumerLog, "ConsumerLog", this);
-      }
-    }
-    public string MulticastGroup
-    {
-      get
-      {
-        return b_MulticastGroup;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<string>(value, ref b_MulticastGroup, "MulticastGroup", this);
-      }
-    }
-    public bool MulticastGroupSelection
-    {
-      get
-      {
-        return b_MulticastGroupSelection;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<bool>(value, ref b_MulticastGroupSelection, "MulticastGroupSelection", this);
       }
     }
     #endregion
@@ -442,30 +383,6 @@ namespace UAOOI.Networking.ReferenceApplication
       set
       {
         PropertyChanged.RaiseHandler<int>(value, ref b_PackagesSent, "PackagesSent", this);
-      }
-    }
-    public string RemoteHost
-    {
-      get
-      {
-        return b_RemoteHost;
-      }
-      set
-      {
-        if (PropertyChanged.RaiseHandler<string>(value, ref b_RemoteHost, "RemoteHost", this))
-          Properties.Settings.Default.RemoteHostName = value;
-      }
-    }
-    public int RemotePort
-    {
-      get
-      {
-        return b_RemotePort;
-      }
-      set
-      {
-        if (PropertyChanged.RaiseHandler<int>(value, ref b_RemotePort, "RemotePort", this))
-          Properties.Settings.Default.RemoteUDPPortNumber = value;
       }
     }
     public ICommand ProducerRestart
@@ -554,19 +471,14 @@ namespace UAOOI.Networking.ReferenceApplication
     }
     //vars
     //Consumer private part
-    private bool b_MulticastGroupSelection;
-    private string b_MulticastGroup;
     private ObservableCollection<string> b_ConsumerLog;
     private string b_ConsumerErrorMessage;
     private ICommand b_ConsumerUpdateConfiguration;
     private int b_ConsumerFramesReceived;
     private int b_ConsumerBytesReceived;
-    private int b_UDPPort;
     //producer private part
     private int b_BytesSent;
     private int b_PackagesSent;
-    private string b_RemoteHost;
-    private int b_RemotePort;
     private ICommand b_ProducerRestart;
     private string b_ProducerErrorMessage;
     //methods
@@ -576,35 +488,6 @@ namespace UAOOI.Networking.ReferenceApplication
       _return.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).ToString()}");
       return _return;
     }
-    private IPAddress GetMulticastGroupIPAddress()
-    {
-      try
-      {
-        if (!MulticastGroupSelection)
-          return null;
-        Controls.IPAddressValidationRule _vr = new IPAddressValidationRule();
-        ValidationResult _res = _vr.Validate(MulticastGroup, CultureInfo.InvariantCulture);
-        if (!_res.IsValid)
-        {
-          Trace($"Removed multicast group because of error {_res.ErrorContent}");
-          MulticastGroupSelection = false;
-          return null;
-        }
-        return IPAddress.Parse(MulticastGroup);
-      }
-      catch (Exception _ex)
-      {
-        Trace($"Removed multicast group because of exception: {_ex.GetType().Name} with the message: {_ex.Message}");
-        MulticastGroupSelection = false;
-        return null;
-      }
-    }
-#if DEBUG
-    internal IPAddress DebugGetMulticastGroupIPAddress()
-    {
-      return GetMulticastGroupIPAddress();
-    }
-#endif
     #endregion
 
   }

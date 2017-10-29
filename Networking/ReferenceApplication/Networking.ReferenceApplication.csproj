@@ -114,7 +114,6 @@
     <Compile Include="Controls\INotification.cs" />
     <Compile Include="Controls\InteractionRequestedEventArgs.cs" />
     <Compile Include="Controls\ConfigurationEditorOpenCommand.cs" />
-    <Compile Include="Controls\IPAddressValidationRule.cs" />
     <Compile Include="Controls\OpenFileCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>

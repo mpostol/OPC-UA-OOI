@@ -41,13 +41,13 @@ namespace UAOOI.Networking.UDPMessageHandler
         UDPReaderConfiguration _ret = new UDPReaderConfiguration();
         _ret.UDPPortNumber = int.Parse(_parameters[0]);
         _ret.JoinMulticastGroup = bool.Parse(_parameters[1]);
-        _ret.DefaultMulticastGroup = _parameters[2];
+        if (_ret.JoinMulticastGroup)
+          _ret.DefaultMulticastGroup = IPAddressValidationRule.ValidateIP(_parameters[2]);
         _ret.ReuseAddress = bool.Parse(_parameters[3]);
         return _ret;
       }
       internal int UDPPortNumber { get; set; }
-      internal bool JoinMulticastGroup { get; set; }
-      internal string DefaultMulticastGroup { get; set; }
+      internal IPAddress DefaultMulticastGroup { get; set; } = null;
       internal bool ReuseAddress { get; set; }
       public override string ToString()
       {
@@ -55,6 +55,7 @@ namespace UAOOI.Networking.UDPMessageHandler
       }
 
       private UDPReaderConfiguration() { }
+      private bool JoinMulticastGroup;
 
     }
     /// <summary>
@@ -69,8 +70,7 @@ namespace UAOOI.Networking.UDPMessageHandler
       UDPReaderConfiguration _configuration = UDPReaderConfiguration.Parse(configuration);
       BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(uaDecoder, _configuration.UDPPortNumber, m_Trace);
       m_ToDispose(_ret);
-      if (_configuration.JoinMulticastGroup)
-        _ret.MulticastGroup = IPAddress.Parse(_configuration.DefaultMulticastGroup);
+      _ret.MulticastGroup = _configuration.DefaultMulticastGroup;
       _ret.ReuseAddress = _configuration.ReuseAddress;
       return _ret;
     }

@@ -52,12 +52,12 @@ namespace UAOOI.Networking.ReferenceApplication.Controls
       IConfiguration _editor = null;
       try
       {
-        string _asseblyLocatioen = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        _filePath = Path.Combine(_asseblyLocatioen, m_FileName);
+        string _assemblyLocatioen = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        _filePath = Path.Combine(_assemblyLocatioen, m_FileName);
         FileInfo _configurationFileInfo = new FileInfo(_filePath);
         if (!_configurationFileInfo.Exists)
           throw new FileNotFoundException();
-        string _editorPath = Path.Combine(_asseblyLocatioen, Properties.Settings.Default.ConfigurationEditorPlugInFilePath);
+        string _editorPath = Path.Combine(_assemblyLocatioen, Properties.Settings.Default.ConfigurationEditorPlugInFilePath);
         FileInfo _editorFileInfo = new FileInfo(_editorPath);
         if (_editorFileInfo.Exists)
           _editor = CreateInstance(_editorFileInfo);

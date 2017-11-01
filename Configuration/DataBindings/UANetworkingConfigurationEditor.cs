@@ -1,9 +1,9 @@
 ﻿
-using CAS.UA.IServerConfiguration;
 using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
+using CAS.UA.IServerConfiguration;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings
@@ -115,11 +115,7 @@ namespace UAOOI.Configuration.DataBindings
     /// </summary>
     /// <value>The configuration editor.</value>
     [Import(typeof(IConfigurationEditor))]
-    public IConfigurationEditor ConfigurationEditor
-    {
-      get { return b_ConfigurationEditor; }
-      set { b_ConfigurationEditor = value; }
-    }
+    public IConfigurationEditor ConfigurationEditor { get; set; }
     /// <summary>
     /// Gets or sets the instance configuration factory.
     /// </summary>
@@ -136,7 +132,6 @@ namespace UAOOI.Configuration.DataBindings
     #endregion
 
     #region private
-    private IConfigurationEditor b_ConfigurationEditor;
     private CompositionContainer m_Container;
     private void ComposeParts()
     {
@@ -152,7 +147,6 @@ namespace UAOOI.Configuration.DataBindings
     {
       return new ConfigurationData() { DataSets = new DataSetConfiguration[] { }, MessageHandlers = new MessageHandlerConfiguration[] { } };
     }
-
     #endregion
 
   }

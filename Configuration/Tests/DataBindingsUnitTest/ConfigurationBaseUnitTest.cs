@@ -7,7 +7,7 @@ using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings.UnitTest
 {
-    [TestClass]
+  [TestClass]
   [DeploymentItem(@"..\NetworkingUnitTest\TestData\", @"TestData\")]
   public class ConfigurationBaseUnitTest
   {
@@ -82,7 +82,7 @@ namespace UAOOI.Configuration.DataBindings.UnitTest
       /// </summary>
       public override void CreateDefaultConfiguration()
       {
-        CurrentConfiguration = new ConfigurationData(); 
+        CurrentConfiguration = new ConfigurationData();
       }
       /// <summary>
       /// Creates automatically the instance configurations on the best effort basis.

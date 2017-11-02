@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".CommonResources", ".CommonResources", "{78EDB72A-77B1-4A64-8E76-17E780993017}"
 	ProjectSection(SolutionItems) = preProject
 		CONTRIBUTING.md = CONTRIBUTING.md
+		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
 		README.md = README.md
 		SemanticDataSolution\README.MD = SemanticDataSolution\README.MD
 		SemanticDataSolution\README.MessageCentricCommunication.md = SemanticDataSolution\README.MessageCentricCommunication.md

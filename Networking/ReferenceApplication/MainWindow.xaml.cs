@@ -2,18 +2,26 @@
 using Microsoft.Win32;
 using System.Windows;
 using UAOOI.Networking.ReferenceApplication.Controls;
+using System.ComponentModel.Composition;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
   /// <summary>
   /// Interaction logic for MainWindow.xaml
   /// </summary>
+  [Export()]
   public partial class MainWindow : Window
   {
 
     public MainWindow()
     {
       InitializeComponent();
+    }
+    [Import]
+    internal MainWindowViewModel MainWindowViewModel
+    {
+      set { DataContext = value; }
+      get { return DataContext as MainWindowViewModel; }
     }
     private void CommandBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
     {

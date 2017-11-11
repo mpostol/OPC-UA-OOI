@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -19,6 +20,7 @@ namespace UAOOI.Networking.ReferenceApplication
   /// Class MainWindowViewModel - this class demonstrates how to create bindings to the properties that are holders of OPC UA values in the 
   /// Model View ViewModel pattern.
   /// </summary>
+  [Export]
   internal class MainWindowViewModel : INotifyPropertyChanged, IProducerViewModel, IConsumerViewModel
   {
 

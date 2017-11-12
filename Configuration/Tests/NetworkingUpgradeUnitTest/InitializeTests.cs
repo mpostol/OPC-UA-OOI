@@ -7,7 +7,6 @@ namespace UAOOI.Configuration.Networking.Upgrade.UnitTest
   [DeploymentItem(@"TestingData\", @"TestingData\")]
   public class AssemblyInitialize
   {
-    [TestMethod]
     [AssemblyInitialize]
     public static void Initialize(TestContext context) { }
     [TestMethod]

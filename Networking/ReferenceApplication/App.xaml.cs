@@ -1,7 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
@@ -18,12 +15,9 @@ namespace UAOOI.Networking.ReferenceApplication
     private void App_Startup(object sender, StartupEventArgs e)
     {
       GalaSoft.MvvmLight.Threading.DispatcherHelper.Initialize();
-      // Open a window
-      MainWindow window = new MainWindow();
-      MainWindowViewModel _cbf = (MainWindowViewModel)window.DataContext;
-      Consumer.ConsumerDataManagementSetup.CreateDevice(_cbf, x => m_DisposableCollection.Add(x));
-      Producer.OPCUAServerProducerSimulator.CreateDevice(_cbf, x => m_DisposableCollection.Add(x), y => m_Log.Add(y));
-      window.Show();
+      //Producer.OPCUAServerProducerSimulator.CreateDevice(_cbf, x => m_DisposableCollection.Add(x), y => m_Log.Add(y));
+      AppBootstrapper _bootstrapper = new AppBootstrapper();
+      _bootstrapper.Run();
     }
     /// <summary>
     /// Handles the Exit event of the App control.
@@ -32,12 +26,8 @@ namespace UAOOI.Networking.ReferenceApplication
     /// <param name="e">The <see cref="ExitEventArgs"/> instance containing the event data.</param>
     private void App_Exit(object sender, ExitEventArgs e)
     {
-      foreach (IDisposable _toDispose in m_DisposableCollection)
-        _toDispose.Dispose();
       ReferenceApplication.Properties.Settings.Default.Save();
     }
-    private List<IDisposable> m_DisposableCollection = new List<IDisposable>();
-    private List<string> m_Log = new List<string>();
 
   }
 }

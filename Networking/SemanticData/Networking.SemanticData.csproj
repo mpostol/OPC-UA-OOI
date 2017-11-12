@@ -22,7 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\UAOOI.Networking.SemanticData.xml</DocumentationFile>
-    <NoWarn>IDE0001, IDE0003</NoWarn>
+    <NoWarn>IDE0001, IDE0002,IDE0003,1591</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">

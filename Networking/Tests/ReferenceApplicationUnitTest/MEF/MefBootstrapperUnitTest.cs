@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.Windows;
+using CommonServiceLocator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Networking.ReferenceApplication.MEF;
@@ -116,8 +117,11 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         Assert.AreEqual<string>(nameof(CreateShell), m_CallSequence[i++]);
         Assert.AreEqual<string>(nameof(InitializeShell), m_CallSequence[i++]);
         Assert.AreEqual<string>(nameof(OnInitialized), m_CallSequence[i++]);
-        MainWindow _MainWindow = this.Container.GetExportedValue<MainWindow>();
+        Assert.IsTrue(ServiceLocator.IsLocationProviderSet);
+        MainWindow _MainWindow = ServiceLocator.Current.GetInstance<MainWindow>();
         Assert.IsNotNull(_MainWindow);
+        MainWindowViewModel _MainWindowViewModel = ServiceLocator.Current.GetInstance<MainWindowViewModel>();
+        Assert.IsNotNull(_MainWindowViewModel);
       }
       private bool m_ExternalInitialization = false;
       private List<string> m_CallSequence = new List<string>();

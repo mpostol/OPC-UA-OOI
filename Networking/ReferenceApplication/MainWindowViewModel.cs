@@ -20,7 +20,10 @@ namespace UAOOI.Networking.ReferenceApplication
   /// Class MainWindowViewModel - this class demonstrates how to create bindings to the properties that are holders of OPC UA values in the 
   /// Model View ViewModel pattern.
   /// </summary>
-  [Export]
+  [Export()]
+  [Export(typeof(IProducerViewModel))]
+  [Export(typeof(IConsumerViewModel))]
+  [PartCreationPolicy(CreationPolicy.Shared)]
   internal class MainWindowViewModel : INotifyPropertyChanged, IProducerViewModel, IConsumerViewModel
   {
 

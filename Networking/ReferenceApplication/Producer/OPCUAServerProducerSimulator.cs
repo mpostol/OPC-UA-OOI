@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Windows.Input;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.UDPMessageHandler;
@@ -11,16 +12,16 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
   /// <summary>
   /// Class OPCUAServerProducerSimulator simulates interface to internal <see cref="CustomNodeManager"/> class.
   /// </summary>
+  [Export]
+  [PartCreationPolicy(CreationPolicy.Shared)]
   internal sealed class OPCUAServerProducerSimulator : DataManagementSetup, IDisposable
   {
-    #region creator
-    internal static void CreateDevice(IProducerViewModel viewModel, Action<IDisposable> toDispose, Action<string> trace)
+
+    #region Composition
+    [Import(typeof(IProducerViewModel))]
+    internal IProducerViewModel ViewModel
     {
-      Current = new OPCUAServerProducerSimulator();
-      toDispose(Current);
-      Current.m_Trace = trace;
-      Current.m_ViewModel = viewModel;
-      Current.Setup();
+      get; set;
     }
     #endregion
 
@@ -60,27 +61,25 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       private Action m_restart;
     }
     private List<IDisposable> m_ToDispose = new List<IDisposable>();
-    private Action<string> m_Trace;
-    private IProducerViewModel m_ViewModel;
-    private void Setup()
+    internal void Setup()
     {
       try
       {
-        m_ViewModel.ProducerRestart = new RestartCommand(Current.Restart);
+        ViewModel.ProducerRestart = new RestartCommand(Current.Restart);
         Current.ConfigurationFactory = new ProducerConfigurationFactory();
         CustomNodeManager _simulator = new CustomNodeManager();
         m_ToDispose.Add(_simulator);
         Current.BindingFactory = _simulator;
         Current.EncodingFactory = _simulator;
-        Current.MessageHandlerFactory = new MessageHandlerFactory(x => m_ToDispose.Add(x), m_Trace);
+        Current.MessageHandlerFactory = new MessageHandlerFactory(x => m_ToDispose.Add(x), x => { });
         Current.Initialize();
         Current.Run();
         _simulator.Run();
-        m_ViewModel.ProducerErrorMessage = "Running";
+        ViewModel.ProducerErrorMessage = "Running";
       }
       catch (Exception ex)
       {
-        m_ViewModel.ProducerErrorMessage = String.Format("Error: {0}", ex.Message);
+        ViewModel.ProducerErrorMessage = String.Format("Error: {0}", ex.Message);
         Dispose();
       }
     }

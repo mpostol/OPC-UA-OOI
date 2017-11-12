@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoWarn>IDE0001,IDE0002,IDE0003</NoWarn>
+    <NoWarn>IDE0001,IDE0002,IDE0003,1591</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <DocumentationFile>bin\Debug\UAOOI.Configuration.Networking.XML</DocumentationFile>
   </PropertyGroup>

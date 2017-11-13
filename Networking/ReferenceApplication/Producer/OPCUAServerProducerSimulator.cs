@@ -34,14 +34,6 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     }
     #endregion
 
-    #region API
-    /// <summary>
-    /// Gets the current instance of the <see cref="OPCUAServerProducerSimulator"/>.
-    /// </summary>
-    /// <value>The current.</value>
-    public static OPCUAServerProducerSimulator Current { get; private set; }
-    #endregion
-
     #region private
     private class RestartCommand : ICommand
     {
@@ -65,15 +57,15 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     {
       try
       {
-        ViewModel.ProducerRestart = new RestartCommand(Current.Restart);
-        Current.ConfigurationFactory = new ProducerConfigurationFactory();
+        ViewModel.ProducerRestart = new RestartCommand(Restart);
+        ConfigurationFactory = new ProducerConfigurationFactory();
         CustomNodeManager _simulator = new CustomNodeManager();
         m_ToDispose.Add(_simulator);
-        Current.BindingFactory = _simulator;
-        Current.EncodingFactory = _simulator;
-        Current.MessageHandlerFactory = new MessageHandlerFactory(x => m_ToDispose.Add(x), x => { });
-        Current.Initialize();
-        Current.Run();
+        BindingFactory = _simulator;
+        EncodingFactory = _simulator;
+        MessageHandlerFactory = new MessageHandlerFactory(x => m_ToDispose.Add(x), x => { });
+        Initialize();
+        Run();
         _simulator.Run();
         ViewModel.ProducerErrorMessage = "Running";
       }

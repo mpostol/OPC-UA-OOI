@@ -7,7 +7,7 @@ using UAOOI.Networking.SemanticData.MessageHandling;
 namespace UAOOI.Networking.UDPMessageHandler
 {
   /// <summary>
-  /// Class ConsumerMessageHandlerFactory - implements <see cref="IMessageHandlerFactory"/> 
+  /// Class <see cref="MessageHandlerFactory"/> - implements <see cref="IMessageHandlerFactory"/> 
   /// </summary>
   public class MessageHandlerFactory : IMessageHandlerFactory
   {

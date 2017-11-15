@@ -232,6 +232,11 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
       Assert.IsNotNull(ReadMessageCompleted);
       Assert.IsTrue(m_HaveBeenActivated);
     }
+
+    public void Dispose()
+    {
+      throw new NotImplementedException();
+    }
     #endregion
 
     #region private

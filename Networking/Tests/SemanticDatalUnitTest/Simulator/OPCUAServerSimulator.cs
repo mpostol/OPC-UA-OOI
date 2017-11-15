@@ -236,6 +236,11 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
     }
     #endregion
 
+    public void Dispose()
+    {
+      throw new NotImplementedException();
+    }
+
     #region testing environment
     internal void ReadData()
     {

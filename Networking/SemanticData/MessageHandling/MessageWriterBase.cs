@@ -10,7 +10,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
   /// <summary>
   /// Class MessageWriterBase - helper class that provides basic implementation of the <see cref="IMessageWriter"/>.
   /// </summary>
-  public abstract class MessageWriterBase : IMessageWriter, IBinaryEncoder
+  public abstract class MessageWriterBase : MessageHandler, IMessageWriter, IBinaryEncoder
   {
 
     #region creator
@@ -34,10 +34,10 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// </summary>
     /// <value>The content mask represented as unsigned number <see cref="UInt64" />. The order of the bits starting from the least significant
     /// bit matches the order of the data items within the data set.</value>
-    public ulong ContentMask
+    public override ulong ContentMask
     {
       get;
-      private set;
+      protected set;
     }
     /// <summary>
     /// Sends the data described by a data set collection to remote destination.
@@ -62,7 +62,6 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
         if (State.State != HandlerState.Operational)
           return;
         ContentMask = contentMask;
-
         CreateMessage(encoding, dataSelector.PublisherId, dataSelector.DataSetWriterId, length, messageSequenceNumber, timeStamp, configurationVersion);
         //UInt64 _mask = 0x1;
         for (int i = 0; i < length; i++)
@@ -89,21 +88,6 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
         SendMessage();
       }
     }
-
-    /// <summary>
-    /// If implemented in derived class gets the state machine for this instance.
-    /// </summary>
-    /// <value>An object of <see cref="IAssociationState" /> providing implementation of the state machine governing this instance behavior.</value>
-    public abstract IAssociationState State
-    {
-      get;
-      protected set;
-    }
-    /// <summary>
-    /// Attaches to network - initialize the underlying protocol stack and establish the connection with the broker is applicable.
-    /// </summary>
-    /// <remarks>Depending on the message transport layer type implementation of this function varies.</remarks>
-    public abstract void AttachToNetwork();
     #endregion
 
     #region IBinaryEncoder

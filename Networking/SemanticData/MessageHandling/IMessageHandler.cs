@@ -7,7 +7,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
   /// <summary>
   /// Interface IMessageHandler - provides basic functionality handling messages communication over the wire.
   /// </summary>
-  public interface IMessageHandler
+  public interface IMessageHandler : IDisposable
   {
 
     /// <summary>

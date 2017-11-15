@@ -37,7 +37,8 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// The order of the bits starting from the least significant bit matches the order of the data items within the data set.</value>
     public override ulong ContentMask //TODO must be implemented - get it from message.
     {
-      get { return ulong.MaxValue; } 
+      get { return ulong.MaxValue; }
+      protected set { throw new InvalidOperationException($"ContentMask cannopt be set"); }
     }
     /// <summary>
     /// Gets or sets the message header.

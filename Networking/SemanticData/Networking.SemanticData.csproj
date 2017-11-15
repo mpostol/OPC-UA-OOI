@@ -104,6 +104,7 @@
     <Compile Include="MessageHandling\IMessageHandlerFactory.cs" />
     <Compile Include="MessageHandling\IMessageReader.cs" />
     <Compile Include="MessageHandling\IMessageWriter.cs" />
+    <Compile Include="MessageHandling\MessageHandler.cs" />
     <Compile Include="MessageHandling\MessageHeader.cs" />
     <Compile Include="MessageHandling\MessageLengthEnum.cs" />
     <Compile Include="MessageHandling\MessageReaderBase.cs" />

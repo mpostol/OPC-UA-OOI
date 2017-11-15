@@ -51,13 +51,13 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     {
       public IMessageReader GetIMessageReader(string name, string configuration, IUADecoder uaDecoder)
       {
-        return new MR();
+        return new MessageReader();
       }
       public IMessageWriter GetIMessageWriter(string name, string configuration, IUAEncoder uaEncoder)
       {
         throw new NotImplementedException();
       }
-      private class MR : IMessageReader
+      private class MessageReader : IMessageReader
       {
         public IAssociationState State
         {
@@ -76,6 +76,12 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         {
           throw new NotImplementedException();
         }
+
+        public void Dispose()
+        {
+          throw new NotImplementedException();
+        }
+
         public ulong ContentMask
         {
           get { throw new NotImplementedException(); }

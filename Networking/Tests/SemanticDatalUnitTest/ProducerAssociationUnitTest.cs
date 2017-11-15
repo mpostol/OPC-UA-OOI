@@ -136,6 +136,11 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         throw new NotImplementedException();
       }
 
+      public void Dispose()
+      {
+        throw new NotImplementedException();
+      }
+
       public ulong ContentMask
       {
         get { throw new NotImplementedException(); }

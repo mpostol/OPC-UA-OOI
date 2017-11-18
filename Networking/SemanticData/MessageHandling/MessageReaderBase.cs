@@ -44,7 +44,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       {
         if (EndOfMessage())
         {
-          Trace($"Unexpected end of message while reading #{i} element.");
+          Diagnostics.SemanticEventSource.Log.MessageInconsistency(i); 
           break;
         }
         //TODO: Implement ContentMask https://github.com/mpostol/OPC-UA-OOI/issues/89
@@ -103,11 +103,6 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// </summary>
     /// <returns><c>true</c> if there is end of message condition, <c>false</c> otherwise.</returns>
     protected abstract bool EndOfMessage();
-    /// <summary>
-    /// If implemented by the derived class traces the specified message.
-    /// </summary>
-    /// <param name="message">The message.</param>
-    protected abstract void Trace(string message);
     /// <summary>
     /// Gets the publisher identifier.
     /// </summary>

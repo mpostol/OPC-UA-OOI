@@ -1,6 +1,9 @@
 ﻿
 using System;
+using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.IO;
+using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Networking.SemanticData.Encoding;
 
 namespace UAOOI.Networking.SemanticData.MessageHandling

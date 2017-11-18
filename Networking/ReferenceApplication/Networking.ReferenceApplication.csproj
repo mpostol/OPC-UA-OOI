@@ -170,7 +170,6 @@
       <Link>DependencyValidation1.layerdiagram</Link>
       <Visible>False</Visible>
     </AdditionalFiles>
-    <None Include="CpmponenetsDiagram.dgml" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />

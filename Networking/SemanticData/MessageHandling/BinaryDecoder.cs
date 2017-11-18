@@ -8,7 +8,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
   /// <summary>
   /// Class BinaryDecoder - wrapper of <see cref="BinaryReader"/> supporting OPC UA binary encoding.
   /// </summary>
-  public abstract class BinaryDecoder : BinaryPacketDecoder, IDisposable
+  public abstract class BinaryDecoder : BinaryPacketDecoder
   {
     #region creators
     /// <summary>
@@ -19,15 +19,13 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     #endregion
 
     #region IDisposable Support
-    private bool disposedValue = false; // To detect redundant calls
     /// <summary>
     /// Releases unmanaged and - optionally - managed resources.
     /// </summary>
     /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-    protected virtual void Dispose(bool disposing)
+    protected override void Dispose(bool disposing)
     {
-      if (disposedValue)
-        return;
+      base.Dispose(disposing);
       if (disposing)
       {
         BinaryReader _lc = m_UABinaryReader;
@@ -35,18 +33,6 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
           _lc.Close();
         m_UABinaryReader = null;
       }
-      disposedValue = true;
-    }
-    /// <summary>
-    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-    /// </summary>
-    /// <remarks>
-    /// This code added to correctly implement the disposable pattern.
-    /// </remarks>
-    public void Dispose()
-    {
-      // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-      Dispose(true);
     }
     #endregion
 

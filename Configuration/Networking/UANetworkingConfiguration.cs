@@ -10,7 +10,7 @@ using UAOOI.Configuration.Networking.Serializers;
 namespace UAOOI.Configuration.Networking
 {
   /// <summary>
-  /// Class UANetworkingConfiguration - Provides implementation of the <see cref="ConfigurationBase{ConfigurationDataType}"/> for the UANetworking application.
+  /// Class UANetworkingConfiguration - Provides implementation of the <see cref="IConfigurationDataFactory"/> for the UANetworking application.
   /// </summary>
   /// <typeparam name="ConfigurationDataType">The type of the configuration data type.</typeparam>
   public class UANetworkingConfiguration<ConfigurationDataType>

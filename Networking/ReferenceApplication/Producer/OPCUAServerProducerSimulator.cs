@@ -14,7 +14,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
   /// </summary>
   [Export]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  internal sealed class OPCUAServerProducerSimulator : DataManagementSetup, IDisposable
+  internal sealed class OPCUAServerProducerSimulator : DataManagementSetup 
   {
 
     #region Composition
@@ -25,13 +25,34 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     }
     #endregion
 
-    #region IDisposable
-    public void Dispose()
+    #region private
+    internal void Setup()
     {
-      foreach (IDisposable _2Dispose in m_ToDispose)
-        _2Dispose.Dispose();
-      m_ToDispose.Clear();
+      try
+      {
+        ViewModel.ProducerRestart = new RestartCommand(Restart);
+        ConfigurationFactory = new ProducerConfigurationFactory();
+        MessageHandlerFactory = new MessageHandlerFactory(x => { });
+        BindAndStartRunning();
+        ViewModel.ProducerErrorMessage = "Running";
+      }
+      catch (Exception ex)
+      {
+        ViewModel.ProducerErrorMessage = String.Format("Error: {0}", ex.Message);
+        Dispose();
+      }
     }
+    #endregion
+
+    #region IDisposable
+    protected override void Dispose(bool disposing)
+    {
+      base.Dispose(disposing);
+      if (!disposing)
+        return;
+      foreach (IDisposable _toDispose in m_ToDispose)
+        _toDispose.Dispose();
+    } 
     #endregion
 
     #region private
@@ -53,34 +74,23 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       private Action m_restart;
     }
     private List<IDisposable> m_ToDispose = new List<IDisposable>();
-    internal void Setup()
-    {
-      try
-      {
-        ViewModel.ProducerRestart = new RestartCommand(Restart);
-        ConfigurationFactory = new ProducerConfigurationFactory();
-        CustomNodeManager _simulator = new CustomNodeManager();
-        m_ToDispose.Add(_simulator);
-        BindingFactory = _simulator;
-        EncodingFactory = _simulator;
-        MessageHandlerFactory = new MessageHandlerFactory(x => m_ToDispose.Add(x), x => { });
-        Initialize();
-        Run();
-        _simulator.Run();
-        ViewModel.ProducerErrorMessage = "Running";
-      }
-      catch (Exception ex)
-      {
-        ViewModel.ProducerErrorMessage = String.Format("Error: {0}", ex.Message);
-        Dispose();
-      }
-    }
+    private CustomNodeManager m_Simulator = null;
     private void Restart()
     {
-      Dispose();
-      Setup();
+      System.Diagnostics.Debug.Assert(m_Simulator != null);
+       m_Simulator.Dispose();
+      BindAndStartRunning();
+    }
+    private void BindAndStartRunning()
+    {
+      m_Simulator = new CustomNodeManager();
+      BindingFactory = m_Simulator;
+      EncodingFactory = m_Simulator;
+      Start();
+      m_Simulator.Run();
     }
     #endregion
 
   }
+
 }

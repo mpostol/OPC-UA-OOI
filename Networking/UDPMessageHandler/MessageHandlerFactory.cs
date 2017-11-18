@@ -20,10 +20,9 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// The objects are disposed when application exits.</param>
     /// <param name="viewModel">The ViewModel instance for this object.</param>
     /// <param name="trace">The delegate capturing logging functionality.</param>
-    public MessageHandlerFactory(Action<IDisposable> toDispose, Action<string> trace)
+    public MessageHandlerFactory(Action<string> trace)
     {
       m_Trace = trace;
-      m_ToDispose = toDispose;
     }
     #endregion
 
@@ -69,7 +68,6 @@ namespace UAOOI.Networking.UDPMessageHandler
     {
       UDPReaderConfiguration _configuration = UDPReaderConfiguration.Parse(configuration);
       BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(uaDecoder, _configuration.UDPPortNumber, m_Trace);
-      m_ToDispose(_ret);
       _ret.MulticastGroup = _configuration.DefaultMulticastGroup;
       _ret.ReuseAddress = _configuration.ReuseAddress;
       return _ret;
@@ -111,13 +109,11 @@ namespace UAOOI.Networking.UDPMessageHandler
     {
       UDPWriterConfiguration _configuration = UDPWriterConfiguration.Parse(configuration);
       BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(_configuration.RemoteHostName, _configuration.UDPPortNumber, m_Trace, uaEncoder);
-      m_ToDispose(_ret);
       return _ret;
     }
     #endregion
 
     #region private
-    private Action<IDisposable> m_ToDispose;
     private Action<string> m_Trace;
     #endregion
 

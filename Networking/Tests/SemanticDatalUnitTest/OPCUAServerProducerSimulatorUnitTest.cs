@@ -19,15 +19,14 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     {
       Guid _dataSetGuid = Guid.NewGuid();
       MyMessageHandlerFactory _mhf = new MyMessageHandlerFactory(_dataSetGuid);
-      DataManagementSetup _producer = OPCUAServerProducerSimulator.CreateDevice(_mhf, _dataSetGuid);
+      OPCUAServerProducerSimulator _producer = OPCUAServerProducerSimulator.CreateDevice(_mhf, _dataSetGuid);
       Assert.IsNull(_producer.AssociationsCollection);
       Assert.IsNotNull(_producer.BindingFactory);
       Assert.IsNotNull(_producer.ConfigurationFactory);
       Assert.IsNotNull(_producer.EncodingFactory);
       Assert.IsNotNull(_producer.MessageHandlerFactory);
       Assert.IsNull(_producer.MessageHandlersCollection);
-      _producer.Initialize();
-      _producer.Run();
+      _producer.TestStart();
       Assert.AreEqual<int>(1, _producer.AssociationsCollection.Count);
       Assert.AreEqual<int>(1, _producer.MessageHandlersCollection.Count);
       ((OPCUAServerProducerSimulator)_producer).CheckConsistency();
@@ -90,6 +89,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       #endregion
 
     }
+
     #endregion
 
   }

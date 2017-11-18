@@ -17,10 +17,10 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
   {
 
     #region creator
-    internal static DataManagementSetup CreateDevice(IMessageHandlerFactory messageHandlerFactory, Guid dataSetGuid)
+    internal static OPCUAServerProducerSimulator CreateDevice(IMessageHandlerFactory messageHandlerFactory, Guid dataSetGuid)
     {
       AssociationConfigurationId = dataSetGuid;
-      DataManagementSetup _ret = new OPCUAServerProducerSimulator();
+      OPCUAServerProducerSimulator _ret = new OPCUAServerProducerSimulator();
       _ret.ConfigurationFactory = new MyConfigurationFactory();
       _ret.BindingFactory = new MyBindingFFactory();
       _ret.EncodingFactory = new MyEncodingFactory();
@@ -30,6 +30,10 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
     #endregion
 
     #region testing environment
+    internal void TestStart()
+    {
+      base.Start();
+    }
     /// <summary>
     /// Checks the consistency of the all items in the <see cref="AssociationsCollection"/> collection.
     /// </summary>
@@ -155,18 +159,9 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
         Assert.AreEqual<BuiltInType>(sourceEncoding.BuiltInType, binding.Encoding.BuiltInType);
       }
 
-      public IUADecoder UADecoder
-      {
-        get { return m_UADecoder; }
-      }
-      public IUAEncoder UAEncoder
-      {
-        get { return m_UAEncoder; }
-      }
+      public IUADecoder UADecoder { get; } = new Helpers.UABinaryDecoderImplementation();
 
-      private readonly IUADecoder m_UADecoder = new Helpers.UABinaryDecoderImplementation();
-      private readonly IUAEncoder m_UAEncoder = new Helpers.UABinaryEncoderImplementation();
-
+      public IUAEncoder UAEncoder { get; } = new Helpers.UABinaryEncoderImplementation();
     }
     #endregion
 

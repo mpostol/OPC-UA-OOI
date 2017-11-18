@@ -10,7 +10,7 @@ namespace UAOOI.Networking.SemanticData
   /// Class DataManagementSetup - it is place holder to gather all external injection points used to initialize 
   /// the communication and bind to local resources.
   /// </summary>
-  public class DataManagementSetup
+  public class DataManagementSetup : IDisposable
   {
 
     #region Injection points
@@ -49,9 +49,9 @@ namespace UAOOI.Networking.SemanticData
     internal MessageHandlersCollection MessageHandlersCollection { get; private set; }
     #endregion
 
-    #region Master Controll functioanlity
+    #region private
     /// <summary>
-    /// Initializes the data set infrastructure.
+    /// Starts this instance - Initializes the data set infrastructure, enable all associations ans start pumping the data;
     /// </summary>
     /// <exception cref="System.ArgumentNullException">
     /// BindingFactory
@@ -62,7 +62,15 @@ namespace UAOOI.Networking.SemanticData
     /// or
     /// ConfigurationFactory
     /// </exception>
-    public void Initialize()
+    protected void Start()
+    {
+      Initialize();
+      Run();
+    }
+    /// <summary>
+    /// Initializes the data set infrastructure.
+    /// </summary>
+    private void Initialize()
     {
       if (BindingFactory == null)
         throw new ArgumentNullException(nameof(BindingFactory));
@@ -72,6 +80,7 @@ namespace UAOOI.Networking.SemanticData
         throw new ArgumentNullException(nameof(MessageHandlerFactory));
       if (ConfigurationFactory == null)
         throw new ArgumentNullException(nameof(ConfigurationFactory));
+      DisposeMessageHandlersCollection();
       ConfigurationData _configuration = ConfigurationFactory.GetConfiguration();
       AssociationsCollection = AssociationsCollection.CreateAssociations(_configuration.DataSets, BindingFactory, EncodingFactory);
       ConfigurationFactory.OnAssociationConfigurationChange += AssociationsCollection.OnConfigurationChangeHandler;
@@ -81,7 +90,7 @@ namespace UAOOI.Networking.SemanticData
     /// <summary>
     /// Initialize and enable all associations ans start pumping the data 
     /// </summary>
-    public void Run()
+    private void Run()
     {
       if (AssociationsCollection == null)
         throw new ArgumentNullException(nameof(AssociationsCollection));
@@ -89,6 +98,36 @@ namespace UAOOI.Networking.SemanticData
         throw new ArgumentNullException(nameof(MessageHandlersCollection));
       this.AssociationsCollection.Initialize();
       this.MessageHandlersCollection.Run();
+    }
+    #endregion
+
+    #region IDisposable Support
+    private bool disposedValue = false; // To detect redundant calls
+    protected virtual void Dispose(bool disposing)
+    {
+      if (disposedValue)
+        return;
+      if (disposing)
+      {
+        DisposeMessageHandlersCollection();
+      }
+      // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+      // TODO: set large fields to null.
+      disposedValue = true;
+    }
+    private void DisposeMessageHandlersCollection()
+    {
+      if (MessageHandlersCollection == null)
+        return;
+      foreach (IMessageHandler _handler in MessageHandlersCollection.Values)
+        _handler.Dispose();
+      MessageHandlersCollection = null; //to make sure no one will use them anymore.
+    }
+    // This code added to correctly implement the disposable pattern.
+    public void Dispose()
+    {
+      // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+      Dispose(true);
     }
     #endregion
 

@@ -31,7 +31,7 @@ namespace UAOOI.Networking.SemanticData
     /// </param>
     /// <param name="processValueName">
     /// The name of a variable that is the source of the values forwarded by a message over the network. 
-    /// Must be unique in the context of the group named by <paramref name="repositoryGroup.
+    /// Must be unique in the context of the group named by <paramref name="repositoryGroup"/>
     /// </param>
     /// <param name="fieldTypeInfo">The <see cref="BuiltInType"/>of the message field encoding.</param>
     /// <returns>Returns an object implementing the <see cref="IProducerBinding" /> interface that can be used to create message and populate it with the data.</returns>

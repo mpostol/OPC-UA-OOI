@@ -32,8 +32,10 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     #region IDisposable
     public void Dispose()
     {
-      if (m_Timer != null)
-        m_Timer.Change(Timeout.Infinite, Timeout.Infinite);
+      if (m_Timer == null)
+        return;
+      m_Timer.Change(Timeout.Infinite, Timeout.Infinite);
+      m_Timer.Dispose();
     }
     #endregion    
 
@@ -221,7 +223,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     private const string m_RepositoryGroup = "repositoryGroup";
     private Timer m_Timer;
     private readonly IUAEncoder m_IUAEncoder = new UABinaryEncoderImplementation();
-    private event EventHandler m_TimeEven;
+    private event EventHandler m_TimeEvent;
     private Dictionary<string, IProducerBinding> m_NodesDictionary = new Dictionary<string, IProducerBinding>();
     //methods
     #region Inc methods
@@ -300,14 +302,14 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     {
       ProducerBindingMonitoredValue<type> binding = new ProducerBindingMonitoredValue<type>(key, typeInfo) { MonitoredValue = defaultValue };
       m_NodesDictionary.Add(key, binding);
-      m_TimeEven += (x, y) => binding.MonitoredValue = increment(binding.MonitoredValue);
+      m_TimeEvent += (x, y) => binding.MonitoredValue = increment(binding.MonitoredValue);
       return binding;
     }
     private void TimerCallback(object state)
     {
       try
       {
-        m_TimeEven?.Invoke(this, EventArgs.Empty);
+        m_TimeEvent?.Invoke(this, EventArgs.Empty);
       }
       catch (Exception) { }
     }

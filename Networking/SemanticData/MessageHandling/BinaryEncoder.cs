@@ -9,7 +9,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
   /// <summary>
   /// Class BinaryEncoder - wrapper of <see cref="BinaryWriter"/> supporting OPC UA binary encoding.
   /// </summary>
-  public abstract class BinaryEncoder : BinaryPacketEncoder, IDisposable
+  public abstract class BinaryEncoder : BinaryPacketEncoder
   {
 
     #region creator
@@ -22,34 +22,16 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     #endregion
 
     #region IDisposable
-    /// <summary>
-    /// Flag: Has Dispose already been called?
-    /// </summary>
-    bool disposed = false;
-    // 
-    /// <summary>
-    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-    /// </summary>
-    /// Public implementation of Dispose pattern callable by consumers.
-    /// <remarks>
-    /// </remarks>
-    public void Dispose()
-    {
-      Dispose(true);
-      GC.SuppressFinalize(this);
-    }
     // Protected implementation of Dispose pattern.
     /// <summary>
     /// Releases unmanaged and - optionally - managed resources.
     /// </summary>
     /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-    protected virtual void Dispose(bool disposing)
+    protected override void Dispose(bool disposing)
     {
-      if (disposed)
-        return;
+      base.Dispose(disposing);
       if (disposing)
         DisposeWriter();
-      disposed = true;
     }
     #endregion
 

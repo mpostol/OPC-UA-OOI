@@ -19,15 +19,14 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     {
       UInt32 DataSetGuid = UInt32.MaxValue;
       MyMessageHandlerFactory _mhf = new MyMessageHandlerFactory(DataSetGuid);
-      DataManagementSetup _consumer = ConsumerDeviceSimulator.CreateDevice(_mhf, DataSetGuid);
+      ConsumerDeviceSimulator _consumer = ConsumerDeviceSimulator.CreateDevice(_mhf, DataSetGuid);
       Assert.IsNull(_consumer.AssociationsCollection);
       Assert.IsNotNull(_consumer.BindingFactory);
       Assert.IsNotNull(_consumer.ConfigurationFactory);
       Assert.IsNotNull(_consumer.EncodingFactory);
       Assert.IsNotNull(_consumer.MessageHandlerFactory);
       Assert.IsNull(_consumer.MessageHandlersCollection);
-      _consumer.Initialize();
-      _consumer.Run();
+      _consumer.InitializeAndRun();
       Assert.AreEqual<int>(1, _consumer.AssociationsCollection.Count);
       Assert.AreEqual<int>(1, _consumer.MessageHandlersCollection.Count);
       ((ConsumerDeviceSimulator)_consumer).CheckConsistency();

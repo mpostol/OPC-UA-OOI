@@ -32,6 +32,8 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     /// </summary>
     public override event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
     #endregion
+
+    #region private
     private ConfigurationData LoadConfig()
     {
       FileInfo _configurationFile = new FileInfo(Properties.Settings.Default.ConsumerConfigurationFileName);
@@ -42,5 +44,8 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
       OnAssociationConfigurationChange?.Invoke(this, EventArgs.Empty);
       OnMessageHandlerConfigurationChange?.Invoke(this, EventArgs.Empty);
     }
+
+    #endregion
+
   }
 }

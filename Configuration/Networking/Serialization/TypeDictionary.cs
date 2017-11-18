@@ -646,7 +646,7 @@ namespace UAOOI.Configuration.Networking.Serialization
     [EnumMemberAttribute()]
     Union
   }
-  /// <remarks/>
+  ///// <remarks/>
   //[XmlIncludeAttribute(typeof(EnumeratedType))]
   //[SerializableAttribute()]
   //[XmlTypeAttribute(Namespace = CommonDefinitions.Namespace)]

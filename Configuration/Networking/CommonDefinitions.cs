@@ -23,7 +23,7 @@ namespace UAOOI.Configuration.Networking
     /// <param name="newValue">The new value to set.</param>
     /// <param name="oldValue">The old value to replace (and the value holder).</param>
     /// <param name="update">The delegate used to update the property.</param>
-    /// <param name="propertyName">The property's name as required by <typeparamref name="System.ComponentModel.PropertyChangedEventArgs" />.</param>
+    /// <param name="propertyName">The property's name.</param>
     /// <param name="sender">The object to be appointed as the executioner of the handler.</param>
     /// <returns>A boolean value that indicates if the new value was truly different from the old value according to <code>object.Equals()</code>.</returns>
     internal static bool RaiseHandler<T>(this PropertyChangedEventHandler handler, T newValue, T oldValue, Action<T> update, string propertyName, object sender)

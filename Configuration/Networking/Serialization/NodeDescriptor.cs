@@ -15,7 +15,7 @@ namespace UAOOI.Configuration.Networking.Serialization
     /// <summary>
     /// Creates the wrapper of this instance.
     /// </summary>
-    /// <returns>An instance of <see cref="NodeDescriptorBase"/>.</returns>
+    /// <returns>An instance of <see cref="NodeDescriptorWrapper"/>.</returns>
     internal IComparable CreateWrapper()
     {
       return new NodeDescriptorWrapper(this);

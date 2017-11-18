@@ -18,10 +18,10 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
   {
 
     #region creator of the ConsumerDeviceSimulator
-    internal static DataManagementSetup CreateDevice(IMessageHandlerFactory messageHandlerFactory, UInt32 dataSetGuid)
+    internal static ConsumerDeviceSimulator CreateDevice(IMessageHandlerFactory messageHandlerFactory, UInt32 dataSetGuid)
     {
       AssociationConfigurationId = dataSetGuid;
-      DataManagementSetup _ret = new ConsumerDeviceSimulator();
+      ConsumerDeviceSimulator _ret = new ConsumerDeviceSimulator();
       _ret.ConfigurationFactory = new ConsumerConfigurationFactory();
       _ret.BindingFactory = new MVVMSimulatorFactory();
       _ret.EncodingFactory = new MyEncodingFactory();
@@ -41,14 +41,18 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
       foreach (MessageReader _item in MessageHandlersCollection.Values)
         _item.CheckConsistency();
     }
-    private void CheckConsistency(ConsumerAssociation _item)
+    private void CheckConsistency(ConsumerAssociation item)
     {
 
-      Assert.AreEqual(HandlerState.Operational, _item.State.State);
+      Assert.AreEqual(HandlerState.Operational, item.State.State);
       //Assert.AreEqual<UInt32>(AssociationConfigurationId, _item.DataDescriptor.Guid);
-      Assert.AreEqual<string>(AssociationConfigurationInformationModelURI, _item.DataDescriptor.Identifier.ToString());
-      Assert.AreEqual<string>(AssociationConfigurationDataSymbolicName, _item.DataDescriptor.SymbolicName);
+      Assert.AreEqual<string>(AssociationConfigurationInformationModelURI, item.DataDescriptor.Identifier.ToString());
+      Assert.AreEqual<string>(AssociationConfigurationDataSymbolicName, item.DataDescriptor.SymbolicName);
 
+    }
+    internal void InitializeAndRun()
+    {
+      Start();
     }
     #endregion
 

@@ -27,7 +27,7 @@ namespace UAOOI.Networking.SemanticData
     /// <exception cref="System.ArgumentOutOfRangeException">data argument must not be null
     /// or
     /// aliasName argument must not be null</exception>
-    /// <remarks>The DataSet has the following identifiers <see cref="Association.DataDescriptor" />
+    /// <remarks>The DataSet has the following identifiers <see cref="Association.DataDescriptor"/></remarks>
     internal Association(ISemanticData data, string aliasName)
     {
       if (data == null)

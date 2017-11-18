@@ -1,13 +1,13 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Xml;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Networking.SemanticData.UnitTest.Simulator;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
+using System.Linq;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
 {
@@ -30,24 +30,27 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     [TestCategory("DataManagement_DataManagementSetup")]
     public void InitializeTestMethod()
     {
-      DataManagementSetup _ndm = new DataManagementSetup();
+      TestDataManagementSetup _ndm = new TestDataManagementSetup();
       Assert.IsNotNull(_ndm);
-      _ndm.BindingFactory = new BF();
-      _ndm.ConfigurationFactory = new CF();
-      _ndm.EncodingFactory = new EF();
-      _ndm.MessageHandlerFactory = new MF();
-      _ndm.Initialize();
+      _ndm.BindingFactory = new BindingFactory();
+      _ndm.ConfigurationFactory = new ConfigurationFactory();
+      _ndm.EncodingFactory = new EncodingFactory();
+      _ndm.MessageHandlerFactory = new MessageHandlerFactory();
+      _ndm.TestStart();
+      Assert.AreEqual<int>(3, _ndm.MessageHandlersCollection.Count);
+      Assert.AreEqual<int>(0, _ndm.MessageHandlersCollection.Values.Cast<MessageHandlerFactory.MessageReader>().First().AttachToNetworkCalled);
+      Assert.AreEqual<int>(1, _ndm.MessageHandlersCollection.Values.Cast<MessageHandlerFactory.MessageReader>().First().StateCalled);
     }
     [TestMethod]
     [TestCategory("DataManagement_DataManagementSetup")]
     [ExpectedException(typeof(ArgumentNullException))]
     public void RunTestMethod()
     {
-      DataManagementSetup _ndm = new DataManagementSetup();
+      TestDataManagementSetup _ndm = new TestDataManagementSetup();
       Assert.IsNotNull(_ndm);
-      _ndm.Run();
+      _ndm.TestStart();
     }
-    private class MF : IMessageHandlerFactory
+    private class MessageHandlerFactory : IMessageHandlerFactory
     {
       public IMessageReader GetIMessageReader(string name, string configuration, IUADecoder uaDecoder)
       {
@@ -57,15 +60,19 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       {
         throw new NotImplementedException();
       }
-      private class MessageReader : IMessageReader
+      internal class MessageReader : IMessageReader
       {
         public IAssociationState State
         {
-          get { throw new NotImplementedException(); }
+          get
+          {
+            StateCalled = Progress++;
+            return new AssociationState();
+          }
         }
         public void AttachToNetwork()
         {
-          throw new NotImplementedException();
+          AttachToNetworkCalled = Progress++;
         }
         public event EventHandler<MessageEventArg> ReadMessageCompleted;
         public void UpdateMyValues(Func<int, IConsumerBinding> update, int length)
@@ -76,19 +83,35 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         {
           throw new NotImplementedException();
         }
-
         public void Dispose()
         {
           throw new NotImplementedException();
         }
-
         public ulong ContentMask
         {
           get { throw new NotImplementedException(); }
         }
+
+        #region testing instrumentation
+        private class AssociationState : IAssociationState
+        {
+          public HandlerState State => HandlerState.Operational;
+          public void Disable()
+          {
+            throw new NotImplementedException();
+          }
+          public void Enable()
+          {
+            ;
+          }
+        }
+        internal int Progress = 0;
+        internal int AttachToNetworkCalled = -1;
+        internal int StateCalled = -1;
+        #endregion
       }
     }
-    private class EF : IEncodingFactory
+    private class EncodingFactory : IEncodingFactory
     {
       public IUADecoder UADecoder
       {
@@ -111,7 +134,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       private IUADecoder m_IUADecoder = new Helpers.UABinaryDecoderImplementation();
 
     }
-    private class CF : IConfigurationFactory
+    private class ConfigurationFactory : IConfigurationFactory
     {
       public ConfigurationData GetConfiguration()
       {
@@ -120,7 +143,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       public event EventHandler<EventArgs> OnAssociationConfigurationChange;
       public event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
     }
-    private class BF : IBindingFactory
+    private class BindingFactory : IBindingFactory
     {
       #region IBindingFactory
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo field)
@@ -171,7 +194,13 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       }
 
     }
-
+    private class TestDataManagementSetup : DataManagementSetup
+    {
+      internal void TestStart()
+      {
+        base.Start();
+      }
+    }
   }
 
 }

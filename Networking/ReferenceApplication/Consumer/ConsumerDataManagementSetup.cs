@@ -10,7 +10,7 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
 {
   [Export]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  internal sealed class ConsumerDataManagementSetup : DataManagementSetup, IDisposable
+  internal sealed class ConsumerDataManagementSetup : DataManagementSetup
   {
 
     #region Composition
@@ -18,16 +18,6 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     internal IConsumerViewModel ViewModel
     {
       get; set;
-    }
-    #endregion
-
-    #region IDisposable
-    public void Dispose()
-    {
-      ViewModel.Trace("Entering Dispose");
-      foreach (IDisposable _2Dispose in m_ToDispose)
-        _2Dispose.Dispose();
-      m_ToDispose.Clear();
     }
     #endregion
 
@@ -39,14 +29,12 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
         ViewModel.Trace("Entering Setup");
         ViewModel.ConsumerUpdateConfiguration = new RestartCommand(Restart);
         ConfigurationFactory = new ConsumerConfigurationFactory();
+        MessageHandlerFactory = new MessageHandlerFactory(ViewModel.Trace);
         MainWindowModel _model = new MainWindowModel() { ViewModelBindingFactory = ViewModel };
         BindingFactory = _model;
         EncodingFactory = _model;
-        MessageHandlerFactory = new MessageHandlerFactory(x => m_ToDispose.Add(x), ViewModel.Trace);
-        ViewModel.Trace("Initialize consumer engine.");
-        Initialize();
-        ViewModel.Trace("On start receiving UDP frames.");
-        Run();
+        ViewModel.Trace("Initialize consumer engine and start receiving UDP frames.");
+        Start();
         ViewModel.ConsumerErrorMessage = "Running";
       }
       catch (Exception ex)
@@ -80,12 +68,10 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
       }
       private Action m_restart;
     }
-    private List<IDisposable> m_ToDispose = new List<IDisposable>();
     private void Restart()
     {
       ViewModel.Trace("Entering Restart");
-      Dispose();
-      Setup();
+      Start();
     }
     #endregion
 

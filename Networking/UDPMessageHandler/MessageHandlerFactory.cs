@@ -12,20 +12,6 @@ namespace UAOOI.Networking.UDPMessageHandler
   public class MessageHandlerFactory : IMessageHandlerFactory
   {
 
-    #region constructor
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MessageHandlerFactory" /> class.
-    /// </summary>
-    /// <param name="toDispose">To dispose captures functionality to create a collection of disposable objects.
-    /// The objects are disposed when application exits.</param>
-    /// <param name="viewModel">The ViewModel instance for this object.</param>
-    /// <param name="trace">The delegate capturing logging functionality.</param>
-    public MessageHandlerFactory(Action<string> trace)
-    {
-      m_Trace = trace;
-    }
-    #endregion
-
     #region IMessageHandlerFactory
     /// <summary>
     /// Class UDPReaderConfiguration encapsulating configuration for <see cref="IMessageHandlerFactory.GetIMessageReader"/>.
@@ -67,7 +53,7 @@ namespace UAOOI.Networking.UDPMessageHandler
     IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, string configuration, IUADecoder uaDecoder)
     {
       UDPReaderConfiguration _configuration = UDPReaderConfiguration.Parse(configuration);
-      BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(uaDecoder, _configuration.UDPPortNumber, m_Trace);
+      BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(uaDecoder, _configuration.UDPPortNumber);
       _ret.MulticastGroup = _configuration.DefaultMulticastGroup;
       _ret.ReuseAddress = _configuration.ReuseAddress;
       return _ret;
@@ -108,13 +94,9 @@ namespace UAOOI.Networking.UDPMessageHandler
     IMessageWriter IMessageHandlerFactory.GetIMessageWriter(string name, string configuration, IUAEncoder uaEncoder)
     {
       UDPWriterConfiguration _configuration = UDPWriterConfiguration.Parse(configuration);
-      BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(_configuration.RemoteHostName, _configuration.UDPPortNumber, m_Trace, uaEncoder);
+      BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(_configuration.RemoteHostName, _configuration.UDPPortNumber, uaEncoder);
       return _ret;
     }
-    #endregion
-
-    #region private
-    private Action<string> m_Trace;
     #endregion
 
   }

@@ -32,7 +32,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       {
         ViewModel.ProducerRestart = new RestartCommand(Restart);
         ConfigurationFactory = new ProducerConfigurationFactory();
-        MessageHandlerFactory = new MessageHandlerFactory(x => { });
+        MessageHandlerFactory = new MessageHandlerFactory();
         BindAndStartRunning();
         ViewModel.ProducerErrorMessage = "Running";
       }

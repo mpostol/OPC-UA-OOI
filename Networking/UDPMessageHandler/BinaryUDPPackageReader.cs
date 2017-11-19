@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
+using UAOOI.Networking.UDPMessageHandler.Diagnostic;
 
 namespace UAOOI.Networking.UDPMessageHandler
 {
@@ -25,10 +26,10 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// </summary>
     /// <param name="port">The port.</param>
     /// <param name="trace">The trace.</param>
-    public BinaryUDPPackageReader(IUADecoder uaDecoder, int port, Action<string> trace) : base(uaDecoder)
+    public BinaryUDPPackageReader(IUADecoder uaDecoder, int port) : base(uaDecoder)
     {
+      SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(BinaryUDPPackageReader));
       State = new MyState(this);
-      m_Trace = trace;
       m_UDPPort = port;
     }
     #endregion
@@ -52,6 +53,7 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// </summary>
     public override void AttachToNetwork()
     {
+      SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(AttachToNetwork));
       Debug.Assert(HandlerState.Operational != State.State);
     }
     /// <summary>
@@ -60,7 +62,8 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
     protected override void Dispose(bool disposing)
     {
-      m_Trace("Entering Dispose");
+      SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(Dispose));
+
       base.Dispose(disposing);
       if (!disposing)
         return;
@@ -166,7 +169,6 @@ namespace UAOOI.Networking.UDPMessageHandler
     private int m_NumberOfPackages = 0;
     private UdpClient m_UdpClient;
     private int m_UDPPort;
-    private Action<string> m_Trace;
     private bool m_ReuseAddress = true;
     private IPAddress m_MulticastGroup = null;
     private IPGlobalProperties m_Properties = IPGlobalProperties.GetIPGlobalProperties();
@@ -174,9 +176,9 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// Implements <see cref="AsyncCallback"/> for UDP begin receive.
     /// </summary>
     /// <param name="asyncResult">The asynchronous result.</param>
-    private void m_ReceiveAsyncCallback(IAsyncResult asyncResult)
+    private void ReceiveAsyncCallback(IAsyncResult asyncResult)
     {
-      m_Trace("Entering m_ReceiveAsyncCallback");
+      SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(ReceiveAsyncCallback));
       //if (!asyncResult.IsCompleted)
       //  return;
       try
@@ -189,26 +191,26 @@ namespace UAOOI.Networking.UDPMessageHandler
         //m_ViewModel.ConsumerFramesReceived = m_NumberOfPackages;
         //m_ViewModel.ConsumerReceivedBytes = m_NumberOfBytes;
         int _length = _receiveBytes == null ? -1 : _receiveBytes.Length;
-        m_Trace($"Message<{_UEndPoint.Address.ToString()}:{_UEndPoint.Port} [{_length}]>: {String.Join(", ", new ArraySegment<byte>(_receiveBytes, 0, Math.Min(_receiveBytes.Length, 80)).Select<byte, string>(x => x.ToString("X")).ToArray<string>())}");
+        SemanticEventSource.Log.MessageContent(_UEndPoint, _length, _receiveBytes);
         MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
         OnNewFrameArrived(new BinaryReader(_stream, System.Text.Encoding.UTF8));
-        m_Trace("BeginReceive");
+        SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(UdpStatisticsEvent));
         UdpStatisticsEvent?.Invoke(this, new UdpStatisticsEventArgs(m_Properties.GetUdpIPv4Statistics()));
-        m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), m_UdpClient);
+        m_UdpClient.BeginReceive(new AsyncCallback(ReceiveAsyncCallback), m_UdpClient);
       }
       catch (ObjectDisposedException _ex)
       {
-        m_Trace(String.Format("ObjectDisposedException = {0}", _ex.Message));
+        SemanticEventSource.Log.Failure($"ObjectDisposedException = {_ex.Message}");
       }
       catch (Exception _ex)
       {
-        m_Trace(String.Format("Exception {0}, message = {1}", _ex, GetType().Name, _ex.Message));
+        SemanticEventSource.Log.Failure($"Exception {_ex.Message}, type = {_ex.GetType().Name}");
       }
-      m_Trace("Exiting m_ReceiveAsyncCallback");
     }
     //Methods
     private void OnEnable()
     {
+      SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(OnEnable));
       m_UdpClient = new UdpClient();
       m_UdpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, ReuseAddress);
       m_UdpClient.ExclusiveAddressUse = !ReuseAddress;
@@ -216,11 +218,11 @@ namespace UAOOI.Networking.UDPMessageHandler
       m_UdpClient.Client.Bind(_ep);
       if (m_MulticastGroup != null)
       {
-        m_Trace($"Joining the multicast group: {m_MulticastGroup}");
+        SemanticEventSource.Log.JoiningMulticastGroup(m_MulticastGroup);
         m_UdpClient.JoinMulticastGroup(m_MulticastGroup);
       }
-      m_Trace(ToString());
-      m_UdpClient.BeginReceive(new AsyncCallback(m_ReceiveAsyncCallback), m_UdpClient);
+      SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(m_UdpClient.BeginReceive)); 
+      m_UdpClient.BeginReceive(new AsyncCallback(ReceiveAsyncCallback), m_UdpClient);
     }
     private void OnDisable()
     {

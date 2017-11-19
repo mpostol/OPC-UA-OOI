@@ -1,6 +1,5 @@
 ﻿
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
 using UAOOI.Networking.SemanticData;
@@ -29,7 +28,7 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
         ViewModel.Trace("Entering Setup");
         ViewModel.ConsumerUpdateConfiguration = new RestartCommand(Restart);
         ConfigurationFactory = new ConsumerConfigurationFactory();
-        MessageHandlerFactory = new MessageHandlerFactory(ViewModel.Trace);
+        MessageHandlerFactory = new MessageHandlerFactory();
         MainWindowModel _model = new MainWindowModel() { ViewModelBindingFactory = ViewModel };
         BindingFactory = _model;
         EncodingFactory = _model;

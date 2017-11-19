@@ -108,6 +108,10 @@
       <Project>{f0accb28-ae0d-4e19-94fa-7be3044f1eeb}</Project>
       <Name>Networking.ReferenceApplication</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\UDPMessageHandler\Networking.UDPMessageHandler.csproj">
+      <Project>{D2EB89F9-321E-46E4-BA79-679138B82B23}</Project>
+      <Name>Networking.UDPMessageHandler</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">

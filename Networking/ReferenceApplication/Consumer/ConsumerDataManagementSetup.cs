@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
 using UAOOI.Networking.SemanticData;
-using UAOOI.Networking.UDPMessageHandler;
+//using UAOOI.Networking.UDPMessageHandler;
 
 namespace UAOOI.Networking.ReferenceApplication.Consumer
 {
@@ -28,7 +28,7 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
         ViewModel.Trace("Entering Setup");
         ViewModel.ConsumerUpdateConfiguration = new RestartCommand(Restart);
         ConfigurationFactory = new ConsumerConfigurationFactory();
-        MessageHandlerFactory = new MessageHandlerFactory();
+        //MessageHandlerFactory = new MessageHandlerFactory();
         MainWindowModel _model = new MainWindowModel() { ViewModelBindingFactory = ViewModel };
         BindingFactory = _model;
         EncodingFactory = _model;

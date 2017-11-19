@@ -1,14 +1,18 @@
 ﻿
 using System;
+using System.ComponentModel.Composition;
 using System.Net;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
 
 namespace UAOOI.Networking.UDPMessageHandler
 {
+
   /// <summary>
   /// Class <see cref="MessageHandlerFactory"/> - implements <see cref="IMessageHandlerFactory"/> 
   /// </summary>
+  [Export(typeof(IMessageHandlerFactory))]
+  [PartCreationPolicy(CreationPolicy.Shared)]
   public class MessageHandlerFactory : IMessageHandlerFactory
   {
 

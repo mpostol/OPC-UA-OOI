@@ -145,10 +145,6 @@
     <None Include="READMEDataDiscoveryAndBinding.md" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj">
-      <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
-      <Name>Common.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj">
       <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
       <Name>Configuration.Networking</Name>

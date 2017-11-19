@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
 using UAOOI.Networking.SemanticData;
-using UAOOI.Networking.UDPMessageHandler;
+//using UAOOI.Networking.UDPMessageHandler;
 
 namespace UAOOI.Networking.ReferenceApplication.Producer
 {
@@ -32,7 +32,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       {
         ViewModel.ProducerRestart = new RestartCommand(Restart);
         ConfigurationFactory = new ProducerConfigurationFactory();
-        MessageHandlerFactory = new MessageHandlerFactory();
+        //MessageHandlerFactory = new MessageHandlerFactory();
         BindAndStartRunning();
         ViewModel.ProducerErrorMessage = "Running";
       }

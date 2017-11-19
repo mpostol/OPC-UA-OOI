@@ -3,7 +3,6 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.Networking.SemanticData.Encoding;
 using System.Net;
-using System.Collections.Generic;
 using System.Threading;
 using System.Xml;
 

@@ -44,7 +44,7 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
       this.Logger.TraceData(TraceEventType.Verbose, 33, "Bootstrapper Sequence Completed");
     }
     /// <summary>
-    /// Configures the LocatorProvider for the <see cref="Microsoft.Practices.ServiceLocation.ServiceLocator" />.
+    /// Configures the the <see cref="CommonServiceLocator.ServiceLocator" /> .
     /// </summary>
     /// <remarks>
     /// The base implementation also sets the ServiceLocator provider singleton.

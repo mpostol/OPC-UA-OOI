@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.Windows;
 using CommonServiceLocator;
@@ -10,6 +9,7 @@ using UAOOI.Networking.ReferenceApplication.MEF;
 namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
 {
   [TestClass]
+  [DeploymentItem("UAOOI.Networking.UDPMessageHandler.dll")]
   public class MefBootstrapperUnitTest
   {
 

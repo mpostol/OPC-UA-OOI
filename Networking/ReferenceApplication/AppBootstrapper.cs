@@ -1,22 +1,34 @@
 ﻿
 using System;
+using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using System.Windows;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Networking.ReferenceApplication.Consumer;
 using UAOOI.Networking.ReferenceApplication.MEF;
 using UAOOI.Networking.ReferenceApplication.Producer;
+using UAOOI.Networking.ReferenceApplication.Properties;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
   internal class AppBootstrapper : MefBootstrapper
   {
+
     #region MefBootstrapper
+    /// <summary>
+    /// Run the bootstrapper process.
+    /// </summary>
+    /// <param name="runWithDefaultConfiguration">if set to <c>true</c> run with default configuration.</param>
     public override void Run(bool runWithDefaultConfiguration)
     {
       base.Run(runWithDefaultConfiguration);
       m_ConsumerConfigurationFactory.Setup();
       m_OPCUAServerProducerSimulator.Setup();
+    }
+    protected override void ConfigureContainer()
+    {
+      base.ConfigureContainer();
+      this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(Settings.Default.MessageHandlerProvider));
     }
     /// <summary>
     /// Initializes the shell.
@@ -44,8 +56,6 @@ namespace UAOOI.Networking.ReferenceApplication
       return this.Container.GetExportedValue<MainWindow>();
     }
     #endregion
-
-
 
     internal static void RunInReleaseMode()
     {

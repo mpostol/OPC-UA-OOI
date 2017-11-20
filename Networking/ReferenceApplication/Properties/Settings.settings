@@ -11,5 +11,8 @@
     <Setting Name="ConfigurationEditorPlugInFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">ConfigurationEditor\UAOOI.Configuration.DataBindings.dll</Value>
     </Setting>
+    <Setting Name="MessageHandlerProvider" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UAOOI.Networking.UDPMessageHandler.dll</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

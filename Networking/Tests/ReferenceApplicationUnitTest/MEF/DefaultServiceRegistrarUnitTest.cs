@@ -73,9 +73,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         Assert.IsNotNull(_exportedValue);
         IInterface _interface = _container.GetExportedValue<IInterface>();
         Assert.IsNotNull(_interface);
-        IMessageHandlerFactory _messageHandlerFactory = new MessageHandlerFactory();
-        Assert.IsNotNull(_messageHandlerFactory);
-        _messageHandlerFactory = _container.GetExportedValue<IMessageHandlerFactory>();
+        IMessageHandlerFactory _messageHandlerFactory = _container.GetExportedValue<IMessageHandlerFactory>();
         Assert.IsNotNull(_messageHandlerFactory);
       }
     }

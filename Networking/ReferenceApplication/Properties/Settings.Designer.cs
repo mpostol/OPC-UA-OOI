@@ -52,5 +52,14 @@ namespace UAOOI.Networking.ReferenceApplication.Properties {
                 this["ConfigurationEditorPlugInFilePath"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("UAOOI.Networking.UDPMessageHandler.dll")]
+        public string MessageHandlerProvider {
+            get {
+                return ((string)(this["MessageHandlerProvider"]));
+            }
+        }
     }
 }

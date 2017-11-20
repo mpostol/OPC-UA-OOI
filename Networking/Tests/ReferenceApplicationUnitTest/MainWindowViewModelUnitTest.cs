@@ -9,7 +9,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitialize]
     public void Initialize()
     {
-      GalaSoft.MvvmLight.Threading.DispatcherHelper.Initialize();
+      //GalaSoft.MvvmLight.Threading.DispatcherHelper.Initialize();
     }
 
   }

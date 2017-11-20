@@ -17,7 +17,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.IsNull(_ex.InnerException);
       Assert.IsNull(_ex.TraceMessage);
       Assert.IsFalse(String.IsNullOrEmpty(_ex.Message), _ex.Message);
-      Assert.AreEqual<string>("Exception of type 'UAOOI.SemanticData.UANodeSetValidation.ServiceResultException' was thrown.", _ex.Message);
+      Assert.IsTrue(_ex.Message.Contains("UAOOI.SemanticData.UANodeSetValidation.ServiceResultException"));
     }
     [TestMethod]
     [TestCategory("Code")]

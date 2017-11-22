@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="BinaryUDPPackageReader.cs" />
     <Compile Include="BinaryUDPPackageWriter.cs" />
-    <Compile Include="Diagnostic\SemanticEventSource.cs" />
+    <Compile Include="Diagnostic\UDPMessageHandlerSemanticEventSource.cs" />
     <Compile Include="IPAddressValidationRule.cs" />
     <Compile Include="MessageHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -1,7 +1,9 @@
 ﻿
 using System;
 using System.ComponentModel.Composition;
+using System.Diagnostics.Tracing;
 using System.Net;
+using UAOOI.Networking.SemanticData.Diagnostics;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
 
@@ -13,7 +15,7 @@ namespace UAOOI.Networking.UDPMessageHandler
   /// </summary>
   [Export(typeof(IMessageHandlerFactory))]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  public class MessageHandlerFactory : IMessageHandlerFactory
+  public class MessageHandlerFactory : NetworkingEventSourceBase, IMessageHandlerFactory
   {
 
     #region IMessageHandlerFactory
@@ -100,6 +102,13 @@ namespace UAOOI.Networking.UDPMessageHandler
       UDPWriterConfiguration _configuration = UDPWriterConfiguration.Parse(configuration);
       BinaryUDPPackageWriter _ret = new BinaryUDPPackageWriter(_configuration.RemoteHostName, _configuration.UDPPortNumber, uaEncoder);
       return _ret;
+    }
+    #endregion
+
+    #region NetworkingEventSourceBase
+    public override EventSource GetPartEventSource()
+    {
+      return Diagnostic.UDPMessageHandlerSemanticEventSource.Log;
     }
     #endregion
 

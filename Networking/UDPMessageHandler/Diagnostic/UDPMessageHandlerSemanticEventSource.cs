@@ -7,7 +7,7 @@ using System.Linq;
 namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
 {
   [EventSource(Name = "UAOOI-Networking-UDPMessageHandler-Diagnostic")]
-  public class SemanticEventSource : EventSource
+  public class UDPMessageHandlerSemanticEventSource : EventSource
   {
     /// <summary>
     /// Class Keywords - defines the local keywords (flags) that apply to events.
@@ -19,6 +19,9 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
       public const EventKeywords Performance = (EventKeywords)4;
     }
 
+    /// <summary>
+    /// Class Tasks.
+    /// </summary>
     internal class Tasks
     {
       public const EventTask Consumer = (EventTask)1;
@@ -26,10 +29,10 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
     }
 
     /// <summary>
-    /// Gets the log - implements singleton of the <see cref="SemanticEventSource"/>.
+    /// Gets the log - implements singleton of the <see cref="UDPMessageHandlerSemanticEventSource"/>.
     /// </summary>
     /// <value>The log.</value>
-    internal static SemanticEventSource Log { get; } = new SemanticEventSource();
+    internal static UDPMessageHandlerSemanticEventSource Log { get; } = new UDPMessageHandlerSemanticEventSource();
 
     [Event(1, Message = "Application Failure: {0}", Opcode = EventOpcode.Info, Task = EventTask.None, Level = EventLevel.Critical, Keywords = Keywords.Diagnostic)]
     internal void Failure(string message)
@@ -46,7 +49,7 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
     {
       if (this.IsEnabled()) this.WriteEvent(3, className, methodName);
     }
-    private SemanticEventSource() { }
+    private UDPMessageHandlerSemanticEventSource() { }
 
     [Event(4, Message = "Unexpected end of message while reading #{0} element.", Opcode = EventOpcode.Receive, Task = Tasks.Consumer, Keywords = Keywords.PackageContent, Level = EventLevel.Warning)]
 

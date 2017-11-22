@@ -28,7 +28,7 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// <param name="trace">The trace.</param>
     public BinaryUDPPackageReader(IUADecoder uaDecoder, int port) : base(uaDecoder)
     {
-      SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(BinaryUDPPackageReader));
+      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(BinaryUDPPackageReader));
       State = new MyState(this);
       m_UDPPort = port;
     }
@@ -53,7 +53,7 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// </summary>
     public override void AttachToNetwork()
     {
-      SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(AttachToNetwork));
+      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(AttachToNetwork));
       Debug.Assert(HandlerState.Operational != State.State);
     }
     /// <summary>
@@ -62,7 +62,7 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
     protected override void Dispose(bool disposing)
     {
-      SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(Dispose));
+      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(Dispose));
 
       base.Dispose(disposing);
       if (!disposing)
@@ -178,7 +178,7 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// <param name="asyncResult">The asynchronous result.</param>
     private void ReceiveAsyncCallback(IAsyncResult asyncResult)
     {
-      SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(ReceiveAsyncCallback));
+      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(ReceiveAsyncCallback));
       //if (!asyncResult.IsCompleted)
       //  return;
       try
@@ -191,26 +191,26 @@ namespace UAOOI.Networking.UDPMessageHandler
         //m_ViewModel.ConsumerFramesReceived = m_NumberOfPackages;
         //m_ViewModel.ConsumerReceivedBytes = m_NumberOfBytes;
         int _length = _receiveBytes == null ? -1 : _receiveBytes.Length;
-        SemanticEventSource.Log.MessageContent(_UEndPoint, _length, _receiveBytes);
+        UDPMessageHandlerSemanticEventSource.Log.MessageContent(_UEndPoint, _length, _receiveBytes);
         MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
         OnNewFrameArrived(new BinaryReader(_stream, System.Text.Encoding.UTF8));
-        SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(UdpStatisticsEvent));
+        UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(UdpStatisticsEvent));
         UdpStatisticsEvent?.Invoke(this, new UdpStatisticsEventArgs(m_Properties.GetUdpIPv4Statistics()));
         m_UdpClient.BeginReceive(new AsyncCallback(ReceiveAsyncCallback), m_UdpClient);
       }
       catch (ObjectDisposedException _ex)
       {
-        SemanticEventSource.Log.Failure($"ObjectDisposedException = {_ex.Message}");
+        UDPMessageHandlerSemanticEventSource.Log.Failure($"ObjectDisposedException = {_ex.Message}");
       }
       catch (Exception _ex)
       {
-        SemanticEventSource.Log.Failure($"Exception {_ex.Message}, type = {_ex.GetType().Name}");
+        UDPMessageHandlerSemanticEventSource.Log.Failure($"Exception {_ex.Message}, type = {_ex.GetType().Name}");
       }
     }
     //Methods
     private void OnEnable()
     {
-      SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(OnEnable));
+      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(OnEnable));
       m_UdpClient = new UdpClient();
       m_UdpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, ReuseAddress);
       m_UdpClient.ExclusiveAddressUse = !ReuseAddress;
@@ -218,10 +218,10 @@ namespace UAOOI.Networking.UDPMessageHandler
       m_UdpClient.Client.Bind(_ep);
       if (m_MulticastGroup != null)
       {
-        SemanticEventSource.Log.JoiningMulticastGroup(m_MulticastGroup);
+        UDPMessageHandlerSemanticEventSource.Log.JoiningMulticastGroup(m_MulticastGroup);
         m_UdpClient.JoinMulticastGroup(m_MulticastGroup);
       }
-      SemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(m_UdpClient.BeginReceive)); 
+      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(m_UdpClient.BeginReceive)); 
       m_UdpClient.BeginReceive(new AsyncCallback(ReceiveAsyncCallback), m_UdpClient);
     }
     private void OnDisable()

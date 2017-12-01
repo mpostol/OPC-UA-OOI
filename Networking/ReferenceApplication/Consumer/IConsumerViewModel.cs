@@ -3,7 +3,7 @@ using System.Windows.Input;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.Networking.ReferenceApplication
+namespace UAOOI.Networking.ReferenceApplication.Consumer
 {
   internal interface IConsumerViewModel
   {

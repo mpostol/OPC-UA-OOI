@@ -1,8 +1,5 @@
 ﻿
-using System;
 using System.Diagnostics.Tracing;
-using System.Net;
-using System.Linq;
 
 namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
 {
@@ -12,7 +9,7 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
     /// <summary>
     /// Class Keywords - defines the local keywords (flags) that apply to events.
     /// </summary>
-    internal class Keywords
+    public class Keywords
     {
       public const EventKeywords PackageContent = (EventKeywords)1;
       public const EventKeywords Diagnostic = (EventKeywords)2;
@@ -22,7 +19,7 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
     /// <summary>
     /// Class Tasks.
     /// </summary>
-    internal class Tasks
+    public class Tasks
     {
       public const EventTask Consumer = (EventTask)1;
       public const EventTask Producer = (EventTask)2;
@@ -34,13 +31,13 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
     /// <value>The log.</value>
     internal static UDPMessageHandlerSemanticEventSource Log { get; } = new UDPMessageHandlerSemanticEventSource();
 
-    [Event(1, Message = "Application Failure: {0}", Opcode = EventOpcode.Info, Task = EventTask.None, Level = EventLevel.Critical, Keywords = Keywords.Diagnostic)]
-    internal void Failure(string message)
+    [Event(1, Message = "Application Failure: {0}", Opcode = EventOpcode.Start, Task = Tasks.Consumer, Level = EventLevel.Critical, Keywords = Keywords.Diagnostic)]
+    public void Failure(string message)
     {
       this.WriteEvent(1, message);
     }
     [Event(2, Message = "Starting up.", Keywords = Keywords.Performance, Level = EventLevel.Informational)]
-    internal void Startup()
+    public void Startup()
     {
       this.WriteEvent(2);
     }
@@ -49,26 +46,23 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
     {
       if (this.IsEnabled()) this.WriteEvent(3, className, methodName);
     }
-    private UDPMessageHandlerSemanticEventSource() { }
-
     [Event(4, Message = "Unexpected end of message while reading #{0} element.", Opcode = EventOpcode.Receive, Task = Tasks.Consumer, Keywords = Keywords.PackageContent, Level = EventLevel.Warning)]
-
     internal void MessageInconsistency(int i)
     {
       this.WriteEvent(4, i);
     }
-    [Event(5, Message = "Message: {0}", Opcode = EventOpcode.Receive, Task = Tasks.Consumer, Keywords = Keywords.PackageContent, Level = EventLevel.Warning)]
-    internal void MessageContent(IPEndPoint endPoint, int length, byte[] message)
+    [Event(5, Message = "Message: {0}", Opcode = EventOpcode.Start, Task = Tasks.Consumer, Keywords = Keywords.PackageContent, Level = EventLevel.Warning)]
+    internal void MessageContent(string payload0)
     {
-      string _content = 
-        ($"<{endPoint.Address.ToString()}:{endPoint.Port} [{length}]>: {String.Join(", ", new ArraySegment<byte>(message, 0, Math.Min(message.Length, 80)).Select<byte, string>(x => x.ToString("X")).ToArray<string>())}");
-      WriteEvent(5, _content);
+      WriteEvent(5, payload0);
     }
-    [Event(5, Message = "Joining the multicast group: {m_MulticastGroup} {0}", Opcode = EventOpcode.Receive, Task = Tasks.Consumer, Keywords = Keywords.PackageContent, Level = EventLevel.Informational)]
-
-    internal void JoiningMulticastGroup(IPAddress multicastGroup)
+    [Event(6, Message = "Joining the multicast group: {0}", Opcode = EventOpcode.Receive, Task = Tasks.Consumer, Keywords = Keywords.PackageContent, Level = EventLevel.Informational)]
+    internal void JoiningMulticastGroup(string payload0)
     {
-      WriteEvent(5, multicastGroup);
+      WriteEvent(6, payload0);
     }
+    private UDPMessageHandlerSemanticEventSource() { }
   }
+
 }
+

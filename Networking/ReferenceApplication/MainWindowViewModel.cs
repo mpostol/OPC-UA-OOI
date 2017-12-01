@@ -5,12 +5,13 @@ using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.ReferenceApplication.Consumer;
 using UAOOI.Networking.ReferenceApplication.Controls;
+using UAOOI.Networking.ReferenceApplication.Producer;
 using UAOOI.Networking.SemanticData.DataRepository;
 
 namespace UAOOI.Networking.ReferenceApplication

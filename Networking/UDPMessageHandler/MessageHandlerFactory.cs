@@ -58,6 +58,7 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// <returns>An object implementing <see cref="T:UAOOI.Networking.SemanticData.MessageHandling.IMessageReader" /> that provides functionality supporting reading the messages from the wire.</returns>
     IMessageReader IMessageHandlerFactory.GetIMessageReader(string name, string configuration, IUADecoder uaDecoder)
     {
+      Diagnostic.UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(MessageHandlerFactory), $"{nameof(IMessageHandlerFactory.GetIMessageReader)}{{ name = {name}, configuration= {configuration} }}");
       UDPReaderConfiguration _configuration = UDPReaderConfiguration.Parse(configuration);
       BinaryUDPPackageReader _ret = new BinaryUDPPackageReader(uaDecoder, _configuration.UDPPortNumber);
       _ret.MulticastGroup = _configuration.DefaultMulticastGroup;

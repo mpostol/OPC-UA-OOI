@@ -1,7 +1,7 @@
 ﻿
 using System.Windows.Input;
 
-namespace UAOOI.Networking.ReferenceApplication
+namespace UAOOI.Networking.ReferenceApplication.Producer
 {
   internal interface IProducerViewModel
   {

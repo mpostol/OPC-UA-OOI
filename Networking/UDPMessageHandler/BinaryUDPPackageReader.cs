@@ -2,7 +2,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
@@ -22,23 +21,21 @@ namespace UAOOI.Networking.UDPMessageHandler
 
     #region creator
     /// <summary>
-    /// Initializes a new instance of the <see cref="BinaryUDPPackageReader"/> class.
+    /// Initializes a new instance of the <see cref="BinaryUDPPackageReader" /> class.
     /// </summary>
-    /// <param name="port">The port.</param>
-    /// <param name="trace">The trace.</param>
-    public BinaryUDPPackageReader(IUADecoder uaDecoder, int port) : base(uaDecoder)
+    /// <param name="uaDecoder">The ua decoder.</param>
+    /// <param name="configuration">The configuration of the reader.</param>
+    public BinaryUDPPackageReader(IUADecoder uaDecoder, MessageHandlerFactory.UDPReaderConfiguration configuration) : base(uaDecoder)
     {
-      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(BinaryUDPPackageReader));
+      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), $"{nameof(BinaryUDPPackageReader)}({configuration.ToString()})");
       State = new MyState(this);
-      m_UDPPort = port;
+      m_UDPPort = configuration.UDPPortNumber;
+      MulticastGroup = configuration.DefaultMulticastGroup;
+      ReuseAddress = configuration.ReuseAddress;
     }
     #endregion
 
     #region BinaryDecoder
-    /// <summary>
-    /// Occurs when new package is received and processed.
-    /// </summary>
-    public event EventHandler<UdpStatisticsEventArgs> UdpStatisticsEvent;
     /// <summary>
     /// Gets or sets the state.
     /// </summary>
@@ -63,14 +60,13 @@ namespace UAOOI.Networking.UDPMessageHandler
     protected override void Dispose(bool disposing)
     {
       UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(Dispose));
-
       base.Dispose(disposing);
       if (!disposing)
         return;
-      if (m_UdpClient == null)
+      if (Client == null)
         return;
-      m_UdpClient.Close();
-      m_UdpClient = null;
+      Client.Close();
+      Client = null;
       m_MulticastGroup = null;
     }
     #endregion
@@ -95,10 +91,6 @@ namespace UAOOI.Networking.UDPMessageHandler
           throw new InvalidOperationException($"{nameof(MulticastGroup)} cannot be set the object is in Operational state");
         m_MulticastGroup = value;
       }
-    }
-    public UdpClient Client
-    {
-      get { return m_UdpClient; }
     }
     #endregion
 
@@ -164,14 +156,12 @@ namespace UAOOI.Networking.UDPMessageHandler
 
     }
     //vars
-    //private IConsumerViewModel m_ViewModel = null;
-    private int m_NumberOfBytes = 0;
-    private int m_NumberOfPackages = 0;
-    private UdpClient m_UdpClient;
+    private UdpClient Client { get; set; }
     private int m_UDPPort;
     private bool m_ReuseAddress = true;
     private IPAddress m_MulticastGroup = null;
     private IPGlobalProperties m_Properties = IPGlobalProperties.GetIPGlobalProperties();
+
     /// <summary>
     /// Implements <see cref="AsyncCallback"/> for UDP begin receive.
     /// </summary>
@@ -186,17 +176,11 @@ namespace UAOOI.Networking.UDPMessageHandler
         UdpClient _client = (UdpClient)asyncResult.AsyncState;
         IPEndPoint _UEndPoint = null;
         Byte[] _receiveBytes = _client.EndReceive(asyncResult, ref _UEndPoint);
-        m_NumberOfPackages++;
-        m_NumberOfBytes += _receiveBytes.Length;
-        //m_ViewModel.ConsumerFramesReceived = m_NumberOfPackages;
-        //m_ViewModel.ConsumerReceivedBytes = m_NumberOfBytes;
         int _length = _receiveBytes == null ? -1 : _receiveBytes.Length;
-        UDPMessageHandlerSemanticEventSource.Log.MessageContent(_UEndPoint, _length, _receiveBytes);
+        UDPMessageHandlerSemanticEventSource.Log.ReceivedMessageContent(_UEndPoint, _length, _receiveBytes);
         MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
         OnNewFrameArrived(new BinaryReader(_stream, System.Text.Encoding.UTF8));
-        UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(UdpStatisticsEvent));
-        UdpStatisticsEvent?.Invoke(this, new UdpStatisticsEventArgs(m_Properties.GetUdpIPv4Statistics()));
-        m_UdpClient.BeginReceive(new AsyncCallback(ReceiveAsyncCallback), m_UdpClient);
+        Client.BeginReceive(new AsyncCallback(ReceiveAsyncCallback), Client);
       }
       catch (ObjectDisposedException _ex)
       {
@@ -211,18 +195,18 @@ namespace UAOOI.Networking.UDPMessageHandler
     private void OnEnable()
     {
       UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(OnEnable));
-      m_UdpClient = new UdpClient();
-      m_UdpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, ReuseAddress);
-      m_UdpClient.ExclusiveAddressUse = !ReuseAddress;
+      Client = new UdpClient();
+      Client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, ReuseAddress);
+      Client.ExclusiveAddressUse = !ReuseAddress;
       IPEndPoint _ep = new IPEndPoint(IPAddress.Any, m_UDPPort);
-      m_UdpClient.Client.Bind(_ep);
+      Client.Client.Bind(_ep);
       if (m_MulticastGroup != null)
       {
         UDPMessageHandlerSemanticEventSource.Log.JoiningMulticastGroup(m_MulticastGroup);
-        m_UdpClient.JoinMulticastGroup(m_MulticastGroup);
+        Client.JoinMulticastGroup(m_MulticastGroup);
       }
-      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(m_UdpClient.BeginReceive)); 
-      m_UdpClient.BeginReceive(new AsyncCallback(ReceiveAsyncCallback), m_UdpClient);
+      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(Client.BeginReceive));
+      Client.BeginReceive(new AsyncCallback(ReceiveAsyncCallback), Client);
     }
     private void OnDisable()
     {

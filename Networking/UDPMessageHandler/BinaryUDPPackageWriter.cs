@@ -20,7 +20,7 @@ namespace UAOOI.Networking.UDPMessageHandler
     public BinaryUDPPackageWriter(string remoteHostName, int remotePort, IUAEncoder uaEncoder) :
       base(uaEncoder, MessageLengthFieldTypeEnum.TwoBytes)
     {
-      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), nameof(BinaryUDPPackageWriter));
+      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(BinaryUDPPackageWriter)}(RemoteHostName={remoteHostName},RemotePort={remotePort})");
       State = new MyState(this);
       m_RemoteHostName = remoteHostName;
       m_remotePort = remotePort;
@@ -35,8 +35,7 @@ namespace UAOOI.Networking.UDPMessageHandler
     }
     public override void AttachToNetwork()
     {
-      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), nameof(BinaryUDPPackageWriter));
-      m_NumberOfAttachToNetwork++;
+      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), nameof(AttachToNetwork));
     }
     protected override void SendFrame(byte[] buffer)
     {
@@ -48,12 +47,8 @@ namespace UAOOI.Networking.UDPMessageHandler
           return;
         try
         {
-          m_NumberOfSentBytes += buffer.Length;
-          //m_ViewModel.BytesSent = m_NumberOfSentBytes;
-          m_NumberOfSentMessages++;
-          //m_ViewModel.PackagesSent = m_NumberOfSentMessages;
           IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, m_remotePort);
-          UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(_UdpClient.Send)} m_NumberOfSentBytes = {m_NumberOfSentBytes}, m_NumberOfSentMessages = {m_NumberOfSentMessages}");
+          UDPMessageHandlerSemanticEventSource.Log.SentMessageContent(_IPEndPoint, buffer.Length, buffer);
           _UdpClient.Send(buffer, buffer.Length, _IPEndPoint);
         }
         catch (SocketException e)
@@ -80,8 +75,7 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
     protected override void Dispose(bool disposing)
     {
-      string _msg = String.Format("Entering Dispose disposing = {0}", disposing);
-      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(BinaryUDPPackageWriter)}({nameof(disposing)} = {disposing})");
+      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(Dispose)}({nameof(disposing)} = {disposing})");
       lock (this)
       {
         base.Dispose(disposing);
@@ -167,12 +161,6 @@ namespace UAOOI.Networking.UDPMessageHandler
       UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(UdpClient)} m_RemoteHostName: {m_RemoteHostName} Ip : {m_IPAddresses.ToString()}");
       m_UdpClient = new UdpClient();
     }
-    #endregion
-
-    #region diagnostic instrumentation
-    internal int m_NumberOfSentMessages = 0;
-    internal int m_NumberOfSentBytes = 0;
-    internal int m_NumberOfAttachToNetwork;
     #endregion
 
   }

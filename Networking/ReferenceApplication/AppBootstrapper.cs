@@ -22,8 +22,6 @@ namespace UAOOI.Networking.ReferenceApplication
     public override void Run(bool runWithDefaultConfiguration)
     {
       base.Run(runWithDefaultConfiguration);
-      m_ConsumerConfigurationFactory.Setup();
-      m_OPCUAServerProducerSimulator.Setup();
     }
     protected override void ConfigureContainer()
     {
@@ -39,8 +37,6 @@ namespace UAOOI.Networking.ReferenceApplication
       base.InitializeShell();
       Application.Current.MainWindow = (MainWindow)this.Shell;
       Application.Current.MainWindow.Show();
-      m_ConsumerConfigurationFactory = Container.GetExportedValue<ConsumerDataManagementSetup>();
-      m_OPCUAServerProducerSimulator = Container.GetExportedValue<OPCUAServerProducerSimulator>(); 
     }
     /// <summary>
     /// Creates the shell or main window of the application.
@@ -54,6 +50,14 @@ namespace UAOOI.Networking.ReferenceApplication
     protected override DependencyObject CreateShell()
     {
       return this.Container.GetExportedValue<MainWindow>();
+    }
+    protected override void OnInitialized()
+    {
+      base.OnInitialized();
+      m_ConsumerConfigurationFactory = Container.GetExportedValue<ConsumerDataManagementSetup>();
+      m_OPCUAServerProducerSimulator = Container.GetExportedValue<OPCUAServerProducerSimulator>();
+      m_ConsumerConfigurationFactory.Setup();
+      m_OPCUAServerProducerSimulator.Setup();
     }
     #endregion
 

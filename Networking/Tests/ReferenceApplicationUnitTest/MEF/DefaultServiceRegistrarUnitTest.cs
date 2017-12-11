@@ -8,8 +8,8 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Networking.ReferenceApplication.MEF;
+using UAOOI.Networking.SemanticData.Diagnostics;
 using UAOOI.Networking.SemanticData.MessageHandling;
-using UAOOI.Networking.UDPMessageHandler;
 
 namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
 {
@@ -75,6 +75,8 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         Assert.IsNotNull(_interface);
         IMessageHandlerFactory _messageHandlerFactory = _container.GetExportedValue<IMessageHandlerFactory>();
         Assert.IsNotNull(_messageHandlerFactory);
+        NetworkingEventSourceBase _baseEventSource = _messageHandlerFactory as NetworkingEventSourceBase;
+        Assert.IsNotNull(_baseEventSource);
       }
     }
     [Export(typeof(IInterface))]

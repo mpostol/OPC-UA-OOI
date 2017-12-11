@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UAOOI.Networking.SemanticData.Diagnostics;
 
 namespace UAOOI.Networking.UDPMessageHandler.UnitTest
 {
@@ -43,6 +44,11 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest
       Assert.AreEqual<string>("4840,localhost", _configuration.ToString());
       Assert.AreEqual<int>(UDPPortNumber, _configuration.UDPPortNumber);
       Assert.AreEqual<string>(RemoteHostName, _configuration.RemoteHostName);
+    }
+    [TestMethod]
+    public void MessageHandlerFactoryBaseTest()
+    {
+      Assert.IsTrue(typeof(NetworkingEventSourceBase).IsAssignableFrom( typeof(MessageHandlerFactory)));
     }
   }
 }

@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>IDE0001,IDE0002,IDE0003</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -49,7 +50,8 @@
   <ItemGroup>
     <Compile Include="BinaryUDPPackageReader.cs" />
     <Compile Include="BinaryUDPPackageWriter.cs" />
-    <Compile Include="Diagnostic\SemanticEventSource.cs" />
+    <Compile Include="Diagnostic\UDPMessageHandlerDiagnosticExtension.cs" />
+    <Compile Include="Diagnostic\UDPMessageHandlerSemanticEventSource.cs" />
     <Compile Include="IPAddressValidationRule.cs" />
     <Compile Include="MessageHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

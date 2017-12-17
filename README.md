@@ -1,5 +1,7 @@
 # Object Oriented Internet
 
+[![Join the chat at https://gitter.im/mpostol/OPC-UA-OOI](https://badges.gitter.im/mpostol/OPC-UA-OOI.svg)](https://gitter.im/mpostol/OPC-UA-OOI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## CHARTER
 
 ### What is Object Oriented Internet

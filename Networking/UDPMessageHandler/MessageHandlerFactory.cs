@@ -89,7 +89,7 @@ namespace UAOOI.Networking.UDPMessageHandler
       {
         string[] _parameters = configuration.Split(',');
         if (_parameters.Length != 2)
-          throw new ArgumentException($"Wrong number of parameter {_parameters.Length} but expected 4");
+          throw new ArgumentException($"Wrong number of parameter {_parameters.Length} but expected 2");
         UDPWriterConfiguration _ret = new UDPWriterConfiguration();
         _ret.UDPPortNumber = int.Parse(_parameters[0]);
         _ret.RemoteHostName = _parameters[1];

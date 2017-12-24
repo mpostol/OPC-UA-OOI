@@ -64,7 +64,6 @@
     <Compile Include="DataManagementSetup.cs" />
     <Compile Include="DataRepository\ConsumerBindingMonitoredValue.cs" />
     <Compile Include="Diagnostics\INetworkingEventSourceProvider.cs" />
-    <Compile Include="Diagnostics\NetworkingEventSourceBase.cs" />
     <Compile Include="Diagnostics\SemanticEventSource.cs" />
     <Compile Include="Encoding\CommonDefinitions.cs" />
     <Compile Include="Encoding\IBinaryEncoder.cs" />

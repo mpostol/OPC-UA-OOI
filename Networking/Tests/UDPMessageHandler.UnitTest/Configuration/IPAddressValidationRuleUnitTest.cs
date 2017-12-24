@@ -3,12 +3,14 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UAOOI.Networking.UDPMessageHandler.Configuration;
 
-namespace UAOOI.Networking.UDPMessageHandler.UnitTest
+namespace UAOOI.Networking.UDPMessageHandler.UnitTest.Configuration
 {
   [TestClass]
   public class IPAddressValidationRuleUnitTest
   {
+
     [TestMethod]
     [TestCategory("ReferenceApplication_IPAddressValidationRuleUnitTest")]
     [ExpectedException(typeof(ArgumentNullException))]
@@ -69,7 +71,6 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest
       Assert.AreEqual<AddressFamily>(AddressFamily.InterNetwork, _res.AddressFamily);
       IPAddressValidationRule.ValidateMulticast(_res);
     }
-
     [TestMethod]
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void WrongMulticast223_0_0_0_TestMethod()

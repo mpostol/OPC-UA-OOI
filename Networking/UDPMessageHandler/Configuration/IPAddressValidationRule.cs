@@ -2,7 +2,7 @@
 using System;
 using System.Net;
 
-namespace UAOOI.Networking.UDPMessageHandler
+namespace UAOOI.Networking.UDPMessageHandler.Configuration
 {
   internal static class IPAddressValidationRule
   {

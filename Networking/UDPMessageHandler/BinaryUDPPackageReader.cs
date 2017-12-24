@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
+using UAOOI.Networking.UDPMessageHandler.Configuration;
 using UAOOI.Networking.UDPMessageHandler.Diagnostic;
 
 namespace UAOOI.Networking.UDPMessageHandler
@@ -25,7 +26,7 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// </summary>
     /// <param name="uaDecoder">The ua decoder.</param>
     /// <param name="configuration">The configuration of the reader.</param>
-    public BinaryUDPPackageReader(IUADecoder uaDecoder, MessageHandlerFactory.UDPReaderConfiguration configuration) : base(uaDecoder)
+    public BinaryUDPPackageReader(IUADecoder uaDecoder, UDPReaderConfiguration configuration) : base(uaDecoder)
     {
       UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), $"{nameof(BinaryUDPPackageReader)}({configuration.ToString()})");
       State = new MyState(this);

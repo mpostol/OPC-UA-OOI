@@ -3,18 +3,9 @@ using System.Diagnostics.Tracing;
 
 namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
 {
-  [EventSource(Name = "UAOOI-Networking-UDPMessageHandler-Diagnostic")]
+  [EventSource(Name = "UAOOI-Networking-UDPMessageHandler-Diagnostic", Guid = "84C6B563-8282-47CB-9111-7B29D8B43E23")]
   public class UDPMessageHandlerSemanticEventSource : EventSource
   {
-    /// <summary>
-    /// Class Keywords - defines the local keywords (flags) that apply to events.
-    /// </summary>
-    public class Keywords
-    {
-      public const EventKeywords PackageContent = (EventKeywords)1;
-      public const EventKeywords Diagnostic = (EventKeywords)2;
-      public const EventKeywords Performance = (EventKeywords)4;
-    }
 
     /// <summary>
     /// Class Tasks.
@@ -24,54 +15,56 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
       public const EventTask Consumer = (EventTask)1;
       public const EventTask Producer = (EventTask)2;
       public const EventTask Stack = (EventTask)3;
-      public const EventTask Infrastructure = (EventTask)4;
+      public const EventTask CodeBehaviour = (EventTask)4;
     }
-
+    /// <summary>
+    /// Class Keywords - defines the local keywords (flags) that apply to events.
+    /// </summary>
+    public class Keywords
+    {
+      public const EventKeywords PackageContent = (EventKeywords)(1 << 1);
+      public const EventKeywords Diagnostic = (EventKeywords)(1 << 2);
+      public const EventKeywords Performance = (EventKeywords)(1 << 3);
+      public const EventKeywords Settings = (EventKeywords)(1 << 4);
+    }
 
     /// <summary>
     /// Gets the log - implements singleton of the <see cref="UDPMessageHandlerSemanticEventSource"/>.
     /// </summary>
     /// <value>The log.</value>
     internal static UDPMessageHandlerSemanticEventSource Log { get; } = new UDPMessageHandlerSemanticEventSource();
-
-    [Event(1, Message = "Application Failure: {0}", Opcode = EventOpcode.Start, Task = Tasks.Consumer, Level = EventLevel.Critical, Keywords = Keywords.Diagnostic)]
+    [Event(1, Message = "Application Failure: {0}", Opcode = EventOpcode.Info, Task = Tasks.CodeBehaviour, Level = EventLevel.Error, Keywords = Keywords.Diagnostic)]
     public void Failure(string message)
     {
       WriteEvent(1, message);
     }
-    [Event(2, Message = "Starting up {0}.", Task = Tasks.Infrastructure, Keywords = Keywords.Performance, Level = EventLevel.Informational)]
-    internal void Startup(string stackName)
+    [Event(2, Message = "The get IMessageHandler method {0} has been called.", Opcode = EventOpcode.Start, Task = Tasks.CodeBehaviour, Level = EventLevel.Informational)]
+    internal void GetIMessageHandler(string iMessageHandlerName)
     {
-      WriteEvent(2, stackName);
+      WriteEvent(2, iMessageHandlerName);
     }
-    [Event(3, Message = "Entering method {0}.{1}", Opcode = EventOpcode.Start, Task = EventTask.None, Keywords = Keywords.Performance, Level = EventLevel.Verbose)]
+    [Event(3, Message = "Entering method {0}.{1}", Opcode = EventOpcode.Info, Task = EventTask.None, Level = EventLevel.Verbose)]
     internal void EnteringMethod(string className, string methodName)
     {
       if (IsEnabled())
         WriteEvent(3, className, methodName);
     }
-    [Event(4, Message = "Unexpected end of message while reading #{0} element.", Opcode = EventOpcode.Receive, Task = Tasks.Consumer, Keywords = Keywords.PackageContent, Level = EventLevel.Warning)]
-    internal void MessageInconsistency(int i)
-    {
-      WriteEvent(4, i);
-    }
-    [Event(5, Message = "Received message: {0}", Opcode = EventOpcode.Start, Task = Tasks.Consumer, Keywords = Keywords.PackageContent, Level = EventLevel.Verbose)]
+    [Event(5, Message = "Received message: {0}", Opcode = EventOpcode.Info, Task = Tasks.Consumer, Level = EventLevel.Verbose)]
     internal void ReceivedMessageContent(string payload0)
     {
       WriteEvent(5, payload0);
     }
-    [Event(6, Message = "Sent message: {0}", Opcode = EventOpcode.Start, Task = Tasks.Producer, Keywords = Keywords.PackageContent, Level = EventLevel.Verbose)]
+    [Event(6, Message = "Sent message: {0}", Opcode = EventOpcode.Info, Task = Tasks.Producer, Level = EventLevel.Verbose)]
     internal void SentMessageContent(string payload0)
     {
       WriteEvent(6, payload0);
     }
-    [Event(7, Message = "Joining the multicast group: {0}", Opcode = EventOpcode.Receive, Task = Tasks.Consumer, Keywords = Keywords.PackageContent, Level = EventLevel.Informational)]
-    internal void JoiningMulticastGroup(string payload0)
+    [Event(7, Message = "Joining the multicast group: {0}", Opcode = EventOpcode.Start, Task = Tasks.Stack, Level = EventLevel.Informational)]
+    internal void JoiningMulticastGroup(string multicastGroup)
     {
-      WriteEvent(7, payload0);
+      WriteEvent(7, multicastGroup);
     }
-    [Event(8, Message = "Udp statistics: datagrams received = {0} sent = {1}", Opcode = EventOpcode.Info, Task = Tasks.Stack, Keywords = Keywords.Performance, Level = EventLevel.Informational)]
-
+    [Event(8, Message = "Udp statistics: datagrams received = {0} sent = {1}", Opcode = EventOpcode.Info, Task = Tasks.Stack, Level = EventLevel.Informational)]
     internal void ReaderUdpStatistics(long datagramsReceived, long datagramsSent)
     {
       WriteEvent(8, datagramsReceived, datagramsSent);

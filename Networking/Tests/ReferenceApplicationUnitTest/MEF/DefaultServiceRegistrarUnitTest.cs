@@ -75,7 +75,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         Assert.IsNotNull(_interface);
         IMessageHandlerFactory _messageHandlerFactory = _container.GetExportedValue<IMessageHandlerFactory>();
         Assert.IsNotNull(_messageHandlerFactory);
-        NetworkingEventSourceBase _baseEventSource = _messageHandlerFactory as NetworkingEventSourceBase;
+        INetworkingEventSourceProvider _baseEventSource = _messageHandlerFactory as INetworkingEventSourceProvider;
         Assert.IsNotNull(_baseEventSource);
       }
     }

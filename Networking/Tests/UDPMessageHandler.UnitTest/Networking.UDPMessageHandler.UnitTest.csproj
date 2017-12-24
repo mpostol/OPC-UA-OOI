@@ -72,8 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryUDPPackageReaderTestClass.cs" />
+    <Compile Include="Configuration\UDPReaderConfigurationUnitTest.cs" />
+    <Compile Include="Configuration\UDPWriterConfigurationUnitTest.cs" />
     <Compile Include="Diagnostic\UDPMessageHandlerSemanticEventSourceUnitTest.cs" />
-    <Compile Include="IPAddressValidationRuleUnitTest.cs" />
+    <Compile Include="Configuration\IPAddressValidationRuleUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

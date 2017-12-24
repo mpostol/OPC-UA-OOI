@@ -50,16 +50,17 @@
   <ItemGroup>
     <Compile Include="BinaryUDPPackageReader.cs" />
     <Compile Include="BinaryUDPPackageWriter.cs" />
+    <Compile Include="Configuration\UDPWriterConfiguration.cs" />
+    <Compile Include="Configuration\UDPReaderConfiguration.cs" />
     <Compile Include="Diagnostic\UDPMessageHandlerDiagnosticExtension.cs" />
     <Compile Include="Diagnostic\UDPMessageHandlerSemanticEventSource.cs" />
-    <Compile Include="IPAddressValidationRule.cs" />
+    <Compile Include="Configuration\IPAddressValidationRule.cs" />
     <Compile Include="MessageHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
-    <Compile Include="UdpStatisticsEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj">

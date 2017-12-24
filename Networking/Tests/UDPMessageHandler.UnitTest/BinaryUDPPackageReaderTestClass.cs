@@ -5,12 +5,15 @@ using System.Threading;
 using System.Xml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.Networking.SemanticData.Encoding;
+using UAOOI.Networking.UDPMessageHandler.Configuration;
 
 namespace UAOOI.Networking.UDPMessageHandler.UnitTest
 {
+
   [TestClass]
   public class BinaryUDPPackageReaderTestClass
   {
+
     #region TestMethod
     [TestMethod]
     [TestCategory("ReferenceApplication_BinaryUDPPackageReaderTestClass")]
@@ -113,52 +116,42 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest
       {
         throw new NotImplementedException();
       }
-
       public DateTime ReadDateTime(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();
       }
-
       public IDiagnosticInfo ReadDiagnosticInfo(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();
       }
-
       public IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();
       }
-
       public IExtensionObject ReadExtensionObject(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();
       }
-
       public Guid ReadGuid(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();
       }
-
       public ILocalizedText ReadLocalizedText(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();
       }
-
       public INodeId ReadNodeId(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();
       }
-
       public IQualifiedName ReadQualifiedName(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();
       }
-
       public IStatusCode ReadStatusCode(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();
       }
-
       public string ReadString(IBinaryDecoder decoder)
       {
         throw new NotImplementedException();
@@ -174,16 +167,17 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest
     }
     private static class LocalUDPConfiguration
     {
-      internal static MessageHandlerFactory.UDPReaderConfiguration GetReaderConfiguration()
+      internal static UDPReaderConfiguration GetReaderConfiguration()
       {
         bool _ExclusiveAddressUse = true;
         int UDPPortNumber = 4840;
         bool JoinMulticastGroup = true;
         string DefaultMulticastGroup = "239.255.255.1";
-        return MessageHandlerFactory.UDPReaderConfiguration.Parse($"{UDPPortNumber},{JoinMulticastGroup},{DefaultMulticastGroup},{_ExclusiveAddressUse}");
+        return UDPReaderConfiguration.Parse($"{UDPPortNumber},{JoinMulticastGroup},{DefaultMulticastGroup},{_ExclusiveAddressUse}");
       }
     }
     #endregion
 
   }
+
 }

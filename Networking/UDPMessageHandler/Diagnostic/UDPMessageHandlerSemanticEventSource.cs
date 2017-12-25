@@ -64,11 +64,6 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
     {
       WriteEvent(7, multicastGroup);
     }
-    [Event(8, Message = "Udp statistics: datagrams received = {0} sent = {1}", Opcode = EventOpcode.Info, Task = Tasks.Stack, Level = EventLevel.Informational)]
-    internal void ReaderUdpStatistics(long datagramsReceived, long datagramsSent)
-    {
-      WriteEvent(8, datagramsReceived, datagramsSent);
-    }
     private UDPMessageHandlerSemanticEventSource() { }
 
   }

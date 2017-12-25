@@ -44,7 +44,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       {
         if (EndOfMessage())
         {
-          Diagnostics.SemanticEventSource.Log.MessageInconsistency(i); 
+          Diagnostics.ReactiveNetworkingEventSource.Log.MessageInconsistency(i); 
           break;
         }
         //TODO: Implement ContentMask https://github.com/mpostol/OPC-UA-OOI/issues/89

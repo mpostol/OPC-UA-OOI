@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using System.Net;
-using System.Net.NetworkInformation;
 
 namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
 {
@@ -20,10 +19,6 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
     internal static void JoiningMulticastGroup(this UDPMessageHandlerSemanticEventSource eventSource, IPAddress multicastGroup)
     {
       eventSource.JoiningMulticastGroup(multicastGroup.ToString());
-    }
-    internal static void ReaderUdpStatistics(this UDPMessageHandlerSemanticEventSource eventSource, UdpStatistics payload0)
-    {
-      eventSource.ReaderUdpStatistics(payload0.DatagramsReceived, payload0.DatagramsSent);
     }
     private static string MessageContentFormat(IPEndPoint endPoint, int length, byte[] message)
     {

@@ -9,7 +9,7 @@ using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.Networking.UDPMessageHandler.Diagnostic;
-using static UAOOI.Networking.SemanticData.Diagnostics.SemanticEventSource;
+using static UAOOI.Networking.SemanticData.Diagnostics.ReactiveNetworkingEventSource;
 
 namespace UAOOI.Networking.UDPMessageHandler.UnitTest.Diagnostic
 {
@@ -158,47 +158,6 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest.Diagnostic
       }
     }
     [TestMethod]
-    public void ReaderUdpStatisticsTest()
-    {
-      EventEntry _lastEvent = null;
-      int _calls = 0;
-      ObservableEventListener _listener = new ObservableEventListener();
-      IDisposable subscription = _listener.Subscribe(x => { _calls++; _lastEvent = x; });
-      using (SinkSubscription<ObservableEventListener> _sinkSubscription = new SinkSubscription<ObservableEventListener>(subscription, _listener))
-      {
-        Assert.IsNotNull(_sinkSubscription.Sink);
-
-        UDPMessageHandlerSemanticEventSource _log = UDPMessageHandlerSemanticEventSource.Log;
-        _sinkSubscription.Sink.EnableEvents(_log, EventLevel.LogAlways, Keywords.All);
-
-        Assert.IsNull(_lastEvent);
-        _log.ReaderUdpStatistics(new UdpStatisticsTest());
-        Assert.AreEqual<int>(1, _calls);
-        Assert.IsNotNull(_lastEvent);
-
-        //_lastEvent content
-        Assert.AreEqual<int>(8, _lastEvent.EventId);
-        Assert.AreEqual<Guid>(Guid.Empty, _lastEvent.ActivityId);
-        string _message = "Udp statistics: datagrams received = 100 sent = 100";
-        Assert.AreEqual<string>(_message, _lastEvent.FormattedMessage, _lastEvent.FormattedMessage);
-
-        Assert.AreEqual<string>("System.Collections.ObjectModel.ReadOnlyCollection`1[System.Object]", _lastEvent.Payload.ToString(), _lastEvent.Payload.ToString());
-        Assert.AreEqual<int>(2, _lastEvent.Payload.Count);
-        Assert.IsInstanceOfType(_lastEvent.Payload[0], typeof(long));
-        Assert.AreEqual<string>("100", _lastEvent.Payload[0].ToString());
-        Assert.AreEqual<string>("datagramsReceived", _lastEvent.Schema.Payload[0]);
-        Assert.IsInstanceOfType(_lastEvent.Payload[1], typeof(long));
-        Assert.AreEqual<string>("100", _lastEvent.Payload[1].ToString());
-        Assert.AreEqual<string>("datagramsSent", _lastEvent.Schema.Payload[1]);
-
-        Assert.AreEqual<string>("Info", _lastEvent.Schema.OpcodeName);
-        Assert.AreEqual<EventOpcode>(EventOpcode.Info, _lastEvent.Schema.Opcode);
-        Assert.AreEqual<string>("Stack", _lastEvent.Schema.TaskName);
-        Assert.AreEqual<EventTask>(Tasks.Stack, _lastEvent.Schema.Task);
-      }
-
-    }
-    [TestMethod]
     public void LogFailure2LogToFlatFileTest()
     {
       string _filePath = $"{nameof(LogFailure2LogToFlatFileTest)}.log";
@@ -221,21 +180,6 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest.Diagnostic
       Assert.IsTrue(_logFile.Length > 100);
       _FlatFileSink.Dispose();
     }
-
-    #region Instrumentation
-    private class UdpStatisticsTest : UdpStatistics
-    {
-      public override long DatagramsReceived => 100;
-
-      public override long DatagramsSent => 100;
-
-      public override long IncomingDatagramsDiscarded => 0;
-
-      public override long IncomingDatagramsWithErrors => 0;
-
-      public override int UdpListeners => 1;
-    }
-    #endregion
 
   }
 }

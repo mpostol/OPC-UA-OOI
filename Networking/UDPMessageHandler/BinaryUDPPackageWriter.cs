@@ -156,7 +156,7 @@ namespace UAOOI.Networking.UDPMessageHandler
       // Get DNS host information.
       IPAddress[] _remoteHostAddresses = Dns.GetHostAddresses(m_RemoteHostName);
       // Get the DNS IP addresses associated with the host.
-      // Get first IPAddress in list return by DNS.
+      // Get first IPAddress in list returned by the DNS.
       m_IPAddresses = _remoteHostAddresses.Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
       Debug.Assert(m_IPAddresses != null);
       UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(UdpClient)} m_RemoteHostName: {m_RemoteHostName} Ip : {m_IPAddresses.ToString()}");

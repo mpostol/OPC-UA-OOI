@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonDefinitions.cs" />
-    <Compile Include="Diagnostics\SemanticEventSourceUnitTest.cs" />
+    <Compile Include="Diagnostics\ReactiveNetworkingEventSourceUnitTest.cs" />
     <Compile Include="HeaderTestHelpers.cs" />
     <Compile Include="Helpers\UABinaryDecoderImplementation.cs" />
     <Compile Include="Helpers\UABinaryEncoderImplementation.cs" />

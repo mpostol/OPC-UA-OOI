@@ -4,7 +4,7 @@ using System.Diagnostics.Tracing;
 namespace UAOOI.Networking.SemanticData.Diagnostics
 {
   [EventSource(Name = "UAOOI-Networking-SemanticData-Diagnostics", Guid = "C8666C20-6FEF-4DD0-BB66-5807BA629DA8")]
-  public class SemanticEventSource : EventSource
+  public class ReactiveNetworkingEventSource : EventSource
   {
     ///// <summary>
     ///// Class Keywords - defines the local keywords (flags) that apply to events.
@@ -26,10 +26,10 @@ namespace UAOOI.Networking.SemanticData.Diagnostics
       public const EventTask Infrastructure = (EventTask)4;
     }
     /// <summary>
-    /// Gets the log - implements singleton of the <see cref="SemanticEventSource"/>.
+    /// Gets the log - implements singleton of the <see cref="ReactiveNetworkingEventSource"/>.
     /// </summary>
     /// <value>The log.</value>
-    internal static SemanticEventSource Log { get; } = new SemanticEventSource();
+    internal static ReactiveNetworkingEventSource Log { get; } = new ReactiveNetworkingEventSource();
 
     //[Event(1, Message = "Application Failure: {0}", Opcode = EventOpcode.Info, Task = EventTask.None, Level = EventLevel.Critical, Keywords = Keywords.Diagnostic)]
     //internal void Failure(string message)
@@ -51,6 +51,11 @@ namespace UAOOI.Networking.SemanticData.Diagnostics
     {
       this.WriteEvent(4, position);
     }
-    private SemanticEventSource() { }
+    [Event(8, Message = "Udp statistics: datagrams received = {0} sent = {1}", Opcode = EventOpcode.Info, Task = Tasks.Stack, Level = EventLevel.Informational)]
+    internal void UdpStatistics(long datagramsReceived, long datagramsSent)
+    {
+      WriteEvent(8, datagramsReceived, datagramsSent);
+    }
+    private ReactiveNetworkingEventSource() { }
   }
 }

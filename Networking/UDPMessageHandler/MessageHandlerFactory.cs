@@ -1,5 +1,4 @@
 ﻿
-using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics.Tracing;
 using UAOOI.Networking.SemanticData.Diagnostics;

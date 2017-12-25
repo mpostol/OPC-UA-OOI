@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -16,8 +17,8 @@ namespace UAOOI.Networking.UDPMessageHandler
   internal class BinaryUDPPackageWriter : BinaryEncoder
   {
 
-    #region creator
-    public BinaryUDPPackageWriter(string remoteHostName, int remotePort, IUAEncoder uaEncoder) :
+    #region constructor
+    internal BinaryUDPPackageWriter(string remoteHostName, int remotePort, IUAEncoder uaEncoder) :
       base(uaEncoder, MessageLengthFieldTypeEnum.TwoBytes)
     {
       UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(BinaryUDPPackageWriter)}(RemoteHostName={remoteHostName},RemotePort={remotePort})");

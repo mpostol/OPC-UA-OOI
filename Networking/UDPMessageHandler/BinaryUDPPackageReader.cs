@@ -26,7 +26,7 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// </summary>
     /// <param name="uaDecoder">The ua decoder.</param>
     /// <param name="configuration">The configuration of the reader.</param>
-    public BinaryUDPPackageReader(IUADecoder uaDecoder, UDPReaderConfiguration configuration) : base(uaDecoder)
+    internal BinaryUDPPackageReader(IUADecoder uaDecoder, UDPReaderConfiguration configuration) : base(uaDecoder)
     {
       UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), $"{nameof(BinaryUDPPackageReader)}({configuration.ToString()})");
       State = new MyState(this);
@@ -79,7 +79,11 @@ namespace UAOOI.Networking.UDPMessageHandler
       set
       {
         if (State.State == HandlerState.Operational)
-          throw new InvalidOperationException($"{nameof(ReuseAddress)} cannot be set the object is in Operational state");
+        {
+          string _msg = $"{nameof(ReuseAddress)} cannot be set in the Operational state";
+          UDPMessageHandlerSemanticEventSource.Log.Failure(_msg);
+          throw new InvalidOperationException(_msg);
+        }
         m_ReuseAddress = value;
       }
     }
@@ -89,7 +93,11 @@ namespace UAOOI.Networking.UDPMessageHandler
       set
       {
         if (State.State == HandlerState.Operational)
-          throw new InvalidOperationException($"{nameof(MulticastGroup)} cannot be set the object is in Operational state");
+        {
+          string _msg = $"{nameof(MulticastGroup)} cannot be set in the Operational state";
+          UDPMessageHandlerSemanticEventSource.Log.Failure(_msg);
+          throw new InvalidOperationException(_msg);
+        }
         m_MulticastGroup = value;
       }
     }
@@ -162,7 +170,7 @@ namespace UAOOI.Networking.UDPMessageHandler
     private bool m_ReuseAddress = true;
     private IPAddress m_MulticastGroup = null;
     private IPGlobalProperties m_Properties = IPGlobalProperties.GetIPGlobalProperties();
-
+    //methods
     /// <summary>
     /// Implements <see cref="AsyncCallback"/> for UDP begin receive.
     /// </summary>

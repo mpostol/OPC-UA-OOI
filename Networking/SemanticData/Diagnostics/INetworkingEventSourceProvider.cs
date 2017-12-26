@@ -1,4 +1,5 @@
 ﻿
+using System.ComponentModel.Composition;
 using System.Diagnostics.Tracing;
 
 namespace UAOOI.Networking.SemanticData.Diagnostics
@@ -15,6 +16,14 @@ namespace UAOOI.Networking.SemanticData.Diagnostics
     /// <returns>An instance of <see cref="EventSource"/>.</returns>
     EventSource GetPartEventSource();
 
+  }
+  [Export(typeof(INetworkingEventSourceProvider))]
+  public class NetworkingEventSourceProvider : INetworkingEventSourceProvider
+  {
+    public EventSource GetPartEventSource()
+    {
+      return ReactiveNetworkingEventSource.Log;
+    }
   }
 
 }

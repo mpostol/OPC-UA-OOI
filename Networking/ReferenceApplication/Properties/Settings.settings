@@ -14,5 +14,8 @@
     <Setting Name="MessageHandlerProvider" Type="System.String" Scope="Application">
       <Value Profile="(Default)">UAOOI.Networking.UDPMessageHandler.dll</Value>
     </Setting>
+    <Setting Name="LogFilePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ReferenceApplication.log</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -103,6 +103,9 @@
     <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="System.Reactive.Linq, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Reactive.Linq.3.1.1\lib\net46\System.Reactive.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -131,9 +134,11 @@
     <Compile Include="Controls\InteractionRequestedEventArgs.cs" />
     <Compile Include="Controls\ConfigurationEditorOpenCommand.cs" />
     <Compile Include="Controls\OpenFileCommand.cs" />
+    <Compile Include="Diagnostic\ReferenceApplicationEventSource.cs" />
     <Compile Include="MEF\BootstrapperBase.cs" />
     <Compile Include="MEF\DefaultsCatalog.cs" />
     <Compile Include="MEF\DefaultServiceRegistrar.cs" />
+    <Compile Include="MEF\EventSourceBootsraper.cs" />
     <Compile Include="MEF\ExceptionExtensions.cs" />
     <Compile Include="MEF\MefBootstrapper.cs" />
     <Compile Include="MEF\ServiceLocatorAdapter.cs" />
@@ -264,6 +269,7 @@
     <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
     <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -8,7 +8,7 @@ using UAOOI.Configuration.Networking.Serialization;
 namespace UAOOI.Configuration.DataBindings.UnitTest
 {
   [TestClass]
-  [DeploymentItem(@"..\NetworkingUnitTest\TestData\", @"TestData\")]
+  [DeploymentItem(@"..\..\..\NetworkingUnitTest\TestData\", @"TestData\")]
   public class ConfigurationBaseUnitTest
   {
 
@@ -41,7 +41,7 @@ namespace UAOOI.Configuration.DataBindings.UnitTest
     }
     [TestMethod]
     [TestCategory("DataBindings_ConfigurationBaseUnitTest")]
-    [DeploymentItem(@"..\..\..\NetworkingUnitTest\TestData\", @"TestData\")]
+    //[DeploymentItem(@"..\..\..\NetworkingUnitTest\TestData\", @"TestData\")]
     public void ReadConfigurationTest()
     {
       ConfigurationBaseDerivedTest _instance = new ConfigurationBaseDerivedTest();

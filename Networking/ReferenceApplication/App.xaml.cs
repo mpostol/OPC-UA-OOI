@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿
+using System.Windows;
+using UAOOI.Networking.ReferenceApplication.Properties;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
@@ -7,6 +9,7 @@ namespace UAOOI.Networking.ReferenceApplication
   /// </summary>
   public partial class App : Application
   {
+
     /// <summary>
     /// Handles the Startup event of the App control.
     /// </summary>
@@ -15,9 +18,7 @@ namespace UAOOI.Networking.ReferenceApplication
     private void App_Startup(object sender, StartupEventArgs e)
     {
       GalaSoft.MvvmLight.Threading.DispatcherHelper.Initialize();
-      //Producer.OPCUAServerProducerSimulator.CreateDevice(_cbf, x => m_DisposableCollection.Add(x), y => m_Log.Add(y));
-      AppBootstrapper _bootstrapper = new AppBootstrapper();
-      _bootstrapper.Run();
+      m_Bootstrapper.Run();
     }
     /// <summary>
     /// Handles the Exit event of the App control.
@@ -26,8 +27,10 @@ namespace UAOOI.Networking.ReferenceApplication
     /// <param name="e">The <see cref="ExitEventArgs"/> instance containing the event data.</param>
     private void App_Exit(object sender, ExitEventArgs e)
     {
-      ReferenceApplication.Properties.Settings.Default.Save();
+      m_Bootstrapper.Dispose();
+      Settings.Default.Save();
     }
+    AppBootstrapper m_Bootstrapper = new AppBootstrapper();
 
   }
 }

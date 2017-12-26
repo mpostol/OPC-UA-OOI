@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
+using System.Reactive.Disposables;
 using System.Windows;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Networking.ReferenceApplication.Consumer;
@@ -11,7 +12,7 @@ using UAOOI.Networking.ReferenceApplication.Properties;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
-  internal class AppBootstrapper : MefBootstrapper
+  internal class AppBootstrapper : MefBootstrapper, IDisposable
   {
 
     #region MefBootstrapper
@@ -54,31 +55,28 @@ namespace UAOOI.Networking.ReferenceApplication
     protected override void OnInitialized()
     {
       base.OnInitialized();
-      m_ConsumerConfigurationFactory = Container.GetExportedValue<ConsumerDataManagementSetup>();
-      m_OPCUAServerProducerSimulator = Container.GetExportedValue<OPCUAServerProducerSimulator>();
+      EventSourceBootsraper _eventSourceBootsraper = Container.GetExportedValue<EventSourceBootsraper>();
+      m_Components.Add(_eventSourceBootsraper);
+      _eventSourceBootsraper.Run();
+      Diagnostic.ReferenceApplicationEventSource.Log.StartingApplication();
+      ConsumerDataManagementSetup m_ConsumerConfigurationFactory = Container.GetExportedValue<ConsumerDataManagementSetup>();
+      m_Components.Add(m_ConsumerConfigurationFactory);
       m_ConsumerConfigurationFactory.Setup();
+      OPCUAServerProducerSimulator m_OPCUAServerProducerSimulator = Container.GetExportedValue<OPCUAServerProducerSimulator>();
       m_OPCUAServerProducerSimulator.Setup();
+      m_Components.Add(m_OPCUAServerProducerSimulator);
     }
     #endregion
 
-    internal static void RunInReleaseMode()
+    #region IDisposable
+    public void Dispose()
     {
-      AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
-      AppBootstrapper _bootstrapper;
-      try
-      {
-        _bootstrapper = new AppBootstrapper();
-        _bootstrapper.Run();
-      }
-      catch (Exception ex)
-      {
-        HandleException(ex);
-        ITraceSource _logger = new TraceSourceBase();
-        _logger.TraceData(TraceEventType.Critical, 51, $"Exception while composing the application: {ex}");
-      }
+      m_Components.Dispose();
     }
-    private ConsumerDataManagementSetup m_ConsumerConfigurationFactory = null;
-    private OPCUAServerProducerSimulator m_OPCUAServerProducerSimulator = null;
+    #endregion
+
+    #region private 
+    private CompositeDisposable m_Components = new CompositeDisposable();
     private static void AppDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
       HandleException(e.ExceptionObject as Exception);
@@ -90,5 +88,7 @@ namespace UAOOI.Networking.ReferenceApplication
       MessageBox.Show(Properties.Resources.UnhandledException, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
       Environment.Exit(1);
     }
+    #endregion
+
   }
 }

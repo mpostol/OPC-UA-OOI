@@ -1,8 +1,10 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Reflection;
+using UAOOI.Networking.SemanticData;
 
 namespace UAOOI.Networking.ReferenceApplication.MEF
 {
@@ -57,7 +59,8 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
     /// </returns>
     private static ComposablePartCatalog GetDefaultComposablePartCatalog()
     {
-      return new AssemblyCatalog(Assembly.GetAssembly(typeof(MefBootstrapper)));
+      return new AggregateCatalog(new AssemblyCatalog(Assembly.GetAssembly(typeof(AppBootstrapper))), 
+                                  new AssemblyCatalog(Assembly.GetAssembly(typeof(DataManagementSetup))));
     }
 
   }

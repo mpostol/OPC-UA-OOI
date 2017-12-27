@@ -52,6 +52,7 @@
     <Compile Include="BinaryUDPPackageWriter.cs" />
     <Compile Include="Configuration\UDPWriterConfiguration.cs" />
     <Compile Include="Configuration\UDPReaderConfiguration.cs" />
+    <Compile Include="Diagnostic\NetworkingEventSourceProvider.cs" />
     <Compile Include="Diagnostic\UDPMessageHandlerDiagnosticExtension.cs" />
     <Compile Include="Diagnostic\UDPMessageHandlerSemanticEventSource.cs" />
     <Compile Include="Configuration\IPAddressValidationRule.cs" />

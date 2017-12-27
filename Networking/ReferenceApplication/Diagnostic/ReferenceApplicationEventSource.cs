@@ -53,18 +53,6 @@ namespace UAOOI.Networking.ReferenceApplication.Diagnostic
 
     private ReferenceApplicationEventSource() { }
   }
-  [Export(typeof(INetworkingEventSourceProvider))]
-  public class NetworkingEventSourceProvider : INetworkingEventSourceProvider
-  {
-
-    #region INetworkingEventSourceProvider
-    public EventSource GetPartEventSource()
-    {
-      return ReferenceApplicationEventSource.Log;
-    }
-    #endregion
-
-  }
 
 }
 

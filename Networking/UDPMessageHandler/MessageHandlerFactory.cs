@@ -1,7 +1,6 @@
 ﻿
 using System.ComponentModel.Composition;
 using System.Diagnostics.Tracing;
-using UAOOI.Networking.SemanticData.Diagnostics;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Networking.UDPMessageHandler.Configuration;
@@ -15,7 +14,7 @@ namespace UAOOI.Networking.UDPMessageHandler
   /// </summary>
   [Export(typeof(IMessageHandlerFactory))]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  public class MessageHandlerFactory : INetworkingEventSourceProvider, IMessageHandlerFactory
+  public class MessageHandlerFactory : IMessageHandlerFactory
   {
 
     #region IMessageHandlerFactory

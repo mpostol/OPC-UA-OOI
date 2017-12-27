@@ -1,15 +1,15 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.Tracing;
+using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks;
 using UAOOI.Networking.ReferenceApplication.Consumer;
 using UAOOI.Networking.SemanticData.Diagnostics;
-using UAOOI.Networking.SemanticData.MessageHandling;
-using System.Linq;
 
 namespace UAOOI.Networking.ReferenceApplication.MEF
 {
@@ -20,17 +20,8 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
     #region composition
     [ImportMany(typeof(INetworkingEventSourceProvider))]
     public IEnumerable<INetworkingEventSourceProvider> EventSources { get; set; }
-    /// <summary>
-    /// Gets or sets the message handler factory.
-    /// </summary>
-    /// <value>The message handler factory.</value>
-    [Import(typeof(IMessageHandlerFactory))]
-    public IMessageHandlerFactory MessageHandlerFactory { get; set; }
     [Import(typeof(IConsumerViewModel))]
-    internal IConsumerViewModel ViewModel
-    {
-      get; set;
-    }
+    internal IConsumerViewModel ViewModel { get; set; }
     #endregion
 
     internal void Run()
@@ -45,16 +36,9 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
         }
       if (_listenersDisposable.Count == 0)
         return;
-      INetworkingEventSourceProvider _messageHandlerProvider = MessageHandlerFactory as INetworkingEventSourceProvider;
-      if (_messageHandlerProvider != null)
-      {
-        ObservableEventListener _newMessageHandlerListener = new ObservableEventListener();
-        _newMessageHandlerListener.EnableEvents(_messageHandlerProvider.GetPartEventSource(), EventLevel.LogAlways, Keywords.All);
-        _listenersDisposable.Add(_newMessageHandlerListener);
-      }
       IObservable<EventEntry> _last = _listenersDisposable.Cast<IObservable<EventEntry>>().Concat();
       m_FileSubscription = _last.LogToFlatFile(Properties.Settings.Default.LogFilePath);
-      m_Subscription = new SinkSubscription<CompositeDisposable>(_last.Subscribe< EventEntry>(x => ViewModel.Trace(x.FormattedMessage)), _listenersDisposable);
+      m_Subscription = new SinkSubscription<CompositeDisposable>(_last.Subscribe<EventEntry>(x => ViewModel.Trace(x.FormattedMessage)), _listenersDisposable);
     }
 
     #region IDisposable Support

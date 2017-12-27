@@ -3,7 +3,6 @@ using System;
 using System.Diagnostics.Tracing;
 using System.IO;
 using System.Net;
-using System.Net.NetworkInformation;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks;

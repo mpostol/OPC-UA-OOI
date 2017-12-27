@@ -117,7 +117,7 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
     /// </summary>
     public virtual void RegisterDefaultTypesIfMissing()
     {
-      this.AggregateCatalog = DefaultServiceRegistrar.RegisterRequiredServicesIfMissing(this.AggregateCatalog);
+      this.AggregateCatalog = DefaultServiceRegistrar.RegisterServices(this.AggregateCatalog);
     }
     /// <summary>
     /// Helper method for configuring the <see cref="CompositionContainer"/>. 

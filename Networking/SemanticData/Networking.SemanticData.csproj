@@ -63,6 +63,7 @@
     <Compile Include="DataRepository\ConsumerBinding.cs" />
     <Compile Include="DataManagementSetup.cs" />
     <Compile Include="DataRepository\ConsumerBindingMonitoredValue.cs" />
+    <Compile Include="Diagnostics\NetworkingEventSourceProvider.cs" />
     <Compile Include="Diagnostics\ReactiveNetworkingEventSourceExtensions.cs" />
     <Compile Include="Diagnostics\INetworkingEventSourceProvider.cs" />
     <Compile Include="Diagnostics\ReactiveNetworkingEventSource.cs" />

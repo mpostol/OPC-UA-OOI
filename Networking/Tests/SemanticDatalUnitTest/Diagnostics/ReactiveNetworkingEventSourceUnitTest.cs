@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.Diagnostics.Tracing;
-using System.Net.NetworkInformation;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -24,7 +23,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Diagnostics
       {
         Assert.IsNotNull(_sinkSubscription.Sink);
 
-        ReactiveNetworkingEventSource _log = ReactiveNetworkingEventSource.Log;
+        ReactiveNetworkingEventSource _log = Log;
         _sinkSubscription.Sink.EnableEvents(_log, EventLevel.LogAlways, EventKeywords.All);
 
         Assert.IsNull(_lastEvent);

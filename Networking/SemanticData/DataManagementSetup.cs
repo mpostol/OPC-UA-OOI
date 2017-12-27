@@ -1,15 +1,13 @@
 ﻿
 using System;
 using System.ComponentModel.Composition;
-using System.Net.NetworkInformation;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData.MessageHandling;
-using UAOOI.Networking.SemanticData.Diagnostics;
-using System.Threading;
 
 namespace UAOOI.Networking.SemanticData
 {
+  
   /// <summary>
   /// Class DataManagementSetup - it is place holder to gather all external injection points used to initialize 
   /// the communication and bind to local resources.

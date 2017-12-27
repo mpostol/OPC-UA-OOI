@@ -20,39 +20,40 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
   {
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void TestMethod1()
+    public void RegisterRequiredServicesIfMissingNullArgumentTestM()
     {
-      DefaultServiceRegistrar.RegisterRequiredServicesIfMissing(null);
+      using (AggregateCatalog newCatalog = DefaultServiceRegistrar.RegisterServices(null)) { }
     }
     [TestMethod]
     public void RegisterRequiredServicesIfMissingTest()
     {
-      AggregateCatalog _emptyCatalog = new AggregateCatalog();
-      AggregateCatalog newCatalog = DefaultServiceRegistrar.RegisterRequiredServicesIfMissing(_emptyCatalog);
-      using (CompositionContainer _container = new CompositionContainer(newCatalog))
+      using (AggregateCatalog newCatalog = DefaultServiceRegistrar.RegisterServices(null))
       {
-        foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
-          foreach (var export in _part.ExportDefinitions)
-            Debug.WriteLine(string.Format("Part contract name => '{0}'", export.ContractName));
-        Assert.AreEqual<int>(7, _container.Catalog.Parts.Count());
-        MainWindow _MainWindowExportedValue = _container.GetExportedValue<MainWindow>();
-        Assert.IsNotNull(_MainWindowExportedValue);
-        Assert.IsNotNull(_MainWindowExportedValue.MainWindowViewModel);
-        IEnumerable<INetworkingEventSourceProvider> _diagnosticProviders = _container.GetExportedValues<INetworkingEventSourceProvider>();
-        Assert.AreEqual<int>(2, _diagnosticProviders.Count<INetworkingEventSourceProvider>());
+        using (CompositionContainer _container = new CompositionContainer(newCatalog))
+        {
+          foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
+            foreach (var export in _part.ExportDefinitions)
+              Debug.WriteLine(string.Format("Part contract name => '{0}'", export.ContractName));
+          Assert.AreEqual<int>(7, _container.Catalog.Parts.Count());
+          MainWindow _MainWindowExportedValue = _container.GetExportedValue<MainWindow>();
+          Assert.IsNotNull(_MainWindowExportedValue);
+          Assert.IsNotNull(_MainWindowExportedValue.MainWindowViewModel);
+          IEnumerable<INetworkingEventSourceProvider> _diagnosticProviders = _container.GetExportedValues<INetworkingEventSourceProvider>();
+          Assert.AreEqual<int>(2, _diagnosticProviders.Count<INetworkingEventSourceProvider>());
+        }
       }
     }
     [TestMethod]
     public void RegisterRequiredServicesIfMissingAndUDPMessageHandler()
     {
       AggregateCatalog _catalog = new AggregateCatalog(new AssemblyCatalog("UAOOI.Networking.UDPMessageHandler.dll"));
-      AggregateCatalog _newCatalog = DefaultServiceRegistrar.RegisterRequiredServicesIfMissing(_catalog);
+      AggregateCatalog _newCatalog = DefaultServiceRegistrar.RegisterServices(_catalog);
       using (CompositionContainer _container = new CompositionContainer(_newCatalog))
       {
         //Assert.AreEqual<int>(3, _container.Catalog.Parts.Count<ComposablePartDefinition>());
         foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
         {
+          Debug.WriteLine("New Part");
           foreach (ImportDefinition _import in _part.ImportDefinitions)
             Debug.WriteLine(string.Format("Imported contracts name => '{0}'", _import.ContractName));
           foreach (ExportDefinition _export in _part.ExportDefinitions)
@@ -61,11 +62,14 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         IMessageHandlerFactory _messageHandlerFactory = _container.GetExportedValue<IMessageHandlerFactory>();
         Assert.IsNotNull(_messageHandlerFactory);
         INetworkingEventSourceProvider _baseEventSource = _messageHandlerFactory as INetworkingEventSourceProvider;
-        Assert.IsNotNull(_baseEventSource);
+        Assert.IsNull(_baseEventSource);
+        //IEnumerable<INetworkingEventSourceProvider> _diagnosticProviders = _container.GetExportedValues<INetworkingEventSourceProvider>();
+        //Assert.AreEqual<int>(3, _diagnosticProviders.Count<INetworkingEventSourceProvider>());
         using (CompositeDisposable _Components = new CompositeDisposable())
         {
           EventSourceBootstrapper _eventSourceBootstrapper = _container.GetExportedValue<EventSourceBootstrapper>();
           _Components.Add(_eventSourceBootstrapper);
+          Assert.AreEqual<int>(3, _eventSourceBootstrapper.EventSources.Count<INetworkingEventSourceProvider>());
           ConsumerDataManagementSetup m_ConsumerConfigurationFactory = _container.GetExportedValue<ConsumerDataManagementSetup>();
           _Components.Add(m_ConsumerConfigurationFactory);
           OPCUAServerProducerSimulator m_OPCUAServerProducerSimulator = _container.GetExportedValue<OPCUAServerProducerSimulator>();
@@ -77,3 +81,4 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
 
   }
 }
+

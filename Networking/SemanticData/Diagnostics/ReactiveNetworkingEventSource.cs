@@ -51,11 +51,6 @@ namespace UAOOI.Networking.SemanticData.Diagnostics
     {
       this.WriteEvent(4, position);
     }
-    [Event(8, Message = "Udp statistics: datagrams received = {0} sent = {1}", Opcode = EventOpcode.Info, Task = Tasks.Stack, Level = EventLevel.Informational)]
-    internal void UdpStatistics(long datagramsReceived, long datagramsSent)
-    {
-      WriteEvent(8, datagramsReceived, datagramsSent);
-    }
     private ReactiveNetworkingEventSource() { }
   }
 }

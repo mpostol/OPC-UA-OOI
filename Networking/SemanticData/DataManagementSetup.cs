@@ -55,7 +55,6 @@ namespace UAOOI.Networking.SemanticData
     #endregion
 
     #region private
-    private Timer m_StatisticsTimer = new Timer(state => ReactiveNetworkingEventSource.Log.UdpStatistics(IPGlobalProperties.GetIPGlobalProperties().GetUdpIPv4Statistics()), null, 1000, 1000);
     /// <summary>
     /// Starts this instance - Initializes the data set infrastructure, enable all associations ans start pumping the data;
     /// </summary>
@@ -115,7 +114,6 @@ namespace UAOOI.Networking.SemanticData
         return;
       if (disposing)
       {
-        m_StatisticsTimer.Dispose();
         DisposeMessageHandlersCollection();
       }
       // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.

@@ -88,7 +88,7 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest.Diagnostic
         Assert.AreEqual<string>(_message, _lastEvent.FormattedMessage, _lastEvent.FormattedMessage);
         //schema
         EventSchema _Schema = _lastEvent.Schema;
-        Assert.AreEqual<string>("CodeBehaviourStart", _Schema.EventName);
+        Assert.AreEqual<string>("CodeBehaviorStart", _Schema.EventName);
         Assert.AreEqual<int>(2, _Schema.Id);
         ////Assert.IsTrue((_Schema.Keywords & UDPMessageHandlerSemanticEventSource.Keywords.Diagnostic) > 0);
         //Assert.AreEqual<string>("PackageContent", _Schema.KeywordsDescription);
@@ -97,7 +97,7 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest.Diagnostic
         Assert.AreEqual<EventOpcode>(EventOpcode.Start, _Schema.Opcode);
         Assert.AreEqual<Guid>(new Guid("84C6B563-8282-47CB-9111-7B29D8B43E23"), _Schema.ProviderId);
         Assert.AreEqual<string>("UAOOI-Networking-UDPMessageHandler-Diagnostic", _Schema.ProviderName);
-        Assert.AreEqual<string>("CodeBehaviour", _Schema.TaskName);
+        Assert.AreEqual<string>("CodeBehavior", _Schema.TaskName);
         Assert.AreEqual<EventTask>(Tasks.Infrastructure, _Schema.Task);
         Assert.AreEqual<int>(0, _Schema.Version);
 

@@ -13,8 +13,8 @@ using System.Linq;
 
 namespace UAOOI.Networking.ReferenceApplication.MEF
 {
-  [Export(typeof(EventSourceBootsraper))]
-  public class EventSourceBootsraper : IDisposable
+  [Export(typeof(EventSourceBootstrapper))]
+  public class EventSourceBootstrapper : IDisposable
   {
 
     #region composition
@@ -35,26 +35,26 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
 
     internal void Run()
     {
-      CompositeDisposable _lisners = new CompositeDisposable();
+      CompositeDisposable _listenersDisposable = new CompositeDisposable();
       if (EventSources != null)
         foreach (INetworkingEventSourceProvider _eventSources in EventSources)
         {
-          ObservableEventListener _newLisner = new ObservableEventListener();
-          _newLisner.EnableEvents(_eventSources.GetPartEventSource(), EventLevel.LogAlways, Keywords.All);
-          _lisners.Add(_newLisner);
+          ObservableEventListener _newEventListener = new ObservableEventListener();
+          _newEventListener.EnableEvents(_eventSources.GetPartEventSource(), EventLevel.LogAlways, Keywords.All);
+          _listenersDisposable.Add(_newEventListener);
         }
-      if (_lisners.Count == 0)
+      if (_listenersDisposable.Count == 0)
         return;
-      //INetworkingEventSourceProvider _messageHandlerProvider = MessageHandlerFactory as INetworkingEventSourceProvider;
-      //if (_messageHandlerProvider != null)
-      //{
-      //  ObservableEventListener _newMessageHandlerLisner = new ObservableEventListener();
-      //  _newMessageHandlerLisner.EnableEvents(_messageHandlerProvider.GetPartEventSource(), EventLevel.LogAlways, Keywords.All);
-      //  _lisners.Add(_newMessageHandlerLisner);
-      //}
-      IObservable<EventEntry> _last = _lisners.Cast<IObservable<EventEntry>>().Concat();
+      INetworkingEventSourceProvider _messageHandlerProvider = MessageHandlerFactory as INetworkingEventSourceProvider;
+      if (_messageHandlerProvider != null)
+      {
+        ObservableEventListener _newMessageHandlerListener = new ObservableEventListener();
+        _newMessageHandlerListener.EnableEvents(_messageHandlerProvider.GetPartEventSource(), EventLevel.LogAlways, Keywords.All);
+        _listenersDisposable.Add(_newMessageHandlerListener);
+      }
+      IObservable<EventEntry> _last = _listenersDisposable.Cast<IObservable<EventEntry>>().Concat();
       m_FileSubscription = _last.LogToFlatFile(Properties.Settings.Default.LogFilePath);
-      m_Subscription = new SinkSubscription<CompositeDisposable>(_last.Subscribe< EventEntry>(x => ViewModel.Trace(x.FormattedMessage)), _lisners);
+      m_Subscription = new SinkSubscription<CompositeDisposable>(_last.Subscribe< EventEntry>(x => ViewModel.Trace(x.FormattedMessage)), _listenersDisposable);
     }
 
     #region IDisposable Support

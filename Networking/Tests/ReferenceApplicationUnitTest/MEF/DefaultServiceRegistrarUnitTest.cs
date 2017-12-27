@@ -44,7 +44,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
       }
     }
     [TestMethod]
-    public void RegisterRequiredServicesIfMissingandUDPMessageHandler()
+    public void RegisterRequiredServicesIfMissingAndUDPMessageHandler()
     {
       AggregateCatalog _catalog = new AggregateCatalog(new AssemblyCatalog("UAOOI.Networking.UDPMessageHandler.dll"));
       AggregateCatalog _newCatalog = DefaultServiceRegistrar.RegisterRequiredServicesIfMissing(_catalog);
@@ -64,8 +64,8 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         Assert.IsNotNull(_baseEventSource);
         using (CompositeDisposable _Components = new CompositeDisposable())
         {
-          EventSourceBootsraper _eventSourceBootsraper = _container.GetExportedValue<EventSourceBootsraper>();
-          _Components.Add(_eventSourceBootsraper);
+          EventSourceBootstrapper _eventSourceBootstrapper = _container.GetExportedValue<EventSourceBootstrapper>();
+          _Components.Add(_eventSourceBootstrapper);
           ConsumerDataManagementSetup m_ConsumerConfigurationFactory = _container.GetExportedValue<ConsumerDataManagementSetup>();
           _Components.Add(m_ConsumerConfigurationFactory);
           OPCUAServerProducerSimulator m_OPCUAServerProducerSimulator = _container.GetExportedValue<OPCUAServerProducerSimulator>();

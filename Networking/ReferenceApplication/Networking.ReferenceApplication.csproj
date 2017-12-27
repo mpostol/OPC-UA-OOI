@@ -138,7 +138,7 @@
     <Compile Include="MEF\BootstrapperBase.cs" />
     <Compile Include="MEF\DefaultsCatalog.cs" />
     <Compile Include="MEF\DefaultServiceRegistrar.cs" />
-    <Compile Include="MEF\EventSourceBootsraper.cs" />
+    <Compile Include="MEF\EventSourceBootstrapper.cs" />
     <Compile Include="MEF\ExceptionExtensions.cs" />
     <Compile Include="MEF\MefBootstrapper.cs" />
     <Compile Include="MEF\ServiceLocatorAdapter.cs" />

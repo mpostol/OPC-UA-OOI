@@ -15,7 +15,7 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
       public const EventTask Consumer = (EventTask)1;
       public const EventTask Producer = (EventTask)2;
       public const EventTask Stack = (EventTask)3;
-      public const EventTask CodeBehaviour = (EventTask)4;
+      public const EventTask CodeBehavior = (EventTask)4;
     }
     /// <summary>
     /// Class Keywords - defines the local keywords (flags) that apply to events.
@@ -33,12 +33,12 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
     /// </summary>
     /// <value>The log.</value>
     internal static UDPMessageHandlerSemanticEventSource Log { get; } = new UDPMessageHandlerSemanticEventSource();
-    [Event(1, Message = "Application Failure: {0}", Opcode = EventOpcode.Info, Task = Tasks.CodeBehaviour, Level = EventLevel.Error, Keywords = Keywords.Diagnostic)]
+    [Event(1, Message = "Application Failure: {0}", Opcode = EventOpcode.Info, Task = Tasks.CodeBehavior, Level = EventLevel.Error, Keywords = Keywords.Diagnostic)]
     public void Failure(string message)
     {
       WriteEvent(1, message);
     }
-    [Event(2, Message = "The get IMessageHandler method {0} has been called.", Opcode = EventOpcode.Start, Task = Tasks.CodeBehaviour, Level = EventLevel.Informational)]
+    [Event(2, Message = "The get IMessageHandler method {0} has been called.", Opcode = EventOpcode.Start, Task = Tasks.CodeBehavior, Level = EventLevel.Informational)]
     internal void GetIMessageHandler(string iMessageHandlerName)
     {
       WriteEvent(2, iMessageHandlerName);

@@ -55,9 +55,9 @@ namespace UAOOI.Networking.ReferenceApplication
     protected override void OnInitialized()
     {
       base.OnInitialized();
-      EventSourceBootsraper _eventSourceBootsraper = Container.GetExportedValue<EventSourceBootsraper>();
-      m_Components.Add(_eventSourceBootsraper);
-      _eventSourceBootsraper.Run();
+      EventSourceBootstrapper _eventSourceBootstrapper = Container.GetExportedValue<EventSourceBootstrapper>();
+      m_Components.Add(_eventSourceBootstrapper);
+      _eventSourceBootstrapper.Run();
       Diagnostic.ReferenceApplicationEventSource.Log.StartingApplication();
       ConsumerDataManagementSetup m_ConsumerConfigurationFactory = Container.GetExportedValue<ConsumerDataManagementSetup>();
       m_Components.Add(m_ConsumerConfigurationFactory);

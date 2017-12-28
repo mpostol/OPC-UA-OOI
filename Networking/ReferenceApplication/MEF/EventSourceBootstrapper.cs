@@ -36,7 +36,7 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
         }
       if (_listenersDisposable.Count == 0)
         return;
-      IObservable<EventEntry> _last = _listenersDisposable.Cast<IObservable<EventEntry>>().Concat();
+      IObservable<EventEntry> _last = _listenersDisposable.Cast<IObservable<EventEntry>>().Merge<EventEntry>();
       m_FileSubscription = _last.LogToFlatFile(Properties.Settings.Default.LogFilePath);
       m_Subscription = new SinkSubscription<CompositeDisposable>(_last.Subscribe<EventEntry>(x => ViewModel.Trace(x.FormattedMessage)), _listenersDisposable);
     }
@@ -81,27 +81,27 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
     #endregion
 
   }
-  public static class SinkExtensions
-  {
+  //public static class SinkExtensions
+  //{
 
-    public static SinkSubscription<ObservableEventListener> CreateSink(this ObservableEventListener eventStream, Action<EventEntry> feedback)
-    {
-      IDisposable subscription = eventStream.Subscribe(feedback);
-      return new SinkSubscription<ObservableEventListener>(subscription, eventStream);
-    }
+  //  public static SinkSubscription<ObservableEventListener> CreateSink(this ObservableEventListener eventStream, Action<EventEntry> feedback)
+  //  {
+  //    IDisposable subscription = eventStream.Subscribe(feedback);
+  //    return new SinkSubscription<ObservableEventListener>(subscription, eventStream);
+  //  }
 
-    public static SinkSubscription<ObservableEventListener> CreateSink(Action<EventEntry> feedback)
-    {
-      ObservableEventListener _listener = new ObservableEventListener();
-      IDisposable subscription = _listener.Subscribe(feedback);
-      return new SinkSubscription<ObservableEventListener>(subscription, _listener);
-    }
-    public static SinkSubscription<FlatFileSink> CreateSink(EventSource eventSource, string path)
-    {
-      ObservableEventListener _listener = new ObservableEventListener();
-      _listener.EnableEvents(eventSource, EventLevel.LogAlways, Keywords.All);
-      return _listener.LogToFlatFile(path);
-    }
+  //  public static SinkSubscription<ObservableEventListener> CreateSink(Action<EventEntry> feedback)
+  //  {
+  //    ObservableEventListener _listener = new ObservableEventListener();
+  //    IDisposable subscription = _listener.Subscribe(feedback);
+  //    return new SinkSubscription<ObservableEventListener>(subscription, _listener);
+  //  }
+  //  public static SinkSubscription<FlatFileSink> CreateSink(EventSource eventSource, string path)
+  //  {
+  //    ObservableEventListener _listener = new ObservableEventListener();
+  //    _listener.EnableEvents(eventSource, EventLevel.LogAlways, Keywords.All);
+  //    return _listener.LogToFlatFile(path);
+  //  }
 
-  }
+  //}
 }

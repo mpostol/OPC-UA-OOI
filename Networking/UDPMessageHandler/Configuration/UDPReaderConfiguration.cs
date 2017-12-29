@@ -30,7 +30,7 @@ namespace UAOOI.Networking.UDPMessageHandler.Configuration
       }
       catch (Exception _ex)
       {
-        UDPMessageHandlerSemanticEventSource.Log.Failure($"The following exception has been caught during parsing the reader configuration: {_ex}");
+        UDPMessageHandlerSemanticEventSource.Log.LogException( nameof(UDPReaderConfiguration), nameof(Parse), _ex);
         throw;
       }
     }

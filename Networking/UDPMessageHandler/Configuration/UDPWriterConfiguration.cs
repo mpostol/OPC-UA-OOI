@@ -25,7 +25,7 @@ namespace UAOOI.Networking.UDPMessageHandler.Configuration
       }
       catch (Exception _ex)
       {
-        UDPMessageHandlerSemanticEventSource.Log.Failure($"The following exception has been caught during parsing the writer configuration: {_ex}");
+        UDPMessageHandlerSemanticEventSource.Log.LogException(nameof(UDPWriterConfiguration), nameof(Parse), _ex);
         throw;
       }
     }

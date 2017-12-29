@@ -66,6 +66,7 @@ namespace UAOOI.Networking.UDPMessageHandler
         return;
       if (Client == null)
         return;
+      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageReader), nameof(Client.Close));
       Client.Close();
       Client = null;
       m_MulticastGroup = null;
@@ -81,7 +82,7 @@ namespace UAOOI.Networking.UDPMessageHandler
         if (State.State == HandlerState.Operational)
         {
           string _msg = $"{nameof(ReuseAddress)} cannot be set in the Operational state";
-          UDPMessageHandlerSemanticEventSource.Log.Failure(_msg);
+          UDPMessageHandlerSemanticEventSource.Log.Failure(nameof(BinaryUDPPackageReader), nameof(ReuseAddress), _msg);
           throw new InvalidOperationException(_msg);
         }
         m_ReuseAddress = value;
@@ -95,7 +96,7 @@ namespace UAOOI.Networking.UDPMessageHandler
         if (State.State == HandlerState.Operational)
         {
           string _msg = $"{nameof(MulticastGroup)} cannot be set in the Operational state";
-          UDPMessageHandlerSemanticEventSource.Log.Failure(_msg);
+          UDPMessageHandlerSemanticEventSource.Log.Failure(nameof(BinaryUDPPackageReader), nameof(ReuseAddress), _msg);
           throw new InvalidOperationException(_msg);
         }
         m_MulticastGroup = value;
@@ -191,13 +192,9 @@ namespace UAOOI.Networking.UDPMessageHandler
         OnNewFrameArrived(new BinaryReader(_stream, System.Text.Encoding.UTF8));
         Client.BeginReceive(new AsyncCallback(ReceiveAsyncCallback), Client);
       }
-      catch (ObjectDisposedException _ex)
-      {
-        UDPMessageHandlerSemanticEventSource.Log.Failure($"ObjectDisposedException = {_ex.Message}");
-      }
       catch (Exception _ex)
       {
-        UDPMessageHandlerSemanticEventSource.Log.Failure($"Exception {_ex.Message}, type = {_ex.GetType().Name}");
+        UDPMessageHandlerSemanticEventSource.Log.LogException(nameof(BinaryUDPPackageReader), nameof(ReceiveAsyncCallback), _ex);
       }
     }
     //Methods

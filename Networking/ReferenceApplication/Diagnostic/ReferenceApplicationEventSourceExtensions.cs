@@ -12,7 +12,7 @@ namespace UAOOI.Networking.ReferenceApplication.Diagnostic
     /// Logs the exception using <see cref="ReferenceApplicationEventSource"/>.
     /// </summary>
     /// <param name="eventSource">The event source source to be used for problem reporting.</param>
-    /// <param name="e">The exeption to be reported.</param>
+    /// <param name="e">The exception to be reported.</param>
     internal static void LogException (this ReferenceApplicationEventSource eventSource, Exception e)
     {
       Exception _exception = e;

@@ -153,7 +153,6 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest.Diagnostic
         Assert.IsInstanceOfType(_lastEvent.Payload[0], typeof(String));
         Assert.AreEqual<string>("192.168.0.0", (string)_lastEvent.Payload[0]);
         Assert.AreEqual<string>("multicastGroup", _lastEvent.Schema.Payload[0]);
-
       }
     }
     [TestMethod]
@@ -172,7 +171,7 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest.Diagnostic
       Assert.IsTrue(_logFile.Exists);
       Assert.AreEqual<long>(0, _logFile.Length);
 
-      _log.Failure("LogFailure");
+      _log.Failure(nameof(UDPMessageHandlerSemanticEventSourceUnitTest), nameof(LogFailure2LogToFlatFileTest), "LogFailure");
 
       _FlatFileSink.Sink.FlushAsync();
       _logFile.Refresh();

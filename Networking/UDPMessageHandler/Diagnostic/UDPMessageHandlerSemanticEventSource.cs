@@ -33,10 +33,10 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
     /// </summary>
     /// <value>The log.</value>
     internal static UDPMessageHandlerSemanticEventSource Log { get; } = new UDPMessageHandlerSemanticEventSource();
-    [Event(1, Message = "Application Failure: {0}", Opcode = EventOpcode.Info, Task = Tasks.CodeBehavior, Level = EventLevel.Error, Keywords = Keywords.Diagnostic)]
-    public void Failure(string message)
+    [Event(1, Message = "At {0}.{1} encountered application failure: {2}", Opcode = EventOpcode.Info, Task = Tasks.CodeBehavior, Level = EventLevel.Error, Keywords = Keywords.Diagnostic)]
+    public void Failure(string className, string methodName, string problem)
     {
-      WriteEvent(1, message);
+      WriteEvent(1, className, methodName, problem);
     }
     [Event(2, Message = "The get IMessageHandler method {0} has been called.", Opcode = EventOpcode.Start, Task = Tasks.CodeBehavior, Level = EventLevel.Informational)]
     internal void GetIMessageHandler(string iMessageHandlerName)

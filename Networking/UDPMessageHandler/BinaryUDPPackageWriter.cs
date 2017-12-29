@@ -40,9 +40,9 @@ namespace UAOOI.Networking.UDPMessageHandler
     }
     protected override void SendFrame(byte[] buffer)
     {
-      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(SendFrame)} buffer.Length = {buffer.Length}");
       lock (this)
       {
+        UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(SendFrame)} buffer.Length = {buffer.Length}");
         UdpClient _UdpClient = m_UdpClient;
         if (_UdpClient == null)
           return;
@@ -52,21 +52,9 @@ namespace UAOOI.Networking.UDPMessageHandler
           UDPMessageHandlerSemanticEventSource.Log.SentMessageContent(_IPEndPoint, buffer.Length, buffer);
           _UdpClient.Send(buffer, buffer.Length, _IPEndPoint);
         }
-        catch (SocketException e)
+        catch (Exception _e)
         {
-          UDPMessageHandlerSemanticEventSource.Log.Failure($"SocketException caught!!! Source : { e.Source} Message : {e.Message}");
-        }
-        catch (ArgumentNullException e)
-        {
-          UDPMessageHandlerSemanticEventSource.Log.Failure($"ArgumentNullException caught!!! Source : { e.Source} Message : {e.Message}");
-        }
-        catch (NullReferenceException e)
-        {
-          UDPMessageHandlerSemanticEventSource.Log.Failure($"NullReferenceException caught!!! Source : { e.Source} Message : {e.Message}");
-        }
-        catch (Exception e)
-        {
-          UDPMessageHandlerSemanticEventSource.Log.Failure($"Exception caught!!! Source : { e.Source} Message : {e.Message}");
+          UDPMessageHandlerSemanticEventSource.Log.LogException(nameof(BinaryUDPPackageWriter), nameof(SendFrame), _e);
         }
       }
     }
@@ -76,9 +64,9 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
     protected override void Dispose(bool disposing)
     {
-      UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(Dispose)}({nameof(disposing)} = {disposing})");
       lock (this)
       {
+        UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(Dispose)}({nameof(disposing)} = {disposing})");
         base.Dispose(disposing);
         if (!disposing)
           return;

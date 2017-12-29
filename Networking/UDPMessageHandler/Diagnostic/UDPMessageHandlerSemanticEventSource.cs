@@ -38,7 +38,7 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
     {
       WriteEvent(1, className, methodName, problem);
     }
-    [Event(2, Message = "The get IMessageHandler method {0} has been called.", Opcode = EventOpcode.Start, Task = Tasks.CodeBehavior, Level = EventLevel.Informational)]
+    [Event(2, Message = "The IMessageHandlerFactory.{0} method has been called.", Opcode = EventOpcode.Start, Task = Tasks.CodeBehavior, Level = EventLevel.Informational)]
     internal void GetIMessageHandler(string iMessageHandlerName)
     {
       WriteEvent(2, iMessageHandlerName);

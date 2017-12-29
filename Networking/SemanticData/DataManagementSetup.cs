@@ -4,10 +4,11 @@ using System.ComponentModel.Composition;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData.MessageHandling;
+using UAOOI.Networking.SemanticData.Diagnostics;
 
 namespace UAOOI.Networking.SemanticData
 {
-  
+
   /// <summary>
   /// Class DataManagementSetup - it is place holder to gather all external injection points used to initialize 
   /// the communication and bind to local resources.
@@ -54,7 +55,7 @@ namespace UAOOI.Networking.SemanticData
 
     #region private
     /// <summary>
-    /// Starts this instance - Initializes the data set infrastructure, enable all associations ans start pumping the data;
+    /// Starts this instance - Initializes the data set infrastructure, enable all associations and starts pumping the data;
     /// </summary>
     /// <exception cref="System.ArgumentNullException">
     /// BindingFactory
@@ -67,8 +68,16 @@ namespace UAOOI.Networking.SemanticData
     /// </exception>
     protected void Start()
     {
-      Initialize();
-      Run();
+      try
+      {
+        Initialize();
+        Run();
+      }
+      catch (Exception _ex)
+      {
+        Diagnostics.ReactiveNetworkingEventSource.Log.LogException(nameof(DataManagementSetup), nameof(Start), _ex);
+        throw;
+      }
     }
     /// <summary>
     /// Initializes the data set infrastructure.

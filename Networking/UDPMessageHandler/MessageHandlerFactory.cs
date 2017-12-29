@@ -48,13 +48,6 @@ namespace UAOOI.Networking.UDPMessageHandler
     }
     #endregion
 
-    #region INetworkingEventSourceProvider
-    public EventSource GetPartEventSource()
-    {
-      return UDPMessageHandlerSemanticEventSource.Log;
-    }
-    #endregion
-
   }
 
 }

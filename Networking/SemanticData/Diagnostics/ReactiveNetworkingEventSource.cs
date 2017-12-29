@@ -24,6 +24,7 @@ namespace UAOOI.Networking.SemanticData.Diagnostics
       public const EventTask Producer = (EventTask)2;
       public const EventTask Stack = (EventTask)3;
       public const EventTask Infrastructure = (EventTask)4;
+      public const EventTask CodeBehavior = (EventTask)5;
     }
     /// <summary>
     /// Gets the log - implements singleton of the <see cref="ReactiveNetworkingEventSource"/>.
@@ -31,11 +32,11 @@ namespace UAOOI.Networking.SemanticData.Diagnostics
     /// <value>The log.</value>
     internal static ReactiveNetworkingEventSource Log { get; } = new ReactiveNetworkingEventSource();
 
-    //[Event(1, Message = "Application Failure: {0}", Opcode = EventOpcode.Info, Task = EventTask.None, Level = EventLevel.Critical, Keywords = Keywords.Diagnostic)]
-    //internal void Failure(string message)
-    //{
-    //  this.WriteEvent(1, message);
-    //}
+    [Event(1, Message = "At {0}.{1} encountered application failure: {2}", Opcode = EventOpcode.Info, Task = Tasks.CodeBehavior, Level = EventLevel.Error/*, Keywords = Keywords.Diagnostic*/)]
+    public void Failure(string className, string methodName, string problem)
+    {
+      WriteEvent(1, className, methodName, problem);
+    }
     //[Event(2, Message = "Starting up.", Keywords = Keywords.Performance, Level = EventLevel.Informational)]
     //internal void Startup()
     //{

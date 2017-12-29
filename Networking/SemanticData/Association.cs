@@ -2,6 +2,7 @@
 using System;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.SemanticData.Diagnostics;
 
 namespace UAOOI.Networking.SemanticData
 {
@@ -77,8 +78,9 @@ namespace UAOOI.Networking.SemanticData
         InitializeCommunication();
         State = new AssociationStateDisabled(this);
       }
-      catch (Exception)
+      catch (Exception _ex)
       {
+        Diagnostics.ReactiveNetworkingEventSource.Log.LogException(nameof(Association), nameof(Initialize), _ex);
         State = new AssociationStateError(this);
       }
     }

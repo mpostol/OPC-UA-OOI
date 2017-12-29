@@ -183,10 +183,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         {
           throw new NotImplementedException();
         }
-        public void OnEnabling()
-        {
-          throw new NotImplementedException();
-        }
+        public void OnEnabling() { }
         public void OnDisabling()
         {
           throw new NotImplementedException();

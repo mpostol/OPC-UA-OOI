@@ -21,9 +21,11 @@ namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
       eventSource.JoiningMulticastGroup(multicastGroup.ToString());
     }
     /// <summary>
-    /// Logs the exception using <see cref="ReferenceApplicationEventSource"/>.
+    /// Logs the exception using <see cref="ReferenceApplicationEventSource" />.
     /// </summary>
     /// <param name="eventSource">The event source source to be used for problem reporting.</param>
+    /// <param name="className">Name of the class.</param>
+    /// <param name="methodName">Name of the method.</param>
     /// <param name="e">The exception to be reported.</param>
     internal static void LogException(this UDPMessageHandlerSemanticEventSource eventSource, string className, string methodName, Exception e)
     {

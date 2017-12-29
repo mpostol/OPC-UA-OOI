@@ -83,7 +83,7 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest.Diagnostic
         //_lastEvent content
         Assert.AreEqual<int>(2, _lastEvent.EventId);
         Assert.AreEqual<Guid>(Guid.Empty, _lastEvent.ActivityId);
-        string _message = "The get IMessageHandler method NameOfIMessageHandlerMethod has been called.";
+        string _message = "The IMessageHandlerFactory.NameOfIMessageHandlerMethod method has been called.";
         Assert.AreEqual<string>(_message, _lastEvent.FormattedMessage, _lastEvent.FormattedMessage);
         //schema
         EventSchema _Schema = _lastEvent.Schema;

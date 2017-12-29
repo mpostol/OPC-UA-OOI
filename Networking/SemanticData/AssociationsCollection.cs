@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Windows.Data;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Networking.SemanticData.Diagnostics;
 using UAOOI.Networking.SemanticData.MessageHandling;
 
 namespace UAOOI.Networking.SemanticData
@@ -93,9 +94,10 @@ namespace UAOOI.Networking.SemanticData
           _ax.Initialize();
           _ax.State.Enable();
         }
-        catch (Exception)
+        catch (Exception _ex)
         {
-          //TODO tracking add exception handling to provide feedback to the user, e.g. message in the log file - intensionally not implemented. 
+          Diagnostics.ReactiveNetworkingEventSource.Log.LogException(nameof(AssociationsCollection), nameof(Initialize), _ex);
+          throw;
         }
       };
     }

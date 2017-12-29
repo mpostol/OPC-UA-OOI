@@ -1,18 +1,17 @@
 ﻿
 using System;
 using System.ComponentModel.Composition.Hosting;
-using System.Diagnostics;
 using System.Reactive.Disposables;
 using System.Windows;
-using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Networking.ReferenceApplication.Consumer;
+using UAOOI.Networking.ReferenceApplication.Diagnostic;
 using UAOOI.Networking.ReferenceApplication.MEF;
 using UAOOI.Networking.ReferenceApplication.Producer;
 using UAOOI.Networking.ReferenceApplication.Properties;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
-  internal class AppBootstrapper : MefBootstrapper, IDisposable
+  internal class AppBootstrapper : MefBootstrapper 
   {
 
     #region MefBootstrapper
@@ -39,15 +38,11 @@ namespace UAOOI.Networking.ReferenceApplication
       Application.Current.MainWindow = (MainWindow)this.Shell;
       Application.Current.MainWindow.Show();
     }
+
     /// <summary>
     /// Creates the shell or main window of the application.
     /// </summary>
-    /// <returns>The shell of the application.</returns>
-    /// <remarks>If the returned instance is a <see cref="T:System.Windows.DependencyObject" />, the
-    /// <see cref="T:Prism.Bootstrapper" /> will attach the default <see cref="T:Prism.Regions.IRegionManager" /> of
-    /// the application in its <see cref="F:Prism.Regions.RegionManager.RegionManagerProperty" /> attached property
-    /// in order to be able to add regions by using the <see cref="F:Prism.Regions.RegionManager.RegionNameProperty" />
-    /// attached property from XAML.</remarks>
+    /// <returns>The shell of the application as an exported instance of the <see cref="MainWindow" /></returns>
     protected override DependencyObject CreateShell()
     {
       return this.Container.GetExportedValue<MainWindow>();
@@ -55,28 +50,34 @@ namespace UAOOI.Networking.ReferenceApplication
     protected override void OnInitialized()
     {
       base.OnInitialized();
-      EventSourceBootstrapper _eventSourceBootstrapper = Container.GetExportedValue<EventSourceBootstrapper>();
-      m_Components.Add(_eventSourceBootstrapper);
-      _eventSourceBootstrapper.Run();
-      Diagnostic.ReferenceApplicationEventSource.Log.StartingApplication();
+       m_EventSourceBootstrapper = Container.GetExportedValue<EventSourceBootstrapper>();
+      m_EventSourceBootstrapper.Run();
+      ReferenceApplicationEventSource.Log.StartingApplication(Settings.Default.MessageHandlerProvider);
       ConsumerDataManagementSetup m_ConsumerConfigurationFactory = Container.GetExportedValue<ConsumerDataManagementSetup>();
-      m_Components.Add(m_ConsumerConfigurationFactory);
       m_ConsumerConfigurationFactory.Setup();
+      m_Components.Add(m_ConsumerConfigurationFactory);
+      ReferenceApplicationEventSource.Log.PartCreated(nameof(ConsumerDataManagementSetup));
       OPCUAServerProducerSimulator m_OPCUAServerProducerSimulator = Container.GetExportedValue<OPCUAServerProducerSimulator>();
       m_OPCUAServerProducerSimulator.Setup();
       m_Components.Add(m_OPCUAServerProducerSimulator);
+      ReferenceApplicationEventSource.Log.PartCreated(nameof(OPCUAServerProducerSimulator));
     }
     #endregion
 
     #region IDisposable
-    public void Dispose()
+    protected override void Dispose(bool disposing)
     {
+      ReferenceApplicationEventSource.Log.EnteringDispose(nameof(AppBootstrapper), disposing);
       m_Components.Dispose();
+      base.Dispose(disposing);
+      //to keep logging it must be disposed as the last operation.
+      m_EventSourceBootstrapper.Dispose();
     }
     #endregion
 
     #region private 
     private CompositeDisposable m_Components = new CompositeDisposable();
+    private EventSourceBootstrapper m_EventSourceBootstrapper;
     private static void AppDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
       HandleException(e.ExceptionObject as Exception);

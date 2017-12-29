@@ -5,10 +5,11 @@ using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using CommonServiceLocator;
 using UAOOI.Common.Infrastructure.Diagnostic;
+using UAOOI.Networking.ReferenceApplication.Diagnostic;
 
 namespace UAOOI.Networking.ReferenceApplication.MEF
 {
-  internal abstract class MefBootstrapper : BootstrapperBase
+  internal abstract class MefBootstrapper : BootstrapperBase, IDisposable
   {
 
     #region BootstrapperBase
@@ -129,6 +130,34 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
       this.Container.ComposeExportedValue<IServiceLocator>(new ServiceLocatorAdapter(this.Container));
       this.Container.ComposeExportedValue<AggregateCatalog>(this.AggregateCatalog);
     }
+
+    #region IDisposable Support
+    private bool disposedValue = false; // To detect redundant calls
+    /// <summary>
+    /// Releases unmanaged and - optionally - managed resources.
+    /// </summary>
+    /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+    protected virtual void Dispose(bool disposing)
+    {
+      if (disposedValue)
+        return;
+      ReferenceApplicationEventSource.Log.EnteringDispose(nameof(MefBootstrapper), disposing);
+      if (disposing)
+      {
+        this.AggregateCatalog.Dispose();
+        this.Container.Dispose();
+      }
+      disposedValue = true;
+    }
+    /// <summary>
+    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
+    public void Dispose()
+    {
+      // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+      Dispose(true);
+    }
+    #endregion
     #endregion
 
   }

@@ -60,14 +60,7 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
     /// <summary>
     /// Creates the shell or main window of the application.
     /// </summary>
-    /// <returns>The shell of the application.</returns>
-    /// <remarks>
-    /// If the returned instance is a <see cref="DependencyObject"/>, the
-    /// <see cref="Bootstrapper"/> will attach the default <see cref="IRegionManager"/> of
-    /// the application in its <see cref="RegionManager.RegionManagerProperty"/> attached property
-    /// in order to be able to add regions by using the <see cref="RegionManager.RegionNameProperty"/>
-    /// attached property from XAML.
-    /// </remarks>
+    /// <returns>The shell of the application as an instance of the <see cref="DependencyObject" /></returns>
     protected virtual DependencyObject CreateShell()
     {
       return null;

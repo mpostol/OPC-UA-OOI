@@ -1,7 +1,4 @@
-﻿
-using System.ComponentModel.Composition;
-using System.Diagnostics.Tracing;
-using UAOOI.Networking.SemanticData.Diagnostics;
+﻿using System.Diagnostics.Tracing;
 
 namespace UAOOI.Networking.ReferenceApplication.Diagnostic
 {
@@ -34,21 +31,35 @@ namespace UAOOI.Networking.ReferenceApplication.Diagnostic
     /// <value>The log.</value>
     internal static ReferenceApplicationEventSource Log { get; } = new ReferenceApplicationEventSource();
 
-    [Event(1, Message = "Application Failure: {0}", Opcode = EventOpcode.Info, Task = EventTask.None, Level = EventLevel.Critical/*, Keywords = Keywords.Diagnostic*/)]
+    [Event(1, Message = "Application Failure: {0}", Opcode = EventOpcode.Info, Task = Tasks.Infrastructure, Level = EventLevel.Error/*, Keywords = Keywords.Diagnostic*/)]
     internal void Failure(string message)
     {
       this.WriteEvent(1, message);
     }
-    [Event(2, Message = "The application has been started.", Opcode = EventOpcode.Start, Task = Tasks.Infrastructure, /*Keywords = Keywords.Setup,*/ Level = EventLevel.Informational)]
-    internal void StartingApplication()
+    [Event(2, Message = "The application has been started using the message handling provider {0}.", Opcode = EventOpcode.Start, Task = Tasks.Infrastructure, /*Keywords = Keywords.Setup,*/ Level = EventLevel.Informational)]
+    internal void StartingApplication(string transportName)
     {
-      this.WriteEvent(2);
+      this.WriteEvent(2, transportName);
     }
-    [Event(3, Message = "Entering method {0}.{1}", Opcode = EventOpcode.Start, Task = Tasks.Infrastructure, /*Keywords = Keywords.Diagnostic,*/ Level = EventLevel.Verbose)]
+    [Event(3, Message = "The part {0} has been just created and configured.", Opcode = EventOpcode.Start, Task = Tasks.Infrastructure, Level = EventLevel.Informational/*, Keywords = Keywords.Setup*/ )]
+    internal void PartCreated(string partName)
+    {
+      this.WriteEvent(3, partName);
+    }
+    [Event(4, Message = "Initialization of {0}", Opcode = EventOpcode.Start, Task = Tasks.Infrastructure, Level = EventLevel.Informational /*, Keywords = Keywords.Setup,*/ )]
+    internal void Initialization(string message)
+    {
+      this.WriteEvent(4, message);
+    }
+    [Event(5, Message = "Entering method {0}.{1}", Opcode = EventOpcode.Start, Task = Tasks.Infrastructure, /*Keywords = Keywords.Diagnostic,*/ Level = EventLevel.Verbose)]
     internal void EnteringMethod(string className, string methodName)
     {
-      if (this.IsEnabled())
-        this.WriteEvent(3, className, methodName);
+      this.WriteEvent(5, className, methodName);
+    }
+    [Event(6, Message = "Entering Dispose method in {0} class disposing = {1}", Opcode = EventOpcode.Start, Task = Tasks.Infrastructure, /*Keywords = Keywords.Diagnostic,*/ Level = EventLevel.Informational)]
+    internal void EnteringDispose(string className, bool disposing)
+    {
+      this.WriteEvent(6, className, disposing);
     }
 
     private ReferenceApplicationEventSource() { }

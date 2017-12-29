@@ -1,10 +1,9 @@
 ﻿
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
+using UAOOI.Networking.ReferenceApplication.Diagnostic;
 using UAOOI.Networking.SemanticData;
-//using UAOOI.Networking.UDPMessageHandler;
 
 namespace UAOOI.Networking.ReferenceApplication.Producer
 {
@@ -14,7 +13,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
   /// </summary>
   [Export]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  internal sealed class OPCUAServerProducerSimulator : DataManagementSetup 
+  internal sealed class OPCUAServerProducerSimulator : DataManagementSetup
   {
 
     #region Composition
@@ -30,14 +29,17 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     {
       try
       {
-        ViewModel.ProducerRestart = new RestartCommand(Restart);
+        ReferenceApplicationEventSource.Log.Initialization($"{nameof(OPCUAServerProducerSimulator)}.{nameof(Setup)} starting");
+        ViewModel.ProducerRestart = new RestartCommand(Restart); //TODO Remove reference of ConsumerDataManagementSetup System.Windows  #239
         ConfigurationFactory = new ProducerConfigurationFactory();
         BindAndStartRunning();
         ViewModel.ProducerErrorMessage = "Running";
+        ReferenceApplicationEventSource.Log.Initialization($" producer engine and starting sending data acomplished");
       }
-      catch (Exception ex)
+      catch (Exception _ex)
       {
-        ViewModel.ProducerErrorMessage = String.Format("Error: {0}", ex.Message);
+        ReferenceApplicationEventSource.Log.LogException(_ex);
+        ViewModel.ProducerErrorMessage = "ERROR";
         Dispose();
       }
     }
@@ -46,12 +48,13 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     #region IDisposable
     protected override void Dispose(bool disposing)
     {
+      ReferenceApplicationEventSource.Log.EnteringDispose(nameof(OPCUAServerProducerSimulator), disposing);
       base.Dispose(disposing);
       if (!disposing)
         return;
-      foreach (IDisposable _toDispose in m_ToDispose)
-        _toDispose.Dispose();
-    } 
+      m_Simulator?.Dispose();
+      m_Simulator = null;
+    }
     #endregion
 
     #region private
@@ -72,12 +75,11 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       }
       private Action m_restart;
     }
-    private List<IDisposable> m_ToDispose = new List<IDisposable>();
     private CustomNodeManager m_Simulator = null;
     private void Restart()
     {
       System.Diagnostics.Debug.Assert(m_Simulator != null);
-       m_Simulator.Dispose();
+      m_Simulator.Dispose();
       BindAndStartRunning();
     }
     private void BindAndStartRunning()

@@ -134,6 +134,7 @@
     <Compile Include="Controls\InteractionRequestedEventArgs.cs" />
     <Compile Include="Controls\ConfigurationEditorOpenCommand.cs" />
     <Compile Include="Controls\OpenFileCommand.cs" />
+    <Compile Include="Diagnostic\ReferenceApplicationEventSourceExtensions.cs" />
     <Compile Include="Diagnostic\NetworkingEventSourceProvider.cs" />
     <Compile Include="Diagnostic\ReferenceApplicationEventSource.cs" />
     <Compile Include="MEF\BootstrapperBase.cs" />

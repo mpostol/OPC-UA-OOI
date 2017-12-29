@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
@@ -15,6 +13,7 @@ using UAOOI.Networking.SemanticData.MessageHandling;
 
 namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
 {
+
   [TestClass]
   public class DefaultServiceRegistrarUnitTest
   {
@@ -50,7 +49,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
       AggregateCatalog _newCatalog = DefaultServiceRegistrar.RegisterServices(_catalog);
       using (CompositionContainer _container = new CompositionContainer(_newCatalog))
       {
-        //Assert.AreEqual<int>(3, _container.Catalog.Parts.Count<ComposablePartDefinition>());
+        Assert.AreEqual<int>(9, _container.Catalog.Parts.Count<ComposablePartDefinition>());
         foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
         {
           Debug.WriteLine("New Part");
@@ -63,8 +62,8 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         Assert.IsNotNull(_messageHandlerFactory);
         INetworkingEventSourceProvider _baseEventSource = _messageHandlerFactory as INetworkingEventSourceProvider;
         Assert.IsNull(_baseEventSource);
-        //IEnumerable<INetworkingEventSourceProvider> _diagnosticProviders = _container.GetExportedValues<INetworkingEventSourceProvider>();
-        //Assert.AreEqual<int>(3, _diagnosticProviders.Count<INetworkingEventSourceProvider>());
+        IEnumerable<INetworkingEventSourceProvider> _diagnosticProviders = _container.GetExportedValues<INetworkingEventSourceProvider>();
+        Assert.AreEqual<int>(3, _diagnosticProviders.Count<INetworkingEventSourceProvider>());
         using (CompositeDisposable _Components = new CompositeDisposable())
         {
           EventSourceBootstrapper _eventSourceBootstrapper = _container.GetExportedValue<EventSourceBootstrapper>();

@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
+using UAOOI.Networking.ReferenceApplication.Diagnostic;
 using UAOOI.Networking.SemanticData;
 
 namespace UAOOI.Networking.ReferenceApplication.Consumer
@@ -24,23 +25,32 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     {
       try
       {
-        ViewModel.Trace("Entering Setup");
-        ViewModel.ConsumerUpdateConfiguration = new RestartCommand(Restart);
+        ReferenceApplicationEventSource.Log.Initialization($"{nameof(ConsumerDataManagementSetup)}.{nameof(Setup)} starting");
+        ViewModel.ConsumerUpdateConfiguration = new RestartCommand(Restart); //TODO Remove reference of ConsumerDataManagementSetup System.Windows  #239
         ConfigurationFactory = new ConsumerConfigurationFactory();
         MainWindowModel _model = new MainWindowModel() { ViewModelBindingFactory = ViewModel };
         BindingFactory = _model;
         EncodingFactory = _model;
-        ViewModel.Trace("Initialize consumer engine and start receiving UDP frames.");
         Start();
         ViewModel.ConsumerErrorMessage = "Running";
+        ReferenceApplicationEventSource.Log.Initialization($" consumer engine and starting receiving data acomplished");
       }
-      catch (Exception ex)
+      catch (Exception _ex)
       {
-        string _errorMessage = $"Error: {ex.Message}";
-        ViewModel.Trace(_errorMessage);
-        ViewModel.ConsumerErrorMessage = _errorMessage;
+        ReferenceApplicationEventSource.Log.LogException(_ex);
+        ViewModel.ConsumerErrorMessage = "ERROR";
         Dispose();
       }
+    }
+    #endregion
+
+    #region IDisposable
+    protected override void Dispose(bool disposing)
+    {
+      ReferenceApplicationEventSource.Log.EnteringDispose(nameof(ConsumerDataManagementSetup), disposing);
+      base.Dispose(disposing);
+      if (!disposing || m_Disposed)
+        return;
     }
     #endregion
 
@@ -66,21 +76,14 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
       private Action m_restart;
     }
     private bool m_Disposed = false;
-
     private void Restart()
     {
       ViewModel.Trace("Entering Restart");
       Start();
     }
     #endregion
-    protected override void Dispose(bool disposing)
-    {
-      base.Dispose(disposing);
-      if (!disposing || m_Disposed)
-        return;
-    }
-  }
 
+  }
 }
 
 

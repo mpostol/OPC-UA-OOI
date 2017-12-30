@@ -11,7 +11,7 @@ using UAOOI.Networking.ReferenceApplication.Properties;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
-  internal class AppBootstrapper : MefBootstrapper 
+  internal class AppBootstrapper : MefBootstrapper
   {
 
     #region MefBootstrapper
@@ -49,18 +49,27 @@ namespace UAOOI.Networking.ReferenceApplication
     }
     protected override void OnInitialized()
     {
-      base.OnInitialized();
-       m_EventSourceBootstrapper = Container.GetExportedValue<EventSourceBootstrapper>();
-      m_EventSourceBootstrapper.Run();
-      ReferenceApplicationEventSource.Log.StartingApplication(Settings.Default.MessageHandlerProvider);
-      ConsumerDataManagementSetup m_ConsumerConfigurationFactory = Container.GetExportedValue<ConsumerDataManagementSetup>();
-      m_ConsumerConfigurationFactory.Setup();
-      m_Components.Add(m_ConsumerConfigurationFactory);
-      ReferenceApplicationEventSource.Log.PartCreated(nameof(ConsumerDataManagementSetup));
-      OPCUAServerProducerSimulator m_OPCUAServerProducerSimulator = Container.GetExportedValue<OPCUAServerProducerSimulator>();
-      m_OPCUAServerProducerSimulator.Setup();
-      m_Components.Add(m_OPCUAServerProducerSimulator);
-      ReferenceApplicationEventSource.Log.PartCreated(nameof(OPCUAServerProducerSimulator));
+      try
+      {
+        base.OnInitialized();
+        m_EventSourceBootstrapper = Container.GetExportedValue<EventSourceBootstrapper>();
+        m_EventSourceBootstrapper.Run();
+        ReferenceApplicationEventSource.Log.StartingApplication(Settings.Default.MessageHandlerProvider);
+        ConsumerDataManagementSetup m_ConsumerConfigurationFactory = Container.GetExportedValue<ConsumerDataManagementSetup>();
+        m_ConsumerConfigurationFactory.Setup();
+        m_Components.Add(m_ConsumerConfigurationFactory);
+        ReferenceApplicationEventSource.Log.PartCreated(nameof(ConsumerDataManagementSetup));
+        OPCUAServerProducerSimulator m_OPCUAServerProducerSimulator = Container.GetExportedValue<OPCUAServerProducerSimulator>();
+        m_OPCUAServerProducerSimulator.Setup();
+        m_Components.Add(m_OPCUAServerProducerSimulator);
+        ReferenceApplicationEventSource.Log.PartCreated(nameof(OPCUAServerProducerSimulator));
+      }
+      catch (Exception _ex)
+      {
+        ReferenceApplicationEventSource.Log.EnteringMethod(nameof(AppBootstrapper), $"{nameof(AppBootstrapper)} at catch (Exception _ex)");
+        ReferenceApplicationEventSource.Log.LogException(_ex);
+        throw;
+      }
     }
     #endregion
 
@@ -80,7 +89,10 @@ namespace UAOOI.Networking.ReferenceApplication
     private EventSourceBootstrapper m_EventSourceBootstrapper;
     private static void AppDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
-      HandleException(e.ExceptionObject as Exception);
+      ReferenceApplicationEventSource.Log.EnteringMethod(nameof(AppBootstrapper), nameof(AppDomainUnhandledException));
+      Exception _ex = e.ExceptionObject as Exception;
+      ReferenceApplicationEventSource.Log.LogException(_ex);
+      HandleException(_ex);
     }
     private static void HandleException(Exception ex)
     {

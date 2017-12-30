@@ -24,3 +24,8 @@ Starting point for this description is available at:
 - description of **IoT/IIoT** paradigms.
 - Object Oriented Internet Networking is empowering the Industrial Internet of Things (IIOT) and Industrie 4.0.
 - The role of MQTT and AMQP- How to get them together in a consistent meaningful way.
+
+## How to get started
+
+In folder [OPC-UA-OOI/Networking/ReferenceApplication/Release.bin/](https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/ReferenceApplication/Release.bin) I have added binary release of the `ReferenceApplication` containing ready to use binaries. Unzip and run exe file to get started. Nuget package will be created after getting more feedback from MQTT and AMQP testing, which are in progress.
+

@@ -12,6 +12,12 @@ The preliminary code help documentation is here: http://www.commsvr.com/Download
 
 The project is in development stage - major changes are expected.
 
+## Current release
+
+The nuget package is available at:
+
+[UAOOI.Networking.SemanticData](https://www.nuget.org/packages/UAOOI.Networking.SemanticData/)
+
 ## Architecture
 
 The library is designed to be a foundation for developing application programs that are parties of message centric communication pattern. The diagram presents relationship between the `DataMangement` library and other communication parties where the library is expanded to provide custom functionality.

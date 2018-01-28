@@ -5,7 +5,6 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".txt" #>
 The documentation is available online at: https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANetworkingReferenceApplication#ua-data-example-application
-The installation package is available here: http://www.commsvr.com/COInstal/UANetworking/uand.html
 
 Current release:
 
@@ -19,13 +18,6 @@ Assembly Version:       <#=NetworkingDataVersion#><#=NetworkingDataPrerelease#>
 Assembly Date:          <#=m_Date#>
 
 The main changes and new functionalities are listed below:
-
-1. Updated the library up to new Pub/Sub Draft 14 with new protocol revision 140
-2. Added support of many published (different PublisherId) by an application at the same time. Changed the configuration schema.
-3. Added support for any external configuration file editor. Released and tested with CAS.CommServerUAOOI.ConfigurationEditor.dll
-4. Improved plug-in functionality for external logging component.
-5. Rearranged project folders structure and improved documentation.
-6. Many bug fixes and improvements.
 
 Detailed description is available at: https://github.com/mpostol/OPC-UA-OOI/commits/master
 _____________________________________________________________________________________________

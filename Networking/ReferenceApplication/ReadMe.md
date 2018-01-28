@@ -19,56 +19,11 @@ By the user interface (UI) remote host name and port numbers can be modified. Th
 
 ### Application installation
 
-The application installation package is available here:
-[CAS.UAOOI.UANetworkingDemo](http://www.commsvr.com/COInstal/UANetworking/uand.html)
+The binary release containing ready to use reference application is avalable in the folder [Release.bin](Release.bin). Unzip and run the exe file to get started. 
 
 ### Version History
 
-Detailed description is available at: https://github.com/mpostol/OPC-UA-OOI/commits/master
-
-Assembly Version:       1.00.16
-Assembly Date:          2016-01-09
-
-The main changes and new functionalities are listed below:
-
-1. IP Multi-cast support - it is configurable on the UI
-2. Arrays and `ByteString` support - array can be configured in the configuration file
-3. Configuration updated to meet the interoperability testing requirements
-4. Improved diagnostic - added log file tracing details related to the UDP protocol communication
-5. Added new unit tests
-5. Improved tracking to the text list available on the user interface.
-7. Fixed problems with reloading Nuget packages
-6. fixed many errors.
-
-Assembly Version:       1.00.13
-Assembly Date:          2015-12-19
-
-The main changes and new functionalities are listed below:
-
-1. It is bug fix release:
- - Raise condition if there are many DataSets
- - Improved documentation and application user intrface
-
-Assembly Version:       1.00.11
-Assembly Date:          2015-12-16
-
-The main changes and new functionalities are listed below:
-
-1. It is bug fix release - DataSetWriter must be encoded as UInt16 (https://github.com/mpostol/OPC-UA-OOI/issues/144).
-
-Assembly Version:       1.00.10; Assembly Date:          2015-12-15
-
-The main changes and new functionalities are listed below:
-
-1. It supports the protocol version 1.10
-2. It is ready for IOP - implements selected test cases described in `PubSub_Proto_test_matrix_v0.4_docx`. DataSet fields collection and destination address/port is configurable.
-
-Assembly Version:       1.00.09; Assembly Date:          2015-11-02
-
-The main changes and new functionalities are listed below:
-
-1. Initial release
-2. It support the protocol version 1.09
+Detailed description is available in file [ReadMe.txt](ReadMe.txt)
 
 ### Troubleshooting
 

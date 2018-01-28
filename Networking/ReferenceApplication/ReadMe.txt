@@ -1,5 +1,4 @@
 ﻿The documentation is available online at: https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANetworkingReferenceApplication#ua-data-example-application
-The installation package is available here: http://www.commsvr.com/COInstal/UANetworking/uand.html
 
 Current release:
 
@@ -10,16 +9,9 @@ Assembly Product:       OPC UA OOI SemanticData
 Assembly Copyright:     Copyright (c) 2017 CommServer
 Assembly Trademark:     OPC-UA-OOI
 Assembly Version:       3.0.1-Echo
-Assembly Date:          27.01.2018
+Assembly Date:          28.01.2018
 
 The main changes and new functionalities are listed below:
-
-1. Updated the library up to new Pub/Sub Draft 14 with new protocol revision 140
-2. Added support of many published (different PublisherId) by an application at the same time. Changed the configuration schema.
-3. Added support for any external configuration file editor. Released and tested with CAS.CommServerUAOOI.ConfigurationEditor.dll
-4. Improved plug-in functionality for external logging component.
-5. Rearranged project folders structure and improved documentation.
-6. Many bug fixes and improvements.
 
 Detailed description is available at: https://github.com/mpostol/OPC-UA-OOI/commits/master
 _____________________________________________________________________________________________
@@ -35,6 +27,28 @@ mailto://commserver@cas.eu
 http://www.commsvr.com/
 
 Version History
+
+Assembly Version:       3.0.1-Echo
+Assembly Date:          28.01.2018
+
+The main changes and new functionalities are listed below:
+1. Add consistent tracing infrastructure
+2. MEF has been used to compose the Reference Application
+3. IMessageHandlerFactory - moved implementation to separate library
+4. Used Nuget packages for components required by Reference Application.
+5. fixed some errors.
+
+Assembly Version:       2.0.0-Charlie
+Assembly Date:          2016-06-19
+
+The main changes and new functionalities are listed below:
+
+1. Updated the library up to new Pub/Sub Draft 14 with new protocol revision 140
+2. Added support of many published (different PublisherId) by an application at the same time. Changed the configuration schema.
+3. Added support for any external configuration file editor. Released and tested with CAS.CommServerUAOOI.ConfigurationEditor.dll
+4. Improved plug-in functionality for external logging component.
+5. Rearranged project folders structure and improved documentation.
+6. Many bug fixes and improvements.
 
 Assembly Version:       1.00.16
 Assembly Date:          2016-01-09

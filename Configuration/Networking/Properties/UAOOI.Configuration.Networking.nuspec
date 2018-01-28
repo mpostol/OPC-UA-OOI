@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>UAOOI.Configuration.Networking</id>
-    <version>2.0.3-Delta</version>
+    <version>2.0.4-Echo</version>
     <title>UAOOI.Configuration.Networking - UA Data Application Configuration</title>
     <authors>commsvr.com</authors>
     <owners>commsvr.com</owners>
@@ -25,7 +25,9 @@
     <tags>Object Oriented Internet, OPC UA, CommServer, ASMD, Address Space Model Designer.</tags>
   </metadata>
   <files>
-        <file src="lib\net461\_._" target="lib\net461\_._" />
+    <file src="..\bin\Release\UAOOI.Common.Infrastructure.dll" target="lib\net461\UAOOI.Common.Infrastructure.dll" />
+    <file src="..\bin\Release\UAOOI.Configuration.Networking.dll" target="lib\net461\UAOOI.Configuration.Networking.dll" />
+    <file src="..\bin\Release\UAOOI.Configuration.Networking.xml" target="lib\net461\UAOOI.Configuration.Networking.xml" />
   </files>
 </package>
 

@@ -13,7 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("UAOOI.Configuration.Networking")]
-[assembly: AssemblyDescription("OPC UA OOI Configuration: UA Data Application Configuration")]
+[assembly: AssemblyDescription("OOI Networking Configuration: UA Data Application Configuration")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
 [assembly: AssemblyProduct("OPC UA OOI SemanticData")]
@@ -21,8 +21,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("OPC-UA-OOI")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("2.0.3.*")]
-[assembly: AssemblyFileVersion("2.0.3")]
+[assembly: AssemblyVersion("2.0.4.*")]
+[assembly: AssemblyFileVersion("2.0.4")]
 [assembly: InternalsVisibleTo(
   "UAOOI.SemanticData.DataManagementUnitTest, PublicKey=" +
     "00240000048000009400000006020000002400005253413100040000010001005b97a0972ff6b13a" +

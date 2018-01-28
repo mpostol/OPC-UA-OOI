@@ -1,6 +1,6 @@
 ﻿//_______________________________________________________________
-//  Title   : Assembly info for: SemanticData DataManagement
-//  System  : Microsoft VisualStudio 2015 / C#
+//  Title   : Assembly info for: Semantic Data Reactive Networking Library
+//  System  : Microsoft VisualStudio 2018 / C#
 //
 //  Copyright (c) 2017 CommServer
 //  +48 608 619 899
@@ -12,17 +12,17 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("SemanticData DataManagement")]
-[assembly: AssemblyDescription("OPC UA OOI Networking: Library supporting management of Semantic Data")]
+[assembly: AssemblyTitle("Semantic Data Reactive Networking Library")]
+[assembly: AssemblyDescription("OOI Reactive Networking: Semantic Data Reactive Networking based on OPC UA Part 14 Pub/Sub")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
-[assembly: AssemblyProduct("OPC UA OOI Networking")]
+[assembly: AssemblyProduct("OOI Reactive Networking")]
 [assembly: AssemblyCopyright("Copyright (c) 2017 CommServer")]
 [assembly: AssemblyTrademark("OPC-UA-OOI")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("3.0.0.*")]
-[assembly: AssemblyFileVersion("3.0.0")]
+[assembly: AssemblyVersion("3.0.1.*")]
+[assembly: AssemblyFileVersion("3.0.1")]
 [assembly: InternalsVisibleTo(
   "UAOOI.Networking.SemanticData.UnitTest, PublicKey=" +
     "00240000048000009400000006020000002400005253413100040000010001005b97a0972ff6b13a" +

@@ -69,6 +69,12 @@
     <Reference Include="System.ServiceModel.Channels" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
+    <Reference Include="UAOOI.Common.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Configuration.Networking.2.0.4-Echo\lib\net461\UAOOI.Common.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="UAOOI.Configuration.Networking, Version=2.0.4.42106, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Configuration.Networking.2.0.4-Echo\lib\net461\UAOOI.Configuration.Networking.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -117,10 +123,6 @@
     <ProjectReference Include="..\..\SemanticData\Networking.SemanticData.csproj">
       <Project>{7f4ded4e-5933-4229-b9cc-51da49678904}</Project>
       <Name>Networking.SemanticData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Configuration\Networking\Configuration.Networking.csproj">
-      <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
-      <Name>Configuration.Networking</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

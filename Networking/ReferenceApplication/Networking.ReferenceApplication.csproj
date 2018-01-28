@@ -120,6 +120,15 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UAOOI.Common.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.Configuration.Networking.2.0.4-Echo\lib\net461\UAOOI.Common.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="UAOOI.Configuration.Networking, Version=2.0.4.42106, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.Configuration.Networking.2.0.4-Echo\lib\net461\UAOOI.Configuration.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UAOOI.Networking.SemanticData, Version=3.0.1.17471, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.Networking.SemanticData.3.0.1-Echo\lib\net461\UAOOI.Networking.SemanticData.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -250,18 +259,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj">
-      <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
-      <Name>Common.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj">
-      <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
-      <Name>Configuration.Networking</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj">
-      <Project>{7f4ded4e-5933-4229-b9cc-51da49678904}</Project>
-      <Name>Networking.SemanticData</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UDPMessageHandler\Networking.UDPMessageHandler.csproj">
       <Project>{D2EB89F9-321E-46E4-BA79-679138B82B23}</Project>
       <Name>Networking.UDPMessageHandler</Name>

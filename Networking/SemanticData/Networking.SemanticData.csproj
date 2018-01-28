@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UAOOI.Networking.SemanticData</RootNamespace>
-    <AssemblyName>UAOOI.Networking.SemanticData</AssemblyName>
+    <AssemblyName>UAOOI.Networking.SemanticData.dbg</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\UAOOI.Networking.SemanticData.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\UAOOI.Networking.SemanticData.dbg.xml</DocumentationFile>
     <NoWarn>IDE0001, IDE0002,IDE0003,1591</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
@@ -32,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\UAOOI.Networking.SemanticData.dbg.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -51,6 +52,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UAOOI.Common.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.Configuration.Networking.2.0.4-Echo\lib\net461\UAOOI.Common.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="UAOOI.Configuration.Networking, Version=2.0.4.42106, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.Configuration.Networking.2.0.4-Echo\lib\net461\UAOOI.Configuration.Networking.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Association.cs" />
@@ -139,19 +146,22 @@
     <None Include="README.md" />
     <None Include="READMEGettingStartedTutorial.md" />
     <None Include="README_MQTTMapping.md" />
+    <None Include="Networking.SemanticData.nuspec">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Networking.SemanticData.tt</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
     </Content>
+    <Content Include="Networking.SemanticData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Networking.SemanticData.nuspec</LastGenOutput>
+    </Content>
     <None Include="READMEDataDiscoveryAndBinding.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj">
-      <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
-      <Name>Configuration.Networking</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

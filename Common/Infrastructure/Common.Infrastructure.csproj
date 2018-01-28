@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UAOOI.Common.Infrastructure</RootNamespace>
-    <AssemblyName>UAOOI.Common.Infrastructure</AssemblyName>
+    <AssemblyName>UAOOI.Common.Infrastructure.dbg</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\UAOOI.Common.Infrastructure.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\UAOOI.Common.Infrastructure.dbg.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

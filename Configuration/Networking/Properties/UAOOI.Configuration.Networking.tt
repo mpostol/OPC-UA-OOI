@@ -27,9 +27,11 @@
     <tags>Object Oriented Internet, OPC UA, CommServer, ASMD, Address Space Model Designer.</tags>
   </metadata>
   <files>
-        <file src="lib\net461\_._" target="lib\net461\_._" />
+    <file src="..\bin\Release\UAOOI.Common.Infrastructure.dll" target="lib\net461\UAOOI.Common.Infrastructure.dll" />
+    <file src="..\bin\Release\UAOOI.Configuration.Networking.dll" target="lib\net461\UAOOI.Configuration.Networking.dll" />
+    <file src="..\bin\Release\UAOOI.Configuration.Networking.xml" target="lib\net461\UAOOI.Configuration.Networking.xml" />
   </files>
 </package>
 
-<#@ include file = "..\..\..\CommonResources\T4Definitions\Model.t4"  #>
+<#@ include file = "..\..\..\CommonResources\T4Definitions\Model.t4" #>
 <#+ string m_AssemblyTitle = "UAOOI.Configuration.Networking"; #>

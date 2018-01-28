@@ -25,14 +25,14 @@ string SemanticDataPrerelease = "-Bravo";
 string SemanticDataProduct = "OPC UA OOI SemanticData";
 
 //UAOOI.Configuration
-string ConfigurationVersion = "2.0.3";
-string ConfigurationPrerelease = "-Delta";
-string ConfigurationProduct = "OPC UA OOI Configuration";
+string ConfigurationVersion = "2.0.4";
+string ConfigurationPrerelease = "-Echo";
+string ConfigurationProduct = "OOI Networking Configuration";
 
 //UAOOI.Networking
-string NetworkingDataVersion = "3.0.0";
-string NetworkingDataPrerelease = "-Delta";
-string NetworkingDataProduct = "OPC UA OOI Networking";
+string NetworkingDataVersion = "3.0.1";
+string NetworkingDataPrerelease = "-Echo";
+string NetworkingDataProduct = "OOI Reactive Networking";
 
 //Note: 
 //Alpha, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, 

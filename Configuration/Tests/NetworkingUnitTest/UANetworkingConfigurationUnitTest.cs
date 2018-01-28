@@ -210,7 +210,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
         //An aggregate catalog that combines multiple catalogs
         AggregateCatalog _catalog = new AggregateCatalog();
         //Create the CompositionContainer with the parts in the catalog
-        _catalog.Catalogs.Add(new DirectoryCatalog(System.IO.Path.GetDirectoryName(typeof(UANetworkingConfigurationUnitTest).Assembly.Location)));
+        _catalog.Catalogs.Add(new AssemblyCatalog(typeof(UAOOI.Common.Infrastructure.Diagnostic.ITraceSource).Assembly));
         m_Container = new CompositionContainer(_catalog);
         //Fill the imports of this object
         m_Container.ComposeParts(this);
@@ -225,7 +225,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
         //An aggregate catalog that combines multiple catalogs
         AggregateCatalog _catalog = new AggregateCatalog();
         //Create the CompositionContainer with the parts in the catalog
-        _catalog.Catalogs.Add(new DirectoryCatalog(System.IO.Path.GetDirectoryName(typeof(UANetworkingConfigurationUnitTest).Assembly.Location)));
+        _catalog.Catalogs.Add(new AssemblyCatalog(typeof(UAOOI.Common.Infrastructure.Diagnostic.ITraceSource).Assembly));
         m_Container = new CompositionContainer(_catalog);
         //Fill the imports of this object
         m_Container.ComposeParts(this);

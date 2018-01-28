@@ -46,6 +46,15 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UAOOI.Common.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.Configuration.Networking.2.0.4-Echo\lib\net461\UAOOI.Common.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="UAOOI.Configuration.Networking, Version=2.0.4.42106, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.Configuration.Networking.2.0.4-Echo\lib\net461\UAOOI.Configuration.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UAOOI.Networking.SemanticData, Version=3.0.1.17471, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.Networking.SemanticData.3.0.1-Echo\lib\net461\UAOOI.Networking.SemanticData.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryUDPPackageReader.cs" />
@@ -64,16 +73,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj">
-      <Project>{7f4ded4e-5933-4229-b9cc-51da49678904}</Project>
-      <Name>Networking.SemanticData</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
       <Link>DependencyValidation1.layerdiagram</Link>
       <Visible>False</Visible>
     </AdditionalFiles>
+    <None Include="app.config" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
   </ItemGroup>

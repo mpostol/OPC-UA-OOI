@@ -3,14 +3,14 @@ The installation package is available here: http://www.commsvr.com/COInstal/UANe
 
 Current release:
 
-Assembly Title:         OPC UA OOI Networking
+Assembly Title:         OOI Reactive Networking
 Assembly Description:   UAOOI SemanticData UA-Networking Reference Application.
 Assembly Company:       commsvr.com
 Assembly Product:       OPC UA OOI SemanticData
 Assembly Copyright:     Copyright (c) 2017 CommServer
 Assembly Trademark:     OPC-UA-OOI
-Assembly Version:       3.0.0-Delta
-Assembly Date:          2017-10-28
+Assembly Version:       3.0.1-Echo
+Assembly Date:          27.01.2018
 
 The main changes and new functionalities are listed below:
 

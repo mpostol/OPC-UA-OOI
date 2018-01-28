@@ -83,7 +83,7 @@ namespace UAOOI.Configuration.Networking
     /// By default an empty private implementation (do nothing) of the <see cref="ITraceSource"/> is provided.
     /// </summary>
     /// <value>The trace source - an implementation of the <see cref="ITraceSource"/>.</value>
-    [Import(typeof(ITraceSource))]
+    //[Import(typeof(ITraceSource))] //TODO
     public ITraceSource TraceSource
     {
       get { return b_TraceSource; }

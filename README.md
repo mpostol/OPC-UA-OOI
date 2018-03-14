@@ -2,6 +2,8 @@
 
 [![Join the chat at https://gitter.im/mpostol/OPC-UA-OOI](https://badges.gitter.im/mpostol/OPC-UA-OOI.svg)](https://gitter.im/mpostol/OPC-UA-OOI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+[![DOI](https://zenodo.org/badge/33917970.svg)](https://zenodo.org/badge/latestdoi/33917970)
+
 ## CHARTER
 
 ### What is Object Oriented Internet

@@ -43,6 +43,10 @@
     <ResolveCrefLinks>true</ResolveCrefLinks>
     <HeaderText>UAOOI.ObjectOrientedInternet</HeaderText>
     <FooterText>Rel 2 prerelease</FooterText>
+    <ConceptualContent>
+      <ContentLayout />
+      <MediaContent />
+    </ConceptualContent>
     <SelectedProjects>
       <SelectedProject>Common.Infrastructure</SelectedProject>
       <SelectedProject>Configuration.Networking</SelectedProject>

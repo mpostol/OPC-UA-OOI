@@ -31,7 +31,7 @@ Integration services are responsible for exchanging the data and metadata with o
 
 In all the cases above the destination representation, i.e. message content, object types and database schema can be prepared in advance at design time using the OPC UA Information Model.
 
-**UA Data Networking** is an example of transferring the UA Semantic Data over the network using message centric data transport standardized by the OPC UA Specification Part 14 Pub/sub Draft 1.04.08. The description of its architecture is captured in
+**UA Data Networking** is an example of transferring the UA Semantic Data over the network using message centric data transport standardized by the OPC UA Specification [Part 14 Pub/Sub](https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/). The description of its architecture is captured in
 [UA SemanticData Message Centric Communication](./README.MessageCentricCommunication.md#ua-semanticdata-message-centric-communication).
 
 This concept has been implemented in the project [Networking of SemanticData Library](../Networking/SemanticData#networking-of-semanticdata-library). This project provides an SDK library that can be used as a foundation of the communication infrastructure deployment. The [UA Data Example Application](../Networking/ReferenceApplication#ua-data-example-application) contains a reference WPF application.

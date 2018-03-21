@@ -2,7 +2,7 @@
  
 ## Motivation
 
-Main goal of this document is to provide instruction on how to expand the transport layer for OOI Networking of the **Semantic Data** over the Message Queue Telemetry Transport (MQTT) to be compliant with the specification mentioned in the section *Normative references*. Implementation of the `Messages` exchange over the MQTT protocol is out of the scope of this project. The library is intentionaly designed to use any transport protocol meeting some basic requirements using external components. External components implementing MQTT connectivity can be seamlessly integrated with this SDK using dependency injection concept ilustrated by the following domain model:
+Main goal of this document is to provide instruction on how to expand the transport layer for OOI Networking of the **Semantic Data** over the Message Queue Telemetry Transport (MQTT) to be compliant with the specification mentioned in the section *Normative references*. Implementation of the `Messages` exchange over the MQTT protocol is out of the scope of this project. The library intentionally is designed to use any transport protocol meeting some basic requirements using external components. External components implementing MQTT connectivity can be seamlessly integrated with this SDK using dependency injection concept illustrated by the following domain model:
 
 ![](../../CommonResources/Media/DataManagementExternalLibraries.png)
 
@@ -13,7 +13,7 @@ Instruction for implementer are covered in the section *Notices for Implementer*
 The following documents, in whole or in part, are normatively referenced in this document and are indispensable for its application.
 
 1. [OASIS Standards MQTT Version 3.1.1 specification](http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/mqtt-v3.1.1.html)
-2. [OPC Unified Architecture Specification Part 14: PubSub Release Candidate 1.04.24 February 9, 2017](https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/)
+2. [OPC Unified Architecture Specification Part 14: PubSub](https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/)
 
 ## Introduction
 
@@ -82,8 +82,8 @@ Subscribers are the consumers of Messages, which are polled from the underlying 
 
 OPC UA PubSub interoperability doesn't depend on any functionality provided by the Message Oriented Middleware. In general, according to the OPC UA PubSub Specification Subscriber and Publisher can be interconnected using any transparent Messages Transport infrastructure providing unreliable service that provides no guarantees for delivery and no protection from duplication. Applying MQTT means that some functionality related to communication reliability, data selection and distribution is delegated to the MQTT `Server`.
 
-> By design the component `DataManagemnt` implemented in the project [Networking.SemanticData](https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/SemanticData) is compliant with the OPC UA PubSub specification.
-> It must be stressed that because the OPC UA Secyfication Part 14 PubSub is not jet released content of this document may change in future. 
+> By design the component `DataManagement` implemented in the project [Networking.SemanticData](https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/SemanticData) is compliant with the [OPC UA Specification Part 14 PubSub](https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/).
+> It must be stressed that because the [OPC UA Specification Part 14 PubSub](https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/) has been just released the content of this document may change in future.
 
 ## MQTT mapping.
 

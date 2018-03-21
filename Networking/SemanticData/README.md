@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is aimed to provide a library for Part 14 PubSub Draft 1.04. using the concept described in the [OPC UA Data Processing Outside the Server](../../SemanticDataSolution#opc-ua-data-processing-outside-the-server)
+This project is aimed on implementation of a [Part 14 PubSub 1.04](https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/) using the concept described in the [OPC UA Data Processing Outside the Server](../../SemanticDataSolution#opc-ua-data-processing-outside-the-server)
 
 For more in-depth information about creating UA Applications exchanging data over the network, see [Getting Started Tutorial](./READMEGettingStartedTutorial.md#getting-started-tutorial)
 
@@ -20,7 +20,7 @@ The nuget package is available at:
 
 ## Architecture
 
-The library is designed to be a foundation for developing application programs that are parties of message centric communication pattern. The diagram presents relationship between the `DataMangement` library and other communication parties where the library is expanded to provide custom functionality.
+The library is designed to be a foundation for developing application programs that are parties of message centric communication pattern. The diagram presents relationship between the `DataManagement` library and other communication parties where the library is expanded to provide custom functionality.
 
 ![Architecture](../../CommonResources/Media/DataManagementGeneralization.png)
 

@@ -3,13 +3,11 @@ using CAS.UA.IServerConfiguration;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.ComponentModel.Composition;
 using System.Linq;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings.UnitTest.Exports
 {
-  [Export(typeof(IInstanceConfigurationFactory))]
   public class InstanceConfigurationFactory : IInstanceConfigurationFactory
   {
     public IInstanceConfiguration GetIInstanceConfiguration(DataSetConfiguration dataSet, ObservableCollection<MessageHandlerConfiguration> availableHandlers, TraceEvent trace, Action onModification)

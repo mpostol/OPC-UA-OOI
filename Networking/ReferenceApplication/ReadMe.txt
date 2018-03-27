@@ -9,7 +9,7 @@ Assembly Product:       OPC UA OOI SemanticData
 Assembly Copyright:     Copyright (c) 2017 CommServer
 Assembly Trademark:     OPC-UA-OOI
 Assembly Version:       3.0.1-Echo
-Assembly Date:          28.01.2018
+Assembly Date:          2018-03-27
 
 The main changes and new functionalities are listed below:
 

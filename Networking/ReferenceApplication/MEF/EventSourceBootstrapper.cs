@@ -53,8 +53,6 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
         m_FileSubscription?.Dispose();
         m_FileSubscription = null;
       }
-      // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-      // TODO: set large fields to null.
       disposedValue = true;
     }
     // This code added to correctly implement the disposable pattern.

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>UAOOI.Configuration.Networking</id>
-    <version>2.0.4-Echo</version>
+    <version>3.0.0-Alpha</version>
     <title>UAOOI.Configuration.Networking - UA Data Application Configuration</title>
     <authors>commsvr.com</authors>
     <owners>commsvr.com</owners>

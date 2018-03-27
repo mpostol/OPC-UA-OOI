@@ -18,7 +18,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Diagnostics
       EventEntry _lastEvent = null;
       int _calls = 0;
       ObservableEventListener _listener = new ObservableEventListener();
-      IDisposable subscription = _listener.Subscribe(x => { _calls++; _lastEvent = x; });
+      IDisposable subscription = _listener.Subscribe<EventEntry>(x => { _calls++; _lastEvent = x; });
       using (SinkSubscription<ObservableEventListener> _sinkSubscription = new SinkSubscription<ObservableEventListener>(subscription, _listener))
       {
         Assert.IsNotNull(_sinkSubscription.Sink);

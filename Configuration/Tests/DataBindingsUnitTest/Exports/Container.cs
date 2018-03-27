@@ -1,0 +1,31 @@
+﻿
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace UAOOI.Configuration.DataBindings.UnitTest.Exports
+{
+  internal class Container : CommonServiceLocator.ServiceLocatorImplBase
+  {
+
+    public Container()
+    {
+      m_ObjectsContainer = new List<Object>() { new Logger { }, new ConfigurationEditorBase(), new InstanceConfigurationFactory() };
+    }
+
+    private readonly IEnumerable<object> m_ObjectsContainer;
+
+    #region ServiceLocatorImplBase
+    protected override object DoGetInstance(Type requestedType, string key)
+    {
+      return String.IsNullOrEmpty(key) ? m_ObjectsContainer.First(o => requestedType.IsAssignableFrom(o.GetType()))
+                                       : m_ObjectsContainer.First(o => requestedType.IsAssignableFrom(o.GetType()) && Equals(key, o.GetType().FullName));
+    }
+    protected override IEnumerable<object> DoGetAllInstances(Type requestedType)
+    {
+      return m_ObjectsContainer.Where(o => requestedType.IsAssignableFrom(o.GetType()));
+    }
+
+    #endregion
+  }
+}

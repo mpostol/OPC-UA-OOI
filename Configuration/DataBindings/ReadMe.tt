@@ -20,8 +20,8 @@ Assembly Date:          <#=m_Date#>
 
 The main changes and new functionalities are listed below:
 
-1.Maintanence release - unimportant changes
- * added read-me files
+1. CommonServiceLocator is used to resolve dependency injection for all libraries.
+ 
 
 ____________________________________________________________________________________________
 For assistance, contact:

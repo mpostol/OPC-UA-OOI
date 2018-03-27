@@ -1,12 +1,14 @@
 ﻿
+using CommonServiceLocator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Configuration.Networking.UnitTest.CommonServiceLocatorInstrumentation;
 
 namespace UAOOI.Configuration.Networking.UnitTest
 {
@@ -21,6 +23,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void CreatorTest()
     {
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => null);
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       Assert.IsNotNull(_newConfiguration);
       Assert.IsNull(_newConfiguration.ConfigurationData);
@@ -29,22 +32,23 @@ namespace UAOOI.Configuration.Networking.UnitTest
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
-    public void ComposePartsTest()
+    public void CustomLoggerTraceSourceTest()
     {
+      Logger _Logger = new Logger();
+      Container _container = new Container(new Object[] { _Logger });
+      ServiceLocator.SetLocatorProvider(() => _container);
+      Assert.IsTrue(ServiceLocator.IsLocationProviderSet);
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
-      Assert.IsNotNull(_newConfiguration);
-      Assert.IsNull(_newConfiguration.ConfigurationData);
-      Assert.IsNull(_newConfiguration.CurrentConfiguration);
-      Assert.IsNotNull(_newConfiguration.TraceSource);
-      _newConfiguration.ComposeParts();
-      Assert.IsNotNull(_newConfiguration.TraceSource);
+      Assert.AreSame(_Logger, _newConfiguration.TraceSource);
+      Assert.AreEqual<int>(0, _Logger.TraceLogList.Count);
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void ReadConfigurationTest()
     {
+      Logger _Logger = new Logger();
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new Object[] { _Logger }));
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
-      _newConfiguration.ComposeParts();
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");
       Assert.IsTrue(_configFile.Exists);
       bool _ConfigurationFileChanged = false;
@@ -54,14 +58,20 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.IsTrue(_ConfigurationFileChanged);
       Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
       Assert.IsNotNull(_newConfiguration.ConfigurationData);
-
+      Assert.AreEqual<int>(1, _Logger.TraceLogList.Count);
+      Logger.TraceLogEntity _logEntry = _Logger.TraceLogList[0];
+      Assert.AreEqual<TraceEventType>(TraceEventType.Verbose, _logEntry.EventType);
+      Assert.AreEqual<int>(52, _logEntry.Id);
+      string _logMessage = $"Data = {_logEntry.Data}, EventType = {_logEntry.EventType}  Id = {_logEntry.Id}";
+      Debug.WriteLine(_logMessage);
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void OnChangedConfigurationTest()
     {
+      Logger _Logger = new Logger();
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new Object[] { _Logger }));
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
-      _newConfiguration.ComposeParts();
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");
       Assert.IsTrue(_configFile.Exists);
       bool _ConfigurationFileChanged = false;
@@ -72,13 +82,15 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.IsNotNull(_newConfiguration.ConfigurationData.OnChanged);
       _newConfiguration.ConfigurationData.OnChanged();
       Assert.IsTrue(_ConfigurationFileChanged);
+      Assert.AreEqual<int>(1, _Logger.TraceLogList.Count);
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void ReadSaveConfigurationTest()
     {
+      Logger _Logger = new Logger();
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new Object[] { _Logger }));
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
-      _newConfiguration.ComposeParts();
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");
       Assert.IsNull(_newConfiguration.ConfigurationData);
       _newConfiguration.ReadConfiguration(_configFile);
@@ -94,12 +106,15 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
       _fi.Refresh();
       Assert.IsTrue(_fi.Exists);
+      Assert.AreEqual<int>(2, _Logger.TraceLogList.Count);
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     [ExpectedException(typeof(ArgumentNullException))]
     public void CurrentConfigurationNullTest()
     {
+      Logger _Logger = new Logger();
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new Object[] { _Logger }));
       UANetworkingConfigurationConfigurationDataWrapper _newConfiguration = new UANetworkingConfigurationConfigurationDataWrapper();
       _newConfiguration.CurrentConfiguration = null;
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataWrapperNull.xml");
@@ -111,6 +126,8 @@ namespace UAOOI.Configuration.Networking.UnitTest
     [ExpectedException(typeof(System.Runtime.Serialization.SerializationException))]
     public void ConfigurationDataNullTest()
     {
+      Logger _Logger = new Logger();
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new Object[] { _Logger }));
       UANetworkingConfigurationConfigurationDataWrapper _newConfiguration = new UANetworkingConfigurationConfigurationDataWrapper();
       _newConfiguration.CurrentConfiguration.ConfigurationData = null;
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataWrapper.ConfigurationDataNull.xml");
@@ -121,6 +138,8 @@ namespace UAOOI.Configuration.Networking.UnitTest
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void ReadSaveConfigurationDataWrapperTest()
     {
+      Logger _Logger = new Logger();
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new Object[] { _Logger }));
       UANetworkingConfigurationConfigurationDataWrapper _newConfiguration = new UANetworkingConfigurationConfigurationDataWrapper();
       Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnLoadedCount);
       bool _ConfigurationFileChanged = false;
@@ -148,6 +167,8 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.IsNotNull(_newConfiguration.ConfigurationData);
       Assert.AreEqual<int>(1, _newConfiguration.CurrentConfiguration.OnLoadedCount);
       Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnSavingCount);
+      Assert.AreEqual<int>(2, _Logger.TraceLogList.Count);
+
     }
     #endregion
 
@@ -198,39 +219,17 @@ namespace UAOOI.Configuration.Networking.UnitTest
     }
     private class UANetworkingConfigurationConfigurationDataWrapper : UANetworkingConfiguration<ConfigurationDataWrapper>
     {
-      private CompositionContainer m_Container;
-
       public UANetworkingConfigurationConfigurationDataWrapper()
       {
-        ComposeParts();
         this.CurrentConfiguration = new ConfigurationDataWrapper();
       }
-      internal void ComposeParts()
-      {
-        //An aggregate catalog that combines multiple catalogs
-        AggregateCatalog _catalog = new AggregateCatalog();
-        //Create the CompositionContainer with the parts in the catalog
-        _catalog.Catalogs.Add(new AssemblyCatalog(typeof(UAOOI.Common.Infrastructure.Diagnostic.ITraceSource).Assembly));
-        m_Container = new CompositionContainer(_catalog);
-        //Fill the imports of this object
-        m_Container.ComposeParts(this);
-      }
-
     }
     private class DerivedUANetworkingConfiguration : UANetworkingConfiguration<ConfigurationData>
     {
-      public DerivedUANetworkingConfiguration() { }
-      internal void ComposeParts()
+      public DerivedUANetworkingConfiguration()
       {
-        //An aggregate catalog that combines multiple catalogs
-        AggregateCatalog _catalog = new AggregateCatalog();
-        //Create the CompositionContainer with the parts in the catalog
-        _catalog.Catalogs.Add(new AssemblyCatalog(typeof(UAOOI.Common.Infrastructure.Diagnostic.ITraceSource).Assembly));
-        m_Container = new CompositionContainer(_catalog);
-        //Fill the imports of this object
-        m_Container.ComposeParts(this);
+        CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => null);
       }
-      private CompositionContainer m_Container = null;
     }
     #endregion
 

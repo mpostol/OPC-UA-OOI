@@ -10,7 +10,7 @@ Assembly Product:       OPC UA OOI Global Data Discovery
 Assembly Copyright:     Copyright (c) 2017 CommServer
 Assembly Trademark:     OPC-UA-OOI
 Assembly Version:       1.0.0-Alpha
-Assembly Date:          27.01.2018
+Assembly Date:          2018-03-27
 
 The main changes and new functionalities are listed below:
 

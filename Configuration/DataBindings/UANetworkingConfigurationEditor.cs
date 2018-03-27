@@ -1,9 +1,8 @@
 ﻿
-using System;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.IO;
 using CAS.UA.IServerConfiguration;
+using CommonServiceLocator;
+using System;
+using System.IO;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings
@@ -12,7 +11,7 @@ namespace UAOOI.Configuration.DataBindings
   /// <summary>
   /// Class UANetworkingConfigurationEditor - 
   /// </summary>
-  [Export(typeof(IConfiguration))]
+  [System.ComponentModel.Composition.Export(typeof(IConfiguration))]
   public sealed class UANetworkingConfigurationEditor : ConfigurationBase<ConfigurationData>, IDisposable
   {
 
@@ -31,10 +30,7 @@ namespace UAOOI.Configuration.DataBindings
     /// <summary>
     /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
     /// </summary>
-    public void Dispose()
-    {
-      ((IDisposable)m_Container).Dispose();
-    }
+    public void Dispose() { }
     #endregion
 
     #region ConfigurationBase
@@ -114,13 +110,11 @@ namespace UAOOI.Configuration.DataBindings
     /// Gets or sets the configuration editor - an access point to the external component.
     /// </summary>
     /// <value>The configuration editor.</value>
-    [Import(typeof(IConfigurationEditor))]
-    public IConfigurationEditor ConfigurationEditor { get; set; }
+    public IConfigurationEditor ConfigurationEditor { get; private set; }
     /// <summary>
     /// Gets or sets the instance configuration factory.
     /// </summary>
     /// <value>The instance configuration factory.</value>
-    [Import(typeof(IInstanceConfigurationFactory))]
     public IInstanceConfigurationFactory InstanceConfigurationFactory { get; set; }
     #endregion
 
@@ -132,16 +126,11 @@ namespace UAOOI.Configuration.DataBindings
     #endregion
 
     #region private
-    private CompositionContainer m_Container;
     private void ComposeParts()
     {
-      //An aggregate catalog that combines multiple catalogs
-      AggregateCatalog _catalog = new AggregateCatalog();
-      //Create the CompositionContainer with the parts in the catalog
-      _catalog.Catalogs.Add(new DirectoryCatalog(System.IO.Path.GetDirectoryName(typeof(UANetworkingConfigurationEditor).Assembly.Location)));
-      m_Container = new CompositionContainer(_catalog);
-      //Fill the imports of this object
-      this.m_Container.ComposeParts(this);
+      IServiceLocator _locator = ServiceLocator.Current;
+      this.ConfigurationEditor = _locator.GetInstance<IConfigurationEditor>();
+      this.InstanceConfigurationFactory = _locator.GetInstance<IInstanceConfigurationFactory>();
     }
     private static ConfigurationData NewConfigurationData()
     {

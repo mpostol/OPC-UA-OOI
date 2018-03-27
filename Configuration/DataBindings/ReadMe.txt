@@ -9,13 +9,13 @@ Assembly Company:       commsvr.com
 Assembly Product:       OOI Networking Configuration
 Assembly Copyright:     Copyright (c) 2017 CommServer
 Assembly Trademark:     OPC-UA-OOI
-Assembly Version:       2.0.4
-Assembly Date:          27.01.2018
+Assembly Version:       3.0.0
+Assembly Date:          2018-03-27
 
 The main changes and new functionalities are listed below:
 
-1.Maintanence release - unimportant changes
- * added read-me files
+1. CommonServiceLocator is used to resolve dependency injection for all libraries.
+ 
 
 ____________________________________________________________________________________________
 For assistance, contact:

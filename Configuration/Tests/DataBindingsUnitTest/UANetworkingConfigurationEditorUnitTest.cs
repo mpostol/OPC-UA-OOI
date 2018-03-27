@@ -3,7 +3,9 @@ using System;
 using System.IO;
 using System.Reflection;
 using CAS.UA.IServerConfiguration;
+using CommonServiceLocator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UAOOI.Configuration.DataBindings.UnitTest.Exports;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings.UnitTest
@@ -22,6 +24,8 @@ namespace UAOOI.Configuration.DataBindings.UnitTest
       Assert.IsTrue(_fileInfo.Exists);
       Assembly _pluginAssembly = null;
       IConfiguration _serverConfiguration = null;
+      Container _container = new Container();
+      ServiceLocator.SetLocatorProvider(() => _container);
       GetIServerConfiguration(_fileInfo, out _pluginAssembly, out _serverConfiguration);
       Assert.IsNotNull(_pluginAssembly);
       Assert.IsNotNull(_serverConfiguration);
@@ -43,6 +47,8 @@ namespace UAOOI.Configuration.DataBindings.UnitTest
     [ExpectedException(typeof(NotImplementedException))]
     public void EditConfigurationTest()
     {
+      Container _container = new Container();
+      ServiceLocator.SetLocatorProvider(() => _container);
       UANetworkingConfigurationEditor _mc = new UANetworkingConfigurationEditor();
       _mc.EditConfiguration();
     }
@@ -51,6 +57,8 @@ namespace UAOOI.Configuration.DataBindings.UnitTest
     [ExpectedException(typeof(NotImplementedException))]
     public void GetInstanceConfigurationTest()
     {
+      Container _container = new Container();
+      ServiceLocator.SetLocatorProvider(() => _container);
       UANetworkingConfigurationEditor _mc = new UANetworkingConfigurationEditor();
       IInstanceConfiguration _ic = _mc.GetInstanceConfiguration(new NodeDescriptorBase() { NodeIdentifier = new System.Xml.XmlQualifiedName("TestNodeIdentifier", "UAOOI.Configuration.DataBindings.UnitTest") });
       Assert.IsNotNull(_ic);
@@ -60,6 +68,8 @@ namespace UAOOI.Configuration.DataBindings.UnitTest
     [TestCategory("DataBindings_UANetworkingConfigurationEditor")]
     public void DefaultFileNameTestMethod()
     {
+      Container _container = new Container();
+      ServiceLocator.SetLocatorProvider(() => _container);
       UANetworkingConfigurationEditor _mc = new UANetworkingConfigurationEditor();
       string _fileName = _mc.DefaultFileName;
       FileInfo _fi = new FileInfo(_fileName);
@@ -70,6 +80,8 @@ namespace UAOOI.Configuration.DataBindings.UnitTest
     [TestCategory("DataBindings_UANetworkingConfigurationEditor")]
     public void CreateDefaultConfigurationTestMethod()
     {
+      Container _container = new Container();
+      ServiceLocator.SetLocatorProvider(() => _container);
       UANetworkingConfigurationEditor _newConfiguration = new UANetworkingConfigurationEditor();
       Assert.IsNotNull(_newConfiguration);
       _newConfiguration.CreateDefaultConfiguration();
@@ -85,6 +97,8 @@ namespace UAOOI.Configuration.DataBindings.UnitTest
     [ExpectedException(typeof(ArgumentNullException))]
     public void GetInstanceConfigurationNullTestMethod()
     {
+      Container _container = new Container();
+      ServiceLocator.SetLocatorProvider(() => _container);
       UANetworkingConfigurationEditor _newConfiguration = new UANetworkingConfigurationEditor();
       Assert.IsNotNull(_newConfiguration);
       IInstanceConfiguration _newInstanceConfiguration = _newConfiguration.GetInstanceConfiguration(null);
@@ -93,6 +107,8 @@ namespace UAOOI.Configuration.DataBindings.UnitTest
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
     public void GetInstanceConfigurationNoConfigurationTestMethod()
     {
+      Container _container = new Container();
+      ServiceLocator.SetLocatorProvider(() => _container);
       UANetworkingConfigurationEditor _newConfiguration = new UANetworkingConfigurationEditor();
       Assert.IsNotNull(_newConfiguration);
       NodeDescriptor _nd = NodeDescriptor.GetTestInstance();

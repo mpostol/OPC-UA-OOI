@@ -25,8 +25,8 @@ string SemanticDataPrerelease = "-Bravo";
 string SemanticDataProduct = "OPC UA OOI SemanticData";
 
 //UAOOI.Configuration
-string ConfigurationVersion = "2.0.4";
-string ConfigurationPrerelease = "-Echo";
+string ConfigurationVersion = "3.0.0";
+string ConfigurationPrerelease = "-Alpha";
 string ConfigurationProduct = "OOI Networking Configuration";
 
 //UAOOI.Networking

@@ -1,7 +1,6 @@
 ﻿
 using CAS.UA.IServerConfiguration;
 using System;
-using System.ComponentModel.Composition;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings.UnitTest.Exports
@@ -10,7 +9,6 @@ namespace UAOOI.Configuration.DataBindings.UnitTest.Exports
   /// <summary>
   /// Class ConfigurationEditorBase - a simple implementation of the <see cref="IConfigurationEditor"/>.
   /// </summary>
-  [Export(typeof(IConfigurationEditor))]
   public class ConfigurationEditorBase : IConfigurationEditor
   {
     /// <summary>

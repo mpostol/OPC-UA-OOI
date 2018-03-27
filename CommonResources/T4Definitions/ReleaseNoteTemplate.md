@@ -66,7 +66,7 @@ The Nuget package is available at:
 ### Versions
 
 * Assembly Product:       OOI Networking Configuration
-* Assembly Version:       2.0.4
+* Assembly Version:       3.0.0
 
 ## Contact
 

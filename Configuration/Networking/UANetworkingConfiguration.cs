@@ -1,6 +1,6 @@
 ﻿
+using CommonServiceLocator;
 using System;
-using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
 using UAOOI.Common.Infrastructure.Diagnostic;
@@ -23,7 +23,13 @@ namespace UAOOI.Configuration.Networking
     /// </summary>
     public UANetworkingConfiguration()
     {
-      TraceSource = new TraceSourceDefault();
+      if (ServiceLocator.IsLocationProviderSet && ServiceLocator.Current != null)
+      {
+        IServiceLocator _locator = ServiceLocator.Current;
+        this.TraceSource = _locator.GetInstance<ITraceSource>();
+      }
+      else
+        this.TraceSource = new TraceSourceDefault();
     }
     #endregion
 
@@ -83,12 +89,7 @@ namespace UAOOI.Configuration.Networking
     /// By default an empty private implementation (do nothing) of the <see cref="ITraceSource"/> is provided.
     /// </summary>
     /// <value>The trace source - an implementation of the <see cref="ITraceSource"/>.</value>
-    //[Import(typeof(ITraceSource))] //TODO
-    public ITraceSource TraceSource
-    {
-      get { return b_TraceSource; }
-      set { b_TraceSource = value; }
-    }
+    public ITraceSource TraceSource { get; set; }
     #endregion
 
     #region privat
@@ -104,7 +105,6 @@ namespace UAOOI.Configuration.Networking
       public void TraceData(TraceEventType eventType, int id, object data) { }
     }
     private ConfigurationDataType m_CurrentConfiguration;
-    private ITraceSource b_TraceSource ;
     /// <summary>
     /// Raises the on change event.
     /// </summary>

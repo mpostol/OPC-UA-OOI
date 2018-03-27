@@ -50,8 +50,10 @@
       <HintPath>..\..\..\packages\CAS.UA.IServerConfiguration.1.00.00\lib\net35\CAS.UA.IServerConfiguration.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.XML" />
   </ItemGroup>
@@ -71,7 +73,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Exports\ConfigurationEditor.cs" />
+    <Compile Include="Exports\Container.cs" />
     <Compile Include="Exports\InstanceConfigurationFactory.cs" />
+    <Compile Include="Exports\Logger.cs" />
     <Compile Include="NodeDescriptor.cs" />
     <Compile Include="ConfigurationBaseUnitTest.cs" />
     <Compile Include="InstanceConfigurationBaseUnitTest.cs" />

@@ -1,7 +1,13 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using UAOOI.Common.Infrastructure.Diagnostic;
+using UAOOI.Common.Infrastructure.UnitTest.Instrumentation;
 
 namespace UAOOI.Common.Infrastructure.UnitTest
 {
@@ -12,7 +18,46 @@ namespace UAOOI.Common.Infrastructure.UnitTest
     public void CreationStateTestMethod()
     {
       TraceSourceBase _trace = new TraceSourceBase();
-      _trace.TraceData(TraceEventType.Critical, 0, null);
+      _trace.TraceData(TraceEventType.Critical, 0, "Message");
     }
+    [TestMethod]
+    public void AssemblyTraceEventTestMethod()
+    {
+      TraceSourceBase _tracer = new TraceSourceBase();
+      Assert.AreEqual<string>("UAOOI.Common", _tracer.TraceSource.Name, $"Actual tracer name: {_tracer.TraceSource.Name}");
+      Assert.AreEqual(1, _tracer.TraceSource.Listeners.Count);
+      Dictionary<string, TraceListener> _listeners = _tracer.TraceSource.Listeners.Cast<TraceListener>().ToDictionary<TraceListener, string>(x => x.Name);
+      Assert.IsTrue(_listeners.ContainsKey("LogFile"));
+      TraceListener _listener = _listeners["LogFile"];
+      Assert.IsNotNull(_listener);
+      Assert.IsInstanceOfType(_listener, typeof(DelimitedListTraceListener));
+      DelimitedListTraceListener _advancedListener = _listener as DelimitedListTraceListener;
+      Assert.IsNotNull(_advancedListener.Filter);
+      Assert.IsInstanceOfType(_advancedListener.Filter, typeof(EventTypeFilter));
+      EventTypeFilter _eventTypeFilter = _advancedListener.Filter as EventTypeFilter;
+      Assert.AreEqual(SourceLevels.All, _eventTypeFilter.EventType);
+      string _testPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+      Assert.AreEqual<string>(Path.Combine(_testPath, @"UAOOI.Common.log"), _advancedListener.GetFileName());
+    }
+
+    [TestMethod]
+    public void LogFileExistsTest()
+    {
+      TraceSourceBase _tracer = new TraceSourceBase();
+      TraceListener _listener = _tracer.TraceSource.Listeners.Cast<TraceListener>().Where<TraceListener>(x => x.Name == "LogFile").First<TraceListener>();
+      Assert.IsNotNull(_listener);
+      DelimitedListTraceListener _advancedListener = _listener as DelimitedListTraceListener;
+      Assert.IsNotNull(_advancedListener);
+      Assert.IsFalse(String.IsNullOrEmpty(_advancedListener.GetFileName()));
+      FileInfo _logFileInfo = new FileInfo(_advancedListener.GetFileName());
+      long _startLength = _logFileInfo.Exists ? _logFileInfo.Length : 0;
+      _tracer.TraceSource.TraceEvent(TraceEventType.Information, 0, "LogFileExistsTest is executed");
+      Assert.IsFalse(String.IsNullOrEmpty(_advancedListener.GetFileName()));
+      _logFileInfo.Refresh();
+      Assert.IsTrue(_logFileInfo.Exists);
+      Assert.IsTrue(_logFileInfo.Length > _startLength);
+    }
+
+
   }
 }

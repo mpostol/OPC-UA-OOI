@@ -1,24 +1,16 @@
 ﻿
-using System.ComponentModel.Composition;
+using System;
 using System.Diagnostics;
+using UAOOI.Common.Infrastructure.Properties;
 
 namespace UAOOI.Common.Infrastructure.Diagnostic
 {
   /// <summary>
   /// Class TraceSourceBase - default implementation of the <see cref="ITraceSource"/>
   /// </summary>
-  [Export(typeof(ITraceSource))]
-  [PartCreationPolicy(CreationPolicy.Shared)]
   public class TraceSourceBase : ITraceSource
   {
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="TraceSourceBase"/> class.
-    /// </summary>
-    public TraceSourceBase()
-    {
-      m_Listener = new ConsoleTraceListener();
-    }
     /// <summary>
     /// Writes trace data to the trace listeners in the <see cref="P:System.Diagnostics.TraceSource.Listeners" /> collection using the specified <paramref name="eventType" />,
     /// event identifier <paramref name="id" />, and trace <paramref name="data" />.
@@ -28,10 +20,15 @@ namespace UAOOI.Common.Infrastructure.Diagnostic
     /// <param name="data">The trace data.</param>
     public virtual void TraceData(TraceEventType eventType, int id, object data)
     {
-      m_Listener.WriteLine($"Event: {eventType}, Identifier: {id}, Message: {data}");
+      m_TraceEventInternal.Value.TraceData(eventType, id, data);
     }
+    /// <summary>
+    /// Gets the trace source instance.
+    /// </summary>
+    /// <value>The trace source instance of type <see cref="TraceSource"/>.</value>
+    public TraceSource TraceSource => m_TraceEventInternal.Value;
 
-    private ConsoleTraceListener m_Listener;
+    private Lazy<TraceSource> m_TraceEventInternal = new Lazy<TraceSource>(() => new TraceSource(Settings.Default.TraceSourceName));
 
   }
 }

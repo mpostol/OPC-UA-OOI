@@ -2,10 +2,10 @@
 //  Title   : Assembly info for: DataBindingsUnitTest
 //  System  : Microsoft VisualStudio 2015 / C#
 //
-//  Copyright (c) 2017 CommServer
+//  Copyright MPostol (c) 2017
 //  +48 608 619 899
 //  commserver@cas.eu
-//  www.commsvr.com
+//  https://github.com/mpostol/OPC-UA-OOI
 //_______________________________________________________________
 
 using System.Reflection;
@@ -17,11 +17,11 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
 [assembly: AssemblyProduct("OOI Networking Configuration")]
-[assembly: AssemblyCopyright("Copyright (c) 2017 CommServer")]
-[assembly: AssemblyTrademark("OPC-UA-OOI")]
+[assembly: AssemblyCopyright("Copyright MPostol (c) 2017")]
+[assembly: AssemblyTrademark("Object Oriented Internet")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("73e0467b-131e-4a9f-8986-cb00f6c58f62")]
-[assembly: AssemblyVersion("3.0.0.*")]
-[assembly: AssemblyFileVersion("3.0.0")]
+[assembly: AssemblyVersion("3.0.3.*")]
+[assembly: AssemblyFileVersion("3.0.3")]
 

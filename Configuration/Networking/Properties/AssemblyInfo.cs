@@ -2,10 +2,10 @@
 //  Title   : Assembly info for: UAOOI.Configuration.Networking
 //  System  : Microsoft VisualStudio 2015 / C#
 //
-//  Copyright (c) 2017 CommServer
+//  Copyright MPostol (c) 2017
 //  +48 608 619 899
 //  commserver@cas.eu
-//  www.commsvr.com
+//  https://github.com/mpostol/OPC-UA-OOI
 //_______________________________________________________________
 
 using System.Reflection;
@@ -16,13 +16,13 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("OOI Networking Configuration: UA Data Application Configuration")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
-[assembly: AssemblyProduct("OPC UA OOI SemanticData")]
-[assembly: AssemblyCopyright("Copyright (c) 2017 CommServer")]
-[assembly: AssemblyTrademark("OPC-UA-OOI")]
+[assembly: AssemblyProduct("OOI SemanticData")]
+[assembly: AssemblyCopyright("Copyright MPostol (c) 2017")]
+[assembly: AssemblyTrademark("Object Oriented Internet")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("3.0.0.*")]
-[assembly: AssemblyFileVersion("3.0.0")]
+[assembly: AssemblyVersion("3.0.3.*")]
+[assembly: AssemblyFileVersion("3.0.3")]
 [assembly: InternalsVisibleTo(
   "UAOOI.SemanticData.DataManagementUnitTest, PublicKey=" +
     "00240000048000009400000006020000002400005253413100040000010001005b97a0972ff6b13a" +

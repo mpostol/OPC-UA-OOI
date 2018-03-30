@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\UAOOI.Common.Infrastructure.dbg.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -62,6 +63,12 @@
       <Visible>False</Visible>
     </AdditionalFiles>
     <None Include="app.config" />
+    <None Include="Common.Infrastructure..nuspec">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.Infrastructure..tt</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -72,6 +79,16 @@
   <ItemGroup>
     <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
     <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common.Infrastructure..tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Common.Infrastructure..nuspec</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

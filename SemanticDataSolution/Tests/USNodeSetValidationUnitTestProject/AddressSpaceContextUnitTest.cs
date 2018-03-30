@@ -20,7 +20,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     {
       AddressSpaceContext _as = new AddressSpaceContext(x => { });
       Assert.IsNotNull(_as);
-      Assert.IsNotNull(_as.UTTryGetUANodeContext(VariableTypes.PropertyType));
+      UANodeContext _context = null;
+      _as.UTTryGetUANodeContext(VariableTypes.PropertyType, x => _context = x);
+      Assert.IsNotNull(_context);
     }
     [TestMethod]
     [TestCategory("Code")]
@@ -87,8 +89,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       UANodeSet _ns;
       IAddressSpaceContext _as;
       ValidateAndExportModelPreparation(out _ns, out _as);
-      Assert.AreEqual<int>(1514, ((AddressSpaceContext)_as).UTValidateAndExportModel(0).Count);
-      Assert.AreEqual<int>(1, ((AddressSpaceContext)_as).UTValidateAndExportModel(1).Count);
+      List<UANodeContext> _returnValue = null;
+      ((AddressSpaceContext)_as).UTValidateAndExportModel(0, x => _returnValue = x);
+      Assert.AreEqual<int>(1514, (_returnValue.Count));
+      ((AddressSpaceContext)_as).UTValidateAndExportModel(1, x => _returnValue = x);
+      Assert.AreEqual<int>(1, _returnValue.Count);
     }
 
     #region private

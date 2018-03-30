@@ -25,9 +25,11 @@
     </releaseNotes>
     <copyright><#=AssemblyCopyright#></copyright>
     <tags>Object Oriented Internet, OPC UA, CommServer, ASMD, Address Space Model Designer.</tags>
+    <dependencies>
+      <dependency id="UAOOI.Common.Infrastructure" version="2.0.0" />
+    </dependencies>
   </metadata>
   <files>
-    <file src="..\bin\Release\UAOOI.Common.Infrastructure.dll" target="lib\net461\UAOOI.Common.Infrastructure.dll" />
     <file src="..\bin\Release\UAOOI.Configuration.Networking.dll" target="lib\net461\UAOOI.Configuration.Networking.dll" />
     <file src="..\bin\Release\UAOOI.Configuration.Networking.xml" target="lib\net461\UAOOI.Configuration.Networking.xml" />
   </files>

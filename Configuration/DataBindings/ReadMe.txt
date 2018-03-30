@@ -7,10 +7,10 @@ Assembly Title:         UAOOI.Configuration.DataBindings
 Assembly Description:   OPC UA DataBindings Library.
 Assembly Company:       commsvr.com
 Assembly Product:       OOI Networking Configuration
-Assembly Copyright:     Copyright (c) 2017 CommServer
-Assembly Trademark:     OPC-UA-OOI
-Assembly Version:       3.0.0
-Assembly Date:          2018-03-27
+Assembly Copyright:     Copyright MPostol (c) 2017
+Assembly Trademark:     Object Oriented Internet
+Assembly Version:       3.0.3
+Assembly Date:          2018-03-30
 
 The main changes and new functionalities are listed below:
 

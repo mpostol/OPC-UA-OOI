@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.UnitTest.CommonServiceLocatorInstrumentation;
 

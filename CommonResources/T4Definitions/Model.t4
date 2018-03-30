@@ -4,34 +4,40 @@ string DefaultProductName ="DefaultProductName";
 string DefaultProductVersion = "0.00.00";
 
 //Solution common
-string ProductTrademark = "OPC-UA-OOI";
-string AssemblyCopyright = "Copyright (c) 2017 CommServer";
+string ProductTrademark = "Object Oriented Internet";
+string AssemblyCopyright = "Copyright MPostol (c) 2017";
 string AssemblyCompany = "commsvr.com";
-string Url = "www.commsvr.com";
+string Url = "https://github.com/mpostol/OPC-UA-OOI";
 string Email = "commserver@cas.eu";
 string Phone = "+48 608 619 899";
-string Owner = "commsvr.com";
+string Owner = "cas.eu";
 string RepositoryVersion = "3.0.0"; //increment on the same position as the group version
+
+//UAOOI.Common
+string CommonTitle = "UAOOI.DataDiscovery";
+string CommonVersion = "2.0.2";
+string CommonPrerelease = "-Bravo";
+string CommonProduct = "OOI Common";
 
 //UAOOI.DataDiscovery
 string DataDiscoveryTitle = "UAOOI.DataDiscovery";
 string DataDiscoveryVersion = "1.0.0";
 string DataDiscoveryPrerelease = "-Alpha";
-string DataDiscoveryProduct = "OPC UA OOI Global Data Discovery";
+string DataDiscoveryProduct = "OOI Global Data Discovery";
 
 //UAOOI.SemanticData
 string SemanticDataVersion = "2.0.0";
 string SemanticDataPrerelease = "-Bravo";
-string SemanticDataProduct = "OPC UA OOI SemanticData";
+string SemanticDataProduct = "OOI SemanticData";
 
 //UAOOI.Configuration
-string ConfigurationVersion = "3.0.0";
-string ConfigurationPrerelease = "-Alpha";
+string ConfigurationVersion = "3.0.3";
+string ConfigurationPrerelease = "-Delta";
 string ConfigurationProduct = "OOI Networking Configuration";
 
 //UAOOI.Networking
-string NetworkingDataVersion = "3.0.1";
-string NetworkingDataPrerelease = "-Echo";
+string NetworkingDataVersion = "3.0.3";
+string NetworkingDataPrerelease = "-Hotel";
 string NetworkingDataProduct = "OOI Reactive Networking";
 
 //Note: 

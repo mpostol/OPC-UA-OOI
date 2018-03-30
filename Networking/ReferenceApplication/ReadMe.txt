@@ -5,11 +5,11 @@ Current release:
 Assembly Title:         OOI Reactive Networking
 Assembly Description:   UAOOI SemanticData UA-Networking Reference Application.
 Assembly Company:       commsvr.com
-Assembly Product:       OPC UA OOI SemanticData
-Assembly Copyright:     Copyright (c) 2017 CommServer
-Assembly Trademark:     OPC-UA-OOI
-Assembly Version:       3.0.1-Echo
-Assembly Date:          2018-03-27
+Assembly Product:       OOI SemanticData
+Assembly Copyright:     Copyright MPostol (c) 2017
+Assembly Trademark:     Object Oriented Internet
+Assembly Version:       3.0.2-Golf
+Assembly Date:          2018-03-30
 
 The main changes and new functionalities are listed below:
 

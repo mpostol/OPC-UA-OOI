@@ -293,18 +293,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     #endregion
 
-#if DEBUG
     #region UnitTestd
-    internal UANodeContext UTTryGetUANodeContext(NodeId nodeId)
+    [System.Diagnostics.Conditional("DEBUG")]
+    internal void UTTryGetUANodeContext(NodeId nodeId, Action<UANodeContext > returnValue )
     {
-      return TryGetUANodeContext(nodeId, x => { });
+      returnValue( TryGetUANodeContext(nodeId, x => { }));
     }
-    internal List<UANodeContext> UTValidateAndExportModel(int nameSpaceIndex)
+    [System.Diagnostics.Conditional("DEBUG")]
+    internal void UTValidateAndExportModel(int nameSpaceIndex, Action<List<UANodeContext>> returnValue)
     {
-      return (from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key).ToList<UANodeContext>();
+      returnValue((from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key).ToList<UANodeContext>());
     }
     #endregion
-#endif
 
   }
 

@@ -111,8 +111,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      List<UANodeContext> _nodes = ((AddressSpaceContext)_as).UTValidateAndExportModel(1);
-      Assert.AreEqual<int>(nodes, ((AddressSpaceContext)_as).UTValidateAndExportModel(1).Count);
+      List<UANodeContext> _nodes = null;
+      ((AddressSpaceContext)_as).UTValidateAndExportModel(1, x => _nodes = x);
+      Assert.AreEqual<int>(nodes, _nodes.Count);
       _as.ValidateAndExportModel();
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       return _nodes;

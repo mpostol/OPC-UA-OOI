@@ -2,10 +2,10 @@
 //  Title   : Assembly info for: UAOOI.SemanticData.UANodeSetValidation
 //  System  : Microsoft VisualStudio 2015 / C#
 //
-//  Copyright (c) 2017 CommServer
+//  Copyright MPostol (c) 2017
 //  +48 608 619 899
 //  commserver@cas.eu
-//  www.commsvr.com
+//  https://github.com/mpostol/OPC-UA-OOI
 //_______________________________________________________________
 
 using System.Reflection;
@@ -16,9 +16,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("OPC UA OOI NodeSet Validation library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
-[assembly: AssemblyProduct("OPC UA OOI SemanticData")]
-[assembly: AssemblyCopyright("Copyright (c) 2017 CommServer")]
-[assembly: AssemblyTrademark("OPC-UA-OOI")]
+[assembly: AssemblyProduct("OOI SemanticData")]
+[assembly: AssemblyCopyright("Copyright MPostol (c) 2017")]
+[assembly: AssemblyTrademark("Object Oriented Internet")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: AssemblyVersion("2.0.0.*")]

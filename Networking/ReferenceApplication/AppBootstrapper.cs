@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.ComponentModel.Composition.Hosting;
+using System.Diagnostics;
 using System.Reactive.Disposables;
 using System.Windows;
 using UAOOI.Networking.ReferenceApplication.Consumer;
@@ -76,11 +77,27 @@ namespace UAOOI.Networking.ReferenceApplication
     #region IDisposable
     protected override void Dispose(bool disposing)
     {
-      ReferenceApplicationEventSource.Log.EnteringDispose(nameof(AppBootstrapper), disposing);
-      m_Components.Dispose();
-      base.Dispose(disposing);
-      //to keep logging it must be disposed as the last operation.
-      m_EventSourceBootstrapper.Dispose();
+      try
+      {
+        ReferenceApplicationEventSource.Log.EnteringDispose(nameof(AppBootstrapper.Dispose), disposing);
+        m_Components.Dispose();
+        base.Dispose(disposing);
+        //to keep logging it must be disposed as the last operation.
+        m_EventSourceBootstrapper.Dispose();
+        Logger.TraceData(TraceEventType.Information, 86, $"{nameof(AppBootstrapper.Dispose)} has been accomplished successfully.");
+      }
+      catch (Exception _ex)
+      {
+        MasterTraceException(_ex, false);
+      }
+    }
+    private void MasterTraceException(Exception ex, bool inner)
+    {
+      string _innerText = inner ? "inner" : "";
+      Logger.TraceData(TraceEventType.Information, 86, $"During {nameof(AppBootstrapper.Dispose)} an {_innerText} exeption been thrown: {ex.ToString()}.");
+      if (ex.InnerException != null)
+        return;
+      MasterTraceException(ex.InnerException, true);
     }
     #endregion
 

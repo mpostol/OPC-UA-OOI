@@ -7,10 +7,10 @@ Assembly Title:         UAOOI.DataDiscovery.DiscoveryServices
 Assembly Description:   OOI Global Data Discovery.
 Assembly Company:       commsvr.com
 Assembly Product:       OOI Global Data Discovery
-Assembly Copyright:     Copyright MPostol (c) 2017
+Assembly Copyright:     Copyright MPostol (c) 2018
 Assembly Trademark:     Object Oriented Internet
 Assembly Version:       1.0.0-Alpha
-Assembly Date:          2018-03-30
+Assembly Date:          2018-03-31
 
 The main changes and new functionalities are listed below:
 

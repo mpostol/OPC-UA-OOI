@@ -6,10 +6,10 @@ Assembly Title:         OOI Reactive Networking
 Assembly Description:   UAOOI SemanticData UA-Networking Reference Application.
 Assembly Company:       commsvr.com
 Assembly Product:       OOI SemanticData
-Assembly Copyright:     Copyright MPostol (c) 2017
+Assembly Copyright:     Copyright MPostol (c) 2018
 Assembly Trademark:     Object Oriented Internet
-Assembly Version:       3.0.2-Golf
-Assembly Date:          2018-03-30
+Assembly Version:       3.0.3-Hotel
+Assembly Date:          2018-03-31
 
 The main changes and new functionalities are listed below:
 

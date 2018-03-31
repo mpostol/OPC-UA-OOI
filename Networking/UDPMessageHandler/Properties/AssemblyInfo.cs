@@ -2,7 +2,7 @@
 //  Title   : Assembly info for: UAOOI.Networking.UDPMessageHandler
 //  System  : Microsoft VisualStudio 2017 / C#
 //
-//  Copyright MPostol (c) 2017
+//  Copyright MPostol (c) 2018
 //  +48 608 619 899
 //  commserver@cas.eu
 //  https://github.com/mpostol/OPC-UA-OOI
@@ -17,13 +17,13 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
 [assembly: AssemblyProduct("OOI Reactive Networking")]
-[assembly: AssemblyCopyright("Copyright MPostol (c) 2017")]
+[assembly: AssemblyCopyright("Copyright MPostol (c) 2018")]
 [assembly: AssemblyTrademark("Object Oriented Internet")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("d2eb89f9-321e-46e4-ba79-679138b82b23")]
-[assembly: AssemblyVersion("3.0.2.*")]
-[assembly: AssemblyFileVersion("3.0.2")]
+[assembly: AssemblyVersion("3.0.3.*")]
+[assembly: AssemblyFileVersion("3.0.3")]
 [assembly: InternalsVisibleTo(
   "UAOOI.Networking.UDPMessageHandler.UnitTest, PublicKey=" +
     "00240000048000009400000006020000002400005253413100040000010001005b97a0972ff6b13a" +

@@ -2,7 +2,7 @@
 //  Title   : Assembly info for: UAOOI.Configuration.DataBindings
 //  System  : Microsoft VisualStudio 2015 / C#
 //
-//  Copyright MPostol (c) 2017
+//  Copyright MPostol (c) 2018
 //  +48 608 619 899
 //  commserver@cas.eu
 //  https://github.com/mpostol/OPC-UA-OOI
@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
 [assembly: AssemblyProduct("OOI Networking Configuration")]
-[assembly: AssemblyCopyright("Copyright MPostol (c) 2017")]
+[assembly: AssemblyCopyright("Copyright MPostol (c) 2018")]
 [assembly: AssemblyTrademark("Object Oriented Internet")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

@@ -69,8 +69,8 @@
     <Reference Include="System.ServiceModel.Channels" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
-    <Reference Include="UAOOI.Common.Infrastructure, Version=2.0.0.33584, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\UAOOI.Common.Infrastructure.2.0.2-Bravo\lib\net461\UAOOI.Common.Infrastructure.dll</HintPath>
+    <Reference Include="UAOOI.Common.Infrastructure, Version=2.0.0.16099, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Common.Infrastructure.2.0.3\lib\net461\UAOOI.Common.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="UAOOI.Configuration.Networking, Version=3.0.3.37303, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\UAOOI.Configuration.Networking.3.0.3-Delta\lib\net461\UAOOI.Configuration.Networking.dll</HintPath>

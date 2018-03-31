@@ -5,18 +5,19 @@ string DefaultProductVersion = "0.00.00";
 
 //Solution common
 string ProductTrademark = "Object Oriented Internet";
-string AssemblyCopyright = "Copyright MPostol (c) 2017";
+string AssemblyCopyright = "Copyright MPostol (c) 2018";
 string AssemblyCompany = "commsvr.com";
 string Url = "https://github.com/mpostol/OPC-UA-OOI";
 string Email = "commserver@cas.eu";
 string Phone = "+48 608 619 899";
 string Owner = "cas.eu";
 string RepositoryVersion = "3.0.0"; //increment on the same position as the group version
+string Authors = "MPostol";
 
 //UAOOI.Common
 string CommonTitle = "UAOOI.DataDiscovery";
-string CommonVersion = "2.0.2";
-string CommonPrerelease = "-Bravo";
+string CommonVersion = "2.0.3";
+string CommonPrerelease = "";
 string CommonProduct = "OOI Common";
 
 //UAOOI.DataDiscovery

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>UAOOI.Networking.SemanticData</id>
-    <version>3.0.2-Golf</version>
+    <version>3.0.3-Hotel</version>
     <title>Semantic Data Reactive Networking Library</title>
     <authors>commsvr.com</authors>
     <owners>cas.eu</owners>
@@ -19,7 +19,7 @@
     <releaseNotes>
       It is working prerelease
     </releaseNotes>
-    <copyright>Copyright MPostol (c) 2017</copyright>
+    <copyright>Copyright MPostol (c) 2018</copyright>
     <tags>Object Oriented Internet, OPC UA, CommServer, ASMD, Address Space Model Designer.</tags>
     <dependencies>
       <dependency id="UAOOI.Configuration.Networking" version="2.0.3-Delta" />

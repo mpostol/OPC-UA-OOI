@@ -8,7 +8,7 @@ Assembly Company:       commsvr.com
 Assembly Product:       OOI SemanticData
 Assembly Copyright:     Copyright MPostol (c) 2018
 Assembly Trademark:     Object Oriented Internet
-Assembly Version:       3.0.3-Hotel
+Assembly Version:       3.0.5
 Assembly Date:          2018-03-31
 
 The main changes and new functionalities are listed below:

@@ -7,7 +7,7 @@ This project is aimed at implementing an editor of the **UA Data Application** c
 The schema of the configuration files is available at:  [ConfigurationData.xsd](../../Configuration/Networking/Serialization/ConfigurationData.xsd) and detailed description of the configuration is captured in the document [UA Data Networking Configuration](../../Configuration/Networking/ReadMe.md#ua-data-networking-configuration).
 
 The code help documentation is available at:
-[UAOOI.Configuration.DataBindings Namespace](http://www.commsvr.com/download/UAOOI.ObjectOrientedInternet/?topic=html/1410155241.htm)
+[UAOOI.Configuration.DataBindings Namespace](http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Configuration.DataBindings.htm)
 
 The main changes and Version History are provided by the document [ReadMe.txt](./ReadMe.txt)
 

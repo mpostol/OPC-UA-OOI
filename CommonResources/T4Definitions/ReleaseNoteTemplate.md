@@ -5,7 +5,7 @@ This project is aimed to workout deliverables supporting strong typed Process Da
 
 This framework class library is a library of classes, interfaces, and value types that provide access to supported OPC UA Data processing functionality. The documentation of the library code is available on-line at:
 
-* http://www.commsvr.com/Download/DataManagement/Index.html
+* [API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
 
 The namespaces in the class library are as follows and documented in detail in this release notes.
 
@@ -66,7 +66,7 @@ The Nuget package is available at:
 ### Versions
 
 * Assembly Product:       OOI Networking Configuration
-* Assembly Version:       3.0.3
+* Assembly Version:       3.0.5
 
 ## Contact
 

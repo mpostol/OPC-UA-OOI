@@ -8,7 +8,7 @@ For more in-depth information about creating UA Applications exchanging data ove
 
 The code is tested using the Unit Test located in the project: [Networking.SemanticData.UnitTest](../../Networking/Tests/SemanticDatalUnitTest)
 
-The preliminary code help documentation is here: http://www.commsvr.com/Download/DataManagement/Index.html
+The preliminary code help documentation is here: [API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
 
 The project is in development stage - major changes are expected.
 

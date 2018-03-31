@@ -41,6 +41,13 @@ It is good opportunity to review your requirements (if you have any) against the
 
 ## Configuration content
 
-The detailed description of the configuration files content is captured in the documentation at: [ConfigurationData](http://www.commsvr.com/Download/DataManagement/?topic=html/24749307.htm).
+The detailed description of the configuration files content is captured in the documentation at:
+ [UAOOI.Configuration.Networking](http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Configuration.Networking.htm).
 
 The XML schema of the configuration files is available at: [ConfigurationData.xsd](./Serialization/ConfigurationData.xsd). Intentionally data producers and consumers use the same schema for configuration files. It makes it easier to harmonize these roles configuration and supports two roles in one application.
+
+## Code documentation
+
+The documentation of the library code is available on-line at:
+
+[UAOOI.Configuration.Networking](http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Configuration.Networking.htm)

@@ -13,7 +13,7 @@
   </SpellChecker>
 <HelpConfigurations selected="HelpFile">
   <HelpConfiguration name="HelpFile">
-    <OutputPath>..\..\..\Windows\Temp\UAOOI.ObjectOrientedInternet</OutputPath>
+    <OutputPath>.\.nuget\packages\help</OutputPath>
     <CleanupOutputPath>true</CleanupOutputPath>
     <HelpFileName>UAObjectOrientedInternet</HelpFileName>
     <HelpFileNamingMethod>MemberName</HelpFileNamingMethod>
@@ -42,23 +42,21 @@
     </SyntaxLanguages>
     <ResolveCrefLinks>true</ResolveCrefLinks>
     <HeaderText>UAOOI.ObjectOrientedInternet</HeaderText>
-    <FooterText>Rel 2 prerelease</FooterText>
+    <FooterText>Rel 3.1.0</FooterText>
     <ConceptualContent>
       <ContentLayout />
       <MediaContent />
     </ConceptualContent>
     <SelectedProjects>
       <SelectedProject>Common.Infrastructure</SelectedProject>
-      <SelectedProject>Configuration.Networking</SelectedProject>
       <SelectedProject>Configuration.DataBindings</SelectedProject>
-      <SelectedProject>SemanticData.InformationModelFactory</SelectedProject>
-      <SelectedProject>SemanticData.UANodeSetValidation</SelectedProject>
-      <SelectedProject>SemanticData.TypeEditors</SelectedProject>
-      <SelectedProject>Configuration.Networking.Upgrade</SelectedProject>
+      <SelectedProject>Configuration.Networking</SelectedProject>
+      <SelectedProject>DataDiscovery.DiscoveryServices</SelectedProject>
       <SelectedProject>Networking.SemanticData</SelectedProject>
-      <SelectedProject>Common.Infrastructure</SelectedProject>
-      <SelectedProject>Common.Infrastructure</SelectedProject>
-      <SelectedProject>Common.Infrastructure</SelectedProject>
+      <SelectedProject>Networking.UDPMessageHandler</SelectedProject>
+      <SelectedProject>SemanticData.InformationModelFactory</SelectedProject>
+      <SelectedProject>SemanticData.TypeEditors</SelectedProject>
+      <SelectedProject>SemanticData.UANodeSetValidation</SelectedProject>
     </SelectedProjects>
   </HelpConfiguration>
 </HelpConfigurations>

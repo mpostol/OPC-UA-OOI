@@ -1,11 +1,11 @@
 
-# Summary
+## Summary
 
 -[Introduction](README.md)
 
-# Reactive Interoperability
+## Reactive Interoperability
 
-## Communication
+### Communication
 
 - [Reactive Networking](Networking/README.md)
   - [Introduction to Semantic-Data](Networking/SemanticData/README.md)
@@ -13,19 +13,19 @@
   - [Data management and binding](Networking/SemanticData/READMEDataDiscoveryAndBinding.md)
   - [Getting Started Tutorial](Networking/SemanticData/READMEGettingStartedTutorial.md)
 
-## Configuration
+### Configuration
 
 -[Reactive Networking Configuration](Configuration/Networking/ReadMe.md)
 
-## Reference Application
+### Reference Application
 
 -[Example Application](Networking/ReferenceApplication/ReadMe.md)
 
-# Data Discovery
+## Data Discovery
 
 - [Introduction](DataDiscovery/README.MD)
 
-# Semantic-Data Processing
+## Semantic-Data Processing
 
 - [Introduction](SemanticDataSolution/README.MD)
 

@@ -15,11 +15,11 @@
 
 ### Configuration
 
--[Reactive Networking Configuration](Configuration/Networking/ReadMe.md)
+- [Reactive Networking Configuration](Configuration/Networking/ReadMe.md)
 
 ### Reference Application
 
--[Example Application](Networking/ReferenceApplication/ReadMe.md)
+- [Example Application](Networking/ReferenceApplication/ReadMe.md)
 
 ## Data Discovery
 
@@ -28,6 +28,3 @@
 ## Semantic-Data Processing
 
 - [Introduction](SemanticDataSolution/README.MD)
-
-
-  

@@ -10,7 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".CommonResources", ".Common
 		CONTRIBUTING.md = CONTRIBUTING.md
 		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
 		NuGet.Config = NuGet.Config
-		README.md = README.md
 		SemanticDataSolution\README.MD = SemanticDataSolution\README.MD
 		SemanticDataSolution\README.MessageCentricCommunication.md = SemanticDataSolution\README.MessageCentricCommunication.md
 		SemanticDataSolution\Readme.SemanticDataDeplyment.MD = SemanticDataSolution\Readme.SemanticDataDeplyment.MD

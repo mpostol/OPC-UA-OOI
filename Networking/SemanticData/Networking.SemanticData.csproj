@@ -144,7 +144,7 @@
     <None Include="MessageHandling\MessageHandling.cd" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
-    <None Include="README.md" />
+    <None Include="README.MD" />
     <None Include="READMEGettingStartedTutorial.md" />
     <None Include="README_MQTTMapping.md" />
     <None Include="UAOOI.Networking.SemanticData.nuspec">

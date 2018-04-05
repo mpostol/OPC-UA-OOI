@@ -123,7 +123,7 @@
       <DependentUpon>UAOOI.Configuration.Networking.tt</DependentUpon>
       <SubType>Designer</SubType>
     </None>
-    <None Include="ReadMe.md" />
+    <None Include="README.MD" />
     <None Include="Serialization\ConfigurationData.cd" />
     <None Include="Serialization\ConfigurationData.xsd">
       <SubType>Designer</SubType>

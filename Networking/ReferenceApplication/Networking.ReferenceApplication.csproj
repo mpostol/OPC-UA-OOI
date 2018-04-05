@@ -206,7 +206,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="ReadMe.md" />
+    <None Include="README.MD" />
     <None Include="ReadMe.old" />
   </ItemGroup>
   <ItemGroup>

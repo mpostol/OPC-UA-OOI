@@ -141,7 +141,7 @@
     <None Include="XML\GoCS.OPCBinarySchema.cmd" />
     <None Include="XML\OPCFCTTInformationModelling.Svcutil.cmd" />
     <None Include="XML\OPCFCTTInformationModelling.xltm" />
-    <None Include="XML\Readme.md" />
+    <None Include="XML\README.MD" />
     <None Include="XML\UANodeSet.xsd">
       <SubType>Designer</SubType>
     </None>

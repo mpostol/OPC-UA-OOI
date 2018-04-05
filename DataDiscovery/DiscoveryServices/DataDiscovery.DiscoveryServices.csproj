@@ -70,7 +70,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UAOOI.DataDiscovery.DiscoveryServices.tt</DependentUpon>
     </None>
-    <None Include="Readme.md" />
+    <None Include="README.MD" />
     <None Include="ReadMe.old" />
   </ItemGroup>
   <ItemGroup>

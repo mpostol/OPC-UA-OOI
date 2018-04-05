@@ -8,7 +8,7 @@
 
 The following diagram presents domain model of the **Data Discovery** concept.
 
-![Design Time Activities](https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/DataDiscovery.DomainModel.png) .
+![Design Time Activities](../CommonResources/Media/DataDiscovery.DomainModel.png)
 
 On the diagram the the following artifacts are distinguished:
 

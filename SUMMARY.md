@@ -6,27 +6,33 @@
 
 ## Reactive Interoperability
 
-## Communication
+### Communication
 
 * [Reactive Networking](Networking/README.md)
-  * [Introduction to Semantic-Data](Networking/SemanticData/README.md)
+  * [UA Semantic Data Message Centric Communication](SemanticDataSolution/README.MessageCentricCommunication.md)
+  * [Networking of SemanticData Library](Networking/SemanticData/README.md)
   * [Communication over MQTT](Networking/SemanticData/README_MQTTMapping.md)
   * [Data management and binding](Networking/SemanticData/READMEDataDiscoveryAndBinding.md)
   * [Getting Started Tutorial](Networking/SemanticData/READMEGettingStartedTutorial.md)
 
-## Configuration
+### Configuration
 
 * [Reactive Networking Configuration](Configuration/Networking/ReadMe.md)
+* [DataBinding library](Configuration/DataBindings/ReadMe.md)
 
-## Reference Application
+### Reference Application
 
 * [Example Application](Networking/ReferenceApplication/ReadMe.md)
 
 ## Data Discovery
 
 * [Introduction](DataDiscovery/Readme.md)
+* [Domain Model of the Global Data Discovery](DataDiscovery/DomainModel.md)
 
 ## Semantic-Data Processing
 
 * [Introduction](SemanticDataSolution/README.MD)
+* [Library Description](SemanticDataSolution/Readme.SemanticDataDeplyment.MD)
+* [OPC UA NodeSet Validation](SemanticDataSolution/UANodeSetValidation/README.MD)
+* [XML Files](SemanticDataSolution/UANodeSetValidation/XML/Readme.md)
 

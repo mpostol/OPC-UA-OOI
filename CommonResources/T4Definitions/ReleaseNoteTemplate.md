@@ -36,7 +36,7 @@ The most important projects for this library release are as follows:
 * [UA Data Networking Configuration](https://github.com/mpostol/OPC-UA-OOI/tree/master/Configuration/Networkingn#ua-data-networking-configuration)
 * [OPC UA NodeSet Validation](https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/UANodeSetValidation/README.MD#opc-ua-nodeset-validation)
 
-The Nuget packages are available at:
+The NuGet packages are available at:
 
 * not yet released.
 

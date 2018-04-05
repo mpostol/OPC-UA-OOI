@@ -1,4 +1,4 @@
-# Object Oriented Internet
+# Summary
 
 ## Summary
 
@@ -6,7 +6,7 @@
 
 ## Reactive Interoperability
 
-### Communication
+## Communication
 
 * [Reactive Networking](Networking/README.md)
   * [UA Semantic Data Message Centric Communication](SemanticDataSolution/README.MessageCentricCommunication.md)
@@ -15,18 +15,18 @@
   * [Data management and binding](Networking/SemanticData/READMEDataDiscoveryAndBinding.md)
   * [Getting Started Tutorial](Networking/SemanticData/READMEGettingStartedTutorial.md)
 
-### Configuration
+## Configuration
 
 * [Reactive Networking Configuration](Configuration/Networking/ReadMe.md)
 * [DataBinding library](Configuration/DataBindings/ReadMe.md)
 
-### Reference Application
+## Reference Application
 
 * [Example Application](Networking/ReferenceApplication/ReadMe.md)
 
 ## Data Discovery
 
-* [Introduction](DataDiscovery/Readme.md)
+* [Global Data Discovery](DataDiscovery/Readme.md)
 * [Domain Model of the Global Data Discovery](DataDiscovery/DomainModel.md)
 
 ## Semantic-Data Processing

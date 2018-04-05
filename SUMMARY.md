@@ -4,6 +4,13 @@
 
 * [Introduction](README.md)
 
+## Semantic-Data Processing
+
+* [Introduction](SemanticDataSolution/README.MD)
+* [Library Description](SemanticDataSolution/Readme.SemanticDataDeplyment.MD)
+* [OPC UA NodeSet Validation](SemanticDataSolution/UANodeSetValidation/README.MD)
+* [XML Files](SemanticDataSolution/UANodeSetValidation/XML/Readme.md)
+
 ## Reactive Interoperability
 
 ### Communication
@@ -28,13 +35,4 @@
 
 * [Global Data Discovery](DataDiscovery/Readme.md)
 * [Domain Model of the Global Data Discovery](DataDiscovery/DomainModel.md)
-
-## Semantic-Data Processing
-
-* [Introduction](SemanticDataSolution/README.MD)
-* [Library Description](SemanticDataSolution/Readme.SemanticDataDeplyment.MD)
-* [OPC UA NodeSet Validation](SemanticDataSolution/UANodeSetValidation/README.MD)
-* [XML Files](SemanticDataSolution/UANodeSetValidation/XML/Readme.md)
-
-
 

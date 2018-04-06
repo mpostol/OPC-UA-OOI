@@ -1,4 +1,5 @@
-﻿# Data management and binding
+
+# Data management and binding
 
 The diagram below provides a very generic overview of the responsibilities that must be implemented by the UA Application:
 

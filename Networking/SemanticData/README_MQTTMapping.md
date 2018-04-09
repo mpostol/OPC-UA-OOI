@@ -1,4 +1,4 @@
-# OOI Unsolicited Communication over MQTT
+# Underlying Transport over MQTT
  
 ## Motivation
 

@@ -1,18 +1,4 @@
-﻿//_______________________________________________________________
-//  Title   : Name of Application
-//  System  : Microsoft VisualStudio 2015 / C#
-//  $LastChangedDate: 2016-07-12 10:03:06 +0200 (Wt, 12 lip 2016) $
-//  $Rev: 12270 $
-//  $LastChangedBy: mpostol $
-//  $URL: svn://svnserver.hq.cas.com.pl/VS/trunk/CommServer.UA.OOI/OOI.ConfigurationEditor/DomainsModel/DomainModel.xsd.cs $
-//  $Id: DomainModel.xsd.cs 12270 2016-07-12 08:03:06Z mpostol $
-//
-//  Copyright (C) 2016, CAS LODZ POLAND.
-//  TEL: +48 (42) 686 25 47
-//  mailto://techsupp@cas.eu
-//  http://www.cas.eu
-//_______________________________________________________________
-
+﻿
 using System;
 using System.Xml;
 using System.Xml.Serialization;

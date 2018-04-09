@@ -6,19 +6,19 @@
 
 ## Semantic-Data Processing
 
-* [Introduction](SemanticDataSolution/README.MD)
+* [Domain Model](SemanticDataSolution/README.MD)
 * [Library Description](SemanticDataSolution/Readme.SemanticDataDeplyment.MD)
 * [OPC UA NodeSet Validation](SemanticDataSolution/UANodeSetValidation/README.MD)
 * [XML Files](SemanticDataSolution/UANodeSetValidation/XML/README.MD)
 
-## Reactive Interoperability
+## Internet of Things (IOT) Archetype
 
 ### Communication
 
-* [Reactive Networking](Networking/README.MD)
+* [Internet of Things (IOT) Communication](Networking/README.MD)
   * [UA Semantic Data Message Centric Communication](SemanticDataSolution/README.MessageCentricCommunication.md)
   * [Networking of SemanticData Library](Networking/SemanticData/README.MD)
-  * [Communication over MQTT](Networking/SemanticData/README_MQTTMapping.md)
+  * [Messages Transport over MQTT](Networking/SemanticData/README_MQTTMapping.md)
   * [Data management and binding](Networking/SemanticData/READMEDataDiscoveryAndBinding.md)
 
 ### Configuration

@@ -1,8 +1,8 @@
-# Object Oriented Internet Reactive Networking
+# Internet of Things (IOT) Communication
 
 ## Introduction
 
-This folder contains library empowering the Industrial Internet of Things \(IIOT\) and Industrie 4.0. as the result of using reactive networking paradigm. Intentionally it is designed on top of OPC UA Part 14 Pub/Sub protocol supporting interoperability with any product compliant with this specification. Seamless integration with AMQP, MQTT, etc. allows meaningful data transfer in the context of semantics defined using OPC UA Information Model.
+This folder contains library empowering the Industrial Internet of Things \(IIOT\) and Industry 4.0. as the result of using reactive networking paradigm. Intentionally it is designed on top of OPC UA Part 14 Pub/Sub protocol supporting interoperability with any product compliant with this specification. Seamless integration with AMQP, MQTT, etc. allows meaningful data transfer in the context of semantics defined using OPC UA Information Model.
 
 ## Goals
 

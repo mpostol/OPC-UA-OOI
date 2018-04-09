@@ -9,7 +9,7 @@ Assembly Product:       OOI SemanticData
 Assembly Copyright:     Copyright MPostol (c) 2018
 Assembly Trademark:     Object Oriented Internet
 Assembly Version:       3.0.5
-Assembly Date:          2018-03-31
+Assembly Date:          2018-04-08
 
 The main changes and new functionalities are listed below:
 
@@ -22,7 +22,7 @@ CAS
 mailto://mpostol@cas.eu
 
 Copyright (C) 2015, commsvr.com LODZ POLAND
-TEL: +48 (42) 686 25 47
+
 mailto://commserver@cas.eu
 http://www.commsvr.com/
 

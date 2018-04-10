@@ -4,11 +4,14 @@ commserver
 commsvr
 Composable
 Json
+Kerberos
 Locator
+Modbus
 Multicast
 Postol
 Prerelease
 Schemas
+stateful
 typeparamref
 uasconfig
 unicast

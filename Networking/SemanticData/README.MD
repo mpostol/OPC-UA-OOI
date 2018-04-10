@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This project is aimed on implementation of a [Part 14 PubSub 1.04](https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/) using the concept described in the [OPC UA Data Processing Outside the Server](../../SemanticDataSolution#opc-ua-data-processing-outside-the-server)
+This project is aimed on implementation of a [Part 14 PubSub 1.04](https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/) using the concept described in the [OPC UA Data Processing Outside the Server](../../SemanticDataSolution/README.MD#opc-ua-data-processing-outside-the-server)
 
 For more in-depth information about creating UA Applications exchanging data over the network, see [Getting Started Tutorial](./READMEGettingStartedTutorial.md#getting-started-tutorial)
 
-The code is tested using the Unit Test located in the project: [Networking.SemanticData.UnitTest](../../Networking/Tests/SemanticDatalUnitTest)
+The code is tested using the Unit Test located in the project: [SemanticDatalUnitTest][OPC-UA-OOI.Networking.Tests.SemanticDatalUnitTest]
 
 The preliminary code help documentation is here: [API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
 
@@ -28,7 +28,7 @@ In figure below the relationship between this library and external libraries is 
 
 ![Architecture](../../CommonResources/Media/DataManagementExternalLibraries.png)
 
-**Configuration** represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [UA Data Networking Configuration](../../Configuration/Networking#ua-data-networking-configuration) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data.
+**Configuration** represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data.
 
 In figure below the relationship of the internal implementation with the overall domain model is presented.
 
@@ -71,6 +71,8 @@ The library provides basic implementation of the `Message` class that supports p
 
 ## Testing
 
-See how it works in the unit test class: [Networking.SemanticData.UnitTest](../Tests/SemanticDatalUnitTest).
+See how it works in the unit test class: [SemanticDatalUnitTest][OPC-UA-OOI.Networking.Tests.SemanticDatalUnitTest].
 
-The [UA Data Example Application](../../Networking/ReferenceApplication#ua-data-example-application) contains a reference WPF application.
+The [UA Data Example Application](../../Networking/ReferenceApplication/README.MD#ua-data-example-application) contains a reference WPF application.
+
+[OPC-UA-OOI.Networking.Tests.SemanticDatalUnitTest]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/Tests/SemanticDatalUnitTest

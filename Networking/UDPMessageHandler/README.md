@@ -2,7 +2,7 @@
  
 ## Motivation
 
-The main goal of this document is to provide instruction on how to expand the transport layer for OOI Networking of the **Semantic Data** over the User Datagram Protocol (UDP) to be compliant with the specification mentioned in the section *Normative references*. 
+The main goal of this document is to provide instruction on how to expand the transport layer for OOI Networking of the **Semantic Data** over the User Datagram Protocol (UDP) to be compliant with the specifications mentioned in the section *Normative references*. 
 
 A reference implementation of the `Transport` over UDP is provided by the project [Networking.UDPMessageHandler][OOI.Networking.UDPMessageHandler]. Because intentionally the SDK is designed to use any transport protocol, a custom external component implementing UDP connectivity can be seamlessly integrated with this SDK using dependency injection concept illustrated by the following domain model:
 

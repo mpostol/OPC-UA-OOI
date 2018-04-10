@@ -3,6 +3,18 @@
 
 ## Introduction
 
+The [OPC.UA.PubSub][OPC.UA.PubSub] offers the publish-subscribe communication pattern as an option to client-server pattern and is a consistent part of the OPC UA specifications suit. The detailed description of the  [OPC.UA.PubSub][OPC.UA.PubSub] has been covered by the document [ OPC Unified Architecture Part 14: PubSub Main Technology Features][README.PubSubMTF].
+
+The specification defines the following actors: 
+
+* `Publisher`: is the actor that pushes `NetworkMessage` structures to an underlying transport layer.
+* `Subscriber`: is the actor that consumes data encapsulated by the `NetworkMessage` structure, which is polled from the underlying transport layer.
+
+The `Publisher` is the actor that pushes `NetworkMessage` structures to an underlying transport layer. It represents a certain data source, for example, a control device, a manufacturing process, a weather station, or a stock exchange. It may be also OPC UA Clients, OPC UA Servers or in general any applications that understand the syntax and semantics of the `NetworkMessage` structure. 
+
+The `Subscriber` actors are the consumers of `NetworkMessage` structure, which are polled from the underlying transport layer. They may be OPC UA Clients, OPC UA Servers or in general any applications that understand the syntax and semantics of the `NetworkMessage` structure.
+
+
 This specification defines the OPC Unified Architecture (OPC UA) PubSub communication model. The PubSub communication model defines an OPC UA publish-subscribe pattern instead of the Client/Server pattern defined by the Services in Part 4.
 
 The specification consists of:

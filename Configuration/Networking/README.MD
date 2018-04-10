@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This library contains types that supports the configuration management of application implementing the paradigm described in [OPC UA Data Processing Outside the Server](../../SemanticDataSolution#opc-ua-data-processing-outside-the-server). The configuration may be read to or write from the xml or json files. By design this library may be used to support variety kinds of applications at design and run time.
+This library contains types that supports the configuration management of application implementing the paradigm described in [OPC UA Data Processing Outside the Server](../../SemanticDataSolution/README.MD#opc-ua-data-processing-outside-the-server). The configuration may be read to or write from the xml or json files. By design this library may be used to support variety kinds of applications at design and run time.
 
 The project seems to be very important prototyping workspace to answer the question how far we can go with the configuration (design time approach) in context of the following problems we have:
 
@@ -15,7 +15,7 @@ Let me know if it works for you and if not how to converge proposed solution and
 
 ### Run time
 
-By design it is a plug-in or using modern terminology application composition part of the library described in [Networking of SemanticData Library](../../Networking/SemanticData#networking-of-semanticdata-library)  and at run time it can be used as the primary source of configuration for any standalone OPC *UA Data Application* and OPC UA Server supporting PubSub role.
+By design it is a plug-in or using modern terminology application composition part of the library described in [Networking of SemanticData Library](../../Networking/SemanticData/README.MD#networking-of-semanticdata-library)  and at run time it can be used as the primary source of configuration for any standalone OPC *UA Data Application* and OPC UA Server supporting PubSub role.
 
 In this case the application configuration may:
 
@@ -41,8 +41,7 @@ It is good opportunity to review your requirements (if you have any) against the
 
 ## Configuration content
 
-The detailed description of the configuration files content is captured in the documentation at:
- [UAOOI.Configuration.Networking](http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Configuration.Networking.htm).
+The detailed description of the configuration files content is captured in the code documentation [Configuration Networking Help][UAOOI.Configuration.Networking.Help].
 
 The XML schema of the configuration files is available at: [ConfigurationData.xsd](./Serialization/ConfigurationData.xsd). Intentionally data producers and consumers use the same schema for configuration files. It makes it easier to harmonize these roles configuration and supports two roles in one application.
 
@@ -50,4 +49,4 @@ The XML schema of the configuration files is available at: [ConfigurationData.xs
 
 The documentation of the library code is available on-line at:
 
-[UAOOI.Configuration.Networking](http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Configuration.Networking.htm)
+[UAOOI.Configuration.Networking.Help]:http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Configuration.Networking.htm

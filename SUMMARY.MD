@@ -38,3 +38,4 @@
 * [Global Data Discovery](DataDiscovery/README.MD)
 * [Domain Model of the Global Data Discovery](DataDiscovery/DomainModel.md)
 
+## [References](REFERENCES.md)

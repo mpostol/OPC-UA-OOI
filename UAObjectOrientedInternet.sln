@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".CommonResources", ".Common
 		SemanticDataSolution\README.MD = SemanticDataSolution\README.MD
 		SemanticDataSolution\README.MessageCentricCommunication.md = SemanticDataSolution\README.MessageCentricCommunication.md
 		SemanticDataSolution\Readme.SemanticDataDeplyment.MD = SemanticDataSolution\Readme.SemanticDataDeplyment.MD
+		REFERENCES.md = REFERENCES.md
 		SUMMARY.md = SUMMARY.md
 	EndProjectSection
 EndProject

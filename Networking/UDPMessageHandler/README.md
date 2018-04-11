@@ -38,7 +38,7 @@ To identify the communication parties (processes) the following information is u
 
 ### OPC UA PubSub
 
-The [OPC.UA.PubSub][OPC.UA.PubSub] offers the publish-subscribe communication pattern as an option to client-server pattern as a part of the OPC UA specifications suit. The detailed description of the  [OPC.UA.PubSub][OPC.UA.PubSub] has been covered by the document [ OPC Unified Architecture Part 14: PubSub Main Technology Features][README.PubSubMTF].
+The [OPC.UA.PubSub][OPC.UA.PubSub] offers the publish-subscribe communication pattern as an option to client-server pattern and is a consistent part of the OPC UA specifications suit. The detailed description of the  [OPC.UA.PubSub][OPC.UA.PubSub] has been covered by the document [ OPC Unified Architecture Part 14: PubSub Main Technology Features][README.PubSubMTF].
 
 The specification defines the following actors: 
 

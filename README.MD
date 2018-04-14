@@ -15,7 +15,7 @@ Computer Science and Information Systems** captures description of this idea.
 
 ## Content
 
-The `SemanticDataSolution` folder contains projects related to support the [OPC UA Data Processing Outside of the Server](./SemanticDataSolution#opc-ua-data-processing-outside-the-server). Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
+The `SemanticDataSolution` folder contains projects related to support the [OPC UA Data Processing Outside of the Server](./SemanticDataSolution/README.MD#opc-ua-data-processing-outside-the-server). Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
 
 This project is aimed to workout deliverables supporting Process Data handling over Internet including but not limiting to:
 

@@ -1,5 +1,6 @@
 
 # Content Description
+
 The `SemanticDataSolution` folder contains projects related to support the [OPC UA Data Processing Outside of the Server](./README.MD).  Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
 
 The **Tools** section describes projects with output type console application. These deliverables may be used as utilities or as examples illustrating how to use the libraries.

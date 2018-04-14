@@ -1,6 +1,6 @@
 # UA Semantic Data Message Centric Communication
 
-To realize the [*UA Semantic Data*](../SemanticDataSolution#opc-ua-data-processing-outside-the-server) paradigm in practice **UA Data Application** must get access to the data in the context of type definition in compliance with the OPC UA *Information Model*. This article summarizes research on the architecture of infrastructure supporting access to the data using a *Message Centric* communication pattern. The proposed architecture is presented in the following figure.
+To realize the [*UA Semantic Data*](../SemanticDataSolution/README.MD#opc-ua-data-processing-outside-the-server) paradigm in practice **UA Data Application** must get access to the data in the context of type definition in compliance with the OPC UA *Information Model*. This article summarizes research on the architecture of infrastructure supporting access to the data using a *Message Centric* communication pattern. The proposed architecture is presented in the following figure.
 
 ![Domain Model](../CommonResources//Media/MessageCentricCommunication.Domain.png)
 
@@ -15,7 +15,7 @@ The architecture contains the following classes directly involved in the data pr
 
 **UA Server Services** class is an embedded part of any OPC UA server. **UA Server Services** shall be compliant with OPC UA Specification Part 4, i.e. it must be tested against interoperability for selected standard profile. **Address Space Management** is also a typical part of any OPC UA server. It is responsible for creation and management of the OPC UA *Address Space*. Optionally, the server *Address Space* could expose *Information Models* defined by companion specifications, organizations and users.
 
-To leverage [processing of the OPC UA Data outside the OPC UA session](../SemanticDataSolution#opc-ua-data-processing-outside-the-server) using data networking, the above mentioned classes shall support *Message Centric* data exchange pattern using a selected underlying network transport. In this case, the following additional optional roles may be considered for them:
+To leverage [processing of the OPC UA Data outside the OPC UA session](../SemanticDataSolution/README.MD#opc-ua-data-processing-outside-the-server) using data networking, the above mentioned classes shall support *Message Centric* data exchange pattern using a selected underlying network transport. In this case, the following additional optional roles may be considered for them:
 
 1.	Data producer: supported by the writer component populating the messages with the locally obtained data and sending them over the underlying network **Transport**.
 2.	Data consumer: supported by the reader component receiving messages from the network **Transport** and recovering the UA Data from the messages.

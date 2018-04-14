@@ -12,7 +12,6 @@
 
 [wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/
 
-
 - [OPC Unified Architecture – Main Technological Features][wordpress.OPCUAMTF]
 
 [wordpress.OPCUAMTF]: https://mpostol.wordpress.com/2013/08/04/opc-unified-architecture-main-technological-features/
@@ -29,13 +28,21 @@
 
 [RFC.UDP.IP]:https://tools.ietf.org/html/rfc791
 
-- [RFC 7159: The JavaScript Object Notation (JSON) Data Interchange Format][RFC.JSON]
+- [RFC 8259: The JavaScript Object Notation (JSON) Data Interchange Format][RFC.JSON]
 
-[RFC.JSON]:https://tools.ietf.org/html/rfc7159
+[RFC.JSON]:https://tools.ietf.org/html/rfc8259
 
 - [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
 
-[OPC.UA.PubSub]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
+[OPC.UA.PubSub]: https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
+
+-  [OASIS MQTT Version 3.1.1 specification][MQTT]
+  
+[MQTT]:http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/mqtt-v3.1.1.html
+
+- [OASIS Advanced Message Queuing Protocol (AMQP) Version 1.0][AMQP]
+
+[AMQP]:http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html
 
 - [OPC Unified Architecture Specification  Part 7: Profiles Release 1.04][OPC.UA.Profiles]
 

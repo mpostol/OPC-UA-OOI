@@ -14,7 +14,7 @@ Instruction for implementer is covered in the section *Notices for Implementer*.
 
 The following documents, in whole or in part, are normatively referenced in this document and are indispensable for its application.
 
-- \[MQTT\] [OASIS Standards MQTT Version 3.1.1 specification][MQTT]
+- \[MQTT\] [ISO/IEC 20922:2016: Message Queuing Telemetry Transport (MQTT) v3.1.1][ISO.MQTT]
 - \[OPC.UA.PubSub\] [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
 
 ## Introduction
@@ -136,8 +136,13 @@ It has been implements by the following classes providing the required interface
 * `BinaryUDPPackageReader` - implements `IMessageReader` inheriting from `BinaryDecoder`
 * `BinaryUDPPackageWriter` - implements `IMessageWriter` inheriting from `BinaryEncoder`
 
+## See also
+
+-  [ISO/IEC 20922:2016: Message Queuing Telemetry Transport (MQTT) v3.1.1][ISO.MQTT]
+
 [MQTT]:http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/mqtt-v3.1.1.html
+[ISO.MQTT]: https://www.iso.org/standard/69466.html
+
 [OPC.UA.PubSub]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
 [OPC.UA.Profiles]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-7-profiles/
 [README.PubSubMTF]:../SemanticData/README.PubSubMTF.md
-

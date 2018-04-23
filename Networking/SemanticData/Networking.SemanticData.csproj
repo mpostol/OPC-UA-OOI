@@ -147,6 +147,7 @@
     <None Include="README.MD" />
     <None Include="README.PubSubMTF.md" />
     <None Include="READMEGettingStartedTutorial.md" />
+    <None Include="README_AMQPMapping.md" />
     <None Include="README_MQTTMapping.md" />
     <None Include="UAOOI.Networking.SemanticData.nuspec">
       <AutoGen>True</AutoGen>

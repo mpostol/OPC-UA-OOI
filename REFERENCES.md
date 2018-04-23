@@ -12,7 +12,7 @@
 
 [wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/
 
-- [OPC Unified Architecture – Main Technological Features][wordpress.OPCUAMTF]
+- [OPC Unified Architecture â€“ Main Technological Features][wordpress.OPCUAMTF]
 
 [wordpress.OPCUAMTF]: https://mpostol.wordpress.com/2013/08/04/opc-unified-architecture-main-technological-features/
 
@@ -40,7 +40,7 @@
   
 [MQTT]:http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/mqtt-v3.1.1.html
 
-- [OASIS Advanced Message Queuing Protocol (AMQP) Version 1.0][AMQP]
+- [amqp-core-overview-v1.0 OASIS Advanced Message Queuing Protocol (AMQP) Version 1.0][AMQP]
 
 [AMQP]:http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html
 
@@ -55,3 +55,11 @@
 - [OOI.Networking.ReferenceApplication][OOI.Networking.ReferenceApplication]
  
 [OOI.Networking.ReferenceApplication]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/ReferenceApplication
+
+- [ISO/IEC 19464:2014: Advanced Message Queuing Protocol (AMQP) v1.0][ISO.AMQP]
+
+[ISO.AMQP]: https://www.iso.org/standard/64955.html
+
+-  [ISO/IEC 20922:2016: Message Queuing Telemetry Transport (MQTT) v3.1.1][ISO.MQTT]
+
+[ISO.MQTT]: https://www.iso.org/standard/69466.html

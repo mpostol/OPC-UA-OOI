@@ -39,4 +39,4 @@
 * [Domain Model of the Global Data Discovery](DataDiscovery/DomainModel.md)
 
 ## References
-* [References](REFERENCES.md)
+* [See also](REFERENCES.md)

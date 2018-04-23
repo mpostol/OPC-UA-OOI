@@ -37,7 +37,7 @@ A link is a unidirectional route between two **Nodes**. A link attaches to a nod
 
 As illustrated in the following domain model, **Nodes** exist within a **Container**. **Container** may be implemented as a process carrying out a software program instance. Examples of containers are **Broker** and **Client** applications. Each **Container** may hold many nodes. Examples of AMQP **Nodes** are **Producers**, **Consumers**, and **Queues**. Producers and consumers are the elements within an application that generate and process messages. **Queues** are entities that store and forward messages.
 
-![Class Diagram of Concrete Containers and Nodes](../../CommonResources\Media\AMQP.ConcreteContainersNodes.png)
+![Class Diagram of Concrete Containers and Nodes](../../CommonResources/Media/AMQP.ConcreteContainersNodes.png)
 
 The AMQP transport specification defines a peer-to-peer protocol for transferring messages between **Nodes** in an AMQP network. In order for communication to occur between nodes in different **Containers** a connection needs be established. An AMQP connection consists of a full-duplex, reliably ordered sequence of frames. A frame is a stream of bytes carried on the wire. Connections have a negotiated maximum frame size (length of the stream). It is assumed connections are transient and can fail for a variety of reasons resulting in the loss of an unknown number of frames.
  

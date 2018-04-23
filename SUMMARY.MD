@@ -21,6 +21,7 @@
 * [Networking of SemanticData Library](Networking/SemanticData/README.MD)
 * [Underlying Transport over UDP](Networking/UDPMessageHandler/README.md)
 * [Underlying Transport over MQTT](Networking/SemanticData/README_MQTTMapping.md)
+* [Underlying Transport over AMQP](Networking/SemanticData/README_AMQPMapping.md)
 * [Data management and binding](Networking/SemanticData/READMEDataDiscoveryAndBinding.md)
 
 ### Configuration

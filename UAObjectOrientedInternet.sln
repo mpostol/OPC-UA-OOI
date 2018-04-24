@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".CommonResources", ".Common
 		SemanticDataSolution\Readme.SemanticDataDeplyment.MD = SemanticDataSolution\Readme.SemanticDataDeplyment.MD
 		REFERENCES.md = REFERENCES.md
 		SUMMARY.md = SUMMARY.md
+		TableOfContent.md = TableOfContent.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.InformationModelFactory", "SemanticDataSolution\InformationModelFactory\SemanticData.InformationModelFactory.csproj", "{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}"

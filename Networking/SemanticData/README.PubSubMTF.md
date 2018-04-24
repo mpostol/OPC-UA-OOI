@@ -24,25 +24,32 @@ Using the connection-oriented communication pattern it is difficult or even impo
  
 > **As the result it can be recognized as the IoT ready technology.**
 
-The specification claims that the PubSub integrates into the existing OPC UA technology but as result of applying the connectionless communication it is easier to implement low power and low-latency communications on local networks. Additionally, the specification states that PubSub is based on the **[OPC UA Information Model][CAS.OPCUAIMD]** with the aim of seamless integration into **OPC UA Servers** and **OPC UA Clients**. Unfortunately,**OPC UA Information Model** is not used to promote **PubSub Applications** interoperability. This concept is only employed to define **Security Key Service** and **Configuration Service** models, which have an only indirect impact on the **PubSub Applications** interoperability. Nevertheless, the PubSub communication does not require such a role dependency, i.e there is no necessity for **Publisher** or **Subscriber** to be either an **OPC UA Server** or an **OPC UA Client** to participate in the communication.
+The specification claims that the PubSub integrates into the existing OPC UA technology but as result of applying the connectionless communication it is easier to implement low power and low-latency communications on local networks. Additionally, the specification states that PubSub is based on the **[OPC UA Information Model][CAS.OPCUAIMD]** with the aim of seamless integration into **OPC UA Servers** and **OPC UA Clients**. Nevertheless, the PubSub communication does not require such a role dependency, i.e there is no necessity for **Publisher** or **Subscriber** to be either an **OPC UA Server** or an **OPC UA Client** to participate in the communication.
+
+> Note: Unfortunately,**OPC UA Information Model** is not used to promote **PubSub Applications** interoperability. This concept is only employed to define **Security Key Service** and **Configuration Service** models, which have an only indirect impact on the **PubSub Applications** interoperability. 
 
 # Services
 
-**PubSub Applications** exchange messages formatted as the `NetworkMessage` structure using underlying transport layer. Directly or indirectly the specification defines the following actors:
+**PubSub Applications** exchange messages formatted as the `NetworkMessage` structure using underlying transport layer. As illustrated in the following domain model,  directly or indirectly the specification defines the following actors:
 
 * **Publisher**: pushes the current process data formatted as the `NetworkMessage` structure to an underlying transport layer.
 * **Subscriber**: consumes the process data, which is recovered from the `NetworkMessages` structure polled from the underlying transport layer.
-* **Security Key Service** - provides security keys that can be used to sign and encrypt messages.
-* **Configuration Tool** - an external application used to remotely configure **PubSub Application**.
+* **Security Key Management** - provides security keys that can be used to sign and encrypt messages.
+* **Configuration Management** - an external application used to remotely configure **PubSub Application**.
+
+![Class Diagram of Concrete Containers and Nodes](../../CommonResources/Media/PubSubMainComponents.png)
 
 The **Publisher** is the actor that pushes `NetworkMessage` structures to an underlying transport layer. It represents a certain data source, for example, a control device, a manufacturing process, a weather station or a stock exchange. It may be also **OPC UA Client**, **OPC UA Server** or in general any applications that understand the syntax and semantics of the `NetworkMessage` structure.
 
 The **Subscriber** actors are the consumers of `NetworkMessage` structures, which are polled from the underlying transport layer. They may be **OPC UA Client**, **OPC UA Server** or in general any applications that understand the syntax and semantics of the `NetworkMessage` structure.
 
-A **Security Key Service (SKS)** provides keys for message security that can be used by the
-**Publisher** to sign and encrypt `NetworkMessages` and by the **Subscriber** to verify the signature of and decrypt the `NetworkMessages`.
+To interchange the process data **Publisher** and all associated **Subscribers** depends on a common **Distribution Channel**. **Distribution Channel** models common knowledge necessary to use a common underlying messages transport layer, i.e. common underlying messaging transport layer and relevant parameters to route the messages over it.
 
-**Publishers** and **Subscribers** may be configurable through vendor-specific engineering tools or using the dedicated configuration **OPC UA Information Model** described in this standard. This model allows a standard **OPC UA Client** based configuration tool to configure a **PubSub Application** connecting to the embedded **OPC UA Server**. Using remote **Configuration Tool** over an **OPC UA Session** does not determine how dynamic the configuration can be. It is worth stressing that the configuration model doesn't provide any definition dedicated to being used for the data bindings configuration.
+A **Security Key Management** provides keys for message security that can be used by the **Publisher** to sign and encrypt `NetworkMessages` and by the **Subscriber** to verify the signature of and decrypt the `NetworkMessages`. The specification defines OPC UA Information model for **Security Key Services** that enables to implement this class as the **OPC UA Server** or **OPC UA Client**.
+
+**Publishers** and **Subscribers** may be configurable through vendor-specific engineering tools or using the dedicated configuration **OPC UA Information Model** described in this standard. This model allows a standard **OPC UA Client** based configuration tool to configure a **PubSub Application** connecting to the embedded **OPC UA Server**. Using remote **Configuration Tool** over an **OPC UA Session** does not determine how dynamic the configuration can be. 
+
+> It is worth stressing that the configuration model doesn't provide any definition dedicated to being used for the data bindings configuration.
 
 # Interoperability
 

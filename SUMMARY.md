@@ -21,8 +21,8 @@
 
 * [Internet of Things (IOT) Communication](Networking/README.MD)
 * [UA Semantic Data Message Centric Communication](SemanticDataSolution/README.MessageCentricCommunication.md)
-* [OPC Unified Architecture Part 14: PubSub Main Technology Features](Networking/SemanticData/README.PubSubMTF.md)
 * [Networking of SemanticData Library](Networking/SemanticData/README.MD)
+* [OPC Unified Architecture Part 14: PubSub Main Technology Features](Networking/SemanticData/README.PubSubMTF.md)
 * [Underlying Transport over UDP](Networking/UDPMessageHandler/README.md)
 * [Underlying Transport over MQTT](Networking/SemanticData/README_MQTTMapping.md)
 * [Underlying Transport over AMQP](Networking/SemanticData/README_AMQPMapping.md)

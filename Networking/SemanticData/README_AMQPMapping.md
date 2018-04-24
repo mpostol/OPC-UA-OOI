@@ -27,15 +27,15 @@ The following documents, in whole or in part, are normatively referenced in this
 
 The [Advanced Message Queuing Protocol (AMQP)][ISO.AMQP] is an open standard application layer protocol. It is a vendor-neutral and platform-agnostic protocol that offers organizations an easier, more secure approach to passing real-time data streams and business transactions. The goal of AMQP is to ensure information is safely and efficiently transported between applications, among organizations, across distributed cloud computing environments, and within mobile infrastructures. AMQP avoids proprietary technologies, offering the potential to lower the cost of enterprise middleware software integration through open interoperability.
 
-This section briefly summarizes the core concepts of the AMQP and explains how to use AMQP as the transport layer. The goal is for any developer using any existing AMQP 1.0 client stack to be able to provide external, composable implementation of the **MessageHandling** class supporting interoperability via AMQP 1.0.
+This section briefly summarizes the core concepts of the AMQP and explains how to use AMQP as the transport layer. The goal is for any developer using any existing AMQP 1.0 client stack to be able to provide external, composable implementation of the **MessageHandling** class supporting interoperability via AMQP.
 
-In the following discussion, it is assumed that the management of AMQP communication are handled by a respective stack. Common general-purpose AMQP 1.0 stacks, such as AMQP.NET Lite, already implement all core AMQP 1.0 protocols. Those foundation gestures should be wrapped with a higher-level functionality to provide the reactive interoperability compliant with the IoT paradigms.
+In the following discussion, it is assumed that the management of AMQP communication are handled by a respective stack. Common general-purpose AMQP 1.0 stacks, such as [AMQP.NET Lite](https://github.com/Azure/amqpnetlite), [RabbitMQ](https://www.rabbitmq.com/) implement AMQP. Those foundation gestures should be wrapped with a higher-level functionality to provide the reactive interoperability compliant with the IoT paradigms.
 
 An AMQP network consists of **Nodes** connected via links. **Nodes** are named entities responsible for the safe storage and/or delivery of messages. Messages can originate from, terminate at, or be relayed by nodes. As a message travels through an AMQP network, the responsibility for safe storage and delivery of the message is transferred between the **Nodes** it encounters.
 
 A link is a unidirectional route between two **Nodes**. A link attaches to a node. There are two kinds of nodes: sources and targets. Messages only travel along a link if they meet the entry criteria at the source.
 
-As illustrated in the following domain model, **Nodes** exist within a **Container**. **Container** may be implemented as a process carrying out a software program instance. Examples of containers are **Broker** and **Client** applications. Each **Container** may hold many nodes. Examples of AMQP **Nodes** are **Producers**, **Consumers**, and **Queues**. Producers and consumers are the elements within an application that generate and process messages. **Queues** are entities that store and forward messages.
+As illustrated in the following domain model, **Nodes** exist within a **Container**. **Container** may be implemented as a process carrying out a software program instance. Examples of containers are **Broker** and **Client** applications. An example of the **Clint** is **PubSub Application**. Each **Container** may hold many nodes. Examples of AMQP **Nodes** are **Producers**, **Consumers**, and **Queues**. Producers and consumers are the elements within an application that generate and process messages. **Queues** are entities that store and forward messages.
 
 ![Class Diagram of Concrete Containers and Nodes](../../CommonResources/Media/AMQP.ConcreteContainersNodes.png)
 
@@ -47,10 +47,9 @@ The network connection is thus anchored on the container. It is initiated by the
 - declaring or negotiating the use of Transport Level Security (TLS/SSL), 
 - an authentication/authorization handshake at the connection scope that is based on Simple Authentication and Security Layer (SASL).
 
-After the connection is established, the containers each declare the maximum frame size they are willing to handle, and after an idle timeout they’ll unilaterally disconnect if there is no activity on the connection. They also declare how many concurrent channels are supported. A channel is a unidirectional, outbound, virtual transfer path on top of the connection.
+After the connection is established, the containers each declare the maximum frame size they are willing to handle, and after an idle timeout they will unilaterally disconnect if there is no activity on the connection. They also declare how many concurrent channels are supported. A channel is a unidirectional, outbound, virtual transfer path on top of the connection.
 
-Connections are subject to an idle timeout threshold. The timeout is triggered by a local peer when no frames
-are received after a threshold value is exceeded. The idle timeout starts from the time the last message is received. If the threshold is exceeded, then a peer SHOULD try to gracefully close the connection using a close frame with an error explaining why. If the remote peer does not respond gracefully within a threshold to this, then the peer may close the TCP socket.
+Connections are subject to an idle timeout threshold. The timeout is triggered by a local peer when no frames are received after a threshold value is exceeded. The idle timeout starts from the time the last message is received. If the threshold is exceeded, then a peer SHOULD try to gracefully close the connection using a close frame with an error explaining why. If the remote peer does not respond gracefully within a threshold to this, then the peer may close the TCP socket.
 
 A session takes a channel from each of the interconnected containers to form a bi-directional communication path. Number of sessions must be defined or arbitrary limited.
 
@@ -58,7 +57,7 @@ A session takes a channel from each of the interconnected containers to form a b
 
 An AMQP session correlates two unidirectional channels to form a bidirectional, sequential conversation between two containers. Sessions provide a flow control scheme based on the number of frames transmitted. Since frames have a maximum size for a given connection, this provides flow control based on the number of bytes transmitted. A single connection may have multiple independent sessions active simultaneously, up to the negotiated channel limit.
 
-Sessions provide the context for communication between sources and targets. A link endpoint is associated with a session endpoint. Within a session, the link protocol is used to establish links between sources and targets and to transfer messages across them. A single session can be simultaneously associated with any number of links. However, a link has not to be attached to more than one session at a time. 
+Sessions provide the context for communication between sources and targets. A link endpoint is associated with a session endpoint. Within a session, the link protocol is used to establish links between sources and targets and to transfer messages across them. A single session can be simultaneously associated with any number of links. However, a link has not to be attached to more than one session at a time.
 
 > Links are named, and the state at the node can live longer than the connection on which they were established.
 
@@ -70,16 +69,25 @@ A source can restrict the messages transferred from a source by specifying a fil
 
 The [OPC.UA.PubSub][OPC.UA.PubSub] offers the publish/subscribe communication pattern as an option to client-server pattern and is a consistent part of the OPC UA specifications suit. The detailed description of the [OPC.UA.PubSub][OPC.UA.PubSub] has been covered by the document [OPC Unified Architecture Part 14: PubSub Main Technology Features][README.PubSubMTF].
 
-The specification defines the following actors: 
+The specification recognizes the following actors (see figure above) as parts of the **PubSub Application** as the communication parties: 
 
-* `Publisher`: is the actor that pushes `NetworkMessage` structures to an underlying transport layer.
-* `Subscriber`: is the actor that consumes data encapsulated by the `NetworkMessage` structure, which is polled from the underlying transport layer.
+* **Publisher**: is the actor that pushes `NetworkMessage` structures to an underlying transport layer.
+* **Subscriber**: is the actor that consumes data encapsulated by the `NetworkMessage` structure, which is polled from the underlying transport layer.
 
-According to the specification the `Publisher` and `Subscriber` don't have any subscriptions management functionality, namely, they follow a communication paradigm called unsolicited notification. When unsolicited notification occurs, a client receives a message that it has never requested. The `Subscriber` must use a filtering mechanism to process only messages it is interested in.
+According to the specification the **Publisher** and **Subscriber** don't have any subscriptions management functionality, namely, they follow a communication paradigm called unsolicited notification. When unsolicited notification occurs, a client may receive a message that it has never requested. The **Subscriber** must use a filtering mechanism to process only messages it is interested in.
 
-Lack of subscriptions management functionality defined by the [OPC.UA.PubSub][OPC.UA.PubSub] could be mitigated by applying the \([AMQP][AMQP]\) that some functionality related to communication reliability, data selection, and distribution is delegated to the **AMQP Server**.
+Lack of subscriptions management functionality defined by the [OPC.UA.PubSub][OPC.UA.PubSub] could be mitigated by applying the \([AMQP][AMQP]\) that some functionality related to communication reliability, data selection, and distribution is delegated to the **Container**.
 
 ## AMQP mapping
+
+### Introduction
+
+Using AMQP connectivity as the messages transport layer by the **PubSub Application** requires two kinds of parameters:
+
+- Promoting interoperability between **Publisher** and all **Subscribers** interested to obtain data from it.
+- Promoting interoperability between **PubSub Applications** and AMQP **Container**.
+
+Configuration of the parameters related to **PubSub Applications** and AMQP **Container** may be recognized as the implementation details except the scenario where remote configuration using **Configuration Services** is the case.
 
 ### `Application Message` encoding
 
@@ -119,7 +127,6 @@ The syntax for an AMQP URL over Web Sockets has the following form:
 `wss://<domain name>[:<port>][/<path>]`
 
 The default port is 443.
-
 
 ### Authentication 
 
@@ -175,7 +182,6 @@ The AMQP message properties shall include additional fields defined on the Write
 ### `Keep Alive`
 
 If the `KeepAliveTime` is set on a `WriterGroup`, a value slightly higher than the configured value of the group in seconds should be set as AMQP `Keep Alive` ensuring that the connection is disconnected if the keep alive message was not sent by any writer in the specified time.
-
 
 ## Data
 

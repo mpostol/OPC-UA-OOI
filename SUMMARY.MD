@@ -1,9 +1,9 @@
 # Object Oriented Internet
 
-* [Table of Content](SUMMARY.md)
  
 ## Summary
 
+* [Table of Content](SUMMARY.md)
 * [Introduction](README.MD)
 
 ## Semantic-Data Processing

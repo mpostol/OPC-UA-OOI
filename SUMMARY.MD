@@ -1,7 +1,7 @@
 # Object Oriented Internet
-
-* [Table of Content](TableOfContent)
  
+* [Table of Content](TableOfContent.md)
+
 ## Summary
 
 * [Introduction](README.MD)

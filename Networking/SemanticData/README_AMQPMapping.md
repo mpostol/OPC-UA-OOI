@@ -29,7 +29,7 @@ The [Advanced Message Queuing Protocol (AMQP)][ISO.AMQP] is an open standard app
 
 This section briefly summarizes the core concepts of the AMQP and explains how to use AMQP as the transport layer. The goal is for any developer using any existing AMQP 1.0 client stack to be able to provide external, composable implementation of the **MessageHandling** class supporting interoperability via AMQP.
 
-In the following discussion, it is assumed that the management of AMQP communication are handled by a respective stack. Common general-purpose AMQP 1.0 stacks, such as [AMQP.NET Lite](https://github.com/Azure/amqpnetlite), [RabbitMQ](https://www.rabbitmq.com/) implement AMQP. Those foundation gestures should be wrapped with a higher-level functionality to provide the reactive interoperability compliant with the IoT paradigms.
+In the following discussion, it is assumed that the management of AMQP communication are handled by a respective stack, such as [AMQP.NET Lite][AMQP.NET Lite], [RabbitMQ][RabbitMQ].
 
 An AMQP network consists of **Nodes** connected via links. **Nodes** are named entities responsible for the safe storage and/or delivery of messages. Messages can originate from, terminate at, or be relayed by nodes. As a message travels through an AMQP network, the responsibility for safe storage and delivery of the message is transferred between the **Nodes** it encounters.
 
@@ -39,7 +39,7 @@ As illustrated in the following domain model, **Nodes** exist within a **Contain
 
 ![Class Diagram of Concrete Containers and Nodes](../../CommonResources/Media/AMQP.ConcreteContainersNodes.png)
 
-The AMQP transport specification defines a peer-to-peer protocol for transferring messages between **Nodes** in an AMQP network. In order for communication to occur between nodes in different **Containers** a connection needs be established. An AMQP connection consists of a full-duplex, reliably ordered sequence of frames. A frame is a stream of bytes carried on the wire. Connections have a negotiated maximum frame size (length of the stream). It is assumed connections are transient and can fail for a variety of reasons resulting in the loss of an unknown number of frames.
+In order for communication to occur between **Nodes** in different **Containers** a connection needs be established. An AMQP connection consists of a full-duplex, reliably ordered sequence of frames. A frame is a stream of bytes carried on the wire. Connections have a negotiated maximum frame size (length of the stream). It is assumed that connections are transient and can fail for a variety of reasons resulting in the loss of an unknown number of frames.
  
 The network connection is thus anchored on the container. It is initiated by the container in the client role making an outbound TCP socket connection to a container in the listener role, which listens for and accepts inbound TCP connections. The connection handshake includes:
 
@@ -49,13 +49,11 @@ The network connection is thus anchored on the container. It is initiated by the
 
 After the connection is established, the containers each declare the maximum frame size they are willing to handle, and after an idle timeout they will unilaterally disconnect if there is no activity on the connection. They also declare how many concurrent channels are supported. A channel is a unidirectional, outbound, virtual transfer path on top of the connection.
 
-Connections are subject to an idle timeout threshold. The timeout is triggered by a local peer when no frames are received after a threshold value is exceeded. The idle timeout starts from the time the last message is received. If the threshold is exceeded, then a peer SHOULD try to gracefully close the connection using a close frame with an error explaining why. If the remote peer does not respond gracefully within a threshold to this, then the peer may close the TCP socket.
-
-Security with AMQP is primarily provided by a TLS connection between the **Nodes** and the, however, this requires that the whole communication path must be trusted. Applications that require end-to-end security with AMQP need to apply security protection defined above the AMQP, e.g. in the [OPC.UA.PubSub][OPC.UA.PubSub].
+Security with AMQP is primarily provided by a TLS connection between the **Containers**. Applications that require end-to-end security with AMQP need to apply security protection defined above the AMQP, e.g. in the [OPC.UA.PubSub][OPC.UA.PubSub].
 
 A session takes a channel from each of the interconnected containers to form a bi-directional communication path. Number of sessions must be defined or arbitrary limited.
 
-> Connections, channels, and sessions are ephemeral. If the underlying connection they must be reestablished.
+> Connections, channels, and sessions are ephemeral. If the underlying connection collapses they must be reestablished.
 
 An AMQP session correlates two unidirectional channels to form a bidirectional, sequential conversation between two containers. Sessions provide a flow control scheme based on the number of frames transmitted. Since frames have a maximum size for a given connection, this provides flow control based on the number of bytes transmitted. A single connection may have multiple independent sessions active simultaneously, up to the negotiated channel limit.
 
@@ -72,15 +70,15 @@ The AMQP message consists of the following sections:
 - Zero or one `header`: the Transport headers for a message.
 - Zero or one `delivery-annotations`: delivery-specific non-standard properties at the head of the message.
 - Zero or one `message-annotations`: properties of the message which are aimed at the infrastructure and should be propagated across every delivery step.
-- Zero or one `properties`: Immutable properties of the message.
-- Zero or one `application-properties`: structured application data. Intermediaries can use the data within this structure for the purposes of filtering or routing.
-- The `body` (`application-data`): consists of one of the following three choices: 
+- Zero or one `properties`: immutable properties of the message.
+- Zero or one `application-properties`: structured application data. Intermediaries can use the data within this structure for the purposes of filtering or routing.
+- The `body` (`application-data`): consists of one of the following three choices:
   - one or more `data`: contains opaque binary data. 
   - one or more `amqp-sequence`: a sequence section contains an arbitrary number of structured data elements. 
   - a single `amqp-value`: contains a single AMQP value.
 - Zero or one `footer`: details about the message or delivery which can only be calculated or evaluated once the whole bare message has been constructed or seen (for example message hashes, HMACs, signatures and encryption details).
 
-Using an available implementation of the AMQP stack not all fields are exposed in the library API.
+> Not all fields are exposed in the library API of the AMQP stack.
 
 ### OPC UA PubSub
 
@@ -236,9 +234,11 @@ In the article [Networking of SemanticData Library](README.MD#message-transport)
 
 - [OASIS Advanced Message Queuing Protocol (AMQP) Version 1.0][AMQP]
 
-[AMQP]:http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html
+[AMQP]: http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html
 [ISO.AMQP]: https://www.iso.org/standard/64955.html
-[OPC.UA.PubSub]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
-[OPC.UA.Profiles]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-7-profiles/
+[OPC.UA.PubSub]: https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
+[OPC.UA.Profiles]: https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-7-profiles/
 [README.PubSubMTF]:../SemanticData/README.PubSubMTF.md
+[AMQP.NET Lite]: https://github.com/Azure/amqpnetlite
+[RabbitMQ]: https://www.rabbitmq.com/
 

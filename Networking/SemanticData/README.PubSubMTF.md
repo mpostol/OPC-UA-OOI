@@ -57,7 +57,7 @@ The **PubSub Applications** are decoupled by exchanging messages over an underly
 
 **PubSub Applications** interoperability doesn't depend on any functionality provided by the underlying transport layer. According to the specification, the **Subscriber** and **Publisher** can be interconnected using any transparent messages transport infrastructure. It defines two groups of solutions:
 
-- A broker-less: the transport layer is the network infrastructure that is able to route datagram-based messages, e.g [UDP][RFC.UDP], ETHERNET.
+- A broker-less: the transport layer is the network infrastructure that is able to route datagram-based messages, e.g [UDP][RFC.UDP], [AMQP][AMQP], ETHERNET.
 - A broker-based: the core component of the transport layer is a message broker, e.g. [AMQP][AMQP] or [MQTT][MQTT].
 
 In both cases, one-to-many relationship between **Publisher** and **Subscriber** can be obtained. For UDP multicast messages distribution may be applied to send Internet Protocol (IP) datagrams to a group of interested receivers in a single transmission. For the broker-based transport, all messages are published to specific queues (e.g. topics, nodes) that the broker exposes and **Subscribers** can listen to these queues.
@@ -86,10 +86,6 @@ The following documents, in whole or in part, are normatively referenced in this
 
 # Glossary
 
-- **PubSub Applications**
- 
-> Any instance of the software program that conforms to the PubSub specification.
- 
 - Publisher-subscriber communication pattern
  
 > Publish-subscribe is a messages distribution scenario where senders of messages, called publishers, do not send them directly to specific receivers, called subscribers, but instead categorize published messages into classes without knowledge of which subscribers if any, there may be. Similarly, subscribers express interest in one or more classes and only receive messages that are of interest, without knowledge of which publishers, if any, there are. In the publish-subscribe model, subscribers typically receive only a subset of the total messages published. The process of selecting messages for reception and processing is called filtering. There are two common forms of filtering: topic-based and content-based.

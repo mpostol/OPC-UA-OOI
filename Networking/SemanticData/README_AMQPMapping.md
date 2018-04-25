@@ -65,6 +65,19 @@ Once attached, a link is subject to flow control of message transfers. Link endp
 
 A source can restrict the messages transferred from a source by specifying a filter. A filter can be thought of as a function which takes a message as input and returns a boolean value: true if the message will be accepted by the source, false otherwise. A filter must not change its return value for a message unless the state or annotations on the message at the node change (e.g., through an updated delivery state).
 
+The AMQP message consists of the following sections:
+
+- Zero or one `header`.
+- Zero or one `delivery-annotations`.
+- Zero or one `message-annotations`.
+- Zero or one `properties`.
+- Zero or one `application-properties`.
+- The body consists of one of the following three choices: 
+  - one or more `data` sections, 
+  - one or more `amqp-sequence`sections, 
+  - a single `amqp-value` section.
+- Zero or one footer.
+  
 ### OPC UA PubSub
 
 The [OPC.UA.PubSub][OPC.UA.PubSub] offers the publish/subscribe communication pattern as an option to client-server pattern and is a consistent part of the OPC UA specifications suit. The detailed description of the [OPC.UA.PubSub][OPC.UA.PubSub] has been covered by the document [OPC Unified Architecture Part 14: PubSub Main Technology Features][README.PubSubMTF].
@@ -84,17 +97,23 @@ Lack of subscriptions management functionality defined by the [OPC.UA.PubSub][OP
 
 Using AMQP connectivity as the messages transport layer by the **PubSub Application** requires two kinds of parameters:
 
-- Promoting interoperability between **Publisher** and all **Subscribers** interested to obtain data from it.
-- Promoting interoperability between **PubSub Applications** and AMQP **Container**.
+- PubSub **Distribution channel**: promoting interoperability between **Publisher** and all **Subscribers** interested to obtain data from it.
+- AMQP connection: Promoting interoperability between **PubSub Applications** and AMQP **Container**.
 
 Configuration of the parameters related to **PubSub Applications** and AMQP **Container** may be recognized as the implementation details except the scenario where remote configuration using **Configuration Services** is the case.
 
-### `Application Message` encoding
+### PubSub **Distribution channel**
+
+#### `properties` and `application properties`
+
+The AMQP `Bare Message` may 
 
 The [OPC.UA.PubSub][OPC.UA.PubSub] specification defines two possible encoding for the `Application Messages`:
 
-- Binary.
-- JSON.
+The `NetworkMessage` structure can be serialized using the following encoding:
+
+- UADP: optimized binary encoding.
+- JSON: text format as defined in [RFC JSON][RFC.JSON].
 
 AMQP Brokers have an upper limit on message size. The mechanism for handling `NetworkMessage` that exceed the Broker limits depend on the encoding.
 
@@ -109,56 +128,6 @@ If the encoded AMQP message size exceeds the `Server` limits it should be broken
 It is recommended that the MetaDataQueueName as described in [OPC.UA.PubSub][OPC.UA.PubSub] is configured as a sub-topic of the related `QueueName` with the name `$Metadata`. The AMQP RETAIN flag shall be set for metadata messages.
 
 The implementation choses packet and message size limits depending on the capabilities of the operating system or the capabilities of the device the application is running on. They can be made configurable through configuration model extensions or by other means.
-
-### Security
-
-Security with AMQP is primarily provided by a TLS connection between the `Client` and the `Server`, however, this requires that the `Server` must be trusted. For that reason, it may be necessary to provide end-to-end security. Applications that require end-to-end security with AMQP need to use the binary message encoding and apply security protection defined in the [OPC.UA.PubSub][OPC.UA.PubSub] specification.
-
-### Addressing
-
-The syntax of the AMQP transporting protocol URL used has the following form:
-
-`amqps://<domain name>[:<port>][/<path>]`
-
-The default port is 5671.
-
-The syntax for an AMQP URL over Web Sockets has the following form:
-
-`wss://<domain name>[:<port>][/<path>]`
-
-The default port is 443.
-
-### Authentication 
-
-Authentication shall be performed according to the configured `AuthenticationProfileUri` of the `PubSubConnection`, `DataSetWriterGroup`, `DataSetWriter` or `DataSetReader` entities. If no authentication information is provided in the form of `ResourceUri` and `AuthenticationProfileUri`, SASL Anonymous is implied. If the authentication profile specifies SASL PLAIN authentication, a separate connection for each new Authentication setting is required.
-
-> This requirements are not clear because it is not related to Publisher/Subscriber interoperability- it is not common knowledge necessary to communicate over AMQP. This parameter could be relevant for the **PubSub Application** and **Container** interoperability. This section must revisited after getting more. 
- 
-### `Quality of Service`
-
-A writer negotiates the delivery guarantees for its link using the snd-settle-mode settlement policy (settled, unsettled, mixed) it will use, and the desired rcv-settle-mode (first, second) of the broker. 
-
-Vice versa, the reader negotiates delivery guarantees using its rcv-settle-mode (first, second) and the desired snd-settle-mode (settled, unsettled) of the broker.
-
-This matches to the `BrokerTransportQualityOfService` values as follows:
-
-- AtMostOnce_1 – messages are pre-settled at the sender endpoint and not sent again. Messages may be lost in transit. This is the default setting.
-- AtLeastOnce_2 – messages are received and settled at the receiver without waiting for the sender to settle.
-- ExactlyOnce_3 – messages are received, the sender settles and then the receiver settles.
-
-> This mapping requirements must be reviewed against AMQP specification. It seems that the `BrokerTransportQualityOfService` is defined by the configuration model and not exist if this model is not used.
-
-### `Keep Alive`
-
-If the `KeepAliveTime` is set on a `WriterGroup`, a value slightly higher than the configured value of the group should be used as idle timeout of the connection ensuring that the connection is disconnected if the keep alive message was not sent by any writer. Otherwise, if no `KeepAliveTime` is specified, the implementation should set a reasonable default value.
-
-> It must be expalined what the connection means. The AMQP define connection: **Containers**, session and Link.
- 
-When setting the maximum message sizes for the Link, the `MaxNetworkMessageSize` of the PubSubGroup shall be used. If this value is 0, the implementation chooses a reasonable maximum.
-
-Other limits are up to the implementation and depend on the capabilities of the OS or or the capabilities of the device the Publisher or Subscriber is running on, and can be made configurable through configuration model extensions or by other means.
-
-> this setting is related to the **PubSub Application and **Container** interoperability except the scenario where the **Subscriber** is implemented as **Container**. 
 
 ### Message Header
 
@@ -179,11 +148,7 @@ content-type | MIME type for the message body. MIME types are specified in the m
 
 The AMQP message properties shall include additional fields defined on the WriterGroup or DataSetWriter through the KeyValuePair array in the WriterGroupProperties and DataSetWriterProperties. The NamespaceIndex of the QualifiedName in the KeyValuePair shall be 0 for AMQP standard message properties. The Name of the QualifiedName is constructed from a message prefix and the AMQP property name with the following syntax.
 
-### `Keep Alive`
-
-If the `KeepAliveTime` is set on a `WriterGroup`, a value slightly higher than the configured value of the group in seconds should be set as AMQP `Keep Alive` ensuring that the connection is disconnected if the keep alive message was not sent by any writer in the specified time.
-
-## Data
+#### Data
 
 The AMQP data field is encoded depending on the selected encoding mapping as defined for the:
 - JSON message mapping - The corresponding MIME type is `application/json`.
@@ -196,6 +161,58 @@ For UADP encoding the specification requires:
 > It is recommended that the MetaDataQueueName as described in 6.4.2.3.6 is configured as a sub-topic of the related QueueName with the name $Metadata.
 
 Unfortunately the AMQP does not define the terms: 'sub-topic' and QueueName. It is also not clear if `$Metadata` is terminal symbol or refers to somethings else.
+
+### AMQP connection
+
+#### Security
+
+Security with AMQP is primarily provided by a TLS connection between the `Client` and the `Server`, however, this requires that the `Server` must be trusted. For that reason, it may be necessary to provide end-to-end security. Applications that require end-to-end security with AMQP need to use the binary message encoding and apply security protection defined in the [OPC.UA.PubSub][OPC.UA.PubSub] specification.
+
+#### Addressing
+
+The syntax of the AMQP transporting protocol URL used has the following form:
+
+`amqps://<domain name>[:<port>][/<path>]`
+
+The default port is 5671.
+
+The syntax for an AMQP URL over Web Sockets has the following form:
+
+`wss://<domain name>[:<port>][/<path>]`
+
+The default port is 443.
+
+#### Authentication 
+
+Authentication shall be performed according to the configured `AuthenticationProfileUri` of the `PubSubConnection`, `DataSetWriterGroup`, `DataSetWriter` or `DataSetReader` entities. If no authentication information is provided in the form of `ResourceUri` and `AuthenticationProfileUri`, SASL Anonymous is implied. If the authentication profile specifies SASL PLAIN authentication, a separate connection for each new Authentication setting is required.
+
+> This requirements are not clear because it is not related to Publisher/Subscriber interoperability- it is not common knowledge necessary to communicate over AMQP. This parameter could be relevant for the **PubSub Application** and **Container** interoperability. This section must revisited after getting more. 
+ 
+#### `Quality of Service`
+
+A writer negotiates the delivery guarantees for its link using the snd-settle-mode settlement policy (settled, unsettled, mixed) it will use, and the desired rcv-settle-mode (first, second) of the broker. 
+
+Vice versa, the reader negotiates delivery guarantees using its rcv-settle-mode (first, second) and the desired snd-settle-mode (settled, unsettled) of the broker.
+
+This matches to the `BrokerTransportQualityOfService` values as follows:
+
+- AtMostOnce_1 – messages are pre-settled at the sender endpoint and not sent again. Messages may be lost in transit. This is the default setting.
+- AtLeastOnce_2 – messages are received and settled at the receiver without waiting for the sender to settle.
+- ExactlyOnce_3 – messages are received, the sender settles and then the receiver settles.
+
+> This mapping requirements must be reviewed against AMQP specification. It seems that the `BrokerTransportQualityOfService` is defined by the configuration model and not exist if this model is not used.
+
+#### `Keep Alive`
+
+If the `KeepAliveTime` is set on a `WriterGroup`, a value slightly higher than the configured value of the group should be used as idle timeout of the connection ensuring that the connection is disconnected if the keep alive message was not sent by any writer. Otherwise, if no `KeepAliveTime` is specified, the implementation should set a reasonable default value.
+
+> It must be explained what the connection means. The AMQP define connection: **Containers**, session and Link.
+
+When setting the maximum message sizes for the Link, the `MaxNetworkMessageSize` of the PubSubGroup shall be used. If this value is 0, the implementation chooses a reasonable maximum.
+
+Other limits are up to the implementation and depend on the capabilities of the OS or or the capabilities of the device the Publisher or Subscriber is running on, and can be made configurable through configuration model extensions or by other means.
+
+> this setting is related to the **PubSub Application and **Container** interoperability except the scenario where the **Subscriber** is implemented as **Container**. 
 
 ## Notices for Implementer
 

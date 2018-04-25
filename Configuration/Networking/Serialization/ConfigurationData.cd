@@ -125,6 +125,7 @@
     <Position X="5.5" Y="8" Width="2.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
       <HashCode>ACAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
@@ -138,6 +139,7 @@
     <Position X="2.5" Y="10.25" Width="2.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAACAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -157,7 +159,7 @@
   <Class Name="UAOOI.Configuration.Networking.Serialization.MessageChannelConfiguration" Collapsed="true">
     <Position X="7.75" Y="6" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
     </TypeIdentifier>
   </Class>

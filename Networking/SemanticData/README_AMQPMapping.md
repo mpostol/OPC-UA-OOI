@@ -51,6 +51,8 @@ After the connection is established, the containers each declare the maximum fra
 
 Connections are subject to an idle timeout threshold. The timeout is triggered by a local peer when no frames are received after a threshold value is exceeded. The idle timeout starts from the time the last message is received. If the threshold is exceeded, then a peer SHOULD try to gracefully close the connection using a close frame with an error explaining why. If the remote peer does not respond gracefully within a threshold to this, then the peer may close the TCP socket.
 
+Security with AMQP is primarily provided by a TLS connection between the **Nodes** and the, however, this requires that the whole communication path must be trusted. Applications that require end-to-end security with AMQP need to apply security protection defined above the AMQP, e.g. in the [OPC.UA.PubSub][OPC.UA.PubSub].
+
 A session takes a channel from each of the interconnected containers to form a bi-directional communication path. Number of sessions must be defined or arbitrary limited.
 
 > Connections, channels, and sessions are ephemeral. If the underlying connection they must be reestablished.
@@ -67,17 +69,19 @@ A source can restrict the messages transferred from a source by specifying a fil
 
 The AMQP message consists of the following sections:
 
-- Zero or one `header`.
-- Zero or one `delivery-annotations`.
-- Zero or one `message-annotations`.
-- Zero or one `properties`.
-- Zero or one `application-properties`.
-- The body consists of one of the following three choices: 
-  - one or more `data` sections, 
-  - one or more `amqp-sequence`sections, 
-  - a single `amqp-value` section.
-- Zero or one footer.
-  
+- Zero or one `header`: the Transport headers for a message.
+- Zero or one `delivery-annotations`: delivery-specific non-standard properties at the head of the message.
+- Zero or one `message-annotations`: properties of the message which are aimed at the infrastructure and should be propagated across every delivery step.
+- Zero or one `properties`: Immutable properties of the message.
+- Zero or one `application-properties`: structured application data. Intermediaries can use the data within this structure for the purposes of filtering or routing.
+- The `body` (`application-data`): consists of one of the following three choices: 
+  - one or more `data`: contains opaque binary data. 
+  - one or more `amqp-sequence`: a sequence section contains an arbitrary number of structured data elements. 
+  - a single `amqp-value`: contains a single AMQP value.
+- Zero or one `footer`: details about the message or delivery which can only be calculated or evaluated once the whole bare message has been constructed or seen (for example message hashes, HMACs, signatures and encryption details).
+
+Using an available implementation of the AMQP stack not all fields are exposed in the library API.
+
 ### OPC UA PubSub
 
 The [OPC.UA.PubSub][OPC.UA.PubSub] offers the publish/subscribe communication pattern as an option to client-server pattern and is a consistent part of the OPC UA specifications suit. The detailed description of the [OPC.UA.PubSub][OPC.UA.PubSub] has been covered by the document [OPC Unified Architecture Part 14: PubSub Main Technology Features][README.PubSubMTF].
@@ -106,67 +110,66 @@ Configuration of the parameters related to **PubSub Applications** and AMQP **Co
 
 #### `properties` and `application properties`
 
-The AMQP `Bare Message` may 
+The `properties` and `application properties` sections are part of the AMQP `Bare Message`.
 
-The [OPC.UA.PubSub][OPC.UA.PubSub] specification defines two possible encoding for the `Application Messages`:
+#### `data`
 
-The `NetworkMessage` structure can be serialized using the following encoding:
+The `data` section is part of the AMQP `Bare Message` and is contained in the `body` section as one of three possible options. 
 
-- UADP: optimized binary encoding.
-- JSON: text format as defined in [RFC JSON][RFC.JSON].
+> It is not clearly stated, but the `data` section shall be used to transfer the `NetworkMessage`.
 
-AMQP Brokers have an upper limit on message size. The mechanism for handling `NetworkMessage` that exceed the Broker limits depend on the encoding.
+[OPC.UA.PubSub][OPC.UA.PubSub] specification defines two possible encoding for the `NetworkMessage` structure and is encoded depending on the selected encoding mapping as defined for the:
 
-> TBD: Define this relationship. How the more flag of the transfer performative shall be used. `2.6.14 Transferring Large Messages` shall be applied.
+- JSON message mapping - The corresponding value of the `content-type` is `application/json`.
+- UADP message mapping - The corresponding of the `content-type` is `application/opcua+uadp`. 
 
-[AMQP][AMQP] does not provide a mechanism for specifying the encoding of the `Application Message` which means the [OPC.UA.PubSub][OPC.UA.PubSub] `Subscriber` entities shall be configured in advance with knowledge of the expected encoding. `Publisher` entities should only publish `NetworkMessages` using a single encoding to a unique AMQP `Topic Name`.
-
-The messages sent through AMQP are limited to one per `Application Message`. It is expected that the software used to receive the message can process it without needing to know that it was transported via AMQP instead of UDP for example.
-
-If the encoded AMQP message size exceeds the `Server` limits it should be broken into multiple chunks as described in the [OPC.UA.PubSub][OPC.UA.PubSub] Specification.
-
-It is recommended that the MetaDataQueueName as described in [OPC.UA.PubSub][OPC.UA.PubSub] is configured as a sub-topic of the related `QueueName` with the name `$Metadata`. The AMQP RETAIN flag shall be set for metadata messages.
+For UADP message mapping if the AMQP frame size exceeds the **Container** limits it shall be broken into multiple chunks.
 
 The implementation choses packet and message size limits depending on the capabilities of the operating system or the capabilities of the device the application is running on. They can be made configurable through configuration model extensions or by other means.
 
-### Message Header
+> MP NOTE: For MQTT the following limitation is stated: `The messages sent through MQTT are limited to one per Application Message`, but for AMQP it should be repeated. 
 
-The table below describes how these fields are populated when an AMQP message is constructed.
+> The PubSub specification says `AMQP Brokers have an upper limit on message size. The mechanism for handling `NetworkMessage` that exceed the Broker limits depend on the encoding.` Unfortunately, it is not clear which one limit is referred to: ` 
+>
+> - `max-message-size`: the maximum message size supported by the link endpoint;
+> - `max-frame-size`: connection maximum frame size defined in the `open` performative;
+>
+> The **Broker** role is not defined in the AMQP specification. It is only an example of the **Container** 
 
-AMQP Message Properties
+The mechanism for handling `NetworkMessage` that exceed the Broker limits depend on the encoding.
+
+> TBD: Define this relationship. How the more flag of the transfer performative shall be used. `2.6.14 Transferring Large Messages` shall be applied.
+
+> MP Note (report to OPCF)  It is recommended that the MetaDataQueueName as described in [OPC.UA.PubSub][OPC.UA.PubSub] is configured as a sub-topic of the related `QueueName` with the name `$Metadata`. The AMQP RETAIN flag shall be set for metadata messages.
+
+For UADP encoding the specification requires:
+ 
+> It must be reported to OPCF:
+> It is recommended that the MetaDataQueueName as described in 6.4.2.3.6 is configured as a sub-topic of the related QueueName with the name $Metadata.
+
+> Unfortunately the AMQP does not define the terms: 'sub-topic' and QueueName. It is also not clear if `$Metadata` is terminal symbol or refers to somethings else.
+
+### `properties`
+
+The table below describes how Immutable properties of the message are populated when an AMQP message is constructed.
 
 Field Name   |	Source
 -            | -
 message-id	 | A globally unique value created by the DataSetWriter.
 subject	     | Valid values are `ua-data` or `ua-metadata`.
 content-type | MIME type for the message body. MIME types are specified in the message body subsections.
+- `subject`: defines the type of the message contained in the AMQP body. A value of `ua-data` specifies the body contains a UADP or JSON `NetworkMessage`. A value of `ua-metadata` specifies a body that contains a UA Binary or JSON encoded DataSetMetaData Message. 
+- content-type: specifies whether the message is binary or JSON data.
 
-> NOTES:
-> 
-> - `subject`: defines the type of the message contained in the AMQP body. A value of `ua-data` specifies the body contains a UADP or JSON `NetworkMessage`. A value of `ua-metadata` specifies a body that contains a UA Binary or JSON encoded DataSetMetaData Message. 
-> - content-type: specifies whether the message is binary or JSON data.
+> MP NOTES: 
 
-The AMQP message properties shall include additional fields defined on the WriterGroup or DataSetWriter through the KeyValuePair array in the WriterGroupProperties and DataSetWriterProperties. The NamespaceIndex of the QualifiedName in the KeyValuePair shall be 0 for AMQP standard message properties. The Name of the QualifiedName is constructed from a message prefix and the AMQP property name with the following syntax.
+> The AMQP message properties shall include additional fields defined on the WriterGroup or DataSetWriter through the KeyValuePair array in the WriterGroupProperties and DataSetWriterProperties. The NamespaceIndex of the QualifiedName in the KeyValuePair shall be 0 for AMQP standard message properties. The Name of the QualifiedName is constructed from a message prefix and the AMQP property name with the following syntax.
 
-#### Data
-
-The AMQP data field is encoded depending on the selected encoding mapping as defined for the:
-- JSON message mapping - The corresponding MIME type is `application/json`.
-- UADP message mapping - The corresponding MIME type is `application/opcua+uadp`. If the AMQP frame size exceeds the **Container** limits it shall be broken into multiple chunks. 
-
-> It is not clear why the 
-
-For UADP encoding the specification requires:
- 
-> It is recommended that the MetaDataQueueName as described in 6.4.2.3.6 is configured as a sub-topic of the related QueueName with the name $Metadata.
-
-Unfortunately the AMQP does not define the terms: 'sub-topic' and QueueName. It is also not clear if `$Metadata` is terminal symbol or refers to somethings else.
+> : AMQP defines two kinds of properties :
+>  - 3.2.4 Properties: Immutable properties of the message
+>  - 3.2.5 Application Properties: Intermediaries can use the data within this structure for the purposes of filtering or routing. The **PubSub Application** cannot be recognized as the intermediary. 
 
 ### AMQP connection
-
-#### Security
-
-Security with AMQP is primarily provided by a TLS connection between the `Client` and the `Server`, however, this requires that the `Server` must be trusted. For that reason, it may be necessary to provide end-to-end security. Applications that require end-to-end security with AMQP need to use the binary message encoding and apply security protection defined in the [OPC.UA.PubSub][OPC.UA.PubSub] specification.
 
 #### Addressing
 
@@ -186,7 +189,9 @@ The default port is 443.
 
 Authentication shall be performed according to the configured `AuthenticationProfileUri` of the `PubSubConnection`, `DataSetWriterGroup`, `DataSetWriter` or `DataSetReader` entities. If no authentication information is provided in the form of `ResourceUri` and `AuthenticationProfileUri`, SASL Anonymous is implied. If the authentication profile specifies SASL PLAIN authentication, a separate connection for each new Authentication setting is required.
 
-> This requirements are not clear because it is not related to Publisher/Subscriber interoperability- it is not common knowledge necessary to communicate over AMQP. This parameter could be relevant for the **PubSub Application** and **Container** interoperability. This section must revisited after getting more. 
+> MP NOTE:
+> 
+>This requirements are not clear because it is not related to Publisher/Subscriber interoperability- it is not common knowledge necessary to communicate over AMQP. This parameter could be relevant for the **PubSub Application** and **Container** interoperability. This section must be revisited after getting more. 
  
 #### `Quality of Service`
 
@@ -200,31 +205,30 @@ This matches to the `BrokerTransportQualityOfService` values as follows:
 - AtLeastOnce_2 – messages are received and settled at the receiver without waiting for the sender to settle.
 - ExactlyOnce_3 – messages are received, the sender settles and then the receiver settles.
 
+> MP Note:
+>
 > This mapping requirements must be reviewed against AMQP specification. It seems that the `BrokerTransportQualityOfService` is defined by the configuration model and not exist if this model is not used.
 
 #### `Keep Alive`
 
 If the `KeepAliveTime` is set on a `WriterGroup`, a value slightly higher than the configured value of the group should be used as idle timeout of the connection ensuring that the connection is disconnected if the keep alive message was not sent by any writer. Otherwise, if no `KeepAliveTime` is specified, the implementation should set a reasonable default value.
 
-> It must be explained what the connection means. The AMQP define connection: **Containers**, session and Link.
+> MP NOTE
+> 
+> It must be explained what the connection means. The AMQP define connection for: 
+> - **Containers**, 
+> - session 
+> - Link.
 
 When setting the maximum message sizes for the Link, the `MaxNetworkMessageSize` of the PubSubGroup shall be used. If this value is 0, the implementation chooses a reasonable maximum.
 
 Other limits are up to the implementation and depend on the capabilities of the OS or or the capabilities of the device the Publisher or Subscriber is running on, and can be made configurable through configuration model extensions or by other means.
 
-> this setting is related to the **PubSub Application and **Container** interoperability except the scenario where the **Subscriber** is implemented as **Container**. 
+> this setting is related to the **PubSub Application and **Container** interoperability except the scenario where the **Subscriber** is implemented as **Container**.
 
 ## Notices for Implementer
 
-In the article [Networking of SemanticData Library](README.MD#message-transport) the section *Message Transport* contains description covering instruction for the external AMQP handling components. An example how to implement the Transport layer over the UDP protocol is illustrated by the project [UA Data Example Application](../ReferenceApplication/README.MD). This application uses two implementations of the `IMessageHandlerFactory`:
-
-* `ConsumerMessageHandlerFactory` - to create communication infrastructure for the consumer role
-* `ProducerMessageHandlerFactory` - to create communication infrastructure for the producer role
-
-It has been implements by the following classes providing the required interfaces:
-
-* `BinaryUDPPackageReader` - implements `IMessageReader` inheriting from `BinaryDecoder`
-* `BinaryUDPPackageWriter` - implements `IMessageWriter` inheriting from `BinaryEncoder`
+In the article [Networking of SemanticData Library](README.MD#message-transport) the section *Message Transport* contains description covering instruction for the external AMQP handling components. An example how to implement the Transport layer over the UDP protocol is illustrated by the project [UA Data Example Application](../ReferenceApplication/README.MD).
 
 ## See also
 

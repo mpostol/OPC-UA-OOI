@@ -56,8 +56,8 @@ It is assumed that the **Data Domain** description is provided by the discovery 
 The main challenge is where the recursive resolution process shall start. It seems we have the following options:
 
 1. Direct - the URI is URL of the XML/Json files containing all definitions required to configure application.
-2. Authority part of the model URI is a DNS entry \(more: \[DOMAIN NAMES - CONCEPTS AND FACILITIES
-   \]\([https://tools.ietf.org/html/rfc1034](https://tools.ietf.org/html/rfc1034)\) \)  in the information model URI zone – on promise services.  
+2. Authority part of the model URI is a DNS entry \(see also: [DOMAIN NAMES - CONCEPTS AND FACILITIES
+   ]([https://tools.ietf.org/html/rfc1034](https://tools.ietf.org/html/rfc1034)) \)  in the information model URI zone – on promise services.  
 3. A selected root HTTP services, e.g. in the opcfoundation.com domain.
 
 # Solution

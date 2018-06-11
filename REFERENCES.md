@@ -24,9 +24,13 @@
 
 [RFC.UDP]:https://tools.ietf.org/html/rfc768
 
-- [RFC: 791 INTERNET PROTOCOL, September 1981][RFC.UDP.IP]
+- [RFC 791: INTERNET PROTOCOL, September 1981][RFC.UDP.IP]
 
 [RFC.UDP.IP]:https://tools.ietf.org/html/rfc791
+
+- [RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1][RFC.HTTP]
+
+[RFC.HTTP]:https://tools.ietf.org/html/rfc2616
 
 - [RFC 8259: The JavaScript Object Notation (JSON) Data Interchange Format][RFC.JSON]
 
@@ -60,6 +64,11 @@
 
 [ISO.AMQP]: https://www.iso.org/standard/64955.html
 
--  [ISO/IEC 20922:2016: Message Queuing Telemetry Transport (MQTT) v3.1.1][ISO.MQTT]
+- [ISO/IEC 20922:2016: Message Queuing Telemetry Transport (MQTT) v3.1.1][ISO.MQTT]
 
 [ISO.MQTT]: https://www.iso.org/standard/69466.html
+
+- [IANA (Internet Assigned Numbers Authority), Hypertext Transfer Protocol (HTTP) Parameters.][IANAHTTPPARAMS]
+
+[IANAHTTPPARAMS]: http://www.iana.org/assignments/http-parameters/http-parameters.xml
+

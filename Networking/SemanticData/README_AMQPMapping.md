@@ -25,19 +25,23 @@ The following documents, in whole or in part, are normatively referenced in this
 
 ### AMQP
 
+#### Architecture
+
 The [Advanced Message Queuing Protocol (AMQP)][ISO.AMQP] is an open standard application layer protocol. It is a vendor-neutral and platform-agnostic protocol that offers organizations an easier, more secure approach to passing real-time data streams and business transactions. The goal of AMQP is to ensure information is safely and efficiently transported between applications, among organizations, across distributed cloud computing environments, and within mobile infrastructures. AMQP avoids proprietary technologies, offering the potential to lower the cost of enterprise middleware software integration through open interoperability.
 
-This section briefly summarizes the core concepts of the AMQP and explains how to use AMQP as the transport layer **PubSub Applications**. The goal is for any developer using any existing AMQP 1.0 client stack to be able to provide external, composable implementation of the **MessageHandling** (figure above) class laveraging interoperability via AMQP.
+This section briefly summarizes the core concepts of the AMQP and explains how to use AMQP as the transport layer of the **PubSub Applications**. The goal is that any developer using any existing AMQP 1.0 client stack to be able to provide external, composable implementation of the **MessageHandling** (figure above) class leveraging interoperability via AMQP.
 
 In this section, it is assumed that the management of AMQP communication are handled by a respective stack, such as [AMQP.NET Lite][AMQP.NET Lite], [RabbitMQ][RabbitMQ].
 
 An AMQP network consists of **Nodes** connected via links. **Nodes** are named entities responsible for processing of process data transfered by messages. Messages can originate from, terminate at, or be relayed by nodes. As a message travels through an AMQP network, the responsibility for safe storage and delivery of the message is transferred between the **Nodes** it encounters.
 
-A link is a unidirectional route between two **Nodes**. A link attaches to a node. There are two kinds of nodes: sources and targets. Messages only travel along a link if they meet the entry criteria at the source.
+The link is a unidirectional route between two **Nodes**. There are two kinds of nodes: sources and targets. Messages only travel along a link if they meet the entry criteria at the source.
 
-As illustrated in the following domain model, **Nodes** exist within a **Container**. **Container** may be implemented as a process carrying out a software program instance. Examples of containers are **Broker** and **Client** applications. An example of the **Clint** is **PubSub Application**. Each **Container** may hold many nodes. Examples of AMQP **Nodes** are **Producer**, **Consumer**, and **Queue**. **Producers** and **Consumers** are the elements within an application that generate and process messages. **Queues** are entities that store and forward messages.
+As illustrated in the following domain model, **Nodes** exist within a **Container**. **Container** may be implemented as a process carrying out a software program instance. Examples of containers are **Broker** and **Client** applications. An example of the **Clint** is a **PubSub Application**. Each **Container** may hold many nodes. Examples of AMQP **Nodes** are **Producer**, **Consumer**, and **Queue**. **Producers** and **Consumers** are the elements within an application that generate and process messages. **Queues** are entities that store and forward messages.
 
 ![Class Diagram of Concrete Containers and Nodes](../../CommonResources/Media/AMQP.ConcreteContainersNodes.png)
+
+#### Transport
 
 In order for communication to occur between **Nodes** in different **Containers** a connection needs be established. An AMQP connection consists of a full-duplex, reliably ordered sequence of frames. A frame is a stream of bytes carried on the wire. Connections have a negotiated maximum frame size (length of the stream). It is assumed that connections are transient and can fail for a variety of reasons resulting in the loss of an unknown number of frames.
  
@@ -65,10 +69,12 @@ Once attached, a link is subject to flow control of message transfers. Link endp
 
 A source can restrict the messages transferred from a source by specifying a filter. A filter can be thought of as a function which takes a message as input and returns a boolean value: true if the message will be accepted by the source, false otherwise. A filter must not change its return value for a message unless the state or annotations on the message at the node change (e.g., through an updated delivery state).
 
+#### Messaging
+
 The AMQP message consists of the following sections:
 
 - Zero or one `header`: the Transport headers for a message.
-- Zero or one `delivery-annotations`: delivery-specific non-standard properties at the head of the message.
+- Zero or one `delivery-annotations`: delivery-specific non-standard properties at the head of the message.
 - Zero or one `message-annotations`: properties of the message which are aimed at the infrastructure and should be propagated across every delivery step.
 - Zero or one `properties`: immutable properties of the message.
 - Zero or one `application-properties`: structured application data. Intermediaries can use the data within this structure for the purposes of filtering or routing.
@@ -81,6 +87,47 @@ The AMQP message consists of the following sections:
 > Not all fields are exposed in the library API of the AMQP stack.
 
 The `properties` section is used for a defined set of standard properties of the message. The properties section is part of the bare message; therefore, if retransmitted by an intermediary, it must remain unaltered.
+
+Field Name| Description|
+-|-|
+`message-id` | application message identifier - `message-id`, if set, uniquely identifies a message within the message system. The message producer is usually responsible for setting the `message-id` in such a way that it is assured to be globally unique. An intermediary may discard a message as a duplicate if the value of the `message-id` matches that of a previously received message sent to the same node.
+`user-id`| creating user id - The identity of the user responsible for producing the message. The client sets this value, and it may be authenticated by intermediaries.
+`to`| the address of the node the message is destined for
+`subject` | the subject of the message - a common field for summary information about the message content and purpose.
+`reply-to` | the node to send replies to - the address of the node to send replies to.
+`correlation-id` | application correlation identifier - this is a client-specific identifier that can be used to mark or identify messages between clients.
+`content-type` | MIME content type (see note below)
+`content-encoding` | MIME content type (see note below)
+`absolute-expiry-time` | the time when this message is considered expired - an absolute time when this message is considered to be expired.
+`creation-time` | the time when this message was created - an absolute time when this message was created.
+`group-id` | the group this message belongs to - identifies the group the message belongs to.
+`group-sequence` | the sequence-no of this message within its group - the relative position of this message within its group.
+`reply-to-group-id` | the group the reply message belongs to - this is a client-specific id that is used so that client can send replies to this message to a specific group.
+
+##### Notes
+
+>`content-type`:
+>
+>The [RFC-2046][RFC.HTTP] MIME type for the messages `application-data` section (body). As per [RFC-2046][RFC.HTTP] this can contain a charset parameter defining the character encoding used, e.g. `text/plain`; `charset=“utf-8`.
+>
+>For clarity, as per section 7.2.1 of [RFC-2616][RFC.HTTP], where the content type is unknown the `content-type` should not be set. This allows the recipient the opportunity to determine the actual type. Where the section is known to be truly opaque binary data, the `content-type` should be set to `application/octet-stream`.
+>
+>When using an `application-data` section with a section code other than data, `content-type` should not be set.
+
+ 
+>`content-encoding`:
+>
+>The `content-encoding` property is used as a modifier to the `content-type`. When present, its value indicates what additional content encodings have been applied to the `application-data`, and thus what decoding mechanisms need to be applied in order to obtain the media-type referenced by the `content-type` header field.
+>
+>`content-encoding` is primarily used to allow a document to be compressed without losing the identity of its underlying content type.
+>
+>`content-encoding` properties are to be interpreted as per section 3.5 of [RFC 2616][RFC.HTTP]. Valid `content-encoding` properties are registered at [Hypertext Transfer Protocol (HTTP) Parameters][IANAHTTPPARAMS].
+>
+>The `content-encoding` must not be set when the `application-data` section is other than data. The binary representation of all other `application-data` section types is defined completely in terms of the AMQP type system.
+>
+>Implementations must not use the identity encoding. Instead, implementations should not set this property. implementations should not use the compress encoding, except as to remain compatible with messages originally sent with other protocols, e.g. HTTP or SMTP.
+>
+>Implementations should not specify multiple `content-encoding` values except as to be compatible with messages originally sent with other protocols, e.g. HTTP or SMTP.
 
 The `application-properties` section is a part of the bare message used for structured application data. Intermediaries
 can use the data within this structure for the purposes of filtering or routing.
@@ -96,7 +143,7 @@ Among others, the specification recognizes the following actors (see figure abov
 
 According to the specification the **Publisher** and **Subscriber** don't have any subscriptions management functionality, namely, they follow a communication paradigm called unsolicited notification. When unsolicited notification occurs, a client may receive a message that it has never requested. The **Subscriber** must use a filtering mechanism to process only messages it is interested in.
 
-Lack of subscriptions management functionality defined by the [OPC.UA.PubSub][OPC.UA.PubSub] could be mitigated by applying the \( [AMQP][AMQP] \) that some functionality related to communication reliability, data selection, and distribution is delegated to the AMQP **Container**.
+Lack of subscriptions management functionality defined by the [OPC.UA.PubSub][OPC.UA.PubSub] could be mitigated by applying the [AMQP][AMQP] that some functionality related to communication reliability, data selection, and distribution is delegated to the AMQP **Container**.
 
 ## AMQP mapping
 
@@ -105,20 +152,40 @@ Lack of subscriptions management functionality defined by the [OPC.UA.PubSub][OP
 Using AMQP connectivity as the messages transport layer by the **PubSub Application** requires two kinds of parameters:
 
 - PubSub **Distribution channel**: promoting interoperability between **Publisher** and all **Subscribers** interested to obtain data from it.
-- AMQP connections: Promoting interoperability between **PubSub Application** hosted by an AMQP **Container** and all the AMQP **Containers** that take part in the communication.
+- AMQP connections: promoting interoperability between **PubSub Application** hosted by an AMQP **Container** and all the AMQP **Containers** that take part in the communication.
 
-Configuration of the parameters related to **PubSub Applications** and AMQP **Containers** interconnection may be recognized as the implementation details except the scenario where remote configuration using **Configuration Management** is the case \( [PubSub Main Technology Features][README.PubSubMTF] \).
+Configuration of the parameters related to the **PubSub Applications** and AMQP **Containers** interconnection may be recognized as the implementation details except the scenario where remote configuration using **Configuration Management** is the case \( [PubSub Main Technology Features][README.PubSubMTF] \).
 
 ### PubSub **Distribution channel**
 
-#### `properties` and `application properties`
+#### `properties`
 
-The `properties` and `application properties` sections are part of the AMQP `Bare Message`.
+The `properties` sections are part of the AMQP `Bare Message`. The table below describes how the selected properties of the message are populated when an AMQP message is constructed.
 
-[OPC.UA.PubSub][OPC.UA.PubSub] specification defines two possible encoding for the `NetworkMessage` structure and is encoded depending on the selected encoding mapping as defined for the:
+Field Name     |	Source
+-              | -
+`subject`      | Valid values are `ua-data` or `ua-metadata`.
+`content-type` | MIME type for the message body. MIME types are specified in the message body subsections.
 
-- JSON message mapping - The corresponding value of the `content-type` is `application/json`.
-- UADP message mapping - The corresponding of the `content-type` is `application/opcua+uadp`. 
+- `subject`: defines the type of the message contained in the AMQP `body`. A value of `ua-data` specifies that the `body` contains a UADP or JSON `NetworkMessage`. A value of `ua-metadata` specifies that the `body` contains a UA Binary or JSON encoded `DataSetMetaData` message.
+- `content-type`: specifies whether the message is binary or JSON data. [OPC.UA.PubSub][OPC.UA.PubSub] specification defines two possible encodings for the `NetworkMessage` structure and is encoded depending on the selected encoding mapping as defined for the:
+
+  - JSON message mapping - The corresponding value of the `content-type` is `application/json`.
+  - UADP message mapping - The corresponding value of the `content-type` is `application/opcua+uadp`. 
+
+#### `application properties`
+
+The `application properties` sections are part of the AMQP `Bare Message` used for structured application data. Intermediaries can use the data within this structure for the purposes of filtering or routing. 
+
+> MP NOTES: 
+>
+> The AMQP message properties shall include additional fields defined on the WriterGroup or DataSetWriter through the KeyValuePair array in the WriterGroupProperties and DataSetWriterProperties. The NamespaceIndex of the QualifiedName in the KeyValuePair shall be 0 for AMQP standard message properties. The Name of the QualifiedName is constructed from a message prefix and the AMQP property name with the following syntax ...
+>
+> AMQP defines two kinds of properties :
+>  - 3.2.4 `Properties`: Immutable properties of the message
+>  - 3.2.5 `Application Properties`: Intermediaries can use the data within this structure for the purposes of filtering or routing. The **PubSub Application** cannot be recognized as the intermediary.
+>
+>Is not clear which one and how to implement this requirement.
 
 #### `data`
 
@@ -126,20 +193,18 @@ The `data` section is part of the AMQP `Bare Message` and is contained in the `b
 
 For UADP message mapping if the AMQP frame size exceeds the **Container** limits it shall be broken into multiple chunks.
 
-The implementation choses packet and message size limits depending on the capabilities of the operating system or the capabilities of the device the application is running on.
+The implementation choses packet and message size limits depending on the capabilities of the operating system or the capabilities of the device the application is running on. The mechanism for handling `NetworkMessage` that exceed the max-message-size limits depends on the encoding.
+- For UADP: it shall be broken into multiple chunks as described in 7.2.2.2.4.
+- For JSON: it is not defined.
 
-> MP NOTE It has been be reported to OPCF:
-> The PubSub specification says `AMQP Brokers have an upper limit on message size. The mechanism for handling `NetworkMessage` that exceed the Broker limits depend on the encoding.` Unfortunately, it is not clear which one limit is referred to: ` 
+>MP  NOTE:
 >
-> - `max-message-size`: the maximum message size supported by the link endpoint;
-> - `max-frame-size`: connection maximum frame size defined in the `open` performative;
->
-> The **Broker** role is not defined in the AMQP specification. It is only an example of the **Container** 
->
-> TBD: How the more flag of the transfer performative shall be used. `2.6.14 Transferring Large Messages` shall be applied.
+>This functionality is an open issue reported to OPC Foundation: [0004269: Part 14 PubSub Section 7.3.4 it is not clear how to deal with long messages.](https://opcfoundation-onlineapplications.org/mantis/view.php?id=4269);
 
  
-> MP NOTE It has been be reported to OPCF:
+> MP NOTE
+> 
+>It has been be reported to OPCF:
 >
 >For UADP encoding the specification requires:
 >
@@ -147,27 +212,9 @@ The implementation choses packet and message size limits depending on the capabi
 >
 > Unfortunately the AMQP does not define the terms: 'sub-topic' and QueueName. It is also not clear if `$Metadata` is terminal symbol or refers to somethings else.
 
-> MP NOTE: For MQTT the following limitation is stated: `The messages sent through MQTT are limited to one per Application Message`, but for AMQP it is not present. 
-
-### `properties`
-
-The table below describes how Immutable properties of the message are populated when an AMQP message is constructed.
-
-Field Name   |	Source
--            | -
-message-id	 | A globally unique value created by the DataSetWriter.
-subject	     | Valid values are `ua-data` or `ua-metadata`.
-content-type | MIME type for the message body. MIME types are specified in the message body subsections.
-- `subject`: defines the type of the message contained in the AMQP body. A value of `ua-data` specifies the body contains a UADP or JSON `NetworkMessage`. A value of `ua-metadata` specifies a body that contains a UA Binary or JSON encoded DataSetMetaData Message. 
-- content-type: specifies whether the message is binary or JSON data.
-
-> MP NOTES: 
->
-> The AMQP message properties shall include additional fields defined on the WriterGroup or DataSetWriter through the KeyValuePair array in the WriterGroupProperties and DataSetWriterProperties. The NamespaceIndex of the QualifiedName in the KeyValuePair shall be 0 for AMQP standard message properties. The Name of the QualifiedName is constructed from a message prefix and the AMQP property name with the following syntax.
->
-> AMQP defines two kinds of properties :
->  - 3.2.4 Properties: Immutable properties of the message
->  - 3.2.5 Application Properties: Intermediaries can use the data within this structure for the purposes of filtering or routing. The **PubSub Application** cannot be recognized as the intermediary. 
+> MP NOTE: 
+> 
+> For MQTT the following limitation is stated: `The messages sent through MQTT are limited to one per Application Message`, but for AMQP it is not present. 
 
 ### AMQP connection
 
@@ -215,16 +262,14 @@ If the `KeepAliveTime` is set on a `WriterGroup`, a value slightly higher than t
 
 > MP NOTE
 > 
+> Reported to OPCF [	0004301: 7.3.4.6 Transport Limits and Keep Alive](https://opcfoundation-onlineapplications.org/mantis/view.php?id=4301)
+> 
 > It must be explained what the connection means. The AMQP define connection for: 
 > - **Containers**, 
 > - session 
 > - Link.
 
-When setting the maximum message sizes for the Link, the `MaxNetworkMessageSize` of the PubSubGroup shall be used. If this value is 0, the implementation chooses a reasonable maximum.
 
-Other limits are up to the implementation and depend on the capabilities of the OS or or the capabilities of the device the Publisher or Subscriber is running on, and can be made configurable through configuration model extensions or by other means.
-
-> this setting is related to the **PubSub Application and **Container** interoperability except the scenario where the **Subscriber** is implemented as **Container**.
 
 ## Notices for Implementer
 
@@ -232,15 +277,23 @@ In the article [Networking of SemanticData Library](README.MD#message-transport)
 
 ## See also
 
-[ISO.AMQP]: https://www.iso.org/standard/69466.html
 
+- [IANA (Internet Assigned Numbers Authority), Hypertext Transfer Protocol (HTTP) Parameters.][IANAHTTPPARAMS]
+- [RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1][RFC.HTTP]
 - [OASIS Advanced Message Queuing Protocol (AMQP) Version 1.0][AMQP]
+- [amqp-core-overview-v1.0 OASIS Advanced Message Queuing Protocol (AMQP) Version 1.0][AMQP]
+- [ISO/IEC 19464:2014: Advanced Message Queuing Protocol (AMQP) v1.0][ISO.AMQP]
+- [OPC Unified Architecture Part 14: PubSub Main Technology Features][README.PubSubMTF]
+- [AMQP.NET Lite][AMQP.NET Lite]
+- [RabbitMQ][RabbitMQ].
 
-[AMQP]: http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html
 [ISO.AMQP]: https://www.iso.org/standard/64955.html
 [OPC.UA.PubSub]: https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
 [OPC.UA.Profiles]: https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-7-profiles/
 [README.PubSubMTF]:../SemanticData/README.PubSubMTF.md
 [AMQP.NET Lite]: https://github.com/Azure/amqpnetlite
 [RabbitMQ]: https://www.rabbitmq.com/
+[IANAHTTPPARAMS]: http://www.iana.org/assignments/http-parameters/http-parameters.xml
+[RFC.HTTP]:https://tools.ietf.org/html/rfc2616
+[AMQP]: http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html
 

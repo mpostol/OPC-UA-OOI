@@ -22,7 +22,7 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     /// Gets or sets the consumer update configuration command.
     /// </summary>
     /// <value>The consumer update configuration <see cref="ICommand"/>.</value>
-    ICommand ConsumerUpdateConfiguration { get; set; }
+    ICommand ConsumerUpdateConfiguration { get; set; } //TODO Remove reference of ConsumerDataManagementSetup System.Windows  #239
     /// <summary>
     /// Gets or sets the last consumer error message.
     /// </summary>

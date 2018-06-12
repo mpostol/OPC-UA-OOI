@@ -197,7 +197,7 @@ namespace UAOOI.Networking.ReferenceApplication
     /// Gets or sets the consumer update configuration command.
     /// </summary>
     /// <value>The consumer update configuration <see cref="ICommand" />.</value>
-    public ICommand ConsumerUpdateConfiguration
+    public ICommand ConsumerUpdateConfiguration //TODO Remove reference of ConsumerDataManagementSetup System.Windows  #239
     {
       get
       {

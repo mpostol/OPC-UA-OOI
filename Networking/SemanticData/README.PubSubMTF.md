@@ -95,6 +95,7 @@ The following documents, in whole or in part, are normatively referenced in this
 > Data exchange scenario that requires a session connection be established before any data can be sent. Connection-oriented services set up virtual links between applications through a network. The session is responsible to retain a state information or status about each communicating partner for the duration of multiple requests. An OPC UA Client/Server connection is a stateful connection because both systems maintain information about the session itself during its life.
 
 - Connectionless-oriented communication pattern
+ 
 > Messages exchange scenario that does not require a session connection between sender and receiver. The sender simply starts sending packets (called datagrams) to the destination. Neither system must maintain state information for the systems that they send messages to or receive messages from.
 
 

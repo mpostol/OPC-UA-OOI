@@ -7,6 +7,7 @@ using UAOOI.Configuration.Networking.Serializers;
 
 namespace UAOOI.Networking.ReferenceApplication.Producer
 {
+
   /// <summary>
   /// Class ProducerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase"/> for the producer.
   /// </summary>
@@ -17,7 +18,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     /// <summary>
     /// Initializes a new instance of the <see cref="ConsumerConfigurationFactory"/> class.
     /// </summary>
-    public ProducerConfigurationFactory()
+    public ProducerConfigurationFactory(string producerConfigurationFileName)
     {
       Loader = LoadConfig;
     }
@@ -31,12 +32,13 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     /// Occurs after the communication configuration has been changed.
     /// </summary>
     public override event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
-
     #endregion
 
+    #region private
+    string m_ProducerConfigurationFileName;
     private ConfigurationData LoadConfig()
     {
-      FileInfo _configurationFile = new FileInfo(Properties.Settings.Default.ProducerConfigurationFileName);
+      FileInfo _configurationFile = new FileInfo(m_ProducerConfigurationFileName);
       return ConfigurationDataFactoryIO.Load<ConfigurationData>(() => XmlDataContractSerializers.Load<ConfigurationData>(_configurationFile, (x, y, z) => { }), () => RaiseEvents());
     }
     protected override void RaiseEvents()
@@ -44,6 +46,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       OnAssociationConfigurationChange?.Invoke(this, EventArgs.Empty);
       OnMessageHandlerConfigurationChange?.Invoke(this, EventArgs.Empty);
     }
+    #endregion
 
   }
 }

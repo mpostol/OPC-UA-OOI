@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using UAOOI.Networking.ReferenceApplication.Diagnostic;
 using UAOOI.Networking.SemanticData;
 
@@ -30,7 +31,6 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       {
         ReferenceApplicationEventSource.Log.Initialization($"{nameof(OPCUAServerProducerSimulator)}.{nameof(Setup)} starting");
         ViewModel.ProducerRestart += (sender, e) => Restart();
-        ConfigurationFactory = new ProducerConfigurationFactory();
         BindAndStartRunning();
         ViewModel.ProducerErrorMessage = "Running";
         ReferenceApplicationEventSource.Log.Initialization($" producer engine and starting sending data acomplished");
@@ -57,20 +57,22 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     #endregion
 
     #region private
-    private CustomNodeManager m_Simulator = null;
+    private IDisposable m_Simulator = null;
     private void Restart()
     {
-      System.Diagnostics.Debug.Assert(m_Simulator != null);
+      Debug.Assert(m_Simulator != null);
       m_Simulator.Dispose();
       BindAndStartRunning();
     }
     private void BindAndStartRunning()
     {
-      m_Simulator = new CustomNodeManager();
-      BindingFactory = m_Simulator;
-      EncodingFactory = m_Simulator;
+      string _repositoryGroup = "repositoryGroup";
+      ConfigurationFactory = new ProducerConfigurationFactory(Properties.Settings.Default.ProducerConfigurationFileName);
+      IBindingFactory _simulator = new SimulatorInteroperabilityTest.DataGenerator(_repositoryGroup);
+      m_Simulator = _simulator as IDisposable;
+      BindingFactory = _simulator;
+      EncodingFactory = new SimulatorInteroperabilityTest.EncodingFactoryBinarySimple(_repositoryGroup);
       Start();
-      m_Simulator.Run();
     }
     #endregion
 

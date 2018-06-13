@@ -153,6 +153,7 @@
     <Compile Include="Producer\IProducerViewModel.cs" />
     <Compile Include="Producer\SimulatorInteroperabilityTest\DataGenerator.cs" />
     <Compile Include="Producer\SimulatorInteroperabilityTest\EncodingFactoryBinarySimple.cs" />
+    <Compile Include="Producer\SimulatorInteroperabilityTest\ProducerConfigurationFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,7 +181,6 @@
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Producer\OPCUAServerProducerSimulator.cs" />
-    <Compile Include="Producer\ProducerConfigurationFactory.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

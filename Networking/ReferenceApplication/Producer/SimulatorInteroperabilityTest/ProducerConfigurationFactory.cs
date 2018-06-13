@@ -5,7 +5,7 @@ using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.Serializers;
 
-namespace UAOOI.Networking.ReferenceApplication.Producer
+namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabilityTest
 {
 
   /// <summary>
@@ -15,13 +15,16 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
   internal class ProducerConfigurationFactory : ConfigurationFactoryBase
   {
 
+    #region constructor
     /// <summary>
     /// Initializes a new instance of the <see cref="ConsumerConfigurationFactory"/> class.
     /// </summary>
     public ProducerConfigurationFactory(string producerConfigurationFileName)
     {
+      m_ProducerConfigurationFileName = producerConfigurationFileName;
       Loader = LoadConfig;
     }
+    #endregion
 
     #region ConfigurationFactoryBase
     /// <summary>

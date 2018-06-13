@@ -67,7 +67,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     private void BindAndStartRunning()
     {
       string _repositoryGroup = "repositoryGroup";
-      ConfigurationFactory = new ProducerConfigurationFactory(Properties.Settings.Default.ProducerConfigurationFileName);
+      ConfigurationFactory = new SimulatorInteroperabilityTest.ProducerConfigurationFactory(Properties.Settings.Default.ProducerConfigurationFileName);
       IBindingFactory _simulator = new SimulatorInteroperabilityTest.DataGenerator(_repositoryGroup);
       m_Simulator = _simulator as IDisposable;
       BindingFactory = _simulator;

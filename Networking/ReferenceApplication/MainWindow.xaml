@@ -77,7 +77,7 @@
                 </MenuItem>
                 <MenuItem Header="Actions" ToolTip="Available actions">
                     <MenuItem Header="Update Consumer Configuration" Command="{Binding Path=ConsumerUpdateConfiguration}" ToolTip="Updates the consumer configuration and restarts the data receiving process"/>
-                    <MenuItem Header="Update Producer Configuration" Command="{Binding Path=ProducerRestart}" ToolTip="Updates the producer configuration and restarts the data pumping process" />
+                    <MenuItem Header="Update Producer Configuration" Command="{Binding Path=ProducerRestartCommand}" ToolTip="Updates the producer configuration and restarts the data pumping process" />
                     <MenuItem Header="Open Configuration folder" Command="{Binding Path=ConfigurationFolder}" ToolTip="Open folder containing configuration files" />
                 </MenuItem>
                 <MenuItem Header="Help" ToolTip="Get more about the software." >
@@ -133,7 +133,7 @@
                     <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=PackagesSent,  FallbackValue=?????, Mode=OneWay}" ToolTip="Packages sent by the producer"/>
                     <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path=BytesSent,  FallbackValue=?????, Mode=OneWay }" ToolTip="Bytes sent by the producer"/>
                     <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path=ProducerErrorMessage, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
-                    <Button  Style="{StaticResource TextBox}" Command="{Binding Path=ProducerRestart}" >Update Configuration</Button>
+                    <Button  Style="{StaticResource TextBox}" Command="{Binding Path=ProducerRestartCommand}" >Update Configuration</Button>
                 </StackPanel>
             </Grid>
         </StackPanel>

@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.ComponentModel.Composition;
-using System.Windows.Input;
 using UAOOI.Networking.ReferenceApplication.Diagnostic;
 using UAOOI.Networking.SemanticData;
 
@@ -30,7 +29,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       try
       {
         ReferenceApplicationEventSource.Log.Initialization($"{nameof(OPCUAServerProducerSimulator)}.{nameof(Setup)} starting");
-        ViewModel.ProducerRestart = new RestartCommand(Restart); //TODO Remove reference of ConsumerDataManagementSetup System.Windows  #239
+        ViewModel.ProducerRestart += (sender, e) => Restart();
         ConfigurationFactory = new ProducerConfigurationFactory();
         BindAndStartRunning();
         ViewModel.ProducerErrorMessage = "Running";
@@ -58,23 +57,6 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     #endregion
 
     #region private
-    private class RestartCommand : ICommand
-    {
-      public RestartCommand(Action restart)
-      {
-        m_restart = restart;
-      }
-      public event EventHandler CanExecuteChanged;
-      public bool CanExecute(object parameter)
-      {
-        return true;
-      }
-      public void Execute(object parameter)
-      {
-        m_restart();
-      }
-      private Action m_restart;
-    }
     private CustomNodeManager m_Simulator = null;
     private void Restart()
     {

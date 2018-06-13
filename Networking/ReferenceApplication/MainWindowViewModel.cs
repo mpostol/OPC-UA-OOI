@@ -34,6 +34,8 @@ namespace UAOOI.Networking.ReferenceApplication
     /// </summary>
     public MainWindowViewModel()
     {
+
+      ProducerRestartCommand = new RestartCommand(() => ProducerRestart?.Invoke(this, EventArgs.Empty));
       b_ConsumerLog = new ObservableCollection<string>();
       //Menu Files
       b_ConfigurationFolder = new ConfigurationFolderCommand();
@@ -47,13 +49,14 @@ namespace UAOOI.Networking.ReferenceApplication
       b_ViewLicense = new WebDocumentationCommand(Properties.Resources.ViewLicenseUrl);
       String _version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
       b_WindowTitle = $"OPC UA Example Application Rel. {_version} supporting PubSup protocol 1.10";
+
     }
 
     private FileInfo SaveResponse(FileInfo arg)
     {
       FileInfo _ret = null;
       SaveFileConfirmation _newFileInfo = new SaveFileConfirmation() { Title = "Save configuration file", FilePath = arg.FullName };
-      SaveFileInteractionEvent?.Invoke(this, new InteractionRequestedEventArgs(_newFileInfo, () => _ret = String.IsNullOrEmpty(_newFileInfo.FilePath) ?  null  : new FileInfo(_newFileInfo.FilePath)));
+      SaveFileInteractionEvent?.Invoke(this, new InteractionRequestedEventArgs(_newFileInfo, () => _ret = String.IsNullOrEmpty(_newFileInfo.FilePath) ? null : new FileInfo(_newFileInfo.FilePath)));
       return _ret;
     }
     #endregion
@@ -368,7 +371,7 @@ namespace UAOOI.Networking.ReferenceApplication
     }
     #endregion
 
-    #region Producer ViewModel implementation
+    #region IProducerViewModel
     public int BytesSent
     {
       get
@@ -391,17 +394,7 @@ namespace UAOOI.Networking.ReferenceApplication
         PropertyChanged.RaiseHandler<int>(value, ref b_PackagesSent, "PackagesSent", this);
       }
     }
-    public ICommand ProducerRestart
-    {
-      get
-      {
-        return b_ProducerRestart;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ProducerRestart, "ProducerRestart", this);
-      }
-    }
+    public event EventHandler<EventArgs> ProducerRestart;
     public string ProducerErrorMessage
     {
       get
@@ -413,6 +406,9 @@ namespace UAOOI.Networking.ReferenceApplication
         PropertyChanged.RaiseHandler<string>(value, ref b_ProducerErrorMessage, "ProducerErrorMessage", this);
       }
     }
+    #endregion
+    #region Producer ViewModel implementation
+    public ICommand ProducerRestartCommand { get; private set; }
     #endregion
 
     #region INotifyPropertyChanged
@@ -475,6 +471,23 @@ namespace UAOOI.Networking.ReferenceApplication
         }
       }
     }
+    private class RestartCommand : ICommand
+    {
+      public RestartCommand(Action restart)
+      {
+        m_restart = restart;
+      }
+      public event EventHandler CanExecuteChanged;
+      public bool CanExecute(object parameter)
+      {
+        return true;
+      }
+      public void Execute(object parameter)
+      {
+        m_restart();
+      }
+      private Action m_restart;
+    }
     //vars
     //Consumer private part
     private ObservableCollection<string> b_ConsumerLog;
@@ -485,7 +498,6 @@ namespace UAOOI.Networking.ReferenceApplication
     //producer private part
     private int b_BytesSent;
     private int b_PackagesSent;
-    private ICommand b_ProducerRestart;
     private string b_ProducerErrorMessage;
     //methods
     private IConsumerBinding AddBinding<type>(string variableName, UATypeInfo typeInfo)

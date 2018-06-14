@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using UAOOI.Configuration.Networking;
 using UAOOI.Networking.ReferenceApplication.Diagnostic;
 using UAOOI.Networking.SemanticData;
 
@@ -22,16 +23,35 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     {
       get; set;
     }
+    [Import(ProducerCompositionSettings.ConfigurationFactoryContract, typeof(IConfigurationFactory))]
+    public IConfigurationFactory ProducerConfigurationFactory
+    {
+      set { ConfigurationFactory = value; }
+    }
+    [Import(ProducerCompositionSettings.EncodingFactoryContract, typeof(IEncodingFactory))]
+    public IEncodingFactory ProducerEncodingFactory
+    {
+      set { EncodingFactory = value; }
+    }
+    [Import(ProducerCompositionSettings.BindingFactoryContract, typeof(IBindingFactory))]
+    public IBindingFactory ProducerBindingFactory
+    {
+      set
+      {
+        BindingFactory = value;
+        m_Simulator = value as IDisposable;
+      }
+    }
     #endregion
 
-    #region private
+    #region API
     internal void Setup()
     {
       try
       {
         ReferenceApplicationEventSource.Log.Initialization($"{nameof(OPCUAServerProducerSimulator)}.{nameof(Setup)} starting");
         ViewModel.ProducerRestart += (sender, e) => Restart();
-        BindAndStartRunning();
+        Start();
         ViewModel.ProducerErrorMessage = "Running";
         ReferenceApplicationEventSource.Log.Initialization($" producer engine and starting sending data acomplished");
       }
@@ -52,7 +72,6 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       if (!disposing)
         return;
       m_Simulator?.Dispose();
-      m_Simulator = null;
     }
     #endregion
 
@@ -61,17 +80,6 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     private void Restart()
     {
       Debug.Assert(m_Simulator != null);
-      m_Simulator.Dispose();
-      BindAndStartRunning();
-    }
-    private void BindAndStartRunning()
-    {
-      string _repositoryGroup = "repositoryGroup";
-      ConfigurationFactory = new SimulatorInteroperabilityTest.ProducerConfigurationFactory(Properties.Settings.Default.ProducerConfigurationFileName);
-      IBindingFactory _simulator = new SimulatorInteroperabilityTest.DataGenerator(_repositoryGroup);
-      m_Simulator = _simulator as IDisposable;
-      BindingFactory = _simulator;
-      EncodingFactory = new SimulatorInteroperabilityTest.EncodingFactoryBinarySimple(_repositoryGroup);
       Start();
     }
     #endregion

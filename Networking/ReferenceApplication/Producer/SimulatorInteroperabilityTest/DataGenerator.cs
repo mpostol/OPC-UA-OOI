@@ -1,10 +1,11 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Threading;
+using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
-using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabilityTest
 {
@@ -12,13 +13,20 @@ namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabili
   /// <summary>
   /// Class CustomNodeManager - it is simulator producing data to be sent over the wire using message centric communication provided 
   /// by the UAOOI.Networking.SemanticData framework.
+  /// 
+  /// The data i generated according to the requirements defined by OPCF to proceed interoperability testing.
   /// </summary>
+  [Export(ProducerCompositionSettings.BindingFactoryContract, typeof(IBindingFactory))]
   internal class DataGenerator : IBindingFactory, IDisposable
   {
-    #region constructor
-    public DataGenerator(string m_RepositoryGroup)
+
+    #region ImportingConstructor
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DataGenerator"/> class that generates the data to be used for interoperability testing.
+    /// </summary>
+    /// <param name="repositoryGroup">The repository group name.</param>
+    public DataGenerator()
     {
-      RepositoryGroup = m_RepositoryGroup;
       m_Timer = new Timer(TimerCallback, null, 1000, 1000);
     }
     #endregion
@@ -31,7 +39,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabili
       m_Timer.Change(Timeout.Infinite, Timeout.Infinite);
       m_Timer.Dispose();
     }
-    #endregion    
+    #endregion
 
     #region IBindingFactory
     /// <summary>
@@ -60,9 +68,9 @@ namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabili
     /// <exception cref="System.NotImplementedException"></exception>
     IProducerBinding IBindingFactory.GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
-      if (repositoryGroup != RepositoryGroup)
+      if (repositoryGroup != Settings.ProducerConfigurationRepositoryGroup)
         throw new ArgumentNullException("repositoryGroup");
-      string _name = $"{ repositoryGroup}.{ processValueName}";
+      string _name = $"{repositoryGroup}.{ processValueName}";
       IProducerBinding _return = null;
       if (m_NodesDictionary.ContainsKey(processValueName))
         _return = m_NodesDictionary[processValueName];
@@ -133,12 +141,9 @@ namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabili
     }
     #endregion
 
-
     #region private
     //vars
-    private string RepositoryGroup { get; set; } = "repositoryGroup";
     private Timer m_Timer;
-
     private event EventHandler m_TimeEvent;
     private Dictionary<string, IProducerBinding> m_NodesDictionary = new Dictionary<string, IProducerBinding>();
     //methods
@@ -213,7 +218,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabili
         _ret[i] = incrementItem(i);
       return _ret;
     }
-    #endregion    
+    #endregion
     private IProducerBinding AddBinding<type>(string key, Func<type, type> increment, type defaultValue, UATypeInfo typeInfo)
     {
       ProducerBindingMonitoredValue<type> binding = new ProducerBindingMonitoredValue<type>(key, typeInfo) { MonitoredValue = defaultValue };

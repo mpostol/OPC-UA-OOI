@@ -151,9 +151,12 @@
     <Compile Include="MEF\MefBootstrapper.cs" />
     <Compile Include="MEF\ServiceLocatorAdapter.cs" />
     <Compile Include="Producer\IProducerViewModel.cs" />
+    <Compile Include="Producer\ProducerCompositionSettings.cs" />
+    <Compile Include="Producer\ProducerSettings.cs" />
     <Compile Include="Producer\SimulatorInteroperabilityTest\DataGenerator.cs" />
     <Compile Include="Producer\SimulatorInteroperabilityTest\EncodingFactoryBinarySimple.cs" />
     <Compile Include="Producer\SimulatorInteroperabilityTest\ProducerConfigurationFactory.cs" />
+    <Compile Include="Producer\SimulatorInteroperabilityTest\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

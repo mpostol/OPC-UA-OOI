@@ -1,5 +1,6 @@
-﻿using System;
-using System.Diagnostics;
+﻿
+using System;
+using System.ComponentModel.Composition;
 using System.Xml;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
@@ -8,12 +9,14 @@ using UAOOI.Networking.SemanticData.Encoding;
 
 namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabilityTest
 {
+
+  /// <summary>
+  /// Class EncodingFactoryBinarySimple - provides <see cref="IEncodingFactory"/> functionality limited to encoding simple data only.
+  /// </summary>
+  /// <seealso cref="UAOOI.Networking.SemanticData.IEncodingFactory" />
+  [Export(ProducerCompositionSettings.EncodingFactoryContract, typeof(IEncodingFactory))]
   public class EncodingFactoryBinarySimple : IEncodingFactory
   {
-    public EncodingFactoryBinarySimple(string repositoryGroup)
-    {
-      m_RepositoryGroup = repositoryGroup;
-    }
 
     #region IEncodingFactory
     /// <summary>
@@ -22,12 +25,17 @@ namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabili
     /// <param name="binding">An object responsible to transfer the value between the message and ultimate destination in the repository.</param>
     /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="sourceEncoding">The source encoding.</param>
-    /// <exception cref="System.ArgumentOutOfRangeException">repositoryGroup</exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// repositoryGroup
+    /// or
+    /// binding
+    /// </exception>
     void IEncodingFactory.UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
     {
-      if (repositoryGroup != m_RepositoryGroup)
-        throw new ArgumentOutOfRangeException("repositoryGroup");
-      Debug.Assert(sourceEncoding.BuiltInType == binding.Encoding.BuiltInType);
+      if (repositoryGroup != Settings.ProducerConfigurationRepositoryGroup)
+        throw new ArgumentOutOfRangeException(nameof(repositoryGroup));
+      if (sourceEncoding.BuiltInType != binding.Encoding.BuiltInType)
+        throw new ArgumentOutOfRangeException(nameof(binding));
     }
     /// <summary>
     /// Gets the ua decoder.
@@ -91,8 +99,8 @@ namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabili
         throw new NotImplementedException();
       }
     }
-    private string m_RepositoryGroup;
     #endregion
 
   }
+
 }

@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.ComponentModel.Composition;
 using System.IO;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
@@ -11,15 +12,17 @@ namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabili
   /// <summary>
   /// Class ProducerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase"/> for the producer.
   /// </summary>
-  /// <remarks>In production environment it shall be replaced by reading a configuration file.</remarks>
+  [Export(ProducerCompositionSettings.ConfigurationFactoryContract, typeof(IConfigurationFactory))]
   internal class ProducerConfigurationFactory : ConfigurationFactoryBase
   {
 
     #region constructor
     /// <summary>
-    /// Initializes a new instance of the <see cref="ConsumerConfigurationFactory"/> class.
+    /// Initializes a new instance of the <see cref="ProducerConfigurationFactory" /> class.
     /// </summary>
-    public ProducerConfigurationFactory(string producerConfigurationFileName)
+    /// <param name="producerConfigurationFileName">Name of the producer configuration file.</param>
+    [ImportingConstructor()]
+    public ProducerConfigurationFactory([ImportAttribute(ProducerCompositionSettings.ConfigurationFileNameContract)] string producerConfigurationFileName)
     {
       m_ProducerConfigurationFileName = producerConfigurationFileName;
       Loader = LoadConfig;
@@ -38,7 +41,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabili
     #endregion
 
     #region private
-    string m_ProducerConfigurationFileName;
+    private string m_ProducerConfigurationFileName;
     private ConfigurationData LoadConfig()
     {
       FileInfo _configurationFile = new FileInfo(m_ProducerConfigurationFileName);

@@ -17,6 +17,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabili
   /// The data i generated according to the requirements defined by OPCF to proceed interoperability testing.
   /// </summary>
   [Export(ProducerCompositionSettings.BindingFactoryContract, typeof(IBindingFactory))]
+  [PartCreationPolicy(CreationPolicy.NonShared)]
   internal class DataGenerator : IBindingFactory, IDisposable
   {
 
@@ -32,6 +33,10 @@ namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabili
     #endregion
 
     #region IDisposable
+    /// <summary>
+    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
+    /// <remarks>It is called by the <see cref="CompositionContainer"/>.</remarks>
     public void Dispose()
     {
       if (m_Timer == null)
@@ -143,7 +148,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabili
 
     #region private
     //vars
-    private Timer m_Timer;
+   private Timer m_Timer;
     private event EventHandler m_TimeEvent;
     private Dictionary<string, IProducerBinding> m_NodesDictionary = new Dictionary<string, IProducerBinding>();
     //methods

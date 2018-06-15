@@ -1,5 +1,7 @@
 ﻿
+using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using System.Reactive.Disposables;
@@ -54,7 +56,7 @@ namespace UAOOI.Networking.ReferenceApplication
       {
         base.OnInitialized();
         m_EventSourceBootstrapper = Container.GetExportedValue<EventSourceBootstrapper>();
-        m_EventSourceBootstrapper.Run();
+        m_EventSourceBootstrapper.Run(EventEntry => m_Log.Add(EventEntry));
         ReferenceApplicationEventSource.Log.StartingApplication(Settings.Default.MessageHandlerProvider);
         ConsumerDataManagementSetup m_ConsumerConfigurationFactory = Container.GetExportedValue<ConsumerDataManagementSetup>();
         m_ConsumerConfigurationFactory.Setup();
@@ -102,6 +104,7 @@ namespace UAOOI.Networking.ReferenceApplication
     #endregion
 
     #region private 
+    private List<EventEntry> m_Log = new List<EventEntry>();
     private CompositeDisposable m_Components = new CompositeDisposable();
     private EventSourceBootstrapper m_EventSourceBootstrapper;
     private static void AppDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)

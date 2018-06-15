@@ -48,7 +48,7 @@ namespace UAOOI.Networking.ReferenceApplication
       b_TermsOfService = new WebDocumentationCommand(Properties.Resources.TermsOfServiceUrl);
       b_ViewLicense = new WebDocumentationCommand(Properties.Resources.ViewLicenseUrl);
       String _version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-      b_WindowTitle = $"OPC UA Example Application Rel. {_version} supporting PubSup protocol 1.10";
+      b_WindowTitle = $"OPC UA Reactive Networking Example Application Rel. {_version} supporting PubSup protocol 1.10";
 
     }
 
@@ -407,6 +407,7 @@ namespace UAOOI.Networking.ReferenceApplication
       }
     }
     #endregion
+
     #region Producer ViewModel implementation
     public ICommand ProducerRestartCommand { get; private set; }
     #endregion

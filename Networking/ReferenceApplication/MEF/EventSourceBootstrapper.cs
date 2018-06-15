@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.Tracing;
 using System.Linq;
+using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
@@ -23,7 +24,7 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
     #endregion
 
     #region API
-    internal void Run()
+    internal void Run(Action<EventEntry> action)
     {
       CompositeDisposable _listenersDisposable = new CompositeDisposable();
       if (EventSources != null)
@@ -36,7 +37,8 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
       if (_listenersDisposable.Count == 0)
         return;
       IObservable<EventEntry> _last = _listenersDisposable.Cast<IObservable<EventEntry>>().Merge<EventEntry>();
-      m_FileSubscription = _last.LogToFlatFile(Properties.Settings.Default.LogFilePath);
+      m_FileSubscription = _last.ObserveOn<EventEntry>(Scheduler.Default).Do<EventEntry>(action).LogToFlatFile(Properties.Settings.Default.LogFilePath);
+
     }
     #endregion
 

@@ -12,5 +12,4 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     public string ProducerConfigurationFileName => Properties.Settings.Default.ProducerConfigurationFileName;
   }
 
-
 }

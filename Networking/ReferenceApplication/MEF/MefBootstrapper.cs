@@ -158,6 +158,7 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
       Dispose(true);
     }
     #endregion
+
     #endregion
 
   }

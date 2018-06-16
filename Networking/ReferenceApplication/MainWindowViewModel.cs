@@ -22,10 +22,9 @@ namespace UAOOI.Networking.ReferenceApplication
   /// Model View ViewModel pattern.
   /// </summary>
   [Export()]
-  [Export(typeof(IProducerViewModel))]
   [Export(typeof(IConsumerViewModel))]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  internal class MainWindowViewModel : INotifyPropertyChanged, IProducerViewModel, IConsumerViewModel
+  internal class MainWindowViewModel : INotifyPropertyChanged, IConsumerViewModel
   {
 
     #region constructors
@@ -35,7 +34,6 @@ namespace UAOOI.Networking.ReferenceApplication
     public MainWindowViewModel()
     {
 
-      ProducerRestartCommand = new RestartCommand(() => ProducerRestart?.Invoke(this, EventArgs.Empty));
       b_ConsumerLog = new ObservableCollection<string>();
       //Menu Files
       b_ConfigurationFolder = new ConfigurationFolderCommand();
@@ -371,7 +369,13 @@ namespace UAOOI.Networking.ReferenceApplication
     }
     #endregion
 
-    #region IProducerViewModel
+    #region ProducerViewModel
+    /// <summary>
+    /// Gets or sets the producer view model.
+    /// </summary>
+    /// <value>The producer view model.</value>
+    [Import(ProducerCompositionSettings.ProducerViewModelContract)]
+    public object ProducerViewModel { get; set; }
     public int BytesSent
     {
       get
@@ -394,22 +398,6 @@ namespace UAOOI.Networking.ReferenceApplication
         PropertyChanged.RaiseHandler<int>(value, ref b_PackagesSent, "PackagesSent", this);
       }
     }
-    public event EventHandler<EventArgs> ProducerRestart;
-    public string ProducerErrorMessage
-    {
-      get
-      {
-        return b_ProducerErrorMessage;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<string>(value, ref b_ProducerErrorMessage, "ProducerErrorMessage", this);
-      }
-    }
-    #endregion
-
-    #region Producer ViewModel implementation
-    public ICommand ProducerRestartCommand { get; private set; }
     #endregion
 
     #region INotifyPropertyChanged
@@ -472,23 +460,6 @@ namespace UAOOI.Networking.ReferenceApplication
         }
       }
     }
-    private class RestartCommand : ICommand
-    {
-      public RestartCommand(Action restart)
-      {
-        m_restart = restart;
-      }
-      public event EventHandler CanExecuteChanged;
-      public bool CanExecute(object parameter)
-      {
-        return true;
-      }
-      public void Execute(object parameter)
-      {
-        m_restart();
-      }
-      private Action m_restart;
-    }
     //vars
     //Consumer private part
     private ObservableCollection<string> b_ConsumerLog;
@@ -499,7 +470,6 @@ namespace UAOOI.Networking.ReferenceApplication
     //producer private part
     private int b_BytesSent;
     private int b_PackagesSent;
-    private string b_ProducerErrorMessage;
     //methods
     private IConsumerBinding AddBinding<type>(string variableName, UATypeInfo typeInfo)
     {

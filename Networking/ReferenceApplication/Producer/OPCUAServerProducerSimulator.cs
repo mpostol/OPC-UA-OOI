@@ -9,7 +9,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
 {
 
   /// <summary>
-  /// Class OPCUAServerProducerSimulator simulates interface to internal <see cref="CustomNodeManager"/> class.
+  /// Class OPCUAServerProducerSimulator represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer.
   /// </summary>
   [Export]
   [PartCreationPolicy(CreationPolicy.Shared)]
@@ -21,8 +21,8 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     /// Gets or sets the view model to be used for diagnostic purpose..
     /// </summary>
     /// <value>The view model.</value>
-    [Import(typeof(IProducerViewModel))]
-    internal IProducerViewModel ViewModel
+    [Import(ProducerCompositionSettings.ProducerViewModelContract, typeof(SimulatorViewModel))]
+    internal SimulatorViewModel ViewModel
     {
       get; set;
     }
@@ -61,7 +61,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       try
       {
         ReferenceApplicationEventSource.Log.Initialization($"{nameof(OPCUAServerProducerSimulator)}.{nameof(Setup)} starting");
-        ViewModel.ProducerRestart += (sender, e) => { };
+        ViewModel.ChangeProducerRestartCommand(() => { ViewModel.ProducerErrorMessage = "Restarted"; });
         Start();
         ViewModel.ProducerErrorMessage = "Running";
         ReferenceApplicationEventSource.Log.Initialization($" Setup of the producer engine acomplished and starting sending data.");

@@ -132,8 +132,8 @@
                 <StackPanel Margin="10" Orientation="Vertical" Grid.Column="1">
                     <TextBox Style="{StaticResource TextBox}" Text="{Binding Path=PackagesSent,  FallbackValue=?????, Mode=OneWay}" ToolTip="Packages sent by the producer"/>
                     <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path=BytesSent,  FallbackValue=?????, Mode=OneWay }" ToolTip="Bytes sent by the producer"/>
-                    <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path=ProducerErrorMessage, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
-                    <Button  Style="{StaticResource TextBox}" Command="{Binding Path=ProducerRestartCommand}" >Update Configuration</Button>
+                    <TextBox  Style="{StaticResource TextBox}" Text="{Binding Path=ProducerViewModel.ProducerErrorMessage, Mode=TwoWay }" ToolTip="Bytes sent by the producer"/>
+                    <Button  Style="{StaticResource TextBox}" Command="{Binding Path=ProducerViewModel.ProducerRestartCommand}" >Update Configuration</Button>
                 </StackPanel>
             </Grid>
         </StackPanel>

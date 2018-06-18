@@ -33,6 +33,7 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.
     <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+    <Product>Object Oriented Internet</Product>
 
   </PropertyGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UANodeSetValid
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".CommonResources", ".CommonResources", "{78EDB72A-77B1-4A64-8E76-17E780993017}"
 	ProjectSection(SolutionItems) = preProject
+		CommonResources\T4Definitions\bin\ClassLibrary1.csproj = CommonResources\T4Definitions\bin\ClassLibrary1.csproj
 		CONTRIBUTING.md = CONTRIBUTING.md
 		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
 		NuGet.Config = NuGet.Config

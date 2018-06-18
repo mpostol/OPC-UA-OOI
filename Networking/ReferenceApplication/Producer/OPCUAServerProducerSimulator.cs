@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using UAOOI.Configuration.Networking;
 using UAOOI.Networking.ReferenceApplication.Diagnostic;
 using UAOOI.Networking.SemanticData;
+using UAOOI.Networking.SemanticData.MessageHandling;
 
 namespace UAOOI.Networking.ReferenceApplication.Producer
 {
@@ -52,6 +53,11 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     public IBindingFactory ProducerBindingFactory
     {
       set { BindingFactory = value; }
+    }
+    [Import(typeof(IMessageHandlerFactory))]
+    public IMessageHandlerFactory ProducerMessageHandlerFactory
+    {
+      set { MessageHandlerFactory = value; }
     }
     #endregion
 

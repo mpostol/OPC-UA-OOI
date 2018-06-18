@@ -162,7 +162,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
 
       private class Binding : IConsumerBinding
       {
-        public System.Windows.Data.IValueConverter Converter
+        public IValueConverter Converter
         {
           set { }
         }
@@ -179,6 +179,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         {
           set { }
         }
+        public object FallbackValue { set => throw new NotImplementedException(); }
         public void Assign2Repository(object value)
         {
           throw new NotImplementedException();

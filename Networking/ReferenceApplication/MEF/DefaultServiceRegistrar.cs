@@ -25,7 +25,8 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
     private static List<ComposablePartCatalog> GetDefaultComposablePartCatalog()
     {
       return new List<ComposablePartCatalog>(new ComposablePartCatalog[] { new AssemblyCatalog(Assembly.GetAssembly(typeof(AppBootstrapper))),
-                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(DataManagementSetup))) });
+                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(DataManagementSetup))),
+                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.SimulatorInteroperabilityTest.EncodingFactoryBinarySimple)))});
     }
 
   }

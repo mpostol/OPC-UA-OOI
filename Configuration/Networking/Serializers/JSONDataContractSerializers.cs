@@ -32,7 +32,7 @@ namespace UAOOI.Configuration.Networking.Serializers
 
         DataContractJsonSerializer _serializer = new DataContractJsonSerializer(typeof(type));
         type _graph = _serializer.ReadObject(reader) as type;
-        trace(TraceEventType.Verbose, 52, String.Format(Resources.InformationFileOpened, fileToRead.FullName));
+        trace(TraceEventType.Verbose, 52, String.Format(Resources.InformationFileOpened2, fileToRead.FullName));
         return _graph;
       }
     }
@@ -55,7 +55,7 @@ namespace UAOOI.Configuration.Networking.Serializers
       Formatting _formatting = new Formatting() { };
       using (FileStream _writer = fileToWrite.Open( FileMode.Create))
         _deserializer.WriteObject(_writer, graph);
-      trace(TraceEventType.Verbose, 52, String.Format(Resources.InformationFileSaved, fileToWrite.FullName));
+      trace(TraceEventType.Verbose, 52, String.Format(Resources.InformationFileSaved2, fileToWrite.FullName));
     }
 
   }

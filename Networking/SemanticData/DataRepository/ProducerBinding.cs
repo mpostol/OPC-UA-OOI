@@ -56,7 +56,7 @@ namespace UAOOI.Networking.SemanticData.DataRepository
       if (this.Converter == null)
         return GetReadValueDelegate();
       else
-        return Converter.ConvertBack(GetReadValueDelegate(), typeof(type), Parameter, Culture);
+        return Converter.Convert(GetReadValueDelegate(), typeof(type), FallbackValue, Parameter, Culture);
     }
     /// <summary>
     /// Occurs when a property value changes.

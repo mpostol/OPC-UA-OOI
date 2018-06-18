@@ -1,13 +1,13 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using UAOOI.Networking.SemanticData.DataRepository;
-using UAOOI.Networking.SemanticData.MessageHandling;
-using System.Linq;
 using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;
+using UAOOI.Networking.SemanticData.MessageHandling;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
 {
@@ -134,7 +134,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       {
         return Value;
       }
-      public System.Windows.Data.IValueConverter Converter
+      public IValueConverter Converter
       {
         set { throw new NotImplementedException(); }
       }
@@ -190,6 +190,9 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       {
         set { throw new NotImplementedException(); }
       }
+
+      public object FallbackValue { set => throw new NotImplementedException(); }
+
       public void OnEnabling()
       {
         throw new NotImplementedException();

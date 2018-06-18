@@ -1,184 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7F4DED4E-5933-4229-B9CC-51DA49678904}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UAOOI.Networking.SemanticData</RootNamespace>
-    <AssemblyName>UAOOI.Networking.SemanticData.deb</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\UAOOI.Networking.SemanticData.deb.xml</DocumentationFile>
-    <NoWarn>IDE0001, IDE0002,IDE0003,1591</NoWarn>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\UAOOI.Networking.SemanticData.deb.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>UAOOI.Networking.SemanticData</AssemblyName>
     <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UAOOI.Common.Infrastructure, Version=2.0.0.16099, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UAOOI.Common.Infrastructure.2.0.3\lib\net461\UAOOI.Common.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="UAOOI.Configuration.Networking, Version=3.0.5.36688, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UAOOI.Configuration.Networking.3.0.5\lib\net461\UAOOI.Configuration.Networking.dll</HintPath>
-    </Reference>
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Association.cs" />
-    <Compile Include="AssociationsCollection.cs" />
-    <Compile Include="AssociationStateChangedEventArgs.cs" />
-    <Compile Include="DataMemberConfiguration.helpers.cs" />
-    <Compile Include="DataRepository\IBinding.cs" />
-    <Compile Include="DataRepository\Binding.cs" />
-    <Compile Include="ConsumerAssociation.cs" />
-    <Compile Include="DataRepository\ConsumerBinding.cs" />
-    <Compile Include="DataManagementSetup.cs" />
-    <Compile Include="DataRepository\ConsumerBindingMonitoredValue.cs" />
-    <Compile Include="Diagnostics\NetworkingEventSourceProvider.cs" />
-    <Compile Include="Diagnostics\ReactiveNetworkingEventSourceExtensions.cs" />
-    <Compile Include="Diagnostics\INetworkingEventSourceProvider.cs" />
-    <Compile Include="Diagnostics\ReactiveNetworkingEventSource.cs" />
-    <Compile Include="Encoding\CommonDefinitions.cs" />
-    <Compile Include="Encoding\IBinaryEncoder.cs" />
-    <Compile Include="Encoding\IDataValue.cs" />
-    <Compile Include="Encoding\IDiagnosticInfo.cs" />
-    <Compile Include="Encoding\IExpandedNodeId.cs" />
-    <Compile Include="Encoding\IExtensionObject.cs" />
-    <Compile Include="Encoding\IBinaryDecoder.cs" />
-    <Compile Include="Encoding\ILocalizedText.cs" />
-    <Compile Include="Encoding\INodeId.cs" />
-    <Compile Include="Encoding\IQualifiedName.cs" />
-    <Compile Include="Encoding\IStatusCode.cs" />
-    <Compile Include="Encoding\IUADecoder.cs" />
-    <Compile Include="Encoding\IUAEcoder.cs" />
-    <Compile Include="Encoding\UABinaryDecoder.cs" />
-    <Compile Include="Encoding\IVariant.cs" />
-    <Compile Include="Encoding\UABinaryEncoder.cs" />
-    <Compile Include="Encoding\VariantEncodingMask.cs" />
-    <Compile Include="IEncodingFactory.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="HandlerState.cs" />
-    <Compile Include="IAssociationState.cs" />
-    <Compile Include="IBindingFactory.cs" />
-    <Compile Include="DataRepository\IConsumerBinding.cs" />
-    <Compile Include="IDataUniqueIdentifier.cs" />
-    <Compile Include="MessageEventArg.cs" />
-    <Compile Include="MessageHandling\BinaryDecoder.cs" />
-    <Compile Include="MessageHandling\BinaryEncoder.cs" />
-    <Compile Include="MessageHandling\BinaryMessageDecoder.cs" />
-    <Compile Include="MessageHandling\BinaryMessageEncoder.cs" />
-    <Compile Include="MessageHandling\BinaryPacketDecoder.cs" />
-    <Compile Include="MessageHandling\BinaryPacketEncoder.cs" />
-    <Compile Include="MessageHandling\CommonDefinition.cs" />
-    <Compile Include="MessageHandling\DataSelector.cs" />
-    <Compile Include="MessageHandling\HeaderWriter.cs" />
-    <Compile Include="MessageHandling\IBinaryHeaderWriter.cs" />
-    <Compile Include="DataRepository\IProducerBinding.cs" />
-    <Compile Include="ISemanticData.cs" />
-    <Compile Include="MessageHandling\IMessageHandler.cs" />
-    <Compile Include="MessageHandlersCollection.cs" />
-    <Compile Include="MessageHandling\IMessageHandlerFactory.cs" />
-    <Compile Include="MessageHandling\IMessageReader.cs" />
-    <Compile Include="MessageHandling\IMessageWriter.cs" />
-    <Compile Include="MessageHandling\MessageHandler.cs" />
-    <Compile Include="MessageHandling\MessageHeader.cs" />
-    <Compile Include="MessageHandling\MessageLengthEnum.cs" />
-    <Compile Include="MessageHandling\MessageReaderBase.cs" />
-    <Compile Include="MessageHandling\MessageTypeEnum.cs" />
-    <Compile Include="MessageHandling\MessageWriterBase.cs" />
-    <Compile Include="MessageHandling\PacketHeader.cs" />
-    <Compile Include="MessageHandling\NetworkMessageFlags.cs" />
-    <Compile Include="ProducerAssociation.cs" />
-    <Compile Include="DataRepository\ProducerBinding.cs" />
-    <Compile Include="DataRepository\ProducerBindingMonitoredValue.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AssemblyInfo.tt</DependentUpon>
-    </Compile>
+    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
-      <Link>DependencyValidation1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
-    <None Include="app.config" />
-    <None Include="Association.cd" />
-    <None Include="DataRepository\IBinding.cd" />
-    <None Include="MessageHandling\MessageHandling.cd" />
-    <None Include="OPCUAOOIKey.snk" />
-    <None Include="packages.config" />
-    <None Include="README.MD" />
-    <None Include="README.PubSubMTF.md" />
-    <None Include="READMEGettingStartedTutorial.md" />
-    <None Include="README_AMQPMapping.md" />
-    <None Include="README_MQTTMapping.md" />
-    <None Include="UAOOI.Networking.SemanticData.nuspec">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UAOOI.Networking.SemanticData.tt</DependentUpon>
+    <None Update="Properties\AssemblyInfo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Properties\AssemblyInfo.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
-    </Content>
-    <Content Include="UAOOI.Networking.SemanticData.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>UAOOI.Networking.SemanticData.nuspec</LastGenOutput>
-    </Content>
-    <None Include="READMEDataDiscoveryAndBinding.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

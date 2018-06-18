@@ -31,6 +31,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         binding.Parameter = "Conversion parameter";
         binding.Converter = new IVC();
         binding.Culture = CultureInfo.InvariantCulture;
+        binding.FallbackValue = null;
       }
       public IUADecoder UADecoder
       {
@@ -65,6 +66,11 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         throw new NotImplementedException();
       }
 
+      public object Convert(object value, Type targetType, object fallBack, object parameter, CultureInfo culture)
+      {
+        throw new NotImplementedException();
+      }
+
       public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
       {
         throw new NotImplementedException();
@@ -72,7 +78,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     }
     private class MyBinding : IBinding
     {
-      public System.Windows.Data.IValueConverter Converter
+      public IValueConverter Converter
       {
         set;
         private get;
@@ -91,11 +97,14 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         set;
         private get;
       }
+      public object FallbackValue { get; set; }
+
       public void Assign2Repository(object value)
       {
         Assert.IsNotNull(Converter);
         Assert.IsNotNull(Parameter);
         Assert.IsNotNull(Culture);
+        Assert.IsNull(FallbackValue);
       }
       public void OnEnabling()
       {

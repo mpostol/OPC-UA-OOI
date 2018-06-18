@@ -106,17 +106,15 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     }
     private class DateFormatter : IValueConverter
     {
-      public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+      public object Convert(object value, Type targetType, object fallBack, object parameter, CultureInfo culture)
       {
         Assert.IsInstanceOfType(value, typeof(Recording));
         Assert.IsNull(parameter);
         DateTime date = ((Recording)value).ReleaseDate;
+        Assert.IsNull(fallBack);
         return date.ToString(CultureInfo.InvariantCulture);
       }
-      public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-      {
-        throw new NotFiniteNumberException();
-      }
+
     }
     #endregion
 

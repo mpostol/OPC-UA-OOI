@@ -8,7 +8,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using System.Windows.Data;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Configuration.Networking.Serialization;
@@ -163,6 +162,10 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       {
         set { throw new NotImplementedException(); }
       }
+
+      DataRepository.IValueConverter IBinding.Converter { set => throw new NotImplementedException(); }
+      public object FallbackValue { set => throw new NotImplementedException(); }
+
       public void OnEnabling()
       {
         throw new NotImplementedException();

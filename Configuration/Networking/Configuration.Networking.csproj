@@ -1,169 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E28E0880-03AA-4D1B-A820-41B04E766019}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>UAOOI.Configuration.Networking</AssemblyName>
     <RootNamespace>UAOOI.Configuration.Networking</RootNamespace>
-    <AssemblyName>UAOOI.Configuration.Networking.dbg</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>IDE0001,IDE0002,IDE0003,1591,CS0067</NoWarn>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <DocumentationFile>bin\Debug\UAOOI.Configuration.Networking.dbg.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\UAOOI.Configuration.Networking.dbg.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup>
+    <Version>4.0.0</Version>
+    <id>UAOOI.Configuration.Networking</id>
+    <title>UAOOI.Configuration.Networking - UA Data Application Configuration</title>
+    <authors>MPostol</authors>
+    <owners>cas.eu</owners>
+    <projectUrl>https://github.com/mpostol/OPC-UA-OOI/tree/master/Configuration/Networking</projectUrl>
+    <licenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <developmentDependency>false</developmentDependency>
+    <description>OPC UA Object Oriented Internet (UAOOI) UAOOI.Configuration.Networking library is dedicated to create a plug-in aimed at provisioning configuration of any application based on OPC UA Information Model.
+It is part of the project supporting OPC UA Object Oriented Internet paradigm.
+</description>
+    <summary>
+      UAOOI Configuration Networking Library
+    </summary>
+    <releaseNotes>
+      It is working prerelease
+    </releaseNotes>
+    <copyright>Copyright MPostol (c) 2018</copyright>
+    <tags>Object Oriented Internet, OPC UA, CommServer, ASMD, Address Space Model Designer.</tags>
+    <Company>commsvr.com</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
     <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows" />
-    <Reference Include="System.Windows.Presentation" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UAOOI.Common.Infrastructure, Version=2.0.0.16099, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UAOOI.Common.Infrastructure.2.0.3\lib\net461\UAOOI.Common.Infrastructure.dll</HintPath>
-    </Reference>
+    <PackageReference Include="CommonServiceLocator" Version="2.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonDefinitions.cs" />
-    <Compile Include="IConfigurationDataFactory.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <AutoGen>True</AutoGen>
+    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
-      <DependentUpon>AssemblyInfo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Serialization\ConfigurationData.cs">
-      <DependentUpon>ConfigurationData.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Serialization\ConfigurationData.xsd.cs">
-      <DependentUpon>ConfigurationData.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="ConfigurationFactoryBase.cs" />
-    <Compile Include="Serialization\ConfigurationVersionDataType.cs" />
-    <Compile Include="Serialization\DataMemberConfiguration.cs" />
-    <Compile Include="Serialization\DataSetConfiguration.cs" />
-    <Compile Include="IConfigurationFactory.cs" />
-    <Compile Include="Serialization\FieldEncodingEnum.cs" />
-    <Compile Include="Serialization\InstanceNodeClassesEnum.cs" />
-    <Compile Include="Serialization\MessageReaderConfiguration.cs" />
-    <Compile Include="Serialization\MessageHandlerConfiguration.cs" />
-    <Compile Include="Serialization\MessageWriterConfiguration.cs" />
-    <Compile Include="Serialization\NodeDescriptor.cs" />
-    <Compile Include="Serialization\BuiltInType.cs" />
-    <Compile Include="Serialization\TypeDictionary.cs" />
-    <Compile Include="Serialization\UATypeInfo.cs" />
-    <Compile Include="Serialization\ValueRanks.cs" />
-    <Compile Include="ConfigurationDataFactoryIO.cs" />
-    <Compile Include="Serializers\JSONDataContractSerializers.cs" />
-    <Compile Include="Serializers\SerializerType.cs" />
-    <Compile Include="Serializers\XmlDataContractSerializers.cs" />
-    <Compile Include="UANetworkingConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
-      <Link>DependencyValidation1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
-    <None Include="app.config" />
-    <None Include="OPCUAOOIKey.snk" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\UAOOI.Configuration.Networking.nuspec">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UAOOI.Configuration.Networking.tt</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="README.MD" />
-    <None Include="Serialization\ConfigurationData.cd" />
-    <None Include="Serialization\ConfigurationData.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Serialization\GoCS.cmd" />
-    <None Include="Serialization\GoXSD.cmd" />
-    <None Include="Serialization\ConfigurationData.XsdDataContractExporter.xsd">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Properties\AssemblyInfo.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
-    </Content>
-    <Content Include="Properties\UAOOI.Configuration.Networking.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>UAOOI.Configuration.Networking.nuspec</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

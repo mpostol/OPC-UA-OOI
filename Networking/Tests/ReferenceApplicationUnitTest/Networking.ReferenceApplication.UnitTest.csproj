@@ -53,7 +53,6 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Reactive.Core, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
@@ -62,16 +61,8 @@
     <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml" />
-    <Reference Include="UAOOI.Common.Infrastructure, Version=2.0.0.16099, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\UAOOI.Common.Infrastructure.2.0.3\lib\net461\UAOOI.Common.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="UAOOI.Configuration.Networking, Version=3.0.5.36688, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\UAOOI.Configuration.Networking.3.0.5\lib\net461\UAOOI.Configuration.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UAOOI.Networking.SemanticData, Version=3.0.5.37267, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\UAOOI.Networking.SemanticData.3.0.5\lib\net461\UAOOI.Networking.SemanticData.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
@@ -97,9 +88,21 @@
     <Compile Include="MainWindowViewModelUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Infrastructure\Common.Infrastructure.csproj">
+      <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
+      <Name>Common.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Configuration\Networking\Configuration.Networking.csproj">
+      <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
+      <Name>Configuration.Networking</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ReferenceApplication\Networking.ReferenceApplication.csproj">
       <Project>{f0accb28-ae0d-4e19-94fa-7be3044f1eeb}</Project>
       <Name>Networking.ReferenceApplication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SemanticData\Networking.SemanticData.csproj">
+      <Project>{7f4ded4e-5933-4229-b9cc-51da49678904}</Project>
+      <Name>Networking.SemanticData</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\UDPMessageHandler\Networking.UDPMessageHandler.csproj">
       <Project>{D2EB89F9-321E-46E4-BA79-679138B82B23}</Project>

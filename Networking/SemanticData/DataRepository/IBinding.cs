@@ -1,5 +1,5 @@
-﻿using System.Globalization;
-using System.Windows.Data;
+﻿
+using System.Globalization;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Networking.SemanticData.DataRepository
@@ -27,6 +27,11 @@ namespace UAOOI.Networking.SemanticData.DataRepository
     /// </summary>
     /// <value>The parameter to be used by the <see cref="IBinding.Converter"/>.</value>
     object Parameter { get; set; }
+    /// <summary>
+    /// Sets the value to use when the binding is unable to return a value.
+    /// </summary>
+    /// <value>The fallback value.</value>
+    object FallbackValue { set; }
     /// <summary>
     /// Sets the culture of the conversion.
     /// </summary>

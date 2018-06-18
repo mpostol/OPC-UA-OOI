@@ -33,7 +33,7 @@ namespace UAOOI.Networking.SemanticData.DataRepository
       if (this.Converter == null)
         AssignValueToRepository((type)value);
       else
-        AssignValueToRepository((type)Converter.Convert(value, typeof(type), Parameter, Culture));
+        AssignValueToRepository((type)Converter.Convert(value, typeof(type), FallbackValue, Parameter, Culture));
     }
     #endregion
 

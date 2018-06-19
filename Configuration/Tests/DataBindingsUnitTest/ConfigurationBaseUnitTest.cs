@@ -1,8 +1,9 @@
 ﻿
 using System;
 using System.IO;
-using CAS.UA.IServerConfiguration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UAOOI.Common.Infrastructure.Diagnostic;
+using UAOOI.Configuration.DataBindings.Common;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings.UnitTest
@@ -45,7 +46,7 @@ namespace UAOOI.Configuration.DataBindings.UnitTest
     public void ReadConfigurationTest()
     {
       ConfigurationBaseDerivedTest _instance = new ConfigurationBaseDerivedTest();
-      _instance.TraceSource = new Common.Infrastructure.Diagnostic.TraceSourceBase();
+      _instance.TraceSource = new TraceSourceBase();
       int _OnModifiedCalled = 0;
       _instance.OnModified += (x, y) => _OnModifiedCalled++;
       FileInfo _configurationFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");

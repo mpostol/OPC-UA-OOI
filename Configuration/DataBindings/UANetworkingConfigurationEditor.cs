@@ -1,8 +1,8 @@
-﻿
-using CAS.UA.IServerConfiguration;
-using CommonServiceLocator;
+﻿using CommonServiceLocator;
 using System;
+using System.ComponentModel.Composition;
 using System.IO;
+using UAOOI.Configuration.DataBindings.Common;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings
@@ -11,7 +11,7 @@ namespace UAOOI.Configuration.DataBindings
   /// <summary>
   /// Class UANetworkingConfigurationEditor - 
   /// </summary>
-  [System.ComponentModel.Composition.Export(typeof(IConfiguration))]
+  [Export(typeof(IConfiguration))]
   public sealed class UANetworkingConfigurationEditor : ConfigurationBase<ConfigurationData>, IDisposable
   {
 
@@ -75,7 +75,7 @@ namespace UAOOI.Configuration.DataBindings
     {
       get
       {
-        return String.Format("{0}.{1}", Properties.Settings.Default.DefaultConfigurationFileName, Properties.Settings.Default.DefaultConfigurationFileNametExtension);
+        return String.Format("{0}.{1}", Settings.DefaultConfigurationFileName, Settings.DefaultConfigurationFileNametExtension);
       }
     }
     /// <summary>

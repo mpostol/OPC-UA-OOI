@@ -1,166 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F8DB9567-C559-440C-BBCF-E02013F9AB94}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UAOOI.Configuration.DataBindings</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>UAOOI.Configuration.DataBindings</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\UAOOI.Configuration.DataBindings.xml</DocumentationFile>
-    <NoWarn>IDE0001,IDE0002,IDE0003</NoWarn>
-    <Prefer32Bit>false</Prefer32Bit>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <DocumentationFile>bin\Release\UAOOI.Configuration.DataBindings.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup>
+    <RootNamespace>UAOOI.Configuration.DataBindings</RootNamespace>
+    <Version>4.0.0</Version>
+    <Authors>commsvr.com</Authors>
+    <Product>Object Oriented Internet</Product>
+    <Description>OPC UA Object Oriented Internet (UAOOI) DataBindings library is dedicated to create a plug-in aimed at editing of the configuration of any application based on OPC UA Information Model.
+It allows also to add data binding to the configuration. It is part of the project supporting OPC UA Object Oriented Internet paradigm.
+</Description>
+    <Copyright>Copyright MPostol (c) 2018</Copyright>
+    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
     <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="CAS.UA.IServerConfiguration, Version=1.0.0.32204, Culture=neutral, PublicKeyToken=8832ff1a67ea61a3, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CAS.UA.IServerConfiguration.1.00.00\lib\net35\CAS.UA.IServerConfiguration.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.3" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="IConfigurationEditor.cs" />
-    <Compile Include="IInstanceConfigurationFactory.cs" />
-    <Compile Include="InstanceConfigurationBase.cs" />
-    <Compile Include="ConfigurationBase.cs" />
-    <Compile Include="NodeDescriptorBase.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AssemblyInfo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="UANetworkingConfigurationEditor.cs" />
+    <ProjectReference Include="..\Networking\Configuration.Networking.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
-      <Link>DependencyValidation1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
-    <None Include="app.config" />
-    <None Include="Help\ASModelDesigner.chm" />
-    <None Include="OPCUAOOIKey.snk" />
-    <None Include="packages.config" />
-    <None Include="Properties\AssemblyInfo.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
-    </None>
-    <None Include="Properties\UAOOI.Configuration.DataBindings.nuspec">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UAOOI.Configuration.DataBindings.tt</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Properties\UAOOI.Configuration.DataBindings.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>UAOOI.Configuration.DataBindings.nuspec</LastGenOutput>
-    </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="README.MD" />
-    <None Include="ReadMe.old" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ReadMe.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ReadMe.txt</LastGenOutput>
-    </Content>
-    <Content Include="ReadMe.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReadMe.tt</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj">
-      <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
-      <Name>Common.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Networking\Configuration.Networking.csproj">
-      <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
-      <Name>Configuration.Networking</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

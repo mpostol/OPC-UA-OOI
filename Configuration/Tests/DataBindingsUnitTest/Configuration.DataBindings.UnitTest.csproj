@@ -46,10 +46,6 @@
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CAS.UA.IServerConfiguration, Version=1.0.0.32204, Culture=neutral, PublicKeyToken=8832ff1a67ea61a3, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\CAS.UA.IServerConfiguration.1.00.00\lib\net35\CAS.UA.IServerConfiguration.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -107,7 +103,6 @@
       <Visible>False</Visible>
     </AdditionalFiles>
     <None Include="app.config" />
-    <None Include="Help\ASModelDesigner.chm" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
     <None Include="Properties\AssemblyInfo.tt">

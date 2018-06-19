@@ -1,5 +1,6 @@
-﻿using CAS.UA.IServerConfiguration;
+﻿
 using System;
+using UAOOI.Configuration.DataBindings.Common;
 
 namespace UAOOI.Configuration.DataBindings
 {

@@ -79,7 +79,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.UDPMessageHandle
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking.SimulatorInteroperabilityTest", "Networking\Networking.SimulatorInteroperabilityTest\Networking.SimulatorInteroperabilityTest.csproj", "{9CACA823-0479-4831-8510-BF4D52306326}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.InformationModelFactory", "SemanticData\InformationModelFactory\SemanticData.InformationModelFactory.csproj", "{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticData.InformationModelFactory", "SemanticData\InformationModelFactory\SemanticData.InformationModelFactory.csproj", "{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UANodeSetValidation", "SemanticData\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj", "{352378A0-8B2E-4679-BB44-FD0BCC8467D9}"
 EndProject
@@ -89,7 +89,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.AddressSpaceCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.DataSerialization.UnitTest", "SemanticData\Tests\DataSerializationUnitTestProject\SemanticData.DataSerialization.UnitTest.csproj", "{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.InformationModelFactoryUnitTest", "SemanticData\Tests\InformationModelFactoryUnitTest\SemanticData.InformationModelFactoryUnitTest.csproj", "{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UANodeSetValidation.UnitTest", "SemanticData\Tests\USNodeSetValidationUnitTestProject\SemanticData.UANodeSetValidation.UnitTest.csproj", "{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

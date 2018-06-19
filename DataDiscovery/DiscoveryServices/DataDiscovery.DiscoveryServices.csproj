@@ -1,132 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DD1A7EC2-FF25-4D35-9D0A-5BB626E61D17}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UAOOI.DataDiscovery.DiscoveryServices</RootNamespace>
-    <AssemblyName>UAOOI.DataDiscovery.DiscoveryServices</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>IDE0001, IDE0003</NoWarn>
-    <DocumentationFile>bin\Debug\UAOOI.DataDiscovery.DiscoveryServices.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>UAOOI.DataDiscovery.DiscoveryServices</PackageId>
+    <Version>4.0.0</Version>
+    <Authors>MPostol</Authors>
+    <Company>commsvr.com</Company>
+    <Product>Object Oriented Internet</Product>
+    <Description>OPC UA Object Oriented Internet (UAOOI) UAOOI.DataDiscovery.DiscoveryServices library is dedicated to support global data discovery services for any application based on OPC UA Information Model. 
+It is part of the project supporting OPC UA Object Oriented Internet paradigm.</Description>
+    <Copyright>Copyright MPostol (c) 2018</Copyright>
+    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>Semantic Data, Object Oriented Internet, OPC UA,</PackageTags>
     <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyName>UAOOI.DataDiscovery.DiscoveryServices</AssemblyName>
+    <RootNamespace>UAOOI.DataDiscovery.DiscoveryServices</RootNamespace>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
-      <Link>DependencyValidation1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
-    <None Include="Models\DomainDescriptor.GoCS.cmd" />
-    <None Include="Models\DomainDescriptor.GoXSD.cmd" />
-    <None Include="Models\DomainDescriptor.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Models\DomainModel.GoCS.cmd" />
-    <None Include="Models\DomainModel.GoXSD.cmd" />
-    <None Include="Models\DomainModel.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="OPCUAOOIKey.snk" />
-    <None Include="packages.config" />
-    <None Include="Properties\UAOOI.DataDiscovery.DiscoveryServices.nuspec">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UAOOI.DataDiscovery.DiscoveryServices.tt</DependentUpon>
-    </None>
-    <None Include="README.MD" />
-    <None Include="ReadMe.old" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Properties\AssemblyInfo.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
-    </Content>
-    <Content Include="Properties\UAOOI.DataDiscovery.DiscoveryServices.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>UAOOI.DataDiscovery.DiscoveryServices.nuspec</LastGenOutput>
-    </Content>
-    <Content Include="ReadMe.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ReadMe.txt</LastGenOutput>
-    </Content>
-    <Content Include="ReadMe.txt">
-      <DependentUpon>ReadMe.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="DataDiscoveryServices.cs" />
-    <Compile Include="Models\DomainDescriptor.cs">
-      <DependentUpon>DomainDescriptor.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DomainDescriptor.xsd.cs">
-      <DependentUpon>DomainDescriptor.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DomainModel.cs">
-      <DependentUpon>DomainModel.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DomainModel.xsd.cs">
-      <DependentUpon>DomainModel.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SemanticsDataIndex.cs" />
-    <Compile Include="Priority.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AssemblyInfo.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

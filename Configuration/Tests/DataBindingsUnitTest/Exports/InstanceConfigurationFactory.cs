@@ -1,9 +1,9 @@
 ﻿
-using CAS.UA.IServerConfiguration;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using UAOOI.Configuration.DataBindings.Common;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings.UnitTest.Exports

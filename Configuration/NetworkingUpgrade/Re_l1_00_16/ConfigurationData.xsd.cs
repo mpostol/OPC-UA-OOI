@@ -1,4 +1,5 @@
-﻿
+﻿#pragma warning disable 1591
+
 using System.Runtime.Serialization;
 using System;
 using System.Xml.Serialization;
@@ -490,3 +491,5 @@ namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
 
   }
 }
+
+#pragma warning restore 1591

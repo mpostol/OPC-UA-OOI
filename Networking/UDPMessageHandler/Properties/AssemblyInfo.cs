@@ -12,18 +12,10 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("UAOOI.Networking.UDPMessageHandler")]
-[assembly: AssemblyDescription("OOI Reactive Networking: UDP IMessageHandlerFactory Implementation")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("commsvr.com")]
-[assembly: AssemblyProduct("OOI Reactive Networking")]
-[assembly: AssemblyCopyright("Copyright MPostol (c) 2018")]
 [assembly: AssemblyTrademark("Object Oriented Internet")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("d2eb89f9-321e-46e4-ba79-679138b82b23")]
-[assembly: AssemblyVersion("3.0.5.*")]
-[assembly: AssemblyFileVersion("3.0.5")]
 [assembly: InternalsVisibleTo(
   "UAOOI.Networking.UDPMessageHandler.UnitTest, PublicKey=" +
     "00240000048000009400000006020000002400005253413100040000010001005b97a0972ff6b13a" +

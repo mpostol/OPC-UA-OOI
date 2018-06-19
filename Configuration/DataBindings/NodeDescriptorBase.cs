@@ -1,7 +1,6 @@
-﻿
-using CAS.UA.IServerConfiguration;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using UAOOI.Configuration.DataBindings.Common;
 
 namespace UAOOI.Configuration.DataBindings
 {
@@ -17,8 +16,7 @@ namespace UAOOI.Configuration.DataBindings
     /// Gets the node class.
     /// </summary>
     /// <value>The node class.</value>
-    //TODO must be refactored 
-    public new CAS.UA.IServerConfiguration.InstanceNodeClassesEnum NodeClass
+    public new InstanceNodeClassesEnum NodeClass
     {
       get
       {

@@ -1,6 +1,5 @@
 ﻿
 using System;
-using System.ComponentModel.Composition;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData.MessageHandling;
@@ -31,7 +30,6 @@ namespace UAOOI.Networking.SemanticData
     /// Gets or sets the message handler factory.
     /// </summary>
     /// <value>The message handler factory.</value>
-    [Import(typeof(IMessageHandlerFactory))]
     public IMessageHandlerFactory MessageHandlerFactory { get; set; }
     /// <summary>
     /// Gets or sets the configuration factory.

@@ -6,6 +6,9 @@ using System.Xml;
 namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
 {
 
+  /// <summary>
+  /// Class NodeDescriptor.
+  /// </summary>
   [DataContractAttribute(Name = "NodeDescriptor", Namespace = CommonDefinitions.Namespace)]
   [SerializableAttribute()]
   public partial class NodeDescriptor

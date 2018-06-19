@@ -1,6 +1,5 @@
-﻿
-using CAS.UA.IServerConfiguration;
-using System;
+﻿using System;
+using UAOOI.Configuration.DataBindings.Common;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings.UnitTest.Exports

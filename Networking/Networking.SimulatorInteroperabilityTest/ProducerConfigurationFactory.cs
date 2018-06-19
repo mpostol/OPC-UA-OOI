@@ -6,7 +6,7 @@ using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.Serializers;
 
-namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabilityTest
+namespace UAOOI.Networking.SimulatorInteroperabilityTest
 {
 
   /// <summary>

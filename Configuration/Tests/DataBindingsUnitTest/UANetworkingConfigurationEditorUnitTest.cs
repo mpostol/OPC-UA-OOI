@@ -2,9 +2,9 @@
 using System;
 using System.IO;
 using System.Reflection;
-using CAS.UA.IServerConfiguration;
 using CommonServiceLocator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UAOOI.Configuration.DataBindings.Common;
 using UAOOI.Configuration.DataBindings.UnitTest.Exports;
 using UAOOI.Configuration.Networking.Serialization;
 

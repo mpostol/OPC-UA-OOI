@@ -1,6 +1,6 @@
 ﻿
-using CAS.UA.IServerConfiguration;
 using System;
+using UAOOI.Configuration.DataBindings.Common;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings
@@ -10,6 +10,7 @@ namespace UAOOI.Configuration.DataBindings
   /// </summary>
   public interface IConfigurationEditor
   {
+
     /// <summary>
     /// Creates the instance configurations.
     /// </summary>

@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.Globalization;
-using System.Windows.Data;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Networking.SemanticData.DataRepository
@@ -47,6 +46,7 @@ namespace UAOOI.Networking.SemanticData.DataRepository
       set { Parameter = value; }
       get { return Parameter; }
     }
+    Object IBinding.FallbackValue { set { FallbackValue = value; } }
     /// <summary>
     /// Sets the culture of the conversion.
     /// </summary>
@@ -106,6 +106,7 @@ namespace UAOOI.Networking.SemanticData.DataRepository
     {
       get; private set;
     }
+    public object FallbackValue { get; private set; }
     private HandlerState m_HandlerState = HandlerState.Operational;
     private void RaiseHandlerState(HandlerState state)
     {

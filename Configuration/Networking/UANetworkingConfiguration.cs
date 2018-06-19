@@ -41,7 +41,7 @@ namespace UAOOI.Configuration.Networking
     public void ReadConfiguration(FileInfo configurationFile)
     {
       CurrentConfiguration = ConfigurationDataFactoryIO.Load<ConfigurationDataType>
-        (Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z), () => RaiseOnChangeEvent());
+        (CommonDefinitions.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z), () => RaiseOnChangeEvent());
     }
     /// <summary>
     /// Saves the configuration.
@@ -52,7 +52,7 @@ namespace UAOOI.Configuration.Networking
     {
       if (CurrentConfiguration == null)
         throw new ArgumentNullException(nameof(CurrentConfiguration));
-      ConfigurationDataFactoryIO.Save<ConfigurationDataType>(CurrentConfiguration, Properties.Settings.Default.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z));
+      ConfigurationDataFactoryIO.Save<ConfigurationDataType>(CurrentConfiguration, CommonDefinitions.Serializer.ToUpper() == "XML" ? SerializerType.Xml : SerializerType.Json, configurationFile, (x, y, z) => TraceSource.TraceData(x, y, z));
     }
     /// <summary>
     /// Gets or sets the current configuration <typeparamref name="ConfigurationDataType"/>.
@@ -83,7 +83,7 @@ namespace UAOOI.Configuration.Networking
     }
     #endregion
 
-    #region MEF composition
+    #region composition
     /// <summary>
     /// Gets or sets the trace source - an access point to the external component.
     /// By default an empty private implementation (do nothing) of the <see cref="ITraceSource"/> is provided.

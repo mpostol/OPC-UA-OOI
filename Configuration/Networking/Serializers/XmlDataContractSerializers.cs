@@ -31,7 +31,7 @@ namespace UAOOI.Configuration.Networking.Serializers
       {
         DataContractSerializer _serializer = new DataContractSerializer(typeof(type));
         type _graph = _serializer.ReadObject(reader, false) as type;
-        trace(TraceEventType.Verbose, 52, String.Format(Resources.InformationFileOpened, fileToRead.FullName));
+        trace(TraceEventType.Verbose, 52, String.Format(Resources.InformationFileOpened2, fileToRead.FullName));
         return _graph;
       }
     }
@@ -54,7 +54,7 @@ namespace UAOOI.Configuration.Networking.Serializers
       Formatting _formatting = new Formatting() { };
       using (XmlTextWriter _writer = new XmlTextWriter(fileToWrite.Open(FileMode.Create, FileAccess.Write), Encoding.UTF8) { Formatting = Formatting.Indented, Indentation = 2 })
         _deserializer.WriteObject(_writer, graph);
-      trace(TraceEventType.Verbose, 52, String.Format(Resources.InformationFileSaved, fileToWrite.FullName));
+      trace(TraceEventType.Verbose, 52, String.Format(Resources.InformationFileSaved2, fileToWrite.FullName));
     }
 
   }

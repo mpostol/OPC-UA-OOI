@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.Diagnostics;
-using UAOOI.Common.Infrastructure.Properties;
 
 namespace UAOOI.Common.Infrastructure.Diagnostic
 {
@@ -28,7 +27,7 @@ namespace UAOOI.Common.Infrastructure.Diagnostic
     /// <value>The trace source instance of type <see cref="TraceSource"/>.</value>
     public TraceSource TraceSource => m_TraceEventInternal.Value;
 
-    private Lazy<TraceSource> m_TraceEventInternal = new Lazy<TraceSource>(() => new TraceSource(Settings.Default.TraceSourceName));
+    private Lazy<TraceSource> m_TraceEventInternal = new Lazy<TraceSource>(() => new TraceSource("UAOOI.Common"));
 
   }
 }

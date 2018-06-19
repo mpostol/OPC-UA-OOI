@@ -19,7 +19,7 @@ namespace UAOOI.Configuration.Networking.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -63,18 +63,18 @@ namespace UAOOI.Configuration.Networking.Properties {
         /// <summary>
         ///   Looks up a localized string similar to File: {0} has benn opened..
         /// </summary>
-        internal static string InformationFileOpened {
+        internal static string InformationFileOpened2 {
             get {
-                return ResourceManager.GetString("InformationFileOpened", resourceCulture);
+                return ResourceManager.GetString("InformationFileOpened2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to File: {0} is saved..
         /// </summary>
-        internal static string InformationFileSaved {
+        internal static string InformationFileSaved2 {
             get {
-                return ResourceManager.GetString("InformationFileSaved", resourceCulture);
+                return ResourceManager.GetString("InformationFileSaved2", resourceCulture);
             }
         }
     }

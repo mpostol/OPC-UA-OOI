@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InformationFileOpened" xml:space="preserve">
+  <data name="InformationFileOpened2" xml:space="preserve">
     <value>File: {0} has benn opened.</value>
   </data>
-  <data name="InformationFileSaved" xml:space="preserve">
+  <data name="InformationFileSaved2" xml:space="preserve">
     <value>File: {0} is saved.</value>
   </data>
 </root>

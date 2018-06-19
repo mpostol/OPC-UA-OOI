@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using System.Windows.Input;
 using UAOOI.Networking.ReferenceApplication.Diagnostic;
 using UAOOI.Networking.SemanticData;
+using UAOOI.Networking.SemanticData.MessageHandling;
 
 namespace UAOOI.Networking.ReferenceApplication.Consumer
 {
@@ -17,6 +18,11 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     internal IConsumerViewModel ViewModel
     {
       get; set;
+    }
+    [Import(typeof(IMessageHandlerFactory))]
+    public IMessageHandlerFactory ProducerMessageHandlerFactory
+    {
+      set { MessageHandlerFactory = value; }
     }
     #endregion
 

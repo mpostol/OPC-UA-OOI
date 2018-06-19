@@ -7,7 +7,7 @@ using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
 
-namespace UAOOI.Networking.ReferenceApplication.Producer.SimulatorInteroperabilityTest
+namespace UAOOI.Networking.SimulatorInteroperabilityTest
 {
 
   /// <summary>

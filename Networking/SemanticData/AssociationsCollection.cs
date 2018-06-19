@@ -1,9 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Windows.Data;
 using UAOOI.Configuration.Networking.Serialization;
-using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Diagnostics;
 using UAOOI.Networking.SemanticData.MessageHandling;
 

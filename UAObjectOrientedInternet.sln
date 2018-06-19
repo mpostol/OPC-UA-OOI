@@ -81,8 +81,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking.SimulatorInterop
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.InformationModelFactory", "SemanticData\InformationModelFactory\SemanticData.InformationModelFactory.csproj", "{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.TypeEditors", "SemanticData\OPCUAUserInterfaceTypeEditors\SemanticData.TypeEditors.csproj", "{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UANodeSetValidation", "SemanticData\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj", "{352378A0-8B2E-4679-BB44-FD0BCC8467D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.AddressSpaceComplianceTestTool", "SemanticData\AddressSpaceComplianceTestTool\SemanticData.AddressSpaceComplianceTestTool.csproj", "{05DB9E60-B12B-4AA3-8A7C-514F87CFF464}"
@@ -91,7 +89,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.AddressSpaceCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.DataSerialization.UnitTest", "SemanticData\Tests\DataSerializationUnitTestProject\SemanticData.DataSerialization.UnitTest.csproj", "{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UANodeSetValidation.UnitTest", "SemanticData\Tests\USNodeSetValidationUnitTestProject\SemanticData.UANodeSetValidation.UnitTest.csproj", "{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.InformationModelFactoryUnitTest", "SemanticData\Tests\InformationModelFactoryUnitTest\SemanticData.InformationModelFactoryUnitTest.csproj", "{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -179,10 +177,6 @@ Global
 		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Release|Any CPU.Build.0 = Release|Any CPU
 		{352378A0-8B2E-4679-BB44-FD0BCC8467D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{352378A0-8B2E-4679-BB44-FD0BCC8467D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{352378A0-8B2E-4679-BB44-FD0BCC8467D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -230,7 +224,6 @@ Global
 		{ECF931DE-F5F3-4752-AA1B-847F7ED414D1} = {19A61D68-0ECA-4093-AEE5-370BC3CE777C}
 		{9CACA823-0479-4831-8510-BF4D52306326} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
 		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
-		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
 		{352378A0-8B2E-4679-BB44-FD0BCC8467D9} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
 		{05DB9E60-B12B-4AA3-8A7C-514F87CFF464} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
 		{37D26B63-74FE-45C6-9F61-251BDF69EDF7} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}

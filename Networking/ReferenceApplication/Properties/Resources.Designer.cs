@@ -79,7 +79,7 @@ namespace UAOOI.Networking.ReferenceApplication.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANetworkingReferenceApplication#ua-data-example-application.
+        ///   Looks up a localized string similar to https://commsvr.gitbook.io/ooi.
         /// </summary>
         internal static string HelpDocumentationUrl {
             get {

@@ -1,3 +1,3 @@
-# Gglobal Data Discovery Services
+# Global Data Discovery Services
 
 Library supporting global data discovery services.

@@ -124,7 +124,7 @@
     <value>ConfigurationDataProducer.xml</value>
   </data>
   <data name="HelpDocumentationUrl" xml:space="preserve">
-    <value>https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANetworkingReferenceApplication#ua-data-example-application</value>
+    <value>https://commsvr.gitbook.io/ooi</value>
   </data>
   <data name="ReadMeFileName" xml:space="preserve">
     <value>ReadMe.txt</value>

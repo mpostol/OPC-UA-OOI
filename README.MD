@@ -17,21 +17,21 @@ Computer Science and Information Systems** captures description of this idea.
 
 ## Content
 
-The `SemanticDataSolution` folder contains projects related to support the [OPC UA Data Processing Outside of the Server](./SemanticDataSolution/README.MD#opc-ua-data-processing-outside-the-server). Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
+The `SemanticData` folder contains projects related to support the [OPC UA Data Processing Outside of the Server](./SemanticData/README.MD#opc-ua-data-processing-outside-the-server). Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
 
 This project is aimed to workout deliverables supporting Process Data handling over Internet including but not limiting to:
 
 • Data Edition – UI allowing display and edition of any custom data
 
-• Data serialization and deserialization - see whitepaper: [Address Space Interchange XML](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf)
+• Data serialization and deserialization - see white-paper: [Address Space Interchange XML](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf)
 
 • Data binding – to define how the process data relate to the real world
 
-• Data Validation - see project description [OPC UA NodeSet Validation](./SemanticDataSolution/UANodeSetValidation)
+• Data Validation - see project description [OPC UA NodeSet Validation](./SemanticData/UANodeSetValidation/README.MD)
 
 • Data Prototyping - methods and tools to design custom data types
 
-• [Data Discovery – methods and tools to find the data over the network](./DataDiscovery)
+• [Data Discovery – methods and tools to find the data over the network](./DataDiscovery/README.MD)
 
 In scope there are also deliverables supporting:
 
@@ -39,9 +39,9 @@ In scope there are also deliverables supporting:
 
 • Browsing \(using the sematics\) of the Metadata to selectively access requested Process Data
 
-• Modeling and representation of the Metadata - see whitepaper: [OPC UA Information Model Deployment](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf)
+• Modeling and representation of the Metadata - see white-paper: [OPC UA Information Model Deployment](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf)
 
-• Validation of the semantics and consistency of the Metadata - see project [USNodeSetValidationUnitTestProject](./SemanticDataSolution/Tests/USNodeSetValidationUnitTestProject)
+• Validation of the semantics and consistency of the Metadata - see project [USNodeSetValidationUnitTestProject](./SemanticData/UANodeSetValidation/README.MD)
 
 The presented approach is a real proposal for new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability.
 

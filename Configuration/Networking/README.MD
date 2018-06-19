@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This library contains types that supports the configuration management of application implementing the paradigm described in [OPC UA Data Processing Outside the Server](../../SemanticDataSolution/README.MD#opc-ua-data-processing-outside-the-server). The configuration may be read to or write from the xml or json files. By design this library may be used to support variety kinds of applications at design and run time.
+This library contains types that supports the configuration management of application implementing the paradigm described in [OPC UA Data Processing Outside the Server](../../SemanticData/README.MD#opc-ua-data-processing-outside-the-server). The configuration may be read to or write from the xml or json files. By design this library may be used to support variety kinds of applications at design and run time.
 
 The project seems to be very important prototyping workspace to answer the question how far we can go with the configuration (design time approach) in context of the following problems we have:
 

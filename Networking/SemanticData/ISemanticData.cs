@@ -10,7 +10,7 @@ namespace UAOOI.Networking.SemanticData
   /// <remarks>
   /// <para>
   /// more about the UA Semantic Data concept cab be found in the:
-  /// <a href="https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/README.MD">OPC UA Data Processing Outside the Server</a>
+  /// <a href="https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticData/README.MD">OPC UA Data Processing Outside the Server</a>
   /// </para>
   /// </remarks>
   public interface ISemanticData : IDataUniqueIdentifier

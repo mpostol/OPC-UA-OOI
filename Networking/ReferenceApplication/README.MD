@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is aimed at implementing an example of the **UA Data Application** supporting producer and consumer roles simultaneously. The purpose of the **Example Application** is to demonstrate the concepts and syntax of the PubSub implementation, rather than to necessarily provide a realistic scenario for its use. For more extensive examples, see the [OPC UA Data Processing Outside the Server](../../SemanticDataSolution/README.MD#opc-ua-data-processing-outside-the-server).
+This project is aimed at implementing an example of the **UA Data Application** supporting producer and consumer roles simultaneously. The purpose of the **Example Application** is to demonstrate the concepts and syntax of the PubSub implementation, rather than to necessarily provide a realistic scenario for its use. For more extensive examples, see the [OPC UA Data Processing Outside the Server](../../SemanticData/README.MD#opc-ua-data-processing-outside-the-server).
 
 Both roles are implemented as independent threads that have common user interface for diagnostic and configuration purpose. The producer sends messages containing the field defined in the configuration file. The values are simulated. To correctly decode the messages the consumer must have configuration defining the same set of fields. The data is encoded using Variant.
 
@@ -51,7 +51,7 @@ The Model layer in the MVVM pattern is implemented by classes located in the `Co
 
 ### How to: Implement producer role for OPC UA server
 
-The class `CustomNodeManager` captures implementation of an interface between the library and an object supporting  **Address Space Management** (described in  [OPC UA Data Processing Outside the Server](../../SemanticDataSolution/README.MD#opc-ua-data-processing-outside-the-server)) functionality in the typical OPC UA server. The **Address Space Management** instantiates the server address space, i.e. creates the nodes and binds the nodes with underlying external behavior. The example contains properties implemented as an instance of class `ProducerBindingMonitoredValue`. Modification of the `ProducerBindingMonitoredValue<type>.MonitoredValue` provides notification to the message handling state machine that a new value is available.
+The class `CustomNodeManager` captures implementation of an interface between the library and an object supporting  **Address Space Management** (described in  [OPC UA Data Processing Outside the Server](../../SemanticData/README.MD#opc-ua-data-processing-outside-the-server)) functionality in the typical OPC UA server. The **Address Space Management** instantiates the server address space, i.e. creates the nodes and binds the nodes with underlying external behavior. The example contains properties implemented as an instance of class `ProducerBindingMonitoredValue`. Modification of the `ProducerBindingMonitoredValue<type>.MonitoredValue` provides notification to the message handling state machine that a new value is available.
 
 In the current software version the class `CustomNodeManager` simulates underlying process using random numbers and current time. Arrays length is incremented periodically.
 

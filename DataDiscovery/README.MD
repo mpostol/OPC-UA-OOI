@@ -5,7 +5,7 @@
 In this approach, the URI of the OPC UA **Information Model** is to be used as a unique key to browse the _Global Data Discovery System_ \(GDDS – an expanded version of GDS\) to find recursively the destination _OPC UA Server_ or _UA Data Application_ exposing the requested data.
 
 The main assumptions of the concept are covered in the document:  
-[Discoverable Data](../SemanticDataSolution/README.MD#discoverable-data)
+[Discoverable Data](../SemanticData/README.MD#discoverable-data)
 
 The URI syntax is described in the document: [Uniform Resource Identifier \(URI\): Generic Syntax](http://tools.ietf.org/html/rfc3986).
 

@@ -3,44 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UANodeSetValidation", "SemanticDataSolution\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj", "{352378A0-8B2E-4679-BB44-FD0BCC8467D9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".CommonResources", ".CommonResources", "{78EDB72A-77B1-4A64-8E76-17E780993017}"
 	ProjectSection(SolutionItems) = preProject
 		CommonResources\T4Definitions\bin\ClassLibrary1.csproj = CommonResources\T4Definitions\bin\ClassLibrary1.csproj
 		CONTRIBUTING.md = CONTRIBUTING.md
 		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
 		NuGet.Config = NuGet.Config
-		SemanticDataSolution\README.MD = SemanticDataSolution\README.MD
 		README.MD = README.MD
-		SemanticDataSolution\README.MessageCentricCommunication.md = SemanticDataSolution\README.MessageCentricCommunication.md
-		SemanticDataSolution\Readme.SemanticDataDeplyment.MD = SemanticDataSolution\Readme.SemanticDataDeplyment.MD
 		REFERENCES.md = REFERENCES.md
 		SUMMARY.md = SUMMARY.md
 		TableOfContent.md = TableOfContent.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.InformationModelFactory", "SemanticDataSolution\InformationModelFactory\SemanticData.InformationModelFactory.csproj", "{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.TypeEditors", "SemanticDataSolution\OPCUAUserInterfaceTypeEditors\SemanticData.TypeEditors.csproj", "{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.AddressSpaceComplianceTestTool", "SemanticDataSolution\AddressSpaceComplianceTestTool\SemanticData.AddressSpaceComplianceTestTool.csproj", "{05DB9E60-B12B-4AA3-8A7C-514F87CFF464}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9E44C9DB-40BC-4FAF-9572-7AA330B467A6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.AddressSpaceComplianceTestTool.UnitTests", "SemanticDataSolution\Tests\AddressSpaceComplianceTestToolUnitTests\SemanticData.AddressSpaceComplianceTestTool.UnitTests.csproj", "{37D26B63-74FE-45C6-9F61-251BDF69EDF7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4Definitions", "CommonResources\T4Definitions\T4Definitions.csproj", "{DDE02168-1EAD-41D9-B5E6-FB101F98AC24}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.DataSerialization.UnitTest", "SemanticDataSolution\Tests\DataSerializationUnitTestProject\SemanticData.DataSerialization.UnitTest.csproj", "{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UANodeSetValidation.UnitTest", "SemanticDataSolution\Tests\USNodeSetValidationUnitTestProject\SemanticData.UANodeSetValidation.UnitTest.csproj", "{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{2148B4AF-8B02-45C3-89E7-AEACAE448DDA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B58E5262-0DEA-4096-8409-7B118711D8DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.DataBindings", "Configuration\DataBindings\Configuration.DataBindings.csproj", "{F8DB9567-C559-440C-BBCF-E02013F9AB94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration.DataBindings", "Configuration\DataBindings\Configuration.DataBindings.csproj", "{F8DB9567-C559-440C-BBCF-E02013F9AB94}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.DataBindings.UnitTest", "Configuration\Tests\DataBindingsUnitTest\Configuration.DataBindings.UnitTest.csproj", "{71D956E4-1AE6-4EF8-BC18-A195A68AFAB5}"
 EndProject
@@ -52,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Infrastructure", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Networking.Upgrade.UnitTest", "Configuration\Tests\NetworkingUpgradeUnitTest\Configuration.Networking.Upgrade.UnitTest.csproj", "{F2ED1AC0-2F78-4506-ADFD-0BC88A6C616D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Networking.Upgrade", "Configuration\NetworkingUpgrade\Configuration.Networking.Upgrade.csproj", "{BEBE131A-C931-4C2C-9F9E-ED0D0B75DF26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration.Networking.Upgrade", "Configuration\NetworkingUpgrade\Configuration.Networking.Upgrade.csproj", "{BEBE131A-C931-4C2C-9F9E-ED0D0B75DF26}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Networking", "Networking", "{F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}"
 	ProjectSection(SolutionItems) = preProject
@@ -62,6 +43,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{19A61D68-0ECA-4093-AEE5-370BC3CE777C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SemanticData", "SemanticData", "{AF01F501-9B19-4357-B8A7-4EFC782BF1AF}"
+	ProjectSection(SolutionItems) = preProject
+		SemanticData\README.MD = SemanticData\README.MD
+		SemanticData\README.MessageCentricCommunication.md = SemanticData\README.MessageCentricCommunication.md
+		SemanticData\Readme.SemanticDataDeplyment.MD = SemanticData\Readme.SemanticDataDeplyment.MD
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration.Networking", "Configuration\Networking\Configuration.Networking.csproj", "{E28E0880-03AA-4D1B-A820-41B04E766019}"
 EndProject
@@ -83,15 +69,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataDiscovery", "DataDiscov
 		DataDiscovery\Readme.md = DataDiscovery\Readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDiscovery.DiscoveryServices", "DataDiscovery\DiscoveryServices\DataDiscovery.DiscoveryServices.csproj", "{DD1A7EC2-FF25-4D35-9D0A-5BB626E61D17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataDiscovery.DiscoveryServices", "DataDiscovery\DiscoveryServices\DataDiscovery.DiscoveryServices.csproj", "{DD1A7EC2-FF25-4D35-9D0A-5BB626E61D17}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDiscovery.DiscoveryServices.UnitTest", "DataDiscovery\Tests\DiscoveryServices.UnitTest\DataDiscovery.DiscoveryServices.UnitTest.csproj", "{591B6DB0-0D22-4E58-AA29-4EB10C0EAFFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.UDPMessageHandler", "Networking\UDPMessageHandler\Networking.UDPMessageHandler.csproj", "{D2EB89F9-321E-46E4-BA79-679138B82B23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking.UDPMessageHandler", "Networking\UDPMessageHandler\Networking.UDPMessageHandler.csproj", "{D2EB89F9-321E-46E4-BA79-679138B82B23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.UDPMessageHandler.UnitTest", "Networking\Tests\UDPMessageHandler.UnitTest\Networking.UDPMessageHandler.UnitTest.csproj", "{ECF931DE-F5F3-4752-AA1B-847F7ED414D1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking.SimulatorInteroperabilityTest", "Networking\Networking.SimulatorInteroperabilityTest\Networking.SimulatorInteroperabilityTest.csproj", "{9CACA823-0479-4831-8510-BF4D52306326}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticData.InformationModelFactory", "SemanticData\InformationModelFactory\SemanticData.InformationModelFactory.csproj", "{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UANodeSetValidation", "SemanticData\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj", "{352378A0-8B2E-4679-BB44-FD0BCC8467D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.AddressSpaceComplianceTestTool", "SemanticData\AddressSpaceComplianceTestTool\SemanticData.AddressSpaceComplianceTestTool.csproj", "{05DB9E60-B12B-4AA3-8A7C-514F87CFF464}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.AddressSpaceComplianceTestTool.UnitTests", "SemanticData\Tests\AddressSpaceComplianceTestToolUnitTests\SemanticData.AddressSpaceComplianceTestTool.UnitTests.csproj", "{37D26B63-74FE-45C6-9F61-251BDF69EDF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.DataSerialization.UnitTest", "SemanticData\Tests\DataSerializationUnitTestProject\SemanticData.DataSerialization.UnitTest.csproj", "{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UANodeSetValidation.UnitTest", "SemanticData\Tests\USNodeSetValidationUnitTestProject\SemanticData.UANodeSetValidation.UnitTest.csproj", "{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,38 +97,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{352378A0-8B2E-4679-BB44-FD0BCC8467D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{352378A0-8B2E-4679-BB44-FD0BCC8467D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{352378A0-8B2E-4679-BB44-FD0BCC8467D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{352378A0-8B2E-4679-BB44-FD0BCC8467D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004}.Release|Any CPU.Build.0 = Release|Any CPU
-		{05DB9E60-B12B-4AA3-8A7C-514F87CFF464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05DB9E60-B12B-4AA3-8A7C-514F87CFF464}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05DB9E60-B12B-4AA3-8A7C-514F87CFF464}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05DB9E60-B12B-4AA3-8A7C-514F87CFF464}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37D26B63-74FE-45C6-9F61-251BDF69EDF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37D26B63-74FE-45C6-9F61-251BDF69EDF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37D26B63-74FE-45C6-9F61-251BDF69EDF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37D26B63-74FE-45C6-9F61-251BDF69EDF7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DDE02168-1EAD-41D9-B5E6-FB101F98AC24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DDE02168-1EAD-41D9-B5E6-FB101F98AC24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDE02168-1EAD-41D9-B5E6-FB101F98AC24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDE02168-1EAD-41D9-B5E6-FB101F98AC24}.Release|Any CPU.Build.0 = Release|Any CPU
-		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F8DB9567-C559-440C-BBCF-E02013F9AB94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F8DB9567-C559-440C-BBCF-E02013F9AB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8DB9567-C559-440C-BBCF-E02013F9AB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -203,20 +173,36 @@ Global
 		{9CACA823-0479-4831-8510-BF4D52306326}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CACA823-0479-4831-8510-BF4D52306326}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CACA823-0479-4831-8510-BF4D52306326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{352378A0-8B2E-4679-BB44-FD0BCC8467D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{352378A0-8B2E-4679-BB44-FD0BCC8467D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{352378A0-8B2E-4679-BB44-FD0BCC8467D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{352378A0-8B2E-4679-BB44-FD0BCC8467D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05DB9E60-B12B-4AA3-8A7C-514F87CFF464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05DB9E60-B12B-4AA3-8A7C-514F87CFF464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05DB9E60-B12B-4AA3-8A7C-514F87CFF464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05DB9E60-B12B-4AA3-8A7C-514F87CFF464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37D26B63-74FE-45C6-9F61-251BDF69EDF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37D26B63-74FE-45C6-9F61-251BDF69EDF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37D26B63-74FE-45C6-9F61-251BDF69EDF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37D26B63-74FE-45C6-9F61-251BDF69EDF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{352378A0-8B2E-4679-BB44-FD0BCC8467D9} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
-		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
-		{E66D4EB1-B0F5-48CA-A811-ACAF59C35004} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
-		{05DB9E60-B12B-4AA3-8A7C-514F87CFF464} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
-		{9E44C9DB-40BC-4FAF-9572-7AA330B467A6} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
-		{37D26B63-74FE-45C6-9F61-251BDF69EDF7} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
 		{DDE02168-1EAD-41D9-B5E6-FB101F98AC24} = {78EDB72A-77B1-4A64-8E76-17E780993017}
-		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
-		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF} = {9E44C9DB-40BC-4FAF-9572-7AA330B467A6}
 		{B58E5262-0DEA-4096-8409-7B118711D8DF} = {2148B4AF-8B02-45C3-89E7-AEACAE448DDA}
 		{F8DB9567-C559-440C-BBCF-E02013F9AB94} = {2148B4AF-8B02-45C3-89E7-AEACAE448DDA}
 		{71D956E4-1AE6-4EF8-BC18-A195A68AFAB5} = {B58E5262-0DEA-4096-8409-7B118711D8DF}
@@ -237,6 +223,12 @@ Global
 		{D2EB89F9-321E-46E4-BA79-679138B82B23} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
 		{ECF931DE-F5F3-4752-AA1B-847F7ED414D1} = {19A61D68-0ECA-4093-AEE5-370BC3CE777C}
 		{9CACA823-0479-4831-8510-BF4D52306326} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
+		{6D20785D-0451-46A9-9AC2-EC66B7C0D18A} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
+		{352378A0-8B2E-4679-BB44-FD0BCC8467D9} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
+		{05DB9E60-B12B-4AA3-8A7C-514F87CFF464} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
+		{37D26B63-74FE-45C6-9F61-251BDF69EDF7} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
+		{268DEFE0-D604-4888-BF69-57EBAE0FD7E7} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
+		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9388D93E-9AA9-40EE-A0C6-F096265079B2}

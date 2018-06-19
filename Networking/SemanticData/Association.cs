@@ -49,7 +49,7 @@ namespace UAOOI.Networking.SemanticData
     /// <summary>
     /// Gets the data descriptor captured by an <see cref="ISemanticData"/> instance.
     /// </summary>
-    /// <value>The <see cref="ISemanticData"/> instance representing UA Semantic Data triple https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/README.MD. </value>
+    /// <value>The <see cref="ISemanticData"/> instance representing UA Semantic Data triple https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticData/README.MD. </value>
     internal ISemanticData DataDescriptor
     {
       get;

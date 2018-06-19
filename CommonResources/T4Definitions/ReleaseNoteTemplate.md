@@ -22,7 +22,7 @@ Main aim of this namespace is to support engineering of data processing in conte
 
 #### UA Data Example Application
 
-The description of this application is available at: [UA Data Example Application](../../Networking/ReferenceApplication#ua-data-example-application).
+The description of this application is available at: [UA Data Example Application](../../Networking/ReferenceApplication/README.MD).
 
 The installation package is available at: http://www.commsvr.com/COInstal/UANetworking/uand.html
 
@@ -32,11 +32,11 @@ This release contains modifications required to start interoperability testing a
 
 The most important projects for this library release are as follows:
 
-* [OPC UA DataManagement Library](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/DataManagement#opc-ua-datamanagement-library)
+* [OPC UA DataManagement Library](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticData/DataManagement#opc-ua-datamanagement-library)
 * [UA Data Networking Configuration](https://github.com/mpostol/OPC-UA-OOI/tree/master/Configuration/Networkingn#ua-data-networking-configuration)
-* [OPC UA NodeSet Validation](https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticDataSolution/UANodeSetValidation/README.MD#opc-ua-nodeset-validation)
+* [OPC UA NodeSet Validation](https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticData/UANodeSetValidation/README.MD#opc-ua-nodeset-validation)
 
-The NuGet packages are available at:
+The Nuget packages are available at:
 
 * not yet released.
 
@@ -59,7 +59,7 @@ The most important projects for this library release are as follows:
 
 * [Data Bindings Solution Library](https://github.com/mpostol/OPC-UA-OOI/tree/master/DataBindingsSolution)
 
-The Nuget package is available at:
+The NuGet package is available at:
 
 * [OPC UA DataBindings Library 1.0.15](https://www.nuget.org/packages/UAOOI.DataBindings/)
 

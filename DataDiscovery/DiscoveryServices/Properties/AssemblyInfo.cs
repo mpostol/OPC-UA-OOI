@@ -10,19 +10,9 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("UAOOI.DataDiscovery.DiscoveryServices")]
-[assembly: AssemblyDescription("Library supporting global data discovery services")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("commsvr.com")]
-[assembly: AssemblyProduct("OOI Global Data Discovery")]
-[assembly: AssemblyCopyright("Copyright MPostol (c) 2018")]
 [assembly: AssemblyTrademark("Object Oriented Internet")]
 [assembly: AssemblyCulture("")]
-[assembly: ComVisible(false)]
-[assembly: AssemblyVersion("1.0.0.*")]
-[assembly: AssemblyFileVersion("1.0.0")]
 [assembly: InternalsVisibleTo(
   "UAOOI.DataDiscovery.DiscoveryServices.UnitTest, PublicKey=" +
     "00240000048000009400000006020000002400005253413100040000010001005b97a0972ff6b13a" +

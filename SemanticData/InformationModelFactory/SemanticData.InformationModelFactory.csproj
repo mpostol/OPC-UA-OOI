@@ -3,23 +3,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>UAOOI.DataDiscovery.DiscoveryServices</PackageId>
+    <AssemblyName>UAOOI.SemanticData.InformationModelFactory</AssemblyName>
+    <PackageId>UAOOI.SemanticData.InformationModelFactory</PackageId>
     <Version>4.0.0</Version>
     <Authors>MPostol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
-    <Description>OPC UA Object Oriented Internet (UAOOI) UAOOI.DataDiscovery.DiscoveryServices library is dedicated to support global data discovery services for any application based on OPC UA Information Model. 
-It is part of the project supporting OPC UA Object Oriented Internet paradigm.</Description>
+    <Description>OPC UA Information Model Factory Library</Description>
     <Copyright>Copyright MPostol (c) 2018</Copyright>
     <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <PackageTags>Object Oriented Internet, OPC UA, Information Model</PackageTags>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageTags>Semantic Data, Object Oriented Internet, OPC UA,</PackageTags>
+    <RootNamespace>UAOOI.SemanticData.InformationModelFactory</RootNamespace>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <AssemblyName>UAOOI.DataDiscovery.DiscoveryServices</AssemblyName>
-    <RootNamespace>UAOOI.DataDiscovery.DiscoveryServices</RootNamespace>
   </PropertyGroup>
 
 </Project>

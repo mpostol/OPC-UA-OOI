@@ -1,5 +1,4 @@
-﻿The documentation is available online at: https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANetworkingReferenceApplication#ua-data-example-application
-
+﻿
 Current release:
 
 Assembly Title:         OOI Reactive Networking
@@ -9,7 +8,7 @@ Assembly Product:       OOI SemanticData
 Assembly Copyright:     Copyright MPostol (c) 2018
 Assembly Trademark:     Object Oriented Internet
 Assembly Version:       3.0.5
-Assembly Date:          2018-04-08
+Assembly Date:          2018-06-19
 
 The main changes and new functionalities are listed below:
 

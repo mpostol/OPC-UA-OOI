@@ -4,17 +4,17 @@
 
 ## Semantic-Data Processing
 
-* [Domain Model](SemanticDataSolution/README.MD)
-* [Library Description](SemanticDataSolution/Readme.SemanticDataDeplyment.MD)
-* [OPC UA NodeSet Validation](SemanticDataSolution/UANodeSetValidation/README.MD)
-* [XML Files](SemanticDataSolution/UANodeSetValidation/XML/README.MD)
+* [Domain Model](SemanticData/README.MD)
+* [Library Description](SemanticData/Readme.SemanticDataDeplyment.MD)
+* [OPC UA NodeSet Validation](SemanticData/UANodeSetValidation/README.MD)
+* [XML Files](SemanticData/UANodeSetValidation/XML/README.MD)
 
 ## Internet of Things (IOT) Archetype
 
 ### Communication
 
 * [Internet of Things (IOT) Communication](Networking/README.MD)
-* [UA Semantic Data Message Centric Communication](SemanticDataSolution/README.MessageCentricCommunication.md)
+* [UA Semantic Data Message Centric Communication](SemanticData/README.MessageCentricCommunication.md)
 * [Networking of SemanticData Library](Networking/SemanticData/README.MD)
 * [OPC Unified Architecture Part 14: PubSub Main Technology Features](Networking/SemanticData/README.PubSubMTF.md)
 * [Underlying Transport over UDP](Networking/UDPMessageHandler/README.md)

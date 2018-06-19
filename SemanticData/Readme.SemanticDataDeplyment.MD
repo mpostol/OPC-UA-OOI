@@ -1,7 +1,7 @@
 
 # Content Description
 
-The `SemanticDataSolution` folder contains projects related to support the [OPC UA Data Processing Outside of the Server](./README.MD).  Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
+The `SemanticData` folder contains projects related to support the [OPC UA Data Processing Outside of the Server](./README.MD).  Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
 
 The **Tools** section describes projects with output type console application. These deliverables may be used as utilities or as examples illustrating how to use the libraries.
 The **Libraries** offer functionally supporting creation and validation of the OPC **UA Semantic Data**.
@@ -16,9 +16,10 @@ It is command line application aimed to validate XML files compliant with the [U
 
 ### UANodeSetValidation
 
-The [UANodeSetValidation](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/UANodeSetValidation) project is aimed to validate UANodeSet xml files.
-To validate a new model add the code to the [USNodeSetValidationUnitTestProject](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticDataSolution/USNodeSetValidationUnitTestProject)
-and XML file to the XMLModels in this project. If the validation test does not recognize an error the code in the UANodeSetValidation must be improved.
+The [UANodeSetValidation](./UANodeSetValidation/README.MD) project is aimed to validate `UANodeSet` xml files.
+
+To validate a new model add the code to the [USNodeSetValidationUnitTestProject](./Tests/USNodeSetValidationUnitTestProject/README.md) and XML file to the XMLModels in this project. If the validation test does not recognize an error the code in the UANodeSetValidation must be improved.
+
 In this case add issue or modify the code on your fork and add purge request after finishing.
 
 **Public API**:

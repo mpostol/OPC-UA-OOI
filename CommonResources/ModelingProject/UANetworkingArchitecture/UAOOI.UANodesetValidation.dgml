@@ -4,24 +4,10 @@
     <Node Id="@10" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(FxRoot)\v2.0.50727\System.dll" Group="Collapsed" Label="System.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@12" Category="CodeSchema_Assembly" AssemblyTimestamp="01/11/2016 13:14:27" Bounds="-44.8958837088914,14.6855817213264,303.833333333333,25" CodeSchemaProperty_StrongName="UAOOI.SemanticDataUANodeSetValidation, Version=1.0.16.25632, Culture=neutral, PublicKeyToken=deede3c2df331bb0" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(352378a0-8b2e-4679-bb44-fd0bcc8467d9.OutputPath)" Group="Collapsed" Label="UAOOI.SemanticDataUANodeSetValidation.dll" />
     <Node Id="@14" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Runtime.Serialization, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(FxReferenceAssemblies)\v3.0\System.Runtime.Serialization.dll" Group="Collapsed" Label="System.Runtime.Serialization.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@16" Category="CodeSchema_Assembly" AssemblyTimestamp="01/11/2016 13:14:30" Bounds="-38.5057859960538,-170.314618278674,233.173333333333,25" CodeSchemaProperty_StrongName="UAOOI.SemanticDataUnitTest, Version=1.0.16.25635, Culture=neutral, PublicKeyToken=deede3c2df331bb0" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(2dc898b5-afd9-47b2-a962-c4002c1ae8ff.OutputPath)" Group="Collapsed" Label="UAOOI.SemanticDataUnitTest.dll">
-      <Category Ref="CodeMap_TestAsset" />
-      <Category Ref="CodeMap_TestProject" />
-      <Category Ref="FileSystem.Category.FileOfType.dll" />
-    </Node>
-    <Node Id="@18" Category="CodeSchema_Assembly" AssemblyTimestamp="01/11/2016 13:14:30" Bounds="-38.5057859960538,-115.314618278674,321.843333333333,25" CodeSchemaProperty_StrongName="UAOOI.SemanticDataDataSerializationUnitTest, Version=1.0.16.25635, Culture=neutral, PublicKeyToken=deede3c2df331bb0" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(268defe0-d604-4888-bf69-57ebae0fd7e7.OutputPath)" Group="Collapsed" Label="UAOOI.SemanticDataDataSerializationUnitTest.dll">
-      <Category Ref="CodeMap_TestAsset" />
-      <Category Ref="CodeMap_TestProject" />
-      <Category Ref="FileSystem.Category.FileOfType.dll" />
-    </Node>
-    <Node Id="@2" Category="CodeSchema_Assembly" AssemblyTimestamp="01/11/2016 13:14:28" Bounds="75.8899119285028,-40.3145182786736,261.88,25" CodeSchemaProperty_StrongName="AddressSpaceComplianceTestTool, Version=1.0.16.25634, Culture=neutral, PublicKeyToken=deede3c2df331bb0" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(05db9e60-b12b-4aa3-8a7c-514f87cff464.OutputPath)" Group="Collapsed" Label="AddressSpaceComplianceTestTool.exe">
-      <Category Ref="FileSystem.Category.FileOfType.exe" />
-    </Node>
-    <Node Id="@20" Category="CodeSchema_Assembly" AssemblyTimestamp="01/11/2016 13:14:24" Bounds="12.4077459142048,69.6856817213264,323.266666666667,25" CodeSchemaProperty_StrongName="UAOOI.SemanticDataInformationModelFactory, Version=1.0.16.25632, Culture=neutral, PublicKeyToken=deede3c2df331bb0" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(6d20785d-0451-46a9-9ac2-ec66b7c0d18a.OutputPath)" Group="Collapsed" Label="UAOOI.SemanticDataInformationModelFactory.dll">
+    <Node Id="@20" Category="CodeSchema_Assembly" AssemblyTimestamp="01/11/2016 13:14:24" Bounds="119.560422216686,213.5,323.266666666667,25" CodeSchemaProperty_StrongName="UAOOI.SemanticDataInformationModelFactory, Version=1.0.16.25632, Culture=neutral, PublicKeyToken=deede3c2df331bb0" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(6d20785d-0451-46a9-9ac2-ec66b7c0d18a.OutputPath)" Group="Collapsed" Label="UAOOI.SemanticDataInformationModelFactory.dll">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
     <Node Id="@4" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(FxRoot)\v2.0.50727\mscorlib.dll" Group="Collapsed" Label="mscorlib.dll" UseManualLocation="True">
@@ -33,80 +19,9 @@
     <Node Id="@8" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(FxRoot)\v2.0.50727\System.Xml.dll" Group="Collapsed" Label="System.Xml.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="Tests{9E44C9DB-40BC-4FAF-9572-7AA330B467A6}" Category="CodeMap_SolutionFolder" Bounds="-58.5057859960538,-210.314618278674,361.843333333333,140" Group="Expanded" Label="Tests" />
-    <Node Id="_standardGraphExternalsGroup" Category="Externals" Bounds="76.8101664681863,124.685781721327,86.99,25" Group="Collapsed" Label="Externals" LayoutSettings="List" />
+    <Node Id="_standardGraphExternalsGroup" Category="Externals" Bounds="329.120642895576,268.5,86.99,25" Group="Collapsed" Label="Externals" LayoutSettings="List" />
   </Nodes>
   <Links>
-    <Link Source="@12" Target="@10" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="727">
-      <Category Ref="CodeMap_ExternalReference" />
-      <Category Ref="CodeSchema_AttributeUse" />
-      <Category Ref="CodeSchema_Calls" />
-      <Category Ref="CodeSchema_ReturnTypeLink" />
-    </Link>
-    <Link Source="@12" Target="@14" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="17">
-      <Category Ref="CodeMap_ExternalReference" />
-      <Category Ref="CodeSchema_AttributeUse" />
-      <Category Ref="CodeSchema_ReturnTypeLink" />
-      <Category Ref="Implements" />
-    </Link>
-    <Link Source="@12" Target="@20" Category="References" Bounds="122.252640783889,39.6855817213264,29.5993829273421,24.2906867182976" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="222">
-      <Category Ref="CodeMap_ProjectReference" />
-      <Category Ref="CodeSchema_Calls" />
-      <Category Ref="CodeSchema_FieldWrite" />
-      <Category Ref="CodeSchema_FunctionPointer" />
-      <Category Ref="CodeSchema_ReturnTypeLink" />
-      <Category Ref="Implements" />
-      <Category Ref="InheritsFrom" />
-    </Link>
-    <Link Source="@12" Target="@4" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="6068">
-      <Category Ref="CodeMap_ExternalReference" />
-      <Category Ref="CodeSchema_AttributeUse" />
-      <Category Ref="CodeSchema_Calls" />
-      <Category Ref="CodeSchema_FieldRead" />
-      <Category Ref="CodeSchema_ReturnTypeLink" />
-      <Category Ref="Implements" />
-      <Category Ref="InheritsFrom" />
-    </Link>
-    <Link Source="@12" Target="@6" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="135">
-      <Category Ref="CodeMap_ExternalReference" />
-      <Category Ref="CodeSchema_AttributeUse" />
-      <Category Ref="CodeSchema_Calls" />
-    </Link>
-    <Link Source="@12" Target="@8" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1264">
-      <Category Ref="CodeMap_ExternalReference" />
-      <Category Ref="CodeSchema_AttributeUse" />
-      <Category Ref="CodeSchema_Calls" />
-      <Category Ref="CodeSchema_FieldRead" />
-      <Category Ref="CodeSchema_ReturnTypeLink" />
-    </Link>
-    <Link Source="@16" Target="@12" Category="References" Bounds="80.0362768313728,-145.314668278623,23.6381409802799,151.108388255537" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2966">
-      <Category Ref="CodeMap_ProjectReference" />
-      <Category Ref="CodeSchema_Calls" />
-      <Category Ref="CodeSchema_ReturnTypeLink" />
-    </Link>
-    <Link Source="@16" Target="@20" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="9">
-      <Category Ref="CodeMap_ProjectReference" />
-    </Link>
-    <Link Source="@18" Target="@10" Category="CodeMap_ExternalReference" />
-    <Link Source="@18" Target="@12" Category="References" Bounds="109.559495490291,-90.3146182786735,11.3760896006965,96.0626525985125" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="77">
-      <Category Ref="CodeMap_ProjectReference" />
-      <Category Ref="CodeSchema_Calls" />
-      <Category Ref="CodeSchema_FieldRead" />
-    </Link>
-    <Link Source="@18" Target="@4" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="89">
-      <Category Ref="CodeMap_ExternalReference" />
-      <Category Ref="CodeSchema_AttributeUse" />
-      <Category Ref="CodeSchema_Calls" />
-      <Category Ref="CodeSchema_ReturnTypeLink" />
-    </Link>
-    <Link Source="@18" Target="@6" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="3">
-      <Category Ref="CodeMap_ExternalReference" />
-    </Link>
-    <Link Source="@2" Target="@12" Category="References" Bounds="137.587071046543,-15.3145182786736,46.5589891774342,25.6564613584478" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="6">
-      <Category Ref="CodeMap_ProjectReference" />
-      <Category Ref="CodeSchema_Calls" />
-    </Link>
-    <Link Source="@2" Target="@20" Category="CodeMap_ProjectReference" Bounds="219.259048461914,-15.3145179748535,49.8126068115234,82.0893669128418" />
     <Link Source="@20" Target="@10" Category="CodeSchema_AttributeUse" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1">
       <Category Ref="CodeMap_ExternalReference" />
     </Link>
@@ -123,8 +38,6 @@
       <Category Ref="CodeMap_ExternalReference" />
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
-    <Link Source="Tests{9E44C9DB-40BC-4FAF-9572-7AA330B467A6}" Target="@16" Category="Contains" FetchingParent="Tests{9E44C9DB-40BC-4FAF-9572-7AA330B467A6}" />
-    <Link Source="Tests{9E44C9DB-40BC-4FAF-9572-7AA330B467A6}" Target="@18" Category="Contains" FetchingParent="Tests{9E44C9DB-40BC-4FAF-9572-7AA330B467A6}" />
     <Link Source="_standardGraphExternalsGroup" Target="@10" Category="Contains" />
     <Link Source="_standardGraphExternalsGroup" Target="@14" Category="Contains" />
     <Link Source="_standardGraphExternalsGroup" Target="@4" Category="Contains" />
@@ -133,25 +46,14 @@
   </Links>
   <Categories>
     <Category Id="CodeMap_ExternalReference" Label="External Reference" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Referenced By" OutgoingActionLabel="References" />
-    <Category Id="CodeMap_ProjectReference" Label="Project Reference" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Referenced By" OutgoingActionLabel="References" />
-    <Category Id="CodeMap_SolutionFolder" Label="Solution Folder" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="Solution Folder" />
-    <Category Id="CodeMap_TestAsset" Label="Test Asset" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="Test Assets" />
-    <Category Id="CodeMap_TestProject" Label="Test Project" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="Test Projects" />
     <Category Id="CodeSchema_Assembly" Label="Assembly" BasedOn="File" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="CodeSchema_Assembly" NavigationActionLabel="Assemblies" />
     <Category Id="CodeSchema_AttributeUse" Label="Uses Attribute" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Used by" OutgoingActionLabel="Uses Attribute" />
     <Category Id="CodeSchema_Calls" Label="Calls" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Called By" OutgoingActionLabel="Calls" />
-    <Category Id="CodeSchema_FieldRead" Label="Field Read" BasedOn="CodeSchema_FieldReference" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Read By" OutgoingActionLabel="Reads Fields" />
-    <Category Id="CodeSchema_FieldReference" Label="Field Reference" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Referenced By" OutgoingActionLabel="References Fields" />
-    <Category Id="CodeSchema_FieldWrite" Label="Field Write" BasedOn="CodeSchema_FieldReference" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Written By" OutgoingActionLabel="Writes Fields" />
-    <Category Id="CodeSchema_FunctionPointer" Label="Function Pointer" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Function Pointers" OutgoingActionLabel="Function Pointers" />
     <Category Id="CodeSchema_ReturnTypeLink" Label="Return" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Return types" OutgoingActionLabel="Return types" />
     <Category Id="Contains" Label="Contains" Description="Whether the source of the link contains the target object" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Contained By" IsContainment="True" OutgoingActionLabel="Contains" />
     <Category Id="Externals" Label="Externals" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="Externals" />
     <Category Id="File" Label="File" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="File" NavigationActionLabel="Files" />
     <Category Id="FileSystem.Category.FileOfType.dll" BasedOn="CodeSchema_Assembly" CanBeDataDriven="True" IsProviderRoot="False" />
-    <Category Id="FileSystem.Category.FileOfType.exe" BasedOn="CodeSchema_Assembly" CanBeDataDriven="True" IsProviderRoot="False" />
-    <Category Id="Implements" Label="Implements" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Implemented by" OutgoingActionLabel="Implements" />
-    <Category Id="InheritsFrom" Label="Inherits From" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Inherited By" OutgoingActionLabel="Inherits From" />
     <Category Id="References" Label="References" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Referenced By" OutgoingActionLabel="References" />
   </Categories>
   <Properties>
@@ -166,7 +68,6 @@
     <Property Id="DelayedChildNodesState" Label="Delayed Child Nodes State" Description="Unspecified if the delayed child nodes state is not specified. NotFetched if the group contains child nodes that are not fetched into the graph yet. Fetched if the group has all its delayed child nodes already fetched." DataType="Microsoft.VisualStudio.GraphModel.DelayedDataState" />
     <Property Id="DelayedCrossGroupLinksState" Label="Delayed Cross-Group Links State" Description="Unspecified if the delayed cross-group links state is not specified. NotFetched if delayed cross-group links on this node are not fetched into the graph yet. Fetched if all delayed cross-group links have already fetched." DataType="Microsoft.VisualStudio.GraphModel.DelayedDataState" />
     <Property Id="Expression" DataType="System.String" />
-    <Property Id="FetchingParent" DataType="Microsoft.VisualStudio.GraphModel.GraphNodeId" />
     <Property Id="FilePath" Label="File Path" Description="File Path" DataType="System.String" />
     <Property Id="Group" Label="Group" Description="Display the node as a group" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
     <Property Id="GroupLabel" DataType="System.String" />
@@ -194,8 +95,6 @@
     <Name Id="Assembly" Label="Assembly" ValueType="Uri" />
   </QualifiedNames>
   <IdentifierAliases>
-    <Alias n="1" Uri="Assembly=$(05db9e60-b12b-4aa3-8a7c-514f87cff464.OutputPathUri)" />
-    <Alias n="2" Id="(@1)" />
     <Alias n="3" Uri="Assembly=$(FxRootUri)/v2.0.50727/mscorlib.dll" />
     <Alias n="4" Id="(@3)" />
     <Alias n="5" Uri="Assembly=$(FxReferenceAssembliesUri)/v3.5/System.Core.dll" />
@@ -204,14 +103,8 @@
     <Alias n="8" Id="(@7)" />
     <Alias n="9" Uri="Assembly=$(FxRootUri)/v2.0.50727/System.dll" />
     <Alias n="10" Id="(@9)" />
-    <Alias n="11" Uri="Assembly=$(352378a0-8b2e-4679-bb44-fd0bcc8467d9.OutputPathUri)" />
-    <Alias n="12" Id="(@11)" />
     <Alias n="13" Uri="Assembly=$(FxReferenceAssembliesUri)/v3.0/System.Runtime.Serialization.dll" />
     <Alias n="14" Id="(@13)" />
-    <Alias n="15" Uri="Assembly=$(2dc898b5-afd9-47b2-a962-c4002c1ae8ff.OutputPathUri)" />
-    <Alias n="16" Id="(@15)" />
-    <Alias n="17" Uri="Assembly=$(268defe0-d604-4888-bf69-57ebae0fd7e7.OutputPathUri)" />
-    <Alias n="18" Id="(@17)" />
     <Alias n="19" Uri="Assembly=$(6d20785d-0451-46a9-9ac2-ec66b7c0d18a.OutputPathUri)" />
     <Alias n="20" Id="(@19)" />
   </IdentifierAliases>
@@ -433,16 +326,12 @@
     </Style>
   </Styles>
   <Paths>
-    <Path Id="05db9e60-b12b-4aa3-8a7c-514f87cff464.OutputPath" Value="C:\VS\Projects\OPC-UA-OOI\SemanticDataSolution\AddressSpaceComplianceTestTool\bin\Debug\AddressSpaceComplianceTestTool.exe" />
-    <Path Id="05db9e60-b12b-4aa3-8a7c-514f87cff464.OutputPathUri" Value="file:///C:/VS/Projects/OPC-UA-OOI/SemanticDataSolution/AddressSpaceComplianceTestTool/bin/Debug/AddressSpaceComplianceTestTool.exe" />
-    <Path Id="268defe0-d604-4888-bf69-57ebae0fd7e7.OutputPath" Value="C:\VS\Projects\OPC-UA-OOI\SemanticDataSolution\DataSerializationUnitTestProject\bin\Debug\UAOOI.SemanticDataDataSerializationUnitTest.dll" />
-    <Path Id="268defe0-d604-4888-bf69-57ebae0fd7e7.OutputPathUri" Value="file:///C:/VS/Projects/OPC-UA-OOI/SemanticDataSolution/DataSerializationUnitTestProject/bin/Debug/UAOOI.SemanticDataDataSerializationUnitTest.dll" />
-    <Path Id="2dc898b5-afd9-47b2-a962-c4002c1ae8ff.OutputPath" Value="C:\VS\Projects\OPC-UA-OOI\SemanticDataSolution\USNodeSetValidationUnitTestProject\bin\Debug\UAOOI.SemanticDataUnitTest.dll" />
-    <Path Id="2dc898b5-afd9-47b2-a962-c4002c1ae8ff.OutputPathUri" Value="file:///C:/VS/Projects/OPC-UA-OOI/SemanticDataSolution/USNodeSetValidationUnitTestProject/bin/Debug/UAOOI.SemanticDataUnitTest.dll" />
-    <Path Id="352378a0-8b2e-4679-bb44-fd0bcc8467d9.OutputPath" Value="C:\VS\Projects\OPC-UA-OOI\SemanticDataSolution\UANodeSetValidation\bin\Debug\UAOOI.SemanticDataUANodeSetValidation.dll" />
-    <Path Id="352378a0-8b2e-4679-bb44-fd0bcc8467d9.OutputPathUri" Value="file:///C:/VS/Projects/OPC-UA-OOI/SemanticDataSolution/UANodeSetValidation/bin/Debug/UAOOI.SemanticDataUANodeSetValidation.dll" />
-    <Path Id="6d20785d-0451-46a9-9ac2-ec66b7c0d18a.OutputPath" Value="C:\VS\Projects\OPC-UA-OOI\SemanticDataSolution\InformationModelFactory\bin\Debug\UAOOI.SemanticDataInformationModelFactory.dll" />
-    <Path Id="6d20785d-0451-46a9-9ac2-ec66b7c0d18a.OutputPathUri" Value="file:///C:/VS/Projects/OPC-UA-OOI/SemanticDataSolution/InformationModelFactory/bin/Debug/UAOOI.SemanticDataInformationModelFactory.dll" />
+    <Path Id="05db9e60-b12b-4aa3-8a7c-514f87cff464.OutputPath" Value="E:\GitHub\OPC-UA-OOI.400\SemanticData\AddressSpaceComplianceTestTool\bin\Debug\AddressSpaceComplianceTestTool.exe" />
+    <Path Id="268defe0-d604-4888-bf69-57ebae0fd7e7.OutputPath" Value="E:\GitHub\OPC-UA-OOI.400\SemanticData\Tests\DataSerializationUnitTestProject\bin\Debug\UAOOI.SemanticDataDataSerializationUnitTest.dll" />
+    <Path Id="2dc898b5-afd9-47b2-a962-c4002c1ae8ff.OutputPath" Value="E:\GitHub\OPC-UA-OOI.400\SemanticData\Tests\USNodeSetValidationUnitTestProject\bin\Debug\UAOOI.SemanticDataUnitTest.dll" />
+    <Path Id="352378a0-8b2e-4679-bb44-fd0bcc8467d9.OutputPath" Value="E:\GitHub\OPC-UA-OOI.400\SemanticData\UANodeSetValidation\bin\Debug\UAOOI.SemanticDataUANodeSetValidation.dll" />
+    <Path Id="6d20785d-0451-46a9-9ac2-ec66b7c0d18a.OutputPath" Value="E:\GitHub\OPC-UA-OOI.400\SemanticData\InformationModelFactory\bin\Debug\UAOOI.SemanticDataInformationModelFactory.dll" />
+    <Path Id="6d20785d-0451-46a9-9ac2-ec66b7c0d18a.OutputPathUri" Value="file:///E:/GitHub/OPC-UA-OOI.400/SemanticData/InformationModelFactory/bin/Debug/UAOOI.SemanticDataInformationModelFactory.dll" />
     <Path Id="FxReferenceAssemblies" Value="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework" />
     <Path Id="FxReferenceAssembliesUri" Value="file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework" />
     <Path Id="FxRoot" Value="C:\Windows\Microsoft.NET\Framework" />

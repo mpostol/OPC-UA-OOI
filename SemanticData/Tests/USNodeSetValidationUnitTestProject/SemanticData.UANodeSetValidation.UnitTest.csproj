@@ -87,6 +87,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
     </None>
+    <None Include="README.md" />
     <None Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.Classes.cs" />

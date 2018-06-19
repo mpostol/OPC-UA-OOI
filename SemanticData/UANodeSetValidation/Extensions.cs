@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -69,7 +70,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [SecurityPermissionAttribute(SecurityAction.Demand)]
     internal static string ValidateIdentifier(this string name, Action<TraceMessage> reportError)
     {
-      if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(name))
+      if (!CodeGenerator.IsValidLanguageIndependentIdentifier(name))
         reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongSymbolicName, String.Format("SymbolicName: '{0}'.", name)));
       return name;
     }

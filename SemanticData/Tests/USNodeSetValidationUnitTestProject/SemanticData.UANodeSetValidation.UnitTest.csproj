@@ -45,6 +45,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.CodeDom, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.CodeDom.4.5.0\lib\net461\System.CodeDom.dll</HintPath>
+    </Reference>
     <Reference Include="System.XML" />
   </ItemGroup>
   <Choose>
@@ -92,16 +95,6 @@
     <None Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.Classes.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\InformationModelFactory\SemanticData.InformationModelFactory.csproj">
-      <Project>{6d20785d-0451-46a9-9ac2-ec66b7c0d18a}</Project>
-      <Name>SemanticData.InformationModelFactory</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj">
-      <Project>{352378a0-8b2e-4679-bb44-fd0bcc8467d9}</Project>
-      <Name>SemanticData.UANodeSetValidation</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="XMLModels\CorrectModels\DataTypeTest.xml" />
@@ -210,6 +203,16 @@
   <ItemGroup>
     <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
     <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\InformationModelFactory\SemanticData.InformationModelFactory.csproj">
+      <Project>{6d20785d-0451-46a9-9ac2-ec66b7c0d18a}</Project>
+      <Name>SemanticData.InformationModelFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj">
+      <Project>{352378a0-8b2e-4679-bb44-fd0bcc8467d9}</Project>
+      <Name>SemanticData.UANodeSetValidation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

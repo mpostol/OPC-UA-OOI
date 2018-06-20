@@ -1,6 +1,6 @@
 ﻿
+using GalaSoft.MvvmLight;
 using System;
-using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
 
@@ -13,7 +13,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
   /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
   [Export(ProducerCompositionSettings.ProducerViewModelContract)]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  public class SimulatorViewModel : INotifyPropertyChanged
+  public class SimulatorViewModel : ViewModelBase
   {
 
     #region API
@@ -36,7 +36,8 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       }
       set
       {
-        PropertyChanged.RaiseHandler<string>(value, ref b_ProducerErrorMessage, "ProducerErrorMessage", this);
+        b_ProducerErrorMessage = value;
+        RaisePropertyChanged<string>("ProducerErrorMessage", b_ProducerErrorMessage, value);
       }
     }
     /// <summary>
@@ -51,7 +52,8 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ProducerRestartCommand, "ProducerRestartCommand", this);
+        b_ProducerRestartCommand = value;
+        RaisePropertyChanged<ICommand>("ProducerRestartCommand", b_ProducerRestartCommand, value);
       }
     }
 
@@ -59,13 +61,6 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     {
       ProducerRestartCommand = new RestartCommand(action);
     }
-    #endregion
-
-    #region INotifyPropertyChanged
-    /// <summary>
-    /// Occurs when a property value changes.
-    /// </summary>
-    public event PropertyChangedEventHandler PropertyChanged;
     #endregion
 
     #region private

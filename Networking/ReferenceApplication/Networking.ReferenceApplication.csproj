@@ -158,7 +158,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CommonDefinitions.cs" />
     <Compile Include="Consumer\ConsumerConfigurationFactory.cs" />
     <Compile Include="Consumer\ConsumerDataManagementSetup.cs" />
     <Compile Include="Consumer\MainWindowModel.cs" />

@@ -1,4 +1,5 @@
 ﻿
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -24,7 +25,7 @@ namespace UAOOI.Networking.ReferenceApplication
   [Export()]
   [Export(typeof(IConsumerViewModel))]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  internal class MainWindowViewModel : INotifyPropertyChanged, IConsumerViewModel
+  internal class MainWindowViewModel : ViewModelBase, IConsumerViewModel
   {
 
     #region constructors
@@ -68,7 +69,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<string>(value, ref b_WindowTitle, "WindowTitle", this);
+        b_WindowTitle = value;
+        this.RaisePropertyChanged<string>("WindowTitle", b_WindowTitle, value);
       }
     }
     internal event EventHandler<Controls.InteractionRequestedEventArgs> SaveFileInteractionEvent;
@@ -84,7 +86,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_OpenConsumerConfiguration, "OpenConsumerConfiguration", this);
+        b_OpenConsumerConfiguration = value;
+        RaisePropertyChanged<ICommand>("OpenConsumerConfiguration", b_OpenConsumerConfiguration, value);
       }
     }
     public ICommand OpenProducerConfiguration
@@ -95,7 +98,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_OpenProducerConfiguration, "OpenProducerConfiguration", this);
+        b_OpenProducerConfiguration = value;
+        RaisePropertyChanged<ICommand>("OpenProducerConfiguration", b_OpenProducerConfiguration, value);
       }
     }
     public ICommand HelpDocumentation
@@ -106,7 +110,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_HelpDocumentation, "HelpDocumentation", this);
+        b_HelpDocumentation = value;
+        RaisePropertyChanged<ICommand>("HelpDocumentation", b_HelpDocumentation, value);
       }
     }
     public ICommand ConfigurationFolder
@@ -117,7 +122,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ConfigurationFolder, "ConfigurationFolder", this);
+        b_ConfigurationFolder = value;
+        RaisePropertyChanged<ICommand>("ConfigurationFolder", b_ConfigurationFolder, value);
       }
     }
     public ICommand ReadMe
@@ -128,7 +134,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ReadMe, "ReadMe", this);
+        b_ReadMe = value;
+        RaisePropertyChanged<ICommand>("ReadMe", b_ReadMe, value);
       }
     }
     public ICommand ViewLicense
@@ -139,7 +146,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ViewLicense, "ViewLicense", this);
+        b_ViewLicense = value;
+        RaisePropertyChanged<ICommand>("ViewLicense", b_ViewLicense, value);
       }
     }
     public ICommand TermsOfService
@@ -150,7 +158,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_TermsOfService, "TermsOfService", this);
+        b_TermsOfService = value;
+        RaisePropertyChanged<ICommand>("TermsOfService", b_TermsOfService, value);
       }
     }
     //private
@@ -176,7 +185,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<int>(value, ref b_ConsumerBytesReceived, "ConsumerReceivedBytes", this);
+        b_ConsumerBytesReceived = value;
+        RaisePropertyChanged<int>("ConsumerReceivedBytes", b_ConsumerBytesReceived, value);
       }
     }
     /// <summary>
@@ -191,7 +201,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<int>(value, ref b_ConsumerFramesReceived, "ConsumerFramesReceived", this);
+        b_ConsumerFramesReceived = value;
+        RaisePropertyChanged<int>("ConsumerFramesReceived", b_ConsumerFramesReceived, value);
       }
     }
     /// <summary>
@@ -206,7 +217,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ConsumerUpdateConfiguration, "ConsumerUpdateConfiguration", this);
+        b_ConsumerUpdateConfiguration = value;
+        RaisePropertyChanged<ICommand>("ConsumerUpdateConfiguration", b_ConsumerUpdateConfiguration, value);
       }
     }
     /// <summary>
@@ -221,7 +233,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<string>(value, ref b_ConsumerErrorMessage, "ConsumerErrorMessage", this);
+        b_ConsumerErrorMessage = value;
+        RaisePropertyChanged<string>("ConsumerErrorMessage", b_ConsumerErrorMessage, value);
       }
     }
     /// <summary>
@@ -364,7 +377,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ObservableCollection<string>>(value, ref b_ConsumerLog, "ConsumerLog", this);
+        b_ConsumerLog = value;
+        RaisePropertyChanged<ObservableCollection<string>>("ConsumerLog", b_ConsumerLog, value);
       }
     }
     #endregion
@@ -384,7 +398,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<int>(value, ref b_BytesSent, "BytesSent", this);
+        b_BytesSent = value;
+        RaisePropertyChanged<int>("BytesSent", b_BytesSent, value);
       }
     }
     public int PackagesSent
@@ -395,13 +410,10 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<int>(value, ref b_PackagesSent, "PackagesSent", this);
+        b_PackagesSent = value;
+        RaisePropertyChanged<int>("PackagesSent", b_PackagesSent, value);
       }
     }
-    #endregion
-
-    #region INotifyPropertyChanged
-    public event PropertyChangedEventHandler PropertyChanged;
     #endregion
 
     #region private

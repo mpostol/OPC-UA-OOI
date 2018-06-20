@@ -66,10 +66,6 @@
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CAS.UA.IServerConfiguration, Version=1.0.0.32204, Culture=neutral, PublicKeyToken=8832ff1a67ea61a3, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CAS.UA.IServerConfiguration.1.00.00\lib\net35\CAS.UA.IServerConfiguration.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -224,11 +220,12 @@
     <Content Include="ConfigurationDataProducer.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="ReadMe.txt">
+    <None Include="ReadMe.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReadMe.tt</DependentUpon>
-    </Resource>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Resource Include="Icons\action_Cancel_16xLG.png" />
     <None Include="ConfigurationEditor\Readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -249,6 +246,10 @@
     <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj">
       <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
       <Name>Common.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Configuration\DataBindings\Configuration.DataBindings.csproj">
+      <Project>{F8DB9567-C559-440C-BBCF-E02013F9AB94}</Project>
+      <Name>Configuration.DataBindings</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj">
       <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>

@@ -123,6 +123,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Consumer\ConsumerCompositionSettings.cs" />
+    <Compile Include="Consumer\ConsumerViewModell.cs" />
+    <Compile Include="Consumer\DataConsumerl.cs" />
     <Compile Include="Controls\INotification.cs" />
     <Compile Include="Controls\InteractionRequestedEventArgs.cs" />
     <Compile Include="Controls\ConfigurationEditorOpenCommand.cs" />
@@ -156,8 +159,6 @@
     </Compile>
     <Compile Include="Consumer\ConsumerConfigurationFactory.cs" />
     <Compile Include="Consumer\ConsumerDataManagementSetup.cs" />
-    <Compile Include="Consumer\MainWindowModel.cs" />
-    <Compile Include="Consumer\IConsumerViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -254,6 +255,10 @@
     <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj">
       <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
       <Name>Configuration.Networking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Networking.Encoding\Networking.Encoding.csproj">
+      <Project>{12f06ce3-1bfb-49fc-aa15-af3a1ff1c66a}</Project>
+      <Name>Networking.Encoding</Name>
     </ProjectReference>
     <ProjectReference Include="..\Networking.SimulatorInteroperabilityTest\Networking.SimulatorInteroperabilityTest.csproj">
       <Project>{9caca823-0479-4831-8510-bf4d52306326}</Project>

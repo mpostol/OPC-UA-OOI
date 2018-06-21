@@ -10,12 +10,14 @@ Locator
 middleware
 Modbus
 Multicast
+nameof
 performative
 plugin
 Postol
 Prerelease
 Schemas
 stateful
+typeof
 typeparamref
 uasconfig
 unicast

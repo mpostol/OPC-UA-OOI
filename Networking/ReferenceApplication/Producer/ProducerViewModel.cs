@@ -1,5 +1,6 @@
 ﻿
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
@@ -11,7 +12,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
   /// class SimulatorViewModel - defines a ViewModel part to be used by the producer to expose diagnostic information on the UI.
   /// </summary>
   /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-  [Export(ProducerCompositionSettings.ProducerViewModelContract)]
+  [Export(ProducerCompositionSettings.ViewModelContract)]
   [PartCreationPolicy(CreationPolicy.Shared)]
   public class SimulatorViewModel : ViewModelBase
   {
@@ -22,7 +23,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     /// </summary>
     public SimulatorViewModel()
     {
-      ProducerRestartCommand = new RestartCommand(() => { });
+      ProducerRestartCommand = new RelayCommand(() => { });
     }
     /// <summary>
     /// Gets or sets the producer error message.
@@ -56,31 +57,13 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
         RaisePropertyChanged<ICommand>("ProducerRestartCommand", b_ProducerRestartCommand, value);
       }
     }
-
-    internal void ChangeProducerRestartCommand(Action action)
+    internal void ChangeProducerCommand(Action action)
     {
-      ProducerRestartCommand = new RestartCommand(action);
+      ProducerRestartCommand = new RelayCommand(action);
     }
     #endregion
 
     #region private
-    private class RestartCommand : ICommand
-    {
-      public RestartCommand(Action restart)
-      {
-        m_restart = restart;
-      }
-      public event EventHandler CanExecuteChanged;
-      public bool CanExecute(object parameter)
-      {
-        return true;
-      }
-      public void Execute(object parameter)
-      {
-        m_restart();
-      }
-      private Action m_restart;
-    }
     private string b_ProducerErrorMessage;
     private ICommand b_ProducerRestartCommand;
     #endregion

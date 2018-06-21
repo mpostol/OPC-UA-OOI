@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.ComponentModel.Composition;
 using System.IO;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
@@ -11,6 +12,7 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
   /// Class ConsumerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase"/> for the UA Data consumer.
   /// </summary>
   /// <remarks>In production environment it shall be replaced by reading a configuration file.</remarks>
+  [Export(ConsumerCompositionSettings.ConfigurationFactoryContract, typeof(IConfigurationFactory))]
   internal class ConsumerConfigurationFactory : ConfigurationFactoryBase
   {
 

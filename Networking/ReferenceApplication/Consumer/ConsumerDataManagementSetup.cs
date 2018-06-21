@@ -1,7 +1,7 @@
 ﻿
 using System;
 using System.ComponentModel.Composition;
-using System.Windows.Input;
+using UAOOI.Configuration.Networking;
 using UAOOI.Networking.ReferenceApplication.Diagnostic;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.MessageHandling;
@@ -14,10 +14,37 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
   {
 
     #region Composition
-    [Import(typeof(IConsumerViewModel))]
-    internal IConsumerViewModel ViewModel
+    [Import(ConsumerCompositionSettings.ViewModelContract, typeof(ConsumerViewModel))]
+    internal ConsumerViewModel ViewModel
     {
       get; set;
+    }
+    /// <summary>
+    /// Sets the producer configuration factory.
+    /// </summary>
+    /// <value>The producer configuration factory.</value>
+    [Import(ConsumerCompositionSettings.ConfigurationFactoryContract, typeof(IConfigurationFactory))]
+    public IConfigurationFactory ProducerConfigurationFactory
+    {
+      set { ConfigurationFactory = value; }
+    }
+    /// <summary>
+    /// Sets the producer encoding factory.
+    /// </summary>
+    /// <value>The producer encoding factory.</value>
+    [Import(ConsumerCompositionSettings.EncodingFactoryContract, typeof(IEncodingFactory))]
+    public IEncodingFactory ProducerEncodingFactory
+    {
+      set { EncodingFactory = value; }
+    }
+    /// <summary>
+    /// Sets the producer binding factory.
+    /// </summary>
+    /// <value>The producer binding factory.</value>
+    [Import(ConsumerCompositionSettings.BindingFactoryContract, typeof(IBindingFactory))]
+    public IBindingFactory ProducerBindingFactory
+    {
+      set { BindingFactory = value; }
     }
     [Import(typeof(IMessageHandlerFactory))]
     public IMessageHandlerFactory ProducerMessageHandlerFactory
@@ -32,11 +59,7 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
       try
       {
         ReferenceApplicationEventSource.Log.Initialization($"{nameof(ConsumerDataManagementSetup)}.{nameof(Setup)} starting");
-        ViewModel.ConsumerUpdateConfiguration = new RestartCommand(Restart); //TODO Remove reference of ConsumerDataManagementSetup System.Windows  #239
-        ConfigurationFactory = new ConsumerConfigurationFactory();
-        MainWindowModel _model = new MainWindowModel() { ViewModelBindingFactory = ViewModel };
-        BindingFactory = _model;
-        EncodingFactory = _model;
+        ViewModel.ChangeProducerCommand(Restart); 
         Start();
         ViewModel.ConsumerErrorMessage = "Running";
         ReferenceApplicationEventSource.Log.Initialization($" consumer engine and starting receiving data acomplished");
@@ -61,26 +84,6 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     #endregion
 
     #region private
-    private class RestartCommand : ICommand
-    {
-      public RestartCommand(Action restart)
-      {
-        m_restart = restart;
-      }
-      /// <summary>
-      /// Occurs when changes occur that affect whether or not the command should execute.
-      /// </summary>
-      public event EventHandler CanExecuteChanged;
-      public bool CanExecute(object parameter)
-      {
-        return true;
-      }
-      public void Execute(object parameter)
-      {
-        m_restart();
-      }
-      private Action m_restart;
-    }
     private bool m_Disposed = false;
     private void Restart()
     {

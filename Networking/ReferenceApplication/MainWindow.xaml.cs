@@ -1,8 +1,8 @@
 ﻿
 using Microsoft.Win32;
+using System.ComponentModel.Composition;
 using System.Windows;
 using UAOOI.Networking.ReferenceApplication.Controls;
-using System.ComponentModel.Composition;
 
 namespace UAOOI.Networking.ReferenceApplication
 {

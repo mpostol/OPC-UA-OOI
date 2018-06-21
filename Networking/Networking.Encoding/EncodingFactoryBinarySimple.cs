@@ -1,20 +1,19 @@
 ﻿
 using System;
 using System.ComponentModel.Composition;
-using System.Xml;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;
 
-namespace UAOOI.Networking.SimulatorInteroperabilityTest
+namespace UAOOI.Networking.Encoding
 {
 
   /// <summary>
   /// Class EncodingFactoryBinarySimple - provides <see cref="IEncodingFactory"/> functionality limited to encoding simple data only.
   /// </summary>
   /// <seealso cref="UAOOI.Networking.SemanticData.IEncodingFactory" />
-  [Export(ProducerCompositionSettings.EncodingFactoryContract, typeof(IEncodingFactory))]
+  [Export(CompositionSettings.EncodingFactoryContract, typeof(IEncodingFactory))]
   public class EncodingFactoryBinarySimple : IEncodingFactory
   {
 
@@ -32,7 +31,7 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// </exception>
     void IEncodingFactory.UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
     {
-      if (repositoryGroup != Settings.ProducerConfigurationRepositoryGroup)
+      if (repositoryGroup != CompositionSettings.ConfigurationRepositoryGroup)
         throw new ArgumentOutOfRangeException(nameof(repositoryGroup));
       if (sourceEncoding.BuiltInType != binding.Encoding.BuiltInType)
         throw new ArgumentOutOfRangeException(nameof(binding));
@@ -47,58 +46,7 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// </summary>
     /// <value>The object implementing <see cref="T:UAOOI.Networking.SemanticData.Encoding.IUADecoder" /> interface.</value>
     /// <exception cref="System.NotImplementedException"></exception>
-    IUADecoder IEncodingFactory.UADecoder
-    {
-      get
-      {
-        throw new NotImplementedException();
-      }
-    }
-    #endregion
-
-    #region private
-    /// <summary>
-    /// Class UABinaryEncoderImplementation - limited implementation of the <see cref="UABinaryEncoder"/> for the testing purpose only.
-    /// </summary>
-    private class UABinaryEncoderImplementation : UABinaryEncoder
-    {
-      public override void Write(IBinaryEncoder encoder, IDataValue value)
-      {
-        throw new NotImplementedException();
-      }
-      public override void Write(IBinaryEncoder encoder, IDiagnosticInfo value)
-      {
-        throw new NotImplementedException();
-      }
-      public override void Write(IBinaryEncoder encoder, IExpandedNodeId value)
-      {
-        throw new NotImplementedException();
-      }
-      public override void Write(IBinaryEncoder encoder, IExtensionObject value)
-      {
-        throw new NotImplementedException();
-      }
-      public override void Write(IBinaryEncoder encoder, ILocalizedText value)
-      {
-        throw new NotImplementedException();
-      }
-      public override void Write(IBinaryEncoder encoder, INodeId value)
-      {
-        throw new NotImplementedException();
-      }
-      public override void Write(IBinaryEncoder encoder, IQualifiedName value)
-      {
-        throw new NotImplementedException();
-      }
-      public override void Write(IBinaryEncoder encoder, IStatusCode value)
-      {
-        throw new NotImplementedException();
-      }
-      public override void Write(IBinaryEncoder encoder, XmlElement value)
-      {
-        throw new NotImplementedException();
-      }
-    }
+    IUADecoder IEncodingFactory.UADecoder { get; } = new UABinaryDecoderImplementation();
     #endregion
 
   }

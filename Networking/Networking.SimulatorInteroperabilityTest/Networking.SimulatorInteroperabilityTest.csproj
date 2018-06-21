@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Networking.Encoding\Networking.Encoding.csproj" />
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
   </ItemGroup>
 

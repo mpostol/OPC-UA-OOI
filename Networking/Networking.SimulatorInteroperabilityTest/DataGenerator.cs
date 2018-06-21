@@ -11,10 +11,10 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
 {
 
   /// <summary>
-  /// Class CustomNodeManager - it is simulator producing data to be sent over the wire using message centric communication provided 
+  /// Class DataGenerator - it is simulator producing data to be sent over the wire using message centric communication provided 
   /// by the UAOOI.Networking.SemanticData framework.
   /// 
-  /// The data i generated according to the requirements defined by OPCF to proceed interoperability testing.
+  /// The data is generated according to the principles defined by the OPCF to proceed interoperability testing.
   /// </summary>
   [Export(ProducerCompositionSettings.BindingFactoryContract, typeof(IBindingFactory))]
   [PartCreationPolicy(CreationPolicy.NonShared)]
@@ -73,7 +73,7 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// <exception cref="System.NotImplementedException"></exception>
     IProducerBinding IBindingFactory.GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
-      if (repositoryGroup != Settings.ProducerConfigurationRepositoryGroup)
+      if (repositoryGroup != UAOOI.Networking.Encoding.CompositionSettings.ConfigurationRepositoryGroup)
         throw new ArgumentNullException("repositoryGroup");
       string _name = $"{repositoryGroup}.{ processValueName}";
       IProducerBinding _return = null;

@@ -22,7 +22,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     /// Gets or sets the view model to be used for diagnostic purpose..
     /// </summary>
     /// <value>The view model.</value>
-    [Import(ProducerCompositionSettings.ProducerViewModelContract, typeof(SimulatorViewModel))]
+    [Import(ProducerCompositionSettings.ViewModelContract, typeof(SimulatorViewModel))]
     internal SimulatorViewModel ViewModel
     {
       get; set;
@@ -67,7 +67,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       try
       {
         ReferenceApplicationEventSource.Log.Initialization($"{nameof(OPCUAServerProducerSimulator)}.{nameof(Setup)} starting");
-        ViewModel.ChangeProducerRestartCommand(() => { ViewModel.ProducerErrorMessage = "Restarted"; });
+        ViewModel.ChangeProducerCommand(() => { ViewModel.ProducerErrorMessage = "Restarted"; });
         Start();
         ViewModel.ProducerErrorMessage = "Running";
         ReferenceApplicationEventSource.Log.Initialization($" Setup of the producer engine acomplished and starting sending data.");

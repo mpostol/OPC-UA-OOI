@@ -6,9 +6,8 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
 
     public const string ConfigurationFileNameContract = "ProducerCompositionSettings.ConfigurationFileName";
     public const string ConfigurationFactoryContract = "ProducerCompositionSettings.ConfigurationFactory";
-    public const string EncodingFactoryContract = "ProducerCompositionSettings.EncodingFactory";
     public const string BindingFactoryContract = "ProducerCompositionSettings.BindingFactory";
-    public const string ProducerViewModelContract = "ProducerCompositionSettings.ProducerViewModel";
+    public const string ViewModelContract = "ProducerCompositionSettings.ProducerViewModel";
 
   }
 

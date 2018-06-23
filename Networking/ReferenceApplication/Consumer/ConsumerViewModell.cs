@@ -3,16 +3,19 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
 using System.Windows.Input;
 
 namespace UAOOI.Networking.ReferenceApplication.Consumer
 {
+  [Export(ConsumerCompositionSettings.ViewModelContract)]
   internal class ConsumerViewModel : ViewModelBase
   {
     public ConsumerViewModel()
     {
       b_ConsumerLog = new ObservableCollection<string>();
     }
+
     #region ViewModel
     /// <summary>
     /// Gets or sets the consumer received bytes.

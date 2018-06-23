@@ -5,6 +5,7 @@ using System.IO;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.Serializers;
+using UAOOI.Networking.Encoding;
 
 namespace UAOOI.Networking.ReferenceApplication.Consumer
 {

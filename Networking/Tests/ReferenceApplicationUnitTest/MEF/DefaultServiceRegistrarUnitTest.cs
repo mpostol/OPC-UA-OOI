@@ -34,7 +34,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
           foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
             foreach (var export in _part.ExportDefinitions)
               Debug.WriteLine(string.Format("Part contract name => '{0}'", export.ContractName));
-          Assert.AreEqual<int>(11, _container.Catalog.Parts.Count());
+          Assert.AreEqual<int>(15, _container.Catalog.Parts.Count());
           MainWindow _MainWindowExportedValue = _container.GetExportedValue<MainWindow>();
           Assert.IsNotNull(_MainWindowExportedValue);
           Assert.IsNotNull(_MainWindowExportedValue.MainWindowViewModel);
@@ -50,7 +50,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
       AggregateCatalog _newCatalog = DefaultServiceRegistrar.RegisterServices(_catalog);
       using (CompositionContainer _container = new CompositionContainer(_newCatalog))
       {
-        Assert.AreEqual<int>(13, _container.Catalog.Parts.Count<ComposablePartDefinition>());
+        Assert.AreEqual<int>(17, _container.Catalog.Parts.Count<ComposablePartDefinition>());
         foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
         {
           Debug.WriteLine("New Part");

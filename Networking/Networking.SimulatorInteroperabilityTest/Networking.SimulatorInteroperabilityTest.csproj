@@ -12,6 +12,10 @@
     <Product>UAOOI</Product>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\UAOOI.Networking.SimulatorInteroperabilityTest.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Networking.Encoding\Networking.Encoding.csproj" />
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />

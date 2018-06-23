@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel.Composition;
+using UAOOI.Networking.SimulatorInteroperabilityTest;
 
 namespace UAOOI.Networking.ReferenceApplication.Producer
 {
@@ -9,7 +10,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
   public class ProducerSettings
   {
 
-    [Export(ProducerCompositionSettings.ConfigurationFileNameContract)]
+    [Export(SimulatorCompositionSettings.ConfigurationFileNameContract)]
     public string ProducerConfigurationFileName => Properties.Settings.Default.ProducerConfigurationFileName;
 
   }

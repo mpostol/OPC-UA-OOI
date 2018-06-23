@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.Composition;
 using UAOOI.Configuration.Networking;
+using UAOOI.Networking.Encoding;
 using UAOOI.Networking.ReferenceApplication.Diagnostic;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.MessageHandling;
@@ -32,7 +33,7 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     /// Sets the producer encoding factory.
     /// </summary>
     /// <value>The producer encoding factory.</value>
-    [Import(ConsumerCompositionSettings.EncodingFactoryContract, typeof(IEncodingFactory))]
+    [Import(typeof(IEncodingFactory))]
     public IEncodingFactory ProducerEncodingFactory
     {
       set { EncodingFactory = value; }
@@ -59,7 +60,7 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
       try
       {
         ReferenceApplicationEventSource.Log.Initialization($"{nameof(ConsumerDataManagementSetup)}.{nameof(Setup)} starting");
-        ViewModel.ChangeProducerCommand(Restart); 
+        ViewModel.ChangeProducerCommand(Restart);
         Start();
         ViewModel.ConsumerErrorMessage = "Running";
         ReferenceApplicationEventSource.Log.Initialization($" consumer engine and starting receiving data acomplished");

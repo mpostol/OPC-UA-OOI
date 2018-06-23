@@ -142,7 +142,7 @@
     <Compile Include="MEF\ServiceLocatorAdapter.cs" />
     <Compile Include="Producer\ProducerCompositionSettings.cs" />
     <Compile Include="Producer\ProducerSettings.cs" />
-    <Compile Include="Producer\ProducerViewModel.cs" />
+    <Compile Include="Producer\SimulatorViewModell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

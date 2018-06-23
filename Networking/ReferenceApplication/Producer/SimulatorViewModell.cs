@@ -11,8 +11,8 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
   /// <summary>
   /// class SimulatorViewModel - defines a ViewModel part to be used by the producer to expose diagnostic information on the UI.
   /// </summary>
-  /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-  [Export(ProducerCompositionSettings.ViewModelContract)]
+  /// <seealso cref="GalaSoft.MvvmLight.ViewModelBase" />
+  [Export()]
   [PartCreationPolicy(CreationPolicy.Shared)]
   public class SimulatorViewModel : ViewModelBase
   {

@@ -13,7 +13,8 @@ namespace UAOOI.Networking.Encoding
   /// Class EncodingFactoryBinarySimple - provides <see cref="IEncodingFactory"/> functionality limited to encoding simple data only.
   /// </summary>
   /// <seealso cref="UAOOI.Networking.SemanticData.IEncodingFactory" />
-  [Export(CompositionSettings.EncodingFactoryContract, typeof(IEncodingFactory))]
+  [Export(typeof(IEncodingFactory))]
+  [PartCreationPolicy(CreationPolicy.Shared)]
   public class EncodingFactoryBinarySimple : IEncodingFactory
   {
 
@@ -31,7 +32,7 @@ namespace UAOOI.Networking.Encoding
     /// </exception>
     void IEncodingFactory.UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
     {
-      if (repositoryGroup != CompositionSettings.ConfigurationRepositoryGroup)
+      if (repositoryGroup != EncodingCompositionSettings.ConfigurationRepositoryGroup)
         throw new ArgumentOutOfRangeException(nameof(repositoryGroup));
       if (sourceEncoding.BuiltInType != binding.Encoding.BuiltInType)
         throw new ArgumentOutOfRangeException(nameof(binding));

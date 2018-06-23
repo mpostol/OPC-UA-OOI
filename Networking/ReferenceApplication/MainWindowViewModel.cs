@@ -24,6 +24,8 @@ namespace UAOOI.Networking.ReferenceApplication
   /// Class MainWindowViewModel - this class demonstrates how to create bindings to the properties that are holders of OPC UA values in the 
   /// Model View ViewModel pattern.
   /// </summary>
+  [Export()]
+  [PartCreationPolicy(CreationPolicy.Shared)]
   internal class MainWindowViewModel : ViewModelBase
   {
 
@@ -176,8 +178,8 @@ namespace UAOOI.Networking.ReferenceApplication
     /// Gets or sets the producer view model.
     /// </summary>
     /// <value>The producer view model.</value>
-    [Import(ProducerCompositionSettings.ViewModelContract)]
-    public object ProducerViewModel { get; set; }
+    [Import(typeof(SimulatorViewModel))]
+    public SimulatorViewModel ProducerViewModel { get; set; }
     public int BytesSent
     {
       get

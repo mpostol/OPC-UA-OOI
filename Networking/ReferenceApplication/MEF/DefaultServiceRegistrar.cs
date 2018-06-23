@@ -26,8 +26,10 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
     {
       return new List<ComposablePartCatalog>(new ComposablePartCatalog[] { new AssemblyCatalog(Assembly.GetAssembly(typeof(AppBootstrapper))),
                                                                            new AssemblyCatalog(Assembly.GetAssembly(typeof(DataManagementSetup))),
-                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.Encoding.CompositionSettings)),
-                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.SimulatorInteroperabilityTest.ProducerCompositionSettings))))});
+                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.SimulatorInteroperabilityTest.SimulatorCompositionSettings))),
+                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.Encoding.EncodingCompositionSettings)))
+                                                                          }
+                                            );
     }
 
   }

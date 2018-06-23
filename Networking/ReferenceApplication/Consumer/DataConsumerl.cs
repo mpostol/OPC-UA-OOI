@@ -42,7 +42,7 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     /// <exception cref="System.ArgumentNullException">repositoryGroup</exception>
     IConsumerBinding IBindingFactory.GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
-      if (repositoryGroup != Encoding.CompositionSettings.ConfigurationRepositoryGroup)
+      if (repositoryGroup != Encoding.EncodingCompositionSettings.ConfigurationRepositoryGroup)
         throw new ArgumentNullException("repositoryGroup");
       return GetConsumerBinding(processValueName, fieldTypeInfo);
     }

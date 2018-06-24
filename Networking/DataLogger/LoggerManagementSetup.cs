@@ -2,16 +2,21 @@
 using System;
 using System.ComponentModel.Composition;
 using UAOOI.Configuration.Networking;
-using UAOOI.Networking.Encoding;
-using UAOOI.Networking.ReferenceApplication.Diagnostic;
+using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.MessageHandling;
 
-namespace UAOOI.Networking.ReferenceApplication.Consumer
+namespace UAOOI.Networking.DataLogger
 {
+
+  /// <summary>
+  /// Class ConsumerDataManagementSetup - custom implementation of the <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
+  /// This class cannot be inherited.
+  /// </summary>
+  /// <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
   [Export]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  internal sealed class ConsumerDataManagementSetup : DataManagementSetup
+  public sealed class LoggerManagementSetup : DataManagementSetup
   {
 
     #region Composition
@@ -47,6 +52,10 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     {
       set { BindingFactory = value; }
     }
+    /// <summary>
+    /// Sets the producer message handler factory.
+    /// </summary>
+    /// <value>An instance of the <see cref="IMessageHandlerFactory"/> The producer message handler factory.</value>
     [Import(typeof(IMessageHandlerFactory))]
     public IMessageHandlerFactory ProducerMessageHandlerFactory
     {
@@ -55,11 +64,14 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     #endregion
 
     #region API
-    internal void Setup()
+    /// <summary>
+    /// Setups this instance.
+    /// </summary>
+    public void Setup()
     {
       try
       {
-        ReferenceApplicationEventSource.Log.Initialization($"{nameof(ConsumerDataManagementSetup)}.{nameof(Setup)} starting");
+        ReferenceApplicationEventSource.Log.Initialization($"{nameof(LoggerManagementSetup)}.{nameof(Setup)} starting");
         ViewModel.ChangeProducerCommand(Restart);
         Start();
         ViewModel.ConsumerErrorMessage = "Running";
@@ -75,9 +87,13 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     #endregion
 
     #region IDisposable
+    /// <summary>
+    /// Releases unmanaged and - optionally - managed resources.
+    /// </summary>
+    /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
     protected override void Dispose(bool disposing)
     {
-      ReferenceApplicationEventSource.Log.EnteringDispose(nameof(ConsumerDataManagementSetup), disposing);
+      ReferenceApplicationEventSource.Log.EnteringDispose(nameof(LoggerManagementSetup), disposing);
       base.Dispose(disposing);
       if (!disposing || m_Disposed)
         return;

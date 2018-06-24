@@ -17,7 +17,6 @@ namespace UAOOI.Networking.ReferenceApplication
     /// <param name="e">The <see cref="StartupEventArgs"/> instance containing the event data.</param>
     private void App_Startup(object sender, StartupEventArgs e)
     {
-      GalaSoft.MvvmLight.Threading.DispatcherHelper.Initialize();
       m_Bootstrapper.Run();
     }
     /// <summary>

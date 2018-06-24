@@ -58,18 +58,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     [TestCategory("Code")]
     public void AddressSpaceContextValidateAndExportModelTestMethod1()
     {
-      UANodeSet _ns;
       IAddressSpaceContext _as;
-      ValidateAndExportModelPreparation(out _ns, out _as);
+      ValidateAndExportModelPreparation(out UANodeSet _ns, out _as);
       _as.ValidateAndExportModel(_ns.NamespaceUris[0]);
     }
     [TestMethod]
     [TestCategory("Code")]
     public void AddressSpaceContextValidateAndExportModelTestMethod2()
     {
-      UANodeSet _ns;
       IAddressSpaceContext _as;
-      ValidateAndExportModelPreparation(out _ns, out _as);
+      ValidateAndExportModelPreparation(out UANodeSet _ns, out _as);
       _as.ValidateAndExportModel();
     }
     [TestMethod]

@@ -69,15 +69,6 @@
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmLightLibs.5.4.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
-    </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmLightLibs.5.4.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
-    </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmLightLibs.5.4.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.SemanticLogging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EnterpriseLibrary.SemanticLogging.2.0.1406.1\lib\net45\Microsoft.Practices.EnterpriseLibrary.SemanticLogging.dll</HintPath>
     </Reference>
@@ -100,10 +91,6 @@
       <HintPath>..\..\packages\System.Reactive.Linq.3.1.1\lib\net46\System.Reactive.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmLightLibs.5.4.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -123,16 +110,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="Consumer\ConsumerCompositionSettings.cs" />
-    <Compile Include="Consumer\ConsumerViewModell.cs" />
-    <Compile Include="Consumer\DataConsumerl.cs" />
+    <Compile Include="Consumer\DataLoggerViewModel.cs" />
     <Compile Include="Controls\INotification.cs" />
     <Compile Include="Controls\InteractionRequestedEventArgs.cs" />
     <Compile Include="Controls\ConfigurationEditorOpenCommand.cs" />
     <Compile Include="Controls\OpenFileCommand.cs" />
-    <Compile Include="Diagnostic\ReferenceApplicationEventSourceExtensions.cs" />
-    <Compile Include="Diagnostic\NetworkingEventSourceProvider.cs" />
-    <Compile Include="Diagnostic\ReferenceApplicationEventSource.cs" />
     <Compile Include="MEF\BootstrapperBase.cs" />
     <Compile Include="MEF\DefaultsCatalog.cs" />
     <Compile Include="MEF\DefaultServiceRegistrar.cs" />
@@ -157,8 +139,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Consumer\ConsumerConfigurationFactory.cs" />
-    <Compile Include="Consumer\ConsumerDataManagementSetup.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -256,17 +236,25 @@
       <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
       <Name>Configuration.Networking</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Networking.Encoding\Networking.Encoding.csproj">
-      <Project>{12f06ce3-1bfb-49fc-aa15-af3a1ff1c66a}</Project>
+    <ProjectReference Include="..\DataLogger\Networking.DataLogger.csproj">
+      <Project>{b260f419-0164-4660-8605-74bca992e9de}</Project>
+      <Name>Networking.DataLogger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Encoding\Networking.Encoding.csproj">
+      <Project>{2492aa3b-cf67-477a-b29e-14a1e348b939}</Project>
       <Name>Networking.Encoding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Networking.SimulatorInteroperabilityTest\Networking.SimulatorInteroperabilityTest.csproj">
-      <Project>{9caca823-0479-4831-8510-bf4d52306326}</Project>
-      <Name>Networking.SimulatorInteroperabilityTest</Name>
+    <ProjectReference Include="..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj">
+      <Project>{2238851E-4DB8-46B0-B38D-0E2315FE153E}</Project>
+      <Name>Networking.ReferenceApplication.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj">
       <Project>{7f4ded4e-5933-4229-b9cc-51da49678904}</Project>
       <Name>Networking.SemanticData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimulatorInteroperabilityTest\Networking.SimulatorInteroperabilityTest.csproj">
+      <Project>{5d2a0688-95e3-400a-b789-49052389d2b1}</Project>
+      <Name>Networking.SimulatorInteroperabilityTest</Name>
     </ProjectReference>
     <ProjectReference Include="..\UDPMessageHandler\Networking.UDPMessageHandler.csproj">
       <Project>{D2EB89F9-321E-46E4-BA79-679138B82B23}</Project>

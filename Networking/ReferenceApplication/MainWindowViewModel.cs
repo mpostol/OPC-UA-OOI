@@ -1,8 +1,4 @@
-﻿
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.ObjectModel;
+﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
@@ -10,12 +6,11 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
-using UAOOI.Configuration.Networking.Serialization;
-using UAOOI.Networking.ReferenceApplication.Consumer;
+using UAOOI.Networking.DataLogger;
 using UAOOI.Networking.ReferenceApplication.Controls;
+using UAOOI.Networking.ReferenceApplication.Core.MvvmLight;
 using UAOOI.Networking.ReferenceApplication.Producer;
 using UAOOI.Networking.ReferenceApplication.Properties;
-using UAOOI.Networking.SemanticData.DataRepository;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
@@ -26,7 +21,7 @@ namespace UAOOI.Networking.ReferenceApplication
   /// </summary>
   [Export()]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  internal class MainWindowViewModel : ViewModelBase
+  internal class MainWindowViewModel : ObservableObject
   {
 
     #region constructors
@@ -37,15 +32,15 @@ namespace UAOOI.Networking.ReferenceApplication
     {
 
       //Menu Files
-      b_ConfigurationFolder = new RelayCommand(ProcessOpenFileInExecutingAssemblyLocation);
-      b_HelpDocumentation = new RelayCommand(() => ProcessStart(Resources.HelpDocumentationUrl));
+      b_ConfigurationFolder = new DelegateCommand(ProcessOpenFileInExecutingAssemblyLocation);
+      b_HelpDocumentation = new DelegateCommand(() => ProcessStart(Resources.HelpDocumentationUrl));
       //Menu Actions
       b_OpenConsumerConfiguration = new ConfigurationEditorOpenCommand(Properties.Resources.ConfigurationDataConsumerFileName, SaveResponse);
       b_OpenProducerConfiguration = new ConfigurationEditorOpenCommand(Properties.Resources.ConfigurationDataProducerFileName, SaveResponse);
       //Menu Help
-      b_ReadMe = new RelayCommand(() => ProcessStart(Resources.ReadMeFileName));
-      b_TermsOfService = new RelayCommand(() => ProcessStart(Resources.TermsOfServiceUrl));
-      b_ViewLicense = new RelayCommand(() => ProcessStart(Resources.ViewLicenseUrl));
+      b_ReadMe = new DelegateCommand(() => ProcessStart(Resources.ReadMeFileName));
+      b_TermsOfService = new DelegateCommand(() => ProcessStart(Resources.TermsOfServiceUrl));
+      b_ViewLicense = new DelegateCommand(() => ProcessStart(Resources.ViewLicenseUrl));
       String _version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
       b_WindowTitle = $"OPC UA Reactive Networking Example Application Rel. {_version} supporting PubSup protocol 1.10";
 

@@ -1,20 +1,17 @@
 ﻿
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
+using UAOOI.Networking.ReferenceApplication.Core.MvvmLight;
 
-namespace UAOOI.Networking.ReferenceApplication.Consumer
+namespace UAOOI.Networking.DataLogger
 {
-  [Export(ConsumerCompositionSettings.ViewModelContract)]
-  internal class ConsumerViewModel : ViewModelBase
+  /// <summary>
+  /// Class ConsumerViewModel -custom implementation of the ViewModel for this DataLogger
+  /// </summary>
+  /// <seealso cref="UAOOI.Networking.ReferenceApplication.Core.MvvmLight.ObservableObject" />
+  public abstract class ConsumerViewModel : ObservableObject
   {
-    public ConsumerViewModel()
-    {
-      b_ConsumerLog = new ObservableCollection<string>();
-    }
 
     #region ViewModel
     /// <summary>
@@ -82,32 +79,16 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
       }
     }
     /// <summary>
-    /// Add the message to the <see cref="MainWindowViewModel.ConsumerLog"/>.
+    /// Add the message to the Log on the UI.
     /// </summary>
-    /// <param name="message">The message to be added to the log <see cref="MainWindowViewModel.ConsumerLog"/>.</param>
-    public void Trace(string message)
-    {
-      GalaSoft.MvvmLight.Threading.DispatcherHelper.RunAsync((() => ConsumerLog.Insert(0, message)));
-    }
-    public ObservableCollection<string> ConsumerLog
-    {
-      get
-      {
-        return b_ConsumerLog;
-      }
-      set
-      {
-        b_ConsumerLog = value;
-        RaisePropertyChanged<ObservableCollection<string>>("ConsumerLog", b_ConsumerLog, value);
-      }
-    }
-
+    /// <param name="message">The message to be added to the log.</param>
+    internal protected abstract void Trace(string message);
     #endregion
 
     #region API
     internal void ChangeProducerCommand(Action action)
     {
-      ConsumerUpdateConfiguration = new RelayCommand(action);
+      ConsumerUpdateConfiguration = new DelegateCommand(action);
     }
     #endregion
 
@@ -116,7 +97,6 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     private int b_ConsumerFramesReceived;
     private ICommand b_ConsumerUpdateConfiguration;
     private string b_ConsumerErrorMessage;
-    private ObservableCollection<string> b_ConsumerLog;
     #endregion
 
   }

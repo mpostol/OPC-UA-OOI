@@ -5,7 +5,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using UAOOI.Common.Infrastructure.Diagnostic;
-using UAOOI.Networking.ReferenceApplication.Diagnostic;
+using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 
 namespace UAOOI.Networking.ReferenceApplication.MEF
 {

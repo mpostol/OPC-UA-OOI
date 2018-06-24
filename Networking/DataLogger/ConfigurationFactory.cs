@@ -6,28 +6,26 @@ using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.Serializers;
 
-namespace UAOOI.Networking.SimulatorInteroperabilityTest
+namespace UAOOI.Networking.DataLogger
 {
 
   /// <summary>
-  /// Class ProducerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase"/> for the producer.
+  /// Class ConsumerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase"/> for the UA Data consumer.
   /// </summary>
-  [Export(SimulatorCompositionSettings.ConfigurationFactoryContract, typeof(IConfigurationFactory))]
-  internal class ProducerConfigurationFactory : ConfigurationFactoryBase
+  /// <remarks>In production environment it shall be replaced by reading a configuration file.</remarks>
+  [Export(ConsumerCompositionSettings.ConfigurationFactoryContract, typeof(IConfigurationFactory))]
+  internal class ConsumerConfigurationFactory : ConfigurationFactoryBase
   {
 
-    #region constructor
     /// <summary>
-    /// Initializes a new instance of the <see cref="ProducerConfigurationFactory" /> class.
+    /// Initializes a new instance of the <see cref="ConsumerConfigurationFactory"/> class.
     /// </summary>
-    /// <param name="producerConfigurationFileName">Name of the producer configuration file.</param>
     [ImportingConstructor()]
-    public ProducerConfigurationFactory([Import(SimulatorCompositionSettings.ConfigurationFileNameContract)] string producerConfigurationFileName)
+    public ConsumerConfigurationFactory([Import(ConsumerCompositionSettings.ConfigurationFileNameContract)] string configurationFileName)
     {
-      m_ProducerConfigurationFileName = producerConfigurationFileName;
       Loader = LoadConfig;
+      m_ConfigurationFileName = configurationFileName;
     }
-    #endregion
 
     #region ConfigurationFactoryBase
     /// <summary>
@@ -41,10 +39,10 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     #endregion
 
     #region private
-    private string m_ProducerConfigurationFileName;
+    private readonly string m_ConfigurationFileName;
     private ConfigurationData LoadConfig()
     {
-      FileInfo _configurationFile = new FileInfo(m_ProducerConfigurationFileName);
+      FileInfo _configurationFile = new FileInfo(m_ConfigurationFileName);
       return ConfigurationDataFactoryIO.Load<ConfigurationData>(() => XmlDataContractSerializers.Load<ConfigurationData>(_configurationFile, (x, y, z) => { }), () => RaiseEvents());
     }
     protected override void RaiseEvents()

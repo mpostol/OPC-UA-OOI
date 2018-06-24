@@ -1,9 +1,7 @@
-﻿
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using System;
+﻿using System;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
+using UAOOI.Networking.ReferenceApplication.Core.MvvmLight;
 
 namespace UAOOI.Networking.ReferenceApplication.Producer
 {
@@ -14,7 +12,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
   /// <seealso cref="GalaSoft.MvvmLight.ViewModelBase" />
   [Export()]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  public class SimulatorViewModel : ViewModelBase
+  public class SimulatorViewModel : ObservableObject
   {
 
     #region API
@@ -23,7 +21,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     /// </summary>
     public SimulatorViewModel()
     {
-      ProducerRestartCommand = new RelayCommand(() => { });
+      ProducerRestartCommand = new DelegateCommand(() => { });
     }
     /// <summary>
     /// Gets or sets the producer error message.
@@ -59,7 +57,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     }
     internal void ChangeProducerCommand(Action action)
     {
-      ProducerRestartCommand = new RelayCommand(action);
+      ProducerRestartCommand = new DelegateCommand(action);
     }
     #endregion
 

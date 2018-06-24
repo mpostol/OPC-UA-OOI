@@ -10,36 +10,36 @@ string AssemblyCompany = "commsvr.com";
 string Url = "https://github.com/mpostol/OPC-UA-OOI";
 string Email = "commserver@cas.eu";
 string Phone = "+48 608 619 899";
-string Owner = "cas.eu";
-string RepositoryVersion = "3.1.0"; //increment on the same position as the group version
+string Owner = "commsvr.com";
+string RepositoryVersion = "4.0.0"; //increment on the same position as the group version
 string Authors = "MPostol";
 
 //UAOOI.Common
 string CommonTitle = "UAOOI.DataDiscovery";
-string CommonVersion = "2.0.3";
-string CommonPrerelease = "";
-string CommonProduct = "OOI Common";
+string CommonVersion = "4.0.0";
+string CommonPrerelease = "-Alpha";
+string CommonProduct = "Object Oriented Internet";
 
 //UAOOI.DataDiscovery
 string DataDiscoveryTitle = "UAOOI.DataDiscovery";
-string DataDiscoveryVersion = "1.0.0";
+string DataDiscoveryVersion = "4.0.0";
 string DataDiscoveryPrerelease = "-Alpha";
-string DataDiscoveryProduct = "OOI Global Data Discovery";
+string DataDiscoveryProduct = "Object Oriented Internet";
 
 //UAOOI.SemanticData
-string SemanticDataVersion = "2.0.0";
-string SemanticDataPrerelease = "-Bravo";
-string SemanticDataProduct = "OOI SemanticData";
+string SemanticDataVersion = "4.0.0";
+string SemanticDataPrerelease = "-Alpha";
+string SemanticDataProduct = "Object Oriented Internet";
 
 //UAOOI.Configuration
-string ConfigurationVersion = "3.0.5";
-string ConfigurationPrerelease = "";
-string ConfigurationProduct = "OOI Networking Configuration";
+string ConfigurationVersion = "4.0.0";
+string ConfigurationPrerelease = "-Alpha";
+string ConfigurationProduct = "Object Oriented Internet";
 
 //UAOOI.Networking
-string NetworkingDataVersion = "3.0.5";
-string NetworkingDataPrerelease = "";
-string NetworkingDataProduct = "OOI Reactive Networking";
+string NetworkingDataVersion = "4.0.0";
+string NetworkingDataPrerelease = "-Alpha";
+string NetworkingDataProduct = "Object Oriented Internet";
 
 //Note: 
 //Alpha, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, 

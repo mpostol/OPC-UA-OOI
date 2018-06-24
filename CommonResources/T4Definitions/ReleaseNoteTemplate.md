@@ -22,7 +22,7 @@ Main aim of this namespace is to support engineering of data processing in conte
 
 #### UA Data Example Application
 
-The description of this application is available at: [UA Data Example Application](../../Networking/ReferenceApplication/README.MD).
+The description of this application is available at: [UA Data Example Application](../../Networking/ReferenceApplication).
 
 The installation package is available at: http://www.commsvr.com/COInstal/UANetworking/uand.html
 
@@ -44,8 +44,8 @@ The Nuget packages are available at:
 
 Current release:
 
-* Assembly Product:       OOI SemanticData
-* Assembly Version:       2.0.0
+* Assembly Product:       Object Oriented Internet
+* Assembly Version:       4.0.0
 
 # Library UAOOI.DataBindings
 
@@ -65,8 +65,8 @@ The NuGet package is available at:
 
 ### Versions
 
-* Assembly Product:       OOI Networking Configuration
-* Assembly Version:       3.0.5
+* Assembly Product:       Object Oriented Internet
+* Assembly Version:       4.0.0
 
 ## Contact
 

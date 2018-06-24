@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.Composition;
 using UAOOI.Configuration.Networking;
-using UAOOI.Networking.ReferenceApplication.Diagnostic;
+using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Networking.SimulatorInteroperabilityTest;

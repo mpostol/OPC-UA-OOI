@@ -5,7 +5,7 @@ using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
 
-namespace UAOOI.Networking.ReferenceApplication.Consumer
+namespace UAOOI.Networking.DataLogger
 {
 
   /// <summary>
@@ -50,10 +50,12 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     /// Gets the producer binding.
     /// </summary>
     /// <param name="repositoryGroup">The repository group.</param>
-    /// <param name="variableName">Name of the variable.</param>
-    /// <remarks>It is intentionally not implemented.</remarks>
-    /// <returns>An instance implementing the <see cref="IProducerBinding"/> interface.</returns>
+    /// <param name="processValueName">The name of a variable that is the source of the values forwarded by a message over the network.
+    /// Must be unique in the context of the group named by <paramref name="repositoryGroup" /></param>
+    /// <param name="fieldTypeInfo">The <see cref="T:UAOOI.Configuration.Networking.Serialization.BuiltInType" />of the message field encoding.</param>
+    /// <returns>An instance implementing the <see cref="IProducerBinding" /> interface.</returns>
     /// <exception cref="System.NotImplementedException"></exception>
+    /// <remarks>It is intentionally not implemented.</remarks>
     IProducerBinding IBindingFactory.GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
       throw new NotImplementedException();

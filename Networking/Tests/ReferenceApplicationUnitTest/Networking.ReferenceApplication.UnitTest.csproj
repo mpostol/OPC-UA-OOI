@@ -96,6 +96,14 @@
       <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
       <Name>Configuration.Networking</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DataLogger\Networking.DataLogger.csproj">
+      <Project>{B260F419-0164-4660-8605-74BCA992E9DE}</Project>
+      <Name>Networking.DataLogger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj">
+      <Project>{2238851E-4DB8-46B0-B38D-0E2315FE153E}</Project>
+      <Name>Networking.ReferenceApplication.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ReferenceApplication\Networking.ReferenceApplication.csproj">
       <Project>{f0accb28-ae0d-4e19-94fa-7be3044f1eeb}</Project>
       <Name>Networking.ReferenceApplication</Name>

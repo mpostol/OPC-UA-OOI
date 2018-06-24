@@ -5,8 +5,8 @@ using System.Diagnostics.Tracing;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.Networking.ReferenceApplication.Diagnostic;
-using static UAOOI.Networking.ReferenceApplication.Diagnostic.ReferenceApplicationEventSource;
+using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
+using static UAOOI.Networking.ReferenceApplication.Core.Diagnostic.ReferenceApplicationEventSource;
 
 namespace UAOOI.Networking.ReferenceApplication.UnitTest.Diagnostic
 {

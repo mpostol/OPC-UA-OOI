@@ -8,7 +8,7 @@ namespace UAOOI.Networking.ReferenceApplication
 
   [Export]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  public class ProducerSettings
+  public class ApplicationSettings
   {
 
     [Export(SimulatorCompositionSettings.ConfigurationFileNameContract)]

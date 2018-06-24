@@ -86,6 +86,7 @@
     <Compile Include="MEF\DefaultServiceRegistrarUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MainWindowViewModelUnitTest.cs" />
+    <Compile Include="ApplicationSettingsUnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Infrastructure\Common.Infrastructure.csproj">
@@ -111,6 +112,10 @@
     <ProjectReference Include="..\..\SemanticData\Networking.SemanticData.csproj">
       <Project>{7f4ded4e-5933-4229-b9cc-51da49678904}</Project>
       <Name>Networking.SemanticData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SimulatorInteroperabilityTest\Networking.SimulatorInteroperabilityTest.csproj">
+      <Project>{5D2A0688-95E3-400A-B789-49052389D2B1}</Project>
+      <Name>Networking.SimulatorInteroperabilityTest</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\UDPMessageHandler\Networking.UDPMessageHandler.csproj">
       <Project>{D2EB89F9-321E-46E4-BA79-679138B82B23}</Project>

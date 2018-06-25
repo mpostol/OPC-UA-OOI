@@ -1,6 +1,5 @@
 ﻿
 using System;
-using System.ComponentModel.Composition;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
@@ -12,16 +11,17 @@ namespace UAOOI.Networking.DataLogger
   /// Class ConsumerViewModel - it is a consumer of the data send over the wire using the UAOOI.Networking.SemanticData framework.
   /// It is expected that the data is generated according to the requirements defined by OPCF to proceed interoperability testing.
   /// </summary>
-  [Export(ConsumerCompositionSettings.BindingFactoryContract, typeof(IBindingFactory))]
-  [PartCreationPolicy(CreationPolicy.NonShared)]
   internal class DataConsumer : IBindingFactory
   {
 
     #region composition
-    [Import(ConsumerCompositionSettings.ViewModelContract, typeof(ConsumerViewModel))]
-    internal ConsumerViewModel ViewModel
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DataConsumer"/> class.
+    /// </summary>
+    /// <param name="viewModel">The view model used to log data received over wire.</param>
+    internal DataConsumer(ConsumerViewModel viewModel)
     {
-      get; set;
+      m_ViewModel = viewModel;
     }
     #endregion
 
@@ -63,6 +63,8 @@ namespace UAOOI.Networking.DataLogger
     #endregion
 
     #region private
+    private ConsumerViewModel m_ViewModel;
+
     /// <summary>
     /// Helper method that creates the consumer binding.
     /// </summary>
@@ -187,7 +189,7 @@ namespace UAOOI.Networking.DataLogger
     private IConsumerBinding AddBinding<type>(string variableName, UATypeInfo typeInfo)
     {
       ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(typeInfo);
-      _return.PropertyChanged += (x, y) => ViewModel.Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).ToString()}");
+      _return.PropertyChanged += (x, y) => m_ViewModel.Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).ToString()}");
       return _return;
     }
     #endregion

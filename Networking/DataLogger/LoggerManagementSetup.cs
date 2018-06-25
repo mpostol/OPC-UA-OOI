@@ -1,7 +1,7 @@
 ﻿
+using CommonServiceLocator;
 using System;
 using System.ComponentModel.Composition;
-using UAOOI.Configuration.Networking;
 using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.MessageHandling;
@@ -19,47 +19,19 @@ namespace UAOOI.Networking.DataLogger
   public sealed class LoggerManagementSetup : DataManagementSetup
   {
 
-    #region Composition
-    [Import(ConsumerCompositionSettings.ViewModelContract, typeof(ConsumerViewModel))]
-    internal ConsumerViewModel ViewModel
-    {
-      get; set;
-    }
+    #region constructor
     /// <summary>
-    /// Sets the producer configuration factory.
+    /// Initializes a new instance of the <see cref="LoggerManagementSetup"/> class.
     /// </summary>
-    /// <value>The producer configuration factory.</value>
-    [Import(ConsumerCompositionSettings.ConfigurationFactoryContract, typeof(IConfigurationFactory))]
-    public IConfigurationFactory ProducerConfigurationFactory
+    public LoggerManagementSetup()
     {
-      set { ConfigurationFactory = value; }
-    }
-    /// <summary>
-    /// Sets the producer encoding factory.
-    /// </summary>
-    /// <value>The producer encoding factory.</value>
-    [Import(typeof(IEncodingFactory))]
-    public IEncodingFactory ProducerEncodingFactory
-    {
-      set { EncodingFactory = value; }
-    }
-    /// <summary>
-    /// Sets the producer binding factory.
-    /// </summary>
-    /// <value>The producer binding factory.</value>
-    [Import(ConsumerCompositionSettings.BindingFactoryContract, typeof(IBindingFactory))]
-    public IBindingFactory ProducerBindingFactory
-    {
-      set { BindingFactory = value; }
-    }
-    /// <summary>
-    /// Sets the producer message handler factory.
-    /// </summary>
-    /// <value>An instance of the <see cref="IMessageHandlerFactory"/> The producer message handler factory.</value>
-    [Import(typeof(IMessageHandlerFactory))]
-    public IMessageHandlerFactory ProducerMessageHandlerFactory
-    {
-      set { MessageHandlerFactory = value; }
+      IServiceLocator _serviceLocator = ServiceLocator.Current;
+      string _ConsumerConfigurationFileName = _serviceLocator.GetInstance<string>(ConsumerCompositionSettings.ConfigurationFileNameContract);
+      m_ViewModel = _serviceLocator.GetInstance<ConsumerViewModel>(ConsumerCompositionSettings.ViewModelContract);
+      ConfigurationFactory = new ConsumerConfigurationFactory(_ConsumerConfigurationFileName);
+      EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();
+      BindingFactory = new DataConsumer(m_ViewModel);
+      MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
     }
     #endregion
 
@@ -72,15 +44,15 @@ namespace UAOOI.Networking.DataLogger
       try
       {
         ReferenceApplicationEventSource.Log.Initialization($"{nameof(LoggerManagementSetup)}.{nameof(Setup)} starting");
-        ViewModel.ChangeProducerCommand(Restart);
+        m_ViewModel.ChangeProducerCommand(Restart);
         Start();
-        ViewModel.ConsumerErrorMessage = "Running";
+        m_ViewModel.ConsumerErrorMessage = "Running";
         ReferenceApplicationEventSource.Log.Initialization($" consumer engine and starting receiving data acomplished");
       }
       catch (Exception _ex)
       {
         ReferenceApplicationEventSource.Log.LogException(_ex);
-        ViewModel.ConsumerErrorMessage = "ERROR";
+        m_ViewModel.ConsumerErrorMessage = "ERROR";
         Dispose();
       }
     }
@@ -102,9 +74,10 @@ namespace UAOOI.Networking.DataLogger
 
     #region private
     private bool m_Disposed = false;
+    private ConsumerViewModel m_ViewModel;
     private void Restart()
     {
-      ViewModel.Trace("Entering Restart");
+      m_ViewModel.Trace("Entering Restart");
       Start();
     }
     #endregion

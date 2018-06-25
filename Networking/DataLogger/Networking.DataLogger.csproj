@@ -24,6 +24,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ConfigurationDataConsumer.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ConfigurationDataConsumer.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />
   </ItemGroup>
 

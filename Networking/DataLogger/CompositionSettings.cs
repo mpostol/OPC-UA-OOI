@@ -15,10 +15,6 @@ namespace UAOOI.Networking.DataLogger
     /// The view model contract name
     /// </summary>
     public const string ViewModelContract = "ConsumerCompositionSettings.ConsumerViewModel";
-    [System.Obsolete("Consider usinh new instead of the composition")]
-    internal const string ConfigurationFactoryContract = "ConsumerCompositionSettings.ConfigurationFactory";
-    [System.Obsolete("Consider usinh new instead of the composition")]
-    internal const string BindingFactoryContract = "ConsumerCompositionSettings.BindingFactory";
 
   }
 }

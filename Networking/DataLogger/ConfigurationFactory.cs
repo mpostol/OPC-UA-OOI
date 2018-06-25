@@ -13,15 +13,13 @@ namespace UAOOI.Networking.DataLogger
   /// Class ConsumerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase"/> for the UA Data consumer.
   /// </summary>
   /// <remarks>In production environment it shall be replaced by reading a configuration file.</remarks>
-  [Export(ConsumerCompositionSettings.ConfigurationFactoryContract, typeof(IConfigurationFactory))]
   internal class ConsumerConfigurationFactory : ConfigurationFactoryBase
   {
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ConsumerConfigurationFactory"/> class.
     /// </summary>
-    [ImportingConstructor()]
-    public ConsumerConfigurationFactory([Import(ConsumerCompositionSettings.ConfigurationFileNameContract)] string configurationFileName)
+    public ConsumerConfigurationFactory(string configurationFileName)
     {
       Loader = LoadConfig;
       m_ConfigurationFileName = configurationFileName;

@@ -13,6 +13,22 @@
             </reference>
           </references>
         </layer>
+        <layer Id="f77723cd-1873-40ba-8338-7be79f79f2ba" name="UAOOI.Networking.ReferenceApplication.UnitTest.dll">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="c80e6cb5-1da8-4eca-86af-5d571530121d" direction="Forward">
+              <layerMoniker Id="41178758-f652-4b8c-bd62-2a7950fd7ee4" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="3820b507-9b39-4460-9a44-8ec13804a3b3" name="UAOOI.Networking.ReferenceApplication.UnitTest.dll">
+              <ArtifactNode Label="UAOOI.Networking.ReferenceApplication.UnitTest.dll" Category="CodeSchema_Assembly" Id="(Assembly=../../../Networking/Tests/ReferenceApplicationUnitTest/bin/Debug/UAOOI.Networking.ReferenceApplication.UnitTest.dll)" />
+              <ExpandedNode Id="(Assembly=UAOOI.Networking.ReferenceApplication.UnitTest)" Label="UAOOI.Networking.ReferenceApplication.UnitTest.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
         <layer Id="1d5c0cb1-bd7f-44ca-b06a-2af3d417ab92" name="UAOOI.Networking.SemanticData.UnitTest.dll">
           <references>
             <reference Id="34f57450-fba5-4f53-b6a8-f3d2e0d4b5de" name="UAOOI.Networking.SemanticData.UnitTest.dll">
@@ -24,11 +40,38 @@
             </reference>
           </references>
         </layer>
-        <layer Id="f77723cd-1873-40ba-8338-7be79f79f2ba" name="UAOOI.Networking.ReferenceApplication.UnitTest.dll">
+        <layer Id="41178758-f652-4b8c-bd62-2a7950fd7ee4" name="UAOOI.Networking.DataLogger">
           <references>
-            <reference Id="3820b507-9b39-4460-9a44-8ec13804a3b3" name="UAOOI.Networking.ReferenceApplication.UnitTest.dll">
-              <ArtifactNode Label="UAOOI.Networking.ReferenceApplication.UnitTest.dll" Category="CodeSchema_Assembly" Id="(Assembly=../../../Networking/Tests/ReferenceApplicationUnitTest/bin/Debug/UAOOI.Networking.ReferenceApplication.UnitTest.dll)" />
-              <ExpandedNode Id="(Assembly=UAOOI.Networking.ReferenceApplication.UnitTest)" Label="UAOOI.Networking.ReferenceApplication.UnitTest.dll" Category="CodeSchema_Assembly">
+            <reference Id="5dd32470-10be-497b-a32f-c0c170623eee" name="UAOOI.Networking.DataLogger">
+              <ArtifactNode Label="UAOOI.Networking.DataLogger" Category="CodeSchema_Namespace" Id="(Namespace=UAOOI.Networking.DataLogger)" />
+              <ExpandedNode Id="(Namespace=UAOOI.Networking.DataLogger)" Label="UAOOI.Networking.DataLogger" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="9c949b3b-4568-4c74-9736-9a125c229f12" name="UAOOI.Networking.DataLogger.UnitTest.dll">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="dc81da34-fbf5-4bf5-b3f0-875cde2ab8d4" direction="Forward">
+              <layerMoniker Id="41178758-f652-4b8c-bd62-2a7950fd7ee4" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <childLayers>
+            <layer Id="947128be-d3b0-4233-af86-8972fa3367c6" name="UAOOI.Networking.DataLogger.UnitTest.Instrumentation">
+              <references>
+                <reference Id="003522ed-43db-4d34-9f66-67a1d584c43f" name="UAOOI.Networking.DataLogger.UnitTest.Instrumentation">
+                  <ArtifactNode Label="UAOOI.Networking.DataLogger.UnitTest.Instrumentation" Category="CodeSchema_Namespace" Id="(Namespace=UAOOI.Networking.DataLogger.UnitTest.Instrumentation)" />
+                  <ExpandedNode Id="(Namespace=UAOOI.Networking.DataLogger.UnitTest.Instrumentation)" Label="UAOOI.Networking.DataLogger.UnitTest.Instrumentation" Category="CodeSchema_Namespace">
+                    <LinkCategory Ref="Represents" />
+                  </ExpandedNode>
+                </reference>
+              </references>
+            </layer>
+          </childLayers>
+          <references>
+            <reference Id="c3e08ca8-8e87-4d85-a7ba-b689c55d3098" name="UAOOI.Networking.DataLogger.UnitTest.dll">
+              <ArtifactNode Label="UAOOI.Networking.DataLogger.UnitTest.dll" Category="CodeSchema_Assembly" Id="(Assembly=../../../Networking/Tests/Networking.DataLogger.UnitTest/bin/Debug/UAOOI.Networking.DataLogger.UnitTest.dll)" />
+              <ExpandedNode Id="(Assembly=UAOOI.Networking.DataLogger.UnitTest)" Label="UAOOI.Networking.DataLogger.UnitTest.dll" Category="CodeSchema_Assembly">
                 <Category Ref="FileSystem.Category.FileOfType.dll" />
                 <LinkCategory Ref="Represents" />
               </ExpandedNode>

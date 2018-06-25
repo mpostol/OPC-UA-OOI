@@ -1,4 +1,5 @@
-﻿using CommonServiceLocator;
+﻿
+using CommonServiceLocator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
@@ -20,10 +21,6 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest
       {
         using (CompositionContainer _container = new CompositionContainer(newCatalog))
         {
-          foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
-            foreach (var export in _part.ExportDefinitions)
-              Debug.WriteLine(string.Format("Part contract name => '{0}'", export.ContractName));
-          Assert.AreEqual<int>(15, _container.Catalog.Parts.Count());
           string _ProducerConfigurationFileName = _container.GetExportedValue<string>(SimulatorCompositionSettings.ConfigurationFileNameContract);
           Assert.AreEqual<string>("ConfigurationDataProducer.xml", _ProducerConfigurationFileName, $"_ProducerConfigurationFileName = {_ProducerConfigurationFileName}");
           string _ConsumerConfigurationFileName = _container.GetExportedValue<string>(ConsumerCompositionSettings.ConfigurationFileNameContract);
@@ -44,7 +41,6 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest
         {
           IServiceLocator _serviceLocator = new ServiceLocatorAdapter(_container);
           ServiceLocator.SetLocatorProvider(() => _serviceLocator);
-          Assert.IsNotNull(_serviceLocator);
           string _ProducerConfigurationFileName = _serviceLocator.GetInstance<string>(SimulatorCompositionSettings.ConfigurationFileNameContract);
           Assert.AreEqual<string>("ConfigurationDataProducer.xml", _ProducerConfigurationFileName, $"_ProducerConfigurationFileName = {_ProducerConfigurationFileName}");
           string _ConsumerConfigurationFileName = _serviceLocator.GetInstance<string>(ConsumerCompositionSettings.ConfigurationFileNameContract);

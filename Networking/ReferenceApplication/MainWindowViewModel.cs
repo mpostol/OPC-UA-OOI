@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Collections.ObjectModel;
+﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
@@ -8,11 +6,11 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
-using UAOOI.Configuration.Networking.Serialization;
-using UAOOI.Networking.ReferenceApplication.Consumer;
+using UAOOI.Networking.DataLogger;
 using UAOOI.Networking.ReferenceApplication.Controls;
+using UAOOI.Networking.ReferenceApplication.Core.MvvmLight;
 using UAOOI.Networking.ReferenceApplication.Producer;
-using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Networking.ReferenceApplication.Properties;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
@@ -22,9 +20,8 @@ namespace UAOOI.Networking.ReferenceApplication
   /// Model View ViewModel pattern.
   /// </summary>
   [Export()]
-  [Export(typeof(IConsumerViewModel))]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  internal class MainWindowViewModel : INotifyPropertyChanged, IConsumerViewModel
+  internal class MainWindowViewModel : ObservableObject
   {
 
     #region constructors
@@ -34,28 +31,19 @@ namespace UAOOI.Networking.ReferenceApplication
     public MainWindowViewModel()
     {
 
-      b_ConsumerLog = new ObservableCollection<string>();
       //Menu Files
-      b_ConfigurationFolder = new ConfigurationFolderCommand();
-      b_HelpDocumentation = new WebDocumentationCommand(Properties.Resources.HelpDocumentationUrl);
+      b_ConfigurationFolder = new DelegateCommand(ProcessOpenFileInExecutingAssemblyLocation);
+      b_HelpDocumentation = new DelegateCommand(() => ProcessStart(Resources.HelpDocumentationUrl));
       //Menu Actions
       b_OpenConsumerConfiguration = new ConfigurationEditorOpenCommand(Properties.Resources.ConfigurationDataConsumerFileName, SaveResponse);
       b_OpenProducerConfiguration = new ConfigurationEditorOpenCommand(Properties.Resources.ConfigurationDataProducerFileName, SaveResponse);
       //Menu Help
-      b_ReadMe = new OpenFileCommand(Properties.Resources.ReadMeFileName);
-      b_TermsOfService = new WebDocumentationCommand(Properties.Resources.TermsOfServiceUrl);
-      b_ViewLicense = new WebDocumentationCommand(Properties.Resources.ViewLicenseUrl);
+      b_ReadMe = new DelegateCommand(() => ProcessStart(Resources.ReadMeFileName));
+      b_TermsOfService = new DelegateCommand(() => ProcessStart(Resources.TermsOfServiceUrl));
+      b_ViewLicense = new DelegateCommand(() => ProcessStart(Resources.ViewLicenseUrl));
       String _version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
       b_WindowTitle = $"OPC UA Reactive Networking Example Application Rel. {_version} supporting PubSup protocol 1.10";
 
-    }
-
-    private FileInfo SaveResponse(FileInfo arg)
-    {
-      FileInfo _ret = null;
-      SaveFileConfirmation _newFileInfo = new SaveFileConfirmation() { Title = "Save configuration file", FilePath = arg.FullName };
-      SaveFileInteractionEvent?.Invoke(this, new InteractionRequestedEventArgs(_newFileInfo, () => _ret = String.IsNullOrEmpty(_newFileInfo.FilePath) ? null : new FileInfo(_newFileInfo.FilePath)));
-      return _ret;
     }
     #endregion
 
@@ -68,7 +56,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<string>(value, ref b_WindowTitle, "WindowTitle", this);
+        b_WindowTitle = value;
+        this.RaisePropertyChanged<string>("WindowTitle", b_WindowTitle, value);
       }
     }
     internal event EventHandler<Controls.InteractionRequestedEventArgs> SaveFileInteractionEvent;
@@ -84,7 +73,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_OpenConsumerConfiguration, "OpenConsumerConfiguration", this);
+        b_OpenConsumerConfiguration = value;
+        RaisePropertyChanged<ICommand>("OpenConsumerConfiguration", b_OpenConsumerConfiguration, value);
       }
     }
     public ICommand OpenProducerConfiguration
@@ -95,7 +85,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_OpenProducerConfiguration, "OpenProducerConfiguration", this);
+        b_OpenProducerConfiguration = value;
+        RaisePropertyChanged<ICommand>("OpenProducerConfiguration", b_OpenProducerConfiguration, value);
       }
     }
     public ICommand HelpDocumentation
@@ -106,7 +97,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_HelpDocumentation, "HelpDocumentation", this);
+        b_HelpDocumentation = value;
+        RaisePropertyChanged<ICommand>("HelpDocumentation", b_HelpDocumentation, value);
       }
     }
     public ICommand ConfigurationFolder
@@ -117,7 +109,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ConfigurationFolder, "ConfigurationFolder", this);
+        b_ConfigurationFolder = value;
+        RaisePropertyChanged<ICommand>("ConfigurationFolder", b_ConfigurationFolder, value);
       }
     }
     public ICommand ReadMe
@@ -128,7 +121,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ReadMe, "ReadMe", this);
+        b_ReadMe = value;
+        RaisePropertyChanged<ICommand>("ReadMe", b_ReadMe, value);
       }
     }
     public ICommand ViewLicense
@@ -139,7 +133,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ViewLicense, "ViewLicense", this);
+        b_ViewLicense = value;
+        RaisePropertyChanged<ICommand>("ViewLicense", b_ViewLicense, value);
       }
     }
     public ICommand TermsOfService
@@ -150,7 +145,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_TermsOfService, "TermsOfService", this);
+        b_TermsOfService = value;
+        RaisePropertyChanged<ICommand>("TermsOfService", b_TermsOfService, value);
       }
     }
     //private
@@ -163,219 +159,22 @@ namespace UAOOI.Networking.ReferenceApplication
     private ICommand b_HelpDocumentation;
     #endregion
 
-    #region IConsumerViewModel 
-    /// <summary>
-    /// Gets or sets the consumer received bytes.
-    /// </summary>
-    /// <value>The consumer received bytes.</value>
-    public int ConsumerReceivedBytes
-    {
-      get
-      {
-        return b_ConsumerBytesReceived;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<int>(value, ref b_ConsumerBytesReceived, "ConsumerReceivedBytes", this);
-      }
-    }
-    /// <summary>
-    /// Gets or sets the number of consumer received frames .
-    /// </summary>
-    /// <value>The consumer frames received.</value>
-    public int ConsumerFramesReceived
-    {
-      get
-      {
-        return b_ConsumerFramesReceived;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<int>(value, ref b_ConsumerFramesReceived, "ConsumerFramesReceived", this);
-      }
-    }
-    /// <summary>
-    /// Gets or sets the consumer update configuration command.
-    /// </summary>
-    /// <value>The consumer update configuration <see cref="ICommand" />.</value>
-    public ICommand ConsumerUpdateConfiguration //TODO Remove reference of ConsumerDataManagementSetup System.Windows  #239
-    {
-      get
-      {
-        return b_ConsumerUpdateConfiguration;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ConsumerUpdateConfiguration, "ConsumerUpdateConfiguration", this);
-      }
-    }
-    /// <summary>
-    /// Gets or sets the last consumer error message.
-    /// </summary>
-    /// <value>The consumer error message.</value>
-    public string ConsumerErrorMessage
-    {
-      get
-      {
-        return b_ConsumerErrorMessage;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<string>(value, ref b_ConsumerErrorMessage, "ConsumerErrorMessage", this);
-      }
-    }
-    /// <summary>
-    /// Add the message to the <see cref="MainWindowViewModel.ConsumerLog"/>.
-    /// </summary>
-    /// <param name="message">The message to be added to the log <see cref="MainWindowViewModel.ConsumerLog"/>.</param>
-    public void Trace(string message)
-    {
-      GalaSoft.MvvmLight.Threading.DispatcherHelper.RunAsync((() => ConsumerLog.Insert(0, message)));
-    }
-    /// <summary>
-    /// Helper method that creates the consumer binding.
-    /// </summary>
-    /// <param name="variableName">Name of the variable.</param>
-    /// <param name="typeInfo">The encoding.</param>
-    /// <returns>IConsumerBinding.</returns>
-    /// <exception cref="System.ArgumentOutOfRangeException">variableName</exception>
-    public IConsumerBinding GetConsumerBinding(string variableName, UATypeInfo typeInfo)
-    {
-      IConsumerBinding _return = null;
-      if (typeInfo.ValueRank == 0 || typeInfo.ValueRank > 1)
-        throw new ArgumentOutOfRangeException(nameof(typeInfo.ValueRank));
-      switch (typeInfo.BuiltInType)
-      {
-        case BuiltInType.Boolean:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Boolean>(variableName, typeInfo);
-          else
-            _return = AddBinding<Boolean[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.SByte:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<SByte>(variableName, typeInfo);
-          else
-            _return = AddBinding<SByte[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.Byte:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Byte>(variableName, typeInfo);
-          else
-            _return = AddBinding<Byte[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.Int16:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Int16>(variableName, typeInfo);
-          else
-            _return = AddBinding<Int16[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.UInt16:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<UInt16>(variableName, typeInfo);
-          else
-            _return = AddBinding<UInt16[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.Int32:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Int32>(variableName, typeInfo);
-          else
-            _return = AddBinding<Int32[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.UInt32:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<UInt32>(variableName, typeInfo);
-          else
-            _return = AddBinding<UInt32[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.Int64:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Int64>(variableName, typeInfo);
-          else
-            _return = AddBinding<Int64[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.UInt64:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<UInt64>(variableName, typeInfo);
-          else
-            _return = AddBinding<UInt64[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.Float:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<float>(variableName, typeInfo);
-          else
-            _return = AddBinding<float[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.Double:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Double>(variableName, typeInfo);
-          else
-            _return = AddBinding<Double[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.String:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<String>(variableName, typeInfo);
-          else
-            _return = AddBinding<String[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.DateTime:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<DateTime>(variableName, typeInfo);
-          else
-            _return = AddBinding<DateTime[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.Guid:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Guid>(variableName, typeInfo);
-          else
-            _return = AddBinding<Guid[]>(variableName, typeInfo);
-          break;
-        case BuiltInType.ByteString:
-          if (typeInfo.ValueRank < 0)
-            _return = AddBinding<byte[]>(variableName, typeInfo);
-          else
-            _return = AddBinding<byte[][]>(variableName, typeInfo);
-          break;
-        case BuiltInType.Null:
-        case BuiltInType.XmlElement:
-        case BuiltInType.NodeId:
-        case BuiltInType.ExpandedNodeId:
-        case BuiltInType.StatusCode:
-        case BuiltInType.QualifiedName:
-        case BuiltInType.LocalizedText:
-        case BuiltInType.ExtensionObject:
-        case BuiltInType.DataValue:
-        case BuiltInType.Variant:
-        case BuiltInType.DiagnosticInfo:
-        case BuiltInType.Enumeration:
-        default:
-          throw new ArgumentOutOfRangeException("encoding");
-      }
-      return _return;
-    }
-    #endregion
-
-    #region Consumer ViewModel implementation
-    public ObservableCollection<string> ConsumerLog
-    {
-      get
-      {
-        return b_ConsumerLog;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<ObservableCollection<string>>(value, ref b_ConsumerLog, "ConsumerLog", this);
-      }
-    }
-    #endregion
-
-    #region ProducerViewModel
+    #region Consumer ViewModel
     /// <summary>
     /// Gets or sets the producer view model.
     /// </summary>
     /// <value>The producer view model.</value>
-    [Import(ProducerCompositionSettings.ProducerViewModelContract)]
-    public object ProducerViewModel { get; set; }
+    [Import(ConsumerCompositionSettings.ViewModelContract)]
+    public object ConsumerViewModel { get; set; }
+    #endregion
+
+    #region Producer ViewModel
+    /// <summary>
+    /// Gets or sets the producer view model.
+    /// </summary>
+    /// <value>The producer view model.</value>
+    [Import(typeof(SimulatorViewModel))]
+    public SimulatorViewModel ProducerViewModel { get; set; }
     public int BytesSent
     {
       get
@@ -384,7 +183,8 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<int>(value, ref b_BytesSent, "BytesSent", this);
+        b_BytesSent = value;
+        RaisePropertyChanged<int>("BytesSent", b_BytesSent, value);
       }
     }
     public int PackagesSent
@@ -395,87 +195,52 @@ namespace UAOOI.Networking.ReferenceApplication
       }
       set
       {
-        PropertyChanged.RaiseHandler<int>(value, ref b_PackagesSent, "PackagesSent", this);
+        b_PackagesSent = value;
+        RaisePropertyChanged<int>("PackagesSent", b_PackagesSent, value);
       }
     }
-    #endregion
-
-    #region INotifyPropertyChanged
-    public event PropertyChangedEventHandler PropertyChanged;
     #endregion
 
     #region private
-    //types
-    private class WebDocumentationCommand : ICommand
-    {
-
-      public WebDocumentationCommand(string url)
-      {
-        m_URL = url;
-      }
-      public event EventHandler CanExecuteChanged;
-      public bool CanExecute(object parameter)
-      {
-        return true;
-      }
-      public void Execute(object parameter)
-      {
-        try
-        {
-          using (Process process = Process.Start(m_URL)) { }
-        }
-        catch (Exception _ex)
-        {
-          MessageBox.Show($"An error occurs during opening the web page at: {_ex}", "Problem with the website!", MessageBoxButton.OK, MessageBoxImage.Error);
-          return;
-        }
-      }
-      private readonly string m_URL;
-
-    }
-    private class ConfigurationFolderCommand : ICommand
-    {
-      public event EventHandler CanExecuteChanged;
-      public bool CanExecute(object parameter)
-      {
-        return true;
-      }
-      public void Execute(object parameter)
-      {
-        string path = string.Empty;
-        try
-        {
-          path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-          using (Process process = Process.Start(@path)) { }
-        }
-        catch (Win32Exception)
-        {
-          MessageBox.Show($"No configuration folder exists at: {path}.", "No Log folder !", MessageBoxButton.OK, MessageBoxImage.Stop);
-          return;
-        }
-        catch (Exception _ex)
-        {
-          MessageBox.Show($"An error occurs during opening the folder {_ex}", "Problem with log folder !", MessageBoxButton.OK, MessageBoxImage.Error);
-          return;
-        }
-      }
-    }
-    //vars
-    //Consumer private part
-    private ObservableCollection<string> b_ConsumerLog;
-    private string b_ConsumerErrorMessage;
-    private ICommand b_ConsumerUpdateConfiguration;
-    private int b_ConsumerFramesReceived;
-    private int b_ConsumerBytesReceived;
-    //producer private part
     private int b_BytesSent;
     private int b_PackagesSent;
-    //methods
-    private IConsumerBinding AddBinding<type>(string variableName, UATypeInfo typeInfo)
+    private void ProcessStart(string parameter)
     {
-      ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(typeInfo);
-      _return.PropertyChanged += (x, y) => Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).ToString()}");
-      return _return;
+      try
+      {
+        using (Process process = Process.Start(parameter)) { }
+      }
+      catch (Exception _ex)
+      {
+        MessageBox.Show($"An error occurs during opening the web page at: {_ex}", "Problem with the website!", MessageBoxButton.OK, MessageBoxImage.Error);
+        return;
+      }
+    }
+    private void ProcessOpenFileInExecutingAssemblyLocation()
+    {
+      string path = string.Empty;
+      try
+      {
+        path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        using (Process process = Process.Start(@path)) { }
+      }
+      catch (Win32Exception)
+      {
+        MessageBox.Show($"No folder exists at: {path}.", "Folder error !", MessageBoxButton.OK, MessageBoxImage.Stop);
+        return;
+      }
+      catch (Exception _ex)
+      {
+        MessageBox.Show($"An error occurs during opening the file {_ex}", "Problem with the file !", MessageBoxButton.OK, MessageBoxImage.Error);
+        return;
+      }
+    }
+    private FileInfo SaveResponse(FileInfo arg)
+    {
+      FileInfo _ret = null;
+      SaveFileConfirmation _newFileInfo = new SaveFileConfirmation() { Title = "Save configuration file", FilePath = arg.FullName };
+      SaveFileInteractionEvent?.Invoke(this, new InteractionRequestedEventArgs(_newFileInfo, () => _ret = String.IsNullOrEmpty(_newFileInfo.FilePath) ? null : new FileInfo(_newFileInfo.FilePath)));
+      return _ret;
     }
     #endregion
 

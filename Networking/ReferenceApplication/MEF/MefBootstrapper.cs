@@ -1,11 +1,11 @@
 ﻿
+using CommonServiceLocator;
 using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
-using CommonServiceLocator;
 using UAOOI.Common.Infrastructure.Diagnostic;
-using UAOOI.Networking.ReferenceApplication.Diagnostic;
+using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 
 namespace UAOOI.Networking.ReferenceApplication.MEF
 {

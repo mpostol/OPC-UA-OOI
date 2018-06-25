@@ -2,9 +2,10 @@
 using System;
 using System.ComponentModel.Composition;
 using UAOOI.Configuration.Networking;
-using UAOOI.Networking.ReferenceApplication.Diagnostic;
+using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.MessageHandling;
+using UAOOI.Networking.SimulatorInteroperabilityTest;
 
 namespace UAOOI.Networking.ReferenceApplication.Producer
 {
@@ -22,7 +23,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     /// Gets or sets the view model to be used for diagnostic purpose..
     /// </summary>
     /// <value>The view model.</value>
-    [Import(ProducerCompositionSettings.ProducerViewModelContract, typeof(SimulatorViewModel))]
+    [Import(typeof(SimulatorViewModel))]
     internal SimulatorViewModel ViewModel
     {
       get; set;
@@ -31,7 +32,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     /// Sets the producer configuration factory.
     /// </summary>
     /// <value>The producer configuration factory.</value>
-    [Import(ProducerCompositionSettings.ConfigurationFactoryContract, typeof(IConfigurationFactory))]
+    [Import(SimulatorCompositionSettings.ConfigurationFactoryContract, typeof(IConfigurationFactory))]
     public IConfigurationFactory ProducerConfigurationFactory
     {
       set { ConfigurationFactory = value; }
@@ -40,7 +41,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     /// Sets the producer encoding factory.
     /// </summary>
     /// <value>The producer encoding factory.</value>
-    [Import(ProducerCompositionSettings.EncodingFactoryContract, typeof(IEncodingFactory))]
+    [Import(typeof(IEncodingFactory))]
     public IEncodingFactory ProducerEncodingFactory
     {
       set { EncodingFactory = value; }
@@ -49,7 +50,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     /// Sets the producer binding factory.
     /// </summary>
     /// <value>The producer binding factory.</value>
-    [Import(ProducerCompositionSettings.BindingFactoryContract, typeof(IBindingFactory))]
+    [Import(SimulatorCompositionSettings.BindingFactoryContract, typeof(IBindingFactory))]
     public IBindingFactory ProducerBindingFactory
     {
       set { BindingFactory = value; }
@@ -67,7 +68,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       try
       {
         ReferenceApplicationEventSource.Log.Initialization($"{nameof(OPCUAServerProducerSimulator)}.{nameof(Setup)} starting");
-        ViewModel.ChangeProducerRestartCommand(() => { ViewModel.ProducerErrorMessage = "Restarted"; });
+        ViewModel.ChangeProducerCommand(() => { ViewModel.ProducerErrorMessage = "Restarted"; });
         Start();
         ViewModel.ProducerErrorMessage = "Running";
         ReferenceApplicationEventSource.Log.Initialization($" Setup of the producer engine acomplished and starting sending data.");

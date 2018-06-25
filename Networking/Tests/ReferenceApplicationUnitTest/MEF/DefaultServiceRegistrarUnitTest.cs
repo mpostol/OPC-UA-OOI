@@ -5,10 +5,13 @@ using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Disposables;
+using CommonServiceLocator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.Networking.ReferenceApplication.Consumer;
+using UAOOI.Configuration.Networking;
+using UAOOI.Networking.DataLogger;
 using UAOOI.Networking.ReferenceApplication.MEF;
 using UAOOI.Networking.ReferenceApplication.Producer;
+using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.Diagnostics;
 using UAOOI.Networking.SemanticData.MessageHandling;
 
@@ -34,7 +37,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
           foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
             foreach (var export in _part.ExportDefinitions)
               Debug.WriteLine(string.Format("Part contract name => '{0}'", export.ContractName));
-          Assert.AreEqual<int>(12, _container.Catalog.Parts.Count());
+          Assert.AreEqual<int>(13, _container.Catalog.Parts.Count());
           MainWindow _MainWindowExportedValue = _container.GetExportedValue<MainWindow>();
           Assert.IsNotNull(_MainWindowExportedValue);
           Assert.IsNotNull(_MainWindowExportedValue.MainWindowViewModel);
@@ -50,7 +53,9 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
       AggregateCatalog _newCatalog = DefaultServiceRegistrar.RegisterServices(_catalog);
       using (CompositionContainer _container = new CompositionContainer(_newCatalog))
       {
-        Assert.AreEqual<int>(14, _container.Catalog.Parts.Count<ComposablePartDefinition>());
+        IServiceLocator _serviceLocator = new ServiceLocatorAdapter(_container);
+        ServiceLocator.SetLocatorProvider(() => _serviceLocator);
+        Assert.AreEqual<int>(15, _container.Catalog.Parts.Count<ComposablePartDefinition>());
         foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
         {
           Debug.WriteLine("New Part");
@@ -59,18 +64,19 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
           foreach (ExportDefinition _export in _part.ExportDefinitions)
             Debug.WriteLine(string.Format("Exported contracts name => '{0}'", _export.ContractName));
         }
+        //UDPMessageHandler
         IMessageHandlerFactory _messageHandlerFactory = _container.GetExportedValue<IMessageHandlerFactory>();
         Assert.IsNotNull(_messageHandlerFactory);
         INetworkingEventSourceProvider _baseEventSource = _messageHandlerFactory as INetworkingEventSourceProvider;
         Assert.IsNull(_baseEventSource);
         IEnumerable<INetworkingEventSourceProvider> _diagnosticProviders = _container.GetExportedValues<INetworkingEventSourceProvider>();
         Assert.AreEqual<int>(3, _diagnosticProviders.Count<INetworkingEventSourceProvider>());
+        // DataLogger
         using (CompositeDisposable _Components = new CompositeDisposable())
         {
           EventSourceBootstrapper _eventSourceBootstrapper = _container.GetExportedValue<EventSourceBootstrapper>();
           _Components.Add(_eventSourceBootstrapper);
-          Assert.AreEqual<int>(3, _eventSourceBootstrapper.EventSources.Count<INetworkingEventSourceProvider>());
-          ConsumerDataManagementSetup m_ConsumerConfigurationFactory = _container.GetExportedValue<ConsumerDataManagementSetup>();
+          LoggerManagementSetup m_ConsumerConfigurationFactory = _container.GetExportedValue<LoggerManagementSetup>();
           _Components.Add(m_ConsumerConfigurationFactory);
           OPCUAServerProducerSimulator m_OPCUAServerProducerSimulator = _container.GetExportedValue<OPCUAServerProducerSimulator>();
           _Components.Add(m_OPCUAServerProducerSimulator);

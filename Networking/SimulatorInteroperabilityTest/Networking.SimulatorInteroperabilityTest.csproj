@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>UAOOI.Networking.SimulatorInteroperabilityTest</RootNamespace>
+    <AssemblyName>UAOOI.Networking.SimulatorInteroperabilityTest</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+    <Version>4.0.0</Version>
+    <Company>commsvr.com</Company>
+    <Authors>MPostol</Authors>
+    <Product>UAOOI</Product>
+    <Description>Semantic Data Reactive Networking based on OPC UA Part 14 Pub/Sub library.</Description>
+    <Copyright>Copyright MPostol (c) 2018</Copyright>
+    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\UAOOI.Networking.SimulatorInteroperabilityTest.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Encoding\Networking.Encoding.csproj" />
+    <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
+  </ItemGroup>
+
+</Project>

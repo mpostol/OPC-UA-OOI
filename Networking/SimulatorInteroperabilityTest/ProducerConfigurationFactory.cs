@@ -12,7 +12,7 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
   /// <summary>
   /// Class ProducerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase"/> for the producer.
   /// </summary>
-  [Export(ProducerCompositionSettings.ConfigurationFactoryContract, typeof(IConfigurationFactory))]
+  [Export(SimulatorCompositionSettings.ConfigurationFactoryContract, typeof(IConfigurationFactory))]
   internal class ProducerConfigurationFactory : ConfigurationFactoryBase
   {
 
@@ -20,11 +20,11 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// <summary>
     /// Initializes a new instance of the <see cref="ProducerConfigurationFactory" /> class.
     /// </summary>
-    /// <param name="producerConfigurationFileName">Name of the producer configuration file.</param>
+    /// <param name="configurationFileName">Name of the producer configuration file.</param>
     [ImportingConstructor()]
-    public ProducerConfigurationFactory([ImportAttribute(ProducerCompositionSettings.ConfigurationFileNameContract)] string producerConfigurationFileName)
+    public ProducerConfigurationFactory([Import(SimulatorCompositionSettings.ConfigurationFileNameContract)] string configurationFileName)
     {
-      m_ProducerConfigurationFileName = producerConfigurationFileName;
+      m_ProducerConfigurationFileName = configurationFileName;
       Loader = LoadConfig;
     }
     #endregion

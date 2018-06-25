@@ -14,16 +14,16 @@ using System.Runtime.InteropServices;
 using System.Windows;
 
 [assembly: AssemblyTitle("UAOOI.UANetworkingReferenceApplication")]
-[assembly: AssemblyDescription("OOI Reactive Networking: UAOOI SemanticData UA-Networking Reference Application.")]
+[assembly: AssemblyDescription("Object Oriented Internet: UAOOI SemanticData UA-Networking Reference Application.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
-[assembly: AssemblyProduct("OOI Reactive Networking")]
+[assembly: AssemblyProduct("Object Oriented Internet")]
 [assembly: AssemblyCopyright("Copyright MPostol (c) 2018")]
 [assembly: AssemblyTrademark("Object Oriented Internet")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("3.0.5.*")]
-[assembly: AssemblyFileVersion("3.0.5")]
+[assembly: AssemblyVersion("4.0.0.*")]
+[assembly: AssemblyFileVersion("4.0.0")]
 [assembly: InternalsVisibleTo(
   "UAOOI.Networking.ReferenceApplication.UnitTest, PublicKey=" +
     "00240000048000009400000006020000002400005253413100040000010001005b97a0972ff6b13a" +

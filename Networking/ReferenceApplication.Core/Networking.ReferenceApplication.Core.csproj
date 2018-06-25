@@ -2,15 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>UAOOI.Networking.SimulatorInteroperabilityTest</RootNamespace>
-    <AssemblyName>UAOOI.Networking.SimulatorInteroperabilityTest</AssemblyName>
+    <AssemblyName>UAOOI.Networking.ReferenceApplication.Core</AssemblyName>
+    <RootNamespace>UAOOI.Networking.ReferenceApplication.Core</RootNamespace>
+    <Version>4.0.0</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <Version>4.0.0</Version>
-    <Company>commsvr.com</Company>
-    <Authors>MPostol</Authors>
-    <Product>UAOOI</Product>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />

@@ -1,8 +1,7 @@
-﻿
-using System;
-using System.ComponentModel;
+﻿using System;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
+using UAOOI.Networking.ReferenceApplication.Core.MvvmLight;
 
 namespace UAOOI.Networking.ReferenceApplication.Producer
 {
@@ -10,10 +9,10 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
   /// <summary>
   /// class SimulatorViewModel - defines a ViewModel part to be used by the producer to expose diagnostic information on the UI.
   /// </summary>
-  /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-  [Export(ProducerCompositionSettings.ProducerViewModelContract)]
+  /// <seealso cref="GalaSoft.MvvmLight.ViewModelBase" />
+  [Export()]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  public class SimulatorViewModel : INotifyPropertyChanged
+  public class SimulatorViewModel : ObservableObject
   {
 
     #region API
@@ -22,7 +21,7 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
     /// </summary>
     public SimulatorViewModel()
     {
-      ProducerRestartCommand = new RestartCommand(() => { });
+      ProducerRestartCommand = new DelegateCommand(() => { });
     }
     /// <summary>
     /// Gets or sets the producer error message.
@@ -36,7 +35,8 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       }
       set
       {
-        PropertyChanged.RaiseHandler<string>(value, ref b_ProducerErrorMessage, "ProducerErrorMessage", this);
+        b_ProducerErrorMessage = value;
+        RaisePropertyChanged<string>("ProducerErrorMessage", b_ProducerErrorMessage, value);
       }
     }
     /// <summary>
@@ -51,41 +51,17 @@ namespace UAOOI.Networking.ReferenceApplication.Producer
       }
       set
       {
-        PropertyChanged.RaiseHandler<ICommand>(value, ref b_ProducerRestartCommand, "ProducerRestartCommand", this);
+        b_ProducerRestartCommand = value;
+        RaisePropertyChanged<ICommand>("ProducerRestartCommand", b_ProducerRestartCommand, value);
       }
     }
-
-    internal void ChangeProducerRestartCommand(Action action)
+    internal void ChangeProducerCommand(Action action)
     {
-      ProducerRestartCommand = new RestartCommand(action);
+      ProducerRestartCommand = new DelegateCommand(action);
     }
-    #endregion
-
-    #region INotifyPropertyChanged
-    /// <summary>
-    /// Occurs when a property value changes.
-    /// </summary>
-    public event PropertyChangedEventHandler PropertyChanged;
     #endregion
 
     #region private
-    private class RestartCommand : ICommand
-    {
-      public RestartCommand(Action restart)
-      {
-        m_restart = restart;
-      }
-      public event EventHandler CanExecuteChanged;
-      public bool CanExecute(object parameter)
-      {
-        return true;
-      }
-      public void Execute(object parameter)
-      {
-        m_restart();
-      }
-      private Action m_restart;
-    }
     private string b_ProducerErrorMessage;
     private ICommand b_ProducerRestartCommand;
     #endregion

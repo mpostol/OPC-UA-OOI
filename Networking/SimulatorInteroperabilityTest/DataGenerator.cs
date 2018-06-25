@@ -11,21 +11,20 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
 {
 
   /// <summary>
-  /// Class CustomNodeManager - it is simulator producing data to be sent over the wire using message centric communication provided 
+  /// Class DataGenerator - it is simulator producing data to be sent over the wire using message centric communication provided 
   /// by the UAOOI.Networking.SemanticData framework.
   /// 
-  /// The data i generated according to the requirements defined by OPCF to proceed interoperability testing.
+  /// The data is generated according to the principles defined by the OPCF to proceed interoperability testing.
   /// </summary>
-  [Export(ProducerCompositionSettings.BindingFactoryContract, typeof(IBindingFactory))]
-  [PartCreationPolicy(CreationPolicy.NonShared)]
+  [Export(SimulatorCompositionSettings.BindingFactoryContract, typeof(IBindingFactory))]
+  [PartCreationPolicy(CreationPolicy.Shared)]
   internal class DataGenerator : IBindingFactory, IDisposable
   {
 
     #region ImportingConstructor
     /// <summary>
-    /// Initializes a new instance of the <see cref="DataGenerator"/> class that generates the data to be used for interoperability testing.
+    /// Initializes a new instance of the <see cref="DataGenerator" /> class that generates the data to be used for interoperability testing.
     /// </summary>
-    /// <param name="repositoryGroup">The repository group name.</param>
     public DataGenerator()
     {
       m_Timer = new Timer(TimerCallback, null, 1000, 1000);
@@ -36,7 +35,7 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// <summary>
     /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
     /// </summary>
-    /// <remarks>It is called by the <see cref="CompositionContainer"/>.</remarks>
+    /// <remarks>It is called by the <see cref="System.ComponentModel.Composition.Hosting.CompositionContainer"/>.</remarks>
     public void Dispose()
     {
       if (m_Timer == null)
@@ -52,9 +51,9 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// </summary>
     /// <param name="repositoryGroup">It is the name of a repository group profiling the configuration behavior, e.g. encoders selection.
     /// The configuration of the repositories belong to the same group are handled according to the same profile.</param>
-    /// <param name="variableName">The name of a variable that is the ultimate destination of the values recovered from messages. Must be unique in the context of the repositories group.
-    /// is updated periodically by a data produced - user of the <see cref="IBinding" /> object.</param>
-    /// <param name="encoding">The encoding.</param>
+    /// <param name="processValueName">The name of a variable that is the ultimate destination of the values recovered from messages.
+    /// Must be unique in the context of the group named by <paramref name="repositoryGroup" />.</param>
+    /// <param name="fieldTypeInfo">The field metadata definition represented as an object of <see cref="T:UAOOI.Configuration.Networking.Serialization.UATypeInfo" />.</param>
     /// <returns>Returns an object implementing the <see cref="IBinding" /> interface that can be used to update selected variable on the factory side.</returns>
     /// <exception cref="System.NotImplementedException"></exception>
     IConsumerBinding IBindingFactory.GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
@@ -65,15 +64,15 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// Gets the producer binding.
     /// </summary>
     /// <param name="repositoryGroup">The repository group.</param>
-    /// <param name="variableName">Name of the variable.</param>
-    /// <param name="encoding">The encoding.</param>
+    /// <param name="processValueName">The name of a variable that is the source of the values forwarded by a message over the network.
+    /// Must be unique in the context of the group named by <paramref name="repositoryGroup" /></param>
+    /// <param name="fieldTypeInfo">The <see cref="T:UAOOI.Configuration.Networking.Serialization.BuiltInType" />of the message field encoding.</param>
     /// <returns>IProducerBinding.</returns>
     /// <exception cref="System.ArgumentNullException">repositoryGroup</exception>
-    /// <exception cref="System.ArgumentOutOfRangeException">variableName</exception>
-    /// <exception cref="System.NotImplementedException"></exception>
+    /// <exception cref="System.ArgumentOutOfRangeException">encoding</exception>
     IProducerBinding IBindingFactory.GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
-      if (repositoryGroup != Settings.ProducerConfigurationRepositoryGroup)
+      if (repositoryGroup != UAOOI.Networking.Encoding.EncodingCompositionSettings.ConfigurationRepositoryGroup)
         throw new ArgumentNullException("repositoryGroup");
       string _name = $"{repositoryGroup}.{ processValueName}";
       IProducerBinding _return = null;
@@ -148,7 +147,7 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
 
     #region private
     //vars
-   private Timer m_Timer;
+    private Timer m_Timer;
     private event EventHandler m_TimeEvent;
     private Dictionary<string, IProducerBinding> m_NodesDictionary = new Dictionary<string, IProducerBinding>();
     //methods

@@ -9,7 +9,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks;
-using UAOOI.Networking.ReferenceApplication.Diagnostic;
+using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData.Diagnostics;
 
 namespace UAOOI.Networking.ReferenceApplication.MEF

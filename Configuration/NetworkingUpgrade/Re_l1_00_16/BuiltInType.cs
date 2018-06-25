@@ -113,6 +113,9 @@ namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
     /// A diagnostic information associated with a result code.
     /// </summary>
     DiagnosticInfo = 25,
+    /// <summary>
+    /// The enumeration
+    /// </summary>
     Enumeration = 26,
   }
 

@@ -3,8 +3,9 @@ using System.ComponentModel.Composition;
 using System.Diagnostics.Tracing;
 using UAOOI.Networking.SemanticData.Diagnostics;
 
-namespace UAOOI.Networking.ReferenceApplication.Diagnostic
+namespace UAOOI.Networking.ReferenceApplication.Core.Diagnostic
 {
+
   /// <summary>
   /// Class NetworkingEventSourceProvider - gets access to an instance of <see cref="EventSource"/> to be registered by the logging infrastructure.
   /// </summary>

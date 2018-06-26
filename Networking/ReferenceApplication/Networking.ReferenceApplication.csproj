@@ -117,7 +117,6 @@
     <Compile Include="Controls\ConfigurationEditorOpenCommand.cs" />
     <Compile Include="Controls\OpenFileCommand.cs" />
     <Compile Include="MEF\BootstrapperBase.cs" />
-    <Compile Include="MEF\DefaultsCatalog.cs" />
     <Compile Include="MEF\DefaultServiceRegistrar.cs" />
     <Compile Include="MEF\EventSourceBootstrapper.cs" />
     <Compile Include="MEF\ExceptionExtensions.cs" />
@@ -256,9 +255,7 @@
     <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
     <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Producer\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

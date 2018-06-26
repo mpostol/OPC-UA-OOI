@@ -1,19 +1,17 @@
 ﻿
+using CommonServiceLocator;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Disposables;
-using CommonServiceLocator;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.Configuration.Networking;
 using UAOOI.Networking.DataLogger;
 using UAOOI.Networking.ReferenceApplication.MEF;
-using UAOOI.Networking.ReferenceApplication.Producer;
-using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.Diagnostics;
 using UAOOI.Networking.SemanticData.MessageHandling;
+using UAOOI.Networking.SimulatorInteroperabilityTest;
 
 namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
 {
@@ -76,10 +74,18 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         {
           EventSourceBootstrapper _eventSourceBootstrapper = _container.GetExportedValue<EventSourceBootstrapper>();
           _Components.Add(_eventSourceBootstrapper);
-          LoggerManagementSetup m_ConsumerConfigurationFactory = _container.GetExportedValue<LoggerManagementSetup>();
-          _Components.Add(m_ConsumerConfigurationFactory);
-          OPCUAServerProducerSimulator m_OPCUAServerProducerSimulator = _container.GetExportedValue<OPCUAServerProducerSimulator>();
-          _Components.Add(m_OPCUAServerProducerSimulator);
+          LoggerManagementSetup _logger = _container.GetExportedValue<LoggerManagementSetup>();
+          Assert.IsNotNull(_logger.BindingFactory);
+          Assert.IsNotNull(_logger.ConfigurationFactory);
+          Assert.IsNotNull(_logger.EncodingFactory);
+          Assert.IsNotNull(_logger.MessageHandlerFactory);
+          _Components.Add(_logger);
+          SimulatorDataManagementSetup _simulator = _container.GetExportedValue<SimulatorDataManagementSetup>();
+          Assert.IsNotNull(_simulator.BindingFactory);
+          Assert.IsNotNull(_simulator.ConfigurationFactory);
+          Assert.IsNotNull(_simulator.EncodingFactory);
+          Assert.IsNotNull(_simulator.MessageHandlerFactory);
+          _Components.Add(_simulator);
           Assert.AreEqual<int>(3, _Components.Count);
         }
       }

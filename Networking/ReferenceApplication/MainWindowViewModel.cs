@@ -9,8 +9,8 @@ using System.Windows.Input;
 using UAOOI.Networking.DataLogger;
 using UAOOI.Networking.ReferenceApplication.Controls;
 using UAOOI.Networking.ReferenceApplication.Core.MvvmLight;
-using UAOOI.Networking.ReferenceApplication.Producer;
 using UAOOI.Networking.ReferenceApplication.Properties;
+using UAOOI.Networking.SimulatorInteroperabilityTest;
 
 namespace UAOOI.Networking.ReferenceApplication
 {

@@ -1,15 +1,15 @@
-﻿using System;
+﻿
+using System;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
 using UAOOI.Networking.ReferenceApplication.Core.MvvmLight;
 
-namespace UAOOI.Networking.ReferenceApplication.Producer
+namespace UAOOI.Networking.SimulatorInteroperabilityTest
 {
 
   /// <summary>
   /// class SimulatorViewModel - defines a ViewModel part to be used by the producer to expose diagnostic information on the UI.
   /// </summary>
-  /// <seealso cref="GalaSoft.MvvmLight.ViewModelBase" />
   [Export()]
   [PartCreationPolicy(CreationPolicy.Shared)]
   public class SimulatorViewModel : ObservableObject

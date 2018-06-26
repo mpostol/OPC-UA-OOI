@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Threading;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
@@ -16,8 +15,6 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
   /// 
   /// The data is generated according to the principles defined by the OPCF to proceed interoperability testing.
   /// </summary>
-  [Export(SimulatorCompositionSettings.BindingFactoryContract, typeof(IBindingFactory))]
-  [PartCreationPolicy(CreationPolicy.Shared)]
   internal class DataGenerator : IBindingFactory, IDisposable
   {
 
@@ -72,7 +69,7 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// <exception cref="System.ArgumentOutOfRangeException">encoding</exception>
     IProducerBinding IBindingFactory.GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
-      if (repositoryGroup != UAOOI.Networking.Encoding.EncodingCompositionSettings.ConfigurationRepositoryGroup)
+      if (repositoryGroup != Encoding.EncodingCompositionSettings.ConfigurationRepositoryGroup)
         throw new ArgumentNullException("repositoryGroup");
       string _name = $"{repositoryGroup}.{ processValueName}";
       IProducerBinding _return = null;

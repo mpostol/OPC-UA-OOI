@@ -153,7 +153,6 @@ namespace UAOOI.Networking.ReferenceApplication.Core.MvvmLight
       if (m_PropertiesToObserve.Contains(e.PropertyName))
         RaiseCanExecuteChanged();
     }
-    private bool m_isActive = false;
     private SynchronizationContext m_SynchronizationContext = null;
     readonly HashSet<string> m_PropertiesToObserve = new HashSet<string>();
     private INotifyPropertyChanged m_NotifyPropertyChangedInstance = null;

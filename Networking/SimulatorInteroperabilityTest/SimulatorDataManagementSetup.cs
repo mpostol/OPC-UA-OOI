@@ -2,6 +2,7 @@
 using CommonServiceLocator;
 using System;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.MessageHandling;
@@ -63,12 +64,14 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
     protected override void Dispose(bool disposing)
     {
+
+      m_onDispose(disposing);
       base.Dispose(disposing);
       if (disposing)
         _DataGenerator.Dispose();
     }
-    #endregion    
-    
+    #endregion
+
     #region private
     /// <summary>
     /// Gets or sets the view model to be used for diagnostic purpose..
@@ -76,6 +79,15 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// <value>The view model.</value>
     private SimulatorViewModel m_ViewModel;
     private DataGenerator _DataGenerator = null;
+    private Action<bool> m_onDispose = disposing => { };
+    #endregion
+
+    #region Unit tests instrumentation
+    [Conditional("DEBUG")]
+    internal void DisposeCheck(Action<bool> onDispose)
+    {
+      m_onDispose = onDispose;
+    }
     #endregion
 
   }

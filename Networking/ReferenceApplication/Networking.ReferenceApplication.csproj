@@ -192,9 +192,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ConfigurationDataProducer.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="ReadMe.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

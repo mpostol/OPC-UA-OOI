@@ -24,6 +24,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Diagnostic\**" />
+    <EmbeddedResource Remove="Diagnostic\**" />
+    <None Remove="Diagnostic\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ConfigurationDataConsumer.xml" />
   </ItemGroup>
 
@@ -42,10 +48,6 @@
     <ProjectReference Include="..\Encoding\Networking.Encoding.csproj" />
     <ProjectReference Include="..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj" />
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Diagnostic\" />
   </ItemGroup>
 
 </Project>

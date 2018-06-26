@@ -25,10 +25,6 @@ namespace UAOOI.Networking.DataLogger
     }
     #endregion
 
-    #region API
-    internal ConsumerViewModel ViewModelBindingFactory { get; set; }
-    #endregion
-
     #region IBindingFactory
     /// <summary>
     /// Gets the binding captured by an instance of the <see cref="UAOOI.Networking.SemanticData.DataRepository.IConsumerBinding" /> type used by the consumer to save the data in the data repository.
@@ -64,7 +60,6 @@ namespace UAOOI.Networking.DataLogger
 
     #region private
     private ConsumerViewModel m_ViewModel;
-
     /// <summary>
     /// Helper method that creates the consumer binding.
     /// </summary>

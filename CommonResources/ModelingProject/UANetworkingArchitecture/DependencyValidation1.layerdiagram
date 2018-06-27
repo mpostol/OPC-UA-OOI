@@ -22,33 +22,6 @@
         </reference>
       </references>
     </layer>
-    <layer Id="1812b591-6d79-435e-85b1-ed4e269ac83a" name="UAOOI.Networking.DataLogger.dll">
-      <dependencyToLayers>
-        <dependencyFromLayerToLayer Id="246aff83-a7eb-4248-aadf-d4f86485da9f" direction="Forward">
-          <layerMoniker Id="302e3778-4673-49f7-9ec5-95c72215c4be" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="b9fdd190-6dc0-4d20-b511-1f49ee0da7c8" direction="Forward">
-          <layerMoniker Id="9a01fd84-96cf-4318-920d-7b656a6b08a2" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="07f9746f-c01d-4964-9e9d-98ba3544fd5d" direction="Forward">
-          <layerMoniker Id="0cb1fd98-3287-44cb-b31a-87f180db4e43" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="aebee18e-312f-4ab0-b528-59837a1ee023" direction="Forward">
-          <layerMoniker Id="94c1a319-6740-4f11-a1be-a403780ab69d" />
-        </dependencyFromLayerToLayer>
-      </dependencyToLayers>
-      <references>
-        <reference Id="35b59521-06bf-44eb-81ff-17aea609daf7" name="UAOOI.Networking.DataLogger.dll">
-          <ArtifactNode Label="UAOOI.Networking.DataLogger.dll" Category="CodeSchema_Assembly" Id="(Assembly=../../../Networking/DataLogger/bin/Debug/netstandard2.0/UAOOI.Networking.DataLogger.dll)">
-            <Category Ref="FileSystem.Category.FileOfType.dll" />
-          </ArtifactNode>
-          <ExpandedNode Id="(Assembly=UAOOI.Networking.DataLogger)" Label="UAOOI.Networking.DataLogger.dll" Category="CodeSchema_Assembly">
-            <Category Ref="FileSystem.Category.FileOfType.dll" />
-            <LinkCategory Ref="Represents" />
-          </ExpandedNode>
-        </reference>
-      </references>
-    </layer>
     <layer Id="dd74f0a0-48e8-4f1f-82a5-b80779f61049" name="UAOOI.Configuration.DataBindings.dll">
       <dependencyToLayers>
         <dependencyFromLayerToLayer Id="73539b35-b01b-4aa1-9b77-61f504c67f44" direction="Forward">
@@ -62,71 +35,6 @@
           </ArtifactNode>
           <ExpandedNode Id="(Assembly=UAOOI.Configuration.DataBindings)" Label="UAOOI.Configuration.DataBindings.dll" Category="CodeSchema_Assembly">
             <Category Ref="FileSystem.Category.FileOfType.dll" />
-            <LinkCategory Ref="Represents" />
-          </ExpandedNode>
-        </reference>
-      </references>
-    </layer>
-    <layer Id="221341a4-eac1-4d5d-adf4-2ee060573deb" name="UAOOI.Networking.SimulatorInteroperabilityTest.dll">
-      <dependencyToLayers>
-        <dependencyFromLayerToLayer Id="e89b361f-5dd1-4ab8-9437-cb2b4200f994" direction="Forward">
-          <layerMoniker Id="302e3778-4673-49f7-9ec5-95c72215c4be" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="3c2f097f-73e8-4b42-88e9-773d07a505b5" direction="Forward">
-          <layerMoniker Id="9a01fd84-96cf-4318-920d-7b656a6b08a2" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="7f82fdef-c791-4848-b696-3d762617805c" direction="Forward">
-          <layerMoniker Id="0cb1fd98-3287-44cb-b31a-87f180db4e43" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="999026e8-e9bd-457a-b72c-da0d09194661" direction="Forward">
-          <layerMoniker Id="94c1a319-6740-4f11-a1be-a403780ab69d" />
-        </dependencyFromLayerToLayer>
-      </dependencyToLayers>
-      <references>
-        <reference Id="68e9bf7c-0246-4a83-94d9-b71e984c9505" name="UAOOI.Networking.SimulatorInteroperabilityTest.dll">
-          <ArtifactNode Label="UAOOI.Networking.SimulatorInteroperabilityTest.dll" Category="CodeSchema_Assembly" Id="(Assembly=../../../Networking/SimulatorInteroperabilityTest/bin/Debug/netstandard2.0/UAOOI.Networking.SimulatorInteroperabilityTest.dll)">
-            <Category Ref="FileSystem.Category.FileOfType.dll" />
-          </ArtifactNode>
-          <ExpandedNode Id="(Assembly=UAOOI.Networking.SimulatorInteroperabilityTest)" Label="UAOOI.Networking.SimulatorInteroperabilityTest.dll" Category="CodeSchema_Assembly">
-            <Category Ref="FileSystem.Category.FileOfType.dll" />
-            <LinkCategory Ref="Represents" />
-          </ExpandedNode>
-        </reference>
-      </references>
-    </layer>
-    <layer Id="ab8feee9-af85-4cbf-b6dd-55fe23d74dd3" name="UAOOI.Networking.ReferenceApplication.exe">
-      <dependencyToLayers>
-        <dependencyFromLayerToLayer Id="682143af-bb1d-47dc-8c6f-1f6902498fb6" direction="Forward">
-          <layerMoniker Id="302e3778-4673-49f7-9ec5-95c72215c4be" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="036a2b93-00bd-4db7-a7cd-1d51381a5b9b" direction="Forward">
-          <layerMoniker Id="1812b591-6d79-435e-85b1-ed4e269ac83a" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="e66298b8-3998-4f3c-a711-14c9986b4f76" direction="Forward">
-          <layerMoniker Id="dd74f0a0-48e8-4f1f-82a5-b80779f61049" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="263c0c4e-b0c8-4055-a251-a6379763caba" direction="Forward">
-          <layerMoniker Id="221341a4-eac1-4d5d-adf4-2ee060573deb" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="c3835af0-8d16-41e0-a9d6-c771604f53d4" direction="Forward">
-          <layerMoniker Id="9a01fd84-96cf-4318-920d-7b656a6b08a2" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="1bcacdb8-8978-403d-b185-d6f495891ed0" direction="Forward">
-          <layerMoniker Id="0cb1fd98-3287-44cb-b31a-87f180db4e43" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="069b72b2-ddcc-4b0f-8d95-f11382e3368a" direction="Forward">
-          <layerMoniker Id="94c1a319-6740-4f11-a1be-a403780ab69d" />
-        </dependencyFromLayerToLayer>
-      </dependencyToLayers>
-      <references>
-        <reference Id="fd3d13bb-4d1d-4006-8a19-183ee67f8c58" name="UAOOI.Networking.ReferenceApplication.exe">
-          <ArtifactNode Label="UAOOI.Networking.ReferenceApplication.exe" Category="CodeSchema_Assembly" Id="(Assembly=../../../Networking/ReferenceApplication/bin/Debug/UAOOI.Networking.ReferenceApplication.exe)">
-            <Category Ref="CodeMap_WpfProject" />
-            <Category Ref="FileSystem.Category.FileOfType.exe" />
-          </ArtifactNode>
-          <ExpandedNode Id="(Assembly=UAOOI.Networking.ReferenceApplication)" Label="UAOOI.Networking.ReferenceApplication.exe" Category="CodeSchema_Assembly">
-            <Category Ref="CodeMap_WpfProject" />
-            <Category Ref="FileSystem.Category.FileOfType.exe" />
             <LinkCategory Ref="Represents" />
           </ExpandedNode>
         </reference>
@@ -183,6 +91,105 @@
           </ExpandedNode>
         </reference>
       </references>
+    </layer>
+    <layer Id="49589dc5-de20-43b6-8136-bc26830c9fbb" name="Application View">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="0cd48ba8-f377-47f6-9391-cfdb906798ab" direction="Forward">
+          <layerMoniker Id="391d23f3-e580-43e6-8a18-090aa6940c3c" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="ab8feee9-af85-4cbf-b6dd-55fe23d74dd3" name="UAOOI.Networking.ReferenceApplication.exe">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="682143af-bb1d-47dc-8c6f-1f6902498fb6" direction="Forward">
+              <layerMoniker Id="302e3778-4673-49f7-9ec5-95c72215c4be" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="e66298b8-3998-4f3c-a711-14c9986b4f76" direction="Forward">
+              <layerMoniker Id="dd74f0a0-48e8-4f1f-82a5-b80779f61049" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="c3835af0-8d16-41e0-a9d6-c771604f53d4" direction="Forward">
+              <layerMoniker Id="9a01fd84-96cf-4318-920d-7b656a6b08a2" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="1bcacdb8-8978-403d-b185-d6f495891ed0" direction="Forward">
+              <layerMoniker Id="0cb1fd98-3287-44cb-b31a-87f180db4e43" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="069b72b2-ddcc-4b0f-8d95-f11382e3368a" direction="Forward">
+              <layerMoniker Id="94c1a319-6740-4f11-a1be-a403780ab69d" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="fd3d13bb-4d1d-4006-8a19-183ee67f8c58" name="UAOOI.Networking.ReferenceApplication.exe">
+              <ArtifactNode Label="UAOOI.Networking.ReferenceApplication.exe" Category="CodeSchema_Assembly" Id="(Assembly=../../../Networking/ReferenceApplication/bin/Debug/UAOOI.Networking.ReferenceApplication.exe)">
+                <Category Ref="CodeMap_WpfProject" />
+                <Category Ref="FileSystem.Category.FileOfType.exe" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=UAOOI.Networking.ReferenceApplication)" Label="UAOOI.Networking.ReferenceApplication.exe" Category="CodeSchema_Assembly">
+                <Category Ref="CodeMap_WpfProject" />
+                <Category Ref="FileSystem.Category.FileOfType.exe" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="391d23f3-e580-43e6-8a18-090aa6940c3c" name="Application Functional Components">
+      <childLayers>
+        <layer Id="1812b591-6d79-435e-85b1-ed4e269ac83a" name="UAOOI.Networking.DataLogger.dll">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="246aff83-a7eb-4248-aadf-d4f86485da9f" direction="Forward">
+              <layerMoniker Id="302e3778-4673-49f7-9ec5-95c72215c4be" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="b9fdd190-6dc0-4d20-b511-1f49ee0da7c8" direction="Forward">
+              <layerMoniker Id="9a01fd84-96cf-4318-920d-7b656a6b08a2" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="07f9746f-c01d-4964-9e9d-98ba3544fd5d" direction="Forward">
+              <layerMoniker Id="0cb1fd98-3287-44cb-b31a-87f180db4e43" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="aebee18e-312f-4ab0-b528-59837a1ee023" direction="Forward">
+              <layerMoniker Id="94c1a319-6740-4f11-a1be-a403780ab69d" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="35b59521-06bf-44eb-81ff-17aea609daf7" name="UAOOI.Networking.DataLogger.dll">
+              <ArtifactNode Label="UAOOI.Networking.DataLogger.dll" Category="CodeSchema_Assembly" Id="(Assembly=../../../Networking/DataLogger/bin/Debug/netstandard2.0/UAOOI.Networking.DataLogger.dll)">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=UAOOI.Networking.DataLogger)" Label="UAOOI.Networking.DataLogger.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="221341a4-eac1-4d5d-adf4-2ee060573deb" name="UAOOI.Networking.SimulatorInteroperabilityTest.dll">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="e89b361f-5dd1-4ab8-9437-cb2b4200f994" direction="Forward">
+              <layerMoniker Id="302e3778-4673-49f7-9ec5-95c72215c4be" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="3c2f097f-73e8-4b42-88e9-773d07a505b5" direction="Forward">
+              <layerMoniker Id="9a01fd84-96cf-4318-920d-7b656a6b08a2" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="7f82fdef-c791-4848-b696-3d762617805c" direction="Forward">
+              <layerMoniker Id="0cb1fd98-3287-44cb-b31a-87f180db4e43" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="999026e8-e9bd-457a-b72c-da0d09194661" direction="Forward">
+              <layerMoniker Id="94c1a319-6740-4f11-a1be-a403780ab69d" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="68e9bf7c-0246-4a83-94d9-b71e984c9505" name="UAOOI.Networking.SimulatorInteroperabilityTest.dll">
+              <ArtifactNode Label="UAOOI.Networking.SimulatorInteroperabilityTest.dll" Category="CodeSchema_Assembly" Id="(Assembly=../../../Networking/SimulatorInteroperabilityTest/bin/Debug/netstandard2.0/UAOOI.Networking.SimulatorInteroperabilityTest.dll)">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+              </ArtifactNode>
+              <ExpandedNode Id="(Assembly=UAOOI.Networking.SimulatorInteroperabilityTest)" Label="UAOOI.Networking.SimulatorInteroperabilityTest.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
     </layer>
   </layers>
 </layerModel>

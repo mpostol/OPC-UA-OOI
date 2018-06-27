@@ -7,6 +7,14 @@
     <Version>4.0.0</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+    <Product>Object Oriented Internet</Product>
+    <Copyright>Copyright MPostol (c) 2018</Copyright>
+    <Company>commsvr.com</Company>
+    <Authors>MPostol</Authors>
+    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
+    <RepositoryType>OOI Reference Application, Object Oriented Internet, OPC UA, Reactive Networking.</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>

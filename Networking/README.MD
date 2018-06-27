@@ -8,14 +8,14 @@ This folder contains library empowering the Industrial Internet of Things \(IIOT
 
 Main goals of this document are:
 
-* description of the IoT and the main difference between OPC UA client-server model and Object Oriented Internet Reactive Networking implemented in this folder. 
+* description of the IoT and the main difference between OPC UA client-server model and Object Oriented Internet Reactive Networking. 
 * description how this project addresses the IoT paradigms,
-* instruction hot to build commercial products based on this stuff
-* instruction how to integrate the proposed solution with other existing on the marked, i.e. AMQP, MQTT, etc. 
+* instruction on how to build commercial products,
+* instruction on how to integrate the proposed solution with other existing on the marked, i.e. AMQP, MQTT, etc. 
 
 ## Projects
 
-This folder contains the projects in concern.
+This [folder](https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking) contains the projects in concern.
 
 ## IoT paradigms description
 
@@ -26,9 +26,9 @@ The starting point for this description is available at:
 
 * description of **IoT/IIoT** paradigms.
 * Object Oriented Internet Networking is empowering the Industrial Internet of Things \(IIOT\) and Industries 4.0.
-* The role of MQTT and AMQP- How to get them together in a consistent meaningful way.
+* The role of MQTT and AMQP - How to get them together in a consistent meaningful way.
 
 ## How to get started
 
-In folder [OPC-UA-OOI/Networking/ReferenceApplication/Release.bin/](https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/ReferenceApplication/Release.bin) I have added binary release of the `ReferenceApplication` containing ready to use binaries. Unzip and run `.exe` file to get started. The NuGet package will be created after getting more feedback from MQTT and AMQP testing, which are in progress.
+The latest [release](https://github.com/mpostol/OPC-UA-OOI/releases) contains the ready to use binaries of the `ReferenceApplication`. Unzip it and run `.exe` file to get started. 
 

@@ -16,7 +16,7 @@
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
+    <PackageTags>Object Oriented Internet, OPC UA, Reactive Networking.</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -11,9 +11,9 @@
 
 ## Internet of Things (IOT) Archetype
 
-### Communication
+### Reactive Communication
 
-* [Internet of Things (IOT) Communication](Networking/README.MD)
+* [Internet of Things \(IOT\) Communication](Networking/README.MD)
 * [UA Semantic Data Message Centric Communication](SemanticData/README.MessageCentricCommunication.md)
 * [Networking of SemanticData Library](Networking/SemanticData/README.MD)
 * [OPC Unified Architecture Part 14: PubSub Main Technology Features](Networking/SemanticData/README.PubSubMTF.md)
@@ -21,6 +21,7 @@
 * [Underlying Transport over MQTT](Networking/SemanticData/README_MQTTMapping.md)
 * [Underlying Transport over AMQP](Networking/SemanticData/README_AMQPMapping.md)
 * [Data management and binding](Networking/SemanticData/READMEDataDiscoveryAndBinding.md)
+* [Data Encoding Library](Networking/Encoding/README.MD)
 
 ### Configuration
 
@@ -30,7 +31,10 @@
 ### Deployment 
 
 * [Getting Started Tutorial](Networking/SemanticData/READMEGettingStartedTutorial.md)
-* [Reference Application](Networking/ReferenceApplication/README.MD)
+* [Reference Application Graphical User Interface](Networking/ReferenceApplication/README.MD)
+* [Reference Application Consumer - Data Logger](Networking/DataLogger/README.MD)
+* [Reference Application Producer - Interoperability Test Data Generator](Networking/SimulatorInteroperabilityTest/README.MD)
+* [Reference Application Utitiees](Networking/ReferenceApplication.Core/README.MD)
 
 ## Data Discovery
 

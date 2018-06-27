@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is aimed on implementation of a [Part 14 PubSub 1.04](https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/) using the concept described in the [OPC UA Data Processing Outside the Server](../../SemanticData/README.MD#opc-ua-data-processing-outside-the-server)
+This project is aimed on implementation of a [Part 14 PubSub 1.04](https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/) using the concept described in the [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD)
 
 For more in-depth information about creating UA Applications exchanging data over the network, see [Getting Started Tutorial](./READMEGettingStartedTutorial.md#getting-started-tutorial)
 

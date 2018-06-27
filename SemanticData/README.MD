@@ -1,5 +1,5 @@
 
-# OPC UA Data Processing Outside the Server
+# OOI Semantic Data Processing Architecture
 
 ## Concept
 

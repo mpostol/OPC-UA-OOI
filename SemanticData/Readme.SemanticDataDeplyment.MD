@@ -1,7 +1,7 @@
 
 # Content Description
 
-The `SemanticData` folder contains projects related to support the [OPC UA Data Processing Outside of the Server](./README.MD).  Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
+The [Networking](https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/SemanticData) folder contains projects related to support the [OOI Semantic Data Processing Architecture](./README.MD).  Processing of the OPC UA Data Outside of the Server context is based on the OPC **UA Semantic Data** concept.
 
 The **Tools** section describes projects with output type console application. These deliverables may be used as utilities or as examples illustrating how to use the libraries.
 The **Libraries** offer functionally supporting creation and validation of the OPC **UA Semantic Data**.

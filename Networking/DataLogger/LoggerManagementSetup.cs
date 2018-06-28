@@ -2,6 +2,7 @@
 using CommonServiceLocator;
 using System;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.MessageHandling;
@@ -56,6 +57,11 @@ namespace UAOOI.Networking.DataLogger
         Dispose();
       }
     }
+    /// <summary>
+    /// Gets a value indicating whether this <see cref="LoggerManagementSetup"/> is disposed.
+    /// </summary>
+    /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
+    public bool Disposed { get; private set; } = false;
     #endregion
 
     #region IDisposable
@@ -66,21 +72,32 @@ namespace UAOOI.Networking.DataLogger
     protected override void Dispose(bool disposing)
     {
       ReferenceApplicationEventSource.Log.EnteringDispose(nameof(LoggerManagementSetup), disposing);
+      m_onDispose(disposing);
       base.Dispose(disposing);
-      if (!disposing || m_Disposed)
+      if (!disposing || Disposed)
         return;
+      Disposed = true;
     }
     #endregion
 
     #region private
-    private bool m_Disposed = false;
     private ConsumerViewModel m_ViewModel;
+    private Action<bool> m_onDispose = disposing => { };
+
     private void Restart()
     {
       m_ViewModel.Trace("Entering Restart");
       Start();
     }
     #endregion
+    #region Unit tests instrumentation
+    [Conditional("DEBUG")]
+    internal void DisposeCheck(Action<bool> onDispose)
+    {
+      m_onDispose = onDispose;
+    }
+    #endregion
+
 
   }
 }

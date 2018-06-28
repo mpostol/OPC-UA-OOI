@@ -117,14 +117,11 @@
     <Compile Include="Controls\ConfigurationEditorOpenCommand.cs" />
     <Compile Include="Controls\OpenFileCommand.cs" />
     <Compile Include="MEF\BootstrapperBase.cs" />
-    <Compile Include="MEF\DefaultsCatalog.cs" />
     <Compile Include="MEF\DefaultServiceRegistrar.cs" />
     <Compile Include="MEF\EventSourceBootstrapper.cs" />
     <Compile Include="MEF\ExceptionExtensions.cs" />
     <Compile Include="MEF\MefBootstrapper.cs" />
     <Compile Include="MEF\ServiceLocatorAdapter.cs" />
-    <Compile Include="Producer\ProducerCompositionSettings.cs" />
-    <Compile Include="Producer\SimulatorViewModell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -146,7 +143,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="Producer\OPCUAServerProducerSimulator.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -195,9 +191,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ConfigurationDataProducer.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="ReadMe.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

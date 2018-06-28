@@ -16,12 +16,18 @@
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
+    <PackageTags>Object Oriented Internet, OPC UA, Reactive Networking.</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard2.0\UAOOI.Networking.DataLogger.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Diagnostic\**" />
+    <EmbeddedResource Remove="Diagnostic\**" />
+    <None Remove="Diagnostic\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="ConfigurationDataConsumer.xml" />
@@ -42,10 +48,6 @@
     <ProjectReference Include="..\Encoding\Networking.Encoding.csproj" />
     <ProjectReference Include="..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj" />
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Diagnostic\" />
   </ItemGroup>
 
 </Project>

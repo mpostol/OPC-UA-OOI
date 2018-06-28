@@ -201,10 +201,10 @@ namespace UAOOI.Networking.ReferenceApplication.Core.MvvmLight
   }
   internal static class Resources
   {
-    internal static readonly string DelegateCommandDelegatesCannotBeNull = "Delegate command delegates cannot be null";
-    internal static readonly string DelegateCommandInvalidGenericPayloadType = "delegate command invalid generic payload type";
-    internal static readonly string PropertySupport_NotMemberAccessExpression_Exception;
-    internal static readonly string PropertySupport_ExpressionNotProperty_Exception;
-    internal static readonly string PropertySupport_StaticExpression_Exception;
+    internal static readonly string DelegateCommandDelegatesCannotBeNull = "Neither the executeMethod nor the canExecuteMethod delegates can be null.";
+    internal static readonly string DelegateCommandInvalidGenericPayloadType = @"T for DelegateCommand<T> is not an object nor Nullable.";
+    internal static readonly string PropertySupport_NotMemberAccessExpression_Exception = "The expression is not a member access expression.";
+    internal static readonly string PropertySupport_ExpressionNotProperty_Exception = "The member access expression does not access a property.";
+    internal static readonly string PropertySupport_StaticExpression_Exception ="The referenced property is a static property.";
   }
 }

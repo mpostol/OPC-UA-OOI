@@ -24,7 +24,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ConfigurationDataProducer.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ConfigurationDataProducer.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Encoding\Networking.Encoding.csproj" />
+    <ProjectReference Include="..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj" />
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
   </ItemGroup>
 

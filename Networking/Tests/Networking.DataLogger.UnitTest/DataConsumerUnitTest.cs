@@ -9,11 +9,10 @@ namespace UAOOI.Networking.DataLogger.UnitTest
   {
 
     [TestMethod]
-    public void TestMethod1()
+    public void ConstructorTest()
     {
-      TestConsumerViewModel viewModel = new TestConsumerViewModel();
-      DataConsumer _DataConsumer = new DataConsumer(viewModel);
+      TestConsumerViewModel _viewModel = new TestConsumerViewModel();
+      DataConsumer _DataConsumer = new DataConsumer(_viewModel);
     }
-
   }
 }

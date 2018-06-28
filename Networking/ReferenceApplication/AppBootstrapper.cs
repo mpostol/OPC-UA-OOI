@@ -9,11 +9,12 @@ using System.Windows;
 using UAOOI.Networking.DataLogger;
 using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.ReferenceApplication.MEF;
-using UAOOI.Networking.ReferenceApplication.Producer;
 using UAOOI.Networking.ReferenceApplication.Properties;
+using UAOOI.Networking.SimulatorInteroperabilityTest;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
+
   internal class AppBootstrapper : MefBootstrapper
   {
 
@@ -41,7 +42,6 @@ namespace UAOOI.Networking.ReferenceApplication
       Application.Current.MainWindow = (MainWindow)this.Shell;
       Application.Current.MainWindow.Show();
     }
-
     /// <summary>
     /// Creates the shell or main window of the application.
     /// </summary>
@@ -62,10 +62,10 @@ namespace UAOOI.Networking.ReferenceApplication
         m_ConsumerConfigurationFactory.Setup();
         m_Components.Add(m_ConsumerConfigurationFactory);
         ReferenceApplicationEventSource.Log.PartCreated(nameof(LoggerManagementSetup));
-        OPCUAServerProducerSimulator m_OPCUAServerProducerSimulator = Container.GetExportedValue<OPCUAServerProducerSimulator>();
-        m_OPCUAServerProducerSimulator.Setup();
-        m_Components.Add(m_OPCUAServerProducerSimulator);
-        ReferenceApplicationEventSource.Log.PartCreated(nameof(OPCUAServerProducerSimulator));
+        SimulatorDataManagementSetup m_Producer = Container.GetExportedValue<SimulatorDataManagementSetup>();
+        m_Producer.Setup();
+        m_Components.Add(m_Producer);
+        ReferenceApplicationEventSource.Log.PartCreated(nameof(SimulatorDataManagementSetup));
       }
       catch (Exception _ex)
       {
@@ -95,9 +95,11 @@ namespace UAOOI.Networking.ReferenceApplication
     }
     private void MasterTraceException(Exception ex, bool inner)
     {
+      if (ex == null)
+        throw new ArgumentNullException(nameof(ex), $"Calling {nameof(MasterTraceException)} with null exception doesn't make sense.");
       string _innerText = inner ? "inner" : "";
       Logger.TraceData(TraceEventType.Information, 86, $"During {nameof(AppBootstrapper.Dispose)} an {_innerText} exeption been thrown: {ex.ToString()}.");
-      if (ex.InnerException != null)
+      if (ex.InnerException == null)
         return;
       MasterTraceException(ex.InnerException, true);
     }

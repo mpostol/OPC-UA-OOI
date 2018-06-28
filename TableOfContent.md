@@ -14,7 +14,7 @@
 * [Internet of Things \(IOT\) Communication](Networking/README.MD)
 * [UA Semantic Data Message Centric Communication](SemanticData/README.MessageCentricCommunication.md)
 
-### Reactive Communication
+## Reactive Communication
 
 * [Networking of SemanticData Library](Networking/SemanticData/README.MD)
 * [OPC Unified Architecture Part 14: PubSub Main Technology Features](Networking/SemanticData/README.PubSubMTF.md)
@@ -25,12 +25,12 @@
 * [Data Encoding Library](Networking/Encoding/README.md)
 * [Getting Started Tutorial](Networking/SemanticData/READMEGettingStartedTutorial.md)
 
-### Configuration
+## Configuration
 
 * [Reactive Networking Configuration](Configuration/Networking/README.MD)
 * [DataBinding library](Configuration/DataBindings/README.MD)
 
-### Deployment 
+## Deployment 
 
 * [Reference Application Graphical User Interface](Networking/ReferenceApplication/README.MD)
 * [Reference Application Consumer - Data Logger](Networking/DataLogger/README.md)

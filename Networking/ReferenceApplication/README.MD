@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is aimed at implementing an example of the **UA Data Application** supporting producer and consumer roles simultaneously. The purpose of the **Example Application** is to demonstrate the concepts and syntax of the PubSub implementation, rather than to necessarily provide a realistic scenario for its use. For more extensive examples, see the [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD).
+This project is aimed at implementing an example of the **UA Data Application** supporting producer and consumer roles simultaneously. The purpose of the **Example Application** is to demonstrate the concepts and architecture of the a reactive networking application implementation, rather than to necessarily provide a realistic scenario for its use. For more extensive examples, see the [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD).
 
 Both roles are implemented as independent threads that have common user interface for diagnostic and configuration purpose. The producer sends messages containing the field defined in the configuration file. The values are simulated. To correctly decode the messages the consumer must have configuration defining the same set of fields. The data is encoded using Variant.
 

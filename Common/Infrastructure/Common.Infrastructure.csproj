@@ -26,7 +26,7 @@
     <AssemblyName>UAOOI.Common.Infrastructure</AssemblyName>
     <RootNamespace>UAOOI.Common.Infrastructure</RootNamespace>
     <PackageId>UAOOI.Common.Infrastructure</PackageId>
-    <Version>3.0.0</Version>
+    <Version>4.0.0</Version>
     <title>Common Infrastructure Management Functionality Aimed at Object Oriented Internet</title>
     <authors>MPostol</authors>
     <owners>cas.eu; commsvr.com</owners>
@@ -51,6 +51,7 @@
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <PackageTags>Object Oriented Internet, IoT, OPC UA, CommServer</PackageTags>
     <RepositoryType>GitHub</RepositoryType>
+    <Company>commsvr.com</Company>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>

@@ -15,6 +15,11 @@
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>OOI Reference Application, Object Oriented Internet, OPC UA, Reactive Networking.</RepositoryType>
+    <Description>This library provides an implementation of a core functionality required by the `ReferenceApplication` and all its components that are helpful in writing well-structured and maintainable applications, including:
+
+- MVVM pattern 
+
+- logging</Description>
   </PropertyGroup>
 
   <ItemGroup>

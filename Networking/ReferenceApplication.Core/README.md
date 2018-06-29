@@ -6,7 +6,7 @@ This library provides an implementation of a core functionality required by the 
 - MVVM pattern 
 - logging
 
-# TBD 
+<!--# TBD 
 
 > NOTE The rest of document is just template
 
@@ -90,3 +90,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](../../LICE
 * Inspiration
 * etc
 
+-->

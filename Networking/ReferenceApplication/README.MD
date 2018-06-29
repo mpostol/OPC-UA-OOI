@@ -1,4 +1,4 @@
-# UA Data Example Application
+# ReferenceApplication Graphical User Interface
 
 ## Introduction
 

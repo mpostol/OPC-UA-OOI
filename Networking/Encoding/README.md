@@ -1,92 +1,40 @@
 ﻿# Encoding Library
 
 ## Getting Started
+This library is a loosely coupled part of the `ReferenceApplication` described in the section [Reference Application Graphical User Interface](../ReferenceApplication/README.MD). The main purpose of this library is the interoperability testing and diagnostic. 
 
-This part provides functionality to lookup a dictionary containing value converters. The interface is used for late binding to inject dependency on the external library.  This library provides IEncodingFactory functionality  limited to encoding simple data types only  for the testing purpose only.
+It provides `UAOOI.Networking.SemanticData.IEncodingFactory` limited implementation in the class `EncodingFactoryBinarySimple`.  Using this implementation the library can encode/decode only simple data types. The `ReferenceApplication` uses implementation of this class for late binding to inject dependency on the encoding functionality.  
 
-Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may replace this library by a custom one providing unlimited encoding functionality.
- 
-# TBD 
+The implementation of the `UAOOI.Networking.SemanticData.Encoding.IUADecoder` interface is provided by the `UABinaryDecoderImplementation`. The implementation of the `UAOOI.Networking.SemanticData.Encoding.IUAEncoder` interface is provided in the `UABinaryEncoderImplementation`;
 
-> NOTE The rest of document is just template
+This `UpdateValueConverter` method is responsible to lookup a dictionary containing value converters and if any assigns it to `IBinding.Converter` property. This method doesn't support this functionality and left the property unassigned.
 
-### Prerequisites
+This library may be easily replaced by a custom one - change the composition contract in:
 
-What things you need to install the software and how to install them
+- `UAOOI.Networking.DataLogger.LoggerManagementSetup`
+- `UAOOI.Networking.SimulatorInteroperabilityTest.SimulatorDataManagementSetup`
 
-```
-Give examples
-```
+## Current release
 
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+> Note; This library is not considered to be published as the NuGrt package.
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
+Consider expanding functionality in this library by implementing the methods in classes: `UABinaryDecoderImplementation` and `UABinaryEncoderImplementation`. 
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+## Running tests
 
-## Authors
+The library is not Unit Tested.
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+## See also
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* [Reference Application Graphical User Interface](../ReferenceApplication/README.MD)
+* [Reference Application Consumer - Data Logger](../DataLogger/README.md)
+* [Reference Application Producer - Interoperability Test Data Generator](../SimulatorInteroperabilityTest/README.md)
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
 

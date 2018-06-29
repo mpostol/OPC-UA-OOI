@@ -169,14 +169,14 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// Creates the message.
     /// </summary>
     /// <param name="encoding">The selected encoding for the message.</param>
-    /// <param name="prodicerId">The prodicer identifier.</param>
+    /// <param name="producerId">The producer identifier.</param>
     /// <param name="dataSetWriterId">The data set writer identifier.</param>
     /// <param name="fieldCount">The field count.</param>
     /// <param name="sequenceNumber">The sequence number.</param>
     /// <param name="timeStamp">The time stamp.</param>
     /// <param name="configurationVersion">The configuration version.</param>
     internal protected abstract void CreateMessage
-      (FieldEncodingEnum encoding, Guid prodicerId, UInt16 dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion);
+      (FieldEncodingEnum encoding, Guid producerId, UInt16 dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion);
     /// <summary>
     /// Finalize preparation and sends the message.
     /// </summary>

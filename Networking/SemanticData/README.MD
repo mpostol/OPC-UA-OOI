@@ -1,42 +1,81 @@
-# Networking of SemanticData Library
+# Reactive Networking of SemanticData Library
 
-## Introduction
+## Getting Started
 
-This project is aimed on implementation of a [Part 14 PubSub 1.04](https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/) using the concept described in the [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD)
+The `UAOOI.Networking.SemanticData` library is designed to be a foundation of developing application programs that are taking part of message-centric communication pattern and interconnected using the reactive networking concept described in the [OOI Semantic Data Processing Architecture](../../SemanticData/README.MessageCentricCommunication.md). The diagram below presents how to engage this library to provide a more specific functionality required depending on the role of concern compliant with the overall architecture.
 
-For more in-depth information about creating UA Applications exchanging data over the network, see [Getting Started Tutorial](./READMEGettingStartedTutorial.md#getting-started-tutorial)
+![Message-centric Communication Roles Implementation](../../CommonResources/Media/DataManagementGeneralization.png)
 
-The code is tested using the Unit Test located in the project: [SemanticDatalUnitTest][OPC-UA-OOI.Networking.Tests.SemanticDatalUnitTest]
+For more in-depth information about creating **UA Data Application** exchanging data over the network using the reactive networking pattern, see [Getting Started Tutorial](./READMEGettingStartedTutorial.md).
 
-The preliminary code help documentation is here: [API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
+To promote interoperability this library is a collection of types aimed at implementation of the [Part 14 PubSub](README.PubSubMTF.md) standard.
 
-The project is in development stage - major changes are expected.
+The code is tested using the Unit Tests located in the project: [SemanticDatalUnitTest][OPC-UA-OOI.Networking.Tests.SemanticDatalUnitTest]
+
+The preliminary code help documentation is here: [API Browser](http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Networking.SemanticData.htm)
+
+> NOTE: The project is in development stage - major changes are expected.
 
 ## Current release
 
-The nuget package is available at:
+The NuGet package is available at:
 
 [UAOOI.Networking.SemanticData](https://www.nuget.org/packages/UAOOI.Networking.SemanticData/)
 
-## Architecture
+## Reactive Networkin Application Architecture
 
-The library is designed to be a foundation for developing application programs that are parties of message centric communication pattern. The diagram presents relationship between the `DataManagement` library and other communication parties where the library is expanded to provide custom functionality.
+The figure below shows the relationship between this library and external parts compounding any reactive networking application. Any application engaging the **`UAOOI.Networking.SemanticData`** is composed using the dependency injection pattern.
 
-![Architecture](../../CommonResources/Media/DataManagementGeneralization.png)
+![Application Architecture](../../CommonResources/Media/DataManagementExternalLibraries.png)
 
-In figure below the relationship between this library and external libraries is presented. Any application engaging the **DataManagemnet** is composed using the dependency injection pattern.
+The `DataManagementSetup`class is a placeholder to gather all external injection points used to compose the application, initialize the communication and bind to local resources. The class declares the following properties that must be initialized by the application to provide specific functionality.
 
-![Architecture](../../CommonResources/Media/DataManagementExternalLibraries.png)
+```C#
+    #region Injection points
+    /// <summary>
+    /// Gets or sets the binding factory.
+    /// </summary>
+    /// <value>The binding factory.</value>
+    public IBindingFactory BindingFactory { get; set; }
+    /// <summary>
+    /// Gets or sets the encoding factory.
+    /// </summary>
+    /// <value>The encoding factory.</value>
+    public IEncodingFactory EncodingFactory { get; set; }
+    /// <summary>
+    /// Gets or sets the message handler factory.
+    /// </summary>
+    /// <value>The message handler factory.</value>
+    public IMessageHandlerFactory MessageHandlerFactory { get; set; }
+    /// <summary>
+    /// Gets or sets the configuration factory.
+    /// </summary>
+    /// <value>The configuration factory.</value>
+    public IConfigurationFactory ConfigurationFactory { get; set; }
+    #endregion
 
-**Configuration** represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data.
+```
+To promote flexibility and the separation of concern design approach, the concrete types are loosely coupled with the library. It means, that the selection of the concrete types used to compose the application is up to the application, namely it may designate them at runtime. To conform to the library requirements all the classes must implement appropriate contract defined as an interface. 
 
-In figure below the relationship of the internal implementation with the overall domain model is presented.
+- `Configuration`: represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data. This class must implement the `IConfigurationFactory` interface. 
 
-![Architecture](../../CommonResources/Media/UADataIntegrationServices.UADataManagementClasses.png)
+- `DataRepository`:  represents local resources in the application, for example PLC registers, HMI variables binded to screen controls, internal register of smart meters, etc. Depending on the role the library supports:
+
+  - Consumers - recovering data from message and writing to local resource.
+  - Producers - reading from the Local resource, populating a new message with this value and sending the message over the wire.  
+
+- `MessageHandling`: is a part providing the message handling services. The communicating party can be interconnected using any transparent messages transport infrastructure. For the broker-less transport layer the network infrastructure routes datagram-based messages and the `MessageHandling` should implement UDP, AMQP or ETHERNET protocol. Applying the broker-based approach a core component of the transport layer is a message broker and in this case the `MessageHandling` should implement AMQP or MQTT protocol.
+
+- `Encoding`: A method stub or simply stub in software development is a piece of code used to stand in for some other programming functionality. A stub may simulate the behavior of existing code (such as a procedure on a remote machine, such methods are often called mocks) or be a temporary substitute for yet-to-be-developed code.
+
 
 ## Internal Architecture
 
 ### Introduction
+
+In figure below the relationship of the internal implementation with the overall domain model is presented.
+
+![Architecture](../../CommonResources/Media/UADataIntegrationServices.UADataManagementClasses.png)
 
 * It is assumed that the data consumer is lightweight and may support limited encoding/decoding functionality. The functionality will be  provided as a plug-in library injected at run time. EncodingDecoding is recognizable using a pair of: name recovered from the Type object and OPC UA DataType represented by its URI.
 * Data binding - it is assumed that the binding of Local repositories/variables and messages content items is provided by the configuration. It could be also provided at runtime by updating the configuration using any external mechanism.

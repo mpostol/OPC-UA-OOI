@@ -4,7 +4,9 @@
 
 Semantic Data Reactive Networking based on OPC UA Part 14 Pub/Sub library.
 
-# TBD 
+Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may replace this library by a custom one providing unlimited encoding functionality.
+
+<!--# TBD 
 
 > NOTE The rest of document is just template
 
@@ -89,4 +91,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Hat tip to anyone whose code was used
 * Inspiration
 * etc
-
+-->

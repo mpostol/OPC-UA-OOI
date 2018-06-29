@@ -6,7 +6,7 @@
 
 Semantic Data Reactive Networking based on OPC UA Part 14 Pub/Sub library.
 
-# TBD 
+<!--# TBD 
 
 > NOTE The rest of document is just template
 
@@ -94,3 +94,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 
+-->

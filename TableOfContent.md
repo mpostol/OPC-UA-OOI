@@ -16,14 +16,14 @@
 
 ## Reactive Communication
 
-* [Networking of SemanticData Library](Networking/SemanticData/README.MD)
 * [OPC Unified Architecture Part 14: PubSub Main Technology Features](Networking/SemanticData/README.PubSubMTF.md)
-* [Underlying Transport over UDP](Networking/UDPMessageHandler/README.md)
-* [Underlying Transport over MQTT](Networking/SemanticData/README_MQTTMapping.md)
-* [Underlying Transport over AMQP](Networking/SemanticData/README_AMQPMapping.md)
-* [Data management and binding](Networking/SemanticData/READMEDataDiscoveryAndBinding.md)
-* [Data Encoding Library](Networking/Encoding/README.md)
-* [Getting Started Tutorial](Networking/SemanticData/READMEGettingStartedTutorial.md)
+* [Reactive Networking of SemanticData Library](Networking/SemanticData/README.MD)
+  * [Underlying Transport over UDP](Networking/UDPMessageHandler/README.md)
+  * [Underlying Transport over MQTT](Networking/SemanticData/README_MQTTMapping.md)
+  * [Underlying Transport over AMQP](Networking/SemanticData/README_AMQPMapping.md)
+  * [Data management and binding](Networking/SemanticData/READMEDataDiscoveryAndBinding.md)
+  * [Data Encoding Library](Networking/Encoding/README.md)
+  * [Getting Started Tutorial](Networking/SemanticData/READMEGettingStartedTutorial.md)
 
 ## Configuration
 
@@ -32,9 +32,9 @@
 
 ## Deployment 
 
-* [Reference Application Graphical User Interface](Networking/ReferenceApplication/README.MD)
-* [Reference Application Consumer - Data Logger](Networking/DataLogger/README.md)
-* [Reference Application Producer - Interoperability Test Data Generator](Networking/SimulatorInteroperabilityTest/README.md)
+* [ReferenceApplication Graphical User Interface](Networking/ReferenceApplication/README.MD)
+* [ReferenceApplication Consumer - Data Logger](Networking/DataLogger/README.md)
+* [ReferenceApplication Producer - Interoperability Test Data Generator](Networking/SimulatorInteroperabilityTest/README.md)
 * [Reference Application Utilities](Networking/ReferenceApplication.Core/README.md)
 
 ## Data Discovery

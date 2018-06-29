@@ -73,46 +73,36 @@ namespace UAOOI.Networking.SemanticData.DataRepository
 
     #region public API
     /// <summary>
-    /// Gets the state of the handler.
-    /// </summary>
-    /// <value>The state of the handler.</value>
-    public HandlerState HandlerState { get { return m_HandlerState; } }
-    /// <summary>
     /// Occurs when state changes].
     /// </summary>
     public event EventHandler<AssociationStateChangedEventArgs> StateChangedEventHandler;
     #endregion
 
     #region private
-    private UATypeInfo m_MessageEncoding;
+    private readonly UATypeInfo m_MessageEncoding = null;
     /// <summary>
     /// Sets the converter, which is used to provide a way to apply custom logic to a binding.
     /// </summary>
     /// <value>The converter as an instance of the <see cref="IValueConverter" />.</value>
-    protected IValueConverter Converter
-    {
-      get; private set;
-    }
+    protected IValueConverter Converter { get; private set; } = null;
     /// <summary>
     /// Gets the culture.
     /// </summary>
     /// <value>The culture.</value>
-    protected CultureInfo Culture { get; private set; }
+    protected CultureInfo Culture { get; private set; } = null;
     /// <summary>
     /// Sets an optional parameter to be used in the converter logic.
     /// </summary>
     /// <value>The parameter to be used by the <see cref="IBinding.Converter" />.</value>
-    protected object Parameter
-    {
-      get; private set;
-    }
-    public object FallbackValue { get; private set; }
-    private HandlerState m_HandlerState = HandlerState.Operational;
+    protected object Parameter { get; private set; } = null;
+    /// <summary>
+    /// Sets the value to use when the binding is unable to return a value.
+    /// </summary>
+    /// <value>The fallback value.</value>
+    protected object FallbackValue { get; private set; }
     private void RaiseHandlerState(HandlerState state)
     {
-      EventHandler<AssociationStateChangedEventArgs> _hc = StateChangedEventHandler;
-      if (_hc != null)
-        _hc(this, new AssociationStateChangedEventArgs(state));
+      StateChangedEventHandler?.Invoke(this, new AssociationStateChangedEventArgs(state));
     }
     #endregion
   }

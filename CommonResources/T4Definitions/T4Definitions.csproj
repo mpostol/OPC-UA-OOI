@@ -43,6 +43,7 @@
       <Visible>False</Visible>
     </AdditionalFiles>
     <None Include="packages.config" />
+    <None Include="README-Template.md" />
     <None Include="ReleaseNoteTemplate.md">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

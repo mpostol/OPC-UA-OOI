@@ -16,7 +16,7 @@ This library may be easily replaced by a custom one - change the composition con
 
 ## Current release
 
-> Note; This library is not considered to be published as the NuGrt package.
+> Note; This library is not considered to be published as the NuGet package.
 
 ## Contributing
 

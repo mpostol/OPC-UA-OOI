@@ -1,10 +1,15 @@
-# Reference Application Simulator for Interoperability Test Component
+# `ReferenceApplication` Producer - Interoperability Test Data Generator
 
 ## Getting Started
 
 Semantic Data Reactive Networking based on OPC UA Part 14 Pub/Sub library.
 
 Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may replace this library by a custom one providing unlimited encoding functionality.
+
+## Current release
+
+> Note; This library is not considered to be published as the NuGet package.
+
 
 <!--# TBD 
 

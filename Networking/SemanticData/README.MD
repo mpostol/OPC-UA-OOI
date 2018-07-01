@@ -6,7 +6,7 @@ The `UAOOI.Networking.SemanticData` library is designed to be a foundation of de
 
 ![Message-centric Communication Roles Implementation](../../CommonResources/Media/DataManagementGeneralization.png)
 
-For more in-depth information about creating **UA Data Application** exchanging data over the network using the reactive networking pattern, see [Getting Started Tutorial](./READMEGettingStartedTutorial.md).
+For more in-depth information about creating `OOI Reactive Application` exchanging data over the network using the reactive networking pattern, see [Getting Started Tutorial](./READMEGettingStartedTutorial.md).
 
 To promote interoperability this library is a collection of types aimed at implementation of the [Part 14 PubSub](README.PubSubMTF.md) standard.
 
@@ -22,7 +22,7 @@ The NuGet package is available at:
 
 [UAOOI.Networking.SemanticData](https://www.nuget.org/packages/UAOOI.Networking.SemanticData/)
 
-## Reactive Networkin Application Architecture
+## Reactive Networking Application Architecture
 
 The figure below shows the relationship between this library and external parts compounding any reactive networking application. Any application engaging the **`UAOOI.Networking.SemanticData`** is composed using the dependency injection pattern.
 

@@ -1,8 +1,8 @@
 # Getting Started Tutorial
 
-The topics contained in this section are intended to give you quick exposure to the **UA Data Application** network based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to create **UA Data Application** producer and consumer applications.
+The topics contained in this section are intended to give you quick exposure to the `OOI Reactive Application` network based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to create `OOI Reactive Application` producer and consumer applications.
 
-Here are steps to create a successful the **UA Data Application**:
+Here are steps to create a successful the `OOI Reactive Application`:
 
 - Implement 'IEncodingFactory' - provides functionality to lookup a dictionary containing value converters.
 - Implement `IMessageHandlerFactory` interface -  creates objects supporting messages handling over the wire.
@@ -32,9 +32,9 @@ To implement encoding the following steps must be accomplished:
 - implement the `UAOOI.Networking.SemanticData.Encoding.IUADecoder` interface;
 - implement the `UAOOI.Networking.SemanticData.Encoding.IUAEncoder` interface;
 
-## How to: Implement `Consumer` role for the **UA Data Application**
+## How to: Implement `Consumer` role for the `OOI Reactive Application`
 
-This section provides hints how to implement the consumer role of any **UA Data Application** processing data received in messages sent over the network by a data producer. For example the following applications are good candidate to support this role:
+This section provides hints how to implement the consumer role of any `OOI Reactive Application` processing data received in messages sent over the network by a data producer. For example the following applications are good candidate to support this role:
 
 * HMI device - displaying incoming data on the screen;
 * Supervisory Control and Data Acquisition (SCADA) - equipped with driver compliant with the standard

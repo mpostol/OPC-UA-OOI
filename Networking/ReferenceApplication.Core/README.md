@@ -1,11 +1,15 @@
-# ReferenceApplication Core Functionality Library
+# `ReferenceApplication` Utilities
 
 ## Getting Started
 
-This library provides an implementation of a core functionality required by the `ReferenceApplication` and all its components that are helpful in writing well-structured and maintainable applications, including:
+The library `UAOOI.Networking.ReferenceApplication.Core` provides an implementation of a core functionality required by the `ReferenceApplication` and all its components that are helpful in writing well-structured and maintainable applications, including:
 - MVVM pattern 
 - logging
 
+## Current release
+
+> Note; This library is not considered to be published as the NuGet package.
+ 
 <!--# TBD 
 
 > NOTE The rest of document is just template

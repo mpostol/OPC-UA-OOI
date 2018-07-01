@@ -1,8 +1,8 @@
-# ReferenceApplication Graphical User Interface
+# Walk-through `ReferenceApplication`
 
 ## Introduction
 
-This project is aimed at implementing an example of the **UA Data Application** supporting producer and consumer roles simultaneously. The purpose of the **Example Application** is to demonstrate the concepts and architecture of the a reactive networking application implementation, rather than to necessarily provide a realistic scenario for its use. For more extensive examples, see the [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD).
+This project is aimed at implementing an example of the `OOI Reactive Application` supporting producer and consumer roles simultaneously. The purpose of the **Example Application** is to demonstrate the concepts and architecture of the a reactive networking application implementation, rather than to necessarily provide a realistic scenario for its use. For more extensive examples, see the [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD).
 
 Both roles are implemented as independent threads that have common user interface for diagnostic and configuration purpose. The producer sends messages containing the field defined in the configuration file. The values are simulated. To correctly decode the messages the consumer must have configuration defining the same set of fields. The data is encoded using Variant.
 
@@ -33,13 +33,13 @@ The log file `UANetworkingReferenceApplication.log` captures output messages fro
 
 ## Getting Started Tutorial
 
-The topics contained in this section are intended to give you quick exposure to the **UA Data Application** network based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to create **UA Data Application** producer and consumer applications.
+The topics contained in this section are intended to give you quick exposure to the `OOI Reactive Application` network based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to create `OOI Reactive Application` producer and consumer applications.
 
 Both roles uses configuration managed using the `UAOOI.SemanticDataUANetworkingConfiguration` component. The remote host name/port number and the consumer port number are provided by the application configuration and may be changed using the UI. The configuration location may be opened using the menu. Using menu the configuration files may be opened in a default external editor.
 
 ### How to implement the consumer role for WPF application
 
-This section provides hints how to implement the consumer role of any **UA Data Application** processing data received in messages sent over the network by a data producer. For example the following applications are good candidate to support this role:
+This section provides hints how to implement the consumer role of any `OOI Reactive Application` processing data received in messages sent over the network by a data producer. For example the following applications are good candidate to support this role:
 
 * HMI device - displaying incoming data on the screen;
 * Supervisory Control and Data Acquisition (SCADA) - equipped with driver compliant with the standard

@@ -16,6 +16,10 @@
 
 [wordpress.OPCUAMTF]: https://mpostol.wordpress.com/2013/08/04/opc-unified-architecture-main-technological-features/
 
+- [OPC UA Makes Smart User Interface Possible][wordpress.HMI]
+
+[wordpress.HMI]:https://mpostol.wordpress.com/2013/08/11/opc-ua-makes-smart-user-interface-possible/
+
 - [OPC UA Information Model Deployment][CAS.OPCUAIMD]
  
 [CAS.OPCUAIMD]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf

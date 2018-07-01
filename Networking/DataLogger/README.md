@@ -1,10 +1,15 @@
-﻿# DataLogger Consumer Component
+﻿# `ReferenceApplication` Consumer - Data Logger
 
 ## Getting Started
 
-`DataLogger` is a component of the ReferenceApplication. 
+`DataLogger` is a component of the `ReferenceApplication`. 
 
 Semantic Data Reactive Networking based on OPC UA Part 14 Pub/Sub library.
+
+## Current release
+
+> Note; This library is not considered to be published as the NuGet package.
+
 
 <!--# TBD 
 

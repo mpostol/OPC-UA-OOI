@@ -7,17 +7,17 @@
 ## Summary
 
 * [Introduction](README.MD)
+* [GitHub Repository Content](SemanticData/Readme.SemanticDataDeplyment.MD)
 
 ## SemanticData Processing
 
 * [OOI SemanticData Processing Architecture](SemanticData/README.MD)
-* [Library Description](SemanticData/Readme.SemanticDataDeplyment.MD)
 * [UA NodeSet Validation](SemanticData/UANodeSetValidation/README.MD)
 * [XML Files](SemanticData/UANodeSetValidation/XML/README.MD)
 
-## Internet of Things (IOT) Archetype
+## Internet of Things (IoT) Archetype
 
-* [IOT Communication](Networking/README.MD)
+* [IoT Communication](Networking/README.MD)
 * [SemanticData Message Centric Communication](SemanticData/README.MessageCentricCommunication.md)
 
 ## Reactive Communication

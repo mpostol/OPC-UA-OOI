@@ -1,6 +1,6 @@
 # Object Oriented Internet
 
-## [Cover Page](COVERPAGE.md)
+* [Cover Page](COVERPAGE.md)
  
 * [Table of Content](TableOfContent.md)
 
@@ -8,27 +8,27 @@
 
 * [Introduction](README.MD)
 
-## Semantic-Data Processing
+## SemanticData Processing
 
-* [Domain Model](SemanticData/README.MD)
+* [OOI SemanticData Processing Architecture](SemanticData/README.MD)
 * [Library Description](SemanticData/Readme.SemanticDataDeplyment.MD)
-* [OPC UA NodeSet Validation](SemanticData/UANodeSetValidation/README.MD)
+* [UA NodeSet Validation](SemanticData/UANodeSetValidation/README.MD)
 * [XML Files](SemanticData/UANodeSetValidation/XML/README.MD)
 
 ## Internet of Things (IOT) Archetype
 
-* [Internet of Things \(IOT\) Communication](Networking/README.MD)
-* [UA Semantic Data Message Centric Communication](SemanticData/README.MessageCentricCommunication.md)
+* [IOT Communication](Networking/README.MD)
+* [SemanticData Message Centric Communication](SemanticData/README.MessageCentricCommunication.md)
 
 ## Reactive Communication
 
-* [OPC Unified Architecture Part 14: PubSub Main Technology Features](Networking/SemanticData/README.PubSubMTF.md)
+* [UA Part 14: PubSub Main Technology Features](Networking/SemanticData/README.PubSubMTF.md)
 * [Reactive Networking of SemanticData Library](Networking/SemanticData/README.MD)
-  * [Underlying Transport over UDP](Networking/UDPMessageHandler/README.md)
-  * [Underlying Transport over MQTT](Networking/SemanticData/README_MQTTMapping.md)
-  * [Underlying Transport over AMQP](Networking/SemanticData/README_AMQPMapping.md)
-  * [Data management and binding](Networking/SemanticData/READMEDataDiscoveryAndBinding.md)
-  * [Data Encoding Library](Networking/Encoding/README.md)
+  * [Transport over UDP](Networking/UDPMessageHandler/README.md)
+  * [Transport over MQTT](Networking/SemanticData/README_MQTTMapping.md)
+  * [Transport over AMQP](Networking/SemanticData/README_AMQPMapping.md)
+  * [DataSet and Communication Channel Association](Networking/SemanticData/READMEDataDiscoveryAndBinding.md)
+  * [Data Encoding](Networking/Encoding/README.md)
 * [Getting Started Tutorial](Networking/SemanticData/READMEGettingStartedTutorial.md)
 
 ## Configuration
@@ -38,10 +38,10 @@
 
 ## Deployment 
 
-* [ReferenceApplication Graphical User Interface](Networking/ReferenceApplication/README.MD)
-* [ReferenceApplication Consumer - Data Logger](Networking/DataLogger/README.md)
-* [ReferenceApplication Producer - Interoperability Test Data Generator](Networking/SimulatorInteroperabilityTest/README.md)
-* [Reference Application Utilities](Networking/ReferenceApplication.Core/README.md)
+* [Walk-through `ReferenceApplication`](Networking/ReferenceApplication/README.MD)
+  * [`ReferenceApplication` Consumer - Data Logger](Networking/DataLogger/README.md)
+  * [`ReferenceApplication` Producer - Interoperability Test Data Generator](Networking/SimulatorInteroperabilityTest/README.md)
+  * [`ReferenceApplication` Utilities](Networking/ReferenceApplication.Core/README.md)
 
 ## Data Discovery
 

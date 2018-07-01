@@ -2,7 +2,7 @@
 
 * [Cover Page](COVERPAGE.md)
  
-  * [Table of Content](TableOfContent.md)
+* [Table of Content](TableOfContent.md)
 
 ## Summary
 

@@ -16,19 +16,13 @@ The preliminary code help documentation is here: [API Browser](http://www.commsv
 
 > NOTE: The project is in development stage - major changes are expected.
 
-## Current release
-
-The NuGet package is available at:
-
-[UAOOI.Networking.SemanticData](https://www.nuget.org/packages/UAOOI.Networking.SemanticData/)
-
 ## Reactive Networking Application Architecture
 
-The figure below shows the relationship between this library and external parts compounding any reactive networking application. Any application engaging the **`UAOOI.Networking.SemanticData`** is composed using the dependency injection pattern.
+The figure below shows the relationship between the library `UAOOI.Networking.SemanticData` and external parts compounding any reactive networking application (`OOI Reactive Application`). The `OOI Reactive Application` is collection of `Producer` and `Consumer` entities. They must provide an interface to real-time process data, hence they are recognized as an extension of `DataRepository` class. To implement the `DataRepository` dedicated implementation [`IBinding`](http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/T-UAOOI.Networking.SemanticData.DataRepository.IBinding.htm) interface should be provided to create a bridge between real word data `Row Data` represented by the `LocalResources` class. 
 
 ![Application Architecture](../../CommonResources/Media/DataManagementExternalLibraries.png)
 
-The `DataManagementSetup`class is a placeholder to gather all external injection points used to compose the application, initialize the communication and bind to local resources. The class declares the following properties that must be initialized by the application to provide specific functionality.
+Any application engaging the library is composed using the dependency injection pattern. The `DataManagementSetup`class is a placeholder to gather all external injection points used to compose the application, initialize the communication and bind to local resources. The class declares the following properties that must be initialized by the application to provide specific functionality.
 
 ```C#
     #region Injection points
@@ -57,17 +51,16 @@ The `DataManagementSetup`class is a placeholder to gather all external injection
 ```
 To promote flexibility and the separation of concern design approach, the concrete types are loosely coupled with the library. It means, that the selection of the concrete types used to compose the application is up to the application, namely it may designate them at runtime. To conform to the library requirements all the classes must implement appropriate contract defined as an interface. 
 
-- `Configuration`: represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data. This class must implement the `IConfigurationFactory` interface. 
+- `Configuration`: represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data. This class must implement the [`IConfigurationFactory`](http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/T-UAOOI.Configuration.Networking.IConfigurationFactory.htm) interface. Each `Publisher` and `Consumer` must provide its own configuration.
 
 - `DataRepository`:  represents local resources in the application, for example PLC registers, HMI variables binded to screen controls, internal register of smart meters, etc. Depending on the role the library supports:
 
-  - Consumers - recovering data from message and writing to local resource.
-  - Producers - reading from the Local resource, populating a new message with this value and sending the message over the wire.  
+  - `Consumer` - recovering data from message and writing to local resource.
+  - `Producer` - reading data from the Local resource, populating a new message with this value and sending the message over the wire.
 
-- `MessageHandling`: is a part providing the message handling services. The communicating party can be interconnected using any transparent messages transport infrastructure. For the broker-less transport layer the network infrastructure routes datagram-based messages and the `MessageHandling` should implement UDP, AMQP or ETHERNET protocol. Applying the broker-based approach a core component of the transport layer is a message broker and in this case the `MessageHandling` should implement AMQP or MQTT protocol.
+- `MessageHandling`: is a part providing the message handling services. The communicating party can be interconnected using any transparent messages transport infrastructure. For the broker-less transport layer the network infrastructure routes datagram-based messages and the `MessageHandling` should implement `UDP`, `AMQP` or `ETHERNET` protocol. Applying the broker-based approach a core component of the transport layer is a message broker and in this case the `MessageHandling` should implement `AMQP` or `MQTT` protocol.
 
 - `Encoding`: A method stub or simply stub in software development is a piece of code used to stand in for some other programming functionality. A stub may simulate the behavior of existing code (such as a procedure on a remote machine, such methods are often called mocks) or be a temporary substitute for yet-to-be-developed code.
-
 
 ## Internal Architecture
 
@@ -115,3 +108,9 @@ See how it works in the unit test class: [SemanticDatalUnitTest][OPC-UA-OOI.Netw
 The [UA Data Example Application](../../Networking/ReferenceApplication/README.MD#ua-data-example-application) contains a reference WPF application.
 
 [OPC-UA-OOI.Networking.Tests.SemanticDatalUnitTest]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/Tests/SemanticDatalUnitTest
+
+## Current release
+
+The NuGet package is available at:
+
+[UAOOI.Networking.SemanticData](https://www.nuget.org/packages/UAOOI.Networking.SemanticData/)

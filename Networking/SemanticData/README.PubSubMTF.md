@@ -71,6 +71,14 @@ The `NetworkMessage` structure can be serialized using the following encoding:
 - UADP: optimized binary encoding.
 - JSON: text format as defined in [RFC JSON][RFC.JSON].
 
+Using UADP message mapping the following encodings may be supported:
+
+- `Variant`: the Variant can contain a `StatusCode` instead of the expected `DataType` if the status of the field is `Bad`. The `Variant` can contain a `DataValue` with the value and the statusCode if the status of the field is `Uncertain`.
+
+- RawData: the data fields are encoded in the `DataTypes` specified in the DataSetMetaData for the DataSet. The encoding is handled like a Structure DataType where the DataSet fields are handled like Structure fields and fields with Structure DataType are handled like nested structures. All restrictions for the encoding of Structure DataTypes also apply to the RawData Field Encoding.
+
+- DataValue: the DataSet fields are encoded as DataValue. This option is set if the DataSet is configured to send more than the Value.
+
 This specification lists the following protocols that have been selected to be used as the underlying transport layer:
 
 - [Advanced Message Queuing Protocol][AMQP]

@@ -1,120 +1,77 @@
 # `ReferenceApplication` Producer - Interoperability Test Data Generator
 
-## Getting Started
+## Common Tasks
 
-### Getting Started Tutorial
+Working through this tutorial gives you an introductory understanding of the steps required to implement `Producer` role of `OOI Reactive Application`. `SimulatorInteroperabilityTest` is a sample of the `Producer` part of the `ReferenceApplication`, which is an example of `SemanticData` reactive networking based on  [OPC UA Part 14 Pub/Sub](../../Networking/SemanticData/README.PubSubMTF.md) specification. 
 
-<!--The topics contained in this section are intended to give you quick exposure to the `OOI Reactive Application` network based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to create `OOI Reactive Application` producer and consumer applications.
+The `Producer` role serves as a data generator to be used for testing purpose. Main purpose of this library is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may replace this library by a custom one supporting more realistic process data acquisition scenario.
 
-Both roles uses configuration managed using the `UAOOI.SemanticDataUANetworkingConfiguration` component. The remote host name/port number and the consumer port number are provided by the application configuration and may be changed using the UI. The configuration location may be opened using the menu. Using menu the configuration files may be opened in a default external editor.-->
+Here are steps undertaken to implement the `Producer` role of the application:
 
-<!--### How to: Implement producer role for OPC UA server
+1. `DataManagementSetup`: this class has been overridden in the `SimulatorDataManagementSetup` class. It initializes the communication and bind the fields populating the messages to local resources.
+1. 'IEncodingFactory' and `IMessageHandlerFactory`: has been implemented in the an external common libraries and `Producer` doesn't depend on the implementation - this interfaces are localized as services using an instance of the `IServiceLocator` interface.
+1. `IBindingFactory`: has been implemented in the class `DataGenerator` responsible to synchronize the values of the local data repository properties and messages sent over the wire.
+1. `IConfigurationFactory`: the class `ProducerConfigurationFactory` implements this interface to be used for configuration opening.
 
-The class `CustomNodeManager` captures implementation of an interface between the library and an object supporting  **Address Space Management** (described in  [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD)) functionality in the typical OPC UA server. The **Address Space Management** instantiates the server address space, i.e. creates the nodes and binds the nodes with underlying external behavior. The example contains properties implemented as an instance of class `ProducerBindingMonitoredValue`. Modification of the `ProducerBindingMonitoredValue<type>.MonitoredValue` provides notification to the message handling state machine that a new value is available.
+## How to: Implement `DataManagementSetup`
 
-In the current software version the class `CustomNodeManager` simulates underlying process using random numbers and current time. Arrays length is incremented periodically.
+The `LoggerManagementSetup` constructor initializes all properties, which are injection points of all parties composing this role.
+```C#
+  public sealed class SimulatorDataManagementSetup : DataManagementSetup
+  {
 
-[OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
--->
+    public SimulatorDataManagementSetup()
+    {
+      IServiceLocator _serviceLocator = ServiceLocator.Current;
+      string _configurationFileName = _serviceLocator.GetInstance<string>(SimulatorCompositionSettings.ConfigurationFileNameContract);
+      m_ViewModel = _serviceLocator.GetInstance<SimulatorViewModel>();
+      ConfigurationFactory = new ProducerConfigurationFactory(_configurationFileName);
+      EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();
+      BindingFactory = m_DataGenerator = new DataGenerator();
+      MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
+    }
 
-`Producer` implementation of a data generator to be used for testing purpose.
+    ....
 
-Semantic Data Reactive Networking based on OPC UA Part 14 Pub/Sub library.
+  }
+```
 
-Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may replace this library by a custom one providing unlimited encoding functionality.
+In this example, it is assumed that [`ServiceLocator`](https://www.nuget.org/packages/CommonServiceLocator) is implemented to resolve references to any external services.
+
+Finally the `DataManagementSetup.Start()` method is called to initialize the infrastructure, enable all associations and start pumping the data.
+
+## How to: Implement IBindingFactory
+
+Implementation of this interface is a basic step to implement `Producer` functionality. An instance of the `IBindingFactory` is responsible to create objects implementing `IBinding` that can be used to read or generate (simulator case) from the local data repository.
+
+This section provides hints on how to implement the `Producer` role responsible for:
+- generating stream of process data,
+- packing the data into the messages,
+- and sending the data over the network to all interested parties. 
+
+The class `DataGenerator` captures implementation of a [testing data generator](../../Networking/SimulatorInteroperabilityTest/README.md) aimed at accomplishing interoperability tests defined by the OPC Foundation for PuSub applications. The example contains properties implemented as an instance of class `ProducerBindingMonitoredValue`. Modification of the `ProducerBindingMonitoredValue<type>.MonitoredValue` provides notification to the message handling state machine that a new value is available.
+
+## How to: Implement `IConfigurationFactory`
+
+Implementation of this interface is straightforward and based entirely on the library [`UAOOI.Configuration.Networking`](../../Configuration/Networking/README.MD). In a typical scenario, this implementation should not be considered for further modification.  The only open question is how to provide the file path of the file containing the configuration of this role. In proposed solution the file path is provided by a service defined by the configuration maintained by the application entry point part and localized using `IServiceLocator` in the class `SimulatorDataManagementSetup`: 
+
+```C#
+  string _configurationFileName = _serviceLocator.GetInstance<string>(SimulatorCompositionSettings.ConfigurationFileNameContract);
+```
+This role uses independent configuration file `ConfigurationDataProducer.xml` attached to the project.
 
 ## Current release
 
 > Note; This library is not considered to be published as the NuGet package.
 
-Each role uses independent configuration file as follows:
+## See also
 
-* Producer: `ConfigurationDataProducer.xml`
-* Consumer: `ConfigurationDataConsumer.xml`
+- [API Browser][API Browser]: the preliminary code help documentation.
+ 
+[API Browser]: http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Networking.SemanticData.htm
 
-<!--# TBD 
+- [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 
-> NOTE The rest of document is just template
+[wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
--->

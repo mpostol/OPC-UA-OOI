@@ -33,7 +33,7 @@ The diagram below presents main parts making up the `ReferenceApplication` - an 
 - `UDPMessageHandler`: proprietary UDP `IMessageHandlerFactory` implementation.
 - `Encoding`: IEncodingFactory functionality  implementation limited to encoding simple data types for the testing purpose only.
 - `ReferenceApplication.Core`: this library provides an implementation of a core functionality required by the `ReferenceApplication` and all its components that are helpful in writing well-structured and maintainable applications.
-- `SemanticData`: *SemanticData Reactive Networking* library based on OPC UA Part 14 Pub/Sub.
+- `SemanticData`: *SemanticData Reactive Networking* library based on [OPC UA Part 14 Pub/Sub](../../Networking/SemanticData/README.PubSubMTF.md).
 
 ## How to: Get Started
 

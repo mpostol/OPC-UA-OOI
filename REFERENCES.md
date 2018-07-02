@@ -80,9 +80,13 @@
  
 [OOI.Networking.ReferenceApplication]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/ReferenceApplication
 
-- [ISO/IEC 19464:2014: Advanced Message Queuing Protocol (AMQP) v1.0][ISO.AMQP]
+- [UAOOI Releases Page][OOI.Releases]
+
+[OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
 
 <!--iso-->
+
+- [ISO/IEC 19464:2014: Advanced Message Queuing Protocol (AMQP) v1.0][ISO.AMQP]
 
 [ISO.AMQP]: https://www.iso.org/standard/64955.html
 

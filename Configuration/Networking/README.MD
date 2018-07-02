@@ -47,6 +47,6 @@ The XML schema of the configuration files is available at: [ConfigurationData.xs
 
 ## Code documentation
 
-The documentation of the library code is available on-line at:
-
-[UAOOI.Configuration.Networking.Help]:http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Configuration.Networking.htm
+- [API Browser][API Browser]: the preliminary code help documentation.
+ 
+[API Browser]: http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Networking.SemanticData.htm

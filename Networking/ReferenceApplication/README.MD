@@ -41,7 +41,7 @@ The diagram below presents main parts making up the `ReferenceApplication` - an 
 
 The application is located on the GitHub at [OPC-UA-OOI](https://github.com/mpostol/OPC-UA-OOI) and maintained as the project `Networking.ReferenceApplication` of the solution `UAObjectOrientedInternet.sln`.
 
-The current binary release containing ready to use application is available on the repository [Releases][OOI.Releases] page. Download, unzip and run the exe file to get started.
+The current binary release containing ready to use application is available on the repository [Releases][OOI.Releases] page. Download and run the downloaded .exe file to unzip the content to selected folder. Now you may run the application file `UAOOI.Networking.ReferenceApplication.exe` to get started.
 
 ### Version History
 
@@ -53,4 +53,4 @@ For the diagnostic purpose, the application supports network transfer tracing th
 
 The log file `UANetworkingReferenceApplication.log` captures output messages from some public methods of the `Socket`, `TcpListener`, `TcpClient`, and `Dns` classes. To find the log file location click the `Actions.Open Configuration folder` menu entry.
 
-
+[OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases

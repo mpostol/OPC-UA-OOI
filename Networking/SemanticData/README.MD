@@ -22,34 +22,9 @@ The figure below shows the relationship between the library `UAOOI.Networking.Se
 
 ![Application Architecture](../../CommonResources/Media/DataManagementExternalLibraries.png)
 
-Any application engaging the library is composed using the dependency injection pattern. The `DataManagementSetup`class is a placeholder to gather all external injection points used to compose the application, initialize the communication and bind to local resources. The class declares the following properties that must be initialized by the application to provide specific functionality.
+Any application engaging the library is composed using the dependency injection pattern. The `DataManagementSetup`class is a placeholder to gather all external injection points used to compose the application, initialize the communication and bind to local resources. 
 
-```C#
-    #region Injection points
-    /// <summary>
-    /// Gets or sets the binding factory.
-    /// </summary>
-    /// <value>The binding factory.</value>
-    public IBindingFactory BindingFactory { get; set; }
-    /// <summary>
-    /// Gets or sets the encoding factory.
-    /// </summary>
-    /// <value>The encoding factory.</value>
-    public IEncodingFactory EncodingFactory { get; set; }
-    /// <summary>
-    /// Gets or sets the message handler factory.
-    /// </summary>
-    /// <value>The message handler factory.</value>
-    public IMessageHandlerFactory MessageHandlerFactory { get; set; }
-    /// <summary>
-    /// Gets or sets the configuration factory.
-    /// </summary>
-    /// <value>The configuration factory.</value>
-    public IConfigurationFactory ConfigurationFactory { get; set; }
-    #endregion
-
-```
-To promote flexibility and the separation of concern design approach, the concrete types are loosely coupled with the library. It means, that the selection of the concrete types used to compose the application is up to the application, namely it may designate them at runtime. To conform to the library requirements all the classes must implement appropriate contract defined as an interface. 
+To promote flexibility and the separation of concern design approach, the concreted types are loosely coupled with the library. It means, that the selection of the concrete types used to compose the application is up to the application, namely it may designate them at runtime. To conform to the library requirements all the classes must implement appropriate contract defined as an interface.
 
 - `Configuration`: represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data. This class must implement the [`IConfigurationFactory`](http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/T-UAOOI.Configuration.Networking.IConfigurationFactory.htm) interface. Each `Publisher` and `Consumer` must provide its own configuration.
 

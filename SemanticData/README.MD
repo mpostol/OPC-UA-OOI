@@ -5,7 +5,7 @@
 
 ### Concept
 
-The main challenge that must be faced up by engineering of data processing is the preservation of the data semantics at all the stages of this process to manipulate the data meaningfully. This diagram is a domain model, which presents a conceptual framework of the OPC `SemanticData` supporting contextual data processing outside the *OPC UA Server*. It presents all the major contributors processing the data in the context of `UA Information Model`.
+The main challenge that must be faced up by engineering of data processing is the preservation of the data semantics at all the stages of this process to manipulate the data meaningfully. This diagram is a domain model, which presents a conceptual framework of the `SemanticData` supporting contextual data processing outside the *OPC UA Server* session. It presents all the major contributors processing the data in the context of `UA Information Model`.
 
 `SemanticData` may be directly used by the following classes of actors:
 

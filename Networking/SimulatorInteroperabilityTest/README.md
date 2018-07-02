@@ -2,6 +2,23 @@
 
 ## Getting Started
 
+### Getting Started Tutorial
+
+<!--The topics contained in this section are intended to give you quick exposure to the `OOI Reactive Application` network based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to create `OOI Reactive Application` producer and consumer applications.
+
+Both roles uses configuration managed using the `UAOOI.SemanticDataUANetworkingConfiguration` component. The remote host name/port number and the consumer port number are provided by the application configuration and may be changed using the UI. The configuration location may be opened using the menu. Using menu the configuration files may be opened in a default external editor.-->
+
+<!--### How to: Implement producer role for OPC UA server
+
+The class `CustomNodeManager` captures implementation of an interface between the library and an object supporting  **Address Space Management** (described in  [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD)) functionality in the typical OPC UA server. The **Address Space Management** instantiates the server address space, i.e. creates the nodes and binds the nodes with underlying external behavior. The example contains properties implemented as an instance of class `ProducerBindingMonitoredValue`. Modification of the `ProducerBindingMonitoredValue<type>.MonitoredValue` provides notification to the message handling state machine that a new value is available.
+
+In the current software version the class `CustomNodeManager` simulates underlying process using random numbers and current time. Arrays length is incremented periodically.
+
+[OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
+-->
+
+`Producer` implementation of a data generator to be used for testing purpose.
+
 Semantic Data Reactive Networking based on OPC UA Part 14 Pub/Sub library.
 
 Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may replace this library by a custom one providing unlimited encoding functionality.
@@ -10,6 +27,10 @@ Main purpose of this release is to support implementation of the interoperabilit
 
 > Note; This library is not considered to be published as the NuGet package.
 
+Each role uses independent configuration file as follows:
+
+* Producer: `ConfigurationDataProducer.xml`
+* Consumer: `ConfigurationDataConsumer.xml`
 
 <!--# TBD 
 

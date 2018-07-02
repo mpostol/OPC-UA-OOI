@@ -2,9 +2,6 @@
 
 ## Common Tasks
 
-## Current release
-
-
 The topics contained in this section are intended to give you quick exposure to the `OOI Reactive Application` network based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to create `OOI Reactive Application` producer and consumer applications using the library `UAOOI.Networking.SemanticData'. Current release of the NuGet package is available at:
 
 [UAOOI.Networking.SemanticData](https://www.nuget.org/packages/UAOOI.Networking.SemanticData/)
@@ -21,7 +18,7 @@ Here are steps to create a successful `OOI Reactive Application`:
 > - It is expected that the encoding/decoding functionality is provided outside in a custom library. The interface 'IEncodingFactory' is used for late binding to inject dependency on the external library. 
 >- `Producer` and `Consumer` roles may use independent configurations.
 
-## How to: implement `DataManagementSetup`
+## How to: Implement `DataManagementSetup`
 
 Any application engaging the library is composed using the dependency injection pattern. The `DataManagementSetup`class is a placeholder to gather all external injection points used to compose the application, initialize the communication and bind to local resources. The class declares the following properties that must be initialized by the application to provide specific functionality.
 

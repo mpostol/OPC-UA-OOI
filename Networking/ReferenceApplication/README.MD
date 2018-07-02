@@ -2,24 +2,46 @@
 
 ## Introduction
 
-This project is aimed at implementing an example of the `OOI Reactive Application` supporting producer and consumer roles simultaneously. The purpose of the **Example Application** is to demonstrate the concepts and architecture of the a reactive networking application implementation, rather than to necessarily provide a realistic scenario for its use. For more extensive examples, see the [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD).
+The topics contained in the document [Getting Started Tutorial](../../Networking/SemanticData/READMEGettingStartedTutorial.md) are intended to give you quick exposure to the `OOI Reactive Application` network-based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to customize existing  `OOI Reactive Application`.
 
-Both roles are implemented as independent threads that have common user interface for diagnostic and configuration purpose. The producer sends messages containing the field defined in the configuration file. The values are simulated. To correctly decode the messages the consumer must have configuration defining the same set of fields. The data is encoded using Variant.
+This project is aimed at implementation of an example of the `OOI Reactive Application` supporting producer and consumer roles simultaneously. The purpose of the `ReferenceApplication` is to demonstrate the concepts and architecture of the reactive networking application implementation, rather than to necessarily provide a realistic scenario for its use. For more extensive examples, see the [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD).
+The `ReferenceApplication` hosts parts offering `Producer` and `Consumer` functionality. Both roles are implemented as independent threads that have a common graphical user interface (GUI) for diagnostic and configuration purpose.
+ 
+The `Producer` sends messages containing the fields defined in the configuration file using UDP communication stack. The values are simulated. The `Consumer` is configured to receive these messages from the UDP protocol stack. The `Consumer`to correctly decode the messages must have configuration defining the same set of fields. The data is encoded using *Variant* encoding.
 
-Each role uses independent configuration file as follows:
+The detailed description of the `Consumer` is covered by the document [`ReferenceApplication` Consumer - Data Logger](../../Networking/DataLogger/README.md). The detailed description of the `Producer` is covered by the document  [`ReferenceApplication` Producer - Interoperability Test Data Generator](../../Networking/SimulatorInteroperabilityTest/README.md).
 
-* Producer: `ConfigurationDataProducer.xml`
-* Consumer: `ConfigurationDataConsumer.xml`
+Each role uses independent configuration file. The detailed description of the configuration maintenance is captured in the document [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration).
 
-The schema of the configuration files is available at:  [ConfigurationData.xsd](../../Configuration/Networking/Serialization/ConfigurationData.xsd) and detailed description of the configuration is captured in the document [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration).
+<!--
+
+Note: in current version it is not supported.
 
 By the user interface (UI) remote host name and port numbers can be modified. The IP address is resolved using DNS. Use the update buttons to start communication to apply new settings. The user interface provides also some diagnostic information. All received values are logged and displayed as the list with the time prefix.
 
-## Application
+-->
 
-### Application installation
+## Architecture
 
-The binary release containing ready to use reference application is available on the project [Releases][OOI.Releases] page. Download, unzip and run the exe file to get started. 
+The diagram below presents main parts making up the `ReferenceApplication` - an example application compliant with the *Object Oriented Internet* concept.
+
+![ReferenceApplication Architecture 4.0.0](../../CommonResources/Media/UAOOI.Networking.ReferenceApplication.Layers..png)
+
+- `ReferenceApplication`: SemanticData networking reference application WPF GUI layer - it exposes the startup entry point to the runtime environment.
+- `DataLogger`: is an example of the `Consumer` part of the `ReferenceApplication`.
+- `SimulatorInteroperabilityTest`: `Producer` implementation of a data generator to be used for testing purpose.
+- `UDPMessageHandler`: proprietary UDP `IMessageHandlerFactory` implementation.
+- `Encoding`: IEncodingFactory functionality  implementation limited to encoding simple data types for the testing purpose only.
+- `ReferenceApplication.Core`: this library provides an implementation of a core functionality required by the `ReferenceApplication` and all its components that are helpful in writing well-structured and maintainable applications.
+- `SemanticData`: *SemanticData Reactive Networking* library based on OPC UA Part 14 Pub/Sub.
+
+## How to: Get Started
+
+### Application Installation
+
+The application is located on the GitHub at [OPC-UA-OOI](https://github.com/mpostol/OPC-UA-OOI) and maintained as the project `Networking.ReferenceApplication` of the solution `UAObjectOrientedInternet.sln`.
+
+The current binary release containing ready to use application is available on the repository [Releases][OOI.Releases] page. Download, unzip and run the exe file to get started.
 
 ### Version History
 
@@ -27,32 +49,8 @@ Detailed description is available in file [ReadMe.txt](ReadMe.txt)
 
 ### Troubleshooting
 
-For the diagnostic purpose the application supports network tracing that provides access to information about method invocations and network traffic generated by the application. This feature is useful for debugging applications under development as well as for analyzing deployed applications. The output provided by network tracing is customizable to support different usage scenarios at development time and in a production environment. Traces are to publish specific messages that are generated during application execution. To learn more about configuration of the tracing visit the documentation at [Network Tracing in the .NET Framework](https://msdn.microsoft.com/en-us/library/hyb3xww8.aspx). 
+For the diagnostic purpose, the application supports network transfer tracing that provides access to information about method invocations and network traffic generated by the application. This feature is useful for debugging applications under development as well as for analyzing deployed applications. The output provided by network tracing is customizable to support different usage scenarios at development time and in the production environment. Traces are to publish specific messages that are generated during application execution. To learn more about a configuration of the tracing visit the documentation at [Network Tracing in the .NET Framework](https://msdn.microsoft.com/en-us/library/hyb3xww8.aspx). 
 
 The log file `UANetworkingReferenceApplication.log` captures output messages from some public methods of the `Socket`, `TcpListener`, `TcpClient`, and `Dns` classes. To find the log file location click the `Actions.Open Configuration folder` menu entry.
 
-## Getting Started Tutorial
 
-The topics contained in this section are intended to give you quick exposure to the `OOI Reactive Application` network based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to create `OOI Reactive Application` producer and consumer applications.
-
-Both roles uses configuration managed using the `UAOOI.SemanticDataUANetworkingConfiguration` component. The remote host name/port number and the consumer port number are provided by the application configuration and may be changed using the UI. The configuration location may be opened using the menu. Using menu the configuration files may be opened in a default external editor.
-
-### How to implement the consumer role for WPF application
-
-This section provides hints how to implement the consumer role of any `OOI Reactive Application` processing data received in messages sent over the network by a data producer. For example the following applications are good candidate to support this role:
-
-* HMI device - displaying incoming data on the screen;
-* Supervisory Control and Data Acquisition (SCADA) - equipped with driver compliant with the standard
-* PLC - updating the internal registers using data recovered from the incoming messages.
-
-The class `ConsumerDataManagementSetup` contains code composing an application like that. This part of application consumes the data sent over the network and updates properties in the class `MainWindowViewModel`. The class `MainWindowViewModel` demonstrates how to create bindings to the properties that are holders of values in the [Model View ViewModel (on MSDN)](https://msdn.microsoft.com/en-us/magazine/dd419663.aspx) pattern. The user interface View in the `MainWindow` class is dynamically bounded at run time with the `MainWindowViewModel`. To implement the ViewModel layer in the MVVM pattern the helper generic class `ConsumerBindingMonitoredValue` is used.
-
-The Model layer in the MVVM pattern is implemented by classes located in the `Consumer` folder.
-
-### How to: Implement producer role for OPC UA server
-
-The class `CustomNodeManager` captures implementation of an interface between the library and an object supporting  **Address Space Management** (described in  [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD)) functionality in the typical OPC UA server. The **Address Space Management** instantiates the server address space, i.e. creates the nodes and binds the nodes with underlying external behavior. The example contains properties implemented as an instance of class `ProducerBindingMonitoredValue`. Modification of the `ProducerBindingMonitoredValue<type>.MonitoredValue` provides notification to the message handling state machine that a new value is available.
-
-In the current software version the class `CustomNodeManager` simulates underlying process using random numbers and current time. Arrays length is incremented periodically.
-
-[OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases

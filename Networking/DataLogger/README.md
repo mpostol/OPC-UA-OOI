@@ -4,7 +4,7 @@
 
 Working through this tutorial gives you an introductory understanding of the steps required to implement `Consumer` role of `OOI Reactive Application`. `DataLogger` is a sample implementation of the `Consumer` part of the `ReferenceApplication`, which is an example application of `SemanticData` reactive networking based on [OPC UA Part 14 Pub/Sub](../../Networking/SemanticData/README.PubSubMTF.md) specification.
 
-Here are steps undertaken to implement the `Consumer` role of the application:
+Here are steps undertook to implement the `Consumer` role in the application:
 
 1. `DataManagementSetup`: this class has been overridden by the `LoggerManagementSetup`class and it initializes the communication and binds data fields recovered form messages to local resources.
 1. `IEncodingFactory` and `IMessageHandlerFactory`: has been implemented in external common libraries and `Consumer` doesn't depend on this implementation - current implementation of the interfaces is localized as services using an instance of the `IServiceLocator` interface.
@@ -40,7 +40,7 @@ Finally the `DataManagementSetup.Start()` method is called to initialize the inf
 
 Implementation of this interface is a basic step to implement `Consumer` functionality. An instance of the `IBindingFactory` is responsible to create objects implementing `IBinding` that can be used by the `Consumer` to save the data received over the wire in the local data repository.
 
-The class `DataConsumer` is a sample implementation of a [data logger](./../DataLogger/README.md) functionality recording data over time. It consumes the testing data sent and updates properties in the class `ConsumerViewModel` implementing *ViewModel* layer in the *[Model View ViewModel (on MSDN)](https://msdn.microsoft.com/en-us/magazine/dd419663.aspx)* (*MVVM pattern*). The class `DataConsumer` demonstrates how to create bindings interconnecting the data received over the wire and the properties that are the ultimate destination of the data. The user interface provided by the *View* layer implemented in the `UAOOI.Networking.ReferenceApplication.MainWindow` class is dynamically bounded at run time with the `ConsumerViewModel`. To implement the *ViewModel* layer in the *MVVM pattern* the helper generic class `UAOOI.Networking.SemanticData.DataRepository.ProducerBindingMonitoredValue<type>` is used.
+The class `DataConsumer` is a sample implementation of a data logger functionality recording data over time. It consumes the testing data sent and updates properties in the class `ConsumerViewModel` implementing *ViewModel* layer in the *[Model View ViewModel (on MSDN)](https://msdn.microsoft.com/en-us/magazine/dd419663.aspx)* (*MVVM pattern*). The class `DataConsumer` demonstrates how to create bindings interconnecting the data received over the wire and the properties that are the ultimate destination of the data. The user interface provided by the *View* layer implemented in the `UAOOI.Networking.ReferenceApplication.MainWindow` class is dynamically bounded at run time with the `ConsumerViewModel`. To implement the *ViewModel* layer in the *MVVM pattern* the helper generic class `UAOOI.Networking.SemanticData.DataRepository.ProducerBindingMonitoredValue<type>` is used.
 
 ## How to: Implement `IConfigurationFactory`
 

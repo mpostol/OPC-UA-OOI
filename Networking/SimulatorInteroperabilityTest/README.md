@@ -105,10 +105,10 @@ Mass_1	|UInt32	|
 …	| UInt32	|
 |Mass_99	| UInt32	
 
-####	UPD Message Writers should use the following settings:
+####	UPD Settings
 
 DataSet	|DataSetWriterId	|Message Length	|Message Encoding
--|-|-
+-|-|-|-
 DataSet 1	|1	|2 byte	|Variant
 DataSet 1	|11	|1 byte	|Compressed
 DataSet 1	|12	|2 byte	|DataValue

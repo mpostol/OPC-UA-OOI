@@ -7,13 +7,13 @@ Working through this tutorial gives you an introductory understanding of the ste
 Here are steps undertaken to implement the `Consumer` role of the application:
 
 1. `DataManagementSetup`: this class has been overridden by the `LoggerManagementSetup`class and it initializes the communication and binds data fields recovered form messages to local resources.
-1. `IEncodingFactory` and `IMessageHandlerFactory`: has been implemented in external common libraries and `Consumer` doesn't depend on the implementation - this interfaces are localized as services using an instance of the `IServiceLocator` interface.
+1. `IEncodingFactory` and `IMessageHandlerFactory`: has been implemented in external common libraries and `Consumer` doesn't depend on this implementation - current implementation of the interfaces is localized as services using an instance of the `IServiceLocator` interface.
 1. `IBindingFactory`: has been implemented in the class  `DataConsumer` that is responsible to synchronize the values of the local data repository properties and messages received over the wire.
 1. `IConfigurationFactory`: the class `ConsumerConfigurationFactory` implements this interface to be used for the configuration file opening.
 
 ## How to: Implement `DataManagementSetup`
 
-The `LoggerManagementSetup` constructor initializes all properties, which are injection points of all parties composing this role.
+The `LoggerManagementSetup` constructor initializes all properties, which are injection points of all parts composing this role.
 ```C#
   public sealed class LoggerManagementSetup : DataManagementSetup
   {
@@ -50,6 +50,7 @@ Implementation of this interface is straightforward and based entirely on the li
 string _ConsumerConfigurationFileName = _serviceLocator.GetInstance<string>(ConsumerCompositionSettings.ConfigurationFileNameContract);
 ```
 This role uses independent configuration file `ConfigurationDataConsumer.xml` attached to the project.
+This file contains a mirror configuration of the [`Producer`](../../Networking/SimulatorInteroperabilityTest/README.md) role configuration to log all the generated data.
 
 ## Current release
 

@@ -18,7 +18,7 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
   internal class DataGenerator : IBindingFactory, IDisposable
   {
 
-    #region ImportingConstructor
+    #region Constructor
     /// <summary>
     /// Initializes a new instance of the <see cref="DataGenerator" /> class that generates the data to be used for interoperability testing.
     /// </summary>

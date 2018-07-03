@@ -6,9 +6,13 @@ namespace UAOOI.Networking.SemanticData
 {
 
   /// <summary>
-  /// Interface IBindingFactory - if implemented creates object implementing <see cref="IBinding"/> that can used by a data source to 
-  /// update selected variable on the creator side.
+  /// The IBindingFactory interface - if implemented creates object implementing <see cref="IBinding"/> that can used:
+  /// - by the consumer to save the data received over the wire in the local data repository.
+  /// - by the producer to read from the local data repository.
   /// </summary>
+  /// <remarks>
+  /// Implementation of this interface is a basic step to provide consumer and/or producer functionality. 
+  /// </remarks>
   public interface IBindingFactory
   {
 
@@ -24,7 +28,7 @@ namespace UAOOI.Networking.SemanticData
     /// <returns>Returns an object implementing the <see cref="IConsumerBinding" /> interface that can be used to update selected variable on the factory side.</returns>
     IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo);
     /// <summary>
-    /// Gets the binding captured by an instance of the <see cref="IProducerBinding" /> type used by the consumer to save the data in the data repository.
+    /// Gets the binding captured by an instance of the <see cref="IProducerBinding" /> type used by the producer to read from the local data repository.
     /// </summary>
     /// <param name="repositoryGroup">It is the name of a repository group profiling the configuration behavior, e.g. encoders selection.
     /// The configuration of the repositories belonging to the same group are handled according to the same profile.

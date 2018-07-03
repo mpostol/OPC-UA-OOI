@@ -34,9 +34,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
     {
       if (name == "Value1")
       {
-        if (Value1.HandlerState != HandlerState.Operational)
-          throw new ArgumentOutOfRangeException("Wrong HandlerState");
-        if (((IProducerBinding)Value1).Encoding.BuiltInType != BuiltInType.String)
+        if (Value1.Encoding.BuiltInType != BuiltInType.String)
           throw new ArgumentOutOfRangeException("Wrong type");
         if ("Value1" != name)
           throw new ArgumentOutOfRangeException("Wrong name");
@@ -44,9 +42,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
       }
       else if (name == "Value2")
       {
-        if (Value1.HandlerState != HandlerState.Operational)
-          throw new ArgumentOutOfRangeException("Wrong HandlerState");
-        if (((IProducerBinding)Value2).Encoding.BuiltInType != BuiltInType.Double)
+        if (Value2.Encoding.BuiltInType != BuiltInType.Double)
           throw new ArgumentOutOfRangeException("Wrong type");
         if ("Value2" != name)
           throw new ArgumentOutOfRangeException("Wrong name");

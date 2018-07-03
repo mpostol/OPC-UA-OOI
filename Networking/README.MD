@@ -1,4 +1,4 @@
-# Internet of Things (IOT) Communication
+# Internet of Things (IoT) Communication
 
 ## Introduction
 

@@ -30,16 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ConfigurationDataConsumer.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="ConfigurationDataConsumer.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="CommonServiceLocator" Version="2.0.3" />
     <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />
   </ItemGroup>
 
@@ -48,6 +39,12 @@
     <ProjectReference Include="..\Encoding\Networking.Encoding.csproj" />
     <ProjectReference Include="..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj" />
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ConfigurationDataConsumer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

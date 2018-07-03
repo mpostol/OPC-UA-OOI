@@ -12,14 +12,14 @@ The URI syntax is described in the document: [Uniform Resource Identifier \(URI\
 The **Data Discovery** procedure may be applied to the following scenarios:
 
 * **Design time data discovery** - all about using data definition \(OPC UA Information Model - semantics\) to configure data bindings and data distribution over the wire.
-* **Startup process** - all about bootstrapping process of the **UA Data Application**.
+* **Startup process** - all about bootstrapping process of the `OOI Reactive Application`.
 * **Operational time** - all about dynamic data definitions and security stuff management \(certificates, keys\)
 
 Design time data discovery process is illustrated in the activity diagram:
 
 * ![Design Time Activities](../CommonResources/Media/DataDiscovery.Design Time Activities.png)
 
-The startup process of an **UA Data Application** is illustrated in the activity diagram:
+The startup process of an `OOI Reactive Application` is illustrated in the activity diagram:
 
 * ![StartupActivityDiagram](../CommonResources/Media/DataDiscovery.StartupActivityDiagram.png)
 

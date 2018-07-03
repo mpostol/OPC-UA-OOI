@@ -1,20 +1,11 @@
-﻿//_______________________________________________________________
-//  Title   : Assembly info for: UAOOI.UANetworkingReferenceApplication
-//  System  : Microsoft VisualStudio 2015 / C#
-//
-//  Copyright MPostol (c) 2018
-//  +48 608 619 899
-//  commserver@cas.eu
-//  https://github.com/mpostol/OPC-UA-OOI
-//_______________________________________________________________
-
+﻿
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 
 [assembly: AssemblyTitle("UAOOI.UANetworkingReferenceApplication")]
-[assembly: AssemblyDescription("Object Oriented Internet: UAOOI SemanticData UA-Networking Reference Application.")]
+[assembly: AssemblyDescription("Object Oriented Internet: SemanticData Networking Reference Application WPF GUI.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
 [assembly: AssemblyProduct("Object Oriented Internet")]

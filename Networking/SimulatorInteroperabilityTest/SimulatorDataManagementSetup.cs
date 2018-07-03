@@ -28,8 +28,7 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
       m_ViewModel = _serviceLocator.GetInstance<SimulatorViewModel>();
       ConfigurationFactory = new ProducerConfigurationFactory(_configurationFileName);
       EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();
-      _DataGenerator = new DataGenerator();
-      BindingFactory = _DataGenerator;
+      BindingFactory = m_DataGenerator = new DataGenerator();
       MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
     }
     #endregion
@@ -68,7 +67,7 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
       m_onDispose(disposing);
       base.Dispose(disposing);
       if (disposing)
-        _DataGenerator.Dispose();
+        m_DataGenerator.Dispose();
     }
     #endregion
 
@@ -78,7 +77,7 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// </summary>
     /// <value>The view model.</value>
     private SimulatorViewModel m_ViewModel;
-    private DataGenerator _DataGenerator = null;
+    private DataGenerator m_DataGenerator = null;
     private Action<bool> m_onDispose = disposing => { };
     #endregion
 

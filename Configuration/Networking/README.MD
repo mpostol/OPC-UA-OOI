@@ -15,7 +15,7 @@ Let me know if it works for you and if not how to converge proposed solution and
 
 ### Run time
 
-By design it is a plug-in or using modern terminology application composition part of the library described in [Networking of SemanticData Library](../../Networking/SemanticData/README.MD#networking-of-semanticdata-library)  and at run time it can be used as the primary source of configuration for any standalone OPC *UA Data Application* and OPC UA Server supporting PubSub role.
+By design it is a plug-in or using modern terminology application composition part of the library described in [Networking of SemanticData Library](../../Networking/SemanticData/README.MD#networking-of-semanticdata-library)  and at run time it can be used as the primary source of configuration for any standalone `OOI Reactive Application` and `UA Server` supporting PubSub role.
 
 In this case the application configuration may:
 
@@ -47,6 +47,6 @@ The XML schema of the configuration files is available at: [ConfigurationData.xs
 
 ## Code documentation
 
-The documentation of the library code is available on-line at:
-
-[UAOOI.Configuration.Networking.Help]:http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Configuration.Networking.htm
+- [API Browser][API Browser]: the preliminary code help documentation.
+ 
+[API Browser]: http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Networking.SemanticData.htm

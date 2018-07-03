@@ -1,6 +1,5 @@
 ﻿
 using System;
-using System.ComponentModel.Composition;
 using System.IO;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;

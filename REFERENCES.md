@@ -1,5 +1,7 @@
 # References
 
+<!--wordpress-->
+
 - [OPC Unified Architecture][wordpress.opc-ua]
 
 [wordpress.opc-ua]: https://mpostol.wordpress.com/opc-ua/
@@ -16,9 +18,17 @@
 
 [wordpress.OPCUAMTF]: https://mpostol.wordpress.com/2013/08/04/opc-unified-architecture-main-technological-features/
 
+- [OPC UA Makes Smart User Interface Possible][wordpress.HMI]
+
+[wordpress.HMI]:https://mpostol.wordpress.com/2013/08/11/opc-ua-makes-smart-user-interface-possible/
+
+<!--commsvr-->
+
 - [OPC UA Information Model Deployment][CAS.OPCUAIMD]
- 
+
 [CAS.OPCUAIMD]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf
+
+<!--ietf.org-->
 
 - [RFC 768: User Datagram ProtocolJ, August 1980][RFC.UDP]
 
@@ -36,9 +46,21 @@
 
 [RFC.JSON]:https://tools.ietf.org/html/rfc8259
 
+- [IANA (Internet Assigned Numbers Authority), Hypertext Transfer Protocol (HTTP) Parameters.][IANAHTTPPARAMS]
+
+[IANAHTTPPARAMS]: http://www.iana.org/assignments/http-parameters/http-parameters.xml
+
+<!--opcfoundation-->
+
 - [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
 
 [OPC.UA.PubSub]: https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
+
+- [OPC Unified Architecture Specification  Part 7: Profiles Release 1.04][OPC.UA.Profiles]
+
+[OPC.UA.Profiles]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-7-profiles/
+
+<!--oasis-open-->
 
 -  [OASIS MQTT Version 3.1.1 specification][MQTT]
   
@@ -48,9 +70,7 @@
 
 [AMQP]:http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html
 
-- [OPC Unified Architecture Specification  Part 7: Profiles Release 1.04][OPC.UA.Profiles]
-
-[OPC.UA.Profiles]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-7-profiles/
+<!--OOI on GitHub-->
 
 - [OOI.Networking.UDPMessageHandler][OOI.Networking.UDPMessageHandler]
 
@@ -60,6 +80,12 @@
  
 [OOI.Networking.ReferenceApplication]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/ReferenceApplication
 
+- [UAOOI Releases Page][OOI.Releases]
+
+[OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
+
+<!--iso-->
+
 - [ISO/IEC 19464:2014: Advanced Message Queuing Protocol (AMQP) v1.0][ISO.AMQP]
 
 [ISO.AMQP]: https://www.iso.org/standard/64955.html
@@ -68,7 +94,4 @@
 
 [ISO.MQTT]: https://www.iso.org/standard/69466.html
 
-- [IANA (Internet Assigned Numbers Authority), Hypertext Transfer Protocol (HTTP) Parameters.][IANAHTTPPARAMS]
-
-[IANAHTTPPARAMS]: http://www.iana.org/assignments/http-parameters/http-parameters.xml
 

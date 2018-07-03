@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel;
 
-namespace UAOOI.Networking.SemanticData
+namespace UAOOI.Networking.SemanticData.DataRepository
 {
   /// <summary>
   /// Class Extensions - provides a set of static helper methods for this library.
@@ -29,8 +29,7 @@ namespace UAOOI.Networking.SemanticData
         //Save the new value. 
         oldValue = newValue;
         //Raise the event 
-        if (handler != null)
-          handler(sender, new PropertyChangedEventArgs(propertyName));
+        handler?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
       }
       //Signal what happened. 
       return changed;

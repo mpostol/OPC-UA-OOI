@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using UAOOI.Networking.SemanticData.Common;
 
 namespace UAOOI.Networking.SemanticData.MessageHandling
 {

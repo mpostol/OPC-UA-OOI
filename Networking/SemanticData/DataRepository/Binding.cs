@@ -2,6 +2,7 @@
 using System;
 using System.Globalization;
 using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.SemanticData.Common;
 
 namespace UAOOI.Networking.SemanticData.DataRepository
 {

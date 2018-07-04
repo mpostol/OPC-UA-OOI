@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel.Composition;
+using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Networking.UDPMessageHandler.Configuration;

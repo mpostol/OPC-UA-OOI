@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UAOOI.Networking.SemanticData
+namespace UAOOI.Networking.SemanticData.Common
 {
   /// <summary>
   /// Class AssociationStateChangedEventArgs represents the class containing event data representing current configurable object state <see cref="HandlerState"/>.

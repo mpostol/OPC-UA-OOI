@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace UAOOI.Networking.SemanticData
+namespace UAOOI.Networking.SemanticData.Common
 {
   /// <summary>
   /// Class IDataUniqueIdentifier - instance of this interface provides globally unique identifier (GUID) of the data. 

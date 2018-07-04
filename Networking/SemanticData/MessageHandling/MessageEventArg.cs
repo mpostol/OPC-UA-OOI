@@ -1,8 +1,7 @@
 ﻿
 using System;
-using UAOOI.Networking.SemanticData.MessageHandling;
 
-namespace UAOOI.Networking.SemanticData
+namespace UAOOI.Networking.SemanticData.MessageHandling
 {
 
   /// <summary>

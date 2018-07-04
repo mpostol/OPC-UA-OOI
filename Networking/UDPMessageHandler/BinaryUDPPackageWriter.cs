@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using UAOOI.Networking.SemanticData;
+using UAOOI.Networking.SemanticData.Common;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Networking.UDPMessageHandler.Diagnostic;

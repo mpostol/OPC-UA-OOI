@@ -1,8 +1,9 @@
 ﻿
 using System;
+using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.SemanticData.Common;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;
-using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Networking.SemanticData.MessageHandling
 {

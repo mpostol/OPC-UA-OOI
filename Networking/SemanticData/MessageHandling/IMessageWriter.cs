@@ -1,7 +1,7 @@
 ﻿
 using System;
-using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.SemanticData.DataRepository;
 
 namespace UAOOI.Networking.SemanticData.MessageHandling
 {

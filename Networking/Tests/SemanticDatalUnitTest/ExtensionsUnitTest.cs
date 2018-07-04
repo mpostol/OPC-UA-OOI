@@ -1,5 +1,6 @@
-﻿using System;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UAOOI.Networking.SemanticData.DataRepository;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
 {

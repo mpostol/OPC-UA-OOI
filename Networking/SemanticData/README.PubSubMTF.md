@@ -1,4 +1,3 @@
-
 # OPC UA PubSub Main Technology Features
 
 # Introduction

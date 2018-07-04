@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace UAOOI.Configuration.DataBindings.Common
+namespace UAOOI.Configuration.Core
 {
   /// <summary>
   /// Instance of this class provides more information on the type of the changes made in the server configuration.

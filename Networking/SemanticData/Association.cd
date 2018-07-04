@@ -11,44 +11,38 @@
   <Class Name="UAOOI.Networking.SemanticData.ConsumerAssociation" Collapsed="true">
     <Position X="5.5" Y="3.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEBAgAAAABEAAAAAAAAQAEAAAAAAAAAAAoAAA=</HashCode>
+      <HashCode>AAAAAAAEBAgAAAAAEAAAAAAAAQAEAAAAAAAAAAAoAAA=</HashCode>
       <FileName>ConsumerAssociation.cs</FileName>
     </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Field Name="m_DataSetBindings" />
-    </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="UAOOI.Networking.SemanticData.ProducerAssociation" Collapsed="true">
+  <Class Name="UAOOI.Networking.SemanticData.ProducerAssociation">
     <Position X="7.75" Y="3.25" Width="2" />
-    <AssociationLine Name="m_DataSetBindings" Type="UAOOI.Networking.SemanticData.DataRepository.IProducerBinding" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="8.75" Y="3.941" />
-        <Point X="8.75" Y="4.469" />
-        <Point X="11.25" Y="4.469" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAEBCgAEAAAAGBAAAgICAAEAQABEAAAAgQkAAQ=</HashCode>
       <FileName>ProducerAssociation.cs</FileName>
     </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Field Name="m_MessageWriter" />
-      <Field Name="m_DataSetBindings" />
-    </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="UAOOI.Networking.SemanticData.AssociationsCollection" Collapsed="true">
+  <Class Name="UAOOI.Networking.SemanticData.AssociationsCollection">
     <Position X="6.75" Y="7" Width="2.25" />
     <Compartments>
-      <Compartment Name="Nested Types" Collapsed="false" />
+      <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
+    <NestedTypes>
+      <Class Name="UAOOI.Networking.SemanticData.AssociationsCollection.SemanticData" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>AssociationsCollection.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAgAAQAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AssociationsCollection.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="UAOOI.Networking.SemanticData.MessageHandling.IMessageWriter" Collapsed="true">
-    <Position X="11.25" Y="3.25" Width="2.25" />
+    <Position X="11" Y="1.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MessageHandling\IMessageWriter.cs</FileName>
@@ -58,17 +52,19 @@
     <Position X="11.25" Y="4.25" Width="2.25" />
     <InheritanceLine Type="UAOOI.Networking.SemanticData.DataRepository.IBinding" FixedToPoint="true">
       <Path>
-        <Point X="7.75" Y="6" />
-        <Point X="7.75" Y="5.452" />
-        <Point X="11.5" Y="5.452" />
+        <Point X="5.5" Y="6" />
+        <Point X="5.5" Y="5.452" />
+        <Point X="7.688" Y="5.452" />
+        <Point X="7.688" Y="3.188" />
+        <Point X="11.188" Y="3.188" />
+        <Point X="11.188" Y="5.164" />
+        <Point X="11.5" Y="5.164" />
         <Point X="11.5" Y="5.07" />
       </Path>
     </InheritanceLine>
     <InheritanceLine Type="System.ComponentModel.INotifyPropertyChanged" ManuallyRouted="true" FixedToPoint="true">
       <Path>
         <Point X="12.5" Y="6" />
-        <Point X="12.5" Y="5.643" />
-        <Point X="12.5" Y="5.643" />
         <Point X="12.5" Y="5.07" />
       </Path>
     </InheritanceLine>
@@ -81,8 +77,8 @@
     <Position X="2" Y="3.25" Width="1.75" />
     <InheritanceLine Type="UAOOI.Networking.SemanticData.DataRepository.IBinding" ManuallyRouted="true">
       <Path>
-        <Point X="7.75" Y="6" />
-        <Point X="7.75" Y="5.452" />
+        <Point X="5.5" Y="6" />
+        <Point X="5.5" Y="5.452" />
         <Point X="2.875" Y="5.452" />
         <Point X="2.875" Y="3.941" />
       </Path>
@@ -93,9 +89,9 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="UAOOI.Networking.SemanticData.DataRepository.IBinding" Collapsed="true">
-    <Position X="7" Y="6" Width="1.5" />
+    <Position X="4.75" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAARAAAAAAAAAAAAAAAgQAUAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAIAAAARAAAAAAAAAAAAAAAgQAUAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DataRepository\IBinding.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -104,7 +100,7 @@
     <TypeIdentifier />
   </Interface>
   <Interface Name="UAOOI.Networking.SemanticData.MessageHandling.IMessageHandler" Collapsed="true">
-    <Position X="13.75" Y="4.5" Width="1.5" />
+    <Position X="11.5" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAABAQAAAA=</HashCode>
       <FileName>MessageHandling\IMessageHandler.cs</FileName>

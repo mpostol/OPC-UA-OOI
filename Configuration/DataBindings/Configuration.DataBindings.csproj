@@ -31,6 +31,7 @@ It allows also to add data binding to the configuration. It is part of the proje
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core\Configuration.Core.csproj" />
     <ProjectReference Include="..\Networking\Configuration.Networking.csproj" />
   </ItemGroup>
 

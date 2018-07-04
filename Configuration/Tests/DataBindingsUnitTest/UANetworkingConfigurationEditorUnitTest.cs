@@ -1,10 +1,10 @@
 ﻿
+using CommonServiceLocator;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Reflection;
-using CommonServiceLocator;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.Configuration.DataBindings.Common;
+using UAOOI.Configuration.Core;
 using UAOOI.Configuration.DataBindings.UnitTest.Exports;
 using UAOOI.Configuration.Networking.Serialization;
 

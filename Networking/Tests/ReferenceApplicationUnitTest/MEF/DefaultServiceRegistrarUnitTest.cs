@@ -8,8 +8,8 @@ using System.Diagnostics;
 using System.Linq;
 using UAOOI.Networking.DataLogger;
 using UAOOI.Networking.ReferenceApplication.MEF;
+using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.Diagnostics;
-using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Networking.SimulatorInteroperabilityTest;
 
 namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF

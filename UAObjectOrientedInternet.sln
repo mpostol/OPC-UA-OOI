@@ -100,6 +100,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.DataLogger.UnitT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.SimulatorInteroperabilityTest.UnitTest", "Networking\Tests\Networking.SimulatorInteroperabilityTest.UnitTest\Networking.SimulatorInteroperabilityTest.UnitTest.csproj", "{3BF22621-2E78-4F60-B7C9-7C61D1F440BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration.Core", "Configuration\Core\Configuration.Core.csproj", "{0A2FB856-D50C-463D-8218-063A36942188}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -226,6 +228,10 @@ Global
 		{3BF22621-2E78-4F60-B7C9-7C61D1F440BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BF22621-2E78-4F60-B7C9-7C61D1F440BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BF22621-2E78-4F60-B7C9-7C61D1F440BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A2FB856-D50C-463D-8218-063A36942188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A2FB856-D50C-463D-8218-063A36942188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A2FB856-D50C-463D-8218-063A36942188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A2FB856-D50C-463D-8218-063A36942188}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -263,6 +269,7 @@ Global
 		{2238851E-4DB8-46B0-B38D-0E2315FE153E} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
 		{45BE72F2-3F5B-4D13-B931-0CA62F404D4C} = {19A61D68-0ECA-4093-AEE5-370BC3CE777C}
 		{3BF22621-2E78-4F60-B7C9-7C61D1F440BA} = {19A61D68-0ECA-4093-AEE5-370BC3CE777C}
+		{0A2FB856-D50C-463D-8218-063A36942188} = {2148B4AF-8B02-45C3-89E7-AEACAE448DDA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9388D93E-9AA9-40EE-A0C6-F096265079B2}

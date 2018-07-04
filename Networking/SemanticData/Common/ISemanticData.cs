@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace UAOOI.Networking.SemanticData
+namespace UAOOI.Networking.SemanticData.Common
 {
 
   /// <summary>

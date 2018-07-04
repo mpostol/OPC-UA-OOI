@@ -88,6 +88,10 @@
       <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
       <Name>Common.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Core\Configuration.Core.csproj">
+      <Project>{0a2fb856-d50c-463d-8218-063a36942188}</Project>
+      <Name>Configuration.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DataBindings\Configuration.DataBindings.csproj">
       <Project>{f8db9567-c559-440c-bbcf-e02013f9ab94}</Project>
       <Name>Configuration.DataBindings</Name>

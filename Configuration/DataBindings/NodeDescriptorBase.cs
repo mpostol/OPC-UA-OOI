@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using UAOOI.Configuration.DataBindings.Common;
+using UAOOI.Configuration.Core;
 
 namespace UAOOI.Configuration.DataBindings
 {

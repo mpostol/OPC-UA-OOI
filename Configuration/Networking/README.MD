@@ -41,7 +41,7 @@ It is good opportunity to review your requirements (if you have any) against the
 
 ## Configuration content
 
-The detailed description of the configuration files content is captured in the code documentation [Configuration Networking Help][UAOOI.Configuration.Networking.Help].
+The detailed description of the configuration files content is captured in the code help documentation [API Browser][API Browser].
 
 The XML schema of the configuration files is available at: [ConfigurationData.xsd](./Serialization/ConfigurationData.xsd). Intentionally data producers and consumers use the same schema for configuration files. It makes it easier to harmonize these roles configuration and supports two roles in one application.
 

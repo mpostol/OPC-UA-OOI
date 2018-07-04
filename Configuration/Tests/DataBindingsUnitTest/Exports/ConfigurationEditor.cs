@@ -1,5 +1,6 @@
-﻿using System;
-using UAOOI.Configuration.DataBindings.Common;
+﻿
+using System;
+using UAOOI.Configuration.Core;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings.UnitTest.Exports

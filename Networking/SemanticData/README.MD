@@ -74,7 +74,7 @@ The library provides basic implementation of the `Message` class that supports p
 
 ### Messages Sequence
 
-![Sequence Diagram](../../Networking/SemanticData/Media/MessagesLoop.png)
+![Sequence Diagram](../../CommonResources/Media/MessagesLoop.png)
 
 ## Testing
 

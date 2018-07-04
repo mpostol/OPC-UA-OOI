@@ -2,7 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using UAOOI.Configuration.DataBindings.Common;
+using UAOOI.Configuration.Core;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings

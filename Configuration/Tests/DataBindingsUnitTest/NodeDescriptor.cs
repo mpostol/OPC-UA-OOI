@@ -1,6 +1,6 @@
 ﻿
 using System.Xml;
-using UAOOI.Configuration.DataBindings.Common;
+using UAOOI.Configuration.Core;
 
 namespace UAOOI.Configuration.DataBindings.UnitTest
 {

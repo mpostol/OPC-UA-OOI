@@ -1,7 +1,7 @@
 ﻿
 using System.Xml;
 
-namespace UAOOI.Configuration.DataBindings.Common
+namespace UAOOI.Configuration.Core
 {
   /// <summary>
   /// Provides description of the node to be configured.

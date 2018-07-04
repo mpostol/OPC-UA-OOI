@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace UAOOI.Configuration.DataBindings.Common
+namespace UAOOI.Configuration.Core
 {
   /// <summary>
   /// Gets access to the server configuration file editor.

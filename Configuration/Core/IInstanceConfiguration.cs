@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.Configuration.DataBindings.Common
+namespace UAOOI.Configuration.Core
 {
 
   /// <summary>

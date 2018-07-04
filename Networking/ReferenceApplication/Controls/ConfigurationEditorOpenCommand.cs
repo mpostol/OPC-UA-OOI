@@ -5,7 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
-using UAOOI.Configuration.DataBindings.Common;
+using UAOOI.Configuration.Core;
 
 namespace UAOOI.Networking.ReferenceApplication.Controls
 {

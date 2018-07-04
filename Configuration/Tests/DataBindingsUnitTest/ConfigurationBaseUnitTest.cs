@@ -1,9 +1,9 @@
 ﻿
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.Common.Infrastructure.Diagnostic;
-using UAOOI.Configuration.DataBindings.Common;
+using UAOOI.Configuration.Core;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Configuration.DataBindings.UnitTest

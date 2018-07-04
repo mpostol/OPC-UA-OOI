@@ -218,9 +218,9 @@
       <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
       <Name>Common.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Configuration\DataBindings\Configuration.DataBindings.csproj">
-      <Project>{F8DB9567-C559-440C-BBCF-E02013F9AB94}</Project>
-      <Name>Configuration.DataBindings</Name>
+    <ProjectReference Include="..\..\Configuration\Core\Configuration.Core.csproj">
+      <Project>{0a2fb856-d50c-463d-8218-063a36942188}</Project>
+      <Name>Configuration.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj">
       <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>

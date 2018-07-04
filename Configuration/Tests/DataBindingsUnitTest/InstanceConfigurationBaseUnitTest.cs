@@ -1,6 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using UAOOI.Configuration.DataBindings.Common;
+using UAOOI.Configuration.Core;
 
 namespace UAOOI.Configuration.DataBindings.UnitTest
 {

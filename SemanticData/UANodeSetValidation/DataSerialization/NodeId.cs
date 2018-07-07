@@ -2,6 +2,7 @@
 using System;
 using System.Globalization;
 using System.Text;
+using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {
@@ -452,6 +453,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       if (Object.ReferenceEquals(value1, null))
         return !Object.ReferenceEquals(value2, null);
       return (value1.CompareTo(value2) != 0);
+    }
+    /// <summary>
+    /// Converts an identifier and a namespaceUri to a local NodeId using the namespaceTable.
+    /// </summary>
+    /// <param name="identifier">The identifier for the node.</param>
+    /// <param name="namespaceUri">The URI to look up.</param>
+    /// <param name="namespaceTable">The table to use for the URI lookup.</param>
+    /// <returns>A local NodeId</returns>
+    /// <exception cref="ServiceResultException">Thrown when the namespace cannot be found</exception>
+    public static NodeId Create(object identifier, string namespaceUri, NamespaceTable namespaceTable)
+    {
+      int index = -1;
+      if (namespaceTable != null)
+        index = namespaceTable.GetIndex(namespaceUri);
+      if (index < 0)
+        throw new ServiceResultException(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdNotDefined,  $"NamespaceUri ({namespaceUri}) is not in the namespace table."), "BuildError_BadNodeIdInvalid");
+      return new NodeId(identifier, (ushort)index);
     }
 
     #region  Format()

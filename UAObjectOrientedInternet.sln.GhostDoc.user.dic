@@ -6,6 +6,7 @@ commsvr
 Composable
 const
 Fallback
+Historizing
 Json
 Kerberos
 Locator

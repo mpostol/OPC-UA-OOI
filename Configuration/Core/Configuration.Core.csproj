@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>UAOOI.Configuration.Core</AssemblyName>
+    <RootNamespace>UAOOI.Configuration.Core</RootNamespace>
+    <Description>The library contains a shared interfaces for server configuration which OPC UA applications can reference.
+The library provides an abstraction over any OPC UA Server configuration plug-in. Using the library allows an application to indirectly access the server configuration attributes without relying on hard references. The hope is that using this library, third-party applications and frameworks can begin to leverage server configuration management without tying themselves down to a specific     implementation.</Description>
+    <Version>4.0.0</Version>
+    <Authors>MPostol</Authors>
+    <Company>commsvr.com</Company>
+    <Product>Object Oriented Internet</Product>
+    <Copyright>Copyright MPostol (c) 2018</Copyright>
+    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;1705;IDE0001;IDE0002;IDE0003</NoWarn>
+  </PropertyGroup>
+
+</Project>

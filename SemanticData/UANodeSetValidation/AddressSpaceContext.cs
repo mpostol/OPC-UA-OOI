@@ -21,7 +21,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   sealed public class AddressSpaceContext : IAddressSpaceContext
   {
 
-    #region creator
+    #region constructor
     /// <summary>
     /// Initializes a new instance of the <see cref="AddressSpaceContext" /> class.
     /// </summary>

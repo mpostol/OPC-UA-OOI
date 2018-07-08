@@ -56,6 +56,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       if (value == null) throw new ArgumentNullException("value");
       Name = value.Name;
       NamespaceIndex = value.NamespaceIndex;
+      NamespaceIndexSpecified = value.NamespaceIndexSpecified;
     }
     /// <summary>
     /// Initializes the object with a name.
@@ -68,6 +69,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       NamespaceIndex = 0;
       Name = name;
+      NamespaceIndexSpecified = false;
     }
     /// <summary>
     /// Initializes the object with a name and a namespace index.
@@ -81,6 +83,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       NamespaceIndex = namespaceIndex;
       Name = name;
+      NamespaceIndexSpecified = namespaceIndex != 0;
     }
     #endregion
 
@@ -184,6 +187,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <param name="value2">The second value to compare</param>
     public static bool operator ==(QualifiedName value1, QualifiedName value2)
     {
+      if (Object.ReferenceEquals(value1, null))
+        return Object.ReferenceEquals(value2, null);
       return value1.Equals(value2);
     }
     /// <summary>
@@ -196,6 +201,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <param name="value2">The second value to compare</param>
     public static bool operator !=(QualifiedName value1, QualifiedName value2)
     {
+      if (Object.ReferenceEquals(value1, null))
+        return !Object.ReferenceEquals(value2, null);
       return !value1.Equals(value2);
     }
     /// <summary>
@@ -297,7 +304,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       if (value == null || String.IsNullOrEmpty(value.Name))
         return false;
       if (namespaceUris != null && namespaceUris.GetString(value.NamespaceIndex) == null)
-          return false;
+        return false;
       return true;
     }
     /// <summary>

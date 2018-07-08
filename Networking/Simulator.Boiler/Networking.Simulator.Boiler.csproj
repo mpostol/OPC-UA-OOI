@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
     <ProjectReference Include="..\..\SemanticData\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj" />
   </ItemGroup>
 

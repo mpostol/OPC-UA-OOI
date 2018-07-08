@@ -13,7 +13,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
   {
     public AnalogItemState(NodeState parent) : base(parent) { }
     /// <summary>
-    /// Gets or sets the eu range.
+    /// Gets or sets the engineering unit range.
     /// </summary>
     /// <value>The eu range.</value>
     public PropertyState<Range> EURange
@@ -48,8 +48,27 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// <summary>
     /// The value of the variable.
     /// </summary>
-    public T Value { get; set; }
+    public new T Value
+    {
+      get { return (T)base.Value; }
+      set { base.Value = Value; }
+    }
     #endregion
+
+  }
+  public class StateMachineState : BaseObjectState
+  {
+    public StateMachineState(NodeState parent) : base(parent) { }
+  }
+  public class FiniteStateMachineState : StateMachineState
+  {
+    public FiniteStateMachineState(NodeState parent) : base(parent) { }
+
+  }
+  public class ProgramStateMachineState : FiniteStateMachineState
+  {
+
+    public ProgramStateMachineState(NodeState parent) : base(parent) { }
 
   }
 

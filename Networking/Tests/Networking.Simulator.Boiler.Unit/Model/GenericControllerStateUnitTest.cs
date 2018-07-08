@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using tempuri.org.UA.Examples.BoilerType;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;

@@ -122,6 +122,55 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       return null;
     }
     /// <summary>
+    /// Populates a list with the children that belong to the node.
+    /// </summary>
+    /// <param name="context">The context for the system being accessed.</param>
+    /// <param name="children">The list of children to populate.</param>
+    /// <remarks>
+    /// This method returns the children that are in memory and does not attempt to
+    /// access an underlying system. The PopulateBrowser method is used to discover those references. 
+    /// </remarks>
+    public virtual void GetChildren(ISystemContext context, IList<BaseInstanceState> children)
+    {
+      if (m_children != null)
+        return;
+      for (int ii = 0; ii < m_children.Count; ii++)
+        children.Add(m_children[ii]);
+    }
+    /// <summary>
+    /// Clears the change masks.
+    /// </summary>
+    /// <param name="context">The context that describes how access the system containing the data..</param>
+    /// <param name="includeChildren">if set to <c>true</c> clear masks recursively for all children..</param>
+    public void ClearChangeMasks(ISystemContext context, bool includeChildren)
+    {
+      if (includeChildren)
+      {
+        List<BaseInstanceState> children = new List<BaseInstanceState>();
+        GetChildren(context, children);
+        for (int ii = 0; ii < children.Count; ii++)
+          children[ii].ClearChangeMasks(context, true);
+      }
+      if (ChangeMasks != NodeStateChangeMasks.None)
+      {
+        OnStateChanged?.Invoke(context, this, m_changeMasks);
+        //if (StateChanged != null)
+        //{
+        //  StateChanged(context, this, m_changeMasks);
+        //}
+        ChangeMasks = NodeStateChangeMasks.None;
+      }
+    }
+    /// <summary>
+    /// Used to receive notifications when a non-value attribute is read or written.
+    /// </summary>
+    public delegate void NodeStateChangedHandler(ISystemContext context, NodeState node, NodeStateChangeMasks changes);
+    /// <summary>
+    /// Called when ClearChangeMasks is called and the ChangeMask is not None.
+    /// </summary>
+    public NodeStateChangedHandler OnStateChanged;
+    protected NodeStateChangeMasks m_changeMasks = NodeStateChangeMasks.None;
+    /// <summary>
     /// What has changed in the node since <see cref="ClearChangeMasks"/> was last called.
     /// </summary>
     /// <value>The change masks that indicates what has changed in a node.</value>

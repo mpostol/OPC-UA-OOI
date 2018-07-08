@@ -58,6 +58,7 @@
     <Compile Include="AddressSpace\BaseInstanceStateUnitTest.cs" />
     <Compile Include="AddressSpace\NodeStateUnitTest.cs" />
     <Compile Include="Model\GenericControllerStateUnitTest.cs" />
+    <Compile Include="Model\UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

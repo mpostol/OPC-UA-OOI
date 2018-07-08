@@ -4,7 +4,7 @@ using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
 {
-  public class NodeState
+  public class NodeState: IDisposable
   {
 
     /// <summary>
@@ -13,7 +13,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// <param name="nodeClass">The node class.</param>
     protected NodeState(NodeClass nodeClass)
     {
-      m_nodeClass = nodeClass;
+      NodeClass = nodeClass;
     }
     /// <summary>
     /// The browse name of the node.
@@ -36,9 +36,32 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       }
     }
     public NodeStateChangeMasks ChangeMasks { get; protected set; }
+    internal NodeClass NodeClass { get; private set; }
+
+    #region IDisposable Support
+    private bool disposedValue = false; // To detect redundant calls
+    protected virtual void Dispose(bool disposing)
+    {
+      if (!disposedValue)
+      {
+        if (disposing)
+        {
+          // TODO: dispose managed state (managed objects).
+        }
+        // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+        // TODO: set large fields to null.
+        disposedValue = true;
+      }
+    }
+    // This code added to correctly implement the disposable pattern.
+    public void Dispose()
+    {
+      // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+      Dispose(true);
+    }
+    #endregion
 
     #region private
-    private NodeClass m_nodeClass;
     private QualifiedName m_browseName;
     #endregion
 

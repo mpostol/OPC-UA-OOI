@@ -8,6 +8,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
   [TestClass]
   public class BaseInstanceStateUnitTest
   {
+
     [TestMethod]
     [ExpectedException(typeof(NotImplementedException))]
     public void AddChildTest()

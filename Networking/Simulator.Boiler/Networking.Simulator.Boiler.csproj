@@ -21,6 +21,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;DEBUG;OPCUA_EXCLUDE_InitializationStrings;NETSTANDARD2_0</DefineConstants>
+    <NoWarn>1701;1702;1705;IDE0001,IDE0002,IDE0003</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

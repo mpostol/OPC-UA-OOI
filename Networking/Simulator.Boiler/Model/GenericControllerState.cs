@@ -1,5 +1,6 @@
 ﻿using System;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
+using UAOOI.Networking.Simulator.Boiler.Model;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace tempuri.org.UA.Examples.BoilerType
@@ -9,9 +10,17 @@ namespace tempuri.org.UA.Examples.BoilerType
   /// Class GenericControllerState - an object representing a generic controller.
   /// </summary>
   /// <seealso cref="UAOOI.Networking.Simulator.Boiler.AddressSpace.BaseObjectState" />
-  /// <remarks>This part adds behaviour to generated class <see cref="GenericControllerState" /></remarks>
+  /// <remarks>This part adds behavior to generated class <see cref="GenericControllerState" /></remarks>
   public partial class GenericControllerState
   {
+
+    public GenericControllerState(NodeState parent, string browseName) : base(parent)
+    {
+      BrowseName = browseName;
+      this.ControlOut = new PropertyState<double>(this) { BrowseName = nameof(ControlOut) };
+      this.Measurement = new PropertyState<double>(this) { BrowseName = nameof(Measurement) };
+      this.SetPoint = new PropertyState<double>(this) { BrowseName = nameof(SetPoint) };
+    }
     #region Public Interface
     /// <summary>
     /// Updates the measurement and calculates the new control output.

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
+using UAOOI.Networking.Simulator.Boiler.Model;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
@@ -12,6 +13,17 @@ namespace tempuri.org.UA.Examples.BoilerType
 {
   public partial class BoilerState
   {
+    public BoilerState(NodeState parent, QualifiedName browseName) : base(parent)
+    {
+      BrowseName = browseName;
+      CustomController = new CustomControllerState(this, BrowseNames.CustomController);
+      Drum = new BoilerDrumState(this) { BrowseName = BrowseNames.Drum };
+      FlowController = new FlowControllerState(this) { BrowseName = BrowseNames.FlowController };
+      InputPipe = new BoilerInputPipeState(this) { BrowseName = BrowseNames.InputPipe };
+      LevelController = new LevelControllerState(this) { BrowseName = BrowseNames.LevelController };
+      OutputPipe = new BoilerOutputPipeState(this) { BrowseName = BrowseNames.OutputPipe };
+      Simulation = new BoilerStateMachineState(this) { BrowseName = BrowseNames.Simulation };
+    }
     //#region Initialization
     ///// <summary>
     ///// Initializes the object as a collection of counters which change value on read.

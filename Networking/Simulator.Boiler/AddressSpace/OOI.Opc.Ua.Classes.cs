@@ -35,12 +35,17 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
   {
 
     #region Constructors
+    public AnalogItemState(NodeState parent) : this(parent, "AnalogItemState", Model.ModelExtensions.CreateRange(1, 0)) { }
     /// <summary>
     /// Initializes the instance with its default attribute values.
     /// </summary>
-    public AnalogItemState(NodeState parent) : base(parent)
+    public AnalogItemState(NodeState parent, QualifiedName browseName, Range range, T value = default(T)) : base(parent)
     {
-      Value = default(T);
+      this.BrowseName = browseName;
+      this.EURange = new PropertyState<Range>(this);
+      this.EURange.Value = range;
+      this.EURange.BrowseName = nameof(EURange);
+      this.Value = value;
     }
     #endregion
 
@@ -51,7 +56,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     public new T Value
     {
       get { return (T)base.Value; }
-      set { base.Value = Value; }
+      set { base.Value = value; }
     }
     #endregion
 

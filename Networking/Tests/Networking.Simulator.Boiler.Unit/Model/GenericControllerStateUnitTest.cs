@@ -20,6 +20,17 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
       Assert.IsNull(_controller.SetPoint);
     }
     [TestMethod]
+    public void Constructor2Test()
+    {
+      GenericControllerState _controller = new GenericControllerState(null, nameof(GenericControllerState));
+      Assert.IsNotNull(_controller.BrowseName);
+      Assert.AreEqual<NodeStateChangeMasks>(NodeStateChangeMasks.Children | NodeStateChangeMasks.NonValue, _controller.ChangeMasks);
+      Assert.IsNotNull(_controller.ControlOut);
+      Assert.IsNotNull(_controller.Measurement);
+      Assert.IsNull(_controller.Parent);
+      Assert.IsNotNull(_controller.SetPoint);
+    }
+    [TestMethod]
     public void ParentsTest()
     {
       GenericControllerState _controller = new GenericControllerState(null);

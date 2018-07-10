@@ -57,8 +57,11 @@
   <ItemGroup>
     <Compile Include="AddressSpace\BaseInstanceStateUnitTest.cs" />
     <Compile Include="AddressSpace\NodeStateUnitTest.cs" />
+    <Compile Include="Model\BoilerStateUnitTest.cs" />
     <Compile Include="Model\GenericControllerStateUnitTest.cs" />
-    <Compile Include="Model\UnitTest1.cs" />
+    <Compile Include="Model\CustomControllerStateUnitTest.cs" />
+    <Compile Include="Model\BoilerDrumStateUnitTest.cs" />
+    <Compile Include="Model\AnalogItemStateUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Threading;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
@@ -13,16 +12,15 @@ namespace tempuri.org.UA.Examples.BoilerType
 {
   public partial class BoilerState
   {
-    public BoilerState(NodeState parent, QualifiedName browseName) : base(parent)
+    public BoilerState(NodeState parent, QualifiedName browseName) : base(parent, browseName)
     {
-      BrowseName = browseName;
       CustomController = new CustomControllerState(this, BrowseNames.CustomController);
-      Drum = new BoilerDrumState(this) { BrowseName = BrowseNames.Drum };
-      FlowController = new FlowControllerState(this) { BrowseName = BrowseNames.FlowController };
-      InputPipe = new BoilerInputPipeState(this) { BrowseName = BrowseNames.InputPipe };
-      LevelController = new LevelControllerState(this) { BrowseName = BrowseNames.LevelController };
-      OutputPipe = new BoilerOutputPipeState(this) { BrowseName = BrowseNames.OutputPipe };
-      Simulation = new BoilerStateMachineState(this) { BrowseName = BrowseNames.Simulation };
+      Drum = new BoilerDrumState(this, BrowseNames.Drum);
+      FlowController = new FlowControllerState(this, BrowseNames.FlowController);
+      InputPipe = new BoilerInputPipeState(this, BrowseNames.InputPipe);
+      LevelController = new LevelControllerState(this, BrowseNames.LevelController);
+      OutputPipe = new BoilerOutputPipeState(this, BrowseNames.OutputPipe);
+      Simulation = new BoilerStateMachineState(this, BrowseNames.Simulation);
     }
     //#region Initialization
     ///// <summary>
@@ -238,4 +236,62 @@ namespace tempuri.org.UA.Examples.BoilerType
     #endregion
 
   }
+
+  public partial class FlowControllerState
+  {
+    public FlowControllerState(NodeState parent, QualifiedName browseName) : base(parent, browseName)
+    {
+      this.BrowseName = browseName;
+      this.ControlOut = new PropertyState<double>(this, BrowseNames.ControlOut);
+      this.Measurement = new PropertyState<double>(this, BrowseNames.Measurement);
+      this.SetPoint = new PropertyState<double>(this, BrowseNames.SetPoint);
+    }
+  }
+
+  public partial class BoilerInputPipeState
+  {
+    public BoilerInputPipeState(NodeState parent, QualifiedName browseName) : base(parent, browseName)
+    {
+      this.FlowTransmitter1 = new FlowTransmitterState(this, BrowseNames.FlowTransmitter1);
+      this.Valve = new ValveState(this, BrowseNames.Valve);
+    }
+  }
+  public partial class LevelControllerState
+  {
+    public LevelControllerState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
+  }
+  public partial class BoilerOutputPipeState
+  {
+    public BoilerOutputPipeState(NodeState parent, QualifiedName browseName) : base(parent, browseName)
+    {
+      this.FlowTransmitter2 = new FlowTransmitterState(this, BrowseNames.FlowTransmitter2);
+    }
+  }
+  public partial class BoilerStateMachineState
+  {
+    public BoilerStateMachineState(NodeState parent, QualifiedName browseName) : base(parent, browseName)
+    {
+      this.UpdateRate = new PropertyState<uint>(this, BrowseNames.UpdateRate, 1000);
+    }
+  }
+  public partial class FlowTransmitterState
+  {
+    public FlowTransmitterState(NodeState parent, QualifiedName browseName) : base(parent, browseName)
+    {
+      this.Output = new AnalogItemState<double>(this, BrowseNames.Output, ModelExtensions.CreateRange(1, 0), 0.5);
+    }
+  }
+  public partial class ValveState
+  {
+    public ValveState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
+  }
+  public partial class GenericActuatorState
+  {
+    public GenericActuatorState(NodeState parent, QualifiedName browseName) : base(parent, browseName)
+    {
+      this.Input = new AnalogItemState<double>(this, BrowseNames.Input, ModelExtensions.CreateRange(1, 0), 0.5);
+    }
+
+  }
 }
+

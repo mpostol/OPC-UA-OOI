@@ -1,5 +1,6 @@
 ﻿
 using System;
+using UAOOI.Networking.Simulator.Boiler.Model;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
@@ -7,11 +8,18 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
 
   public partial class DataItemState : BaseDataVariableState
   {
+    [Obsolete("This constructor is provided only to make auto-generated code error free")]
     public DataItemState(NodeState parent) : base(parent) { }
+
+    public DataItemState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
   }
   public class AnalogItemState : DataItemState
   {
+    public AnalogItemState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
+
+    [Obsolete("This constructor is provided only to make auto-generated code error free")]
     public AnalogItemState(NodeState parent) : base(parent) { }
+
     /// <summary>
     /// Gets or sets the engineering unit range.
     /// </summary>
@@ -39,12 +47,10 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// <summary>
     /// Initializes the instance with its default attribute values.
     /// </summary>
-    public AnalogItemState(NodeState parent, QualifiedName browseName, Range range, T value = default(T)) : base(parent)
+    public AnalogItemState(NodeState parent, QualifiedName browseName, Range range, T value = default(T)) : base(parent, browseName)
     {
-      this.BrowseName = browseName;
-      this.EURange = new PropertyState<Range>(this);
+      this.EURange = new PropertyState<Range>(this, nameof(EURange));
       this.EURange.Value = range;
-      this.EURange.BrowseName = nameof(EURange);
       this.Value = value;
     }
     #endregion
@@ -63,17 +69,25 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
   }
   public class StateMachineState : BaseObjectState
   {
+    [Obsolete("This constructor is provided only to make auto-generated code error free")]
     public StateMachineState(NodeState parent) : base(parent) { }
+
+    public StateMachineState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
   }
   public class FiniteStateMachineState : StateMachineState
   {
+    [Obsolete("This constructor is provided only to make auto-generated code error free")]
     public FiniteStateMachineState(NodeState parent) : base(parent) { }
+
+    public FiniteStateMachineState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
 
   }
   public class ProgramStateMachineState : FiniteStateMachineState
   {
 
+    [Obsolete("This constructor is provided only to make auto-generated code error free")]
     public ProgramStateMachineState(NodeState parent) : base(parent) { }
+    public ProgramStateMachineState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
 
   }
 

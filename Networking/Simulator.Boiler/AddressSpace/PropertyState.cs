@@ -1,9 +1,15 @@
-﻿namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
+﻿
+using System;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+
+namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
 {
   public class PropertyState<Type> : PropertyState
   {
 
+    [Obsolete("This constructor is provided only to make auto-generated code error free")]
     public PropertyState(NodeState parent) : base(parent) { }
+    public PropertyState(NodeState parent, QualifiedName browseName, Type value = default(Type)) : base(parent, browseName) { }
     /// <summary>
     /// The value of the variable.
     /// </summary>
@@ -14,11 +20,12 @@
     }
 
   }
-
   public class PropertyState : BaseVariableState
   {
 
+    [Obsolete("This constructor is provided only to make auto-generated code error free")]
     public PropertyState(NodeState parent) : base(parent) { }
+    public PropertyState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
 
   }
 

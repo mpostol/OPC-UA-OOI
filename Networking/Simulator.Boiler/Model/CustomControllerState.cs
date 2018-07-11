@@ -6,14 +6,13 @@ namespace tempuri.org.UA.Examples.BoilerType
 {
   partial class CustomControllerState
   {
-    public CustomControllerState(NodeState parent, string browseName) : this(parent)
+    public CustomControllerState(NodeState parent, string browseName) : base(parent, browseName)
     {
-      this.BrowseName = browseName;
-      this.ControlOut = new PropertyState<double>(this) { BrowseName = nameof(ControlOut) };
-      this.DescriptionX = new PropertyState<LocalizedText>(this);
-      this.Input1 = new PropertyState<double>(this);
-      this.Input2 = new PropertyState<double>(this);
-      this.Input3 = new PropertyState<double>(this);
+      this.ControlOut = new PropertyState<double>(this, BrowseNames.ControlOut);
+      this.DescriptionX = new PropertyState<LocalizedText>(this, BrowseNames.DescriptionX);
+      this.Input1 = new PropertyState<double>(this, BrowseNames.Input1);
+      this.Input2 = new PropertyState<double>(this, BrowseNames.Input2);
+      this.Input3 = new PropertyState<double>(this, BrowseNames.Input3);
     }
   }
 }

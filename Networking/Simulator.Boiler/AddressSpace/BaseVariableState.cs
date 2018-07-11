@@ -11,7 +11,11 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
   public abstract class BaseVariableState : BaseInstanceState
   {
 
-    public BaseVariableState(NodeState parent) : base(NodeClass.Variable_2, parent) { }
+    public BaseVariableState(NodeState parent, QualifiedName browseName) : base(parent, NodeClass.Variable_2, browseName) { }
+
+    [Obsolete("This constructor is provided only to make auto-generated code error free")]
+    protected BaseVariableState(NodeState parent) : base(parent) { }
+
     public object Value
     {
       get
@@ -26,6 +30,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
         m_value = value;
       }
     }
+
     private object m_value;
 
   }

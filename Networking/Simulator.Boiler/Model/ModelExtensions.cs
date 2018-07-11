@@ -24,29 +24,10 @@ namespace UAOOI.Networking.Simulator.Boiler.Model
       };
       return _ret;
     }
-    internal static void Initialize(this LevelIndicatorState instance, QualifiedName qualifiedName)
-    {
-      instance.BrowseName = qualifiedName;
-      instance.Output = new AnalogItemState<double>(instance, BrowseNames.Output, CreateRange(0, 1), 0.5);
-    }
-    internal static void Initialize(this BoilerInputPipeState instance)
-    {
-      instance.BrowseName = BrowseNames.InputPipe;
-      instance.FlowTransmitter1 = new FlowTransmitterState(instance);
-      instance.FlowTransmitter1.Initialize(BrowseNames.FlowTransmitter1);
-      instance.Valve = new ValveState(instance);
-      instance.Valve.Initialize(BrowseNames.Valve);
-    }
-    internal static void Initialize(this FlowTransmitterState instance, QualifiedName qualifiedName)
-    {
-      instance.BrowseName = qualifiedName;
-      instance.Output = new AnalogItemState<double>(instance, BrowseNames.Output, CreateRange(1, 0), 0.5);
-    }
-    internal static void Initialize(this ValveState instance, QualifiedName qualifiedName)
-    {
-      instance.BrowseName = qualifiedName;
-      instance.Input = new AnalogItemState<double>(instance, BrowseNames.Input, CreateRange(1, 0), 0.5);
-    }
+
+
+
+
     /// <summary>
     /// Returns the difference between high and low of the <see cref="Range"/>.
     /// </summary>
@@ -54,6 +35,7 @@ namespace UAOOI.Networking.Simulator.Boiler.Model
     {
       return Math.Abs(value.High - value.Low);
     }
+
     private static Tuple<double, double> CreateValue(double high, double low)
     {
       return high > low ? Tuple.Create<double, double>(low, high) : Tuple.Create(high, low);

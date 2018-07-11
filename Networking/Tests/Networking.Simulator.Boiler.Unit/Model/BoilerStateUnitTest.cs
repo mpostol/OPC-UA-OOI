@@ -10,20 +10,10 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
   public class BoilerStateUnitTest
   {
     [TestMethod]
+    [ExpectedException(typeof(System.NotImplementedException))]
     public void ConstructorTest()
     {
       BoilerState _boilerState = new BoilerState(null);
-      Assert.IsNull(_boilerState.BrowseName);
-      Assert.IsNull(_boilerState.CustomController);
-      Assert.IsNull(_boilerState.Drum);
-      Assert.IsNull(_boilerState.FlowController);
-      Assert.IsNull(_boilerState.InputPipe);
-      Assert.IsNull(_boilerState.LevelController);
-      Assert.IsNull(_boilerState.OutputPipe);
-      Assert.IsNull(_boilerState.Parent);
-      Assert.IsNull(_boilerState.Simulation);
-      Assert.AreEqual<NodeClass>(NodeClass.Object_1, _boilerState.NodeClass);
-      Assert.AreEqual<NodeStateChangeMasks>(NodeStateChangeMasks.None, _boilerState.ChangeMasks);
     }
     [TestMethod]
     public void Constructor2Test()
@@ -41,7 +31,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
       Assert.IsNull(_boilerState.Parent);
       Assert.IsNotNull(_boilerState.Simulation);
       Assert.AreEqual<NodeClass>(NodeClass.Object_1, _boilerState.NodeClass);
-      Assert.AreEqual<NodeStateChangeMasks>(NodeStateChangeMasks.Children | NodeStateChangeMasks.NonValue, _boilerState.ChangeMasks);
+      Assert.AreEqual<NodeStateChangeMasks>(NodeStateChangeMasks.Children, _boilerState.ChangeMasks);
     }
   }
 }

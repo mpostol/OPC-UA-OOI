@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
 using UAOOI.Networking.Simulator.Boiler.Model;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
@@ -14,12 +15,11 @@ namespace tempuri.org.UA.Examples.BoilerType
   public partial class GenericControllerState
   {
 
-    public GenericControllerState(NodeState parent, string browseName) : base(parent)
+    public GenericControllerState(NodeState parent, QualifiedName browseName) : base(parent, browseName)
     {
-      BrowseName = browseName;
-      this.ControlOut = new PropertyState<double>(this) { BrowseName = nameof(ControlOut) };
-      this.Measurement = new PropertyState<double>(this) { BrowseName = nameof(Measurement) };
-      this.SetPoint = new PropertyState<double>(this) { BrowseName = nameof(SetPoint) };
+      this.ControlOut = new PropertyState<double>(this, BrowseNames.ControlOut);
+      this.Measurement = new PropertyState<double>(this, BrowseNames.Measurement);
+      this.SetPoint = new PropertyState<double>(this, BrowseNames.SetPoint);
     }
     #region Public Interface
     /// <summary>
@@ -29,7 +29,7 @@ namespace tempuri.org.UA.Examples.BoilerType
     {
       Range range = source.EURange.Value;
       m_measurement.Value = source.Value;
-      // clamp the setpoint.
+      // clamp the set-point.
       if (range != null)
       {
         if (m_setPoint.Value > range.High)

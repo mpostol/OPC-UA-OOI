@@ -11,10 +11,13 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// <summary>
     /// Initializes the instance with its default attribute values.
     /// </summary>
-    protected BaseInstanceState(NodeClass nodeClass, NodeState parent) : base(nodeClass)
+    protected BaseInstanceState(NodeState parent, NodeClass nodeClass, QualifiedName browseName) : base(nodeClass, browseName)
     {
       Parent = parent;
     }
+    [Obsolete()]
+    public BaseInstanceState(NodeState parent) : base(parent) { }
+
     /// <summary>
     /// The parent node.
     /// </summary>

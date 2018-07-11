@@ -28,7 +28,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
     private class TestSystemContext : ISystemContext { }
     private class TestBaseInstanceState : BaseInstanceState
     {
-      public TestBaseInstanceState(NodeState nodeState) : base(NodeClass.Unspecified_0, nodeState) { }
+      public TestBaseInstanceState(NodeState nodeState) : base(nodeState, NodeClass.Unspecified_0, "browseName") { }
       public BaseInstanceState FindChildTest(ISystemContext context, QualifiedName browseName, bool createOrReplace, BaseInstanceState replacement)
       {
         return base.FindChild(context, browseName, createOrReplace, replacement);

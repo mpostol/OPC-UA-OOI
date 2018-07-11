@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
 using UAOOI.Networking.Simulator.Boiler.Model;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
@@ -9,7 +10,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
   public class AnalogItemStateUnitTest
   {
     [TestMethod]
-    public void ComstructorTest()
+    public void ConstructorTest()
     {
       AnalogItemState<double> _item = new AnalogItemState<double>(null, "browseName", ModelExtensions.CreateRange(0, 1), 0.5);
       Assert.AreEqual<string>("browseName", _item.BrowseName.Name);

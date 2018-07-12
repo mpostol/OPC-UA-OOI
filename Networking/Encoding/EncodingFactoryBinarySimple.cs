@@ -32,8 +32,6 @@ namespace UAOOI.Networking.Encoding
     /// </exception>
     void IEncodingFactory.UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
     {
-      if (repositoryGroup != EncodingCompositionSettings.ConfigurationRepositoryGroup)
-        throw new ArgumentOutOfRangeException(nameof(repositoryGroup));
       if (sourceEncoding.BuiltInType != binding.Encoding.BuiltInType)
         throw new ArgumentOutOfRangeException(nameof(binding));
     }

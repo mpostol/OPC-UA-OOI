@@ -9,7 +9,10 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
 
     [Obsolete("This constructor is provided only to make auto-generated code error free")]
     public PropertyState(NodeState parent) : base(parent) { }
-    public PropertyState(NodeState parent, QualifiedName browseName, Type value = default(Type)) : base(parent, browseName) { }
+    public PropertyState(NodeState parent, QualifiedName browseName, Type value = default(Type)) : base(parent, browseName)
+    {
+      Value = value;
+    }
     /// <summary>
     /// The value of the variable.
     /// </summary>

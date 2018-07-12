@@ -15,11 +15,6 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
     public void ConstructorTestMethod()
     {
       BoilerDrumState _drum = new BoilerDrumState(null);
-      Assert.IsNull(_drum.BrowseName);
-      Assert.IsNull(_drum.LevelIndicator);
-      Assert.IsNull(_drum.Parent);
-      Assert.AreEqual<NodeClass>(NodeClass.Object_1, _drum.NodeClass);
-      Assert.AreEqual<NodeStateChangeMasks>(NodeStateChangeMasks.None, _drum.ChangeMasks);
     }
     [TestMethod]
     public void Constructor2TestMethod()

@@ -1,7 +1,5 @@
 ﻿
 using System;
-using tempuri.org.UA.Examples.BoilerType;
-using UAOOI.Networking.Simulator.Boiler.AddressSpace;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.Networking.Simulator.Boiler.Model
@@ -24,18 +22,13 @@ namespace UAOOI.Networking.Simulator.Boiler.Model
       };
       return _ret;
     }
-
-
-
-
     /// <summary>
     /// Returns the difference between high and low of the <see cref="Range"/>.
     /// </summary>
-    public static double Magnitude(this Range value)
+    internal static double Magnitude(this Range value)
     {
       return Math.Abs(value.High - value.Low);
     }
-
     private static Tuple<double, double> CreateValue(double high, double low)
     {
       return high > low ? Tuple.Create<double, double>(low, high) : Tuple.Create(high, low);

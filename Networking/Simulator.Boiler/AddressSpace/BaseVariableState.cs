@@ -22,7 +22,6 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       {
         return m_value;
       }
-
       set
       {
         if (!Object.ReferenceEquals(m_value, value))

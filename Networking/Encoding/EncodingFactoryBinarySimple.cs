@@ -26,8 +26,6 @@ namespace UAOOI.Networking.Encoding
     /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="sourceEncoding">The source encoding.</param>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// repositoryGroup
-    /// or
     /// binding
     /// </exception>
     void IEncodingFactory.UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)

@@ -135,7 +135,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// </remarks>
     public virtual void GetChildren(ISystemContext context, IList<BaseInstanceState> children)
     {
-      if (m_children != null)
+      if (m_children == null)
         return;
       for (int ii = 0; ii < m_children.Count; ii++)
         children.Add(m_children[ii]);
@@ -156,7 +156,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       }
       if (ChangeMasks != NodeStateChangeMasks.None)
       {
-        OnStateChanged?.Invoke(context, this, m_changeMasks);
+        OnStateChanged?.Invoke(context, this, ChangeMasks);
         //if (StateChanged != null)
         //{
         //  StateChanged(context, this, m_changeMasks);
@@ -165,19 +165,14 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       }
     }
     /// <summary>
-    /// Used to receive notifications when a non-value attribute is read or written.
-    /// </summary>
-    public delegate void NodeStateChangedHandler(ISystemContext context, NodeState node, NodeStateChangeMasks changes);
-    /// <summary>
     /// Called when ClearChangeMasks is called and the ChangeMask is not None.
     /// </summary>
     public NodeStateChangedHandler OnStateChanged;
-    protected NodeStateChangeMasks m_changeMasks = NodeStateChangeMasks.None;
-    /// <summary>
-    /// What has changed in the node since <see cref="ClearChangeMasks"/> was last called.
-    /// </summary>
-    /// <value>The change masks that indicates what has changed in a node.</value>
     private List<BaseInstanceState> m_children = null;
-
   }
+  /// <summary>
+  /// Used to receive notifications when a non-value attribute is read or written.
+  /// </summary>
+  public delegate void NodeStateChangedHandler(ISystemContext context, NodeState node, NodeStateChangeMasks changes);
+
 }

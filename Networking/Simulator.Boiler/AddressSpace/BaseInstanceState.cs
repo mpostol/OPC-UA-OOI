@@ -1,10 +1,18 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 
+
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
 {
+
+  /// <summary>
+  /// Used to receive notifications when a non-value attribute is read or written.
+  /// </summary>
+  public delegate void NodeStateChangedHandler(ISystemContext context, NodeState node, NodeStateChangeMasks changes);
+
   public class BaseInstanceState : NodeState
   {
 
@@ -13,7 +21,10 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// </summary>
     protected BaseInstanceState(NodeState parent, NodeClass nodeClass, QualifiedName browseName) : base(nodeClass, browseName)
     {
-      Parent = parent;
+      if (parent == null)
+        return;
+      Parent = (BaseInstanceState)parent;
+      Parent.AddChild(this);
     }
     [Obsolete()]
     public BaseInstanceState(NodeState parent) : base(parent) { }
@@ -21,7 +32,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// <summary>
     /// The parent node.
     /// </summary>
-    public NodeState Parent { get; internal set; }
+    public BaseInstanceState Parent { get; internal set; }
     /// <summary>
     /// Returns the id of the default type definition node for the instance.
     /// </summary>
@@ -30,30 +41,6 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     protected virtual NodeId GetDefaultTypeDefinitionId(NamespaceTable namespaceUris)
     {
       return null;
-    }
-    /// <summary>
-    /// Adds a child to the node. 
-    /// </summary>
-    public void AddChild(BaseInstanceState child)
-    {
-      throw new NotImplementedException(nameof(AddChild));
-      //if (!Object.ReferenceEquals(child.Parent, this))
-      //{
-      //  child.Parent = this;
-
-      //  if (NodeId.IsNull(child.ReferenceTypeId))
-      //  {
-      //    child.ReferenceTypeId = ReferenceTypeIds.HasComponent;
-      //  }
-      //}
-
-      //if (m_children == null)
-      //{
-      //  m_children = new List<BaseInstanceState>();
-      //}
-
-      //m_children.Add(child);
-      //ChangeMasks |= NodeStateChangeMasks.Children;
     }
     /// <summary>
     /// Finds the child with the specified browse path.
@@ -66,19 +53,13 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     {
       if (index < 0 || index >= Int32.MaxValue)
         throw new ArgumentOutOfRangeException("index");
-
       BaseInstanceState instance = FindChild(context, browsePath[index], false, null);
-
       if (instance != null)
       {
         if (browsePath.Count == index + 1)
-        {
           return instance;
-        }
-
         return instance.FindChild(context, browsePath, index + 1);
       }
-
       return null;
     }
     /// <summary>
@@ -92,36 +73,22 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     protected virtual BaseInstanceState FindChild(ISystemContext context, QualifiedName browseName, bool createOrReplace, BaseInstanceState replacement)
     {
       if (QualifiedName.IsNull(browseName))
-      {
         return null;
-      }
-
-      if (m_children != null)
+      for (int ii = 0; ii < m_children.Count; ii++)
       {
-        for (int ii = 0; ii < m_children.Count; ii++)
+        BaseInstanceState child = m_children[ii];
+        if (browseName == child.BrowseName)
         {
-          BaseInstanceState child = m_children[ii];
-
-          if (browseName == child.BrowseName)
-          {
-            if (createOrReplace && replacement != null)
-            {
-              m_children[ii] = child = replacement;
-            }
-
-            return child;
-          }
+          if (createOrReplace && replacement != null)
+            m_children[ii] = child = replacement;
+          return child;
         }
       }
-
       if (createOrReplace)
       {
         if (replacement != null)
-        {
           AddChild(replacement);
-        }
       }
-
       return null;
     }
     /// <summary>
@@ -168,11 +135,28 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// Called when ClearChangeMasks is called and the ChangeMask is not None.
     /// </summary>
     public NodeStateChangedHandler OnStateChanged;
-    private List<BaseInstanceState> m_children = null;
+    /// <summary>
+    /// Adds a child to the node. 
+    /// </summary>
+    internal void AddChild(BaseInstanceState child)
+    {
+      m_children.Add(child);
+      ChangeMasks |= NodeStateChangeMasks.Children;
+    }
+    internal void RegisterVariable(IReadOnlyList<BaseInstanceState> hasComponentPath, Action<BaseInstanceState, string[]> register)
+    {
+      List<BaseInstanceState> _hasComponentPathAndMe = new List<BaseInstanceState>(hasComponentPath);
+      _hasComponentPathAndMe.Add(this);
+      CallRegister(_hasComponentPathAndMe, register);
+      List<BaseInstanceState> _myComponents = new List<BaseInstanceState>(hasComponentPath);
+      GetChildren(null, _myComponents);
+      for (int ii = 0; ii < _myComponents.Count; ii++)
+        _myComponents[ii].RegisterVariable(_hasComponentPathAndMe, register);
+    }
+
+    protected virtual void CallRegister(List<BaseInstanceState> hasComponentPathAndMe, Action<BaseInstanceState, string[]> register) { }
+    private List<BaseInstanceState> m_children = new List<BaseInstanceState>();
+
   }
-  /// <summary>
-  /// Used to receive notifications when a non-value attribute is read or written.
-  /// </summary>
-  public delegate void NodeStateChangedHandler(ISystemContext context, NodeState node, NodeStateChangeMasks changes);
 
 }

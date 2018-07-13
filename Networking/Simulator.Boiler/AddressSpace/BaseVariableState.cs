@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
@@ -29,7 +30,10 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
         m_value = value;
       }
     }
-
+    protected override void CallRegister(List<BaseInstanceState> hasComponentPathAndMe, Action<BaseInstanceState, string[]> register)
+    {
+      throw new NotImplementedException();
+    }
     private object m_value;
 
   }

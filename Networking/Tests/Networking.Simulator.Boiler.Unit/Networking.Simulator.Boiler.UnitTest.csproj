@@ -81,6 +81,10 @@
     <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Infrastructure\Common.Infrastructure.csproj">
+      <Project>{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}</Project>
+      <Name>Common.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\SemanticData\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj">
       <Project>{352378a0-8b2e-4679-bb44-fd0bcc8467d9}</Project>
       <Name>SemanticData.UANodeSetValidation</Name>

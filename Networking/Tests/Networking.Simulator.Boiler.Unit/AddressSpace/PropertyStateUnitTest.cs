@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
@@ -21,15 +20,6 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
       Assert.AreEqual<double>(default(double), _property.Value);
       _property.ClearChangeMasks(new SystemContextFixture(), true);
       Assert.AreEqual<NodeStateChangeMasks>(NodeStateChangeMasks.None, _property.ChangeMasks);
-    }
-    [TestMethod]
-    [ExpectedException(typeof(NotImplementedException))]
-    public void AddChildTest()
-    {
-
-      PropertyState<double> _property = new PropertyState<double>(null, "PropertyState");
-      _property.AddChild(new PropertyState<double>(null, "wqwqwwwoiuoiuwq"));
-
     }
     [TestMethod]
     public void ValueTest()

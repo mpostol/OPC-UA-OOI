@@ -28,7 +28,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// The browse name of the node.
     /// </summary>
     /// <value>The name qualified with a namespace.</value>
-    public QualifiedName BrowseName
+    internal QualifiedName BrowseName
     {
       get
       {
@@ -44,7 +44,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
         m_browseName = value;
       }
     }
-    public NodeStateChangeMasks ChangeMasks { get; protected set; }
+    internal protected NodeStateChangeMasks ChangeMasks { get; protected set; }
     internal NodeClass NodeClass { get; private set; }
 
     #region IDisposable Support

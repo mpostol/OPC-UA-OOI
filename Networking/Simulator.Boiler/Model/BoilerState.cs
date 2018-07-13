@@ -22,6 +22,24 @@ namespace tempuri.org.UA.Examples.BoilerType
       OutputPipe = new BoilerOutputPipeState(this, BrowseNames.OutputPipe);
       Simulation = new BoilerStateMachineState(this, BrowseNames.Simulation);
     }
+
+    internal void StartSimulation()
+    {
+      if (m_simulationTimer != null)
+      {
+        m_simulationTimer.Dispose();
+        m_simulationTimer = null;
+      }
+      uint updateRate = this.Simulation.UpdateRate.Value;
+      if (updateRate < 100)
+      {
+        updateRate = 100;
+        Simulation.UpdateRate.Value = updateRate;
+      }
+      m_simulationTimer = new Timer(DoSimulation, null, (int)updateRate, (int)updateRate);
+    }
+    internal ITraceSource Logger { get; set; } = new DoNothingTraceSource();
+
     //#region Initialization
     ///// <summary>
     ///// Initializes the object as a collection of counters which change value on read.
@@ -63,7 +81,6 @@ namespace tempuri.org.UA.Examples.BoilerType
     private Timer m_simulationTimer = null;
     private Random m_random = new Random();
     private long m_simulationCounter = 0;
-    private ITraceSource m_Logger = new DoNothingTraceSource();
     //Methods
     /// <summary>
     /// Changes the state of the simulation.
@@ -189,14 +206,10 @@ namespace tempuri.org.UA.Examples.BoilerType
     {
       try
       {
+        Logger.TraceData(TraceEventType.Verbose, 210, $"Entering {nameof(DoSimulation)} #{m_simulationCounter}");
         m_simulationCounter++;
-
         // adjust level.
-        m_drum.LevelIndicator.Output.Value = Adjust(
-            m_drum.LevelIndicator.Output.Value,
-            m_levelController.SetPoint.Value,
-            0.1,
-            m_drum.LevelIndicator.Output.EURange.Value);
+        m_drum.LevelIndicator.Output.Value = Adjust(m_drum.LevelIndicator.Output.Value, m_levelController.SetPoint.Value, 0.1, m_drum.LevelIndicator.Output.EURange.Value);
 
         // calculate inputs for custom controller. 
         m_customController.Input1.Value = m_levelController.UpdateMeasurement(m_drum.LevelIndicator.Output);
@@ -230,13 +243,12 @@ namespace tempuri.org.UA.Examples.BoilerType
       }
       catch (Exception e)
       {
-        m_Logger.TraceData(TraceEventType.Error, 225, $"Unexpected error during boiler simulation: {e}.");
+        Logger.TraceData(TraceEventType.Error, 225, $"Unexpected error during boiler simulation: {e}.");
       }
     }
     #endregion
 
   }
-
   public partial class FlowControllerState
   {
     public FlowControllerState(NodeState parent, QualifiedName browseName) : base(parent, browseName)
@@ -247,7 +259,6 @@ namespace tempuri.org.UA.Examples.BoilerType
       this.SetPoint = new PropertyState<double>(this, BrowseNames.SetPoint);
     }
   }
-
   public partial class BoilerInputPipeState
   {
     public BoilerInputPipeState(NodeState parent, QualifiedName browseName) : base(parent, browseName)
@@ -271,7 +282,7 @@ namespace tempuri.org.UA.Examples.BoilerType
   {
     public BoilerStateMachineState(NodeState parent, QualifiedName browseName) : base(parent, browseName)
     {
-      this.UpdateRate = new PropertyState<uint>(this, BrowseNames.UpdateRate, 1000);
+      this.UpdateRate = new PropertyState<uint>(this, BrowseNames.UpdateRate, 200);
     }
   }
   public partial class FlowTransmitterState

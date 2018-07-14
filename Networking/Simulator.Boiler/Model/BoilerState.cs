@@ -12,17 +12,18 @@ namespace tempuri.org.UA.Examples.BoilerType
 {
   public partial class BoilerState
   {
+
     public BoilerState(NodeState parent, QualifiedName browseName) : base(parent, browseName)
     {
       CustomController = new CustomControllerState(this, BrowseNames.CustomController);
-      Drum = new BoilerDrumState(this, BrowseNames.Drum);
+      Drum = new BoilerDrumState(this, BrowseNames.Drum, ModelExtensions.CreateRange(1000, 0));
       FlowController = new FlowControllerState(this, BrowseNames.FlowController);
       InputPipe = new BoilerInputPipeState(this, BrowseNames.InputPipe);
       LevelController = new LevelControllerState(this, BrowseNames.LevelController);
+      LevelController.SetPoint.Value = 500.0;
       OutputPipe = new BoilerOutputPipeState(this, BrowseNames.OutputPipe);
       Simulation = new BoilerStateMachineState(this, BrowseNames.Simulation);
     }
-
     internal void StartSimulation()
     {
       if (m_simulationTimer != null)
@@ -208,6 +209,7 @@ namespace tempuri.org.UA.Examples.BoilerType
       {
         Logger.TraceData(TraceEventType.Verbose, 210, $"Entering {nameof(DoSimulation)} #{m_simulationCounter}");
         m_simulationCounter++;
+
         // adjust level.
         m_drum.LevelIndicator.Output.Value = Adjust(m_drum.LevelIndicator.Output.Value, m_levelController.SetPoint.Value, 0.1, m_drum.LevelIndicator.Output.EURange.Value);
 
@@ -228,17 +230,12 @@ namespace tempuri.org.UA.Examples.BoilerType
         m_inputPipe.Valve.Input.Value = Adjust(m_inputPipe.Valve.Input.Value, (error > 0) ? 100 : 0, 10, null);
 
         // adjust the input flow.
-        m_inputPipe.FlowTransmitter1.Output.Value = Adjust(
-            m_inputPipe.FlowTransmitter1.Output.Value,
-            m_flowController.SetPoint.Value,
-            0.6,
-            m_inputPipe.FlowTransmitter1.Output.EURange.Value);
+        m_inputPipe.FlowTransmitter1.Output.Value = Adjust(m_inputPipe.FlowTransmitter1.Output.Value, m_flowController.SetPoint.Value, 0.6, m_inputPipe.FlowTransmitter1.Output.EURange.Value);
 
         // add pertubations.
         m_drum.LevelIndicator.Output.Value = RoundAndPerturb(m_drum.LevelIndicator.Output.Value, 3);
         m_inputPipe.FlowTransmitter1.Output.Value = RoundAndPerturb(m_inputPipe.FlowTransmitter1.Output.Value, 3);
         m_outputPipe.FlowTransmitter2.Output.Value = RoundAndPerturb(m_outputPipe.FlowTransmitter2.Output.Value, 3);
-
         this.ClearChangeMasks(m_simulationContext, true);
       }
       catch (Exception e)
@@ -251,13 +248,7 @@ namespace tempuri.org.UA.Examples.BoilerType
   }
   public partial class FlowControllerState
   {
-    public FlowControllerState(NodeState parent, QualifiedName browseName) : base(parent, browseName)
-    {
-      this.BrowseName = browseName;
-      this.ControlOut = new PropertyState<double>(this, BrowseNames.ControlOut);
-      this.Measurement = new PropertyState<double>(this, BrowseNames.Measurement);
-      this.SetPoint = new PropertyState<double>(this, BrowseNames.SetPoint);
-    }
+    public FlowControllerState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
   }
   public partial class BoilerInputPipeState
   {
@@ -304,5 +295,27 @@ namespace tempuri.org.UA.Examples.BoilerType
     }
 
   }
+  partial class BoilerDrumState
+  {
+
+    public BoilerDrumState(NodeState parent, QualifiedName browseName, Range range) : base(parent, browseName)
+    {
+      this.LevelIndicator = new LevelIndicatorState(this, BrowseNames.LevelIndicator, range);
+    }
+  }
+  public partial class LevelIndicatorState
+  {
+
+    public LevelIndicatorState(NodeState parent, QualifiedName browseName, Range range) : base(parent, browseName)
+    {
+      this.Output = new AnalogItemState<double>(this, BrowseNames.Output, range);
+    }
+
+  }
+  public partial class GenericSensorState : BaseObjectState
+  {
+    public GenericSensorState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
+  }
+
 }
 

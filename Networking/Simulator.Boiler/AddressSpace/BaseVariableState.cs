@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using System.Linq;
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
 {
@@ -32,8 +33,11 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     }
     protected override void CallRegister(List<BaseInstanceState> hasComponentPathAndMe, Action<BaseInstanceState, string[]> register)
     {
-      throw new NotImplementedException();
+      base.CallRegister(hasComponentPathAndMe, register);
+      string[] _browsePath = hasComponentPathAndMe.Select<BaseInstanceState, string>(x => x.BrowseName.Name).ToArray<string>();
+      register(this, _browsePath);
     }
+
     private object m_value;
 
   }

@@ -1,10 +1,12 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using tempuri.org.UA.Examples.BoilerType;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
+using UAOOI.Networking.Simulator.Boiler.Model;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
@@ -19,7 +21,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
       using (BoilerState _boilerState = new BoilerState(null))
       {
       }
-        
+
     }
     [TestMethod]
     public void Constructor2Test()
@@ -57,25 +59,65 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
       }
     }
     [TestMethod]
+    public void GetChildrenTest()
+    {
+      using (BoilerState _boilerState = new BoilerState(null, "browseName"))
+      {
+        List<BaseInstanceState> _children = new List<BaseInstanceState>();
+        _boilerState.GetChildren(_children);
+        Assert.AreEqual<int>(7, _children.Count);
+      }
+    }
+    [TestMethod]
+    public void RegisterVariableTest()
+    {
+      TraceSourceFixture _log = new TraceSourceFixture();
+      using (BoilerState _boilerState = new BoilerState(null, "browseName"))
+      {
+        _boilerState.Logger = _log;
+        Dictionary<string, BaseInstanceState> _vars = new Dictionary<string, BaseInstanceState>();
+        _boilerState.RegisterVariable(new List<BaseInstanceState>(), (x, y) => _vars.Add(String.Join("_", y), x));
+        foreach (KeyValuePair<string, BaseInstanceState> _item in _vars)
+        {
+          BaseVariableState _var = _item.Value as BaseVariableState;
+          Assert.IsNotNull(_var);
+          string _type = _var.Value == null ? "not set" : _var.Value.GetType().Name;
+          Debug.WriteLine($"{_item} {_type}");
+        }
+        Assert.AreEqual<int>(20, _vars.Count);
+      }
+      Assert.IsTrue(_log.TraceLog.Count == 0);
+      Assert.IsTrue(_log.ErrorTraceLog.Count == 0);
+    }
+
+    [TestMethod]
     public void StartSimulationTest()
     {
       ISystemContext _context = new SystemContextFixture();
       TraceSourceFixture _log = new TraceSourceFixture();
-      int _callBackCount = 0;
+      List<Tuple<string, object>> _callBackCount = new List<Tuple<string, object>>();
+      Range _startRange = null;
+      int _valueChangeCount = 0;
       using (BoilerState _boilerState = new BoilerState(null, "browseName"))
       {
+        _boilerState.RegisterVariable(new List<BaseInstanceState>(), (x, y) => { _callBackCount.Add(Tuple.Create<string, object>(String.Join("_", y), ((BaseVariableState)x).Value)); x.OnStateChanged += (q, w, e) => _valueChangeCount++; });
+        Range _level = _boilerState.Drum.LevelIndicator.Output.EURange.Value;
+        _startRange = ModelExtensions.CreateRange(_level.High, _level.Low);
+        double _startSetPoint = _boilerState.LevelController.SetPoint.Value;
         _boilerState.Logger = _log;
         _boilerState.ClearChangeMasks(_context, true);
         _boilerState.StartSimulation();
-        _boilerState.OnStateChanged = (x, y, z) => _callBackCount++;
+        _boilerState.OnStateChanged = (x, y, z) => Assert.Fail();
         System.Threading.Thread.Sleep(10000);
-        Assert.AreEqual<int>(0, _callBackCount);
+        Assert.AreEqual<int>(20, _callBackCount.Count);
         _boilerState.ClearChangeMasks(_context, true);
+        Assert.AreEqual<Range>(_level, _boilerState.Drum.LevelIndicator.Output.EURange.Value);
+        Assert.AreEqual<double>(_startSetPoint, _boilerState.LevelController.SetPoint.Value);
       }
       Assert.IsTrue(_log.TraceLog.Count > 10);
       Assert.IsTrue(_log.ErrorTraceLog.Count == 0);
-      Assert.Inconclusive("RegisterVariable must be implemented to agregate all events.");
-      Assert.AreEqual<int>(5, _callBackCount);
+      Assert.AreEqual<int>(20, _callBackCount.Count);
+      Assert.IsTrue(600 < _valueChangeCount, $"_valueChangeCount = {_valueChangeCount}");
     }
     private class SystemContextFixture : ISystemContext { }
     private class TraceSourceFixture : ITraceSource

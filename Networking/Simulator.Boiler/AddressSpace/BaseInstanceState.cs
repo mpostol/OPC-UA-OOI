@@ -100,10 +100,19 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// This method returns the children that are in memory and does not attempt to
     /// access an underlying system. The PopulateBrowser method is used to discover those references. 
     /// </remarks>
+    [Obsolete("This method is added to awoid compiler errors only and will cause NotImplementedException")]
     public virtual void GetChildren(ISystemContext context, IList<BaseInstanceState> children)
     {
-      if (m_children == null)
-        return;
+      throw new NotImplementedException("This method is added to awoid compiler errors only");
+      for (int ii = 0; ii < m_children.Count; ii++)
+        children.Add(m_children[ii]);
+    }
+    /// <summary>
+    /// Populates a list with the children that belong to the node.
+    /// </summary>
+    /// <param name="children">The list of children to populate.</param>
+    public void GetChildren(IList<BaseInstanceState> children)
+    {
       for (int ii = 0; ii < m_children.Count; ii++)
         children.Add(m_children[ii]);
     }
@@ -117,19 +126,14 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       if (includeChildren)
       {
         List<BaseInstanceState> children = new List<BaseInstanceState>();
-        GetChildren(context, children);
+        GetChildren(children);
         for (int ii = 0; ii < children.Count; ii++)
           children[ii].ClearChangeMasks(context, true);
       }
-      if (ChangeMasks != NodeStateChangeMasks.None)
-      {
+      if (ChangeMasks == NodeStateChangeMasks.None)
+        return;
         OnStateChanged?.Invoke(context, this, ChangeMasks);
-        //if (StateChanged != null)
-        //{
-        //  StateChanged(context, this, m_changeMasks);
-        //}
         ChangeMasks = NodeStateChangeMasks.None;
-      }
     }
     /// <summary>
     /// Called when ClearChangeMasks is called and the ChangeMask is not None.
@@ -148,10 +152,14 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       List<BaseInstanceState> _hasComponentPathAndMe = new List<BaseInstanceState>(hasComponentPath);
       _hasComponentPathAndMe.Add(this);
       CallRegister(_hasComponentPathAndMe, register);
-      List<BaseInstanceState> _myComponents = new List<BaseInstanceState>(hasComponentPath);
-      GetChildren(null, _myComponents);
+      List<BaseInstanceState> _myComponents = new List<BaseInstanceState>();
+      GetChildren(_myComponents);
       for (int ii = 0; ii < _myComponents.Count; ii++)
+      {
+        if (_myComponents[ii] == this)
+          throw new ArgumentOutOfRangeException("Redundant browes path");
         _myComponents[ii].RegisterVariable(_hasComponentPathAndMe, register);
+      }
     }
 
     protected virtual void CallRegister(List<BaseInstanceState> hasComponentPathAndMe, Action<BaseInstanceState, string[]> register) { }

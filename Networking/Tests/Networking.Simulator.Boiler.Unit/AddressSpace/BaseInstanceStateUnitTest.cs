@@ -27,7 +27,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
       BaseInstanceState _childState = new TestBaseInstanceState(null, nameof(_childState));
       _parentState.AddChild(_childState);
       List<BaseInstanceState> _children = new List<BaseInstanceState>();
-      _parentState.GetChildren(null, _children);
+      _parentState.GetChildren(_children);
       Assert.AreEqual<int>(1, _children.Count);
 
     }

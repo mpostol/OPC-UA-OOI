@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using tempuri.org.UA.Examples.BoilerType;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
+using UAOOI.Networking.Simulator.Boiler.Model;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
@@ -19,7 +20,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
     [TestMethod]
     public void Constructor2TestMethod()
     {
-      BoilerDrumState _drum = new BoilerDrumState(null, BrowseNames.Drum);
+      BoilerDrumState _drum = new BoilerDrumState(null, BrowseNames.Drum, ModelExtensions.CreateRange(1000, 0));
       Assert.IsNotNull(_drum.BrowseName);
       Assert.IsNotNull(_drum.LevelIndicator);
       Assert.IsNotNull(_drum.LevelIndicator.Output);
@@ -31,6 +32,9 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
       Assert.IsNull(_drum.Parent);
       Assert.AreEqual<NodeClass>(NodeClass.Object_1, _drum.NodeClass);
       Assert.AreEqual<NodeStateChangeMasks>(NodeStateChangeMasks.Children, _drum.ChangeMasks);
+      Assert.AreEqual<double>(0, _drum.LevelIndicator.Output.Value);
+      Assert.AreEqual<double>(0, _drum.LevelIndicator.Output.EURange.Value.Low);
+      Assert.AreEqual<double>(1000, _drum.LevelIndicator.Output.EURange.Value.High);
     }
   }
 

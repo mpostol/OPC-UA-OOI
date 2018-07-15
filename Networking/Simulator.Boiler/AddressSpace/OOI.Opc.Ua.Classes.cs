@@ -1,19 +1,24 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
-using UAOOI.Networking.Simulator.Boiler.Model;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
 {
 
-  public partial class DataItemState : BaseDataVariableState
+  public abstract partial class DataItemState : BaseDataVariableState
   {
     [Obsolete("This constructor is provided only to make auto-generated code error free")]
     public DataItemState(NodeState parent) : base(parent) { }
 
     public DataItemState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
   }
-  public class AnalogItemState : DataItemState
+  public abstract class AnalogItemState : DataItemState
   {
     public AnalogItemState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
 
@@ -39,7 +44,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     }
     private PropertyState<Range> m_eURange;
   }
-  public class AnalogItemState<T> : AnalogItemState
+  public class AnalogItemState<type> : AnalogItemState
   {
 
     #region Constructors
@@ -47,7 +52,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// <summary>
     /// Initializes the instance with its default attribute values.
     /// </summary>
-    public AnalogItemState(NodeState parent, QualifiedName browseName, Range range, T value = default(T)) : base(parent, browseName)
+    public AnalogItemState(NodeState parent, QualifiedName browseName, Range range, type value = default(type)) : base(parent, browseName)
     {
       this.EURange = new PropertyState<Range>(this, nameof(EURange));
       this.EURange.Value = range;
@@ -59,13 +64,20 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// <summary>
     /// The value of the variable.
     /// </summary>
-    public new T Value
+    public new type Value
     {
-      get { return (T)base.Value; }
+      get { return (type)base.Value; }
       set { base.Value = value; }
     }
     #endregion
-
+    /// <summary>
+    /// Gets the type of the value.
+    /// </summary>
+    /// <returns>Type.</returns>
+    protected override Type GetValueType()
+    {
+      return typeof(type);
+    }
   }
   public class StateMachineState : BaseObjectState
   {

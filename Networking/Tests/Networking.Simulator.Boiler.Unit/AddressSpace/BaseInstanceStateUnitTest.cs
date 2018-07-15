@@ -1,5 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
@@ -13,30 +19,34 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
     [TestMethod]
     public void AddChildTest()
     {
-      BaseInstanceState _parentState = new TestBaseInstanceState(null, nameof(_parentState));
-      BaseInstanceState _childState = new TestBaseInstanceState(_parentState, nameof(_childState));
-      _parentState.AddChild(_childState);
-      Assert.IsNotNull(_parentState.FindChild(null, new List<QualifiedName>() { _childState.BrowseName }, 0));
+      using (BaseInstanceState _parentState = new TestBaseInstanceState(null, nameof(_parentState)))
+      using (BaseInstanceState _childState = new TestBaseInstanceState(_parentState, nameof(_childState)))
+      {
+        _parentState.AddChild(_childState);
+        Assert.IsNotNull(_parentState.FindChild(null, new List<QualifiedName>() { _childState.BrowseName }, 0));
+      }
 
     }
     [TestMethod]
     public void GetChildrenTest()
     {
-
-      BaseInstanceState _parentState = new TestBaseInstanceState(null, nameof(_parentState));
-      BaseInstanceState _childState = new TestBaseInstanceState(null, nameof(_childState));
-      _parentState.AddChild(_childState);
-      List<BaseInstanceState> _children = new List<BaseInstanceState>();
-      _parentState.GetChildren(_children);
-      Assert.AreEqual<int>(1, _children.Count);
-
+      using (BaseInstanceState _parentState = new TestBaseInstanceState(null, nameof(_parentState)))
+      using (BaseInstanceState _childState = new TestBaseInstanceState(null, nameof(_childState)))
+      {
+        _parentState.AddChild(_childState);
+        List<BaseInstanceState> _children = new List<BaseInstanceState>();
+        _parentState.GetChildren(_children);
+        Assert.AreEqual<int>(1, _children.Count);
+      }
     }
     [TestMethod]
     public void FindChildTest()
     {
-      TestBaseInstanceState _nodeState = new TestBaseInstanceState(null, nameof(_nodeState));
-      BaseInstanceState _child = _nodeState.FindChildTest(new TestSystemContext(), null, true, null);
-      Assert.IsNull(_child);
+      using (TestBaseInstanceState _nodeState = new TestBaseInstanceState(null, nameof(_nodeState)))
+      {
+        BaseInstanceState _child = _nodeState.FindChildTest(new TestSystemContext(), null, true, null);
+        Assert.IsNull(_child);
+      }
     }
 
     #region test instrumentation

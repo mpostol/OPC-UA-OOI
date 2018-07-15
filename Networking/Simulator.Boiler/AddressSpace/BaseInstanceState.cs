@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.Collections.Generic;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
@@ -13,6 +19,10 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
   /// </summary>
   public delegate void NodeStateChangedHandler(ISystemContext context, NodeState node, NodeStateChangeMasks changes);
 
+  /// <summary>
+  /// Class BaseInstanceState.
+  /// </summary>
+  /// <seealso cref="UAOOI.Networking.Simulator.Boiler.AddressSpace.NodeState" />
   public class BaseInstanceState : NodeState
   {
 
@@ -96,16 +106,11 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// </summary>
     /// <param name="context">The context for the system being accessed.</param>
     /// <param name="children">The list of children to populate.</param>
-    /// <remarks>
-    /// This method returns the children that are in memory and does not attempt to
-    /// access an underlying system. The PopulateBrowser method is used to discover those references. 
-    /// </remarks>
-    [Obsolete("This method is added to awoid compiler errors only and will cause NotImplementedException")]
+    /// <exception cref="System.NotImplementedException">This method is added to avoid compiler errors only</exception>
+    [Obsolete("This method is added to avoid compiler errors only and will cause NotImplementedException")]
     public virtual void GetChildren(ISystemContext context, IList<BaseInstanceState> children)
     {
-      throw new NotImplementedException("This method is added to awoid compiler errors only");
-      for (int ii = 0; ii < m_children.Count; ii++)
-        children.Add(m_children[ii]);
+      throw new NotImplementedException("This method is added to avoid compiler errors only");
     }
     /// <summary>
     /// Populates a list with the children that belong to the node.
@@ -138,7 +143,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// <summary>
     /// Called when ClearChangeMasks is called and the ChangeMask is not None.
     /// </summary>
-    public NodeStateChangedHandler OnStateChanged;
+    public event NodeStateChangedHandler OnStateChanged;
     /// <summary>
     /// Adds a child to the node. 
     /// </summary>
@@ -157,7 +162,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       for (int ii = 0; ii < _myComponents.Count; ii++)
       {
         if (_myComponents[ii] == this)
-          throw new ArgumentOutOfRangeException("Redundant browes path");
+          throw new ArgumentOutOfRangeException("Redundant browse path");
         _myComponents[ii].RegisterVariable(_hasComponentPathAndMe, register);
       }
     }

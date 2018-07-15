@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
@@ -34,7 +40,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
       NodeStateChangeMasks _returnedMask = NodeStateChangeMasks.None;
       NodeState _returnedNodeState = null;
       int _handlerCalled = 0;
-      _property.OnStateChanged = (x, y, z) => { _returnedContext = x; _returnedNodeState = y; _returnedMask = z; _handlerCalled++; };
+      _property.OnStateChanged += (x, y, z) => { _returnedContext = x; _returnedNodeState = y; _returnedMask = z; _handlerCalled++; };
       _property.Value = 999.99;
       Assert.AreEqual<NodeStateChangeMasks>(NodeStateChangeMasks.Value, _property.ChangeMasks);
       Assert.AreEqual<double>(999.99, _property.Value);

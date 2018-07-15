@@ -42,8 +42,8 @@
       <Link>DependencyValidation1.layerdiagram</Link>
       <Visible>False</Visible>
     </AdditionalFiles>
+    <None Include="CodeHeader.snippet" />
     <None Include="packages.config" />
-    <None Include="README-Template.md" />
     <None Include="ReleaseNoteTemplate.md">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

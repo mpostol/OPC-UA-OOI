@@ -1,8 +1,14 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) Year of Copyright, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using tempuri.org.UA.Examples.BoilerType;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
@@ -18,10 +24,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
     [ExpectedException(typeof(System.NotImplementedException))]
     public void ConstructorTest()
     {
-      using (BoilerState _boilerState = new BoilerState(null))
-      {
-      }
-
+      using (BoilerState _boilerState = new BoilerState(null)) { }
     }
     [TestMethod]
     public void Constructor2Test()
@@ -89,7 +92,6 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
       Assert.IsTrue(_log.TraceLog.Count == 0);
       Assert.IsTrue(_log.ErrorTraceLog.Count == 0);
     }
-
     [TestMethod]
     public void StartSimulationTest()
     {
@@ -107,7 +109,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
         _boilerState.Logger = _log;
         _boilerState.ClearChangeMasks(_context, true);
         _boilerState.StartSimulation();
-        _boilerState.OnStateChanged = (x, y, z) => Assert.Fail();
+        _boilerState.OnStateChanged += (x, y, z) => Assert.Fail();
         System.Threading.Thread.Sleep(10000);
         Assert.AreEqual<int>(20, _callBackCount.Count);
         _boilerState.ClearChangeMasks(_context, true);

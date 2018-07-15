@@ -58,6 +58,7 @@
     <Compile Include="AddressSpace\BaseInstanceStateUnitTest.cs" />
     <Compile Include="AddressSpace\NodeStateUnitTest.cs" />
     <Compile Include="AddressSpace\PropertyStateUnitTest.cs" />
+    <Compile Include="AddressSpace\SemanticDataSetSourceUnitTest.cs" />
     <Compile Include="Model\BoilerStateUnitTest.cs" />
     <Compile Include="Model\GenericControllerStateUnitTest.cs" />
     <Compile Include="Model\CustomControllerStateUnitTest.cs" />

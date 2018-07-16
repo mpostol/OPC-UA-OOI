@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
@@ -47,7 +48,8 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// Gets the type of the value.
     /// </summary>
     /// <value>The type of the data returned by the Value property.</value>
-    public Type ValueType => GetValueType();
+    public UATypeInfo ValueType => GetValueType();
+
 
     [Obsolete("This constructor is provided only to make auto-generated code error free")]
     protected BaseVariableState(NodeState parent) : base(parent) { }
@@ -61,7 +63,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// Gets the type of the value.
     /// </summary>
     /// <returns>Type.</returns>
-    protected abstract Type GetValueType();
+    protected abstract UATypeInfo GetValueType();
     private object m_value;
 
   }

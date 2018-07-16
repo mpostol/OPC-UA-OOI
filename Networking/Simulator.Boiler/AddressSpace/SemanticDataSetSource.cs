@@ -6,6 +6,7 @@
 //___________________________________________________________________________________
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
@@ -46,6 +47,22 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     public bool ContainsKey(string key)
     {
       return _variables.ContainsKey(key);
+    }
+    /// <summary>
+    /// Returns an enumerator that iterates through the collection.
+    /// </summary>
+    /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+    public IEnumerator<KeyValuePair<string, IVariable>> GetEnumerator()
+    {
+      return _variables.GetEnumerator();
+    }
+    /// <summary>
+    /// Returns an enumerator that iterates through a collection.
+    /// </summary>
+    /// <returns>An <see cref="T:System.Collections.IEnumerator"></see> object that can be used to iterate through the collection.</returns>
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return _variables.GetEnumerator();
     }
     #endregion
 

@@ -6,10 +6,20 @@
 //___________________________________________________________________________________
 
 using System;
+using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
 {
+
+  public abstract class PropertyState : BaseVariableState
+  {
+
+    [Obsolete("This constructor is provided only to make auto-generated code error free")]
+    public PropertyState(NodeState parent) : base(parent) { }
+    public PropertyState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
+
+  }
   public class PropertyState<type> : PropertyState
   {
 
@@ -31,18 +41,10 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// Gets the type of the value.
     /// </summary>
     /// <returns>Type.</returns>
-    protected override Type GetValueType()
+    protected override  UATypeInfo GetValueType()
     {
-      return typeof(type);
+      return typeof(type).GetUATypeInfo();
     }
-  }
-  public abstract class PropertyState : BaseVariableState
-  {
-
-    [Obsolete("This constructor is provided only to make auto-generated code error free")]
-    public PropertyState(NodeState parent) : base(parent) { }
-    public PropertyState(NodeState parent, QualifiedName browseName) : base(parent, browseName) { }
-
   }
 
 }

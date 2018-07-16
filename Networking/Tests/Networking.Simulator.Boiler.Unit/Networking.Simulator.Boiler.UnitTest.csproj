@@ -53,6 +53,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressSpace\BaseInstanceStateUnitTest.cs" />
@@ -85,6 +86,14 @@
     <ProjectReference Include="..\..\..\Common\Infrastructure\Common.Infrastructure.csproj">
       <Project>{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}</Project>
       <Name>Common.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Configuration\NetworkingUpgrade\Configuration.Networking.Upgrade.csproj">
+      <Project>{BEBE131A-C931-4C2C-9F9E-ED0D0B75DF26}</Project>
+      <Name>Configuration.Networking.Upgrade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Configuration\Networking\Configuration.Networking.csproj">
+      <Project>{E28E0880-03AA-4D1B-A820-41B04E766019}</Project>
+      <Name>Configuration.Networking</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\SemanticData\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj">
       <Project>{352378a0-8b2e-4679-bb44-fd0bcc8467d9}</Project>

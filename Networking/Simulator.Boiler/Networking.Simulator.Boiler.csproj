@@ -30,7 +30,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj" />
     <ProjectReference Include="..\..\SemanticData\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ConfigurationDataProducer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -6,6 +6,7 @@
 //___________________________________________________________________________________
 
 using System;
+using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
@@ -48,7 +49,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
   {
 
     #region Constructors
-    public AnalogItemState(NodeState parent) : this(parent, "AnalogItemState", Model.ModelExtensions.CreateRange(1, 0)) { }
+    public AnalogItemState(NodeState parent) : this(parent, "AnalogItemState", ModelExtensions.CreateRange(1, 0)) { }
     /// <summary>
     /// Initializes the instance with its default attribute values.
     /// </summary>
@@ -74,9 +75,9 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// Gets the type of the value.
     /// </summary>
     /// <returns>Type.</returns>
-    protected override Type GetValueType()
+    protected override UATypeInfo GetValueType()
     {
-      return typeof(type);
+      return typeof(type).GetUATypeInfo();
     }
   }
   public class StateMachineState : BaseObjectState

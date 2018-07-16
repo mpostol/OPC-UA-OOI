@@ -12,7 +12,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
   /// <summary>
   /// Interface ISemanticDataSetSource - captures a set of semantic data source. Each data entity is represented as the <see cref="BaseVariableState"></see> instance.
   /// </summary>
-  public interface ISemanticDataSetSource
+  public interface ISemanticDataSetSource: IEnumerable<KeyValuePair<string, IVariable>>
   {
     /// <summary>
     /// Gets the name of the semantic data set.

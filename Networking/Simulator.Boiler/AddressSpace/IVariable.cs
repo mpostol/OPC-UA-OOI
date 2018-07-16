@@ -5,7 +5,7 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
-using System;
+using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
 {
@@ -25,7 +25,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// Gets the type of the value.
     /// </summary>
     /// <value>The type of the data returned by the Value property.</value>
-    Type ValueType { get; }
+    UATypeInfo ValueType { get; }
 
   }
 }

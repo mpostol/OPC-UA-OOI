@@ -11,8 +11,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using tempuri.org.UA.Examples.BoilerType;
 using UAOOI.Common.Infrastructure.Diagnostic;
+using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Configuration.Networking.Upgrade;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
-using UAOOI.Networking.Simulator.Boiler.Model;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
@@ -20,6 +21,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
   [TestClass]
   public class BoilerStateUnitTest
   {
+
     [TestMethod]
     [ExpectedException(typeof(System.NotImplementedException))]
     public void ConstructorTest()
@@ -121,6 +123,8 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
       Assert.AreEqual<int>(20, _callBackCount.Count);
       Assert.IsTrue(600 < _valueChangeCount, $"_valueChangeCount = {_valueChangeCount}");
     }
+
+    #region test instrumentation
     private class SystemContextFixture : ISystemContext { }
     private class TraceSourceFixture : ITraceSource
     {
@@ -149,6 +153,8 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
       internal List<string> TraceLog { get; private set; } = new List<string>();
       internal List<string> ErrorTraceLog { get; private set; } = new List<string>();
     }
+    #endregion
+
   }
 }
 

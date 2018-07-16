@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.Collections.Generic;
 
@@ -37,7 +43,7 @@ namespace UAOOI.Configuration.Networking.Upgrade.Re_l1_00_16
     /// </summary>
     /// <returns>Returns an instance of <see cref="T:UAOOI.Configuration.Networking.Serialization.ConfigurationData" />.</returns>
     /// <exception cref="NotImplementedException"></exception>
-    Configuration.Networking.Serialization.ConfigurationData IConfigurationDataFactory.GetConfigurationData()
+    Serialization.ConfigurationData IConfigurationDataFactory.GetConfigurationData()
     {
       throw new NotImplementedException();
     }

@@ -45,6 +45,9 @@
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\CommonServiceLocator.2.0.3\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\MSTest.TestFramework.1.2.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
     </Reference>
@@ -60,6 +63,9 @@
     <Compile Include="AddressSpace\NodeStateUnitTest.cs" />
     <Compile Include="AddressSpace\PropertyStateUnitTest.cs" />
     <Compile Include="AddressSpace\SemanticDataSetSourceUnitTest.cs" />
+    <Compile Include="CommonServiceLocatorInstrumentation\Class1.cs" />
+    <Compile Include="CommonServiceLocatorInstrumentation\Container.cs" />
+    <Compile Include="CommonServiceLocatorInstrumentation\Logger.cs" />
     <Compile Include="Model\BoilerStateUnitTest.cs" />
     <Compile Include="Model\GenericControllerStateUnitTest.cs" />
     <Compile Include="Model\CustomControllerStateUnitTest.cs" />
@@ -67,6 +73,7 @@
     <Compile Include="Model\AnalogItemStateUnitTest.cs" />
     <Compile Include="Model\BoilersSetUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AssemblyInitializeFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">

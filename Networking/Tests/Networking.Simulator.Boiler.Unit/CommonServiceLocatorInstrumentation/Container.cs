@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UAOOI.Configuration.Networking.UnitTest.CommonServiceLocatorInstrumentation
+namespace UAOOI.Networking.Simulator.Boiler.UnitTest.CommonServiceLocatorInstrumentation
 {
   internal class Container : ServiceLocatorImplBase
   {

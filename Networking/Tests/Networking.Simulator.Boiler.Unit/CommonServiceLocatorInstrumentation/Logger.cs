@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UAOOI.Common.Infrastructure.Diagnostic;
 
-namespace UAOOI.Configuration.Networking.UnitTest.CommonServiceLocatorInstrumentation
+namespace UAOOI.Networking.Simulator.Boiler.UnitTest.CommonServiceLocatorInstrumentation
 {
 
   public class Logger : ITraceSource
@@ -30,7 +30,7 @@ namespace UAOOI.Configuration.Networking.UnitTest.CommonServiceLocatorInstrument
     public List<TraceLogEntity> TraceLogList { get; } = new List<TraceLogEntity>();
 
     #region ITraceSource
-    public void TraceData(TraceEventType eventType, int id, object data)
+    void ITraceSource.TraceData(TraceEventType eventType, int id, object data)
     {
       TraceLogList.Add(new TraceLogEntity(eventType, id, data));
     }

@@ -99,6 +99,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
           SymbolicName = _item.Key,
           TypeInformation = _item.Value.ValueType
         };
+        _lf.Add(_field);
       }
       ConfigurationManagement.UpdateDataSetFields(_lf.ToArray(), associationName, inFileName, outFileName, _traceSource);
     }

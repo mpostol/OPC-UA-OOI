@@ -39,8 +39,8 @@ namespace UAOOI.Configuration.Networking.Upgrade
       traceSource.TraceData(TraceEventType.Verbose, 53, $"Configuration contains {_dataSets.Count} item of type {nameof(DataSetConfiguration)}.");
       _dataSets[associationName].DataSet = dataSourceFields;
       traceSource.TraceData(TraceEventType.Verbose, 53, $"{nameof(DataSetConfiguration.DataSet)} for the association {associationName} has been modified by array of {dataSourceFields.Length} instances.");
-      _newConfiguration.CurrentConfiguration.DataSets = new DataSetConfiguration[] { _dataSets[associationName] };
-      FileInfo _file2SaveConfiguration = new FileInfo(inFileName);
+      //_newConfiguration.CurrentConfiguration.DataSets = new DataSetConfiguration[] { _dataSets[associationName] };
+      FileInfo _file2SaveConfiguration = new FileInfo(outFileName);
       _newConfiguration.SaveConfiguration(_file2SaveConfiguration);
       traceSource.TraceData(TraceEventType.Verbose, 53, $"Configuration has been saved to the file {_file2SaveConfiguration.FullName}.");
     }

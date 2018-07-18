@@ -63,7 +63,6 @@
     <Compile Include="AddressSpace\NodeStateUnitTest.cs" />
     <Compile Include="AddressSpace\PropertyStateUnitTest.cs" />
     <Compile Include="AddressSpace\SemanticDataSetSourceUnitTest.cs" />
-    <Compile Include="CommonServiceLocatorInstrumentation\Class1.cs" />
     <Compile Include="CommonServiceLocatorInstrumentation\Container.cs" />
     <Compile Include="CommonServiceLocatorInstrumentation\Logger.cs" />
     <Compile Include="Model\BoilerStateUnitTest.cs" />

@@ -28,7 +28,7 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
                                                                            new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.ReferenceApplication.Core.Diagnostic.NetworkingEventSourceProvider))),
                                                                            new AssemblyCatalog(Assembly.GetAssembly(typeof(DataManagementSetup))),
                                                                            new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.SimulatorInteroperabilityTest.SimulatorCompositionSettings))),
-                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.Encoding.EncodingCompositionSettings))),
+                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.Encoding.EncodingFactoryBinarySimple))),
                                                                            new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.DataLogger.ConsumerCompositionSettings))),
                                                                           }
                                             );

@@ -16,7 +16,8 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
     [TestMethod]
     public void ConstructorTest()
     {
-      BoilersSet _set = new BoilersSet();
+      BoilersSet _set = BoilersSet.Factory;
+      Assert.IsNotNull(_set);
     }
   }
 }

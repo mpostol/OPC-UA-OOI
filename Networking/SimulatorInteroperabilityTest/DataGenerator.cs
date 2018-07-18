@@ -69,8 +69,6 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// <exception cref="System.ArgumentOutOfRangeException">encoding</exception>
     IProducerBinding IBindingFactory.GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
-      if (repositoryGroup != Encoding.EncodingCompositionSettings.ConfigurationRepositoryGroup)
-        throw new ArgumentNullException("repositoryGroup");
       string _name = $"{repositoryGroup}.{ processValueName}";
       IProducerBinding _return = null;
       if (m_NodesDictionary.ContainsKey(processValueName))

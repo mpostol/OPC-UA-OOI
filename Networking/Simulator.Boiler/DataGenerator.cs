@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.Collections.Generic;
 using UAOOI.Configuration.Networking.Serialization;
@@ -22,14 +28,11 @@ namespace UAOOI.Networking.Simulator.Boiler
     /// <summary>
     /// Initializes a new instance of the <see cref="DataGenerator" /> class that generates the data to be used for interoperability testing.
     /// </summary>
-    public DataGenerator()
-    {
-      m_Factory = BoilersSet.Factory;
-      m_Factory.GetSemanticDataSetSources(RegisterVariable);
-    }
-    public DataGenerator(IBoilersSet boilersSet)
+    public DataGenerator() : this(BoilersSet.Factory) { }
+    internal DataGenerator(IBoilersSet boilersSet)
     {
       m_Factory = boilersSet;
+      m_Factory.GetSemanticDataSetSources(RegisterVariable);
     }
     #endregion
 

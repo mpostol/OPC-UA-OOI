@@ -21,6 +21,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
   [TestClass]
   public class SemanticDataSetSourceUnitTest
   {
+
     [TestMethod]
     public void ConstructorTest()
     {
@@ -105,4 +106,5 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
     }
 
   }
+
 }

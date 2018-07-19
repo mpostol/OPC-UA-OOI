@@ -14,6 +14,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
   /// </summary>
   public interface ISemanticDataSetSource: IEnumerable<KeyValuePair<string, IVariable>>
   {
+
     /// <summary>
     /// Gets the name of the semantic data set.
     /// </summary>
@@ -45,5 +46,6 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// <param name="key">The key.</param>
     /// <returns><c>true</c> if this set contains key; otherwise, <c>false</c>.</returns>
     bool ContainsKey(string key);
+
   }
 }

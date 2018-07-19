@@ -18,11 +18,13 @@ namespace UAOOI.Networking.Simulator.Boiler.Model
   {
 
     internal static BoilersSet Factory { get { return m_Factory.Value; } }
+
+    #region ISemanticDataSource
     /// <summary>
     /// Gets the semantic data set sources.
     /// </summary>
     /// <param name="registerSemanticData">The register semantic data.</param>
-    public void GetSemanticDataSources(RegisterSemanticData registerSemanticData )
+    public void GetSemanticDataSources(RegisterSemanticData registerSemanticData)
     {
       foreach (BaseInstanceState _state in m_Boilers)
       {
@@ -31,7 +33,9 @@ namespace UAOOI.Networking.Simulator.Boiler.Model
           registerSemanticData(_sd.SemanticDataSetRootBrowseName, item.Key, item.Value);
       }
     }
+    #endregion
 
+    #region private
     protected override void Dispose(bool disposing)
     {
       base.Dispose(disposing);
@@ -47,6 +51,7 @@ namespace UAOOI.Networking.Simulator.Boiler.Model
       m_Boilers.Add(new tempuriClasses.BoilerState(this, CommsvrClassess.BrowseNames.BoilerCharlie));
       m_Boilers.Add(new tempuriClasses.BoilerState(this, CommsvrClassess.BrowseNames.BoilerDelta));
     }
-  }
+    #endregion
 
+  }
 }

@@ -52,11 +52,14 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest
       }
     }
 
+    #region tests instrumentation
     private class BoilersSetFixture : ISemanticDataSource
     {
 
       internal int DisposeCount = 0;
       internal VariableFixture Variable = new VariableFixture();
+
+      #region ISemanticDataSource
       public void Dispose()
       {
         DisposeCount++;
@@ -65,6 +68,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest
       {
         registerSemanticData("repositoryGroup", "processValueName", Variable);
       }
+      #endregion
 
     }
     private class VariableFixture : IVariable
@@ -83,5 +87,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest
       }
 
     }
+    #endregion
+
   }
 }

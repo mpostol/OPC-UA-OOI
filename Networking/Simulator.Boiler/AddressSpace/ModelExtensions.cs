@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
@@ -10,6 +16,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
   /// </summary>
   internal static class ModelExtensions
   {
+
     /// <summary>
     /// Initializes the object with the high and low limits.
     /// </summary>
@@ -29,10 +36,6 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     internal static double Magnitude(this Range value)
     {
       return Math.Abs(value.High - value.Low);
-    }
-    private static Tuple<double, double> CreateValue(double high, double low)
-    {
-      return high > low ? Tuple.Create<double, double>(low, high) : Tuple.Create(high, low);
     }
     internal static UATypeInfo GetUATypeInfo(this Type code)
     {
@@ -65,9 +68,17 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
         case TypeCode.String:
           return new UATypeInfo(BuiltInType.String);
         default:
-          return new UATypeInfo( BuiltInType.Null);
+          return new UATypeInfo(BuiltInType.Null);
           //throw new ArgumentOutOfRangeException(nameof(code), $"Cannot convert system type {code} to {nameof(UATypeInfo)}");
       }
+    }
+    internal static bool IsEqual(this UATypeInfo me, UATypeInfo other)
+    {
+      return (me.BuiltInType == other.BuiltInType) && (me.ValueRank == other.ValueRank) && (me.ArrayDimensions == other.ArrayDimensions);
+    }
+    private static Tuple<double, double> CreateValue(double high, double low)
+    {
+      return high > low ? Tuple.Create<double, double>(low, high) : Tuple.Create(high, low);
     }
 
   }

@@ -65,6 +65,7 @@
     <Compile Include="AddressSpace\SemanticDataSetSourceUnitTest.cs" />
     <Compile Include="CommonServiceLocatorInstrumentation\Container.cs" />
     <Compile Include="CommonServiceLocatorInstrumentation\Logger.cs" />
+    <Compile Include="DataGeneratorUnitTest.cs" />
     <Compile Include="Model\BoilerStateUnitTest.cs" />
     <Compile Include="Model\GenericControllerStateUnitTest.cs" />
     <Compile Include="Model\CustomControllerStateUnitTest.cs" />
@@ -73,7 +74,6 @@
     <Compile Include="Model\BoilersSetUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AssemblyInitializeFixture.cs" />
-    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">

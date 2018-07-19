@@ -161,7 +161,7 @@ namespace UAOOI.Networking.Simulator.Boiler
     {
       IVariable _variable = m_NodesDictionary[key];
       Type _expectedType = typeof(type);
-      if (_expectedType.GetUATypeInfo() != _variable.ValueType)
+      if (! _expectedType.GetUATypeInfo().IsEqual(_variable.ValueType))
         throw new ArgumentOutOfRangeException($"Wrong argument type: {_expectedType.GetUATypeInfo()} but expected {_variable.ValueType}");
       ProducerBindingMonitoredValue<type> _binding = new ProducerBindingMonitoredValue<type>(key, typeInfo) { MonitoredValue = default(type) };
       _variable.OnStateChanged += (context, node, changes) =>

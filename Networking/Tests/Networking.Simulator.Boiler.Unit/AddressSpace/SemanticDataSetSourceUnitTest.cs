@@ -31,7 +31,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
         Assert.IsTrue(_register1.ContainsKey("Property0"));
         Assert.IsTrue(_register1.ContainsKey("Property1"));
         Assert.IsTrue(_register1.ContainsKey("Property2"));
-        Assert.AreEqual<string>(nameof(SemanticDataSetSource), _register1.SemanticDataSetName);
+        Assert.AreEqual<string>(nameof(SemanticDataSetSource), _register1.SemanticDataSetRootBrowseName);
       }
     }
     [TestMethod]

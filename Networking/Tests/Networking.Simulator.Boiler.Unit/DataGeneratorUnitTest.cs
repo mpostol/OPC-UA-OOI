@@ -11,7 +11,6 @@ using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
-using UAOOI.Networking.Simulator.Boiler.Model;
 
 namespace UAOOI.Networking.Simulator.Boiler.UnitTest
 {
@@ -53,18 +52,20 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest
       }
     }
 
-    private class BoilersSetFixture : IBoilersSet
+    private class BoilersSetFixture : ISemanticDataSource
     {
+
       internal int DisposeCount = 0;
       internal VariableFixture Variable = new VariableFixture();
       public void Dispose()
       {
         DisposeCount++;
       }
-      public void GetSemanticDataSetSources(Action<string, string, IVariable> registerSemanticData)
+      public void GetSemanticDataSources(RegisterSemanticData registerSemanticData)
       {
         registerSemanticData("repositoryGroup", "processValueName", Variable);
       }
+
     }
     private class VariableFixture : IVariable
     {
@@ -80,6 +81,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest
         Value = !(bool)Value;
         OnStateChanged?.Invoke(null, null, NodeStateChangeMasks.Value);
       }
+
     }
   }
 }

@@ -25,6 +25,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Model\IBoilersSet.cs" />
     <Compile Remove="Model\tempuri.org.UA.Examples.BoilerType.Classes - Copy.cs" />
   </ItemGroup>
 

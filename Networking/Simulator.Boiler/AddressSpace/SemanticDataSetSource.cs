@@ -11,6 +11,11 @@ using System.Collections.Generic;
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
 {
+  /// <summary>
+  /// Class SemanticDataSetSource - captures the enumerator of a set of variables representing the semantic data source expressed as the root object of the <see cref="BaseInstanceState"/> type. 
+  /// Each data entity has to have the parent relationship to the root <see cref="BaseVariableState"></see> instance.
+  /// </summary>
+  /// <seealso cref="ISemanticDataSetSource" />
   public class SemanticDataSetSource : ISemanticDataSetSource
   {
 
@@ -19,25 +24,25 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// Initializes a new instance of the <see cref="SemanticDataSetSource"/> class.
     /// </summary>
     /// <param name="parent">The parent collecting all variables to be captured by this instance.</param>
-    /// <param name="name">The name of the semantic data set source.</param>
-    public SemanticDataSetSource(BaseInstanceState parent, string name)
+    /// <param name="rootBrowseName">The name of the semantic data set source.</param>
+    public SemanticDataSetSource(BaseInstanceState parent, string rootBrowseName)
     {
-      SemanticDataSetName = name;
+      SemanticDataSetRootBrowseName = rootBrowseName;
       List<BaseInstanceState> _myComponents = new List<BaseInstanceState>();
       parent.GetChildren(_myComponents);
       for (int ii = 0; ii < _myComponents.Count; ii++)
       {
         List<BaseInstanceState> _hasComponentPath = new List<BaseInstanceState>();
-        _myComponents[ii].RegisterVariable(_hasComponentPath, (x, y) => { if (x is IVariable) _variables.Add(String.Join(m_JoiningChar, y), (IVariable)x); });
+        _myComponents[ii].RegisterVariable(_hasComponentPath, (x, y) => { if (x is IVariable) m_Variables.Add(String.Join(m_JoiningChar, y), (IVariable)x); });
       }
     }
     #endregion
 
     #region ISemanticDataSetSource
-    public string SemanticDataSetName { get; private set; }
-    public IEnumerable<string> Keys => _variables.Keys;
-    public int Count => _variables.Count;
-    public IVariable this[string[] key] => _variables[String.Join(m_JoiningChar, key)];
+    public string SemanticDataSetRootBrowseName { get; private set; }
+    public IEnumerable<string> Keys => m_Variables.Keys;
+    public int Count => m_Variables.Count;
+    public IVariable this[string[] key] => m_Variables[String.Join(m_JoiningChar, key)];
     /// <summary>
     /// Determines whether this set contains key.
     /// </summary>
@@ -46,7 +51,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// <exception cref="System.NotImplementedException"></exception>
     public bool ContainsKey(string key)
     {
-      return _variables.ContainsKey(key);
+      return m_Variables.ContainsKey(key);
     }
     /// <summary>
     /// Returns an enumerator that iterates through the collection.
@@ -54,7 +59,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// <returns>An enumerator that can be used to iterate through the collection.</returns>
     public IEnumerator<KeyValuePair<string, IVariable>> GetEnumerator()
     {
-      return _variables.GetEnumerator();
+      return m_Variables.GetEnumerator();
     }
     /// <summary>
     /// Returns an enumerator that iterates through a collection.
@@ -62,13 +67,13 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// <returns>An <see cref="T:System.Collections.IEnumerator"></see> object that can be used to iterate through the collection.</returns>
     IEnumerator IEnumerable.GetEnumerator()
     {
-      return _variables.GetEnumerator();
+      return m_Variables.GetEnumerator();
     }
     #endregion
 
     #region private
     private const string m_JoiningChar = "_";
-    private Dictionary<string, IVariable> _variables = new Dictionary<string, IVariable>();
+    private Dictionary<string, IVariable> m_Variables = new Dictionary<string, IVariable>();
     #endregion
 
   }

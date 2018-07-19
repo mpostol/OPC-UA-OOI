@@ -14,17 +14,21 @@ using tempuriClasses = tempuri.org.UA.Examples.BoilerType;
 namespace UAOOI.Networking.Simulator.Boiler.Model
 {
 
-  internal class BoilersSet : FolderState, IBoilersSet
+  internal class BoilersSet : FolderState, ISemanticDataSource
   {
 
     internal static BoilersSet Factory { get { return m_Factory.Value; } }
-    public void GetSemanticDataSetSources(Action<string, string, IVariable> registerSemanticData )
+    /// <summary>
+    /// Gets the semantic data set sources.
+    /// </summary>
+    /// <param name="registerSemanticData">The register semantic data.</param>
+    public void GetSemanticDataSources(RegisterSemanticData registerSemanticData )
     {
       foreach (BaseInstanceState _state in m_Boilers)
       {
         SemanticDataSetSource _sd = new SemanticDataSetSource(_state, _state.BrowseName.ToString());
         foreach (KeyValuePair<string, IVariable> item in _sd)
-          registerSemanticData(_sd.SemanticDataSetName, item.Key, item.Value);
+          registerSemanticData(_sd.SemanticDataSetRootBrowseName, item.Key, item.Value);
       }
     }
 

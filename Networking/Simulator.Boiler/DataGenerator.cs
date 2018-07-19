@@ -29,10 +29,10 @@ namespace UAOOI.Networking.Simulator.Boiler
     /// Initializes a new instance of the <see cref="DataGenerator" /> class that generates the data to be used for interoperability testing.
     /// </summary>
     public DataGenerator() : this(BoilersSet.Factory) { }
-    internal DataGenerator(IBoilersSet boilersSet)
+    internal DataGenerator(ISemanticDataSource boilersSet)
     {
       m_Factory = boilersSet;
-      m_Factory.GetSemanticDataSetSources(RegisterVariable);
+      m_Factory.GetSemanticDataSources(RegisterVariable);
     }
     #endregion
 
@@ -144,7 +144,7 @@ namespace UAOOI.Networking.Simulator.Boiler
 
     #region private
     //vars
-    private IBoilersSet m_Factory;
+    private ISemanticDataSource m_Factory;
     private Dictionary<string, IVariable> m_NodesDictionary = new Dictionary<string, IVariable>();
 
     private void RegisterVariable(string repositoryGroup, string processValueName, IVariable variable)

@@ -9,16 +9,20 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using tempuri.org.UA.Examples.BoilerType;
+using System.Xml;
+using BoilerType = tempuri.org.UA.Examples.BoilerType;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.Upgrade;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using BoilersSet = Commsvr.UA.Examples.BoilersSet;
+using System;
 
 namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
 {
   [TestClass]
+  [DeploymentItem("*.xml", @"\")]
   public class SemanticDataSetSourceUnitTest
   {
 
@@ -36,11 +40,10 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
       }
     }
     [TestMethod]
-    [DeploymentItem("ConfigurationDataProducer.xml", @"\")]
-    public void CreateConfigurationTest()
+    public void ReplaceDataSetFieldsTest()
     {
       TraceSourceFixture _log = new TraceSourceFixture();
-      using (BoilerState _boilerState = new BoilerState(null, "browseName"))
+      using (BoilerType.BoilerState _boilerState = new BoilerType.BoilerState(null, "browseName"))
       {
         const string _inFileName = "ConfigurationDataProducer.xml";
         FileInfo _inFile = new FileInfo(_inFileName);
@@ -48,9 +51,67 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
         string _outFileName = $"new.{_inFileName}";
         _boilerState.Logger = _log;
         ISemanticDataSetSource _dataSource = new SemanticDataSetSource(_boilerState, nameof(SemanticDataSetSource));
-        CreateConfiguration(_dataSource, "Simple", _inFileName, _outFileName);
+        ReplaceDataSetFields(_dataSource, "Simple", _inFileName, _outFileName);
       }
     }
+    [TestMethod]
+    public void CreateConfigurationTest()
+    {
+      TraceSourceFixture _log = new TraceSourceFixture();
+      const string _associationName = "BoilersArea_BoilerAlpha";
+      using (BoilerType.BoilerState _boilerState = new BoilerType.BoilerState(null, _associationName))
+      {
+        const string _inFileName = "EmptyProducerConfiguration.xml";
+        FileInfo _inFile = new FileInfo(_inFileName);
+        Assert.IsTrue(_inFile.Exists, $"File not exist {_inFile.FullName}");
+        string _outFileName = $"new.{_inFileName}";
+        _boilerState.Logger = _log;
+        ISemanticDataSetSource _dataSource = new SemanticDataSetSource(_boilerState, nameof(SemanticDataSetSource));
+        //ReplaceDataSetFields(_dataSource, "Simple", _inFileName, _outFileName);
+        ITraceSource _traceSource = new TraceSourceFixture();
+        List<FieldMetaData> _lf = new List<FieldMetaData>();
+        foreach (KeyValuePair<string, IVariable> _item in _dataSource)
+        {
+          if (_item.Value.ValueType.BuiltInType == BuiltInType.Null)
+            continue;
+          FieldMetaData _field = new FieldMetaData()
+          {
+            ProcessValueName = _item.Key,
+            SymbolicName = _item.Key,
+            TypeInformation = _item.Value.ValueType
+          };
+          _lf.Add(_field);
+        }
+        DataSetConfiguration _newDataSetConfiguration = new DataSetConfiguration()
+        {
+          AssociationName = _associationName,
+          AssociationRole = AssociationRole.Producer,
+          ConfigurationGuid = System.Guid.NewGuid(),
+          ConfigurationVersion = new ConfigurationVersionDataType() { MajorVersion = 1, MinorVersion = 0 },
+          Id = System.Guid.NewGuid(),
+          InformationModelURI = BoilersSet.Namespaces.BoilersSet,
+          DataSet = _lf.ToArray(),
+          DataSymbolicName = _associationName,
+          MaxBufferTime = 1000,
+          PublishingInterval = 100,
+          RepositoryGroup = _associationName,
+          Root = new NodeDescriptor()
+          {
+            BindingDescription = "Binding Description",
+            DataType = new XmlQualifiedName(BoilerType.BrowseNames.BoilerType, BoilerType.Namespaces.BoilerType) { },
+            InstanceDeclaration = false,
+            NodeClass = InstanceNodeClassesEnum.Object,
+            NodeIdentifier = new XmlQualifiedName(_associationName, BoilersSet.Namespaces.BoilersSet)
+          }
+        };
+        ConfigurationManagement.AddDataSetConfiguration(_newDataSetConfiguration, new Tuple<string, ushort, System.Guid>("UDP", 1, ProducerId), _inFileName, _outFileName, _traceSource);
+        //ConfigurationManagement.ReplaceDataSetFields(_lf.ToArray(), associationName, inFileName, outFileName, _traceSource);
+
+      }
+    }
+
+    #region instrumentation
+    private readonly System.Guid ProducerId = new System.Guid("d80d81dd-96e6-4560-850e-154f9181307c");
     private class StateFixture : BaseInstanceState
     {
       public StateFixture() : base(null, NodeClass.Object_1, "BaseObjectStateFixture")
@@ -87,13 +148,14 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
       internal List<string> TraceLog { get; private set; } = new List<string>();
       internal List<string> ErrorTraceLog { get; private set; } = new List<string>();
     }
-
-    private void CreateConfiguration(ISemanticDataSetSource dataSource, string associationName, string inFileName, string outFileName)
+    private void ReplaceDataSetFields(ISemanticDataSetSource dataSource, string associationName, string inFileName, string outFileName)
     {
       ITraceSource _traceSource = new TraceSourceFixture();
       List<FieldMetaData> _lf = new List<FieldMetaData>();
       foreach (KeyValuePair<string, IVariable> _item in dataSource)
       {
+        if (_item.Value.ValueType.BuiltInType == BuiltInType.Null)
+          continue;
         FieldMetaData _field = new FieldMetaData()
         {
           ProcessValueName = _item.Key,
@@ -102,8 +164,9 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
         };
         _lf.Add(_field);
       }
-      ConfigurationManagement.UpdateDataSetFields(_lf.ToArray(), associationName, inFileName, outFileName, _traceSource);
+      ConfigurationManagement.ReplaceDataSetFields(_lf.ToArray(), associationName, inFileName, outFileName, _traceSource);
     }
+    #endregion
 
   }
 

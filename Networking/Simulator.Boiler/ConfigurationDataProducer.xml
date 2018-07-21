@@ -8,34 +8,137 @@
       <DataSymbolicName>DataSymbolicName</DataSymbolicName>
       <DataSet>
         <DataMemberConfiguration>
-          <SymbolicName>BoolToggle</SymbolicName>
-          <ProcessValueName>BoolToggle</ProcessValueName>
+          <SymbolicName>CCX001_ControlOut</SymbolicName>
+          <ProcessValueName>CCX001_ControlOut</ProcessValueName>
           <TypeInformation>
-            <BuiltInType>Boolean</BuiltInType>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
-          <SymbolicName>Int32Normal</SymbolicName>
-          <ProcessValueName>Int32Normal</ProcessValueName>
+          <SymbolicName>CCX001_Input1</SymbolicName>
+          <ProcessValueName>CCX001_Input1</ProcessValueName>
           <TypeInformation>
-            <BuiltInType>Int32</BuiltInType>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
-          <SymbolicName>Int32Fast</SymbolicName>
-          <ProcessValueName>Int32Fast</ProcessValueName>
+          <SymbolicName>CCX001_Input2</SymbolicName>
+          <ProcessValueName>CCX001_Input2</ProcessValueName>
           <TypeInformation>
-            <BuiltInType>Int32</BuiltInType>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
         <DataMemberConfiguration>
-          <SymbolicName>SimpleValueDateTime</SymbolicName>
-          <ProcessValueName>SimpleValueDateTime</ProcessValueName>
+          <SymbolicName>CCX001_Input3</SymbolicName>
+          <ProcessValueName>CCX001_Input3</ProcessValueName>
           <TypeInformation>
-            <BuiltInType>DateTime</BuiltInType>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>DrumX001_LIX001_Output</SymbolicName>
+          <ProcessValueName>DrumX001_LIX001_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_ControlOut</SymbolicName>
+          <ProcessValueName>FCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_Measurement</SymbolicName>
+          <ProcessValueName>FCX001_Measurement</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_SetPoint</SymbolicName>
+          <ProcessValueName>FCX001_SetPoint</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX001_FTX001_Output</SymbolicName>
+          <ProcessValueName>PipeX001_FTX001_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX001_ValveX001_Input</SymbolicName>
+          <ProcessValueName>PipeX001_ValveX001_Input</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_ControlOut</SymbolicName>
+          <ProcessValueName>LCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_Measurement</SymbolicName>
+          <ProcessValueName>LCX001_Measurement</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_SetPoint</SymbolicName>
+          <ProcessValueName>LCX001_SetPoint</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX002_FTX002_Output</SymbolicName>
+          <ProcessValueName>PipeX002_FTX002_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>Simulation_UpdateRate</SymbolicName>
+          <ProcessValueName>Simulation_UpdateRate</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -64,6 +167,7 @@
           <ProcessValueName>ValueBoolean</ProcessValueName>
           <TypeInformation>
             <BuiltInType>Boolean</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -72,6 +176,7 @@
           <ProcessValueName>ValueByte</ProcessValueName>
           <TypeInformation>
             <BuiltInType>Byte</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -80,6 +185,7 @@
           <ProcessValueName>ValueInt16</ProcessValueName>
           <TypeInformation>
             <BuiltInType>Int16</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -88,6 +194,7 @@
           <ProcessValueName>ValueInt32</ProcessValueName>
           <TypeInformation>
             <BuiltInType>Int32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -96,6 +203,7 @@
           <ProcessValueName>ValueInt64</ProcessValueName>
           <TypeInformation>
             <BuiltInType>Int64</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -104,6 +212,7 @@
           <ProcessValueName>ValueSByte</ProcessValueName>
           <TypeInformation>
             <BuiltInType>SByte</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -112,6 +221,7 @@
           <ProcessValueName>ValueUInt16</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt16</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -120,6 +230,7 @@
           <ProcessValueName>ValueUInt32</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -128,6 +239,7 @@
           <ProcessValueName>ValueUInt64</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt64</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -136,6 +248,7 @@
           <ProcessValueName>ValueFloat</ProcessValueName>
           <TypeInformation>
             <BuiltInType>Float</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -144,6 +257,7 @@
           <ProcessValueName>ValueDouble</ProcessValueName>
           <TypeInformation>
             <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -152,6 +266,7 @@
           <ProcessValueName>ValueString</ProcessValueName>
           <TypeInformation>
             <BuiltInType>String</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -160,6 +275,7 @@
           <ProcessValueName>ValueByteString</ProcessValueName>
           <TypeInformation>
             <BuiltInType>ByteString</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -168,6 +284,7 @@
           <ProcessValueName>ValueGuid</ProcessValueName>
           <TypeInformation>
             <BuiltInType>Guid</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -176,6 +293,7 @@
           <ProcessValueName>ValueDateTime</ProcessValueName>
           <TypeInformation>
             <BuiltInType>DateTime</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -184,137 +302,10 @@
           <ProcessValueName>UInt32Array</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
-
-        <!--arrays all types out of scope -->
-        <!-- uncomment aas needed - all have been self tested
-        
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayBoolean</SymbolicName>
-          <ProcessValueName>ArrayBoolean</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>Boolean</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayByte</SymbolicName>
-          <ProcessValueName>ArrayByte</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>Byte</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayInt16</SymbolicName>
-          <ProcessValueName>ArrayInt16</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>Int16</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayInt32</SymbolicName>
-          <ProcessValueName>ArrayInt32</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>Int32</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayInt64</SymbolicName>
-          <ProcessValueName>ArrayInt64</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>Int64</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArraySByte</SymbolicName>
-          <ProcessValueName>ArraySByte</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>SByte</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayUInt16</SymbolicName>
-          <ProcessValueName>ArrayUInt16</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>UInt16</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayUInt32</SymbolicName>
-          <ProcessValueName>ArrayUInt32</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>UInt32</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayUInt64</SymbolicName>
-          <ProcessValueName>ArrayUInt64</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>UInt64</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayFloat</SymbolicName>
-          <ProcessValueName>ArrayFloat</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>Float</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayDouble</SymbolicName>
-          <ProcessValueName>ArrayDouble</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>Double</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayString</SymbolicName>
-          <ProcessValueName>ArrayString</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>String</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayByteString</SymbolicName>
-          <ProcessValueName>ArrayByteString</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>ByteString</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayGuid</SymbolicName>
-          <ProcessValueName>ArrayGuid</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>Guid</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-        <DataMemberConfiguration>
-          <SymbolicName>ArrayDateTime</SymbolicName>
-          <ProcessValueName>ArrayDateTime</ProcessValueName>
-          <TypeInformation>
-            <BuiltInType>DateTime</BuiltInType>
-            <ValueRank>1</ValueRank>
-          </TypeInformation>
-        </DataMemberConfiguration>
-
-        -->
-        <!--out of scope-->
-
       </DataSet>
       <Guid>c1f53ffb-6552-4ccc-84c9-f847147cdc85</Guid>
       <Root>
@@ -322,7 +313,7 @@
       </Root>
       <PublishingInterval>1000</PublishingInterval>
       <MaxBufferTime>100</MaxBufferTime>
-      <ConfigurationGuid>D79E3F84-48AB-48A2-9055-DF589D19E824</ConfigurationGuid>
+      <ConfigurationGuid>d79e3f84-48ab-48a2-9055-df589d19e824</ConfigurationGuid>
       <ConfigurationVersion>
         <MajorVersion>1</MajorVersion>
         <MinorVersion>0</MinorVersion>
@@ -340,6 +331,7 @@
           <ProcessValueName>MassTest_00</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -348,6 +340,7 @@
           <ProcessValueName>MassTest_01</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -356,6 +349,7 @@
           <ProcessValueName>MassTest_02</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -364,6 +358,7 @@
           <ProcessValueName>MassTest_03</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -372,6 +367,7 @@
           <ProcessValueName>MassTest_04</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -380,6 +376,7 @@
           <ProcessValueName>MassTest_05</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -388,6 +385,7 @@
           <ProcessValueName>MassTest_06</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -396,6 +394,7 @@
           <ProcessValueName>MassTest_07</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -404,6 +403,7 @@
           <ProcessValueName>MassTest_08</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -412,15 +412,16 @@
           <ProcessValueName>MassTest_09</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
-
         <DataMemberConfiguration>
           <SymbolicName>MassTest_10</SymbolicName>
           <ProcessValueName>MassTest_10</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -429,6 +430,7 @@
           <ProcessValueName>MassTest_11</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -437,6 +439,7 @@
           <ProcessValueName>MassTest_12</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -445,6 +448,7 @@
           <ProcessValueName>MassTest_13</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -453,6 +457,7 @@
           <ProcessValueName>MassTest_14</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -461,6 +466,7 @@
           <ProcessValueName>MassTest_15</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -469,6 +475,7 @@
           <ProcessValueName>MassTest_16</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -477,6 +484,7 @@
           <ProcessValueName>MassTest_17</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -485,6 +493,7 @@
           <ProcessValueName>MassTest_18</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -493,15 +502,16 @@
           <ProcessValueName>MassTest_19</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
-
         <DataMemberConfiguration>
           <SymbolicName>MassTest_20</SymbolicName>
           <ProcessValueName>MassTest_20</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -510,6 +520,7 @@
           <ProcessValueName>MassTest_21</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -518,6 +529,7 @@
           <ProcessValueName>MassTest_22</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -526,6 +538,7 @@
           <ProcessValueName>MassTest_23</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -534,6 +547,7 @@
           <ProcessValueName>MassTest_24</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -542,6 +556,7 @@
           <ProcessValueName>MassTest_25</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -550,6 +565,7 @@
           <ProcessValueName>MassTest_26</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -558,6 +574,7 @@
           <ProcessValueName>MassTest_27</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -566,6 +583,7 @@
           <ProcessValueName>MassTest_28</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -574,15 +592,16 @@
           <ProcessValueName>MassTest_29</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
-
         <DataMemberConfiguration>
           <SymbolicName>MassTest_30</SymbolicName>
           <ProcessValueName>MassTest_30</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -591,6 +610,7 @@
           <ProcessValueName>MassTest_31</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -599,6 +619,7 @@
           <ProcessValueName>MassTest_32</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -607,6 +628,7 @@
           <ProcessValueName>MassTest_33</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -615,6 +637,7 @@
           <ProcessValueName>MassTest_34</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -623,6 +646,7 @@
           <ProcessValueName>MassTest_35</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -631,6 +655,7 @@
           <ProcessValueName>MassTest_36</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -639,6 +664,7 @@
           <ProcessValueName>MassTest_37</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -647,6 +673,7 @@
           <ProcessValueName>MassTest_38</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -655,15 +682,16 @@
           <ProcessValueName>MassTest_39</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
-
         <DataMemberConfiguration>
           <SymbolicName>MassTest_40</SymbolicName>
           <ProcessValueName>MassTest_40</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -672,6 +700,7 @@
           <ProcessValueName>MassTest_41</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -680,6 +709,7 @@
           <ProcessValueName>MassTest_42</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -688,6 +718,7 @@
           <ProcessValueName>MassTest_43</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -696,6 +727,7 @@
           <ProcessValueName>MassTest_44</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -704,6 +736,7 @@
           <ProcessValueName>MassTest_45</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -712,6 +745,7 @@
           <ProcessValueName>MassTest_46</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -720,6 +754,7 @@
           <ProcessValueName>MassTest_47</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -728,6 +763,7 @@
           <ProcessValueName>MassTest_48</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -736,15 +772,16 @@
           <ProcessValueName>MassTest_49</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
-
         <DataMemberConfiguration>
           <SymbolicName>MassTest_50</SymbolicName>
           <ProcessValueName>MassTest_50</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -753,6 +790,7 @@
           <ProcessValueName>MassTest_51</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -761,6 +799,7 @@
           <ProcessValueName>MassTest_52</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -769,6 +808,7 @@
           <ProcessValueName>MassTest_53</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -777,6 +817,7 @@
           <ProcessValueName>MassTest_54</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -785,6 +826,7 @@
           <ProcessValueName>MassTest_55</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -793,6 +835,7 @@
           <ProcessValueName>MassTest_56</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -801,6 +844,7 @@
           <ProcessValueName>MassTest_57</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -809,6 +853,7 @@
           <ProcessValueName>MassTest_58</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -817,15 +862,16 @@
           <ProcessValueName>MassTest_59</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
-
         <DataMemberConfiguration>
           <SymbolicName>MassTest_60</SymbolicName>
           <ProcessValueName>MassTest_60</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -834,6 +880,7 @@
           <ProcessValueName>MassTest_61</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -842,6 +889,7 @@
           <ProcessValueName>MassTest_62</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -850,6 +898,7 @@
           <ProcessValueName>MassTest_63</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -858,6 +907,7 @@
           <ProcessValueName>MassTest_64</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -866,6 +916,7 @@
           <ProcessValueName>MassTest_65</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -874,6 +925,7 @@
           <ProcessValueName>MassTest_66</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -882,6 +934,7 @@
           <ProcessValueName>MassTest_67</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -890,6 +943,7 @@
           <ProcessValueName>MassTest_68</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -898,15 +952,16 @@
           <ProcessValueName>MassTest_69</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
-
         <DataMemberConfiguration>
           <SymbolicName>MassTest_70</SymbolicName>
           <ProcessValueName>MassTest_70</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -915,6 +970,7 @@
           <ProcessValueName>MassTest_71</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -923,6 +979,7 @@
           <ProcessValueName>MassTest_72</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -931,6 +988,7 @@
           <ProcessValueName>MassTest_73</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -939,6 +997,7 @@
           <ProcessValueName>MassTest_74</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -947,6 +1006,7 @@
           <ProcessValueName>MassTest_75</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -955,6 +1015,7 @@
           <ProcessValueName>MassTest_76</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -963,6 +1024,7 @@
           <ProcessValueName>MassTest_77</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -971,6 +1033,7 @@
           <ProcessValueName>MassTest_78</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -979,15 +1042,16 @@
           <ProcessValueName>MassTest_79</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
-
         <DataMemberConfiguration>
           <SymbolicName>MassTest_80</SymbolicName>
           <ProcessValueName>MassTest_80</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -996,6 +1060,7 @@
           <ProcessValueName>MassTest_81</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1004,6 +1069,7 @@
           <ProcessValueName>MassTest_82</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1012,6 +1078,7 @@
           <ProcessValueName>MassTest_83</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1020,6 +1087,7 @@
           <ProcessValueName>MassTest_84</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1028,6 +1096,7 @@
           <ProcessValueName>MassTest_85</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1036,6 +1105,7 @@
           <ProcessValueName>MassTest_86</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1044,6 +1114,7 @@
           <ProcessValueName>MassTest_87</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1052,6 +1123,7 @@
           <ProcessValueName>MassTest_88</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1060,15 +1132,16 @@
           <ProcessValueName>MassTest_89</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
-
         <DataMemberConfiguration>
           <SymbolicName>MassTest_90</SymbolicName>
           <ProcessValueName>MassTest_90</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1077,6 +1150,7 @@
           <ProcessValueName>MassTest_91</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1085,6 +1159,7 @@
           <ProcessValueName>MassTest_92</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1093,6 +1168,7 @@
           <ProcessValueName>MassTest_93</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1101,6 +1177,7 @@
           <ProcessValueName>MassTest_94</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1109,6 +1186,7 @@
           <ProcessValueName>MassTest_95</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1117,6 +1195,7 @@
           <ProcessValueName>MassTest_96</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1125,6 +1204,7 @@
           <ProcessValueName>MassTest_97</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1133,6 +1213,7 @@
           <ProcessValueName>MassTest_98</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
@@ -1141,10 +1222,10 @@
           <ProcessValueName>MassTest_99</ProcessValueName>
           <TypeInformation>
             <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
             <ValueRank>-1</ValueRank>
           </TypeInformation>
         </DataMemberConfiguration>
-
       </DataSet>
       <Guid>c1f53ffb-6552-4ccc-84c9-f847147cdc85</Guid>
       <Root>
@@ -1152,7 +1233,7 @@
       </Root>
       <PublishingInterval>1000</PublishingInterval>
       <MaxBufferTime>100</MaxBufferTime>
-      <ConfigurationGuid>C67E4D73-F46E-499C-991F-F86D0E1BEB00</ConfigurationGuid>
+      <ConfigurationGuid>c67e4d73-f46e-499c-991f-f86d0e1beb00</ConfigurationGuid>
       <ConfigurationVersion>
         <MajorVersion>1</MajorVersion>
         <MinorVersion>0</MinorVersion>
@@ -1188,4 +1269,5 @@
       </ProducerAssociationConfigurations>
     </MessageHandlerConfiguration>
   </MessageHandlers>
+  <TypeDictionaries i:nil="true" />
 </ConfigurationData>

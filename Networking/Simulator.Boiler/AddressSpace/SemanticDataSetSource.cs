@@ -25,9 +25,9 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// </summary>
     /// <param name="parent">The parent collecting all variables to be captured by this instance.</param>
     /// <param name="rootBrowseName">The name of the semantic data set source.</param>
-    public SemanticDataSetSource(BaseInstanceState parent, string rootBrowseName)
+    public SemanticDataSetSource(BaseInstanceState parent)
     {
-      SemanticDataSetRootBrowseName = rootBrowseName;
+      SemanticDataSetRootBrowseName = parent.BrowseName.ToString();
       List<BaseInstanceState> _myComponents = new List<BaseInstanceState>();
       parent.GetChildren(_myComponents);
       for (int ii = 0; ii < _myComponents.Count; ii++)

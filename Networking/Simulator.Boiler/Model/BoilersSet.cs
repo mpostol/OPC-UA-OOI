@@ -28,7 +28,7 @@ namespace UAOOI.Networking.Simulator.Boiler.Model
     {
       foreach (BaseInstanceState _state in m_Boilers)
       {
-        SemanticDataSetSource _sd = new SemanticDataSetSource(_state, _state.BrowseName.ToString());
+        SemanticDataSetSource _sd = new SemanticDataSetSource(_state);
         foreach (KeyValuePair<string, IVariable> item in _sd)
           registerSemanticData(_sd.SemanticDataSetRootBrowseName, item.Key, item.Value);
       }

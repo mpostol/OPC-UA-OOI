@@ -37,5 +37,15 @@ namespace UAOOI.SemanticData.UnitTest.DataSerialization
       _qualifiedNameSecond = new QualifiedName("name", 0);
       Assert.IsFalse(_qualifiedName.Equals(_qualifiedNameSecond));
     }
+    [TestMethod]
+    public void ToStringTest()
+    {
+      QualifiedName _qualifiedName = new QualifiedName("name", 1);
+      Assert.AreEqual<string>($"1:name", _qualifiedName.ToString());
+      _qualifiedName = new QualifiedName("name");
+      Assert.AreEqual<string>("name", _qualifiedName.ToString());
+      _qualifiedName = new QualifiedName();
+      Assert.AreEqual<string>("", _qualifiedName.ToString());
+    }
   }
 }

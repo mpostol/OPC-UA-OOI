@@ -23,6 +23,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
 {
   [TestClass]
   [DeploymentItem("*.xml", @"\")]
+  [DeploymentItem(@"..\..\ToDeploy\", @"ToDeploy\*.*")]
   public class SemanticDataSetSourceUnitTest
   {
 
@@ -31,12 +32,12 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
     {
       using (StateFixture _object = new StateFixture())
       {
-        SemanticDataSetSource _register1 = new SemanticDataSetSource(_object, nameof(SemanticDataSetSource));
+        SemanticDataSetSource _register1 = new SemanticDataSetSource(_object);
         Assert.AreEqual<int>(3, _register1.Count);
         Assert.IsTrue(_register1.ContainsKey("Property0"));
         Assert.IsTrue(_register1.ContainsKey("Property1"));
         Assert.IsTrue(_register1.ContainsKey("Property2"));
-        Assert.AreEqual<string>(nameof(SemanticDataSetSource), _register1.SemanticDataSetRootBrowseName);
+        Assert.AreEqual<string>(_object.BrowseName.ToString(), _register1.SemanticDataSetRootBrowseName);
       }
     }
     [TestMethod]
@@ -50,7 +51,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
         Assert.IsTrue(_inFile.Exists, $"File not exist {_inFile.FullName}");
         string _outFileName = $"new.{_inFileName}";
         _boilerState.Logger = _log;
-        ISemanticDataSetSource _dataSource = new SemanticDataSetSource(_boilerState, nameof(SemanticDataSetSource));
+        ISemanticDataSetSource _dataSource = new SemanticDataSetSource(_boilerState);
         ReplaceDataSetFields(_dataSource, "Simple", _inFileName, _outFileName);
       }
     }
@@ -61,12 +62,12 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
       const string _associationName = "BoilersArea_BoilerAlpha";
       using (BoilerType.BoilerState _boilerState = new BoilerType.BoilerState(null, _associationName))
       {
-        const string _inFileName = "EmptyProducerConfiguration.xml";
-        FileInfo _inFile = new FileInfo(_inFileName);
+        Func<string, string> _inFileName = (_prefix) => $@"ToDeploy\{_prefix}EmptyProducerConfiguration.xml";
+        FileInfo _inFile = new FileInfo(_inFileName(String.Empty));
+        //Assert.Inconclusive(@"File not exist E:\GitHub\OPC-UA-OOI.401\TestResults\Deploy_mpostol 2018-07-22 20_06_49\Out\EmptyProducerConfiguration.xml"); //The file is not deployed for some reasons for run all tests. 
         Assert.IsTrue(_inFile.Exists, $"File not exist {_inFile.FullName}");
-        string _outFileName = $"new.{_inFileName}";
         _boilerState.Logger = _log;
-        ISemanticDataSetSource _dataSource = new SemanticDataSetSource(_boilerState, nameof(SemanticDataSetSource));
+        ISemanticDataSetSource _dataSource = new SemanticDataSetSource(_boilerState);
         //ReplaceDataSetFields(_dataSource, "Simple", _inFileName, _outFileName);
         ITraceSource _traceSource = new TraceSourceFixture();
         List<FieldMetaData> _lf = new List<FieldMetaData>();
@@ -104,7 +105,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
             NodeIdentifier = new XmlQualifiedName(_associationName, BoilersSet.Namespaces.BoilersSet)
           }
         };
-        ConfigurationManagement.AddDataSetConfiguration(_newDataSetConfiguration, new Tuple<string, ushort, System.Guid>("UDP", 1, ProducerId), _inFileName, _outFileName, _traceSource);
+        ConfigurationManagement.AddDataSetConfiguration(_newDataSetConfiguration, new Tuple<string, ushort, System.Guid>("UDP", 1, ProducerId), _inFileName(string.Empty), _inFileName("new."), _traceSource);
         //ConfigurationManagement.ReplaceDataSetFields(_lf.ToArray(), associationName, inFileName, outFileName, _traceSource);
 
       }

@@ -8,6 +8,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
+using UAOOI.Common.Infrastructure.Diagnostic;
+using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Configuration.Networking.Upgrade;
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
 {
@@ -71,6 +75,46 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     }
     #endregion
 
+    internal void CreateConfiguration
+      (XmlQualifiedName instanceType, string _associationName, XmlQualifiedName instanceSymbolicName, string fileName, Tuple<string, ushort, System.Guid> writerNameDataSetWriterIdPublisherId, ITraceSource _traceSource)
+    {
+      List<FieldMetaData> _lf = new List<FieldMetaData>();
+      foreach (KeyValuePair<string, IVariable> _item in this)
+      {
+        if (_item.Value.ValueType.BuiltInType == BuiltInType.Null)
+          continue;
+        FieldMetaData _field = new FieldMetaData()
+        {
+          ProcessValueName = _item.Key,
+          SymbolicName = _item.Key,
+          TypeInformation = _item.Value.ValueType
+        };
+        _lf.Add(_field);
+      }
+      DataSetConfiguration _newDataSetConfiguration = new DataSetConfiguration()
+      {
+        AssociationName = _associationName,
+        AssociationRole = AssociationRole.Producer,
+        ConfigurationGuid = System.Guid.NewGuid(),
+        ConfigurationVersion = new ConfigurationVersionDataType() { MajorVersion = 1, MinorVersion = 0 },
+        Id = System.Guid.NewGuid(),
+        InformationModelURI = instanceSymbolicName.Namespace,
+        DataSet = _lf.ToArray(),
+        DataSymbolicName = _associationName,
+        MaxBufferTime = 1000,
+        PublishingInterval = 100,
+        RepositoryGroup = _associationName,
+        Root = new NodeDescriptor()
+        {
+          BindingDescription = "Binding Description",
+          DataType = instanceType,
+          InstanceDeclaration = false,
+          NodeClass = InstanceNodeClassesEnum.Object,
+          NodeIdentifier = instanceSymbolicName
+        }
+      };
+      ConfigurationManagement.AddDataSetConfiguration(_newDataSetConfiguration, writerNameDataSetWriterIdPublisherId, fileName, fileName, _traceSource);
+    }
     #region private
     private const string m_JoiningChar = "_";
     private Dictionary<string, IVariable> m_Variables = new Dictionary<string, IVariable>();

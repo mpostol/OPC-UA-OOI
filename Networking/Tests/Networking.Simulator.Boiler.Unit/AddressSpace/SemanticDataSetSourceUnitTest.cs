@@ -22,8 +22,6 @@ using System;
 namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
 {
   [TestClass]
-  [DeploymentItem("*.xml", @"\")]
-  [DeploymentItem(@"..\..\ToDeploy\", @"ToDeploy\*.*")]
   public class SemanticDataSetSourceUnitTest
   {
 
@@ -41,6 +39,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
       }
     }
     [TestMethod]
+    [DeploymentItem(@"ConfigurationDataProducer.xml")]
     public void ReplaceDataSetFieldsTest()
     {
       TraceSourceFixture _log = new TraceSourceFixture();
@@ -56,58 +55,29 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
       }
     }
     [TestMethod]
+    [DeploymentItem(@"Deploy\", @"Deploy")]
     public void CreateConfigurationTest()
     {
       TraceSourceFixture _log = new TraceSourceFixture();
-      const string _associationName = "BoilersArea_BoilerAlpha";
+      string _inFileName = $@"Deploy\Producer.tml.xml";
+      FileInfo _inFile = new FileInfo(_inFileName);
+      Assert.IsTrue(_inFile.Exists, $"File not exist {_inFile.FullName}");
+      CreateConfiguration(_log, 1, "BoilersArea_Boiler #1", "BoilersArea_BoilerAlpha", _inFileName);
+      CreateConfiguration(_log, 2, "BoilersArea_Boiler #2", "BoilersArea_BoilerBravo", _inFileName);
+      CreateConfiguration(_log, 3, "BoilersArea_Boiler #3", "BoilersArea_BoilerBravo", _inFileName);
+      CreateConfiguration(_log, 4, "BoilersArea_Boiler #4", "BoilersArea_BoilerBravo", _inFileName);
+      //Assert.Fail($"{Environment.CurrentDirectory}");
+    }
+
+    private void CreateConfiguration(TraceSourceFixture _log, ushort writerId, string _associationName, string symbolicName, string _inFileName)
+    {
       using (BoilerType.BoilerState _boilerState = new BoilerType.BoilerState(null, _associationName))
       {
-        Func<string, string> _inFileName = (_prefix) => $@"ToDeploy\{_prefix}EmptyProducerConfiguration.xml";
-        FileInfo _inFile = new FileInfo(_inFileName(String.Empty));
-        //Assert.Inconclusive(@"File not exist E:\GitHub\OPC-UA-OOI.401\TestResults\Deploy_mpostol 2018-07-22 20_06_49\Out\EmptyProducerConfiguration.xml"); //The file is not deployed for some reasons for run all tests. 
-        Assert.IsTrue(_inFile.Exists, $"File not exist {_inFile.FullName}");
         _boilerState.Logger = _log;
-        ISemanticDataSetSource _dataSource = new SemanticDataSetSource(_boilerState);
-        //ReplaceDataSetFields(_dataSource, "Simple", _inFileName, _outFileName);
-        ITraceSource _traceSource = new TraceSourceFixture();
-        List<FieldMetaData> _lf = new List<FieldMetaData>();
-        foreach (KeyValuePair<string, IVariable> _item in _dataSource)
-        {
-          if (_item.Value.ValueType.BuiltInType == BuiltInType.Null)
-            continue;
-          FieldMetaData _field = new FieldMetaData()
-          {
-            ProcessValueName = _item.Key,
-            SymbolicName = _item.Key,
-            TypeInformation = _item.Value.ValueType
-          };
-          _lf.Add(_field);
-        }
-        DataSetConfiguration _newDataSetConfiguration = new DataSetConfiguration()
-        {
-          AssociationName = _associationName,
-          AssociationRole = AssociationRole.Producer,
-          ConfigurationGuid = System.Guid.NewGuid(),
-          ConfigurationVersion = new ConfigurationVersionDataType() { MajorVersion = 1, MinorVersion = 0 },
-          Id = System.Guid.NewGuid(),
-          InformationModelURI = BoilersSet.Namespaces.BoilersSet,
-          DataSet = _lf.ToArray(),
-          DataSymbolicName = _associationName,
-          MaxBufferTime = 1000,
-          PublishingInterval = 100,
-          RepositoryGroup = _associationName,
-          Root = new NodeDescriptor()
-          {
-            BindingDescription = "Binding Description",
-            DataType = new XmlQualifiedName(BoilerType.BrowseNames.BoilerType, BoilerType.Namespaces.BoilerType) { },
-            InstanceDeclaration = false,
-            NodeClass = InstanceNodeClassesEnum.Object,
-            NodeIdentifier = new XmlQualifiedName(_associationName, BoilersSet.Namespaces.BoilersSet)
-          }
-        };
-        ConfigurationManagement.AddDataSetConfiguration(_newDataSetConfiguration, new Tuple<string, ushort, System.Guid>("UDP", 1, ProducerId), _inFileName(string.Empty), _inFileName("new."), _traceSource);
-        //ConfigurationManagement.ReplaceDataSetFields(_lf.ToArray(), associationName, inFileName, outFileName, _traceSource);
-
+        SemanticDataSetSource _dataSource = new SemanticDataSetSource(_boilerState);
+        XmlQualifiedName _type = new XmlQualifiedName(BoilerType.BrowseNames.BoilerType, BoilerType.Namespaces.BoilerType);
+        XmlQualifiedName _object = new XmlQualifiedName(symbolicName, BoilersSet.Namespaces.BoilersSet);
+        _dataSource.CreateConfiguration(_type, _associationName, _object, _inFileName, Tuple.Create("UDP", writerId, ProducerId), _log);
       }
     }
 

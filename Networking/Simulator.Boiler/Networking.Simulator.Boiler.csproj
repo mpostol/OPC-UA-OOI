@@ -30,10 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="bin\Producer.tml.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Configuration\NetworkingUpgrade\Configuration.Networking.Upgrade.csproj" />
     <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj" />
@@ -43,9 +39,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="ConfigurationDataProducer.BoilersSet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="ConfigurationDataProducer.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\" />
   </ItemGroup>
 
 </Project>

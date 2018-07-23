@@ -19,8 +19,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest
     [AssemblyInitialize]
     public static void TestMethod1(TestContext context)
     {
-      Logger _Logger = new Logger();
-      Container _container = new Container(new Object[] { _Logger });
+      Container _container = new Container(new Object[] { Logger.Singleton });
       ServiceLocator.SetLocatorProvider(() => _container);
       Assert.IsTrue(ServiceLocator.IsLocationProviderSet);
     }

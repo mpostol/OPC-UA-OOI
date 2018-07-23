@@ -5,6 +5,7 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UAOOI.Common.Infrastructure.Diagnostic;
@@ -14,6 +15,8 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.CommonServiceLocatorInstrum
 
   public class Logger : ITraceSource
   {
+
+    internal static Logger Singleton { get { return m_Singleton.Value; } }
 
     public class TraceLogEntity
     {
@@ -35,6 +38,9 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.CommonServiceLocatorInstrum
       TraceLogList.Add(new TraceLogEntity(eventType, id, data));
     }
     #endregion
+
+    private Logger() { }
+    private static Lazy<Logger> m_Singleton = new Lazy<Logger>(() => new Logger());
 
   }
 }

@@ -39,16 +39,16 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
       }
     }
     [TestMethod]
-    [DeploymentItem(@"ConfigurationDataProducer.xml")]
+    [DeploymentItem(@"CommonServiceLocatorInstrumentation\ConfigurationDataProducer.xml", "CommonServiceLocatorInstrumentation")]
     public void ReplaceDataSetFieldsTest()
     {
       TraceSourceFixture _log = new TraceSourceFixture();
       using (BoilerType.BoilerState _boilerState = new BoilerType.BoilerState(null, "browseName"))
       {
-        const string _inFileName = "ConfigurationDataProducer.xml";
+        const string _inFileName = @"CommonServiceLocatorInstrumentation\ConfigurationDataProducer.xml";
         FileInfo _inFile = new FileInfo(_inFileName);
         Assert.IsTrue(_inFile.Exists, $"File not exist {_inFile.FullName}");
-        string _outFileName = $"new.{_inFileName}";
+        string _outFileName = @"CommonServiceLocatorInstrumentation\new.ConfigurationDataProducer.xml";
         _boilerState.Logger = _log;
         ISemanticDataSetSource _dataSource = new SemanticDataSetSource(_boilerState);
         ReplaceDataSetFields(_dataSource, "Simple", _inFileName, _outFileName);

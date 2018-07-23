@@ -33,7 +33,7 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest
       Assert.IsTrue(_configuration.MessageHandlers[0] is MessageWriterConfiguration);
       Assert.IsNull(_configuration.TypeDictionaries);
       int LogEndPosition = Logger.Singleton.TraceLogList.Count;
-      Assert.AreEqual<int>(0, LogEndPosition - LogStartPosition, $"Current number of log entries is {LogEndPosition - LogStartPosition}");
+      Assert.AreEqual<int>(2, LogEndPosition - LogStartPosition, $"Current number of log entries is {LogEndPosition - LogStartPosition}");
 
     }
 

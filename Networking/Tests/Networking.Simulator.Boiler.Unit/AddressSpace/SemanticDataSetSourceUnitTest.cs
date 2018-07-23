@@ -6,18 +6,18 @@
 //___________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Xml;
-using BoilerType = tempuri.org.UA.Examples.BoilerType;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.Upgrade;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using BoilersSet = Commsvr.UA.Examples.BoilersSet;
-using System;
+using BoilerType = tempuri.org.UA.Examples.BoilerType;
 
 namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
 {

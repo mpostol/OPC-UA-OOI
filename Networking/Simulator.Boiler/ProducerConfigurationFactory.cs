@@ -6,8 +6,11 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using CommonServiceLocator;
 using System;
+using System.Diagnostics;
 using System.IO;
+using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.Serializers;
@@ -28,6 +31,9 @@ namespace UAOOI.Networking.Simulator.Boiler
     /// <param name="configurationFileName">Name of the producer configuration file.</param>
     public ProducerConfigurationFactory(string configurationFileName)
     {
+      IServiceLocator _serviceLocator = ServiceLocator.Current;
+      m_TraceSource = _serviceLocator.GetInstance<ITraceSource>();
+      m_TraceSource.TraceData(TraceEventType.Information, 36, $"Starting {nameof(ProducerConfigurationFactory)} with the configuration file name {configurationFileName}");
       m_ProducerConfigurationFileName = configurationFileName;
       Loader = LoadConfig;
     }
@@ -46,10 +52,11 @@ namespace UAOOI.Networking.Simulator.Boiler
 
     #region private
     private string m_ProducerConfigurationFileName;
+    private ITraceSource m_TraceSource = null;
     private ConfigurationData LoadConfig()
     {
       FileInfo _configurationFile = new FileInfo(m_ProducerConfigurationFileName);
-      return ConfigurationDataFactoryIO.Load<ConfigurationData>(() => XmlDataContractSerializers.Load<ConfigurationData>(_configurationFile, (x, y, z) => { }), () => RaiseEvents());
+      return ConfigurationDataFactoryIO.Load<ConfigurationData>(() => XmlDataContractSerializers.Load<ConfigurationData>(_configurationFile, m_TraceSource.TraceData), () => RaiseEvents());
     }
     protected override void RaiseEvents()
     {

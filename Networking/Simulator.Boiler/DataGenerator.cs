@@ -5,8 +5,11 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using CommonServiceLocator;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
@@ -35,6 +38,9 @@ namespace UAOOI.Networking.Simulator.Boiler
     /// <param name="semanticDataSource">The boilers set.</param>
     internal DataGenerator(ISemanticDataSource semanticDataSource)
     {
+      IServiceLocator _serviceLocator = ServiceLocator.Current;
+      m_TraceSource = _serviceLocator.GetInstance<ITraceSource>();
+      m_TraceSource.TraceData(TraceEventType.Information, 43, $"Starting {nameof(DataGenerator)} with the data source {semanticDataSource.GetType().FullName}");
       m_SemanticDataSource = semanticDataSource;
       m_SemanticDataSource.GetSemanticDataSources(RegisterVariable);
     }
@@ -64,6 +70,7 @@ namespace UAOOI.Networking.Simulator.Boiler
     /// <exception cref="System.NotImplementedException"></exception>
     IConsumerBinding IBindingFactory.GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
+      m_TraceSource.TraceData(TraceEventType.Error, 60, $"Starting {nameof(IBindingFactory.GetConsumerBinding)} for the process variable {repositoryGroup}_{processValueName}");
       throw new NotImplementedException();
     }
     /// <summary>
@@ -79,6 +86,7 @@ namespace UAOOI.Networking.Simulator.Boiler
     IProducerBinding IBindingFactory.GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
       string _name = CreateKey(repositoryGroup, processValueName);
+      m_TraceSource.TraceData(TraceEventType.Information, 60, $"Starting {nameof(IBindingFactory.GetProducerBinding)} for the process variable {_name}");
       IProducerBinding _return = null;
       switch (fieldTypeInfo.BuiltInType)
       {
@@ -140,8 +148,12 @@ namespace UAOOI.Networking.Simulator.Boiler
         case BuiltInType.DiagnosticInfo:
         case BuiltInType.Enumeration:
         default:
-          throw new ArgumentOutOfRangeException("encoding");
+          {
+            m_TraceSource.TraceData(TraceEventType.Error, 60, $"Cannot get binding for {_name}");
+            throw new ArgumentOutOfRangeException($"{_name}");
+          }
       }
+      m_TraceSource.TraceData(TraceEventType.Information, 60, $"Created binding for the process variable {_name}");
       return _return;
     }
     #endregion
@@ -150,10 +162,12 @@ namespace UAOOI.Networking.Simulator.Boiler
     //vars
     private ISemanticDataSource m_SemanticDataSource = null;
     private Dictionary<string, IVariable> m_NodesDictionary = new Dictionary<string, IVariable>();
+    private ITraceSource m_TraceSource = null;
     //methods
     private void RegisterVariable(string repositoryGroup, string processValueName, IVariable variable)
     {
       string _name = CreateKey(repositoryGroup, processValueName);
+      m_TraceSource.TraceData(TraceEventType.Information, 60, $"Registering next process variable {_name}");
       m_NodesDictionary.Add(_name, variable);
     }
     private string CreateKey(string repositoryGroup, string processValueName)
@@ -165,7 +179,7 @@ namespace UAOOI.Networking.Simulator.Boiler
     {
       IVariable _variable = m_NodesDictionary[key];
       Type _expectedType = typeof(type);
-      if (! _expectedType.GetUATypeInfo().IsEqual(_variable.ValueType))
+      if (!_expectedType.GetUATypeInfo().IsEqual(_variable.ValueType))
         throw new ArgumentOutOfRangeException($"Wrong argument type: {_expectedType.GetUATypeInfo()} but expected {_variable.ValueType}");
       ProducerBindingMonitoredValue<type> _binding = new ProducerBindingMonitoredValue<type>(key, typeInfo) { MonitoredValue = default(type) };
       _variable.OnStateChanged += (context, node, changes) =>

@@ -7,10 +7,12 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.Simulator.Boiler.AddressSpace;
+using UAOOI.Networking.Simulator.Boiler.UnitTest.CommonServiceLocatorInstrumentation;
 
 namespace UAOOI.Networking.Simulator.Boiler.UnitTest
 {
@@ -49,6 +51,20 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest
       {
         IBindingFactory _bindingFactory = _generator;
         IProducerBinding _binding = _bindingFactory.GetProducerBinding("repositoryGroup", "processValueName", new UATypeInfo(BuiltInType.Int16));
+      }
+    }
+    [TestMethod]
+    public void DefaultConstructorTest()
+    {
+      int _startLoggerPosition = Logger.Singleton.TraceLogList.Count;
+      using (DataGenerator _generator = new DataGenerator()) { }
+      int _endLoggerPosition = Logger.Singleton.TraceLogList.Count;
+      int _length = _endLoggerPosition - _startLoggerPosition;
+      Assert.AreEqual<int>(81, _length);
+      for (int i = _startLoggerPosition; i < _length; i++)
+      {
+        Assert.AreNotEqual<TraceEventType>(TraceEventType.Error, Logger.Singleton.TraceLogList[i].EventType, $"Error in registartion procedure {Logger.Singleton.TraceLogList[i].Data}");
+        Debug.WriteLine($"Trace type {Logger.Singleton.TraceLogList[i].EventType}, message {Logger.Singleton.TraceLogList[i].Data}");
       }
     }
 

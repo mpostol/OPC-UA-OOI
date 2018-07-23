@@ -76,6 +76,7 @@
     <Compile Include="ProducerConfigurationFactoryUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AssemblyInitializeFixture.cs" />
+    <Compile Include="AssemblyCleanupFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">

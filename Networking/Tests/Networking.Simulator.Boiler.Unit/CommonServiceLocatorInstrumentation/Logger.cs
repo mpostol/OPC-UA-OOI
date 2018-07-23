@@ -31,7 +31,13 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.CommonServiceLocatorInstrum
       }
     }
     public List<TraceLogEntity> TraceLogList { get; } = new List<TraceLogEntity>();
-
+    internal bool CheckForErrors()
+    {
+      foreach (TraceLogEntity _item in TraceLogList)
+        if (_item.EventType > TraceEventType.Information)
+          return true;
+      return false;
+    }
     #region ITraceSource
     void ITraceSource.TraceData(TraceEventType eventType, int id, object data)
     {

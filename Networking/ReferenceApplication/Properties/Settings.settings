@@ -6,7 +6,7 @@
       <Value Profile="(Default)">ConfigurationDataConsumer.xml</Value>
     </Setting>
     <Setting Name="ProducerConfigurationFileName" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">ConfigurationDataProducer.xml</Value>
+      <Value Profile="(Default)">ConfigurationDataProducer.BoilersSet.xml</Value>
     </Setting>
     <Setting Name="ConfigurationEditorPlugInFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">ConfigurationEditor\UAOOI.Configuration.DataBindings.dll</Value>
@@ -16,6 +16,9 @@
     </Setting>
     <Setting Name="LogFilePath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">ReferenceApplication.log</Value>
+    </Setting>
+    <Setting Name="DataProducerProvider" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UAOOI.Networking.Simulator.Boiler.dll</Value>
     </Setting>
   </Settings>
 </SettingsFile>

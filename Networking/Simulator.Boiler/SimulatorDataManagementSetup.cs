@@ -9,6 +9,7 @@ using CommonServiceLocator;
 using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData;
 
@@ -18,9 +19,9 @@ namespace UAOOI.Networking.Simulator.Boiler
   /// <summary>
   /// Class SimulatorDataManagementSetup represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer.
   /// </summary>
-  [Export]
+  [Export(typeof(IProducerDataManagementSetup))]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  public sealed class SimulatorDataManagementSetup : DataManagementSetup
+  public sealed class SimulatorDataManagementSetup : DataManagementSetup, IProducerDataManagementSetup
   {
 
     #region Composition
@@ -31,7 +32,7 @@ namespace UAOOI.Networking.Simulator.Boiler
     {
       IServiceLocator _serviceLocator = ServiceLocator.Current;
       string _configurationFileName = _serviceLocator.GetInstance<string>(SimulatorCompositionSettings.ConfigurationFileNameContract);
-      m_ViewModel = _serviceLocator.GetInstance<SimulatorViewModel>();
+      m_ViewModel = _serviceLocator.GetInstance<ProducerViewModel>();
       ConfigurationFactory = new ProducerConfigurationFactory(_configurationFileName);
       EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();
       BindingFactory = m_DataGenerator = new DataGenerator();
@@ -82,7 +83,7 @@ namespace UAOOI.Networking.Simulator.Boiler
     /// Gets or sets the view model to be used for diagnostic purpose..
     /// </summary>
     /// <value>The view model.</value>
-    private SimulatorViewModel m_ViewModel;
+    private UAOOI.Networking.ReferenceApplication.Core.ProducerViewModel m_ViewModel;
     private DataGenerator m_DataGenerator = null;
     private Action<bool> m_onDispose = disposing => { };
     #endregion

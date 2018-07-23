@@ -34,7 +34,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
           foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
             foreach (var export in _part.ExportDefinitions)
               Debug.WriteLine(string.Format("Part contract name => '{0}'", export.ContractName));
-          Assert.AreEqual<int>(11, _container.Catalog.Parts.Count());
+          Assert.AreEqual<int>(10, _container.Catalog.Parts.Count());
           MainWindow _MainWindowExportedValue = _container.GetExportedValue<MainWindow>();
           Assert.IsNotNull(_MainWindowExportedValue);
           Assert.IsNotNull(_MainWindowExportedValue.MainWindowViewModel);
@@ -46,7 +46,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
     [TestMethod]
     public void RegisterRequiredServicesIfMissingAndUDPMessageHandler()
     {
-      AggregateCatalog _catalog = new AggregateCatalog(new AssemblyCatalog("UAOOI.Networking.UDPMessageHandler.dll"));
+      AggregateCatalog _catalog = new AggregateCatalog(new AssemblyCatalog("UAOOI.Networking.UDPMessageHandler.dll"), new AssemblyCatalog("UAOOI.Networking.SimulatorInteroperabilityTest.dll"));
       AggregateCatalog _newCatalog = DefaultServiceRegistrar.RegisterServices(_catalog);
       int _disposingCount = 0;
       using (CompositionContainer _container = new CompositionContainer(_newCatalog))

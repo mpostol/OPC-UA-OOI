@@ -7,10 +7,10 @@ using System.Diagnostics;
 using System.Reactive.Disposables;
 using System.Windows;
 using UAOOI.Networking.DataLogger;
+using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.ReferenceApplication.MEF;
 using UAOOI.Networking.ReferenceApplication.Properties;
-using UAOOI.Networking.SimulatorInteroperabilityTest;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
@@ -31,6 +31,7 @@ namespace UAOOI.Networking.ReferenceApplication
     {
       base.ConfigureContainer();
       this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(Settings.Default.MessageHandlerProvider));
+      this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(Settings.Default.DataProducerProvider));
     }
     /// <summary>
     /// Initializes the shell.
@@ -62,10 +63,10 @@ namespace UAOOI.Networking.ReferenceApplication
         m_ConsumerConfigurationFactory.Setup();
         m_Components.Add(m_ConsumerConfigurationFactory);
         ReferenceApplicationEventSource.Log.PartCreated(nameof(LoggerManagementSetup));
-        SimulatorDataManagementSetup m_Producer = Container.GetExportedValue<SimulatorDataManagementSetup>();
+        IProducerDataManagementSetup m_Producer = Container.GetExportedValue<IProducerDataManagementSetup>();
         m_Producer.Setup();
         m_Components.Add(m_Producer);
-        ReferenceApplicationEventSource.Log.PartCreated(nameof(SimulatorDataManagementSetup));
+        ReferenceApplicationEventSource.Log.PartCreated(nameof(IProducerDataManagementSetup));
       }
       catch (Exception _ex)
       {

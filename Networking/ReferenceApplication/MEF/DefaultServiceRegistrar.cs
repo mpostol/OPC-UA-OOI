@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
@@ -27,7 +33,6 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
       return new List<ComposablePartCatalog>(new ComposablePartCatalog[] { new AssemblyCatalog(Assembly.GetAssembly(typeof(AppBootstrapper))),
                                                                            new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.ReferenceApplication.Core.Diagnostic.NetworkingEventSourceProvider))),
                                                                            new AssemblyCatalog(Assembly.GetAssembly(typeof(DataManagementSetup))),
-                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.SimulatorInteroperabilityTest.SimulatorCompositionSettings))),
                                                                            new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.Encoding.EncodingFactoryBinarySimple))),
                                                                            new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.DataLogger.ConsumerCompositionSettings))),
                                                                           }

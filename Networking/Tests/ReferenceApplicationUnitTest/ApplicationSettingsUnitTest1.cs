@@ -9,8 +9,8 @@ using CommonServiceLocator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel.Composition.Hosting;
 using UAOOI.Networking.DataLogger;
+using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.ReferenceApplication.MEF;
-using UAOOI.Networking.SimulatorInteroperabilityTest;
 
 namespace UAOOI.Networking.ReferenceApplication.UnitTest
 {
@@ -24,7 +24,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest
       {
         using (CompositionContainer _container = new CompositionContainer(newCatalog))
         {
-          string _ProducerConfigurationFileName = _container.GetExportedValue<string>(SimulatorCompositionSettings.ConfigurationFileNameContract);
+          string _ProducerConfigurationFileName = _container.GetExportedValue<string>(CompositionSettings.ConfigurationFileNameContract);
           Assert.AreEqual<string>("ConfigurationDataProducer.xml", _ProducerConfigurationFileName, $"_ProducerConfigurationFileName = {_ProducerConfigurationFileName}");
           string _ConsumerConfigurationFileName = _container.GetExportedValue<string>(ConsumerCompositionSettings.ConfigurationFileNameContract);
           Assert.AreEqual<string>("ConfigurationDataConsumer.xml", _ConsumerConfigurationFileName, $"_ProducerConfigurationFileName = {_ConsumerConfigurationFileName}");
@@ -44,7 +44,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest
         {
           IServiceLocator _serviceLocator = new ServiceLocatorAdapter(_container);
           ServiceLocator.SetLocatorProvider(() => _serviceLocator);
-          string _ProducerConfigurationFileName = _serviceLocator.GetInstance<string>(SimulatorCompositionSettings.ConfigurationFileNameContract);
+          string _ProducerConfigurationFileName = _serviceLocator.GetInstance<string>(CompositionSettings.ConfigurationFileNameContract);
           Assert.AreEqual<string>("ConfigurationDataProducer.xml", _ProducerConfigurationFileName, $"_ProducerConfigurationFileName = {_ProducerConfigurationFileName}");
           string _ConsumerConfigurationFileName = _serviceLocator.GetInstance<string>(ConsumerCompositionSettings.ConfigurationFileNameContract);
           Assert.AreEqual<string>("ConfigurationDataConsumer.xml", _ConsumerConfigurationFileName, $"_ProducerConfigurationFileName = {_ConsumerConfigurationFileName}");

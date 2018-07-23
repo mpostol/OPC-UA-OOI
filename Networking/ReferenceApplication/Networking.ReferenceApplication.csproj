@@ -242,6 +242,10 @@
       <Project>{7f4ded4e-5933-4229-b9cc-51da49678904}</Project>
       <Name>Networking.SemanticData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Simulator.Boiler\Networking.Simulator.Boiler.csproj">
+      <Project>{3ce5cca6-0ead-49ef-ab69-d1f17a9c6d43}</Project>
+      <Name>Networking.Simulator.Boiler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SimulatorInteroperabilityTest\Networking.SimulatorInteroperabilityTest.csproj">
       <Project>{5d2a0688-95e3-400a-b789-49052389d2b1}</Project>
       <Name>Networking.SimulatorInteroperabilityTest</Name>

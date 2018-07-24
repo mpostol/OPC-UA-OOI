@@ -46,10 +46,10 @@ namespace UAOOI.Networking.Simulator.Boiler.Model
     private List<BaseInstanceState> m_Boilers = new List<BaseInstanceState>();
     private BoilersSet() : base(null, CommsvrClassess.BrowseNames.BoilersArea)
     {
-      m_Boilers.Add(new tempuriClasses.BoilerState(this, CommsvrClassess.BrowseNames.BoilerAlpha));
-      m_Boilers.Add(new tempuriClasses.BoilerState(this, CommsvrClassess.BrowseNames.BoilerBravo));
-      m_Boilers.Add(new tempuriClasses.BoilerState(this, CommsvrClassess.BrowseNames.BoilerCharlie));
-      m_Boilers.Add(new tempuriClasses.BoilerState(this, CommsvrClassess.BrowseNames.BoilerDelta));
+      m_Boilers.Add(new tempuriClasses.BoilerState(this, $"{CommsvrClassess.BrowseNames.BoilersArea}_{ CommsvrClassess.BrowseNames.BoilerAlpha}"));
+      m_Boilers.Add(new tempuriClasses.BoilerState(this, $"{CommsvrClassess.BrowseNames.BoilersArea}_{ CommsvrClassess.BrowseNames.BoilerBravo}"));
+      m_Boilers.Add(new tempuriClasses.BoilerState(this, $"{CommsvrClassess.BrowseNames.BoilersArea}_{ CommsvrClassess.BrowseNames.BoilerCharlie}"));
+      m_Boilers.Add(new tempuriClasses.BoilerState(this, $"{CommsvrClassess.BrowseNames.BoilersArea}_{ CommsvrClassess.BrowseNames.BoilerDelta}"));
     }
     #endregion
 

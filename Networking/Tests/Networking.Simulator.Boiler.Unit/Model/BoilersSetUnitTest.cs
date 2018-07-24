@@ -41,10 +41,10 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.Model
           Debug.WriteLine($"{_var.Key}:{_var.Value.ValueType}");
 
       }
-      Assert.IsTrue(AddressSpace.ContainsKey("Boiler #1:CCX001_ControlOut"));
-      Assert.IsTrue(AddressSpace.ContainsKey("Boiler #2:CCX001_ControlOut"));
-      Assert.IsTrue(AddressSpace.ContainsKey("Boiler #3:CCX001_ControlOut"));
-      Assert.IsTrue(AddressSpace.ContainsKey("Boiler #4:CCX001_ControlOut"));
+      Assert.IsTrue(AddressSpace.ContainsKey("BoilersArea_Boiler #1:CCX001_ControlOut"));
+      Assert.IsTrue(AddressSpace.ContainsKey("BoilersArea_Boiler #2:CCX001_ControlOut"));
+      Assert.IsTrue(AddressSpace.ContainsKey("BoilersArea_Boiler #3:CCX001_ControlOut"));
+      Assert.IsTrue(AddressSpace.ContainsKey("BoilersArea_Boiler #4:CCX001_ControlOut"));
     }
     private Dictionary<string, IVariable> AddressSpace = new Dictionary<string, IVariable>();
 

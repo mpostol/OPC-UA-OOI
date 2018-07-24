@@ -76,8 +76,8 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest.AddressSpace
         _boilerState.Logger = _log;
         SemanticDataSetSource _dataSource = new SemanticDataSetSource(_boilerState);
         XmlQualifiedName _type = new XmlQualifiedName(BoilerType.BrowseNames.BoilerType, BoilerType.Namespaces.BoilerType);
-        XmlQualifiedName _object = new XmlQualifiedName(symbolicName, BoilersSet.Namespaces.BoilersSet);
-        _dataSource.CreateConfiguration(_type, _associationName, _object, _inFileName, Tuple.Create("UDP", writerId, ProducerId), _log);
+        XmlQualifiedName _instanceSymbolicName = new XmlQualifiedName(symbolicName, BoilersSet.Namespaces.BoilersSet);
+        _dataSource.CreateConfiguration(_type, _associationName, _instanceSymbolicName, _inFileName, Tuple.Create("UDP", writerId, ProducerId), _log);
       }
     }
 

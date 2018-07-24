@@ -7,6 +7,7 @@ using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
 using System.Linq;
 using UAOOI.Networking.DataLogger;
+using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.ReferenceApplication.MEF;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.Diagnostics;
@@ -77,7 +78,8 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         Assert.IsNotNull(_logger.ConfigurationFactory);
         Assert.IsNotNull(_logger.EncodingFactory);
         Assert.IsNotNull(_logger.MessageHandlerFactory);
-        SimulatorDataManagementSetup _simulator = _container.GetExportedValue<SimulatorDataManagementSetup>();
+        SimulatorDataManagementSetup _simulator = _container.GetExportedValue<IProducerDataManagementSetup>() as SimulatorDataManagementSetup;
+        Assert.IsNotNull(_simulator);
         Assert.IsNotNull(_simulator.BindingFactory);
         Assert.IsNotNull(_simulator.ConfigurationFactory);
         Assert.IsNotNull(_simulator.EncodingFactory);

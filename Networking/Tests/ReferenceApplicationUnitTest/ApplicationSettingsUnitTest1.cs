@@ -27,7 +27,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest
           string _ProducerConfigurationFileName = _container.GetExportedValue<string>(CompositionSettings.ConfigurationFileNameContract);
           Assert.AreEqual<string>("ConfigurationDataProducer.xml", _ProducerConfigurationFileName, $"_ProducerConfigurationFileName = {_ProducerConfigurationFileName}");
           string _ConsumerConfigurationFileName = _container.GetExportedValue<string>(ConsumerCompositionSettings.ConfigurationFileNameContract);
-          Assert.AreEqual<string>("ConfigurationDataConsumer.xml", _ConsumerConfigurationFileName, $"_ProducerConfigurationFileName = {_ConsumerConfigurationFileName}");
+          Assert.AreEqual<string>("ConfigurationDataConsumer.xml", _ConsumerConfigurationFileName, $"_ConsumerConfigurationFileName = {_ConsumerConfigurationFileName}");
           ApplicationSettings _ApplicationSettings = _container.GetExportedValue<ApplicationSettings>();
           Assert.IsNotNull(_ApplicationSettings);
           ApplicationSettings _ApplicationSettings2 = _container.GetExportedValue<ApplicationSettings>();
@@ -47,7 +47,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest
           string _ProducerConfigurationFileName = _serviceLocator.GetInstance<string>(CompositionSettings.ConfigurationFileNameContract);
           Assert.AreEqual<string>("ConfigurationDataProducer.xml", _ProducerConfigurationFileName, $"_ProducerConfigurationFileName = {_ProducerConfigurationFileName}");
           string _ConsumerConfigurationFileName = _serviceLocator.GetInstance<string>(ConsumerCompositionSettings.ConfigurationFileNameContract);
-          Assert.AreEqual<string>("ConfigurationDataConsumer.xml", _ConsumerConfigurationFileName, $"_ProducerConfigurationFileName = {_ConsumerConfigurationFileName}");
+          Assert.AreEqual<string>("ConfigurationDataConsumer.xml", _ConsumerConfigurationFileName, $"_ConsumerConfigurationFileName = {_ConsumerConfigurationFileName}");
           ApplicationSettings _ApplicationSettings = _serviceLocator.GetInstance<ApplicationSettings>();
           Assert.IsNotNull(_ApplicationSettings);
           ApplicationSettings _ApplicationSettings2 = _serviceLocator.GetInstance<ApplicationSettings>();

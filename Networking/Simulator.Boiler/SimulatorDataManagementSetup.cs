@@ -31,7 +31,7 @@ namespace UAOOI.Networking.Simulator.Boiler
     public SimulatorDataManagementSetup()
     {
       IServiceLocator _serviceLocator = ServiceLocator.Current;
-      string _configurationFileName = _serviceLocator.GetInstance<string>(SimulatorCompositionSettings.ConfigurationFileNameContract);
+      string _configurationFileName = _serviceLocator.GetInstance<string>(CompositionSettings.ConfigurationFileNameContract);
       m_ViewModel = _serviceLocator.GetInstance<ProducerViewModel>();
       ConfigurationFactory = new ProducerConfigurationFactory(_configurationFileName);
       EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();

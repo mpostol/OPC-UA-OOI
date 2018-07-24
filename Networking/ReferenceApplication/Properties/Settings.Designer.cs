@@ -32,15 +32,6 @@ namespace UAOOI.Networking.ReferenceApplication.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ConfigurationDataProducer.BoilersSet.xml")]
-        public string ProducerConfigurationFileName {
-            get {
-                return ((string)(this["ProducerConfigurationFileName"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("ConfigurationEditor\\UAOOI.Configuration.DataBindings.dll")]
@@ -73,7 +64,16 @@ namespace UAOOI.Networking.ReferenceApplication.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("UAOOI.Networking.Simulator.Boiler.dll")]
+        [global::System.Configuration.DefaultSettingValueAttribute("ConfigurationDataProducer.xml")]
+        public string ProducerConfigurationFileName {
+            get {
+                return ((string)(this["ProducerConfigurationFileName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("UAOOI.Networking.SimulatorInteroperabilityTest.dll")]
         public string DataProducerProvider {
             get {
                 return ((string)(this["DataProducerProvider"]));

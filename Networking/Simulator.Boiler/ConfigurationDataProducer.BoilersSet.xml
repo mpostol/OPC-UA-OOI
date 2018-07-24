@@ -639,25 +639,25 @@
       <ProducerAssociationConfigurations>
         <ProducerAssociationConfiguration>
           <AssociationName>BoilersArea_Boiler #1</AssociationName>
-          <DataSetWriterId>1</DataSetWriterId>
+          <DataSetWriterId>100</DataSetWriterId>
           <PublisherId>d80d81dd-96e6-4560-850e-154f9181307c</PublisherId>
           <FieldEncoding>VariantFieldEncoding</FieldEncoding>
         </ProducerAssociationConfiguration>
         <ProducerAssociationConfiguration>
           <AssociationName>BoilersArea_Boiler #2</AssociationName>
-          <DataSetWriterId>2</DataSetWriterId>
+          <DataSetWriterId>1202</DataSetWriterId>
           <PublisherId>d80d81dd-96e6-4560-850e-154f9181307c</PublisherId>
           <FieldEncoding>VariantFieldEncoding</FieldEncoding>
         </ProducerAssociationConfiguration>
         <ProducerAssociationConfiguration>
           <AssociationName>BoilersArea_Boiler #3</AssociationName>
-          <DataSetWriterId>3</DataSetWriterId>
+          <DataSetWriterId>130</DataSetWriterId>
           <PublisherId>d80d81dd-96e6-4560-850e-154f9181307c</PublisherId>
           <FieldEncoding>VariantFieldEncoding</FieldEncoding>
         </ProducerAssociationConfiguration>
         <ProducerAssociationConfiguration>
           <AssociationName>BoilersArea_Boiler #4</AssociationName>
-          <DataSetWriterId>4</DataSetWriterId>
+          <DataSetWriterId>140</DataSetWriterId>
           <PublisherId>d80d81dd-96e6-4560-850e-154f9181307c</PublisherId>
           <FieldEncoding>VariantFieldEncoding</FieldEncoding>
         </ProducerAssociationConfiguration>

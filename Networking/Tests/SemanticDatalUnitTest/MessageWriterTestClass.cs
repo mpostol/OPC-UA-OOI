@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
@@ -368,6 +374,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
 
   }
 
+  //TODO to be promoted to the codebase
   #region to be promoted to the codebase
   public sealed class BinaryUDPPackageWriter : BinaryEncoder
   {

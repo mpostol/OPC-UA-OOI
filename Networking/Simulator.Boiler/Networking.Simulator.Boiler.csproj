@@ -21,14 +21,34 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;DEBUG;OPCUA_EXCLUDE_InitializationStrings;NETSTANDARD2_0</DefineConstants>
+    <NoWarn>1701;1702;1705;IDE0001,IDE0002,IDE0003</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Model\IBoilersSet.cs" />
     <Compile Remove="Model\tempuri.org.UA.Examples.BoilerType.Classes - Copy.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Configuration\NetworkingUpgrade\Configuration.Networking.Upgrade.csproj" />
+    <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj" />
     <ProjectReference Include="..\..\SemanticData\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj" />
+    <ProjectReference Include="..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj" />
+    <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ConfigurationDataProducer.BoilersSet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ConfigurationDataProducer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\" />
   </ItemGroup>
 
 </Project>

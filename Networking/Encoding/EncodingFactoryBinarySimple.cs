@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.ComponentModel.Composition;
 using UAOOI.Configuration.Networking.Serialization;
@@ -26,14 +32,10 @@ namespace UAOOI.Networking.Encoding
     /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="sourceEncoding">The source encoding.</param>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// repositoryGroup
-    /// or
     /// binding
     /// </exception>
     void IEncodingFactory.UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
     {
-      if (repositoryGroup != EncodingCompositionSettings.ConfigurationRepositoryGroup)
-        throw new ArgumentOutOfRangeException(nameof(repositoryGroup));
       if (sourceEncoding.BuiltInType != binding.Encoding.BuiltInType)
         throw new ArgumentOutOfRangeException(nameof(binding));
     }

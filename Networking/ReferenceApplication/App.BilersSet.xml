@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <section name="UAOOI.Networking.ReferenceApplication.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+      <section name="UAOOI.UANetworking.ReferenceApplication.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+    </sectionGroup>
+    <sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <section name="UAOOI.Networking.ReferenceApplication.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+      <section name="UAOOI.UANetworking.ReferenceApplication.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+    </sectionGroup>
+  </configSections>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.6.1" />
+  </startup>
+  <userSettings>
+    <UAOOI.Networking.ReferenceApplication.Properties.Settings>
+      <setting name="ConfigurationEditorPlugInFilePath" serializeAs="String">
+        <value>ConfigurationEditor\UAOOI.Configuration.DataBindings.dll</value>
+      </setting>
+    </UAOOI.Networking.ReferenceApplication.Properties.Settings>
+    <UAOOI.UANetworking.ReferenceApplication.Properties.Settings>
+      <setting name="UDPPort" serializeAs="String">
+        <value>4840</value>
+      </setting>
+      <setting name="RemoteHostName" serializeAs="String">
+        <value>localhost</value>
+      </setting>
+      <setting name="RemoteUDPPortNumber" serializeAs="String">
+        <value>4840</value>
+      </setting>
+      <setting name="DefaultMulticastGroup" serializeAs="String">
+        <value>239.255.255.1</value>
+      </setting>
+      <setting name="JoinMulticastGroup" serializeAs="String">
+        <value>False</value>
+      </setting>
+      <setting name="ReuseAddress" serializeAs="String">
+        <value>True</value>
+      </setting>
+    </UAOOI.UANetworking.ReferenceApplication.Properties.Settings>
+  </userSettings>
+  <applicationSettings>
+    <UAOOI.Networking.ReferenceApplication.Properties.Settings>
+      <setting name="ConsumerConfigurationFileName" serializeAs="String">
+        <value>ConfigurationDataConsumer.xml</value>
+      </setting>
+      <setting name="ProducerConfigurationFileName" serializeAs="String">
+        <value>ConfigurationDataProducer.BoilersSet.xml</value>
+      </setting>
+      <setting name="MessageHandlerProvider" serializeAs="String">
+        <value>UAOOI.Networking.UDPMessageHandler.dll</value>
+      </setting>
+      <setting name="LogFilePath" serializeAs="String">
+        <value>ReferenceApplication.log</value>
+      </setting>
+      <setting name="DataProducerProvider" serializeAs="String">
+        <value>UAOOI.Networking.Simulator.Boiler.dll</value>
+      </setting>
+    </UAOOI.Networking.ReferenceApplication.Properties.Settings>
+    <UAOOI.UANetworking.ReferenceApplication.Properties.Settings>
+      <setting name="AssociationConfigurationId" serializeAs="String">
+        <value>C1F53FFB-6552-4CCC-84C9-F847147CDC85</value>
+      </setting>
+      <setting name="ProducerId" serializeAs="String">
+        <value>d80d81dd-96e6-4560-850e-154f9181307c</value>
+      </setting>
+      <setting name="ConsumerConfigurationFileName" serializeAs="String">
+        <value>ConfigurationDataConsumer.xml</value>
+      </setting>
+      <setting name="ProducerConfigurationFileName" serializeAs="String">
+        <value>ConfigurationDataProducer.xml</value>
+      </setting>
+    </UAOOI.UANetworking.ReferenceApplication.Properties.Settings>
+  </applicationSettings>
+  <system.diagnostics>
+    <sources>
+      <source name="System.Net.Sockets">
+        <listeners>
+          <add name="LogFile" />
+          <remove name="Default" />
+        </listeners>
+      </source>
+      <source name="UAOOI.Common" switchValue="Verbose" switchType="System.Diagnostics.SourceSwitch">
+        <listeners>
+          <add name="LogFile" />
+          <remove name="Default" />
+        </listeners>
+      </source>
+    </sources>
+    <switches>
+      <add name="System.Net.Sockets" value="Information" />
+      <!-- value:  Required String attribute. Sets the verbosity of the output. 
+                  Legitimate values are Critical, Error, Verbose, Warning, and Information.
+      -->
+      <!-- maxdatasize:  Optional Int32 attribute. Sets the maximum number of bytes of network data included in each line trace. 
+                         The default value is 1024.
+      -->
+      <!-- tracemode Optional String attribute. Set to includehex to show protocol traces in hexadecimal and text format. 
+      Set to protocolonly to show only text. The default value is includehex.
+      -->
+    </switches>
+    <sharedListeners>
+      <add name="LogFile" type="System.Diagnostics.DelimitedListTraceListener" initializeData="ReferenceApplicationBootstrapper.log" traceOutputOptions="DateTime">
+        <filter type="System.Diagnostics.EventTypeFilter" initializeData="All" />
+      </add>
+    </sharedListeners>
+    <trace autoflush="true" />
+  </system.diagnostics>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-11.0.0.0" newVersion="11.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="CommonServiceLocator" publicKeyToken="489b6accfaf20ef0" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-2.0.3.0" newVersion="2.0.3.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="UAOOI.Configuration.Networking" publicKeyToken="deede3c2df331bb0" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-3.0.5.36688" newVersion="3.0.5.36688" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="UAOOI.Common.Infrastructure" publicKeyToken="deede3c2df331bb0" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-2.0.0.16099" newVersion="2.0.0.16099" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+</configuration>

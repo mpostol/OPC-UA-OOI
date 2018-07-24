@@ -1,0 +1,16 @@
+﻿<ConfigurationData xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">
+  <DataSets>
+  </DataSets>
+  <MessageHandlers>
+    <MessageHandlerConfiguration i:type="MessageWriterConfiguration">
+      <Name>UDP</Name>
+      <Configuration>
+        <ChannelConfiguration>4840,localhost</ChannelConfiguration>
+      </Configuration>
+      <TransportRole>Producer</TransportRole>
+      <ProducerAssociationConfigurations>
+      </ProducerAssociationConfigurations>
+    </MessageHandlerConfiguration>
+  </MessageHandlers>
+  <TypeDictionaries i:nil="true" />
+</ConfigurationData>

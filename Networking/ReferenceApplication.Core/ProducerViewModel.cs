@@ -1,25 +1,31 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
 using UAOOI.Networking.ReferenceApplication.Core.MvvmLight;
 
-namespace UAOOI.Networking.SimulatorInteroperabilityTest
+namespace UAOOI.Networking.ReferenceApplication.Core
 {
 
   /// <summary>
-  /// class SimulatorViewModel - defines a ViewModel part to be used by the producer to expose diagnostic information on the UI.
+  /// class ProducerViewModel - defines a ViewModel part to be used by the producer to expose diagnostic information on the UI.
   /// </summary>
   [Export()]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  public class SimulatorViewModel : ObservableObject
+  public class ProducerViewModel : ObservableObject
   {
 
     #region API
     /// <summary>
-    /// Initializes a new instance of the <see cref="SimulatorViewModel"/> class.
+    /// Initializes a new instance of the <see cref="ProducerViewModel"/> class.
     /// </summary>
-    public SimulatorViewModel()
+    public ProducerViewModel()
     {
       ProducerRestartCommand = new DelegateCommand(() => { });
     }
@@ -55,7 +61,11 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
         RaisePropertyChanged<ICommand>("ProducerRestartCommand", b_ProducerRestartCommand, value);
       }
     }
-    internal void ChangeProducerCommand(Action action)
+    /// <summary>
+    /// Changes the producer command.
+    /// </summary>
+    /// <param name="action">The action to be executed in case of <see cref="ProducerViewModel.ProducerRestartCommand"/> event.</param>
+    public void ChangeProducerCommand(Action action)
     {
       ProducerRestartCommand = new DelegateCommand(action);
     }

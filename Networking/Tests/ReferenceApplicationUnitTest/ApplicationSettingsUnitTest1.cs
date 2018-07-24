@@ -1,13 +1,16 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using CommonServiceLocator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Primitives;
-using System.Diagnostics;
-using System.Linq;
 using UAOOI.Networking.DataLogger;
+using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.ReferenceApplication.MEF;
-using UAOOI.Networking.SimulatorInteroperabilityTest;
 
 namespace UAOOI.Networking.ReferenceApplication.UnitTest
 {
@@ -21,10 +24,10 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest
       {
         using (CompositionContainer _container = new CompositionContainer(newCatalog))
         {
-          string _ProducerConfigurationFileName = _container.GetExportedValue<string>(SimulatorCompositionSettings.ConfigurationFileNameContract);
+          string _ProducerConfigurationFileName = _container.GetExportedValue<string>(CompositionSettings.ConfigurationFileNameContract);
           Assert.AreEqual<string>("ConfigurationDataProducer.xml", _ProducerConfigurationFileName, $"_ProducerConfigurationFileName = {_ProducerConfigurationFileName}");
           string _ConsumerConfigurationFileName = _container.GetExportedValue<string>(ConsumerCompositionSettings.ConfigurationFileNameContract);
-          Assert.AreEqual<string>("ConfigurationDataConsumer.xml", _ConsumerConfigurationFileName, $"_ProducerConfigurationFileName = {_ConsumerConfigurationFileName}");
+          Assert.AreEqual<string>("ConfigurationDataConsumer.xml", _ConsumerConfigurationFileName, $"_ConsumerConfigurationFileName = {_ConsumerConfigurationFileName}");
           ApplicationSettings _ApplicationSettings = _container.GetExportedValue<ApplicationSettings>();
           Assert.IsNotNull(_ApplicationSettings);
           ApplicationSettings _ApplicationSettings2 = _container.GetExportedValue<ApplicationSettings>();
@@ -41,10 +44,10 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest
         {
           IServiceLocator _serviceLocator = new ServiceLocatorAdapter(_container);
           ServiceLocator.SetLocatorProvider(() => _serviceLocator);
-          string _ProducerConfigurationFileName = _serviceLocator.GetInstance<string>(SimulatorCompositionSettings.ConfigurationFileNameContract);
+          string _ProducerConfigurationFileName = _serviceLocator.GetInstance<string>(CompositionSettings.ConfigurationFileNameContract);
           Assert.AreEqual<string>("ConfigurationDataProducer.xml", _ProducerConfigurationFileName, $"_ProducerConfigurationFileName = {_ProducerConfigurationFileName}");
           string _ConsumerConfigurationFileName = _serviceLocator.GetInstance<string>(ConsumerCompositionSettings.ConfigurationFileNameContract);
-          Assert.AreEqual<string>("ConfigurationDataConsumer.xml", _ConsumerConfigurationFileName, $"_ProducerConfigurationFileName = {_ConsumerConfigurationFileName}");
+          Assert.AreEqual<string>("ConfigurationDataConsumer.xml", _ConsumerConfigurationFileName, $"_ConsumerConfigurationFileName = {_ConsumerConfigurationFileName}");
           ApplicationSettings _ApplicationSettings = _serviceLocator.GetInstance<ApplicationSettings>();
           Assert.IsNotNull(_ApplicationSettings);
           ApplicationSettings _ApplicationSettings2 = _serviceLocator.GetInstance<ApplicationSettings>();

@@ -8,9 +8,9 @@ using System.Windows;
 using System.Windows.Input;
 using UAOOI.Networking.DataLogger;
 using UAOOI.Networking.ReferenceApplication.Controls;
+using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.ReferenceApplication.Core.MvvmLight;
 using UAOOI.Networking.ReferenceApplication.Properties;
-using UAOOI.Networking.SimulatorInteroperabilityTest;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
@@ -173,8 +173,8 @@ namespace UAOOI.Networking.ReferenceApplication
     /// Gets or sets the producer view model.
     /// </summary>
     /// <value>The producer view model.</value>
-    [Import(typeof(SimulatorViewModel))]
-    public SimulatorViewModel ProducerViewModel { get; set; }
+    [Import(typeof(ProducerViewModel))]
+    public ProducerViewModel ProducerViewModel { get; set; }
     public int BytesSent
     {
       get

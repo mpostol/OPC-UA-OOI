@@ -7,6 +7,7 @@ using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
 using System.Linq;
 using UAOOI.Networking.DataLogger;
+using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.ReferenceApplication.MEF;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.Diagnostics;
@@ -34,7 +35,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
           foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
             foreach (var export in _part.ExportDefinitions)
               Debug.WriteLine(string.Format("Part contract name => '{0}'", export.ContractName));
-          Assert.AreEqual<int>(11, _container.Catalog.Parts.Count());
+          Assert.AreEqual<int>(10, _container.Catalog.Parts.Count());
           MainWindow _MainWindowExportedValue = _container.GetExportedValue<MainWindow>();
           Assert.IsNotNull(_MainWindowExportedValue);
           Assert.IsNotNull(_MainWindowExportedValue.MainWindowViewModel);
@@ -46,7 +47,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
     [TestMethod]
     public void RegisterRequiredServicesIfMissingAndUDPMessageHandler()
     {
-      AggregateCatalog _catalog = new AggregateCatalog(new AssemblyCatalog("UAOOI.Networking.UDPMessageHandler.dll"));
+      AggregateCatalog _catalog = new AggregateCatalog(new AssemblyCatalog("UAOOI.Networking.UDPMessageHandler.dll"), new AssemblyCatalog("UAOOI.Networking.SimulatorInteroperabilityTest.dll"));
       AggregateCatalog _newCatalog = DefaultServiceRegistrar.RegisterServices(_catalog);
       int _disposingCount = 0;
       using (CompositionContainer _container = new CompositionContainer(_newCatalog))
@@ -77,7 +78,8 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         Assert.IsNotNull(_logger.ConfigurationFactory);
         Assert.IsNotNull(_logger.EncodingFactory);
         Assert.IsNotNull(_logger.MessageHandlerFactory);
-        SimulatorDataManagementSetup _simulator = _container.GetExportedValue<SimulatorDataManagementSetup>();
+        SimulatorDataManagementSetup _simulator = _container.GetExportedValue<IProducerDataManagementSetup>() as SimulatorDataManagementSetup;
+        Assert.IsNotNull(_simulator);
         Assert.IsNotNull(_simulator.BindingFactory);
         Assert.IsNotNull(_simulator.ConfigurationFactory);
         Assert.IsNotNull(_simulator.EncodingFactory);

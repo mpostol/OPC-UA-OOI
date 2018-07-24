@@ -1,11 +1,18 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+using CommonServiceLocator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace UAOOI.Configuration.Networking.UnitTest.CommonServiceLocatorInstrumentation
 {
-  internal class Container : CommonServiceLocator.ServiceLocatorImplBase
+  internal class Container : ServiceLocatorImplBase
   {
 
     public Container(IEnumerable<object> list)

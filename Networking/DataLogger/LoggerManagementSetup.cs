@@ -83,13 +83,13 @@ namespace UAOOI.Networking.DataLogger
     #region private
     private ConsumerViewModel m_ViewModel;
     private Action<bool> m_onDispose = disposing => { };
-
     private void Restart()
     {
       m_ViewModel.Trace("Entering Restart");
       Start();
     }
     #endregion
+
     #region Unit tests instrumentation
     [Conditional("DEBUG")]
     internal void DisposeCheck(Action<bool> onDispose)
@@ -97,7 +97,6 @@ namespace UAOOI.Networking.DataLogger
       m_onDispose = onDispose;
     }
     #endregion
-
 
   }
 }

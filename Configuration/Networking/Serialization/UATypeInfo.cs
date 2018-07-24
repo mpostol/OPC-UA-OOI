@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.Runtime.Serialization;
 using System.Xml;
@@ -13,7 +19,7 @@ namespace UAOOI.Configuration.Networking.Serialization
   public class UATypeInfo
   {
 
-    #region creators
+    #region constructor
     /// <summary>
     /// Initializes a new instance of the <see cref="UATypeInfo"/> class representing an unknown type.
     /// </summary>

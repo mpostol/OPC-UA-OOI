@@ -1,0 +1,664 @@
+﻿<ConfigurationData xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">
+  <DataSets>
+    <DataSetConfiguration>
+      <AssociationRole>Consumer</AssociationRole>
+      <AssociationName>BoilersArea_Boiler #1</AssociationName>
+      <RepositoryGroup>BoilersArea_Boiler #1</RepositoryGroup>
+      <InformationModelURI>http://commsvr.com/UA/Examples/BoilersSet</InformationModelURI>
+      <DataSymbolicName>BoilersArea_Boiler #1</DataSymbolicName>
+      <DataSet>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_ControlOut</SymbolicName>
+          <ProcessValueName>CCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_Input1</SymbolicName>
+          <ProcessValueName>CCX001_Input1</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_Input2</SymbolicName>
+          <ProcessValueName>CCX001_Input2</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_Input3</SymbolicName>
+          <ProcessValueName>CCX001_Input3</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>DrumX001_LIX001_Output</SymbolicName>
+          <ProcessValueName>DrumX001_LIX001_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_ControlOut</SymbolicName>
+          <ProcessValueName>FCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_Measurement</SymbolicName>
+          <ProcessValueName>FCX001_Measurement</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_SetPoint</SymbolicName>
+          <ProcessValueName>FCX001_SetPoint</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX001_FTX001_Output</SymbolicName>
+          <ProcessValueName>PipeX001_FTX001_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX001_ValveX001_Input</SymbolicName>
+          <ProcessValueName>PipeX001_ValveX001_Input</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_ControlOut</SymbolicName>
+          <ProcessValueName>LCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_Measurement</SymbolicName>
+          <ProcessValueName>LCX001_Measurement</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_SetPoint</SymbolicName>
+          <ProcessValueName>LCX001_SetPoint</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX002_FTX002_Output</SymbolicName>
+          <ProcessValueName>PipeX002_FTX002_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>Simulation_UpdateRate</SymbolicName>
+          <ProcessValueName>Simulation_UpdateRate</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+      </DataSet>
+      <Guid>e669df1f-3670-4dd4-9ef6-acb0975bf4f8</Guid>
+      <Root>
+        <BindingDescription>Binding Description</BindingDescription>
+        <q:DataType xmlns:d5p1="http://tempuri.org/UA/Examples/BoilerType" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d5p1:BoilerType</q:DataType>
+        <q:NodeIdentifier xmlns:d5p1="http://commsvr.com/UA/Examples/BoilersSet" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d5p1:BoilersArea_BoilerAlpha</q:NodeIdentifier>
+      </Root>
+      <PublishingInterval>100</PublishingInterval>
+      <MaxBufferTime>1000</MaxBufferTime>
+      <ConfigurationGuid>ec1d3d5b-c988-45da-9b6e-8d7f7d5c6089</ConfigurationGuid>
+      <ConfigurationVersion>
+        <MajorVersion>1</MajorVersion>
+        <MinorVersion>0</MinorVersion>
+      </ConfigurationVersion>
+    </DataSetConfiguration>
+    <DataSetConfiguration>
+      <AssociationRole>Consumer</AssociationRole>
+      <AssociationName>BoilersArea_Boiler #2</AssociationName>
+      <RepositoryGroup>BoilersArea_Boiler #2</RepositoryGroup>
+      <InformationModelURI>http://commsvr.com/UA/Examples/BoilersSet</InformationModelURI>
+      <DataSymbolicName>BoilersArea_Boiler #2</DataSymbolicName>
+      <DataSet>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_ControlOut</SymbolicName>
+          <ProcessValueName>CCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_Input1</SymbolicName>
+          <ProcessValueName>CCX001_Input1</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_Input2</SymbolicName>
+          <ProcessValueName>CCX001_Input2</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_Input3</SymbolicName>
+          <ProcessValueName>CCX001_Input3</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>DrumX001_LIX001_Output</SymbolicName>
+          <ProcessValueName>DrumX001_LIX001_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_ControlOut</SymbolicName>
+          <ProcessValueName>FCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_Measurement</SymbolicName>
+          <ProcessValueName>FCX001_Measurement</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_SetPoint</SymbolicName>
+          <ProcessValueName>FCX001_SetPoint</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX001_FTX001_Output</SymbolicName>
+          <ProcessValueName>PipeX001_FTX001_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX001_ValveX001_Input</SymbolicName>
+          <ProcessValueName>PipeX001_ValveX001_Input</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_ControlOut</SymbolicName>
+          <ProcessValueName>LCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_Measurement</SymbolicName>
+          <ProcessValueName>LCX001_Measurement</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_SetPoint</SymbolicName>
+          <ProcessValueName>LCX001_SetPoint</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX002_FTX002_Output</SymbolicName>
+          <ProcessValueName>PipeX002_FTX002_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>Simulation_UpdateRate</SymbolicName>
+          <ProcessValueName>Simulation_UpdateRate</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+      </DataSet>
+      <Guid>1f5c2bba-b5a7-44d2-93fe-b8736470ee54</Guid>
+      <Root>
+        <BindingDescription>Binding Description</BindingDescription>
+        <q:DataType xmlns:d5p1="http://tempuri.org/UA/Examples/BoilerType" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d5p1:BoilerType</q:DataType>
+        <q:NodeIdentifier xmlns:d5p1="http://commsvr.com/UA/Examples/BoilersSet" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d5p1:BoilersArea_BoilerBravo</q:NodeIdentifier>
+      </Root>
+      <PublishingInterval>100</PublishingInterval>
+      <MaxBufferTime>1000</MaxBufferTime>
+      <ConfigurationGuid>33b3a9b8-595c-4dd6-8915-489cd6057b5b</ConfigurationGuid>
+      <ConfigurationVersion>
+        <MajorVersion>1</MajorVersion>
+        <MinorVersion>0</MinorVersion>
+      </ConfigurationVersion>
+    </DataSetConfiguration>
+    <DataSetConfiguration>
+      <AssociationRole>Consumer</AssociationRole>
+      <AssociationName>BoilersArea_Boiler #3</AssociationName>
+      <RepositoryGroup>BoilersArea_Boiler #3</RepositoryGroup>
+      <InformationModelURI>http://commsvr.com/UA/Examples/BoilersSet</InformationModelURI>
+      <DataSymbolicName>BoilersArea_Boiler #3</DataSymbolicName>
+      <DataSet>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_ControlOut</SymbolicName>
+          <ProcessValueName>CCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_Input1</SymbolicName>
+          <ProcessValueName>CCX001_Input1</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_Input2</SymbolicName>
+          <ProcessValueName>CCX001_Input2</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_Input3</SymbolicName>
+          <ProcessValueName>CCX001_Input3</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>DrumX001_LIX001_Output</SymbolicName>
+          <ProcessValueName>DrumX001_LIX001_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_ControlOut</SymbolicName>
+          <ProcessValueName>FCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_Measurement</SymbolicName>
+          <ProcessValueName>FCX001_Measurement</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_SetPoint</SymbolicName>
+          <ProcessValueName>FCX001_SetPoint</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX001_FTX001_Output</SymbolicName>
+          <ProcessValueName>PipeX001_FTX001_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX001_ValveX001_Input</SymbolicName>
+          <ProcessValueName>PipeX001_ValveX001_Input</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_ControlOut</SymbolicName>
+          <ProcessValueName>LCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_Measurement</SymbolicName>
+          <ProcessValueName>LCX001_Measurement</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_SetPoint</SymbolicName>
+          <ProcessValueName>LCX001_SetPoint</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX002_FTX002_Output</SymbolicName>
+          <ProcessValueName>PipeX002_FTX002_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>Simulation_UpdateRate</SymbolicName>
+          <ProcessValueName>Simulation_UpdateRate</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+      </DataSet>
+      <Guid>096d553e-c1da-4ca4-9fcc-9d524fa3ca20</Guid>
+      <Root>
+        <BindingDescription>Binding Description</BindingDescription>
+        <q:DataType xmlns:d5p1="http://tempuri.org/UA/Examples/BoilerType" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d5p1:BoilerType</q:DataType>
+        <q:NodeIdentifier xmlns:d5p1="http://commsvr.com/UA/Examples/BoilersSet" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d5p1:BoilersArea_BoilerBravo</q:NodeIdentifier>
+      </Root>
+      <PublishingInterval>100</PublishingInterval>
+      <MaxBufferTime>1000</MaxBufferTime>
+      <ConfigurationGuid>ef63fda7-bb4a-400d-a5e9-517fae8e4ff6</ConfigurationGuid>
+      <ConfigurationVersion>
+        <MajorVersion>1</MajorVersion>
+        <MinorVersion>0</MinorVersion>
+      </ConfigurationVersion>
+    </DataSetConfiguration>
+    <DataSetConfiguration>
+      <AssociationRole>Consumer</AssociationRole>
+      <AssociationName>BoilersArea_Boiler #4</AssociationName>
+      <RepositoryGroup>BoilersArea_Boiler #4</RepositoryGroup>
+      <InformationModelURI>http://commsvr.com/UA/Examples/BoilersSet</InformationModelURI>
+      <DataSymbolicName>BoilersArea_Boiler #4</DataSymbolicName>
+      <DataSet>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_ControlOut</SymbolicName>
+          <ProcessValueName>CCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_Input1</SymbolicName>
+          <ProcessValueName>CCX001_Input1</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_Input2</SymbolicName>
+          <ProcessValueName>CCX001_Input2</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>CCX001_Input3</SymbolicName>
+          <ProcessValueName>CCX001_Input3</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>DrumX001_LIX001_Output</SymbolicName>
+          <ProcessValueName>DrumX001_LIX001_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_ControlOut</SymbolicName>
+          <ProcessValueName>FCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_Measurement</SymbolicName>
+          <ProcessValueName>FCX001_Measurement</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>FCX001_SetPoint</SymbolicName>
+          <ProcessValueName>FCX001_SetPoint</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX001_FTX001_Output</SymbolicName>
+          <ProcessValueName>PipeX001_FTX001_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX001_ValveX001_Input</SymbolicName>
+          <ProcessValueName>PipeX001_ValveX001_Input</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_ControlOut</SymbolicName>
+          <ProcessValueName>LCX001_ControlOut</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_Measurement</SymbolicName>
+          <ProcessValueName>LCX001_Measurement</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>LCX001_SetPoint</SymbolicName>
+          <ProcessValueName>LCX001_SetPoint</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>PipeX002_FTX002_Output</SymbolicName>
+          <ProcessValueName>PipeX002_FTX002_Output</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>Double</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+        <DataMemberConfiguration>
+          <SymbolicName>Simulation_UpdateRate</SymbolicName>
+          <ProcessValueName>Simulation_UpdateRate</ProcessValueName>
+          <TypeInformation>
+            <BuiltInType>UInt32</BuiltInType>
+            <TypeName i:nil="true" />
+            <ValueRank>-1</ValueRank>
+          </TypeInformation>
+        </DataMemberConfiguration>
+      </DataSet>
+      <Guid>78e83ea4-aa0c-43e3-9449-3f2f195f2844</Guid>
+      <Root>
+        <BindingDescription>Binding Description</BindingDescription>
+        <q:DataType xmlns:d5p1="http://tempuri.org/UA/Examples/BoilerType" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d5p1:BoilerType</q:DataType>
+        <q:NodeIdentifier xmlns:d5p1="http://commsvr.com/UA/Examples/BoilersSet" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d5p1:BoilersArea_BoilerBravo</q:NodeIdentifier>
+      </Root>
+      <PublishingInterval>100</PublishingInterval>
+      <MaxBufferTime>1000</MaxBufferTime>
+      <ConfigurationGuid>3b3273c2-c5bc-468d-9c6b-97c6e2a5042d</ConfigurationGuid>
+      <ConfigurationVersion>
+        <MajorVersion>1</MajorVersion>
+        <MinorVersion>0</MinorVersion>
+      </ConfigurationVersion>
+    </DataSetConfiguration>
+  </DataSets>
+  <MessageHandlers>
+    <MessageHandlerConfiguration i:type="MessageReaderConfiguration">
+      <Name>UDP</Name>
+      <Configuration>
+        <ChannelConfiguration>4840,False,127.0.0.1,True</ChannelConfiguration>
+      </Configuration>
+      <TransportRole>Consumer</TransportRole>
+      <ConsumerAssociationConfigurations>
+        <ConsumerAssociationConfiguration>
+          <AssociationName>BoilersArea_Boiler #1</AssociationName>
+          <DataSetWriterId>100</DataSetWriterId>
+          <PublisherId>d80d81dd-96e6-4560-850e-154f9181307c</PublisherId>
+        </ConsumerAssociationConfiguration>
+        <ConsumerAssociationConfiguration>
+          <AssociationName>BoilersArea_Boiler #2</AssociationName>
+          <DataSetWriterId>1202</DataSetWriterId>
+          <PublisherId>d80d81dd-96e6-4560-850e-154f9181307c</PublisherId>
+        </ConsumerAssociationConfiguration>
+        <ConsumerAssociationConfiguration>
+          <AssociationName>BoilersArea_Boiler #3</AssociationName>
+          <DataSetWriterId>130</DataSetWriterId>
+          <PublisherId>d80d81dd-96e6-4560-850e-154f9181307c</PublisherId>
+        </ConsumerAssociationConfiguration>
+        <ConsumerAssociationConfiguration>
+          <AssociationName>BoilersArea_Boiler #4</AssociationName>
+          <DataSetWriterId>140</DataSetWriterId>
+          <PublisherId>d80d81dd-96e6-4560-850e-154f9181307c</PublisherId>
+          <FieldEncoding>VariantFieldEncoding</FieldEncoding>
+        </ConsumerAssociationConfiguration>
+      </ConsumerAssociationConfigurations>
+    </MessageHandlerConfiguration>
+  </MessageHandlers>
+</ConfigurationData>

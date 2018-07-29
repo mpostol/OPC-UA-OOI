@@ -50,6 +50,9 @@ namespace UAOOI.Networking.Simulator.Boiler.Model
       m_Boilers.Add(new tempuriClasses.BoilerState(this, $"{CommsvrClassess.BrowseNames.BoilersArea}_{ CommsvrClassess.BrowseNames.BoilerBravo}"));
       m_Boilers.Add(new tempuriClasses.BoilerState(this, $"{CommsvrClassess.BrowseNames.BoilersArea}_{ CommsvrClassess.BrowseNames.BoilerCharlie}"));
       m_Boilers.Add(new tempuriClasses.BoilerState(this, $"{CommsvrClassess.BrowseNames.BoilersArea}_{ CommsvrClassess.BrowseNames.BoilerDelta}"));
+
+      foreach (tempuriClasses.BoilerState boilerState in m_Boilers)
+        boilerState.StartSimulation();      
     }
     #endregion
 

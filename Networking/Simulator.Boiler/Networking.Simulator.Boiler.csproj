@@ -39,6 +39,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="ConfigurationDataConsumer.BoilersSet.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ConfigurationDataProducer.BoilersSet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

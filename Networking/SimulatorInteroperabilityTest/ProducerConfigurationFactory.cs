@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.IO;
 using UAOOI.Configuration.Networking;
@@ -9,9 +15,10 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
 {
 
   /// <summary>
-  /// Class ProducerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase"/> for the producer.
+  /// Class ProducerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase{ConfigurationData}" /> for the producer.
   /// </summary>
-  internal class ProducerConfigurationFactory : ConfigurationFactoryBase
+  /// <seealso cref="ConfigurationFactoryBase{ConfigurationData}" />
+  internal class ProducerConfigurationFactory : ConfigurationFactoryBase<ConfigurationData>
   {
 
     #region constructor

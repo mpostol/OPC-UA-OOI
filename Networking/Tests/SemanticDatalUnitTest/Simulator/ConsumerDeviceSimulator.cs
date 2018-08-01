@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using UAOOI.Configuration.Networking;
@@ -61,7 +67,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
     /// <summary>
     /// Class ConfigurationFactory.
     /// </summary>
-    private class ConsumerConfigurationFactory : ConfigurationFactoryBase
+    private class ConsumerConfigurationFactory : ConfigurationFactoryBase<ConfigurationData>
     {
 
       public ConsumerConfigurationFactory()

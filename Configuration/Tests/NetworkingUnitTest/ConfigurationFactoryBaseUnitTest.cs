@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.Configuration.Networking.Serialization;
@@ -21,7 +27,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
       ConfigurationData _config = _newOne.GetConfiguration();
       Assert.IsNotNull(_config);
     }
-    internal class TestConfigurationDataFactory : ConfigurationFactoryBase
+    private class TestConfigurationDataFactory : ConfigurationFactoryBase<ConfigurationData>
     {
 
       /// <summary>
@@ -43,6 +49,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
       public override event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
       #endregion
 
+      internal new Func<ConfigurationData> Loader { get { return base.Loader; } set { base.Loader = value; } }
       #region private
       private ConfigurationData LoadConfig()
       {

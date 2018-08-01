@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.IO;
 using UAOOI.Configuration.Networking;
@@ -9,12 +15,13 @@ namespace UAOOI.Networking.DataLogger
 {
 
   /// <summary>
-  /// Class ConsumerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase"/> for the UA Data consumer.
+  /// Class ConsumerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase{onfigurationData}"/> for the UA Data consumer.
   /// </summary>
   /// <remarks>In production environment it shall be replaced by reading a configuration file.</remarks>
-  internal class ConsumerConfigurationFactory : ConfigurationFactoryBase
+  internal class ConsumerConfigurationFactory : ConfigurationFactoryBase<ConfigurationData>
   {
 
+    #region condtructor
     /// <summary>
     /// Initializes a new instance of the <see cref="ConsumerConfigurationFactory"/> class.
     /// </summary>
@@ -23,6 +30,7 @@ namespace UAOOI.Networking.DataLogger
       Loader = LoadConfig;
       m_ConfigurationFileName = configurationFileName;
     }
+    #endregion
 
     #region ConfigurationFactoryBase
     /// <summary>

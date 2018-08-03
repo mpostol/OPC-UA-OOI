@@ -9,11 +9,9 @@
 using CommonServiceLocator;
 using System;
 using System.Diagnostics;
-using System.IO;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
-using UAOOI.Configuration.Networking.Serializers;
 
 namespace UAOOI.Networking.Simulator.Boiler
 {
@@ -21,7 +19,7 @@ namespace UAOOI.Networking.Simulator.Boiler
   /// <summary>
   /// Class ProducerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase"/> for the producer.
   /// </summary>
-  internal class ProducerConfigurationFactory : ConfigurationFactoryBase
+  internal class ProducerConfigurationFactory : ConfigurationFactoryBase<ConfigurationData>
   {
 
     #region constructor
@@ -29,13 +27,12 @@ namespace UAOOI.Networking.Simulator.Boiler
     /// Initializes a new instance of the <see cref="ProducerConfigurationFactory" /> class.
     /// </summary>
     /// <param name="configurationFileName">Name of the producer configuration file.</param>
-    public ProducerConfigurationFactory(string configurationFileName)
+    public ProducerConfigurationFactory(string configurationFileName) : base(configurationFileName)
     {
       IServiceLocator _serviceLocator = ServiceLocator.Current;
       m_TraceSource = _serviceLocator.GetInstance<ITraceSource>();
       m_TraceSource.TraceData(TraceEventType.Information, 36, $"Starting {nameof(ProducerConfigurationFactory)} with the configuration file name {configurationFileName}");
       m_ProducerConfigurationFileName = configurationFileName;
-      Loader = LoadConfig;
     }
     #endregion
 
@@ -51,13 +48,12 @@ namespace UAOOI.Networking.Simulator.Boiler
     #endregion
 
     #region private
+    protected override void TraceData(TraceEventType eventType, int id, object data)
+    {
+      m_TraceSource.TraceData(eventType, id, data);
+    }
     private string m_ProducerConfigurationFileName;
     private ITraceSource m_TraceSource = null;
-    private ConfigurationData LoadConfig()
-    {
-      FileInfo _configurationFile = new FileInfo(m_ProducerConfigurationFileName);
-      return ConfigurationDataFactoryIO.Load<ConfigurationData>(() => XmlDataContractSerializers.Load<ConfigurationData>(_configurationFile, m_TraceSource.TraceData), () => RaiseEvents());
-    }
     protected override void RaiseEvents()
     {
       OnAssociationConfigurationChange?.Invoke(this, EventArgs.Empty);

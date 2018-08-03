@@ -36,6 +36,9 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.
     <Product>Object Oriented Internet</Product>
 
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;1705;IDE0001;IDE0002;IDE0003</NoWarn>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.3" />
   </ItemGroup>

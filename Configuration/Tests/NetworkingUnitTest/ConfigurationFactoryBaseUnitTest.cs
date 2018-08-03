@@ -5,11 +5,12 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.Configuration.Networking.Serialization;
+using System;
 using System.IO;
+using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.Serializers;
+using UAOOI.Configuration.Networking.UnitTest.Instrumentation;
 
 namespace UAOOI.Configuration.Networking.UnitTest
 {
@@ -26,6 +27,15 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.IsNotNull(_newOne.Loader);
       ConfigurationData _config = _newOne.GetConfiguration();
       Assert.IsNotNull(_config);
+    }
+    [TestMethod]
+    public void LoadConfigurationDataWrapperTest()
+    {
+      TestConfigurationFactoryBaseConfigurationDataWrapper _newOne = new TestConfigurationFactoryBaseConfigurationDataWrapper();
+      Assert.IsNotNull(_newOne.Loader);
+      ConfigurationData _config = _newOne.GetConfiguration();
+      Assert.IsNotNull(_config);
+      Assert.IsNotNull(_newOne.Configuration);
     }
     private class TestConfigurationDataFactory : ConfigurationFactoryBase<ConfigurationData>
     {
@@ -65,5 +75,23 @@ namespace UAOOI.Configuration.Networking.UnitTest
       #endregion
 
     }
+    private class TestConfigurationFactoryBaseConfigurationDataWrapper : ConfigurationFactoryBase<ConfigurationDataWrapper>
+    {
+
+      public TestConfigurationFactoryBaseConfigurationDataWrapper() : base(m_FileName) { }
+
+      #region ConfigurationFactoryBase
+      public override event EventHandler<EventArgs> OnAssociationConfigurationChange;
+      public override event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
+      protected override void RaiseEvents()
+      {
+        throw new NotImplementedException();
+      }
+      #endregion
+      internal new Func<ConfigurationDataWrapper> Loader { get { return base.Loader; } set { base.Loader = value; } }
+
+      private const string m_FileName = @"TestData\ConsumerConfigurationDataWrapper.xml";
+
+}
   }
 }

@@ -1,0 +1,138 @@
+﻿<ConfigurationDataWrapper xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/UnitTest/Serialization.xsd">
+  <ConfigurationData xmlns:d2p1="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">
+    <d2p1:DataSets>
+      <d2p1:DataSetConfiguration>
+        <d2p1:AssociationRole>Consumer</d2p1:AssociationRole>
+        <d2p1:AssociationName>Association1</d2p1:AssociationName>
+        <d2p1:RepositoryGroup>repositoryGroup</d2p1:RepositoryGroup>
+        <d2p1:InformationModelURI>https://github.com/mpostol/OPC-UA-OOI</d2p1:InformationModelURI>
+        <d2p1:DataSymbolicName>DataSymbolicName</d2p1:DataSymbolicName>
+        <d2p1:DataSet>
+          <d2p1:DataMemberConfiguration>
+            <d2p1:SymbolicName>Value1</d2p1:SymbolicName>
+            <d2p1:ProcessValueName>Value1</d2p1:ProcessValueName>
+            <d2p1:TypeInformation>
+              <d2p1:BuiltInType>DateTime</d2p1:BuiltInType>
+              <q:TypeName xmlns:d8p1="Value1NS" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d8p1:Value1Name</q:TypeName>
+              <d2p1:ValueRank>-1</d2p1:ValueRank>
+            </d2p1:TypeInformation>
+          </d2p1:DataMemberConfiguration>
+          <d2p1:DataMemberConfiguration>
+            <d2p1:SymbolicName>Value2</d2p1:SymbolicName>
+            <d2p1:ProcessValueName>Value2</d2p1:ProcessValueName>
+            <d2p1:TypeInformation>
+              <d2p1:BuiltInType>Double</d2p1:BuiltInType>
+              <q:TypeName xmlns:d8p1="Value2NS" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d8p1:Value2Name</q:TypeName>
+              <d2p1:ValueRank>-1</d2p1:ValueRank>
+            </d2p1:TypeInformation>
+          </d2p1:DataMemberConfiguration>
+        </d2p1:DataSet>
+        <d2p1:Guid>c1f53ffb-6552-4ccc-84c9-f847147cdc85</d2p1:Guid>
+        <d2p1:Root>
+          <q:NodeIdentifier xmlns:d6p1="NodeDescriptorNS" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d6p1:NodeDescriptor</q:NodeIdentifier>
+        </d2p1:Root>
+        <d2p1:PublishingInterval>1000</d2p1:PublishingInterval>
+        <d2p1:MaxBufferTime>100</d2p1:MaxBufferTime>
+        <d2p1:ConfigurationGuid>d3dea20a-1f65-4744-abf5-3d8120960d7b</d2p1:ConfigurationGuid>
+        <d2p1:ConfigurationVersion>
+          <d2p1:MajorVersion>0</d2p1:MajorVersion>
+          <d2p1:MinorVersion>0</d2p1:MinorVersion>
+        </d2p1:ConfigurationVersion>
+      </d2p1:DataSetConfiguration>
+    </d2p1:DataSets>
+    <d2p1:MessageHandlers>
+      <d2p1:MessageHandlerConfiguration i:type="d2p1:MessageReaderConfiguration">
+        <d2p1:Name>UDP</d2p1:Name>
+        <d2p1:Configuration>
+          <d2p1:ChannelConfiguration>4840,True,239.255.255.1,True</d2p1:ChannelConfiguration>
+        </d2p1:Configuration>
+        <d2p1:TransportRole>Consumer</d2p1:TransportRole>
+        <d2p1:ConsumerAssociationConfigurations>
+          <d2p1:ConsumerAssociationConfiguration>
+            <d2p1:AssociationName>Association1</d2p1:AssociationName>
+            <d2p1:DataSetWriterId>12345</d2p1:DataSetWriterId>
+            <d2p1:PublisherId>c1f53ffb-6552-4ccc-84c9-f847147cdc85</d2p1:PublisherId>
+          </d2p1:ConsumerAssociationConfiguration>
+        </d2p1:ConsumerAssociationConfigurations>
+      </d2p1:MessageHandlerConfiguration>
+    </d2p1:MessageHandlers>
+    <d2p1:TypeDictionaries>
+      <d2p1:TypeDictionary>
+        <d2p1:Items>
+          <d2p1:TypeDescription i:type="d2p1:StructuredType">
+            <d2p1:Name>StructuredTypeName</d2p1:Name>
+            <d2p1:Field>
+              <d2p1:FieldType>
+                <d2p1:Name>FieldName1</d2p1:Name>
+                <d2p1:SwitchField i:nil="true" />
+                <d2p1:SwitchOperand>Equals</d2p1:SwitchOperand>
+                <d2p1:SwitchOperandSpecified>false</d2p1:SwitchOperandSpecified>
+                <d2p1:SwitchValue>0</d2p1:SwitchValue>
+                <d2p1:SwitchValueSpecified>false</d2p1:SwitchValueSpecified>
+                <q:TypeName xmlns:d9p1="http://opcfoundation.org/UA/" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d9p1:Int32</q:TypeName>
+              </d2p1:FieldType>
+              <d2p1:FieldType>
+                <d2p1:Name>FieldName2</d2p1:Name>
+                <d2p1:SwitchField i:nil="true" />
+                <d2p1:SwitchOperand>Equals</d2p1:SwitchOperand>
+                <d2p1:SwitchOperandSpecified>false</d2p1:SwitchOperandSpecified>
+                <d2p1:SwitchValue>0</d2p1:SwitchValue>
+                <d2p1:SwitchValueSpecified>false</d2p1:SwitchValueSpecified>
+                <q:TypeName xmlns:d9p1="http://opcfoundation.org/UA/" xmlns:q="http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd">d9p1:Int32</q:TypeName>
+              </d2p1:FieldType>
+            </d2p1:Field>
+            <d2p1:StructureKind>Structure</d2p1:StructureKind>
+          </d2p1:TypeDescription>
+          <d2p1:TypeDescription i:type="d2p1:EnumeratedType">
+            <d2p1:Name>EnumeratedTypeName</d2p1:Name>
+            <d2p1:EnumeratedValues>
+              <d2p1:EnumeratedValue>
+                <d2p1:Documentation>
+                  <d2p1:LocalizedText>
+                    <d2p1:Locale>en-us</d2p1:Locale>
+                    <d2p1:Value>Documentation</d2p1:Value>
+                  </d2p1:LocalizedText>
+                  <d2p1:LocalizedText>
+                    <d2p1:Locale>pl-pl</d2p1:Locale>
+                    <d2p1:Value>Dokumentacja</d2p1:Value>
+                  </d2p1:LocalizedText>
+                </d2p1:Documentation>
+                <d2p1:Name>Field1</d2p1:Name>
+                <d2p1:Value>0</d2p1:Value>
+              </d2p1:EnumeratedValue>
+              <d2p1:EnumeratedValue>
+                <d2p1:Documentation>
+                  <d2p1:LocalizedText>
+                    <d2p1:Locale>en-us</d2p1:Locale>
+                    <d2p1:Value>Documentation</d2p1:Value>
+                  </d2p1:LocalizedText>
+                  <d2p1:LocalizedText>
+                    <d2p1:Locale>pl-pl</d2p1:Locale>
+                    <d2p1:Value>Dokumentacja</d2p1:Value>
+                  </d2p1:LocalizedText>
+                </d2p1:Documentation>
+                <d2p1:Name>Field2</d2p1:Name>
+                <d2p1:Value>1</d2p1:Value>
+              </d2p1:EnumeratedValue>
+              <d2p1:EnumeratedValue>
+                <d2p1:Documentation>
+                  <d2p1:LocalizedText>
+                    <d2p1:Locale>en-us</d2p1:Locale>
+                    <d2p1:Value>Documentation</d2p1:Value>
+                  </d2p1:LocalizedText>
+                  <d2p1:LocalizedText>
+                    <d2p1:Locale>pl-pl</d2p1:Locale>
+                    <d2p1:Value>Dokumentacja</d2p1:Value>
+                  </d2p1:LocalizedText>
+                </d2p1:Documentation>
+                <d2p1:Name>Field3</d2p1:Name>
+                <d2p1:Value>2</d2p1:Value>
+              </d2p1:EnumeratedValue>
+            </d2p1:EnumeratedValues>
+          </d2p1:TypeDescription>
+        </d2p1:Items>
+        <d2p1:TargetNamespace>http://commsvr.com/UAOOI/Configuration/Networking/UnitTest/TargetNamespace.xsd</d2p1:TargetNamespace>
+      </d2p1:TypeDictionary>
+    </d2p1:TypeDictionaries>
+  </ConfigurationData>
+</ConfigurationDataWrapper>

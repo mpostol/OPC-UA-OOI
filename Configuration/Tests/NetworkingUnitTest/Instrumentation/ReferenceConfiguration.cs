@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -6,7 +12,7 @@ using System.Linq;
 using System.Xml;
 using UAOOI.Configuration.Networking.Serialization;
 
-namespace UAOOI.Configuration.Networking.UnitTest
+namespace UAOOI.Configuration.Networking.UnitTest.Instrumentation
 {
   /// <summary>
   /// Class ReferenceConfiguration - creates a configuration for testing purpose.

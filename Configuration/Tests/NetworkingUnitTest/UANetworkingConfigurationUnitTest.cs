@@ -13,7 +13,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using UAOOI.Configuration.Networking.Serialization;
-using UAOOI.Configuration.Networking.UnitTest.CommonServiceLocatorInstrumentation;
+using UAOOI.Configuration.Networking.UnitTest.Instrumentation;
 
 namespace UAOOI.Configuration.Networking.UnitTest
 {
@@ -128,7 +128,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
     }
     [TestMethod]
     [TestCategory("Configuration_UANetworkingConfigurationUnitTest")]
-    [ExpectedException(typeof(System.Runtime.Serialization.SerializationException))]
+    [ExpectedException(typeof(SerializationException))]
     public void ConfigurationDataNullTest()
     {
       Logger _Logger = new Logger();
@@ -173,55 +173,12 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.AreEqual<int>(1, _newConfiguration.CurrentConfiguration.OnLoadedCount);
       Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnSavingCount);
       Assert.AreEqual<int>(2, _Logger.TraceLogList.Count);
-
+      //Assert.Fail(); //To get created file the test must fail.
     }
     #endregion
 
     #region private
-    private const string m_Namespace = "http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/UnitTest/Serialization.xsd";
 
-    [DataContractAttribute(Name = "ConfigurationDataWrapper", Namespace = m_Namespace)]
-    [System.SerializableAttribute()]
-    [XmlRoot(Namespace = CommonDefinitions.Namespace)]
-    private class ConfigurationDataWrapper : IConfigurationDataFactory
-    {
-      public ConfigurationDataWrapper()
-      {
-        ConfigurationData = ReferenceConfiguration.LoadConsumer();
-      }
-
-      private ConfigurationData m_ConfigurationDataWrapperField;
-
-      [DataMember(EmitDefaultValue = false, IsRequired = true)]
-      public ConfigurationData ConfigurationData
-      {
-        get { return m_ConfigurationDataWrapperField; }
-        set { m_ConfigurationDataWrapperField = value; }
-      }
-
-      #region IConfigurationDataFactory
-      public ConfigurationData GetConfigurationData()
-      {
-        return ConfigurationData;
-      }
-      public void OnLoaded()
-      {
-        OnLoadedCount++;
-      }
-      public void OnSaving()
-      {
-        OnSavingCount++;
-      }
-      public Action OnChanged
-      {
-        get; set;
-      }
-      #endregion
-
-      internal int OnSavingCount = 0;
-      internal int OnLoadedCount = 0;
-
-    }
     private class UANetworkingConfigurationConfigurationDataWrapper : UANetworkingConfiguration<ConfigurationDataWrapper>
     {
       public UANetworkingConfigurationConfigurationDataWrapper()

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UAOOI.Common.Infrastructure.Diagnostic;
 
-namespace UAOOI.Configuration.Networking.UnitTest.CommonServiceLocatorInstrumentation
+namespace UAOOI.Configuration.Networking.UnitTest.Instrumentation
 {
 
   public class Logger : ITraceSource

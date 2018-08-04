@@ -43,16 +43,16 @@
   <applicationSettings>
     <UAOOI.Networking.ReferenceApplication.Properties.Settings>
       <setting name="ConsumerConfigurationFileName" serializeAs="String">
-        <value>ConfigurationDataConsumer.xml</value>
-      </setting>
-      <setting name="ProducerConfigurationFileName" serializeAs="String">
-        <value>ConfigurationDataProducer.BoilersSet.xml</value>
+        <value>ConfigurationDataConsumer.BoilersSet.xml</value>
       </setting>
       <setting name="MessageHandlerProvider" serializeAs="String">
         <value>UAOOI.Networking.UDPMessageHandler.dll</value>
       </setting>
       <setting name="LogFilePath" serializeAs="String">
         <value>ReferenceApplication.log</value>
+      </setting>
+      <setting name="ProducerConfigurationFileName" serializeAs="String">
+        <value>ConfigurationDataProducer.BoilersSet.xml</value>
       </setting>
       <setting name="DataProducerProvider" serializeAs="String">
         <value>UAOOI.Networking.Simulator.Boiler.dll</value>
@@ -89,7 +89,7 @@
       </source>
     </sources>
     <switches>
-      <add name="System.Net.Sockets" value="Information" />
+      <add name="System.Net.Sockets" value="All" />
       <!-- value:  Required String attribute. Sets the verbosity of the output. 
                   Legitimate values are Critical, Error, Verbose, Warning, and Information.
       -->

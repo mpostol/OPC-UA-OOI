@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="UAOOI.Networking.SemanticData.MessageHandling.MessageEventArg">
+  <Class Name="UAOOI.Networking.SemanticData.MessageHandling.MessageEventArg" Collapsed="true">
     <Position X="0.5" Y="5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
@@ -57,21 +57,21 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="UAOOI.Networking.SemanticData.DataRepository.IConsumerBinding" Collapsed="true">
-    <Position X="4.5" Y="6" Width="1.5" />
+    <Position X="4.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>DataRepository\IConsumerBinding.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="UAOOI.Networking.SemanticData.DataRepository.IBinding" Collapsed="true">
-    <Position X="5.5" Y="4.75" Width="1.5" />
+    <Position X="5.75" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAARAAAAAAAAAAAAAAAgQAUAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DataRepository\IBinding.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="UAOOI.Networking.SemanticData.DataRepository.IProducerBinding" Collapsed="true">
-    <Position X="6.75" Y="6" Width="1.5" />
+    <Position X="7" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DataRepository\IProducerBinding.cs</FileName>

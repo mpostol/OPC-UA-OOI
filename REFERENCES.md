@@ -6,6 +6,10 @@
 
 [wordpress.opc-ua]: https://mpostol.wordpress.com/opc-ua/
 
+- [OPC UA Makes Reactive Object Oriented Internet Possible][wordpress.ReactiveOOI]
+ 
+[wordpress.ReactiveOOI]:https://mpostol.wordpress.com/2019/01/14/opc-ua-makes-reactive-object-oriented-internet-possible/
+
 - [IoT versus SCADA/DCS Data Acquisition Patterns][wordpress.IoTVersus]
 
 [wordpress.IoTVersus]: https://mpostol.wordpress.com/2017/09/19/iot-versus-scadadcs/
@@ -14,13 +18,14 @@
 
 [wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/
 
-- [OPC Unified Architecture – Main Technological Features][wordpress.OPCUAMTF]
-
-[wordpress.OPCUAMTF]: https://mpostol.wordpress.com/2013/08/04/opc-unified-architecture-main-technological-features/
 
 - [OPC UA Makes Smart User Interface Possible][wordpress.HMI]
 
 [wordpress.HMI]:https://mpostol.wordpress.com/2013/08/11/opc-ua-makes-smart-user-interface-possible/
+
+- [OPC Unified Architecture – Main Technological Features][wordpress.OPCUAMTF]
+
+[wordpress.OPCUAMTF]: https://mpostol.wordpress.com/2013/08/04/opc-unified-architecture-main-technological-features/
 
 <!--commsvr-->
 

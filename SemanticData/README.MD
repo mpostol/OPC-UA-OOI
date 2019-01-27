@@ -75,15 +75,15 @@ The diagram below shows how the `OOI Reactive Application` may be expanded to im
 The `OOI Reactive Application` class in the domain model represents varieties of possible applications including but not limited to:
 
 * `XML Gateway` - it factories objects using the `SemanticData` and serializes them into XML text representation for further processing.
-* `JSON Gateway` - it factories objects using the the `SemanticData` and serializes them into the JSON text representation for further processing
+* `JSON Gateway` - it factories objects using the `SemanticData` and serializes them into the JSON text representation for further processing
 * `Data Archival` - collects the `SemanticData` received over the wire and archives it in a database.
-* `Cloud Gateway` - it simplifies creation of a bridge to the cloud that enables data to stream from industrial equipment to a cloud messaging endpoint such as [Azure IoT Fundamentals](https://docs.microsoft.com/en-us/azure/iot-fundamentals/).
+* `Cloud Gateway` - it simplifies creation of a bridge to the cloud that enables data to stream from industrial equipment to a cloud messaging endpoint such as [Azure IoT](https://docs.microsoft.com/en-us/azure/iot-fundamentals/).
 * `HMI` - reactive visualization of the `SemanticData`- [OPC UA Makes Smart User Interface Possible][wordpress.HMI]
 * `SCADA` - supervisory control and data acquisition is a control system architecture that uses computers, networked data communications and graphical user interfaces for high-level process supervisory management.
 * `Fieldbus  gateway` - a gateway to family of industrial computer network protocols.
 * `UA Server Integration` - a gateway to data exposed by the `Address Space Management` - a typical part of any *OPC UA Server*. 
 
-The `Data Archival` can also be used to transfer data from the OPC UA environment to any Data Based Management System for further processing by Enterprise Management BI systems.
+The `Data Archival` can also be used to transfer data from the OPC UA environment to any Database Management System for further processing by Enterprise Management BI systems.
 
 The `JSON Gateway` and `XML Gateway` supports strong typed objects serialization and deserialization using JSON and XML industrial standards. Converting the OPC UA objects into text based representation is required to publish and subscribe using Enterprise Service Base concept.
 

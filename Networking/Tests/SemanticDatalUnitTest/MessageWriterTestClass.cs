@@ -11,7 +11,6 @@ using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.Common;
 using UAOOI.Networking.SemanticData.DataRepository;
-using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Networking.SemanticData.UnitTest.Helpers;
 
@@ -87,35 +86,37 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     [TestCategory("DataManagement_MessageWriter")]
     public void BinaryUDPPackageWriterTestMethod()
     {
-      using (BinaryUDPPackageWriter _writer = new BinaryUDPPackageWriter(new Helpers.UABinaryEncoderImplementation()))
+      BinaryDataTransferGraphSenderFixture _binaryStreamObservable = new BinaryDataTransferGraphSenderFixture();
+      using (BinaryEncoder _writer = new BinaryEncoder(_binaryStreamObservable, new Helpers.UABinaryEncoderImplementation(), MessageLengthFieldTypeEnum.TwoBytes))
       {
-        Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
-        Assert.AreEqual<int>(0, _writer.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
-        //Assert.AreEqual<HandlerState>(HandlerState.Disabled, _writer.State.State);
-        //_writer.AttachToNetwork();
-        //Assert.AreEqual<HandlerState>(HandlerState.Operational, _writer.State.State);
-        Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
-        Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
+        Assert.AreEqual<int>(0, _binaryStreamObservable.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(0, _binaryStreamObservable.NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(0, _binaryStreamObservable.m_NumberOfSentMessages);
+        Assert.AreEqual<HandlerState>(HandlerState.Disabled, _binaryStreamObservable.State.State);
+        _writer.AttachToNetwork();
+        _writer.State.Enable();
+        Assert.AreEqual<HandlerState>(HandlerState.Operational, _binaryStreamObservable.State.State);
+        Assert.AreEqual<int>(1, _binaryStreamObservable.NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(0, _binaryStreamObservable.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(0, _binaryStreamObservable.m_NumberOfSentMessages);
         ProducerBinding _binding = new ProducerBinding() { Value = string.Empty };
         int _sentItems = 0;
         Guid m_Guid = CommonDefinitions.TestGuid;
         DataSelector _testDataSelector = new DataSelector() { DataSetWriterId = CommonDefinitions.DataSetId, PublisherId = CommonDefinitions.TestGuid };
-        ((IMessageWriter)_writer.BinaryEncoder).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
-                                                      Convert.ToUInt16(CommonDefinitions.TestValues.Length),
-                                                      ulong.MaxValue,
-                                                      FieldEncodingEnum.VariantFieldEncoding,
-                                                      _testDataSelector,
-                                                      0,
-                                                      CommonDefinitions.TestMinimalDateTime, new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 }
-                                                     );
+        ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
+                                        Convert.ToUInt16(CommonDefinitions.TestValues.Length),
+                                        ulong.MaxValue,
+                                        FieldEncodingEnum.VariantFieldEncoding,
+                                        _testDataSelector,
+                                        0,
+                                        CommonDefinitions.TestMinimalDateTime, new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 }
+                                        );
         Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
-        Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(115, _writer.m_NumberOfSentBytes);
-        Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
+        Assert.AreEqual<int>(1, _binaryStreamObservable.NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(115, _binaryStreamObservable.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(1, _binaryStreamObservable.m_NumberOfSentMessages);
         byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArrayVariant4Consumer();
-        CollectionAssert.AreEqual(_writer.Buffer, _shouldBeInBuffer);
+        CollectionAssert.AreEqual(_binaryStreamObservable.Buffer, _shouldBeInBuffer);
       }
     }
     #endregion
@@ -307,64 +308,39 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     }
     #endregion
 
-    private sealed class BinaryUDPPackageWriter : IDisposable
+    private class BinaryDataTransferGraphSenderFixture : IBinaryDataTransferGraphSender
     {
-
-      #region constructor
-      public BinaryUDPPackageWriter(IUAEncoder uaEncoder)
+      public BinaryDataTransferGraphSenderFixture() { }
+      #region IBinaryStreamObservable
+      public IAssociationState State { get; set; } = new MyState();
+      public void AttachToNetwork()
       {
-        this.BinaryEncoder = new BinaryEncoder(new BinaryStreamObservable(this), uaEncoder, MessageLengthFieldTypeEnum.TwoBytes);
+        NumberOfAttachToNetwork++;
       }
-      #endregion
-
-      #region tetst instrumentation
-      private class BinaryStreamObservable : IBinaryDataTransferGraphSender
+      public void SendFrame(byte[] buffer)
       {
-
-        public BinaryStreamObservable(BinaryUDPPackageWriter binaryUDPPackageWriter)
-        {
-          this.m_BinaryUDPPackageWriter = binaryUDPPackageWriter;
-        }
-
-        #region IBinaryStreamObservable
-        public IAssociationState State { get; set; } = new MyState();
-        public void AttachToNetwork()
-        {
-          m_BinaryUDPPackageWriter.m_NumberOfAttachToNetwork++;
-        }
-        public void SendFrame(byte[] buffer)
-        {
-          m_BinaryUDPPackageWriter.m_NumberOfSentBytes += buffer.Length;
-          m_BinaryUDPPackageWriter.m_NumberOfSentMessages++;
-          m_BinaryUDPPackageWriter.Buffer = buffer;
-        }
-        #endregion
-
-        #region IDisposable
-        public void Dispose()
-        {
-          throw new NotImplementedException();
-        }
-        #endregion
-
-        private BinaryUDPPackageWriter m_BinaryUDPPackageWriter;
-
+        m_NumberOfSentBytes += buffer.Length;
+        m_NumberOfSentMessages++;
+        Buffer = buffer;
       }
-      internal BinaryEncoder BinaryEncoder { get; set; }
-      internal byte[] Buffer { get; private set; }
-      internal int m_NumberOfSentMessages = 0;
-      internal int m_NumberOfSentBytes = 0;
-      internal int m_NumberOfAttachToNetwork;
       #endregion
 
       #region IDisposable
       public void Dispose()
       {
-        BinaryEncoder.Dispose();
+        DisposeCount++;
       }
       #endregion
+
+      internal byte[] Buffer { get; private set; }
+      internal int m_NumberOfSentMessages = 0;
+      internal int m_NumberOfSentBytes = 0;
+      internal int NumberOfAttachToNetwork = 0;
+      internal int DisposeCount = 0;
 
     }
 
   }
+
 }
+

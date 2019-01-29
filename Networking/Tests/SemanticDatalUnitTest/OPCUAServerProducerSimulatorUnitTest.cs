@@ -35,9 +35,9 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       _producer.TestStart();
       Assert.AreEqual<int>(1, _producer.AssociationsCollection.Count);
       Assert.AreEqual<int>(1, _producer.MessageHandlersCollection.Count);
-      ((OPCUAServerProducerSimulator)_producer).CheckConsistency();
+      _producer.CheckConsistency();
       _mhf.CheckConsistency();
-      ((OPCUAServerProducerSimulator)_producer).Update("Value1", "Value1");
+      _producer.Update("Value1", "Value1");
     }
     #endregion
 

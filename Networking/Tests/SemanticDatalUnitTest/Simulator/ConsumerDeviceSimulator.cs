@@ -195,7 +195,6 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
 
   }
 
-
   internal class MessageReader : IMessageReader
   {
     public MessageReader(UInt32 dataSetGuid)

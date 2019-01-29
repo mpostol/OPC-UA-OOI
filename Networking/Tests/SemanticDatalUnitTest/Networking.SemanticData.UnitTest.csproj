@@ -70,6 +70,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinaryEncoderTest.cs" />
     <Compile Include="CommonDefinitions.cs" />
     <Compile Include="Diagnostics\ReactiveNetworkingEventSourceUnitTest.cs" />
     <Compile Include="HeaderTestHelpers.cs" />
@@ -91,7 +92,6 @@
     <Compile Include="ProducerBindingUnitTest.cs" />
     <Compile Include="PersistentConfigurationUnitTest.cs" />
     <Compile Include="OPCUAServerProducerSimulatorUnitTest.cs" />
-    <Compile Include="MessageWriterTestClass.cs" />
     <Compile Include="PacketHeaderUnitTest.cs" />
     <Compile Include="MessageHeaderUnitTest.cs" />
     <Compile Include="UABinaryEncoderImplementationUnitTest.cs" />

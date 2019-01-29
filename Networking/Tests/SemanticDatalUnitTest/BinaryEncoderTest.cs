@@ -9,7 +9,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.Core;
-using UAOOI.Networking.SemanticData.Common;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Networking.SemanticData.UnitTest.Helpers;
@@ -18,7 +17,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
 {
 
   [TestClass]
-  public class MessageWriterTestClass
+  public class BinaryEncoderTest
   {
 
     #region TestMethod
@@ -292,25 +291,10 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       #endregion
 
     }
-    internal class SemanticDataTest : ISemanticData
-    {
-      public SemanticDataTest(Guid guid)
-      {
-        Guid = guid;
-      }
-      public Guid Guid
-      {
-        get; private set;
-      }
-      public Uri Identifier => throw new NotImplementedException();
-      public IComparable NodeId => throw new NotImplementedException();
-      public string SymbolicName => throw new NotImplementedException();
-    }
-    #endregion
-
     private class BinaryDataTransferGraphSenderFixture : IBinaryDataTransferGraphSender
     {
       public BinaryDataTransferGraphSenderFixture() { }
+
       #region IBinaryStreamObservable
       public IAssociationState State { get; set; } = new MyState();
       public void AttachToNetwork()
@@ -332,13 +316,16 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       }
       #endregion
 
+      #region instrumentation
       internal byte[] Buffer { get; private set; }
       internal int m_NumberOfSentMessages = 0;
       internal int m_NumberOfSentBytes = 0;
       internal int NumberOfAttachToNetwork = 0;
       internal int DisposeCount = 0;
+      #endregion
 
     }
+    #endregion
 
   }
 

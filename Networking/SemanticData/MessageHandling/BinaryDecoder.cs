@@ -37,13 +37,13 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     protected override void Dispose(bool disposing)
     {
       base.Dispose(disposing);
-      if (disposing)
-      {
-        BinaryReader _lc = m_UABinaryReader;
-        if (_lc != null)
-          _lc.Close();
-        m_UABinaryReader = null;
-      }
+      if (!disposing)
+        return;
+      BinaryReader _lc = m_UABinaryReader;
+      if (_lc != null)
+        _lc.Close();
+      m_UABinaryReader = null;
+      m_DTGReceiver.Dispose();
     }
     #endregion
 

@@ -9,11 +9,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.DataRepository;
@@ -28,40 +23,44 @@ namespace UAOOI.Networking.SemanticData.UnitTest
   {
 
     [TestMethod]
-    [TestCategory("DataManagement_BinaryDecoderUnitTest")]
-    public void BinaryUDPPackageReaderTestMethod()
+    public void DisposeTest()
     {
-      int _port = 35678;
+      BinaryDataTransferGraphReceiverFixture _BinaryDataTransferGraphReceiverFixture = new BinaryDataTransferGraphReceiverFixture();
+      using (BinaryDecoder _reader = new BinaryDecoder(_BinaryDataTransferGraphReceiverFixture, new Helpers.UABinaryDecoderImplementation())) ;
+      Assert.AreEqual<int>(1, _BinaryDataTransferGraphReceiverFixture.DisposeCount);
+    }
+    [TestMethod]
+    [TestCategory("UAOOI.Networking.SemanticData")]
+    public void DataTransferTest()
+    {
       uint _dataId = CommonDefinitions.DataSetId;
-      List<string> _Events = new List<string>();
-      using (BinaryUDPPackageReader _reader = new BinaryUDPPackageReader(_port, z => _Events.Add(z)))
+      BinaryDataTransferGraphReceiverFixture _BinaryDataTransferGraphReceiverFixture = new BinaryDataTransferGraphReceiverFixture();
+      using (BinaryDecoder _reader = new BinaryDecoder(_BinaryDataTransferGraphReceiverFixture, new Helpers.UABinaryDecoderImplementation()))
       {
         Assert.IsNotNull(_reader);
-        Assert.AreEqual<int>(0, _reader.m_NumberOfSentBytes);
-        Assert.AreEqual<int>(0, _reader.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(0, _reader.m_NumberOfSentMessages);
-        //Assert.AreEqual<HandlerState>(HandlerState.Disabled, _reader.State.State);
-        //_reader.AttachToNetwork();
-        //Assert.AreEqual<HandlerState>(HandlerState.Operational, _reader.State.State);
-        Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(0, _reader.m_NumberOfSentBytes);
-        Assert.AreEqual<int>(0, _reader.m_NumberOfSentMessages);
+        Assert.AreEqual<int>(0, _BinaryDataTransferGraphReceiverFixture.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(0, _BinaryDataTransferGraphReceiverFixture.m_NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(0, _BinaryDataTransferGraphReceiverFixture.m_NumberOfSentMessages);
+        Assert.AreEqual<HandlerState>(HandlerState.Disabled, _BinaryDataTransferGraphReceiverFixture.State.State);
+        _reader.AttachToNetwork();
+        _reader.State.Enable();
+        Assert.AreEqual<HandlerState>(HandlerState.Operational, _BinaryDataTransferGraphReceiverFixture.State.State);
+        Assert.AreEqual<int>(1, _BinaryDataTransferGraphReceiverFixture.m_NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(0, _BinaryDataTransferGraphReceiverFixture.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(0, _BinaryDataTransferGraphReceiverFixture.m_NumberOfSentMessages);
         object[] _buffer = new object[CommonDefinitions.TestValues.Length];
         IConsumerBinding[] _bindings = new IConsumerBinding[_buffer.Length];
         Action<object, int> _assign = (x, y) => _buffer[y] = x;
         for (int i = 0; i < _buffer.Length; i++)
           _bindings[i] = new ConsumerBinding(i, _assign, Type.GetTypeCode(CommonDefinitions.TestValues[i].GetType()));
         int _redItems = 0;
-        _reader.m_BinaryDecoder.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _dataId, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
-        _reader.TestBinaryStreamObserver.SendUDPMessage(CommonDefinitions.GetTestBinaryArrayVariant(), _dataId);
-        Assert.AreEqual<int>(1, _reader.m_NumberOfAttachToNetwork);
-        Assert.AreEqual<int>(116, _reader.m_NumberOfSentBytes);
-        Assert.AreEqual<int>(1, _reader.m_NumberOfSentMessages);
-        Thread.Sleep(1500);
-        foreach (string _item in _Events)
-          Console.WriteLine(_item);
+        _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _dataId, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
+        _BinaryDataTransferGraphReceiverFixture.SendUDPMessage(CommonDefinitions.GetTestBinaryArrayVariant(), _dataId);
+        Assert.AreEqual<int>(1, _BinaryDataTransferGraphReceiverFixture.m_NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(116, _BinaryDataTransferGraphReceiverFixture.m_NumberOfSentBytes);
+        Assert.AreEqual<int>(1, _BinaryDataTransferGraphReceiverFixture.m_NumberOfSentMessages);
         //test packet content
-        PacketHeader _readerHeader = _reader.m_BinaryDecoder.Header;
+        PacketHeader _readerHeader = _reader.Header;
         Assert.AreEqual<Guid>(CommonDefinitions.TestGuid, _readerHeader.PublisherId);
         Assert.AreEqual<byte>(MessageHandling.CommonDefinitions.ProtocolVersion, _readerHeader.ProtocolVersion);
         Assert.AreEqual<byte>(0, _readerHeader.NetworkMessageFlags);
@@ -78,10 +77,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
         Assert.AreEqual<string>(string.Join(",", _shouldBeInBuffer), string.Join(",", _buffer));
         Assert.AreEqual<byte>(1, _readerHeader.MessageCount);
-        Assert.AreEqual<int>(3, _Events.Count);
       }
-      Thread.Sleep(150);
-      Assert.AreEqual<int>(3, _Events.Count);
     }
 
     #region private test instrumentation
@@ -186,69 +182,35 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       Assert.AreEqual<uint>(dataId, e.DataSetId);
       e.MessageContent.UpdateMyValues(update, length);
     }
-    private sealed class BinaryUDPPackageReader : IDisposable
+    internal class BinaryDataTransferGraphReceiverFixture : IBinaryDataTransferGraphReceiver
     {
-
-      public BinaryUDPPackageReader(int port, Action<string> trace)
+      public BinaryDataTransferGraphReceiverFixture() { }
+      public IAssociationState State { get; set; } = new MyState();
+      public event EventHandler<byte[]> OnNewFrameArrived;
+      public void AttachToNetwork()
       {
-        m_BinaryDecoder = new BinaryDecoder(TestBinaryStreamObserver = new BinaryStreamObserver(this), new Helpers.UABinaryDecoderImplementation());
-        m_Trace = trace;
+        this.m_NumberOfAttachToNetwork++;
       }
-
-      #region BinaryDecoder
-      public BinaryStreamObserver TestBinaryStreamObserver { get; set; }
-      internal class BinaryStreamObserver : IBinaryDataTransferGraphReceiver
+      public void Dispose()
       {
-        public BinaryStreamObserver(BinaryUDPPackageReader binaryUDPPackageReader)
-        {
-          this.binaryUDPPackageReader = binaryUDPPackageReader;
-        }
-        public IAssociationState State { get; set; } = new MyState();
-        public event EventHandler<byte[]> OnNewFrameArrived;
-        public void AttachToNetwork()
-        {
-          this.binaryUDPPackageReader.m_NumberOfAttachToNetwork++;
-        }
-        public void Dispose()
-        {
-          throw new NotImplementedException();
-        }
-        internal void SendUDPMessage(byte[] buffer, uint semanticData)
-        {
-          //string m_RemoteHostName = "localhost";
-          //// Get DNS host information.
-          //IPHostEntry m_HostInfo = Dns.GetHostEntry(m_RemoteHostName);
-          //// Get the DNS IP addresses associated with the host.
-          //Assert.AreEqual<int>(2, m_HostInfo.AddressList.Length);
-          //// Get first IPAddress in list return by DNS.
-          //IPAddress m_IPAddresses = m_HostInfo.AddressList.Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
-          //Assert.IsNotNull(m_IPAddresses);
-          //IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, _RemoteHostPortNumber);
-          //using (UdpClient _myClient = new UdpClient())
-          OnNewFrameArrived.Invoke(this, buffer);
-          binaryUDPPackageReader.m_NumberOfSentMessages++;
-          binaryUDPPackageReader.m_NumberOfSentBytes += buffer.Length;
-          binaryUDPPackageReader.m_SemanticData = semanticData;
-        }
-
-        private readonly BinaryUDPPackageReader binaryUDPPackageReader;
+        DisposeCount++;
       }
-      internal readonly BinaryDecoder m_BinaryDecoder;
-      #endregion
-
-      #region private
-      private uint m_SemanticData;
-      #endregion
+      internal void SendUDPMessage(byte[] buffer, uint semanticData)
+      {
+        OnNewFrameArrived.Invoke(this, buffer);
+        m_NumberOfSentMessages++;
+        m_NumberOfSentBytes += buffer.Length;
+        m_SemanticData = semanticData;
+      }
 
       #region tetst instrumentation
+      private uint m_SemanticData;
+      internal int DisposeCount = 0;
       internal int m_NumberOfSentBytes = 0;
       internal int m_NumberOfAttachToNetwork = 0;
       internal int m_NumberOfSentMessages = 0;
       private readonly Action<string> m_Trace;
       #endregion
-
-      public void Dispose() { }
-
 
     }
     #endregion

@@ -5,9 +5,10 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using UAOOI.Networking.Core;
+using UAOOI.Networking.SemanticData.UnitTest.Helpers;
 using UAOOI.Networking.SemanticData.UnitTest.Simulator;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
@@ -21,7 +22,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     [TestCategory("DataManagement_ConsumerDeviceSimulator")]
     public void ConsumerDeviceSimulatorTestMethod()
     {
-      UInt32 DataSetGuid = UInt32.MaxValue;
+      uint DataSetGuid = uint.MaxValue;
       MyMessageHandlerFactory _mhf = new MyMessageHandlerFactory(DataSetGuid);
       ConsumerDeviceSimulator _consumer = ConsumerDeviceSimulator.CreateDevice(_mhf, DataSetGuid);
       Assert.IsNull(_consumer.AssociationsCollection);
@@ -42,7 +43,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     private class MyMessageHandlerFactory : IMessageHandlerFactory
     {
       #region creator
-      internal MyMessageHandlerFactory(UInt32 dataSetGuid)
+      internal MyMessageHandlerFactory(uint dataSetGuid)
       {
         this.MyMessageReader = new MessageReader(dataSetGuid);
       }
@@ -75,19 +76,12 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       #region private
       private class BinaryStreamObserverFixture : IBinaryDataTransferGraphReceiver
       {
-        public IAssociationState State { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IAssociationState State { get; set; } = new MyState();
 
         public event EventHandler<byte[]> OnNewFrameArrived;
 
-        public void AttachToNetwork()
-        {
-          throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-          throw new NotImplementedException();
-        }
+        public void AttachToNetwork() { }
+        public void Dispose() { }
       }
       private MessageReader MyMessageReader { get; set; }
       #endregion

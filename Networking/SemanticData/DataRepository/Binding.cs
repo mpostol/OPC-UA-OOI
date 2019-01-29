@@ -1,7 +1,14 @@
-﻿
+﻿//____________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//____________________________________________________________________________
+
 using System;
 using System.Globalization;
 using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.Common;
 
 namespace UAOOI.Networking.SemanticData.DataRepository
@@ -106,6 +113,7 @@ namespace UAOOI.Networking.SemanticData.DataRepository
       StateChangedEventHandler?.Invoke(this, new AssociationStateChangedEventArgs(state));
     }
     #endregion
+
   }
 
 }

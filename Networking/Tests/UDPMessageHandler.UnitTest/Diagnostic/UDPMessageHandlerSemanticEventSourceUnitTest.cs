@@ -1,14 +1,19 @@
-﻿
-using System;
-using System.Diagnostics.Tracing;
-using System.IO;
-using System.Net;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Diagnostics.Tracing;
+using System.IO;
+using System.Net;
 using UAOOI.Networking.UDPMessageHandler.Diagnostic;
-using static UAOOI.Networking.SemanticData.Diagnostics.ReactiveNetworkingEventSource;
 
 namespace UAOOI.Networking.UDPMessageHandler.UnitTest.Diagnostic
 {
@@ -58,7 +63,7 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest.Diagnostic
         Assert.AreEqual<string>("Info", _lastEvent.Schema.OpcodeName);
         Assert.AreEqual<EventOpcode>(EventOpcode.Info, _lastEvent.Schema.Opcode);
         Assert.AreEqual<string>("Consumer", _lastEvent.Schema.TaskName);
-        Assert.AreEqual<EventTask>(Tasks.Consumer, _lastEvent.Schema.Task);
+        Assert.AreEqual<EventTask>(UDPMessageHandlerSemanticEventSource.Tasks.Consumer, _lastEvent.Schema.Task);
       }
     }
     [TestMethod]
@@ -97,7 +102,7 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest.Diagnostic
         Assert.AreEqual<Guid>(new Guid("84C6B563-8282-47CB-9111-7B29D8B43E23"), _Schema.ProviderId);
         Assert.AreEqual<string>("UAOOI-Networking-UDPMessageHandler-Diagnostic", _Schema.ProviderName);
         Assert.AreEqual<string>("CodeBehavior", _Schema.TaskName);
-        Assert.AreEqual<EventTask>(Tasks.Infrastructure, _Schema.Task);
+        Assert.AreEqual<EventTask>(UDPMessageHandlerSemanticEventSource.Tasks.CodeBehavior, _Schema.Task);
         Assert.AreEqual<int>(0, _Schema.Version);
 
         //Payload
@@ -144,7 +149,7 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest.Diagnostic
         Assert.AreEqual<Guid>(new Guid("84C6B563-8282-47CB-9111-7B29D8B43E23"), _Schema.ProviderId);
         Assert.AreEqual<string>("UAOOI-Networking-UDPMessageHandler-Diagnostic", _Schema.ProviderName);
         Assert.AreEqual<string>("Stack", _Schema.TaskName);
-        Assert.AreEqual<EventTask>(Tasks.Stack, _Schema.Task);
+        Assert.AreEqual<EventTask>(UDPMessageHandlerSemanticEventSource.Tasks.Stack, _Schema.Task);
         Assert.AreEqual<int>(0, _Schema.Version);
 
         //Payload

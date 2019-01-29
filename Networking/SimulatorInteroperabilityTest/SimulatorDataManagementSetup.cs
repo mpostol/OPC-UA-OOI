@@ -9,6 +9,7 @@ using CommonServiceLocator;
 using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData;

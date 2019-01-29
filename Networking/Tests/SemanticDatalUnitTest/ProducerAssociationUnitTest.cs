@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.Common;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;

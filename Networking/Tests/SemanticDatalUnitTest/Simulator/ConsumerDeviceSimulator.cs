@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
-using UAOOI.Networking.SemanticData.Common;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
@@ -192,7 +192,9 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
     private const string AssociationConfigurationInformationModelURI = "https://github.com/mpostol/OPC-UA-OOI";
     #endregion
 
+
   }
+
 
   internal class MessageReader : IMessageReader
   {

@@ -1,7 +1,14 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.Collections.Generic;
 using System.IO;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.Encoding;
 
 namespace UAOOI.Networking.SemanticData.MessageHandling
@@ -9,7 +16,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
   /// <summary>
   /// Class BinaryEncoder - wrapper of <see cref="BinaryWriter"/> supporting OPC UA binary encoding.
   /// </summary>
-  public abstract class BinaryEncoder : BinaryPacketEncoder
+  public sealed class BinaryEncoder : BinaryPacketEncoder
   {
 
     #region creator
@@ -18,7 +25,10 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// </summary>
     /// <param name="uaEncoder">The ua encoder.</param>
     /// <param name="lengthFieldType">Type of the length field.</param>
-    public BinaryEncoder(IUAEncoder uaEncoder, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder, lengthFieldType) { }
+    public BinaryEncoder(IBinaryDataTransferGraphSender messageWriter, IUAEncoder uaEncoder, MessageLengthFieldTypeEnum lengthFieldType) : base(uaEncoder, lengthFieldType)
+    {
+      m_IBinaryDTGSender = messageWriter ?? throw new ArgumentNullException(nameof(messageWriter));
+    }
     #endregion
 
     #region IDisposable
@@ -95,30 +105,35 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// <param name="origin">
     /// A field of <see cref="SeekOrigin"/> indicating the reference point from which the new position is to be obtained..
     /// </param>
-    /// <returns>The position with the current stream as <see cref="Int64"/>.</returns>
+    /// <returns>The position with the current stream as <see cref="long"/>.</returns>
     public override long Seek(int offset, SeekOrigin origin)
     {
       return m_binaryWriter.Seek(offset, origin);
     }
     #endregion
 
-    /// <summary>
-    /// Begins sending the frame.
-    /// </summary>
-    protected override void SendFrame()
+    public override void AttachToNetwork()
     {
-      m_binaryWriter.Close();
-      SendFrame(m_output.ToArray());
-      DisposeWriter();
+      m_IBinaryDTGSender.AttachToNetwork();
     }
+    public override IAssociationState State { get => m_IBinaryDTGSender.State; set => m_IBinaryDTGSender.State = value; }
     #endregion
 
     #region private
     //vars
     private MemoryStream m_output;
     private BinaryWriter m_binaryWriter;
-
+    private IBinaryDataTransferGraphSender m_IBinaryDTGSender;
     //methods
+    /// <summary>
+    /// Begins sending the frame.
+    /// </summary>
+    protected override void SendFrame()
+    {
+      m_binaryWriter.Flush();
+      m_IBinaryDTGSender.SendFrame(m_output.ToArray());
+      DisposeWriter();
+    }
     /// <summary>
     /// Called when new message is adding to the package payload.
     /// </summary>
@@ -126,14 +141,9 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// <param name="dataSetWriterId">The data set writer identifier - must be unique in context of <paramref name="producerId" />.</param>
     protected override void OnMessageAdding(Guid producerId, ushort dataSetWriterId)
     {
-      CreateUABinaryWriter(producerId, new UInt16[] { dataSetWriterId });
+      CreateUABinaryWriter(producerId, new ushort[] { dataSetWriterId });
       base.OnMessageAdding(producerId, dataSetWriterId);
     }
-    /// <summary>
-    /// Sends the message.
-    /// </summary>
-    /// <param name="buffer">The buffer with the message content.</param>
-    protected abstract void SendFrame(byte[] buffer);
     private void DisposeWriter()
     {
       if (m_binaryWriter == null)
@@ -143,7 +153,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       m_binaryWriter = null;
       m_output = null;
     }
-    private void CreateUABinaryWriter(Guid producerId, IList<UInt16> dataSetWriterIds)
+    private void CreateUABinaryWriter(Guid producerId, IList<ushort> dataSetWriterIds)
     {
       m_output = new MemoryStream();
       m_binaryWriter = new BinaryWriter(m_output);

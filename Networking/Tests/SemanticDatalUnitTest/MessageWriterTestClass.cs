@@ -7,14 +7,13 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
 using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.Common;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
+using UAOOI.Networking.SemanticData.UnitTest.Helpers;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
 {
@@ -40,9 +39,11 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     {
       TypesMessageWriter _bmw = new TypesMessageWriter();
       _bmw.AttachToNetwork();
-      ProducerBinding _binding = new ProducerBinding();
-      _binding.Value = new TestClass();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, FieldEncodingEnum.VariantFieldEncoding, TestDataSelector, 0, DateTime.UtcNow,
+      ProducerBinding _binding = new ProducerBinding
+      {
+        Value = new TestClass()
+      };
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, ulong.MaxValue, FieldEncodingEnum.VariantFieldEncoding, TestDataSelector, 0, DateTime.UtcNow,
         new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
     }
     [TestMethod]
@@ -53,9 +54,11 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       TypesMessageWriter _bmw = new TypesMessageWriter();
       _bmw.AttachToNetwork();
       Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
-      ProducerBinding _binding = new ProducerBinding(BuiltInType.Float);
-      _binding.Value = new Nullable<float>();
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, UInt64.MaxValue, FieldEncodingEnum.VariantFieldEncoding, TestDataSelector, 0, DateTime.UtcNow, new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
+      ProducerBinding _binding = new ProducerBinding(BuiltInType.Float)
+      {
+        Value = new Nullable<float>()
+      };
+      ((IMessageWriter)_bmw).Send(x => _binding, 1, ulong.MaxValue, FieldEncodingEnum.VariantFieldEncoding, TestDataSelector, 0, DateTime.UtcNow, new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
     }
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
@@ -64,12 +67,14 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       TypesMessageWriter _bmw = new TypesMessageWriter();
       _bmw.AttachToNetwork();
       Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
-      ProducerBinding _binding = new ProducerBinding();
-      _binding.Value = String.Empty;
+      ProducerBinding _binding = new ProducerBinding
+      {
+        Value = string.Empty
+      };
       int _sentItems = 0;
       ((IMessageWriter)_bmw).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
                                    Convert.ToUInt16(CommonDefinitions.TestValues.Length),
-                                   UInt64.MaxValue,
+                                   ulong.MaxValue,
                                    FieldEncodingEnum.VariantFieldEncoding,
                                    TestDataSelector,
                                    0,
@@ -82,49 +87,47 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     [TestCategory("DataManagement_MessageWriter")]
     public void BinaryUDPPackageWriterTestMethod()
     {
-      int _port = 35678;
-      using (BinaryUDPPackageWriter _writer = new BinaryUDPPackageWriter("localhost", _port, new Helpers.UABinaryEncoderImplementation()))
+      using (BinaryUDPPackageWriter _writer = new BinaryUDPPackageWriter(new Helpers.UABinaryEncoderImplementation()))
       {
         Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
         Assert.AreEqual<int>(0, _writer.m_NumberOfAttachToNetwork);
         Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
-        Assert.AreEqual<HandlerState>(HandlerState.Disabled, _writer.State.State);
-        _writer.AttachToNetwork();
-        Assert.AreEqual<HandlerState>(HandlerState.Operational, _writer.State.State);
+        //Assert.AreEqual<HandlerState>(HandlerState.Disabled, _writer.State.State);
+        //_writer.AttachToNetwork();
+        //Assert.AreEqual<HandlerState>(HandlerState.Operational, _writer.State.State);
         Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
         Assert.AreEqual<int>(0, _writer.m_NumberOfSentBytes);
         Assert.AreEqual<int>(0, _writer.m_NumberOfSentMessages);
-        ProducerBinding _binding = new ProducerBinding() { Value = String.Empty };
+        ProducerBinding _binding = new ProducerBinding() { Value = string.Empty };
         int _sentItems = 0;
         Guid m_Guid = CommonDefinitions.TestGuid;
-        DataSelector _testDataSelector = new DataSelector() { DataSetWriterId = CommonDefinitions.DataSetId, PublisherId = CommonDefinitions.TestGuid  };
-        ((IMessageWriter)_writer).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
-                                        Convert.ToUInt16(CommonDefinitions.TestValues.Length),
-                                        UInt64.MaxValue,
-                                        FieldEncodingEnum.VariantFieldEncoding,
-                                        _testDataSelector,
-                                        0,
-                                        CommonDefinitions.TestMinimalDateTime, new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 }
-                                       );
+        DataSelector _testDataSelector = new DataSelector() { DataSetWriterId = CommonDefinitions.DataSetId, PublisherId = CommonDefinitions.TestGuid };
+        ((IMessageWriter)_writer.BinaryEncoder).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
+                                                      Convert.ToUInt16(CommonDefinitions.TestValues.Length),
+                                                      ulong.MaxValue,
+                                                      FieldEncodingEnum.VariantFieldEncoding,
+                                                      _testDataSelector,
+                                                      0,
+                                                      CommonDefinitions.TestMinimalDateTime, new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 }
+                                                     );
         Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
         Assert.AreEqual<int>(1, _writer.m_NumberOfAttachToNetwork);
         Assert.AreEqual<int>(115, _writer.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _writer.m_NumberOfSentMessages);
         byte[] _shouldBeInBuffer = CommonDefinitions.GetTestBinaryArrayVariant4Consumer();
-        byte[] _outputBuffer = _writer.DoUDPRead();
-        CollectionAssert.AreEqual(_outputBuffer, _shouldBeInBuffer);
+        CollectionAssert.AreEqual(_writer.Buffer, _shouldBeInBuffer);
       }
     }
     #endregion
 
     #region private
     private class TestClass { }
-    private readonly DataSelector TestDataSelector = new DataSelector() { PublisherId = Guid.NewGuid(), DataSetWriterId = UInt16.MaxValue };
+    private readonly DataSelector TestDataSelector = new DataSelector() { PublisherId = Guid.NewGuid(), DataSetWriterId = ushort.MaxValue };
     private class ProducerBinding : IProducerBinding
     {
 
       internal object Value;
-      private BuiltInType _builtInType;
+      private readonly BuiltInType _builtInType;
 
       public ProducerBinding(BuiltInType builtInType)
       {
@@ -133,17 +136,14 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       public ProducerBinding() { }
 
       #region IProducerBinding
-      public bool NewValue
-      {
-        get { return true; }
-      }
+      public bool NewValue => true;
       public object GetFromRepository()
       {
         return Value;
       }
       public IValueConverter Converter
       {
-        set { throw new NotImplementedException(); }
+        set => throw new NotImplementedException();
       }
       public UATypeInfo Encoding
       {
@@ -187,15 +187,12 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       }
       public object Parameter
       {
-        get
-        {
-          return null;
-        }
+        get => null;
         set { }
       }
       public System.Globalization.CultureInfo Culture
       {
-        set { throw new NotImplementedException(); }
+        set => throw new NotImplementedException();
       }
 
       public object FallbackValue { set => throw new NotImplementedException(); }
@@ -226,7 +223,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       public override IAssociationState State
       {
         get;
-        protected set;
+        set;
       }
       public override void AttachToNetwork()
       {
@@ -304,211 +301,70 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       {
         get; private set;
       }
-      public Uri Identifier
+      public Uri Identifier => throw new NotImplementedException();
+      public IComparable NodeId => throw new NotImplementedException();
+      public string SymbolicName => throw new NotImplementedException();
+    }
+    #endregion
+
+    private sealed class BinaryUDPPackageWriter : IDisposable
+    {
+
+      #region constructor
+      public BinaryUDPPackageWriter(IUAEncoder uaEncoder)
       {
-        get
+        this.BinaryEncoder = new BinaryEncoder(new BinaryStreamObservable(this), uaEncoder, MessageLengthFieldTypeEnum.TwoBytes);
+      }
+      #endregion
+
+      #region tetst instrumentation
+      private class BinaryStreamObservable : IBinaryDataTransferGraphSender
+      {
+
+        public BinaryStreamObservable(BinaryUDPPackageWriter binaryUDPPackageWriter)
+        {
+          this.m_BinaryUDPPackageWriter = binaryUDPPackageWriter;
+        }
+
+        #region IBinaryStreamObservable
+        public IAssociationState State { get; set; } = new MyState();
+        public void AttachToNetwork()
+        {
+          m_BinaryUDPPackageWriter.m_NumberOfAttachToNetwork++;
+        }
+        public void SendFrame(byte[] buffer)
+        {
+          m_BinaryUDPPackageWriter.m_NumberOfSentBytes += buffer.Length;
+          m_BinaryUDPPackageWriter.m_NumberOfSentMessages++;
+          m_BinaryUDPPackageWriter.Buffer = buffer;
+        }
+        #endregion
+
+        #region IDisposable
+        public void Dispose()
         {
           throw new NotImplementedException();
         }
+        #endregion
+
+        private BinaryUDPPackageWriter m_BinaryUDPPackageWriter;
+
       }
-      public IComparable NodeId
+      internal BinaryEncoder BinaryEncoder { get; set; }
+      internal byte[] Buffer { get; private set; }
+      internal int m_NumberOfSentMessages = 0;
+      internal int m_NumberOfSentBytes = 0;
+      internal int m_NumberOfAttachToNetwork;
+      #endregion
+
+      #region IDisposable
+      public void Dispose()
       {
-        get
-        {
-          throw new NotImplementedException();
-        }
+        BinaryEncoder.Dispose();
       }
-      public string SymbolicName
-      {
-        get
-        {
-          throw new NotImplementedException();
-        }
-      }
-    }
-    #endregion
+      #endregion
 
-  }
-
-  internal class MyState : IAssociationState
-  {
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MyState"/> class.
-    /// </summary>
-    public MyState()
-    {
-      State = HandlerState.Disabled;
-    }
-    /// <summary>
-    /// Gets the current state <see cref="HandlerState" /> of the <see cref="Association" /> instance.
-    /// </summary>
-    /// <value>The state of <see cref="HandlerState" /> type.</value>
-    public HandlerState State
-    {
-      get;
-      private set;
-    }
-    /// <summary>
-    /// This method is used to enable a configured <see cref="Association" /> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational" /> state.
-    /// In the case of an error situation, the state changes into <see cref="HandlerState.Error" />. The operation is rejected if the current <see cref="State" />  is not <see cref="HandlerState.Disabled" />.
-    /// </summary>
-    /// <exception cref="System.ArgumentException">Wrong state</exception>
-    public void Enable()
-    {
-      if (State != HandlerState.Disabled)
-        throw new ArgumentException("Wrong state");
-      State = HandlerState.Operational;
-    }
-    /// <summary>
-    /// This method is used to disable an already enabled <see cref="Association" /> object.
-    /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled" /> or <see cref="HandlerState.NoConfiguration" />.
-    /// </summary>
-    /// <exception cref="System.ArgumentException">Wrong state</exception>
-    public void Disable()
-    {
-      if (State != HandlerState.Operational)
-        throw new ArgumentException("Wrong state");
-      State = HandlerState.Disabled;
     }
 
   }
-
-  //TODO to be promoted to the codebase
-  #region to be promoted to the codebase
-  public sealed class BinaryUDPPackageWriter : BinaryEncoder
-  {
-
-    #region creator
-    public BinaryUDPPackageWriter(string remoteHostName, int port, IUAEncoder uaEncoder) :
-      base(uaEncoder, MessageLengthFieldTypeEnum.TwoBytes)
-    {
-      State = new MyState();
-      m_RemoteHostName = remoteHostName;
-      m_Port = port;
-    }
-    #endregion
-
-    #region BinaryMessageEncoder
-    public override IAssociationState State
-    {
-      get;
-      protected set;
-    }
-    public override void AttachToNetwork()
-    {
-      // Get DNS host information.
-      m_HostInfo = Dns.GetHostEntry(m_RemoteHostName);
-      // Get the DNS IP addresses associated with the host.
-      Assert.AreEqual<int>(2, m_HostInfo.AddressList.Length);
-      // Get first IPAddress in list return by DNS.
-      m_IPAddresses = m_HostInfo.AddressList.Where<IPAddress>(x => x.AddressFamily == AddressFamily.InterNetwork).First<IPAddress>();
-      Assert.IsNotNull(m_IPAddresses);
-      m_UdpClient = new UdpClient(m_Port);
-      Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
-      State.Enable();
-      m_NumberOfAttachToNetwork++;
-    }
-    protected override void SendFrame(byte[] buffer)
-    {
-      m_NumberOfSentBytes += buffer.Length;
-      m_NumberOfSentMessages++;
-      try
-      {
-        IPEndPoint _IPEndPoint = new IPEndPoint(m_IPAddresses, m_Port);
-        m_UdpClient.Send(buffer, buffer.Length, _IPEndPoint);
-      }
-      catch (SocketException e)
-      {
-        Console.WriteLine("SocketException caught!!!");
-        Console.WriteLine("Source : " + e.Source);
-        Console.WriteLine("Message : " + e.Message);
-        throw;
-      }
-      catch (ArgumentNullException e)
-      {
-        Console.WriteLine("ArgumentNullException caught!!!");
-        Console.WriteLine("Source : " + e.Source);
-        Console.WriteLine("Message : " + e.Message);
-        throw;
-      }
-      catch (NullReferenceException e)
-      {
-        Console.WriteLine("NullReferenceException caught!!!");
-        Console.WriteLine("Source : " + e.Source);
-        Console.WriteLine("Message : " + e.Message);
-        throw;
-      }
-      catch (Exception e)
-      {
-        Console.WriteLine("Exception caught!!!");
-        Console.WriteLine("Source : " + e.Source);
-        Console.WriteLine("Message : " + e.Message);
-        throw;
-      }
-    }
-
-    #endregion
-
-    #region private
-    private UdpClient m_UdpClient;
-    private IPAddress m_IPAddresses;
-    private IPHostEntry m_HostInfo;
-    private int m_Port = 4800;
-    private string m_RemoteHostName;
-    #endregion
-
-    #region tetst instrumentation
-    internal int m_NumberOfSentMessages = 0;
-    internal int m_NumberOfSentBytes = 0;
-    internal int m_NumberOfAttachToNetwork;
-    internal byte[] DoUDPRead()
-    {
-      Byte[] _receiverBytes = null;
-      try
-      {
-        IPEndPoint _IPEndPoint = null;
-        _receiverBytes = m_UdpClient.Receive(ref _IPEndPoint);
-        Assert.IsNotNull(_IPEndPoint);
-      } // End of the try block.
-      catch (SocketException e)
-      {
-        Console.WriteLine("SocketException caught!!!");
-        Console.WriteLine("Source : " + e.Source);
-        Console.WriteLine("Message : " + e.Message);
-      }
-      catch (ArgumentNullException e)
-      {
-        Console.WriteLine("ArgumentNullException caught!!!");
-        Console.WriteLine("Source : " + e.Source);
-        Console.WriteLine("Message : " + e.Message);
-      }
-      catch (NullReferenceException e)
-      {
-        Console.WriteLine("NullReferenceException caught!!!");
-        Console.WriteLine("Source : " + e.Source);
-        Console.WriteLine("Message : " + e.Message);
-      }
-      catch (Exception e)
-      {
-        Console.WriteLine("Exception caught!!!");
-        Console.WriteLine("Source : " + e.Source);
-        Console.WriteLine("Message : " + e.Message);
-      }
-      return _receiverBytes;
-
-    }
-    protected override void Dispose(bool disposing)
-    {
-      base.Dispose(disposing);
-      if (!disposing)
-        return;
-      m_UdpClient.Close();
-    }
-
-    #endregion
-
-  }
-  #endregion
-
 }

@@ -1,10 +1,16 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
-using UAOOI.Networking.SemanticData.Common;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
@@ -53,14 +59,19 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     }
     private class MessageHandlerFactory : IMessageHandlerFactory
     {
-      public IMessageReader GetIMessageReader(string name, string configuration, IUADecoder uaDecoder)
-      {
-        return new MessageReader();
-      }
-      public IMessageWriter GetIMessageWriter(string name, string configuration, IUAEncoder uaEncoder)
+
+      #region IMessageHandlerFactory
+      public IBinaryDataTransferGraphReceiver GetBinaryDTGReceiver(string name, string configuration)
       {
         throw new NotImplementedException();
       }
+
+      public IBinaryDataTransferGraphSender GetBinaryDTGSender(string name, string configuration)
+      {
+        throw new NotImplementedException();
+      }
+      #endregion
+
       internal class MessageReader : IMessageReader
       {
         public IAssociationState State

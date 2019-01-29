@@ -1,6 +1,13 @@
-﻿
+﻿//____________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//____________________________________________________________________________
+
 using System;
 using System.IO;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.Encoding;
 
 namespace UAOOI.Networking.SemanticData.MessageHandling
@@ -8,14 +15,18 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
   /// <summary>
   /// Class BinaryDecoder - wrapper of <see cref="BinaryReader"/> supporting OPC UA binary encoding.
   /// </summary>
-  public abstract class BinaryDecoder : BinaryPacketDecoder
+  public sealed class BinaryDecoder : BinaryPacketDecoder
   {
     #region creators
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryPacketDecoder" /> class is to be used by the packet level decoding.
     /// </summary>
     /// <param name="uaDecoder">The UA decoder to be used fo decode UA Built-in data types.</param>
-    public BinaryDecoder(IUADecoder uaDecoder) : base(uaDecoder) { }
+    public BinaryDecoder(IBinaryDataTransferGraphReceiver messageReader, IUADecoder uaDecoder) : base(uaDecoder)
+    {
+      m_DTGReceiver = messageReader ?? throw new ArgumentNullException(nameof(messageReader));
+      m_DTGReceiver.OnNewFrameArrived += OnNewFrameArrived;
+    }
     #endregion
 
     #region IDisposable Support
@@ -40,44 +51,44 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// <summary>
     /// Reads an 8-byte unsigned integer from the message and advances the position by eight bytes.
     /// </summary>
-    /// <returns>An 8-byte unsigned integer <see cref="UInt64"/> read from this message. .</returns>
-    public override UInt64 ReadUInt64()
+    /// <returns>An 8-byte unsigned integer <see cref="ulong"/> read from this message. .</returns>
+    public override ulong ReadUInt64()
     {
       return m_UABinaryReader.ReadUInt64();
     }
-    public override UInt32 ReadUInt32()
+    public override uint ReadUInt32()
     {
       return m_UABinaryReader.ReadUInt32();
     }
-    public override UInt16 ReadUInt16()
+    public override ushort ReadUInt16()
     {
       return m_UABinaryReader.ReadUInt16();
     }
-    public override String ReadString()
+    public override string ReadString()
     {
       return m_UABinaryReader.ReadString();
     }
-    public override Single ReadSingle()
+    public override float ReadSingle()
     {
       return m_UABinaryReader.ReadSingle();
     }
-    public override SByte ReadSByte()
+    public override sbyte ReadSByte()
     {
       return m_UABinaryReader.ReadSByte();
     }
-    public override Int64 ReadInt64()
+    public override long ReadInt64()
     {
       return m_UABinaryReader.ReadInt64();
     }
-    public override Int32 ReadInt32()
+    public override int ReadInt32()
     {
       return m_UABinaryReader.ReadInt32();
     }
-    public override Int16 ReadInt16()
+    public override short ReadInt16()
     {
       return m_UABinaryReader.ReadInt16();
     }
-    public override Double ReadDouble()
+    public override double ReadDouble()
     {
       return m_UABinaryReader.ReadDouble();
     }
@@ -85,11 +96,11 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     {
       return m_UABinaryReader.ReadChar();
     }
-    public override Byte ReadByte()
+    public override byte ReadByte()
     {
       return m_UABinaryReader.ReadByte();
     }
-    public override Boolean ReadBoolean()
+    public override bool ReadBoolean()
     {
       return m_UABinaryReader.ReadBoolean();
     }
@@ -101,25 +112,33 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     {
       return m_UABinaryReader.BaseStream.Position == m_UABinaryReader.BaseStream.Length;
     }
+    public override void AttachToNetwork()
+    {
+      m_DTGReceiver.AttachToNetwork();
+    }
+    public override IAssociationState State { get => m_DTGReceiver.State; set => m_DTGReceiver.State = value; }
     #endregion
 
     #region private
+    private BinaryReader m_UABinaryReader;
+    private readonly IBinaryDataTransferGraphReceiver m_DTGReceiver;
     /// <summary>
     /// Called when new frame has arrived.
     /// </summary>
     /// <param name="uaBinaryReader">
-    /// The UA binary reader an instance of <see cref="BinaryReader"/> created after new frame has been arrived.
+    /// The UA binary reader is an instance of <see cref="BinaryReader"/> created after new frame has been arrived.
     /// </param>
-    /// <remarks> Just after processing the object is disposed.</remarks>
-    protected void OnNewFrameArrived(BinaryReader uaBinaryReader)
+    /// <remarks>Just after processing the object is disposed.</remarks>
+    private void OnNewFrameArrived(object source, byte[] _receiveBytes)
     {
-      m_UABinaryReader = uaBinaryReader;
+      MemoryStream _stream = new MemoryStream(_receiveBytes, 0, _receiveBytes.Length);
+      m_UABinaryReader = new BinaryReader(_stream, System.Text.Encoding.UTF8);
       OnNewPacketArrived();
       m_UABinaryReader.Dispose();
       m_UABinaryReader = null; ;
     }
-    private BinaryReader m_UABinaryReader;
     #endregion
+
 
   }
 

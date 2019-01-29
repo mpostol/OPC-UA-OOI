@@ -16,7 +16,7 @@
     <Authors>MPostol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
-    <RootNamespace>UAOOI.Networking.SemanticData</RootNamespace>
+    <RootNamespace>UAOOI.Networking.SemanticData</RootNamespace> 
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;1705;IDE0001;IDE002;IDE003</NoWarn>
@@ -30,6 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj" />
+    <ProjectReference Include="..\Core\Networking.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Properties\AssemblyInfo.tt">

@@ -40,7 +40,7 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.
     <NoWarn>1701;1702;1705;IDE0001;IDE0002;IDE0003</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CommonServiceLocator" Version="2.0.3" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />

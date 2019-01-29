@@ -1,13 +1,16 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using UAOOI.Networking.SemanticData;
-using UAOOI.Networking.SemanticData.Common;
-using UAOOI.Networking.SemanticData.Encoding;
-using UAOOI.Networking.SemanticData.MessageHandling;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.UDPMessageHandler.Diagnostic;
 
 namespace UAOOI.Networking.UDPMessageHandler
@@ -15,12 +18,11 @@ namespace UAOOI.Networking.UDPMessageHandler
   /// <summary>
   /// Class BinaryUDPPackageWriter - custom implementation of the <see cref="BinaryEncoder"/> using UDP protocol.
   /// </summary>
-  internal class BinaryUDPPackageWriter : BinaryEncoder
+  internal sealed class BinaryUDPPackageWriter : IBinaryDataTransferGraphSender
   {
 
     #region constructor
-    internal BinaryUDPPackageWriter(string remoteHostName, int remotePort, IUAEncoder uaEncoder) :
-      base(uaEncoder, MessageLengthFieldTypeEnum.TwoBytes)
+    internal BinaryUDPPackageWriter(string remoteHostName, int remotePort)
     {
       UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(BinaryUDPPackageWriter)}(RemoteHostName={remoteHostName},RemotePort={remotePort})");
       State = new MyState(this);
@@ -30,16 +32,16 @@ namespace UAOOI.Networking.UDPMessageHandler
     #endregion
 
     #region BinaryMessageEncoder
-    public override IAssociationState State
+    public IAssociationState State
     {
       get;
-      protected set;
+      set;
     }
-    public override void AttachToNetwork()
+    public void AttachToNetwork()
     {
       UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), nameof(AttachToNetwork));
     }
-    protected override void SendFrame(byte[] buffer)
+    public void SendFrame(byte[] buffer)
     {
       lock (this)
       {
@@ -63,14 +65,11 @@ namespace UAOOI.Networking.UDPMessageHandler
     /// Releases unmanaged and - optionally - managed resources.
     /// </summary>
     /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-    protected override void Dispose(bool disposing)
+    public void Dispose()
     {
       lock (this)
       {
-        UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(Dispose)}({nameof(disposing)} = {disposing})");
-        base.Dispose(disposing);
-        if (!disposing)
-          return;
+        UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"Entering {nameof(BinaryUDPPackageWriter)}.{nameof(Dispose)} method");
         if (m_UdpClient == null)
           return;
         UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), nameof(m_UdpClient.Close));
@@ -135,8 +134,8 @@ namespace UAOOI.Networking.UDPMessageHandler
     //vars
     private UdpClient m_UdpClient;
     private IPAddress m_IPAddresses;
-    private int m_remotePort = 4800;
-    private string m_RemoteHostName;
+    private readonly int m_remotePort = 4800;
+    private readonly string m_RemoteHostName;
     //Methods
     private void OnEnable()
     {
@@ -151,6 +150,7 @@ namespace UAOOI.Networking.UDPMessageHandler
       UDPMessageHandlerSemanticEventSource.Log.EnteringMethod(nameof(BinaryUDPPackageWriter), $"{nameof(UdpClient)} m_RemoteHostName: {m_RemoteHostName} Ip : {m_IPAddresses.ToString()}");
       m_UdpClient = new UdpClient();
     }
+
     #endregion
 
   }

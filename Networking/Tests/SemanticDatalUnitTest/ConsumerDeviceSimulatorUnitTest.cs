@@ -1,8 +1,13 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.Networking.SemanticData.Encoding;
-using UAOOI.Networking.SemanticData.MessageHandling;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.UnitTest.Simulator;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
@@ -12,7 +17,6 @@ namespace UAOOI.Networking.SemanticData.UnitTest
   public class ConsumerDeviceSimulatorUnitTest
   {
 
-    #region test part
     [TestMethod]
     [TestCategory("DataManagement_ConsumerDeviceSimulator")]
     public void ConsumerDeviceSimulatorTestMethod()
@@ -29,34 +33,14 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       _consumer.InitializeAndRun();
       Assert.AreEqual<int>(1, _consumer.AssociationsCollection.Count);
       Assert.AreEqual<int>(1, _consumer.MessageHandlersCollection.Count);
-      ((ConsumerDeviceSimulator)_consumer).CheckConsistency();
+      _consumer.CheckConsistency();
       _mhf.CheckConsistency();
       _mhf.SendData();
     }
-    [TestMethod]
-    [TestCategory("DataManagement_ConsumerDeviceSimulator")]
-    public void MessageHandlerFactoryCreatorReadTestMethod()
-    {
-      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(UInt32.MaxValue);
-      Assert.IsNotNull(_nmf);
-      IMessageReader _nmr = _nmf.GetIMessageReader("UDP", null, new Helpers.UABinaryDecoderImplementation());
-      Assert.IsNotNull(_nmr);
-    }
-    [TestMethod]
-    [TestCategory("DataManagement_ConsumerDeviceSimulator")]
-    [ExpectedException(typeof(NotImplementedException))]
-    public void MessageHandlerFactoryCreatorWriteTestMethod()
-    {
-      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(UInt32.MaxValue);
-      Assert.IsNotNull(_nmf);
-      IMessageWriter _nmr = _nmf.GetIMessageWriter("UDP", null, null);
-    }
-    #endregion
 
     #region private
     private class MyMessageHandlerFactory : IMessageHandlerFactory
     {
-
       #region creator
       internal MyMessageHandlerFactory(UInt32 dataSetGuid)
       {
@@ -65,14 +49,13 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       #endregion
 
       #region IMessageHandlerFactory
-      public IMessageReader GetIMessageReader(string name, string configuration, IUADecoder uaDecoder)
+      public IBinaryDataTransferGraphReceiver GetBinaryDTGReceiver(string name, string configuration)
       {
         Assert.AreEqual("UDP", name);
         Assert.IsNull(configuration);
-        Assert.IsNotNull(uaDecoder);
-        return MyMessageReader;
+        return new BinaryStreamObserverFixture();
       }
-      public IMessageWriter GetIMessageWriter(string name, string configuration, IUAEncoder uaEncoder)
+      public IBinaryDataTransferGraphSender GetBinaryDTGSender(string name, string configuration)
       {
         throw new NotImplementedException();
       }
@@ -87,16 +70,29 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       {
         MyMessageReader.SendData();
       }
-
       #endregion
 
       #region private
+      private class BinaryStreamObserverFixture : IBinaryDataTransferGraphReceiver
+      {
+        public IAssociationState State { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public event EventHandler<byte[]> OnNewFrameArrived;
+
+        public void AttachToNetwork()
+        {
+          throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+          throw new NotImplementedException();
+        }
+      }
       private MessageReader MyMessageReader { get; set; }
       #endregion
-
     }
     #endregion
-
   }
 
 }

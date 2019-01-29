@@ -20,7 +20,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Networking.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

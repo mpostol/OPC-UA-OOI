@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -9,8 +15,8 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
-using UAOOI.Networking.SemanticData.Diagnostics;
 
 namespace UAOOI.Networking.ReferenceApplication.MEF
 {

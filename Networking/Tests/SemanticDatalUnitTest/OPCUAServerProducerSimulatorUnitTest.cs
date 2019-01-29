@@ -1,7 +1,13 @@
-﻿
-using System;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.Networking.SemanticData.Encoding;
+using System;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Networking.SemanticData.UnitTest.Simulator;
 
@@ -33,24 +39,6 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       _mhf.CheckConsistency();
       ((OPCUAServerProducerSimulator)_producer).Update("Value1", "Value1");
     }
-    [TestMethod]
-    [TestCategory("DataManagement_ConsumerDeviceSimulator")]
-    public void MessageHandlerFactoryCreatorReadTestMethod()
-    {
-      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(Guid.NewGuid());
-      Assert.IsNotNull(_nmf);
-      IMessageWriter _nmr = _nmf.GetIMessageWriter("UDP", "4840,localhost", null);
-      Assert.IsNotNull(_nmr);
-    }
-    [TestMethod]
-    [TestCategory("DataManagement_ConsumerDeviceSimulator")]
-    [ExpectedException(typeof(NotImplementedException))]
-    public void MessageHandlerFactoryCreatorWriteTestMethod()
-    {
-      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(Guid.NewGuid());
-      Assert.IsNotNull(_nmf);
-      IMessageReader _nmr = _nmf.GetIMessageReader("UDP", null, null);
-    }
     #endregion
 
     #region private
@@ -65,15 +53,15 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       #endregion
 
       #region IMessageHandlerFactory
-      public MessageHandling.IMessageReader GetIMessageReader(string name, string configuration, IUADecoder uaDecoder)
+      public IBinaryDataTransferGraphReceiver GetBinaryDTGReceiver(string name, string configuration)
       {
         throw new NotImplementedException();
       }
-      public MessageHandling.IMessageWriter GetIMessageWriter(string name, string configuration, IUAEncoder uaEncoder)
+      public IBinaryDataTransferGraphSender GetBinaryDTGSender(string name, string configuration)
       {
         Assert.AreEqual("UDP", name);
         Assert.AreEqual<string>("4840,localhost", configuration);
-        return MessageWriter;
+        return new BinaryStreamObservableFixture();
       }
       #endregion
 
@@ -82,6 +70,23 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       #endregion
 
       #region test environment
+      private class BinaryStreamObservableFixture : IBinaryDataTransferGraphSender
+      {
+        public IAssociationState State { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public void AttachToNetwork()
+        {
+          throw new NotImplementedException();
+        }
+        public void SendFrame(byte[] buffer)
+        {
+          throw new NotImplementedException();
+        }
+        public void Dispose()
+        {
+          throw new NotImplementedException();
+        }
+      }
       internal void CheckConsistency()
       {
         Assert.IsNotNull(MessageWriter);
@@ -89,7 +94,6 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       #endregion
 
     }
-
     #endregion
 
   }

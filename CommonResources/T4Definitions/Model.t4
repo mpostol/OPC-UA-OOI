@@ -5,10 +5,10 @@ string DefaultProductVersion = "0.00.00";
 
 //Solution common
 string ProductTrademark = "Object Oriented Internet";
-string AssemblyCopyright = "Copyright MPostol (c) 2018";
+string AssemblyCopyright = "Copyright MPostol (c) 2019";
 string AssemblyCompany = "commsvr.com";
 string Url = "https://github.com/mpostol/OPC-UA-OOI";
-string Email = "commserver@cas.eu";
+string Email = "mpostol@cas.eu";
 string Phone = "+48 608 619 899";
 string Owner = "commsvr.com";
 string RepositoryVersion = "4.0.0"; //increment on the same position as the group version

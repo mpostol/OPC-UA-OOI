@@ -1,11 +1,17 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using CommonServiceLocator;
 using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData;
-using UAOOI.Networking.SemanticData.MessageHandling;
 
 namespace UAOOI.Networking.DataLogger
 {

@@ -21,66 +21,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
   {
 
     #region TestMethod
-    [TestMethod]
-    [TestCategory("DataManagement_MessageWriter")]
-    public void CreatorTestMethod1()
-    {
-      TypesMessageWriter _bmw = new TypesMessageWriter();
-      Assert.IsNotNull(_bmw);
-      _bmw.AttachToNetwork();
-      Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
-    }
-    [TestMethod]
-    [TestCategory("DataManagement_MessageWriter")]
-    [ExpectedException(typeof(ArgumentOutOfRangeException))]
-    public void ObjectTestMethod()
-    {
-      TypesMessageWriter _bmw = new TypesMessageWriter();
-      _bmw.AttachToNetwork();
-      ProducerBinding _binding = new ProducerBinding
-      {
-        Value = new TestClass()
-      };
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, ulong.MaxValue, FieldEncodingEnum.VariantFieldEncoding, TestDataSelector, 0, DateTime.UtcNow,
-        new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
-    }
-    [TestMethod]
-    [TestCategory("DataManagement_MessageWriter")]
-    [ExpectedException(typeof(NullReferenceException))]
-    public void NullableTestMethod()
-    {
-      TypesMessageWriter _bmw = new TypesMessageWriter();
-      _bmw.AttachToNetwork();
-      Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
-      ProducerBinding _binding = new ProducerBinding(BuiltInType.Float)
-      {
-        Value = new Nullable<float>()
-      };
-      ((IMessageWriter)_bmw).Send(x => _binding, 1, ulong.MaxValue, FieldEncodingEnum.VariantFieldEncoding, TestDataSelector, 0, DateTime.UtcNow, new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 });
-    }
-    [TestMethod]
-    [TestCategory("DataManagement_MessageWriter")]
-    public void SendTestMethod()
-    {
-      TypesMessageWriter _bmw = new TypesMessageWriter();
-      _bmw.AttachToNetwork();
-      Assert.IsTrue(_bmw.State.State == HandlerState.Operational);
-      ProducerBinding _binding = new ProducerBinding
-      {
-        Value = string.Empty
-      };
-      int _sentItems = 0;
-      ((IMessageWriter)_bmw).Send((x) => { _binding.Value = CommonDefinitions.TestValues[x]; _sentItems++; return _binding; },
-                                   Convert.ToUInt16(CommonDefinitions.TestValues.Length),
-                                   ulong.MaxValue,
-                                   FieldEncodingEnum.VariantFieldEncoding,
-                                   TestDataSelector,
-                                   0,
-                                   DateTime.UtcNow,
-                                   new ConfigurationVersionDataType() { MajorVersion = 0, MinorVersion = 0 }
-                                   );
-      Assert.AreEqual(CommonDefinitions.TestValues.Length, _sentItems);
-    }
+
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
     public void BinaryUDPPackageWriterTestMethod()
@@ -98,7 +39,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         Assert.AreEqual<int>(1, _binaryStreamObservable.NumberOfAttachToNetwork);
         Assert.AreEqual<int>(0, _binaryStreamObservable.m_NumberOfSentBytes);
         Assert.AreEqual<int>(0, _binaryStreamObservable.m_NumberOfSentMessages);
-        ProducerBinding _binding = new ProducerBinding() { Value = string.Empty };
+        ProducerBindingFixture _binding = new ProducerBindingFixture() { Value = string.Empty };
         int _sentItems = 0;
         Guid m_Guid = CommonDefinitions.TestGuid;
         DataSelector _testDataSelector = new DataSelector() { DataSetWriterId = CommonDefinitions.DataSetId, PublisherId = CommonDefinitions.TestGuid };
@@ -121,19 +62,17 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     #endregion
 
     #region private
-    private class TestClass { }
-    private readonly DataSelector TestDataSelector = new DataSelector() { PublisherId = Guid.NewGuid(), DataSetWriterId = ushort.MaxValue };
-    private class ProducerBinding : IProducerBinding
+    private class ProducerBindingFixture : IProducerBinding
     {
 
       internal object Value;
       private readonly BuiltInType _builtInType;
 
-      public ProducerBinding(BuiltInType builtInType)
+      public ProducerBindingFixture(BuiltInType builtInType)
       {
         _builtInType = builtInType;
       }
-      public ProducerBinding() { }
+      public ProducerBindingFixture() { }
 
       #region IProducerBinding
       public bool NewValue => true;
@@ -209,88 +148,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       #endregion
 
     }
-    private class TypesMessageWriter : MessageWriterBase
-    {
 
-      #region creator
-      public TypesMessageWriter() : base(new Helpers.UABinaryEncoderImplementation())
-      {
-        State = new MyState();
-      }
-      #endregion
-
-      #region BinaryMessageWriter
-      public override IAssociationState State
-      {
-        get;
-        set;
-      }
-      public override void AttachToNetwork()
-      {
-        Assert.AreNotEqual<HandlerState>(HandlerState.Operational, State.State);
-        State.Enable();
-      }
-      public override void Write(ulong value)
-      {
-        Assert.IsInstanceOfType(value, typeof(ulong));
-      }
-      public override void Write(uint value)
-      {
-        Assert.IsInstanceOfType(value, typeof(uint));
-      }
-      public override void Write(ushort value)
-      {
-        Assert.IsInstanceOfType(value, typeof(ushort));
-      }
-      public override void Write(float value)
-      {
-        Assert.IsInstanceOfType(value, typeof(float));
-      }
-      public override void Write(sbyte value)
-      {
-        Assert.IsInstanceOfType(value, typeof(sbyte));
-      }
-      public override void Write(long value)
-      {
-        Assert.IsInstanceOfType(value, typeof(long));
-      }
-      public override void Write(int value)
-      {
-        Assert.IsInstanceOfType(value, typeof(int));
-      }
-      public override void Write(short value)
-      {
-        Assert.IsInstanceOfType(value, typeof(short));
-      }
-      public override void Write(double value)
-      {
-        Assert.IsInstanceOfType(value, typeof(double));
-      }
-      public override void Write(byte value)
-      {
-        Assert.IsInstanceOfType(value, typeof(byte));
-      }
-      public override void Write(bool value)
-      {
-        Assert.IsInstanceOfType(value, typeof(bool));
-      }
-      public override void Write(byte[] value)
-      {
-        Assert.IsInstanceOfType(value, typeof(byte[]));
-      }
-      protected internal override void CreateMessage
-        (FieldEncodingEnum encoding, Guid prodicerId, ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
-      {
-        MassageCreated = true;
-      }
-      protected override void SendMessage() { }
-      #endregion
-
-      #region test infrastructure
-      internal bool MassageCreated = false;
-      #endregion
-
-    }
     private class BinaryDataTransferGraphSenderFixture : IBinaryDataTransferGraphSender
     {
       public BinaryDataTransferGraphSenderFixture() { }

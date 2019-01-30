@@ -102,6 +102,7 @@
     <Compile Include="ProducerAssociationUnitTest.cs" />
     <Compile Include="BinaryDecoderUnitTest.cs" />
     <Compile Include="ConsumerBindingMonitoredValueUnitTest.cs" />
+    <Compile Include="MessageWriterBaseTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">

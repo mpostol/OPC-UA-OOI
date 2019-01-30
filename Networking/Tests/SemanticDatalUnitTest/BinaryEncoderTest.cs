@@ -11,7 +11,7 @@ using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.MessageHandling;
-using UAOOI.Networking.SemanticData.UnitTest.Helpers;
+using UAOOI.Networking.SemanticData.UnitTest.MessageHandlerFactory;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
 {
@@ -20,13 +20,12 @@ namespace UAOOI.Networking.SemanticData.UnitTest
   public class BinaryEncoderTest
   {
 
-    #region TestMethod
-
+    #region TestMethods
     [TestMethod]
     [TestCategory("DataManagement_MessageWriter")]
     public void BinaryUDPPackageWriterTestMethod()
     {
-      BinaryDataTransferGraphSenderFixture _binaryStreamObservable = new BinaryDataTransferGraphSenderFixture();
+      BinaryDataTransferGraphSenderFixture _binaryStreamObservable = new BinaryDataTransferGraphSenderTest();
       using (BinaryEncoder _writer = new BinaryEncoder(_binaryStreamObservable, new Helpers.UABinaryEncoderImplementation(), MessageLengthFieldTypeEnum.TwoBytes))
       {
         Assert.AreEqual<int>(0, _binaryStreamObservable.m_NumberOfSentBytes);
@@ -148,41 +147,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       #endregion
 
     }
-
-    private class BinaryDataTransferGraphSenderFixture : IBinaryDataTransferGraphSender
-    {
-      public BinaryDataTransferGraphSenderFixture() { }
-
-      #region IBinaryStreamObservable
-      public IAssociationState State { get; set; } = new MyState();
-      public void AttachToNetwork()
-      {
-        NumberOfAttachToNetwork++;
-      }
-      public void SendFrame(byte[] buffer)
-      {
-        m_NumberOfSentBytes += buffer.Length;
-        m_NumberOfSentMessages++;
-        Buffer = buffer;
-      }
-      #endregion
-
-      #region IDisposable
-      public void Dispose()
-      {
-        DisposeCount++;
-      }
-      #endregion
-
-      #region instrumentation
-      internal byte[] Buffer { get; private set; }
-      internal int m_NumberOfSentMessages = 0;
-      internal int m_NumberOfSentBytes = 0;
-      internal int NumberOfAttachToNetwork = 0;
-      internal int DisposeCount = 0;
-      #endregion
-
-    }
+    private class BinaryDataTransferGraphSenderTest : BinaryDataTransferGraphSenderFixture { }
     #endregion
 
   }

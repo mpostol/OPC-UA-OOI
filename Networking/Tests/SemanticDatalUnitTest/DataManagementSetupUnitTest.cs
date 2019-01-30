@@ -7,14 +7,13 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;
-using UAOOI.Networking.SemanticData.UnitTest.Helpers;
+using UAOOI.Networking.SemanticData.UnitTest.MessageHandlerFactory;
 using UAOOI.Networking.SemanticData.UnitTest.Simulator;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
@@ -27,94 +26,81 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     [TestCategory("DataManagement_DataManagementSetup")]
     public void DataManagementSetupCreatorTestMethod()
     {
-      DataManagementSetup _ndm = new DataManagementSetup();
-      Assert.IsNotNull(_ndm);
-      Assert.IsNull(_ndm.BindingFactory);
-      Assert.IsNull(_ndm.ConfigurationFactory);
-      Assert.IsNull(_ndm.EncodingFactory);
-      Assert.IsNull(_ndm.MessageHandlerFactory);
+      using (DataManagementSetup _ndm = new DataManagementSetup())
+      {
+        Assert.IsNull(_ndm.BindingFactory);
+        Assert.IsNull(_ndm.ConfigurationFactory);
+        Assert.IsNull(_ndm.EncodingFactory);
+        Assert.IsNull(_ndm.MessageHandlerFactory);
+      }
     }
     [TestMethod]
     [TestCategory("DataManagement_DataManagementSetup")]
     public void InitializeTestMethod()
     {
-      TestDataManagementSetup _ndm = new TestDataManagementSetup
+      using (DataManagementSetupTest _ndm = new DataManagementSetupTest
       {
         BindingFactory = new BindingFactory(),
         ConfigurationFactory = new ConfigurationFactory(),
         EncodingFactory = new EncodingFactory(),
-        MessageHandlerFactory = new MessageHandlerFactory()
-      };
-      Assert.IsNull(_ndm.MessageHandlersCollection);
-      _ndm.TestStart();
-      Assert.AreEqual<int>(3, _ndm.MessageHandlersCollection.Count());
-      _ndm.Dispose();
-      Assert.AreEqual<int>(3, MessageHandlerFactory.MessageHandlersCollection.Count);
-      Assert.AreEqual<int>(3, MessageHandlerFactory.MessageHandlersCollection.Where<BinaryDataTransferGraphReceiverFixture>(x => x.CheckConsistency()).Count());
+        MessageHandlerFactory = new MessageHandlerFactoryTest()
+      }
+              )
+      {
+        Assert.IsNull(_ndm.MessageHandlersCollection);
+        _ndm.TestStart();
+        Assert.AreEqual<int>(3, _ndm.MessageHandlersCollection.Count());
+        _ndm.Dispose();
+        ((MessageHandlerFactoryTest)_ndm.MessageHandlerFactory).AssertConsistency();
+      }
     }
     [TestMethod]
     [TestCategory("DataManagement_DataManagementSetup")]
     [ExpectedException(typeof(ArgumentNullException))]
     public void RunTestMethod()
     {
-      TestDataManagementSetup _ndm = new TestDataManagementSetup();
-      Assert.IsNotNull(_ndm);
-      _ndm.TestStart();
+      using (DataManagementSetupTest _ndm = new DataManagementSetupTest())
+        _ndm.TestStart();
     }
 
     #region instrumentation
-    private class TestDataManagementSetup : DataManagementSetup
+    private class DataManagementSetupTest : DataManagementSetup
     {
       internal void TestStart()
       {
         base.Start();
       }
     }
-    private class MessageHandlerFactory : IMessageHandlerFactory
+    private class MessageHandlerFactoryTest : MessageHandlerFactoryFixture
     {
-
-      internal static List<BinaryDataTransferGraphReceiverFixture> MessageHandlersCollection = new List<BinaryDataTransferGraphReceiverFixture>();
-      #region IMessageHandlerFactory
-      public IBinaryDataTransferGraphReceiver GetBinaryDTGReceiver(string name, string configuration)
+      protected override BinaryDataTransferGraphReceiverFixture NewBinaryDataTransferGraphReceiverFixture()
       {
-        BinaryDataTransferGraphReceiverFixture _newFixture = new BinaryDataTransferGraphReceiverFixture();
-        MessageHandlersCollection.Add(_newFixture);
-        return _newFixture;
+        return new DTGReceiverTest(); ;
       }
-      public IBinaryDataTransferGraphSender GetBinaryDTGSender(string name, string configuration)
+      protected override BinaryDataTransferGraphSenderFixture NewBinaryDataTransferGraphSenderFixture()
       {
         throw new NotImplementedException();
       }
-      #endregion
+      internal override void AssertConsistency()
+      {
+        Assert.AreEqual<int>(3, MessageHandlerFactoryFixture.BinaryDataTransferGraphReceiverFixtureList.Count);
+        Assert.AreEqual<int>(3, MessageHandlerFactoryFixture.BinaryDataTransferGraphReceiverFixtureList.
+          Cast<BinaryDataTransferGraphReceiverFixture>().
+          Where<BinaryDataTransferGraphReceiverFixture>((x) => { x.AssertConsistency(); return true; }).Count());
+      }
     }
-    private class BinaryDataTransferGraphReceiverFixture : IBinaryDataTransferGraphReceiver
+    private class DTGReceiverTest : BinaryDataTransferGraphReceiverFixture
     {
-      public IAssociationState State { get; set; } = new MyState();
-      public event EventHandler<byte[]> OnNewFrameArrived;
-      public void AttachToNetwork()
+      internal override void AssertConsistency()
       {
-        AttachToNetworkCount++;
+        Assert.AreEqual<int>(1, base.NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(1, base.DisposeCount);
+        Assert.AreEqual<HandlerState>(HandlerState.Operational, base.State.State);
       }
-      public void Dispose()
-      {
-        DisposeCount++;
-      }
-
-      internal bool CheckConsistency()
-      {
-        Assert.AreEqual<int>(1, AttachToNetworkCount);
-        Assert.AreEqual<int>(1, DisposeCount);
-        Assert.AreEqual<HandlerState>(HandlerState.Operational, State.State);
-        return true;
-      }
-
-      internal int AttachToNetworkCount = 0;
-      internal int DisposeCount = 0;
-      internal int StateCalled = -1;
     }
     private class EncodingFactory : IEncodingFactory
     {
-      public IUADecoder UADecoder => m_IUADecoder;
+      public IUADecoder UADecoder { get; } = new Helpers.UABinaryDecoderImplementation();
       public IUAEncoder UAEncoder => throw new NotImplementedException();
       public void UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
       {
@@ -123,8 +109,6 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         binding.Parameter = null;
         Assert.IsNotNull(binding);
       }
-      private readonly IUADecoder m_IUADecoder = new Helpers.UABinaryDecoderImplementation();
-
     }
     private class ConfigurationFactory : IConfigurationFactory
     {

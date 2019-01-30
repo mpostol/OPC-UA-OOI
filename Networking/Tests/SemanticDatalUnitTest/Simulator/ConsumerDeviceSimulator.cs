@@ -12,7 +12,6 @@ using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;
-using UAOOI.Networking.SemanticData.MessageHandling;
 
 namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
 {
@@ -45,8 +44,6 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
     {
       foreach (ConsumerAssociation _item in AssociationsCollection.Values)
         CheckConsistency(_item);
-      foreach (MessageReader _item in MessageHandlersCollection.Values)
-        _item.CheckConsistency();
     }
     private void CheckConsistency(ConsumerAssociation item)
     {
@@ -166,13 +163,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
           throw new ArgumentOutOfRangeException("repositoryGroup");
         Assert.AreEqual<BuiltInType>(sourceEncoding.BuiltInType, binding.Encoding.BuiltInType);
       }
-      public IUADecoder UADecoder
-      {
-        get
-        {
-          return m_UADecoder;
-        }
-      }
+      public IUADecoder UADecoder { get; } = new Helpers.UABinaryDecoderImplementation();
       public IUAEncoder UAEncoder
       {
         get
@@ -180,7 +171,6 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
           throw new NotImplementedException();
         }
       }
-      private readonly IUADecoder m_UADecoder = new Helpers.UABinaryDecoderImplementation();
     }
     #endregion
 
@@ -195,111 +185,5 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
 
   }
 
-  internal class MessageReader : IMessageReader
-  {
-    public MessageReader(UInt32 dataSetGuid)
-    {
-      State = new MyState();
-      m_DataSetGuid = dataSetGuid;
-    }
-
-    #region IMessageReader
-    public event EventHandler<MessageEventArg> ReadMessageCompleted;
-    public IAssociationState State
-    {
-      get;
-      private set;
-    }
-    public void AttachToNetwork()
-    {
-      m_HaveBeenActivated = true;
-    }
-    public void UpdateMyValues(Func<int, IConsumerBinding> update, int length)
-    {
-      for (int i = 0; i < length; i++)
-      {
-        IConsumerBinding _bind = update(i);
-        _bind.Assign2Repository(m_Message[i]);
-      }
-    }
-    public bool CheckDestination(UInt32 dataId)
-    {
-      return dataId == m_DataSetGuid;
-    }
-    public ulong ContentMask
-    {
-      get { throw new NotImplementedException(); }
-    }
-    #endregion
-
-    #region testing environment
-    internal void SendData()
-    {
-      ReadMessageCompleted(this, new MessageEventArg(this, UInt16.MaxValue, Guid.NewGuid()));
-    }
-    internal void CheckConsistency()
-    {
-      Assert.IsNotNull(State);
-      Assert.AreEqual<HandlerState>(HandlerState.Operational, State.State);
-      Assert.IsNotNull(ReadMessageCompleted);
-      Assert.IsTrue(m_HaveBeenActivated);
-    }
-
-    public void Dispose()
-    {
-      throw new NotImplementedException();
-    }
-    #endregion
-
-    #region private
-    private class MyState : IAssociationState
-    {
-
-      /// <summary>
-      /// Initializes a new instance of the <see cref="MyState"/> class.
-      /// </summary>
-      public MyState()
-      {
-        State = HandlerState.Disabled;
-      }
-      /// <summary>
-      /// Gets the current state <see cref="HandlerState" /> of the <see cref="Association" /> instance.
-      /// </summary>
-      /// <value>The state of <see cref="HandlerState" /> type.</value>
-      public HandlerState State
-      {
-        get;
-        private set;
-      }
-      /// <summary>
-      /// This method is used to enable a configured <see cref="Association" /> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational" /> state.
-      /// In the case of an error situation, the state changes into <see cref="HandlerState.Error" />. The operation is rejected if the current <see cref="State" />  is not <see cref="HandlerState.Disabled" />.
-      /// </summary>
-      /// <exception cref="System.ArgumentException">Wrong state</exception>
-      public void Enable()
-      {
-        if (State != HandlerState.Disabled)
-          throw new ArgumentException("Wrong state");
-        State = HandlerState.Operational;
-      }
-      /// <summary>
-      /// This method is used to disable an already enabled <see cref="Association" /> object.
-      /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled" /> or <see cref="HandlerState.NoConfiguration" />.
-      /// </summary>
-      /// <exception cref="System.ArgumentException">Wrong state</exception>
-      public void Disable()
-      {
-        if (State != HandlerState.Operational)
-          throw new ArgumentException("Wrong state");
-        State = HandlerState.Disabled;
-      }
-
-    }
-    private object[] m_Message = new object[] { "123", 1.23 };
-    private UInt32 m_DataSetGuid { get; set; }
-    private bool m_HaveBeenActivated;
-    #endregion
-
-  }
 
 }

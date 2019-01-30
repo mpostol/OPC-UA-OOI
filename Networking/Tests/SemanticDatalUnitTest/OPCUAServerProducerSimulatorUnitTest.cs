@@ -7,8 +7,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using UAOOI.Networking.Core;
-using UAOOI.Networking.SemanticData.MessageHandling;
+using UAOOI.Networking.SemanticData.UnitTest.MessageHandlerFactory;
 using UAOOI.Networking.SemanticData.UnitTest.Simulator;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
@@ -24,74 +23,46 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     public void CreatorTestMethod()
     {
       Guid _dataSetGuid = Guid.NewGuid();
-      MyMessageHandlerFactory _mhf = new MyMessageHandlerFactory(_dataSetGuid);
-      OPCUAServerProducerSimulator _producer = OPCUAServerProducerSimulator.CreateDevice(_mhf, _dataSetGuid);
-      Assert.IsNull(_producer.AssociationsCollection);
-      Assert.IsNotNull(_producer.BindingFactory);
-      Assert.IsNotNull(_producer.ConfigurationFactory);
-      Assert.IsNotNull(_producer.EncodingFactory);
-      Assert.IsNotNull(_producer.MessageHandlerFactory);
-      Assert.IsNull(_producer.MessageHandlersCollection);
-      _producer.TestStart();
-      Assert.AreEqual<int>(1, _producer.AssociationsCollection.Count);
-      Assert.AreEqual<int>(1, _producer.MessageHandlersCollection.Count);
-      _producer.CheckConsistency();
-      _mhf.CheckConsistency();
-      _producer.Update("Value1", "Value1");
+      MessageHandlerFactoryTest _mhf = new MessageHandlerFactoryTest();
+      using (OPCUAServerProducerSimulator _producer = OPCUAServerProducerSimulator.CreateDevice(_mhf, _dataSetGuid))
+      {
+        Assert.IsNull(_producer.AssociationsCollection);
+        Assert.IsNotNull(_producer.BindingFactory);
+        Assert.IsNotNull(_producer.ConfigurationFactory);
+        Assert.IsNotNull(_producer.EncodingFactory);
+        Assert.IsNotNull(_producer.MessageHandlerFactory);
+        Assert.IsNull(_producer.MessageHandlersCollection);
+        _producer.TestStart();
+        Assert.AreEqual<int>(1, _producer.AssociationsCollection.Count);
+        Assert.AreEqual<int>(1, _producer.MessageHandlersCollection.Count);
+        _producer.CheckConsistency();
+        _mhf.AssertConsistency();
+        _producer.Update("Value1", "Value1");
+      }
     }
     #endregion
 
     #region private
-    private class MyMessageHandlerFactory : IMessageHandlerFactory
+    private class MessageHandlerFactoryTest : MessageHandlerFactoryFixture
     {
 
-      #region creator
-      public MyMessageHandlerFactory(Guid dataSetGuid)
-      {
-        this.MessageWriter = new MyMessageWriter(dataSetGuid);
-      }
-      #endregion
-
-      #region IMessageHandlerFactory
-      public IBinaryDataTransferGraphReceiver GetBinaryDTGReceiver(string name, string configuration)
+      #region MessageHandlerFactoryFixture
+      protected override BinaryDataTransferGraphReceiverFixture NewBinaryDataTransferGraphReceiverFixture()
       {
         throw new NotImplementedException();
       }
-      public IBinaryDataTransferGraphSender GetBinaryDTGSender(string name, string configuration)
+      protected override BinaryDataTransferGraphSenderFixture NewBinaryDataTransferGraphSenderFixture()
       {
-        Assert.AreEqual("UDP", name);
-        Assert.AreEqual<string>("4840,localhost", configuration);
-        return new BinaryStreamObservableFixture();
+        return new BinaryDataTransferGraphSenderTest();
+      }
+      internal override void AssertConsistency()
+      {
+        Assert.AreEqual<int>(0, BinaryDataTransferGraphReceiverFixtureList.Count);
+        Assert.AreEqual<int>(1, BinaryDataTransferGraphSenderFixtureList.Count);
       }
       #endregion
 
-      #region private
-      private IMessageWriter MessageWriter { get; set; }
-      #endregion
-
-      #region test environment
-      private class BinaryStreamObservableFixture : IBinaryDataTransferGraphSender
-      {
-        public IAssociationState State { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public void AttachToNetwork()
-        {
-          throw new NotImplementedException();
-        }
-        public void SendFrame(byte[] buffer)
-        {
-          throw new NotImplementedException();
-        }
-        public void Dispose()
-        {
-          throw new NotImplementedException();
-        }
-      }
-      internal void CheckConsistency()
-      {
-        Assert.IsNotNull(MessageWriter);
-      }
-      #endregion
+      private class BinaryDataTransferGraphSenderTest : BinaryDataTransferGraphSenderFixture { }
 
     }
     #endregion

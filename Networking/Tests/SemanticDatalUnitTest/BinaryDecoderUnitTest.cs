@@ -12,7 +12,7 @@ using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.MessageHandling;
-using UAOOI.Networking.SemanticData.UnitTest.Helpers;
+using UAOOI.Networking.SemanticData.UnitTest.MessageHandlerFactory;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
 {
@@ -24,8 +24,8 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     [TestMethod]
     public void DisposeTest()
     {
-      BinaryDataTransferGraphReceiverFixture _BinaryDataTransferGraphReceiverFixture = new BinaryDataTransferGraphReceiverFixture();
-      using (BinaryDecoder _reader = new BinaryDecoder(_BinaryDataTransferGraphReceiverFixture, new Helpers.UABinaryDecoderImplementation())) ;
+      BinaryDataTransferGraphReceiverFixture _BinaryDataTransferGraphReceiverFixture = new DTGFixture();
+      using (BinaryDecoder _reader = new BinaryDecoder(_BinaryDataTransferGraphReceiverFixture, new Helpers.UABinaryDecoderImplementation())) { }
       Assert.AreEqual<int>(1, _BinaryDataTransferGraphReceiverFixture.DisposeCount);
     }
     [TestMethod]
@@ -33,18 +33,18 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     public void DataTransferTest()
     {
       uint _dataId = CommonDefinitions.DataSetId;
-      BinaryDataTransferGraphReceiverFixture _BinaryDataTransferGraphReceiverFixture = new BinaryDataTransferGraphReceiverFixture();
+      BinaryDataTransferGraphReceiverFixture _BinaryDataTransferGraphReceiverFixture = new DTGFixture();
       using (BinaryDecoder _reader = new BinaryDecoder(_BinaryDataTransferGraphReceiverFixture, new Helpers.UABinaryDecoderImplementation()))
       {
         Assert.IsNotNull(_reader);
         Assert.AreEqual<int>(0, _BinaryDataTransferGraphReceiverFixture.m_NumberOfSentBytes);
-        Assert.AreEqual<int>(0, _BinaryDataTransferGraphReceiverFixture.m_NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(0, _BinaryDataTransferGraphReceiverFixture.NumberOfAttachToNetwork);
         Assert.AreEqual<int>(0, _BinaryDataTransferGraphReceiverFixture.m_NumberOfSentMessages);
         Assert.AreEqual<HandlerState>(HandlerState.Disabled, _BinaryDataTransferGraphReceiverFixture.State.State);
         _reader.AttachToNetwork();
         _reader.State.Enable();
         Assert.AreEqual<HandlerState>(HandlerState.Operational, _BinaryDataTransferGraphReceiverFixture.State.State);
-        Assert.AreEqual<int>(1, _BinaryDataTransferGraphReceiverFixture.m_NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(1, _BinaryDataTransferGraphReceiverFixture.NumberOfAttachToNetwork);
         Assert.AreEqual<int>(0, _BinaryDataTransferGraphReceiverFixture.m_NumberOfSentBytes);
         Assert.AreEqual<int>(0, _BinaryDataTransferGraphReceiverFixture.m_NumberOfSentMessages);
         object[] _buffer = new object[CommonDefinitions.TestValues.Length];
@@ -55,7 +55,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         int _redItems = 0;
         _reader.ReadMessageCompleted += (x, y) => _reader_ReadMessageCompleted(x, y, _dataId, (z) => { _redItems++; return _bindings[z]; }, _buffer.Length);
         _BinaryDataTransferGraphReceiverFixture.SendUDPMessage(CommonDefinitions.GetTestBinaryArrayVariant(), _dataId);
-        Assert.AreEqual<int>(1, _BinaryDataTransferGraphReceiverFixture.m_NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(1, _BinaryDataTransferGraphReceiverFixture.NumberOfAttachToNetwork);
         Assert.AreEqual<int>(116, _BinaryDataTransferGraphReceiverFixture.m_NumberOfSentBytes);
         Assert.AreEqual<int>(1, _BinaryDataTransferGraphReceiverFixture.m_NumberOfSentMessages);
         //test packet content
@@ -70,7 +70,6 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         Assert.AreEqual<ushort>(1, _readerHeader.MessageCount);
         Assert.AreEqual<int>(1, _readerHeader.DataSetWriterIds.Count);
         Assert.AreEqual<uint>(CommonDefinitions.DataSetId, _readerHeader.DataSetWriterIds[0]);
-
         Assert.AreEqual<int>(_buffer.Length, _redItems);
         object[] _shouldBeInBuffer = CommonDefinitions.TestValues;
         Assert.AreEqual<int>(_shouldBeInBuffer.Length, _buffer.Length);
@@ -181,37 +180,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       Assert.AreEqual<uint>(dataId, e.DataSetId);
       e.MessageContent.UpdateMyValues(update, length);
     }
-    internal class BinaryDataTransferGraphReceiverFixture : IBinaryDataTransferGraphReceiver
-    {
-      public BinaryDataTransferGraphReceiverFixture() { }
-      public IAssociationState State { get; set; } = new MyState();
-      public event EventHandler<byte[]> OnNewFrameArrived;
-      public void AttachToNetwork()
-      {
-        this.m_NumberOfAttachToNetwork++;
-      }
-      public void Dispose()
-      {
-        DisposeCount++;
-      }
-      internal void SendUDPMessage(byte[] buffer, uint semanticData)
-      {
-        OnNewFrameArrived.Invoke(this, buffer);
-        m_NumberOfSentMessages++;
-        m_NumberOfSentBytes += buffer.Length;
-        m_SemanticData = semanticData;
-      }
-
-      #region tetst instrumentation
-      private uint m_SemanticData;
-      internal int DisposeCount = 0;
-      internal int m_NumberOfSentBytes = 0;
-      internal int m_NumberOfAttachToNetwork = 0;
-      internal int m_NumberOfSentMessages = 0;
-      private readonly Action<string> m_Trace;
-      #endregion
-
-    }
+    private class DTGFixture : BinaryDataTransferGraphReceiverFixture { }
     #endregion
 
   }

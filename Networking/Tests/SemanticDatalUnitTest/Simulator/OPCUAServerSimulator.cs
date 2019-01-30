@@ -13,6 +13,7 @@ using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.SemanticData.MessageHandling;
+using UAOOI.Networking.SemanticData.UnitTest.MessageHandlerFactory;
 
 namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
 {
@@ -24,14 +25,16 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
   {
 
     #region creator
-    internal static OPCUAServerProducerSimulator CreateDevice(IMessageHandlerFactory messageHandlerFactory, Guid dataSetGuid)
+    internal static OPCUAServerProducerSimulator CreateDevice(MessageHandlerFactoryFixture messageHandlerFactory, Guid dataSetGuid)
     {
       AssociationConfigurationId = dataSetGuid;
-      OPCUAServerProducerSimulator _ret = new OPCUAServerProducerSimulator();
-      _ret.ConfigurationFactory = new MyConfigurationFactory();
-      _ret.BindingFactory = new MyBindingFFactory();
-      _ret.EncodingFactory = new MyEncodingFactory();
-      _ret.MessageHandlerFactory = messageHandlerFactory;
+      OPCUAServerProducerSimulator _ret = new OPCUAServerProducerSimulator
+      {
+        ConfigurationFactory = new MyConfigurationFactory(),
+        BindingFactory = new MyBindingFFactory(),
+        EncodingFactory = new MyEncodingFactory(),
+        MessageHandlerFactory = messageHandlerFactory
+      };
       return _ret;
     }
     #endregion
@@ -48,8 +51,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
     {
       foreach (ProducerAssociation _item in AssociationsCollection.Values)
         CheckConsistency(_item);
-      foreach (MyMessageWriter _item in MessageHandlersCollection.Values)
-        _item.CheckConsistency();
+      ((MessageHandlerFactoryFixture)MessageHandlerFactory).AssertConsistency();
     }
     private void CheckConsistency(ProducerAssociation _item)
     {
@@ -103,7 +105,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
       }
       private ProducerAssociationConfiguration[] GetTransportAssociations()
       {
-        return new ProducerAssociationConfiguration[] { new ProducerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = UInt16.MaxValue } };
+        return new ProducerAssociationConfiguration[] { new ProducerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = ushort.MaxValue } };
       }
       private DataSetConfiguration[] GetAssociations()
       {
@@ -199,10 +201,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
     /// <value>The content mask represented as unsigned number <see cref="T:System.UInt64" />. The order of the bits starting from the least significant
     /// bit matches the order of the data items within the data set.</value>
     /// <exception cref="System.NotImplementedException"></exception>
-    public ulong ContentMask
-    {
-      get { throw new NotImplementedException(); }
-    }
+    public ulong ContentMask => throw new NotImplementedException();
     /// <summary>
     /// Sends the data described by a data set collection to remote destination.
     /// </summary>
@@ -222,7 +221,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
     {
       if (length > 2)
         throw new ArgumentOutOfRangeException("length");
-      m_Buffer = new Object[length];
+      m_Buffer = new object[length];
       for (int i = 0; i < 2; i++)
         m_Buffer[i] = producerBinding(i);
       m_HaveSendData = true;
@@ -259,7 +258,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest.Simulator
 
     private bool m_HaveBeenActivated = false;
     private bool m_HaveSendData;
-    private Object[] m_Buffer = null;
+    private object[] m_Buffer = null;
     #endregion
 
     #region private

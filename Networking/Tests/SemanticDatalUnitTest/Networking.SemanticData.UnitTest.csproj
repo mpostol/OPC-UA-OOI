@@ -26,7 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoWarn>IDE0001,IDE0002,IDE0003,,CS0067</NoWarn>
+    <NoWarn>IDE0001,IDE0002,IDE0003,,CS0067. IDE0049</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -77,6 +77,10 @@
     <Compile Include="Helpers\MyState.cs" />
     <Compile Include="Helpers\UABinaryDecoderImplementation.cs" />
     <Compile Include="Helpers\UABinaryEncoderImplementation.cs" />
+    <Compile Include="MessageHandlerFactory\BinaryDataTransferGraphBaseFixture.cs" />
+    <Compile Include="MessageHandlerFactory\BinaryDataTransferGraphReceiverFixture.cs" />
+    <Compile Include="MessageHandlerFactory\BinaryDataTransferGraphSenderFixture.cs" />
+    <Compile Include="MessageHandlerFactory\MessageHandlerFactoryFixture.cs" />
     <Compile Include="Simulator\ConsumerDeviceSimulator.cs" />
     <Compile Include="Simulator\CustomNodeManager.cs" />
     <Compile Include="Simulator\OPCUAServerSimulator.cs" />
@@ -136,6 +140,7 @@
     <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
     <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

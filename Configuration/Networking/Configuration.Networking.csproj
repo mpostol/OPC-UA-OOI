@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>UAOOI.Configuration.Networking</AssemblyName>
     <RootNamespace>UAOOI.Configuration.Networking</RootNamespace>
-    <Version>4.0.0</Version>
+    <Version>4.0.0-alfa</Version>
     <id>UAOOI.Configuration.Networking</id>
     <title>UAOOI.Configuration.Networking - UA Data Application Configuration</title>
     <authors>MPostol</authors>

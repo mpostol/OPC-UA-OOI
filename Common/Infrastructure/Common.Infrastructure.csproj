@@ -52,6 +52,7 @@
     <PackageTags>Object Oriented Internet, IoT, OPC UA, CommServer</PackageTags>
     <RepositoryType>GitHub</RepositoryType>
     <Company>commsvr.com</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>

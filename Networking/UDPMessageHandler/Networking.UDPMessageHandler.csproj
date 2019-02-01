@@ -18,6 +18,7 @@
     <Company>commsvr.com</Company>
     <Authors>MPostol</Authors>
     <AssemblyVersion>4.0.1.1</AssemblyVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

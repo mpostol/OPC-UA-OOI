@@ -16,7 +16,7 @@ The library provides an abstraction over any OPC UA Server configuration plug-in
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

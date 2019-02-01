@@ -20,6 +20,7 @@
     <PackageReleaseNotes>Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may simply replace this library by a custom one providing unlimited encoding functionality.
 </PackageReleaseNotes>
     <AssemblyVersion>4.0.1.1</AssemblyVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   
   </PropertyGroup>
 

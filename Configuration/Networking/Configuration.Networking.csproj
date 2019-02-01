@@ -25,7 +25,7 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.
     <copyright>Copyright MPostol (c) 2018</copyright>
     <tags>Object Oriented Internet, OPC UA, CommServer, ASMD, Address Space Model Designer.</tags>
     <Company>commsvr.com</Company>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>

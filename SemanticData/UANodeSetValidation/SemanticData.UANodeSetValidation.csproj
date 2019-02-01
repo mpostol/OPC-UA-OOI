@@ -21,6 +21,7 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Object Oriented Internet, OPC UA, Information Model</PackageTags>
     <AssemblyVersion>4.0.1.1</AssemblyVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

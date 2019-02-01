@@ -17,7 +17,7 @@
     <Product>Object Oriented Internet</Product>
     <Company>commsvr.com</Company>
     <Authors>MPostol</Authors>
-    <AssemblyVersion>4.0.1.*</AssemblyVersion>
+    <AssemblyVersion>4.0.1.1</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>

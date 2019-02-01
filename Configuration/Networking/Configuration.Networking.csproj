@@ -34,7 +34,7 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <Product>Object Oriented Internet</Product>
-    <AssemblyVersion>4.0.1.*</AssemblyVersion>
+    <AssemblyVersion>4.0.1.1</AssemblyVersion>
 
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

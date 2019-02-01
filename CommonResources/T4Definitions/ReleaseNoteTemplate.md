@@ -1,72 +1,77 @@
 ﻿
-# OPC Unified Architecture - Object Oriented Internet
-
-This project is aimed to workout deliverables supporting strong typed Process Data handling over the Internet. It contains example applications and class libraries.
-
-This framework class library is a library of classes, interfaces, and value types that provide access to supported OPC UA Data processing functionality. The documentation of the library code is available on-line at:
+### This release:
 
 * [API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
+* [Object Oriented Internet eBook](https://commsvr.gitbook.io/ooi)
 
-The namespaces in the class library are as follows and documented in detail in this release notes.
+The main changes and new functionalities:
 
-* `UAOOI.SemanticData`
-* `UAOOI.DataBindings`
+1. .NET Standard implementation
+2. Documentation improved
+3. New code help documentation available
+4. Tested against Xamarin.Android [CrossHMI](https://drutol.github.io/ReactiveNetworking.CrossHMI/)
 
-## Library UAOOI.SemanticData
+## Packages
 
-### Introduction
+### Common
 
-Main aim of this namespace is to support engineering of data processing in context of the data semantics at all the stages of this process to manipulate the data meaningfully outside the OPC UA Server.
+Version: **4.0.1**
 
-### Deliverables
+The main changes and new functionalities:
 
-#### UA Data Example Application
+_ 
 
-The description of this application is available at: [UA Data Example Application](../../Networking/ReferenceApplication).
+NuGet packages published:
 
-The installation package is available at: http://www.commsvr.com/COInstal/UANetworking/uand.html
+- `UAOOI.Common.Infrastructure.nupkg`
 
-This release contains modifications required to start interoperability testing against PubSub protocol version 1.10.
+### Configuration
 
-#### The library
+Version: **4.0.1**
 
-The most important projects for this library release are as follows:
+The main changes and new functionalities:
 
-* [OPC UA DataManagement Library](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticData/DataManagement#opc-ua-datamanagement-library)
-* [UA Data Networking Configuration](https://github.com/mpostol/OPC-UA-OOI/tree/master/Configuration/Networkingn#ua-data-networking-configuration)
-* [OPC UA NodeSet Validation](https://github.com/mpostol/OPC-UA-OOI/blob/master/SemanticData/UANodeSetValidation/README.MD#opc-ua-nodeset-validation)
+- 
 
-The Nuget packages are available at:
+NuGet packages published:
 
-* not yet released.
+- `UAOOI.Configuration.Core.4.0.1.nupkg`
+- `UAOOI.Configuration.DataBindings.4.0.1.nupkg`
+- `UAOOI.Configuration.Networking.4.0.1.nupkg`
 
-### Versions
+### SemanticData
 
-Current release:
+Version: **4.0.1**
 
-* Assembly Product:       Object Oriented Internet
-* Assembly Version:       4.0.1
+The main changes and new functionalities:
 
-# Library UAOOI.DataBindings
+- 
 
-### Introduction
+NuGet packages published:
 
-Data binding library contains classes, interfaces, and value types that may be used to define how the process data relates to the real world.
+- `UAOOI.SemanticData.InformationModelFactory.4.0.1.nupkg`
+- `UAOOI.SemanticData.UANodeSetValidation.4.0.1.nupkg`
 
-### Deliverables
+### Networking
 
-The most important projects for this library release are as follows:
+Version: **4.0.1**
 
-* [Data Bindings Solution Library](https://github.com/mpostol/OPC-UA-OOI/tree/master/DataBindingsSolution)
+The main changes and new functionalities:
 
-The NuGet package is available at:
+- Added Boiler simulator
+- `MessageHandling` has been decoupled 
 
-* [OPC UA DataBindings Library 1.0.15](https://www.nuget.org/packages/UAOOI.DataBindings/)
+NuGet packages published:
+- `UAOOI.Networking.Core.4.0.1.nupkg`
+- `UAOOI.Networking.Encoding.4.0.1.nupkg`
+- `UAOOI.Networking.SemanticData.4.0.1.nupkg`
+- `UAOOI.Networking.UDPMessageHandler.4.0.1.nupkg`
 
-### Versions
+PubSub Example Application
 
-* Assembly Product:       Object Oriented Internet
-* Assembly Version:       4.0.1
+- UAOOI.Networking.ReferenceApplication4.0.1.exe
+
+> This release contains modifications required to start interoperability testing against PubSub protocol version 1.10.
 
 ## Contact
 
@@ -76,5 +81,5 @@ Mariusz Postol
 [Contact](http://www.commsvr.com/tabid/85/language/en-US/Default.aspx)
 http://www.commsvr.com/
 
-Copyright (C) 2016, commsvr.com LODZ POLAND
+Copyright MPostol (c) 2019
 

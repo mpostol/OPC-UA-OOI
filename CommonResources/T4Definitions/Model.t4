@@ -12,6 +12,7 @@ string Email = "mpostol@cas.eu";
 string Phone = "+48 608 619 899";
 string Owner = "commsvr.com";
 string RepositoryVersion = "4.0.1"; //increment on the same position as the group version
+string RepositoryVersionPrerelease = ""; //increment on the same position as the group version
 string Authors = "MPostol";
 
 //UAOOI.Common

@@ -28,7 +28,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Networking\Configuration.Networking.csproj" />
+    <PackageReference Include="UAOOI.Configuration.Networking" Version="4.0.1" />
   </ItemGroup>
 
 </Project>

@@ -35,10 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Configuration\NetworkingUpgrade\Configuration.Networking.Upgrade.csproj" />
-    <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj" />
-    <ProjectReference Include="..\..\SemanticData\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj" />
     <ProjectReference Include="..\Core\Networking.Core.csproj" />
     <ProjectReference Include="..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj" />
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
@@ -58,6 +55,12 @@
 
   <ItemGroup>
     <Folder Include="bin\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="UAOOI.Common.Infrastructure" Version="4.0.1" />
+    <PackageReference Include="UAOOI.Configuration.Networking" Version="4.0.1" />
+    <PackageReference Include="UAOOI.SemanticData.UANodeSetValidation" Version="4.0.1" />
   </ItemGroup>
 
 </Project>

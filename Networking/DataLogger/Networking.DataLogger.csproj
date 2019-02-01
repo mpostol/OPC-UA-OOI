@@ -34,10 +34,10 @@
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.4" />
     <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />
+    <PackageReference Include="UAOOI.Configuration.Networking" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj" />
     <ProjectReference Include="..\Core\Networking.Core.csproj" />
     <ProjectReference Include="..\Encoding\Networking.Encoding.csproj" />
     <ProjectReference Include="..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj" />

@@ -55,9 +55,29 @@
       <HintPath>..\..\..\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.CodeDom, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.CodeDom.4.5.0\lib\net461\System.CodeDom.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.TraceSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Diagnostics.TraceSource.4.3.0\lib\net46\System.Diagnostics.TraceSource.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
+    <Reference Include="UAOOI.Common.Infrastructure, Version=4.0.1.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Common.Infrastructure.4.0.1\lib\netstandard2.0\UAOOI.Common.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="UAOOI.Configuration.Networking, Version=4.0.1.1, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Configuration.Networking.4.0.1\lib\netstandard2.0\UAOOI.Configuration.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UAOOI.SemanticData.InformationModelFactory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.SemanticData.InformationModelFactory.4.0.1\lib\netstandard2.0\UAOOI.SemanticData.InformationModelFactory.dll</HintPath>
+    </Reference>
+    <Reference Include="UAOOI.SemanticData.UANodeSetValidation, Version=4.0.1.1, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.SemanticData.UANodeSetValidation.4.0.1\lib\netstandard2.0\UAOOI.SemanticData.UANodeSetValidation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressSpace\BaseInstanceStateUnitTest.cs" />
@@ -93,21 +113,9 @@
     <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Infrastructure\Common.Infrastructure.csproj">
-      <Project>{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}</Project>
-      <Name>Common.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Configuration\NetworkingUpgrade\Configuration.Networking.Upgrade.csproj">
       <Project>{BEBE131A-C931-4C2C-9F9E-ED0D0B75DF26}</Project>
       <Name>Configuration.Networking.Upgrade</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Configuration\Networking\Configuration.Networking.csproj">
-      <Project>{E28E0880-03AA-4D1B-A820-41B04E766019}</Project>
-      <Name>Configuration.Networking</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\SemanticData\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj">
-      <Project>{352378a0-8b2e-4679-bb44-fd0bcc8467d9}</Project>
-      <Name>SemanticData.UANodeSetValidation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SemanticData\Networking.SemanticData.csproj">
       <Project>{7F4DED4E-5933-4229-B9CC-51DA49678904}</Project>
@@ -122,6 +130,9 @@
     <Content Include="CommonServiceLocatorInstrumentation\ConfigurationDataProducer.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Deploy\Producer.tml.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

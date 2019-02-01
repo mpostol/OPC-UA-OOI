@@ -81,6 +81,11 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.TraceSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Diagnostics.TraceSource.4.3.0\lib\net46\System.Diagnostics.TraceSource.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Reactive, Version=4.1.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Reactive.4.1.2\lib\net46\System.Reactive.dll</HintPath>
     </Reference>
@@ -115,6 +120,15 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UAOOI.Common.Infrastructure, Version=4.0.1.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.Common.Infrastructure.4.0.1\lib\netstandard2.0\UAOOI.Common.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="UAOOI.Configuration.Core, Version=4.0.1.1, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.Configuration.Core.4.0.1\lib\netstandard2.0\UAOOI.Configuration.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="UAOOI.Configuration.Networking, Version=4.0.1.1, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.Configuration.Networking.4.0.1\lib\netstandard2.0\UAOOI.Configuration.Networking.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -233,18 +247,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj">
-      <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
-      <Name>Common.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Configuration\Core\Configuration.Core.csproj">
-      <Project>{0a2fb856-d50c-463d-8218-063a36942188}</Project>
-      <Name>Configuration.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj">
-      <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
-      <Name>Configuration.Networking</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\Networking.Core.csproj">
       <Project>{AFCCA7C9-47FE-4FB6-935E-12D686EEC58F}</Project>
       <Name>Networking.Core</Name>

@@ -1,13 +1,19 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
-using UAOOI.Networking.SemanticData.Common;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;
-using UAOOI.Networking.SemanticData.MessageHandling;
+using UAOOI.Networking.SemanticData.UnitTest.MessageHandlerFactory;
 using UAOOI.Networking.SemanticData.UnitTest.Simulator;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
@@ -20,111 +26,82 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     [TestCategory("DataManagement_DataManagementSetup")]
     public void DataManagementSetupCreatorTestMethod()
     {
-      DataManagementSetup _ndm = new DataManagementSetup();
-      Assert.IsNotNull(_ndm);
-      Assert.IsNull(_ndm.BindingFactory);
-      Assert.IsNull(_ndm.ConfigurationFactory);
-      Assert.IsNull(_ndm.EncodingFactory);
-      Assert.IsNull(_ndm.MessageHandlerFactory);
+      using (DataManagementSetup _ndm = new DataManagementSetup())
+      {
+        Assert.IsNull(_ndm.BindingFactory);
+        Assert.IsNull(_ndm.ConfigurationFactory);
+        Assert.IsNull(_ndm.EncodingFactory);
+        Assert.IsNull(_ndm.MessageHandlerFactory);
+      }
     }
     [TestMethod]
     [TestCategory("DataManagement_DataManagementSetup")]
     public void InitializeTestMethod()
     {
-      TestDataManagementSetup _ndm = new TestDataManagementSetup();
-      Assert.IsNotNull(_ndm);
-      _ndm.BindingFactory = new BindingFactory();
-      _ndm.ConfigurationFactory = new ConfigurationFactory();
-      _ndm.EncodingFactory = new EncodingFactory();
-      _ndm.MessageHandlerFactory = new MessageHandlerFactory();
-      _ndm.TestStart();
-      Assert.AreEqual<int>(3, _ndm.MessageHandlersCollection.Count);
-      Assert.AreEqual<int>(0, _ndm.MessageHandlersCollection.Values.Cast<MessageHandlerFactory.MessageReader>().First().AttachToNetworkCalled);
-      Assert.AreEqual<int>(1, _ndm.MessageHandlersCollection.Values.Cast<MessageHandlerFactory.MessageReader>().First().StateCalled);
+      using (DataManagementSetupTest _ndm = new DataManagementSetupTest
+      {
+        BindingFactory = new BindingFactory(),
+        ConfigurationFactory = new ConfigurationFactory(),
+        EncodingFactory = new EncodingFactory(),
+        MessageHandlerFactory = new MessageHandlerFactoryTest()
+      }
+              )
+      {
+        Assert.IsNull(_ndm.MessageHandlersCollection);
+        _ndm.TestStart();
+        Assert.AreEqual<int>(3, _ndm.MessageHandlersCollection.Count());
+        _ndm.Dispose();
+        ((MessageHandlerFactoryTest)_ndm.MessageHandlerFactory).AssertConsistency();
+      }
     }
     [TestMethod]
     [TestCategory("DataManagement_DataManagementSetup")]
     [ExpectedException(typeof(ArgumentNullException))]
     public void RunTestMethod()
     {
-      TestDataManagementSetup _ndm = new TestDataManagementSetup();
-      Assert.IsNotNull(_ndm);
-      _ndm.TestStart();
+      using (DataManagementSetupTest _ndm = new DataManagementSetupTest())
+        _ndm.TestStart();
     }
-    private class MessageHandlerFactory : IMessageHandlerFactory
+
+    #region instrumentation
+    private class DataManagementSetupTest : DataManagementSetup
     {
-      public IMessageReader GetIMessageReader(string name, string configuration, IUADecoder uaDecoder)
+      internal void TestStart()
       {
-        return new MessageReader();
+        base.Start();
       }
-      public IMessageWriter GetIMessageWriter(string name, string configuration, IUAEncoder uaEncoder)
+    }
+    private class MessageHandlerFactoryTest : MessageHandlerFactoryFixture
+    {
+      protected override BinaryDataTransferGraphReceiverFixture NewBinaryDataTransferGraphReceiverFixture()
+      {
+        return new DTGReceiverTest(); ;
+      }
+      protected override BinaryDataTransferGraphSenderFixture NewBinaryDataTransferGraphSenderFixture()
       {
         throw new NotImplementedException();
       }
-      internal class MessageReader : IMessageReader
+      internal override void AssertConsistency()
       {
-        public IAssociationState State
-        {
-          get
-          {
-            StateCalled = Progress++;
-            return new AssociationState();
-          }
-        }
-        public void AttachToNetwork()
-        {
-          AttachToNetworkCalled = Progress++;
-        }
-        public event EventHandler<MessageEventArg> ReadMessageCompleted;
-        public void UpdateMyValues(Func<int, IConsumerBinding> update, int length)
-        {
-          throw new NotImplementedException();
-        }
-        public bool CheckDestination(uint dataId)
-        {
-          throw new NotImplementedException();
-        }
-        public void Dispose()
-        {
-          throw new NotImplementedException();
-        }
-        public ulong ContentMask
-        {
-          get { throw new NotImplementedException(); }
-        }
-
-        #region testing instrumentation
-        private class AssociationState : IAssociationState
-        {
-          public HandlerState State => HandlerState.Operational;
-          public void Disable()
-          {
-            throw new NotImplementedException();
-          }
-          public void Enable()
-          {
-            ;
-          }
-        }
-        internal int Progress = 0;
-        internal int AttachToNetworkCalled = -1;
-        internal int StateCalled = -1;
-        #endregion
+        Assert.AreEqual<int>(3, MessageHandlerFactoryFixture.BinaryDataTransferGraphReceiverFixtureList.Count);
+        Assert.AreEqual<int>(3, MessageHandlerFactoryFixture.BinaryDataTransferGraphReceiverFixtureList.
+          Cast<BinaryDataTransferGraphReceiverFixture>().
+          Where<BinaryDataTransferGraphReceiverFixture>((x) => { x.AssertConsistency(); return true; }).Count());
+      }
+    }
+    private class DTGReceiverTest : BinaryDataTransferGraphReceiverFixture
+    {
+      internal override void AssertConsistency()
+      {
+        Assert.AreEqual<int>(1, base.NumberOfAttachToNetwork);
+        Assert.AreEqual<int>(1, base.DisposeCount);
+        Assert.AreEqual<HandlerState>(HandlerState.Operational, base.State.State);
       }
     }
     private class EncodingFactory : IEncodingFactory
     {
-      public IUADecoder UADecoder
-      {
-        get { return m_IUADecoder; }
-      }
-      public IUAEncoder UAEncoder
-      {
-        get
-        {
-          throw new NotImplementedException();
-        }
-      }
+      public IUADecoder UADecoder { get; } = new Helpers.UABinaryDecoderImplementation();
+      public IUAEncoder UAEncoder => throw new NotImplementedException();
       public void UpdateValueConverter(IBinding binding, string repositoryGroup, UATypeInfo sourceEncoding)
       {
         binding.Converter = null;
@@ -132,8 +109,6 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         binding.Parameter = null;
         Assert.IsNotNull(binding);
       }
-      private IUADecoder m_IUADecoder = new Helpers.UABinaryDecoderImplementation();
-
     }
     private class ConfigurationFactory : IConfigurationFactory
     {
@@ -167,14 +142,11 @@ namespace UAOOI.Networking.SemanticData.UnitTest
         {
           set { }
         }
-        public UATypeInfo Encoding
-        {
-          get { return null; }
-        }
+        public UATypeInfo Encoding => null;
         public object Parameter
         {
           set { }
-          get { return null; }
+          get => null;
         }
         public System.Globalization.CultureInfo Culture
         {
@@ -193,13 +165,8 @@ namespace UAOOI.Networking.SemanticData.UnitTest
       }
 
     }
-    private class TestDataManagementSetup : DataManagementSetup
-    {
-      internal void TestStart()
-      {
-        base.Start();
-      }
-    }
+    #endregion
+
   }
 
 }

@@ -1,8 +1,13 @@
-﻿
-using System;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.Networking.SemanticData.Encoding;
-using UAOOI.Networking.SemanticData.MessageHandling;
+using System;
+using UAOOI.Networking.SemanticData.UnitTest.MessageHandlerFactory;
 using UAOOI.Networking.SemanticData.UnitTest.Simulator;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
@@ -18,78 +23,48 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     public void CreatorTestMethod()
     {
       Guid _dataSetGuid = Guid.NewGuid();
-      MyMessageHandlerFactory _mhf = new MyMessageHandlerFactory(_dataSetGuid);
-      OPCUAServerProducerSimulator _producer = OPCUAServerProducerSimulator.CreateDevice(_mhf, _dataSetGuid);
-      Assert.IsNull(_producer.AssociationsCollection);
-      Assert.IsNotNull(_producer.BindingFactory);
-      Assert.IsNotNull(_producer.ConfigurationFactory);
-      Assert.IsNotNull(_producer.EncodingFactory);
-      Assert.IsNotNull(_producer.MessageHandlerFactory);
-      Assert.IsNull(_producer.MessageHandlersCollection);
-      _producer.TestStart();
-      Assert.AreEqual<int>(1, _producer.AssociationsCollection.Count);
-      Assert.AreEqual<int>(1, _producer.MessageHandlersCollection.Count);
-      ((OPCUAServerProducerSimulator)_producer).CheckConsistency();
-      _mhf.CheckConsistency();
-      ((OPCUAServerProducerSimulator)_producer).Update("Value1", "Value1");
-    }
-    [TestMethod]
-    [TestCategory("DataManagement_ConsumerDeviceSimulator")]
-    public void MessageHandlerFactoryCreatorReadTestMethod()
-    {
-      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(Guid.NewGuid());
-      Assert.IsNotNull(_nmf);
-      IMessageWriter _nmr = _nmf.GetIMessageWriter("UDP", "4840,localhost", null);
-      Assert.IsNotNull(_nmr);
-    }
-    [TestMethod]
-    [TestCategory("DataManagement_ConsumerDeviceSimulator")]
-    [ExpectedException(typeof(NotImplementedException))]
-    public void MessageHandlerFactoryCreatorWriteTestMethod()
-    {
-      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(Guid.NewGuid());
-      Assert.IsNotNull(_nmf);
-      IMessageReader _nmr = _nmf.GetIMessageReader("UDP", null, null);
+      MessageHandlerFactoryTest _mhf = new MessageHandlerFactoryTest();
+      using (OPCUAServerProducerSimulator _producer = OPCUAServerProducerSimulator.CreateDevice(_mhf, _dataSetGuid))
+      {
+        Assert.IsNull(_producer.AssociationsCollection);
+        Assert.IsNotNull(_producer.BindingFactory);
+        Assert.IsNotNull(_producer.ConfigurationFactory);
+        Assert.IsNotNull(_producer.EncodingFactory);
+        Assert.IsNotNull(_producer.MessageHandlerFactory);
+        Assert.IsNull(_producer.MessageHandlersCollection);
+        _producer.TestStart();
+        Assert.AreEqual<int>(1, _producer.AssociationsCollection.Count);
+        Assert.AreEqual<int>(1, _producer.MessageHandlersCollection.Count);
+        _producer.CheckConsistency();
+        _mhf.AssertConsistency();
+        _producer.Update("Value1", "Value1");
+      }
     }
     #endregion
 
     #region private
-    private class MyMessageHandlerFactory : IMessageHandlerFactory
+    private class MessageHandlerFactoryTest : MessageHandlerFactoryFixture
     {
 
-      #region creator
-      public MyMessageHandlerFactory(Guid dataSetGuid)
-      {
-        this.MessageWriter = new MyMessageWriter(dataSetGuid);
-      }
-      #endregion
-
-      #region IMessageHandlerFactory
-      public MessageHandling.IMessageReader GetIMessageReader(string name, string configuration, IUADecoder uaDecoder)
+      #region MessageHandlerFactoryFixture
+      protected override BinaryDataTransferGraphReceiverFixture NewBinaryDataTransferGraphReceiverFixture()
       {
         throw new NotImplementedException();
       }
-      public MessageHandling.IMessageWriter GetIMessageWriter(string name, string configuration, IUAEncoder uaEncoder)
+      protected override BinaryDataTransferGraphSenderFixture NewBinaryDataTransferGraphSenderFixture()
       {
-        Assert.AreEqual("UDP", name);
-        Assert.AreEqual<string>("4840,localhost", configuration);
-        return MessageWriter;
+        return new BinaryDataTransferGraphSenderTest();
+      }
+      internal override void AssertConsistency()
+      {
+        Assert.AreEqual<int>(0, BinaryDataTransferGraphReceiverFixtureList.Count);
+        Assert.AreEqual<int>(1, BinaryDataTransferGraphSenderFixtureList.Count);
       }
       #endregion
 
-      #region private
-      private IMessageWriter MessageWriter { get; set; }
-      #endregion
-
-      #region test environment
-      internal void CheckConsistency()
-      {
-        Assert.IsNotNull(MessageWriter);
-      }
-      #endregion
+      private class BinaryDataTransferGraphSenderTest : BinaryDataTransferGraphSenderFixture { }
 
     }
-
     #endregion
 
   }

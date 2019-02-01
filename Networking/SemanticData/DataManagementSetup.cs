@@ -10,6 +10,7 @@ using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData.MessageHandling;
 using UAOOI.Networking.SemanticData.Diagnostics;
+using UAOOI.Networking.Core;
 
 namespace UAOOI.Networking.SemanticData
 {

@@ -1,4 +1,11 @@
-﻿using CommonServiceLocator;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+using CommonServiceLocator;
 using System;
 using System.ComponentModel.Composition;
 using System.IO;
@@ -12,7 +19,7 @@ namespace UAOOI.Configuration.DataBindings
   /// Class UANetworkingConfigurationEditor - 
   /// </summary>
   [Export(typeof(IConfiguration))]
-  public sealed class UANetworkingConfigurationEditor : ConfigurationBase<ConfigurationData>, IDisposable
+  public sealed class UANetworkingConfigurationEditor : ConfigurationBase<ConfigurationData>
   {
 
     #region API
@@ -25,13 +32,6 @@ namespace UAOOI.Configuration.DataBindings
       DefaultConfigurationLoader = NewConfigurationData;
       CreateDefaultConfiguration();
     }
-
-    #region IDisposable
-    /// <summary>
-    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-    /// </summary>
-    public void Dispose() { }
-    #endregion
 
     #region ConfigurationBase
     /// <summary>
@@ -139,4 +139,5 @@ namespace UAOOI.Configuration.DataBindings
     #endregion
 
   }
+
 }

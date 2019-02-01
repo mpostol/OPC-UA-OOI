@@ -1,8 +1,14 @@
-﻿
+﻿//____________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//____________________________________________________________________________
+
 using System;
 using System.Xml;
 using UAOOI.Configuration.Networking.Serialization;
-using UAOOI.Networking.SemanticData.Common;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;
 

@@ -6,7 +6,7 @@
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <RootNamespace>UAOOI.Networking.DataLogger</RootNamespace>
     <AssemblyName>UAOOI.Networking.DataLogger</AssemblyName>
-    <Version>4.0.0</Version>
+    <Version>4.0.1</Version>
     <Authors>MPostol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
@@ -17,6 +17,7 @@
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Object Oriented Internet, OPC UA, Reactive Networking.</PackageTags>
+    <AssemblyVersion>4.0.1.*</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -31,12 +32,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommonServiceLocator" Version="2.0.3" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.4" />
     <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj" />
+    <ProjectReference Include="..\Core\Networking.Core.csproj" />
     <ProjectReference Include="..\Encoding\Networking.Encoding.csproj" />
     <ProjectReference Include="..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj" />
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />

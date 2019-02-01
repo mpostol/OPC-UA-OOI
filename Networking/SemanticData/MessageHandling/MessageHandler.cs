@@ -1,4 +1,11 @@
-﻿using UAOOI.Networking.SemanticData.Common;
+﻿//____________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//____________________________________________________________________________
+
+using UAOOI.Networking.Core;
 
 namespace UAOOI.Networking.SemanticData.MessageHandling
 {
@@ -15,7 +22,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// Gets the state machine for the the <see cref="IMessageHandler" /> instance.
     /// </summary>
     /// <value>An object of <see cref="IAssociationState" /> providing implementation of the state machine governing this instance behavior.</value>
-    public abstract IAssociationState State { get; protected set; }
+    public abstract IAssociationState State { get; set; }
     /// <summary>
     /// Gets the content mask. The content mast read from the message or provided by the writer.
     /// The order of the bits starting from the least significant bit matches the order of the data items

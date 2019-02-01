@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>UAOOI.Networking.Simulator.Boiler</RootNamespace>
     <AssemblyName>UAOOI.Networking.Simulator.Boiler</AssemblyName>
-    <Version>4.0.0</Version>
+    <Version>4.0.1</Version>
     <Authors>MPostol</Authors>
     <Company>commsvr.com</Company>
     <Description>Simulator of a set of boilers used to produce steam for a turbine.</Description>
@@ -17,6 +17,7 @@
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyVersion>4.0.1.*</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -34,6 +35,7 @@
     <ProjectReference Include="..\..\Configuration\NetworkingUpgrade\Configuration.Networking.Upgrade.csproj" />
     <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj" />
     <ProjectReference Include="..\..\SemanticData\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj" />
+    <ProjectReference Include="..\Core\Networking.Core.csproj" />
     <ProjectReference Include="..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj" />
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
   </ItemGroup>

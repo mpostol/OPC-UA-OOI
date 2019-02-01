@@ -26,7 +26,7 @@
     <AssemblyName>UAOOI.Common.Infrastructure</AssemblyName>
     <RootNamespace>UAOOI.Common.Infrastructure</RootNamespace>
     <PackageId>UAOOI.Common.Infrastructure</PackageId>
-    <Version>4.0.0</Version>
+    <Version>4.0.1</Version>
     <title>Common Infrastructure Management Functionality Aimed at Object Oriented Internet</title>
     <authors>MPostol</authors>
     <owners>cas.eu; commsvr.com</owners>

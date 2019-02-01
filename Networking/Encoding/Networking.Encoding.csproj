@@ -6,7 +6,7 @@
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>UAOOI.Networking.Encoding</AssemblyName>
     <RootNamespace>UAOOI.Networking.Encoding</RootNamespace>
-    <Version>4.0.0</Version>
+    <Version>4.0.1</Version>
     <Authors>MPostol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
@@ -17,9 +17,10 @@
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
-    <PackageReleaseNotes>Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation.
-In the production environment, you may simply replace this library by a custom one providing unlimited encoding functionality. 
+    <PackageReleaseNotes>Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may simply replace this library by a custom one providing unlimited encoding functionality.
 </PackageReleaseNotes>
+    <AssemblyVersion>4.0.1.*</AssemblyVersion>
+  
   </PropertyGroup>
 
   <ItemGroup>

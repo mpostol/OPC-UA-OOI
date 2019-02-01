@@ -5,7 +5,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>UAOOI.Configuration.DataBindings</AssemblyName>
     <RootNamespace>UAOOI.Configuration.DataBindings</RootNamespace>
-    <Version>4.0.0</Version>
+    <Version>4.0.1</Version>
     <Authors>commsvr.com</Authors>
     <Product>Object Oriented Internet</Product>
     <Description>OPC UA Object Oriented Internet (UAOOI) DataBindings library is dedicated to create a plug-in aimed at editing of the configuration of any application based on OPC UA Information Model.
@@ -19,6 +19,7 @@ It allows also to add data binding to the configuration. It is part of the proje
     <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyVersion>4.0.1.*</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,7 +27,7 @@ It allows also to add data binding to the configuration. It is part of the proje
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommonServiceLocator" Version="2.0.3" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.4" />
     <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />
   </ItemGroup>
 

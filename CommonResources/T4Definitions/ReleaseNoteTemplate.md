@@ -45,7 +45,7 @@ The Nuget packages are available at:
 Current release:
 
 * Assembly Product:       Object Oriented Internet
-* Assembly Version:       4.0.0
+* Assembly Version:       4.0.1
 
 # Library UAOOI.DataBindings
 
@@ -66,7 +66,7 @@ The NuGet package is available at:
 ### Versions
 
 * Assembly Product:       Object Oriented Internet
-* Assembly Version:       4.0.0
+* Assembly Version:       4.0.1
 
 ## Contact
 

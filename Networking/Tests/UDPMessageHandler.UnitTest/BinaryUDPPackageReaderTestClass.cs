@@ -1,10 +1,15 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Net;
+using System.Net.Sockets;
 using System.Threading;
-using System.Xml;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Networking.UDPMessageHandler.Configuration;
 
 namespace UAOOI.Networking.UDPMessageHandler.UnitTest
@@ -19,13 +24,13 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest
     [TestCategory("ReferenceApplication_BinaryUDPPackageReaderTestClass")]
     public void CreatorTestMethod()
     {
-      using (BinaryUDPPackageReader _reader1 = new BinaryUDPPackageReader(new UADecoder(), LocalUDPConfiguration.GetReaderConfiguration()))
+      using (BinaryUDPPackageReader _reader1 = new BinaryUDPPackageReader(LocalUDPConfiguration.GetReaderConfiguration()))
       {
         Assert.IsNotNull(_reader1);
         _reader1.State.Enable();
         Assert.IsNotNull(_reader1.MulticastGroup);
       }
-      using (BinaryUDPPackageReader _reader1 = new BinaryUDPPackageReader(new UADecoder(), LocalUDPConfiguration.GetReaderConfiguration()))
+      using (BinaryUDPPackageReader _reader1 = new BinaryUDPPackageReader(LocalUDPConfiguration.GetReaderConfiguration()))
       {
         Assert.IsNotNull(_reader1);
         _reader1.State.Enable();
@@ -36,12 +41,12 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest
     public void ExclusiveAddressUseTrueTestMethod()
     {
       bool _ExclusiveAddressUse = true;
-      using (BinaryUDPPackageReader _reader1 = new BinaryUDPPackageReader(new UADecoder(), LocalUDPConfiguration.GetReaderConfiguration()))
+      using (BinaryUDPPackageReader _reader1 = new BinaryUDPPackageReader(LocalUDPConfiguration.GetReaderConfiguration()))
       {
         Assert.IsNotNull(_reader1);
         _reader1.ReuseAddress = _ExclusiveAddressUse;
         _reader1.State.Enable();
-        using (BinaryUDPPackageReader _reader2 = new BinaryUDPPackageReader(new UADecoder(), LocalUDPConfiguration.GetReaderConfiguration()))
+        using (BinaryUDPPackageReader _reader2 = new BinaryUDPPackageReader(LocalUDPConfiguration.GetReaderConfiguration()))
         {
           Assert.IsNotNull(_reader2);
           _reader2.ReuseAddress = _ExclusiveAddressUse;
@@ -51,15 +56,15 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest
     }
     [TestMethod]
     [TestCategory("ReferenceApplication_BinaryUDPPackageReaderTestClass")]
-    [ExpectedException(typeof(System.Net.Sockets.SocketException))]
+    [ExpectedException(typeof(SocketException))]
     public void ExclusiveAddressUseFalseTestMethod()
     {
       bool _ExclusiveAddressUse = false;
-      using (BinaryUDPPackageReader _reader1 = new BinaryUDPPackageReader(new UADecoder(), LocalUDPConfiguration.GetReaderConfiguration()))
+      using (BinaryUDPPackageReader _reader1 = new BinaryUDPPackageReader(LocalUDPConfiguration.GetReaderConfiguration()))
       {
         _reader1.ReuseAddress = _ExclusiveAddressUse;
         _reader1.State.Enable();
-        using (BinaryUDPPackageReader _reader2 = new BinaryUDPPackageReader(new UADecoder(), LocalUDPConfiguration.GetReaderConfiguration()))
+        using (BinaryUDPPackageReader _reader2 = new BinaryUDPPackageReader(LocalUDPConfiguration.GetReaderConfiguration()))
         {
           _reader2.ReuseAddress = _ExclusiveAddressUse;
           _reader2.State.Enable();
@@ -72,7 +77,7 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest
     public void ExclusiveAddressOperationalTestMethod()
     {
       bool _ExclusiveAddressUse = true;
-      using (BinaryUDPPackageReader _reader1 = new BinaryUDPPackageReader(new UADecoder(), LocalUDPConfiguration.GetReaderConfiguration()))
+      using (BinaryUDPPackageReader _reader1 = new BinaryUDPPackageReader(LocalUDPConfiguration.GetReaderConfiguration()))
       {
         _reader1.ReuseAddress = _ExclusiveAddressUse;
         _reader1.State.Enable();
@@ -84,7 +89,7 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest
     [ExpectedException(typeof(InvalidOperationException))]
     public void ExclusiveMulticastGroupTestMethod()
     {
-      using (BinaryUDPPackageReader _reader1 = new BinaryUDPPackageReader(new UADecoder(), LocalUDPConfiguration.GetReaderConfiguration()))
+      using (BinaryUDPPackageReader _reader1 = new BinaryUDPPackageReader(LocalUDPConfiguration.GetReaderConfiguration()))
       {
         try
         {
@@ -102,69 +107,6 @@ namespace UAOOI.Networking.UDPMessageHandler.UnitTest
     #endregion
 
     #region test instrumentation
-    private class UADecoder : IUADecoder
-    {
-      public Array ReadArray<type>(IBinaryDecoder decoder, Func<type> readValue, bool arrayDimensionsPresents)
-      {
-        throw new NotImplementedException();
-      }
-      public byte[] ReadByteString(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public IDataValue ReadDataValue(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public DateTime ReadDateTime(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public IDiagnosticInfo ReadDiagnosticInfo(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public IExpandedNodeId ReadExpandedNodeId(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public IExtensionObject ReadExtensionObject(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public Guid ReadGuid(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public ILocalizedText ReadLocalizedText(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public INodeId ReadNodeId(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public IQualifiedName ReadQualifiedName(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public IStatusCode ReadStatusCode(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public string ReadString(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public IVariant ReadVariant(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-      public XmlElement ReadXmlElement(IBinaryDecoder decoder)
-      {
-        throw new NotImplementedException();
-      }
-    }
     private static class LocalUDPConfiguration
     {
       internal static UDPReaderConfiguration GetReaderConfiguration()

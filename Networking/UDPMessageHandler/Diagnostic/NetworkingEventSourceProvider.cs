@@ -1,7 +1,13 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System.ComponentModel.Composition;
 using System.Diagnostics.Tracing;
-using UAOOI.Networking.SemanticData.Diagnostics;
+using UAOOI.Networking.Core;
 
 namespace UAOOI.Networking.UDPMessageHandler.Diagnostic
 {

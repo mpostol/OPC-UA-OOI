@@ -1,8 +1,13 @@
-﻿
-using System;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.Networking.SemanticData.Encoding;
-using UAOOI.Networking.SemanticData.MessageHandling;
+using System;
+using UAOOI.Networking.SemanticData.UnitTest.MessageHandlerFactory;
 using UAOOI.Networking.SemanticData.UnitTest.Simulator;
 
 namespace UAOOI.Networking.SemanticData.UnitTest
@@ -12,91 +17,45 @@ namespace UAOOI.Networking.SemanticData.UnitTest
   public class ConsumerDeviceSimulatorUnitTest
   {
 
-    #region test part
     [TestMethod]
     [TestCategory("DataManagement_ConsumerDeviceSimulator")]
     public void ConsumerDeviceSimulatorTestMethod()
     {
-      UInt32 DataSetGuid = UInt32.MaxValue;
-      MyMessageHandlerFactory _mhf = new MyMessageHandlerFactory(DataSetGuid);
-      ConsumerDeviceSimulator _consumer = ConsumerDeviceSimulator.CreateDevice(_mhf, DataSetGuid);
-      Assert.IsNull(_consumer.AssociationsCollection);
-      Assert.IsNotNull(_consumer.BindingFactory);
-      Assert.IsNotNull(_consumer.ConfigurationFactory);
-      Assert.IsNotNull(_consumer.EncodingFactory);
-      Assert.IsNotNull(_consumer.MessageHandlerFactory);
-      Assert.IsNull(_consumer.MessageHandlersCollection);
-      _consumer.InitializeAndRun();
-      Assert.AreEqual<int>(1, _consumer.AssociationsCollection.Count);
-      Assert.AreEqual<int>(1, _consumer.MessageHandlersCollection.Count);
-      ((ConsumerDeviceSimulator)_consumer).CheckConsistency();
-      _mhf.CheckConsistency();
-      _mhf.SendData();
-    }
-    [TestMethod]
-    [TestCategory("DataManagement_ConsumerDeviceSimulator")]
-    public void MessageHandlerFactoryCreatorReadTestMethod()
-    {
-      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(UInt32.MaxValue);
-      Assert.IsNotNull(_nmf);
-      IMessageReader _nmr = _nmf.GetIMessageReader("UDP", null, new Helpers.UABinaryDecoderImplementation());
-      Assert.IsNotNull(_nmr);
-    }
-    [TestMethod]
-    [TestCategory("DataManagement_ConsumerDeviceSimulator")]
-    [ExpectedException(typeof(NotImplementedException))]
-    public void MessageHandlerFactoryCreatorWriteTestMethod()
-    {
-      IMessageHandlerFactory _nmf = new MyMessageHandlerFactory(UInt32.MaxValue);
-      Assert.IsNotNull(_nmf);
-      IMessageWriter _nmr = _nmf.GetIMessageWriter("UDP", null, null);
-    }
-    #endregion
-
-    #region private
-    private class MyMessageHandlerFactory : IMessageHandlerFactory
-    {
-
-      #region creator
-      internal MyMessageHandlerFactory(UInt32 dataSetGuid)
+      uint DataSetGuid = uint.MaxValue;
+      MessageHandlerFactoryTest _mhf = new MessageHandlerFactoryTest();
+      using (ConsumerDeviceSimulator _consumer = ConsumerDeviceSimulator.CreateDevice(_mhf, DataSetGuid))
       {
-        this.MyMessageReader = new MessageReader(dataSetGuid);
+        Assert.IsNull(_consumer.AssociationsCollection);
+        Assert.IsNotNull(_consumer.BindingFactory);
+        Assert.IsNotNull(_consumer.ConfigurationFactory);
+        Assert.IsNotNull(_consumer.EncodingFactory);
+        Assert.IsNotNull(_consumer.MessageHandlerFactory);
+        Assert.IsNull(_consumer.MessageHandlersCollection);
+        _consumer.InitializeAndRun();
+        Assert.AreEqual<int>(1, _consumer.AssociationsCollection.Count);
+        Assert.AreEqual<int>(1, _consumer.MessageHandlersCollection.Count);
+        _consumer.CheckConsistency();
       }
-      #endregion
+      _mhf.AssertConsistency();
+    }
 
-      #region IMessageHandlerFactory
-      public IMessageReader GetIMessageReader(string name, string configuration, IUADecoder uaDecoder)
+    private class MessageHandlerFactoryTest : MessageHandlerFactoryFixture
+    {
+
+      #region testing environment
+      protected override BinaryDataTransferGraphReceiverFixture NewBinaryDataTransferGraphReceiverFixture()
       {
-        Assert.AreEqual("UDP", name);
-        Assert.IsNull(configuration);
-        Assert.IsNotNull(uaDecoder);
-        return MyMessageReader;
+        return new BinaryDataTransferGraphReceiverTest();
       }
-      public IMessageWriter GetIMessageWriter(string name, string configuration, IUAEncoder uaEncoder)
+      protected override BinaryDataTransferGraphSenderFixture NewBinaryDataTransferGraphSenderFixture()
       {
         throw new NotImplementedException();
       }
       #endregion
 
-      #region testing environment
-      internal void CheckConsistency()
-      {
-        Assert.IsNotNull(MyMessageReader);
-      }
-      internal void SendData()
-      {
-        MyMessageReader.SendData();
-      }
-
-      #endregion
-
-      #region private
-      private MessageReader MyMessageReader { get; set; }
-      #endregion
-
+      private class BinaryDataTransferGraphReceiverTest : BinaryDataTransferGraphReceiverFixture { }
     }
-    #endregion
-
   }
-
 }
+
+

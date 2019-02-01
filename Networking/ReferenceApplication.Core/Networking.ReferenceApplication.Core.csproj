@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>UAOOI.Networking.ReferenceApplication.Core</AssemblyName>
     <RootNamespace>UAOOI.Networking.ReferenceApplication.Core</RootNamespace>
-    <Version>4.0.0</Version>
+    <Version>4.0.1</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <Product>Object Oriented Internet</Product>
@@ -20,6 +20,7 @@
 - MVVM pattern 
 
 - logging</Description>
+    <AssemblyVersion>4.0.1.*</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -25,6 +25,10 @@
     <NoWarn>1701;1702;1705;IDE0001,IDE0002,IDE0003</NoWarn>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;OPCUA_EXCLUDE_InitializationStrings</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Model\IBoilersSet.cs" />
     <Compile Remove="Model\tempuri.org.UA.Examples.BoilerType.Classes - Copy.cs" />

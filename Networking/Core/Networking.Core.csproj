@@ -15,11 +15,11 @@
     <NeutralLanguage></NeutralLanguage>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
-    <AssemblyVersion>4.0.0.0</AssemblyVersion>
-    <FileVersion>4.0.0.0</FileVersion>
+    <AssemblyVersion>4.0.1.*</AssemblyVersion>
+    <FileVersion>4.0.1.0</FileVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <Version>4.0.0-Bravo</Version>
+    <Version>4.0.1</Version>
   </PropertyGroup>
 
 </Project>

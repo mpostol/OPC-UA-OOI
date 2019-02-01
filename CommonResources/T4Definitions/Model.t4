@@ -11,34 +11,34 @@ string Url = "https://github.com/mpostol/OPC-UA-OOI";
 string Email = "mpostol@cas.eu";
 string Phone = "+48 608 619 899";
 string Owner = "commsvr.com";
-string RepositoryVersion = "4.0.0"; //increment on the same position as the group version
+string RepositoryVersion = "4.0.1"; //increment on the same position as the group version
 string Authors = "MPostol";
 
 //UAOOI.Common
 string CommonTitle = "UAOOI.DataDiscovery";
-string CommonVersion = "4.0.0";
-string CommonPrerelease = "-Alpha";
+string CommonVersion = "4.0.1";
+string CommonPrerelease = "";
 string CommonProduct = "Object Oriented Internet";
 
 //UAOOI.DataDiscovery
 string DataDiscoveryTitle = "UAOOI.DataDiscovery";
-string DataDiscoveryVersion = "4.0.0";
-string DataDiscoveryPrerelease = "-Alpha";
+string DataDiscoveryVersion = "4.0.1";
+string DataDiscoveryPrerelease = "";
 string DataDiscoveryProduct = "Object Oriented Internet";
 
 //UAOOI.SemanticData
-string SemanticDataVersion = "4.0.0";
-string SemanticDataPrerelease = "-Alpha";
+string SemanticDataVersion = "4.0.1";
+string SemanticDataPrerelease = "";
 string SemanticDataProduct = "Object Oriented Internet";
 
 //UAOOI.Configuration
-string ConfigurationVersion = "4.0.0";
-string ConfigurationPrerelease = "-Alpha";
+string ConfigurationVersion = "4.0.1";
+string ConfigurationPrerelease = "";
 string ConfigurationProduct = "Object Oriented Internet";
 
 //UAOOI.Networking
-string NetworkingDataVersion = "4.0.0";
-string NetworkingDataPrerelease = "-Alpha";
+string NetworkingDataVersion = "4.0.1";
+string NetworkingDataPrerelease = "";
 string NetworkingDataProduct = "Object Oriented Internet";
 
 //Note: 

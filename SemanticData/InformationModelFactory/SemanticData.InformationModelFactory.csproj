@@ -5,7 +5,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>UAOOI.SemanticData.InformationModelFactory</AssemblyName>
     <PackageId>UAOOI.SemanticData.InformationModelFactory</PackageId>
-    <Version>4.0.0</Version>
+    <Version>4.0.1</Version>
     <Authors>MPostol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
@@ -19,6 +19,7 @@
     <RootNamespace>UAOOI.SemanticData.InformationModelFactory</RootNamespace>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyVersion>4.0.1.*</AssemblyVersion>
   </PropertyGroup>
 
 </Project>

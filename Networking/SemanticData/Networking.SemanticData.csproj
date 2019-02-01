@@ -12,11 +12,12 @@
     <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
     <Copyright>Copyright MPostol (c) 2018</Copyright>
     <Description>SemanticData Reactive Networking  library based on OPC UA Part 14 Pub/Sub.</Description>
-    <Version>4.0.0-Alpha</Version>
+    <Version>4.0.1</Version>
     <Authors>MPostol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
-    <RootNamespace>UAOOI.Networking.SemanticData</RootNamespace> 
+    <RootNamespace>UAOOI.Networking.SemanticData</RootNamespace>
+    <AssemblyVersion>4.0.1.*</AssemblyVersion> 
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;1705;IDE0001;IDE002;IDE003</NoWarn>

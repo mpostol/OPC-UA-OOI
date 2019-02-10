@@ -10,7 +10,7 @@
 
 ### What is Object Oriented Internet
 
-In this project, C\# deliverables supporting a new Machine To Machine \(M2M\) communication architecture is to be researched. The goal is to provide a generic solution for publishing and updating information in a context that can be used to describe and discover it by software applications. It is implemented based on the [OPC Unified Architecture](http://goo.gl/y4EHUn) - a new emerging industrial integration standard that fulfills the proposed architecture requirements.
+In this project, C\# deliverables supporting a new Machine To Machine \(M2M\) communication approach based on the **Data-Oriented Architecture** paradigm is to be researched. The goal is to provide a generic solution for publishing and updating information in a context that can be used to describe and discover it by software applications. It is implemented based on the [OPC Unified Architecture](http://goo.gl/y4EHUn) - a newly emerging industrial integration standard that fulfills the proposed architecture requirements.
 
 The [Object Oriented Internet](https://fedcsis.org/proceedings/2015/pliks/160.pdf) article published in **Proceedings of the Federated Conference on Computer Science and Information Systems** captures description of this idea.
 

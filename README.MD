@@ -4,7 +4,7 @@
 
 [![Join the chat at https://gitter.im/mpostol/OPC-UA-OOI](https://badges.gitter.im/mpostol/OPC-UA-OOI.svg)](https://gitter.im/mpostol/OPC-UA-OOI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) - join the project chat
 
-[![DOI](https://zenodo.org/badge/33917970.svg)](https://zenodo.org/badge/latestdoi/33917970)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2555407.svg)](https://doi.org/10.5281/zenodo.2555407)
 
 ## CHARTER
 

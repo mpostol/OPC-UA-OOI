@@ -75,4 +75,4 @@ Replace [year] with the current year and [Target Part Name] with the name (or na
 - [About me on LinkedIn](https://pl.linkedin.com/in/mpostol)
 - [OPC Foundation](https://opcfoundation.org/)
 - [Sponsored by commsvr.com](http://www.commsvr.com/)
-
+[![HitCount](http://hits.dwyl.io/mpostol/mpostol/OPC-UA-OOI.svg)](http://hits.dwyl.io/mpostol/mpostol/OPC-UA-OOI)

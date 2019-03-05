@@ -4,7 +4,8 @@
 
 [![Join the chat at https://gitter.im/mpostol/OPC-UA-OOI](https://badges.gitter.im/mpostol/OPC-UA-OOI.svg)](https://gitter.im/mpostol/OPC-UA-OOI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) - join the project chat
 
-[![DOI](https://zenodo.org/badge/33917970.svg)](https://zenodo.org/badge/latestdoi/33917970) - a DOI number is a unique identifying number associated with the repository version. Visit the section `How to cite the software and associated documentation files` to learn how to create derived works.
+[![DOI](https://zenodo.org/badge/33917970.svg)](https://zenodo.org/badge/latestdoi/33917970) - a DOI number is a unique identifying number associated with the repository version. Visit the section `How to cite the software and associated documentation files` to learn how to create derived works and cite the origin.
+
 
 ## CHARTER
 

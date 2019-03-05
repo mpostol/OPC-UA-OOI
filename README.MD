@@ -4,7 +4,7 @@
 
 [![Join the chat at https://gitter.im/mpostol/OPC-UA-OOI](https://badges.gitter.im/mpostol/OPC-UA-OOI.svg)](https://gitter.im/mpostol/OPC-UA-OOI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) - join the project chat
 
-[![DOI](https://zenodo.org/badge/33917970.svg)](https://zenodo.org/badge/latestdoi/33917970)
+[![DOI](https://zenodo.org/badge/33917970.svg)](https://zenodo.org/badge/latestdoi/33917970) - a DOI number is a unique identifying number associated with the repository version. Visit the section `How to cite the software and associated documentation files` to learn how to create derived works.
 
 ## CHARTER
 
@@ -36,7 +36,7 @@ In scope there are also deliverables supporting:
 
 • Exposition of the Process Data in the context of Metadata [OPC UA Address Space Model Designer](http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx)
 
-• Browsing \(using the sematics\) of the Metadata to selectively access requested Process Data
+• Browsing \(using the schematics\) of the Metadata to selectively access requested Process Data
 
 • Modeling and representation of the Metadata - see white-paper: [OPC UA Information Model Deployment](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf)
 
@@ -51,6 +51,19 @@ Out of scope is any work on exchanging the Process Data and Metadata over the ne
 ### Conclusion
 
 I hope it is a good place to prototype and converge the OPC UA communication technology with Semantic Data, Semantc Web, Internet Of Things, Plug and Play, Global Data Discovery, Selective Availability, etc. concepts. My goal is to bridge a gap between OPC UA technology and Industrial IT Application Domains.
+
+## How to cite the software and associated documentation files
+
+To be compliant with the license of the repository the below copyright notice shall be included in all copies or substantial portions of the software and associated documentation files (the "Software").
+
+Copyright (c) 2019 Mariusz Postol
+
+In this section, you will learn how to cite the "Software" using the DOI number. A DOI number is a unique identifying number for the Software version. Because this repository has a DOI, use the DOI in your citation for the article or any derived work, like this:
+
+Postol, M., Object Oriented Internet: [Target Part Name], https://github.com/mpostol/OPC-UA-OOI, [year]
+http://doi.org/10.5281/zenodo.1198852. 
+
+Replace [year] with the current year and [Target Part Name] with the name (or names) of the files you are referring to.
 
 ## Read more
 

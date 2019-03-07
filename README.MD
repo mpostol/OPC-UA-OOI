@@ -39,7 +39,7 @@ In scope there are also deliverables supporting:
 
 • Browsing \(using the schematics\) of the Metadata to selectively access requested Process Data
 
-• Modeling and representation of the Metadata - see white-paper: [OPC UA Information Model Deployment](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf)
+• Modeling and representation of the Metadata - see white-paper: [OPC UA Information Model Deployment](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2586616.svg)](https://doi.org/10.5281/zenodo.2586616)
 
 • Validation of the semantics and consistency of the Metadata - see project [USNodeSetValidationUnitTestProject](./SemanticData/UANodeSetValidation/README.MD)
 

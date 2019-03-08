@@ -61,8 +61,13 @@ Copyright (c) 2019 Mariusz Postol
 
 In this section, you will learn how to cite the "Software" using the DOI number. A DOI number is a unique identifying number for the Software version. Because this repository has a DOI, use the DOI in your citation for the article or any derived work, like this:
 
-Postol, M., Object Oriented Internet: [Target Part Name], https://github.com/mpostol/OPC-UA-OOI, [year]
-http://doi.org/10.5281/zenodo.1198852. 
+> Mariusz Postol, Object Oriented Internet: [Target Part Name], https://github.com/mpostol/OPC-UA-OOI, [year]
+DOI: [10.5281/zenodo.1198852](http://doi.org/10.5281/zenodo.1198852). 
+
+or
+
+> Mariusz Postol, Object Oriented Internet: [Target Part Name], https://github.com/mpostol/OPC-UA-OOI, [year]
+DOI: [http://doi.org/10.5281/zenodo.1198852](http://doi.org/10.5281/zenodo.1198852). 
 
 Replace [year] with the current year and [Target Part Name] with the name (or names) of the files you are referring to.
 

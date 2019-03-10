@@ -30,6 +30,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bin\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <None Remove="bin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Model\IBoilersSet.cs" />
     <Compile Remove="Model\tempuri.org.UA.Examples.BoilerType.Classes - Copy.cs" />
   </ItemGroup>
@@ -51,10 +57,6 @@
     <None Update="ConfigurationDataProducer.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="bin\" />
   </ItemGroup>
 
   <ItemGroup>

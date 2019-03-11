@@ -1,4 +1,4 @@
-﻿# Boilers Set Simulator
+﻿# `ReferenceApplication` Consumer - Boilers Set Simulator
 
 ## Introduction
 

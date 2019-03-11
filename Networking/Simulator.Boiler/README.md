@@ -1,4 +1,4 @@
-﻿# `ReferenceApplication` Consumer - Boilers Set Simulator
+﻿# `ReferenceApplication` Producer - Boilers Set Simulator
 
 ## Introduction
 

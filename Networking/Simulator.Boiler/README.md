@@ -1,9 +1,5 @@
 ﻿# Boilers Set Simulator
 
-## Key words
-
-Boiler, Simulator, Reactive Networking, Object Oriented Internet, OPC UA, CommServer.
-
 ## Introduction 
 
 The project `Networking.Simulator.Boiler` is a part of the proof of concept with the aim of verifying that the reactive communication implemented using the `Networking.SemanticData` library is well suited to deploy Internet of Things (IoT) paradigm for highly distributed applications. A set of unmanned boilers spread geographically, which have to be monitored and remotely controlled is used as an example in this proof of concept. 
@@ -14,9 +10,11 @@ It is assumed that they produce a lot of process data describing the state and b
 - **Remote control** – the serviceman must be able to control remotely the industrial object (in this case the boiler) to avoid any catastrophic behavior
 - **Data reusability** – the data must be also available and shared by others helping him minimize danger and fix the problem in the shortest possible time
 
-The main goal of this proof of concept is to demonstrate the feasibility of process data generation and publication using **PubSub** reactive networking concept against selected OPC UA Information Model. It also demonstrates how to design the pluggable software module dedicated to implementing the **Producer** role that is developed solely on top of the library.  [Reactive Networking of SemanticData Library](../../Networking/SemanticData/README.MD)
+The main goal of this proof of concept is to demonstrate the feasibility of process data generation and publication using **PubSub** reactive networking concept against selected OPC UA Information Model. It also demonstrates how to design the pluggable software module dedicated to implementing the **Producer** role that is developed solely on top of the library  [Reactive Networking of SemanticData Library](../../Networking/SemanticData/README.MD).
 
-By design it is composable component of the `ReferenceApplication`. This component may be integrated with the `ReferenceApplication` as the `Producer`.
+By design it is composable component of the [`ReferenceApplication`](../../Networking/ReferenceApplication/README.MD). This component may be integrated with the `ReferenceApplication` as the `Producer`.
+
+The source code of the OPC UA Information Model is added to the project and is located in the folder 'UAInformationModel'. The folder also contains the solution file that can be opened using the Address Space Model Designer [\[ 2\]][CAS.ASMD]. A detailed description of the OPC UA Information Model deployment is covered in [\[1\]][CAS.OPCUAIMD].
 
 ## Informal Model of Boiler
 
@@ -29,7 +27,7 @@ This example considers a real process in a boiler producing steam from water. Th
 
 ## OPC UA Information Model of Boiler
 
-One purpose of this example is to illustrate modeling against OPC UA type definitions. A simplified model of the presented process is illustrated in Figure 2 showing part of an OPC UA Information Model where the `BoilerType` type is defined.
+One purpose of this example is to illustrate modeling against OPC UA Information Model . A simplified model of the presented process is illustrated in Figure 2 showing part of an OPC UA Information Model where the `BoilerType` type is defined.
 
 ![Figure 2 Boiler simplified model](../../CommonResources/Media/Boiler/image003.png)
 
@@ -41,7 +39,7 @@ To reflect the process behavior, a `FlowTo` reference type is used to interconne
 
 The `BoilerType` can be instantiated every time a new boiler process is to be represented. As a result of instantiation of this type, all mandatory node chains referenced consecutively by the `HierarchicalReferences` in the forward direction (i.e. all components defined in Figure 2 and all their subcomponents) are instantiated as well.
 
-Analyzing the whole process model is impractical here. To illustrate the design practice using this model, we will focus only on one selected brand of type definition inheritance hierarchy (see Figure 4). The whole model is available as a sample solution attached to the Address Space Model Designer [\[1\]][CAS.OPCUAIMD] [\[ 2\]][CAS.ASMD] and can be used for further examination.
+Analyzing the whole process model is impractical here. To illustrate the design practice using this model, we will focus only on one selected brand of type definition inheritance hierarchy (see Figure 4). The whole model is added to the project and is located in the folder 'UAInformationModel'. The folder also contains the solution file that can be opened using the Address Space Model Designer [\[ 2\]][CAS.ASMD].
 
 ![Figure 3  New FlowTo reference type definition](../../CommonResources/Media/Boiler/image005.png)
 
@@ -53,20 +51,16 @@ The model of the `BoilerInputPipeType` consists of two mandatory object componen
 
 *Figure 4 Model of the BoilerInputPipeType inheritance hierarchy*
 
-`FlowTransmiter1` is of `FlowTransmitterType` type, which indirectly inherits from `GenericSensorType`, based finally on the standard `BaseObjectType`. `GenericSensorType` has a component an - `Output` variable of the standard `AnalogItemType`, which has three properties: `EURange`, `InstrumentRange` and `EngineeringUnits`,_but only `EURange` is mandatory. `InstrumentRange` and `EngineeringUnits` are optional, therefore should be created if needed. In the case of optional instance declaration, clients are responsible for examining the exposed Address Space to check if the predefined nodes are instantiated.
+`FlowTransmiter1` is of `FlowTransmitterType` type, which indirectly inherits from `GenericSensorType`, based finally on the standard `BaseObjectType`. `GenericSensorType` has a component, namely an `Output` variable of the standard `AnalogItemType`, which has three properties: `EURange`, `InstrumentRange` and `EngineeringUnits`, but only `EURange` is mandatory. `InstrumentRange` and `EngineeringUnits` are optional, therefore should be created if needed. In the case of optional instance declaration, clients are responsible for examining the exposed Address Space to check if the predefined nodes are instantiated.
 
-## OPC UA Address Space of Boilers Set
+## OPC UA Address Space of `BoilersArea`
 
-After instantiation of the `BoilerType` and adding reference to it in the `Objects.Boilers` folder, we obtain the Address Space presented in Figure 5 exposed by the server to clients. It should be noted that in Figure 5 both objects, `FlowTransmitter1` and `Valve,` have names other than in the definition. It is because each node in the Information Model has `DisplayName` attribute that contains the localized name of the node. Clients should use this attribute if they want to display the node name to the user. They should not use the browse name for this purpose. In this example only mandatory nodes have been instantiated.
+After instantiation of the `BoilerType` and adding reference to it in the `Objects.BoilersArea` folder, we obtain the Address Space presented in Figure 5 exposed by the server to clients. It should be noted that objects could have names other than in the definition. It is because each node in the Information Model has `DisplayName` attribute that contains the localized name of the node. Clients should use this attribute if they want to display the node name to the user. They should not use the browse name for this purpose. In this example only mandatory nodes have been instantiated.
 
 ![Figure 5 Boiler Object exposed by the server](../../CommonResources/Media/Boiler/image009.png)
 
 *Figure 5 `BoilersArea` Object exposed by the server*
 
-
-## Getting Started
-
-> TBD
 
 ## See also
 

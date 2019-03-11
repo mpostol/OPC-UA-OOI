@@ -33,6 +33,10 @@
 
 [CAS.OPCUAIMD]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf
 
+- [OPC UA Address Space Model Designer, 2019][CAS.ASMD]
+
+[CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
+
 <!--ietf.org-->
 
 - [RFC 768: User Datagram ProtocolJ, August 1980][RFC.UDP]
@@ -56,6 +60,7 @@
 [IANAHTTPPARAMS]: http://www.iana.org/assignments/http-parameters/http-parameters.xml
 
 <!--opcfoundation-->
+
 
 - [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
 

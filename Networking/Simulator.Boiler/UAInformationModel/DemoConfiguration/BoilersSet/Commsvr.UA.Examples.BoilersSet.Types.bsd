@@ -1,0 +1,14 @@
+<opc:TypeDictionary
+  xmlns:bt="http://tempuri.org/UA/Examples/BoilerType"
+  xmlns:opc="http://opcfoundation.org/BinarySchema/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ua="http://opcfoundation.org/UA/"
+  xmlns:tns="http://commsvr.com/UA/Examples/BoilersSet"
+  DefaultByteOrder="LittleEndian"
+  TargetNamespace="http://commsvr.com/UA/Examples/BoilersSet"
+>
+  <!-- This File was generated on 2016-07-02 and supports the specifications supported by version 1.2.26.16032 of the OPC UA deliverables. -->
+  <opc:Import Namespace="http://opcfoundation.org/UA/" Location="Opc.Ua.BinarySchema.bsd"/>
+  <opc:Import Namespace="http://tempuri.org/UA/Examples/BoilerType" Location="tempuri.org.UA.Examples.BoilerType.BinarySchema.bsd"/>
+
+</opc:TypeDictionary>

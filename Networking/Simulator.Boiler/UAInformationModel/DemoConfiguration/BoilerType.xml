@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModelDesign xmlns:bt="http://tempuri.org/UA/Examples/BoilerType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:OpcUa="http://opcfoundation.org/UA/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" TargetNamespace="http://tempuri.org/UA/Examples/BoilerType" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+  <Namespaces>
+    <Namespace Name="OpcUa" Prefix="Opc.Ua" InternalPrefix="Opc.Ua.Server" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd" XmlPrefix="OpcUa">http://opcfoundation.org/UA/</Namespace>
+    <Namespace Name="BoilerType" Prefix="tempuri.org.UA.Examples.BoilerType" XmlNamespace="http://tempuri.org/UA/Examples/BoilerType/Types.xsd" XmlPrefix="bt" FilePath="BoilerType">http://tempuri.org/UA/Examples/BoilerType</Namespace>
+  </Namespaces>
+  <ReferenceType SymbolicName="bt:FlowTo" BaseType="OpcUa:NonHierarchicalReferences">
+    <Description>A reference that indicates a flow between two objects.</Description>
+    <InverseName>FlowFrom</InverseName>
+  </ReferenceType>
+  <ReferenceType SymbolicName="bt:HotFlowTo" BaseType="bt:FlowTo">
+    <Description>A reference that indicates a high temperature flow between two objects.</Description>
+    <InverseName>HotFlowFrom</InverseName>
+  </ReferenceType>
+  <ReferenceType SymbolicName="bt:SignalTo" BaseType="OpcUa:NonHierarchicalReferences">
+    <Description>A reference that indicates an electrical signal between two variables.</Description>
+    <InverseName>SignalFrom</InverseName>
+  </ReferenceType>
+  <ObjectType SymbolicName="bt:GenericControllerType" BaseType="OpcUa:BaseObjectType">
+    <Description>A generic PID controller</Description>
+    <Children>
+      <Property SymbolicName="bt:Measurement" DataType="OpcUa:Double" ValueRank="Scalar" />
+      <Property SymbolicName="bt:SetPoint" DataType="OpcUa:Double" ValueRank="Scalar" AccessLevel="ReadWrite" />
+      <Property SymbolicName="bt:ControlOut" DataType="OpcUa:Double" ValueRank="Scalar" />
+    </Children>
+  </ObjectType>
+  <ObjectType SymbolicName="bt:GenericSensorType" BaseType="OpcUa:BaseObjectType">
+    <Description>A generic sensor that read a process value.</Description>
+    <Children>
+      <Variable SymbolicName="bt:Output" TypeDefinition="OpcUa:AnalogItemType" DataType="OpcUa:Double" ValueRank="Scalar" />
+    </Children>
+  </ObjectType>
+  <ObjectType SymbolicName="bt:GenericActuatorType" BaseType="OpcUa:BaseObjectType">
+    <Description>Represents a piece of equipment that causes some action to occur.</Description>
+    <Children>
+      <Variable SymbolicName="bt:Input" TypeDefinition="OpcUa:AnalogItemType" DataType="OpcUa:Double" ValueRank="Scalar" AccessLevel="Write" />
+    </Children>
+  </ObjectType>
+  <ObjectType SymbolicName="bt:CustomControllerType" BaseType="OpcUa:BaseObjectType">
+    <Description>A custom PID controller with 3 inputs</Description>
+    <Children>
+      <Property SymbolicName="bt:Input1" DataType="OpcUa:Double" ValueRank="Scalar" AccessLevel="Write" />
+      <Property SymbolicName="bt:Input2" DataType="OpcUa:Double" ValueRank="Scalar" AccessLevel="Write" />
+      <Property SymbolicName="bt:Input3" DataType="OpcUa:Double" ValueRank="Scalar" AccessLevel="Write" />
+      <Property SymbolicName="bt:ControlOut" DataType="OpcUa:Double" />
+      <Property SymbolicName="bt:DescriptionX" DataType="OpcUa:LocalizedText">
+        <BrowseName>Description</BrowseName>
+      </Property>
+    </Children>
+  </ObjectType>
+  <ObjectType SymbolicName="bt:ValveType" BaseType="bt:GenericActuatorType">
+    <Description>An actuator that controls the flow through a pipe.</Description>
+  </ObjectType>
+  <ObjectType SymbolicName="bt:LevelControllerType" BaseType="bt:GenericControllerType">
+    <Description>A controller for the level of a fluid in a drum.</Description>
+  </ObjectType>
+  <ObjectType SymbolicName="bt:FlowControllerType" BaseType="bt:GenericControllerType">
+    <Description>A controller for the flow of a fluid through a pipe.</Description>
+  </ObjectType>
+  <ObjectType SymbolicName="bt:LevelIndicatorType" BaseType="bt:GenericSensorType">
+    <Description>A sensor that reports the level of a liquid in a tank.</Description>
+  </ObjectType>
+  <ObjectType SymbolicName="bt:FlowTransmitterType" BaseType="bt:GenericSensorType">
+    <Description>A sensor that reports the flow of a liquid through a pipe.</Description>
+  </ObjectType>
+  <ObjectType SymbolicName="bt:BoilerStateMachineType" BaseType="OpcUa:ProgramStateMachineType">
+    <Description>A program that produces simulated values for a running boiler.</Description>
+    <Children>
+      <Property SymbolicName="bt:UpdateRate" DataType="OpcUa:UInt32" ValueRank="Scalar" AccessLevel="ReadWrite">
+        <Description>The rate at which the simulation runs.</Description>
+      </Property>
+    </Children>
+  </ObjectType>
+  <ObjectType SymbolicName="bt:BoilerInputPipeType" BaseType="OpcUa:FolderType">
+    <Children>
+      <Object SymbolicName="bt:FlowTransmitter1" TypeDefinition="bt:FlowTransmitterType" SupportsEvents="true">
+        <BrowseName>FTX001</BrowseName>
+        <DisplayName>FlowTransmitter1</DisplayName>
+      </Object>
+      <Object SymbolicName="bt:Valve" TypeDefinition="bt:ValveType" SupportsEvents="true">
+        <BrowseName>ValveX001</BrowseName>
+        <DisplayName>Valve</DisplayName>
+      </Object>
+    </Children>
+    <References>
+      <Reference>
+        <ReferenceType>OpcUa:HasNotifier</ReferenceType>
+        <TargetId>bt:BoilerInputPipeType_FlowTransmitter1</TargetId>
+      </Reference>
+    </References>
+  </ObjectType>
+  <ObjectType SymbolicName="bt:BoilerDrumType" BaseType="OpcUa:FolderType">
+    <Children>
+      <Object SymbolicName="bt:LevelIndicator" TypeDefinition="bt:LevelIndicatorType" SupportsEvents="true">
+        <BrowseName>LIX001</BrowseName>
+      </Object>
+    </Children>
+    <References>
+      <Reference>
+        <ReferenceType>OpcUa:HasNotifier</ReferenceType>
+        <TargetId>bt:BoilerDrumType_LevelIndicator</TargetId>
+      </Reference>
+    </References>
+  </ObjectType>
+  <ObjectType SymbolicName="bt:BoilerOutputPipeType" BaseType="OpcUa:FolderType">
+    <Children>
+      <Object SymbolicName="bt:FlowTransmitter2" TypeDefinition="bt:FlowTransmitterType" SupportsEvents="true">
+        <BrowseName>FTX002</BrowseName>
+      </Object>
+    </Children>
+    <References>
+      <Reference>
+        <ReferenceType>OpcUa:HasNotifier</ReferenceType>
+        <TargetId>bt:BoilerOutputPipeType_FlowTransmitter2</TargetId>
+      </Reference>
+    </References>
+  </ObjectType>
+  <ObjectType SymbolicName="bt:BoilerType" BaseType="OpcUa:BaseObjectType" SupportsEvents="true">
+    <Description>A boiler used to produce steam for a turbine.</Description>
+    <Children>
+      <Object SymbolicName="bt:InputPipe" TypeDefinition="bt:BoilerInputPipeType" SupportsEvents="true">
+        <BrowseName>PipeX001</BrowseName>
+        <DisplayName>InputPipe</DisplayName>
+        <Children>
+          <Object SymbolicName="bt:FlowTransmitter1">
+            <BrowseName>FTX001</BrowseName>
+            <Children>
+              <Variable SymbolicName="bt:Output" />
+            </Children>
+          </Object>
+          <Object SymbolicName="bt:Valve">
+            <BrowseName>ValveX001</BrowseName>
+            <Children>
+              <Variable SymbolicName="bt:Input" />
+            </Children>
+          </Object>
+        </Children>
+        <References>
+          <Reference>
+            <ReferenceType>bt:FlowTo</ReferenceType>
+            <TargetId>bt:BoilerType_Drum</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="bt:Drum" TypeDefinition="bt:BoilerDrumType" SupportsEvents="true">
+        <BrowseName>DrumX001</BrowseName>
+        <DisplayName>Drum</DisplayName>
+        <Children>
+          <Object SymbolicName="bt:LevelIndicator">
+            <BrowseName>LIX001</BrowseName>
+            <Children>
+              <Variable SymbolicName="bt:Output" Declaration="bt:GenericSensorType_Output" />
+            </Children>
+          </Object>
+        </Children>
+        <References>
+          <Reference>
+            <ReferenceType>bt:HotFlowTo</ReferenceType>
+            <TargetId>bt:BoilerType_OutputPipe</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="bt:OutputPipe" TypeDefinition="bt:BoilerOutputPipeType" SupportsEvents="true">
+        <BrowseName>PipeX002</BrowseName>
+        <DisplayName>OutputPipe</DisplayName>
+        <Children>
+          <Object SymbolicName="bt:FlowTransmitter2">
+            <BrowseName>FTX002</BrowseName>
+            <Children>
+              <Variable SymbolicName="bt:Output" />
+            </Children>
+          </Object>
+        </Children>
+      </Object>
+      <Object SymbolicName="bt:FlowController" TypeDefinition="bt:FlowControllerType">
+        <BrowseName>FCX001</BrowseName>
+        <DisplayName>FlowController</DisplayName>
+        <Children>
+          <Property SymbolicName="bt:Measurement">
+            <References>
+              <Reference IsInverse="true">
+                <ReferenceType>bt:SignalTo</ReferenceType>
+                <TargetId>bt:BoilerType_InputPipe_FlowTransmitter1_Output</TargetId>
+              </Reference>
+            </References>
+          </Property>
+          <Property SymbolicName="bt:SetPoint" />
+          <Property SymbolicName="bt:ControlOut">
+            <References>
+              <Reference>
+                <ReferenceType>bt:SignalTo</ReferenceType>
+                <TargetId>bt:BoilerType_InputPipe_Valve_Input</TargetId>
+              </Reference>
+            </References>
+          </Property>
+        </Children>
+      </Object>
+      <Object SymbolicName="bt:LevelController" TypeDefinition="bt:LevelControllerType">
+        <BrowseName>LCX001</BrowseName>
+        <DisplayName>LevelController</DisplayName>
+        <Children>
+          <Property SymbolicName="bt:Measurement">
+            <References>
+              <Reference IsInverse="true">
+                <ReferenceType>bt:SignalTo</ReferenceType>
+                <TargetId>bt:BoilerType_Drum_LevelIndicator_Output</TargetId>
+              </Reference>
+            </References>
+          </Property>
+          <Property SymbolicName="bt:SetPoint" />
+          <Property SymbolicName="bt:ControlOut">
+            <References>
+              <Reference>
+                <ReferenceType>bt:SignalTo</ReferenceType>
+                <TargetId>bt:BoilerType_CustomController_Input1</TargetId>
+              </Reference>
+            </References>
+          </Property>
+        </Children>
+      </Object>
+      <Object SymbolicName="bt:CustomController" TypeDefinition="bt:CustomControllerType">
+        <BrowseName>CCX001</BrowseName>
+        <DisplayName>CustomController</DisplayName>
+        <Children>
+          <Property SymbolicName="bt:Input1" />
+          <Property SymbolicName="bt:Input2">
+            <References>
+              <Reference IsInverse="true">
+                <ReferenceType>bt:SignalTo</ReferenceType>
+                <TargetId>bt:BoilerType_InputPipe_FlowTransmitter1_Output</TargetId>
+              </Reference>
+            </References>
+          </Property>
+          <Property SymbolicName="bt:Input3">
+            <References>
+              <Reference IsInverse="true">
+                <ReferenceType>bt:SignalTo</ReferenceType>
+                <TargetId>bt:BoilerType_OutputPipe_FlowTransmitter2_Output</TargetId>
+              </Reference>
+            </References>
+          </Property>
+          <Property SymbolicName="bt:ControlOut">
+            <References>
+              <Reference>
+                <ReferenceType>bt:SignalTo</ReferenceType>
+                <TargetId>bt:BoilerType_FlowController_SetPoint</TargetId>
+              </Reference>
+            </References>
+          </Property>
+        </Children>
+      </Object>
+      <Object SymbolicName="bt:Simulation" TypeDefinition="bt:BoilerStateMachineType" SupportsEvents="true" />
+    </Children>
+    <References>
+      <Reference>
+        <ReferenceType>OpcUa:HasNotifier</ReferenceType>
+        <TargetId>bt:BoilerType_InputPipe</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasNotifier</ReferenceType>
+        <TargetId>bt:BoilerType_Drum</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasNotifier</ReferenceType>
+        <TargetId>bt:BoilerType_OutputPipe</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasEventSource</ReferenceType>
+        <TargetId>bt:BoilerType_Simulation</TargetId>
+      </Reference>
+    </References>
+  </ObjectType>
+</ModelDesign>

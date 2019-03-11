@@ -1,4 +1,5 @@
-﻿# `ReferenceApplication` Consumer - Data Logger
+﻿
+# `ReferenceApplication` Consumer - Data Logger
 
 ## Common Tasks
 
@@ -14,6 +15,7 @@ Here are steps undertook to implement the `Consumer` role in the application:
 ## How to: Implement `DataManagementSetup`
 
 The `LoggerManagementSetup` constructor initializes all properties, which are injection points of all parts composing this role.
+
 ```C#
   public sealed class LoggerManagementSetup : DataManagementSetup
   {
@@ -32,6 +34,7 @@ The `LoggerManagementSetup` constructor initializes all properties, which are in
 
   }
 ```
+
 In this example, it is assumed that [`ServiceLocator`](https://www.nuget.org/packages/CommonServiceLocator) is implemented to resolve references to any external services.
 
 Finally the `DataManagementSetup.Start()` method is called to initialize the infrastructure, enable all associations and start pumping the data.
@@ -44,11 +47,14 @@ The class `DataConsumer` is a sample implementation of a data logger functionali
 
 ## How to: Implement `IConfigurationFactory`
 
-Implementation of this interface is straightforward and based entirely on the library [`UAOOI.Configuration.Networking`](../../Configuration/Networking/README.MD). In a typical scenario, this implementation should not be considered for further modification. The only open question is how to provide the name of the file containing the configuration of this role. In proposed solution the name is provided by a service defined by  the application entry point part and localized using `IServiceLocator` in the class `LoggerManagementSetup` - see code snipped below: 
+Implementation of this interface is straightforward and based entirely on the library [`UAOOI.Configuration.Networking`](../../Configuration/Networking/README.MD). In a typical scenario, this implementation should not be considered for further modification. The only open question is how to provide the name of the file containing the configuration of this role. In proposed solution the name is provided by a service defined by  the application entry point part and localized using `IServiceLocator` in the class `LoggerManagementSetup` - see code snipped below:
 
 ```C#
+
 string _ConsumerConfigurationFileName = _serviceLocator.GetInstance<string>(ConsumerCompositionSettings.ConfigurationFileNameContract);
+
 ```
+
 This role uses independent configuration file `ConfigurationDataConsumer.xml` attached to the project.
 This file contains a mirror configuration of the [`Producer`](../../Networking/SimulatorInteroperabilityTest/README.md) role configuration to log all the generated data.
 
@@ -59,10 +65,7 @@ This file contains a mirror configuration of the [`Producer`](../../Networking/S
 ## See also
 
 - [API Browser][API Browser]: the preliminary code help documentation.
- 
-[API Browser]: http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Common.Infrastructure.Diagnostic.htm
-
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 
-[wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/
-
+[API Browser]: http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Common.Infrastructure.Diagnostic.htm
+[wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible

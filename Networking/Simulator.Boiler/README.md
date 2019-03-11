@@ -1,9 +1,8 @@
 ﻿# Boilers Set Simulator
 
-## Introduction 
+## Introduction
 
-The project `Networking.Simulator.Boiler` is a part of the proof of concept with the aim of verifying that the reactive communication implemented using the `Networking.SemanticData` library is well suited to deploy Internet of Things (IoT) paradigm for highly distributed applications. A set of unmanned boilers spread geographically, which have to be monitored and remotely controlled is used as an example in this proof of concept. 
-It is assumed that they produce a lot of process data describing the state and behavior of each boiler. In case some alarms have been raised a serviceman must be called to investigate and fix the problem. So we are facing the following problems:
+The project `Networking.Simulator.Boiler` is a part of the proof of concept with the aim of verifying that the reactive communication implemented using the `Networking.SemanticData` library is well suited to deploy Internet of Things (IoT) paradigm for highly distributed applications. A set of unmanned boilers spread geographically, which have to be monitored and remotely controlled is used as an example in this proof of concept. It is assumed that they produce a lot of process data describing the state and behavior of each boiler. In case some alarms have been raised a serviceman must be called to investigate and fix the problem. So we are facing the following problems:
 
 - **Mobility** – the serviceman must be informed in any localization in the service area (say agglomeration)
 - **Navigation** – the serviceman must be routed from the place currently he is to the affected area
@@ -22,8 +21,7 @@ This example considers a real process in a boiler producing steam from water. Th
 
 ![Figure 1 Boiler diagram.](../../CommonResources/Media/Boiler/image001.png)
 
-*Figure 1 Boiler P&ID diagram*
-
+Figure 1 Boiler P&ID diagram
 
 ## OPC UA Information Model of Boiler
 
@@ -31,7 +29,7 @@ One purpose of this example is to illustrate modeling against OPC UA Information
 
 ![Figure 2 Boiler simplified model](../../CommonResources/Media/Boiler/image003.png)
 
-*Figure 2 Boiler simplified model*
+Figure 2 Boiler simplified model
 
 Objects of this type are complex and consist of the following components: `InputPipe`, `Drum`, `OutputPipe`, `FlowController`, `LevelController`, `CustomController`. For all of these objects corresponding types are defined.
 
@@ -43,13 +41,13 @@ Analyzing the whole process model is impractical here. To illustrate the design 
 
 ![Figure 3  New FlowTo reference type definition](../../CommonResources/Media/Boiler/image005.png)
 
-*Figure 3  New FlowTo reference type definition*
+Figure 3  New FlowTo reference type definition
 
 The model of the `BoilerInputPipeType` consists of two mandatory object components: `FlowTransmitter1`(`FTC001`) and `Valve`(`Valve001`) (Figure 5). After parent type instantiation, they are also created as components of that type and, therefore, called instance declaration. The newly created nodes have the same browse names (`FTC001`, `Valve001`) and display names (`FlowTransmitter1`, `Valve`) as in the type definition. Since browse names shall be unique in the context of the parent type definition, new nodes may be created without any fear of breaking the browse path uniqueness rules. A graphical element programmed against the `BoilerType` may need to display the value of the `Valve`. If the main graphical element is called `Boiler1` (an instance of `BoilerType`) it will need to refer to the target using the browse path: `Boiler1.Pipe001.Valve001`. This browse path is always unique, because the browse name of the created main object should be unique in the context it is located in and all instance declarations should have unique browse names in the context of types they are defined by.
 
 ![Figure 4 Model of the BoilerInputPipeType inheritance hierarchy](../../CommonResources/Media/Boiler/image007.png)
 
-*Figure 4 Model of the BoilerInputPipeType inheritance hierarchy*
+Figure 4 Model of the BoilerInputPipeType inheritance hierarchy
 
 `FlowTransmiter1` is of `FlowTransmitterType` type, which indirectly inherits from `GenericSensorType`, based finally on the standard `BaseObjectType`. `GenericSensorType` has a component, namely an `Output` variable of the standard `AnalogItemType`, which has three properties: `EURange`, `InstrumentRange` and `EngineeringUnits`, but only `EURange` is mandatory. `InstrumentRange` and `EngineeringUnits` are optional, therefore should be created if needed. In the case of optional instance declaration, clients are responsible for examining the exposed Address Space to check if the predefined nodes are instantiated.
 
@@ -59,8 +57,7 @@ After instantiation of the `BoilerType` and adding reference to it in the `Objec
 
 ![Figure 5 Boiler Object exposed by the server](../../CommonResources/Media/Boiler/image009.png)
 
-*Figure 5 `BoilersArea` Object exposed by the server*
-
+Figure 5 `BoilersArea` Object exposed by the server
 
 ## See also
 
@@ -70,5 +67,4 @@ After instantiation of the `BoilerType` and adding reference to it in the `Objec
 
 [CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
 [CAS.OPCUAIMD]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf
-
 [CAS.VideoInstances]: https://youtu.be/LvGHl-hRwZw

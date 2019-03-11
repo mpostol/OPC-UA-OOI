@@ -35,6 +35,7 @@
 * [Walk-through `ReferenceApplication`](Networking/ReferenceApplication/README.MD)
   * [`ReferenceApplication` Consumer - Data Logger](Networking/DataLogger/README.md)
   * [`ReferenceApplication` Producer - Interoperability Test Data Generator](Networking/SimulatorInteroperabilityTest/README.md)
+  * [`ReferenceApplication` Producer - Boilers Set Simulator](Networking/Simulator.Boiler/README.md) 
   * [`ReferenceApplication` Utilities](Networking/ReferenceApplication.Core/README.md)
 
 ## Data Discovery

@@ -45,7 +45,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SemanticData", "SemanticDat
 	ProjectSection(SolutionItems) = preProject
 		SemanticData\README.MD = SemanticData\README.MD
 		SemanticData\README.MessageCentricCommunication.md = SemanticData\README.MessageCentricCommunication.md
-		SemanticData\Readme.SemanticDataDeplyment.MD = SemanticData\Readme.SemanticDataDeplyment.MD
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration.Networking", "Configuration\Networking\Configuration.Networking.csproj", "{E28E0880-03AA-4D1B-A820-41B04E766019}"
@@ -111,6 +110,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solution Items", "{606ADC64-90A1-4355-BEAB-6B04717F598C}"
 	ProjectSection(SolutionItems) = preProject
 		CONTRIBUTING.md = CONTRIBUTING.md
+		COVERPAGE.md = COVERPAGE.md
 		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
 		README.MD = README.MD
 		REFERENCES.md = REFERENCES.md

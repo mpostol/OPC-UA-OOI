@@ -1,7 +1,8 @@
 ﻿# Encoding Library
 
 ## Getting Started
-This library is a loosely coupled part of the `ReferenceApplication` described in the section [Reference Application Graphical User Interface](../ReferenceApplication/README.MD). The main purpose of this library is the interoperability testing and diagnostic. 
+
+This library is a loosely coupled part of the `ReferenceApplication` described in the section [Reference Application Graphical User Interface](../ReferenceApplication/README.MD). The main purpose of this library is the interoperability testing and diagnostic.
 
 It provides `UAOOI.Networking.SemanticData.IEncodingFactory` limited implementation in the class `EncodingFactoryBinarySimple`.  Using this implementation the library can encode/decode only simple data types. The `ReferenceApplication` uses implementation of this class for late binding to inject dependency on the encoding functionality.  
 
@@ -22,7 +23,7 @@ This library may be easily replaced by a custom one - change the composition con
 
 Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
 
-Consider expanding functionality in this library by implementing the methods in classes: `UABinaryDecoderImplementation` and `UABinaryEncoderImplementation`. 
+Consider expanding functionality in this library by implementing the methods in classes: `UABinaryDecoderImplementation` and `UABinaryEncoderImplementation`.
 
 ## Running tests
 
@@ -30,11 +31,6 @@ The library is not Unit Tested.
 
 ## See also
 
-* [Reference Application Graphical User Interface](../ReferenceApplication/README.MD)
-* [Reference Application Consumer - Data Logger](../DataLogger/README.md)
-* [Reference Application Producer - Interoperability Test Data Generator](../SimulatorInteroperabilityTest/README.md)
-
-
-
-
-
+- [Reference Application Graphical User Interface](../ReferenceApplication/README.MD)
+- [Reference Application Consumer - Data Logger](../DataLogger/README.md)
+- [Reference Application Producer - Interoperability Test Data Generator](../SimulatorInteroperabilityTest/README.md)

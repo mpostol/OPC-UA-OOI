@@ -1,5 +1,21 @@
 # References
 
+## Mariusz Postol
+
+<!--OOI on GitHub-->
+
+- [GitHub UAOOI.Networking.UDPMessageHandler][OOI.Networking.UDPMessageHandler]
+
+[OOI.Networking.UDPMessageHandler]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/UDPMessageHandler
+
+- [GitHub UAOOI.Networking.ReferenceApplication][OOI.Networking.ReferenceApplication]
+
+[OOI.Networking.ReferenceApplication]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/ReferenceApplication
+
+- [GitHub UAOOI Releases Page][OOI.Releases]
+
+[OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
+
 <!--wordpress-->
 
 - [OPC Unified Architecture][wordpress.opc-ua]
@@ -7,7 +23,7 @@
 [wordpress.opc-ua]: https://mpostol.wordpress.com/opc-ua/
 
 - [OPC UA Makes Reactive Object Oriented Internet Possible][wordpress.ReactiveOOI]
- 
+
 [wordpress.ReactiveOOI]:https://mpostol.wordpress.com/2019/01/14/opc-ua-makes-reactive-object-oriented-internet-possible/
 
 - [IoT versus SCADA/DCS Data Acquisition Patterns][wordpress.IoTVersus]
@@ -17,7 +33,6 @@
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 
 [wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/
-
 
 - [OPC UA Makes Smart User Interface Possible][wordpress.HMI]
 
@@ -36,6 +51,8 @@
 - [OPC UA Address Space Model Designer, 2019][CAS.ASMD]
 
 [CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
+
+## ietf.org
 
 <!--ietf.org-->
 
@@ -59,8 +76,9 @@
 
 [IANAHTTPPARAMS]: http://www.iana.org/assignments/http-parameters/http-parameters.xml
 
-<!--opcfoundation-->
+## OPCFoundation
 
+<!--opcfoundation-->
 
 - [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
 
@@ -70,29 +88,17 @@
 
 [OPC.UA.Profiles]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-7-profiles/
 
+## OASIS
+
 <!--oasis-open-->
 
--  [OASIS MQTT Version 3.1.1 specification][MQTT]
+- [OASIS MQTT Version 3.1.1 specification][MQTT]
   
 [MQTT]:http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/mqtt-v3.1.1.html
 
 - [amqp-core-overview-v1.0 OASIS Advanced Message Queuing Protocol (AMQP) Version 1.0][AMQP]
 
 [AMQP]:http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html
-
-<!--OOI on GitHub-->
-
-- [OOI.Networking.UDPMessageHandler][OOI.Networking.UDPMessageHandler]
-
-[OOI.Networking.UDPMessageHandler]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/UDPMessageHandler
-
-- [OOI.Networking.ReferenceApplication][OOI.Networking.ReferenceApplication]
- 
-[OOI.Networking.ReferenceApplication]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/ReferenceApplication
-
-- [UAOOI Releases Page][OOI.Releases]
-
-[OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
 
 <!--iso-->
 
@@ -103,5 +109,3 @@
 - [ISO/IEC 20922:2016: Message Queuing Telemetry Transport (MQTT) v3.1.1][ISO.MQTT]
 
 [ISO.MQTT]: https://www.iso.org/standard/69466.html
-
-

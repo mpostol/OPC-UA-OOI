@@ -5,13 +5,12 @@
 ## SemanticData Processing
 
 * [OOI SemanticData Processing Architecture](SemanticData/README.MD)
-* [Library Description](SemanticData/Readme.SemanticDataDeplyment.MD)
 * [UA NodeSet Validation](SemanticData/UANodeSetValidation/README.MD)
 * [XML Files](SemanticData/UANodeSetValidation/XML/README.MD)
 
-## Internet of Things (IOT) Archetype
+## Internet of Things (IoT) Archetype
 
-* [IOT Communication](Networking/README.MD)
+* [Internet of Things (IoT) Communication](Networking/README.MD)
 * [SemanticData Message Centric Communication](SemanticData/README.MessageCentricCommunication.md)
 
 ## Reactive Communication
@@ -22,7 +21,7 @@
   * [Transport over MQTT](Networking/SemanticData/README_MQTTMapping.md)
   * [Transport over AMQP](Networking/SemanticData/README_AMQPMapping.md)
   * [DataSet and Communication Channel Association](Networking/SemanticData/READMEDataDiscoveryAndBinding.md)
-  * [Data Encoding](Networking/Encoding/README.md)
+  * [Encoding Library](Networking/Encoding/README.md)
 * [Getting Started Tutorial](Networking/SemanticData/READMEGettingStartedTutorial.md)
 
 ## Configuration

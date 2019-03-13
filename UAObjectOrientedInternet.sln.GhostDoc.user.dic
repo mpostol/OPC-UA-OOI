@@ -6,12 +6,14 @@ commserver
 commsvr
 Composable
 const
+ebook
 Fallback
 Historizing
 Json
 Kerberos
 Locator
 Mariusz
+Metadata
 middleware
 Modbus
 mpostol
@@ -31,4 +33,5 @@ typeof
 typeparamref
 uasconfig
 unicast
+versioning
 wordpress

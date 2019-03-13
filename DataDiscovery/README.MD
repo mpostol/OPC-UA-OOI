@@ -1,4 +1,4 @@
-# OPC UA OOI Global Data Discovery
+# Global Data Discovery
 
 # Concept
 

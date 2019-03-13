@@ -30,8 +30,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bin\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <None Remove="bin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Model\IBoilersSet.cs" />
     <Compile Remove="Model\tempuri.org.UA.Examples.BoilerType.Classes - Copy.cs" />
+    <Compile Remove="UAInformationModel\DemoConfiguration\BoilersSet\Commsvr.UA.Examples.BoilersSet.Classes.cs" />
+    <Compile Remove="UAInformationModel\DemoConfiguration\BoilerType\tempuri.org.UA.Examples.BoilerType.Classes.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="UAInformationModel\DemoConfiguration\BoilersSet\Commsvr.UA.Examples.BoilersSet.Classes.cs" />
+    <None Include="UAInformationModel\DemoConfiguration\BoilerType\tempuri.org.UA.Examples.BoilerType.Classes.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,10 +64,6 @@
     <None Update="ConfigurationDataProducer.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="bin\" />
   </ItemGroup>
 
   <ItemGroup>

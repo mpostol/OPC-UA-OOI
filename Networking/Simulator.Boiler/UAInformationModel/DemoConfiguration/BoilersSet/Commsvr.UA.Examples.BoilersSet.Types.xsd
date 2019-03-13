@@ -1,0 +1,12 @@
+<xs:schema
+  xmlns:bt="http://tempuri.org/UA/Examples/BoilerType/Types.xsd"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
+  xmlns:tns="http://commsvr.com/UA/Examples/BoilersSet/Types.xsd"
+  targetNamespace="http://commsvr.com/UA/Examples/BoilersSet/Types.xsd"
+  elementFormDefault="qualified"
+>
+  <xs:import namespace="http://opcfoundation.org/UA/2008/02/Types.xsd" />
+  <xs:import namespace="http://tempuri.org/UA/Examples/BoilerType/Types.xsd" />
+
+</xs:schema>

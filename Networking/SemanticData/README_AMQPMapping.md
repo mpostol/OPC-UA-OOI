@@ -10,7 +10,7 @@ The main goal of this document is to provide instruction on how to expand the tr
 
 Implementation of the messages exchange over the \([AMQP][AMQP]\) protocol is out of the scope of this project. The library intentionally is designed to use any transport protocol meeting some basic requirements using external components. External components implementing \([AMQP][AMQP]\) connectivity can be seamlessly integrated with this SDK using dependency injection concept illustrated by the following domain model:
 
-![](../../CommonResources/Media/DataManagementExternalLibraries.png)
+![Figure 1. Domain Model](../../CommonResources/Media/DataManagementExternalLibraries.png)
 
 Instruction for implementer is covered in the section *Notices for Implementer*.
 
@@ -290,7 +290,7 @@ In the article [Networking of SemanticData Library](README.MD#message-transport)
 [ISO.AMQP]: https://www.iso.org/standard/64955.html
 [OPC.UA.PubSub]: https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
 [OPC.UA.Profiles]: https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-7-profiles/
-[README.PubSubMTF]:../SemanticData/README.PubSubMTF.md
+[README.PubSubMTF]:README.PubSubMTF.md
 [AMQP.NET Lite]: https://github.com/Azure/amqpnetlite
 [RabbitMQ]: https://www.rabbitmq.com/
 [IANAHTTPPARAMS]: http://www.iana.org/assignments/http-parameters/http-parameters.xml

@@ -9,9 +9,9 @@
 * [UA NodeSet Validation](SemanticData/UANodeSetValidation/README.MD)
 * [XML Files](SemanticData/UANodeSetValidation/XML/README.MD)
 
-## Internet of Things (IOT) Archetype
+## Internet of Things (IoT) Archetype
 
-* [IOT Communication](Networking/README.MD)
+* [Internet of Things (IoT) Communication](Networking/README.MD)
 * [SemanticData Message Centric Communication](SemanticData/README.MessageCentricCommunication.md)
 
 ## Reactive Communication

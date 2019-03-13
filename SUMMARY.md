@@ -2,22 +2,22 @@
 
 * [Cover Page](COVERPAGE.md)
  
-  * [Table of Content](TableOfContent.md)
+* [Table of Content](TableOfContent.md)
 
 ## Summary
 
 * [Introduction](README.MD)
-* [GitHub Repository Content](SemanticData/Readme.SemanticDataDeplyment.MD)
 
 ## SemanticData Processing
 
 * [OOI SemanticData Processing Architecture](SemanticData/README.MD)
+* [Library Description](SemanticData/Readme.SemanticDataDeplyment.MD)
 * [UA NodeSet Validation](SemanticData/UANodeSetValidation/README.MD)
 * [XML Files](SemanticData/UANodeSetValidation/XML/README.MD)
 
 ## Internet of Things (IoT) Archetype
 
-* [IoT Communication](Networking/README.MD)
+* [Internet of Things (IoT) Communication](Networking/README.MD)
 * [SemanticData Message Centric Communication](SemanticData/README.MessageCentricCommunication.md)
 
 ## Reactive Communication
@@ -39,9 +39,10 @@
 ## Deployment 
 
 * [Walk-through `ReferenceApplication`](Networking/ReferenceApplication/README.MD)
+  * [`ReferenceApplication` Utilities](Networking/ReferenceApplication.Core/README.md)
   * [`ReferenceApplication` Consumer - Data Logger](Networking/DataLogger/README.md)
   * [`ReferenceApplication` Producer - Interoperability Test Data Generator](Networking/SimulatorInteroperabilityTest/README.md)
-  * [`ReferenceApplication` Utilities](Networking/ReferenceApplication.Core/README.md)
+  * [`ReferenceApplication` Producer - Boilers Set Simulator](Networking/Simulator.Boiler/README.md) 
 
 ## Data Discovery
 

@@ -2,12 +2,11 @@
 
 * [Cover Page](COVERPAGE.md)
  
-  * [Table of Content](TableOfContent.md)
+* [Table of Content](TableOfContent.md)
 
 ## Summary
 
 * [Introduction](README.MD)
-* [GitHub Repository Content](SemanticData/Readme.SemanticDataDeplyment.MD)
 
 ## SemanticData Processing
 
@@ -17,7 +16,7 @@
 
 ## Internet of Things (IoT) Archetype
 
-* [IoT Communication](Networking/README.MD)
+* [Internet of Things (IoT) Communication](Networking/README.MD)
 * [SemanticData Message Centric Communication](SemanticData/README.MessageCentricCommunication.md)
 
 ## Reactive Communication
@@ -28,7 +27,7 @@
   * [Transport over MQTT](Networking/SemanticData/README_MQTTMapping.md)
   * [Transport over AMQP](Networking/SemanticData/README_AMQPMapping.md)
   * [DataSet and Communication Channel Association](Networking/SemanticData/READMEDataDiscoveryAndBinding.md)
-  * [Data Encoding](Networking/Encoding/README.md)
+  * [Encoding Library](Networking/Encoding/README.md)
 * [Getting Started Tutorial](Networking/SemanticData/READMEGettingStartedTutorial.md)
 
 ## Configuration
@@ -39,9 +38,10 @@
 ## Deployment 
 
 * [Walk-through `ReferenceApplication`](Networking/ReferenceApplication/README.MD)
+  * [`ReferenceApplication` Utilities](Networking/ReferenceApplication.Core/README.md)
   * [`ReferenceApplication` Consumer - Data Logger](Networking/DataLogger/README.md)
   * [`ReferenceApplication` Producer - Interoperability Test Data Generator](Networking/SimulatorInteroperabilityTest/README.md)
-  * [`ReferenceApplication` Utilities](Networking/ReferenceApplication.Core/README.md)
+  * [`ReferenceApplication` Producer - Boilers Set Simulator](Networking/Simulator.Boiler/README.md) 
 
 ## Data Discovery
 

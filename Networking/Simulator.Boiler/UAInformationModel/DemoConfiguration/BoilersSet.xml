@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModelDesign xmlns:bt="http://tempuri.org/UA/Examples/BoilerType" xmlns:bs="http://commsvr.com/UA/Examples/BoilersSet" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:OpcUa="http://opcfoundation.org/UA/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" TargetNamespace="http://commsvr.com/UA/Examples/BoilersSet" TargetXmlNamespace="http://commsvr.com/UA/Examples/BoilersSet" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+  <Namespaces>
+    <Namespace Name="OpcUa" Prefix="Opc.Ua" InternalPrefix="Opc.Ua.Server" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd" XmlPrefix="OpcUa">http://opcfoundation.org/UA/</Namespace>
+    <Namespace Name="BoilerType" Prefix="tempuri.org.UA.Examples.BoilerType" XmlNamespace="http://tempuri.org/UA/Examples/BoilerType/Types.xsd" XmlPrefix="bt" FilePath="BoilerType">http://tempuri.org/UA/Examples/BoilerType</Namespace>
+    <Namespace Name="BoilersSet" Prefix="Commsvr.UA.Examples.BoilersSet" XmlNamespace="http://commsvr.com/UA/Examples/BoilersSet/Types.xsd" XmlPrefix="bs" FilePath="BoilersSet">http://commsvr.com/UA/Examples/BoilersSet</Namespace>
+  </Namespaces>
+  <Object SymbolicName="bs:BoilersArea" TypeDefinition="OpcUa:FolderType">
+    <Children>
+      <Object SymbolicName="bs:BoilerAlpha" TypeDefinition="bt:BoilerType">
+        <BrowseName>Boiler #1</BrowseName>
+        <Children>
+          <Object SymbolicName="bs:InputPipe">
+            <DisplayName>Boiler #1: Pipe1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:Drum">
+            <DisplayName>Boiler #1: Drum1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:OutputPipe">
+            <DisplayName>Boiler #1: Pipe1002</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:FlowController">
+            <DisplayName>Boiler #1: FC1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:LevelController">
+            <DisplayName>Boiler #1: LC1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:CustomController">
+            <DisplayName>Boiler #1: CC1001</DisplayName>
+          </Object>
+        </Children>
+      </Object>
+      <Object SymbolicName="bs:BoilerBravo" TypeDefinition="bt:BoilerType">
+        <BrowseName>Boiler #2</BrowseName>
+        <DisplayName>Boilers Second</DisplayName>
+        <Children>
+          <Object SymbolicName="bs:InputPipe">
+            <DisplayName>Boiler #2: Pipe1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:Drum">
+            <DisplayName>Boiler #2: Drum1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:OutputPipe">
+            <DisplayName>Boiler #2: Pipe1002</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:FlowController">
+            <DisplayName>Boiler #2: FC1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:LevelController">
+            <DisplayName>Boiler #2: LC1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:CustomController">
+            <DisplayName>Boiler #2: CC1001</DisplayName>
+          </Object>
+        </Children>
+      </Object>
+      <Object SymbolicName="bs:BoilerCharlie" TypeDefinition="bt:BoilerType">
+        <BrowseName>Boiler #3</BrowseName>
+        <Children>
+          <Object SymbolicName="bs:InputPipe">
+            <DisplayName>Boiler #3: Pipe1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:Drum">
+            <DisplayName>Boiler #3: Drum1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:OutputPipe">
+            <DisplayName>Boiler #3: Pipe1002</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:FlowController">
+            <DisplayName>Boiler #3: FC1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:LevelController">
+            <DisplayName>Boiler #3: LC1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:CustomController">
+            <DisplayName>Boiler #3: CC1001</DisplayName>
+          </Object>
+        </Children>
+      </Object>
+      <Object SymbolicName="bs:BoilerDelta" TypeDefinition="bt:BoilerType">
+        <BrowseName>Boiler #4</BrowseName>
+        <Children>
+          <Object SymbolicName="bs:InputPipe">
+            <DisplayName>Boiler #4: Pipe1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:Drum">
+            <DisplayName>Boiler #4: Drum1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:OutputPipe">
+            <DisplayName>Boiler #4: Pipe1002</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:FlowController">
+            <DisplayName>Boiler #4: FC1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:LevelController">
+            <DisplayName>Boiler #4: LC1001</DisplayName>
+          </Object>
+          <Object SymbolicName="bs:CustomController">
+            <DisplayName>Boiler #4: CC1001</DisplayName>
+          </Object>
+        </Children>
+      </Object>
+    </Children>
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>OpcUa:Organizes</ReferenceType>
+        <TargetId>OpcUa:ObjectsFolder</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>OpcUa:HasNotifier</ReferenceType>
+        <TargetId>OpcUa:Server</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasNotifier</ReferenceType>
+        <TargetId>bs:BoilersArea_BoilerAlpha</TargetId>
+      </Reference>
+    </References>
+  </Object>
+  <Object SymbolicName="bs:Drums">
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>OpcUa:Organizes</ReferenceType>
+        <TargetId>OpcUa:ObjectsFolder</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasComponent</ReferenceType>
+        <TargetId>bs:BoilersArea_BoilerAlpha_Drum</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasComponent</ReferenceType>
+        <TargetId>bs:BoilersArea_BoilerBravo_Drum</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasComponent</ReferenceType>
+        <TargetId>bs:BoilersArea_BoilerCharlie_Drum</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasComponent</ReferenceType>
+        <TargetId>bs:BoilersArea_BoilerDelta_Drum</TargetId>
+      </Reference>
+    </References>
+  </Object>
+  <Object SymbolicName="bs:Pipes">
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>OpcUa:Organizes</ReferenceType>
+        <TargetId>OpcUa:ObjectsFolder</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasComponent</ReferenceType>
+        <TargetId>bs:BoilersArea_BoilerAlpha_InputPipe</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasComponent</ReferenceType>
+        <TargetId>bs:BoilersArea_BoilerAlpha_OutputPipe</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasComponent</ReferenceType>
+        <TargetId>bs:BoilersArea_BoilerBravo_InputPipe</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasComponent</ReferenceType>
+        <TargetId>bs:BoilersArea_BoilerBravo_OutputPipe</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasComponent</ReferenceType>
+        <TargetId>bs:BoilersArea_BoilerCharlie_InputPipe</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasComponent</ReferenceType>
+        <TargetId>bs:BoilersArea_BoilerCharlie_OutputPipe</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasComponent</ReferenceType>
+        <TargetId>bs:BoilersArea_BoilerDelta_InputPipe</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>OpcUa:HasComponent</ReferenceType>
+        <TargetId>bs:BoilersArea_BoilerDelta_OutputPipe</TargetId>
+      </Reference>
+    </References>
+  </Object>
+</ModelDesign>

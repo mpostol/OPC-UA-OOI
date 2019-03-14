@@ -1,12 +1,9 @@
-﻿//_______________________________________________________________
-//  Title   : Assembly info for: UAOOI.SemanticData.InformationModelFactory
-//  System  : Microsoft VisualStudio 2015 / C#
+﻿//___________________________________________________________________________________
 //
-//  Copyright MPostol (c) 2018
-//  +48 608 619 899
-//  commserver@cas.eu
-//  https://github.com/mpostol/OPC-UA-OOI
-//_______________________________________________________________
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
 
 using System.Reflection;
 using System.Runtime.InteropServices;

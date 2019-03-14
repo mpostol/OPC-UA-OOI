@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System.Xml;
 
 namespace UAOOI.SemanticData.InformationModelFactory
@@ -53,7 +59,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
       set;
     }
     /// <summary>
-    /// Sets the write access. The optional WriteMask attribute represents the WriteMask attribute of the Basic NodeClass, which exposes the possibilities of a client 
+    /// Sets the write mask. The optional WriteMask attribute represents the WriteMask attribute of the Basic NodeClass, which exposes the possibilities of a client 
     /// to write the attributes of the node. The WriteMask attribute does not take any user access rights into account, that is, although an attribute is writable 
     /// this may be restricted to a certain user/user group.
     /// </summary>

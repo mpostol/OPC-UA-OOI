@@ -1,4 +1,11 @@
-﻿using System.Xml;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+using System.Xml;
 
 namespace UAOOI.SemanticData.InformationModelFactory
 {
@@ -29,7 +36,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// Sets a value indicating whether this instance is inverse.
     /// </summary>
     /// <value><c>true</c> if this instance is inverse; otherwise, <c>false</c>.</value>
-    [System.ComponentModel.DefaultValueAttribute(false)]
+    [System.ComponentModel.DefaultValue(false)]
     bool IsInverse
     {
       set;

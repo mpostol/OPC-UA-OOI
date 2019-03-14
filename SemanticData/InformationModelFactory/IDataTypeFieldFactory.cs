@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System.Xml;
 
 namespace UAOOI.SemanticData.InformationModelFactory
@@ -58,7 +64,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// <summary>
     /// The value associated with the field. This field is only specified for subtypes of Enumeration.
     /// </summary>
-    /// <value>The value.</value>
+    /// <value>The value. </value>
     int Value
     {
       set;

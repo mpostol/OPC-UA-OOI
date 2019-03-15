@@ -118,6 +118,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solutio
 		TableOfContent.md = TableOfContent.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UAModelDesignExport", "SemanticData\UAModelDesignExport\SemanticData.UAModelDesignExport.csproj", "{C970C14C-98AA-48A9-9F6F-D00C92FA6CEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -260,6 +262,10 @@ Global
 		{AFCCA7C9-47FE-4FB6-935E-12D686EEC58F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFCCA7C9-47FE-4FB6-935E-12D686EEC58F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFCCA7C9-47FE-4FB6-935E-12D686EEC58F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C970C14C-98AA-48A9-9F6F-D00C92FA6CEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C970C14C-98AA-48A9-9F6F-D00C92FA6CEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C970C14C-98AA-48A9-9F6F-D00C92FA6CEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C970C14C-98AA-48A9-9F6F-D00C92FA6CEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -301,6 +307,7 @@ Global
 		{3CE5CCA6-0EAD-49EF-AB69-D1F17A9C6D43} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
 		{F0B59A0A-90DA-41D3-8BAD-96B1F266DB6F} = {19A61D68-0ECA-4093-AEE5-370BC3CE777C}
 		{AFCCA7C9-47FE-4FB6-935E-12D686EEC58F} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
+		{C970C14C-98AA-48A9-9F6F-D00C92FA6CEF} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9388D93E-9AA9-40EE-A0C6-F096265079B2}

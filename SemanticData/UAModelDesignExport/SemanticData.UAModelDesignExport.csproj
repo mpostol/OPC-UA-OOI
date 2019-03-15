@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>UAOOI.SemanticData.UAModelDesignExport</AssemblyName>
+    <RootNamespace>UAOOI.SemanticData.UAModelDesignExport</RootNamespace>
+    <Description>This library provides implementation o f the export an XML file compliant with the UAModelDeign schema. By design The UAModelDeign schema describes the structure of an XML document representing the OPC UA Information Model that is used as the input for the [`UA-ModelCompiler`](https://github.com/OPCFoundation/UA-ModelCompiler).</Description>
+    <RepositoryType>GitHub</RepositoryType>
+    <Copyright>Copyright (c) 2019 Mariusz Postol</Copyright>
+    <Authors>Mariusz Postol</Authors>
+    <Company>commsvr.com</Company>
+    <Product>Object Oriented Internet</Product>
+    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
+    <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
+  </ItemGroup>
+
+</Project>

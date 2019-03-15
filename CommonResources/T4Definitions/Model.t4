@@ -5,7 +5,7 @@ string DefaultProductVersion = "0.00.00";
 
 //Solution common
 string ProductTrademark = "Object Oriented Internet";
-string AssemblyCopyright = "Copyright MPostol (c) 2019";
+string AssemblyCopyright = "Copyright (c) 2019 Mariusz Postol";
 string AssemblyCompany = "commsvr.com";
 string Url = "https://github.com/mpostol/OPC-UA-OOI";
 string Email = "mpostol@cas.eu";
@@ -13,7 +13,7 @@ string Phone = "+48 608 619 899";
 string Owner = "commsvr.com";
 string RepositoryVersion = "4.0.1"; //increment on the same position as the group version
 string RepositoryVersionPrerelease = ""; //increment on the same position as the group version
-string Authors = "MPostol";
+string Authors = "Mariusz Postol";
 
 //UAOOI.Common
 string CommonTitle = "UAOOI.DataDiscovery";

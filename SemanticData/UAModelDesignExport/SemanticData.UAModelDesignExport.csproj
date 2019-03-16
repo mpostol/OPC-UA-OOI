@@ -18,6 +18,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
+    <ProjectReference Include="..\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Diagnostic\" />
   </ItemGroup>
 
 </Project>

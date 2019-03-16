@@ -18,7 +18,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
 
     /// <summary>
     /// Sets the modeling rule, which defines whether the component of a complex type are instantiated. 
-    /// This value is defined by processing the object pointed by the HasModellingRule reference.
+    /// This value is defined by processing the object pointed by the HasModelingRule reference.
     /// </summary>
     /// <value>The modeling rule.</value>
     ModelingRules? ModelingRule

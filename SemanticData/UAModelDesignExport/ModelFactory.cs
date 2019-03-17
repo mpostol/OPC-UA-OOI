@@ -12,7 +12,7 @@ using System.Linq;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UAModelDesignExport.XML;
-using UAOOI.SemanticData.UANodeSetValidation;
+using TraceMessage = UAOOI.SemanticData.BuildingErrorsHandling.TraceMessage;
 
 namespace UAOOI.SemanticData.UAModelDesignExport
 {

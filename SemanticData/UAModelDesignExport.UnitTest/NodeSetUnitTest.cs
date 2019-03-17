@@ -11,9 +11,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UAModelDesignExport.Instrumentation;
 using UAOOI.SemanticData.UAModelDesignExport.XML;
-using UAOOI.SemanticData.UANodeSetValidation;
 
 namespace CAS.UA.Model.Designer.ImportExport.UT
 {

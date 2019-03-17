@@ -11,8 +11,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
-using TraceMessage = UAOOI.SemanticData.UANodeSetValidation.TraceMessage;
 
 namespace UAOOI.SemanticData.UAModelDesignExport
 {

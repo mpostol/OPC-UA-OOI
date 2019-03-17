@@ -8,6 +8,7 @@
 
 using System;
 using System.IO;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UAModelDesignExport.XML;
 using UAOOI.SemanticData.UANodeSetValidation;
 

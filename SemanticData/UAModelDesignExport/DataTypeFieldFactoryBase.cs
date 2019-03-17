@@ -9,7 +9,7 @@ using System;
 using System.Diagnostics;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
-using TraceMessage = UAOOI.SemanticData.UANodeSetValidation.TraceMessage;
+using TraceMessage = UAOOI.SemanticData.BuildingErrorsHandling.TraceMessage;
 
 namespace UAOOI.SemanticData.UAModelDesignExport
 {

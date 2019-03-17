@@ -1,5 +1,5 @@
 ﻿
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.BuildingErrorsHandling
 {
   /// <summary>
   /// Class BuildError - provides building descriptions of building errors. 

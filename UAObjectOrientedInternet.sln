@@ -118,9 +118,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solutio
 		TableOfContent.md = TableOfContent.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UAModelDesignExport", "SemanticData\UAModelDesignExport\SemanticData.UAModelDesignExport.csproj", "{C970C14C-98AA-48A9-9F6F-D00C92FA6CEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticData.UAModelDesignExport", "SemanticData\UAModelDesignExport\SemanticData.UAModelDesignExport.csproj", "{C970C14C-98AA-48A9-9F6F-D00C92FA6CEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UAModelDesignExport.UnitTest", "SemanticData\UAModelDesignExport.UnitTest\SemanticData.UAModelDesignExport.UnitTest.csproj", "{ABB9D4E2-568C-483E-8A77-2DE5F4FF886A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.BuildingErrorsHandling", "SemanticData\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj", "{9CA2F05B-FB18-49AD-8520-1BCC838F748C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -272,6 +274,10 @@ Global
 		{ABB9D4E2-568C-483E-8A77-2DE5F4FF886A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABB9D4E2-568C-483E-8A77-2DE5F4FF886A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABB9D4E2-568C-483E-8A77-2DE5F4FF886A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CA2F05B-FB18-49AD-8520-1BCC838F748C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CA2F05B-FB18-49AD-8520-1BCC838F748C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CA2F05B-FB18-49AD-8520-1BCC838F748C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CA2F05B-FB18-49AD-8520-1BCC838F748C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -315,6 +321,7 @@ Global
 		{AFCCA7C9-47FE-4FB6-935E-12D686EEC58F} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
 		{C970C14C-98AA-48A9-9F6F-D00C92FA6CEF} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
 		{ABB9D4E2-568C-483E-8A77-2DE5F4FF886A} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
+		{9CA2F05B-FB18-49AD-8520-1BCC838F748C} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9388D93E-9AA9-40EE-A0C6-F096265079B2}

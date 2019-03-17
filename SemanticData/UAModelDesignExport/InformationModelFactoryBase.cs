@@ -6,8 +6,8 @@
 //___________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
-using UAOOI.SemanticData.UANodeSetValidation;
 
 namespace UAOOI.SemanticData.UAModelDesignExport
 {

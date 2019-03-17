@@ -1,7 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
-using UAOOI.SemanticData.UANodeSetValidation;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {

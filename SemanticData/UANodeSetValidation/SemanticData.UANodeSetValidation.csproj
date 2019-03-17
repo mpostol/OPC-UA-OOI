@@ -50,6 +50,7 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj" />
     <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
   </ItemGroup>
 

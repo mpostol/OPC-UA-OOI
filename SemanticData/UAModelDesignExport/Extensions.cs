@@ -8,9 +8,9 @@
 
 using System;
 using System.Collections.Generic;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
-using UAOOI.SemanticData.UANodeSetValidation;
-using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 
 namespace UAOOI.SemanticData.UAModelDesignExport
 {

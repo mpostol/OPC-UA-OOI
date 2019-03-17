@@ -19,8 +19,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj" />
     <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
-    <ProjectReference Include="..\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

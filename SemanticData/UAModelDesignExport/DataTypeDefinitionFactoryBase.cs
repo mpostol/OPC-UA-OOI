@@ -59,7 +59,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     #endregion
 
     #region private
-    private Action<TraceMessage> m_TraceEvent = null;
+    private readonly Action<TraceMessage> m_TraceEvent = null;
     private List<DataTypeFieldFactoryBase> m_ListOfDataTypeFieldFactoryBase = new List<DataTypeFieldFactoryBase>();
     #endregion
 

@@ -19,6 +19,10 @@
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\git\OPC-UA-OOI\SemanticData\BuildingErrorsHandling\UAOOI.SemanticData.BuildingErrorsHandling.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Update="BuildErrors.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

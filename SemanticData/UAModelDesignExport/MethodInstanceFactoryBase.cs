@@ -92,7 +92,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     #region private
     private XML.Parameter[] GetArguments(IEnumerable<Parameter> parameter)
     {
-      return parameter == null ? null : parameter.Select<Parameter, XML.Parameter>(x => x.ExportArgument(TraceEvent)).ToArray<XML.Parameter>();
+      return parameter?.Select<Parameter, XML.Parameter>(x => x.ExportArgument(TraceEvent)).ToArray<XML.Parameter>();
     }
     private IEnumerable<Parameter> m_InputArguments = null;
     private IEnumerable<Parameter> m_OutputArguments = null;

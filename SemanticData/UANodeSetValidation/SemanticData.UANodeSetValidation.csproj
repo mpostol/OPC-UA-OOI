@@ -26,6 +26,7 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;1705;IDE0001, IDE0002,IDE0003</NoWarn>
+    <DocumentationFile>C:\git\OPC-UA-OOI\SemanticData\UANodeSetValidation\UAOOI.SemanticData.UANodeSetValidation.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

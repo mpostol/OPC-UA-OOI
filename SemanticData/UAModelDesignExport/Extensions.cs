@@ -50,7 +50,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// <param name="valueRank">The value rank.</param>
     /// <param name="specified">if set to <c>true</c> the parameter is specified.</param>
     /// <param name="traceEvent">An <see cref="Action"/> delegate is used to trace event as the <see cref="TraceMessage"/>.</param>
-    /// <returns>Returns value of <see cref="ModelDesign.ValueRank" />.</returns>
+    /// <returns>Returns value of <see cref="XML.ValueRank" />.</returns>
     internal static XML.ValueRank GetValueRank(this int? valueRank, Action<bool> specified, Action<TraceMessage> traceEvent)
     {
       XML.ValueRank _vr = XML.ValueRank.Scalar;

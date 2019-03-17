@@ -93,9 +93,8 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     {
       Debug.Assert(instance != null, "CreateInstanceType.instance cannot be null");
       InstanceDesign _ret = null;
-      if (instance is MethodDesign)
+      if (instance is MethodDesign _src)
       {
-        MethodDesign _src = (MethodDesign)instance;
         XmlQualifiedName _newSymbolicName = new XmlQualifiedName(browsePath.SymbolicName(), instance.SymbolicName.Namespace);
         MethodDesign _method = new MethodDesign
         {

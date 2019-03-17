@@ -46,11 +46,11 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       {
         FilePath = string.Empty,
         InternalPrefix = uri,
-        Name = String.Format("Name{0}", m_Count),
-        Prefix = String.Format("Prefix{0}", m_Count++),
+        Name = string.Format("Name{0}", m_Count),
+        Prefix = string.Format("Prefix{0}", m_Count++),
         Value = uri,
         XmlNamespace = uri,
-        XmlPrefix = String.Format("Prefix{0}", m_Count++)
+        XmlPrefix = string.Format("Prefix{0}", m_Count++)
       };
       m_Namespaces.Add(_new);
     }

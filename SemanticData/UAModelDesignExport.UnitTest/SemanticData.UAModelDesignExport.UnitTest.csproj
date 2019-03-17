@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>IDE0001,IDE0002,IDE0003</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +38,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -50,8 +57,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtensionsUnitTest.cs" />
+    <Compile Include="Instrumentation\AddressSpaceContextService.cs" />
+    <Compile Include="Instrumentation\Extensions.cs" />
+    <Compile Include="Instrumentation\IStylesheetNameProvider.cs" />
+    <Compile Include="Instrumentation\UnitTestsExtensions.cs" />
+    <Compile Include="Instrumentation\XmlFile.cs" />
+    <None Include="Models\DataTypeTest\DataTypeTest.Classes.cs" />
+    <None Include="Models\ObjectTypeTest\ObjectTypeTest.Classes.cs" />
+    <None Include="Models\ReferenceTest\ReferenceTest.Classes.cs" />
+    <None Include="Models\VariableTypeTest\VariableTypeTest.Classes.cs" />
+    <Compile Include="NodeFactoryBaseUnitTest.cs" />
+    <Compile Include="NodeSetUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ModelDesignUnitTest.cs" />
+    <Compile Include="ModelFactoryUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
@@ -60,6 +80,32 @@
     </AdditionalFiles>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Models\DataTypeTest.csv" />
+    <None Include="Models\DataTypeTest\DataTypeTest.PredefinedNodes.uanodes" />
+    <None Include="Models\DataTypeTest\DataTypeTest.Types.bsd" />
+    <None Include="Models\DataTypeTest\DataTypeTest.Types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Models\ObjectTypeTest.csv" />
+    <None Include="Models\ObjectTypeTest\ObjectTypeTest.PredefinedNodes.uanodes" />
+    <None Include="Models\ObjectTypeTest\ObjectTypeTest.Types.bsd" />
+    <None Include="Models\ObjectTypeTest\ObjectTypeTest.Types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Models\ReferenceTest.csv" />
+    <None Include="Models\ReferenceTest\ReferenceTest.PredefinedNodes.uanodes" />
+    <None Include="Models\ReferenceTest\ReferenceTest.Types.bsd" />
+    <None Include="Models\ReferenceTest\ReferenceTest.Types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Models\TestModels.uamdsl" />
+    <None Include="Models\VariableTypeTest.csv" />
+    <None Include="Models\VariableTypeTest\VariableTypeTest.PredefinedNodes.uanodes" />
+    <None Include="Models\VariableTypeTest\VariableTypeTest.Types.bsd" />
+    <None Include="Models\VariableTypeTest\VariableTypeTest.Types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -67,10 +113,55 @@
     <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj">
+      <Project>{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}</Project>
+      <Name>SemanticData.InformationModelFactory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UAModelDesignExport\SemanticData.UAModelDesignExport.csproj">
       <Project>{c970c14c-98aa-48a9-9f6f-d00c92fa6cef}</Project>
       <Name>SemanticData.UAModelDesignExport</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj">
+      <Project>{352378A0-8B2E-4679-BB44-FD0BCC8467D9}</Project>
+      <Name>SemanticData.UANodeSetValidation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\DataTypeTest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Models\DataTypeTest\DataTypeTest.NodeSet.xml" />
+    <None Include="Models\DataTypeTest\DataTypeTest.NodeSet2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Models\DataTypeTest\DataTypeTest.PredefinedNodes.xml" />
+    <None Include="Models\ObjectTypeTest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Models\ObjectTypeTest\ObjectTypeTest.NodeSet.xml" />
+    <None Include="Models\ObjectTypeTest\ObjectTypeTest.NodeSet2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Models\ObjectTypeTest\ObjectTypeTest.PredefinedNodes.xml" />
+    <Content Include="Models\ReadMe.txt" />
+    <None Include="Models\ReferenceTest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Models\ReferenceTest\ReferenceTest.NodeSet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Models\ReferenceTest\ReferenceTest.NodeSet2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Models\ReferenceTest\ReferenceTest.PredefinedNodes.xml" />
+    <None Include="Models\VariableTypeTest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Models\VariableTypeTest\VariableTypeTest.NodeSet.xml" />
+    <None Include="Models\VariableTypeTest\VariableTypeTest.NodeSet2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Models\VariableTypeTest\VariableTypeTest.PredefinedNodes.xml" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

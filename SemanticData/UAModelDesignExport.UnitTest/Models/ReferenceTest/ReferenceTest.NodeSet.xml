@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NodeSet xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+  <NamespaceUris>
+    <String>http://opcfoundation.org/UA/</String>
+    <String>http://cas.eu/UA/CommServer/UnitTests/ReferenceTest</String>
+  </NamespaceUris>
+  <ServerUris />
+  <Nodes>
+    <Node i:type="ReferenceTypeNode">
+      <NodeId>
+        <Identifier>ns=1;i=1</Identifier>
+      </NodeId>
+      <NodeClass>ReferenceType_32</NodeClass>
+      <BrowseName>
+        <NamespaceIndex>1</NamespaceIndex>
+        <Name>ReferenceTypeTest</Name>
+      </BrowseName>
+      <DisplayName>
+        <Locale></Locale>
+        <Text>ReferenceTypeTest</Text>
+      </DisplayName>
+      <Description i:nil="true" />
+      <WriteMask>0</WriteMask>
+      <UserWriteMask>0</UserWriteMask>
+      <References>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=45</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>true</IsInverse>
+          <TargetId>
+            <Identifier>i=46</Identifier>
+          </TargetId>
+        </ReferenceNode>
+      </References>
+      <IsAbstract>false</IsAbstract>
+      <Symmetric>false</Symmetric>
+      <InverseName>
+        <Locale></Locale>
+        <Text>FromSomwhere</Text>
+      </InverseName>
+    </Node>
+  </Nodes>
+</NodeSet>

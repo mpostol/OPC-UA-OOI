@@ -14,6 +14,8 @@
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA</PackageTags>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +25,10 @@
 
   <ItemGroup>
     <Folder Include="Diagnostic\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommonServiceLocator" Version="2.0.4" />
   </ItemGroup>
 
 </Project>

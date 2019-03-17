@@ -1,0 +1,9 @@
+ComplexVariableType,8,VariableType
+ComplexVariableType_Definition,9,Variable
+ComplexVariableType_ValuePrecision,10,Variable
+ComplexVariableType_InstrumentRange,11,Variable
+ComplexVariableType_EURange,12,Variable
+ComplexVariableType_EngineeringUnits,13,Variable
+ComplexVariableType_VariableChild,14,Variable
+ArrayVariableType,15,VariableType
+SimpleVariableWithValueType,16,VariableType

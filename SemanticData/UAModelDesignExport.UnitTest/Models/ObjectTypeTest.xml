@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModelDesign xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cas="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ua="http://opcfoundation.org/UA/" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+  <Namespaces>
+    <Namespace Name="cas" Prefix="ObjectTypeTest" XmlPrefix="cas">http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest</Namespace>
+    <Namespace Name="ua" XmlPrefix="ua">http://opcfoundation.org/UA/</Namespace>
+  </Namespaces>
+  <ObjectType SymbolicName="cas:ComplexObjectType" BaseType="ua:ServerType">
+    <Children>
+      <Object SymbolicName="cas:ChildObject" ModellingRule="MandatoryPlaceholder" SupportsEvents="true" />
+      <Property SymbolicName="cas:BrowseName4node66" ModellingRule="Mandatory" DataType="ua:LocalizedText">
+        <BrowseName>ChildProperty</BrowseName>
+        <References>
+          <Reference IsInverse="true" IsOneWay="true">
+            <ReferenceType>cas:FlowTo</ReferenceType>
+            <TargetId>cas:ComplexObjectType_NameNotSet1109</TargetId>
+          </Reference>
+        </References>
+      </Property>
+      <Variable SymbolicName="cas:NameNotSet1109" TypeDefinition="ua:AnalogItemType" ModellingRule="Mandatory">
+        <BrowseName>BrowseName4node1109</BrowseName>
+      </Variable>
+      <Method SymbolicName="cas:ChildMethod" TypeDefinition="cas:ChildMethodComplexObjectType" ModellingRule="Mandatory" />
+      <Method SymbolicName="cas:NonExecutableMethod" TypeDefinition="cas:NonExecutableMethodComplexObjectType" ModellingRule="Mandatory" />
+    </Children>
+  </ObjectType>
+  <ReferenceType SymbolicName="cas:FlowTo" BaseType="ua:NonHierarchicalReferences" Symmetric="false">
+    <DisplayName>Flow to type</DisplayName>
+    <Description>It is test ReferenceType</Description>
+    <InverseName>FlowFrom</InverseName>
+  </ReferenceType>
+  <Method SymbolicName="cas:ChildMethodComplexObjectType">
+    <InputArguments>
+      <Argument Name="Input1" DataType="ua:Int32" />
+      <Argument Name="Input2" DataType="ua:Int32" />
+    </InputArguments>
+    <OutputArguments>
+      <Argument Name="Output1" DataType="ua:Int32" />
+    </OutputArguments>
+  </Method>
+  <Method SymbolicName="cas:NonExecutableMethodComplexObjectType" NonExecutable="true" />
+</ModelDesign>

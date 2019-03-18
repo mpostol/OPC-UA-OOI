@@ -26,7 +26,8 @@ The root of the definitions is the `IModelFactory` interface.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\git\OPC-UA-OOI\SemanticData\InformationModelFactory\UAOOI.SemanticData.InformationModelFactory.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netstandard2.0\UAOOI.SemanticData.InformationModelFactory.xml</DocumentationFile>
+    <OutputPath>bin\Debug\netstandard2.0\</OutputPath>
   </PropertyGroup>
 
 </Project>

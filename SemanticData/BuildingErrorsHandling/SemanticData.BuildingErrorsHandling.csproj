@@ -20,7 +20,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\git\OPC-UA-OOI\SemanticData\BuildingErrorsHandling\UAOOI.SemanticData.BuildingErrorsHandling.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netstandard2.0\UAOOI.SemanticData.BuildingErrorsHandling.xml</DocumentationFile>
+    <OutputPath>bin\Debug\netstandard2.0\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

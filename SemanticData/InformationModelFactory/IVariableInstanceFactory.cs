@@ -23,7 +23,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// may be restricted to a certain user / user group.
     /// </summary>
     /// <value>The access level.</value>
-    byte? AccessLevel
+    uint? AccessLevel
     {
       set;
     }

@@ -100,22 +100,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       foreach (DataTypeField _item in dataTypeDefinition.Field)
       {
         IDataTypeFieldFactory _nP = definition.NewField();
-        _nP.DataType = modelContext.ExportBrowseName(_item.DataType, DataTypes.BaseDataType, traceEvent);
-        _item.Description.ExportLocalizedTextArray(_nP.AddDescription);
-        _nP.Identifier = _item.Value;
         _nP.Name = _item.Name;
-        _nP.ValueRank = _item.ValueRank.GetValueRank(traceEvent);
         _nP.SymbolicName = _item.SymbolicName;
+        _item.DisplayName.ExportLocalizedTextArray(_nP.AddDisplayName);
+        _nP.DataType = modelContext.ExportBrowseName(_item.DataType, DataTypes.BaseDataType, traceEvent);
+        _nP.ValueRank = _item.ValueRank.GetValueRank(traceEvent);
+        _nP.ArrayDimensions = _item.ArrayDimensions;
+        _nP.MaxStringLength = _item.MaxStringLength;
+        _item.Description.ExportLocalizedTextArray(_nP.AddDescription);
         _nP.Value = _item.Value;
-        if (_item.Definition == null)
-          continue;
-        IDataTypeDefinitionFactory _new = _nP.NewDefinition();
-        _item.Definition.GetParameters(_new, modelContext, traceEvent);
+        _nP.IsOptional = _item.IsOptional;
       }
     }
     internal static void ExportLocalizedTextArray(this XML.LocalizedText[] text, LocalizedTextFactory createLocalizedText)
     {
-
       if (text == null || text.Length == 0)
         return;
       foreach (XML.LocalizedText item in text)

@@ -15,8 +15,11 @@ namespace UAOOI.SemanticData.InformationModelFactory
   public interface IDataTypeFieldFactory
   {
     /// <summary>
-    /// Sets the DataType name.
+    /// Sets the DataType name. 
     /// </summary>
+    /// <remarks>
+    /// This field is not specified for subtypes of Enumeration.
+    /// </remarks>
     /// <value>The type of the data.</value>
     XmlQualifiedName DataType
     {
@@ -29,14 +32,11 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// <param name="valueField">The localized text.</param>
     void AddDescription(string localeField, string valueField);
     /// <summary>
-    /// Sets the identifier the value associated with the field.
+    /// Adds the display name.
     /// </summary>
-    /// <value>The identifier.</value>
-    //TODO IDataTypeFieldFactory.Identifier is not defined by the schema #46
-    int? Identifier
-    {
-      set;
-    }
+    /// <param name="localeField">The locale field specified as a string that is composed of a language component and a country/region component as specified by RFC 3066.</param>
+    /// <param name="valueField">The localized text.</param>
+    void AddDisplayName(string localeField, string valueField);
     /// <summary>
     /// Sets the name for the field that is unique within the <see cref="IDataTypeDefinitionFactory"/>.
     /// </summary>
@@ -53,14 +53,15 @@ namespace UAOOI.SemanticData.InformationModelFactory
     {
       set;
     }
-    /// <summary>Creates new object of <see cref="IDataTypeDefinitionFactory"/> for anonymous definition of the DatType.
-    /// The field is a structure with a layout specified by the <see cref="IDataTypeDefinitionFactory"/>.
-    /// This field is optional.
-    /// This field allows designers to create nested structures without defining a new DataType Node for each structure.
-    /// This field is not specified for subtypes of Enumeration.
-    /// </summary>
-    /// <value>A new instance of <see cref="IDataTypeDefinitionFactory"/> encapsulating the DatType definition.</value>
-    IDataTypeDefinitionFactory NewDefinition();
+    //TODO to be removed in UANodeSet.xsd - synchronize with current OPCF Release #207
+    ///// <summary>Creates new object of<see cref= "IDataTypeDefinitionFactory" /> for anonymous definition of the DatType.
+    ///// The field is a structure with a layout specified by the <see cref = "IDataTypeDefinitionFactory" />.
+    ///// This field is optional.
+    ///// This field allows designers to create nested structures without defining a new DataType Node for each structure.
+    ///// This field is not specified for subtypes of Enumeration.
+    ///// </summary>
+    ///// <value>A new instance of<see cref= "IDataTypeDefinitionFactory" /> encapsulating the DatType definition.</value>
+    ////IDataTypeDefinitionFactory NewDefinition();
     /// <summary>
     /// The value associated with the field. This field is only specified for subtypes of Enumeration.
     /// </summary>
@@ -79,5 +80,34 @@ namespace UAOOI.SemanticData.InformationModelFactory
     {
       set;
     }
+    /// <summary>
+    /// Gets the array dimensions.
+    /// </summary>
+    /// <remarks>
+    /// The maximum length of an array. This field is a comma separated list of unsigned integer values.The list has a number of elements equal to the ValueRank.
+    /// The value is 0 if the maximum is not known for a dimension. This field is not specified if the ValueRank less or equal 0.
+    /// This field is not specified for subtypes of Enumeration or for DataTypes
+    /// </remarks>
+    /// <value>The array dimensions.</value>
+    string ArrayDimensions { set; }
+    /// <summary>
+    /// Sets the maximum length of the string.
+    /// </summary>
+    /// <remarks>The maximum length of a String or ByteString value. If not known the value is 0. The value is 0 if the DataType is not String or ByteString.
+    /// If the ValueRank > 0 the maximum applies to each element in the array. This field is not specified for subtypes of Enumeration or for DataTypes with 
+    /// the OptionSetValues Property.
+    /// </remarks>
+    /// <value>The maximum length of the string.</value>
+    uint MaxStringLength { set; }
+
+    /// <summary>
+    /// Sets a value indicating whether this instance is optional.
+    /// </summary>
+    /// <remarks>
+    /// The field indicates if a data type field in a structure is optional. This field is optional.The default value is false. This field is not specified for subtypes of Enumeration and Union.
+    /// </remarks>
+    /// <value><c>true</c> if this instance is optional; otherwise, <c>false</c>.</value>
+    bool IsOptional { set; }
+
   }
 }

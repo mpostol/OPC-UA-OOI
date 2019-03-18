@@ -143,6 +143,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd")]
     public partial class ModelTableEntry {
         
+        private RolePermission[] rolePermissionsField;
+        
         private ModelTableEntry[] requiredModelField;
         
         private string modelUriField;
@@ -152,6 +154,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         private System.DateTime publicationDateField;
         
         private bool publicationDateFieldSpecified;
+        
+        private byte accessRestrictionsField;
+        
+        public ModelTableEntry() {
+            this.accessRestrictionsField = ((byte)(0));
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public RolePermission[] RolePermissions {
+            get {
+                return this.rolePermissionsField;
+            }
+            set {
+                this.rolePermissionsField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("RequiredModel")]
@@ -205,6 +224,58 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
             }
             set {
                 this.publicationDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(typeof(byte), "0")]
+        public byte AccessRestrictions {
+            get {
+                return this.accessRestrictionsField;
+            }
+            set {
+                this.accessRestrictionsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd")]
+    public partial class RolePermission {
+        
+        private uint permissionsField;
+        
+        private string valueField;
+        
+        public RolePermission() {
+            this.permissionsField = ((uint)(0));
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(typeof(uint), "0")]
+        public uint Permissions {
+            get {
+                return this.permissionsField;
+            }
+            set {
+                this.permissionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
             }
         }
     }
@@ -363,9 +434,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd")]
     public partial class DataTypeField {
         
+        private LocalizedText[] displayNameField;
+        
         private LocalizedText[] descriptionField;
         
-        private DataTypeDefinition definitionField;
+        private string documentationField;
         
         private string nameField;
         
@@ -375,6 +448,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         
         private int valueRankField;
         
+        private string arrayDimensionsField;
+        
+        private uint maxStringLengthField;
+        
         private int valueField;
         
         private bool isOptionalField;
@@ -382,8 +459,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         public DataTypeField() {
             this.dataTypeField = "i=24";
             this.valueRankField = -1;
+            this.arrayDimensionsField = "";
+            this.maxStringLengthField = ((uint)(0));
             this.valueField = -1;
             this.isOptionalField = false;
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("DisplayName")]
+        public LocalizedText[] DisplayName {
+            get {
+                return this.displayNameField;
+            }
+            set {
+                this.displayNameField = value;
+            }
         }
         
         /// <remarks/>
@@ -398,12 +488,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         }
         
         /// <remarks/>
-        public DataTypeDefinition Definition {
+        public string Documentation {
             get {
-                return this.definitionField;
+                return this.documentationField;
             }
             set {
-                this.definitionField = value;
+                this.documentationField = value;
             }
         }
         
@@ -450,6 +540,30 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
             }
             set {
                 this.valueRankField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="token")]
+        [System.ComponentModel.DefaultValueAttribute("")]
+        public string ArrayDimensions {
+            get {
+                return this.arrayDimensionsField;
+            }
+            set {
+                this.arrayDimensionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(typeof(uint), "0")]
+        public uint MaxStringLength {
+            get {
+                return this.maxStringLengthField;
+            }
+            set {
+                this.maxStringLengthField = value;
             }
         }
         
@@ -530,16 +644,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         
         private string nameField;
         
-        private string baseTypeField;
-        
         private string symbolicNameField;
         
         private bool isUnionField;
         
+        private bool isOptionSetField;
+        
+        private string baseTypeField;
+        
         public DataTypeDefinition() {
-            this.baseTypeField = "";
             this.symbolicNameField = "";
             this.isUnionField = false;
+            this.isOptionSetField = false;
+            this.baseTypeField = "";
         }
         
         /// <remarks/>
@@ -567,18 +684,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.ComponentModel.DefaultValueAttribute("")]
-        public string BaseType {
-            get {
-                return this.baseTypeField;
-            }
-            set {
-                this.baseTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("")]
         public string SymbolicName {
             get {
                 return this.symbolicNameField;
@@ -597,6 +702,64 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
             }
             set {
                 this.isUnionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool IsOptionSet {
+            get {
+                return this.isOptionSetField;
+            }
+            set {
+                this.isOptionSetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("")]
+        public string BaseType {
+            get {
+                return this.baseTypeField;
+            }
+            set {
+                this.baseTypeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd")]
+    public partial class UAMethodArgument {
+        
+        private string nameField;
+        
+        private LocalizedText[] descriptionField;
+        
+        /// <remarks/>
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Description")]
+        public LocalizedText[] Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
             }
         }
     }
@@ -736,9 +899,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         
         private string[] categoryField;
         
-        private string documentationField;
-        
         private Reference[] referencesField;
+        
+        private RolePermission[] rolePermissionsField;
+        
+        private string documentationField;
         
         private System.Xml.XmlElement[] extensionsField;
         
@@ -750,11 +915,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         
         private uint userWriteMaskField;
         
+        private byte accessRestrictionsField;
+        
         private string symbolicNameField;
+        
+        private ReleaseStatus releaseStatusField;
         
         public UANode() {
             this.writeMaskField = ((uint)(0));
             this.userWriteMaskField = ((uint)(0));
+            this.accessRestrictionsField = ((byte)(0));
+            this.releaseStatusField = ReleaseStatus.Released;
         }
         
         /// <remarks/>
@@ -791,16 +962,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         }
         
         /// <remarks/>
-        public string Documentation {
-            get {
-                return this.documentationField;
-            }
-            set {
-                this.documentationField = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
         public Reference[] References {
             get {
@@ -808,6 +969,27 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
             }
             set {
                 this.referencesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public RolePermission[] RolePermissions {
+            get {
+                return this.rolePermissionsField;
+            }
+            set {
+                this.rolePermissionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Documentation {
+            get {
+                return this.documentationField;
+            }
+            set {
+                this.documentationField = value;
             }
         }
         
@@ -870,6 +1052,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(typeof(byte), "0")]
+        public byte AccessRestrictions {
+            get {
+                return this.accessRestrictionsField;
+            }
+            set {
+                this.accessRestrictionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string SymbolicName {
             get {
                 return this.symbolicNameField;
@@ -878,6 +1072,34 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
                 this.symbolicNameField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(ReleaseStatus.Released)]
+        public ReleaseStatus ReleaseStatus {
+            get {
+                return this.releaseStatusField;
+            }
+            set {
+                this.releaseStatusField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd")]
+    public enum ReleaseStatus {
+        
+        /// <remarks/>
+        Released,
+        
+        /// <remarks/>
+        Draft,
+        
+        /// <remarks/>
+        Deprecated,
     }
     
     /// <remarks/>
@@ -961,6 +1183,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         
         private DataTypeDefinition definitionField;
         
+        private DataTypePurpose purposeField;
+        
+        public UADataType() {
+            this.purposeField = DataTypePurpose.Normal;
+        }
+        
         /// <remarks/>
         public DataTypeDefinition Definition {
             get {
@@ -970,6 +1198,34 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
                 this.definitionField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(DataTypePurpose.Normal)]
+        public DataTypePurpose Purpose {
+            get {
+                return this.purposeField;
+            }
+            set {
+                this.purposeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd")]
+    public enum DataTypePurpose {
+        
+        /// <remarks/>
+        Normal,
+        
+        /// <remarks/>
+        ServicesOnly,
+        
+        /// <remarks/>
+        CodeGenerator,
     }
     
     /// <remarks/>
@@ -1126,6 +1382,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd")]
     public partial class UAMethod : UAInstance {
         
+        private UAMethodArgument[] argumentDescriptionField;
+        
         private bool executableField;
         
         private bool userExecutableField;
@@ -1135,6 +1393,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         public UAMethod() {
             this.executableField = true;
             this.userExecutableField = true;
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ArgumentDescription")]
+        public UAMethodArgument[] ArgumentDescription {
+            get {
+                return this.argumentDescriptionField;
+            }
+            set {
+                this.argumentDescriptionField = value;
+            }
         }
         
         /// <remarks/>
@@ -1191,9 +1460,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         
         private string arrayDimensionsField;
         
-        private byte accessLevelField;
+        private uint accessLevelField;
         
-        private byte userAccessLevelField;
+        private uint userAccessLevelField;
         
         private double minimumSamplingIntervalField;
         
@@ -1203,8 +1472,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
             this.dataTypeField = "i=24";
             this.valueRankField = -1;
             this.arrayDimensionsField = "";
-            this.accessLevelField = ((byte)(1));
-            this.userAccessLevelField = ((byte)(1));
+            this.accessLevelField = ((uint)(1));
+            this.userAccessLevelField = ((uint)(1));
             this.minimumSamplingIntervalField = 0D;
             this.historizingField = false;
         }
@@ -1268,8 +1537,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(typeof(byte), "1")]
-        public byte AccessLevel {
+        [System.ComponentModel.DefaultValueAttribute(typeof(uint), "1")]
+        public uint AccessLevel {
             get {
                 return this.accessLevelField;
             }
@@ -1280,8 +1549,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(typeof(byte), "1")]
-        public byte UserAccessLevel {
+        [System.ComponentModel.DefaultValueAttribute(typeof(uint), "1")]
+        public uint UserAccessLevel {
             get {
                 return this.userAccessLevelField;
             }
@@ -1402,8 +1671,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         
         private ReferenceChange[] referencesToDeleteField;
         
-        private string versionField;
-        
         private System.DateTime lastModifiedField;
         
         private bool lastModifiedFieldSpecified;
@@ -1513,17 +1780,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Version {
-            get {
-                return this.versionField;
-            }
-            set {
-                this.versionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
         public System.DateTime LastModified {
             get {
                 return this.lastModifiedField;
@@ -1585,8 +1841,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
         
         private NodeSetStatus[] referencesToDeleteField;
         
-        private string versionField;
-        
         private System.DateTime lastModifiedField;
         
         private bool lastModifiedFieldSpecified;
@@ -1634,17 +1888,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML {
             }
             set {
                 this.referencesToDeleteField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Version {
-            get {
-                return this.versionField;
-            }
-            set {
-                this.versionField = value;
             }
         }
         

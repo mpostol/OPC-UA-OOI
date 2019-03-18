@@ -56,8 +56,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       RemoveArguments(BrowseNames.OutputArguments, argument);
     }
+    /// <summary>
+    /// Adds the argument description.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="locale">The locale.</param>
+    /// <param name="value">The value.</param>
+    public void AddArgumentDescription(string name, string locale, string value) { }
     #endregion
-    
+
     private Parameter[] RemoveArguments(string parameterKind, Func<XmlElement, Parameter[]> getParameters)
     {
       Parameter[] _parameters = null;

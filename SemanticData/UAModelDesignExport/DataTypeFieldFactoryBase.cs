@@ -14,9 +14,15 @@ using TraceMessage = UAOOI.SemanticData.BuildingErrorsHandling.TraceMessage;
 namespace UAOOI.SemanticData.UAModelDesignExport
 {
 
+  /// <summary>
+  /// Class DataTypeFieldFactoryBase.
+  /// Implements the <see cref="UAOOI.SemanticData.InformationModelFactory.IDataTypeFieldFactory" />
+  /// </summary>
+  /// <seealso cref="UAOOI.SemanticData.InformationModelFactory.IDataTypeFieldFactory" />
   internal class DataTypeFieldFactoryBase : IDataTypeFieldFactory
   {
 
+    #region constructors
     /// <summary>
     /// Initializes a new instance of the <see cref="DataTypeFieldFactoryBase"/> class.
     /// </summary>
@@ -24,8 +30,9 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     internal DataTypeFieldFactoryBase(Action<TraceMessage> traceEvent)
     {
       Debug.Assert(traceEvent != null);
-      this.TraceEvent = traceEvent;
+      TraceEvent = traceEvent;
     }
+    #endregion
 
     #region IDataTypeFieldFactory
     public XmlQualifiedName DataType
@@ -33,37 +40,21 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       set;
       private get;
     }
-    public int? Identifier
-    {
-      set { }
-    }
-    public string Name
-    {
-      set;
-      private get;
-    }
-    public int? ValueRank
-    {
-      set;
-      private get;
-    }
-    public IDataTypeDefinitionFactory NewDefinition()
-    {
-      return new DataTypeDefinitionFactoryBase(this.TraceEvent); //TODO add trace - not implemented.
-    }
-    public int Value
-    {
-      set;
-      private get;
-    }
-    public string SymbolicName
-    {
-      set { }
-    }
+    public string Name { set; private get; }
+    public int? ValueRank { set; private get; }
+    public int Value { set; private get; }
+    public string SymbolicName { set; private get; }
     public void AddDescription(string localeField, string valueField)
     {
       Extensions.AddLocalizedText(localeField, valueField, ref m_Description, TraceEvent);
     }
+    public void AddDisplayName(string localeField, string valueField)
+    {
+      Extensions.AddLocalizedText(localeField, valueField, ref m_Description, TraceEvent);
+    }
+    public string ArrayDimensions { set; private get; }
+    public uint MaxStringLength { set; private get; }
+    public bool IsOptional { set; private get; }
     #endregion
 
     #region internal API
@@ -73,11 +64,14 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       XML.Parameter _newParameter = new XML.Parameter()
       {
         DataType = DataType,
-        Description = this.m_Description,
-        Identifier = this.Value,
+        Description = m_Description,
+        Identifier = Value,
         IdentifierSpecified = true,
-        Name = this.Name,
-        ValueRank = this.ValueRank.GetValueRank(x => _ValueRankSpecified = x, this.TraceEvent)
+        Name = Name,
+        ValueRank = ValueRank.GetValueRank(x => _ValueRankSpecified = x, TraceEvent),
+        //TODO to be implemented according to the in UANodeSet.xsd - synchronize with current OPCF Release #207
+        //ArrayDimensions, BitMask, m_DisplayNam 
+        // m_DisplayNam and Description are arrays but here are 
 
         //_item.Definition 
         //The field is a structure with a layout specified by the definition.
@@ -101,6 +95,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     #region private
     private Action<TraceMessage> TraceEvent { get; set; }
     private XML.LocalizedText m_Description = null;
+    private readonly XML.LocalizedText m_DisplayNam = null;
     #endregion
 
   }

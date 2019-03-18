@@ -75,6 +75,12 @@
     </ns1:NamedBuildError>
     <ns1:NamedBuildError>
       <ns1:Focus>NodeClass</ns1:Focus>
+      <ns1:Identifier>P3-0856000000</ns1:Identifier>
+      <ns1:Descriptor>The value must be less than 0x7.</ns1:Descriptor>
+      <ns1:Name>WrongAccessRestriction</ns1:Name>
+    </ns1:NamedBuildError>
+    <ns1:NamedBuildError>
+      <ns1:Focus>NodeClass</ns1:Focus>
       <ns1:Identifier>P3-0503020000</ns1:Identifier>
       <ns1:Descriptor>Unexpected value of the InverseName.</ns1:Descriptor>
       <ns1:Name>WrongInverseName</ns1:Name>

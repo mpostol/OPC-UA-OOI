@@ -28,7 +28,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// may be restricted to a certain user / user group.
     /// </summary>
     /// <value>The access level.</value>
-    public byte? AccessLevel
+    public uint? AccessLevel
     {
       set { }
     }

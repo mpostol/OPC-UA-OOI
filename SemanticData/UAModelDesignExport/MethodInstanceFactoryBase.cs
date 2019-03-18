@@ -66,6 +66,18 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     {
       m_OutputArguments = RemoveArguments(BrowseNames.OutputArguments, argument);
     }
+    /// <summary>
+    /// Adds the argument description.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="locale">The locale.</param>
+    /// <param name="value">The value.</param>
+    /// <exception cref="NotImplementedException"></exception>
+    public void AddArgumentDescription(string name, string locale, string value)
+    {
+      //TODO to be removed in UANodeSet.xsd - synchronize with current OPCF Release #207
+      throw new NotImplementedException();
+    }
     #endregion
 
     //internal API
@@ -113,6 +125,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       m_Nodes = _newChildrenCollection;
       return _parameters == null || _parameters.Length == 0 ? null : _parameters.AsEnumerable<Parameter>();
     }
+
     #endregion
   }
 

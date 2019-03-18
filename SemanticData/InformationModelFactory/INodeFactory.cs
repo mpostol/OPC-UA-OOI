@@ -6,6 +6,7 @@
 //___________________________________________________________________________________
 
 using System.Xml;
+using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 
 namespace UAOOI.SemanticData.InformationModelFactory
 {
@@ -69,6 +70,14 @@ namespace UAOOI.SemanticData.InformationModelFactory
     {
       set;
     }
+    /// <summary>
+    /// Sets the access restrictions.
+    /// </summary>
+    /// <remarks>
+    /// The AccessRestrictions that apply to the Node.
+    /// </remarks>
+    /// <value>The access restrictions.</value>
+    AccessRestrictions AccessRestrictions { set; }
 
-  }
+    }
 }

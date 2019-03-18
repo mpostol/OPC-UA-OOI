@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
+using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 using UAOOI.SemanticData.UAModelDesignExport.XML;
 using TraceMessage = UAOOI.SemanticData.BuildingErrorsHandling.TraceMessage;
 
@@ -66,11 +67,13 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// </summary>
     /// <value>The write access.</value>
     /// <remarks>Default Value "0"</remarks>
-    public uint WriteAccess
-    {
-      set;
-      private get;
-    }
+    public uint WriteAccess { set; private get; }
+    /// <summary>
+    /// Sets the access restrictions.
+    /// </summary>
+    /// <value>The access restrictions.</value>
+    /// <remarks>The AccessRestrictions that apply to the Node.</remarks>
+    public AccessRestrictions AccessRestrictions { set; private get; }
     /// <summary>
     /// Adds new value for the Description. The optional Description element shall explain the meaning of the node in a localized text using the same mechanisms
     /// for localization as described for the DisplayName.
@@ -79,11 +82,20 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// <param name="valueField">The value field.</param>
     public void AddDescription(string localeField, string valueField)
     {
-      Extensions.AddLocalizedText(localeField, valueField, ref m_Description, this.TraceEvent);
+      Extensions.AddLocalizedText(localeField, valueField, ref m_Description, TraceEvent);
     }
+    /// <summary>
+    /// Adds new value for the DisplayName. The DisplayName attribute contains the localized name of the node.
+    /// Clients should use this attribute if they want to display the name of the node to the user. They should not use
+    /// the BrowseName for this purpose. The server may maintain one or more localized representations for each DisplayName.
+    /// Clients negotiate the locale to be returned when they open a session with the server. The section DisplayName defines the structure of the DisplayName.
+    /// The string part of the DisplayName is restricted to 512 characters.
+    /// </summary>
+    /// <param name="localeField">The locale field.</param>
+    /// <param name="valueField">The value field.</param>
     public void AddDisplayName(string localeField, string valueField)
     {
-      Extensions.AddLocalizedText(localeField, valueField, ref m_DisplayName, this.TraceEvent);
+      Extensions.AddLocalizedText(localeField, valueField, ref m_DisplayName, TraceEvent);
     }
     #endregion
 
@@ -100,23 +112,25 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     #region private
     protected void UpdateNode(NodeDesign nodeDesign, List<string> path, Action<InstanceDesign, List<string>> createInstanceType)
     {
-      string _defaultDisplay = String.IsNullOrEmpty(BrowseName) ? SymbolicName.Name : BrowseName;
+      string _defaultDisplay = string.IsNullOrEmpty(BrowseName) ? SymbolicName.Name : BrowseName;
       nodeDesign.BrowseName = BrowseName == SymbolicName.Name ? null : BrowseName;
       List<NodeDesign> _Members = new List<NodeDesign>();
-      path.Add(this.SymbolicName.Name);
+      path.Add(SymbolicName.Name);
       base.ExportNodes(_Members, path, createInstanceType);
       InstanceDesign[] _items = _Members.Cast<InstanceDesign>().ToArray<InstanceDesign>();
       nodeDesign.Children = _items == null || _items.Length == 0 ? null : new ListOfChildren() { Items = _items };
-      nodeDesign.Description = this.m_Description;
-      nodeDesign.DisplayName = this.m_DisplayName == null || this.m_DisplayName.Value == _defaultDisplay ? null : m_DisplayName;
+      nodeDesign.Description = m_Description;
+      nodeDesign.DisplayName = m_DisplayName == null || m_DisplayName.Value == _defaultDisplay ? null : m_DisplayName;
       nodeDesign.IsDeclaration = false;
       nodeDesign.NumericId = 0;
       nodeDesign.NumericIdSpecified = false;
       nodeDesign.References = m_References.Count == 0 ? null : m_References.Select<ReferenceFactoryBase, Reference>(x => x.Export()).ToArray<Reference>();
       nodeDesign.StringId = null;
       nodeDesign.SymbolicId = null;
-      nodeDesign.SymbolicName = this.SymbolicName;
-      nodeDesign.WriteAccess = this.WriteAccess;
+      nodeDesign.SymbolicName = SymbolicName;
+      nodeDesign.WriteAccess = WriteAccess;
+      //TODO to be removed in UANodeSet.xsd - synchronize with current OPCF Release #207
+      //this.AccessRestrictions
     }
     private LocalizedText m_Description = null;
     private LocalizedText m_DisplayName = null;

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
+using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
 {
@@ -60,10 +61,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// </summary>
     /// <value>The write access.</value>
     /// <remarks>Default Value "0"</remarks>
-    public uint WriteAccess
-    {
-      set { }
-    }
+    public uint WriteAccess { set { } }
+    /// <summary>
+    /// Sets the access restrictions.
+    /// </summary>
+    /// <value>The access restrictions.</value>
+    /// <remarks>The AccessRestrictions that apply to the Node.</remarks>
+    public AccessRestrictions AccessRestrictions { set { } }
     /// <summary>
     /// Adds new value for the Description. The optional Description element shall explain the meaning of the node in a localized text using the same mechanisms
     /// for localization as described for the DisplayName.

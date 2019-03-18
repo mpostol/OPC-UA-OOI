@@ -5,7 +5,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>UAOOI.SemanticData.InformationModelFactory</AssemblyName>
     <PackageId>UAOOI.SemanticData.InformationModelFactory</PackageId>
-    <Version>4.0.2</Version>
+    <Version>5.0.0</Version>
     <Authors>Mariuisz Postol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
@@ -20,9 +20,9 @@ The root of the definitions is the `IModelFactory` interface.</Description>
     <RootNamespace>UAOOI.SemanticData.InformationModelFactory</RootNamespace>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>4.0.2.2</AssemblyVersion>
+    <AssemblyVersion>5.0.0.3</AssemblyVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <FileVersion>4.0.2.0</FileVersion>
+    <FileVersion>5.0.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

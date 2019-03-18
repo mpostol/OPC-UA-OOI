@@ -55,9 +55,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EventNotifierValueNotSupported, String.Format("EventNotifier value: {0}", eventNotifier)));
       return eventNotifier != 0 ? (eventNotifier & EventNotifiers.SubscribeToEvents) != 0 : new Nullable<bool>();
     }
-    internal static byte? GetAccessLevel(this byte accessLevel, Action<TraceMessage> traceEvent)
+    internal static uint? GetAccessLevel(this uint accessLevel, Action<TraceMessage> traceEvent)
     {
-      byte? _ret = new Nullable<byte>();
+      uint? _ret = new Nullable<byte>();
       if (accessLevel <= 0x7F)
         _ret = accessLevel;
       else

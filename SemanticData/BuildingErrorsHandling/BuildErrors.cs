@@ -103,6 +103,14 @@ namespace UAOOI.SemanticData.BuildingErrorsHandling
                     Identifier = "P3-0502070000", 
                     Descriptor = "The value must be less than 0x200000 for the UAVariable and less than 0x400000 for other node types." }; } }
     /// <summary>
+    /// Error: P3-0856000000; Focus: NodeClass; The value must be less than 0x7.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0856000000.</value>
+    public static BuildError WrongAccessRestriction { get { return new BuildError() 
+                  { Focus = Focus.NodeClass, 
+                    Identifier = "P3-0856000000", 
+                    Descriptor = "The value must be less than 0x7." }; } }
+    /// <summary>
     /// Error: P3-0503020000; Focus: NodeClass; Unexpected value of the InverseName.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P3-0503020000.</value>

@@ -51,6 +51,12 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </summary>
     /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XmlElement"/>.</param>
     void AddOutputArguments(Func<XmlElement, Parameter[]> argument);
-
+    /// <summary>
+    /// Adds the argument description.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="locale">The locale.</param>
+    /// <param name="value">The value.</param>
+    void AddArgumentDescription(string name, string locale, string value);
   }
 }

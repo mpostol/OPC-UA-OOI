@@ -80,7 +80,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         _vr = XML.ValueRank.OneOrMoreDimensions;
       return _vr;
     }
-    internal static XML.AccessLevel GetAccessLevel(this byte? accessLevel, Action<bool> accessLevelSpecified, Action<TraceMessage> traceEvent)
+    internal static XML.AccessLevel GetAccessLevel(this uint? accessLevel, Action<bool> accessLevelSpecified, Action<TraceMessage> traceEvent)
     {
       XML.AccessLevel _ret = XML.AccessLevel.None;
       if (!accessLevel.HasValue)

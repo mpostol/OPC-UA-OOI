@@ -93,7 +93,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return "Empty LocalizedText";
       return String.Format("{0}:{1}", localizedText[0].Locale, localizedText[0].Value);
     }
-    internal static void GetParameters(this DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory definition, UAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal static void GetParameters(this DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory definition, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       if (dataTypeDefinition == null || dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
         return;
@@ -103,7 +103,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _nP.Name = _item.Name;
         _nP.SymbolicName = _item.SymbolicName;
         _item.DisplayName.ExportLocalizedTextArray(_nP.AddDisplayName);
-        _nP.DataType = modelContext.ExportBrowseName(_item.DataType, DataTypes.BaseDataType, traceEvent);
+        _nP.DataType = modelContext.ExportBrowseName(_item.DataType, DataTypes.BaseDataType);
         _nP.ValueRank = _item.ValueRank.GetValueRank(traceEvent);
         _nP.ArrayDimensions = _item.ArrayDimensions;
         _nP.MaxStringLength = _item.MaxStringLength;
@@ -139,15 +139,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return localizedText;
     }
-    internal static List<Argument> GetParameters(this XmlElement xmlElement)
+    internal static List<DataSerialization.Argument> GetParameters(this XmlElement xmlElement)
     {
       ListOfExtensionObject _wrapper = xmlElement.GetObject<ListOfExtensionObject>();
       Debug.Assert(_wrapper != null);
       if (_wrapper.ExtensionObject.AsEnumerable<ExtensionObject>().Where<ExtensionObject>(x => !((string)x.TypeId.Identifier).Equals("i=297")).Any())
         throw new ArgumentOutOfRangeException("ExtensionObject.TypeId.Identifier");
-      List<Argument> _ret = new List<Argument>();
+      List<DataSerialization.Argument> _ret = new List<DataSerialization.Argument>();
       foreach (var item in _wrapper.ExtensionObject)
-        _ret.Add(item.Body.GetObject<Argument>());
+        _ret.Add(item.Body.GetObject<DataSerialization.Argument>());
       return _ret;
     }
     /// <summary>

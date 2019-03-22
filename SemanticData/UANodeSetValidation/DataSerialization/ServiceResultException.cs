@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 using System.Security.Permissions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {
   /// <summary>
   /// Class ServiceResultException.

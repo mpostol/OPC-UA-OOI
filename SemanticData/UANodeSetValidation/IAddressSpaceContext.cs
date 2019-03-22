@@ -1,6 +1,15 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -39,4 +48,33 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     void ValidateAndExportModel(string targetNamespace);
 
   }
+  internal interface IAddressSpaceBuildContext
+  {
+
+    /// <summary>
+    /// Exports the browse name.
+    /// </summary>
+    /// <param name="id">The identifier.</param>
+    /// <returns>XmlQualifiedName.</returns>
+    XmlQualifiedName ExportBrowseName(NodeId id);
+    Parameter ExportArgument(DataSerialization.Argument argument, XmlQualifiedName dataType);
+    IUANodeContext GetOrCreateNodeContext(NodeId id, IUAModelContext uAModelContext);
+    ushort GetIndexOrAppend(string identifier);
+    string GetNamespace(ushort namespaceIndex);
+    IEnumerable<UAReferenceContext> GetMyReferences(IUANodeContext index);
+    IEnumerable<UAReferenceContext> GetReferences2Me(IUANodeContext index);
+    void GetDerivedInstances(IUANodeContext rootNode, List<IUANodeContext> list);
+
+  }
+  internal interface IAddressSpaceValidationContext
+  {
+
+    /// <summary>
+    /// Exports the current namespace table containing all namespaces relevant for exported model.
+    /// </summary>
+    /// <returns>Array of relevant namespaces as the <see cref="System.String"/>.</returns>
+    string[] ExportNamespaceTable();
+
+  }
+
 }

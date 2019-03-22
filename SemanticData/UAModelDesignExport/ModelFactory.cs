@@ -40,7 +40,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// </summary>
     /// <param name="uri">The URI.</param>
     /// <remarks>The set of objects that the OPC Unified Architecture server makes available to clients is referred to as its Address Space. The namespace is provided to make the BrowseName unique in the Address Space.</remarks>
-    public void CreateNamespace(string uri)
+    public void CreateNamespace(string uri, string publicationDate, string version)
     {
       Namespace _new = new Namespace()
       {
@@ -50,7 +50,9 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         Prefix = string.Format("Prefix{0}", m_Count++),
         Value = uri,
         XmlNamespace = uri,
-        XmlPrefix = string.Format("Prefix{0}", m_Count++)
+        XmlPrefix = string.Format("Prefix{0}", m_Count++),
+        PublicationDate = publicationDate,
+        Version = version
       };
       m_Namespaces.Add(_new);
     }

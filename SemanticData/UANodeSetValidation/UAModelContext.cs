@@ -16,62 +16,61 @@ using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  internal class UAModelContext
+
+  internal class UAModelContext : IUAModelContext
   {
 
     #region creator
     /// <summary>
     /// Initializes a new instance of the <see cref="UAModelContext" /> class.
     /// </summary>
-    /// <param name="nodeIdAlias">The node identifier aliases table.</param>
-    /// <param name="modelNamespaceUris">The model namespace uris table.</param>
+    /// <param name="model">The imported model.</param>
     /// <param name="addressSpaceContext">The address space context.</param>
-    internal UAModelContext(NodeIdAlias[] nodeIdAlias, string[] modelNamespaceUris, AddressSpaceContext addressSpaceContext)
+    /// <exception cref="ArgumentNullException">addressSpaceContext
+    /// or
+    /// model.Aliases</exception>
+    internal UAModelContext(UANodeSet model, IAddressSpaceBuildContext addressSpaceContext)
     {
-      if (nodeIdAlias == null)
+      AddressSpaceContext = addressSpaceContext ?? throw new ArgumentNullException(nameof(addressSpaceContext));
+      m_UANodeSetModel = model ?? throw new ArgumentNullException(nameof(model));
+      if (model.Aliases == null)
         throw new ArgumentNullException("nodeIdAlias");
-      if (modelNamespaceUris == null)
-        modelNamespaceUris = new string[] { };
-      if (addressSpaceContext == null)
-        throw new ArgumentNullException("addressSpaceContext");
-      AddAlias(nodeIdAlias);
-      m_ModelNamespaceUris = modelNamespaceUris;
-      m_AddressSpaceContext = addressSpaceContext;
+      AddAlias(model.Aliases);
+      m_ModelNamespaceUris = model.NamespaceUris == null ? new string[] { } : model.NamespaceUris;
     }
     #endregion
 
-    #region public
+    #region IUAModelContext
     /// <summary>
     /// Exports the node identifier.
     /// </summary>
     /// <param name="nodeId">The node identifier as the string.</param>
     /// <param name="defaultValue">The default value.</param>
-    /// <param name="traceEvent">An <see cref="Action" /> delegate is used to trace event as the <see cref="TraceMessage" />.</param>
     /// <returns>The identifier an object of <see cref="System.Xml.XmlQualifiedName" /> or null if <paramref name="nodeId" /> has default value.</returns>
-    internal XmlQualifiedName ExportBrowseName(string nodeId, NodeId defaultValue, Action<TraceMessage> traceEvent)
+    public XmlQualifiedName ExportBrowseName(string nodeId, NodeId defaultValue)
     {
-      NodeId _id = ImportNodeId(nodeId, true, traceEvent);
+      NodeId _id = ImportNodeId(nodeId, true);
       if (_id == defaultValue)
         return null;
-      return m_AddressSpaceContext.ExportBrowseName(_id, traceEvent);
+      return AddressSpaceContext.ExportBrowseName(_id);
     }
-    internal Parameter ExportArgument(DataSerialization.Argument argument, Action<TraceMessage> traceEvent)
+    public Parameter ExportArgument(DataSerialization.Argument argument)
     {
-      XmlQualifiedName _dataType = ExportBrowseName(argument.DataType.Identifier, DataTypeIds.BaseDataType, traceEvent);
-      return m_AddressSpaceContext.ExportArgument(argument, _dataType, traceEvent);
+      XmlQualifiedName _dataType = ExportBrowseName(argument.DataType.Identifier, DataTypeIds.BaseDataType);
+      return AddressSpaceContext.ExportArgument(argument, _dataType);
     }
-    internal AddressSpaceContext AddressSpaceContext
+    public IUANodeContext GetOrCreateNodeContext(string nodeId, bool lookupAlias)
     {
-      get { return m_AddressSpaceContext; }
+      NodeId _id = ImportNodeId(nodeId, lookupAlias);
+      return AddressSpaceContext.GetOrCreateNodeContext(_id, this);
     }
-    internal UANodeContext GetOrCreateNodeContext(string nodeId, bool lookupAlias, Action<TraceMessage> traceEvent)
+    public QualifiedName ImportQualifiedName(QualifiedName source)
     {
-      NodeId _id = ImportNodeId(nodeId, lookupAlias, traceEvent);
-      return m_AddressSpaceContext.GetOrCreateNodeContext(_id, this, traceEvent);
+      return new QualifiedName(source.Name, ImportNamespaceIndex(source.NamespaceIndex));
     }
-    internal NodeId ImportNodeId(string nodeId, bool lookupAlias, Action<TraceMessage> traceEvent)
+    public NodeId ImportNodeId(string nodeId, bool lookupAlias)
     {
-      if (String.IsNullOrEmpty(nodeId))
+      if (string.IsNullOrEmpty(nodeId))
         return NodeId.Null;
       // lookup alias.
       if (lookupAlias)
@@ -85,64 +84,60 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _nodeId;
     }
-    internal NodeId ImportExpandedNodeId(string nodeId, bool lookupAlias)
+    public XmlQualifiedName ExportQualifiedName(QualifiedName source)
     {
-      if (string.IsNullOrEmpty(nodeId))
-        return NodeId.Null;
-      // lookup alias.
-      if (lookupAlias)
-        nodeId = LookupAlias(nodeId);
-      ExpandedNodeId _expandedNodeId = ExpandedNodeId.Parse(nodeId);
-      if (_expandedNodeId.IsAbsolute)
-        throw new NotImplementedException();
-      if (_expandedNodeId.ServerIndex > 0)
-        throw new NotImplementedException();
-      ushort namespaceIndex = _expandedNodeId.NamespaceIndex;
-      if (_expandedNodeId.NamespaceIndex > 0)
-        namespaceIndex = ImportNamespaceIndex(_expandedNodeId.NamespaceIndex);
-      return new NodeId(_expandedNodeId.Identifier, namespaceIndex);
-    }
-    internal QualifiedName ImportQualifiedName(QualifiedName source)
-    {
-      return new QualifiedName(source.Name, ImportNamespaceIndex(source.NamespaceIndex));
-    }
-    internal XmlQualifiedName ExportQualifiedName(QualifiedName source)
-    {
-      return new XmlQualifiedName(source.Name, m_AddressSpaceContext.GetNamespace(source.NamespaceIndex));
-    }
-    private void AddAlias(NodeIdAlias[] nodeIdAlias)
-    {
-      foreach (var _alias in nodeIdAlias)
-        m_AliasesDictionary.Add(_alias.Alias, _alias.Value);
+      return new XmlQualifiedName(source.Name, AddressSpaceContext.GetNamespace(source.NamespaceIndex));
     }
     #endregion
 
     #region private
-    //vars
-    private AddressSpaceContext m_AddressSpaceContext;
-    private Action<TraceMessage> m_TraceEvent = x => { };
+    //var
+    private readonly Action<TraceMessage> m_TraceEvent = BuildErrorsHandling.Log.TraceEvent;
     private string[] m_ModelNamespaceUris;
     private Dictionary<string, string> m_AliasesDictionary = new Dictionary<string, string>();
+    private readonly UANodeSet m_UANodeSetModel;
+    private IAddressSpaceBuildContext AddressSpaceContext { get; }
     //methods
+    private void AddAlias(NodeIdAlias[] nodeIdAlias)
+    {
+      foreach (NodeIdAlias _alias in nodeIdAlias)
+        m_AliasesDictionary.Add(_alias.Alias, _alias.Value);
+    }
     private string LookupAlias(string id)
     {
-      string _newId = String.Empty;
+      string _newId = string.Empty;
       return m_AliasesDictionary.TryGetValue(id, out _newId) ? _newId : id;
     }
     private ushort ImportNamespaceIndex(ushort namespaceIndex)
     {
       // nothing special required for indexes < 0.
-      if (namespaceIndex < 1)
+      if (namespaceIndex == 1)
         return namespaceIndex;
       // return a bad value if parameters are bad.
       string _identifier = "NameUnknown";
       if (m_ModelNamespaceUris != null || m_ModelNamespaceUris.Length < namespaceIndex - 1)
         _identifier = m_ModelNamespaceUris[namespaceIndex - 1];
-      return m_AddressSpaceContext.GetIndexOrAppend(_identifier, m_TraceEvent);
+      return AddressSpaceContext.GetIndexOrAppend(_identifier);
     }
+    //TODO it is not used
+    //private NodeId ImportExpandedNodeId(string nodeId, bool lookupAlias)
+    //{
+    //  if (string.IsNullOrEmpty(nodeId))
+    //    return NodeId.Null;
+    //  // lookup alias.
+    //  if (lookupAlias)
+    //    nodeId = LookupAlias(nodeId);
+    //  ExpandedNodeId _expandedNodeId = ExpandedNodeId.Parse(nodeId);
+    //  if (_expandedNodeId.IsAbsolute)
+    //    throw new NotImplementedException();
+    //  if (_expandedNodeId.ServerIndex > 0)
+    //    throw new NotImplementedException();
+    //  ushort namespaceIndex = _expandedNodeId.NamespaceIndex;
+    //  if (_expandedNodeId.NamespaceIndex > 0)
+    //    namespaceIndex = ImportNamespaceIndex(_expandedNodeId.NamespaceIndex);
+    //  return new NodeId(_expandedNodeId.Identifier, namespaceIndex);
+    //}
     #endregion
-
-
 
   }
 

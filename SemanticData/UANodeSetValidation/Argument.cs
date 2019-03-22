@@ -7,7 +7,7 @@
 
 using UAOOI.SemanticData.InformationModelFactory;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
+namespace UAOOI.SemanticData.UANodeSetValidation
 {
   /// <summary>
   /// Class Argument.

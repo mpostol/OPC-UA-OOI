@@ -256,7 +256,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
   {
     #region Constructors
     /// <summary>
-    /// Creates an empty collection.
+    /// Creates the collection containing <see cref="Namespaces.OpcUa"/> namespace. 
     /// </summary>
     public NamespaceTable(Action<TraceMessage> traceEvent)
     {
@@ -275,43 +275,43 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
 #endif
     }
 
-    /// <summary>
-    /// Copies a list of strings.
-    /// </summary>
-    public NamespaceTable(IEnumerable<string> namespaceUris, Action<TraceMessage> traceEvent)
-    {
-      Update(namespaceUris, traceEvent);
-    }
+    ///// <summary>
+    ///// Copies a list of strings.
+    ///// </summary>
+    //public NamespaceTable(IEnumerable<string> namespaceUris, Action<TraceMessage> traceEvent)
+    //{
+    //  Update(namespaceUris, traceEvent);
+    //}
     #endregion
 
-    #region Public Members
-    /// <summary>
-    /// Updates the table of namespace uris.
-    /// </summary>
-    public new void Update(IEnumerable<string> namespaceUris, Action<TraceMessage> traceEvent)
-    {
-      if (namespaceUris == null) throw new ArgumentNullException("namespaceUris");
+    //#region Public Members
+    ///// <summary>
+    ///// Updates the table of namespace uris.
+    ///// </summary>
+    //public new void Update(IEnumerable<string> namespaceUris, Action<TraceMessage> traceEvent)
+    //{
+    //  if (namespaceUris == null) throw new ArgumentNullException("namespaceUris");
 
-      // check that first entry is the UA namespace.
-      int ii = 0;
+    //  // check that first entry is the UA namespace.
+    //  int ii = 0;
 
-      foreach (string namespaceUri in namespaceUris)
-      {
-        if (ii == 0 && namespaceUri != Namespaces.OpcUa)
-        {
-          throw new ArgumentException("The first namespace in the table must be the OPC-UA namespace.");
-        }
+    //  foreach (string namespaceUri in namespaceUris)
+    //  {
+    //    if (ii == 0 && namespaceUri != Namespaces.OpcUa)
+    //    {
+    //      throw new ArgumentException("The first namespace in the table must be the OPC-UA namespace.");
+    //    }
 
-        ii++;
+    //    ii++;
 
-        if (ii == 2)
-        {
-          break;
-        }
-      }
+    //    if (ii == 2)
+    //    {
+    //      break;
+    //    }
+    //  }
 
-      base.Update(namespaceUris, traceEvent);
-    }
-    #endregion
+    //  base.Update(namespaceUris, traceEvent);
+    //}
+    //#endregion
   }
 }

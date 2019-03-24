@@ -6,8 +6,8 @@
     <ProjectGuid>{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UAOOI.SemanticData.UnitTest</RootNamespace>
-    <AssemblyName>UAOOI.SemanticDataUnitTest</AssemblyName>
+    <RootNamespace>UAOOI.SemanticData.UANodeSetValidation</RootNamespace>
+    <AssemblyName>UAOOI.SemanticData.UANodeSetValidation.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -85,6 +85,7 @@
       <Link>DependencyValidation1.layerdiagram</Link>
       <Visible>False</Visible>
     </AdditionalFiles>
+    <Compile Include="NamespaceTableUnitTest.cs" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
     <None Include="Properties\AssemblyInfo.tt">

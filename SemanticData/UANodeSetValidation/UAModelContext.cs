@@ -36,7 +36,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (model.Aliases == null)
         throw new ArgumentNullException("nodeIdAlias");
       AddAlias(model.Aliases);
-      m_ModelNamespaceUris = model.NamespaceUris == null ? new string[] { } : model.NamespaceUris;
+      model.NamespaceUris = model.NamespaceUris ?? new string[] { };
     }
     #endregion
 
@@ -92,11 +92,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
     //var
-    private readonly Action<TraceMessage> m_TraceEvent = BuildErrorsHandling.Log.TraceEvent;
-    private string[] m_ModelNamespaceUris;
     private Dictionary<string, string> m_AliasesDictionary = new Dictionary<string, string>();
     private readonly UANodeSet m_UANodeSetModel;
     private IAddressSpaceBuildContext AddressSpaceContext { get; }
+    private static int m_NamespaceCount = 0; 
     //methods
     private void AddAlias(NodeIdAlias[] nodeIdAlias)
     {
@@ -111,12 +110,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private ushort ImportNamespaceIndex(ushort namespaceIndex)
     {
       // nothing special required for indexes < 0.
-      if (namespaceIndex == 1)
+      if (namespaceIndex == 0)
         return namespaceIndex;
-      // return a bad value if parameters are bad.
-      string _identifier = "NameUnknown";
-      if (m_ModelNamespaceUris != null || m_ModelNamespaceUris.Length < namespaceIndex - 1)
-        _identifier = m_ModelNamespaceUris[namespaceIndex - 1];
+      // return a new value if parameter is out of range.
+      string _identifier = $"NameUnknown{m_NamespaceCount++}";
+      if (m_UANodeSetModel.NamespaceUris.Length > namespaceIndex - 1)
+        _identifier = m_UANodeSetModel.NamespaceUris[namespaceIndex - 1];
+      else
+        BuildErrorsHandling.Log.TraceEvent(
+          TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedNamespaceIndex, $"ImportNamespaceIndex failed - namespace index {namespaceIndex-1} is out of the NamespaceUris index. New namespace {_identifier} is created insted."));
       return AddressSpaceContext.GetIndexOrAppend(_identifier);
     }
     //TODO it is not used

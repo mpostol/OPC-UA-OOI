@@ -1,29 +1,44 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Xml;
+using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.InformationModelFactory;
+using UAOOI.SemanticData.InformationModelFactory.UAConstants;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers;
+using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
+
   [TestClass]
   public class UAModelContextUnitTest
   {
+    [TestMethod]
+    [TestCategory("Code")]
+    public void ConstructorTest()
+    {
+      UANodeSet _tm = TestData.CreateNodeSetModel();
+      IAddressSpaceBuildContext _as = new AddressSpaceFixture();
+      UAModelContext _mc = new UAModelContext(_tm, _as);
+    }
     [TestMethod]
     [ExpectedException(typeof(System.ArgumentNullException))]
     [TestCategory("Code")]
     public void CreateUAModelContextNodeAliasNull()
     {
       UANodeSet _tm = TestData.CreateNodeSetModel();
-      AddressSpaceContext _as = new AddressSpaceContext(x => { });
-      UAModelContext _mc = new UAModelContext(null, _tm.NamespaceUris, _as);
-    }
-    [TestMethod]
-    [TestCategory("Code")]
-    public void CreateUAModelContextModelNamespaceUrisNull()
-    {
-      UANodeSet _tm = TestData.CreateNodeSetModel();
-      AddressSpaceContext _as = new AddressSpaceContext(x => { });
-      UAModelContext _mc = new UAModelContext(_tm.Aliases, null, _as);
+      _tm.Aliases = null;
+      IAddressSpaceBuildContext _as = new AddressSpaceFixture();
+      UAModelContext _mc = new UAModelContext(_tm, _as);
     }
     [TestMethod]
     [TestCategory("Code")]
@@ -31,17 +46,91 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     public void CreateUAModelContextAddressSpaceContextNull()
     {
       UANodeSet _tm = TestData.CreateNodeSetModel();
-      UAModelContext _mc = new UAModelContext(_tm.Aliases, _tm.NamespaceUris, null);
-      Assert.IsNotNull(_mc);
+      UAModelContext _mc = new UAModelContext(_tm, null);
     }
     [TestMethod]
     [TestCategory("Code")]
-    public void CreateUAModelContext()
-    { 
+    public void CreateUAModelContextModelNamespaceUrisNullTest()
+    {
+      List<TraceMessage> _log = new List<TraceMessage>();
+      BuildErrorsHandling.Log.TraceEventAction += _msg => _log.Add(_msg);
       UANodeSet _tm = TestData.CreateNodeSetModel();
-      AddressSpaceContext _as = new AddressSpaceContext(x => { });
-      UAModelContext _mc = new UAModelContext(_tm.Aliases, _tm.NamespaceUris, _as);
-      Assert.IsNotNull(_mc);
+      _tm.NamespaceUris = null;
+      AddressSpaceFixture _as = new AddressSpaceFixture();
+      UAModelContext _mc = new UAModelContext(_tm, _as);
+      List<NodeId> nodeIdList = new List<NodeId>();
+      foreach (UANode _nd in _tm.Items)
+        nodeIdList.Add(_mc.ImportNodeId(_nd.NodeId, false));
+      BuildErrorsHandling.Log.TraceEventAction -= _msg => _log.Add(_msg);
+      Assert.AreEqual<int>(1, _log.Count);
+      Assert.AreEqual<string>("P3-0802020000", _log[0].BuildError.Identifier);
+      Assert.AreEqual<int>(1, nodeIdList.Count);
+      Assert.AreEqual<int>(2, _as.m_NamespaceTable.Count);
+      Assert.AreEqual<int>(0, _as.m_NamespaceTable.GetIndex(Namespaces.OpcUa));
+      Assert.AreEqual<int>(-1, _as.m_NamespaceTable.GetIndex(@"NameUnknown0"));
+    }
+    [TestMethod]
+    [TestCategory("Code")]
+    public void ImportNodeIdTest()
+    {
+      List<TraceMessage> _log = new List<TraceMessage>();
+      BuildErrorsHandling.Log.TraceEventAction += _msg => _log.Add(_msg);
+      UANodeSet _tm = TestData.CreateNodeSetModel();
+      AddressSpaceFixture _as = new AddressSpaceFixture();
+      UAModelContext _mc = new UAModelContext(_tm, _as);
+      List<NodeId> nodeIdList = new List<NodeId>();
+      foreach (UANode _nd in _tm.Items)
+        nodeIdList.Add(_mc.ImportNodeId(_nd.NodeId, false));
+      BuildErrorsHandling.Log.TraceEventAction -= _msg => _log.Add(_msg);
+      Assert.AreEqual<int>(0, _log.Count);
+      Assert.AreEqual<int>(1, nodeIdList.Count);
+      Assert.AreEqual<int>(2, _as.m_NamespaceTable.Count);
+      Assert.AreEqual<int >(0, _as.m_NamespaceTable.GetIndex(Namespaces.OpcUa));
+      Assert.AreEqual<int>(1, _as.m_NamespaceTable.GetIndex(@"http://cas.eu/UA/Demo/"));
+    }
+    private class AddressSpaceFixture : IAddressSpaceBuildContext
+    {
+      public Parameter ExportArgument(Argument argument, XmlQualifiedName dataType)
+      {
+        throw new System.NotImplementedException();
+      }
+
+      public XmlQualifiedName ExportBrowseName(NodeId id)
+      {
+        throw new System.NotImplementedException();
+      }
+
+      public void GetDerivedInstances(IUANodeContext rootNode, List<IUANodeContext> list)
+      {
+        throw new System.NotImplementedException();
+      }
+
+      public ushort GetIndexOrAppend(string identifier)
+      {
+        return m_NamespaceTable.GetIndexOrAppend(identifier, BuildErrorsHandling.Log.TraceEvent);
+      }
+
+      public NamespaceTable m_NamespaceTable = new NamespaceTable(BuildErrorsHandling.Log.TraceEvent);
+
+      public IEnumerable<UAReferenceContext> GetMyReferences(IUANodeContext index)
+      {
+        throw new System.NotImplementedException();
+      }
+
+      public string GetNamespace(ushort namespaceIndex)
+      {
+        throw new System.NotImplementedException();
+      }
+
+      public IUANodeContext GetOrCreateNodeContext(NodeId id, IUAModelContext uAModelContext)
+      {
+        throw new System.NotImplementedException();
+      }
+
+      public IEnumerable<UAReferenceContext> GetReferences2Me(IUANodeContext index)
+      {
+        throw new System.NotImplementedException();
+      }
     }
   }
 }

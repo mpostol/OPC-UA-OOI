@@ -83,5 +83,15 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// <value>The list of descriptions.</value>
     public List<Description> Descriptions { get; protected set; }
 
+    /// <summary>
+    /// Adds the localized description of the argument
+    /// </summary>
+    /// <param name="localeField">The locale field.</param>
+    /// <param name="valueField">The value field.</param>
+    public void AddDescription(string localeField, string valueField)
+    {
+      Descriptions.Add(new Description() { Locale = localeField, Text = valueField });
+    }
+
   }
 }

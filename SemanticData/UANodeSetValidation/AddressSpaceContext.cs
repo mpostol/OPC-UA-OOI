@@ -36,16 +36,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="System.ArgumentNullException">traceEvent - cannot be null.</exception>
     public AddressSpaceContext(Action<TraceMessage> traceEvent)
     {
-      if (traceEvent == null)
-        throw new ArgumentNullException("traceEvent");
-      m_TraceEvent = traceEvent;
+      m_TraceEvent = traceEvent ?? throw new ArgumentNullException("traceEvent");
       m_NamespaceTable = new NamespaceTable(m_TraceEvent);
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting address space validation."));
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting creation the OPC UA Address Space."));
       UANodeSet _standard = UANodeSet.ReadUADefinedTypes();
-      Debug.Assert(_standard != null);
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext - uploading the OPC UA defined types."));
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Address Space - the OPC UA defined has been uploaded."));
       ImportNodeSet(_standard);
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext - has bee created successfully."));
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Address Space - has bee created successfully."));
     }
     #endregion
 
@@ -134,7 +131,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     public Parameter ExportArgument(DataSerialization.Argument argument, XmlQualifiedName dataType)
     {
-      Argument _ret = new Argument()
+      Parameter _ret = new Parameter()
       {
         DataType = dataType,
         Identifier = new Nullable<int>(),

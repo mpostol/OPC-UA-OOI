@@ -215,6 +215,14 @@ namespace UAOOI.SemanticData.BuildingErrorsHandling
                     Identifier = "P3-0713000000", 
                     Descriptor = "Undefined HasTypeDefinition - each Variable and each Object shall be the SourceNode of exactly one HasTypeDefinition Reference." }; } }
     /// <summary>
+    /// Error: P3-0802020000; Focus: Naming; Undefined namespace index - The numeric values used to identify namespaces correspond to the index into the NamespaceArray.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0802020000.</value>
+    public static BuildError UndefinedNamespaceIndex { get { return new BuildError() 
+                  { Focus = Focus.Naming, 
+                    Identifier = "P3-0802020000", 
+                    Descriptor = "Undefined namespace index - The numeric values used to identify namespaces correspond to the index into the NamespaceArray." }; } }
+    /// <summary>
     /// Error: P6-0503011400; Focus: NodeClass; BrowseName cannot be null string.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P6-0503011400.</value>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns1:BuildErrorsCollection xmlns:ns1="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd">
+<ns1:BuildErrorsCollection xmlns:ns1="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd" >
   <ns1:ListOfBuildErrors>
     <ns1:NamedBuildError>
       <ns1:Focus>XML</ns1:Focus>
@@ -156,6 +156,12 @@
       <ns1:Identifier>P3-0713000000</ns1:Identifier>
       <ns1:Descriptor>Undefined HasTypeDefinition - each Variable and each Object shall be the SourceNode of exactly one HasTypeDefinition Reference.</ns1:Descriptor>
       <ns1:Name>UndefinedHasTypeDefinition</ns1:Name>
+    </ns1:NamedBuildError>
+    <ns1:NamedBuildError>
+      <ns1:Focus>Naming</ns1:Focus>
+      <ns1:Identifier>P3-0802020000</ns1:Identifier>
+      <ns1:Descriptor>Undefined namespace index - The numeric values used to identify namespaces correspond to the index into the NamespaceArray.</ns1:Descriptor>
+      <ns1:Name>UndefinedNamespaceIndex</ns1:Name>
     </ns1:NamedBuildError>
     <ns1:NamedBuildError>
       <ns1:Focus>NodeClass</ns1:Focus>

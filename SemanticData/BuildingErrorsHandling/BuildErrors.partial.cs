@@ -41,7 +41,11 @@ namespace UAOOI.SemanticData.BuildingErrorsHandling
     /// <summary>
     /// The data type definition error - eny error that relates to custom DataType definion.
     /// </summary>
-    DataType
+    DataType,
+    /// <summary>
+    /// The naming
+    /// </summary>
+    Naming
 
   }
   /// <summary>

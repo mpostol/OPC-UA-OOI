@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-           xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-           attributeFormDefault="unqualified" 
+<xsd:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           attributeFormDefault="unqualified"
            elementFormDefault="qualified"
            targetNamespace="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd"
            xmlns="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd">
@@ -14,7 +14,20 @@
               <xsd:element maxOccurs="unbounded" name="NamedBuildError">
                 <xsd:complexType>
                   <xsd:sequence>
-                    <xsd:element name="Focus" type="xsd:string" />
+                    <xsd:element name="Focus">
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:enumeration value="Reference"/>
+                          <xsd:enumeration value="Diagnostic"/>
+                          <xsd:enumeration value="NodeClass"/>
+                          <xsd:enumeration value="XML"/>
+                          <xsd:enumeration value="NonCategorized"/>
+                          <xsd:enumeration value="DataEncoding"/>
+                          <xsd:enumeration value="DataType"/>
+                          <xsd:enumeration value="Naming"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
                     <xsd:element name="Identifier" type="xsd:string" />
                     <xsd:element name="Descriptor" type="xsd:string" />
                     <xsd:element name="Name" type="xsd:string" />
@@ -27,4 +40,4 @@
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
-</xs:schema>
+</xsd:schema>

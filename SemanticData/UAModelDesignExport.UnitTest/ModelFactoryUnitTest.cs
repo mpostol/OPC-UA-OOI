@@ -29,7 +29,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     {
       List<TraceMessage> _traceBuffer = new List<TraceMessage>();
       ModelFactory _instance = new ModelFactory(_message => _traceBuffer.Add(_message));
-      _instance.CreateNamespace(nameof(NamespaceTest));
+      _instance.CreateNamespace(nameof(NamespaceTest ), String.Empty, String.Empty );
       ModelDesign _createdModel = _instance.Export();
       Assert.IsNotNull(_createdModel);
       Assert.IsNotNull(_createdModel.Items);

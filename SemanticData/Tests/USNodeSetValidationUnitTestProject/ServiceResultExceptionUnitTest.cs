@@ -9,9 +9,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
 using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
+
   [TestClass]
   public class ServiceResultExceptionUnitTest
   {
@@ -24,7 +26,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.IsNull(_ex.InnerException);
       Assert.IsNull(_ex.TraceMessage);
       Assert.IsFalse(String.IsNullOrEmpty(_ex.Message), _ex.Message);
-      Assert.IsTrue(_ex.Message.Contains("UAOOI.SemanticData.UANodeSetValidation.ServiceResultException"));
+      Assert.IsTrue(_ex.Message.Contains("UAOOI.SemanticData.UANodeSetValidation.DataSerialization"));
     }
     [TestMethod]
     [TestCategory("Code")]
@@ -40,5 +42,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<Focus>(BuildError.NodeIdInvalidSyntax.Focus, _ex.TraceMessage.BuildError.Focus);
       Assert.AreEqual<TraceEventType>(TraceEventType.Information, _ex.TraceMessage.TraceLevel);
     }
+
   }
 }

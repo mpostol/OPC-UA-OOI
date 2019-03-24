@@ -31,6 +31,7 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Argument.cs" />
     <Compile Remove="Properties\Resources.Designer.cs" />
   </ItemGroup>
 

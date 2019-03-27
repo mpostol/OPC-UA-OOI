@@ -54,6 +54,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     }
     /// <summary>
     /// The value associated with the field. This field is only specified for subtypes of Enumeration.
+    /// For OptionSets the value is the number of the bit associated with the field.
     /// </summary>
     /// <value>The value.</value>
     public int Value

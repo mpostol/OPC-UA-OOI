@@ -28,12 +28,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj" />
-    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
+    <Compile Remove="Diagnostic\**" />
+    <EmbeddedResource Remove="Diagnostic\**" />
+    <None Remove="Diagnostic\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Diagnostic\" />
+    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj" />
+    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
   </ItemGroup>
 
   <ItemGroup>

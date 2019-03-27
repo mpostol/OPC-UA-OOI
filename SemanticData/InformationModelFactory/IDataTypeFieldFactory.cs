@@ -53,19 +53,11 @@ namespace UAOOI.SemanticData.InformationModelFactory
     {
       set;
     }
-    //TODO to be removed in UANodeSet.xsd - synchronize with current OPCF Release #207
-    ///// <summary>Creates new object of<see cref= "IDataTypeDefinitionFactory" /> for anonymous definition of the DatType.
-    ///// The field is a structure with a layout specified by the <see cref = "IDataTypeDefinitionFactory" />.
-    ///// This field is optional.
-    ///// This field allows designers to create nested structures without defining a new DataType Node for each structure.
-    ///// This field is not specified for subtypes of Enumeration.
-    ///// </summary>
-    ///// <value>A new instance of<see cref= "IDataTypeDefinitionFactory" /> encapsulating the DatType definition.</value>
-    ////IDataTypeDefinitionFactory NewDefinition();
     /// <summary>
-    /// The value associated with the field. This field is only specified for subtypes of Enumeration.
+    /// The value associated with the field. This field is only specified for subtypes of Enumeration. 
+    /// For OptionSets the value is the number of the bit associated with the field.
     /// </summary>
-    /// <value>The value. </value>
+    /// <value>The value.</value>
     int Value
     {
       set;

@@ -7,23 +7,17 @@
 
 namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
 {
+
   /// <summary>
   /// Class RolePermission - default RolePermissions for all Nodes in the model.
   /// </summary>
   /// <remarks>
-  /// This type is defined in Part 6 F.5 but the definition is not compliant. 
+  /// This type is defined in Part 6 F.5 but the definition is not compliant with the UANodeSet schema. 
   /// This type is also defined in the Part 3 5.2.9 but the definition is not compliant.
   /// </remarks>
-  public partial class RolePermission
+  public interface IRolePermission
   {
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RolePermission"/> class.
-    /// </summary>
-    public RolePermission()
-    {
-      this.Permissions = ((uint)(0));
-    }
     /// <summary>
     /// Gets or sets the permissions.
     /// </summary>
@@ -31,10 +25,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
     /// This is a subtype of the UInt32 DataType with the OptionSetValues Property defined. It is used to define the permissions of a Node. The <c>PermissionType</c> is formally defined in Part3 8.55 Table 38.
     /// </remarks>
     /// <value>The permissions.</value>
-    public uint Permissions
-    {
-      get; set;
-    }
+    uint Permissions { get; set; }
     /// <summary>
     /// Gets or sets the value.
     /// </summary>
@@ -42,10 +33,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
     /// Not defined in the spec. 
     /// </remarks>
     /// <value>The value.</value>
-    public string Value
-    {
-      get; set;
-    }
-  }
+    string Value { get; set; }
 
+  }
 }

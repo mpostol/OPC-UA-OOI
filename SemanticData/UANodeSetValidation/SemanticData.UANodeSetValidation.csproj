@@ -33,6 +33,7 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
   <ItemGroup>
     <Compile Remove="Argument.cs" />
     <Compile Remove="Properties\Resources.Designer.cs" />
+    <Compile Remove="Utilities\ModelTableEntry.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -16,6 +16,13 @@ using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 namespace UAOOI.SemanticData.UAModelDesignExport
 {
 
+  /// <summary>
+  /// Class MethodInstanceFactoryBase.
+  /// Implements the <see cref="UAOOI.SemanticData.UAModelDesignExport.InstanceFactoryBase" />
+  /// Implements the <see cref="UAOOI.SemanticData.InformationModelFactory.IMethodInstanceFactory" />
+  /// </summary>
+  /// <seealso cref="UAOOI.SemanticData.UAModelDesignExport.InstanceFactoryBase" />
+  /// <seealso cref="UAOOI.SemanticData.InformationModelFactory.IMethodInstanceFactory" />
   internal class MethodInstanceFactoryBase : InstanceFactoryBase, IMethodInstanceFactory
   {
 
@@ -49,11 +56,18 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       private get;
     }
     /// <summary>
+    /// Gets or sets the method declaration identifier defined in Part 6  F.9. May be specified for Method Nodes that are a target of a HasComponent reference from a single Object Node.
+    /// It is the NodeId of the UAMethod with the same BrowseName contained in the TypeDefinition associated with the Object Node.
+    /// If the TypeDefinition overrides a Method inherited from a base ObjectType then this attribute shall reference the Method Node in the subtype.
+    /// </summary>
+    /// <value>The method declaration identifier.</value>
+    public string MethodDeclarationId { set; private get; }
+    /// <summary>
     /// Adds the input arguments. The InputArgument specify the input argument of the Method. The Method contains an array of the Argument data type.
     /// An empty array indicates that there are no input arguments for the Method.
     /// </summary>
     /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="T:System.Xml.XmlElement" />.</param>
-    public void AddInputArguments(Func<System.Xml.XmlElement, Parameter[]> argument)
+    public void AddInputArguments(Func<XmlElement, Parameter[]> argument)
     {
       m_InputArguments = RemoveArguments(BrowseNames.InputArguments, argument);
     }
@@ -94,20 +108,27 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         InputArguments = GetArguments(m_InputArguments),
         OutputArguments = GetArguments(m_OutputArguments),
         NonExecutable = Executable.GetValueOrDefault(false),
-        NonExecutableSpecified = Executable.HasValue
+        NonExecutableSpecified = Executable.HasValue 
       };
+      string MethodDeclarationId = this.MethodDeclarationId; //TODO it is not present in the XML.MethodDesign
       base.UpdateInstance(_new, path, TraceEvent, createInstanceType);
       createInstanceType(_new, path);
       return _new;
     }
 
     #region private
+    private struct ArgumentDescription
+    {
+      // TODO must be implemented
+    }
+    //var
+    private IEnumerable<Parameter> m_InputArguments = null;
+    private IEnumerable<Parameter> m_OutputArguments = null;
+    //method
     private XML.Parameter[] GetArguments(IEnumerable<Parameter> parameter)
     {
       return parameter?.Select<Parameter, XML.Parameter>(x => x.ExportArgument(TraceEvent)).ToArray<XML.Parameter>();
     }
-    private IEnumerable<Parameter> m_InputArguments = null;
-    private IEnumerable<Parameter> m_OutputArguments = null;
     private IEnumerable<Parameter> RemoveArguments(string parameterKind, Func<XmlElement, Parameter[]> getParameters)
     {
       Parameter[] _parameters = null;
@@ -125,7 +146,6 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       m_Nodes = _newChildrenCollection;
       return _parameters == null || _parameters.Length == 0 ? null : _parameters.AsEnumerable<Parameter>();
     }
-
     #endregion
   }
 

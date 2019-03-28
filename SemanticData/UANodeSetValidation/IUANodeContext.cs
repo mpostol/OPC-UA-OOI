@@ -89,6 +89,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <value>The imported node identifier.</value>
     NodeId NodeIdContext { get; }
+    /// <summary>
+    /// Gets the ua node described by <see cref="UANode"/>.
+    /// </summary>
+    /// <value>The ua node.</value>
     UANode UANode { get; }
     /// <summary>
     /// Exports the browse name of the wrapped node by this instance.

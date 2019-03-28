@@ -42,7 +42,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       List<BuildError> _errors = new List<BuildError>(); //TODO should be added to the model;
       foreach (IModelTableEntry _ns in addressSpaceContext.ExportNamespaceTable)
       {
-        //TODO UANodeSet.xsd - synchronize with current OPCF Release #207
         string _publicationDate = _ns.PublicationDate.HasValue ? _ns.PublicationDate.Value.ToShortDateString() : DateTime.UtcNow.ToShortDateString();
         string _version = _ns.Version;
         exportModelFactory.CreateNamespace(_ns.ModelUri, _publicationDate, _version);
@@ -202,9 +201,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         }
       nodeDesign.Executable = !nodeSet.Executable ? nodeSet.Executable : new Nullable<bool>();
       nodeDesign.UserExecutable = !nodeSet.UserExecutable ? nodeSet.UserExecutable : new Nullable<bool>();
+      nodeDesign.MethodDeclarationId = nodeSet.MethodDeclarationId;
       nodeDesign.AddInputArguments(x => nodeContext.GetParameters(x));
       nodeDesign.AddOutputArguments(x => nodeContext.GetParameters(x));
-      //MethodDeclarationId is ignored
     }
     private static void Update(IViewInstanceFactory nodeDesign, UAView nodeSet, Action<TraceMessage> traceEvent)
     {

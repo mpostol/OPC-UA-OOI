@@ -21,6 +21,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard2.0\UAOOI.SemanticData.UAModelDesignExport.xml</DocumentationFile>
     <OutputPath>bin\Debug\netstandard2.0\</OutputPath>
+    <NoWarn>1701;1702,IDE0001</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

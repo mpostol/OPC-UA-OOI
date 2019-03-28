@@ -82,7 +82,6 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </summary>
     /// <value>The list of descriptions.</value>
     public List<Description> Descriptions { get; protected set; }
-
     /// <summary>
     /// Adds the localized description of the argument
     /// </summary>

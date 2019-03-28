@@ -6,8 +6,7 @@
 //___________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using UAOOI.SemanticData.BuildingErrorsHandling;
+using System;
 using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 
@@ -21,43 +20,41 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void ConstructorTest()
     {
 
-      List<TraceMessage> _log = new List<TraceMessage>();
-      NamespaceTable _instance = new NamespaceTable(_message => _log.Add(_message));
-      Assert.AreEqual<int>(1, _instance.Count);
-      Assert.AreEqual<int>(0, _log.Count);
+      NamespaceTable _instance = new NamespaceTable();
+      Assert.AreEqual<int>(0, _instance.LastNamespaceIndex);
 
     }
     [TestMethod]
     public void GetStringTest()
     {
-
-      List<TraceMessage> _log = new List<TraceMessage>();
-      NamespaceTable _instance = new NamespaceTable(_message => _log.Add(_message));
+      NamespaceTable _instance = new NamespaceTable();
       Assert.AreEqual<string>(Namespaces.OpcUa, _instance.GetString(0));
-      Assert.IsNull(_instance.GetString(1));  //It should throw na exception
-      Assert.AreEqual<int>(0, _log.Count); //Trace doesn't work
+    }
 
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    public void GetStringArgumentOutOfRangeExceptionTest()
+    {
+
+      NamespaceTable _instance = new NamespaceTable();
+      string _uri = _instance.GetString(1);  //It should throw na exception
     }
     [TestMethod]
     public void GetIndexTest()
     {
 
-      List<TraceMessage> _log = new List<TraceMessage>();
-      NamespaceTable _instance = new NamespaceTable(_message => _log.Add(_message));
+      NamespaceTable _instance = new NamespaceTable();
       Assert.AreEqual<int>(0, _instance.GetIndex(Namespaces.OpcUa));
-      Assert.AreEqual<int>(-1, _instance.GetIndex("qerqrqerqwrewrwer"));
-      Assert.AreEqual<int>(0, _log.Count);
-
+      Assert.AreEqual<int>(-1, _instance.GetIndex("non existing namespace"));
     }
     [TestMethod]
     public void GetIndexOrAppend()
     {
 
-      List<TraceMessage> _log = new List<TraceMessage>();
-      NamespaceTable _instance = new NamespaceTable(_message => _log.Add(_message));
-      Assert.AreEqual<int>(1, _instance.GetIndexOrAppend("qerqrqerqwrewrwer", _message => _log.Add(_message)));
+      NamespaceTable _instance = new NamespaceTable();
+      Assert.AreEqual<int>(1, _instance.GetIndexOrAppend("qerqrqerqwrewrwer"));
       Assert.AreEqual<int>(1, _instance.GetIndex("qerqrqerqwrewrwer"));
-      Assert.AreEqual<int>(0, _log.Count); //Trace doesn't work
+      Assert.AreEqual<int>(1, _instance.LastNamespaceIndex);
 
     }
   }

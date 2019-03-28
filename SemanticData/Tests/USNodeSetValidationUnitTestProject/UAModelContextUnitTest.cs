@@ -65,7 +65,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<int>(1, _log.Count);
       Assert.AreEqual<string>("P3-0802020000", _log[0].BuildError.Identifier);
       Assert.AreEqual<int>(1, nodeIdList.Count);
-      Assert.AreEqual<int>(2, _as.m_NamespaceTable.Count);
       Assert.AreEqual<int>(0, _as.m_NamespaceTable.GetIndex(Namespaces.OpcUa));
       Assert.AreEqual<int>(-1, _as.m_NamespaceTable.GetIndex(@"NameUnknown0"));
     }
@@ -84,8 +83,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       BuildErrorsHandling.Log.TraceEventAction -= _msg => _log.Add(_msg);
       Assert.AreEqual<int>(0, _log.Count);
       Assert.AreEqual<int>(1, nodeIdList.Count);
-      Assert.AreEqual<int>(2, _as.m_NamespaceTable.Count);
-      Assert.AreEqual<int >(0, _as.m_NamespaceTable.GetIndex(Namespaces.OpcUa));
+      Assert.AreEqual<int>(0, _as.m_NamespaceTable.GetIndex(Namespaces.OpcUa));
       Assert.AreEqual<int>(1, _as.m_NamespaceTable.GetIndex(@"http://cas.eu/UA/Demo/"));
     }
     private class AddressSpaceFixture : IAddressSpaceBuildContext
@@ -107,10 +105,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 
       public ushort GetIndexOrAppend(string identifier)
       {
-        return m_NamespaceTable.GetIndexOrAppend(identifier, BuildErrorsHandling.Log.TraceEvent);
+        return m_NamespaceTable.GetIndexOrAppend(identifier);
       }
 
-      public NamespaceTable m_NamespaceTable = new NamespaceTable(BuildErrorsHandling.Log.TraceEvent);
+      public NamespaceTable m_NamespaceTable = new NamespaceTable();
 
       public IEnumerable<UAReferenceContext> GetMyReferences(IUANodeContext index)
       {

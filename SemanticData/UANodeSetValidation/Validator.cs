@@ -15,6 +15,7 @@ using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
+using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -39,12 +40,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       traceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering Validator.ValidateExportModel - starting creation of the ModelDesign for {0} nodes.", nodesCollection.Count<IUANodeBase>())));
       List<BuildError> _errors = new List<BuildError>(); //TODO should be added to the model;
-      foreach (string _ns in addressSpaceContext.ExportNamespaceTable())
+      foreach (IModelTableEntry _ns in addressSpaceContext.ExportNamespaceTable)
       {
         //TODO UANodeSet.xsd - synchronize with current OPCF Release #207
-        string _publicationDate = DateTime.UtcNow.ToShortDateString();
-        string _version = "1.0.0";
-        exportModelFactory.CreateNamespace(_ns, _publicationDate, _version);
+        string _publicationDate = _ns.PublicationDate.HasValue ? _ns.PublicationDate.Value.ToShortDateString() : DateTime.UtcNow.ToShortDateString();
+        string _version = _ns.Version;
+        exportModelFactory.CreateNamespace(_ns.ModelUri, _publicationDate, _version);
       }
       string _msg = null;
       int _nc = 0;

@@ -6,102 +6,74 @@
 //___________________________________________________________________________________
 
 using System;
-using UAOOI.SemanticData.BuildingErrorsHandling;
+using System.Collections.Generic;
+using System.Linq;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
 {
 
   /// <summary>
-  /// The table of namespace uris for a server.
+  /// The table of namespace uris for a server. The <see cref="Namespaces.OpcUa"/> namespace has index = 0.
   /// </summary>
-  public class NamespaceTable : StringTable
+  public class NamespaceTable
   {
+
     #region Constructors
     /// <summary>
-    /// Creates the collection containing <see cref="Namespaces.OpcUa"/> namespace. 
+    /// Creates the <see cref="NamespaceTable"/> instance containing <see cref="Namespaces.OpcUa"/> namespace.
     /// </summary>
-    public NamespaceTable(Action<TraceMessage> traceEvent)
+    internal NamespaceTable()
     {
-      Append(Namespaces.OpcUa, traceEvent);
+      Append(Namespaces.OpcUa);
     }
-
-    /// <summary>
-    /// Creates an empty collection which is marked as shared.
-    /// </summary>
-    public NamespaceTable(bool shared, Action<TraceMessage> traceEvent)
-    {
-      Append(Namespaces.OpcUa, traceEvent);
-
-#if DEBUG
-      m_shared = shared;
-#endif
-    }
-
-    ///// <summary>
-    ///// Copies a list of strings.
-    ///// </summary>
-    //public NamespaceTable(IEnumerable<string> namespaceUris, Action<TraceMessage> traceEvent)
-    //{
-    //  Update(namespaceUris, traceEvent);
-    //}
     #endregion
 
+    #region Public Members
     /// <summary>
-    /// Gets the default model table entry.
+    /// Adds model Uri to the table.
     /// </summary>
-    /// <param name="modelUri">The model URI.</param>
-    /// <returns>UAOOI.SemanticData.UANodeSetValidation.Utilities.IModelTableEntry.</returns>
-    public static IModelTableEntry GetDEfaultModelTableEntry(string modelUri)
+    internal int Append(string modelUri)
     {
       if (string.IsNullOrEmpty(modelUri))
-        throw new ArgumentNullException(nameof(modelUri), $"Model URI must be provided for the {nameof(IModelTableEntry)} instance");
-      return new ModelTableEntry
-      {
-        AccessRestrictions = 0xC,
-        ModelUri = modelUri,
-        PublicationDate = DateTime.UtcNow.Date,
-        RequiredModel = null,
-        RolePermissions = new IRolePermission[] { new RolePermission() },
-        Version = string.Empty
-      };
+        throw new ArgumentNullException("value", "URI must not be null or empty");
+      ModelTableEntry _newModel = ModelTableEntry.GetDefaultModelTableEntry(modelUri, ref m_Index);
+      m_URIDictionary.Add(modelUri, _newModel);
+      m_IndexDictionary = m_URIDictionary.Values.ToDictionary(y => y.Index, x => x.ModelUri);
+      return m_URIDictionary.Count - 1;
     }
-    //#region Public Members
-    ///// <summary>
-    ///// Updates the table of namespace uris.
-    ///// </summary>
-    //public new void Update(IEnumerable<string> namespaceUris, Action<TraceMessage> traceEvent)
-    //{
-    //  if (namespaceUris == null) throw new ArgumentNullException("namespaceUris");
-
-    //  // check that first entry is the UA namespace.
-    //  int ii = 0;
-
-    //  foreach (string namespaceUri in namespaceUris)
-    //  {
-    //    if (ii == 0 && namespaceUri != Namespaces.OpcUa)
-    //    {
-    //      throw new ArgumentException("The first namespace in the table must be the OPC-UA namespace.");
-    //    }
-
-    //    ii++;
-
-    //    if (ii == 2)
-    //    {
-    //      break;
-    //    }
-    //  }
-
-    //  base.Update(namespaceUris, traceEvent);
-    //}
-    //#endregion
+    internal string GetString(ushort nsi)
+    {
+      if (m_IndexDictionary.ContainsKey(nsi))
+        return m_IndexDictionary[nsi];
+      throw new ArgumentOutOfRangeException("namespace index", "Namespace index has not been registered");
+    }
+    internal int GetIndex(string uri)
+    {
+      if (string.IsNullOrEmpty(uri))
+        throw URINullException();
+      return m_URIDictionary.ContainsKey(uri) ? m_URIDictionary[uri].Index : -1;
+    }
+    internal ushort LastNamespaceIndex => (ushort)(m_Index - 1);
     /// <summary>
-    /// Class RolePermission - default RolePermissions for all Nodes in the model.
+    /// Returns the index of the specified namespace uri, adds it if it does not exist.
     /// </summary>
-    /// <remarks>
-    /// This type is defined in Part 6 F.5 but the definition is not compliant with the UANodeSet schema. 
-    /// This type is also defined in the Part 3 5.2.9 but the definition is not compliant.
-    /// </remarks>
+    internal ushort GetIndexOrAppend(string uri)
+    {
+      int _index = GetIndex(uri);
+      if (_index == -1)
+        _index = Append(uri);
+      return (ushort)_index;
+    }
+    internal IEnumerable<IModelTableEntry> ExportNamespaceTable => m_URIDictionary.Values;
+    #endregion
+
+    #region private
+    //var
+    private readonly Dictionary<string, ModelTableEntry> m_URIDictionary = new Dictionary<string, ModelTableEntry>();
+    private Dictionary<ushort, string> m_IndexDictionary = new Dictionary<ushort, string>();
+    private ushort m_Index = 0;
+    //classes
     private class RolePermission : IRolePermission
     {
 
@@ -127,12 +99,34 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
     {
 
       /// <summary>
-      /// Initializes a new instance of the <see cref="ModelTableEntry"/> class.
+      /// Gets or sets the index of the model.
       /// </summary>
-      public ModelTableEntry()
+      /// <value>The index.</value>
+      internal ushort Index { get; set; } = 0;
+      /// <summary>
+      /// Gets the default model table entry.
+      /// </summary>
+      /// <param name="modelUri">The model URI.</param>
+      /// <param name="index">Index of the model.</param>
+      /// <returns>UAOOI.SemanticData.UANodeSetValidation.Utilities.IModelTableEntry.</returns>
+      /// <remarks>This type is defined in Part 6 F.5 but the definition is not compliant with the UANodeSet schema.
+      /// This type is also defined in the Part 3 5.2.9 but the definition is not compliant.</remarks>
+      internal static ModelTableEntry GetDefaultModelTableEntry(string modelUri, ref ushort index)
       {
-        this.AccessRestrictions = (byte)0;
+        if (string.IsNullOrEmpty(modelUri))
+          throw URINullException();
+        return new ModelTableEntry
+        {
+          AccessRestrictions = 0xC,
+          Index = index++,
+          ModelUri = modelUri,
+          PublicationDate = DateTime.UtcNow.Date,
+          RequiredModel = null,
+          RolePermissions = new IRolePermission[] { new RolePermission() },
+          Version = new Version(1, 0).ToString()
+        };
       }
+      #region IModelTableEntry
       /// <summary>
       /// Gets or sets the role permissions. The list of default RolePermissions for all Nodes in the model.
       /// </summary>
@@ -163,8 +157,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
       /// Gets or sets the access restrictions. The default AccessRestrictions that apply to all Nodes in the model.
       /// </summary>
       /// <value>The access restrictions.</value>
-      public byte AccessRestrictions { get; set; }
-
+      public byte AccessRestrictions { get; set; } = 0xC;
+      #endregion
     }
+    //methods
+    private static ArgumentNullException URINullException()
+    {
+      return new ArgumentNullException("modelUri", $"Model URI must be provided for the {nameof(IModelTableEntry)} instance");
+    }
+    #endregion
   }
 }
+

@@ -6,9 +6,11 @@
 //___________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
 {
+
   /// <summary>
   /// Interface IModelTableEntry - instance of this interface is defined in the <see cref="UANodeSet"/> 
   /// along with any dependencies these models have.

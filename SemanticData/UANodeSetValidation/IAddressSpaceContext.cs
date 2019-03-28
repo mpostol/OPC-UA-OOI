@@ -10,6 +10,7 @@ using System.IO;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -70,10 +71,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   {
 
     /// <summary>
-    /// Exports the current namespace table containing all namespaces relevant for exported model.
+    /// Exports the current namespace table containing all namespaces that have been registered.
     /// </summary>
-    /// <returns>Array of relevant namespaces as the <see cref="System.String"/>.</returns>
-    string[] ExportNamespaceTable();
+    /// <returns>An instance of <see cref="IEnumerable{Tstring}"/> containing.</returns>
+    IEnumerable<IModelTableEntry> ExportNamespaceTable { get; }
 
   }
 

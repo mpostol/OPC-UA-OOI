@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -37,7 +36,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public AddressSpaceContext(Action<TraceMessage> traceEvent)
     {
       m_TraceEvent = traceEvent ?? throw new ArgumentNullException("traceEvent");
-      m_NamespaceTable = new NamespaceTable(m_TraceEvent);
+      m_NamespaceTable = new NamespaceTable();
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting creation the OPC UA Address Space."));
       UANodeSet _standard = UANodeSet.ReadUADefinedTypes();
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Address Space - the OPC UA defined has been uploaded."));
@@ -95,8 +94,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     void IAddressSpaceContext.ValidateAndExportModel()
     {
-      int _nsi = Math.Max(m_NamespaceTable.Count - 1, 0);
-      string _namespace = m_NamespaceTable.GetString((uint)_nsi);
+      ushort _nsi = m_NamespaceTable.LastNamespaceIndex;
+      string _namespace = m_NamespaceTable.GetString(_nsi);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering AddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", _namespace)));
       ValidateAndExportModel(_nsi);
     }
@@ -154,7 +153,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     public ushort GetIndexOrAppend(string value)
     {
-      return m_NamespaceTable.GetIndexOrAppend(value, m_TraceEvent);
+      return m_NamespaceTable.GetIndexOrAppend(value);
     }
     /// <summary>
     /// Gets the namespace.
@@ -189,10 +188,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Exports the current namespace table containing all namespaces relevant for exported model.
     /// </summary>
     /// <returns>Array of relevant namespaces as the <see cref="System.String"/>.</returns>
-    public string[] ExportNamespaceTable()
-    {
-      return m_NamespaceTable.ToArray();
-    }
+    public IEnumerable<IModelTableEntry> ExportNamespaceTable => m_NamespaceTable.ExportNamespaceTable;
     #endregion
 
     #region private

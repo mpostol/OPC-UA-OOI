@@ -190,7 +190,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     private static void Update(IMethodInstanceFactory nodeDesign, UAMethod nodeSet, IUANodeValidator nodeContext, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
-      //TODO add test case validate parentReference
+      //TODO UANodeSet.xsd - synchronize with current OPCF Release #207 - add test case validate parentReference.
       if (nodeSet.ArgumentDescription != null)
         foreach (UAMethodArgument _argument in nodeSet.ArgumentDescription)
         {

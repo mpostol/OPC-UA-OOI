@@ -86,6 +86,7 @@
       <Visible>False</Visible>
     </AdditionalFiles>
     <Compile Include="NamespaceTableUnitTest.cs" />
+    <Compile Include="ExtensionsUnitTest.cs" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
     <None Include="Properties\AssemblyInfo.tt">

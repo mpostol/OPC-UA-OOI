@@ -93,6 +93,22 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return "Empty LocalizedText";
       return String.Format("{0}:{1}", localizedText[0].Locale, localizedText[0].Value);
     }
+    /// <summary>
+    /// Converts the ArrayDimensions represented as the array of <seealso cref="uint"/> to string.
+    /// </summary>
+    /// <remarks>
+    /// The maximum length of an array.
+    /// This value is a comma separated list of unsigned integer values.The list has a number of elements equal to the ValueRank.
+    /// The value is 0 if the maximum is not known for a dimension.
+    /// This field is not specified if the ValueRank less or equal 0.
+    /// This field is not specified for subtypes of Enumeration or for DataTypes with the OptionSetValues Property.
+    /// </remarks>
+    /// <param name="arrayDimensions">The array dimensions represented as the string.</param>
+    /// <returns>System.String.</returns>
+    internal static string ArrayDimensionsToString (this uint[] arrayDimensions )
+    {
+      return String.Join(", ", arrayDimensions);
+    }
     internal static void GetParameters(this DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory definition, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       if (dataTypeDefinition == null || dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
@@ -146,7 +162,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (_wrapper.ExtensionObject.AsEnumerable<ExtensionObject>().Where<ExtensionObject>(x => !((string)x.TypeId.Identifier).Equals("i=297")).Any())
         throw new ArgumentOutOfRangeException("ExtensionObject.TypeId.Identifier");
       List<DataSerialization.Argument> _ret = new List<DataSerialization.Argument>();
-      foreach (var item in _wrapper.ExtensionObject)
+      foreach (ExtensionObject item in _wrapper.ExtensionObject)
         _ret.Add(item.Body.GetObject<DataSerialization.Argument>());
       return _ret;
     }

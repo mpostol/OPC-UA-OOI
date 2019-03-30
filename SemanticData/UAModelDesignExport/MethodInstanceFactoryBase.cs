@@ -89,8 +89,10 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// <exception cref="NotImplementedException"></exception>
     public void AddArgumentDescription(string name, string locale, string value)
     {
-      //TODO to be removed in UANodeSet.xsd - synchronize with current OPCF Release #207
-      throw new NotImplementedException();
+      if (m_ArgumentsDescription.ContainsKey(name))
+        m_ArgumentsDescription[name].Add(new XML.LocalizedText() { Key = locale, Value = value });
+      else
+        m_ArgumentsDescription.Add(name, new List<XML.LocalizedText>() { new XML.LocalizedText() { Key = locale, Value = value } });
     }
     #endregion
 
@@ -108,7 +110,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         InputArguments = GetArguments(m_InputArguments),
         OutputArguments = GetArguments(m_OutputArguments),
         NonExecutable = Executable.GetValueOrDefault(false),
-        NonExecutableSpecified = Executable.HasValue 
+        NonExecutableSpecified = Executable.HasValue
       };
       string MethodDeclarationId = this.MethodDeclarationId; //TODO it is not present in the XML.MethodDesign
       base.UpdateInstance(_new, path, TraceEvent, createInstanceType);
@@ -117,17 +119,25 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     }
 
     #region private
-    private struct ArgumentDescription
-    {
-      // TODO must be implemented
-    }
     //var
     private IEnumerable<Parameter> m_InputArguments = null;
     private IEnumerable<Parameter> m_OutputArguments = null;
+    private Dictionary<string, List<XML.LocalizedText>> m_ArgumentsDescription = new Dictionary<string, List<XML.LocalizedText>>();
     //method
     private XML.Parameter[] GetArguments(IEnumerable<Parameter> parameter)
     {
-      return parameter?.Select<Parameter, XML.Parameter>(x => x.ExportArgument(TraceEvent)).ToArray<XML.Parameter>();
+      XML.Parameter[] _arguments = parameter?.Select<Parameter, XML.Parameter>(x => x.ExportArgument(TraceEvent)).ToArray<XML.Parameter>();
+      foreach (XML.Parameter _item in _arguments)
+      {
+        if (m_ArgumentsDescription.ContainsKey(_item.Name))
+        {
+          List<XML.LocalizedText> _argumentDescription = m_ArgumentsDescription[_item.Name];
+          _argumentDescription.Add(_item.Description);
+          //TODO Report error - the model design doesn't support array of localized descriptions.
+          _item.Description = _argumentDescription.ToArray<XML.LocalizedText>()[0];
+        }
+      }
+      return _arguments;
     }
     private IEnumerable<Parameter> RemoveArguments(string parameterKind, Func<XmlElement, Parameter[]> getParameters)
     {

@@ -132,7 +132,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       Parameter _ret = new Parameter()
       {
-        DataType = dataType,
+        ArrayDimensions = argument.ArrayDimensions.ArrayDimensionsToString(),
+        DataType = dataType, 
         Identifier = new Nullable<int>(),
         Name = argument.Name,
         ValueRank = argument.ValueRank.GetValueRank(m_TraceEvent)

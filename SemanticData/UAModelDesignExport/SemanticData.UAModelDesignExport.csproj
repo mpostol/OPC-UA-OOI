@@ -16,6 +16,9 @@
     <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA</PackageTags>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

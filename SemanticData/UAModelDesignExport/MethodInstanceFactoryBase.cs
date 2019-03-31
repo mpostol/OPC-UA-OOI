@@ -127,16 +127,17 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     private XML.Parameter[] GetArguments(IEnumerable<Parameter> parameter)
     {
       XML.Parameter[] _arguments = parameter?.Select<Parameter, XML.Parameter>(x => x.ExportArgument(TraceEvent)).ToArray<XML.Parameter>();
-      foreach (XML.Parameter _item in _arguments)
-      {
-        if (m_ArgumentsDescription.ContainsKey(_item.Name))
+      if (_arguments != null)
+        foreach (XML.Parameter _item in _arguments)
         {
-          List<XML.LocalizedText> _argumentDescription = m_ArgumentsDescription[_item.Name];
-          _argumentDescription.Add(_item.Description);
-          //TODO Report error - the model design doesn't support array of localized descriptions.
-          _item.Description = _argumentDescription.ToArray<XML.LocalizedText>()[0];
+          if (m_ArgumentsDescription.ContainsKey(_item.Name))
+          {
+            List<XML.LocalizedText> _argumentDescription = m_ArgumentsDescription[_item.Name];
+            _argumentDescription.Add(_item.Description);
+            //TODO Report error - the model design doesn't support array of localized descriptions.
+            _item.Description = _argumentDescription.ToArray<XML.LocalizedText>()[0];
+          }
         }
-      }
       return _arguments;
     }
     private IEnumerable<Parameter> RemoveArguments(string parameterKind, Func<XmlElement, Parameter[]> getParameters)

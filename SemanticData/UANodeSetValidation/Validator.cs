@@ -202,6 +202,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.Executable = !nodeSet.Executable ? nodeSet.Executable : new Nullable<bool>();
       nodeDesign.UserExecutable = !nodeSet.UserExecutable ? nodeSet.UserExecutable : new Nullable<bool>();
       nodeDesign.MethodDeclarationId = nodeSet.MethodDeclarationId;
+      nodeDesign.ReleaseStatus = nodeSet.ReleaseStatus.ConvertToReleaseStatus();
       nodeDesign.AddInputArguments(x => nodeContext.GetParameters(x));
       nodeDesign.AddOutputArguments(x => nodeContext.GetParameters(x));
     }

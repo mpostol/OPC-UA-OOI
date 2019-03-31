@@ -20,10 +20,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// It holds the value of the BrowseName attribute of modes in the Address Space.
     /// </summary>
     /// <value>The BrowseName of the node.</value>
-    string BrowseName
-    {
-      set;
-    }
+    string BrowseName { set; }
     /// <summary>
     /// Adds new value for the Description. The optional Description element shall explain the meaning of the node in a localized text using the same mechanisms 
     /// for localization as described for the DisplayName.
@@ -55,10 +52,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// This attribute is not exposed in the Address Space.
     /// </summary>
     /// <value>The symbolic name for the node.</value>
-    XmlQualifiedName SymbolicName
-    {
-      set;
-    }
+    XmlQualifiedName SymbolicName { set; }
     /// <summary>
     /// Sets the write mask. The optional WriteMask attribute represents the WriteMask attribute of the Basic NodeClass, which exposes the possibilities of a client 
     /// to write the attributes of the node. The WriteMask attribute does not take any user access rights into account, that is, although an attribute is writable 
@@ -66,10 +60,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </summary>
     /// <remarks>Default Value "0"</remarks>
     /// <value>The write access.</value>
-    uint WriteAccess
-    {
-      set;
-    }
+    uint WriteAccess { set; }
     /// <summary>
     /// Sets the access restrictions.
     /// </summary>
@@ -78,6 +69,15 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </remarks>
     /// <value>The access restrictions.</value>
     AccessRestrictions AccessRestrictions { set; }
+    /// <summary>
+    /// Sets the release status of the node.
+    /// </summary>
+    /// <remarks>
+    /// It is not exposed in the address space.
+    /// Added in the Rel 1.04 to the specification.
+    /// </remarks>
+    /// <value>The release status.</value>
+    ReleaseStatus ReleaseStatus { set; }
 
-    }
+  }
 }

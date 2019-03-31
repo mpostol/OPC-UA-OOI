@@ -11,7 +11,6 @@ using System.Linq;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.InformationModelFactory.UAConstants;
-using UAOOI.SemanticData.UAModelDesignExport.XML;
 using TraceMessage = UAOOI.SemanticData.BuildingErrorsHandling.TraceMessage;
 
 namespace UAOOI.SemanticData.UAModelDesignExport
@@ -75,6 +74,13 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// <remarks>The AccessRestrictions that apply to the Node.</remarks>
     public AccessRestrictions AccessRestrictions { set; private get; }
     /// <summary>
+    /// Sets the release status of the node.
+    /// </summary>
+    /// <value>The release status.</value>
+    /// <remarks>It is not exposed in the address space.
+    /// Added in the Rel 1.04 to the specification.</remarks>
+    public ReleaseStatus ReleaseStatus { set; private get; }
+    /// <summary>
     /// Adds new value for the Description. The optional Description element shall explain the meaning of the node in a localized text using the same mechanisms
     /// for localization as described for the DisplayName.
     /// </summary>
@@ -106,34 +112,35 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// <param name="path">The path.</param>
     /// <param name="createInstanceType">Type of the create instance.</param>
     /// <returns>NodeDesign.</returns>
-    internal abstract NodeDesign Export(List<string> path, Action<InstanceDesign, List<string>> createInstanceType);
+    internal abstract XML.NodeDesign Export(List<string> path, Action<XML.InstanceDesign, List<string>> createInstanceType);
     #endregion
 
     #region private
-    protected void UpdateNode(NodeDesign nodeDesign, List<string> path, Action<InstanceDesign, List<string>> createInstanceType)
+    protected void UpdateNode(XML.NodeDesign nodeDesign, List<string> path, Action<XML.InstanceDesign, List<string>> createInstanceType)
     {
       string _defaultDisplay = string.IsNullOrEmpty(BrowseName) ? SymbolicName.Name : BrowseName;
       nodeDesign.BrowseName = BrowseName == SymbolicName.Name ? null : BrowseName;
-      List<NodeDesign> _Members = new List<NodeDesign>();
+      List<XML.NodeDesign> _Members = new List<XML.NodeDesign>();
       path.Add(SymbolicName.Name);
       base.ExportNodes(_Members, path, createInstanceType);
-      InstanceDesign[] _items = _Members.Cast<InstanceDesign>().ToArray<InstanceDesign>();
-      nodeDesign.Children = _items == null || _items.Length == 0 ? null : new ListOfChildren() { Items = _items };
+      XML.InstanceDesign[] _items = _Members.Cast<XML.InstanceDesign>().ToArray<XML.InstanceDesign>();
+      nodeDesign.Children = _items == null || _items.Length == 0 ? null : new XML.ListOfChildren() { Items = _items };
       nodeDesign.Description = m_Description;
       nodeDesign.DisplayName = m_DisplayName == null || m_DisplayName.Value == _defaultDisplay ? null : m_DisplayName;
       nodeDesign.IsDeclaration = false;
       nodeDesign.NumericId = 0;
       nodeDesign.NumericIdSpecified = false;
-      nodeDesign.References = m_References.Count == 0 ? null : m_References.Select<ReferenceFactoryBase, Reference>(x => x.Export()).ToArray<Reference>();
+      nodeDesign.References = m_References.Count == 0 ? null : m_References.Select<ReferenceFactoryBase, XML.Reference>(x => x.Export()).ToArray<XML.Reference>();
       nodeDesign.StringId = null;
       nodeDesign.SymbolicId = null;
       nodeDesign.SymbolicName = SymbolicName;
       nodeDesign.WriteAccess = WriteAccess;
+      nodeDesign.ReleaseStatus = this.ReleaseStatus.ConvertToReleaseStatus();
       //TODO to be removed in UANodeSet.xsd - synchronize with current OPCF Release #207
-      //this.AccessRestrictions
+      //AccessRestrictions
     }
-    private LocalizedText m_Description = null;
-    private LocalizedText m_DisplayName = null;
+    private XML.LocalizedText m_Description = null;
+    private XML.LocalizedText m_DisplayName = null;
     private List<ReferenceFactoryBase> m_References = new List<ReferenceFactoryBase>();
     #endregion
 

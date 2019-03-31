@@ -147,7 +147,23 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       isSpecified(true);
       return _ret;
     }
-
+    internal static XML.ReleaseStatus ConvertToReleaseStatus(this ReleaseStatus releaseStatus)
+    {
+      XML.ReleaseStatus _status = XML.ReleaseStatus.Released;
+      switch (releaseStatus)
+      {
+        case ReleaseStatus.Released:
+          _status = XML.ReleaseStatus.Released;
+          break;
+        case ReleaseStatus.Draft:
+          _status = XML.ReleaseStatus.Draft;
+          break;
+        case ReleaseStatus.Deprecated:
+          _status = XML.ReleaseStatus.Deprecated;
+          break;
+      }
+      return _status;
+    }
   }
 
 }

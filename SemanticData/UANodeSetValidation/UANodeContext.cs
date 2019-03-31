@@ -199,13 +199,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Exports the BrowseName of the BaseType.
     /// </summary>
     /// <param name="type">if set to <c>true</c> the source node represents type. <c>false</c> if it is an instance.</param>
-    /// <param name="traceEvent">A delegate encapsulates the action to report any error and trace processing progress.</param>
     /// <returns>XmlQualifiedName.</returns>
     /// <value>An instance of <see cref="XmlQualifiedName" /> representing the base type.</value>
     public XmlQualifiedName ExportBaseTypeBrowseName(bool type)
     {
       return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type, BuildErrorsHandling.Log.TraceEvent));
-
     }
     /// <summary>
     /// Gets the modeling rule associated with this node.
@@ -253,6 +251,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     #endregion
+
     #region private
     private IUAModelContext m_ModelContext = null;
     private ModelingRules? m_ModelingRule;
@@ -274,7 +273,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
     #endregion
-
 
   }
 }

@@ -18,7 +18,6 @@ using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
-using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -81,7 +80,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongSymbolicName, String.Format("SymbolicName: '{0}'.", name)));
       return name;
     }
-    internal static string NodeIdentifier(this UANode node)
+    internal static string NodeIdentifier(this XML.UANode node)
     {
       if (String.IsNullOrEmpty(node.BrowseName))
         return node.SymbolicName;
@@ -109,11 +108,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return String.Join(", ", arrayDimensions);
     }
-    internal static void GetParameters(this DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory definition, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal static void GetParameters(this XML.DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory definition, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       if (dataTypeDefinition == null || dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
         return;
-      foreach (DataTypeField _item in dataTypeDefinition.Field)
+      foreach (XML.DataTypeField _item in dataTypeDefinition.Field)
       {
         IDataTypeFieldFactory _nP = definition.NewField();
         _nP.Name = _item.Name;
@@ -188,6 +187,24 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return _Value;
       }
     }
+    internal static ReleaseStatus ConvertToReleaseStatus(this XML.ReleaseStatus releaseStatus)
+    {
+      ReleaseStatus _status = ReleaseStatus.Released;
+      switch (releaseStatus)
+      {
+        case XML.ReleaseStatus.Released:
+          _status = ReleaseStatus.Released;
+          break;
+        case XML.ReleaseStatus.Draft:
+          _status = ReleaseStatus.Draft;
+          break;
+        case XML.ReleaseStatus.Deprecated:
+          _status = ReleaseStatus.Deprecated;
+          break;
+      }
+      return _status;
+    }
+
 
   }
 

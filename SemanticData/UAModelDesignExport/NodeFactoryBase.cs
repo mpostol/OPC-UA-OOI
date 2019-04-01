@@ -88,6 +88,14 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// <remarks>Not defined in the specification Part 2, 5, 6 and Errata Release 1.04.2 September 25, 2018</remarks>
     public DataTypePurpose DataTypePurpose { set; private get; } = DataTypePurpose.Normal;
     /// <summary>
+    /// Sets the category. A list of identifiers used to group related UANodes together for use by tools that create/edit UANodeSet files.
+    /// </summary>
+    /// <remarks>
+    /// In the UA Model Design it is a comment separated list of categories assigned to the node (e.g. Part4/Services or Part5/StateMachines).
+    /// </remarks>
+    /// <value>The category.</value>
+    public string[] Category { set; private get; } = null;
+    /// <summary>
     /// Adds new value for the Description. The optional Description element shall explain the meaning of the node in a localized text using the same mechanisms
     /// for localization as described for the DisplayName.
     /// </summary>
@@ -142,8 +150,9 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       nodeDesign.SymbolicId = null;
       nodeDesign.SymbolicName = SymbolicName;
       nodeDesign.WriteAccess = WriteAccess;
-      nodeDesign.ReleaseStatus = this.ReleaseStatus.ConvertToReleaseStatus();
-      nodeDesign.Purpose = this.DataTypePurpose.ConvertToDataTypePurpose();
+      nodeDesign.ReleaseStatus = ReleaseStatus.ConvertToReleaseStatus();
+      nodeDesign.Purpose = DataTypePurpose.ConvertToDataTypePurpose();
+      nodeDesign.Category = Category == null ? null : string.Join(", ", Category);
       //TODO to be removed in UANodeSet.xsd - synchronize with current OPCF Release #207
       //AccessRestrictions
     }

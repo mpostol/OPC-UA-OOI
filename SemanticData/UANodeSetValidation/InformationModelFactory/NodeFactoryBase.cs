@@ -75,9 +75,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// <remarks>It is not exposed in the address space.
     /// Added in the Rel 1.04 to the specification.</remarks>
     public ReleaseStatus ReleaseStatus { set { } }
-
+    /// <summary>
+    /// Sets the data type purpose.
+    /// </summary>
+    /// <value>The data type purpose.</value>
+    /// <remarks>Not defined in the specification Part 2, 5, 6 and Errata Release 1.04.2 September 25, 2018</remarks>
     public DataTypePurpose DataTypePurpose { set { } }
-
+    /// <summary>
+    /// Sets the category. A list of identifiers used to group related UANodes together for use by tools that create/edit UANodeSet files.
+    /// </summary>
+    /// <value>The category.</value>
+    /// <exception cref="System.NotImplementedException"></exception>
+    public string[] Category { set { } }
     /// <summary>
     /// Adds new value for the Description. The optional Description element shall explain the meaning of the node in a localized text using the same mechanisms
     /// for localization as described for the DisplayName.

@@ -262,6 +262,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       };
       _nodeFactory.WriteAccess = _nodeSet is UAVariable ? _nodeSet.WriteMask.Validate(0x200000, x => _doReport(x, _nodeSet.GetType().Name)) : _nodeSet.WriteMask.Validate(0x400000, x => _doReport(x, _nodeSet.GetType().Name));
       _nodeFactory.AccessRestrictions = ConvertToAccessRestrictions(_nodeSet.AccessRestrictions, _nodeSet.GetType().Name, traceEvent);
+      _nodeFactory.Category = _nodeSet.Category;
       if (_nodeSet.RolePermissions != null)
         traceEvent(TraceMessage.DiagnosticTraceMessage("RolePermissions is not supported. You must fix it manually."));
       if (!string.IsNullOrEmpty(_nodeSet.Documentation))

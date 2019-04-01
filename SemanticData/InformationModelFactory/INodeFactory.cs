@@ -87,6 +87,11 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </remarks>
     /// <value>The data type purpose.</value>
     DataTypePurpose DataTypePurpose { set; }
+    /// <summary>
+    /// Sets the category. A list of identifiers used to group related UANodes together for use by tools that create/edit UANodeSet files.
+    /// </summary>
+    /// <value>The category.</value>
+    string[] Category { set; }
 
   }
 }

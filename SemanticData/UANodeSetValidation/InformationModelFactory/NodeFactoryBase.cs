@@ -88,6 +88,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// <exception cref="System.NotImplementedException"></exception>
     public string[] Category { set { } }
     /// <summary>
+    /// Sets a value indicating whether [not in address space].
+    /// </summary>
+    /// <value><c>true</c> if [not in address space]; otherwise, <c>false</c>.</value>
+    public bool NotInAddressSpace { set { } }
+
+    /// <summary>
     /// Adds new value for the Description. The optional Description element shall explain the meaning of the node in a localized text using the same mechanisms
     /// for localization as described for the DisplayName.
     /// </summary>

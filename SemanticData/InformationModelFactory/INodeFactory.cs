@@ -92,6 +92,14 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </summary>
     /// <value>The category.</value>
     string[] Category { set; }
+    /// <summary>
+    /// Sets a value indicating whether the Node is in the address space.
+    /// </summary>
+    /// <remarks>
+    /// To be used by a tool. Not exposed in the address space.
+    /// </remarks>
+    /// <value><c>true</c> if the Node is not in address space; otherwise, <c>false</c>.</value>
+    bool NotInAddressSpace { set; }
 
   }
 }

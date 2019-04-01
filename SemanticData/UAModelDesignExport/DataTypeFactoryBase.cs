@@ -42,7 +42,6 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         Fields = m_DataTypeDefinitionFactoryBase.Export().ToArray<XML.Parameter>(),
         Encodings = null, //Not supported
         NoArraysAllowed = false, //Not supported
-        NotInAddressSpace = false //Not supported
       };
       base.Update(_new, path, createInstanceType);
       return _new;

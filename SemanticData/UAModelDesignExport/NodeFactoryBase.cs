@@ -95,6 +95,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// </remarks>
     /// <value>The category.</value>
     public string[] Category { set; private get; } = null;
+    public bool NotInAddressSpace { set; private get; } = false; 
     /// <summary>
     /// Adds new value for the Description. The optional Description element shall explain the meaning of the node in a localized text using the same mechanisms
     /// for localization as described for the DisplayName.
@@ -153,6 +154,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       nodeDesign.ReleaseStatus = ReleaseStatus.ConvertToReleaseStatus();
       nodeDesign.Purpose = DataTypePurpose.ConvertToDataTypePurpose();
       nodeDesign.Category = Category == null ? null : string.Join(", ", Category);
+      nodeDesign.NotInAddressSpace = this.NotInAddressSpace;
       //TODO to be removed in UANodeSet.xsd - synchronize with current OPCF Release #207
       //AccessRestrictions
     }

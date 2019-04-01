@@ -78,6 +78,15 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </remarks>
     /// <value>The release status.</value>
     ReleaseStatus ReleaseStatus { set; }
+    //TODO Mantis - report error 
+    /// <summary>
+    /// Sets the data type purpose.
+    /// </summary>
+    /// <remarks>
+    /// Not defined in the specification Part 2, 5, 6 and Errata Release 1.04.2 September 25, 2018
+    /// </remarks>
+    /// <value>The data type purpose.</value>
+    DataTypePurpose DataTypePurpose { set; }
 
   }
 }

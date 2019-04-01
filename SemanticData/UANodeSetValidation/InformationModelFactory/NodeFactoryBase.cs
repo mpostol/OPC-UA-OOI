@@ -75,6 +75,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// <remarks>It is not exposed in the address space.
     /// Added in the Rel 1.04 to the specification.</remarks>
     public ReleaseStatus ReleaseStatus { set { } }
+
+    public DataTypePurpose DataTypePurpose { set { } }
+
     /// <summary>
     /// Adds new value for the Description. The optional Description element shall explain the meaning of the node in a localized text using the same mechanisms
     /// for localization as described for the DisplayName.

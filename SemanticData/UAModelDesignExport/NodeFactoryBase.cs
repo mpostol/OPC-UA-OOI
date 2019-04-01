@@ -81,6 +81,13 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// Added in the Rel 1.04 to the specification.</remarks>
     public ReleaseStatus ReleaseStatus { set; private get; }
     /// <summary>
+    /// Sets the data type purpose.
+    /// </summary>
+    /// <value>The data type purpose.</value>
+    /// <exception cref="NotImplementedException"></exception>
+    /// <remarks>Not defined in the specification Part 2, 5, 6 and Errata Release 1.04.2 September 25, 2018</remarks>
+    public DataTypePurpose DataTypePurpose { set; private get; } = DataTypePurpose.Normal;
+    /// <summary>
     /// Adds new value for the Description. The optional Description element shall explain the meaning of the node in a localized text using the same mechanisms
     /// for localization as described for the DisplayName.
     /// </summary>
@@ -136,6 +143,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       nodeDesign.SymbolicName = SymbolicName;
       nodeDesign.WriteAccess = WriteAccess;
       nodeDesign.ReleaseStatus = this.ReleaseStatus.ConvertToReleaseStatus();
+      nodeDesign.Purpose = this.DataTypePurpose.ConvertToDataTypePurpose();
       //TODO to be removed in UANodeSet.xsd - synchronize with current OPCF Release #207
       //AccessRestrictions
     }

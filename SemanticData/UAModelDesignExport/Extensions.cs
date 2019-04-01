@@ -164,6 +164,23 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       }
       return _status;
     }
+    internal static XML.DataTypePurpose ConvertToDataTypePurpose(this DataTypePurpose releaseStatus)
+    {
+      XML.DataTypePurpose _status = XML.DataTypePurpose.Normal;
+      switch (releaseStatus)
+      {
+        case DataTypePurpose.CodeGenerator:
+          _status = XML.DataTypePurpose.CodeGenerator;
+          break;
+        case DataTypePurpose.Normal:
+          _status = XML.DataTypePurpose.Normal;
+          break;
+        case DataTypePurpose.ServicesOnly:
+          _status = XML.DataTypePurpose.ServicesOnly;
+          break;
+      }
+      return _status;
+    }
   }
 
 }

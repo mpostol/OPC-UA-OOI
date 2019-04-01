@@ -204,6 +204,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _status;
     }
+    internal static DataTypePurpose ConvertToDataTypePurpose(this XML.DataTypePurpose releaseStatus)
+    {
+      DataTypePurpose _status = DataTypePurpose.Normal;
+      switch (releaseStatus)
+      {
+        case XML.DataTypePurpose.Normal:
+          _status = DataTypePurpose.Normal;
+          break;
+        case XML.DataTypePurpose.CodeGenerator:
+          _status = DataTypePurpose.CodeGenerator;
+          break;
+        case XML.DataTypePurpose.ServicesOnly:
+          _status = DataTypePurpose.ServicesOnly;
+          break;
+      }
+      return _status;
+    }
 
 
   }

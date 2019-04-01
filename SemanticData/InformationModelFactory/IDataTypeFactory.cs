@@ -7,11 +7,13 @@
 
 namespace UAOOI.SemanticData.InformationModelFactory
 {
+
   /// <summary>
   /// Interface <c>IDataTypeFactory</c> - it provides functionality to factory objects implementing the <see cref="IDataTypeDefinitionFactory"/> interface. 
   /// </summary>
   public interface IDataTypeFactory : ITypeFactory
   {
+
     /// <summary>
     /// Creates new implementation dependent object implementing the <see cref="IDataTypeDefinitionFactory"/> interface.
     /// The data type model is used to define simple and complex data types. Types are used to describe the structure of the Value attribute of variables and their types. 

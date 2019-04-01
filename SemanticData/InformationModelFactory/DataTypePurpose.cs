@@ -10,26 +10,26 @@ namespace UAOOI.SemanticData.InformationModelFactory
 
   //TODO Mantis - report error 
   /// <summary>
-  /// Enum ReleaseStatus
+  /// Enum DataTypePurpose
   /// </summary>
   /// <remarks>
-  /// Not defined in the specification Part 2, 5, 6 and  Errata Release 1.04.2 September 25, 2018
+  /// Not defined in the specification Part 2, 5, 6 and Errata Release 1.04.2 September 25, 2018
   /// </remarks>
-    public enum ReleaseStatus
+  public enum DataTypePurpose
   {
 
     /// <summary>
-    /// The model has been released.
+    /// The normal release purpose
     /// </summary>
-    Released,
+    Normal,
     /// <summary>
-    /// It is draft model
+    /// The services only release purpose
     /// </summary>
-    Draft,
+    ServicesOnly,
     /// <summary>
-    /// Consider the model as deprecated
+    /// The code generator only release purpose
     /// </summary>
-    Deprecated,
+    CodeGenerator,
 
   }
 

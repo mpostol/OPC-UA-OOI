@@ -214,7 +214,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private static void Update(IDataTypeFactory nodeDesign, UADataType nodeSet, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
       nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), modelContext, traceEvent);
-      if (nodeSet.Purpose != DataTypePurpose.Normal)
+      //UANodeSet.xsd - synchronize with current OPCF Release #207 implement DataTypePurpose support
+      nodeDesign.DataTypePurpose = nodeSet.Purpose.ConvertToDataTypePurpose();
+      if (nodeSet.Purpose != XML.DataTypePurpose.Normal)
         traceEvent(TraceMessage.DiagnosticTraceMessage($"DataTypePurpose value {nodeSet.Purpose } is not supported by the tool"));
     }
     private static void Update(IReferenceTypeFactory nodeDesign, UAReferenceType nodeSet, Action<TraceMessage> traceEvent)

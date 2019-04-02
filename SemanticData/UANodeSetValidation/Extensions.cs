@@ -110,6 +110,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     internal static void GetParameters(this XML.DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory definition, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
+      //TODO #207
+      definition.BaseType = modelContext.ExportBrowseName(dataTypeDefinition.BaseType, DataTypes.BaseDataType);
+      definition.IsOptionSet = dataTypeDefinition.IsOptionSet;
+      definition.IsUnion = dataTypeDefinition.IsUnion;
+      definition.Name = modelContext.ExportBrowseName( dataTypeDefinition.Name, DataTypes.BaseDataType);
+      definition.SymbolicName = dataTypeDefinition.SymbolicName;
       if (dataTypeDefinition == null || dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
         return;
       foreach (XML.DataTypeField _item in dataTypeDefinition.Field)

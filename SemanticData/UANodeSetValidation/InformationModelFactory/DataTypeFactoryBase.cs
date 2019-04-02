@@ -16,8 +16,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
   /// </summary>
   /// <seealso cref="UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory.TypeFactoryBase" />
   /// <seealso cref="UAOOI.SemanticData.InformationModelFactory.IDataTypeFactory" />
-  internal class DataTypeFactoryBase: TypeFactoryBase, IDataTypeFactory
+  internal class DataTypeFactoryBase : TypeFactoryBase, IDataTypeFactory
   {
+
+    /// <summary>
+    /// Sets a value indicating whether this instance is option set. This flag indicates that the data type defines the OptionSetValues Property. 
+    /// This field is optional.The default value is false.
+    /// </summary>
+    /// <value><c>true</c> if this instance is option set; otherwise, <c>false</c>.</value>
+    public bool IsOptionSet { set; private get; }
     /// <summary>
     /// Creates new implementation dependent object implementing the <see cref="T:UAOOI.SemanticData.InformationModelFactory.IDataTypeDefinitionFactory" /> interface.
     /// The data type model is used to define simple and complex data types. Types are used to describe the structure of the Value attribute of variables and their types.

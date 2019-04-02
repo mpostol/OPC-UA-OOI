@@ -84,6 +84,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </summary>
     /// <remarks>
     /// Not defined in the specification Part 2, 5, 6 and Errata Release 1.04.2 September 25, 2018
+    /// This field is defined in the UADataType in the <c>UADataType</c> but in UA Model Design in the <c>NodeDesign</c>
     /// </remarks>
     /// <value>The data type purpose.</value>
     DataTypePurpose DataTypePurpose { set; }

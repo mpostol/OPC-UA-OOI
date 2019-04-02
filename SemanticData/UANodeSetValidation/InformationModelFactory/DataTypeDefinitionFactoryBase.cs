@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
   /// Implements the <see cref="UAOOI.SemanticData.InformationModelFactory.IDataTypeDefinitionFactory" />
   /// </summary>
   /// <seealso cref="UAOOI.SemanticData.InformationModelFactory.IDataTypeDefinitionFactory" />
-  internal class DataTypeDefinitionFactoryBase: IDataTypeDefinitionFactory
+  internal class DataTypeDefinitionFactoryBase : IDataTypeDefinitionFactory
   {
     /// <summary>
     /// Creates new field and provides an object of <see cref="T:UAOOI.SemanticData.InformationModelFactory.IDataTypeFieldFactory" /> type encapsulating information about the field data type.
@@ -29,26 +29,25 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// Sets the name of the DataType.
     /// </summary>
     /// <value>The name represented as <see cref="T:System.Xml.XmlQualifiedName" />.</value>
-    public XmlQualifiedName Name
-    {
-      set {  }
-    }
+    public XmlQualifiedName Name { set { } }
     /// <summary>
     /// Sets the the base type name.
     /// </summary>
     /// <value>AN object <see cref="T:System.Xml.XmlQualifiedName" /> representing name of a base type.</value>
-    public XmlQualifiedName BaseType
-    {
-      set {  }
-    }
+    public XmlQualifiedName BaseType { set { } }
     /// <summary>
     /// A symbolic name for the data type. It should only be specified if the Name cannot be used for this purpose.
     /// Only letters, digits or the underscore (‘_’) are permitted.
     /// </summary>
     /// <value>The symbolic name of thi entity.</value>
-    public string SymbolicName
-    {
-      set {  }
-    }
+    public string SymbolicName { set { } }
+    /// <summary>
+    /// Sets a value indicating whether this instance is option set. This flag indicates that the data type defines the OptionSetValues Property.
+    /// This field is optional.The default value is false.
+    /// </summary>
+    /// <value><c>true</c> if this instance is option set; otherwise, <c>false</c>.</value>
+    public bool IsOptionSet { set { } }
+
+    public bool IsUnion { set { } }
   }
 }

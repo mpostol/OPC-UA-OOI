@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UAModelDesignExport.XML;
@@ -18,6 +17,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
 
   internal class DataTypeFactoryBase : TypeFactoryBase, IDataTypeFactory
   {
+
     /// <summary>
     /// Initializes a new instance of the <see cref="NodeFactoryBase" /> class.
     /// </summary>
@@ -37,12 +37,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     //internal  API
     internal override NodeDesign Export(List<string> path, Action<InstanceDesign, List<string>> createInstanceType)
     {
-      DataTypeDesign _new = new DataTypeDesign()
-      {
-        Fields = m_DataTypeDefinitionFactoryBase.Export().ToArray<XML.Parameter>(),
-        Encodings = null, //Not supported
-        NoArraysAllowed = false, //Not supported
-      };
+      DataTypeDesign _new = m_DataTypeDefinitionFactoryBase.Export();
       base.Update(_new, path, createInstanceType);
       return _new;
     }

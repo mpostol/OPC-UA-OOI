@@ -249,9 +249,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       XmlQualifiedName _browseName = nodeContext.ExportNodeBrowseName();
       string _symbolicName;
       if (string.IsNullOrEmpty(_nodeSet.SymbolicName))
-        _symbolicName = _browseName.Name.ValidateIdentifier(traceEvent);
+        _symbolicName = _browseName.Name.ValidateIdentifier(traceEvent); //TODO IsValidLanguageIndependentIdentifier is not supported by the .NET standard #340
       else
-        _symbolicName = _nodeSet.SymbolicName.ValidateIdentifier(traceEvent);
+        _symbolicName = _nodeSet.SymbolicName.ValidateIdentifier(traceEvent); //TODO IsValidLanguageIndependentIdentifier is not supported by the .NET standard #340
       _nodeFactory.BrowseName = _browseName.Name.ExportString(_symbolicName);
       _nodeSet.Description.ExportLocalizedTextArray(_nodeFactory.AddDescription);
       _nodeSet.DisplayName.Truncate(512, traceEvent).ExportLocalizedTextArray(_nodeFactory.AddDisplayName);

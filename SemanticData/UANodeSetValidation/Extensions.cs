@@ -6,9 +6,9 @@
 //___________________________________________________________________________________
 
 using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Permissions;
@@ -73,11 +73,50 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         reportError(value);
       return value & maxValue - 1;
     }
-    [SecurityPermissionAttribute(SecurityAction.Demand)]
+    //TODO IsValidLanguageIndependentIdentifier is not supported by the .NET standard #340
+    /// <summary>
+    /// Gets a value indicating whether the specified value is a valid language independent identifier.
+    /// </summary>
+    /// <remarks>
+    /// it is implemented using 
+    /// https://raw.githubusercontent.com/Microsoft/referencesource/3b1eaf5203992df69de44c783a3eda37d3d4cd10/System/compmod/system/codedom/compiler/CodeGenerator.cs as the starting point.
+    /// </remarks>
+    private static bool IsValidLanguageIndependentIdentifier(this string value)
+    {
+      if (value.Length == 0)
+        return false;
+      // each char must be Lu, Ll, Lt, Lm, Lo, Nd, Mn, Mc, Pc
+      for (int i = 0; i < value.Length; i++)
+      {
+        char ch = value[i];
+        UnicodeCategory uc = Char.GetUnicodeCategory(ch);
+        switch (uc)
+        {
+          case UnicodeCategory.UppercaseLetter:        // Lu
+          case UnicodeCategory.LowercaseLetter:        // Ll
+          case UnicodeCategory.TitlecaseLetter:        // Lt
+          case UnicodeCategory.ModifierLetter:         // Lm
+          case UnicodeCategory.LetterNumber:           // Lm
+          case UnicodeCategory.OtherLetter:            // Lo
+            break;
+          case UnicodeCategory.NonSpacingMark:         // Mn
+          case UnicodeCategory.SpacingCombiningMark:   // Mc
+          case UnicodeCategory.ConnectorPunctuation:   // Pc
+          case UnicodeCategory.DecimalDigitNumber:     // Nd
+                                                       // Underscore is a valid starting character, even though it is a ConnectorPunctuation.
+            //if (nextMustBeStartChar && ch != '_')
+            //  return false;
+            break;
+          default:
+            return false;
+        }
+      }
+      return true;
+    }
     internal static string ValidateIdentifier(this string name, Action<TraceMessage> reportError)
     {
-      if (!CodeGenerator.IsValidLanguageIndependentIdentifier(name))
-        reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongSymbolicName, String.Format("SymbolicName: '{0}'.", name)));
+      if (!name.IsValidLanguageIndependentIdentifier())
+       reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongSymbolicName, String.Format("SymbolicName: '{0}'.", name)));
       return name;
     }
     internal static string NodeIdentifier(this XML.UANode node)

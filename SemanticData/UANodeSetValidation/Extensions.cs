@@ -11,7 +11,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Security.Permissions;
 using System.Xml;
 using System.Xml.Serialization;
 using UAOOI.SemanticData.BuildingErrorsHandling;
@@ -45,19 +44,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //string
     internal static string SymbolicName(this List<string> path)
     {
-      return String.Join("_", path.ToArray());
+      return string.Join("_", path.ToArray());
     }
     /// <summary>
     /// Exports the string and filter out the default value. 
     /// </summary>
     /// <param name="value">The value.</param>
     /// <param name="defaultValue">The default value.</param>
-    /// <returns>Returns <paramref name="value"/> if not equal to <paramref name="defaultValue"/>, otherwise it returns <see cref="String.Empty"/>.</returns>
+    /// <returns>Returns <paramref name="value"/> if not equal to <paramref name="defaultValue"/>, otherwise it returns <see cref="string.Empty"/>.</returns>
     internal static string ExportString(this string value, string defaultValue)
     {
-      if (String.IsNullOrEmpty(value))
+      if (string.IsNullOrEmpty(value))
         return null;
-      return String.Compare(value, defaultValue) == 0 ? null : value;
+      return string.Compare(value, defaultValue) == 0 ? null : value;
     }
     internal static bool? Export(this bool value, bool defaultValue)
     {
@@ -67,7 +66,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return !value.Equals(defaultValue) ? Convert.ToInt32(value) : new Nullable<int>();
     }
-    internal static UInt32 Validate(this UInt32 value, UInt32 maxValue, Action<UInt32> reportError)
+    internal static uint Validate(this uint value, uint maxValue, Action<uint> reportError)
     {
       if (value.CompareTo(maxValue) >= 0)
         reportError(value);
@@ -89,7 +88,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       for (int i = 0; i < value.Length; i++)
       {
         char ch = value[i];
-        UnicodeCategory uc = Char.GetUnicodeCategory(ch);
+        UnicodeCategory uc = char.GetUnicodeCategory(ch);
         switch (uc)
         {
           case UnicodeCategory.UppercaseLetter:        // Lu
@@ -104,8 +103,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case UnicodeCategory.ConnectorPunctuation:   // Pc
           case UnicodeCategory.DecimalDigitNumber:     // Nd
                                                        // Underscore is a valid starting character, even though it is a ConnectorPunctuation.
-            //if (nextMustBeStartChar && ch != '_')
-            //  return false;
+                                                       //if (nextMustBeStartChar && ch != '_')
+                                                       //  return false;
             break;
           default:
             return false;
@@ -116,12 +115,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     internal static string ValidateIdentifier(this string name, Action<TraceMessage> reportError)
     {
       if (!name.IsValidLanguageIndependentIdentifier())
-       reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongSymbolicName, String.Format("SymbolicName: '{0}'.", name)));
+        reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongSymbolicName, string.Format("SymbolicName: '{0}'.", name)));
       return name;
     }
     internal static string NodeIdentifier(this XML.UANode node)
     {
-      if (String.IsNullOrEmpty(node.BrowseName))
+      if (string.IsNullOrEmpty(node.BrowseName))
         return node.SymbolicName;
       return node.BrowseName;
     }
@@ -129,7 +128,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (localizedText == null || localizedText.Length == 0)
         return "Empty LocalizedText";
-      return String.Format("{0}:{1}", localizedText[0].Locale, localizedText[0].Value);
+      return string.Format("{0}:{1}", localizedText[0].Locale, localizedText[0].Value);
     }
     /// <summary>
     /// Converts the ArrayDimensions represented as the array of <seealso cref="uint"/> to string.
@@ -143,23 +142,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </remarks>
     /// <param name="arrayDimensions">The array dimensions represented as the string.</param>
     /// <returns>System.String.</returns>
-    internal static string ArrayDimensionsToString (this uint[] arrayDimensions )
+    internal static string ArrayDimensionsToString(this uint[] arrayDimensions)
     {
-      return String.Join(", ", arrayDimensions);
+      return string.Join(", ", arrayDimensions);
     }
-    internal static void GetParameters(this XML.DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory definition, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal static void GetParameters(this XML.DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory dataTypeDefinitionFactory, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
-      //TODO #207
-      definition.BaseType = modelContext.ExportBrowseName(dataTypeDefinition.BaseType, DataTypes.BaseDataType);
-      definition.IsOptionSet = dataTypeDefinition.IsOptionSet;
-      definition.IsUnion = dataTypeDefinition.IsUnion;
-      definition.Name = modelContext.ExportBrowseName( dataTypeDefinition.Name, DataTypes.BaseDataType);
-      definition.SymbolicName = dataTypeDefinition.SymbolicName;
+      //xsd comment  < !--BaseType is obsolete and no longer used.Left in for backwards compatibility. -->
+      //definition.BaseType = modelContext.ExportBrowseName(dataTypeDefinition.BaseType, DataTypes.BaseDataType);
+      dataTypeDefinitionFactory.IsOptionSet = dataTypeDefinition.IsOptionSet;
+      dataTypeDefinitionFactory.IsUnion = dataTypeDefinition.IsUnion;
+      dataTypeDefinitionFactory.Name = null; //TODO UADataType.Definition.Name wrong value #341 modelContext.ExportBrowseName( dataTypeDefinition.Name, DataTypes.BaseDataType);
+      dataTypeDefinitionFactory.SymbolicName = dataTypeDefinition.SymbolicName;
       if (dataTypeDefinition == null || dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
         return;
       foreach (XML.DataTypeField _item in dataTypeDefinition.Field)
       {
-        IDataTypeFieldFactory _nP = definition.NewField();
+        IDataTypeFieldFactory _nP = dataTypeDefinitionFactory.NewField();
         _nP.Name = _item.Name;
         _nP.SymbolicName = _item.SymbolicName;
         _item.DisplayName.ExportLocalizedTextArray(_nP.AddDisplayName);
@@ -188,7 +187,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         if (_item.Value.Length > maxLength)
         {
-          reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongDisplayNameLength, String.Format
+          reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongDisplayNameLength, string.Format
             ("The localized text starting with '{0}:{1}' of length {2} is too long.", _item.Locale, _item.Value.Substring(0, 20), _item.Value.Length)));
           XML.LocalizedText _localizedText = new XML.LocalizedText()
           {

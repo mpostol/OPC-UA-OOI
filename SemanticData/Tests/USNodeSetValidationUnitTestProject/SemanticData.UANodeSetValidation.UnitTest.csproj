@@ -78,12 +78,12 @@
     <Compile Include="ServiceResultExceptionUnitTest.cs" />
     <Compile Include="InformationModelFactoryUnitTest.cs" />
     <Compile Include="NodeIdUnitTest.cs" />
+    <Compile Include="NamespaceTableUnitTest.cs" />
+    <Compile Include="ExtensionsUnitTest.cs" />
     <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
       <Link>DependencyValidation1.layerdiagram</Link>
       <Visible>False</Visible>
     </AdditionalFiles>
-    <Compile Include="NamespaceTableUnitTest.cs" />
-    <Compile Include="ExtensionsUnitTest.cs" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
     <None Include="Properties\AssemblyInfo.tt">
@@ -95,6 +95,7 @@
     <None Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.Classes.cs" />
+    <None Include="XMLModels\ProblemsToReport\ADIDataTypeDataType.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="XMLModels\CorrectModels\DataTypeTest.xml" />
@@ -119,6 +120,7 @@
     <Content Include="XMLModels\ModelsWithErrors\UndefinedHasTypeDefinition.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="XMLModels\ProblemsToReport\ADIDataTypeExample.xml" />
     <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

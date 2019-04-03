@@ -31,11 +31,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// <value>The name represented as <see cref="T:System.Xml.XmlQualifiedName" />.</value>
     public XmlQualifiedName Name { set { } }
     /// <summary>
-    /// Sets the the base type name.
-    /// </summary>
-    /// <value>AN object <see cref="T:System.Xml.XmlQualifiedName" /> representing name of a base type.</value>
-    public XmlQualifiedName BaseType { set { } }
-    /// <summary>
     /// A symbolic name for the data type. It should only be specified if the Name cannot be used for this purpose.
     /// Only letters, digits or the underscore (‘_’) are permitted.
     /// </summary>
@@ -47,7 +42,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// </summary>
     /// <value><c>true</c> if this instance is option set; otherwise, <c>false</c>.</value>
     public bool IsOptionSet { set { } }
-
+    /// <summary>
+    /// Sets a value indicating whether this instance is union.
+    /// Only one of the Fields defined for the data type is encoded into a value.
+    /// This field is optional.The default value is false. If this value is true, the first field is the switch value.
+    /// </summary>
+    /// <value><c>true</c> if this instance is union; otherwise, <c>false</c>.</value>
     public bool IsUnion { set { } }
   }
 }

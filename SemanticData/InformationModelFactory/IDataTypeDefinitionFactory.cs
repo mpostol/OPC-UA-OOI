@@ -21,7 +21,6 @@ namespace UAOOI.SemanticData.InformationModelFactory
   /// 
   /// Note:
   /// 
-  /// <see cref="IDataTypeDefinitionFactory.BaseType"/> is not defined in the spec.
   /// <c>IsUnion</c> is not defined in the .xsd. This flag indicates if the data type represents a union.  Only one of the Fields defined for the data type is encoded into a value.
   /// This field is optional.The default value is false. If this value is true, the first field is the switch value.
   /// </remarks>
@@ -41,11 +40,6 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </summary>
     /// <value>The name represented as <see cref="XmlQualifiedName"/>.</value>
     XmlQualifiedName Name { set; }
-    /// <summary>
-    /// Sets the base type name.
-    /// </summary>
-    /// <value>AN object <see cref="XmlQualifiedName"/> representing name of a base type.</value>
-    XmlQualifiedName BaseType { set; }
     /// <summary>
     /// A symbolic name for the data type. It should only be specified if the Name cannot be used for this purpose. 
     /// Only letters, digits or the underscore (‘_’) are permitted.

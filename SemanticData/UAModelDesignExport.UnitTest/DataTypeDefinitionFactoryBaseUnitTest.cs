@@ -21,7 +21,6 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     {
       DataTypeDefinitionFactoryBase _newInstance = new DataTypeDefinitionFactoryBase(x => { })
       {
-        BaseType = new XmlQualifiedName("XmlQualifiedName"), // Is not supported by the UA Model Design
         IsOptionSet = true,
         IsUnion = true, //Is not supported by the UA Model Design
         Name = new XmlQualifiedName("XmlQualifiedName"), // Is not supported by the UA Model Design

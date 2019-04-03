@@ -60,14 +60,6 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// <value>The name represented as <see cref="T:System.Xml.XmlQualifiedName" />.</value>
     public XmlQualifiedName Name { set; private get; }
     /// <summary>
-    /// Sets the base type name.
-    /// </summary>
-    /// <remarks>
-    /// TODO Mantis Not supported by the UA Model Design
-    /// </remarks>
-    /// <value>AN object <see cref="T:System.Xml.XmlQualifiedName" /> representing name of a base type.</value>
-    public XmlQualifiedName BaseType { set; private get; }
-    /// <summary>
     /// A symbolic name for the data type. It should only be specified if the Name cannot be used for this purpose.
     /// Only letters, digits or the underscore (‘_’) are permitted.
     /// </summary>

@@ -86,6 +86,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<int>(0, _as.m_NamespaceTable.GetIndex(Namespaces.OpcUa));
       Assert.AreEqual<int>(1, _as.m_NamespaceTable.GetIndex(@"http://cas.eu/UA/Demo/"));
     }
+    [TestMethod]
+    public void MyTestMethod()
+    {
+      UANodeSet _tm = TestData.CreateNodeSetModel();
+      IAddressSpaceBuildContext _as = new AddressSpaceFixture();
+      UAModelContext _mc = new UAModelContext(_tm, _as);
+      XmlQualifiedName _resolvedName =_mc.ExportBrowseName(null, null);
+      Assert.IsNull(_resolvedName);
+    }
     private class AddressSpaceFixture : IAddressSpaceBuildContext
     {
       public Parameter ExportArgument(Argument argument, XmlQualifiedName dataType)

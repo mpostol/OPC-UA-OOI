@@ -87,13 +87,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<int>(1, _as.m_NamespaceTable.GetIndex(@"http://cas.eu/UA/Demo/"));
     }
     [TestMethod]
-    public void MyTestMethod()
+    public void ExportBrowseNameTest()
     {
       UANodeSet _tm = TestData.CreateNodeSetModel();
       IAddressSpaceBuildContext _as = new AddressSpaceFixture();
       UAModelContext _mc = new UAModelContext(_tm, _as);
-      XmlQualifiedName _resolvedName =_mc.ExportBrowseName(null, null);
+      XmlQualifiedName _resolvedName = _mc.ExportBrowseName(null, null);
       Assert.IsNull(_resolvedName);
+      _resolvedName = _mc.ExportBrowseName(null, UAInformationModel.DataTypes.BaseDataType);
+      Assert.IsNull(_resolvedName);
+      _resolvedName = _mc.ExportBrowseName(new NodeId(UAInformationModel.DataTypes.BaseDataType, 0).ToString(), UAInformationModel.DataTypes.BaseDataType);
+      Assert.IsNull(_resolvedName);
+      _resolvedName = _mc.ExportBrowseName(new NodeId(UAInformationModel.DataTypes.Structure, 0).ToString(), UAInformationModel.DataTypes.BaseDataType);
+      Assert.IsNotNull(_resolvedName);
+      Assert.AreEqual(@"http://opcfoundation.org/UA/:Structure", _resolvedName.ToString());
     }
     private class AddressSpaceFixture : IAddressSpaceBuildContext
     {
@@ -104,7 +111,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 
       public XmlQualifiedName ExportBrowseName(NodeId id)
       {
-        throw new System.NotImplementedException();
+        Assert.IsNotNull(id);
+        Assert.AreEqual<int>(0, id.NamespaceIndex);
+        switch ((uint)id.IdentifierPart)
+        {
+          case 22:
+            return new XmlQualifiedName(BrowseNames.Structure, Namespaces.OpcUa);
+          default:
+            Assert.Fail();
+            break;
+        }
+        return null;
       }
 
       public void GetDerivedInstances(IUANodeContext rootNode, List<IUANodeContext> list)

@@ -95,7 +95,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// </remarks>
     /// <value>The category.</value>
     public string[] Category { set; private get; } = null;
-    public bool NotInAddressSpace { set; private get; } = false; 
+    public bool NotInAddressSpace { set; private get; } = false;
     /// <summary>
     /// Adds new value for the Description. The optional Description element shall explain the meaning of the node in a localized text using the same mechanisms
     /// for localization as described for the DisplayName.
@@ -140,23 +140,23 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       path.Add(SymbolicName.Name);
       base.ExportNodes(_Members, path, createInstanceType);
       XML.InstanceDesign[] _items = _Members.Cast<XML.InstanceDesign>().ToArray<XML.InstanceDesign>();
+      nodeDesign.Category = Category == null ? null : string.Join(", ", Category);
       nodeDesign.Children = _items == null || _items.Length == 0 ? null : new XML.ListOfChildren() { Items = _items };
       nodeDesign.Description = m_Description;
       nodeDesign.DisplayName = m_DisplayName == null || m_DisplayName.Value == _defaultDisplay ? null : m_DisplayName;
       nodeDesign.IsDeclaration = false;
+      nodeDesign.NotInAddressSpace = NotInAddressSpace;
       nodeDesign.NumericId = 0;
       nodeDesign.NumericIdSpecified = false;
+      nodeDesign.PartNo = 0;
+      nodeDesign.Purpose = DataTypePurpose.ConvertToDataTypePurpose();
       nodeDesign.References = m_References.Count == 0 ? null : m_References.Select<ReferenceFactoryBase, XML.Reference>(x => x.Export()).ToArray<XML.Reference>();
+      nodeDesign.ReleaseStatus = ReleaseStatus.ConvertToReleaseStatus();
       nodeDesign.StringId = null;
       nodeDesign.SymbolicId = null;
       nodeDesign.SymbolicName = SymbolicName;
       nodeDesign.WriteAccess = WriteAccess;
-      nodeDesign.ReleaseStatus = ReleaseStatus.ConvertToReleaseStatus();
-      nodeDesign.Purpose = DataTypePurpose.ConvertToDataTypePurpose();
-      nodeDesign.Category = Category == null ? null : string.Join(", ", Category);
-      nodeDesign.NotInAddressSpace = this.NotInAddressSpace;
-      //TODO to be removed in UANodeSet.xsd - synchronize with current OPCF Release #207
-      //AccessRestrictions
+      // AccessRestrictions _access = AccessRestrictions; model design doesn't support AccessRestrictions
     }
     private XML.LocalizedText m_Description = null;
     private XML.LocalizedText m_DisplayName = null;

@@ -49,7 +49,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>The identifier an object of <see cref="System.Xml.XmlQualifiedName" /> or null if <paramref name="nodeId" /> has default value.</returns>
     public XmlQualifiedName ExportBrowseName(string nodeId, NodeId defaultValue)
     {
-      //TODO #207
       NodeId _id = ImportNodeId(nodeId, true);
       if (_id == NodeId.Null ||_id == defaultValue)
         return null;

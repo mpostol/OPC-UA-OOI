@@ -65,7 +65,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// Sets the access restrictions.
     /// </summary>
     /// <remarks>
-    /// The AccessRestrictions that apply to the Node.
+    /// Part 6 Table F.1 – UANodeSet The default AccessRestrictions that apply to all Nodes in the model.
     /// </remarks>
     /// <value>The access restrictions.</value>
     AccessRestrictions AccessRestrictions { set; }

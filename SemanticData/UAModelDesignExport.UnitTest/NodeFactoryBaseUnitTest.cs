@@ -8,7 +8,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Xml;
 using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 using UAOOI.SemanticData.UAModelDesignExport.Instrumentation;
 using UAOOI.SemanticData.UAModelDesignExport.XML;
 
@@ -56,6 +58,28 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       List<string> _path = new List<string>();
       NodeDesign _nd = _nf.Export(_path, (x, Y) => { });
       _lt.Compare(_nd.DisplayName);
+    }
+    [TestMethod]
+    public void NodeFactoryExportTest()
+    {
+      int _counter = 0;
+      NodeFactory _nf = new NodeFactory(x => _counter++);
+      _nf.AccessRestrictions = AccessRestrictions.EncryptionRequired | AccessRestrictions.SessionRequired | AccessRestrictions.SigningRequired;
+      _nf.BrowseName = BrowseNames.AggregateFunction_MinimumActualTime.ToString();
+      _nf.Category = new string[] { "cat1", "cat2" };
+      _nf.DataTypePurpose = InformationModelFactory.DataTypePurpose.ServicesOnly;
+      _nf.ReleaseStatus = InformationModelFactory.ReleaseStatus.Draft;
+      _nf.SymbolicName = new XmlQualifiedName("name", "ns");
+      List<string> _path = new List<string>();
+      NodeDesign _md = _nf.Export(_path, (x, Y) => { });
+      Assert.AreEqual<string>(BrowseNames.AggregateFunction_MinimumActualTime.ToString(), _md.BrowseName);
+      Assert.AreEqual<string>("cat1, cat2", _md.Category);
+      Assert.IsNull(_md.Children);
+      Assert.IsFalse(_md.NumericIdSpecified);
+      Assert.AreEqual<uint>(0, _md.PartNo);  //is not copied form the UANodeSet; 
+      Assert.AreEqual<XML.DataTypePurpose>(DataTypePurpose.ServicesOnly, _md.Purpose);
+      Assert.AreEqual<XML.ReleaseStatus>(XML.ReleaseStatus.Draft, _md.ReleaseStatus);
+      Assert.AreEqual<XmlQualifiedName>(new XmlQualifiedName("name", "ns"), _md.SymbolicName);
     }
     private class NodeFactory : NodeFactoryBase
     {

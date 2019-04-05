@@ -28,7 +28,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="addressSpaceContext">The address space context.</param>
     /// <exception cref="ArgumentNullException">addressSpaceContext
     /// or
-    /// model.Aliases</exception>
+    /// model.Aliases
+    /// </exception>
     internal UAModelContext(UANodeSet model, IAddressSpaceBuildContext addressSpaceContext)
     {
       AddressSpaceContext = addressSpaceContext ?? throw new ArgumentNullException(nameof(addressSpaceContext));

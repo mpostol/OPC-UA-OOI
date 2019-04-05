@@ -249,7 +249,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return this.NodeIdContext.Equals(other.NodeIdContext);
     }
-
     #endregion
 
     #region private

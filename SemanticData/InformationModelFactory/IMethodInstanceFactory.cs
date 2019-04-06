@@ -27,18 +27,19 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// this request and return the corresponding StatusCode if such a request is rejected.
     /// </summary>
     /// <value><c>true</c> if executable; otherwise, <c>false</c>. Default value is <c>true</c></value>
-    bool? Executable
-    {
-      set;
-    }
+    bool? Executable { set; }
     /// <summary>
     /// Sets a value indicating whether the Method is currently executable taking user access rights into account (“False” means not executable, “True” means executable).
     /// </summary>
     /// <value><c>true</c> if executable by current user; otherwise, <c>false</c>. Default value is <c>true</c></value>
-    bool? UserExecutable
-    {
-      set;
-    }
+    bool? UserExecutable { set; }
+    /// <summary>
+    /// Gets or sets the method declaration identifier defined in Part 6  F.9. May be specified for Method Nodes that are a target of a HasComponent reference from a single Object Node. 
+    /// It is the NodeId of the UAMethod with the same BrowseName contained in the TypeDefinition associated with the Object Node.
+    /// If the TypeDefinition overrides a Method inherited from a base ObjectType then this attribute shall reference the Method Node in the subtype.
+    /// </summary>
+    /// <value>The method declaration identifier.</value>
+    string MethodDeclarationId { set; }
     /// <summary>
     /// Adds the input arguments. The InputArgument specify the input argument of the Method. The Method contains an array of the Argument data type. 
     /// An empty array indicates that there are no input arguments for the Method.
@@ -51,6 +52,12 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </summary>
     /// <param name="argument">Encapsulates a method used to convert Argument represented as <see cref="XmlElement"/>.</param>
     void AddOutputArguments(Func<XmlElement, Parameter[]> argument);
-
+    /// <summary>
+    /// Adds the argument description.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="locale">The locale.</param>
+    /// <param name="value">The value.</param>
+    void AddArgumentDescription(string name, string locale, string value);
   }
 }

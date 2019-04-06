@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>UAOOI.SemanticData.BuildingErrorsHandling</AssemblyName>
+    <RootNamespace>UAOOI.SemanticData.BuildingErrorsHandling</RootNamespace>
+    <Authors>Mariuisz Postol</Authors>
+    <Company>commsvr.com</Company>
+    <Product>Object Oriented Internet</Product>
+    <Description>It provides descriptions of building errors to be used for OPC UA Address Space consistency validation purpose.
+</Description>
+    <Copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</Copyright>
+    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</PackageTags>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\UAOOI.SemanticData.BuildingErrorsHandling.xml</DocumentationFile>
+    <OutputPath>bin\Debug\netstandard2.0\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="BuildErrors.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BuildErrors.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="BuildErrors.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BuildErrors.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

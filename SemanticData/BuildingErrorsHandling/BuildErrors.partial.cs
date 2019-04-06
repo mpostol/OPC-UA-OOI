@@ -1,5 +1,11 @@
-﻿
-namespace UAOOI.SemanticData.UANodeSetValidation
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+namespace UAOOI.SemanticData.BuildingErrorsHandling
 {
 
   /// <summary>
@@ -35,7 +41,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// The data type definition error - eny error that relates to custom DataType definion.
     /// </summary>
-    DataType
+    DataType,
+    /// <summary>
+    /// The naming
+    /// </summary>
+    Naming
 
   }
   /// <summary>

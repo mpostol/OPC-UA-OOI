@@ -1,8 +1,15 @@
+//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
@@ -459,8 +466,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 
     #region statioc Parse
     /// <summary>
-    /// Parses a expanded node id string, translated any namespace indexes and returns the result.
+    /// Parses the <paramref name="text" /> to recover an instance of the <see cref="ExpandedNodeId" />.
     /// </summary>
+    /// <remarks>Namespace is translated to get current index.</remarks>
+    /// <param name="text">The text.</param>
+    /// <param name="currentNamespaces">The current namespaces table.</param>
+    /// <param name="targetNamespaces">The target namespaces table.</param>
+    /// <returns>An instance of the <see cref="ExpandedNodeId"/> recovered from the string representation.</returns>
     public static ExpandedNodeId Parse(string text, NamespaceTable currentNamespaces, NamespaceTable targetNamespaces)
     {
       // parse the string.

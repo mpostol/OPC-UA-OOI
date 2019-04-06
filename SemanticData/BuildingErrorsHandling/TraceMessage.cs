@@ -1,8 +1,14 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.Diagnostics;
 
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.BuildingErrorsHandling
 {
   /// <summary>
   /// Class TraceMessage.
@@ -10,7 +16,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   public class TraceMessage : IFormattable
   {
     /// <summary>
-    /// creates new <see cref="TraceMessage"/> to be used for diagnostic purpose
+    /// Creates new instance of the <see cref="TraceMessage"/> to be used for diagnostic purpose
     /// </summary>
     /// <param name="message">The new <see cref="TraceMessage"/> containing the <paramref name="message"/>.</param>
     /// <returns>The new <see cref="TraceMessage"/> diagnostic message.</returns>

@@ -26,10 +26,16 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;1705;IDE0001, IDE0002,IDE0003</NoWarn>
+    <DocumentationFile>bin\Debug\netstandard2.0\UAOOI.SemanticData.UANodeSetValidation.xml</DocumentationFile>
+    <OutputPath>bin\Debug\netstandard2.0\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Argument.cs" />
+    <Compile Remove="IUANodeValidator.cs" />
     <Compile Remove="Properties\Resources.Designer.cs" />
+    <Compile Remove="Utilities\ModelTableEntry.cs" />
+    <Compile Remove="Utilities\StringTable.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,11 +52,27 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.CodeDom" Version="4.5.0" />
+    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj" />
+    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
+    <None Update="BuildErrors.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BuildErrors.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="BuildErrors.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BuildErrors.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

@@ -197,11 +197,18 @@ The data discovery mechanism is a part of the broader concept captured in the do
 
 Meaningful processing of the *OPC UA Data* by variety of applications is an important part of a broader concept described in the document [Object Oriented Internet](../README.md).
 
+<!--
 A detailed description of this solution is captured in the document [Content Description](./Readme.SemanticDataDeplyment.MD). The solution contains projects supporting deployment of the concept presented in this document.
+-->
 
 The code illustrating networking of the `SemanticData` paradigm implementation can be found in the project [Reactive Networking of SemanticData Library](../Networking/SemanticData/README.MD#networking-of-semanticdata-library).
 
 Description of the `OOI Reactive Application` architecture is captured in the section [UA SemanticData Message Centric Communication](README.MessageCentricCommunication.md).
+
+### Architecture
+
+![Architecture](../CommonResources/Media/SemanticData/UAOOI.SemanticData.Architecture.png)
+
 
 [wordpress.HMI]:https://mpostol.wordpress.com/2013/08/11/opc-ua-makes-smart-user-interface-possible/
 [wordpress.opc-ua]: https://mpostol.wordpress.com/opc-ua/

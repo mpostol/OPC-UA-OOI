@@ -1,9 +1,16 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {
   /// <summary>
   /// Class ServiceResultException.

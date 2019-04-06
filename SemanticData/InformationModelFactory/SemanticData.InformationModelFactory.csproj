@@ -5,13 +5,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>UAOOI.SemanticData.InformationModelFactory</AssemblyName>
     <PackageId>UAOOI.SemanticData.InformationModelFactory</PackageId>
-    <Version>4.0.2</Version>
-    <Authors>MPostol</Authors>
+    <Version>5.0.0</Version>
+    <Authors>Mariuisz Postol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
     <Description>OPC UA Information Model Factory library used as the dependency injection to produce **OPC UA Information Model** by an external importer. The abstract API must be implemented by a classes providing functionality of OPC UA  Information Model creation.
 The root of the definitions is the `IModelFactory` interface.</Description>
-    <Copyright>Copyright (C) 2019, Mariusz Postol LODZ POLAND</Copyright>
+    <Copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</Copyright>
     <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
     <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</PackageTags>
@@ -20,9 +20,14 @@ The root of the definitions is the `IModelFactory` interface.</Description>
     <RootNamespace>UAOOI.SemanticData.InformationModelFactory</RootNamespace>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>4.0.2.2</AssemblyVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <FileVersion>4.0.2.0</FileVersion>
+    <AssemblyVersion>5.0.0.3</AssemblyVersion>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <FileVersion>5.0.0.0</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\UAOOI.SemanticData.InformationModelFactory.xml</DocumentationFile>
+    <OutputPath>bin\Debug\netstandard2.0\</OutputPath>
   </PropertyGroup>
 
 </Project>

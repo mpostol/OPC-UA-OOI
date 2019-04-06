@@ -1,0 +1,77 @@
+<xs:schema
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
+  xmlns:tns="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest"
+  targetNamespace="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest"
+  elementFormDefault="qualified"
+>
+  <xs:import namespace="http://opcfoundation.org/UA/" />
+
+  <xs:simpleType  name="AbstractEnumerationDataType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Field1_0" />
+      <xs:enumeration value="Field2_1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AbstractEnumerationDataType" type="tns:AbstractEnumerationDataType" />
+
+  <xs:complexType name="ListOfAbstractEnumerationDataType">
+    <xs:sequence>
+      <xs:element name="AbstractEnumerationDataType" type="tns:AbstractEnumerationDataType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfAbstractEnumerationDataType" type="tns:ListOfAbstractEnumerationDataType" nillable="true"></xs:element>
+
+  <xs:simpleType  name="EnumerationDataType">
+    <xs:annotation>
+      <xs:documentation>Enumeration DataType derived from abstract type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Field3_1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EnumerationDataType" type="tns:EnumerationDataType" />
+
+  <xs:complexType name="ListOfEnumerationDataType">
+    <xs:sequence>
+      <xs:element name="EnumerationDataType" type="tns:EnumerationDataType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfEnumerationDataType" type="tns:ListOfEnumerationDataType" nillable="true"></xs:element>
+
+  <xs:complexType name="AbstractStructure">
+    <xs:annotation>
+      <xs:documentation>Abstract structure</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Number" type="ua:Variant" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AbstractStructure" type="tns:AbstractStructure" />
+
+  <xs:complexType name="ListOfAbstractStructure">
+    <xs:sequence>
+      <xs:element name="AbstractStructure" type="tns:AbstractStructure" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfAbstractStructure" type="tns:ListOfAbstractStructure" nillable="true"></xs:element>
+
+  <xs:complexType name="DerivedStructure">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AbstractStructure">
+        <xs:sequence>
+          <xs:element name="Number" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DerivedStructure" type="tns:DerivedStructure" />
+
+  <xs:complexType name="ListOfDerivedStructure">
+    <xs:sequence>
+      <xs:element name="DerivedStructure" type="tns:DerivedStructure" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfDerivedStructure" type="tns:ListOfDerivedStructure" nillable="true"></xs:element>
+
+</xs:schema>

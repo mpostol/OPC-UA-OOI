@@ -207,7 +207,7 @@ Description of the `OOI Reactive Application` architecture is captured in the se
 
 ### Architecture
 
-![Architecture](../CommonResources/Media/SemanticData/PackageArchitecture.png)
+![Architecture](../CommonResources/Media/SemanticData/UAOOI.SemanticData.Architecture.png)
 
 
 [wordpress.HMI]:https://mpostol.wordpress.com/2013/08/11/opc-ua-makes-smart-user-interface-possible/

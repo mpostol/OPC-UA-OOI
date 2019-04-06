@@ -113,7 +113,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Ir recursively builds the symbolic identifier.
     /// </summary>
     /// <param name="path">The browse path.</param>
-    /// <param name="traceEvent">A delegate <see cref="Action{TraceMessage}"/> encapsulates an action to report any errors and trace processing progress.</param>
     internal void BuildSymbolicId(List<string> path)
     {
       this.SourceNode.BuildSymbolicId(path);
@@ -123,7 +122,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the target node context.
     /// </summary>
     /// <value>The target node context.</value>
-    internal IUANodeType TargetNodeContext<IUANodeType>() where IUANodeType : IUANodeBase { return (IUANodeType)TargetNode; }
+    internal IUANodeBase TargetNodeContext=> TargetNode; 
     /// <summary>
     /// Gets the source node context.
     /// </summary>

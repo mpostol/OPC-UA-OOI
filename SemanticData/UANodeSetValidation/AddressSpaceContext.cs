@@ -128,12 +128,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return null;
       return _context.ExportNodeBrowseName();
     }
+    /// <summary>
+    /// Exports the argument for a method.
+    /// </summary>
+    /// <param name="argument">The argument - it defines a Method input or output argument specification. It is for example used in the input and output argument Properties for Methods.</param>
+    /// <param name="dataType">Type of the data.</param>
+    /// <returns>Parameter.</returns>
     public Parameter ExportArgument(DataSerialization.Argument argument, XmlQualifiedName dataType)
     {
       Parameter _ret = new Parameter()
       {
         ArrayDimensions = argument.ArrayDimensions.ArrayDimensionsToString(),
-        DataType = dataType, 
+        DataType = dataType,
         Identifier = new Nullable<int>(),
         Name = argument.Name,
         ValueRank = argument.ValueRank.GetValueRank(m_TraceEvent)
@@ -142,6 +148,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _ret.AddDescription(argument.Description.Locale, argument.Description.Text);
       return _ret;
     }
+    /// <summary>
+    /// Gets the or create node context.
+    /// </summary>
+    /// <param name="nodeId">The node identifier.</param>
+    /// <param name="modelContext">The model context.</param>
+    /// <returns>IUANodeContext.</returns>
     IUANodeContext IAddressSpaceBuildContext.GetOrCreateNodeContext(NodeId nodeId, IUAModelContext modelContext)
     {
       string _idKey = nodeId.ToString();
@@ -152,6 +164,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _ret;
     }
+    /// <summary>
+    /// Gets the index or append.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <returns>System.UInt16.</returns>
     public ushort GetIndexOrAppend(string value)
     {
       return m_NamespaceTable.GetIndexOrAppend(value);
@@ -164,15 +181,30 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return m_NamespaceTable.GetString(namespaceIndex);
     }
+    /// <summary>
+    /// Gets my references.
+    /// </summary>
+    /// <param name="index">The index.</param>
+    /// <returns>IEnumerable&lt;UAReferenceContext&gt;.</returns>
     IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetMyReferences(IUANodeContext index)
     {
       return m_References.Values.Where<UAReferenceContext>(x => (x.ParentNode == index));
     }
+    /// <summary>
+    /// Gets the references2 me.
+    /// </summary>
+    /// <param name="index">The index.</param>
+    /// <returns>IEnumerable&lt;UAReferenceContext&gt;.</returns>
     IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetReferences2Me(IUANodeContext index)
     {
       return m_References.Values.Where<UAReferenceContext>(x => x.TargetNode == index && x.ParentNode != index);
     }
-    void IAddressSpaceBuildContext.GetDerivedInstances(IUANodeContext rootNode, List<IUANodeContext> list)
+    /// <summary>
+    /// Gets the derived instances.
+    /// </summary>
+    /// <param name="rootNode">The root node.</param>
+    /// <param name="list">The list o d nodes.</param>
+    void IAddressSpaceBuildContext.GetDerivedInstances(IUANodeContext rootNode, List<IUANodeBase> list)
     {
       List<IUANodeContext> _col = new List<IUANodeContext>
       {
@@ -186,9 +218,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region IAddressSpaceValidationContext
     /// <summary>
-    /// Exports the current namespace table containing all namespaces relevant for exported model.
+    /// Exports the current namespace table containing all namespaces that have been registered.
     /// </summary>
-    /// <returns>Array of relevant namespaces as the <see cref="System.String"/>.</returns>
+    /// <value>An instance of <see cref="IEnumerable{IModelTableEntry}" /> containing.</value>
     public IEnumerable<IModelTableEntry> ExportNamespaceTable => m_NamespaceTable.ExportNamespaceTable;
     #endregion
 
@@ -261,7 +293,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _ret;
     }
-    private void GetChildren(IUANodeContext type, List<IUANodeContext> instances)
+    private void GetChildren(IUANodeContext type, List<IUANodeBase> instances)
     {
       IEnumerable<IUANodeContext> _children = m_References.Values.Where<UAReferenceContext>(x => x.SourceNode == type).
                                                                   Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).

@@ -108,7 +108,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       {
         throw new System.NotImplementedException();
       }
-
       public XmlQualifiedName ExportBrowseName(NodeId id)
       {
         Assert.IsNotNull(id);
@@ -123,34 +122,27 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         }
         return null;
       }
-
-      public void GetDerivedInstances(IUANodeContext rootNode, List<IUANodeContext> list)
+      public void GetDerivedInstances(IUANodeContext rootNode, List<IUANodeBase> list)
       {
         throw new System.NotImplementedException();
       }
-
       public ushort GetIndexOrAppend(string identifier)
       {
         return m_NamespaceTable.GetIndexOrAppend(identifier);
       }
-
       public NamespaceTable m_NamespaceTable = new NamespaceTable();
-
       public IEnumerable<UAReferenceContext> GetMyReferences(IUANodeContext index)
       {
         throw new System.NotImplementedException();
       }
-
       public string GetNamespace(ushort namespaceIndex)
       {
         throw new System.NotImplementedException();
       }
-
       public IUANodeContext GetOrCreateNodeContext(NodeId id, IUAModelContext uAModelContext)
       {
         throw new System.NotImplementedException();
       }
-
       public IEnumerable<UAReferenceContext> GetReferences2Me(IUANodeContext index)
       {
         throw new System.NotImplementedException();

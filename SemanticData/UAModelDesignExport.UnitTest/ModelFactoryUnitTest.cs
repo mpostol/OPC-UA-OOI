@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UAModelDesignExport.XML;
 
 namespace UAOOI.SemanticData.UAModelDesignExport
@@ -29,7 +30,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     {
       List<TraceMessage> _traceBuffer = new List<TraceMessage>();
       ModelFactory _instance = new ModelFactory(_message => _traceBuffer.Add(_message));
-      _instance.CreateNamespace(nameof(NamespaceTest ), String.Empty, String.Empty );
+      ((IModelFactory)_instance).CreateNamespace(nameof(NamespaceTest ), String.Empty, String.Empty );
       ModelDesign _createdModel = _instance.Export();
       Assert.IsNotNull(_createdModel);
       Assert.IsNotNull(_createdModel.Items);

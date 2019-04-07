@@ -42,7 +42,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// <param name="publicationDate">The publication date - when the model was published. This value is used for comparisons if the Model is defined in multiple UANodeSet files.</param>
     /// <param name="version">The version of the model defined in the UANodeSet. This is a human readable string and not intended for programmatic comparisons.</param>
     /// <remarks>The set of objects that the OPC Unified Architecture server makes available to clients is referred to as its Address Space. The namespace is provided to make the BrowseName unique in the Address Space.</remarks>
-    public void CreateNamespace(string uri, string publicationDate, string version)
+    void IModelFactory.CreateNamespace(string uri, string publicationDate, string version)
     {
       Namespace _new = new Namespace()
       {

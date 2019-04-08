@@ -112,6 +112,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solutio
 		CONTRIBUTING.md = CONTRIBUTING.md
 		COVERPAGE.md = COVERPAGE.md
 		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
+		.github\ISSUE_TEMPLATE\PrepareReleaseTask.md = .github\ISSUE_TEMPLATE\PrepareReleaseTask.md
 		README.MD = README.MD
 		REFERENCES.md = REFERENCES.md
 		SUMMARY.md = SUMMARY.md
@@ -122,7 +123,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticData.UAModelDesignE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UAModelDesignExport.UnitTest", "SemanticData\UAModelDesignExport.UnitTest\SemanticData.UAModelDesignExport.UnitTest.csproj", "{ABB9D4E2-568C-483E-8A77-2DE5F4FF886A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.BuildingErrorsHandling", "SemanticData\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj", "{9CA2F05B-FB18-49AD-8520-1BCC838F748C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticData.BuildingErrorsHandling", "SemanticData\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj", "{9CA2F05B-FB18-49AD-8520-1BCC838F748C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

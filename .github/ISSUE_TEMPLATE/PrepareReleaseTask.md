@@ -1,6 +1,7 @@
-﻿---
+---
 name: Release
 about: Release the milestone
+
 ---
 
 # Release new version

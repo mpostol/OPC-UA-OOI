@@ -84,7 +84,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         AnyAttr = null,
         DefaultLocale = null,
         TargetPublicationDate = DateTime.Today,
-        TargetPublicationDateSpecified = false,
+        TargetPublicationDateSpecified = true,
         TargetVersion = string.Empty,
         TargetXmlNamespace = null
       };

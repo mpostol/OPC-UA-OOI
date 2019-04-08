@@ -15,7 +15,7 @@ namespace UAOOI.SemanticData.AddressSpaceTestTool.CommandLineSyntax
   internal static class Extensions
   {
 
-    public static void Parse<T>(this string[] args, Action<T> RunCommand, Action<IEnumerable<Error>> dump)
+    internal static void Parse<T>(this string[] args, Action<T> RunCommand, Action<IEnumerable<Error>> dump)
     {
       ParserResult<T> parserResult = Parser.Default
         .ParseArguments<T>(args)

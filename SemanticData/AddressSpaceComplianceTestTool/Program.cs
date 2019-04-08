@@ -5,12 +5,14 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using CommandLine;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CommandLine;
 using UAOOI.SemanticData.AddressSpaceTestTool.CommandLineSyntax;
+using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.UAModelDesignExport;
 using UAOOI.SemanticData.UANodeSetValidation;
 
 namespace UAOOI.SemanticData.AddressSpaceTestTool
@@ -40,17 +42,22 @@ namespace UAOOI.SemanticData.AddressSpaceTestTool
     }
     private static void Do(Options obj)
     {
+      Action<TraceMessage> _tracingMetchod = z => Console.WriteLine(z.ToString());
       FileInfo _fileToRead = GetFileToRead(obj.Filenames);
-      ValidateFile(_fileToRead);
-    }
-    internal static void ValidateFile(FileInfo _fileToRead)
-    {
-      IAddressSpaceContext _as = new AddressSpaceContext(z => Console.WriteLine(z.ToString()));
-      //_as.InformationModelFactory = UAOOI.SemanticData.UAModelDesignExport.
+      IAddressSpaceContext _as = new AddressSpaceContext(_tracingMetchod);
+      ModelDesignExport _exporter = new ModelDesignExport();
+      bool _exportModel = false;
+      if (!string.IsNullOrEmpty(obj.ModelDesignFileName))
+      {
+        _as.InformationModelFactory = _exporter.GetFactory(obj.ModelDesignFileName, _tracingMetchod);
+        _exportModel = true;
+      }
       _as.ImportUANodeSet(_fileToRead);
       _as.ValidateAndExportModel();
+      if (_exportModel)
+        _exporter.ExportToXMLFile();
     }
-    internal static FileInfo GetFileToRead(IEnumerable<string> files )
+    internal static FileInfo GetFileToRead(IEnumerable<string> files)
     {
       if (files == null || files.Count<string>() != 1)
         throw new ArgumentOutOfRangeException("args", "List of command line arguments is incorrect - enter name of an xml file to be tested.");
@@ -60,7 +67,7 @@ namespace UAOOI.SemanticData.AddressSpaceTestTool
       return _FileInfo;
     }
     //Command lines
-    //"XMLModels\DataTypeTest.NodeSet2.xml"
+    //"XMLModels\DataTypeTest.NodeSet2.xml" -e "XMLModels\DataTypeTest.ModelDesign.xml"
   }
 
 }

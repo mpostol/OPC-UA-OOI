@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
@@ -44,14 +50,6 @@ namespace UAOOI.SemanticData.AddressSpaceTestTool.UnitTests
     {
       FileInfo _testDataFileInfo = Program.GetFileToRead(new string[] { @"XMLModels\DataTypeTest.NodeSet2.xml" });
       Assert.IsTrue(_testDataFileInfo.Exists);
-    }
-    [TestMethod]
-    [TestCategory("Code")]
-    public void ValidateFileTestMethod()
-    {
-      FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\DataTypeTest.NodeSet2.xml");
-      Assert.IsTrue(_testDataFileInfo.Exists);
-      Program.ValidateFile(_testDataFileInfo);
     }
   }
 

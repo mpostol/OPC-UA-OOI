@@ -1,5 +1,5 @@
 ﻿//_______________________________________________________________
-//  Title   : Assembly info for: UANodeSetValidationUnitTestProject
+//  Title   : Assembly info for: UAOOI.SemanticData.UANodeSetValidation
 //  System  : Microsoft VisualStudio 2017 / C#
 //
 //  Copyright (c) 2019 Mariusz Postol
@@ -9,10 +9,9 @@
 //_______________________________________________________________
 
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("UANodeSetValidationUnitTestProject")]
+[assembly: AssemblyTitle("UAOOI.SemanticData.UANodeSetValidation")]
 [assembly: AssemblyDescription("OPC UA NodeSet Validation UnitTests")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
@@ -22,6 +21,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("deea592b-285a-47db-afbc-b1e2efac8ab3")]
-[assembly: AssemblyVersion("4.0.1.*")]
-[assembly: AssemblyFileVersion("4.0.1")]
+[assembly: AssemblyVersion("5.0.2.*")]
+[assembly: AssemblyFileVersion("5.0.2")]
 

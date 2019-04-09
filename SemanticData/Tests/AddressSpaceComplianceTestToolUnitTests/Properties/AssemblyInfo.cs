@@ -2,7 +2,7 @@
 //  Title   : Assembly info for: AddressSpaceComplianceTestToolUnitTests
 //  System  : Microsoft VisualStudio 2015 / C#
 //
-//  Copyright MPostol (c) 2019
+//  Copyright (c) 2019 Mariusz Postol
 //  +48 608 619 899
 //  mpostol@cas.eu
 //  https://github.com/mpostol/OPC-UA-OOI
@@ -17,11 +17,11 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
 [assembly: AssemblyProduct("Object Oriented Internet")]
-[assembly: AssemblyCopyright("Copyright MPostol (c) 2019")]
+[assembly: AssemblyCopyright("Copyright (c) 2019 Mariusz Postol")]
 [assembly: AssemblyTrademark("Object Oriented Internet")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("f0e97198-9cea-4cb8-a0b2-61eeca42eeca")]
-[assembly: AssemblyVersion("4.0.1.*")]
-[assembly: AssemblyFileVersion("4.0.1")]
+[assembly: AssemblyVersion("5.0.2.*")]
+[assembly: AssemblyFileVersion("5.0.2")]
 

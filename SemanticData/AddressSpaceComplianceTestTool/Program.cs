@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UAModelDesignExport;
@@ -37,25 +38,28 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       foreach (Error _item in errors)
       {
         string _processing = _item.StopsProcessing ? "and it stops processing" : "but the processing continues";
-        Console.WriteLine($"The following tag has wrong value: {_item.Tag} {_processing}.");
+        //TODO trace it to log Console.WriteLine($"The following tag has wrong value: {_item.Tag} {_processing}.");
       }
     }
-    private static void Do(Options obj)
+    private static void Do(Options options)
     {
+      PrintLogo(options);
       Action<TraceMessage> _tracingMethod = z => Console.WriteLine(z.ToString());
-      FileInfo _fileToRead = GetFileToRead(obj.Filenames);
       IAddressSpaceContext _as = new AddressSpaceContext(_tracingMethod);
       ModelDesignExport _exporter = new ModelDesignExport();
       bool _exportModel = false;
-      if (!string.IsNullOrEmpty(obj.ModelDesignFileName))
+      if (!string.IsNullOrEmpty(options.ModelDesignFileName))
       {
-        _as.InformationModelFactory = _exporter.GetFactory(obj.ModelDesignFileName, _tracingMethod);
+        _as.InformationModelFactory = _exporter.GetFactory(options.ModelDesignFileName, _tracingMethod);
         _exportModel = true;
       }
+      FileInfo _fileToRead = GetFileToRead(options.Filenames);
       _as.ImportUANodeSet(_fileToRead);
       _as.ValidateAndExportModel();
       if (_exportModel)
-        _exporter.ExportToXMLFile();
+      {
+        _exporter.ExportToXMLFile(options.Stylesheet);
+      }
     }
     internal static FileInfo GetFileToRead(IEnumerable<string> files)
     {
@@ -66,8 +70,15 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
         throw new FileNotFoundException(string.Format("FileNotFoundException - the file {0} doesn't exist.", _FileInfo.FullName));
       return _FileInfo;
     }
-    //Command lines
-    //"XMLModels\DataTypeTest.NodeSet2.xml" -e "XMLModels\DataTypeTest.ModelDesign.xml"
+    private static void PrintLogo(Options options)
+    {
+      if (options.NoLogo)
+        return;
+      AssemblyName _myAssembly = Assembly.GetExecutingAssembly().GetName();
+      Console.WriteLine($"Address Space Prototyping (asp.exe) {_myAssembly.Version}");
+      Console.WriteLine("Copyright(c) 2019 Mariusz Postol");
+      Console.WriteLine();
+    }
   }
 
 }

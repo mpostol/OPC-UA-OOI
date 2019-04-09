@@ -22,7 +22,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// </summary>
     /// <param name="outputFilePtah">A relative or absolute path for the file containing the serialized object.</param>
     /// <param name="traceEvent">The trace event delegate capturing the action used to trace all event encountered during the model generation.</param>
-    /// <returns>An instance of the <see cref="IModelFactory"/> to be used to generate the OPC UA Infromation Model captured as the <see cref="XML.ModelDesign"/>.</returns>
+    /// <returns>An instance of the <see cref="IModelFactory"/> to be used to generate the OPC UA Information Model captured as the <see cref="XML.ModelDesign"/>.</returns>
     /// <exception cref="ArgumentNullException">outputFilePtah</exception>
     public IModelFactory GetFactory(string outputFilePtah, Action<TraceMessage> traceEvent)
     {
@@ -32,17 +32,18 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       if (traceEvent == null)
         traceEvent = x => { };
       m_Model = new ModelFactory(traceEvent);
+      m_traceEvent = traceEvent;
       return m_Model;
     }
     /// <summary>
-    ///  Serializes the oready generated model using the interface <see cref="IModelFactory"/> and writes the XML document to a file.
+    ///  Serializes the already generated model using the interface <see cref="IModelFactory"/> and writes the XML document to a file.
     /// </summary>
     public void ExportToXMLFile()
     {
       ExportToXMLFile(string.Empty);
     }
     /// <summary>
-    ///  Serializes the oready generated model using the interface <see cref="IModelFactory"/> and writes the XML document to a file.
+    ///  Serializes the already generated model using the interface <see cref="IModelFactory"/> and writes the XML document to a file.
     /// </summary>
     /// <param name="stylesheetName">Name of the stylesheet document.</param>
     public void ExportToXMLFile(string stylesheetName)
@@ -51,8 +52,11 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         throw new ArgumentNullException("UAModelDesign", "The model must be generated first.");
       XML.ModelDesign _model = m_Model.Export();
       XML.XmlFile.WriteXmlFile<XML.ModelDesign>(_model, m_OutputPath, FileMode.Create, stylesheetName);
+      m_traceEvent(TraceMessage.DiagnosticTraceMessage($"The ModelDesign XML has been saved to file {m_OutputPath} and decorated with the stylesheet {stylesheetName}"));
+
     }
     private ModelFactory m_Model = null;
+    private Action<TraceMessage> m_traceEvent;
     private string m_OutputPath = string.Empty;
   }
 }

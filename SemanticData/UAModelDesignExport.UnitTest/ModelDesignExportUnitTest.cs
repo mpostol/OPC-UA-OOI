@@ -29,7 +29,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       _exporter.ExportToXMLFile();
       FileInfo _outputFile = new FileInfo(_filePath);
       Assert.IsTrue(_outputFile.Exists);
-      Assert.AreEqual<long>(0, _log.Count);
+      Assert.AreEqual<long>(1, _log.Count);
       Assert.IsTrue(720 < _outputFile.Length);
     }
   }

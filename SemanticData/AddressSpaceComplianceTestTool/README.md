@@ -1,6 +1,6 @@
 ﻿# OPC UA Address Space Prototyping
 
-The OPC `UA Address Space Prototyping` (UAAddressSpacePrototyping.exe) tool
+The OPC UA Address Space Prototyping (asp.exe) tool
 
 - creates OPC UA Address Space using input XML files compliant with the `UANodeSet` schema.
 - validates the  OPC UA Address Space against the OPC UA specification 1.04.
@@ -9,9 +9,9 @@ The OPC `UA Address Space Prototyping` (UAAddressSpacePrototyping.exe) tool
 ## Syntax
 
 ```
-UAAddressSpacePrototyping {file.xml} {-eModelDesign.xml}
-UAAddressSpacePrototyping [--help] [--version]
-UAAddressSpacePrototyping [help] [version]
+asp {file.xml} {-eModelDesign.xml}
+asp [--help] [--version]
+asp [help] [version]
 ```
 
 ## Argument

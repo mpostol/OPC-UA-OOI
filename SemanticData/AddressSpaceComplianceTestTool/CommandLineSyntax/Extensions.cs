@@ -9,7 +9,7 @@ using CommandLine;
 using System;
 using System.Collections.Generic;
 
-namespace UAOOI.SemanticData.AddressSpaceTestTool.CommandLineSyntax
+namespace UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax
 {
 
   internal static class Extensions

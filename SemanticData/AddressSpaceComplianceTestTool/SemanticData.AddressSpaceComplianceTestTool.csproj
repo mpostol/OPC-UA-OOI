@@ -7,8 +7,8 @@
     <ProjectGuid>{05DB9E60-B12B-4AA3-8A7C-514F87CFF464}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UAOOI.SemanticData.AddressSpaceTestTool</RootNamespace>
-    <AssemblyName>UAAddressSpacePrototyping</AssemblyName>
+    <RootNamespace>UAOOI.SemanticData.AddressSpacePrototyping</RootNamespace>
+    <AssemblyName>asp</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

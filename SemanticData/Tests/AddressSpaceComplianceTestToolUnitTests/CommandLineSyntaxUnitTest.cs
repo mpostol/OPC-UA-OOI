@@ -9,7 +9,7 @@ using CommandLine;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
-using UAOOI.SemanticData.AddressSpaceTestTool.CommandLineSyntax;
+using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
 
 namespace UAOOI.SemanticData.AddressSpaceTestTool.UnitTests
 {

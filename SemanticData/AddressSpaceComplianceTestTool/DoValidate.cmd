@@ -1,1 +1,1 @@
-UAAddressSpacePrototyping "XMLModels\DataTypeTest.NodeSet2.xml"
+asp "XMLModels\DataTypeTest.NodeSet2.xml"

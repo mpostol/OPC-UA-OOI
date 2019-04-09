@@ -11,7 +11,6 @@
 //_______________________________________________________________
 
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("<#=m_AssemblyTitle#>")]
@@ -29,5 +28,5 @@ using System.Runtime.InteropServices;
 
 <#@ include file = "..\..\..\..\CommonResources\T4Definitions\Model.t4" #>
 <#+
-string m_AssemblyTitle = "UANodeSetValidationUnitTestProject";
+string m_AssemblyTitle = "UAOOI.SemanticData.UANodeSetValidation";
 #>

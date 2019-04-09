@@ -8,13 +8,13 @@
 using CommandLine;
 using System.Collections.Generic;
 
-namespace UAOOI.SemanticData.AddressSpaceTestTool.CommandLineSyntax
+namespace UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax
 {
   internal class Options
   {
     [Value(0, Required = true, HelpText = "At least one file containing Address Space definition must be specified")]
     public IEnumerable<string> Filenames { get; set; }
-    [Option('e', "export", HelpText = "Ecport to UA Model Designer XML file")]
+    [Option('e', "export", HelpText = "Specifies the output file containing the ModelDesign XML document.")]
     public string ModelDesignFileName { get; set; }
     [Option('c', "no-create", HelpText = "DontCreate")]
     public bool DontCreate { get; set; }

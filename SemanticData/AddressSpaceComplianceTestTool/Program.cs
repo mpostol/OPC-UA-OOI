@@ -10,12 +10,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UAOOI.SemanticData.AddressSpaceTestTool.CommandLineSyntax;
+using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UAModelDesignExport;
 using UAOOI.SemanticData.UANodeSetValidation;
 
-namespace UAOOI.SemanticData.AddressSpaceTestTool
+namespace UAOOI.SemanticData.AddressSpacePrototyping
 {
   internal class Program
   {
@@ -42,14 +42,14 @@ namespace UAOOI.SemanticData.AddressSpaceTestTool
     }
     private static void Do(Options obj)
     {
-      Action<TraceMessage> _tracingMetchod = z => Console.WriteLine(z.ToString());
+      Action<TraceMessage> _tracingMethod = z => Console.WriteLine(z.ToString());
       FileInfo _fileToRead = GetFileToRead(obj.Filenames);
-      IAddressSpaceContext _as = new AddressSpaceContext(_tracingMetchod);
+      IAddressSpaceContext _as = new AddressSpaceContext(_tracingMethod);
       ModelDesignExport _exporter = new ModelDesignExport();
       bool _exportModel = false;
       if (!string.IsNullOrEmpty(obj.ModelDesignFileName))
       {
-        _as.InformationModelFactory = _exporter.GetFactory(obj.ModelDesignFileName, _tracingMetchod);
+        _as.InformationModelFactory = _exporter.GetFactory(obj.ModelDesignFileName, _tracingMethod);
         _exportModel = true;
       }
       _as.ImportUANodeSet(_fileToRead);

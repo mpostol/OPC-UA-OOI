@@ -1,1 +1,1 @@
-UAAddressSpacePrototyping --help --version
+asp --help --version

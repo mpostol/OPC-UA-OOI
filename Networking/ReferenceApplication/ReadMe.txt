@@ -5,10 +5,10 @@ Assembly Title:         Object Oriented Internet
 Assembly Description:   UAOOI SemanticData UA-Networking Reference Application.
 Assembly Company:       commsvr.com
 Assembly Product:       Object Oriented Internet
-Assembly Copyright:     Copyright MPostol (c) 2019
+Assembly Copyright:     Copyright (c) 2019 Mariusz Postol
 Assembly Trademark:     Object Oriented Internet
 Assembly Version:       4.0.1
-Assembly Date:          31.01.2019
+Assembly Date:          09.04.2019
 
 The main changes and new functionalities are listed below:
 

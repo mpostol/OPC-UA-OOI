@@ -4,8 +4,8 @@
 
 The **OPC UA Address Space Prototyping** (asp.exe) tool can be utilized in several ways:
 
-- creates OPC UA Address Space populated using input XML files compliant with the `UANodeSet` schema.
-- validates an instance of the OPC UA Address Space against the OPC UA specification 1.04.
+- creates `UA Address Space` populated using input XML files compliant with the `UANodeSet` schema.
+- validates an instance of the `UA Address Space` against the OPC UA specification 1.04.
 - generates XML file compliant with the `ModelDesign` schema that is input standard for the [OPCFoundation/UA-ModelCompiler][OPCFoundation/UA-ModelCompiler].
 
 These instructions will get you a copy of the software up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -22,22 +22,22 @@ These instructions will get you a copy of the software up and running on your lo
 
 |Argument|Description|
 |--------|-----------|
-|*filePath*| Specifies the input file to populate the internal `UA Address Space`. At least one file containing `UA Address Space` model compliant with `UANodeSet` schema must be specified. Many files may be entered at once.
+|*filePath*| Specifies the input file to populate the internal `UA Address Space`. At least one file containing `UA Address Space` model compliant with `UANodeSet` schema must be specified. Many files can be entered at once.
 
 ### General Options
 
 |Option|Description|
 |--------|-----------|
-|`help`|Displays command syntax and options for the tool. It halts processing and displays the help screen. The help screen is also displayed when the parsing process fails, along with the clear and explicit description of every error encountered. The switch or the built-in verb can be used.|
-|`version`|Prints version information. The switch or the built-in version verb can be used.|
+|`help`|Displays command syntax and options for the tool. It halts processing and displays the help screen. The help screen is also displayed when the parsing process fails, along with the clear and explicit description of every error encountered. The switch or the built-in `help`verb can be used.|
+|`version`|Prints version information. The switch or the built-in `version` verb can be used.|
 |`nologo`|Suppresses the banner.|
 
 ### ModelDesign Options
 
 |Option|Description|
 |--------|-----------|
-|`e[xport]`*ModelDesign.xml*| Specifies the output file containing the ModelDesign XML document.|
-|`s[tylesheet]`*\<stylesheetName\>* |Name of the stylesheet document (XSLT - eXtensible Stylesheet Language Transformations). With XSLT you can transform an XML document into any text document.|
+|`e[xport]`*path*| Specifies the output file containing the ModelDesign XML document.|
+|`s[tylesheet]`*stylesheetName* | Name of the stylesheet document (XSLT - eXtensible Stylesheet Language Transformations). With XSLT you can transform an XML document into any text document.|
 |`n[amespace]`*ns*| Specifies the namespace for the generated types. If not specified last imported model is used for export. 
 
 ### Command-line Syntax
@@ -50,7 +50,7 @@ The following table describes the notation used to indicate command-line syntax.
 | Text Italic |Placeholder for which you must supply a value|
 | \[Text inside square brackets\]	| Optional items|
 | \{Text inside braces\}	|Items that can be repeated|
-| Vertical bar `|`	|Separator for mutually exclusive items; choose one|
+| Vertical bar |Separator for mutually exclusive items; choose one|
 
 ## Deployment
 
@@ -89,7 +89,7 @@ Run the script `DoValidate.cmd` or enter the following command
 asp "XMLModels\DataTypeTest.NodeSet2.xml"
 ```
 
-The screen will contain a verbose listing of diagnostic messages related to the processing of the input file `DataTypeTest.NodeSet2.xml` The messages can be examined to improve the files used to populate the Address Space and remove any inconsistency against the OPC UA Specification 1.04.
+The screen will contain a verbose listing of diagnostic messages related to the processing of the input file `DataTypeTest.NodeSet2.xml` The messages can be examined to improve the files used to populate the `UA Address Space` and remove any inconsistency against the OPC UA Specification 1.04.
 
 ### How to Export Selected Model to ModelDesign
 

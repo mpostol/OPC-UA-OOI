@@ -1,85 +1,65 @@
 ﻿
-### This release:
+# SemanticData **5.0.2-Alpha**
+
+## This release:
 
 * [API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
 * [Object Oriented Internet eBook](https://commsvr.gitbook.io/ooi)
 
-The main changes and new functionalities:
+- *Changes*:
+  - SemanticData - updated against OPC UA Specification 1.04; new API (Details in section **SemanticData**) 
+  - Documentation improved
+  - New code help documentation available
 
-1. .NET Standard implementation
-2. Documentation improved
-3. New code help documentation available
-4. Tested against Xamarin.Android [CrossHMI](https://drutol.github.io/ReactiveNetworking.CrossHMI/)
+> **Note**: It is pre-release. I will appreciate reporting all problems directly to me (see section `Contact`) or in th issue #350.
 
 ## Packages
 
 ### Common
 
-Version: **4.0.1**
-
-The main changes and new functionalities:
-
-_ 
-
-NuGet packages published:
-
-- `UAOOI.Common.Infrastructure.nupkg`
+- *Version*: **4.0.1**
+- *Changes*: no changes
+- *NuGet packages*: not published
+- *Tools*: not published
 
 ### Configuration
 
-Version: **4.0.1**
-
-The main changes and new functionalities:
-
-- 
-
-NuGet packages published:
-
-- `UAOOI.Configuration.Core.4.0.1.nupkg`
-- `UAOOI.Configuration.DataBindings.4.0.1.nupkg`
-- `UAOOI.Configuration.Networking.4.0.1.nupkg`
+- *Version*: **4.0.1**
+- *Changes*: no changes
+- *NuGet packages*: not published
+- *Tools*: not published
 
 ### SemanticData
 
-Version: **5.0.2-Alpha**
+- *Version*: **5.0.2-Alpha**
+- *Changes*:
+  - Updated the UA Address Space process against OPC UA Specification 1.04
+  - Updated UANodeSet schema
+  - Added export to ModelDesign
+  - Export to model design
+- *NuGet packages*: not published
+- *Tools*:
+  - OPC UA Address Space Prototyping Tool (`asp.exe`)
 
-The main changes and new functionalities:
-
-- 
-
-NuGet packages published:
-
-- `UAOOI.SemanticData.InformationModelFactory.4.0.1.nupkg`
-- `UAOOI.SemanticData.UANodeSetValidation.4.0.1.nupkg`
+> Download and run the file to unzip the content to the selected folder. Now you may run the application file `asp.exe`. The section `Examples` cover details on how to get started using attached examples.
 
 ### Networking
 
-Version: **4.0.1**
-
-The main changes and new functionalities:
-
-- Added Boiler simulator
-- `MessageHandling` has been decoupled 
-
-NuGet packages published:
-- `UAOOI.Networking.Core.4.0.1.nupkg`
-- `UAOOI.Networking.Encoding.4.0.1.nupkg`
-- `UAOOI.Networking.SemanticData.4.0.1.nupkg`
-- `UAOOI.Networking.UDPMessageHandler.4.0.1.nupkg`
-
-PubSub Example Application
-
-- UAOOI.Networking.ReferenceApplication4.0.1.exe
-
-> This release contains modifications required to start interoperability testing against PubSub protocol version 1.10.
+- *Version*: **4.0.1**
+- *Changes*: no changes
+- *NuGet packages*: not published
+- *Tools*: not published
 
 ## Contact
 
 For assistance, contact:
 
 Mariusz Postol
-[Contact](http://www.commsvr.com/tabid/85/language/en-US/Default.aspx)
-http://www.commsvr.com/
+
+- [GitHub profile](https://github.com/mpostol)
+- http://www.commsvr.com/
+- linkedin.com/in/mpostol
+- https://twitter.com/mpostol
 
 Copyright (c) 2019 Mariusz Postol
 

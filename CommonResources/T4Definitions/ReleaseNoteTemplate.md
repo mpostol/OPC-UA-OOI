@@ -1,5 +1,4 @@
-﻿
-# SemanticData **5.0.2-Alpha**
+﻿# SemanticData **5.0.2-Alpha**
 
 ## This release:
 
@@ -11,7 +10,7 @@
   - Documentation improved
   - New code help documentation available
 
-> **Note**: It is pre-release. I will appreciate reporting all problems directly to me (see section `Contact`) or in th issue #350.
+> **Note**: It is pre-release. I will appreciate reporting all problems directly to me (see section `Contact`) or in issue #350.
 
 ## Packages
 
@@ -35,8 +34,7 @@
 - *Changes*:
   - Updated the UA Address Space process against OPC UA Specification 1.04
   - Updated UANodeSet schema
-  - Added export to ModelDesign
-  - Export to model design
+  - Added export to ModelDesign [OPC UA Address Space Prototyping](https://commsvr.gitbook.io/ooi/semanticdata-processing/uanodesetvalidation/addressspacecompliancetesttool)
 - *NuGet packages*: not published
 - *Tools*:
   - OPC UA Address Space Prototyping Tool (`asp.exe`)

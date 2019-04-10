@@ -1,4 +1,4 @@
-﻿# OPC UA Address Space Prototyping
+# OPC UA Address Space Prototyping
 
 ## Getting Started
 
@@ -143,7 +143,7 @@ Current version of the tool exports only types to `ModelDesign` XML file.
 - [![ebook](https://img.shields.io/badge/OOI-read_on_Gitbook-brightgreen.svg)](https://commsvr.gitbook.io/ooi) - the ebook **Object Oriented Internet** contains description of this project.
 - [OPC-UA-OOI Home Page][OPC-UA-OOI]
 - [OPC Unified Architecture][wordpress.opc-ua]
-- [OPC Unified Architecture – Main Technological Features][wordpress.OPCUAMTF]
+- [OPC Unified Architecture - Main Technological Features][wordpress.OPCUAMTF]
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 - [OPC UA Address Space Model Designer, 2019][CAS.ASMD]
 - [XSLT Introduction][XSLT Introduction]

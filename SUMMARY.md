@@ -11,7 +11,8 @@
 ## SemanticData Processing
 
 * [OOI SemanticData Processing Architecture](SemanticData/README.MD)
-* [UA NodeSet Validation](SemanticData/UANodeSetValidation/README.MD)
+* [UA Address Space Validation](SemanticData/UANodeSetValidation/README.MD)
+   * [OPC UA Address Space Prototyping Tool (asp.exe)](SemanticData/AddressSpaceComplianceTestTool/README.md) 
 * [XML Files](SemanticData/UANodeSetValidation/XML/README.MD)
 
 ## Internet of Things (IoT) Archetype

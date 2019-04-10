@@ -41,7 +41,7 @@ NuGet packages published:
 
 ### SemanticData
 
-Version: **4.0.1**
+Version: **5.0.2-Alpha**
 
 The main changes and new functionalities:
 
@@ -81,5 +81,5 @@ Mariusz Postol
 [Contact](http://www.commsvr.com/tabid/85/language/en-US/Default.aspx)
 http://www.commsvr.com/
 
-Copyright MPostol (c) 2019
+Copyright (c) 2019 Mariusz Postol
 

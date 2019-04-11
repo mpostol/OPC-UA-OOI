@@ -1,4 +1,4 @@
-﻿# SemanticData **5.0.2-Alpha**
+﻿# SemanticData ModelDesign Export **5.0.2-Alpha**
 
 ## This release:
 
@@ -39,7 +39,9 @@
 - *Tools*:
   - OPC UA Address Space Prototyping Tool (`asp.exe`)
 
-> Download and run the file to unzip the content to the selected folder. Now you may run the application file `asp.exe`. The section `Examples` cover details on how to get started using attached examples.
+> **Getting Started**: Download and run the file to unzip the content to the selected folder. Now you may run the application file `asp.exe`. The section 
+> [OPC UA Address Space Prototyping](https://commsvr.gitbook.io/ooi/semanticdata-processing/uanodesetvalidation/addressspacecompliancetesttool) of the online ebook covers details on how to get started using attached examples. 
+> This section has bee also added to the installation package as pdf document `OPC UA Address Space Prototyping.md.pdf`.
 
 ### Networking
 

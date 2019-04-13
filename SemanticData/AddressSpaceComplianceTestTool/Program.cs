@@ -9,7 +9,6 @@ using CommandLine;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
 using UAOOI.SemanticData.BuildingErrorsHandling;
@@ -53,22 +52,18 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
         _as.InformationModelFactory = _exporter.GetFactory(options.ModelDesignFileName, _tracingMethod);
         _exportModel = true;
       }
-      FileInfo _fileToRead = GetFileToRead(options.Filenames);
-      _as.ImportUANodeSet(_fileToRead);
-      _as.ValidateAndExportModel();
-      if (_exportModel)
+      if (options.Filenames == null)
+        throw new ArgumentOutOfRangeException($"{nameof(options.Filenames)}", "List of input files to convert i incorrect. At least one file UANodeSet must be entered.");
+      foreach (string _path in options.Filenames)
       {
-        _exporter.ExportToXMLFile(options.Stylesheet);
+        FileInfo _fileToRead = new FileInfo(_path);
+        if (!_fileToRead.Exists)
+          throw new FileNotFoundException(string.Format($"FileNotFoundException - the file {_path} doesn't exist.", _fileToRead.FullName));
+        _as.ImportUANodeSet(_fileToRead);
       }
-    }
-    internal static FileInfo GetFileToRead(IEnumerable<string> files)
-    {
-      if (files == null || files.Count<string>() != 1)
-        throw new ArgumentOutOfRangeException("args", "List of command line arguments is incorrect - enter name of an xml file to be tested.");
-      FileInfo _FileInfo = new FileInfo(files.First<string>());
-      if (!_FileInfo.Exists)
-        throw new FileNotFoundException(string.Format("FileNotFoundException - the file {0} doesn't exist.", _FileInfo.FullName));
-      return _FileInfo;
+      _as.ValidateAndExportModel(options.IMNamespace);
+      if (_exportModel)
+        _exporter.ExportToXMLFile(options.Stylesheet);
     }
     private static void PrintLogo(Options options)
     {

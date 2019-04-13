@@ -4,14 +4,14 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".md" #>
-# SemanticData SemanticData ModelDesign Export **<#=RepositoryVersion#><#=RepositoryVersionPrerelease#>**
+# SemanticData ModelDesign Export **<#=RepositoryVersion#><#=RepositoryVersionPrerelease#>**
 
 ## This release:
 
 * [API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
 * [Object Oriented Internet eBook](https://commsvr.gitbook.io/ooi)
 
-- *Changes*:
+- *This update comprises the following changes:*
   - SemanticData - updated against OPC UA Specification 1.04; new API (Details in section **SemanticData**) 
   - Documentation improved
   - New code help documentation available

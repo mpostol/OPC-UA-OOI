@@ -17,13 +17,16 @@ using UAOOI.SemanticData.UANodeSetValidation;
 
 namespace UAOOI.SemanticData.AddressSpacePrototyping
 {
-  internal class Program
+  /// <summary>
+  /// Class Program - main entry point to the OPC UA Address Space Prototyping tool (asp.exe)
+  /// </summary>
+  public class Program
   {
-    internal static void Main(string[] args)
+    public static void Main(string[] args)
     {
       try
       {
-        args.Parse<Options>(Do, HandleErrors);
+        Run(args);
       }
       catch (Exception ex)
       {
@@ -31,6 +34,10 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       }
       Console.Write("Press Enter to close this window.......");
       Console.Read();
+    }
+    internal static void Run(string[] args)
+    {
+      args.Parse<Options>(Do, HandleErrors);
     }
     private static void HandleErrors(IEnumerable<Error> errors)
     {
@@ -61,7 +68,10 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
           throw new FileNotFoundException(string.Format($"FileNotFoundException - the file {_path} doesn't exist.", _fileToRead.FullName));
         _as.ImportUANodeSet(_fileToRead);
       }
-      _as.ValidateAndExportModel(options.IMNamespace);
+      if (string.IsNullOrEmpty(options.IMNamespace))
+        _as.ValidateAndExportModel();
+      else
+        _as.ValidateAndExportModel(options.IMNamespace);
       if (_exportModel)
         _exporter.ExportToXMLFile(options.Stylesheet);
     }

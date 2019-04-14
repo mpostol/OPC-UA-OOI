@@ -62,13 +62,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ProgramUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
     <Compile Include="CommandLineSyntaxUnitTest.cs" />
-    <Compile Include="ValidateFileUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\AddressSpaceComplianceTestTool\SemanticData.AddressSpaceComplianceTestTool.csproj">

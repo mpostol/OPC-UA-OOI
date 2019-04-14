@@ -41,6 +41,9 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>UAOOI.SemanticData.AddressSpacePrototyping.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommandLine, Version=2.4.3.0, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CommandLineParser.2.4.3\lib\netstandard2.0\CommandLine.dll</HintPath>

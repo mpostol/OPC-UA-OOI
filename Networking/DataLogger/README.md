@@ -3,7 +3,7 @@
 
 ## Common Tasks
 
-Working through this tutorial gives you an introductory understanding of the steps required to implement `Consumer` role of `OOI Reactive Application`. `DataLogger` is a sample implementation of the `Consumer` part of the `ReferenceApplication`, which is an example application of `SemanticData` reactive networking based on [OPC UA Part 14 Pub/Sub](../../Networking/SemanticData/README.PubSubMTF.md) specification.
+Working through this tutorial gives you an introductory understanding of the steps required to implement `Consumer` role of `OOI Reactive Application`. `DataLogger` is a sample implementation of the `Consumer` part of the `ReferenceApplication`, which is an example application of `Semantic-Data` reactive networking based on [OPC UA Part 14 Pub/Sub](../../Networking/SemanticData/README.PubSubMTF.md) specification.
 
 Here are steps undertook to implement the `Consumer` role in the application:
 

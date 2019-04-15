@@ -1,8 +1,8 @@
-# Reactive Networking of SemanticData Library
+# Reactive Networking of Semantic-Data Library
 
 ## Getting Started
 
-The `UAOOI.Networking.SemanticData` library is designed to be a foundation of developing application programs that are taking part of message-centric communication pattern and interconnected using the reactive networking concept described in the [OOI Semantic Data Processing Architecture](../../SemanticData/README.MessageCentricCommunication.md). The diagram below presents how to engage this library to provide a more specific functionality required depending on the role of concern compliant with the overall architecture.
+The `UAOOI.Networking.SemanticData` library is designed to be a foundation of developing application programs that are taking part of message-centric communication pattern and interconnected using the reactive networking concept described in the [Semantic-Data Processing Architecture](../../SemanticData/README.MessageCentricCommunication.md). The diagram below presents how to engage this library to provide a more specific functionality required depending on the role of concern compliant with the overall architecture.
 
 ![Figure 1. Message-centric Communication Roles Implementation](../../CommonResources/Media/DataManagementGeneralization.png)
 

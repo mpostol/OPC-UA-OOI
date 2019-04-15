@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is aimed at implementing an editor of the `OOI Reactive Application` configuration file. For more extensive examples, see the [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD).
+This project is aimed at implementing an editor of the `OOI Reactive Application` configuration file. For more extensive examples, see the [Semantic-Data Processing Architecture](../../SemanticData/README.MD).
 
 The schema of the configuration files is available at:  [ConfigurationData.xsd](../../Configuration/Networking/Serialization/ConfigurationData.xsd) and detailed description of the configuration is captured in the document [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration).
 

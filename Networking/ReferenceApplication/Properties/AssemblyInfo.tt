@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 
 [assembly: AssemblyTitle("<#=m_AssemblyTitle#>")]
-[assembly: AssemblyDescription("<#=NetworkingDataProduct#>: SemanticData Networking Reference Application WPF GUI.")]
+[assembly: AssemblyDescription("<#=NetworkingDataProduct#>: Reactive Networking of Semantic-Data Library WPF GUI.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("<#=AssemblyCompany#>")]
 [assembly: AssemblyProduct("<#=NetworkingDataProduct#>")]

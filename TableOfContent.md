@@ -1,23 +1,25 @@
+# Table of Content
+
 ## Summary
 
 * [Introduction](README.MD)
 
-## SemanticData Processing
+## Semantic-Data Processing
 
-* [OOI SemanticData Processing Architecture](SemanticData/README.MD)
-* [UA Address Space Validation](SemanticData/UANodeSetValidation/README.MD)
-   * [OPC UA Address Space Prototyping Tool (asp.exe)](SemanticData/AddressSpaceComplianceTestTool/README.md) 
-* [XML Files](SemanticData/UANodeSetValidation/XML/README.MD)
+* [Semantic-Data Processing Architecture](SemanticData/README.MD)
+* [Address Space Management](SemanticData/UANodeSetValidation/README.MD)
+* [Address Space Prototyping Tool (ase.exe)](SemanticData/AddressSpaceComplianceTestTool/README.md)
 
 ## Internet of Things (IoT) Archetype
 
+* [Semantic-Data Message Centric Communication](SemanticData/README.MessageCentricCommunication.md)
 * [Internet of Things (IoT) Communication](Networking/README.MD)
-* [SemanticData Message Centric Communication](SemanticData/README.MessageCentricCommunication.md)
+
 
 ## Reactive Communication
 
 * [UA Part 14: PubSub Main Technology Features](Networking/SemanticData/README.PubSubMTF.md)
-* [Reactive Networking of SemanticData Library](Networking/SemanticData/README.MD)
+* [Reactive Networking of Semantic-Data Library](Networking/SemanticData/README.MD)
   * [Transport over UDP](Networking/UDPMessageHandler/README.md)
   * [Transport over MQTT](Networking/SemanticData/README_MQTTMapping.md)
   * [Transport over AMQP](Networking/SemanticData/README_AMQPMapping.md)
@@ -30,13 +32,13 @@
 * [Reactive Networking Configuration](Configuration/Networking/README.MD)
 * [DataBinding library](Configuration/DataBindings/README.MD)
 
-## Deployment 
+## Deployment
 
 * [Walk-through `ReferenceApplication`](Networking/ReferenceApplication/README.MD)
   * [`ReferenceApplication` Utilities](Networking/ReferenceApplication.Core/README.md)
   * [`ReferenceApplication` Consumer - Data Logger](Networking/DataLogger/README.md)
   * [`ReferenceApplication` Producer - Interoperability Test Data Generator](Networking/SimulatorInteroperabilityTest/README.md)
-  * [`ReferenceApplication` Producer - Boilers Set Simulator](Networking/Simulator.Boiler/README.md) 
+  * [`ReferenceApplication` Producer - Boilers Set Simulator](Networking/Simulator.Boiler/README.md)
 
 ## Data Discovery
 

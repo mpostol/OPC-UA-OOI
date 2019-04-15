@@ -15,7 +15,7 @@
 
 ## Internet of Things (IoT) Archetype
 
-* [Semantic-Data Message Centric Communication](SemanticData/README.MessageCentricCommunication.md)
+* [Semantic-Data Message Centric Communication](Networking/README.MessageCentricCommunication.md)
 * [Internet of Things (IoT) Communication](Networking/README.MD)
 
 ## Reactive Communication

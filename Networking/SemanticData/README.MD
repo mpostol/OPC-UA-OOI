@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-The `UAOOI.Networking.SemanticData` library is designed to be a foundation of developing application programs that are taking part of message-centric communication pattern and interconnected using the reactive networking concept described in the [Semantic-Data Processing Architecture](../../SemanticData/README.MessageCentricCommunication.md). The diagram below presents how to engage this library to provide a more specific functionality required depending on the role of concern compliant with the overall architecture.
+The `UAOOI.Networking.SemanticData` library is designed to be a foundation of developing application programs that are taking part of message-centric communication pattern and interconnected using the reactive networking concept described in the [Semantic-Data Processing Architecture](../README.MessageCentricCommunication.md). The diagram below presents how to engage this library to provide a more specific functionality required depending on the role of concern compliant with the overall architecture.
 
 ![Figure 1. Message-centric Communication Roles Implementation](../../CommonResources/Media/DataManagementGeneralization.png)
 
@@ -10,7 +10,7 @@ For more in-depth information about creating `OOI Reactive Application` exchangi
 
 To promote interoperability this library is a collection of types aimed at implementation of the [Part 14 PubSub](README.PubSubMTF.md) standard.
 
-The code is tested using the Unit Tests located in the project: [SemanticDatalUnitTest][OPC-UA-OOI.Networking.Tests.SemanticDatalUnitTest]
+The code is tested using the Unit Tests located in the project: [Networking.SemanticData.UnitTest][OPC-UA-OOI.Networking.Tests.SemanticDatalUnitTest]
 
 The preliminary code help documentation is here: [API Browser](http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Networking.SemanticData.htm)
 

@@ -62,7 +62,7 @@ Optionally the `OPC UA Client` may also support importing and exporting services
 
 ### OOI Reactive Application
 
-`OOI Reactive Application` is an application transferring the `Semantic-Data` over the network using message centric transport of the strong typed data standardized by the OPC UA Specification [Part 14 Pub/Sub](../Networking/SemanticData/README.PubSubMTF.md). The description of its architecture is captured in [UA SemanticData Message Centric Communication](./README.MessageCentricCommunication.md#ua-semanticdata-message-centric-communication).
+`OOI Reactive Application` is an application transferring the `Semantic-Data` over the network using message centric transport of the strong typed data standardized by the OPC UA Specification [Part 14 Pub/Sub](../Networking/SemanticData/README.PubSubMTF.md). The description of its architecture is captured in [UA SemanticData Message Centric Communication](../Networking/README.MessageCentricCommunication.md#ua-semanticdata-message-centric-communication).
 
 This concept has been implemented in the project [Reactive Networking of Semantic-Data Library](../Networking/SemanticData/README.MD#networking-of-semanticdata-library). This project provides an SDK library that can be used as a foundation of the communication infrastructure deployment. The [Walk-through `ReferenceApplication`](../Networking/ReferenceApplication/README.MD#ua-data-example-application) contains the description of a reference WPF application.
 
@@ -203,7 +203,7 @@ A detailed description of this solution is captured in the document [Content Des
 
 The code illustrating networking of the `Semantic-Data` paradigm implementation can be found in the project [Reactive Networking of SemanticData Library](../Networking/SemanticData/README.MD#networking-of-semanticdata-library).
 
-Description of the `OOI Reactive Application` architecture is captured in the section [Semantic-Data Message Centric Communication](README.MessageCentricCommunication.md).
+Description of the `OOI Reactive Application` architecture is captured in the section [Semantic-Data Message Centric Communication](../Networking/README.MessageCentricCommunication.md).
 
 ### Architecture
 

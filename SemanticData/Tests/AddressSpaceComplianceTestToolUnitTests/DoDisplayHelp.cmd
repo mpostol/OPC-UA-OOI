@@ -1,0 +1,1 @@
+asp --help --version

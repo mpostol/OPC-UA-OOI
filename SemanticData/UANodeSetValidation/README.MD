@@ -1,6 +1,6 @@
 # OPC UA NodeSet Validation
 
-This project support validation of the OPC UA Address Space captured in the xml file against the OPC UA Specification. It is assumed that the Address Space is represented as a XML file compliant with the NodeSet schema.
+This project supports populating of the `UA Address Space` from the xml `UANodeSet` file and validation of `UA Name Space` against the OPC UA Specification. It is assumed that the `UA Address Space` content is represented by an XML file compliant with the `UANodeSet` schema.
 
 ## Read more
 

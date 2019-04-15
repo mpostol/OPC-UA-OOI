@@ -23,15 +23,25 @@ The [Object Oriented Internet](https://fedcsis.org/proceedings/2015/pliks/160.pd
 
 ### Releases
 
-We use [Semantic Versioning](http://semver.org/) for versioning. For the versions available, see the [releases on this repository](https://github.com/mpostol/OPC-UA-OOI/releases). For your convenience, the versions of the repository and released NuGet packages has been listed in the next subsections.
+We use [Semantic Versioning](http://semver.org/) for versioning. For the versions available, see the [releases on this repository](https://github.com/mpostol/OPC-UA-OOI/releases). For your convenience, the versions of the repository, tools and NuGet packages has been listed in the next subsections.
 
 #### Repository
 
 | Version | Milestone                                                          | DOI |Date|
 |:-------:|--------------------------------------------------------------------|:---:|:--:|
+|5.0.2-Alpha |Updated the UA Address Space build against OPC UA Specification 1.04; updated UANodeSet schema; added export to ModelDesign [OPC UA Address Space Prototyping](https://commsvr.gitbook.io/ooi/semanticdata-processing/uanodesetvalidation/addressspacecompliancetesttool)|10.5281/zenodo.2636426|Apr 11, 2019|
 |4.0.1 |.NET Standard implementation, documentation improved, new code help documentation available, tested against Xamarin.Android |10.5281/zenodo.2555407 |Feb 1, 2019|
 | 3.1.0 |New version of the UAOOI.Networking.ReferenceApplication, documentation has been improved.|10.5281/zenodo.1291549 |Jun 17, 2018|
 |3.0.0 |DOI creation for the publication purpose. |10.5281/zenodo.1198853 |Mar 14, 2018|
+
+#### Tools
+
+The table below lists the latest versions of the published Tools.
+
+| Description | Version | 
+|----|:---------:|-------------|
+|[OPC UA Address Space Prototyping](https://commsvr.gitbook.io/ooi/semanticdata-processing/uanodesetvalidation/addressspacecompliancetesttool)| 5.00.02| 
+|[OOI Semantic Data Processing ReferenceApplication](https://commsvr.gitbook.io/ooi/deployment/referenceapplication)| 4.00.01|
 
 #### NuGet packages
 
@@ -50,16 +60,15 @@ The table below lists the latest versions of the published NuGet packages.
 | [UAOOI.SemanticData.InformationModelFactory](https://www.nuget.org/packages/UAOOI.SemanticData.InformationModelFactory/) | 4.0.1 | OPC UA Information Model Factory Library
 | [UAOOI.SemanticData.UANodeSetValidation](https://www.nuget.org/packages/UAOOI.SemanticData.UANodeSetValidation/)| 4.0.1 | This project supports validation of the OPC UA Address Space captured in the XML file against the OPC UA Specification. It is assumed that the Address Space is represented as an XML file compliant with the NodeSet schema. This library is dedicated to creating a plug-in aimed at importing models based on the OPC UA Information Model. It is part of the project supporting OPC UA Object Oriented Internet paradigm.
 
-
 ## Content
 
 ### Architecture
 
-The repository workspaces are organized as it is illustrated in the Figure 1 below.
+The repository workspaces are organized as it is illustrated in the Figure below.
 
 ![Figure 1. Packages relationship](CommonResources/Media/Packages.png)
 
-Next sections describe the content of the workspaces in the repository. The workspaces are loosely coupled. Each workspace contains applications (tools), libraries, and unit tests. All common resources are collected in the `CommonResources`.
+Next sections describe the content of the workspaces/packages in the repository. The packages are loosely coupled. Each package contains applications (tools), libraries, and unit tests. All common resources are collected in the `CommonResources`.
 
 ### Common
 
@@ -141,7 +150,7 @@ Replace [year] with the current year and [Target Part Name] with the name (or na
 
 ## Conclusion
 
-I hope it is a good place to prototype and converge the OPC UA communication technology with Semantic Data, Industry 4.0, Internet Of Things, Plug and Play, Global Data Discovery, Selective Availability, etc. concepts. My goal is to bridge a gap between OPC UA technology and Industrial IT Application Domains.
+I hope it is a good place to prototype and converge the OPC UA communication technology with Semantic Data, Industry 4.0, Internet Of Things, Data Oriented Architecture, Plug and Play, Global Data Discovery, Selective Availability, etc. concepts. My goal is to bridge a gap between OPC UA technology and Industrial IT Application Domains.
 
 The presented approach is a real proposal for a new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability.
 

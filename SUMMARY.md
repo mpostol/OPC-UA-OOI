@@ -1,7 +1,6 @@
 # Object Oriented Internet
 
 * [Cover Page](COVERPAGE.md)
- 
 * [Table of Content](TableOfContent.md)
 
 ## Summary
@@ -11,7 +10,8 @@
 ## SemanticData Processing
 
 * [OOI SemanticData Processing Architecture](SemanticData/README.MD)
-* [UA NodeSet Validation](SemanticData/UANodeSetValidation/README.MD)
+* [UA Address Space Validation](SemanticData/UANodeSetValidation/README.MD)
+  * [OPC UA Address Space Prototyping](SemanticData/AddressSpaceComplianceTestTool/README.md)
 * [XML Files](SemanticData/UANodeSetValidation/XML/README.MD)
 
 ## Internet of Things (IoT) Archetype
@@ -35,13 +35,13 @@
 * [Reactive Networking Configuration](Configuration/Networking/README.MD)
 * [DataBinding library](Configuration/DataBindings/README.MD)
 
-## Deployment 
+## Deployment
 
 * [Walk-through `ReferenceApplication`](Networking/ReferenceApplication/README.MD)
   * [`ReferenceApplication` Utilities](Networking/ReferenceApplication.Core/README.md)
   * [`ReferenceApplication` Consumer - Data Logger](Networking/DataLogger/README.md)
   * [`ReferenceApplication` Producer - Interoperability Test Data Generator](Networking/SimulatorInteroperabilityTest/README.md)
-  * [`ReferenceApplication` Producer - Boilers Set Simulator](Networking/Simulator.Boiler/README.md) 
+  * [`ReferenceApplication` Producer - Boilers Set Simulator](Networking/Simulator.Boiler/README.md)
 
 ## Data Discovery
 

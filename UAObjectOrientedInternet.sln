@@ -37,6 +37,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Networking", "Networking", "{F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}"
 	ProjectSection(SolutionItems) = preProject
 		Networking\README.MD = Networking\README.MD
+		Networking\README.MessageCentricCommunication.md = Networking\README.MessageCentricCommunication.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{19A61D68-0ECA-4093-AEE5-370BC3CE777C}"
@@ -44,7 +45,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SemanticData", "SemanticData", "{AF01F501-9B19-4357-B8A7-4EFC782BF1AF}"
 	ProjectSection(SolutionItems) = preProject
 		SemanticData\README.MD = SemanticData\README.MD
-		SemanticData\README.MessageCentricCommunication.md = SemanticData\README.MessageCentricCommunication.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration.Networking", "Configuration\Networking\Configuration.Networking.csproj", "{E28E0880-03AA-4D1B-A820-41B04E766019}"

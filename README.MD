@@ -41,7 +41,7 @@ The table below lists the latest versions of the published Tools.
 | Description | Version | 
 |----|:---------:|-------------|
 |[OPC UA Address Space Prototyping](https://commsvr.gitbook.io/ooi/semanticdata-processing/uanodesetvalidation/addressspacecompliancetesttool)| 5.00.02| 
-|[OOI Semantic Data Processing ReferenceApplication](https://commsvr.gitbook.io/ooi/deployment/referenceapplication)| 4.00.01|
+|[Semantic-Data Processing ReferenceApplication](https://commsvr.gitbook.io/ooi/deployment/referenceapplication)| 4.00.01|
 
 #### NuGet packages
 
@@ -53,7 +53,7 @@ The table below lists the latest versions of the published NuGet packages.
 | [UAOOI.Configuration.Core](https://www.nuget.org/packages/UAOOI.Configuration.Core)| 4.0.1 |The library contains a shared interfaces for server configuration which OPC UA applications can reference. The library provides an abstraction over any OPC UA Server configuration plug-in. Using the library allows an application to indirectly access the server configuration attributes without relying on hard references. The hope is that using this library, third-party applications and frameworks can begin to leverage server configuration management without tying themselves down to a specific implementation.
 | [UAOOI.Configuration.DataBindings](https://www.nuget.org/packages/UAOOI.Configuration.DataBindings)| 4.0.1 |OPC UA Object Oriented Internet (UAOOI) DataBindings library is dedicated to create a plug-in aimed at editing of the configuration of any application based on OPC UA Information Model. It allows also to add data binding to the configuration.
 | [UAOOI.Configuration.Networking](https://www.nuget.org/packages/UAOOI.Configuration.Networking)| 4.0.1| OPC UA Object Oriented Internet (UAOOI) UAOOI.Configuration.Networking library is dedicated to create a plug-in aimed at provisioning configuration of any application based on OPC UA Information Model.
-| [UAOOI.Networking.Core](https://www.nuget.org/packages/UAOOI.Networking.Core)| 4.0.1 | The core functionality of SemanticData Reactive Networking library based on OPC UA Part 14 Pub/Sub.
+| [UAOOI.Networking.Core](https://www.nuget.org/packages/UAOOI.Networking.Core)| 4.0.1 | The core functionality of `Semantic-Data` reactive networking library based on OPC UA Part 14 Pub/Sub.
 | [UAOOI.Networking.Encoding](https://www.nuget.org/packages/UAOOI.Networking.Encoding)|4.0.1 | This package provides functionality to lookup a dictionary containing value converters. The interface is used for late binding to inject dependency on the external library.  This library provides IEncodingFactory functionality limited to encoding simple data types only for the testing purpose only.
 | [UAOOI.Networking.SemanticData](https://www.nuget.org/packages/UAOOI.Networking.SemanticData) |4.0.1 | SemanticData Reactive Networking library based on OPC UA Part 14 Pub/Sub.
 | [UAOOI.Networking.UDPMessageHandler](https://www.nuget.org/packages/UAOOI.Networking.UDPMessageHandler) | 4.0.1 | OOI Reactive Networking: UDP IMessageHandlerFactory Implementation
@@ -76,7 +76,7 @@ This workspace provides API for common infrastructure management functionality a
 
 ### Configuration
 
-This workspace is aimed at implementing an editor of the `OOI Reactive Application` configuration file. It contains types that supports the configuration management of application implementing the paradigm described in [OOI Semantic Data Processing Architecture](SemanticData/README.MD). The configuration may be read to or write from the xml or json files. By design this library may be used to support variety kinds of applications at design and run time. It supports also the data binding mechanism to define how the process data relate to the real world.
+This workspace is aimed at implementing an editor of the `OOI Reactive Application` configuration file. It contains types that supports the configuration management of application implementing the paradigm described in [Semantic-Data Processing Architecture](SemanticData/README.MD). The configuration may be read to or write from the xml or json files. By design this library may be used to support variety kinds of applications at design and run time. It supports also the data binding mechanism to define how the process data relate to the real world.
 
 ### DataDiscovery
 
@@ -150,7 +150,7 @@ Replace [year] with the current year and [Target Part Name] with the name (or na
 
 ## Conclusion
 
-I hope it is a good place to prototype and converge the OPC UA communication technology with Semantic Data, Industry 4.0, Internet Of Things, Data Oriented Architecture, Plug and Play, Global Data Discovery, Selective Availability, etc. concepts. My goal is to bridge a gap between OPC UA technology and Industrial IT Application Domains.
+I hope it is a good place to prototype and converge the OPC UA communication technology with `Semantic-Data`, Industry 4.0, Internet Of Things, Data Oriented Architecture, Plug and Play, Global Data Discovery, Selective Availability, etc. concepts. My goal is to bridge a gap between OPC UA technology and Industrial IT Application Domains.
 
 The presented approach is a real proposal for a new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability.
 

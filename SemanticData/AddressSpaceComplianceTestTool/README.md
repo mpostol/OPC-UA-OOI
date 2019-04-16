@@ -1,10 +1,10 @@
-# OPC UA Address Space Prototyping
+# Address Space Prototyping Tool (ase.exe)
 
 ## Getting Started
 
-The **OPC UA Address Space Prototyping** (asp.exe) tool can be utilized in several ways:
+The **OPC UA Address Space Prototyping** (asp.exe) is an engineering tool and can be utilized in several ways:
 
-- creates `UA Address Space` populated using input XML files compliant with the `UANodeSet` schema.
+- creates `UA Address Space` populated using input XML files compliant with the `UANodeSet` schema defined in Part 6 Annex F.
 - validates an instance of the `UA Address Space` against the OPC UA specification 1.04.
 - generates XML file compliant with the `ModelDesign` schema that is input standard for the [OPCFoundation/UA-ModelCompiler][OPCFoundation/UA-ModelCompiler].
 

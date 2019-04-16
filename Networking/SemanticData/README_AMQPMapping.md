@@ -6,7 +6,7 @@
 
 ## Motivation
 
-The main goal of this document is to provide instruction on how to expand the transport layer for OOI Networking of the **Semantic Data** over the Advanced Message Queuing Protocol \([AMQP][AMQP]\) to be compliant with the specifications mentioned in the section *Normative references*.
+The main goal of this document is to provide instruction on how to expand the transport layer for OOI Networking of the `Semantic-Data` over the Advanced Message Queuing Protocol \([AMQP][AMQP]\) to be compliant with the specifications mentioned in the section *Normative references*.
 
 Implementation of the messages exchange over the \([AMQP][AMQP]\) protocol is out of the scope of this project. The library intentionally is designed to use any transport protocol meeting some basic requirements using external components. External components implementing \([AMQP][AMQP]\) connectivity can be seamlessly integrated with this SDK using dependency injection concept illustrated by the following domain model:
 
@@ -272,7 +272,7 @@ If the `KeepAliveTime` is set on a `WriterGroup`, a value slightly higher than t
 
 ## Notices for Implementer
 
-In the article [Networking of SemanticData Library](README.MD#message-transport) the section *Message Transport* contains description covering instruction for the external AMQP handling components. An example how to implement the Transport layer over the UDP protocol is illustrated by the project [UA Data Example Application](../ReferenceApplication/README.MD).
+In the article [Reactive Networking of Semantic-Data Library](README.MD#message-transport) the section *Message Transport* contains description covering instruction for the external AMQP handling components. An example how to implement the Transport layer over the UDP protocol is illustrated by the project [UA Data Example Application](../ReferenceApplication/README.MD).
 
 ## See also
 

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 
 [assembly: AssemblyTitle("UAOOI.UANetworkingReferenceApplication")]
-[assembly: AssemblyDescription("Object Oriented Internet: SemanticData Networking Reference Application WPF GUI.")]
+[assembly: AssemblyDescription("Object Oriented Internet: Reactive Networking of Semantic-Data Library WPF GUI.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
 [assembly: AssemblyProduct("Object Oriented Internet")]

@@ -2,7 +2,7 @@
 
 ## Motivation
 
-The main goal of this document is to provide instruction on how to expand the transport layer for OOI Networking of the **Semantic Data** over the Message Queue Telemetry Transport \([MQTT][MQTT]\) to be compliant with the specifications mentioned in the section *Normative references*.
+The main goal of this document is to provide instruction on how to expand the transport layer for OOI Networking of the `Semantic-Data` over the Message Queue Telemetry Transport \([MQTT][MQTT]\) to be compliant with the specifications mentioned in the section *Normative references*.
 
 Implementation of the `Messages` exchange over the MQTT protocol is out of the scope of this project. The library intentionally is designed to use any transport protocol meeting some basic requirements using external components. External components implementing MQTT connectivity can be seamlessly integrated with this SDK using dependency injection concept illustrated by the following domain model:
 
@@ -127,7 +127,7 @@ The `BrokerTransportQualityOfService` values map to MQTT `Quality of Service` se
 
 ## Notices for Implementer
 
-In the article [Networking of SemanticData Library](README.MD) the section *Message Transport* contains description covering instruction for the external MQTT handling components. An example how to implement the Transport layer over the UDP protocol is illustrated by the project [UA Data Example Application](../ReferenceApplication/README.MD). This application uses two implementations of the `IMessageHandlerFactory`:
+In the article [Reactive Networking of Semantic-Data Library](README.MD) the section *Message Transport* contains description covering instruction for the external MQTT handling components. An example how to implement the Transport layer over the UDP protocol is illustrated by the project [UA Data Example Application](../ReferenceApplication/README.MD). This application uses two implementations of the `IMessageHandlerFactory`:
 
 - `ConsumerMessageHandlerFactory` - to create communication infrastructure for the consumer role
 - `ProducerMessageHandlerFactory` - to create communication infrastructure for the producer role

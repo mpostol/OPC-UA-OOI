@@ -1,4 +1,4 @@
-﻿# SemanticData ModelDesign Export **5.0.2-Alpha**
+﻿# Semantic-Data ModelDesign Export **5.0.2-Alpha**
 
 ## This release:
 
@@ -6,7 +6,7 @@
 * [Object Oriented Internet eBook](https://commsvr.gitbook.io/ooi)
 
 - *This update comprises the following changes:*
-  - SemanticData - updated against OPC UA Specification 1.04; new API (Details in section **SemanticData**) 
+  - Semantic-Data - updated against OPC UA Specification 1.04; new API (Details in section **SemanticData**) 
   - Documentation improved
   - New code help documentation available
 

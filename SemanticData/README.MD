@@ -1,13 +1,12 @@
-
-# OOI SemanticData Processing Architecture
+# Semantic-Data Processing Architecture
 
 ## Domain Model
 
-### Concept
+### Introduction
 
-The main challenge that must be faced up by engineering of data processing is the preservation of the data semantics at all the stages of this process to manipulate the data meaningfully. This diagram is a domain model, which presents a conceptual framework of the `SemanticData` supporting contextual data processing outside the *OPC UA Server* session. It presents all the major contributors processing the data in the context of `UA Information Model`.
+The main challenge that must be faced up by engineering of data processing is the preservation of the data semantics at all the stages of this process to manipulate the data meaningfully. This diagram is a domain model, which presents a conceptual framework of the `Semantic-Data` supporting contextual data processing outside the *OPC UA Server* session. It presents all the major contributors processing the data in the context of `UA Information Model`.
 
-`SemanticData` may be directly used by the following classes of actors:
+`Semantic-Data` may be directly used by the following classes of actors:
 
 * `Address Space Management` -  part of the **OPC UA Server** application optionally supporting integration services.
 * `UA Client` -  custom OPC `UA Client` supporting integration services.
@@ -18,6 +17,7 @@ The main challenge that must be faced up by engineering of data processing is th
 ### UA Information Model
 
 The description of the *OPC UA Information Model* is captured in details in in the:
+
 * [OPC Unified Architecture e-book](http://www.commsvr.com/UAModelDesigner/Index.aspx)
 * [OPC UA Information Model Deployment](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf)
 
@@ -62,26 +62,26 @@ Optionally the `OPC UA Client` may also support importing and exporting services
 
 ### OOI Reactive Application
 
-`OOI Reactive Application` is an application transferring the `SemanticData` over the network using message centric transport of the strong typed data standardized by the OPC UA Specification [Part 14 Pub/Sub](../Networking/SemanticData/README.PubSubMTF.md). The description of its architecture is captured in [UA SemanticData Message Centric Communication](./README.MessageCentricCommunication.md#ua-semanticdata-message-centric-communication).
+`OOI Reactive Application` is an application transferring the `Semantic-Data` over the network using message centric transport of the strong typed data standardized by the OPC UA Specification [Part 14 Pub/Sub](../Networking/SemanticData/README.PubSubMTF.md). The description of its architecture is captured in [UA SemanticData Message Centric Communication](../Networking/README.MessageCentricCommunication.md#ua-semanticdata-message-centric-communication).
 
-This concept has been implemented in the project [Reactive Networking of SemanticData Library](../Networking/SemanticData/README.MD#networking-of-semanticdata-library). This project provides an SDK library that can be used as a foundation of the communication infrastructure deployment. The [Walk-through `ReferenceApplication`](../Networking/ReferenceApplication/README.MD#ua-data-example-application) contains the description of a reference WPF application.
+This concept has been implemented in the project [Reactive Networking of Semantic-Data Library](../Networking/SemanticData/README.MD#networking-of-semanticdata-library). This project provides an SDK library that can be used as a foundation of the communication infrastructure deployment. The [Walk-through `ReferenceApplication`](../Networking/ReferenceApplication/README.MD#ua-data-example-application) contains the description of a reference WPF application.
 
 The diagram below shows how the `OOI Reactive Application` may be expanded to implement integration services in context of selected Industrial IT technologies.
 
 ![OOI Reactive Application](../CommonResources/Media/UADataIntegrationServices.UADataApplication.png)
 
-`OOI Reactive Application` is any software program designed to perform a specific function directly for the user or for other application programs. Application programs process consumes (`Consumer` role) and/or produces (`Producer` role) the `SemanticData` according to selected algorithm to meet the user requirements according to selected information model. The roles expands the `DataRepository` class representing ultimate source or destination of the *raw data*. Description of how to implement this roles is covered in the document [Reactive Networking of SemanticData Library](../Networking/SemanticData/README.MD)
+`OOI Reactive Application` is any software program designed to perform a specific function directly for the user or for other application programs. Application programs process consumes (`Consumer` role) and/or produces (`Producer` role) the `Semantic-Data` according to selected algorithm to meet the user requirements according to selected information model. The roles expands the `DataRepository` class representing ultimate source or destination of the *raw data*. Description of how to implement this roles is covered in the document [Reactive Networking of SemanticData Library](../Networking/SemanticData/README.MD)
 
 The `OOI Reactive Application` class in the domain model represents varieties of possible applications including but not limited to:
 
-* `XML Gateway` - it factories objects using the `SemanticData` and serializes them into XML text representation for further processing.
-* `JSON Gateway` - it factories objects using the `SemanticData` and serializes them into the JSON text representation for further processing
-* `Data Archival` - collects the `SemanticData` received over the wire and archives it in a database.
+* `XML Gateway` - it factories objects using the `Semantic-Data` and serializes them into XML text representation for further processing.
+* `JSON Gateway` - it factories objects using the `Semantic-Data` and serializes them into the JSON text representation for further processing
+* `Data Archival` - collects the `Semantic-Data` received over the wire and archives it in a database.
 * `Cloud Gateway` - it simplifies creation of a bridge to the cloud that enables data to stream from industrial equipment to a cloud messaging endpoint such as [Azure IoT](https://docs.microsoft.com/en-us/azure/iot-fundamentals/).
-* `HMI` - reactive visualization of the `SemanticData`- [OPC UA Makes Smart User Interface Possible][wordpress.HMI]
+* `HMI` - reactive visualization of the `Semantic-Data`- [OPC UA Makes Smart User Interface Possible][wordpress.HMI]
 * `SCADA` - supervisory control and data acquisition is a control system architecture that uses computers, networked data communications and graphical user interfaces for high-level process supervisory management.
 * `Fieldbus  gateway` - a gateway to family of industrial computer network protocols.
-* `UA Server Integration` - a gateway to data exposed by the `Address Space Management` - a typical part of any *OPC UA Server*. 
+* `UA Server Integration` - a gateway to data exposed by the `Address Space Management` - a typical part of any *OPC UA Server*.
 
 The `Data Archival` can also be used to transfer data from the OPC UA environment to any Database Management System for further processing by Enterprise Management BI systems.
 
@@ -89,11 +89,11 @@ The `JSON Gateway` and `XML Gateway` supports strong typed objects serialization
 
 By design in all the cases above the destination representation, i.e. message content, object types and database schema can be prepared in advance at design time using the OPC UA Information Model.
 
-## SemanticData
+## Semantic-Data
 
 ### Concept
 
-The OPC `SemanticData` represents the following triple:
+The OPC `Semantic-Data` represents the following triple:
 
 * *Uniform Resource Identifier* (URI).
 * Type as an entity of the *OPC UA Information Model*.
@@ -103,9 +103,9 @@ Using the URI as a standard for global identifiers allows for a worldwide refere
 
 Any data instance (value) is always just a stream of bits. To understand the binary data we must have defined a data type a description how to understand a bits pattern. Simplifying, the data type determines a set of valid values and rules needed to assign information (understand the data) to a selected bits pattern. The OPC UA specification provides an additional possibility of defining the meaning of the data, i.e. exposing the data in the context of metadata. In this case the data is made available as the *Value* attribute of the *Variable* node and is surrounded by other nodes creating a part of relationship. A well defined set of interconnected nodes can be recognized as complex data ([to learn more visit: OPC UA Makes Complex Data Processing Possible](https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/)). Complex in this context means that the type must additionally define a relationship between the components of the binary data, i.e. how to selectively get a component of the complex data. To associate the type and the data, the URI must be defined unambiguously in the context of the selected *OPC UA Information Model* that provides type definitions.
 
-To promote data processing against type definitions we shall assume that types are stable and therefore may not be preserved in the data instance, provided that precise nodes selection rules are defined and observed. To meet this requirement, any `SemanticData` represents a set of nodes organized as a tree structure defined recursively as a collection of nodes (starting at a root node), where each node called parent is the root of a subtree, i.e. all nodes that have "part of" relationship called children. The collection of children may be empty and in this case the node is called a leaf. In this definition “part of” means that the parent has a `HasProperty` or `HasComponent` reference to its children. This type of references prevents loops.
+To promote data processing against type definitions we shall assume that types are stable and therefore may not be preserved in the data instance, provided that precise nodes selection rules are defined and observed. To meet this requirement, any `Semantic-Data` represents a set of nodes organized as a tree structure defined recursively as a collection of nodes (starting at a root node), where each node called parent is the root of a subtree, i.e. all nodes that have "part of" relationship called children. The collection of children may be empty and in this case the node is called a leaf. In this definition “part of” means that the parent has a `HasProperty` or `HasComponent` reference to its children. This type of references prevents loops.
 
-For any *OPC Information Model* the selection rule proposed above unambiguously yields a set of nodes that can make up the `SemanticData** instance. The URI of this instance is the following couple:
+For any *OPC Information Model* the selection rule proposed above unambiguously yields a set of nodes that can make up the `Semantic-Data** instance. The URI of this instance is the following couple:
 
 * Selected URI for a root element that qualifies the symbolic name part.
 * Symbolic name of a root element.
@@ -116,15 +116,15 @@ The symbolic name of each node is its `BrowseName`, or, when it is a part of ano
 
 For example, the `ServerType` defined in the specification has the symbolic name `ServerType`. One of its instance declarations would be identified as ‘ServerType_ServerCapabilities’. Since this Object is complex, another instance declaration of the `ServerType` is `ServerType_ServerCapabilities_MinSupportedSampleRate`. The `Server` `Object` node is based on the `ServerType` and has the symbolic name `Server`. Therefore, the instance based on the instance declaration described above has the symbolic name `Server_ServerCapabilities_MinSupportedSampleRate`.
 
-The unique identifier and both methods of data meaning definition make up a concept of the `SemanticData**. Again, this concept can be implemented using the *OPC UA Information Model* to define types and *OPC UA Address Space Model* to expose the data in the context of metadata. 
+The unique identifier and both methods of data meaning definition make up a concept of the `Semantic-Data**. Again, this concept can be implemented using the *OPC UA Information Model* to define types and *OPC UA Address Space Model* to expose the data in the context of metadata.
 
-> Note: The `SemanticData` may be implemented using any other consistent type system. 
+> Note: The `Semantic-Data` may be implemented using any other consistent type system.
 
-The `SemanticData` may be used to implement the *Data Security* and *Discoverable Data* concepts described below.
+The `Semantic-Data` may be used to implement the *Data Security* and *Discoverable Data* concepts described below.
 
 ### Encoding
 
-As it was defined above any `SemanticData` represents a well defined set of nodes organized as a tree structure. Type is responsible to define a meaning for this tree, e.g. from *BoilerType* we can learn how for this kind of objects their state is described - what values must be present in the data instance. This meaning is provided by the semantics rules of the type. To define valid bits pattern encoding must be defined by the type as well. Encoding rules depends on where the data is to be processed and it could change during the data life-cycle. Definition of the encoding is, therefore, outside of scope of `SemanticData` definition and to promote interoperability must be defined be an international standard. For this purpose [OPC Unified Architecture][wordpress.opc-ua] has been selected.
+As it was defined above any `Semantic-Data` represents a well defined set of nodes organized as a tree structure. Type is responsible to define a meaning for this tree, e.g. from *BoilerType* we can learn how for this kind of objects their state is described - what values must be present in the data instance. This meaning is provided by the semantics rules of the type. To define valid bits pattern encoding must be defined by the type as well. Encoding rules depends on where the data is to be processed and it could change during the data life-cycle. Definition of the encoding is, therefore, outside of scope of `SemanticData` definition and to promote interoperability must be defined be an international standard. For this purpose [OPC Unified Architecture][wordpress.opc-ua] has been selected.
 
 Value of the data can change in time. It is worth noting that, in the presented concept, if two instances of the data have the same URI it does not mean that both have the same value, i.e. the same bits pattern. For example, if we are measuring the temperature in an output pipe of a selected boiler at 1 second intervals, we are getting a new value (creating new data instance) every second. The URI cannot be used to distinguish data instances, but still it could be used to apply a common key and sign each value and, finally, send it over the wire to a destination application. The destination application can use a recognizable key (indexed by the URI) retrieved from a dictionary and check the data against a not-repudiation security scenario.
 
@@ -132,26 +132,26 @@ Value of the data can change in time. It is worth noting that, in the presented 
 
 For this scenario we can apply the following work-flow:
 
-1. The server instantiates the OPC UA Information Model for the crude oil refinery process and starts listening for UDP messages containing the `SemanticData` instances.
-2. The `Flow meter #A-4321` device supporting Modbus RTU is equipped with a Modbus => `SemanticData` gateway (lightweight plug converter - actually converting Modbus responses into the UDP/IP frame according to the [Pub/Sub specification](../Networking/SemanticData/README.PubSubMTF.md) - price is relevant!)
+1. The server instantiates the OPC UA Information Model for the crude oil refinery process and starts listening for UDP messages containing the `Semantic-Data` instances.
+2. The `Flow meter #A-4321` device supporting Modbus RTU is equipped with a Modbus => `Semantic-Data` gateway (lightweight plug converter - actually converting Modbus responses into the UDP/IP frame according to the [Pub/Sub specification](../Networking/SemanticData/README.PubSubMTF.md) - price is relevant!)
 3. Using the *OPC UA Information Model* of the process the meter creates partial data instance containing value of the *InputFlow* *Variable*` defined somewhere in the model
 4. Using local private key of the device the payload is signed and sent to the server.
 5. Embedded UDP receiver of the `Address Space Management` on the server side reads the message from the network and, using the URI of the `Flow meter #A-4321`, browses a global directory to find the sender certificate and get the public key to implement payload integrity check.
 6. Finally, *OPC UA Server* exposes the data (updates *Value* attributes of the relevant *Variable* nodes) related to a virtual meter for `Flow meter #A-4321` in his `Address Space Management` component (i.e. in the *UA Address Space* instantiated according to the Information Model used to configure the device)
 7. *OPC UA Clients* connected to this server are updated over the sessions using the standard subscription mechanism
-8. In case the `Flow meter #A-4321` device is replaced for some reasons the new one also has to update relevant properties and *OPC UA Clients* can adopt the behavior using new values (e.g. engineering units) and expose also the device identification data, e.g serial number, model, etc. The device must be equipped with a gateway supporting its field level protocol or directly supporting the `SemanticData` implementation.
+8. In case the `Flow meter #A-4321` device is replaced for some reasons the new one also has to update relevant properties and *OPC UA Clients* can adopt the behavior using new values (e.g. engineering units) and expose also the device identification data, e.g serial number, model, etc. The device must be equipped with a gateway supporting its field level protocol or directly supporting the `Semantic-Data` implementation.
 
 ### Data Security
 
-Some scenarios where the OPC `SemanticData` is used requires that the data is protected against:
+Some scenarios where the OPC `Semantic-Data` is used requires that the data is protected against:
 
 * Unauthorized Access.
 * Non-repudiation.
 * Integrity.
 
-Because any `SemanticData` instance is a uniquely named standalone object, the security can be provided in the context of the data but not in the context of the server the data is exposed by.
+Because any `Semantic-Data` instance is a uniquely named standalone object, the security can be provided in the context of the data but not in the context of the server the data is exposed by.
 
-Each node in the `Semantic Data` is a root of a tree structure created by nodes recursively pointed out by *HierarchicalReferences* in forward direction. Because each node in this hierarchy is globally recognizable it may be protected as a resource by any independent protection system (for example any Kerberos protocol implementation) supporting authentication and authorization operation and responsible for the distribution of security tokens used to protect the data as above. A hierarchical relationship supports permissions inheritance, i.e. permissions propagation to the children nodes.
+Each node in the `Semantic-Data` is a root of a tree structure created by nodes recursively pointed out by *HierarchicalReferences* in forward direction. Because each node in this hierarchy is globally recognizable it may be protected as a resource by any independent protection system (for example any Kerberos protocol implementation) supporting authentication and authorization operation and responsible for the distribution of security tokens used to protect the data as above. A hierarchical relationship supports permissions inheritance, i.e. permissions propagation to the children nodes.
 
 **Challenge 2**: A server wants to send information out to a large number of thin `HMI` devices in a local network – the creation of simultaneous OPC UA sessions is impractical or impossible for some reasons.
 
@@ -177,9 +177,9 @@ For this scenario we can apply the following work-flow:
 
 ### Discoverable Data
 
-In distributed systems the `OOI Reactive Application` and `UA Client` (see the diagram above) are interested in getting access to or update the data and they may not care about which particular server provides the data. In this case the data must be discoverable over the network. The `SemanticData` can be used to meet this requirement. In this approach, the data URI can be used as a key to browse the *Global Data Discovery System* (GDDS – an expanded version of GDS) to find recursively the destination *OPC UA Server* exposing the requested data. In this scenario we can use a well-known two-step process:
+In distributed systems the `OOI Reactive Application` and `UA Client` (see the diagram above) are interested in getting access to or update the data and they may not care about which particular server provides the data. In this case the data must be discoverable over the network. The `Semantic-Data` can be used to meet this requirement. In this approach, the data URI can be used as a key to browse the *Global Data Discovery System* (GDDS – an expanded version of GDS) to find recursively the destination *OPC UA Server* exposing the requested data. In this scenario we can use a well-known two-step process:
 
-1. discover the server using the resource (`SemanticData`) unique domain based identifier - URI;
+1. discover the server using the resource (`Semantic-Data`) unique domain based identifier - URI;
 2. browse or update the data.
 
 **Challenge 4**: A `HMI` prepared in advance to display the state of boilers formally described by the *BoilerType* shall display the *Boiler #1* state but the server exposing the data is unknown and may change occasionally (e.g. non transparent redundancy).
@@ -193,7 +193,7 @@ For this scenario we can apply the following work-flow:
 
 The data discovery mechanism is a part of the broader concept captured in the document [Global Data Discovery](../DataDiscovery/README.MD).
 
-## SemanticData Deployment
+## Semantic-Data Deployment
 
 Meaningful processing of the *OPC UA Data* by variety of applications is an important part of a broader concept described in the document [Object Oriented Internet](../README.md).
 
@@ -201,14 +201,13 @@ Meaningful processing of the *OPC UA Data* by variety of applications is an impo
 A detailed description of this solution is captured in the document [Content Description](./Readme.SemanticDataDeplyment.MD). The solution contains projects supporting deployment of the concept presented in this document.
 -->
 
-The code illustrating networking of the `SemanticData` paradigm implementation can be found in the project [Reactive Networking of SemanticData Library](../Networking/SemanticData/README.MD#networking-of-semanticdata-library).
+The code illustrating networking of the `Semantic-Data` paradigm implementation can be found in the project [Reactive Networking of SemanticData Library](../Networking/SemanticData/README.MD#networking-of-semanticdata-library).
 
-Description of the `OOI Reactive Application` architecture is captured in the section [UA SemanticData Message Centric Communication](README.MessageCentricCommunication.md).
+Description of the `OOI Reactive Application` architecture is captured in the section [Semantic-Data Message Centric Communication](../Networking/README.MessageCentricCommunication.md).
 
 ### Architecture
 
 ![Architecture](../CommonResources/Media/SemanticData/UAOOI.SemanticData.Architecture.png)
-
 
 [wordpress.HMI]:https://mpostol.wordpress.com/2013/08/11/opc-ua-makes-smart-user-interface-possible/
 [wordpress.opc-ua]: https://mpostol.wordpress.com/opc-ua/

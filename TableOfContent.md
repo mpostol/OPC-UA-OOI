@@ -2,7 +2,7 @@
 
 ## Summary
 
-* [Introduction](README.MD)
+* [OOI Introduction](README.MD)
 
 ## Semantic-Data Processing
 
@@ -36,10 +36,10 @@
 * [Reactive Networking Configuration](Configuration/Networking/README.MD)
 * [DataBinding library](Configuration/DataBindings/README.MD)
 
-## Data Discovery
+## Global Data Discovery
 
-* [Global Data Discovery](DataDiscovery/README.MD)
-* [Domain Model of the Global Data Discovery](DataDiscovery/DomainModel.md)
+* [Concept](DataDiscovery/README.MD)
+* [Domain Model](DataDiscovery/DomainModel.md)
 
 ## References
 

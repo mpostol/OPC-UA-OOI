@@ -109,11 +109,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking.Core", "Networki
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solution Items", "{606ADC64-90A1-4355-BEAB-6B04717F598C}"
 	ProjectSection(SolutionItems) = preProject
-		.github\ISSUE_TEMPLATE\bug_report.md = .github\ISSUE_TEMPLATE\bug_report.md
 		CONTRIBUTING.md = CONTRIBUTING.md
 		COVERPAGE.md = COVERPAGE.md
-		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
-		.github\ISSUE_TEMPLATE\PrepareReleaseTask.md = .github\ISSUE_TEMPLATE\PrepareReleaseTask.md
 		README.MD = README.MD
 		REFERENCES.md = REFERENCES.md
 		SUMMARY.md = SUMMARY.md
@@ -125,6 +122,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticData.UAModelDesignExport.UnitTest", "SemanticData\UAModelDesignExport.UnitTest\SemanticData.UAModelDesignExport.UnitTest.csproj", "{ABB9D4E2-568C-483E-8A77-2DE5F4FF886A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticData.BuildingErrorsHandling", "SemanticData\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj", "{9CA2F05B-FB18-49AD-8520-1BCC838F748C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{5C2EB20B-990C-4444-8C5F-F1D9641DE28D}"
+	ProjectSection(SolutionItems) = preProject
+		.github\ISSUE_TEMPLATE\bug_report.md = .github\ISSUE_TEMPLATE\bug_report.md
+		.github\ISSUE_TEMPLATE\custom.md = .github\ISSUE_TEMPLATE\custom.md
+		.github\ISSUE_TEMPLATE\feature_request.md = .github\ISSUE_TEMPLATE\feature_request.md
+		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
+		.github\ISSUE_TEMPLATE\PrepareReleaseTask.md = .github\ISSUE_TEMPLATE\PrepareReleaseTask.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -324,6 +330,7 @@ Global
 		{C970C14C-98AA-48A9-9F6F-D00C92FA6CEF} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
 		{ABB9D4E2-568C-483E-8A77-2DE5F4FF886A} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
 		{9CA2F05B-FB18-49AD-8520-1BCC838F748C} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
+		{5C2EB20B-990C-4444-8C5F-F1D9641DE28D} = {606ADC64-90A1-4355-BEAB-6B04717F598C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9388D93E-9AA9-40EE-A0C6-F096265079B2}

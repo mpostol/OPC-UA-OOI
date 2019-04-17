@@ -156,8 +156,6 @@ The following documents, in whole or in part, are normatively referenced in this
 
 [AMQP]:http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html
 
-
-
 - [OOI.Networking.UDPMessageHandler][OOI.Networking.UDPMessageHandler]
 
 [OOI.Networking.UDPMessageHandler]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/UDPMessageHandler

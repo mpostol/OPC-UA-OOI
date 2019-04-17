@@ -1,6 +1,6 @@
 # Global Data Discovery
 
-# Concept
+## Concept
 
 In this approach, the URI of the OPC UA **Information Model** is to be used as a unique key to browse the _Global Data Discovery System_ \(GDDS – an expanded version of GDS\) to find recursively the destination _OPC UA Server_ or _UA Data Application_ exposing the requested data.
 
@@ -25,7 +25,7 @@ The startup process of an `OOI Reactive Application` is illustrated in the activ
 
 The proposed concept is scalable and could be used in local and global scope depending on the available resources. A domain model describing a scenario where this approach is applicable is covered in the document [Domain Model of the Global Data Discovery](./DomainModel.md).
 
-# Data semantics
+## Data semantics
 
 In the discovery process the semantics of the data is layered as follows:
 
@@ -42,9 +42,9 @@ Semantics of the data is expressed using types. Process data is available as the
 > * the data types - to get meaning and design data management and processing
 > * the data values - to get current process state and control it
 
-# URI resolver
+## URI resolver
 
-```
+```txt
         foo://example.com:8042/over/there?name=ferret#nose
          \_/  \______________/ \________/ \_________/ \__/
           |           |            |            |       |
@@ -60,7 +60,7 @@ The main challenge is where the recursive resolution process shall start. It see
    ]([https://tools.ietf.org/html/rfc1034](https://tools.ietf.org/html/rfc1034)) \)  in the information model URI zone – on promise services.  
 3. A selected root HTTP services, e.g. in the opcfoundation.com domain.
 
-# Solution
+## Solution
 
 The discovery procedure is based on the following records:
 
@@ -69,10 +69,7 @@ The discovery procedure is based on the following records:
 
 The recovery and resolving procedure is based on the Restful \(Representational State Transfer\) Web API style with the goal that the system can evolve over a long period of time and can tolerate many different clients and many different changes without breaking those clients.
 
-# Content
+## Content
 
 * `DataDiscovery` - Library supporting global data discovery services.
 * `Tests` - test projects.
-
-
-

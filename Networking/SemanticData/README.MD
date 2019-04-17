@@ -28,7 +28,7 @@ To promote flexibility and the separation of concern design approach, the concre
 
 - `Configuration`: represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data. This class must implement the [`IConfigurationFactory`](http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/T-UAOOI.Configuration.Networking.IConfigurationFactory.htm) interface. Each `Publisher` and `Consumer` must provide its own configuration.
 
-- `DataRepository`:  represents local resources in the application, for example PLC registers, HMI variables binded to screen controls, internal register of smart meters, etc. Depending on the role the library supports:
+- `DataRepository`:  represents local resources in the application, for example PLC registers, HMI variables bound to screen controls, internal register of smart meters, etc. Depending on the role the library supports:
 
   - `Consumer` - recovering data from message and writing to local resource.
   - `Producer` - reading data from the Local resource, populating a new message with this value and sending the message over the wire.
@@ -55,7 +55,7 @@ Description of the domain model of the data management and binding is covered in
 ### Bindings and encodings implementation
 
 Binding between the local repository `DataRepository` (e.g. HMI Screen, OPC UA Server Address Space) and the message content items is provided by the `IBinding` interface and its basic implementation `Binding` class. This class is responsible to decode the data from the format used to construct the message to the local type. The decoders are factored by the external class `Encoding`. See definition for details: `IBinding`.
-It is expected that the value conversion (decoding) is provided by an instance of the IValueConverter class. If it is not applicable the [Adapter patern](http://www.dofactory.com/net/adapter-design-pattern) must be used.
+It is expected that the value conversion (decoding) is provided by an instance of the IValueConverter class. If it is not applicable the [Adapter pattern](http://www.dofactory.com/net/adapter-design-pattern) must be used.
 
 ### Message Transport
 
@@ -78,12 +78,12 @@ The library provides basic implementation of the `Message` class that supports p
 
 ## Testing
 
-See how it works in the unit test class: [SemanticDatalUnitTest][OPC-UA-OOI.Networking.Tests.SemanticDatalUnitTest].
+See how it works in the unit test class: [Networking.SemanticData.UnitTest][Networking.SemanticData.UnitTest]].
 
-The [UA Data Example Application](../../Networking/ReferenceApplication/README.MD#ua-data-example-application) contains a reference WPF application.
+The [UA Data Example Application](../../Networking/ReferenceApplication/README.MD) contains a reference WPF application.
 
 ## Current release
 
 The NuGet package is available at: [UAOOI.Networking.SemanticData](https://www.nuget.org/packages/UAOOI.Networking.SemanticData/)
 
-[OPC-UA-OOI.Networking.Tests.SemanticDatalUnitTest]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/Tests/SemanticDatalUnitTest
+[Networking.SemanticData.UnitTest]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/Tests/SemanticDatalUnitTest

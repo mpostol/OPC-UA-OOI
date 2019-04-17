@@ -62,9 +62,9 @@ Optionally the `OPC UA Client` may also support importing and exporting services
 
 ### OOI Reactive Application
 
-`OOI Reactive Application` is an application transferring the `Semantic-Data` over the network using message centric transport of the strong typed data standardized by the OPC UA Specification [Part 14 Pub/Sub](../Networking/SemanticData/README.PubSubMTF.md). The description of its architecture is captured in [UA SemanticData Message Centric Communication](../Networking/README.MessageCentricCommunication.md#ua-semanticdata-message-centric-communication).
+`OOI Reactive Application` is an application transferring the `Semantic-Data` over the network using message centric transport of the strong typed data standardized by the OPC UA Specification [Part 14 Pub/Sub](../Networking/SemanticData/README.PubSubMTF.md). The description of its architecture is captured in [UA SemanticData Message Centric Communication](../Networking/README.MessageCentricCommunication.md).
 
-This concept has been implemented in the project [Reactive Networking of Semantic-Data Library](../Networking/SemanticData/README.MD#networking-of-semanticdata-library). This project provides an SDK library that can be used as a foundation of the communication infrastructure deployment. The [Walk-through `ReferenceApplication`](../Networking/ReferenceApplication/README.MD#ua-data-example-application) contains the description of a reference WPF application.
+This concept has been implemented in the project [Reactive Networking of Semantic-Data Library](../Networking/SemanticData/README.MD). This project provides an SDK library that can be used as a foundation of the communication infrastructure deployment. The [Walk-through `ReferenceApplication`](../Networking/ReferenceApplication/README.MD) contains the description of a reference WPF application.
 
 The diagram below shows how the `OOI Reactive Application` may be expanded to implement integration services in context of selected Industrial IT technologies.
 
@@ -201,7 +201,7 @@ Meaningful processing of the *OPC UA Data* by variety of applications is an impo
 A detailed description of this solution is captured in the document [Content Description](./Readme.SemanticDataDeplyment.MD). The solution contains projects supporting deployment of the concept presented in this document.
 -->
 
-The code illustrating networking of the `Semantic-Data` paradigm implementation can be found in the project [Reactive Networking of SemanticData Library](../Networking/SemanticData/README.MD#networking-of-semanticdata-library).
+The code illustrating networking of the `Semantic-Data` paradigm implementation can be found in the project [Reactive Networking of SemanticData Library](../Networking/SemanticData/README.MD).
 
 Description of the `OOI Reactive Application` architecture is captured in the section [Semantic-Data Message Centric Communication](../Networking/README.MessageCentricCommunication.md).
 

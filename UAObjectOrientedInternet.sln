@@ -44,6 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{19A61D68
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SemanticData", "SemanticData", "{AF01F501-9B19-4357-B8A7-4EFC782BF1AF}"
 	ProjectSection(SolutionItems) = preProject
+		SemanticData\InformationProcessing.md = SemanticData\InformationProcessing.md
 		SemanticData\README.MD = SemanticData\README.MD
 	EndProjectSection
 EndProject
@@ -111,6 +112,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solutio
 	ProjectSection(SolutionItems) = preProject
 		CONTRIBUTING.md = CONTRIBUTING.md
 		COVERPAGE.md = COVERPAGE.md
+		OPCUAMainTechnologyFeatures.md = OPCUAMainTechnologyFeatures.md
+		OPCUnifiedArchitecture.md = OPCUnifiedArchitecture.md
+		Preface.md = Preface.md
 		README.MD = README.MD
 		REFERENCES.md = REFERENCES.md
 		SUMMARY.md = SUMMARY.md

@@ -5,7 +5,9 @@
 
 ## Summary
 
-* [OOI Introduction](README.MD)
+* [OOI Introduction](Preface.md)
+* [OPC Unified Architecture](OPCUnifiedArchitecture.md)
+* [OPC UA Main Technology Features](OPCUAMainTechnologyFeatures.md)
 
 ## Semantic-Data Processing
 

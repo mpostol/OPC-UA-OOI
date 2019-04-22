@@ -8,8 +8,8 @@ The standard types derived from the `BaseObjectType` are listed in Table 1.
 
 Table 1 Standard Object Types
 
-Name  Description
--|-
+Name | Description
+:-|-
 `ServerType` |Instances of this type provide information about the server to the clients.
 `ServerCapabilitiesType`| Instances of this type define the capabilities supported by the OPC UA server.
 `ServerDiagnosticsType`| Instances of this type define diagnostic information about the OPC UA server.
@@ -76,7 +76,7 @@ The `BaseDataType` is the root of the inheritance tree. The simplified inheritan
 Table 2 Built-in Data Types
 
 |Name  |Description |
-|-|-|
+:-|-
 Boolean | A two-state logical value (true or false).
 Byte | An integer value between 0 and 256.
 ByteString | A sequence of octets.
@@ -206,3 +206,11 @@ The simplified state machine model described above can be freely expanded to pro
 State machines are represented in the Address Space as an object of a type derived from the `StateMachineType` that defines a single variable of the `StateVariableType`, which represents the current state of the machine. An instance of the `StateMachineType` shall generate an event whenever a state change occurs. Transitions are represented as objects of the `TransitionType`. Each valid transition shall have exactly one `FromState` reference and exactly one `ToState` reference, each pointing to an object of the `StateType`.
 
 Using the above terminology we can represent any state machine from Figure 10 as a diagram shown in Figure 11. For this diagram it is assumed that `MyStateMachineType` is derived directly or indirectly from the `StateMachineType`. All states, transitions and methods are components of this type.
+
+## See also
+
+- [OPC Unified Architecture Specification Part 5: Information Model, OPC Foundation, Rel. 1.04, 2017-11-22][OPC.UA.Part5]
+- [UA Information Model - Concept]
+
+[UA Information Model - Concept]:InformationModelConcept.md
+[OPC.UA.Part5]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-5-information-model/

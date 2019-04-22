@@ -164,6 +164,6 @@ The presented approach is a real proposal for a new technology wave based on the
 - [About me on LinkedIn](https://pl.linkedin.com/in/mpostol)
 - [OPC Foundation](https://opcfoundation.org/)
 - [Sponsored by commsvr.com](http://www.commsvr.com/)
-- [References](References.md) - this section contains links to selected internal and external resources.
+- [References](REFERENCES.md) - this section contains links to selected internal and external resources.
 
 [![HitCount](http://hits.dwyl.io/mpostol/mpostol/OPC-UA-OOI.svg)](http://hits.dwyl.io/mpostol/mpostol/OPC-UA-OOI)

@@ -52,9 +52,11 @@
 
 [CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
 
-## ietf.org
+- [OPC Unified Architecture e-book, 2010][CAS.EBOOK]
 
-<!--ietf.org-->
+[CAS.EBOOK]:http://www.commsvr.com/UAModelDesigner/
+
+## ietf.org
 
 - [RFC 768: User Datagram ProtocolJ, August 1980][RFC.UDP]
 
@@ -78,19 +80,39 @@
 
 ## OPCFoundation
 
-<!--opcfoundation-->
+- [OPC Unified Architecture Specification Part 4 – Services, OPC Foundation, Rel. 1.04, 2017-11-22][Opc.UA.Part4]
 
-- [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
+[Opc.UA.Part4]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-4-services/
 
-[OPC.UA.PubSub]: https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
+- [OPC Unified Architecture Specification Part 5: Information Model, OPC Foundation, Rel. 1.04, 2017-11-22][OPC.UA.Part5]
+
+[OPC.UA.Part5]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-5-information-model/
+
+- [OPC Unified Architecture Specification Part 6: Mappings, OPC Foundation, Rel. 1.04, 2017-11-22][OPC.UA.Part6]
+
+[Opc.UA.Part6]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-6-mappings/
 
 - [OPC Unified Architecture Specification  Part 7: Profiles Release 1.04][OPC.UA.Profiles]
 
 [OPC.UA.Profiles]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-7-profiles/
 
-## OASIS
+- [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
 
-<!--oasis-open-->
+[OPC.UA.PubSub]: https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
+
+- [OPC Unified Architecture Specification Part 100: Device Information Model, OPC Foundation, 1.02, 2019-04-19][OPC.UA.DI]
+
+[OPC.UA.DI]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-100-device-information-model/
+
+- [OPC Unified Architecture for Analyzer, OPC Foundation, Rel. 1.1a, 2015-01-09][OPC.UA.ADI]
+
+[OPC.UA.ADI]:https://opcfoundation.org/developer-tools/specifications-opc-ua-information-models/opc-unified-architecture-for-analyzer-devices-adi/
+
+- [OPCFoundation/UA-ModelCompiler][OPC.UA.ModelCompiler]
+
+[OPC.UA.ModelCompiler]:https://github.com/OPCFoundation/UA-ModelCompiler
+
+## OASIS
 
 - [OASIS MQTT Version 3.1.1 specification][MQTT]
   
@@ -100,7 +122,7 @@
 
 [AMQP]:http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-overview-v1.0-os.html
 
-<!--iso-->
+## ISO
 
 - [ISO/IEC 19464:2014: Advanced Message Queuing Protocol (AMQP) v1.0][ISO.AMQP]
 

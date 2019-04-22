@@ -1,4 +1,4 @@
-# Address Space Prototyping Tool (ase.exe)
+# Address Space Prototyping Tool (asp.exe)
 
 ## Getting Started
 

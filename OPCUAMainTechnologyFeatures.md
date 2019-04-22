@@ -4,6 +4,18 @@
 
 One of the main goals of the [OPC Unified Architecture](OPCUnifiedArchitecture.md) is to provide a consistent mechanism for the integration of process control and management systems. It is assumed that it should be robust and the implementation should be platform independent. In this section, I will examine technologies and paradigms used as a foundation for the development of the OPC UA standard and discuss their impact on the final result.
 
+## Object Oriented Information Model
+
+To make systems interoperable, the data transfer mechanism must be associated with a consistent information representation model. OPC UA uses an object as a fundamental notion to represent data and activity of an underlying system. The objects are placeholders of variables, events, and methods and are interconnected by references. This concept is similar to well-known object-oriented programming (OOP) that is a programming paradigm using "objects" – data structures consisting of fields, events and methods – and their interactions to design applications and computer programs. The OPC UA Information Model provides features such as data abstraction, encapsulation, polymorphism, and inheritance.
+
+The OPC UA object model allows servers to provide type definitions for objects and their components. Type definition may be abstract and may be inherited by new type to reflect polymorphism. They may also be common or they may be system-specific. Object types may be defined by standardization organizations, vendors or end-users.
+
+The Information Model is a very powerful concept, but it is abstract and hence, in a real environment, it must be implemented in terms of bit streams (to make information transferable) and addresses (to make information selectively available). To meet this requirement, OPC UA introduces a Node notion as an atomic addressable entity that consists of attributes (value-holders) and references (address-holders of coupled nodes). The set of Nodes that an OPC UA Server makes available to clients is referred to as its Address Space, which enables the representation of both real process environment and real-time process behavior. The Address Space is described in depth in the [OPC UA eBook][CAS.EBOOK].
+
+Each of the previous OPC Classic specifications defined their own address space model and their own set of services. OPC UA unifies the previous models into a single integrated Address Space with a single set of services.
+
+A detailed description of this topic is covered by the section [*Semantic-Data Processing Architecture*][SDPA]. This section is an executive summary targeting the new concept called `Semantic-data` derived from the OPC Unified Architecture address space model.
+
 ## Service Oriented Architecture
 
 At the very beginning of new solution development, we must address a question about its fundamental paradigms and architecture. OPC Classic is based on the functionality provided by an operating system and is actually an instruction on how to use the functionality to interconnect participants of the data exchange. This was recognized as one of the drawbacks making the lifetime of the OPC Classic standard dependent on the lifetime of the technology it is based on.
@@ -16,23 +28,13 @@ Today, an ideal platform for the SOA concept implementation is Web Service techn
 
 The WS-\* standards are the basic foundation for OPC UA but, using them alone, would not be enough to reach the expected data throughput performance in industrial applications. The OPC UA suite of protocols, therefore, expands the WS-\* standards by defining a few proprietary ones that can be used alternatively. OPC UA messages may be encoded as an XML text or in binary format for efficiency purposes. They may be transferred using multiple underlying kinds of transport, for example, TCP or SOAP over HTTP. Clients and servers that support multiple kinds of transport and encodings will allow end users to make decisions about tradeoffs between performance and XML Web Services compatibility at the time of deployment, rather than having these tradeoffs determined by the OPC vendor at the time of product selection.
 
-## Object Oriented Information Model
-
-To make systems interoperable, the data transfer mechanism must be associated with a consistent information representation model. OPC UA uses an object as a fundamental notion to represent data and activity of an underlying system. The objects are placeholders of variables, events, and methods and are interconnected by references. This concept is similar to well-known object-oriented programming (OOP) that is a programming paradigm using "objects" – data structures consisting of fields, events and methods – and their interactions to design applications and computer programs. The OPC UA Information Model provides features such as data abstraction, encapsulation, polymorphism, and inheritance.
-
-The OPC UA object model allows servers to provide type definitions for objects and their components. Type definition may be abstract and may be inherited by new type to reflect polymorphism. They may also be common or they may be system-specific. Object types may be defined by standardization organizations, vendors or end-users.
-
-The Information Model is a very powerful concept, but it is abstract and hence, in a real environment, it must be implemented in terms of bit streams (to make information transferable) and addresses (to make information selectively available). To meet this requirement, OPC UA introduces a Node notion as an atomic addressable entity that consists of attributes (value-holders) and references (address-holders of coupled nodes). The set of Nodes that an OPC UA Server makes available to clients is referred to as its Address Space, which enables the representation of both real process environment and real-time process behavior. The Address Space is described in depth in the [OPC UA eBook](http://www.commsvr.com/UAModelDesigner/Index.aspx).
-
-Each of the previous OPC Classic specifications defined their own address space model and their own set of services. OPC UA unifies the previous models into a single integrated Address Space with a single set of services.
-
 ## Abstraction and Mapping
 
 To make systems interoperable, the data transfer mechanism must be associated with a consistent information representation model. OPC UA uses an object as a fundamental notion to represent data and activity of an underlying system. The objects are placeholders of variables, events, and methods and are interconnected by references. This concept is similar to well-known object-oriented programming (OOP) that is a programming paradigm using "objects" – data structures consisting of fields, events and methods – and their interactions to design applications and computer programs. The OPC UA Information Model provides features such as data abstraction, encapsulation, polymorphism, and inheritance.
 
 The OPC UA object model allows servers to provide type definitions for objects and their components. Type definition may be abstract and may be inherited by new type to reflect polymorphism. They may also be common or they may be system-specific. Object types may be defined by standardization organizations, vendors or end-users.
 
-The Information Model is a very powerful concept, but it is abstract and hence, in a real environment, it must be implemented in terms of bit streams (to make information transferable) and addresses (to make information selectively available). To meet this requirement, OPC UA introduces a Node notion as an atomic addressable entity that consists of attributes (value-holders) and references (address-holders of coupled nodes). The set of Nodes that an OPC UA Server makes available to clients is referred to as its Address Space, which enables the representation of both real process environment and real-time process behavior. The Address Space is described in depth in the [OPC UA eBook](http://www.commsvr.com/UAModelDesigner/Index.aspx).
+The Information Model is a very powerful concept, but it is abstract and hence, in a real environment, it must be implemented in terms of bit streams (to make information transferable) and addresses (to make information selectively available). To meet this requirement, OPC UA introduces a Node notion as an atomic addressable entity that consists of attributes (value-holders) and references (address-holders of coupled nodes). The set of Nodes that an OPC UA Server makes available to clients is referred to as its Address Space, which enables the representation of both real process environment and real-time process behavior. The Address Space is described in depth in the [OPC UA eBook][CAS.EBOOK].
 
 Each of the previous OPC Classic specifications defined their own address space model and their own set of services. OPC UA unifies the previous models into a single integrated Address Space with a single set of services.
 
@@ -73,4 +75,12 @@ Sessions are defined as logical connections between clients and servers. What is
 
 More you can find in the eBook at:
 
-OPC UA eBook
+- [1] [OPC UA Address Space Model Designer, 2019][CAS.ASMD]
+- [2] [OPC Unified Architecture e-book, 2010][CAS.EBOOK]
+- [3] [Part 5: Information Model, OPC Foundation, Rel. 1.04, 2017-11-22][OPC.UA.Part5]
+- [Semantic-Data Processing Architecture][SDPA]
+
+[SDPA]:SemanticData/README.MD
+[OPC.UA.Part5]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-5-information-model/
+[CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
+[CAS.EBOOK]:http://www.commsvr.com/UAModelDesigner/

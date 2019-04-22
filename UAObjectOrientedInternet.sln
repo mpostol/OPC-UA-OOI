@@ -44,8 +44,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{19A61D68
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SemanticData", "SemanticData", "{AF01F501-9B19-4357-B8A7-4EFC782BF1AF}"
 	ProjectSection(SolutionItems) = preProject
+		SemanticData\ADIInformationModelAdoption.md = SemanticData\ADIInformationModelAdoption.md
+		SemanticData\ADIModelDeployment.md = SemanticData\ADIModelDeployment.md
+		SemanticData\AdoptingCompanionStandardADI.md = SemanticData\AdoptingCompanionStandardADI.md
+		SemanticData\CompanionSpecificationInformationModelFforAnalyzers.md = SemanticData\CompanionSpecificationInformationModelFforAnalyzers.md
+		SemanticData\InformationModelConcept.md = SemanticData\InformationModelConcept.md
+		SemanticData\InformationModelLifecycle.md = SemanticData\InformationModelLifecycle.md
+		SemanticData\InformationModelsDevelopment.md = SemanticData\InformationModelsDevelopment.md
 		SemanticData\InformationProcessing.md = SemanticData\InformationProcessing.md
 		SemanticData\README.MD = SemanticData\README.MD
+		SemanticData\StandardInformationModel.md = SemanticData\StandardInformationModel.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration.Networking", "Configuration\Networking\Configuration.Networking.csproj", "{E28E0880-03AA-4D1B-A820-41B04E766019}"
@@ -110,6 +118,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking.Core", "Networki
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solution Items", "{606ADC64-90A1-4355-BEAB-6B04717F598C}"
 	ProjectSection(SolutionItems) = preProject
+		AddressSpaceAddressSpaceModel.md = AddressSpaceAddressSpaceModel.md
 		CONTRIBUTING.md = CONTRIBUTING.md
 		COVERPAGE.md = COVERPAGE.md
 		OPCUAMainTechnologyFeatures.md = OPCUAMainTechnologyFeatures.md

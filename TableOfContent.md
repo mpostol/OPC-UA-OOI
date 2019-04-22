@@ -1,16 +1,26 @@
 # Table of Content
 
-## Summary
+* [Executive Summary](README.MD)
 
-* Project Page](README.MD)
+## Introduction
+
 * [OOI Introduction](Preface.md)
 * [OPC Unified Architecture](OPCUnifiedArchitecture.md)
 * [OPC UA Main Technology Features](OPCUAMainTechnologyFeatures.md)
+* [Address Space and Address Space Model](AddressSpaceAddressSpaceModel.md)
 
 ## Semantic-Data Processing
 
 * [Semantic-Data Processing Architecture](SemanticData/README.MD)
-* [Address Space Management](SemanticData/UANodeSetValidation/README.MD)
+* [UA Information Model - Concept](SemanticData/InformationModelConcept.md)
+  * [Standard Information Model](SemanticData/StandardInformationModel.md)
+* [Information Models Development](SemanticData/InformationModelsDevelopment.md)
+  * [Adopting Companion Standard Models - Analyzer Devices Integration](SemanticData/AdoptingCompanionStandardADI.md)
+  * [Companion Specification - Information Model for Analyzers](SemanticData/CompanionSpecificationInformationModelFforAnalyzers.md)
+  * [ADI Information Model Adoption](SemanticData/ADIInformationModelAdoption.md)
+  * [ADI Model Deployment](SemanticData/ADIModelDeployment.md)
+  * [Address Space Model Life-cycle](SemanticData/InformationModelLifecycle.md)
+* [`Address Space Management` Implementation](SemanticData/UANodeSetValidation/README.MD)
 * [Address Space Prototyping Tool (ase.exe)](SemanticData/AddressSpaceComplianceTestTool/README.md)
 
 ## Internet of Things (IoT) Archetype

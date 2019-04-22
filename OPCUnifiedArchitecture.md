@@ -95,7 +95,7 @@ This part specifies the information model associated with aggregates and describ
 
 ## Conclusion
 
-All of the features presented in this section are very important for assessing the specification against particular requirements vital for industrial IT application domain. For the rest of this paper they can be recognized as “must have option” to be surrounded by tools and deployment methodology to finally produce a widely accepted powerful technology. To meet the goal of this paper we will focus on the information representation rules proposed by this standard and methodology of practical deployment thereof. In this context there are two fundamental concepts introduced by the OPC UA specification:
+All of the features presented in this section are very important for assessing the specification against particular requirements vital for industrial IT application domain. For the rest of this paper they can be recognized as **must have option** to be surrounded by tools and deployment methodology to finally produce a widely accepted powerful technology. To meet the goal of this paper we will focus on the information representation rules proposed by this standard and methodology of practical deployment thereof. In this context there are two fundamental concepts introduced by the OPC UA specification:
 
 - Address Space Model – all about exposing information in a standard way
 - Information Model – all about unambiguous, computer centric definition of information

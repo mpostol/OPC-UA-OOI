@@ -4,7 +4,7 @@ In 2008 the OPC Foundation announced support for Analyzer Devices Integration in
 
 The model described in the specification [[1]][OPC.UA.ADI] is intended to provide a unified view of analyzers irrespective of the underlying device. This Information Model is also referred to as the ADI Information Model. As it was mentioned, analyzers can be further refined into various groups, but the specification defines an Information Model that can be applied to all the groups of analyzers.
 
-The ADI Information Model is located above the DI Information Model [[9]][OPC.UA.DI]. It means that the ADI model refers to definitions provided by the DI model, but the reverse is not true. To expand the ADI Information Model, the next layers shall be provided.
+The ADI Information Model is located above the DI Information Model [[2]][OPC.UA.DI]. It means that the ADI model refers to definitions provided by the DI model, but the reverse is not true. To expand the ADI Information Model, the next layers shall be provided.
 
 Analyzing in detail the whole ADI Information Model is impractical here. Hence, the discussion below will be focused only on selected types defined in this specification to illustrate the design practice of the model adoption.
 

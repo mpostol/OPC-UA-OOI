@@ -34,7 +34,7 @@ The Address Space concept based on types can be a foundation for exposing any in
 - \[6\] [Standard Information Model][SIM]
 
 [SIM]:StandardInformationModel.md
-[ASASM]:../AddressSpaceAddressSpaceModel.md
+[ASASM]:AddressSpaceAddressSpaceModel.md
 [OPC.UA.Part5]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-5-information-model/
 [ASMLC]:InformationModelLifecycle.md
 [CAS.EBOOK]:http://www.commsvr.com/UAModelDesigner/

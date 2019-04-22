@@ -42,7 +42,7 @@ The root for all `VariableType`s is `BaseVariableType` (Figure 2). This means th
 
 Both of the above-mentioned types have the same `BaseDataType`, which is abstract and defines a value that can have any valid type (Figure 3).  The double closed arrows point to the source of the `HasSubtype` reference. An interesting feature of these types is that even though they have an abstract `BaseDataType` both are concrete and therefore can be instantiated. Abstract `DataType`s do not have any encoding and cannot be exchanged on the wire; therefore the instantiated variables with an abstract `DataType` must redefine it. The `DataType` attribute can only be changed to a new one if it is a subtype of the original `DataType`.
 
-![Figure 3 BaseDataType association](../CommonResources/Media/SemanticData/StandardInformationModel.BaseDataTypeAssociation.PNG)
+![Figure 3 BaseDataType association](../CommonResources/Media/SemanticData/StandardInformationModel.BaseDataTypeAssociation.png)
 
 Dividing the variables into properties and data variables has its source in two different information categories: data and metadata. For example, data can represent a signal, say pressure, and metadata describes the data and can be engineering units in this example. Of course we are not limited to the process control domain; it can be also a file content as the data, and last modification time as the metadata. Both may change in time, but properties are recognized as more stable. Whereas talking about stability is useful only to better understand the semantics difference, this difference has a major impact on the data source access.
 
@@ -105,7 +105,7 @@ XmlElement | An XML element.
 
 To some standard data types – called built-in types - special rules apply. Built-in data types have no encoding visible in the UA Address Space since the encoding should be known to all OPC UA products. Examples of built-in data types are `Int32` and `Double`. The built-in data types with a short description are listed in the Table 2
 
-![Figure 6 Standard DataTypes inheritance hierarchy](../CommonResources/Media/SemanticData/StandardInformationModel.StandardDataTypesInheritanceHierarchy.PNG)
+![Figure 6 Standard DataTypes inheritance hierarchy](../CommonResources/Media/SemanticData/StandardInformationModel.StandardDataTypesInheritanceHierarchy.png)
 
 Most of the built-in types are similar to those known in other IT systems, except the `NodeId` type. This type needs some comments, because it is intended to be used by the random addressing mechanism to represent information allowing clients to uniquely identify and access the nodes. This built-in data type is a structure composed of:
 

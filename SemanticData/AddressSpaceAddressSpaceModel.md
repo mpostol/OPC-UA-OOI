@@ -9,7 +9,7 @@ To make the data available for further processing by computer systems it must be
 - **transferable** – there must exist mechanisms to transfer the data over the network,
 - **addressable** – there must exist services to selectively access the data,
 - **meaningful** – there must exist rules (unambiguous for all interoperating parties) how to apply the semantics to bit patterns.
- 
+
 OPC UA Address Space concept is all about exposing the data in a standard way, so it must address the above mentioned issues, but the description of mechanisms involved in the data transfer is outside this section scope.
 
 Generally speaking, to select a particular target piece of data we have two options: random access or browsing. Random access requires that the target item must have been assigned a globally unique address and the clients must know it in advance. We call them well-known addresses. The browsing approach means that the clients walk down available paths from entity to entity that build up the structure of data. This process is costly, because instead of jumping to a target, we need to discover the structure of the data step by step using relative identifiers. The main advantage of this approach is that the clients do not need any prior knowledge of the data structure – the clients of this type are called generic clients. To minimize the cost, after having found the target, every access to it can use random access. Random access is possible since the browsing path is convertible to a globally unique address.
@@ -20,7 +20,7 @@ It seems that, in spite of the access method, we have to assign an address to al
 
 The main goal of exposing a network of nodes to clients is to create a meaningful context for the underling process data. To create the Address Space, we need to instantiate nodes and interconnect them by References. Instantiating nodes requires assigning appropriate values to attributes. To make information internally consistent as a large whole, we need rules governing the creation and modification processes, i.e. Address Space Model. According to the model the roles of nodes in the network are well defined as a result of the definition of a set of `NodeClass`es. Available `NodeClass`es are predefined, i.e. the Address Space Model provides a strictly defined and non-extensible set of `NodeClass`es.  Each one is assigned a dedicated function to represent well defined information at run-time. `NodeClass` is a formal description of the node defining the allowed attributes and references. Each node must be an instance of the selected `NodeClass`.
 
-![Figure 1. Address Space Model](CommonResources/Media/InformationModelClassDisgram.png)
+![Figure 1. Address Space Model](../CommonResources/Media/InformationModelClassDisgram.png)
 
 The Address Space Model defines the following set of `NodeClass`es (Figure 1):
 
@@ -40,8 +40,8 @@ Accessing information by clients is the first aspect of controlling the informat
 The `Variable` node is used to be a holder of the process data – it has a `Value` attribute. To be used as the real-time process state representation, the value of the `Value` attribute must be bound to a real data source, e.g. a sensor or actuator. The `Method` node represents functions that can be called by the clients connected to the server. In this case the real-time process bindings are responsible for conveying the parameters current values, invoking the represented function and returning the execution result. Both classes are the main building blocks that allow the server to couple the exposed address space` with the current state and behavior of the underlying process.
 
 > Add description of all NodeClasses
-> 
+>
 
 - [Address Space Model Life-cycle][ASMLC]
 
-[ASMLC]:SemanticData/InformationModelLifecycle.md
+[ASMLC]:InformationModelLifecycle.md

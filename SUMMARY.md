@@ -8,11 +8,11 @@
 * [OOI Introduction](Preface.md)
 * [OPC Unified Architecture](OPCUnifiedArchitecture.md)
 * [OPC UA Main Technology Features](OPCUAMainTechnologyFeatures.md)
-* [Address Space and Address Space Model](AddressSpaceAddressSpaceModel.md)
 
 ## Semantic-Data Processing
 
 * [Semantic-Data Processing Architecture](SemanticData/README.MD)
+* [Address Space and Address Space Model](SemanticData/AddressSpaceAddressSpaceModel.md)
 * [UA Information Model - Concept](SemanticData/InformationModelConcept.md)
   * [Standard Information Model](SemanticData/StandardInformationModel.md)
 * [Information Models Development](SemanticData/InformationModelsDevelopment.md)

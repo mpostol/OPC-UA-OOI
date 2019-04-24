@@ -121,6 +121,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solutio
 		AddressSpaceAddressSpaceModel.md = AddressSpaceAddressSpaceModel.md
 		CONTRIBUTING.md = CONTRIBUTING.md
 		COVERPAGE.md = COVERPAGE.md
+		Introduction2ComplexDataProcessing.md = Introduction2ComplexDataProcessing.md
 		OPCUAMainTechnologyFeatures.md = OPCUAMainTechnologyFeatures.md
 		OPCUnifiedArchitecture.md = OPCUnifiedArchitecture.md
 		Preface.md = Preface.md

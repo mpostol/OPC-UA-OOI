@@ -80,7 +80,11 @@
 
 ## OPCFoundation
 
-- [OPC Unified Architecture Specification Part 4 – Services, OPC Foundation, Rel. 1.04, 2017-11-22][Opc.UA.Part4]
+- [OPC Unified Architecture Specification Part 3: Address Space Model, OPC Foundation, Rel. 1.04, 2017-11-22][Opc.UA.Part3]
+
+[Opc.UA.Part3]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-3-address-space-model/
+
+- [OPC Unified Architecture Specification Part 4: Services, OPC Foundation, Rel. 1.04, 2017-11-22][Opc.UA.Part4]
 
 [Opc.UA.Part4]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-4-services/
 

@@ -1,4 +1,4 @@
-# Preface
+# Introduction to Object-Oriented Internet
 
 The industrial IT application domain is an integrated set of ICT (Information and Communication Technologies) systems. System integration means the necessity of the information exchange between them (the nodes of a common domain). The main challenge of deploying an industrial IT solution is that information is abstract, but unfortunately machines cannot be used to process abstraction. It is also impossible to transfer abstraction from one place to another.
 

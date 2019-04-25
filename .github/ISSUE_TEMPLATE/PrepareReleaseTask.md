@@ -8,6 +8,7 @@ about: Release the milestone
  
 ## Packages to be released
 
+- [ ] `Common`
 - [ ] `Configuration`
 - [ ] `DataDiscovery`
 - [ ] `Networking`
@@ -16,12 +17,14 @@ about: Release the milestone
 ## Tasks to be done
 
 - [ ] Update version information for all published assemblies (Model.t4), 
-- [ ] Prepare NuGet packages
 - [ ] Prepare an example if applicable
 - [ ] Update Readme files
 - [ ] Update the release documentation (ReleaseNoteTemplate)
+- [ ] Prepare NuGet packages if applicable
 - [ ] Create release front page
-- [ ] Publish the installation package
-- [ ] Update the project front page
+   - [ ] Getting Started
+   - [ ] Version information
+- [ ] Prepare binary deliverables and publish the installation package
 - [ ] Update and publish the code help documentation
-
+- [ ] Publish release
+- [ ] Update the project front page

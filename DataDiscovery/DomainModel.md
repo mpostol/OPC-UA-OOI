@@ -1,6 +1,7 @@
 # Domain Model of the Global Data Discovery
 
 ## Main goals
+
 * To promote systems integration against data type definitions.
 * To promote separation of concerns.
 
@@ -17,7 +18,7 @@ On the diagram the following artifacts are distinguished:
 * *Maintenance* - *Engineering* organization (e.g. boiler maintenance service provider) according to the local needs adopts the *Asset* OPC UA information model to meet maintenance requirements on behalf of the *Asset User* (e.g. Heat and Power Plant).
 * *Data Domain* - *Asset User* is ultimate owner of the data. *Engineering* on behalf of the user prepares the **Data Domain** OPC UA Information Model that could be uniquely identified in the global scope.
 
-Finlay the presented scenario the subscriber configurations of the *Cloud IIoT Hub*, *Asset Vendor*, and *Engineering* are based on the prepared in advance **Data Domain** model to gather selected data.
+Finally the presented scenario the subscriber configurations of the *Cloud IIoT Hub*, *Asset Vendor*, and *Engineering* are based on the prepared in advance **Data Domain** model to gather selected data.
 
 Using the real time data the Pollution *Control Agency* are working to:
 

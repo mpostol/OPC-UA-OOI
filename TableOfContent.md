@@ -1,13 +1,27 @@
 # Table of Content
 
-## Summary
+* [Executive Summary](README.MD)
 
-* [Introduction](README.MD)
+## Introduction
+
+* [Introduction to Object-Oriented Internet](Preface.md)
+* [Introduction to Complex Data Processing](Introduction2ComplexDataProcessing.md)
+* [OPC Unified Architecture](OPCUnifiedArchitecture.md)
+* [OPC UA Main Technology Features](OPCUAMainTechnologyFeatures.md)
 
 ## Semantic-Data Processing
 
 * [Semantic-Data Processing Architecture](SemanticData/README.MD)
-* [Address Space Management](SemanticData/UANodeSetValidation/README.MD)
+* [Address Space and Address Space Model](SemanticData/AddressSpaceAddressSpaceModel.md)
+* [UA Information Model - Concept](SemanticData/InformationModelConcept.md)
+  * [Standard Information Model](SemanticData/StandardInformationModel.md)
+* [Information Models Development](SemanticData/InformationModelsDevelopment.md)
+  * [Adopting Companion Standard Models - Analyzer Devices Integration](SemanticData/AdoptingCompanionStandardADI.md)
+  * [Companion Specification - Information Model for Analyzers](SemanticData/CompanionSpecificationInformationModelFforAnalyzers.md)
+  * [ADI Information Model Adoption](SemanticData/ADIInformationModelAdoption.md)
+  * [ADI Model Deployment](SemanticData/ADIModelDeployment.md)
+  * [Address Space Model Life-cycle](SemanticData/InformationModelLifecycle.md)
+* [`Address Space Management` Implementation](SemanticData/UANodeSetValidation/README.MD)
 * [Address Space Prototyping Tool (ase.exe)](SemanticData/AddressSpaceComplianceTestTool/README.md)
 
 ## Internet of Things (IoT) Archetype
@@ -36,10 +50,10 @@
 * [Reactive Networking Configuration](Configuration/Networking/README.MD)
 * [DataBinding library](Configuration/DataBindings/README.MD)
 
-## Data Discovery
+## Global Data Discovery
 
-* [Global Data Discovery](DataDiscovery/README.MD)
-* [Domain Model of the Global Data Discovery](DataDiscovery/DomainModel.md)
+* [Concept](DataDiscovery/README.MD)
+* [Domain Model](DataDiscovery/DomainModel.md)
 
 ## References
 

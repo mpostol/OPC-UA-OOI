@@ -94,7 +94,6 @@
     <None Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.Classes.cs" />
-    <None Include="XMLModels\ProblemsToReport\ADIDataTypeDataType.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="XMLModels\CorrectModels\DataTypeTest.xml" />

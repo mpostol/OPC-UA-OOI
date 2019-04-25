@@ -39,7 +39,7 @@ We use [Semantic Versioning](http://semver.org/) for versioning. For the version
 The table below lists the latest versions of the published Tools.
 
 | Description | Version |
-|----|:---------:|-------------|
+|----|:---------:|
 |[OPC UA Address Space Prototyping](https://commsvr.gitbook.io/ooi/semanticdata-processing/uanodesetvalidation/addressspacecompliancetesttool)| 5.00.02|
 |[Semantic-Data Processing ReferenceApplication](https://commsvr.gitbook.io/ooi/deployment/referenceapplication)| 4.00.01|
 

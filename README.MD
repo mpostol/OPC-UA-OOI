@@ -29,7 +29,7 @@ We use [Semantic Versioning](http://semver.org/) for versioning. For the version
 
 | Version | Milestone                                                          | DOI |Date|
 |:-------:|--------------------------------------------------------------------|:---:|:--:|
-|5.0.2-Alpha |Updated the UA Address Space build against OPC UA Specification 1.04; updated UANodeSet schema; added export to ModelDesign [OPC UA Address Space Prototyping](https://commsvr.gitbook.io/ooi/semanticdata-processing/uanodesetvalidation/addressspacecompliancetesttool)|10.5281/zenodo.2636426|Apr 11, 2019|
+|5.0.2-Alpha |Updated the UA Address Space build against OPC UA Specification 1.04; updated UANodeSet schema; added export to ModelDesign [OPC UA Address Space Prototyping](SemanticData/AddressSpaceComplianceTestTool/README.md)|10.5281/zenodo.2636426|Apr 11, 2019|
 |4.0.1 |.NET Standard implementation, documentation improved, new code help documentation available, tested against Xamarin.Android |10.5281/zenodo.2555407 |Feb 1, 2019|
 | 3.1.0 |New version of the UAOOI.Networking.ReferenceApplication, documentation has been improved.|10.5281/zenodo.1291549 |Jun 17, 2018|
 |3.0.0 |DOI creation for the publication purpose. |10.5281/zenodo.1198853 |Mar 14, 2018|
@@ -40,8 +40,8 @@ The table below lists the latest versions of the published Tools.
 
 | Description | Version |
 |----|:---------:|
-|[OPC UA Address Space Prototyping](https://commsvr.gitbook.io/ooi/semanticdata-processing/uanodesetvalidation/addressspacecompliancetesttool)| 5.00.02|
-|[Semantic-Data Processing ReferenceApplication](https://commsvr.gitbook.io/ooi/deployment/referenceapplication)| 4.00.01|
+|[OPC UA Address Space Prototyping](SemanticData/AddressSpaceComplianceTestTool/README.md)| 5.00.02|
+|[Semantic-Data Processing ReferenceApplication](Networking/ReferenceApplication/README.MD)| 4.00.01|
 
 #### NuGet packages
 

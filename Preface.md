@@ -22,7 +22,7 @@ To comply with the Industry 4.0 communication criterion, even the lowest categor
 
 Considering the above-defined requirements and OPC UA main technology features (Section [OPC UA Main Technology Features]) as a starting point for further discussion a generic architecture is proposed (Section [Semantic-Data Processing Architecture]) that allows designing robust real-time globally scoped distributed systems against the cyber-physical systems paradigm called Industry 4.0.
 
-To deploy the Industry 4.0 paradigm additionally the data holder mobility behavior must be incorporated. This way we have entered the domain of Internet applications coined as the Internet of Things (IoT).  One of the arguments for an Internet of Things is allowing distributed yet interlinked devices, machines, and objects (data holders) to interact with each other without relying on human intervention to set-up and commission the embedded intelligence. In this context, the IoT is all about:
+To deploy the Industry 4.0 paradigm additionally the data holder mobility behavior must be incorporated. This way we have entered the domain of Internet applications coined as the Internet of Things (IoT) (Section [Internet of Things (IoT) Communication]). One of the arguments for an Internet of Things is allowing distributed yet interlinked devices, machines, and objects (data holders) to interact with each other without relying on human intervention to set-up and commission the embedded intelligence. In this context, the IoT is all about:
 
 - mobile data fetching – how to gather data from mobile things (data holders)
 - mobile data distribution – how to transfer the data over the Internet to a place where it could be processed
@@ -42,7 +42,9 @@ On the foundation of this model, selected interoperability deployment issues and
 
 - [OPC UA Main Technology Features]
 - [Semantic-Data Processing Architecture]
+- [Internet of Things (IoT) Communication]
 
+[Internet of Things (IoT) Communication]:Networking/README.MD
 [Semantic-Data Processing Architecture]:SemanticData/README.MD 
 [Address Space and Address Space Model]:SemanticData/AddressSpaceAddressSpaceModel.md
 [UA Information Model - Concept]:SemanticData/InformationModelConcept.md

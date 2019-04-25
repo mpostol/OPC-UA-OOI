@@ -12,7 +12,7 @@ The OPC UA specifications are organized as a multipart document comprising the f
 
 The first set specifies the core capabilities of OPC UA. Those core capabilities define the concept and structure of the Address Space and the services that operate on it. The access type set applies those core capabilities to specific models of data access. Like in OPC Classic, there are distinguished: Data Access (DA), Alarms and Conditions (A&C) and Historical Access (HA). A new access mode is provided as a result of introducing the programs concept and aggregation mechanisms. This set also specifies the UA server discovery process. Those mechanisms are not directly dedicated to support data exchange, but play a very important role in the whole interoperability process.
 
-The core set contains the following specifications:
+The core set contains the following specifications ([References]):
 
 - Part 1 – Overview and Concepts: presents the concepts and overview of OPC Unified Architecture.
 - Part 2 – Security Model: describes the model for securing interactions between OPC UA clients and servers.
@@ -40,7 +40,7 @@ Part 100: Device Information Model.  Companion Specification featuring an Inform
 
 This part describes the goal of OPC UA and introduces the following models to achieve it:
 
-- Address Space and information model to represent structure, behavior, semantics, and infrastructure of the underlying real-time system.
+- Address Space (Section [Address Space and Address Space Model]) and Information Model (Section [UA Information Model - Concept]) to represent structure, behavior, semantics, and infrastructure of the underlying real-time system.
 - Message model to interact between applications.
 - Communication models to transfer data over the network.
 - Conformance model to guarantee interoperability between systems.
@@ -52,7 +52,7 @@ This part describes the OPC UA security model. OPC UA provides countermeasures t
 
 ## Address Space
 
-There is no doubt that information technology and process control engineering have to be integrated to benefit from macro optimization and synergy effect. To integrate them, we must make systems interoperable. It causes the necessity of exchanging information, but to exchange information, it has to be represented as computer centric (saveable in a binary memory) and transferable (a stream of bits) data. According to the specification, a set of objects that an OPC UA server makes available to clients as data representing an underlying real-time system is referred to as its Address Space. The breaking feature of the Address Space concept allows representing both real process environment and real-time process behavior - by a unique means, mutually understandable by diverse systems.
+There is no doubt that information technology and process control engineering have to be integrated to benefit from macro optimization and synergy effect. To integrate them, we must make systems interoperable. It causes the necessity of exchanging information, but to exchange information, it has to be represented as computer centric (saveable in a binary memory) and transferable (a stream of bits) data. According to the specification, a set of objects that an OPC UA server makes available to clients as data representing an underlying real-time system is referred to as its Address Space ((Section [Address Space and Address Space Model])). The breaking feature of the Address Space concept allows representing both real process environment and real-time process behavior - by a unique means, mutually understandable by diverse systems.
 
 ## Services
 
@@ -60,7 +60,7 @@ The OPC UA services described in this part are a collection of abstract remote p
 
 ## Information Model
 
-To make the data exposed by the Address Space mutually understandable by diverse systems, the information model part standardizes the information representation as computer centric data. To promote interoperability, the information model defines the content of the Address Space of an empty OPC UA server. This content can be used as a starting browse point to discover all information relevant to any client. Definitions provided in this part are considered abstract because they do not define any particular representation on the wire. To make the solution open for new technologies, the representation mappings are postponed to the part Mappings. The solution proposed in this model is also open to defining vendor specific representations.
+To make the data exposed by the Address Space mutually understandable by diverse systems, the information model (Section [UA Information Model - Concept]) part standardizes the information representation as computer centric data. To promote interoperability, the standard information model (Section [Standard Information Model]) defines the content of the Address Space of the OPC UA server. This content can be used as a starting browse point to discover all information relevant to any client. Definitions provided in this part are considered abstract because they do not define any particular representation on the wire. To make the solution open for new technologies, the representation mappings are postponed to the part Mappings. The solution proposed in this model is also open to defining vendor specific representations.
 
 ## Mappings
 
@@ -102,6 +102,16 @@ All of the features presented in this section are very important for assessing t
 
 ## See also
 
+- [Address Space and Address Space Model]
+- [UA Information Model - Concept]
+- [Standard Information Model]
+- [OPC UA Main Technology Features]
 - [OPC Unified Architecture - Main Technological Features](http://wp.me/p3MGZj-i)
 - [OPC UA Makes Smart Factory Possible](http://mpostol.wordpress.com)
-- [OPC UA makes cloud computing possible](http://mpostol.wordpress.com)
+- [References]
+
+[Standard Information Model]:SemanticData/StandardInformationModel.md
+[Address Space and Address Space Model]:SemanticData/AddressSpaceAddressSpaceModel.md
+[UA Information Model - Concept]:SemanticData/InformationModelConcept.md
+[OPC UA Main Technology Features]:OPCUAMainTechnologyFeatures.md
+[References]:REFERENCES.md

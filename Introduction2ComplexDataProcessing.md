@@ -1,4 +1,4 @@
-# Introduction to Complex Data Processing 
+# Introduction to Complex Data Processing
 
 From the definition, the Industrial IT domain is an integrated set of ICT systems. System integration means the necessity of the information exchange between them (the nodes of a common domain). ICT systems are recognized as a typical measure of processing information (Section [Semantic-Data Processing Architecture]). The main challenge of deploying an Industrial IT solution is that information is abstract – it is knowledge describing a situation in the selected environment, e.g. temperature in a boiler, a car speed, an account balance, a robot manipulator position, etc. Unfortunately, machines cannot be used to process abstraction. It is also impossible to transfer abstraction from one place to another.
 
@@ -12,8 +12,8 @@ To have a similar ability to add common properties to the representations of man
 
 There are two well-known and widely used relationships:
 
-- Arrays – components are indexed and all components must have a common data type
-- Structures – components are named and components may have different data types
+- **Arrays** – components are indexed and all components must have a common data type
+- **Structures** – components are named and components may have different data types
 
 Anyway, indexes and names must be unambiguous, and a complex data type has the responsibility to provide a precise definition of them, i.e. selectors of the components.
 
@@ -26,15 +26,32 @@ Using the data type definitions to describe information exposed by a server allo
 - Development against a type definition.
 - Unambiguous association of the information with the data.
 
-Having defined types in advance, clients may provide dedicated functionality, e.g. displaying the information in the context of specific graphics.
+Having defined types in advance, clients may provide dedicated functionality, e.g. displaying the information in the context of specific graphics. Typical scenarios can be recognized when we can define appropriate complex data types in advance. The OPC UA offers a variety of standard types ready to be used in common cases (Section [Standard Information Model]). If this out of the box set is not capable of fulfilling more demanding needs users may define custom data types. The OPC UA allows servers to provide data type definitions. The type definitions may be abstract and may be inherited by new types to reflect polymorphism. They may be of generic use or they may be application domain specific. Custom types must have a globally unique identifier, which can be used to identify the authoring organization responsible for that type definition.
 
-Typical scenarios can be recognized when we can define appropriate complex data types in advance. The OPC UA offers a variety of standard types ready to be used in common cases (Section [Standard Information Model]). If this out of the box set is not capable of fulfilling more demanding needs users may define custom data types. The OPC UA allows servers to provide data type definitions. The type definitions may be abstract and may be inherited by new types to reflect polymorphism. They may be of generic use or they may be application domain specific. Custom types must have a globally unique identifier, which can be used to identify the authoring organization responsible for that type definition.
-If the data publisher – an OPC UA server is not running in an environment capable of creating the complex data there must be taken special precaution to fabricate it if required. An example of this scenario is a standalone OPC UA server pooling data from plant floor devices using a custom protocol, e.g. MODBUS. If that is the case the protocol used to gather process data is usually not data complex aware. Reading and writing the data is accomplished using REQUEST/RESPONSE frame pairs. Moreover, one request can be used to read a set of values that has the same simple type only. The fabrication is an operation that uses a group of requests to gather components and embeds them into a single value of a selected complex data type. It is an optional server capability.
+Representing the information processed as one sequence of bits could be impossible or impractical for some application domains. If the information comes from a real-time process, for example, a boiler or a chemical analyzer, we use an independent sensor to measure values, e.g. pressure, temperature, flow. The measuring process is independent, but pieces of information are related to each other as they describe the same physical process. If the data publisher (e.g. a server) is not running in an environment capable of creating complex data there must be taken special measures to fabricate it if required. An example of this scenario is a software application pooling data from plant floor devices using a custom protocol, e.g. MODBUS. If that is the case the protocol used to gather process data is usually not data complex aware. Reading and writing the data is accomplished using REQUEST/RESPONSE frame pairs. Moreover, one request can be used to read a set of values that has the same simple type only. Fabrication is an operation that uses a group of requests to gather components and embed them into a single value of a selected complex data type.
 
-See also
+Fabrication of complex data is similar to using reverse engineering for recovering a big picture from details. Additionally, as it was pointed out, fabrication of complex data from pieces (i.e. composing it using building-blocks) is possible but it needs additional effort. Because processing and transferring the data over the network are not for free this approach must be well-founded. If the data volume grows paying this cost could be groundless or even impossible and then we need an alternative solution, i.e. the possibility to process and transfer the data piece by piece. In such a case the consistency could be achieved by timestamps associated with each piece separately and partial data processing is possible if pieces can be accessed selectively. The proposed selection mechanisms of components for the complex data are rather static, i.e. they limit the internal structure and meaning (semantics) of the relations, but still can be successfully used for that purpose. Hence, to overcome those limits the reference concept could be introduced. Reference links two elements together, where the source and target roles are distinguished in this couple. Reference could also represent information - has meaning. Adding randomly specific references to particular pieces of data we can create unlimited structures - a graph of entities. For example, let’s try to describe a car. We need partial information about the main car body and four references to the tires as components, but for the spare tire we need different reference kind, say a spare component to point out a different relationship for this case. Following the reference concept, we actually introduced a new selection mechanism, namely browsing. Nowadays, as a consequence of using references, we are able to replace a static newspaper with a dynamic website, where information is represented using hypertext instead of plain text. The concepts and terms presented above are well known and widely used by programmers and website authors. As there are people working on processing and exposing information professionally, a question arises why we are bothering about it. There is one simple reason: the offered services are unsatisfactory.
+
+> There are two issues that can be recognized. Programmers offer **dedicated solutions with the goal of meeting precisely defined requirements of selected stakeholders**. The webmasters offer the possibility for freely exposing any information you need, but the **representation is hard to be processed by other programs** because the content and references have semantics (have meaning) in the native language only.
+
+In contrast to the offer of programmers and webmasters we face the biggest challenge of providing a generic solution that allows us to expose any complex information, transport it over the network and finally process it on the assumption that all these three operations can be done by independent parties. In this context generic means here that only out of the box products and existing infrastructure are acceptable. Independent parties mean no need for special agreements made to guarantee interoperability case by case.
+
+> In other words, **common rules must be observed instead of case-specific agreements**.
+
+The rules must be valid now, in the future, and for all application domains called industrial IT. Having an adequate rules specification in hands we will be able to ask programmers and webmasters to fulfill our requirements and we will finally obtain a universal, flexible enough solution based on best practice. This project is all about the selection of appropriate specifications and deployment rules in the context of information processing.
+
+To meet the requirements presented above it is proposed to select OPC Unified Architecture specification as a foundation for further work. One of the main goals of the OPC Unified Architecture (OPC UA) is to provide a consistent mechanism for the integration of process control and business management systems. It is assumed that it should be robust and the implementation should be platform independent.
+
+The section [Semantic-Data Processing Architecture] provides more information about the Semantic-Data environment architecture and the section [Address Space Model Life-cycle] describes the modeling process step by step in more details. The section [Semantic-Data Message Centric Communication] introduces some aspects related to exchange the Semantic-Data over the wire and how to plan a foundation for interoperability.
+
+## See also
 
 - [Semantic-Data Processing Architecture]
 - [Standard Information Model]
+- [Address Space Model Life-cycle]
+- [Semantic-Data Message Centric Communication]
 
+[Address Space Model Life-cycle]:SemanticData/InformationModelLifecycle.md
 [Semantic-Data Processing Architecture]:SemanticData/README.MD
 [Standard Information Model]:SemanticData/StandardInformationModel.md
+[Semantic-Data Message Centric Communication]:Networking/README.MessageCentricCommunication.md

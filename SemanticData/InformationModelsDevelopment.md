@@ -6,7 +6,7 @@ OPC UA specification provides a standard Information Model domain, which contain
 
 The model design engineering is an emerging discipline in which engineers develop new models with a primary emphasis on convergence between information describing the state and behavior of a selected real-time process and simplified representation of the process by process data. The data is formally described in terms of types. Generally speaking there are two approaches possible:
 
-- Design a custom model that meets requirements of a proprietary process (section [*`ReferenceApplication` Producer - Boilers Set Simulator*][BlrsStSmultr]
+- Design a custom model that meets requirements of a proprietary process (Section [*`ReferenceApplication` Producer - Boilers Set Simulator*][BlrsStSmultr])
 - Adopt an existing model released as a companion specification to meet the requirements of a proprietary process.
 
 To improve performance of independent model developments as a result of reusability and, what is more important, to promote unification of results there are many activities aimed at designing models for selected processes. The unification enables vendors to commence independent developments of selected application aware products. In this section a case studies illustrating both approaches is presented.

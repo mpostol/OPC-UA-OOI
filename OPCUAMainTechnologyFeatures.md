@@ -78,7 +78,7 @@ More you can find in the eBook at:
 - [1] [OPC UA Address Space Model Designer, 2019][CAS.ASMD]
 - [2] [OPC Unified Architecture e-book, 2010][CAS.EBOOK]
 - [3] [Part 5: Information Model, OPC Foundation, Rel. 1.04, 2017-11-22][OPC.UA.Part5]
-- [Semantic-Data Processing Architecture][SDPA]
+- [4] [Semantic-Data Processing Architecture][SDPA]
 
 [SDPA]:SemanticData/README.MD
 [OPC.UA.Part5]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-5-information-model/

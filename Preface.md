@@ -24,9 +24,9 @@ Considering the above-defined requirements and OPC UA main technology features (
 
 To deploy the Industry 4.0 paradigm additionally the data holder mobility behavior must be incorporated. This way we have entered the domain of Internet applications coined as the Internet of Things (IoT) (Section [Internet of Things (IoT) Communication]). One of the arguments for an Internet of Things is allowing distributed yet interlinked devices, machines, and objects (data holders) to interact with each other without relying on human intervention to set-up and commission the embedded intelligence. In this context, the IoT is all about:
 
-- mobile data fetching – how to gather data from mobile things (data holders)
-- mobile data distribution – how to transfer the data over the Internet to a place where it could be processed
-- mobile data processing – how to integrate consistently the partial data into a selected application as one whole to improve process behavioral performance
+- mobile data fetching - how to gather data from mobile things (data holders)
+- mobile data distribution - how to transfer the data over the Internet to a place where it could be processed
+- mobile data processing - how to integrate consistently the partial data into a selected application as one whole to improve process behavioral performance
 
 On the foundation of this model, selected interoperability deployment issues and available solutions are being researched in the project. The discussion is focused on the issues related to:
 

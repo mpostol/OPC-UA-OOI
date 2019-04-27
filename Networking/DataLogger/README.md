@@ -1,4 +1,3 @@
-﻿
 # `ReferenceApplication` Consumer - Data Logger
 
 ## Common Tasks

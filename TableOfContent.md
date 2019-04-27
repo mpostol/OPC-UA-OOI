@@ -21,6 +21,7 @@
   * [ADI Information Model Adoption](SemanticData/ADIInformationModelAdoption.md)
   * [ADI Model Deployment](SemanticData/ADIModelDeployment.md)
   * [Address Space Model Life-cycle](SemanticData/InformationModelLifecycle.md)
+  * [Design and Deployment Support](SemanticData/DesignDeploymentSupport.md)
 * [`Address Space Management` Implementation](SemanticData/UANodeSetValidation/README.MD)
 * [Address Space Prototyping Tool (ase.exe)](SemanticData/AddressSpaceComplianceTestTool/README.md)
 

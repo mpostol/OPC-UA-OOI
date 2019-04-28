@@ -1,4 +1,4 @@
-﻿# Underlying Transport over UDP
+# Underlying Transport over UDP
 
 ## Motivation
 

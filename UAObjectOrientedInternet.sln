@@ -48,6 +48,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SemanticData", "SemanticDat
 		SemanticData\ADIModelDeployment.md = SemanticData\ADIModelDeployment.md
 		SemanticData\AdoptingCompanionStandardADI.md = SemanticData\AdoptingCompanionStandardADI.md
 		SemanticData\CompanionSpecificationInformationModelFforAnalyzers.md = SemanticData\CompanionSpecificationInformationModelFforAnalyzers.md
+		SemanticData\DesignDeploymentSupport.md = SemanticData\DesignDeploymentSupport.md
 		SemanticData\InformationModelConcept.md = SemanticData\InformationModelConcept.md
 		SemanticData\InformationModelLifecycle.md = SemanticData\InformationModelLifecycle.md
 		SemanticData\InformationModelsDevelopment.md = SemanticData\InformationModelsDevelopment.md

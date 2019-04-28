@@ -1,4 +1,4 @@
-﻿# Encoding Library
+# Encoding Library
 
 ## Getting Started
 

@@ -47,7 +47,7 @@ The `Variable` node is used to be a holder of the process data – it has a `Val
 
 The `DataType` is used to define simple and structured data types. Data types are used to describe the bits pattern of the `Value` attribute of `Variable` and their `VariableType` nodes. Therefore each `Variable` and `VariableType` refers to an instance of the `DataType` `NodeClass`.
 
-Address Space Meta-Model is an intermediate language used by the Information Model to formally describe the content of the Address Space instance. Detailed description is covered in the section [UA Information Model - Concept]. 
+Address Space Meta-Model is an intermediate language used by the Information Model to formally describe the content of the Address Space instance. Detailed description is covered in the section [UA Information Model - Concept][UAInformationModelConcept]. 
 
 Accessing information by clients is the first aspect of controlling the information stream between the clients and underling process. Another one is creating and maintaining the Address Space in real-time. This activity includes also creation of data bindings with the underlying real-time process. This topic is described in more details in the section [*Address Space Model Life-cycle*][ASMLC].
 
@@ -57,10 +57,10 @@ Accessing information by clients is the first aspect of controlling the informat
 - [2] Wolfgang Mahnke, Stefan Helmut Leitner, Matthias Damm. OPC Unified Architecture. Berlin: Springer, 2009.
 - [3] [OPC Unified Architecture Specification Part 3: Address Space Model, OPC Foundation, Rel. 1.04, 2017-11-22][Opc.UA.Part3]
 - [4] [Address Space Model Life-cycle][ASMLC]
-- [5] [UA Information Model - Concept]
+- [5] [UA Information Model - Concept][UAInformationModelConcept]
 
 [Opc.UA.Part3]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-3-address-space-model/
 [CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
-[UA Information Model - Concept]:InformationModelConcept.md
+[UAInformationModelConcept]:InformationModelConcept.md
 [ASMLC]:InformationModelLifecycle.md
 

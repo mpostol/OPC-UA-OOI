@@ -80,7 +80,7 @@ This workspace is aimed at implementing an editor of the `OOI Reactive Applicati
 
 ### DataDiscovery
 
-This workspace contains libraries and tools to find the data over the network. In the proposed approach the URI of the OPC UA **Information Model** is to be used as a unique key to browse the **Global Data Discovery System** \(GDDS – an expanded version of GDS\) to find recursively the destination `OPC UA Server`  or  `UA Data Application` exposing the requested data.
+This workspace contains libraries and tools to find the data over the network. In the proposed approach the URI of the OPC UA **Information Model** is to be used as a unique key to browse the **Global Data Discovery System** \(GDDS ֠an expanded version of GDS\) to find recursively the destination `OPC UA Server`  or  `UA Data Application` exposing the requested data.
 
 To get more details visit the section [Global Data Discovery](./DataDiscovery/README.MD)
 
@@ -96,7 +96,7 @@ To get more details visit the section [Internet of Things (IoT) Communication](.
 
 The `SemanticData` folder contains projects related to support the [OOI Semantic-Data Processing Architecture](./SemanticData/README.MD). Processing of the OPC UA Data Outside of the Server context is based on the **Semantic-Data** concept. This project is aimed to workout deliverables supporting Process Data handling over Internet including but not limiting to:
 
-- Data edition – UI allowing display and edition of any custom data
+- Data edition ֠UI allowing display and edition of any custom data
 - Data serialization and deserialization - see white-paper [Address Space Interchange XML](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf)
 - Data prototyping - methods and tools to design custom data types
 - Exposition of the process data in the context of metadata [OPC UA Address Space Model Designer](http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx)
@@ -165,5 +165,3 @@ The presented approach is a real proposal for a new technology wave based on the
 - [OPC Foundation](https://opcfoundation.org/)
 - [Sponsored by commsvr.com](http://www.commsvr.com/)
 - [References](REFERENCES.md) - this section contains links to selected internal and external resources.
-
-[![HitCount](http://hits.dwyl.io/mpostol/mpostol/OPC-UA-OOI.svg)](http://hits.dwyl.io/mpostol/mpostol/OPC-UA-OOI)

@@ -21,7 +21,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class UANodeContext - it wraps the <see cref="UANode"/> and provides functionality to analyze its semantic.
   /// </summary>
-  internal class UANodeContext : IEquatable<UANodeContext>, IUANodeContext, IUANodeBase
+  internal class UANodeContext : IUANodeContext, IUANodeBase
   {
 
     #region constructor
@@ -36,7 +36,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       this.m_AddressSpaceContext = addressSpaceContext;
       this.NodeIdContext = nodeId;
       this.UAModelContext = modelContext;
-      this.InRecursionChain = false;
     }
     #endregion
 
@@ -65,7 +64,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets or sets a value indicating whether the node is in recursion chain - selected for analysis second time.
     /// </summary>
     /// <value><c>true</c> if the node is in recursion chain; otherwise, <c>false</c>.</value>
-    public bool InRecursionChain { get; set; }
+    public bool InRecursionChain { get; set; } = false;
     /// <summary>
     /// Updates this instance in case the wrapped <see cref="UANode"/> is recognized in the model.
     /// </summary>
@@ -100,7 +99,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent models.
     /// </summary>
     /// <param name="nodeFactory">The node container.</param>
-    public void CalculateNodeReferences(INodeFactory nodeFactory)
+    void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory)
     {
       ModelingRule = new Nullable<ModelingRules>();
       List<UAReferenceContext> _children = new List<UAReferenceContext>();
@@ -143,7 +142,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             break;
         }
       }
-      _children = _children.Where<UAReferenceContext>(x => _derivedChildren == null || !_derivedChildren.ContainsKey(x.TargetNodeContext.BrowseName.Name)).ToList<UAReferenceContext>();
+      _children = _children.Where<UAReferenceContext>(x => _derivedChildren == null ||
+        !_derivedChildren.ContainsKey(x.TargetNodeContext.BrowseName.Name) ||
+        _derivedChildren[x.TargetNodeContext.BrowseName.Name].Equals(x.TargetNodeContext)).ToList<UAReferenceContext>();
       foreach (UAReferenceContext _rc in _children)
         Validator.ValidateExportNode(_rc.TargetNodeContext, nodeFactory, _rc, BuildErrorsHandling.Log.TraceEvent);
     }
@@ -250,18 +251,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <value>The name of the browse.</value>
     public QualifiedName BrowseName { get; set; } = QualifiedName.Null;
+    /// <summary>
+    /// Indicates whether the current object is equal to another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this object.</param>
+    /// <returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
+    public bool Equals(IUANodeBase other)
+    {
+      if (Object.ReferenceEquals(other, null))
+        return false;
+      return this.BrowseName == other.BrowseName &&
+        this.ModelingRule == other.ModelingRule &&
+        this.UANode == other.UANode;
+    }
     #endregion
 
     #region public API
     public bool IsPropertyVariableType => this.NodeIdContext == VariableTypeIds.PropertyType;
-    #endregion
-
-    #region IEquatable<UANodeContext>
-    public bool Equals(UANodeContext other)
-    {
-      return this.NodeIdContext.Equals(other.NodeIdContext);
-    }
-
     #endregion
 
     #region private

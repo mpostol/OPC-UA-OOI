@@ -265,8 +265,51 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _status;
     }
-
-
+    internal static bool LocalizedTextArraysEqual(this XML.LocalizedText[] first, XML.LocalizedText[] second)
+    {
+      if (Object.ReferenceEquals(first, null))
+        return Object.ReferenceEquals(second, null);
+      if (first.Length != second.Length)
+        return false;
+      Dictionary<string, XML.LocalizedText> _dictionaryForFirst = first.ToDictionary<XML.LocalizedText, string>(x => x.Locale);
+      foreach (XML.LocalizedText _text in second)
+      {
+        if (!_dictionaryForFirst.ContainsKey(_text.Locale))
+          return false;
+        if (_dictionaryForFirst[_text.Locale].Value != _text.Value)
+          return false;
+      }
+      return true;
+    }
+    internal static bool RolePermissionsEquals(this XML.RolePermission[] first, XML.RolePermission[] second)
+    {
+      if (Object.ReferenceEquals(first, null))
+        return Object.ReferenceEquals(second, null);
+      if (first.Length != second.Length)
+        return false;
+      Dictionary<uint, XML.RolePermission> _dictionaryForFirst = first.ToDictionary<XML.RolePermission, uint>(x => x.Permissions);
+      foreach (XML.RolePermission _permission in second)
+      {
+        if (!_dictionaryForFirst.ContainsKey(_permission.Permissions))
+          return false;
+        if (_dictionaryForFirst[_permission.Permissions].Value != _permission.Value)
+          return false;
+      }
+      return true;
+    }
+    internal static bool ReferencesEquals(this XML.Reference[] first, XML.Reference[] second)
+    {
+      if (Object.ReferenceEquals(first, null))
+        return Object.ReferenceEquals(second, null);
+      if (first.Length != second.Length)
+        return false;
+      List<string> _dictionaryForFirst = first.Select<XML.Reference, string>(x => x.ToString()).ToList<string>();
+      foreach (XML.Reference _reference in second)
+      {
+        if (!_dictionaryForFirst.Exists(x => _reference.ToString().CompareTo(x) == 0))
+          return false;
+      };
+      return true;
+    }
   }
-
 }

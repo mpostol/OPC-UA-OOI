@@ -1,1 +1,1 @@
-asp "XMLModels\tempuri.org.UA.Examples.BoilerType.NodeSet2.xml" "XMLModels\Commsvr.UA.Examples.BoilersSet.NodeSet2.xml" -e "XMLModels\DataTypeTest.ModelDesign.xml" -s XMLstylesheet -n "http://tempuri.org/UA/Examples/BoilerType"
+asp "XMLModels\tempuri.org.UA.Examples.BoilerType.NodeSet2.xml" "XMLModels\Commsvr.UA.Examples.BoilersSet.NodeSet2.xml" -e "XMLModels\BoilerType.ModelDesign.xml" -s XMLstylesheet -n "http://tempuri.org/UA/Examples/BoilerType"

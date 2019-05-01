@@ -71,7 +71,6 @@
     <Compile Include="UANodeSetWithErrorsUnitTest.cs" />
     <Compile Include="UANodeSetUnitTest.cs" />
     <Compile Include="UAModelContextUnitTest.cs" />
-    <Compile Include="Helpers\ModelDesign.cs" />
     <Compile Include="ResourcesUnitTest.cs" />
     <Compile Include="AddressSpaceContextUnitTest.cs" />
     <Compile Include="Helpers\TestData.cs" />
@@ -84,6 +83,8 @@
       <Link>DependencyValidation1.layerdiagram</Link>
       <Visible>False</Visible>
     </AdditionalFiles>
+    <Compile Include="UANodeContextUnitTest.cs" />
+    <Compile Include="XMLUANodeUnitTest.cs" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
     <None Include="Properties\AssemblyInfo.tt">

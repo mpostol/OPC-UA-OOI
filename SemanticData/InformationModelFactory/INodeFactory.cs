@@ -17,10 +17,11 @@ namespace UAOOI.SemanticData.InformationModelFactory
   {
 
     /// <summary>
-    /// It holds the value of the BrowseName attribute of modes in the Address Space.
+    /// It holds the value of the BrowseName attribute of modes in the Address Space. The BrowseName is the name used in the information model. 
+    /// The BrowseName is qualified by the namespace used for the SymbolicName
     /// </summary>
     /// <value>The BrowseName of the node.</value>
-    string BrowseName { set; }
+  string BrowseName { set; }
     /// <summary>
     /// Adds new value for the Description. The optional Description element shall explain the meaning of the node in a localized text using the same mechanisms 
     /// for localization as described for the DisplayName.
@@ -93,14 +94,6 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// </summary>
     /// <value>The category.</value>
     string[] Category { set; }
-    /// <summary>
-    /// Sets a value indicating whether the Node is in the address space.
-    /// </summary>
-    /// <remarks>
-    /// To be used by a tool. Not exposed in the address space.
-    /// </remarks>
-    /// <value><c>true</c> if the Node is not in address space; otherwise, <c>false</c>.</value>
-    bool NotInAddressSpace { set; }
 
   }
 }

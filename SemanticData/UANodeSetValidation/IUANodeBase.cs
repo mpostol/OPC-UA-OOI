@@ -18,7 +18,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Interface IUANodeBase - if implemented captures all basic information represented by the UA Node
   /// </summary>
-  internal interface IUANodeBase
+  internal interface IUANodeBase: IEquatable<IUANodeBase>
   {
 
     /// <summary>

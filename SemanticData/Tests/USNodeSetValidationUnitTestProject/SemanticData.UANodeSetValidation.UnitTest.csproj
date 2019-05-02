@@ -71,7 +71,6 @@
     <Compile Include="UANodeSetWithErrorsUnitTest.cs" />
     <Compile Include="UANodeSetUnitTest.cs" />
     <Compile Include="UAModelContextUnitTest.cs" />
-    <Compile Include="Helpers\ModelDesign.cs" />
     <Compile Include="ResourcesUnitTest.cs" />
     <Compile Include="AddressSpaceContextUnitTest.cs" />
     <Compile Include="Helpers\TestData.cs" />
@@ -84,7 +83,10 @@
       <Link>DependencyValidation1.layerdiagram</Link>
       <Visible>False</Visible>
     </AdditionalFiles>
+    <Compile Include="UANodeContextUnitTest.cs" />
+    <Compile Include="XMLUANodeUnitTest.cs" />
     <None Include="OPCUAOOIKey.snk" />
+    <None Include="packages.config" />
     <None Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
@@ -118,7 +120,6 @@
     <Content Include="XMLModels\ModelsWithErrors\UndefinedHasTypeDefinition.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="XMLModels\ProblemsToReport\ADIDataTypeExample.xml" />
     <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -213,6 +214,9 @@
       <Project>{352378a0-8b2e-4679-bb44-fd0bcc8467d9}</Project>
       <Name>SemanticData.UANodeSetValidation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="XMLModels\ProblemsToReport\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

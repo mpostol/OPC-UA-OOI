@@ -31,7 +31,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Validates the selected nodes <paramref name="nodesCollection"/> and export it using <paramref name="exportModelFactory"/>.
     /// </summary>
-    /// <param name="nodesCollection">The items <see cref="IUANodeValidator" /> imported to the Address Space <see cref="IAddressSpaceContext" />.</param>
+    /// <param name="nodesCollection">The items <see cref="IEnumerable{IUANodeBase}" /> imported to the Address Space <see cref="IAddressSpaceContext" />.</param>
     /// <param name="exportModelFactory">The model export factory.</param>
     /// <param name="addressSpaceContext">The Address Space context.</param>
     /// <param name="traceEvent">The trace event method encapsulation.</param>
@@ -72,7 +72,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       traceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
     }
     /// <summary>
-    /// Validates <paramref name="nodeContext"/> and exports it using an object od <see cref="IModelFactory"/>.
+    /// Validates <paramref name="nodeContext"/> and exports it using an object of <see cref="IModelFactory"/>  type.
     /// </summary>
     /// <param name="nodeContext">The node context to be validated and exported.</param>
     /// <param name="exportFactory">A model export factory.</param>

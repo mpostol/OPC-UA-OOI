@@ -66,5 +66,5 @@ This file contains a mirror configuration of the [`Producer`](../../Networking/S
 - [API Browser][API Browser]: the preliminary code help documentation.
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 
-[API Browser]: http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Common.Infrastructure.Diagnostic.htm
-[wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible
+[API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
+[wordpress.OPCUACD]:https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible

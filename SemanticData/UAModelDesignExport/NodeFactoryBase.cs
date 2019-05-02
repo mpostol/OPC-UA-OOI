@@ -95,7 +95,6 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// </remarks>
     /// <value>The category.</value>
     public string[] Category { set; private get; } = null;
-    public bool NotInAddressSpace { set; private get; } = false;
     /// <summary>
     /// Adds new value for the Description. The optional Description element shall explain the meaning of the node in a localized text using the same mechanisms
     /// for localization as described for the DisplayName.
@@ -145,7 +144,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       nodeDesign.Description = m_Description;
       nodeDesign.DisplayName = m_DisplayName == null || m_DisplayName.Value == _defaultDisplay ? null : m_DisplayName;
       nodeDesign.IsDeclaration = false;
-      nodeDesign.NotInAddressSpace = NotInAddressSpace;
+      nodeDesign.NotInAddressSpace = false;
       nodeDesign.NumericId = 0;
       nodeDesign.NumericIdSpecified = false;
       nodeDesign.PartNo = 0;

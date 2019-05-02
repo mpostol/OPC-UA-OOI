@@ -128,9 +128,7 @@ Both are parts of the example implementation [`ReferenceApplication`](../../Netw
 ## See also
 
 - [API Browser][API Browser]: the preliminary code help documentation.
- 
-[API Browser]: http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Networking.SemanticData.htm
-
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 
+[API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
 [wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/

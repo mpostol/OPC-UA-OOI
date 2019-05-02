@@ -49,4 +49,4 @@ The XML schema of the configuration files is available at: [ConfigurationData.xs
 
 - [API Browser][API Browser]: the preliminary code help documentation.
  
-[API Browser]: http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Networking.SemanticData.htm
+[API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html

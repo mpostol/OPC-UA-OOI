@@ -31,10 +31,24 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="addressSpaceContext">The address space context.</param>
     /// <param name="modelContext">The model context.</param>
     /// <param name="nodeId">An object of <see cref="NodeId"/> that stores an identifier for a node in a server's address space.</param>
-    internal UANodeContext(IAddressSpaceBuildContext addressSpaceContext, IUAModelContext modelContext, NodeId nodeId)
+    internal UANodeContext(IAddressSpaceBuildContext addressSpaceContext, IUAModelContext modelContext, NodeId nodeId) : this(addressSpaceContext, modelContext)
+    {
+      NodeIdContext = nodeId;
+    }
+    internal UANodeContext(IAddressSpaceBuildContext addressSpaceContext, IUAModelContext modelContext, UANode node) : this(addressSpaceContext, modelContext)
+    {
+      if (node == null)
+      {
+        BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeCannotBeNull, "A stub is created."));
+        NodeIdContext = NodeId.Null;
+      }
+      else
+        NodeIdContext = modelContext.ImportNodeId(node.NodeId, false);
+      Update(node);
+    }
+    private UANodeContext(IAddressSpaceBuildContext addressSpaceContext, IUAModelContext modelContext)
     {
       this.m_AddressSpaceContext = addressSpaceContext;
-      this.NodeIdContext = nodeId;
       this.UAModelContext = modelContext;
     }
     #endregion
@@ -69,7 +83,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Updates this instance in case the wrapped <see cref="UANode"/> is recognized in the model.
     /// </summary>
     /// <param name="node">The node <see cref="UANode"/> containing definition to be added to the model.</param>
-    void IUANodeContext.Update(UANode node)
+    public void Update(UANode node)
     {
       if (node == null)
         return;
@@ -83,6 +97,29 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, string.Format("New identifier {0} is generated to proceed.", _broseName)));
       }
       BrowseName = UAModelContext.ImportQualifiedName(_broseName);
+      List<UAReferenceContext> m_References = new List<UAReferenceContext>();
+      foreach (Reference _reference in node.References)
+      {
+        UAReferenceContext _referenceStub = UAReferenceContext.NewReferenceStub(_reference, this.m_AddressSpaceContext, UAModelContext, this, BuildErrorsHandling.Log.TraceEvent);
+        m_References.Add(_referenceStub);
+        switch (_referenceStub.ReferenceKind)
+        {
+          case ReferenceKindEnum.Custom:
+          case ReferenceKindEnum.HasComponent:
+          case ReferenceKindEnum.HasProperty:
+          case ReferenceKindEnum.HasModellingRule:
+            break;
+          case ReferenceKindEnum.HasSubtype: //TODO Part 3 7.10 HasSubtype - add test cases #35
+            m_BaseTypeNode = _referenceStub.SourceNodeContext;
+            break;
+          case ReferenceKindEnum.HasTypeDefinition: //Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
+            m_BaseTypeNode = _referenceStub.TargetNodeContext;
+            break;
+        }
+        if (m_BaseTypeNode == null)
+          m_BaseTypeNode = m_AddressSpaceContext.GetBaseTypeNode(node.NodeClassEnum);
+      }
+      this.References = m_References;
     }
     #endregion
 
@@ -101,10 +138,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="nodeFactory">The node container.</param>
     void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory)
     {
+      if (nodeFactory == null)
+        throw new ArgumentNullException(nameof(nodeFactory), $"{nodeFactory} must not be null in {nameof(IUANodeBase.CalculateNodeReferences)}");
       ModelingRule = new Nullable<ModelingRules>();
       List<UAReferenceContext> _children = new List<UAReferenceContext>();
-      Dictionary<string, IUANodeBase> _derivedChildren = null;
-      foreach (UAReferenceContext _rfx in m_AddressSpaceContext.GetMyReferences(this))
+      Dictionary<string, IUANodeBase> _derivedChildren = m_BaseTypeNode == null ? new Dictionary<string, IUANodeBase>() : m_BaseTypeNode.GetDerivedInstances();
+      foreach (UAReferenceContext _rfx in this.References)
       {
         switch (_rfx.ReferenceKind)
         {
@@ -125,28 +164,34 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               _children.Add(_rfx);
             break;
           case ReferenceKindEnum.HasProperty:
-            if ((_rfx.SourceNodeContext == this) && (!(_rfx.SourceNodeContext.UANode is UADataType) || _rfx.TargetNodeContext.UANode.BrowseName.CompareTo("EnumStrings") != 0))
+            if ((_rfx.SourceNodeContext == this) &&
+              (!(_rfx.SourceNodeContext.UANode.NodeClassEnum == NodeClassEnum.UADataType) || _rfx.TargetNodeContext.UANode.BrowseName.CompareTo("EnumStrings") != 0))
               _children.Add(_rfx);
             break;
           case ReferenceKindEnum.HasModellingRule:
             ModelingRule = _rfx.GetModelingRule();
             break;
-          case ReferenceKindEnum.HasSubtype: //TODO Part 3 7.10 HasSubtype - add test cases #35
-            m_BaseTypeNode = _rfx.SourceNodeContext;
+          case ReferenceKindEnum.HasSubtype:
             break;
           case ReferenceKindEnum.HasTypeDefinition: //Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
-            m_BaseTypeNode = _rfx.TargetNodeContext;
-            _derivedChildren = _rfx.TargetNodeContext.GetDerivedInstances();
-            Debug.Assert(!IsProperty, "Has property ");
             IsProperty = _rfx.TargetNodeContext.IsPropertyVariableType;
             break;
         }
       }
-      _children = _children.Where<UAReferenceContext>(x => _derivedChildren == null ||
-        !_derivedChildren.ContainsKey(x.TargetNodeContext.BrowseName.Name) ||
-        _derivedChildren[x.TargetNodeContext.BrowseName.Name].Equals(x.TargetNodeContext)).ToList<UAReferenceContext>();
       foreach (UAReferenceContext _rc in _children)
-        Validator.ValidateExportNode(_rc.TargetNodeContext, nodeFactory, _rc, BuildErrorsHandling.Log.TraceEvent);
+      {
+        try
+        {
+          IUANodeBase _instanceDeclaration = null;
+          if (!string.IsNullOrEmpty(_rc.TargetNodeContext.BrowseName.Name))
+            _instanceDeclaration = _derivedChildren.ContainsKey(_rc.TargetNodeContext.BrowseName.Name) ? _derivedChildren[_rc.TargetNodeContext.BrowseName.Name] : null;
+          Validator.ValidateExportNode(_rc.TargetNodeContext, _instanceDeclaration, nodeFactory, _rc, BuildErrorsHandling.Log.TraceEvent);
+        }
+        catch (Exception ex)
+        {
+          throw;
+        }
+      }
     }
     /// <summary>
     /// Gets the instance of <see cref="UANode" /> of this context source
@@ -264,15 +309,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         this.ModelingRule == other.ModelingRule &&
         this.UANode == other.UANode;
     }
+    bool IUANodeBase.IsPropertyVariableType => this.NodeIdContext == VariableTypeIds.PropertyType;
     #endregion
 
     #region public API
-    public bool IsPropertyVariableType => this.NodeIdContext == VariableTypeIds.PropertyType;
+    internal IEnumerable<UAReferenceContext> References { get; private set; }
     #endregion
 
     #region private
     private IUANodeBase m_BaseTypeNode;
-    private IAddressSpaceBuildContext m_AddressSpaceContext = null;
+    private readonly IAddressSpaceBuildContext m_AddressSpaceContext = null;
     //methods
     /// <summary>
     /// Gets or sets the name of the m browse.

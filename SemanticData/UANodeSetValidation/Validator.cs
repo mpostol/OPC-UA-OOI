@@ -51,7 +51,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         try
         {
-          ValidateExportNode(_item, exportModelFactory, null, y =>
+          ValidateExportNode(_item, null, exportModelFactory, null, y =>
               {
                 if (y.TraceLevel != TraceEventType.Verbose)
                   _errors.Add(y.BuildError);
@@ -72,14 +72,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       traceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
     }
     /// <summary>
-    /// Validates <paramref name="nodeContext"/> and exports it using an object of <see cref="IModelFactory"/>  type.
+    /// Validates <paramref name="nodeContext" /> and exports it using an object of <see cref="IModelFactory" />  type.
     /// </summary>
     /// <param name="nodeContext">The node context to be validated and exported.</param>
+    /// <param name="instanceDeclaration">The instance declaration.</param>
     /// <param name="exportFactory">A model export factory.</param>
     /// <param name="parentReference">The reference to parent node.</param>
     /// <param name="traceEvent">The trace event.</param>
-    /// <returns>An object of <see cref="INodeFactory"/>.</returns>
-    internal static void ValidateExportNode(IUANodeBase nodeContext, INodeContainer exportFactory, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
+    internal static void ValidateExportNode(IUANodeBase nodeContext, IUANodeBase instanceDeclaration, INodeContainer exportFactory, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
       Debug.Assert(nodeContext != null, "Validator.ValidateExportNode the argument nodeContext is null.");
       //TODO Handle HasComponent ReferenceType errors. #42
@@ -97,41 +97,51 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       else
       {
-        string nodeType = nodeContext.UANode.GetType().Name;
-        switch (nodeType)
+        switch (nodeContext.UANode.NodeClassEnum)
         {
-          case "UAReferenceType":
-            CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.AddNodeFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateType, traceEvent);
-            break;
-          case "UADataType":
+          case NodeClassEnum.UADataType:
+            if (instanceDeclaration != null)
+              throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
             CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext.UAModelContext, traceEvent), UpdateType, traceEvent);
             break;
-          case "UAVariableType":
-            CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.AddNodeFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
-            break;
-          case "UAObjectType":
-            CreateNode<IObjectTypeFactory, UAObjectType>(exportFactory.AddNodeFactory<IObjectTypeFactory>, nodeContext, Update, UpdateType, traceEvent);
-            break;
-          case "UAView":
-            CreateNode<IViewInstanceFactory, UAView>(exportFactory.AddNodeFactory<IViewInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
-            break;
-          case "UAMethod":
+          case NodeClassEnum.UAMethod:
+            if (instanceDeclaration != null)
+              throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
             CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.AddNodeFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             break;
-          case "UAVariable":
+          case NodeClassEnum.UAObject:
+            CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.AddNodeFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
+            break;
+          case NodeClassEnum.UAObjectType:
+            CreateNode<IObjectTypeFactory, UAObjectType>(exportFactory.AddNodeFactory<IObjectTypeFactory>, nodeContext, Update, UpdateType, traceEvent);
+            break;
+          case NodeClassEnum.UAReferenceType:
+            if (instanceDeclaration != null)
+              throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
+            CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.AddNodeFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateType, traceEvent);
+            break;
+          case NodeClassEnum.UAVariable:
             if (parentReference == null || parentReference.ReferenceKind == ReferenceKindEnum.HasProperty)
               CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             else
               CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             break;
-          case "UAObject":
-            CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.AddNodeFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
+          case NodeClassEnum.UAVariableType:
+            CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.AddNodeFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
             break;
-          default:
-            Debug.Assert(false, "Wrong node type");
+          case NodeClassEnum.UAView:
+            if (instanceDeclaration != null)
+              throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
+            CreateNode<IViewInstanceFactory, UAView>(exportFactory.AddNodeFactory<IViewInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
             break;
+          case NodeClassEnum.Unknown:
+            throw new ApplicationException($"In {nameof(ValidateExportNode)} unexpected NodeClass value");
         }
       }
+    }
+    private static ApplicationException InstanceDeclarationNotSupported(NodeClassEnum nodeClass)
+    {
+      return new ApplicationException($"{nodeClass} doesn't support instance declarations");
     }
     #endregion
 

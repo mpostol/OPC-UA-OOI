@@ -147,6 +147,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       {
         throw new System.NotImplementedException();
       }
+
+      public IUANodeBase GetBaseTypeNode(NodeClassEnum nodeClass)
+      {
+        throw new System.NotImplementedException();
+      }
     }
   }
 }

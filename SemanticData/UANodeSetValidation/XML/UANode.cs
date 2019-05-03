@@ -48,7 +48,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// <param name="value1">The first object to compare, or null.</param>
     /// <param name="value2">The second object to compare, or null.</param>
     /// <returns>The result of the operator. The <see cref="UANode.Equals"/> procedure is used to compare.</returns>
-    public static bool operator == (UANode value1, UANode value2)
+    public static bool operator ==(UANode value1, UANode value2)
     {
       if (Object.ReferenceEquals(value1, null))
         return Object.ReferenceEquals(value2, null);
@@ -64,7 +64,34 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     {
       if (Object.ReferenceEquals(value1, null))
         return !Object.ReferenceEquals(value2, null);
-      return ! value1.Equals(value2);
+      return !value1.Equals(value2);
+    }
+    /// <summary>
+    /// Gets the node class enum based on the type of this instance.
+    /// </summary>
+    /// <value>The node class enum.</value>
+    internal NodeClassEnum NodeClassEnum
+    {
+      get
+      {
+        if (this.GetType() == typeof(UAReferenceType))
+          return NodeClassEnum.UAReferenceType;
+        if (this.GetType() == typeof(UADataType))
+          return NodeClassEnum.UADataType;
+        if (this.GetType() == typeof(UAVariableType))
+          return NodeClassEnum.UAVariableType;
+        if (this.GetType() == typeof(UAObjectType))
+          return NodeClassEnum.UAObjectType;
+        if (this.GetType() == typeof(UAView))
+          return NodeClassEnum.UAView;
+        if (this.GetType() == typeof(UAMethod))
+          return NodeClassEnum.UAMethod;
+        if (this.GetType() == typeof(UAVariable))
+          return NodeClassEnum.UAVariable;
+        if (this.GetType() == typeof(UAObject))
+          return NodeClassEnum.UAObject;
+        return NodeClassEnum.Unknown;
+      }
     }
     /// <summary>
     /// Indicates whether the the inherited parent object is also equal to another object.

@@ -182,15 +182,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return m_NamespaceTable.GetString(namespaceIndex);
     }
     /// <summary>
-    /// Gets my references.
-    /// </summary>
-    /// <param name="index">The index.</param>
-    /// <returns>IEnumerable&lt;UAReferenceContext&gt;.</returns>
-    IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetMyReferences(IUANodeContext index)
-    {
-      return m_References.Values.Where<UAReferenceContext>(x => (x.ParentNode == index));
-    }
-    /// <summary>
     /// Gets the references2 me.
     /// </summary>
     /// <param name="index">The index.</param>
@@ -213,6 +204,40 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       GetBaseTypes(rootNode, _col);
       foreach (IUANodeContext _type in _col)
         GetChildren(_type, list);
+    }
+    /// <summary>
+    /// Gets an instance of the <see cref="IAddressSpaceBuildContext"/> representing selected by <paramref name="nodeClass"/> base type node if applicable, null otherwise.
+    /// </summary>
+    /// <param name="nodeClass">The node class selector.</param>
+    /// <returns>An  instance of <see cref="IUANodeBase"/> representing base type for selected node class.</returns>
+    /// <exception cref="ApplicationException"> If <paramref name="nodeClass"/> is equal <see cref="NodeClassEnum.Unknown"/></exception>
+    IUANodeBase IAddressSpaceBuildContext.GetBaseTypeNode(NodeClassEnum nodeClass)
+    {
+      IUANodeContext _ret = null;
+      switch (nodeClass)
+      {
+        case NodeClassEnum.UADataType:
+          m_NodesDictionary.TryGetValue(DataTypeIds.BaseDataType.ToString(), out _ret);
+          break;
+        case NodeClassEnum.UAMethod:
+          break;
+        case NodeClassEnum.UAObjectType:
+        case NodeClassEnum.UAObject:
+          m_NodesDictionary.TryGetValue(ObjectTypeIds.BaseObjectType.ToString(), out _ret);
+          break;
+        case NodeClassEnum.UAReferenceType:
+          m_NodesDictionary.TryGetValue(ReferenceTypeIds.References.ToString(), out _ret);
+          break;
+        case NodeClassEnum.UAVariable:
+        case NodeClassEnum.UAVariableType:
+          m_NodesDictionary.TryGetValue(VariableTypeIds.BaseVariableType.ToString(), out _ret);
+          break;
+        case NodeClassEnum.UAView:
+          break;
+        case NodeClassEnum.Unknown:
+          throw new ApplicationException($"In {nameof(IAddressSpaceBuildContext.GetBaseTypeNode)} the {nameof(NodeClass)} must not be {nameof(NodeClassEnum.Unknown)}");
+      }
+      return _ret;
     }
     #endregion    
 
@@ -250,28 +275,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       try
       {
-        if (node == null)
-          m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeCannotBeNull, "At Importing UANode."));
-        NodeId nodeId = modelContext.ImportNodeId(node.NodeId, false);
-        string nodeIdKey = nodeId.ToString();
-        if (!m_NodesDictionary.TryGetValue(nodeIdKey, out IUANodeContext _newNode))
-        {
-          _newNode = new UANodeContext(this, modelContext, nodeId);
-          _newNode.Update(node);
-          m_NodesDictionary.Add(nodeIdKey, _newNode);
-        }
+        UANodeContext _newNode = new UANodeContext(this, modelContext, node);
+        string _nodeIdKey = _newNode.NodeIdContext.ToString();
+        if (m_NodesDictionary.ContainsKey(_nodeIdKey))
+          if (m_NodesDictionary[_nodeIdKey].UANode != null)
+          {
+            m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, string.Format("The {0} is already defined and is removed from further processing.", node.NodeId.ToString())));
+            return;
+          }
+          else
+            m_NodesDictionary[_nodeIdKey].Update(node);
         else
-        {
-          if (_newNode.UANode != null)
-            m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, string.Format("The {0} is already defined.", node.NodeId.ToString())));
-          _newNode.Update(node);
-        }
-        foreach (Reference _rf in node.References)
-        {
-          UAReferenceContext _rs = UAReferenceContext.NewReferenceStub(_rf, this, modelContext, _newNode, m_TraceEvent);
-          if (!m_References.ContainsKey(_rs.Key))
-            m_References.Add(_rs.Key, _rs);
-        }
+          m_NodesDictionary.Add(_nodeIdKey, _newNode);
+        foreach (UAReferenceContext _reference in _newNode.References)
+          if (!m_References.ContainsKey(_reference.Key))
+            m_References.Add(_reference.Key, _reference);
       }
       catch (Exception _ex)
       {
@@ -337,6 +355,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       returnValue((from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key).ToList<IUANodeContext>());
     }
+
     #endregion
 
   }

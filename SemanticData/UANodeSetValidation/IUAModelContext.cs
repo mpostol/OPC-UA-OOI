@@ -21,9 +21,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Imports the qualified name. It recalculates the <see cref="QualifiedName.NamespaceIndex"/> against local namespace index table. 
     /// </summary>
-    /// <param name="broseName">The browse name to be imported.</param>
+    /// <param name="browseName">The browse name to be imported.</param>
     /// <returns> An instance of the <see cref="QualifiedName"/> with recalculated <see cref="QualifiedName.NamespaceIndex"/>.</returns>
-    QualifiedName ImportQualifiedName(QualifiedName broseName);
+    QualifiedName ImportQualifiedName(QualifiedName browseName);
     /// <summary>
     /// Exports the browse name of the node.
     /// </summary>

@@ -29,18 +29,32 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     ///</summary>
     public TestContext TestContext
     {
-      get
-      {
-        return testContextInstance;
-      }
-      set
-      {
-        testContextInstance = value;
-      }
+      get => testContextInstance;
+      set => testContextInstance = value;
     }
     #endregion
 
     #region TestMethod
+    [TestMethod]
+    public void NodeClassEnumTest()
+    {
+      UANode _toTest = new UADataType();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UADataType, _toTest.NodeClassEnum);
+      _toTest = new UAObject();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAObject, _toTest.NodeClassEnum);
+      _toTest = new UAObjectType();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAObjectType, _toTest.NodeClassEnum);
+      _toTest = new UAReferenceType();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAReferenceType, _toTest.NodeClassEnum);
+      _toTest = new UAVariable();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAVariable, _toTest.NodeClassEnum);
+      _toTest = new UAVariableType();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAVariableType, _toTest.NodeClassEnum);
+      _toTest = new UAView();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAView, _toTest.NodeClassEnum);
+      _toTest = new UAMethod();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAMethod, _toTest.NodeClassEnum);
+    }
     [TestMethod]
     [TestCategory("Deployment")]
     [ExpectedExceptionAttribute(typeof(System.InvalidOperationException))]
@@ -49,8 +63,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml");  //File not compliant with the schema.
       Assert.IsTrue(_testDataFileInfo.Exists);
       List<TraceMessage> _trace = new List<TraceMessage>();
-      int _diagnosticCounter = 0;
-      IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
+      IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace));
       Assert.IsNotNull(_as);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       _as.ImportUANodeSet(_testDataFileInfo);
@@ -98,29 +111,24 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     #endregion
 
     #region private
-    private void TraceDiagnostic(TraceMessage msg, List<TraceMessage> errors, ref int diagnosticCounter)
+    private void TraceDiagnostic(TraceMessage msg, List<TraceMessage> errors)
     {
       Console.WriteLine(msg.ToString());
-      if (msg.BuildError.Focus == Focus.Diagnostic)
-      {
-        diagnosticCounter++;
-      }
-      else
+      if (msg.BuildError.Focus != Focus.Diagnostic)
         errors.Add(msg);
     }
     private List<IUANodeContext> ValidationUnitTest(FileInfo _testDataFileInfo, int nodes)
     {
       List<TraceMessage> _trace = new List<TraceMessage>();
-      int _diagnosticCounter = 0;
-      IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace));
+      Assert.AreEqual<int>(0, _trace.Count);
       _as.ImportUANodeSet(_testDataFileInfo);
-      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Count);
       List<IUANodeContext> _nodes = null;
       ((AddressSpaceContext)_as).UTValidateAndExportModel(1, x => _nodes = x);
       Assert.AreEqual<int>(nodes, _nodes.Count);
       _as.ValidateAndExportModel();
-      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Count);
       return _nodes;
     }
     #endregion

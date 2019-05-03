@@ -132,6 +132,7 @@ namespace CAS.UA.Model.Designer.ImportExport.UT
     }
     #endregion
 
+    #region Test instrumentation
     #region ModelDesign
     private static void Compare(ModelDesign expected, ModelDesign actual)
     {
@@ -271,7 +272,6 @@ namespace CAS.UA.Model.Designer.ImportExport.UT
     }
     #endregion
 
-
     #region private helper
     private static void Compare(Parameter[] expected, Parameter[] actual)
     {
@@ -391,6 +391,7 @@ namespace CAS.UA.Model.Designer.ImportExport.UT
       else
         errors.Add(msg);
     }
+    #endregion
     #endregion
 
   }

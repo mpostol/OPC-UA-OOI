@@ -48,12 +48,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>The namespace of the index pointed out by the <paramref name="namespaceIndex"/></returns>
     string GetNamespace(ushort namespaceIndex);
     /// <summary>
-    /// Gets my references.
-    /// </summary>
-    /// <param name="index">The index.</param>
-    /// <returns>IEnumerable&lt;UAReferenceContext&gt;.</returns>
-    IEnumerable<UAReferenceContext> GetMyReferences(IUANodeContext index);
-    /// <summary>
     /// Gets the references to me.
     /// </summary>
     /// <param name="node">The node.</param>
@@ -65,6 +59,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="rootNode">The root node.</param>
     /// <param name="list">The list o d nodes.</param>
     void GetDerivedInstances(IUANodeContext rootNode, List<IUANodeBase> list);
+    /// <summary>
+    /// Gets the base type node if exist.
+    /// </summary>
+    /// <param name="nodeClass">The node class.</param>
+    /// <returns>An instance of the <see cref="IUANodeBase"/> if exist in the AddressSpace, null otherwise.</returns>
+    IUANodeBase GetBaseTypeNode(XML.NodeClassEnum nodeClass);
 
   }
 

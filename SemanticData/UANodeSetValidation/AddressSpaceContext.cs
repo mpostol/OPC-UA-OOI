@@ -182,6 +182,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return m_NamespaceTable.GetString(namespaceIndex);
     }
     /// <summary>
+    /// Gets my references from the main collection.
+    /// </summary>
+    /// <param name="index">The index.</param>
+    /// <returns>An instance of the <see cref="IEnumerable{UAReferenceContext}"/> containing references pointed out by index.</returns>
+    IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetMyReferences(IUANodeContext index)
+    {
+      return m_References.Values.Where<UAReferenceContext>(x => (x.ParentNode == index));
+    }
+    /// <summary>
     /// Gets the references2 me.
     /// </summary>
     /// <param name="index">The index.</param>
@@ -275,21 +284,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       try
       {
-        UANodeContext _newNode = new UANodeContext(this, modelContext, node);
-        string _nodeIdKey = _newNode.NodeIdContext.ToString();
-        if (m_NodesDictionary.ContainsKey(_nodeIdKey))
-          if (m_NodesDictionary[_nodeIdKey].UANode != null)
-          {
-            m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, string.Format("The {0} is already defined and is removed from further processing.", node.NodeId.ToString())));
-            return;
-          }
-          else
-            m_NodesDictionary[_nodeIdKey].Update(node);
-        else
-          m_NodesDictionary.Add(_nodeIdKey, _newNode);
-        foreach (UAReferenceContext _reference in _newNode.References)
-          if (!m_References.ContainsKey(_reference.Key))
-            m_References.Add(_reference.Key, _reference);
+        IUANodeContext _newNode = modelContext.GetOrCreateNodeContext(node.NodeId);
+        _newNode.Update(node, _reference => 
+              {
+                if (!m_References.ContainsKey(_reference.Key))
+                  m_References.Add(_reference.Key, _reference);
+              }
+        );
       }
       catch (Exception _ex)
       {

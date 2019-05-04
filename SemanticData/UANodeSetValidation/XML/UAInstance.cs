@@ -21,7 +21,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       UAInstance _other = other as UAInstance;
       if (_other == null)
         return false;
-      return this.ParentNodeId == _other.ParentNodeId;
+      return true; //this.ParentNodeId == _other.ParentNodeId; it is not attribute exposed by the node.
     }
   }
 

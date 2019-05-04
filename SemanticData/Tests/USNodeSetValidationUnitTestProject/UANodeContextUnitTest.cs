@@ -34,7 +34,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.AreSame(_mc, _toTest.UAModelContext);
       Assert.IsNull(_toTest.UANode);
       XML.UANode _node = UnitTest.Helpers.TestData.CreateUAObject();
-      _toTest.Update(_node);
+      _toTest.Update(_node, x => { }); //TODO add reference registration test.
       Assert.IsNotNull(_toTest.BrowseName);
       Assert.AreEqual<string>(_node.BrowseName, _toTest.BrowseName.ToString());
       Assert.IsFalse(_toTest.InRecursionChain);
@@ -43,23 +43,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsFalse(_toTest.ModelingRule.HasValue);
       Assert.IsNotNull(_toTest.NodeIdContext);
       Assert.AreEqual<string>(_toTest.NodeIdContext.ToString(), "ns=1;i=11");
-      Assert.AreSame(_mc, _toTest.UAModelContext);
-      Assert.IsNotNull(_toTest.UANode);
-    }
-    [TestMethod]
-    public void ConstructorUANodeTest()
-    {
-      IUAModelContext _mc = new UAModelContext();
-      XML.UANode _node = UnitTest.Helpers.TestData.CreateUAObject();
-      UANodeContext _toTest = new UANodeContext(AddressSpaceBuildContext.NewAddressSpaceBuildContext, _mc, _node);
-      Assert.IsNotNull(_toTest.BrowseName);
-      Assert.AreEqual<string>(_node.BrowseName, _toTest.BrowseName.ToString());
-      Assert.IsFalse(_toTest.InRecursionChain);
-      Assert.IsFalse(_toTest.IsProperty);
-      Assert.IsFalse(((IUANodeBase)_toTest).IsPropertyVariableType);
-      Assert.IsFalse(_toTest.ModelingRule.HasValue);
-      Assert.IsNotNull(_toTest.NodeIdContext);
-      Assert.AreEqual<string>(_toTest.NodeIdContext.ToString(), "ns=1;i=986");
       Assert.AreSame(_mc, _toTest.UAModelContext);
       Assert.IsNotNull(_toTest.UANode);
     }
@@ -136,13 +119,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         throw new NotImplementedException();
       }
-      public IUANodeContext GetOrCreateNodeContext(string nodeId, bool lookupAlias)
+      public IUANodeContext GetOrCreateNodeContext(string nodeId)
       {
         return new UANodeContext(AddressSpaceBuildContext.NewAddressSpaceBuildContext, this, NodeId.Parse(nodeId));
       }
-      public NodeId ImportNodeId(string nodeId, bool lookupAlias)
+      public NodeId ImportNodeId(string nodeId)
       {
-        Assert.IsFalse(lookupAlias);
         return NodeId.Parse(nodeId);
       }
       public QualifiedName ImportQualifiedName(QualifiedName broseName)

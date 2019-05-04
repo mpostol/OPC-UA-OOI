@@ -313,6 +313,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       List<string> _dictionaryForFirst = first.Select<XML.Reference, string>(x => x.ToString()).ToList<string>();
       foreach (XML.Reference _reference in second)
       {
+        if (!_reference.IsForward) 
+          continue;
         if (!_dictionaryForFirst.Exists(x => _reference.ToString().CompareTo(x) == 0))
           return false;
       };

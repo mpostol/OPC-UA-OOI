@@ -110,9 +110,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.AddNodeFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             break;
           case NodeClassEnum.UAObject:
+            if (nodeContext.Equals(instanceDeclaration))
+              return;
             CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.AddNodeFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
             break;
           case NodeClassEnum.UAObjectType:
+            if (instanceDeclaration != null)
+              throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
             CreateNode<IObjectTypeFactory, UAObjectType>(exportFactory.AddNodeFactory<IObjectTypeFactory>, nodeContext, Update, UpdateType, traceEvent);
             break;
           case NodeClassEnum.UAReferenceType:
@@ -121,12 +125,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.AddNodeFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateType, traceEvent);
             break;
           case NodeClassEnum.UAVariable:
+            if (nodeContext.Equals(instanceDeclaration))
+              return;
             if (parentReference == null || parentReference.ReferenceKind == ReferenceKindEnum.HasProperty)
               CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             else
               CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             break;
           case NodeClassEnum.UAVariableType:
+            if (instanceDeclaration != null)
+              throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
             CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.AddNodeFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, traceEvent), UpdateType, traceEvent);
             break;
           case NodeClassEnum.UAView:
@@ -239,7 +247,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongInverseName, string.Format("If ReferenceType {0} is not symmetric and not abstract the InverseName shall be specified.", nodeSet.NodeIdentifier())));
     }
     private static void Update(IObjectTypeFactory nodeDesign, UAObjectType nodeSet) { }
-    private static FactoryType CreateNode<FactoryType, NodeSetType>
+    private static void CreateNode<FactoryType, NodeSetType>
       (
         Func<FactoryType> createNode,
         IUANodeBase nodeContext,
@@ -276,7 +284,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.DiagnosticTraceMessage("Documentation is not supported. You must fix it manually."));
       updateBase(_nodeFactory, _nodeSet, nodeContext, traceEvent);
       updateNode(_nodeFactory, _nodeSet);
-      return _nodeFactory;
     }
     private static AccessRestrictions ConvertToAccessRestrictions(byte accessRestrictions, string typeName, Action<TraceMessage> traceEvent)
     {

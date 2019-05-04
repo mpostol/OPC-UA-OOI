@@ -41,16 +41,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the or create node context.
     /// </summary>
     /// <param name="nodeId">The node identifier.</param>
-    /// <param name="lookupAlias">if set to <c>true</c> lookup alias table.</param>
     /// <returns>An instance of <see cref="IUANodeContext"/>.</returns>
-    IUANodeContext GetOrCreateNodeContext(string nodeId, bool lookupAlias);
+    IUANodeContext GetOrCreateNodeContext(string nodeId);
     /// <summary>
     /// Imports the node identifier if <paramref name="nodeId"/> is not empty.
     /// </summary>
     /// <param name="nodeId">The node identifier.</param>
-    /// <param name="lookupAlias">if set to <c>true</c> lookup the aliases table .</param>
     /// <returns>An instance of the <see cref="NodeId"/> or null is the <paramref name="nodeId"/> is null or empty.</returns>
-    NodeId ImportNodeId(string nodeId, bool lookupAlias);
+    NodeId ImportNodeId(string nodeId);
     /// <summary>
     /// Exports the qualified name to <see cref="XmlQualifiedName"/>. 
     /// </summary>

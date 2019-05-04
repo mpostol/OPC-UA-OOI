@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
-using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
@@ -24,35 +23,57 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   public class UAReferenceContext
   {
 
-    #region creator
-    internal static UAReferenceContext NewReferenceStub
-      (Reference reference, IAddressSpaceBuildContext addressSpaceContext, IUAModelContext modelContext, IUANodeContext parentNode, Action<TraceMessage> traceEvent)
+    #region constructor
+    internal UAReferenceContext(Reference reference, IAddressSpaceBuildContext addressSpaceContext, IUAModelContext modelContext, IUANodeContext parentNode)
     {
-      IUANodeContext targetNode = modelContext.GetOrCreateNodeContext(reference.Value, true);
-      UAReferenceContext _stb = new UAReferenceContext()
-      {
-        m_Context = addressSpaceContext,
-        ParentNode = parentNode,
-        SourceNode = reference.IsForward ? parentNode : targetNode,
-        ModelNode = reference,
-        TargetNode = reference.IsForward ? targetNode : parentNode,
-        TypeNode = modelContext.GetOrCreateNodeContext(reference.ReferenceType, true),
-      };
-      if (_stb.TypeNode != null && _stb.TypeNode.NodeIdContext.NamespaceIndex == 0)
-        _stb.ReferenceKind = _stb.GetReferenceKind(_stb.TypeNode);
-      return _stb;
+      IUANodeContext targetNode = modelContext.GetOrCreateNodeContext(reference.Value);
+      this.m_AddressSpace = addressSpaceContext;
+      this.ParentNode = parentNode;
+      this.SourceNode = reference.IsForward ? parentNode : targetNode;
+      this.Reference = reference;
+      this.TargetNode = reference.IsForward ? targetNode : parentNode;
+      this.TypeNode = modelContext.GetOrCreateNodeContext(reference.ReferenceType);
     }
     #endregion
 
-    #region IReferenceContext
+    #region API
     /// <summary>
     /// Gets the kind of the reference.
     /// </summary>
     /// <value>The kind of the reference.</value>
     internal ReferenceKindEnum ReferenceKind
     {
-      get => b_ReferenceKindEnum;
-      private set => b_ReferenceKindEnum = value;
+      get
+      {
+        if ((TypeNode == null) || TypeNode.NodeIdContext.NamespaceIndex != 0)
+          return ReferenceKindEnum.Custom;
+        ReferenceKindEnum _ret = default(ReferenceKindEnum);
+        switch (TypeNode.NodeIdContext.UintIdentifier())
+        {
+          case ReferenceTypes.HierarchicalReferences:
+            _ret = ReferenceKindEnum.HierarchicalReferences;
+            break;
+          case ReferenceTypes.HasComponent:
+            _ret = ReferenceKindEnum.HasComponent;
+            break;
+          case ReferenceTypes.HasProperty:
+            _ret = ReferenceKindEnum.HasProperty;
+            break;
+          case ReferenceTypes.HasModellingRule:
+            _ret = ReferenceKindEnum.HasModellingRule;
+            break;
+          case ReferenceTypes.HasTypeDefinition:
+            _ret = ReferenceKindEnum.HasTypeDefinition;
+            break;
+          case ReferenceTypes.HasSubtype:
+            _ret = ReferenceKindEnum.HasSubtype;
+            break;
+          default:
+            _ret = ReferenceKindEnum.Custom;
+            break;
+        }
+        return _ret;
+      }
     }
     /// <summary>
     /// Gets the name of the reference type.
@@ -62,7 +83,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (IsDefault(this.TypeNode.NodeIdContext))
         return null;
-      return m_Context.ExportBrowseName(this.TypeNode.NodeIdContext);
+      return m_AddressSpace.ExportBrowseName(this.TypeNode.NodeIdContext);
     }
     /// <summary>
     /// Returns the name of the reference target and calculates the Target identifier by traversing the components hierarchical path.
@@ -71,11 +92,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     internal XmlQualifiedName BrowsePath()
     {
       List<string> _path = new List<string>();
-      IUANodeContext _startingNode = ModelNode.IsForward ? TargetNode : SourceNode;
+      IUANodeContext _startingNode = this.Reference.IsForward ? TargetNode : SourceNode;
       _startingNode.BuildSymbolicId(_path);
       string _symbolicId = _path.SymbolicName();
       //return new XmlQualifiedName(_symbolicId, m_Context.m_NamespaceTable.GetString(this.TargetNode.NodeIdContext.NamespaceIndex));
-      return new XmlQualifiedName(_symbolicId, m_Context.GetNamespace(this.TargetNode.NodeIdContext.NamespaceIndex));
+      return new XmlQualifiedName(_symbolicId, m_AddressSpace.GetNamespace(this.TargetNode.NodeIdContext.NamespaceIndex));
     }
     /// <summary>
     /// Gets or sets the parent node (the reference is originated from) of the reference.
@@ -100,15 +121,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return _ret;
     }
     internal IUANodeContext ParentNode { get; private set; }
+    /// <summary>
+    /// Gets the target node context.
+    /// </summary>
+    /// <value>The target node context.</value>
     internal IUANodeContext TypeNode { get; private set; }
     internal IUANodeContext TargetNode { get; private set; }
+    /// <summary>
+    /// Gets the source node context.
+    /// </summary>
+    /// <value>The source node context.</value>
     internal IUANodeContext SourceNode { get; private set; }
     internal bool ChildConnector => (ReferenceKind == ReferenceKindEnum.HasProperty) || (ReferenceKind == ReferenceKindEnum.HasComponent);
-    internal bool HierarchicalReference
-    {
-      get => b_HierarchicalReference;
-      set => b_HierarchicalReference = value;
-    }
     /// <summary>
     /// Ir recursively builds the symbolic identifier.
     /// </summary>
@@ -119,60 +143,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     internal string Key => string.Format("{0}:{1}:{2}", SourceNode.NodeIdContext.Format(), TypeNode.NodeIdContext.Format(), TargetNode.NodeIdContext.Format());
     /// <summary>
-    /// Gets the target node context.
-    /// </summary>
-    /// <value>The target node context.</value>
-    internal IUANodeBase TargetNodeContext=> TargetNode; 
-    /// <summary>
-    /// Gets the source node context.
-    /// </summary>
-    /// <value>The source node context.</value>
-    internal IUANodeContext SourceNodeContext => SourceNode;
-    /// <summary>
     /// Gets the reference.
     /// </summary>
     /// <value>The reference.</value>
-    internal Reference Reference => ModelNode;
+    internal Reference Reference { get; private set; }
     #endregion
 
     #region private
     //fields
-    private bool b_HierarchicalReference;
-    private Reference ModelNode;
-    private IAddressSpaceBuildContext m_Context;
-    private ReferenceKindEnum b_ReferenceKindEnum = ReferenceKindEnum.Custom;
+    private IAddressSpaceBuildContext m_AddressSpace;
     //methods
-    private ReferenceKindEnum GetReferenceKind(IUANodeContext TypeNode)
-    {
-      if (TypeNode.NodeIdContext.NamespaceIndex != 0)
-        return ReferenceKindEnum.Custom;
-      ReferenceKindEnum _ret = default(ReferenceKindEnum);
-      switch (TypeNode.NodeIdContext.UintIdentifier())
-      {
-        case ReferenceTypes.HierarchicalReferences:
-          _ret = ReferenceKindEnum.HierarchicalReferences;
-          break;
-        case ReferenceTypes.HasComponent:
-          _ret = ReferenceKindEnum.HasComponent;
-          break;
-        case ReferenceTypes.HasProperty:
-          _ret = ReferenceKindEnum.HasProperty;
-          break;
-        case ReferenceTypes.HasModellingRule:
-          _ret = ReferenceKindEnum.HasModellingRule;
-          break;
-        case ReferenceTypes.HasTypeDefinition:
-          _ret = ReferenceKindEnum.HasTypeDefinition;
-          break;
-        case ReferenceTypes.HasSubtype:
-          _ret = ReferenceKindEnum.HasSubtype;
-          break;
-        default:
-          _ret = ReferenceKindEnum.Custom;
-          break;
-      }
-      return _ret;
-    }
     private bool IsDefault(NodeId node)
     {
       NodeId _default = NodeId.Null;
@@ -195,8 +175,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _default == node;
     }
-    //creator
-    private UAReferenceContext() { }
     #endregion
 
   };

@@ -48,6 +48,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>The namespace of the index pointed out by the <paramref name="namespaceIndex"/></returns>
     string GetNamespace(ushort namespaceIndex);
     /// <summary>
+    /// Gets my references.
+    /// </summary>
+    /// <param name="index">The index.</param>
+    /// <returns>IEnumerable&lt;UAReferenceContext&gt;.</returns>
+    IEnumerable<UAReferenceContext> GetMyReferences(IUANodeContext index);
+    /// <summary>
     /// Gets the references to me.
     /// </summary>
     /// <param name="node">The node.</param>

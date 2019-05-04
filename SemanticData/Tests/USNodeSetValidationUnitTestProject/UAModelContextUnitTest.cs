@@ -60,7 +60,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       UAModelContext _mc = new UAModelContext(_tm, _as);
       List<NodeId> nodeIdList = new List<NodeId>();
       foreach (UANode _nd in _tm.Items)
-        nodeIdList.Add(_mc.ImportNodeId(_nd.NodeId, false));
+        nodeIdList.Add(_mc.ImportNodeId(_nd.NodeId));
       BuildErrorsHandling.Log.TraceEventAction -= _msg => _log.Add(_msg);
       Assert.AreEqual<int>(1, _log.Count);
       Assert.AreEqual<string>("P3-0802020000", _log[0].BuildError.Identifier);
@@ -79,7 +79,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       UAModelContext _mc = new UAModelContext(_tm, _as);
       List<NodeId> nodeIdList = new List<NodeId>();
       foreach (UANode _nd in _tm.Items)
-        nodeIdList.Add(_mc.ImportNodeId(_nd.NodeId, false));
+        nodeIdList.Add(_mc.ImportNodeId(_nd.NodeId));
       BuildErrorsHandling.Log.TraceEventAction -= _msg => _log.Add(_msg);
       Assert.AreEqual<int>(0, _log.Count);
       Assert.AreEqual<int>(1, nodeIdList.Count);

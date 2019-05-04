@@ -31,7 +31,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         ParentEquals(other) &&
         this.AccessRestrictions == other.AccessRestrictions &&
         this.DisplayName.LocalizedTextArraysEqual(other.DisplayName) &&
-        this.NodeId == other.NodeId &&
+        //this.NodeId == other.NodeId && it is not Information Model
         this.ReleaseStatus == ReleaseStatus &&
         this.RolePermissions.RolePermissionsEquals(other.RolePermissions) &&
         this.SymbolicName == other.SymbolicName &&
@@ -47,7 +47,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// </summary>
     /// <param name="value1">The first object to compare, or null.</param>
     /// <param name="value2">The second object to compare, or null.</param>
-    /// <returns>The result of the operator. The <see cref="UANode.Equals"/> procedure is used to compare.</returns>
+    /// <returns>The result of the operator. The <see cref="UANode.Equals(UANode)"/> procedure is used to compare.</returns>
     public static bool operator ==(UANode value1, UANode value2)
     {
       if (Object.ReferenceEquals(value1, null))
@@ -59,7 +59,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// </summary>
     /// <param name="value1">The first object to compare, or null.</param>
     /// <param name="value2">The second object to compare, or null.</param>
-    /// <returns>The result of the operator. The <see cref="UANode.Equals"/> procedure is used to compare.</returns>
+    /// <returns>The result of the operator. The <see cref="UANode.Equals(UANode)"/> procedure is used to compare.</returns>
     public static bool operator !=(UANode value1, UANode value2)
     {
       if (Object.ReferenceEquals(value1, null))
@@ -93,11 +93,34 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         return NodeClassEnum.Unknown;
       }
     }
+    #region override Object
+    /// <summary>
+    /// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+    /// </summary>
+    /// <param name="obj">The object to compare with the current object.</param>
+    /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+    /// <exception cref="NotImplementedException">Object.Equals must not be used and is intentionally not implemented</exception>
+    public override bool Equals(object obj)
+    {
+      throw new NotImplementedException("Object.Equals must not be used and is intentionally not implemented");
+    }
+    /// <summary>
+    /// Returns a hash code for this instance.
+    /// </summary>
+    /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+    /// <exception cref="NotImplementedException">Object.GetHashCode must not be used and is intentionally not implemented</exception>
+    public override int GetHashCode()
+    {
+      throw new NotImplementedException("Object.GetHashCode must not be used and is intentionally not implemented");
+    }
+    #endregion
+
     /// <summary>
     /// Indicates whether the the inherited parent object is also equal to another object.
     /// </summary>
     /// <param name="other">An object to compare with this object.</param>
     /// <returns><c>true</c> if the current object is equal to the <paramref name="other">other</paramref>; otherwise,, <c>false</c> otherwise.</returns>
     protected abstract bool ParentEquals(UANode other);
+
   }
 }

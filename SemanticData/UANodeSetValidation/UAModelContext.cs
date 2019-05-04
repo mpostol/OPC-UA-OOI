@@ -50,8 +50,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>The identifier an object of <see cref="System.Xml.XmlQualifiedName" /> or null if <paramref name="nodeId" /> has default value.</returns>
     public XmlQualifiedName ExportBrowseName(string nodeId, NodeId defaultValue)
     {
-      NodeId _id = ImportNodeId(nodeId, true);
-      if (_id == NodeId.Null ||_id == defaultValue)
+      NodeId _id = ImportNodeId(nodeId);
+      if (_id == NodeId.Null || _id == defaultValue)
         return null;
       return AddressSpaceContext.ExportBrowseName(_id);
     }
@@ -60,9 +60,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       XmlQualifiedName _dataType = ExportBrowseName(argument.DataType.Identifier, DataTypeIds.BaseDataType);
       return AddressSpaceContext.ExportArgument(argument, _dataType);
     }
-    public IUANodeContext GetOrCreateNodeContext(string nodeId, bool lookupAlias)
+    public IUANodeContext GetOrCreateNodeContext(string nodeId)
     {
-      NodeId _id = ImportNodeId(nodeId, lookupAlias);
+      NodeId _id = ImportNodeId(nodeId);
       return AddressSpaceContext.GetOrCreateNodeContext(_id, this);
     }
     public QualifiedName ImportQualifiedName(QualifiedName source)
@@ -73,15 +73,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Imports the node identifier if <paramref name="nodeId" /> is not empty.
     /// </summary>
     /// <param name="nodeId">The node identifier.</param>
-    /// <param name="lookupAlias">if set to <c>true</c> lookup the aliases table .</param>
     /// <returns>An instance of the <see cref="NodeId" /> or null is the <paramref name="nodeId" /> is null or empty.</returns>
-    public NodeId ImportNodeId(string nodeId, bool lookupAlias)
+    public NodeId ImportNodeId(string nodeId)
     {
       if (string.IsNullOrEmpty(nodeId))
         return NodeId.Null;
-      // lookup alias.
-      if (lookupAlias)
-        nodeId = LookupAlias(nodeId);
+      nodeId = LookupAlias(nodeId);
       // parse the string.
       NodeId _nodeId = NodeId.Parse(nodeId);
       if (_nodeId.NamespaceIndex > 0)
@@ -102,7 +99,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private Dictionary<string, string> m_AliasesDictionary = new Dictionary<string, string>();
     private readonly UANodeSet m_UANodeSetModel;
     private IAddressSpaceBuildContext AddressSpaceContext { get; }
-    private static int m_NamespaceCount = 0; 
+    private static int m_NamespaceCount = 0;
     //methods
     private void AddAlias(NodeIdAlias[] nodeIdAlias)
     {
@@ -125,7 +122,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _identifier = m_UANodeSetModel.NamespaceUris[namespaceIndex - 1];
       else
         BuildErrorsHandling.Log.TraceEvent(
-          TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedNamespaceIndex, $"ImportNamespaceIndex failed - namespace index {namespaceIndex-1} is out of the NamespaceUris index. New namespace {_identifier} is created insted."));
+          TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedNamespaceIndex, $"ImportNamespaceIndex failed - namespace index {namespaceIndex - 1} is out of the NamespaceUris index. New namespace {_identifier} is created insted."));
       return AddressSpaceContext.GetIndexOrAppend(_identifier);
     }
     //TODO it is not used

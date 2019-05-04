@@ -31,23 +31,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="addressSpaceContext">The address space context.</param>
     /// <param name="modelContext">The model context.</param>
     /// <param name="nodeId">An object of <see cref="NodeId"/> that stores an identifier for a node in a server's address space.</param>
-    internal UANodeContext(IAddressSpaceBuildContext addressSpaceContext, IUAModelContext modelContext, NodeId nodeId) : this(addressSpaceContext, modelContext)
+    internal UANodeContext(IAddressSpaceBuildContext addressSpaceContext, IUAModelContext modelContext, NodeId nodeId)
     {
       NodeIdContext = nodeId;
-    }
-    internal UANodeContext(IAddressSpaceBuildContext addressSpaceContext, IUAModelContext modelContext, UANode node) : this(addressSpaceContext, modelContext)
-    {
-      if (node == null)
-      {
-        BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeCannotBeNull, "A stub is created."));
-        NodeIdContext = NodeId.Null;
-      }
-      else
-        NodeIdContext = modelContext.ImportNodeId(node.NodeId, false);
-      Update(node);
-    }
-    private UANodeContext(IAddressSpaceBuildContext addressSpaceContext, IUAModelContext modelContext)
-    {
       this.m_AddressSpaceContext = addressSpaceContext;
       this.UAModelContext = modelContext;
     }
@@ -80,16 +66,22 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <value><c>true</c> if the node is in recursion chain; otherwise, <c>false</c>.</value>
     public bool InRecursionChain { get; set; } = false;
     /// <summary>
-    /// Updates this instance in case the wrapped <see cref="UANode"/> is recognized in the model.
+    /// Updates this instance in case the wrapped <see cref="UANode" /> is recognized in the model.
     /// </summary>
-    /// <param name="node">The node <see cref="UANode"/> containing definition to be added to the model.</param>
-    public void Update(UANode node)
+    /// <param name="node">The node <see cref="UANode" /> containing definition to be added to the model.</param>
+    /// <param name="addReference">Used to add new reference to the common collection of references.</param>
+    /// <exception cref="ArgumentException">node - Argument must not be null</exception>
+    public void Update(UANode node, Action<UAReferenceContext> addReference)
     {
       if (node == null)
+        throw new ArgumentException(nameof(node), $"Argument must not be null at {nameof(Update)} ");
+      if (UANode != null)
+      {
+        BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, string.Format("The {0} is already defined and is removed from further processing.", node.NodeId.ToString())));
         return;
+      }
       UANode = node;
       QualifiedName _broseName = node.BrowseName.Parse(BuildErrorsHandling.Log.TraceEvent);
-      Debug.Assert(BrowseName != null);
       if (QualifiedName.IsNull(_broseName))
       {
         NodeId _id = NodeId.Parse(UANode.NodeId);
@@ -97,29 +89,29 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, string.Format("New identifier {0} is generated to proceed.", _broseName)));
       }
       BrowseName = UAModelContext.ImportQualifiedName(_broseName);
-      List<UAReferenceContext> m_References = new List<UAReferenceContext>();
       foreach (Reference _reference in node.References)
       {
-        UAReferenceContext _referenceStub = UAReferenceContext.NewReferenceStub(_reference, this.m_AddressSpaceContext, UAModelContext, this, BuildErrorsHandling.Log.TraceEvent);
-        m_References.Add(_referenceStub);
-        switch (_referenceStub.ReferenceKind)
+        UAReferenceContext _newReference = new UAReferenceContext(_reference, this.m_AddressSpaceContext, UAModelContext, this);
+        switch (_newReference.ReferenceKind)
         {
           case ReferenceKindEnum.Custom:
           case ReferenceKindEnum.HasComponent:
           case ReferenceKindEnum.HasProperty:
+            break;
           case ReferenceKindEnum.HasModellingRule:
+            ModelingRule = _newReference.GetModelingRule();
             break;
           case ReferenceKindEnum.HasSubtype: //TODO Part 3 7.10 HasSubtype - add test cases #35
-            m_BaseTypeNode = _referenceStub.SourceNodeContext;
+            m_BaseTypeNode = _newReference.SourceNode;
             break;
           case ReferenceKindEnum.HasTypeDefinition: //Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
-            m_BaseTypeNode = _referenceStub.TargetNodeContext;
+            m_BaseTypeNode = _newReference.TargetNode;
             break;
         }
         if (m_BaseTypeNode == null)
           m_BaseTypeNode = m_AddressSpaceContext.GetBaseTypeNode(node.NodeClassEnum);
+        addReference(_newReference);
       }
-      this.References = m_References;
     }
     #endregion
 
@@ -140,10 +132,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (nodeFactory == null)
         throw new ArgumentNullException(nameof(nodeFactory), $"{nodeFactory} must not be null in {nameof(IUANodeBase.CalculateNodeReferences)}");
-      ModelingRule = new Nullable<ModelingRules>();
       List<UAReferenceContext> _children = new List<UAReferenceContext>();
       Dictionary<string, IUANodeBase> _derivedChildren = m_BaseTypeNode == null ? new Dictionary<string, IUANodeBase>() : m_BaseTypeNode.GetDerivedInstances();
-      foreach (UAReferenceContext _rfx in this.References)
+      foreach (UAReferenceContext _rfx in m_AddressSpaceContext.GetMyReferences(this))
       {
         switch (_rfx.ReferenceKind)
         {
@@ -160,21 +151,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             _or.TargetId = _rfx.BrowsePath();
             break;
           case ReferenceKindEnum.HasComponent:
-            if (_rfx.SourceNodeContext == this)
+            if (_rfx.SourceNode == this)
               _children.Add(_rfx);
             break;
           case ReferenceKindEnum.HasProperty:
-            if ((_rfx.SourceNodeContext == this) &&
-              (!(_rfx.SourceNodeContext.UANode.NodeClassEnum == NodeClassEnum.UADataType) || _rfx.TargetNodeContext.UANode.BrowseName.CompareTo("EnumStrings") != 0))
+            if ((_rfx.SourceNode == this) &&
+              (!(_rfx.SourceNode.UANode.NodeClassEnum == NodeClassEnum.UADataType) || _rfx.TargetNode.UANode.BrowseName.CompareTo("EnumStrings") != 0))
               _children.Add(_rfx);
             break;
           case ReferenceKindEnum.HasModellingRule:
-            ModelingRule = _rfx.GetModelingRule();
             break;
           case ReferenceKindEnum.HasSubtype:
             break;
           case ReferenceKindEnum.HasTypeDefinition: //Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
-            IsProperty = _rfx.TargetNodeContext.IsPropertyVariableType;
+            IsProperty = _rfx.TargetNode.IsPropertyVariableType;
             break;
         }
       }
@@ -183,9 +173,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         try
         {
           IUANodeBase _instanceDeclaration = null;
-          if (!string.IsNullOrEmpty(_rc.TargetNodeContext.BrowseName.Name))
-            _instanceDeclaration = _derivedChildren.ContainsKey(_rc.TargetNodeContext.BrowseName.Name) ? _derivedChildren[_rc.TargetNodeContext.BrowseName.Name] : null;
-          Validator.ValidateExportNode(_rc.TargetNodeContext, _instanceDeclaration, nodeFactory, _rc, BuildErrorsHandling.Log.TraceEvent);
+          if (!string.IsNullOrEmpty(_rc.TargetNode.BrowseName.Name))
+            _instanceDeclaration = _derivedChildren.ContainsKey(_rc.TargetNode.BrowseName.Name) ? _derivedChildren[_rc.TargetNode.BrowseName.Name] : null;
+          Validator.ValidateExportNode(_rc.TargetNode, _instanceDeclaration, nodeFactory, _rc, BuildErrorsHandling.Log.TraceEvent);
         }
         catch (Exception ex)
         {
@@ -222,7 +212,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the modeling rule associated with this node.
     /// </summary>
     /// <value>The modeling rule. Null if valid modeling rule cannot be recognized.</value>
-    public ModelingRules? ModelingRule { get; private set; }
+    public ModelingRules? ModelingRule { get; private set; } = new Nullable<ModelingRules>();
     /// <summary>
     /// Gets the parameters.
     /// </summary>
@@ -310,10 +300,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         this.UANode == other.UANode;
     }
     bool IUANodeBase.IsPropertyVariableType => this.NodeIdContext == VariableTypeIds.PropertyType;
-    #endregion
-
-    #region public API
-    internal IEnumerable<UAReferenceContext> References { get; private set; }
     #endregion
 
     #region private

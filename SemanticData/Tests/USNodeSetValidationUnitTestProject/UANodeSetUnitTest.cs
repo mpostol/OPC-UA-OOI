@@ -84,7 +84,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     {
       FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
-      List<IUANodeContext> _nodes = ValidationUnitTest(_testDataFileInfo, 14);
+      List<IUANodeContext> _nodes = ValidationUnitTest(_testDataFileInfo, 24);
       Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
       Assert.AreEqual<int>(2, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
     }

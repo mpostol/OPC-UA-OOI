@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" LastModified="2015-04-03T15:25:20.5736134Z" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" LastModified="2019-05-05T11:55:48.2432276Z" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
   <NamespaceUris>
     <Uri>http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest</Uri>
   </NamespaceUris>
@@ -43,6 +43,7 @@
   <UAObjectType NodeId="ns=1;i=196" BrowseName="1:ComplexObjectType">
     <DisplayName>ComplexObjectType</DisplayName>
     <References>
+      <Reference ReferenceType="HasComponent">ns=1;i=214</Reference>
       <Reference ReferenceType="HasComponent">ns=1;i=308</Reference>
       <Reference ReferenceType="HasProperty">ns=1;i=309</Reference>
       <Reference ReferenceType="HasComponent">ns=1;i=289</Reference>
@@ -51,6 +52,105 @@
       <Reference ReferenceType="HasSubtype" IsForward="false">i=2004</Reference>
     </References>
   </UAObjectType>
+  <UAObject NodeId="ns=1;i=214" BrowseName="ServerCapabilities" ParentNodeId="ns=1;i=196">
+    <DisplayName>ServerCapabilities</DisplayName>
+    <Description>Describes capabilities supported by the server.</Description>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=215</Reference>
+      <Reference ReferenceType="HasProperty">ns=1;i=216</Reference>
+      <Reference ReferenceType="HasProperty">ns=1;i=217</Reference>
+      <Reference ReferenceType="HasProperty">ns=1;i=218</Reference>
+      <Reference ReferenceType="HasProperty">ns=1;i=219</Reference>
+      <Reference ReferenceType="HasProperty">ns=1;i=220</Reference>
+      <Reference ReferenceType="HasProperty">ns=1;i=221</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=237</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=238</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=2013</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=196</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=1;i=215" BrowseName="ServerProfileArray" ParentNodeId="ns=1;i=214" DataType="String" ValueRank="1">
+    <DisplayName>ServerProfileArray</DisplayName>
+    <Description>A list of profiles supported by the server.</Description>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=214</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=216" BrowseName="LocaleIdArray" ParentNodeId="ns=1;i=214" DataType="i=295" ValueRank="1">
+    <DisplayName>LocaleIdArray</DisplayName>
+    <Description>A list of locales supported by the server.</Description>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=214</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=217" BrowseName="MinSupportedSampleRate" ParentNodeId="ns=1;i=214" DataType="i=290">
+    <DisplayName>MinSupportedSampleRate</DisplayName>
+    <Description>The minimum sampling interval supported by the server.</Description>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=214</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=218" BrowseName="MaxBrowseContinuationPoints" ParentNodeId="ns=1;i=214" DataType="UInt16">
+    <DisplayName>MaxBrowseContinuationPoints</DisplayName>
+    <Description>The maximum number of continuation points for Browse operations per session.</Description>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=214</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=219" BrowseName="MaxQueryContinuationPoints" ParentNodeId="ns=1;i=214" DataType="UInt16">
+    <DisplayName>MaxQueryContinuationPoints</DisplayName>
+    <Description>The maximum number of continuation points for Query operations per session.</Description>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=214</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=220" BrowseName="MaxHistoryContinuationPoints" ParentNodeId="ns=1;i=214" DataType="UInt16">
+    <DisplayName>MaxHistoryContinuationPoints</DisplayName>
+    <Description>The maximum number of continuation points for ReadHistory operations per session.</Description>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=214</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=221" BrowseName="SoftwareCertificates" ParentNodeId="ns=1;i=214" DataType="i=344" ValueRank="1">
+    <DisplayName>SoftwareCertificates</DisplayName>
+    <Description>The software certificates owned by the server.</Description>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=214</Reference>
+    </References>
+  </UAVariable>
+  <UAObject NodeId="ns=1;i=237" BrowseName="ModellingRules" ParentNodeId="ns=1;i=214">
+    <DisplayName>ModellingRules</DisplayName>
+    <Description>A folder for the modelling rules supported by the server.</Description>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=214</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=1;i=238" BrowseName="AggregateFunctions" ParentNodeId="ns=1;i=214">
+    <DisplayName>AggregateFunctions</DisplayName>
+    <Description>A folder for the real time aggregates supported by the server.</Description>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=214</Reference>
+    </References>
+  </UAObject>
   <UAObject NodeId="ns=1;i=308" BrowseName="1:ChildObject" ParentNodeId="ns=1;i=196" EventNotifier="1">
     <DisplayName>ChildObject</DisplayName>
     <References>

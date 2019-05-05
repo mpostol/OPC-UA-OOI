@@ -76,6 +76,11 @@ namespace ObjectTypeTest
     public static partial class Objects
     {
         /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities Object.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities = 214;
+
+        /// <summary>
         /// The identifier for the ComplexObjectType_ChildObject Object.
         /// </summary>
         public const uint ComplexObjectType_ChildObject = 308;
@@ -195,6 +200,11 @@ namespace ObjectTypeTest
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
     public static partial class ObjectIds
     {
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities Object.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities = new ExpandedNodeId(ObjectTypeTest.Objects.ComplexObjectType_ServerCapabilities, ObjectTypeTest.Namespaces.cas);
+
         /// <summary>
         /// The identifier for the ComplexObjectType_ChildObject Object.
         /// </summary>

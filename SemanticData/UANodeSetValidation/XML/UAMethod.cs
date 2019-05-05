@@ -24,8 +24,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         base.ParentEquals(_other) &&
         // TODO compare ArgumentDescription 
         this.Executable == _other.Executable &&
-        this.UserExecutable == _other.UserExecutable &&
-        this.MethodDeclarationId == _other.MethodDeclarationId;
+        this.UserExecutable == _other.UserExecutable;
+      // not exposed and must be excluded from the comparison this.MethodDeclarationId == _other.MethodDeclarationId;
     }
   }
 }

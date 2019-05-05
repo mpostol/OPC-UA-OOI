@@ -64,6 +64,11 @@ namespace ObjectTypeTest
         /// The identifier for the NonExecutableMethodComplexObjectType Method.
         /// </summary>
         public const uint NonExecutableMethodComplexObjectType = 307;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ChildMethod Method.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ChildMethod = 409;
     }
     #endregion
 
@@ -99,6 +104,11 @@ namespace ObjectTypeTest
         /// The identifier for the ComplexObjectType ObjectType.
         /// </summary>
         public const uint ComplexObjectType = 196;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType ObjectType.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType = 310;
     }
     #endregion
 
@@ -189,6 +199,11 @@ namespace ObjectTypeTest
         /// The identifier for the NonExecutableMethodComplexObjectType Method.
         /// </summary>
         public static readonly ExpandedNodeId NonExecutableMethodComplexObjectType = new ExpandedNodeId(ObjectTypeTest.Methods.NonExecutableMethodComplexObjectType, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ChildMethod Method.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ChildMethod = new ExpandedNodeId(ObjectTypeTest.Methods.DerivedFromComplexObjectType_ChildMethod, ObjectTypeTest.Namespaces.cas);
     }
     #endregion
 
@@ -224,6 +239,11 @@ namespace ObjectTypeTest
         /// The identifier for the ComplexObjectType ObjectType.
         /// </summary>
         public static readonly ExpandedNodeId ComplexObjectType = new ExpandedNodeId(ObjectTypeTest.ObjectTypes.ComplexObjectType, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType ObjectType.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType = new ExpandedNodeId(ObjectTypeTest.ObjectTypes.DerivedFromComplexObjectType, ObjectTypeTest.Namespaces.cas);
     }
     #endregion
 
@@ -317,6 +337,11 @@ namespace ObjectTypeTest
         /// The BrowseName for the ComplexObjectType component.
         /// </summary>
         public const string ComplexObjectType = "ComplexObjectType";
+
+        /// <summary>
+        /// The BrowseName for the DerivedFromComplexObjectType component.
+        /// </summary>
+        public const string DerivedFromComplexObjectType = "DerivedFromComplexObjectType";
 
         /// <summary>
         /// The BrowseName for the FlowTo component.
@@ -862,6 +887,155 @@ namespace ObjectTypeTest
         int input1,
         int input2,
         ref int output1);
+    #endif
+    #endregion
+
+    #region DerivedFromComplexObjectState Class
+    #if (!OPCUA_EXCLUDE_DerivedFromComplexObjectState)
+    /// <summary>
+    /// Stores an instance of the DerivedFromComplexObjectType ObjectType.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    public partial class DerivedFromComplexObjectState : ComplexObjectState
+    {
+        #region Constructors
+        /// <summary>
+        /// Initializes the type with its default attribute values.
+        /// </summary>
+        public DerivedFromComplexObjectState(NodeState parent) : base(parent)
+        {
+        }
+
+        /// <summary>
+        /// Returns the id of the default type definition node for the instance.
+        /// </summary>
+        protected override NodeId GetDefaultTypeDefinitionId(NamespaceTable namespaceUris)
+        {
+            return Opc.Ua.NodeId.Create(ObjectTypeTest.ObjectTypes.DerivedFromComplexObjectType, ObjectTypeTest.Namespaces.cas, namespaceUris);
+        }
+
+        #if (!OPCUA_EXCLUDE_InitializationStrings)
+        /// <summary>
+        /// Initializes the instance.
+        /// </summary>
+        protected override void Initialize(ISystemContext context)
+        {
+            Initialize(context, InitializationString);
+            InitializeOptionalChildren(context);
+        }
+
+        /// <summary>
+        /// Initializes the any option children defined for the instance.
+        /// </summary>
+        protected override void InitializeOptionalChildren(ISystemContext context)
+        {
+            base.InitializeOptionalChildren(context);
+        }
+
+        #region Initialization String
+        private const string InitializationString =
+           "AQAAADQAAABodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL09iamVjdFR5cGVUZXN0" +
+           "/////wRggAABAAAAAQAkAAAARGVyaXZlZEZyb21Db21wbGV4T2JqZWN0VHlwZUluc3RhbmNlAQE2AQEB" +
+           "NgH/////DQAAADVwiQoCAAAAAAALAAAAU2VydmVyQXJyYXkBATcBAwAAAAArAAAAVGhlIGxpc3Qgb2Yg" +
+           "c2VydmVyIFVSSXMgdXNlZCBieSB0aGUgc2VydmVyLgAuAEQ3AQAAAAwBAAAAAQEAAAAAAECPQP////8A" +
+           "AAAANXCJCgIAAAAAAA4AAABOYW1lc3BhY2VBcnJheQEBOAEDAAAAAC4AAABUaGUgbGlzdCBvZiBuYW1l" +
+           "c3BhY2UgVVJJcyB1c2VkIGJ5IHRoZSBzZXJ2ZXIuAC4ARDgBAAAADAEAAAABAQAAAAAAQI9A/////wAA" +
+           "AAA1cIkKAgAAAAAADAAAAFNlcnZlclN0YXR1cwEBOQEDAAAAACEAAABUaGUgY3VycmVudCBzdGF0dXMg" +
+           "b2YgdGhlIHNlcnZlci4ALwEAWgg5AQAAAQBeA/////8BAQAAAAAAQI9A/////wYAAAAVYIkKAgAAAAAA" +
+           "CQAAAFN0YXJ0VGltZQEBOgEALwA/OgEAAAEAJgH/////AQH/////AAAAABVgiQoCAAAAAAALAAAAQ3Vy" +
+           "cmVudFRpbWUBATsBAC8APzsBAAABACYB/////wEB/////wAAAAAVYIkKAgAAAAAABQAAAFN0YXRlAQE8" +
+           "AQAvAD88AQAAAQBUA/////8BAf////8AAAAAFWCJCgIAAAAAAAkAAABCdWlsZEluZm8BAT0BAC8BAOsL" +
+           "PQEAAAEAUgH/////AQH/////BgAAABVwiQoCAAAAAAAKAAAAUHJvZHVjdFVyaQEBPgEALwA/PgEAAAAM" +
+           "/////wEBAAAAAABAj0D/////AAAAABVwiQoCAAAAAAAQAAAATWFudWZhY3R1cmVyTmFtZQEBPwEALwA/" +
+           "PwEAAAAM/////wEBAAAAAABAj0D/////AAAAABVwiQoCAAAAAAALAAAAUHJvZHVjdE5hbWUBAUABAC8A" +
+           "P0ABAAAADP////8BAQAAAAAAQI9A/////wAAAAAVcIkKAgAAAAAADwAAAFNvZnR3YXJlVmVyc2lvbgEB" +
+           "QQEALwA/QQEAAAAM/////wEBAAAAAABAj0D/////AAAAABVwiQoCAAAAAAALAAAAQnVpbGROdW1iZXIB" +
+           "AUIBAC8AP0IBAAAADP////8BAQAAAAAAQI9A/////wAAAAAVcIkKAgAAAAAACQAAAEJ1aWxkRGF0ZQEB" +
+           "QwEALwA/QwEAAAEAJgH/////AQEAAAAAAECPQP////8AAAAAFWCJCgIAAAAAABMAAABTZWNvbmRzVGls" +
+           "bFNodXRkb3duAQFEAQAvAD9EAQAAAAf/////AQH/////AAAAABVgiQoCAAAAAAAOAAAAU2h1dGRvd25S" +
+           "ZWFzb24BAUUBAC8AP0UBAAAAFf////8BAf////8AAAAANXCJCgIAAAAAAAwAAABTZXJ2aWNlTGV2ZWwB" +
+           "AUYBAwAAAABXAAAAQSB2YWx1ZSBpbmRpY2F0aW5nIHRoZSBsZXZlbCBvZiBzZXJ2aWNlIHRoZSBzZXJ2" +
+           "ZXIgY2FuIHByb3ZpZGUuIDI1NSBpbmRpY2F0ZXMgdGhlIGJlc3QuAC4AREYBAAAAA/////8BAQAAAAAA" +
+           "QI9A/////wAAAAA1cIkKAgAAAAAACAAAAEF1ZGl0aW5nAQFHAQMAAAAASgAAAEEgZmxhZyBpbmRpY2F0" +
+           "aW5nIHdoZXRoZXIgdGhlIHNlcnZlciBpcyBjdXJyZW50bHkgZ2VuZXJhdGluZyBhdWRpdCBldmVudHMu" +
+           "AC4AREcBAAAAAf////8BAQAAAAAAQI9A/////wAAAAAkYIAKAQAAAAAAEgAAAFNlcnZlckNhcGFiaWxp" +
+           "dGllcwEBSAEDAAAAAC8AAABEZXNjcmliZXMgY2FwYWJpbGl0aWVzIHN1cHBvcnRlZCBieSB0aGUgc2Vy" +
+           "dmVyLgAvAQDdB0gBAAD/////CQAAADVgiQoCAAAAAAASAAAAU2VydmVyUHJvZmlsZUFycmF5AQFJAQMA" +
+           "AAAAKwAAAEEgbGlzdCBvZiBwcm9maWxlcyBzdXBwb3J0ZWQgYnkgdGhlIHNlcnZlci4ALgBESQEAAAAM" +
+           "AQAAAAEB/////wAAAAA1YIkKAgAAAAAADQAAAExvY2FsZUlkQXJyYXkBAUoBAwAAAAAqAAAAQSBsaXN0" +
+           "IG9mIGxvY2FsZXMgc3VwcG9ydGVkIGJ5IHRoZSBzZXJ2ZXIuAC4AREoBAAABACcBAQAAAAEB/////wAA" +
+           "AAA1YIkKAgAAAAAAFgAAAE1pblN1cHBvcnRlZFNhbXBsZVJhdGUBAUsBAwAAAAA2AAAAVGhlIG1pbmlt" +
+           "dW0gc2FtcGxpbmcgaW50ZXJ2YWwgc3VwcG9ydGVkIGJ5IHRoZSBzZXJ2ZXIuAC4AREsBAAABACIB////" +
+           "/wEB/////wAAAAA1YIkKAgAAAAAAGwAAAE1heEJyb3dzZUNvbnRpbnVhdGlvblBvaW50cwEBTAEDAAAA" +
+           "AEwAAABUaGUgbWF4aW11bSBudW1iZXIgb2YgY29udGludWF0aW9uIHBvaW50cyBmb3IgQnJvd3NlIG9w" +
+           "ZXJhdGlvbnMgcGVyIHNlc3Npb24uAC4AREwBAAAABf////8BAf////8AAAAANWCJCgIAAAAAABoAAABN" +
+           "YXhRdWVyeUNvbnRpbnVhdGlvblBvaW50cwEBTQEDAAAAAEsAAABUaGUgbWF4aW11bSBudW1iZXIgb2Yg" +
+           "Y29udGludWF0aW9uIHBvaW50cyBmb3IgUXVlcnkgb3BlcmF0aW9ucyBwZXIgc2Vzc2lvbi4ALgBETQEA" +
+           "AAAF/////wEB/////wAAAAA1YIkKAgAAAAAAHAAAAE1heEhpc3RvcnlDb250aW51YXRpb25Qb2ludHMB" +
+           "AU4BAwAAAABRAAAAVGhlIG1heGltdW0gbnVtYmVyIG9mIGNvbnRpbnVhdGlvbiBwb2ludHMgZm9yIFJl" +
+           "YWRIaXN0b3J5IG9wZXJhdGlvbnMgcGVyIHNlc3Npb24uAC4ARE4BAAAABf////8BAf////8AAAAANWCJ" +
+           "CgIAAAAAABQAAABTb2Z0d2FyZUNlcnRpZmljYXRlcwEBTwEDAAAAAC4AAABUaGUgc29mdHdhcmUgY2Vy" +
+           "dGlmaWNhdGVzIG93bmVkIGJ5IHRoZSBzZXJ2ZXIuAC4ARE8BAAABAFgBAQAAAAEB/////wAAAAAkYIAK" +
+           "AQAAAAAADgAAAE1vZGVsbGluZ1J1bGVzAQFfAQMAAAAAOQAAAEEgZm9sZGVyIGZvciB0aGUgbW9kZWxs" +
+           "aW5nIHJ1bGVzIHN1cHBvcnRlZCBieSB0aGUgc2VydmVyLgAvAD1fAQAA/////wAAAAAkYIAKAQAAAAAA" +
+           "EgAAAEFnZ3JlZ2F0ZUZ1bmN0aW9ucwEBYAEDAAAAAD4AAABBIGZvbGRlciBmb3IgdGhlIHJlYWwgdGlt" +
+           "ZSBhZ2dyZWdhdGVzIHN1cHBvcnRlZCBieSB0aGUgc2VydmVyLgAvAD1gAQAA/////wAAAAAkYIAKAQAA" +
+           "AAAAEQAAAFNlcnZlckRpYWdub3N0aWNzAQFhAQMAAAAAJQAAAFJlcG9ydHMgZGlhZ25vc3RpY3MgYWJv" +
+           "dXQgdGhlIHNlcnZlci4ALwEA5AdhAQAA/////wQAAAA1YIkKAgAAAAAAGAAAAFNlcnZlckRpYWdub3N0" +
+           "aWNzU3VtbWFyeQEBYgEDAAAAACYAAABBIHN1bW1hcnkgb2Ygc2VydmVyIGxldmVsIGRpYWdub3N0aWNz" +
+           "LgAvAQBmCGIBAAABAFsD/////wEB/////wwAAAAVYIkKAgAAAAAADwAAAFNlcnZlclZpZXdDb3VudAEB" +
+           "YwEALwA/YwEAAAAH/////wEB/////wAAAAAVYIkKAgAAAAAAEwAAAEN1cnJlbnRTZXNzaW9uQ291bnQB" +
+           "AWQBAC8AP2QBAAAAB/////8BAf////8AAAAAFWCJCgIAAAAAABUAAABDdW11bGF0ZWRTZXNzaW9uQ291" +
+           "bnQBAWUBAC8AP2UBAAAAB/////8BAf////8AAAAAFWCJCgIAAAAAABwAAABTZWN1cml0eVJlamVjdGVk" +
+           "U2Vzc2lvbkNvdW50AQFmAQAvAD9mAQAAAAf/////AQH/////AAAAABVgiQoCAAAAAAAUAAAAUmVqZWN0" +
+           "ZWRTZXNzaW9uQ291bnQBAWcBAC8AP2cBAAAAB/////8BAf////8AAAAAFWCJCgIAAAAAABMAAABTZXNz" +
+           "aW9uVGltZW91dENvdW50AQFoAQAvAD9oAQAAAAf/////AQH/////AAAAABVgiQoCAAAAAAARAAAAU2Vz" +
+           "c2lvbkFib3J0Q291bnQBAWkBAC8AP2kBAAAAB/////8BAf////8AAAAAFWCJCgIAAAAAABcAAABQdWJs" +
+           "aXNoaW5nSW50ZXJ2YWxDb3VudAEBagEALwA/agEAAAAH/////wEB/////wAAAAAVYIkKAgAAAAAAGAAA" +
+           "AEN1cnJlbnRTdWJzY3JpcHRpb25Db3VudAEBawEALwA/awEAAAAH/////wEB/////wAAAAAVYIkKAgAA" +
+           "AAAAGgAAAEN1bXVsYXRlZFN1YnNjcmlwdGlvbkNvdW50AQFsAQAvAD9sAQAAAAf/////AQH/////AAAA" +
+           "ABVgiQoCAAAAAAAdAAAAU2VjdXJpdHlSZWplY3RlZFJlcXVlc3RzQ291bnQBAW0BAC8AP20BAAAAB///" +
+           "//8BAf////8AAAAAFWCJCgIAAAAAABUAAABSZWplY3RlZFJlcXVlc3RzQ291bnQBAW4BAC8AP24BAAAA" +
+           "B/////8BAf////8AAAAANWCJCgIAAAAAABwAAABTdWJzY3JpcHRpb25EaWFnbm9zdGljc0FycmF5AQFw" +
+           "AQMAAAAAMwAAAEEgbGlzdCBvZiBkaWFnbm9zdGljcyBmb3IgZWFjaCBhY3RpdmUgc3Vic2NyaXB0aW9u" +
+           "LgAvAQB7CHABAAABAGoDAQAAAAEB/////wAAAAAkYIAKAQAAAAAAGgAAAFNlc3Npb25zRGlhZ25vc3Rp" +
+           "Y3NTdW1tYXJ5AQFxAQMAAAAAJwAAAEEgc3VtbWFyeSBvZiBzZXNzaW9uIGxldmVsIGRpYWdub3N0aWNz" +
+           "LgAvAQDqB3EBAAD/////AgAAADVgiQoCAAAAAAAXAAAAU2Vzc2lvbkRpYWdub3N0aWNzQXJyYXkBAXIB" +
+           "AwAAAAAuAAAAQSBsaXN0IG9mIGRpYWdub3N0aWNzIGZvciBlYWNoIGFjdGl2ZSBzZXNzaW9uLgAvAQCU" +
+           "CHIBAAABAGEDAQAAAAEB/////wAAAAA1YIkKAgAAAAAAHwAAAFNlc3Npb25TZWN1cml0eURpYWdub3N0" +
+           "aWNzQXJyYXkBAXMBAwAAAAA/AAAAQSBsaXN0IG9mIHNlY3VyaXR5IHJlbGF0ZWQgZGlhZ25vc3RpY3Mg" +
+           "Zm9yIGVhY2ggYWN0aXZlIHNlc3Npb24uAC8BAMMIcwEAAAEAZAMBAAAAAQH/////AAAAADVgiQoCAAAA" +
+           "AAALAAAARW5hYmxlZEZsYWcBAXQBAwAAAAAuAAAASWYgVFJVRSB0aGUgZGlhZ25vc3RpY3MgY29sbGVj" +
+           "dGlvbiBpcyBlbmFibGVkLgAuAER0AQAAAAH/////AwP/////AAAAACRggAoBAAAAAAAQAAAAVmVuZG9y" +
+           "U2VydmVySW5mbwEBdQEDAAAAACoAAABTZXJ2ZXIgaW5mb3JtYXRpb24gcHJvdmlkZWQgYnkgdGhlIHZl" +
+           "bmRvci4ALwEA8Qd1AQAA/////wAAAAAkYIAKAQAAAAAAEAAAAFNlcnZlclJlZHVuZGFuY3kBAXYBAwAA" +
+           "AAA0AAAARGVzY3JpYmVzIHRoZSByZWR1bmRhbmN5IGNhcGFiaWxpdGllcyBvZiB0aGUgc2VydmVyLgAv" +
+           "AQDyB3YBAAD/////AQAAADVgiQoCAAAAAAARAAAAUmVkdW5kYW5jeVN1cHBvcnQBAXcBAwAAAAA+AAAA" +
+           "SW5kaWNhdGVzIHdoYXQgc3R5bGUgb2YgcmVkdW5kYW5jeSBpcyBzdXBwb3J0ZWQgYnkgdGhlIHNlcnZl" +
+           "ci4ALgBEdwEAAAEAUwP/////AQH/////AAAAABVgyQoCAAAAEQAAAEJyb3dzZU5hbWU0bm9kZTY2AQAN" +
+           "AAAAQ2hpbGRQcm9wZXJ0eQEBkgEALgBEkgEAAAAV/////wEBAQAAAAEBwwABAQGTAQAAAAAVYMkKAgAA" +
+           "AA4AAABOYW1lTm90U2V0MTEwOQEAEwAAAEJyb3dzZU5hbWU0bm9kZTExMDkBAZMBAC8BAEAJkwEAAAAa" +
+           "/////wEBAQAAAAEBwwAAAQGSAQEAAAAVYIkKAgAAAAAABwAAAEVVUmFuZ2UBAZcBAC4ARJcBAAABAHQD" +
+           "/////wEB/////wAAAAAEYYIKBAAAAAEACwAAAENoaWxkTWV0aG9kAQGZAQAvAQEnAZkBAAABAf////8C" +
+           "AAAAFWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEBmgEALgBEmgEAAJYCAAAAAQAqAQEVAAAABgAA" +
+           "AElucHV0MQAG/////wAAAAAAAQAqAQEVAAAABgAAAElucHV0MgAG/////wAAAAAAAQAoAQEAAAABAf//" +
+           "//8AAAAAFWCpCgIAAAAAAA8AAABPdXRwdXRBcmd1bWVudHMBAZsBAC4ARJsBAACWAQAAAAEAKgEBFgAA" +
+           "AAcAAABPdXRwdXQxAAb/////AAAAAAABACgBAQAAAAEB/////wAAAAAEYYIKBAAAAAEAEwAAAE5vbkV4" +
+           "ZWN1dGFibGVNZXRob2QBAZwBAC8BATIBnAEAAAEB/////wAAAAA=";
+        #endregion
+        #endif
+        #endregion
+
+        #region Public Properties
+        #endregion
+
+        #region Overridden Methods
+        #endregion
+
+        #region Private Fields
+        #endregion
+    }
     #endif
     #endregion
 }

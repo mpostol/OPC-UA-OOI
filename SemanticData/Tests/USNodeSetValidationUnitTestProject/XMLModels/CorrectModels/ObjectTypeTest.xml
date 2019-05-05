@@ -39,4 +39,9 @@
     </OutputArguments>
   </Method>
   <Method SymbolicName="cas:NonExecutableMethodComplexObjectType" NonExecutable="true" />
+  <ObjectType SymbolicName="cas:DerivedFromComplexObjectType" BaseType="cas:ComplexObjectType">
+    <Children>
+      <Method SymbolicName="cas:ChildMethod" />
+    </Children>
+  </ObjectType>
 </ModelDesign>

@@ -123,6 +123,15 @@
             <Identifier>ns=1;i=306</Identifier>
           </TargetId>
         </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=45</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=310</Identifier>
+          </TargetId>
+        </ReferenceNode>
       </References>
       <IsAbstract>false</IsAbstract>
     </Node>
@@ -1563,6 +1572,280 @@
         <Identifier>i=21</Identifier>
       </DataType>
       <ValueRank>-1</ValueRank>
+      <ArrayDimensions />
+      <AccessLevel>1</AccessLevel>
+      <UserAccessLevel>1</UserAccessLevel>
+      <MinimumSamplingInterval>0</MinimumSamplingInterval>
+      <Historizing>false</Historizing>
+    </Node>
+    <Node i:type="ObjectTypeNode">
+      <NodeId>
+        <Identifier>ns=1;i=310</Identifier>
+      </NodeId>
+      <NodeClass>ObjectType_8</NodeClass>
+      <BrowseName>
+        <NamespaceIndex>1</NamespaceIndex>
+        <Name>DerivedFromComplexObjectType</Name>
+      </BrowseName>
+      <DisplayName>
+        <Locale></Locale>
+        <Text>DerivedFromComplexObjectType</Text>
+      </DisplayName>
+      <Description i:nil="true" />
+      <WriteMask>0</WriteMask>
+      <UserWriteMask>0</UserWriteMask>
+      <References>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=45</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>true</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=196</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=47</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=409</Identifier>
+          </TargetId>
+        </ReferenceNode>
+      </References>
+      <IsAbstract>false</IsAbstract>
+    </Node>
+    <Node i:type="MethodNode">
+      <NodeId>
+        <Identifier>ns=1;i=409</Identifier>
+      </NodeId>
+      <NodeClass>Method_4</NodeClass>
+      <BrowseName>
+        <NamespaceIndex>1</NamespaceIndex>
+        <Name>ChildMethod</Name>
+      </BrowseName>
+      <DisplayName>
+        <Locale></Locale>
+        <Text>ChildMethod</Text>
+      </DisplayName>
+      <Description i:nil="true" />
+      <WriteMask>0</WriteMask>
+      <UserWriteMask>0</UserWriteMask>
+      <References>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=47</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>true</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=310</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=40</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=295</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=37</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>i=78</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=46</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=410</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=46</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=411</Identifier>
+          </TargetId>
+        </ReferenceNode>
+      </References>
+      <Executable>true</Executable>
+      <UserExecutable>true</UserExecutable>
+    </Node>
+    <Node i:type="VariableNode">
+      <NodeId>
+        <Identifier>ns=1;i=410</Identifier>
+      </NodeId>
+      <NodeClass>Variable_2</NodeClass>
+      <BrowseName>
+        <NamespaceIndex>0</NamespaceIndex>
+        <Name>InputArguments</Name>
+      </BrowseName>
+      <DisplayName>
+        <Locale></Locale>
+        <Text>InputArguments</Text>
+      </DisplayName>
+      <Description i:nil="true" />
+      <WriteMask>0</WriteMask>
+      <UserWriteMask>0</UserWriteMask>
+      <References>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=46</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>true</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=409</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=40</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>i=68</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=37</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>i=78</Identifier>
+          </TargetId>
+        </ReferenceNode>
+      </References>
+      <Value>
+        <Value>
+          <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <ExtensionObject>
+              <TypeId>
+                <Identifier>i=297</Identifier>
+              </TypeId>
+              <Body>
+                <Argument>
+                  <Name>Input1</Name>
+                  <DataType>
+                    <Identifier>i=6</Identifier>
+                  </DataType>
+                  <ValueRank>-1</ValueRank>
+                  <ArrayDimensions />
+                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+                </Argument>
+              </Body>
+            </ExtensionObject>
+            <ExtensionObject>
+              <TypeId>
+                <Identifier>i=297</Identifier>
+              </TypeId>
+              <Body>
+                <Argument>
+                  <Name>Input2</Name>
+                  <DataType>
+                    <Identifier>i=6</Identifier>
+                  </DataType>
+                  <ValueRank>-1</ValueRank>
+                  <ArrayDimensions />
+                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+                </Argument>
+              </Body>
+            </ExtensionObject>
+          </ListOfExtensionObject>
+        </Value>
+      </Value>
+      <DataType>
+        <Identifier>i=296</Identifier>
+      </DataType>
+      <ValueRank>1</ValueRank>
+      <ArrayDimensions />
+      <AccessLevel>1</AccessLevel>
+      <UserAccessLevel>1</UserAccessLevel>
+      <MinimumSamplingInterval>0</MinimumSamplingInterval>
+      <Historizing>false</Historizing>
+    </Node>
+    <Node i:type="VariableNode">
+      <NodeId>
+        <Identifier>ns=1;i=411</Identifier>
+      </NodeId>
+      <NodeClass>Variable_2</NodeClass>
+      <BrowseName>
+        <NamespaceIndex>0</NamespaceIndex>
+        <Name>OutputArguments</Name>
+      </BrowseName>
+      <DisplayName>
+        <Locale></Locale>
+        <Text>OutputArguments</Text>
+      </DisplayName>
+      <Description i:nil="true" />
+      <WriteMask>0</WriteMask>
+      <UserWriteMask>0</UserWriteMask>
+      <References>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=46</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>true</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=409</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=40</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>i=68</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=37</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>i=78</Identifier>
+          </TargetId>
+        </ReferenceNode>
+      </References>
+      <Value>
+        <Value>
+          <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <ExtensionObject>
+              <TypeId>
+                <Identifier>i=297</Identifier>
+              </TypeId>
+              <Body>
+                <Argument>
+                  <Name>Output1</Name>
+                  <DataType>
+                    <Identifier>i=6</Identifier>
+                  </DataType>
+                  <ValueRank>-1</ValueRank>
+                  <ArrayDimensions />
+                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+                </Argument>
+              </Body>
+            </ExtensionObject>
+          </ListOfExtensionObject>
+        </Value>
+      </Value>
+      <DataType>
+        <Identifier>i=296</Identifier>
+      </DataType>
+      <ValueRank>1</ValueRank>
       <ArrayDimensions />
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>

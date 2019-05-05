@@ -105,8 +105,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext.UAModelContext, traceEvent), UpdateType, traceEvent);
             break;
           case NodeClassEnum.UAMethod:
-            if (instanceDeclaration != null)
-              throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
+            if (nodeContext.Equals(instanceDeclaration))
+              return;
             CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.AddNodeFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             break;
           case NodeClassEnum.UAObject:

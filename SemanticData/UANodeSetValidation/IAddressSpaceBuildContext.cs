@@ -52,7 +52,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="index">The index.</param>
     /// <returns>IEnumerable&lt;UAReferenceContext&gt;.</returns>
-    IEnumerable<UAReferenceContext> GetMyReferences(IUANodeContext index);
+    IEnumerable<UAReferenceContext> GetMyReferences(IUANodeBase index);
     /// <summary>
     /// Gets the references to me.
     /// </summary>

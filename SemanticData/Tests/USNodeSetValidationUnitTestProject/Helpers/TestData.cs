@@ -40,7 +40,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers
     {
       return new UAObject()
       {
-        NodeId = "ns=1;i=986",
+        NodeId = "ns=1;i=1",
         BrowseName = "1:NewUAObject",
         DisplayName = new LocalizedText[] { new LocalizedText() { Value = "New Display Name" } },
         References = new Reference[] { new Reference() { ReferenceType = ReferenceTypeIds.HasTypeDefinition.ToString(), IsForward = false, Value = ObjectTypeIds.BaseObjectType.ToString() } },

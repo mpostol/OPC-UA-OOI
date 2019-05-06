@@ -87,7 +87,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         throw new NotImplementedException();
       }
-      public IEnumerable<UAReferenceContext> GetMyReferences(IUANodeContext index)
+      public IEnumerable<UAReferenceContext> GetMyReferences(IUANodeBase index)
       {
         List<UAReferenceContext> contexts = new List<UAReferenceContext>();
         return contexts;

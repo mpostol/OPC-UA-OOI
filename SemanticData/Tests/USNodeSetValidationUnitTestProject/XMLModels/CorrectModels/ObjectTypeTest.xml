@@ -44,4 +44,12 @@
       <Method SymbolicName="cas:ChildMethod" />
     </Children>
   </ObjectType>
+  <Object SymbolicName="cas:NameNotSet6" TypeDefinition="cas:DerivedFromComplexObjectType">
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>ua:Organizes</ReferenceType>
+        <TargetId>ua:ObjectsFolder</TargetId>
+      </Reference>
+    </References>
+  </Object>
 </ModelDesign>

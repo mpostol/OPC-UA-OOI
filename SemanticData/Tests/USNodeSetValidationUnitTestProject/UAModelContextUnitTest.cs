@@ -131,10 +131,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         return m_NamespaceTable.GetIndexOrAppend(identifier);
       }
       public NamespaceTable m_NamespaceTable = new NamespaceTable();
-      public IEnumerable<UAReferenceContext> GetMyReferences(IUANodeContext index)
-      {
-        throw new System.NotImplementedException();
-      }
       public string GetNamespace(ushort namespaceIndex)
       {
         throw new System.NotImplementedException();
@@ -147,11 +143,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       {
         throw new System.NotImplementedException();
       }
+      public IEnumerable<UAReferenceContext> GetMyReferences(IUANodeBase index)
+      {
+        throw new System.NotImplementedException();
+      }
 
       public IUANodeBase GetBaseTypeNode(NodeClassEnum nodeClass)
       {
         throw new System.NotImplementedException();
       }
+
     }
   }
 }

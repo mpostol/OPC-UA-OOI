@@ -155,13 +155,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     internal static void GetParameters(this XML.DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory dataTypeDefinitionFactory, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
     {
+      if (dataTypeDefinition is null)
+        return;
       //xsd comment  < !--BaseType is obsolete and no longer used.Left in for backwards compatibility. -->
       //definition.BaseType = modelContext.ExportBrowseName(dataTypeDefinition.BaseType, DataTypes.BaseDataType);
       dataTypeDefinitionFactory.IsOptionSet = dataTypeDefinition.IsOptionSet;
       dataTypeDefinitionFactory.IsUnion = dataTypeDefinition.IsUnion;
       dataTypeDefinitionFactory.Name = null; //TODO UADataType.Definition.Name wrong value #341 modelContext.ExportBrowseName( dataTypeDefinition.Name, DataTypes.BaseDataType);
       dataTypeDefinitionFactory.SymbolicName = dataTypeDefinition.SymbolicName;
-      if (dataTypeDefinition == null || dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
+      if (dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
         return;
       foreach (XML.DataTypeField _item in dataTypeDefinition.Field)
       {
@@ -276,6 +278,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (Object.ReferenceEquals(first, null))
         return Object.ReferenceEquals(second, null);
+      if (Object.ReferenceEquals(second, null))
+        return false;
       if (first.Length != second.Length)
         return false;
       Dictionary<string, XML.LocalizedText> _dictionaryForFirst = first.ToDictionary<XML.LocalizedText, string>(x => x.Locale);
@@ -308,12 +312,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (Object.ReferenceEquals(first, null))
         return Object.ReferenceEquals(second, null);
+      if (Object.ReferenceEquals(second, null))
+        return false;
       if (first.Length != second.Length)
         return false;
       List<string> _dictionaryForFirst = first.Select<XML.Reference, string>(x => x.ToString()).ToList<string>();
       foreach (XML.Reference _reference in second)
       {
-        if (!_reference.IsForward) 
+        if (!_reference.IsForward)
           continue;
         if (!_dictionaryForFirst.Exists(x => _reference.ToString().CompareTo(x) == 0))
           return false;

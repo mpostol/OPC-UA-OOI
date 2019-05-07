@@ -338,16 +338,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private void ValidateAndExportModel(int nameSpaceIndex)
     {
       IEnumerable<IUANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
-      //TODO ValidateAndExportModel shall export also instances #40
       List<IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
       IUANodeBase _objects = TryGetUANodeContext(UAInformationModel.ObjectIds.ObjectsFolder, m_TraceEvent);
       if (_objects is null)
         throw new ArgumentNullException("Cannot find ObjectsFolder in the standard information model");
-      //IEnumerable<IUANodeContext> _allInstances = m_References.Values.Where<UAReferenceContext>(x => (x.SourceNode == _objects))// &&
-      //                                                                                               //(x.TypeNode.NodeIdContext == ReferenceTypeIds.Organizes) && 
-      //                                                                                               //(x.TargetNode.NodeIdContext.NamespaceIndex == nameSpaceIndex))
-      //                                                                                               .Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
-      //_nodes.AddRange(_allInstances);
+      IEnumerable<IUANodeContext> _allInstances = m_References.Values.Where<UAReferenceContext>(x => (x.SourceNode.NodeIdContext == ObjectIds.ObjectsFolder) &&
+                                                                                                     (x.TypeNode.NodeIdContext == ReferenceTypeIds.Organizes) &&
+                                                                                                     (x.TargetNode.NodeIdContext.NamespaceIndex == nameSpaceIndex))
+                                                                                                     .Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
+      _nodes.AddRange(_allInstances);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("AddressSpaceContext.ValidateAndExportModel - selected {0} nodes to be added to the model.", _nodes.Count)));
       Validator.ValidateExportModel(_nodes, InformationModelFactory, this, m_TraceEvent);
     }
@@ -355,7 +354,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region UnitTestd
     [System.Diagnostics.Conditional("DEBUG")]
-    internal void UTAddressSpaceCheckConsistenct(Action<IUANodeContext> returnValue)
+    internal void UTAddressSpaceCheckConsistency(Action<IUANodeContext> returnValue)
     {
       foreach (IUANodeContext _node in m_NodesDictionary.Values.Where<IUANodeBase>(x => x.UANode is null))
         returnValue(_node);
@@ -365,7 +364,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       foreach (UAReferenceContext _node in m_References.Values)
         if (_node.SourceNode is null || _node.ParentNode is null || _node.TargetNode is null || _node.TypeNode is null)
-        returnValue(_node?.SourceNode, _node?.ParentNode, _node?.TargetNode, _node?.TargetNode);
+          returnValue(_node?.SourceNode, _node?.ParentNode, _node?.TargetNode, _node?.TargetNode);
     }
     [System.Diagnostics.Conditional("DEBUG")]
     internal void UTTryGetUANodeContext(NodeId nodeId, Action<IUANodeContext> returnValue)
@@ -379,9 +378,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         returnValue(_ref);
     }
     [System.Diagnostics.Conditional("DEBUG")]
-    internal void UTValidateAndExportModel(int nameSpaceIndex, Action<List<IUANodeContext>> returnValue)
+    internal void UTValidateAndExportModel(int nameSpaceIndex, Action<IEnumerable<IUANodeContext>> returnValue)
     {
-      returnValue((from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key).ToList<IUANodeContext>());
+      returnValue((from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key));
     }
     #endregion
 

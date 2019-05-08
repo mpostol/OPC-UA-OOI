@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
@@ -61,6 +62,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       IUAModelContext _mc = new UAModelContext();
       IUANodeBase _first = new UANodeContext(AddressSpaceBuildContext.NewAddressSpaceBuildContext, _mc, NodeId.Parse("ns=1;i=11"));
       _first.CalculateNodeReferences(null);
+    }
+    [TestMethod]
+    public void BuildSymbolicIdTest()
+    {
+      BuildErrorsHandling _logger = BuildErrorsHandling.Log;
+      List<TraceMessage> _messages = new List<TraceMessage>();
+      _logger.TraceEventAction += x => _messages.Add(x);
+      IUAModelContext _mc = new UAModelContext();
+      NodeId _nodeId = NodeId.Parse("ns=1;i=11");
+      UANodeContext _toTest = new UANodeContext(AddressSpaceBuildContext.NewAddressSpaceBuildContext, _mc, NodeId.Parse("ns=1;i=11"));
+      List<string> path = new List<string>();
+      _toTest.BuildSymbolicId(path);
+      Assert.AreEqual<int>(1, _messages.Count);
+      Assert.AreEqual<string>("P3-0403040000", _messages[0].BuildError.Identifier);
+      Assert.AreEqual<string>("The target node NodeId=ns=1;i=11, current path ", _messages[0].Message);
+      Assert.AreEqual<int>(0, path.Count);
+      _logger.TraceEventAction -= x => _messages.Add(x);
     }
     private class AddressSpaceBuildContext : IAddressSpaceBuildContext
     {

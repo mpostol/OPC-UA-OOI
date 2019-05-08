@@ -86,9 +86,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return m_AddressSpace.ExportBrowseName(this.TypeNode.NodeIdContext);
     }
     /// <summary>
-    /// Returns the name of the reference target and calculates the Target identifier by traversing the components hierarchical path.
+    /// Calculates the browse path starting from the node pointed out by this reference. If <see cref="XML.Reference.IsForward"/> is <c>true</c> <see cref="UAReferenceContext.TargetNode"/> is use,  <see cref="UAReferenceContext.SourceNode"/> otherwise. 
     /// </summary>
-    /// <returns><see cref="System.Xml.XmlQualifiedName" />.</returns>
+    /// <returns>An instance of <see cref="System.Xml.XmlQualifiedName" /> representing the browse path.</returns>
     internal XmlQualifiedName BrowsePath()
     {
       List<string> _path = new List<string>();

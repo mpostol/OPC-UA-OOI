@@ -49,11 +49,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (this.UANode == null)
       {
-        BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, ""));
+        BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The target node NodeId={this.NodeIdContext}, current path {String.Join(", ", path)}"));
         return;
       }
       IEnumerable<UAReferenceContext> _parentConnector = m_AddressSpaceContext.GetReferences2Me(this).Where<UAReferenceContext>(x => x.ChildConnector);
-      Debug.Assert(_parentConnector.Count<UAReferenceContext>() <= 1);
+      Debug.Assert(_parentConnector.Count<UAReferenceContext>() <= 1); //TODO #40; ValidateAndExportModel shall export also instances #40
       UAReferenceContext _connector = _parentConnector.FirstOrDefault<UAReferenceContext>();
       if (_connector != null)
         _connector.BuildSymbolicId(path);

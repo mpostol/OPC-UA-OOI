@@ -31,5 +31,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         this.MinimumSamplingInterval == _other.MinimumSamplingInterval &&
         this.Historizing == _other.Historizing;
     }
+    internal override void RemoveInheritedValues(UANode baseNode)
+    {
+      base.RemoveInheritedValues(baseNode);
+      UAVariable _other = baseNode as UAVariable;
+      if (baseNode is null)
+        throw new System.ArgumentNullException($"{nameof(baseNode)}", $"The parameter of the {nameof(RemoveInheritedValues)} must not be null");
+      if (this.DataType == _other.DataType)
+        this.DataType = null;
+      if (this.ArrayDimensions == _other.ArrayDimensions)
+        this.ArrayDimensions = string.Empty;
+    }
   }
 }

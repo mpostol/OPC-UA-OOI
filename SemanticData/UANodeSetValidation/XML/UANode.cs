@@ -30,17 +30,30 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return
         ParentEquals(other) &&
         this.AccessRestrictions == other.AccessRestrictions &&
+        this.BrowseName == other.BrowseName &&
+        this.Description.LocalizedTextArraysEqual(other.Description) &&
         this.DisplayName.LocalizedTextArraysEqual(other.DisplayName) &&
+        this.Documentation == other.Documentation &&
         //this.NodeId == other.NodeId && it is not Information Model
         this.ReleaseStatus == ReleaseStatus &&
         this.RolePermissions.RolePermissionsEquals(other.RolePermissions) &&
         this.SymbolicName == other.SymbolicName &&
         this.UserWriteMask == other.UserWriteMask &&
         this.WriteMask == other.WriteMask &&
-        this.BrowseName == other.BrowseName &&
-        this.Documentation == other.Documentation &&
-        this.Description.LocalizedTextArraysEqual(other.Description) &&
         this.References.ReferencesEquals(other.References);
+    }
+    internal virtual void RemoveInheritedValues(UANode baseNode)
+    {
+      if (this.BrowseName == baseNode.BrowseName)
+        this.BrowseName = String.Empty;
+      if (this.Description.LocalizedTextArraysEqual(baseNode.Description))
+        this.Description = null;
+      if (this.RolePermissions.RolePermissionsEquals(baseNode.RolePermissions))
+        this.RolePermissions = null;
+      if (this.Documentation == baseNode.Documentation)
+        this.Documentation = String.Empty;
+      if (this.Description.LocalizedTextArraysEqual(baseNode.Description))
+        this.Description = null;
     }
     /// <summary>
     /// Implements the == operator. Determines whether two instances of <see cref="UANode"/> represent the same information.

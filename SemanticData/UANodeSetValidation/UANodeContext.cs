@@ -300,6 +300,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         this.UANode == other.UANode;
     }
     bool IUANodeBase.IsPropertyVariableType => this.NodeIdContext == VariableTypeIds.PropertyType;
+    public void RemoveInheritedValues(IUANodeBase instanceDeclaration)
+    {
+      if (instanceDeclaration is null)
+        return;
+      this.UANode.RemoveInheritedValues(instanceDeclaration.UANode);
+      if (this.ModelingRule == instanceDeclaration.ModelingRule)
+        this.ModelingRule = null;
+    }
     #endregion
 
     #region private

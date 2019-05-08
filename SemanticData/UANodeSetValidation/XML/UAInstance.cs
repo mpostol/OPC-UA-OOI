@@ -23,6 +23,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         return false;
       return true; //this.ParentNodeId == _other.ParentNodeId; it is not attribute exposed by the node.
     }
+
   }
 
 }

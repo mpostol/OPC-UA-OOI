@@ -127,6 +127,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case NodeClassEnum.UAVariable:
             if (nodeContext.Equals(instanceDeclaration))
               return;
+            nodeContext.RemoveInheritedValues(instanceDeclaration);
             if (parentReference == null || parentReference.ReferenceKind == ReferenceKindEnum.HasProperty)
               CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             else
@@ -301,7 +302,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     private static void UpdateInstance(IInstanceFactory nodeDesign, UAInstance nodeSet, IUANodeBase nodeContext, Action<TraceMessage> traceEvent)
     {
-      nodeDesign.ModelingRule = nodeContext.ModelingRule;
+      if (nodeContext.ModelingRule.HasValue)
+        nodeDesign.ModelingRule = nodeContext.ModelingRule.Value;
       nodeDesign.TypeDefinition = nodeContext.ExportBaseTypeBrowseName(false);
       //nodeSet.ParentNodeId - The NodeId of the Node that is the parent of the Node within the information model. This field is used to indicate 
       //that a tight coupling exists between the Node and its parent (e.g. when the parent is deleted the child is deleted 

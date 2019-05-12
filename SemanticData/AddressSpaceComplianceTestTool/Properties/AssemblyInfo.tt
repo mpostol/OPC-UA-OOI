@@ -15,7 +15,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("<#=m_AssemblyTitle#>")]
-[assembly: AssemblyDescription("Command Line OPC UA Address Space Compliance Test Tool")]
+[assembly: AssemblyDescription("Command Line OPC UA Address Space Prototyping Tool")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("<#=AssemblyCompany#>")]
 [assembly: AssemblyProduct("<#=SemanticDataProduct#>")]
@@ -33,5 +33,5 @@ using System.Runtime.InteropServices;
 
 <#@ include file = "..\..\..\CommonResources\T4Definitions\Model.t4" #>
 <#+
-string m_AssemblyTitle = "AddressSpaceTestTool";
+string m_AssemblyTitle = "Address Space Prototyping";
 #>

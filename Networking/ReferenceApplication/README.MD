@@ -4,7 +4,7 @@
 
 The topics contained in the document [Getting Started Tutorial](../../Networking/SemanticData/READMEGettingStartedTutorial.md) are intended to give you quick exposure to the `OOI Reactive Application` network-based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to customize existing  `OOI Reactive Application`.
 
-This project is aimed at implementation of an example of the `OOI Reactive Application` supporting producer and consumer roles simultaneously. The purpose of the `ReferenceApplication` is to demonstrate the concepts and architecture of the reactive networking application implementation, rather than to necessarily provide a realistic scenario for its use. For more extensive examples, see the [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD).
+This project is aimed at implementation of an example of the `OOI Reactive Application` supporting producer and consumer roles simultaneously. The purpose of the `ReferenceApplication` is to demonstrate the concepts and architecture of the reactive networking application implementation, rather than to necessarily provide a realistic scenario for its use. For more extensive examples, see the [Semantic-Data Processing Architecture](../../SemanticData/README.MD).
 The `ReferenceApplication` hosts parts offering `Producer` and `Consumer` functionality. Both roles are implemented as independent threads that have a common graphical user interface (GUI) for diagnostic and configuration purpose.
  
 The `Producer` sends messages containing the fields defined in the configuration file using UDP communication stack. The values are simulated. The `Consumer` is configured to receive these messages from the UDP protocol stack. The `Consumer`to correctly decode the messages must have configuration defining the same set of fields. The data is encoded using *Variant* encoding.
@@ -27,13 +27,13 @@ The diagram below presents main parts making up the `ReferenceApplication` - an 
 
 ![ReferenceApplication Architecture 4.0.0](../../CommonResources/Media/UAOOI.Networking.ReferenceApplication.Layers..png)
 
-- `ReferenceApplication`: SemanticData networking reference application WPF GUI layer - it exposes the startup entry point to the runtime environment.
+- `ReferenceApplication`: Reactive Networking of Semantic-Data Library WPF GUI layer - it exposes the startup entry point to the runtime environment.
 - `DataLogger`: is an example of the `Consumer` part of the `ReferenceApplication`.
 - `SimulatorInteroperabilityTest`: `Producer` implementation of a data generator to be used for testing purpose.
 - `UDPMessageHandler`: proprietary UDP `IMessageHandlerFactory` implementation.
 - `Encoding`: IEncodingFactory functionality  implementation limited to encoding simple data types for the testing purpose only.
 - `ReferenceApplication.Core`: this library provides an implementation of a core functionality required by the `ReferenceApplication` and all its components that are helpful in writing well-structured and maintainable applications.
-- `SemanticData`: *SemanticData Reactive Networking* library based on [OPC UA Part 14 Pub/Sub](../../Networking/SemanticData/README.PubSubMTF.md).
+- `SemanticData`: *Reactive Networking of Semantic-Data Library* library based on [OPC UA Part 14 Pub/Sub](../../Networking/SemanticData/README.PubSubMTF.md).
 
 ## How to: Get Started
 

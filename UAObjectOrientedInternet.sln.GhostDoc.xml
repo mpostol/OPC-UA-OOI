@@ -13,7 +13,7 @@
   </SpellChecker>
 <HelpConfigurations selected="HelpFile">
   <HelpConfiguration name="HelpFile">
-    <OutputPath>..\..\Users\mpost\Downloads\Nowy folder</OutputPath>
+    <OutputPath>..\..\Users\mpost\Downloads\OOIHelp</OutputPath>
     <CleanupOutputPath>true</CleanupOutputPath>
     <HelpFileName>UAObjectOrientedInternet</HelpFileName>
     <HelpFileNamingMethod>MemberName</HelpFileNamingMethod>
@@ -43,7 +43,7 @@
     </SyntaxLanguages>
     <ResolveCrefLinks>true</ResolveCrefLinks>
     <HeaderText>UAOOI.ObjectOrientedInternet</HeaderText>
-    <FooterText>Rel 4.0.1</FooterText>
+    <FooterText>Rel 5.00.02</FooterText>
     <ConceptualContent>
       <ContentLayout />
       <MediaContent />
@@ -55,12 +55,12 @@
       <SelectedProject>Configuration.Networking</SelectedProject>
       <SelectedProject>DataDiscovery.DiscoveryServices</SelectedProject>
       <SelectedProject>Networking.Core</SelectedProject>
-      <SelectedProject>Networking.DataLogger</SelectedProject>
       <SelectedProject>Networking.Encoding</SelectedProject>
       <SelectedProject>Networking.SemanticData</SelectedProject>
-      <SelectedProject>Networking.SimulatorInteroperabilityTest</SelectedProject>
       <SelectedProject>Networking.UDPMessageHandler</SelectedProject>
+      <SelectedProject>SemanticData.BuildingErrorsHandling</SelectedProject>
       <SelectedProject>SemanticData.InformationModelFactory</SelectedProject>
+      <SelectedProject>SemanticData.UAModelDesignExport</SelectedProject>
       <SelectedProject>SemanticData.UANodeSetValidation</SelectedProject>
     </SelectedProjects>
   </HelpConfiguration>

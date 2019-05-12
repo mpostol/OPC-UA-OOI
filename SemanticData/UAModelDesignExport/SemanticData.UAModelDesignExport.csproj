@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>UAOOI.SemanticData.UAModelDesignExport</AssemblyName>
+    <RootNamespace>UAOOI.SemanticData.UAModelDesignExport</RootNamespace>
+    <Description>This library provides implementation o f the export an XML file compliant with the UAModelDeign schema. By design The UAModelDeign schema describes the structure of an XML document representing the OPC UA Information Model that is used as the input for the [`UA-ModelCompiler`](https://github.com/OPCFoundation/UA-ModelCompiler).</Description>
+    <RepositoryType>GitHub</RepositoryType>
+    <Copyright>Copyright (c) 2019 Mariusz Postol</Copyright>
+    <Authors>Mariusz Postol</Authors>
+    <Company>commsvr.com</Company>
+    <Product>Object Oriented Internet</Product>
+    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
+    <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA</PackageTags>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+    <Version>1.0.0-Alpha</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\UAOOI.SemanticData.UAModelDesignExport.xml</DocumentationFile>
+    <OutputPath>bin\Debug\netstandard2.0\</OutputPath>
+    <NoWarn>1701;1702,IDE0001</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Diagnostic\**" />
+    <EmbeddedResource Remove="Diagnostic\**" />
+    <None Remove="Diagnostic\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj" />
+    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommonServiceLocator" Version="2.0.4" />
+  </ItemGroup>
+
+</Project>

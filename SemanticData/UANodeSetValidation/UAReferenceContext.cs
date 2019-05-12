@@ -1,8 +1,15 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
@@ -14,14 +21,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class UAReferenceContext - encapsulates information about a reference
   /// </summary>
-  internal class UAReferenceContext
+  public class UAReferenceContext
   {
 
     #region creator
     internal static UAReferenceContext NewReferenceStub
-      (Reference reference, AddressSpaceContext addressSpaceContext, UAModelContext modelContext, UANodeContext parentNode, Action<TraceMessage> traceEvent)
+      (Reference reference, IAddressSpaceBuildContext addressSpaceContext, IUAModelContext modelContext, IUANodeContext parentNode, Action<TraceMessage> traceEvent)
     {
-      UANodeContext targetNode = modelContext.GetOrCreateNodeContext(reference.Value, true, traceEvent);
+      IUANodeContext targetNode = modelContext.GetOrCreateNodeContext(reference.Value, true);
       UAReferenceContext _stb = new UAReferenceContext()
       {
         m_Context = addressSpaceContext,
@@ -29,7 +36,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         SourceNode = reference.IsForward ? parentNode : targetNode,
         ModelNode = reference,
         TargetNode = reference.IsForward ? targetNode : parentNode,
-        TypeNode = modelContext.GetOrCreateNodeContext(reference.ReferenceType, true, traceEvent),
+        TypeNode = modelContext.GetOrCreateNodeContext(reference.ReferenceType, true),
       };
       if (_stb.TypeNode != null && _stb.TypeNode.NodeIdContext.NamespaceIndex == 0)
         _stb.ReferenceKind = _stb.GetReferenceKind(_stb.TypeNode);
@@ -44,30 +51,28 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <value>The kind of the reference.</value>
     internal ReferenceKindEnum ReferenceKind
     {
-      get { return b_ReferenceKindEnum; }
-      private set { b_ReferenceKindEnum = value; }
+      get => b_ReferenceKindEnum;
+      private set => b_ReferenceKindEnum = value;
     }
     /// <summary>
     /// Gets the name of the reference type.
     /// </summary>
-    /// <param name="traceEvent">An <see cref="Action" /> delegate is used to trace event as the <see cref="TraceMessage" />.</param>
     /// <returns>XmlQualifiedName.</returns>
-    internal XmlQualifiedName GetReferenceTypeName(Action<TraceMessage> traceEvent)
+    internal XmlQualifiedName GetReferenceTypeName()
     {
       if (IsDefault(this.TypeNode.NodeIdContext))
         return null;
-      return m_Context.ExportBrowseName(this.TypeNode.NodeIdContext, traceEvent);
+      return m_Context.ExportBrowseName(this.TypeNode.NodeIdContext);
     }
     /// <summary>
     /// Returns the name of the reference target and calculates the Target identifier by traversing the components hierarchical path.
     /// </summary>
-    /// <param name="traceEvent">A delegate <see cref="Action{TraceMessage}"/> encapsulates an action to report any errors and trace processing progress.</param>
     /// <returns><see cref="System.Xml.XmlQualifiedName" />.</returns>
-    internal XmlQualifiedName BrowsePath(Action<TraceMessage> traceEvent)
+    internal XmlQualifiedName BrowsePath()
     {
       List<string> _path = new List<string>();
-      var _startingNode = ModelNode.IsForward ? TargetNode : SourceNode;
-      _startingNode.BuildSymbolicId(_path, traceEvent);
+      IUANodeContext _startingNode = ModelNode.IsForward ? TargetNode : SourceNode;
+      _startingNode.BuildSymbolicId(_path);
       string _symbolicId = _path.SymbolicName();
       //return new XmlQualifiedName(_symbolicId, m_Context.m_NamespaceTable.GetString(this.TargetNode.NodeIdContext.NamespaceIndex));
       return new XmlQualifiedName(_symbolicId, m_Context.GetNamespace(this.TargetNode.NodeIdContext.NamespaceIndex));
@@ -94,66 +99,50 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _ret = ModelingRules.OptionalPlaceholder;
       return _ret;
     }
-    internal UANodeContext ParentNode { get; private set; }
-    internal UANodeContext TypeNode { get; private set; }
-    internal UANodeContext TargetNode { get; private set; }
-    internal UANodeContext SourceNode { get; private set; }
-    internal bool ChildConnector { get { return (ReferenceKind == ReferenceKindEnum.HasProperty) || (ReferenceKind == ReferenceKindEnum.HasComponent); } }
+    internal IUANodeContext ParentNode { get; private set; }
+    internal IUANodeContext TypeNode { get; private set; }
+    internal IUANodeContext TargetNode { get; private set; }
+    internal IUANodeContext SourceNode { get; private set; }
+    internal bool ChildConnector => (ReferenceKind == ReferenceKindEnum.HasProperty) || (ReferenceKind == ReferenceKindEnum.HasComponent);
     internal bool HierarchicalReference
     {
-      get { return b_HierarchicalReference; }
-      set { b_HierarchicalReference = value; }
+      get => b_HierarchicalReference;
+      set => b_HierarchicalReference = value;
     }
     /// <summary>
     /// Ir recursively builds the symbolic identifier.
     /// </summary>
     /// <param name="path">The browse path.</param>
-    /// <param name="traceEvent">A delegate <see cref="Action{TraceMessage}"/> encapsulates an action to report any errors and trace processing progress.</param>
-    internal void BuildSymbolicId(List<string> path, Action<TraceMessage> traceEvent)
+    internal void BuildSymbolicId(List<string> path)
     {
-      this.SourceNode.BuildSymbolicId(path, traceEvent);
+      this.SourceNode.BuildSymbolicId(path);
     }
-    internal string Key
-    {
-      get
-      {
-        return String.Format("{0}:{1}:{2}", SourceNode.NodeIdContext.Format(), TypeNode.NodeIdContext.Format(), TargetNode.NodeIdContext.Format());
-      }
-    }
+    internal string Key => string.Format("{0}:{1}:{2}", SourceNode.NodeIdContext.Format(), TypeNode.NodeIdContext.Format(), TargetNode.NodeIdContext.Format());
     /// <summary>
     /// Gets the target node context.
     /// </summary>
     /// <value>The target node context.</value>
-    internal UANodeContext TargetNodeContext
-    {
-      get { return TargetNode; }
-    }
+    internal IUANodeBase TargetNodeContext=> TargetNode; 
     /// <summary>
     /// Gets the source node context.
     /// </summary>
     /// <value>The source node context.</value>
-    internal UANodeContext SourceNodeContext
-    {
-      get { return SourceNode; }
-    }
+    internal IUANodeContext SourceNodeContext => SourceNode;
     /// <summary>
     /// Gets the reference.
     /// </summary>
     /// <value>The reference.</value>
-    internal Reference Reference
-    {
-      get { return ModelNode; }
-    }
+    internal Reference Reference => ModelNode;
     #endregion
 
     #region private
     //fields
     private bool b_HierarchicalReference;
     private Reference ModelNode;
-    private AddressSpaceContext m_Context;
+    private IAddressSpaceBuildContext m_Context;
     private ReferenceKindEnum b_ReferenceKindEnum = ReferenceKindEnum.Custom;
     //methods
-    private ReferenceKindEnum GetReferenceKind(UANodeContext TypeNode)
+    private ReferenceKindEnum GetReferenceKind(IUANodeContext TypeNode)
     {
       if (TypeNode.NodeIdContext.NamespaceIndex != 0)
         return ReferenceKindEnum.Custom;

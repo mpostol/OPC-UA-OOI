@@ -1,9 +1,12 @@
-﻿
-using System;
-using System.Globalization;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System.IO;
 using System.Reflection;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML

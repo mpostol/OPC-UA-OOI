@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.Collections.Generic;
 using System.Xml;
@@ -28,10 +34,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// Sets a value indicating whether the Method is currently executable taking user access rights into account (“False” means not executable, “True” means executable).
     /// </summary>
     /// <value><c>true</c> if executable by current user; otherwise, <c>false</c>. Default value is <c>true</c></value>
-    public bool? UserExecutable
-    {
-      set { }
-    }
+    public bool? UserExecutable { set { } }
+    /// <summary>
+    /// Gets or sets the method declaration identifier defined in Part 6  F.9. May be specified for Method Nodes that are a target of a HasComponent reference from a single Object Node.
+    /// It is the NodeId of the UAMethod with the same BrowseName contained in the TypeDefinition associated with the Object Node.
+    /// If the TypeDefinition overrides a Method inherited from a base ObjectType then this attribute shall reference the Method Node in the subtype.
+    /// </summary>
+    /// <value>The method declaration identifier.</value>
+    public string MethodDeclarationId { set { } }
     /// <summary>
     /// Adds the input arguments. The InputArgument specify the input argument of the Method. The Method contains an array of the Argument data type.
     /// An empty array indicates that there are no input arguments for the Method.
@@ -50,8 +60,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     {
       RemoveArguments(BrowseNames.OutputArguments, argument);
     }
+    /// <summary>
+    /// Adds the argument description.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="locale">The locale.</param>
+    /// <param name="value">The value.</param>
+    public void AddArgumentDescription(string name, string locale, string value) { }
     #endregion
-    
+
     private Parameter[] RemoveArguments(string parameterKind, Func<XmlElement, Parameter[]> getParameters)
     {
       Parameter[] _parameters = null;

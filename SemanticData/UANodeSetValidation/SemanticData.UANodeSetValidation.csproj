@@ -3,12 +3,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>UAOOI.SemanticData.UANodeSetValidation</AssemblyName>
+    <AssemblyName>UAOOI.SemanticData.UANodeSetValidation.5</AssemblyName>
     <RootNamespace>UAOOI.SemanticData.UANodeSetValidation</RootNamespace>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <PackageId>UAOOI.SemanticData.UANodeSetValidation</PackageId>
-    <Version>4.0.1</Version>
+    <Version>5.0.2-alpha</Version>
     <Authors>MPostol</Authors>
     <Product>commsvr.com</Product>
     <Description>This project supports validation of the OPC UA Address Space captured in the xml file against the OPC UA Specyfication. It is assumed that the Address Space is represented as a XML file compliant with the NodeSet schema.
@@ -20,16 +20,23 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Object Oriented Internet, OPC UA, Information Model</PackageTags>
-    <AssemblyVersion>4.0.1.1</AssemblyVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>5.0.2.1</AssemblyVersion>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <FileVersion>5.0.2.1</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;1705;IDE0001, IDE0002,IDE0003</NoWarn>
+    <DocumentationFile>bin\Debug\netstandard2.0\UAOOI.SemanticData.UANodeSetValidation.xml</DocumentationFile>
+    <OutputPath>bin\Debug\netstandard2.0\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Argument.cs" />
+    <Compile Remove="IUANodeValidator.cs" />
     <Compile Remove="Properties\Resources.Designer.cs" />
+    <Compile Remove="Utilities\ModelTableEntry.cs" />
+    <Compile Remove="Utilities\StringTable.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,11 +53,27 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.CodeDom" Version="4.5.0" />
+    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj" />
+    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
+    <None Update="BuildErrors.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BuildErrors.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="BuildErrors.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BuildErrors.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

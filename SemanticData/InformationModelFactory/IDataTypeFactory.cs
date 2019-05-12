@@ -1,11 +1,19 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 namespace UAOOI.SemanticData.InformationModelFactory
 {
+
   /// <summary>
   /// Interface <c>IDataTypeFactory</c> - it provides functionality to factory objects implementing the <see cref="IDataTypeDefinitionFactory"/> interface. 
   /// </summary>
   public interface IDataTypeFactory : ITypeFactory
   {
+
     /// <summary>
     /// Creates new implementation dependent object implementing the <see cref="IDataTypeDefinitionFactory"/> interface.
     /// The data type model is used to define simple and complex data types. Types are used to describe the structure of the Value attribute of variables and their types. 

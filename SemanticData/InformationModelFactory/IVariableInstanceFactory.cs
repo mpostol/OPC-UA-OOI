@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System.Xml;
 
 namespace UAOOI.SemanticData.InformationModelFactory
@@ -17,7 +23,7 @@ namespace UAOOI.SemanticData.InformationModelFactory
     /// may be restricted to a certain user / user group.
     /// </summary>
     /// <value>The access level.</value>
-    byte? AccessLevel
+    uint? AccessLevel
     {
       set;
     }

@@ -1,0 +1,1 @@
+asp "XMLModels\DataTypeTest.NodeSet2.xml" "XMLModels\ReferenceTest.NodeSet2.xml" "XMLModels\ObjectTypeTest.NodeSet2.xml" "XMLModels\VariableTypeTest.NodeSet2.xml" -e "XMLModels\DataTypeTest.ModelDesign.xml" -s XMLstylesheet -n "http://cas.eu/UA/CommServer/UnitTests/DataTypeTest"

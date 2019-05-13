@@ -14,7 +14,7 @@ Instruction for implementer is covered in the section *Notices for Implementer*.
 
 The following documents, in whole or in part, are normatively referenced in this document and are indispensable for its application.
 
-- [ISO/IEC 19464:2014: Advanced Message Queuing Protocol (AMQP) v1.0][ISO.AMQP]
+- [`IEEE 802.3`][Ethernet]
 - [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
 
 ## Introduction
@@ -87,8 +87,8 @@ The messages (`UADP NetworkMessage`) are transparently transported as the payloa
 - [OPC Unified Architecture Part 14: PubSub Main Technology Features][README.PubSubMTF]
 - [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
 
-[OPC.UA.PubSub]: https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
-[Ethernet]: https://en.wikipedia.org/wiki/IEEE_802.3
+[OPC.UA.PubSub]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
+[Ethernet]:https://en.wikipedia.org/wiki/IEEE_802.3
 [README.PubSubMTF]:README.PubSubMTF.md
 
 

@@ -1,9 +1,8 @@
-﻿
 # `ReferenceApplication` Consumer - Data Logger
 
 ## Common Tasks
 
-Working through this tutorial gives you an introductory understanding of the steps required to implement `Consumer` role of `OOI Reactive Application`. `DataLogger` is a sample implementation of the `Consumer` part of the `ReferenceApplication`, which is an example application of `SemanticData` reactive networking based on [OPC UA Part 14 Pub/Sub](../../Networking/SemanticData/README.PubSubMTF.md) specification.
+Working through this tutorial gives you an introductory understanding of the steps required to implement `Consumer` role of `OOI Reactive Application`. `DataLogger` is a sample implementation of the `Consumer` part of the `ReferenceApplication`, which is an example application of `Semantic-Data` reactive networking based on [OPC UA Part 14 Pub/Sub](../../Networking/SemanticData/README.PubSubMTF.md) specification.
 
 Here are steps undertook to implement the `Consumer` role in the application:
 
@@ -67,5 +66,5 @@ This file contains a mirror configuration of the [`Producer`](../../Networking/S
 - [API Browser][API Browser]: the preliminary code help documentation.
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 
-[API Browser]: http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Common.Infrastructure.Diagnostic.htm
-[wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible
+[API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
+[wordpress.OPCUACD]:https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible

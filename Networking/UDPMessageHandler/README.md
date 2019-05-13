@@ -1,8 +1,8 @@
-﻿# Underlying Transport over UDP
+# Underlying Transport over UDP
 
 ## Motivation
 
-The main goal of this document is to provide instruction on how to expand the transport layer for OOI Networking of the **Semantic Data** over the User Datagram Protocol (UDP) to be compliant with the specifications mentioned in the section *Normative references*.
+The main goal of this document is to provide instruction on how to expand the transport layer for OOI Networking of the `Semantic-Data` over the User Datagram Protocol (UDP) to be compliant with the specifications mentioned in the section *Normative references*.
 
 A reference implementation of the `Transport` over UDP is provided by the project [Networking.UDPMessageHandler][OOI.Networking.UDPMessageHandler]. Because intentionally the SDK is designed to use any transport protocol, a custom external component implementing UDP connectivity can be seamlessly integrated with this SDK using dependency injection concept illustrated by the following domain model:
 
@@ -82,7 +82,7 @@ It is assumed that the IP multicasting is supported by the UDP protocol stock st
 
 ## Notices for Implementer
 
-The article [Networking of SemanticData Library](README.MD#message-transport) contains description covering instruction for the external UDP handling components. An example how to implement the `Transport` layer for the UDP protocol is illustrated by the project [UA Data Example Application][OOI.Networking.ReferenceApplication]. This library implements the `IMessageHandlerFactory` in the class `MessageHandlerFactory` used to create communication infrastructure for the `Consumer` and `Producer` role as well.
+The article [Reactive Networking of Semantic-Data Library](../SemanticData/README.MD) contains description covering instruction for the external UDP handling components. An example how to implement the `Transport` layer for the UDP protocol is illustrated by the project [UA Data Example Application][OOI.Networking.ReferenceApplication]. This library implements the `IMessageHandlerFactory` in the class `MessageHandlerFactory` used to create communication infrastructure for the `Consumer` and `Producer` role as well.
 
 The `JoinMulticastGroup` method subscribes the `UdpClient` to a multicast group using the specified `IPAddress`. After calling the `JoinMulticastGroup` method, the underlying `Socket` sends an Internet Group Management Protocol (IGMP) packet to the router requesting membership to the multicast group. The multicast address range is `224.0.0.0` to `239.255.255.255`. If you specify an address outside this range or if the router to which the request is made is not multicast enabled, `UdpClient` will throw a `SocketException`. Once the `UdpClient` is listed with the router as a member of the multicast group, it will be able to receive multicasted datagrams sent to the specified `IPAddress`.  `Publisher` do not need to belong to a multicast group to send datagrams to a multicast IP address. To get more details visit the MSDN online documentation.
 

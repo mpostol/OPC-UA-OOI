@@ -8,7 +8,7 @@
 Current release:
 
 Assembly Title:         <#=NetworkingDataProduct#>
-Assembly Description:   UAOOI SemanticData UA-Networking Reference Application.
+Assembly Description:   UAOOI Reactive Networking of Semantic-Data Library.
 Assembly Company:       <#=AssemblyCompany#>
 Assembly Product:       <#=SemanticDataProduct#>
 Assembly Copyright:     <#=AssemblyCopyright#>

@@ -1,4 +1,11 @@
-﻿using UAOOI.SemanticData.UANodeSetValidation.XML;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers
 {
@@ -9,18 +16,38 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers
       UANodeSet _ns = new UANodeSet()
       {
         NamespaceUris = new string[] { @"http://cas.eu/UA/Demo/" },
-        Aliases = new NodeIdAlias[] { 
+        Aliases = new NodeIdAlias[] {
                                       new NodeIdAlias() { Alias = "Boolean", Value = "i=1" },
-                                      new NodeIdAlias() { Alias = "HasSubtype", Value = "i=45" } 
+                                      new NodeIdAlias() { Alias = "HasSubtype", Value = "i=45" }
                                     },
-        Items = new UANode[]
-        {
-          new UAReferenceType() {  NodeId = "ns=1;i=985", BrowseName="1:FlowTo", DisplayName = new LocalizedText[]{ new LocalizedText()  { Value = "FlowTo"}}, Symmetric = true, 
-                                   References = new Reference[] { new Reference() {ReferenceType="HasSubtype", IsForward=false, Value = "i=32"}  }
-                                }
-        }
+        Items = new UANode[] { CreateUAReferenceType() }
       };
       return _ns;
+    }
+    public static UAReferenceType CreateUAReferenceType()
+    {
+      return new UAReferenceType()
+      {
+        NodeId = "ns=1;i=985",
+        BrowseName = "1:FlowTo",
+        DisplayName = new LocalizedText[] { new LocalizedText() { Value = "FlowTo" } },
+        Symmetric = true,
+        References = new Reference[] { new Reference() { ReferenceType = "HasSubtype", IsForward = false, Value = "i=32" } }
+      };
+    }
+    public static UAObject CreateUAObject()
+    {
+      return new UAObject()
+      {
+        NodeId = "ns=1;i=985",
+        BrowseName = "1:FlowTo",
+        DisplayName = new LocalizedText[] { new LocalizedText() { Value = "FlowTo" } },
+        References = new Reference[] { new Reference() { ReferenceType = "HasSubtype", IsForward = false, Value = "i=32" } },
+        // UAInstance
+        ParentNodeId = "ParentNodeId",
+        // UAObject
+        EventNotifier = 0x01
+      };
     }
 
   }

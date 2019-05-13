@@ -1,26 +1,34 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
+
   [TestClass]
   public class AddressSpaceContextUnitTest
   {
 
     [TestMethod]
     [TestCategory("Code")]
-    public void AddressSpaceContextCreatorTestMethod()
+    public void AddressSpaceContextConstructorTestMethod()
     {
-      AddressSpaceContext _as = new AddressSpaceContext(x => { });
-      Assert.IsNotNull(_as);
-      UANodeContext _context = null;
+      List<TraceMessage> _log = new List<TraceMessage>();
+      AddressSpaceContext _as = new AddressSpaceContext(x => { _log.Add(x); });
+      IUANodeContext _context = null;
       _as.UTTryGetUANodeContext(VariableTypes.PropertyType, x => _context = x);
       Assert.IsNotNull(_context);
     }
@@ -58,16 +66,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     [TestCategory("Code")]
     public void AddressSpaceContextValidateAndExportModelTestMethod1()
     {
-      IAddressSpaceContext _as;
-      ValidateAndExportModelPreparation(out UANodeSet _ns, out _as);
+      ValidateAndExportModelPreparation(out UANodeSet _ns, out IAddressSpaceContext _as);
       _as.ValidateAndExportModel(_ns.NamespaceUris[0]);
     }
     [TestMethod]
     [TestCategory("Code")]
     public void AddressSpaceContextValidateAndExportModelTestMethod2()
     {
-      IAddressSpaceContext _as;
-      ValidateAndExportModelPreparation(out UANodeSet _ns, out _as);
+      ValidateAndExportModelPreparation(out UANodeSet _ns, out IAddressSpaceContext _as);
       _as.ValidateAndExportModel();
     }
     [TestMethod]
@@ -75,19 +81,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
     public void AddressSpaceContextValidateAndExportModelTestMethod3()
     {
-      UANodeSet _ns;
-      IAddressSpaceContext _as;
-      ValidateAndExportModelPreparation(out _ns, out _as);
+      ValidateAndExportModelPreparation(out UANodeSet _ns, out IAddressSpaceContext _as);
       _as.ValidateAndExportModel("Not existing namespace");
     }
     [TestMethod]
     [TestCategory("Code")]
     public void AddressSpaceContextValidateAndExportModelTestMethod4()
     {
-      UANodeSet _ns;
-      IAddressSpaceContext _as;
-      ValidateAndExportModelPreparation(out _ns, out _as);
-      List<UANodeContext> _returnValue = null;
+      ValidateAndExportModelPreparation(out UANodeSet _ns, out IAddressSpaceContext _as);
+      List<IUANodeContext> _returnValue = null;
       ((AddressSpaceContext)_as).UTValidateAndExportModel(0, x => _returnValue = x);
       Assert.AreEqual<int>(1514, (_returnValue.Count));
       ((AddressSpaceContext)_as).UTValidateAndExportModel(1, x => _returnValue = x);

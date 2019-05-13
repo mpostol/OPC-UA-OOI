@@ -102,13 +102,13 @@ Implementation of this interface is a basic step to implement `Consumer` and/or 
 - by the `Consumer` to save the data received over the wire in the local data repository.
 - by the `Producer` to read from the local data repository.
 
-### How to: Implement `Consumer` role
+### `Consumer` Role Implementation
 
 This section provides hints on how to implement the `Consumer` role of the `OOI Reactive Application` processing data received in messages sent over the network by a data producer.
 
 The class `UAOOI.Networking.DataLogger.DataConsumer` is an example implementation of a [data logger](./../DataLogger/README.md) functionality recording data over time. It consumes the testing data sent and updates properties in the class `UAOOI.Networking.DataLogger.ConsumerViewModel` implementing ViewModel layer in the [Model View ViewModel (on MSDN)](https://msdn.microsoft.com/en-us/magazine/dd419663.aspx). The class `DataConsumer` demonstrates how to create bindings interconnecting the data received over the wire and the properties that are the ultimate destination of the data.
 
-### How to: Implement `Producer` role
+### `Producer` Role Implementation 
 
 This section provides hints on how to implement the `Producer` role responsible for:
 - reading process data from a local repository,
@@ -128,9 +128,7 @@ Both are parts of the example implementation [`ReferenceApplication`](../../Netw
 ## See also
 
 - [API Browser][API Browser]: the preliminary code help documentation.
- 
-[API Browser]: http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Networking.SemanticData.htm
-
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 
+[API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
 [wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/

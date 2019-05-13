@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UAModelDesignerSolution xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>UnitTestsData</Name>
+  <Projects>
+    <UAModelDesignerProject ProjectIdentifier="f94e41c2-dbc6-48c3-a374-81615b1bf0de">
+      <Name>ReferenceTest</Name>
+      <CSVFileName>$(ProjectFileName).csv</CSVFileName>
+      <BuildOutputDirectoryName>$(ProjectFileName)</BuildOutputDirectoryName>
+      <FileName>ReferenceTest.xml</FileName>
+    </UAModelDesignerProject>
+    <UAModelDesignerProject ProjectIdentifier="66dc1a63-f9f4-411f-8866-07b8e6a54f99">
+      <Name>ObjectTypeTest</Name>
+      <CSVFileName>$(ProjectFileName).csv</CSVFileName>
+      <BuildOutputDirectoryName>$(ProjectFileName)</BuildOutputDirectoryName>
+      <FileName>ObjectTypeTest.xml</FileName>
+    </UAModelDesignerProject>
+    <UAModelDesignerProject ProjectIdentifier="72861b24-ae2a-4ea2-973d-9d8193e317bb">
+      <Name>VariableTypeTest</Name>
+      <CSVFileName>$(ProjectFileName).csv</CSVFileName>
+      <BuildOutputDirectoryName>$(ProjectFileName)</BuildOutputDirectoryName>
+      <FileName>VariableTypeTest.xml</FileName>
+    </UAModelDesignerProject>
+    <UAModelDesignerProject ProjectIdentifier="be767e1a-245c-4051-a151-b3708704f464">
+      <Name>DataTypeTest</Name>
+      <CSVFileName>$(ProjectFileName).csv</CSVFileName>
+      <BuildOutputDirectoryName>$(ProjectFileName)</BuildOutputDirectoryName>
+      <FileName>DataTypeTest.xml</FileName>
+    </UAModelDesignerProject>
+  </Projects>
+  <ServerDetails xsi:nil="true" />
+</UAModelDesignerSolution>

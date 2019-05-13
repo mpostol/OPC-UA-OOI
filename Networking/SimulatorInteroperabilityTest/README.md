@@ -2,7 +2,7 @@
 
 ## Common Tasks
 
-Working through this tutorial gives you an introductory understanding of the steps required to implement `Producer` role of `OOI Reactive Application`. `SimulatorInteroperabilityTest` is a sample of the `Producer` part of the `ReferenceApplication`, which is an example of `SemanticData` reactive networking based on  [OPC UA Part 14 Pub/Sub](../../Networking/SemanticData/README.PubSubMTF.md) specification.
+Working through this tutorial gives you an introductory understanding of the steps required to implement `Producer` role of `OOI Reactive Application`. `SimulatorInteroperabilityTest` is a sample of the `Producer` part of the `ReferenceApplication`, which is an example of `Semantic-Data` reactive networking based on  [OPC UA Part 14 Pub/Sub](../../Networking/SemanticData/README.PubSubMTF.md) specification.
 The `Producer` role serves as a data generator to be used for testing purpose aimed at supporting the interoperability tests planned by the OPC Foundation. In the production environment, you may replace this library by a custom one supporting more realistic process data acquisition scenario.
 
 Here are steps undertook to implement the `Producer` role in the application:
@@ -133,5 +133,5 @@ DataSet 3 |32 |2 byte |DataValue
 - [API Browser][API Browser]: the preliminary code help documentation.
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 
-[API Browser]: http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Networking.SemanticData.htm
-[wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible
+[API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
+[wordpress.OPCUACD]:https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible

@@ -1,8 +1,8 @@
 ﻿//_______________________________________________________________
-//  Title   : Assembly info for: AddressSpaceTestTool
+//  Title   : Assembly info for: Address Space Prototyping
 //  System  : Microsoft VisualStudio 2015 / C#
 //
-//  Copyright MPostol (c) 2019
+//  Copyright (c) 2019 Mariusz Postol
 //  +48 608 619 899
 //  mpostol@cas.eu
 //  https://github.com/mpostol/OPC-UA-OOI
@@ -12,17 +12,17 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("AddressSpaceTestTool")]
-[assembly: AssemblyDescription("Command Line OPC UA Address Space Compliance Test Tool")]
+[assembly: AssemblyTitle("Address Space Prototyping")]
+[assembly: AssemblyDescription("Command Line OPC UA Address Space Prototyping Tool")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
 [assembly: AssemblyProduct("Object Oriented Internet")]
-[assembly: AssemblyCopyright("Copyright MPostol (c) 2019")]
+[assembly: AssemblyCopyright("Copyright (c) 2019 Mariusz Postol")]
 [assembly: AssemblyTrademark("Object Oriented Internet")]
 [assembly: AssemblyCulture("")]
 [assembly: Guid("157926b5-f6a5-4496-84c2-f5f9dae937ae")]
-[assembly: AssemblyVersion("4.0.1.*")]
-[assembly: AssemblyFileVersion("4.0.1")]
+[assembly: AssemblyVersion("5.0.2.*")]
+[assembly: AssemblyFileVersion("5.0.2")]
 [assembly: InternalsVisibleToAttribute("AddressSpaceComplianceTestToolUnitTests, PublicKey=00240000048000009400000006020000002400005253413100040000010001005b97a0972ff6b1" +
                                                                                           "3a8a9ff9c09503aea0e5e2fe29cb2275a0c0942182f4c3431814b6bc9a556d9fe0d7e7823439c1" +
                                                                                           "ba28521f6318e4c936c4461604ef668e9686c2021571b093e1bfba071b373bc56a07a3afdc120c" +

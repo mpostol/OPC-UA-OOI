@@ -9,11 +9,11 @@ The project `Networking.Simulator.Boiler` is a part of the proof of concept with
 - **Remote control** – the serviceman must be able to control remotely the industrial object (in this case the boiler) to avoid any catastrophic behavior
 - **Data reusability** – the data must be also available and shared by others helping him minimize danger and fix the problem in the shortest possible time
 
-The main goal of this proof of concept is to demonstrate the feasibility of process data generation and publication using **PubSub** reactive networking concept against selected OPC UA Information Model. It also demonstrates how to design the pluggable software module dedicated to implementing the **Producer** role that is developed solely on top of the library  [Reactive Networking of SemanticData Library](../../Networking/SemanticData/README.MD).
+The main goal of this proof of concept is to demonstrate the feasibility of process data generation and publication using **PubSub** reactive networking concept against selected OPC UA Information Model. It also demonstrates how to design the pluggable software module dedicated to implementing the **Producer** role that is developed solely on top of the library  [Reactive Networking of Semantic-Data Library](../../Networking/SemanticData/README.MD).
 
 By design it is composable component of the [`ReferenceApplication`](../../Networking/ReferenceApplication/README.MD). This component may be integrated with the `ReferenceApplication` as the `Producer`.
 
-The source code of the OPC UA Information Model is added to the project and is located in the folder 'UAInformationModel'. The folder also contains the solution file that can be opened using the Address Space Model Designer [\[ 2\]][CAS.ASMD]. A detailed description of the OPC UA Information Model deployment is covered in [\[1\]][CAS.OPCUAIMD].
+The source code of the OPC UA Information Model is added to the project and is located in the folder `UAInformationModel`. The folder also contains the solution file that can be opened using the Address Space Model Designer [\[ 2\]][CAS.ASMD]. A detailed description of the OPC UA Information Model deployment is covered in [\[1\]][CAS.OPCUAIMD].
 
 ## Informal Model of Boiler
 

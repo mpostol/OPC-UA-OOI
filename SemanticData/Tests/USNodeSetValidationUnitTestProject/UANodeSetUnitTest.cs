@@ -1,10 +1,16 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UAOOI.SemanticData.UANodeSetValidation;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
@@ -55,9 +61,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     {
       FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
-      List<UANodeContext> _nodes = ValidationUnitTest(_testDataFileInfo, 1);
-      Assert.IsFalse(_nodes.Where<UANodeContext>(x => x.UANode == null).Any<UANodeContext>());
-      Assert.AreEqual<int>(1, _nodes.Where<UANodeContext>(x => x.UANode is UAType).Count<UANodeContext>());
+      List<IUANodeContext> _nodes = ValidationUnitTest(_testDataFileInfo, 1);
+      Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
+      Assert.AreEqual<int>(1, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
     }
     [TestMethod]
     [TestCategory("Correct Model")]
@@ -65,9 +71,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     {
       FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
-      List<UANodeContext> _nodes = ValidationUnitTest(_testDataFileInfo, 14);
-      Assert.IsFalse(_nodes.Where<UANodeContext>(x => x.UANode == null).Any<UANodeContext>());
-      Assert.AreEqual<int>(2, _nodes.Where<UANodeContext>(x => x.UANode is UAType).Count<UANodeContext>());
+      List<IUANodeContext> _nodes = ValidationUnitTest(_testDataFileInfo, 14);
+      Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
+      Assert.AreEqual<int>(2, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
     }
     [TestMethod]
     [TestCategory("Correct Model")]
@@ -75,9 +81,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     {
       FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
-      List<UANodeContext> _nodes = ValidationUnitTest(_testDataFileInfo, 4);
-      Assert.IsFalse(_nodes.Where<UANodeContext>(x => x.UANode == null).Any<UANodeContext>());
-      Assert.AreEqual<int>(3, _nodes.Where<UANodeContext>(x => x.UANode is UAType).Count<UANodeContext>());
+      List<IUANodeContext> _nodes = ValidationUnitTest(_testDataFileInfo, 4);
+      Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
+      Assert.AreEqual<int>(3, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
     }
     [TestMethod]
     [TestCategory("Correct Model")]
@@ -85,9 +91,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     {
       FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\DataTypeTest\DataTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
-      List<UANodeContext> _nodes = ValidationUnitTest(_testDataFileInfo, 18);
-      Assert.IsFalse(_nodes.Where<UANodeContext>(x => x.UANode == null).Any<UANodeContext>());
-      Assert.AreEqual<int>(4, _nodes.Where<UANodeContext>(x => x.UANode is UAType).Count<UANodeContext>());
+      List<IUANodeContext> _nodes = ValidationUnitTest(_testDataFileInfo, 18);
+      Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
+      Assert.AreEqual<int>(4, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
     }
     #endregion
 
@@ -102,16 +108,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       else
         errors.Add(msg);
     }
-    private List<UANodeContext> ValidationUnitTest(FileInfo _testDataFileInfo, int nodes)
+    private List<IUANodeContext> ValidationUnitTest(FileInfo _testDataFileInfo, int nodes)
     {
       List<TraceMessage> _trace = new List<TraceMessage>();
       int _diagnosticCounter = 0;
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.IsNotNull(_as);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      List<UANodeContext> _nodes = null;
+      List<IUANodeContext> _nodes = null;
       ((AddressSpaceContext)_as).UTValidateAndExportModel(1, x => _nodes = x);
       Assert.AreEqual<int>(nodes, _nodes.Count);
       _as.ValidateAndExportModel();

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This library contains types that supports the configuration management of application implementing the paradigm described in [OOI Semantic Data Processing Architecture](../../SemanticData/README.MD). The configuration may be read to or write from the xml or json files. By design this library may be used to support variety kinds of applications at design and run time.
+This library contains types that supports the configuration management of application implementing the paradigm described in [Semantic-Data Processing Architecture](../../SemanticData/README.MD). The configuration may be read to or write from the xml or json files. By design this library may be used to support variety kinds of applications at design and run time.
 
 The project seems to be very important prototyping workspace to answer the question how far we can go with the configuration (design time approach) in context of the following problems we have:
 
@@ -15,7 +15,7 @@ Let me know if it works for you and if not how to converge proposed solution and
 
 ### Run time
 
-By design it is a plug-in or using modern terminology application composition part of the library described in [Networking of SemanticData Library](../../Networking/SemanticData/README.MD#networking-of-semanticdata-library)  and at run time it can be used as the primary source of configuration for any standalone `OOI Reactive Application` and `UA Server` supporting PubSub role.
+By design it is a plug-in or using modern terminology application composition part of the library described in [Reactive Networking of Semantic-Data Library](../../Networking/SemanticData/README.MD#networking-of-semanticdata-library)  and at run time it can be used as the primary source of configuration for any standalone `OOI Reactive Application` and `UA Server` supporting PubSub role.
 
 In this case the application configuration may:
 
@@ -49,4 +49,4 @@ The XML schema of the configuration files is available at: [ConfigurationData.xs
 
 - [API Browser][API Browser]: the preliminary code help documentation.
  
-[API Browser]: http://www.commsvr.com/download/OPC-UA-OOI/?topic=html/N-UAOOI.Networking.SemanticData.htm
+[API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html

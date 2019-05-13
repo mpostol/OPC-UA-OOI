@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<uax:ListOfNodeState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+  <uax:NamespaceUris>
+    <uax:NamespaceUri>http://cas.eu/UA/CommServer/UnitTests/ReferenceTest</uax:NamespaceUri>
+  </uax:NamespaceUris>
+  <ReferenceTypeTest xmlns="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest">
+    <uax:NodeClass>ReferenceType_32</uax:NodeClass>
+    <uax:NodeId>
+      <uax:Identifier>ns=1;i=1</uax:Identifier>
+    </uax:NodeId>
+    <uax:BrowseName>
+      <uax:NamespaceIndex>1</uax:NamespaceIndex>
+      <uax:Name>ReferenceTypeTest</uax:Name>
+    </uax:BrowseName>
+    <uax:SuperTypeId>
+      <uax:Identifier>i=46</uax:Identifier>
+    </uax:SuperTypeId>
+    <uax:InverseName>
+      <uax:Locale></uax:Locale>
+      <uax:Text>FromSomwhere</uax:Text>
+    </uax:InverseName>
+  </ReferenceTypeTest>
+</uax:ListOfNodeState>

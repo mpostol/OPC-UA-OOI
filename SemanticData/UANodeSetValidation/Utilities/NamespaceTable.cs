@@ -1,310 +1,171 @@
+//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Linq;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
 {
+
   /// <summary>
-  /// A thread safe table of string constants.
+  /// The table of namespace uris for a server. The <see cref="Namespaces.OpcUa"/> namespace has index = 0.
   /// </summary>
-  public class StringTable
+  public class NamespaceTable
   {
+
     #region Constructors
     /// <summary>
-    /// Creates an empty collection.
+    /// Creates the <see cref="NamespaceTable"/> instance containing <see cref="Namespaces.OpcUa"/> namespace.
     /// </summary>
-    public StringTable()
+    internal NamespaceTable()
     {
-      m_strings = new List<string>();
-#if DEBUG
-      m_instanceId = Interlocked.Increment(ref m_globalInstanceCount);
-#endif
-    }
-    /// <summary>
-    /// Creates an empty collection which is marked as shared.
-    /// </summary>
-    public StringTable(bool shared)
-    {
-      m_strings = new List<string>();
-#if DEBUG
-      m_shared = shared;
-      m_instanceId = Interlocked.Increment(ref m_globalInstanceCount);
-#endif
-    }
-    /// <summary>
-    /// Copies a list of strings.
-    /// </summary>
-    public StringTable(IEnumerable<string> strings, Action<TraceMessage> traceEvent)
-    {
-      Update(strings, traceEvent);
-#if DEBUG
-      m_instanceId = Interlocked.Increment(ref m_globalInstanceCount);
-#endif
+      Append(Namespaces.OpcUa);
     }
     #endregion
 
     #region Public Members
     /// <summary>
-    /// The synchronization object.
+    /// Adds model Uri to the table.
     /// </summary>
-    public object SyncRoot
+    internal int Append(string modelUri)
     {
-      get { return m_lock; }
+      if (string.IsNullOrEmpty(modelUri))
+        throw new ArgumentNullException("value", "URI must not be null or empty");
+      ModelTableEntry _newModel = ModelTableEntry.GetDefaultModelTableEntry(modelUri, ref m_Index);
+      m_URIDictionary.Add(modelUri, _newModel);
+      m_IndexDictionary = m_URIDictionary.Values.ToDictionary(y => y.Index, x => x.ModelUri);
+      return m_URIDictionary.Count - 1;
     }
-    /// <summary>
-    /// Returns a unique identifier for the table instance. Used to debug problems with shared tables.
-    /// </summary>
-    public int InstanceId
+    internal string GetString(ushort nsi)
     {
-#if DEBUG
-      get { return m_instanceId; }
-#else
-            get { return 0; }
-#endif
+      if (m_IndexDictionary.ContainsKey(nsi))
+        return m_IndexDictionary[nsi];
+      throw new ArgumentOutOfRangeException("namespace index", "Namespace index has not been registered");
     }
-
-    /// <summary>
-    /// Updates the table of namespace uris.
-    /// </summary>
-    public void Update(IEnumerable<string> strings, Action<TraceMessage> traceEvent)
+    internal int GetIndex(string uri)
     {
-      if (strings == null) throw new ArgumentNullException("strings");
-
-      lock (m_lock)
-      {
-        m_strings = new List<string>(strings);
-#if DEBUG
-        if (m_shared)
-        {
-          for (int ii = 0; ii < m_strings.Count; ii++)
-            traceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("WARNING: Adding '{0}' to shared StringTable #{1}.", m_strings[ii], m_instanceId)));
-        }
-#endif
-      }
+      if (string.IsNullOrEmpty(uri))
+        throw URINullException();
+      return m_URIDictionary.ContainsKey(uri) ? m_URIDictionary[uri].Index : -1;
     }
-
-    /// <summary>
-    /// Adds a string to the end of the table.
-    /// </summary>
-    public int Append(string value, Action<TraceMessage> traceEvent)
-    {
-      if (String.IsNullOrEmpty(value))
-      {
-        throw new ArgumentNullException("value");
-      }
-
-#if DEBUG
-      if (m_shared)
-        traceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("WARNING: Adding '{0}' to shared StringTable #{1}.", value, m_instanceId)));
-#endif
-
-      lock (m_lock)
-      {
-        m_strings.Add(value);
-        return m_strings.Count - 1;
-      }
-    }
-
-    /// <summary>
-    /// Returns the namespace uri at the specified index.
-    /// </summary>
-    public string GetString(uint index)
-    {
-      lock (m_lock)
-      {
-        if (index >= 0 && index < m_strings.Count)
-        {
-          return m_strings[(int)index];
-        }
-
-        return null;
-      }
-    }
-
-    /// <summary>
-    /// Returns the index of the specified namespace uri or -1 if it doesn't exist. 
-    /// </summary>
-    /// <remarks>The index of the namespace if exist, -1 otherwise.</remarks>
-    public int GetIndex(string value)
-    {
-      lock (m_lock)
-      {
-        if (String.IsNullOrEmpty(value))
-        {
-          return -1;
-        }
-
-        return m_strings.IndexOf(value);
-      }
-    }
-
+    internal ushort LastNamespaceIndex => (ushort)(m_Index - 1);
     /// <summary>
     /// Returns the index of the specified namespace uri, adds it if it does not exist.
     /// </summary>
-    public ushort GetIndexOrAppend(string value, Action<TraceMessage> traceEvent)
+    internal ushort GetIndexOrAppend(string uri)
     {
-      if (String.IsNullOrEmpty(value))
-      {
-        throw new ArgumentNullException("value");
-      }
-
-      lock (m_lock)
-      {
-        int index = m_strings.IndexOf(value);
-
-        if (index == -1)
-        {
-#if DEBUG
-          if (m_shared)
-            traceEvent(TraceMessage.DiagnosticTraceMessage(String.Format("WARNING: Adding '{0}' to shared StringTable #{1}.", value, m_instanceId)));
-#endif
-          m_strings.Add(value);
-          return (ushort)(m_strings.Count - 1);
-        }
-
-        return (ushort)index;
-      }
+      int _index = GetIndex(uri);
+      if (_index == -1)
+        _index = Append(uri);
+      return (ushort)_index;
     }
-
-    /// <summary>
-    /// Returns the contexts of the table.
-    /// </summary>
-    public string[] ToArray()
-    {
-      lock (m_lock)
-      {
-        return m_strings.ToArray();
-      }
-    }
-
-    /// <summary>
-    /// Returns the number of entries in the table.
-    /// </summary>
-    public int Count
-    {
-      get
-      {
-        lock (m_lock)
-        {
-          return m_strings.Count;
-        }
-      }
-    }
-
-    /// <summary>
-    /// Creates a mapping between the URIs in a source table and the indexes in the current table.
-    /// </summary>
-    /// <param name="source">The string table to map.</param>
-    /// <param name="updateTable">if set to <c>true</c> if missing URIs should be added to the current tables.</param>
-    /// <param name="traceEvent">Encapsulated delegate to the trace event method.</param>
-    /// <returns>A list of indexes in the current table.</returns>
-    public ushort[] CreateMapping(StringTable source, bool updateTable, Action<TraceMessage> traceEvent)
-    {
-      if (source == null)
-      {
-        return null;
-      }
-
-      ushort[] mapping = new ushort[source.Count];
-
-      for (uint ii = 0; ii < source.Count; ii++)
-      {
-        string uri = source.GetString(ii);
-
-        int index = GetIndex(uri);
-
-        if (index < 0)
-        {
-          if (!updateTable)
-          {
-            mapping[ii] = UInt16.MaxValue;
-            continue;
-          }
-          index = Append(uri, traceEvent);
-        }
-        mapping[ii] = (ushort)index;
-      }
-      return mapping;
-    }
+    internal IEnumerable<IModelTableEntry> ExportNamespaceTable => m_URIDictionary.Values;
     #endregion
 
-    #region Private Fields
-    private object m_lock = new object();
-    private List<string> m_strings;
-
-#if DEBUG
-    internal bool m_shared;
-    internal int m_instanceId;
-    private static int m_globalInstanceCount;
-#endif
-    #endregion
-  }
-
-  /// <summary>
-  /// The table of namespace uris for a server.
-  /// </summary>
-  public class NamespaceTable : StringTable
-  {
-    #region Constructors
-    /// <summary>
-    /// Creates an empty collection.
-    /// </summary>
-    public NamespaceTable(Action<TraceMessage> traceEvent)
+    #region private
+    //var
+    private readonly Dictionary<string, ModelTableEntry> m_URIDictionary = new Dictionary<string, ModelTableEntry>();
+    private Dictionary<ushort, string> m_IndexDictionary = new Dictionary<ushort, string>();
+    private ushort m_Index = 0;
+    //classes
+    private class RolePermission : IRolePermission
     {
-      Append(Namespaces.OpcUa, traceEvent);
+
+      /// <summary>
+      /// Gets or sets the permissions.
+      /// </summary>
+      /// <remarks>
+      /// This is a subtype of the UInt32 DataType with the OptionSetValues Property defined. It is used to define the permissions of a Node. The <c>PermissionType</c> is formally defined in Part3 8.55 Table 38.
+      /// </remarks>
+      /// <value>The permissions.</value>
+      public uint Permissions { get; set; } = 0xC;
+      /// <summary>
+      /// Gets or sets the value.
+      /// </summary>
+      /// <remarks>
+      /// Not defined in the spec. 
+      /// </remarks>
+      /// <value>The value.</value>
+      public string Value { get; set; } = string.Empty;
+
     }
-
-    /// <summary>
-    /// Creates an empty collection which is marked as shared.
-    /// </summary>
-    public NamespaceTable(bool shared, Action<TraceMessage> traceEvent)
+    private class ModelTableEntry : IModelTableEntry
     {
-      Append(Namespaces.OpcUa, traceEvent);
 
-#if DEBUG
-      m_shared = shared;
-#endif
-    }
-
-    /// <summary>
-    /// Copies a list of strings.
-    /// </summary>
-    public NamespaceTable(IEnumerable<string> namespaceUris, Action<TraceMessage> traceEvent)
-    {
-      Update(namespaceUris, traceEvent);
-    }
-    #endregion
-
-    #region Public Members
-    /// <summary>
-    /// Updates the table of namespace uris.
-    /// </summary>
-    public new void Update(IEnumerable<string> namespaceUris, Action<TraceMessage> traceEvent)
-    {
-      if (namespaceUris == null) throw new ArgumentNullException("namespaceUris");
-
-      // check that first entry is the UA namespace.
-      int ii = 0;
-
-      foreach (string namespaceUri in namespaceUris)
+      /// <summary>
+      /// Gets or sets the index of the model.
+      /// </summary>
+      /// <value>The index.</value>
+      internal ushort Index { get; set; } = 0;
+      /// <summary>
+      /// Gets the default model table entry.
+      /// </summary>
+      /// <param name="modelUri">The model URI.</param>
+      /// <param name="index">Index of the model.</param>
+      /// <returns>UAOOI.SemanticData.UANodeSetValidation.Utilities.IModelTableEntry.</returns>
+      /// <remarks>This type is defined in Part 6 F.5 but the definition is not compliant with the UANodeSet schema.
+      /// This type is also defined in the Part 3 5.2.9 but the definition is not compliant.</remarks>
+      internal static ModelTableEntry GetDefaultModelTableEntry(string modelUri, ref ushort index)
       {
-        if (ii == 0 && namespaceUri != Namespaces.OpcUa)
+        if (string.IsNullOrEmpty(modelUri))
+          throw URINullException();
+        return new ModelTableEntry
         {
-          throw new ArgumentException("The first namespace in the table must be the OPC-UA namespace.");
-        }
-
-        ii++;
-
-        if (ii == 2)
-        {
-          break;
-        }
+          AccessRestrictions = 0xC,
+          Index = index++,
+          ModelUri = modelUri,
+          PublicationDate = DateTime.UtcNow.Date,
+          RequiredModel = null,
+          RolePermissions = new IRolePermission[] { new RolePermission() },
+          Version = new Version(1, 0).ToString()
+        };
       }
-
-      base.Update(namespaceUris, traceEvent);
+      #region IModelTableEntry
+      /// <summary>
+      /// Gets or sets the role permissions. The list of default RolePermissions for all Nodes in the model.
+      /// </summary>
+      /// <value>The role permissions.</value>
+      public IRolePermission[] RolePermissions { get; set; }
+      /// <summary>
+      /// Gets or sets the required model. A list of dependencies for the model. If the model requires a minimum version the PublicationDate shall be specified. 
+      /// Tools which attempt to resolve these dependencies may accept any PublicationDate after this date.
+      /// </summary>
+      /// <value>The required model.</value>
+      public IModelTableEntry[] RequiredModel { get; set; }
+      /// <summary>
+      /// Gets or sets the model URI. The URI for the model. This URI should be one of the entries in the <see cref="NamespaceTable"/> table.
+      /// </summary>
+      /// <value>The model URI.</value>
+      public string ModelUri { get; set; }
+      /// <summary>
+      /// Gets or sets the version. The version of the model defined in the UANodeSet. This is a human readable string and not intended for programmatic comparisons.
+      /// </summary>
+      /// <value>The version.</value>
+      public string Version { get; set; }
+      /// <summary>
+      /// Gets or sets the publication date. When the model was published. This value is used for comparisons if the model is defined in multiple UANodeSet files.
+      /// </summary>
+      /// <value>The publication date.</value>
+      public DateTime? PublicationDate { get; set; }
+      /// <summary>
+      /// Gets or sets the access restrictions. The default AccessRestrictions that apply to all Nodes in the model.
+      /// </summary>
+      /// <value>The access restrictions.</value>
+      public byte AccessRestrictions { get; set; } = 0xC;
+      #endregion
+    }
+    //methods
+    private static ArgumentNullException URINullException()
+    {
+      return new ArgumentNullException("modelUri", $"Model URI must be provided for the {nameof(IModelTableEntry)} instance");
     }
     #endregion
   }
 }
+

@@ -1,12 +1,24 @@
-﻿# Release new version
+﻿# Release new version Gist
+ 
+## Packages to be released
 
-* Modify Readme.old
-* Update version information
-* Update Readme.txt
-* Publish the installation package
-* Update the help documentation
-* Publish the code help documentation
-* New release front page
-* Update the release documentation (ReleaseNoteTemplate)
-* Update Readme.md files
+- [ ] `Common`
+- [ ] `Configuration`
+- [ ] `DataDiscovery`
+- [ ] `Networking`
+- [ ] `SemanticData`
 
+## Tasks to be done
+
+- [ ] Update version information for all published assemblies (Model.t4), 
+- [ ] Prepare an example if applicable
+- [ ] Update Readme files
+- [ ] Update the release documentation (ReleaseNoteTemplate)
+- [ ] Prepare NuGet packages if applicable
+- [ ] Create release front page
+   - [ ] Getting Started
+   - [ ] Version information
+- [ ] Prepare binary deliverables and publish the installation package
+- [ ] Update and publish the code help documentation
+- [ ] Publish release
+- [ ] Update the project front page

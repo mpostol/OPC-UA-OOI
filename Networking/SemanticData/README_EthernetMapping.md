@@ -29,6 +29,8 @@ The following documents, in whole or in part, are normatively referenced in this
 
 #### Time Sensitive Networks (TSN)
 
+>TODO - describe standard and impact on the PuSub implementation
+
 #### VLAN
 
 A VLAN represents a broadcast domain. VLANs are identified by a VLAN ID (a number between 0 – 4095). 
@@ -80,6 +82,13 @@ The format of a MAC address is six groups of hexadecimal digits, separated by hy
 > NOTE: the above mentioned addressing parameters are not mapped to any of the PubSub `UADP NetworkMessage` parameters. In other word there is not semantic relationship with the OPC UA and, therefore, the parameters must be provided separately by the application configuration.
 
 The messages (`UADP NetworkMessage`) are transparently transported as the payload of the Ethernet frame. For OPC UA Ethernet the MaxNetworkMessageSize plus additional headers shall be limited to an Ethernet frame size of 1522 Byte
+
+## Conclusion
+
+- OPC UA and Ethernet are unrelated, i.e. there is no semantic relationship between both
+- OPC UA is recognized as the Internet technology, but this mapping makes sense only for broadcast domain (local network segment)
+- OPC UA PubSub over the TSN is misleading term because each protocol can be transported over this particular Ethernet dialect
+- Time sensitive doesn’t mean real time – it means no jitter (improves deterministic communication)
 
 ## See also
 

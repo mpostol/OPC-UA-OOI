@@ -10,7 +10,7 @@ For more in-depth information about creating `OOI Reactive Application` exchangi
 
 To promote interoperability this library is a collection of types aimed at implementation of the [Part 14 PubSub](README.PubSubMTF.md) standard.
 
-The code is tested using the Unit Tests located in the project: [Networking.SemanticData.UnitTest][OPC-UA-OOI.Networking.Tests.SemanticDatalUnitTest]
+The code is tested using the Unit Tests located in the project: [Networking.SemanticData.UnitTest][Networking.SemanticData.UnitTest]
 
 The preliminary code help documentation is here: [API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
 

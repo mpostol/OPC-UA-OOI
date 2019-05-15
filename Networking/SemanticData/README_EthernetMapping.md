@@ -2,9 +2,9 @@
 
 > **This article is under development and will be subject of further modification after collecting more feedback from software developers and OPC Foundation.**
 
-The main goal of this document is to provide instruction on how to expand the transport layer for OOI Networking of the **Semantic Data** over the `Ethernet` to be compliant with the specifications mentioned in the section *Normative references*.
+The main goal of this document is to provide instruction on how to expand the transport protocol stack for OOI Networking of the **Semantic Data** over the `Ethernet` to be compliant with the specifications mentioned in the section *Normative references*.
 
-Implementation of the messages exchange over the [`Ethernet`][Ethernet] protocol is out of the scope of this project. The library intentionally is designed to use any transport protocol meeting some basic requirements using external components. External components implementing [`Ethernet`][Ethernet] connectivity can be seamlessly integrated with this SDK using dependency injection concept illustrated by the following domain model:
+Implementation of the messages exchange over the [`Ethernet`][Ethernet] protocol is outside of the scope of this project. The library intentionally is designed to use any transport protocol meeting some basic requirements using external components. External components implementing [`Ethernet`][Ethernet] connectivity can be seamlessly integrated with this SDK using dependency injection concept illustrated by the following domain model:
 
 ![Figure 1. Domain Model](../../CommonResources/Media/DataManagementExternalLibraries.png)
 
@@ -19,11 +19,9 @@ The following documents, in whole or in part, are normatively referenced in this
 
 ## Introduction
 
-### Ethernet
+### Ethernet - IEEE 802.3
 
 > TBD - call for contributor.
-
-#### 802.3
 
 #### EtherType
 
@@ -33,7 +31,7 @@ The following documents, in whole or in part, are normatively referenced in this
 
 #### VLAN
 
-A VLAN represents a broadcast domain. VLANs are identified by a VLAN ID (a number between 0 – 4095). 
+A VLAN represents a broadcast domain. VLANs are identified by a VLAN ID (a number between 0 – 4095).
 
 #### Priority Code Point
 
@@ -52,22 +50,22 @@ The [OPC.UA.PubSub][OPC.UA.PubSub] offers the publish/subscribe communication pa
 
 Among others, the specification recognizes the following actors as the communication parties:
 
-- **Publisher**: is the actor that pushes `NetworkMessage` structures to a selected AMQP **Node**.
-- **Subscriber**: is the actor that consumes data encapsulated by the `NetworkMessage` structure, which is polled from the selected AMQP **Node**.
+- `Publisher`: is the actor that pushes `NetworkMessage` structures to the local area network
+- `Subscriber`: is the actor that consumes data encapsulated by the `NetworkMessage` structure, which is polled from the local area network
 
-According to the specification the **Publisher** and **Subscriber** don't have any subscriptions management functionality, namely, they follow a communication paradigm called unsolicited notification. When unsolicited notification occurs, a client may receive a message that it has never requested. The **Subscriber** must use a filtering mechanism to process only messages it is interested in.
+According to the specification the `Publisher` and `Subscriber` don't have any subscriptions management functionality, namely, they follow a communication paradigm called unsolicited notification. When unsolicited notification occurs, a client may receive a message that it has never requested. The `Subscriber` must use a filtering mechanism to process only messages it is interested in.
 
 Lack of subscriptions management functionality defined by the [OPC.UA.PubSub][OPC.UA.PubSub] could not be mitigated by applying the [`Ethernet`][Ethernet].
 
 ## Ethernet Mapping
 
-OPC UA over Ethernet uses EtherType **`B62C`** that is used to transport UADP NetworkMessages directly as payload of the Ethernet frame without IP or UDP headers. To properly format the Ethernet frame the following parameters must be defined for the underlying transport protocol:
+OPC UA over Ethernet uses EtherType **`B62C`** that is used to transport UADP `NetworkMessages` directly as payload of the Ethernet frame without IP or UDP headers. To properly format the Ethernet frame the following parameters must be defined somehow:
 
 - **MAC address** - media access control address (MAC address) is a unique on the local area network (broadcast domain) identifier assigned to a network interface controller (NIC)
 - **VLAN ID** - a number identifying the VLAN
 - **Priority Code Point** - is a means of classifying and managing network traffic and of providing quality of service (QoS) in modern Layer 2 Ethernet networks.
 
-The specification propose the following syntax to represent address information of the Ethernet transport protocol
+The specification propose the following syntax to represent address information of the `Ethernet` transport protocol
 
 `opc.eth://<host>[:<VID>[.PCP]]`
 
@@ -79,28 +77,23 @@ where:
 
 The format of a MAC address is six groups of hexadecimal digits, separated by hyphens (e.g. 01-23-45-67-89-ab). An application may also accept host names and/or IP addresses if it provides means to resolve it to a MAC address (e.g. DNS and Reverse-ARP).
 
-> NOTE: the above mentioned addressing parameters are not mapped to any of the PubSub `UADP NetworkMessage` parameters. In other word there is not semantic relationship with the OPC UA and, therefore, the parameters must be provided separately by the application configuration.
+> NOTE: the above mentioned addressing parameters are not mapped to any of the PubSub `NetworkMessage` parameters. In other word there is no semantic relationship with the OPC UA and, therefore, the parameters must be provided separately by the application configuration.
 
-The messages (`UADP NetworkMessage`) are transparently transported as the payload of the Ethernet frame. For OPC UA Ethernet the MaxNetworkMessageSize plus additional headers shall be limited to an Ethernet frame size of 1522 Byte
+The messages (`UADP NetworkMessage`) are transparently transported as the payload of the Ethernet frame. For OPC UA Ethernet the MaxNetworkMessageSize plus additional headers shall be limited to an Ethernet frame size of 1522 Bytes.
 
 ## Conclusion
 
 - OPC UA and Ethernet are unrelated, i.e. there is no semantic relationship between both
 - OPC UA is recognized as the Internet technology, but this mapping makes sense only for broadcast domain (local network segment)
 - OPC UA PubSub over the TSN is misleading term because each protocol can be transported over this particular Ethernet dialect
-- Time sensitive doesn’t mean real time – it means no jitter (improves deterministic communication)
+- Time Sensitive Network doesn’t mean real time – it means no jitter (improves deterministic communication)
 
 ## See also
 
-- [`IEEE 802.3`][Ethernet]
+- [IEEE 802.3 ETHERNET WORKING GROUP][Ethernet]
 - [OPC Unified Architecture Part 14: PubSub Main Technology Features][README.PubSubMTF]
 - [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
 
-[OPC.UA.PubSub]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
-[Ethernet]:https://en.wikipedia.org/wiki/IEEE_802.3
+[Ethernet]:http://www.ieee802.org/3/
 [README.PubSubMTF]:README.PubSubMTF.md
-
-
-
-
-
+[OPC.UA.PubSub]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/

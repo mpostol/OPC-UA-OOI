@@ -5472,6 +5472,30 @@
           <uax:Identifier>ns=2;i=97</uax:Identifier>
         </uax:TargetId>
       </uax:Reference>
+      <uax:Reference>
+        <uax:ReferenceTypeId>
+          <uax:Identifier>i=47</uax:Identifier>
+        </uax:ReferenceTypeId>
+        <uax:TargetId>
+          <uax:Identifier>ns=2;i=176</uax:Identifier>
+        </uax:TargetId>
+      </uax:Reference>
+      <uax:Reference>
+        <uax:ReferenceTypeId>
+          <uax:Identifier>i=47</uax:Identifier>
+        </uax:ReferenceTypeId>
+        <uax:TargetId>
+          <uax:Identifier>ns=2;i=255</uax:Identifier>
+        </uax:TargetId>
+      </uax:Reference>
+      <uax:Reference>
+        <uax:ReferenceTypeId>
+          <uax:Identifier>i=47</uax:Identifier>
+        </uax:ReferenceTypeId>
+        <uax:TargetId>
+          <uax:Identifier>ns=2;i=334</uax:Identifier>
+        </uax:TargetId>
+      </uax:Reference>
     </uax:References>
   </Drums>
   <Pipes xmlns="http://commsvr.com/UA/Examples/BoilersSet">

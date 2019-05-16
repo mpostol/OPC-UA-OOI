@@ -26,6 +26,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         this.Executable == _other.Executable &&
         this.UserExecutable == _other.UserExecutable;
       // not exposed and must be excluded from the comparison this.MethodDeclarationId == _other.MethodDeclarationId;
+
+    }
+    protected override UANode ParentClone()
+    {
+      UAMethod _ret = new UAMethod
+      {
+        Executable = this.Executable,
+        UserExecutable = this.UserExecutable
+      };
+      base.CloneUAInstance(_ret);
+      return _ret;
     }
   }
 }

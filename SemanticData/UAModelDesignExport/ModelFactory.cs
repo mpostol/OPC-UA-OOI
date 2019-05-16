@@ -95,50 +95,52 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     private static int m_Count = 0;
     private void CreateInstanceType(InstanceDesign instance, List<string> browsePath, List<NodeDesign> mdNodes)
     {
-      Debug.Assert(instance != null, "CreateInstanceType.instance cannot be null");
-      InstanceDesign _ret = null;
-      if (instance is MethodDesign _src)
-      {
-        XmlQualifiedName _newSymbolicName = new XmlQualifiedName(browsePath.SymbolicName(), instance.SymbolicName.Namespace);
-        MethodDesign _method = new MethodDesign
-        {
-          BrowseName = _src.BrowseName,
-          Children = null,
-          Declaration = _src.Declaration,
-          Description = _src.Description,
-          DisplayName = _src.DisplayName,
-          InputArguments = _src.InputArguments,
-          IsDeclaration = _src.IsDeclaration,
-          MaxCardinality = _src.MaxCardinality,
-          MinCardinality = _src.MinCardinality,
-          ModellingRule = ModellingRule.None,
-          ModellingRuleSpecified = false,
-          NonExecutable = _src.NonExecutable,
-          NonExecutableSpecified = _src.NonExecutableSpecified,
-          NumericId = _src.NumericId,
-          NumericIdSpecified = _src.NumericIdSpecified,
-          OutputArguments = _src.OutputArguments,
-          PartNo = _src.PartNo,
-          PreserveDefaultAttributes = _src.PreserveDefaultAttributes,
-          References = _src.References,
-          ReferenceType = _src.ReferenceType,
-          StringId = _src.StringId,
-          SymbolicId = _src.SymbolicId,
-          SymbolicName = _newSymbolicName,
-          TypeDefinition = null,
-          WriteAccess = _src.WriteAccess,
-        };
-        _src.InputArguments = null;
-        _src.OutputArguments = null;
-        if (instance.Children == null || instance.Children.Items == null || instance.Children.Items.Length == 0)
-          instance.Children = null;
-        _src.TypeDefinition = _newSymbolicName;
-        _ret = _method;
-      }
-      else
-        Debug.Fail("In this release expected Method");
-      if (_ret != null)
-        mdNodes.Add(_ret);
+      return;
+      //TODO #40: ValidateAndExportModel shall export also instances #40
+      //Debug.Assert(instance != null, "CreateInstanceType.instance cannot be null");
+      //InstanceDesign _ret = null;
+      //if (instance is MethodDesign _src)
+      //{
+      //  XmlQualifiedName _newSymbolicName = new XmlQualifiedName(browsePath.SymbolicName(), instance.SymbolicName.Namespace);
+      //  MethodDesign _method = new MethodDesign
+      //  {
+      //    BrowseName = _src.BrowseName,
+      //    Children = null,
+      //    Declaration = _src.Declaration,
+      //    Description = _src.Description,
+      //    DisplayName = _src.DisplayName,
+      //    InputArguments = _src.InputArguments,
+      //    IsDeclaration = _src.IsDeclaration,
+      //    MaxCardinality = _src.MaxCardinality,
+      //    MinCardinality = _src.MinCardinality,
+      //    ModellingRule = ModellingRule.None,
+      //    ModellingRuleSpecified = false,
+      //    NonExecutable = _src.NonExecutable,
+      //    NonExecutableSpecified = _src.NonExecutableSpecified,
+      //    NumericId = _src.NumericId,
+      //    NumericIdSpecified = _src.NumericIdSpecified,
+      //    OutputArguments = _src.OutputArguments,
+      //    PartNo = _src.PartNo,
+      //    PreserveDefaultAttributes = _src.PreserveDefaultAttributes,
+      //    References = _src.References,
+      //    ReferenceType = _src.ReferenceType,
+      //    StringId = _src.StringId,
+      //    SymbolicId = _src.SymbolicId,
+      //    SymbolicName = _newSymbolicName,
+      //    TypeDefinition = null,
+      //    WriteAccess = _src.WriteAccess,
+      //  };
+      //  _src.InputArguments = null;
+      //  _src.OutputArguments = null;
+      //  if (instance.Children == null || instance.Children.Items == null || instance.Children.Items.Length == 0)
+      //    instance.Children = null;
+      //  _src.TypeDefinition = _newSymbolicName;
+      //  _ret = _method;
+      //}
+      //else
+      //  Debug.Fail("In this release expected Method");
+      //if (_ret != null)
+      //  mdNodes.Add(_ret);
     }
 
   }

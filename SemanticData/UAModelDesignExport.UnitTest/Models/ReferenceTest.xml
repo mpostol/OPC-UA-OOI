@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ModelDesign xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cas="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ua="http://opcfoundation.org/UA/" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+<ModelDesign xmlns:cas="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:ua="http://opcfoundation.org/UA/" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
   <Namespaces>
     <Namespace Name="cas" Prefix="ReferenceTest" XmlPrefix="cas">http://cas.eu/UA/CommServer/UnitTests/ReferenceTest</Namespace>
     <Namespace Name="ua" XmlPrefix="ua">http://opcfoundation.org/UA/</Namespace>

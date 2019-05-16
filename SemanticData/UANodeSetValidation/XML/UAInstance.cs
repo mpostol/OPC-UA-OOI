@@ -23,6 +23,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         return false;
       return true; //this.ParentNodeId == _other.ParentNodeId; it is not attribute exposed by the node.
     }
+    /// <summary>
+    /// Clones current object to a new one./>.
+    /// </summary>
+    /// <param name="ret">The ret.</param>
+    protected void CloneUAInstance(UAInstance ret)
+    {
+      ret.ParentNodeId = this.ParentNodeId;
+      base.CloneUANode(this);
+    }
 
   }
 

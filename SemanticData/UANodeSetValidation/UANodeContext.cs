@@ -49,7 +49,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (this.UANode == null)
       {
-        BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The target node NodeId={this.NodeIdContext}, current path {String.Join(", ", path)}"));
+        BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The target node NodeId={this.NodeIdContext}, current path {string.Join(", ", path)}"));
         return;
       }
       IEnumerable<UAReferenceContext> _parentConnector = m_AddressSpaceContext.GetReferences2Me(this).Where<UAReferenceContext>(x => x.ChildConnector);
@@ -297,9 +297,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return false;
       return this.BrowseName == other.BrowseName &&
         this.ModelingRule == other.ModelingRule &&
-        this.UANode == other.UANode;
+        this.UANode == other.InheritedUANode;
     }
     bool IUANodeBase.IsPropertyVariableType => this.NodeIdContext == VariableTypeIds.PropertyType;
+    public UANode InheritedUANode
+    {
+      get
+      {
+        UANode _ret = null;
+        if (!(this.m_BaseTypeNode is null))
+          _ret = m_BaseTypeNode.InheritedUANode;
+        else
+          _ret = this.UANode?.Clone();
+        return _ret;
+      }
+    }
     public void RemoveInheritedValues(IUANodeBase instanceDeclaration)
     {
       if (instanceDeclaration is null)

@@ -4,7 +4,7 @@
     <Namespace Name="cas" Prefix="ObjectTypeTest" XmlPrefix="cas">http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest</Namespace>
     <Namespace Name="ua" XmlPrefix="ua">http://opcfoundation.org/UA/</Namespace>
   </Namespaces>
-  <ObjectType SymbolicName="cas:ComplexObjectType" BaseType="ua:ServerType">
+  <ObjectType SymbolicName="cas:ComplexObjectType">
     <Children>
       <Object SymbolicName="cas:ChildObject" ModellingRule="MandatoryPlaceholder" SupportsEvents="true" />
       <Property SymbolicName="cas:BrowseName4node66" ModellingRule="Mandatory" DataType="ua:LocalizedText">
@@ -19,8 +19,16 @@
       <Variable SymbolicName="cas:NameNotSet1109" TypeDefinition="ua:AnalogItemType" ModellingRule="Mandatory">
         <BrowseName>BrowseName4node1109</BrowseName>
       </Variable>
-      <Method SymbolicName="cas:ChildMethod" TypeDefinition="cas:ChildMethodComplexObjectType" ModellingRule="Mandatory" />
-      <Method SymbolicName="cas:NonExecutableMethod" TypeDefinition="cas:NonExecutableMethodComplexObjectType" ModellingRule="Mandatory" />
+      <Method SymbolicName="cas:ChildMethod" ModellingRule="Mandatory">
+        <InputArguments>
+          <Argument Name="Input1" DataType="ua:Int32" />
+          <Argument Name="Input2" DataType="ua:Int32" />
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Output1" DataType="ua:Int32" />
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="cas:NonExecutableMethod" ModellingRule="Mandatory" />
       <Object SymbolicName="ua:ServerCapabilities" ModellingRule="Mandatory" />
     </Children>
   </ObjectType>
@@ -29,22 +37,14 @@
     <Description>It is test ReferenceType</Description>
     <InverseName>FlowFrom</InverseName>
   </ReferenceType>
-  <Method SymbolicName="cas:ChildMethodComplexObjectType">
-    <InputArguments>
-      <Argument Name="Input1" DataType="ua:Int32" />
-      <Argument Name="Input2" DataType="ua:Int32" />
-    </InputArguments>
-    <OutputArguments>
-      <Argument Name="Output1" DataType="ua:Int32" />
-    </OutputArguments>
-  </Method>
-  <Method SymbolicName="cas:NonExecutableMethodComplexObjectType" NonExecutable="true" />
   <ObjectType SymbolicName="cas:DerivedFromComplexObjectType" BaseType="cas:ComplexObjectType">
     <Children>
-      <Method SymbolicName="cas:ChildMethod" />
+      <Method SymbolicName="cas:ChildMethod">
+        <DisplayName>ChildMethodNewName</DisplayName>
+      </Method>
     </Children>
   </ObjectType>
-  <Object SymbolicName="cas:NameNotSet6" TypeDefinition="cas:DerivedFromComplexObjectType">
+  <Object SymbolicName="cas:InstanceOfDerivedFromComplexObjectType" TypeDefinition="cas:DerivedFromComplexObjectType">
     <References>
       <Reference IsInverse="true">
         <ReferenceType>ua:Organizes</ReferenceType>

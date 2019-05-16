@@ -42,5 +42,26 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       if (this.ArrayDimensions == _other.ArrayDimensions)
         this.ArrayDimensions = string.Empty;
     }
+    /// <summary>
+    /// Get the clone from the types derived from this one.
+    /// </summary>
+    /// <returns>An instance of <see cref="T:UAOOI.SemanticData.UANodeSetValidation.XML.UANode" />.</returns>
+    protected override UANode ParentClone()
+    {
+      UAVariable _ret = new UAVariable()
+      {
+        Value = this.Value,
+        Translation = this.Translation,
+        DataType = this.DataType,
+        ValueRank = this.ValueRank,
+        ArrayDimensions = this.ArrayDimensions,
+        AccessLevel = this.AccessLevel,
+        UserAccessLevel = this.UserAccessLevel,
+        MinimumSamplingInterval = this.MinimumSamplingInterval,
+        Historizing = this.Historizing,
+      };
+      return _ret;
+
+    }
   }
 }

@@ -64,6 +64,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       _first.CalculateNodeReferences(null);
     }
     [TestMethod]
+    public void InheritedUANodeTest()
+    {
+      IUAModelContext _mc = new UAModelContext();
+      UANodeContext _first = new UANodeContext(AddressSpaceBuildContext.NewAddressSpaceBuildContext, _mc, NodeId.Parse("ns=1;i=11"));
+      _first.Update(null, x => { });
+      XML.UANode _inherited = _first.InheritedUANode;
+
+    }
+    [TestMethod]
     public void BuildSymbolicIdTest()
     {
       BuildErrorsHandling _logger = BuildErrorsHandling.Log;

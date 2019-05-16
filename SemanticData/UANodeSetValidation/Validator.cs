@@ -107,11 +107,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case NodeClassEnum.UAMethod:
             if (nodeContext.Equals(instanceDeclaration))
               return;
+            nodeContext.RemoveInheritedValues(instanceDeclaration);
             CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.AddNodeFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference, traceEvent), UpdateInstance, traceEvent);
             break;
           case NodeClassEnum.UAObject:
             if (nodeContext.Equals(instanceDeclaration))
               return;
+            nodeContext.RemoveInheritedValues(instanceDeclaration);
             CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.AddNodeFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y, traceEvent), UpdateInstance, traceEvent);
             break;
           case NodeClassEnum.UAObjectType:

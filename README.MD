@@ -8,7 +8,7 @@ In this project, C\# deliverables supporting a new Machine To Machine \(M2M\) co
 
 The [Object Oriented Internet](https://fedcsis.org/proceedings/2015/pliks/160.pdf) article published in **Proceedings of the Federated Conference on Computer Science and Information Systems** captures description of this idea.
 
-|GoTo| Description|
+|Go To| Description|
 |:-:|-|
 |  [![Release](https://img.shields.io/github/release/mpostol/OPC-UA-OOI.svg?style=popout)](https://github.com/mpostol/OPC-UA-OOI/releases/tag/4.0.1)| latest release |
 | [![ebook](https://img.shields.io/badge/OOI-read_on_Gitbook-brightgreen.svg)](https://commsvr.gitbook.io/ooi) | the ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files from this repository. |

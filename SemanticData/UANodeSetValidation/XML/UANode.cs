@@ -48,16 +48,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     }
     internal virtual void RemoveInheritedValues(UANode baseNode)
     {
-      if (this.BrowseName == baseNode.BrowseName)
-        this.BrowseName = string.Empty;
+      //BrowseName 
+      if (this.DisplayName.LocalizedTextArraysEqual(baseNode.DisplayName))
+        this.DisplayName = null;
       if (this.Description.LocalizedTextArraysEqual(baseNode.Description))
         this.Description = null;
+      //Category
+      //References
       if (this.RolePermissions.RolePermissionsEquals(baseNode.RolePermissions))
         this.RolePermissions = null;
       if (this.Documentation == baseNode.Documentation)
         this.Documentation = string.Empty;
-      if (this.Description.LocalizedTextArraysEqual(baseNode.Description))
-        this.Description = null;
+      //NodeId is not inherited
+      //WriteMask
+      //UserWriteMask
+      //AccessRestrictions
+      //SymbolicName is not inherited
+      //ReleaseStatus
     }
     /// <summary>
     /// Implements the == operator. Determines whether two instances of <see cref="UANode"/> represent the same information.

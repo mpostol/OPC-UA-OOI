@@ -36,11 +36,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     UANode UANode { get; }
     /// <summary>
-    /// Gets the inherited instance of <see cref="UANode"/>. It collect all overridden values traversing the inheritance chain.
-    /// </summary>
-    /// <value>The inherited ua node.</value>
-    UANode InheritedUANode { get; }
-    /// <summary>
     /// Exports the browse name of the wrapped node by this instance.
     /// </summary>
     /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the <see cref="BrowseName"/> of the node.</returns>

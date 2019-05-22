@@ -9,15 +9,9 @@
       <Object SymbolicName="cas:ChildObject" ModellingRule="MandatoryPlaceholder" SupportsEvents="true" />
       <Property SymbolicName="cas:BrowseName4node66" ModellingRule="Mandatory" DataType="ua:LocalizedText">
         <BrowseName>ChildProperty</BrowseName>
-        <References>
-          <Reference IsInverse="true" IsOneWay="true">
-            <ReferenceType>cas:FlowTo</ReferenceType>
-            <TargetId>cas:ComplexObjectType_NameNotSet1109</TargetId>
-          </Reference>
-        </References>
       </Property>
-      <Variable SymbolicName="cas:NameNotSet1109" TypeDefinition="ua:AnalogItemType" ModellingRule="Mandatory">
-        <BrowseName>BrowseName4node1109</BrowseName>
+      <Variable SymbolicName="cas:ChildVariable" TypeDefinition="ua:AnalogItemType" ModellingRule="Mandatory">
+        <BrowseName />
       </Variable>
       <Method SymbolicName="cas:ChildMethod" ModellingRule="Mandatory">
         <InputArguments>
@@ -28,15 +22,8 @@
           <Argument Name="Output1" DataType="ua:Int32" />
         </OutputArguments>
       </Method>
-      <Method SymbolicName="cas:NonExecutableMethod" ModellingRule="Mandatory" />
-      <Object SymbolicName="ua:ServerCapabilities" ModellingRule="Mandatory" />
     </Children>
   </ObjectType>
-  <ReferenceType SymbolicName="cas:FlowTo" BaseType="ua:NonHierarchicalReferences" Symmetric="false">
-    <DisplayName>Flow to type</DisplayName>
-    <Description>It is test ReferenceType</Description>
-    <InverseName>FlowFrom</InverseName>
-  </ReferenceType>
   <ObjectType SymbolicName="cas:DerivedFromComplexObjectType" BaseType="cas:ComplexObjectType">
     <Children>
       <Method SymbolicName="cas:ChildMethod">

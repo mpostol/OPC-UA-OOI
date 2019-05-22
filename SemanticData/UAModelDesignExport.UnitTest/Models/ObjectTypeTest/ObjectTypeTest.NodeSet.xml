@@ -6,46 +6,9 @@
   </NamespaceUris>
   <ServerUris />
   <Nodes>
-    <Node i:type="ReferenceTypeNode">
-      <NodeId>
-        <Identifier>ns=1;i=195</Identifier>
-      </NodeId>
-      <NodeClass>ReferenceType_32</NodeClass>
-      <BrowseName>
-        <NamespaceIndex>1</NamespaceIndex>
-        <Name>FlowTo</Name>
-      </BrowseName>
-      <DisplayName>
-        <Locale></Locale>
-        <Text>Flow to type</Text>
-      </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>It is test ReferenceType</Text>
-      </Description>
-      <WriteMask>0</WriteMask>
-      <UserWriteMask>0</UserWriteMask>
-      <References>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=45</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>true</IsInverse>
-          <TargetId>
-            <Identifier>i=32</Identifier>
-          </TargetId>
-        </ReferenceNode>
-      </References>
-      <IsAbstract>false</IsAbstract>
-      <Symmetric>false</Symmetric>
-      <InverseName>
-        <Locale></Locale>
-        <Text>FlowFrom</Text>
-      </InverseName>
-    </Node>
     <Node i:type="ObjectTypeNode">
       <NodeId>
-        <Identifier>ns=1;i=196</Identifier>
+        <Identifier>ns=1;i=1</Identifier>
       </NodeId>
       <NodeClass>ObjectType_8</NodeClass>
       <BrowseName>
@@ -75,7 +38,7 @@
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=308</Identifier>
+            <Identifier>ns=1;i=2</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -84,7 +47,7 @@
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=309</Identifier>
+            <Identifier>ns=1;i=3</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -93,7 +56,7 @@
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=289</Identifier>
+            <Identifier>ns=1;i=43</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -102,25 +65,7 @@
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=295</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=47</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=306</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=47</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=214</Identifier>
+            <Identifier>ns=1;i=10</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -129,7 +74,7 @@
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=310</Identifier>
+            <Identifier>ns=1;i=16</Identifier>
           </TargetId>
         </ReferenceNode>
       </References>
@@ -137,288 +82,7 @@
     </Node>
     <Node i:type="ObjectNode">
       <NodeId>
-        <Identifier>ns=1;i=214</Identifier>
-      </NodeId>
-      <NodeClass>Object_1</NodeClass>
-      <BrowseName>
-        <NamespaceIndex>0</NamespaceIndex>
-        <Name>ServerCapabilities</Name>
-      </BrowseName>
-      <DisplayName>
-        <Locale></Locale>
-        <Text>ServerCapabilities</Text>
-      </DisplayName>
-      <Description i:nil="true" />
-      <WriteMask>0</WriteMask>
-      <UserWriteMask>0</UserWriteMask>
-      <References>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=47</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>true</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=196</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>i=58</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=37</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>i=78</Identifier>
-          </TargetId>
-        </ReferenceNode>
-      </References>
-      <EventNotifier>0</EventNotifier>
-    </Node>
-    <Node i:type="VariableNode">
-      <NodeId>
-        <Identifier>ns=1;i=289</Identifier>
-      </NodeId>
-      <NodeClass>Variable_2</NodeClass>
-      <BrowseName>
-        <NamespaceIndex>1</NamespaceIndex>
-        <Name>BrowseName4node1109</Name>
-      </BrowseName>
-      <DisplayName>
-        <Locale></Locale>
-        <Text>BrowseName4node1109</Text>
-      </DisplayName>
-      <Description i:nil="true" />
-      <WriteMask>0</WriteMask>
-      <UserWriteMask>0</UserWriteMask>
-      <References>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=47</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>true</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=196</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>i=2368</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=37</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>i=78</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>ns=1;i=195</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=309</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=46</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=293</Identifier>
-          </TargetId>
-        </ReferenceNode>
-      </References>
-      <Value>
-        <Value>
-          <Double xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">0</Double>
-        </Value>
-      </Value>
-      <DataType>
-        <Identifier>i=26</Identifier>
-      </DataType>
-      <ValueRank>-1</ValueRank>
-      <ArrayDimensions />
-      <AccessLevel>1</AccessLevel>
-      <UserAccessLevel>1</UserAccessLevel>
-      <MinimumSamplingInterval>0</MinimumSamplingInterval>
-      <Historizing>false</Historizing>
-    </Node>
-    <Node i:type="VariableNode">
-      <NodeId>
-        <Identifier>ns=1;i=293</Identifier>
-      </NodeId>
-      <NodeClass>Variable_2</NodeClass>
-      <BrowseName>
-        <NamespaceIndex>0</NamespaceIndex>
-        <Name>EURange</Name>
-      </BrowseName>
-      <DisplayName>
-        <Locale></Locale>
-        <Text>EURange</Text>
-      </DisplayName>
-      <Description i:nil="true" />
-      <WriteMask>0</WriteMask>
-      <UserWriteMask>0</UserWriteMask>
-      <References>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=46</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>true</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=289</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>i=68</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=37</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>i=78</Identifier>
-          </TargetId>
-        </ReferenceNode>
-      </References>
-      <Value>
-        <Value>
-          <Null xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd" />
-        </Value>
-      </Value>
-      <DataType>
-        <Identifier>i=884</Identifier>
-      </DataType>
-      <ValueRank>-1</ValueRank>
-      <ArrayDimensions />
-      <AccessLevel>1</AccessLevel>
-      <UserAccessLevel>1</UserAccessLevel>
-      <MinimumSamplingInterval>0</MinimumSamplingInterval>
-      <Historizing>false</Historizing>
-    </Node>
-    <Node i:type="MethodNode">
-      <NodeId>
-        <Identifier>ns=1;i=295</Identifier>
-      </NodeId>
-      <NodeClass>Method_4</NodeClass>
-      <BrowseName>
-        <NamespaceIndex>1</NamespaceIndex>
-        <Name>ChildMethod</Name>
-      </BrowseName>
-      <DisplayName>
-        <Locale></Locale>
-        <Text>ChildMethod</Text>
-      </DisplayName>
-      <Description i:nil="true" />
-      <WriteMask>0</WriteMask>
-      <UserWriteMask>0</UserWriteMask>
-      <References>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=47</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>true</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=196</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=295</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=37</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>i=78</Identifier>
-          </TargetId>
-        </ReferenceNode>
-      </References>
-      <Executable>true</Executable>
-      <UserExecutable>true</UserExecutable>
-    </Node>
-    <Node i:type="MethodNode">
-      <NodeId>
-        <Identifier>ns=1;i=306</Identifier>
-      </NodeId>
-      <NodeClass>Method_4</NodeClass>
-      <BrowseName>
-        <NamespaceIndex>1</NamespaceIndex>
-        <Name>NonExecutableMethod</Name>
-      </BrowseName>
-      <DisplayName>
-        <Locale></Locale>
-        <Text>NonExecutableMethod</Text>
-      </DisplayName>
-      <Description i:nil="true" />
-      <WriteMask>0</WriteMask>
-      <UserWriteMask>0</UserWriteMask>
-      <References>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=47</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>true</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=196</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=306</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=37</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>i=78</Identifier>
-          </TargetId>
-        </ReferenceNode>
-      </References>
-      <Executable>true</Executable>
-      <UserExecutable>true</UserExecutable>
-    </Node>
-    <Node i:type="ObjectNode">
-      <NodeId>
-        <Identifier>ns=1;i=308</Identifier>
+        <Identifier>ns=1;i=2</Identifier>
       </NodeId>
       <NodeClass>Object_1</NodeClass>
       <BrowseName>
@@ -439,7 +103,7 @@
           </ReferenceTypeId>
           <IsInverse>true</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=196</Identifier>
+            <Identifier>ns=1;i=1</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -465,7 +129,7 @@
     </Node>
     <Node i:type="VariableNode">
       <NodeId>
-        <Identifier>ns=1;i=309</Identifier>
+        <Identifier>ns=1;i=3</Identifier>
       </NodeId>
       <NodeClass>Variable_2</NodeClass>
       <BrowseName>
@@ -486,7 +150,7 @@
           </ReferenceTypeId>
           <IsInverse>true</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=196</Identifier>
+            <Identifier>ns=1;i=1</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -505,15 +169,6 @@
           <IsInverse>false</IsInverse>
           <TargetId>
             <Identifier>i=78</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>ns=1;i=195</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>true</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=289</Identifier>
           </TargetId>
         </ReferenceNode>
       </References>
@@ -535,9 +190,57 @@
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
     </Node>
+    <Node i:type="MethodNode">
+      <NodeId>
+        <Identifier>ns=1;i=10</Identifier>
+      </NodeId>
+      <NodeClass>Method_4</NodeClass>
+      <BrowseName>
+        <NamespaceIndex>1</NamespaceIndex>
+        <Name>ChildMethod</Name>
+      </BrowseName>
+      <DisplayName>
+        <Locale></Locale>
+        <Text>ChildMethod</Text>
+      </DisplayName>
+      <Description i:nil="true" />
+      <WriteMask>0</WriteMask>
+      <UserWriteMask>0</UserWriteMask>
+      <References>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=47</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>true</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=1</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=40</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=10</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=37</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>i=78</Identifier>
+          </TargetId>
+        </ReferenceNode>
+      </References>
+      <Executable>true</Executable>
+      <UserExecutable>true</UserExecutable>
+    </Node>
     <Node i:type="ObjectTypeNode">
       <NodeId>
-        <Identifier>ns=1;i=310</Identifier>
+        <Identifier>ns=1;i=16</Identifier>
       </NodeId>
       <NodeClass>ObjectType_8</NodeClass>
       <BrowseName>
@@ -558,7 +261,7 @@
           </ReferenceTypeId>
           <IsInverse>true</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=196</Identifier>
+            <Identifier>ns=1;i=1</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -567,7 +270,7 @@
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=409</Identifier>
+            <Identifier>ns=1;i=25</Identifier>
           </TargetId>
         </ReferenceNode>
       </References>
@@ -575,7 +278,7 @@
     </Node>
     <Node i:type="MethodNode">
       <NodeId>
-        <Identifier>ns=1;i=409</Identifier>
+        <Identifier>ns=1;i=25</Identifier>
       </NodeId>
       <NodeClass>Method_4</NodeClass>
       <BrowseName>
@@ -596,7 +299,7 @@
           </ReferenceTypeId>
           <IsInverse>true</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=310</Identifier>
+            <Identifier>ns=1;i=16</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -605,7 +308,7 @@
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=295</Identifier>
+            <Identifier>ns=1;i=10</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -623,7 +326,7 @@
     </Node>
     <Node i:type="ObjectNode">
       <NodeId>
-        <Identifier>ns=1;i=516</Identifier>
+        <Identifier>ns=1;i=30</Identifier>
       </NodeId>
       <NodeClass>Object_1</NodeClass>
       <BrowseName>
@@ -644,7 +347,7 @@
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=310</Identifier>
+            <Identifier>ns=1;i=16</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -662,7 +365,7 @@
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=518</Identifier>
+            <Identifier>ns=1;i=32</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -671,7 +374,7 @@
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=519</Identifier>
+            <Identifier>ns=1;i=55</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -680,25 +383,7 @@
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=525</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=47</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=528</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=47</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=529</Identifier>
+            <Identifier>ns=1;i=39</Identifier>
           </TargetId>
         </ReferenceNode>
       </References>
@@ -706,7 +391,7 @@
     </Node>
     <Node i:type="VariableNode">
       <NodeId>
-        <Identifier>ns=1;i=518</Identifier>
+        <Identifier>ns=1;i=32</Identifier>
       </NodeId>
       <NodeClass>Variable_2</NodeClass>
       <BrowseName>
@@ -727,7 +412,7 @@
           </ReferenceTypeId>
           <IsInverse>true</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=516</Identifier>
+            <Identifier>ns=1;i=30</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -737,15 +422,6 @@
           <IsInverse>false</IsInverse>
           <TargetId>
             <Identifier>i=68</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>ns=1;i=195</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>true</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=519</Identifier>
           </TargetId>
         </ReferenceNode>
       </References>
@@ -767,18 +443,18 @@
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
     </Node>
-    <Node i:type="VariableNode">
+    <Node i:type="MethodNode">
       <NodeId>
-        <Identifier>ns=1;i=519</Identifier>
+        <Identifier>ns=1;i=39</Identifier>
       </NodeId>
-      <NodeClass>Variable_2</NodeClass>
+      <NodeClass>Method_4</NodeClass>
       <BrowseName>
         <NamespaceIndex>1</NamespaceIndex>
-        <Name>BrowseName4node1109</Name>
+        <Name>ChildMethod</Name>
       </BrowseName>
       <DisplayName>
         <Locale></Locale>
-        <Text>BrowseName4node1109</Text>
+        <Text>ChildMethodNewName</Text>
       </DisplayName>
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
@@ -790,7 +466,46 @@
           </ReferenceTypeId>
           <IsInverse>true</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=516</Identifier>
+            <Identifier>ns=1;i=30</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=40</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=10</Identifier>
+          </TargetId>
+        </ReferenceNode>
+      </References>
+      <Executable>true</Executable>
+      <UserExecutable>true</UserExecutable>
+    </Node>
+    <Node i:type="VariableNode">
+      <NodeId>
+        <Identifier>ns=1;i=43</Identifier>
+      </NodeId>
+      <NodeClass>Variable_2</NodeClass>
+      <BrowseName>
+        <NamespaceIndex>1</NamespaceIndex>
+        <Name>ChildVariable</Name>
+      </BrowseName>
+      <DisplayName>
+        <Locale></Locale>
+        <Text>ChildVariable</Text>
+      </DisplayName>
+      <Description i:nil="true" />
+      <WriteMask>0</WriteMask>
+      <UserWriteMask>0</UserWriteMask>
+      <References>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=47</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>true</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=1</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -804,11 +519,11 @@
         </ReferenceNode>
         <ReferenceNode>
           <ReferenceTypeId>
-            <Identifier>ns=1;i=195</Identifier>
+            <Identifier>i=37</Identifier>
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=518</Identifier>
+            <Identifier>i=78</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -817,7 +532,7 @@
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=523</Identifier>
+            <Identifier>ns=1;i=47</Identifier>
           </TargetId>
         </ReferenceNode>
       </References>
@@ -838,7 +553,7 @@
     </Node>
     <Node i:type="VariableNode">
       <NodeId>
-        <Identifier>ns=1;i=523</Identifier>
+        <Identifier>ns=1;i=47</Identifier>
       </NodeId>
       <NodeClass>Variable_2</NodeClass>
       <BrowseName>
@@ -859,7 +574,127 @@
           </ReferenceTypeId>
           <IsInverse>true</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=519</Identifier>
+            <Identifier>ns=1;i=43</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=40</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>i=68</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=37</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>i=78</Identifier>
+          </TargetId>
+        </ReferenceNode>
+      </References>
+      <Value>
+        <Value>
+          <Null xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd" />
+        </Value>
+      </Value>
+      <DataType>
+        <Identifier>i=884</Identifier>
+      </DataType>
+      <ValueRank>-1</ValueRank>
+      <ArrayDimensions />
+      <AccessLevel>1</AccessLevel>
+      <UserAccessLevel>1</UserAccessLevel>
+      <MinimumSamplingInterval>0</MinimumSamplingInterval>
+      <Historizing>false</Historizing>
+    </Node>
+    <Node i:type="VariableNode">
+      <NodeId>
+        <Identifier>ns=1;i=55</Identifier>
+      </NodeId>
+      <NodeClass>Variable_2</NodeClass>
+      <BrowseName>
+        <NamespaceIndex>1</NamespaceIndex>
+        <Name>ChildVariable</Name>
+      </BrowseName>
+      <DisplayName>
+        <Locale></Locale>
+        <Text>ChildVariable</Text>
+      </DisplayName>
+      <Description i:nil="true" />
+      <WriteMask>0</WriteMask>
+      <UserWriteMask>0</UserWriteMask>
+      <References>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=47</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>true</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=30</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=40</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>i=2368</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=46</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=59</Identifier>
+          </TargetId>
+        </ReferenceNode>
+      </References>
+      <Value>
+        <Value>
+          <Double xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">0</Double>
+        </Value>
+      </Value>
+      <DataType>
+        <Identifier>i=26</Identifier>
+      </DataType>
+      <ValueRank>-1</ValueRank>
+      <ArrayDimensions />
+      <AccessLevel>1</AccessLevel>
+      <UserAccessLevel>1</UserAccessLevel>
+      <MinimumSamplingInterval>0</MinimumSamplingInterval>
+      <Historizing>false</Historizing>
+    </Node>
+    <Node i:type="VariableNode">
+      <NodeId>
+        <Identifier>ns=1;i=59</Identifier>
+      </NodeId>
+      <NodeClass>Variable_2</NodeClass>
+      <BrowseName>
+        <NamespaceIndex>0</NamespaceIndex>
+        <Name>EURange</Name>
+      </BrowseName>
+      <DisplayName>
+        <Locale></Locale>
+        <Text>EURange</Text>
+      </DisplayName>
+      <Description i:nil="true" />
+      <WriteMask>0</WriteMask>
+      <UserWriteMask>0</UserWriteMask>
+      <References>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=46</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>true</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=55</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -886,122 +721,6 @@
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
-    </Node>
-    <Node i:type="MethodNode">
-      <NodeId>
-        <Identifier>ns=1;i=525</Identifier>
-      </NodeId>
-      <NodeClass>Method_4</NodeClass>
-      <BrowseName>
-        <NamespaceIndex>1</NamespaceIndex>
-        <Name>ChildMethod</Name>
-      </BrowseName>
-      <DisplayName>
-        <Locale></Locale>
-        <Text>ChildMethodNewName</Text>
-      </DisplayName>
-      <Description i:nil="true" />
-      <WriteMask>0</WriteMask>
-      <UserWriteMask>0</UserWriteMask>
-      <References>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=47</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>true</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=516</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=295</Identifier>
-          </TargetId>
-        </ReferenceNode>
-      </References>
-      <Executable>true</Executable>
-      <UserExecutable>true</UserExecutable>
-    </Node>
-    <Node i:type="MethodNode">
-      <NodeId>
-        <Identifier>ns=1;i=528</Identifier>
-      </NodeId>
-      <NodeClass>Method_4</NodeClass>
-      <BrowseName>
-        <NamespaceIndex>1</NamespaceIndex>
-        <Name>NonExecutableMethod</Name>
-      </BrowseName>
-      <DisplayName>
-        <Locale></Locale>
-        <Text>NonExecutableMethod</Text>
-      </DisplayName>
-      <Description i:nil="true" />
-      <WriteMask>0</WriteMask>
-      <UserWriteMask>0</UserWriteMask>
-      <References>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=47</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>true</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=516</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=306</Identifier>
-          </TargetId>
-        </ReferenceNode>
-      </References>
-      <Executable>true</Executable>
-      <UserExecutable>true</UserExecutable>
-    </Node>
-    <Node i:type="ObjectNode">
-      <NodeId>
-        <Identifier>ns=1;i=529</Identifier>
-      </NodeId>
-      <NodeClass>Object_1</NodeClass>
-      <BrowseName>
-        <NamespaceIndex>0</NamespaceIndex>
-        <Name>ServerCapabilities</Name>
-      </BrowseName>
-      <DisplayName>
-        <Locale></Locale>
-        <Text>ServerCapabilities</Text>
-      </DisplayName>
-      <Description i:nil="true" />
-      <WriteMask>0</WriteMask>
-      <UserWriteMask>0</UserWriteMask>
-      <References>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=47</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>true</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=516</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>i=58</Identifier>
-          </TargetId>
-        </ReferenceNode>
-      </References>
-      <EventNotifier>0</EventNotifier>
     </Node>
   </Nodes>
 </NodeSet>

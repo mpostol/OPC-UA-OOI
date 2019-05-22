@@ -132,6 +132,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <value>The source node context.</value>
     internal IUANodeContext SourceNode { get; private set; }
+    /// <summary>
+    /// Gets a value indicating whether the reference has been derived form <see cref="ReferenceKindEnum.HasProperty" or <see cref="ReferenceKindEnum.HasComponent"/>/>.
+    /// </summary>
+    /// <value><c>true</c> if is child reference; otherwise, <c>false</c>.</value>
     internal bool ChildConnector => (ReferenceKind == ReferenceKindEnum.HasProperty) || (ReferenceKind == ReferenceKindEnum.HasComponent);
     /// <summary>
     /// Ir recursively builds the symbolic identifier.

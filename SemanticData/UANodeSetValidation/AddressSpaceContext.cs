@@ -159,7 +159,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       string _idKey = nodeId.ToString();
       if (!m_NodesDictionary.TryGetValue(_idKey, out IUANodeContext _ret))
       {
-        _ret = new UANodeContext(this, modelContext, nodeId);
+        _ret = new UANodeContext(nodeId, this, modelContext);
         m_NodesDictionary.Add(_idKey, _ret);
       }
       return _ret;
@@ -206,13 +206,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="list">The list o d nodes.</param>
     void IAddressSpaceBuildContext.GetDerivedInstances(IUANodeContext rootNode, List<IUANodeBase> list)
     {
-      List<IUANodeContext> _col = new List<IUANodeContext>
-      {
-        rootNode
-      };
-      GetBaseTypes(rootNode, _col);
-      foreach (IUANodeContext _type in _col)
-        GetChildren(_type, list);
+      //List<IUANodeContext> _col = new List<IUANodeContext>
+      //{
+      //  rootNode
+      //};
+      //GetBaseTypes(rootNode, _col);
+      //foreach (IUANodeContext _type in _col)
+        GetChildren(rootNode, list);
     }
     /// <summary>
     /// Gets an instance of the <see cref="IAddressSpaceBuildContext"/> representing selected by <paramref name="nodeClass"/> base type node if applicable, null otherwise.

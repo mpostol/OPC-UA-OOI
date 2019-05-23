@@ -65,7 +65,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="rootNode">The root node.</param>
     /// <param name="list">The list o d nodes.</param>
     void GetDerivedInstances(IUANodeContext rootNode, List<IUANodeBase> list);
-    //TODO - remove
+    //TODO #40 - remove
     ///// <summary>
     ///// Gets the base type node if exist.
     ///// </summary>

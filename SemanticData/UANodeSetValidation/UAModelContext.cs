@@ -125,24 +125,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedNamespaceIndex, $"ImportNamespaceIndex failed - namespace index {namespaceIndex - 1} is out of the NamespaceUris index. New namespace {_identifier} is created insted."));
       return AddressSpaceContext.GetIndexOrAppend(_identifier);
     }
-    //TODO it is not used
-    //private NodeId ImportExpandedNodeId(string nodeId, bool lookupAlias)
-    //{
-    //  if (string.IsNullOrEmpty(nodeId))
-    //    return NodeId.Null;
-    //  // lookup alias.
-    //  if (lookupAlias)
-    //    nodeId = LookupAlias(nodeId);
-    //  ExpandedNodeId _expandedNodeId = ExpandedNodeId.Parse(nodeId);
-    //  if (_expandedNodeId.IsAbsolute)
-    //    throw new NotImplementedException();
-    //  if (_expandedNodeId.ServerIndex > 0)
-    //    throw new NotImplementedException();
-    //  ushort namespaceIndex = _expandedNodeId.NamespaceIndex;
-    //  if (_expandedNodeId.NamespaceIndex > 0)
-    //    namespaceIndex = ImportNamespaceIndex(_expandedNodeId.NamespaceIndex);
-    //  return new NodeId(_expandedNodeId.Identifier, namespaceIndex);
-    //}
     #endregion
 
   }

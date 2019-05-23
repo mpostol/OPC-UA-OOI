@@ -206,14 +206,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="list">The list o d nodes.</param>
     void IAddressSpaceBuildContext.GetDerivedInstances(IUANodeContext rootNode, List<IUANodeBase> list)
     {
-      //TODO remove
+      //TODO #40 remove
       //List<IUANodeContext> _col = new List<IUANodeContext>
       //{
       //  rootNode
       //};
       //GetBaseTypes(rootNode, _col);
       //foreach (IUANodeContext _type in _col)
-        GetChildren(rootNode, list);
+      GetChildren(rootNode, list);
     }
     ///// <summary>
     ///// Gets an instance of the <see cref="IAddressSpaceBuildContext"/> representing selected by <paramref name="nodeClass"/> base type node if applicable, null otherwise.

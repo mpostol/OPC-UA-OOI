@@ -53,10 +53,30 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsNotNull(_toTest.UANode);
     }
     [TestMethod]
+    public void UpdateNullTest()
+    {
+      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+      Mock<IUAModelContext> _modelMock = new Mock<IUAModelContext>();
+      IUANodeContext _newNode = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object, _modelMock.Object);
+      Func<UANode> _nodeFactory = () => new UAVariable()
+      {
+        NodeId = "ns=1;i=47",
+        BrowseName = "EURange",
+        ParentNodeId = "ns=1;i=43",
+        DataType = "i=884",
+        DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
+      };
+      List<TraceMessage> _trace = new List<TraceMessage>();
+      BuildErrorsHandling.Log.TraceEventAction += x => _trace.Add(x);
+      _newNode.Update(_nodeFactory(), x => Assert.Fail());
+      _newNode.Update(_nodeFactory(), x => Assert.Fail());
+      Assert.AreEqual<int>(1, _trace.Count);
+      BuildErrorsHandling.Log.TraceEventAction -= x => _trace.Add(x);
+    }
+    [TestMethod]
     public void UpdateTest()
     {
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-      _asMock.Setup(x => x.GetBaseTypeNode(It.IsAny< NodeClassEnum>())).Returns<IUANodeBase>(null);
       Mock<IUAModelContext> _modelMock = new Mock<IUAModelContext>();
       QualifiedName qualifiedName = QualifiedName.Parse("EURange");
       _modelMock.Setup<QualifiedName>(x => x.ImportQualifiedName(qualifiedName)).Returns<QualifiedName>(x => x);
@@ -70,7 +90,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
           };
       _newNode.Update(_nodeFactory(), x => Assert.Fail());
-      _asMock.Verify(x => x.GetBaseTypeNode(It.IsAny<NodeClassEnum>()), Times.Once);
       _modelMock.Verify(x => x.ImportQualifiedName(qualifiedName), Times.Once);
     }
     [TestMethod]

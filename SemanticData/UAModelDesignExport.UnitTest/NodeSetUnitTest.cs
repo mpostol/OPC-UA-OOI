@@ -80,7 +80,7 @@ namespace CAS.UA.Model.Designer.ImportExport.UT
       int _diagnosticCounter = 0;
       ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<int>(4, _expected.Items.Length);
+      Assert.AreEqual<int>(3, _expected.Items.Length);
       CompareModelDesign(_expected, _actual);
     }
     [TestMethod]

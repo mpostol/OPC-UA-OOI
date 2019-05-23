@@ -84,34 +84,33 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (QualifiedName.IsNull(_broseName))
       {
         NodeId _id = NodeId.Parse(UANode.NodeId);
-        _broseName = new QualifiedName(string.Format("EmptyBrowseName{0}", _id.IdentifierPart), _id.NamespaceIndex);
+        _broseName = new QualifiedName($"EmptyBrowseName_{_id.IdentifierPart}", _id.NamespaceIndex);
         BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, string.Format("New identifier {0} is generated to proceed.", _broseName)));
       }
       BrowseName = UAModelContext.ImportQualifiedName(_broseName);
-      if (node.References != null)
-        foreach (Reference _reference in node.References)
+      if (node.References == null)
+        return;
+      foreach (Reference _reference in node.References)
+      {
+        UAReferenceContext _newReference = new UAReferenceContext(_reference, this.m_AddressSpaceContext, UAModelContext, this);
+        switch (_newReference.ReferenceKind)
         {
-          UAReferenceContext _newReference = new UAReferenceContext(_reference, this.m_AddressSpaceContext, UAModelContext, this);
-          switch (_newReference.ReferenceKind)
-          {
-            case ReferenceKindEnum.Custom:
-            case ReferenceKindEnum.HasComponent:
-            case ReferenceKindEnum.HasProperty:
-              break;
-            case ReferenceKindEnum.HasModellingRule:
-              ModelingRule = _newReference.GetModelingRule();
-              break;
-            case ReferenceKindEnum.HasSubtype: //TODO Part 3 7.10 HasSubtype - add test cases #35
-              m_BaseTypeNode = _newReference.SourceNode;
-              break;
-            case ReferenceKindEnum.HasTypeDefinition: //Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
-              m_BaseTypeNode = _newReference.TargetNode;
-              break;
-          }
-          addReference(_newReference);
+          case ReferenceKindEnum.Custom:
+          case ReferenceKindEnum.HasComponent:
+          case ReferenceKindEnum.HasProperty:
+            break;
+          case ReferenceKindEnum.HasModellingRule:
+            ModelingRule = _newReference.GetModelingRule();
+            break;
+          case ReferenceKindEnum.HasSubtype: //TODO Part 3 7.10 HasSubtype - add test cases #35
+            m_BaseTypeNode = _newReference.SourceNode;
+            break;
+          case ReferenceKindEnum.HasTypeDefinition: //Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
+            m_BaseTypeNode = _newReference.TargetNode;
+            break;
         }
-      if (m_BaseTypeNode == null)
-        m_BaseTypeNode = m_AddressSpaceContext.GetBaseTypeNode(node.NodeClassEnum);
+        addReference(_newReference);
+      }
     }
     #endregion
 
@@ -296,22 +295,22 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <value>The name of the browse.</value>
     public QualifiedName BrowseName { get; set; } = QualifiedName.Null;
-    internal IEnumerable<UANodeContext> GetInheritedChildren()
-    {
-      Dictionary<string, UANodeContext> _myChildren = m_AddressSpaceContext.GetMyReferences(this).
-        Where<UAReferenceContext>(x => x.ChildConnector).
-        Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode).
-        Cast<UANodeContext>().
-        ToDictionary<UANodeContext, string>(x => BrowseName.Name);
-      if (m_BaseTypeNode != null)
-      {
-        IEnumerable<UANodeContext> _baseChildren = ((UANodeContext)m_BaseTypeNode).GetInheritedChildren();
-        foreach (UANodeContext _node in _baseChildren)
-          if (!string.IsNullOrEmpty(_node.BrowseName.Name) && !_myChildren.ContainsKey(_node.BrowseName.Name))
-            _myChildren.Add(_node.BrowseName.Name, _node);
-      }
-      return _myChildren.Values;
-    }
+    //internal IEnumerable<UANodeContext> GetInheritedChildren()
+    //{
+    //  Dictionary<string, UANodeContext> _myChildren = m_AddressSpaceContext.GetMyReferences(this).
+    //    Where<UAReferenceContext>(x => x.ChildConnector).
+    //    Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode).
+    //    Cast<UANodeContext>().
+    //    ToDictionary<UANodeContext, string>(x => BrowseName.Name);
+    //  if (m_BaseTypeNode != null)
+    //  {
+    //    IEnumerable<UANodeContext> _baseChildren = ((UANodeContext)m_BaseTypeNode).GetInheritedChildren();
+    //    foreach (UANodeContext _node in _baseChildren)
+    //      if (!string.IsNullOrEmpty(_node.BrowseName.Name) && !_myChildren.ContainsKey(_node.BrowseName.Name))
+    //        _myChildren.Add(_node.BrowseName.Name, _node);
+    //  }
+    //  return _myChildren.Values;
+    //}
     /// <summary>
     /// Indicates whether the current object is equal to another object of the same type.
     /// </summary>

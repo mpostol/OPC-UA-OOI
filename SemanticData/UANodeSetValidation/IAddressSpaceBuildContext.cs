@@ -65,12 +65,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="rootNode">The root node.</param>
     /// <param name="list">The list o d nodes.</param>
     void GetDerivedInstances(IUANodeContext rootNode, List<IUANodeBase> list);
-    /// <summary>
-    /// Gets the base type node if exist.
-    /// </summary>
-    /// <param name="nodeClass">The node class.</param>
-    /// <returns>An instance of the <see cref="IUANodeBase"/> if exist in the AddressSpace, null otherwise.</returns>
-    IUANodeBase GetBaseTypeNode(XML.NodeClassEnum nodeClass);
+    //TODO - remove
+    ///// <summary>
+    ///// Gets the base type node if exist.
+    ///// </summary>
+    ///// <param name="nodeClass">The node class.</param>
+    ///// <returns>An instance of the <see cref="IUANodeBase"/> if exist in the AddressSpace, null otherwise.</returns>
+    //IUANodeBase GetBaseTypeNode(XML.NodeClassEnum nodeClass);
 
   }
 

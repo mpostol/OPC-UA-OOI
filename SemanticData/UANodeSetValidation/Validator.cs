@@ -29,49 +29,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region internal API
     /// <summary>
-    /// Validates the selected nodes <paramref name="nodesCollection"/> and export it using <paramref name="exportModelFactory"/>.
-    /// </summary>
-    /// <param name="nodesCollection">The items <see cref="IEnumerable{IUANodeBase}" /> imported to the Address Space <see cref="IAddressSpaceContext" />.</param>
-    /// <param name="exportModelFactory">The model export factory.</param>
-    /// <param name="addressSpaceContext">The Address Space context.</param>
-    /// <param name="traceEvent">The trace event method encapsulation.</param>
-    internal static void ValidateExportModel(IEnumerable<IUANodeBase> nodesCollection, IModelFactory exportModelFactory, IAddressSpaceValidationContext addressSpaceContext, Action<TraceMessage> traceEvent)
-    {
-      traceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering Validator.ValidateExportModel - starting creation of the ModelDesign for {0} nodes.", nodesCollection.Count<IUANodeBase>())));
-      List<BuildError> _errors = new List<BuildError>(); //TODO should be added to the model;
-      foreach (IModelTableEntry _ns in addressSpaceContext.ExportNamespaceTable)
-      {
-        string _publicationDate = _ns.PublicationDate.HasValue ? _ns.PublicationDate.Value.ToShortDateString() : DateTime.UtcNow.ToShortDateString();
-        string _version = _ns.Version;
-        exportModelFactory.CreateNamespace(_ns.ModelUri, _publicationDate, _version);
-      }
-      string _msg = null;
-      int _nc = 0;
-      foreach (IUANodeBase _item in nodesCollection)
-      {
-        try
-        {
-          ValidateExportNode(_item, null, exportModelFactory, null, y =>
-              {
-                if (y.TraceLevel != TraceEventType.Verbose)
-                  _errors.Add(y.BuildError);
-                traceEvent(y);
-              });
-          _nc++;
-        }
-        catch (Exception _ex)
-        {
-          _msg = string.Format("Error caught while processing the node {0}. The message: {1} at {2}.", _item.UANode.NodeId, _ex.Message, _ex.StackTrace);
-          traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, _msg));
-        }
-      }
-      if (_errors.Count == 0)
-        _msg = string.Format("Finishing Validator.ValidateExportModel - the model contains {0} nodes.", _nc);
-      else
-        _msg = string.Format("Finishing Validator.ValidateExportModel - the model contains {0} nodes and {1} errors.", _nc, _errors.Count);
-      traceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
-    }
-    /// <summary>
     /// Validates <paramref name="nodeContext" /> and exports it using an object of <see cref="IModelFactory" />  type.
     /// </summary>
     /// <param name="nodeContext">The node context to be validated and exported.</param>
@@ -150,13 +107,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         }
       }
     }
+    #endregion
+
+    #region private
     private static ApplicationException InstanceDeclarationNotSupported(NodeClassEnum nodeClass)
     {
       return new ApplicationException($"{nodeClass} doesn't support instance declarations");
     }
-    #endregion
-
-    #region private
     private static void Update(IObjectInstanceFactory nodeDesign, UAObject nodeSet, Action<TraceMessage> traceEvent)
     {
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(traceEvent);

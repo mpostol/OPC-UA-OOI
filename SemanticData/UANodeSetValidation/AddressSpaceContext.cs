@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -349,7 +350,38 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                                                                                                      .Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
       _nodes.AddRange(_allInstances);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("AddressSpaceContext.ValidateAndExportModel - selected {0} nodes to be added to the model.", _nodes.Count)));
-      Validator.ValidateExportModel(_nodes, InformationModelFactory, this, m_TraceEvent);
+      List<BuildError> _errors = new List<BuildError>(); //TODO should be added to the model;
+      foreach (IModelTableEntry _ns in ExportNamespaceTable)
+      {
+        string _publicationDate = _ns.PublicationDate.HasValue ? _ns.PublicationDate.Value.ToShortDateString() : DateTime.UtcNow.ToShortDateString();
+        string _version = _ns.Version;
+        InformationModelFactory.CreateNamespace(_ns.ModelUri, _publicationDate, _version);
+      }
+      string _msg = null;
+      int _nc = 0;
+      foreach (IUANodeBase _item in _nodes)
+      {
+        try
+        {
+          Validator.ValidateExportNode(_item, null, InformationModelFactory, null, y =>
+          {
+            if (y.TraceLevel != TraceEventType.Verbose)
+              _errors.Add(y.BuildError);
+            m_TraceEvent(y);
+          });
+          _nc++;
+        }
+        catch (Exception _ex)
+        {
+          _msg = string.Format("Error caught while processing the node {0}. The message: {1} at {2}.", _item.UANode.NodeId, _ex.Message, _ex.StackTrace);
+          m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, _msg));
+        }
+      }
+      if (_errors.Count == 0)
+        _msg = string.Format("Finishing Validator.ValidateExportModel - the model contains {0} nodes.", _nc);
+      else
+        _msg = string.Format("Finishing Validator.ValidateExportModel - the model contains {0} nodes and {1} errors.", _nc, _errors.Count);
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
     }
     #endregion
 

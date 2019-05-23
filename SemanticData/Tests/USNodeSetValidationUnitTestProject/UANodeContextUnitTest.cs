@@ -102,6 +102,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       _first.CalculateNodeReferences(null);
     }
     [TestMethod]
+    //[ExpectedException(typeof(ArgumentNullException))]
+    public void CalculateNodeReferencesNullUANodeTest()
+    {
+      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+      Mock<IUAModelContext> _modelMock = new Mock<IUAModelContext>();
+      Mock<INodeFactory> _mockNodeFactory = new Mock<INodeFactory>();
+      IUANodeBase _first = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object, _modelMock.Object);
+      _first.CalculateNodeReferences(_mockNodeFactory.Object);
+    }
+    [TestMethod]
     public void EqualsTest()
     {
       AddressSpaceBuildContext _as = new AddressSpaceBuildContext();

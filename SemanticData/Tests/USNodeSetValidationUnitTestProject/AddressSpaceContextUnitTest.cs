@@ -106,7 +106,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel(UAInformationModel.Namespaces.OpcUa);
-      _asp.TestConsistency(10, 0);
+      _asp.TestConsistency(9, 0);
     }
     [TestMethod]
     [TestCategory("AddressSpaceContext")]

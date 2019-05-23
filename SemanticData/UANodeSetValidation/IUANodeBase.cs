@@ -25,7 +25,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Calculates the node references.
     /// </summary>
     /// <param name="nodeFactory">The node factory.</param>
-    void CalculateNodeReferences(INodeFactory nodeFactory);
+    /// <param name="validator">The validator.</param>
+    void CalculateNodeReferences(INodeFactory nodeFactory, IValidator validator);
     /// <summary>
     /// Gets the node identifier.
     /// </summary>

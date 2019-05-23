@@ -25,7 +25,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class AddressSpaceContext - responsible to manage all nodes in the OPC UA Address Space.
   /// </summary>
-  public sealed class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext, IAddressSpaceValidationContext
+  internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext, IAddressSpaceValidationContext
   {
 
     #region constructor
@@ -33,10 +33,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Initializes a new instance of the <see cref="AddressSpaceContext" /> class.
     /// </summary>
     /// <param name="traceEvent">Encapsulates an action to trace the progress and validation issues.</param>
-    /// <exception cref="System.ArgumentNullException">traceEvent - cannot be null.</exception>
+    /// <exception cref="ArgumentNullException">traceEvent - traceEvent - cannot be null</exception>
     public AddressSpaceContext(Action<TraceMessage> traceEvent)
     {
-      m_TraceEvent = traceEvent ?? throw new ArgumentNullException("traceEvent");
+      m_TraceEvent = traceEvent ?? throw new ArgumentNullException("traceEvent", "traceEvent - cannot be null");
       m_NamespaceTable = new NamespaceTable();
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting creation the OPC UA Address Space."));
       UANodeSet _standard = UANodeSet.ReadUADefinedTypes();
@@ -98,7 +98,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       ushort _nsi = m_NamespaceTable.LastNamespaceIndex;
       string _namespace = m_NamespaceTable.GetString(_nsi);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering AddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", _namespace)));
-      ValidateAndExportModel(_nsi);
+      ValidateAndExportModel(_nsi, m_Validator);
     }
     /// <summary>
     /// Validates and exports the selected model.
@@ -111,7 +111,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       int _nsIndex = m_NamespaceTable.GetIndex(targetNamespace);
       if (_nsIndex == -1)
         throw new ArgumentOutOfRangeException("targetNamespace", "Cannot find this namespace");
-      ValidateAndExportModel(_nsIndex);
+      ValidateAndExportModel(_nsIndex, m_Validator);
     }
     #endregion
 
@@ -262,6 +262,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
     //vars
+    private Validator m_Validator = new Validator();
     private IModelFactory m_InformationModelFactory = new InformationModelFactoryBase();
     private Dictionary<string, UAReferenceContext> m_References = new Dictionary<string, UAReferenceContext>();
     private NamespaceTable m_NamespaceTable = null;
@@ -337,7 +338,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         GetBaseTypes(_derived.First<IUANodeContext>(), inheritanceChain);
       rootNode.InRecursionChain = false;
     }
-    private void ValidateAndExportModel(int nameSpaceIndex)
+    private void ValidateAndExportModel(int nameSpaceIndex, Validator validator)
     {
       IEnumerable<IUANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
       List<IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
@@ -363,7 +364,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         try
         {
-          Validator.ValidateExportNode(_item, null, InformationModelFactory, null, y =>
+          validator.ValidateExportNode(_item, null, InformationModelFactory, null, y =>
           {
             if (y.TraceLevel != TraceEventType.Verbose)
               _errors.Add(y.BuildError);

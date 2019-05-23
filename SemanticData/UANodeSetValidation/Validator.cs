@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class Validator - contains static methods used to validate and export a collection of nodes - part of the Address Space.
   /// </summary>
-  internal static class Validator
+  internal class Validator : IValidator
   {
 
     #region internal API
@@ -36,7 +36,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="exportFactory">A model export factory.</param>
     /// <param name="parentReference">The reference to parent node.</param>
     /// <param name="traceEvent">The trace event.</param>
-    internal static void ValidateExportNode(IUANodeBase nodeContext, IUANodeBase instanceDeclaration, INodeContainer exportFactory, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
+    public void ValidateExportNode(IUANodeBase nodeContext, IUANodeBase instanceDeclaration, INodeContainer exportFactory, UAReferenceContext parentReference, Action<TraceMessage> traceEvent)
     {
       Debug.Assert(nodeContext != null, "Validator.ValidateExportNode the argument nodeContext is null.");
       //TODO Handle HasComponent ReferenceType errors. #42
@@ -207,7 +207,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongInverseName, string.Format("If ReferenceType {0} is not symmetric and not abstract the InverseName shall be specified.", nodeSet.NodeIdentifier())));
     }
     private static void Update(IObjectTypeFactory nodeDesign, UAObjectType nodeSet) { }
-    private static void CreateNode<FactoryType, NodeSetType>
+    private void CreateNode<FactoryType, NodeSetType>
       (
         Func<FactoryType> createNode,
         IUANodeBase nodeContext,
@@ -219,7 +219,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       where NodeSetType : UANode
     {
       FactoryType _nodeFactory = createNode();
-      nodeContext.CalculateNodeReferences(_nodeFactory);
+      nodeContext.CalculateNodeReferences(_nodeFactory, this);
       NodeSetType _nodeSet = (NodeSetType)nodeContext.UANode;
       XmlQualifiedName _browseName = nodeContext.ExportNodeBrowseName();
       string _symbolicName;

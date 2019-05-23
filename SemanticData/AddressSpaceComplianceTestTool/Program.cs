@@ -51,7 +51,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     {
       PrintLogo(options);
       Action<TraceMessage> _tracingMethod = z => Console.WriteLine(z.ToString());
-      IAddressSpaceContext _as = new AddressSpaceContext(_tracingMethod);
+      IAddressSpaceContext _as = AddressSpaceFactory.AddressSpace(_tracingMethod);
       ModelDesignExport _exporter = new ModelDesignExport();
       bool _exportModel = false;
       if (!string.IsNullOrEmpty(options.ModelDesignFileName))

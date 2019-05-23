@@ -127,7 +127,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent models.
     /// </summary>
     /// <param name="nodeFactory">The node container.</param>
-    void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory)
+    void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, IValidator m_Validator)
     {
       if (nodeFactory == null)
         throw new ArgumentNullException(nameof(nodeFactory), $"{nodeFactory} must not be null in {nameof(IUANodeBase.CalculateNodeReferences)}");
@@ -174,7 +174,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           IUANodeBase _instanceDeclaration = null;
           if (!string.IsNullOrEmpty(_rc.TargetNode.BrowseName.Name))
             _instanceDeclaration = _derivedChildren.ContainsKey(_rc.TargetNode.BrowseName.Name) ? _derivedChildren[_rc.TargetNode.BrowseName.Name] : null;
-          Validator.ValidateExportNode(_rc.TargetNode, _instanceDeclaration, nodeFactory, _rc, BuildErrorsHandling.Log.TraceEvent);
+          m_Validator.ValidateExportNode(_rc.TargetNode, _instanceDeclaration, nodeFactory, _rc, BuildErrorsHandling.Log.TraceEvent);
         }
         catch (Exception ex)
         {
@@ -350,6 +350,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #region private
     private IUANodeBase m_BaseTypeNode;
     private readonly IAddressSpaceBuildContext m_AddressSpaceContext = null;
+    
     private bool m_InGetDerivedInstances = false;
     //methods
     /// <summary>

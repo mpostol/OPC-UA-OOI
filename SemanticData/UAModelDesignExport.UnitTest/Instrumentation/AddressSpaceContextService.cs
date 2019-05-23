@@ -35,7 +35,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport.Instrumentation
       if (!filePath.Exists)
         throw new FileNotFoundException("The imported file does not exist", filePath.FullName);
       traceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.CreateInstance"));
-      IAddressSpaceContext _as = new AddressSpaceContext(traceEvent);
+      IAddressSpaceContext _as = AddressSpaceFactory.AddressSpace(traceEvent);
       ModelFactory _factory = new ModelFactory(traceEvent);
       _as.InformationModelFactory = _factory;
       _as.ImportUANodeSet(filePath);

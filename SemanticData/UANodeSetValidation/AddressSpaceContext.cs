@@ -364,12 +364,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         try
         {
-          validator.ValidateExportNode(_item, null, InformationModelFactory, null, y =>
-          {
-            if (y.TraceLevel != TraceEventType.Verbose)
-              _errors.Add(y.BuildError);
-            m_TraceEvent(y);
-          });
+          validator.ValidateExportNode(_item, null, InformationModelFactory, null); //y =>
+          //TODO #40 remove
+          //{
+          //  if (y.TraceLevel != TraceEventType.Verbose)
+          //    _errors.Add(y.BuildError);
+          //  m_TraceEvent(y);
+          //});
           _nc++;
         }
         catch (Exception _ex)

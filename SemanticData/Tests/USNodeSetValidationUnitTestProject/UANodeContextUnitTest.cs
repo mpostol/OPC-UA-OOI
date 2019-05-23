@@ -103,7 +103,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       _first.CalculateNodeReferences(null, _validatorMoc.Object);
     }
     [TestMethod]
-    //[ExpectedException(typeof(ArgumentNullException))]
     public void CalculateNodeReferencesNullUANodeTest()
     {
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
@@ -111,6 +110,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Mock<INodeFactory> _mockNodeFactory = new Mock<INodeFactory>();
       Mock<IValidator> _validatorMoc = new Mock<IValidator>();
       IUANodeBase _first = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object, _modelMock.Object);
+      _validatorMoc.Setup(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()));
       _first.CalculateNodeReferences(_mockNodeFactory.Object, _validatorMoc.Object);
     }
     [TestMethod]

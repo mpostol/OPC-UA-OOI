@@ -24,8 +24,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="instanceDeclaration">The instance declaration.</param>
     /// <param name="exportFactory">A model export factory.</param>
     /// <param name="parentReference">The reference to parent node.</param>
-    /// <param name="traceEvent">The trace event.</param>
-    void ValidateExportNode(IUANodeBase nodeContext, IUANodeBase instanceDeclaration, INodeContainer exportFactory, UAReferenceContext parentReference, Action<TraceMessage> traceEvent);
+    void ValidateExportNode(IUANodeBase nodeContext, IUANodeBase instanceDeclaration, INodeContainer exportFactory, UAReferenceContext parentReference);
 
   }
 

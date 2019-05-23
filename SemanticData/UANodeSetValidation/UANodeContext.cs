@@ -174,7 +174,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           IUANodeBase _instanceDeclaration = null;
           if (!string.IsNullOrEmpty(_rc.TargetNode.BrowseName.Name))
             _instanceDeclaration = _derivedChildren.ContainsKey(_rc.TargetNode.BrowseName.Name) ? _derivedChildren[_rc.TargetNode.BrowseName.Name] : null;
-          m_Validator.ValidateExportNode(_rc.TargetNode, _instanceDeclaration, nodeFactory, _rc, BuildErrorsHandling.Log.TraceEvent);
+          m_Validator.ValidateExportNode(_rc.TargetNode, _instanceDeclaration, nodeFactory, _rc);
         }
         catch (Exception ex)
         {
@@ -350,7 +350,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #region private
     private IUANodeBase m_BaseTypeNode;
     private readonly IAddressSpaceBuildContext m_AddressSpaceContext = null;
-    
+
     private bool m_InGetDerivedInstances = false;
     //methods
     /// <summary>

@@ -16,6 +16,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   [TestClass]
   public class UANodeSetUnitTest
   {
+
+    #region tests
     [TestMethod]
     public void RemoveInheritedKeepDifferentValuesTest()
     {
@@ -111,10 +113,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       UANodeSet _toTest = new UANodeSet()
       {
         NamespaceUris = new string[] { @"http://cas.eu/UA/Demo/" },
-        Aliases = new NodeIdAlias[] {
-                                      new NodeIdAlias() { Alias = "Boolean", Value = "i=1" },
-                                      new NodeIdAlias() { Alias = "HasSubtype", Value = "i=45" }
-                                    },
+        Aliases = new NodeIdAlias[] { },
         Items = new UANode[] { new UAObject()
               {
                 NodeId = "ns=1;i=1",
@@ -129,6 +128,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
                 ParentNodeId = string.Empty,
                 // UAObject
                 EventNotifier = 0x01,
+              },
+              new UAVariableType()
+              {
+                NodeId = "ns=1;i=1",
+                BrowseName = "1:NewUAObject",
+                DisplayName = new LocalizedText[] { new LocalizedText() { Value = "New UA Object" } },
+                References = new Reference[]{},
+                // UAObject
+                DataType = "ns=1;i=2",
               }
         }
       };
@@ -153,7 +161,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       _toTest.RecalculateNodeIds(_uAModelContext.Object);
       Assert.AreEqual<string>("ns=10;i=24", _toTest.Aliases[0].Value);
       Assert.AreEqual<string>("Alias name", _toTest.Aliases[0].Alias);
+      Assert.AreEqual<string>("ns=10;i=1", _toTest.Items[0].NodeId);
+      Assert.AreEqual<string>("ns=10;i=2", ((UAVariableType)_toTest.Items[1]).DataType);
     }
+    #endregion
+
+    #region test instrumentation
     private static UAObject GetInstanceOfDerivedFromComplexObjectType()
     {
       return new UAObject()
@@ -202,6 +215,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "ComplexObjectType" } },
       };
     }
+    #endregion
 
   }
 }

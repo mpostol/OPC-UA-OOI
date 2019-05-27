@@ -26,5 +26,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       base.CloneUAType(_ret);
       return _ret;
     }
+    /// <summary>
+    /// Recalculates the node identifiers.
+    /// </summary>
+    /// <param name="modelContext">The model context.</param>
+    internal override void RecalculateNodeIds(IUAModelContext modelContext)
+    {
+      base.RecalculateNodeIds(modelContext);
+      this.DataType = modelContext.ImportNodeId(DataType);
+    }
+
   }
 }

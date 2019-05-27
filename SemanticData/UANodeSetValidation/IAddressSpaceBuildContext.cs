@@ -5,6 +5,7 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
@@ -32,10 +33,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Gets the or create node context.
     /// </summary>
-    /// <param name="id">The identifier.</param>
-    /// <param name="uAModelContext">The u a model context.</param>
-    /// <returns>IUANodeContext.</returns>
-    IUANodeContext GetOrCreateNodeContext(NodeId id, IUAModelContext uAModelContext);
+    /// <param name="nodeId">The node identifier.</param>
+    /// <param name="createUAModelContext">Delegated capturing functionality to create ua model context.</param>
+    /// <returns>Returns an instance of <see cref="IUANodeContext"/>.</returns>
+    IUANodeContext GetOrCreateNodeContext(NodeId nodeId, Func<NodeId, IUANodeContext> createUAModelContext);
     /// <summary>
     /// Gets the index or append the URI.
     /// </summary>

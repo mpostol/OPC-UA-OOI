@@ -5,8 +5,6 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
-using System.Xml;
-using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -21,40 +19,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Imports the qualified name. It recalculates the <see cref="QualifiedName.NamespaceIndex"/> against local namespace index table. 
     /// </summary>
-    /// <param name="browseName">The browse name to be imported.</param>
+    /// <param name="qualifiedName">The <see cref="QualifiedName"/> serialized as string to be imported.</param>
     /// <returns> An instance of the <see cref="QualifiedName"/> with recalculated <see cref="QualifiedName.NamespaceIndex"/>.</returns>
-    QualifiedName ImportQualifiedName(QualifiedName browseName);
-    /// <summary>
-    /// Exports the browse name of the node.
-    /// </summary>
-    /// <param name="nodeId">The node identifier.</param>
-    /// <param name="defaultValue">The default value.</param>
-    /// <returns>An instance of the <see cref="XmlQualifiedName"/> or null if the <paramref name="nodeId"/> is equal <see cref="NodeId.Null"/> or <paramref name="defaultValue"/>.</returns>
-    XmlQualifiedName ExportBrowseName(string nodeId, NodeId defaultValue);
-    /// <summary>
-    /// Exports the argument.
-    /// </summary>
-    /// <param name="item">The item.</param>
-    /// <returns>Parameter.</returns>
-    Parameter ExportArgument(DataSerialization.Argument item);
-    /// <summary>
-    /// Gets the or create node context.
-    /// </summary>
-    /// <param name="nodeId">The node identifier.</param>
-    /// <returns>An instance of <see cref="IUANodeContext"/>.</returns>
-    IUANodeContext GetOrCreateNodeContext(string nodeId);
+    string ImportQualifiedName(string qualifiedName);
     /// <summary>
     /// Imports the node identifier if <paramref name="nodeId"/> is not empty.
     /// </summary>
-    /// <param name="nodeId">The node identifier.</param>
+    /// <param name="nodeId">The node identifier with the syntax defined in Part 6-5.3.1.10.</param>
     /// <returns>An instance of the <see cref="NodeId"/> or null is the <paramref name="nodeId"/> is null or empty.</returns>
-    NodeId ImportNodeId(string nodeId);
-    /// <summary>
-    /// Exports the qualified name to <see cref="XmlQualifiedName"/>. 
-    /// </summary>
-    /// <param name="source">The source.</param>
-    /// <returns>XmlQualifiedName.</returns>
-    XmlQualifiedName ExportQualifiedName(QualifiedName source);
+    string ImportNodeId(string nodeId);
 
   }
 

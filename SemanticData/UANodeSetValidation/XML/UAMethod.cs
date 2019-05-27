@@ -5,11 +5,24 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using System;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
+
+  /// <summary>
+  /// Class UAMethod
+  /// Implements the <see cref="UAOOI.SemanticData.UANodeSetValidation.XML.UAInstance" />
+  /// </summary>
+  /// <seealso cref="UAOOI.SemanticData.UANodeSetValidation.XML.UAInstance" />
   public partial class UAMethod
   {
+
+    internal override void RecalculateNodeIds(IUAModelContext modelContext)
+    {
+      base.RecalculateNodeIds(modelContext);
+      MethodDeclarationId = modelContext.ImportNodeId(this.MethodDeclarationId);
+    }
     /// <summary>
     /// Indicates whether the the inherited parent object is also equal to another object.
     /// </summary>
@@ -26,8 +39,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         this.Executable == _other.Executable &&
         this.UserExecutable == _other.UserExecutable;
       // not exposed and must be excluded from the comparison this.MethodDeclarationId == _other.MethodDeclarationId;
-
     }
+    /// <summary>
+    /// Get the clone from the types derived from this one.
+    /// </summary>
+    /// <returns>An instance of <see cref="T:UAOOI.SemanticData.UANodeSetValidation.XML.UANode" />.</returns>
     protected override UANode ParentClone()
     {
       UAMethod _ret = new UAMethod
@@ -38,5 +54,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       base.CloneUAInstance(_ret);
       return _ret;
     }
+
   }
 }

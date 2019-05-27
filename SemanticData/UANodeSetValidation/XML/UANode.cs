@@ -16,6 +16,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   /// <seealso cref="IEquatable{UANode}" />
   public abstract partial class UANode : IEquatable<UANode>
   {
+
+    #region IEquatable
     /// <summary>
     /// Indicates whether the current object is equal to another object of the same type.
     /// </summary>
@@ -42,6 +44,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         this.WriteMask == other.WriteMask &&
         this.References.ReferencesEquals(other.References);
     }
+    #endregion
+
+    #region API
+    /// <summary>
+    /// Clones this instance.
+    /// </summary>
+    /// <returns>UANode.</returns>
     public virtual UANode Clone()
     {
       return ParentClone();
@@ -117,6 +126,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         return NodeClassEnum.Unknown;
       }
     }
+    internal virtual void RecalculateNodeIds(IUAModelContext modelContext)
+    {
+      BrowseName = modelContext.ImportQualifiedName(BrowseName);
+      this.NodeId = modelContext.ImportNodeId(this.NodeId);
+      if (!(this.References is null))
+        foreach (Reference _reference in this.References)
+          _reference.RecalculateNodeIds(modelContext.ImportNodeId);
+      ImportNodeId(this.RolePermissions, modelContext.ImportNodeId);
+    }
+    #endregion
 
     #region override Object
     /// <summary>
@@ -140,6 +159,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     }
     #endregion
 
+    #region private
+    private void ImportNodeId(RolePermission[] rolePermissions, Func<string, string> importNodeId)
+    {
+      if (this.RolePermissions is null)
+        return;
+      foreach (RolePermission _permission in rolePermissions)
+        _permission.RecalculateNodeIds(importNodeId);
+    }
     /// <summary>
     /// Clones the specified node.
     /// </summary>
@@ -172,6 +199,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// </summary>
     /// <returns>An instance of <see cref="UANode"/>.</returns>
     protected abstract UANode ParentClone();
+    #endregion
 
   }
 }

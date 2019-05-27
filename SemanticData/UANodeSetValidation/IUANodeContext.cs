@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -36,6 +37,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="node">The node <see cref="UANode" /> containing definition to be added to the model.</param>
     /// <param name="addReference">Used to add new reference to the common collection of references.</param>
     void Update(UANode node, Action<UAReferenceContext> addReference);
+    /// <summary>
+    /// Creates new embedded node exposed as the <see cref="IUANodeContext"/>.
+    /// </summary>
+    /// <param name="id">The identifier of the new node.</param>
+    /// <returns>An instance of the <see cref="IUANodeContext"/>. representing the new embedded node.</returns>
+    IUANodeContext CreateUAModelContext(NodeId id); 
 
   }
 

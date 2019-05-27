@@ -7,11 +7,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Xml;
 using UAOOI.SemanticData.BuildingErrorsHandling;
-using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
-using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -24,8 +21,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Initializes a new instance of the <see cref="UAModelContext" /> class.
     /// </summary>
-    /// <param name="model">The imported model.</param>
-    /// <param name="addressSpaceContext">The address space context.</param>
+    /// <param name="model">The imported OPC UA address space model represented by the instance of <see cref="UANodeSet"/>.</param>
+    /// <param name="addressSpaceContext">The address space context represented by an instance of <see cref="IAddressSpaceBuildContext"/>.</param>
     /// <exception cref="ArgumentNullException">addressSpaceContext
     /// or
     /// model.Aliases
@@ -33,51 +30,28 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     internal UAModelContext(UANodeSet model, IAddressSpaceBuildContext addressSpaceContext)
     {
       AddressSpaceContext = addressSpaceContext ?? throw new ArgumentNullException(nameof(addressSpaceContext));
-      m_UANodeSetModel = model ?? throw new ArgumentNullException(nameof(model));
-      if (model.Aliases == null)
-        throw new ArgumentNullException("nodeIdAlias");
-      AddAlias(model.Aliases);
+      if (model is null) throw new ArgumentNullException(nameof(model));
+      AddNamespaceUriTable(model.NamespaceUris);
+      AddAliases(model.Aliases);
       model.NamespaceUris = model.NamespaceUris ?? new string[] { };
     }
     #endregion
 
     #region IUAModelContext
-    /// <summary>
-    /// Exports the node identifier.
-    /// </summary>
-    /// <param name="nodeId">The node identifier as the string.</param>
-    /// <param name="defaultValue">The default value.</param>
-    /// <returns>The identifier an object of <see cref="System.Xml.XmlQualifiedName" /> or null if <paramref name="nodeId" /> has default value.</returns>
-    public XmlQualifiedName ExportBrowseName(string nodeId, NodeId defaultValue)
+    public string ImportQualifiedName(string source)
     {
-      NodeId _id = ImportNodeId(nodeId);
-      if (_id == NodeId.Null || _id == defaultValue)
-        return null;
-      return AddressSpaceContext.ExportBrowseName(_id);
-    }
-    public Parameter ExportArgument(DataSerialization.Argument argument)
-    {
-      XmlQualifiedName _dataType = ExportBrowseName(argument.DataType.Identifier, DataTypeIds.BaseDataType);
-      return AddressSpaceContext.ExportArgument(argument, _dataType);
-    }
-    public IUANodeContext GetOrCreateNodeContext(string nodeId)
-    {
-      NodeId _id = ImportNodeId(nodeId);
-      return AddressSpaceContext.GetOrCreateNodeContext(_id, this);
-    }
-    public QualifiedName ImportQualifiedName(QualifiedName source)
-    {
-      return new QualifiedName(source.Name, ImportNamespaceIndex(source.NamespaceIndex));
+      QualifiedName _qn = QualifiedName.Parse(source);
+      return new QualifiedName(_qn.Name, ImportNamespaceIndex(_qn.NamespaceIndex)).ToString();
     }
     /// <summary>
     /// Imports the node identifier if <paramref name="nodeId" /> is not empty.
     /// </summary>
     /// <param name="nodeId">The node identifier.</param>
     /// <returns>An instance of the <see cref="NodeId" /> or null is the <paramref name="nodeId" /> is null or empty.</returns>
-    public NodeId ImportNodeId(string nodeId)
+    public string ImportNodeId(string nodeId)
     {
       if (string.IsNullOrEmpty(nodeId))
-        return NodeId.Null;
+        return string.Empty;
       nodeId = LookupAlias(nodeId);
       // parse the string.
       NodeId _nodeId = NodeId.Parse(nodeId);
@@ -86,30 +60,37 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         ushort namespaceIndex = ImportNamespaceIndex(_nodeId.NamespaceIndex);
         _nodeId = new NodeId(_nodeId.IdentifierPart, namespaceIndex);
       }
-      return _nodeId;
-    }
-    public XmlQualifiedName ExportQualifiedName(QualifiedName source)
-    {
-      return new XmlQualifiedName(source.Name, AddressSpaceContext.GetNamespace(source.NamespaceIndex));
+      return _nodeId.ToString();
     }
     #endregion
 
+    public IBuildErrorsHandling Log { get; set; } = BuildErrorsHandling.Log;
+
     #region private
     //var
-    private Dictionary<string, string> m_AliasesDictionary = new Dictionary<string, string>();
-    private readonly UANodeSet m_UANodeSetModel;
+    private readonly Dictionary<string, string> m_AliasesDictionary = new Dictionary<string, string>();
+    private readonly List<string> m_NamespaceUris = new List<string>();
     private IAddressSpaceBuildContext AddressSpaceContext { get; }
     private static int m_NamespaceCount = 0;
     //methods
-    private void AddAlias(NodeIdAlias[] nodeIdAlias)
+    private void AddAliases(NodeIdAlias[] nodeIdAlias)
     {
+      if (nodeIdAlias is null)
+        return;
       foreach (NodeIdAlias _alias in nodeIdAlias)
-        m_AliasesDictionary.Add(_alias.Alias, _alias.Value);
+        m_AliasesDictionary.Add(_alias.Alias.Trim(), _alias.Value);
+    }
+    private void AddNamespaceUriTable(string[] namespaceUris)
+    {
+      if (namespaceUris is null)
+        return;
+      for (int i = 0; i < namespaceUris.Length; i++)
+        m_NamespaceUris.Add(namespaceUris[i]);
     }
     private string LookupAlias(string id)
     {
       string _newId = string.Empty;
-      return m_AliasesDictionary.TryGetValue(id, out _newId) ? _newId : id;
+      return m_AliasesDictionary.TryGetValue(id.Trim(), out _newId) ? _newId : id;
     }
     private ushort ImportNamespaceIndex(ushort namespaceIndex)
     {
@@ -117,12 +98,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (namespaceIndex == 0)
         return namespaceIndex;
       // return a new value if parameter is out of range.
-      string _identifier = $"NameUnknown{m_NamespaceCount++}";
-      if (m_UANodeSetModel.NamespaceUris.Length > namespaceIndex - 1)
-        _identifier = m_UANodeSetModel.NamespaceUris[namespaceIndex - 1];
+      string _identifier;
+      if (m_NamespaceUris.Count > namespaceIndex - 1)
+        _identifier = m_NamespaceUris[namespaceIndex - 1];
       else
-        BuildErrorsHandling.Log.TraceEvent(
-          TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedNamespaceIndex, $"ImportNamespaceIndex failed - namespace index {namespaceIndex - 1} is out of the NamespaceUris index. New namespace {_identifier} is created insted."));
+      {
+        _identifier = $@"http://tempuri.org/NameUnknown{m_NamespaceCount++}";
+        this.Log.TraceEvent(
+          TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedNamespaceIndex, $"ImportNamespaceIndex failed - namespace index {namespaceIndex - 1} is out of the NamespaceUris index. New namespace {_identifier} is created instead."));
+        m_NamespaceUris.Add(_identifier);
+      }
       return AddressSpaceContext.GetIndexOrAppend(_identifier);
     }
     #endregion

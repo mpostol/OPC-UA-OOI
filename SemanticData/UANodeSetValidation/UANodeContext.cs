@@ -31,11 +31,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="nodeId">An object of <see cref="NodeId"/> that stores an identifier for a node in a server's address space.</param>
     /// <param name="addressSpaceContext">The address space context.</param>
     /// <param name="modelContext">The model context.</param>
-    internal UANodeContext(NodeId nodeId, IAddressSpaceBuildContext addressSpaceContext, IUAModelContext modelContext)
+    internal UANodeContext(NodeId nodeId, IAddressSpaceBuildContext addressSpaceContext)
     {
       NodeIdContext = nodeId;
       this.m_AddressSpaceContext = addressSpaceContext;
-      this.UAModelContext = modelContext;
     }
     #endregion
 
@@ -80,19 +79,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return;
       }
       UANode = node;
-      QualifiedName _broseName = node.BrowseName.Parse(BuildErrorsHandling.Log.TraceEvent);
-      if (QualifiedName.IsNull(_broseName))
+      this.BrowseName= node.BrowseName.Parse(BuildErrorsHandling.Log.TraceEvent);
+      if (QualifiedName.IsNull(this.BrowseName))
       {
         NodeId _id = NodeId.Parse(UANode.NodeId);
-        _broseName = new QualifiedName($"EmptyBrowseName_{_id.IdentifierPart}", _id.NamespaceIndex);
-        BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, string.Format("New identifier {0} is generated to proceed.", _broseName)));
+        this.BrowseName = new QualifiedName($"EmptyBrowseName_{_id.IdentifierPart}", _id.NamespaceIndex);
+        BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, $"New identifier {this.BrowseName} is generated to proceed."));
       }
-      BrowseName = UAModelContext.ImportQualifiedName(_broseName);
       if (node.References == null)
         return;
       foreach (Reference _reference in node.References)
       {
-        UAReferenceContext _newReference = new UAReferenceContext(_reference, this.m_AddressSpaceContext, UAModelContext, this);
+        UAReferenceContext _newReference = new UAReferenceContext(_reference, this.m_AddressSpaceContext, this);
         switch (_newReference.ReferenceKind)
         {
           case ReferenceKindEnum.Custom:
@@ -112,6 +110,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         addReference(_newReference);
       }
     }
+    public IUANodeContext CreateUAModelContext(NodeId id)
+    {
+      return new UANodeContext(id, m_AddressSpaceContext);
+    }
     #endregion
 
     #region IUANodeBase
@@ -121,7 +123,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the BrowseName of the node.</returns>
     public XmlQualifiedName ExportNodeBrowseName()
     {
-      return UAModelContext.ExportQualifiedName(BrowseName);
+      return new XmlQualifiedName(BrowseName.Name, m_AddressSpaceContext.GetNamespace(BrowseName.NamespaceIndex));
     }
     /// <summary>
     /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent models.
@@ -221,7 +223,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       List<Parameter> _parameters = new List<Parameter>();
       foreach (DataSerialization.Argument _item in arguments.GetParameters())
-        _parameters.Add(UAModelContext.ExportArgument(_item));
+        _parameters.Add(ExportArgument(_item));
       return _parameters.ToArray();
     }
     /// <summary>
@@ -233,13 +235,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>An object of <see cref="XmlQualifiedName" /> representing the BrowseName of <see cref="UANode" /> of the node indexed by <paramref name="nodeId" /></returns>
     public XmlQualifiedName ExportBrowseName(string nodeId, NodeId defaultValue)
     {
-      return UAModelContext.ExportBrowseName(nodeId, defaultValue);
+      NodeId _id = NodeId.Parse(nodeId);
+      if (_id == NodeId.Null || _id == defaultValue)
+        return null;
+      return m_AddressSpaceContext.ExportBrowseName(_id);
     }
-    /// <summary>
-    /// Gets the instance of <see cref="UAModelContext" />containing definition of this node.
-    /// </summary>
-    /// <value>The model context for this node.</value>
-    public IUAModelContext UAModelContext { get; } = null;
+    public Parameter ExportArgument(DataSerialization.Argument argument)
+    {
+      XmlQualifiedName _dataType = ExportBrowseName(argument.DataType.Identifier, DataTypeIds.BaseDataType);
+      return m_AddressSpaceContext.ExportArgument(argument, _dataType);
+    }
     /// <summary>
     /// Exports the browse name of the base type.
     /// </summary>
@@ -350,7 +355,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #region private
     private IUANodeBase m_BaseTypeNode;
     private readonly IAddressSpaceBuildContext m_AddressSpaceContext = null;
-
     private bool m_InGetDerivedInstances = false;
     //methods
     /// <summary>

@@ -5,8 +5,11 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using System;
+
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
+
   public partial class UAVariable
   {
     /// <summary>
@@ -42,6 +45,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       if (this.ArrayDimensions == _other.ArrayDimensions)
         this.ArrayDimensions = string.Empty;
     }
+    internal override void RecalculateNodeIds(IUAModelContext modelContext)
+    {
+      base.RecalculateNodeIds(modelContext);
+      this.DataType = modelContext.ImportNodeId(DataType);
+    }
     /// <summary>
     /// Get the clone from the types derived from this one.
     /// </summary>
@@ -61,7 +69,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         Historizing = this.Historizing,
       };
       return _ret;
-
     }
   }
 }

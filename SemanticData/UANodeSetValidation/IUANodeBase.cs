@@ -65,11 +65,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     QualifiedName BrowseName { get; set; }
     /// <summary>
-    /// Gets the instance of <see cref="IUAModelContext" />containing definition of this node.
-    /// </summary>
-    /// <value>The model context for this node.</value>
-    IUAModelContext UAModelContext { get; }
-    /// <summary>
     /// Converts the <paramref name="nodeId" /> representing instance of <see cref="NodeId" /> and returns <see cref="XmlQualifiedName" />
     /// representing the BrowseName name of the <see cref="UANode" /> pointed out by it.
     /// </summary>

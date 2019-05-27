@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -87,7 +86,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         throw new ArgumentNullException("model", "the model cannot be null");
       if (!model.Exists)
         throw new FileNotFoundException("The imported file does not exist", model.FullName);
-      UANodeSet _nodeSet = UANodeSet.ReadModellFile(model);
+      UANodeSet _nodeSet = UANodeSet.ReadModelFile(model);
       ImportNodeSet(_nodeSet);
     }
     /// <summary>
@@ -153,14 +152,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the or create node context.
     /// </summary>
     /// <param name="nodeId">The node identifier.</param>
-    /// <param name="modelContext">The model context.</param>
-    /// <returns>IUANodeContext.</returns>
-    IUANodeContext IAddressSpaceBuildContext.GetOrCreateNodeContext(NodeId nodeId, IUAModelContext modelContext)
+    /// <param name="createUAModelContext">Delegated capturing functionality to create ua model context.</param>
+    /// <returns>Returns an instance of <see cref="IUANodeContext" />.</returns>
+    public IUANodeContext GetOrCreateNodeContext(NodeId nodeId, Func<NodeId, IUANodeContext> createUAModelContext)
     {
       string _idKey = nodeId.ToString();
       if (!m_NodesDictionary.TryGetValue(_idKey, out IUANodeContext _ret))
       {
-        _ret = new UANodeContext(nodeId, this, modelContext);
+        _ret = createUAModelContext(nodeId);
         m_NodesDictionary.Add(_idKey, _ret);
       }
       return _ret;
@@ -262,7 +261,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
     //vars
-    private Validator m_Validator = new Validator();
+    private readonly Validator m_Validator = new Validator();
     private IModelFactory m_InformationModelFactory = new InformationModelFactoryBase();
     private Dictionary<string, UAReferenceContext> m_References = new Dictionary<string, UAReferenceContext>();
     private NamespaceTable m_NamespaceTable = null;
@@ -277,23 +276,24 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Extensions is omitted during the import"));
       string _namespace = model.NamespaceUris == null ? m_NamespaceTable.GetString(0) : model.NamespaceUris[0];
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering AddressSpaceContext.ImportNodeSet - starting import {0}.", _namespace)));
-      UAModelContext _modelContext = new UAModelContext(model, this);
+      IUAModelContext _modelContext = new UAModelContext(model, this);
+      model.RecalculateNodeIds(_modelContext);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - context for imported model is created and starting import nodes."));
       foreach (UANode _nd in model.Items)
-        this.ImportUANode(_nd, _modelContext, m_TraceEvent);
+        this.ImportUANode(_nd, m_TraceEvent);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Finishing AddressSpaceContext.ImportNodeSet - imported {0} nodes.", model.Items.Length)));
     }
-    private void ImportUANode(UANode node, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
+    private void ImportUANode(UANode node, Action<TraceMessage> traceEvent)
     {
       try
       {
-        IUANodeContext _newNode = modelContext.GetOrCreateNodeContext(node.NodeId);
+        NodeId _nodeId = NodeId.Parse(node.NodeId);
+        IUANodeContext _newNode = GetOrCreateNodeContext(_nodeId, x => new UANodeContext(_nodeId, this));
         _newNode.Update(node, _reference =>
               {
                 if (!m_References.ContainsKey(_reference.Key))
                   m_References.Add(_reference.Key, _reference);
-              }
-        );
+              });
       }
       catch (Exception _ex)
       {

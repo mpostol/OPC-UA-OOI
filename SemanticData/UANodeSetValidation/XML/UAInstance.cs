@@ -5,6 +5,8 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using System;
+
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
 
@@ -32,7 +34,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       ret.ParentNodeId = this.ParentNodeId;
       base.CloneUANode(this);
     }
-
+    internal override void RecalculateNodeIds(IUAModelContext modelContext)
+    {
+      base.RecalculateNodeIds(modelContext);
+      this.ParentNodeId = modelContext.ImportNodeId(this.ParentNodeId);
+    }
   }
 
 }

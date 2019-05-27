@@ -16,6 +16,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   /// <seealso cref="UANode" />
   public abstract partial class UAType
   {
+
     /// <summary>
     /// Indicates whether the the inherited parent object is also equal to another object.
     /// </summary>

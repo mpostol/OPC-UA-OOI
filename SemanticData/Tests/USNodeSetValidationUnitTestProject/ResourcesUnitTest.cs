@@ -17,7 +17,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     {
       FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
-      UANodeSet _model = UANodeSet.ReadModellFile(_testDataFileInfo);
+      UANodeSet _model = UANodeSet.ReadModelFile(_testDataFileInfo);
       Assert.IsNotNull(_model);
     }
     [TestMethod]

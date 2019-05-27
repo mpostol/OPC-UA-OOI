@@ -56,7 +56,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case NodeClassEnum.UADataType:
             if (instanceDeclaration != null)
               throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
-            CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext.UAModelContext), UpdateType );
+            CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext), UpdateType );
             break;
           case NodeClassEnum.UAMethod:
             if (nodeContext.Equals(instanceDeclaration))
@@ -185,9 +185,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.ContainsNoLoops = nodeSet.ContainsNoLoops;//TODO add test case against the loops in the model.
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(traceEvent.TraceEvent);
     }
-    private void Update(IDataTypeFactory nodeDesign, UADataType nodeSet, IUAModelContext modelContext)
+    private void Update(IDataTypeFactory nodeDesign, UADataType nodeSet, IUANodeBase nodeContext)
     {
-      nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), modelContext, traceEvent.TraceEvent);
+      nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), nodeContext, traceEvent.TraceEvent);
       nodeDesign.DataTypePurpose = nodeSet.Purpose.ConvertToDataTypePurpose();
       if (nodeSet.Purpose != XML.DataTypePurpose.Normal)
         traceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"DataTypePurpose value {nodeSet.Purpose } is not supported by the tool"));

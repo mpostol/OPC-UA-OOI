@@ -5,10 +5,13 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using System;
+
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   public partial class UADataType
   {
+    
     /// <summary>
     /// Get the clone from the types derived from this one.
     /// </summary>
@@ -23,5 +26,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       base.CloneUAType(_ret);
       return _ret;
     }
+    internal override void RecalculateNodeIds(IUAModelContext modelContext)
+    {
+      base.RecalculateNodeIds(modelContext);
+      if (this.Definition is null)
+        return;
+      this.Definition.RecalculateNodeIds(modelContext.ImportNodeId);
+    }
+
   }
 }

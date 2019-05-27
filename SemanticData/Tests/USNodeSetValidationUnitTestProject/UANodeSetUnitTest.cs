@@ -6,6 +6,7 @@
 //___________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -54,6 +55,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAView, _toTest.NodeClassEnum);
       _toTest = new UAMethod();
       Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAMethod, _toTest.NodeClassEnum);
+    }
+    [TestMethod]
+    public void UAMethodTest()
+    {
+      UAMethod _toTest = new UAMethod();
+      Mock<IUAModelContext> _mock = new Mock<IUAModelContext>();
+      _toTest.RecalculateNodeIds(_mock.Object);
+      Assert.Inconclusive("TODO #40"); //TODO #40 UAMethodTest must be implemented
     }
     [TestMethod]
     [TestCategory("Deployment")]

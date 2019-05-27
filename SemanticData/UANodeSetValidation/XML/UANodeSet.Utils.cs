@@ -51,14 +51,5 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     private const string m_UADefinedTypesName = @"UAOOI.SemanticData.UANodeSetValidation.XML.Opc.Ua.NodeSet2.xml";
     #endregion
 
-    //TODO #40 remove
-//#if DEBUG
-//    /// <summary>
-//    /// Gets the name of the xml file path containing the standard OPC UA NodeSet
-//    /// </summary>
-//    /// <value>The name of the resource.</value>
-//    internal static string UTUADefinedTypesName { get { return m_UADefinedTypesName; } }
-//#endif
-
   }
 }

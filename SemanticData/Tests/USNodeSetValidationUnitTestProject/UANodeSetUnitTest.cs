@@ -6,7 +6,6 @@
 //___________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,48 +21,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
   public class NodeSetUnitTest
   {
 
-    #region TestContext
-    private TestContext testContextInstance;
-    /// <summary>
-    ///Gets or sets the test context which provides
-    ///information about and functionality for the current test run.
-    ///</summary>
-    public TestContext TestContext
-    {
-      get => testContextInstance;
-      set => testContextInstance = value;
-    }
-    #endregion
-
     #region TestMethod
-    [TestMethod]
-    public void NodeClassEnumTest()
-    {
-      UANode _toTest = new UADataType();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UADataType, _toTest.NodeClassEnum);
-      _toTest = new UAObject();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAObject, _toTest.NodeClassEnum);
-      _toTest = new UAObjectType();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAObjectType, _toTest.NodeClassEnum);
-      _toTest = new UAReferenceType();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAReferenceType, _toTest.NodeClassEnum);
-      _toTest = new UAVariable();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAVariable, _toTest.NodeClassEnum);
-      _toTest = new UAVariableType();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAVariableType, _toTest.NodeClassEnum);
-      _toTest = new UAView();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAView, _toTest.NodeClassEnum);
-      _toTest = new UAMethod();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAMethod, _toTest.NodeClassEnum);
-    }
-    [TestMethod]
-    public void UAMethodTest()
-    {
-      UAMethod _toTest = new UAMethod();
-      Mock<IUAModelContext> _mock = new Mock<IUAModelContext>();
-      _toTest.RecalculateNodeIds(_mock.Object);
-      Assert.Inconclusive("TODO #40"); //TODO #40 UAMethodTest must be implemented
-    }
     [TestMethod]
     [TestCategory("Deployment")]
     [ExpectedExceptionAttribute(typeof(System.InvalidOperationException))]

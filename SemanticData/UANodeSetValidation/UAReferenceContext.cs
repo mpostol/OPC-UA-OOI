@@ -26,13 +26,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #region constructor
     internal UAReferenceContext(Reference reference, IAddressSpaceBuildContext addressSpaceContext, IUANodeContext parentNode)
     {
-      IUANodeContext targetNode = addressSpaceContext.GetOrCreateNodeContext(NodeId.Parse(reference.Value), parentNode.CreateUAModelContext);
+      IUANodeContext targetNode = addressSpaceContext.GetOrCreateNodeContext(NodeId.Parse(reference.Value), parentNode.CreateUANodeContext);
       this.m_AddressSpace = addressSpaceContext;
       this.ParentNode = parentNode;
       this.SourceNode = reference.IsForward ? parentNode : targetNode;
       this.Reference = reference;
       this.TargetNode = reference.IsForward ? targetNode : parentNode;
-      this.TypeNode = addressSpaceContext.GetOrCreateNodeContext(NodeId.Parse(reference.ReferenceType), parentNode.CreateUAModelContext);
+      this.TypeNode = addressSpaceContext.GetOrCreateNodeContext(NodeId.Parse(reference.ReferenceType), parentNode.CreateUANodeContext);
     }
     #endregion
 
@@ -81,9 +81,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>XmlQualifiedName.</returns>
     internal XmlQualifiedName GetReferenceTypeName()
     {
-      if (IsDefault(this.TypeNode.NodeIdContext))
-        return null;
-      return m_AddressSpace.ExportBrowseName(this.TypeNode.NodeIdContext);
+      return m_AddressSpace.ExportBrowseName(this.TypeNode.NodeIdContext, GetDefault());
     }
     /// <summary>
     /// Calculates the browse path starting from the node pointed out by this reference. If <see cref="XML.Reference.IsForward"/> is <c>true</c> <see cref="UAReferenceContext.TargetNode"/> is use,  <see cref="UAReferenceContext.SourceNode"/> otherwise. 
@@ -157,7 +155,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //fields
     private IAddressSpaceBuildContext m_AddressSpace;
     //methods
-    private bool IsDefault(NodeId node)
+    private NodeId GetDefault()
     {
       NodeId _default = NodeId.Null;
       switch (ReferenceKind)
@@ -177,7 +175,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         default:
           break;
       }
-      return _default == node;
+      return _default;
     }
     #endregion
 

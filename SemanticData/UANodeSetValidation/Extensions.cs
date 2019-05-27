@@ -153,7 +153,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return string.Join(", ", arrayDimensions);
     }
-    internal static void GetParameters(this XML.DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory dataTypeDefinitionFactory, IUANodeBase nodeContext, Action<TraceMessage> traceEvent)
+    internal static void GetParameters(this XML.DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory dataTypeDefinitionFactory, IAddressSpaceBuildContext nodeContext, Action<TraceMessage> traceEvent)
     {
       if (dataTypeDefinition is null)
         return;
@@ -171,7 +171,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _nP.Name = _item.Name;
         _nP.SymbolicName = _item.SymbolicName;
         _item.DisplayName.ExportLocalizedTextArray(_nP.AddDisplayName);
-        _nP.DataType = nodeContext.ExportBrowseName(_item.DataType, DataTypes.BaseDataType);
+        _nP.DataType = nodeContext.ExportBrowseName(NodeId.Parse(_item.DataType), DataTypes.BaseDataType);
         _nP.ValueRank = _item.ValueRank.GetValueRank(traceEvent);
         _nP.ArrayDimensions = _item.ArrayDimensions;
         _nP.MaxStringLength = _item.MaxStringLength;

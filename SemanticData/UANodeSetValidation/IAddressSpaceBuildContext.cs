@@ -20,10 +20,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   {
 
     /// <summary>
-    /// Exports the browse name.
+    /// Exports the browse name if it is not default value, otherwise null.
     /// </summary>
     /// <param name="id">The identifier.</param>
-    XmlQualifiedName ExportBrowseName(NodeId id);
+    /// <param name="defaultValue">The default value.</param>
+    /// <returns>XmlQualifiedName.</returns>
+    XmlQualifiedName ExportBrowseName(NodeId id, NodeId defaultValue);
     /// <summary>
     /// Exports the argument for a method.
     /// </summary>
@@ -61,18 +63,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>All references targeting the selected by the <paramref name="node"/> node</returns>
     IEnumerable<UAReferenceContext> GetReferences2Me(IUANodeContext node);
     /// <summary>
-    /// Gets the derived instances.
+    /// Gets the children nodes for the <paramref name="rootNode"/>.
     /// </summary>
-    /// <param name="rootNode">The root node.</param>
-    /// <param name="list">The list o d nodes.</param>
-    void GetDerivedInstances(IUANodeContext rootNode, List<IUANodeBase> list);
-    //TODO #40 - remove
-    ///// <summary>
-    ///// Gets the base type node if exist.
-    ///// </summary>
-    ///// <param name="nodeClass">The node class.</param>
-    ///// <returns>An instance of the <see cref="IUANodeBase"/> if exist in the AddressSpace, null otherwise.</returns>
-    //IUANodeBase GetBaseTypeNode(XML.NodeClassEnum nodeClass);
+    /// <param name="rootNode">The root node of the requested children.</param>
+    /// <param name="nodes">The nodes collection that is to be used to add children.</param>
+    void GetChildren(IUANodeContext rootNode, List<IUANodeBase> nodes);
 
   }
 

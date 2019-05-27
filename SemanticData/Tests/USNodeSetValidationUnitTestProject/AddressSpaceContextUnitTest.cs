@@ -150,6 +150,31 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<int>(1, _toExport.Count<IUANodeContext>());
       _asp.TestConsistency(10, 0);
     }
+    //TODO - adopt the test
+    //public void ExportBrowseNameTest()
+    //{
+    //  UANodeSet _tm = TestData.CreateNodeSetModel();
+    //  Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+    //  UANode _nodeFactory = new UAVariable()
+    //  {
+    //    NodeId = "ns=1;i=47",
+    //    BrowseName = "EURange",
+    //    ParentNodeId = "ns=1;i=43",
+    //    DataType = "i=884",
+    //    DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
+    //  };
+    //  UANodeContext _node = new UANodeContext(NodeId.Parse("ns=1;i=47"), _asMock.Object);
+    //  XmlQualifiedName _resolvedName = _node.ExportNodeBrowseName();
+    //  Assert.IsNull(_resolvedName);
+    //  _resolvedName = _node.ExportBrowseName(null, UAInformationModel.DataTypes.BaseDataType);
+    //  Assert.IsNull(_resolvedName);
+    //  _resolvedName = _node.ExportBrowseName(new NodeId(UAInformationModel.DataTypes.BaseDataType, 0).ToString(), UAInformationModel.DataTypes.BaseDataType);
+    //  Assert.IsNull(_resolvedName);
+    //  _resolvedName = _node.ExportBrowseName(new NodeId(UAInformationModel.DataTypes.Structure, 0).ToString(), UAInformationModel.DataTypes.BaseDataType);
+    //  Assert.IsNotNull(_resolvedName);
+    //  Assert.AreEqual(@"http://opcfoundation.org/UA/:Structure", _resolvedName.ToString());
+    //}
+
     #region private
     private class AddressSpaceWrapper
     {

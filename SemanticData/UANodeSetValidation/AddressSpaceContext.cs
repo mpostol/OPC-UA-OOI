@@ -121,8 +121,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="nodeId">The identifier of the node to find.</param>
     /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the <see cref="UANode.BrowseName" /> of the node indexed by <paramref name="nodeId" /></returns>
-    public XmlQualifiedName ExportBrowseName(NodeId nodeId)
+    public XmlQualifiedName ExportBrowseName(NodeId nodeId, NodeId defaultValue)
     {
+    //  throw new NotImplementedException();
+    //}
+
+    //public XmlQualifiedName ExportBrowseName(NodeId nodeId)
+    //{
       IUANodeContext _context = TryGetUANodeContext(nodeId, m_TraceEvent);
       if (_context == null)
         return null;
@@ -200,21 +205,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return m_References.Values.Where<UAReferenceContext>(x => x.TargetNode == index && x.ParentNode != index);
     }
     /// <summary>
-    /// Gets the derived instances.
+    /// Gets the children nodes for this node.
     /// </summary>
     /// <param name="rootNode">The root node.</param>
-    /// <param name="list">The list o d nodes.</param>
-    void IAddressSpaceBuildContext.GetDerivedInstances(IUANodeContext rootNode, List<IUANodeBase> list)
+    /// <param name="nodes">The nodes collection that is to be used to add children.</param>
+    void IAddressSpaceBuildContext.GetChildren(IUANodeContext rootNode, List<IUANodeBase> nodes)
     {
-      //TODO #40 remove
-      //List<IUANodeContext> _col = new List<IUANodeContext>
-      //{
-      //  rootNode
-      //};
-      //GetBaseTypes(rootNode, _col);
-      //foreach (IUANodeContext _type in _col)
-      GetChildren(rootNode, list);
+      IEnumerable<IUANodeContext> _children = m_References.Values.Where<UAReferenceContext>(x => x.SourceNode == rootNode).
+                                                                  Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
+                                                                  Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
+      nodes.AddRange(_children);
     }
+    //TODO #40 remove commented functionality
     ///// <summary>
     ///// Gets an instance of the <see cref="IAddressSpaceBuildContext"/> representing selected by <paramref name="nodeClass"/> base type node if applicable, null otherwise.
     ///// </summary>
@@ -261,7 +263,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
     //vars
-    private readonly Validator m_Validator = new Validator();
+    private readonly IValidator m_Validator = new Validator();
     private IModelFactory m_InformationModelFactory = new InformationModelFactoryBase();
     private Dictionary<string, UAReferenceContext> m_References = new Dictionary<string, UAReferenceContext>();
     private NamespaceTable m_NamespaceTable = null;
@@ -315,13 +317,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _ret;
     }
-    private void GetChildren(IUANodeContext type, List<IUANodeBase> instances)
-    {
-      IEnumerable<IUANodeContext> _children = m_References.Values.Where<UAReferenceContext>(x => x.SourceNode == type).
-                                                                  Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
-                                                                  Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
-      instances.AddRange(_children);
-    }
     private void GetBaseTypes(IUANodeContext rootNode, List<IUANodeContext> inheritanceChain)
     {
       if (rootNode == null)
@@ -338,7 +333,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         GetBaseTypes(_derived.First<IUANodeContext>(), inheritanceChain);
       rootNode.InRecursionChain = false;
     }
-    private void ValidateAndExportModel(int nameSpaceIndex, Validator validator)
+    private void ValidateAndExportModel(int nameSpaceIndex, IValidator validator)
     {
       IEnumerable<IUANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
       List<IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
@@ -365,12 +360,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         try
         {
           validator.ValidateExportNode(_item, null, InformationModelFactory, null); //y =>
-          //TODO #40 remove
-          //{
-          //  if (y.TraceLevel != TraceEventType.Verbose)
-          //    _errors.Add(y.BuildError);
-          //  m_TraceEvent(y);
-          //});
           _nc++;
         }
         catch (Exception _ex)

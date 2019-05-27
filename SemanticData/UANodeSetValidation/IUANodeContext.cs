@@ -42,7 +42,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="id">The identifier of the new node.</param>
     /// <returns>An instance of the <see cref="IUANodeContext"/>. representing the new embedded node.</returns>
-    IUANodeContext CreateUAModelContext(NodeId id); 
+    IUANodeContext CreateUANodeContext(NodeId id); 
 
   }
 

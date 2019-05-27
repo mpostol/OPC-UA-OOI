@@ -19,6 +19,26 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     #region tests
     [TestMethod]
+    public void NodeClassEnumTest()
+    {
+      UANode _toTest = new UADataType();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UADataType, _toTest.NodeClassEnum);
+      _toTest = new UAObject();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAObject, _toTest.NodeClassEnum);
+      _toTest = new UAObjectType();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAObjectType, _toTest.NodeClassEnum);
+      _toTest = new UAReferenceType();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAReferenceType, _toTest.NodeClassEnum);
+      _toTest = new UAVariable();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAVariable, _toTest.NodeClassEnum);
+      _toTest = new UAVariableType();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAVariableType, _toTest.NodeClassEnum);
+      _toTest = new UAView();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAView, _toTest.NodeClassEnum);
+      _toTest = new UAMethod();
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAMethod, _toTest.NodeClassEnum);
+    }
+    [TestMethod]
     public void RemoveInheritedKeepDifferentValuesTest()
     {
       UAObjectType _derived = GetDerivedFromComplexObjectType();

@@ -25,6 +25,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   internal class Validator : IValidator
   {
 
+    public Validator()
+    {
+      AS = AddressSpaceFactory.AddressSpace(this.Log.TraceEvent) as IAddressSpaceBuildContext;
+    }
+
+    public IBuildErrorsHandling Log { get; set; } = BuildErrorsHandling.Log;
+    public IAddressSpaceBuildContext AS { get; set; }
+    
     #region internal API
     /// <summary>
     /// Validates <paramref name="nodeContext" /> and exports it using an object of <see cref="IModelFactory" />  type.
@@ -56,7 +64,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case NodeClassEnum.UADataType:
             if (instanceDeclaration != null)
               throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
-            CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext), UpdateType );
+            CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType );
             break;
           case NodeClassEnum.UAMethod:
             if (nodeContext.Equals(instanceDeclaration))
@@ -92,7 +100,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case NodeClassEnum.UAVariableType:
             if (instanceDeclaration != null)
               throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
-            CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.AddNodeFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y, nodeContext), UpdateType);
+            CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.AddNodeFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType);
             break;
           case NodeClassEnum.UAView:
             if (instanceDeclaration != null)
@@ -120,7 +128,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       try
       {
-        Update(propertyInstance, nodeSet, nodeContext);
+        Update(propertyInstance, nodeSet);
         propertyInstance.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName();
         if (!nodeContext.IsProperty)
           traceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, string.Format("Creating Property - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
@@ -134,7 +142,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       try
       {
-        Update(variableInstance, nodeSet, nodeContext);
+        Update(variableInstance, nodeSet);
         variableInstance.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName();
         if (nodeContext.IsProperty)
           traceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Variable, string.Format("Creating Variable - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
@@ -144,11 +152,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, string.Format("Cannot resolve the reference for Variable because of error {0} at: {1}.", _ex, _ex.StackTrace)));
       }
     }
-    private void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet, IUANodeBase nodeContext)
+    private void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet)
     {
       nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(traceEvent.TraceEvent);
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(string.Empty);
-      nodeDesign.DataType = nodeContext.ExportBrowseName(nodeSet.DataType, DataTypes.Number);//TODO add test case must be DataType, must not be abstract
+      nodeDesign.DataType = AS.ExportBrowseName(NodeId.Parse(nodeSet.DataType), DataTypes.Number);//TODO add test case must be DataType, must not be abstract
       nodeDesign.DefaultValue = nodeSet.Value; //TODO add test case must be of type defined by DataType
       nodeDesign.Historizing = nodeSet.Historizing.Export(false);
       nodeDesign.MinimumSamplingInterval = nodeSet.MinimumSamplingInterval.Export(0D);
@@ -156,10 +164,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (nodeSet.Translation != null)
         traceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "- the Translation element for the UAVariable"));
     }
-    private void Update(IVariableTypeFactory nodeDesign, UAVariableType nodeSet, IUANodeBase nodeContext)
+    private void Update(IVariableTypeFactory nodeDesign, UAVariableType nodeSet)
     {
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(string.Empty);
-      nodeDesign.DataType = nodeContext.ExportBrowseName(nodeSet.DataType, DataTypes.Number);
+      nodeDesign.DataType = AS.ExportBrowseName(NodeId.Parse(nodeSet.DataType), DataTypes.Number);
       nodeDesign.DefaultValue = nodeSet.Value;
       nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(traceEvent.TraceEvent);
     }
@@ -185,9 +193,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.ContainsNoLoops = nodeSet.ContainsNoLoops;//TODO add test case against the loops in the model.
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(traceEvent.TraceEvent);
     }
-    private void Update(IDataTypeFactory nodeDesign, UADataType nodeSet, IUANodeBase nodeContext)
+    private void Update(IDataTypeFactory nodeDesign, UADataType nodeSet)
     {
-      nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), nodeContext, traceEvent.TraceEvent);
+      nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), AS, traceEvent.TraceEvent);
       nodeDesign.DataTypePurpose = nodeSet.Purpose.ConvertToDataTypePurpose();
       if (nodeSet.Purpose != XML.DataTypePurpose.Normal)
         traceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"DataTypePurpose value {nodeSet.Purpose } is not supported by the tool"));

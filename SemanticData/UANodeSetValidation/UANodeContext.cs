@@ -47,7 +47,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (this.UANode == null)
       {
-        BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The target node NodeId={this.NodeIdContext}, current path {string.Join(", ", path)}"));
+        Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The target node NodeId={this.NodeIdContext}, current path {string.Join(", ", path)}"));
         return;
       }
       IEnumerable<UAReferenceContext> _parentConnector = m_AddressSpaceContext.GetReferences2Me(this).Where<UAReferenceContext>(x => x.ChildConnector);
@@ -73,18 +73,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (node == null)
         throw new ArgumentException(nameof(node), $"Argument must not be null at {nameof(Update)} ");
-      if (UANode != null)
+      if (this.UANode != null)
       {
-        BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, string.Format("The {0} is already defined and is removed from further processing.", node.NodeId.ToString())));
+        Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, string.Format("The {0} is already defined and is removed from further processing.", node.NodeId.ToString())));
         return;
       }
       UANode = node;
-      this.BrowseName= node.BrowseName.Parse(BuildErrorsHandling.Log.TraceEvent);
+      this.BrowseName= node.BrowseName.Parse(Log.TraceEvent);
       if (QualifiedName.IsNull(this.BrowseName))
       {
         NodeId _id = NodeId.Parse(UANode.NodeId);
         this.BrowseName = new QualifiedName($"EmptyBrowseName_{_id.IdentifierPart}", _id.NamespaceIndex);
-        BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, $"New identifier {this.BrowseName} is generated to proceed."));
+        Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, $"New identifier {this.BrowseName} is generated to proceed."));
       }
       if (node.References == null)
         return;
@@ -110,7 +110,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         addReference(_newReference);
       }
     }
-    public IUANodeContext CreateUAModelContext(NodeId id)
+    public IUANodeContext CreateUANodeContext(NodeId id)
     {
       return new UANodeContext(id, m_AddressSpaceContext);
     }
@@ -129,7 +129,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent models.
     /// </summary>
     /// <param name="nodeFactory">The node container.</param>
-    void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, IValidator m_Validator)
+    void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, IValidator validator)
     {
       if (nodeFactory == null)
         throw new ArgumentNullException(nameof(nodeFactory), $"{nodeFactory} must not be null in {nameof(IUANodeBase.CalculateNodeReferences)}");
@@ -143,7 +143,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             if (_ReferenceType == XmlQualifiedName.Empty)
             {
               BuildError _err = BuildError.DanglingReferenceTarget;
-              BuildErrorsHandling.Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(_err, "Information"));
+              Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(_err, "Information"));
             }
             IReferenceFactory _or = nodeFactory.NewReference();
             _or.IsInverse = !_rfx.Reference.IsForward;
@@ -176,7 +176,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           IUANodeBase _instanceDeclaration = null;
           if (!string.IsNullOrEmpty(_rc.TargetNode.BrowseName.Name))
             _instanceDeclaration = _derivedChildren.ContainsKey(_rc.TargetNode.BrowseName.Name) ? _derivedChildren[_rc.TargetNode.BrowseName.Name] : null;
-          m_Validator.ValidateExportNode(_rc.TargetNode, _instanceDeclaration, nodeFactory, _rc);
+          validator.ValidateExportNode(_rc.TargetNode, _instanceDeclaration, nodeFactory, _rc);
         }
         catch (Exception ex)
         {
@@ -207,7 +207,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <value>An instance of <see cref="XmlQualifiedName" /> representing the base type.</value>
     public XmlQualifiedName ExportBaseTypeBrowseName(bool type)
     {
-      return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type, BuildErrorsHandling.Log.TraceEvent));
+      return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type, Log.TraceEvent));
     }
     /// <summary>
     /// Gets the modeling rule associated with this node.
@@ -226,23 +226,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _parameters.Add(ExportArgument(_item));
       return _parameters.ToArray();
     }
-    /// <summary>
-    /// Converts the <paramref name="nodeId" /> representing instance of <see cref="NodeId" /> and returns <see cref="XmlQualifiedName" />
-    /// representing the BrowseName name of the <see cref="UANode" /> pointed out by it.
-    /// </summary>
-    /// <param name="nodeId">The node identifier.</param>
-    /// <param name="defaultValue">The default value.</param>
-    /// <returns>An object of <see cref="XmlQualifiedName" /> representing the BrowseName of <see cref="UANode" /> of the node indexed by <paramref name="nodeId" /></returns>
-    public XmlQualifiedName ExportBrowseName(string nodeId, NodeId defaultValue)
-    {
-      NodeId _id = NodeId.Parse(nodeId);
-      if (_id == NodeId.Null || _id == defaultValue)
-        return null;
-      return m_AddressSpaceContext.ExportBrowseName(_id);
-    }
     public Parameter ExportArgument(DataSerialization.Argument argument)
     {
-      XmlQualifiedName _dataType = ExportBrowseName(argument.DataType.Identifier, DataTypeIds.BaseDataType);
+      //TODO #40 should be moved to AS
+      XmlQualifiedName _dataType = m_AddressSpaceContext.ExportBrowseName(NodeId.Parse(argument.DataType.Identifier), DataTypeIds.BaseDataType);
       return m_AddressSpaceContext.ExportArgument(argument, _dataType);
     }
     /// <summary>
@@ -278,7 +265,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         m_InGetDerivedInstances = true;
         List<IUANodeBase> _derivedChildren = new List<IUANodeBase>();
-        m_AddressSpaceContext.GetDerivedInstances(this, _derivedChildren);
+        m_AddressSpaceContext.GetChildren(this, _derivedChildren);
         Dictionary<string, IUANodeBase> _ret = m_BaseTypeNode == null ? new Dictionary<string, IUANodeBase>() : m_BaseTypeNode.GetDerivedInstances();
         foreach (UANodeContext item in _derivedChildren)
         {
@@ -351,6 +338,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         this.ModelingRule = null;
     }
     #endregion
+
+    public IBuildErrorsHandling Log { get; set; } = BuildErrorsHandling.Log;
 
     #region private
     private IUANodeBase m_BaseTypeNode;

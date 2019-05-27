@@ -65,14 +65,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     QualifiedName BrowseName { get; set; }
     /// <summary>
-    /// Converts the <paramref name="nodeId" /> representing instance of <see cref="NodeId" /> and returns <see cref="XmlQualifiedName" />
-    /// representing the BrowseName name of the <see cref="UANode" /> pointed out by it.
-    /// </summary>
-    /// <param name="nodeId">The node identifier.</param>
-    /// <param name="defaultValue">The default value.</param>
-    /// <returns>An object of <see cref="XmlQualifiedName" /> representing the BrowseName of <see cref="UANode" /> of the node indexed by <paramref name="nodeId" /></returns>
-    XmlQualifiedName ExportBrowseName(string nodeId, NodeId defaultValue);
-    /// <summary>
     /// Exports the BrowseName of the BaseType.
     /// </summary>
     /// <param name="type">if set to <c>true</c> the source node represents type. <c>false</c> if it is an instance.</param>
@@ -96,5 +88,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// If a member is overridden all inherited values of the node attributes must be removed.
     /// </remarks>
     void RemoveInheritedValues(IUANodeBase instanceDeclaration);
+
   }
 }

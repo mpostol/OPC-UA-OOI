@@ -71,6 +71,27 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.IsTrue(_derived.Equals(_base));
     }
     [TestMethod]
+    public void EqualsUAVariableTest()
+    {
+      UAVariable _derivedNode = new UAVariable()
+      {
+        NodeId = "ns=1;i=47",
+        BrowseName = "EURange",
+        ParentNodeId = "ns=1;i=43",
+        DataType = "i=884",
+        DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
+      };
+      UANode _baseNode = new UAVariable()
+      {
+        NodeId = "i=17568",
+        BrowseName = "EURange",
+        ParentNodeId = "i=15318",
+        DataType = "i=884",
+        DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
+      };
+      Assert.IsTrue(_derivedNode.Equals(_baseNode));
+    }
+    [TestMethod]
     public void NotEqualsInstancesTest()
     {
       UAObject _derived = GetInstanceOfDerivedFromComplexObjectType();

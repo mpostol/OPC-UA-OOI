@@ -36,6 +36,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public AddressSpaceContext(Action<TraceMessage> traceEvent)
     {
       m_TraceEvent = traceEvent ?? throw new ArgumentNullException("traceEvent", "traceEvent - cannot be null");
+      m_Validator = new Validator(this);
       m_NamespaceTable = new NamespaceTable();
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting creation the OPC UA Address Space."));
       UANodeSet _standard = UANodeSet.ReadUADefinedTypes();
@@ -120,14 +121,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// encapsulating the <see cref="UANode.BrowseName" /> of this node if exist. Returns<c>null</c> otherwise.
     /// </summary>
     /// <param name="nodeId">The identifier of the node to find.</param>
+    /// <param name="defaultValue">The default value.</param>
     /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the <see cref="UANode.BrowseName" /> of the node indexed by <paramref name="nodeId" /></returns>
     public XmlQualifiedName ExportBrowseName(NodeId nodeId, NodeId defaultValue)
     {
-    //  throw new NotImplementedException();
-    //}
-
-    //public XmlQualifiedName ExportBrowseName(NodeId nodeId)
-    //{
+      if (nodeId == defaultValue)
+        return null;
       IUANodeContext _context = TryGetUANodeContext(nodeId, m_TraceEvent);
       if (_context == null)
         return null;
@@ -205,17 +204,22 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return m_References.Values.Where<UAReferenceContext>(x => x.TargetNode == index && x.ParentNode != index);
     }
     /// <summary>
-    /// Gets the children nodes for this node.
+    /// Gets the children nodes for the <paramref name="rootNode" />.
     /// </summary>
-    /// <param name="rootNode">The root node.</param>
-    /// <param name="nodes">The nodes collection that is to be used to add children.</param>
-    void IAddressSpaceBuildContext.GetChildren(IUANodeContext rootNode, List<IUANodeBase> nodes)
+    /// <param name="rootNode">The root node of the requested children.</param>
+    /// <returns>Return an instance of <see cref="IEnumerable" /> capturing all children of the selected node.</returns>
+    public IEnumerable<IUANodeBase> GetChildren(IUANodeContext rootNode)
     {
-      IEnumerable<IUANodeContext> _children = m_References.Values.Where<UAReferenceContext>(x => x.SourceNode == rootNode).
+      return m_References.Values.Where<UAReferenceContext>(x => x.SourceNode == rootNode).
                                                                   Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
                                                                   Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
-      nodes.AddRange(_children);
     }
+    public Parameter ExportArgument(DataSerialization.Argument argument)
+    {
+      XmlQualifiedName _dataType = ExportBrowseName(NodeId.Parse(argument.DataType.Identifier), DataTypeIds.BaseDataType);
+      return ExportArgument(argument, _dataType);
+    }
+
     //TODO #40 remove commented functionality
     ///// <summary>
     ///// Gets an instance of the <see cref="IAddressSpaceBuildContext"/> representing selected by <paramref name="nodeClass"/> base type node if applicable, null otherwise.
@@ -263,7 +267,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
     //vars
-    private readonly IValidator m_Validator = new Validator();
+    private readonly IValidator m_Validator;
     private IModelFactory m_InformationModelFactory = new InformationModelFactoryBase();
     private Dictionary<string, UAReferenceContext> m_References = new Dictionary<string, UAReferenceContext>();
     private NamespaceTable m_NamespaceTable = null;

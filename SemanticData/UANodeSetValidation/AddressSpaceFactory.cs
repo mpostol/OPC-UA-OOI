@@ -5,8 +5,6 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
-using System;
-using UAOOI.SemanticData.BuildingErrorsHandling;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -18,14 +16,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   {
 
     /// <summary>
-    /// Creates Address Space infrastructure exposed to the API clients as the <see cref="IAddressSpaceContext"/> interface
+    /// Creates Address Space infrastructure exposed to the API clients as the <see cref="IAddressSpaceContext"/> interface using default 
+    /// messages handler provided by the <see cref="BuildErrorsHandling"/> class.
     /// </summary>
-    /// <param name="traceEvent">The trace event.</param>
-    /// <returns>An instance of the <see cref="IAddressSpaceContext"/> populated with the standard OPC UA nodes.</returns>
-    public static IAddressSpaceContext AddressSpace(Action<TraceMessage> traceEvent)
-    {
-      return new AddressSpaceContext(traceEvent);
-    }
+    public static IAddressSpaceContext AddressSpace => new AddressSpaceContext(BuildErrorsHandling.Log.TraceEvent);
 
   }
 }

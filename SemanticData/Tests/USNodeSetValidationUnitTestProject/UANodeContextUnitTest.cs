@@ -129,22 +129,31 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [ExpectedException(typeof(ArgumentNullException))]
     public void CalculateNodeReferencesNullFactoryTest()
     {
-      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+      Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
       Mock<IValidator> _validatorMoc = new Mock<IValidator>();
-      IUANodeBase _first = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object);
+      IUANodeBase _first = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object);
       _first.CalculateNodeReferences(null, _validatorMoc.Object);
+    }
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void CalculateNodeReferencesValidatorIsNullTest()
+    {
+      Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
+      Mock<INodeFactory> _mockNodeFactory = new Mock<INodeFactory>();
+      IUANodeBase _first = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object);
+      _first.CalculateNodeReferences(_mockNodeFactory.Object, null);
     }
     [TestMethod]
     public void CalculateNodeReferencesNullUANodeTest()
     {
-      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-      _asMock.Setup(x => x.GetMyReferences(It.IsAny<IUANodeBase>())).Returns(new List<UAReferenceContext>());
+      Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
+      _addressSpaceMock.Setup(x => x.GetMyReferences(It.IsAny<IUANodeBase>())).Returns(new List<UAReferenceContext>());
       Mock<INodeFactory> _mockNodeFactory = new Mock<INodeFactory>();
       Mock<IValidator> _validatorMoc = new Mock<IValidator>();
       _validatorMoc.Setup(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()));
-      IUANodeBase _node = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object);
+      IUANodeBase _node = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object);
       _node.CalculateNodeReferences(_mockNodeFactory.Object, _validatorMoc.Object);
-      _asMock.Verify(x => x.GetMyReferences(It.IsAny<IUANodeBase>()), Times.Once);
+      _addressSpaceMock.Verify(x => x.GetMyReferences(It.IsAny<IUANodeBase>()), Times.Once);
       _validatorMoc.Verify(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()), Times.Never);
     }
     [TestMethod]
@@ -216,7 +225,56 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsNotNull(_resolvedName);
       Assert.AreEqual<string>("tempuri.org:EURange", _resolvedName.ToString());
     }
-
+    [TestMethod]
+    public void EqualsUAVariableTestMethod()
+    {
+      UAVariable _derivedNode = new UAVariable()
+      {
+        NodeId = "ns=1;i=47",
+        BrowseName = "EURange",
+        ParentNodeId = "ns=1;i=43",
+        DataType = "i=884",
+        DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
+      };
+      UANode _baseNode = new UAVariable()
+      {
+        NodeId = "i=17568",
+        BrowseName = "EURange",
+        ParentNodeId = "i=15318",
+        DataType = "i=884",
+        DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
+      };
+      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+      IUANodeContext _derivedNodeContext = new UANodeContext(NodeId.Parse("ns=1;i=47"), _asMock.Object);
+      _derivedNodeContext.Update(_derivedNode, x => Assert.Fail());
+      UANodeContext _baseNodeContext = new UANodeContext(NodeId.Parse("i=17568"), _asMock.Object);
+      _baseNodeContext.Update(_baseNode, x => Assert.Fail());
+      Assert.IsTrue(_derivedNode.Equals(_baseNode));
+      Assert.IsTrue(_derivedNodeContext.Equals(_baseNodeContext));
+    }
+    [TestMethod]
+    public void RemoveInheritedValuesTest()
+    {
+      UAVariable _derivedNode = new UAVariable()
+      {
+        NodeId = "ns=1;i=47", BrowseName = "EURange", ParentNodeId = "ns=1;i=43", DataType = "i=884",
+        DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
+      };
+      UANode _baseNode = new UAVariable()
+      {
+        NodeId = "i=17568", BrowseName = "EURange", ParentNodeId = "i=15318", DataType = "i=884",
+        DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
+      };
+      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+      IUANodeContext _derivedNodeContext = new UANodeContext(NodeId.Parse("ns=1;i=47"), _asMock.Object);
+      _derivedNodeContext.Update(_derivedNode, x => Assert.Fail());
+      UANodeContext _baseNodeContext = new UANodeContext(NodeId.Parse("i=17568"), _asMock.Object);
+      _baseNodeContext.Update(_baseNode, x => Assert.Fail());
+      _derivedNodeContext.RemoveInheritedValues(_baseNodeContext);
+      Assert.AreEqual<string>("EURange", _derivedNode.BrowseName);
+      Assert.IsNull(_derivedNode.DataType);
+      Assert.IsNull(_derivedNode.Description);
+    }
     #region instrumentation
     private class AddressSpaceBuildContext : IAddressSpaceBuildContext
     {
@@ -241,13 +299,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         return null;
       }
-      public void GetChildren(IUANodeContext rootNode, List<IUANodeBase> nodes)
+      /// <summary>
+      /// Gets the children nodes for the <paramref name="rootNode" />.
+      /// </summary>
+      /// <param name="rootNode">The root node of the requested children.</param>
+      /// <returns>Return an instance of <see cref="T:System.Collections.IEnumerable" /> capturing all children of the selected node.</returns>
+      public IEnumerable<IUANodeBase> GetChildren(IUANodeContext rootNode)
       {
-        Assert.IsNotNull(rootNode);
-        IEnumerable<IUANodeContext> _children = m_References.Values.Where<UAReferenceContext>(x => x.SourceNode == rootNode).
+        return m_References.Values.Where<UAReferenceContext>(x => x.SourceNode == rootNode).
                                                                     Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
                                                                     Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
-        nodes.AddRange(_children);
       }
       public ushort GetIndexOrAppend(string identifier)
       {
@@ -267,6 +328,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return m_NodesDictionary[nodeId.ToString()];
       }
       public IEnumerable<UAReferenceContext> GetReferences2Me(IUANodeContext node)
+      {
+        throw new NotImplementedException();
+      }
+      public Parameter ExportArgument(Argument argument)
       {
         throw new NotImplementedException();
       }
@@ -531,6 +596,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         }
         );
       }
+
       #endregion
 
     }

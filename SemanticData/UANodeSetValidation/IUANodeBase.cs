@@ -76,11 +76,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <value>The <see cref="ModelingRules"/> associated with the node. Null if valid modeling rule cannot be recognized.</value>
     ModelingRules? ModelingRule { get; }
     /// <summary>
-    /// Gets the parameters.
-    /// </summary>
-    /// <param name="arguments">The <see cref="XmlElement"/> encapsulates the arguments.</param>
-    Parameter[] GetParameters(XmlElement arguments);
-    /// <summary>
     /// Removes the inherited values.
     /// </summary>
     /// <param name="instanceDeclaration">The instance declaration.</param>

@@ -28,9 +28,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Initializes a new instance of the <see cref="UANodeContext" /> class.
     /// </summary>
-    /// <param name="nodeId">An object of <see cref="NodeId"/> that stores an identifier for a node in a server's address space.</param>
+    /// <param name="nodeId">An object of <see cref="NodeId" /> that stores an identifier for a node in a server's address space.</param>
     /// <param name="addressSpaceContext">The address space context.</param>
-    /// <param name="modelContext">The model context.</param>
     internal UANodeContext(NodeId nodeId, IAddressSpaceBuildContext addressSpaceContext)
     {
       NodeIdContext = nodeId;
@@ -79,7 +78,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return;
       }
       UANode = node;
-      this.BrowseName= node.BrowseName.Parse(Log.TraceEvent);
+      this.BrowseName = node.BrowseName.Parse(Log.TraceEvent);
       if (QualifiedName.IsNull(this.BrowseName))
       {
         NodeId _id = NodeId.Parse(UANode.NodeId);
@@ -129,10 +128,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent models.
     /// </summary>
     /// <param name="nodeFactory">The node container.</param>
+    /// <param name="validator">The validator.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="nodeFactory"/> must not be null.</exception>
     void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, IValidator validator)
     {
       if (nodeFactory == null)
         throw new ArgumentNullException(nameof(nodeFactory), $"{nodeFactory} must not be null in {nameof(IUANodeBase.CalculateNodeReferences)}");
+      if (validator is null)
+        throw new ArgumentNullException(nameof(validator), $"{nameof(validator)} must not be null in {nameof(IUANodeBase.CalculateNodeReferences)}");
       List<UAReferenceContext> _children = new List<UAReferenceContext>();
       foreach (UAReferenceContext _rfx in m_AddressSpaceContext.GetMyReferences(this))
       {
@@ -176,12 +179,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           IUANodeBase _instanceDeclaration = null;
           if (!string.IsNullOrEmpty(_rc.TargetNode.BrowseName.Name))
             _instanceDeclaration = _derivedChildren.ContainsKey(_rc.TargetNode.BrowseName.Name) ? _derivedChildren[_rc.TargetNode.BrowseName.Name] : null;
-          validator.ValidateExportNode(_rc.TargetNode, _instanceDeclaration, nodeFactory, _rc);
+          if (_rc.TargetNode.Equals(_instanceDeclaration))
+            continue;
+          _rc.TargetNode.RemoveInheritedValues(_instanceDeclaration);
+          validator.ValidateExportNode(_rc.TargetNode, null, nodeFactory, _rc);
         }
-        catch (Exception ex)
-        {
-          throw;
-        }
+        catch (Exception) { throw; }
       }
     }
     /// <summary>
@@ -214,24 +217,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <value>The modeling rule. Null if valid modeling rule cannot be recognized.</value>
     public ModelingRules? ModelingRule { get; private set; } = new Nullable<ModelingRules>();
-    /// <summary>
-    /// Gets the parameters.
-    /// </summary>
-    /// <param name="arguments">The <see cref="XmlElement"/> encapsulates the arguments.</param>
-    /// <returns>Parameter[].</returns>
-    public Parameter[] GetParameters(XmlElement arguments)
-    {
-      List<Parameter> _parameters = new List<Parameter>();
-      foreach (DataSerialization.Argument _item in arguments.GetParameters())
-        _parameters.Add(ExportArgument(_item));
-      return _parameters.ToArray();
-    }
-    public Parameter ExportArgument(DataSerialization.Argument argument)
-    {
-      //TODO #40 should be moved to AS
-      XmlQualifiedName _dataType = m_AddressSpaceContext.ExportBrowseName(NodeId.Parse(argument.DataType.Identifier), DataTypeIds.BaseDataType);
-      return m_AddressSpaceContext.ExportArgument(argument, _dataType);
-    }
+
     /// <summary>
     /// Exports the browse name of the base type.
     /// </summary>
@@ -257,6 +243,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the derived instances.
     /// </summary>
     /// <returns>Dictionary&lt;System.String, IUANodeBase&gt;.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Circular loop in inheritance chain</exception>
     public Dictionary<string, IUANodeBase> GetDerivedInstances()
     {
       if (m_InGetDerivedInstances)
@@ -264,18 +251,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       try
       {
         m_InGetDerivedInstances = true;
-        List<IUANodeBase> _derivedChildren = new List<IUANodeBase>();
-        m_AddressSpaceContext.GetChildren(this, _derivedChildren);
-        Dictionary<string, IUANodeBase> _ret = m_BaseTypeNode == null ? new Dictionary<string, IUANodeBase>() : m_BaseTypeNode.GetDerivedInstances();
-        foreach (UANodeContext item in _derivedChildren)
+        IEnumerable<IUANodeBase> _myChildren = m_AddressSpaceContext.GetChildren(this);
+        Dictionary<string, IUANodeBase> _instanceDeclarations = m_BaseTypeNode == null ? new Dictionary<string, IUANodeBase>() : m_BaseTypeNode.GetDerivedInstances();
+        foreach (UANodeContext item in _myChildren)
         {
           string _key = item.BrowseName.Name;
-          if (_ret.ContainsKey(_key))
-            _ret[_key] = item; //replace by current item tat overrides the base one
+          if (_instanceDeclarations.ContainsKey(_key))
+            _instanceDeclarations[_key] = item; //replace by current item tat overrides the base one
           else
-            _ret.Add(_key, item); //add derived item
+            _instanceDeclarations.Add(_key, item); //add derived item
         }
-        return _ret;
+        return _instanceDeclarations;
       }
       finally
       {
@@ -283,26 +269,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
     /// <summary>
-    /// Gets or sets the name of the browse.
+    /// Gets or sets the browse name of this node.
     /// </summary>
-    /// <value>The name of the browse.</value>
     public QualifiedName BrowseName { get; set; } = QualifiedName.Null;
-    //internal IEnumerable<UANodeContext> GetInheritedChildren()
-    //{
-    //  Dictionary<string, UANodeContext> _myChildren = m_AddressSpaceContext.GetMyReferences(this).
-    //    Where<UAReferenceContext>(x => x.ChildConnector).
-    //    Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode).
-    //    Cast<UANodeContext>().
-    //    ToDictionary<UANodeContext, string>(x => BrowseName.Name);
-    //  if (m_BaseTypeNode != null)
-    //  {
-    //    IEnumerable<UANodeContext> _baseChildren = ((UANodeContext)m_BaseTypeNode).GetInheritedChildren();
-    //    foreach (UANodeContext _node in _baseChildren)
-    //      if (!string.IsNullOrEmpty(_node.BrowseName.Name) && !_myChildren.ContainsKey(_node.BrowseName.Name))
-    //        _myChildren.Add(_node.BrowseName.Name, _node);
-    //  }
-    //  return _myChildren.Values;
-    //}
+    bool IUANodeBase.IsPropertyVariableType => this.NodeIdContext == VariableTypeIds.PropertyType;
+    void IUANodeBase.RemoveInheritedValues(IUANodeBase instanceDeclaration)
+    {
+      if (instanceDeclaration is null)
+        return;
+      this.UANode.RemoveInheritedValues(instanceDeclaration.UANode);
+      if (this.ModelingRule == instanceDeclaration.ModelingRule)
+        this.ModelingRule = null;
+    }
+    #endregion
+
+    #region IEquatable<IUANodeBase>
     /// <summary>
     /// Indicates whether the current object is equal to another object of the same type.
     /// </summary>
@@ -312,30 +293,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (Object.ReferenceEquals(other, null))
         return false;
-      return this.BrowseName == other.BrowseName &&
+      if (this.BrowseName != other.BrowseName)
+        throw new ArgumentOutOfRangeException("The browse name of compared nodes musty be equal.");
+      return
         this.ModelingRule == other.ModelingRule &&
-        this.UANode == other.UANode;
-    }
-    bool IUANodeBase.IsPropertyVariableType => this.NodeIdContext == VariableTypeIds.PropertyType;
-    //public UANode InheritedUANode(UANodeContext typeDefinition)
-    //{
-    //    if (typeDefinition.UANode is null || th)
-    //      throw new ArgumentNullException();
-    //    UANodeContext _child = this.m_AddressSpaceContext.GetMyReferences(this).
-    //      Where<UAReferenceContext>(x => (x.TargetNode != null) && x.TargetNode.BrowseName.Equals(this.BrowseName)).
-    //      Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode).FirstOrDefault<IUANodeContext>() as UANodeContext;
-    //    UANode _ret = this.UANode.Clone();
-    //    if (!(_child is null) && !(_child.m_BaseTypeNode is null))
-    //      _ret.RemoveInheritedValues(m_BaseTypeNode.InheritedUANode);
-    //    return _ret;
-    //}
-    public void RemoveInheritedValues(IUANodeBase instanceDeclaration)
-    {
-      if (instanceDeclaration is null)
-        return;
-      this.UANode.RemoveInheritedValues(instanceDeclaration.UANode);
-      if (this.ModelingRule == instanceDeclaration.ModelingRule)
-        this.ModelingRule = null;
+        this.UANode.Equals(other.UANode);
     }
     #endregion
 

@@ -6,6 +6,7 @@
 //___________________________________________________________________________________
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
@@ -63,12 +64,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>All references targeting the selected by the <paramref name="node"/> node</returns>
     IEnumerable<UAReferenceContext> GetReferences2Me(IUANodeContext node);
     /// <summary>
-    /// Gets the children nodes for the <paramref name="rootNode"/>.
+    /// Gets the children nodes for the <paramref name="rootNode" />.
     /// </summary>
     /// <param name="rootNode">The root node of the requested children.</param>
-    /// <param name="nodes">The nodes collection that is to be used to add children.</param>
-    void GetChildren(IUANodeContext rootNode, List<IUANodeBase> nodes);
+    /// <returns>Return an instance of <see cref="IEnumerable"/> capturing all children of the selected node.</returns>
+    IEnumerable<IUANodeBase> GetChildren(IUANodeContext rootNode);
 
+    Parameter ExportArgument(DataSerialization.Argument argument);
   }
 
 }

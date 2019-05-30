@@ -84,7 +84,7 @@ The messages (`UADP NetworkMessage`) are transparently transported as the payloa
 ## Conclusion
 
 - OPC UA and Ethernet are unrelated, i.e. there is no semantic relationship between both
-- OPC UA is recognized as the Internet technology, but this mapping makes sense only for broadcast domain (local network segment)
+- OPC UA Pub/Sun is recognized as an Internet technology, but an Ethernet mapping only makes sense for a VLAN constrained broadcast domain (local network segment)
 - OPC UA PubSub over the TSN is misleading term because each protocol can be transported over this particular Ethernet dialect
 - Time Sensitive Network doesn’t mean real time – it means no jitter (improves deterministic communication)
 

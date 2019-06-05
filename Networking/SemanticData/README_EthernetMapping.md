@@ -14,8 +14,11 @@ Instruction for implementer is covered in the section *Notices for Implementer*.
 
 The following documents, in whole or in part, are normatively referenced in this document and are indispensable for its application.
 
-- [`IEEE 802.3`][Ethernet]
 - [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
+- [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
+- [802-2014 - IEEE Standard for Local and Metropolitan Area Networks: Overview and Architecture][802]
+- [802.1Q-2014 - IEEE Standard for Local and metropolitan area networks--Bridges and Bridged Networks, DOI: 10.1109/IEEESTD.2014.6991462][8021Q]
+- [802.3-2018 - IEEE Standard for Ethernet][8023]
 
 ## OPC UA Ethernet
 
@@ -107,9 +110,28 @@ Unfortunately, the PubSub specification doesn't define mapping related to addres
 
 ### Time Sensitive Network
 
-This concept is not mentioned within the PubSub specification but is very popular to point out a strategy of further development of the OPC UA targeting real-time applications. 
+The Time Sensitive Network (TSN) concept is not mentioned within the PubSub specification but it is very popular keyword to point out a strategy of further development of the OPC UA targeting real-time applications. By design, the EEE 802.1 Time-Sensitive Networking (TSN) makes it possible to carry data traffic over a bridged Ethernet network shared by various kinds of applications having different Quality of Service (QoS) requirements. The traffic may be classified as the
 
-> **Note 1**: In computer science, the real-time application describes hardware and software systems subject to a "real-time constraint". Real-time programs must guarantee the expected time relationship between the selected events and outcomes of the data processing process.  In other words, deploying the real-time application, time must be considered as an important affecting the application correctness. Conversely, increasing processing or communication speed is not always required for the real-time application correctness. A very good example is Voice over IP where very hard time constraints required to correctly replay the sound can be meat using nondeterministic communication over the Internet. Another example where we have time constraints but the overall speed of processing engine is usually irrelevant is any thermal process.
+- time constrained - where the communication delays contribute to the distributed application time constraints
+- best effort - where the communication time relationship is not critical for the distributed application 
+
+The expectation is that the TSN provides guaranteed data transport with bounded low latency, low delay variation, and extremely low data loss.
+
+The Time-Sensitive Networking (TSN) Task Group (TG) is a part of the IEEE 802.1 Working Group (WG). The mission of the TSN TG is to provide deterministic services through IEEE 802 networks, i.e., 
+
+- guaranteed packet transport with bounded latency
+- low packet delay variation, and low packet loss 
+
+Base standards for TSN:
+- IEEE Std 802.1Q-2018: Bridges and Bridged Networks
+- IEEE Std 802.1AB-2016: Station and Media Access Control Connectivity Discovery (specifies the Link Layer Discovery Protocol (LLDP))
+- IEEE Std 802.1AS-2011: Timing and Synchronization for Time-Sensitive Applications in Bridged Local Area Networks
+- IEEE Std 802.1AX-2014: Link Aggregation
+- IEEE Std 802.1BA-2011: Audio Video Bridging (AVB) Systems
+- IEEE Std 802.1CB-2017: Frame Replication and Elimination for Reliability
+- IEEE Std 802.1CM-2018: Time-Sensitive Networking for Fronthaul
+
+> **Note 1**: In computer science, the real-time application describes hardware and software systems subject to a real-time constraint. Real-time programs must guarantee the expected time relationships between the selected events and outcomes of the data processing process. In other words, deploying the real-time application, time must be considered as an important factor affecting the application correctness. Conversely, increasing processing or communication speed is not always required for the real-time application correctness. A very good example is Voice over IP where very hard time constraints required to correctly replay the sound can be meat using nondeterministic communication over the Internet. Another example where we have time constraints but the overall speed of processing engine is usually irrelevant is any thermal process.
 
 ### Ethernet
 
@@ -136,7 +158,7 @@ Lack of subscriptions management functionality defined by the [OPC.UA.PubSub][OP
 
 ## Ethernet Mapping
 
-According to the OPC UA over Ethernet mapping uses EtherType **`B62C`** that is used to transport UADP `NetworkMessages` directly as payload of the Ethernet frame without IP or UDP headers. To properly format the Ethernet frame the following parameters must be defined somehow:
+According to the OPC UA over `Ethernet` mapping uses EtherType **`B62C`** that is used to transport UADP `NetworkMessages` directly as payload of the Ethernet frame without IP or UDP headers. To properly format the Ethernet frame the following parameters must be defined somehow:
 
 - **MAC address** - media access control address (MAC address) is a unique on the local area network (broadcast domain) identifier assigned to a network interface controller (NIC)
 - **VLAN ID** - a number identifying the VLAN
@@ -158,25 +180,27 @@ The format of a MAC address is six groups of hexadecimal digits, separated by hy
 
 According to this mapping, the `UADP NetworkMessage` structures are transparently transported as the payload of the Ethernet frame. For OPC UA Ethernet the MaxNetworkMessageSize plus additional headers shall be limited to an Ethernet frame size of 1522 Bytes.
 
-
 ## Conclusion
 
 - OPC UA and Ethernet are unrelated, i.e. there is no semantic relationship between both
-- OPC UA Pub/Sun is recognized as an Internet technology, but an Ethernet mapping only makes sense for a VLAN constrained broadcast domain (local network segment)
-- OPC UA PubSub over the TSN is misleading term because each protocol can be transported over this particular Ethernet dialect
-- Time Sensitive Network doesn’t mean real time – it means no jitter (improves deterministic communication)
+- OPC UA Pub/Sub is recognized as an Internet technology, but an Ethernet mapping only makes sense for a VLAN constrained broadcast domain (local network segment)
+- OPC UA PubSub over the TSN is a misleading term because each protocol can be transported over this particular Ethernet dialect
+- Time Sensitive Network doesn’t mean real time – it means no jitter (it improves deterministic communication)
+- The proposed mappings are not compliant with the [IEEE 802][802] specification because the mentioned services are defined in the layer that is located above the Ethernet and applies to Bridged Networks in general 
 
 ## See also
 
 - [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
+- [802-2014 - IEEE Standard for Local and Metropolitan Area Networks: Overview and Architecture][802]
+- [802.1Q-2014 - IEEE Standard for Local and metropolitan area networks--Bridges and Bridged Networks, DOI: 10.1109/IEEESTD.2014.6991462][8021Q]
+- [802.3-2018 - IEEE Standard for Ethernet][8023]
 - [OPC Unified Architecture Part 14: PubSub Main Technology Features][README.PubSubMTF]
 - [IEEE 802.3 ETHERNET WORKING GROUP][Ethernet]
-- [802-2014 - IEEE Standard for Local and Metropolitan Area Networks: Overview and Architecture][802]
 - [Registration Authority - Ethertype][IEEERA]
 - [IEEE 802 Numbers][802Numbers]
-- [802.3-2018 - IEEE Standard for Ethernet][8023]
-- [802.1Q-2014 - IEEE Standard for Local and metropolitan area networks--Bridges and Bridged Networks, DOI: 10.1109/IEEESTD.2014.6991462][8021Q]
+- [J. Farkas, L. L. Bello and C. Gunther, "Time-Sensitive Networking Standards," in IEEE Communications Standards Magazine, vol. 2, no. 2, pp. 20-21, JUNE 2018. doi: 10.1109/MCOMSTD.2018.8412457][TSNStandards]
 
+[TSNStandards]: http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8412457&isnumber=8412445
 [8021Q]:https://ieeexplore.ieee.org/servlet/opac?punumber=6991460
 [8023]: https://ieeexplore.ieee.org/document/8457469
 [802Numbers]: https://www.iana.org/assignments/ieee-802-numbers/ieee-802-numbers.xhtml

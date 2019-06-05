@@ -142,7 +142,7 @@ The section [Walk-through `ReferenceApplication`][ReferenceApplication] covers t
 
 ## Acknowledgment
 
-I would like to thank [Gary Workman](https://www.linkedin.com/in/gary-workman-486663161/) and [Michał Morawski](https://www.linkedin.com/in/micha%C5%82-morawski-969a259a/) for their feedback, cooperation and of course friendship.
+I would like to thank [Gary Workman](https://www.linkedin.com/in/gary-workman-486663161/) and [Michał Morawski](https://www.linkedin.com/in/micha%C5%82-morawski-969a259a/), [Michel Condemine](linkedin.com/in/opcfrance), [Jayachandran Rameshbabu](linkedin.com/in/jayachandran-rameshbabu-483848a9) for their feedback, cooperation and of course friendship.
 
 ## Glossary
 

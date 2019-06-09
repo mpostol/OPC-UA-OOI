@@ -65,7 +65,7 @@ Examples of EtherTypes are 0x0800 and 0x8DD, which are used to identify IPv4 and
 
 A detailed description of the EPD is covered by the specification [IEEE 802][802]. More information on EtherTypes can also be found on the [IEEE RA web site][IEEERA].
 
-> **Note**: EtherType **0xB62C** is recommended by the [OPC UA PubSub][OPC.UA.PubSub] to identify Ethernet mapping for PubSub protocol. Unfortunately, at the date of this document publication, this EtherType number is not listed as an entry in the official registry available here [IEEE 802 Numbers][802Numbers]. This number is classified by the IEEE as the OUI Extended EtherType.
+> **Note 1**: EtherType **0xB62C** is recommended by the [OPC UA PubSub][OPC.UA.PubSub] to identify Ethernet mapping for PubSub protocol. Unfortunately, at the date of this document publication, this EtherType number is not listed as an entry in the official registry available here [IEEE 802 Numbers][802Numbers]. This number is classified by the IEEE as the OUI Extended EtherType.
 
 [IEEE 802][802] defines three assigned EtherType groups of vendor-specific protocol identifier:
 
@@ -77,11 +77,11 @@ OUI Extended EtherType|88-B7
 
 The vendor-specific protocol identifier is a means whereby protocol developers may assign permanent protocol identifier values without consuming type values from the globally available limited resource. This can be useful for **prototype, experimental, and private/proprietary protocols** to be developed without impacting the global EtherType namespace. The OUI Extended `EtherType` allows an organization to apply protocol identifiers using SNAP. An organization allocates protocol identifiers to its own protocols in a manner that ensures that the protocol identifier is globally unique. SNAP provides a method for multiplexing and demultiplexing of private and public protocols among multiple users of the LLC sublayer. An organization that has an OUI assigned to it may use its OUI to assign universally unique protocol identifiers to its own protocols, for use in the protocol identification field of SNAP data units.
 
-> **NOTE**: to use EPD the PubSub cannot directly access Ethernet PDU as it is required in the specification because this service is provided by the LLC sublayer.
+> **NOTE 2**: to use EPD the PubSub cannot directly access Ethernet PDU as it is required in the specification because this service is provided by the LLC sublayer.
 
 #### Virtual Bridged Network
 
-Additionally, the [IEEE 802.1Q][8021Q] introduces a concept of Virtual Bridged Network. VLANs and their identifiers (VID) provide a convenient and consistent network-wide reference for VLAN Bridges. A VLAN represents a broadcast domain. VLANs are identified by a VLAN ID (a number between 0 – 4095). Portions of the network which are VLAN-aware (i.e., IEEE 802.1Q conformant) can include VLAN tags. When a frame enters the VLAN-aware portion of the network, a tag is added to represent the VLAN membership. Each frame must be distinguishable as being within exactly one VLAN. 802.1Q adds a 32-bit field between the source MAC address and the EtherType fields of the original frame.
+Additionally, the [IEEE 802.1Q][8021Q] introduces a concept of Virtual Bridged Network. VLANs and their identifiers (VID) provide a convenient and consistent network-wide reference for VLAN Bridges. A VLAN represents a broadcast domain. VLANs are identified by a VLAN ID (a number between 0 – 4095). Portions of the network which are VLAN-aware (i.e., IEEE 802.1Q conformant) can include VLAN tags. When a frame enters the VLAN-aware portion of the network, a tag is added to represent the VLAN membership. 802.1Q adds a 32-bit field between the source MAC address and the EtherType fields of the original frame.
 
 Each tag comprises the following sequential information elements:
 
@@ -106,7 +106,7 @@ The Time Sensitive Network (TSN) concept is not mentioned within the PubSub spec
 
 The expectation is that the TSN provides guaranteed data transport with bounded low latency, low delay variation, and extremely low data loss.
 
-The Time-Sensitive Networking (TSN) Task Group (TG) is a part of the IEEE 802.1 Working Group (WG). The mission of the TSN TG is to provide deterministic services through IEEE 802 networks, i.e.,
+The [Time-Sensitive Networking (TSN) Task Group (TG)](https://1.ieee802.org/tsn/) is a part of the IEEE 802.1 Working Group (WG). The mission of the TSN TG is to provide deterministic services through IEEE 802 networks, i.e.,
 
 - guaranteed packet transport with bounded latency
 - low packet delay variation, and low packet loss
@@ -121,7 +121,7 @@ Base standards for TSN:
 - IEEE Std 802.1CB-2017: Frame Replication and Elimination for Reliability
 - IEEE Std 802.1CM-2018: Time-Sensitive Networking for Fronthaul
 
-> **Note 1**: In computer science, the real-time application describes hardware and software systems subject to a real-time constraint. Real-time programs must guarantee the expected time relationships between the selected events and outcomes of the data processing process. In other words, deploying the real-time application, time must be considered as an important factor affecting the application correctness. Conversely, increasing processing or communication speed is not always required for the real-time application correctness. A very good example is Voice over IP where very hard time constraints required to correctly replay the sound can be meat using nondeterministic communication over the Internet. Another example where we have time constraints but the overall speed of processing engine is usually irrelevant is any thermal process.
+> **Note 3**: In computer science, the real-time application describes hardware and software systems subject to a real-time constraint. Real-time programs must guarantee the expected time relationships between the selected events and outcomes of the data processing process. In other words, deploying the real-time application, time must be considered as an important factor affecting the application correctness. Conversely, increasing processing or communication speed is not always required for the real-time application correctness. A very good example is Voice over IP where very hard time constraints required to correctly replay the sound can be met using nondeterministic communication over the Internet. Another example where we have time constraints but the overall speed of processing engine is usually irrelevant is any thermal process.
 
 #### Medium Access Control
 
@@ -174,16 +174,18 @@ where:
 
 The format of a MAC address is six groups of hexadecimal digits, separated by hyphens (e.g. 01-23-45-67-89-ab). An application may also accept host names and/or IP addresses if it provides means to resolve it to a MAC address (e.g. DNS and Reverse-ARP).
 
-> NOTE: the above mentioned addressing parameters are not mapped to any of the PubSub `NetworkMessage` parameters. In other word there is no semantic relationship with the OPC UA and, therefore, the parameters must be provided separately by the application configuration.
+> **NOTE 4**: the above mentioned addressing parameters are not mapped to any of the PubSub `NetworkMessage` parameters. In other word there is no semantic relationship with the OPC UA and, therefore, the parameters must be provided separately by the application configuration.
 
 According to this mapping, the `UADP NetworkMessage` structures are transparently transported as the payload of the Ethernet frame. For OPC UA Ethernet the MaxNetworkMessageSize plus additional headers shall be limited to an Ethernet frame size of 1522 Bytes.
+
+> **NOTE #5**: some definitions of parameters duplicate definition in independent normative standards. To avoid conflicts these definitions must be recognized as redundant and removed from the Part 14 document.
 
 ## Conclusion
 
 - OPC UA and Ethernet are unrelated, i.e. there is no semantic relationship between both
 - OPC UA Pub/Sub is recognized as an Internet technology, but the Ethernet mapping only makes sense for a VLAN constrained broadcast domain (local network segment)
 - OPC UA PubSub over the TSN is a misleading term because each protocol can be transported over this particular Ethernet dialect
-- Time Sensitive Network doesn’t mean real time – it means no jitter (it improves deterministic communication)
+- Time Sensitive Network doesn’t mean real-time – simplifying it means no jitter (it improves deterministic communication)
 - The proposed mappings are not compliant with the [IEEE 802][802] specification because the mentioned services are defined in the layer that is located above the Ethernet and applies to Bridged Networks in general
 
 ## See also

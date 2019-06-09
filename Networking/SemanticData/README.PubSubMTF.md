@@ -7,7 +7,7 @@ In general speaking the following two distinct patterns are used to transfer dat
 - connection-oriented: requires a session that has to be established before any data can be sent between sender and receiver
 - connectionless-oriented: the sender may start sending messages (called packets or datagrams) to the destination without any preceding handshake procedure
 
-Each has its own advantages and disadvantages. In general, the OPC UA is a session centric communication. The session is established by the **OPC UA Clint** that must connect to the **OPC UA Server** before any data can be exchanged between them. In this Client/Server scenario defined by the [Services in Part 4][Opc.UA.Part4], the data flow is bidirectional over the session. The session entities communicate over a secure channel that is created in the underlying communication layer and relies upon it for secure communication. It enables to log-in using user authentication and operations authorization. More details you can find in the article:
+Each has its own advantages and disadvantages. In general, the OPC UA is a session centric communication. The session is established by the **OPC UA Client** that must connect to the **OPC UA Server** before any data can be exchanged between them. In this Client/Server scenario defined by the [Services in Part 4][Opc.UA.Part4], the data flow is bidirectional over the session. The session entities communicate over a secure channel that is created in the underlying communication layer and relies upon it for secure communication. It enables to log-in using user authentication and operations authorization. More details you can find in the article:
 
 - [OPC Unified Architecture – Main Technological Features][OPCUAMTF]
 
@@ -107,7 +107,7 @@ I guess that the removal of the UDP and IP protocols from the communication stac
 >
 > **NOTE 4**: Ethernet mapping is applicable only in case the communication parties are connected to the same local network segment (they are in the same broadcast domain limited by a VLAN if any).
   
-Further communication performance improvement and extension of the functionality may be obtained for example by applying implementation of the:
+Further communication performance improvement and extension of the functionality may be obtained for example by applying implementation of the [802.1Q-2018][8021Q]:
 
 - Time-Sensitive Network (TSN)
 - Virtual Local Network (VLAN)
@@ -142,7 +142,7 @@ The section [Walk-through `ReferenceApplication`][ReferenceApplication] covers t
 
 ## Acknowledgment
 
-I would like to thank [Gary Workman](https://www.linkedin.com/in/gary-workman-486663161/), [Michał Morawski](https://orcid.org/0000-0002-8902-1259), [Michel Condemine](https://www.linkedin.com/in/opcfrance/), and [Jayachandran Rameshbabu](https://www.linkedin.com/in/jayachandran-rameshbabu-483848a9/) for their feedback, cooperation and of course friendship.
+I would like to thank [Gary Workman](https://www.linkedin.com/in/gary-workman-486663161/), [Michał Morawski](https://orcid.org/0000-0002-8902-1259), [Michel Condemine](https://www.linkedin.com/in/opcfrance/), [Jayachandran Rameshbabu](https://www.linkedin.com/in/jayachandran-rameshbabu-483848a9/), and [Stéphane Potier](https://www.linkedin.com/in/potier/) for their feedback, cooperation and of course friendship.
 
 ## Glossary
 
@@ -235,3 +235,7 @@ I would like to thank [Gary Workman](https://www.linkedin.com/in/gary-workman-48
 - [IEEE 802.3 ETHERNET WORKING GROUP][IEEE]
 
 [IEEE]:http://www.ieee802.org/3/
+
+- [802.1Q-2018 - IEEE Standard for Local and Metropolitan Area Network--Bridges and Bridged Networks][8021Q]
+
+[8021Q]:https://ieeexplore.ieee.org/servlet/opac?punumber=8686437

@@ -7,16 +7,16 @@ In general speaking the following two distinct patterns are used to transfer dat
 - connection-oriented: requires a session that has to be established before any data can be sent between sender and receiver
 - connectionless-oriented: the sender may start sending messages (called packets or datagrams) to the destination without any preceding handshake procedure
 
-Each has its own advantages and disadvantages. In general, the OPC UA is a session centric communication. The session is established by the **OPC UA Client** that must connect to the **OPC UA Server** before any data can be exchanged between them. In this Client/Server scenario defined by the [Services in Part 4][Opc.UA.Part4], the data flow is bidirectional over the session. The session entities communicate over a secure channel that is created in the underlying communication layer and relies upon it for secure communication. It enables to log-in using user authentication and operations authorization. More details you can find in the article:
+Each has its own advantages and disadvantages. In general, the OPC UA is a session centric communication. The session is established by the **OPC UA Client** that must connect to the **OPC UA Server** before any data can be exchanged between them. In this Client/Server scenario defined by the [Services in Part 4][Opc.UA.Part4], the data flow is bidirectional over the session. The session entities communicate over a secure channel that is created in the underlying communication layer and relies upon it for secure communication. It enables to log-in using user authentication and operations authorization. More details you can find in the section:
 
 - [OPC Unified Architecture – Main Technological Features][OPCUAMTF]
 
 Using the connection-oriented communication pattern it is difficult or even impossible to gather and process data from mobile things (e.g. smart devices, cigarettes box, drug blister, etc.), which is one of the **Internet of Things** paradigms. More details you can find in [IoT versus SCADA/DCS Data Acquisition Patterns][wordpress.IoTVersus].
 
-> The [OPC.UA.PubSub][OPC.UA.PubSub] specification offers the connectionless approach as an additional option to session based client-server interoperability and claims that it is a consistent part of the OPC UA specifications suit.
+> The [OPC UA PubSub][OPC.UA.PubSub] specification offers the connectionless approach as an additional option to session based client-server interoperability and claims that it is a consistent part of the OPC UA specifications suit.
 > **As a result, it may be recognized as the IoT ready technology.**
 
-[OPC UA Part 14: PubSub][OPC.UA.PubSub] promotes interoperability of loosely coupled **PubSub Applications**. By design, they often will not even know each other. Their primary relationship is the shared understanding of:
+[OPC UA Part 14: PubSub][OPC.UA.PubSub] promotes interoperability of loosely coupled **PubSub Applications**. By design, they often will not even know each other. In this case, it is impossible to create in-band interoperability alliance based on the direct negotiations of required configuration parameters and security artifacts. Their primary relationship is the shared understanding of:
 
 - specific semantics (meaning) of exchanged data
 - the syntax and semantics of messages that include these data
@@ -24,7 +24,7 @@ Using the connection-oriented communication pattern it is difficult or even impo
 
 The specification claims that the PubSub integrates into the existing OPC UA technology but as result of applying the connectionless communication it is easier to implement low power and low-latency communications on local networks. Additionally, the specification states that PubSub is based on the [OPC UA Information Model][CAS.OPCUAIMD] with the aim of seamless integration into **OPC UA Servers** and **OPC UA Clients**. Nevertheless, the PubSub communication does not require such a role dependency, i.e. there is no necessity for **Publisher** or **Subscriber** to be either an **OPC UA Server** or an **OPC UA Client** to participate in the communication.
 
-> **Note 1**: Unfortunately, [OPC UA Information Model][CAS.OPCUAIMD] is not used to promote **PubSub Applications** interoperability. This concept is only employed to define `Security Key Management` and `Configuration Management` models, which have an only indirect impact on the **PubSub Applications** interoperability.
+> **Note 1**: Unfortunately, [OPC UA Information Model][CAS.OPCUAIMD] is not used to promote **PubSub Applications** in-band interoperability. This concept is only employed to define `Security Key Management` and `Configuration Management` models, which have an only indirect impact on the in-band **PubSub Applications** interoperability.
 
 ## Services
 
@@ -45,7 +45,15 @@ The `Subscriber` actors are the consumers of `NetworkMessage` structures, which 
 
 To interchange the process data `Publisher` and all associated `Subscribers` nodes depend on a common `Distribution Channel`. `Distribution Channel` models common knowledge necessary to use an underlying messages transport communication stack, i.e. underlying protocol stack and relevant parameters to route the messages over the network.
 
-A `Security Key Management` provides keys for message security that can be used by the `Publisher` to sign and encrypt `NetworkMessage` structures and by the `Subscriber` to verify the signature of and decrypt the `NetworkMessage`. The specification defines OPC UA Information Model for `Security Key Management` services that enables to implement this class as the **OPC UA Server** or **OPC UA Client**.
+A `Security Key Management` provides keys for message security that can be used by the `Publisher` to sign and encrypt `NetworkMessage` structures and by the `Subscriber` to verify the signature of and decrypt the `NetworkMessage`. `NetworkMessage` security concerns the integrity and confidentiality of the published message payload. The level of security can be:
+
+- no security
+- signing but no encryption
+- signing and encryption
+
+Message security is end-to-end security (from `Publisher` to `Subscriber` instances) and requires common knowledge of the cryptographic artifacts necessary to sign and encrypt on the `Publisher` side as well as validate the signature and decrypt on the `Subscriber` side. The message security is independent of the transport protocol mapping and is defined by the specyfication.
+
+The specification defines OPC UA Information Model for `Security Key Management` services and many possible scenarios that can be used to select the security profile and provide appropriate security artifacts to the `Publisher` and `Subscriber` using this model. One of them is to implement this model as the **OPC UA Server** or **OPC UA Client** where the OPC UA IM model is used to describe the server OPC UA Address Space. A detailed description of all possible scenarios applicable to select security profile and exchange security artifacts is outside of the scope of this section.
 
 `Publisher` and `Subscriber` nodes may be configurable through vendor-specific engineering tools or using the dedicated configuration OPC UA Information Model described in this standard. This model allows a standard **OPC UA Client** based configuration tool to configure a **PubSub Application** connecting to the embedded **OPC UA Server**. Using remote **Configuration Tool** over an **OPC UA Session** does not determine how dynamic the configuration can be. More detailed description of this model is outside of the scope of this section.
 
@@ -66,7 +74,7 @@ The **PubSub Applications** are decoupled by exchanging messages over a selected
 
 In both cases, the one-to-many relationship between `Publisher` and `Subscriber` can be obtained. For UDP multicast messages distribution may be applied to send `Internet Protocol (IP)` (figure below) datagrams to a group of interested receivers in a single transmission. For the broker-based transport, all messages are published to specific queues (e.g. topics, nodes) that the broker exposes and `Subscribers` can listen to these queues.
 
-The [OPC.UA.PubSub][OPC.UA.PubSub] specification lists the following protocol stacks that can be selected as the transport for massages and their possible combinations with message mappings:
+The [OPC UA PubSub][OPC.UA.PubSub] specification lists the following protocol stacks that can be selected as the transport for messages and their possible combinations with message mappings:
 
 - OPC UA UDP - simple UDP based protocol that is used to transport UADP `NetworkMessages`
 - OPC UA Ethernet - simple Ethernet based protocol using EtherType B62C that is used to transport UADP `NetworkMessages` as payload of the Ethernet II frame without IP or UDP headers

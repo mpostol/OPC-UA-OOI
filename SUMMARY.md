@@ -38,6 +38,7 @@
   * [Underlying Transport over UDP](Networking/UDPMessageHandler/README.md)
   * [Underlying Transport over MQTT](Networking/SemanticData/README_MQTTMapping.md)
   * [Underlying Transport over AMQP](Networking/SemanticData/README_AMQPMapping.md)
+  * [Underlying Transport over Ethernet](Networking/SemanticData/README_EthernetMapping.md)
   * [DataSet and Communication Channel Association](Networking/SemanticData/READMEDataDiscoveryAndBinding.md)
   * [Encoding Library](Networking/Encoding/README.md)
 * [Getting Started Tutorial](Networking/SemanticData/READMEGettingStartedTutorial.md)

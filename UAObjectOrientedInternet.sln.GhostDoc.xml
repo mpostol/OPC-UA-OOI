@@ -13,7 +13,7 @@
   </SpellChecker>
 <HelpConfigurations selected="HelpFile">
   <HelpConfiguration name="HelpFile">
-    <OutputPath>..\..\Users\mpost\Downloads\OOIHelp</OutputPath>
+    <OutputPath>..\..\..\Users\mpostol\Downloads\UAOOI401</OutputPath>
     <CleanupOutputPath>true</CleanupOutputPath>
     <HelpFileName>UAObjectOrientedInternet</HelpFileName>
     <HelpFileNamingMethod>MemberName</HelpFileNamingMethod>
@@ -29,7 +29,7 @@
     <IncludeScopes>
       <Public>true</Public>
       <Internal>false</Internal>
-      <Protected>false</Protected>
+      <Protected>true</Protected>
       <Private>false</Private>
       <Inherited>true</Inherited>
       <InheritedFromReferences>true</InheritedFromReferences>
@@ -49,19 +49,9 @@
       <MediaContent />
     </ConceptualContent>
     <SelectedProjects>
-      <SelectedProject>Common.Infrastructure</SelectedProject>
-      <SelectedProject>Configuration.Core</SelectedProject>
-      <SelectedProject>Configuration.DataBindings</SelectedProject>
-      <SelectedProject>Configuration.Networking</SelectedProject>
-      <SelectedProject>DataDiscovery.DiscoveryServices</SelectedProject>
       <SelectedProject>Networking.Core</SelectedProject>
       <SelectedProject>Networking.Encoding</SelectedProject>
       <SelectedProject>Networking.SemanticData</SelectedProject>
-      <SelectedProject>Networking.UDPMessageHandler</SelectedProject>
-      <SelectedProject>SemanticData.BuildingErrorsHandling</SelectedProject>
-      <SelectedProject>SemanticData.InformationModelFactory</SelectedProject>
-      <SelectedProject>SemanticData.UAModelDesignExport</SelectedProject>
-      <SelectedProject>SemanticData.UANodeSetValidation</SelectedProject>
     </SelectedProjects>
   </HelpConfiguration>
 </HelpConfigurations>

@@ -1,0 +1,70 @@
+NetworkMessage = DataToSign Signature
+Signature = 0*OCTET
+DataToSign = NetworkMessageHeader GroupHeader PayloadHeader ExtendedNetworkMessageHeader [SecurityHeader] DataToEncrypt
+NetworkMessageHeader = UADPVersion UADPFlags [ExtendedFlags1] ExtendedFlags2 PublisherId DataSetClassId
+UADPVersion = OCTET ;Version of the NetworkMessage. The UADPVersion for this specification version is %x01.
+UADPFlags = PublisherIdEnabled  GroupHeaderEnabled PayloadHeaderEnabled ExtendedFlags1Enabled;
+PublisherIdEnabled = BIT; Bit 4 - If the PublisherId is enabled, the type of PublisherId is indicated in the ExtendedFlags1 field
+GroupHeaderEnabled = BIT; Bit 5 - The GroupHeader shall be omitted if GroupHeaderEnabled is 0.
+PayloadHeaderEnabled = BIT; Bit 6 - 
+ExtendedFlags1Enabled = BIT ;Bit 7 - The bit shall be false, if ExtendedFlags1 is 0.
+ExtendedFlags1 = PublisherIdType DataSetClassIdEnabled SecurityEnabled TimestampEnabled PicoSecondsEnabled ExtendedFlags2Enabled ;The ExtendedFlags1 shall be omitted if ExtendedFlags1Enabled is 0. 
+                                                                                                                                 ;If the field is omitted, the default value of 0 is applied for all bits.
+PublisherIdType = %b0.0.0 / ; The PublisherId is of DataType Byte,
+                  %b0.0.1 / ; The PublisherId is of DataType UInt16
+                  %b0.1.0 / ; The PublisherId is of DataType UInt32
+                  %b0.1.1 / ; The PublisherId is of DataType UInt64
+                  %b1.0.0 / ; The PublisherId is of DataType String
+                  %b1.0.1 / ; Reserved
+                  %b1.1.0 / ; Reserved
+                  %b1.1.1   ; Reserved
+DataSetClassIdEnabled = BIT ; Bit 3:
+SecurityEnabled = BIT       ; Bit 4 - If the SecurityMode is SIGN_1 or SIGNANDENCRYPT_2, this flag is set, message security is enabled and the SecurityHeader is contained in the NetworkMessage header.
+                            ; If this flag is not set, the SecurityHeader is omitted.
+TimestampEnabled = BIT      ; Bit 5
+PicoSecondsEnabled = BIT    ; Bit 6
+ExtendedFlags2Enabled = BIT ; Bit 7 - The bit shall be 0, if ExtendedFlags2 is 0.
+ExtendedFlags2 = ChunkMessage PromotedFieldsEnabled NetworkMessageType Reserved
+ChunkMessage = BIT
+PromotedFieldsEnabled = BIT ; Promoted fields can only be sent if the NetworkMessage contains only one DataSetMessage.
+NetworkMessageType = %b0.0.0 / ; NetworkMessage with DataSetMessage payload. If the ExtendedFlags2 element is not provided, this is the default value.
+                     %b0.0.1 / ; NetworkMessage with discovery request payload.
+                     %b0.1.0 / ; NetworkMessage with discovery response payload.
+Reserved = %b0.0.0
+PublisherId = *OCTET
+DataSetClassId = Guid ; The DataSetClassId associated with the DataSet elements in the NetworkMessage. All DataSetMessage elements in the NetworkMessage shall have the same DataSetClassId.
+                      ; The DataSetClassId shall be omitted if DataSetClassIdEnabled is 0
+
+GroupHeader = GroupFlags WriterGroupId GroupVersion NetworkMessageNumber SequenceNumber ; The GroupHeader shall be omitted if GroupHeaderEnabled is 0.
+GroupFlags = WriterGroupIdEnabled GroupVersionEnabled NetworkMessageNumberEnabled SequenceNumberEnabled GroupFlagsReserved
+WriterGroupIdEnabled =
+GroupVersionEnabled =
+NetworkMessageNumberEnabled =
+SequenceNumberEnabled =
+GroupFlagsReserved = 
+
+WriterGroupId =
+GroupVersion =
+NetworkMessageNumber =
+SequenceNumber
+
+PayloadHeader = 
+ExtendedNetworkMessageHeader = Timestamp TimestampPicoSeconds PromotedFields
+SecurityHeader = SecurityFlags SecurityTokenId NonceLength Nonce
+DataToEncrypt = Payload SecurityFooter
+
+DataSetMessage = DataSetMessageHeader 1*DataSetMessageField
+PublisherId = ;Identifies the Publisher 
+SecurityData = ; Only available for encodings that support message security. The relevant information is specified in the message mapping.
+PromotedFields = ;Selected fields out of the DataSet also sent in the header.
+DataSetMessageHeader 
+DataSetMessageField = 
+DataSetMessageContentMask = 
+DataSetWriterId =
+SequenceNumber =  ;A number that is incremented for each DataSetMessage. Can be used to verify the ordering and to detect missing messages.
+Timestamp =  ; A timestamp describing when the data in this DataSetMessage was obtained.
+Version =  ;Version information about the configuration of the DataSetMetaData.
+Status = ; Status information about the data in this DataSetMessage
+KeepAlive =  ; When no DataSetMessages are sent for a configured time period, a keep alive DataSetMessage is sent to signal the Subscribers that the Publisher is still alive.
+BIT = "0" / "1"
+OCTET = %x00-FF ; 8 bits of data

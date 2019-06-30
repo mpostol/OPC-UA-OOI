@@ -1,6 +1,8 @@
 NetworkMessage = DataToSign Signature
-Signature = 0*OCTET
+
 DataToSign = NetworkMessageHeader GroupHeader PayloadHeader ExtendedNetworkMessageHeader [SecurityHeader] DataToEncrypt
+Signature = 0*OCTET ; The signature of the NetworkMessage.
+
 NetworkMessageHeader = UADPVersion UADPFlags [ExtendedFlags1] ExtendedFlags2 PublisherId DataSetClassId
 UADPVersion = OCTET ;Version of the NetworkMessage. The UADPVersion for this specification version is %x01.
 UADPFlags = PublisherIdEnabled  GroupHeaderEnabled PayloadHeaderEnabled ExtendedFlags1Enabled;
@@ -27,9 +29,10 @@ ExtendedFlags2Enabled = BIT ; Bit 7 - The bit shall be 0, if ExtendedFlags2 is 0
 ExtendedFlags2 = ChunkMessage PromotedFieldsEnabled NetworkMessageType Reserved
 ChunkMessage = BIT
 PromotedFieldsEnabled = BIT ; Promoted fields can only be sent if the NetworkMessage contains only one DataSetMessage.
-NetworkMessageType = %b0.0.0 / ; NetworkMessage with DataSetMessage payload. If the ExtendedFlags2 element is not provided, this is the default value.
-                     %b0.0.1 / ; NetworkMessage with discovery request payload.
-                     %b0.1.0 / ; NetworkMessage with discovery response payload.
+NetworkMessageType = DataSetMessageType / DiscoveryRequestType/ DiscoveryResponseType ; The default is DataSetMessageType if the ExtendedFlags2 field is not enabled.
+DataSetMessageType      = %b0.0.0 / ; NetworkMessage with DataSetMessage payload. If the ExtendedFlags2 element is not provided, this is the default value.
+DiscoveryRequestType    = %b0.0.1 / ; NetworkMessage with discovery request payload.
+DiscoveryResponseType   = %b0.1.0 / ; NetworkMessage with discovery response payload.
 Reserved = %b0.0.0
 PublisherId = *OCTET
 DataSetClassId = Guid ; The DataSetClassId associated with the DataSet elements in the NetworkMessage. All DataSetMessage elements in the NetworkMessage shall have the same DataSetClassId.
@@ -37,32 +40,81 @@ DataSetClassId = Guid ; The DataSetClassId associated with the DataSet elements 
 
 GroupHeader = GroupFlags WriterGroupId GroupVersion NetworkMessageNumber SequenceNumber ; The GroupHeader shall be omitted if GroupHeaderEnabled is 0.
 GroupFlags = WriterGroupIdEnabled GroupVersionEnabled NetworkMessageNumberEnabled SequenceNumberEnabled GroupFlagsReserved
-WriterGroupIdEnabled =
-GroupVersionEnabled =
-NetworkMessageNumberEnabled =
-SequenceNumberEnabled =
-GroupFlagsReserved = 
+WriterGroupIdEnabled = BIT        ; Bit 0
+GroupVersionEnabled = BIT         ; Bit 1
+NetworkMessageNumberEnabled = BIT ; Bit 2
+SequenceNumberEnabled = BIT       ; Bit 3
+GroupFlagsReserved = %b0.0.0      ; Bits 4-6
 
-WriterGroupId =
-GroupVersion =
-NetworkMessageNumber =
-SequenceNumber
+WriterGroupId = UInt16     ; Unique id for the WriterGroup in the Publisher. A Subscriber can skip NetworkMessages from WriterGroups it does not expect NetworkMessages from. 
+                           ; This field shall be omitted ifbit WriterGroupIdEnabled of the GroupFlags is "0".
+GroupVersion = VersionTime ; Version of the header and payload layout configuration of the NetworkMessages sent for the group. This field shall be omitted if bit  WriterGroupIdEnabled of the GroupFlags is "0".
+NetworkMessageNumber = UInt16 ; Unique number of a NetworkMessage across the combination of PublisherId and WriterGroupId within one PublishingInterval. 
+                              ;The number is needed if the DataSetMessages for one group are split into more than one NetworkMessage in a PublishingInterval.
+                              ; The value 0 is invalid.
+                              ; This field shall be omitted if bit NetworkMessageNumberEnabled of the GroupFlags is "0".
+SequenceNumber = UInt16 ; Sequence number for the NetworkMessage. This field shall be omitted if bit SequenceNumberEnabled of the GroupFlags is "0"
 
-PayloadHeader = 
+VersionTime = ??
+UInt16 = 2*2 OCTET
+
+    ; The PayloadHeader syntax depends on the NetworkMessageType defined in the ExtendedFlags2 bit range. The default is DataSetMessageType if the ExtendedFlags2 field is not enabled.
+    ; The PayloadHeader shall be omitted if bit PayloadHeaderEnabled of the UADPFlags is "0".
+    ; The PayloadHeader is not contained in the payload but it is contained in the unencrypted NetworkMessage header since it contains information necessary to filter DataSetMessages on the Subscriber side.
+PayloadHeader = DataSetPayloadHeader /  DiscoveryRequestPayloadHeader / DiscoveryResponsePayloadHeader
+DataSetPayloadHeader = MessagesCount DataSetWriterIdList
+MessagesCount = OCTET           ; Number of DataSetMessage items contained in the NetworkMessage. The NetworkMessage shall contain at least one DataSetMessages if the NetworkMessage type is DataSetMessageType.
+DataSetWriterIdList =  * DataSetWriterId    ; List of DataSetWriterIds contained in the NetworkMessage. The size of the list is defined by the Count. 
+DataSetWriterId = Uint16                    ; The DataSetWriterId identifies the PublishedDataSet and the DataSetWriter responsible for sending Messages for the DataSet. 
+                                            ; A Subscriber can skip DataSetMessages from DataSetWriters it does not expect DataSetMessages from.
+DiscoveryRequestPayloadHeader = 
+DiscoveryResponsePayloadHeader
+
 ExtendedNetworkMessageHeader = Timestamp TimestampPicoSeconds PromotedFields
-SecurityHeader = SecurityFlags SecurityTokenId NonceLength Nonce
+SecurityHeader = SecurityFlags SecurityTokenId NonceLength MessageNonce SecurityFooterSize
+SecurityFlags = OCTET       ; A number used exactly once for a given security key. For a given security key a unique nonce shall be generated for every NetworkMessage. The rules for constructing the MessageNonce 
+                            ; are defined for the UADP Message Security in 7.2.2.2.3.
+SecurityTokenId = IntegerId ; The ID of the security token that identifies the security key in a SecurityGroup. The relation to the SecurityGroup is done through DataSetWriterIds contained in the NetworkMessage.
+NonceLength = OCTET         ; The length of the Nonce used to initialize the encryption algorithm.
+MessageNonce =  NonceLength*NonceLength Byte    ; A number used exactly once for a given security key. For a given security key a unique nonce shall be generated for every NetworkMessage. 
+                                                ; The rules for constructing the MessageNonce are defined for the UADP Message Security in 7.2.2.2.3.
+SecurityFooterSize = UInt16                     ; The size of the SecurityFooter. The security footer size shall be omitted if bit 2 of the SecurityFlags is false
+
 DataToEncrypt = Payload SecurityFooter
+Payload = DataSetMessagePayload / DiscoveryRequestPayload / DiscoveryResponsePayload  ; The payload depends on the NetworkMessageType flags defined in the ExtendedFlags2.
+DataSetMessagePayload = DataSetMessageSizeList * DataSetMessage
+DataSetMessageSizeList = * Uint16   ; The size of the list is defined by the Count in the DataSet payload header. 
+                                    ; If the payload size exceeds 65535, the DataSetMessages shall be allocated to separate NetworkMessages. 
+                                    ; If a single DataSetMessage exceeds the payload size it shall be split into Chunk NetworkMessages. 
+                                    ; This field shall be omitted if count is one or if bit 6 of the UADPFlags is false.
+
+DataSetMessage = 
+
+DiscoveryRequestPayload = 
+DiscoveryResponsePayload = 
+
+SecurityFooter = * OCTET    ; Optional security footer shall be omitted if bit 2 of the SecurityFlags is false. The content of the security footer is defined by the SecurityPolicy.
 
 DataSetMessage = DataSetMessageHeader 1*DataSetMessageField
-PublisherId = ;Identifies the Publisher 
+PublisherId = ; Identifies the Publisher 
 SecurityData = ; Only available for encodings that support message security. The relevant information is specified in the message mapping.
-PromotedFields = ;Selected fields out of the DataSet also sent in the header.
-DataSetMessageHeader 
+PromotedFields = ; Selected fields out of the DataSet also sent in the header.
+DataSetMessageHeader = 
 DataSetMessageField = 
 DataSetMessageContentMask = 
 DataSetWriterId =
-SequenceNumber =  ;A number that is incremented for each DataSetMessage. Can be used to verify the ordering and to detect missing messages.
-Timestamp =  ; A timestamp describing when the data in this DataSetMessage was obtained.
+SequenceNumber =        ;A number that is incremented for each DataSetMessage. Can be used to verify the ordering and to detect missing messages.
+Timestamp =  DateTime   ; The time the NetworkMessage was created. The Timestamp shall be omitted if bit TimestampEnabled of ExtendedFlags1 is false.
+                        ; The PublishingInterval, the SamplingOffset the PublishingOffset and the Timestamp and PicoSeconds in the NetworkMessage header shall use the same time base.
+PicoSeconds = UInt16    ; Specifies the number of 10 picoseconds (1,0 e-11 seconds) intervals which shall be added to the Timestamp.
+                        ; The PicoSeconds shall be omitted if bit PicoSecondsEnabled of ExtendedFlags1 is "0".
+PromotedFields = PromotedFieldsSize PromotedFieldsFields    ; The PromotedFields shall be omitted if bit PromotedFieldsEnabled of the ExtendedFlags2 is "0".
+                                                            ; If the PromotedFields are provided, the number of DataSetMessages in the Network Message shall be one.
+PromotedFieldsSize = UInt16 ;
+PromotedFieldsFields = * BaseDataType   ; Array of promoted fields. The size, order and DataTypes of the fields depend on the settings in the FieldMetaData of the DataSetMetaData associated with the 
+                                        ; DataSetMessage contained in the NetworkMessage.
+
+DateTime = 
 Version =  ;Version information about the configuration of the DataSetMetaData.
 Status = ; Status information about the data in this DataSetMessage
 KeepAlive =  ; When no DataSetMessages are sent for a configured time period, a keep alive DataSetMessage is sent to signal the Subscribers that the Publisher is still alive.

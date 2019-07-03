@@ -46,29 +46,29 @@ NetworkMessageNumberEnabled = BIT ; Bit 2
 SequenceNumberEnabled = BIT       ; Bit 3
 GroupFlagsReserved = %b0.0.0      ; Bits 4-6
 
-WriterGroupId = UInt16     ; Unique id for the WriterGroup in the Publisher. A Subscriber can skip NetworkMessages from WriterGroups it does not expect NetworkMessages from. 
-                           ; This field shall be omitted ifbit WriterGroupIdEnabled of the GroupFlags is "0".
-GroupVersion = VersionTime ; Version of the header and payload layout configuration of the NetworkMessages sent for the group. This field shall be omitted if bit  WriterGroupIdEnabled of the GroupFlags is "0".
-NetworkMessageNumber = UInt16 ; Unique number of a NetworkMessage across the combination of PublisherId and WriterGroupId within one PublishingInterval. 
-                              ;The number is needed if the DataSetMessages for one group are split into more than one NetworkMessage in a PublishingInterval.
-                              ; The value 0 is invalid.
-                              ; This field shall be omitted if bit NetworkMessageNumberEnabled of the GroupFlags is "0".
+WriterGroupId = UInt16          ; Unique id for the WriterGroup in the Publisher. A Subscriber can skip NetworkMessages from WriterGroups it does not expect NetworkMessages from. 
+                                ; This field shall be omitted ifbit WriterGroupIdEnabled of the GroupFlags is "0".
+GroupVersion = VersionTime      ; Version of the header and payload layout configuration of the NetworkMessages sent for the group. This field shall be omitted if bit  
+                                ; WriterGroupIdEnabled of the GroupFlags is "0".
+NetworkMessageNumber = UInt16   ; Unique number of a NetworkMessage across the combination of PublisherId and WriterGroupId within one PublishingInterval. 
+                                ;The number is needed if the DataSetMessages for one group are split into more than one NetworkMessage in a PublishingInterval.
+                                ; The value 0 is invalid.
+                                ; This field shall be omitted if bit NetworkMessageNumberEnabled of the GroupFlags is "0".
 SequenceNumber = UInt16 ; Sequence number for the NetworkMessage. This field shall be omitted if bit SequenceNumberEnabled of the GroupFlags is "0"
 
-VersionTime = ??
-UInt16 = 2*2 OCTET
-
-    ; The PayloadHeader syntax depends on the NetworkMessageType defined in the ExtendedFlags2 bit range. The default is DataSetMessageType if the ExtendedFlags2 field is not enabled.
+    ; The PayloadHeader syntax depends on the NetworkMessageType bit range defined in the ExtendedFlags2. The default is DataSetMessageType if the ExtendedFlags2 field is not enabled.
     ; The PayloadHeader shall be omitted if bit PayloadHeaderEnabled of the UADPFlags is "0".
-    ; The PayloadHeader is not contained in the payload but it is contained in the unencrypted NetworkMessage header since it contains information necessary to filter DataSetMessages on the Subscriber side.
+    ; The PayloadHeader is not contained in the payload but it is contained in the unencrypted NetworkMessage header since it contains information necessary to filter incomming 
+    ; DataSetMessage on the Subscriber side.
 PayloadHeader = DataSetPayloadHeader /  DiscoveryRequestPayloadHeader / DiscoveryResponsePayloadHeader
 DataSetPayloadHeader = MessagesCount DataSetWriterIdList
-MessagesCount = OCTET           ; Number of DataSetMessage items contained in the NetworkMessage. The NetworkMessage shall contain at least one DataSetMessages if the NetworkMessage type is DataSetMessageType.
-DataSetWriterIdList =  * DataSetWriterId    ; List of DataSetWriterIds contained in the NetworkMessage. The size of the list is defined by the Count. 
-DataSetWriterId = Uint16                    ; The DataSetWriterId identifies the PublishedDataSet and the DataSetWriter responsible for sending Messages for the DataSet. 
-                                            ; A Subscriber can skip DataSetMessages from DataSetWriters it does not expect DataSetMessages from.
+MessagesCount = OCTET                       ; Number of DataSetMessage items contained in the NetworkMessage. The NetworkMessage shall contain at least one DataSetMessage if the NetworkMessageType is DataSetMessageType.
+DataSetWriterIdList = * DataSetWriterId     ; List of DataSetWriterId items contained in the NetworkMessage. The size of the list is defined by the MessagesCount
+                                            ; The DataSetWriterId identifies the PublishedDataSet and the DataSetWriter responsible for sending Messages for the DataSet.
+DataSetWriterId = Uint16                    ; A Subscriber can skip DataSetMessages from DataSetWriters it does not expect DataSetMessages from.
+
 DiscoveryRequestPayloadHeader = 
-DiscoveryResponsePayloadHeader
+DiscoveryResponsePayloadHeader = 
 
 ExtendedNetworkMessageHeader = Timestamp TimestampPicoSeconds PromotedFields
 SecurityHeader = SecurityFlags SecurityTokenId NonceLength MessageNonce SecurityFooterSize
@@ -81,21 +81,81 @@ MessageNonce =  NonceLength*NonceLength Byte    ; A number used exactly once for
 SecurityFooterSize = UInt16                     ; The size of the SecurityFooter. The security footer size shall be omitted if bit 2 of the SecurityFlags is false
 
 DataToEncrypt = Payload SecurityFooter
-Payload = DataSetMessagePayload / DiscoveryRequestPayload / DiscoveryResponsePayload  ; The payload depends on the NetworkMessageType flags defined in the ExtendedFlags2.
-DataSetMessagePayload = DataSetMessageSizeList * DataSetMessage
-DataSetMessageSizeList = * Uint16   ; The size of the list is defined by the Count in the DataSet payload header. 
-                                    ; If the payload size exceeds 65535, the DataSetMessages shall be allocated to separate NetworkMessages. 
-                                    ; If a single DataSetMessage exceeds the payload size it shall be split into Chunk NetworkMessages. 
-                                    ; This field shall be omitted if count is one or if bit 6 of the UADPFlags is false.
 
-DataSetMessage = 
+; Payload
+
+Payload = DataSetMessagePayload / DiscoveryRequestPayload / DiscoveryResponsePayload  ; The payload depends on the NetworkMessageType flags defined in the ExtendedFlags2.
+DataSetMessagePayload = DataSetMessageSizeList (DataSetMessageList / 
+DataSetMessageSizeList = * DataSetMessageSize   ; The size of the list is defined by the MessagesCount in the DataSetPayloadHeader. 
+DataSetMessageSize = Uint16                     ; If the payload size exceeds 65535, the DataSetMessages shall be allocated to separate NetworkMessages. 
+                                                ; If a single DataSetMessage exceeds the payload size it shall be split into Chunk NetworkMessages. 
+                                                ; This field shall be omitted if count is one or if bit PayloadHeaderEnabled of the UADPFlags is "0".
+
+DataSetMessageList = 1* DataSetMessage  ; DataSetMessageList contained in the NetworkMessage. The size of the list is defined by the MessagesCount in the DataSetPayloadHeader.
+                                        ; The type of encoding used for the DataSetMessages is defined by the DataSetWriter. The encodings for the DataSetMessage are defined in 7.2.2.3.4. 
 
 DiscoveryRequestPayload = 
 DiscoveryResponsePayload = 
 
 SecurityFooter = * OCTET    ; Optional security footer shall be omitted if bit 2 of the SecurityFlags is false. The content of the security footer is defined by the SecurityPolicy.
 
-DataSetMessage = DataSetMessageHeader 1*DataSetMessageField
+; DataSetMessage
+
+DataSetMessage = DataSetMessageHeader MessageData  
+DataSetMessageHeader =  DataSetFlags1 DataSetFlags2 DataSetMessageSequenceNumber Timestamp PicoSeconds Status ConfigurationVersionMajorVersion ConfigurationVersionMinorVersion 
+MessageData = 
+
+; DataSetMessageHeader
+DataSetFlags1 = DataSetMessageIsValid FieldEncoding DataSetMessageSequenceNumberEnabled StatusEnabled ConfigurationVersionMajorVersionEnabled ConfigurationVersionMinorVersionEnabled DataSetFlags2Enabled 
+DataSetFlags2 = DataSetMessageType TimestampEnabled PicoSecondsIncluded  DataSetFlags2Reserved
+DataSetMessageType = DataKeyFrameMessageType / DataDeltaFrameMessageType / EventMessageType / KeepAliveMessageType / DataSetMessageTypeReserved ; Bit range 0-3:
+TimestampEnabled = BIT ; Bit 4
+PicoSecondsIncluded  = BIT ; Bit 5
+DataSetFlags2Reserved = %b0.0-%b1.1 ; Bits range 6-7
+
+; DataSetMessageType
+DataKeyFrameMessageType     = %b0.0.0.0 ; If the DataSetFlags2 field is not provided, this is the default DataSetMessageType.
+DataDeltaFrameMessageType   = %b0.0.0.1
+EventMessageType            = %b0.0.1.0
+KeepAliveMessageType        = %b0.0.1.1
+DataSetMessageTypeReserved  = %b0.1.0.0-%b1.1.1.1 ; Reserved for further extended flag fields
+
+DataSetMessageSequenceNumber = Uint16   ; A strictly monotonically increasing sequence number assigned by the publisher to each DataSetMessage sent. 
+                                        ; A receiver should ignore older DataSetMessage than the last sequence processed if it does not handle reordering of DataSetMessages. 
+                                        ; Receivers need to be aware of sequence numbers roll over (change from 65535 to 0). 
+                                        ; To determine whether a received DataSetMessage is newer than the last processed DataSetMessage the following formula shall be used: 
+                                        ; (65535 + received sequence number – last processed sequence number) modulo 65536
+                                        ; Results below 16384 indicate that the received DataSetMessage is newer than the last processed DataSetMessage and the received DataSetMessage is processed.
+                                        ; Results above 49162 indicate that the received message is older (or same) than the last processed DataSetMessage and the received DataSetMessage should be ignored if reordering of DataSetMessages is not necessary.
+                                        ; Other results are invalid and the DataSetMessage shall be ignored. The field shall be omitted if bit DataSetMessageSequenceNumberEnabled of DataSetFlags1 is "0".
+Timestamp = UtcTime     ; The time the Data was collected. The Timestamp shall be omitted if Bit TimestampEnabled of DataSetFlags2 is "0".
+PicoSeconds = Uint16    ; Specifies the number of 10 picoseconds (1,0 e-11 seconds) intervals which shall be added to the Timestamp. 
+                        ; The field must be omitted if Bit PicoSecondsIncluded of DataSetFlags2 is "0".
+Status =  Uint16        ; The overall status of the DataSet. This is the high order 16 bits of the StatusCode DataType representing the numeric value of the Severity and SubCode of the StatusCode DataType. 
+                        ; The field shall be omitted if bit StatusEnabled of DataSetFlags1 is "0".
+ConfigurationVersionMajorVersion = VersionTime  ; The major version of the configuration version of the DataSet used as consistency check with the DataSetMetaData available on the Subscriber side. 
+                                                ; The field shall be omitted if Bit ConfigurationVersionMajorVersionEnabled of DataSetFlags1 is "0".
+ConfigurationVersionMinorVersion = VersionTime  ; The minor version of the configuration version of the DataSet used as consistency check with the DataSetMetaData available on the Subscriber side. 
+                                                ; The field shall be omitted if Bit ConfigurationVersionMinorVersionEnabled of DataSetFlags1 is "0".
+
+; DataSetFlags1
+DataSetMessageIsValid = BIT ; Bit 0: DataSetMessage is valid. If this bit is set to false, the rest of this DataSetMessage is considered invalid, and shall not be processed by the Subscriber.
+FieldEncoding = FieldEncodingVariant / FieldEncodingRawData / FieldEncodingDataValue / FieldEncodingReserved; Bit 1-2
+DataSetMessageSequenceNumberEnabled = BIT       ; Bit 3
+StatusEnabled = BIT                             ; Bit 4 
+ConfigurationVersionMajorVersionEnabled = BIT   ; Bit 5
+ConfigurationVersionMinorVersionEnabled = BIT   ; Bit 6
+DataSetFlags2Enabled = BIT                      ; Bit 7
+
+; FieldEncoding - Bit range 1-2
+FieldEncodingVariant =  %b0.0   ; 00 - The DataSet fields are encoded as Variant The Variant can contain a StatusCode instead of the expected DataType if the status of the field is Bad. 
+                                ; The Variant can contain a DataValue with the value and the statusCode if the status of the field is Uncertain
+FieldEncodingRawData = %b0.1    ; 01 - RawData Field Encoding The DataSet fields are encoded in the DataTypes specified in the DataSetMetaData for the DataSet.
+                                ; The encoding is handled like a Structure DataType where the DataSet fields are handled like Structure fields and fields with Structure
+                                ; DataType are handled like nested structures. All restrictions for the encoding of Structure DataTypes also apply to the RawData Field Encoding.
+FieldEncodingDataValue = %b1.0  ; 10 - DataValue Field Encoding. The DataSet fields are encoded as DataValue. This option is set if the DataSet is configured to send more than the Value.
+FieldEncodingReserved = %b1.1   ; 11 - Reserved
+
 PublisherId = ; Identifies the Publisher 
 SecurityData = ; Only available for encodings that support message security. The relevant information is specified in the message mapping.
 PromotedFields = ; Selected fields out of the DataSet also sent in the header.
@@ -115,8 +175,10 @@ PromotedFieldsFields = * BaseDataType   ; Array of promoted fields. The size, or
                                         ; DataSetMessage contained in the NetworkMessage.
 
 DateTime = 
+VersionTime = ??
 Version =  ;Version information about the configuration of the DataSetMetaData.
 Status = ; Status information about the data in this DataSetMessage
 KeepAlive =  ; When no DataSetMessages are sent for a configured time period, a keep alive DataSetMessage is sent to signal the Subscribers that the Publisher is still alive.
+UInt16 = 2*2 OCTET
 BIT = "0" / "1"
 OCTET = %x00-FF ; 8 bits of data

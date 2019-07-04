@@ -85,7 +85,7 @@ DataToEncrypt = Payload SecurityFooter
 ; Payload
 
 Payload = DataSetMessagePayload / DiscoveryRequestPayload / DiscoveryResponsePayload  ; The payload depends on the NetworkMessageType flags defined in the ExtendedFlags2.
-DataSetMessagePayload = DataSetMessageSizeList (DataSetMessageList / 
+DataSetMessagePayload = DataSetMessageSizeList DataSetMessageList
 DataSetMessageSizeList = * DataSetMessageSize   ; The size of the list is defined by the MessagesCount in the DataSetPayloadHeader. 
 DataSetMessageSize = Uint16                     ; If the payload size exceeds 65535, the DataSetMessages shall be allocated to separate NetworkMessages. 
                                                 ; If a single DataSetMessage exceeds the payload size it shall be split into Chunk NetworkMessages. 
@@ -93,17 +93,37 @@ DataSetMessageSize = Uint16                     ; If the payload size exceeds 65
 
 DataSetMessageList = 1* DataSetMessage  ; DataSetMessageList contained in the NetworkMessage. The size of the list is defined by the MessagesCount in the DataSetPayloadHeader.
                                         ; The type of encoding used for the DataSetMessages is defined by the DataSetWriter. The encodings for the DataSetMessage are defined in 7.2.2.3.4. 
-
-DiscoveryRequestPayload = 
-DiscoveryResponsePayload = 
+; CDN 
+DiscoveryRequestPayload     = 
+DiscoveryResponsePayload    = 
 
 SecurityFooter = * OCTET    ; Optional security footer shall be omitted if bit 2 of the SecurityFlags is false. The content of the security footer is defined by the SecurityPolicy.
 
 ; DataSetMessage
 
-DataSetMessage = DataSetMessageHeader MessageData  
-DataSetMessageHeader =  DataSetFlags1 DataSetFlags2 DataSetMessageSequenceNumber Timestamp PicoSeconds Status ConfigurationVersionMajorVersion ConfigurationVersionMinorVersion 
-MessageData = 
+DataSetMessage = DataKeyMessageData / DataDeltaMessageData / EventMessageData / KeepAliveMessageData  
+
+KeepAliveMessageDataHeader  = DataSetFlags1 DataSetFlags2 DataSetMessageSequenceNumber
+DataSetMessageHeader        =  KeepAliveMessageDataHeader Timestamp PicoSeconds Status ConfigurationVersionMajorVersion ConfigurationVersionMinorVersion 
+
+DataKeyMessageData      = DataSetMessageHeader FieldCount DataSetFields
+DataDeltaMessageData    = DataSetMessageHeader FieldCount DeltaFrameFields
+EventMessageData        = DataSetMessageHeader FieldCount DataSetFields     ; The fields of EventMessageData  shall be encoded as Variant. The FieldEncoding should be set acordingly.
+KeepAliveMessageData    = KeepAliveMessageDataHeader                        ; The keep alive message does not add any additional fields.
+
+; DataKeyMessageData
+
+FieldCount = UInt16 ; Number of fields of the DataSet contained in the DataSetMessage. The FieldCount shall be omitted if FieldEncodingRawData is set in the FieldEncoding bits
+DataSetFields = * BaseDataType ; The field values of the DataSet.
+
+; DataDeltaMessageData
+
+DeltaFrameFields = * DeltaFrameField
+DeltaFrameField = FieldIndex FieldValue
+FieldIndex = UInt16         ; The index of the Field in the DataSet. The index is based on the field position in the DataSetMetaData with the configuration version defined in the ConfigurationVersion field.
+FieldValue = BaseDataType   ; The field values of the DataSet. 
+
+BaseDataType = * OCTET      ; The field value of the DataSet. The field encoding depends on the FieldEncoding value. The default encoding is FieldEncodingVariant.
 
 ; DataSetMessageHeader
 DataSetFlags1 = DataSetMessageIsValid FieldEncoding DataSetMessageSequenceNumberEnabled StatusEnabled ConfigurationVersionMajorVersionEnabled ConfigurationVersionMinorVersionEnabled DataSetFlags2Enabled 

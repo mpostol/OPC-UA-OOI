@@ -1,17 +1,61 @@
+;//____________________________________________________________________________
+;//
+;//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+;//
+;//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+;//
+;//  This document contains Augmented BNF definition of the NetworkMessage
+;//  NetworkMessage is orginaly defined in OPC UA Part 14
+;//  Augmented BNF is defined in th document Augmented BNF for Syntax Specifications: ABNF RFC 5234
+;//____________________________________________________________________________
+
 NetworkMessage = DataToSign Signature
 
-DataToSign = NetworkMessageHeader GroupHeader PayloadHeader ExtendedNetworkMessageHeader [SecurityHeader] DataToEncrypt
-Signature = 0*OCTET ; The signature of the NetworkMessage.
+; NetworkMessage
 
-NetworkMessageHeader = UADPVersion UADPFlags [ExtendedFlags1] ExtendedFlags2 PublisherId DataSetClassId
-UADPVersion = OCTET ;Version of the NetworkMessage. The UADPVersion for this specification version is %x01.
-UADPFlags = PublisherIdEnabled  GroupHeaderEnabled PayloadHeaderEnabled ExtendedFlags1Enabled;
-PublisherIdEnabled = BIT; Bit 4 - If the PublisherId is enabled, the type of PublisherId is indicated in the ExtendedFlags1 field
-GroupHeaderEnabled = BIT; Bit 5 - The GroupHeader shall be omitted if GroupHeaderEnabled is 0.
-PayloadHeaderEnabled = BIT; Bit 6 - 
-ExtendedFlags1Enabled = BIT ;Bit 7 - The bit shall be false, if ExtendedFlags1 is 0.
-ExtendedFlags1 = PublisherIdType DataSetClassIdEnabled SecurityEnabled TimestampEnabled PicoSecondsEnabled ExtendedFlags2Enabled ;The ExtendedFlags1 shall be omitted if ExtendedFlags1Enabled is 0. 
-                                                                                                                                 ;If the field is omitted, the default value of 0 is applied for all bits.
+DataToSign = NetworkMessageHeader [ GroupHeader ] [ PayloadHeader ] ExtendedNetworkMessageHeader [ SecurityHeader ] DataToEncrypt
+Signature = * OCTET             ; The signature of the NetworkMessage.
+
+; DataToSign
+NetworkMessageHeader    = UADPVersion UADPFlags [ ExtendedFlags1 ] [ ExtendedFlags2 ] [ PublisherId ] [ DataSetClassId ]
+GroupHeader             = GroupFlags WriterGroupId GroupVersion NetworkMessageNumber SequenceNumber ; The GroupHeader shall be omitted if GroupHeaderEnabled is 0.
+PayloadHeader           = DataSetPayloadHeader /  DiscoveryRequestPayloadHeader / DiscoveryResponsePayloadHeader
+    ; The PayloadHeader syntax depends on the NetworkMessageType bit range defined in the ExtendedFlags2. The default is DataSetMessageType if the ExtendedFlags2 field is not enabled.
+    ; The PayloadHeader shall be omitted if bit PayloadHeaderEnabled of the UADPFlags is "0".
+    ; The PayloadHeader is not contained in the payload but it is contained in the unencrypted NetworkMessage header since it contains information necessary to filter incomming DataSetMessage on the Subscriber side.
+ExtendedNetworkMessageHeader    = Timestamp TimestampPicoSeconds PromotedFields
+SecurityHeader                  = SecurityFlags SecurityTokenId NonceLength MessageNonce SecurityFooterSize
+DataToEncrypt                   = Payload SecurityFooter
+
+; NetworkMessageHeader
+UADPVersion             = %b0.0.0-1.1.1 ; Version of the NetworkMessage. The UADPVersion for this specification version is %b0.0.1
+UADPFlags               = PublisherIdEnabled  GroupHeaderEnabled PayloadHeaderEnabled ExtendedFlags1Enabled;
+ExtendedFlags1          = PublisherIdType DataSetClassIdEnabled SecurityEnabled TimestampEnabled PicoSecondsEnabled ExtendedFlags2Enabled   ;The ExtendedFlags1 shall be omitted if ExtendedFlags1Enabled is 0. 
+                                                                                                                                            ;If the field is omitted, the default value of 0 is applied for all bits.
+ExtendedFlags2          = ChunkMessage PromotedFieldsEnabled NetworkMessageType ExtendedFlags2Reserved  ; The ExtendedFlags2 shall be omitted if bit ExtendedFlags2Enabled of the ExtendedFlags1 is false.
+                                                                                                        ; If the field is omitted, the Subscriber shall handle the related bits as false.
+PublisherId             = OCTET / UInt16 / UInt32 / UInt64 / String     ; The syntax depends on PublisherIdType
+DataSetClassId          = Guid  ; The DataSetClassId associated with the DataSet elements in the NetworkMessage. All DataSetMessage elements in the NetworkMessage shall have the same DataSetClassId.
+                                ; The DataSetClassId shall be omitted if DataSetClassIdEnabled is 0
+
+; GroupHeader
+; ??
+
+; GroupHeader
+
+; ExtendedNetworkMessageHeader
+
+; SecurityHeader
+
+; DataToEncrypt
+
+; UADPFlags
+PublisherIdEnabled      = BIT   ; Bit 4 - If the PublisherId is enabled, the type of PublisherId is indicated in the ExtendedFlags1 field
+GroupHeaderEnabled      = BIT   ; Bit 5 - The GroupHeader shall be omitted if GroupHeaderEnabled is 0.
+PayloadHeaderEnabled    = BIT   ; Bit 6 - 
+ExtendedFlags1Enabled   = BIT   ; Bit 7 - The bit shall be false, if ExtendedFlags1 is 0.
+
+; ExtendedFlags1
 PublisherIdType = %b0.0.0 / ; The PublisherId is of DataType Byte,
                   %b0.0.1 / ; The PublisherId is of DataType UInt16
                   %b0.1.0 / ; The PublisherId is of DataType UInt32
@@ -20,13 +64,14 @@ PublisherIdType = %b0.0.0 / ; The PublisherId is of DataType Byte,
                   %b1.0.1 / ; Reserved
                   %b1.1.0 / ; Reserved
                   %b1.1.1   ; Reserved
-DataSetClassIdEnabled = BIT ; Bit 3:
-SecurityEnabled = BIT       ; Bit 4 - If the SecurityMode is SIGN_1 or SIGNANDENCRYPT_2, this flag is set, message security is enabled and the SecurityHeader is contained in the NetworkMessage header.
-                            ; If this flag is not set, the SecurityHeader is omitted.
-TimestampEnabled = BIT      ; Bit 5
-PicoSecondsEnabled = BIT    ; Bit 6
-ExtendedFlags2Enabled = BIT ; Bit 7 - The bit shall be 0, if ExtendedFlags2 is 0.
-ExtendedFlags2 = ChunkMessage PromotedFieldsEnabled NetworkMessageType ExtendedFlags2Reserved
+DataSetClassIdEnabled   = BIT   ; Bit 3:
+SecurityEnabled         = BIT   ; Bit 4 - If the SecurityMode is SIGN_1 or SIGNANDENCRYPT_2, this flag is set, message security is enabled and the SecurityHeader is contained in the NetworkMessage header.
+                                ; If this flag is not set, the SecurityHeader is omitted.
+TimestampEnabled        = BIT   ; Bit 5
+PicoSecondsEnabled      = BIT   ; Bit 6
+ExtendedFlags2Enabled   = BIT   ; Bit 7 - The bit shall be 0, if ExtendedFlags2 is 0.
+
+;ExtendedFlags2
 ChunkMessage = BIT ; Bit 0
 PromotedFieldsEnabled = BIT ; Bit 1 Promoted fields can only be sent if the NetworkMessage contains only one DataSetMessage.
 NetworkMessageType = DataSetMessageType / DiscoveryRequestType/ DiscoveryResponseType ; Bits 2-4 The default is DataSetMessageType if the ExtendedFlags2 field is not enabled.
@@ -34,17 +79,14 @@ DataSetMessageType      = %b0.0.0 / ; NetworkMessage with DataSetMessage payload
 DiscoveryRequestType    = %b0.0.1 / ; NetworkMessage with discovery request payload.
 DiscoveryResponseType   = %b0.1.0 / ; NetworkMessage with discovery response payload.
 ExtendedFlags2Reserved  = %b0.0.0   ; Bit 5-7
-PublisherId = *OCTET
-DataSetClassId = Guid ; The DataSetClassId associated with the DataSet elements in the NetworkMessage. All DataSetMessage elements in the NetworkMessage shall have the same DataSetClassId.
-                      ; The DataSetClassId shall be omitted if DataSetClassIdEnabled is 0
 
-GroupHeader = GroupFlags WriterGroupId GroupVersion NetworkMessageNumber SequenceNumber ; The GroupHeader shall be omitted if GroupHeaderEnabled is 0.
 GroupFlags = WriterGroupIdEnabled GroupVersionEnabled NetworkMessageNumberEnabled SequenceNumberEnabled GroupFlagsReserved
-WriterGroupIdEnabled = BIT        ; Bit 0
-GroupVersionEnabled = BIT         ; Bit 1
-NetworkMessageNumberEnabled = BIT ; Bit 2
-SequenceNumberEnabled = BIT       ; Bit 3
-GroupFlagsReserved = %b0.0.0      ; Bits 4-6
+; GroupFlags
+WriterGroupIdEnabled        = BIT       ; Bit 0
+GroupVersionEnabled         = BIT       ; Bit 1
+NetworkMessageNumberEnabled = BIT       ; Bit 2
+SequenceNumberEnabled       = BIT       ; Bit 3
+GroupFlagsReserved          = %b0.0.0.0 ; Bits 4-7
 
 WriterGroupId = UInt16          ; Unique id for the WriterGroup in the Publisher. A Subscriber can skip NetworkMessages from WriterGroups it does not expect NetworkMessages from. 
                                 ; This field shall be omitted ifbit WriterGroupIdEnabled of the GroupFlags is "0".
@@ -56,11 +98,9 @@ NetworkMessageNumber = UInt16   ; Unique number of a NetworkMessage across the c
                                 ; This field shall be omitted if bit NetworkMessageNumberEnabled of the GroupFlags is "0".
 SequenceNumber = UInt16 ; Sequence number for the NetworkMessage. This field shall be omitted if bit SequenceNumberEnabled of the GroupFlags is "0"
 
-    ; The PayloadHeader syntax depends on the NetworkMessageType bit range defined in the ExtendedFlags2. The default is DataSetMessageType if the ExtendedFlags2 field is not enabled.
-    ; The PayloadHeader shall be omitted if bit PayloadHeaderEnabled of the UADPFlags is "0".
-    ; The PayloadHeader is not contained in the payload but it is contained in the unencrypted NetworkMessage header since it contains information necessary to filter incomming 
-    ; DataSetMessage on the Subscriber side.
-PayloadHeader = DataSetPayloadHeader /  DiscoveryRequestPayloadHeader / DiscoveryResponsePayloadHeader
+
+; PayloadHeader
+
 DataSetPayloadHeader = MessagesCount DataSetWriterIdList
 MessagesCount = OCTET                       ; Number of DataSetMessage items contained in the NetworkMessage. The NetworkMessage shall contain at least one DataSetMessage if the NetworkMessageType is DataSetMessageType.
 DataSetWriterIdList = * DataSetWriterId     ; List of DataSetWriterId items contained in the NetworkMessage. The size of the list is defined by the MessagesCount
@@ -79,8 +119,10 @@ DiscoveryResponseTypeDataSetMetadata                = %x02
 DiscoveryResponseTypeDataSetWriterConfiguration     = %x03
 
 RequestType = OCTET ; 
-ExtendedNetworkMessageHeader = Timestamp TimestampPicoSeconds PromotedFields
-SecurityHeader = SecurityFlags SecurityTokenId NonceLength MessageNonce SecurityFooterSize
+
+
+; SecurityHeader
+
 SecurityFlags = OCTET       ; A number used exactly once for a given security key. For a given security key a unique nonce shall be generated for every NetworkMessage. The rules for constructing the MessageNonce 
                             ; are defined for the UADP Message Security in 7.2.2.2.3.
 SecurityTokenId = IntegerId ; The ID of the security token that identifies the security key in a SecurityGroup. The relation to the SecurityGroup is done through DataSetWriterIds contained in the NetworkMessage.
@@ -89,10 +131,10 @@ MessageNonce =  NonceLength*NonceLength Byte    ; A number used exactly once for
                                                 ; The rules for constructing the MessageNonce are defined for the UADP Message Security in 7.2.2.2.3.
 SecurityFooterSize = UInt16                     ; The size of the SecurityFooter. The security footer size shall be omitted if bit 2 of the SecurityFlags is false
 
-DataToEncrypt = Payload SecurityFooter
+; DataToEncrypt
+Payload = DataSetMessagePayload / DiscoveryRequestPayload / DiscoveryResponsePayload  ; The payload depends on the NetworkMessageType flags defined in the ExtendedFlags2.
 
 ; Payload
-Payload = DataSetMessagePayload / DiscoveryRequestPayload / DiscoveryResponsePayload  ; The payload depends on the NetworkMessageType flags defined in the ExtendedFlags2.
 DataSetMessagePayload = DataSetMessageSizeList DataSetMessageList
 DataSetMessageSizeList = * DataSetMessageSize   ; The size of the list is defined by the MessagesCount in the DataSetPayloadHeader. 
 DataSetMessageSize = Uint16                     ; If the payload size exceeds 65535, the DataSetMessages shall be allocated to separate NetworkMessages. 
@@ -112,9 +154,9 @@ DataSetWriterConfiguration  = %x03
 
 DiscoveryResponsePayload    = PublisherEndpointsMessage / DataSetMetaDataMessage / DataSetWriterConfigurationMessage
 
-PublisherEndpointsMessage           = Endpoints StatusCode
+PublisherEndpointsMessage   = Endpoints StatusCode
 Endpoints = * EndpointDescription ; The OPC UA Server Endpoints of the Publisher. The EndpointDescription is defined in Part 4.
-StatusCode = ?? ; Status code indicating the capability of the Publisher to provide Endpoints.
+
 
 DataSetMetaDataMessage              = DataSetWriterId DataSetMetaDataType StatusCode
 DataSetMetaDataType  = Name Description Fields DataSetClassId ConfigurationVersionDataType
@@ -164,12 +206,26 @@ Properties      = * KeyValuePair    ; List of Property values providing addition
                                     ; KeyValuePair structure is the Value of the Property.
 
 
-Guid = ?? 
+
 ConfigurationVersionDataType =  MajorVersion MinorVersion
 
-DataSetWriterConfigurationMessage   = DataSetWriterIds DataSetWriterConfig * StatusCode ; ?? 7.2.2.4.2.5
+DataSetWriterConfigurationMessage   = DataSetWriterIdList DataSetWriterConfig * StatusCode
 
-SecurityFooter = * OCTET    ; Optional security footer shall be omitted if bit 2 of the SecurityFlags is false. The content of the security footer is defined by the SecurityPolicy.
+DataSetWriterConfig = WriterGroupDataType
+WriterGroupDataType = writerGroupId publishingInterval keepAliveTime priority localeIds transportSettings messageSettings dataSetWriters
+writerGroupId       = UInt32
+publishingInterval  = Durration
+keepAliveTime       = Durration
+priority            = OCTET
+localeIds           = * String
+transportSettings   = WriterGroupTransportDataType  ; Transport mapping specific WriterGroup parameters.
+messageSettings     = WriterGroupMessageDataType    ; NetworkMessage mapping specific WriterGroup parameters.
+dataSetWriters      = DataSetWriterDataType         ; The DataSetWriters contained in the WriterGroup.
+
+WriterGroupTransportDataType    = * OCTET   ; Depends on transport
+WriterGroupMessageDataType      = * OCTET   ; Depends on transport
+DataSetWriterDataType           = * OCTET   ; The DataSetWriters contained in the WriterGroup.
+SecurityFooter                  = * OCTET   ; Optional security footer shall be omitted if bit 2 of the SecurityFlags is false. The content of the security footer is defined by the SecurityPolicy.
 
 ; DataSetMessage
 
@@ -252,10 +308,7 @@ FieldEncodingReserved = %b1.1   ; 11 - Reserved
 PublisherId = ; Identifies the Publisher 
 SecurityData = ; Only available for encodings that support message security. The relevant information is specified in the message mapping.
 PromotedFields = ; Selected fields out of the DataSet also sent in the header.
-DataSetMessageHeader = 
-DataSetMessageField = 
-DataSetMessageContentMask = 
-DataSetWriterId =
+
 Timestamp =  DateTime   ; The time the NetworkMessage was created. The Timestamp shall be omitted if bit TimestampEnabled of ExtendedFlags1 is false.
                         ; The PublishingInterval, the SamplingOffset the PublishingOffset and the Timestamp and PicoSeconds in the NetworkMessage header shall use the same time base.
 PicoSeconds = UInt16    ; Specifies the number of 10 picoseconds (1,0 e-11 seconds) intervals which shall be added to the Timestamp.
@@ -265,11 +318,16 @@ PromotedFields = PromotedFieldsSize PromotedFieldsFields    ; The PromotedFields
 PromotedFieldsSize = UInt16 ;
 PromotedFieldsFields = * BaseDataType   ; Array of promoted fields. The size, order and DataTypes of the fields depend on the settings in the FieldMetaData of the DataSetMetaData associated with the 
                                         ; DataSetMessage contained in the NetworkMessage.
-
-DateTime = 
 ; PART 4 definitions
-VersionTime = ?? ; The VersionTime DataType is defined in Part 4.
-KeepAlive =  ; When no DataSetMessages are sent for a configured time period, a keep alive DataSetMessage is sent to signal the Subscribers that the Publisher is still alive.
-UInt16 = 2*2 OCTET
+VersionTime = UInt32 ; This primitive data type is a UInt32 that represents the time in seconds since the year 2000.
+
+; Part 6 definitions
+DateTime    = UInt64;
+StatusCode  = UInt32 ; Status code indicating the capability of the Publisher to provide Endpoints.
+UInt16      = 2 OCTET
+UInt32      = 4 OCTET
+Guid        = 16 OCTET
+
+; RFC 5234 Brandenburg
 BIT = "0" / "1"
 OCTET = %x00-FF ; 8 bits of data

@@ -123,7 +123,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         DataType = DataType,
         Description = m_Description,
         Identifier = Value,
-        IdentifierSpecified = true,
+        IdentifierSpecified = Value != -1,
         Name = Name,
         ValueRank = ValueRank.GetValueRank(x => _ValueRankSpecified = x, TraceEvent),
         ArrayDimensions = ArrayDimensions,

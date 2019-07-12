@@ -21,10 +21,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Validates <paramref name="nodeContext" /> and exports it using an object of <see cref="IModelFactory" />  type.
     /// </summary>
     /// <param name="nodeContext">The node context to be validated and exported.</param>
-    /// <param name="instanceDeclaration">The instance declaration.</param>
     /// <param name="exportFactory">A model export factory.</param>
     /// <param name="parentReference">The reference to parent node.</param>
-    void ValidateExportNode(IUANodeBase nodeContext, IUANodeBase instanceDeclaration, INodeContainer exportFactory, UAReferenceContext parentReference);
+    void ValidateExportNode(IUANodeBase nodeContext, INodeContainer exportFactory, UAReferenceContext parentReference);
 
   }
 

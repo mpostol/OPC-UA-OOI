@@ -158,8 +158,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               _children.Add(_rfx);
             break;
           case ReferenceKindEnum.HasProperty:
-            if ((_rfx.SourceNode == this) &&
-              (!(_rfx.SourceNode.UANode.NodeClassEnum == NodeClassEnum.UADataType) || _rfx.TargetNode.UANode.BrowseName.CompareTo("EnumStrings") != 0))
+            if ((_rfx.SourceNode == this) && (_rfx.SourceNode.UANode.NodeClassEnum != NodeClassEnum.UADataType))
               _children.Add(_rfx);
             break;
           case ReferenceKindEnum.HasModellingRule:
@@ -182,7 +181,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           if (_rc.TargetNode.Equals(_instanceDeclaration))
             continue;
           _rc.TargetNode.RemoveInheritedValues(_instanceDeclaration);
-          validator.ValidateExportNode(_rc.TargetNode, null, nodeFactory, _rc);
+          validator.ValidateExportNode(_rc.TargetNode, nodeFactory, _rc);
         }
         catch (Exception) { throw; }
       }

@@ -150,11 +150,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       _addressSpaceMock.Setup(x => x.GetMyReferences(It.IsAny<IUANodeBase>())).Returns(new List<UAReferenceContext>());
       Mock<INodeFactory> _mockNodeFactory = new Mock<INodeFactory>();
       Mock<IValidator> _validatorMoc = new Mock<IValidator>();
-      _validatorMoc.Setup(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()));
+      _validatorMoc.Setup(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()));
       IUANodeBase _node = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object);
       _node.CalculateNodeReferences(_mockNodeFactory.Object, _validatorMoc.Object);
       _addressSpaceMock.Verify(x => x.GetMyReferences(It.IsAny<IUANodeBase>()), Times.Once);
-      _validatorMoc.Verify(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()), Times.Never);
+      _validatorMoc.Verify(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(),  _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()), Times.Never);
     }
     [TestMethod]
     public void EqualsTest()

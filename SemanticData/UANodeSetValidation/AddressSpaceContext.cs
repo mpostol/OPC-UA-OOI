@@ -363,7 +363,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         try
         {
-          validator.ValidateExportNode(_item, null, InformationModelFactory, null); //y =>
+          validator.ValidateExportNode(_item, InformationModelFactory, null); //y =>
           _nc++;
         }
         catch (Exception _ex)

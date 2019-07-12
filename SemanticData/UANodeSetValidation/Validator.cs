@@ -38,10 +38,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Validates <paramref name="nodeContext" /> and exports it using an object of <see cref="IModelFactory" />  type.
     /// </summary>
     /// <param name="nodeContext">The node context to be validated and exported.</param>
-    /// <param name="instanceDeclaration">The instance declaration.</param>
     /// <param name="exportFactory">A model export factory.</param>
     /// <param name="parentReference">The reference to parent node.</param>
-    public void ValidateExportNode(IUANodeBase nodeContext, IUANodeBase instanceDeclaration, INodeContainer exportFactory, UAReferenceContext parentReference)
+    /// <exception cref="ApplicationException">In {nameof(ValidateExportNode)}</exception>
+    public void ValidateExportNode(IUANodeBase nodeContext, INodeContainer exportFactory, UAReferenceContext parentReference)
     {
       Debug.Assert(nodeContext != null, "Validator.ValidateExportNode the argument nodeContext is null.");
       //TODO Handle HasComponent ReferenceType errors. #42
@@ -62,49 +62,30 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         switch (nodeContext.UANode.NodeClassEnum)
         {
           case NodeClassEnum.UADataType:
-            if (instanceDeclaration != null)
-              throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
             CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType);
             break;
           case NodeClassEnum.UAMethod:
-            if (nodeContext.Equals(instanceDeclaration))
-              return;
-            nodeContext.RemoveInheritedValues(instanceDeclaration);
             CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.AddNodeFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference), UpdateInstance);
             break;
           case NodeClassEnum.UAObject:
-            if (nodeContext.Equals(instanceDeclaration))
-              return;
-            nodeContext.RemoveInheritedValues(instanceDeclaration);
             CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.AddNodeFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y), UpdateInstance);
             break;
           case NodeClassEnum.UAObjectType:
-            if (instanceDeclaration != null)
-              throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
             CreateNode<IObjectTypeFactory, UAObjectType>(exportFactory.AddNodeFactory<IObjectTypeFactory>, nodeContext, Update, UpdateType);
             break;
           case NodeClassEnum.UAReferenceType:
-            if (instanceDeclaration != null)
-              throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
             CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.AddNodeFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType);
             break;
           case NodeClassEnum.UAVariable:
-            if (nodeContext.Equals(instanceDeclaration))
-              return;
-            nodeContext.RemoveInheritedValues(instanceDeclaration);
             if (parentReference.ReferenceKind == ReferenceKindEnum.HasProperty)
               CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance);
             else
               CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance);
             break;
           case NodeClassEnum.UAVariableType:
-            if (instanceDeclaration != null)
-              throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
             CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.AddNodeFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType);
             break;
           case NodeClassEnum.UAView:
-            if (instanceDeclaration != null)
-              throw InstanceDeclarationNotSupported(nodeContext.UANode.NodeClassEnum);
             CreateNode<IViewInstanceFactory, UAView>(exportFactory.AddNodeFactory<IViewInstanceFactory>, nodeContext, (x, y) => Update(x, y), UpdateInstance);
             break;
           case NodeClassEnum.Unknown:

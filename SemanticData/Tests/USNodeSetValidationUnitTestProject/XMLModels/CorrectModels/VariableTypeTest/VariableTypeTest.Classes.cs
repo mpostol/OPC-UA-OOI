@@ -46,6 +46,11 @@ namespace VariableTypeTest
     public static partial class Variables
     {
         /// <summary>
+        /// The identifier for the ComplexVariableType_EURange Variable.
+        /// </summary>
+        public const uint ComplexVariableType_EURange = 12;
+
+        /// <summary>
         /// The identifier for the ComplexVariableType_VariableChild Variable.
         /// </summary>
         public const uint ComplexVariableType_VariableChild = 14;
@@ -85,6 +90,11 @@ namespace VariableTypeTest
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
     public static partial class VariableIds
     {
+        /// <summary>
+        /// The identifier for the ComplexVariableType_EURange Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexVariableType_EURange = new ExpandedNodeId(VariableTypeTest.Variables.ComplexVariableType_EURange, VariableTypeTest.Namespaces.cas);
+
         /// <summary>
         /// The identifier for the ComplexVariableType_VariableChild Variable.
         /// </summary>
@@ -226,8 +236,9 @@ namespace VariableTypeTest
         private const string InitializationString =
            "AQAAADYAAABodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL1ZhcmlhYmxlVHlwZVRl" +
            "c3T/////FWCJAAIAAAABABsAAABDb21wbGV4VmFyaWFibGVUeXBlSW5zdGFuY2UBAQgAAQEIAAAa////" +
-           "/wEB/////wIAAAAVYIkKAgAAAAAABwAAAEVVUmFuZ2UBAQwAAC4ARAwAAAABAHQD/////wEB/////wAA" +
-           "AAAVYIkKAgAAAAEADQAAAFZhcmlhYmxlQ2hpbGQBAQ4AAC4ARA4AAAAABv////8CAv////8AAAAA";
+           "/wEB/////wIAAABVYIkKAgAAAAAABwAAAEVVUmFuZ2UBAQwAAwAAAAAOAAAATmV3RGlzcGxheU5hbWUA" +
+           "LgBEDAAAAAEAdAP/////AQH/////AAAAABVgiQoCAAAAAQANAAAAVmFyaWFibGVDaGlsZAEBDgAALgBE" +
+           "DgAAAAAG/////wIC/////wAAAAA=";
         #endregion
         #endif
         #endregion

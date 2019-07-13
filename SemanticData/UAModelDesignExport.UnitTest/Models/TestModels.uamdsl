@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<UAModelDesignerSolution xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<UAModelDesignerSolution xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>UnitTestsData</Name>
   <Projects>
     <UAModelDesignerProject ProjectIdentifier="f94e41c2-dbc6-48c3-a374-81615b1bf0de">

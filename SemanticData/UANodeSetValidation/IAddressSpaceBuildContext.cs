@@ -5,6 +5,8 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
@@ -19,10 +21,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   {
 
     /// <summary>
-    /// Exports the browse name.
+    /// Exports the browse name if it is not default value, otherwise null.
     /// </summary>
     /// <param name="id">The identifier.</param>
-    XmlQualifiedName ExportBrowseName(NodeId id);
+    /// <param name="defaultValue">The default value.</param>
+    /// <returns>XmlQualifiedName.</returns>
+    XmlQualifiedName ExportBrowseName(NodeId id, NodeId defaultValue);
     /// <summary>
     /// Exports the argument for a method.
     /// </summary>
@@ -32,10 +36,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Gets the or create node context.
     /// </summary>
-    /// <param name="id">The identifier.</param>
-    /// <param name="uAModelContext">The u a model context.</param>
-    /// <returns>IUANodeContext.</returns>
-    IUANodeContext GetOrCreateNodeContext(NodeId id, IUAModelContext uAModelContext);
+    /// <param name="nodeId">The node identifier.</param>
+    /// <param name="createUAModelContext">Delegated capturing functionality to create ua model context.</param>
+    /// <returns>Returns an instance of <see cref="IUANodeContext"/>.</returns>
+    IUANodeContext GetOrCreateNodeContext(NodeId nodeId, Func<NodeId, IUANodeContext> createUAModelContext);
     /// <summary>
     /// Gets the index or append the URI.
     /// </summary>
@@ -52,7 +56,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="index">The index.</param>
     /// <returns>IEnumerable&lt;UAReferenceContext&gt;.</returns>
-    IEnumerable<UAReferenceContext> GetMyReferences(IUANodeContext index);
+    IEnumerable<UAReferenceContext> GetMyReferences(IUANodeBase index);
     /// <summary>
     /// Gets the references to me.
     /// </summary>
@@ -60,12 +64,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>All references targeting the selected by the <paramref name="node"/> node</returns>
     IEnumerable<UAReferenceContext> GetReferences2Me(IUANodeContext node);
     /// <summary>
-    /// Gets the derived instances.
+    /// Gets the children nodes for the <paramref name="rootNode" />.
     /// </summary>
-    /// <param name="rootNode">The root node.</param>
-    /// <param name="list">The list o d nodes.</param>
-    void GetDerivedInstances(IUANodeContext rootNode, List<IUANodeBase> list);
+    /// <param name="rootNode">The root node of the requested children.</param>
+    /// <returns>Return an instance of <see cref="IEnumerable"/> capturing all children of the selected node.</returns>
+    IEnumerable<IUANodeBase> GetChildren(IUANodeContext rootNode);
 
+    Parameter ExportArgument(DataSerialization.Argument argument);
   }
 
 }

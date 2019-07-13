@@ -6,7 +6,7 @@
   DefaultByteOrder="LittleEndian"
   TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest"
 >
-  <!-- This File was generated on 2015-04-03 and supports the specifications supported by version 1.2.26.28146 of the OPC UA deliverables. -->
+  <!-- This File was generated on 2019-05-11 and supports the specifications supported by version 1.2.26.16032 of the OPC UA deliverables. -->
   <opc:Import Namespace="http://opcfoundation.org/UA/" Location=".BinarySchema.bsd"/>
 
 </opc:TypeDictionary>

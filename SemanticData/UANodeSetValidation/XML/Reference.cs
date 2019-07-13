@@ -9,7 +9,7 @@ using System;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  public partial class Reference: IEquatable<Reference>
+  public partial class Reference : IEquatable<Reference>
   {
     /// <summary>
     /// Indicates whether the current object is equal to another object of the same type.
@@ -28,5 +28,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     {
       return $"{this.IsForward}, {this.ReferenceType}, {this.Value}";
     }
+    internal void RecalculateNodeIds(Func<string, string> importNodeId)
+    {
+      ReferenceType = importNodeId(ReferenceType);
+      Value = importNodeId(Value);
+    }
+
   }
 }

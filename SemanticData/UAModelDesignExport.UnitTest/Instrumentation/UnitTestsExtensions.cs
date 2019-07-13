@@ -21,7 +21,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport.Instrumentation
       Assert.IsNotNull(expected);
       Assert.IsNotNull(actual);
       Assert.AreEqual<string>(expected.Key, actual.Key);
-      Assert.AreEqual<string>(expected.Value, actual.Value);
+      Assert.AreEqual<string>(expected.Value.Trim(), actual.Value.Trim());
     }
 
   }

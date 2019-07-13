@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
-using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UAModelDesignExport;
 using UAOOI.SemanticData.UANodeSetValidation;
 
@@ -50,13 +49,13 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     private static void Do(Options options)
     {
       PrintLogo(options);
-      Action<TraceMessage> _tracingMethod = z => Console.WriteLine(z.ToString());
-      IAddressSpaceContext _as = new AddressSpaceContext(_tracingMethod);
+      BuildErrorsHandling.Log.TraceEventAction += z => Console.WriteLine(z.ToString());
+      IAddressSpaceContext _as = AddressSpaceFactory.AddressSpace;
       ModelDesignExport _exporter = new ModelDesignExport();
       bool _exportModel = false;
       if (!string.IsNullOrEmpty(options.ModelDesignFileName))
       {
-        _as.InformationModelFactory = _exporter.GetFactory(options.ModelDesignFileName, _tracingMethod);
+        _as.InformationModelFactory = _exporter.GetFactory(options.ModelDesignFileName, BuildErrorsHandling.Log.TraceEvent);
         _exportModel = true;
       }
       if (options.Filenames == null)

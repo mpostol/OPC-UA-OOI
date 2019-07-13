@@ -23,5 +23,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         base.ParentEquals(_other) &&
         (this.EventNotifier == _other.EventNotifier);
     }
+    /// <summary>
+    /// Get the clone from the types derived from this one.
+    /// </summary>
+    /// <returns>An instance of <see cref="T:UAOOI.SemanticData.UANodeSetValidation.XML.UANode" />.</returns>
+    protected override UANode ParentClone()
+    {
+      UAObject _ret = new UAObject()
+      {
+        EventNotifier = this.EventNotifier
+      };
+      base.CloneUAInstance(_ret);
+      return _ret;
+    }
   }
 }

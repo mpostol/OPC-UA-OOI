@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ModelDesign xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cas="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ua="http://opcfoundation.org/UA/" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+<ModelDesign xmlns:cas="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:ua="http://opcfoundation.org/UA/" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
   <Namespaces>
     <Namespace Name="cas" Prefix="DataTypeTest" XmlPrefix="cas">http://cas.eu/UA/CommServer/UnitTests/DataTypeTest</Namespace>
     <Namespace Name="ua" XmlPrefix="ua">http://opcfoundation.org/UA/</Namespace>
@@ -13,7 +13,7 @@
   <DataType SymbolicName="cas:EnumerationDataType" BaseType="cas:AbstractEnumerationDataType">
     <Description>Enumeration DataType derived from abstract type</Description>
     <Fields>
-      <Field Name="Field3" DataType="ua:Int32" />
+      <Field Name="Field3" Identifier="1" />
     </Fields>
   </DataType>
   <DataType SymbolicName="cas:AbstractStructure" BaseType="ua:Structure" IsAbstract="true">

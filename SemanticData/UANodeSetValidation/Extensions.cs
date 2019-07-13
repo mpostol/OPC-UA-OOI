@@ -10,6 +10,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
@@ -146,15 +153,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return string.Join(", ", arrayDimensions);
     }
-    internal static void GetParameters(this XML.DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory dataTypeDefinitionFactory, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
+    internal static void GetParameters(this XML.DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory dataTypeDefinitionFactory, IAddressSpaceBuildContext nodeContext, Action<TraceMessage> traceEvent)
     {
+      if (dataTypeDefinition is null)
+        return;
       //xsd comment  < !--BaseType is obsolete and no longer used.Left in for backwards compatibility. -->
       //definition.BaseType = modelContext.ExportBrowseName(dataTypeDefinition.BaseType, DataTypes.BaseDataType);
       dataTypeDefinitionFactory.IsOptionSet = dataTypeDefinition.IsOptionSet;
       dataTypeDefinitionFactory.IsUnion = dataTypeDefinition.IsUnion;
       dataTypeDefinitionFactory.Name = null; //TODO UADataType.Definition.Name wrong value #341 modelContext.ExportBrowseName( dataTypeDefinition.Name, DataTypes.BaseDataType);
       dataTypeDefinitionFactory.SymbolicName = dataTypeDefinition.SymbolicName;
-      if (dataTypeDefinition == null || dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
+      if (dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
         return;
       foreach (XML.DataTypeField _item in dataTypeDefinition.Field)
       {
@@ -162,7 +171,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _nP.Name = _item.Name;
         _nP.SymbolicName = _item.SymbolicName;
         _item.DisplayName.ExportLocalizedTextArray(_nP.AddDisplayName);
-        _nP.DataType = modelContext.ExportBrowseName(_item.DataType, DataTypes.BaseDataType);
+        _nP.DataType = nodeContext.ExportBrowseName(NodeId.Parse(_item.DataType), DataTypes.BaseDataType);
         _nP.ValueRank = _item.ValueRank.GetValueRank(traceEvent);
         _nP.ArrayDimensions = _item.ArrayDimensions;
         _nP.MaxStringLength = _item.MaxStringLength;
@@ -269,15 +278,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (Object.ReferenceEquals(first, null))
         return Object.ReferenceEquals(second, null);
+      if (Object.ReferenceEquals(second, null))
+        return false;
       if (first.Length != second.Length)
         return false;
-      Dictionary<string, XML.LocalizedText> _dictionaryForFirst = first.ToDictionary<XML.LocalizedText, string>(x => x.Locale);
-      foreach (XML.LocalizedText _text in second)
+      try
       {
-        if (!_dictionaryForFirst.ContainsKey(_text.Locale))
-          return false;
-        if (_dictionaryForFirst[_text.Locale].Value != _text.Value)
-          return false;
+        Dictionary<string, XML.LocalizedText> _dictionaryForFirst = first.ToDictionary(x => ConvertToString(x));
+        foreach (XML.LocalizedText _text in second)
+          if (!_dictionaryForFirst.ContainsKey(ConvertToString(_text)))
+            return false;
+      }
+      catch (Exception)
+      {
+        return false;
       }
       return true;
     }
@@ -299,17 +313,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     internal static bool ReferencesEquals(this XML.Reference[] first, XML.Reference[] second)
     {
-      if (Object.ReferenceEquals(first, null))
-        return Object.ReferenceEquals(second, null);
-      if (first.Length != second.Length)
-        return false;
-      List<string> _dictionaryForFirst = first.Select<XML.Reference, string>(x => x.ToString()).ToList<string>();
-      foreach (XML.Reference _reference in second)
-      {
-        if (!_dictionaryForFirst.Exists(x => _reference.ToString().CompareTo(x) == 0))
-          return false;
-      };
       return true;
+    }
+    internal static bool AreEqual(this string first, string second)
+    {
+      if (String.IsNullOrEmpty(first))
+        return String.IsNullOrEmpty(second);
+      return String.Compare(first, second) == 0;
+    }
+    private static string ConvertToString(XML.LocalizedText x)
+    {
+      return $"{ x.Locale}:{x.Value}";
     }
   }
 }

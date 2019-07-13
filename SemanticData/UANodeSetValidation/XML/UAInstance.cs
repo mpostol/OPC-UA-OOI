@@ -5,6 +5,8 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using System;
+
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
 
@@ -19,9 +21,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     protected override bool ParentEquals(UANode other)
     {
       UAInstance _other = other as UAInstance;
-      if (_other == null)
+      if ( Object.ReferenceEquals( _other, null))
         return false;
-      return this.ParentNodeId == _other.ParentNodeId;
+      return true;
+    }
+    /// <summary>
+    /// Clones current object to a new one./>.
+    /// </summary>
+    /// <param name="ret">The ret.</param>
+    protected void CloneUAInstance(UAInstance ret)
+    {
+      ret.ParentNodeId = this.ParentNodeId;
+      base.CloneUANode(this);
+    }
+    internal override void RecalculateNodeIds(IUAModelContext modelContext)
+    {
+      base.RecalculateNodeIds(modelContext);
+      this.ParentNodeId = modelContext.ImportNodeId(this.ParentNodeId);
     }
   }
 

@@ -7,6 +7,7 @@
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
+
   public partial class UAVariable
   {
     /// <summary>
@@ -30,6 +31,42 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         this.UserAccessLevel == _other.UserAccessLevel &&
         this.MinimumSamplingInterval == _other.MinimumSamplingInterval &&
         this.Historizing == _other.Historizing;
+    }
+    internal override void RemoveInheritedValues(UANode baseNode)
+    {
+      base.RemoveInheritedValues(baseNode);
+      UAVariable _other = baseNode as UAVariable;
+      if (baseNode is null)
+        throw new System.ArgumentNullException($"{nameof(baseNode)}", $"The parameter of the {nameof(RemoveInheritedValues)} must not be null");
+      if (this.DataType == _other.DataType)
+        this.DataType = null;
+      if (this.ArrayDimensions == _other.ArrayDimensions)
+        this.ArrayDimensions = string.Empty;
+    }
+    internal override void RecalculateNodeIds(IUAModelContext modelContext)
+    {
+      base.RecalculateNodeIds(modelContext);
+      this.DataType = modelContext.ImportNodeId(DataType);
+    }
+    /// <summary>
+    /// Get the clone from the types derived from this one.
+    /// </summary>
+    /// <returns>An instance of <see cref="T:UAOOI.SemanticData.UANodeSetValidation.XML.UANode" />.</returns>
+    protected override UANode ParentClone()
+    {
+      UAVariable _ret = new UAVariable()
+      {
+        Value = this.Value,
+        Translation = this.Translation,
+        DataType = this.DataType,
+        ValueRank = this.ValueRank,
+        ArrayDimensions = this.ArrayDimensions,
+        AccessLevel = this.AccessLevel,
+        UserAccessLevel = this.UserAccessLevel,
+        MinimumSamplingInterval = this.MinimumSamplingInterval,
+        Historizing = this.Historizing,
+      };
+      return _ret;
     }
   }
 }

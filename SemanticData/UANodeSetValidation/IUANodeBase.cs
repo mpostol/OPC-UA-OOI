@@ -25,7 +25,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Calculates the node references.
     /// </summary>
     /// <param name="nodeFactory">The node factory.</param>
-    void CalculateNodeReferences(INodeFactory nodeFactory);
+    /// <param name="validator">The validator.</param>
+    void CalculateNodeReferences(INodeFactory nodeFactory, IValidator validator);
     /// <summary>
     /// Gets the node identifier.
     /// </summary>
@@ -64,19 +65,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     QualifiedName BrowseName { get; set; }
     /// <summary>
-    /// Gets the instance of <see cref="IUAModelContext" />containing definition of this node.
-    /// </summary>
-    /// <value>The model context for this node.</value>
-    IUAModelContext UAModelContext { get; }
-    /// <summary>
-    /// Converts the <paramref name="nodeId" /> representing instance of <see cref="NodeId" /> and returns <see cref="XmlQualifiedName" />
-    /// representing the BrowseName name of the <see cref="UANode" /> pointed out by it.
-    /// </summary>
-    /// <param name="nodeId">The node identifier.</param>
-    /// <param name="defaultValue">The default value.</param>
-    /// <returns>An object of <see cref="XmlQualifiedName" /> representing the BrowseName of <see cref="UANode" /> of the node indexed by <paramref name="nodeId" /></returns>
-    XmlQualifiedName ExportBrowseName(string nodeId, NodeId defaultValue);
-    /// <summary>
     /// Exports the BrowseName of the BaseType.
     /// </summary>
     /// <param name="type">if set to <c>true</c> the source node represents type. <c>false</c> if it is an instance.</param>
@@ -88,10 +76,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <value>The <see cref="ModelingRules"/> associated with the node. Null if valid modeling rule cannot be recognized.</value>
     ModelingRules? ModelingRule { get; }
     /// <summary>
-    /// Gets the parameters.
+    /// Removes the inherited values.
     /// </summary>
-    /// <param name="arguments">The <see cref="XmlElement"/> encapsulates the arguments.</param>
-    Parameter[] GetParameters(XmlElement arguments);
+    /// <param name="instanceDeclaration">The instance declaration.</param>
+    /// <remarks>
+    /// If a member is overridden all inherited values of the node attributes must be removed.
+    /// </remarks>
+    void RemoveInheritedValues(IUANodeBase instanceDeclaration);
 
   }
 }

@@ -31,7 +31,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     protected override bool ParentEquals(UANode other)
     {
       UAMethod _other = other as UAMethod;
-      if (_other == null)
+      if (Object.ReferenceEquals(_other, null))
         return false;
       return
         base.ParentEquals(_other) &&

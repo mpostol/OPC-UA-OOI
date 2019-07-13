@@ -93,8 +93,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       IUANodeContext _startingNode = this.Reference.IsForward ? TargetNode : SourceNode;
       _startingNode.BuildSymbolicId(_path);
       string _symbolicId = _path.SymbolicName();
-      //return new XmlQualifiedName(_symbolicId, m_Context.m_NamespaceTable.GetString(this.TargetNode.NodeIdContext.NamespaceIndex));
-      return new XmlQualifiedName(_symbolicId, m_AddressSpace.GetNamespace(this.TargetNode.NodeIdContext.NamespaceIndex));
+      return new XmlQualifiedName(_symbolicId, m_AddressSpace.GetNamespace(_startingNode.NodeIdContext.NamespaceIndex));
     }
     /// <summary>
     /// Gets or sets the parent node (the reference is originated from) of the reference.

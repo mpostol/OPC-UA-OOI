@@ -282,13 +282,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return false;
       if (first.Length != second.Length)
         return false;
-      Dictionary<string, XML.LocalizedText> _dictionaryForFirst = first.ToDictionary<XML.LocalizedText, string>(x => x.Locale);
-      foreach (XML.LocalizedText _text in second)
+      try
       {
-        if (!_dictionaryForFirst.ContainsKey(_text.Locale))
-          return false;
-        if (_dictionaryForFirst[_text.Locale].Value != _text.Value)
-          return false;
+        Dictionary<string, XML.LocalizedText> _dictionaryForFirst = first.ToDictionary(x => ConvertToString(x));
+        foreach (XML.LocalizedText _text in second)
+          if (!_dictionaryForFirst.ContainsKey(ConvertToString(_text)))
+            return false;
+      }
+      catch (Exception)
+      {
+        return false;
       }
       return true;
     }
@@ -310,13 +313,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
     internal static bool ReferencesEquals(this XML.Reference[] first, XML.Reference[] second)
     {
-      if (Object.ReferenceEquals(first, null))
-        return Object.ReferenceEquals(second, null);
-      if (Object.ReferenceEquals(second, null))
-        return false;
-      if (first.Length != second.Length)
-        return false;
       return true;
+    }
+    internal static bool AreEqual(this string first, string second)
+    {
+      if (String.IsNullOrEmpty(first))
+        return String.IsNullOrEmpty(second);
+      return String.Compare(first, second) == 0;
+    }
+    private static string ConvertToString(XML.LocalizedText x)
+    {
+      return $"{ x.Locale}:{x.Value}";
     }
   }
 }

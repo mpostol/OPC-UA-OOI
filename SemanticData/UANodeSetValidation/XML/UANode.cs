@@ -32,14 +32,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return
         ParentEquals(other) &&
         this.AccessRestrictions == other.AccessRestrictions &&
-        this.BrowseName == other.BrowseName &&
+        this.BrowseName.AreEqual(other.BrowseName) &&
         this.Description.LocalizedTextArraysEqual(other.Description) &&
         this.DisplayName.LocalizedTextArraysEqual(other.DisplayName) &&
-        this.Documentation == other.Documentation &&
+        this.Documentation.AreEqual(other.Documentation) &&
         //this.NodeId == other.NodeId && it is not Information Model
         this.ReleaseStatus == ReleaseStatus &&
         this.RolePermissions.RolePermissionsEquals(other.RolePermissions) &&
-        this.SymbolicName == other.SymbolicName &&
+        this.SymbolicName.AreEqual(other.SymbolicName) &&
         this.UserWriteMask == other.UserWriteMask &&
         this.WriteMask == other.WriteMask &&
         this.References.ReferencesEquals(other.References);

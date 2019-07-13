@@ -45,7 +45,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       Debug.Assert(nodeContext != null, "Validator.ValidateExportNode the argument nodeContext is null.");
       //TODO Handle HasComponent ReferenceType errors. #42
-      if (nodeContext.UANode == null)
+      if (Object.ReferenceEquals(nodeContext.UANode, null))
       {
         string _msg = string.Format("The node {0} is undefined", nodeContext.NodeIdContext);
         BuildError _be = null;

@@ -295,7 +295,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (this.BrowseName != other.BrowseName)
         throw new ArgumentOutOfRangeException("The browse name of compared nodes musty be equal.");
       return
-        this.ModelingRule == other.ModelingRule &&
         this.UANode.Equals(other.UANode);
     }
     #endregion

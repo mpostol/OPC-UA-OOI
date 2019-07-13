@@ -42,19 +42,5 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       _first = new XML.RolePermission[] { new XML.RolePermission() { Permissions = 1234, Value = "Value1" }, new XML.RolePermission() { Permissions = 4321, Value = "Value2" } };
       Assert.IsTrue(_first.RolePermissionsEquals(new XML.RolePermission[] { new XML.RolePermission() { Permissions = 4321, Value = "Value2" }, new XML.RolePermission() { Permissions = 1234, Value = "Value1" } }));
     }
-    [TestMethod]
-    public void ReferencesEqualsTestMethod()
-    {
-      XML.Reference[] _first = null;
-      Assert.IsTrue(_first.ReferencesEquals(_first));
-      Assert.IsFalse(_first.ReferencesEquals(new XML.Reference[] { }));
-      Assert.IsFalse((new XML.Reference[] { }).ReferencesEquals(_first));
-      _first = new XML.Reference[] { };
-      Assert.IsTrue(_first.ReferencesEquals(new XML.Reference[] { }));
-      _first = new XML.Reference[] { new XML.Reference() { IsForward = true, ReferenceType = "ReferenceType", Value = "Value1" }, new XML.Reference() { IsForward = false, ReferenceType = "ReferenceType", Value = "Value2" } };
-      Assert.IsTrue(_first.ReferencesEquals(new XML.Reference[] 
-                                           { new XML.Reference() { IsForward = false, ReferenceType = "ReferenceType", Value = "Value2" }, new XML.Reference() { IsForward = true, ReferenceType = "ReferenceType", Value = "Value1" } }));
-
-    }
   }
 }

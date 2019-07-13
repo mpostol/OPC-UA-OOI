@@ -135,3 +135,9 @@
 - [ISO/IEC 20922:2016: Message Queuing Telemetry Transport (MQTT) v3.1.1][ISO.MQTT]
 
 [ISO.MQTT]: https://www.iso.org/standard/69466.html
+
+## IEEE
+
+- [IEEE 802.3 ETHERNET WORKING GROUP][IEEE]
+
+[IEEE]:http://www.ieee802.org/3/

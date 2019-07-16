@@ -2,7 +2,7 @@
 
 ## Common Tasks
 
-The topics contained in this section are intended to give you quick exposure to the `OOI Reactive Application` network based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to create `OOI Reactive Application` producer and consumer applications using the library `UAOOI.Networking.SemanticData'. Current release of the NuGet package is available at:
+The topics contained in this section are intended to give you quick exposure to the `OOI Reactive Application` network based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to create `OOI Reactive Application` producer and consumer applications using the library `UAOOI.Networking.SemanticData`. Current release of the NuGet package is available at:
 
 [UAOOI.Networking.SemanticData](https://www.nuget.org/packages/UAOOI.Networking.SemanticData/)
 

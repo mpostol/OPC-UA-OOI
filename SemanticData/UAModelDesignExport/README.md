@@ -15,7 +15,7 @@ In general, two scenarios can be applied to create an instance of the Address Sp
 
 At run-time, the step-by-step approach can be applied using `NodeManagement Service Set` defined in [OPC UA Part 4: Services][Opc.UA.Part4].  This Service Set defines functionality to add and delete nodes and references between them in the Address Space that is part of the OPC UA Server application.
 
-Because the step-by-step approach shall be recognized as the run-time custom approach where the Address Space nodes graph depends on the behavior of users functionality it will needs a migration path targeting generation of reusable deliverables (subsection *How to reuse models created in a step-by-step scenario*).
+Because the step-by-step approach shall be recognized as the run-time custom approach where the Address Space nodes graph depends on the behavior of users functionality it will need a migration path targeting generation of reusable deliverables (subsection *How to reuse models created in a step-by-step scenario*).
 
 To promote en block scenario and to create all nodes all together in a united group making up the Address Space content there is a need for a standard syntax that can be used to represent it in a form that can be read by a computer program. The [OPC UA Part 6 - Mappings][Opc.UA.Part6] defines an XML-based schema for this purpose:
 
@@ -95,7 +95,7 @@ Figure 1 visualizes dependencies across the code available in the `SemanticData`
 
 The library `UAOOI.SemanticData.UAModelDesignExport.dll` (`UAModelDesignExport`) is used by the `asp.exe` (`asp`) tool to export `UAModelDesign` files using the `UAOOI.SemanticData.UANodeSetValidation.dll` (`UANodeSetValidation`). The `UANodeSetValidation` implements functionality of the `Address Space Management` described in the section [Semantic-Data Processing Architecture][SDPA].
 
-The following code snippet contains the most relevant lines of code from `asp.exe` that could help you to get started development of a custom application based on this library.
+The following code snippet contains the most relevant lines of code copied from `asp.exe` that could help you to get started development of a custom application based on this library.
 
 ``` C#
 
@@ -121,7 +121,7 @@ This library is available as the NuGet package `UAOOI.SemanticData.UAModelDesign
 1. Generate `UANodeSet` file using your favorite Software Development Kit (SDK)
     - instantiate Address Space using the available functionality or custom code
     - export the Address Space to `UANodeSet` file
-2. Generate `UAModelDesign` file using [`asp` tool][asp.exe]
+2. Generate `UAModelDesign` file using [Address Space Prototyping Tool (`ASP`) tool][asp.exe]
     - import the already generated `UANodeSet`
     - export the UA Information Model to `UAModelDesign` file
 3. Continue the model design using [ASMD tool][CAS.ASMD]
@@ -136,7 +136,7 @@ This library is available as the NuGet package `UAOOI.SemanticData.UAModelDesign
     - using a favorite tool design UML diagrams representing expected OPC UA Information Model
     - export the model to a suitable form supported as input by `UANodeSet` a custom generating tool
     - generate `UANodeSet` using the custom `UANodeSet` generating tool
-2. Generate `UAModelDesign` file using [`asp` tool][asp.exe]
+2. Generate `UAModelDesign` file using [`ASP` tool][asp.exe]
     - import the already generated `UANodeSet`
     - export the UA Information Model to `UAModelDesign` file
 3. Continue the model design using [ASMD tool][CAS.ASMD]
@@ -161,7 +161,7 @@ This library is available as the NuGet package `UAOOI.SemanticData.UAModelDesign
 - [Address Space Prototyping Tool (ase.exe)][asp.exe]
 
 [asp.exe]:../../SemanticData/AddressSpaceComplianceTestTool/README.md
-[SDPA]:../README.md
+[SDPA]:../README.MD
 [ASMD.Help]:http://www.commsvr.com/LinkClick.aspx?link=http%3a%2f%2fwww.commsvr.com%2fOPC-Help%2fIndex.aspx%3ftopic%3dhtml%2fa2d55988-b59a-4a87-95b9-933f6bbdf5bd.htm&tabid=321&mid=2446
 [nuget-intro]:https://docs.microsoft.com/en-us/nuget/what-is-nuget
 [nuget-install]:https://docs.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio

@@ -25,6 +25,7 @@
   * [Design and Deployment Support](SemanticData/DesignDeploymentSupport.md)
 * [`Address Space Management` Implementation](SemanticData/UANodeSetValidation/README.MD)
 * [Address Space Prototyping Tool (asp.exe)](SemanticData/AddressSpaceComplianceTestTool/README.md)
+  * [`UAModelDesignExport` Library](SemanticData/UAModelDesignExport/README.md)
 
 ## Internet of Things (IoT) Archetype
 

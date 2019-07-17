@@ -24,7 +24,7 @@
   * [Address Space Model Life-cycle](SemanticData/InformationModelLifecycle.md)
   * [Design and Deployment Support](SemanticData/DesignDeploymentSupport.md)
 * [`Address Space Management` Implementation](SemanticData/UANodeSetValidation/README.MD)
-* [Address Space Prototyping Tool (ase.exe)](SemanticData/AddressSpaceComplianceTestTool/README.md)
+* [Address Space Prototyping Tool (asp.exe)](SemanticData/AddressSpaceComplianceTestTool/README.md)
 
 ## Internet of Things (IoT) Archetype
 

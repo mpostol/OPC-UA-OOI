@@ -205,9 +205,13 @@ The code illustrating networking of the `Semantic-Data` paradigm implementation 
 
 Description of the `OOI Reactive Application` architecture is captured in the section [Semantic-Data Message Centric Communication](../Networking/README.MessageCentricCommunication.md).
 
-### Architecture
+## How the code fits together
 
-![Architecture](../CommonResources/Media/SemanticData/UAOOI.SemanticData.Architecture.png)
+Figure 1 visualizes dependencies across the code available in the `SemanticData` solution folder on the code map. This code map helps you see how the code fits together without reading through files and lines of code.
+
+![Figure 1 Architecture](../CommonResources/Media/SemanticData/UAOOI.SemanticData.Architecture.png)
+
+> For the sake of simplicity the unit tests have been removed from the diagram.
 
 [wordpress.HMI]:https://mpostol.wordpress.com/2013/08/11/opc-ua-makes-smart-user-interface-possible/
 [wordpress.opc-ua]: https://mpostol.wordpress.com/opc-ua/

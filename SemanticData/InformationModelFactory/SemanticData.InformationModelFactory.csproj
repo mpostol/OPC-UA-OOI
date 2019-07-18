@@ -9,7 +9,7 @@
     <Authors>Mariuisz Postol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
-    <Description>OPC UA Information Model Factory library used as the dependency injection to produce **OPC UA Information Model** by an external importer. The abstract API must be implemented by a classes providing functionality of OPC UA  Information Model creation.
+    <Description>OPC UA Information Model Factory library used as the dependency injection to produce **OPC UA Information Model** by an external importer. The abstract API must be implemented by classes providing the functionality of OPC UA  Information Model creation.
 The root of the definitions is the `IModelFactory` interface.</Description>
     <Copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -21,9 +21,10 @@ The root of the definitions is the `IModelFactory` interface.</Description>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <AssemblyVersion>5.1.0</AssemblyVersion>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <FileVersion>5.1.0</FileVersion>
     <ApplicationIcon>Logo.ico</ApplicationIcon>
+    <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

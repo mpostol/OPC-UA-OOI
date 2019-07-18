@@ -6,12 +6,12 @@
     <RootNamespace>UAOOI.SemanticData.UAModelDesignExport</RootNamespace>
     <Description>This library provides implementation o f the export an XML file compliant with the UAModelDeign schema. By design The UAModelDeign schema describes the structure of an XML document representing the OPC UA Information Model that is used as the input for the [`UA-ModelCompiler`](https://github.com/OPCFoundation/UA-ModelCompiler).</Description>
     <RepositoryType>GitHub</RepositoryType>
-    <Copyright>Copyright (c) 2019 Mariusz Postol</Copyright>
+    <Copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</Copyright>
     <Authors>Mariusz Postol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
     <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
-    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi/readme</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA</PackageTags>
     <SignAssembly>true</SignAssembly>
@@ -19,7 +19,9 @@
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
-    <Version>1.0.0-Alpha</Version>
+    <Version>1.1.0</Version>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -3,9 +3,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>UAOOI.SemanticData.InformationModelFactory.5</AssemblyName>
+    <AssemblyName>UAOOI.SemanticData.InformationModelFactory</AssemblyName>
     <PackageId>UAOOI.SemanticData.InformationModelFactory</PackageId>
-    <Version>5.0.0-Alpha</Version>
+    <Version>5.1.0</Version>
     <Authors>Mariuisz Postol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
@@ -13,16 +13,16 @@
 The root of the definitions is the `IModelFactory` interface.</Description>
     <Copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</Copyright>
     <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
-    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi/readme</PackageProjectUrl>
     <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</PackageTags>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <RootNamespace>UAOOI.SemanticData.InformationModelFactory</RootNamespace>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>5.0.0.2</AssemblyVersion>
+    <AssemblyVersion>5.1.0</AssemblyVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <FileVersion>5.0.0.2</FileVersion>
+    <FileVersion>5.1.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

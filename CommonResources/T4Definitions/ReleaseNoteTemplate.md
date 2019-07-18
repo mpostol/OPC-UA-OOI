@@ -30,7 +30,7 @@
 
 ### SemanticData
 
-- *Version*: **5.0.2-Alpha**
+- *Version*: **5.1.0**
 - *Changes*:
   - Updated the UA Address Space process against OPC UA Specification 1.04
   - Updated UANodeSet schema

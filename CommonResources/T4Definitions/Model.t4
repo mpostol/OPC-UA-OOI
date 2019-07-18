@@ -28,8 +28,8 @@ string DataDiscoveryPrerelease = "";
 string DataDiscoveryProduct = "Object Oriented Internet";
 
 //UAOOI.SemanticData
-string SemanticDataVersion = "5.0.2";
-string SemanticDataPrerelease = "-Alpha";
+string SemanticDataVersion = "5.1.0";
+string SemanticDataPrerelease = "";
 string SemanticDataProduct = "Object Oriented Internet";
 
 //UAOOI.Configuration

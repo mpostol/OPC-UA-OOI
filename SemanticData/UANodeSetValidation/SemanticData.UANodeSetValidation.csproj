@@ -3,26 +3,27 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>UAOOI.SemanticData.UANodeSetValidation.5</AssemblyName>
+    <AssemblyName>UAOOI.SemanticData.UANodeSetValidation</AssemblyName>
     <RootNamespace>UAOOI.SemanticData.UANodeSetValidation</RootNamespace>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <PackageId>UAOOI.SemanticData.UANodeSetValidation</PackageId>
-    <Version>5.0.2-alpha</Version>
+    <Version>5.1.0</Version>
     <Authors>MPostol</Authors>
     <Product>commsvr.com</Product>
-    <Description>This project supports validation of the OPC UA Address Space captured in the xml file against the OPC UA Specyfication. It is assumed that the Address Space is represented as a XML file compliant with the NodeSet schema.
+    <Description>This project supports validation of the OPC UA Address Space captured in the xml file against the OPC UA Specyfication. It is assumed that the Address Space is represented as a XML file compliant with the UANodeSet schema.
 This library is dedicated to create a plug-in aimed at importing models based on the OPC UA Information Model.
 It is part of the project supporting OPC UA Object Oriented Internet paradigm.</Description>
-    <Copyright>Copyright MPostol (c) 2018</Copyright>
+    <Copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</Copyright>
     <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
-    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi/readme</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageTags>Object Oriented Internet, OPC UA, Information Model</PackageTags>
-    <AssemblyVersion>5.0.2.1</AssemblyVersion>
+    <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</PackageTags>
+    <AssemblyVersion>5.1.0</AssemblyVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <FileVersion>5.0.2.1</FileVersion>
+    <FileVersion>5.1.0</FileVersion>
+    <Company>commsvr.com</Company>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

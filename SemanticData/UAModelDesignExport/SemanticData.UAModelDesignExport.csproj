@@ -44,11 +44,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.4" />
+    <PackageReference Include="UAOOI.SemanticData.BuildingErrorsHandling" Version="5.1.0" />
     <PackageReference Include="UAOOI.SemanticData.InformationModelFactory" Version="5.1.0" />
   </ItemGroup>
 

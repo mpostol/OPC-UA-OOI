@@ -55,11 +55,8 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="UAOOI.SemanticData.BuildingErrorsHandling" Version="5.1.0" />
     <PackageReference Include="UAOOI.SemanticData.InformationModelFactory" Version="5.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj" />
   </ItemGroup>
 
   <ItemGroup>

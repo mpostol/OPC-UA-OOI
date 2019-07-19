@@ -55,6 +55,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UAOOI.SemanticData.BuildingErrorsHandling, Version=5.1.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.SemanticData.BuildingErrorsHandling.5.1.0\lib\netstandard2.0\UAOOI.SemanticData.BuildingErrorsHandling.dll</HintPath>
+    </Reference>
     <Reference Include="UAOOI.SemanticData.InformationModelFactory, Version=5.1.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\UAOOI.SemanticData.InformationModelFactory.5.1.0\lib\netstandard2.0\UAOOI.SemanticData.InformationModelFactory.dll</HintPath>
     </Reference>
@@ -93,10 +96,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj">
-      <Project>{9CA2F05B-FB18-49AD-8520-1BCC838F748C}</Project>
-      <Name>SemanticData.BuildingErrorsHandling</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UAModelDesignExport\SemanticData.UAModelDesignExport.csproj">
       <Project>{c970c14c-98aa-48a9-9f6f-d00c92fa6cef}</Project>
       <Name>SemanticData.UAModelDesignExport</Name>

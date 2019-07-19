@@ -62,6 +62,9 @@
     <Reference Include="UAOOI.SemanticData.InformationModelFactory, Version=5.1.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\UAOOI.SemanticData.InformationModelFactory.5.1.0\lib\netstandard2.0\UAOOI.SemanticData.InformationModelFactory.dll</HintPath>
     </Reference>
+    <Reference Include="UAOOI.SemanticData.UANodeSetValidation, Version=5.1.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.SemanticData.UANodeSetValidation.5.1.0\lib\netstandard2.0\UAOOI.SemanticData.UANodeSetValidation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionsUnitTest.cs" />
@@ -120,10 +123,6 @@
     <ProjectReference Include="..\UAModelDesignExport\SemanticData.UAModelDesignExport.csproj">
       <Project>{c970c14c-98aa-48a9-9f6f-d00c92fa6cef}</Project>
       <Name>SemanticData.UAModelDesignExport</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj">
-      <Project>{352378A0-8B2E-4679-BB44-FD0BCC8467D9}</Project>
-      <Name>SemanticData.UANodeSetValidation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

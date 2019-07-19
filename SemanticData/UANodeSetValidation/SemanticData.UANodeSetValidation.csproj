@@ -21,7 +21,7 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</PackageTags>
     <AssemblyVersion>5.1.0</AssemblyVersion>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <FileVersion>5.1.0</FileVersion>
     <Company>commsvr.com</Company>
     <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
@@ -63,6 +63,19 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
     <None Update="BuildErrors.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BuildErrors.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\Template.nuspec.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Template.nuspec.nuspec</LastGenOutput>
+    </None>
+    <None Update="Properties\UANodeSetValidation.Nuget.nuspec">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UANodeSetValidation.Nuget.tt</DependentUpon>
+    </None>
+    <None Update="Properties\UANodeSetValidation.Nuget.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UANodeSetValidation.Nuget.nuspec</LastGenOutput>
     </None>
   </ItemGroup>
 

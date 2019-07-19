@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Define.Assembly.Title</id>
+    <version>0.00.00</version>
+    <title>DefaultProductName</title>
+    <authors>commsvr.com</authors>
+    <owners>Mariusz Postol</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/mpostol/OPC-UA-OOI</projectUrl>
+    <iconUrl> https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true </iconUrl>
+    <description>description must be added</description>
+    <summary>summary must be added.</summary>    
+    <copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</copyright>
+    <tags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</tags>
+    <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+    <releaseNotes>
+      Add releaseNotes if needed.
+    </releaseNotes>
+    <copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</copyright>
+  </metadata>
+  <files>
+  </files>
+</package>
+

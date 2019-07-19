@@ -54,6 +54,11 @@
       <LastGenOutput>Template.AssemblyInfo.cs</LastGenOutput>
     </None>
     <None Include="Model.t4" />
+    <None Include="Template.nuspec.nuspec">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Template.nuspec.tt</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Template.AssemblyInfo.cs">
@@ -72,6 +77,10 @@
     <Content Include="ReleaseNoteTemplate.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ReleaseNoteTemplate.md</LastGenOutput>
+    </Content>
+    <Content Include="Template.nuspec.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Template.nuspec.nuspec</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,35 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".nuspec" #>
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id><#=m_AssemblyTitle#></id>
+    <version><#= DefaultProductVersion #></version>
+    <title><#=DefaultProductName#></title>
+    <authors><#=AssemblyCompany#></authors>
+    <owners><#=Owner#></owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl><#=Url#></projectUrl>
+    <iconUrl> <#=IconURLTag#> </iconUrl>
+    <description>description must be added</description>
+    <summary>summary must be added.</summary>    
+    <copyright><#=AssemblyCopyright#></copyright>
+    <tags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</tags>
+    <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+    <releaseNotes>
+      Add releaseNotes if needed.
+    </releaseNotes>
+    <copyright><#=AssemblyCopyright#></copyright>
+  </metadata>
+  <files>
+  </files>
+</package>
+
+<#@ include file = ".\Model.t4" #>
+<#+
+string m_AssemblyTitle = "Define.Assembly.Title";
+#>

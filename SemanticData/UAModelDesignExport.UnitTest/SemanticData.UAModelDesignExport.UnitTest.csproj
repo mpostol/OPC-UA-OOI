@@ -56,6 +56,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
+    <Reference Include="UAOOI.SemanticData.InformationModelFactory, Version=5.1.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.SemanticData.InformationModelFactory.5.1.0\lib\netstandard2.0\UAOOI.SemanticData.InformationModelFactory.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionsUnitTest.cs" />
@@ -114,10 +117,6 @@
     <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj">
       <Project>{9ca2f05b-fb18-49ad-8520-1bcc838f748c}</Project>
       <Name>SemanticData.BuildingErrorsHandling</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj">
-      <Project>{6D20785D-0451-46A9-9AC2-EC66B7C0D18A}</Project>
-      <Name>SemanticData.InformationModelFactory</Name>
     </ProjectReference>
     <ProjectReference Include="..\UAModelDesignExport\SemanticData.UAModelDesignExport.csproj">
       <Project>{c970c14c-98aa-48a9-9f6f-d00c92fa6cef}</Project>

@@ -10,7 +10,7 @@
     <Description>It provides descriptions of building errors to be used for OPC UA Address Space consistency validation purpose.
 </Description>
     <Copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</Copyright>
-    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi/readme</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
@@ -20,6 +20,9 @@
     <AssemblyVersion>5.1.0</AssemblyVersion>
     <FileVersion>5.1.0</FileVersion>
     <Version>5.1.0</Version>
+    <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

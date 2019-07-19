@@ -15,7 +15,7 @@
 This library is dedicated to create a plug-in aimed at importing models based on the OPC UA Information Model.
 It is part of the project supporting OPC UA Object Oriented Internet paradigm.</Description>
     <Copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</Copyright>
-    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi/readme</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
@@ -24,6 +24,7 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <FileVersion>5.1.0</FileVersion>
     <Company>commsvr.com</Company>
+    <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -54,8 +55,11 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="UAOOI.SemanticData.InformationModelFactory" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj" />
-    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
   </ItemGroup>
 
   <ItemGroup>

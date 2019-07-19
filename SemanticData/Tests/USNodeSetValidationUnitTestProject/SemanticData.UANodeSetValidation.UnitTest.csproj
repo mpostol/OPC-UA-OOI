@@ -59,6 +59,9 @@
       <HintPath>..\..\..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.XML" />
+    <Reference Include="UAOOI.SemanticData.InformationModelFactory, Version=5.1.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.SemanticData.InformationModelFactory.5.1.0\lib\netstandard2.0\UAOOI.SemanticData.InformationModelFactory.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -219,10 +222,6 @@
     <ProjectReference Include="..\..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj">
       <Project>{9ca2f05b-fb18-49ad-8520-1bcc838f748c}</Project>
       <Name>SemanticData.BuildingErrorsHandling</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\InformationModelFactory\SemanticData.InformationModelFactory.csproj">
-      <Project>{6d20785d-0451-46a9-9ac2-ec66b7c0d18a}</Project>
-      <Name>SemanticData.InformationModelFactory</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj">
       <Project>{352378a0-8b2e-4679-bb44-fd0bcc8467d9}</Project>

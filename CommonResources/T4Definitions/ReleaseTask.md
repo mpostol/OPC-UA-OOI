@@ -21,4 +21,3 @@
 - [ ] Update and publish the code help documentation
 - [ ] Publish release
 - [ ] Update the repository front page
-- [ ] Update and publish the code help documentation

@@ -10,7 +10,7 @@ The [Object Oriented Internet](https://fedcsis.org/proceedings/2015/pliks/160.pd
 
 |Go To| Description|
 |:-:|-|
-|  [![Release](https://img.shields.io/github/release/mpostol/OPC-UA-OOI.svg?style=popout)](https://github.com/mpostol/OPC-UA-OOI/releases/tag/4.0.1)| latest release |
+|  [![Release](https://img.shields.io/github/release/mpostol/OPC-UA-OOI.svg?style=popout)](https://github.com/mpostol/OPC-UA-OOI/releases)| latest release |
 | [![ebook](https://img.shields.io/badge/OOI-read_on_Gitbook-brightgreen.svg)](https://commsvr.gitbook.io/ooi) | the ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files from this repository. |
 | [![Join the chat at https://gitter.im/mpostol/OPC-UA-OOI](https://badges.gitter.im/mpostol/OPC-UA-OOI.svg)](https://gitter.im/mpostol/OPC-UA-OOI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) |join the project chat|
 | [10.5281/zenodo.1198852](http://doi.org/10.5281/zenodo.1198852)|you can cite all versions by using the DOI 10.5281/zenodo.1198852. This DOI represents all versions, and will always resolve to the latest one.|
@@ -29,6 +29,7 @@ We use [Semantic Versioning](http://semver.org/) for versioning. For the version
 
 | Version | Milestone                                                          | DOI |Date|
 |:-------:|--------------------------------------------------------------------|:---:|:--:|
+|5.1.0| Semantic-Data ModelDesign Export 5.1.0 |10.5281/zenodo.3345043|Jul 21, 2019 |
 |5.0.2-Alpha |Updated the UA Address Space build against OPC UA Specification 1.04; updated UANodeSet schema; added export to ModelDesign [OPC UA Address Space Prototyping](SemanticData/AddressSpaceComplianceTestTool/README.md)|10.5281/zenodo.2636426|Apr 11, 2019|
 |4.0.1 |.NET Standard implementation, documentation improved, new code help documentation available, tested against Xamarin.Android |10.5281/zenodo.2555407 |Feb 1, 2019|
 | 3.1.0 |New version of the UAOOI.Networking.ReferenceApplication, documentation has been improved.|10.5281/zenodo.1291549 |Jun 17, 2018|
@@ -40,7 +41,7 @@ The table below lists the latest versions of the published Tools.
 
 | Description | Version |
 |----|:---------:|
-|[OPC UA Address Space Prototyping](SemanticData/AddressSpaceComplianceTestTool/README.md)| 5.00.02|
+|[OPC UA Address Space Prototyping](SemanticData/AddressSpaceComplianceTestTool/README.md)| 5.1.0|
 |[Semantic-Data Processing ReferenceApplication](Networking/ReferenceApplication/README.MD)| 4.00.01|
 
 #### NuGet packages
@@ -57,8 +58,10 @@ The table below lists the latest versions of the published NuGet packages.
 | [UAOOI.Networking.Encoding](https://www.nuget.org/packages/UAOOI.Networking.Encoding)|4.0.1 | This package provides functionality to lookup a dictionary containing value converters. The interface is used for late binding to inject dependency on the external library.  This library provides IEncodingFactory functionality limited to encoding simple data types only for the testing purpose only.
 | [UAOOI.Networking.SemanticData](https://www.nuget.org/packages/UAOOI.Networking.SemanticData) |4.0.1 | SemanticData Reactive Networking library based on OPC UA Part 14 Pub/Sub.
 | [UAOOI.Networking.UDPMessageHandler](https://www.nuget.org/packages/UAOOI.Networking.UDPMessageHandler) | 4.0.1 | OOI Reactive Networking: UDP IMessageHandlerFactory Implementation
-| [UAOOI.SemanticData.InformationModelFactory](https://www.nuget.org/packages/UAOOI.SemanticData.InformationModelFactory/) | 4.0.1 | OPC UA Information Model Factory Library
-| [UAOOI.SemanticData.UANodeSetValidation](https://www.nuget.org/packages/UAOOI.SemanticData.UANodeSetValidation/)| 4.0.1 | This project supports validation of the OPC UA Address Space captured in the XML file against the OPC UA Specification. It is assumed that the Address Space is represented as an XML file compliant with the NodeSet schema. This library is dedicated to creating a plug-in aimed at importing models based on the OPC UA Information Model. It is part of the project supporting OPC UA Object Oriented Internet paradigm.
+| [UAOOI.SemanticData.InformationModelFactory](https://www.nuget.org/packages/UAOOI.SemanticData.InformationModelFactory/) | 5.1.0 | OPC UA Information Model Factory Library
+| [UAOOI.SemanticData.UANodeSetValidation](https://www.nuget.org/packages/UAOOI.SemanticData.UANodeSetValidation/)| 5.1.0 | This project supports validation of the OPC UA Address Space captured in the XML file against the OPC UA Specification. It is assumed that the Address Space is represented as an XML file compliant with the NodeSet schema. This library is dedicated to creating a plug-in aimed at importing models based on the OPC UA Information Model. It is part of the project supporting OPC UA Object Oriented Internet paradigm.
+| [UAOOI.SemanticData.UAModelDesignExport](https://www.nuget.org/packages/UAOOI.SemanticData.UAModelDesignExport/) | 5.1.0 |This library provides an implementation of the export functionality of an XML file compliant with the UAModelDeign schema. By design, the UAModelDeign schema describes the syntax of an XML document representing the OPC UA Information Model.|
+[UAOOI.SemanticData.BuildingErrorsHandling](https://www.nuget.org/packages/UAOOI.SemanticData.BuildingErrorsHandling/)|5.1.0|It provides descriptions of building errors to be used for OPC UA Address Space consistency validation purpose.|
 
 ## Content
 

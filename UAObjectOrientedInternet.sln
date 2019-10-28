@@ -74,6 +74,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataDiscovery", "DataDiscovery", "{069B930C-EF5B-4943-AA82-0F56C33CF3DD}"
 	ProjectSection(SolutionItems) = preProject
 		DataDiscovery\DomainModel.md = DataDiscovery\DomainModel.md
+		DataDiscovery\ProjectDescription.md = DataDiscovery\ProjectDescription.md
 		DataDiscovery\Readme.md = DataDiscovery\Readme.md
 	EndProjectSection
 EndProject

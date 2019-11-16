@@ -151,7 +151,7 @@ The project [CommServer Migration to Open-source][migration2osProj] will be used
 
 ### Object Oriented Internet Reactive Networking Configuration Editor
 
-OPC-UA-OOI.ConfigEditor is a package of software to manage the configuration of the [Reactive Communication][OOIBookToC].  The `OPC-UA-OOI.ConfigEditor` was written by CAS Lodz Poland. The [mpostol/OPC-UA-OOI.ConfigEditor][ConfigEditor] repository is aimed at the software migration from on-premise subversion repository to GitHub and publishing it as the Open-Source Software (OSS).  After migration, this repository will be used to manage all activities addressing the software maintenance process as a plug-in of the [Object Oriented Internet Reactive Networking Configuration Editor][ConfigEditor].
+OPC-UA-OOI.ConfigEditor is a package of software to manage the configuration of the [Reactive Communication][OOIBookToC].  The `OPC-UA-OOI.ConfigEditor` was written by CAS Lodz Poland. The [mpostol/OPC-UA-OOI.ConfigEditor][ConfigEditor] repository is aimed at the software migration from on-premise subversion repository to GitHub and publishing it as the Open-Source Software (OSS).  After migration, this repository will be used to manage all activities addressing the software maintenance process as a plug-in of the [ASMD][ASMD].
 
 ## How to cite the software and associated documentation files
 
@@ -198,4 +198,4 @@ The presented approach is a real proposal for a new technology wave based on the
 [migration2os]: https://github.com/commsvr-com/migration2os
 [migration2osProj]: https://github.com/orgs/commsvr-com/projects
 [ConfigEditor]: https://github.com/mpostol/OPC-UA-OOI.ConfigEditor
-[OOIBookToC]: TableOfContent.md
+[OOIBookToC]: TableOfContent.md#reactive-communication

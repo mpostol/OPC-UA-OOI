@@ -13,7 +13,7 @@ The [Object Oriented Internet](https://fedcsis.org/proceedings/2015/pliks/160.pd
 |  [![Release](https://img.shields.io/github/release/mpostol/OPC-UA-OOI.svg?style=popout)](https://github.com/mpostol/OPC-UA-OOI/releases)| latest release |
 | [![ebook](https://img.shields.io/badge/OOI-read_on_Gitbook-brightgreen.svg)](https://commsvr.gitbook.io/ooi) | the ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files from this repository. |
 | [![Join the chat at https://gitter.im/mpostol/OPC-UA-OOI](https://badges.gitter.im/mpostol/OPC-UA-OOI.svg)](https://gitter.im/mpostol/OPC-UA-OOI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) |join the project chat|
-| [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1198852.svg)](https://doi.org/10.5281/zenodo.1198852)|you can cite all versions by using the DOI 10.5281/zenodo.1198852. This DOI represents all versions, and will always resolve to the latest one.|
+| [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1198852.svg)](https://doi.org/10.5281/zenodo.1198852) | you can cite all versions by using the DOI 10.5281/zenodo.1198852. This DOI represents all versions, and will always resolve to the latest one.|
 
 > Note: the DOI number is a unique identifying number associated with the repository version. Visit the section `How to cite the software and associated documentation files` to learn how to create derived works and cite the origin.
 
@@ -135,13 +135,19 @@ Detailed description is covered by the document [InformationModelFactory Library
 
 ## Related work
 
-### OPC UA Address Space Model Designer
+### OPC UA Address Space Model Designer (ASMD)
 
 The main challenge of the project [OPC UA Address Space Model Designer (ASMD)][ASMD] is to offer the designers a user-friendly tool supporting all aspects of the OPC UA Address Space model designing process. It brings together: designing, learning, and deploying. Description of the main features of the tool is covered by the section [Design and Deployment Support][DDSupport].
 
 The OPC UA Address Space Model Designer ([ASMD][ASMD]) implements conceptual containers called solutions and projects to apply their settings. Any solution contains one or more projects and it manages the way the designer configures, builds, and deploys sets of related projects. Any project includes source files containing the model representation and related metadata such as properties and references to other projects. The designer Integrated Development Environment (IDE) provides tools that help you edit and manipulate models, namespaces, and add references to external resources.
 
 ### CommServer
+
+[CommServer][commserver] is a package of software to manage data transfer using OPC standards. Built-in technologies and algorithms support Machine to Machine (M2M) meaningful inetroperability. The [CommServer][commserver] was written by CAS Lodz Poland.
+
+The GitHub repository [commsvr-com/migration2os][migration2os] is aimed at the `CommServer` software migration from on-premise subversion repository to GitHub and publishing it as the Open-Source Software (OSS). The members of the `CommSerrver` family are to be converged with the Object-Oriented Internet paradigms and integrated with the solutions maintained in this repository.
+
+The project [CommServer Migration to Open-source][migration2osProj] will be used to coordinate the migration process of transferring multi-parts software from an on-premise subversion repository to a set of GitHub repositories. After migration, this project will aggregate the description of all activities addressing the software maintenance process.
 
 ### Object Oriented Internet Reactive Networking Configuration Editor
 
@@ -188,4 +194,6 @@ The presented approach is a real proposal for a new technology wave based on the
 [ASMD]:https://github.com/mpostol/ASMD
 [DDSupport]:SemanticData/DesignDeploymentSupport.md
 [CAS.InterchangeXML]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf
-
+[commserver]: http://www.commsvr.com/
+[migration2os]: https://github.com/commsvr-com/migration2os
+[migration2osProj]: https://github.com/orgs/commsvr-com/projects

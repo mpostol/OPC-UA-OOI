@@ -162,7 +162,7 @@ The presented approach is a real proposal for a new technology wave based on the
 - ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files [![ebook](https://img.shields.io/badge/Gitbook-Release-brightgreen.svg)](https://commsvr.gitbook.io/ooi/tableofcontent)
 - Mariusz Postol, [Object Oriented Internet](https://ieeexplore.ieee.org/abstract/document/7321562), [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp), 2015, [IEEE Xplore Digital Library](https://ieeexplore.ieee.org/abstract/document/7321562) [![DOI](https://img.shields.io/badge/DOI-10.15439%2F015F160-blue)](https://fedcsis.org/proceedings/2015/pliks/160.pdf)
 - [WIKI of this project](https://github.com/mpostol/OPC-UA-OOI/wiki)
-- [Library API Browser](http://www.commsvr.com/download/UAOOI401/index.html)
+- [Library API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
 - [My Blog: About enablers of future solutions](http://wwww.mpostol.wordpress.com/)
 - [About me on LinkedIn](https://pl.linkedin.com/in/mpostol)
 - [OPC Foundation](https://opcfoundation.org/)

@@ -22,6 +22,10 @@
 
 [OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
 
+- [Library API Browser][API]
+
+[API]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
+
 <!--wordpress-->
 
 - [OPC Unified Architecture][wordpress.opc-ua]

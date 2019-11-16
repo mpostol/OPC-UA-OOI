@@ -2,7 +2,19 @@
 
 ## Mariusz Postol
 
+<!-- Publications -->
+
+- Mariusz Postol, [Object Oriented Internet](https://ieeexplore.ieee.org/abstract/document/7321562), [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp), 2015, [IEEE Xplore Digital Library](https://ieeexplore.ieee.org/abstract/document/7321562) [![DOI](https://img.shields.io/badge/DOI-10.15439%2F2015F160-blue)](https://fedcsis.org/proceedings/2015/pliks/160.pdf)
+
+[Object Oriented Internet]: https://fedcsis.org/proceedings/2015/pliks/160.pdf
+
+- Mariusz Postol, [Machine to Machine Semantic-Data Based Communication: Comprehensive Survey](https://www.researchgate.net/publication/331633195_Machine_to_Machine_Semantic-Data_Based_Communication) in [Computer Game Innovations 2018](https://www.researchgate.net/publication/335524620_Computer_Game_Innovations_2018), Publisher: Lodz University of Technology Press; ISBN: 978-83-7283-999-2
+
 <!--OOI on GitHub-->
+
+- [OPC UA Address Space Model Designer (ASMD) - GitHub Open Source Software][ASMD]
+
+[ASMD]:https://github.com/mpostol/ASMD
 
 - [GitHub UAOOI.Networking.UDPMessageHandler][OOI.Networking.UDPMessageHandler]
 
@@ -15,6 +27,10 @@
 - [GitHub UAOOI Releases Page][OOI.Releases]
 
 [OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
+
+- [Library API Browser][API]
+
+[API]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
 
 <!--wordpress-->
 
@@ -48,7 +64,7 @@
 
 [CAS.OPCUAIMD]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf
 
-- [OPC UA Address Space Model Designer, 2019][CAS.ASMD]
+- [CAS OPC UA Address Space Model Designer, CommServer software family][CAS.ASMD]
 
 [CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
 

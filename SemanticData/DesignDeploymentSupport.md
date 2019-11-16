@@ -75,18 +75,18 @@ Concluding the above the most important requirements of the development environm
 - No XML file editing is required.
 - No programming skills are required.
 
-An example of the tool meeting all this requirements is [OPC UA Address Space Model Designer, 2019][CAS.ASMD].
+An example of the tool meeting all this requirements is [OPC UA Address Space Model Designer][CAS.ASMD] the open source available on GitHub.
 
 ## See also
 
-- [1] [OPC UA Address Space Model Designer, 2019][CAS.ASMD]
+- [1] [OPC UA Address Space Model Designer][CAS.ASMD]
 - [2] [OPC Unified Architecture Specification Part 3: Address Space Model, OPC Foundation, Rel. 1.04, 2017-11-22][Opc.UA.Part3]
 - [3] [OPC Unified Architecture Specification Part 5: Information Model, OPC Foundation, Rel. 1.04, 2017-11-22][OPC.UA.Part5]
 - [4] [Address Space Model Life-cycle][Address Space Model Life-cycle]
 - [5] [Address Space and Address Space Model][Address Space and Address Space Model]
 - [6] [UA Information Model - Concept][UA Information Model - Concept]
 
-[CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
+[CAS.ASMD]: https://github.com/mpostol/ASMD
 [Opc.UA.Part3]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-3-address-space-model/
 [Opc.UA.Part4]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-4-services/
 [OPC.UA.Part5]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-5-information-model/

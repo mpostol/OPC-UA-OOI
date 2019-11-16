@@ -143,12 +143,12 @@ This software is licensed under the MIT License - see the [LICENSE.md][LICENSE.m
 - [OPC Unified Architecture][wordpress.opc-ua]
 - [OPC Unified Architecture - Main Technological Features][wordpress.OPCUAMTF]
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
-- [OPC UA Address Space Model Designer, 2019][CAS.ASMD]
+- [OPC UA Address Space Model Designer][CAS.ASMD]
 - [XSLT Introduction][XSLT Introduction]
 - [OPCFoundation/UA-ModelCompiler] - `ModelCompiler` converts XML files into C# and ANSI C
 - [How to contribute][CONTRIBUTING.md]
 
-[CAS.OPCUAIMD]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf
+[CAS.OPCUAIMD]: https://zenodo.org/record/2586616#.XdAT5FdKiUk
 
 [wordpress.opc-ua]: https://mpostol.wordpress.com/opc-ua/
 
@@ -164,7 +164,7 @@ This software is licensed under the MIT License - see the [LICENSE.md][LICENSE.m
 
 [OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
 
-[CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
+[CAS.ASMD]: https://github.com/mpostol/ASMD
 
 [OPCFoundation/UA-ModelCompiler]:https://github.com/OPCFoundation/UA-ModelCompiler
 

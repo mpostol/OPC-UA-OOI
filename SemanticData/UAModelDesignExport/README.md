@@ -81,7 +81,7 @@ The main challenge of the project [OPC UA Address Space Model Designer (ASMD)][C
 
 To make this tool as useful as possible, the definition of the created Address Space can be saved to the XML file compatible with the `UAModelDesign` schema used by the OPC UA Software Development Kit released by the OPC Foundation.
 
-The OPC UA Address Space Model Designer (ASMD) implements conceptual containers called solutions and projects to apply their settings. Any solution contains one or more projects and it manages the way the designer configures, builds, and deploys sets of related projects. Any project includes source files containing the model representation and related metadata such as properties and references to other projects. The designer integrated development environment provides tools that help you edit and manipulate models, namespaces, and add references to external resources.
+The [ASMD][CAS.ASMD] implements conceptual containers called solutions and projects to apply their settings. Any solution contains one or more projects and it manages the way the designer configures, builds, and deploys sets of related projects. Any project includes source files containing the model representation and related metadata such as properties and references to other projects. The designer integrated development environment provides tools that help you edit and manipulate models, namespaces, and add references to external resources.
 
 Documents compliant with the `UAModelDesign` schema may be opened as an existing project. Visit the help documentation to learn how to manage the solution [OPC UA Address Space Model Designer Online Help][ASMD.Help].
 
@@ -121,14 +121,14 @@ This library is available as the NuGet package `UAOOI.SemanticData.UAModelDesign
 1. Generate `UANodeSet` file using your favorite Software Development Kit (SDK)
     - instantiate Address Space using the available functionality or custom code
     - export the Address Space to `UANodeSet` file
-2. Generate `UAModelDesign` file using [Address Space Prototyping Tool (`ASP`) tool][asp.exe]
+2. Generate `UAModelDesign` file using [Address Space Prototyping Tool (ASP) tool][asp.exe]
     - import the already generated `UANodeSet`
     - export the UA Information Model to `UAModelDesign` file
 3. Continue the model design using [ASMD tool][CAS.ASMD]
     - create new or reuse existing solution
     - open the `UAModelDesign` as the existing project
-4. You are ready to modify the model according to your needs using ASMD
-5. If done generate all required files using build functionality offered by the ASMD
+4. You are ready to modify the model according to your needs using [ASMD tool][CAS.ASMD]
+5. If done generate all required files using build functionality offered by the [ASMD tool][CAS.ASMD]
 
 ## How to reuse models designed in UML
 
@@ -136,14 +136,14 @@ This library is available as the NuGet package `UAOOI.SemanticData.UAModelDesign
     - using a favorite tool design UML diagrams representing expected OPC UA Information Model
     - export the model to a suitable form supported as input by `UANodeSet` a custom generating tool
     - generate `UANodeSet` using the custom `UANodeSet` generating tool
-2. Generate `UAModelDesign` file using [`ASP` tool][asp.exe]
+2. Generate `UAModelDesign` file using [ASP tool][asp.exe]
     - import the already generated `UANodeSet`
     - export the UA Information Model to `UAModelDesign` file
 3. Continue the model design using [ASMD tool][CAS.ASMD]
     - create a new or open existing solution
     - open the `UAModelDesign` as the existing project
-4. You are ready to modify the model according to your needs using ASMD
-5. If done generate all required files using build functionality offered by the ASMD
+4. You are ready to modify the model according to your needs using [ASMD tool][CAS.ASMD]
+5. If done generate all required files using build functionality offered by the [ASMD tool][CAS.ASMD] 
 
 ## See also
 
@@ -156,13 +156,14 @@ This library is available as the NuGet package `UAOOI.SemanticData.UAModelDesign
 - [Address Space Model Life-cycle][ASMLC]
 - [Design and Deployment Support][DDSupport]
 - [OPC UA Address Space Model Designer tool][CAS.ASMD]
-- [OPC UA Address Space Model Designer Online Help][ASMD.Help]
+- [OPC UA Address Space Model Designer WIKI][ASMD.Help]
 - [Semantic-Data Processing Architecture][SDPA]
 - [Address Space Prototyping Tool (ase.exe)][asp.exe]
 
 [asp.exe]:../../SemanticData/AddressSpaceComplianceTestTool/README.md
 [SDPA]:../README.MD
-[ASMD.Help]:http://www.commsvr.com/LinkClick.aspx?link=http%3a%2f%2fwww.commsvr.com%2fOPC-Help%2fIndex.aspx%3ftopic%3dhtml%2fa2d55988-b59a-4a87-95b9-933f6bbdf5bd.htm&tabid=321&mid=2446
+[ASMD.Help]:https://github.com/mpostol/ASMD/wiki
+[CAS.ASMD]: https://github.com/mpostol/ASMD
 [nuget-intro]:https://docs.microsoft.com/en-us/nuget/what-is-nuget
 [nuget-install]:https://docs.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio
 [ASMLC]:../InformationModelLifecycle.md
@@ -170,4 +171,3 @@ This library is available as the NuGet package `UAOOI.SemanticData.UAModelDesign
 [Opc.UA.Part6]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-6-mappings/
 [Opc.UA.Part4]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-4-services/
 [DDSupport]:../../SemanticData/DesignDeploymentSupport.md
-[CAS.ASMD]:http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx

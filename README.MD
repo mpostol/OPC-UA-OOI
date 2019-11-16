@@ -13,7 +13,7 @@ The [Object Oriented Internet](https://fedcsis.org/proceedings/2015/pliks/160.pd
 |  [![Release](https://img.shields.io/github/release/mpostol/OPC-UA-OOI.svg?style=popout)](https://github.com/mpostol/OPC-UA-OOI/releases)| latest release |
 | [![ebook](https://img.shields.io/badge/OOI-read_on_Gitbook-brightgreen.svg)](https://commsvr.gitbook.io/ooi) | the ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files from this repository. |
 | [![Join the chat at https://gitter.im/mpostol/OPC-UA-OOI](https://badges.gitter.im/mpostol/OPC-UA-OOI.svg)](https://gitter.im/mpostol/OPC-UA-OOI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) |join the project chat|
-| [10.5281/zenodo.1198852](http://doi.org/10.5281/zenodo.1198852)|you can cite all versions by using the DOI 10.5281/zenodo.1198852. This DOI represents all versions, and will always resolve to the latest one.|
+| [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1198852.svg)](https://doi.org/10.5281/zenodo.1198852)|you can cite all versions by using the DOI 10.5281/zenodo.1198852. This DOI represents all versions, and will always resolve to the latest one.|
 
 > Note: the DOI number is a unique identifying number associated with the repository version. Visit the section `How to cite the software and associated documentation files` to learn how to create derived works and cite the origin.
 
@@ -161,6 +161,7 @@ The presented approach is a real proposal for a new technology wave based on the
 
 - ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files [![ebook](https://img.shields.io/badge/Gitbook-Release-brightgreen.svg)](https://commsvr.gitbook.io/ooi/tableofcontent)
 - Mariusz Postol, [Object Oriented Internet](https://ieeexplore.ieee.org/abstract/document/7321562), [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp), 2015, [IEEE Xplore Digital Library](https://ieeexplore.ieee.org/abstract/document/7321562) [![DOI](https://img.shields.io/badge/DOI-10.15439%2F015F160-blue)](https://fedcsis.org/proceedings/2015/pliks/160.pdf)
+- Mariusz Postol, [Machine to Machine Semantic-Data Based Communication: Comprehensive Survey](https://www.researchgate.net/publication/331633195_Machine_to_Machine_Semantic-Data_Based_Communication) in [Computer Game Innovations 2018](https://www.researchgate.net/publication/335524620_Computer_Game_Innovations_2018), Publisher: Lodz University of Technology Press; ISBN: 978-83-7283-999-2, 2018
 - [WIKI of this project](https://github.com/mpostol/OPC-UA-OOI/wiki)
 - [Library API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
 - [My Blog: About enablers of future solutions](http://wwww.mpostol.wordpress.com/)

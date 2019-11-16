@@ -8,6 +8,8 @@
 
 [Object Oriented Internet]: https://fedcsis.org/proceedings/2015/pliks/160.pdf
 
+- Mariusz Postol, [Machine to Machine Semantic-Data Based Communication: Comprehensive Survey](https://www.researchgate.net/publication/331633195_Machine_to_Machine_Semantic-Data_Based_Communication) in [Computer Game Innovations 2018](https://www.researchgate.net/publication/335524620_Computer_Game_Innovations_2018), Publisher: Lodz University of Technology Press; ISBN: 978-83-7283-999-2
+
 <!--OOI on GitHub-->
 
 - [GitHub UAOOI.Networking.UDPMessageHandler][OOI.Networking.UDPMessageHandler]

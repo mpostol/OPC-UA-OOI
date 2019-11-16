@@ -100,17 +100,17 @@ To get more details visit the section [Internet of Things (IoT) Communication](.
 The `SemanticData` folder contains projects related to support the [OOI Semantic-Data Processing Architecture](./SemanticData/README.MD). Processing of the OPC UA Data Outside of the Server context is based on the **Semantic-Data** concept. This project is aimed to workout deliverables supporting Process Data handling over Internet including but not limiting to:
 
 - Data edition ֠UI allowing display and edition of any custom data
-- Data serialization and deserialization - see white-paper [Address Space Interchange XML](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf)
+- Data serialization and deserialization - see white-paper [Address Space Interchange XML][CAS.InterchangeXML]
 - Data prototyping - methods and tools to design custom data types
 - Exposition of the process data in the context of metadata [OPC UA Address Space Model Designer](http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx)
 - Browsing of the Metadata to selectively access requested Process Data
-- Modeling and representation of the metadata - see white-paper [OPC UA Information Model Deployment](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2586616.svg)](https://doi.org/10.5281/zenodo.2586616)
+- Modeling and representation of the metadata - detailed description is covered by the section [OPC UA Information Model Deployment](SemanticData/InformationModelsDevelopment.md)
 - Validation of the semantics and consistency of the metadata - see project [USNodeSetValidationUnitTestProject](./SemanticData/UANodeSetValidation/README.MD)
 - Data Oriented Architecture (DOA)
 
 #### Project `AddressSpaceComplianceTestTool`
 
-It is command line application aimed to validate XML files compliant with the [UANodeSet schema](https://opcfoundation.org/UA/2011/03/UANodeSet.xsd) defined in Part 6 of the OPC UA Specification. The description of this schema is captured in the document [Address Space Interchange XML](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf)
+It is a command-line application aimed at the validation of the XML files compliant with the [UANodeSet schema](https://opcfoundation.org/UA/2011/03/UANodeSet.xsd) defined in Part 6 of the OPC UA Specification. The description of this schema is captured by the document [Address Space Interchange XML][CAS.InterchangeXML]
 
 #### Project `UANodeSetValidation`
 
@@ -132,6 +132,20 @@ This interface may be used for dependency injection where validation of the inpu
 The project is dedicated to develop the OPC UA Information Model Factory Library. It is a library used as the dependency injection to produce OPC UA **Information Model** by a selected importer. The abstract API must be implemented by a classes providing functionality of **Information Model** creation.
 
 Detailed description is covered by the document [InformationModelFactory Library](./SemanticData/InformationModelFactory/README.md)
+
+## Related work
+
+### OPC UA Address Space Model Designer
+
+The main challenge of the project [OPC UA Address Space Model Designer (ASMD)][ASMD] is to offer the designers a user-friendly tool supporting all aspects of the OPC UA Address Space model designing process. It brings together: designing, learning, and deploying. Description of the main features of the tool is covered by the section [Design and Deployment Support][DDSupport].
+
+The OPC UA Address Space Model Designer ([ASMD][ASMD]) implements conceptual containers called solutions and projects to apply their settings. Any solution contains one or more projects and it manages the way the designer configures, builds, and deploys sets of related projects. Any project includes source files containing the model representation and related metadata such as properties and references to other projects. The designer Integrated Development Environment (IDE) provides tools that help you edit and manipulate models, namespaces, and add references to external resources.
+
+### CommServer
+
+### Object Oriented Internet Reactive Networking Configuration Editor
+
+[Object Oriented Internet Reactive Networking Configuration Editor](https://github.com/mpostol/OPC-UA-OOI.ConfigEditor)
 
 ## How to cite the software and associated documentation files
 
@@ -157,15 +171,21 @@ I hope it is a good place to prototype and converge the OPC UA communication tec
 
 The presented approach is a real proposal for a new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability.
 
-## Read more
+## See Also
 
 - ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files [![ebook](https://img.shields.io/badge/Gitbook-Release-brightgreen.svg)](https://commsvr.gitbook.io/ooi/tableofcontent)
 - Mariusz Postol, [Object Oriented Internet](https://ieeexplore.ieee.org/abstract/document/7321562), [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp), 2015, [IEEE Xplore Digital Library](https://ieeexplore.ieee.org/abstract/document/7321562) [![DOI](https://img.shields.io/badge/DOI-10.15439%2F015F160-blue)](https://fedcsis.org/proceedings/2015/pliks/160.pdf)
 - Mariusz Postol, [Machine to Machine Semantic-Data Based Communication: Comprehensive Survey](https://www.researchgate.net/publication/331633195_Machine_to_Machine_Semantic-Data_Based_Communication) in [Computer Game Innovations 2018](https://www.researchgate.net/publication/335524620_Computer_Game_Innovations_2018), Publisher: Lodz University of Technology Press; ISBN: 978-83-7283-999-2, 2018
 - [WIKI of this project](https://github.com/mpostol/OPC-UA-OOI/wiki)
 - [Library API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
+- [OPC UA Address Space Model Designer (ASMD)][ASMD]
 - [My Blog: About enablers of future solutions](http://wwww.mpostol.wordpress.com/)
 - [About me on LinkedIn](https://pl.linkedin.com/in/mpostol)
 - [OPC Foundation](https://opcfoundation.org/)
 - [References](REFERENCES.md) - this section contains links to selected internal and external resources.
 - [Sponsored by commsvr.com](http://www.commsvr.com/)
+
+[ASMD]:https://github.com/mpostol/ASMD
+[DDSupport]:SemanticData/DesignDeploymentSupport.md
+[CAS.InterchangeXML]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf
+

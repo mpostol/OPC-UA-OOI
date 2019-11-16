@@ -13,7 +13,7 @@ The main goal of this proof of concept is to demonstrate the feasibility of proc
 
 By design it is composable component of the [`ReferenceApplication`](../../Networking/ReferenceApplication/README.MD). This component may be integrated with the `ReferenceApplication` as the `Producer`.
 
-The source code of the OPC UA Information Model is added to the project and is located in the folder `UAInformationModel`. The folder also contains the solution file that can be opened using the Address Space Model Designer [\[ 2\]][CAS.ASMD]. A detailed description of the OPC UA Information Model deployment is covered in [\[1\]][CAS.OPCUAIMD].
+The source code of the OPC UA Information Model is added to the project and is located in the folder `UAInformationModel`. The folder also contains the solution file that can be opened using the Address Space Model Designer [\[ 2\]][CAS.ASMD]. A detailed description of the OPC UA Information Model deployment is covered by [\[1\]][CAS.OPCUAIMD].
 
 ## Informal Model of Boiler
 
@@ -23,7 +23,7 @@ This example considers a real process in a boiler producing steam from water. Th
 
 ## OPC UA Information Model of Boiler
 
-One purpose of this example is to illustrate modeling against OPC UA Information Model . A simplified model of the presented process is illustrated in Figure 2 showing part of an OPC UA Information Model where the `BoilerType` type is defined.
+One purpose of this example is to illustrate modeling against OPC UA Information Model. A simplified model of the presented process is illustrated in Figure 2 showing part of an OPC UA Information Model where the `BoilerType` type is defined.
 
 ![Figure 2. Boiler simplified model](../../CommonResources/Media/Boiler/image003.png)
 
@@ -51,10 +51,10 @@ After instantiation of the `BoilerType` and adding reference to it in the `Objec
 
 ## See also
 
-> - [ 1] [Mariusz Postol. OPC UA Information Model Deployment][CAS.OPCUAIMD]. 2016. Version 1.2, DOI: 10.5281/zenodo.2586616 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2586616.svg)](https://doi.org/10.5281/zenodo.2586616)
+> - [ 1] Mariusz Postol. OPC UA Information Model Deployment, 2016. Version 1.2, DOI: 10.5281/zenodo.2586616 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2586616.svg)](https://doi.org/10.5281/zenodo.2586616)
 > - [ 2] [OPC UA Address Space Model Designer, 2019][CAS.ASMD]
 > - [ 3] [OPC UA Information Model How to Create Instances Video][CAS.VideoInstances]
 
-[CAS.ASMD]:http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
-[CAS.OPCUAIMD]:http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf
+[CAS.ASMD]:https://github.com/mpostol/ASMD
+[CAS.OPCUAIMD]:https://zenodo.org/record/2586616#.XdAUQFdKiUk
 [CAS.VideoInstances]:https://youtu.be/LvGHl-hRwZw

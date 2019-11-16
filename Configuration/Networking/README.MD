@@ -29,7 +29,7 @@ The proposed solution supports also possibility to handle the configuration chan
 
 I hope the interface is ready to fulfill the following design time scenarios allowing for configuration in context of selected OPC Information Model/Address Space:
 
-1. Plug in to a modeler (UA Information Model design tool) as the configuration editor tool (preferred for me) - now it is compatible with the [Address Space Model Designer](http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx)
+1. Plug in to a modeler (UA Information Model design tool) as the configuration editor tool (preferred for me) - now it is compatible with the [Address Space Model Designer][ASMD]
 2. OPC UA Server as an local editor – using server local GUI, Address Space and the UANetworkingConfiguration plug-in (in this case OPC UA server is just modeler)
 3. OPC UA Client as an editor  - using client local GUI/UANetworkingConfiguration on the client side, and remote access to the Address Space
 4. OPC UA Server as a remote editor – using custom configuration Information Model/UANetworkingConfiguration plug-in on the server side, and  generic configuration OPC UA Clint as the remote configuration tool,
@@ -50,3 +50,4 @@ The XML schema of the configuration files is available at: [ConfigurationData.xs
 - [API Browser][API Browser]: the preliminary code help documentation.
  
 [API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
+[ASMD]:https://github.com/mpostol/ASMD

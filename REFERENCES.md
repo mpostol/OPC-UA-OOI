@@ -12,6 +12,10 @@
 
 <!--OOI on GitHub-->
 
+- [OPC UA Address Space Model Designer (ASMD) - GitHub Open Source Software][ASMD]
+
+[ASMD]:https://github.com/mpostol/ASMD
+
 - [GitHub UAOOI.Networking.UDPMessageHandler][OOI.Networking.UDPMessageHandler]
 
 [OOI.Networking.UDPMessageHandler]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/UDPMessageHandler
@@ -60,7 +64,7 @@
 
 [CAS.OPCUAIMD]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf
 
-- [OPC UA Address Space Model Designer, 2019][CAS.ASMD]
+- [CAS OPC UA Address Space Model Designer, CommServer software family][CAS.ASMD]
 
 [CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
 

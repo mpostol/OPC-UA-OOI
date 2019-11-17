@@ -9,10 +9,10 @@ The topics contained in this section are intended to give you quick exposure to 
 Here are steps to create a successful `OOI Reactive Application`:
 
 1. Derive from `DataManagementSetup` - it is place holder to gather all external injection points used to initialize the communication and bind to local resources.
-1. Implement 'IEncodingFactory' - provides functionality to lookup a dictionary containing value converters.
+1. Implement 'IEncodingFactory' interface - provides functionality to lookup a dictionary containing value converters.
 1. Implement `IMessageHandlerFactory` interface -  creates objects supporting messages handling over the wire.
-1. Implement `IBindingFactory` - interface creating objects implementing `IBinding` that can be used to synchronize the values of the local data repository properties and messages received/send over the wire.
-1. Implement `IConfigurationFactory` - providing access to the selected role configuration.
+1. Implement `IBindingFactory` interface - creates objects implementing `IBinding` that can be used to synchronize the values of the local data repository properties and messages received/send over the wire.
+1. Implement `IConfigurationFactory` interface - provides access to the selected role configuration.
 
 > Notes:
 > - It is expected that the encoding/decoding functionality is provided outside in a custom library. The interface 'IEncodingFactory' is used for late binding to inject dependency on the external library. 

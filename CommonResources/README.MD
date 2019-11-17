@@ -2,7 +2,7 @@
 
 ## ModelingProject
 
-Contains models at different levels of detail throughout the application lifecycle as part of your development process. 
+Contains models at different levels of detail throughout the application life-cycle as part of your development process. 
 Main aim is to track requirements, tasks, test cases, bugs, and other work associated with your models by linking model 
 elements to development plan.
 

@@ -44,16 +44,17 @@
     </AdditionalFiles>
     <None Include="CodeHeader.snippet" />
     <None Include="packages.config" />
-    <None Include="ReleaseNoteTemplate.md">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReleaseNoteTemplate.tt</DependentUpon>
-    </None>
+    <None Include="ReleaseNoteTemplate.md" />
     <None Include="Template.AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Template.AssemblyInfo.cs</LastGenOutput>
     </None>
     <None Include="Model.t4" />
+    <None Include="Template.nuspec.nuspec">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Template.nuspec.tt</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Template.AssemblyInfo.cs">
@@ -69,9 +70,9 @@
     <None Include="ReleaseTask.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ReleaseNoteTemplate.tt">
+    <Content Include="Template.nuspec.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ReleaseNoteTemplate.md</LastGenOutput>
+      <LastGenOutput>Template.nuspec.nuspec</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

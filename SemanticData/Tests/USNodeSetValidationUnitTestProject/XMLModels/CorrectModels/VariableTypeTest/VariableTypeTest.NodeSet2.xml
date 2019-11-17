@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" LastModified="2015-04-03T15:25:27.3092814Z" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" LastModified="2019-05-05T10:22:47.4107976Z" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
   <NamespaceUris>
     <Uri>http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest</Uri>
   </NamespaceUris>
@@ -43,10 +43,19 @@
   <UAVariableType NodeId="ns=1;i=8" BrowseName="1:ComplexVariableType" DataType="Number">
     <DisplayName>ComplexVariableType</DisplayName>
     <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=12</Reference>
       <Reference ReferenceType="HasProperty">ns=1;i=14</Reference>
       <Reference ReferenceType="HasSubtype" IsForward="false">i=2368</Reference>
     </References>
   </UAVariableType>
+  <UAVariable NodeId="ns=1;i=12" BrowseName="EURange" ParentNodeId="ns=1;i=8" DataType="i=884">
+    <DisplayName>NewDisplayName</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=8</Reference>
+    </References>
+  </UAVariable>
   <UAVariable NodeId="ns=1;i=14" BrowseName="1:VariableChild" ParentNodeId="ns=1;i=8" DataType="Int32" AccessLevel="2" UserAccessLevel="2">
     <DisplayName>VariableChild</DisplayName>
     <References>

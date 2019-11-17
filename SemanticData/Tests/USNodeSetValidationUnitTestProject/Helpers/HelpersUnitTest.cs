@@ -16,33 +16,35 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers
   public class HelpersUnitTest
   {
     [TestMethod]
-    [TestCategory("Code")]
-    [ExpectedException(typeof(ArgumentNullException))]
+    [TestCategory("Helpers")]
+    [ExpectedException(typeof(NullReferenceException))]
     public void TraceDiagnosticTestMethod1()
     {
       List<TraceMessage> _listOfTraceMessage = null;
-      int diagnosticCounter = 0;
-      TraceHelper.TraceDiagnostic(TraceMessage.DiagnosticTraceMessage("Test string"), _listOfTraceMessage, ref diagnosticCounter);
+      int _diagnosticCounter = 0;
+      TraceHelper.TraceDiagnostic(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, "Test string"), _listOfTraceMessage, ref _diagnosticCounter);
+      Assert.AreEqual<int>(1, _diagnosticCounter);
+      Assert.AreEqual<int>(0, _listOfTraceMessage.Count);
     }
     [TestMethod]
-    [TestCategory("Code")]
+    [TestCategory("Helpers")]
     public void TraceDiagnosticTestMethod2()
     {
       List<TraceMessage> _listOfTraceMessage = new List<TraceMessage>();
       int _diagnosticCounter = 0;
-      TraceHelper.TraceDiagnostic(TraceMessage.DiagnosticTraceMessage("Test string"), _listOfTraceMessage, ref _diagnosticCounter);
-      Assert.AreEqual<int>(0, _listOfTraceMessage.Count);
+      TraceHelper.TraceDiagnostic(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, "Test string"), _listOfTraceMessage, ref _diagnosticCounter);
+      Assert.AreEqual<int>(1, _listOfTraceMessage.Count);
       Assert.AreEqual<int>(1, _diagnosticCounter);
     }
     [TestMethod]
-    [TestCategory("Code")]
+    [TestCategory("Helpers")]
     public void TraceDiagnosticTestMethod3()
     {
       List<TraceMessage> _listOfTraceMessage = new List<TraceMessage>();
       int _diagnosticCounter = 0;
       TraceHelper.TraceDiagnostic(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdInvalidSyntax, "NodeIdInvalidSyntax"), _listOfTraceMessage, ref _diagnosticCounter);
       Assert.AreEqual<int>(1, _listOfTraceMessage.Count);
-      Assert.AreEqual<int>(0, _diagnosticCounter);
+      Assert.AreEqual<int>(1, _diagnosticCounter);
     }
   }
 }

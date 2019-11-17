@@ -9,6 +9,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   public partial class UAView
   {
+
     /// <summary>
     /// Indicates whether the the inherited parent object is also equal to another object.
     /// </summary>
@@ -24,5 +25,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         (this.ContainsNoLoops == _other.ContainsNoLoops) &&
         (this.EventNotifier == _other.EventNotifier);
     }
+    protected override UANode ParentClone()
+    {
+      UAView _ret = new UAView()
+      {
+        ContainsNoLoops = this.ContainsNoLoops,
+        EventNotifier = this.EventNotifier
+      };
+      base.CloneUAInstance(_ret);
+      return _ret;
+    }
+
   }
 }

@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class AddressSpaceContext - responsible to manage all nodes in the OPC UA Address Space.
   /// </summary>
-  public sealed class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext, IAddressSpaceValidationContext
+  internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext, IAddressSpaceValidationContext
   {
 
     #region constructor
@@ -32,10 +32,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Initializes a new instance of the <see cref="AddressSpaceContext" /> class.
     /// </summary>
     /// <param name="traceEvent">Encapsulates an action to trace the progress and validation issues.</param>
-    /// <exception cref="System.ArgumentNullException">traceEvent - cannot be null.</exception>
+    /// <exception cref="ArgumentNullException">traceEvent - traceEvent - cannot be null</exception>
     public AddressSpaceContext(Action<TraceMessage> traceEvent)
     {
-      m_TraceEvent = traceEvent ?? throw new ArgumentNullException("traceEvent");
+      m_TraceEvent = traceEvent ?? throw new ArgumentNullException("traceEvent", "traceEvent - cannot be null");
+      m_Validator = new Validator(this);
       m_NamespaceTable = new NamespaceTable();
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting creation the OPC UA Address Space."));
       UANodeSet _standard = UANodeSet.ReadUADefinedTypes();
@@ -86,7 +87,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         throw new ArgumentNullException("model", "the model cannot be null");
       if (!model.Exists)
         throw new FileNotFoundException("The imported file does not exist", model.FullName);
-      UANodeSet _nodeSet = UANodeSet.ReadModellFile(model);
+      UANodeSet _nodeSet = UANodeSet.ReadModelFile(model);
       ImportNodeSet(_nodeSet);
     }
     /// <summary>
@@ -97,7 +98,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       ushort _nsi = m_NamespaceTable.LastNamespaceIndex;
       string _namespace = m_NamespaceTable.GetString(_nsi);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering AddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", _namespace)));
-      ValidateAndExportModel(_nsi);
+      ValidateAndExportModel(_nsi, m_Validator);
     }
     /// <summary>
     /// Validates and exports the selected model.
@@ -110,7 +111,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       int _nsIndex = m_NamespaceTable.GetIndex(targetNamespace);
       if (_nsIndex == -1)
         throw new ArgumentOutOfRangeException("targetNamespace", "Cannot find this namespace");
-      ValidateAndExportModel(_nsIndex);
+      ValidateAndExportModel(_nsIndex, m_Validator);
     }
     #endregion
 
@@ -120,9 +121,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// encapsulating the <see cref="UANode.BrowseName" /> of this node if exist. Returns<c>null</c> otherwise.
     /// </summary>
     /// <param name="nodeId">The identifier of the node to find.</param>
+    /// <param name="defaultValue">The default value.</param>
     /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the <see cref="UANode.BrowseName" /> of the node indexed by <paramref name="nodeId" /></returns>
-    public XmlQualifiedName ExportBrowseName(NodeId nodeId)
+    public XmlQualifiedName ExportBrowseName(NodeId nodeId, NodeId defaultValue)
     {
+      if (nodeId == defaultValue)
+        return null;
       IUANodeContext _context = TryGetUANodeContext(nodeId, m_TraceEvent);
       if (_context == null)
         return null;
@@ -152,14 +156,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the or create node context.
     /// </summary>
     /// <param name="nodeId">The node identifier.</param>
-    /// <param name="modelContext">The model context.</param>
-    /// <returns>IUANodeContext.</returns>
-    IUANodeContext IAddressSpaceBuildContext.GetOrCreateNodeContext(NodeId nodeId, IUAModelContext modelContext)
+    /// <param name="createUAModelContext">Delegated capturing functionality to create ua model context.</param>
+    /// <returns>Returns an instance of <see cref="IUANodeContext" />.</returns>
+    public IUANodeContext GetOrCreateNodeContext(NodeId nodeId, Func<NodeId, IUANodeContext> createUAModelContext)
     {
       string _idKey = nodeId.ToString();
       if (!m_NodesDictionary.TryGetValue(_idKey, out IUANodeContext _ret))
       {
-        _ret = new UANodeContext(this, modelContext, nodeId);
+        _ret = createUAModelContext(nodeId);
         m_NodesDictionary.Add(_idKey, _ret);
       }
       return _ret;
@@ -182,11 +186,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return m_NamespaceTable.GetString(namespaceIndex);
     }
     /// <summary>
-    /// Gets my references.
+    /// Gets my references from the main collection.
     /// </summary>
     /// <param name="index">The index.</param>
-    /// <returns>IEnumerable&lt;UAReferenceContext&gt;.</returns>
-    IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetMyReferences(IUANodeContext index)
+    /// <returns>An instance of the <see cref="IEnumerable{UAReferenceContext}"/> containing references pointed out by index.</returns>
+    IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetMyReferences(IUANodeBase index)
     {
       return m_References.Values.Where<UAReferenceContext>(x => (x.ParentNode == index));
     }
@@ -200,20 +204,57 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return m_References.Values.Where<UAReferenceContext>(x => x.TargetNode == index && x.ParentNode != index);
     }
     /// <summary>
-    /// Gets the derived instances.
+    /// Gets the children nodes for the <paramref name="rootNode" />.
     /// </summary>
-    /// <param name="rootNode">The root node.</param>
-    /// <param name="list">The list o d nodes.</param>
-    void IAddressSpaceBuildContext.GetDerivedInstances(IUANodeContext rootNode, List<IUANodeBase> list)
+    /// <param name="rootNode">The root node of the requested children.</param>
+    /// <returns>Return an instance of <see cref="IEnumerable" /> capturing all children of the selected node.</returns>
+    public IEnumerable<IUANodeBase> GetChildren(IUANodeContext rootNode)
     {
-      List<IUANodeContext> _col = new List<IUANodeContext>
-      {
-        rootNode
-      };
-      GetBaseTypes(rootNode, _col);
-      foreach (IUANodeContext _type in _col)
-        GetChildren(_type, list);
+      return m_References.Values.Where<UAReferenceContext>(x => x.SourceNode == rootNode).
+                                                                  Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
+                                                                  Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
     }
+    public Parameter ExportArgument(DataSerialization.Argument argument)
+    {
+      XmlQualifiedName _dataType = ExportBrowseName(NodeId.Parse(argument.DataType.Identifier), DataTypeIds.BaseDataType);
+      return ExportArgument(argument, _dataType);
+    }
+
+    //TODO #40 remove commented functionality
+    ///// <summary>
+    ///// Gets an instance of the <see cref="IAddressSpaceBuildContext"/> representing selected by <paramref name="nodeClass"/> base type node if applicable, null otherwise.
+    ///// </summary>
+    ///// <param name="nodeClass">The node class selector.</param>
+    ///// <returns>An  instance of <see cref="IUANodeBase"/> representing base type for selected node class.</returns>
+    ///// <exception cref="ApplicationException"> If <paramref name="nodeClass"/> is equal <see cref="NodeClassEnum.Unknown"/></exception>
+    //IUANodeBase IAddressSpaceBuildContext.GetBaseTypeNode(NodeClassEnum nodeClass)
+    //{
+    //  IUANodeContext _ret = null;
+    //  switch (nodeClass)
+    //  {
+    //    case NodeClassEnum.UADataType:
+    //      m_NodesDictionary.TryGetValue(DataTypeIds.BaseDataType.ToString(), out _ret);
+    //      break;
+    //    case NodeClassEnum.UAMethod:
+    //      break;
+    //    case NodeClassEnum.UAObjectType:
+    //    case NodeClassEnum.UAObject:
+    //      m_NodesDictionary.TryGetValue(ObjectTypeIds.BaseObjectType.ToString(), out _ret);
+    //      break;
+    //    case NodeClassEnum.UAReferenceType:
+    //      m_NodesDictionary.TryGetValue(ReferenceTypeIds.References.ToString(), out _ret);
+    //      break;
+    //    case NodeClassEnum.UAVariable:
+    //    case NodeClassEnum.UAVariableType:
+    //      m_NodesDictionary.TryGetValue(VariableTypeIds.BaseVariableType.ToString(), out _ret);
+    //      break;
+    //    case NodeClassEnum.UAView:
+    //      break;
+    //    case NodeClassEnum.Unknown:
+    //      throw new ApplicationException($"In {nameof(IAddressSpaceBuildContext.GetBaseTypeNode)} the {nameof(NodeClass)} must not be {nameof(NodeClassEnum.Unknown)}");
+    //  }
+    //  return _ret;
+    //}
     #endregion    
 
     #region IAddressSpaceValidationContext
@@ -226,6 +267,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
     //vars
+    private readonly IValidator m_Validator;
     private IModelFactory m_InformationModelFactory = new InformationModelFactoryBase();
     private Dictionary<string, UAReferenceContext> m_References = new Dictionary<string, UAReferenceContext>();
     private NamespaceTable m_NamespaceTable = null;
@@ -240,38 +282,24 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Extensions is omitted during the import"));
       string _namespace = model.NamespaceUris == null ? m_NamespaceTable.GetString(0) : model.NamespaceUris[0];
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering AddressSpaceContext.ImportNodeSet - starting import {0}.", _namespace)));
-      UAModelContext _modelContext = new UAModelContext(model, this);
+      IUAModelContext _modelContext = new UAModelContext(model, this);
+      model.RecalculateNodeIds(_modelContext);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - context for imported model is created and starting import nodes."));
       foreach (UANode _nd in model.Items)
-        this.ImportUANode(_nd, _modelContext, m_TraceEvent);
+        this.ImportUANode(_nd, m_TraceEvent);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Finishing AddressSpaceContext.ImportNodeSet - imported {0} nodes.", model.Items.Length)));
     }
-    private void ImportUANode(UANode node, IUAModelContext modelContext, Action<TraceMessage> traceEvent)
+    private void ImportUANode(UANode node, Action<TraceMessage> traceEvent)
     {
       try
       {
-        if (node == null)
-          m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeCannotBeNull, "At Importing UANode."));
-        NodeId nodeId = modelContext.ImportNodeId(node.NodeId, false);
-        string nodeIdKey = nodeId.ToString();
-        if (!m_NodesDictionary.TryGetValue(nodeIdKey, out IUANodeContext _newNode))
-        {
-          _newNode = new UANodeContext(this, modelContext, nodeId);
-          _newNode.Update(node);
-          m_NodesDictionary.Add(nodeIdKey, _newNode);
-        }
-        else
-        {
-          if (_newNode.UANode != null)
-            m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, string.Format("The {0} is already defined.", node.NodeId.ToString())));
-          _newNode.Update(node);
-        }
-        foreach (Reference _rf in node.References)
-        {
-          UAReferenceContext _rs = UAReferenceContext.NewReferenceStub(_rf, this, modelContext, _newNode, m_TraceEvent);
-          if (!m_References.ContainsKey(_rs.Key))
-            m_References.Add(_rs.Key, _rs);
-        }
+        NodeId _nodeId = NodeId.Parse(node.NodeId);
+        IUANodeContext _newNode = GetOrCreateNodeContext(_nodeId, x => new UANodeContext(_nodeId, this));
+        _newNode.Update(node, _reference =>
+              {
+                if (!m_References.ContainsKey(_reference.Key))
+                  m_References.Add(_reference.Key, _reference);
+              });
       }
       catch (Exception _ex)
       {
@@ -293,13 +321,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _ret;
     }
-    private void GetChildren(IUANodeContext type, List<IUANodeBase> instances)
-    {
-      IEnumerable<IUANodeContext> _children = m_References.Values.Where<UAReferenceContext>(x => x.SourceNode == type).
-                                                                  Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
-                                                                  Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
-      instances.AddRange(_children);
-    }
     private void GetBaseTypes(IUANodeContext rootNode, List<IUANodeContext> inheritanceChain)
     {
       if (rootNode == null)
@@ -316,26 +337,78 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         GetBaseTypes(_derived.First<IUANodeContext>(), inheritanceChain);
       rootNode.InRecursionChain = false;
     }
-    private void ValidateAndExportModel(int nameSpaceIndex)
+    private void ValidateAndExportModel(int nameSpaceIndex, IValidator validator)
     {
       IEnumerable<IUANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
-      //TODO ValidateAndExportModel shall export also instances #40
       List<IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
+      IUANodeBase _objects = TryGetUANodeContext(UAInformationModel.ObjectIds.ObjectsFolder, m_TraceEvent);
+      if (_objects is null)
+        throw new ArgumentNullException("Cannot find ObjectsFolder in the standard information model");
+      IEnumerable<IUANodeContext> _allInstances = m_References.Values.Where<UAReferenceContext>(x => (x.SourceNode.NodeIdContext == ObjectIds.ObjectsFolder) &&
+                                                                                                     (x.TypeNode.NodeIdContext == ReferenceTypeIds.Organizes) &&
+                                                                                                     (x.TargetNode.NodeIdContext.NamespaceIndex == nameSpaceIndex))
+                                                                                                     .Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
+      _nodes.AddRange(_allInstances);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("AddressSpaceContext.ValidateAndExportModel - selected {0} nodes to be added to the model.", _nodes.Count)));
-      Validator.ValidateExportModel(_nodes, InformationModelFactory, this, m_TraceEvent);
+      List<BuildError> _errors = new List<BuildError>(); //TODO should be added to the model;
+      foreach (IModelTableEntry _ns in ExportNamespaceTable)
+      {
+        string _publicationDate = _ns.PublicationDate.HasValue ? _ns.PublicationDate.Value.ToShortDateString() : DateTime.UtcNow.ToShortDateString();
+        string _version = _ns.Version;
+        InformationModelFactory.CreateNamespace(_ns.ModelUri, _publicationDate, _version);
+      }
+      string _msg = null;
+      int _nc = 0;
+      foreach (IUANodeBase _item in _nodes)
+      {
+        try
+        {
+          validator.ValidateExportNode(_item, InformationModelFactory, null); //y =>
+          _nc++;
+        }
+        catch (Exception _ex)
+        {
+          _msg = string.Format("Error caught while processing the node {0}. The message: {1} at {2}.", _item.UANode.NodeId, _ex.Message, _ex.StackTrace);
+          m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, _msg));
+        }
+      }
+      if (_errors.Count == 0)
+        _msg = string.Format("Finishing Validator.ValidateExportModel - the model contains {0} nodes.", _nc);
+      else
+        _msg = string.Format("Finishing Validator.ValidateExportModel - the model contains {0} nodes and {1} errors.", _nc, _errors.Count);
+      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
     }
     #endregion
 
     #region UnitTestd
+    [System.Diagnostics.Conditional("DEBUG")]
+    internal void UTAddressSpaceCheckConsistency(Action<IUANodeContext> returnValue)
+    {
+      foreach (IUANodeContext _node in m_NodesDictionary.Values.Where<IUANodeBase>(x => x.UANode is null))
+        returnValue(_node);
+    }
+    [System.Diagnostics.Conditional("DEBUG")]
+    internal void UTReferencesCheckConsistency(Action<IUANodeContext, IUANodeContext, IUANodeContext, IUANodeContext> returnValue)
+    {
+      foreach (UAReferenceContext _node in m_References.Values)
+        if (_node.SourceNode is null || _node.ParentNode is null || _node.TargetNode is null || _node.TypeNode is null)
+          returnValue(_node?.SourceNode, _node?.ParentNode, _node?.TargetNode, _node?.TargetNode);
+    }
     [System.Diagnostics.Conditional("DEBUG")]
     internal void UTTryGetUANodeContext(NodeId nodeId, Action<IUANodeContext> returnValue)
     {
       returnValue(TryGetUANodeContext(nodeId, x => { }));
     }
     [System.Diagnostics.Conditional("DEBUG")]
-    internal void UTValidateAndExportModel(int nameSpaceIndex, Action<List<IUANodeContext>> returnValue)
+    internal void UTGetReferences(NodeId source, Action<UAReferenceContext> returnValue)
     {
-      returnValue((from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key).ToList<IUANodeContext>());
+      foreach (UAReferenceContext _ref in m_References.Values.Where<UAReferenceContext>(x => (x.SourceNode.NodeIdContext == source)))
+        returnValue(_ref);
+    }
+    [System.Diagnostics.Conditional("DEBUG")]
+    internal void UTValidateAndExportModel(int nameSpaceIndex, Action<IEnumerable<IUANodeContext>> returnValue)
+    {
+      returnValue((from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key));
     }
     #endregion
 

@@ -42,7 +42,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UAInstance _first = TestData.CreateUAObject();
       UAInstance _second = TestData.CreateUAObject();
       _second.ParentNodeId = Guid.NewGuid().ToString();
-      Assert.IsTrue(_first != _second);
+      _second.NodeId = Guid.NewGuid().ToString();
+      Assert.IsTrue(_first == _second);
     }
     [TestMethod]
     public void UAObjectEqualsTest()

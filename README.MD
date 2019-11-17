@@ -8,12 +8,12 @@ In this project, C\# deliverables supporting a new Machine To Machine \(M2M\) co
 
 The [Object Oriented Internet](https://fedcsis.org/proceedings/2015/pliks/160.pdf) article published in **Proceedings of the Federated Conference on Computer Science and Information Systems** captures description of this idea.
 
-|GoTo| Description|
+|Go To| Description|
 |:-:|-|
-|  [![Release](https://img.shields.io/github/release/mpostol/OPC-UA-OOI.svg?style=popout)](https://github.com/mpostol/OPC-UA-OOI/releases/tag/4.0.1)| latest release |
+|  [![Release](https://img.shields.io/github/release/mpostol/OPC-UA-OOI.svg?style=popout)](https://github.com/mpostol/OPC-UA-OOI/releases)| latest release |
 | [![ebook](https://img.shields.io/badge/OOI-read_on_Gitbook-brightgreen.svg)](https://commsvr.gitbook.io/ooi) | the ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files from this repository. |
 | [![Join the chat at https://gitter.im/mpostol/OPC-UA-OOI](https://badges.gitter.im/mpostol/OPC-UA-OOI.svg)](https://gitter.im/mpostol/OPC-UA-OOI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) |join the project chat|
-| [10.5281/zenodo.1198852](http://doi.org/10.5281/zenodo.1198852)|you can cite all versions by using the DOI 10.5281/zenodo.1198852. This DOI represents all versions, and will always resolve to the latest one.|
+| [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1198852.svg)](https://doi.org/10.5281/zenodo.1198852) | you can cite all versions by using the DOI 10.5281/zenodo.1198852. This DOI represents all versions, and will always resolve to the latest one.|
 
 > Note: the DOI number is a unique identifying number associated with the repository version. Visit the section `How to cite the software and associated documentation files` to learn how to create derived works and cite the origin.
 
@@ -29,6 +29,7 @@ We use [Semantic Versioning](http://semver.org/) for versioning. For the version
 
 | Version | Milestone                                                          | DOI |Date|
 |:-------:|--------------------------------------------------------------------|:---:|:--:|
+|5.1.0| Semantic-Data ModelDesign Export 5.1.0 |10.5281/zenodo.3345043|Jul 21, 2019 |
 |5.0.2-Alpha |Updated the UA Address Space build against OPC UA Specification 1.04; updated UANodeSet schema; added export to ModelDesign [OPC UA Address Space Prototyping](SemanticData/AddressSpaceComplianceTestTool/README.md)|10.5281/zenodo.2636426|Apr 11, 2019|
 |4.0.1 |.NET Standard implementation, documentation improved, new code help documentation available, tested against Xamarin.Android |10.5281/zenodo.2555407 |Feb 1, 2019|
 | 3.1.0 |New version of the UAOOI.Networking.ReferenceApplication, documentation has been improved.|10.5281/zenodo.1291549 |Jun 17, 2018|
@@ -40,7 +41,7 @@ The table below lists the latest versions of the published Tools.
 
 | Description | Version |
 |----|:---------:|
-|[OPC UA Address Space Prototyping](SemanticData/AddressSpaceComplianceTestTool/README.md)| 5.00.02|
+|[OPC UA Address Space Prototyping](SemanticData/AddressSpaceComplianceTestTool/README.md)| 5.1.0|
 |[Semantic-Data Processing ReferenceApplication](Networking/ReferenceApplication/README.MD)| 4.00.01|
 
 #### NuGet packages
@@ -57,8 +58,10 @@ The table below lists the latest versions of the published NuGet packages.
 | [UAOOI.Networking.Encoding](https://www.nuget.org/packages/UAOOI.Networking.Encoding)|4.0.1 | This package provides functionality to lookup a dictionary containing value converters. The interface is used for late binding to inject dependency on the external library.  This library provides IEncodingFactory functionality limited to encoding simple data types only for the testing purpose only.
 | [UAOOI.Networking.SemanticData](https://www.nuget.org/packages/UAOOI.Networking.SemanticData) |4.0.1 | SemanticData Reactive Networking library based on OPC UA Part 14 Pub/Sub.
 | [UAOOI.Networking.UDPMessageHandler](https://www.nuget.org/packages/UAOOI.Networking.UDPMessageHandler) | 4.0.1 | OOI Reactive Networking: UDP IMessageHandlerFactory Implementation
-| [UAOOI.SemanticData.InformationModelFactory](https://www.nuget.org/packages/UAOOI.SemanticData.InformationModelFactory/) | 4.0.1 | OPC UA Information Model Factory Library
-| [UAOOI.SemanticData.UANodeSetValidation](https://www.nuget.org/packages/UAOOI.SemanticData.UANodeSetValidation/)| 4.0.1 | This project supports validation of the OPC UA Address Space captured in the XML file against the OPC UA Specification. It is assumed that the Address Space is represented as an XML file compliant with the NodeSet schema. This library is dedicated to creating a plug-in aimed at importing models based on the OPC UA Information Model. It is part of the project supporting OPC UA Object Oriented Internet paradigm.
+| [UAOOI.SemanticData.InformationModelFactory](https://www.nuget.org/packages/UAOOI.SemanticData.InformationModelFactory/) | 5.1.0 | OPC UA Information Model Factory Library
+| [UAOOI.SemanticData.UANodeSetValidation](https://www.nuget.org/packages/UAOOI.SemanticData.UANodeSetValidation/)| 5.1.0 | This project supports validation of the OPC UA Address Space captured in the XML file against the OPC UA Specification. It is assumed that the Address Space is represented as an XML file compliant with the NodeSet schema. This library is dedicated to creating a plug-in aimed at importing models based on the OPC UA Information Model. It is part of the project supporting OPC UA Object Oriented Internet paradigm.
+| [UAOOI.SemanticData.UAModelDesignExport](https://www.nuget.org/packages/UAOOI.SemanticData.UAModelDesignExport/) | 5.1.0 |This library provides an implementation of the export functionality of an XML file compliant with the UAModelDeign schema. By design, the UAModelDeign schema describes the syntax of an XML document representing the OPC UA Information Model.|
+[UAOOI.SemanticData.BuildingErrorsHandling](https://www.nuget.org/packages/UAOOI.SemanticData.BuildingErrorsHandling/)|5.1.0|It provides descriptions of building errors to be used for OPC UA Address Space consistency validation purpose.|
 
 ## Content
 
@@ -97,17 +100,17 @@ To get more details visit the section [Internet of Things (IoT) Communication](.
 The `SemanticData` folder contains projects related to support the [OOI Semantic-Data Processing Architecture](./SemanticData/README.MD). Processing of the OPC UA Data Outside of the Server context is based on the **Semantic-Data** concept. This project is aimed to workout deliverables supporting Process Data handling over Internet including but not limiting to:
 
 - Data edition ֠UI allowing display and edition of any custom data
-- Data serialization and deserialization - see white-paper [Address Space Interchange XML](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf)
+- Data serialization and deserialization - see white-paper [Address Space Interchange XML][CAS.InterchangeXML]
 - Data prototyping - methods and tools to design custom data types
 - Exposition of the process data in the context of metadata [OPC UA Address Space Model Designer](http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx)
 - Browsing of the Metadata to selectively access requested Process Data
-- Modeling and representation of the metadata - see white-paper [OPC UA Information Model Deployment](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2586616.svg)](https://doi.org/10.5281/zenodo.2586616)
+- Modeling and representation of the metadata - detailed description is covered by the section [OPC UA Information Model Deployment](SemanticData/InformationModelsDevelopment.md)
 - Validation of the semantics and consistency of the metadata - see project [USNodeSetValidationUnitTestProject](./SemanticData/UANodeSetValidation/README.MD)
 - Data Oriented Architecture (DOA)
 
 #### Project `AddressSpaceComplianceTestTool`
 
-It is command line application aimed to validate XML files compliant with the [UANodeSet schema](https://opcfoundation.org/UA/2011/03/UANodeSet.xsd) defined in Part 6 of the OPC UA Specification. The description of this schema is captured in the document [Address Space Interchange XML](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf)
+It is a command-line application aimed at the validation of the XML files compliant with the [UANodeSet schema](https://opcfoundation.org/UA/2011/03/UANodeSet.xsd) defined in Part 6 of the OPC UA Specification. The description of this schema is captured by the document [Address Space Interchange XML][CAS.InterchangeXML]
 
 #### Project `UANodeSetValidation`
 
@@ -129,6 +132,26 @@ This interface may be used for dependency injection where validation of the inpu
 The project is dedicated to develop the OPC UA Information Model Factory Library. It is a library used as the dependency injection to produce OPC UA **Information Model** by a selected importer. The abstract API must be implemented by a classes providing functionality of **Information Model** creation.
 
 Detailed description is covered by the document [InformationModelFactory Library](./SemanticData/InformationModelFactory/README.md)
+
+## Related work
+
+### OPC UA Address Space Model Designer (ASMD)
+
+The main challenge of the project [OPC UA Address Space Model Designer (ASMD)][ASMD] is to offer the designers a user-friendly tool supporting all aspects of the OPC UA Address Space model designing process. It brings together: designing, learning, and deploying. Description of the main features of the tool is covered by the section [Design and Deployment Support][DDSupport].
+
+The OPC UA Address Space Model Designer ([ASMD][ASMD]) implements conceptual containers called solutions and projects to apply their settings. Any solution contains one or more projects and it manages the way the designer configures, builds, and deploys sets of related projects. Any project includes source files containing the model representation and related metadata such as properties and references to other projects. The designer Integrated Development Environment (IDE) provides tools that help you edit and manipulate models, namespaces, and add references to external resources.
+
+### CommServer
+
+[CommServer][commserver] is a package of software to manage data transfer using OPC standards. Built-in technologies and algorithms support Machine to Machine (M2M) meaningful interoperability. The [CommServer][commserver] was written by CAS Lodz Poland.
+
+The GitHub repository [commsvr-com/migration2os][migration2os] is aimed at the `CommServer` software migration from on-premise subversion repository to GitHub and publishing it as the Open-Source Software (OSS). The members of the `CommServer` family are to be converged with the Object-Oriented Internet paradigms and integrated with the solutions maintained in this repository.
+
+The project [CommServer Migration to Open-source][migration2osProj] will be used to coordinate the migration process of transferring multi-parts software from an on-premise subversion repository to a set of GitHub repositories. After migration, this project will aggregate the description of all activities addressing the software maintenance process.
+
+### Object Oriented Internet Reactive Networking Configuration Editor
+
+OPC-UA-OOI.ConfigEditor is a package of software to manage the configuration of the [Reactive Communication][OOIBookToC].  The `OPC-UA-OOI.ConfigEditor` was written by CAS Lodz Poland. The [mpostol/OPC-UA-OOI.ConfigEditor][ConfigEditor] repository is aimed at the software migration from on-premise subversion repository to GitHub and publishing it as the Open-Source Software (OSS).  After migration, this repository will be used to manage all activities addressing the software maintenance process as a plug-in of the [ASMD][ASMD].
 
 ## How to cite the software and associated documentation files
 
@@ -154,14 +177,25 @@ I hope it is a good place to prototype and converge the OPC UA communication tec
 
 The presented approach is a real proposal for a new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability.
 
-## Read more
+## See Also
 
-- [![ebook](https://img.shields.io/badge/Gitbook-Release-brightgreen.svg)](https://commsvr.gitbook.io/ooi) ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files.
-- [API Browser](http://www.commsvr.com/download/UAOOI401/index.html)
-- The paper [**Object Oriented Internet**](https://fedcsis.org/proceedings/2015/pliks/160.pdf) has been presented on the conference [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp).
+- ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files [![ebook](https://img.shields.io/badge/Gitbook-Release-brightgreen.svg)](https://commsvr.gitbook.io/ooi/tableofcontent)
+- Mariusz Postol, [Object Oriented Internet](https://ieeexplore.ieee.org/abstract/document/7321562), [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp), 2015, [IEEE Xplore Digital Library](https://ieeexplore.ieee.org/abstract/document/7321562) [![DOI](https://img.shields.io/badge/DOI-10.15439%2F015F160-blue)](https://fedcsis.org/proceedings/2015/pliks/160.pdf)
+- Mariusz Postol, [Machine to Machine Semantic-Data Based Communication: Comprehensive Survey](https://www.researchgate.net/publication/331633195_Machine_to_Machine_Semantic-Data_Based_Communication) in [Computer Game Innovations 2018](https://www.researchgate.net/publication/335524620_Computer_Game_Innovations_2018), Publisher: Lodz University of Technology Press; ISBN: 978-83-7283-999-2, 2018
 - [WIKI of this project](https://github.com/mpostol/OPC-UA-OOI/wiki)
+- [Library API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
+- [OPC UA Address Space Model Designer (ASMD)][ASMD]
 - [My Blog: About enablers of future solutions](http://wwww.mpostol.wordpress.com/)
 - [About me on LinkedIn](https://pl.linkedin.com/in/mpostol)
 - [OPC Foundation](https://opcfoundation.org/)
-- [Sponsored by commsvr.com](http://www.commsvr.com/)
 - [References](REFERENCES.md) - this section contains links to selected internal and external resources.
+- [Sponsored by commsvr.com](http://www.commsvr.com/)
+
+[ASMD]:https://github.com/mpostol/ASMD
+[DDSupport]:SemanticData/DesignDeploymentSupport.md
+[CAS.InterchangeXML]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf
+[commserver]: http://www.commsvr.com/
+[migration2os]: https://github.com/commsvr-com/migration2os
+[migration2osProj]: https://github.com/orgs/commsvr-com/projects
+[ConfigEditor]: https://github.com/mpostol/OPC-UA-OOI.ConfigEditor
+[OOIBookToC]: TableOfContent.md#reactive-communication

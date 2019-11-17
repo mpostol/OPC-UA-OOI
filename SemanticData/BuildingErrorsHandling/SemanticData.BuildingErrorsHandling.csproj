@@ -4,22 +4,26 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>UAOOI.SemanticData.BuildingErrorsHandling</AssemblyName>
     <RootNamespace>UAOOI.SemanticData.BuildingErrorsHandling</RootNamespace>
-    <Authors>Mariuisz Postol</Authors>
+    <Authors>Mariusz Postol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
     <Description>It provides descriptions of building errors to be used for OPC UA Address Space consistency validation purpose.
 </Description>
     <Copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</Copyright>
-    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
-    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi/readme</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</PackageTags>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>1.0.0.2</AssemblyVersion>
-    <FileVersion>1.0.0.2</FileVersion>
-    <Version>1.0.0-Alpha</Version>
+    <AssemblyVersion>5.1.0</AssemblyVersion>
+    <FileVersion>5.1.0</FileVersion>
+    <Version>5.1.0</Version>
+    <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
+    <Title>Object-Oriented Internet Semantic-Data Building Errors Handling</Title>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

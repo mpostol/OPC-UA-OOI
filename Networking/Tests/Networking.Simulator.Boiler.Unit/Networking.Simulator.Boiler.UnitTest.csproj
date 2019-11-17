@@ -72,11 +72,14 @@
     <Reference Include="UAOOI.Configuration.Networking, Version=4.0.1.1, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\UAOOI.Configuration.Networking.4.0.1\lib\netstandard2.0\UAOOI.Configuration.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UAOOI.SemanticData.InformationModelFactory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\UAOOI.SemanticData.InformationModelFactory.4.0.1\lib\netstandard2.0\UAOOI.SemanticData.InformationModelFactory.dll</HintPath>
+    <Reference Include="UAOOI.SemanticData.BuildingErrorsHandling, Version=5.1.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.SemanticData.BuildingErrorsHandling.5.1.0\lib\netstandard2.0\UAOOI.SemanticData.BuildingErrorsHandling.dll</HintPath>
     </Reference>
-    <Reference Include="UAOOI.SemanticData.UANodeSetValidation, Version=4.0.1.1, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\UAOOI.SemanticData.UANodeSetValidation.4.0.1\lib\netstandard2.0\UAOOI.SemanticData.UANodeSetValidation.dll</HintPath>
+    <Reference Include="UAOOI.SemanticData.InformationModelFactory, Version=5.1.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.SemanticData.InformationModelFactory.5.1.0\lib\netstandard2.0\UAOOI.SemanticData.InformationModelFactory.dll</HintPath>
+    </Reference>
+    <Reference Include="UAOOI.SemanticData.UANodeSetValidation, Version=5.1.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.SemanticData.UANodeSetValidation.5.1.0\lib\netstandard2.0\UAOOI.SemanticData.UANodeSetValidation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +108,7 @@
     </AdditionalFiles>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
   </ItemGroup>

@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
-using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UAModelDesignExport;
 using UAOOI.SemanticData.UANodeSetValidation;
 
@@ -50,13 +49,14 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     private static void Do(Options options)
     {
       PrintLogo(options);
-      Action<TraceMessage> _tracingMethod = z => Console.WriteLine(z.ToString());
-      IAddressSpaceContext _as = new AddressSpaceContext(_tracingMethod);
-      ModelDesignExport _exporter = new ModelDesignExport();
+      BuildErrorsHandling.Log.TraceEventAction += z => Console.WriteLine(z.ToString());
+      IAddressSpaceContext _as = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
+      ModelDesignExport _exporter = new ModelDesignExport(); //creates new instance of the ModelDesignExport class that captures functionality supporting export functionality of the OPC UA Information Model represented 
+                                                             //by an xml file compliant with UAModelDesign schema.
       bool _exportModel = false;
       if (!string.IsNullOrEmpty(options.ModelDesignFileName))
       {
-        _as.InformationModelFactory = _exporter.GetFactory(options.ModelDesignFileName, _tracingMethod);
+        _as.InformationModelFactory = _exporter.GetFactory(options.ModelDesignFileName, BuildErrorsHandling.Log.TraceEvent);  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space. 
         _exportModel = true;
       }
       if (options.Filenames == null)
@@ -66,14 +66,14 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
         FileInfo _fileToRead = new FileInfo(_path);
         if (!_fileToRead.Exists)
           throw new FileNotFoundException(string.Format($"FileNotFoundException - the file {_path} doesn't exist.", _fileToRead.FullName));
-        _as.ImportUANodeSet(_fileToRead);
+        _as.ImportUANodeSet(_fileToRead); //Imports a part of the OPC UA Address Space contained in the file compliant with the `UANodeSet` schema.
       }
       if (string.IsNullOrEmpty(options.IMNamespace))
         _as.ValidateAndExportModel();
       else
-        _as.ValidateAndExportModel(options.IMNamespace);
+        _as.ValidateAndExportModel(options.IMNamespace); //Validates and exports the selected model.
       if (_exportModel)
-        _exporter.ExportToXMLFile(options.Stylesheet);
+        _exporter.ExportToXMLFile(options.Stylesheet); //Serializes the already generated model and writes the XML document to a file.
     }
     private static void PrintLogo(Options options)
     {

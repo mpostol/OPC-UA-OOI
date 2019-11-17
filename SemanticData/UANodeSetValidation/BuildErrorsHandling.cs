@@ -1,17 +1,27 @@
-﻿using System;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+using System;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  internal class BuildErrorsHandling
+  public class BuildErrorsHandling : IBuildErrorsHandling
   {
 
-    internal event Action<TraceMessage> TraceEventAction;
-    internal static BuildErrorsHandling Log => m_Instance.Value;
-    internal void TraceEvent(TraceMessage traceMessage)
+    public static IBuildErrorsHandling Log => m_Instance.Value;
+
+    #region IBuildErrorsHandling
+    public event Action<TraceMessage> TraceEventAction;
+    public void TraceEvent(TraceMessage traceMessage)
     {
       TraceEventAction?.Invoke(traceMessage);
     }
+    #endregion
 
     private BuildErrorsHandling() { }
     private static Lazy<BuildErrorsHandling> m_Instance = new Lazy<BuildErrorsHandling>(() => new BuildErrorsHandling());

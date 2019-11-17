@@ -5,15 +5,16 @@ string DefaultProductVersion = "0.00.00";
 
 //Solution common
 string ProductTrademark = "Object Oriented Internet";
-string AssemblyCopyright = "Copyright (c) 2019 Mariusz Postol";
+string AssemblyCopyright = "Copyright (C) 2019 Mariusz Postol LODZ POLAND";
 string AssemblyCompany = "commsvr.com";
 string Url = "https://github.com/mpostol/OPC-UA-OOI";
 string Email = "mpostol@cas.eu";
 string Phone = "+48 608 619 899";
-string Owner = "commsvr.com";
+string Owner = "Mariusz Postol";
 string RepositoryVersion = "5.0.2"; //increment on the same position as the group version
 string RepositoryVersionPrerelease = "-Alpha"; //increment on the same position as the group version
 string Authors = "Mariusz Postol";
+string IconURLTag = "https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true";
 
 //UAOOI.Common
 string CommonTitle = "UAOOI.DataDiscovery";
@@ -28,9 +29,17 @@ string DataDiscoveryPrerelease = "";
 string DataDiscoveryProduct = "Object Oriented Internet";
 
 //UAOOI.SemanticData
-string SemanticDataVersion = "5.0.2";
-string SemanticDataPrerelease = "-Alpha";
+string SemanticDataVersion = "5.1.0";
+string SemanticDataPrerelease = "";
 string SemanticDataProduct = "Object Oriented Internet";
+
+//UAOOI.SemanticData.UANodeSetValidation
+string SemanticDataUANodeSetValidationVersion = "5.1.0";
+string SemanticDataUANodeSetValidationPrerelease = "";
+
+//UAOOI.SemanticData.UAModelDesignExport
+string SemanticDataUAModelDesignExportVersion = "5.1.0";
+string SemanticDataUAModelDesignExportPrerelease = "";
 
 //UAOOI.Configuration
 string ConfigurationVersion = "4.0.1";

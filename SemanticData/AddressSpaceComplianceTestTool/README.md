@@ -6,7 +6,7 @@ The **OPC UA Address Space Prototyping** (asp.exe) is an engineering tool and ca
 
 - creates `UA Address Space` populated using input XML files compliant with the `UANodeSet` schema defined in Part 6 Annex F.
 - validates an instance of the `UA Address Space` against the OPC UA specification 1.04.
-- generates XML file compliant with the `ModelDesign` schema that is input standard for the [OPCFoundation/UA-ModelCompiler][OPCFoundation/UA-ModelCompiler].
+- exports XML file compliant with the `ModelDesign` schema that may be used as the input for the [OPCFoundation/UA-ModelCompiler][OPCFoundation/UA-ModelCompiler].
 
 These instructions will get you a copy of the software up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
@@ -135,8 +135,6 @@ This software is licensed under the MIT License - see the [LICENSE.md][LICENSE.m
 
 - **Version limitations**
 
-Current version of the tool exports only types to `ModelDesign` XML file.
-
 ## See also
 
 - [Mariusz Postol. OPC UA Information Model Deployment. 2016. Version 1.2][CAS.OPCUAIMD] [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2586616.svg)](https://doi.org/10.5281/zenodo.2586616)
@@ -145,12 +143,12 @@ Current version of the tool exports only types to `ModelDesign` XML file.
 - [OPC Unified Architecture][wordpress.opc-ua]
 - [OPC Unified Architecture - Main Technological Features][wordpress.OPCUAMTF]
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
-- [OPC UA Address Space Model Designer, 2019][CAS.ASMD]
+- [OPC UA Address Space Model Designer][CAS.ASMD]
 - [XSLT Introduction][XSLT Introduction]
 - [OPCFoundation/UA-ModelCompiler] - `ModelCompiler` converts XML files into C# and ANSI C
 - [How to contribute][CONTRIBUTING.md]
 
-[CAS.OPCUAIMD]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf
+[CAS.OPCUAIMD]: https://zenodo.org/record/2586616#.XdAT5FdKiUk
 
 [wordpress.opc-ua]: https://mpostol.wordpress.com/opc-ua/
 
@@ -166,7 +164,7 @@ Current version of the tool exports only types to `ModelDesign` XML file.
 
 [OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
 
-[CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
+[CAS.ASMD]: https://github.com/mpostol/ASMD
 
 [OPCFoundation/UA-ModelCompiler]:https://github.com/OPCFoundation/UA-ModelCompiler
 

@@ -1,0 +1,42 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".nuspec" #>
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id><#=m_AssemblyTitle#></id>
+    <version><#= SemanticDataUAModelDesignExportVersion #><#= SemanticDataUAModelDesignExportPrerelease #> </version>
+    <title>Semantic-Data UAModelDesign Export</title>
+    <authors><#=Authors#></authors>
+    <owners><#=Owner#></owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://commsvr.gitbook.io/ooi/semantic-data-processing/addressspacecompliancetesttool/uamodeldesignexport</projectUrl>
+    <iconUrl> <#=IconURLTag#> </iconUrl>
+    <description>
+      This library provides an implementation of the export functionality of an XML file compliant with the UAModelDeign schema. By design, the UAModelDeign schema describes the syntax of an XML document representing the OPC UA Information Model that is used as the input for the https://github.com/OPCFoundation/UA-ModelCompiler.
+    </description>
+    <summary>
+      Object-Oriented Internet Semantic-Data UAModelDesign Export Library.
+    </summary>    
+    <copyright><#=AssemblyCopyright#></copyright>
+    <tags>Object Oriented Internet, OOI, OPC UA, Information Model, IoT, M2M, DOA</tags>
+    <repository type="GitHub" url="<#=Url#>" />
+    <releaseNotes>Updated against OPC UA Rel 1.04</releaseNotes>
+    <copyright><#=AssemblyCopyright#></copyright>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="CommonServiceLocator" version="2.0.4" exclude="Build,Analyzers" />
+        <dependency id="UAOOI.SemanticData.BuildingErrorsHandling" version="5.1.0" exclude="Build,Analyzers" />
+        <dependency id="UAOOI.SemanticData.InformationModelFactory" version="5.1.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\bin\Release\netstandard2.0\UAOOI.SemanticData.UAModelDesignExport.dll" target="lib\netstandard2.0\UAOOI.SemanticData.UAModelDesignExport.dll" />
+  </files>
+</package>
+
+<#@ include file = "..\..\..\CommonResources\T4Definitions\Model.t4" #>
+<#+
+string m_AssemblyTitle = "UAOOI.SemanticData.UAModelDesignExport";
+#>

@@ -1,6 +1,6 @@
 # DataDiscovery Project Description
 
-Description is covered by the the section of the ebook:
+Description is covered by the section of the ebook:
 
 * [Global Data Discovery](https://commsvr.gitbook.io/ooi/global-data-discovery/datadiscovery)
 

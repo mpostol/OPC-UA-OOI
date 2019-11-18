@@ -9,7 +9,7 @@ using System;
 using System.ComponentModel.Composition;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
-using UAOOI.Networking.SemanticData.DataRepository;
+using UAOOI.Networking.SemanticData.DataRepository; //TODO Networking.SemanticData dependency on Networking.Encoding should be removed #323: IBinding
 using UAOOI.Networking.SemanticData.Encoding;
 
 namespace UAOOI.Networking.Encoding
@@ -21,7 +21,8 @@ namespace UAOOI.Networking.Encoding
   /// <seealso cref="UAOOI.Networking.SemanticData.IEncodingFactory" />
   [Export(typeof(IEncodingFactory))]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  public class EncodingFactoryBinarySimple : IEncodingFactory
+  //TODO Networking.SemanticData dependency on Networking.Encoding should be removed #323: IEncodingFactory
+  public class EncodingFactoryBinarySimple : IEncodingFactory 
   {
 
     #region IEncodingFactory

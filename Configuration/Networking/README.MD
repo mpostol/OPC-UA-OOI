@@ -26,7 +26,6 @@ The proposed solution supports also possibility to handle the configuration chan
 
 ### Design time
 
-
 I hope the interface is ready to fulfill the following design time scenarios allowing for configuration in context of selected OPC Information Model/Address Space:
 
 1. Plug in to a modeler (UA Information Model design tool) as the configuration editor tool (preferred for me) - now it is compatible with the [Address Space Model Designer][ASMD]

@@ -18,6 +18,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// sent over the network by the underlying message transport protocol.</param>
     /// <param name="dataSetId">The data set identifier.</param>
     /// <param name="producerId">The producer identifier.</param>
+    // TODO How to configure ProducerId #148
     public MessageEventArg(IMessageReader newMessage, UInt16 dataSetId, Guid producerId)
     {
       MessageContent = newMessage;
@@ -35,6 +36,8 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// </summary>
     /// <value>The data set identifier.</value>
     internal UInt32 DataSetId { get; private set; }
+
+    //TODO How to configure ProducerId #148
     internal Guid ProducerId { get; private set; }
 
   }

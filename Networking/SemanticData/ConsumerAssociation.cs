@@ -82,6 +82,7 @@ namespace UAOOI.Networking.SemanticData
       if (this.State.State != HandlerState.Operational)
         return;
       //TODO Skip message if no one is interested to process it #135
+      //TODO How to configure ProducerId #148
       if ((messageArg.DataSetId) != DataSetId.DataSetWriterId || (messageArg.ProducerId != DataSetId.PublisherId))
         return;
       messageArg.MessageContent.UpdateMyValues(x => m_DataSetBindings[x], m_DataSetBindings.Length);

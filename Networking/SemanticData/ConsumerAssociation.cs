@@ -78,8 +78,10 @@ namespace UAOOI.Networking.SemanticData
     private IConsumerBinding[] m_DataSetBindings = null;
     private void MessageHandler(object sender, MessageEventArg messageArg)
     {
+      //TODO ConsumerAssociation - skip message if not operational #133
       if (this.State.State != HandlerState.Operational)
         return;
+      //TODO Skip message if no one is interested to process it #135
       if ((messageArg.DataSetId) != DataSetId.DataSetWriterId || (messageArg.ProducerId != DataSetId.PublisherId))
         return;
       messageArg.MessageContent.UpdateMyValues(x => m_DataSetBindings[x], m_DataSetBindings.Length);

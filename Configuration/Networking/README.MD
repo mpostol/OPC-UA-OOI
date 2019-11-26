@@ -44,6 +44,38 @@ The detailed description of the configuration files content is captured in the c
 
 The XML schema of the configuration files is available at: [ConfigurationData.xsd](./Serialization/ConfigurationData.xsd). Intentionally data producers and consumers use the same schema for configuration files. It makes it easier to harmonize these roles configuration and supports two roles in one application.
 
+## How to customize the configuration
+
+By design it is a plug-in or using modern terminology application composition part of the library described in [Reactive Networking of Semantic-Data Library](../../Networking/SemanticData/README.MD#networking-of-semanticdata-library)  and at run time it can be used as the primary source of configuration for any standalone `OOI Reactive Application` and `UA Server` supporting PubSub role.
+
+In this case the application configuration may:
+
+* be derived from the proposed one
+* be expanded by the proposed one
+
+The proposed solution supports also possibility to handle the configuration change event at run time, but this option is not tested and its implementation may change in new releases.
+
+
+### Wrapper Approach
+
+In this scenario the custom class must implement `IConfigurationDataFactory` and contain property with public getter and setter of type `ConfigurationData`. The snipped below is an eexample for ilustrating this scenario.
+
+```C#
+[DataContractAttribute(Name = "ConfigurationDataWrapper", Namespace = Definitions.m_Namespace)]
+[System.SerializableAttribute()]
+[XmlRoot(Namespace = CommonDefinitions.Namespace)]
+internal class ConfigurationDataWrapper : IConfigurationDataFactory
+{
+  
+  ...  
+  [DataMember(EmitDefaultValue = false, IsRequired = true)]
+  public ConfigurationData ConfigurationData { get; set; }  
+  ...
+
+}
+
+```
+
 ## Code documentation
 
 - [API Browser][API Browser]: the preliminary code help documentation.

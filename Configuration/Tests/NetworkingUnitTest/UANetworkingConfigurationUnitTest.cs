@@ -11,7 +11,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.UnitTest.Instrumentation;
 

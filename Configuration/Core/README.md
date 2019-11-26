@@ -1,0 +1,3 @@
+﻿# Core definitions
+
+Core definitions

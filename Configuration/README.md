@@ -1,13 +1,21 @@
-# Configuration
+# Configuration - Executive Summary
 
 This workspace is aimed at implementing an editor of the `OOI Reactive Application` configuration file. For more extensive examples, see the [Semantic-Data Processing Architecture](../SemanticData/README.MD).
 
 It contains types that supports the configuration management of application implementing the paradigm described in [Semantic-Data Processing Architecture](../SemanticData/README.MD). The configuration may be read to or write from the xml or json files. By design this library may be used to support variety kinds of applications at design and run time.
 
+## Architecture
+
+![Configuration Architecture](../CommonResources/Media/Configuration/ConfigurationArchitecture.png)
+
+- "DataBindings" - This project is aimed at implementing an editor of the `OOI Reactive Application` configuration file.
+- "Networking" - This library contains types that support the configuration management of application implementing the paradigm described in [Semantic-Data Processing Architecture](../SemanticData/README.MD)
+- Core - The library contains core definitions for "DataBindings" to promote late binding and loosely coupled components interaction
+
+<!--
 
 ## TBD
 
-<!--
 
 One Paragraph of project description goes here
 

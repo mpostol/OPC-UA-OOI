@@ -1,17 +1,6 @@
 # UA Data Networking Configuration
 
-## Introduction
 
-This library contains types that supports the configuration management of application implementing the paradigm described in [Semantic-Data Processing Architecture](../../SemanticData/README.MD). The configuration may be read to or write from the xml or json files. By design this library may be used to support variety kinds of applications at design and run time.
-
-The project seems to be very important prototyping workspace to answer the question how far we can go with the configuration (design time approach) in context of the following problems we have:
-
-1. Message content definition, i.e. items selected to be distributed (or fields, variables, values, etc.  – nor sure about terminology)
-2. Metadata distribution – preparation of the consumer to be able to decode the messages,
-3. Privileges/Permissions management in context of the distributed data as the primary resource (subject) for any OPC UA data processing application and in context of the message handlers as the data access communication channels (infrastructure).
-4. Security tokens distribution to support all scenarios mentioned in 3 above.
-
-Let me know if it works for you and if not how to converge proposed solution and your expectations. Examples how to use the library you can find in the Unit Tests aimed to test selected scenarios.
 
 ### Run time
 
@@ -76,9 +65,31 @@ internal class ConfigurationDataWrapper : IConfigurationDataFactory
 
 ```
 
-## Code documentation
+## How to read/save the configuration in XML format
+
+## How to read/save the configuration in JSON format
+
+## How to handel configuration change
+
+## See also 
+
 
 - [API Browser][API Browser]: the preliminary code help documentation.
  
 [API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
 [ASMD]:https://github.com/mpostol/ASMD
+
+<!--
+
+## `IConfigurationDataFactory`
+
+-  Static doesn't mean injected. The idea behind this interface implementation is late binding - to allow modification after deploying the main library. It requires loosely coupled parts, but now Configuration is tightly coupled in your code and Reference application. Unfortunately, we don't have proof of the concept that dependency injection is possible in this respect.
+- The Configuration library depends on Logger, so it must use any functionality to inject the logger part. Now it uses ServiceLocator, but because it is tightly coupled we can use constructors to provide a logger. 
+- Part of your code may be recognized as a clone of the functionality provided by the `Configuration` library, i.e. serialization. The library provides the same functionality offering `DataContractSerializer` and `JsonConvert`.  Visit the ReferenceApplication and Configuration library to get more.
+- You have correctly applied the possibility to expand the base configuration by adding your stuff but using both serialization methods at the same time may be recognized as a violation of the best practice rules, this way we have >>16 versioning possibilities of the serialization stuff.
+
+Dynamic configuration coupled with discovery functionality is an independent topic that we must discuss after collecting all ideas targeting this topic. 
+
+Once more thanks for the comments. I will use them to improve the documentation. The work targeting this issue mpostol/OPC-UA-OOI#401 is conducted on the branch [Configuration](https://github.com/mpostol/OPC-UA-OOI/tree/Configuration)
+
+-->

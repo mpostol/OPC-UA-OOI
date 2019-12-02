@@ -42,7 +42,7 @@ namespace UAOOI.Networking.SemanticData
       if (data == null)
         throw new NullReferenceException("data argument must not be null");
       DataDescriptor = data;
-      if (String.IsNullOrEmpty(aliasName))
+      if (string.IsNullOrEmpty(aliasName))
         throw new NullReferenceException("aliasName argument must not be null");
       m_AliasName = aliasName;
       p_State = new AssociationStateNoConfiguration(this);
@@ -69,7 +69,7 @@ namespace UAOOI.Networking.SemanticData
     /// <value>The state <see cref="IAssociationState"/> of this instance .</value>
     internal IAssociationState State
     {
-      get { return p_State; }
+      get => p_State;
       private set
       {
         p_State = value;
@@ -95,12 +95,16 @@ namespace UAOOI.Networking.SemanticData
     /// <summary>
     /// Adds the message handler. It must initialize binding between the <see cref="IMessageHandler" /> and the local data resources.
     /// </summary>
+    /// <remarks>
+    /// The Subscriber may have configured filters (like a PublisherId, DataSetWriterId or a DataSetClassId) so that it can drop all messages that do not match the filter
+    /// </remarks>
     /// <param name="messageHandler">The message handler.</param>
     /// <param name="configuration">The configuration.</param>
-    internal protected virtual void AddMessageHandler(IMessageHandler messageHandler, AssociationConfiguration configuration)
+    protected internal virtual void AddMessageHandler(IMessageHandler messageHandler, AssociationConfiguration configuration)
     {
+      //TODO How to configure ProducerId #148
       DataSetId = new DataSelector() { DataSetWriterId = configuration.DataSetWriterId, PublisherId = configuration.PublisherId };
-      }
+    }
     #endregion
 
     #region IComparable
@@ -152,7 +156,7 @@ namespace UAOOI.Networking.SemanticData
       public AssociationStateDisabled(Association host)
         : base(host)
       { }
-      public override HandlerState State { get { return HandlerState.Disabled; } }
+      public override HandlerState State => HandlerState.Disabled;
       public override void Enable()
       {
         base.Enable();
@@ -167,7 +171,7 @@ namespace UAOOI.Networking.SemanticData
       public AssociationStateOperational(Association host)
         : base(host)
       { }
-      public override HandlerState State { get { return HandlerState.Operational; } }
+      public override HandlerState State => HandlerState.Operational;
       public override void Enable()
       {
         throw new InvalidOperationException("Enable call is not allowed in the Operational state.");
@@ -182,7 +186,7 @@ namespace UAOOI.Networking.SemanticData
       public AssociationStateNoConfiguration(Association host)
         : base(host)
       { }
-      public override HandlerState State { get { return HandlerState.NoConfiguration; } }
+      public override HandlerState State => HandlerState.NoConfiguration;
       public override void Enable()
       {
         throw new InvalidOperationException("Enable call is not allowed in the NoConfiguration state.");
@@ -197,7 +201,7 @@ namespace UAOOI.Networking.SemanticData
       public AssociationStateError(Association host)
         : base(host)
       { }
-      public override HandlerState State { get { return HandlerState.Error; } }
+      public override HandlerState State => HandlerState.Error;
       public override void Enable()
       {
         throw new InvalidOperationException("Enable call is not allowed in the Error state.");
@@ -209,7 +213,7 @@ namespace UAOOI.Networking.SemanticData
     }
     //var
     private IAssociationState p_State = null;
-    private string m_AliasName = string.Empty;
+    private readonly string m_AliasName = string.Empty;
     #endregion
 
     #region protected

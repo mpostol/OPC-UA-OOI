@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -59,7 +59,8 @@ namespace UAOOI.Configuration.Networking.UnitTest
       public override event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
       #endregion
 
-      internal new Func<ConfigurationData> Loader { get { return base.Loader; } set { base.Loader = value; } }
+      internal new Func<ConfigurationData> Loader { get => base.Loader; set => base.Loader = value; }
+
       #region private
       private ConfigurationData LoadConfig()
       {
@@ -71,7 +72,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
         OnAssociationConfigurationChange?.Invoke(this, EventArgs.Empty);
         OnMessageHandlerConfigurationChange?.Invoke(this, EventArgs.Empty);
       }
-      private String _ConsumerConfigurationFileName = @"TestData\ConfigurationDataConsumer.xml";
+      private readonly string _ConsumerConfigurationFileName = @"TestData\ConfigurationDataConsumer.xml";
       #endregion
 
     }
@@ -88,10 +89,11 @@ namespace UAOOI.Configuration.Networking.UnitTest
         throw new NotImplementedException();
       }
       #endregion
-      internal new Func<ConfigurationDataWrapper> Loader { get { return base.Loader; } set { base.Loader = value; } }
+
+      internal new Func<ConfigurationDataWrapper> Loader { get => base.Loader; set => base.Loader = value; }
 
       private const string m_FileName = @"TestData\ConsumerConfigurationDataWrapper.xml";
 
-}
+    }
   }
 }

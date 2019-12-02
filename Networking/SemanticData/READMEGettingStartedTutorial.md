@@ -97,7 +97,7 @@ The communicating party can be interconnected using any transparent messages tra
 
 It is expected that implementation of the `IMessageHandlerFactory` and as the result messages handling services will be provided as an external part. An example implementation of the messages handling services conforming to UTP standard may be found in `UAOOI.Networking.UDPMessageHandler` project described in the document [Transport over UDP](../../Networking/UDPMessageHandler/README.md).
 
-## How to: Implement IBindingFactory
+## How to: Implement `IBindingFactory`
 
 ### Introduction
 

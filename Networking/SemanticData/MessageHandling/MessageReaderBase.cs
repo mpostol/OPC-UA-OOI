@@ -8,7 +8,6 @@
 using System;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.Core;
-using UAOOI.Networking.SemanticData.Common;
 using UAOOI.Networking.SemanticData.DataRepository;
 using UAOOI.Networking.SemanticData.Encoding;
 
@@ -127,6 +126,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// </summary>
     protected void RaiseReadMessageCompleted(UInt16 dataSetId)
     {
+      //TODO ConsumerAssociation - skip message if not operational #133
       if (this.State.State != HandlerState.Operational)
         return;
       ReadMessageCompleted?.Invoke(this, new MessageEventArg(this, dataSetId, PublisherId));

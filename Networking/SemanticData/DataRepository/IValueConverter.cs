@@ -19,6 +19,7 @@ namespace UAOOI.Networking.SemanticData.DataRepository
   /// The <c>Convert</c> methods also have a parameter called <c>parameter</c> so that you can use the same instance of the converter with different parameters. 
   /// For example, you can write a formatting converter that produces different formats of data based on the input parameter that you use. 
   /// </remarks>
+  //TODO Networking.SemanticData dependency on Networking.Encoding should be removed #323: IValueConverter
   public interface IValueConverter
   {
 
@@ -37,6 +38,7 @@ namespace UAOOI.Networking.SemanticData.DataRepository
     /// </remarks>
     object Convert(object value, Type targetType, object fallBack, object parameter, CultureInfo culture);
 
+    //TODO Networking.SemanticData dependency on Networking.Encoding should be removed #323: Review empty comment
     ///// <summary>
     ///// Converts the specified value.
     ///// </summary>

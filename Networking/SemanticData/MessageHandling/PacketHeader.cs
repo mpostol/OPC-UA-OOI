@@ -1,9 +1,9 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using UAOOI.Networking.SemanticData.Encoding;
-using System.Collections.ObjectModel;
 
 namespace UAOOI.Networking.SemanticData.MessageHandling
 {
@@ -22,7 +22,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// <param name="producerId">The producer identifier.</param>
     /// <param name="dataSetWriterIds">The data set writer ids list. The size of the list must be equal to the <see cref="PacketHeader.MessageCount"/>.</param>
     /// <returns>An instance of the <see cref="PacketHeader"/>.</returns>
-    public static PacketHeader GetProducerPacketHeader(IBinaryHeaderEncoder encoder, Guid producerId, IList<UInt16> dataSetWriterIds)
+    public static PacketHeader GetProducerPacketHeader(IBinaryHeaderEncoder encoder, Guid producerId, IList<ushort> dataSetWriterIds)
     {
       return new ProducerHeader(encoder, producerId, dataSetWriterIds);
     }
@@ -56,12 +56,13 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// If implemented gets or sets the identifier of producer that sends the data.
     /// </summary>
     /// <value>The <see cref="Guid"/> representing the producer.</value>
+   //TODO How to configure ProducerId #148
     public abstract Guid PublisherId { get; set; }
     /// <summary>
     /// If implemented gets or sets the security token identifier.
     /// </summary>
     /// <value>The security token identifier.</value>
-    public abstract UInt32 SecurityTokenId { get; set; }
+    public abstract uint SecurityTokenId { get; set; }
     /// <summary>
     /// Gets or sets the length of the nonce used to initialize the encryption algorithm..
     /// </summary>
@@ -82,7 +83,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// It identifies the publisher and the message writer responsible for sending Messages for the DataSet.
     /// </summary>
     /// <value>The data set writer ids.</value>
-    public abstract ReadOnlyCollection<UInt16> DataSetWriterIds { get; }
+    public abstract ReadOnlyCollection<ushort> DataSetWriterIds { get; }
     #endregion
 
     #region private implementation
@@ -98,10 +99,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       #endregion
 
       #region PacketHeader
-      public override byte MessageCount
-      {
-        get { return m_MessageCount; }
-      }
+      public override byte MessageCount => m_MessageCount;
       public override byte NetworkMessageFlags
       {
         get; set;
@@ -110,18 +108,20 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       {
         get; set;
       }
+      /// <summary>
+      /// If implemented gets or sets the identifier of producer that sends the data.
+      /// </summary>
+      /// <value>The <see cref="Guid" /> representing the producer.</value>
+      //TODO How to configure ProducerId #148
       public override Guid PublisherId
       {
         get; set;
       }
-      public override UInt32 SecurityTokenId
+      public override uint SecurityTokenId
       {
         get; set;
       }
-      public override ReadOnlyCollection<UInt16> DataSetWriterIds
-      {
-        get { return m_DataSetWriterIds; }
-      }
+      public override ReadOnlyCollection<ushort> DataSetWriterIds => m_DataSetWriterIds;
       public override void WritePacketHeader()
       {
         throw new ApplicationException("Consumer packet is read only");
@@ -130,7 +130,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
 
       #region private
       private IBinaryDecoder m_Reader;
-      private ReadOnlyCollection<UInt16> m_DataSetWriterIds;
+      private ReadOnlyCollection<ushort> m_DataSetWriterIds;
       private byte m_MessageCount;
       private void ReadPacketHeader()
       {
@@ -143,10 +143,10 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
         for (int i = 0; i < NonceLength; i++)
           Nonce[i] = m_Reader.ReadByte();
         m_MessageCount = m_Reader.ReadByte();
-        List<UInt16> _ids = new List<UInt16>();
+        List<ushort> _ids = new List<ushort>();
         for (int i = 0; i < MessageCount; i++)
           _ids.Add(m_Reader.ReadUInt16());
-        m_DataSetWriterIds = new ReadOnlyCollection<UInt16>(_ids);
+        m_DataSetWriterIds = new ReadOnlyCollection<ushort>(_ids);
       }
       #endregion
 
@@ -155,7 +155,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     {
 
       #region constructor
-      public ProducerHeader(IBinaryHeaderEncoder writer, Guid producerId, IList<UInt16> dataSetWriterIds) : base()
+      public ProducerHeader(IBinaryHeaderEncoder writer, Guid producerId, IList<ushort> dataSetWriterIds) : base()
       {
         if (writer == null)
           throw new ArgumentNullException(nameof(writer));
@@ -164,7 +164,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
         ProtocolVersion = CommonDefinitions.ProtocolVersion;
         SecurityTokenId = 0;
         NonceLength = 0;
-        DataSetWriterIds = new ReadOnlyCollection<UInt16>(dataSetWriterIds);
+        DataSetWriterIds = new ReadOnlyCollection<ushort>(dataSetWriterIds);
         MessageCount = Convert.ToByte(DataSetWriterIds.Count);
         ushort _packetLength = Convert.ToUInt16(m_PacketHeaderLength + dataSetWriterIds.Count * 2);
         m_HeaderWriter = new HeaderWriter(writer, _packetLength);
@@ -200,6 +200,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       /// Gets or sets the identifier of producer that sends the data.
       /// </summary>
       /// <value>The <see cref="Guid" /> representing the producer.</value>
+      //TODO How to configure ProducerId #148
       public override Guid PublisherId
       {
         get; set;
@@ -208,11 +209,11 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       /// Gets or sets the security token identifier.
       /// </summary>
       /// <value>The security token identifier.</value>
-      public override UInt32 SecurityTokenId
+      public override uint SecurityTokenId
       {
         get; set;
       }
-      public override ReadOnlyCollection<UInt16> DataSetWriterIds
+      public override ReadOnlyCollection<ushort> DataSetWriterIds
       {
         get;
       }

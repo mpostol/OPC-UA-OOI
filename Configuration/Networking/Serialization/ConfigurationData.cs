@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -67,7 +73,7 @@ namespace UAOOI.Configuration.Networking.Serialization
     {
       if (b_DataSetConfigurationList == null)
         return;
-      if (m_PendingChages)
+      if (m_PendingChanges)
         DataSets = b_DataSetConfigurationList.ToArray<DataSetConfiguration>();
       if (m_MessageHandlersCollectionChanged)
         MessageHandlers = m_ObservableMessageHandlers.Select<ICloneable, MessageHandlerConfiguration>(x => (MessageHandlerConfiguration)x.Clone()).ToArray<MessageHandlerConfiguration>();
@@ -75,13 +81,13 @@ namespace UAOOI.Configuration.Networking.Serialization
     #endregion
 
     #region private
-    private bool m_PendingChages = false;
+    private bool m_PendingChanges = false;
     private bool m_MessageHandlersCollectionChanged = false;
     private List<DataSetConfiguration> b_DataSetConfigurationList;
     private ObservableCollection<MessageHandlerConfiguration> m_ObservableMessageHandlers;
     private void PendingChanges()
     {
-      m_PendingChages = true;
+      m_PendingChanges = true;
       OnChanged();
     }
     private void M_MessageHandlers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

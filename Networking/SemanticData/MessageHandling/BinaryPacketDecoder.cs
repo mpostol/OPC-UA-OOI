@@ -36,6 +36,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       for (int i = 0; i < Header.MessageCount; i++)
         OnNewMessageArrived(Header.DataSetWriterIds[i]);
     }
+    //TODO How to configure ProducerId #148
     protected override Guid PublisherId
     {
       get

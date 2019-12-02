@@ -51,8 +51,9 @@
 
 ## Configuration
 
-* [Reactive Networking Configuration](Configuration/Networking/README.MD)
-* [DataBinding library](Configuration/DataBindings/README.MD)
+* [Configuration - Executive Summary](Configuration/README.md)
+  * [Reactive Networking (RxNetworking) Configuration](Configuration/Networking/README.MD)
+  * [DataBinding library](Configuration/DataBindings/README.MD)
 
 ## Global Data Discovery
 

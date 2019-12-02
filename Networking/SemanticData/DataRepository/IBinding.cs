@@ -10,6 +10,7 @@ namespace UAOOI.Networking.SemanticData.DataRepository
   /// It captures an association targeted a variable that is to be updated and all information required to convert the value to be compliant with the target type.
   /// The owner of this object is responsible to provide converter an an instance of <see cref="IValueConverter"/> and required by it information.
   /// </summary>
+  //TODO Networking.SemanticData dependency on Networking.Encoding should be removed #323: IBinding
   public interface IBinding
   {
     /// <summary>

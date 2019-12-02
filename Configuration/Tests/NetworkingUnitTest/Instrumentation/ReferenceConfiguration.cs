@@ -43,7 +43,7 @@ namespace UAOOI.Configuration.Networking.UnitTest.Instrumentation
     #endregion
 
     #region configuration
-    private static MessageHandlerConfiguration[] GetMessageHandlers(AssociationRole associationRole)
+    internal static MessageHandlerConfiguration[] GetMessageHandlers(AssociationRole associationRole)
     {
       MessageHandlerConfiguration[] _ret = null;
       switch (associationRole)
@@ -71,7 +71,7 @@ namespace UAOOI.Configuration.Networking.UnitTest.Instrumentation
     {
       return new ProducerAssociationConfiguration[] { new ProducerAssociationConfiguration() { AssociationName = AssociationConfigurationAlias, DataSetWriterId = DefaultDataSetWriterId, PublisherId = DefaultAssociationConfigurationId, FieldEncoding = FieldEncodingEnum.VariantFieldEncoding } };
     }
-    private static TypeDictionary[] TypeDictionaries()
+    internal static TypeDictionary[] TypeDictionaries()
     {
       return new TypeDictionary[] { new TypeDictionary() { TargetNamespace = "http://commsvr.com/UAOOI/Configuration/Networking/UnitTest/TargetNamespace.xsd", Items = GetItems() } };
     }
@@ -123,7 +123,7 @@ namespace UAOOI.Configuration.Networking.UnitTest.Instrumentation
       _fields.Add(new FieldType() { Name = "FieldName2", TypeName = new System.Xml.XmlQualifiedName("Int32", @"http://opcfoundation.org/UA/"), SwitchOperandSpecified = false, SwitchValueSpecified = false });
       return _fields.ToArray();
     }
-    private static DataSetConfiguration[] GetDataSetConfigurations(AssociationRole associationRole)
+    internal static DataSetConfiguration[] GetDataSetConfigurations(AssociationRole associationRole)
     {
       return new DataSetConfiguration[]
       { new DataSetConfiguration()

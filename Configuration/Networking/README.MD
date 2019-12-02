@@ -1,6 +1,6 @@
 # Reactive Networking (RxNetworking) Configuration
 
-### Run time
+## Itroduction
 
 By design it is a plug-in or using modern terminology application composition part of the library described in [Reactive Networking of Semantic-Data Library](../../Networking/SemanticData/README.MD#networking-of-semanticdata-library)  and at run time it can be used as the primary source of configuration for any standalone `OOI Reactive Application` and `UA Server` supporting PubSub role.
 
@@ -10,8 +10,6 @@ In this case the application configuration may:
 * be expanded by the proposed one
 
 The proposed solution supports also possibility to handle the configuration change event at run time, but this option is not tested and its implementation may change in new releases.
-
-### Design time
 
 I hope the interface is ready to fulfill the following design time scenarios allowing for configuration in context of selected OPC Information Model/Address Space:
 
@@ -42,7 +40,6 @@ In this case the application configuration may:
 
 The proposed solution supports also possibility to handle the configuration change event at run time, but this option is not tested and its implementation may change in new releases.
 
-
 ### Wrapper Approach
 
 In this scenario the custom class must implement `IConfigurationDataFactory` and contain property with public getter and setter of type `ConfigurationData`. The snipped below is an eexample for ilustrating this scenario.
@@ -60,9 +57,12 @@ internal class ConfigurationDataWrapper : IConfigurationDataFactory
   ...
 
 }
+```
+### Custom class derived form `ConfigurationData`
+
+```C#
 
 ```
-
 ## How to read/save the configuration in XML format
 
 
@@ -72,7 +72,6 @@ internal class ConfigurationDataWrapper : IConfigurationDataFactory
 ## How to handel configuration change
 
 ## See also 
-
 
 - [API Browser][API Browser]: the preliminary code help documentation.
  

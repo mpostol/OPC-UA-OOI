@@ -1,0 +1,4 @@
+xsd.exe ..\bin\Debug\UAOOI.Configuration.Networking.UnitTest.dll /t:UAOOI.Configuration.Networking.UnitTest.Instrumentation.CustomConfigurationData
+rem https://msdn.microsoft.com/en-us/library/aa347733(v=vs.110).aspx
+rem Svcutil ..\bin\Debug\UAOOI.Configuration.Networking.dll /collectionType:UAOOI.Configuration.Networking.Serialization.ConfigurationData /N:http://commsvr.com/UAOOI/SemanticData/UANetworking/Configuration/Serialization.xsd,UAOOI.Configuration.Networking.Serialization /o:ConfigurationData.!.xsd /dconly /s /serializer:DataContractSerializer 
+rem Svcutil ..\bin\Debug\UAOOI.Configuration.Networking.dll /t:metadata /dconly /d:xsd

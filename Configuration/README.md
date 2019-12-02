@@ -6,12 +6,12 @@ This library contains types that support the configuration management of applica
 
 The project is to be a prototyping workspace to answer the question of how far we can go with the configuration (design-time approach) in the context of the following problems we have:
 
-1.  all about how to establish semantic-context, i.e. to make data exchange meaningful 
-  - message encoding, i.e. process data selection, and message populating
-  - message decoding – preparation of the consumer to be able to decode the messages, i.e. to make the message meaningful
+1. all about how to establish semantic-context, i.e. to make data exchange meaningful
+    * message encoding, i.e. process data selection, and message populating
+    * message decoding preparation of the consumer to be able to decode the messages, i.e. to make the message meaningful
 2. all about how to establish security-context, i..e. to make data exchange secure
-  - Privileges/Permissions management in the context of the mobile data as the primary resource (subject) for any OPC UA data processing application and context of the message handlers as the data access communication channels (infrastructure)
-  - Security artifacts distribution to support all scenarios mentioned above
+   * Privileges/Permissions management in the context of the mobile data as the primary resource (subject) for any OPC UA data processing application and context of the message handlers as the data access communication channels (infrastructure)
+   * Security artifacts distribution to support all scenarios mentioned above
 
 ## Architecture
 
@@ -21,16 +21,18 @@ The relationship between the assemblies in this namespace is illustrated in the 
 
 >Where:
 >
->- `DataBindings` - this library is aimed at implementing an independent editor of the `OOI Reactive Application` (`RxNetworking`) configuration file
->- `Networking` - this library contains types that support the configuration management of the `OOI Reactive Application` (`RxNetworking`)
->- `Core` - The library contains core definitions for "DataBindings" to promote late binding and loosely coupled components interaction
+> * `DataBindings` - this library is aimed at implementing an independent editor of the `OOI Reactive Application` (`RxNetworking`) configuration file
+> * `Networking` - this library contains types that support the configuration management of the `OOI Reactive Application` (`RxNetworking`)
+> * `Core` - The library contains core definitions for "DataBindings" to promote late binding and loosely coupled components interaction
+>
 
 ## Features
 
 By design libraries in this namespace
-- allow editing and saving the configuration in the **XML** or **JSON** formats
-- promotes dependency injection pattern
-- enable dynamic configuration to reload after modification and discovery functionality
+
+* allow editing and saving the configuration in the **XML** or **JSON** formats
+* promotes dependency injection pattern
+* enable dynamic configuration to reload after modification and discovery functionality
 
 The dependency injection allows the composition of the hosting application using a late-binding approach and as a result replacing the used parts after deploying the main library. It requires loosely coupled parts.
 
@@ -42,12 +44,11 @@ By design, the Configuration libraries depend on a logger functionality implemen
 
 UAOOI.Common.Infrastructure.Diagnostic.ITraceSource
 
-``` 
+```
 
 defined in the `UAOOI.Common.Infrastructure` package. It is used to trace the behavior of libraries at run-time. To get an instance implementing this interface the `CommonServiceLocator` is used. The functionality required by the `CommonServiceLocator` has to be provided by the hosting application. Usually, it is provided by the composition container that is built at the application bootstrap stage. To get more visit this library home page [Microsoft.Practices.ServiceLocation at GitHub](https://github.com/unitycontainer/commonservicelocator).
 
 > If the `CommonServiceLocator` is not available a default logger (do nothing) is used. 
-
 
 ## How to guide
 
@@ -90,9 +91,9 @@ internal class ConsumerConfigurationFactory : ConfigurationFactoryBase<Configura
 
 ## See Also
 
-- [Reactive Networking (RxNetworking) Configuration][RxNetworkingConfig].
-- [API Browser][API Browser]: the preliminary code help documentation.
-- [OPC UA Address Space Model Designer (ASMD) - GitHub repository with related work][ASMD]
+* [Reactive Networking (RxNetworking) Configuration][RxNetworkingConfig].
+* [API Browser][API Browser]: the preliminary code help documentation.
+* [OPC UA Address Space Model Designer (ASMD) - GitHub repository with related work][ASMD]
 
 [RxNetworkingConfig]:./Networking/README.MD
 [API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html

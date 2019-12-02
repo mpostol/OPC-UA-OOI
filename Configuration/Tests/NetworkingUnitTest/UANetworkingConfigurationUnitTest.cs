@@ -39,7 +39,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
     public void CustomLoggerTraceSourceTest()
     {
       Logger _Logger = new Logger();
-      Container _container = new Container(new Object[] { _Logger });
+      Container _container = new Container(new object[] { _Logger });
       ServiceLocator.SetLocatorProvider(() => _container);
       Assert.IsTrue(ServiceLocator.IsLocationProviderSet);
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
@@ -51,7 +51,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
     public void ReadConfigurationTest()
     {
       Logger _Logger = new Logger();
-      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new Object[] { _Logger }));
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new object[] { _Logger }));
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");
       Assert.IsTrue(_configFile.Exists);
@@ -74,7 +74,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
     public void OnChangedConfigurationTest()
     {
       Logger _Logger = new Logger();
-      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new Object[] { _Logger }));
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new object[] { _Logger }));
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");
       Assert.IsTrue(_configFile.Exists);
@@ -93,7 +93,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
     public void ReadSaveConfigurationTest()
     {
       Logger _Logger = new Logger();
-      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new Object[] { _Logger }));
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new object[] { _Logger }));
       DerivedUANetworkingConfiguration _newConfiguration = new DerivedUANetworkingConfiguration();
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataConsumer.xml");
       Assert.IsNull(_newConfiguration.ConfigurationData);
@@ -118,9 +118,11 @@ namespace UAOOI.Configuration.Networking.UnitTest
     public void CurrentConfigurationNullTest()
     {
       Logger _Logger = new Logger();
-      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new Object[] { _Logger }));
-      UANetworkingConfigurationConfigurationDataWrapper _newConfiguration = new UANetworkingConfigurationConfigurationDataWrapper();
-      _newConfiguration.CurrentConfiguration = null;
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new object[] { _Logger }));
+      UANetworkingConfigurationConfigurationDataWrapper _newConfiguration = new UANetworkingConfigurationConfigurationDataWrapper
+      {
+        CurrentConfiguration = null
+      };
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataWrapperNull.xml");
       Assert.IsFalse(_configFile.Exists);
       _newConfiguration.SaveConfiguration(_configFile);
@@ -131,7 +133,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
     public void ConfigurationDataNullTest()
     {
       Logger _Logger = new Logger();
-      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new Object[] { _Logger }));
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new object[] { _Logger }));
       UANetworkingConfigurationConfigurationDataWrapper _newConfiguration = new UANetworkingConfigurationConfigurationDataWrapper();
       _newConfiguration.CurrentConfiguration.ConfigurationData = null;
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataWrapper.ConfigurationDataNull.xml");
@@ -143,10 +145,9 @@ namespace UAOOI.Configuration.Networking.UnitTest
     public void ReadSaveConfigurationDataWrapperTest()
     {
       Logger _Logger = new Logger();
-      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new Object[] { _Logger }));
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new object[] { _Logger }));
       UANetworkingConfigurationConfigurationDataWrapper _newConfiguration = new UANetworkingConfigurationConfigurationDataWrapper();
       Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnLoadedCount);
-      bool _ConfigurationFileChanged = false;
       FileInfo _configFile = new FileInfo(@"TestData\ConfigurationDataWrapper.xml");
       Assert.IsFalse(_configFile.Exists);
       Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnSavingCount);
@@ -154,7 +155,6 @@ namespace UAOOI.Configuration.Networking.UnitTest
 
       //on SaveConfiguration tests
       Assert.AreEqual<int>(1, _newConfiguration.CurrentConfiguration.OnSavingCount);
-      Assert.IsFalse(_ConfigurationFileChanged);
       Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
       _configFile.Refresh();
       Assert.IsTrue(_configFile.Exists);
@@ -162,6 +162,7 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnLoadedCount);
 
       //prepare ReadConfiguration
+      bool _ConfigurationFileChanged = false;
       _newConfiguration.OnModified += (x, y) => { _ConfigurationFileChanged = true; };
       _newConfiguration.ReadConfiguration(_configFile);
 
@@ -174,6 +175,43 @@ namespace UAOOI.Configuration.Networking.UnitTest
       Assert.AreEqual<int>(2, _Logger.TraceLogList.Count);
       //Assert.Fail(); //To get created file the test must fail.
     }
+    [TestMethod]
+    public void CustomConfigurationDataTest()
+    {
+      Logger _Logger = new Logger();
+      CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => new Container(new object[] { _Logger }));
+      UANetworkingConfigurationCustomConfigurationDataFixture _newConfiguration = UANetworkingConfigurationCustomConfigurationDataFixture.GetUANetworkingConfigurationFixture();
+      Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
+      Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnLoadedCount);
+      FileInfo _configFile = new FileInfo(@"TestData\CustomConfigurationData.new.xml");
+      Assert.IsFalse(_configFile.Exists);
+      Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnSavingCount);
+      _newConfiguration.SaveConfiguration(_configFile);
+
+      //on SaveConfiguration tests
+      Assert.AreEqual<int>(1, _newConfiguration.CurrentConfiguration.OnSavingCount);
+      Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
+      _configFile.Refresh();
+      Assert.IsTrue(_configFile.Exists);
+      Assert.IsNotNull(_newConfiguration.ConfigurationData);
+      Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnLoadedCount);
+
+      //prepare ReadConfiguration
+      bool _ConfigurationFileChanged = false;
+      _newConfiguration.OnModified += (x, y) => { _ConfigurationFileChanged = true; };
+      _newConfiguration.ReadConfiguration(_configFile);
+
+      //on ReadConfiguration test
+      Assert.IsTrue(_ConfigurationFileChanged);
+      Assert.IsNotNull(_newConfiguration.CurrentConfiguration);
+      Assert.IsNotNull(_newConfiguration.ConfigurationData);
+      Assert.AreEqual<int>(1, _newConfiguration.CurrentConfiguration.OnLoadedCount);
+      Assert.AreEqual<int>(0, _newConfiguration.CurrentConfiguration.OnSavingCount);
+      Assert.AreEqual<int>(2, _Logger.TraceLogList.Count);
+
+      //Assert.Fail(); //To get created file the test must fail.
+
+    }
     #endregion
 
     #region private
@@ -184,6 +222,16 @@ namespace UAOOI.Configuration.Networking.UnitTest
       {
         this.CurrentConfiguration = new ConfigurationDataWrapper();
       }
+    }
+    private class UANetworkingConfigurationCustomConfigurationDataFixture : UANetworkingConfiguration<CustomConfigurationData>
+    {
+      internal static UANetworkingConfigurationCustomConfigurationDataFixture GetUANetworkingConfigurationFixture()
+      {
+        UANetworkingConfigurationCustomConfigurationDataFixture _item = new UANetworkingConfigurationCustomConfigurationDataFixture();
+        _item.CurrentConfiguration = CustomConfigurationData.LoadConsumer();
+        return _item;
+      }
+
     }
     private class DerivedUANetworkingConfiguration : UANetworkingConfiguration<ConfigurationData>
     {

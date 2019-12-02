@@ -1,6 +1,4 @@
-# UA Data Networking Configuration
-
-
+# Reactive Networking (RxNetworking) Configuration
 
 ### Run time
 
@@ -66,6 +64,8 @@ internal class ConfigurationDataWrapper : IConfigurationDataFactory
 ```
 
 ## How to read/save the configuration in XML format
+
+
 
 ## How to read/save the configuration in JSON format
 

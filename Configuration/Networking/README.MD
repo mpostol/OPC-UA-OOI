@@ -2,7 +2,7 @@
 
 ## Introduction
 
-By design, this library is a plug-in or using modern terminology application composition part of the `RxNetworking` application described in [Reactive Networking (`RxNetworking`) of Semantic-Data Library](../../Networking/SemanticData/README.MD). At run time it can be used as the primary source of configuration for any standalone `OOI Reactive Application` and `UA Server` supporting PubSub role. It provides a basic implementation of the `IConfigurationDataFactory`. The idea behind this interface implementation is late binding - to allow the adoption of a new functionality against inevitable requirement changes after deploying a solution based on the `RxNetworking` application. 
+By design, this library is a plug-in or using modern terminology application composition part of the `RxNetworking` application described in [Reactive Networking (`RxNetworking`) of Semantic-Data Library][RxNetworkingLib]. At run time it can be used as the primary source of configuration for any standalone `OOI Reactive Application` and `UA Server` supporting PubSub role. It provides a basic implementation of the `IConfigurationDataFactory`. The idea behind this interface implementation is late binding - to allow the adoption of a new functionality against inevitable requirement changes after deploying a solution based on the `RxNetworking` application.
 
 In this case, the application configuration may:
 
@@ -13,15 +13,15 @@ The proposed solution supports also possibility to handle the configuration chan
 
 I hope the interface is ready to fulfill the following design time scenarios allowing for configuration in context of selected OPC Information Model/Address Space:
 
-1. Plug in to a modeler (UA Information Model design tool) as the configuration editor tool (preferred for me) - now it is compatible with the [Address Space Model Designer][ASMD]
-2. OPC UA Server as an local editor – using server local GUI, Address Space and the UANetworkingConfiguration plug-in (in this case OPC UA server is just modeler)
-3. OPC UA Client as an editor - using client local GUI/UANetworkingConfiguration on the client side, and remote access to the Address Space
-4. OPC UA Server as a remote editor – using custom configuration Information Model/UANetworkingConfiguration plug-in on the server side, and generic configuration OPC UA Clint as the remote configuration tool,
-5. OPC UA Server as a remote dedicated editor – using PubSub Information Model/UANetworkingConfiguration plug-in on the server side, and dedicated (configuration editor GUI) PubSub configuration OPC UA Clint as the remote configuration tool (let me stress it is the only scenario using PubSub Information Model) – it is rather run time approach.
+1. Plug-in to a modeler (UA Information Model design tool) as the configuration editor tool (preferred for me) - now it is compatible with the [Address Space Model Designer][ASMD]
+2. OPC UA Server as a local editor – using server local GUI, Address Space and the UANetworkingConfiguration plug-in (in this case OPC UA server is just modeler)
+3. OPC UA Client as an editor - using client local GUI/UANetworkingConfiguration on the client-side, and remote access to the Address Space
+4. OPC UA Server as a remote editor – using custom configuration Information Model/UANetworkingConfiguration plug-in on the server-side, and generic configuration OPC UA Client as the remote configuration tool,
+5. OPC UA Server as a remote dedicated editor – using PubSub Information Model/UANetworkingConfiguration plug-in on the server-side, and dedicated (configuration editor GUI) PubSub configuration OPC UA Client as the remote configuration tool (let me stress it is the only scenario using PubSub Information Model) – it is rather run time approach.
 
-It is my opinion, but options 4 and 5 are only theoretically possible, because in real installations OPC server is untouchable artifact, but in a lab it is just Modeler and cannot be used as run time configuration tool.
+It is my opinion, but options 4 and 5 are only theoretically possible because in real installations OPC server is an untouchable artifact, but in a lab, it is just Modeler and cannot be used as the run-time configuration tool.
 
-It is good opportunity to review your requirements (if you have any) against the proposed solution.
+It is a good opportunity to review your requirements (if you have any) against the proposed solution.
 
 ## Configuration content
 
@@ -31,12 +31,14 @@ The XML schema of the configuration files is available at: [ConfigurationData.xs
 
 ## How to customize the configuration
 
-By design it is a plug-in or using modern terminology application composition part of the library described in [Reactive Networking of Semantic-Data Library][RxNetworkingLib] and at run time it can be used as the primary source of configuration for any standalone `OOI Reactive Application` and `UA Server` supporting PubSub role.
+By design it is a plug-in or using modern terminology application composition part of the library described in [Reactive Networking (`RxNetworking`) of Semantic-Data Library][RxNetworkingLib] and at run time it can be used as the primary source of configuration for any standalone `OOI Reactive Application` and `UA Server` supporting PubSub role.
 
 In this case the application configuration may:
 
 * be derived from the proposed one
 * be expanded by the proposed one
+
+The `Configuration` library provides the required serialization functionality. This functionality must not be cloned in the custom extension.
 
 The proposed solution supports also possibility to handle the configuration change event at run time.
 
@@ -53,7 +55,7 @@ internal class ConfigurationDataWrapper : IConfigurationDataFactory
 
  ...
  [DataMember(EmitDefaultValue = false, IsRequired = true)]
- public ConfigurationData ConfigurationData { get; set; } 
+ public ConfigurationData ConfigurationData { get; set; }
  ...
 
 }
@@ -79,6 +81,20 @@ public class CustomConfigurationData : ConfigurationData
 }
 ```
 
+## Prerequisites
+
+By design, the Configuration libraries depend on a logger functionality implementing the interface
+
+```txt
+
+UAOOI.Common.Infrastructure.Diagnostic.ITraceSource
+
+```
+
+defined in the `UAOOI.Common.Infrastructure` package. It is used to trace the behavior of libraries at run-time. To get an instance implementing this interface the `CommonServiceLocator` is used. The functionality required by the `CommonServiceLocator` has to be provided by the hosting application. Usually, it is provided by the composition container that is built at the application bootstrap stage. To get more visit this library home page [Microsoft.Practices.ServiceLocation at GitHub](https://github.com/unitycontainer/commonservicelocator).
+
+> If the `CommonServiceLocator` is not available a default logger (do nothing) is used.
+
 ## See also
 
 * [Reactive Networking (`RxNetworking`) of Semantic-Data Library][RxNetworkingLib]
@@ -88,18 +104,3 @@ public class CustomConfigurationData : ConfigurationData
 [RxNetworkingLib]:../../Networking/SemanticData/README.MD
 [API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
 [ASMD]:https://github.com/mpostol/ASMD
-
-<!--
-
-## `IConfigurationDataFactory`
-
-- Static doesn't mean injected. The idea behind this interface implementation is late binding - to allow modification after deploying the main library. It requires loosely coupled parts, but now Configuration is tightly coupled in your code and Reference application. Unfortunately, we don't have proof of the concept that dependency injection is possible in this respect.
-- The Configuration library depends on Logger, so it must use any functionality to inject the logger part. Now it uses ServiceLocator, but because it is tightly coupled we can use constructors to provide a logger. 
-- Part of your code may be recognized as a clone of the functionality provided by the `Configuration` library, i.e. serialization. The library provides the same functionality offering `DataContractSerializer` and `JsonConvert`. Visit the ReferenceApplication and Configuration library to get more.
-- You have correctly applied the possibility to expand the base configuration by adding your stuff but using both serialization methods at the same time may be recognized as a violation of the best practice rules, this way we have >>16 versioning possibilities of the serialization stuff.
-
-Dynamic configuration coupled with discovery functionality is an independent topic that we must discuss after collecting all ideas targeting this topic. 
-
-Once more thanks for the comments. I will use them to improve the documentation. The work targeting this issue mpostol/OPC-UA-OOI#401 is conducted on the branch [Configuration](https://github.com/mpostol/OPC-UA-OOI/tree/Configuration)
-
--->

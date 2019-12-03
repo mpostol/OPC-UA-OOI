@@ -1,4 +1,4 @@
-# Reactive Networking of Semantic-Data Library
+# Reactive Networking (`RxNetworking`) of Semantic-Data Library
 
 ## Getting Started
 
@@ -26,7 +26,7 @@ Any application engaging the library is composed using the dependency injection 
 
 To promote flexibility and the separation of concern design approach, the concreted types are loosely coupled with the library. It means, that the selection of the concrete types used to compose the application is up to the application, namely it may designate them at runtime. To conform to the library requirements all the classes must implement appropriate contract defined as an interface.
 
-- `Configuration`: represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data. This class must implement the [`IConfigurationFactory`](http://www.commsvr.com/download/OPC-UA-OOI/html/T-UAOOI.Configuration.Core.IConfiguration.htm) interface. Each `Publisher` and `Consumer` must provide its own configuration.
+- `Configuration`: represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [Reactive Networking (RxNetworking) Configuration](../../Configuration/Networking/README.MD) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data. This class must implement the [`IConfigurationFactory`](http://www.commsvr.com/download/OPC-UA-OOI/html/T-UAOOI.Configuration.Core.IConfiguration.htm) interface. Each `Publisher` and `Consumer` must provide its own configuration.
 
 - `DataRepository`:  represents local resources in the application, for example PLC registers, HMI variables bound to screen controls, internal register of smart meters, etc. Depending on the role the library supports:
 

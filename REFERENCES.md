@@ -12,25 +12,29 @@
 
 <!--OOI on GitHub-->
 
-- [OPC UA Address Space Model Designer (ASMD) - GitHub Open Source Software][ASMD]
+- [Object Oriented Internet - C# deliverables supporting a new Machine To Machine (M2M) communication architecture; GitHub Open Source Software][OOI]
+  - [GitHub UAOOI.Networking.UDPMessageHandler][OOI.Networking.UDPMessageHandler]
+  - [GitHub UAOOI.Networking.ReferenceApplication][OOI.Networking.ReferenceApplication]
+  - [GitHub UAOOI Releases Page][OOI.Releases]
+  - [Library API Browser][API]
+
+[OOI]:https://github.com/mpostol/OPC-UA-OOI
+[OOI.Networking.UDPMessageHandler]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/UDPMessageHandler
+[OOI.Networking.ReferenceApplication]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/ReferenceApplication
+[OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
+[API]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
+
+- [Object Oriented Internet - online ebook][OOIBook]
+ 
+[OOIBook]:https://commsvr.gitbook.io/ooi/readme
+
+- [OPC UA Address Space Model Designer (ASMD); GitHub Open Source Software][ASMD]
 
 [ASMD]:https://github.com/mpostol/ASMD
 
-- [GitHub UAOOI.Networking.UDPMessageHandler][OOI.Networking.UDPMessageHandler]
+- [CommServer software family - management of the migration to open source.][migration2os]
 
-[OOI.Networking.UDPMessageHandler]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/UDPMessageHandler
-
-- [GitHub UAOOI.Networking.ReferenceApplication][OOI.Networking.ReferenceApplication]
-
-[OOI.Networking.ReferenceApplication]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/ReferenceApplication
-
-- [GitHub UAOOI Releases Page][OOI.Releases]
-
-[OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
-
-- [Library API Browser][API]
-
-[API]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
+[migration2os]:https://github.com/commsvr-com/migration2os
 
 <!--wordpress-->
 

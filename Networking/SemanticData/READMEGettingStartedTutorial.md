@@ -9,7 +9,7 @@ The topics contained in this section are intended to give you quick exposure to 
 Here are steps to create a successful `OOI Reactive Application`:
 
 1. derive from `DataManagementSetup` - it is place holder to gather all external injection points used to initialize the communication and bind to local resources
-1. implement 'IEncodingFactory' interface - to provide functionality to lookup a dictionary containing value converters
+1. implement `IEncodingFactory` interface - to provide functionality to lookup a dictionary containing value converters
 1. implement `IMessageHandlerFactory` interface - to create objects supporting messages handling over the wire
 1. implement `IBindingFactory` interface - to create objects implementing `IBinding` that can be used to synchronize the values of the local data repository properties and messages received/send over the wire
 1. implement `IConfigurationFactory` interface - to provide access to the selected role configuration
@@ -17,7 +17,7 @@ Here are steps to create a successful `OOI Reactive Application`:
 
 > Notes:
 >
-> - It is expected that the encoding/decoding functionality is provided outside in a custom library. The interface 'IEncodingFactory' is used for late binding to inject dependency on the external library.
+> - It is expected that the encoding/decoding functionality is provided outside in a custom library. The interface `IEncodingFactory` is used for late binding to inject dependency on the external library.
 >- `Producer` and `Consumer` roles may use independent configurations.
 
 ## How to Guide
@@ -89,9 +89,9 @@ To implement encoding the following steps must be accomplished:
 - implement the `UAOOI.Networking.SemanticData.Encoding.IUADecoder` interface;
 - implement the `UAOOI.Networking.SemanticData.Encoding.IUAEncoder` interface;
 
-This library has been released as the NuGet package [UAOOI.Networking.Encoding](https://www.nuget.org/packages/UAOOI.Networking.Encoding).
-
-Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may simply replace this library by a custom one providing unlimited encoding functionality.
+> Note: 
+> 
+>This library has been released as the NuGet package [UAOOI.Networking.Encoding](https://www.nuget.org/packages/UAOOI.Networking.Encoding). Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may simply replace this library by a custom one providing unlimited encoding functionality.
 
 ### How to: Implement `IMessageHandlerFactory`
 
@@ -122,7 +122,7 @@ IProducerBinding IBindingFactory.GetProducerBinding(string repositoryGroup, stri
 
 where:
 
-- `repositoryGroup` - is the name of a repository group profiling the configuration behavior, e.g. encoders selection. The configuration of the repositories belonging to the same group is handled according to the same profile. For example, the `repositoryGroup` may be used to represent a browse path in the OPC UA Address Space. In this case browse path aggregates all variables belonging to the same object (e.g. a boiler), which has to be handled consistently on the screen. This name is determined by the `DataSetConfiguration.RepositoryGroup` in the application configuration (section [Reactive Networking Configuration](../../Configuration/Networking/README.MD).
+- `repositoryGroup` - is the name of a repository group profiling the configuration behavior, e.g. encoders selection. The configuration of the repositories belonging to the same group is handled according to the same profile. For example, the `repositoryGroup` may be used to represent a browse path in the OPC UA Address Space. In this case browse path aggregates all variables belonging to the same object (e.g. a boiler), which has to be handled consistently on the screen. This name is determined by the `DataSetConfiguration.RepositoryGroup` in the application configuration (section [Reactive Networking Configuration](../../Configuration/Networking/README.MD)).
 - `processValueName` - is the name of a variable that is the ultimate destination/source of the message values. The value of `processValueName` must be unique in the context of the group named by `repositoryGroup`.
 - `fieldTypeInfo` - the field metadata definition represented as an object of 'UATypeInfo`.
 
@@ -145,7 +145,7 @@ This section provides hints on how to implement the `Producer` role responsible 
 There are two examples of this role implementation:
 
 - `Networking.SimulatorInteroperabilityTest` - in this project the data expected by a [data logger](./../DataLogger/README.md) is generated and send over the network
-- `Networking.Simulator.Boiler` - in this project a set of boilers is simulated. It is a part of the proof of concept with the aim of verifying that the reactive communication implemented using the `Networking.SemanticData` library is well suited to deploy the Internet of Things (IoT) paradigm for highly distributed applications
+- `Networking.Simulator.Boiler` - in this project a set of boilers is simulated. It is a part of the proof of concept with the aim of verifying that the reactive communication implemented using the `Networking.SemanticData` library is well suited to deploy the Internet of Things (IoT) paradigm for highly distributed applications.
 
 In the `Networking.SimulatorInteroperabilityTest` project, the `DataManagementSetup` class is implemented by derived class `UAOOI.Networking.SimulatorInteroperabilityTest.SimulatorDataManagementSetup`. The class `UAOOI.Networking.SimulatorInteroperabilityTest.DataGenerator` captures implementation of a [testing data generator](../../Networking/SimulatorInteroperabilityTest/README.md) aimed at accomplishing interoperability tests defined by the OPC Foundation for PubSub applications. Because there is only one group of variables the `GetProducerBinding` method doesn't use the `repositoryGroup` and the `GetConsumerBinding` is intentionally not implemented.
 

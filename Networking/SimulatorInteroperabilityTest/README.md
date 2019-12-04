@@ -52,9 +52,11 @@ This section provides hints on how to implement the `Producer` role responsible 
 
 The class `DataGenerator` captures implementation of a generator of testing data aimed at accomplishing interoperability tests defined by the OPC Foundation for PubSub applications. The example contains properties implemented as an instance of class `ProducerBindingMonitoredValue`. Modification of the `ProducerBindingMonitoredValue<type>.MonitoredValue` provides notification to the message handling state machine that a new value is available.
 
-## How to: Implement `IConfigurationFactory`
+## How to Guide
 
-### Implementation
+### How to: Implement `IConfigurationFactory`
+
+#### Implementation
 
 Implementation of this interface is straightforward and based entirely on the library [`UAOOI.Configuration.Networking`](../../Configuration/Networking/README.MD). In a typical scenario, this implementation should not be considered for further modification.  The only open question is how to provide a path to the file containing the configuration of this role. In proposed solution the file path is provided by a service defined by the application entry point and localized using `IServiceLocator` in the class `SimulatorDataManagementSetup`:
 
@@ -64,11 +66,11 @@ Implementation of this interface is straightforward and based entirely on the li
 
 This role uses independent configuration file `ConfigurationDataProducer.xml` attached to the project.
 
-### Generated Data
+#### Generated Data
 
 This `Producer` sends out the following datasets:
 
-#### DataSet 1 (Simple)
+##### DataSet 1 (Simple)
 
 Parameter Name |Type|Behavior
 -|-|-
@@ -77,7 +79,7 @@ Int32          | Int32        | Counts (1 per second) from 0 to 10.000 and then 
 Int32Fast     | Int32        | Counts (100 per second) from 0 to 10.000 and then resets
 DateTime      | DateTime    | Current time refreshed with every packet sent
 
-#### DataSet 2 (AllTypes)
+##### DataSet 2 (AllTypes)
 
 ParameterName    |Type    |Behavior
 -|-|-
@@ -98,7 +100,7 @@ Guid|Guid |1 new random Guid per second
 DateTime |DateTime | Current time refreshed with every packet sent
 UInt32Array |UInt32[10] | Length=10 Counts (1 per second on every element) from 0 to type-max and then resets. The count starting point for each value should differ
 
-#### DataSet 3 (MassTest)
+##### DataSet 3 (MassTest)
 
 Parameter    |Type    |Behavior
 -|-|-
@@ -107,7 +109,7 @@ Mass_1       | UInt32
 `...`        | UInt32
 Mass_99      | UInt32
 
-#### UPD Settings
+##### UPD Settings
 
 DataSet |DataSetWriterId |Message Length |Message Encoding
 -|-|-|-

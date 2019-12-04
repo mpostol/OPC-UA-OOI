@@ -13,13 +13,16 @@ Here are steps to create a successful `OOI Reactive Application`:
 1. implement `IMessageHandlerFactory` interface - to create objects supporting messages handling over the wire
 1. implement `IBindingFactory` interface - to create objects implementing `IBinding` that can be used to synchronize the values of the local data repository properties and messages received/send over the wire
 1. implement `IConfigurationFactory` interface - to provide access to the selected role configuration
+1. register the library `EventSource` to support common logging infrastructure
 
 > Notes:
 >
 > - It is expected that the encoding/decoding functionality is provided outside in a custom library. The interface 'IEncodingFactory' is used for late binding to inject dependency on the external library.
 >- `Producer` and `Consumer` roles may use independent configurations.
 
-## How to: Implement `DataManagementSetup`
+## How to Guide
+
+### How to: Implement `DataManagementSetup`
 
 Any application engaging the library is composed using the dependency injection pattern. The `DataManagementSetup`class is a placeholder to gather all external injection points used to compose the application, initialize the communication and bind to local resources. The class declares the following properties that must be initialized by the application to provide specific functionality.
 
@@ -86,7 +89,11 @@ To implement encoding the following steps must be accomplished:
 - implement the `UAOOI.Networking.SemanticData.Encoding.IUADecoder` interface;
 - implement the `UAOOI.Networking.SemanticData.Encoding.IUAEncoder` interface;
 
-## How to: Implement `IMessageHandlerFactory`
+This library has been released as the NuGet package [UAOOI.Networking.Encoding](https://www.nuget.org/packages/UAOOI.Networking.Encoding).
+
+Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may simply replace this library by a custom one providing unlimited encoding functionality.
+
+### How to: Implement `IMessageHandlerFactory`
 
 An instance implementing `IMessageHandlerFactory` creates objects supporting messages handling over the wire services:
 
@@ -97,9 +104,9 @@ The communicating party can be interconnected using any transparent messages tra
 
 It is expected that implementation of the `IMessageHandlerFactory` and as the result messages handling services will be provided as an external part. An example implementation of the messages handling services conforming to UTP standard may be found in `UAOOI.Networking.UDPMessageHandler` project described in the document [Transport over UDP](../../Networking/UDPMessageHandler/README.md).
 
-## How to: Implement `IBindingFactory`
+### How to: Implement `IBindingFactory`
 
-### Introduction
+#### Introduction
 
 Implementation of this interface is a basic step to implement `Consumer` and/or `Producer` functionality. An instance of the `IBindingFactory` is responsible to create objects implementing `IBinding` that can be used by:
 
@@ -119,7 +126,7 @@ where:
 - `processValueName` - is the name of a variable that is the ultimate destination/source of the message values. The value of `processValueName` must be unique in the context of the group named by `repositoryGroup`.
 - `fieldTypeInfo` - the field metadata definition represented as an object of 'UATypeInfo`.
 
-### `Consumer` Role Implementation
+#### `Consumer` Role Implementation
 
 This section provides hints on how to implement the `Consumer` role of the `OOI Reactive Application` processing data received in messages sent over the network by a data `Producer`.
 
@@ -127,7 +134,7 @@ The `Consumer` role implementation is captured by the `Networking.DataLogger` pr
 
 The class `UAOOI.Networking.DataLogger.DataConsumer` is an example implementation of a [data logger](./../DataLogger/README.md). This functionality is aimed at recording data over time. It consumes the testing data sent over the wire and updates properties in the class `UAOOI.Networking.DataLogger.ConsumerViewModel` implementing ViewModel layer in the [Model View ViewModel (on MSDN)](https://msdn.microsoft.com/en-us/magazine/dd419663.aspx). The class `DataConsumer` demonstrates how to create bindings interconnecting the data received over the wire and the properties that are the ultimate destination of the data. Because there is only one group of variables the `GetConsumerBinding` method doesn't use the `repositoryGroup` and the `GetProducerBinding` is intentionally not implemented.
 
-### `Producer` Role Implementation
+#### `Producer` Role Implementation
 
 This section provides hints on how to implement the `Producer` role responsible for:
 
@@ -144,13 +151,23 @@ In the `Networking.SimulatorInteroperabilityTest` project, the `DataManagementSe
 
 In the `Networking.Simulator.Boiler` project `DataManagementSetup` class is implemented by derived class `UAOOI.Networking.Simulator.Boiler.SimulatorDataManagementSetup`. The class `UAOOI.Networking.Simulator.Boiler.DataGenerator` captures the implementation of a simulator generating data for a set of boilers. In this case, the variables representing the state of one boiler are grouped by the `GetProducerBinding` method using the `repositoryGroup` parameter. Because it is the `Producer` role implementation the `GetConsumerBinding` method is intentionally not implemented and should not be called.
 
-## How to: Implement `IConfigurationFactory`
+### How to: Implement `IConfigurationFactory`
 
 Definition of the interface `UAOOI.Configuration.Networking.IConfigurationFactory` is located in the [`UAOOI.Configuration.Networking`](../../Configuration/Networking/README.MD) library. This library also contains the class `UAOOI.Configuration.Networking.ConfigurationFactoryBase` that is a base implementation of this interface. This class must be overridden by a custom class designed according to the user application custom requirements.
 
 Example implementations of this class are in [`Producer`](../../Networking/SimulatorInteroperabilityTest/README.md) and [`Consumer`](./../../Networking/DataLogger/README.md).
 
 Both are parts of the example implementation [`ReferenceApplication`](../../Networking/ReferenceApplication/README.MD).
+
+### How to: Register the `EventSource`
+
+Using the following contract create an instance of the `NetworkingEventSourceProvider` and call `GetPartEventSource` to get the local instance of the `EventSource` that is used locally for the semantic logging purpose.
+
+```C#
+[Export(typeof(INetworkingEventSourceProvider))]
+public class NetworkingEventSourceProvider : INetworkingEventSourceProvider
+```
+The `EventSourceBootstrapper` in `Networking.ReferenceApplication` project is an example on how to register all `EventSource` instances to support common logging infrastructure.
 
 ## See also
 

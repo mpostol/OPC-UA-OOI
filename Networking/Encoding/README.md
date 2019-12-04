@@ -17,7 +17,9 @@ This library may be easily replaced by a custom one - change the composition con
 
 ## Current release
 
-> Note; This library is not considered to be published as the NuGet package.
+This library has been released as the NuGet package [UAOOI.Networking.Encoding](https://www.nuget.org/packages/UAOOI.Networking.Encoding).
+
+Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may simply replace this library by a custom one providing unlimited encoding functionality.
 
 ## Contributing
 

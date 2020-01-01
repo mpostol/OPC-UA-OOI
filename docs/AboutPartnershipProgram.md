@@ -1,4 +1,4 @@
-# Object-Oriented Internet Partnership Program
+# [Object-Oriented Internet](https://github.com/mpostol/OPC-UA-OOI) Partnership Program
 
 ## Why follow Object-Oriented Internet
 
@@ -65,8 +65,28 @@ As a result of participation in the sponsorship program, direct contribution or 
 
 ## How to be involved
 
-I am a researcher who is passionate about applying knowledge and experience in building a machine-centric global village. Let's build it with you and for you. To be involved you may 
+I am a researcher who is passionate about applying knowledge and experience in building a machine-centric global village. Let's build it with you and for you. To be involved you may
 
-- join this Sponsorship Program
-- directly contribute as an active member of the OOI team [CONTRIBUTING](https://github.com/mpostol/OPC-UA-OOI/blob/master/CONTRIBUTING.md)
-- provide reciprocal feedback as the end-users of adopted deliverables [Gitter](https://gitter.im/mpostol/OPC-UA-OOI)
+- join the Sponsorship Program
+- directly contribute
+- adopt deliverables
+
+### Sponsorship Program
+
+You can sponsor the OOI using my profiles
+
+- [**GitHub**](https://github.com/sponsors/mpostol) anyone with a GitHub account can sponsor anyone with a sponsored developer profile through a recurring monthly payment. You can choose from multiple sponsorship tiers, with monthly payment amounts and benefits that are set. For more information, see [About GitHub Sponsors](https://help.github.com/en/github/supporting-the-open-source-community-with-github-sponsors/about-github-sponsors)
+
+- [**Patreon**](https://www.patreon.com/mpostol) - Patrons are the keepers of the cash, the power people with the credit/debit cards. A patron will kick-off the chain of events by typing in credit/debit card info, or syncing a payment account, like PayPal. A more detailed description is covered by the [Payment Glossary - payment processing on Patreon](https://support.patreon.com/hc/en-us/articles/360024774831-Payment-Glossary-payment-processing-on-Patreon).
+
+Choose the profile based on your convenience, but it is worth stressing that there is [GitHub Sponsors Matching Fund](https://help.github.com/en/github/supporting-the-open-source-community-with-github-sponsors/about-github-sponsors#about-the-github-sponsors-matching-fund).
+
+Regardless of which profile you choose the same tiers can be selected. The detailed tiers description is [here](Tiers.md).
+
+### Contribute
+
+Directly contribute as an active member of the OOI team [CONTRIBUTING](https://github.com/mpostol/OPC-UA-OOI/blob/master/CONTRIBUTING.md). Toi get started you may use the guide [The beginner's guide to contributing to a GitHub project](https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/)
+
+### Adopt Deliverables
+
+All OOI repositories on GitHub are used to share open-source software and documentation. These repositories are truly open source because they are licensed under the terms of the MIT license, therefore, others are free to use, change, and distribute the software. I hope that all end-users adopting the software will provide reciprocal feedback by email, on [Gitter](https://gitter.im/mpostol/OPC-UA-OOI), reporting feature requests/issues, etc.

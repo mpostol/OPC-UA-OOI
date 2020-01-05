@@ -22,7 +22,7 @@ This umbrella project targets multi-vendor plug-and-produce machines interoperab
 
 I am a researcher who is passionate about applying knowledge and experience in building a machine-centric global village. Let's build it with you and for you. To join our effort and create an organization context I have launched the [**Object-Oriented Internet Partnership Program**](https://github.commsvr.com/AboutPartnershipProgram.md.html).
 
-> **Consider joining [**Object-Oriented Internet Partnership Program**](https://github.commsvr.com/AboutPartnershipProgram.md.html)** as a sponsor, contributor or end-user.
+> Consider joining as a sponsor, contributor or end-user. Details are covered by the section [**How to be involved**](https://github.commsvr.com/AboutPartnershipProgram.md.html#how-to-be-involved)
 >
 > Your participation is needed to make sure the work will continue as expected.
 

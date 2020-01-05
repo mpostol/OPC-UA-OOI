@@ -1,10 +1,34 @@
-# Object Oriented Internet
+# Object-Oriented Internet
 
 ## Preface
 
+### Object-Oriented Internet - Machines to Machine Meaningful Interoperability
+
+It is said that we are or soon will be citizens of a global village - a world considered as a single community linked by telecommunications. All applications designed atop of network communication can be grouped as follows:
+
+- **human-centric** - applications where the information origin or information destination is an operator
+- **machine-centric** - applications where information creation, consumption, networking, and processing are achieved entirely without human interaction
+
+A typical **human-centric** approach is web-service supporting, for example, online bank account management. In this case, it is essential that any uncertainty and necessity to make a decision can be relaxed by human interaction. Coordination of multi-robot behavior in a work-cell or autonomous cars entering a service area fulfills the **machine-centric** scenario. It is crucial that, in this case, any human interaction is impractical or even impossible. **This interoperability scenario requires a machine to machine communication (M2M) demanding multi-vendor devices integration**.
+
+The human-centric global village is almost done. However, the machine-centric global village still needs design and development effort. Information and Communication Technology (ICT) has provided society with a vast variety of distributed machine-oriented applications including the meaningful Machine to Machine (M2M) communication targeting distributed mobile applications in the context of new emerging disciplines, i.e. Industry 4.0 (I40) and Internet of Things (IoT). However, it is a real challenge if the mentioned machines are provided by a vast variety of vendors. The real challenge we are facing is how to produce independently smart things (i.e. machines, devices, appliances, assets, etc.) to guarantee that they are plug and produce ready. There are no doubts, it requires standardization. I believe that while producing the machines in compliance with the OPC Unified Architecture this issue is relaxed by applying the following OPC UA standardized concepts:
+
+- **Information Model** - all about how to design a formal but mutually meaningful and shareable description of the considered process
+- **Address Space** - all about how to instantiate and expose to the network a life replica of the process providing real-time data according to the above-mentioned formal description
+
+The standardization process may be "paper-driven" or "community-driven". In both cases, standardization is indispensable but not sufficient. Let me recall that the foundation for the human-centric global village is just the Internet Protocol defined in 1981 and derived from the academic abstract knowledge and practitioners' concrete experience. It is worth stressing that it was published as an open-access document (RFC 791) and it has not been deprecated yet.
+
+This umbrella project targets multi-vendor plug-and-produce machines interoperability scenarios targeting all aspects of the machine-centric global village concept aimed at providing reusable deliverables, training, best practice rules, prototyping, compliance testing and dissemination of valuable results.
+
+I am a researcher who is passionate about applying knowledge and experience in building a machine-centric global village. Let's build it with you and for you. To join our effort and create an organization context I have launched the [**Object-Oriented Internet Partnership Program**](https://github.commsvr.com/AboutPartnershipProgram.md.html).
+
+> **Consider joining [**Object-Oriented Internet Partnership Program**](https://github.commsvr.com/AboutPartnershipProgram.md.html)** as a sponsor, contributor or end-user.
+>
+> Your participation is needed to make sure the work will continue as expected.
+
 ### What is Object Oriented Internet
 
-In this project, C\# deliverables supporting a new Machine To Machine \(M2M\) communication approach based on the **Data-Oriented Architecture** (DOA) paradigm is to be researched. The goal is to provide a generic solution for publishing and updating information in a context that can be used to describe and discover it by software applications. It is implemented based on the [OPC Unified Architecture](http://goo.gl/y4EHUn) - an industrial integration standard that fulfills the proposed architecture requirements.
+In this project, C\# deliverables supporting a new Machine To Machine \(M2M\) communication approach based on the **Data-Oriented Architecture** (DOA) paradigm is to be researched. The goal is to provide a generic solution for publishing and updating information in a context that can be used to describe and discover it by software applications. It is implemented based on the [OPC Unified Architecture][wordpress.OPCUAMTF] (OPC UA)- an industrial integration standard that fulfills the proposed architecture requirements.
 
 The [Object Oriented Internet](https://fedcsis.org/proceedings/2015/pliks/160.pdf) article published in **Proceedings of the Federated Conference on Computer Science and Information Systems** captures description of this idea.
 
@@ -186,11 +210,13 @@ The presented approach is a real proposal for a new technology wave based on the
 - [Library API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
 - [OPC UA Address Space Model Designer (ASMD)][ASMD]
 - [My Blog: About enablers of future solutions](http://wwww.mpostol.wordpress.com/)
+- [OPC Unified Architecture – Main Technological Features][wordpress.OPCUAMTF]
 - [About me on LinkedIn](https://pl.linkedin.com/in/mpostol)
 - [OPC Foundation](https://opcfoundation.org/)
 - [References](REFERENCES.md) - this section contains links to selected internal and external resources.
 - [Sponsored by commsvr.com](http://www.commsvr.com/)
 
+[wordpress.OPCUAMTF]: https://mpostol.wordpress.com/2013/08/04/opc-unified-architecture-main-technological-features/
 [ASMD]:https://github.com/mpostol/ASMD
 [DDSupport]:SemanticData/DesignDeploymentSupport.md
 [CAS.InterchangeXML]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf

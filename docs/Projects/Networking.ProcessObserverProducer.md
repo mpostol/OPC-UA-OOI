@@ -1,5 +1,7 @@
 # Machine to Sensors (M2S) connectivity based on Process-Observer
 
+## [Back to GitHub](https://github.com/mpostol/OPC-UA-OOI)
+
 ## Keywords
 
 OPCUA, Process-Observer, PubSub, Producer, Reactive communication, ReactiveX
@@ -18,7 +20,7 @@ The main goal of this project is to prove that the implementation of the `Produc
 
 ## Scope
 
-- create a VS project addressing the implementation of the `Process-Observer` connectivity
+- create a VS project encapsulating the implementation of the `Process-Observer` connectivity
 - define an interface representing `Process-Observer` API
 - implement the `Producer` against this interface to provide `Process-Observer` connectivity
 - adopt the implementation of the `Process-Observer` to be compliant with this project, e.g. harmonize target framework
@@ -34,9 +36,9 @@ The main goal of this project is to prove that the implementation of the `Produc
 
 ## See also
 
+- Mariusz Postol, [Object Oriented Internet][OOI], [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp), 2015, [IEEE Xplore Digital Library][OOI] [![DOI](https://img.shields.io/badge/DOI-10.15439%2F2015F160-blue)](https://fedcsis.org/proceedings/2015/pliks/160.pdf)
 - [Object-Oriented Internet - reactive visualization of asynchronous data using AZURE services \(Networking.Gateway2Azure\)][Networking.Gateway2Azure]
 - [The Reactive Extensions for .NET \( ReactiveX\)][ReactiveX]
-- Mariusz Postol, [Object Oriented Internet][OOI], [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp), 2015, [IEEE Xplore Digital Library][OOI] [![DOI](https://img.shields.io/badge/DOI-10.15439%2F2015F160-blue)](https://fedcsis.org/proceedings/2015/pliks/160.pdf)
 
 [OOI]:https://ieeexplore.ieee.org/abstract/document/7321562
 [PO]:https://github.com/mpostol/ProcessObserver

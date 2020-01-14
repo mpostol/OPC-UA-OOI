@@ -159,19 +159,30 @@ Detailed description is covered by the document [InformationModelFactory Library
 
 ## Related work
 
-### OPC UA Address Space Model Designer (ASMD)
+### OPC UA Address Space Model Designer (`ASMD`)
 
 The main challenge of the project [OPC UA Address Space Model Designer (ASMD)][ASMD] is to offer the designers a user-friendly tool supporting all aspects of the OPC UA Address Space model designing process. It brings together: designing, learning, and deploying. Description of the main features of the tool is covered by the section [Design and Deployment Support][DDSupport].
 
-The OPC UA Address Space Model Designer ([ASMD][ASMD]) implements conceptual containers called solutions and projects to apply their settings. Any solution contains one or more projects and it manages the way the designer configures, builds, and deploys sets of related projects. Any project includes source files containing the model representation and related metadata such as properties and references to other projects. The designer Integrated Development Environment (IDE) provides tools that help you edit and manipulate models, namespaces, and add references to external resources.
+The OPC UA Address Space Model Designer ([`ASMD`][ASMD]) implements conceptual containers called solutions and projects to apply their settings. Any solution contains one or more projects and it manages the way the designer configures, builds, and deploys sets of related projects. Any project includes source files containing the model representation and related metadata such as properties and references to other projects. The designer Integrated Development Environment (IDE) provides tools that help you edit and manipulate models, namespaces, and add references to external resources.
+
+### Process-Observer (`PO`)
+
+Process-Observer (`PO`) is an archetype that allows creation consistent, homogeneous real-time representation of the underlying process. This representation is a kind of a process state and behavior replica, which exposes real-time process data to the network using standardized interfaces like OPC Classic, OPC Unified Architecture, OPC PubSub, AMQP, MQTT, etc. In other words, it supports **Machine to Sensors Connectivity (M2S)**, i.e. it allows an open, uniform, secure and standards-based communication solution between sensors, actuators, controllers and the upper layer applications.
+
+A detailed description of this concept is covered by the article [Object Oriented Internet][OOI.ieeexplore]. By design this concept supports
+
+- **Process Devices Interconnection** - synchronization of the process replica with the process state
+- **Process Simulation** - simulation of the process behavior to recover unavailable data and ensure a safe testing environment
+- **Resource Monitoring** - allowing to add information processing and networking infrastructure to be exposed consistently aggregated with the process replica
+- **Server to Server Interactions** - supports a scenario in which `PO` is the Client of a Server
+
+The `PO` concept has been implemented as a generic communication engine used by the CAS CommServer Classic and Unified Architecture servers. This implementation is optimized for highly distributed applications. This implementation is maintained in the [mpostol/ProcessObserver][OOI.PO] repository.
 
 ### CommServer
 
 [CommServer][commserver] is a package of software to manage data transfer using OPC standards. Built-in technologies and algorithms support Machine to Machine (M2M) meaningful interoperability. The [CommServer][commserver] was written by CAS Lodz Poland.
 
 The GitHub repository [commsvr-com/migration2os][migration2os] is aimed at the `CommServer` software migration from on-premise subversion repository to GitHub and publishing it as the Open-Source Software (OSS). The members of the `CommServer` family are to be converged with the Object-Oriented Internet paradigms and integrated with the solutions maintained in this repository.
-
-The project [CommServer Migration to Open-source][migration2osProj] will be used to coordinate the migration process of transferring multi-parts software from an on-premise subversion repository to a set of GitHub repositories. After migration, this project will aggregate the description of all activities addressing the software maintenance process.
 
 ### Object Oriented Internet Reactive Networking Configuration Editor
 
@@ -204,7 +215,7 @@ The presented approach is a real proposal for a new technology wave based on the
 ## See Also
 
 - ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files [![ebook](https://img.shields.io/badge/Gitbook-Release-brightgreen.svg)](https://commsvr.gitbook.io/ooi/tableofcontent)
-- Mariusz Postol, [Object Oriented Internet](https://ieeexplore.ieee.org/abstract/document/7321562), [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp), 2015, [IEEE Xplore Digital Library](https://ieeexplore.ieee.org/abstract/document/7321562) [![DOI](https://img.shields.io/badge/DOI-10.15439%2F015F160-blue)](https://fedcsis.org/proceedings/2015/pliks/160.pdf)
+- Mariusz Postol, [Object Oriented Internet][OOI.ieeexplore], [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp), 2015, [IEEE Xplore Digital Library][OOI.ieeexplore] [![DOI](https://img.shields.io/badge/DOI-10.15439%2F015F160-blue)](https://fedcsis.org/proceedings/2015/pliks/160.pdf)
 - Mariusz Postol, [Machine to Machine Semantic-Data Based Communication: Comprehensive Survey](https://www.researchgate.net/publication/331633195_Machine_to_Machine_Semantic-Data_Based_Communication) in [Computer Game Innovations 2018](https://www.researchgate.net/publication/335524620_Computer_Game_Innovations_2018), Publisher: Lodz University of Technology Press; ISBN: 978-83-7283-999-2, 2018
 - [WIKI of this project](https://github.com/mpostol/OPC-UA-OOI/wiki)
 - [Library API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
@@ -225,3 +236,5 @@ The presented approach is a real proposal for a new technology wave based on the
 [migration2osProj]: https://github.com/orgs/commsvr-com/projects
 [ConfigEditor]: https://github.com/mpostol/OPC-UA-OOI.ConfigEditor
 [OOIBookToC]: TableOfContent.md#reactive-communication
+[OOI.ieeexplore]:https://ieeexplore.ieee.org/abstract/document/7321562
+[OOI.PO]:https://github.com/mpostol/ProcessObserver#process-observer

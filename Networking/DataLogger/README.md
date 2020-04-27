@@ -44,7 +44,7 @@ Finally the `DataManagementSetup.Start()` method is called to initialize the inf
 
 Implementation of this interface is a basic step to implement `Consumer` functionality. An instance of the `IBindingFactory` is responsible to create objects implementing `IBinding` that can be used by the `Consumer` to save the data received over the wire in the local data repository.
 
-The class `DataConsumer` is a sample implementation of a data logger functionality recording data over time. It consumes the testing data sent and updates properties in the class `ConsumerViewModel` implementing *ViewModel* layer in the *[Model View ViewModel (on MSDN)](https://msdn.microsoft.com/en-us/magazine/dd419663.aspx)* (*MVVM pattern*). The class `DataConsumer` demonstrates how to create bindings interconnecting the data received over the wire and the properties that are the ultimate destination of the data. The user interface provided by the *View* layer implemented in the `UAOOI.Networking.ReferenceApplication.MainWindow` class is dynamically bounded at run time with the `ConsumerViewModel`. To implement the *ViewModel* layer in the *MVVM pattern* the helper generic class `UAOOI.Networking.SemanticData.DataRepository.ProducerBindingMonitoredValue<type>` is used.
+The class `DataConsumer` is a sample implementation of a data logger functionality recording data over time. It consumes the testing data sent and updates properties in the class `ConsumerViewModel` implementing *ViewModel* layer in the *[Model View ViewModel (on MSDN)](https://msdn.microsoft.com/en-us/magazine/dd419663.aspx)* (*MVVM pattern*). The class `DataConsumer` demonstrates how to create bindings interconnecting the data received over the wire and the properties that are the ultimate destination of the data. The user interface provided by the *View* layer implemented in the `UAOOI.Networking.ReferenceApplication.MainWindow` class is dynamically bounded at run time with the `ConsumerViewModel`. To implement the *ViewModel* layer in the *`MVVM pattern* the helper generic class `UAOOI.Networking.SemanticData.DataRepository.ProducerBindingMonitoredValue<type>` is used.
 
 ### How to: Implement `IConfigurationFactory`
 
@@ -65,8 +65,7 @@ This file contains a mirror configuration of the [`Producer`](../../Networking/S
 
 ## See also
 
-- [API Browser][API Browser]: the preliminary code help documentation.
+- API Browser: the preliminary code help documentation - [available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 
-[API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
 [wordpress.OPCUACD]:https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible

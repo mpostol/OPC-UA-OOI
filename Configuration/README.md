@@ -48,7 +48,7 @@ UAOOI.Common.Infrastructure.Diagnostic.ITraceSource
 
 defined in the `UAOOI.Common.Infrastructure` package. It is used to trace the behavior of libraries at run-time. To get an instance implementing this interface the `CommonServiceLocator` is used. The functionality required by the `CommonServiceLocator` has to be provided by the hosting application. Usually, it is provided by the composition container that is built at the application bootstrap stage. To get more visit this library home page [Microsoft.Practices.ServiceLocation at GitHub](https://github.com/unitycontainer/commonservicelocator).
 
-> If the `CommonServiceLocator` is not available a default logger (do nothing) is used. 
+> If the `CommonServiceLocator` is not available a default logger (do nothing) is used.
 
 ## How to guide
 
@@ -70,6 +70,7 @@ Implementation of this scenario is covered by a full-featured example managed in
 For the XML format, an example illustrating the reactive networking (`RxNetworking`) atop of the OPC UA PubSub is the `UAOOI.Networking.DataLogger.ConsumerConfigurationFactory` class. The following code snippet demonstrates this case. To get more examples of how to design custom configuration, visit the document covering [`RxNetworking configuration][RxNetworkingConfig].
 
 ```C#
+
 internal class ConsumerConfigurationFactory : ConfigurationFactoryBase<ConfigurationData>
 {
   ...
@@ -87,14 +88,14 @@ internal class ConsumerConfigurationFactory : ConfigurationFactoryBase<Configura
   }
   ...
 }
+
 ```
 
 ## See Also
 
 * [Reactive Networking (RxNetworking) Configuration][RxNetworkingConfig].
-* [API Browser][API Browser]: the preliminary code help documentation.
+* API Browser: the preliminary code help documentation - [available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 * [OPC UA Address Space Model Designer (ASMD) - GitHub repository with related work][ASMD]
 
 [RxNetworkingConfig]:./Networking/README.MD
-[API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
 [ASMD]:https://github.com/mpostol/ASMD

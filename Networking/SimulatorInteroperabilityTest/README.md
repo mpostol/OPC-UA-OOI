@@ -68,7 +68,7 @@ This role uses independent configuration file `ConfigurationDataProducer.xml` at
 
 #### Generated Data
 
-This `Producer` sends out the following datasets:
+This `Producer` sends out the following `Datasets`:
 
 ##### DataSet 1 (Simple)
 
@@ -132,8 +132,7 @@ DataSet 3 |32 |2 byte |DataValue
 
 ## See also
 
-- [API Browser][API Browser]: the preliminary code help documentation.
+- [API Browser is available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 
-[API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
 [wordpress.OPCUACD]:https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible

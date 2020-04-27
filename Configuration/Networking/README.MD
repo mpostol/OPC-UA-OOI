@@ -98,9 +98,9 @@ defined in the `UAOOI.Common.Infrastructure` package. It is used to trace the be
 ## See also
 
 * [Reactive Networking (`RxNetworking`) of Semantic-Data Library][RxNetworkingLib]
-* [API Browser][API Browser]: the preliminary code help documentation.
+* API Browser: the preliminary code help documentation is [available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 * [Address Space Model Designer][ASMD]
 
 [RxNetworkingLib]:../../Networking/SemanticData/README.MD
-[API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
+[API Browser]: https://github.commsvr.com/AboutPartnershipProgram.md.htm
 [ASMD]:https://github.com/mpostol/ASMD

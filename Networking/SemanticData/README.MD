@@ -12,13 +12,13 @@ To promote interoperability this library is a collection of types aimed at imple
 
 The code is tested using the Unit Tests located in the project: [Networking.SemanticData.UnitTest][Networking.SemanticData.UnitTest]
 
-The preliminary code help documentation is here: [API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
+The preliminary code help documentation is [available for sponsors - consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html).
 
 > NOTE: The project is in development stage - major changes are expected.
 
 ## Reactive Networking Application Architecture
 
-The figure below shows the relationship between the library `UAOOI.Networking.SemanticData` and external parts compounding any reactive networking application (`OOI Reactive Application`). The `OOI Reactive Application` is collection of `Producer` and `Consumer` entities. They must provide an interface to real-time process data, hence they are recognized as an extension of `DataRepository` class. To implement the `DataRepository` dedicated implementation [`IBinding`](http://www.commsvr.com/download/OPC-UA-OOI/html/T-UAOOI.Networking.SemanticData.DataRepository.IBinding.htm) interface should be provided to create a bridge between real word data `Row Data` represented by the `LocalResources` class.
+The figure below shows the relationship between the library `UAOOI.Networking.SemanticData` and external parts compounding any reactive networking application (`OOI Reactive Application`). The `OOI Reactive Application` is collection of `Producer` and `Consumer` entities. They must provide an interface to real-time process data, hence they are recognized as an extension of `DataRepository` class. To implement the `DataRepository` dedicated implementation `IBinding` interface should be provided to create a bridge between real word data `Row Data` represented by the `LocalResources` class.
 
 ![Figure 2. Application Architecture](../../CommonResources/Media/DataManagementExternalLibraries.png)
 
@@ -26,7 +26,7 @@ Any application engaging the library is composed using the dependency injection 
 
 To promote flexibility and the separation of concern design approach, the concreted types are loosely coupled with the library. It means, that the selection of the concrete types used to compose the application is up to the application, namely it may designate them at runtime. To conform to the library requirements all the classes must implement appropriate contract defined as an interface.
 
-- `Configuration`: represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [Reactive Networking (RxNetworking) Configuration](../../Configuration/Networking/README.MD) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data. This class must implement the [`IConfigurationFactory`](http://www.commsvr.com/download/OPC-UA-OOI/html/T-UAOOI.Configuration.Core.IConfiguration.htm) interface. Each `Publisher` and `Consumer` must provide its own configuration.
+- `Configuration`: represents functionality needed to read the configuration and handle the configuration modification at runtime. This functionality must be supported by the deployment platform. The library described in the article [Reactive Networking (RxNetworking) Configuration](../../Configuration/Networking/README.MD) provides helper classes that may be used to gather all required information from the configuration files to instantiate the communication infrastructure and start pumping the data. This class must implement the `IConfigurationFactory` interface. Each `Publisher` and `Consumer` must provide its own configuration.
 
 - `DataRepository`:  represents local resources in the application, for example PLC registers, HMI variables bound to screen controls, internal register of smart meters, etc. Depending on the role the library supports:
 

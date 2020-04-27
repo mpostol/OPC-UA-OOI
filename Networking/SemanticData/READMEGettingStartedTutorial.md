@@ -89,8 +89,8 @@ To implement encoding the following steps must be accomplished:
 - implement the `UAOOI.Networking.SemanticData.Encoding.IUADecoder` interface;
 - implement the `UAOOI.Networking.SemanticData.Encoding.IUAEncoder` interface;
 
-> Note: 
-> 
+> Note:
+>
 >This library has been released as the NuGet package [UAOOI.Networking.Encoding](https://www.nuget.org/packages/UAOOI.Networking.Encoding). Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may simply replace this library by a custom one providing unlimited encoding functionality.
 
 ### How to: Implement `IMessageHandlerFactory`
@@ -167,12 +167,12 @@ Using the following contract create an instance of the `NetworkingEventSourcePro
 [Export(typeof(INetworkingEventSourceProvider))]
 public class NetworkingEventSourceProvider : INetworkingEventSourceProvider
 ```
+
 The `EventSourceBootstrapper` in `Networking.ReferenceApplication` project is an example on how to register all `EventSource` instances to support common logging infrastructure.
 
 ## See also
 
-- [API Browser][API Browser]: the preliminary code help documentation.
+- [API Browser is available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 
-[API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
 [wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/

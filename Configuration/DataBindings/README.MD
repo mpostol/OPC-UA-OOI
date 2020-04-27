@@ -6,9 +6,7 @@ This project is aimed at implementing an editor of the `OOI Reactive Application
 
 The schema of the configuration files is available at:  [ConfigurationData.xsd](../../Configuration/Networking/Serialization/ConfigurationData.xsd) and detailed description of the configuration is captured in the document [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration).
 
-The code help documentation is available at:
-
-- [UAOOI.Configuration.DataBindings Namespace](http://www.commsvr.com/download/OPC-UA-OOI/index.html)
+The code help documentation is [available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 
 The main changes and Version History are provided by the document [ReadMe.txt](./ReadMe.txt)
 
@@ -28,6 +26,6 @@ The configuration files are managed using the `UAOOI.Configuration.Networking` c
 
 This section provides hints how to implement a custom editor of any `OOI Reactive Application` processing data. For example the following applications are good candidate to support this role:
 
-* HMI device - displaying incoming data on the screen;
-* Supervisory Control and Data Acquisition (SCADA) - equipped with the driver compliant with the standard
-* PLC - updating the internal registers using data recovered from the incoming messages.
+- HMI device - displaying incoming data on the screen;
+- Supervisory Control and Data Acquisition (SCADA) - equipped with the driver compliant with the standard
+- PLC - updating the internal registers using data recovered from the incoming messages.

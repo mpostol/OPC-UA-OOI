@@ -24,7 +24,7 @@
 [OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
 
 - [Object Oriented Internet - online ebook][OOIBook]
- 
+
 [OOIBook]:https://commsvr.gitbook.io/ooi/readme
 
 - [OPC UA Address Space Model Designer (ASMD); GitHub Open Source Software][ASMD]

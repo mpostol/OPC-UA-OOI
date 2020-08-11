@@ -56,15 +56,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
-    <Reference Include="UAOOI.SemanticData.BuildingErrorsHandling, Version=5.1.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UAOOI.SemanticData.BuildingErrorsHandling.5.1.0\lib\netstandard2.0\UAOOI.SemanticData.BuildingErrorsHandling.dll</HintPath>
-    </Reference>
-    <Reference Include="UAOOI.SemanticData.InformationModelFactory, Version=5.1.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UAOOI.SemanticData.InformationModelFactory.5.1.0\lib\netstandard2.0\UAOOI.SemanticData.InformationModelFactory.dll</HintPath>
-    </Reference>
-    <Reference Include="UAOOI.SemanticData.UANodeSetValidation, Version=5.1.0.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\UAOOI.SemanticData.UANodeSetValidation.5.1.0\lib\netstandard2.0\UAOOI.SemanticData.UANodeSetValidation.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionsUnitTest.cs" />
@@ -120,9 +111,21 @@
     <None Include="OPCUAOOIKey.snk" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj">
+      <Project>{9ca2f05b-fb18-49ad-8520-1bcc838f748c}</Project>
+      <Name>SemanticData.BuildingErrorsHandling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj">
+      <Project>{6d20785d-0451-46a9-9ac2-ec66b7c0d18a}</Project>
+      <Name>SemanticData.InformationModelFactory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UAModelDesignExport\SemanticData.UAModelDesignExport.csproj">
       <Project>{c970c14c-98aa-48a9-9f6f-d00c92fa6cef}</Project>
       <Name>SemanticData.UAModelDesignExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj">
+      <Project>{352378a0-8b2e-4679-bb44-fd0bcc8467d9}</Project>
+      <Name>SemanticData.UANodeSetValidation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

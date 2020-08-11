@@ -81,12 +81,6 @@
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UAOOI.Common.Infrastructure, Version=4.0.1.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\UAOOI.Common.Infrastructure.4.0.1\lib\netstandard2.0\UAOOI.Common.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="UAOOI.Configuration.Networking, Version=4.0.1.1, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\UAOOI.Configuration.Networking.4.0.1\lib\netstandard2.0\UAOOI.Configuration.Networking.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
@@ -113,6 +107,14 @@
     <Compile Include="ApplicationSettingsUnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Infrastructure\Common.Infrastructure.csproj">
+      <Project>{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}</Project>
+      <Name>Common.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Configuration\Networking\Configuration.Networking.csproj">
+      <Project>{E28E0880-03AA-4D1B-A820-41B04E766019}</Project>
+      <Name>Configuration.Networking</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Networking.Core.csproj">
       <Project>{AFCCA7C9-47FE-4FB6-935E-12D686EEC58F}</Project>
       <Name>Networking.Core</Name>

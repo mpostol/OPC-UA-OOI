@@ -11,7 +11,7 @@
     </sectionGroup>
   </configSections>
   <startup>
-    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.6.1" />
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
   </startup>
   <userSettings>
     <UAOOI.Networking.ReferenceApplication.Properties.Settings>
@@ -90,13 +90,13 @@
     </sources>
     <switches>
       <add name="System.Net.Sockets" value="All" />
-      <!-- value:  Required String attribute. Sets the verbosity of the output. 
+      <!-- value:  Required String attribute. Sets the verbosity of the output.
                   Legitimate values are Critical, Error, Verbose, Warning, and Information.
       -->
-      <!-- maxdatasize:  Optional Int32 attribute. Sets the maximum number of bytes of network data included in each line trace. 
+      <!-- maxdatasize:  Optional Int32 attribute. Sets the maximum number of bytes of network data included in each line trace.
                          The default value is 1024.
       -->
-      <!-- tracemode Optional String attribute. Set to includehex to show protocol traces in hexadecimal and text format. 
+      <!-- tracemode Optional String attribute. Set to includehex to show protocol traces in hexadecimal and text format.
       Set to protocolonly to show only text. The default value is includehex.
       -->
     </switches>
@@ -107,24 +107,4 @@
     </sharedListeners>
     <trace autoflush="true" />
   </system.diagnostics>
-  <runtime>
-    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-      <dependentAssembly>
-        <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-11.0.0.0" newVersion="11.0.0.0" />
-      </dependentAssembly>
-      <dependentAssembly>
-        <assemblyIdentity name="CommonServiceLocator" publicKeyToken="489b6accfaf20ef0" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-2.0.3.0" newVersion="2.0.3.0" />
-      </dependentAssembly>
-      <dependentAssembly>
-        <assemblyIdentity name="UAOOI.Configuration.Networking" publicKeyToken="deede3c2df331bb0" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-3.0.5.36688" newVersion="3.0.5.36688" />
-      </dependentAssembly>
-      <dependentAssembly>
-        <assemblyIdentity name="UAOOI.Common.Infrastructure" publicKeyToken="deede3c2df331bb0" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-2.0.0.16099" newVersion="2.0.0.16099" />
-      </dependentAssembly>
-    </assemblyBinding>
-  </runtime>
 </configuration>

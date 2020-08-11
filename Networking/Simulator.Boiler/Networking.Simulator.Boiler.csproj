@@ -49,6 +49,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Configuration\NetworkingUpgrade\Configuration.Networking.Upgrade.csproj" />
+    <ProjectReference Include="..\..\SemanticData\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj" />
     <ProjectReference Include="..\Core\Networking.Core.csproj" />
     <ProjectReference Include="..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj" />
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
@@ -64,12 +65,6 @@
     <None Update="ConfigurationDataProducer.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="UAOOI.Common.Infrastructure" Version="4.0.1" />
-    <PackageReference Include="UAOOI.Configuration.Networking" Version="4.0.1" />
-    <PackageReference Include="UAOOI.SemanticData.UANodeSetValidation" Version="5.1.0" />
   </ItemGroup>
 
 </Project>

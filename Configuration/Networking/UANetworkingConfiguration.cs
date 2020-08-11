@@ -98,7 +98,7 @@ namespace UAOOI.Configuration.Networking
     public ITraceSource TraceSource { get; set; }
     #endregion
 
-    #region privat
+    #region private
     private class TraceSourceDefault : ITraceSource
     {
       /// <summary>

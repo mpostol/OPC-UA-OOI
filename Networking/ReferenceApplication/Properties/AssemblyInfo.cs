@@ -9,7 +9,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("commsvr.com")]
 [assembly: AssemblyProduct("Object Oriented Internet")]
-[assembly: AssemblyCopyright("Copyright (c) 2019 Mariusz Postol")]
+[assembly: AssemblyCopyright("Copyright (C) 2019 Mariusz Postol LODZ POLAND")]
 [assembly: AssemblyTrademark("Object Oriented Internet")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

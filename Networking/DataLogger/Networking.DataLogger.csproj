@@ -32,8 +32,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommonServiceLocator" Version="2.0.4" />
-    <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.5" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
     <PackageReference Include="UAOOI.Configuration.Networking" Version="4.0.1" />
   </ItemGroup>
 

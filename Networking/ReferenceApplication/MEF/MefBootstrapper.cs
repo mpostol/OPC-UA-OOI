@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using CommonServiceLocator;
 using System;
 using System.ComponentModel.Composition;
@@ -45,7 +51,7 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
       this.Logger.TraceData(TraceEventType.Verbose, 33, "Bootstrapper Sequence Completed");
     }
     /// <summary>
-    /// Configures the the <see cref="CommonServiceLocator.ServiceLocator" /> .
+    /// Configures the <see cref="CommonServiceLocator.ServiceLocator" /> .
     /// </summary>
     /// <remarks>
     /// The base implementation also sets the ServiceLocator provider singleton.

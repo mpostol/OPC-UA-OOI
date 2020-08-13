@@ -151,7 +151,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking.DataRepository.A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataRepository", "DataRepository", "{20139208-1830-4DF2-A158-0C505DC05DF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.DataRepository.AzureGatewayUnitTest", "AzureGatewayUnitTest\Networking.DataRepository.AzureGatewayUnitTest.csproj", "{F7FDDDCC-58C7-44E0-8DE3-6A94E6222D03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.DataRepository.AzureGatewayUnitTest", "Networking\DataRepository\AzureGatewayUnitTest\Networking.DataRepository.AzureGatewayUnitTest.csproj", "{F7FDDDCC-58C7-44E0-8DE3-6A94E6222D03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -23,4 +23,8 @@
     <DocumentationFile>C:\VS.git\UAOOI\OPC-UA-OOI\Networking\DataRepository\AzureGateway\Properties\UAOOI.Networking.DataRepository.AzureGateway.xml</DocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\SemanticData\Networking.SemanticData.csproj" />
+  </ItemGroup>
+
 </Project>

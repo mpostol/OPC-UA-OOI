@@ -54,7 +54,7 @@ namespace UAOOI.Networking.DataLogger
         m_ViewModel.ChangeProducerCommand(Restart);
         Start();
         m_ViewModel.ConsumerErrorMessage = "Running";
-        ReferenceApplicationEventSource.Log.Initialization($" consumer engine and starting receiving data acomplished");
+        ReferenceApplicationEventSource.Log.Initialization($" consumer engine and starting receiving data accomplished");
       }
       catch (Exception _ex)
       {

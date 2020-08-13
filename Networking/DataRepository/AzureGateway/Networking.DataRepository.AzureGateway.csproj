@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>UAOOI.Networking.DataRepository.AzureGateway</AssemblyName>
+    <RootNamespace>UAOOI.Networking.DataRepository.AzureGateway</RootNamespace>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
+    <Description>TBD</Description>
+    <Copyright>Copyright MPostol (c) 2020</Copyright>
+    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
+    <Authors>MPostol</Authors>
+    <Company>commsvr.com</Company>
+    <Product>Object Oriented Internet</Product>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\VS.git\UAOOI\OPC-UA-OOI\Networking\DataRepository\AzureGateway\Properties\UAOOI.Networking.DataRepository.AzureGateway.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SemanticData\Networking.SemanticData.csproj" />
+  </ItemGroup>
+
+</Project>

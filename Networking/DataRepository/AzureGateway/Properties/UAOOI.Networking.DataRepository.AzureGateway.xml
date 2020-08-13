@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UAOOI.Networking.DataRepository.AzureGateway</name>
+    </assembly>
+    <members>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureGatewayDataManagementSetup">
+            <summary>
+            Class AzureGatewayDataManagementSetup.
+            Implements the <see cref="T:UAOOI.Networking.SemanticData.DataManagementSetup" />
+            </summary>
+            <seealso cref="T:UAOOI.Networking.SemanticData.DataManagementSetup" />
+        </member>
+    </members>
+</doc>

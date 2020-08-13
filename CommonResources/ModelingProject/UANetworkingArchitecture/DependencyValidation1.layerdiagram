@@ -167,9 +167,6 @@
             <dependencyFromLayerToLayer Id="e89b361f-5dd1-4ab8-9437-cb2b4200f994" direction="Forward">
               <layerMoniker Id="302e3778-4673-49f7-9ec5-95c72215c4be" />
             </dependencyFromLayerToLayer>
-            <dependencyFromLayerToLayer Id="3c2f097f-73e8-4b42-88e9-773d07a505b5" direction="Forward">
-              <layerMoniker Id="9a01fd84-96cf-4318-920d-7b656a6b08a2" />
-            </dependencyFromLayerToLayer>
             <dependencyFromLayerToLayer Id="7f82fdef-c791-4848-b696-3d762617805c" direction="Forward">
               <layerMoniker Id="0cb1fd98-3287-44cb-b31a-87f180db4e43" />
             </dependencyFromLayerToLayer>
@@ -183,6 +180,38 @@
                 <Category Ref="FileSystem.Category.FileOfType.dll" />
               </ArtifactNode>
               <ExpandedNode Id="(Assembly=UAOOI.Networking.SimulatorInteroperabilityTest)" Label="UAOOI.Networking.SimulatorInteroperabilityTest.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="76de77b6-9dfd-4320-a0e6-8fc5f9c5374c" name="UAOOI.Networking.DataRepository.AzureGateway.dll">
+          <references>
+            <reference Id="8afe82e2-e0a5-4c71-8075-abc7411008be" name="UAOOI.Networking.DataRepository.AzureGateway.dll">
+              <ArtifactNode Label="UAOOI.Networking.DataRepository.AzureGateway.dll" Category="CodeSchema_Assembly" Id="(Assembly=../../../Networking/DataRepository/AzureGateway/bin/Debug/netstandard2.0/UAOOI.Networking.DataRepository.AzureGateway.dll)" />
+              <ExpandedNode Id="(Assembly=UAOOI.Networking.DataRepository.AzureGateway)" Label="UAOOI.Networking.DataRepository.AzureGateway.dll" Category="CodeSchema_Assembly">
+                <Category Ref="FileSystem.Category.FileOfType.dll" />
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="34345008-5fe7-4225-9abd-75f906b09006" name="UnitTests">
+      <description>All unt tests</description>
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="6b2d3fe4-ecb7-4ddd-9761-f18d84c78edb" direction="Forward">
+          <layerMoniker Id="49589dc5-de20-43b6-8136-bc26830c9fbb" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="5524f815-361b-445c-a262-feeef8cc4c75" name="UAOOI.Networking.DataRepository.AzureGateway.Test.dll">
+          <references>
+            <reference Id="a18f7c31-7c50-492d-8dce-67ee867f690e" name="UAOOI.Networking.DataRepository.AzureGateway.Test.dll">
+              <ArtifactNode Label="UAOOI.Networking.DataRepository.AzureGateway.Test.dll" Category="CodeSchema_Assembly" Id="(Assembly=../../../AzureGatewayUnitTest/bin/Debug/UAOOI.Networking.DataRepository.AzureGateway.Test.dll)" />
+              <ExpandedNode Id="(Assembly=UAOOI.Networking.DataRepository.AzureGateway.Test)" Label="UAOOI.Networking.DataRepository.AzureGateway.Test.dll" Category="CodeSchema_Assembly">
                 <Category Ref="FileSystem.Category.FileOfType.dll" />
                 <LinkCategory Ref="Represents" />
               </ExpandedNode>

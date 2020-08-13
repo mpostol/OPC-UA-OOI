@@ -147,9 +147,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEM
 		.github\ISSUE_TEMPLATE\PrepareReleaseTask.md = .github\ISSUE_TEMPLATE\PrepareReleaseTask.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureGateway", "Networking\DataRepository\AzureGateway\AzureGateway.csproj", "{3F5CBB26-9142-4E55-8DE5-5BAF0C3EA1CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking.DataRepository.AzureGateway", "Networking\DataRepository\AzureGateway\Networking.DataRepository.AzureGateway.csproj", "{3F5CBB26-9142-4E55-8DE5-5BAF0C3EA1CE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataRepository", "DataRepository", "{20139208-1830-4DF2-A158-0C505DC05DF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.DataRepository.AzureGatewayUnitTest", "AzureGatewayUnitTest\Networking.DataRepository.AzureGatewayUnitTest.csproj", "{F7FDDDCC-58C7-44E0-8DE3-6A94E6222D03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -309,6 +311,10 @@ Global
 		{3F5CBB26-9142-4E55-8DE5-5BAF0C3EA1CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F5CBB26-9142-4E55-8DE5-5BAF0C3EA1CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F5CBB26-9142-4E55-8DE5-5BAF0C3EA1CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7FDDDCC-58C7-44E0-8DE3-6A94E6222D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7FDDDCC-58C7-44E0-8DE3-6A94E6222D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7FDDDCC-58C7-44E0-8DE3-6A94E6222D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7FDDDCC-58C7-44E0-8DE3-6A94E6222D03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -356,6 +362,7 @@ Global
 		{5C2EB20B-990C-4444-8C5F-F1D9641DE28D} = {606ADC64-90A1-4355-BEAB-6B04717F598C}
 		{3F5CBB26-9142-4E55-8DE5-5BAF0C3EA1CE} = {20139208-1830-4DF2-A158-0C505DC05DF7}
 		{20139208-1830-4DF2-A158-0C505DC05DF7} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
+		{F7FDDDCC-58C7-44E0-8DE3-6A94E6222D03} = {20139208-1830-4DF2-A158-0C505DC05DF7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9388D93E-9AA9-40EE-A0C6-F096265079B2}

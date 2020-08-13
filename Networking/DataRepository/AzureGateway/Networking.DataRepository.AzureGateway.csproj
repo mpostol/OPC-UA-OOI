@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\VS.git\UAOOI\OPC-UA-OOI\Networking\DataRepository\AzureGateway\UAOOI.Networking.DataRepository.AzureGateway.xml</DocumentationFile>
+    <DocumentationFile>C:\VS.git\UAOOI\OPC-UA-OOI\Networking\DataRepository\AzureGateway\Properties\UAOOI.Networking.DataRepository.AzureGateway.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>

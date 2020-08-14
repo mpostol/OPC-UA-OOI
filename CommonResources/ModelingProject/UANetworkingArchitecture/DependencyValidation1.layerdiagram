@@ -186,36 +186,6 @@
             </reference>
           </references>
         </layer>
-        <layer Id="a5c14bc9-660a-4af9-8c5f-ba4305e58c94" name="UAOOI.Networking.DataRepository.AzureGateway">
-          <references>
-            <reference Id="0e3d95a7-af75-4205-87f9-0ebb0116af70" name="UAOOI.Networking.DataRepository.AzureGateway">
-              <ArtifactNode Label="UAOOI.Networking.DataRepository.AzureGateway" Category="CodeSchema_Namespace" Id="(Namespace=UAOOI.Networking.DataRepository.AzureGateway)" />
-              <ExpandedNode Id="(Namespace=UAOOI.Networking.DataRepository.AzureGateway)" Label="UAOOI.Networking.DataRepository.AzureGateway" Category="CodeSchema_Namespace">
-                <LinkCategory Ref="Represents" />
-              </ExpandedNode>
-            </reference>
-          </references>
-        </layer>
-      </childLayers>
-    </layer>
-    <layer Id="34345008-5fe7-4225-9abd-75f906b09006" name="UnitTests">
-      <description>All unt tests</description>
-      <dependencyToLayers>
-        <dependencyFromLayerToLayer Id="86e29f80-4aef-48ae-bf63-556d3de96a24" direction="Forward">
-          <layerMoniker Id="a5c14bc9-660a-4af9-8c5f-ba4305e58c94" />
-        </dependencyFromLayerToLayer>
-      </dependencyToLayers>
-      <childLayers>
-        <layer Id="aa1a1513-c8b1-49c1-89e1-ce9db6f53da3" name="UAOOI.Networking.DataRepository.AzureGateway.Test">
-          <references>
-            <reference Id="677af75b-0498-4d4c-99a4-dc61c4066a20" name="UAOOI.Networking.DataRepository.AzureGateway.Test">
-              <ArtifactNode Label="UAOOI.Networking.DataRepository.AzureGateway.Test" Category="CodeSchema_Namespace" Id="(Namespace=UAOOI.Networking.DataRepository.AzureGateway.Test)" />
-              <ExpandedNode Id="(Namespace=UAOOI.Networking.DataRepository.AzureGateway.Test)" Label="UAOOI.Networking.DataRepository.AzureGateway.Test" Category="CodeSchema_Namespace">
-                <LinkCategory Ref="Represents" />
-              </ExpandedNode>
-            </reference>
-          </references>
-        </layer>
       </childLayers>
     </layer>
   </layers>

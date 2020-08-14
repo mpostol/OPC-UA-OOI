@@ -9,23 +9,20 @@ using CommonServiceLocator;
 using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
-using UAOOI.Configuration.Networking;
-using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.Core;
 using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.SemanticData;
-using UAOOI.Networking.SemanticData.DataRepository;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway
 {
   /// <summary>
   /// Class AzureGatewayDataManagementSetup - represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer
   /// This class cannot be inherited.
-  /// Implements the <see cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
-  /// Implements the <see cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
+  /// Implements the <see cref="DataManagementSetup" />
+  /// Implements the <see cref="IProducerDataManagementSetup" />
   /// </summary>
-  /// <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
-  /// <seealso cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
+  /// <seealso cref="DataManagementSetup" />
+  /// <seealso cref="IProducerDataManagementSetup" />
   [Export(typeof(IProducerDataManagementSetup))]
   [PartCreationPolicy(CreationPolicy.Shared)]
   public sealed class PartDataManagementSetup : DataManagementSetup, IProducerDataManagementSetup
@@ -117,46 +114,5 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     }
 
     #endregion Unit tests instrumentation
-
-    //TODO Implement DataManagementSetup #450
-    private class PartConfigurationFactory : IConfigurationFactory
-    {
-      private readonly string _configurationFileName;
-
-      public PartConfigurationFactory(string configurationFileName)
-      {
-        _configurationFileName = configurationFileName;
-      }
-
-      #region IConfigurationFactory
-
-      public event EventHandler<EventArgs> OnAssociationConfigurationChange;
-
-      public event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
-
-      public ConfigurationData GetConfiguration()
-      {
-        throw new NotImplementedException();
-      }
-
-      #endregion IConfigurationFactory
-    }
-
-    private class PartBindingFactory : IBindingFactory
-    {
-      #region IBindingFactory
-
-      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
-      {
-        throw new NotImplementedException();
-      }
-
-      public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
-      {
-        throw new NotImplementedException();
-      }
-
-      #endregion IBindingFactory
-    }
   }
 }

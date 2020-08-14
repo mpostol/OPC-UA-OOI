@@ -19,7 +19,7 @@ using UAOOI.Networking.SemanticData.DataRepository;
 namespace UAOOI.Networking.DataRepository.AzureGateway
 {
   /// <summary>
-  /// Class AzureGatewayDataManagementSetup - custom implementation of the <seealso cref="DataManagementSetup" />
+  /// Class AzureGatewayDataManagementSetup - represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer
   /// This class cannot be inherited.
   /// Implements the <see cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
   /// Implements the <see cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
@@ -32,7 +32,9 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
   {
     #region Composition
 
-    /// <seealso cref="DataManagementSetup" />
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PartDataManagementSetup"/> class.
+    /// </summary>
     public PartDataManagementSetup()
     {
       IServiceLocator _serviceLocator = ServiceLocator.Current;

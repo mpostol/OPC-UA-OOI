@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -15,18 +15,19 @@ using UAOOI.Networking.SemanticData;
 
 namespace UAOOI.Networking.DataLogger
 {
-
   /// <summary>
   /// Class ConsumerDataManagementSetup - custom implementation of the <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
   /// This class cannot be inherited.
+  /// Implements the <see cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
   /// </summary>
+  /// <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
   /// <seealso cref="DataManagementSetup" />
   [Export]
   [PartCreationPolicy(CreationPolicy.Shared)]
   public sealed class LoggerManagementSetup : DataManagementSetup
   {
-
     #region constructor
+
     /// <summary>
     /// Initializes a new instance of the <see cref="LoggerManagementSetup"/> class.
     /// </summary>
@@ -40,9 +41,11 @@ namespace UAOOI.Networking.DataLogger
       BindingFactory = new DataConsumer(m_ViewModel);
       MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
     }
-    #endregion
+
+    #endregion constructor
 
     #region API
+
     /// <summary>
     /// Setups this instance.
     /// </summary>
@@ -63,9 +66,11 @@ namespace UAOOI.Networking.DataLogger
         Dispose();
       }
     }
-    #endregion
+
+    #endregion API
 
     #region IDisposable
+
     /// <summary>
     /// Releases unmanaged and - optionally - managed resources.
     /// </summary>
@@ -79,36 +84,41 @@ namespace UAOOI.Networking.DataLogger
         return;
       m_disposed = true;
     }
-    #endregion
+
+    #endregion IDisposable
 
     #region private
+
     /// <summary>
     /// Gets or sets the view model to be used for diagnostic purpose..
     /// </summary>
     /// <value>The view model.</value>
     private ConsumerViewModel m_ViewModel;
+
     /// <summary>
     /// Gets a value indicating whether this <see cref="LoggerManagementSetup"/> is disposed.
     /// </summary>
     /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
     private bool m_disposed = false;
+
     private Action<bool> m_onDispose = disposing => { };
+
     private void Restart()
     {
       m_ViewModel.Trace("Entering Restart");
       Start();
     }
-    #endregion
+
+    #endregion private
 
     #region Unit tests instrumentation
+
     [Conditional("DEBUG")]
     internal void DisposeCheck(Action<bool> onDispose)
     {
       m_onDispose = onDispose;
     }
-    #endregion
 
+    #endregion Unit tests instrumentation
   }
 }
-
-

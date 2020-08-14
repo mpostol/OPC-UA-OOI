@@ -6,7 +6,7 @@
     <members>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup">
             <summary>
-            Class AzureGatewayDataManagementSetup - custom implementation of the <seealso cref="T:UAOOI.Networking.SemanticData.DataManagementSetup" />
+            Class AzureGatewayDataManagementSetup - represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer
             This class cannot be inherited.
             Implements the <see cref="T:UAOOI.Networking.SemanticData.DataManagementSetup" />
             Implements the <see cref="T:UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
@@ -15,7 +15,9 @@
             <seealso cref="T:UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
         </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup.#ctor">
-            <seealso cref="T:UAOOI.Networking.SemanticData.DataManagementSetup" />
+            <summary>
+            Initializes a new instance of the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup"/> class.
+            </summary>
         </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup.Setup">
             <summary>

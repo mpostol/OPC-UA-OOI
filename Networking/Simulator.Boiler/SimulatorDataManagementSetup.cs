@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -18,7 +18,12 @@ namespace UAOOI.Networking.Simulator.Boiler
 {
   /// <summary>
   /// Class SimulatorDataManagementSetup represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer.
+  /// This class cannot be inherited.
+  /// Implements the <see cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
+  /// Implements the <see cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
   /// </summary>
+  /// <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
+  /// <seealso cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
   [Export(typeof(IProducerDataManagementSetup))]
   [PartCreationPolicy(CreationPolicy.Shared)]
   public sealed class SimulatorDataManagementSetup : DataManagementSetup, IProducerDataManagementSetup
@@ -64,7 +69,7 @@ namespace UAOOI.Networking.Simulator.Boiler
       }
     }
 
-    #endregion API
+    #endregion IProducerDataManagementSetup
 
     #region IDisposable
 

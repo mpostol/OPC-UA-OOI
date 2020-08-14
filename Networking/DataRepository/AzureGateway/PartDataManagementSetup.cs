@@ -19,12 +19,16 @@ using UAOOI.Networking.SemanticData.DataRepository;
 namespace UAOOI.Networking.DataRepository.AzureGateway
 {
   /// <summary>
-  /// Class AzureGatewayDataManagementSetup.
-  /// Implements the <see cref="DataManagementSetup" />
+  /// Class AzureGatewayDataManagementSetup - custom implementation of the <seealso cref="DataManagementSetup" />
+  /// This class cannot be inherited.
+  /// Implements the <see cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
+  /// Implements the <see cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
   /// </summary>
+  /// <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
+  /// <seealso cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
   [Export(typeof(IProducerDataManagementSetup))]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  public class PartDataManagementSetup : DataManagementSetup, IProducerDataManagementSetup
+  public sealed class PartDataManagementSetup : DataManagementSetup, IProducerDataManagementSetup
   {
 
     #region Composition
@@ -73,8 +77,9 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     {
       m_onDispose(disposing);
       base.Dispose(disposing);
-      if (disposing)
-        ;
+      if (!disposing || m_disposed)
+        return;
+      m_disposed = true;
     }
     #endregion IDisposable
 
@@ -84,18 +89,23 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// </summary>
     /// <value>The view model.</value>
     private ProducerViewModel m_ViewModel;
-
+    /// <summary>
+    /// Gets a value indicating whether this <see cref="LoggerManagementSetup"/> is disposed.
+    /// </summary>
+    /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
+    private bool m_disposed = false;
     private Action<bool> m_onDispose = disposing => { };
-
     #endregion private
 
     #region Unit tests instrumentation
-
     [Conditional("DEBUG")]
     internal void DisposeCheck(Action<bool> onDispose)
     {
       m_onDispose = onDispose;
     }
+    #endregion Unit tests instrumentation
+
+    //TODO Implement DataManagementSetup #450
     private class PartConfigurationFactory : IConfigurationFactory
     {
 
@@ -127,6 +137,5 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       }
       #endregion
     }
-    #endregion Unit tests instrumentation
   }
 }

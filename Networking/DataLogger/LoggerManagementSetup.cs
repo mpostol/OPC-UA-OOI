@@ -20,7 +20,7 @@ namespace UAOOI.Networking.DataLogger
   /// Class ConsumerDataManagementSetup - custom implementation of the <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
   /// This class cannot be inherited.
   /// </summary>
-  /// <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
+  /// <seealso cref="DataManagementSetup" />
   [Export]
   [PartCreationPolicy(CreationPolicy.Shared)]
   public sealed class LoggerManagementSetup : DataManagementSetup
@@ -63,11 +63,6 @@ namespace UAOOI.Networking.DataLogger
         Dispose();
       }
     }
-    /// <summary>
-    /// Gets a value indicating whether this <see cref="LoggerManagementSetup"/> is disposed.
-    /// </summary>
-    /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
-    public bool Disposed { get; private set; } = false;
     #endregion
 
     #region IDisposable
@@ -80,14 +75,23 @@ namespace UAOOI.Networking.DataLogger
       ReferenceApplicationEventSource.Log.EnteringDispose(nameof(LoggerManagementSetup), disposing);
       m_onDispose(disposing);
       base.Dispose(disposing);
-      if (!disposing || Disposed)
+      if (!disposing || m_disposed)
         return;
-      Disposed = true;
+      m_disposed = true;
     }
     #endregion
 
     #region private
+    /// <summary>
+    /// Gets or sets the view model to be used for diagnostic purpose..
+    /// </summary>
+    /// <value>The view model.</value>
     private ConsumerViewModel m_ViewModel;
+    /// <summary>
+    /// Gets a value indicating whether this <see cref="LoggerManagementSetup"/> is disposed.
+    /// </summary>
+    /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
+    private bool m_disposed = false;
     private Action<bool> m_onDispose = disposing => { };
     private void Restart()
     {

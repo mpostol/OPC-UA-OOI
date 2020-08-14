@@ -30,8 +30,8 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
   [PartCreationPolicy(CreationPolicy.Shared)]
   public sealed class PartDataManagementSetup : DataManagementSetup, IProducerDataManagementSetup
   {
-
     #region Composition
+
     /// <seealso cref="DataManagementSetup" />
     public PartDataManagementSetup()
     {
@@ -43,9 +43,11 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       BindingFactory = new PartBindingFactory();
       MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
     }
+
     #endregion Composition
 
-    #region API
+    #region IProducerDataManagementSetup
+
     /// <summary>
     /// Setups this instance.
     /// </summary>
@@ -66,9 +68,11 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
         Dispose();
       }
     }
-    #endregion API
+
+    #endregion IProducerDataManagementSetup
 
     #region IDisposable
+
     /// <summary>
     /// Releases unmanaged and - optionally - managed resources.
     /// </summary>
@@ -81,61 +85,76 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
         return;
       m_disposed = true;
     }
+
     #endregion IDisposable
 
     #region private
+
     /// <summary>
     /// Gets or sets the view model to be used for diagnostic purpose..
     /// </summary>
     /// <value>The view model.</value>
     private ProducerViewModel m_ViewModel;
+
     /// <summary>
     /// Gets a value indicating whether this <see cref="LoggerManagementSetup"/> is disposed.
     /// </summary>
     /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
     private bool m_disposed = false;
+
     private Action<bool> m_onDispose = disposing => { };
+
     #endregion private
 
     #region Unit tests instrumentation
+
     [Conditional("DEBUG")]
     internal void DisposeCheck(Action<bool> onDispose)
     {
       m_onDispose = onDispose;
     }
+
     #endregion Unit tests instrumentation
 
     //TODO Implement DataManagementSetup #450
     private class PartConfigurationFactory : IConfigurationFactory
     {
-
       private readonly string _configurationFileName;
+
       public PartConfigurationFactory(string configurationFileName)
       {
         _configurationFileName = configurationFileName;
       }
 
       #region IConfigurationFactory
+
       public event EventHandler<EventArgs> OnAssociationConfigurationChange;
+
       public event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
+
       public ConfigurationData GetConfiguration()
       {
         throw new NotImplementedException();
       }
-      #endregion
+
+      #endregion IConfigurationFactory
     }
+
     private class PartBindingFactory : IBindingFactory
     {
       #region IBindingFactory
+
       public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
       {
         throw new NotImplementedException();
       }
+
       public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
       {
         throw new NotImplementedException();
       }
-      #endregion
+
+      #endregion IBindingFactory
     }
   }
 }

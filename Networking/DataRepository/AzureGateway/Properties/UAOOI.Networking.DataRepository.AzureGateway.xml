@@ -4,12 +4,43 @@
         <name>UAOOI.Networking.DataRepository.AzureGateway</name>
     </assembly>
     <members>
-        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureGatewayDataManagementSetup">
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup">
             <summary>
-            Class AzureGatewayDataManagementSetup.
+            Class AzureGatewayDataManagementSetup - represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer
+            This class cannot be inherited.
             Implements the <see cref="T:UAOOI.Networking.SemanticData.DataManagementSetup" />
+            Implements the <see cref="T:UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
             </summary>
             <seealso cref="T:UAOOI.Networking.SemanticData.DataManagementSetup" />
+            <seealso cref="T:UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup"/> class.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup.Setup">
+            <summary>
+            Setups this instance.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup.m_ViewModel">
+            <summary>
+            Gets or sets the view model to be used for diagnostic purpose..
+            </summary>
+            <value>The view model.</value>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup.m_disposed">
+            <summary>
+            Gets a value indicating whether this <see cref="!:LoggerManagementSetup"/> is disposed.
+            </summary>
+            <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
         </member>
     </members>
 </doc>

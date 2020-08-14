@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -16,16 +16,20 @@ using UAOOI.Networking.SemanticData;
 
 namespace UAOOI.Networking.Simulator.Boiler
 {
-
   /// <summary>
   /// Class SimulatorDataManagementSetup represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer.
+  /// This class cannot be inherited.
+  /// Implements the <see cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
+  /// Implements the <see cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
   /// </summary>
+  /// <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
+  /// <seealso cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
   [Export(typeof(IProducerDataManagementSetup))]
   [PartCreationPolicy(CreationPolicy.Shared)]
   public sealed class SimulatorDataManagementSetup : DataManagementSetup, IProducerDataManagementSetup
   {
-
     #region Composition
+
     /// <summary>
     /// Initializes a new instance of the <see cref="SimulatorDataManagementSetup"/> class.
     /// </summary>
@@ -39,9 +43,11 @@ namespace UAOOI.Networking.Simulator.Boiler
       BindingFactory = m_DataGenerator = new DataGenerator();
       MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
     }
-    #endregion
 
-    #region API
+    #endregion Composition
+
+    #region IProducerDataManagementSetup
+
     /// <summary>
     /// Setups this instance.
     /// </summary>
@@ -62,41 +68,55 @@ namespace UAOOI.Networking.Simulator.Boiler
         Dispose();
       }
     }
-    #endregion
+
+    #endregion IProducerDataManagementSetup
 
     #region IDisposable
+
     /// <summary>
     /// Releases unmanaged and - optionally - managed resources.
     /// </summary>
     /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
     protected override void Dispose(bool disposing)
     {
-
       m_onDispose(disposing);
       base.Dispose(disposing);
-      if (disposing)
-        m_DataGenerator.Dispose();
+      if (!disposing || m_disposed)
+        return;
+      m_disposed = true;
+      m_DataGenerator.Dispose();
     }
-    #endregion
+
+    #endregion IDisposable
 
     #region private
+
     /// <summary>
     /// Gets or sets the view model to be used for diagnostic purpose..
     /// </summary>
     /// <value>The view model.</value>
-    private UAOOI.Networking.ReferenceApplication.Core.ProducerViewModel m_ViewModel;
+    private ProducerViewModel m_ViewModel;
+
     private DataGenerator m_DataGenerator = null;
+
+    /// <summary>
+    /// Gets a value indicating whether this <see cref="LoggerManagementSetup"/> is disposed.
+    /// </summary>
+    /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
+    private bool m_disposed = false;
+
     private Action<bool> m_onDispose = disposing => { };
-    #endregion
+
+    #endregion private
 
     #region Unit tests instrumentation
+
     [Conditional("DEBUG")]
     internal void DisposeCheck(Action<bool> onDispose)
     {
       m_onDispose = onDispose;
     }
-    #endregion
 
+    #endregion Unit tests instrumentation
   }
-
 }

@@ -9,15 +9,17 @@ using CommonServiceLocator;
 using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using UAOOI.Configuration.Networking;
+using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.Core;
 using UAOOI.Networking.ReferenceApplication.Core;
-using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData;
+using UAOOI.Networking.SemanticData.DataRepository;
 
-namespace UAOOI.Networking.SimulatorInteroperabilityTest
+namespace UAOOI.Networking.DataRepository.AzureGateway
 {
   /// <summary>
-  /// Class SimulatorDataManagementSetup represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer.
+  /// Class AzureGatewayDataManagementSetup - represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer
   /// This class cannot be inherited.
   /// Implements the <see cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
   /// Implements the <see cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
@@ -26,21 +28,21 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
   /// <seealso cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
   [Export(typeof(IProducerDataManagementSetup))]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  public sealed class SimulatorDataManagementSetup : DataManagementSetup, IProducerDataManagementSetup
+  public sealed class PartDataManagementSetup : DataManagementSetup, IProducerDataManagementSetup
   {
     #region Composition
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="SimulatorDataManagementSetup" /> class.
+    /// Initializes a new instance of the <see cref="PartDataManagementSetup"/> class.
     /// </summary>
-    public SimulatorDataManagementSetup()
+    public PartDataManagementSetup()
     {
       IServiceLocator _serviceLocator = ServiceLocator.Current;
       string _configurationFileName = _serviceLocator.GetInstance<string>(CompositionSettings.ConfigurationFileNameContract);
       m_ViewModel = _serviceLocator.GetInstance<ProducerViewModel>();
-      ConfigurationFactory = new ProducerConfigurationFactory(_configurationFileName);
+      ConfigurationFactory = new PartConfigurationFactory(_configurationFileName);
       EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();
-      BindingFactory = m_DataGenerator = new DataGenerator();
+      BindingFactory = new PartBindingFactory();
       MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
     }
 
@@ -55,15 +57,15 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     {
       try
       {
-        ReferenceApplicationEventSource.Log.Initialization($"{nameof(SimulatorDataManagementSetup)}.{nameof(Setup)} starting");
+        //ReferenceApplicationEventSource.Log.Initialization($"{nameof(SimulatorDataManagementSetup)}.{nameof(Setup)} starting");
         m_ViewModel.ChangeProducerCommand(() => { m_ViewModel.ProducerErrorMessage = "Restarted"; });
         Start();
         m_ViewModel.ProducerErrorMessage = "Running";
-        ReferenceApplicationEventSource.Log.Initialization($" Setup of the producer engine has been accomplished and it starts sending data.");
+        //ReferenceApplicationEventSource.Log.Initialization($" Setup of the producer engine has been accomplished and it starts sending data.");
       }
       catch (Exception _ex)
       {
-        ReferenceApplicationEventSource.Log.LogException(_ex);
+        //ReferenceApplicationEventSource.Log.LogException(_ex);
         m_ViewModel.ProducerErrorMessage = "ERROR";
         Dispose();
       }
@@ -84,7 +86,6 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
       if (!disposing || m_disposed)
         return;
       m_disposed = true;
-      m_DataGenerator.Dispose();
     }
 
     #endregion IDisposable
@@ -103,7 +104,6 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
     private bool m_disposed = false;
 
-    private DataGenerator m_DataGenerator = null;
     private Action<bool> m_onDispose = disposing => { };
 
     #endregion private
@@ -117,5 +117,46 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     }
 
     #endregion Unit tests instrumentation
+
+    //TODO Implement DataManagementSetup #450
+    private class PartConfigurationFactory : IConfigurationFactory
+    {
+      private readonly string _configurationFileName;
+
+      public PartConfigurationFactory(string configurationFileName)
+      {
+        _configurationFileName = configurationFileName;
+      }
+
+      #region IConfigurationFactory
+
+      public event EventHandler<EventArgs> OnAssociationConfigurationChange;
+
+      public event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
+
+      public ConfigurationData GetConfiguration()
+      {
+        throw new NotImplementedException();
+      }
+
+      #endregion IConfigurationFactory
+    }
+
+    private class PartBindingFactory : IBindingFactory
+    {
+      #region IBindingFactory
+
+      public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
+      {
+        throw new NotImplementedException();
+      }
+
+      public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
+      {
+        throw new NotImplementedException();
+      }
+
+      #endregion IBindingFactory
+    }
   }
 }

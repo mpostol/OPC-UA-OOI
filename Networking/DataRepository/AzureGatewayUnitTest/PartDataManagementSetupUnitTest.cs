@@ -8,6 +8,7 @@
 using CommonServiceLocator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using UAOOI.Networking.SemanticData;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway.Test
 {
@@ -18,7 +19,9 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test
     public void ConstructorTest()
     {
       Mock<ServiceLocatorImplBase> _ServiceLocatorProviderMocq = new Mock<ServiceLocatorImplBase>();
+      Mock<IEncodingFactory> _IEncodingFactoryMock = new Mock<IEncodingFactory>();
       ServiceLocator.SetLocatorProvider(() => _ServiceLocatorProviderMocq.Object);
+      _ServiceLocatorProviderMocq.Setup(x => x.GetInstance<IEncodingFactory>()).Returns(_IEncodingFactoryMock.Object);
       bool _disposingFlag = false;
       int _dosposingCount = 0;
       using (PartDataManagementSetup _newInstance = new PartDataManagementSetup())
@@ -26,7 +29,8 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test
         _newInstance.DisposeCheck(x => { _disposingFlag = x; _dosposingCount++; });
         Assert.IsNotNull(_newInstance.BindingFactory);
         Assert.IsNotNull(_newInstance.ConfigurationFactory);
-        Assert.IsNull(_newInstance.EncodingFactory);
+        Assert.IsNotNull(_newInstance.EncodingFactory);
+        Assert.AreSame(_IEncodingFactoryMock.Object, _newInstance.EncodingFactory);
         Assert.IsNull(_newInstance.MessageHandlerFactory);
         ServiceLocator.SetLocatorProvider(() => null);
       }

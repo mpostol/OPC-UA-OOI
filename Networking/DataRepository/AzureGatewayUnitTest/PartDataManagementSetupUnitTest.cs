@@ -8,6 +8,7 @@
 using CommonServiceLocator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using UAOOI.Networking.Core;
 using UAOOI.Networking.SemanticData;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway.Test
@@ -18,10 +19,12 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test
     [TestMethod]
     public void ConstructorTest()
     {
-      Mock<ServiceLocatorImplBase> _ServiceLocatorProviderMocq = new Mock<ServiceLocatorImplBase>();
-      Mock<IEncodingFactory> _IEncodingFactoryMock = new Mock<IEncodingFactory>();
-      ServiceLocator.SetLocatorProvider(() => _ServiceLocatorProviderMocq.Object);
-      _ServiceLocatorProviderMocq.Setup(x => x.GetInstance<IEncodingFactory>()).Returns(_IEncodingFactoryMock.Object);
+      Mock<ServiceLocatorImplBase> _ServiceLocatorProviderMock = new Mock<ServiceLocatorImplBase>();
+      Mock<IEncodingFactory> _EncodingFactoryMock = new Mock<IEncodingFactory>();
+      Mock<IMessageHandlerFactory> _MessageHandlerFactoryMock = new Mock<IMessageHandlerFactory>();
+      _ServiceLocatorProviderMock.Setup(x => x.GetInstance<IEncodingFactory>()).Returns(_EncodingFactoryMock.Object);
+      _ServiceLocatorProviderMock.Setup(y => y.GetInstance<IMessageHandlerFactory>()).Returns(_MessageHandlerFactoryMock.Object);
+      ServiceLocator.SetLocatorProvider(() => _ServiceLocatorProviderMock.Object);
       bool _disposingFlag = false;
       int _dosposingCount = 0;
       using (PartDataManagementSetup _newInstance = new PartDataManagementSetup())
@@ -30,8 +33,9 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test
         Assert.IsNotNull(_newInstance.BindingFactory);
         Assert.IsNotNull(_newInstance.ConfigurationFactory);
         Assert.IsNotNull(_newInstance.EncodingFactory);
-        Assert.AreSame(_IEncodingFactoryMock.Object, _newInstance.EncodingFactory);
-        Assert.IsNull(_newInstance.MessageHandlerFactory);
+        Assert.AreSame(_EncodingFactoryMock.Object, _newInstance.EncodingFactory);
+        Assert.IsNotNull(_newInstance.MessageHandlerFactory);
+        Assert.AreSame(_MessageHandlerFactoryMock.Object, _newInstance.MessageHandlerFactory);
         ServiceLocator.SetLocatorProvider(() => null);
       }
       Assert.AreEqual<int>(1, _dosposingCount);

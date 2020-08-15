@@ -35,13 +35,15 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     public PartDataManagementSetup()
     {
       IServiceLocator _serviceLocator = ServiceLocator.Current;
-      string _configurationFileName = _serviceLocator.GetInstance<string>(CompositionSettings.ConfigurationFileNameContract);
+      //string _configurationFileName = _serviceLocator.GetInstance<string>(CompositionSettings.ConfigurationFileNameContract);
       m_ViewModel = _serviceLocator.GetInstance<ProducerViewModel>();
-      ConfigurationFactory = new PartConfigurationFactory(_configurationFileName);
+      ConfigurationFactory = new PartConfigurationFactory(ConfigurationFilePath);
       EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();
       BindingFactory = new PartBindingFactory();
       MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
     }
+
+    internal static string ConfigurationFilePath { get; set; } = @"ConfigurationDataConsumer.BoilersSet.xml";
 
     #endregion Composition
 

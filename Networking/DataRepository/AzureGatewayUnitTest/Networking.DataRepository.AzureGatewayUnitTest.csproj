@@ -86,6 +86,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Infrastructure\Common.Infrastructure.csproj">
+      <Project>{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}</Project>
+      <Name>Common.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Configuration\Networking\Configuration.Networking.csproj">
       <Project>{E28E0880-03AA-4D1B-A820-41B04E766019}</Project>
       <Name>Configuration.Networking</Name>
@@ -106,6 +110,11 @@
       <Project>{3f5cbb26-9142-4e55-8de5-5baf0c3ea1ce}</Project>
       <Name>Networking.DataRepository.AzureGateway</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestingData\ConfigurationDataConsumer.BoilersSet.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

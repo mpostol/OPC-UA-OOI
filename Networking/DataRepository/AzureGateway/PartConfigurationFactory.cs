@@ -5,32 +5,74 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using CommonServiceLocator;
 using System;
+using System.Diagnostics;
+using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway
 {
-  internal class PartConfigurationFactory : IConfigurationFactory
+  /// <summary>
+  /// Class ProducerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase{T}" /> for the producer.
+  /// Implements the <see cref="ConfigurationFactoryBase{T}" />
+  /// </summary>
+  /// <seealso cref="ConfigurationFactoryBase{T}" />
+  internal class PartConfigurationFactory : ConfigurationFactoryBase<ConfigurationData>
   {
-    private readonly string _configurationFileName;
+    #region constructor
 
-    public PartConfigurationFactory(string configurationFileName)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PartConfigurationFactory" /> class.
+    /// </summary>
+    /// <param name="configurationFileName">Name of the producer configuration file.</param>
+    public PartConfigurationFactory(string configurationFileName) : base(configurationFileName)
     {
-      _configurationFileName = configurationFileName;
+      //TODO Create and Register the EventSource #455
+      IServiceLocator _serviceLocator = ServiceLocator.Current;
+      _TraceSource = _serviceLocator.GetInstance<ITraceSource>();
+      _TraceSource.TraceData(TraceEventType.Information, 36, $"Starting {nameof(PartConfigurationFactory)} with the configuration file name {configurationFileName}");
     }
 
-    #region IConfigurationFactory
+    #endregion constructor
 
-    public event EventHandler<EventArgs> OnAssociationConfigurationChange;
+    #region ConfigurationFactoryBase
 
-    public event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
+    /// <summary>
+    /// Occurs after the association configuration has been changed.
+    /// </summary>
+    public override event EventHandler<EventArgs> OnAssociationConfigurationChange;
 
-    public ConfigurationData GetConfiguration()
+    /// <summary>
+    /// Occurs after the communication configuration has been changed.
+    /// </summary>
+    public override event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
+
+    /// <summary>
+    /// Writes trace data to the trace listeners in the <see cref="P:System.Diagnostics.TraceSource.Listeners" /> collection using the specified <paramref name="eventType" />,
+    /// event identifier <paramref name="id" />, and trace <paramref name="data" />.
+    /// </summary>
+    /// <param name="eventType">One of the enumeration values that specifies the event type of the trace data.</param>
+    /// <param name="id">A numeric identifier for the event.</param>
+    /// <param name="data">The trace data.</param>
+    protected override void TraceData(TraceEventType eventType, int id, object data)
     {
-      throw new NotImplementedException();
+      _TraceSource.TraceData(eventType, id, data);
     }
 
-    #endregion IConfigurationFactory
+    protected override void RaiseEvents()
+    {
+      OnAssociationConfigurationChange?.Invoke(this, EventArgs.Empty);
+      OnMessageHandlerConfigurationChange?.Invoke(this, EventArgs.Empty);
+    }
+
+    #endregion ConfigurationFactoryBase
+
+    #region private
+
+    private ITraceSource _TraceSource = null;
+
+    #endregion private
   }
 }

@@ -28,4 +28,10 @@
     <ProjectReference Include="..\..\SemanticData\Networking.SemanticData.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="ConfigurationDataConsumer.BoilersSet.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

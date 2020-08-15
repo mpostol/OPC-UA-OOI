@@ -153,7 +153,13 @@ In the `Networking.Simulator.Boiler` project `DataManagementSetup` class is impl
 
 ### How to: Implement `IConfigurationFactory`
 
-Definition of the interface `UAOOI.Configuration.Networking.IConfigurationFactory` is located in the [`UAOOI.Configuration.Networking`](../../Configuration/Networking/README.MD) library. This library also contains the class `UAOOI.Configuration.Networking.ConfigurationFactoryBase` that is a base implementation of this interface. This class must be overridden by a custom class designed according to the user application custom requirements.
+Definition of the interface `UAOOI.Configuration.Networking.IConfigurationFactory` is located in the [`UAOOI.Configuration.Networking`](../../Configuration/Networking/README.MD) library. This library also contains the class `UAOOI.Configuration.Networking.ConfigurationFactoryBase` that is a base implementation of this interface. This class may be overridden by a custom class designed according to the user application custom requirements.
+
+>Notes for implementers
+>
+>- If you need a special loading procedure you must use the parameterless constructor of the `ConfigurationFactoryBase` and assign a new loader method to the `ConfigurationFactoryBase.Loader` property, alternatively embedded loader will be used to open the configuration file using the `filePath` provided in the constructor.
+>- The derived class must override an abstract method `RaiseEvents` called on the configuration change.
+>- The embedded configuration loading method uses `System.IO.FileInfo` to test if the file exists. 
 
 Example implementations of this class are in [`Producer`](../../Networking/SimulatorInteroperabilityTest/README.md) and [`Consumer`](./../../Networking/DataLogger/README.md).
 

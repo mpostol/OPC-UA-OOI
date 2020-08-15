@@ -13,7 +13,6 @@ using UAOOI.Networking.Simulator.Boiler.UnitTest.CommonServiceLocatorInstrumenta
 
 namespace UAOOI.Networking.Simulator.Boiler.UnitTest
 {
-
   [DeploymentItem(@"ConfigurationDataProducer.BoilersSet.xml")]
   [TestClass]
   public class ProducerConfigurationFactoryUnitTest
@@ -21,7 +20,6 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest
     [TestMethod]
     public void ConstructorTestMethod1()
     {
-
       int LogStartPosition = Logger.Singleton.TraceLogList.Count;
       FileInfo _configurationFile = new FileInfo(m_configurationFileName);
       Assert.IsTrue(_configurationFile.Exists, $"There is no file in path {_configurationFile.FullName}");
@@ -35,18 +33,21 @@ namespace UAOOI.Networking.Simulator.Boiler.UnitTest
       Assert.IsNull(_configuration.TypeDictionaries);
       int LogEndPosition = Logger.Singleton.TraceLogList.Count;
       Assert.AreEqual<int>(2, LogEndPosition - LogStartPosition, $"Current number of log entries is {LogEndPosition - LogStartPosition}");
-
     }
 
     #region instrumentation
+
     private const string m_configurationFileName = "ConfigurationDataProducer.BoilersSet.xml";
+
     private class TestProducerConfigurationFactory : ProducerConfigurationFactory
     {
-      public TestProducerConfigurationFactory(string configurationFileName) : base(configurationFileName) { }
-      internal new Func<ConfigurationData> Loader { get { return base.Loader; } set { base.Loader = value; } }
+      public TestProducerConfigurationFactory(string configurationFileName) : base(configurationFileName)
+      {
+      }
 
+      internal new Func<ConfigurationData> Loader { get => base.Loader; set => base.Loader = value; }
     }
-    #endregion
 
+    #endregion instrumentation
   }
 }

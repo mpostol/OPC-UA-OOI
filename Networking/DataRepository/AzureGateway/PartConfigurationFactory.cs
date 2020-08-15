@@ -62,7 +62,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
 
     #region private
 
-    private readonly string _configurationFileName;
     private ITraceSource _TraceSource = null;
 
     #endregion private

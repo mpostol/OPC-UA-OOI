@@ -4,6 +4,27 @@
         <name>UAOOI.Networking.DataRepository.AzureGateway</name>
     </assembly>
     <members>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.PartConfigurationFactory">
+            <summary>
+            Class ProducerConfigurationFactory - provides implementation of the <see cref="T:UAOOI.Configuration.Networking.ConfigurationFactoryBase`1"/> for the producer.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.PartConfigurationFactory.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.PartConfigurationFactory" /> class.
+            </summary>
+            <param name="configurationFileName">Name of the producer configuration file.</param>
+        </member>
+        <member name="E:UAOOI.Networking.DataRepository.AzureGateway.PartConfigurationFactory.OnAssociationConfigurationChange">
+            <summary>
+            Occurs after the association configuration has been changed.
+            </summary>
+        </member>
+        <member name="E:UAOOI.Networking.DataRepository.AzureGateway.PartConfigurationFactory.OnMessageHandlerConfigurationChange">
+            <summary>
+            Occurs after the communication configuration has been changed.
+            </summary>
+        </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup">
             <summary>
             Class AzureGatewayDataManagementSetup - represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer

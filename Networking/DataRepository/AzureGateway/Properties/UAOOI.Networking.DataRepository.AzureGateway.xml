@@ -4,6 +4,30 @@
         <name>UAOOI.Networking.DataRepository.AzureGateway</name>
     </assembly>
     <members>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.PartBindingFactory.GetConsumerBinding(System.String,System.String,UAOOI.Configuration.Networking.Serialization.UATypeInfo)">
+            <summary>
+            Gets the binding captured by an instance of the <see cref="T:UAOOI.Networking.SemanticData.DataRepository.IConsumerBinding" /> type used by the consumer to save the data in the data repository.
+            </summary>
+            <param name="repositoryGroup">It is the name of a repository group profiling the configuration behavior, e.g. encoders selection.
+            The configuration of the repositories belonging to the same group are handled according to the same profile.</param>
+            <param name="processValueName">The name of a variable that is the ultimate destination of the values recovered from messages.
+            Must be unique in the context of the group named by <paramref name="repositoryGroup" />.</param>
+            <param name="fieldTypeInfo">The field metadata definition represented as an object of <see cref="T:UAOOI.Configuration.Networking.Serialization.UATypeInfo" />.</param>
+            <returns>Returns an object implementing the <see cref="T:UAOOI.Networking.SemanticData.DataRepository.IConsumerBinding" /> interface that can be used to update selected variable on the factory side.</returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.PartBindingFactory.GetProducerBinding(System.String,System.String,UAOOI.Configuration.Networking.Serialization.UATypeInfo)">
+            <summary>
+            Gets the binding captured by an instance of the <see cref="T:UAOOI.Networking.SemanticData.DataRepository.IProducerBinding" /> type used by the producer to read from the local data repository.
+            </summary>
+            <param name="repositoryGroup">It is the name of a repository group profiling the configuration behavior, e.g. encoders selection.
+            The configuration of the repositories belonging to the same group are handled according to the same profile.</param>
+            <param name="processValueName">The name of a variable that is the source of the values forwarded by a message over the network.
+            Must be unique in the context of the group named by <paramref name="repositoryGroup" /></param>
+            <param name="fieldTypeInfo">The <see cref="T:UAOOI.Configuration.Networking.Serialization.BuiltInType" />of the message field encoding.</param>
+            <returns>Returns an object implementing the <see cref="T:UAOOI.Networking.SemanticData.DataRepository.IProducerBinding" /> interface that can be used to create message and populate it with the data.</returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.PartConfigurationFactory">
             <summary>
             Class ProducerConfigurationFactory - provides implementation of the <see cref="T:UAOOI.Configuration.Networking.ConfigurationFactoryBase`1" /> for the producer.

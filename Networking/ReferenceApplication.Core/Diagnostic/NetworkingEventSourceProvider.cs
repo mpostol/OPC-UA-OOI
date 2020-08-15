@@ -15,7 +15,7 @@ namespace UAOOI.Networking.ReferenceApplication.Core.Diagnostic
   /// <summary>
   /// Class NetworkingEventSourceProvider - gets access to an instance of <see cref="EventSource"/> to be registered by the logging infrastructure.
   /// </summary>
-  /// <seealso cref="UAOOI.Networking.SemanticData.Diagnostics.INetworkingEventSourceProvider" />
+  /// <seealso cref="INetworkingEventSourceProvider" />
   [Export(typeof(INetworkingEventSourceProvider))]
   public class NetworkingEventSourceProvider : INetworkingEventSourceProvider
   {

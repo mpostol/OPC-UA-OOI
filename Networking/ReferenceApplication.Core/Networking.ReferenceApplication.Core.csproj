@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
+    <ProjectReference Include="..\Core\Networking.Core.csproj" />
   </ItemGroup>
 
 </Project>

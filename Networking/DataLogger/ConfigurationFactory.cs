@@ -14,8 +14,10 @@ using UAOOI.Configuration.Networking.Serializers;
 namespace UAOOI.Networking.DataLogger
 {
   /// <summary>
-  /// Class ConsumerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase{onfigurationData}"/> for the UA Data consumer.
+  /// Class ConsumerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase{T}" /> for the UA Data consumer.
+  /// Implements the <see cref="ConfigurationFactoryBase{T}" />
   /// </summary>
+  /// <seealso cref="ConfigurationFactoryBase{T}" />
   /// <remarks>In production environment it shall be replaced by reading a configuration file.</remarks>
   internal class ConsumerConfigurationFactory : ConfigurationFactoryBase<ConfigurationData>
   {

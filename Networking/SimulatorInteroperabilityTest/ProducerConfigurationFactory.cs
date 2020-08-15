@@ -14,9 +14,10 @@ using UAOOI.Configuration.Networking.Serializers;
 namespace UAOOI.Networking.SimulatorInteroperabilityTest
 {
   /// <summary>
-  /// Class ProducerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase{ConfigurationData}" /> for the producer.
+  /// Class ProducerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase{T}" /> for the producer.
+  /// Implements the <see cref="ConfigurationFactoryBase{T}" />
   /// </summary>
-  /// <seealso cref="ConfigurationFactoryBase{ConfigurationData}" />
+  /// <seealso cref="ConfigurationFactoryBase{T}" />
   internal class ProducerConfigurationFactory : ConfigurationFactoryBase<ConfigurationData>
   {
     #region constructor
@@ -32,7 +33,6 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
       m_ProducerConfigurationFileName = configurationFileName;
       Loader = LoadConfig;
       //TODO Create and Register the EventSource #455
-
     }
 
     #endregion constructor
@@ -49,6 +49,12 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     /// </summary>
     public override event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
 
+    protected override void RaiseEvents()
+    {
+      OnAssociationConfigurationChange?.Invoke(this, EventArgs.Empty);
+      OnMessageHandlerConfigurationChange?.Invoke(this, EventArgs.Empty);
+    }
+
     #endregion ConfigurationFactoryBase
 
     #region private
@@ -59,12 +65,6 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
     {
       FileInfo _configurationFile = new FileInfo(m_ProducerConfigurationFileName);
       return ConfigurationDataFactoryIO.Load<ConfigurationData>(() => XmlDataContractSerializers.Load<ConfigurationData>(_configurationFile, (x, y, z) => { }), () => RaiseEvents());
-    }
-
-    protected override void RaiseEvents()
-    {
-      OnAssociationConfigurationChange?.Invoke(this, EventArgs.Empty);
-      OnMessageHandlerConfigurationChange?.Invoke(this, EventArgs.Empty);
     }
 
     #endregion private

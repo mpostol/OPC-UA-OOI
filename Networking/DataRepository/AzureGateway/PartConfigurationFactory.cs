@@ -15,8 +15,10 @@ using UAOOI.Configuration.Networking.Serialization;
 namespace UAOOI.Networking.DataRepository.AzureGateway
 {
   /// <summary>
-  /// Class ProducerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase{T}"/> for the producer.
+  /// Class ProducerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase{T}" /> for the producer.
+  /// Implements the <see cref="ConfigurationFactoryBase{T}" />
   /// </summary>
+  /// <seealso cref="ConfigurationFactoryBase{T}" />
   internal class PartConfigurationFactory : ConfigurationFactoryBase<ConfigurationData>
   {
     #region constructor
@@ -27,8 +29,8 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// <param name="configurationFileName">Name of the producer configuration file.</param>
     public PartConfigurationFactory(string configurationFileName) : base(configurationFileName)
     {
-      IServiceLocator _serviceLocator = ServiceLocator.Current;
       //TODO Create and Register the EventSource #455
+      IServiceLocator _serviceLocator = ServiceLocator.Current;
       _TraceSource = _serviceLocator.GetInstance<ITraceSource>();
       _TraceSource.TraceData(TraceEventType.Information, 36, $"Starting {nameof(PartConfigurationFactory)} with the configuration file name {configurationFileName}");
     }
@@ -47,6 +49,13 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// </summary>
     public override event EventHandler<EventArgs> OnMessageHandlerConfigurationChange;
 
+    /// <summary>
+    /// Writes trace data to the trace listeners in the <see cref="P:System.Diagnostics.TraceSource.Listeners" /> collection using the specified <paramref name="eventType" />,
+    /// event identifier <paramref name="id" />, and trace <paramref name="data" />.
+    /// </summary>
+    /// <param name="eventType">One of the enumeration values that specifies the event type of the trace data.</param>
+    /// <param name="id">A numeric identifier for the event.</param>
+    /// <param name="data">The trace data.</param>
     protected override void TraceData(TraceEventType eventType, int id, object data)
     {
       _TraceSource.TraceData(eventType, id, data);

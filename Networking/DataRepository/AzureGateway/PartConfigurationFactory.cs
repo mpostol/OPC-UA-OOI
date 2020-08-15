@@ -31,7 +31,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       //TODO Create and Register the EventSource #455
       _TraceSource = _serviceLocator.GetInstance<ITraceSource>();
       _TraceSource.TraceData(TraceEventType.Information, 36, $"Starting {nameof(PartConfigurationFactory)} with the configuration file name {configurationFileName}");
-      _configurationFileName = configurationFileName;
     }
 
     #endregion constructor

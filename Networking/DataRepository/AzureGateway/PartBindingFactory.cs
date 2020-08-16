@@ -182,7 +182,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       //variable.bleble = sender.Value;
     }
 
-    private readonly Dictionary<string, dynamic> _processReplica = new Dictionary<string, dynamic>();
+    private readonly Dictionary<string, RepositoryGroup> _processReplica = new Dictionary<string, RepositoryGroup>();
 
     private IConsumerBinding AddBinding<type>(string variableName, UATypeInfo typeInfo)
     {

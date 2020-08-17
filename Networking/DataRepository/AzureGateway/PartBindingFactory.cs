@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
@@ -37,107 +36,107 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       {
         case BuiltInType.Boolean:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<bool>(processValueName, fieldTypeInfo);
+            _return = AddBinding<bool>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<bool[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<bool[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.SByte:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<sbyte>(processValueName, fieldTypeInfo);
+            _return = AddBinding<sbyte>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<sbyte[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<sbyte[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.Byte:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<byte>(processValueName, fieldTypeInfo);
+            _return = AddBinding<byte>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<byte[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<byte[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.Int16:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<short>(processValueName, fieldTypeInfo);
+            _return = AddBinding<short>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<short[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<short[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.UInt16:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<ushort>(processValueName, fieldTypeInfo);
+            _return = AddBinding<ushort>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<ushort[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<ushort[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.Int32:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<int>(processValueName, fieldTypeInfo);
+            _return = AddBinding<int>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<int[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<int[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.UInt32:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<uint>(processValueName, fieldTypeInfo);
+            _return = AddBinding<uint>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<uint[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<uint[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.Int64:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<long>(processValueName, fieldTypeInfo);
+            _return = AddBinding<long>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<long[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<long[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.UInt64:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<ulong>(processValueName, fieldTypeInfo);
+            _return = AddBinding<ulong>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<ulong[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<ulong[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.Float:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<float>(processValueName, fieldTypeInfo);
+            _return = AddBinding<float>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<float[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<float[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.Double:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<double>(processValueName, fieldTypeInfo);
+            _return = AddBinding<double>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<double[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<double[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.String:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<string>(processValueName, fieldTypeInfo);
+            _return = AddBinding<string>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<string[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<string[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.DateTime:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<DateTime>(processValueName, fieldTypeInfo);
+            _return = AddBinding<DateTime>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<DateTime[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<DateTime[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.Guid:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<Guid>(processValueName, fieldTypeInfo);
+            _return = AddBinding<Guid>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<Guid[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<Guid[]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.ByteString:
           if (fieldTypeInfo.ValueRank < 0)
-            _return = AddBinding<byte[]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<byte[]>(repositoryGroup, processValueName, fieldTypeInfo);
           else
-            _return = AddBinding<byte[][]>(processValueName, fieldTypeInfo);
+            _return = AddBinding<byte[][]>(repositoryGroup, processValueName, fieldTypeInfo);
           break;
 
         case BuiltInType.Null:
@@ -175,19 +174,26 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
 
     #endregion IBindingFactory
 
-    #region private
+    #region API
 
-    internal void PropertyChangedEventHandler<type>(dynamic variable, ConsumerBindingMonitoredValue<type> sender, PropertyChangedEventArgs e)
+    internal dynamic GetDTO(string repositoryGroup)
     {
-      //variable.bleble = sender.Value;
+      return _processReplica[repositoryGroup];
     }
+
+    #endregion API
+
+    #region private
 
     private readonly Dictionary<string, RepositoryGroup> _processReplica = new Dictionary<string, RepositoryGroup>();
 
-    private IConsumerBinding AddBinding<type>(string variableName, UATypeInfo typeInfo)
+    private IConsumerBinding AddBinding<type>(string repositoryGroup, string variableName, UATypeInfo typeInfo)
     {
       ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(typeInfo);
-      //_return.PropertyChanged += (x, y) => m_ViewModel.Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).ToString()}");
+      if (!_processReplica.ContainsKey(repositoryGroup))
+        _processReplica.Add(repositoryGroup, new RepositoryGroup());
+      Action<type> _updater = _processReplica[repositoryGroup].AddProperty<type>(variableName);
+      _return.PropertyChanged += (x, y) => _updater(((ConsumerBindingMonitoredValue<type>)x).Value);
       return _return;
     }
 

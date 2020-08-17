@@ -39,8 +39,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     {
       result = null;
       return false;
-      //result = GetPropertyValue(binder.Name);
-      //return result == null ? false : true;
     }
 
     public Action<type> AddProperty<type>(string propertyName)

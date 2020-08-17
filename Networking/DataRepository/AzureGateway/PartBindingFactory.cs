@@ -176,6 +176,11 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
 
     #region API
 
+    /// <summary>
+    /// Gets the Data Transfer Object to be transmitted to Azure.
+    /// </summary>
+    /// <param name="repositoryGroup">The repository group.</param>
+    /// <returns>dynamic.</returns>
     internal dynamic GetDTO(string repositoryGroup)
     {
       return _processReplica[repositoryGroup];

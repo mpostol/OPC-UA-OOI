@@ -13,7 +13,14 @@ using UAOOI.Networking.SemanticData.DataRepository;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway
 {
-  internal class PartBindingFactory : IBindingFactory
+  /// <summary>
+  /// Class PartBindingFactory.
+  /// Implements the <see cref="UAOOI.Networking.SemanticData.IBindingFactory" />
+  /// Implements the <see cref="UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider" />
+  /// </summary>
+  /// <seealso cref="UAOOI.Networking.SemanticData.IBindingFactory" />
+  /// <seealso cref="UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider" />
+  internal class PartBindingFactory : IBindingFactory, IDTOProvider
   {
     #region IBindingFactory
 
@@ -174,19 +181,14 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
 
     #endregion IBindingFactory
 
-    #region API
+    #region IDTOProvider
 
-    /// <summary>
-    /// Gets the Data Transfer Object to be transmitted to Azure.
-    /// </summary>
-    /// <param name="repositoryGroup">The repository group.</param>
-    /// <returns>dynamic.</returns>
-    internal dynamic GetDTO(string repositoryGroup)
+    public dynamic GetDTO(string repositoryGroup)
     {
       return _processReplica[repositoryGroup];
     }
 
-    #endregion API
+    #endregion IDTOProvider
 
     #region private
 

@@ -4,6 +4,29 @@
         <name>UAOOI.Networking.DataRepository.AzureGateway</name>
     </assembly>
     <members>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.CommunicationContext">
+            <summary>
+            Class CommunicationContext - implements Azure communication state machine.
+            Implements the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IStateBase" />
+            </summary>
+            <seealso cref="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IStateBase" />
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider.GetDTO(System.String)">
+            <summary>
+            Gets the Data Transfer Object to be transmitted to Azure.
+            </summary>
+            <param name="repositoryGroup">The repository group.</param>
+            <returns>dynamic.</returns>
+        </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.PartBindingFactory">
+            <summary>
+            Class PartBindingFactory.
+            Implements the <see cref="T:UAOOI.Networking.SemanticData.IBindingFactory" />
+            Implements the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider" />
+            </summary>
+            <seealso cref="T:UAOOI.Networking.SemanticData.IBindingFactory" />
+            <seealso cref="T:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider" />
+        </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.PartBindingFactory.GetConsumerBinding(System.String,System.String,UAOOI.Configuration.Networking.Serialization.UATypeInfo)">
             <summary>
             Gets the binding captured by an instance of the <see cref="T:UAOOI.Networking.SemanticData.DataRepository.IConsumerBinding" /> type used by the consumer to save the data in the data repository.

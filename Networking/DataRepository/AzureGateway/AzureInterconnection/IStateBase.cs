@@ -5,16 +5,22 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using Microsoft.Azure.Devices.Provisioning.Client;
+using System.Threading.Tasks;
+
 namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 {
   internal interface IStateBase
   {
-    void Register();
+    Task<bool> Register();
 
-    void Connect();
+    Task<bool> Connect();
 
     void TransferData(IDTOProvider dataProvider, string repositoryGroup);
 
     void DisconnectRequest();
+
+    ProvisioningRegistrationStatusType GetProvisioningRegistrationStatusType { get; }
+
   }
 }

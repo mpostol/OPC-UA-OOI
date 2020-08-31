@@ -11,6 +11,51 @@
             </summary>
             <seealso cref="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IStateBase" />
         </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters">
+            <summary>
+            Interface defining device parameters for establishing azure connection.
+            </summary>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.TransportType">
+            <summary>
+            Gets the transport type used for this device.
+            </summary>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.AzureDeviceId">
+            <summary>
+            Gets the Id corresponding to Azure device id.
+            </summary>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.AzureScopeId">
+            <summary>
+            Gets the azure scope id in which given device resides.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.GetSecurityProviderAsync">
+            <summary>
+            Creates security client which will be used for device provisioning.
+            </summary>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureEnabledNetworkDevice.AzureDeviceParameters">
+            <summary>
+            Gets required connection parameters for establishing azure connection.
+            </summary>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureEnabledNetworkDevice.DeviceClient">
+            <summary>
+            Gets or sets the device client. Will be updated upon successful registration.
+            </summary>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureEnabledNetworkDevice.PublishingInterval">
+            <summary>
+            Gets the time interval when to send device state to Azure.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureEnabledNetworkDevice.CreateMessagePayload">
+            <summary>
+            Returns JSON payload which will be passed to Azure.
+            </summary>
+        </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider.GetDTO(System.String)">
             <summary>
             Gets the Data Transfer Object to be transmitted to Azure.

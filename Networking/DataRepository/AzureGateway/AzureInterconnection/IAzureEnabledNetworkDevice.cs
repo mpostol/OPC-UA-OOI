@@ -18,11 +18,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
     IAzureDeviceParameters AzureDeviceParameters { get; }
 
     /// <summary>
-    /// Gets or sets the device client. Will be updated upon successful registration.
-    /// </summary>
-    DeviceClient DeviceClient { get; set; }
-
-    /// <summary>
     /// Gets the time interval when to send device state to Azure.
     /// </summary>
     TimeSpan PublishingInterval { get; }

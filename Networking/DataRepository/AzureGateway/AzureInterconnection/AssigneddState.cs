@@ -52,7 +52,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       }
       DeviceClient = DeviceClient.Create(DeviceRegistrationResult.AssignedHub, auth, AzureEnabledNetworkDevice.AzureDeviceParameters.TransportType);
       await DeviceClient.OpenAsync().ConfigureAwait(false);
-      AzureEnabledNetworkDevice.DeviceClient = DeviceClient;
       return true;
     }
 
@@ -61,7 +60,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       throw new NotImplementedException();
     }
 
-    public override async Task<bool> Register()
+    public override async Task<bool> Register(IAzureEnabledNetworkDevice device)
     {
       throw new NotImplementedException();
     }

@@ -17,6 +17,7 @@
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <DelaySign>false</DelaySign>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

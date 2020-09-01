@@ -23,37 +23,37 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
   {
     #region constructor
 
-    internal CommunicationContext(StateBase state, ILogger<CommunicationContext> logger)
+    internal CommunicationContext(ILogger<CommunicationContext> logger)
     {
       _Logger = logger;
-      SetContext(state);
+      _currentState = new UnassignedState(this);
     }
 
     #endregion constructor
 
     #region IStateBase
 
-    public async Task<bool> Register()
+    public async Task<bool> Register(IAzureEnabledNetworkDevice device)
     {
-      return await _currenyState.Register();
+      return await _currentState.Register(device);
     }
 
     public async Task<bool> Connect()
     {
-      return await _currenyState.Connect();
+      return await _currentState.Connect();
     }
 
     public void TransferData(IDTOProvider dataProvider, string repositoryGroup)
     {
-      _currenyState.TransferData(dataProvider, repositoryGroup);
+      _currentState.TransferData(dataProvider, repositoryGroup);
     }
 
     public void DisconnectRequest()
     {
-      _currenyState.DisconnectRequest();
+      _currentState.DisconnectRequest();
     }
 
-    public ProvisioningRegistrationStatusType GetProvisioningRegistrationStatusType => _currenyState.GetProvisioningRegistrationStatusType;
+    public ProvisioningRegistrationStatusType GetProvisioningRegistrationStatusType => _currentState.GetProvisioningRegistrationStatusType;
 
     #endregion IStateBase
 
@@ -65,15 +65,14 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
       public StateBase(CommunicationContext communicationContext)
       {
-        _context = communicationContext;
-        SecurityProvider = null;
+        _paretContext = communicationContext;
       }
 
       #endregion constructors
 
       #region IStateBase
 
-      public abstract Task<bool> Register();
+      public abstract Task<bool> Register(IAzureEnabledNetworkDevice device);
 
       public abstract Task<bool> Connect();
 
@@ -87,28 +86,28 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
       protected void TransitionTo(StateBase state)
       {
-        _context.SetContext(this);
+        _paretContext.TransitionTo(state);
       }
 
-      protected CommunicationContext _context;
-      protected ILogger<CommunicationContext> Logger => _context._Logger;
-      protected SecurityProvider SecurityProvider { get => _context._security; set => _context._security = value; }
-      protected IAzureEnabledNetworkDevice AzureEnabledNetworkDevice { get => _context._device; set => _context._device = value; }
-      protected DeviceClient DeviceClient { get => _context._deviceClient; set => _context._deviceClient = value; }
-      protected DeviceRegistrationResult DeviceRegistrationResult { get => _context._provisioningResult; set => _context._provisioningResult = value; }
+      protected CommunicationContext _paretContext;
+      protected ILogger<CommunicationContext> Logger => _paretContext._Logger;
+      protected SecurityProvider SecurityProvider { get => _paretContext._security; set => _paretContext._security = value; }
+      protected IAzureEnabledNetworkDevice AzureEnabledNetworkDevice { get => _paretContext._device; set => _paretContext._device = value; }
+      protected DeviceClient DeviceClient { get => _paretContext._deviceClient; set => _paretContext._deviceClient = value; }
+      protected DeviceRegistrationResult DeviceRegistrationResult { get => _paretContext._provisioningResult; set => _paretContext._provisioningResult = value; }
     }
 
-    private void SetContext(StateBase stateBase)
-    {
-      _currenyState = stateBase;
-    }
-
-    private StateBase _currenyState = null;
+    private StateBase _currentState = null;
     private SecurityProvider _security;
     private readonly ILogger<CommunicationContext> _Logger;
     private IAzureEnabledNetworkDevice _device;
     private DeviceClient _deviceClient;
     private DeviceRegistrationResult _provisioningResult;
+
+    private void TransitionTo(StateBase stateBase)
+    {
+      _currentState = stateBase;
+    }
 
     #region IDisposable Support
 
@@ -116,31 +115,28 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     protected virtual void Dispose(bool disposing)
     {
-      if (!disposedValue)
+      if (disposedValue)
+        return;
+      if (disposing)
       {
-        if (disposing)
-        {
-          // TODO: dispose managed state (managed objects).
-          _security?.Dispose();
-          if (_deviceClient != null)
+        // TODO: dispose managed state (managed objects).
+        _security?.Dispose();
+        if (_deviceClient != null)
+          try
           {
-            try
-            {
-              Task _await = _deviceClient.CloseAsync();
-              _await.Wait();
-              _Logger.LogInformation($"Disposed azure connection.");
-            }
-            catch (Exception e)
-            {
-              _Logger.LogInformation($"Azure connection already disposed.");
-            }
+            Task _await = _deviceClient.CloseAsync();
+            _await.Wait();
+            _Logger.LogInformation($"Disposed azure connection.");
             _deviceClient.Dispose();
+            _deviceClient = null;
           }
-          _device.DeviceClient = null;
-        }
-        // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below. Set large fields to null.
-        disposedValue = true;
+          catch (Exception e)
+          {
+            _Logger.LogInformation($"Azure connection already disposed.");
+          }
       }
+      // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below. Set large fields to null.
+      disposedValue = true;
     }
 
     // This code added to correctly implement the disposable pattern.

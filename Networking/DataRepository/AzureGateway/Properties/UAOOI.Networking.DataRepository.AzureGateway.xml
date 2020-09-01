@@ -41,11 +41,6 @@
             Gets required connection parameters for establishing azure connection.
             </summary>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureEnabledNetworkDevice.DeviceClient">
-            <summary>
-            Gets or sets the device client. Will be updated upon successful registration.
-            </summary>
-        </member>
         <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureEnabledNetworkDevice.PublishingInterval">
             <summary>
             Gets the time interval when to send device state to Azure.

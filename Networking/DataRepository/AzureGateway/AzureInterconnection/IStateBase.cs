@@ -12,7 +12,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 {
   internal interface IStateBase
   {
-    Task<bool> Register();
+    Task<bool> Register(IAzureEnabledNetworkDevice device);
 
     Task<bool> Connect();
 
@@ -21,6 +21,5 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
     void DisconnectRequest();
 
     ProvisioningRegistrationStatusType GetProvisioningRegistrationStatusType { get; }
-
   }
 }

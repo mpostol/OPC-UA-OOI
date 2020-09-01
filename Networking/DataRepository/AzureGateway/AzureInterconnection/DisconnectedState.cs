@@ -17,9 +17,8 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 {
   internal class UnassignedState : CommunicationContext.StateBase
   {
-    public UnassignedState(IAzureEnabledNetworkDevice device, CommunicationContext communicationContext) : base(communicationContext)
+    public UnassignedState(CommunicationContext communicationContext) : base(communicationContext)
     {
-      AzureEnabledNetworkDevice = device;
     }
 
     #region CommunicationContext.StateBase
@@ -36,8 +35,9 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       throw new NotImplementedException();
     }
 
-    public override async Task<bool> Register()
+    public override async Task<bool> Register(IAzureEnabledNetworkDevice device)
     {
+      AzureEnabledNetworkDevice = device;
       Logger.LogDebug($"Opening {nameof(Connect)}. Obtaining security provider for the device.");
       SecurityProvider = await AzureEnabledNetworkDevice.AzureDeviceParameters.GetSecurityProviderAsync().ConfigureAwait(false);
       switch (AzureEnabledNetworkDevice.AzureDeviceParameters.TransportType)
@@ -83,8 +83,8 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
         case ProvisioningRegistrationStatusType.Assigning:
           throw new ArgumentOutOfRangeException($"{nameof(DeviceRegistrationResult.Status)} = {nameof(ProvisioningRegistrationStatusType.Assigning)}");
         case ProvisioningRegistrationStatusType.Assigned:
-          TransitionTo(new AssigneddState(_context));
-          return await _context.Connect();
+          TransitionTo(new AssigneddState(_paretContext));
+          return await _paretContext.Connect();
 
         case ProvisioningRegistrationStatusType.Failed:
         case ProvisioningRegistrationStatusType.Disabled:

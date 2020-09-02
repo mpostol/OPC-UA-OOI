@@ -25,19 +25,9 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     public override ProvisioningRegistrationStatusType GetProvisioningRegistrationStatusType => ProvisioningRegistrationStatusType.Unassigned;
 
-    public override async Task<bool> Connect()
-    {
-      throw new ApplicationException($"operation {nameof(Connect)} is not allowed in the {nameof(UnassignedState)}");
-    }
-
-    public override void DisconnectRequest()
-    {
-      throw new NotImplementedException();
-    }
-
     public override async Task<bool> Register(IAzureEnabledNetworkDevice device)
     {
-      AzureEnabledNetworkDevice = device;
+      AzureEnabledNetworkDevice = device ?? throw new ArgumentNullException($"{nameof(device)}");
       Logger.LogDebug($"Opening {nameof(Connect)}. Obtaining security provider for the device.");
       SecurityProvider = await AzureEnabledNetworkDevice.AzureDeviceParameters.GetSecurityProviderAsync().ConfigureAwait(false);
       switch (AzureEnabledNetworkDevice.AzureDeviceParameters.TransportType)
@@ -95,9 +85,19 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       return false;
     }
 
+    public override async Task<bool> Connect()
+    {
+      throw new ApplicationException($"The operation {nameof(Connect)} is not allowed in the {nameof(UnassignedState)}");
+    }
+
+    public override void DisconnectRequest()
+    {
+      throw new ApplicationException($"The operation {nameof(DisconnectRequest)} is not allowed in the {nameof(UnassignedState)}.");
+    }
+
     public override void TransferData(IDTOProvider dataProvider, string repositoryGroup)
     {
-      throw new NotImplementedException();
+      throw new ApplicationException($"The operation {nameof(TransferData)} is not allowed in the {nameof(UnassignedState)}");
     }
 
     #endregion CommunicationContext.StateBase
@@ -112,7 +112,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
     {
       _transport?.Dispose();
       //_timer?.DisposeAsync();
-
     }
 
     #endregion private

@@ -65,7 +65,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
       public StateBase(CommunicationContext communicationContext)
       {
-        _paretContext = communicationContext;
+        _paretContext = communicationContext ?? throw new ArgumentNullException($"{nameof(communicationContext)}");
       }
 
       #endregion constructors

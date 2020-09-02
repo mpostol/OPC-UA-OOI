@@ -1,4 +1,11 @@
-﻿using Microsoft.Azure.Devices.Provisioning.Client;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+using Microsoft.Azure.Devices.Provisioning.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -15,7 +22,14 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.AzureInterconnection
     public void ConstructorTest()
     {
       Mock<ILogger<CommunicationContext>> loggerFixture = new Mock<ILogger<CommunicationContext>>();
-      CommunicationContext _fixture = new CommunicationContext(loggerFixture.Object);
+      using (CommunicationContext _fixture = new CommunicationContext(loggerFixture.Object))
+      {
+        Assert.AreEqual<ProvisioningRegistrationStatusType>(ProvisioningRegistrationStatusType.Unassigned, _fixture.GetProvisioningRegistrationStatusType);
+        Assert.ThrowsException<AggregateException>(() => _fixture.Register(null).Wait());
+        Assert.ThrowsException<AggregateException>(() => _fixture.Connect().Wait());
+        Assert.ThrowsException<ApplicationException>(() => _fixture.TransferData(null, "Repository group"));
+        Assert.ThrowsException<AggregateException>(() => _fixture.Connect().Wait());
+      }
     }
 
     private class StateBaseFixture : CommunicationContext.StateBase

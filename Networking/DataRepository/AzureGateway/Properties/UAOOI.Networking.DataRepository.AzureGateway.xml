@@ -46,11 +46,6 @@
             Gets the time interval when to send device state to Azure.
             </summary>
         </member>
-        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureEnabledNetworkDevice.CreateMessagePayload">
-            <summary>
-            Returns JSON payload which will be passed to Azure.
-            </summary>
-        </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider.GetDTO(System.String)">
             <summary>
             Gets the Data Transfer Object to be transmitted to Azure.

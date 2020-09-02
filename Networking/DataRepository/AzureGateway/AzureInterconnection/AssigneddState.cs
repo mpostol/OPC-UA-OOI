@@ -75,7 +75,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     public override void TransferData(IDTOProvider dataProvider, string repositoryGroup)
     {
-      throw new NotImplementedException();
+      throw new ApplicationException($"The operation {nameof(TransferData)} is not allowed in the {nameof(AssigneddState)}");
     }
 
     #endregion CommunicationContext.StateBase

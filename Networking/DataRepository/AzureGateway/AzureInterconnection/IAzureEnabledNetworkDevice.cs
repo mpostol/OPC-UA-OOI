@@ -22,10 +22,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
     /// </summary>
     TimeSpan PublishingInterval { get; }
 
-    /// <summary>
-    /// Returns JSON payload which will be passed to Azure.
-    /// </summary>
-    string CreateMessagePayload();
   }
 
 }

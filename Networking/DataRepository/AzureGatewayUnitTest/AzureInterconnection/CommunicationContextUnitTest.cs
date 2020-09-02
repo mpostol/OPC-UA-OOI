@@ -29,8 +29,19 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.AzureInterconnection
         Assert.ThrowsException<AggregateException>(() => _fixture.Connect().Wait());
         Assert.ThrowsException<ApplicationException>(() => _fixture.TransferData(null, "Repository group"));
         Assert.ThrowsException<AggregateException>(() => _fixture.Connect().Wait());
+        Assert.ThrowsException<ApplicationException>(() => _fixture.DisconnectRequest());
       }
     }
+
+    [TestMethod]
+    public void StateBaseTest()
+    {
+      Assert.ThrowsException<ArgumentNullException>(() => new StateBaseFixture(null));
+      Assert.ThrowsException<ArgumentNullException>(() => new UnassignedState(null));
+      Assert.ThrowsException<ArgumentNullException>(() => new AssigneddState(null));
+    }
+
+    #region instrumentation
 
     private class StateBaseFixture : CommunicationContext.StateBase
     {
@@ -60,5 +71,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.AzureInterconnection
         throw new NotImplementedException();
       }
     }
+
+    #endregion instrumentation
   }
 }

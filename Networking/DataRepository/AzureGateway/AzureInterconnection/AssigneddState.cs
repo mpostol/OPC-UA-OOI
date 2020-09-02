@@ -30,28 +30,36 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     public override async Task<bool> Connect()
     {
-      Logger.LogDebug("Successfully provisioned device. Creating client.");
-      IAuthenticationMethod auth;
-      switch (SecurityProvider)
+      try
       {
-        case SecurityProviderTpm tpmSecurity:
-          auth = new DeviceAuthenticationWithTpm(AzureEnabledNetworkDevice.AzureDeviceParameters.AzureDeviceId, tpmSecurity);
-          break;
+        Logger.LogDebug("Successfully provisioned device. Creating client.");
+        IAuthenticationMethod auth;
+        switch (SecurityProvider)
+        {
+          case SecurityProviderTpm tpmSecurity:
+            auth = new DeviceAuthenticationWithTpm(AzureEnabledNetworkDevice.AzureDeviceParameters.AzureDeviceId, tpmSecurity);
+            break;
 
-        case SecurityProviderX509 certificateSecurity:
-          auth = new DeviceAuthenticationWithX509Certificate(AzureEnabledNetworkDevice.AzureDeviceParameters.AzureDeviceId, certificateSecurity.GetAuthenticationCertificate());
-          break;
+          case SecurityProviderX509 certificateSecurity:
+            auth = new DeviceAuthenticationWithX509Certificate(AzureEnabledNetworkDevice.AzureDeviceParameters.AzureDeviceId, certificateSecurity.GetAuthenticationCertificate());
+            break;
 
-        case SecurityProviderSymmetricKey symmetricKeySecurity:
-          auth = new DeviceAuthenticationWithRegistrySymmetricKey(AzureEnabledNetworkDevice.AzureDeviceParameters.AzureDeviceId, symmetricKeySecurity.GetPrimaryKey());
-          break;
+          case SecurityProviderSymmetricKey symmetricKeySecurity:
+            auth = new DeviceAuthenticationWithRegistrySymmetricKey(AzureEnabledNetworkDevice.AzureDeviceParameters.AzureDeviceId, symmetricKeySecurity.GetPrimaryKey());
+            break;
 
-        default:
-          Logger.LogError("Specified security provider is unknown.");
-          throw new NotSupportedException("Unknown authentication type.");
+          default:
+            Logger.LogError("Specified security provider is unknown.");
+            throw new NotSupportedException("Unknown authentication type.");
+        }
+        DeviceClient = DeviceClient.Create(DeviceRegistrationResult.AssignedHub, auth, AzureEnabledNetworkDevice.AzureDeviceParameters.TransportType);
+        await DeviceClient.OpenAsync().ConfigureAwait(false);
       }
-      DeviceClient = DeviceClient.Create(DeviceRegistrationResult.AssignedHub, auth, AzureEnabledNetworkDevice.AzureDeviceParameters.TransportType);
-      await DeviceClient.OpenAsync().ConfigureAwait(false);
+      catch (Exception ex)
+      {
+        Logger.LogError($"Operation {nameof(Connect)} failed because of error {ex.Message}.");
+        return false;
+      }
       return true;
     }
 
@@ -62,7 +70,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     public override async Task<bool> Register(IAzureEnabledNetworkDevice device)
     {
-      throw new NotImplementedException();
+      throw new ApplicationException($"The operation {nameof(Register)} is not allowed in the {nameof(AssigneddState)}");
     }
 
     public override void TransferData(IDTOProvider dataProvider, string repositoryGroup)

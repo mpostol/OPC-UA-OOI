@@ -22,10 +22,11 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.AzureInterconnection
     public void ConstructorTest()
     {
       Mock<ILogger<CommunicationContext>> loggerFixture = new Mock<ILogger<CommunicationContext>>();
-      using (CommunicationContext _fixture = new CommunicationContext(loggerFixture.Object))
+      Mock<IAzureEnabledNetworkDevice> azureParametersFixture = new Mock<IAzureEnabledNetworkDevice>();
+      using (CommunicationContext _fixture = new CommunicationContext(azureParametersFixture.Object, loggerFixture.Object))
       {
         Assert.AreEqual<ProvisioningRegistrationStatusType>(ProvisioningRegistrationStatusType.Unassigned, _fixture.GetProvisioningRegistrationStatusType);
-        Assert.ThrowsException<AggregateException>(() => _fixture.Register(null).Wait());
+        Assert.ThrowsException<AggregateException>(() => _fixture.Register().Wait());
         Assert.ThrowsException<AggregateException>(() => _fixture.Connect().Wait());
         Assert.ThrowsException<ApplicationException>(() => _fixture.TransferData(null, "Repository group"));
         Assert.ThrowsException<AggregateException>(() => _fixture.Connect().Wait());
@@ -61,7 +62,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.AzureInterconnection
         throw new NotImplementedException();
       }
 
-      public override Task<bool> Register(IAzureEnabledNetworkDevice device)
+      public override Task<RegisterResult> Register()
       {
         throw new NotImplementedException();
       }

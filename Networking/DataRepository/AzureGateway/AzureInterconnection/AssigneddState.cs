@@ -68,9 +68,9 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       throw new NotImplementedException();
     }
 
-    public override async Task<bool> Register(IAzureEnabledNetworkDevice device)
+    public override async Task<RegisterResult> Register()
     {
-      throw new ApplicationException($"The operation {nameof(Register)} is not allowed in the {nameof(AssigneddState)}");
+      return await Task.FromException<RegisterResult>(new ApplicationException($"The operation {nameof(Register)} is not allowed in the {nameof(AssigneddState)}"));
     }
 
     public override void TransferData(IDTOProvider dataProvider, string repositoryGroup)

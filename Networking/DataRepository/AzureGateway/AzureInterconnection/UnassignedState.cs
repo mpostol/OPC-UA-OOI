@@ -25,47 +25,56 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     public override ProvisioningRegistrationStatusType GetProvisioningRegistrationStatusType => ProvisioningRegistrationStatusType.Unassigned;
 
-    public override async Task<bool> Register(IAzureEnabledNetworkDevice device)
+
+    public override async Task<RegisterResult> Register()
     {
-      AzureEnabledNetworkDevice = device ?? throw new ArgumentNullException($"{nameof(device)}");
       Logger.LogDebug($"Opening {nameof(Connect)}. Obtaining security provider for the device.");
-      SecurityProvider = await AzureEnabledNetworkDevice.AzureDeviceParameters.GetSecurityProviderAsync().ConfigureAwait(false);
-      switch (AzureEnabledNetworkDevice.AzureDeviceParameters.TransportType)
+      SecurityProvider = new SecurityProviderSymmetricKey
+        (AzureEnabledNetworkDevice.AzureDeviceParameters.AzureDeviceId, AzureEnabledNetworkDevice.AzureDeviceParameters.AzurePrimaryKey, AzureEnabledNetworkDevice.AzureDeviceParameters.AzureSecondaryKey);
+      ProvisioningTransportHandler _transport = null;
+      try
       {
-        case TransportType.Amqp:
-          _transport = new ProvisioningTransportHandlerAmqp();
-          break;
+        switch (AzureEnabledNetworkDevice.AzureDeviceParameters.TransportType)
+        {
+          case TransportType.Amqp:
+            _transport = new ProvisioningTransportHandlerAmqp();
+            break;
 
-        case TransportType.Http1:
-          _transport = new ProvisioningTransportHandlerHttp();
-          break;
+          case TransportType.Http1:
+            _transport = new ProvisioningTransportHandlerHttp();
+            break;
 
-        case TransportType.Amqp_WebSocket_Only:
-          _transport = new ProvisioningTransportHandlerAmqp(TransportFallbackType.WebSocketOnly);
-          break;
+          case TransportType.Amqp_WebSocket_Only:
+            _transport = new ProvisioningTransportHandlerAmqp(TransportFallbackType.WebSocketOnly);
+            break;
 
-        case TransportType.Amqp_Tcp_Only:
-          _transport = new ProvisioningTransportHandlerAmqp(TransportFallbackType.TcpOnly);
-          break;
+          case TransportType.Amqp_Tcp_Only:
+            _transport = new ProvisioningTransportHandlerAmqp(TransportFallbackType.TcpOnly);
+            break;
 
-        case TransportType.Mqtt:
-          _transport = new ProvisioningTransportHandlerMqtt();
-          break;
+          case TransportType.Mqtt:
+            _transport = new ProvisioningTransportHandlerMqtt();
+            break;
 
-        case TransportType.Mqtt_WebSocket_Only:
-          _transport = new ProvisioningTransportHandlerMqtt(TransportFallbackType.WebSocketOnly);
-          break;
+          case TransportType.Mqtt_WebSocket_Only:
+            _transport = new ProvisioningTransportHandlerMqtt(TransportFallbackType.WebSocketOnly);
+            break;
 
-        case TransportType.Mqtt_Tcp_Only:
-          _transport = new ProvisioningTransportHandlerMqtt(TransportFallbackType.TcpOnly);
-          break;
+          case TransportType.Mqtt_Tcp_Only:
+            _transport = new ProvisioningTransportHandlerMqtt(TransportFallbackType.TcpOnly);
+            break;
 
-        default:
-          throw new ArgumentOutOfRangeException();
+          default:
+            throw new ArgumentOutOfRangeException();
+        }
+        ProvisioningDeviceClient provisioningClient = ProvisioningDeviceClient.Create(GlobalDeviceEndpoint, AzureEnabledNetworkDevice.AzureDeviceParameters.AzureScopeId, SecurityProvider, _transport);
+        Logger.LogDebug($"Register device using {nameof(ProvisioningDeviceClient.RegisterAsync)} device.");
+        DeviceRegistrationResult = await provisioningClient.RegisterAsync().ConfigureAwait(false);
       }
-      ProvisioningDeviceClient provisioningClient = ProvisioningDeviceClient.Create(GlobalDeviceEndpoint, AzureEnabledNetworkDevice.AzureDeviceParameters.AzureScopeId, SecurityProvider, _transport);
-      Logger.LogDebug($"Register device using {nameof(ProvisioningDeviceClient.RegisterAsync)} device.");
-      DeviceRegistrationResult = await provisioningClient.RegisterAsync().ConfigureAwait(false);
+      finally
+      {
+        _transport.Dispose();
+      }
       switch (DeviceRegistrationResult.Status)
       {
         case ProvisioningRegistrationStatusType.Unassigned:
@@ -73,21 +82,22 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
         case ProvisioningRegistrationStatusType.Assigning:
           throw new ArgumentOutOfRangeException($"{nameof(DeviceRegistrationResult.Status)} = {nameof(ProvisioningRegistrationStatusType.Assigning)}");
         case ProvisioningRegistrationStatusType.Assigned:
-          TransitionTo(new AssigneddState(_paretContext));
-          return await _paretContext.Connect();
+          return RegisterResult.Assigned;
 
         case ProvisioningRegistrationStatusType.Failed:
+          Logger.LogWarning($"Failed to provision the device. {nameof(ProvisioningRegistrationStatusType.Failed)} - {DeviceRegistrationResult.ErrorMessage}.");
+          return RegisterResult.Assigned;
+
         case ProvisioningRegistrationStatusType.Disabled:
-          break;
+          Logger.LogWarning($"Failed to provision the device. {nameof(ProvisioningRegistrationStatusType.Disabled)} - {DeviceRegistrationResult.ErrorMessage}.");
+          return RegisterResult.Disabled;
       }
-      Logger.LogWarning($"Failed to provision the device. {DeviceRegistrationResult.Status} - {DeviceRegistrationResult.ErrorMessage}. Disposing.");
-      await DisposeAsync();
-      return false;
+      return RegisterResult.Disabled;
     }
 
     public override async Task<bool> Connect()
     {
-      throw new ApplicationException($"The operation {nameof(Connect)} is not allowed in the {nameof(UnassignedState)}");
+      return await Task.FromException<bool>(new ApplicationException($"The operation {nameof(Connect)} is not allowed in the {nameof(UnassignedState)}"));
     }
 
     public override void DisconnectRequest()
@@ -105,14 +115,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
     #region private
 
     private const string GlobalDeviceEndpoint = "global.azure-devices-provisioning.net";
-
-    private ProvisioningTransportHandler _transport;
-
-    private async ValueTask DisposeAsync()
-    {
-      _transport?.Dispose();
-      //_timer?.DisposeAsync();
-    }
 
     #endregion private
   }

@@ -31,10 +31,17 @@
             Gets the azure scope id in which given device resides.
             </summary>
         </member>
-        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.GetSecurityProviderAsync">
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.AzurePrimaryKey">
             <summary>
-            Creates security client which will be used for device provisioning.
+            Gets the Azure primary key.
             </summary>
+            <value>The Azure primary key.</value>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.AzureSecondaryKey">
+            <summary>
+            Gets the azure secondary key.
+            </summary>
+            <value>The azure secondary key.</value>
         </member>
         <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureEnabledNetworkDevice.AzureDeviceParameters">
             <summary>
@@ -152,7 +159,7 @@
         </member>
         <member name="F:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup.m_disposed">
             <summary>
-            Gets a value indicating whether this <see cref="!:LoggerManagementSetup"/> is disposed.
+            Gets a value indicating whether this <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup"/> is disposed.
             </summary>
             <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
         </member>

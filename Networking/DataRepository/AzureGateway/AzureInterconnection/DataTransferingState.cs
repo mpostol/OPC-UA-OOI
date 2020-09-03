@@ -16,9 +16,9 @@ using System.Threading.Tasks;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 {
-  internal class DataTransfering : CommunicationContext.StateBase
+  internal class DataTransferingState : CommunicationContext.StateBase
   {
-    public DataTransfering(IDTOProvider dataProvider, string repositoryGroup, CommunicationContext communicationContext) : base(communicationContext)
+    public DataTransferingState(IDTOProvider dataProvider, string repositoryGroup, CommunicationContext communicationContext) : base(communicationContext)
     {
       _dataProvider = dataProvider;
       _repositoryGroup = repositoryGroup;
@@ -31,17 +31,17 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     public override Task<bool> Connect()
     {
-      throw new ApplicationException($"The operation {nameof(Connect)} is not allowed in the {nameof(DataTransfering)}");
+      throw new ApplicationException($"The operation {nameof(Connect)} is not allowed in the {nameof(DataTransferingState)}");
     }
 
-    public override Task<bool> Register(IAzureEnabledNetworkDevice device)
+    public override Task<RegisterResult> Register()
     {
-      throw new ApplicationException($"The operation {nameof(Connect)} is not allowed in the {nameof(DataTransfering)}");
+      throw new ApplicationException($"The operation {nameof(Connect)} is not allowed in the {nameof(DataTransferingState)}");
     }
 
     public override void TransferData(IDTOProvider dataProvider, string repositoryGroup)
     {
-      throw new ApplicationException($"The operation {nameof(Connect)} is not allowed in the {nameof(DataTransfering)}");
+      throw new ApplicationException($"The operation {nameof(Connect)} is not allowed in the {nameof(DataTransferingState)}");
     }
 
     public override void DisconnectRequest()

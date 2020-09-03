@@ -6,8 +6,6 @@
 //___________________________________________________________________________________
 
 using Microsoft.Azure.Devices.Client;
-using Microsoft.Azure.Devices.Shared;
-using System.Threading.Tasks;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 {
@@ -32,8 +30,15 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
     string AzureScopeId { get; }
 
     /// <summary>
-    /// Creates security client which will be used for device provisioning.
+    /// Gets the Azure primary key.
     /// </summary>
-    Task<SecurityProvider> GetSecurityProviderAsync();
+    /// <value>The Azure primary key.</value>
+    string AzurePrimaryKey { get; }
+
+    /// <summary>
+    /// Gets the azure secondary key.
+    /// </summary>
+    /// <value>The azure secondary key.</value>
+    string AzureSecondaryKey { get; }
   }
 }

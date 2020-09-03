@@ -23,19 +23,22 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
   {
     #region constructor
 
-    internal CommunicationContext(ILogger<CommunicationContext> logger)
+    internal CommunicationContext(IAzureEnabledNetworkDevice device, ILogger<CommunicationContext> logger)
     {
+      _device = device ?? throw new ArgumentNullException($"{nameof(device)}");
       _Logger = logger;
       _currentState = new UnassignedState(this);
     }
 
     #endregion constructor
 
+
+
     #region IStateBase
 
-    public async Task<bool> Register(IAzureEnabledNetworkDevice device)
+    public async Task<RegisterResult> Register()
     {
-      return await _currentState.Register(device);
+      return await _currentState.Register();
     }
 
     public async Task<bool> Connect()
@@ -72,7 +75,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
       #region IStateBase
 
-      public abstract Task<bool> Register(IAzureEnabledNetworkDevice device);
+      public abstract Task<RegisterResult> Register();
 
       public abstract Task<bool> Connect();
 
@@ -132,7 +135,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
           }
           catch (Exception e)
           {
-            _Logger.LogInformation($"Azure connection already disposed.");
+            _Logger.LogError($"Error while disposing {nameof(CommunicationContext)}: {e.Message}");
           }
       }
       // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below. Set large fields to null.

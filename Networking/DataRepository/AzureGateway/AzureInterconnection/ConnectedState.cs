@@ -26,14 +26,14 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       throw new ApplicationException($"The operation {nameof(Connect)} is not allowed in the {nameof(ConnectedState)}");
     }
 
-    public override Task<bool> Register(IAzureEnabledNetworkDevice device)
+    public override Task<RegisterResult> Register()
     {
       throw new ApplicationException($"The operation {nameof(Register)} is not allowed in the {nameof(ConnectedState)}");
     }
 
     public override void TransferData(IDTOProvider dataProvider, string repositoryGroup)
     {
-      TransitionTo(new DataTransfering(dataProvider, repositoryGroup, _paretContext));
+      TransitionTo(new DataTransferingState(dataProvider, repositoryGroup, _paretContext));
     }
 
     public override void DisconnectRequest()

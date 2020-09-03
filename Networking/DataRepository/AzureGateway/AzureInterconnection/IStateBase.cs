@@ -10,11 +10,13 @@ using System.Threading.Tasks;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 {
+  internal enum RegisterResult { Assigned, Failed, Disabled }
+
   internal interface IStateBase
   {
     ProvisioningRegistrationStatusType GetProvisioningRegistrationStatusType { get; }
 
-    Task<bool> Register(IAzureEnabledNetworkDevice device);
+    Task<RegisterResult> Register();
 
     Task<bool> Connect();
 

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 {
-  internal enum RegisterResult { Assigned, Failed, Disabled }
 
   internal interface IStateBase
   {

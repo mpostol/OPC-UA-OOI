@@ -7,9 +7,7 @@
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.CommunicationContext">
             <summary>
             Class CommunicationContext - implements Azure communication state machine.
-            Implements the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IStateBase" />
             </summary>
-            <seealso cref="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IStateBase" />
         </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters">
             <summary>

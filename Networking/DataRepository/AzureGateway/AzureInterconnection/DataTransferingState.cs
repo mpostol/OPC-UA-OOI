@@ -18,11 +18,8 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 {
   internal class DataTransferingState : CommunicationContext.StateBase
   {
-    public DataTransferingState(IDTOProvider dataProvider, string repositoryGroup, CommunicationContext communicationContext) : base(communicationContext)
+    public DataTransferingState( CommunicationContext communicationContext) : base(communicationContext)
     {
-      _dataProvider = dataProvider;
-      _repositoryGroup = repositoryGroup;
-      _timer = new Timer(Callback, null, TimeSpan.Zero, AzureEnabledNetworkDevice.PublishingInterval);
     }
 
     #region CommunicationContext.StateBase
@@ -46,33 +43,12 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     public override void DisconnectRequest()
     {
-      _timer.Dispose();
-      DeviceClient.CloseAsync().Wait();
-      TransitionTo(new AssigneddState(_paretContext));
     }
 
     #endregion CommunicationContext.StateBase
 
     #region private
 
-    private readonly IDTOProvider _dataProvider;
-    private readonly string _repositoryGroup;
-    private Timer _timer;
-
-    private void Callback(object state)
-    {
-      try
-      {
-        Logger.LogDebug("Building payload.");
-        string payload = JsonConvert.SerializeObject(_dataProvider.GetDTO(_repositoryGroup));
-        DeviceClient.SendEventAsync(new Message(Encoding.UTF8.GetBytes(payload))).Wait();
-        Logger.LogDebug("Successfully published device state to Azure.");
-      }
-      catch (Exception e)
-      {
-        Logger.LogError(e, "Failed to publish device state.");
-      }
-    }
 
     #endregion private
   }

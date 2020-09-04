@@ -33,13 +33,11 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     public override void TransferData(IDTOProvider dataProvider, string repositoryGroup)
     {
-      TransitionTo(new DataTransferingState(dataProvider, repositoryGroup, _paretContext));
     }
 
     public override void DisconnectRequest()
     {
-      DeviceClient.CloseAsync().Wait();
-      TransitionTo(new AssigneddState(_paretContext));
+
     }
 
     #endregion StateBase

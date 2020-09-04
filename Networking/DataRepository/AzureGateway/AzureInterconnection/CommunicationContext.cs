@@ -25,12 +25,12 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
   {
     #region constructor
 
-    internal CommunicationContext(IDTOProvider dataProvider, string repositoryGroup, IAzureEnabledNetworkDevice device, ILogger<CommunicationContext> logger)
+    internal CommunicationContext(IDTOProvider dataProvider, string repositoryGroup, IAzureDeviceParameters azureDeviceParameters, ILogger<CommunicationContext> logger)
     {
-      _device = device ?? throw new ArgumentNullException($"{nameof(device)}");
       _dataProvider = dataProvider ?? throw new ArgumentNullException($"{nameof(dataProvider)}"); ;
       _repositoryGroup = repositoryGroup;
-      _Logger = logger;
+      _azureDeviceParameters = azureDeviceParameters ?? throw new ArgumentNullException($"{nameof(azureDeviceParameters)}");
+      _Logger = logger ?? throw new ArgumentNullException($"{nameof(logger)}"); ;
     }
 
     #endregion constructor
@@ -40,37 +40,33 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       await Task.Run(async () => await TransitionLoop(), cancelation);
     }
 
-    public enum MachineState { UnassignedState, AssigneddState, DataTransferingState, ConnectedState, DisconnectingState }
-
     #region private
 
     private const string _globalDeviceEndpoint = "global.azure-devices-provisioning.net";
     private const int _delayAfterFailure = 5000;
 
-    private enum RegisterResult { Assigned, Failed, Disabled }
+    private enum MachineState { UnassignedState, AssigneddState, DataTransferingState, ConnectedState, DisconnectingState }
 
     private readonly IDTOProvider _dataProvider;
     private readonly string _repositoryGroup;
-    private IAzureEnabledNetworkDevice _device;
+    private readonly IAzureDeviceParameters _azureDeviceParameters;
+    private readonly ILogger<CommunicationContext> _Logger;
     private MachineState _currentState = MachineState.UnassignedState;
     private SecurityProvider _security;
-    private readonly ILogger<CommunicationContext> _Logger;
     private DeviceClient _deviceClient;
-    private DeviceRegistrationResult _provisioningResult = null;
 
     private void TransitionTo(MachineState state)
     {
       _currentState = state;
     }
 
-    private async Task<RegisterResult> Register()
+    private async Task<DeviceRegistrationResult> Register()
     {
       _Logger.LogDebug($"Opening {nameof(Register)} operation. Obtaining security provider for the device.");
-      _security = new SecurityProviderSymmetricKey(_device.AzureDeviceParameters.AzureDeviceId, _device.AzureDeviceParameters.AzurePrimaryKey, _device.AzureDeviceParameters.AzureSecondaryKey);
       ProvisioningTransportHandler _transport = null;
       try
       {
-        switch (_device.AzureDeviceParameters.TransportType)
+        switch (_azureDeviceParameters.TransportType)
         {
           case TransportType.Amqp:
             _transport = new ProvisioningTransportHandlerAmqp();
@@ -103,35 +99,17 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
           default:
             throw new ArgumentOutOfRangeException();
         }
-        ProvisioningDeviceClient provisioningClient = ProvisioningDeviceClient.Create(_globalDeviceEndpoint, _device.AzureDeviceParameters.AzureScopeId, _security, _transport);
+        ProvisioningDeviceClient provisioningClient = ProvisioningDeviceClient.Create(_globalDeviceEndpoint, _azureDeviceParameters.AzureScopeId, _security, _transport);
         _Logger.LogDebug($"Register device using {nameof(ProvisioningDeviceClient.RegisterAsync)} device.");
-        _provisioningResult = await provisioningClient.RegisterAsync().ConfigureAwait(false);
+        return await provisioningClient.RegisterAsync().ConfigureAwait(false);
       }
       finally
       {
         _transport.Dispose();
       }
-      switch (_provisioningResult.Status)
-      {
-        case ProvisioningRegistrationStatusType.Unassigned:
-          throw new ArgumentOutOfRangeException($"{nameof(_provisioningResult.Status)} = {nameof(ProvisioningRegistrationStatusType.Unassigned)}");
-        case ProvisioningRegistrationStatusType.Assigning:
-          throw new ArgumentOutOfRangeException($"{nameof(_provisioningResult.Status)} = {nameof(ProvisioningRegistrationStatusType.Assigning)}");
-        case ProvisioningRegistrationStatusType.Assigned:
-          return RegisterResult.Assigned;
-
-        case ProvisioningRegistrationStatusType.Failed:
-          _Logger.LogWarning($"Failed to provision the device. {nameof(ProvisioningRegistrationStatusType.Failed)} - {_provisioningResult.ErrorMessage}.");
-          return RegisterResult.Assigned;
-
-        case ProvisioningRegistrationStatusType.Disabled:
-          _Logger.LogWarning($"Failed to provision the device. {nameof(ProvisioningRegistrationStatusType.Disabled)} - {_provisioningResult.ErrorMessage}.");
-          return RegisterResult.Disabled;
-      }
-      return RegisterResult.Disabled;
     }
 
-    private async Task<bool> Connect()
+    private async Task<bool> Connect(string AssignedHub)
     {
       try
       {
@@ -140,22 +118,22 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
         switch (_security)
         {
           case SecurityProviderTpm tpmSecurity:
-            auth = new DeviceAuthenticationWithTpm(_device.AzureDeviceParameters.AzureDeviceId, tpmSecurity);
+            auth = new DeviceAuthenticationWithTpm(_azureDeviceParameters.AzureDeviceId, tpmSecurity);
             break;
 
           case SecurityProviderX509 certificateSecurity:
-            auth = new DeviceAuthenticationWithX509Certificate(_device.AzureDeviceParameters.AzureDeviceId, certificateSecurity.GetAuthenticationCertificate());
+            auth = new DeviceAuthenticationWithX509Certificate(_azureDeviceParameters.AzureDeviceId, certificateSecurity.GetAuthenticationCertificate());
             break;
 
           case SecurityProviderSymmetricKey symmetricKeySecurity:
-            auth = new DeviceAuthenticationWithRegistrySymmetricKey(_device.AzureDeviceParameters.AzureDeviceId, symmetricKeySecurity.GetPrimaryKey());
+            auth = new DeviceAuthenticationWithRegistrySymmetricKey(_azureDeviceParameters.AzureDeviceId, symmetricKeySecurity.GetPrimaryKey());
             break;
 
           default:
             _Logger.LogError("Specified security provider is unknown.");
             throw new NotSupportedException("Unknown authentication type.");
         }
-        _deviceClient = DeviceClient.Create(_provisioningResult.AssignedHub, auth, _device.AzureDeviceParameters.TransportType);
+        _deviceClient = DeviceClient.Create(AssignedHub, auth, _azureDeviceParameters.TransportType);
         await _deviceClient.OpenAsync().ConfigureAwait(false);
       }
       catch (Exception ex)
@@ -183,34 +161,50 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     private async Task TransitionLoop()
     {
+      _security = new SecurityProviderSymmetricKey(_azureDeviceParameters.AzureDeviceId, _azureDeviceParameters.AzurePrimaryKey, _azureDeviceParameters.AzureSecondaryKey);
       while (true)
       {
+        string assignedHub = String.Empty;
+
         switch (_currentState)
         {
           case MachineState.UnassignedState:
             _Logger.LogDebug($"{nameof(CommunicationContext)} entering the state: {nameof(MachineState.UnassignedState)}");
-            switch (await Register())
+            DeviceRegistrationResult provisioningResult = await Register();
+            switch (provisioningResult.Status)
             {
-              case RegisterResult.Assigned:
+              case ProvisioningRegistrationStatusType.Unassigned:
+                _Logger.LogDebug($"Unexpected result from {nameof(provisioningResult.Status)}:  {nameof(ProvisioningRegistrationStatusType.Unassigned)}");
+                await Task.Delay(_delayAfterFailure); //No transition
+                break;
+
+              case ProvisioningRegistrationStatusType.Assigning:
+                _Logger.LogDebug($"Unexpected result from {nameof(provisioningResult.Status)}:  {nameof(ProvisioningRegistrationStatusType.Assigning)}");
+                await Task.Delay(_delayAfterFailure); //No transition
+                break;
+
+              case ProvisioningRegistrationStatusType.Assigned:
+                assignedHub = provisioningResult.AssignedHub;
                 TransitionTo(MachineState.AssigneddState);
                 break;
 
-              case RegisterResult.Failed:
-
+              case ProvisioningRegistrationStatusType.Failed:
+                _Logger.LogWarning($"Failed to provision the device. {nameof(ProvisioningRegistrationStatusType.Failed)} - {provisioningResult.ErrorMessage}.");
+                await Task.Delay(_delayAfterFailure); //No transition
                 break;
 
-              case RegisterResult.Disabled:
-                break;
-
-              default:
+              case ProvisioningRegistrationStatusType.Disabled:
+                _Logger.LogWarning($"Failed to provision the device. {nameof(ProvisioningRegistrationStatusType.Disabled)} - {provisioningResult.ErrorMessage}.");
+                await Task.Delay(_delayAfterFailure); //No transition
                 break;
             }
+
             break;
 
           case MachineState.AssigneddState:
             _Logger.LogDebug($"{nameof(CommunicationContext)} entering the state: {nameof(MachineState.AssigneddState)}");
-            if (await Connect())
-              _currentState = MachineState.DataTransferingState;
+            if (await Connect(assignedHub))
+              TransitionTo(MachineState.DataTransferingState);
             else
             {
               _Logger.LogWarning($"Failed to connect.");
@@ -220,7 +214,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
           case MachineState.DataTransferingState:
             _Logger.LogDebug($"{nameof(CommunicationContext)} entering the state: {nameof(MachineState.UnassignedState)}");
-            await Task.Delay(_device.PublishingInterval);
+            await Task.Delay(_azureDeviceParameters.PublishingInterval);
             await DataTransfer();
             break;
 
@@ -238,7 +232,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
         }
       }
     }
-
 
     #region IDisposable Support
 

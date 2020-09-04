@@ -41,12 +41,7 @@
             </summary>
             <value>The azure secondary key.</value>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureEnabledNetworkDevice.AzureDeviceParameters">
-            <summary>
-            Gets required connection parameters for establishing azure connection.
-            </summary>
-        </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureEnabledNetworkDevice.PublishingInterval">
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.PublishingInterval">
             <summary>
             Gets the time interval when to send device state to Azure.
             </summary>

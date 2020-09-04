@@ -6,6 +6,7 @@
 //___________________________________________________________________________________
 
 using Microsoft.Azure.Devices.Client;
+using System;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 {
@@ -40,5 +41,10 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
     /// </summary>
     /// <value>The azure secondary key.</value>
     string AzureSecondaryKey { get; }
+
+    /// <summary>
+    /// Gets the time interval when to send device state to Azure.
+    /// </summary>
+    TimeSpan PublishingInterval { get; }
   }
 }

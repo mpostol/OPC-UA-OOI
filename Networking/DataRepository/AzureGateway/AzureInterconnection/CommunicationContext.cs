@@ -21,7 +21,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
   /// <summary>
   /// Class CommunicationContext - implements Azure communication state machine.
   /// </summary>
-  internal class CommunicationContext : IDisposable
+  internal class CommunicationContext
   {
     #region constructor
 
@@ -40,27 +40,31 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       await Task.Run(async () => await TransitionLoop(), cancelation);
     }
 
+    internal void DisconnectRequest()
+    {
+      _disconnectRequest = true;
+    }
+
     #region private
 
     private const string _globalDeviceEndpoint = "global.azure-devices-provisioning.net";
     private const int _delayAfterFailure = 5000;
 
-    private enum MachineState { UnassignedState, AssigneddState, DataTransferingState, ConnectedState, DisconnectingState }
+    private enum MachineState { UnassignedState, AssigneddState, DataTransferingState }
 
     private readonly IDTOProvider _dataProvider;
     private readonly string _repositoryGroup;
     private readonly IAzureDeviceParameters _azureDeviceParameters;
     private readonly ILogger<CommunicationContext> _Logger;
     private MachineState _currentState = MachineState.UnassignedState;
-    private SecurityProvider _security;
-    private DeviceClient _deviceClient;
+    private bool _disconnectRequest = false;
 
     private void TransitionTo(MachineState state)
     {
       _currentState = state;
     }
 
-    private async Task<DeviceRegistrationResult> Register()
+    private async Task<DeviceRegistrationResult> Register(SecurityProvider security)
     {
       _Logger.LogDebug($"Opening {nameof(Register)} operation. Obtaining security provider for the device.");
       ProvisioningTransportHandler _transport = null;
@@ -99,7 +103,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
           default:
             throw new ArgumentOutOfRangeException();
         }
-        ProvisioningDeviceClient provisioningClient = ProvisioningDeviceClient.Create(_globalDeviceEndpoint, _azureDeviceParameters.AzureScopeId, _security, _transport);
+        ProvisioningDeviceClient provisioningClient = ProvisioningDeviceClient.Create(_globalDeviceEndpoint, _azureDeviceParameters.AzureScopeId, security, _transport);
         _Logger.LogDebug($"Register device using {nameof(ProvisioningDeviceClient.RegisterAsync)} device.");
         return await provisioningClient.RegisterAsync().ConfigureAwait(false);
       }
@@ -109,48 +113,49 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       }
     }
 
-    private async Task<bool> Connect(string AssignedHub)
+    private async Task<DeviceClient> Connect(string assignedHub, SecurityProvider security)
     {
+      DeviceClient deviceClient;
       try
       {
         _Logger.LogDebug("Successfully provisioned device. Creating client.");
-        IAuthenticationMethod auth;
-        switch (_security)
+        IAuthenticationMethod authenticationMethod;
+        switch (security)
         {
           case SecurityProviderTpm tpmSecurity:
-            auth = new DeviceAuthenticationWithTpm(_azureDeviceParameters.AzureDeviceId, tpmSecurity);
+            authenticationMethod = new DeviceAuthenticationWithTpm(_azureDeviceParameters.AzureDeviceId, tpmSecurity);
             break;
 
           case SecurityProviderX509 certificateSecurity:
-            auth = new DeviceAuthenticationWithX509Certificate(_azureDeviceParameters.AzureDeviceId, certificateSecurity.GetAuthenticationCertificate());
+            authenticationMethod = new DeviceAuthenticationWithX509Certificate(_azureDeviceParameters.AzureDeviceId, certificateSecurity.GetAuthenticationCertificate());
             break;
 
           case SecurityProviderSymmetricKey symmetricKeySecurity:
-            auth = new DeviceAuthenticationWithRegistrySymmetricKey(_azureDeviceParameters.AzureDeviceId, symmetricKeySecurity.GetPrimaryKey());
+            authenticationMethod = new DeviceAuthenticationWithRegistrySymmetricKey(_azureDeviceParameters.AzureDeviceId, symmetricKeySecurity.GetPrimaryKey());
             break;
 
           default:
             _Logger.LogError("Specified security provider is unknown.");
             throw new NotSupportedException("Unknown authentication type.");
         }
-        _deviceClient = DeviceClient.Create(AssignedHub, auth, _azureDeviceParameters.TransportType);
-        await _deviceClient.OpenAsync().ConfigureAwait(false);
+        deviceClient = DeviceClient.Create(assignedHub, authenticationMethod, _azureDeviceParameters.TransportType);
+        await deviceClient.OpenAsync().ConfigureAwait(false);
       }
       catch (Exception ex)
       {
         _Logger.LogError($"Operation {nameof(Connect)} failed because of error {ex.Message}.");
-        return false;
+        return await Task.FromResult<DeviceClient>(null);
       }
-      return true;
+      return await Task.FromResult<DeviceClient>(deviceClient);
     }
 
-    private async Task DataTransfer()
+    private async Task DataTransfer(DeviceClient deviceClient)
     {
       try
       {
         _Logger.LogDebug("Building payload.");
         string payload = JsonConvert.SerializeObject(_dataProvider.GetDTO(_repositoryGroup));
-        await _deviceClient.SendEventAsync(new Message(Encoding.UTF8.GetBytes(payload)));
+        await deviceClient.SendEventAsync(new Message(Encoding.UTF8.GetBytes(payload)));
         _Logger.LogDebug("Successfully published device state to Azure.");
       }
       catch (Exception e)
@@ -161,116 +166,86 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     private async Task TransitionLoop()
     {
-      _security = new SecurityProviderSymmetricKey(_azureDeviceParameters.AzureDeviceId, _azureDeviceParameters.AzurePrimaryKey, _azureDeviceParameters.AzureSecondaryKey);
-      while (true)
+      SecurityProvider security = new SecurityProviderSymmetricKey(_azureDeviceParameters.AzureDeviceId, _azureDeviceParameters.AzurePrimaryKey, _azureDeviceParameters.AzureSecondaryKey);
+      DeviceClient deviceClient = null;
+      string assignedHub = String.Empty;
+      try
       {
-        string assignedHub = String.Empty;
-
-        switch (_currentState)
+        while (!_disconnectRequest)
         {
-          case MachineState.UnassignedState:
-            _Logger.LogDebug($"{nameof(CommunicationContext)} entering the state: {nameof(MachineState.UnassignedState)}");
-            DeviceRegistrationResult provisioningResult = await Register();
-            switch (provisioningResult.Status)
-            {
-              case ProvisioningRegistrationStatusType.Unassigned:
-                _Logger.LogDebug($"Unexpected result from {nameof(provisioningResult.Status)}:  {nameof(ProvisioningRegistrationStatusType.Unassigned)}");
-                await Task.Delay(_delayAfterFailure); //No transition
-                break;
+          switch (_currentState)
+          {
+            case MachineState.UnassignedState:
+              _Logger.LogDebug($"{nameof(CommunicationContext)} entering the state: {nameof(MachineState.UnassignedState)}");
+              DeviceRegistrationResult provisioningResult = await Register(security);
+              switch (provisioningResult.Status)
+              {
+                case ProvisioningRegistrationStatusType.Unassigned:
+                  _Logger.LogDebug($"Unexpected result from {nameof(provisioningResult.Status)}:  {nameof(ProvisioningRegistrationStatusType.Unassigned)}");
+                  await Task.Delay(_delayAfterFailure); //No transition
+                  break;
 
-              case ProvisioningRegistrationStatusType.Assigning:
-                _Logger.LogDebug($"Unexpected result from {nameof(provisioningResult.Status)}:  {nameof(ProvisioningRegistrationStatusType.Assigning)}");
-                await Task.Delay(_delayAfterFailure); //No transition
-                break;
+                case ProvisioningRegistrationStatusType.Assigning:
+                  _Logger.LogDebug($"Unexpected result from {nameof(provisioningResult.Status)}:  {nameof(ProvisioningRegistrationStatusType.Assigning)}");
+                  await Task.Delay(_delayAfterFailure); //No transition
+                  break;
 
-              case ProvisioningRegistrationStatusType.Assigned:
-                assignedHub = provisioningResult.AssignedHub;
-                TransitionTo(MachineState.AssigneddState);
-                break;
+                case ProvisioningRegistrationStatusType.Assigned:
+                  assignedHub = provisioningResult.AssignedHub;
+                  TransitionTo(MachineState.AssigneddState);
+                  _Logger.LogDebug("Successfully provisioned the device.");
+                  break;
 
-              case ProvisioningRegistrationStatusType.Failed:
-                _Logger.LogWarning($"Failed to provision the device. {nameof(ProvisioningRegistrationStatusType.Failed)} - {provisioningResult.ErrorMessage}.");
-                await Task.Delay(_delayAfterFailure); //No transition
-                break;
+                case ProvisioningRegistrationStatusType.Failed:
+                  _Logger.LogWarning($"Failed to provision the device. {nameof(ProvisioningRegistrationStatusType.Failed)} - {provisioningResult.ErrorMessage}.");
+                  await Task.Delay(_delayAfterFailure); //No transition
+                  break;
 
-              case ProvisioningRegistrationStatusType.Disabled:
-                _Logger.LogWarning($"Failed to provision the device. {nameof(ProvisioningRegistrationStatusType.Disabled)} - {provisioningResult.ErrorMessage}.");
-                await Task.Delay(_delayAfterFailure); //No transition
-                break;
-            }
+                case ProvisioningRegistrationStatusType.Disabled:
+                  _Logger.LogWarning($"Failed to provision the device. {nameof(ProvisioningRegistrationStatusType.Disabled)} - {provisioningResult.ErrorMessage}.");
+                  await Task.Delay(_delayAfterFailure); //No transition
+                  break;
+              }
 
-            break;
+              break;
 
-          case MachineState.AssigneddState:
-            _Logger.LogDebug($"{nameof(CommunicationContext)} entering the state: {nameof(MachineState.AssigneddState)}");
-            if (await Connect(assignedHub))
-              TransitionTo(MachineState.DataTransferingState);
-            else
-            {
-              _Logger.LogWarning($"Failed to connect.");
-              await Task.Delay(5000);
-            }
-            break;
+            case MachineState.AssigneddState:
+              _Logger.LogDebug($"{nameof(CommunicationContext)} entering the state: {nameof(MachineState.AssigneddState)}");
+              deviceClient = await Connect(assignedHub, security);
+              if (deviceClient != null)
+              {
+                security.Dispose();
+                security = null;
+                TransitionTo(MachineState.DataTransferingState);
+              }
+              else
+              {
+                _Logger.LogWarning($"Failed to connect.");
+                await Task.Delay(5000);
+              }
+              break;
 
-          case MachineState.DataTransferingState:
-            _Logger.LogDebug($"{nameof(CommunicationContext)} entering the state: {nameof(MachineState.UnassignedState)}");
-            await Task.Delay(_azureDeviceParameters.PublishingInterval);
-            await DataTransfer();
-            break;
+            case MachineState.DataTransferingState:
+              _Logger.LogDebug($"{nameof(CommunicationContext)} entering the state: {nameof(MachineState.UnassignedState)}");
+              await Task.Delay(_azureDeviceParameters.PublishingInterval);
+              await DataTransfer(deviceClient);
+              break;
 
-          case MachineState.ConnectedState:
-            _Logger.LogDebug($"{nameof(CommunicationContext)} entering the state: {nameof(MachineState.UnassignedState)}");
-            break;
-
-          case MachineState.DisconnectingState:
-            await _deviceClient.CloseAsync();
-            _currentState = MachineState.AssigneddState;
-            break;
-
-          default:
-            break;
+          }
         }
       }
-    }
-
-    #region IDisposable Support
-
-    private bool disposedValue = false; // To detect redundant calls
-
-    protected virtual void Dispose(bool disposing)
-    {
-      if (disposedValue)
-        return;
-      if (disposing)
+      catch (Exception ex)
       {
-        // TODO: dispose managed state (managed objects).
-        _security?.Dispose();
-        if (_deviceClient != null)
-          try
-          {
-            Task _await = _deviceClient.CloseAsync();
-            _await.Wait();
-            _Logger.LogInformation($"Disposed azure connection.");
-            _deviceClient.Dispose();
-            _deviceClient = null;
-          }
-          catch (Exception e)
-          {
-            _Logger.LogError($"Error while disposing {nameof(CommunicationContext)}: {e.Message}");
-          }
+        _Logger.LogError($"{nameof(CommunicationContext.TransitionLoop)} - an Exception has been thrown: {ex.Message}. The device {_repositoryGroup} has been disconnected.");
       }
-      // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below. Set large fields to null.
-      disposedValue = true;
+      finally
+      {
+        if (deviceClient != null)
+          await deviceClient.CloseAsync();
+        if (security != null)
+          security.Dispose();
+      }
     }
-
-    // This code added to correctly implement the disposable pattern.
-    public void Dispose()
-    {
-      // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-      Dispose(true);
-    }
-
-    #endregion IDisposable Support
 
     #endregion private
   }

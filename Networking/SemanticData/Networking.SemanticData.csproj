@@ -28,7 +28,7 @@
     <None Remove="EthernetMapping.md" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="5.0.0-preview.8.20407.11" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />

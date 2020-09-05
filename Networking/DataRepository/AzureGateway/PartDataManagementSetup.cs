@@ -98,7 +98,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     private ProducerViewModel m_ViewModel;
 
     /// <summary>
-    /// Gets a value indicating whether this <see cref="LoggerManagementSetup"/> is disposed.
+    /// Gets a value indicating whether this <see cref="PartDataManagementSetup"/> is disposed.
     /// </summary>
     /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
     private bool m_disposed = false;

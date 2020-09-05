@@ -25,9 +25,8 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.AzureInterconnection
       Assert.ThrowsException<ArgumentNullException>(() => new CommunicationContext(null, "qwerty", azureParametersFixture.Object, loggerFixture.Object));
       Assert.ThrowsException<ArgumentNullException>(() => new CommunicationContext(IDTOProviderFixture.Object, "qwerty", null, loggerFixture.Object));
       Assert.ThrowsException<ArgumentNullException>(() => new CommunicationContext(IDTOProviderFixture.Object, "qwerty", azureParametersFixture.Object, null));
-      using (CommunicationContext _fixture = new CommunicationContext(IDTOProviderFixture.Object, "qwerty", azureParametersFixture.Object, loggerFixture.Object))
-      {
-      }
+      CommunicationContext _fixture = new CommunicationContext(IDTOProviderFixture.Object, "qwerty", azureParametersFixture.Object, loggerFixture.Object);
+      Assert.ThrowsException<ApplicationException>(() => _fixture.DisconnectRequest());
     }
   }
 }

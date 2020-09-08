@@ -6,6 +6,7 @@
 //___________________________________________________________________________________
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
@@ -187,6 +188,15 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     {
       return _processReplica[repositoryGroup];
     }
+    public IEnumerator<string> GetEnumerator()
+    {
+      return _processReplica.Keys.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return _processReplica.Keys.GetEnumerator();
+    }
 
     #endregion IDTOProvider
 
@@ -203,6 +213,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       _return.PropertyChanged += (x, y) => _updater(((ConsumerBindingMonitoredValue<type>)x).Value);
       return _return;
     }
+
 
     #endregion private
   }

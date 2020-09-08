@@ -7,9 +7,14 @@
 
 using CommonServiceLocator;
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 using UAOOI.Networking.Core;
+using UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection;
 using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.SemanticData;
 
@@ -39,7 +44,9 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       m_ViewModel = _serviceLocator.GetInstance<ProducerViewModel>();
       ConfigurationFactory = new PartConfigurationFactory(ConfigurationFilePath);
       EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();
-      BindingFactory = new PartBindingFactory();
+      PartBindingFactory pbf = new PartBindingFactory();
+      _DTOProvider = pbf;
+      BindingFactory = pbf;
       MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
     }
 
@@ -49,6 +56,10 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
 
     #region IProducerDataManagementSetup
 
+    private readonly ConcurrentBag<Task> _tasks = new ConcurrentBag<Task>();
+    private CancellationTokenSource _tokenSource = new CancellationTokenSource();
+    private CancellationToken token;
+
     /// <summary>
     /// Setups this instance.
     /// </summary>
@@ -57,10 +68,10 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       try
       {
         //ReferenceApplicationEventSource.Log.Initialization($"{nameof(SimulatorDataManagementSetup)}.{nameof(Setup)} starting");
+        token = _tokenSource.Token;
         m_ViewModel.ChangeProducerCommand(() => { m_ViewModel.ProducerErrorMessage = "Restarted"; });
         Start();
-        m_ViewModel.ProducerErrorMessage = "Running";
-        //ReferenceApplicationEventSource.Log.Initialization($" Setup of the producer engine has been accomplished and it starts sending data.");
+        StartAzureCommunication();
       }
       catch (Exception _ex)
       {
@@ -85,6 +96,19 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       if (!disposing || m_disposed)
         return;
       m_disposed = true;
+      _tokenSource.Cancel();
+      try
+      {
+        Task.WhenAll(_tasks.ToArray()).Wait();
+      }
+      catch (OperationCanceledException)
+      {
+        Console.WriteLine($"\n{nameof(OperationCanceledException)} thrown\n"); //TODO Replace by Log
+      }
+      finally
+      {
+        _tokenSource.Dispose();
+      }
     }
 
     #endregion IDisposable
@@ -103,7 +127,24 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
     private bool m_disposed = false;
 
+    private readonly IDTOProvider _DTOProvider = null;
+
     private Action<bool> m_onDispose = disposing => { };
+
+    private void StartAzureCommunication()
+    {
+      List<CommunicationContext> azureComunicationContextList = new List<CommunicationContext>();
+      TaskFactory taskFactory = Task.Factory;
+      foreach (string repository in _DTOProvider)
+      {
+        CommunicationContext communicationContext = new CommunicationContext(_DTOProvider, repository, null, null);
+        azureComunicationContextList.Add(communicationContext);
+        Task newCommunicatinTask = taskFactory.StartNew(() => communicationContext.Run(token), token);
+        _tasks.Add(newCommunicatinTask);
+      }
+      m_ViewModel.ProducerErrorMessage = "Running";
+      //ReferenceApplicationEventSource.Log.Initialization($" Setup of the producer engine has been accomplished and it starts sending data.");
+    }
 
     #endregion private
 

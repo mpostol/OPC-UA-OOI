@@ -6,10 +6,18 @@
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
+    <AssociationLine Name="MessageHandlers" Type="UAOOI.Configuration.Networking.Serialization.MessageHandlerConfiguration">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.12" Y="0.06" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAABAABAGUAEAIAIQAAAAIIAEQgAAAEEgAAIAQIAAAA=</HashCode>
       <FileName>Serialization\ConfigurationData.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MessageHandlers" />
+    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="UAOOI.Configuration.Networking.Serialization.DataSetConfiguration">
@@ -29,8 +37,8 @@
       <FileName>Serialization\ConfigurationData.xsd.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Root" />
       <Property Name="DataSet" />
+      <Property Name="Root" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
@@ -85,6 +93,7 @@
     <Position X="2.5" Y="8" Width="2.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
       <HashCode>ACABAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>

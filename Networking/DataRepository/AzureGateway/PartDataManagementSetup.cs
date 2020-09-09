@@ -13,6 +13,7 @@ using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.Core;
 using UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection;
 using UAOOI.Networking.ReferenceApplication.Core;
@@ -55,7 +56,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     #endregion Composition
 
     #region IProducerDataManagementSetup
-
 
     /// <summary>
     /// Setups this instance.
@@ -116,6 +116,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// </summary>
     /// <value>The view model.</value>
     private ProducerViewModel m_ViewModel;
+
     private readonly ConcurrentBag<Task> _tasks = new ConcurrentBag<Task>();
     private CancellationTokenSource _tokenSource = new CancellationTokenSource();
 
@@ -134,9 +135,16 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       CancellationToken token = _tokenSource.Token;
       List<CommunicationContext> azureComunicationContextList = new List<CommunicationContext>();
       TaskFactory taskFactory = Task.Factory;
-      foreach (string repository in _DTOProvider)
+      ConfigurationData configuration = ConfigurationFactory.GetConfiguration();
+      foreach (DataSetConfiguration dataset in configuration.DataSets)
       {
-        CommunicationContext communicationContext = new CommunicationContext(_DTOProvider, repository, null, null);
+        string repository = dataset.RepositoryGroup;
+        TimeSpan publishingInterval = TimeSpan.FromMilliseconds(dataset.PublishingInterval);
+        AzureDeviceParameters parameters = AzureDeviceParameters.Parse(repository);
+        if (parameters == null)
+          continue;
+        parameters.PublishingInterval = publishingInterval > parameters.PublishingInterval ? publishingInterval : parameters.PublishingInterval;
+        CommunicationContext communicationContext = new CommunicationContext(_DTOProvider, repository, parameters, null);
         azureComunicationContextList.Add(communicationContext);
         Task newCommunicatinTask = taskFactory.StartNew(() => communicationContext.Run(token), token);
         _tasks.Add(newCommunicatinTask);

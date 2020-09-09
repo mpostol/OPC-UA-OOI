@@ -9,39 +9,53 @@
             Class CommunicationContext - implements Azure communication state machine.
             </summary>
         </member>
-        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters">
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters">
             <summary>
             Interface defining device parameters for establishing azure connection.
             </summary>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.TransportType">
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.Parse(System.String)">
+            <summary>
+            Parses the specified configuration if <paramref name="configuration"/> is not empty, otherwise parse it .
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <returns>AzureDeviceParameters.</returns>
+            <exception cref="T:System.NotImplementedException">parse string</exception>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters"/> class.
+            </summary>
+            <remarks> Must be protected to be used by Mock in UT</remarks>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.TransportType">
             <summary>
             Gets the transport type used for this device.
             </summary>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.AzureDeviceId">
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.AzureDeviceId">
             <summary>
             Gets the Id corresponding to Azure device id.
             </summary>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.AzureScopeId">
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.AzureScopeId">
             <summary>
             Gets the azure scope id in which given device resides.
             </summary>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.AzurePrimaryKey">
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.AzurePrimaryKey">
             <summary>
             Gets the Azure primary key.
             </summary>
             <value>The Azure primary key.</value>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.AzureSecondaryKey">
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.AzureSecondaryKey">
             <summary>
             Gets the azure secondary key.
             </summary>
             <value>The azure secondary key.</value>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.PublishingInterval">
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.PublishingInterval">
             <summary>
             Gets the time interval when to send device state to Azure.
             </summary>

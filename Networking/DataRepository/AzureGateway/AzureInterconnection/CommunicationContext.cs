@@ -25,7 +25,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
   {
     #region constructor
 
-    internal CommunicationContext(IDTOProvider dataProvider, string repositoryGroup, IAzureDeviceParameters azureDeviceParameters, ILogger<CommunicationContext> logger)
+    internal CommunicationContext(IDTOProvider dataProvider, string repositoryGroup, AzureDeviceParameters azureDeviceParameters, ILogger<CommunicationContext> logger)
     {
       _dataProvider = dataProvider ?? throw new ArgumentNullException($"{nameof(dataProvider)}");
       _repositoryGroup = repositoryGroup;
@@ -60,7 +60,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     private readonly IDTOProvider _dataProvider;
     private readonly string _repositoryGroup;
-    private readonly IAzureDeviceParameters _azureDeviceParameters;
+    private readonly AzureDeviceParameters _azureDeviceParameters;
     private readonly ILogger<CommunicationContext> _Logger;
     private MachineState _currentState = MachineState.UnassignedState;
     private bool _disconnectRequest = false;

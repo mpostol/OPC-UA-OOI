@@ -56,9 +56,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
 
     #region IProducerDataManagementSetup
 
-    private readonly ConcurrentBag<Task> _tasks = new ConcurrentBag<Task>();
-    private CancellationTokenSource _tokenSource = new CancellationTokenSource();
-    private CancellationToken token;
 
     /// <summary>
     /// Setups this instance.
@@ -68,7 +65,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       try
       {
         //ReferenceApplicationEventSource.Log.Initialization($"{nameof(SimulatorDataManagementSetup)}.{nameof(Setup)} starting");
-        token = _tokenSource.Token;
         m_ViewModel.ChangeProducerCommand(() => { m_ViewModel.ProducerErrorMessage = "Restarted"; });
         Start();
         StartAzureCommunication();
@@ -120,6 +116,8 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// </summary>
     /// <value>The view model.</value>
     private ProducerViewModel m_ViewModel;
+    private readonly ConcurrentBag<Task> _tasks = new ConcurrentBag<Task>();
+    private CancellationTokenSource _tokenSource = new CancellationTokenSource();
 
     /// <summary>
     /// Gets a value indicating whether this <see cref="PartDataManagementSetup"/> is disposed.
@@ -133,6 +131,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
 
     private void StartAzureCommunication()
     {
+      CancellationToken token = _tokenSource.Token;
       List<CommunicationContext> azureComunicationContextList = new List<CommunicationContext>();
       TaskFactory taskFactory = Task.Factory;
       foreach (string repository in _DTOProvider)

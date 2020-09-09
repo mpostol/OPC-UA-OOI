@@ -194,8 +194,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
               {
                 case ProvisioningRegistrationStatusType.Unassigned:
                   _Logger.LogWarning($"Unexpected result from {nameof(provisioningResult.Status)}:  {nameof(ProvisioningRegistrationStatusType.Unassigned)}");
-                  SpinWait sw = new SpinWait();
-                  sw.SpinOnce();
                   await Task.Delay(_delayAfterFailure, token); //No transition
                   break;
 

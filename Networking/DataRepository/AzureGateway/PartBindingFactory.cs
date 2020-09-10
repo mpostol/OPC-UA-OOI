@@ -188,6 +188,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     {
       return _processReplica[repositoryGroup];
     }
+
     public IEnumerator<string> GetEnumerator()
     {
       return _processReplica.Keys.GetEnumerator();
@@ -206,14 +207,13 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
 
     private IConsumerBinding AddBinding<type>(string repositoryGroup, string variableName, UATypeInfo typeInfo)
     {
-      ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(typeInfo);
+      ConsumerBindingMonitoredValue<type> toBeReturned = new ConsumerBindingMonitoredValue<type>(typeInfo);
       if (!_processReplica.ContainsKey(repositoryGroup))
         _processReplica.Add(repositoryGroup, new RepositoryGroup());
-      Action<type> _updater = _processReplica[repositoryGroup].AddProperty<type>(variableName);
-      _return.PropertyChanged += (x, y) => _updater(((ConsumerBindingMonitoredValue<type>)x).Value);
-      return _return;
+      Action<type> updater = _processReplica[repositoryGroup].AddProperty<type>(variableName);
+      toBeReturned.PropertyChanged += (x, y) => updater(((ConsumerBindingMonitoredValue<type>)x).Value);
+      return toBeReturned;
     }
-
 
     #endregion private
   }

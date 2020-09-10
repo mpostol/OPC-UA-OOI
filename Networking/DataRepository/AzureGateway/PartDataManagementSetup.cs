@@ -40,15 +40,17 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// </summary>
     public PartDataManagementSetup()
     {
+      //Compose external parts
       IServiceLocator _serviceLocator = ServiceLocator.Current;
       //string _configurationFileName = _serviceLocator.GetInstance<string>(CompositionSettings.ConfigurationFileNameContract);
       m_ViewModel = _serviceLocator.GetInstance<ProducerViewModel>();
-      ConfigurationFactory = new PartConfigurationFactory(ConfigurationFilePath);
       EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();
+      MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
+      //compose internal parts
+      ConfigurationFactory = new PartConfigurationFactory(ConfigurationFilePath);
       PartBindingFactory pbf = new PartBindingFactory();
       _DTOProvider = pbf;
       BindingFactory = pbf;
-      MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
     }
 
     internal static string ConfigurationFilePath { get; set; } = @"ConfigurationDataConsumer.BoilersSet.xml";
@@ -99,11 +101,12 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       }
       catch (OperationCanceledException)
       {
-        Console.WriteLine($"\n{nameof(OperationCanceledException)} thrown\n"); //TODO Replace by Log
+        //TODO Create and Register the EventSource #455
+        // Console.WriteLine($"\n{nameof(OperationCanceledException)} thrown\n"); //TODO Replace by Log
       }
       finally
       {
-        _tokenSource.Dispose();
+        _tokenSource.Dispose();       //TODO Create and Register the EventSource #455
       }
     }
 
@@ -126,7 +129,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
     private bool m_disposed = false;
 
-    private readonly IDTOProvider _DTOProvider = null;
+    private readonly IDTOProvider _DTOProvider = null; //TODO IDTOProvider - improve definition #471
 
     private Action<bool> m_onDispose = disposing => { };
 
@@ -159,6 +162,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
         }
       }
       m_ViewModel.ProducerErrorMessage = "Running";
+      //TODO Create and Register the EventSource #455
       //ReferenceApplicationEventSource.Log.Initialization($" Setup of the producer engine has been accomplished and it starts sending data.");
     }
 
@@ -168,7 +172,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
         Report(item);
     }
 
-    private void Report(Exception item)
+    private void Report(Exception item) //TODO Create and Register the EventSource #455
     {
       throw new NotImplementedException();
     }

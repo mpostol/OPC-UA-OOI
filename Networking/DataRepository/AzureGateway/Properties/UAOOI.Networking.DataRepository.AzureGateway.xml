@@ -4,11 +4,6 @@
         <name>UAOOI.Networking.DataRepository.AzureGateway</name>
     </assembly>
     <members>
-        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.CommunicationContext">
-            <summary>
-            Class CommunicationContext - implements Azure communication state machine.
-            </summary>
-        </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters">
             <summary>
             Interface defining device parameters for establishing azure connection.
@@ -70,6 +65,24 @@
             <summary>
             Calculates the time interval when to send device state to Azure.
             </summary>
+        </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.CommunicationContext">
+            <summary>
+            Class CommunicationContext - implements Azure communication state machine.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.CommunicationContext.Run(System.Threading.CancellationToken)">
+            <summary>
+            Runs the communication machine.
+            </summary>
+            <param name="cancellation">The cancellation token.</param>
+            <exception cref="T:System.ApplicationException">Only one instance of the task {nameof(Run)} is allowed.</exception>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.CommunicationContext.DisconnectRequest">
+            <summary>
+            Disconnects the request.
+            </summary>
+            <exception cref="T:System.ApplicationException">Calling the {nameof(DisconnectRequest)} operation is allowed only in the running state of the communication machine.</exception>
         </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider.GetDTO(System.String)">
             <summary>
@@ -183,7 +196,7 @@
         </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup">
             <summary>
-            Class RepositoryGroup.
+            Class RepositoryGroup - it is a process state replica.
             Implements the <see cref="T:System.Dynamic.DynamicObject" />
             </summary>
             <seealso cref="T:System.Dynamic.DynamicObject" />

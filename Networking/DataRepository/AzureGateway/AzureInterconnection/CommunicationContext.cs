@@ -37,15 +37,24 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     #region API
 
-    internal async void Run(CancellationToken cancelation)
+    /// <summary>
+    /// Runs the communication machine.
+    /// </summary>
+    /// <param name="cancellation">The cancellation token.</param>
+    /// <exception cref="ApplicationException">Only one instance of the task {nameof(Run)} is allowed.</exception>
+    internal async void Run(CancellationToken cancellation)
     {
       _Logger.LogDebug($"Entering {nameof(Run)} operation");
       if (_running)
         throw new ApplicationException($"Only one instance of the task {nameof(Run)} is allowed.");
       _running = true;
-      await TransitionLoopAsync(cancelation);
+      await TransitionLoopAsync(cancellation);
     }
 
+    /// <summary>
+    /// Disconnects the request.
+    /// </summary>
+    /// <exception cref="ApplicationException">Calling the {nameof(DisconnectRequest)} operation is allowed only in the running state of the communication machine.</exception>
     internal void DisconnectRequest()
     {
       if (!_running)
@@ -65,7 +74,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
     private readonly IDTOProvider _dataProvider;
     private readonly string _repositoryGroup;
     private readonly AzureDeviceParameters _azureDeviceParameters;
-    private readonly ILogger<CommunicationContext> _Logger;
+    private readonly ILogger<CommunicationContext> _Logger;  //TODO Create and Register the EventSource #455
     private MachineState _currentState = MachineState.UnassignedState;
     private bool _disconnectRequest = false;
     private bool _running = false;

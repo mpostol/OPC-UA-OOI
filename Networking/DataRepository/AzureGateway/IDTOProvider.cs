@@ -9,6 +9,7 @@ using System.Collections.Generic;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway
 {
+  //TODO IDTOProvider - improve definition #471
   internal interface IDTOProvider: IEnumerable<string>
   {
     /// <summary>

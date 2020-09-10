@@ -69,7 +69,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
         //ReferenceApplicationEventSource.Log.Initialization($"{nameof(SimulatorDataManagementSetup)}.{nameof(Setup)} starting");
         m_ViewModel.ChangeProducerCommand(() => { m_ViewModel.ProducerErrorMessage = "Restarted"; });
         Start();
-        StartAzureCommunication();
+        StartAzureCommunication(ConfigurationFactory.GetConfiguration());
       }
       catch (Exception _ex)
       {
@@ -129,16 +129,15 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
     private bool m_disposed = false;
 
-    private readonly IDTOProvider _DTOProvider = null; //TODO IDTOProvider - improve definition #471
+    private readonly IDTOProvider _DTOProvider = null;
 
     private Action<bool> m_onDispose = disposing => { };
 
-    private void StartAzureCommunication()
+    private void StartAzureCommunication(ConfigurationData configuration)
     {
       CancellationToken token = _tokenSource.Token;
       List<CommunicationContext> azureComunicationContextList = new List<CommunicationContext>();
       TaskFactory taskFactory = Task.Factory;
-      ConfigurationData configuration = ConfigurationFactory.GetConfiguration();
       foreach (DataSetConfiguration dataset in configuration.DataSets)
       {
         try

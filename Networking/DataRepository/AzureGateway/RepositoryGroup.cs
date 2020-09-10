@@ -12,12 +12,13 @@ using System.Dynamic;
 namespace UAOOI.Networking.DataRepository.AzureGateway
 {
   /// <summary>
-  /// Class RepositoryGroup.
+  /// Class RepositoryGroup - it is a process state replica.
   /// Implements the <see cref="DynamicObject" />
   /// </summary>
   /// <seealso cref="DynamicObject" />
   internal class RepositoryGroup : DynamicObject
   {
+    #region DynamicObject
 
     public override bool TryGetMember(GetMemberBinder binder, out object result)
     {
@@ -41,6 +42,10 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       return false;
     }
 
+    #endregion DynamicObject
+
+    #region API
+
     public Action<type> AddProperty<type>(string propertyName)
     {
       if (_processReplica.ContainsKey(propertyName))
@@ -49,6 +54,10 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       object _value = _processReplica[propertyName];
       return x => Updater<type>(propertyName, x);
     }
+
+    #endregion API
+
+    #region private
 
     private readonly Dictionary<string, object> _processReplica = new Dictionary<string, object>();
 
@@ -64,5 +73,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     {
       _processReplica[propertyName] = value;
     }
+
+    #endregion private
   }
 }

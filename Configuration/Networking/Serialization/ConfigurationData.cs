@@ -1,6 +1,6 @@
-﻿//___________________________________________________________________________________
+//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -13,14 +13,13 @@ using System.Xml.Serialization;
 
 namespace UAOOI.Configuration.Networking.Serialization
 {
-
   /// <summary>
   /// Class ConfigurationData - contains configuration data of the UANetworking application.
   /// </summary>
   public partial class ConfigurationData : IConfigurationDataFactory
   {
-
     #region API
+
     public ObservableCollection<MessageHandlerConfiguration> GetMessageHandlers()
     {
       if (m_ObservableMessageHandlers == null)
@@ -30,6 +29,7 @@ namespace UAOOI.Configuration.Networking.Serialization
       }
       return m_ObservableMessageHandlers;
     }
+
     /// <summary>
     /// Gets the instance configuration - collection of data sets represented as the <see cref="DataSetConfiguration"/>.
     /// </summary>
@@ -42,9 +42,11 @@ namespace UAOOI.Configuration.Networking.Serialization
         _node = DataSetConfiguration.Create(descriptor);
       return _node;
     }
-    #endregion
+
+    #endregion API
 
     #region IConfigurationDataFactory
+
     /// <summary>
     /// Gets and instance of <see cref="ConfigurationData" />.
     /// </summary>
@@ -53,8 +55,9 @@ namespace UAOOI.Configuration.Networking.Serialization
     {
       return this;
     }
+
     /// <summary>
-    /// Gets or sets the the delegate capturing functionality tha is executed when the configuration is changing.
+    /// Gets or sets the delegate capturing functionality that is executed when the configuration is changing.
     /// </summary>
     /// <value>The m_ on changed.</value>
     [XmlIgnore]
@@ -62,12 +65,14 @@ namespace UAOOI.Configuration.Networking.Serialization
     {
       get; set;
     }
+
     /// <summary>
     /// Called when the configuration is loaded.
     /// </summary>
     public virtual void OnLoaded() { }
+
     /// <summary>
-    /// Called before the saving the configuration.
+    /// Called before saving the configuration.
     /// </summary>
     public virtual void OnSaving()
     {
@@ -78,23 +83,28 @@ namespace UAOOI.Configuration.Networking.Serialization
       if (m_MessageHandlersCollectionChanged)
         MessageHandlers = m_ObservableMessageHandlers.Select<ICloneable, MessageHandlerConfiguration>(x => (MessageHandlerConfiguration)x.Clone()).ToArray<MessageHandlerConfiguration>();
     }
-    #endregion
+
+    #endregion IConfigurationDataFactory
 
     #region private
-    private bool m_PendingChanges = false;
+
+    private bool m_PendingChages = false;
     private bool m_MessageHandlersCollectionChanged = false;
     private List<DataSetConfiguration> b_DataSetConfigurationList;
     private ObservableCollection<MessageHandlerConfiguration> m_ObservableMessageHandlers;
+
     private void PendingChanges()
     {
       m_PendingChanges = true;
       OnChanged();
     }
+
     private void M_MessageHandlers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
     {
       m_MessageHandlersCollectionChanged = true;
       OnChanged();
     }
+
     private List<DataSetConfiguration> DataSetsList
     {
       get
@@ -104,8 +114,7 @@ namespace UAOOI.Configuration.Networking.Serialization
         return b_DataSetConfigurationList;
       }
     }
-    #endregion
 
+    #endregion private
   }
-
 }

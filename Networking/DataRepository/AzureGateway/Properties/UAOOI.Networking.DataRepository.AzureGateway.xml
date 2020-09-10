@@ -4,47 +4,85 @@
         <name>UAOOI.Networking.DataRepository.AzureGateway</name>
     </assembly>
     <members>
-        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.CommunicationContext">
-            <summary>
-            Class CommunicationContext - implements Azure communication state machine.
-            </summary>
-        </member>
-        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters">
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters">
             <summary>
             Interface defining device parameters for establishing azure connection.
             </summary>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.TransportType">
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.ParseRepositoryGroup(System.String)">
+            <summary>
+            Parses the specified configuration if <paramref name="repositoryGroup"/> is not empty, otherwise parse it .
+            </summary>
+            <param name="repositoryGroup">The configuration.</param>
+            <returns>AzureDeviceParameters.</returns>
+            <exception cref="T:System.NotImplementedException">parse string</exception>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters"/> class.
+            </summary>
+            <remarks> Must be public to be used by the command line parser</remarks>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.ResourceGroupName">
+            <summary>
+            Gets or sets the name of the resource group.
+            </summary>
+            <value>The name of the resource group.</value>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.TransportType">
             <summary>
             Gets the transport type used for this device.
             </summary>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.AzureDeviceId">
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.AzureDeviceId">
             <summary>
             Gets the Id corresponding to Azure device id.
             </summary>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.AzureScopeId">
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.AzureScopeId">
             <summary>
             Gets the azure scope id in which given device resides.
             </summary>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.AzurePrimaryKey">
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.AzurePrimaryKey">
             <summary>
             Gets the Azure primary key.
             </summary>
             <value>The Azure primary key.</value>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.AzureSecondaryKey">
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.AzureSecondaryKey">
             <summary>
             Gets the azure secondary key.
             </summary>
             <value>The azure secondary key.</value>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IAzureDeviceParameters.PublishingInterval">
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.PublishingIntervalMS">
             <summary>
             Gets the time interval when to send device state to Azure.
             </summary>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.PublishingInterval">
+            <summary>
+            Calculates the time interval when to send device state to Azure.
+            </summary>
+        </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.CommunicationContext">
+            <summary>
+            Class CommunicationContext - implements Azure communication state machine.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.CommunicationContext.Run(System.Threading.CancellationToken)">
+            <summary>
+            Runs the communication machine.
+            </summary>
+            <param name="cancellation">The cancellation token.</param>
+            <exception cref="T:System.ApplicationException">Only one instance of the task {nameof(Run)} is allowed.</exception>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.CommunicationContext.DisconnectRequest">
+            <summary>
+            Disconnects the request.
+            </summary>
+            <exception cref="T:System.ApplicationException">Calling the {nameof(DisconnectRequest)} operation is allowed only in the running state of the communication machine.</exception>
         </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider.GetDTO(System.String)">
             <summary>
@@ -158,7 +196,7 @@
         </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup">
             <summary>
-            Class RepositoryGroup.
+            Class RepositoryGroup - it is a process state replica.
             Implements the <see cref="T:System.Dynamic.DynamicObject" />
             </summary>
             <seealso cref="T:System.Dynamic.DynamicObject" />

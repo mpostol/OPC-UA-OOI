@@ -5,9 +5,12 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using System.Collections.Generic;
+
 namespace UAOOI.Networking.DataRepository.AzureGateway
 {
-  internal interface IDTOProvider
+  //TODO IDTOProvider - improve definition #471
+  internal interface IDTOProvider: IEnumerable<string>
   {
     /// <summary>
     /// Gets the Data Transfer Object to be transmitted to Azure.

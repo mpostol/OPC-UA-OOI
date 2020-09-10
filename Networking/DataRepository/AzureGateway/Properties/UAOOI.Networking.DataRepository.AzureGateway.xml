@@ -84,6 +84,11 @@
             </summary>
             <exception cref="T:System.ApplicationException">Calling the {nameof(DisconnectRequest)} operation is allowed only in the running state of the communication machine.</exception>
         </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider">
+            <summary>
+            Interface IDTOProvider - used to get access to data cached in the selected RepositoryGroup
+            </summary>
+        </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider.GetDTO(System.String)">
             <summary>
             Gets the Data Transfer Object to be transmitted to Azure.

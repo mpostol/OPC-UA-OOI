@@ -47,8 +47,8 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
     /// <summary>
     /// Initializes a new instance of the <see cref="AzureDeviceParameters"/> class.
     /// </summary>
-    /// <remarks> Must be protected to be used by Mock in UT</remarks>
-    protected AzureDeviceParameters()
+    /// <remarks> Must be public to be used by the command line parser</remarks>
+    public AzureDeviceParameters()
     {
     }
 
@@ -57,44 +57,57 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
     #region API
 
     /// <summary>
+    /// Gets or sets the name of the resource group.
+    /// </summary>
+    /// <value>The name of the resource group.</value>
+    [Value(0, HelpText = "Resource Group Name retrieved as the first identifier", Required = true)]
+    public string ResourceGroupName { get; set; }
+
+    /// <summary>
     /// Gets the transport type used for this device.
     /// </summary>
     [Option('t', "transport", HelpText = "TransportType", Default = default(TransportType), Required = false)]
-    internal TransportType TransportType { get; set; }
+    public TransportType TransportType { get; set; }
 
     /// <summary>
     /// Gets the Id corresponding to Azure device id.
     /// </summary>
     [Option('d', "DeviceId", HelpText = "a string representing AzureDeviceId", Required = true)]
-    internal string AzureDeviceId { get; set; }
+    public string AzureDeviceId { get; set; }
 
     /// <summary>
     /// Gets the azure scope id in which given device resides.
     /// </summary>
     [Option('s', "ScopeId", HelpText = "a string representing AzureScopeId", Required = true)]
-    internal string AzureScopeId { get; set; }
+    public string AzureScopeId { get; set; }
 
     /// <summary>
     /// Gets the Azure primary key.
     /// </summary>
     /// <value>The Azure primary key.</value>
     [Option('p', "PrimaryKey", HelpText = "a string representing AzurePrimaryKey", Required = true)]
-    internal string AzurePrimaryKey { get; set; }
+    public string AzurePrimaryKey { get; set; }
 
     /// <summary>
     /// Gets the azure secondary key.
     /// </summary>
     /// <value>The azure secondary key.</value>
     [Option('k', "SecondaryKey", HelpText = "a string representing AzureSecondaryKey", Required = true)]
-    internal string AzureSecondaryKey { get; set; }
+    public string AzureSecondaryKey { get; set; }
 
     /// <summary>
     /// Gets the time interval when to send device state to Azure.
     /// </summary>
-    [Option('i', "Interval", HelpText = "an integer representing PublishingInterval", Required = true)]
-    internal int PublishingIntervalMS { get; set; }
+    [Option('i', "Interval", HelpText = "an integer representing PublishingInterval", Required = false)]
+    public int PublishingIntervalMS { get; set; }
 
-    internal TimeSpan PublishingInterval => TimeSpan.FromMilliseconds(Math.Max(1000, PublishingIntervalMS));
+    /// <summary>
+    /// Calculates the time interval when to send device state to Azure.
+    /// </summary>
+    internal TimeSpan PublishingInterval()
+    {
+      return TimeSpan.FromMilliseconds(Math.Max(1000, PublishingIntervalMS));
+    }
 
     #endregion API
   }

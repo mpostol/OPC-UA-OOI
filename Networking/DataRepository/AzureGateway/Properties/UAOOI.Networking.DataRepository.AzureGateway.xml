@@ -26,7 +26,13 @@
             <summary>
             Initializes a new instance of the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters"/> class.
             </summary>
-            <remarks> Must be protected to be used by Mock in UT</remarks>
+            <remarks> Must be public to be used by the command line parser</remarks>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.ResourceGroupName">
+            <summary>
+            Gets or sets the name of the resource group.
+            </summary>
+            <value>The name of the resource group.</value>
         </member>
         <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.TransportType">
             <summary>
@@ -58,6 +64,11 @@
         <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.PublishingIntervalMS">
             <summary>
             Gets the time interval when to send device state to Azure.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.PublishingInterval">
+            <summary>
+            Calculates the time interval when to send device state to Azure.
             </summary>
         </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider.GetDTO(System.String)">

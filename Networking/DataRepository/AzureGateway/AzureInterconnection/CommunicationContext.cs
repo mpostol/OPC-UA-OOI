@@ -243,7 +243,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
             case MachineState.DataTransferingState:
               _Logger.LogDebug($"{nameof(CommunicationContext)} entering the state: {nameof(MachineState.UnassignedState)}");
-              await Task.Delay(_azureDeviceParameters.PublishingInterval, token);
+              await Task.Delay(_azureDeviceParameters.PublishingInterval(), token);
               await DataTransfer(deviceClient, token);
               break;
           }

@@ -38,7 +38,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     public override ulong ContentMask //TODO must be implemented - get it from message.
     {
       get { return ulong.MaxValue; }
-      protected set { throw new InvalidOperationException($"ContentMask cannopt be set"); }
+      protected set { throw new InvalidOperationException($"ContentMask cannot be set"); }
     }
     /// <summary>
     /// Gets or sets the message header.

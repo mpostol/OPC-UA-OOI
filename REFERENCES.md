@@ -2,19 +2,39 @@
 
 ## Mariusz Postol
 
+<!-- Publications -->
+
+- Postół M. (2020) Object-Oriented Internet Reactive Interoperability. In: Krzhizhanovskaya V. et al. (eds) Computational Science – ICCS 2020. ICCS 2020. Lecture Notes in Computer Science, vol 12141. Springer, Cham; [DOI: https://doi.org/10.1007/978-3-030-50426-7_31](https://doi.org/10.1007/978-3-030-50426-7_31)
+  - Postół M. (2020) [Object-Oriented Internet Reactive Interoperability](https://www.researchgate.net/publication/341882427_Object-Oriented_Internet_Reactive_Interoperability), presentation, DOI: 10.13140/RG.2.2.33984.56323
+
+- Mariusz Postol, [Machine to Machine Semantic-Data Based Communication: Comprehensive Survey](https://www.researchgate.net/publication/341165347_Machine_to_Machine_Semantic-Data_Based_Communication_Comprehensive_Survey) chapter in book [Computer Game Innovations 2018](https://www.researchgate.net/publication/335524620_Computer_Game_Innovations_2018), Publisher: Lodz University of Technology Press; ISBN: 978-83-7283-999-2
+
+- Mariusz Postol, [Object Oriented Internet](https://ieeexplore.ieee.org/abstract/document/7321562), [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp), 2015, [IEEE Xplore Digital Library](https://ieeexplore.ieee.org/abstract/document/7321562) [![DOI](https://img.shields.io/badge/DOI-10.15439%2F2015F160-blue)](https://fedcsis.org/proceedings/2015/pliks/160.pdf)
+
 <!--OOI on GitHub-->
 
-- [GitHub UAOOI.Networking.UDPMessageHandler][OOI.Networking.UDPMessageHandler]
+- [Object Oriented Internet - C# deliverables supporting a new Machine To Machine (M2M) communication architecture; GitHub Open Source Software][OOI]
+  - [GitHub UAOOI.Networking.UDPMessageHandler][OOI.Networking.UDPMessageHandler]
+  - [GitHub UAOOI.Networking.ReferenceApplication][OOI.Networking.ReferenceApplication]
+  - [GitHub UAOOI Releases Page][OOI.Releases]
+  - [API Browser is available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 
+[OOI]:https://github.com/mpostol/OPC-UA-OOI
 [OOI.Networking.UDPMessageHandler]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/UDPMessageHandler
-
-- [GitHub UAOOI.Networking.ReferenceApplication][OOI.Networking.ReferenceApplication]
-
 [OOI.Networking.ReferenceApplication]:https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/ReferenceApplication
-
-- [GitHub UAOOI Releases Page][OOI.Releases]
-
 [OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
+
+- [Object Oriented Internet - online ebook][OOIBook]
+
+[OOIBook]:https://commsvr.gitbook.io/ooi/readme
+
+- [OPC UA Address Space Model Designer (ASMD); GitHub Open Source Software][ASMD]
+
+[ASMD]:https://github.com/mpostol/ASMD
+
+- [CommServer software family - management of the migration to open source.][migration2os]
+
+[migration2os]:https://github.com/commsvr-com/migration2os
 
 <!--wordpress-->
 
@@ -48,7 +68,7 @@
 
 [CAS.OPCUAIMD]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf
 
-- [OPC UA Address Space Model Designer, 2019][CAS.ASMD]
+- [CAS OPC UA Address Space Model Designer, CommServer software family][CAS.ASMD]
 
 [CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
 

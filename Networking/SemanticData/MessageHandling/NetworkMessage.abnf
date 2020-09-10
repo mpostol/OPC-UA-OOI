@@ -34,7 +34,11 @@ ExtendedFlags1          = PublisherIdType DataSetClassIdEnabled SecurityEnabled 
                                                                                                                                             ; If the field is omitted, the default value of 0 is applied for all bits.
 ExtendedFlags2          = ChunkMessage PromotedFieldsEnabled NetworkMessageType ExtendedFlags2Reserved  ; The ExtendedFlags2 shall be omitted if bit ExtendedFlags2Enabled of the ExtendedFlags1 is false.
                                                                                                         ; If the field is omitted, the Subscriber shall handle the related bits as false.
-PublisherId             = OCTET / UInt16 / UInt32 / UInt64 / String     ; Identifies the Publisher. The syntax depends on PublisherIdType
+PublisherId             = OCTET / UInt16 / UInt32 / UInt64 / String     ; Identifies the Publisher. PublisherId and WriterGroupId identify the WriterGroup. The syntax depends on PublisherIdType
+																		; The PublisherId is a unique identifier for a Publisher within a Message Oriented Middleware. It can be included in sent NetworkMessage for 
+																		; identification or filtering. The value of the PublisherId is typically shared between PubSubConnections but the assignment of the PublisherId is vendor specific.
+																		; The PublisherId parameter is only relevant for the Publisher functionality inside a PubSubConnection. The filter setting on the Subscriber side is 
+																		; contained in the DataSetReader parameters. Valid DataTypes are UInteger and String.
 DataSetClassId          = Guid  
                         ; DataSetClassId - This field provides the globally unique identifier of the class of DataSet if the DataSet is based on a DataSetClass. 
                         ; In this case, this field shall match the DataSetClassId of the concrete DataSet configuration. 
@@ -67,7 +71,9 @@ ExtendedFlags2Enabled       = BIT       ; Bit 7 - The bit shall be 0, if Extende
 
 ; GroupHeader
 GroupFlags              = WriterGroupIdEnabled GroupVersionEnabled NetworkMessageNumberEnabled SequenceNumberEnabled GroupFlagsReserved 
-WriterGroupId           = UInt16        ; Unique id for the WriterGroup in the Publisher. A Subscriber can skip NetworkMessages from WriterGroups it does not expect NetworkMessages from. 
+WriterGroupId           = UInt16        ; PublisherId and WriterGroupId identify the WriterGroup - unique id for the WriterGroup in the Publisher. A Subscriber can skip NetworkMessages from WriterGroups it does not expect NetworkMessages from. 
+					; Note: The DataSetWriterId with DataType UInt16 defines the unique ID of the DataSetWriter for a PublishedDataSet. It is used to select DataSetMessages for a PublishedDataSet on the Subscriber side.
+					; It shall be unique across all DataSetWriters for a PublisherId. All values, except for 0, are valid DataSetWriterIds. The value 0 is defined as null value.
                                         ; This field shall be omitted if bit WriterGroupIdEnabled of the GroupFlags is "0".
 GroupVersion            = VersionTime   ; Version of the header and payload layout configuration of the NetworkMessages sent for the group. 
                                         ; This field shall be omitted if bit GroupVersionEnabled of the GroupFlags is "0".

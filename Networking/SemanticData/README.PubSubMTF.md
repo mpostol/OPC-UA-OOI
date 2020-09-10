@@ -51,7 +51,7 @@ A `Security Key Management` provides keys for message security that can be used 
 - signing but no encryption
 - signing and encryption
 
-Message security is end-to-end security (from `Publisher` to `Subscriber` instances) and requires common knowledge of the cryptographic artifacts necessary to sign and encrypt on the `Publisher` side as well as validate the signature and decrypt on the `Subscriber` side. The message security is independent of the transport protocol mapping and is defined by the specyfication.
+Message security is end-to-end security (from `Publisher` to `Subscriber` instances) and requires common knowledge of the cryptographic artifacts necessary to sign and encrypt on the `Publisher` side as well as validate the signature and decrypt on the `Subscriber` side. The message security is independent of the transport protocol mapping and is defined by the specification.
 
 The specification defines OPC UA Information Model for `Security Key Management` services and many possible scenarios that can be used to select the security profile and provide appropriate security artifacts to the `Publisher` and `Subscriber` using this model. One of them is to implement this model as the **OPC UA Server** or **OPC UA Client** where the OPC UA IM model is used to describe the server OPC UA Address Space. A detailed description of all possible scenarios applicable to select security profile and exchange security artifacts is outside of the scope of this section.
 
@@ -142,7 +142,7 @@ The following documents, in whole or in part, are normatively referenced in this
 
 The `UAOOI.Networking.SemanticData` library is designed to be a foundation of developing application programs that are taking part of message-centric communication pattern and interconnected using the reactive networking concept described in the section [Semantic-Data Processing Architecture](../README.MessageCentricCommunication.md). To promote interoperability this library is a collection of types aimed at implementation of the [Part 14 PubSub][OPC.UA.PubSub] standard.
 
-The preliminary code help documentation is here: [API Browser](http://www.commsvr.com/download/OPC-UA-OOI/index.html).
+The preliminary code help documentation is [available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html).
 
 The topics contained in the document [Getting Started Tutorial](../../Networking/SemanticData/READMEGettingStartedTutorial.md) are intended to give you quick exposure to the `OOI Reactive Application` network-based data exchange programming experience. Working through this tutorial gives you an introductory understanding of the steps required to customize existing `OOI Reactive Application`.
 

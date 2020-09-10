@@ -1,4 +1,4 @@
-﻿//___________________________________________________________________________________
+//___________________________________________________________________________________
 //
 //  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
 //
@@ -78,7 +78,7 @@ namespace UAOOI.Configuration.Networking.Serialization
     {
       if (b_DataSetConfigurationList == null)
         return;
-      if (m_PendingChages)
+      if (m_PendingChanges)
         DataSets = b_DataSetConfigurationList.ToArray<DataSetConfiguration>();
       if (m_MessageHandlersCollectionChanged)
         MessageHandlers = m_ObservableMessageHandlers.Select<ICloneable, MessageHandlerConfiguration>(x => (MessageHandlerConfiguration)x.Clone()).ToArray<MessageHandlerConfiguration>();
@@ -95,7 +95,7 @@ namespace UAOOI.Configuration.Networking.Serialization
 
     private void PendingChanges()
     {
-      m_PendingChages = true;
+      m_PendingChanges = true;
       OnChanged();
     }
 

@@ -70,6 +70,7 @@
     <Compile Include="CSharpSelectedTypesEncoding.cs" />
     <Compile Include="Instrumentation\ConfigurationDataWrapper.cs" />
     <Compile Include="Instrumentation\Container.cs" />
+    <Compile Include="Instrumentation\CustomConfigurationData.cs" />
     <Compile Include="Instrumentation\Logger.cs" />
     <Compile Include="Instrumentation\ReferenceConfiguration.cs" />
     <Compile Include="JSONDataContractSerializersUnitTest.cs" />
@@ -88,6 +89,8 @@
       <Link>DependencyValidation1.layerdiagram</Link>
       <Visible>False</Visible>
     </AdditionalFiles>
+    <None Include="Instrumentation\GoCS.cmd" />
+    <None Include="Instrumentation\GoXSD.cmd" />
     <None Include="OPCUAOOIKey.snk" />
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +126,11 @@
   <ItemGroup>
     <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
     <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestData\CustomConfigurationData.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

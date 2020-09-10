@@ -11,7 +11,9 @@ Here are steps undertook to implement the `Consumer` role in the application:
 1. `IBindingFactory`: has been implemented in the class  `DataConsumer` that is responsible to synchronize the values of the local data repository properties and messages received over the wire.
 1. `IConfigurationFactory`: the class `ConsumerConfigurationFactory` implements this interface to be used for the configuration file opening.
 
-## How to: Implement `DataManagementSetup`
+## How to Guide
+
+### How to: Implement `DataManagementSetup`
 
 The `LoggerManagementSetup` constructor initializes all properties, which are injection points of all parts composing this role.
 
@@ -38,13 +40,13 @@ In this example, it is assumed that [`ServiceLocator`](https://www.nuget.org/pac
 
 Finally the `DataManagementSetup.Start()` method is called to initialize the infrastructure, enable all associations and start pumping the data.
 
-## How to: Implement IBindingFactory
+### How to: Implement IBindingFactory
 
 Implementation of this interface is a basic step to implement `Consumer` functionality. An instance of the `IBindingFactory` is responsible to create objects implementing `IBinding` that can be used by the `Consumer` to save the data received over the wire in the local data repository.
 
-The class `DataConsumer` is a sample implementation of a data logger functionality recording data over time. It consumes the testing data sent and updates properties in the class `ConsumerViewModel` implementing *ViewModel* layer in the *[Model View ViewModel (on MSDN)](https://msdn.microsoft.com/en-us/magazine/dd419663.aspx)* (*MVVM pattern*). The class `DataConsumer` demonstrates how to create bindings interconnecting the data received over the wire and the properties that are the ultimate destination of the data. The user interface provided by the *View* layer implemented in the `UAOOI.Networking.ReferenceApplication.MainWindow` class is dynamically bounded at run time with the `ConsumerViewModel`. To implement the *ViewModel* layer in the *MVVM pattern* the helper generic class `UAOOI.Networking.SemanticData.DataRepository.ProducerBindingMonitoredValue<type>` is used.
+The class `DataConsumer` is a sample implementation of a data logger functionality recording data over time. It consumes the testing data sent and updates properties in the class `ConsumerViewModel` implementing *ViewModel* layer in the *[Model View ViewModel (on MSDN)](https://msdn.microsoft.com/en-us/magazine/dd419663.aspx)* (*MVVM pattern*). The class `DataConsumer` demonstrates how to create bindings interconnecting the data received over the wire and the properties that are the ultimate destination of the data. The user interface provided by the *View* layer implemented in the `UAOOI.Networking.ReferenceApplication.MainWindow` class is dynamically bounded at run time with the `ConsumerViewModel`. To implement the *ViewModel* layer in the *`MVVM pattern* the helper generic class `UAOOI.Networking.SemanticData.DataRepository.ProducerBindingMonitoredValue<type>` is used.
 
-## How to: Implement `IConfigurationFactory`
+### How to: Implement `IConfigurationFactory`
 
 Implementation of this interface is straightforward and based entirely on the library [`UAOOI.Configuration.Networking`](../../Configuration/Networking/README.MD). In a typical scenario, this implementation should not be considered for further modification. The only open question is how to provide the name of the file containing the configuration of this role. In proposed solution the name is provided by a service defined by  the application entry point part and localized using `IServiceLocator` in the class `LoggerManagementSetup` - see code snipped below:
 
@@ -63,8 +65,7 @@ This file contains a mirror configuration of the [`Producer`](../../Networking/S
 
 ## See also
 
-- [API Browser][API Browser]: the preliminary code help documentation.
+- API Browser: the preliminary code help documentation - [available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 
-[API Browser]:http://www.commsvr.com/download/OPC-UA-OOI/index.html
 [wordpress.OPCUACD]:https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible

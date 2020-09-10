@@ -35,6 +35,8 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
     #endregion constructor
 
+    #region API
+
     internal async void Run(CancellationToken cancelation)
     {
       _Logger.LogDebug($"Entering {nameof(Run)} operation");
@@ -50,6 +52,8 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
         throw new ApplicationException($"Calling the {nameof(DisconnectRequest)} operation is allowed only in the running state of the communication machine.");
       _disconnectRequest = true;
     }
+
+    #endregion API
 
     #region private
 

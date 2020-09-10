@@ -5,8 +5,10 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using CommandLine;
 using Microsoft.Azure.Devices.Client;
 using System;
+using System.Collections.Generic;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 {
@@ -18,17 +20,28 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
     #region constructor
 
     /// <summary>
-    /// Parses the specified configuration if <paramref name="configuration"/> is not empty, otherwise parse it .
+    /// Parses the specified configuration if <paramref name="repositoryGroup"/> is not empty, otherwise parse it .
     /// </summary>
-    /// <param name="configuration">The configuration.</param>
+    /// <param name="repositoryGroup">The configuration.</param>
     /// <returns>AzureDeviceParameters.</returns>
     /// <exception cref="NotImplementedException">parse string</exception>
-    internal static AzureDeviceParameters Parse(string configuration)
+    internal static AzureDeviceParameters ParseRepositoryGroup(string repositoryGroup)
     {
       AzureDeviceParameters ret = new AzureDeviceParameters();
-      if (!String.IsNullOrEmpty(configuration))
-        throw new NotImplementedException("parse string");
+      if (String.IsNullOrEmpty(repositoryGroup))
+        return ret;
+      string[] args = repositoryGroup.Split(' ');
+      using (Parser parserInstance = new Parser(x => { x.AutoHelp = false; x.AutoVersion = false; x.HelpWriter = null; }))
+        parserInstance.ParseArguments<AzureDeviceParameters>(args).WithParsed<AzureDeviceParameters>(opts => ret = opts).WithNotParsed<AzureDeviceParameters>(X => ReportErrors(X));
       return ret;
+    }
+
+    private static void ReportErrors(IEnumerable<Error> errors)
+    {
+      List<ArgumentOutOfRangeException> errorsList = new List<ArgumentOutOfRangeException>();
+      foreach (Error e in errors)
+        errorsList.Add(new ArgumentOutOfRangeException($"{e.Tag} with stop processing = {e.StopsProcessing}"));
+      throw new AggregateException(errorsList);
     }
 
     /// <summary>
@@ -46,34 +59,42 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
     /// <summary>
     /// Gets the transport type used for this device.
     /// </summary>
-    internal TransportType TransportType { get; } = default(TransportType);
+    [Option('t', "transport", HelpText = "TransportType", Default = default(TransportType), Required = false)]
+    internal TransportType TransportType { get; set; }
 
     /// <summary>
     /// Gets the Id corresponding to Azure device id.
     /// </summary>
-    internal string AzureDeviceId { get; } = string.Empty;
+    [Option('d', "DeviceId", HelpText = "a string representing AzureDeviceId", Required = true)]
+    internal string AzureDeviceId { get; set; }
 
     /// <summary>
     /// Gets the azure scope id in which given device resides.
     /// </summary>
-    internal string AzureScopeId { get; } = string.Empty;
+    [Option('s', "ScopeId", HelpText = "a string representing AzureScopeId", Required = true)]
+    internal string AzureScopeId { get; set; }
 
     /// <summary>
     /// Gets the Azure primary key.
     /// </summary>
     /// <value>The Azure primary key.</value>
-    internal string AzurePrimaryKey { get; } = string.Empty;
+    [Option('p', "PrimaryKey", HelpText = "a string representing AzurePrimaryKey", Required = true)]
+    internal string AzurePrimaryKey { get; set; }
 
     /// <summary>
     /// Gets the azure secondary key.
     /// </summary>
     /// <value>The azure secondary key.</value>
-    internal string AzureSecondaryKey { get; } = string.Empty;
+    [Option('k', "SecondaryKey", HelpText = "a string representing AzureSecondaryKey", Required = true)]
+    internal string AzureSecondaryKey { get; set; }
 
     /// <summary>
     /// Gets the time interval when to send device state to Azure.
     /// </summary>
-    internal TimeSpan PublishingInterval { get; set; } = TimeSpan.FromSeconds(1.0);
+    [Option('i', "Interval", HelpText = "an integer representing PublishingInterval", Required = true)]
+    internal int PublishingIntervalMS { get; set; }
+
+    internal TimeSpan PublishingInterval => TimeSpan.FromMilliseconds(Math.Max(1000, PublishingIntervalMS));
 
     #endregion API
   }

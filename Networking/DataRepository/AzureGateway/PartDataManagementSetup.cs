@@ -138,19 +138,39 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       ConfigurationData configuration = ConfigurationFactory.GetConfiguration();
       foreach (DataSetConfiguration dataset in configuration.DataSets)
       {
-        string repository = dataset.RepositoryGroup;
-        TimeSpan publishingInterval = TimeSpan.FromMilliseconds(dataset.PublishingInterval);
-        AzureDeviceParameters parameters = AzureDeviceParameters.Parse(repository);
-        if (parameters == null)
+        try
+        {
+          AzureDeviceParameters parameters = AzureDeviceParameters.ParseRepositoryGroup(dataset.RepositoryGroup);
+          if (parameters == null)
+            continue;
+          CommunicationContext communicationContext = new CommunicationContext(_DTOProvider, dataset.RepositoryGroup, parameters, null);
+          azureComunicationContextList.Add(communicationContext);
+          Task newCommunicatinTask = taskFactory.StartNew(() => communicationContext.Run(token), token);
+          _tasks.Add(newCommunicatinTask);
+        }
+        catch (AggregateException ax)
+        {
+          Report(ax);
           continue;
-        parameters.PublishingInterval = publishingInterval > parameters.PublishingInterval ? publishingInterval : parameters.PublishingInterval;
-        CommunicationContext communicationContext = new CommunicationContext(_DTOProvider, repository, parameters, null);
-        azureComunicationContextList.Add(communicationContext);
-        Task newCommunicatinTask = taskFactory.StartNew(() => communicationContext.Run(token), token);
-        _tasks.Add(newCommunicatinTask);
+        }
+        catch (Exception)
+        {
+          throw;
+        }
       }
       m_ViewModel.ProducerErrorMessage = "Running";
       //ReferenceApplicationEventSource.Log.Initialization($" Setup of the producer engine has been accomplished and it starts sending data.");
+    }
+
+    private void Report(AggregateException ax)
+    {
+      foreach (Exception item in ax.InnerExceptions)
+        Report(item);
+    }
+
+    private void Report(Exception item)
+    {
+      throw new NotImplementedException();
     }
 
     #endregion private

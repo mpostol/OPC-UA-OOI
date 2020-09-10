@@ -18,7 +18,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.AzureInterconnection
     [TestMethod]
     public void ConstructorTest()
     {
-      AzureDeviceParameters instaneToTest = AzureDeviceParameters.Parse(String.Empty);
+      AzureDeviceParameters instaneToTest = AzureDeviceParameters.ParseRepositoryGroup(String.Empty);
       Assert.IsNotNull(instaneToTest);
       Assert.IsTrue(String.IsNullOrEmpty(instaneToTest.AzureDeviceId));
       Assert.IsTrue(String.IsNullOrEmpty(instaneToTest.AzurePrimaryKey));

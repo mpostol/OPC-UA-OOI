@@ -14,11 +14,11 @@
             Interface defining device parameters for establishing azure connection.
             </summary>
         </member>
-        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.Parse(System.String)">
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.ParseRepositoryGroup(System.String)">
             <summary>
-            Parses the specified configuration if <paramref name="configuration"/> is not empty, otherwise parse it .
+            Parses the specified configuration if <paramref name="repositoryGroup"/> is not empty, otherwise parse it .
             </summary>
-            <param name="configuration">The configuration.</param>
+            <param name="repositoryGroup">The configuration.</param>
             <returns>AzureDeviceParameters.</returns>
             <exception cref="T:System.NotImplementedException">parse string</exception>
         </member>
@@ -55,7 +55,7 @@
             </summary>
             <value>The azure secondary key.</value>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.PublishingInterval">
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.AzureDeviceParameters.PublishingIntervalMS">
             <summary>
             Gets the time interval when to send device state to Azure.
             </summary>

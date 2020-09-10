@@ -20,7 +20,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.AzureInterconnection
     public void ConstructorTest()
     {
       Mock<ILogger<CommunicationContext>> loggerFixture = new Mock<ILogger<CommunicationContext>>();
-      AzureDeviceParameters azureParametersFixture = AzureDeviceParameters.Parse(String.Empty);
+      AzureDeviceParameters azureParametersFixture = AzureDeviceParameters.ParseRepositoryGroup(String.Empty);
       Mock<IDTOProvider> IDTOProviderFixture = new Mock<IDTOProvider>();
       Assert.ThrowsException<ArgumentNullException>(() => new CommunicationContext(null, "qwerty", azureParametersFixture, loggerFixture.Object));
       Assert.ThrowsException<ArgumentNullException>(() => new CommunicationContext(IDTOProviderFixture.Object, "qwerty", null, loggerFixture.Object));

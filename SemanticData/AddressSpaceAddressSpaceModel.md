@@ -53,14 +53,14 @@ Accessing information by clients is the first aspect of controlling the informat
 
 ## See also
 
-- [1] [OPC UA Address Space Model Designer, 2019][CAS.ASMD]
+- [1] [Address Space Model Designer (ASMD)][CAS.ASMD]
 - [2] Wolfgang Mahnke, Stefan Helmut Leitner, Matthias Damm. OPC Unified Architecture. Berlin: Springer, 2009.
 - [3] [OPC Unified Architecture Specification Part 3: Address Space Model, OPC Foundation, Rel. 1.04, 2017-11-22][Opc.UA.Part3]
 - [4] [Address Space Model Life-cycle][ASMLC]
 - [5] [UA Information Model - Concept][UAInformationModelConcept]
 
 [Opc.UA.Part3]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-3-address-space-model/
-[CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
+[CAS.ASMD]:https://github.com/mpostol/ASMD
 [UAInformationModelConcept]:InformationModelConcept.md
 [ASMLC]:InformationModelLifecycle.md
 

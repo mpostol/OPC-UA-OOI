@@ -88,7 +88,7 @@ namespace UAOOI.Configuration.Networking.Serialization
 
     #region private
 
-    private bool m_PendingChages = false;
+    private bool m_PendingChanges = false;
     private bool m_MessageHandlersCollectionChanged = false;
     private List<DataSetConfiguration> b_DataSetConfigurationList;
     private ObservableCollection<MessageHandlerConfiguration> m_ObservableMessageHandlers;

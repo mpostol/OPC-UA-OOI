@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
 

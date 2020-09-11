@@ -1,5 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway.Test
 {
@@ -9,21 +18,32 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test
     [TestMethod]
     public void ConstructorTest()
     {
-      dynamic _newInstance = new RepositoryGroup();
-      Assert.ThrowsException<Microsoft.CSharp.RuntimeBinder.RuntimeBinderException>(() => _newInstance.qwerty);
+      RepositoryGroup _itemToTest = new RepositoryGroup();
+      Assert.ThrowsException<NotImplementedException>(() => _itemToTest.Add("Key", null));
+      Assert.ThrowsException<NotImplementedException>(() => _itemToTest.Add(new KeyValuePair<string, object>("Key", null)));
+      Assert.ThrowsException<NotImplementedException>(() => _itemToTest.Clear());
+      Assert.ThrowsException<NotImplementedException>(() => _itemToTest.Remove("Random name"));
+      Assert.IsNotNull(_itemToTest.GetEnumerator());
+      Assert.IsNotNull(_itemToTest.Keys);
+      Assert.AreEqual<int>(0, _itemToTest.Count);
     }
 
     [TestMethod]
-    public void AddPropertyTest()
+    public void GetConsumerBindingJsonSerializationTest()
     {
-      RepositoryGroup _newInstance = new RepositoryGroup();
-      Action<string> _updater = _newInstance.AddProperty<string>("qwerty");
-      Assert.IsNotNull(_updater);
-      dynamic _dynamicIbstance = _newInstance;
-      Assert.IsNotNull(_dynamicIbstance);
-      Assert.IsTrue(string.IsNullOrEmpty(_dynamicIbstance.qwerty));
-      _updater("C5C77AEC - 2C1A - 4D33 - 9BCC - 68318A9BC8E9");
-      Assert.AreEqual<string>("C5C77AEC - 2C1A - 4D33 - 9BCC - 68318A9BC8E9", _dynamicIbstance.qwerty);
+      RepositoryGroup _itemToTest = new RepositoryGroup();
+      string processValueName = "processValueName";
+      Action<String> updater = _itemToTest.AddProperty<string>(processValueName);
+      Assert.IsNotNull(updater);
+      Assert.AreEqual<int>(1, _itemToTest.Count);
+      Assert.AreEqual<string>(default(string), (string)_itemToTest[processValueName]);
+      updater("New value");
+      Assert.AreEqual<string>("New value", (string)_itemToTest[processValueName]);
+      string dto = _itemToTest.ToString();
+      Debug.Write(dto);
+      Assert.AreEqual<int>(32, dto.Length);
+      Assert.AreEqual<string>("{\"processValueName\":\"New value\"}", dto);
+
     }
   }
 }

@@ -13,10 +13,10 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
   internal interface IDTOProvider
   {
     /// <summary>
-    /// Gets the Data Transfer Object to be transmitted to Azure.
+    /// Gets the Data Transfer Object to be transmitted to Azure as the JSON document.
     /// </summary>
     /// <param name="repositoryGroup">The repository group.</param>
-    /// <returns>dynamic.</returns>
-    dynamic GetDTO(string repositoryGroup);
+    /// <returns>object capturing the current state of selected repository group.</returns>
+    string GetDTO(string repositoryGroup);
   }
 }

@@ -6,7 +6,9 @@
 //___________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData.DataRepository;
 
@@ -23,16 +25,17 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test
     }
 
     [TestMethod]
-    public void GetConsumerBindingTest()
+    public void GetConsumerBindingSerializationTest()
     {
       PartBindingFactory newInstance = new PartBindingFactory();
-      IConsumerBinding binding = newInstance.GetConsumerBinding("repositoryGroup", "processValueName", new UATypeInfo(BuiltInType.String));
+      string repositoryName = "RepositoryGroup -tHttp1 -dAzureDeviceId -sAzureScopeId -pAzurePrimaryKey -kAzureSecondaryKey -i2000";
+      IConsumerBinding binding = newInstance.GetConsumerBinding(repositoryName, "processValueName", new UATypeInfo(BuiltInType.String));
       Assert.IsNotNull(binding);
-      dynamic repository = newInstance.GetDTO("repositoryGroup");
-      Assert.IsNotNull(repository);
-      Assert.IsTrue(string.IsNullOrEmpty(repository.processValueName));
       binding.Assign2Repository("New value");
-      Assert.AreEqual<string>("New value", repository.processValueName);
+      string dto = newInstance.GetDTO(repositoryName);
+      Debug.Write(dto);
+      Assert.AreEqual<int>(32, dto.Length);
+      Assert.AreEqual<string>("{\"processValueName\":\"New value\"}", dto);
     }
   }
 }

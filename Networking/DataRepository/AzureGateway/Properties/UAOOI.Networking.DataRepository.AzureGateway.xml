@@ -91,19 +91,19 @@
         </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IDTOProvider.GetDTO(System.String)">
             <summary>
-            Gets the Data Transfer Object to be transmitted to Azure.
+            Gets the Data Transfer Object to be transmitted to Azure as the JSON document.
             </summary>
             <param name="repositoryGroup">The repository group.</param>
-            <returns>dynamic.</returns>
+            <returns>object capturing the current state of selected repository group.</returns>
         </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.PartBindingFactory">
             <summary>
             Class PartBindingFactory.
             Implements the <see cref="T:UAOOI.Networking.SemanticData.IBindingFactory" />
-            Implements the <see cref="!:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider" />
+            Implements the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IDTOProvider" />
             </summary>
             <seealso cref="T:UAOOI.Networking.SemanticData.IBindingFactory" />
-            <seealso cref="!:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider" />
+            <seealso cref="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IDTOProvider" />
         </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.PartBindingFactory.GetConsumerBinding(System.String,System.String,UAOOI.Configuration.Networking.Serialization.UATypeInfo)">
             <summary>
@@ -201,19 +201,130 @@
         </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup">
             <summary>
-            Class RepositoryGroup - it is a process state replica.
-            Implements the <see cref="T:System.Dynamic.DynamicObject" />
+            Class RepositoryGroup - it is a process state replica implementing Data Transfer Object.
+            Implements the <see cref="T:System.Collections.Generic.IDictionary`2" />
             </summary>
-            <seealso cref="T:System.Dynamic.DynamicObject" />
+            <seealso cref="T:System.Collections.Generic.IDictionary`2" />
         </member>
-        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.TryInvokeMember(System.Dynamic.InvokeMemberBinder,System.Object[],System.Object@)">
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.AddProperty``1(System.String)">
             <summary>
-            Provides the implementation for operations that invoke a member. Classes derived from the <see cref="T:System.Dynamic.DynamicObject"></see> class can override this method to specify dynamic behavior for operations such as calling a method.
+            Adds the property to the Dada Transfer Object.
             </summary>
-            <param name="binder">Provides information about the dynamic operation. The binder.Name property provides the name of the member on which the dynamic operation is performed. For example, for the statement sampleObject.SampleMethod(100), where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject"></see> class, binder.Name returns "SampleMethod". The binder.IgnoreCase property specifies whether the member name is case-sensitive.</param>
-            <param name="args">The arguments that are passed to the object member during the invoke operation. For example, for the statement sampleObject.SampleMethod(100), where sampleObject is derived from the <see cref="T:System.Dynamic.DynamicObject"></see> class, args[0] is equal to 100.</param>
-            <param name="result">The result of the member invocation.</param>
-            <returns>true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)</returns>
+            <typeparam name="type">The type of the type.</typeparam>
+            <param name="propertyName">Name of the property.</param>
+            <returns>Action&lt;type&gt;.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">Duplicated property name: {propertyName}</exception>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.Keys">
+            <summary>
+            Gets an <see cref="T:System.Collections.Generic.ICollection`1"></see> containing the keys of the <see cref="T:System.Collections.Generic.IDictionary`2"></see>.
+            </summary>
+            <value>The keys.</value>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.Values">
+            <summary>
+            Gets an <see cref="T:System.Collections.Generic.ICollection`1"></see> containing the values in the <see cref="T:System.Collections.Generic.IDictionary`2"></see>.
+            </summary>
+            <value>The values.</value>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"></see>.
+            </summary>
+            <value>The count.</value>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"></see> is read-only.
+            </summary>
+            <value><c>true</c> if this instance is read only; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.Item(System.String)">
+            <summary>
+            Gets or sets the <see cref="T:System.Object"/> with the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>System.Object.</returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.Add(System.String,System.Object)">
+            <summary>
+            Adds an element with the provided key and value to the <see cref="T:System.Collections.Generic.IDictionary`2"></see>.
+            </summary>
+            <param name="key">The object to use as the key of the element to add.</param>
+            <param name="value">The object to use as the value of the element to add.</param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.ContainsKey(System.String)">
+            <summary>
+            Determines whether the <see cref="T:System.Collections.Generic.IDictionary`2"></see> contains an element with the specified key.
+            </summary>
+            <param name="key">The key to locate in the <see cref="T:System.Collections.Generic.IDictionary`2"></see>.</param>
+            <returns>true if the <see cref="T:System.Collections.Generic.IDictionary`2"></see> contains an element with the key; otherwise, false.</returns>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.Remove(System.String)">
+            <summary>
+            Removes the element with the specified key from the <see cref="T:System.Collections.Generic.IDictionary`2"></see>.
+            </summary>
+            <param name="key">The key of the element to remove.</param>
+            <returns>true if the element is successfully removed; otherwise, false.  This method also returns false if <paramref name="key">key</paramref> was not found in the original <see cref="T:System.Collections.Generic.IDictionary`2"></see>.</returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.TryGetValue(System.String,System.Object@)">
+            <summary>
+            Gets the value associated with the specified key.
+            </summary>
+            <param name="key">The key whose value to get.</param>
+            <param name="value">When this method returns, the value associated with the specified key, if the key is found; otherwise, the default value for the type of the value parameter. This parameter is passed uninitialized.</param>
+            <returns>true if the object that implements <see cref="T:System.Collections.Generic.IDictionary`2"></see> contains an element with the specified key; otherwise, false.</returns>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.Add(System.Collections.Generic.KeyValuePair{System.String,System.Object})">
+            <summary>
+            Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"></see>.
+            </summary>
+            <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"></see>.</param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.Clear">
+            <summary>
+            Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"></see>.
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.Contains(System.Collections.Generic.KeyValuePair{System.String,System.Object})">
+            <summary>
+            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"></see> contains a specific value.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"></see>.</param>
+            <returns>true if <paramref name="item">item</paramref> is found in the <see cref="T:System.Collections.Generic.ICollection`1"></see>; otherwise, false.</returns>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.CopyTo(System.Collections.Generic.KeyValuePair{System.String,System.Object}[],System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1"></see> to an <see cref="T:System.Array"></see>, starting at a particular <see cref="T:System.Array"></see> index.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"></see> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1"></see>. The <see cref="T:System.Array"></see> must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.Remove(System.Collections.Generic.KeyValuePair{System.String,System.Object})">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"></see>.
+            </summary>
+            <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"></see>.</param>
+            <returns>true if <paramref name="item">item</paramref> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"></see>; otherwise, false. This method also returns false if <paramref name="item">item</paramref> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"></see>.</returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.RepositoryGroup.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"></see> object that can be used to iterate through the collection.</returns>
         </member>
     </members>
 </doc>

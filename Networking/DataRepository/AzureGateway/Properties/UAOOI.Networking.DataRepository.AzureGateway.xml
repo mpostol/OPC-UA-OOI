@@ -96,6 +96,43 @@
             <param name="repositoryGroup">The repository group.</param>
             <returns>object capturing the current state of selected repository group.</returns>
         </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewayDiagnosticExtension.LogException(UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource,System.String,System.String,System.Exception)">
+            <summary>
+            Logs the exception using <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource" />.
+            </summary>
+            <param name="eventSource">The event source to be used for problem reporting.</param>
+            <param name="className">Name of the class.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="e">The exception to be reported.</param>
+        </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Tasks">
+            <summary>
+            Class Tasks.
+            </summary>
+        </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Keywords">
+            <summary>
+            Class Keywords - defines the local keywords (flags) that apply to events.
+            </summary>
+        </member>
+        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Log">
+            <summary>
+            Gets the log - implements singleton of the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource"/>.
+            </summary>
+            <value>The log.</value>
+        </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.NetworkingEventSourceProvider">
+            <summary>
+            Class NetworkingEventSourceProvider - gets access to an instance of <see cref="T:System.Diagnostics.Tracing.EventSource"/> to be registered by the logging infrastructure.
+            </summary>
+            <seealso cref="T:UAOOI.Networking.Core.INetworkingEventSourceProvider" />
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.NetworkingEventSourceProvider.GetPartEventSource">
+            <summary>
+            Gets the part event source.
+            </summary>
+            <returns>Returns an instance of <see cref="T:System.Diagnostics.Tracing.EventSource" />.</returns>
+        </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.PartBindingFactory">
             <summary>
             Class PartBindingFactory.

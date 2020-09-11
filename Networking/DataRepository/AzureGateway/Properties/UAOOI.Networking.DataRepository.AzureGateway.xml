@@ -84,12 +84,12 @@
             </summary>
             <exception cref="T:System.ApplicationException">Calling the {nameof(DisconnectRequest)} operation is allowed only in the running state of the communication machine.</exception>
         </member>
-        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider">
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IDTOProvider">
             <summary>
             Interface IDTOProvider - used to get access to data cached in the selected RepositoryGroup
             </summary>
         </member>
-        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider.GetDTO(System.String)">
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.IDTOProvider.GetDTO(System.String)">
             <summary>
             Gets the Data Transfer Object to be transmitted to Azure.
             </summary>
@@ -100,10 +100,10 @@
             <summary>
             Class PartBindingFactory.
             Implements the <see cref="T:UAOOI.Networking.SemanticData.IBindingFactory" />
-            Implements the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider" />
+            Implements the <see cref="!:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider" />
             </summary>
             <seealso cref="T:UAOOI.Networking.SemanticData.IBindingFactory" />
-            <seealso cref="T:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider" />
+            <seealso cref="!:UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider" />
         </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.PartBindingFactory.GetConsumerBinding(System.String,System.String,UAOOI.Configuration.Networking.Serialization.UATypeInfo)">
             <summary>

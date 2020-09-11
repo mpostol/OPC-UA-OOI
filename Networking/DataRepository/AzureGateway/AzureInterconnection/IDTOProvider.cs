@@ -5,7 +5,7 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
-namespace UAOOI.Networking.DataRepository.AzureGateway
+namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 {
   /// <summary>
   /// Interface IDTOProvider - used to get access to data cached in the selected RepositoryGroup

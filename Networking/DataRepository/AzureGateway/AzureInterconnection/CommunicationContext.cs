@@ -10,7 +10,6 @@ using Microsoft.Azure.Devices.Provisioning.Client;
 using Microsoft.Azure.Devices.Provisioning.Client.Transport;
 using Microsoft.Azure.Devices.Shared;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Text;
 using System.Threading;
@@ -174,7 +173,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       try
       {
         _Logger.LogDebug($"Entering {nameof(DataTransfer)} operation");
-        string payload = JsonConvert.SerializeObject(_dataProvider.GetDTO(_repositoryGroup));
+        string payload = _dataProvider.GetDTO(_repositoryGroup);
         using (Message message = new Message(Encoding.UTF8.GetBytes(payload)))
           await deviceClient.SendEventAsync(message, token);
         _Logger.LogDebug("Successfully published device state to Azure.");

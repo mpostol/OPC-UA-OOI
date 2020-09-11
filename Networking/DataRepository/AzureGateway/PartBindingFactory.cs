@@ -16,11 +16,11 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
 {
   /// <summary>
   /// Class PartBindingFactory.
-  /// Implements the <see cref="UAOOI.Networking.SemanticData.IBindingFactory" />
-  /// Implements the <see cref="UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider" />
+  /// Implements the <see cref="IBindingFactory" />
+  /// Implements the <see cref="IDTOProvider" />
   /// </summary>
   /// <seealso cref="UAOOI.Networking.SemanticData.IBindingFactory" />
-  /// <seealso cref="UAOOI.Networking.DataRepository.AzureGateway.IDTOProvider" />
+  /// <seealso cref="IDTOProvider" />
   internal class PartBindingFactory : IBindingFactory, IDTOProvider
   {
     #region IBindingFactory
@@ -177,16 +177,16 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// <exception cref="NotImplementedException"></exception>
     public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
-      throw new NotImplementedException();
+      throw new NotImplementedException("Intentionally nut implemented - this role is not supported for the consumer");
     }
 
     #endregion IBindingFactory
 
     #region IDTOProvider
 
-    public dynamic GetDTO(string repositoryGroup)
+    public string GetDTO(string repositoryGroup)
     {
-      return _processReplica[repositoryGroup];
+      return _processReplica[repositoryGroup].ToString();
     }
 
     #endregion IDTOProvider

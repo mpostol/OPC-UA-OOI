@@ -24,7 +24,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
     /// <returns>Returns an instance of <see cref="EventSource" />.</returns>
     public EventSource GetPartEventSource()
     {
-      return AzureGatewaySemanticEventSource.Log;
+      return AzureGatewaySemanticEventSource.Log();
     }
   }
 

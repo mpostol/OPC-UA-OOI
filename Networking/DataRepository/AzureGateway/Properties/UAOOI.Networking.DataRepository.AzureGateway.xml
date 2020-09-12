@@ -76,7 +76,6 @@
             Runs the communication machine.
             </summary>
             <param name="cancellation">The cancellation token.</param>
-            <exception cref="T:System.ApplicationException">Only one instance of the task {nameof(Run)} is allowed.</exception>
         </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.CommunicationContext.DisconnectRequest">
             <summary>
@@ -105,9 +104,41 @@
             <param name="methodName">Name of the method.</param>
             <param name="e">The exception to be reported.</param>
         </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource">
+            <summary>
+            Class AzureGatewaySemanticEventSource capturing event source functionality supporting semantic par logging
+            Implements the <see cref="T:System.Diagnostics.Tracing.EventSource" />
+            </summary>
+            <seealso cref="T:System.Diagnostics.Tracing.EventSource" />
+        </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Tasks">
             <summary>
-            Class Tasks.
+            Class Tasks - capturing definitions of the tasks that apply to events.
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Tasks.Part">
+            <summary>
+            The part behavior event task
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Tasks.Code">
+            <summary>
+            The code behavior event task
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Tasks.Binding">
+            <summary>
+            The binding behavior event task
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Tasks.Configuration">
+            <summary>
+            The configuration behavior event task
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Tasks.Azure">
+            <summary>
+            The azure behavior event task
             </summary>
         </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Keywords">
@@ -115,7 +146,27 @@
             Class Keywords - defines the local keywords (flags) that apply to events.
             </summary>
         </member>
-        <member name="P:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Log">
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Keywords.PackageContent">
+            <summary>
+            The PackageContent <see cref="T:System.Diagnostics.Tracing.EventKeywords"/>
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Keywords.Diagnostic">
+            <summary>
+            The Diagnostic <see cref="T:System.Diagnostics.Tracing.EventKeywords"/>
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Keywords.Performance">
+            <summary>
+            The Performance <see cref="T:System.Diagnostics.Tracing.EventKeywords"/>
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Keywords.Settings">
+            <summary>
+            The Settings <see cref="T:System.Diagnostics.Tracing.EventKeywords"/>
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Log">
             <summary>
             Gets the log - implements singleton of the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource"/>.
             </summary>

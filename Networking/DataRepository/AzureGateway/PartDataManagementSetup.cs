@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.Core;
 using UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection;
+using UAOOI.Networking.DataRepository.AzureGateway.Diagnostic;
 using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.SemanticData;
 
@@ -40,12 +41,15 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// </summary>
     public PartDataManagementSetup()
     {
+      _Logger.EnteringMethodPart(nameof(PartDataManagementSetup), nameof(PartDataManagementSetup));
       //Compose external parts
       IServiceLocator _serviceLocator = ServiceLocator.Current;
       //string _configurationFileName = _serviceLocator.GetInstance<string>(CompositionSettings.ConfigurationFileNameContract);
       m_ViewModel = _serviceLocator.GetInstance<ProducerViewModel>();
       EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();
+      _Logger.Composed(nameof(EncodingFactory), EncodingFactory.ToString());
       MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
+      _Logger.Composed(nameof(MessageHandlerFactory), MessageHandlerFactory.ToString());
       //compose internal parts
       ConfigurationFactory = new PartConfigurationFactory(ConfigurationFilePath);
       PartBindingFactory pbf = new PartBindingFactory();
@@ -64,17 +68,19 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// </summary>
     public void Setup()
     {
+      _Logger.EnteringMethodPart(nameof(PartDataManagementSetup), nameof(Setup));
       try
       {
-        //ReferenceApplicationEventSource.Log.Initialization($"{nameof(SimulatorDataManagementSetup)}.{nameof(Setup)} starting");
         m_ViewModel.ChangeProducerCommand(() => { m_ViewModel.ProducerErrorMessage = "Restarted"; });
+        _Logger.EnteringMethodPart(nameof(PartDataManagementSetup), nameof(Start));
         Start();
         StartAzureCommunication(ConfigurationFactory.GetConfiguration());
+        _Logger.PartInitializationCompleted();
       }
-      catch (Exception _ex)
+      catch (Exception ex)
       {
-        //ReferenceApplicationEventSource.Log.LogException(_ex);
         m_ViewModel.ProducerErrorMessage = "ERROR";
+        _Logger.LogException(nameof(PartDataManagementSetup), nameof(Dispose), ex);
         Dispose();
       }
     }
@@ -89,6 +95,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
     protected override void Dispose(bool disposing)
     {
+      _Logger.EnteringMethodPart(nameof(PartDataManagementSetup), nameof(Dispose));
       m_onDispose(disposing);
       base.Dispose(disposing);
       if (!disposing || m_disposed)
@@ -99,14 +106,14 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       {
         Task.WhenAll(_tasks.ToArray()).Wait();
       }
-      catch (OperationCanceledException)
+      catch (OperationCanceledException oce)
       {
-        //TODO Create and Register the EventSource #455
-        // Console.WriteLine($"\n{nameof(OperationCanceledException)} thrown\n"); //TODO Replace by Log
+        _Logger.LogException(nameof(PartDataManagementSetup), nameof(Dispose), oce);
       }
       finally
       {
-        _tokenSource.Dispose();       //TODO Create and Register the EventSource #455
+        _Logger.DisposingObject(nameof(CancellationTokenSource), nameof(Dispose));
+        _tokenSource.Dispose();
       }
     }
 
@@ -121,6 +128,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     private ProducerViewModel m_ViewModel;
 
     private readonly ConcurrentBag<Task> _tasks = new ConcurrentBag<Task>();
+    private readonly AzureGatewaySemanticEventSource _Logger = AzureGatewaySemanticEventSource.Log();
     private CancellationTokenSource _tokenSource = new CancellationTokenSource();
 
     /// <summary>
@@ -135,6 +143,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
 
     private void StartAzureCommunication(ConfigurationData configuration)
     {
+      _Logger.EnteringMethodPart(nameof(PartDataManagementSetup), nameof(StartAzureCommunication));
       CancellationToken token = _tokenSource.Token;
       List<CommunicationContext> azureComunicationContextList = new List<CommunicationContext>();
       TaskFactory taskFactory = Task.Factory;
@@ -145,14 +154,14 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
           AzureDeviceParameters parameters = AzureDeviceParameters.ParseRepositoryGroup(dataset.RepositoryGroup);
           if (parameters == null)
             continue;
-          CommunicationContext communicationContext = new CommunicationContext(_DTOProvider, dataset.RepositoryGroup, parameters, null);
+          CommunicationContext communicationContext = new CommunicationContext(_DTOProvider, dataset.RepositoryGroup, parameters);
           azureComunicationContextList.Add(communicationContext);
           Task newCommunicatinTask = taskFactory.StartNew(() => communicationContext.Run(token), token);
           _tasks.Add(newCommunicatinTask);
         }
         catch (AggregateException ax)
         {
-          Report(ax);
+          _Logger.LogException(nameof(PartDataManagementSetup), nameof(StartAzureCommunication), ax);
           continue;
         }
         catch (Exception)
@@ -161,19 +170,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
         }
       }
       m_ViewModel.ProducerErrorMessage = "Running";
-      //TODO Create and Register the EventSource #455
-      //ReferenceApplicationEventSource.Log.Initialization($" Setup of the producer engine has been accomplished and it starts sending data.");
-    }
-
-    private void Report(AggregateException ax)
-    {
-      foreach (Exception item in ax.InnerExceptions)
-        Report(item);
-    }
-
-    private void Report(Exception item) //TODO Create and Register the EventSource #455
-    {
-      throw new NotImplementedException();
     }
 
     #endregion private

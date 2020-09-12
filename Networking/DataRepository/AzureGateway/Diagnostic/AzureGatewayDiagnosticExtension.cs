@@ -6,27 +6,11 @@
 //___________________________________________________________________________________
 
 using System;
-using System.Linq;
-using System.Net;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
 {
   internal static class AzureGatewayDiagnosticExtension
   {
-    internal static void ReceivedMessageContent(this AzureGatewaySemanticEventSource eventSource, IPEndPoint endPoint, int length, byte[] message)
-    {
-      eventSource.ReceivedMessageContent(MessageContentFormat(endPoint, length, message));
-    }
-
-    internal static void SentMessageContent(this AzureGatewaySemanticEventSource eventSource, IPEndPoint endPoint, int length, byte[] message)
-    {
-      eventSource.SentMessageContent(MessageContentFormat(endPoint, length, message));
-    }
-
-    internal static void JoiningMulticastGroup(this AzureGatewaySemanticEventSource eventSource, IPAddress multicastGroup)
-    {
-      eventSource.JoiningMulticastGroup(multicastGroup.ToString());
-    }
 
     /// <summary>
     /// Logs the exception using <see cref="AzureGatewaySemanticEventSource" />.
@@ -47,9 +31,5 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
       }
     }
 
-    private static string MessageContentFormat(IPEndPoint endPoint, int length, byte[] message)
-    {
-      return ($"{endPoint.Address.ToString()}:{endPoint.Port} [{length}]: {String.Join(",", new ArraySegment<byte>(message, 0, Math.Min(message.Length, 80)).Select<byte, string>(x => x.ToString("X")).ToArray<string>())}");
-    }
   }
 }

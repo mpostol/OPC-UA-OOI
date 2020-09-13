@@ -46,7 +46,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       if (_running)
         throw new ApplicationException($"Only one instance of the task {nameof(Run)} is allowed.");
       _running = true;
-      await TransitionLoopAsync(cancellation);
+      await CommunicationEngineLoopAsync(cancellation);
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       _Logger.EnteringMethodAzure(nameof(CommunicationContext), nameof(DisconnectRequest));
       if (!_running)
       {
-        _Logger.Failure(nameof(CommunicationContext), nameof(Run), "This method cannot be called in the running state of the communication machine");
+        _Logger.ProgramFailure(nameof(CommunicationContext), "This method cannot be called in the running state of the communication machine");
         throw new ApplicationException($"Calling the {nameof(DisconnectRequest)} operation is allowed only in the running state of the communication machine.");
       }
       _disconnectRequest = true;
@@ -86,9 +86,9 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       _currentState = state;
     }
 
-    private async Task<DeviceRegistrationResult> Register(SecurityProvider security, CancellationToken token)
+    private async Task<DeviceRegistrationResult> RegisterAsync(SecurityProvider security, CancellationToken token)
     {
-      _Logger.EnteringMethodAzure(nameof(CommunicationContext), nameof(Register));
+      _Logger.EnteringMethodAzure(nameof(CommunicationContext), nameof(RegisterAsync));
       ProvisioningTransportHandler transport = null;
       try
       {
@@ -136,9 +136,9 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       }
     }
 
-    private async Task<DeviceClient> Connect(string assignedHub, SecurityProvider security, CancellationToken token)
+    private async Task<DeviceClient> ConnectAsync(string assignedHub, SecurityProvider security, CancellationToken token)
     {
-      _Logger.EnteringMethodAzure(nameof(CommunicationContext), nameof(Connect));
+      _Logger.EnteringMethodAzure(nameof(CommunicationContext), nameof(ConnectAsync));
       DeviceClient deviceClient;
       try
       {
@@ -158,17 +158,17 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
             break;
 
           default:
-            _Logger.Failure(nameof(CommunicationContext), nameof(Connect), "Specified security provider is unknown.");
+            _Logger.ProgramFailure(nameof(CommunicationContext), "Specified security provider is unknown.");
             throw new NotSupportedException("Unknown authentication type.");
         }
-        _Logger.EnteringMethodAzure(nameof(DeviceClient), nameof(DeviceClient.Create), $"Creating client for {assignedHub} with authenticationMethod {authenticationMethod.ToString()}, and using the transport {_azureDeviceParameters.TransportType}.");
+        _Logger.StartCreatingClient(nameof(DeviceClient), nameof(DeviceClient.Create), assignedHub, authenticationMethod.ToString(), _azureDeviceParameters.TransportType.ToString());
         deviceClient = DeviceClient.Create(assignedHub, authenticationMethod, _azureDeviceParameters.TransportType);
         _Logger.EnteringMethodAzure(nameof(DeviceClient), nameof(DeviceClient.OpenAsync));
         await deviceClient.OpenAsync(token);
       }
       catch (Exception ex)
       {
-        _Logger.LogException(nameof(CommunicationContext), nameof(Connect), ex);
+        _Logger.LogException(nameof(CommunicationContext), ex);
         return null;
       }
       return deviceClient;
@@ -186,14 +186,14 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       }
       catch (Exception e)
       {
-        _Logger.LogException(nameof(CommunicationContext), nameof(DataTransfer), e);
+        _Logger.LogException(nameof(CommunicationContext), e);
         throw;
       }
     }
 
-    private async Task TransitionLoopAsync(CancellationToken token)
+    private async Task CommunicationEngineLoopAsync(CancellationToken token)
     {
-      _Logger.EnteringMethodAzure(nameof(CommunicationContext), nameof(TransitionLoopAsync));
+      _Logger.EnteringMethodAzure(nameof(CommunicationContext), nameof(CommunicationEngineLoopAsync));
       SecurityProvider security = null;
       DeviceClient deviceClient = null;
       string assignedHub = String.Empty;
@@ -207,7 +207,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
           {
             case MachineState.UnassignedState:
               _Logger.EnteringState($"{nameof(MachineState.UnassignedState)}");
-              DeviceRegistrationResult provisioningResult = await Register(security, token);
+              DeviceRegistrationResult provisioningResult = await RegisterAsync(security, token);
               switch (provisioningResult.Status)
               {
                 case ProvisioningRegistrationStatusType.Unassigned:
@@ -240,7 +240,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
 
             case MachineState.AssigneddState:
               _Logger.EnteringState($"{nameof(MachineState.AssigneddState)}");
-              deviceClient = await Connect(assignedHub, security, token);
+              deviceClient = await ConnectAsync(assignedHub, security, token);
               if (deviceClient != null)
               {
                 security.Dispose();
@@ -249,14 +249,14 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
               }
               else
               {
-                _Logger.Failure(nameof(CommunicationContext), nameof(TransitionLoopAsync), $"Failed to connect.");
+                _Logger.AzureCommunicationFailure(nameof(CommunicationContext), nameof(CommunicationEngineLoopAsync), $"Failed to connect.");
                 await Task.Delay(5000, token);
               }
               break;
 
             case MachineState.DataTransferingState:
               _Logger.EnteringState($"{nameof(MachineState.AssigneddState)}");
-              _Logger.StartingTimeDelay(_azureDeviceParameters.PublishingInterval());
+              _Logger.StartingTimeDelay(_azureDeviceParameters.PublishingInterval().ToString());
               await Task.Delay(_azureDeviceParameters.PublishingInterval(), token);
               await DataTransfer(deviceClient, token);
               break;
@@ -265,7 +265,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection
       }
       catch (Exception ex)
       {
-        _Logger.LogException(nameof(CommunicationContext), nameof(TransitionLoopAsync), ex);
+        _Logger.LogException(nameof(CommunicationContext), ex);
       }
       finally
       {

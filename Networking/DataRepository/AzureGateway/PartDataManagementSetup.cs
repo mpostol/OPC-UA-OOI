@@ -80,7 +80,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       catch (Exception ex)
       {
         m_ViewModel.ProducerErrorMessage = "ERROR";
-        _Logger.LogException(nameof(PartDataManagementSetup), nameof(Dispose), ex);
+        _Logger.LogException(nameof(PartDataManagementSetup), ex);
         Dispose();
       }
     }
@@ -108,7 +108,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       }
       catch (OperationCanceledException oce)
       {
-        _Logger.LogException(nameof(PartDataManagementSetup), nameof(Dispose), oce);
+        _Logger.LogException(nameof(PartDataManagementSetup), oce);
       }
       finally
       {
@@ -161,7 +161,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
         }
         catch (AggregateException ax)
         {
-          _Logger.LogException(nameof(PartDataManagementSetup), nameof(StartAzureCommunication), ax);
+          _Logger.LogException(nameof(PartDataManagementSetup), ax);
           continue;
         }
         catch (Exception)

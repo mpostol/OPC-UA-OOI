@@ -6,12 +6,12 @@
 //___________________________________________________________________________________
 
 using System;
+using System.Runtime.CompilerServices;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
 {
   internal static class AzureGatewayDiagnosticExtension
   {
-
     /// <summary>
     /// Logs the exception using <see cref="AzureGatewaySemanticEventSource" />.
     /// </summary>
@@ -19,17 +19,16 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
     /// <param name="className">Name of the class.</param>
     /// <param name="methodName">Name of the method.</param>
     /// <param name="e">The exception to be reported.</param>
-    internal static void LogException(this AzureGatewaySemanticEventSource eventSource, string className, string methodName, Exception e)
+    internal static void LogException(this AzureGatewaySemanticEventSource eventSource, string className, Exception e, [CallerMemberName] string methodName = nameof(LogException))
     {
       Exception _exception = e;
       string _innerText = "An exception has been caught:";
       while (e != null)
       {
-        eventSource.Failure(className, methodName, $"{_innerText} of type {_exception.GetType().Name} capturing the message: {e.Message}");
+        eventSource.ProgramFailure(className, methodName, $"{_innerText} of type {_exception.GetType().Name} capturing the message: {e.Message}");
         e = e.InnerException;
         _innerText = "It contains inner exception:";
       }
     }
-
   }
 }

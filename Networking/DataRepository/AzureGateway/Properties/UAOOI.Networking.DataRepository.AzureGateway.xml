@@ -95,7 +95,7 @@
             <param name="repositoryGroup">The repository group.</param>
             <returns>object capturing the current state of selected repository group.</returns>
         </member>
-        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewayDiagnosticExtension.LogException(UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource,System.String,System.String,System.Exception)">
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewayDiagnosticExtension.LogException(UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource,System.String,System.Exception,System.String)">
             <summary>
             Logs the exception using <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource" />.
             </summary>
@@ -171,6 +171,12 @@
             Gets the log - implements singleton of the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource"/>.
             </summary>
             <value>The log.</value>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.Diagnostics.Tracing.EventSource"></see> class and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.NetworkingEventSourceProvider">
             <summary>

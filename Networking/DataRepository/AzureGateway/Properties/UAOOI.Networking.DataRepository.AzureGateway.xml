@@ -76,7 +76,6 @@
             Runs the communication machine.
             </summary>
             <param name="cancellation">The cancellation token.</param>
-            <exception cref="T:System.ApplicationException">Only one instance of the task {nameof(Run)} is allowed.</exception>
         </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection.CommunicationContext.DisconnectRequest">
             <summary>
@@ -95,6 +94,101 @@
             </summary>
             <param name="repositoryGroup">The repository group.</param>
             <returns>object capturing the current state of selected repository group.</returns>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewayDiagnosticExtension.LogException(UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource,System.String,System.Exception,System.String)">
+            <summary>
+            Logs the exception using <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource" />.
+            </summary>
+            <param name="eventSource">The event source to be used for problem reporting.</param>
+            <param name="className">Name of the class.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="e">The exception to be reported.</param>
+        </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource">
+            <summary>
+            Class AzureGatewaySemanticEventSource capturing event source functionality supporting semantic par logging
+            Implements the <see cref="T:System.Diagnostics.Tracing.EventSource" />
+            </summary>
+            <seealso cref="T:System.Diagnostics.Tracing.EventSource" />
+        </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Tasks">
+            <summary>
+            Class Tasks - capturing definitions of the tasks that apply to events.
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Tasks.Part">
+            <summary>
+            The part behavior event task
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Tasks.Code">
+            <summary>
+            The code behavior event task
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Tasks.Binding">
+            <summary>
+            The binding behavior event task
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Tasks.Configuration">
+            <summary>
+            The configuration behavior event task
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Tasks.Azure">
+            <summary>
+            The azure behavior event task
+            </summary>
+        </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Keywords">
+            <summary>
+            Class Keywords - defines the local keywords (flags) that apply to events.
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Keywords.PackageContent">
+            <summary>
+            The PackageContent <see cref="T:System.Diagnostics.Tracing.EventKeywords"/>
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Keywords.Diagnostic">
+            <summary>
+            The Diagnostic <see cref="T:System.Diagnostics.Tracing.EventKeywords"/>
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Keywords.Performance">
+            <summary>
+            The Performance <see cref="T:System.Diagnostics.Tracing.EventKeywords"/>
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Keywords.Settings">
+            <summary>
+            The Settings <see cref="T:System.Diagnostics.Tracing.EventKeywords"/>
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Log">
+            <summary>
+            Gets the log - implements singleton of the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource"/>.
+            </summary>
+            <value>The log.</value>
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.Diagnostics.Tracing.EventSource"></see> class and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.NetworkingEventSourceProvider">
+            <summary>
+            Class NetworkingEventSourceProvider - gets access to an instance of <see cref="T:System.Diagnostics.Tracing.EventSource"/> to be registered by the logging infrastructure.
+            </summary>
+            <seealso cref="T:UAOOI.Networking.Core.INetworkingEventSourceProvider" />
+        </member>
+        <member name="M:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.NetworkingEventSourceProvider.GetPartEventSource">
+            <summary>
+            Gets the part event source.
+            </summary>
+            <returns>Returns an instance of <see cref="T:System.Diagnostics.Tracing.EventSource" />.</returns>
         </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.PartBindingFactory">
             <summary>

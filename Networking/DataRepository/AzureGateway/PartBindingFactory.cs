@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.DataRepository.AzureGateway.AzureInterconnection;
+using UAOOI.Networking.DataRepository.AzureGateway.Diagnostic;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
 
@@ -37,6 +38,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// <exception cref="NotImplementedException"></exception>
     public IConsumerBinding GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
+      _log.EnteringMethodBinding();
       IConsumerBinding _return = null;
       if (fieldTypeInfo.ValueRank == 0 || fieldTypeInfo.ValueRank > 1)
         throw new ArgumentOutOfRangeException(nameof(fieldTypeInfo.ValueRank));
@@ -177,6 +179,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// <exception cref="NotImplementedException"></exception>
     public IProducerBinding GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
+      _log.EnteringMethodBinding();
       throw new NotImplementedException("Intentionally nut implemented - this role is not supported for the consumer");
     }
 
@@ -186,6 +189,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
 
     public string GetDTO(string repositoryGroup)
     {
+      _log.EnteringMethodBinding();
       return _processReplica[repositoryGroup].ToString();
     }
 
@@ -194,6 +198,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     #region private
 
     private readonly Dictionary<string, RepositoryGroup> _processReplica = new Dictionary<string, RepositoryGroup>();
+    private readonly AzureGatewaySemanticEventSource _log = AzureGatewaySemanticEventSource.Log();
 
     private IConsumerBinding AddBinding<type>(string repositoryGroup, string variableName, UATypeInfo typeInfo)
     {

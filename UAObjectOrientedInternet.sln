@@ -103,11 +103,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking.Encoding", "Netw
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking.SimulatorInteroperabilityTest", "Networking\SimulatorInteroperabilityTest\Networking.SimulatorInteroperabilityTest.csproj", "{5D2A0688-95E3-400A-B789-49052389D2B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking.DataLogger", "Networking\DataLogger\Networking.DataLogger.csproj", "{B260F419-0164-4660-8605-74BCA992E9DE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking.ReferenceApplication.Core", "Networking\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj", "{2238851E-4DB8-46B0-B38D-0E2315FE153E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.DataLogger.UnitTest", "Networking\Tests\Networking.DataLogger.UnitTest\Networking.DataLogger.UnitTest.csproj", "{45BE72F2-3F5B-4D13-B931-0CA62F404D4C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.SimulatorInteroperabilityTest.UnitTest", "Networking\Tests\Networking.SimulatorInteroperabilityTest.UnitTest\Networking.SimulatorInteroperabilityTest.UnitTest.csproj", "{3BF22621-2E78-4F60-B7C9-7C61D1F440BA}"
 EndProject
@@ -153,6 +149,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataRepository", "DataRepository", "{20139208-1830-4DF2-A158-0C505DC05DF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.DataRepository.AzureGatewayUnitTest", "Networking\DataRepository\AzureGatewayUnitTest\Networking.DataRepository.AzureGatewayUnitTest.csproj", "{F7FDDDCC-58C7-44E0-8DE3-6A94E6222D03}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networking.DataLogger", "Networking\DataRepository\DataLogger\Networking.DataLogger.csproj", "{3781B8CA-3128-45DC-89C9-981740357630}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking.DataLogger.UnitTest", "Networking\DataRepository\DataLogger.UnitTest\Networking.DataLogger.UnitTest.csproj", "{45BE72F2-3F5B-4D13-B931-0CA62F404D4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -264,18 +264,10 @@ Global
 		{5D2A0688-95E3-400A-B789-49052389D2B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D2A0688-95E3-400A-B789-49052389D2B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D2A0688-95E3-400A-B789-49052389D2B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B260F419-0164-4660-8605-74BCA992E9DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B260F419-0164-4660-8605-74BCA992E9DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B260F419-0164-4660-8605-74BCA992E9DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B260F419-0164-4660-8605-74BCA992E9DE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2238851E-4DB8-46B0-B38D-0E2315FE153E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2238851E-4DB8-46B0-B38D-0E2315FE153E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2238851E-4DB8-46B0-B38D-0E2315FE153E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2238851E-4DB8-46B0-B38D-0E2315FE153E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{45BE72F2-3F5B-4D13-B931-0CA62F404D4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45BE72F2-3F5B-4D13-B931-0CA62F404D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45BE72F2-3F5B-4D13-B931-0CA62F404D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45BE72F2-3F5B-4D13-B931-0CA62F404D4C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3BF22621-2E78-4F60-B7C9-7C61D1F440BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3BF22621-2E78-4F60-B7C9-7C61D1F440BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BF22621-2E78-4F60-B7C9-7C61D1F440BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -316,6 +308,14 @@ Global
 		{F7FDDDCC-58C7-44E0-8DE3-6A94E6222D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7FDDDCC-58C7-44E0-8DE3-6A94E6222D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7FDDDCC-58C7-44E0-8DE3-6A94E6222D03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3781B8CA-3128-45DC-89C9-981740357630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3781B8CA-3128-45DC-89C9-981740357630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3781B8CA-3128-45DC-89C9-981740357630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3781B8CA-3128-45DC-89C9-981740357630}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45BE72F2-3F5B-4D13-B931-0CA62F404D4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45BE72F2-3F5B-4D13-B931-0CA62F404D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45BE72F2-3F5B-4D13-B931-0CA62F404D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45BE72F2-3F5B-4D13-B931-0CA62F404D4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -349,9 +349,7 @@ Global
 		{2DC898B5-AFD9-47B2-A962-C4002C1AE8FF} = {AF01F501-9B19-4357-B8A7-4EFC782BF1AF}
 		{2492AA3B-CF67-477A-B29E-14A1E348B939} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
 		{5D2A0688-95E3-400A-B789-49052389D2B1} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
-		{B260F419-0164-4660-8605-74BCA992E9DE} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
 		{2238851E-4DB8-46B0-B38D-0E2315FE153E} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
-		{45BE72F2-3F5B-4D13-B931-0CA62F404D4C} = {19A61D68-0ECA-4093-AEE5-370BC3CE777C}
 		{3BF22621-2E78-4F60-B7C9-7C61D1F440BA} = {19A61D68-0ECA-4093-AEE5-370BC3CE777C}
 		{0A2FB856-D50C-463D-8218-063A36942188} = {2148B4AF-8B02-45C3-89E7-AEACAE448DDA}
 		{3CE5CCA6-0EAD-49EF-AB69-D1F17A9C6D43} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
@@ -364,6 +362,8 @@ Global
 		{3F5CBB26-9142-4E55-8DE5-5BAF0C3EA1CE} = {20139208-1830-4DF2-A158-0C505DC05DF7}
 		{20139208-1830-4DF2-A158-0C505DC05DF7} = {F4178F51-3BFF-46DE-841D-C01D4ABA9B0C}
 		{F7FDDDCC-58C7-44E0-8DE3-6A94E6222D03} = {20139208-1830-4DF2-A158-0C505DC05DF7}
+		{3781B8CA-3128-45DC-89C9-981740357630} = {20139208-1830-4DF2-A158-0C505DC05DF7}
+		{45BE72F2-3F5B-4D13-B931-0CA62F404D4C} = {20139208-1830-4DF2-A158-0C505DC05DF7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9388D93E-9AA9-40EE-A0C6-F096265079B2}

@@ -98,8 +98,8 @@
     <Reference Include="System.Reactive.Linq, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Reactive.Linq.4.4.1\lib\net46\System.Reactive.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0-preview.8.20407.11\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -248,8 +248,8 @@
       <Project>{AFCCA7C9-47FE-4FB6-935E-12D686EEC58F}</Project>
       <Name>Networking.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataLogger\Networking.DataLogger.csproj">
-      <Project>{b260f419-0164-4660-8605-74bca992e9de}</Project>
+    <ProjectReference Include="..\DataRepository\DataLogger\Networking.DataLogger.csproj">
+      <Project>{3781B8CA-3128-45DC-89C9-981740357630}</Project>
       <Name>Networking.DataLogger</Name>
     </ProjectReference>
     <ProjectReference Include="..\Encoding\Networking.Encoding.csproj">

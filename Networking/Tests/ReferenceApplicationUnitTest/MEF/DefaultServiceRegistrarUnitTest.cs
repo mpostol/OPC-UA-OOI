@@ -13,23 +13,22 @@ using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
 using System.Linq;
 using UAOOI.Networking.Core;
-using UAOOI.Networking.DataLogger;
+using UAOOI.Networking.DataRepository.DataLogger;
 using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.ReferenceApplication.MEF;
 using UAOOI.Networking.SimulatorInteroperabilityTest;
 
 namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
 {
-
   [TestClass]
   public class DefaultServiceRegistrarUnitTest
   {
-
     [TestMethod]
     public void RegisterRequiredServicesIfMissingNullArgumentTestM()
     {
       using (AggregateCatalog newCatalog = DefaultServiceRegistrar.RegisterServices(null)) { }
     }
+
     [TestMethod]
     public void RegisterRequiredServicesIfMissingTest()
     {
@@ -38,7 +37,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         using (CompositionContainer _container = new CompositionContainer(newCatalog))
         {
           foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
-            foreach (var export in _part.ExportDefinitions)
+            foreach (ExportDefinition export in _part.ExportDefinitions)
               Debug.WriteLine(string.Format("Part contract name => '{0}'", export.ContractName));
           Assert.AreEqual<int>(10, _container.Catalog.Parts.Count());
           MainWindow _MainWindowExportedValue = _container.GetExportedValue<MainWindow>();
@@ -49,6 +48,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         }
       }
     }
+
     [TestMethod]
     public void RegisterRequiredServicesIfMissingAndUDPMessageHandler()
     {
@@ -78,7 +78,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         // DataLogger
         EventSourceBootstrapper _eventSourceBootstrapper = _container.GetExportedValue<EventSourceBootstrapper>();
         LoggerManagementSetup _logger = _container.GetExportedValue<LoggerManagementSetup>();
-        _logger.DisposeCheck(x => _disposingCount++ );
+        _logger.DisposeCheck(x => _disposingCount++);
         Assert.IsNotNull(_logger.BindingFactory);
         Assert.IsNotNull(_logger.ConfigurationFactory);
         Assert.IsNotNull(_logger.EncodingFactory);
@@ -94,7 +94,5 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
       }
       Assert.AreEqual<int>(2, _disposingCount);
     }
-
   }
 }
-

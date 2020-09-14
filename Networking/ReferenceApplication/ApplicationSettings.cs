@@ -6,21 +6,19 @@
 //___________________________________________________________________________________
 
 using System.ComponentModel.Composition;
-using UAOOI.Networking.DataLogger;
+using UAOOI.Networking.DataRepository.DataLogger;
 using UAOOI.Networking.ReferenceApplication.Core;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
-
   [Export]
   [PartCreationPolicy(CreationPolicy.Shared)]
   public class ApplicationSettings
   {
-
     [Export(CompositionSettings.ConfigurationFileNameContract)]
     public string ProducerConfigurationFileName => Properties.Settings.Default.ProducerConfigurationFileName;
+
     [Export(ConsumerCompositionSettings.ConfigurationFileNameContract)]
     public string ConsumerConfigurationFileName => Properties.Settings.Default.ConsumerConfigurationFileName;
   }
-
 }

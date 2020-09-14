@@ -13,7 +13,7 @@ using UAOOI.Networking.Core;
 using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData;
 
-namespace UAOOI.Networking.DataLogger
+namespace UAOOI.Networking.DataRepository.DataLogger
 {
   /// <summary>
   /// Class ConsumerDataManagementSetup - custom implementation of the <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
@@ -38,7 +38,7 @@ namespace UAOOI.Networking.DataLogger
       m_ViewModel = _serviceLocator.GetInstance<ConsumerViewModel>(ConsumerCompositionSettings.ViewModelContract);
       ConfigurationFactory = new ConsumerConfigurationFactory(_ConsumerConfigurationFileName);
       EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();
-      BindingFactory = new DataConsumer(m_ViewModel);
+      BindingFactory = new PartIBindingFactory(m_ViewModel);
       MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
     }
 

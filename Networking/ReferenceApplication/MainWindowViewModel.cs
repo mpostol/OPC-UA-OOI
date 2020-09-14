@@ -1,4 +1,11 @@
-﻿using System;
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
@@ -6,7 +13,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
-using UAOOI.Networking.DataLogger;
+using UAOOI.Networking.DataRepository.DataLogger;
 using UAOOI.Networking.ReferenceApplication.Controls;
 using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.ReferenceApplication.Core.MvvmLight;
@@ -14,23 +21,21 @@ using UAOOI.Networking.ReferenceApplication.Properties;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
-
   /// <summary>
-  /// Class MainWindowViewModel - this class demonstrates how to create bindings to the properties that are holders of OPC UA values in the 
+  /// Class MainWindowViewModel - this class demonstrates how to create bindings to the properties that are holders of OPC UA values in the
   /// Model View ViewModel pattern.
   /// </summary>
   [Export()]
   [PartCreationPolicy(CreationPolicy.Shared)]
   internal class MainWindowViewModel : ObservableObject
   {
-
     #region constructors
+
     /// <summary>
     /// Initializes a new instance of the <see cref="MainWindowViewModel"/> class.
     /// </summary>
     public MainWindowViewModel()
     {
-
       //Menu Files
       b_ConfigurationFolder = new DelegateCommand(ProcessOpenFileInExecutingAssemblyLocation);
       b_HelpDocumentation = new DelegateCommand(() => ProcessStart(Resources.HelpDocumentationUrl));
@@ -41,169 +46,161 @@ namespace UAOOI.Networking.ReferenceApplication
       b_ReadMe = new DelegateCommand(() => ProcessStart(Resources.ReadMeFileName));
       b_TermsOfService = new DelegateCommand(() => ProcessStart(Resources.TermsOfServiceUrl));
       b_ViewLicense = new DelegateCommand(() => ProcessStart(Resources.ViewLicenseUrl));
-      String _version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+      string _version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
       b_WindowTitle = $"OPC UA Reactive Networking Example Application Rel. {_version} supporting PubSup protocol 1.10";
-
     }
-    #endregion
+
+    #endregion constructors
 
     #region Window
+
     public string WindowTitle
     {
-      get
-      {
-        return b_WindowTitle;
-      }
+      get => b_WindowTitle;
       set
       {
         b_WindowTitle = value;
         this.RaisePropertyChanged<string>("WindowTitle", b_WindowTitle, value);
       }
     }
+
     internal event EventHandler<Controls.InteractionRequestedEventArgs> SaveFileInteractionEvent;
+
     private string b_WindowTitle;
-    #endregion
+
+    #endregion Window
 
     #region menu
+
     public ICommand OpenConsumerConfiguration
     {
-      get
-      {
-        return b_OpenConsumerConfiguration;
-      }
+      get => b_OpenConsumerConfiguration;
       set
       {
         b_OpenConsumerConfiguration = value;
         RaisePropertyChanged<ICommand>("OpenConsumerConfiguration", b_OpenConsumerConfiguration, value);
       }
     }
+
     public ICommand OpenProducerConfiguration
     {
-      get
-      {
-        return b_OpenProducerConfiguration;
-      }
+      get => b_OpenProducerConfiguration;
       set
       {
         b_OpenProducerConfiguration = value;
         RaisePropertyChanged<ICommand>("OpenProducerConfiguration", b_OpenProducerConfiguration, value);
       }
     }
+
     public ICommand HelpDocumentation
     {
-      get
-      {
-        return b_HelpDocumentation;
-      }
+      get => b_HelpDocumentation;
       set
       {
         b_HelpDocumentation = value;
         RaisePropertyChanged<ICommand>("HelpDocumentation", b_HelpDocumentation, value);
       }
     }
+
     public ICommand ConfigurationFolder
     {
-      get
-      {
-        return b_ConfigurationFolder;
-      }
+      get => b_ConfigurationFolder;
       set
       {
         b_ConfigurationFolder = value;
         RaisePropertyChanged<ICommand>("ConfigurationFolder", b_ConfigurationFolder, value);
       }
     }
+
     public ICommand ReadMe
     {
-      get
-      {
-        return b_ReadMe;
-      }
+      get => b_ReadMe;
       set
       {
         b_ReadMe = value;
         RaisePropertyChanged<ICommand>("ReadMe", b_ReadMe, value);
       }
     }
+
     public ICommand ViewLicense
     {
-      get
-      {
-        return b_ViewLicense;
-      }
+      get => b_ViewLicense;
       set
       {
         b_ViewLicense = value;
         RaisePropertyChanged<ICommand>("ViewLicense", b_ViewLicense, value);
       }
     }
+
     public ICommand TermsOfService
     {
-      get
-      {
-        return b_TermsOfService;
-      }
+      get => b_TermsOfService;
       set
       {
         b_TermsOfService = value;
         RaisePropertyChanged<ICommand>("TermsOfService", b_TermsOfService, value);
       }
     }
+
     //private
     private ICommand b_TermsOfService;
+
     private ICommand b_ViewLicense;
     private ICommand b_ReadMe;
     private ICommand b_OpenProducerConfiguration;
     private ICommand b_OpenConsumerConfiguration;
     private ICommand b_ConfigurationFolder;
     private ICommand b_HelpDocumentation;
-    #endregion
+
+    #endregion menu
 
     #region Consumer ViewModel
+
     /// <summary>
     /// Gets or sets the producer view model.
     /// </summary>
     /// <value>The producer view model.</value>
     [Import(ConsumerCompositionSettings.ViewModelContract)]
     public object ConsumerViewModel { get; set; }
-    #endregion
+
+    #endregion Consumer ViewModel
 
     #region Producer ViewModel
+
     /// <summary>
     /// Gets or sets the producer view model.
     /// </summary>
     /// <value>The producer view model.</value>
     [Import(typeof(ProducerViewModel))]
     public ProducerViewModel ProducerViewModel { get; set; }
+
     public int BytesSent
     {
-      get
-      {
-        return b_BytesSent;
-      }
+      get => b_BytesSent;
       set
       {
         b_BytesSent = value;
         RaisePropertyChanged<int>("BytesSent", b_BytesSent, value);
       }
     }
+
     public int PackagesSent
     {
-      get
-      {
-        return b_PackagesSent;
-      }
+      get => b_PackagesSent;
       set
       {
         b_PackagesSent = value;
         RaisePropertyChanged<int>("PackagesSent", b_PackagesSent, value);
       }
     }
-    #endregion
+
+    #endregion Producer ViewModel
 
     #region private
+
     private int b_BytesSent;
     private int b_PackagesSent;
+
     private void ProcessStart(string parameter)
     {
       try
@@ -216,6 +213,7 @@ namespace UAOOI.Networking.ReferenceApplication
         return;
       }
     }
+
     private void ProcessOpenFileInExecutingAssemblyLocation()
     {
       string path = string.Empty;
@@ -235,15 +233,15 @@ namespace UAOOI.Networking.ReferenceApplication
         return;
       }
     }
+
     private FileInfo SaveResponse(FileInfo arg)
     {
       FileInfo _ret = null;
       SaveFileConfirmation _newFileInfo = new SaveFileConfirmation() { Title = "Save configuration file", FilePath = arg.FullName };
-      SaveFileInteractionEvent?.Invoke(this, new InteractionRequestedEventArgs(_newFileInfo, () => _ret = String.IsNullOrEmpty(_newFileInfo.FilePath) ? null : new FileInfo(_newFileInfo.FilePath)));
+      SaveFileInteractionEvent?.Invoke(this, new InteractionRequestedEventArgs(_newFileInfo, () => _ret = string.IsNullOrEmpty(_newFileInfo.FilePath) ? null : new FileInfo(_newFileInfo.FilePath)));
       return _ret;
     }
-    #endregion
 
+    #endregion private
   }
-
 }

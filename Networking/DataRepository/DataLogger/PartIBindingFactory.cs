@@ -1,31 +1,38 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
 
-namespace UAOOI.Networking.DataLogger
+namespace UAOOI.Networking.DataRepository.DataLogger
 {
-
   /// <summary>
-  /// Class ConsumerViewModel - it is a consumer of the data send over the wire using the UAOOI.Networking.SemanticData framework.
-  /// It is expected that the data is generated according to the requirements defined by OPCF to proceed interoperability testing.
+  /// Class <see cref="PartIBindingFactory"/> - it is a consumer of the data send over the wire using the UAOOI.Networking.SemanticData framework.
+  /// It is expected that the data is generated according to the requirements defined by the OPCF to proceed interoperability testing.
   /// </summary>
-  internal class DataConsumer : IBindingFactory
+  internal class PartIBindingFactory : IBindingFactory
   {
-
     #region composition
+
     /// <summary>
-    /// Initializes a new instance of the <see cref="DataConsumer"/> class.
+    /// Initializes a new instance of the <see cref="PartIBindingFactory"/> class.
     /// </summary>
     /// <param name="viewModel">The view model used to log data received over wire.</param>
-    internal DataConsumer(ConsumerViewModel viewModel)
+    internal PartIBindingFactory(ConsumerViewModel viewModel)
     {
       m_ViewModel = viewModel;
     }
-    #endregion
+
+    #endregion composition
 
     #region IBindingFactory
+
     /// <summary>
     /// Gets the binding captured by an instance of the <see cref="UAOOI.Networking.SemanticData.DataRepository.IConsumerBinding" /> type used by the consumer to save the data in the data repository.
     /// </summary>
@@ -40,6 +47,7 @@ namespace UAOOI.Networking.DataLogger
     {
       return GetConsumerBinding(processValueName, fieldTypeInfo);
     }
+
     /// <summary>
     /// Gets the producer binding.
     /// </summary>
@@ -54,10 +62,13 @@ namespace UAOOI.Networking.DataLogger
     {
       throw new NotImplementedException();
     }
-    #endregion
+
+    #endregion IBindingFactory
 
     #region private
+
     private ConsumerViewModel m_ViewModel;
+
     /// <summary>
     /// Helper method that creates the consumer binding.
     /// </summary>
@@ -74,94 +85,109 @@ namespace UAOOI.Networking.DataLogger
       {
         case BuiltInType.Boolean:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Boolean>(variableName, typeInfo);
+            _return = AddBinding<bool>(variableName, typeInfo);
           else
-            _return = AddBinding<Boolean[]>(variableName, typeInfo);
+            _return = AddBinding<bool[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.SByte:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<SByte>(variableName, typeInfo);
+            _return = AddBinding<sbyte>(variableName, typeInfo);
           else
-            _return = AddBinding<SByte[]>(variableName, typeInfo);
+            _return = AddBinding<sbyte[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.Byte:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Byte>(variableName, typeInfo);
+            _return = AddBinding<byte>(variableName, typeInfo);
           else
-            _return = AddBinding<Byte[]>(variableName, typeInfo);
+            _return = AddBinding<byte[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.Int16:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Int16>(variableName, typeInfo);
+            _return = AddBinding<short>(variableName, typeInfo);
           else
-            _return = AddBinding<Int16[]>(variableName, typeInfo);
+            _return = AddBinding<short[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.UInt16:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<UInt16>(variableName, typeInfo);
+            _return = AddBinding<ushort>(variableName, typeInfo);
           else
-            _return = AddBinding<UInt16[]>(variableName, typeInfo);
+            _return = AddBinding<ushort[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.Int32:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Int32>(variableName, typeInfo);
+            _return = AddBinding<int>(variableName, typeInfo);
           else
-            _return = AddBinding<Int32[]>(variableName, typeInfo);
+            _return = AddBinding<int[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.UInt32:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<UInt32>(variableName, typeInfo);
+            _return = AddBinding<uint>(variableName, typeInfo);
           else
-            _return = AddBinding<UInt32[]>(variableName, typeInfo);
+            _return = AddBinding<uint[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.Int64:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Int64>(variableName, typeInfo);
+            _return = AddBinding<long>(variableName, typeInfo);
           else
-            _return = AddBinding<Int64[]>(variableName, typeInfo);
+            _return = AddBinding<long[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.UInt64:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<UInt64>(variableName, typeInfo);
+            _return = AddBinding<ulong>(variableName, typeInfo);
           else
-            _return = AddBinding<UInt64[]>(variableName, typeInfo);
+            _return = AddBinding<ulong[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.Float:
           if (typeInfo.ValueRank < 0)
             _return = AddBinding<float>(variableName, typeInfo);
           else
             _return = AddBinding<float[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.Double:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Double>(variableName, typeInfo);
+            _return = AddBinding<double>(variableName, typeInfo);
           else
-            _return = AddBinding<Double[]>(variableName, typeInfo);
+            _return = AddBinding<double[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.String:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<String>(variableName, typeInfo);
+            _return = AddBinding<string>(variableName, typeInfo);
           else
-            _return = AddBinding<String[]>(variableName, typeInfo);
+            _return = AddBinding<string[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.DateTime:
           if (typeInfo.ValueRank < 0)
             _return = AddBinding<DateTime>(variableName, typeInfo);
           else
             _return = AddBinding<DateTime[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.Guid:
           if (typeInfo.ValueRank < 0)
             _return = AddBinding<Guid>(variableName, typeInfo);
           else
             _return = AddBinding<Guid[]>(variableName, typeInfo);
           break;
+
         case BuiltInType.ByteString:
           if (typeInfo.ValueRank < 0)
             _return = AddBinding<byte[]>(variableName, typeInfo);
           else
             _return = AddBinding<byte[][]>(variableName, typeInfo);
           break;
+
         case BuiltInType.Null:
         case BuiltInType.XmlElement:
         case BuiltInType.NodeId:
@@ -179,14 +205,14 @@ namespace UAOOI.Networking.DataLogger
       }
       return _return;
     }
+
     private IConsumerBinding AddBinding<type>(string variableName, UATypeInfo typeInfo)
     {
       ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(typeInfo);
       _return.PropertyChanged += (x, y) => m_ViewModel.Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).ToString()}");
       return _return;
     }
-    #endregion
 
+    #endregion private
   }
-
 }

@@ -80,7 +80,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
     /// Gets the log - implements singleton of the <see cref="AzureGatewaySemanticEventSource"/>.
     /// </summary>
     /// <value>The log.</value>
-    internal static AzureGatewaySemanticEventSource Log() { return _singleto.Value; }
+    internal static AzureGatewaySemanticEventSource Log() { return _singleton.Value; }
 
     [Event(1, Message = "At {0}.{1} encountered application failure: {2}",
       Channel = EventChannel.Admin, Opcode = EventOpcode.Info, Task = Tasks.Code, Level = EventLevel.Error, Keywords = Keywords.Diagnostic, Version = 0x01)]
@@ -152,16 +152,16 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
       WriteEvent(10, methodName);
     }
 
-    [Event(11, Message = "Entering method {0}.{1}",
+    [Event(11, Message = "Opening the configuration file {0}",
       Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Configuration, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
-    internal void EnteringMethodConfiguration(string className, string methodName)
+    internal void CreatingConfiguration(string configurationFileName)
     {
-      WriteEvent(11, className, methodName);
+      WriteEvent(11, configurationFileName);
     }
 
     [Event(12, Message = "Entering method {0}.{1}",
       Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Part, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
-    internal void EnteringMethodPart(string className, string methodName)
+    internal void EnteringMethodPart(string className, [CallerMemberName] string methodName = nameof(EnteringMethodPart))
     {
       WriteEvent(12, className, methodName);
     }
@@ -180,9 +180,16 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
       WriteEvent(14);
     }
 
+    [Event(15, Message = "TraceData of the EventType={0} with id={1} and description={2}",
+      Channel = EventChannel.Analytic, Opcode = EventOpcode.Start, Task = Tasks.Code, Level = EventLevel.Informational, Keywords = EventKeywords.AuditSuccess)]
+    internal void TraceData(string eventType, int id, string data)
+    {
+      WriteEvent(15, eventType, id, data);
+    }
+
     #region private
 
-    private static Lazy<AzureGatewaySemanticEventSource> _singleto = new Lazy<AzureGatewaySemanticEventSource>(() => new AzureGatewaySemanticEventSource());
+    private static Lazy<AzureGatewaySemanticEventSource> _singleton = new Lazy<AzureGatewaySemanticEventSource>(() => new AzureGatewaySemanticEventSource());
 
     /// <summary>
     /// Releases the unmanaged resources used by the <see cref="T:System.Diagnostics.Tracing.EventSource"></see> class and optionally releases the managed resources.
@@ -192,12 +199,11 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
     {
       base.Dispose(disposing);
       if (disposing)
-        _singleto = new Lazy<AzureGatewaySemanticEventSource>(() => new AzureGatewaySemanticEventSource());
+        _singleton = new Lazy<AzureGatewaySemanticEventSource>(() => new AzureGatewaySemanticEventSource());
     }
 
     private AzureGatewaySemanticEventSource()
     {
-      //this.Chann
     }
 
     #endregion private

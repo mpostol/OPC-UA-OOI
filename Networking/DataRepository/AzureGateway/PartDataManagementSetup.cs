@@ -41,15 +41,15 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// </summary>
     public PartDataManagementSetup()
     {
-      _Logger.EnteringMethodPart(nameof(PartDataManagementSetup), nameof(PartDataManagementSetup));
+      _Logger.EnteringMethodPart(nameof(PartDataManagementSetup));
       //Compose external parts
       IServiceLocator _serviceLocator = ServiceLocator.Current;
       //string _configurationFileName = _serviceLocator.GetInstance<string>(CompositionSettings.ConfigurationFileNameContract);
       m_ViewModel = _serviceLocator.GetInstance<ProducerViewModel>();
       EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();
-      _Logger.Composed(nameof(EncodingFactory), EncodingFactory.ToString());
+      _Logger.Composed(nameof(EncodingFactory), EncodingFactory.GetType().FullName);
       MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
-      _Logger.Composed(nameof(MessageHandlerFactory), MessageHandlerFactory.ToString());
+      _Logger.Composed(nameof(MessageHandlerFactory), MessageHandlerFactory.GetType().FullName);
       //compose internal parts
       ConfigurationFactory = new PartConfigurationFactory(ConfigurationFilePath);
       PartBindingFactory pbf = new PartBindingFactory();
@@ -68,11 +68,11 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// </summary>
     public void Setup()
     {
-      _Logger.EnteringMethodPart(nameof(PartDataManagementSetup), nameof(Setup));
+      _Logger.EnteringMethodPart(nameof(PartDataManagementSetup));
       try
       {
         m_ViewModel.ChangeProducerCommand(() => { m_ViewModel.ProducerErrorMessage = "Restarted"; });
-        _Logger.EnteringMethodPart(nameof(PartDataManagementSetup), nameof(Start));
+        _Logger.EnteringMethodPart(nameof(DataManagementSetup), nameof(Start));
         Start();
         StartAzureCommunication(ConfigurationFactory.GetConfiguration());
         _Logger.PartInitializationCompleted();
@@ -143,7 +143,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
 
     private void StartAzureCommunication(ConfigurationData configuration)
     {
-      _Logger.EnteringMethodPart(nameof(PartDataManagementSetup), nameof(StartAzureCommunication));
+      _Logger.EnteringMethodPart(nameof(PartDataManagementSetup));
       CancellationToken token = _tokenSource.Token;
       List<CommunicationContext> azureComunicationContextList = new List<CommunicationContext>();
       TaskFactory taskFactory = Task.Factory;
@@ -179,6 +179,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     [Conditional("DEBUG")]
     internal void DisposeCheck(Action<bool> onDispose)
     {
+      _Logger.EnteringMethodPart(nameof(PartDataManagementSetup));
       m_onDispose = onDispose;
     }
 

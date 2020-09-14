@@ -26,7 +26,7 @@ namespace UAOOI.Networking.SemanticData.UnitTest
     [TestCategory("DataManagement_DataManagementSetup")]
     public void DataManagementSetupCreatorTestMethod()
     {
-      using (DataManagementSetup _ndm = new DataManagementSetup())
+      using (DataManagementSetupTest _ndm = new DataManagementSetupTest())
       {
         Assert.IsNull(_ndm.BindingFactory);
         Assert.IsNull(_ndm.ConfigurationFactory);

@@ -12,7 +12,7 @@ namespace UAOOI.Networking.DataLogger.UnitTest
     public void ConstructorTest()
     {
       TestConsumerViewModel _viewModel = new TestConsumerViewModel();
-      DataConsumer _DataConsumer = new DataConsumer(_viewModel);
+      PartIBindingFactory _DataConsumer = new PartIBindingFactory(_viewModel);
     }
   }
 }

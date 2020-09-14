@@ -13,7 +13,7 @@ using UAOOI.Networking.Core;
 using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData;
 
-namespace UAOOI.Networking.DataLogger
+namespace UAOOI.Networking.DataRepository.DataLogger
 {
   /// <summary>
   /// Class ConsumerDataManagementSetup - custom implementation of the <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />

@@ -9,13 +9,15 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Reflection;
+using UAOOI.Networking.DataRepository.DataLogger;
+using UAOOI.Networking.Encoding;
+using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.SemanticData;
 
 namespace UAOOI.Networking.ReferenceApplication.MEF
 {
   internal static class DefaultServiceRegistrar
   {
-
     /// <summary>
     /// Registers the required services.
     /// </summary>
@@ -28,16 +30,16 @@ namespace UAOOI.Networking.ReferenceApplication.MEF
         _catalog.Add(additionalCatalog);
       return new AggregateCatalog(_catalog);
     }
+
     private static List<ComposablePartCatalog> GetDefaultComposablePartCatalog()
     {
       return new List<ComposablePartCatalog>(new ComposablePartCatalog[] { new AssemblyCatalog(Assembly.GetAssembly(typeof(AppBootstrapper))),
-                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.ReferenceApplication.Core.Diagnostic.NetworkingEventSourceProvider))),
+                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(NetworkingEventSourceProvider))),
                                                                            new AssemblyCatalog(Assembly.GetAssembly(typeof(DataManagementSetup))),
-                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.Encoding.EncodingFactoryBinarySimple))),
-                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(UAOOI.Networking.DataLogger.ConsumerCompositionSettings))),
+                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(EncodingFactoryBinarySimple))),
+                                                                           new AssemblyCatalog(Assembly.GetAssembly(typeof(ConsumerCompositionSettings))),
                                                                           }
                                             );
     }
-
   }
 }

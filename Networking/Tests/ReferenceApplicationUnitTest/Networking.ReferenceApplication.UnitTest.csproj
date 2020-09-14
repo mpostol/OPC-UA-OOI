@@ -120,7 +120,7 @@
       <Name>Networking.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DataRepository\DataLogger\Networking.DataLogger.csproj">
-      <Project>{3781b8ca-3128-45dc-89c9-981740357630}</Project>
+      <Project>{3781B8CA-3128-45DC-89C9-981740357630}</Project>
       <Name>Networking.DataLogger</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj">

@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
 using System;
 using System.Collections.Generic;
@@ -6,7 +12,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using System.Reactive.Disposables;
 using System.Windows;
-using UAOOI.Networking.DataLogger;
+using UAOOI.Networking.DataRepository.DataLogger;
 using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.ReferenceApplication.Core.Diagnostic;
 using UAOOI.Networking.ReferenceApplication.MEF;
@@ -14,11 +20,10 @@ using UAOOI.Networking.ReferenceApplication.Properties;
 
 namespace UAOOI.Networking.ReferenceApplication
 {
-
   internal class AppBootstrapper : MefBootstrapper
   {
-
     #region MefBootstrapper
+
     /// <summary>
     /// Run the bootstrapper process.
     /// </summary>
@@ -27,12 +32,14 @@ namespace UAOOI.Networking.ReferenceApplication
     {
       base.Run(runWithDefaultConfiguration);
     }
+
     protected override void ConfigureContainer()
     {
       base.ConfigureContainer();
       this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(Settings.Default.MessageHandlerProvider));
       this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(Settings.Default.DataProducerProvider));
     }
+
     /// <summary>
     /// Initializes the shell.
     /// </summary>
@@ -43,6 +50,7 @@ namespace UAOOI.Networking.ReferenceApplication
       Application.Current.MainWindow = (MainWindow)this.Shell;
       Application.Current.MainWindow.Show();
     }
+
     /// <summary>
     /// Creates the shell or main window of the application.
     /// </summary>
@@ -51,6 +59,7 @@ namespace UAOOI.Networking.ReferenceApplication
     {
       return this.Container.GetExportedValue<MainWindow>();
     }
+
     protected override void OnInitialized()
     {
       try
@@ -75,9 +84,11 @@ namespace UAOOI.Networking.ReferenceApplication
         throw;
       }
     }
-    #endregion
+
+    #endregion MefBootstrapper
 
     #region IDisposable
+
     protected override void Dispose(bool disposing)
     {
       try
@@ -94,6 +105,7 @@ namespace UAOOI.Networking.ReferenceApplication
         MasterTraceException(_ex, false);
       }
     }
+
     private void MasterTraceException(Exception ex, bool inner)
     {
       if (ex == null)
@@ -104,12 +116,15 @@ namespace UAOOI.Networking.ReferenceApplication
         return;
       MasterTraceException(ex.InnerException, true);
     }
-    #endregion
 
-    #region private 
+    #endregion IDisposable
+
+    #region private
+
     private List<EventEntry> m_Log = new List<EventEntry>();
     private CompositeDisposable m_Components = new CompositeDisposable();
     private EventSourceBootstrapper m_EventSourceBootstrapper;
+
     private static void AppDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
       ReferenceApplicationEventSource.Log.EnteringMethod(nameof(AppBootstrapper), nameof(AppDomainUnhandledException));
@@ -117,6 +132,7 @@ namespace UAOOI.Networking.ReferenceApplication
       ReferenceApplicationEventSource.Log.LogException(_ex);
       HandleException(_ex);
     }
+
     private static void HandleException(Exception ex)
     {
       if (ex == null)
@@ -124,7 +140,7 @@ namespace UAOOI.Networking.ReferenceApplication
       MessageBox.Show(Properties.Resources.UnhandledException, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
       Environment.Exit(1);
     }
-    #endregion
 
+    #endregion private
   }
 }

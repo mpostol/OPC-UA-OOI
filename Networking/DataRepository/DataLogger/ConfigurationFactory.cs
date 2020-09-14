@@ -11,7 +11,7 @@ using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Configuration.Networking.Serializers;
 
-namespace UAOOI.Networking.DataLogger
+namespace UAOOI.Networking.DataRepository.DataLogger
 {
   /// <summary>
   /// Class ConsumerConfigurationFactory - provides implementation of the <see cref="ConfigurationFactoryBase{T}" /> for the UA Data consumer.

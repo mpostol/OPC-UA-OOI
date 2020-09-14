@@ -9,7 +9,7 @@ using System;
 using System.Windows.Input;
 using UAOOI.Networking.ReferenceApplication.Core.MvvmLight;
 
-namespace UAOOI.Networking.DataLogger
+namespace UAOOI.Networking.DataRepository.DataLogger
 {
   /// <summary>
   /// Class ConsumerViewModel -custom implementation of the ViewModel for this DataLogger

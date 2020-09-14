@@ -1,11 +1,16 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using UAOOI.Networking.DataLogger.UnitTest.Instrumentation;
+using UAOOI.Networking.DataRepository.DataLogger.Instrumentation;
 
-namespace UAOOI.Networking.DataLogger.UnitTest
+namespace UAOOI.Networking.DataRepository.DataLogger
 {
-
   [TestClass]
   public class ConsumerViewModelUnit
   {
@@ -14,6 +19,7 @@ namespace UAOOI.Networking.DataLogger.UnitTest
     {
       TestConsumerViewModel _viewModel = new TestConsumerViewModel();
     }
+
     [TestMethod]
     [ExpectedException(typeof(NotImplementedException))]
     public void TraceTest()
@@ -21,6 +27,5 @@ namespace UAOOI.Networking.DataLogger.UnitTest
       TestConsumerViewModel _viewModel = new TestConsumerViewModel();
       _viewModel.Trace("");
     }
-
   }
 }

@@ -8,7 +8,7 @@
 using CommonServiceLocator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel.Composition.Hosting;
-using UAOOI.Networking.DataLogger;
+using UAOOI.Networking.DataRepository.DataLogger;
 using UAOOI.Networking.ReferenceApplication.Core;
 using UAOOI.Networking.ReferenceApplication.MEF;
 

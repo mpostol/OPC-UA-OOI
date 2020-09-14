@@ -10,7 +10,7 @@ using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
 
-namespace UAOOI.Networking.DataLogger
+namespace UAOOI.Networking.DataRepository.DataLogger
 {
   /// <summary>
   /// Class <see cref="PartIBindingFactory"/> - it is a consumer of the data send over the wire using the UAOOI.Networking.SemanticData framework.

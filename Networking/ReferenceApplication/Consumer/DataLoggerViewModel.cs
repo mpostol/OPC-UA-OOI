@@ -1,32 +1,37 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Threading;
-using UAOOI.Networking.DataLogger;
+using UAOOI.Networking.DataRepository.DataLogger;
 
 namespace UAOOI.Networking.ReferenceApplication.Consumer
 {
-
   [Export(ConsumerCompositionSettings.ViewModelContract, typeof(ConsumerViewModel))]
   internal class DataLoggerViewModel : ConsumerViewModel
   {
     #region ViewModel
+
     public ObservableCollection<string> ConsumerLog
     {
-      get
-      {
-        return b_ConsumerLog;
-      }
+      get => b_ConsumerLog;
       set
       {
         b_ConsumerLog = value;
         RaisePropertyChanged<ObservableCollection<string>>("ConsumerLog", b_ConsumerLog, value);
       }
     }
-    #endregion
+
+    #endregion ViewModel
 
     #region private
+
     /// <summary>
     /// Add the message to the <see cref="MainWindowViewModel.ConsumerLog"/>.
     /// </summary>
@@ -35,9 +40,9 @@ namespace UAOOI.Networking.ReferenceApplication.Consumer
     {
       Application.Current.Dispatcher.Invoke(() => ConsumerLog.Insert(0, message), DispatcherPriority.Normal);
     }
+
     private ObservableCollection<string> b_ConsumerLog = new ObservableCollection<string>();
-    #endregion
 
+    #endregion private
   }
-
 }

@@ -4,8 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <RootNamespace>UAOOI.Networking.DataLogger</RootNamespace>
-    <AssemblyName>UAOOI.Networking.DataLogger</AssemblyName>
+    <RootNamespace>UAOOI.Networking.DataRepository.DataLogger</RootNamespace>
+    <AssemblyName>UAOOI.Networking.DataRepository.DataLogger</AssemblyName>
     <Version>4.0.1</Version>
     <Authors>MPostol</Authors>
     <Company>commsvr.com</Company>

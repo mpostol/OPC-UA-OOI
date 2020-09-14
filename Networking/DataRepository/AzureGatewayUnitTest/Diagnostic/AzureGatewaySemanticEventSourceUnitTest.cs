@@ -54,8 +54,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.Diagnostic
     public void EventListenerTest()
     {
       using (AzureGatewaySemanticEventSource itemToTest = AzureGatewaySemanticEventSource.Log())
-      //AzureGatewaySemanticEventSource itemToTest = AzureGatewaySemanticEventSource.Log();
-      //using (myEventSource itemToTest = new myEventSource())
       using (EventListener lisner = new EventListener())
       {
         List<EventSourceCreatedEventArgs> sourceList = new List<EventSourceCreatedEventArgs>();
@@ -63,19 +61,41 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.Diagnostic
         lisner.EventSourceCreated += (o, es) => sourceList.Add(es);
         lisner.EventWritten += (source, entry) => eventsList.Add(entry);
         foreach (EventSourceCreatedEventArgs item in sourceList)
-        {
           Debug.WriteLine($"{item.EventSource.Name}:{item.EventSource.Guid}; Is enabled: {item.EventSource.IsEnabled()}");
-        }
-        int esCount = sourceList.Count;//Assert.AreEqual<int>(2, sourceList.Count);
+        int esCount = sourceList.Count;
         Assert.AreEqual<int>(0, eventsList.Count);
         lisner.EnableEvents(itemToTest, EventLevel.LogAlways, EventKeywords.All);
         Assert.AreEqual<int>(esCount, sourceList.Count);
         Assert.AreEqual<int>(0, eventsList.Count);
+      }
+    }
+
+    [TestMethod]
+    public void ProgramFailureTest()
+    {
+      using (AzureGatewaySemanticEventSource itemToTest = AzureGatewaySemanticEventSource.Log())
+      using (EventListener lisner = new EventListener())
+      {
+        List<EventSourceCreatedEventArgs> sourceList = new List<EventSourceCreatedEventArgs>();
+        List<EventWrittenEventArgs> eventsList = new List<EventWrittenEventArgs>();
+        lisner.EventSourceCreated += (o, es) => sourceList.Add(es);
+        lisner.EventWritten += (source, entry) => eventsList.Add(entry);
+        Assert.AreEqual<int>(0, eventsList.Count);
+        lisner.EnableEvents(itemToTest, EventLevel.LogAlways, EventKeywords.All);
         itemToTest.ProgramFailure("ClassName", "problem");
         Assert.AreEqual<int>(1, eventsList.Count);
         EventWrittenEventArgs eventArgs = eventsList[0];
         Assert.AreEqual<int>(1, eventArgs.EventId);
-        Assert.AreEqual<string>("At ClassName.EventListenerTest encountered application failure: problem", String.Format(eventArgs.Message, eventArgs.Payload.Select<object, string>(x => x.ToString()).ToArray<string>()));
+        Assert.AreEqual<string>("At ClassName.ProgramFailureTest encountered application failure: problem", String.Format(eventArgs.Message, eventArgs.Payload.Select<object, string>(x => x.ToString()).ToArray<string>()));
+        Assert.AreEqual<EventChannel>(EventChannel.Admin, eventArgs.Channel);
+        Assert.AreEqual<int>(1, eventArgs.EventId);
+        Assert.AreEqual<string>(nameof(AzureGatewaySemanticEventSource.ProgramFailure), eventArgs.EventName);
+        Assert.AreSame(AzureGatewaySemanticEventSource.Log(), eventArgs.EventSource);
+        Assert.IsTrue((AzureGatewaySemanticEventSource.Keywords.Diagnostic & eventArgs.Keywords) > 0);
+        Assert.AreEqual<EventLevel>(EventLevel.Error, eventArgs.Level);
+        Assert.AreEqual<EventOpcode>(EventOpcode.Info, eventArgs.Opcode);
+        Assert.AreEqual<EventTask>(AzureGatewaySemanticEventSource.Tasks.Code, eventArgs.Task);
+        Assert.AreEqual<byte>(0x01, eventArgs.Version);
       }
     }
   }

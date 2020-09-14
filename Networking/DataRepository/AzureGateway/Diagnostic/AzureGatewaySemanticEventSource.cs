@@ -7,6 +7,7 @@
 
 using System;
 using System.Diagnostics.Tracing;
+using System.Runtime.CompilerServices;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
 {
@@ -82,98 +83,98 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
     internal static AzureGatewaySemanticEventSource Log() { return _singleto.Value; }
 
     [Event(1, Message = "At {0}.{1} encountered application failure: {2}",
-      Opcode = EventOpcode.Info, Task = Tasks.Code, Level = EventLevel.Error, Keywords = Keywords.Diagnostic)]
-    internal void ProgramFailure(string className, string problem, [System.Runtime.CompilerServices.CallerMemberName] string methodName = nameof(ProgramFailure))
+      Channel = EventChannel.Admin, Opcode = EventOpcode.Info, Task = Tasks.Code, Level = EventLevel.Error, Keywords = Keywords.Diagnostic, Version = 0x01)]
+    internal void ProgramFailure(string className, string problem, [CallerMemberName] string methodName = nameof(ProgramFailure))
     {
       WriteEvent(1, className, methodName, problem);
     }
 
     [Event(2, Message = "Disposing an object: {0}.{1}.",
-      Opcode = EventOpcode.Stop, Task = Tasks.Code, Level = EventLevel.Verbose)]
+       Channel = EventChannel.Debug, Opcode = EventOpcode.Stop, Task = Tasks.Code, Level = EventLevel.Verbose)]
     internal void DisposingObject(string className, string methodName)
     {
       WriteEvent(2, className, methodName);
     }
 
     [Event(3, Message = "At {0}.{1} encountered Azure transient communication problem: {2}",
-      Opcode = EventOpcode.Suspend, Task = Tasks.Azure, Level = EventLevel.Warning, Keywords = EventKeywords.AuditFailure)]
+      Channel = EventChannel.Admin, Opcode = EventOpcode.Suspend, Task = Tasks.Azure, Level = EventLevel.Warning, Keywords = EventKeywords.AuditFailure)]
     internal void AzureCommunicationFailure(string className, string methodName, string problem)
     {
       WriteEvent(3, className, methodName, problem);
     }
 
     [Event(4, Message = "Entering method {0}.{1}",
-      Opcode = EventOpcode.Start, Task = Tasks.Azure, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Start, Task = Tasks.Azure, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
     internal void EnteringMethodAzure(string className, string methodName)
     {
       WriteEvent(4, className, methodName);
     }
 
     [Event(5, Message = "Start creating client using {0}.{1} for {2} with authenticationMethod {3}, and using the transport {3}",
-      Opcode = EventOpcode.Start, Task = Tasks.Azure, Level = EventLevel.Informational, Keywords = EventKeywords.AuditSuccess)]
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Start, Task = Tasks.Azure, Level = EventLevel.Informational, Keywords = EventKeywords.AuditSuccess)]
     internal void StartCreatingClient(string className, string methodName, string assignedHub, string authenticationMethod, string transportType)
     {
       WriteEvent(5, className, methodName, assignedHub, authenticationMethod, transportType);
     }
 
     [Event(6, Message = "Azure communication machine entering state {0}",
-     Opcode = EventOpcode.Start, Task = Tasks.Azure, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Start, Task = Tasks.Azure, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
     internal void EnteringState(string machineState)
     {
       WriteEvent(6, machineState);
     }
 
     [Event(7, Message = "Unexpected provisioning resultStatus {0} reporting error {1}",
-     Opcode = EventOpcode.Info, Task = Tasks.Azure, Level = EventLevel.Warning, Keywords = EventKeywords.AuditFailure)]
+     Channel = EventChannel.Admin, Opcode = EventOpcode.Info, Task = Tasks.Azure, Level = EventLevel.Warning, Keywords = EventKeywords.AuditFailure)]
     internal void UnexpectedProvisioningResultStatus(string provisioningRegistrationStatusType, string errorMessage)
     {
       WriteEvent(7, provisioningRegistrationStatusType, errorMessage);
     }
 
     [Event(8, Message = "The message {0} has been successfully send to Azure service",
-     Opcode = EventOpcode.Info, Task = Tasks.Azure, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Azure, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
     internal void SendEvenSuccided(string payload)
     {
       WriteEvent(8, payload.Substring(0, 80));
     }
 
     [Event(9, Message = "Starting time delay {0} for a transient failure",
-      Opcode = EventOpcode.Info, Task = Tasks.Azure, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
+      Channel = EventChannel.Admin, Opcode = EventOpcode.Info, Task = Tasks.Azure, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
     internal void StartingTimeDelay(string timeSpan)
     {
       WriteEvent(9, timeSpan);
     }
 
     [Event(10, Message = "Entering method {0}.{1}",
-      Opcode = EventOpcode.Info, Task = Tasks.Binding, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Binding, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
     internal void EnteringMethodBinding(string className, string methodName)
     {
       WriteEvent(10, className, methodName);
     }
 
     [Event(11, Message = "Entering method {0}.{1}",
-      Opcode = EventOpcode.Info, Task = Tasks.Configuration, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Configuration, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
     internal void EnteringMethodConfiguration(string className, string methodName)
     {
       WriteEvent(11, className, methodName);
     }
 
     [Event(12, Message = "Entering method {0}.{1}",
-      Opcode = EventOpcode.Info, Task = Tasks.Part, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Part, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
     internal void EnteringMethodPart(string className, string methodName)
     {
       WriteEvent(12, className, methodName);
     }
 
     [Event(13, Message = "Successfully composed {0} using instance of type {1}",
-      Opcode = EventOpcode.Info, Task = Tasks.Part, Level = EventLevel.Informational, Keywords = EventKeywords.AuditSuccess)]
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Part, Level = EventLevel.Informational, Keywords = EventKeywords.AuditSuccess)]
     internal void Composed(string variable, string typeName)
     {
       WriteEvent(13, variable, typeName);
     }
 
     [Event(14, Message = "Setup of the producer engine has been accomplished and it starts sending data.",
-      Opcode = EventOpcode.Start, Task = Tasks.Part, Level = EventLevel.Informational, Keywords = EventKeywords.AuditSuccess)]
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Start, Task = Tasks.Part, Level = EventLevel.Informational, Keywords = EventKeywords.AuditSuccess)]
     internal void PartInitializationCompleted()
     {
       WriteEvent(14);

@@ -76,9 +76,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.Diagnostic
       using (AzureGatewaySemanticEventSource itemToTest = AzureGatewaySemanticEventSource.Log())
       using (EventListener lisner = new EventListener())
       {
-        List<EventSourceCreatedEventArgs> sourceList = new List<EventSourceCreatedEventArgs>();
         List<EventWrittenEventArgs> eventsList = new List<EventWrittenEventArgs>();
-        lisner.EventSourceCreated += (o, es) => sourceList.Add(es);
         lisner.EventWritten += (source, entry) => eventsList.Add(entry);
         Assert.AreEqual<int>(0, eventsList.Count);
         lisner.EnableEvents(itemToTest, EventLevel.LogAlways, EventKeywords.All);

@@ -98,14 +98,14 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
 
     [Event(3, Message = "At {0}.{1} encountered Azure transient communication problem: {2}",
       Channel = EventChannel.Admin, Opcode = EventOpcode.Suspend, Task = Tasks.Azure, Level = EventLevel.Warning, Keywords = EventKeywords.AuditFailure)]
-    internal void AzureCommunicationFailure(string className, string methodName, string problem)
+    internal void AzureConnectionFailure(string className, string methodName, string problem)
     {
       WriteEvent(3, className, methodName, problem);
     }
 
     [Event(4, Message = "Entering method {0}.{1}",
       Channel = EventChannel.Debug, Opcode = EventOpcode.Start, Task = Tasks.Azure, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
-    internal void EnteringMethodAzure(string className, string methodName)
+    internal void EnteringMethodAzure(string className, [CallerMemberName] string methodName = nameof(EnteringMethodAzure))
     {
       WriteEvent(4, className, methodName);
     }
@@ -125,17 +125,17 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
     }
 
     [Event(7, Message = "Unexpected provisioning resultStatus {0} reporting error {1}",
-     Channel = EventChannel.Admin, Opcode = EventOpcode.Info, Task = Tasks.Azure, Level = EventLevel.Warning, Keywords = EventKeywords.AuditFailure)]
+      Channel = EventChannel.Admin, Opcode = EventOpcode.Info, Task = Tasks.Azure, Level = EventLevel.Warning, Keywords = EventKeywords.AuditFailure)]
     internal void UnexpectedProvisioningResultStatus(string provisioningRegistrationStatusType, string errorMessage)
     {
       WriteEvent(7, provisioningRegistrationStatusType, errorMessage);
     }
 
-    [Event(8, Message = "The message {0} has been successfully send to Azure service",
+    [Event(8, Message = "The following message has been successfully send to Azure service: {0}",
       Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Azure, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
-    internal void SendEvenSuccided(string payload)
+    internal void SendEvenSuccided(string payloadHeader)
     {
-      WriteEvent(8, payload.Substring(0, 80));
+      WriteEvent(8, payloadHeader);
     }
 
     [Event(9, Message = "Starting time delay {0} for a transient failure",
@@ -145,11 +145,11 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
       WriteEvent(9, timeSpan);
     }
 
-    [Event(10, Message = "Entering method {0}.{1}",
+    [Event(10, Message = "Entering method PartBindingFactory.{0}",
       Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Binding, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
-    internal void EnteringMethodBinding(string className, string methodName)
+    internal void EnteringMethodBinding([CallerMemberName] string methodName = nameof(EnteringMethodBinding))
     {
-      WriteEvent(10, className, methodName);
+      WriteEvent(10, methodName);
     }
 
     [Event(11, Message = "Entering method {0}.{1}",

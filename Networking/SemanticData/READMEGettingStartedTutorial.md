@@ -62,10 +62,10 @@ Create new class that derives from `DataManagementSetup` and initialize all ment
    IServiceLocator _serviceLocator = ServiceLocator.Current;
    string _ConsumerConfigurationFileName = _serviceLocator.GetInstance<string>(ConsumerCompositionSettings.ConfigurationFileNameContract);
    m_ViewModel = _serviceLocator.GetInstance<ConsumerViewModel>(ConsumerCompositionSettings.ViewModelContract);
-   ConfigurationFactory = new ConsumerConfigurationFactory(_ConsumerConfigurationFileName);
    EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();
-   BindingFactory = new DataConsumer(m_ViewModel);
    MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
+   ConfigurationFactory = new ConsumerConfigurationFactory(_ConsumerConfigurationFileName);
+   BindingFactory = new DataConsumer(m_ViewModel);
   }
 
   ....
@@ -73,9 +73,14 @@ Create new class that derives from `DataManagementSetup` and initialize all ment
  }
 ```
 
-In this example, it is assumed that [`ServiceLocator`](https://www.nuget.org/packages/CommonServiceLocator) is implemented to resolve references to any external services.
+In this example, it is assumed that [`ServiceLocator`](https://www.nuget.org/packages/CommonServiceLocator) is implemented to resolve references to any external services. 
 
-Finally call the `DataManagementSetup.Start()` methods responsible to initialize the infrastructure, enable all associations and start pumping the data.
+Finally, call the `DataManagementSetup.Start()` methods. It is responsible to initialize the infrastructure, create all data bindings, enable all associations, and finally starts pumping the data. If you need any custom startup functionality, just place it just after calling the `Start` method. The following example originates from the `UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup`
+
+```C#
+   Start();
+   StartAzureCommunication(ConfigurationFactory.GetConfiguration());
+```
 
 ## How to: Implement `IEncodingFactory`
 
@@ -178,7 +183,7 @@ The `EventSourceBootstrapper` in `Networking.ReferenceApplication` project is an
 
 ## See also
 
-- [API Browser is available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
+- [**API Browser** is available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 
 [wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/

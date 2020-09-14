@@ -11,6 +11,7 @@ using System.Diagnostics;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.DataRepository.AzureGateway.Diagnostic;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway
 {
@@ -29,10 +30,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// <param name="configurationFileName">Name of the producer configuration file.</param>
     public PartConfigurationFactory(string configurationFileName) : base(configurationFileName)
     {
-      //TODO Create and Register the EventSource #455
-      IServiceLocator _serviceLocator = ServiceLocator.Current;
-      _TraceSource = _serviceLocator.GetInstance<ITraceSource>();
-      _TraceSource.TraceData(TraceEventType.Information, 36, $"Starting {nameof(PartConfigurationFactory)} with the configuration file name {configurationFileName}");
+      _log.CreatingConfiguration(configurationFileName);
     }
 
     #endregion constructor
@@ -58,7 +56,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
     /// <param name="data">The trace data.</param>
     protected override void TraceData(TraceEventType eventType, int id, object data)
     {
-      _TraceSource.TraceData(eventType, id, data);
+      _log.TraceData(eventType.ToString(), id, data.ToString());
     }
 
     protected override void RaiseEvents()
@@ -71,7 +69,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
 
     #region private
 
-    private ITraceSource _TraceSource = null;
+    private readonly AzureGatewaySemanticEventSource _log = AzureGatewaySemanticEventSource.Log();
 
     #endregion private
   }

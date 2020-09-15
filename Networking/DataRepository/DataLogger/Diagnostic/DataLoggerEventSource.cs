@@ -7,11 +7,12 @@
 
 using System;
 using System.Diagnostics.Tracing;
+using System.Runtime.CompilerServices;
 
 namespace UAOOI.Networking.DataRepository.DataLogger.Diagnostic
 {
   /// <summary>
-  /// Class DataLoggerEventSource.
+  /// Class DataLoggerEventSource captures event source functionality supporting semantic par logging.
   /// Implements the <see cref="EventSource" />
   /// </summary>
   /// <seealso cref="EventSource" />
@@ -19,25 +20,36 @@ namespace UAOOI.Networking.DataRepository.DataLogger.Diagnostic
   public class DataLoggerEventSource : EventSource
   {
     /// <summary>
-    /// Class Tasks.
+    /// Class Tasks - capturing definitions of the tasks that apply to events.
     /// </summary>
     public class Tasks
     {
-      public const EventTask Consumer = (EventTask)1;
-      public const EventTask Producer = (EventTask)2;
-      public const EventTask Stack = (EventTask)3;
-      public const EventTask Infrastructure = (EventTask)4;
+      /// <summary>
+      /// The part behavior event task
+      /// </summary>
+      public const EventTask Part = (EventTask)1;
+
+      /// <summary>
+      /// The code behavior event task
+      /// </summary>
+      public const EventTask Code = (EventTask)2;
+
+      /// <summary>
+      /// The binding behavior event task
+      /// </summary>
+      public const EventTask Binding = (EventTask)3;
+
+      /// <summary>
+      /// The configuration behavior event task
+      /// </summary>
+      public const EventTask Configuration = (EventTask)4;
+
+      /// <summary>
+      /// The azure behavior event task
+      /// </summary>
+      public const EventTask UserInterface = (EventTask)5;
     }
 
-    ///// <summary>
-    ///// Class Keywords - defines the local keywords (flags) that apply to events.
-    ///// </summary>
-    //internal class Keywords
-    //{
-    //  public const EventKeywords Setup = (EventKeywords)1;
-    //  public const EventKeywords Configuration = (EventKeywords)2;
-    //  public const EventKeywords Diagnostic = (EventKeywords)4;
-    //}
     /// <summary>
     /// Class Keywords - defines the local keywords (flags) that apply to events.
     /// </summary>
@@ -70,46 +82,74 @@ namespace UAOOI.Networking.DataRepository.DataLogger.Diagnostic
     /// <value>The log.</value>
     internal static DataLoggerEventSource Log() { return _singleton.Value; }
 
-    [Event(1, Message = "Application Failure: {0}",
-      Opcode = EventOpcode.Info, Task = Tasks.Infrastructure, Level = EventLevel.Error, Keywords = Keywords.Diagnostic)]
-    internal void Failure(string message)
+    [Event(1, Message = "At {0}.{1} encountered application failure: {2}",
+      Channel = EventChannel.Admin, Opcode = EventOpcode.Info, Task = Tasks.Code, Level = EventLevel.Error, Keywords = Keywords.Diagnostic, Version = 0x01)]
+    internal void ProgramFailure(string className, string problem, [CallerMemberName] string methodName = nameof(ProgramFailure))
     {
-      this.WriteEvent(1, message);
+      WriteEvent(1, className, methodName, problem);
     }
 
-    [Event(2, Message = "The application has been started using the message handling provider {0}.",
-      Opcode = EventOpcode.Start, Task = Tasks.Infrastructure, Level = EventLevel.Informational, Keywords = Keywords.Diagnostic)]
-    public void StartingApplication(string transportName)
+    [Event(2, Message = "Disposing an object: {0}.{1}.",
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Stop, Task = Tasks.Code, Level = EventLevel.Verbose)]
+    internal void DisposingObject(string className, [CallerMemberName] string methodName = nameof(DisposingObject))
     {
-      this.WriteEvent(2, transportName);
+      WriteEvent(2, className, methodName);
     }
 
-    [Event(3, Message = "The part {0} has been just created and configured.",
-      Opcode = EventOpcode.Start, Task = Tasks.Infrastructure, Level = EventLevel.Informational, Keywords = Keywords.Setup)]
-    public void PartCreated(string partName)
+    [Event(3, Message = "Entering method ConsumerViewModell.{0}",
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Start, Task = Tasks.UserInterface, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
+    internal void EnteringMethodUserInterface( [CallerMemberName] string methodName = nameof(EnteringMethodUserInterface))
     {
-      this.WriteEvent(3, partName);
+      WriteEvent(3, methodName);
     }
 
-    [Event(4, Message = "Initialization of {0}",
-      Opcode = EventOpcode.Start, Task = Tasks.Infrastructure, Level = EventLevel.Informational, Keywords = Keywords.Setup)]
-    public void Initialization(string message)
+    [Event(4, Message = "Entering method PartBindingFactory.{0}",
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Binding, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
+    internal void EnteringMethodBinding([CallerMemberName] string methodName = nameof(EnteringMethodBinding))
     {
-      this.WriteEvent(4, message);
+      WriteEvent(4, methodName);
     }
 
-    [Event(5, Message = "Entering method {0}.{1}",
-      Opcode = EventOpcode.Start, Task = Tasks.Infrastructure, Level = EventLevel.Verbose, Keywords = Keywords.Diagnostic)]
-    public void EnteringMethod(string className, string methodName)
+    [Event(5, Message = "Entering method ConfigurationFactory.{0}",
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Configuration, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
+    internal void EnteringMethodConfiguration([CallerMemberName] string methodName = nameof(EnteringMethodBinding))
     {
-      this.WriteEvent(5, className, methodName);
+      WriteEvent(5, methodName);
     }
 
-    [Event(6, Message = "Entering Dispose method in {0} class disposing = {1}",
-      Opcode = EventOpcode.Start, Task = Tasks.Infrastructure, Level = EventLevel.Informational, Keywords = Keywords.Diagnostic)]
-    public void EnteringDispose(string className, bool disposing)
+    [Event(6, Message = "Opening the configuration file {0}",
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Configuration, Level = EventLevel.Informational, Keywords = EventKeywords.AuditSuccess)]
+    internal void CreatingConfiguration(string configurationFileName)
     {
-      this.WriteEvent(6, className, disposing);
+      WriteEvent(6, configurationFileName);
+    }
+
+    [Event(7, Message = "Entering method LoggerManagementSetup.{0}",
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Part, Level = EventLevel.Verbose, Keywords = EventKeywords.AuditSuccess)]
+    internal void EnteringMethodPart([CallerMemberName] string methodName = nameof(EnteringMethodPart))
+    {
+      WriteEvent(7, methodName);
+    }
+
+    [Event(8, Message = "Successfully composed {0} using instance of type {1}",
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Info, Task = Tasks.Part, Level = EventLevel.Informational, Keywords = EventKeywords.AuditSuccess)]
+    internal void Composed(string variable, string typeName)
+    {
+      WriteEvent(8, variable, typeName);
+    }
+
+    [Event(9, Message = "Setup of the consumer engine has been accomplished and it starts receiving data.",
+      Channel = EventChannel.Debug, Opcode = EventOpcode.Start, Task = Tasks.Part, Level = EventLevel.Informational, Keywords = EventKeywords.AuditSuccess)]
+    internal void PartInitializationCompleted()
+    {
+      WriteEvent(9);
+    }
+
+    [Event(10, Message = "TraceData of the EventType={0} with id={1} and description={2}",
+      Channel = EventChannel.Analytic, Opcode = EventOpcode.Start, Task = Tasks.Code, Level = EventLevel.Informational, Keywords = EventKeywords.AuditSuccess)]
+    internal void TraceData(string eventType, int id, string data)
+    {
+      WriteEvent(10, eventType, id, data);
     }
 
     #region private

@@ -10,6 +10,9 @@ using System.Runtime.CompilerServices;
 
 namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
 {
+  /// <summary>
+  /// Class <see cref="AzureGatewayDiagnosticExtension"/> - expanding the <see cref="AzureGatewaySemanticEventSource"/>
+  /// </summary>
   internal static class AzureGatewayDiagnosticExtension
   {
     /// <summary>

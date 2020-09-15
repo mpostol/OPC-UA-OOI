@@ -6,26 +6,29 @@
 //___________________________________________________________________________________
 
 using System;
+using System.Runtime.CompilerServices;
 
 namespace UAOOI.Networking.DataRepository.DataLogger.Diagnostic
 {
   /// <summary>
   /// Class <see cref="DataLoggerEventSourceExtensions"/> - expanding the <see cref="DataLoggerEventSource"/>
   /// </summary>
-  public static class DataLoggerEventSourceExtensions
+  internal static class DataLoggerEventSourceExtensions
   {
     /// <summary>
-    /// Logs the exception using <see cref="DataLoggerEventSource"/>.
+    /// Logs the exception using <see cref="DataLoggerEventSource" />.
     /// </summary>
     /// <param name="eventSource">The event source to be used for problem reporting.</param>
+    /// <param name="className">Name of the class.</param>
     /// <param name="e">The exception to be reported.</param>
-    public static void LogException(this DataLoggerEventSource eventSource, Exception e)
+    /// <param name="methodName">Name of the method.</param>
+    internal static void LogException(this DataLoggerEventSource eventSource, string className, Exception e, [CallerMemberName] string methodName = nameof(LogException))
     {
       Exception _exception = e;
       string _innerText = "An exception has been caught:";
       while (e != null)
       {
-        eventSource.Failure($"{_innerText} of type {_exception.GetType().Name} capturing the message: {e.Message}");
+        eventSource.ProgramFailure(className, methodName, $"{_innerText} of type {_exception.GetType().Name} capturing the message: {e.Message}");
         e = e.InnerException;
         _innerText = "It contains inner exception:";
       }

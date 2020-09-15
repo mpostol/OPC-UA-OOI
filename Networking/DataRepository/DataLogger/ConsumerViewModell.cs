@@ -7,6 +7,7 @@
 
 using System;
 using System.Windows.Input;
+using UAOOI.Networking.DataRepository.DataLogger.Diagnostic;
 using UAOOI.Networking.ReferenceApplication.Core.MvvmLight;
 
 namespace UAOOI.Networking.DataRepository.DataLogger
@@ -78,7 +79,7 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     /// <summary>
     /// Add the message to the Log on the UI.
     /// </summary>
-    /// <param name="message">The message to be added to the log.</param>
+    /// <param name="message">The message to be added to the log on the UI.</param>
     protected internal abstract void Trace(string message);
 
     #endregion ViewModel
@@ -87,12 +88,18 @@ namespace UAOOI.Networking.DataRepository.DataLogger
 
     internal void ChangeProducerCommand(Action action)
     {
+      _logger.EnteringMethodConfiguration();
       ConsumerUpdateConfiguration = new DelegateCommand(action);
     }
 
     #endregion API
 
     #region private
+
+    /// <summary>
+    /// The logger - captures the functionality of the global logging infrastructure
+    /// </summary>
+    private readonly DataLoggerEventSource _logger = DataLoggerEventSource.Log();
 
     private int b_ConsumerBytesReceived;
     private int b_ConsumerFramesReceived;

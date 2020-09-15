@@ -7,6 +7,7 @@
 
 using System;
 using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.DataRepository.DataLogger.Diagnostic;
 using UAOOI.Networking.SemanticData;
 using UAOOI.Networking.SemanticData.DataRepository;
 
@@ -26,6 +27,7 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     /// <param name="viewModel">The view model used to log data received over wire.</param>
     internal PartIBindingFactory(ConsumerViewModel viewModel)
     {
+      _logger.EnteringMethodBinding();
       m_ViewModel = viewModel;
     }
 
@@ -40,11 +42,11 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     /// The configuration of the repositories belonging to the same group are handled according to the same profile.</param>
     /// <param name="processValueName">The name of a variable that is the ultimate destination of the values recovered from messages.
     /// Must be unique in the context of the group named by <paramref name="repositoryGroup" />.</param>
-    /// <param name="fieldTypeInfo">The field metadata definition represented as an object of <see cref="UAOOI.Configuration.Networking.Serialization.UATypeInfo" />.</param>
-    /// <returns>Returns an object implementing the <see cref="UAOOI.Networking.SemanticData.DataRepository.IConsumerBinding" /> interface that can be used to update selected variable on the factory side.</returns>
-    /// <exception cref="System.ArgumentNullException">repositoryGroup</exception>
+    /// <param name="fieldTypeInfo">The field metadata definition represented as an object of <see cref="UATypeInfo" />.</param>
+    /// <returns>Returns an object implementing the <see cref="IConsumerBinding" /> interface that can be used to update selected variable on the factory side.</returns>
     IConsumerBinding IBindingFactory.GetConsumerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
+      _logger.EnteringMethodBinding();
       return GetConsumerBinding(processValueName, fieldTypeInfo);
     }
 
@@ -54,13 +56,16 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     /// <param name="repositoryGroup">The repository group.</param>
     /// <param name="processValueName">The name of a variable that is the source of the values forwarded by a message over the network.
     /// Must be unique in the context of the group named by <paramref name="repositoryGroup" /></param>
-    /// <param name="fieldTypeInfo">The <see cref="T:UAOOI.Configuration.Networking.Serialization.BuiltInType" />of the message field encoding.</param>
+    /// <param name="fieldTypeInfo">The <see cref="BuiltInType" />of the message field encoding.</param>
     /// <returns>An instance implementing the <see cref="IProducerBinding" /> interface.</returns>
-    /// <exception cref="System.NotImplementedException"></exception>
+    /// <exception cref="NotImplementedException"></exception>
     /// <remarks>It is intentionally not implemented.</remarks>
     IProducerBinding IBindingFactory.GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
-      throw new NotImplementedException();
+      _logger.EnteringMethodBinding();
+      NotImplementedException ex = new NotImplementedException($"intentionally the method {nameof(IBindingFactory.GetProducerBinding)} is not implemented.");
+      _logger.LogException(nameof(PartIBindingFactory), ex);
+      throw ex;
     }
 
     #endregion IBindingFactory
@@ -68,6 +73,7 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     #region private
 
     private ConsumerViewModel m_ViewModel;
+    private DataLoggerEventSource _logger = DataLoggerEventSource.Log();
 
     /// <summary>
     /// Helper method that creates the consumer binding.
@@ -78,9 +84,14 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     /// <exception cref="System.ArgumentOutOfRangeException">variableName</exception>
     private IConsumerBinding GetConsumerBinding(string variableName, UATypeInfo typeInfo)
     {
+      _logger.EnteringMethodBinding();
       IConsumerBinding _return = null;
       if (typeInfo.ValueRank == 0 || typeInfo.ValueRank > 1)
-        throw new ArgumentOutOfRangeException(nameof(typeInfo.ValueRank));
+      {
+        ArgumentOutOfRangeException ex = new ArgumentOutOfRangeException(nameof(typeInfo.ValueRank));
+        _logger.LogException(nameof(PartIBindingFactory), ex);
+        throw ex;
+      }
       switch (typeInfo.BuiltInType)
       {
         case BuiltInType.Boolean:
@@ -208,6 +219,7 @@ namespace UAOOI.Networking.DataRepository.DataLogger
 
     private IConsumerBinding AddBinding<type>(string variableName, UATypeInfo typeInfo)
     {
+      _logger.EnteringMethodBinding();
       ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(typeInfo);
       _return.PropertyChanged += (x, y) => m_ViewModel.Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).ToString()}");
       return _return;

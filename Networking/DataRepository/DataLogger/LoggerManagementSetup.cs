@@ -33,15 +33,21 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     /// </summary>
     public LoggerManagementSetup()
     {
+      _logger.EnteringMethodPart();
       // get external parts to compose
       IServiceLocator _serviceLocator = ServiceLocator.Current;
       string _ConsumerConfigurationFileName = _serviceLocator.GetInstance<string>(ConsumerCompositionSettings.ConfigurationFileNameContract);
-      m_ViewModel = _serviceLocator.GetInstance<ConsumerViewModel>(ConsumerCompositionSettings.ViewModelContract);
+      _ViewModel = _serviceLocator.GetInstance<ConsumerViewModel>(ConsumerCompositionSettings.ViewModelContract);
+      _logger.Composed(nameof(_ViewModel), _ViewModel.GetType().FullName);
       EncodingFactory = _serviceLocator.GetInstance<IEncodingFactory>();
+      _logger.Composed(nameof(EncodingFactory), EncodingFactory.GetType().FullName);
       MessageHandlerFactory = _serviceLocator.GetInstance<IMessageHandlerFactory>();
+      _logger.Composed(nameof(MessageHandlerFactory), MessageHandlerFactory.GetType().FullName);
       // setup local functionality
       ConfigurationFactory = new ConsumerConfigurationFactory(_ConsumerConfigurationFileName);
-      BindingFactory = new PartIBindingFactory(m_ViewModel);
+      _logger.Composed(nameof(ConfigurationFactory), ConfigurationFactory.GetType().FullName);
+      BindingFactory = new PartIBindingFactory(_ViewModel);
+      _logger.Composed(nameof(BindingFactory), BindingFactory.GetType().FullName);
     }
 
     #endregion constructor
@@ -55,21 +61,20 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     {
       try
       {
-        _logger.Initialization($"{nameof(LoggerManagementSetup)}.{nameof(Setup)} starting");
-        m_ViewModel.ChangeProducerCommand(Restart);
+        _logger.EnteringMethodPart();
+        _ViewModel.ChangeProducerCommand(Restart);
         Start();
-        m_ViewModel.ConsumerErrorMessage = "Running";
-        _logger.Initialization($" consumer engine and starting receiving data accomplished");
+        _ViewModel.ConsumerErrorMessage = "Running";
+        _logger.PartInitializationCompleted();
       }
       catch (Exception _ex)
       {
-        _logger.LogException(_ex);
-        m_ViewModel.ConsumerErrorMessage = "ERROR";
+        _logger.LogException(nameof(LoggerManagementSetup), _ex);
+        _ViewModel.ConsumerErrorMessage = "ERROR";
         Dispose();
       }
     }
 
-    private readonly DataLoggerEventSource _logger = DataLoggerEventSource.Log();
 
     #endregion API
 
@@ -81,7 +86,7 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
     protected override void Dispose(bool disposing)
     {
-      _logger.EnteringDispose(nameof(LoggerManagementSetup), disposing);
+      _logger.DisposingObject(nameof(LoggerManagementSetup));
       m_onDispose(disposing);
       base.Dispose(disposing);
       if (!disposing || m_disposed)
@@ -97,7 +102,8 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     /// Gets or sets the view model to be used for diagnostic purpose..
     /// </summary>
     /// <value>The view model.</value>
-    private ConsumerViewModel m_ViewModel;
+    private ConsumerViewModel _ViewModel;
+    private readonly DataLoggerEventSource _logger = DataLoggerEventSource.Log();
 
     /// <summary>
     /// Gets a value indicating whether this <see cref="LoggerManagementSetup"/> is disposed.
@@ -109,7 +115,8 @@ namespace UAOOI.Networking.DataRepository.DataLogger
 
     private void Restart()
     {
-      m_ViewModel.Trace("Entering Restart");
+      _logger.EnteringMethodPart();
+      _ViewModel.Trace("Entering Restart");
       Start();
     }
 
@@ -120,6 +127,7 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     [Conditional("DEBUG")]
     internal void DisposeCheck(Action<bool> onDispose)
     {
+      _logger.EnteringMethodPart();
       m_onDispose = onDispose;
     }
 

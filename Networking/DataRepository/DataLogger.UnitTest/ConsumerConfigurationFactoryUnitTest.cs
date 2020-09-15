@@ -19,7 +19,8 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     [TestMethod]
     public void ConstructorTestMethod()
     {
-      IConfigurationFactory _configuration = new ConsumerConfigurationFactory("Configuration file name");
+      IConfigurationFactory _configuration = null;
+      Assert.ThrowsException<ArgumentException>(() => _configuration = new ConsumerConfigurationFactory("Configuration file name"));
     }
 
     [TestMethod]

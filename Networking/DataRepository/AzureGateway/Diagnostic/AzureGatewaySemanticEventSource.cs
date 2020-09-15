@@ -12,8 +12,8 @@ using System.Runtime.CompilerServices;
 namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
 {
   /// <summary>
-  /// Class AzureGatewaySemanticEventSource capturing event source functionality supporting semantic par logging
-  /// Implements the <see cref="System.Diagnostics.Tracing.EventSource" />
+  /// Class AzureGatewaySemanticEventSource captures event source functionality supporting semantic par logging
+  /// Implements the <see cref="EventSource" />
   /// </summary>
   /// <seealso cref="EventSource" />
   [EventSource(Name = "UAOOI.Networking.DataRepository.AzureGateway.Diagnostic", Guid = "BC7E8C08-C708-4E3C-A27E-237F093F175C")]
@@ -173,7 +173,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
       WriteEvent(13, variable, typeName);
     }
 
-    [Event(14, Message = "Setup of the producer engine has been accomplished and it starts sending data.",
+    [Event(14, Message = "Setup of the consumer engine has been accomplished and it starts receiving data.",
       Channel = EventChannel.Debug, Opcode = EventOpcode.Start, Task = Tasks.Part, Level = EventLevel.Informational, Keywords = EventKeywords.AuditSuccess)]
     internal void PartInitializationCompleted()
     {

@@ -39,7 +39,6 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.Diagnostic
       try
       {
         AzureGatewaySemanticEventSource itemToTest = AzureGatewaySemanticEventSource.Log();
-        Assert.IsNotNull(itemToTest);
         itemToTest.Dispose();
         Assert.IsNotNull(itemToTest);
         Assert.AreNotSame(itemToTest, AzureGatewaySemanticEventSource.Log());

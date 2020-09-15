@@ -14,7 +14,7 @@ namespace UAOOI.Networking.DataRepository.DataLogger
   /// <summary>
   /// Class ConsumerViewModel -custom implementation of the ViewModel for this DataLogger
   /// </summary>
-  /// <seealso cref="UAOOI.Networking.ReferenceApplication.Core.MvvmLight.ObservableObject" />
+  /// <seealso cref="ObservableObject" />
   public abstract class ConsumerViewModel : ObservableObject
   {
     #region ViewModel

@@ -39,12 +39,12 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
           foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
             foreach (ExportDefinition export in _part.ExportDefinitions)
               Debug.WriteLine(string.Format("Part contract name => '{0}'", export.ContractName));
-          Assert.AreEqual<int>(10, _container.Catalog.Parts.Count());
+          Assert.AreEqual<int>(11, _container.Catalog.Parts.Count());
           MainWindow _MainWindowExportedValue = _container.GetExportedValue<MainWindow>();
           Assert.IsNotNull(_MainWindowExportedValue);
           Assert.IsNotNull(_MainWindowExportedValue.MainWindowViewModel);
           IEnumerable<INetworkingEventSourceProvider> _diagnosticProviders = _container.GetExportedValues<INetworkingEventSourceProvider>();
-          Assert.AreEqual<int>(2, _diagnosticProviders.Count<INetworkingEventSourceProvider>());
+          Assert.AreEqual<int>(3, _diagnosticProviders.Count<INetworkingEventSourceProvider>());
         }
       }
     }
@@ -59,7 +59,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
       {
         IServiceLocator _serviceLocator = new ServiceLocatorAdapter(_container);
         ServiceLocator.SetLocatorProvider(() => _serviceLocator);
-        Assert.AreEqual<int>(13, _container.Catalog.Parts.Count<ComposablePartDefinition>());
+        Assert.AreEqual<int>(14, _container.Catalog.Parts.Count<ComposablePartDefinition>());
         foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
         {
           Debug.WriteLine("New Part");
@@ -74,7 +74,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         INetworkingEventSourceProvider _baseEventSource = _messageHandlerFactory as INetworkingEventSourceProvider;
         Assert.IsNull(_baseEventSource);
         IEnumerable<INetworkingEventSourceProvider> _diagnosticProviders = _container.GetExportedValues<INetworkingEventSourceProvider>();
-        Assert.AreEqual<int>(3, _diagnosticProviders.Count<INetworkingEventSourceProvider>());
+        Assert.AreEqual<int>(4, _diagnosticProviders.Count<INetworkingEventSourceProvider>());
         // DataLogger
         EventSourceBootstrapper _eventSourceBootstrapper = _container.GetExportedValue<EventSourceBootstrapper>();
         LoggerManagementSetup _logger = _container.GetExportedValue<LoggerManagementSetup>();

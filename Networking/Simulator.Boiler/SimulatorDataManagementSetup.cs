@@ -65,7 +65,7 @@ namespace UAOOI.Networking.Simulator.Boiler
       {
         ReferenceApplicationEventSource.Log.LogException(_ex);
         m_ViewModel.ProducerErrorMessage = "ERROR";
-        Dispose();
+       throw;
       }
     }
 

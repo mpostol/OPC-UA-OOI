@@ -19,7 +19,7 @@ namespace UAOOI.Networking.DataRepository.DataLogger.Diagnostic
     /// Logs the exception using <see cref="DataLoggerEventSource" />.
     /// </summary>
     /// <param name="eventSource">The event source to be used for problem reporting.</param>
-    /// <param name="className">Name of the class.</param>
+    /// <param name="className">Name of the class where the exception has been caught.</param>
     /// <param name="e">The exception to be reported.</param>
     /// <param name="methodName">Name of the method.</param>
     internal static void LogException(this DataLoggerEventSource eventSource, string className, Exception e, [CallerMemberName] string methodName = nameof(LogException))

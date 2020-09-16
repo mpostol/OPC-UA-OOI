@@ -81,7 +81,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
       {
         m_ViewModel.ProducerErrorMessage = "ERROR";
         _Logger.LogException(nameof(PartDataManagementSetup), ex);
-        Dispose();
+        throw;
       }
     }
 

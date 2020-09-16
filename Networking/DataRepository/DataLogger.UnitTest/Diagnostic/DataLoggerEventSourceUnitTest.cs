@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Tracing;
+using System.Linq;
 
 namespace UAOOI.Networking.DataRepository.DataLogger.Diagnostic
 {
@@ -66,5 +67,32 @@ namespace UAOOI.Networking.DataRepository.DataLogger.Diagnostic
         Assert.AreEqual<int>(0, eventsList.Count);
       }
     }
+    [TestMethod]
+    public void ProgramFailureTest()
+    {
+      using (DataLoggerEventSource itemToTest = DataLoggerEventSource.Log())
+      using (EventListener lisner = new EventListener())
+      {
+        List<EventWrittenEventArgs> eventsList = new List<EventWrittenEventArgs>();
+        lisner.EventWritten += (source, entry) => eventsList.Add(entry);
+        Assert.AreEqual<int>(0, eventsList.Count);
+        lisner.EnableEvents(itemToTest, EventLevel.LogAlways, EventKeywords.All);
+        itemToTest.ProgramFailure("ClassName", "problem");
+        Assert.AreEqual<int>(1, eventsList.Count);
+        EventWrittenEventArgs eventArgs = eventsList[0];
+        Assert.AreEqual<int>(1, eventArgs.EventId);
+        Assert.AreEqual<string>("At ClassName.ProgramFailureTest encountered application failure: problem", String.Format(eventArgs.Message, eventArgs.Payload.Select<object, string>(x => x.ToString()).ToArray<string>()));
+        Assert.AreEqual<EventChannel>(EventChannel.Admin, eventArgs.Channel);
+        Assert.AreEqual<int>(1, eventArgs.EventId);
+        Assert.AreEqual<string>(nameof(DataLoggerEventSource.ProgramFailure), eventArgs.EventName);
+        Assert.AreSame(DataLoggerEventSource.Log(), eventArgs.EventSource);
+        Assert.IsTrue((DataLoggerEventSource.Keywords.Diagnostic & eventArgs.Keywords) > 0);
+        Assert.AreEqual<EventLevel>(EventLevel.Error, eventArgs.Level);
+        Assert.AreEqual<EventOpcode>(EventOpcode.Info, eventArgs.Opcode);
+        Assert.AreEqual<EventTask>(DataLoggerEventSource.Tasks.Code, eventArgs.Task);
+        Assert.AreEqual<byte>(0x01, eventArgs.Version);
+      }
+    }
+
   }
 }

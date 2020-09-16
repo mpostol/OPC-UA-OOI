@@ -28,7 +28,7 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     internal PartIBindingFactory(ConsumerViewModel viewModel)
     {
       _logger.EnteringMethodBinding();
-      m_ViewModel = viewModel;
+      _ViewModel = viewModel;
     }
 
     #endregion composition
@@ -36,7 +36,7 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     #region IBindingFactory
 
     /// <summary>
-    /// Gets the binding captured by an instance of the <see cref="UAOOI.Networking.SemanticData.DataRepository.IConsumerBinding" /> type used by the consumer to save the data in the data repository.
+    /// Gets the binding captured by an instance of the <see cref="IConsumerBinding" /> type used by the consumer to save the data in the data repository.
     /// </summary>
     /// <param name="repositoryGroup">It is the name of a repository group profiling the configuration behavior, e.g. encoders selection.
     /// The configuration of the repositories belonging to the same group are handled according to the same profile.</param>
@@ -51,15 +51,14 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     }
 
     /// <summary>
-    /// Gets the producer binding.
+    /// Gets the binding captured by an instance of the <see cref="IProducerBinding" /> type used by the producer to read from the local data repository.
     /// </summary>
-    /// <param name="repositoryGroup">The repository group.</param>
+    /// <param name="repositoryGroup">It is the name of a repository group profiling the configuration behavior, e.g. encoders selection.
+    /// The configuration of the repositories belonging to the same group are handled according to the same profile.</param>
     /// <param name="processValueName">The name of a variable that is the source of the values forwarded by a message over the network.
     /// Must be unique in the context of the group named by <paramref name="repositoryGroup" /></param>
     /// <param name="fieldTypeInfo">The <see cref="BuiltInType" />of the message field encoding.</param>
-    /// <returns>An instance implementing the <see cref="IProducerBinding" /> interface.</returns>
-    /// <exception cref="NotImplementedException"></exception>
-    /// <remarks>It is intentionally not implemented.</remarks>
+    /// <returns>Returns an object implementing the <see cref="IProducerBinding" /> interface that can be used to create message and populate it with the data.</returns>
     IProducerBinding IBindingFactory.GetProducerBinding(string repositoryGroup, string processValueName, UATypeInfo fieldTypeInfo)
     {
       _logger.EnteringMethodBinding();
@@ -72,7 +71,7 @@ namespace UAOOI.Networking.DataRepository.DataLogger
 
     #region private
 
-    private ConsumerViewModel m_ViewModel;
+    private ConsumerViewModel _ViewModel;
     private DataLoggerEventSource _logger = DataLoggerEventSource.Log();
 
     /// <summary>
@@ -85,7 +84,7 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     private IConsumerBinding GetConsumerBinding(string variableName, UATypeInfo typeInfo)
     {
       _logger.EnteringMethodBinding();
-      IConsumerBinding _return = null;
+      IConsumerBinding returnValue = null;
       if (typeInfo.ValueRank == 0 || typeInfo.ValueRank > 1)
       {
         ArgumentOutOfRangeException ex = new ArgumentOutOfRangeException(nameof(typeInfo.ValueRank));
@@ -96,107 +95,107 @@ namespace UAOOI.Networking.DataRepository.DataLogger
       {
         case BuiltInType.Boolean:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<bool>(variableName, typeInfo);
+            returnValue = AddBinding<bool>(variableName, typeInfo);
           else
-            _return = AddBinding<bool[]>(variableName, typeInfo);
+            returnValue = AddBinding<bool[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.SByte:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<sbyte>(variableName, typeInfo);
+            returnValue = AddBinding<sbyte>(variableName, typeInfo);
           else
-            _return = AddBinding<sbyte[]>(variableName, typeInfo);
+            returnValue = AddBinding<sbyte[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.Byte:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<byte>(variableName, typeInfo);
+            returnValue = AddBinding<byte>(variableName, typeInfo);
           else
-            _return = AddBinding<byte[]>(variableName, typeInfo);
+            returnValue = AddBinding<byte[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.Int16:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<short>(variableName, typeInfo);
+            returnValue = AddBinding<short>(variableName, typeInfo);
           else
-            _return = AddBinding<short[]>(variableName, typeInfo);
+            returnValue = AddBinding<short[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.UInt16:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<ushort>(variableName, typeInfo);
+            returnValue = AddBinding<ushort>(variableName, typeInfo);
           else
-            _return = AddBinding<ushort[]>(variableName, typeInfo);
+            returnValue = AddBinding<ushort[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.Int32:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<int>(variableName, typeInfo);
+            returnValue = AddBinding<int>(variableName, typeInfo);
           else
-            _return = AddBinding<int[]>(variableName, typeInfo);
+            returnValue = AddBinding<int[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.UInt32:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<uint>(variableName, typeInfo);
+            returnValue = AddBinding<uint>(variableName, typeInfo);
           else
-            _return = AddBinding<uint[]>(variableName, typeInfo);
+            returnValue = AddBinding<uint[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.Int64:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<long>(variableName, typeInfo);
+            returnValue = AddBinding<long>(variableName, typeInfo);
           else
-            _return = AddBinding<long[]>(variableName, typeInfo);
+            returnValue = AddBinding<long[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.UInt64:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<ulong>(variableName, typeInfo);
+            returnValue = AddBinding<ulong>(variableName, typeInfo);
           else
-            _return = AddBinding<ulong[]>(variableName, typeInfo);
+            returnValue = AddBinding<ulong[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.Float:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<float>(variableName, typeInfo);
+            returnValue = AddBinding<float>(variableName, typeInfo);
           else
-            _return = AddBinding<float[]>(variableName, typeInfo);
+            returnValue = AddBinding<float[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.Double:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<double>(variableName, typeInfo);
+            returnValue = AddBinding<double>(variableName, typeInfo);
           else
-            _return = AddBinding<double[]>(variableName, typeInfo);
+            returnValue = AddBinding<double[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.String:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<string>(variableName, typeInfo);
+            returnValue = AddBinding<string>(variableName, typeInfo);
           else
-            _return = AddBinding<string[]>(variableName, typeInfo);
+            returnValue = AddBinding<string[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.DateTime:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<DateTime>(variableName, typeInfo);
+            returnValue = AddBinding<DateTime>(variableName, typeInfo);
           else
-            _return = AddBinding<DateTime[]>(variableName, typeInfo);
+            returnValue = AddBinding<DateTime[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.Guid:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<Guid>(variableName, typeInfo);
+            returnValue = AddBinding<Guid>(variableName, typeInfo);
           else
-            _return = AddBinding<Guid[]>(variableName, typeInfo);
+            returnValue = AddBinding<Guid[]>(variableName, typeInfo);
           break;
 
         case BuiltInType.ByteString:
           if (typeInfo.ValueRank < 0)
-            _return = AddBinding<byte[]>(variableName, typeInfo);
+            returnValue = AddBinding<byte[]>(variableName, typeInfo);
           else
-            _return = AddBinding<byte[][]>(variableName, typeInfo);
+            returnValue = AddBinding<byte[][]>(variableName, typeInfo);
           break;
 
         case BuiltInType.Null:
@@ -214,15 +213,15 @@ namespace UAOOI.Networking.DataRepository.DataLogger
         default:
           throw new ArgumentOutOfRangeException("encoding");
       }
-      return _return;
+      return returnValue;
     }
 
     private IConsumerBinding AddBinding<type>(string variableName, UATypeInfo typeInfo)
     {
       _logger.EnteringMethodBinding();
-      ConsumerBindingMonitoredValue<type> _return = new ConsumerBindingMonitoredValue<type>(typeInfo);
-      _return.PropertyChanged += (x, y) => m_ViewModel.Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).ToString()}");
-      return _return;
+      ConsumerBindingMonitoredValue<type> returnValue = new ConsumerBindingMonitoredValue<type>(typeInfo);
+      returnValue.PropertyChanged += (x, y) => _ViewModel.Trace($"{DateTime.Now.ToLongTimeString()}:{DateTime.Now.Millisecond} {variableName} = {((ConsumerBindingMonitoredValue<type>)x).ToString()}");
+      return returnValue;
     }
 
     #endregion private

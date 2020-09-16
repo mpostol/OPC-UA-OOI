@@ -16,12 +16,10 @@ using UAOOI.Networking.SemanticData;
 namespace UAOOI.Networking.DataRepository.DataLogger
 {
   /// <summary>
-  /// Class ConsumerDataManagementSetup - custom implementation of the <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
+  /// Class <see cref="LoggerManagementSetup" /> - custom implementation of the <seealso cref="DataManagementSetup" />
   /// This class cannot be inherited.
-  /// Implements the <see cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
+  /// Implements the <see cref="DataManagementSetup" />
   /// </summary>
-  /// <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
-  /// <seealso cref="DataManagementSetup" />
   [Export]
   [PartCreationPolicy(CreationPolicy.Shared)]
   public sealed class LoggerManagementSetup : DataManagementSetup
@@ -71,10 +69,9 @@ namespace UAOOI.Networking.DataRepository.DataLogger
       {
         _logger.LogException(nameof(LoggerManagementSetup), _ex);
         _ViewModel.ConsumerErrorMessage = "ERROR";
-        Dispose();
+        throw;
       }
     }
-
 
     #endregion API
 
@@ -103,6 +100,7 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     /// </summary>
     /// <value>The view model.</value>
     private ConsumerViewModel _ViewModel;
+
     private readonly DataLoggerEventSource _logger = DataLoggerEventSource.Log();
 
     /// <summary>

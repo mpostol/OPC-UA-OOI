@@ -8,21 +8,21 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
+namespace UAOOI.Networking.DataRepository.DataLogger.Diagnostic
 {
   /// <summary>
-  /// Class <see cref="AzureGatewayDiagnosticExtension"/> - expanding the <see cref="AzureGatewaySemanticEventSource"/>
+  /// Class <see cref="DataLoggerEventSourceExtensions"/> - expanding the <see cref="DataLoggerEventSource"/>
   /// </summary>
-  internal static class AzureGatewayDiagnosticExtension
+  internal static class DataLoggerEventSourceExtensions
   {
     /// <summary>
-    /// Logs the exception using <see cref="AzureGatewaySemanticEventSource" />.
+    /// Logs the exception using <see cref="DataLoggerEventSource" />.
     /// </summary>
     /// <param name="eventSource">The event source to be used for problem reporting.</param>
-    /// <param name="className">Name of the class.</param>
-    /// <param name="methodName">Name of the method.</param>
+    /// <param name="className">Name of the class where the exception has been caught.</param>
     /// <param name="e">The exception to be reported.</param>
-    internal static void LogException(this AzureGatewaySemanticEventSource eventSource, string className, Exception e, [CallerMemberName] string methodName = nameof(LogException))
+    /// <param name="methodName">Name of the method.</param>
+    internal static void LogException(this DataLoggerEventSource eventSource, string className, Exception e, [CallerMemberName] string methodName = nameof(LogException))
     {
       Exception _exception = e;
       string _innerText = "An exception has been caught:";

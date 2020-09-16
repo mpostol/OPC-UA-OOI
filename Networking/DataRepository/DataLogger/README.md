@@ -2,7 +2,7 @@
 
 ## Common Tasks
 
-Working through this tutorial gives you an introductory understanding of the steps required to implement `Consumer` role of `OOI Reactive Application`. `DataLogger` is a sample implementation of the `Consumer` part of the `ReferenceApplication`, which is an example application of `Semantic-Data` reactive networking based on [OPC UA Part 14 Pub/Sub](../../Networking/SemanticData/README.PubSubMTF.md) specification.
+Working through this tutorial gives you an introductory understanding of the steps required to implement `Consumer` role of `OOI Reactive Application`. `DataLogger` is a sample implementation of the `Consumer` part of the `ReferenceApplication`, which is an example application of `Semantic-Data` reactive networking based on [OPC UA Part 14 Pub/Sub](../../../Networking/SemanticData/README.PubSubMTF.md) specification.
 
 Here are steps undertook to implement the `Consumer` role in the application:
 
@@ -48,7 +48,7 @@ The class `DataConsumer` is a sample implementation of a data logger functionali
 
 ### How to: Implement `IConfigurationFactory`
 
-Implementation of this interface is straightforward and based entirely on the library [`UAOOI.Configuration.Networking`](../../Configuration/Networking/README.MD). In a typical scenario, this implementation should not be considered for further modification. The only open question is how to provide the name of the file containing the configuration of this role. In proposed solution the name is provided by a service defined by  the application entry point part and localized using `IServiceLocator` in the class `LoggerManagementSetup` - see code snipped below:
+Implementation of this interface is straightforward and based entirely on the library [`UAOOI.Configuration.Networking`](../../../Configuration/Networking/README.MD). In a typical scenario, this implementation should not be considered for further modification. The only open question is how to provide the name of the file containing the configuration of this role. In proposed solution the name is provided by a service defined by  the application entry point part and localized using `IServiceLocator` in the class `LoggerManagementSetup` - see code snipped below:
 
 ```C#
 
@@ -57,7 +57,7 @@ string _ConsumerConfigurationFileName = _serviceLocator.GetInstance<string>(Cons
 ```
 
 This role uses independent configuration file `ConfigurationDataConsumer.xml` attached to the project.
-This file contains a mirror configuration of the [`Producer`](../../Networking/SimulatorInteroperabilityTest/README.md) role configuration to log all the generated data.
+This file contains a mirror configuration of the [`Producer`](../../../Networking/SimulatorInteroperabilityTest/README.md) role configuration to log all the generated data.
 
 ## Current release
 

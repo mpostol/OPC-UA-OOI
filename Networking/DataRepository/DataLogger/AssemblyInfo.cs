@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-// The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("a5863757-f1fc-4f49-a984-a7d17ac3fb61")]
 [assembly: InternalsVisibleTo(
   "UAOOI.Networking.ReferenceApplication.UnitTest, PublicKey=" +

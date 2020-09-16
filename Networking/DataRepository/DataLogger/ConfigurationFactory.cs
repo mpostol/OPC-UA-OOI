@@ -1,15 +1,15 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
 using System;
-using System.IO;
+using System.Diagnostics;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
-using UAOOI.Configuration.Networking.Serializers;
+using UAOOI.Networking.DataRepository.DataLogger.Diagnostic;
 
 namespace UAOOI.Networking.DataRepository.DataLogger
 {
@@ -26,13 +26,11 @@ namespace UAOOI.Networking.DataRepository.DataLogger
     /// <summary>
     /// Initializes a new instance of the <see cref="ConsumerConfigurationFactory"/> class.
     /// </summary>
-    public ConsumerConfigurationFactory(string configurationFileName)
+    public ConsumerConfigurationFactory(string configurationFileName) : base(configurationFileName)
     {
+      _logger.EnteringMethodConfiguration();
       //Simulator.Boiler.ProducerConfigurationFactory - review the configuration loading sequence #461
-      //here a default loader instead of a local one shall be used - don't use the parameterless constructor of the base class
-      Loader = LoadConfig;
-      m_ConfigurationFileName = configurationFileName;
-      //TODO Create and Register the EventSource #455
+      _logger.CreatingConfiguration(configurationFileName);
     }
 
     #endregion constructor
@@ -51,21 +49,21 @@ namespace UAOOI.Networking.DataRepository.DataLogger
 
     protected override void RaiseEvents()
     {
+      _logger.EnteringMethodConfiguration();
       OnAssociationConfigurationChange?.Invoke(this, EventArgs.Empty);
       OnMessageHandlerConfigurationChange?.Invoke(this, EventArgs.Empty);
+    }
+
+    protected override void TraceData(TraceEventType eventType, int id, object data)
+    {
+      _logger.TraceData(eventType.ToString(), id, data.ToString());
     }
 
     #endregion ConfigurationFactoryBase
 
     #region private
 
-    private readonly string m_ConfigurationFileName;
-
-    private ConfigurationData LoadConfig()
-    {
-      FileInfo _configurationFile = new FileInfo(m_ConfigurationFileName);
-      return ConfigurationDataFactoryIO.Load<ConfigurationData>(() => XmlDataContractSerializers.Load<ConfigurationData>(_configurationFile, (x, y, z) => { }), () => RaiseEvents());
-    }
+    private readonly DataLoggerEventSource _logger = DataLoggerEventSource.Log();
 
     #endregion private
   }

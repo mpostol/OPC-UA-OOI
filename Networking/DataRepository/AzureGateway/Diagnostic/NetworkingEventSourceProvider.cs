@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -18,6 +18,8 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
   [Export(typeof(INetworkingEventSourceProvider))]
   public class NetworkingEventSourceProvider : INetworkingEventSourceProvider
   {
+    #region INetworkingEventSourceProvider
+
     /// <summary>
     /// Gets the part event source.
     /// </summary>
@@ -26,6 +28,7 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Diagnostic
     {
       return AzureGatewaySemanticEventSource.Log();
     }
-  }
 
+    #endregion INetworkingEventSourceProvider
+  }
 }

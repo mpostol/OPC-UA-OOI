@@ -26,9 +26,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Diagnostic\**" />
-    <EmbeddedResource Remove="Diagnostic\**" />
-    <None Remove="Diagnostic\**" />
+    <Compile Remove="Diagnostic\ReferenceApplicationEventSourceExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>

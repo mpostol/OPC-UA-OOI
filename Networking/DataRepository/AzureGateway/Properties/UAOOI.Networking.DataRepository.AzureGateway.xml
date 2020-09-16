@@ -95,6 +95,11 @@
             <param name="repositoryGroup">The repository group.</param>
             <returns>object capturing the current state of selected repository group.</returns>
         </member>
+        <member name="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewayDiagnosticExtension">
+            <summary>
+            Class <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewayDiagnosticExtension"/> - expanding the <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource"/>
+            </summary>
+        </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewayDiagnosticExtension.LogException(UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource,System.String,System.Exception,System.String)">
             <summary>
             Logs the exception using <see cref="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource" />.
@@ -106,7 +111,7 @@
         </member>
         <member name="T:UAOOI.Networking.DataRepository.AzureGateway.Diagnostic.AzureGatewaySemanticEventSource">
             <summary>
-            Class AzureGatewaySemanticEventSource capturing event source functionality supporting semantic par logging
+            Class AzureGatewaySemanticEventSource captures event source functionality supporting semantic par logging
             Implements the <see cref="T:System.Diagnostics.Tracing.EventSource" />
             </summary>
             <seealso cref="T:System.Diagnostics.Tracing.EventSource" />

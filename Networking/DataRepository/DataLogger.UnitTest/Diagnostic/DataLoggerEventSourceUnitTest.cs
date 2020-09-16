@@ -11,25 +11,24 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Tracing;
 using System.Linq;
-using UAOOI.Networking.DataRepository.AzureGateway.Diagnostic;
 
-namespace UAOOI.Networking.DataRepository.AzureGateway.Test.Diagnostic
+namespace UAOOI.Networking.DataRepository.DataLogger.Diagnostic
 {
   [TestClass]
-  public class AzureGatewaySemanticEventSourceUnitTest
+  public class DataLoggerEventSourceUnitTest
   {
     [TestMethod]
     public void ConstructorTest()
     {
-      using (AzureGatewaySemanticEventSource itemToTest = AzureGatewaySemanticEventSource.Log())
+      using (DataLoggerEventSource itemToTest = DataLoggerEventSource.Log())
       {
         Assert.IsNotNull(itemToTest);
         Assert.IsNull(itemToTest.ConstructionException);
-        Assert.AreEqual<Guid>(Guid.Parse("BC7E8C08-C708-4E3C-A27E-237F093F175C"), itemToTest.Guid);
-        Assert.AreEqual<string>("UAOOI.Networking.DataRepository.AzureGateway.Diagnostic", itemToTest.Name);
+        Assert.AreEqual<Guid>(Guid.Parse("B28CBA3C-E2B7-4C5B-A045-E21FD3158D9B"), itemToTest.Guid);
+        Assert.AreEqual<string>("UAOOI.Networking.DataRepository.DataLogger.Diagnostic.DataLoggerEventSource", itemToTest.Name);
         Assert.AreEqual<EventSourceSettings>(EventSourceSettings.EtwManifestEventFormat, itemToTest.Settings);
         Assert.IsFalse(itemToTest.IsEnabled());
-        Assert.AreSame(itemToTest, AzureGatewaySemanticEventSource.Log());
+        Assert.AreSame(itemToTest, DataLoggerEventSource.Log());
       }
     }
 
@@ -38,21 +37,21 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.Diagnostic
     {
       try
       {
-        AzureGatewaySemanticEventSource itemToTest = AzureGatewaySemanticEventSource.Log();
+        DataLoggerEventSource itemToTest = DataLoggerEventSource.Log();
         itemToTest.Dispose();
         Assert.IsNotNull(itemToTest);
-        Assert.AreNotSame(itemToTest, AzureGatewaySemanticEventSource.Log());
+        Assert.AreNotSame(itemToTest, DataLoggerEventSource.Log());
       }
       finally
       {
-        AzureGatewaySemanticEventSource.Log().Dispose();
+        DataLoggerEventSource.Log().Dispose();
       }
     }
 
     [TestMethod]
     public void EventListenerTest()
     {
-      using (AzureGatewaySemanticEventSource itemToTest = AzureGatewaySemanticEventSource.Log())
+      using (DataLoggerEventSource itemToTest = DataLoggerEventSource.Log())
       using (EventListener lisner = new EventListener())
       {
         List<EventSourceCreatedEventArgs> sourceList = new List<EventSourceCreatedEventArgs>();
@@ -68,11 +67,10 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.Diagnostic
         Assert.AreEqual<int>(0, eventsList.Count);
       }
     }
-
     [TestMethod]
     public void ProgramFailureTest()
     {
-      using (AzureGatewaySemanticEventSource itemToTest = AzureGatewaySemanticEventSource.Log())
+      using (DataLoggerEventSource itemToTest = DataLoggerEventSource.Log())
       using (EventListener lisner = new EventListener())
       {
         List<EventWrittenEventArgs> eventsList = new List<EventWrittenEventArgs>();
@@ -86,14 +84,15 @@ namespace UAOOI.Networking.DataRepository.AzureGateway.Test.Diagnostic
         Assert.AreEqual<string>("At ClassName.ProgramFailureTest encountered application failure: problem", String.Format(eventArgs.Message, eventArgs.Payload.Select<object, string>(x => x.ToString()).ToArray<string>()));
         Assert.AreEqual<EventChannel>(EventChannel.Admin, eventArgs.Channel);
         Assert.AreEqual<int>(1, eventArgs.EventId);
-        Assert.AreEqual<string>(nameof(AzureGatewaySemanticEventSource.ProgramFailure), eventArgs.EventName);
-        Assert.AreSame(AzureGatewaySemanticEventSource.Log(), eventArgs.EventSource);
-        Assert.IsTrue((AzureGatewaySemanticEventSource.Keywords.Diagnostic & eventArgs.Keywords) > 0);
+        Assert.AreEqual<string>(nameof(DataLoggerEventSource.ProgramFailure), eventArgs.EventName);
+        Assert.AreSame(DataLoggerEventSource.Log(), eventArgs.EventSource);
+        Assert.IsTrue((DataLoggerEventSource.Keywords.Diagnostic & eventArgs.Keywords) > 0);
         Assert.AreEqual<EventLevel>(EventLevel.Error, eventArgs.Level);
         Assert.AreEqual<EventOpcode>(EventOpcode.Info, eventArgs.Opcode);
-        Assert.AreEqual<EventTask>(AzureGatewaySemanticEventSource.Tasks.Code, eventArgs.Task);
+        Assert.AreEqual<EventTask>(DataLoggerEventSource.Tasks.Code, eventArgs.Task);
         Assert.AreEqual<byte>(0x01, eventArgs.Version);
       }
     }
+
   }
 }

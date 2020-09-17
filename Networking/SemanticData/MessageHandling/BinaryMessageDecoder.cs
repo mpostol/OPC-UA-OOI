@@ -1,21 +1,26 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using UAOOI.Networking.SemanticData.Encoding;
 
 namespace UAOOI.Networking.SemanticData.MessageHandling
 {
-
   /// <summary>
   /// Class BinaryMessageDecoder - provides message content binary decoding functionality.
   /// </summary>
   /// <remarks>
-  /// <note>Implements only simple value types. Structural types must be implemented after more details will 
+  /// <note>Implements only simple value types. Structural types must be implemented after more details will
   /// be available in the spec.</note>
   /// </remarks>
   public abstract class BinaryMessageDecoder : MessageReaderBase
   {
-
     #region constructor
+
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryMessageDecoder" /> class.
     /// </summary>
@@ -24,41 +29,46 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     {
       b_MessageHeader = MessageHeader.GetConsumerMessageHeader(this);
     }
-    #endregion
+
+    #endregion constructor
 
     #region MessageReaderBase
+
     /// <summary>
     /// Gets the content mask. The content mast read from the message or provided by the writer.
     /// The order of the bits starting from the least significant bit matches the order of the data items
     /// within the data set.
     /// </summary>
-    /// <value>The content mask is represented as unsigned number <see cref="UInt64" />.
+    /// <value>The content mask is represented as unsigned number <see cref="ulong" />.
     /// The value is provided by the message.
     /// The order of the bits starting from the least significant bit matches the order of the data items within the data set.</value>
     public override ulong ContentMask //TODO must be implemented - get it from message.
     {
-      get { return ulong.MaxValue; }
-      protected set { throw new InvalidOperationException($"ContentMask cannot be set"); }
+      get => ulong.MaxValue;
+      protected set => throw new InvalidOperationException($"ContentMask cannot be set");
     }
+
     /// <summary>
     /// Gets or sets the message header.
     /// </summary>
     /// <value>The message header.</value>
-    protected override MessageHeader MessageHeader { get { return b_MessageHeader; } }
-    #endregion
+    protected override MessageHeader MessageHeader => b_MessageHeader;
+
+    #endregion MessageReaderBase
 
     #region private
-    private MessageHeader b_MessageHeader;
+
+    private readonly MessageHeader b_MessageHeader;
+
     /// <summary>
     /// Called when there is a new message in the packet that is to be processed.
     /// </summary>
-    protected void OnNewMessageArrived(UInt16 dataSetId)
+    protected void OnNewMessageArrived(ushort dataSetId)
     {
       MessageHeader.Synchronize();
       RaiseReadMessageCompleted(dataSetId);
     }
-    #endregion
 
+    #endregion private
   }
-
 }

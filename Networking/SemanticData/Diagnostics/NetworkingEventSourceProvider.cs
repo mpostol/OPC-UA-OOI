@@ -1,6 +1,6 @@
 ﻿//____________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //____________________________________________________________________________
@@ -14,7 +14,7 @@ namespace UAOOI.Networking.SemanticData.Diagnostics
   /// <summary>
   /// Class NetworkingEventSourceProvider - gets access to an instance of <see cref="EventSource"/> to be registered by the logging infrastructure.
   /// </summary>
-  /// <seealso cref="UAOOI.Networking.SemanticData.Diagnostics.INetworkingEventSourceProvider" />
+  /// <seealso cref="INetworkingEventSourceProvider" />
   [Export(typeof(INetworkingEventSourceProvider))]
   public class NetworkingEventSourceProvider : INetworkingEventSourceProvider
   {

@@ -12,7 +12,6 @@
     <Product>Object Oriented Internet</Product>
     <Description>This part provides functionality to lookup a dictionary containing value converters. The interface is used for late binding to inject dependency on the external library.  This library provides IEncodingFactory functionality  limited to encoding simple data types only  for the testing purpose only.</Description>
     <Copyright>Copyright MPostol (c) 2018</Copyright>
-    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
@@ -20,7 +19,7 @@
     <PackageReleaseNotes>Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may simply replace this library by a custom one providing unlimited encoding functionality.
 </PackageReleaseNotes>
     <AssemblyVersion>4.0.1.1</AssemblyVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   
   </PropertyGroup>
 

@@ -1,24 +1,28 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.IO;
-using UAOOI.Networking.SemanticData.Encoding;
 using UAOOI.Configuration.Networking.Serialization;
+using UAOOI.Networking.SemanticData.Encoding;
 
 namespace UAOOI.Networking.SemanticData.MessageHandling
 {
-
   /// <summary>
   /// Class BinaryMessageEncoder - provides message content binary encoding functionality.
   /// </summary>
   /// <remarks>
   /// <note>
-  /// Implements only simple value types. Structural types must be implemented after more details will 
+  /// Implements only simple value types. Structural types must be implemented after more details will
   /// be available in the spec.
   /// </note>
   /// </remarks>
   public abstract class BinaryMessageEncoder : MessageWriterBase, IBinaryHeaderEncoder
   {
-
     /// <summary>
     /// Initializes a new instance of the <see cref="BinaryMessageEncoder" /> class.
     /// </summary>
@@ -30,6 +34,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     }
 
     #region IBinaryHeaderWriter
+
     /// <summary>
     /// If implemented by the derived class sets the position within the wrapped stream.
     /// </summary>
@@ -41,28 +46,32 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// </param>
     /// <returns>The position with the current stream as <see cref="System.Int64"/>.</returns>
     public abstract long Seek(int offset, SeekOrigin origin);
-    #endregion
+
+    #endregion IBinaryHeaderWriter
 
     #region Header
+
     /// <summary>
     /// Gets or sets the message header.
     /// </summary>
     /// <value>The message header.</value>
     internal MessageHeader MessageHeader { get; set; }
-    #endregion
+
+    #endregion Header
 
     #region MessageWriterBase
+
     /// <summary>
     /// Creates the message.
     /// </summary>
     /// <param name="encoding">The selected encoding for the message.</param>
-    /// <param name="prodicerId">The prodicer identifier.</param>
+    /// <param name="prodicerId">The producer identifier.</param>
     /// <param name="dataSetWriterId">The data set writer identifier.</param>
     /// <param name="fieldCount">The field count.</param>
     /// <param name="sequenceNumber">The sequence number.</param>
     /// <param name="timeStamp">The time stamp.</param>
     /// <param name="configurationVersion">The configuration version.</param>
-    internal protected override void CreateMessage
+    protected internal override void CreateMessage
       (FieldEncodingEnum encoding, Guid prodicerId, ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion)
     {
       OnMessageAdding(prodicerId, dataSetWriterId);
@@ -72,6 +81,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       MessageHeader.MessageSequenceNumber = sequenceNumber;
       MessageHeader.TimeStamp = timeStamp;
     }
+
     /// <summary>
     /// Sends the message - evaluates condition if send the package.
     /// </summary>
@@ -84,22 +94,26 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       OnMessageAdded();
       //TODO sign and encrypt the message.
     }
-    #endregion
+
+    #endregion MessageWriterBase
 
     #region private
-    private MessageLengthFieldTypeEnum m_lengthFieldType;
+
+    private readonly MessageLengthFieldTypeEnum m_lengthFieldType;
+
     /// <summary>
     /// Called when new message is adding to the package payload.
     /// </summary>
     /// <param name="producerId">The producer identifier.</param>
     /// <param name="dataSetWriterId">The data set writer identifier - must be unique in context of <paramref name="producerId"/>.</param>
-    protected abstract void OnMessageAdding(Guid producerId, UInt16 dataSetWriterId);
+    protected abstract void OnMessageAdding(Guid producerId, ushort dataSetWriterId);
+
     /// <summary>
     /// Called when the current message has been added and is ready to be sent out.
     /// </summary>
     protected abstract void OnMessageAdded();
-    #endregion    
+
+    #endregion private
 
   }
-
 }

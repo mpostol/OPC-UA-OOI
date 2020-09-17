@@ -11,7 +11,6 @@ The library provides an abstraction over any OPC UA Server configuration plug-in
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
     <Copyright>Copyright MPostol (c) 2018</Copyright>
-    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>

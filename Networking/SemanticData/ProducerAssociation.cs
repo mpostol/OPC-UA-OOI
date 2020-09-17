@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -79,13 +85,13 @@ namespace UAOOI.Networking.SemanticData
     private Timer m_Timer;
     private List<IMessageWriter> m_MessageWriter = new List<IMessageWriter>();
     private IProducerBinding[] m_DataSetBindings;
-    private object mLockObject = new object();
+    private readonly object mLockObject = new object();
     private bool m_Modified = true;
-    private Object m_lock = new object();
+    private readonly Object m_lock = new object();
     private ushort m_MessageSequenceNumber = 0;
     private FieldEncodingEnum m_Encoding;
-    //TODO Handle Configuration Version  #140 at: https://github.com/mpostol/OPC-UA-OOI/issues/140
-    private ConfigurationVersionDataType m_ConfigurationVersion = null;
+    //TODO Handle Configuration Version  #140
+    private readonly ConfigurationVersionDataType m_ConfigurationVersion = null;
     //methods
     protected override void InitializeCommunication()
     {

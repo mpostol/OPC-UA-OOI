@@ -81,7 +81,7 @@ namespace UAOOI.Networking.SemanticData.DataRepository
     /// <value>The <see cref="Func{type}"/> delegate used to read value from repository.</value>
     protected virtual Func<type> GetReadValueDelegate { private set; get; }
     private bool b_NewValue;
-    private string m_VariableName;
+    private readonly string m_VariableName;
     #endregion
 
   }

@@ -9,7 +9,6 @@
     <RepositoryType>GitHub</RepositoryType>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
     <Copyright>Copyright MPostol (c) 2018</Copyright>
     <Description>SemanticData Reactive Networking  library based on OPC UA Part 14 Pub/Sub.</Description>
     <Version>4.0.1</Version>
@@ -18,15 +17,11 @@
     <Product>Object Oriented Internet</Product>
     <RootNamespace>UAOOI.Networking.SemanticData</RootNamespace>
     <AssemblyVersion>4.0.1.1</AssemblyVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild> 
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild> 
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;1705;IDE0001;IDE002;IDE003</NoWarn>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="DataRepository\IBinding.cd" />
-    <None Remove="EthernetMapping.md" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿//____________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //____________________________________________________________________________
@@ -19,39 +19,40 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
   /// </summary>
   public abstract class MessageWriterBase : MessageHandler, IMessageWriter, IBinaryEncoder
   {
-
     #region creator
+
     /// <summary>
     /// Initializes a new instance of the <see cref="MessageWriterBase"/> class providing basic implementation of the <see cref="IMessageWriter"/>.
     /// </summary>
     /// <param name="uaEncoder">The ua encoder.</param>
     public MessageWriterBase(IUAEncoder uaEncoder)
     {
-      if (uaEncoder == null)
-        throw new ArgumentNullException(nameof(uaEncoder));
-      m_UAEncoder = uaEncoder;
+      m_UAEncoder = uaEncoder ?? throw new ArgumentNullException(nameof(uaEncoder));
     }
-    #endregion
+
+    #endregion creator
 
     #region IMessageWriter
+
     /// <summary>
     /// Gets the content mask. The content mast read from the message or provided by the writer.
     /// The order of the bits starting from the least significant bit matches the order of the data items
     /// within the data set.
     /// </summary>
-    /// <value>The content mask represented as unsigned number <see cref="UInt64" />. The order of the bits starting from the least significant
+    /// <value>The content mask represented as unsigned number <see cref="ulong" />. The order of the bits starting from the least significant
     /// bit matches the order of the data items within the data set.</value>
     public override ulong ContentMask
     {
       get;
       protected set;
     }
+
     /// <summary>
     /// Sends the data described by a data set collection to remote destination.
     /// </summary>
     /// <param name="producerBinding">Encapsulates functionality used by the <see cref="IMessageWriter" /> to collect all the data (data set items) required to prepare new message and send it over the network.</param>
     /// <param name="length">Number of items to be send used to calculate the length of the message.</param>
-    /// <param name="contentMask">The content mask represented as unsigned number <see cref="UInt64" />. The order of the bits starting from the least significant
+    /// <param name="contentMask">The content mask represented as unsigned number <see cref="ulong" />. The order of the bits starting from the least significant
     /// bit matches the order of the data items within the data set.</param>
     /// <param name="encoding">The encoding.</param>
     /// <param name="dataSelector">The data selector.</param>
@@ -82,9 +83,11 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
             case FieldEncodingEnum.VariantFieldEncoding:
               WriteValueVariant(_pb);
               break;
+
             case FieldEncodingEnum.CompressedFieldEncoding:
               WriteValue(_pb);
               break;
+
             case FieldEncodingEnum.DataValueFieldEncoding:
               WriteDataValue(_pb);
               break;
@@ -95,19 +98,31 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
         SendMessage();
       }
     }
-    #endregion
+
+    #endregion IMessageWriter
 
     #region IBinaryEncoder
+
     public abstract void Write(ulong value);
+
     public abstract void Write(uint value);
+
     public abstract void Write(ushort value);
+
     public abstract void Write(float value);
+
     public abstract void Write(sbyte value);
+
     public abstract void Write(long value);
+
     public abstract void Write(int value);
+
     public abstract void Write(short value);
+
     public abstract void Write(double value);
+
     public abstract void Write(bool value);
+
     /// <summary>
     /// Writes a <see cref="Guid"/> to the current stream as a 16-element byte array that contains the value and advances the stream position by 16 bytes.
     /// </summary>
@@ -116,19 +131,24 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     {
       m_UAEncoder.Write(this, value);
     }
+
     public abstract void Write(byte[] value);
+
     /// <summary>
     /// Writes an unsigned byte to the current stream and advances the stream position by one byte.
     /// </summary>
     /// <param name="value">TThe unsigned <see cref="byte"/> to write.</param>
     public abstract void Write(byte value);
+
     public void Write(DateTime value)
     {
       m_UAEncoder.Write(this, value);
     }
-    #endregion
+
+    #endregion IBinaryEncoder
 
     #region private
+
     //types
     private class Variant : IVariant
     {
@@ -154,23 +174,28 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
             if (value == null)
               throw new NullReferenceException("Value type cannot be null.");
             break;
+
           default:
             break;
         }
         UATypeInfo = typeInfo;
         Value = value;
       }
+
       public UATypeInfo UATypeInfo
       {
         get; private set;
       }
+
       public object Value
       {
         get; private set;
       }
     }
+
     //vars
     private IUAEncoder m_UAEncoder;
+
     //methods
     /// <summary>
     /// Creates the message.
@@ -182,12 +207,14 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     /// <param name="sequenceNumber">The sequence number.</param>
     /// <param name="timeStamp">The time stamp.</param>
     /// <param name="configurationVersion">The configuration version.</param>
-    internal protected abstract void CreateMessage
-      (FieldEncodingEnum encoding, Guid producerId, UInt16 dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion);
+    protected internal abstract void CreateMessage
+      (FieldEncodingEnum encoding, Guid producerId, ushort dataSetWriterId, ushort fieldCount, ushort sequenceNumber, DateTime timeStamp, ConfigurationVersionDataType configurationVersion);
+
     /// <summary>
     /// Finalize preparation and sends the message.
     /// </summary>
     protected abstract void SendMessage();
+
     private void WriteValue(IProducerBinding producerBinding)
     {
       object value = producerBinding.GetFromRepository();
@@ -195,173 +222,198 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       {
         case BuiltInType.Boolean:
           if (producerBinding.Encoding.ValueRank < 0)
-            Write((Boolean)value);
+            Write((bool)value);
           else
-            m_UAEncoder.WriteArray<Boolean>(this, (Array)value, Write, BuiltInType.Boolean);
+            m_UAEncoder.WriteArray<bool>(this, (Array)value, Write, BuiltInType.Boolean);
           break;
+
         case BuiltInType.SByte:
           if (producerBinding.Encoding.ValueRank < 0)
-            Write((SByte)value);
+            Write((sbyte)value);
           else
-            m_UAEncoder.WriteArray<SByte>(this, (Array)value, Write, BuiltInType.SByte);
+            m_UAEncoder.WriteArray<sbyte>(this, (Array)value, Write, BuiltInType.SByte);
           break;
+
         case BuiltInType.Byte:
           if (producerBinding.Encoding.ValueRank < 0)
-            Write((Byte)value);
+            Write((byte)value);
           else
-            m_UAEncoder.WriteArray<Byte>(this, (Array)value, Write, BuiltInType.Byte);
+            m_UAEncoder.WriteArray<byte>(this, (Array)value, Write, BuiltInType.Byte);
           break;
+
         case BuiltInType.DateTime:
           if (producerBinding.Encoding.ValueRank < 0)
             m_UAEncoder.Write(this, (DateTime)value);
           else
             m_UAEncoder.WriteArray<DateTime>(this, (Array)value, Write, BuiltInType.DateTime);
           break;
+
         case BuiltInType.Double:
           if (producerBinding.Encoding.ValueRank < 0)
-            Write((Double)value);
+            Write((double)value);
           else
-            m_UAEncoder.WriteArray<Double>(this, (Array)value, Write, BuiltInType.Double);
+            m_UAEncoder.WriteArray<double>(this, (Array)value, Write, BuiltInType.Double);
           break;
+
         case BuiltInType.Int16:
           if (producerBinding.Encoding.ValueRank < 0)
-            Write((Int16)value);
+            Write((short)value);
           else
-            m_UAEncoder.WriteArray<Int16>(this, (Array)value, Write, BuiltInType.Int16);
+            m_UAEncoder.WriteArray<short>(this, (Array)value, Write, BuiltInType.Int16);
           break;
+
         case BuiltInType.Enumeration:
         case BuiltInType.Int32:
           if (producerBinding.Encoding.ValueRank < 0)
-            Write((Int32)value);
+            Write((int)value);
           else
-            m_UAEncoder.WriteArray<Int32>(this, (Array)value, Write, BuiltInType.Int32);
+            m_UAEncoder.WriteArray<int>(this, (Array)value, Write, BuiltInType.Int32);
           break;
+
         case BuiltInType.Int64:
           if (producerBinding.Encoding.ValueRank < 0)
-            Write((Int64)value);
+            Write((long)value);
           else
-            m_UAEncoder.WriteArray<Int64>(this, (Array)value, Write, BuiltInType.Int64);
+            m_UAEncoder.WriteArray<long>(this, (Array)value, Write, BuiltInType.Int64);
           break;
+
         case BuiltInType.Float:
           if (producerBinding.Encoding.ValueRank < 0)
-            Write((Single)value);
+            Write((float)value);
           else
-            m_UAEncoder.WriteArray<Single>(this, (Array)value, Write, BuiltInType.Float);
+            m_UAEncoder.WriteArray<float>(this, (Array)value, Write, BuiltInType.Float);
           break;
+
         case BuiltInType.String:
           if (producerBinding.Encoding.ValueRank < 0)
-            m_UAEncoder.Write(this, (String)value);
+            m_UAEncoder.Write(this, (string)value);
           else
-            m_UAEncoder.WriteArray<String>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.String);
+            m_UAEncoder.WriteArray<string>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.String);
           break;
+
         case BuiltInType.UInt16:
           if (producerBinding.Encoding.ValueRank < 0)
-            Write((UInt16)value);
+            Write((ushort)value);
           else
-            m_UAEncoder.WriteArray<UInt16>(this, (Array)value, Write, BuiltInType.UInt16);
+            m_UAEncoder.WriteArray<ushort>(this, (Array)value, Write, BuiltInType.UInt16);
           break;
+
         case BuiltInType.UInt32:
           if (producerBinding.Encoding.ValueRank < 0)
-            Write((UInt32)value);
+            Write((uint)value);
           else
-            m_UAEncoder.WriteArray<UInt32>(this, (Array)value, Write, BuiltInType.UInt32);
+            m_UAEncoder.WriteArray<uint>(this, (Array)value, Write, BuiltInType.UInt32);
           break;
+
         case BuiltInType.UInt64:
           if (producerBinding.Encoding.ValueRank < 0)
-            Write((UInt64)value);
+            Write((ulong)value);
           else
-            m_UAEncoder.WriteArray<UInt64>(this, (Array)value, Write, BuiltInType.UInt64);
+            m_UAEncoder.WriteArray<ulong>(this, (Array)value, Write, BuiltInType.UInt64);
           break;
+
         case BuiltInType.Guid:
           if (producerBinding.Encoding.ValueRank < 0)
             m_UAEncoder.Write(this, (Guid)value);
           else
             m_UAEncoder.WriteArray<Guid>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.Guid);
           break;
+
         case BuiltInType.ByteString:
           if (producerBinding.Encoding.ValueRank < 0)
             m_UAEncoder.Write(this, (byte[])value);
           else
             m_UAEncoder.WriteArray<byte[]>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.ByteString);
           break;
+
         case BuiltInType.XmlElement:
           if (producerBinding.Encoding.ValueRank < 0)
             m_UAEncoder.Write(this, (XmlElement)value);
           else
             m_UAEncoder.WriteArray<XmlElement>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.XmlElement);
           break;
+
         case BuiltInType.NodeId:
           if (producerBinding.Encoding.ValueRank < 0)
             m_UAEncoder.Write(this, (INodeId)value);
           else
             m_UAEncoder.WriteArray<INodeId>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.NodeId);
           break;
+
         case BuiltInType.ExpandedNodeId:
           if (producerBinding.Encoding.ValueRank < 0)
             m_UAEncoder.Write(this, (IExpandedNodeId)value);
           else
             m_UAEncoder.WriteArray<IExpandedNodeId>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.ExpandedNodeId);
           break;
+
         case BuiltInType.StatusCode:
           if (producerBinding.Encoding.ValueRank < 0)
             m_UAEncoder.Write(this, (IStatusCode)value);
           else
             m_UAEncoder.WriteArray<IStatusCode>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.StatusCode);
           break;
+
         case BuiltInType.QualifiedName:
           if (producerBinding.Encoding.ValueRank < 0)
             m_UAEncoder.Write(this, (IQualifiedName)value);
           else
             m_UAEncoder.WriteArray<IQualifiedName>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.QualifiedName);
           break;
+
         case BuiltInType.LocalizedText:
           if (producerBinding.Encoding.ValueRank < 0)
             m_UAEncoder.Write(this, (ILocalizedText)value);
           else
             m_UAEncoder.WriteArray<ILocalizedText>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.LocalizedText);
           break;
+
         case BuiltInType.ExtensionObject:
           if (producerBinding.Encoding.ValueRank < 0)
             m_UAEncoder.Write(this, (IExtensionObject)value);
           else
             m_UAEncoder.WriteArray<IExtensionObject>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.ExtensionObject);
           break;
+
         case BuiltInType.DataValue:
           if (producerBinding.Encoding.ValueRank < 0)
             m_UAEncoder.Write(this, (IDataValue)value);
           else
             m_UAEncoder.WriteArray<IDataValue>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.DataValue);
           break;
+
         case BuiltInType.Variant:
           if (producerBinding.Encoding.ValueRank < 0)
             m_UAEncoder.Write(this, (IVariant)value);
           else
             m_UAEncoder.WriteArray<IVariant>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.Variant);
           break;
+
         case BuiltInType.DiagnosticInfo:
           if (producerBinding.Encoding.ValueRank < 0)
             m_UAEncoder.Write(this, (IDiagnosticInfo)value);
           else
             m_UAEncoder.WriteArray<IDiagnosticInfo>(this, (Array)value, x => m_UAEncoder.Write(this, x), BuiltInType.DiagnosticInfo);
           break;
+
         case BuiltInType.Null:
         default:
           throw new ArgumentOutOfRangeException($"Impossible to convert {value} of type {producerBinding.Encoding}");
       }
     }
+
     private void WriteValueVariant(IProducerBinding producerBinding)
     {
       object value = producerBinding.GetFromRepository();
       Variant _variant = new Variant(producerBinding.Encoding, value);
       m_UAEncoder.Write(this, _variant);
     }
+
     private void WriteDataValue(IProducerBinding _pb)
     {
       throw new NotImplementedException();
     }
 
-    #endregion
-
+    #endregion private
   }
-
 }

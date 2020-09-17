@@ -1,4 +1,10 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2020, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using System;
 using System.IO;
 
@@ -9,8 +15,8 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
   /// </summary>
   internal class HeaderWriter
   {
-
     #region API
+
     /// <summary>
     /// Initializes a new instance of the <see cref="HeaderWriter"/> class.
     /// </summary>
@@ -23,6 +29,7 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       m_BeginPosition = CurrentPosition();
       writer.Seek(m_Length, SeekOrigin.Current);
     }
+
     /// <summary>
     /// Writes the header.
     /// </summary>
@@ -33,13 +40,17 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
       writeHeader(m_Writer, DataLength(m_CurrentPosition));
       RestorePosition();
     }
-    #endregion
+
+    #endregion API
 
     #region private
+
     //vars
     private IBinaryHeaderEncoder m_Writer;
-    private ushort m_Length;
-    private long m_BeginPosition;
+
+    private readonly ushort m_Length;
+    private readonly long m_BeginPosition;
+
     //methods
     /// <summary>
     /// The length of the message content.
@@ -49,21 +60,24 @@ namespace UAOOI.Networking.SemanticData.MessageHandling
     {
       return Convert.ToUInt16(currentPosition - m_BeginPosition);
     }
+
     private long SetPosition(int offset)
     {
       long _ret = m_Writer.Seek(0, SeekOrigin.Current);
       m_Writer.Seek(offset, SeekOrigin.Begin);
       return _ret;
     }
+
     private long RestorePosition()
     {
       return m_Writer.Seek(0, SeekOrigin.End);
     }
+
     private long CurrentPosition()
     {
       return m_Writer.Seek(0, SeekOrigin.Current);
     }
-    #endregion
 
+    #endregion private
   }
 }

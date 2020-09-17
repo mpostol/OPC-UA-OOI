@@ -9,7 +9,6 @@
     <Product>Object Oriented Internet</Product>
     <Description>The core functionality of SemanticData Reactive Networking library based on OPC UA Part 14 Pub/Sub.</Description>
     <Copyright>Copyright MPostol (c) 2020</Copyright>
-    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
     <NeutralLanguage></NeutralLanguage>
@@ -20,7 +19,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <Version>4.0.1</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>

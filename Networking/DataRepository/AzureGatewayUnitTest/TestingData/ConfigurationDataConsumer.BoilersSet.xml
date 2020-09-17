@@ -3,7 +3,7 @@
     <DataSetConfiguration>
       <AssociationRole>Consumer</AssociationRole>
       <AssociationName>BoilersArea_Boiler #1</AssociationName>
-      <RepositoryGroup>BoilersArea_Boiler #1</RepositoryGroup>
+      <RepositoryGroup>BoilersArea_Boiler_#1 -tHttp1 -dAzureDeviceId -sAzureScopeId -pAzurePrimaryKey -kAzureSecondaryKey -i2000</RepositoryGroup>
       <InformationModelURI>http://commsvr.com/UA/Examples/BoilersSet</InformationModelURI>
       <DataSymbolicName>BoilersArea_Boiler #1</DataSymbolicName>
       <DataSet>
@@ -160,7 +160,7 @@
     <DataSetConfiguration>
       <AssociationRole>Consumer</AssociationRole>
       <AssociationName>BoilersArea_Boiler #2</AssociationName>
-      <RepositoryGroup>BoilersArea_Boiler #2</RepositoryGroup>
+      <RepositoryGroup>BoilersArea_Boiler_#2  -tHttp1 -dAzureDeviceId -sAzureScopeId -pAzurePrimaryKey -kAzureSecondaryKey -i2000</RepositoryGroup>
       <InformationModelURI>http://commsvr.com/UA/Examples/BoilersSet</InformationModelURI>
       <DataSymbolicName>BoilersArea_Boiler #2</DataSymbolicName>
       <DataSet>
@@ -317,7 +317,7 @@
     <DataSetConfiguration>
       <AssociationRole>Consumer</AssociationRole>
       <AssociationName>BoilersArea_Boiler #3</AssociationName>
-      <RepositoryGroup>BoilersArea_Boiler #3</RepositoryGroup>
+      <RepositoryGroup>BoilersArea_Boiler_#3  -tHttp1 -dAzureDeviceId -sAzureScopeId -pAzurePrimaryKey -kAzureSecondaryKey -i2000</RepositoryGroup>
       <InformationModelURI>http://commsvr.com/UA/Examples/BoilersSet</InformationModelURI>
       <DataSymbolicName>BoilersArea_Boiler #3</DataSymbolicName>
       <DataSet>
@@ -474,7 +474,7 @@
     <DataSetConfiguration>
       <AssociationRole>Consumer</AssociationRole>
       <AssociationName>BoilersArea_Boiler #4</AssociationName>
-      <RepositoryGroup>BoilersArea_Boiler #4</RepositoryGroup>
+      <RepositoryGroup>BoilersArea_Boiler_#4  -tHttp1 -dAzureDeviceId -sAzureScopeId -pAzurePrimaryKey -kAzureSecondaryKey -i2000</RepositoryGroup>
       <InformationModelURI>http://commsvr.com/UA/Examples/BoilersSet</InformationModelURI>
       <DataSymbolicName>BoilersArea_Boiler #4</DataSymbolicName>
       <DataSet>
@@ -661,10 +661,4 @@
       </ConsumerAssociationConfigurations>
     </MessageHandlerConfiguration>
   </MessageHandlers>
-  <InformationModelAliases>
-    <InformationModelAlias>
-      <Alias>Industrial Boiler</Alias>
-      <InformationModelURI>http://commsvr.com/UA/Examples/BoilersSet</InformationModelURI>
-    </InformationModelAlias>
-  </InformationModelAliases>
 </ConfigurationData>

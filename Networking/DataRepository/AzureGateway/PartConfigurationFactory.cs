@@ -5,10 +5,8 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
-using CommonServiceLocator;
 using System;
 using System.Diagnostics;
-using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Configuration.Networking;
 using UAOOI.Configuration.Networking.Serialization;
 using UAOOI.Networking.DataRepository.AzureGateway.Diagnostic;

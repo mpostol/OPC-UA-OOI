@@ -53,6 +53,7 @@
     <Compile Include="PartDataManagementSetupUnitTest.cs" />
     <Compile Include="RepositoryGroupUnitTest.cs" />
     <Compile Include="PartBindingFactoryUnit.cs" />
+    <Compile Include="PartConfigurationFactoryUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">

@@ -25,8 +25,11 @@ namespace UAOOI.Configuration.Networking.UnitTest
     {
       TestConfigurationDataFactory _newOne = new TestConfigurationDataFactory();
       Assert.IsNotNull(_newOne.Loader);
+      Assert.IsNull(_newOne.Configuration);
       ConfigurationData _config = _newOne.GetConfiguration();
       Assert.IsNotNull(_config);
+      Assert.IsNotNull(_newOne.Configuration);
+      Assert.AreSame(_config, _newOne.Configuration);
     }
     [TestMethod]
     public void LoadConfigurationDataWrapperTest()

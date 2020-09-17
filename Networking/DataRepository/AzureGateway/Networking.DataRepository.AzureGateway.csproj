@@ -42,7 +42,7 @@
 
   <ItemGroup>
     <None Update="ConfigurationDataConsumer.BoilersSet.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

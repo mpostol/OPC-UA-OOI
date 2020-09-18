@@ -21,7 +21,7 @@
     <FileVersion>5.1.0</FileVersion>
     <Version>5.1.0</Version>
     <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <ApplicationIcon>Logo.ico</ApplicationIcon>
     <Title>Object-Oriented Internet Semantic-Data Building Errors Handling</Title>
   </PropertyGroup>

@@ -16,7 +16,7 @@
     <Authors>MPostol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <DelaySign>false</DelaySign>
   </PropertyGroup>
 

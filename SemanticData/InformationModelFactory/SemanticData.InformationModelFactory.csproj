@@ -21,7 +21,7 @@ The root of the definitions is the `IModelFactory` interface.</Description>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <AssemblyVersion>5.1.0</AssemblyVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <FileVersion>5.1.0</FileVersion>
     <ApplicationIcon>Logo.ico</ApplicationIcon>
     <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>

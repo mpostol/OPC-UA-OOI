@@ -25,7 +25,7 @@
     <FileVersion>5.1.0</FileVersion>
     <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
     <Title>Object-Oriented Internet Semantic-Data UAModelDesign Export</Title>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

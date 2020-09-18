@@ -4,7 +4,7 @@
     <id>Define.Assembly.Title</id>
     <version>0.00.00</version>
     <title>DefaultProductName</title>
-    <authors>commsvr.com</authors>
+    <authors>Mariusz Postol</authors>
     <owners>Mariusz Postol</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
@@ -15,13 +15,12 @@
     <copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</copyright>
     <tags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</tags>
     <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI" />
+    <releaseNotes> Add releaseNotes if needed. </releaseNotes>
+    <copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</copyright>
     <dependencies>
       <group targetFramework=".NETStandard2.0" />
     </dependencies>
-    <releaseNotes>
-      Add releaseNotes if needed.
-    </releaseNotes>
-    <copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</copyright>
+
   </metadata>
   <files>
   </files>

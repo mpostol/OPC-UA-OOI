@@ -71,10 +71,6 @@
       <Project>{E28E0880-03AA-4D1B-A820-41B04E766019}</Project>
       <Name>Configuration.Networking</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\Networking.Core.csproj">
-      <Project>{AFCCA7C9-47FE-4FB6-935E-12D686EEC58F}</Project>
-      <Name>Networking.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj">
       <Project>{2238851E-4DB8-46B0-B38D-0E2315FE153E}</Project>
       <Name>Networking.ReferenceApplication.Core</Name>
@@ -381,6 +377,9 @@
     </Reference>
     <Reference Include="UAOOI.Common.Infrastructure, Version=4.0.2.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\UAOOI.Common.Infrastructure.4.0.2\lib\netstandard2.0\UAOOI.Common.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="UAOOI.Networking.Core, Version=4.0.2.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Networking.Core.4.0.2\lib\netstandard2.0\UAOOI.Networking.Core.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>

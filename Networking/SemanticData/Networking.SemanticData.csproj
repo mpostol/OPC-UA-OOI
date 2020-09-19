@@ -24,10 +24,10 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
+    <PackageReference Include="UAOOI.Networking.Core" Version="4.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj" />
-    <ProjectReference Include="..\Core\Networking.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Properties\AssemblyInfo.tt">

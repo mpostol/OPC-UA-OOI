@@ -28,10 +28,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="UAOOI.Common.Infrastructure" Version="4.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Networking\Configuration.Networking.csproj" />
   </ItemGroup>
 

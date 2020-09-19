@@ -15,17 +15,17 @@ namespace UAOOI.Networking.Core
   {
 
     /// <summary>
-    /// Gets the current state <see cref="HandlerState"/> of the <see cref="Association"/> instance.
+    /// Gets the current state <see cref="HandlerState"/> of an association instance.
     /// </summary>
     /// <value>The state of <see cref="HandlerState"/> type.</value>
     HandlerState State { get; }
     /// <summary>
-    /// This method is used to enable a configured <see cref="Association"/> object. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational"/> state. 
+    /// This method is used to enable a configured association instance. If a normal operation is possible, the state changes into <see cref="HandlerState.Operational"/> state. 
     /// In the case of an error situation, the state changes into <see cref="HandlerState.Error"/>. The operation is rejected if the current <see cref="State"/>  is not <see cref="HandlerState.Disabled"/>.
     /// </summary>
     void Enable();
     /// <summary>
-    /// This method is used to disable an already enabled <see cref="Association"/> object.
+    /// This method is used to disable an already enabled association instance.
     /// This method call shall be rejected if the current State is <see cref="HandlerState.Disabled"/> or <see cref="HandlerState.NoConfiguration"/>.
     /// </summary>
     void Disable();

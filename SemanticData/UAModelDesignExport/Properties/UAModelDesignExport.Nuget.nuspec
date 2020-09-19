@@ -16,11 +16,11 @@
     <summary>
       Object-Oriented Internet Semantic-Data UAModelDesign Export Library.
     </summary>    
-    <copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2020 Mariusz Postol LODZ POLAND</copyright>
     <tags>Object Oriented Internet, OOI, OPC UA, Information Model, IoT, M2M, DOA</tags>
     <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI" />
     <releaseNotes>Updated against OPC UA Rel 1.04</releaseNotes>
-    <copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2020 Mariusz Postol LODZ POLAND</copyright>
     <dependencies>
       <group targetFramework=".NETStandard2.0">
         <dependency id="CommonServiceLocator" version="2.0.5" exclude="Build,Analyzers" />

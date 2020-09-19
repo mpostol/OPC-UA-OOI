@@ -2,7 +2,7 @@
 //  Title   : Assembly info for: Address Space Prototyping
 //  System  : Microsoft VisualStudio 2015 / C#
 //
-//  Copyright (C) 2019 Mariusz Postol LODZ POLAND
+//  Copyright (C) 2020 Mariusz Postol LODZ POLAND
 //  +48 608 619 899
 //  mpostol@cas.eu
 //  https://github.com/mpostol/OPC-UA-OOI
@@ -15,9 +15,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Address Space Prototyping")]
 [assembly: AssemblyDescription("Command Line OPC UA Address Space Prototyping Tool")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("commsvr.com")]
+[assembly: AssemblyCompany("Mariusz Postol")]
 [assembly: AssemblyProduct("Object Oriented Internet")]
-[assembly: AssemblyCopyright("Copyright (C) 2019 Mariusz Postol LODZ POLAND")]
+[assembly: AssemblyCopyright("Copyright (C) 2020 Mariusz Postol LODZ POLAND")]
 [assembly: AssemblyTrademark("Object Oriented Internet")]
 [assembly: AssemblyCulture("")]
 [assembly: Guid("157926b5-f6a5-4496-84c2-f5f9dae937ae")]

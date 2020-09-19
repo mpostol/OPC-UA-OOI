@@ -18,7 +18,7 @@ namespace UAOOI.Networking.Core
     /// </summary>
     /// <param name="name">The name to be used for identification of the underlying DTG transport channel.</param>
     /// <param name="configuration">The configuration of the object implementing the <see cref="IBinaryDataTransferGraphReceiver" />.</param>
-    /// <returns>An object implementing <see cref="IMessageReader" /> that provides functionality supporting reading the messages from the wire.</returns>
+    /// <returns>An object implementing <see cref="IBinaryDataTransferGraphReceiver" /> that provides functionality supporting reading the messages from the wire.</returns>
     IBinaryDataTransferGraphReceiver GetBinaryDTGReceiver(string name, string configuration);
 
     /// <summary>
@@ -26,7 +26,7 @@ namespace UAOOI.Networking.Core
     /// </summary>
     /// <param name="name">The name to be used for identification of the underlying DTG transport channel.</param>
     /// <param name="configuration">The configuration of the object implementing the <see cref="IBinaryDataTransferGraphSender" />.</param>
-    /// <returns>An object implementing <see cref="IMessageWriter" /> that provides functionality supporting sending the messages over the wire.</returns>
+    /// <returns>An object implementing <see cref="IBinaryDataTransferGraphSender" /> that provides functionality supporting sending the messages over the wire.</returns>
     IBinaryDataTransferGraphSender GetBinaryDTGSender(string name, string configuration);
 
   }

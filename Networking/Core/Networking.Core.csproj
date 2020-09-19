@@ -5,7 +5,7 @@
     <AssemblyName>UAOOI.Networking.Core</AssemblyName>
     <RootNamespace>UAOOI.Networking.Core</RootNamespace>
     <Authors>MPostol</Authors>
-    <Company>commsvr.com</Company>
+    <Company>MPostol</Company>
     <Product>Object Oriented Internet</Product>
     <Description>The core functionality of SemanticData Reactive Networking library based on OPC UA Part 14 Pub/Sub.</Description>
     <Copyright>Copyright MPostol (c) 2020</Copyright>
@@ -14,12 +14,32 @@
     <NeutralLanguage></NeutralLanguage>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
-    <AssemblyVersion>4.0.1.1</AssemblyVersion>
-    <FileVersion>4.0.1.0</FileVersion>
+    <AssemblyVersion>4.0.2</AssemblyVersion>
+    <FileVersion>4.0.2</FileVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <Version>4.0.1</Version>
+    <Version>4.0.2</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\VS.git\UAOOI\OPC-UA-OOI\Networking\Core\UAOOI.Networking.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="Networking.Core.nuspec.nuspec">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Networking.Core.nuspec.tt</DependentUpon>
+    </None>
+    <None Update="Networking.Core.nuspec.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Networking.Core.nuspec.nuspec</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
 
 </Project>

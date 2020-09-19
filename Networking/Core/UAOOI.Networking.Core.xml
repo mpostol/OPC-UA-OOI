@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UAOOI.Networking.Core</name>
+    </assembly>
+    <members>
+        <member name="T:UAOOI.Networking.Core.HandlerState">
+            <summary>
+            Enum HandlerState - represents states of an configurable object. 
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.Core.HandlerState.NoConfiguration">
+            <summary>
+            The handler is not configured and cannot be enabled.
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.Core.HandlerState.Disabled">
+            <summary>
+            The handler is configured but currently disabled.
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.Core.HandlerState.Operational">
+            <summary>
+            The handler is operational.
+            </summary>
+        </member>
+        <member name="F:UAOOI.Networking.Core.HandlerState.Error">
+            <summary>
+            The handler is in an error state, i.e. cannot change the state to Operational. Similar to NoConfiguration state but after an error occurs.
+            </summary>
+        </member>
+        <member name="T:UAOOI.Networking.Core.IAssociationState">
+            <summary>
+            Interface IAssociationState - encapsulates the state machine implementation governing this instance behavior.
+            The provided functionality behavior depends on the current value returned by the <see cref="P:UAOOI.Networking.Core.IAssociationState.State"/> property.
+            </summary>
+        </member>
+        <member name="P:UAOOI.Networking.Core.IAssociationState.State">
+            <summary>
+            Gets the current state <see cref="T:UAOOI.Networking.Core.HandlerState"/> of an association instance.
+            </summary>
+            <value>The state of <see cref="T:UAOOI.Networking.Core.HandlerState"/> type.</value>
+        </member>
+        <member name="M:UAOOI.Networking.Core.IAssociationState.Enable">
+            <summary>
+            This method is used to enable a configured association instance. If a normal operation is possible, the state changes into <see cref="F:UAOOI.Networking.Core.HandlerState.Operational"/> state. 
+            In the case of an error situation, the state changes into <see cref="F:UAOOI.Networking.Core.HandlerState.Error"/>. The operation is rejected if the current <see cref="P:UAOOI.Networking.Core.IAssociationState.State"/>  is not <see cref="F:UAOOI.Networking.Core.HandlerState.Disabled"/>.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.Core.IAssociationState.Disable">
+            <summary>
+            This method is used to disable an already enabled association instance.
+            This method call shall be rejected if the current State is <see cref="F:UAOOI.Networking.Core.HandlerState.Disabled"/> or <see cref="F:UAOOI.Networking.Core.HandlerState.NoConfiguration"/>.
+            </summary>
+        </member>
+        <member name="T:UAOOI.Networking.Core.IBinaryDataTransferGraphReceiver">
+            <summary>
+            Interface IBinaryDataTransferGraphReceiver
+            Implements the <see cref="T:System.IDisposable" />
+            </summary>
+            <seealso cref="T:System.IDisposable" />
+        </member>
+        <member name="E:UAOOI.Networking.Core.IBinaryDataTransferGraphReceiver.OnNewFrameArrived">
+            <summary>
+            Is executed after arriving new Data Transfer Graph (DTG). 
+            </summary>
+        </member>
+        <member name="P:UAOOI.Networking.Core.IBinaryDataTransferGraphReceiver.State">
+            <summary>
+            Gets or sets the state of the transport channel. Interface <see cref="T:UAOOI.Networking.Core.IAssociationState"/> encapsulates the state machine implementation governing this instance behavior.
+            The provided functionality behavior depends on the current value returned by the <see cref="P:UAOOI.Networking.Core.IAssociationState.State"/> property.
+            </summary>
+            <value>An object implementing <see cref="T:UAOOI.Networking.Core.IAssociationState"/> representing the state machine of communication channel.</value>
+        </member>
+        <member name="M:UAOOI.Networking.Core.IBinaryDataTransferGraphReceiver.AttachToNetwork">
+            <summary>
+            Attach the communication channel to the network.
+            </summary>
+        </member>
+        <member name="T:UAOOI.Networking.Core.IBinaryDataTransferGraphSender">
+            <summary>
+            Interface IBinaryDataTransferGraphSender
+            Implements the <see cref="T:System.IDisposable" />
+            </summary>
+            <seealso cref="T:System.IDisposable" />
+        </member>
+        <member name="M:UAOOI.Networking.Core.IBinaryDataTransferGraphSender.SendFrame(System.Byte[])">
+            <summary>
+            Sends a Data Transfer Graph to a remote host (DTG).
+            </summary>
+            <param name="buffer">The buffer.</param>
+        </member>
+        <member name="P:UAOOI.Networking.Core.IBinaryDataTransferGraphSender.State">
+            <summary>
+            Gets or sets the state of the transport channel. Interface <see cref="T:UAOOI.Networking.Core.IAssociationState"/> encapsulates the state machine implementation governing this instance behavior.
+            The provided functionality behavior depends on the current value returned by the <see cref="P:UAOOI.Networking.Core.IAssociationState.State"/> property.
+            </summary>
+            <value>An object implementing <see cref="T:UAOOI.Networking.Core.IAssociationState"/> representing the state machine of communication channel.</value>
+        </member>
+        <member name="M:UAOOI.Networking.Core.IBinaryDataTransferGraphSender.AttachToNetwork">
+            <summary>
+            Attach the communication channel to the network.
+            </summary>
+        </member>
+        <member name="T:UAOOI.Networking.Core.IMessageHandlerFactory">
+            <summary>
+            Interface IMessageHandlerFactory - creates objects supporting the Data Transfer Graph messages handling over the wire.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.Core.IMessageHandlerFactory.GetBinaryDTGReceiver(System.String,System.String)">
+            <summary>
+            Gets an instance implementing <see cref="T:UAOOI.Networking.Core.IBinaryDataTransferGraphReceiver" /> interface.
+            </summary>
+            <param name="name">The name to be used for identification of the underlying DTG transport channel.</param>
+            <param name="configuration">The configuration of the object implementing the <see cref="T:UAOOI.Networking.Core.IBinaryDataTransferGraphReceiver" />.</param>
+            <returns>An object implementing <see cref="T:UAOOI.Networking.Core.IBinaryDataTransferGraphReceiver" /> that provides functionality supporting reading the messages from the wire.</returns>
+        </member>
+        <member name="M:UAOOI.Networking.Core.IMessageHandlerFactory.GetBinaryDTGSender(System.String,System.String)">
+            <summary>
+            Gets an instance implementing <see cref="T:UAOOI.Networking.Core.IBinaryDataTransferGraphSender" /> interface.
+            </summary>
+            <param name="name">The name to be used for identification of the underlying DTG transport channel.</param>
+            <param name="configuration">The configuration of the object implementing the <see cref="T:UAOOI.Networking.Core.IBinaryDataTransferGraphSender" />.</param>
+            <returns>An object implementing <see cref="T:UAOOI.Networking.Core.IBinaryDataTransferGraphSender" /> that provides functionality supporting sending the messages over the wire.</returns>
+        </member>
+        <member name="T:UAOOI.Networking.Core.INetworkingEventSourceProvider">
+            <summary>
+            Interface IEventSourceProvider - if implemented returns an instance of <see cref="T:System.Diagnostics.Tracing.EventSource"/> to be registered by the logging infrastructure.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.Core.INetworkingEventSourceProvider.GetPartEventSource">
+            <summary>
+            Gets the part event source.
+            </summary>
+            <returns>Returns an instance of <see cref="T:System.Diagnostics.Tracing.EventSource"/>.</returns>
+        </member>
+    </members>
+</doc>

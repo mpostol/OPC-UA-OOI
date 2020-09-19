@@ -3,12 +3,12 @@ Current release:
 
 Assembly Title:         Object Oriented Internet
 Assembly Description:   UAOOI Reactive Networking of Semantic-Data Library.
-Assembly Company:       commsvr.com
+Assembly Company:       Mariusz Postol
 Assembly Product:       Object Oriented Internet
-Assembly Copyright:     Copyright (C) 2019 Mariusz Postol LODZ POLAND
+Assembly Copyright:     Copyright (C) 2020 Mariusz Postol LODZ POLAND
 Assembly Trademark:     Object Oriented Internet
 Assembly Version:       4.0.1
-Assembly Date:          11.08.2020
+Assembly Date:          18.09.2020
 
 The main changes and new functionalities are listed below:
 

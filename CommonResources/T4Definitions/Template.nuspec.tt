@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl><#=Url#></projectUrl>
-    <iconUrl> <#=IconURLTag#> </iconUrl>
+    <icon>Logo64.PNG</icon>
     <description>description must be added</description>
     <summary>summary must be added.</summary>    
     <copyright><#=AssemblyCopyright#></copyright>
@@ -26,6 +26,7 @@
     <copyright><#=AssemblyCopyright#></copyright>
   </metadata>
   <files>
+    <file src="Logo64.PNG" target=""/>
   </files>
 </package>
 

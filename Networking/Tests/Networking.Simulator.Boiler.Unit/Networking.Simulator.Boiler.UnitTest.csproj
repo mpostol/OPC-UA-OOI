@@ -67,6 +67,9 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
+    <Reference Include="UAOOI.Common.Infrastructure, Version=4.0.2.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Common.Infrastructure.4.0.2\lib\netstandard2.0\UAOOI.Common.Infrastructure.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressSpace\BaseInstanceStateUnitTest.cs" />
@@ -99,10 +102,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Infrastructure\Common.Infrastructure.csproj">
-      <Project>{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}</Project>
-      <Name>Common.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Configuration\NetworkingUpgrade\Configuration.Networking.Upgrade.csproj">
       <Project>{BEBE131A-C931-4C2C-9F9E-ED0D0B75DF26}</Project>
       <Name>Configuration.Networking.Upgrade</Name>

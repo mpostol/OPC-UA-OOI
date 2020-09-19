@@ -67,10 +67,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Infrastructure\Common.Infrastructure.csproj">
-      <Project>{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}</Project>
-      <Name>Common.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Configuration\Networking\Configuration.Networking.csproj">
       <Project>{E28E0880-03AA-4D1B-A820-41B04E766019}</Project>
       <Name>Configuration.Networking</Name>
@@ -382,6 +378,9 @@
       <HintPath>..\..\..\packages\System.Xml.ReaderWriter.4.3.1\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="UAOOI.Common.Infrastructure, Version=4.0.2.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Common.Infrastructure.4.0.2\lib\netstandard2.0\UAOOI.Common.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>

@@ -26,7 +26,6 @@
     <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj" />
     <ProjectReference Include="..\Core\Networking.Core.csproj" />
   </ItemGroup>

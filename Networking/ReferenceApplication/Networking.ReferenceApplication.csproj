@@ -119,6 +119,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UAOOI.Common.Infrastructure, Version=4.0.2.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.Common.Infrastructure.4.0.2\lib\netstandard2.0\UAOOI.Common.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -236,10 +239,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj">
-      <Project>{8817A671-ABB8-463A-A8A3-DDCFE781A6B6}</Project>
-      <Name>Common.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Configuration\Core\Configuration.Core.csproj">
       <Project>{0A2FB856-D50C-463D-8218-063A36942188}</Project>
       <Name>Configuration.Core</Name>

@@ -33,8 +33,7 @@
     <projectUrl>https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <developmentDependency>false</developmentDependency>
-    <description>This library provides API for common infrastructure management functionality aimed at Object Oriented Internet application deployment.
-</description>
+    <description>This library provides API for common infrastructure management functionality aimed at Object Oriented Internet application deployment.</description>
     <summary>
       This library provides API for common infrastructure management functionality aimed at Object Oriented Internet application deployment including but not limited to:
       - Common definitions
@@ -52,27 +51,35 @@
     <Company>commsvr.com</Company>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>C:\VS.git\UAOOI\OPC-UA-OOI\Common\Infrastructure\UAOOI.Common.Infrastructure.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard1.4|AnyCPU'">
     <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Properties\AssemblyInfo.tt" />
-    <None Remove="UAOOI.Common.Infrastructure.nuspec" />
-    <None Remove="UAOOI.Common.Infrastructure.tt" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <None Update="Common.Infrastructure.nuspec.nuspec">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Common.Infrastructure.nuspec.tt</DependentUpon>
+    </None>
+    <None Update="Common.Infrastructure.nuspec.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Common.Infrastructure.nuspec.nuspec</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 </Project>

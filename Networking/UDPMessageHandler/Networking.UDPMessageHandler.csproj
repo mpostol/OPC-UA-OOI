@@ -5,7 +5,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <Version>4.0.1</Version>
+    <Version>4.0.2</Version>
     <AssemblyName>UAOOI.Networking.UDPMessageHandler</AssemblyName>
     <Description>OOI Reactive Networking: UDP IMessageHandlerFactory Implementation</Description>
     <Copyright>Copyright MPostol (c) 2018</Copyright>
@@ -17,7 +17,7 @@
     <Product>Object Oriented Internet</Product>
     <Company>commsvr.com</Company>
     <Authors>MPostol</Authors>
-    <AssemblyVersion>4.0.1.1</AssemblyVersion>
+    <AssemblyVersion>4.0.2.0</AssemblyVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 

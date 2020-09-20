@@ -11,12 +11,12 @@
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
     <Copyright>Copyright MPostol (c) 2018</Copyright>
     <Description>SemanticData Reactive Networking  library based on OPC UA Part 14 Pub/Sub.</Description>
-    <Version>4.0.1</Version>
+    <Version>4.0.2</Version>
     <Authors>MPostol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
     <RootNamespace>UAOOI.Networking.SemanticData</RootNamespace>
-    <AssemblyVersion>4.0.1.1</AssemblyVersion>
+    <AssemblyVersion>4.0.2.0</AssemblyVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild> 
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -24,10 +24,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
+    <PackageReference Include="UAOOI.Configuration.Networking" Version="4.0.1" />
     <PackageReference Include="UAOOI.Networking.Core" Version="4.0.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Properties\AssemblyInfo.tt">

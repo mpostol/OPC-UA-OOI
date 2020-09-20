@@ -21,15 +21,32 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\VS.git\UAOOI\OPC-UA-OOI\Networking\UDPMessageHandler\UAOOI.Networking.UDPMessageHandler.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
     <PackageReference Include="UAOOI.Networking.Core" Version="4.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Networking.UDPMessageHandler.nuspec.nuspec">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Networking.UDPMessageHandler.nuspec.tt</DependentUpon>
+    </None>
+    <None Update="Networking.UDPMessageHandler.nuspec.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Networking.UDPMessageHandler.nuspec.nuspec</LastGenOutput>
+    </None>
     <None Update="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
 </Project>

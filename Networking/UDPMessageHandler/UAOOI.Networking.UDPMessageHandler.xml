@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UAOOI.Networking.UDPMessageHandler</name>
+    </assembly>
+    <members>
+        <member name="T:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageReader">
+            <summary>
+            Class BinaryUDPPackageReader - custom implementation of the <see cref="!:BinaryDecoder"/> using UDP protocol.. 
+            This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageReader.#ctor(UAOOI.Networking.UDPMessageHandler.Configuration.UDPReaderConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageReader" /> class.
+            </summary>
+            <param name="configuration">The configuration of the reader.</param>
+        </member>
+        <member name="P:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageReader.State">
+            <summary>
+            Gets or sets the state.
+            </summary>
+            <value>The state.</value>
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageReader.Dispose">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageReader.MyState.#ctor(UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageReader)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageReader.MyState"/> class.
+            </summary>
+        </member>
+        <member name="P:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageReader.MyState.State">
+            <summary>
+            Gets the current state <see cref="T:UAOOI.Networking.Core.HandlerState" /> of the <see cref="!:Association" /> instance.
+            </summary>
+            <value>The state of <see cref="T:UAOOI.Networking.Core.HandlerState" /> type.</value>
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageReader.MyState.Enable">
+            <summary>
+            This method is used to enable a configured <see cref="!:Association" /> object. If a normal operation is possible, the state changes into <see cref="F:UAOOI.Networking.Core.HandlerState.Operational" /> state.
+            In the case of an error situation, the state changes into <see cref="F:UAOOI.Networking.Core.HandlerState.Error" />. The operation is rejected if the current <see cref="P:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageReader.MyState.State" />  is not <see cref="F:UAOOI.Networking.Core.HandlerState.Disabled" />.
+            </summary>
+            <exception cref="T:System.ArgumentException">Wrong state</exception>
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageReader.MyState.Disable">
+            <summary>
+            This method is used to disable an already enabled <see cref="!:Association" /> object.
+            This method call shall be rejected if the current State is <see cref="F:UAOOI.Networking.Core.HandlerState.Disabled" /> or <see cref="F:UAOOI.Networking.Core.HandlerState.NoConfiguration" />.
+            </summary>
+            <exception cref="T:System.ArgumentException">Wrong state</exception>
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageReader.ReceiveAsyncCallback(System.IAsyncResult)">
+            <summary>
+            Implements <see cref="T:System.AsyncCallback"/> for UDP begin receive.
+            </summary>
+            <param name="asyncResult">The asynchronous result.</param>
+        </member>
+        <member name="T:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageWriter">
+            <summary>
+            Class BinaryUDPPackageWriter - custom implementation of the <see cref="!:BinaryEncoder"/> using UDP protocol.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageWriter.Dispose">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageWriter.MyState.#ctor(UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageWriter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageWriter.MyState"/> class.
+            </summary>
+        </member>
+        <member name="P:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageWriter.MyState.State">
+            <summary>
+            Gets the current state <see cref="T:UAOOI.Networking.Core.HandlerState" /> of the <see cref="!:Association" /> instance.
+            </summary>
+            <value>The state of <see cref="T:UAOOI.Networking.Core.HandlerState" /> type.</value>
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageWriter.MyState.Enable">
+            <summary>
+            This method is used to enable a configured <see cref="!:Association" /> object. If a normal operation is possible, the state changes into <see cref="F:UAOOI.Networking.Core.HandlerState.Operational" /> state.
+            In the case of an error situation, the state changes into <see cref="F:UAOOI.Networking.Core.HandlerState.Error" />. The operation is rejected if the current <see cref="P:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageWriter.MyState.State" />  is not <see cref="F:UAOOI.Networking.Core.HandlerState.Disabled" />.
+            </summary>
+            <exception cref="T:System.ArgumentException">Wrong state</exception>
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.BinaryUDPPackageWriter.MyState.Disable">
+            <summary>
+            This method is used to disable an already enabled <see cref="!:Association" /> object.
+            This method call shall be rejected if the current State is <see cref="F:UAOOI.Networking.Core.HandlerState.Disabled" /> or <see cref="F:UAOOI.Networking.Core.HandlerState.NoConfiguration" />.
+            </summary>
+            <exception cref="T:System.ArgumentException">Wrong state</exception>
+        </member>
+        <member name="T:UAOOI.Networking.UDPMessageHandler.Configuration.UDPReaderConfiguration">
+            <summary>
+            Class UDPReaderConfiguration encapsulates configuration for <see cref="!:IMessageHandlerFactory.GetIMessageReader"/>.
+            </summary>
+        </member>
+        <member name="T:UAOOI.Networking.UDPMessageHandler.Configuration.UDPWriterConfiguration">
+            <summary>
+            Class UDPWriterConfiguration encapsulates configuration for <see cref="!:IMessageHandlerFactory.GetIMessageWriter"/>.
+            </summary>
+        </member>
+        <member name="T:UAOOI.Networking.UDPMessageHandler.Diagnostic.NetworkingEventSourceProvider">
+            <summary>
+            Class NetworkingEventSourceProvider - gets access to an instance of <see cref="T:System.Diagnostics.Tracing.EventSource"/> to be registered by the logging infrastructure.
+            </summary>
+            <seealso cref="T:UAOOI.Networking.Core.INetworkingEventSourceProvider" />
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.Diagnostic.NetworkingEventSourceProvider.GetPartEventSource">
+            <summary>
+            Gets the part event source.
+            </summary>
+            <returns>Returns an instance of <see cref="T:System.Diagnostics.Tracing.EventSource" />.</returns>
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.Diagnostic.UDPMessageHandlerDiagnosticExtension.LogException(UAOOI.Networking.UDPMessageHandler.Diagnostic.UDPMessageHandlerSemanticEventSource,System.String,System.String,System.Exception)">
+            <summary>
+            Logs the exception using <see cref="!:ReferenceApplicationEventSource" />.
+            </summary>
+            <param name="eventSource">The event source source to be used for problem reporting.</param>
+            <param name="className">Name of the class.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="e">The exception to be reported.</param>
+        </member>
+        <member name="T:UAOOI.Networking.UDPMessageHandler.Diagnostic.UDPMessageHandlerSemanticEventSource.Tasks">
+            <summary>
+            Class Tasks.
+            </summary>
+        </member>
+        <member name="T:UAOOI.Networking.UDPMessageHandler.Diagnostic.UDPMessageHandlerSemanticEventSource.Keywords">
+            <summary>
+            Class Keywords - defines the local keywords (flags) that apply to events.
+            </summary>
+        </member>
+        <member name="P:UAOOI.Networking.UDPMessageHandler.Diagnostic.UDPMessageHandlerSemanticEventSource.Log">
+            <summary>
+            Gets the log - implements singleton of the <see cref="T:UAOOI.Networking.UDPMessageHandler.Diagnostic.UDPMessageHandlerSemanticEventSource"/>.
+            </summary>
+            <value>The log.</value>
+        </member>
+        <member name="T:UAOOI.Networking.UDPMessageHandler.MessageHandlerFactory">
+            <summary>
+            Class <see cref="T:UAOOI.Networking.UDPMessageHandler.MessageHandlerFactory"/> - implements <see cref="T:UAOOI.Networking.Core.IMessageHandlerFactory"/> 
+            </summary>
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.MessageHandlerFactory.UAOOI#Networking#Core#IMessageHandlerFactory#GetBinaryDTGReceiver(System.String,System.String)">
+            <summary>
+            Gets an instance implementing <see cref="T:UAOOI.Networking.Core.IBinaryDataTransferGraphReceiver" /> interface.
+            </summary>
+            <param name="name">The name to be used for identification of the underlying TDG transport channel.</param>
+            <param name="configuration">The configuration of the object implementing the <see cref="T:UAOOI.Networking.Core.IBinaryDataTransferGraphReceiver" />.</param>
+            <returns>An object implementing <see cref="T:UAOOI.Networking.Core.IBinaryDataTransferGraphReceiver" /> that provides functionality supporting reading the messages from the wire.</returns>
+        </member>
+        <member name="M:UAOOI.Networking.UDPMessageHandler.MessageHandlerFactory.UAOOI#Networking#Core#IMessageHandlerFactory#GetBinaryDTGSender(System.String,System.String)">
+            <summary>
+            Gets an instance implementing <see cref="T:UAOOI.Networking.Core.IBinaryDataTransferGraphSender" /> interface.
+            </summary>
+            <param name="name">The name to be used for identification of the underlying TDG transport channel.</param>
+            <param name="configuration">The configuration of the object implementing the <see cref="T:UAOOI.Networking.Core.IBinaryDataTransferGraphSender" />.</param>
+            <returns>An object implementing <see cref="T:UAOOI.Networking.Core.IBinaryDataTransferGraphSender" /> that provides functionality supporting sending the messages over the wire.</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>UAOOI.Networking.UDPMessageHandler</id>
+    <version>4.0.2</version>
+    <title>Object Oriented Internet UDPMessageHandler</title>
+    <authors>Mariusz Postol</authors>
+    <owners>Mariusz Postol</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/mpostol/OPC-UA-OOI</projectUrl>
+    <icon>Logo64.PNG</icon>
+    <description>OOI Reactive Networking: UDP IMessageHandlerFactory Implementation</description>
+    <summary>UDP IMessageHandlerFactory Implementation.</summary>    
+    <copyright>Copyright (C) 2020 Mariusz Postol LODZ POLAND</copyright>
+    <tags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</tags>
+    <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="System.ComponentModel.Composition" version="4.7.0" exclude="Build,Analyzers" />
+        <dependency id="UAOOI.Networking.Core" version="4.0.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <releaseNotes>Maintenance release - unimportant changes.</releaseNotes>
+    <copyright>Copyright (C) 2020 Mariusz Postol LODZ POLAND</copyright>
+  </metadata>
+  <files>
+    <file src="Logo64.PNG" target=""/>
+    <file src="bin\Release\netstandard2.0\UAOOI.Networking.UDPMessageHandler.dll" target="lib\netstandard2.0\UAOOI.Networking.UDPMessageHandler.dll" />
+    <file src="bin\Release\netstandard2.0\UAOOI.Networking.UDPMessageHandler.xml" target="lib\netstandard2.0\UAOOI.Networking.UDPMessageHandler.xml" />
+  </files>
+</package>
+

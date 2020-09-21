@@ -1,0 +1,36 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".nuspec" #>
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>UAOOI.Networking.SemanticData</id>
+    <version>4.0.2</version>
+    <title><#=NetworkingDataProduct#> Networking SemanticData</title>
+    <authors><#=AssemblyCompany#></authors>
+    <owners><#=Owner#></owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl><#=Url#></projectUrl>
+    <icon>logo.png</icon>
+    <description>SemanticData Reactive Networking  library based on OPC UA Part 14 Pub/Sub</description>
+    <summary>summary must be added.</summary>    
+    <copyright><#=AssemblyCopyright#></copyright>
+    <tags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</tags>
+    <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/SemanticData#reactive-networking-rxnetworking-of-semantic-data-library" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="System.ComponentModel.Composition" version="4.7.0" exclude="Build,Analyzers" />
+        <dependency id="UAOOI.Configuration.Networking" version="4.0.1" exclude="Build,Analyzers" />
+        <dependency id="UAOOI.Networking.Core" version="4.0.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <releaseNotes>Maintenance release - unimportant changes.</releaseNotes>
+    <copyright><#=AssemblyCopyright#></copyright>
+  </metadata>
+  <files>
+    <file src="logo.png" target=""/>
+    <file src="bin\Release\netstandard2.0\UAOOI.Networking.SemanticData.dll" target="lib\netstandard2.0\UAOOI.Networking.SemanticData.dll" />
+  </files>
+</package>
+
+<#@ include file = "..\..\CommonResources\T4Definitions\Model.t4" #>

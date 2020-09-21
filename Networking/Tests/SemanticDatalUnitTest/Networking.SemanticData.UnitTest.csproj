@@ -89,9 +89,6 @@
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
-    <Reference Include="UAOOI.Networking.Core, Version=4.0.2.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\UAOOI.Networking.Core.4.0.2\lib\netstandard2.0\UAOOI.Networking.Core.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +144,10 @@
     <ProjectReference Include="..\..\..\Configuration\Networking\Configuration.Networking.csproj">
       <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
       <Name>Configuration.Networking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Networking.Core.csproj">
+      <Project>{afcca7c9-47fe-4fb6-935e-12d686eec58f}</Project>
+      <Name>Networking.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SemanticData\Networking.SemanticData.csproj">
       <Project>{7f4ded4e-5933-4229-b9cc-51da49678904}</Project>

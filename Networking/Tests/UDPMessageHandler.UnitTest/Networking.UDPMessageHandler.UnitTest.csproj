@@ -92,9 +92,6 @@
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UAOOI.Networking.Core, Version=4.0.2.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\UAOOI.Networking.Core.4.0.2\lib\netstandard2.0\UAOOI.Networking.Core.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +116,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Networking.Core.csproj">
+      <Project>{afcca7c9-47fe-4fb6-935e-12d686eec58f}</Project>
+      <Name>Networking.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\UDPMessageHandler\Networking.UDPMessageHandler.csproj">
       <Project>{d2eb89f9-321e-46e4-ba79-679138b82b23}</Project>
       <Name>Networking.UDPMessageHandler</Name>

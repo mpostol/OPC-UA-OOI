@@ -25,7 +25,10 @@
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
     <PackageReference Include="UAOOI.Configuration.Networking" Version="4.0.1" />
-    <PackageReference Include="UAOOI.Networking.SemanticData" Version="4.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
   </ItemGroup>
 
   <ItemGroup>

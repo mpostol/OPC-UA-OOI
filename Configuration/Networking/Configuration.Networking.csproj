@@ -38,7 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.5" />
-    <PackageReference Include="UAOOI.Common.Infrastructure" Version="4.0.2" />
+    <PackageReference Include="UAOOI.Common.Infrastructure" Version="4.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

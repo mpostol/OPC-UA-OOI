@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -30,12 +30,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="bin\**" />
-    <EmbeddedResource Remove="bin\**" />
-    <None Remove="bin\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Model\IBoilersSet.cs" />
     <Compile Remove="Model\tempuri.org.UA.Examples.BoilerType.Classes - Copy.cs" />
     <Compile Remove="UAInformationModel\DemoConfiguration\BoilersSet\Commsvr.UA.Examples.BoilersSet.Classes.cs" />
@@ -48,8 +42,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="UAOOI.SemanticData.UANodeSetValidation" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Configuration\NetworkingUpgrade\Configuration.Networking.Upgrade.csproj" />
-    <ProjectReference Include="..\..\SemanticData\UANodeSetValidation\SemanticData.UANodeSetValidation.csproj" />
+    <ProjectReference Include="..\Core\Networking.Core.csproj" />
     <ProjectReference Include="..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj" />
     <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
   </ItemGroup>

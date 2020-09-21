@@ -67,8 +67,8 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
-    <Reference Include="UAOOI.Common.Infrastructure, Version=4.0.2.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\UAOOI.Common.Infrastructure.4.0.2\lib\netstandard2.0\UAOOI.Common.Infrastructure.dll</HintPath>
+    <Reference Include="UAOOI.Common.Infrastructure, Version=4.0.1.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Common.Infrastructure.4.0.1\lib\netstandard2.0\UAOOI.Common.Infrastructure.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

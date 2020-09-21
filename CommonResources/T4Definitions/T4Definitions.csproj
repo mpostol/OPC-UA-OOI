@@ -70,6 +70,7 @@
     <None Include="ReleaseTask.md" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="logo.png" />
     <Content Include="Template.nuspec.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Template.nuspec.nuspec</LastGenOutput>

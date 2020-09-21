@@ -137,7 +137,7 @@ This section provides hints on how to implement the `Consumer` role of the `OOI 
 
 The `Consumer` role implementation is captured by the `Networking.DataLogger` project where `DataManagementSetup` is implemented by derived class `UAOOI.Networking.DataLogger.LoggerManagementSetup`.
 
-The class `UAOOI.Networking.DataLogger.DataConsumer` is an example implementation of a [data logger](./../DataLogger/README.md). This functionality is aimed at recording data over time. It consumes the testing data sent over the wire and updates properties in the class `UAOOI.Networking.DataLogger.ConsumerViewModel` implementing ViewModel layer in the [Model View ViewModel (on MSDN)](https://msdn.microsoft.com/en-us/magazine/dd419663.aspx). The class `DataConsumer` demonstrates how to create bindings interconnecting the data received over the wire and the properties that are the ultimate destination of the data. Because there is only one group of variables the `GetConsumerBinding` method doesn't use the `repositoryGroup` and the `GetProducerBinding` is intentionally not implemented.
+The class `UAOOI.Networking.DataLogger.DataConsumer` is an example implementation of a [data logger](./../DataRepository/DataLogger/README.md). This functionality is aimed at recording data over time. It consumes the testing data sent over the wire and updates properties in the class `UAOOI.Networking.DataLogger.ConsumerViewModel` implementing ViewModel layer in the [Model View ViewModel (on MSDN)](https://msdn.microsoft.com/en-us/magazine/dd419663.aspx). The class `DataConsumer` demonstrates how to create bindings interconnecting the data received over the wire and the properties that are the ultimate destination of the data. Because there is only one group of variables the `GetConsumerBinding` method doesn't use the `repositoryGroup` and the `GetProducerBinding` is intentionally not implemented.
 
 #### `Producer` Role Implementation
 
@@ -149,7 +149,7 @@ This section provides hints on how to implement the `Producer` role responsible 
 
 There are two examples of this role implementation:
 
-- `Networking.SimulatorInteroperabilityTest` - in this project the data expected by a [data logger](./../DataLogger/README.md) is generated and send over the network
+- `Networking.SimulatorInteroperabilityTest` - in this project the data expected by a [data logger](./../DataRepository/DataLogger/README.md) is generated and send over the network
 - `Networking.Simulator.Boiler` - in this project a set of boilers is simulated. It is a part of the proof of concept with the aim of verifying that the reactive communication implemented using the `Networking.SemanticData` library is well suited to deploy the Internet of Things (IoT) paradigm for highly distributed applications.
 
 In the `Networking.SimulatorInteroperabilityTest` project, the `DataManagementSetup` class is implemented by derived class `UAOOI.Networking.SimulatorInteroperabilityTest.SimulatorDataManagementSetup`. The class `UAOOI.Networking.SimulatorInteroperabilityTest.DataGenerator` captures implementation of a [testing data generator](../../Networking/SimulatorInteroperabilityTest/README.md) aimed at accomplishing interoperability tests defined by the OPC Foundation for PubSub applications. Because there is only one group of variables the `GetProducerBinding` method doesn't use the `repositoryGroup` and the `GetConsumerBinding` is intentionally not implemented.
@@ -166,7 +166,7 @@ Definition of the interface `UAOOI.Configuration.Networking.IConfigurationFactor
 >- The derived class must override an abstract method `RaiseEvents` called on the configuration change.
 >- The embedded configuration loading method uses `System.IO.FileInfo` to test if the file exists. 
 
-Example implementations of this class are in [`Producer`](../../Networking/SimulatorInteroperabilityTest/README.md) and [`Consumer`](./../../Networking/DataLogger/README.md).
+Example implementations of this class are in [`Producer`](../../Networking/SimulatorInteroperabilityTest/README.md) and [`Consumer`](./../../Networking/DataRepository/DataLogger/README.md).
 
 Both are parts of the example implementation [`ReferenceApplication`](../../Networking/ReferenceApplication/README.MD).
 

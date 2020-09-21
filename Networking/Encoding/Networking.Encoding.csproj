@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,7 +6,7 @@
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>UAOOI.Networking.Encoding</AssemblyName>
     <RootNamespace>UAOOI.Networking.Encoding</RootNamespace>
-    <Version>4.0.1</Version>
+    <Version>4.0.2</Version>
     <Authors>MPostol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
@@ -18,13 +18,30 @@
     <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
     <PackageReleaseNotes>Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may simply replace this library by a custom one providing unlimited encoding functionality.
 </PackageReleaseNotes>
-    <AssemblyVersion>4.0.1.1</AssemblyVersion>
+    <AssemblyVersion>4.0.2.0</AssemblyVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-  
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SemanticData\Networking.SemanticData.csproj" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
+    <PackageReference Include="UAOOI.Configuration.Networking" Version="4.0.1" />
+    <PackageReference Include="UAOOI.Networking.SemanticData" Version="4.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Networking.Encoding.nuspec.nuspec">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Networking.Encoding.nuspec.tt</DependentUpon>
+    </None>
+    <None Update="Networking.Encoding.nuspec.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Networking.Encoding.nuspec.nuspec</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
 </Project>

@@ -34,5 +34,5 @@ The library is not Unit Tested.
 ## See also
 
 - [Reference Application Graphical User Interface](../ReferenceApplication/README.MD)
-- [Reference Application Consumer - Data Logger](../DataLogger/README.md)
+- [Reference Application Consumer - Data Logger](../DataRepository/DataLogger/README.md)
 - [Reference Application Producer - Interoperability Test Data Generator](../SimulatorInteroperabilityTest/README.md)

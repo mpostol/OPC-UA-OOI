@@ -10,7 +10,7 @@ The `ReferenceApplication` hosts parts offering `Producer` and `Consumer` functi
  
 The `Producer` sends messages containing the fields defined in the configuration file using UDP communication stack. The values are simulated. The `Consumer` is configured to receive these messages from the UDP protocol stack. The `Consumer`to correctly decode the messages must have configuration defining the same set of fields. The data is encoded using *Variant* encoding.
 
-The detailed description of the `Consumer` is covered by the document [`ReferenceApplication` Consumer - Data Logger](../../Networking/DataLogger/README.md). The detailed description of the `Producer` is covered by the document  [`ReferenceApplication` Producer - Interoperability Test Data Generator](../../Networking/SimulatorInteroperabilityTest/README.md).
+The detailed description of the `Consumer` is covered by the document [`ReferenceApplication` Consumer - Data Logger](../../Networking/DataRepository/DataLogger/README.md). The detailed description of the `Producer` is covered by the document  [`ReferenceApplication` Producer - Interoperability Test Data Generator](../../Networking/SimulatorInteroperabilityTest/README.md).
 
 Each role uses independent configuration file. The detailed description of the configuration maintenance is captured in the document [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration).
 

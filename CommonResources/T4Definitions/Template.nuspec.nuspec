@@ -9,7 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/mpostol/OPC-UA-OOI</projectUrl>
-    <icon>Logo64.PNG</icon>
+    <icon>logo.png</icon>
     <description>description must be added</description>
     <summary>summary must be added.</summary>    
     <copyright>Copyright (C) 2020 Mariusz Postol LODZ POLAND</copyright>
@@ -24,7 +24,7 @@
     <copyright>Copyright (C) 2020 Mariusz Postol LODZ POLAND</copyright>
   </metadata>
   <files>
-    <file src="Logo64.PNG" target=""/>
+    <file src="logo.png" target=""/>
   </files>
 </package>
 

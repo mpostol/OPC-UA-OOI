@@ -50,6 +50,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
     }
 
     [TestMethod]
+    [DeploymentItem(@".\ConfigurationDataConsumer.xml", @".\")]
     public void RegisterRequiredServicesIfMissingAndUDPMessageHandler()
     {
       AggregateCatalog _catalog = new AggregateCatalog(new AssemblyCatalog("UAOOI.Networking.UDPMessageHandler.dll"), new AssemblyCatalog("UAOOI.Networking.SimulatorInteroperabilityTest.dll"));
@@ -62,7 +63,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         Assert.AreEqual<int>(14, _container.Catalog.Parts.Count<ComposablePartDefinition>());
         foreach (ComposablePartDefinition _part in _container.Catalog.Parts)
         {
-          Debug.WriteLine("New Part");
+          Debug.WriteLine($"New Part: {string.Join(", ", _part.Metadata.Keys.ToArray<string>())}");
           foreach (ImportDefinition _import in _part.ImportDefinitions)
             Debug.WriteLine(string.Format("Imported contracts name => '{0}'", _import.ContractName));
           foreach (ExportDefinition _export in _part.ExportDefinitions)

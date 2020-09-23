@@ -5,25 +5,20 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
-using UAOOI.Common.Infrastructure.Diagnostic;
-using UAOOI.Configuration.Networking.Serialization;
-using UAOOI.Configuration.Networking.Upgrade;
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
 {
   /// <summary>
-  /// Class SemanticDataSetSource - captures the enumerator of a set of variables representing the semantic data source expressed as the root object of the <see cref="BaseInstanceState"/> type. 
+  /// Class SemanticDataSetSource - captures the enumerator of a set of variables representing the semantic data source expressed as the root object of the <see cref="BaseInstanceState"/> type.
   /// Each data entity has to have the parent relationship to the root <see cref="BaseVariableState"></see> instance.
   /// </summary>
   /// <seealso cref="ISemanticDataSetSource" />
   public class SemanticDataSetSource : ISemanticDataSetSource
   {
-
     #region constructor
+
     /// <summary>
     /// Initializes a new instance of the <see cref="SemanticDataSetSource"/> class.
     /// </summary>
@@ -37,16 +32,19 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       for (int ii = 0; ii < _myComponents.Count; ii++)
       {
         List<BaseInstanceState> _hasComponentPath = new List<BaseInstanceState>();
-        _myComponents[ii].RegisterVariable(_hasComponentPath, (x, y) => { if (x is IVariable) m_Variables.Add(String.Join(m_JoiningChar, y), (IVariable)x); });
+        _myComponents[ii].RegisterVariable(_hasComponentPath, (x, y) => { if (x is IVariable) m_Variables.Add(string.Join(m_JoiningChar, y), (IVariable)x); });
       }
     }
-    #endregion
+
+    #endregion constructor
 
     #region ISemanticDataSetSource
+
     public string SemanticDataSetRootBrowseName { get; private set; }
     public IEnumerable<string> Keys => m_Variables.Keys;
     public int Count => m_Variables.Count;
-    public IVariable this[string[] key] => m_Variables[String.Join(m_JoiningChar, key)];
+    public IVariable this[string[] key] => m_Variables[string.Join(m_JoiningChar, key)];
+
     /// <summary>
     /// Determines whether this set contains key.
     /// </summary>
@@ -57,6 +55,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     {
       return m_Variables.ContainsKey(key);
     }
+
     /// <summary>
     /// Returns an enumerator that iterates through the collection.
     /// </summary>
@@ -65,6 +64,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     {
       return m_Variables.GetEnumerator();
     }
+
     /// <summary>
     /// Returns an enumerator that iterates through a collection.
     /// </summary>
@@ -73,52 +73,55 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     {
       return m_Variables.GetEnumerator();
     }
-    #endregion
 
-    internal void CreateConfiguration
-      (XmlQualifiedName instanceType, string _associationName, XmlQualifiedName instanceSymbolicName, string fileName, Tuple<string, ushort, System.Guid> writerNameDataSetWriterIdPublisherId, ITraceSource _traceSource)
-    {
-      List<FieldMetaData> _lf = new List<FieldMetaData>();
-      foreach (KeyValuePair<string, IVariable> _item in this)
-      {
-        if (_item.Value.ValueType.BuiltInType == BuiltInType.Null)
-          continue;
-        FieldMetaData _field = new FieldMetaData()
-        {
-          ProcessValueName = _item.Key,
-          SymbolicName = _item.Key,
-          TypeInformation = _item.Value.ValueType
-        };
-        _lf.Add(_field);
-      }
-      DataSetConfiguration _newDataSetConfiguration = new DataSetConfiguration()
-      {
-        AssociationName = _associationName,
-        AssociationRole = AssociationRole.Producer,
-        ConfigurationGuid = System.Guid.NewGuid(),
-        ConfigurationVersion = new ConfigurationVersionDataType() { MajorVersion = 1, MinorVersion = 0 },
-        Id = System.Guid.NewGuid(),
-        InformationModelURI = instanceSymbolicName.Namespace,
-        DataSet = _lf.ToArray(),
-        DataSymbolicName = _associationName,
-        MaxBufferTime = 1000,
-        PublishingInterval = 100,
-        RepositoryGroup = _associationName,
-        Root = new NodeDescriptor()
-        {
-          BindingDescription = "Binding Description",
-          DataType = instanceType,
-          InstanceDeclaration = false,
-          NodeClass = InstanceNodeClassesEnum.Object,
-          NodeIdentifier = instanceSymbolicName
-        }
-      };
-      ConfigurationManagement.AddDataSetConfiguration(_newDataSetConfiguration, writerNameDataSetWriterIdPublisherId, fileName, fileName, _traceSource);
-    }
+    #endregion ISemanticDataSetSource
+
+    //internal void CreateConfiguration
+    //  (XmlQualifiedName instanceType, string _associationName, XmlQualifiedName instanceSymbolicName, string fileName, Tuple<string, ushort, Guid> writerNameDataSetWriterIdPublisherId, ITraceSource _traceSource)
+    //{
+    //  List<FieldMetaData> _lf = new List<FieldMetaData>();
+    //  foreach (KeyValuePair<string, IVariable> _item in this)
+    //  {
+    //    if (_item.Value.ValueType.BuiltInType == BuiltInType.Null)
+    //      continue;
+    //    FieldMetaData _field = new FieldMetaData()
+    //    {
+    //      ProcessValueName = _item.Key,
+    //      SymbolicName = _item.Key,
+    //      TypeInformation = _item.Value.ValueType
+    //    };
+    //    _lf.Add(_field);
+    //  }
+    //  DataSetConfiguration _newDataSetConfiguration = new DataSetConfiguration()
+    //  {
+    //    AssociationName = _associationName,
+    //    AssociationRole = AssociationRole.Producer,
+    //    ConfigurationGuid = System.Guid.NewGuid(),
+    //    ConfigurationVersion = new ConfigurationVersionDataType() { MajorVersion = 1, MinorVersion = 0 },
+    //    Id = System.Guid.NewGuid(),
+    //    InformationModelURI = instanceSymbolicName.Namespace,
+    //    DataSet = _lf.ToArray(),
+    //    DataSymbolicName = _associationName,
+    //    MaxBufferTime = 1000,
+    //    PublishingInterval = 100,
+    //    RepositoryGroup = _associationName,
+    //    Root = new NodeDescriptor()
+    //    {
+    //      BindingDescription = "Binding Description",
+    //      DataType = instanceType,
+    //      InstanceDeclaration = false,
+    //      NodeClass = InstanceNodeClassesEnum.Object,
+    //      NodeIdentifier = instanceSymbolicName
+    //    }
+    //  };
+    //  ConfigurationManagement.AddDataSetConfiguration(_newDataSetConfiguration, writerNameDataSetWriterIdPublisherId, fileName, fileName, _traceSource);
+    //}
+
     #region private
+
     private const string m_JoiningChar = "_";
     private Dictionary<string, IVariable> m_Variables = new Dictionary<string, IVariable>();
-    #endregion
 
+    #endregion private
   }
 }

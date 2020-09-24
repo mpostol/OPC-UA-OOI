@@ -68,9 +68,9 @@ Finally the `DataManagementSetup.Start()` method is called to initialize the inf
 
 Implementation of this interface is a basic step to implement `Consumer` functionality. The `DataRepository` represents data holding assets in the `RxNetworking App` and, following the proposed architecture, the `IBindingFactory` interface is implemented by this external part. It captures functionality responsible for accessing the process data represented by the `LocalResources`. The `LocalResources` represents the external part that has a very broad usage purpose. For example, it may be any kind of process data source/destination, and to name a few `Raw Data`,  `OPC UA Address Space Management`, and `Azure` services in this case.
 
-The `AzureGateway` functional package has been implemented based on the `Consumer` concept. This particular `Consumer` implements `IBindingFactory` interface to gather the data recovered from the `Message` instances pulled from the `Distribution Channel`. The received data is driven to the Azure services using configured out-of-band' protocol. An instance of the `IBindingFactory` is responsible to create objects implementing `IBinding` that can be used by the `Consumer` to forward the data retrieve from `NetworkMessag` received over the wire to Azure services.
+The `AzureGateway` functional package has been implemented based on the `Consumer` concept. This particular `Consumer` implements `IBindingFactory` interface to gather the data recovered from the `Message` instances pulled from the `Distribution Channel`. The received data is driven to the Azure services using configured out-of-band' protocol. An instance of the `IBindingFactory` is responsible to create objects implementing `IBinding` that can be used by the `Consumer` to forward the data retrieved from `NetworkMessag` received over the wire to Azure services.
 
-The proposed implementation of the Azure gateway proves that the `DataRepository` and associated entities, i.e. `Local Resources`, `Consumer`, `Producer` can be implemented as external parts, and consequently, the application scope may cover practically any concern that can be separated from the core application implementation.
+The proposed implementation of the Azure gateway proves that the `DataRepository` and associated entities, i.e. `Local Resources`, `Consumer`, `Producer` can be implemented as external parts, and consequently, the application scope may cover practically any concern that can be separated from the core PubSub communication engine implementation.
 
 ### `IConfigurationFactory` implementation
 
@@ -90,17 +90,13 @@ Please read CONTRIBUTING.md for details on our code of conduct, and the process 
 
 ## Versioning
 
-We use [Semantic Versioning 2.0.0](http://semver.org/) for versioning. For the versions available, see the \[releases\] page of the project.
+We use [Semantic Versioning 2.0.0](http://semver.org/) for versioning. For the versions available, see the [Releases](https://github.com/mpostol/OPC-UA-OOI/releases) page of the project.
 
 ## Authors
 
 - [Mariusz Postol](https://github.com/mpostol) - main contributor of this project.
 
-See also the list of contributors who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the \[LICENSE.md\] file for details
+See also the list of contributors who participated in this project and the `Acknowledgment` section.
 
 ## See also
 

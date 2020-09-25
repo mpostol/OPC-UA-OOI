@@ -126,7 +126,7 @@ The `SemanticData` folder contains projects related to support the [OOI Semantic
 - Data edition ֠UI allowing display and edition of any custom data
 - Data serialization and deserialization - see white-paper [Address Space Interchange XML][CAS.InterchangeXML]
 - Data prototyping - methods and tools to design custom data types
-- Exposition of the process data in the context of metadata [OPC UA Address Space Model Designer](http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx)
+- Exposition of the process data in the context of metadata [OPC UA Address Space Model Designer](https://github.com/mpostol/ASMD)
 - Browsing of the Metadata to selectively access requested Process Data
 - Modeling and representation of the metadata - detailed description is covered by the section [OPC UA Information Model Deployment](SemanticData/InformationModelsDevelopment.md)
 - Validation of the semantics and consistency of the metadata - see project [USNodeSetValidationUnitTestProject](./SemanticData/UANodeSetValidation/README.MD)
@@ -245,7 +245,7 @@ The presented approach is a real proposal for a new technology wave based on the
 [wordpress.OPCUAMTF]: https://mpostol.wordpress.com/2013/08/04/opc-unified-architecture-main-technological-features/
 [ASMD]:https://github.com/mpostol/ASMD
 [DDSupport]:SemanticData/DesignDeploymentSupport.md
-[CAS.InterchangeXML]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf
+[CAS.InterchangeXML]: https://www.researchgate.net/publication/334259707_OPC_UA_Address_Space_Interchange_XML
 [commserver]: http://www.commsvr.com/
 [migration2os]: https://github.com/commsvr-com/migration2os
 [migration2osProj]: https://github.com/orgs/commsvr-com/projects

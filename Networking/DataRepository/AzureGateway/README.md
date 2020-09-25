@@ -14,11 +14,11 @@ Azure, Cloud Computing, Object-Oriented Internet, OPC Unified Architecture, Reac
 
 ## Acknowledgment
 
-I would like to acknowledge the [CrossHMI](https://github.com/Drutol/CrossHMI#crosshmi) project from which the `AzureGateway` implementation of the `DataRepository` was derived. I would like to thank [Piotr Szymczak](https://github.com/Drutol) for their inputs/inspirations, feedback, and cooperation in this respect.
+I would like to acknowledge the [CrossHMI](https://github.com/Drutol/CrossHMI#crosshmi) project from which the `AzureGateway` implementation of the `DataRepository` was derived. I would like to thank [Piotr Szymczak](https://github.com/Drutol) for hir inputs/inspirations, feedback, and cooperation in this respect.
 
 ## Implementation walk through
 
-## Executive Summary
+### Executive Summary
 
 Here are steps undertook to implement the `Consumer` role in the application:
 

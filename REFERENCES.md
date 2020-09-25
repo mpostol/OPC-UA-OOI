@@ -66,15 +66,15 @@
 
 - [Mariusz Postol. OPC UA Information Model Deployment. 2016. Version 1.2][CAS.OPCUAIMD] [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2586616.svg)](https://doi.org/10.5281/zenodo.2586616)
 
-[CAS.OPCUAIMD]: http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/20140301E_DeploymentInformationModel.pdf
+[CAS.OPCUAIMD]: https://www.researchgate.net/publication/331565040_OPC_UA_INFORMATION_MODEL_DEPLOYMENT
 
-- [CAS OPC UA Address Space Model Designer, CommServer software family][CAS.ASMD]
+- [CAS OPC UA Address Space Model Designer][CAS.ASMD]
 
-[CAS.ASMD]: http://www.commsvr.com/Products/OPCUA/UAModelDesigner.aspx
+[CAS.ASMD]: https://github.com/mpostol/ASMD
 
 - [OPC Unified Architecture e-book, 2010][CAS.EBOOK]
 
-[CAS.EBOOK]:http://www.commsvr.com/UAModelDesigner/
+[CAS.EBOOK]:https://commsvr-com.github.io/Documentation/OPCUAebook/html/e34055b2-23e0-4f1a-9e00-52d75becaeec.htm
 
 ## ietf.org
 

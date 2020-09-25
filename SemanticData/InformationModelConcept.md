@@ -37,5 +37,5 @@ The Address Space concept based on types can be a foundation for exposing any in
 [ASASM]:AddressSpaceAddressSpaceModel.md
 [OPC.UA.Part5]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-5-information-model/
 [ASMLC]:InformationModelLifecycle.md
-[CAS.EBOOK]:http://www.commsvr.com/UAModelDesigner/
+[CAS.EBOOK]:https://commsvr-com.github.io/Documentation/ModelDesigner/html/a2d55988-b59a-4a87-95b9-933f6bbdf5bd.htm
 [3]:AdoptingCompanionStandardADI.md

@@ -81,4 +81,4 @@ Sessions are defined as logical connections between clients and servers. What is
 [SDPA]:SemanticData/README.MD
 [OPC.UA.Part5]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-5-information-model/
 [CAS.ASMD]: https://github.com/mpostol/ASMD
-[CAS.EBOOK]:http://www.commsvr.com/UAModelDesigner/
+[CAS.EBOOK]:https://commsvr-com.github.io/Documentation/ModelDesigner/html/a2d55988-b59a-4a87-95b9-933f6bbdf5bd.htm

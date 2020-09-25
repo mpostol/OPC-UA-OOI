@@ -18,7 +18,7 @@ The main challenge that must be faced up by engineering of data processing is th
 
 The description of the *OPC UA Information Model* is captured in details in in the:
 
-* [OPC Unified Architecture e-book](http://www.commsvr.com/UAModelDesigner/Index.aspx)
+* [OPC Unified Architecture e-book 2010](https://commsvr-com.github.io/Documentation/ModelDesigner/html/a2d55988-b59a-4a87-95b9-933f6bbdf5bd.htm)
 * [OPC UA Information Model Deployment](../SemanticData/InformationModelsDevelopment.md)
 
 ### OPC UA Sever

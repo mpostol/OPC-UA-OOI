@@ -10,7 +10,7 @@ This library project implements functionality of the `Address Space Management` 
 
 ## See also
 
-- [Address Space Interchange XML](http://www.commsvr.com/InternetDSL/commserver/P_DowloadCenter/P_Publications/P-150101E-AddressSpaceInterchangeXML.pdf)
+- [M.Postol, Address Space Interchange XML](https://www.researchgate.net/publication/334259707_OPC_UA_Address_Space_Interchange_XML); DOI: DOI: 10.13140/RG.2.2.12228.37768
 - [OPC Unified Architecture eBook](http://goo.gl/y4EHUn)
 
 [OPCFoundation/UA-ModelCompiler]:https://github.com/OPCFoundation/UA-ModelCompiler

@@ -14,7 +14,7 @@ Azure, Cloud Computing, Object-Oriented Internet, OPC Unified Architecture, Reac
 
 ## Acknowledgment
 
-I would like to acknowledge the [CrossHMI](https://github.com/Drutol/CrossHMI#crosshmi) project from which the `AzureGateway` implementation of the `DataRepository` was derived. I would like to thank [Piotr Szymczak](https://github.com/Drutol) for hir inputs/inspirations, feedback, and cooperation in this respect.
+I would like to acknowledge the [CrossHMI](https://github.com/Drutol/CrossHMI#crosshmi) project from which the `AzureGateway` implementation of the `DataRepository` was derived. I would like to thank [Piotr Szymczak](https://github.com/Drutol) for his inputs/inspirations, feedback, and cooperation in this respect.
 
 ## Implementation walk through
 
@@ -23,7 +23,7 @@ I would like to acknowledge the [CrossHMI](https://github.com/Drutol/CrossHMI#cr
 Here are steps undertook to implement the `Consumer` role in the application:
 
 1. `DataManagementSetup`: this class has been overridden by the `PartDataManagementSetup` class and it initializes the communication and binds data fields recovered form messages to local resources.
-1. `IEncodingFactory` and `IMessageHandlerFactory`: has been implemented in external common libraries and `Consumer` doesn't depend on this implementation - current implementation of the interfaces is localized as services using an instance of the `IServiceLocator` interface.
+1. `IEncodingFactory` and `IMessageHandlerFactory`: have been implemented in external common libraries and `Consumer` doesn't depend on this implementation - current implementation of the interfaces is localized as services using an instance of the `IServiceLocator` interface.
 1. `IBindingFactory`: has been implemented in the class  `PartBindingFactory` that is responsible to gather the data recovered from the `Message` instances pulled from the `Distribution Channel`. The received data is driven to the Azure services using configured out-of-band protocol.
 1. `IConfigurationFactory`: the class `PartConfigurationFactory` implements this interface to be used for the configuration file opening.
 
@@ -107,7 +107,7 @@ See also the list of contributors who participated in this project and the `Ackn
 - Mariusz Postol, [Machine to Machine Semantic-Data Based Communication: Comprehensive Survey](https://www.researchgate.net/publication/341165347_Machine_to_Machine_Semantic-Data_Based_Communication_Comprehensive_Survey) chapter in book [Computer Game Innovations 2018](https://www.researchgate.net/publication/335524620_Computer_Game_Innovations_2018), Publisher: Lodz University of Technology Press; ISBN: 978-83-7283-999-2
 - Mariusz Postol, [Object Oriented Internet](https://ieeexplore.ieee.org/abstract/document/7321562), [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp), 2015, [IEEE Xplore Digital Library](https://ieeexplore.ieee.org/abstract/document/7321562) [![DOI](https://img.shields.io/badge/DOI-10.15439%2F2015F160-blue)](https://fedcsis.org/proceedings/2015/pliks/160.pdf)
 - [Reactive HMI Android application example](https://github.com/Drutol/CrossHMI#crosshmi)
-- [Object Oriented Internet - online ebook][OOIBook]
+- [Object Oriented Internet - on-line ebook][OOIBook]
 - API Browser: the preliminary code help documentation - [available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 - [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]

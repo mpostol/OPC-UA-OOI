@@ -1,6 +1,6 @@
-﻿# ![Logo](https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true) Azure Gateway DataRepository Implementation 1.0
+﻿# ![Logo](https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true) Azure Gateway 1.0
 
-## Executive Summary
+## Code and Documentation
 
 This release comprises the following code and documentation changes:
 
@@ -18,22 +18,21 @@ This release comprises the following code and documentation changes:
 
 ## Packages and tools
 
+This release comprises the following packages and tools changes:
+
 ### Common
 
-* *Changes*: no changes
 * *NuGet packages*:
   * UAOOI.Common.Infrastructure 4.0.2
 * *Tools*: not published
 
 ### Configuration
 
-* *Changes*: no changes
 * *NuGet packages*: not published
 * *Tools*: not published
 
 ### Networking
 
-* *Changes*: Unimportant changes
 * *NuGet packages*:
   * UAOOI.Networking.Core 4.0.2
   * UAOOI.Networking.Encoding 4.0.2
@@ -43,8 +42,6 @@ This release comprises the following code and documentation changes:
 
 ### SemanticData
 
-* *Version*: **5.1.0**
-* *Changes*: No changes at all
 * *NuGet packages*: not published
 * *Tools*: not published
 

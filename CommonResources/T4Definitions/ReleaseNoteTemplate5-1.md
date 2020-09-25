@@ -2,7 +2,7 @@
 
 ## This release
 
-* [API Browser is available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
+* [API Browser is available for sponsors - consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 * [Object Oriented Internet eBook](https://commsvr.gitbook.io/ooi)
 
 * *This update comprises the following changes:*

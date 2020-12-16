@@ -84,7 +84,7 @@ namespace UAOOI.Networking.ReferenceApplication.UnitTest.MEF
         Assert.IsNotNull(_logger.ConfigurationFactory);
         Assert.IsNotNull(_logger.EncodingFactory);
         Assert.IsNotNull(_logger.MessageHandlerFactory);
-        SimulatorDataManagementSetup _simulator = _container.GetExportedValue<IProducerDataManagementSetup>() as SimulatorDataManagementSetup;
+        SimulatorDataManagementSetup _simulator = _container.GetExportedValue<IDataRepositoryStartup>() as SimulatorDataManagementSetup;
         Assert.IsNotNull(_simulator);
         Assert.IsNotNull(_simulator.BindingFactory);
         Assert.IsNotNull(_simulator.ConfigurationFactory);

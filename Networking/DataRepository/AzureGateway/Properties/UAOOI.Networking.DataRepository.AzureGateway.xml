@@ -265,10 +265,10 @@
             Class AzureGatewayDataManagementSetup - represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer
             This class cannot be inherited.
             Implements the <see cref="T:UAOOI.Networking.SemanticData.DataManagementSetup" />
-            Implements the <see cref="T:UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
+            Implements the <see cref="!:IProducerDataManagementSetup" />
             </summary>
             <seealso cref="T:UAOOI.Networking.SemanticData.DataManagementSetup" />
-            <seealso cref="T:UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
+            <seealso cref="!:IProducerDataManagementSetup" />
         </member>
         <member name="M:UAOOI.Networking.DataRepository.AzureGateway.PartDataManagementSetup.#ctor">
             <summary>

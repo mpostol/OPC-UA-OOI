@@ -72,10 +72,10 @@ namespace UAOOI.Networking.ReferenceApplication
         m_ConsumerConfigurationFactory.Setup();
         m_Components.Add(m_ConsumerConfigurationFactory);
         ReferenceApplicationEventSource.Log.PartCreated(nameof(LoggerManagementSetup));
-        IProducerDataManagementSetup m_Producer = Container.GetExportedValue<IProducerDataManagementSetup>();
+        IDataRepositoryStartup m_Producer = Container.GetExportedValue<IDataRepositoryStartup>();
         m_Producer.Setup();
         m_Components.Add(m_Producer);
-        ReferenceApplicationEventSource.Log.PartCreated(nameof(IProducerDataManagementSetup));
+        ReferenceApplicationEventSource.Log.PartCreated(nameof(IDataRepositoryStartup));
       }
       catch (Exception _ex)
       {

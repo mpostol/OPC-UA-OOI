@@ -9,7 +9,7 @@ using System;
 
 namespace UAOOI.Networking.ReferenceApplication.Core
 {
-  public interface IProducerDataManagementSetup: IDisposable
+  public interface IDataRepositoryStartup : IDisposable
   {
     void Setup();
   }

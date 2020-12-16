@@ -24,9 +24,9 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
   /// </summary>
   /// <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
   /// <seealso cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
-  [Export(typeof(IProducerDataManagementSetup))]
+  [Export(typeof(IDataRepositoryStartup))]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  public sealed class SimulatorDataManagementSetup : DataManagementSetup, IProducerDataManagementSetup
+  public sealed class SimulatorDataManagementSetup : DataManagementSetup, IDataRepositoryStartup
   {
     #region Composition
 

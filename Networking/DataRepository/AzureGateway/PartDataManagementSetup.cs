@@ -26,10 +26,8 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
   /// Class AzureGatewayDataManagementSetup - represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer
   /// This class cannot be inherited.
   /// Implements the <see cref="DataManagementSetup" />
-  /// Implements the <see cref="IProducerDataManagementSetup" />
   /// </summary>
   /// <seealso cref="DataManagementSetup" />
-  /// <seealso cref="IProducerDataManagementSetup" />
   [Export(typeof(PartDataManagementSetup))]
   [PartCreationPolicy(CreationPolicy.Shared)]
   public sealed class PartDataManagementSetup : DataManagementSetup

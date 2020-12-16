@@ -30,9 +30,9 @@ namespace UAOOI.Networking.DataRepository.AzureGateway
   /// </summary>
   /// <seealso cref="DataManagementSetup" />
   /// <seealso cref="IProducerDataManagementSetup" />
-  [Export(typeof(IDataRepositoryStartup))]
+  [Export(typeof(PartDataManagementSetup))]
   [PartCreationPolicy(CreationPolicy.Shared)]
-  public sealed class PartDataManagementSetup : DataManagementSetup, IDataRepositoryStartup
+  public sealed class PartDataManagementSetup : DataManagementSetup
   {
     #region Composition
 

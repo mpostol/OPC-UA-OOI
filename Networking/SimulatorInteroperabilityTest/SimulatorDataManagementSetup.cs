@@ -20,10 +20,10 @@ namespace UAOOI.Networking.SimulatorInteroperabilityTest
   /// Class SimulatorDataManagementSetup represents a data producer in the Reference Application. It is responsible to compose all parts making up a producer.
   /// This class cannot be inherited.
   /// Implements the <see cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
-  /// Implements the <see cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
+  /// Implements the <see cref="IDataRepositoryStartup" />
   /// </summary>
-  /// <seealso cref="UAOOI.Networking.SemanticData.DataManagementSetup" />
-  /// <seealso cref="UAOOI.Networking.ReferenceApplication.Core.IProducerDataManagementSetup" />
+  /// <seealso cref="DataManagementSetup" />
+  /// <seealso cref="IDataRepositoryStartup" />
   [Export(typeof(IDataRepositoryStartup))]
   [PartCreationPolicy(CreationPolicy.Shared)]
   public sealed class SimulatorDataManagementSetup : DataManagementSetup, IDataRepositoryStartup

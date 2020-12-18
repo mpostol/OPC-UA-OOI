@@ -1,4 +1,4 @@
-﻿# Azure Gateway DataRepository
+# Azure Gateway DataRepository
 
 ## Key words
 

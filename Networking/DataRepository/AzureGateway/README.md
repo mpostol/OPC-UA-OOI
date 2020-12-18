@@ -1,16 +1,22 @@
-﻿# Azure Gateway DataRepository Implementation
+﻿# Azure Gateway DataRepository
+
+## Key words
+
+Azure, Cloud Computing, Object-Oriented Internet, OPC Unified Architecture, Reactive Networking (RxNetworking), Machine to Machine Communication, Internet of Things
 
 ## Preface
 
-This project shows an example implementation of an OPC UA PubSub to Azure gateway. This gateway is implemented as a composable part of the Reactive Networking Application (`RxNetworking App`). The article  [Reactive Networking of Semantic-Data Library](../../../Networking/SemanticData/README.MD) covers a description of the architecture supporting the reactive communication design pattern.  The `RxNetworking App` is an aggregation of `Producer` and `Consumer` entities derived from `DataRepository`. They must provide interconnection to real-time process data, hence they are recognized as an extension of the `DataRepository` class. `AzureGateway` part fulfills the `Consumer` role and uses out-of-band communication to push process data to the cloud.
+This project shows an example implementation of an OPC UA PubSub to Azure embedded gateway. It is implemented as a composable part of the Reactive Networking Application (`RxNetworking App`). The article  [Reactive Networking of Semantic-Data Library](../../../Networking/SemanticData/README.MD) covers a description of the architecture supporting the reactive communication design pattern.  The `RxNetworking App` is an aggregation of `Producer` and `Consumer` entities derived from `DataRepository`. They must provide interconnection to real-time process data, hence they are recognized as an extension of the `DataRepository` class. `AzureGateway` part fulfills the `Consumer` role and uses out-of-band communication to push telemetry data to the cloud.
 
-Working through this tutorial gives you an introductory understanding of the steps required to implement the `Consumer` role of `OOI Reactive Application`. The `ReferenceApplication` is an example application of `Semantic-Data` reactive networking based on [OPC UA PubSub][OPC.UA.PubSub] specification. The document [OPC UA PubSub Main Technology Features][PubSubMTF] covers a description of selected fetuses relevant for this specification.
+Working through this tutorial gives you an introductory understanding of the steps required to implement the `Consumer` role of `OOI Reactive Application`. The `RxNetworking` is an example application of `Semantic-Data` reactive networking based on [OPC UA PubSub][OPC.UA.PubSub] specification. The document [OPC UA PubSub Main Technology Features][PubSubMTF] covers a description of selected fetuses relevant to this specification.
 
-It is proof of the concept that out-of-band communication for OPC UA PubSub can be implemented based on the `DataRepository` concept. This workout will be described in the article: [OOI/Azure Interoperability](https://it-p-lodz-pl.github.io/OOI.Gateway2Azure.Article/README.html).
+This project is proof of concept that out-of-band communication for OPC UA PubSub can be implemented based on the `DataRepository` concept. This workout will be described in an article. To get the full story and your copy check out the preprint from [Research Gateway: Object-Oriented Internet - Azure Interoperability](https://www.researchgate.net/publication/346563454_Object-Oriented_Internet_-_Azure_Interoperability). It is a preprint for early review. We will consider your contribution to be applied to the final version of the article.
 
-### Key words
+## Conclusion
 
-Azure, Cloud Computing, Object-Oriented Internet, OPC Unified Architecture, Reactive Networking (RxNetworking), Machine to Machine Communication, Internet of Things
+The obtained results prove that the **embedded gateway** archetype implementation is possible based on the existing standalone framework supporting reactive interoperability atop of the M2M communication compliant with the [OPC UA PubSub standard][OPC.UA.PubSub]. It is worth stressing that **there is no dependency on the Client/Server session-oriented relationship**. In contrast to the architecture described in the OPC UA Part 1 specification, the publisher/consumer roles are not tightly coupled with the **Address Space** of the OPC UA Server embedded component. In the proposed approach, the cloud interoperability is obtained by implementing a dedicated part employing out-of-band communication only without dependency on the OPC UA functionality. In contrast to the middleware concept, the gateway functionality is implemented as a part - **composable to the whole without programming skills**. It makes it possible to modify its functionality later after releasing the library or even deploying the application program in the production environment because the part is composed at the runtime.
+
+Concluding, the paper describes a proof of the concept that it is possible to integrate selected cloud services (e.g. **Azure**) with the **Cyber-physical network** interconnected as one whole atop of the OPC UA PubSub applying the proposed architecture and deployment scenario. It is in contrast to interconnecting cloud services with an **Address Space** exposed by a selected OPC UA server limiting the PubSub role to data exporter transferring the data out of the OPC UA ecosystem.
 
 ## Acknowledgment
 
@@ -23,7 +29,7 @@ I would like to acknowledge the [CrossHMI](https://github.com/Drutol/CrossHMI#cr
 Here are steps undertook to implement the `Consumer` role in the application:
 
 1. `DataManagementSetup`: this class has been overridden by the `PartDataManagementSetup` class and it initializes the communication and binds data fields recovered form messages to local resources.
-1. `IEncodingFactory` and `IMessageHandlerFactory`: have been implemented in external common libraries and `Consumer` doesn't depend on this implementation - current implementation of the interfaces is localized as services using an instance of the `IServiceLocator` interface.
+1. `IEncodingFactory` and `IMessageHandlerFactory`: have been implemented in external common libraries and `Consumer` doesn't depend on this implementation - current implementation of the interfaces is localized as services using an instance of the [CommonServiceLocator.IServiceLocator][Locator] interface.
 1. `IBindingFactory`: has been implemented in the class  `PartBindingFactory` that is responsible to gather the data recovered from the `Message` instances pulled from the `Distribution Channel`. The received data is driven to the Azure services using configured out-of-band protocol.
 1. `IConfigurationFactory`: the class `PartConfigurationFactory` implements this interface to be used for the configuration file opening.
 
@@ -33,7 +39,9 @@ The `PartDataManagementSetup` constructor initializes all properties, which are 
 
 ```C#
 
-  public sealed class PartDataManagementSetup : DataManagementSetup, IProducerDataManagementSetup
+  [Export(typeof(PartDataManagementSetup))]
+  [PartCreationPolicy(CreationPolicy.Shared)]
+  public sealed class PartDataManagementSetup : DataManagementSetup
   {
 
     public PartDataManagementSetup()
@@ -60,33 +68,29 @@ The `PartDataManagementSetup` constructor initializes all properties, which are 
 
 ```
 
-In this example, it is assumed that [`ServiceLocator`](https://www.nuget.org/packages/CommonServiceLocator) is implemented to resolve references to any external services.
+In this example, it is assumed that [IServiceLocator][Locator] is implemented to resolve references to any external services.
 
 Finally the `DataManagementSetup.Start()` method is called to initialize the infrastructure, enable all associations and start pumping the data.
 
 ### `IBindingFactory` implementation
 
-Implementation of this interface is a basic step to implement `Consumer` functionality. The `DataRepository` represents data holding assets in the `RxNetworking App` and, following the proposed architecture, the `IBindingFactory` interface is implemented by this external part. It captures functionality responsible for accessing the process data represented by the `LocalResources`. The `LocalResources` represents the external part that has a very broad usage purpose. For example, it may be any kind of process data source/destination, and to name a few `Raw Data`,  `OPC UA Address Space Management`, and `Azure` services in this case.
+Implementation of this interface is a basic step to implement `Consumer` functionality. The `DataRepository` represents data holding assets in the `RxNetworking App` and, following the proposed approach, the `IBindingFactory` interface is implemented by an external part. It captures functionality responsible for accessing the process data represented by the `LocalResources`. The `LocalResources` represents the external part that has a very broad usage purpose. For example, it may be any kind of process data source/destination, and to name a few `Raw Data`,  `OPC UA Address Space Management`, `Azure` cloud-based front-end, etc.
 
-The `AzureGateway` functional package has been implemented based on the `Consumer` concept. This particular `Consumer` implements `IBindingFactory` interface to gather the data recovered from the `Message` instances pulled from the `Distribution Channel`. The received data is driven to the Azure services using configured out-of-band' protocol. An instance of the `IBindingFactory` is responsible to create objects implementing `IBinding` that can be used by the `Consumer` to forward the data retrieved from `NetworkMessag` received over the wire to Azure services.
+The `AzureGateway` functional package has been implemented based on the `Consumer` concept. This particular `Consumer` (`PartBindingFactory`) implements the `IBindingFactory` interface to gather the data recovered from the `Message` instances pulled from the `Distribution Channel`. The received data is driven to the Azure services using configured out-of-band' protocol. An instance of the `IBindingFactory` is responsible to create objects implementing `IBinding` that can be used by the `Consumer` to forward the data retrieved from `NetworkMessag` received over the wire to Azure services.
 
-The proposed implementation of the Azure gateway proves that the `DataRepository` and associated entities, i.e. `Local Resources`, `Consumer`, `Producer` can be implemented as external parts, and consequently, the application scope may cover practically any concern that can be separated from the core PubSub communication engine implementation.
+The proposed implementation of the Azure gateway proves that the `DataRepository` and associated entities, i.e. `Local Resources`, `Consumer`, `Producer` can be implemented as external parts, and consequently, the application scope may cover practically any concern that can be separated from the core OPC UA PubSub communication engine implementation.
 
 ### `IConfigurationFactory` implementation
 
-Implementation of this interface is straightforward and based entirely on the library [`UAOOI.Configuration.Networking`](../../../Configuration/Networking/README.MD). In a typical scenario, this implementation should not be considered for further modification. The only open question is how to provide the name of the file containing the configuration of this role. This role uses independent configuration file:
+the library [`UAOOI.Configuration.Networking`](../../../Configuration/Networking/README.MD). In a typical scenario, this implementation should not be considered for further modification. The only open question is how to provide the name of the file containing the configuration of this role. This role uses an independent configuration file:
 
-- `ConfigurationDataConsumer.BoilersSet.xml` 
+- `ConfigurationDataConsumer.BoilersSet.xml`
 
 attached to the project.
 
 ## Current release
 
 > Note; This library is not considered to be published as the NuGet package.
-
-## Contributing
-
-Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
@@ -112,8 +116,10 @@ See also the list of contributors who participated in this project and the `Ackn
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 - [OPC Unified Architecture Specification Part 14: PubSub Release 1.04 February 06, 2018][OPC.UA.PubSub]
 - [OPC UA PubSub Main Technology Features][PubSubMTF]
+- [CommonServiceLocator NuGet package][Locator]
 
 [PubSubMTF]:../../../Networking/SemanticData/README.PubSubMTF.md
 [OPC.UA.PubSub]: https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-14-pubsub/
 [wordpress.OPCUACD]:https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible
 [OOIBook]:https://commsvr.gitbook.io/ooi/readme
+[Locator]:https://www.nuget.org/packages/CommonServiceLocator

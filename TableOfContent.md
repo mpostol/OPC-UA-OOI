@@ -44,7 +44,7 @@
 * [Getting Started Tutorial](Networking/SemanticData/READMEGettingStartedTutorial.md)
 * [Walk-through `ReferenceApplication`](Networking/ReferenceApplication/README.MD)
   * [`ReferenceApplication` Utilities](Networking/ReferenceApplication.Core/README.md)
-  * [ Azure Gateway DataRepository](Networking/DataRepository/AzureGateway/README.md)
+  * [Azure Gateway DataRepository](Networking/DataRepository/AzureGateway/README.md)
   * [`ReferenceApplication` Consumer - Data Logger](Networking/DataRepository/DataLogger/README.md)
   * [`ReferenceApplication` Producer - Interoperability Test Data Generator](Networking/SimulatorInteroperabilityTest/README.md)
   * [`ReferenceApplication` Producer - Boilers Set Simulator](Networking/Simulator.Boiler/README.md)

@@ -16,7 +16,8 @@ This project is proof of concept that out-of-band communication for OPC UA PubSu
 
 The obtained results prove that the **embedded gateway** archetype implementation is possible based on the existing standalone framework supporting reactive interoperability atop of the M2M communication compliant with the [OPC UA PubSub standard][OPC.UA.PubSub]. It is worth stressing that **there is no dependency on the Client/Server session-oriented relationship**. In contrast to the architecture described in the OPC UA Part 1 specification, the publisher/consumer roles are not tightly coupled with the **Address Space** of the OPC UA Server embedded component. In the proposed approach, the cloud interoperability is supported by a dedicated part employing out-of-band communication only without dependency on the OPC UA functionality. In contrast to the middleware concept, the gateway functionality is implemented as a part - **composable to the whole without programming skills**. It makes it possible to modify its functionality later after releasing the library or even deploying the application program in the production environment because the part is composed at the runtime.
 
-Concluding, the paper describes a proof of the concept that it is possible to integrate selected cloud services (e.g. **Azure**) with the **Cyber-physical network** interconnected as one whole atop of the OPC UA PubSub applying the proposed architecture and deployment scenario. It is in contrast to interconnecting cloud services with an **Address Space** exposed by a selected OPC UA server limiting the PubSub role to data exporter transferring the data out of the OPC UA ecosystem.
+Concluding, the paper describes a proof of concept that it is possible to integrate selected cloud services (e.g. **Azure**) with the **Cyber-physical network** atop of the OPC UA PubSub applying the proposed architecture and deployment scenario. In contrast to limiting the PubSub role to export the data from the **Address Space** exposed by a selected OPC UA server out of the OPC UA ecosystem, applying the proposed solution enables interoperability of the cloud services and  
+the **Cyber-physical network** as one whole.
 
 ## Acknowledgment
 
@@ -24,7 +25,7 @@ I would like to acknowledge the [CrossHMI](https://github.com/Drutol/CrossHMI#cr
 
 ## Implementation walk through
 
-### Executive Summary
+### Introduction
 
 Here are steps undertook to implement the `Consumer` role in the application:
 

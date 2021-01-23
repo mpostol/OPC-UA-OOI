@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -56,7 +56,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       bool _exportModel = false;
       if (!string.IsNullOrEmpty(options.ModelDesignFileName))
       {
-        _as.InformationModelFactory = _exporter.GetFactory(options.ModelDesignFileName, BuildErrorsHandling.Log.TraceEvent);  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space. 
+        _as.InformationModelFactory = _exporter.GetFactory(BuildErrorsHandling.Log.TraceEvent);  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space. 
         _exportModel = true;
       }
       if (options.Filenames == null)
@@ -73,7 +73,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       else
         _as.ValidateAndExportModel(options.IMNamespace); //Validates and exports the selected model.
       if (_exportModel)
-        _exporter.ExportToXMLFile(options.Stylesheet); //Serializes the already generated model and writes the XML document to a file.
+        _exporter.ExportToXMLFile(options.ModelDesignFileName, options.Stylesheet); //Serializes the already generated model and writes the XML document to a file.
     }
     private static void PrintLogo(Options options)
     {

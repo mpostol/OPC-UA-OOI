@@ -21,8 +21,8 @@
     <OutputType>Library</OutputType>
     <StartupObject />
     <Version>5.1.0</Version>
-    <AssemblyVersion>5.1.0</AssemblyVersion>
-    <FileVersion>5.1.0</FileVersion>
+    <AssemblyVersion>5.2.0</AssemblyVersion>
+    <FileVersion>5.2.0</FileVersion>
     <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
     <Title>Object-Oriented Internet Semantic-Data UAModelDesign Export</Title>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -45,12 +45,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommonServiceLocator" Version="2.0.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj" />
-    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
+    <PackageReference Include="UAOOI.SemanticData.BuildingErrorsHandling" Version="5.1.0" />
+    <PackageReference Include="UAOOI.SemanticData.InformationModelFactory" Version="5.1.0" />
   </ItemGroup>
 
   <ItemGroup>

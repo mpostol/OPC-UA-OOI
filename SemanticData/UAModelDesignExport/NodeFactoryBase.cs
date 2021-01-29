@@ -122,7 +122,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
 
     #region internal API
     /// <summary>
-    /// Exports an instance of <see cref="NodeDesign"/>.
+    /// Exports an instance of <see cref="XML.NodeDesign"/>.
     /// </summary>
     /// <param name="path">The path.</param>
     /// <param name="createInstanceType">Type of the create instance.</param>

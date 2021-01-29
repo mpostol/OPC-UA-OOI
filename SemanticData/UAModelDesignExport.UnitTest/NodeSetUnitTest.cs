@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -15,7 +15,7 @@ using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UAModelDesignExport.Instrumentation;
 using UAOOI.SemanticData.UAModelDesignExport.XML;
 
-namespace CAS.UA.Model.Designer.ImportExport.UT
+namespace UAOOI.SemanticData.UAModelDesignExport
 {
 
   [TestClass]

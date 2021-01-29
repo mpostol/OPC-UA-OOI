@@ -24,10 +24,10 @@ namespace UAOOI.SemanticData.UAModelDesignExport.XML
     /// <returns>An instance of <see cref="ModelDesign"/> representing  UA defined types</returns>
     public static ModelDesign LoadUADefinedTypes()
     {
-      return LoadResource<ModelDesign>(UADefinedTypesName());
+      return LoadResource<ModelDesign>(UADefinedTypesName);
     }
 
-    private static readonly Func<string> UADefinedTypesName = () => $"{typeof(UAResources).Namespace}.XML.UA Defined Types.xml";
+    private static string UADefinedTypesName => $"{typeof(UAResources).Namespace}.UA Defined Types.xml";
 
     /// <summary>
     /// Loads a schema from an embedded resource.

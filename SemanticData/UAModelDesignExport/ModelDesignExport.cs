@@ -37,7 +37,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// <param name="outputFilePtah">A relative or absolute path for the file containing the serialized object.</param>
     public void ExportToXMLFile(string outputFilePtah)
     {
-      ExportToXMLFile(string.Empty);
+      ExportToXMLFile(outputFilePtah, string.Empty);
     }
     /// <summary>
     ///  Serializes the already generated model using the interface <see cref="IModelFactory"/> and writes the XML document to a file.

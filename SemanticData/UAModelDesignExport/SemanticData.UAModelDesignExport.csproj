@@ -45,6 +45,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="XML\UA Defined Types.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="XML\UA Defined Types.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="UAOOI.SemanticData.BuildingErrorsHandling" Version="5.1.0" />
     <PackageReference Include="UAOOI.SemanticData.InformationModelFactory" Version="5.1.0" />
   </ItemGroup>

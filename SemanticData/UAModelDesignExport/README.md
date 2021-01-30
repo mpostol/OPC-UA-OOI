@@ -143,7 +143,15 @@ This library is available as the NuGet package `UAOOI.SemanticData.UAModelDesign
     - create a new or open existing solution
     - open the `UAModelDesign` as the existing project
 4. You are ready to modify the model according to your needs using [ASMD tool][CAS.ASMD]
-5. If done generate all required files using build functionality offered by the [ASMD tool][CAS.ASMD] 
+5. If done generate all required files using build functionality offered by the [ASMD tool][CAS.ASMD]
+
+## XML External resources
+
+- [Index of /UA/schemas/1.04](https://opcfoundation.org/UA/schemas/1.04/)
+- [UAModelDesignExport](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticData/UAModelDesignExport)
+- [UA-ModelCompiler](https://github.com/OPCFoundation/UA-ModelCompiler)
+
+# TODO
 
 ## See also
 

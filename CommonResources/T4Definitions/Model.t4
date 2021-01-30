@@ -38,8 +38,8 @@ string SemanticDataUANodeSetValidationVersion = "5.1.0";
 string SemanticDataUANodeSetValidationPrerelease = "";
 
 //UAOOI.SemanticData.UAModelDesignExport
-string SemanticDataUAModelDesignExportVersion = "5.2.0";
-string SemanticDataUAModelDesignExportPrerelease = "-Alpha";
+string SemanticDataUAModelDesignExportVersion = "5.2.3";
+string SemanticDataUAModelDesignExportPrerelease = "-Charlie";
 
 //UAOOI.Configuration
 string ConfigurationVersion = "4.0.1";

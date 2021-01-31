@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>UAOOI.SemanticData.UAModelDesignExport</id>
-    <version>5.2.0-Alpha</version>
+    <version>5.2.3-Charlie</version>
     <title>Semantic-Data UAModelDesign Export</title>
     <authors>Mariusz Postol</authors>
     <owners>Mariusz Postol</owners>
@@ -24,11 +24,12 @@
     <dependencies>
       <group targetFramework=".NETStandard2.0">
         <dependency id="UAOOI.SemanticData.BuildingErrorsHandling" version="5.1.0" exclude="Build,Analyzers" />
+        <dependency id="UAOOI.SemanticData.InformationModelFactory" version="5.1.0" exclude="Build,Analyzers" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\CommonResources\Media\Logo64.PNG" target=""/>
+    <file src="..\..\..\CommonResources\Media\Logo64.PNG" target=""/>
     <file src="..\bin\Release\netstandard2.0\UAOOI.SemanticData.UAModelDesignExport.dll" target="lib\netstandard2.0\UAOOI.SemanticData.UAModelDesignExport.dll" />
   </files>
 </package>

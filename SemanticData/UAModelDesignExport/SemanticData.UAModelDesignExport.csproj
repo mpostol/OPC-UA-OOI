@@ -6,7 +6,7 @@
     <RootNamespace>UAOOI.SemanticData.UAModelDesignExport</RootNamespace>
     <Description>This library provides implementation o f the export an XML file compliant with the UAModelDeign schema. By design The UAModelDeign schema describes the structure of an XML document representing the OPC UA Information Model that is used as the input for the [`UA-ModelCompiler`](https://github.com/OPCFoundation/UA-ModelCompiler).</Description>
     <RepositoryType>GitHub</RepositoryType>
-    <Copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</Copyright>
+    <Copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</Copyright>
     <Authors>Mariusz Postol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
@@ -20,9 +20,9 @@
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
-    <Version>5.1.0</Version>
-    <AssemblyVersion>5.2.0</AssemblyVersion>
-    <FileVersion>5.2.0</FileVersion>
+    <Version>5.2.3</Version>
+    <AssemblyVersion>5.2.3</AssemblyVersion>
+    <FileVersion>5.2.3</FileVersion>
     <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
     <Title>Object-Oriented Internet Semantic-Data UAModelDesign Export</Title>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>

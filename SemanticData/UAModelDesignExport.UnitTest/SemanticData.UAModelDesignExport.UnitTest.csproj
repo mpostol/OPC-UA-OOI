@@ -76,6 +76,7 @@
     <Compile Include="ModelDesignUnitTest.cs" />
     <Compile Include="ModelFactoryUnitTest.cs" />
     <None Include="packages.config" />
+    <None Include="UAResourcesUnitTestUnitTest.cs.md" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">

@@ -81,8 +81,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
-    <Compile Include="UANodeSetWithErrorsUnitTest.cs" />
-    <Compile Include="UANodeSetUnitTest.cs" />
     <Compile Include="UAModelContextUnitTest.cs" />
     <Compile Include="ResourcesUnitTest.cs" />
     <Compile Include="AddressSpaceContextUnitTest.cs" />
@@ -97,6 +95,8 @@
       <Visible>False</Visible>
     </AdditionalFiles>
     <Compile Include="UANodeContextUnitTest.cs" />
+    <Compile Include="XMLModelsCorrectModelsUnitTest.cs" />
+    <Compile Include="XMLModelsModelsWithErrorsUnitTest.cs" />
     <Compile Include="XMLUANodeUnitTest.cs" />
     <Compile Include="XML\UANodeSetUnitTest.cs" />
     <None Include="app.config" />
@@ -111,6 +111,7 @@
     <None Include="XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.Classes.cs" />
     <None Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.Classes.cs" />
+    <None Include="XMLModels\ProblemsToReport\MachineVision\UAModelDesignerSolution.uamdsl" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="XMLModels\CorrectModels\DataTypeTest.xml" />
@@ -135,6 +136,11 @@
     <Content Include="XMLModels\ModelsWithErrors\UndefinedHasTypeDefinition.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="XMLModels\ProblemsToReport\ADI#509\Opc.Ua.Adi.NodeSet2.xml" />
+    <Content Include="XMLModels\ProblemsToReport\eoursel510\Opc.Ua.NodeSet2.TriCycleType_V1.1.xml" />
+    <Content Include="XMLModels\ProblemsToReport\fgolra177\Opc.Ua.Semi.NodeSet2.xml" />
+    <Content Include="XMLModels\ProblemsToReport\fgolra177\OpcUaGemModel.xml" />
+    <Content Include="XMLModels\ProblemsToReport\MachineVision\Opc.Ua.MachineVision.ModelDesign.xml" />
     <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -148,9 +154,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.PredefinedNodes.xml" />
-    <None Include="XMLModels\ModelsWithErrors\DeploymentTest.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="XMLModels\ModelsWithErrors\DuplicatedNodeId.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -230,9 +233,7 @@
       <Name>SemanticData.UANodeSetValidation</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="XMLModels\ProblemsToReport\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
     <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />

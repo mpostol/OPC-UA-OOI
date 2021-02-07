@@ -1,12 +1,16 @@
-﻿
+﻿//___________________________________________________________________________________
+//
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
+//___________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using UAOOI.SemanticData.UANodeSetValidation;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
-
   [TestClass]
   [DeploymentItem(@"XMLModels\", @"XMLModels\")]
   public class ResourcesUnitTest
@@ -20,6 +24,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       UANodeSet _model = UANodeSet.ReadModelFile(_testDataFileInfo);
       Assert.IsNotNull(_model);
     }
+
     [TestMethod]
     [TestCategory("Code")]
     public void ReadUADefinedTypesTestMethod()
@@ -28,6 +33,5 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.IsNotNull(_standard);
       Assert.IsNull(_standard.NamespaceUris);
     }
-
   }
 }

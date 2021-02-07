@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -15,19 +15,18 @@ using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
-
   [TestClass]
-  [DeploymentItem(@"XMLModels\", @"XMLModels\")]
-  public class NodeSetUnitTest
+  [DeploymentItem(@"XMLModels\CorrectModels", @"CorrectModels\")]
+  public class XMLModelsCorrectModelsUnitTest
   {
-
     #region TestMethod
+
     [TestMethod]
     [TestCategory("Deployment")]
     [ExpectedExceptionAttribute(typeof(System.InvalidOperationException))]
     public void WrongFileNFormatTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml");  //File not compliant with the schema.
+      FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml");  //File not compliant with the schema.
       Assert.IsTrue(_testDataFileInfo.Exists);
       List<TraceMessage> _trace = new List<TraceMessage>();
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace));
@@ -35,56 +34,63 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       _as.ImportUANodeSet(_testDataFileInfo);
     }
+
     [TestMethod]
     [TestCategory("Correct Model")]
     public void UAReferenceTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml");
+      FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
       List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 1);
       Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
       Assert.AreEqual<int>(1, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
     }
+
     [TestMethod]
     [TestCategory("Correct Model")]
     public void UAObjectTypeTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\ObjectTypeTest\ObjectTypeTest.NodeSet2.xml");
+      FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\ObjectTypeTest\ObjectTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
       List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 85);
       Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
       Assert.AreEqual<int>(3, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
       Assert.AreEqual<int>(1, _nodes.Where<IUANodeContext>(x => x.NodeIdContext == new DataSerialization.NodeId(413, 1)).Count<IUANodeContext>());
     }
+
     [TestMethod]
     [TestCategory("Correct Model")]
     public void UAVariableTypeTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\VariableTypeTest\VariableTypeTest.NodeSet2.xml");
+      FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\VariableTypeTest\VariableTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
       List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 5);
       Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
       Assert.AreEqual<int>(3, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
     }
+
     [TestMethod]
     [TestCategory("Correct Model")]
     public void UADataTypeTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\DataTypeTest\DataTypeTest.NodeSet2.xml");
+      FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\DataTypeTest\DataTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
       List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 18);
       Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
       Assert.AreEqual<int>(4, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
     }
-    #endregion
+
+    #endregion TestMethod
 
     #region private
+
     private void TraceDiagnostic(TraceMessage msg, List<TraceMessage> errors)
     {
       Console.WriteLine(msg.ToString());
       if (msg.BuildError.Focus != Focus.Diagnostic)
         errors.Add(msg);
     }
+
     private List<IUANodeContext> ValidateAndExportModelUnitTest(FileInfo testDataFileInfo, int numberOfNodes)
     {
       List<TraceMessage> _trace = new List<TraceMessage>();
@@ -101,7 +107,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<int>(0, _trace.Count);
       return _nodes.ToList<IUANodeContext>();
     }
-    #endregion
 
+    #endregion private
   }
 }

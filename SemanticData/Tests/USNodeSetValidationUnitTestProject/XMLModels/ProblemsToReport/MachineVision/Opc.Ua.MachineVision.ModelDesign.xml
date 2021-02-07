@@ -1,0 +1,2940 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModelDesign xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" TargetNamespace="http://opcfoundation.org/UA/MachineVision" TargetVersion="" TargetPublicationDate="2020-08-16T00:00:00+02:00" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+  <Namespaces>
+    <Namespace Name="Name0" Prefix="Prefix0" InternalPrefix="http://opcfoundation.org/UA/" XmlNamespace="http://opcfoundation.org/UA/" XmlPrefix="Prefix1" FilePath="" Version="1.0" PublicationDate="16/08/2020">http://opcfoundation.org/UA/</Namespace>
+    <Namespace Name="Name2" Prefix="Prefix2" InternalPrefix="http://opcfoundation.org/UA/MachineVision" XmlNamespace="http://opcfoundation.org/UA/MachineVision" XmlPrefix="Prefix3" FilePath="" Version="1.0" PublicationDate="16/08/2020">http://opcfoundation.org/UA/MachineVision</Namespace>
+  </Namespaces>
+  <DataType xmlns:q1="http://opcfoundation.org/UA/MachineVision" SymbolicName="q1:SystemStateDataType" xmlns:q2="http://opcfoundation.org/UA/" BaseType="q2:Enumeration">
+    <ClassName />
+    <Fields>
+      <Field Name="PRD_1" Identifier="1" BitMask="" ArrayDimensions="">
+        <Description>Production: The vision system is currently working on a job.</Description>
+      </Field>
+      <Field Name="SBY_2" Identifier="2" BitMask="" ArrayDimensions="">
+        <Description>Stand by: The vision system is ready to accept a command but is currently not executing a job. It could for example be waiting for a Start command or a user input.</Description>
+      </Field>
+      <Field Name="ENG_3" Identifier="3" BitMask="" ArrayDimensions="">
+        <Description>Engineering: The vision system is not working and not ready to accept a command because a user is currently working on the system.  This could be for editing a recipe or changing the system configuration.</Description>
+      </Field>
+      <Field Name="SDT_4" Identifier="4" BitMask="" ArrayDimensions="">
+        <Description>Scheduled downtime: The vision system is not available for production and this was planned in advance. This could be for cleaning, maintenance or calibration works.</Description>
+      </Field>
+      <Field Name="UDT_5" Identifier="5" BitMask="" ArrayDimensions="">
+        <Description>Unscheduled downtime: The vision system is not available for production due to failure and repair. This covers all kinds of error states that might occur during operation.</Description>
+      </Field>
+      <Field Name="NST_6" Identifier="6" BitMask="" ArrayDimensions="">
+        <Description>Nonscheduled time: The vision system is not working because no production was scheduled. This also covers things like operator training on the system.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q3="http://opcfoundation.org/UA/MachineVision" SymbolicName="q3:TriStateBooleanDataType" xmlns:q4="http://opcfoundation.org/UA/" BaseType="q4:Enumeration">
+    <ClassName />
+    <Fields>
+      <Field Name="FALSE_0" Identifier="0" BitMask="" ArrayDimensions="">
+        <Description>The filtering function shall look for entities where the filtered value is FALSE.</Description>
+      </Field>
+      <Field Name="TRUE_1" Identifier="1" BitMask="" ArrayDimensions="">
+        <Description>The filtering function shall look for entities where the filtered value is TRUE.</Description>
+      </Field>
+      <Field Name="DONTCARE_2" Identifier="2" BitMask="" ArrayDimensions="">
+        <Description>The filtering function shall not take the value into account.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q5="http://opcfoundation.org/UA/MachineVision" SymbolicName="q5:ResultStateDataType" xmlns:q6="http://opcfoundation.org/UA/" BaseType="q6:Int32">
+    <ClassName />
+    <Fields />
+  </DataType>
+  <DataType xmlns:q7="http://opcfoundation.org/UA/MachineVision" SymbolicName="q7:Handle" xmlns:q8="http://opcfoundation.org/UA/" BaseType="q8:UInt32">
+    <ClassName />
+    <Fields />
+  </DataType>
+  <DataType xmlns:q9="http://opcfoundation.org/UA/MachineVision" SymbolicName="q9:TrimmedString" xmlns:q10="http://opcfoundation.org/UA/" BaseType="q10:String">
+    <ClassName />
+    <Fields />
+  </DataType>
+  <DataType xmlns:q11="http://opcfoundation.org/UA/MachineVision" SymbolicName="q11:BinaryIdBaseDataType" xmlns:q12="http://opcfoundation.org/UA/" BaseType="q12:Structure" IsAbstract="true">
+    <References>
+      <Reference>
+        <ReferenceType>q12:HasEncoding</ReferenceType>
+        <TargetId>q11:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q12:HasEncoding</ReferenceType>
+        <TargetId>q11:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="Id" BitMask="" DataType="q11:TrimmedString" ArrayDimensions="">
+        <Description>Id is a system-wide unique name for identifying the recipe.</Description>
+      </Field>
+      <Field Name="Version" BitMask="" DataType="q11:TrimmedString" ArrayDimensions="">
+        <Description>Represents an optional version number of the identified recipe. It is recommended to be of the format Major.minor.patch.build or a subset thereof, but the actual format is implementation defined.</Description>
+      </Field>
+      <Field Name="Hash" BitMask="" DataType="q12:ByteString" ArrayDimensions="">
+        <Description>Represents an optional hash of the binary content of the actual recipe (as it would be transmitted by the transfer methods).
+The hash is supposed to be provided by the environment if existing. The environment shall use the same hash function on all recipes so that a difference in the hash indicates a difference in the recipe. It is recommended to use the SHA-256 algorithm for computing the hash, however, the actual algorithm is implementation-defined.</Description>
+      </Field>
+      <Field Name="HashAlgorithm" BitMask="" DataType="q12:String" ArrayDimensions="">
+        <Description>Name of the hash function used. Required if internally and externally computed hashes are to be compared.</Description>
+      </Field>
+      <Field Name="Description" BitMask="" DataType="q12:LocalizedText" ArrayDimensions="">
+        <Description>Optional short human readable description of the configuration.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q13="http://opcfoundation.org/UA/MachineVision" SymbolicName="q13:ConfigurationIdDataType" BaseType="q13:BinaryIdBaseDataType">
+    <References>
+      <Reference>
+        <ReferenceType xmlns:q14="http://opcfoundation.org/UA/">q14:HasEncoding</ReferenceType>
+        <TargetId>q13:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType xmlns:q15="http://opcfoundation.org/UA/">q15:HasEncoding</ReferenceType>
+        <TargetId>q13:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields />
+  </DataType>
+  <DataType xmlns:q16="http://opcfoundation.org/UA/MachineVision" SymbolicName="q16:RecipeIdExternalDataType" BaseType="q16:BinaryIdBaseDataType">
+    <References>
+      <Reference>
+        <ReferenceType xmlns:q17="http://opcfoundation.org/UA/">q17:HasEncoding</ReferenceType>
+        <TargetId>q16:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType xmlns:q18="http://opcfoundation.org/UA/">q18:HasEncoding</ReferenceType>
+        <TargetId>q16:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields />
+  </DataType>
+  <DataType xmlns:q19="http://opcfoundation.org/UA/MachineVision" SymbolicName="q19:RecipeIdInternalDataType" BaseType="q19:BinaryIdBaseDataType">
+    <References>
+      <Reference>
+        <ReferenceType xmlns:q20="http://opcfoundation.org/UA/">q20:HasEncoding</ReferenceType>
+        <TargetId>q19:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType xmlns:q21="http://opcfoundation.org/UA/">q21:HasEncoding</ReferenceType>
+        <TargetId>q19:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields />
+  </DataType>
+  <DataType xmlns:q22="http://opcfoundation.org/UA/MachineVision" SymbolicName="q22:ConfigurationDataType" xmlns:q23="http://opcfoundation.org/UA/" BaseType="q23:Structure">
+    <References>
+      <Reference>
+        <ReferenceType>q23:HasEncoding</ReferenceType>
+        <TargetId>q22:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q23:HasEncoding</ReferenceType>
+        <TargetId>q22:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="HasTransferableDataOnFile" BitMask="" DataType="q23:Boolean" ArrayDimensions="">
+        <Description>Indicates that actual content of the configuration may be transferred through temporary file transfer method.</Description>
+      </Field>
+      <Field Name="ExternalId" BitMask="" DataType="q22:ConfigurationIdDataType" ArrayDimensions="">
+        <Description>Identification of the configuration used by the environment. This argument must not be empty.</Description>
+      </Field>
+      <Field Name="InternalId" BitMask="" DataType="q22:ConfigurationIdDataType" ArrayDimensions="">
+        <Description>System-wide unique ID for identifying a configuration. This ID is assigned by the vision system.</Description>
+      </Field>
+      <Field Name="LastModified" BitMask="" DataType="q23:UtcTime" ArrayDimensions="">
+        <Description>The time and date when this configuration was last modified.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q24="http://opcfoundation.org/UA/MachineVision" SymbolicName="q24:ConfigurationTransferOptions" xmlns:q25="http://opcfoundation.org/UA/" BaseType="q25:Structure">
+    <References>
+      <Reference>
+        <ReferenceType>q25:HasEncoding</ReferenceType>
+        <TargetId>q24:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q25:HasEncoding</ReferenceType>
+        <TargetId>q24:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="InternalId" BitMask="" DataType="q24:ConfigurationIdDataType" ArrayDimensions="">
+        <Description>The Id of the configuration to be transferred to or from the client.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q26="http://opcfoundation.org/UA/MachineVision" SymbolicName="q26:JobIdDataType" xmlns:q27="http://opcfoundation.org/UA/" BaseType="q27:Structure">
+    <References>
+      <Reference>
+        <ReferenceType>q27:HasEncoding</ReferenceType>
+        <TargetId>q26:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q27:HasEncoding</ReferenceType>
+        <TargetId>q26:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="Id" BitMask="" DataType="q26:TrimmedString" ArrayDimensions="">
+        <Description>Id is a system-wide unique identifier/name for identifying the job carried out.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q28="http://opcfoundation.org/UA/MachineVision" SymbolicName="q28:MeasIdDataType" xmlns:q29="http://opcfoundation.org/UA/" BaseType="q29:Structure">
+    <References>
+      <Reference>
+        <ReferenceType>q29:HasEncoding</ReferenceType>
+        <TargetId>q28:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q29:HasEncoding</ReferenceType>
+        <TargetId>q28:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="Id" BitMask="" DataType="q28:TrimmedString" ArrayDimensions="">
+        <Description>Id is an identifier/name for identifying the measurement operation. This identifier is passed by the client to the vision system so no assumptions can be made about its uniqueness or other properties.</Description>
+      </Field>
+      <Field Name="Description" BitMask="" DataType="q29:LocalizedText" ArrayDimensions="">
+        <Description>Optional short human readable description of the measurement.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q30="http://opcfoundation.org/UA/MachineVision" SymbolicName="q30:PartIdDataType" xmlns:q31="http://opcfoundation.org/UA/" BaseType="q31:Structure">
+    <References>
+      <Reference>
+        <ReferenceType>q31:HasEncoding</ReferenceType>
+        <TargetId>q30:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q31:HasEncoding</ReferenceType>
+        <TargetId>q30:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="Id" BitMask="" DataType="q30:TrimmedString" ArrayDimensions="">
+        <Description>Describes the connection between a unit under test and a result, which was created during the processing of a recipe applied on this unit under test. Usually passed by the client with a Start method call and not changed by the server.</Description>
+      </Field>
+      <Field Name="Description" BitMask="" DataType="q31:LocalizedText" ArrayDimensions="">
+        <Description>Optional short human readable description of the part.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q32="http://opcfoundation.org/UA/MachineVision" SymbolicName="q32:ProcessingTimesDataType" xmlns:q33="http://opcfoundation.org/UA/" BaseType="q33:Structure">
+    <References>
+      <Reference>
+        <ReferenceType>q33:HasEncoding</ReferenceType>
+        <TargetId>q32:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q33:HasEncoding</ReferenceType>
+        <TargetId>q32:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="StartTime" BitMask="" DataType="q33:UtcTime" ArrayDimensions="">
+        <Description>Contains the time when the vision system started execution of the recipe.</Description>
+      </Field>
+      <Field Name="EndTime" BitMask="" DataType="q33:UtcTime" ArrayDimensions="">
+        <Description>Contains the time when the vision system finished (or stopped/aborted) execution of the recipe.</Description>
+      </Field>
+      <Field Name="AcquisitionDuration" BitMask="" DataType="q33:Duration" ArrayDimensions="">
+        <Description>Time spent by the vision system acquiring images.</Description>
+      </Field>
+      <Field Name="ProcessingDuration" BitMask="" DataType="q33:Duration" ArrayDimensions="">
+        <Description>Time spent by the vision system processing data.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q34="http://opcfoundation.org/UA/MachineVision" SymbolicName="q34:ProductDataType" xmlns:q35="http://opcfoundation.org/UA/" BaseType="q35:Structure">
+    <References>
+      <Reference>
+        <ReferenceType>q35:HasEncoding</ReferenceType>
+        <TargetId>q34:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q35:HasEncoding</ReferenceType>
+        <TargetId>q34:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="ExternalId" BitMask="" DataType="q34:ProductIdDataType" ArrayDimensions="">
+        <Description>Identification of the product used by the environment. This argument must not be empty.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q36="http://opcfoundation.org/UA/MachineVision" SymbolicName="q36:ProductIdDataType" xmlns:q37="http://opcfoundation.org/UA/" BaseType="q37:Structure">
+    <References>
+      <Reference>
+        <ReferenceType>q37:HasEncoding</ReferenceType>
+        <TargetId>q36:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q37:HasEncoding</ReferenceType>
+        <TargetId>q36:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="Id" BitMask="" DataType="q36:TrimmedString" ArrayDimensions="">
+        <Description>Id is a system-wide unique identifier/name for identifying the product.</Description>
+      </Field>
+      <Field Name="Description" BitMask="" DataType="q37:LocalizedText" ArrayDimensions="">
+        <Description>Optional short human readable description of the configuration</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q38="http://opcfoundation.org/UA/MachineVision" SymbolicName="q38:RecipeTransferOptions" xmlns:q39="http://opcfoundation.org/UA/" BaseType="q39:Structure">
+    <References>
+      <Reference>
+        <ReferenceType>q39:HasEncoding</ReferenceType>
+        <TargetId>q38:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q39:HasEncoding</ReferenceType>
+        <TargetId>q38:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="InternalId" BitMask="" DataType="q38:RecipeIdInternalDataType" ArrayDimensions="">
+        <Description>The InternalId of the recipe to be transferred to or from the client.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q40="http://opcfoundation.org/UA/MachineVision" SymbolicName="q40:ResultDataType" xmlns:q41="http://opcfoundation.org/UA/" BaseType="q41:Structure">
+    <References>
+      <Reference>
+        <ReferenceType>q41:HasEncoding</ReferenceType>
+        <TargetId>q40:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q41:HasEncoding</ReferenceType>
+        <TargetId>q40:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="ResultId" BitMask="" DataType="q40:ResultIdDataType" ArrayDimensions="">
+        <Description>System-wide unique identifier, which is assigned by the system. This ID can be used for fetching exactly this result using the pertinent result management methods and it is identical to the ResultId of the ResultReadyEventType.</Description>
+      </Field>
+      <Field Name="HasTransferableDataOnFile" BitMask="" DataType="q41:Boolean" ArrayDimensions="">
+        <Description>Indicates that additional data for this result can be retrieved by temporary file transfer.</Description>
+      </Field>
+      <Field Name="IsPartial" BitMask="" DataType="q41:Boolean" ArrayDimensions="">
+        <Description>Indicates whether the result is the partial result of a total result.</Description>
+      </Field>
+      <Field Name="IsSimulated" BitMask="" DataType="q41:Boolean" ArrayDimensions="">
+        <Description>Indicates whether the system was in simulation mode when the result was created.</Description>
+      </Field>
+      <Field Name="ResultState" BitMask="" DataType="q40:ResultStateDataType" ArrayDimensions="">
+        <Description>ResultState provides information about the current state of a result and the ResultStateDataType is defined in Section 12.18.</Description>
+      </Field>
+      <Field Name="MeasId" BitMask="" DataType="q40:MeasIdDataType" ArrayDimensions="">
+        <Description>This identifier is given by the client when starting a single job or continuous execution and transmitted to the vision system. It is used to identify the respective result data generated for this job. Although the system-wide unique JobId would be sufficient to identify the job which the result belongs to, this makes for easier filtering on the part of the client without keeping track of JobIds.</Description>
+      </Field>
+      <Field Name="PartId" BitMask="" DataType="q40:PartIdDataType" ArrayDimensions="">
+        <Description>A PartId is given by the client when starting the job; although the system-wide unique JobId would be sufficient to identify the job which the result belongs to, this makes for easier filtering on the part of the client without keeping track of JobIds.</Description>
+      </Field>
+      <Field Name="ExternalRecipeId" BitMask="" DataType="q40:RecipeIdExternalDataType" ArrayDimensions="">
+        <Description>External Id of the recipe in use which produced the result. The ExternalID is only managed by the environment.</Description>
+      </Field>
+      <Field Name="InternalRecipeId" BitMask="" DataType="q40:RecipeIdInternalDataType" ArrayDimensions="">
+        <Description>Internal Id of the recipe in use which produced the result. This ID is system-wide unique and is assigned by the vision system.</Description>
+      </Field>
+      <Field Name="ProductId" BitMask="" DataType="q40:ProductIdDataType" ArrayDimensions="">
+        <Description>productId which was used to trigger the job which created the result.</Description>
+      </Field>
+      <Field Name="ExternalConfigurationId" BitMask="" DataType="q40:ConfigurationIdDataType" ArrayDimensions="">
+        <Description>External Id of the configuration in use which produced the result. The ExternalID is only managed by the environment.</Description>
+      </Field>
+      <Field Name="InternalConfigurationId" BitMask="" DataType="q40:ConfigurationIdDataType" ArrayDimensions="">
+        <Description>Internal Id of the configuration in use which produced the result. This ID is system-wide unique and is assigned by the vision system.</Description>
+      </Field>
+      <Field Name="JobId" BitMask="" DataType="q40:JobIdDataType" ArrayDimensions="">
+        <Description>The ID of the job, created by the transition from state Ready to state SingleExecution or to state ContinuousExecution which produced the result.</Description>
+      </Field>
+      <Field Name="CreationTime" BitMask="" DataType="q41:UtcTime" ArrayDimensions="">
+        <Description>CreationTime indicates the time when the result was created. </Description>
+      </Field>
+      <Field Name="ProcessingTimes" BitMask="" DataType="q40:ProcessingTimesDataType" ArrayDimensions="">
+        <Description>Collection of different processing times that were needed to create the result.</Description>
+      </Field>
+      <Field Name="ResultContent" BitMask="" ValueRank="Array" ArrayDimensions="1">
+        <Description>Abstract data type to be subtyped from to hold result data created by the selected recipe.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q42="http://opcfoundation.org/UA/MachineVision" SymbolicName="q42:ResultIdDataType" xmlns:q43="http://opcfoundation.org/UA/" BaseType="q43:Structure">
+    <References>
+      <Reference>
+        <ReferenceType>q43:HasEncoding</ReferenceType>
+        <TargetId>q42:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q43:HasEncoding</ReferenceType>
+        <TargetId>q42:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="Id" BitMask="" DataType="q42:TrimmedString" ArrayDimensions="">
+        <Description>Id is a system-wide unique identifier/name for identifying the generated result.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q44="http://opcfoundation.org/UA/MachineVision" SymbolicName="q44:ResultTransferOptions" xmlns:q45="http://opcfoundation.org/UA/" BaseType="q45:Structure">
+    <References>
+      <Reference>
+        <ReferenceType>q45:HasEncoding</ReferenceType>
+        <TargetId>q44:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q45:HasEncoding</ReferenceType>
+        <TargetId>q44:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="Id" BitMask="" DataType="q44:ResultIdDataType" ArrayDimensions="">
+        <Description>The Id of the result to be transferred to the client.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <DataType xmlns:q46="http://opcfoundation.org/UA/MachineVision" SymbolicName="q46:SystemStateDescriptionDataType" xmlns:q47="http://opcfoundation.org/UA/" BaseType="q47:Structure">
+    <References>
+      <Reference>
+        <ReferenceType>q47:HasEncoding</ReferenceType>
+        <TargetId>q46:DefaultBinary</TargetId>
+      </Reference>
+      <Reference>
+        <ReferenceType>q47:HasEncoding</ReferenceType>
+        <TargetId>q46:DefaultXml</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+    <Fields>
+      <Field Name="State" BitMask="" DataType="q46:SystemStateDataType" ArrayDimensions="">
+        <Description>Denotes one of the basic SEMI E10 states</Description>
+      </Field>
+      <Field Name="StateDescription" BitMask="" DataType="q46:TrimmedString" ArrayDimensions="">
+        <Description>Optional string describing the full state path, starting with the SEMI E10 state denoted by the state member; the string format is described in Section 11.5.</Description>
+      </Field>
+    </Fields>
+  </DataType>
+  <ReferenceType xmlns:q48="http://opcfoundation.org/UA/MachineVision" SymbolicName="q48:FromTransition" xmlns:q49="http://opcfoundation.org/UA/" BaseType="q49:NonHierarchicalReferences">
+    <ClassName />
+  </ReferenceType>
+  <ReferenceType xmlns:q50="http://opcfoundation.org/UA/MachineVision" SymbolicName="q50:ToTransition" xmlns:q51="http://opcfoundation.org/UA/" BaseType="q51:NonHierarchicalReferences">
+    <ClassName />
+  </ReferenceType>
+  <VariableType xmlns:q52="http://opcfoundation.org/UA/MachineVision" SymbolicName="q52:ResultType" DataType="q52:ResultDataType">
+    <Children>
+      <Variable SymbolicName="q52:CreationTime" ModellingRule="Mandatory" xmlns:q53="http://opcfoundation.org/UA/" DataType="q53:UtcTime" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:ExternalConfigurationId" ModellingRule="Optional" DataType="q52:ConfigurationIdDataType" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:ExternalRecipeId" ModellingRule="Optional" DataType="q52:RecipeIdExternalDataType" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:HasTransferableDataOnFile" ModellingRule="Optional" xmlns:q54="http://opcfoundation.org/UA/" DataType="q54:Boolean" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:InternalConfigurationId" ModellingRule="Mandatory" DataType="q52:ConfigurationIdDataType" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:InternalRecipeId" ModellingRule="Mandatory" DataType="q52:RecipeIdInternalDataType" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:IsPartial" ModellingRule="Mandatory" xmlns:q55="http://opcfoundation.org/UA/" DataType="q55:Boolean" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:IsSimulated" ModellingRule="Optional" xmlns:q56="http://opcfoundation.org/UA/" DataType="q56:Boolean" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:JobId" ModellingRule="Mandatory" DataType="q52:JobIdDataType" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:MeasId" ModellingRule="Optional" DataType="q52:MeasIdDataType" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:PartId" ModellingRule="Optional" DataType="q52:PartIdDataType" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:ProcessingTimes" ModellingRule="Optional" DataType="q52:ProcessingTimesDataType" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:ProductId" ModellingRule="Optional" DataType="q52:ProductIdDataType" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:ResultContent" ModellingRule="Optional" xmlns:q57="http://opcfoundation.org/UA/" DataType="q57:BaseDataType" ValueRank="Array" ArrayDimensions="1" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:ResultId" ModellingRule="Mandatory" DataType="q52:ResultIdDataType" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q52:ResultState" ModellingRule="Mandatory" DataType="q52:ResultStateDataType" AccessLevel="ReadWrite" />
+    </Children>
+    <ClassName />
+    <DefaultValue>
+      <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <uax:TypeId>
+          <uax:Identifier>ns=1;i=5019</uax:Identifier>
+        </uax:TypeId>
+        <uax:Body>
+          <ResultDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+            <EncodingMask>0</EncodingMask>
+            <ResultId>
+              <Id></Id>
+            </ResultId>
+            <IsPartial>false</IsPartial>
+            <ResultState>0</ResultState>
+            <InternalRecipeId>
+              <Id></Id>
+            </InternalRecipeId>
+            <InternalConfigurationId>
+              <Id></Id>
+            </InternalConfigurationId>
+            <JobId>
+              <Id></Id>
+            </JobId>
+            <CreationTime>1900-01-01T00:00:00Z</CreationTime>
+          </ResultDataType>
+        </uax:Body>
+      </uax:ExtensionObject>
+    </DefaultValue>
+  </VariableType>
+  <ObjectType xmlns:q58="http://opcfoundation.org/UA/MachineVision" SymbolicName="q58:AcquisitionDoneEventType" xmlns:q59="http://opcfoundation.org/UA/" BaseType="q59:BaseEventType">
+    <Children>
+      <Property SymbolicName="q58:JobId" ModellingRule="Mandatory" DataType="q58:JobIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5026</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <JobIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <Id></Id>
+              </JobIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q60="http://opcfoundation.org/UA/MachineVision" SymbolicName="q60:VisionConditionType" xmlns:q61="http://opcfoundation.org/UA/" BaseType="q61:AcknowledgeableConditionType" IsAbstract="true">
+    <Children>
+      <Property SymbolicName="q60:BlockReaction" ModellingRule="Mandatory" DataType="q61:Boolean" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q60:CausePath" ModellingRule="Optional" DataType="q61:String" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q60:ErrorCode" ModellingRule="Optional" DataType="q61:UInt64" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q60:ErrorString" ModellingRule="Optional" DataType="q61:String" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q60:ExternalConfigurationId" ModellingRule="Optional" DataType="q60:ConfigurationIdDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q60:ExternalRecipeId" ModellingRule="Optional" DataType="q60:RecipeIdExternalDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q60:InternalConfigurationId" ModellingRule="Optional" DataType="q60:ConfigurationIdDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q60:InternalRecipeId" ModellingRule="Optional" DataType="q60:RecipeIdInternalDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q60:JobId" ModellingRule="Optional" DataType="q60:JobIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5026</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <JobIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <Id></Id>
+              </JobIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q60:MeasId" ModellingRule="Optional" DataType="q60:MeasIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5007</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <MeasIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <Id></Id>
+              </MeasIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q60:PartId" ModellingRule="Optional" DataType="q60:PartIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5014</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <PartIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <Id></Id>
+              </PartIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q60:ProductId" ModellingRule="Optional" DataType="q60:ProductIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5225</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <ProductIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <Id></Id>
+              </ProductIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q60:ResultId" ModellingRule="Optional" DataType="q60:ResultIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5275</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <ResultIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <Id></Id>
+              </ResultIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q60:StopReaction" ModellingRule="Mandatory" DataType="q61:Boolean" AccessLevel="ReadWrite" />
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q62="http://opcfoundation.org/UA/MachineVision" SymbolicName="q62:VisionErrorConditionType" BaseType="q62:VisionConditionType">
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q63="http://opcfoundation.org/UA/MachineVision" SymbolicName="q63:VisionPersistentErrorConditionType" BaseType="q63:VisionConditionType">
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q64="http://opcfoundation.org/UA/MachineVision" SymbolicName="q64:VisionWarningConditionType" BaseType="q64:VisionConditionType">
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q65="http://opcfoundation.org/UA/MachineVision" SymbolicName="q65:EnterStepSequenceEventType" xmlns:q66="http://opcfoundation.org/UA/" BaseType="q66:BaseEventType">
+    <Children>
+      <Property SymbolicName="q65:Steps" ModellingRule="Mandatory" DataType="q66:Int32" AccessLevel="ReadWrite" />
+    </Children>
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>q66:HasEffect</ReferenceType>
+        <TargetId>q65:VisionStepModelStateMachineType_EntryToWaitAuto</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q67="http://opcfoundation.org/UA/MachineVision" SymbolicName="q67:JobStartedEventType" xmlns:q68="http://opcfoundation.org/UA/" BaseType="q68:BaseEventType">
+    <Children>
+      <Property SymbolicName="q67:JobId" ModellingRule="Mandatory" DataType="q67:JobIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5026</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <JobIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <Id></Id>
+              </JobIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+    </Children>
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>q68:HasEffect</ReferenceType>
+        <TargetId>q67:VisionAutomaticModeStateMachineType_ReadyToSingleExecution</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q68:HasEffect</ReferenceType>
+        <TargetId>q67:VisionAutomaticModeStateMachineType_ReadyToSingleExecutionAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q68:HasEffect</ReferenceType>
+        <TargetId>q67:VisionAutomaticModeStateMachineType_ReadyToContinuousExecution</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q68:HasEffect</ReferenceType>
+        <TargetId>q67:VisionAutomaticModeStateMachineType_ReadyToContinuousExecutionAuto</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q69="http://opcfoundation.org/UA/MachineVision" SymbolicName="q69:LeaveStepSequenceEventType" xmlns:q70="http://opcfoundation.org/UA/" BaseType="q70:BaseEventType">
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>q70:HasEffect</ReferenceType>
+        <TargetId>q69:VisionStepModelStateMachineType_StepToExitAuto</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q71="http://opcfoundation.org/UA/MachineVision" SymbolicName="q71:NextStepEventType" xmlns:q72="http://opcfoundation.org/UA/" BaseType="q72:BaseEventType">
+    <Children>
+      <Property SymbolicName="q71:Step" ModellingRule="Mandatory" DataType="q72:Int32" AccessLevel="ReadWrite" />
+    </Children>
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>q72:HasEffect</ReferenceType>
+        <TargetId>q71:VisionStepModelStateMachineType_StepToWaitAuto</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q73="http://opcfoundation.org/UA/MachineVision" SymbolicName="q73:ReadyEventType" xmlns:q74="http://opcfoundation.org/UA/" BaseType="q74:BaseEventType">
+    <Children>
+      <Property SymbolicName="q73:JobId" ModellingRule="Mandatory" DataType="q73:JobIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5026</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <JobIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <Id></Id>
+              </JobIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+    </Children>
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>q74:HasEffect</ReferenceType>
+        <TargetId>q73:VisionAutomaticModeStateMachineType_SingleExecutionToReadyStop</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q74:HasEffect</ReferenceType>
+        <TargetId>q73:VisionAutomaticModeStateMachineType_SingleExecutionToReadyAbort</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q74:HasEffect</ReferenceType>
+        <TargetId>q73:VisionAutomaticModeStateMachineType_SingleExecutionToReadyAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q74:HasEffect</ReferenceType>
+        <TargetId>q73:VisionAutomaticModeStateMachineType_ContinuousExecutionToReadyStop</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q74:HasEffect</ReferenceType>
+        <TargetId>q73:VisionAutomaticModeStateMachineType_ContinuousExecutionToReadyAbort</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q74:HasEffect</ReferenceType>
+        <TargetId>q73:VisionAutomaticModeStateMachineType_ContinuousExecutionToReadyAuto</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q75="http://opcfoundation.org/UA/MachineVision" SymbolicName="q75:RecipePreparedEventType" xmlns:q76="http://opcfoundation.org/UA/" BaseType="q76:BaseEventType">
+    <Children>
+      <Property SymbolicName="q75:ExternalId" ModellingRule="Optional" DataType="q75:RecipeIdExternalDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q75:InternalId" ModellingRule="Mandatory" DataType="q75:RecipeIdInternalDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q75:ProductId" ModellingRule="Optional" DataType="q75:ProductIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5225</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <ProductIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <Id></Id>
+              </ProductIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+    </Children>
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>q76:HasEffect</ReferenceType>
+        <TargetId>q75:VisionAutomaticModeStateMachineType_InitializedToReadyProduct</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q76:HasEffect</ReferenceType>
+        <TargetId>q75:VisionAutomaticModeStateMachineType_InitializedToReadyRecipe</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q77="http://opcfoundation.org/UA/MachineVision" SymbolicName="q77:ResultReadyEventType" xmlns:q78="http://opcfoundation.org/UA/" BaseType="q78:BaseEventType">
+    <Children>
+      <Property SymbolicName="q77:CreationTime" ModellingRule="Mandatory" DataType="q78:UtcTime" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q77:ExternalConfigurationId" ModellingRule="Optional" DataType="q77:ConfigurationIdDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q77:ExternalRecipeId" ModellingRule="Optional" DataType="q77:RecipeIdExternalDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q77:InternalConfigurationId" ModellingRule="Mandatory" DataType="q77:ConfigurationIdDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q77:InternalRecipeId" ModellingRule="Mandatory" DataType="q77:RecipeIdInternalDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q77:IsPartial" ModellingRule="Mandatory" DataType="q78:Boolean" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q77:IsSimulated" ModellingRule="Optional" DataType="q78:Boolean" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q77:JobId" ModellingRule="Mandatory" DataType="q77:JobIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5026</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <JobIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <Id></Id>
+              </JobIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q77:MeasId" ModellingRule="Optional" DataType="q77:MeasIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5007</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <MeasIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <Id></Id>
+              </MeasIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q77:PartId" ModellingRule="Optional" DataType="q77:PartIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5014</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <PartIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <Id></Id>
+              </PartIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q77:ProcessingTimes" ModellingRule="Optional" DataType="q77:ProcessingTimesDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5017</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <ProcessingTimesDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <StartTime>1900-01-01T00:00:00Z</StartTime>
+                <EndTime>1900-01-01T00:00:00Z</EndTime>
+              </ProcessingTimesDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q77:ProductId" ModellingRule="Optional" DataType="q77:ProductIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5225</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <ProductIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <Id></Id>
+              </ProductIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q77:ResultContent" ModellingRule="Optional" DataType="q78:BaseDataType" ValueRank="Array" ArrayDimensions="0" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q77:ResultId" ModellingRule="Mandatory" DataType="q77:ResultIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5275</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <ResultIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <Id></Id>
+              </ResultIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q77:ResultState" ModellingRule="Mandatory" DataType="q77:ResultStateDataType" AccessLevel="ReadWrite" />
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q79="http://opcfoundation.org/UA/MachineVision" SymbolicName="q79:ErrorEventType" xmlns:q80="http://opcfoundation.org/UA/" BaseType="q80:TransitionEventType">
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>q80:HasEffect</ReferenceType>
+        <TargetId>q79:VisionStateMachineType_PreoperationalToErrorAuto</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q81="http://opcfoundation.org/UA/MachineVision" SymbolicName="q81:ErrorResolvedEventType" xmlns:q82="http://opcfoundation.org/UA/" BaseType="q82:TransitionEventType">
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>q82:HasEffect</ReferenceType>
+        <TargetId>q81:VisionStateMachineType_ErrorToOperationalAuto</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q83="http://opcfoundation.org/UA/MachineVision" SymbolicName="q83:StateChangedEventType" xmlns:q84="http://opcfoundation.org/UA/" BaseType="q84:TransitionEventType">
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_PreoperationalToHalted</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_PreoperationalToHaltedAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_PreoperationalToErrorAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_PreoperationalToInitialized</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_PreoperationalToInitializedAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_HaltedToPreoperational</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_HaltedToPreoperationalAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_ErrorToPreoperational</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_ErrorToPreoperationalAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_ErrorToHalted</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_ErrorToHaltedAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_ReadyToInitializedProduct</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_InitializedToReadyProduct</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_OperationalToPreoperational</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_OperationalToPreoperationalAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_OperationalToHalted</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_OperationalToHaltedAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_OperationalToErrorAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_InitializedToReadyRecipe</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_InitializedToReadyAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_ReadyToInitializedRecipe</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_ReadyToInitializedAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_ReadyToSingleExecution</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_ReadyToSingleExecutionAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_ReadyToContinuousExecution</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_ReadyToContinuousExecutionAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_SingleExecutionToReadyStop</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_SingleExecutionToReadyAbort</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_SingleExecutionToReadyAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_ContinuousExecutionToReadyStop</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_ContinuousExecutionToReadyAbort</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionAutomaticModeStateMachineType_ContinuousExecutionToReadyAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStepModelStateMachineType_EntryToExitAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStepModelStateMachineType_EntryToWaitAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStepModelStateMachineType_WaitToStep</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStepModelStateMachineType_WaitToStepAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStepModelStateMachineType_StepToWaitAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStepModelStateMachineType_StepToExitAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_PreoperationalToOperational</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_PreoperationalToOperationalAuto</TargetId>
+      </Reference>
+      <Reference IsInverse="true">
+        <ReferenceType>q84:HasEffect</ReferenceType>
+        <TargetId>q83:VisionStateMachineType_ErrorToOperationalAuto</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q85="http://opcfoundation.org/UA/MachineVision" SymbolicName="q85:VisionEventType" xmlns:q86="http://opcfoundation.org/UA/" BaseType="q86:BaseEventType" IsAbstract="true">
+    <Children>
+      <Property SymbolicName="q85:CausePath" ModellingRule="Optional" DataType="q86:String" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q85:ExternalConfigurationId" ModellingRule="Optional" DataType="q85:ConfigurationIdDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q85:ExternalRecipeId" ModellingRule="Optional" DataType="q85:RecipeIdExternalDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q85:InternalConfigurationId" ModellingRule="Optional" DataType="q85:ConfigurationIdDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q85:InternalRecipeId" ModellingRule="Optional" DataType="q85:RecipeIdInternalDataType" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q85:JobId" ModellingRule="Optional" DataType="q85:JobIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5026</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <JobIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <Id></Id>
+              </JobIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q85:MeasId" ModellingRule="Optional" DataType="q85:MeasIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5007</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <MeasIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <Id></Id>
+              </MeasIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q85:PartId" ModellingRule="Optional" DataType="q85:PartIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5014</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <PartIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <Id></Id>
+              </PartIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q85:ProductId" ModellingRule="Optional" DataType="q85:ProductIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5225</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <ProductIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <Id></Id>
+              </ProductIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+      <Property SymbolicName="q85:ResultId" ModellingRule="Optional" DataType="q85:ResultIdDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5275</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <ResultIdDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <Id></Id>
+              </ResultIdDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Property>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q87="http://opcfoundation.org/UA/MachineVision" SymbolicName="q87:VisionDiagnosticInfoEventType" BaseType="q87:VisionEventType">
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q88="http://opcfoundation.org/UA/MachineVision" SymbolicName="q88:VisionInformationEventType" BaseType="q88:VisionEventType">
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q89="http://opcfoundation.org/UA/MachineVision" SymbolicName="q89:VisionSafetyEventType" xmlns:q90="http://opcfoundation.org/UA/" BaseType="q90:BaseEventType">
+    <Children>
+      <Property SymbolicName="q89:VisionSafetyInformation" ModellingRule="Mandatory" DataType="q90:String" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q89:VisionSafetyTriggered" ModellingRule="Mandatory" DataType="q90:Boolean" AccessLevel="ReadWrite" />
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q91="http://opcfoundation.org/UA/MachineVision" SymbolicName="q91:ConfigurationManagementType">
+    <Children>
+      <Method SymbolicName="q91:ActivateConfiguration" ModellingRule="Mandatory">
+        <InputArguments>
+          <Argument Name="InternalId" DataType="q91:ConfigurationIdDataType">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" xmlns:q92="http://opcfoundation.org/UA/" DataType="q92:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Variable SymbolicName="q91:ActiveConfiguration" ModellingRule="Mandatory" DataType="q91:ConfigurationDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5089</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <ConfigurationDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <InternalId>
+                  <Id></Id>
+                </InternalId>
+                <LastModified>1900-01-01T00:00:00Z</LastModified>
+              </ConfigurationDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Variable>
+      <Method SymbolicName="q91:AddConfiguration" ModellingRule="Optional">
+        <InputArguments>
+          <Argument Name="ExternalId" DataType="q91:ConfigurationIdDataType">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="InternalId" DataType="q91:ConfigurationIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Configuration" xmlns:q93="http://opcfoundation.org/UA/" DataType="q93:NodeId">
+            <Description />
+          </Argument>
+          <Argument Name="TransferRequired" xmlns:q94="http://opcfoundation.org/UA/" DataType="q94:Boolean">
+            <Description />
+          </Argument>
+          <Argument Name="Error" xmlns:q95="http://opcfoundation.org/UA/" DataType="q95:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Object SymbolicName="q91:Configurations" TypeDefinition="q91:ConfigurationFolderType" ModellingRule="Optional" />
+      <Object SymbolicName="q91:ConfigurationTransfer" TypeDefinition="q91:ConfigurationTransferType" ModellingRule="Optional" />
+      <Method SymbolicName="q91:GetConfigurationById" ModellingRule="Mandatory">
+        <InputArguments>
+          <Argument Name="InternalId" DataType="q91:ConfigurationIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Timeout" xmlns:q96="http://opcfoundation.org/UA/" DataType="q96:Int32">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="ConfigurationHandle" DataType="q91:Handle">
+            <Description />
+          </Argument>
+          <Argument Name="Configuration" DataType="q91:ConfigurationDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Error" xmlns:q97="http://opcfoundation.org/UA/" DataType="q97:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q91:GetConfigurationList" ModellingRule="Mandatory">
+        <InputArguments>
+          <Argument Name="MaxResults" xmlns:q98="http://opcfoundation.org/UA/" DataType="q98:UInt32">
+            <Description />
+          </Argument>
+          <Argument Name="StartIndex" xmlns:q99="http://opcfoundation.org/UA/" DataType="q99:UInt32">
+            <Description />
+          </Argument>
+          <Argument Name="Timeout" xmlns:q100="http://opcfoundation.org/UA/" DataType="q100:Int32">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="IsComplete" xmlns:q101="http://opcfoundation.org/UA/" DataType="q101:Boolean">
+            <Description />
+          </Argument>
+          <Argument Name="ResultCount" xmlns:q102="http://opcfoundation.org/UA/" DataType="q102:UInt32">
+            <Description />
+          </Argument>
+          <Argument Name="ConfigurationHandle" DataType="q91:Handle">
+            <Description />
+          </Argument>
+          <Argument Name="ConfigurationList" DataType="q91:ConfigurationDataType" ValueRank="Array">
+            <Description />
+          </Argument>
+          <Argument Name="Error" xmlns:q103="http://opcfoundation.org/UA/" DataType="q103:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q91:ReleaseConfigurationHandle" ModellingRule="Optional">
+        <InputArguments>
+          <Argument Name="ConfigurationHandle" DataType="q91:Handle">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" xmlns:q104="http://opcfoundation.org/UA/" DataType="q104:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q91:RemoveConfiguration" ModellingRule="Optional">
+        <InputArguments>
+          <Argument Name="InternalId" DataType="q91:ConfigurationIdDataType">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" xmlns:q105="http://opcfoundation.org/UA/" DataType="q105:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q106="http://opcfoundation.org/UA/MachineVision" SymbolicName="q106:ConfigurationFolderType" xmlns:q107="http://opcfoundation.org/UA/" BaseType="q107:FolderType">
+    <Children>
+      <Variable SymbolicName="q106:Configuration" ModellingRule="OptionalPlaceholder" DataType="q106:ConfigurationDataType" AccessLevel="ReadWrite">
+        <BrowseName>&lt;Configuration&gt;</BrowseName>
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5089</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <ConfigurationDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <InternalId>
+                  <Id></Id>
+                </InternalId>
+                <LastModified>1900-01-01T00:00:00Z</LastModified>
+              </ConfigurationDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Variable>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q108="http://opcfoundation.org/UA/MachineVision" SymbolicName="q108:ConfigurationTransferType" xmlns:q109="http://opcfoundation.org/UA/" BaseType="q109:TemporaryFileTransferType">
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q110="http://opcfoundation.org/UA/MachineVision" SymbolicName="q110:ProductFolderType" xmlns:q111="http://opcfoundation.org/UA/" BaseType="q111:FolderType">
+    <Children>
+      <Variable SymbolicName="q110:Product" ModellingRule="OptionalPlaceholder" DataType="q110:ProductDataType" AccessLevel="ReadWrite">
+        <BrowseName>&lt;Product&gt;</BrowseName>
+      </Variable>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q112="http://opcfoundation.org/UA/MachineVision" SymbolicName="q112:RecipeFolderType" xmlns:q113="http://opcfoundation.org/UA/" BaseType="q113:FolderType">
+    <Children>
+      <Object SymbolicName="q112:Recipe" TypeDefinition="q112:RecipeType" ModellingRule="OptionalPlaceholder">
+        <BrowseName>&lt;Recipe&gt;</BrowseName>
+      </Object>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q114="http://opcfoundation.org/UA/MachineVision" SymbolicName="q114:RecipeType">
+    <Children>
+      <Property SymbolicName="q114:ExternalId" ModellingRule="Optional" DataType="q114:RecipeIdExternalDataType" AccessLevel="ReadWrite">
+        <Description>Recipe ID for identifying the recipe outside the vision system. The ExternalID is only managed by the host system.</Description>
+      </Property>
+      <Object SymbolicName="q114:Handle" xmlns:q115="http://opcfoundation.org/UA/" TypeDefinition="q115:FileType" ModellingRule="Optional">
+        <Description>The file handle refers to the recipe data, which are teated as a BLOB, i.e. they are not interpreted outside the system. They are accessed via OPC UA file operations.
+</Description>
+        <Children>
+          <Property SymbolicName="q115:OpenCount">
+            <Description>The current number of open file handles.</Description>
+          </Property>
+          <Property SymbolicName="q115:Size">
+            <Description>The size of the file in bytes.</Description>
+          </Property>
+          <Property SymbolicName="q115:UserWritable">
+            <Description>Whether the file is writable by the current user.</Description>
+          </Property>
+          <Property SymbolicName="q115:Writable">
+            <Description>Whether the file is writable.</Description>
+          </Property>
+        </Children>
+      </Object>
+      <Property SymbolicName="q114:InternalId" ModellingRule="Mandatory" DataType="q114:RecipeIdInternalDataType" AccessLevel="ReadWrite">
+        <Description>System-wide unique ID for identifying a recipe. This ID is assigned by the vision system.</Description>
+      </Property>
+      <Property SymbolicName="q114:IsPrepared" ModellingRule="Mandatory" xmlns:q116="http://opcfoundation.org/UA/" DataType="q116:Boolean" AccessLevel="ReadWrite" />
+      <Property SymbolicName="q114:LastModified" ModellingRule="Mandatory" xmlns:q117="http://opcfoundation.org/UA/" DataType="q117:UtcTime" AccessLevel="ReadWrite">
+        <Description>The time when this recipe was last modified.</Description>
+      </Property>
+      <Property SymbolicName="q114:LinkedProducts" ModellingRule="Optional" DataType="q114:ProductIdDataType" ValueRank="Array" ArrayDimensions="0" AccessLevel="ReadWrite" />
+      <Method SymbolicName="q114:LinkProduct" ModellingRule="Optional">
+        <InputArguments>
+          <Argument Name="ProductId" DataType="q114:ProductIdDataType">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" xmlns:q118="http://opcfoundation.org/UA/" DataType="q118:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q114:Prepare" ModellingRule="Mandatory">
+        <OutputArguments>
+          <Argument Name="IsCompleted" xmlns:q119="http://opcfoundation.org/UA/" DataType="q119:Boolean">
+            <Description />
+          </Argument>
+          <Argument Name="Error" xmlns:q120="http://opcfoundation.org/UA/" DataType="q120:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q114:UnlinkProduct" ModellingRule="Optional">
+        <InputArguments>
+          <Argument Name="ProductId" DataType="q114:ProductIdDataType">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" xmlns:q121="http://opcfoundation.org/UA/" DataType="q121:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q114:Unprepare" ModellingRule="Mandatory">
+        <OutputArguments>
+          <Argument Name="Error" xmlns:q122="http://opcfoundation.org/UA/" DataType="q122:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q123="http://opcfoundation.org/UA/MachineVision" SymbolicName="q123:ResultFolderType" xmlns:q124="http://opcfoundation.org/UA/" BaseType="q124:FolderType">
+    <Children>
+      <Variable SymbolicName="q123:ResultVariable" TypeDefinition="q123:ResultType" ModellingRule="OptionalPlaceholder" DataType="q123:ResultDataType" AccessLevel="ReadWrite">
+        <BrowseName>&lt;ResultVariable&gt;</BrowseName>
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5019</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <ResultDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <ResultId>
+                  <Id></Id>
+                </ResultId>
+                <IsPartial>false</IsPartial>
+                <ResultState>0</ResultState>
+                <InternalRecipeId>
+                  <Id></Id>
+                </InternalRecipeId>
+                <InternalConfigurationId>
+                  <Id></Id>
+                </InternalConfigurationId>
+                <JobId>
+                  <Id></Id>
+                </JobId>
+                <CreationTime>1900-01-01T00:00:00Z</CreationTime>
+              </ResultDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Variable>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q125="http://opcfoundation.org/UA/MachineVision" SymbolicName="q125:RecipeManagementType">
+    <Children>
+      <Method SymbolicName="q125:AddRecipe" ModellingRule="Optional">
+        <InputArguments>
+          <Argument Name="ExternalId" DataType="q125:RecipeIdExternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="ProductId" DataType="q125:ProductIdDataType">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="InternalId" DataType="q125:RecipeIdInternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Recipe" xmlns:q126="http://opcfoundation.org/UA/" DataType="q126:NodeId">
+            <Description />
+          </Argument>
+          <Argument Name="Product" xmlns:q127="http://opcfoundation.org/UA/" DataType="q127:NodeId">
+            <Description />
+          </Argument>
+          <Argument Name="TransferRequired" xmlns:q128="http://opcfoundation.org/UA/" DataType="q128:Boolean">
+            <Description />
+          </Argument>
+          <Argument Name="Error" xmlns:q129="http://opcfoundation.org/UA/" DataType="q129:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q125:GetRecipeListFiltered" ModellingRule="Mandatory">
+        <InputArguments>
+          <Argument Name="ExternalId" DataType="q125:RecipeIdExternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="ProductId" DataType="q125:ProductIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="IsPrepared" DataType="q125:TriStateBooleanDataType">
+            <Description />
+          </Argument>
+          <Argument Name="MaxResults" xmlns:q130="http://opcfoundation.org/UA/" DataType="q130:UInt32">
+            <Description />
+          </Argument>
+          <Argument Name="StartIndex" xmlns:q131="http://opcfoundation.org/UA/" DataType="q131:UInt32">
+            <Description />
+          </Argument>
+          <Argument Name="Timeout" xmlns:q132="http://opcfoundation.org/UA/" DataType="q132:Int32">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="IsComplete" xmlns:q133="http://opcfoundation.org/UA/" DataType="q133:Boolean">
+            <Description />
+          </Argument>
+          <Argument Name="ResultCount" xmlns:q134="http://opcfoundation.org/UA/" DataType="q134:UInt32">
+            <Description />
+          </Argument>
+          <Argument Name="RecipeHandle" DataType="q125:Handle">
+            <Description />
+          </Argument>
+          <Argument Name="RecipeList" DataType="q125:RecipeIdInternalDataType" ValueRank="Array">
+            <Description />
+          </Argument>
+          <Argument Name="Error" xmlns:q135="http://opcfoundation.org/UA/" DataType="q135:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q125:PrepareProduct" ModellingRule="Optional">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType xmlns:q136="http://opcfoundation.org/UA/">q136:HasCause</ReferenceType>
+            <TargetId>q125:VisionAutomaticModeStateMachineType_InitializedToReadyProduct</TargetId>
+          </Reference>
+        </References>
+        <InputArguments>
+          <Argument Name="ProductId" DataType="q125:ProductIdDataType">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="InternalId" DataType="q125:RecipeIdInternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Error" xmlns:q137="http://opcfoundation.org/UA/" DataType="q137:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q125:PrepareRecipe" ModellingRule="Mandatory">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType xmlns:q138="http://opcfoundation.org/UA/">q138:HasCause</ReferenceType>
+            <TargetId>q125:VisionAutomaticModeStateMachineType_InitializedToReadyRecipe</TargetId>
+          </Reference>
+        </References>
+        <InputArguments>
+          <Argument Name="ExternalId" DataType="q125:RecipeIdExternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="InternalIdIn" DataType="q125:RecipeIdInternalDataType">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="InternalIdOut" DataType="q125:RecipeIdInternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="IsCompleted" xmlns:q139="http://opcfoundation.org/UA/" DataType="q139:Boolean">
+            <Description />
+          </Argument>
+          <Argument Name="Error" xmlns:q140="http://opcfoundation.org/UA/" DataType="q140:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Object SymbolicName="q125:Products" TypeDefinition="q125:ProductFolderType" ModellingRule="Optional" />
+      <Object SymbolicName="q125:Recipes" TypeDefinition="q125:RecipeFolderType" ModellingRule="Optional" />
+      <Object SymbolicName="q125:RecipeTransfer" TypeDefinition="q125:RecipeTransferType" ModellingRule="Optional" />
+      <Method SymbolicName="q125:ReleaseRecipeHandle" ModellingRule="Optional">
+        <InputArguments>
+          <Argument Name="RecipeHandle" DataType="q125:Handle">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" xmlns:q141="http://opcfoundation.org/UA/" DataType="q141:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q125:RemoveRecipe" ModellingRule="Optional">
+        <InputArguments>
+          <Argument Name="ExternalId" DataType="q125:RecipeIdExternalDataType">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" xmlns:q142="http://opcfoundation.org/UA/" DataType="q142:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q125:UnlinkProduct" ModellingRule="Optional">
+        <InputArguments>
+          <Argument Name="InternalId" DataType="q125:RecipeIdInternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="ProductId" DataType="q125:ProductIdDataType">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" xmlns:q143="http://opcfoundation.org/UA/" DataType="q143:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q125:UnprepareProduct" ModellingRule="Optional">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType xmlns:q144="http://opcfoundation.org/UA/">q144:HasCause</ReferenceType>
+            <TargetId>q125:VisionAutomaticModeStateMachineType_ReadyToInitializedProduct</TargetId>
+          </Reference>
+        </References>
+        <InputArguments>
+          <Argument Name="ProductId" DataType="q125:ProductIdDataType">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="InternalId" DataType="q125:RecipeIdInternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Error" xmlns:q145="http://opcfoundation.org/UA/" DataType="q145:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q125:UnprepareRecipe" ModellingRule="Mandatory">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType xmlns:q146="http://opcfoundation.org/UA/">q146:HasCause</ReferenceType>
+            <TargetId>q125:VisionAutomaticModeStateMachineType_ReadyToInitializedRecipe</TargetId>
+          </Reference>
+        </References>
+        <InputArguments>
+          <Argument Name="ExternalId" DataType="q125:RecipeIdExternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="InternalIdIn" DataType="q125:RecipeIdInternalDataType">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="InternalIdOut" DataType="q125:RecipeIdInternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Error" xmlns:q147="http://opcfoundation.org/UA/" DataType="q147:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q148="http://opcfoundation.org/UA/MachineVision" SymbolicName="q148:RecipeTransferType" xmlns:q149="http://opcfoundation.org/UA/" BaseType="q149:TemporaryFileTransferType">
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q150="http://opcfoundation.org/UA/MachineVision" SymbolicName="q150:ResultManagementType">
+    <Children>
+      <Method SymbolicName="q150:GetResultById" ModellingRule="Mandatory">
+        <InputArguments>
+          <Argument Name="ResultId" DataType="q150:ResultIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Timeout" xmlns:q151="http://opcfoundation.org/UA/" DataType="q151:Int32">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="ResultHandle" DataType="q150:Handle">
+            <Description />
+          </Argument>
+          <Argument Name="Result" DataType="q150:ResultDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Error" xmlns:q152="http://opcfoundation.org/UA/" DataType="q152:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q150:GetResultComponentsById" ModellingRule="Mandatory">
+        <InputArguments>
+          <Argument Name="ResultId" DataType="q150:ResultIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Timeout" xmlns:q153="http://opcfoundation.org/UA/" DataType="q153:Int32">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="HasTransferableDataOnFile" xmlns:q154="http://opcfoundation.org/UA/" DataType="q154:Boolean">
+            <Description />
+          </Argument>
+          <Argument Name="ResultHandle" DataType="q150:Handle">
+            <Description />
+          </Argument>
+          <Argument Name="IsPartial" xmlns:q155="http://opcfoundation.org/UA/" DataType="q155:Boolean">
+            <Description />
+          </Argument>
+          <Argument Name="IsSimulated" xmlns:q156="http://opcfoundation.org/UA/" DataType="q156:Boolean">
+            <Description />
+          </Argument>
+          <Argument Name="ResultState" DataType="q150:ResultStateDataType">
+            <Description />
+          </Argument>
+          <Argument Name="MeasId" DataType="q150:MeasIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="PartId" DataType="q150:PartIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="ExternalRecipeId" DataType="q150:RecipeIdExternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="InternalRecipeId" DataType="q150:RecipeIdInternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="ProductId" DataType="q150:ProductIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="ExternalConfigurationId" DataType="q150:ConfigurationIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="InternalConfigurationId" DataType="q150:ConfigurationIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="JobId" DataType="q150:JobIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="CreationTime" xmlns:q157="http://opcfoundation.org/UA/" DataType="q157:UtcTime">
+            <Description />
+          </Argument>
+          <Argument Name="ProcessingTimes" DataType="q150:ProcessingTimesDataType">
+            <Description />
+          </Argument>
+          <Argument Name="ResultContent" ValueRank="Array">
+            <Description />
+          </Argument>
+          <Argument Name="Error" xmlns:q158="http://opcfoundation.org/UA/" DataType="q158:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q150:GetResultListFiltered" ModellingRule="Mandatory">
+        <InputArguments>
+          <Argument Name="ResultState" DataType="q150:ResultStateDataType">
+            <Description />
+          </Argument>
+          <Argument Name="MeasId" DataType="q150:MeasIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="PartId" DataType="q150:PartIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="ExternalRecipeId" DataType="q150:RecipeIdExternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="InternalRecipeId" DataType="q150:RecipeIdInternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="ExternalConfigurationId" DataType="q150:ConfigurationIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="InternalConfigurationId" DataType="q150:ConfigurationIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="ProductId" DataType="q150:ProductIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="JobId" DataType="q150:JobIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="MaxResults" xmlns:q159="http://opcfoundation.org/UA/" DataType="q159:UInt32">
+            <Description />
+          </Argument>
+          <Argument Name="StartIndex" xmlns:q160="http://opcfoundation.org/UA/" DataType="q160:UInt32">
+            <Description />
+          </Argument>
+          <Argument Name="Timeout" xmlns:q161="http://opcfoundation.org/UA/" DataType="q161:Int32">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="IsComplete" xmlns:q162="http://opcfoundation.org/UA/" DataType="q162:Boolean">
+            <Description />
+          </Argument>
+          <Argument Name="ResultCount" xmlns:q163="http://opcfoundation.org/UA/" DataType="q163:UInt32">
+            <Description />
+          </Argument>
+          <Argument Name="ResultHandle" DataType="q150:Handle">
+            <Description />
+          </Argument>
+          <Argument Name="ResultList" DataType="q150:ResultDataType" ValueRank="Array">
+            <Description />
+          </Argument>
+          <Argument Name="Error" xmlns:q164="http://opcfoundation.org/UA/" DataType="q164:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q150:ReleaseResultHandle" ModellingRule="Optional">
+        <InputArguments>
+          <Argument Name="ResultHandle" DataType="q150:Handle">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" xmlns:q165="http://opcfoundation.org/UA/" DataType="q165:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Object SymbolicName="q150:Results" TypeDefinition="q150:ResultFolderType" ModellingRule="Optional" />
+      <Object SymbolicName="q150:ResultTransfer" TypeDefinition="q150:ResultTransferType" ModellingRule="Optional" />
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q166="http://opcfoundation.org/UA/MachineVision" SymbolicName="q166:ResultTransferType" xmlns:q167="http://opcfoundation.org/UA/" BaseType="q167:TemporaryFileTransferType">
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q168="http://opcfoundation.org/UA/MachineVision" SymbolicName="q168:SafetyStateManagementType">
+    <Children>
+      <Method SymbolicName="q168:ReportSafetyState" ModellingRule="Mandatory">
+        <InputArguments>
+          <Argument Name="SafetyTriggered" xmlns:q169="http://opcfoundation.org/UA/" DataType="q169:Boolean">
+            <Description />
+          </Argument>
+          <Argument Name="SafetyInformation" xmlns:q170="http://opcfoundation.org/UA/" DataType="q170:String">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" xmlns:q171="http://opcfoundation.org/UA/" DataType="q171:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Variable SymbolicName="q168:VisionSafetyInformation" ModellingRule="Mandatory" xmlns:q172="http://opcfoundation.org/UA/" DataType="q172:String" AccessLevel="ReadWrite" />
+      <Variable SymbolicName="q168:VisionSafetyTriggered" ModellingRule="Mandatory" xmlns:q173="http://opcfoundation.org/UA/" DataType="q173:Boolean" AccessLevel="ReadWrite" />
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q174="http://opcfoundation.org/UA/MachineVision" SymbolicName="q174:VisionAutomaticModeStateMachineType" xmlns:q175="http://opcfoundation.org/UA/" BaseType="q175:FiniteStateMachineType">
+    <Children>
+      <Method SymbolicName="q174:Abort" ModellingRule="Mandatory">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:HasCause</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionToReadyAbort</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:HasCause</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ContinuousExecutionToReadyAbort</TargetId>
+          </Reference>
+        </References>
+        <InputArguments>
+          <Argument Name="Cause" DataType="q175:Int32">
+            <Description />
+          </Argument>
+          <Argument Name="CauseDescription" DataType="q175:String">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" DataType="q175:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Object SymbolicName="q174:ContinuousExecution" TypeDefinition="q175:StateType">
+        <References>
+          <Reference>
+            <ReferenceType>q175:HasSubStateMachine</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ContinuousExecutionStepModel</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ContinuousExecutionToReadyAbort</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ContinuousExecutionToReadyAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ContinuousExecutionToReadyStop</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToContinuousExecution</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToContinuousExecutionAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToContinuousExecution</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToContinuousExecutionAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ContinuousExecutionToReadyStop</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ContinuousExecutionToReadyAbort</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ContinuousExecutionToReadyAuto</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q174:ContinuousExecutionStepModel" TypeDefinition="q174:VisionStepModelStateMachineType" ModellingRule="Optional" />
+      <Object SymbolicName="q174:ContinuousExecutionToReadyAbort" TypeDefinition="q175:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Ready</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Ready</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q174:ContinuousExecutionToReadyAuto" TypeDefinition="q175:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Ready</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Ready</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q174:ContinuousExecutionToReadyStop" TypeDefinition="q175:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Ready</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Ready</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q175:HasCause</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Stop</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q174:Initialized" TypeDefinition="q175:StateType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionStateMachineType_PreoperationalToInitialized</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionStateMachineType_PreoperationalToInitializedAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToInitializedProduct</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_InitializedToReadyProduct</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q175:HasSubStateMachine</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_InitializedStepModel</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_InitializedToReadyAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_InitializedToReadyProduct</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_InitializedToReadyRecipe</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToInitializedAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToInitializedProduct</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToInitializedRecipe</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_InitializedToReadyRecipe</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_InitializedToReadyAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToInitializedRecipe</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToInitializedAuto</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q174:InitializedStepModel" TypeDefinition="q174:VisionStepModelStateMachineType" ModellingRule="Optional" />
+      <Object SymbolicName="q174:InitializedToReadyAuto" TypeDefinition="q175:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Ready</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Ready</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q174:InitializedToReadyProduct" TypeDefinition="q175:TransitionType">
+        <References>
+          <Reference>
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Ready</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Ready</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q174:InitializedToReadyRecipe" TypeDefinition="q175:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Ready</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Ready</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q174:Ready" TypeDefinition="q175:StateType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToInitializedProduct</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q175:HasSubStateMachine</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyStepModel</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToContinuousExecution</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToContinuousExecutionAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToInitializedAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToInitializedProduct</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToInitializedRecipe</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToSingleExecution</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToSingleExecutionAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionToReadyAbort</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionToReadyAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionToReadyStop</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToInitializedRecipe</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToInitializedAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToSingleExecution</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToSingleExecutionAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToContinuousExecution</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_ReadyToContinuousExecutionAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionToReadyStop</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionToReadyAbort</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionToReadyAuto</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q174:ReadyStepModel" TypeDefinition="q174:VisionStepModelStateMachineType" ModellingRule="Optional" />
+      <Object SymbolicName="q174:ReadyToContinuousExecution" TypeDefinition="q175:TransitionType">
+        <References>
+          <Reference>
+            <ReferenceType>q175:HasCause</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_StartContinuous</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q174:ReadyToContinuousExecutionAuto" TypeDefinition="q175:TransitionType" />
+      <Object SymbolicName="q174:ReadyToInitializedAuto" TypeDefinition="q175:TransitionType" />
+      <Object SymbolicName="q174:ReadyToInitializedProduct" TypeDefinition="q175:TransitionType" />
+      <Object SymbolicName="q174:ReadyToInitializedRecipe" TypeDefinition="q175:TransitionType" />
+      <Object SymbolicName="q174:ReadyToSingleExecution" TypeDefinition="q175:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecution</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecution</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q175:HasCause</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_StartSingleJob</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q174:ReadyToSingleExecutionAuto" TypeDefinition="q175:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q174:FromTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecution</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q175:ToState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecution</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Method SymbolicName="q174:SimulationMode" ModellingRule="Optional">
+        <InputArguments>
+          <Argument Name="Activate" DataType="q175:Boolean">
+            <Description />
+          </Argument>
+          <Argument Name="Cause" DataType="q175:Int32">
+            <Description />
+          </Argument>
+          <Argument Name="CauseDescription" DataType="q175:String">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" DataType="q175:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Object SymbolicName="q174:SingleExecution" TypeDefinition="q175:StateType">
+        <References>
+          <Reference>
+            <ReferenceType>q175:HasSubStateMachine</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionStepModel</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionToReadyAbort</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionToReadyAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q174:ToTransition</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionToReadyStop</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionToReadyStop</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionToReadyAbort</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q175:FromState</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_SingleExecutionToReadyAuto</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q174:SingleExecutionStepModel" TypeDefinition="q174:VisionStepModelStateMachineType" ModellingRule="Optional" />
+      <Object SymbolicName="q174:SingleExecutionToReadyAbort" TypeDefinition="q175:TransitionType" />
+      <Object SymbolicName="q174:SingleExecutionToReadyAuto" TypeDefinition="q175:TransitionType" />
+      <Object SymbolicName="q174:SingleExecutionToReadyStop" TypeDefinition="q175:TransitionType">
+        <References>
+          <Reference>
+            <ReferenceType>q175:HasCause</ReferenceType>
+            <TargetId>q174:VisionAutomaticModeStateMachineType_Stop</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Method SymbolicName="q174:StartContinuous" ModellingRule="Mandatory">
+        <InputArguments>
+          <Argument Name="MeasId" DataType="q174:MeasIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="PartId" DataType="q174:PartIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="RecipeId" DataType="q174:RecipeIdExternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="ProductId" DataType="q174:ProductIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Parameters" ValueRank="Array">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="JobId" DataType="q174:JobIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Error" DataType="q175:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q174:StartSingleJob" ModellingRule="Mandatory">
+        <InputArguments>
+          <Argument Name="MeasId" DataType="q174:MeasIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="PartId" DataType="q174:PartIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="RecipeId" DataType="q174:RecipeIdExternalDataType">
+            <Description />
+          </Argument>
+          <Argument Name="ProductId" DataType="q174:ProductIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Parameters" ValueRank="Array">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="JobId" DataType="q174:JobIdDataType">
+            <Description />
+          </Argument>
+          <Argument Name="Error" DataType="q175:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q174:Stop" ModellingRule="Mandatory">
+        <InputArguments>
+          <Argument Name="Cause" DataType="q175:Int32">
+            <Description />
+          </Argument>
+          <Argument Name="CauseDescription" DataType="q175:String">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" DataType="q175:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q176="http://opcfoundation.org/UA/MachineVision" SymbolicName="q176:VisionStepModelStateMachineType" xmlns:q177="http://opcfoundation.org/UA/" BaseType="q177:FiniteStateMachineType">
+    <Children>
+      <Object SymbolicName="q176:Entry" TypeDefinition="q177:InitialStateType">
+        <References>
+          <Reference>
+            <ReferenceType>q176:ToTransition</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_EntryToExitAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q176:ToTransition</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_EntryToWaitAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q177:FromState</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_EntryToExitAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q177:FromState</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_EntryToWaitAuto</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q176:EntryToExitAuto" TypeDefinition="q177:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q176:FromTransition</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_Exit</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q177:ToState</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_Exit</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q176:EntryToWaitAuto" TypeDefinition="q177:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q176:FromTransition</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_Wait</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q177:ToState</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_Wait</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q176:Exit" TypeDefinition="q177:StateType">
+        <References>
+          <Reference>
+            <ReferenceType>q176:FromTransition</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_StepToExitAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q177:ToState</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_StepToExitAuto</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q176:Step" TypeDefinition="q177:StateType">
+        <References>
+          <Reference>
+            <ReferenceType>q176:ToTransition</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_StepToExitAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q176:ToTransition</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_StepToWaitAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q176:FromTransition</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_WaitToStep</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q176:FromTransition</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_WaitToStepAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q177:ToState</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_WaitToStep</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q177:ToState</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_WaitToStepAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q177:FromState</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_StepToWaitAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q177:FromState</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_StepToExitAuto</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q176:StepToExitAuto" TypeDefinition="q177:TransitionType" />
+      <Object SymbolicName="q176:StepToWaitAuto" TypeDefinition="q177:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q176:FromTransition</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_Wait</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q177:ToState</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_Wait</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Method SymbolicName="q176:Sync" ModellingRule="Mandatory">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q177:HasCause</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_WaitToStep</TargetId>
+          </Reference>
+        </References>
+        <InputArguments>
+          <Argument Name="Cause" DataType="q177:Int32">
+            <Description />
+          </Argument>
+          <Argument Name="CauseDescription" DataType="q177:String">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" DataType="q177:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Object SymbolicName="q176:Wait" TypeDefinition="q177:StateType">
+        <References>
+          <Reference>
+            <ReferenceType>q176:ToTransition</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_WaitToStep</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q176:ToTransition</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_WaitToStepAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q177:FromState</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_WaitToStep</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q177:FromState</ReferenceType>
+            <TargetId>q176:VisionStepModelStateMachineType_WaitToStepAuto</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q176:WaitToStep" TypeDefinition="q177:TransitionType" />
+      <Object SymbolicName="q176:WaitToStepAuto" TypeDefinition="q177:TransitionType" />
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q178="http://opcfoundation.org/UA/MachineVision" SymbolicName="q178:VisionStateMachineType" xmlns:q179="http://opcfoundation.org/UA/" BaseType="q179:FiniteStateMachineType">
+    <Children>
+      <Object SymbolicName="q178:AutomaticModeStateMachine" TypeDefinition="q178:VisionAutomaticModeStateMachineType" ModellingRule="Optional">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:HasSubStateMachine</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Operational</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Method SymbolicName="q178:ConfirmAll" ModellingRule="Optional">
+        <InputArguments>
+          <Argument Name="Comment" DataType="q179:LocalizedText">
+            <Description />
+          </Argument>
+        </InputArguments>
+      </Method>
+      <Object SymbolicName="q178:Error" TypeDefinition="q179:StateType">
+        <References>
+          <Reference>
+            <ReferenceType>q179:HasSubStateMachine</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_ErrorStepModel</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_ErrorToHalted</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_ErrorToHaltedAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_ErrorToOperationalAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_ErrorToPreoperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_ErrorToPreoperationalAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToErrorAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToErrorAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToErrorAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_ErrorToPreoperational</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_ErrorToPreoperationalAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_ErrorToHalted</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_ErrorToHaltedAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToErrorAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_ErrorToOperationalAuto</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:ErrorStepModel" TypeDefinition="q178:VisionStepModelStateMachineType" ModellingRule="Optional" />
+      <Object SymbolicName="q178:ErrorToHalted" TypeDefinition="q179:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Halted</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q179:HasCause</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Halt</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Halted</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:ErrorToHaltedAuto" TypeDefinition="q179:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Halted</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Halted</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:ErrorToOperationalAuto" TypeDefinition="q179:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Operational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Operational</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:ErrorToPreoperational" TypeDefinition="q179:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Preoperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Preoperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q179:HasCause</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Reset</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:ErrorToPreoperationalAuto" TypeDefinition="q179:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Preoperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Preoperational</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Method SymbolicName="q178:Halt" ModellingRule="Mandatory">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:HasCause</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToHalted</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:HasCause</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToHalted</TargetId>
+          </Reference>
+        </References>
+        <InputArguments>
+          <Argument Name="Cause" DataType="q179:Int32">
+            <Description />
+          </Argument>
+          <Argument Name="CauseDescription" DataType="q179:String">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" DataType="q179:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Object SymbolicName="q178:Halted" TypeDefinition="q179:StateType">
+        <References>
+          <Reference>
+            <ReferenceType>q179:HasSubStateMachine</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_HaltedStepModel</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_HaltedToPreoperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_HaltedToPreoperationalAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToHalted</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToHaltedAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToHalted</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToHaltedAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToHalted</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToHaltedAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_HaltedToPreoperational</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_HaltedToPreoperationalAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToHalted</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToHaltedAuto</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:HaltedStepModel" TypeDefinition="q178:VisionStepModelStateMachineType" ModellingRule="Optional" />
+      <Object SymbolicName="q178:HaltedToPreoperational" TypeDefinition="q179:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Preoperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Preoperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q179:HasCause</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Reset</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:HaltedToPreoperationalAuto" TypeDefinition="q179:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Preoperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Preoperational</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:Operational" TypeDefinition="q179:StateType">
+        <References>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToErrorAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToHalted</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToHaltedAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToPreoperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToPreoperationalAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToOperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToOperationalAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToPreoperational</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToPreoperationalAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToHalted</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToHaltedAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_OperationalToErrorAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToOperational</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToOperationalAuto</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:OperationalToErrorAuto" TypeDefinition="q179:TransitionType" />
+      <Object SymbolicName="q178:OperationalToHalted" TypeDefinition="q179:TransitionType" />
+      <Object SymbolicName="q178:OperationalToHaltedAuto" TypeDefinition="q179:TransitionType" />
+      <Object SymbolicName="q178:OperationalToPreoperational" TypeDefinition="q179:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Preoperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Preoperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q179:HasCause</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Reset</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:OperationalToPreoperationalAuto" TypeDefinition="q179:TransitionType">
+        <References>
+          <Reference IsInverse="true">
+            <ReferenceType>q178:FromTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Preoperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q179:ToState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_Preoperational</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:Preoperational" TypeDefinition="q179:StateType">
+        <References>
+          <Reference>
+            <ReferenceType>q179:HasSubStateMachine</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalStepModel</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToErrorAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToHalted</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToHaltedAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToInitialized</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToInitializedAuto</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToOperational</TargetId>
+          </Reference>
+          <Reference>
+            <ReferenceType>q178:ToTransition</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToOperationalAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToHalted</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToHaltedAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToErrorAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToInitialized</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToInitializedAuto</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToOperational</TargetId>
+          </Reference>
+          <Reference IsInverse="true">
+            <ReferenceType>q179:FromState</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_PreoperationalToOperationalAuto</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:PreoperationalStepModel" TypeDefinition="q178:VisionStepModelStateMachineType" ModellingRule="Optional" />
+      <Object SymbolicName="q178:PreoperationalToErrorAuto" TypeDefinition="q179:TransitionType" />
+      <Object SymbolicName="q178:PreoperationalToHalted" TypeDefinition="q179:TransitionType" />
+      <Object SymbolicName="q178:PreoperationalToHaltedAuto" TypeDefinition="q179:TransitionType" />
+      <Object SymbolicName="q178:PreoperationalToInitialized" TypeDefinition="q179:TransitionType">
+        <References>
+          <Reference>
+            <ReferenceType>q179:HasCause</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_SelectModeAutomatic</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:PreoperationalToInitializedAuto" TypeDefinition="q179:TransitionType" />
+      <Object SymbolicName="q178:PreoperationalToOperational" TypeDefinition="q179:TransitionType">
+        <References>
+          <Reference>
+            <ReferenceType>q179:HasCause</ReferenceType>
+            <TargetId>q178:VisionStateMachineType_SelectModeAutomatic</TargetId>
+          </Reference>
+        </References>
+      </Object>
+      <Object SymbolicName="q178:PreoperationalToOperationalAuto" TypeDefinition="q179:TransitionType" />
+      <Method SymbolicName="q178:Reset" ModellingRule="Mandatory">
+        <InputArguments>
+          <Argument Name="Cause" DataType="q179:Int32">
+            <Description />
+          </Argument>
+          <Argument Name="CauseDescription" DataType="q179:String">
+            <Description />
+          </Argument>
+        </InputArguments>
+        <OutputArguments>
+          <Argument Name="Error" DataType="q179:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+      <Method SymbolicName="q178:SelectModeAutomatic" ModellingRule="Optional">
+        <OutputArguments>
+          <Argument Name="Error" DataType="q179:Int32">
+            <Description />
+          </Argument>
+        </OutputArguments>
+      </Method>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q180="http://opcfoundation.org/UA/MachineVision" SymbolicName="q180:VisionSystemType">
+    <Children>
+      <Object SymbolicName="q180:ConfigurationManagement" TypeDefinition="q180:ConfigurationManagementType" ModellingRule="Optional" />
+      <Variable SymbolicName="q180:DiagnosticLevel" ModellingRule="Optional" xmlns:q181="http://opcfoundation.org/UA/" DataType="q181:UInt16" AccessLevel="ReadWrite" />
+      <Object SymbolicName="q180:RecipeManagement" TypeDefinition="q180:RecipeManagementType" ModellingRule="Optional" />
+      <Object SymbolicName="q180:ResultManagement" TypeDefinition="q180:ResultManagementType" ModellingRule="Optional" />
+      <Object SymbolicName="q180:SafetyStateManagement" TypeDefinition="q180:SafetyStateManagementType" ModellingRule="Optional" />
+      <Variable SymbolicName="q180:SystemState" ModellingRule="Optional" DataType="q180:SystemStateDescriptionDataType" AccessLevel="ReadWrite">
+        <DefaultValue>
+          <uax:ExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:TypeId>
+              <uax:Identifier>ns=1;i=5279</uax:Identifier>
+            </uax:TypeId>
+            <uax:Body>
+              <SystemStateDescriptionDataType xmlns="http://opcfoundation.org/UA/MachineVision/Types.xsd">
+                <EncodingMask>0</EncodingMask>
+                <State>NST_6_6</State>
+              </SystemStateDescriptionDataType>
+            </uax:Body>
+          </uax:ExtensionObject>
+        </DefaultValue>
+      </Variable>
+      <Object SymbolicName="q180:VisionStateMachine" TypeDefinition="q180:VisionStateMachineType" ModellingRule="Mandatory" />
+    </Children>
+    <ClassName />
+  </ObjectType>
+</ModelDesign>

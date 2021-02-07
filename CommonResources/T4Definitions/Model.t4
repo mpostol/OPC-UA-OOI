@@ -34,8 +34,8 @@ string SemanticDataPrerelease = "";
 string SemanticDataProduct = "Object Oriented Internet";
 
 //UAOOI.SemanticData.UANodeSetValidation
-string SemanticDataUANodeSetValidationVersion = "5.1.0";
-string SemanticDataUANodeSetValidationPrerelease = "";
+string SemanticDataUANodeSetValidationVersion = "5.2.1";
+string SemanticDataUANodeSetValidationPrerelease = "Alpha";
 
 //UAOOI.SemanticData.UAModelDesignExport
 string SemanticDataUAModelDesignExportVersion = "5.2.3";

@@ -30,10 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="UAOOI.Configuration.Networking" Version="4.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Encoding\Networking.Encoding.csproj" />
     <ProjectReference Include="..\..\ReferenceApplication.Core\Networking.ReferenceApplication.Core.csproj" />
     <ProjectReference Include="..\..\SemanticData\Networking.SemanticData.csproj" />

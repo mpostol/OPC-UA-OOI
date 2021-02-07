@@ -4,7 +4,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>UAOOI.Common.Infrastructure</id>
-    <version>4.0.2</version>
+    <version><#=CommonVersion#></version>
     <title><#=NetworkingDataProduct#> Common Infrastructure</title>
     <authors><#=AssemblyCompany#></authors>
     <owners><#=Owner#></owners>
@@ -31,9 +31,9 @@
     <copyright><#=AssemblyCopyright#></copyright>
   </metadata>
   <files>
-    <file src="bin\Release\netstandard2.0\UAOOI.Common.Infrastructure.dll" target="lib\netstandard2.0\UAOOI.Common.Infrastructure.dll" />
-    <file src="bin\Release\netstandard2.0\UAOOI.Common.Infrastructure.xml" target="lib\netstandard2.0\UAOOI.Common.Infrastructure.xml" />
-    <file src="Logo64.PNG" target="Logo64.PNG" />
+    <file src="..\..\CommonResources\Media\Logo64.PNG" target=""/>
+    <file src="bin\Release\netstandard2.0\UAOOI.Common.Infrastructure.Loc.dll" target="lib\netstandard2.0\UAOOI.Common.Infrastructure.dll" />
+    <file src="bin\Release\netstandard2.0\UAOOI.Common.Infrastructure.Loc.xml" target="lib\netstandard2.0\UAOOI.Common.Infrastructure.xml" />
   </files>
 </package>
 

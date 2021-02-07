@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+        xmlns:di="http://opcfoundation.org/UA/DI/"
+        xmlns:dix="http://opcfoundation.org/UA/DI/Types.xsd"
+        -->
+
+<ModelDesign
+        xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ua="http://opcfoundation.org/UA/"
+        xmlns:di="http://opcfoundation.org/UA/DI/"
+        xmlns:semi="https://agileo-automation.com/UA/Semi/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        TargetNamespace="https://agileo-automation.com/UA/Semi/"
+        TargetXmlNamespace="https://agileo-automation.com/UA/Semi/"
+        TargetVersion="0.1"
+        TargetPublicationDate="2019-04-01T00:00:00Z"
+        xmlns="http://opcfoundation.org/UA/ModelDesign.xsd"
+        xsi:schemaLocation="http://opcfoundation.org/UA/ModelDesign.xsd ModelDesign.xsd">
+
+  <Namespaces>
+    <Namespace Name="Semi" Version="0.1" Prefix="Opc.Ua.Semi"
+           XmlNamespace="https://agileo-automation.com/UA/Semi/Types.xsd"
+           XmlPrefix="Semi">https://agileo-automation.com/UA/Semi/</Namespace>
+    <!--<Namespace Name="OpcUaDi" Prefix="Opc.Ua.Di"
+               XmlNamespace="http://opcfoundation.org/UA/DI/Types.xsd"
+               XmlPrefix="DI" FilePath="OpcUaDiModel">http://opcfoundation.org/UA/DI/</Namespace>-->
+    <Namespace Name="OpcUa" Version="1.04" PublicationDate="2019-05-01T00:00:00Z" Prefix="Opc.Ua" InternalPrefix="Opc.Ua.Server"
+           XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd"
+           XmlPrefix="OpcUa">http://opcfoundation.org/UA/</Namespace>
+  </Namespaces>
+
+
+  <Object SymbolicName="semi:MyFolder" TypeDefinition="ua:FolderType">
+    <Description>Contains all status variables used in GEM</Description>
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType>ua:Organizes</ReferenceType>
+        <TargetId>ua:ObjectsFolder</TargetId>
+      </Reference>
+    </References>
+  </Object>
+
+ </ModelDesign>

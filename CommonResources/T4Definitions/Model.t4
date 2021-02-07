@@ -11,7 +11,7 @@ string Url = "https://github.com/mpostol/OPC-UA-OOI";
 string Email = "mpostol@cas.eu";
 string Phone = "+48 608 619 899";
 string Owner = "Mariusz Postol";
-string RepositoryVersion = "5.1.0"; //increment on the same position as the group version
+string RepositoryVersion = "5.1.1"; //increment on the same position as the group version
 string RepositoryVersionPrerelease = ""; //increment on the same position as the group version
 string Authors = "Mariusz Postol";
 string IconURLTag = "https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true";

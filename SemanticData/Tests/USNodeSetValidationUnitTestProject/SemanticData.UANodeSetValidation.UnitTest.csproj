@@ -95,6 +95,7 @@
       <Visible>False</Visible>
     </AdditionalFiles>
     <Compile Include="UANodeContextUnitTest.cs" />
+    <Compile Include="XMLModelsProblemsToReportUnitTest.cs" />
     <Compile Include="XMLModelsCorrectModelsUnitTest.cs" />
     <Compile Include="XMLModelsModelsWithErrorsUnitTest.cs" />
     <Compile Include="XMLUANodeUnitTest.cs" />
@@ -136,7 +137,9 @@
     <Content Include="XMLModels\ModelsWithErrors\UndefinedHasTypeDefinition.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="XMLModels\ProblemsToReport\ADI#509\Opc.Ua.Adi.NodeSet2.xml" />
+    <None Include="XMLModels\ProblemsToReport\ADI#509\Opc.Ua.Adi.NodeSet2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="XMLModels\ProblemsToReport\eoursel510\Opc.Ua.NodeSet2.TriCycleType_V1.1.xml" />
     <Content Include="XMLModels\ProblemsToReport\fgolra177\Opc.Ua.Semi.NodeSet2.xml" />
     <Content Include="XMLModels\ProblemsToReport\fgolra177\OpcUaGemModel.xml" />

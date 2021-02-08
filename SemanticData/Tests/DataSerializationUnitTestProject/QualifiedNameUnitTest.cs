@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -22,6 +22,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       Assert.IsFalse(_qn.NamespaceIndexSpecified);
       Assert.AreEqual<string>(_qn.Name, name);
     }
+
     [TestMethod]
     public void QualifiedNameParseTestMethod3()
     {
@@ -31,6 +32,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       Assert.IsFalse(_qn.NamespaceIndexSpecified);
       Assert.AreEqual<string>(_qn.Name, "Name");
     }
+
     [TestMethod]
     public void OperatorsTest()
     {
@@ -41,6 +43,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
       Assert.IsTrue(_qn1 == _qn2);
       Assert.IsTrue(_qn2 == _qn1);
       _qn2 = new QualifiedName("Something else");
+      Assert.IsTrue(_qn1 != _qn2);
+      _qn2 = new QualifiedName("1:Default Binary");
       Assert.IsTrue(_qn1 != _qn2);
     }
   }

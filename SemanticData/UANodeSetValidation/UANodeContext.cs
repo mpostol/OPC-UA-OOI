@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -23,8 +23,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// </summary>
   internal class UANodeContext : IUANodeContext, IUANodeBase
   {
-
     #region constructor
+
     /// <summary>
     /// Initializes a new instance of the <see cref="UANodeContext" /> class.
     /// </summary>
@@ -35,9 +35,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       NodeIdContext = nodeId;
       this.m_AddressSpaceContext = addressSpaceContext;
     }
-    #endregion
+
+    #endregion constructor
 
     #region IUANodeContext
+
     /// <summary>
     /// Builds the symbolic identifier.
     /// </summary>
@@ -57,11 +59,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       string _BranchName = string.IsNullOrEmpty(this.UANode.SymbolicName) ? this.BrowseName.Name : this.UANode.SymbolicName;
       path.Add(_BranchName);
     }
+
     /// <summary>
     /// Gets or sets a value indicating whether the node is in recursion chain - selected for analysis second time.
     /// </summary>
     /// <value><c>true</c> if the node is in recursion chain; otherwise, <c>false</c>.</value>
     public bool InRecursionChain { get; set; } = false;
+
     /// <summary>
     /// Updates this instance in case the wrapped <see cref="UANode" /> is recognized in the model.
     /// </summary>
@@ -96,12 +100,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case ReferenceKindEnum.HasComponent:
           case ReferenceKindEnum.HasProperty:
             break;
+
           case ReferenceKindEnum.HasModellingRule:
             ModelingRule = _newReference.GetModelingRule();
             break;
+
           case ReferenceKindEnum.HasSubtype: //TODO Part 3 7.10 HasSubtype - add test cases #35
             m_BaseTypeNode = _newReference.SourceNode;
             break;
+
           case ReferenceKindEnum.HasTypeDefinition: //Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
             m_BaseTypeNode = _newReference.TargetNode;
             break;
@@ -109,13 +116,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         addReference(_newReference);
       }
     }
+
     public IUANodeContext CreateUANodeContext(NodeId id)
     {
       return new UANodeContext(id, m_AddressSpaceContext);
     }
-    #endregion
+
+    #endregion IUANodeContext
 
     #region IUANodeBase
+
     /// <summary>
     /// Exports the browse name of the wrapped node by this instance.
     /// </summary>
@@ -124,6 +134,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return new XmlQualifiedName(BrowseName.Name, m_AddressSpaceContext.GetNamespace(BrowseName.NamespaceIndex));
     }
+
     /// <summary>
     /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent models.
     /// </summary>
@@ -153,18 +164,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             _or.ReferenceType = _ReferenceType;
             _or.TargetId = _rfx.BrowsePath();
             break;
+
           case ReferenceKindEnum.HasComponent:
             if (_rfx.SourceNode == this)
               _children.Add(_rfx);
             break;
+
           case ReferenceKindEnum.HasProperty:
             if ((_rfx.SourceNode == this) && (_rfx.SourceNode.UANode.NodeClassEnum != NodeClassEnum.UADataType))
               _children.Add(_rfx);
             break;
+
           case ReferenceKindEnum.HasModellingRule:
             break;
+
           case ReferenceKindEnum.HasSubtype:
             break;
+
           case ReferenceKindEnum.HasTypeDefinition: //Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
             IsProperty = _rfx.TargetNode.IsPropertyVariableType;
             break;
@@ -186,21 +202,25 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         catch (Exception) { throw; }
       }
     }
+
     /// <summary>
     /// Gets the instance of <see cref="UANode" /> of this context source
     /// </summary>
     /// <value>The source UA node from the model.</value>
     public UANode UANode { get; private set; } = null;
+
     /// <summary>
     /// Gets the node identifier.
     /// </summary>
     /// <value>The imported node identifier.</value>
     public NodeId NodeIdContext { get; private set; }
+
     /// <summary>
     /// Gets a value indicating whether this instance is a property.
     /// </summary>
     /// <value><c>true</c> if this instance is property; otherwise, <c>false</c>.</value>
     public bool IsProperty { get; private set; } = false;
+
     /// <summary>
     /// Exports the BrowseName of the BaseType.
     /// </summary>
@@ -211,6 +231,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type, Log.TraceEvent));
     }
+
     /// <summary>
     /// Gets the modeling rule associated with this node.
     /// </summary>
@@ -238,6 +259,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return ExportNodeBrowseName();
     }
+
     /// <summary>
     /// Gets the derived instances.
     /// </summary>
@@ -267,11 +289,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_InGetDerivedInstances = false;
       }
     }
+
     /// <summary>
     /// Gets or sets the browse name of this node.
     /// </summary>
     public QualifiedName BrowseName { get; set; } = QualifiedName.Null;
+
     bool IUANodeBase.IsPropertyVariableType => this.NodeIdContext == VariableTypeIds.PropertyType;
+
     void IUANodeBase.RemoveInheritedValues(IUANodeBase instanceDeclaration)
     {
       if (instanceDeclaration is null)
@@ -280,9 +305,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (this.ModelingRule == instanceDeclaration.ModelingRule)
         this.ModelingRule = null;
     }
-    #endregion
+
+    #endregion IUANodeBase
 
     #region IEquatable<IUANodeBase>
+
     /// <summary>
     /// Indicates whether the current object is equal to another object of the same type.
     /// </summary>
@@ -292,19 +319,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (Object.ReferenceEquals(other, null))
         return false;
-      if (this.BrowseName != other.BrowseName)
+      //TODO ADI model from Embedded example import fails #509
+      if (this.BrowseName != other.BrowseName)  //1:TransitionNumber vs TransitionNumber; 1:StateNumber vs StateNumber
         throw new ArgumentOutOfRangeException("The browse name of compared nodes musty be equal.");
       return
         this.UANode.Equals(other.UANode);
     }
-    #endregion
+
+    #endregion IEquatable<IUANodeBase>
 
     public IBuildErrorsHandling Log { get; set; } = BuildErrorsHandling.Log;
 
     #region private
+
     private IUANodeBase m_BaseTypeNode;
     private readonly IAddressSpaceBuildContext m_AddressSpaceContext = null;
     private bool m_InGetDerivedInstances = false;
+
     //methods
     /// <summary>
     /// Gets or sets the name of the m browse.
@@ -323,7 +354,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
       }
     }
-    #endregion
 
+    #endregion private
   }
 }

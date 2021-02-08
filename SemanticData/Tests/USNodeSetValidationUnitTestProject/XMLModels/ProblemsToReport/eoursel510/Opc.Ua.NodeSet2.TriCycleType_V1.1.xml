@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UANodeSet LastModified="2020-11-25T11:52:36.296Z" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:si="http://www.siemens.com/OPCUA/2017/SimaticNodeSetExtensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <NamespaceUris>
+        <Uri>http://tricycleTypeV1</Uri>
+    </NamespaceUris>
+    <Models>
+        <Model ModelUri="http://tricycleTypeV1" PublicationDate="2020-11-25T00:00:00Z" Version="1.00">
+            <RequiredModel ModelUri="http://opcfoundation.org/UA/" PublicationDate="2020-04-14T00:00:00Z" Version="1.04.6"/>
+        </Model>
+    </Models>
+    <Aliases>
+        <Alias Alias="Int32">i=6</Alias>
+        <Alias Alias="Float">i=10</Alias>
+        <Alias Alias="DateTime">i=13</Alias>
+        <Alias Alias="String">i=12</Alias>
+        <Alias Alias="ByteString">i=15</Alias>
+        <Alias Alias="LocalizedText">i=21</Alias>
+        <Alias Alias="HasComponent">i=47</Alias>
+        <Alias Alias="HasProperty">i=46</Alias>
+        <Alias Alias="HasSubtype">i=45</Alias>
+        <Alias Alias="HasTypeDefinition">i=40</Alias>
+        <Alias Alias="HasModellingRule">i=37</Alias>
+        <Alias Alias="HasEncoding">i=38</Alias>
+        <Alias Alias="HasDescription">i=39</Alias>
+        <Alias Alias="HasOrderedComponent">i=49</Alias>
+        <Alias Alias="TireEnum">ns=1;i=1</Alias>
+        <Alias Alias="TriCycleDataType">ns=1;i=3</Alias>
+        <Alias Alias="WheelDataType">ns=1;i=5</Alias>
+    </Aliases>
+    <Extensions>
+        <Extension>
+            <si:Generator Product="SiOME" Edition="Standard" Version="2.1.1"/>
+        </Extension>
+    </Extensions>
+    <UADataType NodeId="ns=1;i=1" BrowseName="1:TireEnum">
+        <DisplayName>TireEnum</DisplayName>
+        <References>
+            <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
+        </References>
+        <Definition Name="TireEnum">
+            <Field DataType="i=24" Name="Mud" Value="0"/>
+            <Field DataType="i=24" Name="Ice" Value="1"/>
+            <Field DataType="i=24" Name="Sand" Value="2"/>
+        </Definition>
+    </UADataType>
+    <UAVariable DataType="LocalizedText" ValueRank="1" NodeId="ns=1;i=2" BrowseName="EnumStrings" ParentNodeId="ns=1;i=1">
+        <DisplayName>EnumStrings</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=1</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Value>
+            <uax:ListOfLocalizedText>
+                <uax:LocalizedText>
+                    <uax:Locale>en-us</uax:Locale>
+                    <uax:Text>Mud</uax:Text>
+                </uax:LocalizedText>
+                <uax:LocalizedText>
+                    <uax:Locale>en-us</uax:Locale>
+                    <uax:Text>Ice</uax:Text>
+                </uax:LocalizedText>
+                <uax:LocalizedText>
+                    <uax:Locale>en-us</uax:Locale>
+                    <uax:Text>Sand</uax:Text>
+                </uax:LocalizedText>
+            </uax:ListOfLocalizedText>
+        </Value>
+    </UAVariable>
+    <UAObject SymbolicName="Default_Binary" NodeId="ns=1;i=4" BrowseName="Default Binary">
+        <DisplayName>Default Binary</DisplayName>
+        <References>
+            <Reference ReferenceType="HasTypeDefinition">i=76</Reference>
+            <Reference ReferenceType="HasDescription">ns=1;i=6008</Reference>
+        </References>
+    </UAObject>
+    <UADataType NodeId="ns=1;i=3" BrowseName="1:TriCycleDataType">
+        <DisplayName>TriCycleDataType</DisplayName>
+        <References>
+            <Reference ReferenceType="HasSubtype" IsForward="false">i=22</Reference>
+            <Reference ReferenceType="HasEncoding">ns=1;i=4</Reference>
+        </References>
+        <Definition Name="TriCycleDataType">
+            <Field DataType="i=10" Name="weight"/>
+            <Field DataType="ns=1;i=5" Name="wheel"/>
+            <Field DataType="i=12" Name="Model"/>
+        </Definition>
+    </UADataType>
+    <UAObject SymbolicName="Default_Binary" NodeId="ns=1;i=6" BrowseName="Default Binary">
+        <DisplayName>Default Binary</DisplayName>
+        <References>
+            <Reference ReferenceType="HasTypeDefinition">i=76</Reference>
+            <Reference ReferenceType="HasDescription">ns=1;i=6009</Reference>
+        </References>
+    </UAObject>
+    <UADataType NodeId="ns=1;i=5" BrowseName="1:WheelDataType">
+        <DisplayName>WheelDataType</DisplayName>
+        <Description>Wheel datatype.</Description>
+        <References>
+            <Reference ReferenceType="HasSubtype" IsForward="false">i=22</Reference>
+            <Reference ReferenceType="HasEncoding">ns=1;i=6</Reference>
+        </References>
+        <Definition Name="WheelDataType">
+            <Field DataType="i=10" Name="tickness"/>
+            <Field DataType="i=10" Name="diameter"/>
+            <Field DataType="i=10" Name="pressure"/>
+            <Field DataType="ns=1;i=1" Name="TireType"/>
+            <Field DataType="i=6" Name="raysLen"/>
+        </Definition>
+    </UADataType>
+    <UAObjectType NodeId="ns=1;i=7" BrowseName="1:HumanType">
+        <DisplayName>HumanType</DisplayName>
+        <References>
+            <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
+        </References>
+    </UAObjectType>
+    <UAVariable DataType="String" NodeId="ns=1;i=8" BrowseName="Name" ParentNodeId="ns=1;i=7">
+        <DisplayName>Name</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=7</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="Int32" NodeId="ns=1;i=9" BrowseName="Age" ParentNodeId="ns=1;i=7">
+        <DisplayName>Age</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=7</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="String" NodeId="ns=1;i=10" BrowseName="Gender" ParentNodeId="ns=1;i=7">
+        <DisplayName>Gender</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=7</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAObjectType NodeId="ns=1;i=11" BrowseName="1:TrailerType">
+        <DisplayName>TrailerType</DisplayName>
+        <References>
+            <Reference ReferenceType="HasSubtype" IsForward="false">ns=1;i=12</Reference>
+        </References>
+    </UAObjectType>
+    <UAObjectType NodeId="ns=1;i=12" BrowseName="1:VehicleType">
+        <DisplayName>VehicleType</DisplayName>
+        <References>
+            <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
+        </References>
+    </UAObjectType>
+    <UAVariable DataType="DateTime" NodeId="ns=1;i=13" BrowseName="buildDate" ParentNodeId="ns=1;i=12">
+        <DisplayName>buildDate</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=12</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAObject SymbolicName="S_Owner_" NodeId="ns=1;i=14" BrowseName="&lt;Owner&gt;" ParentNodeId="ns=1;i=12">
+        <DisplayName>&lt;Owner&gt;</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=12</Reference>
+            <Reference ReferenceType="HasTypeDefinition">ns=1;i=7</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAObject>
+    <UAVariable DataType="String" NodeId="ns=1;i=15" BrowseName="Name" ParentNodeId="ns=1;i=14">
+        <DisplayName>Name</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=14</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="Int32" NodeId="ns=1;i=16" BrowseName="Age" ParentNodeId="ns=1;i=14">
+        <DisplayName>Age</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=14</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="String" NodeId="ns=1;i=17" BrowseName="Gender" ParentNodeId="ns=1;i=14">
+        <DisplayName>Gender</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=14</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="DateTime" NodeId="ns=1;i=18" BrowseName="buildDate" ParentNodeId="ns=1;i=11">
+        <DisplayName>buildDate</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=11</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAObject SymbolicName="S_Owner_" NodeId="ns=1;i=19" BrowseName="&lt;Owner&gt;" ParentNodeId="ns=1;i=11">
+        <DisplayName>&lt;Owner&gt;</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=11</Reference>
+            <Reference ReferenceType="HasTypeDefinition">ns=1;i=7</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAObject>
+    <UAVariable DataType="String" NodeId="ns=1;i=20" BrowseName="Name" ParentNodeId="ns=1;i=19">
+        <DisplayName>Name</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=19</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="Int32" NodeId="ns=1;i=21" BrowseName="Age" ParentNodeId="ns=1;i=19">
+        <DisplayName>Age</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=19</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="String" NodeId="ns=1;i=22" BrowseName="Gender" ParentNodeId="ns=1;i=19">
+        <DisplayName>Gender</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=19</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="TriCycleDataType" ValueRank="1" NodeId="ns=1;i=23" ArrayDimensions="0" BrowseName="LoadedTricycle" ParentNodeId="ns=1;i=11">
+        <DisplayName>LoadedTricycle</DisplayName>
+        <References>
+            <Reference ReferenceType="HasOrderedComponent" IsForward="false">ns=1;i=11</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAObjectType NodeId="ns=1;i=24" BrowseName="1:TriCycleType">
+        <DisplayName>TriCycleType</DisplayName>
+        <Description>This a simple Tricycle</Description>
+        <References>
+            <Reference ReferenceType="HasSubtype" IsForward="false">ns=1;i=12</Reference>
+        </References>
+    </UAObjectType>
+    <UAVariable DataType="DateTime" NodeId="ns=1;i=25" BrowseName="buildDate" ParentNodeId="ns=1;i=24">
+        <DisplayName>buildDate</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=24</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAObject SymbolicName="S_Owner_" NodeId="ns=1;i=26" BrowseName="&lt;Owner&gt;" ParentNodeId="ns=1;i=24">
+        <DisplayName>&lt;Owner&gt;</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=24</Reference>
+            <Reference ReferenceType="HasTypeDefinition">ns=1;i=7</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAObject>
+    <UAVariable DataType="String" NodeId="ns=1;i=27" BrowseName="Name" ParentNodeId="ns=1;i=26">
+        <DisplayName>Name</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=26</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="Int32" NodeId="ns=1;i=28" BrowseName="Age" ParentNodeId="ns=1;i=26">
+        <DisplayName>Age</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=26</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="String" NodeId="ns=1;i=29" BrowseName="Gender" ParentNodeId="ns=1;i=26">
+        <DisplayName>Gender</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=26</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="Float" NodeId="ns=1;i=30" BrowseName="weight" ParentNodeId="ns=1;i=24">
+        <DisplayName>weight</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=24</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="WheelDataType" ValueRank="1" NodeId="ns=1;i=31" ArrayDimensions="3" BrowseName="wheels" ParentNodeId="ns=1;i=24">
+        <DisplayName>wheels</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=24</Reference>
+            <Reference ReferenceType="HasTypeDefinition">ns=1;i=33</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="String" NodeId="ns=1;i=32" BrowseName="Model" ParentNodeId="ns=1;i=24">
+        <DisplayName>Model</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=24</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariableType DataType="ns=1;i=5" NodeId="ns=1;i=33" BrowseName="1:WheelVariableType">
+        <DisplayName>WheelVariableType</DisplayName>
+        <References>
+            <Reference ReferenceType="HasSubtype" IsForward="false">i=63</Reference>
+        </References>
+    </UAVariableType>
+    <UAVariable DataType="Float" NodeId="ns=1;i=34" BrowseName="tickness" ParentNodeId="ns=1;i=33">
+        <DisplayName>tickness</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=33</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="Float" NodeId="ns=1;i=35" BrowseName="diameter" ParentNodeId="ns=1;i=33">
+        <DisplayName>diameter</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=33</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="Float" NodeId="ns=1;i=36" BrowseName="pressure" ParentNodeId="ns=1;i=33">
+        <DisplayName>pressure</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=33</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="TireEnum" NodeId="ns=1;i=37" BrowseName="tiretype" ParentNodeId="ns=1;i=33">
+        <DisplayName>tiretype</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=33</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="DateTime" NodeId="ns=1;i=38" BrowseName="buildDate">
+        <DisplayName>buildDate</DisplayName>
+        <References>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+    </UAVariable>
+    <UAObject SymbolicName="S_Owner_" NodeId="ns=1;i=39" BrowseName="&lt;Owner&gt;">
+        <DisplayName>&lt;Owner&gt;</DisplayName>
+        <References>
+            <Reference ReferenceType="HasTypeDefinition">ns=1;i=7</Reference>
+        </References>
+    </UAObject>
+    <UAVariable DataType="String" NodeId="ns=1;i=40" BrowseName="Name" ParentNodeId="ns=1;i=39">
+        <DisplayName>Name</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=39</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="Int32" NodeId="ns=1;i=41" BrowseName="Age" ParentNodeId="ns=1;i=39">
+        <DisplayName>Age</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=39</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="String" NodeId="ns=1;i=42" BrowseName="Gender" ParentNodeId="ns=1;i=39">
+        <DisplayName>Gender</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=39</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="Float" NodeId="ns=1;i=6000" BrowseName="diameter" ParentNodeId="ns=1;i=31">
+        <DisplayName>diameter</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=31</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="Float" NodeId="ns=1;i=6001" BrowseName="pressure" ParentNodeId="ns=1;i=31">
+        <DisplayName>pressure</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=31</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="Float" NodeId="ns=1;i=6002" BrowseName="tickness" ParentNodeId="ns=1;i=31">
+        <DisplayName>tickness</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=31</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="TireEnum" NodeId="ns=1;i=6003" BrowseName="tiretype" ParentNodeId="ns=1;i=31">
+        <DisplayName>tiretype</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=31</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="ByteString" NodeId="ns=1;i=6004" BrowseName="1:TypeDictionary" UserAccessLevel="3" AccessLevel="3">
+        <DisplayName>TypeDictionary</DisplayName>
+        <Description>Collects the data type descriptions of http://tricycleTypeV1</Description>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">i=93</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=72</Reference>
+        </References>
+        <Value>
+            <uax:ByteString>PG9wYzpUeXBlRGljdGlvbmFyeSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp0bnM9Imh0dHA6Ly90cmljeWNsZVR5cGVWMSIgRGVmYXVsdEJ5dGVPcmRlcj0iTGl0dGxlRW5kaWFuIiB4bWxuczpvcGM9Imh0dHA6Ly9vcGNmb3VuZGF0aW9uLm9yZy9CaW5hcnlTY2hlbWEvIiB4bWxuczp1YT0iaHR0cDovL29wY2ZvdW5kYXRpb24ub3JnL1VBLyIgVGFyZ2V0TmFtZXNwYWNlPSJodHRwOi8vdHJpY3ljbGVUeXBlVjEiPgogICAgPG9wYzpJbXBvcnQgTmFtZXNwYWNlPSJodHRwOi8vb3BjZm91bmRhdGlvbi5vcmcvVUEvIi8+CiAgICA8b3BjOkVudW1lcmF0ZWRUeXBlIExlbmd0aEluQml0cz0iMzIiIE5hbWU9IlRpcmVFbnVtIj4KICAgICAgICA8b3BjOkVudW1lcmF0ZWRWYWx1ZSBOYW1lPSJNdWQiIFZhbHVlPSIwIi8+CiAgICAgICAgPG9wYzpFbnVtZXJhdGVkVmFsdWUgTmFtZT0iSWNlIiBWYWx1ZT0iMSIvPgogICAgICAgIDxvcGM6RW51bWVyYXRlZFZhbHVlIE5hbWU9IlNhbmQiIFZhbHVlPSIyIi8+CiAgICA8L29wYzpFbnVtZXJhdGVkVHlwZT4KICAgIDxvcGM6U3RydWN0dXJlZFR5cGUgQmFzZVR5cGU9InVhOkV4dGVuc2lvbk9iamVjdCIgTmFtZT0iVHJpQ3ljbGVEYXRhVHlwZSI+CiAgICAgICAgPG9wYzpGaWVsZCBUeXBlTmFtZT0ib3BjOkZsb2F0IiBOYW1lPSJ3ZWlnaHQiLz4KICAgICAgICA8b3BjOkZpZWxkIFR5cGVOYW1lPSJ0bnM6V2hlZWxEYXRhVHlwZSIgTmFtZT0id2hlZWwiLz4KICAgICAgICA8b3BjOkZpZWxkIFR5cGVOYW1lPSJvcGM6U3RyaW5nIiBOYW1lPSJNb2RlbCIvPgogICAgPC9vcGM6U3RydWN0dXJlZFR5cGU+CiAgICA8b3BjOlN0cnVjdHVyZWRUeXBlIEJhc2VUeXBlPSJ1YTpFeHRlbnNpb25PYmplY3QiIE5hbWU9IldoZWVsRGF0YVR5cGUiPgogICAgICAgIDxvcGM6RmllbGQgVHlwZU5hbWU9Im9wYzpGbG9hdCIgTmFtZT0idGlja25lc3MiLz4KICAgICAgICA8b3BjOkZpZWxkIFR5cGVOYW1lPSJvcGM6RmxvYXQiIE5hbWU9ImRpYW1ldGVyIi8+CiAgICAgICAgPG9wYzpGaWVsZCBUeXBlTmFtZT0ib3BjOkZsb2F0IiBOYW1lPSJwcmVzc3VyZSIvPgogICAgICAgIDxvcGM6RmllbGQgVHlwZU5hbWU9InRuczpUaXJlRW51bSIgTmFtZT0iVGlyZVR5cGUiLz4KICAgICAgICA8b3BjOkZpZWxkIFR5cGVOYW1lPSJvcGM6SW50MzIiIE5hbWU9InJheXNMZW4iLz4KICAgIDwvb3BjOlN0cnVjdHVyZWRUeXBlPgo8L29wYzpUeXBlRGljdGlvbmFyeT4=</uax:ByteString>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="String" ValueRank="-2" NodeId="ns=1;i=6005" BrowseName="NamespaceUri" UserAccessLevel="3" AccessLevel="3">
+        <DisplayName>NamespaceUri</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=6004</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Value>
+            <uax:String>http://tricycleTypeV1</uax:String>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="ByteString" NodeId="ns=1;i=6006" BrowseName="1:TypeDictionary" UserAccessLevel="3" AccessLevel="3">
+        <DisplayName>TypeDictionary</DisplayName>
+        <Description>Collects the data type descriptions of http://tricycleTypeV1</Description>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">i=92</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=72</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="String" ValueRank="-2" NodeId="ns=1;i=6007" BrowseName="NamespaceUri" UserAccessLevel="3" AccessLevel="3">
+        <DisplayName>NamespaceUri</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=6006</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Value>
+            <uax:String>http://tricycleTypeV1/Types.xsd</uax:String>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="String" NodeId="ns=1;i=6008" BrowseName="1:TriCycleDataType" UserAccessLevel="3" AccessLevel="3">
+        <DisplayName>TriCycleDataType</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=6004</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=69</Reference>
+        </References>
+        <Value>
+            <uax:String>TriCycleDataType</uax:String>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="String" NodeId="ns=1;i=6009" BrowseName="1:WheelDataType" UserAccessLevel="3" AccessLevel="3">
+        <DisplayName>WheelDataType</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=6004</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=69</Reference>
+        </References>
+        <Value>
+            <uax:String>WheelDataType</uax:String>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="String" NodeId="ns=1;i=6010" BrowseName="1:TriCycleDataType" UserAccessLevel="3" AccessLevel="3">
+        <DisplayName>TriCycleDataType</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=6006</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=69</Reference>
+        </References>
+        <Value>
+            <uax:String>//xs:element[@name='TriCycleDataType']</uax:String>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="String" NodeId="ns=1;i=6011" BrowseName="1:WheelDataType" UserAccessLevel="3" AccessLevel="3">
+        <DisplayName>WheelDataType</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=6006</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=69</Reference>
+        </References>
+        <Value>
+            <uax:String>//xs:element[@name='WheelDataType']</uax:String>
+        </Value>
+    </UAVariable>
+</UANodeSet>

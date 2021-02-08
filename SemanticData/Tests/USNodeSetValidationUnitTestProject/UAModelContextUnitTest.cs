@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -15,7 +15,6 @@ using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
-
   [TestClass]
   public class UAModelContextUnitTest
   {
@@ -27,6 +26,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
       UAModelContext _mc = new UAModelContext(_tm, _asMock.Object);
     }
+
     [TestMethod]
     [TestCategory("Code")]
     public void CreateUAModelContextNodeAliasNull()
@@ -36,6 +36,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
       UAModelContext _mc = new UAModelContext(_tm, _asMock.Object);
     }
+
     [TestMethod]
     [TestCategory("Code")]
     [ExpectedException(typeof(ArgumentNullException))]
@@ -44,6 +45,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       UANodeSet _tm = TestData.CreateNodeSetModel();
       UAModelContext _mc = new UAModelContext(_tm, null);
     }
+
     [TestMethod]
     public void AliasesConversionTest()
     {
@@ -60,8 +62,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Mock<IBuildErrorsHandling> _logMock = new Mock<IBuildErrorsHandling>();
       List<TraceMessage> _logsCache = new List<TraceMessage>();
       _logMock.Setup(x => x.TraceEvent(It.IsAny<TraceMessage>())).Callback<TraceMessage>(x => _logsCache.Add(x));
-      UAModelContext _modelContext = new UAModelContext(_nodeSet, _asMock.Object);
-      _modelContext.Log = _logMock.Object;
+      UAModelContext _modelContext = new UAModelContext(_nodeSet, _asMock.Object)
+      {
+        Log = _logMock.Object
+      };
       //start testing
       Assert.AreEqual<string>("ns=10;i=1", _modelContext.ImportNodeId("Boolean"));
       Assert.AreEqual<string>("i=45", _modelContext.ImportNodeId("HasSubtype"));
@@ -76,6 +80,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<int>(1, _logsCache.Count);
       Assert.IsTrue(_logsCache[0].Message.Contains("http://tempuri.org/NameUnknown0"));
     }
+
     [TestMethod]
     public void ImportQualifiedNameTest()
     {

@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -18,11 +18,9 @@ using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
-
   [TestClass]
   public class AddressSpaceContextUnitTest
   {
-
     [TestMethod]
     public void AddressSpaceContextConstructorTest()
     {
@@ -31,6 +29,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       _asp.AddressSpaceContext.UTAddressSpaceCheckConsistency(x => _invalidNodes.Add(x));
       _asp.TestConsistency(6, 0);
     }
+
     [TestMethod]
     public void ReferencesCheckConsistencyTest()
     {
@@ -38,6 +37,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       _asp.AddressSpaceContext.UTReferencesCheckConsistency((x, y, z, v) => Assert.Fail());
       _asp.TestConsistency(6, 0);
     }
+
     [TestMethod]
     public void AddressSpaceContextContentCheck()
     {
@@ -59,6 +59,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.IsTrue(new NodeId(ObjectTypes.FolderType) == _content[0].NodeIdContext);
       _asp.TestConsistency(6, 0);
     }
+
     [TestMethod]
     public void AddressSpaceReferencesContentCheck()
     {
@@ -69,68 +70,66 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       //RootFolder
       _content.Clear();
       _asp.AddressSpaceContext.UTGetReferences(ObjectIds.ObjectsFolder, x => _content.Add(x));
-      Assert.AreEqual<int>(2, _content.Count);
+      Assert.AreEqual<int>(3, _content.Count);
       _asp.TestConsistency(6, 0);
     }
+
     [TestMethod]
     [TestCategory("AddressSpaceContext")]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void AddressSpaceContextImportUANodeSetNullTestMethod1()
+    public void AddressSpaceContextImportUANodeSetNull()
     {
       IAddressSpaceContext _as = new AddressSpaceContext(x => { });
       UANodeSet _ns = null;
-      _as.ImportUANodeSet(_ns);
-    }
-    [TestMethod]
-    [TestCategory("AddressSpaceContext")]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void AddressSpaceContextImportUANodeSetNullTestMethod2()
-    {
-      IAddressSpaceContext _as = new AddressSpaceContext(x => { });
+      Assert.ThrowsException<ArgumentNullException>(() => _as.ImportUANodeSet(_ns));
       FileInfo _fi = null;
-      _as.ImportUANodeSet(_fi);
+      Assert.ThrowsException<ArgumentNullException>(() => _as.ImportUANodeSet(_fi));
     }
+
     [TestMethod]
     [TestCategory("AddressSpaceContext")]
     [ExpectedException(typeof(FileNotFoundException))]
-    public void AddressSpaceContextNotExistingFileNameTestMethod()
+    public void AddressSpaceContextNotExistingFileName()
     {
       IAddressSpaceContext _as = new AddressSpaceContext(x => { });
       FileInfo _fi = new FileInfo("NotExistingFileName.xml");
       Assert.IsFalse(_fi.Exists);
       _as.ImportUANodeSet(_fi);
     }
+
     [TestMethod]
     [TestCategory("AddressSpaceContext")]
-    public void AddressSpaceContextValidateAndExportModel()
+    public void AddressSpaceContextValidateAndExportModelOpcUa()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel(UAInformationModel.Namespaces.OpcUa);
       _asp.TestConsistency(9, 0);
     }
+
     [TestMethod]
     [TestCategory("AddressSpaceContext")]
-    [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
-    public void AddressSpaceContextValidateAndExportModelTestMethod3()
+    [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    public void AddressSpaceContextValidateAndExportModelWrongNamespace()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel("Not existing namespace");
     }
+
     [TestMethod]
     [TestCategory("AddressSpaceContext")]
-    public void AddressSpaceContextValidateAndExportModelTestMethod4()
+    public void AddressSpaceContextValidateAndExportIndex0()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       IEnumerable<IUANodeContext> _returnValue = null;
       _asp.AddressSpaceContext.UTValidateAndExportModel(0, x => _returnValue = x);
-      Assert.AreEqual<int>(3737, (_returnValue.Count<IUANodeContext>()));
+      Assert.AreEqual<int>(3909, (_returnValue.Count<IUANodeContext>()));
       _asp.TestConsistency(6, 0);
       _asp.AddressSpaceContext.UTValidateAndExportModel(1, x => _returnValue = x);
       Assert.AreEqual<int>(0, _returnValue.Count<IUANodeContext>());
       _asp.TestConsistency(6, 0);
     }
+
     [TestMethod]
-    public void ImportObjectTestMethod()
+    public void ImportObjectTest()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       _asp.TestConsistency(6, 0);
@@ -145,54 +144,34 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       //RootFolder
       _content.Clear();
       _asp.AddressSpaceContext.UTGetReferences(ObjectIds.ObjectsFolder, x => _content.Add(x));
-      Assert.AreEqual<int>(3, _content.Count);
+      Assert.AreEqual<int>(4, _content.Count);
       IEnumerable<IUANodeContext> _toExport = _content.Where<UAReferenceContext>(x => x.TargetNode.NodeIdContext.NamespaceIndex == 1).Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
       Assert.AreEqual<int>(1, _toExport.Count<IUANodeContext>());
       _asp.TestConsistency(10, 0);
     }
-    //TODO - adopt the test
-    //public void ExportBrowseNameTest()
-    //{
-    //  UANodeSet _tm = TestData.CreateNodeSetModel();
-    //  Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-    //  UANode _nodeFactory = new UAVariable()
-    //  {
-    //    NodeId = "ns=1;i=47",
-    //    BrowseName = "EURange",
-    //    ParentNodeId = "ns=1;i=43",
-    //    DataType = "i=884",
-    //    DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
-    //  };
-    //  UANodeContext _node = new UANodeContext(NodeId.Parse("ns=1;i=47"), _asMock.Object);
-    //  XmlQualifiedName _resolvedName = _node.ExportNodeBrowseName();
-    //  Assert.IsNull(_resolvedName);
-    //  _resolvedName = _node.ExportBrowseName(null, UAInformationModel.DataTypes.BaseDataType);
-    //  Assert.IsNull(_resolvedName);
-    //  _resolvedName = _node.ExportBrowseName(new NodeId(UAInformationModel.DataTypes.BaseDataType, 0).ToString(), UAInformationModel.DataTypes.BaseDataType);
-    //  Assert.IsNull(_resolvedName);
-    //  _resolvedName = _node.ExportBrowseName(new NodeId(UAInformationModel.DataTypes.Structure, 0).ToString(), UAInformationModel.DataTypes.BaseDataType);
-    //  Assert.IsNotNull(_resolvedName);
-    //  Assert.AreEqual(@"http://opcfoundation.org/UA/:Structure", _resolvedName.ToString());
-    //}
 
     #region private
+
     private class AddressSpaceWrapper
     {
       public AddressSpaceWrapper()
       {
         AddressSpaceContext = new AddressSpaceContext(x => { Helpers.TraceHelper.TraceDiagnostic(x, _trace, ref _diagnosticCounter); });
       }
+
       public void TestConsistency(int diagnosticCounter, int errorsCounter)
       {
         Assert.AreEqual<int>(diagnosticCounter, _diagnosticCounter);
         Assert.AreEqual<int>(errorsCounter, _trace.Count);
       }
+
       private List<TraceMessage> _trace = new List<TraceMessage>();
       private int _diagnosticCounter = 0;
       internal AddressSpaceContext AddressSpaceContext = null;
     }
-    //Helpers
-    #endregion
 
+    //Helpers
+
+    #endregion private
   }
 }

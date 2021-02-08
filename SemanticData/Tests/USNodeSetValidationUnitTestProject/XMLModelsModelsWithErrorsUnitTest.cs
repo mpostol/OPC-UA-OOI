@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -16,19 +16,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
   [TestClass]
   [DeploymentItem(@"XMLModels\ModelsWithErrors\", @"ModelsWithErrors\")]
-  public class UANodeSetWithErrorsUnitTest
+  public class XMLModelsModelsWithErrorsUnitTest
   {
-
     #region TestMethod
-    [TestMethod]
-    [TestCategory("Deployment")]
-    public void DeploymentTestMethod()
-    {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\DeploymentTest.txt");
-      Assert.IsTrue(_testDataFileInfo.Exists);
-    }
 
-    #region Incorrect Model
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void ObjectEventNotifierOutOfRangeTestMethod()
@@ -45,6 +36,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Assert.AreEqual<int>(1, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       }
     }
+
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongReference2PropertyTestMethod()
@@ -61,6 +53,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Assert.AreEqual<int>(2, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       }
     }
+
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongValueRankTestMethod()
@@ -78,6 +71,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Assert.AreEqual<int>(2, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       }
     }
+
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongAccessLevelTestMethod()
@@ -96,6 +90,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Assert.IsTrue(_log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0506040000").Any<TraceMessage>());
       }
     }
+
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongInverseNameTestMethod()
@@ -114,6 +109,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Assert.AreEqual(3, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0503020000").Count<TraceMessage>());
       }
     }
+
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void DuplicatedNodeIdTestMethod()
@@ -132,6 +128,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Assert.IsTrue(_log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502020000").Any<TraceMessage>());
       }
     }
+
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongDisplayNameLength()
@@ -150,6 +147,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Assert.IsTrue(_log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502050000").Any<TraceMessage>());
       }
     }
+
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongWriteMaskValue()
@@ -168,6 +166,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Assert.AreEqual<int>(2, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502070000").Count<TraceMessage>());
       }
     }
+
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void NotSupportedFeature()
@@ -187,6 +186,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         BuildErrorsHandling.Log.TraceEventAction -= _message => _log.TraceList.Add(_message);
       }
     }
+
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongBrowseName()
@@ -204,6 +204,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Assert.AreEqual<int>(1, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P6-0F03000000").Count<TraceMessage>());
       }
     }
+
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongNodeId()
@@ -220,6 +221,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Assert.AreEqual<int>(3, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502020001").Count<TraceMessage>());
       }
     }
+
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void UndefinedHasSubtypeTestMethod()
@@ -236,6 +238,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Assert.AreEqual<int>(1, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0710000001").Count<TraceMessage>());
       }
     }
+
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void UndefinedHasTypeDefinitionTestMethod()
@@ -254,6 +257,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Assert.AreEqual<int>(1, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0713000000").Count<TraceMessage>());
       }
     }
+
     /// <summary>
     /// Class UndefinedHasComponentTargetTestClass: Handle HasComponent ReferenceType errors. #42
     /// </summary>
@@ -274,8 +278,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Assert.AreEqual<int>(1, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0708000000").Count<TraceMessage>());
       }
     }
-    #endregion
-    #endregion
+
+    #endregion TestMethod
 
     #region private
 
@@ -286,16 +290,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         TraceList = new List<TraceMessage>();
         return new AddressSpaceContext(z => TraceDiagnostic(z, TraceList, ref _diagnosticCounter));
       }
+
       public void Dispose()
       {
         BuildErrorsHandling.Log.TraceEventAction -= _message => TraceDiagnostic(_message, TraceList, ref _diagnosticCounter);
       }
+
       internal List<TraceMessage> TraceList;
       internal int _diagnosticCounter = 0;
+
       internal Logger()
       {
         BuildErrorsHandling.Log.TraceEventAction += _message => TraceDiagnostic(_message, TraceList, ref _diagnosticCounter);
       }
+
       private static void TraceDiagnostic(TraceMessage msg, List<TraceMessage> errors, ref int diagnosticCounter)
       {
         Console.WriteLine(msg.ToString());
@@ -305,8 +313,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
           errors.Add(msg);
       }
     }
-    private const string m_NameSpace = @"http://commsvr.com/OOIUA/SemanticData/UnitTest/UANodeSetValidationUnitTestProject";
-    #endregion
 
+    private const string m_NameSpace = @"http://commsvr.com/OOIUA/SemanticData/UnitTest/UANodeSetValidationUnitTestProject";
+
+    #endregion private
   }
 }

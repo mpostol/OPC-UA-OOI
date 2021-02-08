@@ -70,34 +70,25 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       //RootFolder
       _content.Clear();
       _asp.AddressSpaceContext.UTGetReferences(ObjectIds.ObjectsFolder, x => _content.Add(x));
-      Assert.AreEqual<int>(2, _content.Count);
+      Assert.AreEqual<int>(3, _content.Count);
       _asp.TestConsistency(6, 0);
     }
 
     [TestMethod]
     [TestCategory("AddressSpaceContext")]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void AddressSpaceContextImportUANodeSetNullTestMethod1()
+    public void AddressSpaceContextImportUANodeSetNull()
     {
       IAddressSpaceContext _as = new AddressSpaceContext(x => { });
       UANodeSet _ns = null;
-      _as.ImportUANodeSet(_ns);
-    }
-
-    [TestMethod]
-    [TestCategory("AddressSpaceContext")]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void AddressSpaceContextImportUANodeSetNullTestMethod2()
-    {
-      IAddressSpaceContext _as = new AddressSpaceContext(x => { });
+      Assert.ThrowsException<ArgumentNullException>(() => _as.ImportUANodeSet(_ns));
       FileInfo _fi = null;
-      _as.ImportUANodeSet(_fi);
+      Assert.ThrowsException<ArgumentNullException>(() => _as.ImportUANodeSet(_fi));
     }
 
     [TestMethod]
     [TestCategory("AddressSpaceContext")]
     [ExpectedException(typeof(FileNotFoundException))]
-    public void AddressSpaceContextNotExistingFileNameTestMethod()
+    public void AddressSpaceContextNotExistingFileName()
     {
       IAddressSpaceContext _as = new AddressSpaceContext(x => { });
       FileInfo _fi = new FileInfo("NotExistingFileName.xml");
@@ -107,7 +98,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 
     [TestMethod]
     [TestCategory("AddressSpaceContext")]
-    public void AddressSpaceContextValidateAndExportModel()
+    public void AddressSpaceContextValidateAndExportModelOpcUa()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel(UAInformationModel.Namespaces.OpcUa);
@@ -116,8 +107,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 
     [TestMethod]
     [TestCategory("AddressSpaceContext")]
-    [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
-    public void AddressSpaceContextValidateAndExportModelTestMethod3()
+    [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    public void AddressSpaceContextValidateAndExportModelWrongNamespace()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel("Not existing namespace");
@@ -125,12 +116,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 
     [TestMethod]
     [TestCategory("AddressSpaceContext")]
-    public void AddressSpaceContextValidateAndExportModelTestMethod4()
+    public void AddressSpaceContextValidateAndExportIndex0()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       IEnumerable<IUANodeContext> _returnValue = null;
       _asp.AddressSpaceContext.UTValidateAndExportModel(0, x => _returnValue = x);
-      Assert.AreEqual<int>(3737, (_returnValue.Count<IUANodeContext>()));
+      Assert.AreEqual<int>(3909, (_returnValue.Count<IUANodeContext>()));
       _asp.TestConsistency(6, 0);
       _asp.AddressSpaceContext.UTValidateAndExportModel(1, x => _returnValue = x);
       Assert.AreEqual<int>(0, _returnValue.Count<IUANodeContext>());
@@ -138,7 +129,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     }
 
     [TestMethod]
-    public void ImportObjectTestMethod()
+    public void ImportObjectTest()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       _asp.TestConsistency(6, 0);
@@ -153,7 +144,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       //RootFolder
       _content.Clear();
       _asp.AddressSpaceContext.UTGetReferences(ObjectIds.ObjectsFolder, x => _content.Add(x));
-      Assert.AreEqual<int>(3, _content.Count);
+      Assert.AreEqual<int>(4, _content.Count);
       IEnumerable<IUANodeContext> _toExport = _content.Where<UAReferenceContext>(x => x.TargetNode.NodeIdContext.NamespaceIndex == 1).Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
       Assert.AreEqual<int>(1, _toExport.Count<IUANodeContext>());
       _asp.TestConsistency(10, 0);

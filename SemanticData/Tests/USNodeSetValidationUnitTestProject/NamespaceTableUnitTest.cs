@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 using UAOOI.SemanticData.UANodeSetValidation.Utilities;
+using System.Linq;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -20,7 +21,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void ConstructorTest()
     {
       NamespaceTable _instance = new NamespaceTable();
-      Assert.AreEqual<int>(0, _instance.LastNamespaceIndex);
+      Assert.AreEqual<int>(0, _instance.GetIndex().First<ushort>());
     }
 
     [TestMethod]
@@ -52,7 +53,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       NamespaceTable _instance = new NamespaceTable();
       Assert.AreEqual<int>(1, _instance.GetIndexOrAppend("qerqrqerqwrewrwer"));
       Assert.AreEqual<int>(1, _instance.GetIndex("qerqrqerqwrewrwer"));
-      Assert.AreEqual<int>(1, _instance.LastNamespaceIndex);
+      Assert.AreEqual<int>(1, _instance.GetIndex().First<ushort>());
     }
   }
 }

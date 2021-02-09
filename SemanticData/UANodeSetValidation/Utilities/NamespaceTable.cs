@@ -35,7 +35,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
     /// <summary>
     /// Adds model Uri to the table.
     /// </summary>
-    internal int Append(string modelUri)
+    private int Append(string modelUri)
     {
       if (string.IsNullOrEmpty(modelUri))
         throw new ArgumentNullException("value", "URI must not be null or empty");
@@ -59,7 +59,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
       return m_URIDictionary.ContainsKey(uri) ? m_URIDictionary[uri].Index : -1;
     }
 
-    internal ushort LastNamespaceIndex => (ushort)(m_Index - 1);
+    /// <summary>
+    /// Gets the default index.
+    /// </summary>
+    /// <returns>System.Int32.</returns>
+    internal IEnumerable<ushort> GetIndex()
+    {
+      return new List<ushort>() { (ushort)(m_Index - 1) };
+    }
 
     /// <summary>
     /// Returns the index of the specified namespace uri, adds it if it does not exist.
@@ -79,8 +86,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
     #region private
 
     //var
-    private readonly Dictionary<string, ModelTableEntry> m_URIDictionary = new Dictionary<string, ModelTableEntry>();
 
+    private readonly Dictionary<string, ModelTableEntry> m_URIDictionary = new Dictionary<string, ModelTableEntry>();
     private Dictionary<ushort, string> m_IndexDictionary = new Dictionary<ushort, string>();
     private ushort m_Index = 0;
 

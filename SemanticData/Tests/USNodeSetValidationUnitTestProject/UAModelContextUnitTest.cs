@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     {
       UANodeSet _tm = TestData.CreateNodeSetModel();
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-      UAModelContext _mc = new UAModelContext(_tm, _asMock.Object);
+      UAModelContext _mc = new UAModelContext(_tm.Aliases, _tm.NamespaceUris, _asMock.Object);
     }
 
     [TestMethod]
@@ -34,7 +34,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       UANodeSet _tm = TestData.CreateNodeSetModel();
       _tm.Aliases = null;
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-      UAModelContext _mc = new UAModelContext(_tm, _asMock.Object);
+      UAModelContext _mc = new UAModelContext(_tm.Aliases, _tm.NamespaceUris, _asMock.Object);
     }
 
     [TestMethod]
@@ -43,7 +43,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     public void CreateUAModelContextAddressSpaceContextNull()
     {
       UANodeSet _tm = TestData.CreateNodeSetModel();
-      UAModelContext _mc = new UAModelContext(_tm, null);
+      UAModelContext _mc = new UAModelContext(_tm.Aliases, _tm.NamespaceUris, null);
     }
 
     [TestMethod]
@@ -62,7 +62,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Mock<IBuildErrorsHandling> _logMock = new Mock<IBuildErrorsHandling>();
       List<TraceMessage> _logsCache = new List<TraceMessage>();
       _logMock.Setup(x => x.TraceEvent(It.IsAny<TraceMessage>())).Callback<TraceMessage>(x => _logsCache.Add(x));
-      UAModelContext _modelContext = new UAModelContext(_nodeSet, _asMock.Object)
+      UAModelContext _modelContext = new UAModelContext(_nodeSet.Aliases, _nodeSet.NamespaceUris, _asMock.Object)
       {
         Log = _logMock.Object
       };
@@ -91,7 +91,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       };
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
       _asMock.Setup(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
-      UAModelContext _modelContext = new UAModelContext(_nodeSet, _asMock.Object);
+      UAModelContext _modelContext = new UAModelContext(_nodeSet.Aliases, _nodeSet.NamespaceUris, _asMock.Object);
       Assert.AreEqual<string>("10:Boolean", _modelContext.ImportQualifiedName("1:Boolean"));
       Assert.AreEqual<string>("HasSubtype", _modelContext.ImportQualifiedName("HasSubtype"));
       _asMock.Verify(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"), Times.Once);

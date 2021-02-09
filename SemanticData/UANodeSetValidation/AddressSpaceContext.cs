@@ -99,6 +99,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     void IAddressSpaceContext.ValidateAndExportModel()
     {
+      //TODO NamespaceTable must provide correct namespaceIndex #517
       ushort _nsi = m_NamespaceTable.LastNamespaceIndex;
       string _namespace = m_NamespaceTable.GetString(_nsi);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering AddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", _namespace)));
@@ -112,7 +113,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="System.ArgumentOutOfRangeException">targetNamespace;Cannot find this namespace</exception>
     void IAddressSpaceContext.ValidateAndExportModel(string targetNamespace)
     {
-      //TODO ADI model from Embedded example import fails #509
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", targetNamespace)));
       int _nsIndex = m_NamespaceTable.GetIndex(targetNamespace);
       if (_nsIndex == -1)
@@ -271,9 +271,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //  }
     //  return _ret;
     //}
+
     #endregion IAddressSpaceBuildContext
-
-
 
     #region IAddressSpaceValidationContext
 

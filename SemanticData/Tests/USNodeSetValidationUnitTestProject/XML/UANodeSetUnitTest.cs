@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -8,6 +8,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Collections.Generic;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
@@ -16,8 +18,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   [TestClass]
   public class UANodeSetUnitTest
   {
-
     #region tests
+
     [TestMethod]
     public void NodeClassEnumTest()
     {
@@ -38,6 +40,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       _toTest = new UAMethod();
       Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAMethod, _toTest.NodeClassEnum);
     }
+
     [TestMethod]
     public void RemoveInheritedKeepDifferentValuesTest()
     {
@@ -47,6 +50,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<int>(1, _derived.DisplayName.Length);
       Assert.AreEqual<string>("DerivedFromComplexObjectType", _derived.DisplayName[0].Value);
     }
+
     [TestMethod]
     public void RemoveInheritedRemoveSameValuesTest()
     {
@@ -55,6 +59,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       _derived.RemoveInheritedValues(_base);
       Assert.IsNull(_derived.DisplayName);
     }
+
     [TestMethod]
     [ExpectedException(typeof(NotImplementedException))]
     public void EqualsTypesTest()
@@ -63,6 +68,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       UANode _base = GetDerivedFromComplexObjectType();
       Assert.IsTrue(_derived.Equals(_base));
     }
+
     [TestMethod]
     public void EqualsInstancesTest()
     {
@@ -70,6 +76,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       UAObject _base = GetInstanceOfDerivedFromComplexObjectType();
       Assert.IsTrue(_derived.Equals(_base));
     }
+
     [TestMethod]
     public void EqualsUAVariableTest()
     {
@@ -91,6 +98,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       };
       Assert.IsTrue(_derivedNode.Equals(_baseNode));
     }
+
     [TestMethod]
     public void NotEqualsInstancesTest()
     {
@@ -98,6 +106,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       UAObject _base = GetInstanceOfDerivedFromComplexObjectType2();
       Assert.IsFalse(_derived.Equals(_base));
     }
+
     [TestMethod]
     public void RecalculateNodeIdsUADataTypeTest()
     {
@@ -148,16 +157,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<string>("i=24", _enumeration.Definition.Field[0].DataType);
       Assert.AreEqual<string>("ns=10;i=24", _enumeration.Definition.Field[1].DataType);
     }
+
     [TestMethod]
     public void RecalculateNodeIdsUANodeSetTest()
     {
       UANodeSet _toTest = new UANodeSet()
       {
         NamespaceUris = new string[] { @"http://cas.eu/UA/Demo/" },
-        Aliases = new NodeIdAlias[] { },
+        Aliases = new NodeIdAlias[] { new NodeIdAlias() { Alias = "Alias name", Value = "ns=1;i=24" } },
         Items = new UANode[] { new UAObject()
               {
-                NodeId = "ns=1;i=1",
+                NodeId = "Alias name",
                 BrowseName = "1:NewUAObject",
                 DisplayName = new LocalizedText[] { new LocalizedText() { Value = "New UA Object" } },
                 References = new Reference[]
@@ -181,33 +191,42 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
               }
         }
       };
-      Mock<IUAModelContext> _uAModelContext = new Mock<IUAModelContext>();
-      _uAModelContext.Setup<string>(x => x.ImportNodeId(It.IsAny<string>())).Returns<string>
-        (x =>
-        {
-          NodeId nodeId = NodeId.Parse(x);
-          if (nodeId.NamespaceIndex == 1)
-            nodeId.SetNamespaceIndex(10);
-          return nodeId.ToString();
-        });
-      _uAModelContext.Setup<string>(x => x.ImportQualifiedName(It.IsAny<string>())).Returns<string>
-        (x =>
-        {
-          QualifiedName nodeId = QualifiedName.Parse(x);
-          if (nodeId.NamespaceIndex == 1)
-            nodeId.NamespaceIndex = 10;
-          return nodeId.ToString();
-        });
-      _toTest.Aliases = new NodeIdAlias[] { new NodeIdAlias() { Alias = "Alias name", Value = "ns=1;i=24" } };
-      _toTest.RecalculateNodeIds(_uAModelContext.Object);
-      Assert.AreEqual<string>("ns=10;i=24", _toTest.Aliases[0].Value);
+      //Mock<IUAModelContext> _uAModelContext = new Mock<IUAModelContext>();
+      //_uAModelContext.Setup<string>(x => x.ImportNodeId(It.IsAny<string>())).Returns<string>
+      //  (x =>
+      //  {
+      //    NodeId nodeId = NodeId.Parse(x);
+      //    if (nodeId.NamespaceIndex == 1)
+      //      nodeId.SetNamespaceIndex(10);
+      //    return nodeId.ToString();
+      //  });
+      //_uAModelContext.Setup<string>(x => x.ImportQualifiedName(It.IsAny<string>())).Returns<string>
+      //  (x =>
+      //  {
+      //    QualifiedName nodeId = QualifiedName.Parse(x);
+      //    if (nodeId.NamespaceIndex == 1)
+      //      nodeId.NamespaceIndex = 10;
+      //    return nodeId.ToString();
+      //  });
+      Mock<IAddressSpaceBuildContext> addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
+      addressSpaceMock.Setup(x => x.GetIndexOrAppend(@"http://cas.eu/UA/Demo/")).Returns<string>(x => 2);
+      List<TraceMessage> _logsCache = new List<TraceMessage>();
+      Action<TraceMessage> _logMock = z => _logsCache.Add(z);
+      IUAModelContext model = _toTest.UAModelContext(addressSpaceMock.Object, _logMock);
+      Assert.IsNotNull(model);
+      addressSpaceMock.Verify(x => x.GetIndexOrAppend(@"http://cas.eu/UA/Demo/"), Times.AtLeastOnce());
+      Assert.AreEqual<string>("ns=2;i=24", _toTest.Aliases[0].Value);
       Assert.AreEqual<string>("Alias name", _toTest.Aliases[0].Alias);
-      Assert.AreEqual<string>("ns=10;i=1", _toTest.Items[0].NodeId);
-      Assert.AreEqual<string>("ns=10;i=2", ((UAVariableType)_toTest.Items[1]).DataType);
+      Assert.AreEqual<string>("ns=2;i=24", _toTest.Items[0].NodeId);
+      Assert.AreEqual<string>("ns=2;i=2", ((UAVariableType)_toTest.Items[1]).DataType);
+      Assert.AreEqual<string>("2:BleBle", model.ImportQualifiedName("1:BleBle"));
+      Assert.AreEqual<string>("s=1:BleBle", model.ImportNodeId("1:BleBle"));
     }
-    #endregion
+
+    #endregion tests
 
     #region test instrumentation
+
     private static UAObject GetInstanceOfDerivedFromComplexObjectType()
     {
       return new UAObject()
@@ -221,6 +240,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         }
       };
     }
+
     private static UAObject GetInstanceOfDerivedFromComplexObjectType2()
     {
       return new UAObject()
@@ -234,6 +254,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         }
       };
     }
+
     private static UAObjectType GetDerivedFromComplexObjectType()
     {
       return new UAObjectType()
@@ -247,6 +268,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         }
       };
     }
+
     private static UAObjectType GetComplexObjectType()
     {
       return new UAObjectType()
@@ -256,7 +278,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "ComplexObjectType" } },
       };
     }
-    #endregion
 
+    #endregion test instrumentation
   }
 }

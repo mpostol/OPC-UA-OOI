@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting creation the OPC UA Address Space."));
       UANodeSet _standard = UANodeSet.ReadUADefinedTypes();
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Address Space - the OPC UA defined has been uploaded."));
-      ImportNodeSet(_standard);
+      ImportNodeSet(_standard, traceEvent);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Address Space - has bee created successfully."));
     }
 
@@ -74,7 +74,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.ImportUANodeSet - importing from object model."));
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
-      ImportNodeSet(model);
+      ImportNodeSet(model, m_TraceEvent);
     }
 
     /// <summary>
@@ -90,7 +90,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (!model.Exists)
         throw new FileNotFoundException("The imported file does not exist", model.FullName);
       UANodeSet _nodeSet = UANodeSet.ReadModelFile(model);
-      ImportNodeSet(_nodeSet);
+      ImportNodeSet(_nodeSet, m_TraceEvent);
     }
 
     /// <summary>
@@ -297,8 +297,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private readonly Action<TraceMessage> m_TraceEvent = BuildErrorsHandling.Log.TraceEvent;
 
     //methods
-    private void ImportNodeSet(UANodeSet model)
+    private void ImportNodeSet(UANodeSet model, Action<TraceMessage> traceEvent)
     {
+      //TODO NamespaceTable must provide correct namespaceIndex #517
       //if (model.Models != null && model.Models.Length > 0)
       //  m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Models is omitted during the import"));
       if (model.ServerUris != null && model.ServerUris.Length > 0)
@@ -307,8 +308,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Extensions is omitted during the import"));
       string _namespace = model.NamespaceUris == null ? m_NamespaceTable.GetString(0) : model.NamespaceUris[0];
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_namespace}."));
-      IUAModelContext _modelContext = new UAModelContext(model.Aliases, model.NamespaceUris, this);
-      model.RecalculateNodeIds(_modelContext);
+      IUAModelContext _modelContext = model.UAModelContext(this, traceEvent); 
+      ;
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - context for imported model is created and starting import nodes."));
       foreach (UANode _nd in model.Items)
         ImportUANode(_nd, m_TraceEvent);

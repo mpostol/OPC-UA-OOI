@@ -24,26 +24,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     {
       UANodeSet _tm = TestData.CreateNodeSetModel();
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-      UAModelContext _mc = new UAModelContext(_tm, _asMock.Object);
-    }
-
-    [TestMethod]
-    [TestCategory("Code")]
-    public void CreateUAModelContextNodeAliasNull()
-    {
-      UANodeSet _tm = TestData.CreateNodeSetModel();
-      _tm.Aliases = null;
-      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-      UAModelContext _mc = new UAModelContext(_tm, _asMock.Object);
-    }
-
-    [TestMethod]
-    [TestCategory("Code")]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void CreateUAModelContextAddressSpaceContextNull()
-    {
-      UANodeSet _tm = TestData.CreateNodeSetModel();
-      UAModelContext _mc = new UAModelContext(_tm, null);
+      int logCount = 0;
+      Action<TraceMessage> _logMock = z => logCount++;
+      UAModelContext _mc = null;
+      _mc = new UAModelContext(_tm.Aliases, _tm.NamespaceUris, _asMock.Object, _logMock);
+      _mc = new UAModelContext(null, _tm.NamespaceUris, _asMock.Object, _logMock);
+      _mc = new UAModelContext(_tm.Aliases, null, _asMock.Object, _logMock);
+      Assert.ThrowsException<ArgumentNullException>(() => new UAModelContext(_tm.Aliases, _tm.NamespaceUris, _asMock.Object, null));
+      Assert.ThrowsException<ArgumentNullException>(() => new UAModelContext(_tm.Aliases, _tm.NamespaceUris, null, _logMock));
     }
 
     [TestMethod]
@@ -59,13 +47,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
       _asMock.Setup(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
       _asMock.Setup(x => x.GetIndexOrAppend("http://tempuri.org/NameUnknown0")).Returns(20);
-      Mock<IBuildErrorsHandling> _logMock = new Mock<IBuildErrorsHandling>();
       List<TraceMessage> _logsCache = new List<TraceMessage>();
-      _logMock.Setup(x => x.TraceEvent(It.IsAny<TraceMessage>())).Callback<TraceMessage>(x => _logsCache.Add(x));
-      UAModelContext _modelContext = new UAModelContext(_nodeSet, _asMock.Object)
-      {
-        Log = _logMock.Object
-      };
+      Action<TraceMessage> _logMock = z => _logsCache.Add(z);
+      UAModelContext _modelContext = new UAModelContext(_nodeSet.Aliases, _nodeSet.NamespaceUris, _asMock.Object, _logMock);
       //start testing
       Assert.AreEqual<string>("ns=10;i=1", _modelContext.ImportNodeId("Boolean"));
       Assert.AreEqual<string>("i=45", _modelContext.ImportNodeId("HasSubtype"));
@@ -76,7 +60,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       _asMock.Verify(x => x.GetIndexOrAppend("http://tempuri.org/NameUnknown0"), Times.Exactly(2));
       Assert.AreEqual<string>("ns=20;i=4", _modelContext.ImportNodeId("ns=2;i=4"));
       _asMock.Verify(x => x.GetIndexOrAppend("http://tempuri.org/NameUnknown0"), Times.Exactly(3));
-      _logMock.Verify(x => x.TraceEvent(It.IsAny<TraceMessage>()), Times.Once);
       Assert.AreEqual<int>(1, _logsCache.Count);
       Assert.IsTrue(_logsCache[0].Message.Contains("http://tempuri.org/NameUnknown0"));
     }
@@ -91,10 +74,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       };
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
       _asMock.Setup(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
-      UAModelContext _modelContext = new UAModelContext(_nodeSet, _asMock.Object);
+      List<TraceMessage> _logsCache = new List<TraceMessage>();
+      Action<TraceMessage> _logMock = z => _logsCache.Add(z);
+      UAModelContext _modelContext = new UAModelContext(_nodeSet.Aliases, _nodeSet.NamespaceUris, _asMock.Object, _logMock);
       Assert.AreEqual<string>("10:Boolean", _modelContext.ImportQualifiedName("1:Boolean"));
       Assert.AreEqual<string>("HasSubtype", _modelContext.ImportQualifiedName("HasSubtype"));
       _asMock.Verify(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"), Times.Once);
+      Assert.AreEqual<int>(0, _logsCache.Count);
     }
   }
 }

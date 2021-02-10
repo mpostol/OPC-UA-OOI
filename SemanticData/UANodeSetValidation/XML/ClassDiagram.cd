@@ -5,14 +5,16 @@
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AEACEACCAAAkAAgAAINQAAAAACBQEAAAAAgAAAAAAAA=</HashCode>
-      <FileName>XML\UANodeSet.cs</FileName>
+      <HashCode>AEADECiCAACkACgAwJNQIAEIBCBUEIAAEBiAAgAECjA=</HashCode>
+      <FileName>XML\UANode.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="References" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="UAOOI.SemanticData.UANodeSetValidation.XML.UAType" Collapsed="true">
     <Position X="4.5" Y="3.75" Width="1.5" />
@@ -21,70 +23,70 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAABAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAABCAAAAAACAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>XML\UANodeSet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.SemanticData.UANodeSetValidation.XML.UAInstance" Collapsed="true">
     <Position X="4.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
-      <FileName>XML\UANodeSet.cs</FileName>
+      <HashCode>AAAAAAAAAACAAAAAAABAAAAAAAAAAAQAAAIAAAAEAAA=</HashCode>
+      <FileName>XML\UAInstance.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.SemanticData.UANodeSetValidation.XML.UAReferenceType" Collapsed="true">
     <Position X="1.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAACAgAAAAAAAEAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAACAgBAAAAAAEAA=</HashCode>
       <FileName>XML\UANodeSet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.SemanticData.UANodeSetValidation.XML.UADataType" Collapsed="true">
     <Position X="3.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAACAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>XML\UANodeSet.cs</FileName>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAQAABAAAAAAAIBAAAAAEAAA=</HashCode>
+      <FileName>XML\UADataType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.SemanticData.UANodeSetValidation.XML.UAVariableType" Collapsed="true">
     <Position X="5.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAIAAIAAAAAAAAAAAAQCAAAAAAAgIAAACAA=</HashCode>
+      <HashCode>AAAEAAAAAAIAAIAAAAAAAAAAAAQCAAAAABAgIAAECAA=</HashCode>
       <FileName>XML\UANodeSet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.SemanticData.UANodeSetValidation.XML.UAObjectType" Collapsed="true">
     <Position X="8" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
       <FileName>XML\UANodeSet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.SemanticData.UANodeSetValidation.XML.UAView" Collapsed="true">
     <Position X="1.25" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAAAAAAAAAAAAAAACAIAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <HashCode>AQAAAAAAAACAAAAAAACAIAAAAAAAAAAAABABAAAAAAA=</HashCode>
       <FileName>XML\UANodeSet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.SemanticData.UANodeSetValidation.XML.UAMethod" Collapsed="true">
     <Position X="3.5" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAABACAAAAADAAAAAACAAA=</HashCode>
-      <FileName>XML\UANodeSet.cs</FileName>
+      <HashCode>AAAAAAAAQCCAAAAAAAAAAgAABACAAAAADBAAAAAGAAA=</HashCode>
+      <FileName>XML\UAMethod.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.SemanticData.UANodeSetValidation.XML.UAVariable" Collapsed="true">
     <Position X="5.75" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABgEAAAQAAIAgIACAAAAAAAAAGQiAAAQAAAgIAAACAQ=</HashCode>
+      <HashCode>ABgEAAAQAAKAgIACQAAAAAAAAGQiAAAQABAgIAAECAQ=</HashCode>
       <FileName>XML\UANodeSet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.SemanticData.UANodeSetValidation.XML.UAObject" Collapsed="true">
     <Position X="8" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AQAAAAAAAACAAAAAAACAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
       <FileName>XML\UANodeSet.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -94,19 +96,19 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>IBABQgCIAABICAAAAEECAAACAABAAAAAEAkAAAAAAAI=</HashCode>
-      <FileName>XML\UANodeSet.Utils.cs</FileName>
+      <HashCode>ABABQgCIAAAICAACAAECAAACAEBAAAAAAAkAAAAEAAI=</HashCode>
+      <FileName>XML\UANodeSet.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Items" />
       <Property Name="Aliases" />
+      <Property Name="Items" />
     </ShowAsAssociation>
   </Class>
   <Class Name="UAOOI.SemanticData.UANodeSetValidation.XML.NodeIdAlias" Collapsed="true">
     <Position X="15.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAKAAAAAAAgAAAAAAA=</HashCode>
-      <FileName>XML\UANodeSet.cs</FileName>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAKAAAAAAAgAAAEAAA=</HashCode>
+      <FileName>XML\NodeIdAlias.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UAOOI.SemanticData.UANodeSetValidation.XML.Reference" Collapsed="true">
@@ -116,9 +118,10 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAEAAAACAABAAAACAAAAAAAgAAAIAAA=</HashCode>
-      <FileName>XML\UANodeSet.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAEEgAACAABAAAACAAAAAAAgAAAMAAA=</HashCode>
+      <FileName>XML\Reference.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

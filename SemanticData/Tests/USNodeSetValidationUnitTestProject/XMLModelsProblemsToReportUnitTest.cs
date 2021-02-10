@@ -47,5 +47,22 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       foreach (TraceMessage item in focusNonCategorized)
         Debug.WriteLine(item.ToString());
     }
+    [TestMethod]
+    public void eoursel510Test()
+    {
+
+      FileInfo _testDataFileInfo = new FileInfo(@"ProblemsToReport\eoursel510\Opc.Ua.NodeSet2.TriCycleType_V1.1.xml");
+      Assert.IsTrue(_testDataFileInfo.Exists);
+      List<TraceMessage> _trace = new List<TraceMessage>();
+      IAddressSpaceContext _as = new AddressSpaceContext(z => _trace.Add(z));
+      _as.ImportUANodeSet(_testDataFileInfo);
+      //Extensions is omitted during the import
+      Assert.AreEqual<int>(10, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
+      _as.ValidateAndExportModel();
+      Assert.AreEqual<int>(13, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
+
+    }
   }
 }

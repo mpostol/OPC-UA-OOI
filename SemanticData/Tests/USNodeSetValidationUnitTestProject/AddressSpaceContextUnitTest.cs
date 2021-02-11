@@ -22,6 +22,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
   public class AddressSpaceContextUnitTest
   {
     [TestMethod]
+    [TestCategory("AddressSpaceContext")]
     public void AddressSpaceContextConstructorTest()
     {
       List<IUANodeBase> _invalidNodes = new List<IUANodeBase>();
@@ -31,6 +32,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     }
 
     [TestMethod]
+    [TestCategory("AddressSpaceContext")]
     public void ReferencesCheckConsistencyTest()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
@@ -39,6 +41,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     }
 
     [TestMethod]
+    [TestCategory("AddressSpaceContext")]
     public void AddressSpaceContextContentCheck()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
@@ -61,6 +64,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     }
 
     [TestMethod]
+    [TestCategory("AddressSpaceContext")]
     public void AddressSpaceReferencesContentCheck()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
@@ -129,6 +133,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     }
 
     [TestMethod]
+    [TestCategory("AddressSpaceContext")]
     public void ImportObjectTest()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
@@ -169,8 +174,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       private int _diagnosticCounter = 0;
       internal AddressSpaceContext AddressSpaceContext = null;
     }
-
-    //Helpers
 
     #endregion private
   }

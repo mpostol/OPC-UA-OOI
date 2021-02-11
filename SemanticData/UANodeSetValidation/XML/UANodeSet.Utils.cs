@@ -13,13 +13,13 @@ using UAOOI.SemanticData.BuildingErrorsHandling;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  public partial class UANodeSet
+  public partial class UANodeSet: IUANodeSetModelHeader
   {
     #region API
 
-    internal IUAModelContext UAModelContext(IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceEvent)
+    internal IUAModelContext ParseUAModelContext(IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceEvent)
     {
-      UAModelContext model = new UAModelContext(Aliases, NamespaceUris, addressSpaceContext, traceEvent);
+      UAModelContext model = UAModelContext.ParseUANodeSetModelHeader(this, addressSpaceContext, traceEvent);
       this.RecalculateNodeIds(model);
       return model;
     }

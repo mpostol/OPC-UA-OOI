@@ -10,34 +10,49 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
   [TestClass]
+  //TODO UAModelContext must provide default namespaceIndex #517
   public class UAModelContextUnitTest
   {
+
     [TestMethod]
-    [TestCategory("Code")]
     public void ConstructorTest()
     {
-      UANodeSet _tm = TestData.CreateNodeSetModel();
+      IUANodeSetModelHeader _tm = TestData.CreateNodeSetModel();
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
       int logCount = 0;
       Action<TraceMessage> _logMock = z => logCount++;
       UAModelContext _mc = null;
-      _mc = new UAModelContext(_tm.Aliases, _tm.NamespaceUris, _asMock.Object, _logMock);
-      _mc = new UAModelContext(null, _tm.NamespaceUris, _asMock.Object, _logMock);
-      _mc = new UAModelContext(_tm.Aliases, null, _asMock.Object, _logMock);
-      Assert.ThrowsException<ArgumentNullException>(() => new UAModelContext(_tm.Aliases, _tm.NamespaceUris, _asMock.Object, null));
-      Assert.ThrowsException<ArgumentNullException>(() => new UAModelContext(_tm.Aliases, _tm.NamespaceUris, null, _logMock));
+      _mc = UAModelContext.ParseUANodeSetModelHeader(_tm, _asMock.Object, _logMock);
+      _mc = UAModelContext.ParseUANodeSetModelHeader(null, _asMock.Object, _logMock);
+      Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(_tm, _asMock.Object, null));
+      Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(_tm, null, _logMock));
+    }
+
+    [TestMethod]
+    public void ModeltUriTest()
+    {
+      UANodeSet _tm = TestData.CreateNodeSetModel();
+      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+      List<TraceMessage> trace = new List<TraceMessage>();
+      Action<TraceMessage> _logMock = z => trace.Add(z);
+      UAModelContext _mc = null;
+      _mc = UAModelContext.ParseUANodeSetModelHeader(_tm, _asMock.Object, _logMock);
+      Assert.IsTrue(_mc.ModeltUri.ToString().StartsWith(@"http://localhost/github.com/mpostol/OPC-UA-OOI/NameUnknown"));
+      Assert.AreEqual<int>(1, trace.Count);
+      Assert.AreEqual<string>("P0-0001030000", trace[0].BuildError.Identifier);
     }
 
     [TestMethod]
     public void AliasesConversionTest()
     {
-      UANodeSet _nodeSet = new UANodeSet
+      IUANodeSetModelHeader _nodeSet = new UANodeSet
       {
         Aliases = new NodeIdAlias[] {
           new NodeIdAlias() { Alias = "HasSubtype", Value = "i=45" },
@@ -49,7 +64,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       _asMock.Setup(x => x.GetIndexOrAppend("http://tempuri.org/NameUnknown0")).Returns(20);
       List<TraceMessage> _logsCache = new List<TraceMessage>();
       Action<TraceMessage> _logMock = z => _logsCache.Add(z);
-      UAModelContext _modelContext = new UAModelContext(_nodeSet.Aliases, _nodeSet.NamespaceUris, _asMock.Object, _logMock);
+      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(_nodeSet, _asMock.Object, _logMock);
       //start testing
       Assert.AreEqual<string>("ns=10;i=1", _modelContext.ImportNodeId("Boolean"));
       Assert.AreEqual<string>("i=45", _modelContext.ImportNodeId("HasSubtype"));
@@ -67,7 +82,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     [TestMethod]
     public void ImportQualifiedNameTest()
     {
-      UANodeSet _nodeSet = new UANodeSet
+      IUANodeSetModelHeader _nodeSet = new UANodeSet
       {
         Aliases = new NodeIdAlias[] { new NodeIdAlias() { Alias = "HasSubtype", Value = "i=45" }, new NodeIdAlias() { Alias = "Boolean", Value = "ns=1;i=1" } },
         NamespaceUris = new string[] { "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" },
@@ -76,11 +91,65 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       _asMock.Setup(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
       List<TraceMessage> _logsCache = new List<TraceMessage>();
       Action<TraceMessage> _logMock = z => _logsCache.Add(z);
-      UAModelContext _modelContext = new UAModelContext(_nodeSet.Aliases, _nodeSet.NamespaceUris, _asMock.Object, _logMock);
+      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(_nodeSet, _asMock.Object, _logMock);
       Assert.AreEqual<string>("10:Boolean", _modelContext.ImportQualifiedName("1:Boolean"));
       Assert.AreEqual<string>("HasSubtype", _modelContext.ImportQualifiedName("HasSubtype"));
       _asMock.Verify(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"), Times.Once);
       Assert.AreEqual<int>(0, _logsCache.Count);
+    }
+
+    [TestMethod]
+    public void ImportNamespaceIndexTest()
+    {
+      Assert.Inconclusive("Not implemented");
+    }
+
+    [TestMethod]
+    public void RecalculateNodeIdsUANodeSetTest()
+    {
+      UANodeSet _toTest = new UANodeSet()
+      {
+        NamespaceUris = new string[] { @"http://cas.eu/UA/Demo/" },
+        Aliases = new NodeIdAlias[] { new NodeIdAlias() { Alias = "Alias name", Value = "ns=1;i=24" } },
+        Items = new UANode[] { new UAObject()
+              {
+                NodeId = "Alias name",
+                BrowseName = "1:NewUAObject",
+                DisplayName = new LocalizedText[] { new LocalizedText() { Value = "New UA Object" } },
+                References = new Reference[]
+                {
+                  new Reference() { ReferenceType = ReferenceTypeIds.HasTypeDefinition.ToString(), Value = ObjectTypeIds.BaseObjectType.ToString() },
+                  new Reference() { ReferenceType = ReferenceTypeIds.Organizes.ToString(), IsForward= false, Value = "i=85" }
+                },
+                // UAInstance
+                ParentNodeId = string.Empty,
+                // UAObject
+                EventNotifier = 0x01,
+              },
+              new UAVariableType()
+              {
+                NodeId = "ns=1;i=1",
+                BrowseName = "1:NewUAObject",
+                DisplayName = new LocalizedText[] { new LocalizedText() { Value = "New UA Object" } },
+                References = new Reference[]{},
+                // UAObject
+                DataType = "ns=1;i=2",
+              }
+        }
+      };
+      Mock<IAddressSpaceBuildContext> addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
+      addressSpaceMock.Setup(x => x.GetIndexOrAppend(@"http://cas.eu/UA/Demo/")).Returns<string>(x => 2);
+      List<TraceMessage> _logsCache = new List<TraceMessage>();
+      Action<TraceMessage> _logMock = z => _logsCache.Add(z);
+      IUAModelContext model = _toTest.ParseUAModelContext(addressSpaceMock.Object, _logMock);
+      Assert.IsNotNull(model);
+      addressSpaceMock.Verify(x => x.GetIndexOrAppend(@"http://cas.eu/UA/Demo/"), Times.AtLeastOnce());
+      Assert.AreEqual<string>("ns=2;i=24", _toTest.Aliases[0].Value);
+      Assert.AreEqual<string>("Alias name", _toTest.Aliases[0].Alias);
+      Assert.AreEqual<string>("ns=2;i=24", _toTest.Items[0].NodeId);
+      Assert.AreEqual<string>("ns=2;i=2", ((UAVariableType)_toTest.Items[1]).DataType);
+      Assert.AreEqual<string>("2:BleBle", model.ImportQualifiedName("1:BleBle"));
+      Assert.AreEqual<string>("s=1:BleBle", model.ImportNodeId("1:BleBle"));
     }
   }
 }

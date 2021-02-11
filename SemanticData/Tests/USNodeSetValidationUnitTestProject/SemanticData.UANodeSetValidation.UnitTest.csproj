@@ -200,7 +200,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="XMLModels\CorrectModels\DataTypeTest.csv" />
-    <None Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.NodeSet2.xml.zip" />
     <None Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.PredefinedNodes.uanodes" />
     <None Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.Types.bsd" />
     <None Include="XMLModels\CorrectModels\DataTypeTest\DataTypeTest.Types.xsd">

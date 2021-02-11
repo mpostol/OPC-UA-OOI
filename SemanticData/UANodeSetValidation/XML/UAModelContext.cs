@@ -28,6 +28,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// addressSpaceContext</exception>
     internal static UAModelContext ParseUANodeSetModelHeader(IUANodeSetModelHeader modelHeader, IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceEvent)
     {
+      if (modelHeader is null)
+        throw new ArgumentNullException(nameof(modelHeader));
       if (modelHeader.ServerUris != null && modelHeader.ServerUris.Length > 0)
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "ServerUris is omitted during the import"));
       if (modelHeader.Extensions != null && modelHeader.Extensions.Length > 0)
@@ -112,7 +114,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         _log(TraceMessage.BuildErrorTraceMessage(BuildError.NamespaceUrisCannotBeNull, $"Added a random URI { namespaceUris[0] } to NamespaceUris."));
       }
       for (int i = 0; i < namespaceUris.Length; i++)
-        _namespaceUris.Add(namespaceUris[i]);
+        list2Return.Add(namespaceUris[i]);
       return list2Return;
     }
 

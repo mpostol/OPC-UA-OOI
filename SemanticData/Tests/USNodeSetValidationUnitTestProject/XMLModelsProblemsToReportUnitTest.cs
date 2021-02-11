@@ -26,7 +26,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       List<TraceMessage> _trace = new List<TraceMessage>();
       IAddressSpaceContext _as = new AddressSpaceContext(z => _trace.Add(z));
       _as.ImportUANodeSet(_testDataFileInfo);
-      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       _as.ValidateAndExportModel(@"http://opcfoundation.org/UA/ADI/");
       IEnumerable<TraceMessage> vitalMessageserrors = _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic);
       IEnumerable<TraceMessage> focusNodeClass = _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NodeClass);
@@ -34,7 +34,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
       //Assert.Inconclusive("The import returns unexpected errors.");
 
-      Assert.AreEqual<int>(5, vitalMessageserrors.Count<TraceMessage>());
+      Assert.AreEqual<int>(7, vitalMessageserrors.Count<TraceMessage>());
 
       Assert.AreEqual<int>(3, focusNodeClass.Count<TraceMessage>());
       Debug.WriteLine(nameof(Focus.NodeClass));
@@ -58,10 +58,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       _as.ImportUANodeSet(_testDataFileInfo);
       //Extensions is omitted during the import
       Assert.AreEqual<int>(10, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
+      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
       _as.ValidateAndExportModel();
       Assert.AreEqual<int>(13, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
+      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
 
     }
   }

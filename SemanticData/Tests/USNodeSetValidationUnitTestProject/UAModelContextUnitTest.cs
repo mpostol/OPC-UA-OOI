@@ -20,7 +20,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
   //TODO UAModelContext must provide default namespaceIndex #517
   public class UAModelContextUnitTest
   {
-
     [TestMethod]
     public void ConstructorTest()
     {
@@ -28,11 +27,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
       int logCount = 0;
       Action<TraceMessage> _logMock = z => logCount++;
-      UAModelContext _mc = null;
-      _mc = UAModelContext.ParseUANodeSetModelHeader(_tm, _asMock.Object, _logMock);
-      _mc = UAModelContext.ParseUANodeSetModelHeader(null, _asMock.Object, _logMock);
+      Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(null, _asMock.Object, _logMock));
       Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(_tm, _asMock.Object, null));
       Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(_tm, null, _logMock));
+      UAModelContext _mc = UAModelContext.ParseUANodeSetModelHeader(_tm, _asMock.Object, _logMock);
+      Assert.IsNotNull(_mc);
     }
 
     [TestMethod]
@@ -44,7 +43,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Action<TraceMessage> _logMock = z => trace.Add(z);
       UAModelContext _mc = null;
       _mc = UAModelContext.ParseUANodeSetModelHeader(_tm, _asMock.Object, _logMock);
-      Assert.IsTrue(_mc.ModeltUri.ToString().StartsWith(@"http://localhost/github.com/mpostol/OPC-UA-OOI/NameUnknown"));
+      Assert.IsTrue(_mc.ModeltUri.ToString().StartsWith(@"http://cas.eu/UA/Demo/"));
       Assert.AreEqual<int>(1, trace.Count);
       Assert.AreEqual<string>("P0-0001030000", trace[0].BuildError.Identifier);
     }
@@ -61,7 +60,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       };
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
       _asMock.Setup(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
-      _asMock.Setup(x => x.GetIndexOrAppend("http://tempuri.org/NameUnknown0")).Returns(20);
+      string uri = string.Empty;
+      _asMock.Setup(x => x.GetIndexOrAppend(It.Is<string>(z => z.Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown")))).Returns<string>(x => { uri = x; return 20; });
       List<TraceMessage> _logsCache = new List<TraceMessage>();
       Action<TraceMessage> _logMock = z => _logsCache.Add(z);
       UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(_nodeSet, _asMock.Object, _logMock);
@@ -70,13 +70,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<string>("i=45", _modelContext.ImportNodeId("HasSubtype"));
       Assert.AreEqual<string>("ns=20;i=2", _modelContext.ImportNodeId("ns=2;i=2"));
       _asMock.Verify(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"), Times.Once);
-      _asMock.Verify(x => x.GetIndexOrAppend("http://tempuri.org/NameUnknown0"), Times.Once);
+      _asMock.Verify(x => x.GetIndexOrAppend(It.Is<string>(z => z.Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown"))), Times.Once);
       Assert.AreEqual<string>("ns=20;i=3", _modelContext.ImportNodeId("ns=2;i=3"));
-      _asMock.Verify(x => x.GetIndexOrAppend("http://tempuri.org/NameUnknown0"), Times.Exactly(2));
+      _asMock.Verify(x => x.GetIndexOrAppend(It.Is<string>(z => z.Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown"))), Times.Exactly(2));
       Assert.AreEqual<string>("ns=20;i=4", _modelContext.ImportNodeId("ns=2;i=4"));
-      _asMock.Verify(x => x.GetIndexOrAppend("http://tempuri.org/NameUnknown0"), Times.Exactly(3));
-      Assert.AreEqual<int>(1, _logsCache.Count);
-      Assert.IsTrue(_logsCache[0].Message.Contains("http://tempuri.org/NameUnknown0"));
+      _asMock.Verify(x => x.GetIndexOrAppend(It.Is<string>(z => z.Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown"))), Times.Exactly(3));
+      Assert.AreEqual<int>(2, _logsCache.Count);
+      Assert.IsTrue(_logsCache[0].Message.Contains("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"));
+      Assert.IsTrue(_logsCache[1].Message.Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown"));
     }
 
     [TestMethod]
@@ -86,6 +87,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       {
         Aliases = new NodeIdAlias[] { new NodeIdAlias() { Alias = "HasSubtype", Value = "i=45" }, new NodeIdAlias() { Alias = "Boolean", Value = "ns=1;i=1" } },
         NamespaceUris = new string[] { "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" },
+        Models = new ModelTableEntry[] { new ModelTableEntry() { ModelUri = "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" } }
       };
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
       _asMock.Setup(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);

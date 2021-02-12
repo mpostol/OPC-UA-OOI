@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -9,11 +9,9 @@ using System;
 using System.Globalization;
 using System.Text;
 using UAOOI.SemanticData.BuildingErrorsHandling;
-using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {
-
   /// <summary>
   /// Stores an identifier for a node in a server's address space.
   /// </summary>
@@ -49,8 +47,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   /// </remarks>
   public partial class NodeId : IFormattable, IEquatable<NodeId>, IComparable
   {
-
     #region constructors
+
     /// <summary>
     /// Initializes the object with default values.
     /// </summary>
@@ -65,6 +63,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_identifierPart = null;
       m_GlobalHashCode++;
     }
+
     /// <summary>
     /// Creates a deep copy of the value.
     /// </summary>
@@ -80,6 +79,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_identifierType = value.m_identifierType;
       m_identifierPart = value.MemberwiseClone();
     }
+
     /// <summary>
     /// Initializes a numeric node identifier.
     /// </summary>
@@ -93,6 +93,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_identifierType = IdType.Numeric_0;
       m_identifierPart = value;
     }
+
     /// <summary>
     /// Initializes a guid node identifier with a namespace index.
     /// </summary>
@@ -109,6 +110,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_identifierType = IdType.Numeric_0;
       m_identifierPart = value;
     }
+
     /// <summary>
     /// Initializes a string node identifier with a namespace index.
     /// </summary>
@@ -124,6 +126,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_identifierType = IdType.String_1;
       m_identifierPart = value;
     }
+
     /// <summary>
     /// Initializes a guid node identifier.
     /// </summary>
@@ -137,6 +140,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_identifierType = IdType.Guid_2;
       m_identifierPart = value;
     }
+
     /// <summary>
     /// Initializes a guid node identifier.
     /// </summary>
@@ -151,6 +155,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_identifierType = IdType.Guid_2;
       m_identifierPart = value;
     }
+
     /// <summary>
     /// Initializes a guid node identifier.
     /// </summary>
@@ -170,6 +175,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         m_identifierPart = copy;
       }
     }
+
     /// <summary>
     /// Initializes an opaque node identifier with a namespace index.
     /// </summary>
@@ -191,6 +197,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         m_identifierPart = copy;
       }
     }
+
     /// <summary>
     /// Initializes a node id by parsing a node id string.
     /// </summary>
@@ -205,6 +212,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_identifierType = nodeId.IdType;
       m_identifierPart = nodeId.IdentifierPart;
     }
+
     /// <summary>
     /// Initializes a node identifier with a namespace index.
     /// </summary>
@@ -237,9 +245,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return;
       }
     }
-    #endregion
+
+    #endregion constructors
 
     #region public
+
     /// <summary>
     /// Converts an integer to a numeric node identifier.
     /// </summary>
@@ -250,6 +260,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return new NodeId(value);
     }
+
     /// <summary>
     /// Returns an instance of a null NodeId.
     /// </summary>
@@ -266,14 +277,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return true;
       return nodeId.IsNullNodeId;
     }
+
     /// <summary>
     /// Gets the <see cref="NodeId"/> representing <b>null</b>.
     /// </summary>
     /// <value>The null.</value>
-    public static NodeId Null
-    {
-      get { return s_Null; }
-    }
+    public static NodeId Null => s_Null;
+
     /// <summary>
     /// Parses a node id string and returns a node id object.
     /// </summary>
@@ -323,6 +333,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
           (TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdInvalidSyntax, String.Format("Cannot parse node id text: '{0}'", text)), "BuildError_BadNodeIdInvalid", e);
       }
     }
+
     /// <summary>
     /// Updates the namespace index.
     /// </summary>
@@ -330,6 +341,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       m_namespaceIndex = value;
     }
+
     /// <summary>
     /// Updates the identifier.
     /// </summary>
@@ -345,6 +357,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
           break;
       }
     }
+
     /// <summary>
     /// Updates the identifier.
     /// </summary>
@@ -353,16 +366,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_identifierType = idType;
       SetIdentifier(IdType.String_1, value);
     }
+
     ///<summary>
     /// The index of the namespace URI in the server's namespace array.
     /// </summary>
     /// <remarks>
     /// The index of the namespace URI in the server's namespace array.
     /// </remarks>
-    public ushort NamespaceIndex
-    {
-      get { return m_namespaceIndex; }
-    }
+    public ushort NamespaceIndex => m_namespaceIndex;
+
     /// <summary>
     /// The type of node identifier used.
     /// </summary>
@@ -376,10 +388,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// </list>
     /// </remarks>
     /// <seealso cref="IdType"/>
-    public IdType IdType
-    {
-      get { return m_identifierType; }
-    }
+    public IdType IdType => m_identifierType;
+
     /// <summary>
     /// The node identifier.
     /// </summary>
@@ -401,6 +411,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return m_identifierPart;
       }
     }
+
     /// <summary>
     /// Whether the object represents a Null NodeId.
     /// </summary>
@@ -423,12 +434,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
           case IdType.Numeric_0:
             _ret = !!IdentifierPart.Equals((uint)0);
             break;
+
           case IdType.String_1:
             _ret = String.IsNullOrEmpty((string)IdentifierPart);
             break;
+
           case IdType.Guid_2:
             _ret = IdentifierPart.Equals(System.Guid.Empty);
             break;
+
           case IdType.Opaque_3:
             _ret = !(IdentifierPart != null && ((byte[])IdentifierPart).Length > 0);
             break;
@@ -437,6 +451,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return _ret;
       }
     }
+
     /// <summary>
     /// Returns true if the objects are equal.
     /// </summary>
@@ -449,6 +464,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return Object.ReferenceEquals(value2, null);
       return (value1.CompareTo(value2) == 0);
     }
+
     /// <summary>
     /// Returns true if the objects are not equal.
     /// </summary>
@@ -461,6 +477,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return !Object.ReferenceEquals(value2, null);
       return (value1.CompareTo(value2) != 0);
     }
+
     /// <summary>
     /// Converts an identifier and a namespaceUri to a local NodeId using the namespaceTable.
     /// </summary>
@@ -475,11 +492,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       if (namespaceTable != null)
         index = namespaceTable.GetIndex(namespaceUri);
       if (index < 0)
-        throw new ServiceResultException(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdNotDefined,  $"NamespaceUri ({namespaceUri}) is not in the namespace table."), "BuildError_BadNodeIdInvalid");
+        throw new ServiceResultException(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdNotDefined, $"NamespaceUri ({namespaceUri}) is not in the namespace table."), "BuildError_BadNodeIdInvalid");
       return new NodeId(identifier, (ushort)index);
     }
 
-    #region  Format()
+    #region Format()
+
     /// <summary>
     /// Formats a node id as a string.
     /// </summary>
@@ -503,6 +521,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Format(buffer);
       return buffer.ToString();
     }
+
     /// <summary>
     /// Formats the NodeId as a string and appends it to the buffer.
     /// </summary>
@@ -510,6 +529,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       Format(buffer, IdentifierPart, m_identifierType, m_namespaceIndex);
     }
+
     /// <summary>
     /// Formats the NodeId as a string and appends it to the buffer.
     /// </summary>
@@ -523,12 +543,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         case IdType.Numeric_0:
           buffer.Append("i=");
           break;
+
         case IdType.String_1:
           buffer.Append("s=");
           break;
+
         case IdType.Guid_2:
           buffer.Append("g=");
           break;
+
         case IdType.Opaque_3:
           buffer.Append("b=");
           break;
@@ -536,11 +559,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       // add identifier.
       FormatIdentifier(buffer, identifier, identifierType);
     }
-    #endregion
 
-    #endregion
+    #endregion Format()
+
+    #endregion public
 
     #region IComparable
+
     /// <summary>
     /// Compares the current instance to the object.
     /// </summary>
@@ -609,11 +634,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
             if (stringId.Length == 0)
               return 0;
             break;
+
           case IdType.Opaque_3:
             byte[] opaqueId = id as byte[];
             if (opaqueId.Length == 0)
               return 0;
             break;
+
           case IdType.Numeric_0:
             uint? numericId = id as uint?;
             if (numericId.Value == 0)
@@ -631,11 +658,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
             if (stringId.Length == 0)
               return 0;
             break;
+
           case IdType.Opaque_3:
             byte[] opaqueId = IdentifierPart as byte[];
             if (opaqueId.Length == 0)
               return 0;
             break;
+
           case IdType.Numeric_0:
             uint? numericId = IdentifierPart as uint?;
             if (numericId.Value == 0)
@@ -683,9 +712,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       // invalid id type - should never get here.
       return +1;
     }
-    #endregion
+
+    #endregion IComparable
 
     #region IFormattable
+
     /// <summary>
     /// Returns the string representation of a NodeId.
     /// </summary>
@@ -700,9 +731,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return String.Format(formatProvider, "{0}", Format());
       throw new FormatException(String.Format("Invalid format string: '{0}'.", format));
     }
-    #endregion
+
+    #endregion IFormattable
 
     #region object
+
     /// <summary>
     /// Returns a hash code for this instance.
     /// </summary>
@@ -711,6 +744,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return m_HashCode;
     }
+
     /// <summary>
     /// Returns a <see cref="System.String" /> that represents this instance.
     /// </summary>
@@ -719,9 +753,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return Format();
     }
-    #endregion
+
+    #endregion object
 
     #region private
+
     /// <summary>
     /// Formats a node id as a string.
     /// </summary>
@@ -737,9 +773,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
           }
           buffer.AppendFormat(CultureInfo.InvariantCulture, "{0}", identifier);
           break;
+
         case IdType.String_1:
           buffer.AppendFormat(CultureInfo.InvariantCulture, "{0}", identifier);
           break;
+
         case IdType.Guid_2:
           if (identifier == null)
           {
@@ -748,21 +786,25 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
           }
           buffer.AppendFormat(CultureInfo.InvariantCulture, "{0}", identifier);
           break;
+
         case IdType.Opaque_3:
           if (identifier != null)
             buffer.AppendFormat(CultureInfo.InvariantCulture, "{0}", Convert.ToBase64String((byte[])identifier));
           break;
       }
     }
+
     private ushort m_namespaceIndex;
     private IdType m_identifierType;
     private object m_identifierPart;
     private static NodeId s_Null = new NodeId();
     private static int m_GlobalHashCode = 0;
     private int m_HashCode = m_GlobalHashCode;
-    #endregion
+
+    #endregion private
 
     #region IEquatable<NodeId>
+
     /// <summary>
     /// Indicates whether the current object is equal to another object of the same type.
     /// </summary>
@@ -772,7 +814,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return this.CompareTo(other) == 0;
     }
-    #endregion
-  }
 
+    #endregion IEquatable<NodeId>
+  }
 }

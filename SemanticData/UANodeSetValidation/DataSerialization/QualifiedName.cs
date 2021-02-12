@@ -1,6 +1,6 @@
 //___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -9,11 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UAOOI.SemanticData.BuildingErrorsHandling;
-using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {
-
   /// <summary>
   /// A name qualified with a namespace.
   /// </summary>
@@ -39,6 +37,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   public partial class QualifiedName : IFormattable, ICloneable, IComparable
   {
     #region Constructors
+
     /// <summary>
     /// Initializes the object with default values.
     /// </summary>
@@ -50,6 +49,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       NamespaceIndex = 0;
       Name = null;
     }
+
     /// <summary>
     /// Creates a deep copy of the value.
     /// </summary>
@@ -65,6 +65,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       NamespaceIndex = value.NamespaceIndex;
       NamespaceIndexSpecified = value.NamespaceIndexSpecified;
     }
+
     /// <summary>
     /// Initializes the object with a name.
     /// </summary>
@@ -78,6 +79,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Name = name;
       NamespaceIndexSpecified = false;
     }
+
     /// <summary>
     /// Initializes the object with a name and a namespace index.
     /// </summary>
@@ -92,18 +94,22 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Name = name;
       NamespaceIndexSpecified = namespaceIndex != 0;
     }
-    #endregion
+
+    #endregion Constructors
 
     #region Public Properties
+
     /// <summary cref="QualifiedName.NamespaceIndex" />
     internal ushort XmlEncodedNamespaceIndex
     {
-      get { return NamespaceIndex; }
-      set { NamespaceIndex = value; }
+      get => NamespaceIndex;
+      set => NamespaceIndex = value;
     }
-    #endregion
+
+    #endregion Public Properties
 
     #region IComparable Members
+
     /// <summary>
     /// Compares two QualifiedNames.
     /// </summary>
@@ -128,6 +134,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return String.CompareOrdinal(Name, _qualifiedName.Name);
       return -1;
     }
+
     /// <summary>
     /// Implements the operator &gt;.
     /// </summary>
@@ -140,6 +147,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return value1.CompareTo(value2) > 0;
       return false;
     }
+
     /// <summary>
     /// Implements the operator &lt;.
     /// </summary>
@@ -152,9 +160,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return value1.CompareTo(value2) < 0;
       return true;
     }
-    #endregion
+
+    #endregion IComparable Members
 
     #region Overridden Methods
+
     /// <summary>
     /// Returns a suitable hash value for the instance.
     /// </summary>
@@ -164,6 +174,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return Name.GetHashCode();
       return 0;
     }
+
     /// <summary>
     /// Returns true if the objects are equal.
     /// </summary>
@@ -184,6 +195,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return false;
       return _qualifiedName.Name == Name;
     }
+
     /// <summary>
     /// Returns true if the objects are equal.
     /// </summary>
@@ -198,6 +210,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return Object.ReferenceEquals(value2, null);
       return value1.Equals(value2);
     }
+
     /// <summary>
     /// Returns true if the objects are not equal.
     /// </summary>
@@ -212,6 +225,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return !Object.ReferenceEquals(value2, null);
       return !value1.Equals(value2);
     }
+
     /// <summary>
     /// Returns the string representation of the object.
     /// </summary>
@@ -222,9 +236,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return ToString(null, null);
     }
-    #endregion
+
+    #endregion Overridden Methods
 
     #region IFormattable Members
+
     /// <summary>
     /// Returns the string representation of the object.
     /// </summary>
@@ -261,9 +277,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       }
       throw new FormatException(String.Format("Invalid format string: '{0}'.", format));
     }
-    #endregion
+
+    #endregion IFormattable Members
 
     #region ICloneable Members
+
     /// <summary>
     /// Makes a deep copy of the object.
     /// </summary>
@@ -275,9 +293,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       // this object cannot be altered after it is created so no new allocation is necessary.
       return this;
     }
-    #endregion
+
+    #endregion ICloneable Members
 
     #region Static Methods
+
     /// <summary>
     /// Converts an expanded node id to a node id using a namespace table.
     /// </summary>
@@ -300,6 +320,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       // return the name.
       return new QualifiedName(name, (ushort)namespaceIndex);
     }
+
     /// <summary>
     /// Returns true if the QualifiedName is valid.
     /// </summary>
@@ -314,6 +335,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return false;
       return true;
     }
+
     /// <summary>
     /// Parses a string containing a QualifiedName with the syntax <code>n:qname</code>
     /// </summary>
@@ -346,6 +368,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return new QualifiedName(text);
       return new QualifiedName(text.Substring(start), namespaceIndex);
     }
+
     /// <summary>
     /// Returns true if the value is null.
     /// </summary>
@@ -361,6 +384,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       }
       return true;
     }
+
     /// <summary>
     /// Converts a string to a qualified name.
     /// </summary>
@@ -372,6 +396,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return new QualifiedName(value);
     }
+
     /// <summary>
     /// Converts a string to a qualified name.
     /// </summary>
@@ -383,17 +408,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return new QualifiedName(value);
     }
+
     /// <summary>
     /// Returns an instance of a null QualifiedName.
     /// </summary>
-    public static QualifiedName Null
-    {
-      get { return s_Null; }
-    }
-    private static readonly QualifiedName s_Null = new QualifiedName();
-    #endregion
+    public static QualifiedName Null => s_Null;
 
+    private static readonly QualifiedName s_Null = new QualifiedName();
+
+    #endregion Static Methods
   }
+
   /// <summary>
   /// A collection of QualifiedName objects.
   /// </summary>
@@ -409,6 +434,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// Initializes an empty collection.
     /// </remarks>
     public QualifiedNameCollection() { }
+
     /// <summary>
     /// Initializes the collection from another collection.
     /// </summary>
@@ -417,6 +443,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// </remarks>
     /// <param name="collection">The enumerated collection of qualified names to add to this new collection</param>
     public QualifiedNameCollection(IEnumerable<QualifiedName> collection) : base(collection) { }
+
     /// <summary>
     /// Initializes the collection with the specified capacity.
     /// </summary>
@@ -425,6 +452,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// </remarks>
     /// <param name="capacity">Max capacity of this collection</param>
     public QualifiedNameCollection(int capacity) : base(capacity) { }
+
     /// <summary>
     /// Converts an array to a collection.
     /// </summary>
@@ -438,6 +466,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return new QualifiedNameCollection(values);
       return new QualifiedNameCollection();
     }
+
     /// <summary>
     /// Converts an array to a collection.
     /// </summary>
@@ -449,7 +478,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return ToQualifiedNameCollection(values);
     }
+
     #region ICloneable Methods
+
     /// <summary>
     /// Creates a deep copy of the collection.
     /// </summary>
@@ -463,8 +494,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         _clonedCollection.Add((QualifiedName)_item.Clone());
       return _clonedCollection;
     }
-    #endregion
 
+    #endregion ICloneable Methods
   }//QualifiedNameCollection
-
 }//namespace

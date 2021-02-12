@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
+namespace UAOOI.SemanticData.UANodeSetValidation
 {
   //TODO NamespaceTable must provide correct namespaceIndex #517
   /// <summary>

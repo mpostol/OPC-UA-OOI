@@ -6,7 +6,6 @@
 //___________________________________________________________________________________
 
 using System;
-using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation

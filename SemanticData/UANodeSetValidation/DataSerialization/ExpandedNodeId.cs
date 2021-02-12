@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using UAOOI.SemanticData.BuildingErrorsHandling;
-using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {

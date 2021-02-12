@@ -25,6 +25,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
     /// </summary>
     internal NamespaceTable()
     {
+      //TODO NamespaceUrisCannotBeNull - is reported for UADefinedTypes #520
       Append(Namespaces.OpcUa);
     }
 

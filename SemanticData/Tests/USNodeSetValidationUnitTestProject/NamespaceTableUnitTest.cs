@@ -13,6 +13,7 @@ using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
+  //TODO NamespaceUrisCannotBeNull - is reported for UADefinedTypes #520
   [TestClass]
   public class NamespaceTableUnitTest
   {
@@ -35,7 +36,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void GetStringArgumentOutOfRangeExceptionTest()
     {
       NamespaceTable _instance = new NamespaceTable();
-      string _uri = _instance.GetString(1);  //It should throw na exception
+      string _uri = _instance.GetString(1);  //It should throw ArgumentOutOfRangeException exception
     }
 
     [TestMethod]

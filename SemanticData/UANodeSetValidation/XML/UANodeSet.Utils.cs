@@ -30,6 +30,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     internal static UANodeSet ReadUADefinedTypes()
     {
+      //TODO NamespaceUrisCannotBeNull - is reported for UADefinedTypes #520
       return LoadResource(m_UADefinedTypesName);
     }
 

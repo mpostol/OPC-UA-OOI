@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     public void ConstructorTest()
     {
       IUANodeSetModelHeader _tm = TestData.CreateNodeSetModel();
-      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+      Mock<IAddressSpaceURIRecalculate> _asMock = new Mock<IAddressSpaceURIRecalculate>();
       int logCount = 0;
       Action<TraceMessage> _logMock = z => logCount++;
       Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(null, _asMock.Object, _logMock));
@@ -38,7 +38,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     public void ModeltUriTest()
     {
       UANodeSet _tm = TestData.CreateNodeSetModel();
-      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+      Mock<IAddressSpaceURIRecalculate> _asMock = new Mock<IAddressSpaceURIRecalculate>();
       List<TraceMessage> trace = new List<TraceMessage>();
       Action<TraceMessage> _logMock = z => trace.Add(z);
       UAModelContext _mc = null;
@@ -58,7 +58,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
           new NodeIdAlias() { Alias = "Boolean", Value = "ns=1;i=1" } },
         NamespaceUris = new string[] { "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" },
       };
-      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+      Mock<IAddressSpaceURIRecalculate> _asMock = new Mock<IAddressSpaceURIRecalculate>();
       _asMock.Setup(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
       string uri = string.Empty;
       _asMock.Setup(x => x.GetIndexOrAppend(It.Is<string>(z => z.Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown")))).Returns<string>(x => { uri = x; return 20; });
@@ -89,7 +89,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         NamespaceUris = new string[] { "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" },
         Models = new ModelTableEntry[] { new ModelTableEntry() { ModelUri = "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" } }
       };
-      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+      Mock<IAddressSpaceURIRecalculate> _asMock = new Mock<IAddressSpaceURIRecalculate>();
       _asMock.Setup(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
       List<TraceMessage> _logsCache = new List<TraceMessage>();
       Action<TraceMessage> _logMock = z => _logsCache.Add(z);
@@ -139,7 +139,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
               }
         }
       };
-      Mock<IAddressSpaceBuildContext> addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
+      Mock<IAddressSpaceURIRecalculate> addressSpaceMock = new Mock<IAddressSpaceURIRecalculate>();
       addressSpaceMock.Setup(x => x.GetIndexOrAppend(@"http://cas.eu/UA/Demo/")).Returns<string>(x => 2);
       List<TraceMessage> _logsCache = new List<TraceMessage>();
       Action<TraceMessage> _logMock = z => _logsCache.Add(z);

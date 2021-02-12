@@ -45,7 +45,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.IsFalse(_testDataFileInfo.Exists);
       List<TraceMessage> _trace = new List<TraceMessage>();
       int _diagnosticCounter = 0;
-      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
+      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, String.Empty, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
     }
     [TestMethod]
     [ExpectedExceptionAttribute(typeof(System.InvalidOperationException))]
@@ -55,7 +55,8 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.IsTrue(_testDataFileInfo.Exists);
       List<TraceMessage> _trace = new List<TraceMessage>();
       int _diagnosticCounter = 0;
-      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
+      string uri = "http://cas.eu/UA/CommServer/UnitTests/ReferenceTest";
+      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
     }
     [TestMethod]
     public void UAReferenceTestMethod()
@@ -65,8 +66,9 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       ModelDesign _expected = XmlFile.ReadXmlFile<ModelDesign>(@"Models\ReferenceTest.xml");
       List<TraceMessage> _trace = new List<TraceMessage>();
       int _diagnosticCounter = 0;
-      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      string uri = "http://cas.eu/UA/CommServer/UnitTests/ReferenceTest";
+      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _expected.Items.Length);
       CompareModelDesign(_expected, _actual);
     }
@@ -78,8 +80,9 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       ModelDesign _expected = XmlFile.ReadXmlFile<ModelDesign>(@"Models\ObjectTypeTest.xml");
       List<TraceMessage> _trace = new List<TraceMessage>();
       int _diagnosticCounter = 0;
-      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      string uri = "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest";
+      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(3, _expected.Items.Length);
       CompareModelDesign(_expected, _actual);
     }
@@ -91,8 +94,9 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       ModelDesign _expected = XmlFile.ReadXmlFile<ModelDesign>(@"Models\VariableTypeTest.xml");
       List<TraceMessage> _trace = new List<TraceMessage>();
       int _diagnosticCounter = 0;
-      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      string uri = "http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest";
+      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(3, _expected.Items.Length);
       CompareModelDesign(_expected, _actual);
     }
@@ -104,8 +108,9 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       ModelDesign _expected = XmlFile.ReadXmlFile<ModelDesign>(@"Models\DataTypeTest.xml");
       List<TraceMessage> _trace = new List<TraceMessage>();
       int _diagnosticCounter = 0;
-      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      string uri = "http://cas.eu/UA/CommServer/UnitTests/DataTypeTest";
+      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
+      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(4, _expected.Items.Length);
       CompareModelDesign(_expected, _actual);
     }

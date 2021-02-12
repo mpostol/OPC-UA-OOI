@@ -22,7 +22,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class AddressSpaceContext - responsible to manage all nodes in the OPC UA Address Space.
   /// </summary>
-  internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext, IAddressSpaceValidationContext
+  internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext, IAddressSpaceValidationContext, IAddressSpaceURIRecalculate
   {
     #region constructor
 

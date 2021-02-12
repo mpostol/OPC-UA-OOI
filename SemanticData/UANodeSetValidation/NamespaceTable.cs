@@ -7,14 +7,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
   //TODO NamespaceTable must provide correct namespaceIndex #517
   /// <summary>
-  /// The table of namespace uris for a server. The <see cref="Namespaces.OpcUa"/> namespace has index = 0.
+  /// The table of URI entities for the Address Space. The <see cref="Namespaces.OpcUa"/> namespace has index = 0.
   /// </summary>
   public class NamespaceTable
   {
@@ -33,54 +32,47 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region Public Members
 
-    /// <summary>
-    /// Adds model Uri to the table.
-    /// </summary>
-    private int Append(string modelUri)
+    internal IModelTableEntry GetURIatIndex(ushort nsi)
     {
-      if (string.IsNullOrEmpty(modelUri))
-        throw new ArgumentNullException("value", "URI must not be null or empty");
-      ModelTableEntry _newModel = ModelTableEntry.GetDefaultModelTableEntry(modelUri, ref m_Index);
-      m_URIDictionary.Add(modelUri, _newModel);
-      m_IndexDictionary = m_URIDictionary.Values.ToDictionary(y => y.Index, x => x.ModelUri);
-      return m_URIDictionary.Count - 1;
-    }
-
-    internal string GetString(ushort nsi)
-    {
-      if (m_IndexDictionary.ContainsKey(nsi))
-        return m_IndexDictionary[nsi];
-      throw new ArgumentOutOfRangeException("namespace index", "Namespace index has not been registered");
-    }
-
-    internal int GetIndex(string uri)
-    {
-      if (string.IsNullOrEmpty(uri))
-        throw URINullException();
-      return m_URIDictionary.ContainsKey(uri) ? m_URIDictionary[uri].Index : -1;
+      if (nsi >= modelsList.Count)
+        throw new ArgumentOutOfRangeException("namespace index", "Namespace index has not been registered");
+      return modelsList[nsi];
     }
 
     /// <summary>
-    /// Gets the default index.
+    /// Searches for an index that matches the <paramref name="URI"/>, and returns the zero-based index of the first occurrence within the <see cref="NamespaceTable"/>.
     /// </summary>
-    /// <returns>System.Int32.</returns>
-    internal IEnumerable<ushort> GetIndex()
+    /// <param name="URI">The URI .</param>
+    /// <returns>
+    /// The zero-based index of the first occurrence of <paramref name="URI"/>
+    /// </returns>
+    /// <exception cref="System.ArgumentNullException">URI is null.</exception>
+    internal int GetURIIndex(string URI)
     {
-      return new List<ushort>() { (ushort)(m_Index - 1) };
+      return modelsList.FindIndex(x => x.ModelUri == URI);
     }
 
     /// <summary>
     /// Returns the index of the specified namespace uri, adds it if it does not exist.
     /// </summary>
-    internal ushort GetIndexOrAppend(string uri)
+    internal ushort GetURIIndexOrAppend(string URI)
     {
-      int _index = GetIndex(uri);
+      int _index = GetURIIndex(URI);
       if (_index == -1)
-        _index = Append(uri);
+        _index = Append(URI);
       return (ushort)_index;
     }
 
-    internal IEnumerable<IModelTableEntry> ExportNamespaceTable => m_URIDictionary.Values;
+    internal IEnumerable<IModelTableEntry> Models => modelsList;
+
+    internal void UpadateModelOrAppend(IModelTableEntry model)
+    {
+      int index = GetURIIndex(model.ModelUri);
+      if (index >= 0)
+        modelsList[index] = model;
+      else
+        modelsList.Add(model);
+    }
 
     #endregion Public Members
 
@@ -88,9 +80,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     //var
 
-    private readonly Dictionary<string, ModelTableEntry> m_URIDictionary = new Dictionary<string, ModelTableEntry>();
-    private Dictionary<ushort, string> m_IndexDictionary = new Dictionary<ushort, string>();
-    private ushort m_Index = 0;
+    //private readonly Dictionary<string, ModelTableEntry> m_URIDictionary = new Dictionary<string, ModelTableEntry>();
+    //private Dictionary<ushort, string> m_IndexDictionary = new Dictionary<ushort, string>();
+    //private ushort m_Index = 0;
+    private List<IModelTableEntry> modelsList = new List<IModelTableEntry>();
 
     //classes
     private class RolePermission : IRolePermission
@@ -117,12 +110,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private class ModelTableEntry : IModelTableEntry
     {
       /// <summary>
-      /// Gets or sets the index of the model.
-      /// </summary>
-      /// <value>The index.</value>
-      internal ushort Index { get; set; } = 0;
-
-      /// <summary>
       /// Gets the default model table entry.
       /// </summary>
       /// <param name="modelUri">The model URI.</param>
@@ -130,14 +117,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       /// <returns>UAOOI.SemanticData.UANodeSetValidation.Utilities.IModelTableEntry.</returns>
       /// <remarks>This type is defined in Part 6 F.5 but the definition is not compliant with the UANodeSet schema.
       /// This type is also defined in the Part 3 5.2.9 but the definition is not compliant.</remarks>
-      internal static ModelTableEntry GetDefaultModelTableEntry(string modelUri, ref ushort index)
+      internal static ModelTableEntry GetDefaultModelTableEntry(string modelUri)
       {
         if (string.IsNullOrEmpty(modelUri))
           throw URINullException();
         return new ModelTableEntry
         {
           AccessRestrictions = 0xC,
-          Index = index++,
           ModelUri = modelUri,
           PublicationDate = DateTime.UtcNow.Date,
           RequiredModel = null,
@@ -188,7 +174,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       #endregion IModelTableEntry
     }
 
-    //methods
+    private int Append(string URI)
+    {
+      int index = GetURIIndex(URI);
+      if (index == -1)
+      {
+        ModelTableEntry _newModel = ModelTableEntry.GetDefaultModelTableEntry(URI);
+        modelsList.Add(_newModel);
+        index = modelsList.Count - 1;
+      }
+      return index;
+    }
+
     private static ArgumentNullException URINullException()
     {
       return new ArgumentNullException("modelUri", $"Model URI must be provided for the {nameof(IModelTableEntry)} instance");

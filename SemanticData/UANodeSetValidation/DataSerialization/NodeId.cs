@@ -490,7 +490,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       int index = -1;
       if (namespaceTable != null)
-        index = namespaceTable.GetIndex(namespaceUri);
+        index = namespaceTable.GetURIIndex(namespaceUri);
       if (index < 0)
         throw new ServiceResultException(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdNotDefined, $"NamespaceUri ({namespaceUri}) is not in the namespace table."), "BuildError_BadNodeIdInvalid");
       return new NodeId(identifier, (ushort)index);

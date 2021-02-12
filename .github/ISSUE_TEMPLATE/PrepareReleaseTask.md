@@ -1,30 +1,22 @@
 ---
-name: Release
-about: Release the milestone
-
+name: Relese
+about: Release new version tasks list
+title: 'Release new version'
+labels: 'Feature request'
+assignees: 'mpostol'
 ---
-
-# Release new version
  
-## Packages to be released
-
-- [ ] `Common`
-- [ ] `Configuration`
-- [ ] `DataDiscovery`
-- [ ] `Networking`
-- [ ] `SemanticData`
-
-## Tasks to be done
-
 - [ ] Update version information for all published assemblies (Model.t4), 
 - [ ] Prepare an example if applicable
 - [ ] Update Readme files
-- [ ] Update the release documentation (ReleaseNoteTemplate)
-- [ ] Prepare NuGet packages if applicable
+- [ ] Prepare and publish NuGet packages if applicable. 
+- [ ] Replace project references by packages.
 - [ ] Create release front page
-   - [ ] Getting Started
-   - [ ] Version information
-- [ ] Prepare binary deliverables and publish the installation package
+  - [ ] Getting Started
+  - [ ] Version information
+- [ ] Build solution to create deliverable and publish the installation package
 - [ ] Update and publish the code help documentation
 - [ ] Publish release
-- [ ] Update the project front page
+- [ ] Update the repository front page
+- [ ] Update the GitHub pages documentation
+- [ ] Close this issue and the parent milestone

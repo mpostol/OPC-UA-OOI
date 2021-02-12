@@ -29,7 +29,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport.Instrumentation
     /// <param name="traceEvent">The trace event.</param>
     /// <returns>An object of <see cref="ModelDesign.ModelDesign"/>.</returns>
     /// <exception cref="System.IO.FileNotFoundException">The imported file does not exist</exception>
-    public static ModelDesign CreateInstance(FileInfo filePath, Action<TraceMessage> traceEvent)
+    public static ModelDesign CreateInstance(FileInfo filePath, string URI, Action<TraceMessage> traceEvent)
     {
       if (!filePath.Exists)
         throw new FileNotFoundException("The imported file does not exist", filePath.FullName);
@@ -40,7 +40,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport.Instrumentation
       ModelFactory _factory = new ModelFactory(traceEvent);
       _as.InformationModelFactory = _factory;
       _as.ImportUANodeSet(filePath);
-      _as.ValidateAndExportModel();
+      _as.ValidateAndExportModel(URI);
       return _factory.Export();
     }
     #endregion

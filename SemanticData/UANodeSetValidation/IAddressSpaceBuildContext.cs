@@ -41,11 +41,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>Returns an instance of <see cref="IUANodeContext"/>.</returns>
     IUANodeContext GetOrCreateNodeContext(NodeId nodeId, Func<NodeId, IUANodeContext> createUAModelContext);
     /// <summary>
-    /// Gets the index or append the URI.
-    /// </summary>
-    /// <param name="identifier">The identifier.</param>
-    ushort GetIndexOrAppend(string identifier);
-    /// <summary>
     /// Gets the namespace value as the <see cref="string"/>.
     /// </summary>
     /// <param name="namespaceIndex">Index of the namespace.</param>
@@ -72,5 +67,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     Parameter ExportArgument(DataSerialization.Argument argument);
   }
+
 
 }

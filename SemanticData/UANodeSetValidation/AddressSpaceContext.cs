@@ -15,7 +15,6 @@ using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
-using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -23,7 +22,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class AddressSpaceContext - responsible to manage all nodes in the OPC UA Address Space.
   /// </summary>
-  internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext, IAddressSpaceValidationContext
+  internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext, IAddressSpaceValidationContext, IAddressSpaceURIRecalculate
   {
     #region constructor
 
@@ -99,11 +98,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     void IAddressSpaceContext.ValidateAndExportModel()
     {
       //TODO NamespaceTable must provide correct namespaceIndex #517
-      foreach (ushort _nsi in m_NamespaceTable.GetIndex())
+      foreach (IModelTableEntry _nsi in m_NamespaceTable.Models)
       {
-        string _namespace = m_NamespaceTable.GetString(_nsi);
-        m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering AddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", _namespace)));
-        ValidateAndExportModel(_nsi, m_Validator);
+        int indes = m_NamespaceTable.GetURIIndex(_nsi.ModelUri);
+        m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering AddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", _nsi.ModelUri)));
+        ValidateAndExportModel(indes, m_Validator);
       }
     }
 
@@ -115,7 +114,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     void IAddressSpaceContext.ValidateAndExportModel(string targetNamespace)
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", targetNamespace)));
-      int _nsIndex = m_NamespaceTable.GetIndex(targetNamespace);
+      int _nsIndex = m_NamespaceTable.GetURIIndex(targetNamespace);
       if (_nsIndex == -1)
         throw new ArgumentOutOfRangeException("targetNamespace", "Cannot find this namespace");
       ValidateAndExportModel(_nsIndex, m_Validator);
@@ -187,7 +186,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>System.UInt16.</returns>
     public ushort GetIndexOrAppend(string value)
     {
-      return m_NamespaceTable.GetIndexOrAppend(value);
+      return m_NamespaceTable.GetURIIndexOrAppend(value);
     }
 
     /// <summary>
@@ -196,7 +195,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="namespaceIndex">Index of the namespace.</param>
     public string GetNamespace(ushort namespaceIndex)
     {
-      return m_NamespaceTable.GetString(namespaceIndex);
+      return m_NamespaceTable.GetURIatIndex(namespaceIndex).ModelUri;
     }
 
     /// <summary>
@@ -281,7 +280,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Exports the current namespace table containing all namespaces that have been registered.
     /// </summary>
     /// <value>An instance of <see cref="IEnumerable{IModelTableEntry}" /> containing.</value>
-    public IEnumerable<IModelTableEntry> ExportNamespaceTable => m_NamespaceTable.ExportNamespaceTable;
+    public IEnumerable<IModelTableEntry> ExportNamespaceTable => m_NamespaceTable.Models;
 
     #endregion IAddressSpaceValidationContext
 

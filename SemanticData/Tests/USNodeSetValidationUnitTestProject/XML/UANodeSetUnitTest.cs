@@ -8,15 +8,53 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   [TestClass]
+  [DeploymentItem(@"XMLModels\", @"XMLModels\")]
   public class UANodeSetUnitTest
   {
     #region tests
+
+    [TestMethod]
+    public void OpcUaNodeSet2TestMethod()
+    {
+      FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml");
+      Assert.IsTrue(_testDataFileInfo.Exists);
+      UANodeSet instance = UANodeSet.ReadModelFile(_testDataFileInfo);
+      Assert.IsNotNull(instance);
+      Assert.IsNotNull(instance.NamespaceUris);
+      Assert.IsNotNull(instance.Models);
+      Mock<IAddressSpaceURIRecalculate> asbcMock = new Mock<IAddressSpaceURIRecalculate>();
+      asbcMock.Setup(x => x.GetIndexOrAppend(@"XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml")).Returns(1);
+      List<TraceMessage> trace = new List<TraceMessage>();
+      IUAModelContext model = instance.ParseUAModelContext(asbcMock.Object, x => trace.Add(x));
+      Assert.IsNotNull(model);
+      Assert.AreEqual<int>(0, trace.Count);
+      asbcMock.Verify(x => x.GetIndexOrAppend(It.IsAny<string>()), Times.Exactly(2));
+    }
+
+    [TestMethod]
+    public void ReadUADefinedTypesTest()
+    {
+      UANodeSet instance = UANodeSet.ReadUADefinedTypes();
+      Assert.IsNotNull(instance);
+      Assert.IsNotNull(instance.NamespaceUris);
+      Assert.IsNotNull(instance.Models);
+      Mock<IAddressSpaceURIRecalculate> asbcMock = new Mock<IAddressSpaceURIRecalculate>();
+      asbcMock.Setup(x => x.GetIndexOrAppend(It.IsAny<string>()));
+      List<TraceMessage> trace = new List<TraceMessage>();
+      IUAModelContext model = instance.ParseUAModelContext(asbcMock.Object, x => trace.Add(x));
+      Assert.IsNotNull(model);
+      Assert.AreEqual<int>(0, trace.Count);
+      asbcMock.Verify(x => x.GetIndexOrAppend(It.IsAny<string>()), Times.Never);
+    }
 
     [TestMethod]
     public void NodeClassEnumTest()

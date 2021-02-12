@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using UAOOI.SemanticData.BuildingErrorsHandling;
-using UAOOI.SemanticData.UANodeSetValidation.Utilities;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {
@@ -480,12 +479,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       // lookup the namespace uri.
       string uri = nodeId.m_namespaceUri;
       if (nodeId.m_nodeId.NamespaceIndex != 0)
-        uri = currentNamespaces.GetString(nodeId.m_nodeId.NamespaceIndex);
+        uri = currentNamespaces.GetURIatIndex(nodeId.m_nodeId.NamespaceIndex).ModelUri;
       // translate the namespace uri.
       ushort namespaceIndex = 0;
       if (!String.IsNullOrEmpty(uri))
       {
-        int index = targetNamespaces.GetIndex(uri);
+        int index = targetNamespaces.GetURIIndex(uri);
         if (index == -1)
           throw GetResultException(String.Format("Cannot map namespace URI onto an index in the target namespace table: {0}", uri));
         namespaceIndex = (ushort)index;
@@ -767,7 +766,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       NodeId localId = new NodeId(nodeId.m_nodeId);
       int index = -1;
       if (namespaceTable != null)
-        index = namespaceTable.GetIndex(nodeId.NamespaceUri);
+        index = namespaceTable.GetURIIndex(nodeId.NamespaceUri);
       if (index < 0)
         return null;
       localId.SetNamespaceIndex((ushort)index);

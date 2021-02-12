@@ -1,19 +1,17 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2018, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
+using UAOOI.SemanticData.UANodeSetValidation;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
-using UAOOI.SemanticData.UANodeSetValidation.Utilities;
-
 
 namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
 {
-
   /// <summary>
   /// Used to receive notifications when a non-value attribute is read or written.
   /// </summary>
@@ -25,7 +23,6 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
   /// <seealso cref="UAOOI.Networking.Simulator.Boiler.AddressSpace.NodeState" />
   public class BaseInstanceState : NodeState
   {
-
     /// <summary>
     /// Initializes the instance with its default attribute values.
     /// </summary>
@@ -36,6 +33,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       Parent = (BaseInstanceState)parent;
       Parent.AddChild(this);
     }
+
     [Obsolete()]
     public BaseInstanceState(NodeState parent) : base(parent) { }
 
@@ -43,6 +41,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// The parent node.
     /// </summary>
     public BaseInstanceState Parent { get; internal set; }
+
     /// <summary>
     /// Returns the id of the default type definition node for the instance.
     /// </summary>
@@ -52,6 +51,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     {
       return null;
     }
+
     /// <summary>
     /// Finds the child with the specified browse path.
     /// </summary>
@@ -61,7 +61,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     /// <returns>The target if found. Null otherwise.</returns>
     public virtual BaseInstanceState FindChild(ISystemContext context, IList<QualifiedName> browsePath, int index)
     {
-      if (index < 0 || index >= Int32.MaxValue)
+      if (index < 0 || index >= int.MaxValue)
         throw new ArgumentOutOfRangeException("index");
       BaseInstanceState instance = FindChild(context, browsePath[index], false, null);
       if (instance != null)
@@ -72,6 +72,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       }
       return null;
     }
+
     /// <summary>
     /// Finds the child with the specified browse name.
     /// </summary>
@@ -101,6 +102,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       }
       return null;
     }
+
     /// <summary>
     /// Populates a list with the children that belong to the node.
     /// </summary>
@@ -112,6 +114,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
     {
       throw new NotImplementedException("This method is added to avoid compiler errors only");
     }
+
     /// <summary>
     /// Populates a list with the children that belong to the node.
     /// </summary>
@@ -121,6 +124,7 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       for (int ii = 0; ii < m_children.Count; ii++)
         children.Add(m_children[ii]);
     }
+
     /// <summary>
     /// Clears the change masks.
     /// </summary>
@@ -137,25 +141,30 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       }
       if (ChangeMasks == NodeStateChangeMasks.None)
         return;
-        OnStateChanged?.Invoke(context, this, ChangeMasks);
-        ChangeMasks = NodeStateChangeMasks.None;
+      OnStateChanged?.Invoke(context, this, ChangeMasks);
+      ChangeMasks = NodeStateChangeMasks.None;
     }
+
     /// <summary>
     /// Called when ClearChangeMasks is called and the ChangeMask is not None.
     /// </summary>
     public event NodeStateChangedHandler OnStateChanged;
+
     /// <summary>
-    /// Adds a child to the node. 
+    /// Adds a child to the node.
     /// </summary>
     internal void AddChild(BaseInstanceState child)
     {
       m_children.Add(child);
       ChangeMasks |= NodeStateChangeMasks.Children;
     }
+
     internal void RegisterVariable(IReadOnlyList<BaseInstanceState> hasComponentPath, Action<BaseInstanceState, string[]> register)
     {
-      List<BaseInstanceState> _hasComponentPathAndMe = new List<BaseInstanceState>(hasComponentPath);
-      _hasComponentPathAndMe.Add(this);
+      List<BaseInstanceState> _hasComponentPathAndMe = new List<BaseInstanceState>(hasComponentPath)
+      {
+        this
+      };
       CallRegister(_hasComponentPathAndMe, register);
       List<BaseInstanceState> _myComponents = new List<BaseInstanceState>();
       GetChildren(_myComponents);
@@ -167,9 +176,10 @@ namespace UAOOI.Networking.Simulator.Boiler.AddressSpace
       }
     }
 
-    protected virtual void CallRegister(List<BaseInstanceState> hasComponentPathAndMe, Action<BaseInstanceState, string[]> register) { }
+    protected virtual void CallRegister(List<BaseInstanceState> hasComponentPathAndMe, Action<BaseInstanceState, string[]> register)
+    {
+    }
+
     private List<BaseInstanceState> m_children = new List<BaseInstanceState>();
-
   }
-
 }

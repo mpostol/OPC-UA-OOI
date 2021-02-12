@@ -1,23 +1,21 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
-namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
+namespace UAOOI.SemanticData.UANodeSetValidation
 {
-
   /// <summary>
   /// Class RolePermission - default RolePermissions for all Nodes in the model.
   /// </summary>
   /// <remarks>
-  /// This type is defined in Part 6 F.5 but the definition is not compliant with the UANodeSet schema. 
+  /// This type is defined in Part 6 F.5 but the definition is not compliant with the UANodeSet schema.
   /// This type is also defined in the Part 3 5.2.9 but the definition is not compliant.
   /// </remarks>
   public interface IRolePermission
   {
-
     /// <summary>
     /// Gets or sets the permissions.
     /// </summary>
@@ -26,14 +24,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Utilities
     /// </remarks>
     /// <value>The permissions.</value>
     uint Permissions { get; set; }
+
     /// <summary>
     /// Gets or sets the value.
     /// </summary>
     /// <remarks>
-    /// Not defined in the spec. 
+    /// Not defined in the spec.
     /// </remarks>
     /// <value>The value.</value>
     string Value { get; set; }
-
   }
 }

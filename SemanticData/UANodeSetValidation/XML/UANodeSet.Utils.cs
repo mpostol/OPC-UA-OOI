@@ -13,11 +13,11 @@ using UAOOI.SemanticData.BuildingErrorsHandling;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  public partial class UANodeSet: IUANodeSetModelHeader
+  public partial class UANodeSet : IUANodeSetModelHeader
   {
     #region API
 
-    internal IUAModelContext ParseUAModelContext(IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceEvent)
+    internal IUAModelContext ParseUAModelContext(IAddressSpaceURIRecalculate addressSpaceContext, Action<TraceMessage> traceEvent)
     {
       UAModelContext model = UAModelContext.ParseUANodeSetModelHeader(this, addressSpaceContext, traceEvent);
       this.RecalculateNodeIds(model);
@@ -30,7 +30,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     internal static UANodeSet ReadUADefinedTypes()
     {
-      return LoadResource(m_UADefinedTypesName);
+      //TODO NamespaceUrisCannotBeNull - is reported for UADefinedTypes #520
+      UANodeSet uaDefinedTypes = LoadResource(m_UADefinedTypesName);
+      if (uaDefinedTypes.Models is null || uaDefinedTypes.Models.Length == 0)
+        throw new ArgumentNullException(nameof(UANodeSet.Models));
+      if (uaDefinedTypes.NamespaceUris is null)
+        uaDefinedTypes.NamespaceUris = new string[] { uaDefinedTypes.Models[0].ModelUri };
+      return uaDefinedTypes;
     }
 
     internal static UANodeSet ReadModelFile(FileInfo path)

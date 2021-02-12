@@ -87,7 +87,6 @@
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
     <Compile Include="UAModelContextUnitTest.cs" />
-    <Compile Include="ResourcesUnitTest.cs" />
     <Compile Include="AddressSpaceContextUnitTest.cs" />
     <Compile Include="Helpers\TestData.cs" />
     <Compile Include="ServiceResultExceptionUnitTest.cs" />

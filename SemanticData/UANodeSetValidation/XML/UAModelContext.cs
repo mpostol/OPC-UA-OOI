@@ -26,7 +26,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// <exception cref="ArgumentNullException">buildErrorsHandlingLog
     /// or
     /// addressSpaceContext</exception>
-    internal static UAModelContext ParseUANodeSetModelHeader(IUANodeSetModelHeader modelHeader, IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceEvent)
+    internal static UAModelContext ParseUANodeSetModelHeader(IUANodeSetModelHeader modelHeader, IAddressSpaceURIRecalculate addressSpaceContext, Action<TraceMessage> traceEvent)
     {
       if (modelHeader is null)
         throw new ArgumentNullException(nameof(modelHeader));
@@ -80,11 +80,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     private readonly Action<TraceMessage> _log;
     private readonly Dictionary<string, string> _aliasesDictionary = new Dictionary<string, string>();
     private List<string> _namespaceUris = new List<string>();
-    private IAddressSpaceBuildContext _addressSpaceContext { get; }
+    private IAddressSpaceURIRecalculate _addressSpaceContext { get; }
     private static Random _randomNumber = new Random();
 
     //methods
-    private UAModelContext(IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceEvent)
+    private UAModelContext(IAddressSpaceURIRecalculate addressSpaceContext, Action<TraceMessage> traceEvent)
     {
       _log = traceEvent ?? throw new ArgumentNullException(nameof(traceEvent));
       _addressSpaceContext = addressSpaceContext ?? throw new ArgumentNullException(nameof(addressSpaceContext));

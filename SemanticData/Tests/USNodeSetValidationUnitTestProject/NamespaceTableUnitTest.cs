@@ -7,13 +7,12 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 using UAOOI.SemanticData.UANodeSetValidation.Utilities;
-using System.Linq;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  //TODO NamespaceTable must provide correct namespaceIndex #517
   [TestClass]
   public class NamespaceTableUnitTest
   {

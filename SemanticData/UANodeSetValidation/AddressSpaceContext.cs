@@ -299,18 +299,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //methods
     private void ImportNodeSet(UANodeSet model, Action<TraceMessage> traceEvent)
     {
-      //TODO NamespaceTable must provide correct namespaceIndex #517
-      //if (model.Models != null && model.Models.Length > 0)
-      //  m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Models is omitted during the import"));
-      if (model.ServerUris != null && model.ServerUris.Length > 0)
-        m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "ServerUris is omitted during the import"));
-      if (model.Extensions != null && model.Extensions.Length > 0)
-        m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Extensions is omitted during the import"));
-      string _namespace = model.NamespaceUris == null ? m_NamespaceTable.GetString(0) : model.NamespaceUris[0];
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_namespace}."));
-      IUAModelContext _modelContext = model.UAModelContext(this, traceEvent); 
-      ;
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - context for imported model is created and starting import nodes."));
+      IUAModelContext _modelContext = model.ParseUAModelContext(this, traceEvent);
+      traceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext}."));
+      traceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - the context for the imported model is created and starting import nodes."));
       foreach (UANode _nd in model.Items)
         ImportUANode(_nd, m_TraceEvent);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage($"Finishing AddressSpaceContext.ImportNodeSet - imported {model.Items.Length} nodes."));
@@ -411,7 +402,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #endregion private
 
-    #region UnitTestd
+    #region Unit Test
 
     [System.Diagnostics.Conditional("DEBUG")]
     internal void UTAddressSpaceCheckConsistency(Action<IUANodeContext> returnValue)
@@ -447,6 +438,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       returnValue((from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key));
     }
 
-    #endregion UnitTestd
+    #endregion Unit Test
   }
 }

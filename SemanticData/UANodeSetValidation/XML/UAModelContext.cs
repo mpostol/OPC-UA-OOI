@@ -12,29 +12,36 @@ using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
+  //TODO NamespaceTable must provide correct namespaceIndex #517
   internal class UAModelContext : IUAModelContext
   {
-    #region creator
+    #region API
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UAModelContext" /> class.
     /// </summary>
-    /// <param name="aliases">A list of Aliases used in the UANodeSet.</param>
-    /// <param name="namespaceUris">A list of NamespaceUris used in the UANodeSet.</param>
+    /// <param name="modelHeader">The model header of the <see cref="UANodeSet"/> represented as an instance of <see cref="IUANodeSetModelHeader"/>.</param>
     /// <param name="addressSpaceContext">The address space context represented by an instance of <see cref="IAddressSpaceBuildContext" />.</param>
-    /// <param name="traceEvent">The trace event.</param>
+    /// <param name="traceEvent">The trace event call back delegate.</param>
     /// <exception cref="ArgumentNullException">buildErrorsHandlingLog
     /// or
     /// addressSpaceContext</exception>
-    internal UAModelContext(NodeIdAlias[] aliases, string[] namespaceUris, IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceEvent)
+    internal static UAModelContext ParseUANodeSetModelHeader(IUANodeSetModelHeader modelHeader, IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceEvent)
     {
-      Log = traceEvent ?? throw new ArgumentNullException(nameof(traceEvent));
-      AddressSpaceContext = addressSpaceContext ?? throw new ArgumentNullException(nameof(addressSpaceContext));
-      AddNamespaceUriTable(namespaceUris);
-      AddAliases(aliases);
+      if (modelHeader is null)
+        throw new ArgumentNullException(nameof(modelHeader));
+      if (modelHeader.ServerUris != null && modelHeader.ServerUris.Length > 0)
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "ServerUris is omitted during the import"));
+      if (modelHeader.Extensions != null && modelHeader.Extensions.Length > 0)
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Extensions is omitted during the import"));
+      UAModelContext context2Return = new UAModelContext(addressSpaceContext, traceEvent);
+      context2Return.Parse(modelHeader);
+      return context2Return;
     }
 
-    #endregion creator
+    internal Uri ModeltUri { get; private set; }
+
+    #endregion API
 
     #region IUAModelContext
 
@@ -70,33 +77,73 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     //var
 
-    private Action<TraceMessage> Log;
-    private readonly Dictionary<string, string> m_AliasesDictionary = new Dictionary<string, string>();
-    private readonly List<string> m_NamespaceUris = new List<string>();
-    private IAddressSpaceBuildContext AddressSpaceContext { get; }
-    private static int m_NamespaceCount = 0;
+    private readonly Action<TraceMessage> _log;
+    private readonly Dictionary<string, string> _aliasesDictionary = new Dictionary<string, string>();
+    private List<string> _namespaceUris = new List<string>();
+    private IAddressSpaceBuildContext _addressSpaceContext { get; }
+    private static Random _randomNumber = new Random();
 
     //methods
-    private void AddAliases(NodeIdAlias[] nodeIdAlias)
+    private UAModelContext(IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceEvent)
+    {
+      _log = traceEvent ?? throw new ArgumentNullException(nameof(traceEvent));
+      _addressSpaceContext = addressSpaceContext ?? throw new ArgumentNullException(nameof(addressSpaceContext));
+    }
+
+    private void Parse(IUANodeSetModelHeader modelHeader)
+    {
+      _namespaceUris = Parse(modelHeader.NamespaceUris);
+      ModeltUri = Parse(modelHeader.Models);
+      Parse(modelHeader.Aliases);
+    }
+
+    private void Parse(NodeIdAlias[] nodeIdAlias)
     {
       if (nodeIdAlias is null)
         return;
-      foreach (NodeIdAlias _alias in nodeIdAlias)
-        m_AliasesDictionary.Add(_alias.Alias.Trim(), _alias.Value);
+      foreach (NodeIdAlias alias in nodeIdAlias)
+        _aliasesDictionary.Add(alias.Alias.Trim(), alias.Value);
     }
 
-    private void AddNamespaceUriTable(string[] namespaceUris)
+    private List<string> Parse(string[] namespaceUris)
     {
-      if (namespaceUris is null)
-        return;
+      List<string> list2Return = new List<string>();
+      if (namespaceUris is null || namespaceUris.Length == 0)
+      {
+        namespaceUris = new string[] { RandomUri().ToString() };
+        _log(TraceMessage.BuildErrorTraceMessage(BuildError.NamespaceUrisCannotBeNull, $"Added a random URI { namespaceUris[0] } to NamespaceUris."));
+      }
       for (int i = 0; i < namespaceUris.Length; i++)
-        m_NamespaceUris.Add(namespaceUris[i]);
+        list2Return.Add(namespaceUris[i]);
+      return list2Return;
+    }
+
+    private Uri Parse(ModelTableEntry[] models)
+    {
+      if (models == null || models.Length == 0)
+      {
+        models = new ModelTableEntry[] { new ModelTableEntry()
+          {
+            AccessRestrictions = 0,
+            ModelUri = _namespaceUris[0],
+            PublicationDate =DateTime.UtcNow,
+            PublicationDateSpecified = true,
+            RequiredModel = new ModelTableEntry[]{ },
+            RolePermissions = new RolePermission[] { },
+            Version = new Version().ToString()
+          }
+        };
+        _log(TraceMessage.BuildErrorTraceMessage(BuildError.ModelsCannotBeNull, $"Added default model {models[0].ModelUri}"));
+      }
+      else if (models.Length > 1)
+        _log(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, $"Multi-model is not supported, only first model {models[0].ModelUri }is processed."));
+      return new UriBuilder(models[0].ModelUri).Uri;
     }
 
     private string LookupAlias(string id)
     {
       string _newId = string.Empty;
-      return m_AliasesDictionary.TryGetValue(id.Trim(), out _newId) ? _newId : id;
+      return _aliasesDictionary.TryGetValue(id.Trim(), out _newId) ? _newId : id;
     }
 
     private ushort ImportNamespaceIndex(ushort namespaceIndex)
@@ -104,18 +151,28 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       // nothing special required for indexes < 0.
       if (namespaceIndex == 0)
         return namespaceIndex;
-      // return a new value if parameter is out of range.
-      string _identifier;
-      if (m_NamespaceUris.Count > namespaceIndex - 1)
-        _identifier = m_NamespaceUris[namespaceIndex - 1];
+      string uriString;
+      if (_namespaceUris.Count > namespaceIndex - 1)
+        uriString = _namespaceUris[namespaceIndex - 1];
       else
       {
-        _identifier = $@"http://tempuri.org/NameUnknown{m_NamespaceCount++}";
-        this.Log(
-          TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedNamespaceIndex, $"ImportNamespaceIndex failed - namespace index {namespaceIndex - 1} is out of the NamespaceUris index. New namespace {_identifier} is created instead."));
-        m_NamespaceUris.Add(_identifier);
+        // return a random value if index is out of range.
+        uriString = RandomUri().ToString();
+        this._log(
+          TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedNamespaceIndex, $"ImportNamespaceIndex failed - namespace index {namespaceIndex - 1} is out of the NamespaceUris index. New namespace {uriString} is created instead."));
+        _namespaceUris.Add(uriString);
       }
-      return AddressSpaceContext.GetIndexOrAppend(_identifier);
+      return _addressSpaceContext.GetIndexOrAppend(uriString);
+    }
+
+    private static Uri RandomUri()
+    {
+      UriBuilder _builder = new UriBuilder()
+      {
+        Path = $@"github.com/mpostol/OPC-UA-OOI/NameUnknown{_randomNumber.Next(0, int.MaxValue)}",
+        Scheme = Uri.UriSchemeHttp,
+      };
+      return _builder.Uri;
     }
 
     #endregion private

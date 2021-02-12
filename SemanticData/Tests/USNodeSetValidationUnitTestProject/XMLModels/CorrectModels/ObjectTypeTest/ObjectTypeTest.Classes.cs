@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2011 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  *
@@ -30,7 +30,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Reflection;
 using System.Xml;
 using System.Runtime.Serialization;
 using ;
@@ -45,6 +44,16 @@ namespace ObjectTypeTest
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
     public static partial class Methods
     {
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_AddRole Method.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_Roles_AddRole = 520;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_RemoveRole Method.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_Roles_RemoveRole = 523;
+
         /// <summary>
         /// The identifier for the ComplexObjectType_ChildMethod Method.
         /// </summary>
@@ -66,39 +75,29 @@ namespace ObjectTypeTest
         public const uint NonExecutableMethodComplexObjectType = 307;
 
         /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole Method.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole = 536;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole Method.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole = 539;
+
+        /// <summary>
         /// The identifier for the DerivedFromComplexObjectType_ChildMethod Method.
         /// </summary>
         public const uint DerivedFromComplexObjectType_ChildMethod = 409;
 
         /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Open Method.
+        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_AddRole Method.
         /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_Open = 485;
+        public const uint NameNotSet6_ServerCapabilities_Roles_AddRole = 552;
 
         /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Close Method.
+        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_RemoveRole Method.
         /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_Close = 488;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Read Method.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_Read = 490;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Write Method.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_Write = 493;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_GetPosition Method.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_GetPosition = 495;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_SetPosition Method.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_SetPosition = 498;
+        public const uint NameNotSet6_ServerCapabilities_Roles_RemoveRole = 555;
 
         /// <summary>
         /// The identifier for the NameNotSet6_ChildMethod Method.
@@ -126,9 +125,39 @@ namespace ObjectTypeTest
         public const uint ComplexObjectType_ServerCapabilities = 214;
 
         /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_ModellingRules Object.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_ModellingRules = 237;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_AggregateFunctions Object.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_AggregateFunctions = 238;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary Object.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary = 255;
+
+        /// <summary>
         /// The identifier for the ComplexObjectType_ChildObject Object.
         /// </summary>
         public const uint ComplexObjectType_ChildObject = 308;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_ModellingRules Object.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_ModellingRules = 351;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_AggregateFunctions Object.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_AggregateFunctions = 352;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary Object.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary = 369;
 
         /// <summary>
         /// The identifier for the NameNotSet6 Object.
@@ -216,6 +245,236 @@ namespace ObjectTypeTest
     public static partial class Variables
     {
         /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_StartTime Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerStatus_StartTime = 200;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_CurrentTime Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerStatus_CurrentTime = 201;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_State Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerStatus_State = 202;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerStatus_BuildInfo = 203;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo_ProductUri Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerStatus_BuildInfo_ProductUri = 204;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo_ManufacturerName Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerStatus_BuildInfo_ManufacturerName = 205;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo_ProductName Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerStatus_BuildInfo_ProductName = 206;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo_SoftwareVersion Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerStatus_BuildInfo_SoftwareVersion = 207;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo_BuildNumber Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerStatus_BuildInfo_BuildNumber = 208;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo_BuildDate Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerStatus_BuildInfo_BuildDate = 209;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_SecondsTillShutdown Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerStatus_SecondsTillShutdown = 210;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_ShutdownReason Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerStatus_ShutdownReason = 211;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_ServerProfileArray Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_ServerProfileArray = 215;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_LocaleIdArray Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_LocaleIdArray = 216;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_MinSupportedSampleRate Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_MinSupportedSampleRate = 217;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_MaxBrowseContinuationPoints Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_MaxBrowseContinuationPoints = 218;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_MaxQueryContinuationPoints Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_MaxQueryContinuationPoints = 219;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_MaxHistoryContinuationPoints Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_MaxHistoryContinuationPoints = 220;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_SoftwareCertificates Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_SoftwareCertificates = 221;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments = 521;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments = 522;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments = 524;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary = 240;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_ServerViewCount Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_ServerViewCount = 241;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSessionCount Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSessionCount = 242;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSessionCount Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSessionCount = 243;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedSessionCount Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedSessionCount = 244;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedSessionCount Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedSessionCount = 245;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionTimeoutCount Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionTimeoutCount = 246;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionAbortCount Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionAbortCount = 247;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_PublishingIntervalCount Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_PublishingIntervalCount = 248;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSubscriptionCount Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSubscriptionCount = 249;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSubscriptionCount Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSubscriptionCount = 250;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedRequestsCount Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedRequestsCount = 251;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedRequestsCount Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedRequestsCount = 252;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_SubscriptionDiagnosticsArray Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_SubscriptionDiagnosticsArray = 254;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionDiagnosticsArray Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionDiagnosticsArray = 256;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionSecurityDiagnosticsArray Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionSecurityDiagnosticsArray = 257;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_EnabledFlag Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerDiagnostics_EnabledFlag = 258;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerRedundancy_RedundancySupport Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ServerRedundancy_RedundancySupport = 261;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_GetMonitoredItems_InputArguments Variable.
+        /// </summary>
+        public const uint ComplexObjectType_GetMonitoredItems_InputArguments = 285;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_GetMonitoredItems_OutputArguments Variable.
+        /// </summary>
+        public const uint ComplexObjectType_GetMonitoredItems_OutputArguments = 286;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ResendData_InputArguments Variable.
+        /// </summary>
+        public const uint ComplexObjectType_ResendData_InputArguments = 526;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_SetSubscriptionDurable_InputArguments Variable.
+        /// </summary>
+        public const uint ComplexObjectType_SetSubscriptionDurable_InputArguments = 528;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_SetSubscriptionDurable_OutputArguments Variable.
+        /// </summary>
+        public const uint ComplexObjectType_SetSubscriptionDurable_OutputArguments = 529;
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_RequestServerStateChange_InputArguments Variable.
+        /// </summary>
+        public const uint ComplexObjectType_RequestServerStateChange_InputArguments = 531;
+
+        /// <summary>
         /// The identifier for the ComplexObjectType_BrowseName4node66 Variable.
         /// </summary>
         public const uint ComplexObjectType_BrowseName4node66 = 309;
@@ -249,6 +508,261 @@ namespace ObjectTypeTest
         /// The identifier for the ChildMethodComplexObjectType_OutputArguments Variable.
         /// </summary>
         public const uint ChildMethodComplexObjectType_OutputArguments = 305;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_StartTime Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerStatus_StartTime = 314;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_CurrentTime Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerStatus_CurrentTime = 315;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_State Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerStatus_State = 316;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerStatus_BuildInfo = 317;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo_ProductUri Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerStatus_BuildInfo_ProductUri = 318;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo_ManufacturerName Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerStatus_BuildInfo_ManufacturerName = 319;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo_ProductName Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerStatus_BuildInfo_ProductName = 320;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo_SoftwareVersion Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerStatus_BuildInfo_SoftwareVersion = 321;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo_BuildNumber Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerStatus_BuildInfo_BuildNumber = 322;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo_BuildDate Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerStatus_BuildInfo_BuildDate = 323;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_SecondsTillShutdown Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerStatus_SecondsTillShutdown = 324;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_ShutdownReason Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerStatus_ShutdownReason = 325;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_ServerProfileArray Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_ServerProfileArray = 329;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_LocaleIdArray Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_LocaleIdArray = 330;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_MinSupportedSampleRate Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_MinSupportedSampleRate = 331;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_MaxBrowseContinuationPoints Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_MaxBrowseContinuationPoints = 332;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_MaxQueryContinuationPoints Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_MaxQueryContinuationPoints = 333;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_MaxHistoryContinuationPoints Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_MaxHistoryContinuationPoints = 334;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_SoftwareCertificates Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_SoftwareCertificates = 335;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments = 537;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments = 538;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments = 540;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary = 354;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_ServerViewCount Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_ServerViewCount = 355;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSessionCount Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSessionCount = 356;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSessionCount Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSessionCount = 357;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedSessionCount Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedSessionCount = 358;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedSessionCount Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedSessionCount = 359;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionTimeoutCount Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionTimeoutCount = 360;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionAbortCount Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionAbortCount = 361;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_PublishingIntervalCount Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_PublishingIntervalCount = 362;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSubscriptionCount Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSubscriptionCount = 363;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSubscriptionCount Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSubscriptionCount = 364;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedRequestsCount Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedRequestsCount = 365;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedRequestsCount Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedRequestsCount = 366;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_SubscriptionDiagnosticsArray Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_SubscriptionDiagnosticsArray = 368;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionDiagnosticsArray Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionDiagnosticsArray = 370;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionSecurityDiagnosticsArray Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionSecurityDiagnosticsArray = 371;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_EnabledFlag Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerDiagnostics_EnabledFlag = 372;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerRedundancy_RedundancySupport Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ServerRedundancy_RedundancySupport = 375;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_GetMonitoredItems_InputArguments Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_GetMonitoredItems_InputArguments = 399;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_GetMonitoredItems_OutputArguments Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_GetMonitoredItems_OutputArguments = 400;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ResendData_InputArguments Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ResendData_InputArguments = 542;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_SetSubscriptionDurable_InputArguments Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_SetSubscriptionDurable_InputArguments = 544;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_SetSubscriptionDurable_OutputArguments Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_SetSubscriptionDurable_OutputArguments = 545;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_RequestServerStateChange_InputArguments Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_RequestServerStateChange_InputArguments = 547;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_BrowseName4node66 Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_BrowseName4node66 = 402;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_NameNotSet1109 Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_NameNotSet1109 = 403;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_NameNotSet1109_EURange Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_NameNotSet1109_EURange = 407;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ChildMethod_InputArguments Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ChildMethod_InputArguments = 410;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ChildMethod_OutputArguments Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ChildMethod_OutputArguments = 411;
 
         /// <summary>
         /// The identifier for the NameNotSet6_ServerArray Variable.
@@ -371,6 +885,21 @@ namespace ObjectTypeTest
         public const uint NameNotSet6_ServerCapabilities_SoftwareCertificates = 438;
 
         /// <summary>
+        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// </summary>
+        public const uint NameNotSet6_ServerCapabilities_Roles_AddRole_InputArguments = 553;
+
+        /// <summary>
+        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// </summary>
+        public const uint NameNotSet6_ServerCapabilities_Roles_AddRole_OutputArguments = 554;
+
+        /// <summary>
+        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public const uint NameNotSet6_ServerCapabilities_Roles_RemoveRole_InputArguments = 556;
+
+        /// <summary>
         /// The identifier for the NameNotSet6_ServerDiagnostics_ServerDiagnosticsSummary Variable.
         /// </summary>
         public const uint NameNotSet6_ServerDiagnostics_ServerDiagnosticsSummary = 457;
@@ -461,71 +990,6 @@ namespace ObjectTypeTest
         public const uint NameNotSet6_ServerRedundancy_RedundancySupport = 478;
 
         /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Size Variable.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_Size = 481;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Writeable Variable.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_Writeable = 482;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_UserWriteable Variable.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_UserWriteable = 483;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_OpenCount Variable.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_OpenCount = 484;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Open_InputArguments Variable.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_Open_InputArguments = 486;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Open_OutputArguments Variable.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_Open_OutputArguments = 487;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Close_InputArguments Variable.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_Close_InputArguments = 489;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Read_InputArguments Variable.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_Read_InputArguments = 491;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Read_OutputArguments Variable.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_Read_OutputArguments = 492;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Write_InputArguments Variable.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_Write_InputArguments = 494;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_GetPosition_InputArguments Variable.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_GetPosition_InputArguments = 496;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_GetPosition_OutputArguments Variable.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_GetPosition_OutputArguments = 497;
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_SetPosition_InputArguments Variable.
-        /// </summary>
-        public const uint NameNotSet6_Namespaces_AddressSpaceFile_SetPosition_InputArguments = 499;
-
-        /// <summary>
         /// The identifier for the NameNotSet6_GetMonitoredItems_InputArguments Variable.
         /// </summary>
         public const uint NameNotSet6_GetMonitoredItems_InputArguments = 502;
@@ -534,6 +998,26 @@ namespace ObjectTypeTest
         /// The identifier for the NameNotSet6_GetMonitoredItems_OutputArguments Variable.
         /// </summary>
         public const uint NameNotSet6_GetMonitoredItems_OutputArguments = 503;
+
+        /// <summary>
+        /// The identifier for the NameNotSet6_ResendData_InputArguments Variable.
+        /// </summary>
+        public const uint NameNotSet6_ResendData_InputArguments = 558;
+
+        /// <summary>
+        /// The identifier for the NameNotSet6_SetSubscriptionDurable_InputArguments Variable.
+        /// </summary>
+        public const uint NameNotSet6_SetSubscriptionDurable_InputArguments = 560;
+
+        /// <summary>
+        /// The identifier for the NameNotSet6_SetSubscriptionDurable_OutputArguments Variable.
+        /// </summary>
+        public const uint NameNotSet6_SetSubscriptionDurable_OutputArguments = 561;
+
+        /// <summary>
+        /// The identifier for the NameNotSet6_RequestServerStateChange_InputArguments Variable.
+        /// </summary>
+        public const uint NameNotSet6_RequestServerStateChange_InputArguments = 563;
 
         /// <summary>
         /// The identifier for the NameNotSet6_BrowseName4node66 Variable.
@@ -571,6 +1055,16 @@ namespace ObjectTypeTest
     public static partial class MethodIds
     {
         /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_AddRole Method.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_Roles_AddRole = new ExpandedNodeId(ObjectTypeTest.Methods.ComplexObjectType_ServerCapabilities_Roles_AddRole, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_RemoveRole Method.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_Roles_RemoveRole = new ExpandedNodeId(ObjectTypeTest.Methods.ComplexObjectType_ServerCapabilities_Roles_RemoveRole, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
         /// The identifier for the ComplexObjectType_ChildMethod Method.
         /// </summary>
         public static readonly ExpandedNodeId ComplexObjectType_ChildMethod = new ExpandedNodeId(ObjectTypeTest.Methods.ComplexObjectType_ChildMethod, ObjectTypeTest.Namespaces.cas);
@@ -591,39 +1085,29 @@ namespace ObjectTypeTest
         public static readonly ExpandedNodeId NonExecutableMethodComplexObjectType = new ExpandedNodeId(ObjectTypeTest.Methods.NonExecutableMethodComplexObjectType, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole Method.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole = new ExpandedNodeId(ObjectTypeTest.Methods.DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole Method.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole = new ExpandedNodeId(ObjectTypeTest.Methods.DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
         /// The identifier for the DerivedFromComplexObjectType_ChildMethod Method.
         /// </summary>
         public static readonly ExpandedNodeId DerivedFromComplexObjectType_ChildMethod = new ExpandedNodeId(ObjectTypeTest.Methods.DerivedFromComplexObjectType_ChildMethod, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Open Method.
+        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_AddRole Method.
         /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_Open = new ExpandedNodeId(ObjectTypeTest.Methods.NameNotSet6_Namespaces_AddressSpaceFile_Open, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_Roles_AddRole = new ExpandedNodeId(ObjectTypeTest.Methods.NameNotSet6_ServerCapabilities_Roles_AddRole, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Close Method.
+        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_RemoveRole Method.
         /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_Close = new ExpandedNodeId(ObjectTypeTest.Methods.NameNotSet6_Namespaces_AddressSpaceFile_Close, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Read Method.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_Read = new ExpandedNodeId(ObjectTypeTest.Methods.NameNotSet6_Namespaces_AddressSpaceFile_Read, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Write Method.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_Write = new ExpandedNodeId(ObjectTypeTest.Methods.NameNotSet6_Namespaces_AddressSpaceFile_Write, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_GetPosition Method.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_GetPosition = new ExpandedNodeId(ObjectTypeTest.Methods.NameNotSet6_Namespaces_AddressSpaceFile_GetPosition, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_SetPosition Method.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_SetPosition = new ExpandedNodeId(ObjectTypeTest.Methods.NameNotSet6_Namespaces_AddressSpaceFile_SetPosition, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_Roles_RemoveRole = new ExpandedNodeId(ObjectTypeTest.Methods.NameNotSet6_ServerCapabilities_Roles_RemoveRole, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
         /// The identifier for the NameNotSet6_ChildMethod Method.
@@ -651,9 +1135,39 @@ namespace ObjectTypeTest
         public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities = new ExpandedNodeId(ObjectTypeTest.Objects.ComplexObjectType_ServerCapabilities, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_ModellingRules Object.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_ModellingRules = new ExpandedNodeId(ObjectTypeTest.Objects.ComplexObjectType_ServerCapabilities_ModellingRules, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_AggregateFunctions Object.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_AggregateFunctions = new ExpandedNodeId(ObjectTypeTest.Objects.ComplexObjectType_ServerCapabilities_AggregateFunctions, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary Object.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary = new ExpandedNodeId(ObjectTypeTest.Objects.ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
         /// The identifier for the ComplexObjectType_ChildObject Object.
         /// </summary>
         public static readonly ExpandedNodeId ComplexObjectType_ChildObject = new ExpandedNodeId(ObjectTypeTest.Objects.ComplexObjectType_ChildObject, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_ModellingRules Object.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_ModellingRules = new ExpandedNodeId(ObjectTypeTest.Objects.DerivedFromComplexObjectType_ServerCapabilities_ModellingRules, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_AggregateFunctions Object.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_AggregateFunctions = new ExpandedNodeId(ObjectTypeTest.Objects.DerivedFromComplexObjectType_ServerCapabilities_AggregateFunctions, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary Object.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary = new ExpandedNodeId(ObjectTypeTest.Objects.DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
         /// The identifier for the NameNotSet6 Object.
@@ -741,6 +1255,236 @@ namespace ObjectTypeTest
     public static partial class VariableIds
     {
         /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_StartTime Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerStatus_StartTime = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerStatus_StartTime, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_CurrentTime Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerStatus_CurrentTime = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerStatus_CurrentTime, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_State Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerStatus_State = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerStatus_State, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerStatus_BuildInfo = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerStatus_BuildInfo, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo_ProductUri Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerStatus_BuildInfo_ProductUri = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerStatus_BuildInfo_ProductUri, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo_ManufacturerName Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerStatus_BuildInfo_ManufacturerName = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerStatus_BuildInfo_ManufacturerName, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo_ProductName Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerStatus_BuildInfo_ProductName = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerStatus_BuildInfo_ProductName, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo_SoftwareVersion Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerStatus_BuildInfo_SoftwareVersion = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerStatus_BuildInfo_SoftwareVersion, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo_BuildNumber Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerStatus_BuildInfo_BuildNumber = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerStatus_BuildInfo_BuildNumber, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_BuildInfo_BuildDate Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerStatus_BuildInfo_BuildDate = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerStatus_BuildInfo_BuildDate, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_SecondsTillShutdown Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerStatus_SecondsTillShutdown = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerStatus_SecondsTillShutdown, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerStatus_ShutdownReason Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerStatus_ShutdownReason = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerStatus_ShutdownReason, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_ServerProfileArray Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_ServerProfileArray = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_ServerProfileArray, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_LocaleIdArray Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_LocaleIdArray = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_LocaleIdArray, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_MinSupportedSampleRate Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_MinSupportedSampleRate = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_MinSupportedSampleRate, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_MaxBrowseContinuationPoints Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_MaxBrowseContinuationPoints = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_MaxBrowseContinuationPoints, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_MaxQueryContinuationPoints Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_MaxQueryContinuationPoints = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_MaxQueryContinuationPoints, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_MaxHistoryContinuationPoints Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_MaxHistoryContinuationPoints = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_MaxHistoryContinuationPoints, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_SoftwareCertificates Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_SoftwareCertificates = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_SoftwareCertificates, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_ServerViewCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_ServerViewCount = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_ServerViewCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSessionCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSessionCount = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSessionCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSessionCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSessionCount = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSessionCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedSessionCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedSessionCount = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedSessionCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedSessionCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedSessionCount = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedSessionCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionTimeoutCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionTimeoutCount = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionTimeoutCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionAbortCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionAbortCount = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionAbortCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_PublishingIntervalCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_PublishingIntervalCount = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_PublishingIntervalCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSubscriptionCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSubscriptionCount = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSubscriptionCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSubscriptionCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSubscriptionCount = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSubscriptionCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedRequestsCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedRequestsCount = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedRequestsCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedRequestsCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedRequestsCount = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedRequestsCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_SubscriptionDiagnosticsArray Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_SubscriptionDiagnosticsArray = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_SubscriptionDiagnosticsArray, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionDiagnosticsArray Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionDiagnosticsArray = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionDiagnosticsArray, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionSecurityDiagnosticsArray Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionSecurityDiagnosticsArray = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionSecurityDiagnosticsArray, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerDiagnostics_EnabledFlag Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerDiagnostics_EnabledFlag = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerDiagnostics_EnabledFlag, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ServerRedundancy_RedundancySupport Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ServerRedundancy_RedundancySupport = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerRedundancy_RedundancySupport, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_GetMonitoredItems_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_GetMonitoredItems_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_GetMonitoredItems_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_GetMonitoredItems_OutputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_GetMonitoredItems_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_GetMonitoredItems_OutputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_ResendData_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_ResendData_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ResendData_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_SetSubscriptionDurable_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_SetSubscriptionDurable_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_SetSubscriptionDurable_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_SetSubscriptionDurable_OutputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_SetSubscriptionDurable_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_SetSubscriptionDurable_OutputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the ComplexObjectType_RequestServerStateChange_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId ComplexObjectType_RequestServerStateChange_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_RequestServerStateChange_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
         /// The identifier for the ComplexObjectType_BrowseName4node66 Variable.
         /// </summary>
         public static readonly ExpandedNodeId ComplexObjectType_BrowseName4node66 = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_BrowseName4node66, ObjectTypeTest.Namespaces.cas);
@@ -774,6 +1518,261 @@ namespace ObjectTypeTest
         /// The identifier for the ChildMethodComplexObjectType_OutputArguments Variable.
         /// </summary>
         public static readonly ExpandedNodeId ChildMethodComplexObjectType_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ChildMethodComplexObjectType_OutputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_StartTime Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerStatus_StartTime = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerStatus_StartTime, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_CurrentTime Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerStatus_CurrentTime = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerStatus_CurrentTime, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_State Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerStatus_State = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerStatus_State, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerStatus_BuildInfo = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerStatus_BuildInfo, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo_ProductUri Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerStatus_BuildInfo_ProductUri = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerStatus_BuildInfo_ProductUri, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo_ManufacturerName Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerStatus_BuildInfo_ManufacturerName = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerStatus_BuildInfo_ManufacturerName, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo_ProductName Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerStatus_BuildInfo_ProductName = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerStatus_BuildInfo_ProductName, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo_SoftwareVersion Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerStatus_BuildInfo_SoftwareVersion = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerStatus_BuildInfo_SoftwareVersion, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo_BuildNumber Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerStatus_BuildInfo_BuildNumber = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerStatus_BuildInfo_BuildNumber, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_BuildInfo_BuildDate Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerStatus_BuildInfo_BuildDate = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerStatus_BuildInfo_BuildDate, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_SecondsTillShutdown Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerStatus_SecondsTillShutdown = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerStatus_SecondsTillShutdown, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerStatus_ShutdownReason Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerStatus_ShutdownReason = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerStatus_ShutdownReason, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_ServerProfileArray Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_ServerProfileArray = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_ServerProfileArray, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_LocaleIdArray Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_LocaleIdArray = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_LocaleIdArray, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_MinSupportedSampleRate Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_MinSupportedSampleRate = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_MinSupportedSampleRate, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_MaxBrowseContinuationPoints Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_MaxBrowseContinuationPoints = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_MaxBrowseContinuationPoints, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_MaxQueryContinuationPoints Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_MaxQueryContinuationPoints = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_MaxQueryContinuationPoints, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_MaxHistoryContinuationPoints Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_MaxHistoryContinuationPoints = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_MaxHistoryContinuationPoints, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_SoftwareCertificates Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_SoftwareCertificates = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_SoftwareCertificates, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_ServerViewCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_ServerViewCount = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_ServerViewCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSessionCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSessionCount = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSessionCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSessionCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSessionCount = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSessionCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedSessionCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedSessionCount = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedSessionCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedSessionCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedSessionCount = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedSessionCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionTimeoutCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionTimeoutCount = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionTimeoutCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionAbortCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionAbortCount = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SessionAbortCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_PublishingIntervalCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_PublishingIntervalCount = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_PublishingIntervalCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSubscriptionCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSubscriptionCount = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CurrentSubscriptionCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSubscriptionCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSubscriptionCount = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_CumulatedSubscriptionCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedRequestsCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedRequestsCount = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_SecurityRejectedRequestsCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedRequestsCount Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedRequestsCount = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary_RejectedRequestsCount, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_SubscriptionDiagnosticsArray Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_SubscriptionDiagnosticsArray = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_SubscriptionDiagnosticsArray, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionDiagnosticsArray Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionDiagnosticsArray = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionDiagnosticsArray, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionSecurityDiagnosticsArray Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionSecurityDiagnosticsArray = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_SessionsDiagnosticsSummary_SessionSecurityDiagnosticsArray, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_EnabledFlag Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerDiagnostics_EnabledFlag = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerDiagnostics_EnabledFlag, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ServerRedundancy_RedundancySupport Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerRedundancy_RedundancySupport = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerRedundancy_RedundancySupport, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_GetMonitoredItems_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_GetMonitoredItems_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_GetMonitoredItems_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_GetMonitoredItems_OutputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_GetMonitoredItems_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_GetMonitoredItems_OutputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ResendData_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ResendData_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ResendData_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_SetSubscriptionDurable_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_SetSubscriptionDurable_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_SetSubscriptionDurable_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_SetSubscriptionDurable_OutputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_SetSubscriptionDurable_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_SetSubscriptionDurable_OutputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_RequestServerStateChange_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_RequestServerStateChange_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_RequestServerStateChange_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_BrowseName4node66 Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_BrowseName4node66 = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_BrowseName4node66, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_NameNotSet1109 Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_NameNotSet1109 = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_NameNotSet1109, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_NameNotSet1109_EURange Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_NameNotSet1109_EURange = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_NameNotSet1109_EURange, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ChildMethod_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ChildMethod_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ChildMethod_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ChildMethod_OutputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ChildMethod_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ChildMethod_OutputArguments, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
         /// The identifier for the NameNotSet6_ServerArray Variable.
@@ -896,6 +1895,21 @@ namespace ObjectTypeTest
         public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_SoftwareCertificates = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ServerCapabilities_SoftwareCertificates, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
+        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_Roles_AddRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ServerCapabilities_Roles_AddRole_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_Roles_AddRole_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ServerCapabilities_Roles_AddRole_OutputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_Roles_RemoveRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ServerCapabilities_Roles_RemoveRole_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
         /// The identifier for the NameNotSet6_ServerDiagnostics_ServerDiagnosticsSummary Variable.
         /// </summary>
         public static readonly ExpandedNodeId NameNotSet6_ServerDiagnostics_ServerDiagnosticsSummary = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ServerDiagnostics_ServerDiagnosticsSummary, ObjectTypeTest.Namespaces.cas);
@@ -986,71 +2000,6 @@ namespace ObjectTypeTest
         public static readonly ExpandedNodeId NameNotSet6_ServerRedundancy_RedundancySupport = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ServerRedundancy_RedundancySupport, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Size Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_Size = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_Namespaces_AddressSpaceFile_Size, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Writeable Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_Writeable = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_Namespaces_AddressSpaceFile_Writeable, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_UserWriteable Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_UserWriteable = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_Namespaces_AddressSpaceFile_UserWriteable, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_OpenCount Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_OpenCount = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_Namespaces_AddressSpaceFile_OpenCount, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Open_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_Open_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_Namespaces_AddressSpaceFile_Open_InputArguments, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Open_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_Open_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_Namespaces_AddressSpaceFile_Open_OutputArguments, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Close_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_Close_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_Namespaces_AddressSpaceFile_Close_InputArguments, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Read_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_Read_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_Namespaces_AddressSpaceFile_Read_InputArguments, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Read_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_Read_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_Namespaces_AddressSpaceFile_Read_OutputArguments, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_Write_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_Write_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_Namespaces_AddressSpaceFile_Write_InputArguments, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_GetPosition_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_GetPosition_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_Namespaces_AddressSpaceFile_GetPosition_InputArguments, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_GetPosition_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_GetPosition_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_Namespaces_AddressSpaceFile_GetPosition_OutputArguments, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the NameNotSet6_Namespaces_AddressSpaceFile_SetPosition_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_Namespaces_AddressSpaceFile_SetPosition_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_Namespaces_AddressSpaceFile_SetPosition_InputArguments, ObjectTypeTest.Namespaces.cas);
-
-        /// <summary>
         /// The identifier for the NameNotSet6_GetMonitoredItems_InputArguments Variable.
         /// </summary>
         public static readonly ExpandedNodeId NameNotSet6_GetMonitoredItems_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_GetMonitoredItems_InputArguments, ObjectTypeTest.Namespaces.cas);
@@ -1059,6 +2008,26 @@ namespace ObjectTypeTest
         /// The identifier for the NameNotSet6_GetMonitoredItems_OutputArguments Variable.
         /// </summary>
         public static readonly ExpandedNodeId NameNotSet6_GetMonitoredItems_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_GetMonitoredItems_OutputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the NameNotSet6_ResendData_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId NameNotSet6_ResendData_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ResendData_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the NameNotSet6_SetSubscriptionDurable_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId NameNotSet6_SetSubscriptionDurable_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_SetSubscriptionDurable_InputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the NameNotSet6_SetSubscriptionDurable_OutputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId NameNotSet6_SetSubscriptionDurable_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_SetSubscriptionDurable_OutputArguments, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the NameNotSet6_RequestServerStateChange_InputArguments Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId NameNotSet6_RequestServerStateChange_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_RequestServerStateChange_InputArguments, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
         /// The identifier for the NameNotSet6_BrowseName4node66 Variable.
@@ -1201,6 +2170,12 @@ namespace ObjectTypeTest
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -1708,6 +2683,12 @@ namespace ObjectTypeTest
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>

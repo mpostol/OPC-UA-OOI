@@ -23,6 +23,22 @@ namespace UAOOI.SemanticData.BuildingErrorsHandling
                     Identifier = "P0-0001020000", 
                     Descriptor = "Node cannot be null" }; } }
     /// <summary>
+    /// Error: P0-0001030000; Focus: XML; Models element cannot be null or empty
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P0-0001030000.</value>
+    public static BuildError ModelsCannotBeNull { get { return new BuildError() 
+                  { Focus = Focus.XML, 
+                    Identifier = "P0-0001030000", 
+                    Descriptor = "Models element cannot be null or empty" }; } }
+    /// <summary>
+    /// Error: P0-0001040000; Focus: XML; NamespaceUris element cannot be null or empty
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P0-0001040000.</value>
+    public static BuildError NamespaceUrisCannotBeNull { get { return new BuildError() 
+                  { Focus = Focus.XML, 
+                    Identifier = "P0-0001040000", 
+                    Descriptor = "NamespaceUris element cannot be null or empty" }; } }
+    /// <summary>
     /// Error: P0-0002010000; Focus: NonCategorized; General processing error see trace for details.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P0-0002010000.</value>

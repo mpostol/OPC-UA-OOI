@@ -8,8 +8,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections.Generic;
-using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
@@ -156,71 +154,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<int>(0, NodeId.Parse(_enumeration.References[1].ReferenceType).NamespaceIndex);
       Assert.AreEqual<string>("i=24", _enumeration.Definition.Field[0].DataType);
       Assert.AreEqual<string>("ns=10;i=24", _enumeration.Definition.Field[1].DataType);
-    }
-
-    [TestMethod]
-    public void RecalculateNodeIdsUANodeSetTest()
-    {
-      UANodeSet _toTest = new UANodeSet()
-      {
-        NamespaceUris = new string[] { @"http://cas.eu/UA/Demo/" },
-        Aliases = new NodeIdAlias[] { new NodeIdAlias() { Alias = "Alias name", Value = "ns=1;i=24" } },
-        Items = new UANode[] { new UAObject()
-              {
-                NodeId = "Alias name",
-                BrowseName = "1:NewUAObject",
-                DisplayName = new LocalizedText[] { new LocalizedText() { Value = "New UA Object" } },
-                References = new Reference[]
-                {
-                  new Reference() { ReferenceType = ReferenceTypeIds.HasTypeDefinition.ToString(), Value = ObjectTypeIds.BaseObjectType.ToString() },
-                  new Reference() { ReferenceType = ReferenceTypeIds.Organizes.ToString(), IsForward= false, Value = "i=85" }
-                },
-                // UAInstance
-                ParentNodeId = string.Empty,
-                // UAObject
-                EventNotifier = 0x01,
-              },
-              new UAVariableType()
-              {
-                NodeId = "ns=1;i=1",
-                BrowseName = "1:NewUAObject",
-                DisplayName = new LocalizedText[] { new LocalizedText() { Value = "New UA Object" } },
-                References = new Reference[]{},
-                // UAObject
-                DataType = "ns=1;i=2",
-              }
-        }
-      };
-      //Mock<IUAModelContext> _uAModelContext = new Mock<IUAModelContext>();
-      //_uAModelContext.Setup<string>(x => x.ImportNodeId(It.IsAny<string>())).Returns<string>
-      //  (x =>
-      //  {
-      //    NodeId nodeId = NodeId.Parse(x);
-      //    if (nodeId.NamespaceIndex == 1)
-      //      nodeId.SetNamespaceIndex(10);
-      //    return nodeId.ToString();
-      //  });
-      //_uAModelContext.Setup<string>(x => x.ImportQualifiedName(It.IsAny<string>())).Returns<string>
-      //  (x =>
-      //  {
-      //    QualifiedName nodeId = QualifiedName.Parse(x);
-      //    if (nodeId.NamespaceIndex == 1)
-      //      nodeId.NamespaceIndex = 10;
-      //    return nodeId.ToString();
-      //  });
-      Mock<IAddressSpaceBuildContext> addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
-      addressSpaceMock.Setup(x => x.GetIndexOrAppend(@"http://cas.eu/UA/Demo/")).Returns<string>(x => 2);
-      List<TraceMessage> _logsCache = new List<TraceMessage>();
-      Action<TraceMessage> _logMock = z => _logsCache.Add(z);
-      IUAModelContext model = _toTest.UAModelContext(addressSpaceMock.Object, _logMock);
-      Assert.IsNotNull(model);
-      addressSpaceMock.Verify(x => x.GetIndexOrAppend(@"http://cas.eu/UA/Demo/"), Times.AtLeastOnce());
-      Assert.AreEqual<string>("ns=2;i=24", _toTest.Aliases[0].Value);
-      Assert.AreEqual<string>("Alias name", _toTest.Aliases[0].Alias);
-      Assert.AreEqual<string>("ns=2;i=24", _toTest.Items[0].NodeId);
-      Assert.AreEqual<string>("ns=2;i=2", ((UAVariableType)_toTest.Items[1]).DataType);
-      Assert.AreEqual<string>("2:BleBle", model.ImportQualifiedName("1:BleBle"));
-      Assert.AreEqual<string>("s=1:BleBle", model.ImportNodeId("1:BleBle"));
     }
 
     #endregion tests

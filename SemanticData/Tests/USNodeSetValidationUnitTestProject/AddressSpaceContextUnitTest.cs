@@ -22,23 +22,26 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
   public class AddressSpaceContextUnitTest
   {
     [TestMethod]
+    [TestCategory("AddressSpaceContext")]
     public void AddressSpaceContextConstructorTest()
     {
       List<IUANodeBase> _invalidNodes = new List<IUANodeBase>();
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       _asp.AddressSpaceContext.UTAddressSpaceCheckConsistency(x => _invalidNodes.Add(x));
-      _asp.TestConsistency(6, 0);
+      _asp.TestConsistency(7, 1);
     }
 
     [TestMethod]
+    [TestCategory("AddressSpaceContext")]
     public void ReferencesCheckConsistencyTest()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       _asp.AddressSpaceContext.UTReferencesCheckConsistency((x, y, z, v) => Assert.Fail());
-      _asp.TestConsistency(6, 0);
+      _asp.TestConsistency(7, 1);
     }
 
     [TestMethod]
+    [TestCategory("AddressSpaceContext")]
     public void AddressSpaceContextContentCheck()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
@@ -57,10 +60,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       _asp.AddressSpaceContext.UTTryGetUANodeContext(ObjectTypes.FolderType, x => _content.Add(x));
       Assert.AreEqual<int>(1, _content.Count);
       Assert.IsTrue(new NodeId(ObjectTypes.FolderType) == _content[0].NodeIdContext);
-      _asp.TestConsistency(6, 0);
+      _asp.TestConsistency(7, 1);
     }
 
     [TestMethod]
+    [TestCategory("AddressSpaceContext")]
     public void AddressSpaceReferencesContentCheck()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
@@ -71,7 +75,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       _content.Clear();
       _asp.AddressSpaceContext.UTGetReferences(ObjectIds.ObjectsFolder, x => _content.Add(x));
       Assert.AreEqual<int>(3, _content.Count);
-      _asp.TestConsistency(6, 0);
+      _asp.TestConsistency(7, 1);
     }
 
     [TestMethod]
@@ -102,7 +106,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel(UAInformationModel.Namespaces.OpcUa);
-      _asp.TestConsistency(9, 0);
+      _asp.TestConsistency(10, 1);
     }
 
     [TestMethod]
@@ -122,22 +126,22 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       IEnumerable<IUANodeContext> _returnValue = null;
       _asp.AddressSpaceContext.UTValidateAndExportModel(0, x => _returnValue = x);
       Assert.AreEqual<int>(3909, (_returnValue.Count<IUANodeContext>()));
-      _asp.TestConsistency(6, 0);
+      _asp.TestConsistency(7, 1);
       _asp.AddressSpaceContext.UTValidateAndExportModel(1, x => _returnValue = x);
       Assert.AreEqual<int>(0, _returnValue.Count<IUANodeContext>());
-      _asp.TestConsistency(6, 0);
+      _asp.TestConsistency(7, 1);
     }
 
     [TestMethod]
+    [TestCategory("AddressSpaceContext")]
     public void ImportObjectTest()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
-      _asp.TestConsistency(6, 0);
       UANodeSet _newNodeSet = TestData.CreateNodeSetModel();
       ((IAddressSpaceContext)_asp.AddressSpaceContext).ImportUANodeSet(_newNodeSet);
-      _asp.TestConsistency(10, 0);
+      _asp.TestConsistency(12, 2);
       _asp.AddressSpaceContext.UTAddressSpaceCheckConsistency(x => { Assert.Fail(); });
-      _asp.TestConsistency(10, 0);
+      _asp.TestConsistency(12, 2);
       List<UAReferenceContext> _content = new List<UAReferenceContext>();
       _asp.AddressSpaceContext.UTGetReferences(ObjectIds.RootFolder, x => _content.Add(x));
       Assert.AreEqual<int>(4, _content.Count);
@@ -147,7 +151,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<int>(4, _content.Count);
       IEnumerable<IUANodeContext> _toExport = _content.Where<UAReferenceContext>(x => x.TargetNode.NodeIdContext.NamespaceIndex == 1).Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
       Assert.AreEqual<int>(1, _toExport.Count<IUANodeContext>());
-      _asp.TestConsistency(10, 0);
+      _asp.TestConsistency(12, 2);
     }
 
     #region private
@@ -169,8 +173,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       private int _diagnosticCounter = 0;
       internal AddressSpaceContext AddressSpaceContext = null;
     }
-
-    //Helpers
 
     #endregion private
   }

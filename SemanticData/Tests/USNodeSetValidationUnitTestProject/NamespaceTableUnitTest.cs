@@ -7,6 +7,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 using UAOOI.SemanticData.UANodeSetValidation.Utilities;
@@ -21,7 +22,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void ConstructorTest()
     {
       NamespaceTable _instance = new NamespaceTable();
-      Assert.AreEqual<int>(0, _instance.GetIndex().First<ushort>());
+      IEnumerable<IModelTableEntry> exportedNamespaceTable = _instance.ExportNamespaceTable;
+      Assert.IsNotNull(exportedNamespaceTable);
+      List<IModelTableEntry> listOfExportedNamespaceTable = exportedNamespaceTable.ToList<IModelTableEntry>();
+      Assert.AreEqual<int>(1, listOfExportedNamespaceTable.Count);
+      listOfExportedNamespaceTable[0].
     }
 
     [TestMethod]
@@ -43,6 +48,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void GetIndexTest()
     {
       NamespaceTable _instance = new NamespaceTable();
+      Assert.AreEqual<int>(0, _instance.GetIndex().First<ushort>());
       Assert.AreEqual<int>(0, _instance.GetIndex(Namespaces.OpcUa));
       Assert.AreEqual<int>(-1, _instance.GetIndex("non existing namespace"));
     }

@@ -1,6 +1,6 @@
 //___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -22,6 +22,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   public partial class ExpandedNodeId : IComparable, IFormattable, ICloneable
   {
     #region Constructors
+
     /// <summary>
     /// Initializes the object with default values.
     /// </summary>
@@ -32,6 +33,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       Initialize();
     }
+
     /// <summary>
     /// Creates a deep copy of the value.
     /// </summary>
@@ -47,6 +49,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       if (value.m_nodeId != null)
         m_nodeId = value.m_nodeId;
     }
+
     /// <summary>
     /// Initializes an expanded node identifier with a node id.
     /// </summary>
@@ -60,6 +63,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       if (nodeId != null)
         m_nodeId = nodeId;
     }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="ExpandedNodeId"/> class.
     /// </summary>
@@ -73,6 +77,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_namespaceUri = namespaceUri;
       m_serverIndex = serverIndex;
     }
+
     /// <summary>
     /// Initializes an expanded node identifier with a node id and a namespace URI.
     /// </summary>
@@ -90,6 +95,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       if (!String.IsNullOrEmpty(namespaceUri))
         SetNamespaceUri(namespaceUri);
     }
+
     /// <summary>
     /// Initializes an expanded node identifier with a node id and a namespace URI.
     /// </summary>
@@ -109,6 +115,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         SetNamespaceUri(namespaceUri);
       m_serverIndex = serverIndex;
     }
+
     /// <summary>
     /// Initializes a numeric node identifier.
     /// </summary>
@@ -122,6 +129,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Initialize();
       m_nodeId = new NodeId(value);
     }
+
     /// <summary>
     /// Initializes a guid node identifier with a namespace index.
     /// </summary>
@@ -136,6 +144,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Initialize();
       m_nodeId = new NodeId(value, namespaceIndex);
     }
+
     /// <summary>
     /// Initializes a guid node identifier with a namespace URI.
     /// </summary>
@@ -151,6 +160,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_nodeId = new NodeId(value);
       SetNamespaceUri(namespaceUri);
     }
+
     /// <summary>
     /// Initializes a string node identifier with a namespace index.
     /// </summary>
@@ -208,6 +218,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Initialize();
       m_nodeId = new NodeId(value);
     }
+
     /// <summary>
     /// Initializes an opaque node identifier with a namespace index.
     /// </summary>
@@ -222,6 +233,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Initialize();
       m_nodeId = new NodeId(value, namespaceIndex);
     }
+
     /// <summary>
     /// Initializes an opaque node identifier with a namespace index.
     /// </summary>
@@ -236,6 +248,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_nodeId = new NodeId(value);
       SetNamespaceUri(namespaceUri);
     }
+
     /// <summary>
     /// Initializes a node id by parsing a node id string.
     /// </summary>
@@ -248,6 +261,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Initialize();
       m_nodeId = new NodeId(text);
     }
+
     /// <summary>
     /// Sets the private members to default values.
     /// </summary>
@@ -260,10 +274,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_namespaceUri = null;
       m_serverIndex = 0;
     }
-    #endregion
+
+    #endregion Constructors
 
     #region Public Properties
-    
+
     /// <summary>
     /// The index of the namespace URI in the server's namespace array.
     /// </summary>
@@ -279,6 +294,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return 0;
       }
     }
+
     /// <summary>
     /// The type of node identifier used.
     /// </summary>
@@ -294,6 +310,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return IdType.Numeric_0;
       }
     }
+
     /// <summary>
     /// The node identifier.
     /// </summary>
@@ -310,26 +327,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return null;
       }
     }
+
     /// <summary>
     /// The namespace that qualifies the node identifier.
     /// </summary>
     /// <remarks>
     /// Returns the namespace that the node belongs to
     /// </remarks>
-    public string NamespaceUri
-    {
-      get { return m_namespaceUri; }
-    }
+    public string NamespaceUri => m_namespaceUri;
+
     /// <summary>
     /// The index of the server where the node exists.
     /// </summary>
     /// <remarks>
     /// Returns the index of the server where the node resides
     /// </remarks>
-    public uint ServerIndex
-    {
-      get { return m_serverIndex; }
-    }
+    public uint ServerIndex => m_serverIndex;
+
     /// <summary>
     /// Whether the object represents a Null NodeId.
     /// </summary>
@@ -347,6 +361,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return NodeId.IsNull(m_nodeId);
       }
     }
+
     /// <summary>
     /// Returns true if the expanded node id is an absolute identifier that contains a namespace URI instead of a server dependent index.
     /// </summary>
@@ -362,6 +377,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return false;
       }
     }
+
     /// <summary>
     /// Returns the inner node id.
     /// </summary>
@@ -370,9 +386,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// </remarks>
     internal NodeId InnerNodeId
     {
-      get { return m_nodeId; }
-      set { m_nodeId = value; }
+      get => m_nodeId;
+      set => m_nodeId = value;
     }
+
     /// <summary>
     /// The node identifier formatted as a URI.
     /// </summary>
@@ -381,10 +398,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// </remarks>
     internal string IdentifierText
     {
-      get
-      {
-        return Format();
-      }
+      get => Format();
       set
       {
         ExpandedNodeId nodeId = ExpandedNodeId.Parse(value);
@@ -393,9 +407,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         m_serverIndex = nodeId.m_serverIndex;
       }
     }
-    #endregion
+
+    #endregion Public Properties
 
     #region public string Format()
+
     /// <summary>
     /// Formats a expanded node id as a string.
     /// </summary>
@@ -419,6 +435,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Format(buffer);
       return buffer.ToString();
     }
+
     /// <summary>
     /// Formats the node ids as string and adds it to the buffer.
     /// </summary>
@@ -429,6 +446,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       else
         Format(buffer, null, IdType.Numeric_0, 0, m_namespaceUri, m_serverIndex);
     }
+
     /// <summary>
     /// Formats the node ids as string and adds it to the buffer.
     /// </summary>
@@ -461,9 +479,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       }
       NodeId.Format(buffer, identifier, identifierType, namespaceIndex);
     }
-    #endregion
+
+    #endregion public string Format()
 
     #region statioc Parse
+
     /// <summary>
     /// Parses the <paramref name="text" /> to recover an instance of the <see cref="ExpandedNodeId" />.
     /// </summary>
@@ -479,12 +499,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       // lookup the namespace uri.
       string uri = nodeId.m_namespaceUri;
       if (nodeId.m_nodeId.NamespaceIndex != 0)
-        uri = currentNamespaces.GetURIatIndex(nodeId.m_nodeId.NamespaceIndex).ModelUri;
+        uri = currentNamespaces.GetURIatIndex(nodeId.m_nodeId.NamespaceIndex).ModelUri.ToString();
       // translate the namespace uri.
       ushort namespaceIndex = 0;
       if (!String.IsNullOrEmpty(uri))
       {
-        int index = targetNamespaces.GetURIIndex(uri);
+        int index = targetNamespaces.GetURIIndex(new Uri(uri));
         if (index == -1)
           throw GetResultException(String.Format("Cannot map namespace URI onto an index in the target namespace table: {0}", uri));
         namespaceIndex = (ushort)index;
@@ -501,6 +521,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       nodeId.m_namespaceUri = null;
       return nodeId;
     }
+
     /// <summary>
     /// Parses a expanded node id string and returns a node id object.
     /// </summary>
@@ -548,6 +569,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         throw GetResultException(String.Format("Cannot parse expanded node id text: '{0}' because of error {1}", text, _ex.Message));
       }
     }
+
     /// <summary>
     /// Unescapes any reserved characters in the uri.
     /// </summary>
@@ -585,9 +607,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         }
       }
     }
-    #endregion
+
+    #endregion statioc Parse
 
     #region IComparable Members
+
     /// <summary>
     /// Compares the current instance to the object.
     /// </summary>
@@ -626,6 +650,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       // compare node ids.
       return (nodeId == null) ? 0 : -1;
     }
+
     /// <summary>
     /// Returns true if a is greater than b.
     /// </summary>
@@ -638,6 +663,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return value1.CompareTo(value2) > 0;
       return false;
     }
+
     /// <summary>
     /// Returns true if a is less than b.
     /// </summary>
@@ -650,9 +676,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return value1.CompareTo(value2) < 0;
       return true;
     }
-    #endregion
+
+    #endregion IComparable Members
 
     #region Comparison Functions
+
     /// <summary>
     /// Determines if the specified object is equal to the ExpandedNodeId.
     /// </summary>
@@ -663,6 +691,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return (CompareTo(obj) == 0);
     }
+
     /// <summary>
     /// Returns a unique hashcode for the ExpandedNodeId
     /// </summary>
@@ -675,6 +704,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return 0;
       return m_nodeId.GetHashCode();
     }
+
     /// <summary>
     /// Returns true if the objects are equal.
     /// </summary>
@@ -700,9 +730,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return !Object.ReferenceEquals(value2, null);
       return (value1.CompareTo(value2) != 0);
     }
-    #endregion
+
+    #endregion Comparison Functions
 
     #region IFormattable Members
+
     /// <summary>
     /// Returns the string representation of an ExpandedNodeId.
     /// </summary>
@@ -719,9 +751,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return Format();
       throw new FormatException(String.Format("Invalid format string: '{0}'.", format));
     }
-    #endregion
+
+    #endregion IFormattable Members
 
     #region ICloneable Members
+
     /// <summary>
     /// Makes a deep copy of the object.
     /// </summary>
@@ -733,9 +767,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       // this object cannot be altered after it is created so no new allocation is necessary.
       return this;
     }
-    #endregion
+
+    #endregion ICloneable Members
 
     #region Public Methods
+
     /// <summary>
     /// Returns the string representation of am ExpandedNodeId.
     /// </summary>
@@ -746,6 +782,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return ToString(null, null);
     }
+
     /// <summary>
     /// Converts an expanded node id to a node id using a namespace table.
     /// </summary>
@@ -766,12 +803,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       NodeId localId = new NodeId(nodeId.m_nodeId);
       int index = -1;
       if (namespaceTable != null)
-        index = namespaceTable.GetURIIndex(nodeId.NamespaceUri);
+        index = namespaceTable.GetURIIndex(new Uri(nodeId.NamespaceUri));
       if (index < 0)
         return null;
       localId.SetNamespaceIndex((ushort)index);
       return localId;
     }
+
     /// <summary>
     /// Updates the namespace index.
     /// </summary>
@@ -783,6 +821,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_nodeId.SetNamespaceIndex(namespaceIndex);
       m_namespaceUri = null;
     }
+
     /// <summary>
     /// Updates the namespace uri.
     /// </summary>
@@ -791,6 +830,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       m_nodeId.SetNamespaceIndex(0);
       m_namespaceUri = uri;
     }
+
     /// <summary>
     /// Updates the server index.
     /// </summary>
@@ -798,9 +838,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       m_serverIndex = serverIndex;
     }
-    #endregion
+
+    #endregion Public Methods
 
     #region Static Members
+
     /// <summary>
     /// Parses an absolute NodeId formatted as a string and converts it a local NodeId.
     /// </summary>
@@ -820,6 +862,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
           "ExpandedNodeId invalid syntax: namespace URI is not in the namespace table. ");
       return localId;
     }
+
     /// <summary>
     /// Converts an ExpandedNodeId to a NodeId.
     /// </summary>
@@ -835,6 +878,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         throw new InvalidCastException("Cannot cast an absolute ExpandedNodeId to a NodeId. Use ExpandedNodeId.ToNodeId instead.");
       return value.InnerNodeId;
     }
+
     /// <summary>
     /// Converts an integer to a numeric node identifier.
     /// </summary>
@@ -845,6 +889,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return new ExpandedNodeId(value);
     }
+
     /// <summary>
     /// Converts a guid to a guid node identifier.
     /// </summary>
@@ -855,6 +900,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return new ExpandedNodeId(value);
     }
+
     /// <summary>
     /// Converts a byte array to an opaque node identifier.
     /// </summary>
@@ -865,6 +911,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return new ExpandedNodeId(value);
     }
+
     /// <summary>
     /// Parses a node id string and initializes a node id.
     /// </summary>
@@ -875,6 +922,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return new ExpandedNodeId(text);
     }
+
     /// <summary>
     /// Converts a NodeId to an ExpandedNodeId
     /// </summary>
@@ -885,25 +933,28 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return new ExpandedNodeId(nodeId);
     }
+
     /// <summary>
     /// Returns an instance of a null ExpandedNodeId.
     /// </summary>
-    public static ExpandedNodeId Null
-    {
-      get { return s_Null; }
-    }
-    #endregion
+    public static ExpandedNodeId Null => s_Null;
+
+    #endregion Static Members
 
     #region private
+
     //fields
     private static readonly ExpandedNodeId s_Null = new ExpandedNodeId();
+
     private NodeId m_nodeId;
     private string m_namespaceUri;
     private uint m_serverIndex;
+
     /// <summary>
     /// The set of hexadecimal digits used for decoding escaped URIs.
     /// </summary>
     private const string s_HexDigits = "0123456789ABCDEF";
+
     //methods
     private static Exception GetResultException(string _msg)
     {
@@ -911,9 +962,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Exception _ex = new ServiceResultException(TraceMessage.BuildErrorTraceMessage(_be, _msg), _be.ToString() + _msg);
       return _ex;
     }
-    #endregion
 
+    #endregion private
   }
+
   /// <summary>
   /// A collection of ExpandedNodeId objects.
   /// </summary>
@@ -926,6 +978,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// Creates a new [empty] collection.
     /// </remarks>
     public ExpandedNodeIdCollection() { }
+
     /// <summary>
     /// Initializes the collection from another collection.
     /// </summary>
@@ -933,6 +986,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// Initializes the collection from another collection.
     /// </remarks>
     public ExpandedNodeIdCollection(IEnumerable<ExpandedNodeId> collection) : base(collection) { }
+
     /// <summary>
     /// Initializes the collection with the specified capacity.
     /// </summary>
@@ -940,6 +994,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// Initializes the collection with the specified capacity.
     /// </remarks>
     public ExpandedNodeIdCollection(int capacity) : base(capacity) { }
+
     /// <summary>
     /// Converts an array to a collection.
     /// </summary>
@@ -954,6 +1009,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         return new ExpandedNodeIdCollection(values);
       return new ExpandedNodeIdCollection();
     }
+
     /// <summary>
     /// Converts an array to a collection.
     /// </summary>
@@ -965,6 +1021,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return ToExpandedNodeIdCollection(values);
     }
+
     /// <summary>
     /// Creates a deep copy of the collection.
     /// </summary>
@@ -978,7 +1035,5 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         _cloneCollection.Add((ExpandedNodeId)element.Clone());
       return _cloneCollection;
     }
-
   }//class
-
 }//namespace

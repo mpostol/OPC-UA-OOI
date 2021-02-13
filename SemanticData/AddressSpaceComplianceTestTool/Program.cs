@@ -71,7 +71,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       if (string.IsNullOrEmpty(options.IMNamespace))
         _as.ValidateAndExportModel();
       else
-        _as.ValidateAndExportModel(options.IMNamespace); //Validates and exports the selected model.
+        _as.ValidateAndExportModel(new Uri(options.IMNamespace)); //Validates and exports the selected model.
       if (_exportModel)
         _exporter.ExportToXMLFile(options.ModelDesignFileName, options.Stylesheet); //Serializes the already generated model and writes the XML document to a file.
     }

@@ -22,7 +22,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class AddressSpaceContext - responsible to manage all nodes in the OPC UA Address Space.
   /// </summary>
-  internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext, IAddressSpaceValidationContext, IAddressSpaceURIRecalculate
+  internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext, IAddressSpaceValidationContext//, IAddressSpaceURIRecalculate
   {
     #region constructor
 
@@ -68,12 +68,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="model">The model to be imported.</param>
     /// <exception cref="System.ArgumentNullException">model;the model cannot be null</exception>
-    void IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
+    Uri IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.ImportUANodeSet - importing from object model."));
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
-      ImportNodeSet(model, m_TraceEvent);
+      return ImportNodeSet(model, m_TraceEvent);
     }
 
     /// <summary>
@@ -81,7 +81,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="model">The model to be imported.</param>
     /// <exception cref="System.IO.FileNotFoundException">The imported file does not exist</exception>
-    void IAddressSpaceContext.ImportUANodeSet(FileInfo model)
+    Uri IAddressSpaceContext.ImportUANodeSet(FileInfo model)
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.ImportUANodeSet - importing form file"));
       if (model == null)
@@ -89,7 +89,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (!model.Exists)
         throw new FileNotFoundException("The imported file does not exist", model.FullName);
       UANodeSet _nodeSet = UANodeSet.ReadModelFile(model);
-      ImportNodeSet(_nodeSet, m_TraceEvent);
+      return ImportNodeSet(_nodeSet, m_TraceEvent);
     }
 
     /// <summary>
@@ -97,7 +97,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     void IAddressSpaceContext.ValidateAndExportModel()
     {
-      //TODO NamespaceTable must provide correct namespaceIndex #517
+      //TODO ADI model from Embedded example import fails #509
       foreach (IModelTableEntry _nsi in m_NamespaceTable.Models)
       {
         int indes = m_NamespaceTable.GetURIIndex(_nsi.ModelUri);
@@ -111,7 +111,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="targetNamespace">The target namespace of the validated model.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">targetNamespace;Cannot find this namespace</exception>
-    void IAddressSpaceContext.ValidateAndExportModel(string targetNamespace)
+    void IAddressSpaceContext.ValidateAndExportModel(Uri targetNamespace)
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", targetNamespace)));
       int _nsIndex = m_NamespaceTable.GetURIIndex(targetNamespace);
@@ -124,15 +124,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region IAddressSpaceURIRecalculate
 
-    /// <summary>
-    /// Gets the index or append.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    /// <returns>System.UInt16.</returns>
-    ushort IAddressSpaceURIRecalculate.GetIndexOrAppend(string value)
-    {
-      return m_NamespaceTable.GetURIIndexOrAppend(value);
-    }
+    //TODO IModelTableEntry must be updated during import. #523
+    ///// <summary>
+    ///// Gets the index or append.
+    ///// </summary>
+    ///// <param name="value">The value.</param>
+    ///// <returns>System.UInt16.</returns>
+    //ushort IAddressSpaceURIRecalculate.GetIndexOrAppend(string value)
+    //{
+    //  return m_NamespaceTable.GetURIIndexOrAppend(value);
+    //}
 
     #endregion IAddressSpaceURIRecalculate
 
@@ -199,7 +200,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="namespaceIndex">Index of the namespace.</param>
     public string GetNamespace(ushort namespaceIndex)
     {
-      return m_NamespaceTable.GetURIatIndex(namespaceIndex).ModelUri;
+      return m_NamespaceTable.GetURIatIndex(namespaceIndex).ModelUri.ToString();
     }
 
     /// <summary>
@@ -300,14 +301,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private readonly Action<TraceMessage> m_TraceEvent = BuildErrorsHandling.Log.TraceEvent;
 
     //methods
-    private void ImportNodeSet(UANodeSet model, Action<TraceMessage> traceEvent)
+    private Uri ImportNodeSet(UANodeSet model, Action<TraceMessage> traceEvent)
     {
-      IUAModelContext _modelContext = model.ParseUAModelContext(this, traceEvent);
+      IUAModelContext _modelContext = model.ParseUAModelContext(m_NamespaceTable, traceEvent);
       traceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext}."));
       traceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - the context for the imported model is created and starting import nodes."));
       foreach (UANode _nd in model.Items)
         ImportUANode(_nd, m_TraceEvent);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage($"Finishing AddressSpaceContext.ImportNodeSet - imported {model.Items.Length} nodes."));
+      return _modelContext.ModelUri;
     }
 
     private void ImportUANode(UANode node, Action<TraceMessage> traceEvent)
@@ -379,7 +381,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         string _publicationDate = _ns.PublicationDate.HasValue ? _ns.PublicationDate.Value.ToShortDateString() : DateTime.UtcNow.ToShortDateString();
         string _version = _ns.Version;
-        InformationModelFactory.CreateNamespace(_ns.ModelUri, _publicationDate, _version);
+        InformationModelFactory.CreateNamespace(_ns.ModelUri.ToString(), _publicationDate, _version);
       }
       string _msg = null;
       int _nc = 0;

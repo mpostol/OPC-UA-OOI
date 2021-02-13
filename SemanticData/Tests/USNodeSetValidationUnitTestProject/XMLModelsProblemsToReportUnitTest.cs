@@ -6,6 +6,7 @@
 //___________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -25,9 +26,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsTrue(_testDataFileInfo.Exists);
       List<TraceMessage> _trace = new List<TraceMessage>();
       IAddressSpaceContext _as = new AddressSpaceContext(z => _trace.Add(z));
-      _as.ImportUANodeSet(_testDataFileInfo);
+      Uri model = _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(@"http://opcfoundation.org/UA/ADI/");
+      _as.ValidateAndExportModel(model);
       IEnumerable<TraceMessage> vitalMessageserrors = _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic);
       IEnumerable<TraceMessage> focusNodeClass = _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NodeClass);
       Assert.IsFalse(focusNodeClass.Where<TraceMessage>(x => !x.BuildError.Identifier.Trim().Contains("P3-0502020001")).Any<TraceMessage>());
@@ -55,12 +56,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsTrue(_testDataFileInfo.Exists);
       List<TraceMessage> _trace = new List<TraceMessage>();
       IAddressSpaceContext _as = new AddressSpaceContext(z => _trace.Add(z));
-      _as.ImportUANodeSet(_testDataFileInfo);
+      Uri model = _as.ImportUANodeSet(_testDataFileInfo);
       //Extensions is omitted during the import
       Assert.AreEqual<int>(10, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
-      _as.ValidateAndExportModel();
-      Assert.AreEqual<int>(16, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
+      //TODO Normalize representation of URI #524
+      _as.ValidateAndExportModel(model);
+      Assert.AreEqual<int>(13, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
 
     }

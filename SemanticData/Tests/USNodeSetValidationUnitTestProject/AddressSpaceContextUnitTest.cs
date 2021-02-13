@@ -105,7 +105,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     public void AddressSpaceContextValidateAndExportModelOpcUa()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
-      ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel(UAInformationModel.Namespaces.OpcUa);
+      ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel(new Uri(UAInformationModel.Namespaces.OpcUa));
       _asp.TestConsistency(9, 0);
     }
 
@@ -115,7 +115,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     public void AddressSpaceContextValidateAndExportModelWrongNamespace()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
-      ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel("Not existing namespace");
+      ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel(new Uri("http://www.example.com/afterthought/box"));
     }
 
     [TestMethod]

@@ -12,7 +12,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   /// <summary>
   /// Class RolePermission.
   /// </summary>
-  public partial class RolePermission
+  public partial class RolePermission: IRolePermission
   {
 
     internal void RecalculateNodeIds(Func<string, string> importNodeId)

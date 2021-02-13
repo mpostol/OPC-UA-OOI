@@ -13,7 +13,6 @@ using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  //TODO NamespaceUrisCannotBeNull - is reported for UADefinedTypes #520
   [TestClass]
   public class NamespaceTableUnitTest
   {

@@ -122,6 +122,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #endregion IAddressSpaceContext
 
+    #region IAddressSpaceURIRecalculate
+
+    /// <summary>
+    /// Gets the index or append.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <returns>System.UInt16.</returns>
+    ushort IAddressSpaceURIRecalculate.GetIndexOrAppend(string value)
+    {
+      return m_NamespaceTable.GetURIIndexOrAppend(value);
+    }
+
+    #endregion IAddressSpaceURIRecalculate
+
     #region IAddressSpaceBuildContext
 
     /// <summary>
@@ -177,16 +191,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_NodesDictionary.Add(_idKey, _ret);
       }
       return _ret;
-    }
-
-    /// <summary>
-    /// Gets the index or append.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    /// <returns>System.UInt16.</returns>
-    public ushort GetIndexOrAppend(string value)
-    {
-      return m_NamespaceTable.GetURIIndexOrAppend(value);
     }
 
     /// <summary>

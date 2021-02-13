@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return context2Return;
     }
 
-    internal Uri ModeltUri { get; private set; }
+    internal Uri ModelUri { get; private set; }
 
     #endregion API
 
@@ -77,7 +77,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     //var
 
-    private readonly Action<TraceMessage> _log;
+    private readonly Action<TraceMessage> _logTraceMessage;
     private readonly Dictionary<string, string> _aliasesDictionary = new Dictionary<string, string>();
     private List<string> _namespaceUris = new List<string>();
     private IAddressSpaceURIRecalculate _addressSpaceContext { get; }
@@ -86,14 +86,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     //methods
     private UAModelContext(IAddressSpaceURIRecalculate addressSpaceContext, Action<TraceMessage> traceEvent)
     {
-      _log = traceEvent ?? throw new ArgumentNullException(nameof(traceEvent));
+      _logTraceMessage = traceEvent ?? throw new ArgumentNullException(nameof(traceEvent));
       _addressSpaceContext = addressSpaceContext ?? throw new ArgumentNullException(nameof(addressSpaceContext));
     }
 
     private void Parse(IUANodeSetModelHeader modelHeader)
     {
       _namespaceUris = Parse(modelHeader.NamespaceUris);
-      ModeltUri = Parse(modelHeader.Models);
+      ModelUri = Parse(modelHeader.Models);
       Parse(modelHeader.Aliases);
     }
 
@@ -111,7 +111,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       if (namespaceUris is null || namespaceUris.Length == 0)
       {
         namespaceUris = new string[] { RandomUri().ToString() };
-        _log(TraceMessage.BuildErrorTraceMessage(BuildError.NamespaceUrisCannotBeNull, $"Added a random URI { namespaceUris[0] } to NamespaceUris."));
+        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NamespaceUrisCannotBeNull, $"Added a random URI { namespaceUris[0] } to NamespaceUris."));
       }
       for (int i = 0; i < namespaceUris.Length; i++)
         list2Return.Add(namespaceUris[i]);
@@ -126,17 +126,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
           {
             AccessRestrictions = 0,
             ModelUri = _namespaceUris[0],
-            PublicationDate =DateTime.UtcNow,
+            PublicationDate = DateTime.UtcNow,
             PublicationDateSpecified = true,
             RequiredModel = new ModelTableEntry[]{ },
             RolePermissions = new RolePermission[] { },
             Version = new Version().ToString()
           }
         };
-        _log(TraceMessage.BuildErrorTraceMessage(BuildError.ModelsCannotBeNull, $"Added default model {models[0].ModelUri}"));
+        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.ModelsCannotBeNull, $"Added default model {models[0].ModelUri}"));
       }
       else if (models.Length > 1)
-        _log(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, $"Multi-model is not supported, only first model {models[0].ModelUri }is processed."));
+        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, $"Multi-model is not supported, only first model {models[0].ModelUri} is processed."));
       return new UriBuilder(models[0].ModelUri).Uri;
     }
 
@@ -158,7 +158,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       {
         // return a random value if index is out of range.
         uriString = RandomUri().ToString();
-        this._log(
+        this._logTraceMessage(
           TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedNamespaceIndex, $"ImportNamespaceIndex failed - namespace index {namespaceIndex - 1} is out of the NamespaceUris index. New namespace {uriString} is created instead."));
         _namespaceUris.Add(uriString);
       }

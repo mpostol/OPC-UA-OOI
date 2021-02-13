@@ -12,7 +12,6 @@ using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  //TODO NamespaceTable must provide correct namespaceIndex #517
   internal class UAModelContext : IUAModelContext
   {
     #region API

@@ -97,7 +97,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     void IAddressSpaceContext.ValidateAndExportModel()
     {
-      //TODO NamespaceTable must provide correct namespaceIndex #517
+      //TODO ADI model from Embedded example import fails #509
       foreach (IModelTableEntry _nsi in m_NamespaceTable.Models)
       {
         int indes = m_NamespaceTable.GetURIIndex(_nsi.ModelUri);

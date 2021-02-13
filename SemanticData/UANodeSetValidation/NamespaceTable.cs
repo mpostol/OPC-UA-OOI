@@ -11,7 +11,6 @@ using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  //TODO NamespaceTable must provide correct namespaceIndex #517
   /// <summary>
   /// The table of URI entities for the Address Space. The <see cref="Namespaces.OpcUa"/> namespace has index = 0.
   /// </summary>

@@ -18,7 +18,6 @@ using UAOOI.SemanticData.UANodeSetValidation.XML;
 namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
 {
   [TestClass]
-  //TODO UAModelContext must provide default namespaceIndex #517
   public class UAModelContextUnitTest
   {
     [TestMethod]

@@ -82,7 +82,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     [TestMethod]
     public void ImportQualifiedNameTest()
     {
-      IUANodeSetModelHeader _nodeSet = new UANodeSet
+      IUANodeSetModelHeader nodeSet = new UANodeSet
       {
         Aliases = new NodeIdAlias[] { new NodeIdAlias() { Alias = "HasSubtype", Value = "i=45" }, new NodeIdAlias() { Alias = "Boolean", Value = "ns=1;i=1" } },
         NamespaceUris = new string[] { "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" },
@@ -91,11 +91,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Mock<IAddressSpaceURIRecalculate> asMock = new Mock<IAddressSpaceURIRecalculate>();
       asMock.Setup(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
       Action<TraceMessage> logMock = z => Assert.Fail();
-      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(_nodeSet, asMock.Object, logMock);
-      Assert.AreEqual<string>("10:Boolean", _modelContext.ImportQualifiedName("1:Boolean"));
-      Assert.AreEqual<string>("10:AnyText", _modelContext.ImportQualifiedName("1:AnyText"));
-      Assert.AreEqual<string>("HasSubtype", _modelContext.ImportQualifiedName("HasSubtype"));
-      Assert.AreEqual<string>("ns=10;i=232323", _modelContext.ImportNodeId("ns=1;i=232323"));
+      UAModelContext modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
+      Assert.AreEqual<string>("10:Boolean", modelContext.ImportQualifiedName("1:Boolean"));
+      Assert.AreEqual<string>("10:AnyText", modelContext.ImportQualifiedName("1:AnyText"));
+      Assert.AreEqual<string>("HasSubtype", modelContext.ImportQualifiedName("HasSubtype"));
+      Assert.AreEqual<string>("ns=10;i=232323", modelContext.ImportNodeId("ns=1;i=232323"));
       asMock.Verify(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"), Times.Exactly(3));
     }
 
@@ -125,15 +125,45 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     }
 
     [TestMethod]
-    public void ImportNamespaceIndexTest()
+    public void ModelUriTest()
     {
-      Assert.Inconclusive("Not implemented");
+      IUANodeSetModelHeader nodeSet = new UANodeSet
+      {
+        Aliases = new NodeIdAlias[] { new NodeIdAlias() { Alias = "HasSubtype", Value = "i=45" }, new NodeIdAlias() { Alias = "Boolean", Value = "ns=1;i=1" } },
+        NamespaceUris = new string[] { "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" },
+        Models = new ModelTableEntry[] { new ModelTableEntry() { ModelUri = "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" } }
+      };
+      Mock<IAddressSpaceURIRecalculate> asMock = new Mock<IAddressSpaceURIRecalculate>();
+      asMock.Setup(x => x.GetIndexOrAppend(It.IsAny<string>())).Returns(10);
+      Action<TraceMessage> logMock = z => Assert.Fail();
+      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
+      Assert.AreEqual<string>(nodeSet.Models[0].ModelUri, _modelContext.ModelUri.ToString());
+    }
+
+    [TestMethod]
+    public void ModelUriModelsIsEmptyTest()
+    {
+      IUANodeSetModelHeader nodeSet = new UANodeSet
+      {
+        Aliases = new NodeIdAlias[] { new NodeIdAlias() { Alias = "HasSubtype", Value = "i=45" }, new NodeIdAlias() { Alias = "Boolean", Value = "ns=1;i=1" } },
+        NamespaceUris = new string[] { "http://opcfoundation.org/UA/ADI/", "http://opcfoundation.org/UA/DI/" },
+      };
+      Mock<IAddressSpaceURIRecalculate> asMock = new Mock<IAddressSpaceURIRecalculate>();
+      asMock.Setup(x => x.GetIndexOrAppend(It.IsAny<string>())).Returns(10);
+      List<TraceMessage> trace = new List<TraceMessage>();
+      Action<TraceMessage> logMock = z => trace.Add(z);
+      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
+      Assert.IsNull(nodeSet.Models);
+      Assert.AreEqual<string>("http://opcfoundation.org/UA/ADI/", _modelContext.ModelUri.ToString());
+      Assert.AreEqual<int>(1, trace.Count);
+      Assert.AreEqual<string>("P0-0001030000", trace[0].BuildError.Identifier);
+      Assert.AreEqual<TraceEventType>(TraceEventType.Information, trace[0].TraceLevel);
     }
 
     [TestMethod]
     public void RecalculateNodeIdsUANodeSetTest()
     {
-      UANodeSet _toTest = new UANodeSet()
+      UANodeSet nodeSet = new UANodeSet()
       {
         NamespaceUris = new string[] { @"http://cas.eu/UA/Demo/" },
         Aliases = new NodeIdAlias[] { new NodeIdAlias() { Alias = "Alias name", Value = "ns=1;i=24" } },
@@ -167,15 +197,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       addressSpaceMock.Setup(x => x.GetIndexOrAppend(@"http://cas.eu/UA/Demo/")).Returns<string>(x => 2);
       List<TraceMessage> _logsCache = new List<TraceMessage>();
       Action<TraceMessage> _logMock = z => _logsCache.Add(z);
-      IUAModelContext model = _toTest.ParseUAModelContext(addressSpaceMock.Object, _logMock);
+      IUAModelContext model = nodeSet.ParseUAModelContext(addressSpaceMock.Object, _logMock);
       Assert.IsNotNull(model);
       addressSpaceMock.Verify(x => x.GetIndexOrAppend(@"http://cas.eu/UA/Demo/"), Times.AtLeastOnce());
-      Assert.AreEqual<string>("ns=2;i=24", _toTest.Aliases[0].Value);
-      Assert.AreEqual<string>("Alias name", _toTest.Aliases[0].Alias);
-      Assert.AreEqual<string>("ns=2;i=24", _toTest.Items[0].NodeId);
-      Assert.AreEqual<string>("ns=2;i=2", ((UAVariableType)_toTest.Items[1]).DataType);
-      Assert.AreEqual<string>("2:BleBle", model.ImportQualifiedName("1:BleBle"));
-      Assert.AreEqual<string>("s=1:BleBle", model.ImportNodeId("1:BleBle"));
+      Assert.AreEqual<string>("ns=2;i=24", nodeSet.Aliases[0].Value);
+      Assert.AreEqual<string>("Alias name", nodeSet.Aliases[0].Alias);
+      Assert.AreEqual<string>("ns=2;i=24", nodeSet.Items[0].NodeId);
+      Assert.AreEqual<string>("2:NewUAObject", nodeSet.Items[0].BrowseName);
+      Assert.AreEqual<string>("ns=2;i=2", ((UAVariableType)nodeSet.Items[1]).DataType);
+      Assert.AreEqual<string>("2:NewUAObject", ((UAVariableType)nodeSet.Items[1]).BrowseName);
     }
   }
 }

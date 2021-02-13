@@ -78,9 +78,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     //var
 
-    //private readonly Dictionary<string, ModelTableEntry> m_URIDictionary = new Dictionary<string, ModelTableEntry>();
-    //private Dictionary<ushort, string> m_IndexDictionary = new Dictionary<ushort, string>();
-    //private ushort m_Index = 0;
     private List<IModelTableEntry> modelsList = new List<IModelTableEntry>();
 
     //classes

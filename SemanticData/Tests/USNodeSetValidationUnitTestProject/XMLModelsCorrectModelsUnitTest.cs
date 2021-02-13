@@ -94,14 +94,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       List<TraceMessage> _trace = new List<TraceMessage>();
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace));
       _trace.Clear();
-      _as.ImportUANodeSet(testDataFileInfo);
+      Uri model = _as.ImportUANodeSet(testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Count);
       ((AddressSpaceContext)_as).UTAddressSpaceCheckConsistency(x => { Assert.Fail(); });
       ((AddressSpaceContext)_as).UTReferencesCheckConsistency((x, y, z, v) => Assert.Fail());
       IEnumerable<IUANodeContext> _nodes = null;
       ((AddressSpaceContext)_as).UTValidateAndExportModel(1, x => _nodes = x);
       Assert.AreEqual<int>(numberOfNodes, _nodes.Count<IUANodeContext>());
-      _as.ValidateAndExportModel();
+      _as.ValidateAndExportModel(model.ToString());
       Assert.AreEqual<int>(0, _trace.Count);
       return _nodes.ToList<IUANodeContext>();
     }

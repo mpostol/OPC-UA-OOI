@@ -68,12 +68,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="model">The model to be imported.</param>
     /// <exception cref="System.ArgumentNullException">model;the model cannot be null</exception>
-    void IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
+    Uri IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.ImportUANodeSet - importing from object model."));
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
-      ImportNodeSet(model, m_TraceEvent);
+      return ImportNodeSet(model, m_TraceEvent);
     }
 
     /// <summary>
@@ -81,7 +81,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="model">The model to be imported.</param>
     /// <exception cref="System.IO.FileNotFoundException">The imported file does not exist</exception>
-    void IAddressSpaceContext.ImportUANodeSet(FileInfo model)
+    Uri IAddressSpaceContext.ImportUANodeSet(FileInfo model)
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.ImportUANodeSet - importing form file"));
       if (model == null)
@@ -89,7 +89,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (!model.Exists)
         throw new FileNotFoundException("The imported file does not exist", model.FullName);
       UANodeSet _nodeSet = UANodeSet.ReadModelFile(model);
-      ImportNodeSet(_nodeSet, m_TraceEvent);
+      return ImportNodeSet(_nodeSet, m_TraceEvent);
     }
 
     /// <summary>
@@ -300,7 +300,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private readonly Action<TraceMessage> m_TraceEvent = BuildErrorsHandling.Log.TraceEvent;
 
     //methods
-    private void ImportNodeSet(UANodeSet model, Action<TraceMessage> traceEvent)
+    private Uri ImportNodeSet(UANodeSet model, Action<TraceMessage> traceEvent)
     {
       IUAModelContext _modelContext = model.ParseUAModelContext(this, traceEvent);
       traceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext}."));
@@ -308,6 +308,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       foreach (UANode _nd in model.Items)
         ImportUANode(_nd, m_TraceEvent);
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage($"Finishing AddressSpaceContext.ImportNodeSet - imported {model.Items.Length} nodes."));
+      return _modelContext.ModelUri;
     }
 
     private void ImportUANode(UANode node, Action<TraceMessage> traceEvent)

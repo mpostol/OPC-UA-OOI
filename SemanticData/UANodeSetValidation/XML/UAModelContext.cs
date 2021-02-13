@@ -38,11 +38,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return context2Return;
     }
 
-    internal Uri ModelUri { get; private set; }
 
     #endregion API
 
     #region IUAModelContext
+
+    public Uri ModelUri { get; private set; }
 
     public string ImportQualifiedName(string source)
     {

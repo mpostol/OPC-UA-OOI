@@ -164,7 +164,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
           TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedNamespaceIndex, $"ImportNamespaceIndex failed - namespace index {namespaceIndex - 1} is out of the NamespaceUris index. New namespace {uriString} is created instead."));
         _namespaceUris.Add(uriString);
       }
-      return _addressSpaceContext.GetURIIndexOrAppend(uriString);
+      return _addressSpaceContext.GetURIIndexOrAppend(new Uri(uriString));
     }
 
     private static Uri RandomUri()

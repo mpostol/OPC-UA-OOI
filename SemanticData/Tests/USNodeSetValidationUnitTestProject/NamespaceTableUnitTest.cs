@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsNotNull(models);
       List<IModelTableEntry> listOfExportedNamespaceTable = models.ToList<IModelTableEntry>();
       Assert.AreEqual<int>(1, listOfExportedNamespaceTable.Count);
-      Assert.AreEqual<string>("http://opcfoundation.org/UA/", listOfExportedNamespaceTable[0].ModelUri);
+      Assert.AreEqual<Uri>(new Uri("http://opcfoundation.org/UA/"), listOfExportedNamespaceTable[0].ModelUri);
       Assert.IsNull(listOfExportedNamespaceTable[0].RequiredModel);
     }
 
@@ -32,27 +32,27 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void GetURIatIndexTest()
     {
       NamespaceTable instance = new NamespaceTable();
-      Assert.AreEqual<string>(Namespaces.OpcUa, instance.GetURIatIndex(0).ModelUri);
+      Assert.AreEqual<Uri>(new Uri(Namespaces.OpcUa), instance.GetURIatIndex(0).ModelUri);
       Assert.ThrowsException<ArgumentOutOfRangeException>(() => instance.GetURIatIndex(1));
-      Assert.AreEqual(1, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend("http://opcfoundation.org/UA/GetURIatIndexTest1"));
-      Assert.AreEqual(2, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend("http://opcfoundation.org/UA/GetURIatIndexTest2"));
-      Assert.AreEqual<string>("http://opcfoundation.org/UA/GetURIatIndexTest2", instance.GetURIatIndex(2).ModelUri);
-      Assert.AreEqual<string>("http://opcfoundation.org/UA/GetURIatIndexTest1", instance.GetURIatIndex(1).ModelUri);
+      Assert.AreEqual(1, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest1")));
+      Assert.AreEqual(2, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest2")));
+      Assert.AreEqual<Uri>(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest2"), instance.GetURIatIndex(2).ModelUri);
+      Assert.AreEqual<Uri>(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest1"), instance.GetURIatIndex(1).ModelUri);
     }
 
     [TestMethod]
     public void GetURIIndexIndexTest()
     {
       NamespaceTable instance = new NamespaceTable();
-      Assert.AreEqual<int>(0, instance.GetURIIndex(Namespaces.OpcUa));
-      Assert.AreEqual<int>(-1, instance.GetURIIndex("non existing namespace"));
-      Assert.AreEqual(1, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend("http://opcfoundation.org/UA/GetURIatIndexTest1"));
-      Assert.AreEqual(2, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend("http://opcfoundation.org/UA/GetURIatIndexTest2"));
-      Assert.AreEqual(1, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend("http://opcfoundation.org/UA/GetURIatIndexTest1"));
-      Assert.AreEqual(2, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend("http://opcfoundation.org/UA/GetURIatIndexTest2"));
-      Assert.AreEqual(2, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend("http://opcfoundation.org/UA/GetURIatIndexTest2"));
-      Assert.AreEqual<int>(2, instance.GetURIIndex("http://opcfoundation.org/UA/GetURIatIndexTest2"));
-      Assert.AreEqual<int>(1, instance.GetURIIndex("http://opcfoundation.org/UA/GetURIatIndexTest1"));
+      Assert.AreEqual<int>(0, instance.GetURIIndex(new Uri(Namespaces.OpcUa)));
+      Assert.AreEqual<int>(-1, instance.GetURIIndex(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest1/NonExistingNamespace")));
+      Assert.AreEqual(1, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest1")));
+      Assert.AreEqual(2, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest2")));
+      Assert.AreEqual(1, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest1")));
+      Assert.AreEqual(2, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest2")));
+      Assert.AreEqual(2, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest2")));
+      Assert.AreEqual<int>(2, instance.GetURIIndex(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest2")));
+      Assert.AreEqual<int>(1, instance.GetURIIndex(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest1")));
     }
 
     [TestMethod]
@@ -97,7 +97,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return new ModelTableEntry
         {
           AccessRestrictions = 0xC,
-          ModelUri = modelUri,
+          ModelUri = new Uri(modelUri),
           PublicationDate = DateTime.FromFileTime(999999),
           RequiredModel = null,
           RolePermissions = new IRolePermission[] { },
@@ -124,7 +124,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       /// Gets or sets the model URI. The URI for the model. This URI should be one of the entries in the <see cref="NamespaceTable"/> table.
       /// </summary>
       /// <value>The model URI.</value>
-      public string ModelUri { get; set; }
+      public Uri ModelUri { get; set; }
 
       /// <summary>
       /// Gets or sets the version. The version of the model defined in the UANodeSet. This is a human readable string and not intended for programmatic comparisons.

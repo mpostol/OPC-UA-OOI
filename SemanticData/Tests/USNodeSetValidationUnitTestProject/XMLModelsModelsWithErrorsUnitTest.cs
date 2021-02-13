@@ -314,7 +314,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       }
     }
 
-    private const string m_NameSpace = @"http://commsvr.com/OOIUA/SemanticData/UnitTest/UANodeSetValidationUnitTestProject";
+    private readonly Uri m_NameSpace = new Uri( @"http://commsvr.com/OOIUA/SemanticData/UnitTest/UANodeSetValidationUnitTestProject");
 
     #endregion private
   }

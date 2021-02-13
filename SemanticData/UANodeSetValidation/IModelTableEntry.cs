@@ -26,7 +26,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets or sets the model URI. The URI for the model. This URI should be one of the entries in the <see cref="NamespaceTable"/> table.
     /// </summary>
     /// <value>The model URI.</value>
-    string ModelUri { get; }
+    Uri ModelUri { get; }
 
     /// <summary>
     /// Gets or sets the publication date. When the model was published. This value is used for comparisons if the model is defined in multiple UANodeSet files.

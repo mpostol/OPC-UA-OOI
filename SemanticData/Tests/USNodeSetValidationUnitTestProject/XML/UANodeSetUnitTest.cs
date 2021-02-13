@@ -32,12 +32,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.IsNotNull(instance.NamespaceUris);
       Assert.IsNotNull(instance.Models);
       Mock<IAddressSpaceURIRecalculate> asbcMock = new Mock<IAddressSpaceURIRecalculate>();
-      asbcMock.Setup(x => x.GetURIIndexOrAppend(@"XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml")).Returns(1);
+      asbcMock.Setup(x => x.GetURIIndexOrAppend(new Uri(@"http://cas.eu/UA/CommServer/UnitTests/ReferenceTest"))).Returns(1);
       List<TraceMessage> trace = new List<TraceMessage>();
       IUAModelContext model = instance.ParseUAModelContext(asbcMock.Object, x => trace.Add(x));
       Assert.IsNotNull(model);
       Assert.AreEqual<int>(0, trace.Count);
-      asbcMock.Verify(x => x.GetURIIndexOrAppend(It.IsAny<string>()), Times.Exactly(2));
+      asbcMock.Verify(x => x.GetURIIndexOrAppend(It.IsAny<Uri>()), Times.Exactly(2));
     }
 
     [TestMethod]
@@ -48,12 +48,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.IsNotNull(instance.NamespaceUris);
       Assert.IsNotNull(instance.Models);
       Mock<IAddressSpaceURIRecalculate> asbcMock = new Mock<IAddressSpaceURIRecalculate>();
-      asbcMock.Setup(x => x.GetURIIndexOrAppend(It.IsAny<string>()));
+      asbcMock.Setup(x => x.GetURIIndexOrAppend(It.IsAny<Uri>()));
       List<TraceMessage> trace = new List<TraceMessage>();
       IUAModelContext model = instance.ParseUAModelContext(asbcMock.Object, x => trace.Add(x));
       Assert.IsNotNull(model);
       Assert.AreEqual<int>(0, trace.Count);
-      asbcMock.Verify(x => x.GetURIIndexOrAppend(It.IsAny<string>()), Times.Never);
+      asbcMock.Verify(x => x.GetURIIndexOrAppend(It.IsAny<Uri>()), Times.Never);
     }
 
     [TestMethod]

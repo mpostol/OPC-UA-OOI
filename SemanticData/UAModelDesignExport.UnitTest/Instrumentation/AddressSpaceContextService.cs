@@ -40,7 +40,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport.Instrumentation
       ModelFactory _factory = new ModelFactory(traceEvent);
       _as.InformationModelFactory = _factory;
       _as.ImportUANodeSet(filePath);
-      _as.ValidateAndExportModel(URI);
+      _as.ValidateAndExportModel(new Uri(URI));
       return _factory.Export();
     }
     #endregion

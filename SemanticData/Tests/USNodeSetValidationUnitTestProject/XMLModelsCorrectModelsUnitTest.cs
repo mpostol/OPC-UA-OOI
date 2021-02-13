@@ -101,7 +101,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       IEnumerable<IUANodeContext> _nodes = null;
       ((AddressSpaceContext)_as).UTValidateAndExportModel(1, x => _nodes = x);
       Assert.AreEqual<int>(numberOfNodes, _nodes.Count<IUANodeContext>());
-      _as.ValidateAndExportModel(model.ToString());
+      _as.ValidateAndExportModel(model);
       Assert.AreEqual<int>(0, _trace.Count);
       return _nodes.ToList<IUANodeContext>();
     }

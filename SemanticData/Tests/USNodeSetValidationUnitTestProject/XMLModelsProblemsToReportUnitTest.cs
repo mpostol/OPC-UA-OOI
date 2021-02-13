@@ -28,7 +28,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       IAddressSpaceContext _as = new AddressSpaceContext(z => _trace.Add(z));
       Uri model = _as.ImportUANodeSet(_testDataFileInfo);
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      _as.ValidateAndExportModel(model.ToString());
+      _as.ValidateAndExportModel(model);
       IEnumerable<TraceMessage> vitalMessageserrors = _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic);
       IEnumerable<TraceMessage> focusNodeClass = _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NodeClass);
       Assert.IsFalse(focusNodeClass.Where<TraceMessage>(x => !x.BuildError.Identifier.Trim().Contains("P3-0502020001")).Any<TraceMessage>());
@@ -61,8 +61,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.AreEqual<int>(10, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
       //TODO Normalize representation of URI #524
-      _as.ValidateAndExportModel(model.ToString());
-      Assert.AreEqual<int>(16, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
+      _as.ValidateAndExportModel(model);
+      Assert.AreEqual<int>(13, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
 
     }

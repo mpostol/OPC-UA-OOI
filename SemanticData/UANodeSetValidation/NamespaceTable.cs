@@ -23,14 +23,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     internal NamespaceTable()
     {
-      Append(Namespaces.OpcUa);
+      Append(new Uri(Namespaces.OpcUa));
     }
 
     #endregion Constructors
 
     #region IAddressSpaceURIRecalculate
 
-    ushort IAddressSpaceURIRecalculate.GetURIIndexOrAppend(string URI)
+    ushort IAddressSpaceURIRecalculate.GetURIIndexOrAppend(Uri URI)
     {
       int _index = GetURIIndex(URI);
       if (_index == -1)
@@ -58,7 +58,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return modelsList[nsi];
     }
 
-    internal int GetURIIndex(string URI)
+    internal int GetURIIndex(Uri URI)
     {
       return modelsList.FindIndex(x => x.ModelUri == URI);
     }
@@ -105,10 +105,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       /// <returns>UAOOI.SemanticData.UANodeSetValidation.Utilities.IModelTableEntry.</returns>
       /// <remarks>This type is defined in Part 6 F.5 but the definition is not compliant with the UANodeSet schema.
       /// This type is also defined in the Part 3 5.2.9 but the definition is not compliant.</remarks>
-      internal static ModelTableEntry GetDefaultModelTableEntry(string modelUri)
+      internal static ModelTableEntry GetDefaultModelTableEntry(Uri modelUri)
       {
-        if (string.IsNullOrEmpty(modelUri))
-          throw URINullException();
         return new ModelTableEntry
         {
           AccessRestrictions = 0xC,
@@ -139,7 +137,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       /// Gets or sets the model URI. The URI for the model. This URI should be one of the entries in the <see cref="NamespaceTable"/> table.
       /// </summary>
       /// <value>The model URI.</value>
-      public string ModelUri { get; set; }
+      public Uri ModelUri { get; set; }
 
       /// <summary>
       /// Gets or sets the version. The version of the model defined in the UANodeSet. This is a human readable string and not intended for programmatic comparisons.
@@ -162,7 +160,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       #endregion IModelTableEntry
     }
 
-    private int Append(string URI)
+    private int Append(Uri URI)
     {
       int index = GetURIIndex(URI);
       if (index == -1)
@@ -172,11 +170,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         index = modelsList.Count - 1;
       }
       return index;
-    }
-
-    private static ArgumentNullException URINullException()
-    {
-      return new ArgumentNullException("modelUri", $"Model URI must be provided for the {nameof(IModelTableEntry)} instance");
     }
 
     #endregion private

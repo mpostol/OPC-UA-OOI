@@ -111,7 +111,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="targetNamespace">The target namespace of the validated model.</param>
     /// <exception cref="System.ArgumentOutOfRangeException">targetNamespace;Cannot find this namespace</exception>
-    void IAddressSpaceContext.ValidateAndExportModel(string targetNamespace)
+    void IAddressSpaceContext.ValidateAndExportModel(Uri targetNamespace)
     {
       m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", targetNamespace)));
       int _nsIndex = m_NamespaceTable.GetURIIndex(targetNamespace);
@@ -200,7 +200,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="namespaceIndex">Index of the namespace.</param>
     public string GetNamespace(ushort namespaceIndex)
     {
-      return m_NamespaceTable.GetURIatIndex(namespaceIndex).ModelUri;
+      return m_NamespaceTable.GetURIatIndex(namespaceIndex).ModelUri.ToString();
     }
 
     /// <summary>
@@ -381,7 +381,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         string _publicationDate = _ns.PublicationDate.HasValue ? _ns.PublicationDate.Value.ToShortDateString() : DateTime.UtcNow.ToShortDateString();
         string _version = _ns.Version;
-        InformationModelFactory.CreateNamespace(_ns.ModelUri, _publicationDate, _version);
+        InformationModelFactory.CreateNamespace(_ns.ModelUri.ToString(), _publicationDate, _version);
       }
       string _msg = null;
       int _nc = 0;

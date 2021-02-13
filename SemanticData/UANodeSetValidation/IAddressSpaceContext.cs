@@ -45,6 +45,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Validates and exports the selected model.
     /// </summary>
     /// <param name="targetNamespace">The target namespace of the validated model.</param>
-    void ValidateAndExportModel(string targetNamespace);
+    void ValidateAndExportModel(Uri targetNamespace);
   }
 }

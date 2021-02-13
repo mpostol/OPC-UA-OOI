@@ -312,7 +312,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       // find the namespace index.
       int namespaceIndex = -1;
       if (namespaceTable != null)
-        namespaceIndex = namespaceTable.GetURIIndex(namespaceUri);
+        namespaceIndex = namespaceTable.GetURIIndex(new Uri(namespaceUri));
       // oops - not found.
       if (namespaceIndex < 0)
         throw new ServiceResultException

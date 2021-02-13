@@ -22,7 +22,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class AddressSpaceContext - responsible to manage all nodes in the OPC UA Address Space.
   /// </summary>
-  internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext, IAddressSpaceValidationContext, IAddressSpaceURIRecalculate
+  internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext, IAddressSpaceValidationContext//, IAddressSpaceURIRecalculate
   {
     #region constructor
 
@@ -124,15 +124,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region IAddressSpaceURIRecalculate
 
-    /// <summary>
-    /// Gets the index or append.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    /// <returns>System.UInt16.</returns>
-    ushort IAddressSpaceURIRecalculate.GetIndexOrAppend(string value)
-    {
-      return m_NamespaceTable.GetURIIndexOrAppend(value);
-    }
+    //TODO IModelTableEntry must be updated during import. #523
+    ///// <summary>
+    ///// Gets the index or append.
+    ///// </summary>
+    ///// <param name="value">The value.</param>
+    ///// <returns>System.UInt16.</returns>
+    //ushort IAddressSpaceURIRecalculate.GetIndexOrAppend(string value)
+    //{
+    //  return m_NamespaceTable.GetURIIndexOrAppend(value);
+    //}
 
     #endregion IAddressSpaceURIRecalculate
 
@@ -302,7 +303,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //methods
     private Uri ImportNodeSet(UANodeSet model, Action<TraceMessage> traceEvent)
     {
-      IUAModelContext _modelContext = model.ParseUAModelContext(this, traceEvent);
+      IUAModelContext _modelContext = model.ParseUAModelContext(m_NamespaceTable, traceEvent);
       traceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext}."));
       traceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - the context for the imported model is created and starting import nodes."));
       foreach (UANode _nd in model.Items)

@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// The table of URI entities for the Address Space. The <see cref="Namespaces.OpcUa"/> namespace has index = 0.
   /// </summary>
-  public class NamespaceTable
+  public class NamespaceTable : IAddressSpaceURIRecalculate
   {
     #region Constructors
 
@@ -28,6 +28,27 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #endregion Constructors
 
+    #region IAddressSpaceURIRecalculate
+
+    ushort IAddressSpaceURIRecalculate.GetURIIndexOrAppend(string URI)
+    {
+      int _index = GetURIIndex(URI);
+      if (_index == -1)
+        _index = Append(URI);
+      return (ushort)_index;
+    }
+
+    void IAddressSpaceURIRecalculate.UpadateModelOrAppend(IModelTableEntry model)
+    {
+      int index = GetURIIndex(model.ModelUri);
+      if (index >= 0)
+        modelsList[index] = model;
+      else
+        modelsList.Add(model);
+    }
+
+    #endregion IAddressSpaceURIRecalculate
+
     #region Public Members
 
     internal IModelTableEntry GetURIatIndex(ushort nsi)
@@ -37,40 +58,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return modelsList[nsi];
     }
 
-    /// <summary>
-    /// Searches for an index that matches the <paramref name="URI"/>, and returns the zero-based index of the first occurrence within the <see cref="NamespaceTable"/>.
-    /// </summary>
-    /// <param name="URI">The URI .</param>
-    /// <returns>
-    /// The zero-based index of the first occurrence of <paramref name="URI"/>
-    /// </returns>
-    /// <exception cref="System.ArgumentNullException">URI is null.</exception>
     internal int GetURIIndex(string URI)
     {
       return modelsList.FindIndex(x => x.ModelUri == URI);
     }
 
-    /// <summary>
-    /// Returns the index of the specified namespace uri, adds it if it does not exist.
-    /// </summary>
-    internal ushort GetURIIndexOrAppend(string URI)
-    {
-      int _index = GetURIIndex(URI);
-      if (_index == -1)
-        _index = Append(URI);
-      return (ushort)_index;
-    }
-
     internal IEnumerable<IModelTableEntry> Models => modelsList;
-
-    internal void UpadateModelOrAppend(IModelTableEntry model)
-    {
-      int index = GetURIIndex(model.ModelUri);
-      if (index >= 0)
-        modelsList[index] = model;
-      else
-        modelsList.Add(model);
-    }
 
     #endregion Public Members
 

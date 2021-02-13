@@ -52,23 +52,26 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         NamespaceUris = new string[] { "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" },
       };
       Mock<IAddressSpaceURIRecalculate> asMock = new Mock<IAddressSpaceURIRecalculate>();
-      asMock.Setup(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
+      asMock.Setup(x => x.GetURIIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
       string randomURI = string.Empty;
-      asMock.Setup(x => x.GetIndexOrAppend(It.Is<string>(z => z.Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown")))).Returns<string>(x => { randomURI = x; return 20; });
+      asMock.Setup(x => x.GetURIIndexOrAppend(It.Is<string>(z => z.Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown")))).Returns<string>(x => { randomURI = x; return 20; });
+      asMock.Setup(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>()));
       List<TraceMessage> trace = new List<TraceMessage>();
       Action<TraceMessage> logMock = z => trace.Add(z);
       UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       //start testing
+      asMock.Verify(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>()), Times.Once);
       Assert.AreEqual<string>("ns=10;i=1", _modelContext.ImportNodeId("Boolean"));
       Assert.AreEqual<string>("i=45", _modelContext.ImportNodeId("HasSubtype"));
       Assert.AreEqual<string>("ns=20;i=2", _modelContext.ImportNodeId("ns=2;i=2"));
-      asMock.Verify(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"), Times.Once);
-      asMock.Verify(x => x.GetIndexOrAppend(randomURI), Times.Once);
+      asMock.Verify(x => x.GetURIIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"), Times.Once);
+      asMock.Verify(x => x.GetURIIndexOrAppend(randomURI), Times.Once);
+      asMock.Verify(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>()), Times.Once);
       Assert.AreEqual<string>("ns=20;i=3", _modelContext.ImportNodeId("ns=2;i=3"));
-      asMock.Verify(x => x.GetIndexOrAppend(randomURI), Times.Exactly(2));
+      asMock.Verify(x => x.GetURIIndexOrAppend(randomURI), Times.Exactly(2));
       Assert.AreEqual<string>("ns=20;i=4", _modelContext.ImportNodeId("ns=2;i=4"));
-      asMock.Verify(x => x.GetIndexOrAppend(randomURI), Times.Exactly(3));
-      asMock.Verify(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"), Times.Once);
+      asMock.Verify(x => x.GetURIIndexOrAppend(randomURI), Times.Exactly(3));
+      asMock.Verify(x => x.GetURIIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"), Times.Once);
       Assert.AreEqual<int>(2, trace.Count);
       Assert.IsTrue(trace[0].Message.Contains("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"));
       Assert.AreEqual<string>("P0-0001030000", trace[0].BuildError.Identifier);
@@ -88,14 +91,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Models = new ModelTableEntry[] { new ModelTableEntry() { ModelUri = "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" } }
       };
       Mock<IAddressSpaceURIRecalculate> asMock = new Mock<IAddressSpaceURIRecalculate>();
-      asMock.Setup(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
+      asMock.Setup(x => x.GetURIIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
+      asMock.Setup(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>()));
       Action<TraceMessage> logMock = z => Assert.Fail();
       UAModelContext modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       Assert.AreEqual<string>("10:Boolean", modelContext.ImportQualifiedName("1:Boolean"));
       Assert.AreEqual<string>("10:AnyText", modelContext.ImportQualifiedName("1:AnyText"));
       Assert.AreEqual<string>("HasSubtype", modelContext.ImportQualifiedName("HasSubtype"));
       Assert.AreEqual<string>("ns=10;i=232323", modelContext.ImportNodeId("ns=1;i=232323"));
-      asMock.Verify(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"), Times.Exactly(3));
+      asMock.Verify(x => x.GetURIIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"), Times.Exactly(3));
+      asMock.Verify(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>()), Times.Once);
     }
 
     [TestMethod]
@@ -108,15 +113,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Models = new ModelTableEntry[] { new ModelTableEntry() { ModelUri = "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" } }
       };
       Mock<IAddressSpaceURIRecalculate> asMock = new Mock<IAddressSpaceURIRecalculate>();
-      asMock.Setup(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
+      asMock.Setup(x => x.GetURIIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")).Returns(10);
       string randomURI = string.Empty;
-      asMock.Setup(x => x.GetIndexOrAppend(It.Is<string>(z => z.Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown")))).Returns<string>(x => { randomURI = x; return 20; });
+      asMock.Setup(x => x.GetURIIndexOrAppend(It.Is<string>(z => z.Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown")))).Returns<string>(x => { randomURI = x; return 20; });
       List<TraceMessage> trace = new List<TraceMessage>();
       Action<TraceMessage> logMock = z => trace.Add(z);
       UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       Assert.AreEqual<string>("ns=20;i=232323", _modelContext.ImportNodeId("ns=2;i=232323"));
-      asMock.Verify(x => x.GetIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"), Times.Never);
-      asMock.Verify(x => x.GetIndexOrAppend(randomURI), Times.Once);
+      asMock.Verify(x => x.GetURIIndexOrAppend("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"), Times.Never);
+      asMock.Verify(x => x.GetURIIndexOrAppend(randomURI), Times.Once);
       Assert.AreEqual<int>(1, trace.Count);
       Assert.IsTrue(trace[0].Message.Contains(randomURI));
       Assert.AreEqual<string>("P3-0802020000", trace[0].BuildError.Identifier);
@@ -133,7 +138,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         Models = new ModelTableEntry[] { new ModelTableEntry() { ModelUri = "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" } }
       };
       Mock<IAddressSpaceURIRecalculate> asMock = new Mock<IAddressSpaceURIRecalculate>();
-      asMock.Setup(x => x.GetIndexOrAppend(It.IsAny<string>())).Returns(10);
+      asMock.Setup(x => x.GetURIIndexOrAppend(It.IsAny<string>())).Returns(10);
       Action<TraceMessage> logMock = z => Assert.Fail();
       UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       Assert.AreEqual<string>(nodeSet.Models[0].ModelUri, _modelContext.ModelUri.ToString());
@@ -148,7 +153,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         NamespaceUris = new string[] { "http://opcfoundation.org/UA/ADI/", "http://opcfoundation.org/UA/DI/" },
       };
       Mock<IAddressSpaceURIRecalculate> asMock = new Mock<IAddressSpaceURIRecalculate>();
-      asMock.Setup(x => x.GetIndexOrAppend(It.IsAny<string>())).Returns(10);
+      asMock.Setup(x => x.GetURIIndexOrAppend(It.IsAny<string>())).Returns(10);
+      asMock.Setup(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>()));
       List<TraceMessage> trace = new List<TraceMessage>();
       Action<TraceMessage> logMock = z => trace.Add(z);
       UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
@@ -157,6 +163,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.AreEqual<int>(1, trace.Count);
       Assert.AreEqual<string>("P0-0001030000", trace[0].BuildError.Identifier);
       Assert.AreEqual<TraceEventType>(TraceEventType.Information, trace[0].TraceLevel);
+      asMock.Verify(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>()), Times.Once);
     }
 
     [TestMethod]
@@ -193,12 +200,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
         }
       };
       Mock<IAddressSpaceURIRecalculate> addressSpaceMock = new Mock<IAddressSpaceURIRecalculate>();
-      addressSpaceMock.Setup(x => x.GetIndexOrAppend(@"http://cas.eu/UA/Demo/")).Returns<string>(x => 2);
+      addressSpaceMock.Setup(x => x.GetURIIndexOrAppend(@"http://cas.eu/UA/Demo/")).Returns<string>(x => 2);
       List<TraceMessage> _logsCache = new List<TraceMessage>();
       Action<TraceMessage> _logMock = z => _logsCache.Add(z);
       IUAModelContext model = nodeSet.ParseUAModelContext(addressSpaceMock.Object, _logMock);
       Assert.IsNotNull(model);
-      addressSpaceMock.Verify(x => x.GetIndexOrAppend(@"http://cas.eu/UA/Demo/"), Times.AtLeastOnce());
+      addressSpaceMock.Verify(x => x.GetURIIndexOrAppend(@"http://cas.eu/UA/Demo/"), Times.AtLeastOnce());
       Assert.AreEqual<string>("ns=2;i=24", nodeSet.Aliases[0].Value);
       Assert.AreEqual<string>("Alias name", nodeSet.Aliases[0].Alias);
       Assert.AreEqual<string>("ns=2;i=24", nodeSet.Items[0].NodeId);

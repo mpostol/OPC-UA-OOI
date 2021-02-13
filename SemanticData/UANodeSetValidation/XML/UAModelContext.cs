@@ -27,17 +27,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// addressSpaceContext</exception>
     internal static UAModelContext ParseUANodeSetModelHeader(IUANodeSetModelHeader modelHeader, IAddressSpaceURIRecalculate addressSpaceContext, Action<TraceMessage> traceEvent)
     {
-      if (modelHeader is null)
-        throw new ArgumentNullException(nameof(modelHeader));
-      if (modelHeader.ServerUris != null && modelHeader.ServerUris.Length > 0)
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "ServerUris is omitted during the import"));
-      if (modelHeader.Extensions != null && modelHeader.Extensions.Length > 0)
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Extensions is omitted during the import"));
-      UAModelContext context2Return = new UAModelContext(addressSpaceContext, traceEvent);
-      context2Return.Parse(modelHeader);
+      UAModelContext context2Return = new UAModelContext(addressSpaceContext, traceEvent, modelHeader);
+      context2Return.Parse(modelHeader, addressSpaceContext);
       return context2Return;
     }
-
 
     #endregion API
 
@@ -77,23 +70,30 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     //var
 
+    private readonly IUANodeSetModelHeader _modelHeader;
     private readonly Action<TraceMessage> _logTraceMessage;
     private readonly Dictionary<string, string> _aliasesDictionary = new Dictionary<string, string>();
     private List<string> _namespaceUris = new List<string>();
     private IAddressSpaceURIRecalculate _addressSpaceContext { get; }
+
     private static Random _randomNumber = new Random();
 
     //methods
-    private UAModelContext(IAddressSpaceURIRecalculate addressSpaceContext, Action<TraceMessage> traceEvent)
+    private UAModelContext(IAddressSpaceURIRecalculate addressSpaceContext, Action<TraceMessage> traceEvent, IUANodeSetModelHeader modelHeader)
     {
+      _modelHeader = modelHeader ?? throw new ArgumentNullException(nameof(modelHeader));
+      if (modelHeader.ServerUris != null && modelHeader.ServerUris.Length > 0)
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "ServerUris is omitted during the import"));
+      if (modelHeader.Extensions != null && modelHeader.Extensions.Length > 0)
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Extensions is omitted during the import"));
       _logTraceMessage = traceEvent ?? throw new ArgumentNullException(nameof(traceEvent));
       _addressSpaceContext = addressSpaceContext ?? throw new ArgumentNullException(nameof(addressSpaceContext));
     }
 
-    private void Parse(IUANodeSetModelHeader modelHeader)
+    private void Parse(IUANodeSetModelHeader modelHeader, IAddressSpaceURIRecalculate addressSpaceContext)
     {
       _namespaceUris = Parse(modelHeader.NamespaceUris);
-      ModelUri = Parse(modelHeader.Models);
+      ModelUri = Parse(modelHeader.Models, addressSpaceContext);
       Parse(modelHeader.Aliases);
     }
 
@@ -118,7 +118,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return list2Return;
     }
 
-    private Uri Parse(ModelTableEntry[] models)
+    private Uri Parse(ModelTableEntry[] models, IAddressSpaceURIRecalculate addressSpaceContext)
     {
       if (models == null || models.Length == 0)
       {
@@ -137,6 +137,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       }
       else if (models.Length > 1)
         _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, $"Multi-model is not supported, only first model {models[0].ModelUri} is processed."));
+      foreach (ModelTableEntry item in models)
+        addressSpaceContext.UpadateModelOrAppend(item);
       return new UriBuilder(models[0].ModelUri).Uri;
     }
 
@@ -162,7 +164,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
           TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedNamespaceIndex, $"ImportNamespaceIndex failed - namespace index {namespaceIndex - 1} is out of the NamespaceUris index. New namespace {uriString} is created instead."));
         _namespaceUris.Add(uriString);
       }
-      return _addressSpaceContext.GetIndexOrAppend(uriString);
+      return _addressSpaceContext.GetURIIndexOrAppend(uriString);
     }
 
     private static Uri RandomUri()

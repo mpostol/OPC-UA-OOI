@@ -141,13 +141,18 @@
     <Content Include="XMLModels\ModelsWithErrors\UndefinedHasTypeDefinition.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="XMLModels\ProblemsToReport\MachineVision\Opc.Ua.MachineVision.NodeSet2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="XMLModels\ProblemsToReport\ADI#509\Opc.Ua.Adi.NodeSet2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="XMLModels\ProblemsToReport\eoursel510\Opc.Ua.NodeSet2.TriCycleType_V1.1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="XMLModels\ProblemsToReport\fgolra177\Opc.Ua.Semi.NodeSet2.xml" />
+    <None Include="XMLModels\ProblemsToReport\fgolra177\Opc.Ua.Semi.NodeSet2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="XMLModels\ProblemsToReport\fgolra177\OpcUaGemModel.xml" />
     <Content Include="XMLModels\ProblemsToReport\MachineVision\Opc.Ua.MachineVision.ModelDesign.xml" />
     <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml">

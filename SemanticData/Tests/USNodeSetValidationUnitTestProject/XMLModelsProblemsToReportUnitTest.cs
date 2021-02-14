@@ -32,10 +32,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       foreach (TraceMessage item in _trace)
         Debug.WriteLine(item.ToString());
       //TODO ADI model from Embedded example import fails #509
-      Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NodeClass).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataEncoding).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataType).Count<TraceMessage>());
+      Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Naming).Count<TraceMessage>());
       Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Identifier.Trim().Contains("P3-0502020001")).Count<TraceMessage>());
+      Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NodeClass).Count<TraceMessage>());
       Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NonCategorized).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Reference).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
     }
 
     [TestMethod]

@@ -321,7 +321,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return false;
       //TODO ADI model from Embedded example import fails #509
       if (this.BrowseName != other.BrowseName)  //1:TransitionNumber vs TransitionNumber; 1:StateNumber vs StateNumber
-        throw new ArgumentOutOfRangeException("The browse name of compared nodes musty be equal.");
+        return false; // throw new ArgumentOutOfRangeException("The browse name of compared nodes musty be equal.");
       return
         this.UANode.Equals(other.UANode);
     }

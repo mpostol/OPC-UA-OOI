@@ -36,6 +36,10 @@
 
 [migration2os]:https://github.com/commsvr-com/migration2os
 
+- [Postół M. (2016) OPC UA Address Space Interchange XML; Technical Report; DOI: 10.13140/RG.2.2.12228.37768][InterchangeXML]
+
+[InterchangeXML]: https://www.researchgate.net/publication/334259707_OPC_UA_Address_Space_Interchange_XML
+
 <!--wordpress-->
 
 - [OPC Unified Architecture][wordpress.opc-ua]

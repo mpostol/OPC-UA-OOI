@@ -12,7 +12,7 @@ using System.IO;
 using System.Linq;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
+namespace UAOOI.SemanticData.UANodeSetValidation
 {
   [TestClass]
   [DeploymentItem(@"XMLModels\ModelsWithErrors\", @"ModelsWithErrors\")]

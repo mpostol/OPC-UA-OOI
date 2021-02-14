@@ -27,43 +27,47 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       List<TraceMessage> _trace = new List<TraceMessage>();
       IAddressSpaceContext _as = new AddressSpaceContext(z => _trace.Add(z));
       Uri model = _as.ImportUANodeSet(_testDataFileInfo);
-      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _trace.Clear();
       _as.ValidateAndExportModel(model);
-      IEnumerable<TraceMessage> vitalMessageserrors = _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic);
-      IEnumerable<TraceMessage> focusNodeClass = _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NodeClass);
-      Assert.IsFalse(focusNodeClass.Where<TraceMessage>(x => !x.BuildError.Identifier.Trim().Contains("P3-0502020001")).Any<TraceMessage>());
-
-      //Assert.Inconclusive("The import returns unexpected errors.");
-
-      Assert.AreEqual<int>(6, vitalMessageserrors.Count<TraceMessage>());
-
-      Assert.AreEqual<int>(3, focusNodeClass.Count<TraceMessage>());
-      Debug.WriteLine(nameof(Focus.NodeClass));
-      foreach (TraceMessage item in focusNodeClass)
+      foreach (TraceMessage item in _trace)
         Debug.WriteLine(item.ToString());
-
-      IEnumerable<TraceMessage> focusNonCategorized = _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NonCategorized);
-      Assert.AreEqual<int>(2, focusNonCategorized.Count<TraceMessage>());
-      Debug.WriteLine(nameof(Focus.NonCategorized));
-      foreach (TraceMessage item in focusNonCategorized)
-        Debug.WriteLine(item.ToString());
+      //TODO ADI model from Embedded example import fails #509
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataEncoding).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataType).Count<TraceMessage>());
+      Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Naming).Count<TraceMessage>());
+      Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Identifier.Trim().Contains("P3-0502020001")).Count<TraceMessage>());
+      Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NodeClass).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NonCategorized).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Reference).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
     }
+
     [TestMethod]
     public void eoursel510Test()
     {
-
       FileInfo _testDataFileInfo = new FileInfo(@"ProblemsToReport\eoursel510\Opc.Ua.NodeSet2.TriCycleType_V1.1.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
       List<TraceMessage> _trace = new List<TraceMessage>();
       IAddressSpaceContext _as = new AddressSpaceContext(z => _trace.Add(z));
       Uri model = _as.ImportUANodeSet(_testDataFileInfo);
       //Extensions is omitted during the import
-      Assert.AreEqual<int>(10, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
+      List<TraceMessage> importUANodeSetXML = _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).ToList<TraceMessage>();
+      Assert.AreEqual<int>(1, importUANodeSetXML.Count);
+      Assert.AreEqual<string>("P0-0001010000", importUANodeSetXML[0].BuildError.Identifier);
+      Assert.IsTrue(importUANodeSetXML[0].Message.Contains("Extensions is omitted during the import"));
+      _trace.Clear();
       _as.ValidateAndExportModel(model);
-      Assert.AreEqual<int>(13, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
-
+      foreach (TraceMessage item in _trace)
+        Debug.WriteLine(item.ToString());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataEncoding).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataType).Count<TraceMessage>());
+      Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Naming).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NodeClass).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NonCategorized).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Reference).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
     }
   }
 }

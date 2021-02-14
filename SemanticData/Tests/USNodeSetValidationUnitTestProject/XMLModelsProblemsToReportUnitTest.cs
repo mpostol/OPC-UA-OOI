@@ -49,14 +49,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       //Extensions is omitted during the import
       List<TraceMessage> importUANodeSetXML = _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).ToList<TraceMessage>();
       Assert.AreEqual<int>(1, importUANodeSetXML.Count);
-      Assert.AreEqual<string>("", importUANodeSetXML[0].BuildError.Identifier);
+      Assert.AreEqual<string>("P0-0001010000", importUANodeSetXML[0].BuildError.Identifier);
       Assert.IsTrue(importUANodeSetXML[0].Message.Contains("Extensions is omitted during the import"));
       _trace.Clear();
       _as.ValidateAndExportModel(model);
       foreach (TraceMessage item in _trace)
         Debug.WriteLine(item.ToString());
-      Assert.AreEqual<int>(13, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataEncoding).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataType).Count<TraceMessage>());
+      Assert.AreEqual<int>(3, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Naming).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NodeClass).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NonCategorized).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Reference).Count<TraceMessage>());
+      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
     }
   }
 }

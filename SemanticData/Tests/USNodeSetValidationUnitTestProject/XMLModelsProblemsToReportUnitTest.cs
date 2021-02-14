@@ -60,7 +60,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       //Extensions is omitted during the import
       Assert.AreEqual<int>(10, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
-      //TODO Normalize representation of URI #524
       _as.ValidateAndExportModel(model);
       Assert.AreEqual<int>(13, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());

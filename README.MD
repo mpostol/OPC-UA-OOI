@@ -125,7 +125,7 @@ To get more details visit the section [Internet of Things (IoT) Communication](.
 The `SemanticData` folder contains projects related to support the [OOI Semantic-Data Processing Architecture](./SemanticData/README.MD). Processing of the OPC UA Data Outside of the Server context is based on the **Semantic-Data** concept. This project is aimed to workout deliverables supporting Process Data handling over Internet including but not limiting to:
 
 - Data edition ֠UI allowing display and edition of any custom data
-- Data serialization and deserialization - see white-paper [Address Space Interchange XML][CAS.InterchangeXML]
+- Data serialization and deserialization - see white-paper [Address Space Interchange XML][InterchangeXML]
 - Data prototyping - methods and tools to design custom data types
 - Exposition of the process data in the context of metadata [OPC UA Address Space Model Designer](https://github.com/mpostol/ASMD)
 - Browsing of the Metadata to selectively access requested Process Data
@@ -135,7 +135,7 @@ The `SemanticData` folder contains projects related to support the [OOI Semantic
 
 #### Project `AddressSpaceComplianceTestTool`
 
-It is a command-line application aimed at the validation of the XML files compliant with the [UANodeSet schema](https://opcfoundation.org/UA/2011/03/UANodeSet.xsd) defined in Part 6 of the OPC UA Specification. The description of this schema is captured by the document [Address Space Interchange XML][CAS.InterchangeXML]
+It is a command-line application aimed at the validation of the XML files compliant with the [UANodeSet schema](https://opcfoundation.org/UA/2011/03/UANodeSet.xsd) defined in Part 6 of the OPC UA Specification. The description of this schema is captured by the document [Address Space Interchange XML][InterchangeXML]
 
 #### Project `UANodeSetValidation`
 
@@ -246,7 +246,7 @@ The presented approach is a real proposal for a new technology wave based on the
 [wordpress.OPCUAMTF]: https://mpostol.wordpress.com/2013/08/04/opc-unified-architecture-main-technological-features/
 [ASMD]:https://github.com/mpostol/ASMD
 [DDSupport]:SemanticData/DesignDeploymentSupport.md
-[CAS.InterchangeXML]: https://www.researchgate.net/publication/334259707_OPC_UA_Address_Space_Interchange_XML
+[InterchangeXML]: https://www.researchgate.net/publication/334259707_OPC_UA_Address_Space_Interchange_XML
 [commserver]: http://www.commsvr.com/
 [migration2os]: https://github.com/commsvr-com/migration2os
 [migration2osProj]: https://github.com/orgs/commsvr-com/projects

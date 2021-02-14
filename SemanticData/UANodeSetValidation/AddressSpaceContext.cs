@@ -97,7 +97,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     void IAddressSpaceContext.ValidateAndExportModel()
     {
-      //TODO ADI model from Embedded example import fails #509
       foreach (IModelTableEntry _nsi in m_NamespaceTable.Models)
       {
         int indes = m_NamespaceTable.GetURIIndex(_nsi.ModelUri);
@@ -123,17 +122,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #endregion IAddressSpaceContext
 
     #region IAddressSpaceURIRecalculate
-
-    //TODO IModelTableEntry must be updated during import. #523
-    ///// <summary>
-    ///// Gets the index or append.
-    ///// </summary>
-    ///// <param name="value">The value.</param>
-    ///// <returns>System.UInt16.</returns>
-    //ushort IAddressSpaceURIRecalculate.GetIndexOrAppend(string value)
-    //{
-    //  return m_NamespaceTable.GetURIIndexOrAppend(value);
-    //}
 
     #endregion IAddressSpaceURIRecalculate
 

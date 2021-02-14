@@ -141,6 +141,9 @@
     <Content Include="XMLModels\ModelsWithErrors\UndefinedHasTypeDefinition.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="XMLModels\ProblemsToReport\MachineVision\Opc.Ua.MachineVision.NodeSet2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="XMLModels\ProblemsToReport\ADI#509\Opc.Ua.Adi.NodeSet2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

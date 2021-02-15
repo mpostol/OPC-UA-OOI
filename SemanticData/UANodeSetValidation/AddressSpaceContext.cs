@@ -351,6 +351,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       rootNode.InRecursionChain = false;
     }
 
+    //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
     private void ValidateAndExportModel(int nameSpaceIndex, IValidator validator)
     {
       IEnumerable<IUANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;

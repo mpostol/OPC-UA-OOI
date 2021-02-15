@@ -19,21 +19,23 @@ using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-
   /// <summary>
   /// Class Validator - contains static methods used to validate and export a collection of nodes - part of the Address Space.
   /// </summary>
   internal class Validator : IValidator
   {
-
-    public Validator(IAddressSpaceBuildContext addressSpace)
+    public Validator(IAddressSpaceBuildContext addressSpace, IBuildErrorsHandling traceBuildErrorsHandling)
     {
       AS = addressSpace;
+      Log = traceBuildErrorsHandling;
+
     }
-    private IAddressSpaceBuildContext AS { get; set; }
-    public IBuildErrorsHandling Log { get; set; } = BuildErrorsHandling.Log;
+
+    private readonly IAddressSpaceBuildContext AS;
+    public readonly IBuildErrorsHandling Log;
 
     #region internal API
+
     /// <summary>
     /// Validates <paramref name="nodeContext" /> and exports it using an object of <see cref="IModelFactory" />  type.
     /// </summary>
@@ -64,46 +66,58 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case NodeClassEnum.UADataType:
             CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType);
             break;
+
           case NodeClassEnum.UAMethod:
             CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.AddNodeFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference), UpdateInstance);
             break;
+
           case NodeClassEnum.UAObject:
             CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.AddNodeFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y), UpdateInstance);
             break;
+
           case NodeClassEnum.UAObjectType:
             CreateNode<IObjectTypeFactory, UAObjectType>(exportFactory.AddNodeFactory<IObjectTypeFactory>, nodeContext, Update, UpdateType);
             break;
+
           case NodeClassEnum.UAReferenceType:
             CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.AddNodeFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType);
             break;
+
           case NodeClassEnum.UAVariable:
             if (parentReference.ReferenceKind == ReferenceKindEnum.HasProperty)
               CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance);
             else
               CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance);
             break;
+
           case NodeClassEnum.UAVariableType:
             CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.AddNodeFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType);
             break;
+
           case NodeClassEnum.UAView:
             CreateNode<IViewInstanceFactory, UAView>(exportFactory.AddNodeFactory<IViewInstanceFactory>, nodeContext, (x, y) => Update(x, y), UpdateInstance);
             break;
+
           case NodeClassEnum.Unknown:
             throw new ApplicationException($"In {nameof(ValidateExportNode)} unexpected NodeClass value");
         }
       }
     }
-    #endregion
+
+    #endregion internal API
 
     #region private
+
     private static ApplicationException InstanceDeclarationNotSupported(NodeClassEnum nodeClass)
     {
       return new ApplicationException($"{nodeClass} doesn't support instance declarations");
     }
+
     private void Update(IObjectInstanceFactory nodeDesign, UAObject nodeSet)
     {
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(Log.TraceEvent);
     }
+
     private void Update(IPropertyInstanceFactory propertyInstance, UAVariable nodeSet, IUANodeBase nodeContext, UAReferenceContext parentReference)
     {
       try
@@ -118,6 +132,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, string.Format("Cannot resolve the reference for Property because of error {0} at: {1}.", _ex, _ex.StackTrace)));
       }
     }
+
     private void Update(IVariableInstanceFactory variableInstance, UAVariable nodeSet, IUANodeBase nodeContext, UAReferenceContext parentReference)
     {
       try
@@ -132,6 +147,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, string.Format("Cannot resolve the reference for Variable because of error {0} at: {1}.", _ex, _ex.StackTrace)));
       }
     }
+
     private void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet)
     {
       nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(Log.TraceEvent);
@@ -144,6 +160,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (nodeSet.Translation != null)
         Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "- the Translation element for the UAVariable"));
     }
+
     private void Update(IVariableTypeFactory nodeDesign, UAVariableType nodeSet)
     {
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(string.Empty);
@@ -151,6 +168,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.DefaultValue = nodeSet.Value;
       nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(Log.TraceEvent);
     }
+
     private void Update(IMethodInstanceFactory nodeDesign, UAMethod nodeSet, UAReferenceContext parentReference)
     {
       if (nodeSet.ArgumentDescription != null)
@@ -168,11 +186,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.AddInputArguments(x => GetParameters(x));
       nodeDesign.AddOutputArguments(x => GetParameters(x));
     }
+
     private void Update(IViewInstanceFactory nodeDesign, UAView nodeSet)
     {
       nodeDesign.ContainsNoLoops = nodeSet.ContainsNoLoops;//TODO add test case against the loops in the model.
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(Log.TraceEvent);
     }
+
     private void Update(IDataTypeFactory nodeDesign, UADataType nodeSet)
     {
       nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), AS, Log.TraceEvent);
@@ -180,6 +200,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (nodeSet.Purpose != XML.DataTypePurpose.Normal)
         Log.TraceEvent(TraceMessage.DiagnosticTraceMessage($"DataTypePurpose value {nodeSet.Purpose } is not supported by the tool"));
     }
+
     private void Update(IReferenceTypeFactory nodeDesign, UAReferenceType nodeSet)
     {
       nodeSet.InverseName.ExportLocalizedTextArray(nodeDesign.AddInverseName);
@@ -192,7 +213,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       else if (!nodeSet.Symmetric && !nodeSet.IsAbstract && (nodeSet.InverseName == null || !nodeSet.InverseName.Where(x => !string.IsNullOrEmpty(x.Value)).Any()))
         Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongInverseName, string.Format("If ReferenceType {0} is not symmetric and not abstract the InverseName shall be specified.", nodeSet.NodeIdentifier())));
     }
-    private void Update(IObjectTypeFactory nodeDesign, UAObjectType nodeSet) { }
+
+    private void Update(IObjectTypeFactory nodeDesign, UAObjectType nodeSet)
+    {
+    }
+
     private void CreateNode<FactoryType, NodeSetType>
       (
         Func<FactoryType> createNode,
@@ -230,6 +255,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       updateBase(_nodeFactory, _nodeSet, nodeContext);
       updateNode(_nodeFactory, _nodeSet);
     }
+
     private AccessRestrictions ConvertToAccessRestrictions(byte accessRestrictions, string typeName)
     {
       if (accessRestrictions > 7)
@@ -239,20 +265,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return (AccessRestrictions)accessRestrictions;
     }
+
     private void UpdateType(ITypeFactory nodeDesign, UAType nodeSet, IUANodeBase nodeContext)
     {
       nodeDesign.BaseType = nodeContext.ExportBaseTypeBrowseName(true);
       nodeDesign.IsAbstract = nodeSet.IsAbstract;
     }
+
     private static void UpdateInstance(IInstanceFactory nodeDesign, UAInstance nodeSet, IUANodeBase nodeContext)
     {
       if (nodeContext.ModelingRule.HasValue)
         nodeDesign.ModelingRule = nodeContext.ModelingRule.Value;
       nodeDesign.TypeDefinition = nodeContext.ExportBaseTypeBrowseName(false);
-      //nodeSet.ParentNodeId - The NodeId of the Node that is the parent of the Node within the information model. This field is used to indicate 
-      //that a tight coupling exists between the Node and its parent (e.g. when the parent is deleted the child is deleted 
+      //nodeSet.ParentNodeId - The NodeId of the Node that is the parent of the Node within the information model. This field is used to indicate
+      //that a tight coupling exists between the Node and its parent (e.g. when the parent is deleted the child is deleted
       //as well). This information does not appear in the AddressSpace and is intended for use by design tools.
     }
+
     private static void CreateModelDesignStub(INodeContainer factory)
     {
       BuildError _err = BuildError.DanglingReferenceTarget;
@@ -261,6 +290,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       _pr.AddDescription("en-en", _err.Descriptor);
       _pr.AddDisplayName("en-en", string.Format("ERROR{0}", m_ErrorNumber));
     }
+
     /// <summary>
     /// Gets the parameters.
     /// </summary>
@@ -273,9 +303,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _parameters.Add(AS.ExportArgument(_item));
       return _parameters.ToArray();
     }
+
     private static int m_ErrorNumber = 0;
-    #endregion
 
+    #endregion private
   }
-
 }

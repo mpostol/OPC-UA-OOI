@@ -106,7 +106,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel(new Uri(UAInformationModel.Namespaces.OpcUa));
-      _asp.TestConsistency(9, 0);
+      _asp.TestConsistency(550, 2);
+      Assert.AreEqual<string>(BuildError.WrongReference2Property.Identifier, _asp.TraceList[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.ModelContainsErrors.Identifier, _asp.TraceList[1].BuildError.Identifier);
     }
 
     [TestMethod]
@@ -160,18 +162,27 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
     {
       public AddressSpaceWrapper()
       {
-        AddressSpaceContext = new AddressSpaceContext(x => { Helpers.TraceHelper.TraceDiagnostic(x, _trace, ref _diagnosticCounter); });
+        AddressSpaceContext = new AddressSpaceContext(x => { TraceDiagnostic(x, TraceList, ref _diagnosticCounter); });
       }
 
       public void TestConsistency(int diagnosticCounter, int errorsCounter)
       {
         Assert.AreEqual<int>(diagnosticCounter, _diagnosticCounter);
-        Assert.AreEqual<int>(errorsCounter, _trace.Count);
+        Assert.AreEqual<int>(errorsCounter, TraceList.Count);
       }
 
-      private List<TraceMessage> _trace = new List<TraceMessage>();
-      private int _diagnosticCounter = 0;
+      internal List<TraceMessage> TraceList = new List<TraceMessage>();
       internal AddressSpaceContext AddressSpaceContext = null;
+
+      private int _diagnosticCounter = 0;
+
+      private void TraceDiagnostic(TraceMessage msg, List<TraceMessage> errors, ref int diagnosticCounter)
+      {
+        Console.WriteLine(msg.ToString());
+        diagnosticCounter++;
+        if (msg.BuildError.Focus != Focus.Diagnostic)
+          errors.Add(msg);
+      }
     }
 
     #endregion private

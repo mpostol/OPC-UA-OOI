@@ -26,6 +26,12 @@
       <ns1:Name>NamespaceUrisCannotBeNull</ns1:Name>
     </ns1:NamedBuildError>
     <ns1:NamedBuildError>
+      <ns1:Focus>XML</ns1:Focus>
+      <ns1:Identifier>P0-0001050000</ns1:Identifier>
+      <ns1:Descriptor>Selected model contains errors.</ns1:Descriptor>
+      <ns1:Name>ModelContainsErrors</ns1:Name>
+    </ns1:NamedBuildError>
+    <ns1:NamedBuildError>
       <ns1:Focus>NonCategorized</ns1:Focus>
       <ns1:Identifier>P0-0002010000</ns1:Identifier>
       <ns1:Descriptor>General processing error see trace for details.</ns1:Descriptor>

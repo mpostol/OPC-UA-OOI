@@ -39,6 +39,14 @@ namespace UAOOI.SemanticData.BuildingErrorsHandling
                     Identifier = "P0-0001040000", 
                     Descriptor = "NamespaceUris element cannot be null or empty" }; } }
     /// <summary>
+    /// Error: P0-0001050000; Focus: XML; Selected model contains errors.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P0-0001050000.</value>
+    public static BuildError ModelContainsErrors { get { return new BuildError() 
+                  { Focus = Focus.XML, 
+                    Identifier = "P0-0001050000", 
+                    Descriptor = "Selected model contains errors." }; } }
+    /// <summary>
     /// Error: P0-0002010000; Focus: NonCategorized; General processing error see trace for details.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P0-0002010000.</value>

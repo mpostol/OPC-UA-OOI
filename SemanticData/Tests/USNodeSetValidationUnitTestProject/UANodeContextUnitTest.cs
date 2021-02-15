@@ -27,7 +27,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void ConstructorNodeIdTest()
     {
       Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
-      UANodeContext _toTest = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object);
+      UANodeContext _toTest = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object, x => { });
       Assert.IsNotNull(_toTest.BrowseName);
       Assert.IsTrue(new QualifiedName() == _toTest.BrowseName);
       Assert.IsFalse(_toTest.InRecursionChain);
@@ -51,15 +51,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.AreEqual<string>(_toTest.NodeIdContext.ToString(), "ns=1;i=11");
       Assert.IsNotNull(_toTest.UANode);
     }
+
     [TestMethod]
     public void UpdateDuplicatedNodeIdTest()
     {
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-      UANodeContext _newNode = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object);
-      Mock<IBuildErrorsHandling> _traceMock = new Mock<IBuildErrorsHandling>();
       List<TraceMessage> _traceBuffer = new List<TraceMessage>();
-      _traceMock.Setup(x => x.TraceEvent(It.IsAny<TraceMessage>())).Callback<TraceMessage>(x => _traceBuffer.Add(x));
-      _newNode.Log = _traceMock.Object;
+      UANodeContext _newNode = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object, x => _traceBuffer.Add(x));
       UAVariable _nodeFactory = new UAVariable()
       {
         NodeId = "ns=1;i=47",
@@ -73,11 +71,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.AreEqual<int>(1, _traceBuffer.Count);
       Assert.AreEqual<string>(_traceBuffer[0].BuildError.Identifier, BuildError.NodeIdDuplicated.Identifier);
     }
+
     [TestMethod]
     public void UpdateNodeIdTest()
     {
       Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
-      UANodeContext _toTest = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object);
+      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
+      UANodeContext _toTest = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object, x => _traceBuffer.Add(x));
       XML.UANode _node = new UAObject()
       {
         NodeId = "ns=1;i=1",
@@ -106,12 +106,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.AreEqual<string>(_toTest.NodeIdContext.ToString(), "ns=1;i=11");
       Assert.IsNotNull(_toTest.UANode);
     }
+
     [TestMethod]
     public void UpdateWithDifferentNodeIdTest()
     {
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
       QualifiedName qualifiedName = QualifiedName.Parse("EURange");
-      IUANodeContext _newNode = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object);
+      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
+      IUANodeContext _newNode = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object, x => _traceBuffer.Add(x));
       Assert.AreEqual<string>("ns=1;i=11", _newNode.NodeIdContext.ToString());
       UANode _nodeFactory = new UAVariable()
       {
@@ -121,28 +123,36 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DataType = "i=884",
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
-      _newNode.Update(_nodeFactory, x => Assert.Fail()); // Update has different NodeId - no change is expected. 
+      _newNode.Update(_nodeFactory, x => Assert.Fail()); // Update has different NodeId - no change is expected.
       Assert.AreEqual<string>("ns=1;i=11", _newNode.NodeIdContext.ToString());
       Assert.AreEqual<string>("ns=1;i=47", _newNode.UANode.NodeId);
+      Assert.AreEqual<int>(0, _traceBuffer.Count);
     }
+
     [TestMethod]
     [ExpectedException(typeof(ArgumentNullException))]
     public void CalculateNodeReferencesNullFactoryTest()
     {
       Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
       Mock<IValidator> _validatorMoc = new Mock<IValidator>();
-      IUANodeBase _first = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object);
+      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
+      IUANodeBase _first = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object, x => _traceBuffer.Add(x));
       _first.CalculateNodeReferences(null, _validatorMoc.Object);
+      Assert.AreEqual<int>(0, _traceBuffer.Count);
     }
+
     [TestMethod]
     [ExpectedException(typeof(ArgumentNullException))]
     public void CalculateNodeReferencesValidatorIsNullTest()
     {
       Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
       Mock<INodeFactory> _mockNodeFactory = new Mock<INodeFactory>();
-      IUANodeBase _first = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object);
+      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
+      IUANodeBase _first = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object, x => _traceBuffer.Add(x));
       _first.CalculateNodeReferences(_mockNodeFactory.Object, null);
+      Assert.AreEqual<int>(0, _traceBuffer.Count);
     }
+
     [TestMethod]
     public void CalculateNodeReferencesNullUANodeTest()
     {
@@ -151,23 +161,27 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Mock<INodeFactory> _mockNodeFactory = new Mock<INodeFactory>();
       Mock<IValidator> _validatorMoc = new Mock<IValidator>();
       _validatorMoc.Setup(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()));
-      IUANodeBase _node = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object);
+      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
+      IUANodeBase _node = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object, x => _traceBuffer.Add(x));
       _node.CalculateNodeReferences(_mockNodeFactory.Object, _validatorMoc.Object);
       _addressSpaceMock.Verify(x => x.GetMyReferences(It.IsAny<IUANodeBase>()), Times.Once);
-      _validatorMoc.Verify(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(),  _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()), Times.Never);
+      _validatorMoc.Verify(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()), Times.Never);
+      Assert.AreEqual<int>(0, _traceBuffer.Count);
     }
+
     [TestMethod]
     public void EqualsTest()
     {
-      AddressSpaceBuildContext _as = new AddressSpaceBuildContext();
+      AddressSpaceBuildContext _as = new AddressSpaceBuildContext(x => { });
       UANodeContext _first = _as.InstanceToTest;
       UANodeContext _second = _as.InstanceToTest;
       Assert.IsTrue(_first.Equals(_second));
     }
+
     [TestMethod]
     public void GetDerivedInstances4ObjectTest()
     {
-      AddressSpaceBuildContext _as = new AddressSpaceBuildContext();
+      AddressSpaceBuildContext _as = new AddressSpaceBuildContext(x => { });
       UANodeContext _testInstance = _as.InstanceToTest;
       Assert.IsTrue(_testInstance.UANode.GetType() == typeof(UAObject));
       Assert.AreEqual<string>("1:InstanceOfDerivedFromComplexObjectType", _testInstance.BrowseName.ToString());
@@ -175,10 +189,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsNotNull(_result);
       Assert.AreEqual<int>(4, _result.Count);
     }
+
     [TestMethod]
     public void GetDerivedInstances4TypeDefinition()
     {
-      AddressSpaceBuildContext _as = new AddressSpaceBuildContext();
+      AddressSpaceBuildContext _as = new AddressSpaceBuildContext(x => { });
       UANodeContext _testInstance = _as.TypeToTest;
       Assert.IsNotNull(_testInstance);
       Assert.IsTrue(_testInstance.UANode.GetType() == typeof(UAObjectType));
@@ -187,16 +202,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsNotNull(_result);
       Assert.AreEqual<int>(4, _result.Count);
     }
+
     [TestMethod]
     public void BuildSymbolicIdTest()
     {
-      Mock<IBuildErrorsHandling> _traceMock = new Mock<IBuildErrorsHandling>();
-      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
-      _traceMock.Setup(x => x.TraceEvent(It.IsAny<TraceMessage>())).Callback<TraceMessage>(x => _traceBuffer.Add(x));
       NodeId _nodeId = NodeId.Parse("ns=1;i=11");
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-      UANodeContext _toTest = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object);
-      _toTest.Log = _traceMock.Object;
+      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
+      UANodeContext _toTest = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object, x => _traceBuffer.Add(x));
       List<string> path = new List<string>();
       _toTest.BuildSymbolicId(path);
       Assert.AreEqual<int>(1, _traceBuffer.Count);
@@ -204,12 +217,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.AreEqual<string>("The target node NodeId=ns=1;i=11, current path ", _traceBuffer[0].Message);
       Assert.AreEqual<int>(0, path.Count);
     }
+
     [TestMethod]
     public void ExportBrowseNameTest()
     {
       UANodeSet _tm = TestData.CreateNodeSetModel();
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-      _asMock.Setup(x=> x.GetNamespace(0)).Returns<ushort>(x => "tempuri.org");
+      _asMock.Setup(x => x.GetNamespace(0)).Returns<ushort>(x => "tempuri.org");
       UANode _nodeFactory = new UAVariable()
       {
         NodeId = "ns=1;i=47",
@@ -218,13 +232,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DataType = "i=884",
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
-      UANodeContext _node = new UANodeContext(NodeId.Parse("ns=1;i=47"), _asMock.Object);
+      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
+      UANodeContext _node = new UANodeContext(NodeId.Parse("ns=1;i=47"), _asMock.Object, x => _traceBuffer.Add(x));
       _node.Update(_nodeFactory, x => Assert.Fail());
-      XmlQualifiedName _resolvedName =_node.ExportNodeBrowseName();
+      XmlQualifiedName _resolvedName = _node.ExportNodeBrowseName();
       _asMock.Verify(x => x.GetNamespace(0), Times.Once);
       Assert.IsNotNull(_resolvedName);
       Assert.AreEqual<string>("tempuri.org:EURange", _resolvedName.ToString());
+      Assert.AreEqual<int>(0, _traceBuffer.Count);
     }
+
     [TestMethod]
     public void EqualsUAVariableTestMethod()
     {
@@ -245,60 +262,74 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-      IUANodeContext _derivedNodeContext = new UANodeContext(NodeId.Parse("ns=1;i=47"), _asMock.Object);
+      IUANodeContext _derivedNodeContext = new UANodeContext(NodeId.Parse("ns=1;i=47"), _asMock.Object, x => { });
       _derivedNodeContext.Update(_derivedNode, x => Assert.Fail());
-      UANodeContext _baseNodeContext = new UANodeContext(NodeId.Parse("i=17568"), _asMock.Object);
+      UANodeContext _baseNodeContext = new UANodeContext(NodeId.Parse("i=17568"), _asMock.Object, x => { });
       _baseNodeContext.Update(_baseNode, x => Assert.Fail());
       Assert.IsTrue(_derivedNode.Equals(_baseNode));
       Assert.IsTrue(_derivedNodeContext.Equals(_baseNodeContext));
     }
+
     [TestMethod]
     public void RemoveInheritedValuesTest()
     {
       UAVariable _derivedNode = new UAVariable()
       {
-        NodeId = "ns=1;i=47", BrowseName = "EURange", ParentNodeId = "ns=1;i=43", DataType = "i=884",
+        NodeId = "ns=1;i=47",
+        BrowseName = "EURange",
+        ParentNodeId = "ns=1;i=43",
+        DataType = "i=884",
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
       UANode _baseNode = new UAVariable()
       {
-        NodeId = "i=17568", BrowseName = "EURange", ParentNodeId = "i=15318", DataType = "i=884",
+        NodeId = "i=17568",
+        BrowseName = "EURange",
+        ParentNodeId = "i=15318",
+        DataType = "i=884",
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-      IUANodeContext _derivedNodeContext = new UANodeContext(NodeId.Parse("ns=1;i=47"), _asMock.Object);
+      IUANodeContext _derivedNodeContext = new UANodeContext(NodeId.Parse("ns=1;i=47"), _asMock.Object, x => { });
       _derivedNodeContext.Update(_derivedNode, x => Assert.Fail());
-      UANodeContext _baseNodeContext = new UANodeContext(NodeId.Parse("i=17568"), _asMock.Object);
+      UANodeContext _baseNodeContext = new UANodeContext(NodeId.Parse("i=17568"), _asMock.Object, x => { });
       _baseNodeContext.Update(_baseNode, x => Assert.Fail());
       _derivedNodeContext.RemoveInheritedValues(_baseNodeContext);
       Assert.AreEqual<string>("EURange", _derivedNode.BrowseName);
       Assert.IsNull(_derivedNode.DataType);
       Assert.IsNull(_derivedNode.Description);
     }
+
     #region instrumentation
+
     private class AddressSpaceBuildContext : IAddressSpaceBuildContext
     {
-
       #region constructor
-      public AddressSpaceBuildContext()
+
+      public AddressSpaceBuildContext(Action<TraceMessage> traceMessageCallback)
       {
-        CreateAddressSpace();
+        CreateAddressSpace(traceMessageCallback);
       }
-      #endregion
+
+      #endregion constructor
 
       #region IAddressSpaceBuildContext
+
       public Parameter ExportArgument(Argument argument, XmlQualifiedName dataType)
       {
         throw new NotImplementedException();
       }
+
       public XmlQualifiedName ExportBrowseName(NodeId id, NodeId defaultValue)
       {
         throw new NotImplementedException();
       }
+
       public IUANodeBase GetBaseTypeNode(NodeClassEnum nodeClass)
       {
         return null;
       }
+
       /// <summary>
       /// Gets the children nodes for the <paramref name="rootNode" />.
       /// </summary>
@@ -310,53 +341,64 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                                                                     Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
                                                                     Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
       }
+
       public ushort GetIndexOrAppend(string identifier)
       {
         throw new NotImplementedException();
       }
+
       public IEnumerable<UAReferenceContext> GetMyReferences(IUANodeBase index)
       {
         List<UAReferenceContext> contexts = new List<UAReferenceContext>();
         return contexts;
       }
+
       public string GetNamespace(ushort namespaceIndex)
       {
         throw new NotImplementedException();
       }
+
       public IUANodeContext GetOrCreateNodeContext(NodeId nodeId, Func<NodeId, IUANodeContext> createUAModelContext)
       {
         return m_NodesDictionary[nodeId.ToString()];
       }
+
       public IEnumerable<UAReferenceContext> GetReferences2Me(IUANodeContext node)
       {
         throw new NotImplementedException();
       }
+
       public Parameter ExportArgument(Argument argument)
       {
         throw new NotImplementedException();
       }
-      #endregion
+
+      #endregion IAddressSpaceBuildContext
 
       #region private instrumentation
+
       internal UANodeContext InstanceToTest { get; private set; }
       internal UANodeContext TypeToTest { get; private set; }
       private readonly Dictionary<string, UAReferenceContext> m_References = new Dictionary<string, UAReferenceContext>();
       private readonly Dictionary<string, IUANodeContext> m_NodesDictionary = new Dictionary<string, IUANodeContext>();
+
       private void Add2mNodesDictionary(UANodeContext node)
       {
         m_NodesDictionary.Add(node.NodeIdContext.ToString(), node);
       }
-      private UANodeContext NewNode(UANode newNode)
+
+      private UANodeContext NewNode(UANode newNode, Action<TraceMessage> traceMessageCallback)
       {
-        UANodeContext _newNode = new UANodeContext(NodeId.Parse(newNode.NodeId), this);
+        UANodeContext _newNode = new UANodeContext(NodeId.Parse(newNode.NodeId), this, traceMessageCallback);
         _newNode.Update(newNode, x => { m_References.Add(x.Key, x); });
         Add2mNodesDictionary(_newNode);
         return _newNode;
       }
-      private void CreateAddressSpace()
+
+      private void CreateAddressSpace(Action<TraceMessage> traceMessageCallback)
       {
-        NewNode(new UAReferenceType() { NodeId = ReferenceTypeIds.HasProperty.ToString(), BrowseName = "HasProperty" });
-        NewNode(new UAReferenceType() { NodeId = ReferenceTypeIds.HasTypeDefinition.ToString(), BrowseName = "HasTypeDefinition" });
+        NewNode(new UAReferenceType() { NodeId = ReferenceTypeIds.HasProperty.ToString(), BrowseName = "HasProperty" }, traceMessageCallback);
+        NewNode(new UAReferenceType() { NodeId = ReferenceTypeIds.HasTypeDefinition.ToString(), BrowseName = "HasTypeDefinition" }, traceMessageCallback);
         NewNode(new UAVariable()
         {
           NodeId = "i=112",
@@ -364,13 +406,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           ParentNodeId = "i=78",
           DataType = "i=120",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "NamingRule" } }
-        });
+        }, traceMessageCallback);
         NewNode(new UAObjectType()
         {
           NodeId = "i=77",
           BrowseName = "ModellingRuleType",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "ModellingRuleType" } }
-        });
+        }, traceMessageCallback);
         NewNode(new UAObject()
         {
           NodeId = "i=78",
@@ -382,13 +424,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             new Reference(){ IsForward = true, ReferenceType = ReferenceTypeIds.HasProperty.ToString(), Value="i=112" },
             new Reference(){ IsForward = true, ReferenceType = ReferenceTypeIds.HasTypeDefinition.ToString(), Value="i=77" }
           }
-        });
+        }, traceMessageCallback);
         NewNode(new UAReferenceType()
         {
           NodeId = "i=37",
           BrowseName = "HasModellingRule",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "HasModellingRule" } }
-        });
+        }, traceMessageCallback);
         NewNode(new UAMethod()
         {
           NodeId = "ns=1;i=25",
@@ -397,13 +439,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           MethodDeclarationId = "ns=1;i=10",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "ChildMethodNewName" } },
           References = new Reference[] { new Reference() { ReferenceType = ReferenceTypeIds.HasModellingRule.ToString(), IsForward = true, Value = "i=78" } }
-        });
+        }, traceMessageCallback);
         NewNode(new UAReferenceType()
         {
           NodeId = "i=47",
           BrowseName = "HasComponent",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "ChildVariable" } }
-        });
+        }, traceMessageCallback);
         NewNode(new UAVariable()
         {
           NodeId = "ns=1;i=47",
@@ -411,7 +453,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           ParentNodeId = "ns=1;i=43",
           DataType = "i=884",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
-        });
+        }, traceMessageCallback);
         NewNode(new UAVariable()
         {
           NodeId = "i=2369",
@@ -419,7 +461,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           ParentNodeId = "i=2368",
           DataType = "i=884",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
-        });
+        }, traceMessageCallback);
         NewNode(new UAVariableType()
         {
           NodeId = "i=2368",
@@ -428,7 +470,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           ValueRank = -2,
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "AnalogItemType" } },
           References = new Reference[] { new Reference() { IsForward = true, ReferenceType = ReferenceTypeIds.HasProperty.ToString(), Value = "i=2369" } }
-        });
+        }, traceMessageCallback);
         NewNode(new UAVariable()
         {
           NodeId = "ns=1;i=43",
@@ -442,20 +484,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                 new Reference(){ IsForward=true, ReferenceType = ReferenceTypeIds.HasTypeDefinition.ToString(), Value="i=2368"},
                 new Reference() {IsForward=true, ReferenceType = ReferenceTypeIds.HasModellingRule.ToString(), Value="i=78" }
             }
-        });
+        }, traceMessageCallback);
         NewNode(new UAObjectType()
         {
           NodeId = "i=58",
           BrowseName = "BaseObjectType",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "BaseObjectType" } }
-        });
+        }, traceMessageCallback);
         NewNode(new UAVariableType()
         {
           NodeId = "i=68",
           BrowseName = "PropertyType",
           ValueRank = -2,
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "PropertyType" } }
-        });
+        }, traceMessageCallback);
         NewNode(new UAVariable()
         {
           NodeId = "i=11511",
@@ -464,7 +506,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           DataType = "i=120",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "NamingRule" } },
           References = new Reference[] { new Reference() { ReferenceType = ReferenceTypeIds.HasTypeDefinition.ToString(), Value = "i=68", IsForward = true } }
-        });
+        }, traceMessageCallback);
         NewNode(new UAObject()
         {
           NodeId = "i=11510",
@@ -476,7 +518,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
              new Reference(){ ReferenceType = ReferenceTypeIds.HasProperty.ToString(), Value="i=11511", IsForward= true },
              new Reference() { ReferenceType = ReferenceTypeIds.HasTypeDefinition.ToString(), Value = "i=77", IsForward= true }
             }
-        });
+        }, traceMessageCallback);
         NewNode(new UAObject()
         {
           NodeId = "ns=1;i=2",
@@ -489,8 +531,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               new  Reference() { IsForward= true, ReferenceType = ReferenceTypeIds.HasTypeDefinition.ToString(), Value="i=58" },
               new Reference() { IsForward= true, ReferenceType = ReferenceTypeIds.HasModellingRule.ToString(), Value="i=11510" }
             }
-        }
-        );
+        }, traceMessageCallback);
         NewNode(new UAVariable()
         {
           NodeId = "ns=1;i=3",
@@ -504,7 +545,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               new Reference() { ReferenceType = ReferenceTypeIds.HasTypeDefinition.ToString(), Value="i=68", IsForward=true },
               new Reference() { ReferenceType = ReferenceTypeIds.HasModellingRule.ToString(), Value="i=78", IsForward=true }
             }
-        });
+        }, traceMessageCallback);
         NewNode(new UAMethod()
         {
           NodeId = "ns=1;i=10",
@@ -512,7 +553,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           ParentNodeId = "ns=1;i=1",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "ChildMethod" } },
           References = new Reference[] { new Reference() { ReferenceType = ReferenceTypeIds.HasModellingRule.ToString(), Value = "i=78", IsForward = true } }
-        });
+        }, traceMessageCallback);
         NewNode(new UAObjectType()
         {
           NodeId = "ns=1;i=1",
@@ -525,13 +566,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               new Reference() { IsForward = true, ReferenceType = ReferenceTypeIds.HasComponent.ToString(), Value="ns=1;i=43" },
               new Reference() { IsForward = true, ReferenceType = ReferenceTypeIds.HasComponent.ToString(), Value="ns=1;i=10" }
             }
-        });
+        }, traceMessageCallback);
         NewNode(new UAReferenceType()
         {
           NodeId = "i=45",
           BrowseName = "HasSubtype",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "HasSubtype" } },
-        });
+        }, traceMessageCallback);
         TypeToTest = NewNode(new UAObjectType()
         {
           NodeId = "ns=1;i=16",
@@ -542,7 +583,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               new Reference(){  ReferenceType = ReferenceTypeIds.HasComponent.ToString(), IsForward=true, Value= "ns=1;i=25" },
               new Reference() { ReferenceType = ReferenceTypeIds.HasSubtype.ToString(), IsForward = false, Value= "ns=1;i=1" }
             }
-        });
+        }, traceMessageCallback);
         NewNode(new UAVariable()
         {
           NodeId = "ns=1;i=32",
@@ -551,7 +592,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           ParentNodeId = "ns=1;i=30",
           DataType = "LocalizedText",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "ChildProperty" } }
-        });
+        }, traceMessageCallback);
         NewNode(new UAVariable()
         {
           NodeId = "ns=1;i=59",
@@ -559,7 +600,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           ParentNodeId = "ns=1;i=55",
           DataType = "i=884",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } },
-        });
+        }, traceMessageCallback);
         NewNode(new UAVariable()
         {
           NodeId = "ns=1;i=55",
@@ -572,7 +613,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               new Reference(){ IsForward=true, ReferenceType = ReferenceTypeIds.HasProperty.ToString(), Value="ns=1;i=59"},
               new Reference(){ IsForward=true, ReferenceType = ReferenceTypeIds.HasTypeDefinition.ToString(), Value = "i=2368" },
             }
-        });
+        }, traceMessageCallback);
         NewNode(new UAMethod()
         {
           NodeId = "ns=1;i=39",
@@ -580,7 +621,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           ParentNodeId = "ns=1;i=30",
           MethodDeclarationId = "ns=1;i=10",
           DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "ChildMethodNewName" } }
-        });
+        }, traceMessageCallback);
         InstanceToTest = NewNode(new UAObject()
         {
           BrowseName = "1:InstanceOfDerivedFromComplexObjectType",
@@ -593,14 +634,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             new Reference() { IsForward = true, ReferenceType = ReferenceTypeIds.HasComponent.ToString(), Value = "ns=1;i=39" },
             new Reference() { IsForward = true, ReferenceType = ReferenceTypeIds.HasTypeDefinition.ToString(), Value = "ns=1;i=16" }
           }
-        }
-        );
+        }, traceMessageCallback);
       }
 
-      #endregion
-
+      #endregion private instrumentation
     }
-    #endregion
 
+    #endregion instrumentation
   }
 }

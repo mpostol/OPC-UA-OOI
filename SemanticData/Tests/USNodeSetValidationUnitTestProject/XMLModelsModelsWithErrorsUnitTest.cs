@@ -142,7 +142,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Assert.AreEqual<string>(BuildError.NodeIdDuplicated.Identifier, _log.TraceList[1].BuildError.Identifier);
         _log.Clear();
         _as.ValidateAndExportModel(m_NameSpace);
-        Assert.AreEqual<int>(0, _log.TraceList.Count);
+        Assert.AreEqual<int>(1, _log.TraceList.Count);
+        Assert.AreEqual<string>(BuildError.ModelContainsErrors.Identifier, _log.TraceList[0].BuildError.Identifier);
       }
     }
 
@@ -199,10 +200,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Assert.IsNotNull(_as);
         _as.ImportUANodeSet(_testDataFileInfo);
         Assert.AreEqual<int>(1, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+        Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
+        _log.Clear();
         _as.ValidateAndExportModel(m_NameSpace);
-        Assert.AreEqual<int>(3, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-        Assert.AreEqual<int>(1, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P0-0001010000").Count<TraceMessage>());
-        Assert.AreEqual<int>(1, (_log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P0-0001050000").Count<TraceMessage>()));
+        Assert.AreEqual<int>(1, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+        Assert.AreEqual<string>(BuildError.ModelContainsErrors.Identifier, _log.TraceList[0].BuildError.Identifier);
       }
     }
 
@@ -217,6 +219,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         IAddressSpaceContext _as = _log.CreateAddressSpaceContext();
         _as.ImportUANodeSet(_testDataFileInfo);
         Assert.AreEqual<int>(2, _log.TraceList.Count());
+        Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
         Assert.AreEqual<string>(BuildError.EmptyBrowseName.Identifier, _log.TraceList[1].BuildError.Identifier);
         _log.Clear();
         _as.ValidateAndExportModel(m_NameSpace);
@@ -237,6 +240,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         IAddressSpaceContext _as = _log.CreateAddressSpaceContext();
         _as.ImportUANodeSet(_testDataFileInfo);
         Assert.AreEqual<int>(1, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+        _log.Clear();
         _as.ValidateAndExportModel(m_NameSpace);
         Assert.AreEqual<int>(4, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
         Assert.AreEqual<int>(3, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502020001").Count<TraceMessage>());
@@ -254,9 +258,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         IAddressSpaceContext _as = _log.CreateAddressSpaceContext();
         _as.ImportUANodeSet(_testDataFileInfo);
         Assert.AreEqual<int>(1, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+        _log.Clear();
         _as.ValidateAndExportModel(m_NameSpace);
-        Assert.AreEqual<int>(2, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-        Assert.AreEqual<int>(1, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0710000001").Count<TraceMessage>());
+        Assert.AreEqual<int>(2, _log.TraceList.Count());
+        Assert.AreEqual<string>(BuildError.UndefinedHasSubtypeTarget.Identifier, _log.TraceList[0].BuildError.Identifier);
+        Assert.AreEqual<string>(BuildError.ModelContainsErrors.Identifier, _log.TraceList[1].BuildError.Identifier);
       }
     }
 

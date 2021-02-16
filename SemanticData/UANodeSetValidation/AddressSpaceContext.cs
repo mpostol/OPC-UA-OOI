@@ -33,12 +33,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="ArgumentNullException">traceEvent - traceEvent - cannot be null</exception>
     public AddressSpaceContext(Action<TraceMessage> traceEvent)
     {
-      m_TraceEvent = traceEvent ?? throw new ArgumentNullException("traceEvent", "traceEvent - cannot be null");
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting creation the OPC UA Address Space."));
+      m_TraceEvent = new ValidationBuildErrorsHandling(traceEvent);
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting creation the OPC UA Address Space."));
       UANodeSet _standard = UANodeSet.ReadUADefinedTypes();
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Address Space - the OPC UA defined has been uploaded."));
-      ImportNodeSet(_standard, traceEvent);
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Address Space - has bee created successfully."));
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Address Space - the OPC UA defined has been uploaded."));
+      ImportNodeSet(_standard);
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Address Space - has bee created successfully."));
     }
 
     #endregion constructor
@@ -69,10 +69,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="System.ArgumentNullException">model;the model cannot be null</exception>
     Uri IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
     {
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.ImportUANodeSet - importing from object model."));
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.ImportUANodeSet - importing from object model."));
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
-      return ImportNodeSet(model, m_TraceEvent);
+      return ImportNodeSet(model);
     }
 
     /// <summary>
@@ -82,13 +82,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="System.IO.FileNotFoundException">The imported file does not exist</exception>
     Uri IAddressSpaceContext.ImportUANodeSet(FileInfo model)
     {
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.ImportUANodeSet - importing form file"));
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.ImportUANodeSet - importing form file"));
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
       if (!model.Exists)
         throw new FileNotFoundException("The imported file does not exist", model.FullName);
       UANodeSet _nodeSet = UANodeSet.ReadModelFile(model);
-      return ImportNodeSet(_nodeSet, m_TraceEvent);
+      return ImportNodeSet(_nodeSet);
     }
 
     /// <summary>
@@ -99,7 +99,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       foreach (IModelTableEntry _nsi in m_NamespaceTable.Models)
       {
         int indes = m_NamespaceTable.GetURIIndex(_nsi.ModelUri);
-        m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering AddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", _nsi.ModelUri)));
+        m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering AddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", _nsi.ModelUri)));
         ValidateAndExportModel(indes);
       }
     }
@@ -111,7 +111,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="System.ArgumentOutOfRangeException">targetNamespace;Cannot find this namespace</exception>
     void IAddressSpaceContext.ValidateAndExportModel(Uri targetNamespace)
     {
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", targetNamespace)));
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", targetNamespace)));
       int _nsIndex = m_NamespaceTable.GetURIIndex(targetNamespace);
       if (_nsIndex == -1)
         throw new ArgumentOutOfRangeException("targetNamespace", "Cannot find this namespace");
@@ -133,7 +133,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (nodeId == defaultValue)
         return null;
-      IUANodeContext _context = TryGetUANodeContext(nodeId, m_TraceEvent);
+      IUANodeContext _context = TryGetUANodeContext(nodeId);
       if (_context == null)
         return null;
       return _context.ExportNodeBrowseName();
@@ -153,7 +153,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DataType = dataType,
         Identifier = new Nullable<int>(),
         Name = argument.Name,
-        ValueRank = argument.ValueRank.GetValueRank(m_TraceEvent)
+        ValueRank = argument.ValueRank.GetValueRank(m_TraceEvent.TraceEvent)
       };
       if (argument.Description != null)
         _ret.AddDescription(argument.Description.Locale, argument.Description.Text);
@@ -274,32 +274,60 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
 
+    //typeS
+
+    //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
+    private class ValidationBuildErrorsHandling : IBuildErrorsHandling
+    {
+      public ValidationBuildErrorsHandling(Action<TraceMessage> traceEvent)
+      {
+        _TraceEvent = traceEvent ?? throw new ArgumentNullException("traceEvent", "traceEvent - cannot be null");
+      }
+
+      #region IBuildErrorsHandling
+
+      public event Action<TraceMessage> TraceEventAction;
+
+      public void TraceEvent(TraceMessage traceMessage)
+      {
+        _TraceEvent(traceMessage);
+        if (traceMessage.BuildError.Focus != Focus.Diagnostic)
+          Errors++;
+      }
+
+      #endregion IBuildErrorsHandling
+
+      internal int Errors { get; private set; } = 0;
+
+      private readonly Action<TraceMessage> _TraceEvent;
+    }
+
     //vars
 
     private IModelFactory m_InformationModelFactory = new InformationModelFactoryBase();
     private Dictionary<string, UAReferenceContext> m_References = new Dictionary<string, UAReferenceContext>();
     private NamespaceTable m_NamespaceTable = new NamespaceTable();
     private Dictionary<string, IUANodeContext> m_NodesDictionary = new Dictionary<string, IUANodeContext>();
-    private readonly Action<TraceMessage> m_TraceEvent = null;
+    private readonly ValidationBuildErrorsHandling m_TraceEvent = null;
 
     //methods
-    private Uri ImportNodeSet(UANodeSet model, Action<TraceMessage> traceEvent)
+    private Uri ImportNodeSet(UANodeSet model)
     {
-      IUAModelContext _modelContext = model.ParseUAModelContext(m_NamespaceTable, traceEvent);
-      traceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext}."));
-      traceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - the context for the imported model is created and starting import nodes."));
+      IUAModelContext _modelContext = model.ParseUAModelContext(m_NamespaceTable, m_TraceEvent.TraceEvent);
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext}."));
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - the context for the imported model is created and starting import nodes."));
       foreach (UANode _nd in model.Items)
-        ImportUANode(_nd, m_TraceEvent);
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage($"Finishing AddressSpaceContext.ImportNodeSet - imported {model.Items.Length} nodes."));
+        ImportUANode(_nd);
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Finishing AddressSpaceContext.ImportNodeSet - imported {model.Items.Length} nodes."));
       return _modelContext.ModelUri;
     }
 
-    private void ImportUANode(UANode node, Action<TraceMessage> traceEvent)
+    private void ImportUANode(UANode node)
     {
       try
       {
         NodeId _nodeId = NodeId.Parse(node.NodeId);
-        IUANodeContext _newNode = GetOrCreateNodeContext(_nodeId, x => new UANodeContext(_nodeId, this, traceEvent) );
+        IUANodeContext _newNode = GetOrCreateNodeContext(_nodeId, x => new UANodeContext(_nodeId, this, m_TraceEvent.TraceEvent));
         _newNode.Update(node, _reference =>
               {
                 if (!m_References.ContainsKey(_reference.Key))
@@ -309,20 +337,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       catch (Exception _ex)
       {
         string _msg = string.Format("ImportUANode {1} is interrupted by exception {0}", _ex.Message, node.NodeId);
-        m_TraceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
+        m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
       }
     }
 
-    private IUANodeContext TryGetUANodeContext(NodeId nodeId, Action<TraceMessage> traceEvent)
+    private IUANodeContext TryGetUANodeContext(NodeId nodeId)
     {
       if (!m_NodesDictionary.TryGetValue(nodeId.ToString(), out IUANodeContext _ret))
       {
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdNotDefined, string.Format("References to node with NodeId: {0} is omitted during the import.", nodeId)));
+        m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdNotDefined, string.Format("References to node with NodeId: {0} is omitted during the import.", nodeId)));
         return null;
       }
       if (_ret.UANode == null)
       {
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdNotDefined, string.Format("NodeId: {0} is omitted during the import.", nodeId)));
+        m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdNotDefined, string.Format("NodeId: {0} is omitted during the import.", nodeId)));
         return null;
       }
       return _ret;
@@ -345,35 +373,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       rootNode.InRecursionChain = false;
     }
 
-    //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
-    private class ValidationBuildErrorsHandling : IBuildErrorsHandling
-    {
-      public ValidationBuildErrorsHandling(Action<TraceMessage> traceEvent)
-      {
-        _TraceEvent = traceEvent;
-      }
-
-      public event Action<TraceMessage> TraceEventAction;
-
-      public void TraceEvent(TraceMessage traceMessage)
-      {
-        _TraceEvent(traceMessage);
-        if (traceMessage.TraceLevel != System.Diagnostics.TraceEventType.Verbose)
-          TraceEventAction?.Invoke(traceMessage);
-      }
-
-      private readonly Action<TraceMessage> _TraceEvent;
-    }
-
     private void ValidateAndExportModel(int nameSpaceIndex)
     {
-      int _errors = 0; 
-      IBuildErrorsHandling traceBuildError = new ValidationBuildErrorsHandling(m_TraceEvent);
-      traceBuildError.TraceEventAction += x => _errors++;
-      IValidator validator = new Validator(this, traceBuildError);
+      IValidator validator = new Validator(this, m_TraceEvent);
       IEnumerable<IUANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
       List<IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
-      IUANodeBase _objects = TryGetUANodeContext(UAInformationModel.ObjectIds.ObjectsFolder, m_TraceEvent);
+      IUANodeBase _objects = TryGetUANodeContext(UAInformationModel.ObjectIds.ObjectsFolder);
       if (_objects is null)
         throw new ArgumentNullException("Cannot find ObjectsFolder in the standard information model");
       IEnumerable<IUANodeContext> _allInstances = m_References.Values.Where<UAReferenceContext>(x => (x.SourceNode.NodeIdContext == ObjectIds.ObjectsFolder) &&
@@ -381,7 +386,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                                                                                                      (x.TargetNode.NodeIdContext.NamespaceIndex == nameSpaceIndex))
                                                                                                      .Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
       _nodes.AddRange(_allInstances);
-      m_TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("AddressSpaceContext.ValidateAndExportModel - selected {0} nodes to be added to the model.", _nodes.Count)));
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("AddressSpaceContext.ValidateAndExportModel - selected {0} nodes to be added to the model.", _nodes.Count)));
       foreach (IModelTableEntry _ns in ExportNamespaceTable)
       {
         string _publicationDate = _ns.PublicationDate.HasValue ? _ns.PublicationDate.Value.ToShortDateString() : DateTime.UtcNow.ToShortDateString();
@@ -400,18 +405,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         catch (Exception _ex)
         {
           _msg = string.Format("Error caught while processing the node {0}. The message: {1} at {2}.", _item.UANode.NodeId, _ex.Message, _ex.StackTrace);
-          m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, _msg));
+          m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, _msg));
         }
       }
-      if (_errors == 0)
+      if (m_TraceEvent.Errors == 0)
       {
         _msg = string.Format("Finishing Validator.ValidateExportModel - the model contains {0} nodes.", _nc);
-        m_TraceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
+        m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
       }
       else
       {
-        _msg = $"Finishing Validator.ValidateExportModel - the model contains {_nc} nodes and {_errors} errors.";
-        m_TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.ModelContainsErrors, _msg));
+        _msg = $"Finishing Validator.ValidateExportModel - the model contains {_nc} nodes and {m_TraceEvent.Errors} errors.";
+        m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.ModelContainsErrors, _msg));
       }
     }
 
@@ -437,7 +442,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [System.Diagnostics.Conditional("DEBUG")]
     internal void UTTryGetUANodeContext(NodeId nodeId, Action<IUANodeContext> returnValue)
     {
-      returnValue(TryGetUANodeContext(nodeId, x => { }));
+      returnValue(TryGetUANodeContext(nodeId));
     }
 
     [System.Diagnostics.Conditional("DEBUG")]

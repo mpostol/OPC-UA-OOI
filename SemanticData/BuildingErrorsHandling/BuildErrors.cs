@@ -7,11 +7,11 @@ namespace UAOOI.SemanticData.BuildingErrorsHandling
   public partial class BuildError
   {
     /// <summary>
-    /// Error: P0-0001010000; Focus: XML; The XML attribute or element is not supported and neglected.
+    /// Error: P0-0001010000; Focus: Diagnostic; The XML attribute or element is not supported and neglected.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P0-0001010000.</value>
     public static BuildError NotSupportedFeature { get { return new BuildError() 
-                  { Focus = Focus.XML, 
+                  { Focus = Focus.Diagnostic, 
                     Identifier = "P0-0001010000", 
                     Descriptor = "The XML attribute or element is not supported and neglected." }; } }
     /// <summary>

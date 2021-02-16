@@ -30,8 +30,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="nodeId">An object of <see cref="NodeId" /> that stores an identifier for a node in a server's address space.</param>
     /// <param name="addressSpaceContext">The address space context.</param>
-    internal UANodeContext(NodeId nodeId, IAddressSpaceBuildContext addressSpaceContext)
+    internal UANodeContext(NodeId nodeId, IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceMessageCallback)
     {
+      _TraceEvent = traceMessageCallback ?? throw new ArgumentNullException(nameof(traceMessageCallback));
       NodeIdContext = nodeId;
       this.m_AddressSpaceContext = addressSpaceContext;
     }
@@ -48,7 +49,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (this.UANode == null)
       {
-        Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The target node NodeId={this.NodeIdContext}, current path {string.Join(", ", path)}"));
+        _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The target node NodeId={this.NodeIdContext}, current path {string.Join(", ", path)}"));
         return;
       }
       IEnumerable<UAReferenceContext> _parentConnector = m_AddressSpaceContext.GetReferences2Me(this).Where<UAReferenceContext>(x => x.ChildConnector);
@@ -78,16 +79,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         throw new ArgumentException(nameof(node), $"Argument must not be null at {nameof(Update)} ");
       if (this.UANode != null)
       {
-        Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, string.Format("The {0} is already defined and is removed from further processing.", node.NodeId.ToString())));
+        _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, string.Format("The {0} is already defined and is removed from further processing.", node.NodeId.ToString())));
         return;
       }
       UANode = node;
-      this.BrowseName = node.BrowseName.Parse(Log.TraceEvent);
+      this.BrowseName = node.BrowseName.Parse(_TraceEvent);
       if (QualifiedName.IsNull(this.BrowseName))
       {
         NodeId _id = NodeId.Parse(UANode.NodeId);
         this.BrowseName = new QualifiedName($"EmptyBrowseName_{_id.IdentifierPart}", _id.NamespaceIndex);
-        Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, $"New identifier {this.BrowseName} is generated to proceed."));
+        _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, $"New identifier {this.BrowseName} is generated to proceed."));
       }
       if (node.References == null)
         return;
@@ -119,7 +120,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     public IUANodeContext CreateUANodeContext(NodeId id)
     {
-      return new UANodeContext(id, m_AddressSpaceContext);
+      return new UANodeContext(id, m_AddressSpaceContext, _TraceEvent);
     }
 
     #endregion IUANodeContext
@@ -157,7 +158,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             if (_ReferenceType == XmlQualifiedName.Empty)
             {
               BuildError _err = BuildError.DanglingReferenceTarget;
-              Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(_err, "Information"));
+              _TraceEvent(TraceMessage.BuildErrorTraceMessage(_err, "Information"));
             }
             IReferenceFactory _or = nodeFactory.NewReference();
             _or.IsInverse = !_rfx.Reference.IsForward;
@@ -229,7 +230,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <value>An instance of <see cref="XmlQualifiedName" /> representing the base type.</value>
     public XmlQualifiedName ExportBaseTypeBrowseName(bool type)
     {
-      return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type, Log.TraceEvent));
+      return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type, _TraceEvent));
     }
 
     /// <summary>
@@ -328,7 +329,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #endregion IEquatable<IUANodeBase>
 
-    public IBuildErrorsHandling Log { get; set; } = BuildErrorsHandling.Log;
+    private Action<TraceMessage> _TraceEvent = null;
 
     #region private
 

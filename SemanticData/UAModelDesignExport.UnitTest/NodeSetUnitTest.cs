@@ -68,7 +68,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       int _diagnosticCounter = 0;
       string uri = "http://cas.eu/UA/CommServer/UnitTests/ReferenceTest";
       ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _expected.Items.Length);
       CompareModelDesign(_expected, _actual);
     }
@@ -82,7 +82,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       int _diagnosticCounter = 0;
       string uri = "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest";
       ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(3, _expected.Items.Length);
       CompareModelDesign(_expected, _actual);
     }
@@ -96,7 +96,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       int _diagnosticCounter = 0;
       string uri = "http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest";
       ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(3, _expected.Items.Length);
       CompareModelDesign(_expected, _actual);
     }
@@ -110,7 +110,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       int _diagnosticCounter = 0;
       string uri = "http://cas.eu/UA/CommServer/UnitTests/DataTypeTest";
       ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(1, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      Assert.AreEqual<int>(2, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(4, _expected.Items.Length);
       CompareModelDesign(_expected, _actual);
     }

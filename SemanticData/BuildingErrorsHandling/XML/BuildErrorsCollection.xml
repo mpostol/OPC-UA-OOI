@@ -2,7 +2,7 @@
 <ns1:BuildErrorsCollection xmlns:ns1="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd" >
   <ns1:ListOfBuildErrors>
     <ns1:NamedBuildError>
-      <ns1:Focus>XML</ns1:Focus>
+      <ns1:Focus>Diagnostic</ns1:Focus>
       <ns1:Identifier>P0-0001010000</ns1:Identifier>
       <ns1:Descriptor>The XML attribute or element is not supported and neglected.</ns1:Descriptor>
       <ns1:Name>NotSupportedFeature</ns1:Name>
@@ -24,6 +24,12 @@
       <ns1:Identifier>P0-0001040000</ns1:Identifier>
       <ns1:Descriptor>NamespaceUris element cannot be null or empty</ns1:Descriptor>
       <ns1:Name>NamespaceUrisCannotBeNull</ns1:Name>
+    </ns1:NamedBuildError>
+    <ns1:NamedBuildError>
+      <ns1:Focus>XML</ns1:Focus>
+      <ns1:Identifier>P0-0001050000</ns1:Identifier>
+      <ns1:Descriptor>Selected model contains errors.</ns1:Descriptor>
+      <ns1:Name>ModelContainsErrors</ns1:Name>
     </ns1:NamedBuildError>
     <ns1:NamedBuildError>
       <ns1:Focus>NonCategorized</ns1:Focus>

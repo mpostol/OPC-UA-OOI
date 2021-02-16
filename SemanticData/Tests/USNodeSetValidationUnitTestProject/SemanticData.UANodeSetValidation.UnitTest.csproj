@@ -79,8 +79,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DataSerialization\QualifiedNameUnitTest.cs" />
-    <Compile Include="Helpers\TraceHelper.cs" />
-    <Compile Include="Helpers\HelpersUnitTest.cs" />
+    <Compile Include="Helpers\TracedAddressSpaceContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

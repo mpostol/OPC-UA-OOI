@@ -80,6 +80,24 @@
   <ItemGroup>
     <Compile Include="DataSerialization\QualifiedNameUnitTest.cs" />
     <Compile Include="Helpers\TracedAddressSpaceContext.cs" />
+    <Compile Include="InformationModelFactory\Class1.cs" />
+    <Compile Include="InformationModelFactory\DataTypeDefinitionFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\DataTypeFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\DataTypeFieldFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\InformationModelFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\InstanceFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\MethodInstanceFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\NodeFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\NodesContainer.cs" />
+    <Compile Include="InformationModelFactory\ObjectInstanceFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\ObjectTypeFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\PropertyInstanceFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\ReferenceFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\ReferenceTypeFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\TypeFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\VariableInstanceFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\VariableTypeFactoryBase.cs" />
+    <Compile Include="InformationModelFactory\ViewInstanceFactoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

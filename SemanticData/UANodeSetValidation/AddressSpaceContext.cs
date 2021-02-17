@@ -378,6 +378,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       IValidator validator = new Validator(this, m_TraceEvent);
       IEnumerable<IUANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
       List<IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Selected {_nodes.Count} types to be validated."));
       IUANodeBase _objects = TryGetUANodeContext(UAInformationModel.ObjectIds.ObjectsFolder);
       if (_objects is null)
         throw new ArgumentNullException("Cannot find ObjectsFolder in the standard information model");
@@ -385,41 +386,38 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                                                                                                      (x.TypeNode.NodeIdContext == ReferenceTypeIds.Organizes) &&
                                                                                                      (x.TargetNode.NodeIdContext.NamespaceIndex == nameSpaceIndex))
                                                                                                      .Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Selected {_allInstances.Count<IUANodeContext>()} instances referenced by the ObjectsFolder to be validated."));
       _nodes.AddRange(_allInstances);
-      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("AddressSpaceContext.ValidateAndExportModel - selected {0} nodes to be added to the model.", _nodes.Count)));
       foreach (IModelTableEntry _ns in ExportNamespaceTable)
       {
         string _publicationDate = _ns.PublicationDate.HasValue ? _ns.PublicationDate.Value.ToShortDateString() : DateTime.UtcNow.ToShortDateString();
         string _version = _ns.Version;
         InformationModelFactory.CreateNamespace(_ns.ModelUri.ToString(), _publicationDate, _version);
       }
-      string _msg = null;
-      int _nc = 0;
       foreach (IUANodeBase _item in _nodes)
       {
         try
         {
-          validator.ValidateExportNode(_item, InformationModelFactory, null); //y =>
-          _nc++;
+          validator.ValidateExportNode(_item, InformationModelFactory);
         }
         catch (Exception _ex)
         {
-          _msg = string.Format("Error caught while processing the node {0}. The message: {1} at {2}.", _item.UANode.NodeId, _ex.Message, _ex.StackTrace);
-          m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, _msg));
+          string msg = string.Format("Error caught while processing the node {0}. The message: {1} at {2}.", _item.UANode.NodeId, _ex.Message, _ex.StackTrace);
+          m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, msg));
         }
       }
+      string _msg = null;
       if (m_TraceEvent.Errors == 0)
       {
-        _msg = string.Format("Finishing Validator.ValidateExportModel - the model contains {0} nodes.", _nc);
+        _msg = string.Format("Finishing Validator.ValidateExportModel - the model contains {0} nodes.", _nodes.Count);
         m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
       }
       else
       {
-        _msg = $"Finishing Validator.ValidateExportModel - the model contains {_nc} nodes and {m_TraceEvent.Errors} errors.";
+        _msg = $"Finishing Validator.ValidateExportModel - the model contains {_nodes.Count} nodes and {m_TraceEvent.Errors} errors.";
         m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.ModelContainsErrors, _msg));
       }
     }
-
     #endregion private
 
     #region Unit Test

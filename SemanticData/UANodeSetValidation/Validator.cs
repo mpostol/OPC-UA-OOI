@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -26,15 +26,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   {
     public Validator(IAddressSpaceBuildContext addressSpace, IBuildErrorsHandling traceBuildErrorsHandling)
     {
-      AS = addressSpace;
-      Log = traceBuildErrorsHandling;
-
+      m_AddressSpace = addressSpace;
+      m_buildErrorsHandling = traceBuildErrorsHandling;
     }
 
-    private readonly IAddressSpaceBuildContext AS;
-    public readonly IBuildErrorsHandling Log;
-
     #region internal API
+
+    /// <summary>
+    /// Validates <paramref name="nodeContext" /> and exports it using an object of <see cref="IModelFactory" />  type.
+    /// </summary>
+    /// <param name="nodeContext">The node context to be validated and exported.</param>
+    /// <param name="exportFactory">A model export factory.</param>
+    public void ValidateExportNode(IUANodeBase nodeContext, INodeContainer exportFactory)
+    {
+      ValidateExportNode(nodeContext, exportFactory, null);
+    }
 
     /// <summary>
     /// Validates <paramref name="nodeContext" /> and exports it using an object of <see cref="IModelFactory" />  type.
@@ -56,7 +62,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         else
           _be = BuildError.UndefinedHasComponentTarget;
         TraceMessage _traceMessage = TraceMessage.BuildErrorTraceMessage(_be, _msg);
-        Log.TraceEvent(_traceMessage);
+        m_buildErrorsHandling.TraceEvent(_traceMessage);
         CreateModelDesignStub(exportFactory);
       }
       else
@@ -108,6 +114,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
 
+    // vars
+
+    private readonly IAddressSpaceBuildContext m_AddressSpace;
+    private readonly IBuildErrorsHandling m_buildErrorsHandling;
+
     private static ApplicationException InstanceDeclarationNotSupported(NodeClassEnum nodeClass)
     {
       return new ApplicationException($"{nodeClass} doesn't support instance declarations");
@@ -115,7 +126,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     private void Update(IObjectInstanceFactory nodeDesign, UAObject nodeSet)
     {
-      nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(Log.TraceEvent);
+      nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(m_buildErrorsHandling.TraceEvent);
     }
 
     private void Update(IPropertyInstanceFactory propertyInstance, UAVariable nodeSet, IUANodeBase nodeContext, UAReferenceContext parentReference)
@@ -125,11 +136,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Update(propertyInstance, nodeSet);
         propertyInstance.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName();
         if (!nodeContext.IsProperty)
-          Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, $"Creating Property {nodeContext.BrowseName}- wrong reference type {parentReference.ReferenceKind.ToString()}"));
+          m_buildErrorsHandling.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, $"Creating Property {nodeContext.BrowseName}- wrong reference type {parentReference.ReferenceKind.ToString()}"));
       }
       catch (Exception _ex)
       {
-        Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, string.Format("Cannot resolve the reference for Property because of error {0} at: {1}.", _ex, _ex.StackTrace)));
+        m_buildErrorsHandling.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, string.Format("Cannot resolve the reference for Property because of error {0} at: {1}.", _ex, _ex.StackTrace)));
       }
     }
 
@@ -140,33 +151,33 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Update(variableInstance, nodeSet);
         variableInstance.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName();
         if (nodeContext.IsProperty)
-          Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Variable, string.Format("Creating Variable - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
+          m_buildErrorsHandling.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Variable, string.Format("Creating Variable - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
       }
       catch (Exception _ex)
       {
-        Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, string.Format("Cannot resolve the reference for Variable because of error {0} at: {1}.", _ex, _ex.StackTrace)));
+        m_buildErrorsHandling.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, string.Format("Cannot resolve the reference for Variable because of error {0} at: {1}.", _ex, _ex.StackTrace)));
       }
     }
 
     private void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet)
     {
-      nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(Log.TraceEvent);
+      nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(m_buildErrorsHandling.TraceEvent);
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(string.Empty);
-      nodeDesign.DataType = string.IsNullOrEmpty(nodeSet.DataType) ? null : AS.ExportBrowseName(NodeId.Parse(nodeSet.DataType), DataTypes.Number);//TODO add test case must be DataType, must not be abstract
+      nodeDesign.DataType = string.IsNullOrEmpty(nodeSet.DataType) ? null : m_AddressSpace.ExportBrowseName(NodeId.Parse(nodeSet.DataType), DataTypes.Number);//TODO add test case must be DataType, must not be abstract
       nodeDesign.DefaultValue = nodeSet.Value; //TODO add test case must be of type defined by DataType
       nodeDesign.Historizing = nodeSet.Historizing.Export(false);
       nodeDesign.MinimumSamplingInterval = nodeSet.MinimumSamplingInterval.Export(0D);
-      nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(Log.TraceEvent);
+      nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(m_buildErrorsHandling.TraceEvent);
       if (nodeSet.Translation != null)
-        Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "- the Translation element for the UAVariable"));
+        m_buildErrorsHandling.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "- the Translation element for the UAVariable"));
     }
 
     private void Update(IVariableTypeFactory nodeDesign, UAVariableType nodeSet)
     {
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(string.Empty);
-      nodeDesign.DataType = AS.ExportBrowseName(NodeId.Parse(nodeSet.DataType), DataTypes.Number);
+      nodeDesign.DataType = m_AddressSpace.ExportBrowseName(NodeId.Parse(nodeSet.DataType), DataTypes.Number);
       nodeDesign.DefaultValue = nodeSet.Value;
-      nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(Log.TraceEvent);
+      nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(m_buildErrorsHandling.TraceEvent);
     }
 
     private void Update(IMethodInstanceFactory nodeDesign, UAMethod nodeSet, UAReferenceContext parentReference)
@@ -190,15 +201,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private void Update(IViewInstanceFactory nodeDesign, UAView nodeSet)
     {
       nodeDesign.ContainsNoLoops = nodeSet.ContainsNoLoops;//TODO add test case against the loops in the model.
-      nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(Log.TraceEvent);
+      nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(m_buildErrorsHandling.TraceEvent);
     }
 
     private void Update(IDataTypeFactory nodeDesign, UADataType nodeSet)
     {
-      nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), AS, Log.TraceEvent);
+      nodeSet.Definition.GetParameters(nodeDesign.NewDefinition(), m_AddressSpace, m_buildErrorsHandling.TraceEvent);
       nodeDesign.DataTypePurpose = nodeSet.Purpose.ConvertToDataTypePurpose();
       if (nodeSet.Purpose != XML.DataTypePurpose.Normal)
-        Log.TraceEvent(TraceMessage.DiagnosticTraceMessage($"DataTypePurpose value {nodeSet.Purpose } is not supported by the tool"));
+        m_buildErrorsHandling.TraceEvent(TraceMessage.DiagnosticTraceMessage($"DataTypePurpose value {nodeSet.Purpose } is not supported by the tool"));
     }
 
     private void Update(IReferenceTypeFactory nodeDesign, UAReferenceType nodeSet)
@@ -208,10 +219,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (nodeSet.Symmetric && (nodeSet.InverseName != null && nodeSet.InverseName.Where(x => !string.IsNullOrEmpty(x.Value)).Any()))
       {
         XML.LocalizedText _notEmpty = nodeSet.InverseName.Where(x => !string.IsNullOrEmpty(x.Value)).First();
-        Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongInverseName, string.Format("If ReferenceType {0} is symmetric the InverseName {1}:{2} shall be omitted.", nodeSet.NodeIdentifier(), _notEmpty.Locale, _notEmpty.Value)));
+        m_buildErrorsHandling.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongInverseName, string.Format("If ReferenceType {0} is symmetric the InverseName {1}:{2} shall be omitted.", nodeSet.NodeIdentifier(), _notEmpty.Locale, _notEmpty.Value)));
       }
       else if (!nodeSet.Symmetric && !nodeSet.IsAbstract && (nodeSet.InverseName == null || !nodeSet.InverseName.Where(x => !string.IsNullOrEmpty(x.Value)).Any()))
-        Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongInverseName, string.Format("If ReferenceType {0} is not symmetric and not abstract the InverseName shall be specified.", nodeSet.NodeIdentifier())));
+        m_buildErrorsHandling.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongInverseName, string.Format("If ReferenceType {0} is not symmetric and not abstract the InverseName shall be specified.", nodeSet.NodeIdentifier())));
     }
 
     private void Update(IObjectTypeFactory nodeDesign, UAObjectType nodeSet)
@@ -234,24 +245,24 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       XmlQualifiedName _browseName = nodeContext.ExportNodeBrowseName();
       string _symbolicName;
       if (string.IsNullOrEmpty(_nodeSet.SymbolicName))
-        _symbolicName = _browseName.Name.ValidateIdentifier(Log.TraceEvent); //TODO IsValidLanguageIndependentIdentifier is not supported by the .NET standard #340
+        _symbolicName = _browseName.Name.ValidateIdentifier(m_buildErrorsHandling.TraceEvent); //TODO IsValidLanguageIndependentIdentifier is not supported by the .NET standard #340
       else
-        _symbolicName = _nodeSet.SymbolicName.ValidateIdentifier(Log.TraceEvent); //TODO IsValidLanguageIndependentIdentifier is not supported by the .NET standard #340
+        _symbolicName = _nodeSet.SymbolicName.ValidateIdentifier(m_buildErrorsHandling.TraceEvent); //TODO IsValidLanguageIndependentIdentifier is not supported by the .NET standard #340
       _nodeFactory.BrowseName = _browseName.Name.ExportString(_symbolicName);
       _nodeSet.Description.ExportLocalizedTextArray(_nodeFactory.AddDescription);
-      _nodeSet.DisplayName.Truncate(512, Log.TraceEvent).ExportLocalizedTextArray(_nodeFactory.AddDisplayName);
+      _nodeSet.DisplayName.Truncate(512, m_buildErrorsHandling.TraceEvent).ExportLocalizedTextArray(_nodeFactory.AddDisplayName);
       _nodeFactory.SymbolicName = new XmlQualifiedName(_symbolicName, _browseName.Namespace);
       Action<uint, string> _doReport = (x, y) =>
       {
-        Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongWriteMaskValue, string.Format("The current value is {0:x} of the node type {1}.", x, y)));
+        m_buildErrorsHandling.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongWriteMaskValue, string.Format("The current value is {0:x} of the node type {1}.", x, y)));
       };
       _nodeFactory.WriteAccess = _nodeSet is UAVariable ? _nodeSet.WriteMask.Validate(0x200000, x => _doReport(x, _nodeSet.GetType().Name)) : _nodeSet.WriteMask.Validate(0x400000, x => _doReport(x, _nodeSet.GetType().Name));
       _nodeFactory.AccessRestrictions = ConvertToAccessRestrictions(_nodeSet.AccessRestrictions, _nodeSet.GetType().Name);
       _nodeFactory.Category = _nodeSet.Category;
       if (_nodeSet.RolePermissions != null)
-        Log.TraceEvent(TraceMessage.DiagnosticTraceMessage("RolePermissions is not supported. You must fix it manually."));
+        m_buildErrorsHandling.TraceEvent(TraceMessage.DiagnosticTraceMessage("RolePermissions is not supported. You must fix it manually."));
       if (!string.IsNullOrEmpty(_nodeSet.Documentation))
-        Log.TraceEvent(TraceMessage.DiagnosticTraceMessage("Documentation is not supported. You must fix it manually."));
+        m_buildErrorsHandling.TraceEvent(TraceMessage.DiagnosticTraceMessage("Documentation is not supported. You must fix it manually."));
       updateBase(_nodeFactory, _nodeSet, nodeContext);
       updateNode(_nodeFactory, _nodeSet);
     }
@@ -260,7 +271,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (accessRestrictions > 7)
       {
-        Log.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongAccessLevel, $"The current value is {accessRestrictions} of the node type {typeName}. Assigned max value"));
+        m_buildErrorsHandling.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongAccessLevel, $"The current value is {accessRestrictions} of the node type {typeName}. Assigned max value"));
         return AccessRestrictions.EncryptionRequired & AccessRestrictions.SessionRequired & AccessRestrictions.SigningRequired;
       }
       return (AccessRestrictions)accessRestrictions;
@@ -300,7 +311,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       List<Parameter> _parameters = new List<Parameter>();
       foreach (DataSerialization.Argument _item in arguments.GetParameters())
-        _parameters.Add(AS.ExportArgument(_item));
+        _parameters.Add(m_AddressSpace.ExportArgument(_item));
       return _parameters.ToArray();
     }
 

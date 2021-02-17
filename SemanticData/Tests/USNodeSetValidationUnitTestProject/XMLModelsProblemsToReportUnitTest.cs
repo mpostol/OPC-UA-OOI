@@ -7,10 +7,12 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.Helpers;
+using UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -57,11 +59,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       using (TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext())
       {
         IAddressSpaceContext addressSpace = traceContext.CreateAddressSpaceContext();
+        InformationModelFactoryBase testingModelFixture = new InformationModelFactoryBase();
+        addressSpace.InformationModelFactory = testingModelFixture;
         Uri model = addressSpace.ImportUANodeSet(_testDataFileInfo);
         Assert.AreEqual<int>(0, traceContext.TraceList.Count);
         traceContext.Clear();
         addressSpace.ValidateAndExportModel(model);
         Assert.AreEqual<int>(0, traceContext.TraceList.Count);
+        Assert.AreEqual(8, testingModelFixture.NumberOfNodes);
+        Debug.WriteLine($"After removing inherited and instance declaration nodes the recovered information model contains {testingModelFixture.NumberOfNodes}");
       }
     }
 

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
@@ -33,7 +34,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
 
     private void TraceDiagnostic(TraceMessage msg, List<TraceMessage> errors, ref int diagnosticCounter)
     {
-      Console.WriteLine(msg.ToString());
+      Debug.WriteLine(msg.ToString());
       if (msg.BuildError.Focus == Focus.Diagnostic)
         diagnosticCounter++;
       else

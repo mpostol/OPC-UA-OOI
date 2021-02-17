@@ -142,6 +142,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="nodeFactory">The node container.</param>
     /// <param name="validator">The validator.</param>
     /// <exception cref="ArgumentNullException"><paramref name="nodeFactory"/> must not be null.</exception>
+    //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
     void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, IValidator validator)
     {
       if (nodeFactory == null)
@@ -182,7 +183,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case ReferenceKindEnum.HasSubtype:
             break;
 
-          case ReferenceKindEnum.HasTypeDefinition: //Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
+          case ReferenceKindEnum.HasTypeDefinition: //TODO Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
             IsProperty = _rfx.TargetNode.IsPropertyVariableType;
             break;
         }
@@ -196,7 +197,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           if (!string.IsNullOrEmpty(_rc.TargetNode.BrowseName.Name))
             _instanceDeclaration = _derivedChildren.ContainsKey(_rc.TargetNode.BrowseName.Name) ? _derivedChildren[_rc.TargetNode.BrowseName.Name] : null;
           if (_rc.TargetNode.Equals(_instanceDeclaration))
+          {
+            //_TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removing instance declaration {_rc.TargetNode.ToString()}"));
             continue;
+          }
           _rc.TargetNode.RemoveInheritedValues(_instanceDeclaration);
           validator.ValidateExportNode(_rc.TargetNode, nodeFactory, _rc);
         }

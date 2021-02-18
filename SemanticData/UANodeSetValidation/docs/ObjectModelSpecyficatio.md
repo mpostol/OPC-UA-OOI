@@ -31,12 +31,27 @@ The collection of these nodes is called the Address Space. OPC UA Address Space 
 
 ### Introduction
 
+To instantiate the Address Space we need to deal with naming, addressing, and meaning of the nodes. Appropriate naming is helpful in the **human-centric** environment, especially at the design-time. Proper addressing is essential for **machine-centric** environment, especially at the run-time. Designing appropriate rules applied to make the Address Space meaningful is necessary for both and must be addressed by the information model design process. All mentioned above aspects are tightly coupled and contribute to the design process.  The design process can be backed by:
+
+- design conventions - contributing to design best practice rules
+- OPC UA concepts - as a foundation of AS deployment addressing a selected process requirements
+- design tool - to author reusable in the multi-vendor market comprehensive information model 
+
+The following section covers a detailed description of the design conventions to improve reusability, comprehensiveness and minimize the deployment costs in the production environment.
+
+OPC UA engages the following concepts supporting the mentioned above topics, namely naming, addressing, and meaning associations:
+
+- BrowseName attribute - to support browsing and meaning association  
+- DisplayName attribute - to enable comprehensive description using native languages
+- NodeId attribute - to implement the nodes direct addressing
+- Reference - to apply nodes relationship information
+- Type concept - to provide metadata used as a meaningful context for the process data.
+
 OPC UA defines two attributes containing naming information about an OPC UA Node, the BrowseName and the DisplayName.
 
 Recommendations for DisplayName will be given in a later version of this document.
 
-The BrowseName is of DataType QualifiedName, containing a NamespaceIndex and a String. Unless
-the BrowseName is defined in some other Namespace or there is some specific handling for the BrowseName, the Namespace for the BrowseName should be the one the Node is defined in (i.e. the same Namespace as the NodeId). Nodes defined in a Companion Specification should use the Namespace of the Companion Specification for their NodeIds and BrowseNames.
+The BrowseName is of DataType QualifiedName, containing a NamespaceIndex and a String. Unless the BrowseName is defined in some other Namespace or there is some specific handling for the BrowseName, the Namespace for the BrowseName should be the one the Node is defined in (i.e. the same Namespace as the NodeId). Nodes defined in a Companion Specification should use the Namespace of the Companion Specification for their NodeIds and BrowseNames.
 For the string-part the following naming conventions apply:
 
 ### General Rules for BrowseNames

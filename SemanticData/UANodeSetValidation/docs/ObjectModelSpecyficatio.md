@@ -1,5 +1,70 @@
 # OPC UA Object Model Working Notes
 
+## Address Space Concept Executive Summary
+
+The primary objective of the OPC UA application is to expose information that can be used by other OPC UA applications aimed at managing an underlying process with the main challenge of integrating systems into one homogeneous foundation. It requires an exchange of information over a computer network as bitstreams. To make the information available for further processing by computer systems it must be assured that it is:
+
+- **transferable** – there must exist mechanisms to transfer the data over the network
+- **meaningful** – there must exist rules (unambiguous for all interoperating parties) on how to map the meaning and bitstreams (data)
+- **addressable** – there must exist services to selectively access the data
+
+To promote interoperability in the multi-vendor environment the services fulfilling appropriate functionality must be standardized.
+
+The discussion related to the data transfer is outside the scope of this document and will be skipped.
+
+Based on the role humans take while using OPC UA applications they can be grouped as follows:
+
+- **human-centric** - information origin or ultimate information destination is an operator,
+- **machine-centric** - information creation, consumption, networking, and processing are achieved entirely without human interaction.
+
+A typical **human-centric** approach is a web-service supporting, for example, a web user interface (UI) to monitor conditions and manage millions of devices and their data in a typical cloud-based IoT approach. In this case, it is characteristic that any uncertainty and necessity to make a decision can be relaxed by human interaction. Coordination of robot behaviors in a work-cell (automation islands) is a **machine-centric** example. In this case, any human interaction must be recognized as impractical or even impossible. This interconnection scenario requires machine to machine communication (M2M) demanding the integration of multi-vendor devices.
+
+To leverage the **meaningful** data distribution, the OPC UA engages rules derived from the object-oriented programming concept. Following this approach types are commonly used to describe the data semantics (to assign meaning to the bitstreams). For example, using Int32 we are dealing with a set of numbers that can be represented as bitstreams 32 bits long. Unfortunately, sometimes it is not enough. Let assume that we are going to use these numbers to express the age in a personal record. In the  **human-centric** environment, we can use the appropriate names derived from the native language of the data placeholders called variables. For the **machine-centric** case, the multi-vendor environment must be considered. A typical approach to deal with this environment is the usage of names defined by a commonly acceptable standardization body. To make the name unambiguous for all vendors it must be globally unique.
+
+Generally speaking, to select a particular target piece of complex data we have two options: **random access** or **browsing**. **Random-access** requires that the target item must have been assigned a unique address that must be known in advance by a selection operation. The browsing approach means that the data consumer walks down available paths from an entity to an entity that builds up the structure of compound data - a data graph - using references interconnecting entities. It is necessary if we need to represent a relationship between data components. As an example, consider a family tree containing a graph of personal records. The browsing process is costly because instead of jumping to a target, we need to traverse the graph step by step using references. The main advantage of this approach is that the data consumer do not need any prior knowledge of the data structure. To minimize the cost, after having found the target as the result of browsing the graph, every operation targeting it can use direct access. Random access is possible only if the browsing path is convertible to a unique direct address or selected targets have well know addresses assigned by a standardization body.
+
+It seems that, despite the access method, we have to assign an address to all of the accessible entities in the representation of the process data structure. In this concept, this atomic addressable entity is called a node. Each node is a collection of attributes (value-holders) that have values accessible locally in the context of the node. To enable browsing the internal structure of the nodes graph (relationship information), nodes are interconnected by references (address-holders of coupled nodes). Taking into consideration that the browse mechanism is based on the incremental and relative passage along the path of a node, we can easily find out that each path must have a defined entry point, so we must address the question of where to start.
+
+The collection of these nodes is called the Address Space. OPC UA Address Space concept is all about exposing the process data in a standard way. The main goal of exposing a graph of nodes as one whole is to create a meaningful context for the underlying process data. To create the Address Space, we need to instantiate nodes and interconnect them by references.
+
+## Naming Conventions for Nodes
+
+### Introduction
+
+To instantiate the Address Space we need to deal with naming, addressing, and meaning of the nodes. Appropriate naming is helpful in the **human-centric** environment, especially at the design-time. Proper addressing is essential for **machine-centric** environment, especially at the run-time. Designing appropriate rules applied to make the Address Space meaningful is necessary for both and must be addressed by the information model design process. All mentioned above aspects are tightly coupled and contribute to the design process.  The design process can be backed by:
+
+- design conventions - contributing to design best practice rules
+- OPC UA concepts - as a foundation of AS deployment addressing a selected process requirements
+- design tool - to author reusable in the multi-vendor market comprehensive information model 
+
+The following section covers a detailed description of the design conventions to improve reusability, comprehensiveness and minimize the deployment costs in the production environment.
+
+OPC UA engages the following concepts supporting the mentioned above topics, namely naming, addressing, and meaning associations:
+
+- BrowseName attribute - to support browsing and meaning association  
+- DisplayName attribute - to enable comprehensive description using native languages
+- NodeId attribute - to implement the nodes direct addressing
+- Reference - to apply nodes relationship information
+- Type concept - to provide metadata used as a meaningful context for the process data.
+
+OPC UA defines two attributes containing naming information about an OPC UA Node, the BrowseName and the DisplayName.
+
+Recommendations for DisplayName will be given in a later version of this document.
+
+The BrowseName is of DataType QualifiedName, containing a NamespaceIndex and a String. Unless the BrowseName is defined in some other Namespace or there is some specific handling for the BrowseName, the Namespace for the BrowseName should be the one the Node is defined in (i.e. the same Namespace as the NodeId). Nodes defined in a Companion Specification should use the Namespace of the Companion Specification for their NodeIds and BrowseNames.
+For the string-part the following naming conventions apply:
+
+### General Rules for BrowseNames
+
+All BrowseNames should be upper camel case (also known as PascalCase), that is, all words written without spaces, and the first character of each word is upper case, the other characters are lower case. Examples: ReferenceType, BaseObjectType, Int32.
+
+If an acronym or abbreviation is used, upper camel case should also be used. Examples: PortMacAddress (where MAC is an acronym for Media Access Control), NodeId (where ID is an
+abbreviation for identification), UInt32 (where U is an abbreviation for unsigned). In general, it is recommended to only use letters, digits or the underscore (‘_’) as characters for the BrowseName for TypeDefinitions (ObjectTypes, VariableTypes, DataTypes, ReferenceTypes and InstanceDeclarations), unless it is explicitly defined like “<” and “>” for optional placeholders.
+
+> Remark: If special chars like “&”, “<”, etc. are used, the NodeSet-File should define the optional SymbolicName for that Node. This can then be used for code generation.
+
+There is no recommendation on the use of prefixes. Companion specifications may use a prefix because it suits their model. For example, if the Vision companion specification were to define types based on generic concepts (say a state machine), then using the prefix “Vision” may make sense (as in “VisionStateMachineType”).
+
 ## UANodeSet validation
 
 ### XML Import validation
@@ -20,9 +85,7 @@ The NamespaceUri for all NodeIds defined in this document is defined in Annex A.
 
 Namespaces are used by OPC UA to create unique identifiers across different naming authorities. The Attributes NodeId and BrowseName are identifiers. A Node in the UA AddressSpace is unambiguously identified using a NodeId. Unlike NodeIds, the BrowseName cannot be used to unambiguously identify a Node. Different Nodes may have the same BrowseName. They are used to build a browse path between two Nodes or to define a standard Property.
 
-## Inheritance
-
-This approach is commonly used in object-oriented programming languages in which the variables of a class are defined as instances of other classes. When the class is instantiated, each variable is also instantiated, but with the default values (constructor values) defined for the containing class. That is, typically, the constructor for the component class runs first, followed by the constructor for the containing class. The constructor for the containing class may override component values set by the component class.
+## AS graph
 
 `HasSubtype` References are used to define subtypes of `ReferenceTypes`. It is not required to provide the HasSubtype Reference for the supertype. 
 

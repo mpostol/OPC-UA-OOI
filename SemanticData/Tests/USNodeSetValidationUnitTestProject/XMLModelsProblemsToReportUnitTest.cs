@@ -7,12 +7,13 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.Helpers;
-using UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory;
+using UAOOI.SemanticData.UANodeSetValidation.ModelFactoryTestingFixture;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -59,15 +60,33 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       using (TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext())
       {
         IAddressSpaceContext addressSpace = traceContext.CreateAddressSpaceContext();
-        InformationModelFactoryBase testingModelFixture = new InformationModelFactoryBase();
+        ModelFactoryTestingFixture.InformationModelFactoryBase testingModelFixture = new InformationModelFactoryBase();
         addressSpace.InformationModelFactory = testingModelFixture;
         Uri model = addressSpace.ImportUANodeSet(_testDataFileInfo);
         Assert.AreEqual<int>(0, traceContext.TraceList.Count);
         traceContext.Clear();
         addressSpace.ValidateAndExportModel(model);
-        Assert.AreEqual<int>(0, traceContext.TraceList.Count);
-        Assert.AreEqual(8, testingModelFixture.NumberOfNodes);
-        Debug.WriteLine($"After removing inherited and instance declaration nodes the recovered information model contains {testingModelFixture.NumberOfNodes}");
+        Assert.AreEqual<int>(5, traceContext.TraceList.Count);
+        IEnumerable<NodeFactoryBase> nodes = testingModelFixture.Export();
+        Assert.AreEqual(21, nodes.Count< NodeFactoryBase>());
+        Dictionary<string, NodeFactoryBase> nodesDictionary = nodes.ToDictionary<NodeFactoryBase, string>(x => x.SymbolicName.Name);
+        AddressSpaceContext asContext = addressSpace as AddressSpaceContext;
+        IEnumerable<IUANodeContext> allNodes = null;
+        asContext.UTValidateAndExportModel(1, x => allNodes = x);
+        Assert.IsNotNull(allNodes);
+        List<IUANodeContext> orphanedNodes = new List<IUANodeContext>();
+        foreach (IUANodeContext item in allNodes)
+        {
+          if (!nodesDictionary.ContainsKey(item.BrowseName.Name))
+          {
+            orphanedNodes.Add(item);
+            Debug.WriteLine($"{item.ToString()}");
+          }
+        }
+          //Assert.AreEqual(4, testingModelFixture.NumberOfSelectedNodes<ObjectTypeFactoryBase>());
+        //Assert.AreEqual(3, testingModelFixture.NumberOfSelectedNodes<DataTypeFactoryBase>());
+        //Assert.AreEqual(1, testingModelFixture.NumberOfSelectedNodes<VariableTypeFactoryBase>());
+        Debug.WriteLine($"After removing inherited and instance declaration nodes the recovered information model contains {nodes.Count<NodeFactoryBase>()}");
       }
     }
 

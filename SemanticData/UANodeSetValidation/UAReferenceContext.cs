@@ -117,6 +117,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _ret = ModelingRules.OptionalPlaceholder;
       return _ret;
     }
+    /// <summary>
+    /// Gets the parent node that the reference is attached to.
+    /// </summary>
+    /// <value>An instance of the <see cref="IUANodeContext"/> of the parent node.</value>
     internal IUANodeContext ParentNode { get; private set; }
     /// <summary>
     /// Gets the target node context.

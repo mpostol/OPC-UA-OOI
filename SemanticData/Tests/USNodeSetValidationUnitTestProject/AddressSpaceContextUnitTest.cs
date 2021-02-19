@@ -87,26 +87,73 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       Assert.ThrowsException<ArgumentNullException>(() => _as.ImportUANodeSet(_ns));
       FileInfo _fi = null;
       Assert.ThrowsException<ArgumentNullException>(() => _as.ImportUANodeSet(_fi));
-    }
-
-    [TestMethod]
-    [TestCategory("AddressSpaceContext")]
-    [ExpectedException(typeof(FileNotFoundException))]
-    public void AddressSpaceContextNotExistingFileName()
-    {
-      IAddressSpaceContext _as = new AddressSpaceContext(x => { });
-      FileInfo _fi = new FileInfo("NotExistingFileName.xml");
+      _fi = new FileInfo("NotExistingFileName.xml");
       Assert.IsFalse(_fi.Exists);
-      _as.ImportUANodeSet(_fi);
+      Assert.ThrowsException<FileNotFoundException>(() => _as.ImportUANodeSet(_fi));
     }
-
+    [TestMethod]
+    public void ImportUANodeSetTest()
+    {
+      UANodeSet newNodeSet = TestData.CreateNodeSetModel();
+      newNodeSet.Items = new UANode[]
+      {
+        //<UAObjectType NodeId="ns=1;i=12" BrowseName="1:VehicleType">
+        //    <DisplayName>VehicleType</DisplayName>
+        //    <References>
+        //        <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
+        //    </References>
+        //</UAObjectType>
+        new UAObjectType()
+        {
+          NodeId = "ns=1;i=12",
+          BrowseName = "1:VehicleType",
+          References = new Reference[]
+          {
+            new Reference() { ReferenceType = ReferenceTypeIds.HasSubtype.ToString(), IsForward = false,  Value = "i=58" }
+          },
+        },
+        //<UAVariable DataType="DateTime" NodeId="ns=1;i=13" BrowseName="buildDate" ParentNodeId="ns=1;i=12">
+        //  <DisplayName>buildDate</DisplayName>
+        //  <References>
+        //     <Reference ReferenceType="HasProperty" IsForward="false">ns=1; i = 12 </Reference>
+        //     <Reference ReferenceType = "HasTypeDefinition" > i = 63 </ Reference >
+        //     <Reference ReferenceType = "HasModellingRule" > i = 78 </ Reference >
+        //   </ References >
+        //</ UAVariable >
+        new UAVariable()
+        {
+          NodeId = "ns=1;i=13",
+          BrowseName = "buildDate",
+          ParentNodeId="ns=1;i=12",
+          DataType="DateTime",
+          References = new Reference[]
+          {
+            new Reference() { ReferenceType=ReferenceTypeIds.HasProperty.ToString(),  IsForward=false, Value = "ns=1;i=12" },
+            new Reference() { ReferenceType =ReferenceTypeIds.HasTypeDefinition.ToString(), Value = "i=63" },
+            new Reference() { ReferenceType = ReferenceTypeIds.HasModellingRule.ToString(),  Value = "i=78" }
+          }
+         }
+      };
+      List<TraceMessage> _traceLog = new List<TraceMessage>();
+      AddressSpaceContext asp = new AddressSpaceContext(x => _traceLog.Add(x));
+      ((IAddressSpaceContext)asp).ImportUANodeSet(newNodeSet);
+      List<UAReferenceContext> references = new List<UAReferenceContext>();
+      asp.UTGetReferences(NodeId.Parse(newNodeSet.Items[0].NodeId), x => references.Add(x));
+      Assert.AreEqual<int>(1, references.Count);
+      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasProperty, references[0].ReferenceKind);
+      references.Clear();
+      asp.UTGetReferences(NodeId.Parse(newNodeSet.Items[1].NodeId), x => references.Add(x));
+      Assert.AreEqual<int>(2, references.Count);
+      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasTypeDefinition, references[0].ReferenceKind);
+      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasModellingRule, references[1].ReferenceKind);
+    }
     [TestMethod]
     [TestCategory("AddressSpaceContext")]
     public void AddressSpaceContextValidateAndExportModelOpcUa()
     {
       AddressSpaceWrapper _asp = new AddressSpaceWrapper();
       ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel(new Uri(UAInformationModel.Namespaces.OpcUa));
-      _asp.TestConsistency(551, 2);
+      _asp.TestConsistency(554, 2);
       Assert.AreEqual<string>(BuildError.WrongReference2Property.Identifier, _asp.TraceList[0].BuildError.Identifier);
       Assert.AreEqual<string>(BuildError.ModelContainsErrors.Identifier, _asp.TraceList[1].BuildError.Identifier);
     }
@@ -154,6 +201,62 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       IEnumerable<IUANodeContext> _toExport = _content.Where<UAReferenceContext>(x => x.TargetNode.NodeIdContext.NamespaceIndex == 1).Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
       Assert.AreEqual<int>(1, _toExport.Count<IUANodeContext>());
       _asp.TestConsistency(11, 1);
+    }
+
+    [TestMethod]
+    public void GetMyReferencesTest()
+    {
+      UANodeSet newNodeSet = TestData.CreateNodeSetModel();
+      newNodeSet.Items = new UANode[]
+      {
+        //<UAObjectType NodeId="ns=1;i=12" BrowseName="1:VehicleType">
+        //    <DisplayName>VehicleType</DisplayName>
+        //    <References>
+        //        <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
+        //    </References>
+        //</UAObjectType>
+        new UAObjectType()
+        {
+          NodeId = "ns=1;i=12",
+          BrowseName = "1:VehicleType",
+          References = new Reference[]
+          {
+            new Reference() { ReferenceType = ReferenceTypeIds.HasSubtype.ToString(), IsForward = false,  Value = "i=58" }
+          },
+        },
+        //<UAVariable DataType="DateTime" NodeId="ns=1;i=13" BrowseName="buildDate" ParentNodeId="ns=1;i=12">
+        //  <DisplayName>buildDate</DisplayName>
+        //  <References>
+        //     <Reference ReferenceType="HasProperty" IsForward="false">ns=1; i = 12 </Reference>
+        //     <Reference ReferenceType = "HasTypeDefinition" > i = 63 </ Reference >
+        //     <Reference ReferenceType = "HasModellingRule" > i = 78 </ Reference >
+        //   </ References >
+        //</ UAVariable >
+        new UAVariable()
+        {
+          NodeId = "ns=1;i=13",
+          BrowseName = "buildDate",
+          ParentNodeId="ns=1;i=12",
+          DataType="DateTime",
+          References = new Reference[]
+          {
+            new Reference() { ReferenceType=ReferenceTypeIds.HasProperty.ToString(),  IsForward=false, Value = "ns=1;i=12" },
+            new Reference() { ReferenceType =ReferenceTypeIds.HasTypeDefinition.ToString(), Value = "i=63" },
+            new Reference() { ReferenceType = ReferenceTypeIds.HasModellingRule.ToString(),  Value = "i=78" }
+          }
+         }
+      };
+      AddressSpaceWrapper asp = new AddressSpaceWrapper();
+      ((IAddressSpaceContext)asp.AddressSpaceContext).ImportUANodeSet(newNodeSet);
+      IUANodeContext uaObjectType = asp.AddressSpaceContext.GetOrCreateNodeContext(NodeId.Parse(newNodeSet.Items[0].NodeId), x => { Assert.Fail(); return null; } );
+      Assert.IsNotNull(uaObjectType);
+      IEnumerable<UAReferenceContext> myReferences = ((IAddressSpaceBuildContext)asp.AddressSpaceContext).GetMyReferences(uaObjectType);
+      Assert.AreEqual<int>(1, myReferences.Count<UAReferenceContext>());
+      List<UAReferenceContext> _listOfMyReferences = myReferences.ToList<UAReferenceContext>();
+      Assert.AreEqual<string>("buildDate", _listOfMyReferences[0].TargetNode.BrowseName.Name);
+      Assert.AreEqual<string>("buildDate", _listOfMyReferences[0].ParentNode.BrowseName.Name);
+      Assert.AreEqual<string>("VehicleType", _listOfMyReferences[0].SourceNode.BrowseName.Name);
+      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasProperty, _listOfMyReferences[0].ReferenceKind);
     }
 
     #region private

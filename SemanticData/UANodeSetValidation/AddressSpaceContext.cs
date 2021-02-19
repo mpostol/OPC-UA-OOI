@@ -193,7 +193,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>An instance of the <see cref="IEnumerable{UAReferenceContext}"/> containing references pointed out by index.</returns>
     IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetMyReferences(IUANodeBase index)
     {
-      return m_References.Values.Where<UAReferenceContext>(x => (x.ParentNode == index));
+      //TODO Import simple NodeSet2 file is incomplete #510
+      return m_References.Values.Where<UAReferenceContext>(x => (x.SourceNode == index));
     }
 
     /// <summary>
@@ -203,6 +204,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>IEnumerable&lt;UAReferenceContext&gt;.</returns>
     IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetReferences2Me(IUANodeContext index)
     {
+      //TODO Import simple NodeSet2 file is incomplete #510 - consider consolidation with GetMyReferences
       return m_References.Values.Where<UAReferenceContext>(x => x.TargetNode == index && x.ParentNode != index);
     }
 
@@ -418,6 +420,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.ModelContainsErrors, _msg));
       }
     }
+
     #endregion private
 
     #region Unit Test

@@ -143,6 +143,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="validator">The validator.</param>
     /// <exception cref="ArgumentNullException"><paramref name="nodeFactory"/> must not be null.</exception>
     //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
+    //TODO Import simple NodeSet2 file is incomplete #510
     void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, IValidator validator)
     {
       if (nodeFactory == null)
@@ -168,13 +169,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             break;
 
           case ReferenceKindEnum.HasComponent:
-            if (_rfx.SourceNode == this)
-              _children.Add(_rfx);
+            //if (_rfx.SourceNode == this)
+            _children.Add(_rfx);
             break;
 
           case ReferenceKindEnum.HasProperty:
-            if ((_rfx.SourceNode == this) && (_rfx.SourceNode.UANode.NodeClassEnum != NodeClassEnum.UADataType))
-              _children.Add(_rfx);
+            //if ((_rfx.SourceNode == this) && (_rfx.SourceNode.UANode.NodeClassEnum != NodeClassEnum.UADataType))
+            _children.Add(_rfx);
             break;
 
           case ReferenceKindEnum.HasModellingRule:
@@ -333,8 +334,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #endregion IEquatable<IUANodeBase>
 
-    private Action<TraceMessage> _TraceEvent = null;
-
+    public override string ToString()
+    {
+      return $"Node: {this.GetType().Name}, {nameof(UANodeContext.BrowseName)}={ExportNodeBrowseName()}, NodeId={this.NodeIdContext}";
+    }
     #region private
 
     private IUANodeBase m_BaseTypeNode;
@@ -359,6 +362,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
       }
     }
+    private readonly Action<TraceMessage> _TraceEvent = null;
 
     #endregion private
   }

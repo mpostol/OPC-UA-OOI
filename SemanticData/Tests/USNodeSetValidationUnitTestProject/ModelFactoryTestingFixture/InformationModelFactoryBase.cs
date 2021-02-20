@@ -31,14 +31,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.ModelFactoryTestingFixture
     internal IEnumerable<NodeFactoryBase> Export()
     {
       List<NodeFactoryBase> nodes = new List<NodeFactoryBase>();
-      Export(x => nodes.Add(x));
+      base.Export(x => nodes.Add(x));
       return nodes;
     }
 
-    //public int NumberOfSelectedNodes<type>()
-    //  where type : NodeFactoryBase
-    //{
-    //  return m_Nodes.Where<NodeFactoryBase>(x => x.GetType() == typeof(type)).Count<NodeFactoryBase>();
-    //}
+
   }
 }

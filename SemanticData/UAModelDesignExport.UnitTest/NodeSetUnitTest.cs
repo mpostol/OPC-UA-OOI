@@ -17,14 +17,14 @@ using UAOOI.SemanticData.UAModelDesignExport.XML;
 
 namespace UAOOI.SemanticData.UAModelDesignExport
 {
-
   [TestClass]
   [DeploymentItem(@"Models\", @"Models\")]
   public class NodeSetUnitTest
   {
-
     #region TestContext
+
     private TestContext testContextInstance;
+
     /// <summary>
     ///Gets or sets the test context which provides
     ///information about and functionality for the current test run.
@@ -34,9 +34,11 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       get => testContextInstance;
       set => testContextInstance = value;
     }
-    #endregion
+
+    #endregion TestContext
 
     #region TestMethod
+
     [TestMethod]
     [ExpectedExceptionAttribute(typeof(FileNotFoundException))]
     public void FileNotFoundTestMethod()
@@ -47,6 +49,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       int _diagnosticCounter = 0;
       ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, String.Empty, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
     }
+
     [TestMethod]
     [ExpectedExceptionAttribute(typeof(System.InvalidOperationException))]
     public void WrongFileNFormatTestMethod()
@@ -58,6 +61,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       string uri = "http://cas.eu/UA/CommServer/UnitTests/ReferenceTest";
       ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
     }
+
     [TestMethod]
     public void UAReferenceTestMethod()
     {
@@ -72,6 +76,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.AreEqual<int>(1, _expected.Items.Length);
       CompareModelDesign(_expected, _actual);
     }
+
     [TestMethod]
     public void UAObjectTypeTestMethod()
     {
@@ -86,6 +91,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.AreEqual<int>(3, _expected.Items.Length);
       CompareModelDesign(_expected, _actual);
     }
+
     [TestMethod]
     public void UAVariableTypeTestMethod()
     {
@@ -100,6 +106,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.AreEqual<int>(3, _expected.Items.Length);
       CompareModelDesign(_expected, _actual);
     }
+
     [TestMethod]
     public void UADataTypeTestMethod()
     {
@@ -114,10 +121,13 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.AreEqual<int>(4, _expected.Items.Length);
       CompareModelDesign(_expected, _actual);
     }
-    #endregion
+
+    #endregion TestMethod
 
     #region Test instrumentation
+
     #region ModelDesign
+
     private static void CompareModelDesign(ModelDesign expected, ModelDesign actual)
     {
       Assert.AreEqual<int>(expected.Items.Length, actual.Items.Length);
@@ -126,6 +136,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       foreach (NodeDesign _node in actual.Items)
         CompareNode(_items[_node.SymbolicName.ToString()], _node);
     }
+
     public static void CompareNode(NodeDesign expected, NodeDesign actual)
     {
       if (expected.GetType() == typeof(ObjectTypeDesign))
@@ -156,6 +167,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Compare(expected.Fields, actual.Fields);
       CompareTypeDesign(expected, actual);
     }
+
     private static void CompareReferenceTypeDesign(ReferenceTypeDesign expected, ReferenceTypeDesign actual)
     {
       CompareTypeDesign(expected, actual);
@@ -164,6 +176,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.AreEqual<bool>(expected.SymmetricSpecified, actual.SymmetricSpecified);
       Assert.AreEqual<bool>(expected.Symmetric, actual.Symmetric);
     }
+
     private static void CompareObjectTypeDesign(ObjectTypeDesign expected, ObjectTypeDesign actual)
     {
       CompareTypeDesign(expected, actual);
@@ -172,6 +185,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.IsFalse(expected.SupportsEvents, "Field not supported for types - should always be false");
       Assert.IsFalse(actual.SupportsEvents, "Field not supported for types - should always be false");
     }
+
     private static void CompareVariableTypeDesign(VariableTypeDesign expected, VariableTypeDesign actual)
     {
       CompareTypeDesign(expected, actual);
@@ -183,7 +197,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       if (expected.ValueRankSpecified)
         Assert.AreEqual<ValueRank>(expected.ValueRank, actual.ValueRank);
       Assert.AreEqual<string>(expected.ArrayDimensions, actual.ArrayDimensions);
-      //Not supported by the VariableType NodeClass 
+      //Not supported by the VariableType NodeClass
       Assert.IsFalse(expected.ExposesItsChildren);
       Assert.IsFalse(actual.ExposesItsChildren);
       Assert.IsFalse(expected.AccessLevelSpecified);
@@ -193,6 +207,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.IsFalse(expected.MinimumSamplingIntervalSpecified);
       Assert.IsFalse(actual.MinimumSamplingIntervalSpecified);
     }
+
     //Instances
     private static void CompareObjectDesign(ObjectDesign expected, ObjectDesign actual)
     {
@@ -201,6 +216,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         Assert.AreEqual<bool>(expected.SupportsEvents, actual.SupportsEvents);
       CompareInstanceDesign(expected, actual);
     }
+
     private static void CompareVariableDesign(VariableDesign expected, VariableDesign actual)
     {
       Compare(expected.DefaultValue, actual.DefaultValue);
@@ -222,12 +238,14 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         Assert.AreEqual<bool>(expected.Historizing, actual.Historizing);
       CompareInstanceDesign(expected, actual);
     }
+
     private static void ComparePropertyDesign(PropertyDesign expected, PropertyDesign actual)
     {
       Assert.IsNotNull(expected);
       Assert.IsNotNull(actual);
       CompareVariableDesign((VariableDesign)expected, (VariableDesign)actual);
     }
+
     private static void CompareMethodDesign(MethodDesign expected, MethodDesign actual)
     {
       Compare(expected.InputArguments, actual.InputArguments);
@@ -236,6 +254,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.IsFalse(actual.NonExecutable);
       CompareInstanceDesign(expected, actual);
     }
+
     //base types
     private static void CompareTypeDesign(TypeDesign expected, TypeDesign actual)
     {
@@ -246,6 +265,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.IsNotNull(actual.BaseType);
       Assert.AreEqual<string>(expected.BaseType.ToString(), actual.BaseType.ToString());
     }
+
     private static void CompareInstanceDesign(InstanceDesign expected, InstanceDesign actual)
     {
       Assert.IsTrue(expected.GetType() == actual.GetType());
@@ -262,6 +282,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.AreEqual<uint>(0, actual.MaxCardinality);
       Assert.IsFalse(actual.PreserveDefaultAttributes);
     }
+
     private static void CompareNodeDesign(NodeDesign expected, NodeDesign actual)
     {
       Assert.IsTrue(expected.BrowseName.AreEqual(actual.BrowseName));
@@ -279,16 +300,18 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.AreEqual<string>(expected.StringId, actual.StringId);
       Assert.AreEqual<uint>(expected.PartNo, actual.PartNo);
     }
-    #endregion
+
+    #endregion ModelDesign
 
     #region private helper
+
     /// <summary>
     /// Compares the parameters of a method.
     /// </summary>
     /// <remarks>
     /// ModelCompiler doesn't generate parameters if TypeDefinition for the method is not set.
     /// TypeDefinition is not defined in the specification, but has to refer to a method defined top most level.
-    /// The ModelDesign contains parameters but the UANodeSet doesn't have. 
+    /// The ModelDesign contains parameters but the UANodeSet doesn't have.
     /// </remarks>
     /// <param name="expected">The expected.</param>
     /// <param name="actual">The actual.</param>
@@ -309,6 +332,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         Assert.AreEqual<ValueRank>(expected[i].ValueRank, actual[i].ValueRank);
       }
     }
+
     private static void CompareListOfChildren(ListOfChildren expected, ListOfChildren actual)
     {
       if (expected == null && actual == null)
@@ -327,28 +351,9 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         Type _actualType = _actualList[i].GetType();
         Assert.AreSame(_expectedType, _actualType);
         CompareNode(_expectedList[i], _actualList[i]);
-        //TODO #40, ValidateAndExportModel shall export also instances #40
-        //string nodeType = _expectedType.Name;
-        //switch (nodeType)
-        //{
-        //  case "MethodDesign":
-        //    Compare((MethodDesign)_expectedList[i], (MethodDesign)_actualList[i]);
-        //    break;
-        //  case "PropertyDesign":
-        //    Compare((PropertyDesign)_expectedList[i], (PropertyDesign)_actualList[i]);
-        //    break;
-        //  case "VariableDesign":
-        //    Compare((VariableDesign)_expectedList[i], (VariableDesign)_actualList[i]);
-        //    break;
-        //  case "ObjectDesign":
-        //    Compare((ObjectDesign)_expectedList[i], (ObjectDesign)_actualList[i]);
-        //    break;
-        //  default:
-        //    Assert.Fail("Wrong node type");
-        //    break;
-        //}
       }
     }
+
     private static void Compare(Reference[] expected, Reference[] actual)
     {
       if (expected == null && actual == null)
@@ -368,6 +373,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         Assert.IsFalse(_actualDictionary[_rf.Key()].IsOneWay, _rf.Key());
       }
     }
+
     private static void Compare(XmlQualifiedName expected, XmlQualifiedName actual, string parameter)
     {
       if ((expected == null || expected.IsEmpty) && (actual == null || actual.IsEmpty))
@@ -379,6 +385,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.AreEqual<string>(expected.Name, actual.Name.Replace("_", ""), parameter);
       Assert.AreEqual<string>(expected.Namespace, actual.Namespace, parameter);
     }
+
     private static void Compare(XmlElement expected, XmlElement actual)
     {
       if (expected == null && actual == null)
@@ -388,6 +395,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.AreEqual<string>(expected.InnerText, actual.InnerText);
       Compare(expected.Attributes, actual.Attributes);
     }
+
     private static void Compare(XmlAttributeCollection expected, XmlAttributeCollection actual)
     {
       if (expected == null && actual == null)
@@ -401,6 +409,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
         Assert.AreEqual<string>(_ad[_atr.Name].InnerText, _atr.InnerText);
       }
     }
+
     private void TraceDiagnostic(TraceMessage msg, List<TraceMessage> errors, ref int diagnosticCounter)
     {
       Console.WriteLine(msg.ToString());
@@ -411,8 +420,9 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       else
         errors.Add(msg);
     }
-    #endregion
-    #endregion
 
+    #endregion private helper
+
+    #endregion Test instrumentation
   }
 }

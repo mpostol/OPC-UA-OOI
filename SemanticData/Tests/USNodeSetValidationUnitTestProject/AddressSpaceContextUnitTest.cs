@@ -97,12 +97,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       UANodeSet newNodeSet = TestData.CreateNodeSetModel();
       newNodeSet.Items = new UANode[]
       {
-        //<UAObjectType NodeId="ns=1;i=12" BrowseName="1:VehicleType">
-        //    <DisplayName>VehicleType</DisplayName>
-        //    <References>
-        //        <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
-        //    </References>
-        //</UAObjectType>
         new UAObjectType()
         {
           NodeId = "ns=1;i=12",
@@ -112,14 +106,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
             new Reference() { ReferenceType = ReferenceTypeIds.HasSubtype.ToString(), IsForward = false,  Value = "i=58" }
           },
         },
-        //<UAVariable DataType="DateTime" NodeId="ns=1;i=13" BrowseName="buildDate" ParentNodeId="ns=1;i=12">
-        //  <DisplayName>buildDate</DisplayName>
-        //  <References>
-        //     <Reference ReferenceType="HasProperty" IsForward="false">ns=1; i = 12 </Reference>
-        //     <Reference ReferenceType = "HasTypeDefinition" > i = 63 </ Reference >
-        //     <Reference ReferenceType = "HasModellingRule" > i = 78 </ Reference >
-        //   </ References >
-        //</ UAVariable >
         new UAVariable()
         {
           NodeId = "ns=1;i=13",
@@ -209,12 +195,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
       UANodeSet newNodeSet = TestData.CreateNodeSetModel();
       newNodeSet.Items = new UANode[]
       {
-        //<UAObjectType NodeId="ns=1;i=12" BrowseName="1:VehicleType">
-        //    <DisplayName>VehicleType</DisplayName>
-        //    <References>
-        //        <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
-        //    </References>
-        //</UAObjectType>
         new UAObjectType()
         {
           NodeId = "ns=1;i=12",
@@ -224,14 +204,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
             new Reference() { ReferenceType = ReferenceTypeIds.HasSubtype.ToString(), IsForward = false,  Value = "i=58" }
           },
         },
-        //<UAVariable DataType="DateTime" NodeId="ns=1;i=13" BrowseName="buildDate" ParentNodeId="ns=1;i=12">
-        //  <DisplayName>buildDate</DisplayName>
-        //  <References>
-        //     <Reference ReferenceType="HasProperty" IsForward="false">ns=1; i = 12 </Reference>
-        //     <Reference ReferenceType = "HasTypeDefinition" > i = 63 </ Reference >
-        //     <Reference ReferenceType = "HasModellingRule" > i = 78 </ Reference >
-        //   </ References >
-        //</ UAVariable >
         new UAVariable()
         {
           NodeId = "ns=1;i=13",

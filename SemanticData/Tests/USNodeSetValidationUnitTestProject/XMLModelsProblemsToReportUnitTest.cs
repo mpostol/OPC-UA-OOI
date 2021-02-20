@@ -71,6 +71,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Assert.AreEqual(21, nodes.Count< NodeFactoryBase>());
         Dictionary<string, NodeFactoryBase> nodesDictionary = nodes.ToDictionary<NodeFactoryBase, string>(x => x.SymbolicName.Name);
         AddressSpaceContext asContext = addressSpace as AddressSpaceContext;
+        //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
         IEnumerable<IUANodeContext> allNodes = null;
         asContext.UTValidateAndExportModel(1, x => allNodes = x);
         Assert.IsNotNull(allNodes);
@@ -83,9 +84,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             Debug.WriteLine($"{item.ToString()}");
           }
         }
-          //Assert.AreEqual(4, testingModelFixture.NumberOfSelectedNodes<ObjectTypeFactoryBase>());
-        //Assert.AreEqual(3, testingModelFixture.NumberOfSelectedNodes<DataTypeFactoryBase>());
-        //Assert.AreEqual(1, testingModelFixture.NumberOfSelectedNodes<VariableTypeFactoryBase>());
         Debug.WriteLine($"After removing inherited and instance declaration nodes the recovered information model contains {nodes.Count<NodeFactoryBase>()}");
       }
     }

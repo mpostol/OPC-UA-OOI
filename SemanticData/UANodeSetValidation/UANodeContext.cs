@@ -53,7 +53,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return;
       }
       IEnumerable<UAReferenceContext> _parentConnector = m_AddressSpaceContext.GetReferences2Me(this).Where<UAReferenceContext>(x => x.ChildConnector);
-      Debug.Assert(_parentConnector.Count<UAReferenceContext>() <= 1); //TODO #40; ValidateAndExportModel shall export also instances #40
+      Debug.Assert(_parentConnector.Count<UAReferenceContext>() <= 1);
       UAReferenceContext _connector = _parentConnector.FirstOrDefault<UAReferenceContext>();
       if (_connector != null)
         _connector.BuildSymbolicId(path);
@@ -169,12 +169,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             break;
 
           case ReferenceKindEnum.HasComponent:
-            //if (_rfx.SourceNode == this)
             _children.Add(_rfx);
             break;
 
           case ReferenceKindEnum.HasProperty:
-            //if ((_rfx.SourceNode == this) && (_rfx.SourceNode.UANode.NodeClassEnum != NodeClassEnum.UADataType))
             _children.Add(_rfx);
             break;
 
@@ -334,10 +332,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #endregion IEquatable<IUANodeBase>
 
+    #region object
+
     public override string ToString()
     {
       return $"Node: {this.GetType().Name}, {nameof(UANodeContext.BrowseName)}={ExportNodeBrowseName()}, NodeId={this.NodeIdContext}";
     }
+
+    #endregion object
+
     #region private
 
     private IUANodeBase m_BaseTypeNode;
@@ -362,6 +365,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
       }
     }
+
     private readonly Action<TraceMessage> _TraceEvent = null;
 
     #endregion private

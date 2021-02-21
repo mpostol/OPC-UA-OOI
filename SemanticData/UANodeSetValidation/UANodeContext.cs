@@ -231,13 +231,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public bool IsProperty { get; private set; } = false;
 
     /// <summary>
-    /// Exports the BrowseName of the BaseType.
+    /// Exports the <see cref="UANode.BrowseName"/> of a node recognized
+    /// as <see cref="ReferenceKindEnum.HasSubtype"/> or <see cref="ReferenceKindEnum.HasTypeDefinition"/> target.
     /// </summary>
-    /// <param name="type">if set to <c>true</c> the source node represents type. <c>false</c> if it is an instance.</param>
-    /// <returns>XmlQualifiedName.</returns>
-    /// <value>An instance of <see cref="XmlQualifiedName" /> representing the base type.</value>
-    public XmlQualifiedName ExportBaseTypeBrowseName(bool type)
+    /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the base type..</returns>
+    public XmlQualifiedName ExportBaseTypeBrowseName()
     {
+      bool type = UANode is UAType;
       return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type, _TraceEvent));
     }
 
@@ -248,10 +248,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public ModelingRules? ModelingRule { get; private set; } = new Nullable<ModelingRules>();
 
     /// <summary>
-    /// Exports the browse name of the base type.
+    /// Exports the browse name of this node recognized as <see cref="ReferenceKindEnum.HasSubtype" /> or <see cref="ReferenceKindEnum.HasTypeDefinition" /> target.
     /// </summary>
     /// <param name="traceEvent">The trace event.</param>
-    /// <returns>XmlQualifiedName.</returns>
+    /// <returns>An instance of <see cref="XmlQualifiedName" /> representing subtype or type of an instance.</returns>
     public XmlQualifiedName ExportBrowseNameBaseType(Action<NodeId> traceEvent)
     {
       //TODO It cannot be the reference type
@@ -353,10 +353,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private bool m_InGetDerivedInstances = false;
 
     //methods
-    /// <summary>
-    /// Gets or sets the name of the m browse.
-    /// </summary>
-    /// <value>The name of the m browse.</value>
     private void TraceErrorUndefinedBaseType(NodeId target, bool type, Action<TraceMessage> traceEvent)
     {
       if (type)

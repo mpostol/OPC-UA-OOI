@@ -136,11 +136,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Update(propertyInstance, nodeSet);
         propertyInstance.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName();
         if (!nodeContext.IsProperty)
-          m_buildErrorsHandling.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, $"Creating Property {nodeContext.BrowseName}- wrong reference type {parentReference.ReferenceKind.ToString()}"));
+        {
+          XmlQualifiedName baseType = nodeContext.ExportBaseTypeBrowseName();
+          string baseTypeName = baseType == null ? "a base type" : $"the {baseType.ToString()} type.";
+          m_buildErrorsHandling.TraceEvent
+            (
+              TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property,
+                $"Target node of the {parentReference.ReferenceKind.ToString()} reference cannot be {nodeContext.BrowseName} of {baseTypeName}.")
+            );
+        }
       }
       catch (Exception _ex)
       {
-        m_buildErrorsHandling.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, string.Format("Cannot resolve the reference for Property because of error {0} at: {1}.", _ex, _ex.StackTrace)));
+        m_buildErrorsHandling.TraceEvent(
+          TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, string.Format("Cannot resolve the reference for Property because of error {0} at: {1}.", _ex, _ex.StackTrace)));
       }
     }
 
@@ -155,7 +164,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       catch (Exception _ex)
       {
-        m_buildErrorsHandling.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, string.Format("Cannot resolve the reference for Variable because of error {0} at: {1}.", _ex, _ex.StackTrace)));
+        m_buildErrorsHandling.TraceEvent(
+          TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property, string.Format("Cannot resolve the reference for Variable because of error {0} at: {1}.", _ex, _ex.StackTrace)));
       }
     }
 
@@ -279,7 +289,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     private void UpdateType(ITypeFactory nodeDesign, UAType nodeSet, IUANodeBase nodeContext)
     {
-      nodeDesign.BaseType = nodeContext.ExportBaseTypeBrowseName(true);
+      nodeDesign.BaseType = nodeContext.ExportBaseTypeBrowseName();
       nodeDesign.IsAbstract = nodeSet.IsAbstract;
     }
 
@@ -287,7 +297,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (nodeContext.ModelingRule.HasValue)
         nodeDesign.ModelingRule = nodeContext.ModelingRule.Value;
-      nodeDesign.TypeDefinition = nodeContext.ExportBaseTypeBrowseName(false);
+      nodeDesign.TypeDefinition = nodeContext.ExportBaseTypeBrowseName();
       //nodeSet.ParentNodeId - The NodeId of the Node that is the parent of the Node within the information model. This field is used to indicate
       //that a tight coupling exists between the Node and its parent (e.g. when the parent is deleted the child is deleted
       //as well). This information does not appear in the AddressSpace and is intended for use by design tools.

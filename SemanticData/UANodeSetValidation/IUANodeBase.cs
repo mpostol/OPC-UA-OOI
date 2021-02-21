@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -52,9 +52,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <value><c>true</c> if this instance is property variable type; otherwise, <c>false</c>.</value>
     bool IsPropertyVariableType { get; }
     /// <summary>
-    /// Exports the browse name of the base type.
+    /// Exports the browse name of this node recognized as <see cref="ReferenceKindEnum.HasSubtype"/> or <see cref="ReferenceKindEnum.HasTypeDefinition"/> target.
     /// </summary>
     /// <param name="traceEvent">The trace event.</param>
+    /// <returns>An instance of <see cref="XmlQualifiedName"/> representing subtype or type of an instance.</returns>
     XmlQualifiedName ExportBrowseNameBaseType(Action<NodeId> traceEvent);
     /// <summary>
     /// Gets the derived instances.
@@ -65,11 +66,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     QualifiedName BrowseName { get; set; }
     /// <summary>
-    /// Exports the BrowseName of the BaseType.
+    ///  Exports the BrowseName of the BaseType.
     /// </summary>
-    /// <param name="type">if set to <c>true</c> the source node represents type. <c>false</c> if it is an instance.</param>
-    /// <value>An instance of <see cref="XmlQualifiedName" /> representing the base type.</value>
-    XmlQualifiedName ExportBaseTypeBrowseName(bool type);
+    /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the base type..</returns>
+    XmlQualifiedName ExportBaseTypeBrowseName();
     /// <summary>
     /// Gets the modeling rule associated with this node.
     /// </summary>

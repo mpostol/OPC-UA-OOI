@@ -81,7 +81,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           if (!nodesDictionary.ContainsKey(item.BrowseName.Name))
           {
             orphanedNodes.Add(item);
-            Debug.WriteLine($"{item.ToString()}");
+            Debug.WriteLine($"The following node has been removed from the model: {item.ToString()}");
           }
         }
         Debug.WriteLine($"After removing inherited and instance declaration nodes the recovered information model contains {nodes.Count<NodeFactoryBase>()}");

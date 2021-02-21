@@ -22,6 +22,9 @@
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -139,6 +142,7 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</ByteString
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
+      <AccessLevelEx>0</AccessLevelEx>
     </Node>
     <Node i:type="VariableNode">
       <NodeId>
@@ -159,6 +163,9 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</ByteString
       </Description>
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -193,6 +200,7 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</ByteString
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
+      <AccessLevelEx>0</AccessLevelEx>
     </Node>
     <Node i:type="VariableNode">
       <NodeId>
@@ -210,6 +218,9 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</ByteString
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -265,7 +276,7 @@ U2NoZW1hLWluc3RhbmNlIg0KICB4bWxuczp1YT0iaHR0cDovL29wY2ZvdW5kYXRpb24ub3JnL1VB
 LyINCiAgeG1sbnM6dG5zPSJodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL0Rh
 dGFUeXBlVGVzdCINCiAgRGVmYXVsdEJ5dGVPcmRlcj0iTGl0dGxlRW5kaWFuIg0KICBUYXJnZXRO
 YW1lc3BhY2U9Imh0dHA6Ly9jYXMuZXUvVUEvQ29tbVNlcnZlci9Vbml0VGVzdHMvRGF0YVR5cGVU
-ZXN0Ig0KPg0KICA8IS0tIFRoaXMgRmlsZSB3YXMgZ2VuZXJhdGVkIG9uIDIwMTktMDUtMTAgYW5k
+ZXN0Ig0KPg0KICA8IS0tIFRoaXMgRmlsZSB3YXMgZ2VuZXJhdGVkIG9uIDIwMTktMDUtMTEgYW5k
 IHN1cHBvcnRzIHRoZSBzcGVjaWZpY2F0aW9ucyBzdXBwb3J0ZWQgYnkgdmVyc2lvbiAxLjIuMjYu
 MTYwMzIgb2YgdGhlIE9QQyBVQSBkZWxpdmVyYWJsZXMuIC0tPg0KICA8b3BjOkltcG9ydCBOYW1l
 c3BhY2U9Imh0dHA6Ly9vcGNmb3VuZGF0aW9uLm9yZy9VQS8iIExvY2F0aW9uPSIuQmluYXJ5U2No
@@ -299,6 +310,7 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
+      <AccessLevelEx>0</AccessLevelEx>
     </Node>
     <Node i:type="VariableNode">
       <NodeId>
@@ -319,6 +331,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       </Description>
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -353,6 +368,7 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
+      <AccessLevelEx>0</AccessLevelEx>
     </Node>
     <Node i:type="DataTypeNode">
       <NodeId>
@@ -370,6 +386,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -400,6 +419,7 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
         </ReferenceNode>
       </References>
       <IsAbstract>true</IsAbstract>
+      <DataTypeDefinition i:nil="true" />
     </Node>
     <Node i:type="VariableNode">
       <NodeId>
@@ -417,6 +437,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -469,6 +492,7 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
+      <AccessLevelEx>0</AccessLevelEx>
     </Node>
     <Node i:type="DataTypeNode">
       <NodeId>
@@ -489,6 +513,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       </Description>
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -510,6 +537,7 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
         </ReferenceNode>
       </References>
       <IsAbstract>false</IsAbstract>
+      <DataTypeDefinition i:nil="true" />
     </Node>
     <Node i:type="VariableNode">
       <NodeId>
@@ -527,6 +555,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -586,6 +617,7 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
+      <AccessLevelEx>0</AccessLevelEx>
     </Node>
     <Node i:type="DataTypeNode">
       <NodeId>
@@ -606,6 +638,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       </Description>
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -645,6 +680,7 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
         </ReferenceNode>
       </References>
       <IsAbstract>true</IsAbstract>
+      <DataTypeDefinition i:nil="true" />
     </Node>
     <Node i:type="ObjectNode">
       <NodeId>
@@ -662,6 +698,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -709,6 +748,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -743,6 +785,7 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
+      <AccessLevelEx>0</AccessLevelEx>
     </Node>
     <Node i:type="ObjectNode">
       <NodeId>
@@ -760,6 +803,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -807,6 +853,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -841,6 +890,7 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
+      <AccessLevelEx>0</AccessLevelEx>
     </Node>
     <Node i:type="DataTypeNode">
       <NodeId>
@@ -858,6 +908,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -888,6 +941,7 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
         </ReferenceNode>
       </References>
       <IsAbstract>false</IsAbstract>
+      <DataTypeDefinition i:nil="true" />
     </Node>
     <Node i:type="ObjectNode">
       <NodeId>
@@ -905,6 +959,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -952,6 +1009,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -986,6 +1046,7 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
+      <AccessLevelEx>0</AccessLevelEx>
     </Node>
     <Node i:type="ObjectNode">
       <NodeId>
@@ -1003,6 +1064,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -1050,6 +1114,9 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
       <References>
         <ReferenceNode>
           <ReferenceTypeId>
@@ -1084,6 +1151,7 @@ YzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
+      <AccessLevelEx>0</AccessLevelEx>
     </Node>
   </Nodes>
 </NodeSet>

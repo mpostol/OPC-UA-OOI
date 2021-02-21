@@ -6,6 +6,7 @@
 //___________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Xml;
 using UAOOI.SemanticData.UAModelDesignExport.XML;
 
 namespace UAOOI.SemanticData.UAModelDesignExport
@@ -30,5 +31,12 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.AreSame(_descriptionCopy, _description);
     }
 
+    [TestMethod]
+    public void KeyTest()
+    {
+      Reference value1 = new Reference() { IsInverse = false, IsOneWay = true, ReferenceType = new XmlQualifiedName("Type Name"), TargetId = new XmlQualifiedName("TargetId") };
+      Reference value2 = new Reference() { IsInverse = true, IsOneWay = true, ReferenceType = new XmlQualifiedName("Type Name"), TargetId = new XmlQualifiedName("TargetId") };
+      Assert.AreNotEqual<string>(value1.Key(), value2.Key());
+    }
   }
 }

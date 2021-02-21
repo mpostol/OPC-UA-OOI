@@ -162,6 +162,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               BuildError _err = BuildError.DanglingReferenceTarget;
               _TraceEvent(TraceMessage.BuildErrorTraceMessage(_err, "Information"));
             }
+            else if (_ReferenceType == new XmlQualifiedName(BrowseNames.HasEncoding, Namespaces.OpcUa))
+            {
+              _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_ReferenceType.ToString()} from the model"));
+              return;
+            }
             IReferenceFactory _or = nodeFactory.NewReference();
             _or.IsInverse = !_rfx.Reference.IsForward;
             _or.ReferenceType = _ReferenceType;

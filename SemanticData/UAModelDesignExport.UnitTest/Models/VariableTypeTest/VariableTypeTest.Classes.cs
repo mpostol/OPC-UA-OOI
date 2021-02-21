@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2011 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  *
@@ -30,7 +30,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Reflection;
 using System.Xml;
 using System.Runtime.Serialization;
 using ;
@@ -224,6 +223,12 @@ namespace VariableTypeTest
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -366,6 +371,12 @@ namespace VariableTypeTest
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
         }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
         #endregion
 
         #region Public Members
@@ -439,6 +450,12 @@ namespace VariableTypeTest
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -519,6 +536,12 @@ namespace VariableTypeTest
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2011 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  *
@@ -30,7 +30,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Reflection;
 using System.Xml;
 using System.Runtime.Serialization;
 using ;
@@ -363,7 +362,11 @@ namespace DataTypeTest
     /// <exclude />
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
     [CollectionDataContract(Name = "ListOfAbstractEnumerationDataType", Namespace = DataTypeTest.Namespaces.cas, ItemName = "AbstractEnumerationDataType")]
+    #if !NET_STANDARD
     public partial class AbstractEnumerationDataTypeCollection : List<AbstractEnumerationDataType>, ICloneable
+    #else
+    public partial class AbstractEnumerationDataTypeCollection : List<AbstractEnumerationDataType>
+    #endif
     {
         #region Constructors
         /// <summary>
@@ -410,11 +413,20 @@ namespace DataTypeTest
         }
         #endregion
 
+        #if !NET_STANDARD
         #region ICloneable Methods
         /// <summary>
         /// Creates a deep copy of the collection.
         /// </summary>
         public object Clone()
+        {
+            return (AbstractEnumerationDataTypeCollection)this.MemberwiseClone();
+        }
+        #endregion
+        #endif
+
+        /// <summary cref="Object.MemberwiseClone" />
+        public new object MemberwiseClone()
         {
             AbstractEnumerationDataTypeCollection clone = new AbstractEnumerationDataTypeCollection(this.Count);
 
@@ -425,7 +437,6 @@ namespace DataTypeTest
 
             return clone;
         }
-        #endregion
     }
     #endregion
     #endif
@@ -455,7 +466,11 @@ namespace DataTypeTest
     /// <exclude />
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
     [CollectionDataContract(Name = "ListOfEnumerationDataType", Namespace = DataTypeTest.Namespaces.cas, ItemName = "EnumerationDataType")]
+    #if !NET_STANDARD
     public partial class EnumerationDataTypeCollection : List<EnumerationDataType>, ICloneable
+    #else
+    public partial class EnumerationDataTypeCollection : List<EnumerationDataType>
+    #endif
     {
         #region Constructors
         /// <summary>
@@ -502,11 +517,20 @@ namespace DataTypeTest
         }
         #endregion
 
+        #if !NET_STANDARD
         #region ICloneable Methods
         /// <summary>
         /// Creates a deep copy of the collection.
         /// </summary>
         public object Clone()
+        {
+            return (EnumerationDataTypeCollection)this.MemberwiseClone();
+        }
+        #endregion
+        #endif
+
+        /// <summary cref="Object.MemberwiseClone" />
+        public new object MemberwiseClone()
         {
             EnumerationDataTypeCollection clone = new EnumerationDataTypeCollection(this.Count);
 
@@ -517,7 +541,6 @@ namespace DataTypeTest
 
             return clone;
         }
-        #endregion
     }
     #endregion
     #endif
@@ -631,10 +654,18 @@ namespace DataTypeTest
             return true;
         }
 
+        #if !NET_STANDARD
         /// <summary cref="ICloneable.Clone" />
         public virtual object Clone()
         {
-            AbstractStructure clone = (AbstractStructure)this.MemberwiseClone();
+            return (AbstractStructure)this.MemberwiseClone();
+        }
+        #endif
+
+        /// <summary cref="Object.MemberwiseClone" />
+        public new object MemberwiseClone()
+        {
+            AbstractStructure clone = (AbstractStructure)base.MemberwiseClone();
 
             clone.m_number = (Variant)Utils.Clone(this.m_number);
 
@@ -654,7 +685,11 @@ namespace DataTypeTest
     /// <exclude />
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
     [CollectionDataContract(Name = "ListOfAbstractStructure", Namespace = DataTypeTest.Namespaces.cas, ItemName = "AbstractStructure")]
+    #if !NET_STANDARD
     public partial class AbstractStructureCollection : List<AbstractStructure>, ICloneable
+    #else
+    public partial class AbstractStructureCollection : List<AbstractStructure>
+    #endif
     {
         #region Constructors
         /// <summary>
@@ -701,11 +736,20 @@ namespace DataTypeTest
         }
         #endregion
 
+        #if !NET_STANDARD
         #region ICloneable Methods
         /// <summary>
         /// Creates a deep copy of the collection.
         /// </summary>
         public object Clone()
+        {
+            return (AbstractStructureCollection)this.MemberwiseClone();
+        }
+        #endregion
+        #endif
+
+        /// <summary cref="Object.MemberwiseClone" />
+        public new object MemberwiseClone()
         {
             AbstractStructureCollection clone = new AbstractStructureCollection(this.Count);
 
@@ -716,7 +760,6 @@ namespace DataTypeTest
 
             return clone;
         }
-        #endregion
     }
     #endregion
     #endif
@@ -833,12 +876,20 @@ namespace DataTypeTest
             if (!Utils.IsEqual(m_number, value.m_number)) return false;
 
             return true;
-        }
+        }    
 
+        #if !NET_STANDARD
         /// <summary cref="ICloneable.Clone" />
         public override object Clone()
         {
-            DerivedStructure clone = (DerivedStructure)base.Clone();
+            return (DerivedStructure)this.MemberwiseClone();
+        }
+        #endif
+
+        /// <summary cref="Object.MemberwiseClone" />
+        public new object MemberwiseClone()
+        {
+            DerivedStructure clone = (DerivedStructure)base.MemberwiseClone();
 
             clone.m_number = (int)Utils.Clone(this.m_number);
 
@@ -858,7 +909,11 @@ namespace DataTypeTest
     /// <exclude />
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
     [CollectionDataContract(Name = "ListOfDerivedStructure", Namespace = DataTypeTest.Namespaces.cas, ItemName = "DerivedStructure")]
+    #if !NET_STANDARD
     public partial class DerivedStructureCollection : List<DerivedStructure>, ICloneable
+    #else
+    public partial class DerivedStructureCollection : List<DerivedStructure>
+    #endif
     {
         #region Constructors
         /// <summary>
@@ -905,11 +960,20 @@ namespace DataTypeTest
         }
         #endregion
 
+        #if !NET_STANDARD
         #region ICloneable Methods
         /// <summary>
         /// Creates a deep copy of the collection.
         /// </summary>
         public object Clone()
+        {
+            return (DerivedStructureCollection)this.MemberwiseClone();
+        }
+        #endregion
+        #endif
+
+        /// <summary cref="Object.MemberwiseClone" />
+        public new object MemberwiseClone()
         {
             DerivedStructureCollection clone = new DerivedStructureCollection(this.Count);
 
@@ -920,7 +984,6 @@ namespace DataTypeTest
 
             return clone;
         }
-        #endregion
     }
     #endregion
     #endif

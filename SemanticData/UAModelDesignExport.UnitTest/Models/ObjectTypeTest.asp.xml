@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="XMLstylesheet"?>
+<ModelDesign xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" TargetVersion="" TargetPublicationDate="2021-02-21T00:00:00+01:00" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+  <Namespaces>
+    <Namespace Name="Name0" Prefix="Prefix0" InternalPrefix="http://opcfoundation.org/UA/" XmlNamespace="http://opcfoundation.org/UA/" XmlPrefix="Prefix1" FilePath="" Version="1.04.8" PublicationDate="20.11.2020">http://opcfoundation.org/UA/</Namespace>
+    <Namespace Name="Name2" Prefix="Prefix2" InternalPrefix="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" XmlNamespace="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" XmlPrefix="Prefix3" FilePath="" PublicationDate="21.02.2021">http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest</Namespace>
+  </Namespaces>
+  <ObjectType xmlns:q1="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" SymbolicName="q1:ComplexObjectType">
+    <Children>
+      <Object SymbolicName="q1:ChildObject" ModellingRule="MandatoryPlaceholder" SupportsEvents="true" />
+      <Property SymbolicName="q1:BrowseName4node66" ModellingRule="Mandatory" xmlns:q2="http://opcfoundation.org/UA/" DataType="q2:LocalizedText">
+        <BrowseName>ChildProperty</BrowseName>
+      </Property>
+      <Variable SymbolicName="q1:ChildVariable" xmlns:q3="http://opcfoundation.org/UA/" TypeDefinition="q3:AnalogItemType" ModellingRule="Mandatory" />
+      <Method SymbolicName="q1:ChildMethod" ModellingRule="Mandatory" />
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q4="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" SymbolicName="q4:DerivedFromComplexObjectType" BaseType="q4:ComplexObjectType">
+    <Children>
+      <Method SymbolicName="q4:ChildMethod">
+        <DisplayName>ChildMethodNewName</DisplayName>
+      </Method>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <Object xmlns:q5="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" SymbolicName="q5:InstanceOfDerivedFromComplexObjectType" TypeDefinition="q5:DerivedFromComplexObjectType" />
+</ModelDesign>

@@ -1,0 +1,4 @@
+asp "XMLModels\DataTypeTest.NodeSet2.xml" -e "XMLModels\DataTypeTest.asp.xml" -s XMLstylesheet -n "http://cas.eu/UA/CommServer/UnitTests/DataTypeTest"
+asp "XMLModels\ObjectTypeTest.NodeSet2.xml" -e "XMLModels\ObjectTypeTest.asp.xml" -s XMLstylesheet -n "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"
+asp "XMLModels\ReferenceTest.NodeSet2.xml" -e "XMLModels\ReferenceTest.asp.xml" -s XMLstylesheet -n "http://cas.eu/UA/CommServer/UnitTests/ReferenceTest"
+asp "XMLModels\VariableTypeTest.NodeSet2.xml" -e "XMLModels\VariableTypeTest.asp.xml" -s XMLstylesheet -n "http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest"

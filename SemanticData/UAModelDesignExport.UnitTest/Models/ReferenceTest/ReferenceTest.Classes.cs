@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2011 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  *
@@ -30,7 +30,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Reflection;
 using System.Xml;
 using System.Runtime.Serialization;
 using ;

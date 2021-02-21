@@ -78,13 +78,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         List<IUANodeContext> orphanedNodes = new List<IUANodeContext>();
         foreach (IUANodeContext item in allNodes)
         {
-          if (!nodesDictionary.ContainsKey(item.BrowseName.Name))
+          if (!nodesDictionary.ContainsKey(item.BrowseName.ToString()))
           {
             orphanedNodes.Add(item);
             Debug.WriteLine($"The following node has been removed from the model: {item.ToString()}");
           }
         }
-        Debug.WriteLine($"After removing inherited and instance declaration nodes the recovered information model contains {nodes.Count<NodeFactoryBase>()}");
+        Debug.WriteLine($"The recovered information model contains {nodes.Count<NodeFactoryBase>()} nodes");
+        Debug.WriteLine($"The source information model contains {allNodes.Count<IUANodeContext>()} nodes");
+        Debug.WriteLine($"Number of nodes not considered for export {orphanedNodes.Count<IUANodeContext>()}");
       }
     }
 

@@ -53,7 +53,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return;
       }
       IEnumerable<UAReferenceContext> _parentConnector = m_AddressSpaceContext.GetReferences2Me(this).Where<UAReferenceContext>(x => x.ChildConnector);
-      Debug.Assert(_parentConnector.Count<UAReferenceContext>() <= 1); //TODO #40; ValidateAndExportModel shall export also instances #40
+      Debug.Assert(_parentConnector.Count<UAReferenceContext>() <= 1);
       UAReferenceContext _connector = _parentConnector.FirstOrDefault<UAReferenceContext>();
       if (_connector != null)
         _connector.BuildSymbolicId(path);
@@ -143,6 +143,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="validator">The validator.</param>
     /// <exception cref="ArgumentNullException"><paramref name="nodeFactory"/> must not be null.</exception>
     //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
+    //TODO Import simple NodeSet2 file is incomplete #510
     void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, IValidator validator)
     {
       if (nodeFactory == null)
@@ -161,6 +162,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               BuildError _err = BuildError.DanglingReferenceTarget;
               _TraceEvent(TraceMessage.BuildErrorTraceMessage(_err, "Information"));
             }
+            else if (_ReferenceType == new XmlQualifiedName(BrowseNames.HasEncoding, Namespaces.OpcUa))
+            {
+              _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_ReferenceType.ToString()} from the model"));
+              return;
+            }
             IReferenceFactory _or = nodeFactory.NewReference();
             _or.IsInverse = !_rfx.Reference.IsForward;
             _or.ReferenceType = _ReferenceType;
@@ -168,13 +174,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             break;
 
           case ReferenceKindEnum.HasComponent:
-            if (_rfx.SourceNode == this)
-              _children.Add(_rfx);
+            _children.Add(_rfx);
             break;
 
           case ReferenceKindEnum.HasProperty:
-            if ((_rfx.SourceNode == this) && (_rfx.SourceNode.UANode.NodeClassEnum != NodeClassEnum.UADataType))
-              _children.Add(_rfx);
+            _children.Add(_rfx);
             break;
 
           case ReferenceKindEnum.HasModellingRule:
@@ -333,7 +337,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #endregion IEquatable<IUANodeBase>
 
-    private Action<TraceMessage> _TraceEvent = null;
+    #region object
+
+    public override string ToString()
+    {
+      return $"Node: {this.GetType().Name}, {nameof(UANodeContext.BrowseName)}={ExportNodeBrowseName()}, NodeId={this.NodeIdContext}";
+    }
+
+    #endregion object
 
     #region private
 
@@ -359,6 +370,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
       }
     }
+
+    private readonly Action<TraceMessage> _TraceEvent = null;
 
     #endregion private
   }

@@ -131,15 +131,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Models\DataTypeTest.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="Models\DataTypeTest.xml" />
+    <None Include="Models\DataTypeTest.asp.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <Content Include="Models\DataTypeTest\DataTypeTest.NodeSet.xml" />
     <None Include="Models\DataTypeTest\DataTypeTest.NodeSet2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <Content Include="Models\DataTypeTest\DataTypeTest.PredefinedNodes.xml" />
     <None Include="Models\ObjectTypeTest.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Models\ObjectTypeTest.asp.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Models\ObjectTypeTest\ObjectTypeTest.NodeSet.xml" />
@@ -160,6 +166,12 @@
     <None Include="Models\ReferenceTest\ReferenceTest.PredefinedNodes.xml" />
     <None Include="Models\VariableTypeTest.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Models\ReferenceTest.asp.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Models\VariableTypeTest.asp.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Models\VariableTypeTest\VariableTypeTest.NodeSet.xml" />
     <None Include="Models\VariableTypeTest\VariableTypeTest.NodeSet2.xml">

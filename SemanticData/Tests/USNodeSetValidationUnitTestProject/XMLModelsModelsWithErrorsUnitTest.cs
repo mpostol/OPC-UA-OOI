@@ -242,8 +242,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Assert.AreEqual<int>(1, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
         _log.Clear();
         _as.ValidateAndExportModel(m_NameSpace);
-        Assert.AreEqual<int>(4, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-        Assert.AreEqual<int>(3, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == "P3-0502020001").Count<TraceMessage>());
+        Assert.AreEqual<int>(2, _log.TraceList.Count());
+        Assert.AreEqual<string>(BuildError.NodeIdNotDefined.Identifier, _log.TraceList[0].BuildError.Identifier);
+        Assert.AreEqual<string>(BuildError.ModelContainsErrors.Identifier, _log.TraceList[1].BuildError.Identifier);
       }
     }
 

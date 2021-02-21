@@ -193,7 +193,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>An instance of the <see cref="IEnumerable{UAReferenceContext}"/> containing references pointed out by index.</returns>
     IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetMyReferences(IUANodeBase index)
     {
-      return m_References.Values.Where<UAReferenceContext>(x => (x.ParentNode == index));
+      //TODO Import simple NodeSet2 file is incomplete #510
+      return m_References.Values.Where<UAReferenceContext>(x => (x.SourceNode == index));
     }
 
     /// <summary>
@@ -203,6 +204,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>IEnumerable&lt;UAReferenceContext&gt;.</returns>
     IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetReferences2Me(IUANodeContext index)
     {
+      //TODO Import simple NodeSet2 file is incomplete #510 - consider consolidation with GetMyReferences
       return m_References.Values.Where<UAReferenceContext>(x => x.TargetNode == index && x.ParentNode != index);
     }
 
@@ -223,42 +225,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       XmlQualifiedName _dataType = ExportBrowseName(NodeId.Parse(argument.DataType.Identifier), DataTypeIds.BaseDataType);
       return ExportArgument(argument, _dataType);
     }
-
-    //TODO #40 remove commented functionality
-    ///// <summary>
-    ///// Gets an instance of the <see cref="IAddressSpaceBuildContext"/> representing selected by <paramref name="nodeClass"/> base type node if applicable, null otherwise.
-    ///// </summary>
-    ///// <param name="nodeClass">The node class selector.</param>
-    ///// <returns>An  instance of <see cref="IUANodeBase"/> representing base type for selected node class.</returns>
-    ///// <exception cref="ApplicationException"> If <paramref name="nodeClass"/> is equal <see cref="NodeClassEnum.Unknown"/></exception>
-    //IUANodeBase IAddressSpaceBuildContext.GetBaseTypeNode(NodeClassEnum nodeClass)
-    //{
-    //  IUANodeContext _ret = null;
-    //  switch (nodeClass)
-    //  {
-    //    case NodeClassEnum.UADataType:
-    //      m_NodesDictionary.TryGetValue(DataTypeIds.BaseDataType.ToString(), out _ret);
-    //      break;
-    //    case NodeClassEnum.UAMethod:
-    //      break;
-    //    case NodeClassEnum.UAObjectType:
-    //    case NodeClassEnum.UAObject:
-    //      m_NodesDictionary.TryGetValue(ObjectTypeIds.BaseObjectType.ToString(), out _ret);
-    //      break;
-    //    case NodeClassEnum.UAReferenceType:
-    //      m_NodesDictionary.TryGetValue(ReferenceTypeIds.References.ToString(), out _ret);
-    //      break;
-    //    case NodeClassEnum.UAVariable:
-    //    case NodeClassEnum.UAVariableType:
-    //      m_NodesDictionary.TryGetValue(VariableTypeIds.BaseVariableType.ToString(), out _ret);
-    //      break;
-    //    case NodeClassEnum.UAView:
-    //      break;
-    //    case NodeClassEnum.Unknown:
-    //      throw new ApplicationException($"In {nameof(IAddressSpaceBuildContext.GetBaseTypeNode)} the {nameof(NodeClass)} must not be {nameof(NodeClassEnum.Unknown)}");
-    //  }
-    //  return _ret;
-    //}
 
     #endregion IAddressSpaceBuildContext
 
@@ -418,6 +384,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.ModelContainsErrors, _msg));
       }
     }
+
     #endregion private
 
     #region Unit Test

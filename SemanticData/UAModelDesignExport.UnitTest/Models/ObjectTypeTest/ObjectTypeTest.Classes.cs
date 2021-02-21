@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2011 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  *
@@ -30,7 +30,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Reflection;
 using System.Xml;
 using System.Runtime.Serialization;
 using ;
@@ -134,6 +133,16 @@ namespace ObjectTypeTest
         /// The identifier for the ComplexObjectType_ChildMethod_OutputArguments Variable.
         /// </summary>
         public const uint ComplexObjectType_ChildMethod_OutputArguments = 12;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_BrowseName4node66 Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_BrowseName4node66 = 18;
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ChildVariable_EURange Variable.
+        /// </summary>
+        public const uint DerivedFromComplexObjectType_ChildVariable_EURange = 53;
 
         /// <summary>
         /// The identifier for the InstanceOfDerivedFromComplexObjectType_BrowseName4node66 Variable.
@@ -251,6 +260,16 @@ namespace ObjectTypeTest
         public static readonly ExpandedNodeId ComplexObjectType_ChildMethod_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ChildMethod_OutputArguments, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_BrowseName4node66 Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_BrowseName4node66 = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_BrowseName4node66, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedFromComplexObjectType_ChildVariable_EURange Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ChildVariable_EURange = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ChildVariable_EURange, ObjectTypeTest.Namespaces.cas);
+
+        /// <summary>
         /// The identifier for the InstanceOfDerivedFromComplexObjectType_BrowseName4node66 Variable.
         /// </summary>
         public static readonly ExpandedNodeId InstanceOfDerivedFromComplexObjectType_BrowseName4node66 = new ExpandedNodeId(ObjectTypeTest.Variables.InstanceOfDerivedFromComplexObjectType_BrowseName4node66, ObjectTypeTest.Namespaces.cas);
@@ -361,6 +380,12 @@ namespace ObjectTypeTest
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -609,6 +634,12 @@ namespace ObjectTypeTest
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>

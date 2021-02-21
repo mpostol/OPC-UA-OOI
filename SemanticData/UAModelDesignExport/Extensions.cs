@@ -101,7 +101,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     }
     internal static string Key(this XML.Reference value)
     {
-      return value.ReferenceType.ToString() + " " + value.TargetId.ToString();
+      return $"{ value.ReferenceType.ToString()} {value.TargetId.ToString()} IsInverse={value.IsInverse}";
     }
     //Extensions for UAOOI
     internal static XML.Parameter ExportArgument(this Parameter argument, Action<TraceMessage> traceEvent)

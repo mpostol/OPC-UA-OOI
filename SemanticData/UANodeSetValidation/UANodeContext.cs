@@ -83,6 +83,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return;
       }
       UANode = node;
+      //TODO Enhance/Improve BrowseName parser #538
       this.BrowseName = node.BrowseName.Parse(_TraceEvent);
       if (QualifiedName.IsNull(this.BrowseName))
       {
@@ -328,9 +329,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (Object.ReferenceEquals(other, null))
         return false;
-      //TODO ADI model from Embedded example import fails #509
-      if (this.BrowseName != other.BrowseName)  //1:TransitionNumber vs TransitionNumber; 1:StateNumber vs StateNumber
-        return false; // throw new ArgumentOutOfRangeException("The browse name of compared nodes musty be equal.");
+      //TODO Enhance/Improve BrowseName parser #538
+      if (this.BrowseName != other.BrowseName)
+        return false; 
       return
         this.UANode.Equals(other.UANode);
     }

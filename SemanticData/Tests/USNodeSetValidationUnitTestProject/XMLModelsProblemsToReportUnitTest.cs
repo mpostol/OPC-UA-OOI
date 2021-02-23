@@ -34,7 +34,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, traceContext.TraceList[0].BuildError.Identifier);
         traceContext.Clear();
         addressSpace.ValidateAndExportModel(model);
-        //TODO ADI model from Embedded example import fails #509
+        //TODO Enhance/Improve BrowseName parser #538
         Assert.AreEqual<int>(0, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataEncoding).Count<TraceMessage>());
         Assert.AreEqual<int>(0, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataType).Count<TraceMessage>());
         Assert.AreEqual<int>(0, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Naming).Count<TraceMessage>());
@@ -68,7 +68,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         addressSpace.ValidateAndExportModel(model);
         Assert.AreEqual<int>(5, traceContext.TraceList.Count);
         IEnumerable<NodeFactoryBase> nodes = testingModelFixture.Export();
-        Assert.AreEqual(21, nodes.Count< NodeFactoryBase>());
+        Assert.AreEqual(21, nodes.Count<NodeFactoryBase>());
         Dictionary<string, NodeFactoryBase> nodesDictionary = nodes.ToDictionary<NodeFactoryBase, string>(x => x.SymbolicName.Name);
         AddressSpaceContext asContext = addressSpace as AddressSpaceContext;
         //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
@@ -76,6 +76,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         asContext.UTValidateAndExportModel(1, x => allNodes = x);
         Assert.IsNotNull(allNodes);
         List<IUANodeContext> orphanedNodes = new List<IUANodeContext>();
+        List<IUANodeContext> processedNodes = new List<IUANodeContext>();
         foreach (IUANodeContext item in allNodes)
         {
           if (!nodesDictionary.ContainsKey(item.BrowseName.Name))
@@ -83,8 +84,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             orphanedNodes.Add(item);
             Debug.WriteLine($"The following node has been removed from the model: {item.ToString()}");
           }
+          else
+            processedNodes.Add(item);
         }
-        Debug.WriteLine($"After removing inherited and instance declaration nodes the recovered information model contains {nodes.Count<NodeFactoryBase>()}");
+        Debug.WriteLine($"The recovered information model contains {nodesDictionary.Count} nodes");
+        Debug.WriteLine($"The source information model contains {allNodes.Count<IUANodeContext>()} nodes");
+        Debug.WriteLine($"Number of nodes not considered for export {orphanedNodes.Count}");
+        Debug.WriteLine($"Number of processed nodes {processedNodes.Count}");
       }
     }
 

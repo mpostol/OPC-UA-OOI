@@ -27,7 +27,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.ModelFactoryTestingFixture
     /// <value>The BrowseName of the node.</value>
     public string BrowseName
     {
-      set { }
+      set; get;
     }
 
     /// <summary>

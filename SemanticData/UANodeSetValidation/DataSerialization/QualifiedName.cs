@@ -34,6 +34,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   /// <i>1:MyName</i>
   /// <br/></para>
   /// </remarks>
+  //TODO Enhance/Improve BrowseName parser #538
   public partial class QualifiedName : IFormattable, ICloneable, IComparable
   {
     #region Constructors

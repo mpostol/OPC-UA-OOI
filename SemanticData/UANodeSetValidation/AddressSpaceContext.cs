@@ -282,8 +282,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       IUAModelContext _modelContext = model.ParseUAModelContext(m_NamespaceTable, m_TraceEvent.TraceEvent);
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext}."));
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - the context for the imported model is created and starting import nodes."));
-      foreach (UANode _nd in model.Items)
-        ImportUANode(_nd);
+      Dictionary<string, UANode> itemsDictionary = new Dictionary<string, UANode>();
+      foreach (UANode node in model.Items)
+      {
+        if (itemsDictionary.ContainsKey(node.NodeId.ToString()))
+          m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, $"The {node.NodeId.ToString()} is already defined in the imported model and is removed from further processing."));
+        else
+          ImportUANode(node);
+      }
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Finishing AddressSpaceContext.ImportNodeSet - imported {model.Items.Length} nodes."));
       return _modelContext.ModelUri;
     }

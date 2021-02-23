@@ -26,6 +26,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
     [TestMethod]
     public void QualifiedNameParseTestMethod3()
     {
+      //TODO Enhance/Improve BrowseName parser #538
       QualifiedName _qn = QualifiedName.Parse("Name"); //Cannot find information that the NamespaceIndex is optional
       Assert.IsNotNull(_qn);
       Assert.AreEqual<int>(_qn.NamespaceIndex, 0);

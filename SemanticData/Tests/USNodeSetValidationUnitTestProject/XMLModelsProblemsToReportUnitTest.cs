@@ -68,7 +68,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         addressSpace.ValidateAndExportModel(model);
         Assert.AreEqual<int>(5, traceContext.TraceList.Count);
         IEnumerable<NodeFactoryBase> nodes = testingModelFixture.Export();
-        Assert.AreEqual(21, nodes.Count< NodeFactoryBase>());
+        Assert.AreEqual(21, nodes.Count<NodeFactoryBase>());
         Dictionary<string, NodeFactoryBase> nodesDictionary = nodes.ToDictionary<NodeFactoryBase, string>(x => x.SymbolicName.Name);
         AddressSpaceContext asContext = addressSpace as AddressSpaceContext;
         //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
@@ -76,17 +76,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         asContext.UTValidateAndExportModel(1, x => allNodes = x);
         Assert.IsNotNull(allNodes);
         List<IUANodeContext> orphanedNodes = new List<IUANodeContext>();
+        List<IUANodeContext> processedNodes = new List<IUANodeContext>();
         foreach (IUANodeContext item in allNodes)
         {
-          if (!nodesDictionary.ContainsKey(item.BrowseName.ToString()))
+          if (!nodesDictionary.ContainsKey(item.BrowseName.Name))
           {
             orphanedNodes.Add(item);
             Debug.WriteLine($"The following node has been removed from the model: {item.ToString()}");
           }
+          else
+            processedNodes.Add(item);
         }
-        Debug.WriteLine($"The recovered information model contains {nodes.Count<NodeFactoryBase>()} nodes");
+        Debug.WriteLine($"The recovered information model contains {nodesDictionary.Count} nodes");
         Debug.WriteLine($"The source information model contains {allNodes.Count<IUANodeContext>()} nodes");
-        Debug.WriteLine($"Number of nodes not considered for export {orphanedNodes.Count<IUANodeContext>()}");
+        Debug.WriteLine($"Number of nodes not considered for export {orphanedNodes.Count}");
+        Debug.WriteLine($"Number of processed nodes {processedNodes.Count}");
       }
     }
 

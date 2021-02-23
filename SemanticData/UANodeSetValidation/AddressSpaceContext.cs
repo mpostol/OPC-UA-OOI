@@ -283,11 +283,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext}."));
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - the context for the imported model is created and starting import nodes."));
       Dictionary<string, UANode> itemsDictionary = new Dictionary<string, UANode>();
-      //TODO Enhance/Improve NodeId must be unique in context of a model #539
       foreach (UANode node in model.Items)
       {
         if (itemsDictionary.ContainsKey(node.NodeId.ToString()))
-          m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, $"{node.ToString()} has been duplicated in the imported model and is removed from further processing"));
+          m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, $"The {node.NodeId.ToString()} is already defined in the imported model and is removed from further processing."));
         else
           ImportUANode(node);
       }

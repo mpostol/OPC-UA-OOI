@@ -283,6 +283,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext}."));
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - the context for the imported model is created and starting import nodes."));
       Dictionary<string, UANode> itemsDictionary = new Dictionary<string, UANode>();
+      //TODO Enhance/Improve NodeId must be unique in context of a model #539
       foreach (UANode node in model.Items)
       {
         if (itemsDictionary.ContainsKey(node.NodeId.ToString()))

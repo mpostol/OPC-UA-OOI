@@ -62,7 +62,7 @@ Namespace concept is used by OPC UA to create unique identifiers across differen
 The `BrowseName` are used:
 
 - to build a browse path between Nodes
-- define a globaly unique meaning of an entity, e.g. properties
+- define a globaly unique meaning of an entity, e.g. properties, types, etc
 
 In case the `BrowseName` is applied to build a browse path its uniqueness is resolved in the context of a parent node. Unless the `BrowseName` is assigned a globally specific meaning defined independently the `namespaceIndex` shall be the same as assigned to `NodeId` attribute of the hosting Node. It is recommended that Nodes defined in any custom model (including but not limited to Companion Specification) should use a Namespace of the model for their NodeId and BrowseName attributes.
 
@@ -151,7 +151,7 @@ The semantic of this ReferenceType is to express a subtype relationship of types
 
 [5.8.3 DataType NodeClass](https://reference.opcfoundation.org/v104/Core/docs/Part3/5.8.3/) HasSubtype References may be used to expose a data type hierarchy in the AddressSpace. The semantic of subtyping is only defined to the point, that a Server may provide instances of the subtype instead of the DataType. Clients should not make any assumptions about any other semantic with that information. For example, it might not be possible to cast a value of one data type to its base data type. Servers need not provide HasSubtype References, even if their DataTypes span a type hierarchy. Some restrictions apply for subtyping enumeration DataTypes as defined in 8.14.
 
-[6.3 Subtyping of ObjectTypes and VariableTypes](https://reference.opcfoundation.org/v104/Core/docs/Part3/6.3.1/) 
+[6.3 Subtyping of ObjectTypes and VariableTypes](https://reference.opcfoundation.org/v104/Core/docs/Part3/6.3.1/)
 
 The HasSubtype ReferenceType defines subtypes of types. Subtyping can only occur between Nodes of the same NodeClass. Rules for subtyping ReferenceTypes are described in 5.3.3.3. There is no common definition for subtyping DataTypes, as described in 5.8.3. The remainder of 6.3 specify subtyping rules for single inheritance on ObjectTypes and VariableTypes.
 

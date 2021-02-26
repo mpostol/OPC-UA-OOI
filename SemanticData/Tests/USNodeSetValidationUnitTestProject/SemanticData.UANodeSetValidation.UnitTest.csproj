@@ -78,7 +78,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="DataSerialization\NodeIdUnitTest.cs" />
     <Compile Include="DataSerialization\QualifiedNameUnitTest.cs" />
+    <Compile Include="DataSerialization\ExtensionsUnitTest.cs" />
     <Compile Include="Helpers\TracedAddressSpaceContext.cs" />
     <Compile Include="ModelFactoryTestingFixture\DataTypeDefinitionFactoryBase.cs" />
     <Compile Include="ModelFactoryTestingFixture\DataTypeFactoryBase.cs" />
@@ -169,6 +171,9 @@
     <None Include="XMLModels\ProblemsToReport\fgolra177\Opc.Ua.Semi.NodeSet2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="XMLModels\ProblemsToReport\BrowseNameInheritedFrom0\BrowseNameInheritedFrom0.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="XMLModels\ProblemsToReport\fgolra177\OpcUaGemModel.xml" />
     <Content Include="XMLModels\ProblemsToReport\MachineVision\Opc.Ua.MachineVision.ModelDesign.xml" />
     <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml">

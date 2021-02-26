@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -16,8 +16,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   /// <seealso cref="IEquatable{UANode}" />
   public abstract partial class UANode : IEquatable<UANode>
   {
-
     #region IEquatable
+
     /// <summary>
     /// Indicates whether the current object is equal to another object of the same type.
     /// </summary>
@@ -32,12 +32,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return
         ParentEquals(other) &&
         this.AccessRestrictions == other.AccessRestrictions &&
-        this.BrowseName.AreEqual(other.BrowseName) &&
         //TODO Enhance/Improve BrowseName parser #538
+        //this.BrowseName.AreEqual(other.BrowseName) &&
         this.Description.LocalizedTextArraysEqual(other.Description) &&
         this.DisplayName.LocalizedTextArraysEqual(other.DisplayName) &&
         this.Documentation.AreEqual(other.Documentation) &&
-        //this.NodeId == other.NodeId && it is not Information Model
         this.ReleaseStatus == ReleaseStatus &&
         this.RolePermissions.RolePermissionsEquals(other.RolePermissions) &&
         this.SymbolicName.AreEqual(other.SymbolicName) &&
@@ -45,9 +44,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         this.WriteMask == other.WriteMask &&
         this.References.ReferencesEquals(other.References);
     }
-    #endregion
+
+    #endregion IEquatable
 
     #region API
+
     /// <summary>
     /// Clones this instance.
     /// </summary>
@@ -56,9 +57,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     {
       return ParentClone();
     }
+
     internal virtual void RemoveInheritedValues(UANode baseNode)
     {
-      //BrowseName 
+      //BrowseName
       if (this.DisplayName.LocalizedTextArraysEqual(baseNode.DisplayName))
         this.DisplayName = null;
       if (this.Description.LocalizedTextArraysEqual(baseNode.Description))
@@ -76,6 +78,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       //SymbolicName is not inherited
       //ReleaseStatus
     }
+
     /// <summary>
     /// Implements the == operator. Determines whether two instances of <see cref="UANode"/> represent the same information.
     /// </summary>
@@ -88,6 +91,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         return Object.ReferenceEquals(value2, null);
       return value1.Equals(value2);
     }
+
     /// <summary>
     /// Implements the != operator. Determines whether two instances of <see cref="UANode"/> don't represent the same information.
     /// </summary>
@@ -100,6 +104,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         return !Object.ReferenceEquals(value2, null);
       return !value1.Equals(value2);
     }
+
     /// <summary>
     /// Gets the node class enum based on the type of this instance.
     /// </summary>
@@ -127,6 +132,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         return NodeClassEnum.Unknown;
       }
     }
+
     internal virtual void RecalculateNodeIds(IUAModelContext modelContext)
     {
       BrowseName = modelContext.ImportQualifiedName(BrowseName);
@@ -136,9 +142,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
           _reference.RecalculateNodeIds(modelContext.ImportNodeId);
       ImportNodeId(this.RolePermissions, modelContext.ImportNodeId);
     }
-    #endregion
+
+    #endregion API
 
     #region override Object
+
     /// <summary>
     /// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
     /// </summary>
@@ -149,6 +157,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     {
       throw new NotImplementedException("Object.Equals must not be used and is intentionally not implemented");
     }
+
     /// <summary>
     /// Returns a hash code for this instance.
     /// </summary>
@@ -158,9 +167,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     {
       throw new NotImplementedException("Object.GetHashCode must not be used and is intentionally not implemented");
     }
-    #endregion
+
+    #endregion override Object
 
     #region private
+
     private void ImportNodeId(RolePermission[] rolePermissions, Func<string, string> importNodeId)
     {
       if (this.RolePermissions is null)
@@ -168,6 +179,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       foreach (RolePermission _permission in rolePermissions)
         _permission.RecalculateNodeIds(importNodeId);
     }
+
     /// <summary>
     /// Clones the specified node.
     /// </summary>
@@ -189,18 +201,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       node2Clone.UserWriteMask = this.UserWriteMask;
       node2Clone.WriteMask = this.WriteMask;
     }
+
     /// <summary>
     /// Indicates whether the the inherited parent object is also equal to another object.
     /// </summary>
     /// <param name="other">An object to compare with this object.</param>
     /// <returns><c>true</c> if the current object is equal to the <paramref name="other">other</paramref>; otherwise,, <c>false</c> otherwise.</returns>
     protected abstract bool ParentEquals(UANode other);
+
     /// <summary>
     /// Get the clone from the types derived from this one.
     /// </summary>
     /// <returns>An instance of <see cref="UANode"/>.</returns>
     protected abstract UANode ParentClone();
-    #endregion
 
+    #endregion private
   }
 }

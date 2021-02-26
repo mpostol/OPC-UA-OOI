@@ -84,13 +84,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       UANode = node;
       //TODO Enhance/Improve BrowseName parser #538
-      this.BrowseName = node.BrowseName.Parse(_TraceEvent);
-      if (QualifiedName.IsNull(this.BrowseName))
-      {
-        NodeId _id = NodeId.Parse(UANode.NodeId);
-        this.BrowseName = new QualifiedName($"EmptyBrowseName_{_id.IdentifierPart}", _id.NamespaceIndex);
-        _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, $"New identifier {this.BrowseName} is generated to proceed."));
-      }
+      this.BrowseName = node.BrowseName.ParseBrowseName(NodeIdContext, _TraceEvent);
       if (node.References == null)
         return;
       foreach (Reference _reference in node.References)
@@ -232,10 +226,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public bool IsProperty { get; private set; } = false;
 
     /// <summary>
-    /// Exports the <see cref="UANode.BrowseName"/> of a node recognized
-    /// as <see cref="ReferenceKindEnum.HasSubtype"/> or <see cref="ReferenceKindEnum.HasTypeDefinition"/> target.
+    /// Exports the <see cref="UANodeContext.BrowseName"/> of a node recognized as <see cref="ReferenceKindEnum.HasSubtype"/> or <see cref="ReferenceKindEnum.HasTypeDefinition"/> target.
     /// </summary>
-    /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the base type..</returns>
+    /// <returns>An instance of <see cref="XmlQualifiedName" /> encapsulating the base type name.</returns>
     public XmlQualifiedName ExportBaseTypeBrowseName()
     {
       bool type = UANode is UAType;

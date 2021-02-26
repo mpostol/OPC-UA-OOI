@@ -73,6 +73,44 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     [TestMethod]
+    public void UpdateBrowseNameIndexTest()
+    {
+      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
+      UANodeContext _newNode = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object, x => _traceBuffer.Add(x));
+      UAVariable _nodeFactory = new UAVariable()
+      {
+        NodeId = "ns=1;i=47",
+        BrowseName = "0:BrowseName",
+        ParentNodeId = "ns=1;i=43",
+        DataType = "i=884",
+        DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
+      };
+      _newNode.Update(_nodeFactory, x => Assert.Fail());
+      Assert.AreEqual<int>(0, _traceBuffer.Count);
+      Assert.AreEqual<string>("0:BrowseName", _newNode.BrowseName.ToString());
+    }
+
+    [TestMethod]
+    public void UpdateBrowseNameNoNamespaceIndexTest()
+    {
+      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
+      UANodeContext _newNode = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object, x => _traceBuffer.Add(x));
+      UAVariable _nodeFactory = new UAVariable()
+      {
+        NodeId = "ns=1;i=47",
+        BrowseName = "BrowseName",
+        ParentNodeId = "ns=1;i=43",
+        DataType = "i=884",
+        DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
+      };
+      _newNode.Update(_nodeFactory, x => Assert.Fail());
+      Assert.AreEqual<int>(0, _traceBuffer.Count);
+      Assert.AreEqual<string>("1:BrowseName", _newNode.BrowseName.ToString());
+    }
+
+    [TestMethod]
     public void UpdateNodeIdTest()
     {
       Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
@@ -248,7 +286,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UAVariable _derivedNode = new UAVariable()
       {
         NodeId = "ns=1;i=47",
-        BrowseName = "EURange",
+        BrowseName = "0:BrowseName",
         ParentNodeId = "ns=1;i=43",
         DataType = "i=884",
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
@@ -256,7 +294,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UANode _baseNode = new UAVariable()
       {
         NodeId = "i=17568",
-        BrowseName = "EURange",
+        BrowseName = "BrowseName",
         ParentNodeId = "i=15318",
         DataType = "i=884",
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }

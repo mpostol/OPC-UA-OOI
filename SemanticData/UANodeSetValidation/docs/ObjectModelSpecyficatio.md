@@ -79,14 +79,53 @@ abbreviation for identyfier), UInt32 (where U is an abbreviation for unsigned). 
 
 There is no recommendation on the use of prefixes. Companion Specifications may use a prefix because it suits their model. For example, if the Vision companion specification were to define types based on generic concepts (say a state machine), then using the prefix “Vision” may make sense (as in “VisionStateMachineType”).
 
-### General Rules for DisplayName Attribute
+#### Parametrysation
 
+Special characters may be used for parametryzation of the BrowseName to create several copies of the same node. In this case the `BrowseName` amy be used as a pattern of the valuess assigned to new instances created this way.
+
+> What is the impact on the `SymbolicName` ?
+
+#### Syntax
+
+Regex first attempt:
+
+```TXT
+/^(\s+)?((\d{1,}+):)?([^:\s][\w\S]+)/gm
+^(\s+)?((\d+):)?([a-zA-z0-9_]+)
+/^(\s+)?\d+:[a-zA-z0-9_]+$|^(\s+)?[a-zA-z0-9_]+$/gm
+/^(\s+)?\d+:[a-zA-z0-9_]+$|^(\s+)?[a-zA-z0-9_]+$|\S+/gm
+```
+
+```C#
+using System;
+using System.Text.RegularExpressions;
+
+public class Example
+{
+    public static void Main()
+    {
+        string pattern = @"^(\s+)?((\d{1,}+):)?([^:\s][\w\S]+)";
+        string input = @"       123456:_ab_98AS   
+       :_ab_98AS
+    1111112@#hdshdskk8878787*&&&*) 32322\/?\:";
+        RegexOptions options = RegexOptions.Multiline;
+        
+        foreach (Match m in Regex.Matches(input, pattern, options))
+        {
+            Console.WriteLine("'{0}' found at index {1}.", m.Value, m.Index);
+        }
+    }
+}
+```
+
+### General Rules for DisplayName Attribute
 
 ### General Rules for NodeId Attribute
 
   <xs:simpleType name="NodeId">
     <xs:restriction base="xs:string" />
   </xs:simpleType>
+
 
 ### General Rules for SymbolicName Attribute
 

@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -10,13 +10,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-//___________________________________________________________________________________
-//
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
-//
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
-
 using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
@@ -27,14 +20,13 @@ using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-
   /// <summary>
   /// Delegate LocalizedTextFactory - encapsulates a method that must be used to create localized text using <paramref name="localeField"/> and <paramref name="valueField"/>
   /// </summary>
-  /// <param name="localeField">The locale field. This argument is specified as a <see cref="string"/>  that is composed of a language component and a country/region 
-  /// component as specified by RFC 3066. The country/region component is always preceded by a hyphen. The format of the LocaleId string is shown below: 
+  /// <param name="localeField">The locale field. This argument is specified as a <see cref="string"/>  that is composed of a language component and a country/region
+  /// component as specified by RFC 3066. The country/region component is always preceded by a hyphen. The format of the LocaleId string is shown below:
   /// <c>
-  /// &lt;language&gt;[-&lt;country/region&gt;], 
+  /// &lt;language&gt;[-&lt;country/region&gt;],
   /// where:
   ///   &lt;language&gt; is the two letter ISO 639 code for a language,
   ///   &lt;country/region&gt; is the two letter ISO 3166 code for the country/region.
@@ -53,8 +45,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return string.Join("_", path.ToArray());
     }
+
     /// <summary>
-    /// Exports the string and filter out the default value. 
+    /// Exports the string and filter out the default value.
     /// </summary>
     /// <param name="value">The value.</param>
     /// <param name="defaultValue">The default value.</param>
@@ -65,26 +58,30 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return null;
       return string.Compare(value, defaultValue) == 0 ? null : value;
     }
+
     internal static bool? Export(this bool value, bool defaultValue)
     {
       return !value.Equals(defaultValue) ? value : new Nullable<bool>();
     }
+
     internal static int? Export(this double value, double defaultValue)
     {
       return !value.Equals(defaultValue) ? Convert.ToInt32(value) : new Nullable<int>();
     }
+
     internal static uint Validate(this uint value, uint maxValue, Action<uint> reportError)
     {
       if (value.CompareTo(maxValue) >= 0)
         reportError(value);
       return value & maxValue - 1;
     }
+
     //TODO IsValidLanguageIndependentIdentifier is not supported by the .NET standard #340
     /// <summary>
     /// Gets a value indicating whether the specified value is a valid language independent identifier.
     /// </summary>
     /// <remarks>
-    /// it is implemented using 
+    /// it is implemented using
     /// https://raw.githubusercontent.com/Microsoft/referencesource/3b1eaf5203992df69de44c783a3eda37d3d4cd10/System/compmod/system/codedom/compiler/CodeGenerator.cs as the starting point.
     /// </remarks>
     private static bool IsValidLanguageIndependentIdentifier(this string value)
@@ -105,6 +102,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case UnicodeCategory.LetterNumber:           // Lm
           case UnicodeCategory.OtherLetter:            // Lo
             break;
+
           case UnicodeCategory.NonSpacingMark:         // Mn
           case UnicodeCategory.SpacingCombiningMark:   // Mc
           case UnicodeCategory.ConnectorPunctuation:   // Pc
@@ -113,30 +111,35 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                                                        //if (nextMustBeStartChar && ch != '_')
                                                        //  return false;
             break;
+
           default:
             return false;
         }
       }
       return true;
     }
+
     internal static string ValidateIdentifier(this string name, Action<TraceMessage> reportError)
     {
       if (!name.IsValidLanguageIndependentIdentifier())
         reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongSymbolicName, string.Format("SymbolicName: '{0}'.", name)));
       return name;
     }
+
     internal static string NodeIdentifier(this XML.UANode node)
     {
       if (string.IsNullOrEmpty(node.BrowseName))
         return node.SymbolicName;
       return node.BrowseName;
     }
+
     internal static string ConvertToString(this XML.LocalizedText[] localizedText)
     {
       if (localizedText == null || localizedText.Length == 0)
         return "Empty LocalizedText";
       return string.Format("{0}:{1}", localizedText[0].Locale, localizedText[0].Value);
     }
+
     /// <summary>
     /// Converts the ArrayDimensions represented as the array of <seealso cref="uint"/> to string.
     /// </summary>
@@ -153,6 +156,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return string.Join(", ", arrayDimensions);
     }
+
     internal static void GetParameters(this XML.DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory dataTypeDefinitionFactory, IAddressSpaceBuildContext nodeContext, Action<TraceMessage> traceEvent)
     {
       if (dataTypeDefinition is null)
@@ -180,6 +184,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _nP.IsOptional = _item.IsOptional;
       }
     }
+
     internal static void ExportLocalizedTextArray(this XML.LocalizedText[] text, LocalizedTextFactory createLocalizedText)
     {
       if (text == null || text.Length == 0)
@@ -187,6 +192,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       foreach (XML.LocalizedText item in text)
         createLocalizedText(item.Locale, item.Value);
     }
+
     internal static XML.LocalizedText[] Truncate(this XML.LocalizedText[] localizedText, int maxLength, Action<TraceMessage> reportError)
     {
       if (localizedText == null || localizedText.Length == 0)
@@ -207,6 +213,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return localizedText;
     }
+
     internal static List<DataSerialization.Argument> GetParameters(this XmlElement xmlElement)
     {
       ListOfExtensionObject _wrapper = xmlElement.GetObject<ListOfExtensionObject>();
@@ -218,6 +225,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _ret.Add(item.Body.GetObject<DataSerialization.Argument>());
       return _ret;
     }
+
     /// <summary>
     /// Deserialize <see cref="XmlElement" /> object using <see cref="XmlSerializer" />
     /// </summary>
@@ -240,6 +248,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return _Value;
       }
     }
+
     internal static ReleaseStatus ConvertToReleaseStatus(this XML.ReleaseStatus releaseStatus)
     {
       ReleaseStatus _status = ReleaseStatus.Released;
@@ -248,15 +257,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         case XML.ReleaseStatus.Released:
           _status = ReleaseStatus.Released;
           break;
+
         case XML.ReleaseStatus.Draft:
           _status = ReleaseStatus.Draft;
           break;
+
         case XML.ReleaseStatus.Deprecated:
           _status = ReleaseStatus.Deprecated;
           break;
       }
       return _status;
     }
+
     internal static DataTypePurpose ConvertToDataTypePurpose(this XML.DataTypePurpose releaseStatus)
     {
       DataTypePurpose _status = DataTypePurpose.Normal;
@@ -265,15 +277,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         case XML.DataTypePurpose.Normal:
           _status = DataTypePurpose.Normal;
           break;
+
         case XML.DataTypePurpose.CodeGenerator:
           _status = DataTypePurpose.CodeGenerator;
           break;
+
         case XML.DataTypePurpose.ServicesOnly:
           _status = DataTypePurpose.ServicesOnly;
           break;
       }
       return _status;
     }
+
     internal static bool LocalizedTextArraysEqual(this XML.LocalizedText[] first, XML.LocalizedText[] second)
     {
       if (Object.ReferenceEquals(first, null))
@@ -295,6 +310,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return true;
     }
+
     internal static bool RolePermissionsEquals(this XML.RolePermission[] first, XML.RolePermission[] second)
     {
       if (Object.ReferenceEquals(first, null))
@@ -311,16 +327,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return true;
     }
+
     internal static bool ReferencesEquals(this XML.Reference[] first, XML.Reference[] second)
     {
       return true;
     }
+
     internal static bool AreEqual(this string first, string second)
     {
       if (String.IsNullOrEmpty(first))
         return String.IsNullOrEmpty(second);
       return String.Compare(first, second) == 0;
     }
+
     private static string ConvertToString(XML.LocalizedText x)
     {
       return $"{ x.Locale}:{x.Value}";

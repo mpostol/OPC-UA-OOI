@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization.UnitTest
+namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {
   [TestClass]
   public class NodeIdUnitTest

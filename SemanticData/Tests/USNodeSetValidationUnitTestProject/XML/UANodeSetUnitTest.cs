@@ -178,7 +178,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       _uAModelContext.Setup<string>(x => x.ImportQualifiedName(It.IsAny<string>())).Returns<string>
         (x =>
         {
-          QualifiedName nodeId = QualifiedName.Parse(x);
+          QualifiedName nodeId = QualifiedName.ParseRegex(x);
           if (nodeId.NamespaceIndex == 1)
             nodeId.NamespaceIndex = 10;
           return nodeId.ToString();

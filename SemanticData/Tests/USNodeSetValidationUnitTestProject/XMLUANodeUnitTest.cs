@@ -33,8 +33,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsTrue(null != _first);
       Assert.IsTrue(_first == _second);
       Assert.IsTrue(_second == _first);
-      _second.BrowseName = Guid.NewGuid().ToString();
-      Assert.IsTrue(_first != _second);
     }
     [TestMethod]
     public void UAInstanceEqualsTest()
@@ -43,6 +41,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UAInstance _second = TestData.CreateUAObject();
       _second.ParentNodeId = Guid.NewGuid().ToString();
       _second.NodeId = Guid.NewGuid().ToString();
+      _second.BrowseName = Guid.NewGuid().ToString();
       Assert.IsTrue(_first == _second);
     }
     [TestMethod]

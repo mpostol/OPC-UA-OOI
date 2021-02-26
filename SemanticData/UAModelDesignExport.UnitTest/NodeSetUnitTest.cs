@@ -19,7 +19,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
 {
   [TestClass]
   [DeploymentItem(@"Models\", @"Models\")]
-  public class NodeSetUnitTest
+  public class NodeSetIntegrationTest
   {
     #region TestContext
 
@@ -40,26 +40,17 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     #region TestMethod
 
     [TestMethod]
-    [ExpectedExceptionAttribute(typeof(FileNotFoundException))]
     public void FileNotFoundTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"sajlajsjljjjjk.sasa.sasa.sasa");
       Assert.IsFalse(_testDataFileInfo.Exists);
-      List<TraceMessage> _trace = new List<TraceMessage>();
-      int _diagnosticCounter = 0;
-      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, String.Empty, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-    }
-
-    [TestMethod]
-    [ExpectedExceptionAttribute(typeof(System.InvalidOperationException))]
-    public void WrongFileNFormatTestMethod()
-    {
-      FileInfo _testDataFileInfo = new FileInfo(@"Models\ReferenceTest\ReferenceTest.NodeSet.xml");
-      Assert.IsTrue(_testDataFileInfo.Exists);
-      List<TraceMessage> _trace = new List<TraceMessage>();
-      int _diagnosticCounter = 0;
-      string uri = "http://cas.eu/UA/CommServer/UnitTests/ReferenceTest";
-      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
+      using (TracedAddressSpaceContext addressSpace = new Instrumentation.TracedAddressSpaceContext())
+      {
+        Assert.ThrowsException<FileNotFoundException>(() => addressSpace.CreateInstance(_testDataFileInfo, String.Empty));
+        _testDataFileInfo = new FileInfo(@"Models\ReferenceTest\ReferenceTest.NodeSet.xml");
+        Assert.IsTrue(_testDataFileInfo.Exists);
+        Assert.ThrowsException<InvalidOperationException>(() => addressSpace.CreateInstance(_testDataFileInfo, String.Empty));
+      }
     }
 
     [TestMethod]
@@ -71,10 +62,11 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       List<TraceMessage> _trace = new List<TraceMessage>();
       int _diagnosticCounter = 0;
       string uri = "http://cas.eu/UA/CommServer/UnitTests/ReferenceTest";
-      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<int>(1, _expected.Items.Length);
-      CompareModelDesign(_expected, _actual);
+      using (TracedAddressSpaceContext addressSpace = new Instrumentation.TracedAddressSpaceContext())
+      {
+        ModelDesign _actual = addressSpace.CreateInstance(_testDataFileInfo, uri);
+        CompareModelDesign(_expected, _actual);
+      }
     }
 
     [TestMethod]
@@ -83,13 +75,15 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       FileInfo _testDataFileInfo = new FileInfo(@"Models\ObjectTypeTest\ObjectTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
       ModelDesign _expected = XmlFile.ReadXmlFile<ModelDesign>(@"Models\ObjectTypeTest.asp.xml");
-      List<TraceMessage> _trace = new List<TraceMessage>();
-      int _diagnosticCounter = 0;
       string uri = "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest";
-      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<int>(3, _expected.Items.Length);
-      CompareModelDesign(_expected, _actual);
+      using (TracedAddressSpaceContext addressSpace = new Instrumentation.TracedAddressSpaceContext())
+      {
+        ModelDesign _actual = addressSpace.CreateInstance(_testDataFileInfo, uri);
+        CompareModelDesign(_expected, _actual);
+        Assert.AreEqual<int>(0, addressSpace.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+        Assert.AreEqual<int>(3, _expected.Items.Length);
+        CompareModelDesign(_expected, _actual);
+      }
     }
 
     [TestMethod]
@@ -98,13 +92,15 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       FileInfo _testDataFileInfo = new FileInfo(@"Models\VariableTypeTest\VariableTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
       ModelDesign _expected = XmlFile.ReadXmlFile<ModelDesign>(@"Models\VariableTypeTest.asp.xml");
-      List<TraceMessage> _trace = new List<TraceMessage>();
-      int _diagnosticCounter = 0;
       string uri = "http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest";
-      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<int>(3, _expected.Items.Length);
-      CompareModelDesign(_expected, _actual);
+      using (TracedAddressSpaceContext addressSpace = new Instrumentation.TracedAddressSpaceContext())
+      {
+        ModelDesign _actual = addressSpace.CreateInstance(_testDataFileInfo, uri);
+        CompareModelDesign(_expected, _actual);
+        Assert.AreEqual<int>(0, addressSpace.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+        Assert.AreEqual<int>(3, _expected.Items.Length);
+        CompareModelDesign(_expected, _actual);
+      }
     }
 
     [TestMethod]
@@ -113,14 +109,16 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       FileInfo _testDataFileInfo = new FileInfo(@"Models\DataTypeTest\DataTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
       ModelDesign _expected = XmlFile.ReadXmlFile<ModelDesign>(@"Models\DataTypeTest.asp.xml");
-      List<TraceMessage> _trace = new List<TraceMessage>();
-      int _diagnosticCounter = 0;
       string uri = "http://cas.eu/UA/CommServer/UnitTests/DataTypeTest";
-      ModelDesign _actual = AddressSpaceContextService.CreateInstance(_testDataFileInfo, uri, z => TraceDiagnostic(z, _trace, ref _diagnosticCounter));
-      Assert.AreEqual<int>(0, _trace.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<int>(4, _expected.Items.Length);
-      Assert.AreEqual<int>(4, _actual.Items.Length);
-      CompareModelDesign(_expected, _actual);
+      using (TracedAddressSpaceContext addressSpace = new Instrumentation.TracedAddressSpaceContext())
+      {
+        ModelDesign _actual = addressSpace.CreateInstance(_testDataFileInfo, uri);
+        CompareModelDesign(_expected, _actual);
+        Assert.AreEqual<int>(0, addressSpace.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+        Assert.AreEqual<int>(4, _expected.Items.Length);
+        Assert.AreEqual<int>(4, _actual.Items.Length);
+        CompareModelDesign(_expected, _actual);
+      }
     }
 
     #endregion TestMethod

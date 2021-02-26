@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
@@ -344,9 +345,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <exception cref="ServiceResultException">Thrown under a variety of circumstances, each time with a specific message.</exception>
     public static QualifiedName Parse(string text)
     {
-      // check for null.
-      if (String.IsNullOrEmpty(text))
-        return QualifiedName.Null;
       // extract local namespace index.
       ushort namespaceIndex = 0;
       int start = -1;
@@ -368,6 +366,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       if (start == -1)
         return new QualifiedName(text);
       return new QualifiedName(text.Substring(start), namespaceIndex);
+    }
+
+    public static QualifiedName ParseRegex(string text)
+    {
+      ushort defaultNamespaceIndex = 0;
+      string pattern = @"\b((\d{1,}):)?(.+)";
+      RegexOptions options = RegexOptions.Singleline;
+      MatchCollection parseResult = Regex.Matches(text, pattern, options);
+      if (parseResult.Count == 0)
+        throw new ArgumentOutOfRangeException(nameof(text), $"The entry text {text} cannot be resolved to create a valid instance of the {nameof(QualifiedName)}.");
+      else if (parseResult.Count > 1)
+        throw new ArgumentOutOfRangeException(nameof(text), $"Ambiguous entry - {text} contains {parseResult.Count} parts that match the {nameof(QualifiedName)} syntax.");
+      if (!parseResult[0].Groups[3].Success)
+        throw new ArgumentOutOfRangeException(nameof(text), $"The entry text {text} doesn't contain a required {nameof(QualifiedName.Name)} field.");
+      if (ushort.TryParse(parseResult[0].Groups[2].Value, out ushort index))
+        defaultNamespaceIndex = index;
+      return new QualifiedName() { Name = parseResult[0].Groups[3].Value, namespaceIndexFieldSpecified = true, NamespaceIndex = defaultNamespaceIndex };
     }
 
     /// <summary>

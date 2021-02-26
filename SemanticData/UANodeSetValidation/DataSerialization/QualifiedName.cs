@@ -368,20 +368,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       return new QualifiedName(text.Substring(start), namespaceIndex);
     }
 
-    public static QualifiedName Parse(string text, ushort defaultNamespaceIndex)
+    public static QualifiedName ParseRegex(string text)
     {
-      string pattern = @"(\b(\d{1,}):)?([^:\s][\[\]\[\]\,\.]?[\w ]{3,}[\{\}\[\]\<\>]?[^ ])";
+      ushort defaultNamespaceIndex = 0;
+      string pattern = @"\b((\d{1,}):)?(.+)";
       RegexOptions options = RegexOptions.Singleline;
       MatchCollection parseResult = Regex.Matches(text, pattern, options);
       if (parseResult.Count == 0)
         throw new ArgumentOutOfRangeException(nameof(text), $"The entry text {text} cannot be resolved to create a valid instance of the {nameof(QualifiedName)}.");
       else if (parseResult.Count > 1)
-        throw new ArgumentOutOfRangeException(nameof(text), $"Ambiguous entry - text contains {parseResult.Count} parts that match the {nameof(QualifiedName)} syntax.");
+        throw new ArgumentOutOfRangeException(nameof(text), $"Ambiguous entry - {text} contains {parseResult.Count} parts that match the {nameof(QualifiedName)} syntax.");
       if (!parseResult[0].Groups[3].Success)
         throw new ArgumentOutOfRangeException(nameof(text), $"The entry text {text} doesn't contain a required {nameof(QualifiedName.Name)} field.");
       if (ushort.TryParse(parseResult[0].Groups[2].Value, out ushort index))
         defaultNamespaceIndex = index;
-      return new QualifiedName() { Name = parseResult[0].Groups[3].Value, namespaceIndexFieldSpecified = true, NamespaceIndex= defaultNamespaceIndex  };
+      return new QualifiedName() { Name = parseResult[0].Groups[3].Value, namespaceIndexFieldSpecified = true, NamespaceIndex = defaultNamespaceIndex };
     }
 
     /// <summary>

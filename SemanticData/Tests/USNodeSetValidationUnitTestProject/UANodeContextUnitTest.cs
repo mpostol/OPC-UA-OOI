@@ -73,7 +73,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     [TestMethod]
-    public void UpdateBrowseNameIndexTest()
+    public void UpdateBrowseNameIndex0Test()
     {
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
       List<TraceMessage> _traceBuffer = new List<TraceMessage>();
@@ -88,9 +88,27 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       };
       _newNode.Update(_nodeFactory, x => Assert.Fail());
       Assert.AreEqual<int>(0, _traceBuffer.Count);
-      Assert.AreEqual<string>("0:BrowseName", _newNode.BrowseName.ToString());
+      Assert.AreEqual<string>("BrowseName", _newNode.BrowseName.ToString());
     }
 
+    [TestMethod]
+    public void UpdateBrowseNameIndex1Test()
+    {
+      Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
+      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
+      UANodeContext _newNode = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object, x => _traceBuffer.Add(x));
+      UAVariable _nodeFactory = new UAVariable()
+      {
+        NodeId = "ns=1;i=47",
+        BrowseName = "1:BrowseName",
+        ParentNodeId = "ns=1;i=43",
+        DataType = "i=884",
+        DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
+      };
+      _newNode.Update(_nodeFactory, x => Assert.Fail());
+      Assert.AreEqual<int>(0, _traceBuffer.Count);
+      Assert.AreEqual<string>("1:BrowseName", _newNode.BrowseName.ToString());
+    }
     [TestMethod]
     public void UpdateBrowseNameNoNamespaceIndexTest()
     {
@@ -107,7 +125,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       };
       _newNode.Update(_nodeFactory, x => Assert.Fail());
       Assert.AreEqual<int>(0, _traceBuffer.Count);
-      Assert.AreEqual<string>("1:BrowseName", _newNode.BrowseName.ToString());
+      Assert.AreEqual<string>("BrowseName", _newNode.BrowseName.ToString());
     }
 
     [TestMethod]
@@ -149,7 +167,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void UpdateWithDifferentNodeIdTest()
     {
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-      QualifiedName qualifiedName = QualifiedName.Parse("EURange");
       List<TraceMessage> _traceBuffer = new List<TraceMessage>();
       IUANodeContext _newNode = new UANodeContext(NodeId.Parse("ns=1;i=11"), _asMock.Object, x => _traceBuffer.Add(x));
       Assert.AreEqual<string>("ns=1;i=11", _newNode.NodeIdContext.ToString());
@@ -259,9 +276,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestMethod]
     public void ExportBrowseNameTest()
     {
-      UANodeSet _tm = TestData.CreateNodeSetModel();
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
-      _asMock.Setup(x => x.GetNamespace(0)).Returns<ushort>(x => "tempuri.org");
+      _asMock.Setup(x => x.GetNamespace(0)).Returns<ushort>(x => Namespaces.OpcUa);
+      _asMock.Setup(x => x.GetNamespace(1)).Returns<ushort>(x => "tempuri.org");
       UANode _nodeFactory = new UAVariable()
       {
         NodeId = "ns=1;i=47",
@@ -275,8 +292,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       _node.Update(_nodeFactory, x => Assert.Fail());
       XmlQualifiedName _resolvedName = _node.ExportNodeBrowseName();
       _asMock.Verify(x => x.GetNamespace(0), Times.Once);
+      _asMock.Verify(x => x.GetNamespace(1), Times.Never);
       Assert.IsNotNull(_resolvedName);
-      Assert.AreEqual<string>("tempuri.org:EURange", _resolvedName.ToString());
+      Assert.AreEqual<string>("http://opcfoundation.org/UA/:EURange", _resolvedName.ToString());
       Assert.AreEqual<int>(0, _traceBuffer.Count);
     }
 

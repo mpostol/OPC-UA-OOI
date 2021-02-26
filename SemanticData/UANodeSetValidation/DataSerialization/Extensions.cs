@@ -21,7 +21,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       QualifiedName qualifiedNameToReturn = null;
       try
       {
-        qualifiedNameToReturn = QualifiedName.Parse(qualifiedName, nodeId.NamespaceIndex);
+        qualifiedNameToReturn = QualifiedName.ParseRegex(qualifiedName);
       }
       catch (ServiceResultException _sre)
       {
@@ -29,15 +29,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       }
       catch (Exception ex)
       {
-        qualifiedNameToReturn = new QualifiedName($"EmptyBrowseName_{nodeId.IdentifierPart.ToString()}", nodeId.NamespaceIndex);
+        Random random = new Random();
+        qualifiedNameToReturn = QualifiedName.ParseRegex($"{nodeId.NamespaceIndex}:EmptyBrowseName_{nodeId.IdentifierPart.ToString()}.{random.Next(-9999, 0)}");
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, $"Error message: {ex.Message} - new identifier {qualifiedNameToReturn.ToString()} is generated to proceed."));
       }
-      //if (!qualifiedNameToReturn.NamespaceIndexSpecified)
-      //{
-      //  qualifiedNameToReturn.NamespaceIndex = nodeId.NamespaceIndex;
-      //  qualifiedNameToReturn.NamespaceIndexSpecified = true;
-      //  //traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, $"The BrowseName shall have namespaceIndex specified. Current vale {qualifiedNameToReturn.NamespaceIndex} derived it from the NodeId ."));
-      //}
       return qualifiedNameToReturn;
     }
 

@@ -6,7 +6,6 @@
 //___________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {
@@ -21,6 +20,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       _qualifiedName = new QualifiedName("name", 1);
       Assert.IsTrue(_qualifiedName != null);
     }
+
     [TestMethod]
     public void EqualOperatorTest()
     {
@@ -29,6 +29,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       _qualifiedName = new QualifiedName("name", 1);
       Assert.IsFalse(_qualifiedName == null);
     }
+
     [TestMethod]
     public void EqualsTest()
     {
@@ -43,6 +44,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       _qualifiedNameSecond = new QualifiedName("name", 0);
       Assert.IsFalse(_qualifiedName.Equals(_qualifiedNameSecond));
     }
+
     [TestMethod]
     public void ToStringTest()
     {
@@ -53,6 +55,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       _qualifiedName = new QualifiedName();
       Assert.AreEqual<string>("", _qualifiedName.ToString());
     }
+
     [TestMethod]
     public void QualifiedNameConstructorTest()
     {
@@ -62,28 +65,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       //Assert.AreEqual<int>(_qn.NamespaceIndex, 0);
       Assert.IsFalse(_qn.NamespaceIndexSpecified);
       Assert.AreEqual<string>(_qn.Name, name);
-    }
-
-    [TestMethod]
-    public void QualifiedNameParseTest()
-    {
-      //TODO Enhance/Improve BrowseName parser #538
-      QualifiedName _qn = QualifiedName.Parse("Name"); //Cannot find information that the NamespaceIndex is optional
-      Assert.IsNotNull(_qn);
-      Assert.AreEqual<int>(_qn.NamespaceIndex, 0);
-      Assert.IsFalse(_qn.NamespaceIndexSpecified);
-      Assert.AreEqual<string>(_qn.Name, "Name");
-    }
-
-    [TestMethod]
-    public void QualifiedNameParse0NamespaceIndexTest()
-    {
-      //TODO Enhance/Improve BrowseName parser #538
-      QualifiedName _qn = QualifiedName.Parse("0:Name"); //Cannot find information that the NamespaceIndex is optional
-      Assert.IsNotNull(_qn);
-      Assert.IsFalse(_qn.NamespaceIndexSpecified);
-      //Assert.AreEqual<int>(_qn.NamespaceIndex, 0);
-      Assert.AreEqual<string>(_qn.Name, "Name");
     }
 
     [TestMethod]
@@ -100,25 +81,50 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       _qn2 = new QualifiedName("1:Default Binary");
       Assert.IsTrue(_qn1 != _qn2);
     }
+
+    [TestMethod]
+    public void QualifiedNameParseTest()
+    {
+      QualifiedName _qn = QualifiedName.ParseRegex("Name");
+      Assert.IsNotNull(_qn);
+      Assert.AreEqual<int>(_qn.NamespaceIndex, 0);
+      Assert.IsTrue(_qn.NamespaceIndexSpecified);
+      Assert.AreEqual<string>(_qn.Name, "Name");
+    }
+
+    [TestMethod]
+    public void QualifiedNameParse0NamespaceIndexTest()
+    {
+      QualifiedName _qn = QualifiedName.ParseRegex("0:Name");
+      Assert.IsNotNull(_qn);
+      Assert.IsTrue(_qn.NamespaceIndexSpecified);
+      Assert.AreEqual<int>(_qn.NamespaceIndex, 0);
+      Assert.AreEqual<string>(_qn.Name, "Name");
+    }
+
     [TestMethod]
     public void QualifiedNameParseDefaultNamespaceTestMethod()
     {
-      AssertQualifiedNameParse("1:Default Binary", 1, "Default Binary", 1);
-      AssertQualifiedNameParse(":Default Binary", 123, "Default Binary", 123);
-      AssertQualifiedNameParse("1:Default Binary", 3, "Default Binary", 1);
-      AssertQualifiedNameParse("Default Binary", 123, "Default Binary", 123);
-      AssertQualifiedNameParse("   1:Default Binary   ", 1, "Default Binary", 1);
-      AssertQualifiedNameParse("   Default Binary   ", 1, "Default Binary", 1);
-      AssertQualifiedNameParse("   Default Binary   ", 0, "Default Binary", 0);
-      AssertQualifiedNameParse("   1:<Default Binary>   ", 1, "<Default Binary>", 1);
-      AssertQualifiedNameParse("   1:[Default Binary]   ", 1, "[Default Binary]", 1);
-      AssertQualifiedNameParse("   1:{Default Binary}   ", 1, "{Default Binary}", 1);
-      AssertQualifiedNameParse("   1:Default Binary {n}   ", 1, "Default Binary {n", 1);
+      AssertQualifiedNameParse("0:http://opcfoundation.org/UA/", @"http://opcfoundation.org/UA/", 0);
+      AssertQualifiedNameParse("Byte", "Byte", 0);
+      AssertQualifiedNameParse("1:Default Binary", "Default Binary", 1);
+      AssertQualifiedNameParse(":Default Binary", "Default Binary", 0);
+      AssertQualifiedNameParse("1:Default Binary", "Default Binary", 1);
+      AssertQualifiedNameParse("Default Binary", "Default Binary", 0);
+      AssertQualifiedNameParse("   1:Default Binary   ", "Default Binary   ", 1);
+      AssertQualifiedNameParse("   Default Binary   ", "Default Binary   ", 0);
+      AssertQualifiedNameParse("   Default Binary   ", "Default Binary   ", 0);
+      AssertQualifiedNameParse("   1:<Default Binary>", "<Default Binary>", 1);
+      AssertQualifiedNameParse("   1:[Default Binary]", "[Default Binary]", 1);
+      AssertQualifiedNameParse("   1:{Default Binary}", "{Default Binary}", 1);
+      AssertQualifiedNameParse("   1:Default Binary {n}", "Default Binary {n}", 1);
     }
-    private void AssertQualifiedNameParse(string text, ushort defIndex, string expectedName, ushort expectedNamespaceIndex)
+
+    private void AssertQualifiedNameParse(string text, string expectedName, ushort expectedNamespaceIndex)
     {
-      QualifiedName newQualifiedName = QualifiedName.Parse(text, defIndex);
+      QualifiedName newQualifiedName = QualifiedName.ParseRegex(text);
       Assert.IsNotNull(newQualifiedName);
+      Assert.IsTrue(newQualifiedName.NamespaceIndexSpecified);
       Assert.AreEqual<int>(expectedNamespaceIndex, newQualifiedName.NamespaceIndex);
       Assert.AreEqual<string>(expectedName, newQualifiedName.Name);
     }

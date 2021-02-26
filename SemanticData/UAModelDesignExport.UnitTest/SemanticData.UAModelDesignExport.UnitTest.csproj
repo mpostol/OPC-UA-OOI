@@ -62,6 +62,7 @@
     <Compile Include="Instrumentation\AddressSpaceContextService.cs" />
     <Compile Include="Instrumentation\Extensions.cs" />
     <Compile Include="Instrumentation\IStylesheetNameProvider.cs" />
+    <Compile Include="Instrumentation\TracedAddressSpaceContext.cs" />
     <Compile Include="Instrumentation\UnitTestsExtensions.cs" />
     <Compile Include="DataTypeDefinitionFactoryBaseUnitTest.cs" />
     <Compile Include="ModelDesignExportUnitTest.cs" />

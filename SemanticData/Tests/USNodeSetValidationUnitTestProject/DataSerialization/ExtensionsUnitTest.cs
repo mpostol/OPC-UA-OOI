@@ -24,17 +24,25 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       QualifiedName name =  "".ParseBrowseName(new NodeId("i=105"), x => traceLog.Add(x));
       Assert.IsNotNull(name);
       Assert.IsFalse(String.IsNullOrEmpty(name.Name));
-      Assert.IsFalse(name.NamespaceIndexSpecified);
-      Assert.AreEqual<int>(1, traceLog.Count);
-      Assert.AreEqual<Focus>(Focus.NodeClass, traceLog[0].BuildError.Focus);
-      traceLog.Clear();
-      name = "".ParseBrowseName(new NodeId("ns=1;i=28"), x => traceLog.Add(x));
-      Assert.IsNotNull(name);
-      Assert.IsFalse(String.IsNullOrEmpty(name.Name));
+      Assert.IsTrue(name.Name.StartsWith("EmptyBrowseName_"));
       Assert.IsTrue(name.NamespaceIndexSpecified);
       Assert.AreEqual<int>(1, traceLog.Count);
       Assert.AreEqual<Focus>(Focus.NodeClass, traceLog[0].BuildError.Focus);
-      Assert.AreEqual<ushort>(1, name.NamespaceIndex);
+      traceLog.Clear();
+      name = "Id".ParseBrowseName(new NodeId("ns=1;i=28"), x => traceLog.Add(x));
+      Assert.IsNotNull(name);
+      Assert.IsFalse(String.IsNullOrEmpty(name.Name));
+      Assert.AreEqual<string>("Id", name.Name);
+      Assert.IsTrue(name.NamespaceIndexSpecified);
+      Assert.AreEqual<ushort>(0, name.NamespaceIndex);
+      Assert.AreEqual<int>(0, traceLog.Count);
+      name = "   123:Id".ParseBrowseName(new NodeId("ns=1;i=28"), x => traceLog.Add(x));
+      Assert.IsNotNull(name);
+      Assert.IsFalse(String.IsNullOrEmpty(name.Name));
+      Assert.AreEqual<string>("Id", name.Name);
+      Assert.IsTrue(name.NamespaceIndexSpecified);
+      Assert.AreEqual<ushort>(123, name.NamespaceIndex);
+      Assert.AreEqual<int>(0, traceLog.Count);
     }
   }
 }

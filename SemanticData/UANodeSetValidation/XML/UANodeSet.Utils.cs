@@ -20,7 +20,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     internal IUAModelContext ParseUAModelContext(IAddressSpaceURIRecalculate addressSpaceContext, Action<TraceMessage> traceEvent)
     {
       UAModelContext model = UAModelContext.ParseUANodeSetModelHeader(this, addressSpaceContext, traceEvent);
-      this.RecalculateNodeIds(model);
+      this.RecalculateNodeIds(model, traceEvent);
       return model;
     }
 
@@ -52,14 +52,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     #region private
 
-    private void RecalculateNodeIds(IUAModelContext modelContext)
+    private void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
       if (this.Aliases != null)
         foreach (NodeIdAlias alias in this.Aliases)
-          alias.RecalculateNodeIds(modelContext.ImportNodeId);
+          alias.RecalculateNodeIds(x => modelContext.ImportNodeId(x, trace));
       if (this.Items != null)
         foreach (UANode item in Items)
-          item.RecalculateNodeIds(modelContext);
+          item.RecalculateNodeIds(modelContext, trace);
     }
 
     /// <summary>

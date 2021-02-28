@@ -6,6 +6,8 @@
 //___________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
@@ -33,7 +35,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         ParentEquals(other) &&
         this.AccessRestrictions == other.AccessRestrictions &&
         //TODO Enhance/Improve BrowseName parser #538
-        //this.BrowseName.AreEqual(other.BrowseName) &&
+        this.BrowseNameQualifiedName.Equals(other.BrowseNameQualifiedName) &&
         this.Description.LocalizedTextArraysEqual(other.Description) &&
         this.DisplayName.LocalizedTextArraysEqual(other.DisplayName) &&
         this.Documentation.AreEqual(other.Documentation) &&
@@ -133,17 +135,24 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       }
     }
 
-    internal virtual void RecalculateNodeIds(IUAModelContext modelContext)
+    internal virtual void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
-      BrowseName = modelContext.ImportQualifiedName(BrowseName);
-      this.NodeId = modelContext.ImportNodeId(this.NodeId);
+      //TODO Enhance/Improve BrowseName parser #538
+      (BrowseNameQualifiedName, NodeIdNodeId) = modelContext.ImportBrowseName(BrowseName, this.NodeId, trace);
       if (!(this.References is null))
         foreach (Reference _reference in this.References)
-          _reference.RecalculateNodeIds(modelContext.ImportNodeId);
-      ImportNodeId(this.RolePermissions, modelContext.ImportNodeId);
+          _reference.RecalculateNodeIds(x => modelContext.ImportNodeId(x, trace));
+      ImportNodeId(this.RolePermissions, x => modelContext.ImportNodeId(x, trace));
     }
 
     #endregion API
+
+    #region INode
+
+    internal QualifiedName BrowseNameQualifiedName { get; private set; }
+    internal NodeId NodeIdNodeId { get; private set; }
+
+    #endregion INode
 
     #region override Object
 
@@ -172,7 +181,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     #region private
 
-    private void ImportNodeId(RolePermission[] rolePermissions, Func<string, string> importNodeId)
+    private void ImportNodeId(RolePermission[] rolePermissions, Func<string, NodeId> importNodeId)
     {
       if (this.RolePermissions is null)
         return;

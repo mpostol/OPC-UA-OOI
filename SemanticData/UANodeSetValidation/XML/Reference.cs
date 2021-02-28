@@ -1,11 +1,12 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
@@ -20,6 +21,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     {
       return this.ToString().CompareTo(other.ToString()) == 0;
     }
+
     /// <summary>
     /// Returns a <see cref="System.String" /> that represents this instance.
     /// </summary>
@@ -28,11 +30,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     {
       return $"{this.IsForward}, {this.ReferenceType}, {this.Value}";
     }
-    internal void RecalculateNodeIds(Func<string, string> importNodeId)
+
+    internal void RecalculateNodeIds(Func<string, NodeId> importNodeId)
     {
-      ReferenceType = importNodeId(ReferenceType);
-      Value = importNodeId(Value);
+      ReferenceTypeNodeid = importNodeId(ReferenceType);
+      ValueNodeId = importNodeId(Value);
     }
 
+    internal NodeId ReferenceTypeNodeid { get; private set; }
+    internal NodeId ValueNodeId { get; private set; }
   }
 }

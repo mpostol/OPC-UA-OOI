@@ -34,7 +34,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, traceContext.TraceList[0].BuildError.Identifier);
         traceContext.Clear();
         addressSpace.ValidateAndExportModel(model);
-        //TODO Enhance/Improve BrowseName parser #538
         Assert.AreEqual<int>(0, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataEncoding).Count<TraceMessage>());
         Assert.AreEqual<int>(0, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataType).Count<TraceMessage>());
         Assert.AreEqual<int>(0, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Naming).Count<TraceMessage>());
@@ -79,7 +78,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         List<IUANodeContext> processedNodes = new List<IUANodeContext>();
         foreach (IUANodeContext item in allNodes)
         {
-          if (!nodesDictionary.ContainsKey(item.BrowseName.Name))
+          if (!nodesDictionary.ContainsKey(item.UANode.BrowseNameQualifiedName.Name))
           {
             orphanedNodes.Add(item);
             Debug.WriteLine($"The following node has been removed from the model: {item.ToString()}");

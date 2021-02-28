@@ -15,15 +15,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   /// </summary>
   internal static class Extensions
   {
+    //TODO Enhance/Improve BrowseName parser #538
     internal static QualifiedName ParseBrowseName(this string qualifiedName, NodeId nodeId, Action<TraceMessage> traceEvent)
     {
-      if ((nodeId == null) || nodeId == NodeId.Null) throw new ArgumentNullException(nameof(NodeId));
       QualifiedName qualifiedNameToReturn = null;
       try
       {
         qualifiedNameToReturn = QualifiedName.ParseRegex(qualifiedName);
       }
-      catch (ServiceResultException _sre)
+      catch (ServiceResultException _sre) //TODO Rewrite add to UT
       {
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.QualifiedNameInvalidSyntax, String.Format("Error message: {0}", _sre.Message)));
       }
@@ -35,7 +35,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       }
       return qualifiedNameToReturn;
     }
-
+    //TODO Enhance/Improve BrowseName parser #538 rewrite and add to UT
+    /// <summary>
+    /// Parses the node identifier with the syntax defined in Part 6-5.3.1.10
+    /// </summary>
+    /// <param name="nodeId">The node identifier.</param>
+    /// <param name="traceEvent">The trace event.</param>
+    /// <returns>NodeId.</returns>
+    internal static NodeId ParseNodeId(this string nodeId, Action<TraceMessage> traceEvent)
+    {
+      NodeId nodeId2Return = NodeId.Parse(nodeId);
+      return nodeId2Return;
+    }
     /// <summary>
     /// Gets the <see cref="NodeId.IdentifierPart" /> as uint number.
     /// </summary>

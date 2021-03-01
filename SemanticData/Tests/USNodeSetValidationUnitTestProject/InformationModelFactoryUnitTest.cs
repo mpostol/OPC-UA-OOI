@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
+namespace UAOOI.SemanticData.UANodeSetValidation
 {
 
   [TestClass]

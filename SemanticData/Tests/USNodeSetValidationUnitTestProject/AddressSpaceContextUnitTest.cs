@@ -16,7 +16,7 @@ using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest
+namespace UAOOI.SemanticData.UANodeSetValidation
 {
   [TestClass]
   public class AddressSpaceContextUnitTest

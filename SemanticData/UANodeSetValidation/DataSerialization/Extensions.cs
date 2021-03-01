@@ -18,6 +18,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     //TODO Enhance/Improve BrowseName parser #538
     internal static QualifiedName ParseBrowseName(this string qualifiedName, NodeId nodeId, Action<TraceMessage> traceEvent)
     {
+      if ((nodeId == null) || nodeId == NodeId.Null) throw new ArgumentNullException(nameof(NodeId));
       QualifiedName qualifiedNameToReturn = null;
       try
       {

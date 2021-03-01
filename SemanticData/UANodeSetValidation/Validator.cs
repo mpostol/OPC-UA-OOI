@@ -173,7 +173,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(m_buildErrorsHandling.TraceEvent);
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(string.Empty);
-      nodeDesign.DataType = string.IsNullOrEmpty(nodeSet.DataType) ? null : m_AddressSpace.ExportBrowseName(NodeId.Parse(nodeSet.DataType), DataTypes.Number);//TODO add test case must be DataType, must not be abstract
+      nodeDesign.DataType = string.IsNullOrEmpty(nodeSet.DataType) ? null : m_AddressSpace.ExportBrowseName(nodeSet.DataTypeNodeId, DataTypes.Number);//TODO add test case must be DataType, must not be abstract
       nodeDesign.DefaultValue = nodeSet.Value; //TODO add test case must be of type defined by DataType
       nodeDesign.Historizing = nodeSet.Historizing.Export(false);
       nodeDesign.MinimumSamplingInterval = nodeSet.MinimumSamplingInterval.Export(0D);
@@ -185,7 +185,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private void Update(IVariableTypeFactory nodeDesign, UAVariableType nodeSet)
     {
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(string.Empty);
-      nodeDesign.DataType = m_AddressSpace.ExportBrowseName(NodeId.Parse(nodeSet.DataType), DataTypes.Number);
+      nodeDesign.DataType = m_AddressSpace.ExportBrowseName(nodeSet.DataTypeNodeId, DataTypes.Number);
       nodeDesign.DefaultValue = nodeSet.Value;
       nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(m_buildErrorsHandling.TraceEvent);
     }

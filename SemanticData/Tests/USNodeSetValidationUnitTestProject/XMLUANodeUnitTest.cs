@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -23,6 +23,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UANode _second = TestData.CreateUAReferenceType();
       Assert.IsTrue(_first == _second);
     }
+
     [TestMethod]
     public void UANodeEquals()
     {
@@ -34,6 +35,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsTrue(_first == _second);
       Assert.IsTrue(_second == _first);
     }
+
     [TestMethod]
     public void UAInstanceEqualsTest()
     {
@@ -44,6 +46,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       _second.BrowseName = Guid.NewGuid().ToString();
       Assert.IsTrue(_first == _second);
     }
+
     [TestMethod]
     public void UAObjectEqualsTest()
     {
@@ -54,4 +57,3 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
   }
 }
-

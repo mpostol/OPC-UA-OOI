@@ -83,8 +83,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return;
       }
       UANode = node;
-      //TODO Enhance/Improve BrowseName parser #538
-      //this.BrowseName = node.BrowseName.ParseBrowseName(NodeIdContext, _TraceEvent);
       if (node.References == null)
         return;
       foreach (Reference _reference in node.References)

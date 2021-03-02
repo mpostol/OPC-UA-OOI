@@ -109,11 +109,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     [TestMethod]
-    public void UpdateNodeIdTest()
+    public void UpdateTest()
     {
-      Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
-      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
-      UANodeContext _toTest = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object, x => _traceBuffer.Add(x));
+      Mock<IAddressSpaceBuildContext> addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
+      addressSpaceMock.Setup(x => x.GetOrCreateNodeContext(It.IsAny<NodeId>(), It.IsAny<Func<NodeId, UANodeContext>>()));
+      List<TraceMessage> traceBuffer = new List<TraceMessage>();
+      UANodeContext toTest = new UANodeContext(NodeId.Parse("ns=1;i=11"), addressSpaceMock.Object, x => traceBuffer.Add(x));
       XML.UANode _node = new UAObject()
       {
         NodeId = "ns=1;i=1",
@@ -121,7 +122,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "New UA Object" } },
         References = new Reference[]
         {
-          new Reference() { ReferenceType = ReferenceTypeIds.HasTypeDefinition.ToString(), Value = ObjectTypeIds.BaseObjectType.ToString() },
+          new Reference() { ReferenceType = ReferenceTypeIds.HasTypeDefinition.ToString(), IsForward= true, Value = ObjectTypeIds.BaseObjectType.ToString() },
           new Reference() { ReferenceType = ReferenceTypeIds.Organizes.ToString(), IsForward= false, Value = "i=85" }
         },
         // UAInstance
@@ -131,17 +132,25 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       };
       _node.RecalculateNodeIds(new ModelContextMock(), x => Assert.Fail());
       List<UAReferenceContext> _registerReference = new List<UAReferenceContext>();
-      _toTest.Update(_node, x => _registerReference.Add(x));
+      toTest.Update(_node, x => _registerReference.Add(x));
+      addressSpaceMock.Verify(x => x.GetOrCreateNodeContext(It.IsAny<NodeId>(), It.IsAny<Func<NodeId, UANodeContext>>()), Times.Never);
       Assert.AreEqual<int>(2, _registerReference.Count);
-      Assert.AreEqual<string>(ReferenceTypeIds.HasTypeDefinition.ToString(), _registerReference[0].TargetNode.ToString());
-      Assert.AreEqual<string>(ReferenceTypeIds.Organizes.ToString(), _registerReference[1].TargetNode.ToString());
-      Assert.IsFalse(_toTest.InRecursionChain);
-      Assert.IsFalse(_toTest.IsProperty);
-      Assert.IsFalse(((IUANodeBase)_toTest).IsPropertyVariableType);
-      Assert.IsFalse(_toTest.ModelingRule.HasValue);
-      Assert.IsNotNull(_toTest.NodeIdContext);
-      Assert.AreEqual<string>(_toTest.NodeIdContext.ToString(), "ns=1;i=11");
-      Assert.IsNotNull(_toTest.UANode);
+      Assert.AreEqual<string>(ReferenceTypeIds.HasTypeDefinition.ToString(), _registerReference[0].Reference.ReferenceTypeNodeid.ToString());
+      Assert.AreSame(toTest, _registerReference[0].ParentNode);
+      Assert.AreSame(toTest, _registerReference[0].SourceNode);
+      Assert.IsNull(_registerReference[0].TargetNode);
+      Assert.AreEqual<string>(ReferenceTypeIds.Organizes.ToString(), _registerReference[1].Reference.ReferenceTypeNodeid.ToString());
+      Assert.IsNull(_registerReference[1].SourceNode);
+      Assert.AreSame(toTest, _registerReference[1].ParentNode);
+      Assert.AreSame(toTest, _registerReference[1].TargetNode);
+
+      Assert.IsFalse(toTest.InRecursionChain);
+      Assert.IsFalse(toTest.IsProperty);
+      Assert.IsFalse(((IUANodeBase)toTest).IsPropertyVariableType);
+      Assert.IsFalse(toTest.ModelingRule.HasValue);
+      Assert.IsNotNull(toTest.NodeIdContext);
+      Assert.AreEqual<string>(toTest.NodeIdContext.ToString(), "ns=1;i=11");
+      Assert.IsNotNull(toTest.UANode);
     }
 
     [TestMethod]

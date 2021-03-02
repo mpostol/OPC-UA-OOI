@@ -62,10 +62,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     Dictionary<string, IUANodeBase> GetDerivedInstances();
     /// <summary>
-    /// Gets or sets the browse name of this node.
-    /// </summary>
-    QualifiedName BrowseName { get; set; }
-    /// <summary>
     ///  Exports the BrowseName of the BaseType.
     /// </summary>
     /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the base type..</returns>

@@ -110,13 +110,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     {
       UAObject _derived = GetInstanceOfDerivedFromComplexObjectType();
       UAObject _base = GetInstanceOfDerivedFromComplexObjectType();
+      _derived.RecalculateNodeIds(new ModelContextMock(), x => Assert.Fail());
+      _base.RecalculateNodeIds(new ModelContextMock(), x => Assert.Fail());
       Assert.IsTrue(_derived.Equals(_base));
     }
 
     [TestMethod]
     public void EqualsUAVariableTest()
     {
-      UAVariable _derivedNode = new UAVariable()
+      UAVariable firsNode = new UAVariable()
       {
         NodeId = "ns=1;i=47",
         BrowseName = "EURange",
@@ -124,7 +126,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         DataType = "i=884",
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
-      UANode _baseNode = new UAVariable()
+      UAVariable secondNode = new UAVariable()
       {
         NodeId = "i=17568",
         BrowseName = "EURange",
@@ -132,15 +134,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         DataType = "i=884",
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
-      Assert.IsTrue(_derivedNode.Equals(_baseNode));
+      firsNode.RecalculateNodeIds(new ModelContextMock(), x => Assert.Fail());
+      secondNode.RecalculateNodeIds(new ModelContextMock(), x => Assert.Fail());
+      Assert.IsTrue(firsNode.Equals(secondNode));
     }
 
     [TestMethod]
     public void NotEqualsInstancesTest()
     {
-      UAObject _derived = GetInstanceOfDerivedFromComplexObjectType();
-      UAObject _base = GetInstanceOfDerivedFromComplexObjectType2();
-      Assert.IsFalse(_derived.Equals(_base));
+      UAObject firsNode = GetInstanceOfDerivedFromComplexObjectType();
+      UAObject secondNode = GetInstanceOfDerivedFromComplexObjectType2();
+      firsNode.RecalculateNodeIds(new ModelContextMock(), x => Assert.Fail());
+      secondNode.RecalculateNodeIds(new ModelContextMock(), x => Assert.Fail());
+      Assert.IsFalse(firsNode.Equals(secondNode));
     }
 
     [TestMethod]
@@ -166,37 +172,42 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
           }
         }
       };
-      Mock<IUAModelContext> _uAModelContext = new Mock<IUAModelContext>();
-      _uAModelContext.Setup<string>(x => x.ImportNodeId(It.IsAny<string>())).Returns<string>
-        (x =>
-        {
-          NodeId nodeId = NodeId.Parse(x);
-          if (nodeId.NamespaceIndex == 1)
-            nodeId.SetNamespaceIndex(10);
-          return nodeId.ToString();
-        });
-      _uAModelContext.Setup<string>(x => x.ImportQualifiedName(It.IsAny<string>())).Returns<string>
-        (x =>
-        {
-          QualifiedName nodeId = QualifiedName.ParseRegex(x);
-          if (nodeId.NamespaceIndex == 1)
-            nodeId.NamespaceIndex = 10;
-          return nodeId.ToString();
-        });
-      _enumeration.RecalculateNodeIds(_uAModelContext.Object);
-      Assert.AreEqual<string>("10:EnumerationDataType", _enumeration.BrowseName);
-      Assert.AreEqual<int>(10, NodeId.Parse(_enumeration.NodeId).NamespaceIndex);
-      Assert.AreEqual<int>(10, NodeId.Parse(_enumeration.References[0].Value).NamespaceIndex);
-      Assert.AreEqual<int>(0, NodeId.Parse(_enumeration.References[0].ReferenceType).NamespaceIndex);
-      Assert.AreEqual<int>(10, NodeId.Parse(_enumeration.References[1].Value).NamespaceIndex);
-      Assert.AreEqual<int>(0, NodeId.Parse(_enumeration.References[1].ReferenceType).NamespaceIndex);
-      Assert.AreEqual<string>("i=24", _enumeration.Definition.Field[0].DataType);
-      Assert.AreEqual<string>("ns=10;i=24", _enumeration.Definition.Field[1].DataType);
+      _enumeration.RecalculateNodeIds(new ModelContextMock(), x => Assert.Fail());
+      Assert.AreEqual<string>("1:EnumerationDataType", _enumeration.BrowseName);
+      Assert.AreEqual<string>("ns=1;i=11", _enumeration.NodeId);
+      Assert.IsNotNull(_enumeration.BrowseNameQualifiedName);
+      Assert.IsNotNull(_enumeration.NodeIdNodeId);
+      Assert.AreEqual<int>(1, _enumeration.NodeIdNodeId.NamespaceIndex);
+      Assert.IsTrue(_enumeration.BrowseNameQualifiedName.NamespaceIndexSpecified);
+
+      Assert.AreEqual<int>(1, _enumeration.References[0].ValueNodeId.NamespaceIndex);
+      Assert.AreEqual<int>(0, _enumeration.References[0].ReferenceTypeNodeid.NamespaceIndex);
+
+      Assert.AreEqual<int>(1, _enumeration.References[1].ValueNodeId.NamespaceIndex);
+      Assert.AreEqual<int>(0, _enumeration.References[1].ReferenceTypeNodeid.NamespaceIndex);
+
+      Assert.AreEqual<string>("i=24", _enumeration.Definition.Field[0].DataTypeNodeId.ToString());
+      Assert.AreEqual<string>("ns=1;i=24", _enumeration.Definition.Field[1].DataTypeNodeId.ToString());
     }
 
     #endregion tests
 
     #region test instrumentation
+
+    private class ModelContextMock : IUAModelContext
+    {
+      public Uri ModelUri => throw new NotImplementedException();
+
+      public (QualifiedName browseName, NodeId nodeId) ImportBrowseName(string browseNameText, string nodeIdText, Action<TraceMessage> trace)
+      {
+        return (QualifiedName.Parse(browseNameText), NodeId.Parse(nodeIdText));
+      }
+
+      public NodeId ImportNodeId(string nodeId, Action<TraceMessage> trace)
+      {
+        return NodeId.Parse(nodeId);
+      }
+    }
 
     private static UAObject GetInstanceOfDerivedFromComplexObjectType()
     {

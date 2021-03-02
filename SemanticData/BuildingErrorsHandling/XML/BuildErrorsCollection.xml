@@ -62,7 +62,7 @@
       <ns1:Name>QualifiedNameInvalidSyntax</ns1:Name>
     </ns1:NamedBuildError>
     <ns1:NamedBuildError>
-      <ns1:Focus>Diagnostic</ns1:Focus>
+      <ns1:Focus>NodeClass</ns1:Focus>
       <ns1:Identifier>P3-0403040000</ns1:Identifier>
       <ns1:Descriptor>The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist.</ns1:Descriptor>
       <ns1:Name>DanglingReferenceTarget</ns1:Name>

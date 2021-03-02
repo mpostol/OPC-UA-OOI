@@ -124,11 +124,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     /// <summary>
     /// Search the address space to find the node <paramref name="nodeId" /> and returns <see cref="XmlQualifiedName" />
-    /// encapsulating the <see cref="UANodeContext.BrowseName" /> of this node if exist. Returns<c>null</c> otherwise.
+    /// encapsulating the <see cref="UANode.BrowseName" /> of this node if exist. Returns<c>null</c> otherwise.
     /// </summary>
     /// <param name="nodeId">The identifier of the node to find.</param>
     /// <param name="defaultValue">The default value.</param>
-    /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the <see cref="UANodeContext.BrowseName" /> of the node indexed by <paramref name="nodeId" /></returns>
+    /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the <see cref="UANode.BrowseName" /> of the node indexed by <paramref name="nodeId" /></returns>
     public XmlQualifiedName ExportBrowseName(NodeId nodeId, NodeId defaultValue)
     {
       if (nodeId == defaultValue)
@@ -280,13 +280,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private Uri ImportNodeSet(UANodeSet model)
     {
       IUAModelContext _modelContext = model.ParseUAModelContext(m_NamespaceTable, m_TraceEvent.TraceEvent);
-      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext}."));
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext.ModelUri}."));
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - the context for the imported model is created and starting import nodes."));
       Dictionary<string, UANode> itemsDictionary = new Dictionary<string, UANode>();
       foreach (UANode node in model.Items)
       {
-        if (itemsDictionary.ContainsKey(node.NodeId.ToString()))
-          m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, $"The {node.NodeId.ToString()} is already defined in the imported model and is removed from further processing."));
+        if (itemsDictionary.ContainsKey(node.NodeId))
+          m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, $"The {node.NodeId} is already defined in the imported model and is removed from further processing."));
         else
           ImportUANode(node);
       }
@@ -298,7 +298,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       try
       {
-        NodeId _nodeId = NodeId.Parse(node.NodeId);
+        NodeId _nodeId = node.NodeIdNodeId;
         IUANodeContext _newNode = GetOrCreateNodeContext(_nodeId, x => new UANodeContext(_nodeId, this, m_TraceEvent.TraceEvent));
         _newNode.Update(node, _reference =>
               {

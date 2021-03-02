@@ -26,13 +26,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #region constructor
     internal UAReferenceContext(Reference reference, IAddressSpaceBuildContext addressSpaceContext, IUANodeContext parentNode)
     {
-      IUANodeContext targetNode = addressSpaceContext.GetOrCreateNodeContext(NodeId.Parse(reference.Value), parentNode.CreateUANodeContext);
+      IUANodeContext targetNode = addressSpaceContext.GetOrCreateNodeContext(reference.ValueNodeId, parentNode.CreateUANodeContext);
       this.m_AddressSpace = addressSpaceContext;
       this.ParentNode = parentNode;
       this.SourceNode = reference.IsForward ? parentNode : targetNode;
       this.Reference = reference;
       this.TargetNode = reference.IsForward ? targetNode : parentNode;
-      this.TypeNode = addressSpaceContext.GetOrCreateNodeContext(NodeId.Parse(reference.ReferenceType), parentNode.CreateUANodeContext);
+      this.TypeNode = addressSpaceContext.GetOrCreateNodeContext(reference.ReferenceTypeNodeid, parentNode.CreateUANodeContext);
     }
     #endregion
 

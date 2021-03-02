@@ -1,17 +1,17 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   public partial class UADataType
   {
-    
     /// <summary>
     /// Get the clone from the types derived from this one.
     /// </summary>
@@ -26,13 +26,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       base.CloneUAType(_ret);
       return _ret;
     }
-    internal override void RecalculateNodeIds(IUAModelContext modelContext)
+
+    internal override void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
-      base.RecalculateNodeIds(modelContext);
+      base.RecalculateNodeIds(modelContext, trace);
       if (this.Definition is null)
         return;
-      this.Definition.RecalculateNodeIds(modelContext.ImportNodeId);
+      this.Definition.RecalculateNodeIds(x => modelContext.ImportNodeId(x, trace));
     }
-
   }
 }

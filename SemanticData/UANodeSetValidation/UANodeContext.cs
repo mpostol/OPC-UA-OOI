@@ -57,7 +57,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UAReferenceContext _connector = _parentConnector.FirstOrDefault<UAReferenceContext>();
       if (_connector != null)
         _connector.BuildSymbolicId(path);
-      string _BranchName = string.IsNullOrEmpty(this.UANode.SymbolicName) ? this.BrowseName.Name : this.UANode.SymbolicName;
+      string _BranchName = string.IsNullOrEmpty(this.UANode.SymbolicName) ? this.UANode.BrowseNameQualifiedName.Name : this.UANode.SymbolicName;
       path.Add(_BranchName);
     }
 
@@ -83,8 +83,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return;
       }
       UANode = node;
-      //TODO Enhance/Improve BrowseName parser #538
-      this.BrowseName = node.BrowseName.ParseBrowseName(NodeIdContext, _TraceEvent);
       if (node.References == null)
         return;
       foreach (Reference _reference in node.References)
@@ -128,7 +126,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the BrowseName of the node.</returns>
     public XmlQualifiedName ExportNodeBrowseName()
     {
-      return new XmlQualifiedName(BrowseName.Name, m_AddressSpaceContext.GetNamespace(BrowseName.NamespaceIndex));
+      return new XmlQualifiedName(UANode.BrowseNameQualifiedName.Name, m_AddressSpaceContext.GetNamespace(UANode.BrowseNameQualifiedName.NamespaceIndex));
     }
 
     /// <summary>
@@ -148,6 +146,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       List<UAReferenceContext> _children = new List<UAReferenceContext>();
       foreach (UAReferenceContext _rfx in m_AddressSpaceContext.GetMyReferences(this))
       {
+        if (_rfx.TargetNode.UANode == null)
+        {
+          _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The Node {_rfx.TargetNode} has not been defined and is excluded from further model processing."));
+          continue;
+        }
         switch (_rfx.ReferenceKind)
         {
           case ReferenceKindEnum.Custom:
@@ -193,8 +196,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         try
         {
           IUANodeBase _instanceDeclaration = null;
-          if (!string.IsNullOrEmpty(_rc.TargetNode.BrowseName.Name))
-            _instanceDeclaration = _derivedChildren.ContainsKey(_rc.TargetNode.BrowseName.Name) ? _derivedChildren[_rc.TargetNode.BrowseName.Name] : null;
+          if (!string.IsNullOrEmpty(_rc.TargetNode.UANode.BrowseNameQualifiedName.Name))
+            _instanceDeclaration = _derivedChildren.ContainsKey(_rc.TargetNode.UANode.BrowseNameQualifiedName.Name) ? _derivedChildren[_rc.TargetNode.UANode.BrowseNameQualifiedName.Name] : null;
           if (_rc.TargetNode.Equals(_instanceDeclaration))
           {
             //_TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removing instance declaration {_rc.TargetNode.ToString()}"));
@@ -255,7 +258,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return null;
       if (this.NodeIdContext == VariableTypeIds.PropertyType)
         return null;
-      if (QualifiedName.IsNull(BrowseName))
+      if (Object.ReferenceEquals(UANode, null))
       {
         traceEvent(this.NodeIdContext);
         return XmlQualifiedName.Empty;
@@ -279,9 +282,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Dictionary<string, IUANodeBase> _instanceDeclarations = m_BaseTypeNode == null ? new Dictionary<string, IUANodeBase>() : m_BaseTypeNode.GetDerivedInstances();
         foreach (UANodeContext item in _myChildren)
         {
-          string _key = item.BrowseName.Name;
+          string _key = item.UANode.BrowseNameQualifiedName.Name;
           if (_instanceDeclarations.ContainsKey(_key))
-            _instanceDeclarations[_key] = item; //replace by current item tat overrides the base one
+            _instanceDeclarations[_key] = item; //replace by current item that overrides the base one
           else
             _instanceDeclarations.Add(_key, item); //add derived item
         }
@@ -292,11 +295,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_InGetDerivedInstances = false;
       }
     }
-
-    /// <summary>
-    /// Gets or sets the browse name of this node.
-    /// </summary>
-    public QualifiedName BrowseName { get; set; } = QualifiedName.Null;
 
     bool IUANodeBase.IsPropertyVariableType => this.NodeIdContext == VariableTypeIds.PropertyType;
 
@@ -323,8 +321,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (Object.ReferenceEquals(other, null))
         return false;
       //TODO Enhance/Improve BrowseName parser #538
-      if (this.BrowseName != other.BrowseName)
-        return false; 
+      //if (this.BrowseName != other.BrowseName)
+      //  return false;
       return
         this.UANode.Equals(other.UANode);
     }
@@ -335,7 +333,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     public override string ToString()
     {
-      return $"Node: {this.GetType().Name}, {nameof(UANodeContext.BrowseName)}={ExportNodeBrowseName()}, NodeId={this.NodeIdContext}";
+      return $"NodeId={this.NodeIdContext}";
     }
 
     #endregion object
@@ -351,12 +349,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (type)
       {
-        string _msg = string.Format("BaseType of Id={0} for node {1}", target, this.BrowseName);
+        string _msg = string.Format("BaseType of Id={0} for node {1}", target, this.UANode.BrowseNameQualifiedName);
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasSubtypeTarget, _msg));
       }
       else
       {
-        string _msg = string.Format("TypeDefinition of Id={0} for node {1}", target, this.BrowseName);
+        string _msg = string.Format("TypeDefinition of Id={0} for node {1}", target, this.UANode.BrowseNameQualifiedName);
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
       }
     }

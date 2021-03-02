@@ -1,12 +1,15 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
+using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
@@ -19,39 +22,65 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [ExpectedException(typeof(NotImplementedException))]
     public void UANodeEqualsTest()
     {
-      UANode _first = TestData.CreateUAReferenceType();
-      UANode _second = TestData.CreateUAReferenceType();
+      UAReferenceType _first = TestData.CreateUAReferenceType();
+      UAReferenceType _second = TestData.CreateUAReferenceType();
       Assert.IsTrue(_first == _second);
     }
+
+    [TestMethod]
+    public void RecalculateNodeIdsTest()
+    {
+      Mock<IUAModelContext> modelMock = new Mock<IUAModelContext>();
+      modelMock.Setup(x => x.ImportNodeId(It.IsAny<string>(), It.IsAny<Action<TraceMessage>>())).Returns<string, Action<TraceMessage>>((q, w) => NodeId.Parse(q));
+      modelMock.Setup(x => x.ImportBrowseName(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Action<TraceMessage>>())).Returns<string, string, Action<TraceMessage>>((a, b, c) => (QualifiedName.Parse(a), NodeId.Parse(b)));
+      modelMock.Setup(x => x.ModelUri);
+      UAObject toTest = TestData.CreateUAObject();
+      toTest.RecalculateNodeIds(modelMock.Object, XML => Assert.Fail());
+      Assert.IsNotNull(toTest.NodeIdNodeId);
+      Assert.AreEqual<string>("ns=1;i=1", toTest.NodeIdNodeId.ToString());
+      Assert.IsNotNull(toTest.BrowseNameQualifiedName);
+      Assert.AreEqual<string>("1:NewUAObject", toTest.BrowseNameQualifiedName.ToString());
+      modelMock.Verify(x => x.ImportBrowseName(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Action<TraceMessage>>()), Times.Once);
+      modelMock.Verify(x => x.ImportNodeId(It.IsAny<string>(), It.IsAny<Action<TraceMessage>>()), Times.Exactly(5));
+      modelMock.Verify(x => x.ModelUri, Times.Never);
+
+      Assert.IsNotNull(toTest.References[0].ReferenceTypeNodeid);
+      Assert.IsNotNull(toTest.References[1].ReferenceTypeNodeid);
+      Assert.IsNotNull(toTest.References[0].ValueNodeId);
+      Assert.IsNotNull(toTest.References[1].ValueNodeId);
+      Assert.IsNotNull(toTest.ParentNodeIdNodeId);
+    }
+
     [TestMethod]
     public void UANodeEquals()
     {
-      UANode _first = TestData.CreateUAObject();
-      UANode _second = TestData.CreateUAObject();
+      UANode _first = TestData.CreateUAObject().Recalculate();
+      UANode _second = TestData.CreateUAObject().Recalculate();
       Assert.AreNotSame(_first, _second); //to make sure we have two objects
       Assert.IsTrue(_first != null);
       Assert.IsTrue(null != _first);
       Assert.IsTrue(_first == _second);
       Assert.IsTrue(_second == _first);
     }
+
     [TestMethod]
     public void UAInstanceEqualsTest()
     {
-      UAInstance _first = TestData.CreateUAObject();
-      UAInstance _second = TestData.CreateUAObject();
-      _second.ParentNodeId = Guid.NewGuid().ToString();
-      _second.NodeId = Guid.NewGuid().ToString();
-      _second.BrowseName = Guid.NewGuid().ToString();
+      UAInstance _first = TestData.CreateUAObject().Recalculate<UAObject>();
+      UAInstance _second = TestData.CreateUAObject().Recalculate<UAObject>();
+      _second.ParentNodeId = System.Guid.NewGuid().ToString();
+      _second.NodeId = System.Guid.NewGuid().ToString();
+      _second.BrowseName = System.Guid.NewGuid().ToString();
       Assert.IsTrue(_first == _second);
     }
+
     [TestMethod]
     public void UAObjectEqualsTest()
     {
-      UAObject _first = TestData.CreateUAObject();
-      UAObject _second = TestData.CreateUAObject();
+      UAObject _first = TestData.CreateUAObject().Recalculate<UAObject>();
+      UAObject _second = TestData.CreateUAObject().Recalculate<UAObject>();
       _second.EventNotifier ^= _second.EventNotifier;
       Assert.IsTrue(_first != _second);
     }
   }
 }
-

@@ -38,10 +38,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     public Uri ModelUri { get; private set; }
 
-    public string ImportQualifiedName(string source)
+    /// <summary>
+    /// Imports the browse name <see cref="QualifiedName" /> and Node identifier as <see cref="NodeId" />. It recalculates the <see cref="QualifiedName.NamespaceIndex" /> and <see cref="NodeId.NamespaceIndex" /> against local namespace index table.
+    /// </summary>
+    /// <param name="browseNameText">The <see cref="QualifiedName" /> serialized as text to be imported.</param>
+    /// <param name="nodeIdText">The <see cref="NodeId" /> serialized as text to be imported.</param>
+    /// <param name="trace">Captures the functionality of trace.</param>
+    /// <returns>A <see cref="ValueTuple{T1, T2}" /> instance containing <see cref="QualifiedName" /> and <see cref="NodeId" /> with recalculated NamespaceIndex.</returns>
+    public (QualifiedName browseName, NodeId nodeId) ImportBrowseName(string browseNameText, string nodeIdText, Action<TraceMessage> trace)
     {
-      QualifiedName _qn = QualifiedName.Parse(source);
-      return new QualifiedName(_qn.Name, ImportNamespaceIndex(_qn.NamespaceIndex)).ToString();
+      //TODO Enhance/Improve BrowseName parser #538
+      nodeIdText = LookupAlias(nodeIdText);
+      NodeId nodeId = nodeIdText.ParseNodeId(trace);
+      QualifiedName browseNameName = browseNameText.ParseBrowseName(nodeId, trace);
+      nodeId.SetNamespaceIndex(ImportNamespaceIndex(nodeId.NamespaceIndex));
+      browseNameName.NamespaceIndex = ImportNamespaceIndex(browseNameName.NamespaceIndex);
+      browseNameName.NamespaceIndexSpecified = true;
+      return (browseNameName, nodeId);
     }
 
     /// <summary>
@@ -49,19 +62,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// </summary>
     /// <param name="nodeId">The node identifier.</param>
     /// <returns>An instance of the <see cref="NodeId" /> or null is the <paramref name="nodeId" /> is null or empty.</returns>
-    public string ImportNodeId(string nodeId)
+    public NodeId ImportNodeId(string nodeId, Action<TraceMessage> trace)
     {
       if (string.IsNullOrEmpty(nodeId))
-        return string.Empty;
+        return NodeId.Null;
       nodeId = LookupAlias(nodeId);
-      // parse the string.
-      NodeId _nodeId = NodeId.Parse(nodeId);
-      if (_nodeId.NamespaceIndex > 0)
-      {
-        ushort namespaceIndex = ImportNamespaceIndex(_nodeId.NamespaceIndex);
-        _nodeId = new NodeId(_nodeId.IdentifierPart, namespaceIndex);
-      }
-      return _nodeId.ToString();
+      NodeId _nodeId = nodeId.ParseNodeId(trace);
+      ushort namespaceIndex = ImportNamespaceIndex(_nodeId.NamespaceIndex);
+      return new NodeId(_nodeId.IdentifierPart, namespaceIndex);
     }
 
     #endregion IUAModelContext

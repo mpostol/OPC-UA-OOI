@@ -35,7 +35,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   /// <i>1:MyName</i>
   /// <br/></para>
   /// </remarks>
-  //TODO Enhance/Improve BrowseName parser #538
+
   public partial class QualifiedName : IFormattable, ICloneable, IComparable
   {
     #region Constructors
@@ -343,6 +343,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// </summary>
     /// <param name="text">The QualifiedName value as a string.</param>
     /// <exception cref="ServiceResultException">Thrown under a variety of circumstances, each time with a specific message.</exception>
+    //TODO Enhance/Improve BrowseName parser #538
     public static QualifiedName Parse(string text)
     {
       // extract local namespace index.

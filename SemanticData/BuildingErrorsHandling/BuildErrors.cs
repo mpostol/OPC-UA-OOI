@@ -87,11 +87,11 @@ namespace UAOOI.SemanticData.BuildingErrorsHandling
                     Identifier = "P6-0503021400", 
                     Descriptor = "The syntax of the QualifiedName is not valid." }; } }
     /// <summary>
-    /// Error: P3-0403040000; Focus: Diagnostic; The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist.
+    /// Error: P3-0403040000; Focus: NodeClass; The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P3-0403040000.</value>
     public static BuildError DanglingReferenceTarget { get { return new BuildError() 
-                  { Focus = Focus.Diagnostic, 
+                  { Focus = Focus.NodeClass, 
                     Identifier = "P3-0403040000", 
                     Descriptor = "The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist." }; } }
     /// <summary>

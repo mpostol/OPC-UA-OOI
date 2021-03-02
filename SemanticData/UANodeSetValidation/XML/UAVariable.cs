@@ -1,17 +1,20 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using System;
+using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-
   public partial class UAVariable
   {
     /// <summary>
-    /// Indicates whether the the inherited parent object is also equal to another object.
+    /// Indicates whether the inherited parent object is also equal to another object.
     /// </summary>
     /// <param name="other">An object to compare with this object.</param>
     /// <returns>
@@ -24,7 +27,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return
         base.ParentEquals(_other) &&
         //TODO compare Value, Translation
-        this.DataType == _other.DataType &&
+        this.DataTypeNodeId == _other.DataTypeNodeId &&
         this.ValueRank == _other.ValueRank &&
         this.ArrayDimensions == _other.ArrayDimensions &&
         this.AccessLevel == _other.AccessLevel &&
@@ -32,6 +35,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         this.MinimumSamplingInterval == _other.MinimumSamplingInterval &&
         this.Historizing == _other.Historizing;
     }
+
     internal override void RemoveInheritedValues(UANode baseNode)
     {
       base.RemoveInheritedValues(baseNode);
@@ -43,15 +47,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       if (this.ArrayDimensions == _other.ArrayDimensions)
         this.ArrayDimensions = string.Empty;
     }
-    internal override void RecalculateNodeIds(IUAModelContext modelContext)
+
+    internal override void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
-      base.RecalculateNodeIds(modelContext);
-      this.DataType = modelContext.ImportNodeId(DataType);
+      DataTypeNodeId = modelContext.ImportNodeId(DataType, trace);
+      base.RecalculateNodeIds(modelContext, trace);
     }
+
+    internal NodeId DataTypeNodeId { get; private set; }
+
     /// <summary>
     /// Get the clone from the types derived from this one.
     /// </summary>
-    /// <returns>An instance of <see cref="T:UAOOI.SemanticData.UANodeSetValidation.XML.UANode" />.</returns>
+    /// <returns>An instance of <see cref="UANode" />.</returns>
     protected override UANode ParentClone()
     {
       UAVariable _ret = new UAVariable()
@@ -59,6 +67,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         Value = this.Value,
         Translation = this.Translation,
         DataType = this.DataType,
+        DataTypeNodeId = new NodeId(this.DataTypeNodeId),
         ValueRank = this.ValueRank,
         ArrayDimensions = this.ArrayDimensions,
         AccessLevel = this.AccessLevel,

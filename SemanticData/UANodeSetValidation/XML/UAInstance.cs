@@ -39,8 +39,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     internal override void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
-      base.RecalculateNodeIds(modelContext, trace);
       ParentNodeIdNodeId = modelContext.ImportNodeId(ParentNodeId, trace);
+      base.RecalculateNodeIds(modelContext, trace);
     }
 
     internal NodeId ParentNodeIdNodeId { get; private set; }

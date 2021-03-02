@@ -1,6 +1,6 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
@@ -23,7 +23,22 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   public class UANodeContextUnitTest
   {
     [TestMethod]
-    public void ConstructorNodeIdTest()
+    public void ConstructorTest()
+    {
+      Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
+      UANodeContext _toTest = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object, x => { });
+      Assert.IsFalse(_toTest.InRecursionChain);
+      Assert.IsFalse(_toTest.IsProperty);
+      Assert.IsFalse(((IUANodeBase)_toTest).IsPropertyVariableType);
+      Assert.IsFalse(_toTest.ModelingRule.HasValue);
+      Assert.IsNotNull(_toTest.NodeIdContext);
+      Assert.AreEqual<string>("ns=1;i=11", _toTest.NodeIdContext.ToString());
+      Assert.IsNull(_toTest.UANode);
+      Assert.AreEqual<string>("NodeId=ns=1;i=11", _toTest.ToString());
+    }
+
+    [TestMethod]
+    public void UpdateTest()
     {
       Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
       UANodeContext _toTest = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object, x => { });
@@ -49,7 +64,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsNotNull(_toTest.NodeIdContext);
       Assert.AreEqual<string>(_toTest.NodeIdContext.ToString(), "ns=1;i=11");
     }
-
     [TestMethod]
     public void UpdateDuplicatedNodeIdTest()
     {
@@ -109,7 +123,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     [TestMethod]
-    public void UpdateTest()
+    public void UpdateReferencesTest()
     {
       Mock<IAddressSpaceBuildContext> addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
       addressSpaceMock.Setup(x => x.GetOrCreateNodeContext(It.IsAny<NodeId>(), It.IsAny<Func<NodeId, UANodeContext>>()));

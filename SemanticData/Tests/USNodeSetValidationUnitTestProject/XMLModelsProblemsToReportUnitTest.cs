@@ -37,17 +37,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Assert.AreEqual<int>(0, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataEncoding).Count<TraceMessage>());
         Assert.AreEqual<int>(0, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataType).Count<TraceMessage>());
         Assert.AreEqual<int>(0, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Naming).Count<TraceMessage>());
-        Assert.AreEqual<int>(3, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NodeClass).Count<TraceMessage>());
+        Assert.AreEqual<int>(24, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NodeClass).Count<TraceMessage>());
         Assert.AreEqual<int>(0, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.NonCategorized).Count<TraceMessage>());
         Assert.AreEqual<int>(23, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Reference).Count<TraceMessage>());
         Assert.AreEqual<int>(1, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.XML).Count<TraceMessage>());
         //errors
-        Assert.AreEqual<int>(27, traceContext.TraceList.Count);
+        Assert.AreEqual<int>(48, traceContext.TraceList.Count);
         Assert.AreEqual<int>(3, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == BuildError.NodeIdNotDefined.Identifier).Count<TraceMessage>());
         Assert.AreEqual<int>(5, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == BuildError.UndefinedHasSubtypeTarget.Identifier).Count<TraceMessage>());
         Assert.AreEqual<int>(18, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == BuildError.UndefinedHasTypeDefinition.Identifier).Count<TraceMessage>());
         Assert.AreEqual<int>(1, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Identifier == BuildError.ModelContainsErrors.Identifier).Count<TraceMessage>());
-        Assert.AreEqual<string>(BuildError.ModelContainsErrors.Identifier, traceContext.TraceList[26].BuildError.Identifier);
+        Assert.AreEqual<string>(BuildError.ModelContainsErrors.Identifier, traceContext.TraceList[47].BuildError.Identifier);
       }
     }
 

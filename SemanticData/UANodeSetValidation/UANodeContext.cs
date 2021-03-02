@@ -146,6 +146,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       List<UAReferenceContext> _children = new List<UAReferenceContext>();
       foreach (UAReferenceContext _rfx in m_AddressSpaceContext.GetMyReferences(this))
       {
+        if (_rfx.TargetNode.UANode == null)
+        {
+          _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The Node {_rfx.TargetNode} has not been defined and is excluded from further model processing."));
+          continue;
+        }
         switch (_rfx.ReferenceKind)
         {
           case ReferenceKindEnum.Custom:
@@ -253,7 +258,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return null;
       if (this.NodeIdContext == VariableTypeIds.PropertyType)
         return null;
-      if (QualifiedName.IsNull(UANode.BrowseNameQualifiedName))
+      if (Object.ReferenceEquals(UANode, null))
       {
         traceEvent(this.NodeIdContext);
         return XmlQualifiedName.Empty;
@@ -328,7 +333,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     public override string ToString()
     {
-      return $"Node: {this.GetType().Name}, {nameof(UANodeContext.UANode.BrowseName)}={ExportNodeBrowseName()}, NodeId={this.NodeIdContext}";
+      return $"NodeId={this.NodeIdContext}";
     }
 
     #endregion object

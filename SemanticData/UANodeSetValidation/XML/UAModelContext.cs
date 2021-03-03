@@ -53,6 +53,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       nodeId.SetNamespaceIndex(ImportNamespaceIndex(nodeId.NamespaceIndex));
       browseName.NamespaceIndex = ImportNamespaceIndex(browseName.NamespaceIndex);
       browseName.NamespaceIndexSpecified = true;
+      if (browseName.NamespaceIndex != modeLNamespaceIndex)
+      {
+        string message = $"Wrong {nameof(QualifiedName.NamespaceIndex)} of the {browseName}. The {nameof(UAReferenceType)} should be defined by the default model {modeLNamespaceIndex}";
+        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, message));
+      }
       return (browseName, nodeId);
     }
 
@@ -71,17 +76,36 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return new NodeId(_nodeId.IdentifierPart, namespaceIndex);
     }
 
+    public void RegisterUAReferenceType(QualifiedName browseName)
+    {
+      //TODO Enhance / Improve BrowseName parser #538 - define appropriate BuildError and replace the once used. 
+      if (browseName.NamespaceIndex != modeLNamespaceIndex)
+      {
+        string message = $"Wrong {nameof(QualifiedName.NamespaceIndex)} of the {browseName}. The {nameof(UAReferenceType)} should be defined by the default model {modeLNamespaceIndex}";
+        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, message));
+      }
+      else if (UAReferenceTypNames.Contains(browseName))
+      {
+        string message = $"Wrong definition of the {browseName}. The {nameof(UAReferenceType)} shall be unique in a server. It is not allowed that two different ReferenceTypes have the same BrowseName";
+        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, message));
+      }
+      else
+        UAReferenceTypNames.Add(browseName);
+    }
+
     #endregion IUAModelContext
 
     #region private
 
     //var
 
+    private ushort modeLNamespaceIndex;
     private readonly IUANodeSetModelHeader _modelHeader;
     private readonly Action<TraceMessage> _logTraceMessage;
     private readonly Dictionary<string, string> _aliasesDictionary = new Dictionary<string, string>();
     private List<string> _namespaceUris = new List<string>();
     private IAddressSpaceURIRecalculate _addressSpaceContext { get; }
+    private readonly List<QualifiedName> UAReferenceTypNames = new List<QualifiedName>();
 
     private static Random _randomNumber = new Random();
 
@@ -101,6 +125,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     {
       _namespaceUris = Parse(modelHeader.NamespaceUris);
       ModelUri = Parse(modelHeader.Models, addressSpaceContext);
+      modeLNamespaceIndex = _addressSpaceContext.GetURIIndexOrAppend(ModelUri);
       Parse(modelHeader.Aliases);
     }
 

@@ -382,6 +382,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         return NodeId.Parse(nodeId);
       }
+
+      public void RegisterUAReferenceType(QualifiedName browseName)
+      {
+        throw new NotImplementedException();
+      }
     }
 
     private class AddressSpaceBuildContext : IAddressSpaceBuildContext

@@ -50,7 +50,47 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Assert.AreEqual<string>(BuildError.ModelContainsErrors.Identifier, traceContext.TraceList[47].BuildError.Identifier);
       }
     }
-
+    [TestMethod]
+    public void NameInheritedFrom0Test()
+    {
+      FileInfo _testDataFileInfo = new FileInfo(@"ProblemsToReport\BrowseNameInheritedFrom0\BrowseNameInheritedFrom0.xml");
+      Assert.IsTrue(_testDataFileInfo.Exists);
+      using (TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext())
+      {
+        IAddressSpaceContext addressSpace = traceContext.CreateAddressSpaceContext();
+        ModelFactoryTestingFixture.InformationModelFactoryBase testingModelFixture = new InformationModelFactoryBase();
+        addressSpace.InformationModelFactory = testingModelFixture;
+        Uri model = addressSpace.ImportUANodeSet(_testDataFileInfo);
+        Assert.AreEqual<int>(0, traceContext.TraceList.Count);
+        traceContext.Clear();
+        addressSpace.ValidateAndExportModel(model);
+        Assert.AreEqual<int>(2, traceContext.TraceList.Count);
+        IEnumerable<NodeFactoryBase> nodes = testingModelFixture.Export();
+        Assert.AreEqual(3, nodes.Count<NodeFactoryBase>());
+        Dictionary<string, NodeFactoryBase> nodesDictionary = nodes.ToDictionary<NodeFactoryBase, string>(x => x.SymbolicName.Name);
+        AddressSpaceContext asContext = addressSpace as AddressSpaceContext;
+        //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
+        IEnumerable<IUANodeContext> allNodes = null;
+        asContext.UTValidateAndExportModel(1, x => allNodes = x);
+        Assert.IsNotNull(allNodes);
+        List<IUANodeContext> orphanedNodes = new List<IUANodeContext>();
+        List<IUANodeContext> processedNodes = new List<IUANodeContext>();
+        foreach (IUANodeContext item in allNodes)
+        {
+          if (!nodesDictionary.ContainsKey(item.UANode.BrowseNameQualifiedName.Name))
+          {
+            orphanedNodes.Add(item);
+            Debug.WriteLine($"The following node has been removed from the model: {item.ToString()}");
+          }
+          else
+            processedNodes.Add(item);
+        }
+        Debug.WriteLine($"The recovered information model contains {nodesDictionary.Count} nodes");
+        Debug.WriteLine($"The source information model contains {allNodes.Count<IUANodeContext>()} nodes");
+        Debug.WriteLine($"Number of nodes not considered for export {orphanedNodes.Count}");
+        Debug.WriteLine($"Number of processed nodes {processedNodes.Count}");
+      }
+    }
     [TestMethod]
     public void eoursel510Test()
     {

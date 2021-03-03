@@ -19,24 +19,25 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     internal static QualifiedName ParseBrowseName(this string qualifiedName, NodeId nodeId, Action<TraceMessage> traceEvent)
     {
       if ((nodeId == null) || nodeId == NodeId.Null) throw new ArgumentNullException(nameof(NodeId));
+      if (string.IsNullOrEmpty(qualifiedName))
+      {
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, "new identifier {qualifiedNameToReturn.ToString()} is generated to proceed."));
+        throw new NotImplementedException("Generate random QualifiedName");
+      }
       QualifiedName qualifiedNameToReturn = null;
       try
       {
         qualifiedNameToReturn = QualifiedName.ParseRegex(qualifiedName);
       }
-      catch (ServiceResultException _sre) //TODO Rewrite add to UT
-      {
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.QualifiedNameInvalidSyntax, String.Format("Error message: {0}", _sre.Message)));
-      }
       catch (Exception ex)
       {
         Random random = new Random();
         qualifiedNameToReturn = QualifiedName.ParseRegex($"{nodeId.NamespaceIndex}:EmptyBrowseName_{nodeId.IdentifierPart.ToString()}.{random.Next(-9999, 0)}");
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, $"Error message: {ex.Message} - new identifier {qualifiedNameToReturn.ToString()} is generated to proceed."));
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.QualifiedNameInvalidSyntax, $"Error message: {ex.Message} - new identifier {qualifiedNameToReturn.ToString()} is generated to proceed."));
       }
       return qualifiedNameToReturn;
     }
-    //TODO Enhance/Improve BrowseName parser #538 rewrite and add to UT
+    //Enhance/Improve NodeId parser #541 rewrite and add to UT
     /// <summary>
     /// Parses the node identifier with the syntax defined in Part 6-5.3.1.10
     /// </summary>

@@ -44,17 +44,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// <param name="browseNameText">The <see cref="QualifiedName" /> serialized as text to be imported.</param>
     /// <param name="nodeIdText">The <see cref="NodeId" /> serialized as text to be imported.</param>
     /// <param name="trace">Captures the functionality of trace.</param>
-    /// <returns>A <see cref="ValueTuple{T1, T2}" /> instance containing <see cref="QualifiedName" /> and <see cref="NodeId" /> with recalculated NamespaceIndex.</returns>
+    /// <returns>A <see cref="ValueTuple{T1, T2}" /> value containing <see cref="QualifiedName" /> and <see cref="NodeId" /> with recalculated NamespaceIndex.</returns>
     public (QualifiedName browseName, NodeId nodeId) ImportBrowseName(string browseNameText, string nodeIdText, Action<TraceMessage> trace)
     {
-      //TODO Enhance/Improve BrowseName parser #538
       nodeIdText = LookupAlias(nodeIdText);
       NodeId nodeId = nodeIdText.ParseNodeId(trace);
-      QualifiedName browseNameName = browseNameText.ParseBrowseName(nodeId, trace);
+      QualifiedName browseName = browseNameText.ParseBrowseName(nodeId, trace);
       nodeId.SetNamespaceIndex(ImportNamespaceIndex(nodeId.NamespaceIndex));
-      browseNameName.NamespaceIndex = ImportNamespaceIndex(browseNameName.NamespaceIndex);
-      browseNameName.NamespaceIndexSpecified = true;
-      return (browseNameName, nodeId);
+      browseName.NamespaceIndex = ImportNamespaceIndex(browseName.NamespaceIndex);
+      browseName.NamespaceIndexSpecified = true;
+      return (browseName, nodeId);
     }
 
     /// <summary>

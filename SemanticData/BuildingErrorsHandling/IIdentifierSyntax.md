@@ -41,7 +41,7 @@ where:
 
 ## Example
 
-- [P3-0503030201](https://reference.opcfoundation.org/v104/Core/docs/Part3/#5.3.3.2)
+- [P3-0503030201](https://reference.opcfoundation.org/v104/Core/docs/Part3/5.3.3/#5.3.3.2)
 
 ## See also
 

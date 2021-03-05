@@ -64,6 +64,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsNotNull(_toTest.NodeIdContext);
       Assert.AreEqual<string>(_toTest.NodeIdContext.ToString(), "ns=1;i=11");
     }
+
     [TestMethod]
     public void UpdateDuplicatedNodeIdTest()
     {
@@ -385,7 +386,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
       public void RegisterUAReferenceType(QualifiedName browseName)
       {
-        throw new NotImplementedException();
       }
     }
 

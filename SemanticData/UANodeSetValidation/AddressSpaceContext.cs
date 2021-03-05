@@ -82,9 +82,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="System.IO.FileNotFoundException">The imported file does not exist</exception>
     Uri IAddressSpaceContext.ImportUANodeSet(FileInfo model)
     {
-      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Starting model import form file {model.Name}"));
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Starting model import form file {model.Name}"));
       if (!model.Exists)
         throw new FileNotFoundException("The imported file does not exist", model.FullName);
       UANodeSet _nodeSet = UANodeSet.ReadModelFile(model);

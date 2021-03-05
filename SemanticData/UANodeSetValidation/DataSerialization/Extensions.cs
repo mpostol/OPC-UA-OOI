@@ -19,24 +19,25 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     internal static QualifiedName ParseBrowseName(this string qualifiedName, NodeId nodeId, Action<TraceMessage> traceEvent)
     {
       if ((nodeId == null) || nodeId == NodeId.Null) throw new ArgumentNullException(nameof(NodeId));
+      QualifiedName qualifiedNameToReturn = null;
       if (string.IsNullOrEmpty(qualifiedName))
       {
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, "new identifier {qualifiedNameToReturn.ToString()} is generated to proceed."));
-        throw new NotImplementedException("Generate random QualifiedName");
+        qualifiedNameToReturn = nodeId.RandomQualifiedName();
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, $"new identifier {qualifiedNameToReturn.ToString()} is generated to proceed."));
       }
-      QualifiedName qualifiedNameToReturn = null;
-      try
-      {
-        qualifiedNameToReturn = QualifiedName.ParseRegex(qualifiedName);
-      }
-      catch (Exception ex)
-      {
-        Random random = new Random();
-        qualifiedNameToReturn = QualifiedName.ParseRegex($"{nodeId.NamespaceIndex}:EmptyBrowseName_{nodeId.IdentifierPart.ToString()}.{random.Next(-9999, 0)}");
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.QualifiedNameInvalidSyntax, $"Error message: {ex.Message} - new identifier {qualifiedNameToReturn.ToString()} is generated to proceed."));
-      }
+      else
+        try
+        {
+          qualifiedNameToReturn = QualifiedName.ParseRegex(qualifiedName);
+        }
+        catch (Exception ex)
+        {
+          qualifiedNameToReturn = nodeId.RandomQualifiedName();
+          traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.QualifiedNameInvalidSyntax, $"Error message: {ex.Message} - new identifier {qualifiedNameToReturn.ToString()} is generated to proceed."));
+        }
       return qualifiedNameToReturn;
     }
+
     //Enhance/Improve NodeId parser #541 rewrite and add to UT
     /// <summary>
     /// Parses the node identifier with the syntax defined in Part 6-5.3.1.10
@@ -49,6 +50,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       NodeId nodeId2Return = NodeId.Parse(nodeId);
       return nodeId2Return;
     }
+
     /// <summary>
     /// Gets the <see cref="NodeId.IdentifierPart" /> as uint number.
     /// </summary>
@@ -106,5 +108,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         _vr = valueRank;
       return _vr;
     }
+
+    #region private
+
+    private static QualifiedName RandomQualifiedName(this NodeId nodeId)
+    {
+      return new QualifiedName()
+      {
+        Name = $"EmptyBrowseName_{nodeId.IdentifierPart.ToString()}_{ _RandomNumber.Next(-9999, 0)}",
+        NamespaceIndex = nodeId.NamespaceIndex,
+        NamespaceIndexSpecified = true,
+      };
+    }
+
+    private static Random _RandomNumber = new Random();
+
+    #endregion private
   }
 }

@@ -53,11 +53,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       nodeId.SetNamespaceIndex(ImportNamespaceIndex(nodeId.NamespaceIndex));
       browseName.NamespaceIndex = ImportNamespaceIndex(browseName.NamespaceIndex);
       browseName.NamespaceIndexSpecified = true;
-      if (browseName.NamespaceIndex != modeLNamespaceIndex)
-      {
-        string message = $"Wrong {nameof(QualifiedName.NamespaceIndex)} of the {browseName}. The {nameof(UAReferenceType)} should be defined by the default model {modeLNamespaceIndex}";
-        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, message));
-      }
+      //if (browseName.NamespaceIndex != modeLNamespaceIndex)
+      //{
+      //  string message = $"Wrong {nameof(QualifiedName.NamespaceIndex)} of the {browseName}. The {nameof(UAReferenceType)} should be defined by the default model {modeLNamespaceIndex}";
+      //  _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, message));
+      //}
       return (browseName, nodeId);
     }
 

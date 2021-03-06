@@ -11,12 +11,11 @@ using System;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers;
-using UAOOI.SemanticData.UANodeSetValidation.XML;
 
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   [TestClass]
-  public class XMLUANodeUnitTest
+  public class UANodeUnitTest
   {
     [TestMethod]
     [ExpectedException(typeof(NotImplementedException))]

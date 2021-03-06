@@ -104,7 +104,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
-    <Compile Include="UAModelContextUnitTest.cs" />
     <Compile Include="AddressSpaceContextUnitTest.cs" />
     <Compile Include="Helpers\TestData.cs" />
     <Compile Include="ServiceResultExceptionUnitTest.cs" />
@@ -120,8 +119,9 @@
     <Compile Include="XMLModelsProblemsToReportUnitTest.cs" />
     <Compile Include="XMLModelsCorrectModelsUnitTest.cs" />
     <Compile Include="XMLModelsModelsWithErrorsUnitTest.cs" />
-    <Compile Include="XMLUANodeUnitTest.cs" />
+    <Compile Include="XML\UAModelContextUnitTest.cs" />
     <Compile Include="XML\UANodeSetUnitTest.cs" />
+    <Compile Include="XML\UANodeUnitTest.cs" />
     <None Include="app.config" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />

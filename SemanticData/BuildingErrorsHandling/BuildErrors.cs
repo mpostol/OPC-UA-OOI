@@ -143,6 +143,22 @@ namespace UAOOI.SemanticData.BuildingErrorsHandling
                     Identifier = "P3-0503020000", 
                     Descriptor = "Unexpected value of the InverseName." }; } }
     /// <summary>
+    /// Error: P3-0503020001; Focus: NodeClass; The BrowseName of a ReferenceType shall be unique.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0503020001.</value>
+    public static BuildError DuplicatedReferenceType { get { return new BuildError() 
+                  { Focus = Focus.NodeClass, 
+                    Identifier = "P3-0503020001", 
+                    Descriptor = "The BrowseName of a ReferenceType shall be unique." }; } }
+    /// <summary>
+    /// Error: P3-0503020002; Focus: NodeClass; The BrowseName of a ReferenceType is defined outside of the model.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0503020002.</value>
+    public static BuildError BrowseNameReferenceTypeScope { get { return new BuildError() 
+                  { Focus = Focus.NodeClass, 
+                    Identifier = "P3-0503020002", 
+                    Descriptor = "The BrowseName of a ReferenceType is defined outside of the model." }; } }
+    /// <summary>
     /// Error: P3-0503030201; Focus: Reference; Wrong Reference type targeting the Property component.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P3-0503030201.</value>

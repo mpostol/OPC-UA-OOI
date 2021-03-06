@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns1:BuildErrorsCollection xmlns:ns1="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd" >
+<ns1:BuildErrorsCollection xmlns:ns1="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd">
   <ns1:ListOfBuildErrors>
     <ns1:NamedBuildError>
       <ns1:Focus>Diagnostic</ns1:Focus>
@@ -102,6 +102,18 @@
       <ns1:Identifier>P3-0503020000</ns1:Identifier>
       <ns1:Descriptor>Unexpected value of the InverseName.</ns1:Descriptor>
       <ns1:Name>WrongInverseName</ns1:Name>
+    </ns1:NamedBuildError>
+    <ns1:NamedBuildError>
+      <ns1:Focus>NodeClass</ns1:Focus>
+      <ns1:Identifier>P3-0503020001</ns1:Identifier>
+      <ns1:Descriptor>The BrowseName of a ReferenceType shall be unique.</ns1:Descriptor>
+      <ns1:Name>DuplicatedReferenceType</ns1:Name>
+    </ns1:NamedBuildError>
+    <ns1:NamedBuildError>
+      <ns1:Focus>NodeClass</ns1:Focus>
+      <ns1:Identifier>P3-0503020002</ns1:Identifier>
+      <ns1:Descriptor>The BrowseName of a ReferenceType is defined outside of the model.</ns1:Descriptor>
+      <ns1:Name>BrowseNameReferenceTypeScope</ns1:Name>
     </ns1:NamedBuildError>
     <ns1:NamedBuildError>
       <ns1:Focus>Reference</ns1:Focus>

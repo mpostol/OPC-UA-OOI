@@ -79,16 +79,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     public void RegisterUAReferenceType(QualifiedName browseName)
     {
-      //TODO Enhance / Improve BrowseName parser #538 - define appropriate BuildError and replace the once used. 
       if (browseName.NamespaceIndex != modeLNamespaceIndex)
       {
         string message = $"Wrong {nameof(QualifiedName.NamespaceIndex)} of the {browseName}. The {nameof(UAReferenceType)} should be defined by the default model {modeLNamespaceIndex}";
-        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, message));
+        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.BrowseNameReferenceTypeScope, message));
       }
       else if (UAReferenceTypNames.Contains(browseName))
       {
-        string message = $"Wrong definition of the {browseName}. The {nameof(UAReferenceType)} shall be unique in a server. It is not allowed that two different ReferenceTypes have the same BrowseName";
-        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, message));
+        string message = $"The {nameof(UAReferenceType)} duplicated BrowseName={browseName}. It is not allowed that two different ReferenceTypes have the same BrowseName";
+        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.DuplicatedReferenceType, message));
       }
       else
         UAReferenceTypNames.Add(browseName);

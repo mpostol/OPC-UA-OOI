@@ -44,17 +44,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// <param name="browseNameText">The <see cref="QualifiedName" /> serialized as text to be imported.</param>
     /// <param name="nodeIdText">The <see cref="NodeId" /> serialized as text to be imported.</param>
     /// <param name="trace">Captures the functionality of trace.</param>
-    /// <returns>A <see cref="ValueTuple{T1, T2}" /> instance containing <see cref="QualifiedName" /> and <see cref="NodeId" /> with recalculated NamespaceIndex.</returns>
+    /// <returns>A <see cref="ValueTuple{T1, T2}" /> value containing <see cref="QualifiedName" /> and <see cref="NodeId" /> with recalculated NamespaceIndex.</returns>
     public (QualifiedName browseName, NodeId nodeId) ImportBrowseName(string browseNameText, string nodeIdText, Action<TraceMessage> trace)
     {
-      //TODO Enhance/Improve BrowseName parser #538
       nodeIdText = LookupAlias(nodeIdText);
       NodeId nodeId = nodeIdText.ParseNodeId(trace);
-      QualifiedName browseNameName = browseNameText.ParseBrowseName(nodeId, trace);
+      QualifiedName browseName = browseNameText.ParseBrowseName(nodeId, trace);
       nodeId.SetNamespaceIndex(ImportNamespaceIndex(nodeId.NamespaceIndex));
-      browseNameName.NamespaceIndex = ImportNamespaceIndex(browseNameName.NamespaceIndex);
-      browseNameName.NamespaceIndexSpecified = true;
-      return (browseNameName, nodeId);
+      browseName.NamespaceIndex = ImportNamespaceIndex(browseName.NamespaceIndex);
+      browseName.NamespaceIndexSpecified = true;
+      //if (browseName.NamespaceIndex != modeLNamespaceIndex)
+      //{
+      //  string message = $"Wrong {nameof(QualifiedName.NamespaceIndex)} of the {browseName}. The {nameof(UAReferenceType)} should be defined by the default model {modeLNamespaceIndex}";
+      //  _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, message));
+      //}
+      return (browseName, nodeId);
     }
 
     /// <summary>
@@ -72,17 +76,36 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return new NodeId(_nodeId.IdentifierPart, namespaceIndex);
     }
 
+    public void RegisterUAReferenceType(QualifiedName browseName)
+    {
+      //TODO Enhance / Improve BrowseName parser #538 - define appropriate BuildError and replace the once used. 
+      if (browseName.NamespaceIndex != modeLNamespaceIndex)
+      {
+        string message = $"Wrong {nameof(QualifiedName.NamespaceIndex)} of the {browseName}. The {nameof(UAReferenceType)} should be defined by the default model {modeLNamespaceIndex}";
+        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, message));
+      }
+      else if (UAReferenceTypNames.Contains(browseName))
+      {
+        string message = $"Wrong definition of the {browseName}. The {nameof(UAReferenceType)} shall be unique in a server. It is not allowed that two different ReferenceTypes have the same BrowseName";
+        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, message));
+      }
+      else
+        UAReferenceTypNames.Add(browseName);
+    }
+
     #endregion IUAModelContext
 
     #region private
 
     //var
 
+    private ushort modeLNamespaceIndex;
     private readonly IUANodeSetModelHeader _modelHeader;
     private readonly Action<TraceMessage> _logTraceMessage;
     private readonly Dictionary<string, string> _aliasesDictionary = new Dictionary<string, string>();
     private List<string> _namespaceUris = new List<string>();
     private IAddressSpaceURIRecalculate _addressSpaceContext { get; }
+    private readonly List<QualifiedName> UAReferenceTypNames = new List<QualifiedName>();
 
     private static Random _randomNumber = new Random();
 
@@ -102,6 +125,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     {
       _namespaceUris = Parse(modelHeader.NamespaceUris);
       ModelUri = Parse(modelHeader.Models, addressSpaceContext);
+      modeLNamespaceIndex = _addressSpaceContext.GetURIIndexOrAppend(ModelUri);
       Parse(modelHeader.Aliases);
     }
 

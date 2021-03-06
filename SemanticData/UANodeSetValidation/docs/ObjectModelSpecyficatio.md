@@ -62,7 +62,7 @@ Namespace concept is used by OPC UA to create unique identifiers across differen
 The `BrowseName` are used:
 
 - to build a browse path between Nodes
-- define a globaly unique meaning of an entity, e.g. properties, types, etc
+- define a globally unique meaning of an entity, e.g. properties, types, etc
 
 In case the `BrowseName` is applied to build a browse path its uniqueness is resolved in the context of a parent node. Unless the `BrowseName` is assigned a globally specific meaning defined independently the `namespaceIndex` shall be the same as assigned to `NodeId` attribute of the hosting Node. It is recommended that Nodes defined in any custom model (including but not limited to Companion Specification) should use a Namespace of the model for their NodeId and BrowseName attributes.
 
@@ -73,15 +73,125 @@ For the `name` part of the `BrowseName` attribute, the following naming conventi
 The `name` field value should be the upper camel case (also known as PascalCase), that is, all words are written without spaces (concatenated), and the first character of each word is the upper case letter, the other characters are lower case or digits. Examples: ReferenceType, BaseObjectType, Int32.
 
 If an acronym or abbreviation is used, upper camel case should also be used. Examples: PortMacAddress (where MAC is an acronym for Media Access Control), NodeId (where ID is an
-abbreviation for identyfier), UInt32 (where U is an abbreviation for unsigned). In general, it is recommended to only use letters, digits or the underscore (‘_’) as characters for the `BrowseName`.  unless it is explicitly defined like “<” and “>” for optional placeholders.
+abbreviation for identifier), UInt32 (where U is an abbreviation for unsigned). In general, it is recommended to only use letters, digits or the underscore (‘_’) as characters for the `BrowseName`.  unless it is explicitly defined like “<” and “>” for optional placeholders.
 
 > Remark: If special chars like “&”, “<”, etc. are used, the `NodeSet` document should define the `SymbolicName` attribute for that Node as well. This can then be used for code generation.
 
 There is no recommendation on the use of prefixes. Companion Specifications may use a prefix because it suits their model. For example, if the Vision companion specification were to define types based on generic concepts (say a state machine), then using the prefix “Vision” may make sense (as in “VisionStateMachineType”).
 
-#### Parametrysation
+#### Requirements against the specification
 
-Special characters may be used for parametryzation of the BrowseName to create several copies of the same node. In this case the `BrowseName` amy be used as a pattern of the valuess assigned to new instances created this way.
+**P03-03030200XX  Conventions for defining NodeClasses** - this standard defines Properties, but Properties can be defined by other standard organizations or vendors and Nodes can have Properties that are not standardised. Properties defined in this standard are defined by their name, which is mapped to the `BrowseName` having the NamespaceIndex 0, which represents the Namespace for OPC UA.
+
+**P03-04040200XX Properties** - to prevent recursion, Properties are not allowed to have Properties defined for them. To easily identify Properties, the `BrowseName` of a Property shall be unique in the context of the Node containing the Properties (see 5.6.3 for details).
+
+**P03-040504 Instantiation of complex TypeDefinitionNodes** - the instantiation of complex TypeDefinitionNodes depends on the ModellingRules defined in 6.4.4. However, the intention is that instances of a type definition will reflect the structure defined by the TypeDefinitionNode. Figure 7 shows an instance of the TypeDefinitionNode “AI_BLK_TYPE”, where the ModellingRule Mandatory, defined in 6.4.4.5.2, was applied for its containing Variable. Thus, an instance of “AI_BLK_TYPE”, called AI_BLK_1”, has a HasTypeDefinition Reference to “AI_BLK_TYPE”. It also contains a Variable “SP” having the same `BrowseName` as the Variable “SP” used by the TypeDefinitionNode and thereby reflects the structure defined by the TypeDefinitionNode.
+
+There are several constraints related to programming against the TypeDefinitionNode. A TypeDefinitionNode or an InstanceDeclaration shall never reference two Nodes having the same `BrowseName` using forward hierarchical References. Instances based on InstanceDeclarations shall always keep the same `BrowseName` as the InstanceDeclaration they are derived from. A special Service defined in Part 4 called TranslateBrowsePathsToNodeIds may be used to identify the instances based on the InstanceDeclarations. Using the simple Browse Service might not be sufficient since the uniqueness of the `BrowseName` is only required for TypeDefinitionNodes and InstanceDeclarations, not for other instances. Thus, “AI_BLK_1” may have another Variable with the `BrowseName` “SP”, although this one would not be derived from an InstanceDeclaration of the TypeDefinitionNode.
+
+**P03-040802 Well Known Roles** - all Servers should support the well-known Roles which are defined in Table 2. The NodeIds for the well-known Roles are defined in Part 6.
+
+>MP NOTE: The table contains `BrowseNames` instead of `NodeIds`.
+
+**P03-050204 BrowseName** - nodes have a `BrowseName` Attribute that is used as a non-localised human-readable name when browsing the AddressSpace to create paths out of `BrowseNames`. The TranslateBrowsePathsToNodeIds Service defined in Part 4 can be used to follow a path constructed of `BrowseNames`.
+
+A `BrowseName` should never be used to display the name of a Node. The DisplayName should be used instead for this purpose.
+
+Unlike NodeIds, the BrowseName cannot be used to unambiguously identify a Node. Different Nodes may have the same `BrowseName`.
+
+Subclause 8.3 defines the structure of the `BrowseName`. It contains a namespace and a string. The namespace is provided to make the `BrowseName` unique in some cases in the context of a Node (e.g. Properties of a Node) although not unique in the context of the Server. If different organizations define `BrowseNames` for Properties, the namespace of the `BrowseName` provided by the organization makes the BrowseName unique, although different organizations may use the same string having a slightly different meaning.
+
+Servers may often choose to use the same namespace for the NodeId and the `BrowseName`. However, if they want to provide a standard Property, its `BrowseName` shall have the namespace of the standards body although the namespace of the NodeId reflects something else, for example the local Server.
+
+It is recommended that standard bodies defining standard type definitions use their namespace for the NodeId of the TypeDefinitionNode as well as for the `BrowseName` of the TypeDefinitionNode.
+
+The string-part of the `BrowseName` is case sensitive. That is, Clients shall consider them case sensitive. Servers are allowed to handle `BrowseNames` passed in Service requests as case insensitive. Examples are the TranslateBrowsePathsToNodeIds Service or Event filter.
+
+**P03-050205 DisplayName** - the DisplayName Attribute contains the localised name of the Node. Clients should use this Attribute if they want to display the name of the Node to the user. They should not use the BrowseName for this purpose. The Server may maintain one or more localised representations for each `DisplayName`. Clients negotiate the locale to be returned when they open a session with the Server. Refer to Part 4 for a description of session establishment and locales. Subclause 8.5 defines the structure of the `DisplayName`. The string part of the `DisplayName` is restricted to 512 characters.
+
+**P03-050302 Attributes** The ReferenceType NodeClass inherits the base Attributes from the Base NodeClass defined in 5.2. The inherited `BrowseName` Attribute is used to specify the meaning of the ReferenceType as seen from the SourceNode. For example, the ReferenceType with the BrowseName “Contains” is used in References that specify that the SourceNode contains the TargetNode. The inherited DisplayName Attribute contains a translation of the `BrowseName`.
+
+The `BrowseName` of a ReferenceType shall be unique in a Server. It is not allowed that two different ReferenceTypes have the same `BrowseName`.
+
+Figure 9 provides examples of symmetric and non-symmetric References and the use of the `BrowseName` and the InverseName.
+
+**P03-050501 Object NodeClass** If the Object is used as an InstanceDeclaration (see 4.5) then all Nodes referenced with forward hierarchical References direction shall have unique `BrowseNames` in the context of this Object.
+
+If the Object is created based on an InstanceDeclaration then it shall have the same `BrowseName` as its InstanceDeclaration.
+
+**P03-050502 ObjectType** NodeClass All Nodes referenced with forward hierarchical References shall have unique `BrowseNames` in the context of an ObjectType (see 4.5).
+
+**P03-050504 Client-side creation of Objects of an ObjectType** - in addition to the AddNodes Service ObjectTypes may have a special Method with the `BrowseName` “Create”. This Method is used to create an Object of this ObjectType. This Method may be useful for the creation of Objects where the semantic of the creation should differ from the default behaviour expected in the context of the AddNodes Service. For example, the values should directly differ from the default values or additional 1 should be added, etc. The input and output arguments of this Method depend on the ObjectType; the only commonality is the `BrowseName` identifying that this Method will create an Object based on the ObjectType. Servers should not provide a Method on an ObjectType with the `BrowseName` “Create” for any other purpose than creating Objects of the ObjectType.
+
+**P03-050602 Variable NodeClass** - if the Variable is created based on an InstanceDeclaration (see 4.5) it shall have the same `BrowseName` as its InstanceDeclaration.
+
+**P03-050603 Properties** The HasTypeDefinition Reference points to the VariableType of the Property. Since Properties are uniquely identified by their `BrowseName`, all Properties shall point to the PropertyType defined in Part 5.
+
+The `BrowseName` of a Property is always unique in the context of a Node. It is not permitted for a Node to refer to two Variables using HasProperty References having the same `BrowseName`.
+
+**P03-050604 DataVariable** - if the DataVariable is used as InstanceDeclaration (see 4.5) all Nodes referenced with forward hierarchical References shall have unique `BrowseNames` in the context of this DataVariable.
+
+**P03-050605 VariableType NodeClass** All Nodes referenced with forward hierarchical References shall have unique `BrowseNames` in the context of the VariableType (see 4.5).
+
+**P03-0507 Method NodeClass** - if the Method is used as InstanceDeclaration (see 4.5) all Nodes referenced with forward hierarchical References shall have unique `BrowseNames` in the context of this Method.
+
+**P03-050803 DataType NodeClass** - each concrete Structured DataType shall point to at least one DataTypeEncoding Object with the `BrowseName` “Default Binary” or “Default XML” having the NamespaceIndex 0. The `BrowseName` of the DataTypeEncoding Objects shall be unique in the context of a DataType, i.e. a DataType shall not point to two DataTypeEncodings having the same `BrowseName`.
+
+**P03-0509 Summary of Attributes of the NodeClasses** - BrowseName is the mandatory attribute for all NodeClasses.
+
+**P03-060204 Similar Node of InstanceDeclaration** - a similar Node of an InstanceDeclaration is a Node that has the same BrowseName and NodeClass as the InstanceDeclaration and in cases of Variables and Objects the same TypeDefinitionNode or a subtype of it.
+
+**P03-060205 BrowsePath** - all targets of forward hierarchical References from a TypeDefinitionNode shall have a `BrowseName` that is unique within the TypeDefinitionNode. The same restriction applies to the targets of forward hierarchical References from any InstanceDeclaration. This means that any InstanceDeclaration within the InstanceDeclarationHierarchy can be uniquely identified by a sequence of `BrowseNames`. This sequence of `BrowseNames` is called a BrowsePath.
+
+**P03- 060206 Attribute Handling of InstanceDeclarations** - some restrictions exist regarding the Attributes of InstanceDeclarations when the InstanceDeclaration is overridden or instantiated. The `BrowseName` and the NodeClass shall never change and always be the same as the original InstanceDeclaration.
+
+**P03-060302 Attributes** - Subtypes inherit the parent type’s Attribute values, except for the NodeId. Inherited Attribute values may be overridden by the subtype, the `BrowseName` and DisplayName values should be overridden. Special rules apply for some Attributes of VariableTypes as defined in 6.2.7. Optional Attributes, not provided by the parent type, may be added to the subtype.
+
+**P03-06030303 - overriding InstanceDeclarations** - a subtype overrides an InstanceDeclaration by specifying an InstanceDeclaration with the same BrowsePath. An overridden InstanceDeclaration shall have the same NodeClass and `BrowseName`. The TypeDefinitionNode of the overridden InstanceDeclaration shall be the same or a subtype of the TypeDefinitionNode specified in the supertype.
+
+The overriding Node may specify new values for the Node Attributes other than the NodeClass or `BrowseName`, however, the restrictions on Attributes specified in 6.2.6 apply. Any Attribute provided by the overridden InstanceDeclaration has to be provided by the overriding InstanceDeclaration, additional optional Attributes may be added.
+
+**P03-060401 Overview** any Instance of a TypeDefinitionNode will be the root of a hierarchy which mirrors the InstanceDeclarationHierarchy for the TypeDefinitionNode. Each Node in the hierarchy of the Instance will have a BrowsePath which may be the same as the BrowsePath for one of the InstanceDeclarations in the hierarchy of the TypeDefinitionNode. The InstanceDeclaration with the same BrowsePath is called the InstanceDeclaration for the Node. If a Node has an InstanceDeclaration then it shall have the same `BrowseName` and NodeClass as the InstanceDeclaration and, in cases of Variables and Objects, the same TypeDefinitionNode or a subtype of it.
+
+**P03-060402 Creating an Instance** - when a Server creates an instance of a TypeDefinitionNode it shall create the same hierarchy of Nodes beneath the new Object or Variable depending on the ModellingRule of each InstanceDeclaration. Standard ModellingRules are defined in 6.4.4.5. The Nodes within the newly created hierarchy may be copies of the InstanceDeclarations, the InstanceDeclaration itself or another Node in the AddressSpace that has the same TypeDefinitionNode and `BrowseName`. If new copies are created, then the Attribute values of the InstanceDeclarations are used as the initial values.
+
+Figure 15 provides a simple example of a TypeDefinitionNode and an Instance. Nodes referenced by the TypeDefinitionNode without a ModellingRule do not appear in the instance. Instances may have children with duplicate `BrowseNames`; however, only one of those children will correspond to the InstanceDeclaration.
+
+A Client can use the information of TypeDefinitionNodes to access Nodes which are in the hierarchy of the instance. It shall pass the NodeId of the instance and the BrowsePath of the child Nodes based on the TypeDefinitionNode to the TranslateBrowsePathsToNodeIds service (see Part 4). This Service returns the NodeId for each of the child Nodes. If a child Node exists then the `BrowseName` and NodeClass shall match the InstanceDeclaration. In the case of Objects or Variables, also the TypeDefinitionNode shall either match or be a subtype of the original TypeDefinitionNode.
+
+**P03-0604040201 NamingRule** If an InstanceDeclaration has a ModellingRule using the NamingRule Constraint it identifies that the `BrowseName` of the InstanceDeclaration is of no significance but other semantic is defined with the ModellingRule. The TranslateBrowsePathsToNodeIds Service (see Part 4) can typically not be used to access instances based on those InstanceDeclarations.
+
+**P03-0604040503 Optional** In Figure 20 an example using the ModellingRules Optional and Mandatory is shown. The example contains an ObjectType Type_A and all valid combinations of instances named A1 to A13. Note that if the optional B is provided, the mandatory E has to be provided as well, otherwise not. F is referenced by C and D. On the instance, this can be the same Node or two different Nodes with the same `BrowseName` (similar Node to InstanceDeclaration F). Not considered in the example is if the instances have ModellingRules or not. It is assumed that each F is similar to the InstanceDeclaration F, etc.
+
+**P03-0604040504 ExposesItsArray** Figure 21 gives an example. A is an instance of Type_A having two entries in its value array. Therefore it references two instances of the same type as the InstanceDeclaration ArrayExpose. The `BrowseNames` of those instances are not defined by the ModellingRule. In general, it is not possible to get a Variable representing a specific entry in the array (e.g. the second). Clients will typically either get the array or access the Variables directly, so there is no need to provide that information.
+
+**P03-0604040505 OptionalPlaceholder** - for Object and Variable the intention of the ModellingRule OptionalPlaceholder is to expose the information that a complex TypeDefinition expects from instances of the TypeDefinition to add instances with specific References without defining `BrowseNames` for the instances. For example, a Device might have a Folder for DeviceParameters, and the DeviceParameters should be connected with a HasComponent Reference. However, the names of the DeviceParameters are specific to the instances. The example is shown in Figure 23, where an
+instance Device A adds two DeviceParameters in the Folder.
+
+It is recommended that the `BrowseName` and the DisplayName of InstanceDeclarations having the OptionalPlaceholder ModellingRule should be enclosed within angle brackets.
+
+When overriding the InstanceDeclaration, the ModellingRule shall remain OptionalPlaceholder. For Methods, the ModellingRule OptionalPlaceholder is used to define the `BrowseName` where subtypes and instances provide more information. The Method definition with the OptionalPlaceholder only defines the `BrowseName`. An instance or subtype defines the InputArguments and OutputArguments. A subtype shall also change the ModellingRule to Optional or Mandatory. The Method is optional for instances. For example, a Device might have a Method to perform calibration however the specific arguments for the Method depend on the instance of the Device. In this example Device A does not implement the Method, Device B implements the Method with no arguments and Device C implements the Method accepting a mode argument to select how the calibration is to be performed. The example is shown in Figure 24.
+
+**P03-0604040506 MandatoryPlaceholder** for example, when the DeviceType requires that at least one DeviceParameter shall exist without specifying the `BrowseName` for it, it uses MandatoryPlaceholder as shown in Figure 25. Device A is a valid instance as it has the required DeviceParameter. Device B is not valid as it uses the wrong ReferenceType to reference a DeviceParameter (Organizes instead of HasComponent) and Device C is not valid because it does not provide a DeviceParameter at all.
+
+The ModellingRule MandatoryPlaceholder requires that each instance provides at least one instance with the TypeDefinition of the InstanceDeclaration or a subtype, and is referenced with
+the same ReferenceType or a subtype as the InstanceDeclaration. It does not require a specific `BrowseName` and thus cannot be used for the TranslateBrowsePathsToNodeIds Service (see Part 4).
+
+It is recommended that the `BrowseName` and the DisplayName of InstanceDeclarations having the MandatoryPlaceholder ModellingRule should be enclosed within angle brackets.
+
+For Methods, the ModellingRule MandatoryPlaceholder is used to define the `BrowseName` where subtypes and instances provide more information. The Method definition with the MandatoryPlaceholder only defines the `BrowseName`. An instance or subtype defines the InputArguments and OutputArguments. A subtype shall also change the ModellingRule to Mandatory. The Method is mandatory for instances.
+
+**P03-0803 QualifiedName** - this Built-in DataType contains a qualified name. It is, for example, used as `BrowseName`. Its elements are defined in Table 25. The name part of the QualifiedName is restricted to 512 characters.
+
+**P03-0851 StructureField** StructureFields can be exposed as DataVariables that are children of the Variable that contains the Structure Value. In this case the `BrowseName` of the DataVariable shall be the same as the StructureField name and the NamespaceIndex of the `BrowseName` shall be the same as the Structure DataType Node NamespaceIndex.
+
+**P03-A0402 Properties or DataVariables** - besides the semantic differences of Properties and DataVariables described in Clause 4 there are also syntactical differences. A Property is identified by its `BrowseName`, that is, if Properties having the same semantic are used several times, they should always have the same `BrowseName`. The same semantic of DataVariables is captured in the VariableType.
+
+**P03-C0203 Extended Notation** - the `BrowseName` contains the NamespaceIndex and a String. Such a structure can be exposed as \[\<NamespaceIndex\>:\]\<String\> where the NamespaceIndex is optional. For example, a `BrowseName` can be “1:MyName”. Instead of that, “MyName” can also be used. This rule applies whenever a `BrowseName` is shown, including the text used in the graphical representation of a Node.
+
+#### Parametrization
+
+Special characters may be used for parametrization of the BrowseName to create several copies of the same node. In this case the `BrowseName` amy be used as a pattern of the valuess assigned to new instances created this way.
 
 > What is the impact on the `SymbolicName` ?
 
@@ -90,32 +200,11 @@ Special characters may be used for parametryzation of the BrowseName to create s
 Regex first attempt:
 
 ```TXT
+\b((\d{1,}):)?(.+)
 /^(\s+)?((\d{1,}+):)?([^:\s][\w\S]+)/gm
 ^(\s+)?((\d+):)?([a-zA-z0-9_]+)
 /^(\s+)?\d+:[a-zA-z0-9_]+$|^(\s+)?[a-zA-z0-9_]+$/gm
 /^(\s+)?\d+:[a-zA-z0-9_]+$|^(\s+)?[a-zA-z0-9_]+$|\S+/gm
-```
-
-```C#
-using System;
-using System.Text.RegularExpressions;
-
-public class Example
-{
-    public static void Main()
-    {
-        string pattern = @"^(\s+)?((\d{1,}+):)?([^:\s][\w\S]+)";
-        string input = @"       123456:_ab_98AS   
-       :_ab_98AS
-    1111112@#hdshdskk8878787*&&&*) 32322\/?\:";
-        RegexOptions options = RegexOptions.Multiline;
-        
-        foreach (Match m in Regex.Matches(input, pattern, options))
-        {
-            Console.WriteLine("'{0}' found at index {1}.", m.Value, m.Index);
-        }
-    }
-}
 ```
 
 ### General Rules for DisplayName Attribute
@@ -129,7 +218,7 @@ public class Example
 
 ### General Rules for SymbolicName Attribute
 
-Accordin to the specyfication it can be used as a class/field name in auto generated code. It should only be specified if the `BrowseName` cannot be used for this purpose.
+According to the specification it can be used as a class/field name in auto generated code. It should only be specified if the `BrowseName` cannot be used for this purpose.
 
 This xml attribute does not appear in the AddressSpace and is intended for use by design tools. Only letters, digits or the underscore (‘_’) are permitted. The detailed syntax definition is as follows by the type `SymbolicName`
 

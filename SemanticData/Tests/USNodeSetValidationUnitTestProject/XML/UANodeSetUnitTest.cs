@@ -37,7 +37,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       IUAModelContext model = instance.ParseUAModelContext(asbcMock.Object, x => trace.Add(x));
       Assert.IsNotNull(model);
       Assert.AreEqual<int>(0, trace.Count);
-      asbcMock.Verify(x => x.GetURIIndexOrAppend(It.IsAny<Uri>()), Times.Exactly(2));
+      asbcMock.Verify(x => x.GetURIIndexOrAppend(It.IsAny<Uri>()), Times.Exactly(3));
     }
 
     [TestMethod]
@@ -53,7 +53,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       IUAModelContext model = instance.ParseUAModelContext(asbcMock.Object, x => trace.Add(x));
       Assert.IsNotNull(model);
       Assert.AreEqual<int>(0, trace.Count);
-      asbcMock.Verify(x => x.GetURIIndexOrAppend(It.IsAny<Uri>()), Times.Never);
+      asbcMock.Verify(x => x.GetURIIndexOrAppend(It.IsAny<Uri>()), Times.Once);
     }
 
     [TestMethod]
@@ -200,12 +200,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
       public (QualifiedName browseName, NodeId nodeId) ImportBrowseName(string browseNameText, string nodeIdText, Action<TraceMessage> trace)
       {
-        return (QualifiedName.Parse(browseNameText), NodeId.Parse(nodeIdText));
+        return (QualifiedName.ParseRegex(browseNameText), NodeId.Parse(nodeIdText));
       }
 
       public NodeId ImportNodeId(string nodeId, Action<TraceMessage> trace)
       {
         return NodeId.Parse(nodeId);
+      }
+
+      public void RegisterUAReferenceType(QualifiedName browseName)
+      {
+        throw new NotImplementedException();
       }
     }
 

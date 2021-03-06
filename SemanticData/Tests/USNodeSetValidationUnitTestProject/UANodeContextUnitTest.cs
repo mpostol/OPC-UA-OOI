@@ -64,6 +64,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsNotNull(_toTest.NodeIdContext);
       Assert.AreEqual<string>(_toTest.NodeIdContext.ToString(), "ns=1;i=11");
     }
+
     [TestMethod]
     public void UpdateDuplicatedNodeIdTest()
     {
@@ -375,12 +376,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
       public (QualifiedName browseName, NodeId nodeId) ImportBrowseName(string browseNameText, string nodeIdText, Action<TraceMessage> trace)
       {
-        return (QualifiedName.Parse(browseNameText), NodeId.Parse(nodeIdText));
+        return (QualifiedName.ParseRegex(browseNameText), NodeId.Parse(nodeIdText));
       }
 
       public NodeId ImportNodeId(string nodeId, Action<TraceMessage> trace)
       {
         return NodeId.Parse(nodeId);
+      }
+
+      public void RegisterUAReferenceType(QualifiedName browseName)
+      {
       }
     }
 

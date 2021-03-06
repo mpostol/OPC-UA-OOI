@@ -23,6 +23,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     Uri ModelUri { get; }
 
     /// <summary>
+    /// Registers the <see cref="QualifiedName"/> of ReferenceType Node.
+    /// </summary>
+    /// <param name="browseName">An instance of <see cref="QualifiedName"/> used as a name of the ReferenceType node.</param>
+    void RegisterUAReferenceType(QualifiedName browseName);
+
+    /// <summary>
     /// Imports the browse name <see cref="QualifiedName"/> and Node identifier as <see cref="NodeId"/>. It recalculates the <see cref="QualifiedName.NamespaceIndex"/> and <see cref="NodeId.NamespaceIndex"/> against local namespace index table.
     /// </summary>
     /// <param name="browseNameText">The <see cref="QualifiedName" /> serialized as text to be imported.</param>

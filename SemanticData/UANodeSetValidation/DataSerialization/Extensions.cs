@@ -20,23 +20,25 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       if ((nodeId == null) || nodeId == NodeId.Null) throw new ArgumentNullException(nameof(NodeId));
       QualifiedName qualifiedNameToReturn = null;
-      try
+      if (string.IsNullOrEmpty(qualifiedName))
       {
-        qualifiedNameToReturn = QualifiedName.ParseRegex(qualifiedName);
+        qualifiedNameToReturn = nodeId.RandomQualifiedName();
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, $"new identifier {qualifiedNameToReturn.ToString()} is generated to proceed."));
       }
-      catch (ServiceResultException _sre) //TODO Rewrite add to UT
-      {
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.QualifiedNameInvalidSyntax, String.Format("Error message: {0}", _sre.Message)));
-      }
-      catch (Exception ex)
-      {
-        Random random = new Random();
-        qualifiedNameToReturn = QualifiedName.ParseRegex($"{nodeId.NamespaceIndex}:EmptyBrowseName_{nodeId.IdentifierPart.ToString()}.{random.Next(-9999, 0)}");
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.EmptyBrowseName, $"Error message: {ex.Message} - new identifier {qualifiedNameToReturn.ToString()} is generated to proceed."));
-      }
+      else
+        try
+        {
+          qualifiedNameToReturn = QualifiedName.ParseRegex(qualifiedName);
+        }
+        catch (Exception ex)
+        {
+          qualifiedNameToReturn = nodeId.RandomQualifiedName();
+          traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.QualifiedNameInvalidSyntax, $"Error message: {ex.Message} - new identifier {qualifiedNameToReturn.ToString()} is generated to proceed."));
+        }
       return qualifiedNameToReturn;
     }
-    //TODO Enhance/Improve BrowseName parser #538 rewrite and add to UT
+
+    //Enhance/Improve NodeId parser #541 rewrite and add to UT
     /// <summary>
     /// Parses the node identifier with the syntax defined in Part 6-5.3.1.10
     /// </summary>
@@ -48,6 +50,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       NodeId nodeId2Return = NodeId.Parse(nodeId);
       return nodeId2Return;
     }
+
     /// <summary>
     /// Gets the <see cref="NodeId.IdentifierPart" /> as uint number.
     /// </summary>
@@ -105,5 +108,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         _vr = valueRank;
       return _vr;
     }
+
+    #region private
+
+    private static QualifiedName RandomQualifiedName(this NodeId nodeId)
+    {
+      return new QualifiedName()
+      {
+        Name = $"EmptyBrowseName_{nodeId.IdentifierPart.ToString()}_{ _RandomNumber.Next(-9999, 0)}",
+        NamespaceIndex = nodeId.NamespaceIndex,
+        NamespaceIndexSpecified = true,
+      };
+    }
+
+    private static Random _RandomNumber = new Random();
+
+    #endregion private
   }
 }

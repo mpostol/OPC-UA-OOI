@@ -63,14 +63,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<string>("ns=10;i=1", _modelContext.ImportNodeId("Boolean", x=> Assert.Fail()).ToString());
       Assert.AreEqual<string>("i=45", _modelContext.ImportNodeId("HasSubtype", x => Assert.Fail()).ToString());
       Assert.AreEqual<string>("ns=20;i=2", _modelContext.ImportNodeId("ns=2;i=2", x => Assert.Fail()).ToString());
-      asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Once);
+      asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Exactly(2));
       asMock.Verify(x => x.GetURIIndexOrAppend(randomURI), Times.Once);
       asMock.Verify(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>()), Times.Once);
       Assert.AreEqual<string>("ns=20;i=3", _modelContext.ImportNodeId("ns=2;i=3", x => Assert.Fail()).ToString());
       asMock.Verify(x => x.GetURIIndexOrAppend(randomURI), Times.Exactly(2));
       Assert.AreEqual<string>("ns=20;i=4", _modelContext.ImportNodeId("ns=2;i=4", x => Assert.Fail()).ToString());
       asMock.Verify(x => x.GetURIIndexOrAppend(randomURI), Times.Exactly(3));
-      asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Once);
+      asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Exactly(2));
       Assert.AreEqual<int>(2, trace.Count);
       Assert.IsTrue(trace[0].Message.Contains("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"));
       Assert.AreEqual<string>("P0-0001030000", trace[0].BuildError.Identifier);
@@ -96,9 +96,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       UAModelContext modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       Assert.AreEqual<string>("(10:Boolean, ns=10;i=1)", modelContext.ImportBrowseName("1:Boolean", "ns=1;i=1", x => Assert.Fail()).ToString());
       Assert.AreEqual<string>("(10:AnyText, ns=10;i=1)", modelContext.ImportBrowseName("1:AnyText", "ns=1;i=1", x => Assert.Fail()).ToString());
-      Assert.AreEqual<string>("(HasSubtype, ns=10;i=1)", modelContext.ImportBrowseName("HasSubtype", "ns=1;i=1", x => Assert.Fail()).ToString());
+      Assert.AreEqual<string>("(10:HasSubtype, ns=10;i=1)", modelContext.ImportBrowseName("1:HasSubtype", "ns=1;i=1", x => Assert.Fail()).ToString());
       Assert.AreEqual<string>("ns=10;i=232323", modelContext.ImportNodeId("ns=1;i=232323", x => Assert.Fail()).ToString());
-      asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Exactly(6));
+      asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Exactly(8));
       asMock.Verify(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>()), Times.Once);
     }
 
@@ -119,7 +119,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Action<TraceMessage> logMock = z => trace.Add(z);
       UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       Assert.AreEqual<string>("ns=20;i=232323", _modelContext.ImportNodeId("ns=2;i=232323", y => Assert.Fail()).ToString());
-      asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Never);
+      asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Once);
       asMock.Verify(x => x.GetURIIndexOrAppend(randomURI), Times.Once);
       Assert.AreEqual<int>(1, trace.Count);
       Assert.IsTrue(trace[0].Message.Contains(randomURI.ToString()));

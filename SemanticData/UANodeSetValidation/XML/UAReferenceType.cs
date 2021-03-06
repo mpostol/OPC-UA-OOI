@@ -1,19 +1,21 @@
 ﻿//___________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
 using System;
-using System.Collections.Generic;
-using System.Text;
+using UAOOI.SemanticData.BuildingErrorsHandling;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   public partial class UAReferenceType
   {
-
+    /// <summary>
+    /// Get the clone from the types derived from this one.
+    /// </summary>
+    /// <returns>An instance of <see cref="T:UAOOI.SemanticData.UANodeSetValidation.XML.UANode" />.</returns>
     protected override UANode ParentClone()
     {
       UAReferenceType _ret = new UAReferenceType()
@@ -25,5 +27,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return _ret;
     }
 
+    //TODO Enhance/Improve BrowseName parser #538 The `BrowseName` of a `ReferenceType` shall be unique in a server. It is not allowed that two different `ReferenceTypes` have the same `BrowseName`.
+    internal override void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
+    {
+      base.RecalculateNodeIds(modelContext, trace);
+      modelContext.RegisterUAReferenceType(BrowseNameQualifiedName);
+    }
   }
 }

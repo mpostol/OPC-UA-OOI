@@ -51,6 +51,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     #region API
 
+    internal QualifiedName BrowseNameQualifiedName { get; private set; }
+    internal NodeId NodeIdNodeId { get; private set; }
+
     /// <summary>
     /// Clones this instance.
     /// </summary>
@@ -137,7 +140,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     internal virtual void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
-      //TODO Enhance/Improve BrowseName parser #538
       (BrowseNameQualifiedName, NodeIdNodeId) = modelContext.ImportBrowseName(BrowseName, this.NodeId, trace);
       if (!(this.References is null))
         foreach (Reference _reference in this.References)
@@ -146,13 +148,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     }
 
     #endregion API
-
-    #region INode
-
-    internal QualifiedName BrowseNameQualifiedName { get; private set; }
-    internal NodeId NodeIdNodeId { get; private set; }
-
-    #endregion INode
 
     #region override Object
 

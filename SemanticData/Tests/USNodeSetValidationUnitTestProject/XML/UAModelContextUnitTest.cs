@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers;
 
@@ -60,7 +61,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       //start testing
       asMock.Verify(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>()), Times.Once);
-      Assert.AreEqual<string>("ns=10;i=1", _modelContext.ImportNodeId("Boolean", x=> Assert.Fail()).ToString());
+      Assert.AreEqual<string>("ns=10;i=1", _modelContext.ImportNodeId("Boolean", x => Assert.Fail()).ToString());
       Assert.AreEqual<string>("i=45", _modelContext.ImportNodeId("HasSubtype", x => Assert.Fail()).ToString());
       Assert.AreEqual<string>("ns=20;i=2", _modelContext.ImportNodeId("ns=2;i=2", x => Assert.Fail()).ToString());
       asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Exactly(2));
@@ -211,6 +212,44 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<string>("2:NewUAObject", nodeSet.Items[0].BrowseNameQualifiedName.ToString());
       Assert.AreEqual<string>("ns=2;i=2", ((UAVariableType)nodeSet.Items[1]).DataTypeNodeId.ToString());
       Assert.AreEqual<string>("2:NewUAObject", ((UAVariableType)nodeSet.Items[1]).BrowseNameQualifiedName.ToString());
+    }
+
+    [TestMethod]
+    public void RecalculateNodeIdsTest()
+    {
+      IUANodeSetModelHeader nodeSet = new UANodeSet
+      {
+        Aliases = new NodeIdAlias[] {
+          new NodeIdAlias() { Alias = "HasSubtype", Value = "i=45" },
+          new NodeIdAlias() { Alias = "Boolean", Value = "ns=1;i=1" } },
+        NamespaceUris = new string[] { "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" },
+        Models = new ModelTableEntry[] { new ModelTableEntry() { ModelUri = "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" } }
+      };
+      Mock<IAddressSpaceURIRecalculate> asMock = new Mock<IAddressSpaceURIRecalculate>();
+      asMock.Setup(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"))).Returns(10);
+      Uri randomURI = null;
+      asMock.Setup(x => x.GetURIIndexOrAppend(It.Is<Uri>(z => z.ToString().Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown")))).Returns<Uri>(x => { randomURI = x; return 20; });
+      asMock.Setup(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>()));
+      List<TraceMessage> trace = new List<TraceMessage>();
+      Action<TraceMessage> logMock = z => trace.Add(z);
+      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
+      _modelContext.RegisterUAReferenceType(new QualifiedName("QualifiedName", 10));
+      Assert.AreEqual<int>(0, trace.Count);
+      asMock.Verify(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>()), Times.Once);
+      asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Once);
+      asMock.Verify(x => x.GetURIIndexOrAppend(It.Is<Uri>(z => z.ToString().Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown"))), Times.Never);
+      _modelContext.RegisterUAReferenceType(new QualifiedName("QualifiedName", 10));
+      Assert.AreEqual<int>(1, trace.Count);
+      Assert.AreEqual<string>(BuildError.DuplicatedReferenceType.Identifier, trace[0].BuildError.Identifier);
+      Assert.AreEqual<string>("The BrowseName of a ReferenceType shall be unique.", trace[0].BuildError.Descriptor);
+      Assert.AreEqual<string>("The UAReferenceType duplicated BrowseName=10:QualifiedName. It is not allowed that two different ReferenceTypes have the same BrowseName", trace[0].Message);
+      Debug.WriteLine(trace[0].ToString());
+      trace.Clear();
+      _modelContext.RegisterUAReferenceType(new QualifiedName("QualifiedName", 11));
+      Assert.AreEqual<int>(1, trace.Count);
+      Assert.AreEqual<string>(BuildError.BrowseNameReferenceTypeScope.Identifier, trace[0].BuildError.Identifier);
+      Assert.AreEqual<string>("The BrowseName of a ReferenceType is defined outside of the model.", trace[0].BuildError.Descriptor);
+      Assert.AreEqual<string>("Wrong NamespaceIndex of the 11:QualifiedName. The UAReferenceType should be defined by the default model 10", trace[0].Message);
     }
   }
 }

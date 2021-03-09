@@ -338,38 +338,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       return true;
     }
 
-    ///// <summary>
-    ///// Parses a string containing a QualifiedName with the syntax <code>n:qname</code>
-    ///// </summary>
-    ///// <param name="text">The QualifiedName value as a string.</param>
-    ///// <exception cref="ServiceResultException">Thrown under a variety of circumstances, each time with a specific message.</exception>
-    ////TODO Enhance/Improve BrowseName parser #538
-    //public static QualifiedName Parse(string text)
-    //{
-    //  // extract local namespace index.
-    //  ushort namespaceIndex = 0;
-    //  int start = -1;
-    //  for (int ii = 0; ii < text.Length; ii++)
-    //  {
-    //    char ch = text[ii];
-    //    if (ch == ':')
-    //    {
-    //      start = ii + 1;
-    //      break;
-    //    }
-    //    if (Char.IsDigit(ch))
-    //    {
-    //      namespaceIndex *= 10;
-    //      namespaceIndex += (ushort)(ch - '0');
-    //    }
-    //  }
-    //  // no prefix found.
-    //  if (start == -1)
-    //    return new QualifiedName(text);
-    //  return new QualifiedName(text.Substring(start), namespaceIndex);
-    //}
-
-    internal static QualifiedName ParseRegex(string text)
+    /// <summary>
+    /// Parses a string containing a <see cref="QualifiedName"/> with the syntax <code>n:qname</code>
+    /// </summary>
+    /// <param name="text">The QualifiedName value as a string.</param>
+    internal static QualifiedName Parse(string text)
     {
       ushort defaultNamespaceIndex = 0;
       string pattern = @"\b((\d{1,}):)?(.+)";

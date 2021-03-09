@@ -320,9 +320,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (Object.ReferenceEquals(other, null))
         return false;
-      //TODO Enhance/Improve BrowseName parser #538
-      //if (this.BrowseName != other.BrowseName)
-      //  return false;
       return
         this.UANode.Equals(other.UANode);
     }

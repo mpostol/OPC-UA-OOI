@@ -27,7 +27,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       else
         try
         {
-          qualifiedNameToReturn = QualifiedName.ParseRegex(qualifiedName);
+          qualifiedNameToReturn = QualifiedName.Parse(qualifiedName);
         }
         catch (Exception ex)
         {

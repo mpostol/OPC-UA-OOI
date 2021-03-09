@@ -34,7 +34,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return
         ParentEquals(other) &&
         this.AccessRestrictions == other.AccessRestrictions &&
-        //TODO Enhance/Improve BrowseName parser #538
         this.BrowseNameQualifiedName.Equals(other.BrowseNameQualifiedName) &&
         this.Description.LocalizedTextArraysEqual(other.Description) &&
         this.DisplayName.LocalizedTextArraysEqual(other.DisplayName) &&

@@ -376,7 +376,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
       public (QualifiedName browseName, NodeId nodeId) ImportBrowseName(string browseNameText, string nodeIdText, Action<TraceMessage> trace)
       {
-        return (QualifiedName.ParseRegex(browseNameText), NodeId.Parse(nodeIdText));
+        return (QualifiedName.Parse(browseNameText), NodeId.Parse(nodeIdText));
       }
 
       public NodeId ImportNodeId(string nodeId, Action<TraceMessage> trace)

@@ -85,7 +85,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     [TestMethod]
     public void QualifiedNameParseTest()
     {
-      QualifiedName _qn = QualifiedName.ParseRegex("Name");
+      QualifiedName _qn = QualifiedName.Parse("Name");
       Assert.IsNotNull(_qn);
       Assert.AreEqual<int>(_qn.NamespaceIndex, 0);
       Assert.IsTrue(_qn.NamespaceIndexSpecified);
@@ -95,7 +95,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     [TestMethod]
     public void QualifiedNameParse0NamespaceIndexTest()
     {
-      QualifiedName _qn = QualifiedName.ParseRegex("0:Name");
+      QualifiedName _qn = QualifiedName.Parse("0:Name");
       Assert.IsNotNull(_qn);
       Assert.IsTrue(_qn.NamespaceIndexSpecified);
       Assert.AreEqual<int>(_qn.NamespaceIndex, 0);
@@ -122,7 +122,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 
     private void AssertQualifiedNameParse(string text, string expectedName, ushort expectedNamespaceIndex)
     {
-      QualifiedName newQualifiedName = QualifiedName.ParseRegex(text);
+      QualifiedName newQualifiedName = QualifiedName.Parse(text);
       Assert.IsNotNull(newQualifiedName);
       Assert.IsTrue(newQualifiedName.NamespaceIndexSpecified);
       Assert.AreEqual<int>(expectedNamespaceIndex, newQualifiedName.NamespaceIndex);

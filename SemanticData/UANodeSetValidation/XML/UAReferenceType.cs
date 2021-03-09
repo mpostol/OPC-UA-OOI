@@ -27,7 +27,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return _ret;
     }
 
-    //TODO Enhance/Improve BrowseName parser #538 The `BrowseName` of a `ReferenceType` shall be unique in a server. It is not allowed that two different `ReferenceTypes` have the same `BrowseName`.
     internal override void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
       base.RecalculateNodeIds(modelContext, trace);

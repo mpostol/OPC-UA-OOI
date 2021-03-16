@@ -189,22 +189,57 @@ For Methods, the ModellingRule MandatoryPlaceholder is used to define the `Brows
 
 **P03-C0203 Extended Notation** - the `BrowseName` contains the NamespaceIndex and a String. Such a structure can be exposed as \[\<NamespaceIndex\>:\]\<String\> where the NamespaceIndex is optional. For example, a `BrowseName` can be “1:MyName”. Instead of that, “MyName” can also be used. This rule applies whenever a `BrowseName` is shown, including the text used in the graphical representation of a Node.
 
+**P05-0303 Conventions for Node descriptions** - References are defined by providing the ReferenceType name, the `BrowseName` of the TargetNode and its NodeClass.
+
+Nodes of all other NodeClasses cannot be defined in the same table; therefore only the used ReferenceType, their NodeClass and their `BrowseName` are specified. A reference to another part of this document points to their definition.
+
+**P05-0401 NodeIds** - the symbolic name of each Node defined in this standard is its `BrowseName`, or, when it is part of another Node, the `BrowseName` of the other Node, a “.”, and the BrowseNa`me of itself. In this case “part of” means that the whole has a HasProperty or HasComponent Reference to its part. Since all Nodes not being part of another Node have a unique name in this standard, the symbolic name is unique. For example, the ServerType defined in 6.3.1 has the symbolic name “ServerType”. One of its InstanceDeclarations would be identified as “ServerType.ServerCapabilities”. Since this Object is complex, another InstanceDeclaration of the ServerType is “ServerType.ServerCapabilities.MinSupportedSampleRate”. The Server Object defined in 8.3.2 is based on the ServerType and has the symbolic name “Server”. Therefore, the instance based on the InstanceDeclaration described above has the symbolic name “Server.ServerCapabilities.MinSupportedSampleRate”.
+
+**P05-0402 BrowseNames** - the text part of the `BrowseNames` for all Nodes defined in this standard is specified in the tables defining the Nodes. The NamespaceIndex for all `BrowseNames` defined in this standard is 0.
+
+**P05-0501 General** the DisplayName is a LocalizedText. Each server shall provide the DisplayName identical to the `BrowseName` of the Node for the LocaleId “en”. Whether the server provides translated names for other LocaleIds is server-specific.
+
+The NodeId is described by `BrowseNames` as defined in 4.1 and defined in Part 6.
+
+**P05-060304 SessionsDiagnosticsSummaryType** - for each session of the Server, this Object also provides an Object representing the session, indicated by <ClientName>. The BrowseName could be derived from the sessionName defined in the CreateSession Service (Part 4) or some other server-specific mechanisms. It is of the ObjectType SessionDiagnosticsObjectType, as defined in 6.3.5.
+
+**P05-060313 NamespaceMetadataType** - the `BrowseName` of instances of this type shall be derived from the represented namespace. This can, for example, be done by using the index of the namespace in the NamespaceArray as namespaceIndex of the QualifiedName and the namespace URI as name of the QualifiedName.
+
+**P05-060314 NamespacesType** - the ObjectType contains a list of NamespaceMetadataType Objects representing the namespaces in the Server. The `BrowseName` of an Object shall be derived from the namespace represented by the Object. This can, for example, be done by using the index of the namespace in the NamespaceArray as namespaceIndex of the QualifiedName and the namespace URI as name of the QualifiedName. Clients should not assume that all namespaces provided by a Server are present in this list as a namespace may not provide the information necessary to fill all mandatory Properties of the NamespaceMetadataType.
+
+**P05-060402 BaseEventType** Server does not have a description, it shall return the string part of the `BrowseName` of the Node associated with the Event.
+
+**P05-060431 BaseModelChangeEventType** - this EventType inherits all Properties of the BaseEventType. Their semantic is defined in 6.4.2. There are no additional Properties defined for this EventType. The SourceNode Property for Events of this type shall be the Node of the View that gives the context of the changes. If the whole AddressSpace is the context, the SourceNode Property is set to the NodeId of the Server Object. The SourceName for Events of this type shall be the String part of the `BrowseName` of the View; for the whole AddressSpace it shall be “Server”.
+
+**P05-060433 SemanticChangeEventType** - this EventType inherits all Properties of the BaseEventType. Their semantic is defined in 6.4.2. There are no additional Properties defined for this EventType. The SourceNode Property for Events of this type shall be the Node of the View that gives the context of the changes. If the whole AddressSpace is the context, the SourceNode Property is set to the NodeId of the Server Object. The SourceName for Events of this type shall be the String part of the `BrowseName` of the View, for the whole AddressSpace it shall be “Server”.
+
+**P05-0703 PropertyType** - the PropertyType is a subtype of the BaseVariableType. It is used as the type definition for all Properties. Properties are defined by their `BrowseName` and therefore they do not need a specialised type definition. It is not allowed to subtype this VariableType.
+
+**P05-0709 SamplingIntervalDiagnosticsArrayType** - this complex VariableType is used for diagnostic information. For each entry of the array, instances of this type will provide a Variable of the SamplingIntervalDiagnosticsType VariableType having the sampling rate as `BrowseName`.
+
+**P05-B0405 FiniteStateMachineType** - The States of the machine are represented with instances of the StateType ObjectType. Each State shall have a `BrowseName` which is unique within the StateMachine and shall have a StateNumber which shall also be unique across all States defined in the StateMachine. Be aware that States in a SubStateMachine may have the same StateNumber or `BrowseName` as States in the parent machine. A concrete subtype of FiniteStateMachineType shall define at least one State.
+
+The Transitions that may occur are represented with instances of the TransitionType. Each Transition shall have a `BrowseName` which is unique within the StateMachine and may have a TransitionNumber which shall also be unique across all Transitions defined in the StateMachine.
+
+**P05-B0406 FiniteStateVariableType** - the Name Property is inherited from StateVariableType. Its Value shall be the `BrowseName` of one of the State Objects of the FiniteStateMachineType.
+
+**P05-C0302** FileSystem Object The support of file directory structures is declared by aggregating an instance of the FileDirectoryType with the `BrowseName` FileSystem as illustrated in Figure C.1.
+
+The Object representing the root of a file directory structure shall have the `BrowseName` FileSystem. An OPC UA Server may have different FileSystem Objects in the AddressSpace.
+HasComponent is used to reference a FileSystem from aggregating Objects like the Objects Folder or the Object representing a device.
+
 #### Parametrization
 
-Special characters may be used for parametrization of the BrowseName to create several copies of the same node. In this case the `BrowseName` amy be used as a pattern of the valuess assigned to new instances created this way.
+Special characters may be used for parametrization of the `BrowseName` to create several copies of the same node. In this case the `BrowseName` amy be used as a pattern of the values assigned to new instances created this way.
 
 > What is the impact on the `SymbolicName` ?
 
 #### Syntax
 
-Regex first attempt:
+ The regular expression pattern to match.
 
 ```TXT
 \b((\d{1,}):)?(.+)
-/^(\s+)?((\d{1,}+):)?([^:\s][\w\S]+)/gm
-^(\s+)?((\d+):)?([a-zA-z0-9_]+)
-/^(\s+)?\d+:[a-zA-z0-9_]+$|^(\s+)?[a-zA-z0-9_]+$/gm
-/^(\s+)?\d+:[a-zA-z0-9_]+$|^(\s+)?[a-zA-z0-9_]+$|\S+/gm
 ```
 
 ### General Rules for DisplayName Attribute

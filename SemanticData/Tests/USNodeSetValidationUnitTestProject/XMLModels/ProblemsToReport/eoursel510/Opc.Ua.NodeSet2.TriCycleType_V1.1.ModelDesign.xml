@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="XMLstylesheet"?>
+<ModelDesign xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" TargetNamespace="http://tricycletypev1/" TargetVersion="" TargetPublicationDate="2021-03-18T00:00:00+01:00" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+  <Namespaces>
+    <Namespace Name="Name0" Prefix="Prefix0" InternalPrefix="http://opcfoundation.org/UA/" XmlNamespace="http://opcfoundation.org/UA/" XmlPrefix="Prefix1" FilePath="" Version="1.04.8" PublicationDate="20.11.2020">http://opcfoundation.org/UA/</Namespace>
+    <Namespace Name="Name2" Prefix="Prefix2" InternalPrefix="http://tricycletypev1/" XmlNamespace="http://tricycletypev1/" XmlPrefix="Prefix3" FilePath="" Version="1.00" PublicationDate="25.11.2020">http://tricycletypev1/</Namespace>
+  </Namespaces>
+  <DataType xmlns:q1="http://tricycletypev1/" SymbolicName="q1:TireEnum" xmlns:q2="http://opcfoundation.org/UA/" BaseType="q2:Enumeration">
+    <Children>
+      <Property SymbolicName="q2:EnumStrings" DataType="q2:LocalizedText" ValueRank="Array">
+        <DefaultValue>
+          <uax:ListOfLocalizedText xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:LocalizedText>
+              <uax:Locale>en-us</uax:Locale>
+              <uax:Text>Mud</uax:Text>
+            </uax:LocalizedText>
+            <uax:LocalizedText>
+              <uax:Locale>en-us</uax:Locale>
+              <uax:Text>Ice</uax:Text>
+            </uax:LocalizedText>
+            <uax:LocalizedText>
+              <uax:Locale>en-us</uax:Locale>
+              <uax:Text>Sand</uax:Text>
+            </uax:LocalizedText>
+          </uax:ListOfLocalizedText>
+        </DefaultValue>
+      </Property>
+    </Children>
+    <ClassName />
+    <Fields>
+      <Field Name="Mud" Identifier="0" BitMask="" ArrayDimensions="" />
+      <Field Name="Ice" Identifier="1" BitMask="" ArrayDimensions="" />
+      <Field Name="Sand" Identifier="2" BitMask="" ArrayDimensions="" />
+    </Fields>
+  </DataType>
+  <DataType xmlns:q3="http://tricycletypev1/" SymbolicName="q3:TriCycleDataType" xmlns:q4="http://opcfoundation.org/UA/" BaseType="q4:Structure">
+    <ClassName />
+    <Fields>
+      <Field Name="weight" BitMask="" DataType="q4:Float" ArrayDimensions="" />
+      <Field Name="wheel" BitMask="" DataType="q3:WheelDataType" ArrayDimensions="" />
+      <Field Name="Model" BitMask="" DataType="q4:String" ArrayDimensions="" />
+    </Fields>
+  </DataType>
+  <DataType xmlns:q5="http://tricycletypev1/" SymbolicName="q5:WheelDataType" xmlns:q6="http://opcfoundation.org/UA/" BaseType="q6:Structure">
+    <Description>Wheel datatype.</Description>
+    <ClassName />
+    <Fields>
+      <Field Name="tickness" BitMask="" DataType="q6:Float" ArrayDimensions="" />
+      <Field Name="diameter" BitMask="" DataType="q6:Float" ArrayDimensions="" />
+      <Field Name="pressure" BitMask="" DataType="q6:Float" ArrayDimensions="" />
+      <Field Name="TireType" BitMask="" DataType="q5:TireEnum" ArrayDimensions="" />
+      <Field Name="raysLen" BitMask="" DataType="q6:Int32" ArrayDimensions="" />
+    </Fields>
+  </DataType>
+  <ObjectType xmlns:q7="http://tricycletypev1/" SymbolicName="q7:HumanType">
+    <Children>
+      <Variable xmlns:q8="http://opcfoundation.org/UA/" SymbolicName="q8:Name" ModellingRule="Mandatory" DataType="q8:String" />
+      <Variable xmlns:q9="http://opcfoundation.org/UA/" SymbolicName="q9:Age" ModellingRule="Mandatory" DataType="q9:Int32" />
+      <Property xmlns:q10="http://opcfoundation.org/UA/" SymbolicName="q10:Gender" ModellingRule="Mandatory" DataType="q10:String" />
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q11="http://tricycletypev1/" SymbolicName="q11:TrailerType" BaseType="q11:VehicleType">
+    <References>
+      <Reference IsInverse="true">
+        <ReferenceType xmlns:q12="http://opcfoundation.org/UA/">q12:HasOrderedComponent</ReferenceType>
+        <TargetId>q11:TrailerType</TargetId>
+      </Reference>
+    </References>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q13="http://tricycletypev1/" SymbolicName="q13:VehicleType">
+    <Children>
+      <Property xmlns:q14="http://opcfoundation.org/UA/" SymbolicName="q14:buildDate" ModellingRule="Mandatory" DataType="q14:DateTime" />
+      <Object xmlns:q15="http://opcfoundation.org/UA/" SymbolicName="q15:S_Owner_" TypeDefinition="q13:HumanType" ModellingRule="Mandatory">
+        <BrowseName>Owner&gt;</BrowseName>
+        <DisplayName>&lt;Owner&gt;</DisplayName>
+      </Object>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q16="http://tricycletypev1/" SymbolicName="q16:TriCycleType" BaseType="q16:VehicleType">
+    <Description>This a simple Tricycle</Description>
+    <Children>
+      <Property xmlns:q17="http://opcfoundation.org/UA/" SymbolicName="q17:weight" ModellingRule="Mandatory" DataType="q17:Float" />
+      <Property xmlns:q18="http://opcfoundation.org/UA/" SymbolicName="q18:wheels" TypeDefinition="q16:WheelVariableType" ModellingRule="Mandatory" DataType="q16:WheelDataType" ValueRank="Array" ArrayDimensions="3" />
+      <Variable xmlns:q19="http://opcfoundation.org/UA/" SymbolicName="q19:Model" ModellingRule="Mandatory" DataType="q19:String" />
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <VariableType xmlns:q20="http://tricycletypev1/" SymbolicName="q20:WheelVariableType" DataType="q20:WheelDataType">
+    <Children>
+      <Variable xmlns:q21="http://opcfoundation.org/UA/" SymbolicName="q21:tickness" ModellingRule="Mandatory" DataType="q21:Float" />
+      <Variable xmlns:q22="http://opcfoundation.org/UA/" SymbolicName="q22:diameter" ModellingRule="Mandatory" DataType="q22:Float" />
+      <Variable xmlns:q23="http://opcfoundation.org/UA/" SymbolicName="q23:pressure" ModellingRule="Mandatory" DataType="q23:Float" />
+      <Variable xmlns:q24="http://opcfoundation.org/UA/" SymbolicName="q24:tiretype" ModellingRule="Mandatory" DataType="q20:TireEnum" />
+    </Children>
+    <ClassName />
+  </VariableType>
+</ModelDesign>

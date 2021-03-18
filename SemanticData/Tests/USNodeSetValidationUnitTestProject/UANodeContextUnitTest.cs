@@ -417,16 +417,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return null;
       }
 
-      /// <summary>
-      /// Gets the children nodes for the <paramref name="rootNode" />.
-      /// </summary>
-      /// <param name="rootNode">The root node of the requested children.</param>
-      /// <returns>Return an instance of <see cref="T:System.Collections.IEnumerable" /> capturing all children of the selected node.</returns>
-      public IEnumerable<IUANodeBase> GetChildren(IUANodeContext rootNode)
+      public IEnumerable<IUANodeBase> GetChildren(IUANodeBase node)
       {
-        return m_References.Values.Where<UAReferenceContext>(x => x.SourceNode == rootNode).
-                                                                    Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
-                                                                    Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
+        return m_References.Values.Where<UAReferenceContext>(x => Object.ReferenceEquals(x.SourceNode, node)).
+                                                             Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
+                                                             Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
       }
 
       public ushort GetIndexOrAppend(string identifier)
@@ -450,7 +445,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return m_NodesDictionary[nodeId.ToString()];
       }
 
-      public IEnumerable<UAReferenceContext> GetReferences2Me(IUANodeContext node)
+      public IEnumerable<UAReferenceContext> GetReferences2Me(IUANodeBase node)
       {
         throw new NotImplementedException();
       }

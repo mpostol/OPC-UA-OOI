@@ -187,37 +187,35 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     /// <summary>
-    /// Gets my references from the main collection.
+    /// Gets my references.
     /// </summary>
-    /// <param name="index">The index.</param>
-    /// <returns>An instance of the <see cref="IEnumerable{UAReferenceContext}"/> containing references pointed out by index.</returns>
-    IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetMyReferences(IUANodeBase index)
+    /// <param name="node">The source node</param>
+    /// <returns>Returns <see cref="IEnumerable{UAReferenceContex}"/> containing references attached to the <paramref name="node"/>.</returns>
+    IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetMyReferences(IUANodeBase node)
     {
-      //TODO Import simple NodeSet2 file is incomplete #510
-      return m_References.Values.Where<UAReferenceContext>(x => (x.SourceNode == index));
+      return m_References.Values.Where<UAReferenceContext>(x => (Object.ReferenceEquals(x.SourceNode, node)));
     }
 
     /// <summary>
     /// Gets the references2 me.
     /// </summary>
-    /// <param name="index">The index.</param>
+    /// <param name="node">The index.</param>
     /// <returns>IEnumerable&lt;UAReferenceContext&gt;.</returns>
-    IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetReferences2Me(IUANodeContext index)
+    IEnumerable<UAReferenceContext> IAddressSpaceBuildContext.GetReferences2Me(IUANodeBase node)
     {
-      //TODO Import simple NodeSet2 file is incomplete #510 - consider consolidation with GetMyReferences
-      return m_References.Values.Where<UAReferenceContext>(x => x.TargetNode == index && x.ParentNode != index);
+      return m_References.Values.Where<UAReferenceContext>(x => Object.ReferenceEquals(x.TargetNode, node) && !Object.ReferenceEquals(x.ParentNode, node));
     }
 
     /// <summary>
-    /// Gets the children nodes for the <paramref name="rootNode" />.
+    /// Gets the children nodes (<see cref="ReferenceKindEnum.HasProperty" /> or <see cref="ReferenceKindEnum.HasComponent" />) for the <paramref name="node" />.
     /// </summary>
-    /// <param name="rootNode">The root node of the requested children.</param>
-    /// <returns>Return an instance of <see cref="IEnumerable" /> capturing all children of the selected node.</returns>
-    public IEnumerable<IUANodeBase> GetChildren(IUANodeContext rootNode)
+    /// <param name="node">The root node of the requested children.</param>
+    /// <returns>Return an instance of <see cref="IEnumerable{IUANodeBase}" /> capturing all children of the selected node.</returns>
+    public IEnumerable<IUANodeBase> GetChildren(IUANodeBase node)
     {
-      return m_References.Values.Where<UAReferenceContext>(x => x.SourceNode == rootNode).
-                                                                  Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
-                                                                  Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
+      return m_References.Values.Where<UAReferenceContext>(x => Object.ReferenceEquals(x.SourceNode, node)).
+                                                           Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
+                                                           Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
     }
 
     public Parameter ExportArgument(DataSerialization.Argument argument)

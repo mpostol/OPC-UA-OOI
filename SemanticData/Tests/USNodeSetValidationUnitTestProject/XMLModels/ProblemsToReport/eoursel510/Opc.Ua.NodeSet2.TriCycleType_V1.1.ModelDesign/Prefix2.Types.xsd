@@ -1,0 +1,63 @@
+<xs:schema
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
+  xmlns:tns="http://tricycletypev1/"
+  targetNamespace="http://tricycletypev1/"
+  elementFormDefault="qualified"
+>
+  <xs:import namespace="http://opcfoundation.org/UA/" />
+
+  <xs:simpleType  name="TireEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Mud_0" />
+      <xs:enumeration value="Ice_1" />
+      <xs:enumeration value="Sand_2" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TireEnum" type="tns:TireEnum" />
+
+  <xs:complexType name="ListOfTireEnum">
+    <xs:sequence>
+      <xs:element name="TireEnum" type="tns:TireEnum" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfTireEnum" type="tns:ListOfTireEnum" nillable="true"></xs:element>
+
+  <xs:complexType name="TriCycleDataType">
+    <xs:sequence>
+      <xs:element name="weight" type="xs:float" minOccurs="0" />
+      <xs:element name="wheel" type="tns:WheelDataType" minOccurs="0" nillable="true" />
+      <xs:element name="Model" type="xs:string" minOccurs="0" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TriCycleDataType" type="tns:TriCycleDataType" />
+
+  <xs:complexType name="ListOfTriCycleDataType">
+    <xs:sequence>
+      <xs:element name="TriCycleDataType" type="tns:TriCycleDataType" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfTriCycleDataType" type="tns:ListOfTriCycleDataType" nillable="true"></xs:element>
+
+  <xs:complexType name="WheelDataType">
+    <xs:annotation>
+      <xs:documentation>Wheel datatype.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tickness" type="xs:float" minOccurs="0" />
+      <xs:element name="diameter" type="xs:float" minOccurs="0" />
+      <xs:element name="pressure" type="xs:float" minOccurs="0" />
+      <xs:element name="TireType" type="tns:TireEnum" minOccurs="0" />
+      <xs:element name="raysLen" type="xs:int" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WheelDataType" type="tns:WheelDataType" />
+
+  <xs:complexType name="ListOfWheelDataType">
+    <xs:sequence>
+      <xs:element name="WheelDataType" type="tns:WheelDataType" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfWheelDataType" type="tns:ListOfWheelDataType" nillable="true"></xs:element>
+
+</xs:schema>

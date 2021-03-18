@@ -1,0 +1,33 @@
+<opc:TypeDictionary
+  xmlns:opc="http://opcfoundation.org/BinarySchema/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ua="http://opcfoundation.org/UA/"
+  xmlns:tns="http://tricycletypev1/"
+  DefaultByteOrder="LittleEndian"
+  TargetNamespace="http://tricycletypev1/"
+>
+  <!-- This File was generated on 2021-03-18 and supports the specifications supported by version 1.11.335.10 of the OPC UA deliverables. -->
+  <opc:Import Namespace="http://opcfoundation.org/UA/" Location="Prefix0.BinarySchema.bsd"/>
+
+  <opc:EnumeratedType Name="TireEnum" LengthInBits="32">
+    <opc:EnumeratedValue Name="Mud" Value="0" />
+    <opc:EnumeratedValue Name="Ice" Value="1" />
+    <opc:EnumeratedValue Name="Sand" Value="2" />
+  </opc:EnumeratedType>
+
+  <opc:StructuredType Name="TriCycleDataType" BaseType="ua:ExtensionObject">
+    <opc:Field Name="weight" TypeName="opc:Float" />
+    <opc:Field Name="wheel" TypeName="tns:WheelDataType" />
+    <opc:Field Name="Model" TypeName="opc:String" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="WheelDataType" BaseType="ua:ExtensionObject">
+    <opc:Documentation>Wheel datatype.</opc:Documentation>
+    <opc:Field Name="tickness" TypeName="opc:Float" />
+    <opc:Field Name="diameter" TypeName="opc:Float" />
+    <opc:Field Name="pressure" TypeName="opc:Float" />
+    <opc:Field Name="TireType" TypeName="tns:TireEnum" />
+    <opc:Field Name="raysLen" TypeName="opc:Int32" />
+  </opc:StructuredType>
+
+</opc:TypeDictionary>

@@ -117,6 +117,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #endregion semantics
 
+    #region naming
+
     /// <summary>
     /// Gets the name of the reference type.
     /// </summary>
@@ -140,23 +142,40 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     /// <summary>
+    /// Ir recursively builds the symbolic identifier.
+    /// </summary>
+    /// <param name="path">The browse path.</param>
+    internal void BuildSymbolicId(List<string> path)
+    {
+      this.SourceNode.BuildSymbolicId(path);
+    }
+
+    #endregion naming
+
+    #region navigation
+
+    /// <summary>
     /// Gets the parent node that the reference is attached to.
     /// </summary>
     /// <value>An instance of the <see cref="IUANodeContext"/> of the parent node.</value>
     internal IUANodeContext ParentNode => IsForward ? SourceNode : TargetNode;
 
     /// <summary>
-    /// Gets the target node context.
+    /// Gets the type node.
     /// </summary>
-    /// <value>The target node context.</value>
+    /// <value>An instance of <see cref="IUANodeContext "/> that captures information about a node representing type of the reference.</value>
     internal IUANodeContext TypeNode { get; private set; }
 
+    /// <summary>
+    /// Gets the target node.
+    /// </summary>
+    /// <value>An instance of <see cref="IUANodeContext "/> that captures information about a target node.</value>
     internal IUANodeContext TargetNode { get; private set; }
 
     /// <summary>
     /// Gets the source node context.
     /// </summary>
-    /// <value>The source node context.</value>
+    /// <value>An instance of <see cref="IUANodeContext "/> that captures information about a source node.</value>
     internal IUANodeContext SourceNode { get; private set; }
 
     /// <summary>
@@ -171,14 +190,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <value><c>true</c> if this instance is forward; otherwise, <c>false</c>.</value>
     internal bool IsForward { get; private set; }
 
-    /// <summary>
-    /// Ir recursively builds the symbolic identifier.
-    /// </summary>
-    /// <param name="path">The browse path.</param>
-    internal void BuildSymbolicId(List<string> path)
-    {
-      this.SourceNode.BuildSymbolicId(path);
-    }
+    #endregion navigation
 
     #endregion API
 

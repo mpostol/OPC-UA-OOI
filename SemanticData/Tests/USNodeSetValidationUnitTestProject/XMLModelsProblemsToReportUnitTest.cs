@@ -148,7 +148,22 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Assert.AreEqual<int>(0, traceContext.TraceList.Count);
       }
     }
+    [TestMethod]
+    public void HasOrderedComponentTest()
+    {
+      FileInfo _testDataFileInfo = new FileInfo(@"ProblemsToReport\HasOrderedComponent\Opc.Ua.NodeSet2.TriCycleType_V1.1.xml");
+      Assert.IsTrue(_testDataFileInfo.Exists);
+      using (TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext())
+      {
+        IAddressSpaceContext addressSpace = traceContext.CreateAddressSpaceContext();
+        Uri model = addressSpace.ImportUANodeSet(_testDataFileInfo);
+        Assert.AreEqual<int>(0, traceContext.TraceList.Count);
+        traceContext.Clear();
+        addressSpace.ValidateAndExportModel(model);
+        Assert.AreEqual<int>(0, traceContext.TraceList.Count);
+      }
 
+    }
     [TestMethod]
     public void MachineVisionTest()
     {

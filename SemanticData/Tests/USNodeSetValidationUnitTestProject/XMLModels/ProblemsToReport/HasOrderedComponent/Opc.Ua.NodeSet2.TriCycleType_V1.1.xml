@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UANodeSet LastModified="2020-11-25T11:52:36.296Z" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:si="http://www.siemens.com/OPCUA/2017/SimaticNodeSetExtensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <NamespaceUris>
+    <Uri>http://tricycleTypeV1</Uri>
+  </NamespaceUris>
+  <Models>
+    <Model ModelUri="http://tricycleTypeV1" PublicationDate="2020-11-25T00:00:00Z" Version="1.00">
+      <RequiredModel ModelUri="http://opcfoundation.org/UA/" PublicationDate="2020-04-14T00:00:00Z" Version="1.04.6" />
+    </Model>
+  </Models>
+  <Aliases>
+    <Alias Alias="HasSubtype">i=45</Alias>
+    <Alias Alias="HasTypeDefinition">i=40</Alias>
+    <Alias Alias="HasModellingRule">i=37</Alias>
+    <Alias Alias="HasOrderedComponent">i=49</Alias>
+  </Aliases>
+  <UAObjectType NodeId="ns=1;i=11" BrowseName="1:TrailerType">
+    <DisplayName>TrailerType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">ns=1;i=12</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable DataType="TriCycleDataType" ValueRank="1" NodeId="ns=1;i=23" ArrayDimensions="0" BrowseName="LoadedTricycle" ParentNodeId="ns=1;i=11">
+    <DisplayName>LoadedTricycle</DisplayName>
+    <References>
+      <Reference ReferenceType="HasOrderedComponent" IsForward="false">ns=1;i=11</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+    </References>
+  </UAVariable>
+  <UAObjectType NodeId="ns=1;i=12" BrowseName="1:VehicleType">
+    <DisplayName>VehicleType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
+    </References>
+  </UAObjectType>
+</UANodeSet>

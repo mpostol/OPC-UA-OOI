@@ -116,6 +116,7 @@
       <Visible>False</Visible>
     </AdditionalFiles>
     <Compile Include="UANodeContextUnitTest.cs" />
+    <Compile Include="UAReferenceContextTestClass.cs" />
     <Compile Include="XMLModelsProblemsToReportUnitTest.cs" />
     <Compile Include="XMLModelsCorrectModelsUnitTest.cs" />
     <Compile Include="XMLModelsModelsWithErrorsUnitTest.cs" />
@@ -176,6 +177,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="XMLModels\ProblemsToReport\fgolra177\OpcUaGemModel.xml" />
+    <None Include="XMLModels\ProblemsToReport\HasOrderedComponent\Opc.Ua.NodeSet2.TriCycleType_V1.1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="XMLModels\ProblemsToReport\MachineVision\Opc.Ua.MachineVision.ModelDesign.xml" />
     <None Include="XMLModels\CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

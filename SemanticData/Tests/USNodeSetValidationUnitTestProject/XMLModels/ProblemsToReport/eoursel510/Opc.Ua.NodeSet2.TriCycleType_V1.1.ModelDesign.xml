@@ -72,7 +72,8 @@
   </ObjectType>
   <ObjectType xmlns:q14="http://tricycletypev1/" SymbolicName="q14:TrailerType" BaseType="q14:VehicleType">
     <References>
-      <Reference IsInverse="true">
+      <Reference IsInverse
+                 ="true">
         <ReferenceType xmlns:q15="http://opcfoundation.org/UA/">q15:HasOrderedComponent</ReferenceType>
         <TargetId>q14:TrailerType</TargetId>
       </Reference>

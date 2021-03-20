@@ -150,11 +150,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       toTest.Update(_node, x => _registerReference.Add(x));
       addressSpaceMock.Verify(x => x.GetOrCreateNodeContext(It.IsAny<NodeId>(), It.IsAny<Func<NodeId, UANodeContext>>()), Times.Never);
       Assert.AreEqual<int>(2, _registerReference.Count);
-      Assert.AreEqual<string>(ReferenceTypeIds.HasTypeDefinition.ToString(), _registerReference[0].Reference.ReferenceTypeNodeid.ToString());
       Assert.AreSame(toTest, _registerReference[0].ParentNode);
       Assert.AreSame(toTest, _registerReference[0].SourceNode);
       Assert.IsNull(_registerReference[0].TargetNode);
-      Assert.AreEqual<string>(ReferenceTypeIds.Organizes.ToString(), _registerReference[1].Reference.ReferenceTypeNodeid.ToString());
       Assert.IsNull(_registerReference[1].SourceNode);
       Assert.AreSame(toTest, _registerReference[1].ParentNode);
       Assert.AreSame(toTest, _registerReference[1].TargetNode);

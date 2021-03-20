@@ -90,6 +90,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
 
+    /// <summary>
+    /// Gets the modeling rule.
+    /// </summary>
+    /// <returns>System.Nullable&lt;ModelingRules&gt;.</returns>
     internal ModelingRules? GetModelingRule()
     {
       Debug.Assert(TargetNode.NodeIdContext.IdType == IdType.Numeric_0);

@@ -158,7 +158,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.AreEqual<string>("2P8ZkTA2Ccahvs_bLAsL6DSp1Ow5d", typeName.Name);
     }
 
-
     [TestMethod]
     public void BuildSymbolicIdTest()
     {
@@ -187,6 +186,26 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       sourceMock.Verify(z => z.BuildSymbolicId(It.IsAny<List<string>>()), Times.Never);
       typeMock.Verify(z => z.BuildSymbolicId(It.IsAny<List<string>>()), Times.Never);
       Assert.AreEqual<int>(2, path.Count);
+    }
+
+    [TestMethod]
+    public void ChildConnector()
+    {
+      XML.Reference reference = new XML.Reference() { IsForward = false, ReferenceType = ReferenceTypeIds.HasOrderedComponent.ToString(), Value = "ns=1;i=11" };
+      reference.RecalculateNodeIds(x => NodeId.Parse(x));
+
+      Mock<IUANodeContext> typeMock = new Mock<IUANodeContext>();
+      typeMock.Setup(z => z.NodeIdContext).Returns(ReferenceTypes.HasComponent);
+      Mock<IUANodeContext> targetMock = new Mock<IUANodeContext>();
+      Mock<IUANodeContext> sourceMock = new Mock<IUANodeContext>();
+
+      Mock<IAddressSpaceBuildContext> asMock = new Mock<IAddressSpaceBuildContext>();
+      asMock.Setup(x => x.GetOrCreateNodeContext(It.IsAny<NodeId>(), It.IsAny<Func<NodeId, IUANodeContext>>())).Returns(typeMock.Object);
+      asMock.Setup(x => x.GetOrCreateNodeContext(It.Is<NodeId>(z => z == reference.ValueNodeId), It.IsAny<Func<NodeId, IUANodeContext>>())).Returns(targetMock.Object);
+
+      UAReferenceContext instance2Test = new UAReferenceContext(reference, asMock.Object, sourceMock.Object);
+      Assert.IsTrue(instance2Test.ChildConnector);
+      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasComponent, instance2Test.ReferenceKind);
     }
 
     private bool CreatePathFixture(List<string> z)

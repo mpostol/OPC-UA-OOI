@@ -224,6 +224,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return ExportArgument(argument, _dataType);
     }
 
+    public void GetBaseTypes(IUANodeContext rootNode, List<IUANodeContext> inheritanceChain)
+    {
+      if (rootNode == null)
+        throw new ArgumentNullException("rootNode");
+      if (rootNode.InRecursionChain)
+        throw new ArgumentOutOfRangeException("Circular reference");
+      rootNode.InRecursionChain = true;
+      IEnumerable<IUANodeContext> _derived = m_References.Values.Where<UAReferenceContext>(x => (x.TypeNode.NodeIdContext == ReferenceTypeIds.HasSubtype) && (x.TargetNode == rootNode)).
+                                                                 Select<UAReferenceContext, IUANodeContext>(x => x.SourceNode);
+      inheritanceChain.AddRange(_derived);
+      if (_derived.Count<IUANodeContext>() > 1)
+        throw new ArgumentOutOfRangeException("To many subtypes");
+      else if (_derived.Count<IUANodeContext>() == 1)
+        GetBaseTypes(_derived.First<IUANodeContext>(), inheritanceChain);
+      rootNode.InRecursionChain = false;
+    }
+
     #endregion IAddressSpaceBuildContext
 
     #region IAddressSpaceValidationContext
@@ -326,22 +343,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return _ret;
     }
 
-    private void GetBaseTypes(IUANodeContext rootNode, List<IUANodeContext> inheritanceChain)
-    {
-      if (rootNode == null)
-        throw new ArgumentNullException("rootNode");
-      if (rootNode.InRecursionChain)
-        throw new ArgumentOutOfRangeException("Circular reference");
-      rootNode.InRecursionChain = true;
-      IEnumerable<IUANodeContext> _derived = m_References.Values.Where<UAReferenceContext>(x => (x.TypeNode.NodeIdContext == ReferenceTypeIds.HasSubtype) && (x.TargetNode == rootNode)).
-                                                                Select<UAReferenceContext, IUANodeContext>(x => x.SourceNode);
-      inheritanceChain.AddRange(_derived);
-      if (_derived.Count<IUANodeContext>() > 1)
-        throw new ArgumentOutOfRangeException("To many subtypes");
-      else if (_derived.Count<IUANodeContext>() == 1)
-        GetBaseTypes(_derived.First<IUANodeContext>(), inheritanceChain);
-      rootNode.InRecursionChain = false;
-    }
+
 
     private void ValidateAndExportModel(int nameSpaceIndex)
     {

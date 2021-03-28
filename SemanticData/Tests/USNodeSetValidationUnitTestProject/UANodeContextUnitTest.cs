@@ -453,6 +453,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         throw new NotImplementedException();
       }
 
+      public void GetBaseTypes(IUANodeContext rootNode, List<IUANodeContext> inheritanceChain)
+      {
+        throw new NotImplementedException();
+      }
+
       #endregion IAddressSpaceBuildContext
 
       #region private instrumentation

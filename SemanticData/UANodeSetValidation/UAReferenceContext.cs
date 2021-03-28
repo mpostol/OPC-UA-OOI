@@ -13,6 +13,7 @@ using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
+using System.Linq;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -44,6 +45,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #region API
 
     #region semantics
+
+    //TODO UAReferenceContext - causes circular references #558
+    internal bool IsSubtypeOf(NodeId referenceType)
+    {
+      List<IUANodeContext> inheritanceChain = new List<IUANodeContext>();
+      m_AddressSpace.GetBaseTypes(TypeNode, inheritanceChain);
+      return inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == referenceType).Any<IUANodeContext>();
+    }
 
     /// <summary>
     /// Gets the kind of the reference.

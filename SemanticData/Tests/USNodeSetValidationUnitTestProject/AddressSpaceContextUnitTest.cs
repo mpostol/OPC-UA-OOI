@@ -91,6 +91,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsFalse(_fi.Exists);
       Assert.ThrowsException<FileNotFoundException>(() => _as.ImportUANodeSet(_fi));
     }
+
     [TestMethod]
     public void ImportUANodeSetTest()
     {
@@ -127,12 +128,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       asp.UTGetReferences(NodeId.Parse(newNodeSet.Items[0].NodeId), x => references.Add(x));
       Assert.AreEqual<int>(1, references.Count);
       Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasProperty, references[0].ReferenceKind);
+	  //UAReferenceContext - causes circular references #558
+      Assert.IsTrue(references[0].IsSubtypeOf(ReferenceTypeIds.HasProperty));
       references.Clear();
       asp.UTGetReferences(NodeId.Parse(newNodeSet.Items[1].NodeId), x => references.Add(x));
       Assert.AreEqual<int>(2, references.Count);
       Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasTypeDefinition, references[0].ReferenceKind);
       Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasModellingRule, references[1].ReferenceKind);
     }
+
     [TestMethod]
     [TestCategory("AddressSpaceContext")]
     public void AddressSpaceContextValidateAndExportModelOpcUa()
@@ -220,7 +224,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       };
       AddressSpaceWrapper asp = new AddressSpaceWrapper();
       ((IAddressSpaceContext)asp.AddressSpaceContext).ImportUANodeSet(newNodeSet);
-      IUANodeContext uaObjectType = asp.AddressSpaceContext.GetOrCreateNodeContext(NodeId.Parse(newNodeSet.Items[0].NodeId), x => { Assert.Fail(); return null; } );
+      IUANodeContext uaObjectType = asp.AddressSpaceContext.GetOrCreateNodeContext(NodeId.Parse(newNodeSet.Items[0].NodeId), x => { Assert.Fail(); return null; });
       Assert.IsNotNull(uaObjectType);
       IEnumerable<UAReferenceContext> myReferences = ((IAddressSpaceBuildContext)asp.AddressSpaceContext).GetMyReferences(uaObjectType);
       Assert.AreEqual<int>(1, myReferences.Count<UAReferenceContext>());
@@ -229,6 +233,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.AreEqual<string>("buildDate", _listOfMyReferences[0].ParentNode.UANode.BrowseNameQualifiedName.Name);
       Assert.AreEqual<string>("VehicleType", _listOfMyReferences[0].SourceNode.UANode.BrowseNameQualifiedName.Name);
       Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasProperty, _listOfMyReferences[0].ReferenceKind);
+    }
+
+    [TestMethod]
+    public void GetBaseTypesTest()
+    {
+      AddressSpaceWrapper asp = new AddressSpaceWrapper();
+      List<IUANodeContext> inheritanceChain = new List<IUANodeContext>();
+      IUANodeContext hasPropertyNode = asp.AddressSpaceContext.GetOrCreateNodeContext(ReferenceTypeIds.HasProperty, x => { Assert.Fail(); return null; });
+      asp.AddressSpaceContext.GetBaseTypes(hasPropertyNode, inheritanceChain);
+      Assert.AreEqual<int>(5, inheritanceChain.Count);
+      Assert.AreEqual<string>(ReferenceTypeIds.HasProperty.ToString(), inheritanceChain[0].NodeIdContext.ToString());
+      Assert.AreEqual<string>(ReferenceTypeIds.References.ToString(), inheritanceChain[4].NodeIdContext.ToString());
     }
 
     #region private

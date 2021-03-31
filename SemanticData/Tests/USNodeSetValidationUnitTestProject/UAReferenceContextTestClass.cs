@@ -226,6 +226,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       asMock.Verify(x => x.GetOrCreateNodeContext(It.Is<NodeId>(z => z == NodeId.Parse(reference.Value)), It.IsAny<Func<NodeId, IUANodeContext>>()), Times.Once);
 
       Assert.IsTrue(instance2Test.IsSubtypeOf(NodeId.Parse("i=123")));
+      Assert.IsFalse(instance2Test.IsSubtypeOf(NodeId.Parse("i=124")));
     }
 
     private bool ListOTypesFixture(List<IUANodeContext> references)

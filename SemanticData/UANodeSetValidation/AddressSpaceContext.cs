@@ -228,12 +228,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (rootNode == null)
         throw new ArgumentNullException("rootNode");
+      inheritanceChain.Add(rootNode);
       if (rootNode.InRecursionChain)
         throw new ArgumentOutOfRangeException("Circular reference");
       rootNode.InRecursionChain = true;
       IEnumerable<IUANodeContext> _derived = m_References.Values.Where<UAReferenceContext>(x => (x.TypeNode.NodeIdContext == ReferenceTypeIds.HasSubtype) && (x.TargetNode == rootNode)).
                                                                  Select<UAReferenceContext, IUANodeContext>(x => x.SourceNode);
-      inheritanceChain.AddRange(_derived);
       if (_derived.Count<IUANodeContext>() > 1)
         throw new ArgumentOutOfRangeException("To many subtypes");
       else if (_derived.Count<IUANodeContext>() == 1)

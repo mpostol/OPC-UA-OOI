@@ -194,18 +194,33 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       XML.Reference reference = new XML.Reference() { IsForward = false, ReferenceType = ReferenceTypeIds.HasOrderedComponent.ToString(), Value = "ns=1;i=11" };
       reference.RecalculateNodeIds(x => NodeId.Parse(x));
 
-      Mock<IUANodeContext> typeMock = new Mock<IUANodeContext>();
-      typeMock.Setup(z => z.NodeIdContext).Returns(ReferenceTypes.HasComponent);
-      Mock<IUANodeContext> targetMock = new Mock<IUANodeContext>();
       Mock<IUANodeContext> sourceMock = new Mock<IUANodeContext>();
 
       Mock<IAddressSpaceBuildContext> asMock = new Mock<IAddressSpaceBuildContext>();
-      asMock.Setup(x => x.GetOrCreateNodeContext(It.IsAny<NodeId>(), It.IsAny<Func<NodeId, IUANodeContext>>())).Returns(typeMock.Object);
-      asMock.Setup(x => x.GetOrCreateNodeContext(It.Is<NodeId>(z => z == reference.ValueNodeId), It.IsAny<Func<NodeId, IUANodeContext>>())).Returns(targetMock.Object);
+      asMock.Setup(x => x.GetBaseTypes(It.IsAny<IUANodeContext>(), It.Is<List<IUANodeContext>>(z => ListContainingAggregatesTypesFixture(z))));
 
       UAReferenceContext instance2Test = new UAReferenceContext(reference, asMock.Object, sourceMock.Object);
       Assert.IsTrue(instance2Test.ChildConnector);
-      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasComponent, instance2Test.ReferenceKind);
+      //asMock.Verify(x => x.GetBaseTypes(It.IsAny<IUANodeContext>(), It.Is<List<IUANodeContext>>(z => ListContainingAggregatesTypesFixture(z))), Times.Once);
+    }
+
+    private bool ListContainingAggregatesTypesFixture(List<IUANodeContext> references)
+    {
+      Assert.AreEqual<int>(0, references.Count);
+      Mock<IUANodeContext> node1 = new Mock<IUANodeContext>();
+      references.Add(node1.Object);
+      references.Add(node1.Object);
+      references.Add(node1.Object);
+      Mock<IUANodeContext> node2 = new Mock<IUANodeContext>();
+      node2.Setup(x => x.NodeIdContext).Returns(ReferenceTypeIds.Aggregates);
+      references.Add(node2.Object);
+      Mock<IUANodeContext> node3 = new Mock<IUANodeContext>();
+      references.Add(node3.Object);
+      references.Add(node3.Object);
+      references.Add(node3.Object);
+      references.Add(node1.Object);
+      references.Add(node1.Object);
+      return true;
     }
 
     [TestMethod]

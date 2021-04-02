@@ -30,6 +30,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="nodeId">An object of <see cref="NodeId" /> that stores an identifier for a node in a server's address space.</param>
     /// <param name="addressSpaceContext">The address space context.</param>
+    /// <param name="traceMessageCallback">The trace message callback.</param>
+    /// <exception cref="ArgumentNullException">traceMessageCallback</exception>
     internal UANodeContext(NodeId nodeId, IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceMessageCallback)
     {
       _TraceEvent = traceMessageCallback ?? throw new ArgumentNullException(nameof(traceMessageCallback));

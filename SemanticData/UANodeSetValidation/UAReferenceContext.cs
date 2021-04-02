@@ -106,7 +106,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     internal ModelingRules? GetModelingRule()
     {
       Debug.Assert(TargetNode.NodeIdContext.IdType == IdType.Numeric_0);
-      Debug.Assert(ReferenceKind == ReferenceKindEnum.HasModellingRule);
+      //Debug.Assert(ReferenceKind == ReferenceKindEnum.HasModellingRule);
       int _targetId = TargetNode.NodeIdContext.NamespaceIndex != 0 ? -1 : Convert.ToInt32(TargetNode.NodeIdContext.IdentifierPart);
       ModelingRules? _ret = new Nullable<ModelingRules>();
       if (_targetId == Objects.ModellingRule_Mandatory)
@@ -126,7 +126,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets a value indicating whether the reference has been derived form <see cref="ReferenceKindEnum.HasProperty"/> or <see cref="ReferenceKindEnum.HasComponent"/>.
     /// </summary>
     /// <value><c>true</c> if is child reference; otherwise, <c>false</c>.</value>
-    internal bool ChildConnector => (ReferenceKind == ReferenceKindEnum.HasProperty) || (ReferenceKind == ReferenceKindEnum.HasComponent);
+    internal bool ChildConnector => IsSubtypeOf(ReferenceTypeIds.Aggregates);
 
     #endregion semantics
 

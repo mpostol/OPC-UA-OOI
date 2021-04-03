@@ -9,6 +9,7 @@
     </Model>
   </Models>
   <Aliases>
+    <Alias Alias="Int32">i=6</Alias>
     <Alias Alias="HasSubtype">i=45</Alias>
     <Alias Alias="HasTypeDefinition">i=40</Alias>
     <Alias Alias="HasModellingRule">i=37</Alias>
@@ -20,7 +21,7 @@
       <Reference ReferenceType="HasSubtype" IsForward="false">ns=1;i=12</Reference>
     </References>
   </UAObjectType>
-  <UAVariable DataType="TriCycleDataType" ValueRank="1" NodeId="ns=1;i=23" ArrayDimensions="0" BrowseName="LoadedTricycle" ParentNodeId="ns=1;i=11">
+  <UAVariable DataType="Int32" ValueRank="1" NodeId="ns=1;i=23" ArrayDimensions="0" BrowseName="LoadedTricycle" ParentNodeId="ns=1;i=11">
     <DisplayName>LoadedTricycle</DisplayName>
     <References>
       <Reference ReferenceType="HasOrderedComponent" IsForward="false">ns=1;i=11</Reference>

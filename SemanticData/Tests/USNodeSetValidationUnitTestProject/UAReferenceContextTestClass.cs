@@ -193,11 +193,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       XML.Reference reference = new XML.Reference() { IsForward = false, ReferenceType = ReferenceTypeIds.HasOrderedComponent.ToString(), Value = "ns=1;i=11" };
       reference.RecalculateNodeIds(x => NodeId.Parse(x));
+      Mock<IUANodeContext> typeMock = new Mock<IUANodeContext>();
+      typeMock.Setup(x => x.NodeIdContext).Returns(ReferenceTypeIds.HasOrderedComponent);
 
       Mock<IUANodeContext> sourceMock = new Mock<IUANodeContext>();
 
       Mock<IAddressSpaceBuildContext> asMock = new Mock<IAddressSpaceBuildContext>();
       asMock.Setup(x => x.GetBaseTypes(It.IsAny<IUANodeContext>(), It.Is<List<IUANodeContext>>(z => ListContainingAggregatesTypesFixture(z))));
+      asMock.Setup(x => x.GetOrCreateNodeContext(It.Is<NodeId>(v => v == reference.ReferenceTypeNodeid), It.IsAny<Func<NodeId, IUANodeContext>>())).Returns(typeMock.Object);
 
       UAReferenceContext instance2Test = new UAReferenceContext(reference, asMock.Object, sourceMock.Object);
       Assert.IsTrue(instance2Test.ChildConnector);
@@ -212,7 +215,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       references.Add(node1.Object);
       references.Add(node1.Object);
       Mock<IUANodeContext> node2 = new Mock<IUANodeContext>();
-      node2.Setup(x => x.NodeIdContext).Returns(ReferenceTypeIds.Aggregates);
+      node2.Setup(x => x.NodeIdContext).Returns(ReferenceTypeIds.HasComponent);
       references.Add(node2.Object);
       Mock<IUANodeContext> node3 = new Mock<IUANodeContext>();
       references.Add(node3.Object);

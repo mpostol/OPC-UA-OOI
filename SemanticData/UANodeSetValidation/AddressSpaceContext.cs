@@ -214,7 +214,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public IEnumerable<IUANodeBase> GetChildren(IUANodeBase node)
     {
       return m_References.Values.Where<UAReferenceContext>(x => Object.ReferenceEquals(x.SourceNode, node)).
-                                                           Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
+                                                           Where<UAReferenceContext>(x => x.ChildConnector).
                                                            Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
     }
 
@@ -342,8 +342,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       return _ret;
     }
-
-
 
     private void ValidateAndExportModel(int nameSpaceIndex)
     {

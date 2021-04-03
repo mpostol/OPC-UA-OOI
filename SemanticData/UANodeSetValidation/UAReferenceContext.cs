@@ -8,12 +8,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
-using System.Linq;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -62,40 +62,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       get
       {
-        if ((TypeNode == null) || TypeNode.NodeIdContext.NamespaceIndex != 0)
-          return ReferenceKindEnum.Custom;
-        ReferenceKindEnum _ret = default(ReferenceKindEnum);
-        switch (TypeNode.NodeIdContext.UintIdentifier())
-        {
-          case ReferenceTypes.HierarchicalReferences:
-            _ret = ReferenceKindEnum.HierarchicalReferences;
-            break;
-
-          case ReferenceTypes.HasComponent:
-            _ret = ReferenceKindEnum.HasComponent;
-            break;
-
-          case ReferenceTypes.HasProperty:
-            _ret = ReferenceKindEnum.HasProperty;
-            break;
-
-          case ReferenceTypes.HasModellingRule:
-            _ret = ReferenceKindEnum.HasModellingRule;
-            break;
-
-          case ReferenceTypes.HasTypeDefinition:
-            _ret = ReferenceKindEnum.HasTypeDefinition;
-            break;
-
-          case ReferenceTypes.HasSubtype:
-            _ret = ReferenceKindEnum.HasSubtype;
-            break;
-
-          default:
-            _ret = ReferenceKindEnum.Custom;
-            break;
-        }
-        return _ret;
+        if (_ReferenceKindEnum == null)
+          _ReferenceKindEnum = CalculateReferenceKind(this.TypeNode);
+        return _ReferenceKindEnum.Value;
       }
     }
 
@@ -126,7 +95,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets a value indicating whether the reference has been derived form <see cref="ReferenceKindEnum.HasProperty"/> or <see cref="ReferenceKindEnum.HasComponent"/>.
     /// </summary>
     /// <value><c>true</c> if is child reference; otherwise, <c>false</c>.</value>
-    internal bool ChildConnector => IsSubtypeOf(ReferenceTypeIds.Aggregates);
+    internal bool ChildConnector => (ReferenceKind == ReferenceKindEnum.HasProperty) || (ReferenceKind == ReferenceKindEnum.HasComponent);
 
     #endregion semantics
 
@@ -212,7 +181,34 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //fields
     private IAddressSpaceBuildContext m_AddressSpace;
 
+    private ReferenceKindEnum? _ReferenceKindEnum = new Nullable<ReferenceKindEnum>();
+
     //methods
+    private ReferenceKindEnum CalculateReferenceKind(IUANodeContext typeNode)
+    {
+      if ((TypeNode == null) || TypeNode.NodeIdContext.NamespaceIndex != 0)
+        return ReferenceKindEnum.Custom;
+      ReferenceKindEnum _ret = default(ReferenceKindEnum);
+      List<IUANodeContext> inheritanceChain = new List<IUANodeContext>();
+      m_AddressSpace.GetBaseTypes(TypeNode, inheritanceChain);
+      //HierarchicalReferences
+      if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HasProperty).Any<IUANodeContext>())
+        _ret = ReferenceKindEnum.HasProperty;
+      else if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HasComponent).Any<IUANodeContext>())
+        _ret = ReferenceKindEnum.HasComponent;
+      else if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HasSubtype).Any<IUANodeContext>())
+        _ret = ReferenceKindEnum.HasSubtype;
+      else if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HierarchicalReferences).Any<IUANodeContext>())
+        _ret = ReferenceKindEnum.HierarchicalReferences;
+      else if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HasTypeDefinition).Any<IUANodeContext>())
+        _ret = ReferenceKindEnum.HasTypeDefinition;
+      else if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HasModellingRule).Any<IUANodeContext>())
+        _ret = ReferenceKindEnum.HasModellingRule;
+      else
+        _ret = ReferenceKindEnum.Custom;
+      return _ret;
+    }
+
     private NodeId GetDefault()
     {
       NodeId _default = NodeId.Null;

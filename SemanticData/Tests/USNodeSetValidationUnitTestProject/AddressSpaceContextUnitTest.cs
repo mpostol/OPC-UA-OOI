@@ -127,12 +127,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       List<UAReferenceContext> references = new List<UAReferenceContext>();
       asp.UTGetReferences(NodeId.Parse(newNodeSet.Items[0].NodeId), x => references.Add(x));
       Assert.AreEqual<int>(1, references.Count);
+      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasProperty, references[0].ReferenceKind);
+      //UAReferenceContext - causes circular references #558
       Assert.IsTrue(references[0].IsSubtypeOf(ReferenceTypeIds.HasProperty));
       references.Clear();
       asp.UTGetReferences(NodeId.Parse(newNodeSet.Items[1].NodeId), x => references.Add(x));
       Assert.AreEqual<int>(2, references.Count);
-      Assert.IsTrue(references[0].IsSubtypeOf(ReferenceTypeIds.HasTypeDefinition));
-      Assert.IsTrue(references[1].IsSubtypeOf(ReferenceTypeIds.HasModellingRule));
+      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasTypeDefinition, references[0].ReferenceKind);
+      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasModellingRule, references[1].ReferenceKind);
     }
 
     [TestMethod]
@@ -230,7 +232,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.AreEqual<string>("buildDate", _listOfMyReferences[0].TargetNode.UANode.BrowseNameQualifiedName.Name);
       Assert.AreEqual<string>("buildDate", _listOfMyReferences[0].ParentNode.UANode.BrowseNameQualifiedName.Name);
       Assert.AreEqual<string>("VehicleType", _listOfMyReferences[0].SourceNode.UANode.BrowseNameQualifiedName.Name);
-      Assert.IsTrue(_listOfMyReferences[0].IsSubtypeOf(ReferenceTypeIds.HasProperty));
+      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasProperty, _listOfMyReferences[0].ReferenceKind);
     }
 
     [TestMethod]

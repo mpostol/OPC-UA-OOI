@@ -417,7 +417,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
       public IEnumerable<IUANodeBase> GetChildren(IUANodeBase node)
       {
-        return m_References.Values.Where<UAReferenceContext>(x => Object.ReferenceEquals(x.SourceNode, node)).Where<UAReferenceContext>(x => x.IsSubtypeOf(ReferenceTypeIds.Aggregates)).Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
+        return m_References.Values.Where<UAReferenceContext>(x => Object.ReferenceEquals(x.SourceNode, node)).
+                                                             Where<UAReferenceContext>(x => x.ChildConnector).
+                                                             Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
       }
 
       public ushort GetIndexOrAppend(string identifier)

@@ -6,7 +6,6 @@
 //___________________________________________________________________________________
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
@@ -76,5 +75,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="argument">The argument.</param>
     /// <returns>An instance encapsulating <see cref="Parameter"/>.</returns>
     Parameter ExportArgument(Argument argument);
+
+    void GetBaseTypes(IUANodeContext rootNode, List<IUANodeContext> inheritanceChain);
   }
 }

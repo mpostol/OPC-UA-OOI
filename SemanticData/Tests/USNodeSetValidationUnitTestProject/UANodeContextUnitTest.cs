@@ -150,11 +150,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       toTest.Update(_node, x => _registerReference.Add(x));
       addressSpaceMock.Verify(x => x.GetOrCreateNodeContext(It.IsAny<NodeId>(), It.IsAny<Func<NodeId, UANodeContext>>()), Times.Never);
       Assert.AreEqual<int>(2, _registerReference.Count);
-      Assert.AreEqual<string>(ReferenceTypeIds.HasTypeDefinition.ToString(), _registerReference[0].Reference.ReferenceTypeNodeid.ToString());
       Assert.AreSame(toTest, _registerReference[0].ParentNode);
       Assert.AreSame(toTest, _registerReference[0].SourceNode);
       Assert.IsNull(_registerReference[0].TargetNode);
-      Assert.AreEqual<string>(ReferenceTypeIds.Organizes.ToString(), _registerReference[1].Reference.ReferenceTypeNodeid.ToString());
       Assert.IsNull(_registerReference[1].SourceNode);
       Assert.AreSame(toTest, _registerReference[1].ParentNode);
       Assert.AreSame(toTest, _registerReference[1].TargetNode);
@@ -254,11 +252,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void GetDerivedInstances4TypeDefinition()
     {
       AddressSpaceBuildContext _as = new AddressSpaceBuildContext(x => { });
-      UANodeContext _testInstance = _as.TypeToTest;
-      Assert.IsNotNull(_testInstance);
-      Assert.IsTrue(_testInstance.UANode.GetType() == typeof(UAObjectType));
-      Assert.AreEqual<string>("1:DerivedFromComplexObjectType", _testInstance.UANode.BrowseNameQualifiedName.ToString());
-      Dictionary<string, IUANodeBase> _result = _testInstance.GetDerivedInstances();
+      UANodeContext _testType = _as.TypeToTest;
+      Assert.IsNotNull(_testType);
+      Assert.IsInstanceOfType(_testType.UANode, typeof(UAObjectType));
+      Assert.AreEqual<string>("1:DerivedFromComplexObjectType", _testType.UANode.BrowseNameQualifiedName.ToString());
+      Dictionary<string, IUANodeBase> _result = _testType.GetDerivedInstances();
       Assert.IsNotNull(_result);
       Assert.AreEqual<int>(4, _result.Count);
     }
@@ -420,7 +418,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       public IEnumerable<IUANodeBase> GetChildren(IUANodeBase node)
       {
         return m_References.Values.Where<UAReferenceContext>(x => Object.ReferenceEquals(x.SourceNode, node)).
-                                                             Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
+                                                             Where<UAReferenceContext>(x => x.ChildConnector).
                                                              Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
       }
 
@@ -453,6 +451,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       public Parameter ExportArgument(Argument argument)
       {
         throw new NotImplementedException();
+      }
+
+      public void GetBaseTypes(IUANodeContext rootNode, List<IUANodeContext> inheritanceChain)
+      {
+        if (rootNode == null)
+          throw new ArgumentNullException("rootNode");
+        inheritanceChain.Add(rootNode);
+        if (rootNode.InRecursionChain)
+          throw new ArgumentOutOfRangeException("Circular reference");
+        rootNode.InRecursionChain = true;
+        IEnumerable<IUANodeContext> _derived = m_References.Values.Where<UAReferenceContext>(x => (x.TypeNode.NodeIdContext == ReferenceTypeIds.HasSubtype) && (x.TargetNode == rootNode)).
+                                                                   Select<UAReferenceContext, IUANodeContext>(x => x.SourceNode);
+        if (_derived.Count<IUANodeContext>() > 1)
+          throw new ArgumentOutOfRangeException("To many subtypes");
+        else if (_derived.Count<IUANodeContext>() == 1)
+          GetBaseTypes(_derived.First<IUANodeContext>(), inheritanceChain);
+        rootNode.InRecursionChain = false;
       }
 
       #endregion IAddressSpaceBuildContext

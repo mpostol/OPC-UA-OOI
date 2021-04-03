@@ -214,7 +214,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public IEnumerable<IUANodeBase> GetChildren(IUANodeBase node)
     {
       return m_References.Values.Where<UAReferenceContext>(x => Object.ReferenceEquals(x.SourceNode, node)).
-                                                           Where<UAReferenceContext>(x => (x.ReferenceKind == ReferenceKindEnum.HasProperty || x.ReferenceKind == ReferenceKindEnum.HasComponent)).
+                                                           Where<UAReferenceContext>(x => x.ChildConnector).
                                                            Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
     }
 
@@ -222,6 +222,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       XmlQualifiedName _dataType = ExportBrowseName(NodeId.Parse(argument.DataType.Identifier), DataTypeIds.BaseDataType);
       return ExportArgument(argument, _dataType);
+    }
+
+    public void GetBaseTypes(IUANodeContext rootNode, List<IUANodeContext> inheritanceChain)
+    {
+      if (rootNode == null)
+        throw new ArgumentNullException("rootNode");
+      inheritanceChain.Add(rootNode);
+      if (rootNode.InRecursionChain)
+        throw new ArgumentOutOfRangeException("Circular reference");
+      rootNode.InRecursionChain = true;
+      IEnumerable<IUANodeContext> _derived = m_References.Values.Where<UAReferenceContext>(x => (x.TypeNode.NodeIdContext == ReferenceTypeIds.HasSubtype) && (x.TargetNode == rootNode)).
+                                                                 Select<UAReferenceContext, IUANodeContext>(x => x.SourceNode);
+      if (_derived.Count<IUANodeContext>() > 1)
+        throw new ArgumentOutOfRangeException("To many subtypes");
+      else if (_derived.Count<IUANodeContext>() == 1)
+        GetBaseTypes(_derived.First<IUANodeContext>(), inheritanceChain);
+      rootNode.InRecursionChain = false;
     }
 
     #endregion IAddressSpaceBuildContext
@@ -324,23 +341,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return null;
       }
       return _ret;
-    }
-
-    private void GetBaseTypes(IUANodeContext rootNode, List<IUANodeContext> inheritanceChain)
-    {
-      if (rootNode == null)
-        throw new ArgumentNullException("rootNode");
-      if (rootNode.InRecursionChain)
-        throw new ArgumentOutOfRangeException("Circular reference");
-      rootNode.InRecursionChain = true;
-      IEnumerable<IUANodeContext> _derived = m_References.Values.Where<UAReferenceContext>(x => (x.TypeNode.NodeIdContext == ReferenceTypeIds.HasSubtype) && (x.TargetNode == rootNode)).
-                                                                Select<UAReferenceContext, IUANodeContext>(x => x.SourceNode);
-      inheritanceChain.AddRange(_derived);
-      if (_derived.Count<IUANodeContext>() > 1)
-        throw new ArgumentOutOfRangeException("To many subtypes");
-      else if (_derived.Count<IUANodeContext>() == 1)
-        GetBaseTypes(_derived.First<IUANodeContext>(), inheritanceChain);
-      rootNode.InRecursionChain = false;
     }
 
     private void ValidateAndExportModel(int nameSpaceIndex)

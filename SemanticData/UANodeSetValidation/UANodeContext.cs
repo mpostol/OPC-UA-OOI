@@ -30,6 +30,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="nodeId">An object of <see cref="NodeId" /> that stores an identifier for a node in a server's address space.</param>
     /// <param name="addressSpaceContext">The address space context.</param>
+    /// <param name="traceMessageCallback">The trace message callback.</param>
+    /// <exception cref="ArgumentNullException">traceMessageCallback</exception>
     internal UANodeContext(NodeId nodeId, IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceMessageCallback)
     {
       _TraceEvent = traceMessageCallback ?? throw new ArgumentNullException(nameof(traceMessageCallback));
@@ -165,8 +167,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_ReferenceType.ToString()} from the model"));
               return;
             }
+            //TODO UAReferenceContext - causes circular references #558
             IReferenceFactory _or = nodeFactory.NewReference();
-            _or.IsInverse = !_rfx.Reference.IsForward;
+            _or.IsInverse = !_rfx.IsForward;
             _or.ReferenceType = _ReferenceType;
             _or.TargetId = _rfx.BrowsePath();
             break;

@@ -46,14 +46,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region semantics
 
-    //TODO UAReferenceContext - causes circular references #558
-    internal bool IsSubtypeOf(NodeId referenceType)
-    {
-      List<IUANodeContext> inheritanceChain = new List<IUANodeContext>();
-      m_AddressSpace.GetBaseTypes(TypeNode, inheritanceChain);
-      return inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == referenceType).Any<IUANodeContext>();
-    }
-
     /// <summary>
     /// Gets the kind of the reference.
     /// </summary>

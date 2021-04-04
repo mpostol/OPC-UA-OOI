@@ -128,8 +128,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       asp.UTGetReferences(NodeId.Parse(newNodeSet.Items[0].NodeId), x => references.Add(x));
       Assert.AreEqual<int>(1, references.Count);
       Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasProperty, references[0].ReferenceKind);
-      //UAReferenceContext - causes circular references #558
-      Assert.IsTrue(references[0].IsSubtypeOf(ReferenceTypeIds.HasProperty));
+      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasProperty, references[0].ReferenceKind);
       references.Clear();
       asp.UTGetReferences(NodeId.Parse(newNodeSet.Items[1].NodeId), x => references.Add(x));
       Assert.AreEqual<int>(2, references.Count);

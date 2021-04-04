@@ -22,7 +22,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// </summary>
   public class UAReferenceContext
   {
-    //TODO UAReferenceContext - causes circular references #558
 
     #region constructor
 
@@ -30,10 +29,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (reference == null)
         throw new ArgumentNullException(nameof(reference));
-      this.m_AddressSpace = addressSpaceContext ?? throw new ArgumentNullException(nameof(addressSpaceContext));
+      this._AddressSpace = addressSpaceContext ?? throw new ArgumentNullException(nameof(addressSpaceContext));
       if (parentNode == null)
         throw new ArgumentNullException(nameof(parentNode));
-      IUANodeContext targetNode = m_AddressSpace.GetOrCreateNodeContext(reference.ValueNodeId, parentNode.CreateUANodeContext);
+      IUANodeContext targetNode = _AddressSpace.GetOrCreateNodeContext(reference.ValueNodeId, parentNode.CreateUANodeContext);
       this.IsForward = reference.IsForward;
       this.SourceNode = reference.IsForward ? parentNode : targetNode;
       this.TargetNode = reference.IsForward ? targetNode : parentNode;
@@ -55,7 +54,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       get
       {
         if (_ReferenceKindEnum == null)
-          _ReferenceKindEnum = CalculateReferenceKind(this.TypeNode);
+          _ReferenceKindEnum = CalculateReferenceKind();
         return _ReferenceKindEnum.Value;
       }
     }
@@ -63,7 +62,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Gets the modeling rule.
     /// </summary>
-    /// <returns>System.Nullable&lt;ModelingRules&gt;.</returns>
+    /// <returns>System.Nullable{ModelingRules}.</returns>
     internal ModelingRules? GetModelingRule()
     {
       Debug.Assert(TargetNode.NodeIdContext.IdType == IdType.Numeric_0);
@@ -86,7 +85,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Gets a value indicating whether the reference has been derived form <see cref="ReferenceKindEnum.HasProperty"/> or <see cref="ReferenceKindEnum.HasComponent"/>.
     /// </summary>
-    /// <value><c>true</c> if is child reference; otherwise, <c>false</c>.</value>
+    /// <value><c>true</c> if it is child reference; otherwise, <c>false</c>.</value>
     internal bool ChildConnector => (ReferenceKind == ReferenceKindEnum.HasProperty) || (ReferenceKind == ReferenceKindEnum.HasComponent);
 
     #endregion semantics
@@ -96,14 +95,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Gets the name of the reference type.
     /// </summary>
-    /// <returns>XmlQualifiedName.</returns>
+    /// <returns>An instance of <see cref="XmlQualifiedName"/> capturing name of the reference type.</returns>
     internal XmlQualifiedName GetReferenceTypeName()
     {
-      return m_AddressSpace.ExportBrowseName(this.TypeNode.NodeIdContext, GetDefault());
+      return _AddressSpace.ExportBrowseName(this.TypeNode.NodeIdContext, GetDefault());
     }
 
     /// <summary>
-    /// Calculates the browse path starting from the node pointed out by this reference. If <see cref="XML.Reference.IsForward"/> is <c>true</c> <see cref="UAReferenceContext.TargetNode"/> is use,  <see cref="UAReferenceContext.SourceNode"/> otherwise.
+    /// Calculates the browse path starting from the node pointed out by this reference. If <see cref="XML.Reference.IsForward"/> the <see cref="UAReferenceContext.TargetNode"/> is use,  <see cref="UAReferenceContext.SourceNode"/> otherwise.
     /// </summary>
     /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the browse path.</returns>
     internal XmlQualifiedName BrowsePath()
@@ -112,7 +111,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       IUANodeContext _startingNode = this.IsForward ? TargetNode : SourceNode;
       _startingNode.BuildSymbolicId(_path);
       string _symbolicId = _path.SymbolicName();
-      return new XmlQualifiedName(_symbolicId, m_AddressSpace.GetNamespace(_startingNode.NodeIdContext.NamespaceIndex));
+      return new XmlQualifiedName(_symbolicId, _AddressSpace.GetNamespace(_startingNode.NodeIdContext.NamespaceIndex));
     }
 
     /// <summary>
@@ -171,19 +170,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #region private
 
     //fields
-    private IAddressSpaceBuildContext m_AddressSpace;
+    private IAddressSpaceBuildContext _AddressSpace;
 
     private ReferenceKindEnum? _ReferenceKindEnum = new Nullable<ReferenceKindEnum>();
 
     //methods
-    private ReferenceKindEnum CalculateReferenceKind(IUANodeContext typeNode)
+    private ReferenceKindEnum CalculateReferenceKind()
     {
       if ((TypeNode == null) || TypeNode.NodeIdContext.NamespaceIndex != 0)
         return ReferenceKindEnum.Custom;
       ReferenceKindEnum _ret = default(ReferenceKindEnum);
       List<IUANodeContext> inheritanceChain = new List<IUANodeContext>();
-      m_AddressSpace.GetBaseTypes(TypeNode, inheritanceChain);
-      //HierarchicalReferences
+      _AddressSpace.GetBaseTypes(TypeNode, inheritanceChain);
       if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HasProperty).Any<IUANodeContext>())
         _ret = ReferenceKindEnum.HasProperty;
       else if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HasComponent).Any<IUANodeContext>())

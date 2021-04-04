@@ -167,7 +167,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_ReferenceType.ToString()} from the model"));
               return;
             }
-            //TODO UAReferenceContext - causes circular references #558
             IReferenceFactory _or = nodeFactory.NewReference();
             _or.IsInverse = !_rfx.IsForward;
             _or.ReferenceType = _ReferenceType;

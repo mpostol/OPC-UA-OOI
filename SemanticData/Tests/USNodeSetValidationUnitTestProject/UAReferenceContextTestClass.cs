@@ -226,46 +226,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return true;
     }
 
-    [TestMethod]
-    public void IsSubtypeOfReferenceTypeTest()
-    {
-      XML.Reference reference = new XML.Reference() { IsForward = true, ReferenceType = ReferenceTypeIds.HasOrderedComponent.ToString(), Value = "ns=1;i=11" };
-      reference.RecalculateNodeIds(x => NodeId.Parse(x));
-
-      Mock<IUANodeContext> sourceMock = new Mock<IUANodeContext>();
-      Mock<IAddressSpaceBuildContext> asMock = new Mock<IAddressSpaceBuildContext>();
-      asMock.Setup(x => x.GetOrCreateNodeContext(It.Is<NodeId>(z => z == ReferenceTypeIds.HasOrderedComponent), It.IsAny<Func<NodeId, IUANodeContext>>()));
-      asMock.Setup(x => x.GetOrCreateNodeContext(It.Is<NodeId>(z => z == NodeId.Parse(reference.Value)), It.IsAny<Func<NodeId, IUANodeContext>>()));
-      asMock.Setup(x => x.GetBaseTypes(It.IsAny<IUANodeContext>(), It.Is<List<IUANodeContext>>(z => ListOTypesFixture(z))));
-
-      UAReferenceContext instance2Test = new UAReferenceContext(reference, asMock.Object, sourceMock.Object);
-
-      asMock.Verify(x => x.GetOrCreateNodeContext(It.Is<NodeId>(z => z == ReferenceTypeIds.HasOrderedComponent), It.IsAny<Func<NodeId, IUANodeContext>>()), Times.Once);
-      asMock.Verify(x => x.GetOrCreateNodeContext(It.Is<NodeId>(z => z == NodeId.Parse(reference.Value)), It.IsAny<Func<NodeId, IUANodeContext>>()), Times.Once);
-
-      Assert.IsTrue(instance2Test.IsSubtypeOf(NodeId.Parse("i=123")));
-      Assert.IsFalse(instance2Test.IsSubtypeOf(NodeId.Parse("i=124")));
-    }
-
-    private bool ListOTypesFixture(List<IUANodeContext> references)
-    {
-      Assert.AreEqual<int>(0, references.Count);
-      Mock<IUANodeContext> node1 = new Mock<IUANodeContext>();
-      references.Add(node1.Object);
-      references.Add(node1.Object);
-      references.Add(node1.Object);
-      Mock<IUANodeContext> node2 = new Mock<IUANodeContext>();
-      node2.Setup(x => x.NodeIdContext).Returns(NodeId.Parse("i=123"));
-      references.Add(node2.Object);
-      Mock<IUANodeContext> node3 = new Mock<IUANodeContext>();
-      references.Add(node3.Object);
-      references.Add(node3.Object);
-      references.Add(node3.Object);
-      references.Add(node1.Object);
-      references.Add(node1.Object);
-      return true;
-    }
-
     private bool CreatePathFixture(List<string> z)
     {
       z.Add("2P8ZkTA2Ccahvs");

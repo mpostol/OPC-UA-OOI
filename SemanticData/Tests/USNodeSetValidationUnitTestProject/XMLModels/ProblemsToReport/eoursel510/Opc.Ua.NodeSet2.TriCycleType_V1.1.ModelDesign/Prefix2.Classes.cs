@@ -200,6 +200,11 @@ namespace Prefix2
         public const uint TrailerType_S_Owner__Gender = 55;
 
         /// <summary>
+        /// The identifier for the TrailerType_LoadedTricycle Variable.
+        /// </summary>
+        public const uint TrailerType_LoadedTricycle = 61;
+
+        /// <summary>
         /// The identifier for the TriCycleType_S_Owner__Name Variable.
         /// </summary>
         public const uint TriCycleType_S_Owner__Name = 58;
@@ -488,6 +493,11 @@ namespace Prefix2
         /// The identifier for the TrailerType_S_Owner__Gender Variable.
         /// </summary>
         public static readonly ExpandedNodeId TrailerType_S_Owner__Gender = new ExpandedNodeId(Prefix2.Variables.TrailerType_S_Owner__Gender, Prefix2.Namespaces.Name2);
+
+        /// <summary>
+        /// The identifier for the TrailerType_LoadedTricycle Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId TrailerType_LoadedTricycle = new ExpandedNodeId(Prefix2.Variables.TrailerType_LoadedTricycle, Prefix2.Namespaces.Name2);
 
         /// <summary>
         /// The identifier for the TriCycleType_S_Owner__Name Variable.
@@ -1874,22 +1884,108 @@ namespace Prefix2
         #region Initialization String
         private const string InitializationString =
            "AQAAABYAAABodHRwOi8vdHJpY3ljbGV0eXBldjEv/////wRggAABAAAAAQATAAAAVHJhaWxlclR5cGVJ" +
-           "bnN0YW5jZQEBCQABAQkAAQAAAAAxAQEBCQACAAAAFWCJCgIAAAAAAAkAAABidWlsZERhdGUBATMAAC4A" +
-           "RDMAAAAADf////8BAf////8AAAAARGDACgEAAAAIAAAAU19Pd25lcl8AAAYAAABPd25lcj4BATQAAwAA" +
-           "AAAHAAAAPE93bmVyPgAvAQEFADQAAAD/////AwAAABVgiQoCAAAAAAAEAAAATmFtZQEBNQAALwA/NQAA" +
-           "AAAM/////wEB/////wAAAAAVYIkKAgAAAAAAAwAAAEFnZQEBNgAALwA/NgAAAAAG/////wEB/////wAA" +
-           "AAAVYIkKAgAAAAAABgAAAEdlbmRlcgEBNwAALgBENwAAAAAM/////wEB/////wAAAAA=";
+           "bnN0YW5jZQEBCQABAQkA/////wMAAAAVYIkKAgAAAAAACQAAAGJ1aWxkRGF0ZQEBMwAALgBEMwAAAAAN" +
+           "/////wEB/////wAAAABEYMAKAQAAAAgAAABTX093bmVyXwAABgAAAE93bmVyPgEBNAADAAAAAAcAAAA8" +
+           "T3duZXI+AC8BAQUANAAAAP////8DAAAAFWCJCgIAAAAAAAQAAABOYW1lAQE1AAAvAD81AAAAAAz/////" +
+           "AQH/////AAAAABVgiQoCAAAAAAADAAAAQWdlAQE2AAAvAD82AAAAAAb/////AQH/////AAAAABVgiQoC" +
+           "AAAAAAAGAAAAR2VuZGVyAQE3AAAuAEQ3AAAAAAz/////AQH/////AAAAABdgiQoCAAAAAAAOAAAATG9h" +
+           "ZGVkVHJpY3ljbGUBAT0AADEAPz0AAAABAQMAAQAAAAEAAAAAAAAAAQH/////AAAAAA==";
         #endregion
         #endif
         #endregion
 
         #region Public Properties
+        /// <summary>
+        /// A description for the LoadedTricycle Variable.
+        /// </summary>
+        public BaseDataVariableState<TriCycleDataType[]> LoadedTricycle
+        {
+            get
+            {
+                return m_loadedTricycle;
+            }
+
+            set
+            {
+                if (!Object.ReferenceEquals(m_loadedTricycle, value))
+                {
+                    ChangeMasks |= NodeStateChangeMasks.Children;
+                }
+
+                m_loadedTricycle = value;
+            }
+        }
         #endregion
 
         #region Overridden Methods
+        /// <summary>
+        /// Populates a list with the children that belong to the node.
+        /// </summary>
+        /// <param name="context">The context for the system being accessed.</param>
+        /// <param name="children">The list of children to populate.</param>
+        public override void GetChildren(
+            ISystemContext context,
+            IList<BaseInstanceState> children)
+        {
+            if (m_loadedTricycle != null)
+            {
+                children.Add(m_loadedTricycle);
+            }
+
+            base.GetChildren(context, children);
+        }
+
+        /// <summary>
+        /// Finds the child with the specified browse name.
+        /// </summary>
+        protected override BaseInstanceState FindChild(
+            ISystemContext context,
+            QualifiedName browseName,
+            bool createOrReplace,
+            BaseInstanceState replacement)
+        {
+            if (QualifiedName.IsNull(browseName))
+            {
+                return null;
+            }
+
+            BaseInstanceState instance = null;
+
+            switch (browseName.Name)
+            {
+                case Prefix0.BrowseNames.LoadedTricycle:
+                {
+                    if (createOrReplace)
+                    {
+                        if (LoadedTricycle == null)
+                        {
+                            if (replacement == null)
+                            {
+                                LoadedTricycle = new BaseDataVariableState<TriCycleDataType[]>(this);
+                            }
+                            else
+                            {
+                                LoadedTricycle = (BaseDataVariableState<TriCycleDataType[]>)replacement;
+                            }
+                        }
+                    }
+
+                    instance = LoadedTricycle;
+                    break;
+                }
+            }
+
+            if (instance != null)
+            {
+                return instance;
+            }
+
+            return base.FindChild(context, browseName, createOrReplace, replacement);
+        }
         #endregion
 
         #region Private Fields
+        private BaseDataVariableState<TriCycleDataType[]> m_loadedTricycle;
         #endregion
     }
     #endif

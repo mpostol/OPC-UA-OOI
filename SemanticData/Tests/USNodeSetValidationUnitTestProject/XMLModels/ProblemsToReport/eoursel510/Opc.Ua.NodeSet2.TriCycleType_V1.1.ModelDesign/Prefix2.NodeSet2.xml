@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<UANodeSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" LastModified="2021-03-18T00:00:00+01:00" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+<UANodeSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" LastModified="2021-04-04T00:00:00+02:00" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
   <NamespaceUris>
     <Uri>http://tricycletypev1/</Uri>
   </NamespaceUris>
   <Models>
-    <Model ModelUri="http://tricycletypev1/" Version="" PublicationDate="2021-03-18T00:00:00+01:00">
+    <Model ModelUri="http://tricycletypev1/" Version="" PublicationDate="2021-04-04T00:00:00+02:00">
       <RequiredModel ModelUri="http://opcfoundation.org/UA/" Version="1.04" PublicationDate="2016-12-31T00:00:00Z" />
     </Model>
   </Models>
@@ -196,9 +196,18 @@
   <UAObjectType NodeId="ns=1;i=9" BrowseName="1:TrailerType">
     <DisplayName>TrailerType</DisplayName>
     <References>
+      <Reference ReferenceType="i=49">ns=1;i=61</Reference>
       <Reference ReferenceType="HasSubtype" IsForward="false">ns=1;i=10</Reference>
     </References>
   </UAObjectType>
+  <UAVariable NodeId="ns=1;i=61" BrowseName="LoadedTricycle" ParentNodeId="ns=1;i=9" DataType="ns=1;i=3" ValueRank="1" ArrayDimensions="0">
+    <DisplayName>LoadedTricycle</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="i=49" IsForward="false">ns=1;i=9</Reference>
+    </References>
+  </UAVariable>
   <UAObjectType NodeId="ns=1;i=11" BrowseName="1:TriCycleType">
     <DisplayName>TriCycleType</DisplayName>
     <Description>This a simple Tricycle</Description>
@@ -336,6 +345,54 @@
       <Reference ReferenceType="HasComponent" IsForward="false">i=92</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=72</Reference>
     </References>
+    <Value>
+      <ByteString xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">PHhzOnNjaGVtYQ0KICB4bWxuczp4cz0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEi
+DQogIHhtbG5zOnVhPSJodHRwOi8vb3BjZm91bmRhdGlvbi5vcmcvVUEvMjAwOC8wMi9UeXBlcy54
+c2QiDQogIHhtbG5zOnRucz0iaHR0cDovL3RyaWN5Y2xldHlwZXYxLyINCiAgdGFyZ2V0TmFtZXNw
+YWNlPSJodHRwOi8vdHJpY3ljbGV0eXBldjEvIg0KICBlbGVtZW50Rm9ybURlZmF1bHQ9InF1YWxp
+ZmllZCINCj4NCiAgPHhzOmltcG9ydCBuYW1lc3BhY2U9Imh0dHA6Ly9vcGNmb3VuZGF0aW9uLm9y
+Zy9VQS8iIC8+DQoNCiAgPHhzOnNpbXBsZVR5cGUgIG5hbWU9IlRpcmVFbnVtIj4NCiAgICA8eHM6
+cmVzdHJpY3Rpb24gYmFzZT0ieHM6c3RyaW5nIj4NCiAgICAgIDx4czplbnVtZXJhdGlvbiB2YWx1
+ZT0iTXVkXzAiIC8+DQogICAgICA8eHM6ZW51bWVyYXRpb24gdmFsdWU9IkljZV8xIiAvPg0KICAg
+ICAgPHhzOmVudW1lcmF0aW9uIHZhbHVlPSJTYW5kXzIiIC8+DQogICAgPC94czpyZXN0cmljdGlv
+bj4NCiAgPC94czpzaW1wbGVUeXBlPg0KICA8eHM6ZWxlbWVudCBuYW1lPSJUaXJlRW51bSIgdHlw
+ZT0idG5zOlRpcmVFbnVtIiAvPg0KDQogIDx4czpjb21wbGV4VHlwZSBuYW1lPSJMaXN0T2ZUaXJl
+RW51bSI+DQogICAgPHhzOnNlcXVlbmNlPg0KICAgICAgPHhzOmVsZW1lbnQgbmFtZT0iVGlyZUVu
+dW0iIHR5cGU9InRuczpUaXJlRW51bSIgbWluT2NjdXJzPSIwIiBtYXhPY2N1cnM9InVuYm91bmRl
+ZCIgLz4NCiAgICA8L3hzOnNlcXVlbmNlPg0KICA8L3hzOmNvbXBsZXhUeXBlPg0KICA8eHM6ZWxl
+bWVudCBuYW1lPSJMaXN0T2ZUaXJlRW51bSIgdHlwZT0idG5zOkxpc3RPZlRpcmVFbnVtIiBuaWxs
+YWJsZT0idHJ1ZSI+PC94czplbGVtZW50Pg0KDQogIDx4czpjb21wbGV4VHlwZSBuYW1lPSJUcmlD
+eWNsZURhdGFUeXBlIj4NCiAgICA8eHM6c2VxdWVuY2U+DQogICAgICA8eHM6ZWxlbWVudCBuYW1l
+PSJ3ZWlnaHQiIHR5cGU9InhzOmZsb2F0IiBtaW5PY2N1cnM9IjAiIC8+DQogICAgICA8eHM6ZWxl
+bWVudCBuYW1lPSJ3aGVlbCIgdHlwZT0idG5zOldoZWVsRGF0YVR5cGUiIG1pbk9jY3Vycz0iMCIg
+bmlsbGFibGU9InRydWUiIC8+DQogICAgICA8eHM6ZWxlbWVudCBuYW1lPSJNb2RlbCIgdHlwZT0i
+eHM6c3RyaW5nIiBtaW5PY2N1cnM9IjAiIG5pbGxhYmxlPSJ0cnVlIiAvPg0KICAgIDwveHM6c2Vx
+dWVuY2U+DQogIDwveHM6Y29tcGxleFR5cGU+DQogIDx4czplbGVtZW50IG5hbWU9IlRyaUN5Y2xl
+RGF0YVR5cGUiIHR5cGU9InRuczpUcmlDeWNsZURhdGFUeXBlIiAvPg0KDQogIDx4czpjb21wbGV4
+VHlwZSBuYW1lPSJMaXN0T2ZUcmlDeWNsZURhdGFUeXBlIj4NCiAgICA8eHM6c2VxdWVuY2U+DQog
+ICAgICA8eHM6ZWxlbWVudCBuYW1lPSJUcmlDeWNsZURhdGFUeXBlIiB0eXBlPSJ0bnM6VHJpQ3lj
+bGVEYXRhVHlwZSIgbWluT2NjdXJzPSIwIiBtYXhPY2N1cnM9InVuYm91bmRlZCIgbmlsbGFibGU9
+InRydWUiIC8+DQogICAgPC94czpzZXF1ZW5jZT4NCiAgPC94czpjb21wbGV4VHlwZT4NCiAgPHhz
+OmVsZW1lbnQgbmFtZT0iTGlzdE9mVHJpQ3ljbGVEYXRhVHlwZSIgdHlwZT0idG5zOkxpc3RPZlRy
+aUN5Y2xlRGF0YVR5cGUiIG5pbGxhYmxlPSJ0cnVlIj48L3hzOmVsZW1lbnQ+DQoNCiAgPHhzOmNv
+bXBsZXhUeXBlIG5hbWU9IldoZWVsRGF0YVR5cGUiPg0KICAgIDx4czphbm5vdGF0aW9uPg0KICAg
+ICAgPHhzOmRvY3VtZW50YXRpb24+V2hlZWwgZGF0YXR5cGUuPC94czpkb2N1bWVudGF0aW9uPg0K
+ICAgIDwveHM6YW5ub3RhdGlvbj4NCiAgICA8eHM6c2VxdWVuY2U+DQogICAgICA8eHM6ZWxlbWVu
+dCBuYW1lPSJ0aWNrbmVzcyIgdHlwZT0ieHM6ZmxvYXQiIG1pbk9jY3Vycz0iMCIgLz4NCiAgICAg
+IDx4czplbGVtZW50IG5hbWU9ImRpYW1ldGVyIiB0eXBlPSJ4czpmbG9hdCIgbWluT2NjdXJzPSIw
+IiAvPg0KICAgICAgPHhzOmVsZW1lbnQgbmFtZT0icHJlc3N1cmUiIHR5cGU9InhzOmZsb2F0IiBt
+aW5PY2N1cnM9IjAiIC8+DQogICAgICA8eHM6ZWxlbWVudCBuYW1lPSJUaXJlVHlwZSIgdHlwZT0i
+dG5zOlRpcmVFbnVtIiBtaW5PY2N1cnM9IjAiIC8+DQogICAgICA8eHM6ZWxlbWVudCBuYW1lPSJy
+YXlzTGVuIiB0eXBlPSJ4czppbnQiIG1pbk9jY3Vycz0iMCIgLz4NCiAgICA8L3hzOnNlcXVlbmNl
+Pg0KICA8L3hzOmNvbXBsZXhUeXBlPg0KICA8eHM6ZWxlbWVudCBuYW1lPSJXaGVlbERhdGFUeXBl
+IiB0eXBlPSJ0bnM6V2hlZWxEYXRhVHlwZSIgLz4NCg0KICA8eHM6Y29tcGxleFR5cGUgbmFtZT0i
+TGlzdE9mV2hlZWxEYXRhVHlwZSI+DQogICAgPHhzOnNlcXVlbmNlPg0KICAgICAgPHhzOmVsZW1l
+bnQgbmFtZT0iV2hlZWxEYXRhVHlwZSIgdHlwZT0idG5zOldoZWVsRGF0YVR5cGUiIG1pbk9jY3Vy
+cz0iMCIgbWF4T2NjdXJzPSJ1bmJvdW5kZWQiIG5pbGxhYmxlPSJ0cnVlIiAvPg0KICAgIDwveHM6
+c2VxdWVuY2U+DQogIDwveHM6Y29tcGxleFR5cGU+DQogIDx4czplbGVtZW50IG5hbWU9Ikxpc3RP
+ZldoZWVsRGF0YVR5cGUiIHR5cGU9InRuczpMaXN0T2ZXaGVlbERhdGFUeXBlIiBuaWxsYWJsZT0i
+dHJ1ZSI+PC94czplbGVtZW50Pg0KDQo8L3hzOnNjaGVtYT4=</ByteString>
+    </Value>
   </UAVariable>
   <UAVariable NodeId="ns=1;i=28" BrowseName="NamespaceUri" ParentNodeId="ns=1;i=26" DataType="String">
     <DisplayName>NamespaceUri</DisplayName>
@@ -393,6 +450,35 @@
       <Reference ReferenceType="HasComponent" IsForward="false">i=93</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=72</Reference>
     </References>
+    <Value>
+      <ByteString xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">PG9wYzpUeXBlRGljdGlvbmFyeQ0KICB4bWxuczpvcGM9Imh0dHA6Ly9vcGNmb3VuZGF0aW9uLm9y
+Zy9CaW5hcnlTY2hlbWEvIg0KICB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1M
+U2NoZW1hLWluc3RhbmNlIg0KICB4bWxuczp1YT0iaHR0cDovL29wY2ZvdW5kYXRpb24ub3JnL1VB
+LyINCiAgeG1sbnM6dG5zPSJodHRwOi8vdHJpY3ljbGV0eXBldjEvIg0KICBEZWZhdWx0Qnl0ZU9y
+ZGVyPSJMaXR0bGVFbmRpYW4iDQogIFRhcmdldE5hbWVzcGFjZT0iaHR0cDovL3RyaWN5Y2xldHlw
+ZXYxLyINCj4NCiAgPCEtLSBUaGlzIEZpbGUgd2FzIGdlbmVyYXRlZCBvbiAyMDIxLTAzLTE4IGFu
+ZCBzdXBwb3J0cyB0aGUgc3BlY2lmaWNhdGlvbnMgc3VwcG9ydGVkIGJ5IHZlcnNpb24gMS4xMS4z
+MzUuMTAgb2YgdGhlIE9QQyBVQSBkZWxpdmVyYWJsZXMuIC0tPg0KICA8b3BjOkltcG9ydCBOYW1l
+c3BhY2U9Imh0dHA6Ly9vcGNmb3VuZGF0aW9uLm9yZy9VQS8iIExvY2F0aW9uPSJQcmVmaXgwLkJp
+bmFyeVNjaGVtYS5ic2QiLz4NCg0KICA8b3BjOkVudW1lcmF0ZWRUeXBlIE5hbWU9IlRpcmVFbnVt
+IiBMZW5ndGhJbkJpdHM9IjMyIj4NCiAgICA8b3BjOkVudW1lcmF0ZWRWYWx1ZSBOYW1lPSJNdWQi
+IFZhbHVlPSIwIiAvPg0KICAgIDxvcGM6RW51bWVyYXRlZFZhbHVlIE5hbWU9IkljZSIgVmFsdWU9
+IjEiIC8+DQogICAgPG9wYzpFbnVtZXJhdGVkVmFsdWUgTmFtZT0iU2FuZCIgVmFsdWU9IjIiIC8+
+DQogIDwvb3BjOkVudW1lcmF0ZWRUeXBlPg0KDQogIDxvcGM6U3RydWN0dXJlZFR5cGUgTmFtZT0i
+VHJpQ3ljbGVEYXRhVHlwZSIgQmFzZVR5cGU9InVhOkV4dGVuc2lvbk9iamVjdCI+DQogICAgPG9w
+YzpGaWVsZCBOYW1lPSJ3ZWlnaHQiIFR5cGVOYW1lPSJvcGM6RmxvYXQiIC8+DQogICAgPG9wYzpG
+aWVsZCBOYW1lPSJ3aGVlbCIgVHlwZU5hbWU9InRuczpXaGVlbERhdGFUeXBlIiAvPg0KICAgIDxv
+cGM6RmllbGQgTmFtZT0iTW9kZWwiIFR5cGVOYW1lPSJvcGM6U3RyaW5nIiAvPg0KICA8L29wYzpT
+dHJ1Y3R1cmVkVHlwZT4NCg0KICA8b3BjOlN0cnVjdHVyZWRUeXBlIE5hbWU9IldoZWVsRGF0YVR5
+cGUiIEJhc2VUeXBlPSJ1YTpFeHRlbnNpb25PYmplY3QiPg0KICAgIDxvcGM6RG9jdW1lbnRhdGlv
+bj5XaGVlbCBkYXRhdHlwZS48L29wYzpEb2N1bWVudGF0aW9uPg0KICAgIDxvcGM6RmllbGQgTmFt
+ZT0idGlja25lc3MiIFR5cGVOYW1lPSJvcGM6RmxvYXQiIC8+DQogICAgPG9wYzpGaWVsZCBOYW1l
+PSJkaWFtZXRlciIgVHlwZU5hbWU9Im9wYzpGbG9hdCIgLz4NCiAgICA8b3BjOkZpZWxkIE5hbWU9
+InByZXNzdXJlIiBUeXBlTmFtZT0ib3BjOkZsb2F0IiAvPg0KICAgIDxvcGM6RmllbGQgTmFtZT0i
+VGlyZVR5cGUiIFR5cGVOYW1lPSJ0bnM6VGlyZUVudW0iIC8+DQogICAgPG9wYzpGaWVsZCBOYW1l
+PSJyYXlzTGVuIiBUeXBlTmFtZT0ib3BjOkludDMyIiAvPg0KICA8L29wYzpTdHJ1Y3R1cmVkVHlw
+ZT4NCg0KPC9vcGM6VHlwZURpY3Rpb25hcnk+</ByteString>
+    </Value>
   </UAVariable>
   <UAVariable NodeId="ns=1;i=39" BrowseName="NamespaceUri" ParentNodeId="ns=1;i=37" DataType="String">
     <DisplayName>NamespaceUri</DisplayName>

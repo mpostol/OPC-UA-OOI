@@ -1,55 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="OPCUAModelDesign.xslt"?>
-<ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TargetNamespace="http://tricycletypev1/" TargetVersion="" TargetPublicationDate="2021-03-18T00:00:00+01:00" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+<?xml-stylesheet type="text/xsl" href="XMLstylesheet"?>
+<ModelDesign xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" TargetNamespace="http://tricycletypev1/" TargetVersion="" TargetPublicationDate="2021-04-04T00:00:00+02:00" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
   <Namespaces>
-    <Namespace Name="Name0" Prefix="Prefix0" InternalPrefix="http://opcfoundation.org/UA/" XmlNamespace="http://opcfoundation.org/UA/" XmlPrefix="Prefix1" FilePath="">http://opcfoundation.org/UA/</Namespace>
-    <Namespace Name="Name2" Prefix="Prefix2" InternalPrefix="http://tricycletypev1/" XmlNamespace="http://tricycletypev1/" XmlPrefix="Prefix3" FilePath="">http://tricycletypev1/</Namespace>
+    <Namespace Name="Name0" Prefix="Prefix0" InternalPrefix="http://opcfoundation.org/UA/" XmlNamespace="http://opcfoundation.org/UA/" XmlPrefix="Prefix1" FilePath="" Version="1.04.8" PublicationDate="20.11.2020">http://opcfoundation.org/UA/</Namespace>
+    <Namespace Name="Name2" Prefix="Prefix2" InternalPrefix="http://tricycletypev1/" XmlNamespace="http://tricycletypev1/" XmlPrefix="Prefix3" FilePath="" Version="1.00" PublicationDate="25.11.2020">http://tricycletypev1/</Namespace>
   </Namespaces>
   <DataType xmlns:q1="http://tricycletypev1/" SymbolicName="q1:TireEnum" xmlns:q2="http://opcfoundation.org/UA/" BaseType="q2:Enumeration">
     <Children>
       <Property SymbolicName="q2:EnumStrings" DataType="q2:LocalizedText" ValueRank="Array">
         <DefaultValue>
-          <ListOfLocalizedText xmlns="">
-            
-              en-us
-              Mud
-            
-            
-              en-us
-              Ice
-            
-            
-              en-us
-              Sand
-            
-          </ListOfLocalizedText>
+          <uax:ListOfLocalizedText xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+            <uax:LocalizedText>
+              <uax:Locale>en-us</uax:Locale>
+              <uax:Text>Mud</uax:Text>
+            </uax:LocalizedText>
+            <uax:LocalizedText>
+              <uax:Locale>en-us</uax:Locale>
+              <uax:Text>Ice</uax:Text>
+            </uax:LocalizedText>
+            <uax:LocalizedText>
+              <uax:Locale>en-us</uax:Locale>
+              <uax:Text>Sand</uax:Text>
+            </uax:LocalizedText>
+          </uax:ListOfLocalizedText>
         </DefaultValue>
       </Property>
     </Children>
     <ClassName />
     <Fields>
-      <Field Name="Mud" Identifier="0" ArrayDimensions="" />
-      <Field Name="Ice" Identifier="1" ArrayDimensions="" />
-      <Field Name="Sand" Identifier="2" ArrayDimensions="" />
+      <Field Name="Mud" Identifier="0" BitMask="" ArrayDimensions="" />
+      <Field Name="Ice" Identifier="1" BitMask="" ArrayDimensions="" />
+      <Field Name="Sand" Identifier="2" BitMask="" ArrayDimensions="" />
     </Fields>
   </DataType>
   <DataType xmlns:q3="http://tricycletypev1/" SymbolicName="q3:TriCycleDataType" xmlns:q4="http://opcfoundation.org/UA/" BaseType="q4:Structure">
     <ClassName />
     <Fields>
-      <Field Name="weight" DataType="q4:Float" ArrayDimensions="" />
-      <Field Name="wheel" DataType="q3:WheelDataType" ArrayDimensions="" />
-      <Field Name="Model" DataType="q4:String" ArrayDimensions="" />
+      <Field Name="weight" BitMask="" DataType="q4:Float" ArrayDimensions="" />
+      <Field Name="wheel" BitMask="" DataType="q3:WheelDataType" ArrayDimensions="" />
+      <Field Name="Model" BitMask="" DataType="q4:String" ArrayDimensions="" />
     </Fields>
   </DataType>
   <DataType xmlns:q5="http://tricycletypev1/" SymbolicName="q5:WheelDataType" xmlns:q6="http://opcfoundation.org/UA/" BaseType="q6:Structure">
     <Description>Wheel datatype.</Description>
     <ClassName />
     <Fields>
-      <Field Name="tickness" DataType="q6:Float" ArrayDimensions="" />
-      <Field Name="diameter" DataType="q6:Float" ArrayDimensions="" />
-      <Field Name="pressure" DataType="q6:Float" ArrayDimensions="" />
-      <Field Name="TireType" DataType="q5:TireEnum" ArrayDimensions="" />
-      <Field Name="raysLen" DataType="q6:Int32" ArrayDimensions="" />
+      <Field Name="tickness" BitMask="" DataType="q6:Float" ArrayDimensions="" />
+      <Field Name="diameter" BitMask="" DataType="q6:Float" ArrayDimensions="" />
+      <Field Name="pressure" BitMask="" DataType="q6:Float" ArrayDimensions="" />
+      <Field Name="TireType" BitMask="" DataType="q5:TireEnum" ArrayDimensions="" />
+      <Field Name="raysLen" BitMask="" DataType="q6:Int32" ArrayDimensions="" />
     </Fields>
   </DataType>
   <ObjectType xmlns:q7="http://tricycletypev1/" SymbolicName="q7:HumanType">
@@ -60,24 +60,22 @@
     </Children>
     <ClassName />
   </ObjectType>
-  <ObjectType xmlns:q11="http://tricycletypev1/" SymbolicName="q11:VehicleType">
+  <ObjectType xmlns:q13="http://tricycletypev1/" SymbolicName="q13:VehicleType">
     <Children>
-      <Property xmlns:q12="http://opcfoundation.org/UA/" SymbolicName="q12:buildDate" ModellingRule="Mandatory" DataType="q12:DateTime" />
-      <Object xmlns:q13="http://opcfoundation.org/UA/" SymbolicName="q13:S_Owner_" TypeDefinition="q11:HumanType" ModellingRule="Mandatory">
+      <Property xmlns:q14="http://opcfoundation.org/UA/" SymbolicName="q14:buildDate" ModellingRule="Mandatory" DataType="q14:DateTime" />
+      <Object xmlns:q15="http://opcfoundation.org/UA/" SymbolicName="q15:S_Owner_" TypeDefinition="q13:HumanType" ModellingRule="Mandatory">
         <BrowseName>Owner&gt;</BrowseName>
         <DisplayName>&lt;Owner&gt;</DisplayName>
       </Object>
     </Children>
     <ClassName />
   </ObjectType>
-  <ObjectType xmlns:q14="http://tricycletypev1/" SymbolicName="q14:TrailerType" BaseType="q14:VehicleType">
-    <References>
-      <Reference IsInverse
-                 ="true">
-        <ReferenceType xmlns:q15="http://opcfoundation.org/UA/">q15:HasOrderedComponent</ReferenceType>
-        <TargetId>q14:TrailerType</TargetId>
-      </Reference>
-    </References>
+  <ObjectType xmlns:q11="http://tricycletypev1/" SymbolicName="q11:TrailerType" BaseType="q11:VehicleType">
+    <Children>
+      <Variable xmlns:q12="http://opcfoundation.org/UA/" SymbolicName="q12:LoadedTricycle" ModellingRule="Mandatory" DataType="q11:TriCycleDataType" ValueRank="Array" ArrayDimensions="0">
+        <ReferenceType>q12:HasOrderedComponent</ReferenceType>
+      </Variable>
+    </Children>
     <ClassName />
   </ObjectType>
   <ObjectType xmlns:q16="http://tricycletypev1/" SymbolicName="q16:TriCycleType" BaseType="q16:VehicleType">

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="OPCUAModelDesign.xslt"?>
-<ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TargetNamespace="http://tricycletypev1/" TargetVersion="" TargetPublicationDate="2021-03-18T00:00:00+01:00" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+<ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TargetNamespace="http://tricycletypev1/" TargetVersion="" TargetPublicationDate="2021-04-04T00:00:00+02:00" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
   <Namespaces>
     <Namespace Name="Name0" Prefix="Prefix0" InternalPrefix="http://opcfoundation.org/UA/" XmlNamespace="http://opcfoundation.org/UA/" XmlPrefix="Prefix1" FilePath="">http://opcfoundation.org/UA/</Namespace>
     <Namespace Name="Name2" Prefix="Prefix2" InternalPrefix="http://tricycletypev1/" XmlNamespace="http://tricycletypev1/" XmlPrefix="Prefix3" FilePath="">http://tricycletypev1/</Namespace>
@@ -60,24 +60,22 @@
     </Children>
     <ClassName />
   </ObjectType>
-  <ObjectType xmlns:q11="http://tricycletypev1/" SymbolicName="q11:VehicleType">
+  <ObjectType xmlns:q11="http://tricycletypev1/" SymbolicName="q11:TrailerType" BaseType="q11:VehicleType">
     <Children>
-      <Property xmlns:q12="http://opcfoundation.org/UA/" SymbolicName="q12:buildDate" ModellingRule="Mandatory" DataType="q12:DateTime" />
-      <Object xmlns:q13="http://opcfoundation.org/UA/" SymbolicName="q13:S_Owner_" TypeDefinition="q11:HumanType" ModellingRule="Mandatory">
+      <Variable xmlns:q12="http://opcfoundation.org/UA/" SymbolicName="q12:LoadedTricycle" ModellingRule="Mandatory" DataType="q11:TriCycleDataType" ValueRank="Array" ArrayDimensions="0">
+        <ReferenceType>q12:HasOrderedComponent</ReferenceType>
+      </Variable>
+    </Children>
+    <ClassName />
+  </ObjectType>
+  <ObjectType xmlns:q13="http://tricycletypev1/" SymbolicName="q13:VehicleType">
+    <Children>
+      <Property xmlns:q14="http://opcfoundation.org/UA/" SymbolicName="q14:buildDate" ModellingRule="Mandatory" DataType="q14:DateTime" />
+      <Object xmlns:q15="http://opcfoundation.org/UA/" SymbolicName="q15:S_Owner_" TypeDefinition="q13:HumanType" ModellingRule="Mandatory">
         <BrowseName>Owner&gt;</BrowseName>
         <DisplayName>&lt;Owner&gt;</DisplayName>
       </Object>
     </Children>
-    <ClassName />
-  </ObjectType>
-  <ObjectType xmlns:q14="http://tricycletypev1/" SymbolicName="q14:TrailerType" BaseType="q14:VehicleType">
-    <References>
-      <Reference IsInverse
-                 ="true">
-        <ReferenceType xmlns:q15="http://opcfoundation.org/UA/">q15:HasOrderedComponent</ReferenceType>
-        <TargetId>q14:TrailerType</TargetId>
-      </Reference>
-    </References>
     <ClassName />
   </ObjectType>
   <ObjectType xmlns:q16="http://tricycletypev1/" SymbolicName="q16:TriCycleType" BaseType="q16:VehicleType">

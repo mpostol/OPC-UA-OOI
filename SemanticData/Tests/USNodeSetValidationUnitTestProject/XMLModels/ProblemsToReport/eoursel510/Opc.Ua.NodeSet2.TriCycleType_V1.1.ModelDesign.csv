@@ -58,3 +58,4 @@ TriCycleType_S_Owner_,57,Object
 TriCycleType_S_Owner__Name,58,Variable
 TriCycleType_S_Owner__Age,59,Variable
 TriCycleType_S_Owner__Gender,60,Variable
+TrailerType_LoadedTricycle,61,Variable

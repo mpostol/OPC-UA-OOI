@@ -1,4 +1,23 @@
-# OPC UA Object Model Working Notes
+# OPC UA Object Model Working Notes <!-- omit in toc -->
+
+## Table of Content <!-- omit in toc -->
+
+- [Address Space Concept Executive Summary](#address-space-concept-executive-summary)
+- [Naming Conventions for Nodes](#naming-conventions-for-nodes)
+  - [BrowseName Attribute](#browsename-attribute)
+    - [General Naming Rules](#general-naming-rules)
+    - [Requirements against the specification](#requirements-against-the-specification)
+  - [General Rules for DisplayName Attribute](#general-rules-for-displayname-attribute)
+  - [General Rules for NodeId Attribute](#general-rules-for-nodeid-attribute)
+  - [General Rules for SymbolicName Attribute](#general-rules-for-symbolicname-attribute)
+- [UANodeSet validation](#uanodeset-validation)
+  - [XML Import validation](#xml-import-validation)
+  - [XML Semantic validation](#xml-semantic-validation)
+- [Model](#model)
+- [AS graph](#as-graph)
+- [Instance Declaration](#instance-declaration)
+  - [P3 4.5 TypeDefinitionNode](#p3-45-typedefinitionnode)
+  - [7.10 HasSubtype ReferenceType](#710-hassubtype-referencetype)
 
 ## Address Space Concept Executive Summary
 
@@ -19,15 +38,15 @@ Based on the role humans take while using OPC UA applications they can be groupe
 
 A typical **human-centric** approach is a web-service supporting, for example, a web user interface (UI) to monitor conditions and manage millions of devices in a typical cloud-based IoT approach. It is essential in this case that any uncertainty and necessity to make a decision can be relaxed by human interaction. Coordination of robot behaviors in a work-cell (automation islands) is a **machine-centric** example. In this case, any human interaction must be recognized as impractical or even impossible. This interconnection scenario requires the machine to machine communication (M2M) demanding the integration of multi-vendor devices.
 
-To leverage the **meaningful** data distribution, the OPC UA engages rules derived from the object-oriented programming concept. Following this approach types are commonly used to describe the data semantics (to assign meaning to the bitstreams). For example, using Int32 we are dealing with a set of numbers that can be represented as bitstreams 32 bits long. Unfortunately, sometimes it is not enough. Let assume that we are going to use these numbers to express the age in a personal record. In the  **human-centric** environment, we can use the appropriate names derived from the native language of the data holders called variables. For the **machine-centric** case, the multi-vendor environment must be considered. A typical approach to deal with this environment is the usage of names defined by a commonly acceptable standardization body. To make the name unambiguous 9to avoid name collision) for all vendors it must be globally unique.
+To leverage the **meaningful** data distribution, the OPC UA engages rules derived from the object-oriented programming concept. Following this approach types are commonly used to describe the data semantics (to assign meaning to the bitstreams). For example, using Int32 we are dealing with a set of numbers that can be represented as bitstreams 32 bits long. Unfortunately, sometimes it is not enough. Let assume that we are going to use these numbers to express the age in a personal record. In the  **human-centric** environment, we can use the appropriate names derived from the native language of the data holders called variables. For the **machine-centric** case, the multi-vendor environment must be considered. A typical approach to deal with this environment is the usage of names defined by a commonly acceptable standardization body. To make the name unambiguous (to avoid name collision) for all vendors it must be globally unique.
 
 Generally speaking, to select a particular target piece of complex data we have two options: **random access** or **browsing**. **Random-access** requires that the target item must have been assigned a unique address known in advance by a selection operation. The browsing approach means that the data consumer walks down available paths from an entity to an entity that builds up the structure of compound data - a data graph - using references interconnecting entities. It is necessary if we need to represent a relationship between data components. As an example, consider a family tree containing a graph of personal records. The browsing process is costly because instead of jumping to a target, we need to traverse the graph step by step using references. The main advantage of this approach is that the data consumer do not need any prior knowledge of the data structure. To minimize the cost, after having found the target as the result of browsing the graph, every operation targeting it can use direct access. Random access is possible only if the browsing path is convertible to a unique direct address or selected targets have well know addresses assigned by a standardization body.
 
 It seems that, despite the access method, we have to assign an identification to all of the accessible entities in the representation of the process data structure. In this concept, this atomic identifiable entity is called a node. Each node is a collection of attributes (value-holders) that have values accessible locally in the context of the node. To enable browsing the internal structure of the nodes graph (relationship information), nodes are interconnected by references (address-holders of coupled nodes). Taking into consideration that the browse mechanism is based on the incremental and relative passage along the path of interconnected nodes, we can easily find out that each path must have a defined entry point, so we must address the question of where to start.
 
-The collection of these nodes is called the **address space**. The OPC UA Address Space concept is all about exposing the process data in a standard way. The main goal of exposing a graph of nodes as one whole is to create a meaningful context for the underlying process data. To create the Address Space, we need to instantiate nodes and interconnect them by references.
+The collection of these nodes is called the **address space**. The OPC UA Address Space (AS) concept is all about exposing the process data in a standard way. The main goal of exposing a graph of nodes as one whole is to create a meaningful context for the underlying process data. To create the AS, we need to instantiate nodes and interconnect them by references.
 
-To instantiate the **address space** we need to deal with naming, addressing, and meaning of the nodes. Appropriate naming is helpful in the **human-centric** environment, especially at the design-time. Proper addressing is essential for **machine-centric** environment, especially at the run-time. Designing appropriate rules applied to make the **address space** meaningful is necessary for both and must be addressed by the information model design process. All mentioned above aspects are tightly coupled and contribute to the design process.  The design process can be backed by:
+To instantiate the AS we need to deal with naming, addressing, and meaning of the nodes. Appropriate naming is helpful in the **human-centric** environment, especially at the design-time. Proper addressing is essential for **machine-centric** environment, especially at the run-time. Designing appropriate rules applied to make the AS meaningful is necessary for both and must be addressed by the information model design process. All mentioned above aspects are tightly coupled and contribute to the design process.  The design process can be backed by:
 
 - design conventions - contributing to design best practice rules
 - OPC UA concepts - as a foundation of AS deployment addressing a selected process requirements
@@ -43,15 +62,17 @@ OPC UA engages the following concepts supporting the mentioned above topics, nam
 - `Reference` - to apply nodes relationship information
 - `Type` concept - to provide metadata used as a meaningful context for the process data.
 
-To create the address space exposed by an OPC UA Application it must instantiate all nodes and interconnect them through references at the bootstrap process. Before the address space can be instantiated by an OPC UA application it must be designed first. To promote reusability of the address space design process a Domain Specific Language (DSL) is required. A detailed description of this process is covered by the document [Address Space Model Life-cycle](https://commsvr.gitbook.io/ooi/semantic-data-processing/informationmodelsdevelopment/informationmodellifecycle). A mandatory option - coined as `NodeSet` model - of the DSL is described in OPC UA Specification [Part 6: Mappings][Opc.UA.Part6]. By design, it minimizes the required effort spent by the OPC UA applications to instantiate the address space because it requires a detailed description of all implementation details enabling to avoid the necessity to resolve inheritance chains, type definitions, encodings, direct addressing, defaults, etc. A detailed description of this DSL is covered by the document [OPC UA Address Space Interchange XML][InterchangeXML]. As a result, it is expected that all OPC UA applications and design tools must be compliant with this language somehow.
+To create the AS exposed by an OPC UA Application it must instantiate all nodes and interconnect them through references at the bootstrap process. Before the AS can be instantiated by an OPC UA application it must be designed first. To promote reusability of the AS design process a Domain Specific Language (DSL) is required. A detailed description of this process is covered by the document [Address Space Model Life-cycle](https://commsvr.gitbook.io/ooi/semantic-data-processing/informationmodelsdevelopment/informationmodellifecycle). A mandatory option - coined as `NodeSet` model - of the DSL is described in OPC UA Specification [Part 6: Mappings][Opc.UA.Part6]. By design, it minimizes the required effort spent by the OPC UA applications to instantiate the AS because it requires a detailed description of all implementation details enabling to avoid the necessity to resolve inheritance chains, type definitions, encodings, direct addressing, defaults, etc. A detailed description of this DSL is covered by the document [OPC UA Address Space Interchange XML][InterchangeXML]. As a result, it is expected that all OPC UA applications and design tools must be compliant with this language somehow.
 
 This standard additionaly introduces the term
 
-- `SymbolicName` - an identifier that uniquely identifies a specific entity in a program or procedure.
+- `SymbolicName` - an identifier that uniquely identifies a specific entity (node) in a program or procedure.
 
 ## Naming Conventions for Nodes
 
-### General Rules for BrowseName Attribute
+### BrowseName Attribute
+
+#### General Naming Rules
 
 OPC UA defines two attributes containing naming information about an OPC UA Node, the `BrowseName` and the `DisplayName`. The `NodeSet` DSL additionally introduces `SymbolicName`.
 
@@ -79,7 +100,12 @@ abbreviation for identifier), UInt32 (where U is an abbreviation for unsigned). 
 
 There is no recommendation on the use of prefixes. Companion Specifications may use a prefix because it suits their model. For example, if the Vision companion specification were to define types based on generic concepts (say a state machine), then using the prefix “Vision” may make sense (as in “VisionStateMachineType”).
 
+Special characters may be used for parametrization of the `BrowseName` to create several copies of the same node. In this case the `BrowseName` amy be used as a pattern of the values assigned to new instances created this way.
+
+> What is the impact on the `SymbolicName` ?
+
 #### Requirements against the specification
+
 
 **P03-03030200XX  Conventions for defining NodeClasses** - this standard defines Properties, but Properties can be defined by other standard organizations or vendors and Nodes can have Properties that are not standardised. Properties defined in this standard are defined by their name, which is mapped to the `BrowseName` having the NamespaceIndex 0, which represents the Namespace for OPC UA.
 
@@ -183,6 +209,25 @@ For Methods, the ModellingRule MandatoryPlaceholder is used to define the `Brows
 
 **P03-0803 QualifiedName** - this Built-in DataType contains a qualified name. It is, for example, used as `BrowseName`. Its elements are defined in Table 25. The name part of the QualifiedName is restricted to 512 characters.
 
+The  QualifiedName structure syntax
+
+| Name           | Type   | Description                            |
+| -------------- | ------ | -------------------------------------- |
+| namespaceIndex | UInt16 | see description below                  |
+| name           | String | The text portion of the QualifiedName. |
+
+namespaceIndex description
+
+- Index that identifies the namespace that defines the name.
+- This index is the index of that namespace in the local Server’s NamespaceArray.
+- The Client may read the NamespaceArray Variable to access the string value of the namespace.
+
+The regular expression pattern to match.
+
+```TXT
+\b((\d{1,}):)?(.+)
+```
+
 **P03-0851 StructureField** StructureFields can be exposed as DataVariables that are children of the Variable that contains the Structure Value. In this case the `BrowseName` of the DataVariable shall be the same as the StructureField name and the NamespaceIndex of the `BrowseName` shall be the same as the Structure DataType Node NamespaceIndex.
 
 **P03-A0402 Properties or DataVariables** - besides the semantic differences of Properties and DataVariables described in Clause 4 there are also syntactical differences. A Property is identified by its `BrowseName`, that is, if Properties having the same semantic are used several times, they should always have the same `BrowseName`. The same semantic of DataVariables is captured in the VariableType.
@@ -228,19 +273,6 @@ The Transitions that may occur are represented with instances of the TransitionT
 The Object representing the root of a file directory structure shall have the `BrowseName` FileSystem. An OPC UA Server may have different FileSystem Objects in the AddressSpace.
 HasComponent is used to reference a FileSystem from aggregating Objects like the Objects Folder or the Object representing a device.
 
-#### Parametrization
-
-Special characters may be used for parametrization of the `BrowseName` to create several copies of the same node. In this case the `BrowseName` amy be used as a pattern of the values assigned to new instances created this way.
-
-> What is the impact on the `SymbolicName` ?
-
-#### Syntax
-
- The regular expression pattern to match.
-
-```TXT
-\b((\d{1,}):)?(.+)
-```
 
 ### General Rules for DisplayName Attribute
 
@@ -249,7 +281,6 @@ Special characters may be used for parametrization of the `BrowseName` to create
   <xs:simpleType name="NodeId">
     <xs:restriction base="xs:string" />
   </xs:simpleType>
-
 
 ### General Rules for SymbolicName Attribute
 
@@ -286,8 +317,6 @@ This xml attribute does not appear in the AddressSpace and is intended for use b
 The version information is also provided as part of the ModelTableEntry in the UANodeSet XML file. The UANodeSet XML schema is defined in OPC 10000-6.
 
 The NamespaceUri for all NodeIds defined in this document is defined in Annex A. The NamespaceIndex for this NamespaceUri is vendor-specific and depends on the position of the NamespaceUri in the server namespace table.
-
-
 
 ## AS graph
 

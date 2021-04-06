@@ -298,6 +298,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext.ModelUri}."));
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - the context for the imported model is created and starting import nodes."));
       Dictionary<string, UANode> itemsDictionary = new Dictionary<string, UANode>();
+      //TODO Enhance/Improve node selection algorithm for ValidateAndExportModel #531
       foreach (UANode node in model.Items)
       {
         if (itemsDictionary.ContainsKey(node.NodeId))
@@ -346,6 +347,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private void ValidateAndExportModel(int nameSpaceIndex)
     {
       IValidator validator = new Validator(this, m_TraceEvent);
+      //TODO Enhance/Improve node selection algorithm for ValidateAndExportModel #531
       IEnumerable<IUANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
       List<IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Selected {_nodes.Count} types to be validated."));

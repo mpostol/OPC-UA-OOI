@@ -106,7 +106,6 @@ Special characters may be used for parametrization of the `BrowseName` to create
 
 #### Requirements against the specification
 
-
 **P03-03030200XX  Conventions for defining NodeClasses** - this standard defines Properties, but Properties can be defined by other standard organizations or vendors and Nodes can have Properties that are not standardised. Properties defined in this standard are defined by their name, which is mapped to the `BrowseName` having the NamespaceIndex 0, which represents the Namespace for OPC UA.
 
 **P03-04040200XX Properties** - to prevent recursion, Properties are not allowed to have Properties defined for them. To easily identify Properties, the `BrowseName` of a Property shall be unique in the context of the Node containing the Properties (see 5.6.3 for details).
@@ -246,7 +245,7 @@ Nodes of all other NodeClasses cannot be defined in the same table; therefore on
 
 The NodeId is described by `BrowseNames` as defined in 4.1 and defined in Part 6.
 
-**P05-060304 SessionsDiagnosticsSummaryType** - for each session of the Server, this Object also provides an Object representing the session, indicated by <ClientName>. The BrowseName could be derived from the sessionName defined in the CreateSession Service (Part 4) or some other server-specific mechanisms. It is of the ObjectType SessionDiagnosticsObjectType, as defined in 6.3.5.
+**P05-060304 SessionsDiagnosticsSummaryType** - for each session of the Server, this Object also provides an Object representing the session, indicated by `<ClientName>`. The BrowseName could be derived from the sessionName defined in the CreateSession Service (Part 4) or some other server-specific mechanisms. It is of the ObjectType SessionDiagnosticsObjectType, as defined in 6.3.5.
 
 **P05-060313 NamespaceMetadataType** - the `BrowseName` of instances of this type shall be derived from the represented namespace. This can, for example, be done by using the index of the namespace in the NamespaceArray as namespaceIndex of the QualifiedName and the namespace URI as name of the QualifiedName.
 
@@ -272,7 +271,6 @@ The Transitions that may occur are represented with instances of the TransitionT
 
 The Object representing the root of a file directory structure shall have the `BrowseName` FileSystem. An OPC UA Server may have different FileSystem Objects in the AddressSpace.
 HasComponent is used to reference a FileSystem from aggregating Objects like the Objects Folder or the Object representing a device.
-
 
 ### General Rules for DisplayName Attribute
 
@@ -320,7 +318,7 @@ The NamespaceUri for all NodeIds defined in this document is defined in Annex A.
 
 ## AS graph
 
-`HasSubtype` References are used to define subtypes of `ReferenceTypes`. It is not required to provide the HasSubtype Reference for the supertype. 
+`HasSubtype` References are used to define subtypes of `ReferenceTypes`. It is not required to provide the HasSubtype Reference for the supertype.
 
 If a `ReferenceType` specifies some constraints this is inherited and can only be refined (be more restrictive).
 

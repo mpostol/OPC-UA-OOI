@@ -220,7 +220,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     public Parameter ExportArgument(DataSerialization.Argument argument)
     {
-      XmlQualifiedName _dataType = ExportBrowseName(NodeId.Parse(argument.DataType.Identifier), DataTypeIds.BaseDataType);
+      XmlQualifiedName _dataType = ExportBrowseName(argument.DataType.Identifier.ParseNodeId(m_TraceEvent.TraceEvent), DataTypeIds.BaseDataType);
       return ExportArgument(argument, _dataType);
     }
 

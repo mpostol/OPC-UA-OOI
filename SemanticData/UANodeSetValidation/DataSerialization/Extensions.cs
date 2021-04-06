@@ -46,6 +46,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <returns>NodeId.</returns>
     internal static NodeId ParseNodeId(this string nodeId, Action<TraceMessage> traceEvent)
     {
+      //TODO Enhance/Improve NodeId parser #541
       NodeId nodeId2Return = NodeId.Parse(nodeId);
       return nodeId2Return;
     }

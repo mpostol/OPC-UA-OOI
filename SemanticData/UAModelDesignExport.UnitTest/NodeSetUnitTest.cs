@@ -126,7 +126,8 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     #region Test instrumentation
 
     #region ModelDesign
-
+    //TODO UANodeSet prepare a semantic diff #565
+    
     private static void CompareModelDesign(ModelDesign expected, ModelDesign actual)
     {
       Assert.AreEqual<int>(expected.Items.Length, actual.Items.Length);

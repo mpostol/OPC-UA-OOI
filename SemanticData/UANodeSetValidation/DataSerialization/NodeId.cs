@@ -315,7 +315,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
         // parse string node identifier.
         if (text.StartsWith("s=", StringComparison.Ordinal))
           return new NodeId(text.Substring(2), namespaceIndex);
-        // parse guid node identifier.
+        // parse GUID node identifier.
         if (text.StartsWith("g=", StringComparison.Ordinal))
           return new NodeId(new System.Guid(text.Substring(2)), namespaceIndex);
         // parse opaque node identifier.

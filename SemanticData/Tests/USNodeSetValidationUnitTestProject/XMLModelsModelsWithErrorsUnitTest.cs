@@ -7,7 +7,6 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UAOOI.SemanticData.BuildingErrorsHandling;
@@ -311,8 +310,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #endregion TestMethod
 
     #region private
-
-
 
     private readonly Uri m_NameSpace = new Uri(@"http://commsvr.com/OOIUA/SemanticData/UnitTest/UANodeSetValidationUnitTestProject");
 

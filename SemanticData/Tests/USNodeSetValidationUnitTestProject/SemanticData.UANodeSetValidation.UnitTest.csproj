@@ -108,7 +108,6 @@
     <Compile Include="Helpers\TestData.cs" />
     <Compile Include="ServiceResultExceptionUnitTest.cs" />
     <Compile Include="InformationModelFactoryUnitTest.cs" />
-    <Compile Include="NodeIdUnitTest.cs" />
     <Compile Include="NamespaceTableUnitTest.cs" />
     <Compile Include="ExtensionsUnitTest.cs" />
     <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">

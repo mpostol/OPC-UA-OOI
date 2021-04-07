@@ -126,6 +126,8 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     #region Test instrumentation
 
     #region ModelDesign
+    //TODO UANodeSet prepare a semantic diff #565
+    //TODO ModelDesign prepare a semantic diff #566
 
     private static void CompareModelDesign(ModelDesign expected, ModelDesign actual)
     {

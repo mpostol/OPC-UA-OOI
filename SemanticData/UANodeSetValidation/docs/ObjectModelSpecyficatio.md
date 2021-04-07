@@ -5,10 +5,14 @@
 - [Address Space Concept Executive Summary](#address-space-concept-executive-summary)
 - [Naming Conventions for Nodes](#naming-conventions-for-nodes)
   - [BrowseName Attribute](#browsename-attribute)
-    - [General Naming Rules](#general-naming-rules)
-    - [Requirements against the specification](#requirements-against-the-specification)
-  - [General Rules for DisplayName Attribute](#general-rules-for-displayname-attribute)
-  - [General Rules for NodeId Attribute](#general-rules-for-nodeid-attribute)
+    - [BrowseName General Rules](#browsename-general-rules)
+    - [BrowseName Requirements against the specification](#browsename-requirements-against-the-specification)
+  - [NodeId Attribute](#nodeid-attribute)
+    - [NodeId General Rules](#nodeid-general-rules)
+    - [NodeId Requirements against the specification](#nodeid-requirements-against-the-specification)
+  - [DisplayName Attribute](#displayname-attribute)
+    - [DisplayName General Rules](#displayname-general-rules)
+    - [DisplayName Requirements against the specification](#displayname-requirements-against-the-specification)
   - [General Rules for SymbolicName Attribute](#general-rules-for-symbolicname-attribute)
 - [UANodeSet validation](#uanodeset-validation)
   - [XML Import validation](#xml-import-validation)
@@ -72,7 +76,7 @@ This standard additionaly introduces the term
 
 ### BrowseName Attribute
 
-#### General Naming Rules
+#### BrowseName General Rules
 
 OPC UA defines two attributes containing naming information about an OPC UA Node, the `BrowseName` and the `DisplayName`. The `NodeSet` DSL additionally introduces `SymbolicName`.
 
@@ -104,7 +108,7 @@ Special characters may be used for parametrization of the `BrowseName` to create
 
 > What is the impact on the `SymbolicName` ?
 
-#### Requirements against the specification
+#### BrowseName Requirements against the specification
 
 **P03-03030200XX  Conventions for defining NodeClasses** - this standard defines Properties, but Properties can be defined by other standard organizations or vendors and Nodes can have Properties that are not standardised. Properties defined in this standard are defined by their name, which is mapped to the `BrowseName` having the NamespaceIndex 0, which represents the Namespace for OPC UA.
 
@@ -272,13 +276,49 @@ The Transitions that may occur are represented with instances of the TransitionT
 The Object representing the root of a file directory structure shall have the `BrowseName` FileSystem. An OPC UA Server may have different FileSystem Objects in the AddressSpace.
 HasComponent is used to reference a FileSystem from aggregating Objects like the Objects Folder or the Object representing a device.
 
-### General Rules for DisplayName Attribute
+### NodeId Attribute
 
-### General Rules for NodeId Attribute
+#### NodeId General Rules
 
-  <xs:simpleType name="NodeId">
-    <xs:restriction base="xs:string" />
-  </xs:simpleType>
+ Nodes are unambiguously identified using an identifier called the `NodeId`. The syntax of the `NodeId` structure is defined in Part 03 8.2.
+
+Servers may often choose to use the same namespace for the `NodeId` and the BrowseName. However, if they want to provide a standard Property, its BrowseName shall have the namespace of the standards body although the namespace of the `NodeId` reflects something else, for example the local Server. A Server shall persist the `NodeId` of a Node, that is, it shall not generate new `NodeIds` when rebooting.
+
+It is recommended that standard bodies defining standard type definitions use their namespace for the `NodeId` of the TypeDefinitionNode as well as for the BrowseName of the TypeDefinitionNode.
+
+ Subtypes inherit the parent type’s Attribute values, except for the `NodeId`.
+
+#### NodeId Requirements against the specification
+
+**P03-050202 NodeId** - nodes are unambiguously identified using a constructed identifier called the `NodeId`. Some Servers may accept alternative `NodeIds` in addition to the canonical `NodeId` represented in this Attribute. A Server shall persist the `NodeId` of a Node, that is, it shall not generate new `NodeIds` when rebooting. The structure of the `NodeId` is defined in 8.2.
+
+**P03-050204 BrowseName** Servers may often choose to use the same namespace for the `NodeId` and the BrowseName. However, if they want to provide a standard Property, its BrowseName shall have the namespace of the standards body although the namespace of the `NodeId` reflects something else, for example the local Server. It is recommended that standard bodies defining standard type definitions use their namespace for the `NodeId` of the TypeDefinitionNode as well as for the BrowseName of the TypeDefinitionNode.
+
+**P03-050801** DataType Model In many cases, the `NodeId` of the DataType Node – the DataTypeId – will be well-known to Clients and Servers. Clause 8 defines DataTypes and Part 6 defines their DataTypeIds. In addition, other organizations may define DataTypes that are well-known in the industry. Wellknown DataTypeIds provide for commonality across OPC UA Servers and allow Clients to interpret values without having to read the type description from the Server. Therefore, Servers may use well-known DataTypeIds without representing the corresponding DataType Nodes in their AddressSpaces.
+
+**P03-060208 NodeIds of InstanceDeclarations** InstanceDeclarations are identified by their BrowsePath. Different Servers might use different `NodeIds` for the InstanceDeclarations of common TypeDefinitionNodes, unless the definition of the TypeDefinitionNode already defines a `NodeId` for the InstanceDeclaration. All TypeDefinitionNodes defined in Part 5 already define the `NodeIds` for their InstanceDeclarations and therefore shall be used in all Servers.
+
+**P03-060302 Attributes** Subtypes inherit the parent type’s Attribute values, except for the `NodeId`. Inherited Attribute values may be overridden by the subtype, the BrowseName and DisplayName values should be overridden. Special rules apply for some Attributes of VariableTypes as defined in 6.2.7. Optional Attributes, not provided by the parent type, may be added to the subtype.
+
+**P03-060402 Creating an Instance** Instances inherit the initial values for the Attributes that they have in common with the TypeDefinitionNode from which they are instantiated, with the exceptions of the NodeClass and `NodeId`.
+
+**P03-080201 General** This Built-in DataType is composed of three elements that identify a Node within a Server. They are defined in Table 22.
+
+**P-03-080202 NamespaceIndex** The namespace is a URI that identifies the naming authority responsible for assigning the identifier element of the `NodeId`. Naming authorities include the local Server, the underlying system, standards bodies and consortia. It is expected that most Nodes will use the URI of the Server or of the underlying system.
+
+**P03-080203 IdentifierType** The IdentifierType element identifies the type of the `NodeId`, its format and its scope. Its values are defined in Table 23. Normally the scope of `NodeIds` is the Server in which they are defined. For certain types of `NodeIds`, `NodeIds` can uniquely identify a Node within a system, or across systems (e.g. GUIDs). System-wide and globally-unique identifiers allow Clients to track Nodes, such as work orders, as they move between OPC UA Servers as they progress through the system.
+
+Opaque identifiers are identifiers that are free-format byte strings that might or might not be human interpretable.
+
+String identifiers are case sensitive. That is, Clients shall consider them case sensitive. Servers are allowed to provide alternative `NodeIds` (see 5.2.2) and using this mechanism severs can handle `NodeIds` as case insensitive.
+
+**P03-080204 Identifier** value The identifier value element is used within the context of the first three elements to identify the Node. Its data type and format is defined by the IdType.
+
+### DisplayName Attribute
+
+#### DisplayName General Rules
+
+#### DisplayName Requirements against the specification
 
 ### General Rules for SymbolicName Attribute
 

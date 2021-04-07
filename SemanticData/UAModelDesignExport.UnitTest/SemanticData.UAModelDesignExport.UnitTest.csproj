@@ -59,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionsUnitTest.cs" />
-    <Compile Include="Instrumentation\AddressSpaceContextService.cs" />
     <Compile Include="Instrumentation\Extensions.cs" />
     <Compile Include="Instrumentation\IStylesheetNameProvider.cs" />
     <Compile Include="Instrumentation\TracedAddressSpaceContext.cs" />

@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.UANodeSetValidation.Helpers;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 {
@@ -67,7 +68,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     }
 
     [TestMethod]
-    public void MyTestMethod()
+    public void ParseBrowseNameTest()
     {
       List<TraceMessage> traceLog = new List<TraceMessage>();
       QualifiedName name = "   123:Id".ParseBrowseName(new NodeId("ns=1;i=28"), x => traceLog.Add(x));
@@ -77,6 +78,48 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Assert.IsTrue(name.NamespaceIndexSpecified);
       Assert.AreEqual<ushort>(123, name.NamespaceIndex);
       Assert.AreEqual<int>(0, traceLog.Count);
+    }
+
+    [TestMethod]
+    public void ParseNodeIdValidTest()
+    {
+      //Numeric
+      NodeId _ni = "i=13".ParseNodeId(x => Assert.Fail());
+      Assert.IsNotNull(_ni);
+      _ni = "i=0".ParseNodeId(x => Assert.Fail());
+      Assert.IsNotNull(_ni);
+      //STRING
+      _ni = "ns=10;s=Hello:World".ParseNodeId(x => Assert.Fail());
+      Assert.IsNotNull(_ni);
+      //GUID
+      _ni = "g=09087e75-8e5e-499b-954f-f2a9603db28a".ParseNodeId(x => Assert.Fail());
+      Assert.IsNotNull(_ni);
+      //OPAQUE
+      _ni = "ns=1;b=M/RbKBsRVkePCePcx24oRA==".ParseNodeId(x => Assert.Fail());
+      Assert.IsNotNull(_ni);
+      //?? Default string - should be not valid ?
+      _ni = "M/RbKBsRVkePCePcx24oRA==".ParseNodeId(x => Assert.Fail());
+      Assert.IsNotNull(_ni);
+    }
+
+    [TestMethod]
+    public void NodeIdNonValidNumericTest1()
+    {
+      TraceDiagnosticFixture inMemoryTrace = new Helpers.TraceDiagnosticFixture();
+      NodeId _ni = "ns=10;i=-1".ParseNodeId(inMemoryTrace.TraceDiagnostic); //this example is in the specification as valid
+      Assert.AreEqual<int>(1, inMemoryTrace.DiagnosticCounter);
+      Assert.AreEqual<int>(1, inMemoryTrace.TraceList.Count);
+      Assert.AreEqual<string>(BuildError.NodeIdInvalidSyntax.Identifier, inMemoryTrace.TraceList[0].BuildError.Identifier);
+    }
+
+    [TestMethod]
+    public void NodeIdNonValidNumericTest2()
+    {
+      TraceDiagnosticFixture inMemoryTrace = new Helpers.TraceDiagnosticFixture();
+      NodeId _ni = "ns=-10;i=01".ParseNodeId(inMemoryTrace.TraceDiagnostic); //this example is in the specification as valid
+      Assert.AreEqual<int>(1, inMemoryTrace.DiagnosticCounter);
+      Assert.AreEqual<int>(1, inMemoryTrace.TraceList.Count);
+      Assert.AreEqual<string>(BuildError.NodeIdInvalidSyntax.Identifier, inMemoryTrace.TraceList[0].BuildError.Identifier);
     }
   }
 }

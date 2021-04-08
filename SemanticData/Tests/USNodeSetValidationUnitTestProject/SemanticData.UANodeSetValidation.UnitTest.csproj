@@ -82,6 +82,7 @@
     <Compile Include="DataSerialization\QualifiedNameUnitTest.cs" />
     <Compile Include="DataSerialization\ExtensionsUnitTest.cs" />
     <Compile Include="Helpers\TracedAddressSpaceContext.cs" />
+    <Compile Include="Helpers\TraceDiagnosticFixture.cs" />
     <Compile Include="ModelFactoryTestingFixture\DataTypeDefinitionFactoryBase.cs" />
     <Compile Include="ModelFactoryTestingFixture\DataTypeFactoryBase.cs" />
     <Compile Include="ModelFactoryTestingFixture\DataTypeFieldFactoryBase.cs" />

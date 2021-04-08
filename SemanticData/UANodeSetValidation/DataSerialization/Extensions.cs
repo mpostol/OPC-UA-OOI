@@ -39,15 +39,27 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 
     //Enhance/Improve NodeId parser #541 rewrite and add to UT
     /// <summary>
-    /// Parses the node identifier with the syntax defined in Part 6-5.3.1.10
+    /// Parses the node identifier with the syntax defined in Part 3-8.2 and Part 6-5.3.1.10
     /// </summary>
     /// <param name="nodeId">The node identifier.</param>
     /// <param name="traceEvent">The trace event.</param>
     /// <returns>NodeId.</returns>
     internal static NodeId ParseNodeId(this string nodeId, Action<TraceMessage> traceEvent)
     {
-      //TODO Enhance/Improve NodeId parser #541
-      NodeId nodeId2Return = NodeId.Parse(nodeId);
+      NodeId nodeId2Return = null;
+      try
+      {
+        nodeId2Return = NodeId.Parse(nodeId);
+      }
+      catch (ServiceResultException se)
+      {
+        traceEvent(se.TraceMessage);
+      }
+      if (nodeId2Return == null)
+      {
+        nodeId2Return = new NodeId(System.Guid.NewGuid());
+        traceEvent(TraceMessage.DiagnosticTraceMessage($"Generated random NodeId = {nodeId2Return.ToString()}"));
+      }
       return nodeId2Return;
     }
 

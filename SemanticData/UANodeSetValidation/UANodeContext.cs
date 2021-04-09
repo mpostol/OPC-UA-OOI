@@ -332,7 +332,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     public override string ToString()
     {
-      return $"NodeId={this.NodeIdContext}";
+      string browseName = this.UANode == null ? String.Empty : this.UANode.BrowseName;
+      return $"NodeId={this.NodeIdContext}, BrowseName={browseName}";
     }
 
     #endregion object

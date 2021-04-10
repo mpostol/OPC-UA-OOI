@@ -69,7 +69,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Assert.AreEqual(3, nodes.Count<NodeFactoryBase>());
         Dictionary<string, NodeFactoryBase> nodesDictionary = nodes.ToDictionary<NodeFactoryBase, string>(x => x.SymbolicName.Name);
         AddressSpaceContext asContext = addressSpace as AddressSpaceContext;
-        //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
         IEnumerable<IUANodeContext> allNodes = null;
         asContext.UTValidateAndExportModel(1, x => allNodes = x);
         Assert.IsNotNull(allNodes);
@@ -110,7 +109,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Assert.AreEqual(22, nodes.Count<NodeFactoryBase>());
         Dictionary<string, NodeFactoryBase> nodesDictionary = nodes.ToDictionary<NodeFactoryBase, string>(x => x.SymbolicName.Name);
         AddressSpaceContext asContext = addressSpace as AddressSpaceContext;
-        //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
         IEnumerable<IUANodeContext> allNodes = null;
         asContext.UTValidateAndExportModel(1, x => allNodes = x);
         Assert.IsNotNull(allNodes);

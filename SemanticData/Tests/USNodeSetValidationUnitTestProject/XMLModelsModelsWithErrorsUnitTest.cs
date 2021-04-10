@@ -301,9 +301,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Assert.AreEqual<int>(1, _log.TraceList.Count());
         _log.Clear();
         _as.ValidateAndExportModel(m_NameSpace);
-        Assert.AreEqual<int>(3, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-        Assert.AreEqual<string>(BuildError.DanglingReferenceTarget.Identifier, _log.TraceList[0].BuildError.Identifier);
-        Assert.AreEqual<string>(BuildError.DanglingReferenceTarget.Identifier, _log.TraceList[1].BuildError.Identifier);
+        Assert.AreEqual<int>(5, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+        Assert.AreEqual<string>(BuildError.NodeCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
+        Assert.AreEqual<string>(BuildError.NodeCannotBeNull.Identifier, _log.TraceList[1].BuildError.Identifier);
+        Assert.AreEqual<string>(BuildError.DanglingReferenceTarget.Identifier, _log.TraceList[2].BuildError.Identifier);
+        Assert.AreEqual<string>(BuildError.DanglingReferenceTarget.Identifier, _log.TraceList[3].BuildError.Identifier);
       }
     }
 

@@ -257,7 +257,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     //typeS
 
-    //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
     private class ValidationBuildErrorsHandling : IBuildErrorsHandling
     {
       public ValidationBuildErrorsHandling(Action<TraceMessage> traceEvent)
@@ -296,9 +295,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       IUAModelContext _modelContext = model.ParseUAModelContext(m_NamespaceTable, m_TraceEvent.TraceEvent);
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext.ModelUri}."));
-      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("AddressSpaceContext.ImportNodeSet - the context for the imported model is created and starting import nodes."));
       Dictionary<string, UANode> itemsDictionary = new Dictionary<string, UANode>();
-      //TODO Enhance/Improve node selection algorithm for ValidateAndExportModel #531
       foreach (UANode node in model.Items)
       {
         if (itemsDictionary.ContainsKey(node.NodeId))
@@ -349,7 +346,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       IValidator validator = new Validator(this, m_TraceEvent);
       //TODO Enhance/Improve node selection algorithm for ValidateAndExportModel #531
       IEnumerable<IUANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
-      List<IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
+      IEnumerable<IUANodeContext> undefindNodes = from _node in _stubs
+                                                  where Object.ReferenceEquals(_node.UANode, null)
+                                                  select _node;
+      foreach (IUANodeContext item in undefindNodes)
+        m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeCannotBeNull, $"the node {item.ToString()} is not defined in the UANodeSet model"));
+      List <IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Selected {_nodes.Count} types to be validated."));
       IUANodeBase _objects = TryGetUANodeContext(UAInformationModel.ObjectIds.ObjectsFolder);
       if (_objects is null)

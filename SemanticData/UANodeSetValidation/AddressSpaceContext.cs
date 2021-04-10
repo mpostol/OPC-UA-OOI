@@ -344,15 +344,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private void ValidateAndExportModel(int nameSpaceIndex)
     {
       IValidator validator = new Validator(this, m_TraceEvent);
-      //TODO Enhance/Improve node selection algorithm for ValidateAndExportModel #531
-      IEnumerable<IUANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
-      IEnumerable<IUANodeContext> undefindNodes = from _node in _stubs
-                                                  where Object.ReferenceEquals(_node.UANode, null)
-                                                  select _node;
+      IEnumerable<IUANodeContext> stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
+      IEnumerable<IUANodeContext> undefindNodes = from node in stubs
+                                                  where Object.ReferenceEquals(node.UANode, null)
+                                                  select node;
       foreach (IUANodeContext item in undefindNodes)
         m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeCannotBeNull, $"the node {item.ToString()} is not defined in the UANodeSet model"));
-      List <IUANodeContext> _nodes = (from _node in _stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
-      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Selected {_nodes.Count} types to be validated."));
+      List <IUANodeContext> nodes = (from _node in stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Selected {nodes.Count} types to be validated."));
       IUANodeBase _objects = TryGetUANodeContext(UAInformationModel.ObjectIds.ObjectsFolder);
       if (_objects is null)
         throw new ArgumentNullException("Cannot find ObjectsFolder in the standard information model");
@@ -361,35 +360,35 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                                                                                                      (x.TargetNode.NodeIdContext.NamespaceIndex == nameSpaceIndex))
                                                                                                      .Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Selected {_allInstances.Count<IUANodeContext>()} instances referenced by the ObjectsFolder to be validated."));
-      _nodes.AddRange(_allInstances);
-      foreach (IModelTableEntry _ns in ExportNamespaceTable)
+      nodes.AddRange(_allInstances);
+      foreach (IModelTableEntry modelTableEntry in ExportNamespaceTable)
       {
-        string _publicationDate = _ns.PublicationDate.HasValue ? _ns.PublicationDate.Value.ToShortDateString() : DateTime.UtcNow.ToShortDateString();
-        string _version = _ns.Version;
-        InformationModelFactory.CreateNamespace(_ns.ModelUri.ToString(), _publicationDate, _version);
+        string _publicationDate = modelTableEntry.PublicationDate.HasValue ? modelTableEntry.PublicationDate.Value.ToShortDateString() : DateTime.UtcNow.ToShortDateString();
+        string _version = modelTableEntry.Version;
+        InformationModelFactory.CreateNamespace(modelTableEntry.ModelUri.ToString(), _publicationDate, _version);
       }
-      foreach (IUANodeBase _item in _nodes)
+      foreach (IUANodeBase item in nodes)
       {
         try
         {
-          validator.ValidateExportNode(_item, InformationModelFactory);
+          validator.ValidateExportNode(item, InformationModelFactory);
         }
-        catch (Exception _ex)
+        catch (Exception ex)
         {
-          string msg = string.Format("Error caught while processing the node {0}. The message: {1} at {2}.", _item.UANode.NodeId, _ex.Message, _ex.StackTrace);
+          string msg = string.Format("Error caught while processing the node {0}. The message: {1} at {2}.", item.UANode.NodeId, ex.Message, ex.StackTrace);
           m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, msg));
         }
       }
-      string _msg = null;
+      string message = null;
       if (m_TraceEvent.Errors == 0)
       {
-        _msg = $"Finishing Validator.ValidateExportModel - the model contains {_nodes.Count} nodes and no errors/warnings reported";
-        m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage(_msg));
+        message = $"Finishing Validator.ValidateExportModel - the model contains {nodes.Count} nodes and no errors/warnings reported";
+        m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage(message));
       }
       else
       {
-        _msg = $"Finishing Validator.ValidateExportModel - the model contains {_nodes.Count} nodes and {m_TraceEvent.Errors} errors reported.";
-        m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.ModelContainsErrors, _msg));
+        message = $"Finishing Validator.ValidateExportModel - the model contains {nodes.Count} nodes and {m_TraceEvent.Errors} errors reported.";
+        m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.ModelContainsErrors, message));
       }
     }
 

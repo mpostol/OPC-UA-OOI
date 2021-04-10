@@ -137,7 +137,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="nodeFactory">The node container.</param>
     /// <param name="validator">The validator.</param>
     /// <exception cref="ArgumentNullException"><paramref name="nodeFactory"/> must not be null.</exception>
-    //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
     //TODO Import simple NodeSet2 file is incomplete #510
     void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, IValidator validator)
     {
@@ -332,8 +331,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     public override string ToString()
     {
-      string browseName = this.UANode == null ? String.Empty : this.UANode.BrowseName;
-      return $"NodeId={this.NodeIdContext}, BrowseName={browseName}";
+      string browseName = this.UANode == null ? String.Empty : $", BrowseName = {this.UANode.BrowseName}";
+      return $"NodeId={this.NodeIdContext}{browseName}";
     }
 
     #endregion object

@@ -257,7 +257,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     //typeS
 
-    //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
     private class ValidationBuildErrorsHandling : IBuildErrorsHandling
     {
       public ValidationBuildErrorsHandling(Action<TraceMessage> traceEvent)
@@ -347,7 +346,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       IValidator validator = new Validator(this, m_TraceEvent);
       //TODO Enhance/Improve node selection algorithm for ValidateAndExportModel #531
       IEnumerable<IUANodeContext> _stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
-      //TODO Add a warning that the AS contains nodes orphaned and inaccessible for browsing starting from the Root node #529
       IEnumerable<IUANodeContext> undefindNodes = from _node in _stubs
                                                   where Object.ReferenceEquals(_node.UANode, null)
                                                   select _node;

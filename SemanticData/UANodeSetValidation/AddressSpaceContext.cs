@@ -183,7 +183,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="namespaceIndex">Index of the namespace.</param>
     public string GetNamespace(ushort namespaceIndex)
     {
-      return m_NamespaceTable.GetURIatIndex(namespaceIndex).ModelUri.ToString();
+      return m_NamespaceTable.GetModelTableEntry(namespaceIndex).ModelUri.ToString();
     }
 
     /// <summary>
@@ -294,7 +294,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private Uri ImportNodeSet(UANodeSet model)
     {
       IUAModelContext _modelContext = model.ParseUAModelContext(m_NamespaceTable, m_TraceEvent.TraceEvent);
-      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext.ModelUri}."));
+      //TODO Import all dependencies for the model #575
+      //m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext.ModelUri}."));
       Dictionary<string, UANode> itemsDictionary = new Dictionary<string, UANode>();
       foreach (UANode node in model.Items)
       {
@@ -304,7 +305,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           ImportUANode(node);
       }
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Finishing AddressSpaceContext.ImportNodeSet - imported {model.Items.Length} nodes."));
-      return _modelContext.ModelUri;
+      //TODO Import all dependencies for the model #575
+      return m_NamespaceTable.DefaultModelURI; // _modelContext.ModelUri;
     }
 
     private void ImportUANode(UANode node)

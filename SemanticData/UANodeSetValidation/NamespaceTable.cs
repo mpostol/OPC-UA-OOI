@@ -38,20 +38,25 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return (ushort)_index;
     }
 
-    void IAddressSpaceURIRecalculate.UpadateModelOrAppend(IModelTableEntry model)
+    void IAddressSpaceURIRecalculate.UpadateModelOrAppend(IModelTableEntry model, bool defaultModel)
     {
       int index = GetURIIndex(model.ModelUri);
       if (index >= 0)
         modelsList[index] = model;
       else
+      {
         modelsList.Add(model);
+        index = modelsList.Count - 1;
+      }
+      if (defaultModel)
+        this.defaultModelIndex = index;
     }
 
     #endregion IAddressSpaceURIRecalculate
 
     #region Public Members
 
-    internal IModelTableEntry GetURIatIndex(ushort nsi)
+    internal IModelTableEntry GetModelTableEntry(ushort nsi)
     {
       if (nsi >= modelsList.Count)
         throw new ArgumentOutOfRangeException("namespace index", "Namespace index has not been registered");
@@ -64,6 +69,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     internal IEnumerable<IModelTableEntry> Models => modelsList;
+    internal int GetDefaultModelIndex => defaultModelIndex;
+    internal Uri DefaultModelURI => modelsList[defaultModelIndex].ModelUri;
 
     #endregion Public Members
 
@@ -72,6 +79,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //var
 
     private List<IModelTableEntry> modelsList = new List<IModelTableEntry>();
+    private int defaultModelIndex;
 
     //classes
     private class RolePermission : IRolePermission

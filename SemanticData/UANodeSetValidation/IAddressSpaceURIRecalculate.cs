@@ -24,6 +24,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="System.ArgumentNullException">URI is null.</exception>
     ushort GetURIIndexOrAppend(Uri URI);
 
-    void UpadateModelOrAppend(IModelTableEntry model);
+    /// <summary>
+    /// Updates the model or append it the existing collection.
+    /// </summary>
+    /// <param name="model">The model.</param>
+    /// <param name="defaultModel">if set to <c>true</c> it the default model, otherwise <c>false</c>.</param>
+    void UpadateModelOrAppend(IModelTableEntry model, bool defaultModel);
   }
 }

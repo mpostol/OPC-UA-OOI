@@ -499,7 +499,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       // lookup the namespace uri.
       string uri = nodeId.m_namespaceUri;
       if (nodeId.m_nodeId.NamespaceIndex != 0)
-        uri = currentNamespaces.GetURIatIndex(nodeId.m_nodeId.NamespaceIndex).ModelUri.ToString();
+        uri = currentNamespaces.GetModelTableEntry(nodeId.m_nodeId.NamespaceIndex).ModelUri.ToString();
       // translate the namespace uri.
       ushort namespaceIndex = 0;
       if (!String.IsNullOrEmpty(uri))

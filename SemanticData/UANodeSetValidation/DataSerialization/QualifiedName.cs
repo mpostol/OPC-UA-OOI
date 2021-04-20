@@ -333,7 +333,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       if (value == null || String.IsNullOrEmpty(value.Name))
         return false;
-      if (namespaceUris != null && namespaceUris.GetURIatIndex(value.NamespaceIndex) == null)
+      if (namespaceUris != null && namespaceUris.GetModelTableEntry(value.NamespaceIndex) == null)
         return false;
       return true;
     }

@@ -31,8 +31,8 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       {
         Console.WriteLine(string.Format("Program stopped by the exception: {0}", ex.Message));
       }
-      Console.Write("Press Enter to close this window.......");
-      Console.Read();
+      //Console.Write("Press Enter to close this window.......");
+      //Console.Read();
     }
     internal static void Run(string[] args)
     {

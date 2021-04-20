@@ -32,12 +32,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void GetURIatIndexTest()
     {
       NamespaceTable instance = new NamespaceTable();
-      Assert.AreEqual<Uri>(new Uri(Namespaces.OpcUa), instance.GetURIatIndex(0).ModelUri);
-      Assert.ThrowsException<ArgumentOutOfRangeException>(() => instance.GetURIatIndex(1));
+      Assert.AreEqual<Uri>(new Uri(Namespaces.OpcUa), instance.GetModelTableEntry(0).ModelUri);
+      Assert.ThrowsException<ArgumentOutOfRangeException>(() => instance.GetModelTableEntry(1));
       Assert.AreEqual(1, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest1")));
       Assert.AreEqual(2, ((IAddressSpaceURIRecalculate)instance).GetURIIndexOrAppend(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest2")));
-      Assert.AreEqual<Uri>(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest2"), instance.GetURIatIndex(2).ModelUri);
-      Assert.AreEqual<Uri>(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest1"), instance.GetURIatIndex(1).ModelUri);
+      Assert.AreEqual<Uri>(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest2"), instance.GetModelTableEntry(2).ModelUri);
+      Assert.AreEqual<Uri>(new Uri("http://opcfoundation.org/UA/GetURIatIndexTest1"), instance.GetModelTableEntry(1).ModelUri);
     }
 
     [TestMethod]
@@ -63,7 +63,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       ((IAddressSpaceURIRecalculate)instance).UpadateModelOrAppend(model1);
       IModelTableEntry model2 = ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1");
       ((IAddressSpaceURIRecalculate)instance).UpadateModelOrAppend(model2);
-      IModelTableEntry model3 = instance.GetURIatIndex(1);
+      IModelTableEntry model3 = instance.GetModelTableEntry(1);
       Assert.IsNotNull(model3);
       Assert.AreSame(model2, model3);
       Assert.AreNotSame(model1, model3);

@@ -81,7 +81,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
         return;
       AssemblyName _myAssembly = Assembly.GetExecutingAssembly().GetName();
       Console.WriteLine($"Address Space Prototyping (asp.exe) {_myAssembly.Version}");
-      Console.WriteLine("Copyright(c) 2019 Mariusz Postol");
+      Console.WriteLine("Copyright(c) 2021 Mariusz Postol");
       Console.WriteLine();
     }
   }

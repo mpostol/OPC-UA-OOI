@@ -16,6 +16,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// </summary>
   public interface IUAModelContext
   {
+    //TODO Import all dependencies for the model #575
     ///// <summary>
     ///// Gets the model URI.
     ///// </summary>

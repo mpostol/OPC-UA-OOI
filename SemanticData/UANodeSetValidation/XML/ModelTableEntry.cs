@@ -52,5 +52,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// </summary>
     /// <value>The version.</value>
     string IModelTableEntry.Version => Version;
+
+    /// <summary>
+    /// Gets the default model table entry.
+    /// </summary>
+    /// <param name="modelUri">The model URI.</param>
+    /// <returns>IModelTableEntry.</returns>
+    internal static IModelTableEntry GetDefaultModelTableEntry(string modelUri)
+    {
+      return new ModelTableEntry
+      {
+        AccessRestrictions = 0xC,
+        ModelUri = modelUri,
+        PublicationDate = DateTime.UtcNow.Date,
+        RequiredModel = null,
+        RolePermissions = new XML.RolePermission[] { new XML.RolePermission() },
+        Version = new Version(1, 0).ToString()
+      };
+    }
   }
 }

@@ -12,7 +12,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Interface IAddressSpaceURIRecalculate is used to recalculate indexes in the imported model
   /// </summary>
-  internal interface IAddressSpaceURIRecalculate
+  internal interface INamespaceTable
   {
     /// <summary>
     /// Searches for an index that matches the <paramref name="URI"/>, and returns the zero-based index of the first occurrence within the namespace table.

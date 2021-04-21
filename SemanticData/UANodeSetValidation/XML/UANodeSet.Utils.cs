@@ -17,7 +17,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   {
     #region API
 
-    internal IUAModelContext ParseUAModelContext(IAddressSpaceURIRecalculate addressSpaceContext, Action<TraceMessage> traceEvent)
+    internal IUAModelContext ParseUAModelContext(INamespaceTable addressSpaceContext, Action<TraceMessage> traceEvent)
     {
       UAModelContext model = UAModelContext.ParseUANodeSetModelHeader(this, addressSpaceContext, traceEvent);
       this.RecalculateNodeIds(model, traceEvent);

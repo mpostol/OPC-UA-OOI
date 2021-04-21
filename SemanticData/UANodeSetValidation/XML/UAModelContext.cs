@@ -25,7 +25,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// <exception cref="ArgumentNullException">buildErrorsHandlingLog
     /// or
     /// addressSpaceContext</exception>
-    internal static UAModelContext ParseUANodeSetModelHeader(IUANodeSetModelHeader modelHeader, IAddressSpaceURIRecalculate addressSpaceContext, Action<TraceMessage> traceEvent)
+    internal static UAModelContext ParseUANodeSetModelHeader(IUANodeSetModelHeader modelHeader, INamespaceTable addressSpaceContext, Action<TraceMessage> traceEvent)
     {
       UAModelContext context2Return = new UAModelContext(addressSpaceContext, traceEvent, modelHeader);
       context2Return.Parse(modelHeader, addressSpaceContext);
@@ -101,13 +101,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     private readonly Action<TraceMessage> _logTraceMessage;
     private readonly Dictionary<string, string> _aliasesDictionary = new Dictionary<string, string>();
     private List<string> _namespaceUris = new List<string>();
-    private IAddressSpaceURIRecalculate _addressSpaceContext { get; }
+    private INamespaceTable _addressSpaceContext { get; }
     private readonly List<QualifiedName> UAReferenceTypNames = new List<QualifiedName>();
 
     private static Random _randomNumber = new Random();
 
     //methods
-    private UAModelContext(IAddressSpaceURIRecalculate addressSpaceContext, Action<TraceMessage> traceEvent, IUANodeSetModelHeader modelHeader)
+    private UAModelContext(INamespaceTable addressSpaceContext, Action<TraceMessage> traceEvent, IUANodeSetModelHeader modelHeader)
     {
       _modelHeader = modelHeader ?? throw new ArgumentNullException(nameof(modelHeader));
       if (modelHeader.ServerUris != null && modelHeader.ServerUris.Length > 0)
@@ -118,7 +118,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       _addressSpaceContext = addressSpaceContext ?? throw new ArgumentNullException(nameof(addressSpaceContext));
     }
 
-    private void Parse(IUANodeSetModelHeader modelHeader, IAddressSpaceURIRecalculate addressSpaceContext)
+    private void Parse(IUANodeSetModelHeader modelHeader, INamespaceTable addressSpaceContext)
     {
       _namespaceUris = Parse(modelHeader.NamespaceUris);
       //ModelUri =
@@ -150,7 +150,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     }
 
     //TODO Import all dependencies for the model #575
-    private Uri[] Parse(ModelTableEntry[] models, IAddressSpaceURIRecalculate addressSpaceContext)
+    private Uri[] Parse(ModelTableEntry[] models, INamespaceTable addressSpaceContext)
     {
       if (models == null || models.Length == 0)
       {

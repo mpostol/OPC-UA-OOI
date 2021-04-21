@@ -255,7 +255,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
 
-    //typeS
+    //types
 
     private class ValidationBuildErrorsHandling : IBuildErrorsHandling
     {

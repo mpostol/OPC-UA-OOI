@@ -31,7 +31,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.IsNotNull(instance);
       Assert.IsNotNull(instance.NamespaceUris);
       Assert.IsNotNull(instance.Models);
-      Mock<IAddressSpaceURIRecalculate> asbcMock = new Mock<IAddressSpaceURIRecalculate>();
+      Mock<INamespaceTable> asbcMock = new Mock<INamespaceTable>();
       asbcMock.Setup(x => x.GetURIIndexOrAppend(new Uri(@"http://cas.eu/UA/CommServer/UnitTests/ReferenceTest"))).Returns(1);
       List<TraceMessage> trace = new List<TraceMessage>();
       IUAModelContext model = instance.ParseUAModelContext(asbcMock.Object, x => trace.Add(x));
@@ -47,7 +47,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.IsNotNull(instance);
       Assert.IsNotNull(instance.NamespaceUris);
       Assert.IsNotNull(instance.Models);
-      Mock<IAddressSpaceURIRecalculate> asbcMock = new Mock<IAddressSpaceURIRecalculate>();
+      Mock<INamespaceTable> asbcMock = new Mock<INamespaceTable>();
       asbcMock.Setup(x => x.GetURIIndexOrAppend(It.IsAny<Uri>()));
       List<TraceMessage> trace = new List<TraceMessage>();
       IUAModelContext model = instance.ParseUAModelContext(asbcMock.Object, x => trace.Add(x));

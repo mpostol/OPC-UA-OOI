@@ -53,24 +53,26 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         this.defaultModelIndex = index;
     }
 
-    #endregion IAddressSpaceURIRecalculate
-
-    #region Public Members
-
-    internal IModelTableEntry GetModelTableEntry(ushort nsi)
+    public IModelTableEntry GetModelTableEntry(ushort nsi)
     {
       if (nsi >= modelsList.Count)
         throw new ArgumentOutOfRangeException("namespace index", "Namespace index has not been registered");
       return modelsList[nsi];
     }
 
-    internal int GetURIIndex(Uri URI)
+    public int GetURIIndex(Uri URI)
     {
       return modelsList.FindIndex(x => x.ModelUri == URI);
     }
 
+    #endregion IAddressSpaceURIRecalculate
+
+    #region Public Members
+
     internal IEnumerable<IModelTableEntry> Models => modelsList;
     internal Uri DefaultModelURI => modelsList[defaultModelIndex].ModelUri;
+
+    int INamespaceTable.DefaultModelURI => defaultModelIndex;
 
     #endregion Public Members
 

@@ -36,9 +36,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     byte IModelTableEntry.AccessRestrictions => AccessRestrictions;
 
     /// <summary>
-    /// Gets or sets the model URI. The URI for the model. This URI should be one of the entries in the <see cref="NamespaceTable" /> table.
+    /// Gets the <see cref="Uri"/> for the model. This URI should be one of the entries in the namespace table.
     /// </summary>
-    /// <value>The model URI.</value>
+    /// <value>The model <see cref="Uri"/>.</value>
     Uri IModelTableEntry.ModelUri => new Uri(ModelUri);
 
     /// <summary>

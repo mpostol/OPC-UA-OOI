@@ -12,7 +12,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Interface IAddressSpaceURIRecalculate is used to recalculate indexes in the imported model
   /// </summary>
-  internal interface INamespaceTable
+  public interface INamespaceTable
   {
     /// <summary>
     /// Searches for an index that matches the <paramref name="URI"/>, and returns the zero-based index of the first occurrence within the namespace table.
@@ -30,5 +30,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="model">The model.</param>
     /// <param name="defaultModel">if set to <c>true</c> it the default model, otherwise <c>false</c>.</param>
     void UpadateModelOrAppend(IModelTableEntry model, bool defaultModel);
+
+    IModelTableEntry GetModelTableEntry(ushort namespaceIndex);
+
+    int GetURIIndex(Uri URI);
+    int DefaultModelURI { get; }
   }
 }

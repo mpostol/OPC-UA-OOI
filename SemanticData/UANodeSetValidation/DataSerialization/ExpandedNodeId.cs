@@ -482,7 +482,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
 
     #endregion public string Format()
 
-    #region statioc Parse
+    #region static Parse
 
     /// <summary>
     /// Parses the <paramref name="text" /> to recover an instance of the <see cref="ExpandedNodeId" />.
@@ -492,7 +492,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <param name="currentNamespaces">The current namespaces table.</param>
     /// <param name="targetNamespaces">The target namespaces table.</param>
     /// <returns>An instance of the <see cref="ExpandedNodeId"/> recovered from the string representation.</returns>
-    public static ExpandedNodeId Parse(string text, NamespaceTable currentNamespaces, NamespaceTable targetNamespaces)
+    internal static ExpandedNodeId Parse(string text, INamespaceTable currentNamespaces, INamespaceTable targetNamespaces)
     {
       // parse the string.
       ExpandedNodeId nodeId = Parse(text);
@@ -791,7 +791,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// </remarks>
     /// <param name="namespaceTable">The namespace table that contains all the namespaces needed to resolve the namespace index as encoded within this object.</param>
     /// <param name="nodeId">The ExpandedNodeId to convert to a NodeId</param>
-    public static NodeId ToNodeId(ExpandedNodeId nodeId, NamespaceTable namespaceTable)
+    internal static NodeId ToNodeId(ExpandedNodeId nodeId, INamespaceTable namespaceTable)
     {
       // check for null.
       if (nodeId == null)
@@ -850,7 +850,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <param name="text">The text to parse.</param>
     /// <returns>The local identifier.</returns>
     /// <exception cref="ServiceResultException">Thrown if the namespace URI is not in the namespace table.</exception>
-    public static NodeId Parse(string text, NamespaceTable namespaceUris)
+    internal static NodeId Parse(string text, INamespaceTable namespaceUris)
     {
       ExpandedNodeId nodeId = ExpandedNodeId.Parse(text);
       if (!nodeId.IsAbsolute)

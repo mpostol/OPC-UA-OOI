@@ -75,9 +75,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     //TODO Import all dependencies for the model #575
     public void RegisterUAReferenceType(QualifiedName browseName)
     {
-      if (browseName.NamespaceIndex != _addressSpaceContext.DefaultModelURI)
+      if (browseName.NamespaceIndex != _addressSpaceContext.DefaultModelIndex)
       {
-        string message = $"Wrong {nameof(QualifiedName.NamespaceIndex)} of the {browseName}. The {nameof(UAReferenceType)} should be defined by the default model {_addressSpaceContext.DefaultModelURI}";
+        string message = $"Wrong {nameof(QualifiedName.NamespaceIndex)} of the {browseName}. The {nameof(UAReferenceType)} should be defined by the default model {_addressSpaceContext.DefaultModelIndex}";
         _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.BrowseNameReferenceTypeScope, message));
       }
       else if (UAReferenceTypNames.Contains(browseName))

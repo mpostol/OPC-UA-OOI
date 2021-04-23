@@ -33,7 +33,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.IsNotNull(instance.Models);
       Mock<INamespaceTable> asbcMock = new Mock<INamespaceTable>();
       asbcMock.Setup(x => x.GetURIIndexOrAppend(new Uri(@"http://cas.eu/UA/CommServer/UnitTests/ReferenceTest"))).Returns(1);
-      asbcMock.Setup(x => x.DefaultModelURI).Returns(1);
+      asbcMock.Setup(x => x.DefaultModelIndex).Returns(1);
       List<TraceMessage> trace = new List<TraceMessage>();
       IUAModelContext model = instance.ParseUAModelContext(asbcMock.Object, y => { }, x => trace.Add(x));
       Assert.IsNotNull(model);

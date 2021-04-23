@@ -232,7 +232,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Uri randomURI = null;
       asMock.Setup(x => x.GetURIIndexOrAppend(It.Is<Uri>(z => z.ToString().Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown")))).Returns<Uri>(x => { randomURI = x; return 20; });
       asMock.Setup(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>(), It.IsAny<bool>()));
-      asMock.Setup(x => x.DefaultModelURI).Returns(10);
+      asMock.Setup(x => x.DefaultModelIndex).Returns(10);
       List<TraceMessage> trace = new List<TraceMessage>();
       Action<TraceMessage> logMock = z => trace.Add(z);
       UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, x => throw new NotImplementedException(), logMock);

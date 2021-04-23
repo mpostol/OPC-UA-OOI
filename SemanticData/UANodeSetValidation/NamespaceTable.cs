@@ -72,7 +72,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     internal IEnumerable<IModelTableEntry> Models => modelsList;
     internal Uri DefaultModelURI => modelsList[defaultModelIndex].ModelUri;
 
-    int INamespaceTable.DefaultModelURI => defaultModelIndex;
+    int INamespaceTable.DefaultModelIndex => defaultModelIndex;
 
     #endregion Public Members
 

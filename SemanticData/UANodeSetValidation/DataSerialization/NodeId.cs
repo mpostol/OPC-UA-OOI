@@ -486,7 +486,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <param name="namespaceTable">The table to use for the URI lookup.</param>
     /// <returns>A local NodeId</returns>
     /// <exception cref="ServiceResultException">Thrown when the namespace cannot be found</exception>
-    public static NodeId Create(object identifier, string namespaceUri, NamespaceTable namespaceTable)
+    public static NodeId Create(object identifier, string namespaceUri, INamespaceTable namespaceTable)
     {
       int index = -1;
       if (namespaceTable != null)

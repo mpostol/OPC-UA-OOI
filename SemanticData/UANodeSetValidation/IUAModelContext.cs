@@ -16,11 +16,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// </summary>
   public interface IUAModelContext
   {
-    /// <summary>
-    /// Gets the model URI.
-    /// </summary>
-    /// <value>The model URI.</value>
-    Uri ModelUri { get; }
+    //TODO Import all dependencies for the model #575
+    ///// <summary>
+    ///// Gets the model URI.
+    ///// </summary>
+    ///// <value>The model URI.</value>
+    //Uri ModelUri { get; }
 
     /// <summary>
     /// Registers the <see cref="QualifiedName"/> of ReferenceType Node.

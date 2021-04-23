@@ -15,6 +15,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Exports the current namespace table containing all namespaces that have been registered.
     /// </summary>
     /// <value>An instance of <see cref="IEnumerable{IModelTableEntry}"/> containing.</value>
-    IEnumerable<IModelTableEntry> ExportNamespaceTable { get; }
+    // TODO Import all dependencies for the model #575
+    //IEnumerable<IModelTableEntry> ExportNamespaceTable { get; }
   }
 }

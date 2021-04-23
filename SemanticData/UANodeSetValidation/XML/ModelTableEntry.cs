@@ -36,9 +36,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     byte IModelTableEntry.AccessRestrictions => AccessRestrictions;
 
     /// <summary>
-    /// Gets or sets the model URI. The URI for the model. This URI should be one of the entries in the <see cref="NamespaceTable" /> table.
+    /// Gets the <see cref="Uri"/> for the model. This URI should be one of the entries in the namespace table.
     /// </summary>
-    /// <value>The model URI.</value>
+    /// <value>The model <see cref="Uri"/>.</value>
     Uri IModelTableEntry.ModelUri => new Uri(ModelUri);
 
     /// <summary>
@@ -52,5 +52,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// </summary>
     /// <value>The version.</value>
     string IModelTableEntry.Version => Version;
+
+    /// <summary>
+    /// Gets the default model table entry.
+    /// </summary>
+    /// <param name="modelUri">The model URI.</param>
+    /// <returns>IModelTableEntry.</returns>
+    internal static IModelTableEntry GetDefaultModelTableEntry(string modelUri)
+    {
+      return new ModelTableEntry
+      {
+        AccessRestrictions = 0xC,
+        ModelUri = modelUri,
+        PublicationDate = DateTime.UtcNow.Date,
+        RequiredModel = null,
+        RolePermissions = new XML.RolePermission[] { new XML.RolePermission() },
+        Version = new Version(1, 0).ToString()
+      };
+    }
   }
 }

@@ -68,7 +68,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers
       Mock<IUAModelContext> modelMock = new Mock<IUAModelContext>();
       modelMock.Setup(x => x.ImportNodeId(It.IsAny<string>(), It.IsAny<Action<TraceMessage>>())).Returns<string, Action<TraceMessage>>((q, w) => NodeId.Parse(q));
       modelMock.Setup(x => x.ImportBrowseName(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Action<TraceMessage>>())).Returns<string, string, Action<TraceMessage>>((a, b, c) => (QualifiedName.Parse(a), NodeId.Parse(b)));
-      modelMock.Setup(x => x.ModelUri);
+      //TODO Import all dependencies for the model #575
+      //modelMock.Setup(x => x.ModelUri);
       UAObject toTest = TestData.CreateUAObject();
       node.RecalculateNodeIds(modelMock.Object, XML => Assert.Fail());
       return node;

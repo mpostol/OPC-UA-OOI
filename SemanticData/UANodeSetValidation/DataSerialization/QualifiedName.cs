@@ -303,7 +303,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <summary>
     /// Converts an expanded node id to a node id using a namespace table.
     /// </summary>
-    public static QualifiedName Create(string name, string namespaceUri, NamespaceTable namespaceTable)
+    internal static QualifiedName Create(string name, string namespaceUri, INamespaceTable namespaceTable)
     {
       // check for null.
       if (String.IsNullOrEmpty(name))
@@ -329,11 +329,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <param name="value">The name to be validated.</param>
     /// <param name="namespaceUris">The table namespaces known to the server.</param>
     /// <returns>True if the name is value.</returns>
-    public static bool IsValid(QualifiedName value, NamespaceTable namespaceUris)
+    internal static bool IsValid(QualifiedName value, INamespaceTable namespaceUris)
     {
       if (value == null || String.IsNullOrEmpty(value.Name))
         return false;
-      if (namespaceUris != null && namespaceUris.GetURIatIndex(value.NamespaceIndex) == null)
+      if (namespaceUris != null && namespaceUris.GetModelTableEntry(value.NamespaceIndex) == null)
         return false;
       return true;
     }

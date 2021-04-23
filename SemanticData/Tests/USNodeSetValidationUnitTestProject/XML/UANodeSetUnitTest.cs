@@ -31,13 +31,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.IsNotNull(instance);
       Assert.IsNotNull(instance.NamespaceUris);
       Assert.IsNotNull(instance.Models);
-      Mock<IAddressSpaceURIRecalculate> asbcMock = new Mock<IAddressSpaceURIRecalculate>();
+      Mock<INamespaceTable> asbcMock = new Mock<INamespaceTable>();
       asbcMock.Setup(x => x.GetURIIndexOrAppend(new Uri(@"http://cas.eu/UA/CommServer/UnitTests/ReferenceTest"))).Returns(1);
+      asbcMock.Setup(x => x.DefaultModelIndex).Returns(1);
       List<TraceMessage> trace = new List<TraceMessage>();
-      IUAModelContext model = instance.ParseUAModelContext(asbcMock.Object, x => trace.Add(x));
+      IUAModelContext model = instance.ParseUAModelContext(asbcMock.Object, y => { }, x => trace.Add(x));
       Assert.IsNotNull(model);
       Assert.AreEqual<int>(0, trace.Count);
-      asbcMock.Verify(x => x.GetURIIndexOrAppend(It.IsAny<Uri>()), Times.Exactly(3));
+      asbcMock.Verify(x => x.GetURIIndexOrAppend(It.IsAny<Uri>()), Times.Exactly(2));
     }
 
     [TestMethod]
@@ -47,13 +48,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.IsNotNull(instance);
       Assert.IsNotNull(instance.NamespaceUris);
       Assert.IsNotNull(instance.Models);
-      Mock<IAddressSpaceURIRecalculate> asbcMock = new Mock<IAddressSpaceURIRecalculate>();
+      Mock<INamespaceTable> asbcMock = new Mock<INamespaceTable>();
       asbcMock.Setup(x => x.GetURIIndexOrAppend(It.IsAny<Uri>()));
       List<TraceMessage> trace = new List<TraceMessage>();
-      IUAModelContext model = instance.ParseUAModelContext(asbcMock.Object, x => trace.Add(x));
+      IUAModelContext model = instance.ParseUAModelContext(asbcMock.Object, y => { }, x => trace.Add(x));
       Assert.IsNotNull(model);
       Assert.AreEqual<int>(0, trace.Count);
-      asbcMock.Verify(x => x.GetURIIndexOrAppend(It.IsAny<Uri>()), Times.Once);
+      asbcMock.Verify(x => x.GetURIIndexOrAppend(It.IsAny<Uri>()), Times.Never);
     }
 
     [TestMethod]

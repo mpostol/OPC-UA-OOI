@@ -32,7 +32,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Mock<IUAModelContext> modelMock = new Mock<IUAModelContext>();
       modelMock.Setup(x => x.ImportNodeId(It.IsAny<string>(), It.IsAny<Action<TraceMessage>>())).Returns<string, Action<TraceMessage>>((q, w) => NodeId.Parse(q));
       modelMock.Setup(x => x.ImportBrowseName(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Action<TraceMessage>>())).Returns<string, string, Action<TraceMessage>>((a, b, c) => (QualifiedName.Parse(a), NodeId.Parse(b)));
-      modelMock.Setup(x => x.ModelUri);
+      //modelMock.Setup(x => x.ModelUri);
       UAObject toTest = TestData.CreateUAObject();
       toTest.RecalculateNodeIds(modelMock.Object, XML => Assert.Fail());
       Assert.IsNotNull(toTest.NodeIdNodeId);
@@ -41,7 +41,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<string>("1:NewUAObject", toTest.BrowseNameQualifiedName.ToString());
       modelMock.Verify(x => x.ImportBrowseName(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Action<TraceMessage>>()), Times.Once);
       modelMock.Verify(x => x.ImportNodeId(It.IsAny<string>(), It.IsAny<Action<TraceMessage>>()), Times.Exactly(5));
-      modelMock.Verify(x => x.ModelUri, Times.Never);
+      //modelMock.Verify(x => x.ModelUri, Times.Never);
 
       Assert.IsNotNull(toTest.References[0].ReferenceTypeNodeid);
       Assert.IsNotNull(toTest.References[1].ReferenceTypeNodeid);

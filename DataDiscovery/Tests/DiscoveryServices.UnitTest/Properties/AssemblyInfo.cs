@@ -1,12 +1,9 @@
-﻿//_______________________________________________________________
-//  Title   : Assembly info for: UAOOI.DataDiscovery.DiscoveryServices.UnitTest
-//  System  : Microsoft VisualStudio 2015 / C#
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021 Mariusz Postol LODZ POLAND
-//  +48 608 619 899
-//  mpostol@cas.eu
-//  https://github.com/mpostol/OPC-UA-OOI
-//_______________________________________________________________
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System.Reflection;
 using System.Runtime.CompilerServices;

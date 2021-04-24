@@ -1,14 +1,11 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ output extension=".cs" #>
-//_______________________________________________________________
-//  Title   : Assembly info for: <#=m_AssemblyTitle#>
-//  System  : Microsoft VisualStudio 2015 / C#
+//__________________________________________________________________________________________________
 //
-//  <#=AssemblyCopyright#>
-//  <#=Phone#>
-//  <#=Email#>
-//  <#=Url#>
-//_______________________________________________________________
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System.Reflection;
 using System.Runtime.CompilerServices;

@@ -1,4 +1,10 @@
-﻿
+﻿//__________________________________________________________________________________________________
+//
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
@@ -11,7 +17,6 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest
   [TestClass]
   public class DataDiscoveryServicesUnitTest
   {
-
     [TestMethod]
     public void RGetHTTPResponseAsyncTestMethod()
     {
@@ -39,6 +44,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest
         Assert.AreEqual<int>(3, _messages);
       }
     }
+
     [TestMethod]
     [ExpectedException(typeof(System.AggregateException))]
     public void GetHTTPResponseAsyncRetryCountErrorTestMethod()
@@ -49,6 +55,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest
         _service.GetHTTPResponse<DomainDescriptor>(new Uri("http://localhost/alfa.bravo.xml"), DebugLog, x => _tc = x);
       }
     }
+
     [TestMethod]
     public void ResolveDomainModelAsyncTestMethod()
     {
@@ -62,12 +69,15 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest
     }
 
     //tests instrumentation
-    private Uri m_RootUrl = new Uri(@"https://raw.githubusercontent.com/mpostol/OPC-UA-OOI/master/DataDiscovery/Tests/DiscoveryServices.UnitTest/TestData/root.zone/DomainDescriptor.xml");
-    private Uri m_ModelUri = new Uri(@"http://commsvr.com/UA/Examples/BoilersSet");
+    private readonly Uri m_RootUrl = new Uri(@"https://raw.githubusercontent.com/mpostol/OPC-UA-OOI/master/DataDiscovery/Tests/DiscoveryServices.UnitTest/TestData/root.zone/DomainDescriptor.xml");
+
+    private readonly Uri m_ModelUri = new Uri(@"http://commsvr.com/UA/Examples/BoilersSet");
+
     private static void DebugLog(string message, TraceEventType eventType, Priority priority)
     {
       Debug.WriteLine($"ResolveDomainModelAsync log: message: {message}, level: {eventType}, priority: {priority}");
     }
+
     private class LocalDataDiscoveryServices : DataDiscoveryServices
     {
       internal void AreEqualsDomainDescriptors(DomainDescriptor _rootDomainDescriptor, Uri address, Action<string, TraceEventType, Priority> debugLog)
@@ -78,11 +88,8 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest
         Assert.AreEqual<string>(_rootDomainDescriptor.Description, _tc.Description);
         Assert.AreEqual<RecordType>(_rootDomainDescriptor.NextStepRecordType, _tc.NextStepRecordType);
         Assert.AreEqual<String>(_rootDomainDescriptor.UrlPattern, _tc.UrlPattern);
-        debugLog($"Finished {nameof(AreEqualsDomainDescriptors)} succesfully", TraceEventType.Verbose, Priority.None);
+        debugLog($"Finished {nameof(AreEqualsDomainDescriptors)} successfully", TraceEventType.Verbose, Priority.None);
       }
-
     }
-
-
   }
 }

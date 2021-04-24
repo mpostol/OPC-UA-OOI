@@ -7,7 +7,7 @@
 
 using System;
 using UAOOI.SemanticData.BuildingErrorsHandling;
-
+//TODO BuildErrorsHandling - review the code #578
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
   public class BuildErrorsHandling : IBuildErrorsHandling

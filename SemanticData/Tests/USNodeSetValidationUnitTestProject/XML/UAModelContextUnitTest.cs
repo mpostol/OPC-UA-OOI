@@ -225,7 +225,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
           new NodeIdAlias() { Alias = "HasSubtype", Value = "i=45" },
           new NodeIdAlias() { Alias = "Boolean", Value = "ns=1;i=1" } },
         NamespaceUris = new string[] { "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" },
-        Models = new ModelTableEntry[] { new ModelTableEntry() { ModelUri = "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" } }
+        Models = new ModelTableEntry[] { new ModelTableEntry() { ModelUri = "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest", RequiredModel = null } }
       };
       Mock<INamespaceTable> asMock = new Mock<INamespaceTable>();
       asMock.Setup(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"))).Returns(10);
@@ -258,7 +258,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     [TestMethod]
     public void ParseUANodeSetModelHeaderCallBack()
     {
-      Assert.Inconclusive("ParseUANodeSetModelHeader call back to load dependencies must be tested");
+      IUANodeSetModelHeader nodeSet = new UANodeSet
+      {
+        Aliases = new NodeIdAlias[] {
+          new NodeIdAlias() { Alias = "HasSubtype", Value = "i=45" },
+          new NodeIdAlias() { Alias = "Boolean", Value = "ns=1;i=1" } },
+        NamespaceUris = new string[] { "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" },
+        Models = new ModelTableEntry[] { new ModelTableEntry() { ModelUri = "http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest",
+                                                                 RequiredModel = new ModelTableEntry[]{ new ModelTableEntry(){ ModelUri = "http://a.b.c.com" } } }
+                                                                }
+      };
+      Mock<INamespaceTable> asMock = new Mock<INamespaceTable>();
+      List<TraceMessage> trace = new List<TraceMessage>();
+      Action<TraceMessage> logMock = z => trace.Add(z);
+      List<ModelTableEntry> dependencies = new List<ModelTableEntry>();
+      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, x => dependencies.Add(x), logMock);
+      Assert.AreEqual<int>(1, dependencies.Count);
+      Assert.AreEqual<string>("http://a.b.c.com", dependencies[0].ModelUri);
     }
   }
 }

@@ -1,4 +1,10 @@
-﻿
+﻿//__________________________________________________________________________________________________
+//
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
+
 using System;
 using System.Xml;
 using System.Xml.Serialization;
@@ -6,7 +12,7 @@ using System.Xml.Serialization;
 namespace UAOOI.DataDiscovery.DiscoveryServices.Models
 {
   /// <summary>
-  /// Class DomainModel - domain description holder. 
+  /// Class DomainModel - domain description holder.
   /// </summary>
   /// <remarks>
   /// Domain is a collection of data over which an owner has control. It may be used to describe:
@@ -15,8 +21,8 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.Models
   /// </remarks>
   public partial class DomainModel
   {
-
     #region API
+
     /// <summary>
     /// Gets or sets the URI of the domain.
     /// </summary>
@@ -24,15 +30,10 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.Models
     [XmlIgnore]
     public Uri DomainModelUri
     {
-      get
-      {
-        return new Uri(DomainModelUriString);
-      }
-      set
-      {
-        DomainModelUriString = value.ToString();
-      }
+      get => new Uri(DomainModelUriString);
+      set => DomainModelUriString = value.ToString();
     }
+
     /// <summary>
     /// Gets or sets the unique name of the domain.
     /// </summary>
@@ -40,36 +41,17 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.Models
     [XmlIgnore]
     public Guid DomainModelGuid
     {
-      get
-      {
-        return XmlConvert.ToGuid(DomainModelGuidString);
-      }
-      set
-      {
-        DomainModelGuidString = XmlConvert.ToString(value);
-      }
+      get => XmlConvert.ToGuid(DomainModelGuidString);
+      set => DomainModelGuidString = XmlConvert.ToString(value);
     }
+
     /// <summary>
     /// Gets or sets the universal discovery service locator - this URL (REST call is assigned by the resolver).
     /// </summary>
     /// <value>The universal discovery service locator.</value>
     [XmlIgnore]
-    public string UniversalDiscoveryServiceLocator
-    {
-      get
-      {
-        return this.universalDiscoveryServiceLocatorField;
-      }
-      set
-      {
-        this.universalDiscoveryServiceLocatorField = value;
-      }
-    }
-    #endregion
+    public string UniversalDiscoveryServiceLocator { get; set; }
 
-    #region private
-    private string universalDiscoveryServiceLocatorField;
-    #endregion
-
+    #endregion API
   }
 }

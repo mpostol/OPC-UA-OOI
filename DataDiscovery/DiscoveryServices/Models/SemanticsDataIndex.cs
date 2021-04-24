@@ -1,7 +1,12 @@
-﻿
+﻿//__________________________________________________________________________________________________
+//
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
+
 namespace UAOOI.DataDiscovery.DiscoveryServices.Models
 {
-
   /// <summary>
   /// Class SemanticsDataIndex - provides description of a set of data items representing the current state of a selected object uniquely named by the <see cref="SemanticsDataIndex.SymbolicName"/>.
   /// </summary>
@@ -10,5 +15,4 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.Models
   /// <see cref="SemanticsDataIndex.Index"/> is used to replace the symbolic name with the purpose of optimization of the data transfer.
   /// </remarks>
   public partial class SemanticsDataIndex { }
-
 }

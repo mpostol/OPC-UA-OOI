@@ -1,9 +1,14 @@
-﻿
+﻿//__________________________________________________________________________________________________
+//
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
+
 using UAOOI.DataDiscovery.DiscoveryServices.Models;
 
 namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest.TestData
 {
-
   internal static class DomainDescriptorFactory
   {
     internal static DomainDescriptor GetRootDomainDescriptor()
@@ -15,6 +20,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest.TestData
         UrlPattern = "https://raw.githubusercontent.com/mpostol/OPC-UA-OOI/master/DataDiscovery/Tests/DiscoveryServices.UnitTest/TestData/root.zone/#authority#/DomainDescriptor.xml"
       };
     }
+
     internal static DomainDescriptor Iteration1DomainDescriptor()
     {
       return new DomainDescriptor()
@@ -24,6 +30,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest.TestData
         UrlPattern = "https://raw.githubusercontent.com/mpostol/OPC-UA-OOI/master/DataDiscovery/Tests/DiscoveryServices.UnitTest/TestData/root.zone/#authority#/#path#/DomainDescriptor.xml"
       };
     }
+
     internal static DomainDescriptor Iteration2DomainDescriptor()
     {
       return new DomainDescriptor()
@@ -33,6 +40,5 @@ namespace UAOOI.DataDiscovery.DiscoveryServices.UnitTest.TestData
         UrlPattern = "https://raw.githubusercontent.com/mpostol/OPC-UA-OOI/master/DataDiscovery/Tests/DiscoveryServices.UnitTest/TestData/root.zone/#authority#/#path#/DomainModel.xml"
       };
     }
-
   }
 }

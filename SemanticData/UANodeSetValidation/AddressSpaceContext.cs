@@ -23,7 +23,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// Class AddressSpaceContext - responsible to manage all nodes in the OPC UA Address Space.
   /// </summary>
   //TODO Import all dependencies for the model #575
-  internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext, IAddressSpaceValidationContext//, IAddressSpaceURIRecalculate
+  internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext
   {
     #region constructor
 
@@ -295,10 +295,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //methods
     private void LoadModel(ModelTableEntry model)
     {
-      if (m_NamespaceTable.GetURIIndex(new UriBuilder(model.ModelUri).Uri) >= 0)
+      string modelUri = (model ?? throw new ArgumentNullException()).ModelUri;
+      if (m_NamespaceTable.GetURIIndex(new UriBuilder(modelUri).Uri) >= 0)
         return;
-      //TODO Import all dependencies for the model #575
-      throw new NotImplementedException();
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Loading required UANodeSet for Uri={modelUri}"));
+      UANodeSet requiredModel = Discovery.Instance.LoadUANodeSet(modelUri);
+      if (requiredModel == null)
+        m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"An error occurred while loading the UANodeSet document."));
+      ImportNodeSet(requiredModel, LoadModel);
     }
 
     private Uri ImportNodeSet(UANodeSet model, Action<ModelTableEntry> loadDependency)

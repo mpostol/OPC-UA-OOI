@@ -1,12 +1,9 @@
-﻿//_______________________________________________________________
-//  Title   : Assembly info for: UAOOI.DataDiscovery.DiscoveryServices.UnitTest
-//  System  : Microsoft VisualStudio 2015 / C#
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021 Mariusz Postol LODZ POLAND
-//  +48 608 619 899
-//  mpostol@cas.eu
-//  https://github.com/mpostol/OPC-UA-OOI
-//_______________________________________________________________
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -21,8 +18,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("Object Oriented Internet")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("4.0.1.*")]
-[assembly: AssemblyFileVersion("4.0.1")]
+[assembly: AssemblyVersion("4.0.2.*")]
+[assembly: AssemblyFileVersion("4.0.2")]
 [assembly: InternalsVisibleTo(
   "UAOOI.DataDiscovery.DiscoveryServices.UnitTest, PublicKey=" +
     "00240000048000009400000006020000002400005253413100040000010001005b97a0972ff6b13a" +

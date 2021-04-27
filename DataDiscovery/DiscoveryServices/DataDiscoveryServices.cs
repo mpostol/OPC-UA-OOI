@@ -1,4 +1,10 @@
-﻿
+﻿//__________________________________________________________________________________________________
+//
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
+
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -15,6 +21,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
   public class DataDiscoveryServices : IDisposable
   {
     #region public API
+
     /// <summary>
     /// Resolves address and reads the <see cref="DomainModel"/> record as an asynchronous operation.
     /// </summary>
@@ -26,30 +33,33 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
     public async Task<DomainModel> ResolveDomainModelAsync(Uri modelUri, Uri rootZoneUrl, Action<string, TraceEventType, Priority> log)
     {
       log($"Starting resolving address of the domain model descriptor for the model Uri {modelUri}", TraceEventType.Verbose, Priority.Low);
-      DomainDescriptor _lastDomainDescriptor = new DomainDescriptor() { NextStepRecordType = RecordType.DomainDescriptor };
-      Uri _nextUri = rootZoneUrl;
-      int _iteration = 0;
+      DomainDescriptor lastDomainDescriptor = new DomainDescriptor() { NextStepRecordType = RecordType.DomainDescriptor };
+      Uri nextUri = rootZoneUrl;
+      int iteration = 0;
       do
       {
-        _iteration++;
-        log($"Resolving address iteration {_iteration} address: {_nextUri}", TraceEventType.Verbose, Priority.Low);
-        if (_iteration > 16)
+        iteration++;
+        log($"Resolving address iteration {iteration} address: {nextUri}", TraceEventType.Verbose, Priority.Low);
+        if (iteration > 16)
           throw new InvalidOperationException("Too many iteration in the resolving process.");
-        _lastDomainDescriptor = await GetHTTPResponseAsync<DomainDescriptor>(_nextUri, log);
-        _nextUri = _lastDomainDescriptor.ResolveUri(modelUri);
-      } while (_lastDomainDescriptor.NextStepRecordType == RecordType.DomainDescriptor);
-      log($"Reading DomainModel at: {_nextUri}", TraceEventType.Verbose, Priority.Low);
-      Task<DomainModel> _DomainModelTask = GetHTTPResponseAsync<DomainModel>(_nextUri, log);
+        lastDomainDescriptor = await GetHTTPResponseAsync<DomainDescriptor>(nextUri, log);
+        nextUri = lastDomainDescriptor.ResolveUri(modelUri);
+      } while (lastDomainDescriptor.NextStepRecordType == RecordType.DomainDescriptor);
+      log($"Reading DomainModel at: {nextUri}", TraceEventType.Verbose, Priority.Low);
+      Task<DomainModel> _DomainModelTask = GetHTTPResponseAsync<DomainModel>(nextUri, log);
       DomainModel _model = await _DomainModelTask;
-      _model.UniversalDiscoveryServiceLocator = _nextUri.ToString();
-      log($"Successfuly received and decoded the requested DomainModel record: {_nextUri}", TraceEventType.Verbose, Priority.Low);
+      _model.UniversalDiscoveryServiceLocator = nextUri.ToString();
+      log($"Successfully received and decoded the requested DomainModel record: {nextUri}", TraceEventType.Verbose, Priority.Low);
       return _model;
     }
-    #endregion
+
+    #endregion public API
 
     #region IDisposable Support
+
     private bool disposedValue = false; // To detect redundant calls
-    private HttpClient m_Client = new HttpClient() { MaxResponseContentBufferSize = Int32.MaxValue };
+    private HttpClient m_Client = new HttpClient() { MaxResponseContentBufferSize = int.MaxValue };
+
     /// <summary>
     /// Releases unmanaged and - optionally - managed resources.
     /// </summary>
@@ -64,6 +74,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
         disposedValue = true;
       }
     }
+
     // This code added to correctly implement the disposable pattern.
     /// <summary>
     /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -72,9 +83,11 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
     {
       Dispose(true);
     }
-    #endregion
+
+    #endregion IDisposable Support
 
     #region private
+
     /// <summary>
     /// Resolve domain description as an asynchronous operation.
     /// </summary>
@@ -93,14 +106,14 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
       {
         try
         {
-          using (HttpResponseMessage _Message = await m_Client.GetAsync(address))
+          using (HttpResponseMessage message = await m_Client.GetAsync(address))
           {
-            _Message.EnsureSuccessStatusCode();
-            using (Task<Stream> _descriptionStream = _Message.Content.ReadAsStreamAsync())
+            message.EnsureSuccessStatusCode();
+            using (Task<Stream> descriptionStream = message.Content.ReadAsStreamAsync())
             {
-              XmlSerializer _serializer = new XmlSerializer(typeof(TResult));
-              Stream _description = await _descriptionStream;
-              TResult _newDescription = (TResult)_serializer.Deserialize(_description);
+              XmlSerializer serializer = new XmlSerializer(typeof(TResult));
+              Stream _description = await descriptionStream;
+              TResult _newDescription = (TResult)serializer.Deserialize(_description);
               return _newDescription;
             }
           };
@@ -115,8 +128,9 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
         }
       } while (true);
     }
+
     //UnitTest instrumentation
-    [System.Diagnostics.Conditional("DEBUG")]
+    [Conditional("DEBUG")]
     internal void GetHTTPResponse<T>(Uri address, Action<string, TraceEventType, Priority> debugLog, Action<T> getResult)
             where T : class, new()
     {
@@ -124,7 +138,7 @@ namespace UAOOI.DataDiscovery.DiscoveryServices
       _task.Wait();
       getResult(_task.Result);
     }
-    #endregion
 
+    #endregion private
   }
 }

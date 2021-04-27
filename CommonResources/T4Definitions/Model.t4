@@ -24,7 +24,7 @@ string CommonProduct = "Object Oriented Internet";
 
 //UAOOI.DataDiscovery
 string DataDiscoveryTitle = "UAOOI.DataDiscovery";
-string DataDiscoveryVersion = "4.0.1";
+string DataDiscoveryVersion = "4.0.2";
 string DataDiscoveryPrerelease = "";
 string DataDiscoveryProduct = "Object Oriented Internet";
 

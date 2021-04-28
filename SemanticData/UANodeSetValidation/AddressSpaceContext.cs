@@ -114,7 +114,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", targetNamespace)));
       int _nsIndex = m_NamespaceTable.GetURIIndex(targetNamespace);
-      // 
+      //TODO This example doesn't work #583
       if (_nsIndex == -1)
         throw new ArgumentOutOfRangeException("targetNamespace", $"Cannot find this {targetNamespace} namespace");
       ValidateAndExportModel(_nsIndex);

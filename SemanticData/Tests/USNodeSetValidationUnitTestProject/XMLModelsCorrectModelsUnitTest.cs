@@ -62,7 +62,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\VariableTypeTest\VariableTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
-      List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 5, new UriBuilder("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest").Uri);
+      List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 5, new UriBuilder("http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest").Uri);
       Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
       Assert.AreEqual<int>(3, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
     }
@@ -73,7 +73,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\DataTypeTest\DataTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
-      List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 18, new UriBuilder("http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest").Uri);
+      List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 18, new UriBuilder("http://cas.eu/UA/CommServer/UnitTests/DataTypeTest").Uri);
       Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
       Assert.AreEqual<int>(4, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
     }

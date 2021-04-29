@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class AddressSpaceContext - responsible to manage all nodes in the OPC UA Address Space.
   /// </summary>
-  //TODO Import all dependencies for the model #575
   internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext
   {
     #region constructor
@@ -38,7 +37,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting creation the OPC UA Address Space."));
       UANodeSet _standard = UANodeSet.ReadUADefinedTypes();
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Address Space - the OPC UA defined has been uploaded."));
-      ImportNodeSet(_standard, x => throw new ArgumentOutOfRangeException("The standard model must have no dependencies."));
+      ImportNodeSet(_standard);
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Address Space - has bee created successfully."));
     }
 
@@ -68,12 +67,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="model">The model to be imported.</param>
     /// <exception cref="System.ArgumentNullException">model;the model cannot be null</exception>
-    Uri IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
+    void IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
     {
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.ImportUANodeSet - importing from object model."));
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
-      return ImportNodeSet(model, LoadModel);
+      //return
+      //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
+      ImportNodeSet(model);
     }
 
     /// <summary>
@@ -81,7 +82,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="model">The model to be imported.</param>
     /// <exception cref="System.IO.FileNotFoundException">The imported file does not exist</exception>
-    Uri IAddressSpaceContext.ImportUANodeSet(FileInfo model)
+    void IAddressSpaceContext.ImportUANodeSet(FileInfo model)
     {
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
@@ -89,12 +90,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (!model.Exists)
         throw new FileNotFoundException("The imported file does not exist", model.FullName);
       UANodeSet _nodeSet = UANodeSet.ReadModelFile(model);
-      return ImportNodeSet(_nodeSet, LoadModel);
+      //return
+      //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
+      ImportNodeSet(_nodeSet);
     }
 
     /// <summary>
     /// Validates and exports the selected model for the default namespace at index 1 if defined or standard OPC UA.
     /// </summary>
+    //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
     void IAddressSpaceContext.ValidateAndExportModel()
     {
       foreach (IModelTableEntry _nsi in m_NamespaceTable.Models)
@@ -114,8 +118,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", targetNamespace)));
       int _nsIndex = m_NamespaceTable.GetURIIndex(targetNamespace);
+      //TODO This example doesn't work #583
       if (_nsIndex == -1)
-        throw new ArgumentOutOfRangeException("targetNamespace", "Cannot find this namespace");
+        throw new ArgumentOutOfRangeException("targetNamespace", $"Cannot find this {targetNamespace} namespace");
       ValidateAndExportModel(_nsIndex);
     }
 
@@ -244,17 +249,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #endregion IAddressSpaceBuildContext
 
-    #region IAddressSpaceValidationContext
-
-    //TODO Import all dependencies for the model #575
-    ///// <summary>
-    ///// Exports the current namespace table containing all namespaces that have been registered.
-    ///// </summary>
-    ///// <value>An instance of <see cref="IEnumerable{IModelTableEntry}" /> containing.</value>
-    //private IEnumerable<IModelTableEntry> ExportNamespaceTable => m_NamespaceTable.Models;
-
-    #endregion IAddressSpaceValidationContext
-
     #region private
 
     //types
@@ -293,23 +287,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private readonly ValidationBuildErrorsHandling m_TraceEvent = null;
 
     //methods
-    private void LoadModel(ModelTableEntry model)
-    {
-      string modelUri = (model ?? throw new ArgumentNullException()).ModelUri;
-      if (m_NamespaceTable.GetURIIndex(new UriBuilder(modelUri).Uri) >= 0)
-        return;
-      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Loading required UANodeSet for Uri={modelUri}"));
-      UANodeSet requiredModel = Discovery.Instance.LoadUANodeSet(modelUri);
-      if (requiredModel == null)
-        m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"An error occurred while loading the UANodeSet document."));
-      ImportNodeSet(requiredModel, LoadModel);
-    }
 
-    private Uri ImportNodeSet(UANodeSet model, Action<ModelTableEntry> loadDependency)
+    private void ImportNodeSet(UANodeSet model)
     {
-      IUAModelContext _modelContext = model.ParseUAModelContext(m_NamespaceTable, loadDependency, m_TraceEvent.TraceEvent);
-      //TODO Import all dependencies for the model #575
-      //m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Entering AddressSpaceContext.ImportNodeSet - starting import {_modelContext.ModelUri}."));
+      IUAModelContext _modelContext = model.ParseUAModelContext(m_NamespaceTable, m_TraceEvent.TraceEvent);
       Dictionary<string, UANode> itemsDictionary = new Dictionary<string, UANode>();
       foreach (UANode node in model.Items)
       {
@@ -319,8 +300,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           ImportUANode(node);
       }
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Finishing AddressSpaceContext.ImportNodeSet - imported {model.Items.Length} nodes."));
-      //TODO Import all dependencies for the model #575
-      return m_NamespaceTable.DefaultModelURI; // _modelContext.ModelUri;
+      // return m_NamespaceTable.DefaultModelURI; //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
     }
 
     private void ImportUANode(UANode node)

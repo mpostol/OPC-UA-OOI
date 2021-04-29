@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -61,9 +61,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       NamespaceTable instance = new NamespaceTable();
       IModelTableEntry model1 = ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1");
-      ((INamespaceTable)instance).UpadateModelOrAppend(model1, false);
+      ((INamespaceTable)instance).RegisterModel(model1);
       IModelTableEntry model2 = ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1");
-      ((INamespaceTable)instance).UpadateModelOrAppend(model2, false);
+      ((INamespaceTable)instance).RegisterModel(model2);
       IModelTableEntry model3 = instance.GetModelTableEntry(1);
       Assert.IsNotNull(model3);
       Assert.AreSame(model2, model3);
@@ -74,10 +74,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void ModelsTest()
     {
       NamespaceTable instance = new NamespaceTable();
-      ((INamespaceTable)instance).UpadateModelOrAppend(ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1"), false);
-      ((INamespaceTable)instance).UpadateModelOrAppend(ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest3"), false);
-      ((INamespaceTable)instance).UpadateModelOrAppend(ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest2"), false);
-      ((INamespaceTable)instance).UpadateModelOrAppend(ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1"), false);
+      ((INamespaceTable)instance).RegisterModel(ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1"));
+      ((INamespaceTable)instance).RegisterModel(ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest3"));
+      ((INamespaceTable)instance).RegisterModel(ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest2"));
+      ((INamespaceTable)instance).RegisterModel(ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1"));
       Assert.AreEqual<int>(4, instance.Models.Count<IModelTableEntry>());
     }
 

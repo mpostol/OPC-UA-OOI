@@ -41,5 +41,55 @@
             </summary>
             <value>The trace source instance of type <see cref="P:UAOOI.Common.Infrastructure.Diagnostic.TraceSourceBase.TraceSource"/>.</value>
         </member>
+        <member name="T:UAOOI.Common.Infrastructure.Serializers.IStylesheetNameProvider">
+            <summary>
+            Represents XML file style sheet name provider
+            </summary>
+        </member>
+        <member name="P:UAOOI.Common.Infrastructure.Serializers.IStylesheetNameProvider.StylesheetName">
+            <summary>
+            The style sheet name
+            </summary>
+        </member>
+        <member name="T:UAOOI.Common.Infrastructure.Serializers.XmlFile">
+            <summary>
+            Provides static methods for serialization objects into XML documents and writing the XML document to a file.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Common.Infrastructure.Serializers.XmlFile.WriteXmlFile``1(``0,System.String,System.IO.FileMode,System.String)">
+            <summary>
+            Serializes the specified <paramref name="dataObject"/> and writes the XML document to a file.
+            </summary>
+            <typeparam name="type">The type of the root object to be serialized and saved in the file.</typeparam>
+            <param name="dataObject">The object containing working data to be serialized and saved in the file.</param>
+            <param name="path">A relative or absolute path for the file containing the serialized object.</param>
+            <param name="mode">Specifies how the operating system should open a file <see cref="T:System.IO.FileMode"/>.</param>
+            <param name="stylesheetName">Name of the stylesheet document.</param>
+            <exception cref="T:System.ArgumentNullException">
+            path
+            or
+            dataObject
+            or
+            stylesheetName
+            </exception>
+        </member>
+        <member name="M:UAOOI.Common.Infrastructure.Serializers.XmlFile.WriteXmlFile``1(``0,System.String,System.IO.FileMode)">
+            <summary>
+            Serializes the specified <paramref name="dataObject"/> and writes the XML document to a file.
+            </summary>
+            <typeparam name="type">The type of the object to be serialized and saved in the file.</typeparam>
+            <param name="dataObject">The object containing working data to be serialized and saved in the file.</param>
+            <param name="path">A relative or absolute path for the file containing the serialized object.</param>
+            <param name="mode">Specifies how the operating system should open a file.</param>
+        </member>
+        <member name="M:UAOOI.Common.Infrastructure.Serializers.XmlFile.ReadXmlFile``1(System.String)">
+            <summary>
+            Reads an XML document from the file <paramref name="path"/> and deserializes its content to returned object.
+            </summary>
+            <typeparam name="type">The type of the object to be deserialized and saved in the file.</typeparam>
+            <param name="path">A relative or absolute path for the file containing the serialized object.</param>
+            <returns>An object containing working data retrieved from an XML file.</returns>
+            <exception cref="T:System.ArgumentNullException">path</exception>
+        </member>
     </members>
 </doc>

@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\ReferenceTest\ReferenceTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
-      List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 1);
+      List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 1, new UriBuilder("http://cas.eu/UA/CommServer/UnitTests/ReferenceTest").Uri);
       Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
       Assert.AreEqual<int>(1, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
     }
@@ -50,7 +50,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\ObjectTypeTest\ObjectTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
-      List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 85);
+      List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 85, new UriBuilder("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest").Uri);
       Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
       Assert.AreEqual<int>(3, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
       Assert.AreEqual<int>(1, _nodes.Where<IUANodeContext>(x => x.NodeIdContext == new DataSerialization.NodeId(413, 1)).Count<IUANodeContext>());
@@ -62,7 +62,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\VariableTypeTest\VariableTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
-      List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 5);
+      List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 5, new UriBuilder("http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest").Uri);
       Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
       Assert.AreEqual<int>(3, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
     }
@@ -73,7 +73,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\DataTypeTest\DataTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
-      List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 18);
+      List<IUANodeContext> _nodes = ValidateAndExportModelUnitTest(_testDataFileInfo, 18, new UriBuilder("http://cas.eu/UA/CommServer/UnitTests/DataTypeTest").Uri);
       Assert.IsFalse(_nodes.Where<IUANodeContext>(x => x.UANode == null).Any<IUANodeContext>());
       Assert.AreEqual<int>(4, _nodes.Where<IUANodeContext>(x => x.UANode is UAType).Count<IUANodeContext>());
     }
@@ -89,12 +89,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         errors.Add(msg);
     }
 
-    private List<IUANodeContext> ValidateAndExportModelUnitTest(FileInfo testDataFileInfo, int numberOfNodes)
+    private List<IUANodeContext> ValidateAndExportModelUnitTest(FileInfo testDataFileInfo, int numberOfNodes, Uri model)
     {
       List<TraceMessage> _trace = new List<TraceMessage>();
       IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace));
       _trace.Clear();
-      Uri model = _as.ImportUANodeSet(testDataFileInfo);
+      _as.ImportUANodeSet(testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Count);
       ((AddressSpaceContext)_as).UTAddressSpaceCheckConsistency(x => { Assert.Fail(); });
       ((AddressSpaceContext)_as).UTReferencesCheckConsistency((x, y, z, v) => Assert.Fail());

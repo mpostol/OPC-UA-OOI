@@ -31,8 +31,6 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       {
         Console.WriteLine(string.Format("Program stopped by the exception: {0}", ex.Message));
       }
-      //Console.Write("Press Enter to close this window.......");
-      //Console.Read();
     }
     internal static void Run(string[] args)
     {
@@ -46,21 +44,22 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
         //TODO trace it to log Console.WriteLine($"The following tag has wrong value: {_item.Tag} {_processing}.");
       }
     }
+
     private static void Do(Options options)
     {
       PrintLogo(options);
       BuildErrorsHandling.Log.TraceEventAction += z => Console.WriteLine(z.ToString());
       IAddressSpaceContext _as = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
-      ModelDesignExport _exporter = new ModelDesignExport(); //creates new instance of the ModelDesignExport class that captures functionality supporting export functionality of the OPC UA Information Model represented 
-                                                             //by an xml file compliant with UAModelDesign schema.
+      ModelDesignExport _exporter = new ModelDesignExport(); //creates new instance of the ModelDesignExport class that captures functionality supporting export of the OPC UA Information Model represented
+                                                             //by an XML file compliant with UAModelDesign schema.
       bool _exportModel = false;
       if (!string.IsNullOrEmpty(options.ModelDesignFileName))
       {
-        _as.InformationModelFactory = _exporter.GetFactory(BuildErrorsHandling.Log.TraceEvent);  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space. 
+        _as.InformationModelFactory = _exporter.GetFactory(BuildErrorsHandling.Log.TraceEvent);  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space.
         _exportModel = true;
       }
       if (options.Filenames == null)
-        throw new ArgumentOutOfRangeException($"{nameof(options.Filenames)}", "List of input files to convert i incorrect. At least one file UANodeSet must be entered.");
+        throw new ArgumentOutOfRangeException($"{nameof(options.Filenames)}", "List of input files to convert is incorrect. At least one file UANodeSet must be entered.");
       foreach (string _path in options.Filenames)
       {
         FileInfo _fileToRead = new FileInfo(_path);
@@ -68,6 +67,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
           throw new FileNotFoundException(string.Format($"FileNotFoundException - the file {_path} doesn't exist.", _fileToRead.FullName));
         _as.ImportUANodeSet(_fileToRead); //Imports a part of the OPC UA Address Space contained in the file compliant with the `UANodeSet` schema.
       }
+      //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
       if (string.IsNullOrEmpty(options.IMNamespace))
         _as.ValidateAndExportModel();
       else
@@ -75,6 +75,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       if (_exportModel)
         _exporter.ExportToXMLFile(options.ModelDesignFileName, options.Stylesheet); //Serializes the already generated model and writes the XML document to a file.
     }
+
     private static void PrintLogo(Options options)
     {
       if (options.NoLogo)
@@ -85,6 +86,4 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       Console.WriteLine();
     }
   }
-
 }
-

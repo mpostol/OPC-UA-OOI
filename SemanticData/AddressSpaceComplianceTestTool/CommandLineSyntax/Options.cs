@@ -6,6 +6,7 @@
 //___________________________________________________________________________________
 
 using CommandLine;
+using CommandLine.Text;
 using System.Collections.Generic;
 
 namespace UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax
@@ -29,5 +30,13 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax
 
     [Option("nologo", HelpText = "If present suppresses the banner.")]
     public bool NoLogo { get; set; }
-  }
+
+    [Usage(ApplicationAlias = "asp")]
+    public static IEnumerable<Example> Examples => new List<Example>() {
+          new Example("Validate UANodeSet", new Options() { Filenames = new List<string>(){ @"XMLModels\DataTypeTest.NodeSet2.xml", @"XMLModels\ReferenceTest.NodeSet2.xml", @"XMLModels\ObjectTypeTest.NodeSet2.xml", @"XMLModels\VariableTypeTest.NodeSet2.xml" } }),
+          new Example("Recover ModelDesign", new Options(){ Filenames = new List<string>(){ @"XMLModels\DataTypeTest.NodeSet2.xml" },
+                                                            ModelDesignFileName = @"XMLModels\DataTypeTest.ModelDesign.xml",
+                                                            IMNamespace = "http://cas.eu/UA/CommServer/UnitTests/DataTypeTest"})
+        };
+  };
 }

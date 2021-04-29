@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -28,13 +28,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Mock<INamespaceTable> asMock = new Mock<INamespaceTable>();
       List<TraceMessage> trace = new List<TraceMessage>();
       Action<TraceMessage> logMock = z => trace.Add(z);
-      Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(null, asMock.Object, x => throw new NotImplementedException(), logMock));
+      Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(null, asMock.Object, logMock));
       Assert.AreEqual<int>(0, trace.Count);
-      Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(nodeSet, null, x => throw new NotImplementedException(), logMock));
+      Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(nodeSet, null, logMock));
       Assert.AreEqual<int>(0, trace.Count);
-      Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, x => throw new NotImplementedException(), null));
+      Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, null));
       Assert.AreEqual<int>(0, trace.Count);
-      UAModelContext modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, x => throw new NotImplementedException(), logMock);
+      UAModelContext modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       Assert.IsNotNull(modelContext);
       Assert.AreEqual<int>(1, trace.Count);
       Assert.AreEqual<string>("P0-0001030000", trace[0].BuildError.Identifier);
@@ -56,18 +56,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       asMock.Setup(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"))).Returns(10);
       Uri randomURI = null;
       asMock.Setup(x => x.GetURIIndexOrAppend(It.Is<Uri>(z => z.ToString().Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown")))).Returns<Uri>(x => { randomURI = x; return 20; });
-      asMock.Setup(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>(), It.IsAny<bool>()));
+      asMock.Setup(x => x.RegisterModel(It.IsAny<IModelTableEntry>()));
       List<TraceMessage> trace = new List<TraceMessage>();
       Action<TraceMessage> logMock = z => trace.Add(z);
-      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, x => throw new NotImplementedException(), logMock);
+      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       //start testing
-      asMock.Verify(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>(), It.IsAny<bool>()), Times.Once);
+      asMock.Verify(x => x.RegisterModel(It.IsAny<IModelTableEntry>()), Times.Once);
       Assert.AreEqual<string>("ns=10;i=1", _modelContext.ImportNodeId("Boolean", x => Assert.Fail()).ToString());
       Assert.AreEqual<string>("i=45", _modelContext.ImportNodeId("HasSubtype", x => Assert.Fail()).ToString());
       Assert.AreEqual<string>("ns=20;i=2", _modelContext.ImportNodeId("ns=2;i=2", x => Assert.Fail()).ToString());
       asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Once);
       asMock.Verify(x => x.GetURIIndexOrAppend(randomURI), Times.Once);
-      asMock.Verify(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>(), It.IsAny<bool>()), Times.Once);
+      asMock.Verify(x => x.RegisterModel(It.IsAny<IModelTableEntry>()), Times.Once);
       Assert.AreEqual<string>("ns=20;i=3", _modelContext.ImportNodeId("ns=2;i=3", x => Assert.Fail()).ToString());
       asMock.Verify(x => x.GetURIIndexOrAppend(randomURI), Times.Exactly(2));
       Assert.AreEqual<string>("ns=20;i=4", _modelContext.ImportNodeId("ns=2;i=4", x => Assert.Fail()).ToString());
@@ -93,15 +93,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       };
       Mock<INamespaceTable> asMock = new Mock<INamespaceTable>();
       asMock.Setup(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"))).Returns(10);
-      asMock.Setup(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>(), It.IsAny<bool>()));
+      asMock.Setup(x => x.RegisterModel(It.IsAny<IModelTableEntry>()));
       Action<TraceMessage> logMock = z => Assert.Fail();
-      UAModelContext modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, x => throw new NotImplementedException(), logMock);
+      UAModelContext modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       Assert.AreEqual<string>("(10:Boolean, ns=10;i=1)", modelContext.ImportBrowseName("1:Boolean", "ns=1;i=1", x => Assert.Fail()).ToString());
       Assert.AreEqual<string>("(10:AnyText, ns=10;i=1)", modelContext.ImportBrowseName("1:AnyText", "ns=1;i=1", x => Assert.Fail()).ToString());
       Assert.AreEqual<string>("(10:HasSubtype, ns=10;i=1)", modelContext.ImportBrowseName("1:HasSubtype", "ns=1;i=1", x => Assert.Fail()).ToString());
       Assert.AreEqual<string>("ns=10;i=232323", modelContext.ImportNodeId("ns=1;i=232323", x => Assert.Fail()).ToString());
       asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Exactly(7));
-      asMock.Verify(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>(), It.IsAny<bool>()), Times.Once);
+      asMock.Verify(x => x.RegisterModel(It.IsAny<IModelTableEntry>()), Times.Once);
     }
 
     [TestMethod]
@@ -119,7 +119,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       asMock.Setup(x => x.GetURIIndexOrAppend(It.Is<Uri>(z => z.ToString().Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown")))).Returns<Uri>(x => { randomURI = x; return 20; });
       List<TraceMessage> trace = new List<TraceMessage>();
       Action<TraceMessage> logMock = z => trace.Add(z);
-      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, x => throw new NotImplementedException(), logMock);
+      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       Assert.AreEqual<string>("ns=20;i=232323", _modelContext.ImportNodeId("ns=2;i=232323", y => Assert.Fail()).ToString());
       asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Never);
       asMock.Verify(x => x.GetURIIndexOrAppend(randomURI), Times.Once);
@@ -142,7 +142,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       asMock.Setup<ushort>(x => x.GetURIIndexOrAppend(It.IsAny<Uri>())).Returns(10);
       Action<TraceMessage> logMock = z => Assert.Fail();
       //TODO Import all dependencies for the model #575
-      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, x => throw new NotImplementedException(), logMock);
+      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       //Assert.AreEqual<string>(nodeSet.Models[0].ModelUri, _modelContext.ModelUri.ToString());
     }
 
@@ -156,16 +156,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       };
       Mock<INamespaceTable> asMock = new Mock<INamespaceTable>();
       asMock.Setup(x => x.GetURIIndexOrAppend(It.IsAny<Uri>())).Returns(10);
-      asMock.Setup(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>(), It.IsAny<bool>()));
+      asMock.Setup(x => x.RegisterModel(It.IsAny<IModelTableEntry>()));
       List<TraceMessage> trace = new List<TraceMessage>();
       Action<TraceMessage> logMock = z => trace.Add(z);
-      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, x => throw new NotImplementedException(), logMock);
+      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       Assert.IsNull(nodeSet.Models);
       //Assert.AreEqual<string>("http://opcfoundation.org/UA/ADI/", _modelContext.ModelUri.ToString());
       Assert.AreEqual<int>(1, trace.Count);
       Assert.AreEqual<string>("P0-0001030000", trace[0].BuildError.Identifier);
       Assert.AreEqual<TraceEventType>(TraceEventType.Information, trace[0].TraceLevel);
-      asMock.Verify(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>(), It.IsAny<bool>()), Times.Once);
+      asMock.Verify(x => x.RegisterModel(It.IsAny<IModelTableEntry>()), Times.Once);
     }
 
     [TestMethod]
@@ -205,7 +205,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       addressSpaceMock.Setup(x => x.GetURIIndexOrAppend(new Uri(@"http://cas.eu/UA/Demo/"))).Returns<Uri>(x => 2);
       List<TraceMessage> _logsCache = new List<TraceMessage>();
       Action<TraceMessage> _logMock = z => _logsCache.Add(z);
-      IUAModelContext model = nodeSet.ParseUAModelContext(addressSpaceMock.Object, x => throw new NotImplementedException(), _logMock);
+      IUAModelContext model = nodeSet.ParseUAModelContext(addressSpaceMock.Object, _logMock);
       Assert.IsNotNull(model);
       addressSpaceMock.Verify(x => x.GetURIIndexOrAppend(new Uri(@"http://cas.eu/UA/Demo/")), Times.AtLeastOnce());
       Assert.AreEqual<string>("ns=2;i=24", nodeSet.Aliases[0].ValueNodeId.ToString());
@@ -231,14 +231,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       asMock.Setup(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"))).Returns(10);
       Uri randomURI = null;
       asMock.Setup(x => x.GetURIIndexOrAppend(It.Is<Uri>(z => z.ToString().Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown")))).Returns<Uri>(x => { randomURI = x; return 20; });
-      asMock.Setup(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>(), It.IsAny<bool>()));
-      asMock.Setup(x => x.DefaultModelIndex).Returns(10);
+      asMock.Setup(x => x.RegisterModel(It.IsAny<IModelTableEntry>()));
+      //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
+      //asMock.Setup(x => x.DefaultModelIndex).Returns(10);
       List<TraceMessage> trace = new List<TraceMessage>();
       Action<TraceMessage> logMock = z => trace.Add(z);
-      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, x => throw new NotImplementedException(), logMock);
+      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       _modelContext.RegisterUAReferenceType(new QualifiedName("QualifiedName", 10));
       Assert.AreEqual<int>(0, trace.Count);
-      asMock.Verify(x => x.UpadateModelOrAppend(It.IsAny<IModelTableEntry>(), It.IsAny<bool>()), Times.Once);
+      asMock.Verify(x => x.RegisterModel(It.IsAny<IModelTableEntry>()), Times.Once);
       asMock.Verify(x => x.GetURIIndexOrAppend(new Uri("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest")), Times.Never);
       asMock.Verify(x => x.GetURIIndexOrAppend(It.Is<Uri>(z => z.ToString().Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown"))), Times.Never);
       _modelContext.RegisterUAReferenceType(new QualifiedName("QualifiedName", 10));
@@ -247,12 +248,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<string>("The BrowseName of a ReferenceType shall be unique.", trace[0].BuildError.Descriptor);
       Assert.AreEqual<string>("The UAReferenceType duplicated BrowseName=10:QualifiedName. It is not allowed that two different ReferenceTypes have the same BrowseName", trace[0].Message);
       Debug.WriteLine(trace[0].ToString());
+      //TODO Import all dependencies for the model #575
       trace.Clear();
       _modelContext.RegisterUAReferenceType(new QualifiedName("QualifiedName", 11));
-      Assert.AreEqual<int>(1, trace.Count);
-      Assert.AreEqual<string>(BuildError.BrowseNameReferenceTypeScope.Identifier, trace[0].BuildError.Identifier);
-      Assert.AreEqual<string>("The BrowseName of a ReferenceType is defined outside of the model.", trace[0].BuildError.Descriptor);
-      Assert.AreEqual<string>("Wrong NamespaceIndex of the 11:QualifiedName. The UAReferenceType should be defined by the default model 10", trace[0].Message);
+      //Assert.AreEqual<int>(1, trace.Count);
+      //Assert.AreEqual<string>(BuildError.BrowseNameReferenceTypeScope.Identifier, trace[0].BuildError.Identifier);
+      //Assert.AreEqual<string>("The BrowseName of a ReferenceType is defined outside of the model.", trace[0].BuildError.Descriptor);
+      //Assert.AreEqual<string>("Wrong NamespaceIndex of the 11:QualifiedName. The UAReferenceType should be defined by the default model 10", trace[0].Message);
     }
 
     [TestMethod]
@@ -269,12 +271,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
                                                                 }
       };
       Mock<INamespaceTable> asMock = new Mock<INamespaceTable>();
+      asMock.Setup(x => x.RegisterModel(It.IsAny<IModelTableEntry>()));
       List<TraceMessage> trace = new List<TraceMessage>();
       Action<TraceMessage> logMock = z => trace.Add(z);
-      List<ModelTableEntry> dependencies = new List<ModelTableEntry>();
-      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, x => dependencies.Add(x), logMock);
-      Assert.AreEqual<int>(1, dependencies.Count);
-      Assert.AreEqual<string>("http://a.b.c.com", dependencies[0].ModelUri);
+      UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
+      asMock.Verify(x => x.RegisterModel(It.IsAny<IModelTableEntry>()), Times.Once);
+      Assert.AreEqual<int>(0, trace.Count);
     }
   }
 }

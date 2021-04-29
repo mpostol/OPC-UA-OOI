@@ -1,9 +1,9 @@
-//___________________________________________________________________________________
+//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
@@ -30,6 +30,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region IAddressSpaceURIRecalculate
 
+    /// <summary>
+    /// Searches for an index that matches the <paramref name="URI" />, and returns the zero-based index of the first occurrence within the namespace table.
+    /// </summary>
+    /// <param name="URI">The URI to search for in the namespace table.</param>
+    /// <returns>The zero-based index of the first occurrence of <paramref name="URI" /> that matches the conditions defined by <paramref name="URI" />, if found; otherwise, –1.</returns>
     ushort INamespaceTable.GetURIIndexOrAppend(Uri URI)
     {
       int _index = GetURIIndex(URI);
@@ -38,21 +43,29 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return (ushort)_index;
     }
 
-    //TODO Import all dependencies for the model #575
-    void INamespaceTable.UpadateModelOrAppend(IModelTableEntry model, bool defaultModel)
+    //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
+    void INamespaceTable.RegisterModel(IModelTableEntry model)
     {
-      int index = GetURIIndex(model.ModelUri);
+      int index = GetURIIndex((model ?? throw new ArgumentNullException("", "Model table entry must not be null")).ModelUri);
       if (index >= 0)
         modelsList[index] = model;
       else
-      {
         modelsList.Add(model);
-        index = modelsList.Count - 1;
-      }
-      if (defaultModel)
-        this.defaultModelIndex = index;
     }
 
+    void INamespaceTable.RegisterDepenency(IModelTableEntry model)
+    {
+      int index = GetURIIndex((model ?? throw new ArgumentNullException("", "Model table entry must not be null")).ModelUri);
+      if (index == -1 )
+        modelsList.Add(model);
+    }
+
+    /// <summary>
+    /// Gets the model table entry.
+    /// </summary>
+    /// <param name="nsi">The nsi.</param>
+    /// <returns>IModelTableEntry.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">namespace index - Namespace index has not been registered</exception>
     public IModelTableEntry GetModelTableEntry(ushort nsi)
     {
       if (nsi >= modelsList.Count)
@@ -60,6 +73,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return modelsList[nsi];
     }
 
+    /// <summary>
+    /// Gets the index of the URI.
+    /// </summary>
+    /// <param name="URI">The URI.</param>
+    /// <returns>System.Int32.</returns>
     public int GetURIIndex(Uri URI)
     {
       return modelsList.FindIndex(x => x.ModelUri == URI);
@@ -70,18 +88,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #region Public Members
 
     internal IEnumerable<IModelTableEntry> Models => modelsList;
-    internal Uri DefaultModelURI => modelsList[defaultModelIndex].ModelUri;
+    //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
+    //internal Uri DefaultModelURI => modelsList[defaultModelIndex].ModelUri;
+    //int INamespaceTable.DefaultModelIndex => defaultModelIndex;
 
-    int INamespaceTable.DefaultModelIndex => defaultModelIndex;
+    internal void ValidateNamesapceTable()
+    {
+      //TODO Import all dependencies for the model #575
+      throw new NotImplementedException("Import all dependencies for the model #575");
+    }
 
     #endregion Public Members
 
     #region private
 
-    //var
-
     private List<IModelTableEntry> modelsList = new List<IModelTableEntry>();
-    private int defaultModelIndex;
 
     private int Append(Uri URI)
     {

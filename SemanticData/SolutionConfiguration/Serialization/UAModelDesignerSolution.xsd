@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="UAModelDesignerSolution">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" name="Projects" type="ArrayOfUAModelDesignerProject" />
+        <xs:element minOccurs="0" maxOccurs="1" name="ServerDetails">
+          <xs:complexType>
+            <xs:attribute name="codebase" type="xs:string" />
+            <xs:attribute name="configuration" type="xs:string" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfUAModelDesignerProject">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UAModelDesignerProject">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="CSVFileName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="BuildOutputDirectoryName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="FileName" type="xs:string" />
+          </xs:sequence>
+          <xs:attribute name="ProjectIdentifier" type="xs:string" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

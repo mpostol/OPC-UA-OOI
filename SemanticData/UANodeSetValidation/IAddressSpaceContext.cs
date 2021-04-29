@@ -21,13 +21,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Imports a part of the OPC UA Address Space contained in the <see cref="UANodeSet" /> object model.
     /// </summary>
     /// <param name="model">The model to be imported.</param>
-    Uri ImportUANodeSet(UANodeSet model);
+    void ImportUANodeSet(UANodeSet model);
 
     /// <summary>
     /// Imports a part of the OPC UA Address Space contained in the file <paramref name="model"/> of type <see cref="FileInfo" /> compliant with the `UANodeSet` schema.
     /// </summary>
     /// <param name="model">The model to be imported.</param>
-    Uri ImportUANodeSet(FileInfo model);
+    void ImportUANodeSet(FileInfo model);
 
     /// <summary>
     /// Sets the information model factory, which can be used to export a part of the OPC UA Address Space. If not set or set null an internal stub implementation will be used.

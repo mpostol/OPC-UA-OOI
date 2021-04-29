@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using UAOOI.SemanticData.BuildingErrorsHandling;
@@ -16,13 +16,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// </summary>
   public interface IUAModelContext
   {
-    //TODO Import all dependencies for the model #575
-    ///// <summary>
-    ///// Gets the model URI.
-    ///// </summary>
-    ///// <value>The model URI.</value>
-    //Uri ModelUri { get; }
-
     /// <summary>
     /// Registers the <see cref="QualifiedName"/> of ReferenceType Node.
     /// </summary>

@@ -44,18 +44,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
-    void INamespaceTable.UpadateModelOrAppend(IModelTableEntry model, bool defaultModel)
+    void INamespaceTable.RegisterModel(IModelTableEntry model)
     {
-      int index = GetURIIndex(model.ModelUri);
+      int index = GetURIIndex((model ?? throw new ArgumentNullException("", "Model table entry must not be null")).ModelUri);
       if (index >= 0)
         modelsList[index] = model;
       else
-      {
         modelsList.Add(model);
-        index = modelsList.Count - 1;
-      }
-      if (defaultModel)
-        this.defaultModelIndex = index;
+    }
+
+    void INamespaceTable.RegisterDepenency(IModelTableEntry model)
+    {
+      int index = GetURIIndex((model ?? throw new ArgumentNullException("", "Model table entry must not be null")).ModelUri);
+      if (index == -1 )
+        modelsList.Add(model);
     }
 
     /// <summary>
@@ -86,17 +88,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     #region Public Members
 
     internal IEnumerable<IModelTableEntry> Models => modelsList;
-    internal Uri DefaultModelURI => modelsList[defaultModelIndex].ModelUri;
-    int INamespaceTable.DefaultModelIndex => defaultModelIndex;
+    //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
+    //internal Uri DefaultModelURI => modelsList[defaultModelIndex].ModelUri;
+    //int INamespaceTable.DefaultModelIndex => defaultModelIndex;
+
+    internal void ValidateNamesapceTable()
+    {
+      //TODO Import all dependencies for the model #575
+      throw new NotImplementedException("Import all dependencies for the model #575");
+    }
 
     #endregion Public Members
 
     #region private
 
-    //var
-
     private List<IModelTableEntry> modelsList = new List<IModelTableEntry>();
-    private int defaultModelIndex;
 
     private int Append(Uri URI)
     {

@@ -27,8 +27,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Updates the model or append it the existing collection.
     /// </summary>
     /// <param name="model">The model.</param>
-    /// <param name="defaultModel">if set to <c>true</c> it the default model, otherwise <c>false</c>.</param>
-    void UpadateModelOrAppend(IModelTableEntry model, bool defaultModel);
+    void RegisterModel(IModelTableEntry model);
+
+    void RegisterDepenency(IModelTableEntry model);
 
     /// <summary>
     /// Gets the model table entry.
@@ -44,10 +45,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>System.Int32.</returns>
     int GetURIIndex(Uri URI);
 
-    /// <summary>
-    /// Gets the index of the default model.
-    /// </summary>
-    /// <value>The index of the default model.</value>
-    int DefaultModelIndex { get; }
+    //TOD AddressSpacePrototyping - IMNamespace must be required in case of export #584
+    ///// <summary>
+    ///// Gets the index of the default model.
+    ///// </summary>
+    ///// <value>The index of the default model.</value>
+    //int DefaultModelIndex { get; }
   }
 }

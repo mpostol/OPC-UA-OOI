@@ -25,10 +25,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// <exception cref="ArgumentNullException">buildErrorsHandlingLog
     /// or
     /// addressSpaceContext</exception>
-    internal static UAModelContext ParseUANodeSetModelHeader(IUANodeSetModelHeader modelHeader, INamespaceTable addressSpaceContext, Action<ModelTableEntry> loadDependency, Action<TraceMessage> traceEvent)
+    internal static UAModelContext ParseUANodeSetModelHeader(IUANodeSetModelHeader modelHeader, INamespaceTable addressSpaceContext, Action<TraceMessage> traceEvent)
     {
       UAModelContext context2Return = new UAModelContext(modelHeader, addressSpaceContext, traceEvent);
-      context2Return.Parse(modelHeader, addressSpaceContext, loadDependency);
+      context2Return.Parse(modelHeader, addressSpaceContext);
       return context2Return;
     }
 
@@ -72,15 +72,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return new NodeId(_nodeId.IdentifierPart, namespaceIndex);
     }
 
-    //TODO Import all dependencies for the model #575
     public void RegisterUAReferenceType(QualifiedName browseName)
     {
-      if (browseName.NamespaceIndex != _addressSpaceContext.DefaultModelIndex)
-      {
-        string message = $"Wrong {nameof(QualifiedName.NamespaceIndex)} of the {browseName}. The {nameof(UAReferenceType)} should be defined by the default model {_addressSpaceContext.DefaultModelIndex}";
-        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.BrowseNameReferenceTypeScope, message));
-      }
-      else if (UAReferenceTypNames.Contains(browseName))
+      //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
+      //if (browseName.NamespaceIndex != _addressSpaceContext.DefaultModelIndex)
+      //{
+      //  string message = $"Wrong {nameof(QualifiedName.NamespaceIndex)} of the {browseName}. The {nameof(UAReferenceType)} should be defined by the default model {_addressSpaceContext.DefaultModelIndex}";
+      //  _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.BrowseNameReferenceTypeScope, message));
+      //}
+      //else
+      if (UAReferenceTypNames.Contains(browseName))
       {
         string message = $"The {nameof(UAReferenceType)} duplicated BrowseName={browseName}. It is not allowed that two different ReferenceTypes have the same BrowseName";
         _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.DuplicatedReferenceType, message));
@@ -95,15 +96,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     //var
 
-    //private ushort modeLNamespaceIndex;
     private readonly IUANodeSetModelHeader _modelHeader;
-
     private readonly Action<TraceMessage> _logTraceMessage;
     private readonly Dictionary<string, string> _aliasesDictionary = new Dictionary<string, string>();
     private List<string> _namespaceUris = new List<string>();
     private INamespaceTable _addressSpaceContext { get; }
     private readonly List<QualifiedName> UAReferenceTypNames = new List<QualifiedName>();
-
     private static Random _randomNumber = new Random();
 
     //methods
@@ -118,12 +116,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       _addressSpaceContext = addressSpaceContext ?? throw new ArgumentNullException(nameof(addressSpaceContext));
     }
 
-    private void Parse(IUANodeSetModelHeader modelHeader, INamespaceTable addressSpaceContext, Action<ModelTableEntry> loadDependency)
+    private void Parse(IUANodeSetModelHeader modelHeader, INamespaceTable namespaceTable)
     {
       _namespaceUris = Parse(modelHeader.NamespaceUris);
-      //ModelUri =
-      Parse(modelHeader.Models, addressSpaceContext, loadDependency);
-      //modeLNamespaceIndex =_addressSpaceContext.GetURIIndexOrAppend(ModelUri);
+      Parse(modelHeader.Models, namespaceTable);
       Parse(modelHeader.Aliases);
     }
 
@@ -149,8 +145,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return list2Return;
     }
 
-    //TODO Import all dependencies for the model #575
-    private void Parse(ModelTableEntry[] models, INamespaceTable addressSpaceContext, Action<ModelTableEntry> loadDependency)
+    private void Parse(ModelTableEntry[] models, INamespaceTable namespaceTable)
     {
       if (models == null || models.Length == 0)
       {
@@ -167,21 +162,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         };
         _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.ModelsCannotBeNull, $"Added default model {models[0].ModelUri}"));
       }
-      //else if (models.Length > 1)
-      //  _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, $"Multi-model is not supported, only first model {models[0].ModelUri} is processed."));
-      //List<Uri> modelTableEntries = new List<Uri>();
       bool defaultModel = true;
       foreach (ModelTableEntry item in models)
       {
-        addressSpaceContext.UpadateModelOrAppend(item, defaultModel);
+        namespaceTable.RegisterModel(item);
         //TODO Import all dependencies for the model #575
         if (item.RequiredModel != null)
           foreach (ModelTableEntry requiredModel in item.RequiredModel)
-            loadDependency(requiredModel);
-        //modelTableEntries.Add(new UriBuilder(models[0].ModelUri).Uri);
+            namespaceTable.RegisterDepenency(requiredModel);
         defaultModel = false;
       }
-      //return modelTableEntries.ToArray();
     }
 
     private string LookupAlias(string id)

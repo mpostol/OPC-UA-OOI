@@ -37,7 +37,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting creation the OPC UA Address Space."));
       UANodeSet _standard = UANodeSet.ReadUADefinedTypes();
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Address Space - the OPC UA defined has been uploaded."));
-      ImportNodeSet(_standard, x => throw new ArgumentOutOfRangeException("The standard model must have no dependencies."));
+      ImportNodeSet(_standard);
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Address Space - has bee created successfully."));
     }
 
@@ -67,12 +67,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="model">The model to be imported.</param>
     /// <exception cref="System.ArgumentNullException">model;the model cannot be null</exception>
-    Uri IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
+    void IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
     {
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.ImportUANodeSet - importing from object model."));
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
-      return ImportNodeSet(model, CheckIfModelHasBeenloaded);
+      //return
+      //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
+      ImportNodeSet(model);
     }
 
     /// <summary>
@@ -80,7 +82,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="model">The model to be imported.</param>
     /// <exception cref="System.IO.FileNotFoundException">The imported file does not exist</exception>
-    Uri IAddressSpaceContext.ImportUANodeSet(FileInfo model)
+    void IAddressSpaceContext.ImportUANodeSet(FileInfo model)
     {
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
@@ -88,7 +90,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (!model.Exists)
         throw new FileNotFoundException("The imported file does not exist", model.FullName);
       UANodeSet _nodeSet = UANodeSet.ReadModelFile(model);
-      return ImportNodeSet(_nodeSet, CheckIfModelHasBeenloaded);
+      //return
+      //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
+      ImportNodeSet(_nodeSet);
     }
 
     /// <summary>
@@ -283,22 +287,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private readonly ValidationBuildErrorsHandling m_TraceEvent = null;
 
     //methods
-    private void CheckIfModelHasBeenloaded(ModelTableEntry model)
-    {
-      string modelUri = (model ?? throw new ArgumentNullException()).ModelUri;
-      if (m_NamespaceTable.GetURIIndex(new UriBuilder(modelUri).Uri) >= 0)
-        return;
-      //TODO Import all dependencies for the model #575
-      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"There is no required model for Uri={modelUri}"));
-      //UANodeSet requiredModel = Discovery.Instance.LoadUANodeSet(modelUri);
-      //if (requiredModel == null)
-      //  m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"An error occurred while loading the UANodeSet document."));
-      //ImportNodeSet(requiredModel, LoadModel);
-    }
 
-    private Uri ImportNodeSet(UANodeSet model, Action<ModelTableEntry> loadDependency)
+    private void ImportNodeSet(UANodeSet model)
     {
-      IUAModelContext _modelContext = model.ParseUAModelContext(m_NamespaceTable, loadDependency, m_TraceEvent.TraceEvent);
+      IUAModelContext _modelContext = model.ParseUAModelContext(m_NamespaceTable, m_TraceEvent.TraceEvent);
       Dictionary<string, UANode> itemsDictionary = new Dictionary<string, UANode>();
       foreach (UANode node in model.Items)
       {
@@ -308,7 +300,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           ImportUANode(node);
       }
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Finishing AddressSpaceContext.ImportNodeSet - imported {model.Items.Length} nodes."));
-      return m_NamespaceTable.DefaultModelURI; //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
+      // return m_NamespaceTable.DefaultModelURI; //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
     }
 
     private void ImportUANode(UANode node)

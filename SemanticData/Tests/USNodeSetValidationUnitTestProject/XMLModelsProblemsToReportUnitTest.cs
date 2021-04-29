@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -29,11 +29,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       using (TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext())
       {
         IAddressSpaceContext addressSpace = traceContext.CreateAddressSpaceContext();
-        Uri model = addressSpace.ImportUANodeSet(_testDataFileInfo);
+        //TODO Import all dependencies for the model #575 - DI model must be imported as well
+        addressSpace.ImportUANodeSet(_testDataFileInfo);
         Assert.AreEqual<int>(1, traceContext.TraceList.Count);
         Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, traceContext.TraceList[0].BuildError.Identifier);
         traceContext.Clear();
-        addressSpace.ValidateAndExportModel(model);
+        addressSpace.ValidateAndExportModel(new UriBuilder("http://opcfoundation.org/UA/ADI/").Uri);
         Assert.AreEqual<int>(0, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataEncoding).Count<TraceMessage>());
         Assert.AreEqual<int>(0, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.DataType).Count<TraceMessage>());
         Assert.AreEqual<int>(0, traceContext.TraceList.Where<TraceMessage>(x => x.BuildError.Focus == Focus.Naming).Count<TraceMessage>());
@@ -50,6 +51,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Assert.AreEqual<string>(BuildError.ModelContainsErrors.Identifier, traceContext.TraceList[47].BuildError.Identifier);
       }
     }
+
     [TestMethod]
     public void NameInheritedFrom0Test()
     {
@@ -60,10 +62,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         IAddressSpaceContext addressSpace = traceContext.CreateAddressSpaceContext();
         ModelFactoryTestingFixture.InformationModelFactoryBase testingModelFixture = new InformationModelFactoryBase();
         addressSpace.InformationModelFactory = testingModelFixture;
-        Uri model = addressSpace.ImportUANodeSet(_testDataFileInfo);
+        addressSpace.ImportUANodeSet(_testDataFileInfo);
         Assert.AreEqual<int>(0, traceContext.TraceList.Count);
         traceContext.Clear();
-        addressSpace.ValidateAndExportModel(model);
+        addressSpace.ValidateAndExportModel(new UriBuilder("http://tricycleTypeV1").Uri);
         Assert.AreEqual<int>(2, traceContext.TraceList.Count);
         IEnumerable<NodeFactoryBase> nodes = testingModelFixture.Export();
         Assert.AreEqual(3, nodes.Count<NodeFactoryBase>());
@@ -90,6 +92,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Debug.WriteLine($"Number of processed nodes {processedNodes.Count}");
       }
     }
+
     [TestMethod]
     public void eoursel510Test()
     {
@@ -100,10 +103,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         IAddressSpaceContext addressSpace = traceContext.CreateAddressSpaceContext();
         ModelFactoryTestingFixture.InformationModelFactoryBase testingModelFixture = new InformationModelFactoryBase();
         addressSpace.InformationModelFactory = testingModelFixture;
-        Uri model = addressSpace.ImportUANodeSet(_testDataFileInfo);
+        addressSpace.ImportUANodeSet(_testDataFileInfo);
         Assert.AreEqual<int>(0, traceContext.TraceList.Count);
         traceContext.Clear();
-        addressSpace.ValidateAndExportModel(model);
+        addressSpace.ValidateAndExportModel(new UriBuilder("http://tricycleTypeV1").Uri);
         Assert.AreEqual<int>(5, traceContext.TraceList.Count);
         IEnumerable<NodeFactoryBase> nodes = testingModelFixture.Export();
         Assert.AreEqual(22, nodes.Count<NodeFactoryBase>());
@@ -139,13 +142,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       using (TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext())
       {
         IAddressSpaceContext addressSpace = traceContext.CreateAddressSpaceContext();
-        Uri model = addressSpace.ImportUANodeSet(_testDataFileInfo);
+        addressSpace.ImportUANodeSet(_testDataFileInfo);
         Assert.AreEqual<int>(0, traceContext.TraceList.Count);
         traceContext.Clear();
-        addressSpace.ValidateAndExportModel(model);
+        addressSpace.ValidateAndExportModel(new UriBuilder("https://agileo-automation.com/UA/Semi/").Uri);
         Assert.AreEqual<int>(0, traceContext.TraceList.Count);
       }
     }
+
     [TestMethod]
     public void HasOrderedComponentTest()
     {
@@ -154,14 +158,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       using (TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext())
       {
         IAddressSpaceContext addressSpace = traceContext.CreateAddressSpaceContext();
-        Uri model = addressSpace.ImportUANodeSet(_testDataFileInfo);
+        addressSpace.ImportUANodeSet(_testDataFileInfo);
         Assert.AreEqual<int>(0, traceContext.TraceList.Count);
         traceContext.Clear();
-        addressSpace.ValidateAndExportModel(model);
+        addressSpace.ValidateAndExportModel(new UriBuilder("http://tricycleTypeV1").Uri);
         Assert.AreEqual<int>(0, traceContext.TraceList.Count);
       }
-
     }
+
     [TestMethod]
     public void MachineVisionTest()
     {
@@ -170,10 +174,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       using (TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext())
       {
         IAddressSpaceContext addressSpace = traceContext.CreateAddressSpaceContext();
-        Uri model = addressSpace.ImportUANodeSet(_testDataFileInfo);
+        addressSpace.ImportUANodeSet(_testDataFileInfo);
         Assert.AreEqual<int>(0, traceContext.TraceList.Count);
         traceContext.Clear();
-        addressSpace.ValidateAndExportModel(model);
+        addressSpace.ValidateAndExportModel(new UriBuilder("http://opcfoundation.org/UA/MachineVision").Uri);
         Assert.AreEqual<int>(3, traceContext.TraceList.Count);
         Assert.AreEqual<string>(BuildError.WrongInverseName.Identifier, traceContext.TraceList[0].BuildError.Identifier);
         Assert.AreEqual<string>(BuildError.WrongInverseName.Identifier, traceContext.TraceList[1].BuildError.Identifier);

@@ -25,14 +25,17 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     {
       try
       {
-        args.Parse<Options>(Do, HandleErrors);
+        Run(args);
       }
       catch (Exception ex)
       {
         Console.WriteLine(string.Format("Program stopped by the exception: {0}", ex.Message));
       }
     }
-
+    internal static void Run(string[] args)
+    {
+      args.Parse<Options>(Do, HandleErrors);
+    }
     private static void HandleErrors(IEnumerable<Error> errors)
     {
       foreach (Error _item in errors)

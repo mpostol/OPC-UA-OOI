@@ -72,7 +72,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.ImportUANodeSet - importing from object model."));
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
-      return ImportNodeSet(model, LoadModel);
+      return ImportNodeSet(model, CheckIfModelHasBeenloaded);
     }
 
     /// <summary>
@@ -88,7 +88,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (!model.Exists)
         throw new FileNotFoundException("The imported file does not exist", model.FullName);
       UANodeSet _nodeSet = UANodeSet.ReadModelFile(model);
-      return ImportNodeSet(_nodeSet, LoadModel);
+      return ImportNodeSet(_nodeSet, CheckIfModelHasBeenloaded);
     }
 
     /// <summary>
@@ -283,16 +283,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private readonly ValidationBuildErrorsHandling m_TraceEvent = null;
 
     //methods
-    private void LoadModel(ModelTableEntry model)
+    private void CheckIfModelHasBeenloaded(ModelTableEntry model)
     {
       string modelUri = (model ?? throw new ArgumentNullException()).ModelUri;
       if (m_NamespaceTable.GetURIIndex(new UriBuilder(modelUri).Uri) >= 0)
         return;
-      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Loading required UANodeSet for Uri={modelUri}"));
-      UANodeSet requiredModel = Discovery.Instance.LoadUANodeSet(modelUri);
-      if (requiredModel == null)
-        m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"An error occurred while loading the UANodeSet document."));
-      ImportNodeSet(requiredModel, LoadModel);
+      //TODO Import all dependencies for the model #575
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"There is no required model for Uri={modelUri}"));
+      //UANodeSet requiredModel = Discovery.Instance.LoadUANodeSet(modelUri);
+      //if (requiredModel == null)
+      //  m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"An error occurred while loading the UANodeSet document."));
+      //ImportNodeSet(requiredModel, LoadModel);
     }
 
     private Uri ImportNodeSet(UANodeSet model, Action<ModelTableEntry> loadDependency)

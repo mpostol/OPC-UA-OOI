@@ -64,6 +64,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
           throw new FileNotFoundException(string.Format($"FileNotFoundException - the file {_path} doesn't exist.", _fileToRead.FullName));
         _as.ImportUANodeSet(_fileToRead); //Imports a part of the OPC UA Address Space contained in the file compliant with the `UANodeSet` schema.
       }
+      //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
       if (string.IsNullOrEmpty(options.IMNamespace))
         _as.ValidateAndExportModel();
       else

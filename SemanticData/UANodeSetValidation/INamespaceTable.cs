@@ -24,12 +24,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     ushort GetURIIndexOrAppend(Uri URI);
 
     /// <summary>
-    /// Updates the model or append it the existing collection.
+    /// Updates the model or append it to the existing collection
     /// </summary>
-    /// <param name="model">The model.</param>
+    /// <param name="model">The model in concern.</param>
     void RegisterModel(IModelTableEntry model);
 
-    void RegisterDepenency(IModelTableEntry model);
+    /// <summary>
+    /// Registers the dependency.
+    /// </summary>
+    /// <param name="model">The model that is required.</param>
+    void RegisterDependency(IModelTableEntry model);
 
     /// <summary>
     /// Gets the model table entry.

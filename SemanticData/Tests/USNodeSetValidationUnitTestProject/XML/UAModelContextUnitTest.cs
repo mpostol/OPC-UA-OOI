@@ -278,5 +278,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       asMock.Verify(x => x.RegisterModel(It.IsAny<IModelTableEntry>()), Times.Once);
       Assert.AreEqual<int>(0, trace.Count);
     }
+
+    /// <summary>
+    /// Gets the default model table entry.
+    /// </summary>
+    /// <param name="modelUri">The model URI.</param>
+    /// <returns>IModelTableEntry.</returns>
+    private static IModelTableEntry GetDefaultModelTableEntry(string modelUri)
+    {
+      return new ModelTableEntry
+      {
+        AccessRestrictions = 0xC,
+        ModelUri = modelUri,
+        PublicationDate = DateTime.UtcNow.Date,
+        RequiredModel = null,
+        RolePermissions = new XML.RolePermission[] { new XML.RolePermission() },
+        Version = new Version(1, 0).ToString()
+      };
+    }
   }
 }

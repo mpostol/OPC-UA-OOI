@@ -500,7 +500,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       string uri = nodeId.m_namespaceUri;
       if (nodeId.m_nodeId.NamespaceIndex != 0)
         uri = currentNamespaces.GetModelTableEntry(nodeId.m_nodeId.NamespaceIndex).ModelUri.ToString();
-      // translate the namespace uri.
+      // translate the namespace Uri.
       ushort namespaceIndex = 0;
       if (!String.IsNullOrEmpty(uri))
       {

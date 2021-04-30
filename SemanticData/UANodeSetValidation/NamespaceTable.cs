@@ -53,17 +53,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         modelsList.Add(model);
     }
 
-    void INamespaceTable.RegisterDepenency(IModelTableEntry model)
+    void INamespaceTable.RegisterDependency(IModelTableEntry model)
     {
       int index = GetURIIndex((model ?? throw new ArgumentNullException("", "Model table entry must not be null")).ModelUri);
-      if (index == -1 )
+      if (index == -1)
         modelsList.Add(model);
     }
 
     /// <summary>
     /// Gets the model table entry.
     /// </summary>
-    /// <param name="nsi">The nsi.</param>
+    /// <param name="nsi">The namespace index.</param>
     /// <returns>IModelTableEntry.</returns>
     /// <exception cref="ArgumentOutOfRangeException">namespace index - Namespace index has not been registered</exception>
     public IModelTableEntry GetModelTableEntry(ushort nsi)
@@ -92,15 +92,40 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //internal Uri DefaultModelURI => modelsList[defaultModelIndex].ModelUri;
     //int INamespaceTable.DefaultModelIndex => defaultModelIndex;
 
-    internal void ValidateNamesapceTable()
+    internal bool ValidateNamesapceTable(Action<Uri> add2UndefinedModelUriList)
     {
-      //TODO Import all dependencies for the model #575
-      throw new NotImplementedException("Import all dependencies for the model #575");
+      if (modelsList.Count == 0)
+        return false;
+      bool returnValue = true;
+      foreach (IModelTableEntry item in modelsList)
+      {
+        if (item is ModelTableEntryFixture)
+        {
+          add2UndefinedModelUriList(item.ModelUri);
+          returnValue = false;
+        }
+      };
+      return returnValue;
     }
 
     #endregion Public Members
 
     #region private
+
+    private class ModelTableEntryFixture : IModelTableEntry
+    {
+      public ModelTableEntryFixture(Uri URI)
+      {
+        ModelUri = URI;
+      }
+
+      public byte AccessRestrictions { get; private set; } = 0xC;
+      public Uri ModelUri { get; private set; }
+      public DateTime? PublicationDate { get; private set; } = DateTime.UtcNow.Date;
+      public IModelTableEntry[] RequiredModel { get; private set; }
+      public IRolePermission[] RolePermissions { get; } = new XML.RolePermission[] { new XML.RolePermission() };
+      public string Version { get; } = new Version().ToString();
+    }
 
     private List<IModelTableEntry> modelsList = new List<IModelTableEntry>();
 
@@ -109,7 +134,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       int index = GetURIIndex(URI);
       if (index == -1)
       {
-        modelsList.Add(XML.ModelTableEntry.GetDefaultModelTableEntry(URI.ToString()));
+        modelsList.Add(new ModelTableEntryFixture(URI));
         index = modelsList.Count - 1;
       }
       return index;

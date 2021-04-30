@@ -26,7 +26,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       List<IModelTableEntry> listOfExportedNamespaceTable = models.ToList<IModelTableEntry>();
       Assert.AreEqual<int>(1, listOfExportedNamespaceTable.Count);
       Assert.AreEqual<Uri>(new Uri("http://opcfoundation.org/UA/"), listOfExportedNamespaceTable[0].ModelUri);
-      Assert.IsNull(listOfExportedNamespaceTable[0].RequiredModel);
+      Assert.ThrowsException<NotImplementedException>(() => listOfExportedNamespaceTable[0].AccessRestrictions);
+      Assert.ThrowsException<NotImplementedException>(() => listOfExportedNamespaceTable[0].PublicationDate);
+      Assert.ThrowsException<NotImplementedException>(() => listOfExportedNamespaceTable[0].RequiredModel);
+      Assert.ThrowsException<NotImplementedException>(() => listOfExportedNamespaceTable[0].RolePermissions);
+      Assert.ThrowsException<NotImplementedException>(() => listOfExportedNamespaceTable[0].Version);
     }
 
     [TestMethod]
@@ -60,9 +64,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void UpadateModelOrAppendTest()
     {
       NamespaceTable instance = new NamespaceTable();
-      IModelTableEntry model1 = ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1");
+      IModelTableEntry model1 = GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1");
       ((INamespaceTable)instance).RegisterModel(model1);
-      IModelTableEntry model2 = ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1");
+      IModelTableEntry model2 = GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1");
       ((INamespaceTable)instance).RegisterModel(model2);
       IModelTableEntry model3 = instance.GetModelTableEntry(1);
       Assert.IsNotNull(model3);
@@ -74,15 +78,45 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void ModelsTest()
     {
       NamespaceTable instance = new NamespaceTable();
-      ((INamespaceTable)instance).RegisterModel(ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1"));
-      ((INamespaceTable)instance).RegisterModel(ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest3"));
-      ((INamespaceTable)instance).RegisterModel(ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest2"));
-      ((INamespaceTable)instance).RegisterModel(ModelTableEntry.GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1"));
+      ((INamespaceTable)instance).RegisterModel(GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1"));
+      ((INamespaceTable)instance).RegisterModel(GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest3"));
+      ((INamespaceTable)instance).RegisterModel(GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest2"));
+      ((INamespaceTable)instance).RegisterModel(GetDefaultModelTableEntry("http://opcfoundation.org/UA/GetURIatIndexTest1"));
       Assert.AreEqual<int>(4, instance.Models.Count<IModelTableEntry>());
     }
 
-    #region instrumentation
+    [TestMethod]
+    public void ValidateNamesapceTableTestMethod()
+    {
+      NamespaceTable instance = new NamespaceTable();
+      List<Uri> undefinedModels = new List<Uri>();
+      Assert.IsFalse(instance.ValidateNamesapceTable(y => undefinedModels.Add(y)));
+      Assert.AreEqual<int>(1, undefinedModels.Count);
+      Assert.AreEqual<Uri>(new Uri("http://opcfoundation.org/UA/"), undefinedModels[0]);
+      ((INamespaceTable)instance).RegisterModel(GetDefaultModelTableEntry("http://opcfoundation.org/UA/"));
+      Assert.IsTrue(instance.ValidateNamesapceTable(y => Assert.Fail()));
+    }
 
-    #endregion instrumentation
+    #region fixtures
+
+    /// <summary>
+    /// Gets the default model table entry.
+    /// </summary>
+    /// <param name="modelUri">The model URI.</param>
+    /// <returns>IModelTableEntry.</returns>
+    private static IModelTableEntry GetDefaultModelTableEntry(string modelUri)
+    {
+      return new ModelTableEntry
+      {
+        AccessRestrictions = 0xC,
+        ModelUri = modelUri,
+        PublicationDate = DateTime.UtcNow.Date,
+        RequiredModel = null,
+        RolePermissions = new XML.RolePermission[] { new XML.RolePermission() },
+        Version = new Version(1, 0).ToString()
+      };
+    }
+
+    #endregion fixtures
   }
 }

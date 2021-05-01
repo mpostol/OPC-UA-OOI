@@ -34,7 +34,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Searches for an index that matches the <paramref name="URI" />, and returns the zero-based index of the first occurrence within the namespace table.
     /// </summary>
     /// <param name="URI">The URI to search for in the namespace table.</param>
-    /// <returns>The zero-based index of the first occurrence of <paramref name="URI" /> that matches the conditions defined by <paramref name="URI" />, if found; otherwise, –1.</returns>
+    /// <returns>The zero-based index of the first occurrence of <paramref name="URI" />, if found; otherwise, it is appended.</returns>
     ushort INamespaceTable.GetURIIndexOrAppend(Uri URI)
     {
       int _index = GetURIIndex(URI);
@@ -43,41 +43,49 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return (ushort)_index;
     }
 
-    //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
-    void INamespaceTable.RegisterModel(IModelTableEntry model)
+    /// <summary>
+    /// Updates the model or append it to the existing collection
+    /// </summary>
+    /// <param name="model">The model in concern.</param>
+    /// <exception cref="ArgumentNullException">model - Model table entry must not be null</exception>
+    public void RegisterModel(IModelTableEntry model)
     {
-      int index = GetURIIndex((model ?? throw new ArgumentNullException("", "Model table entry must not be null")).ModelUri);
+      int index = GetURIIndex((model ?? throw new ArgumentNullException("model", "Model table entry must not be null")).ModelUri);
       if (index >= 0)
         modelsList[index] = model;
       else
         modelsList.Add(model);
     }
 
-    void INamespaceTable.RegisterDependency(IModelTableEntry model)
-    {
-      int index = GetURIIndex((model ?? throw new ArgumentNullException("", "Model table entry must not be null")).ModelUri);
-      if (index == -1)
-        modelsList.Add(model);
-    }
-
     /// <summary>
-    /// Gets the model table entry.
+    /// Registers the dependency.
     /// </summary>
-    /// <param name="nsi">The namespace index.</param>
-    /// <returns>IModelTableEntry.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">namespace index - Namespace index has not been registered</exception>
-    public IModelTableEntry GetModelTableEntry(ushort nsi)
+    /// <param name="model">The model that is required.</param>
+    /// <exception cref="ArgumentNullException">Model table entry must not be null</exception>
+    public void RegisterDependency(IModelTableEntry model)
     {
-      if (nsi >= modelsList.Count)
-        throw new ArgumentOutOfRangeException("namespace index", "Namespace index has not been registered");
-      return modelsList[nsi];
+      int index = GetURIIndex((model ?? throw new ArgumentNullException("model", "Model table entry must not be null")).ModelUri);
+      if (index == -1)
+        modelsList.Add(new ModelTableEntryFixture(model));
     }
 
     /// <summary>
-    /// Gets the index of the URI.
+    /// Gets the model <see cref="Uri" />.
+    /// </summary>
+    /// <param name="namespaceIndex">Index of the namespace.</param>
+    /// <returns>An instance that captures <see cref="Uri" /> of the requested model if already registered, otherwise, null.</returns>
+    public Uri GetModelTableEntry(ushort namespaceIndex)
+    {
+      if (namespaceIndex >= modelsList.Count)
+        return null;
+      return modelsList[namespaceIndex].ModelUri;
+    }
+
+    /// <summary>
+    /// Searches for an <paramref name="URI" />, and returns the zero-based index of the first occurrence within the <see cref="INamespaceTable" />.
     /// </summary>
     /// <param name="URI">The URI.</param>
-    /// <returns>System.Int32.</returns>
+    /// <returns>The zero-based index of the first occurrence of an <paramref name="URI" />, if found; otherwise, –1.</returns>
     public int GetURIIndex(Uri URI)
     {
       return modelsList.FindIndex(x => x.ModelUri == URI);
@@ -87,10 +95,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region Public Members
 
-    internal IEnumerable<IModelTableEntry> Models => modelsList;
     //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
-    //internal Uri DefaultModelURI => modelsList[defaultModelIndex].ModelUri;
-    //int INamespaceTable.DefaultModelIndex => defaultModelIndex;
+    internal IEnumerable<IModelTableEntry> Models => modelsList;
 
     internal bool ValidateNamesapceTable(Action<Uri> add2UndefinedModelUriList)
     {
@@ -117,6 +123,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       public ModelTableEntryFixture(Uri URI)
       {
         ModelUri = URI;
+      }
+
+      public ModelTableEntryFixture(IModelTableEntry modelTableEntry)
+      {
+        AccessRestrictions = modelTableEntry.AccessRestrictions;
+        ModelUri = modelTableEntry.ModelUri;
+        PublicationDate = modelTableEntry.PublicationDate;
+        RequiredModel = modelTableEntry.RequiredModel;
+        RolePermissions = modelTableEntry.RolePermissions;
+        Version = modelTableEntry.Version;
       }
 
       public byte AccessRestrictions { get; private set; } = 0xC;

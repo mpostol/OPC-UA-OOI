@@ -36,6 +36,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <value>The information model factory.</value>
     IModelFactory InformationModelFactory { set; }
 
+    //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
     /// <summary>
     /// Validates and exports the selected model for the default namespace at index 1 if defined or standard OPC UA.
     /// </summary>

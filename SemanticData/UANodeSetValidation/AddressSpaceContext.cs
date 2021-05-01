@@ -193,7 +193,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="namespaceIndex">Index of the namespace.</param>
     public string GetNamespace(ushort namespaceIndex)
     {
-      return m_NamespaceTable.GetModelTableEntry(namespaceIndex).ModelUri.ToString();
+      return m_NamespaceTable.GetModelTableEntry(namespaceIndex).ToString();
     }
 
     /// <summary>

@@ -29,7 +29,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       using (TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext())
       {
         IAddressSpaceContext addressSpace = traceContext.CreateAddressSpaceContext();
-        //TODO Import all dependencies for the model #575 - DI model must be imported as well
         addressSpace.ImportUANodeSet(_testDataFileInfo);
         Assert.AreEqual<int>(1, traceContext.TraceList.Count);
         Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, traceContext.TraceList[0].BuildError.Identifier);

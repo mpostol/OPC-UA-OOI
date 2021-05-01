@@ -1,9 +1,9 @@
-//___________________________________________________________________________________
+//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
@@ -499,7 +499,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       // lookup the namespace uri.
       string uri = nodeId.m_namespaceUri;
       if (nodeId.m_nodeId.NamespaceIndex != 0)
-        uri = currentNamespaces.GetModelTableEntry(nodeId.m_nodeId.NamespaceIndex).ModelUri.ToString();
+        uri = currentNamespaces.GetModelTableEntry(nodeId.m_nodeId.NamespaceIndex).ToString();
       // translate the namespace Uri.
       ushort namespaceIndex = 0;
       if (!String.IsNullOrEmpty(uri))
@@ -608,7 +608,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       }
     }
 
-    #endregion statioc Parse
+    #endregion static Parse
 
     #region IComparable Members
 

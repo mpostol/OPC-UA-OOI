@@ -165,7 +165,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       foreach (ModelTableEntry item in models)
       {
         namespaceTable.RegisterModel(item);
-        //TODO Import all dependencies for the model #575
         if (item.RequiredModel != null)
           foreach (ModelTableEntry requiredModel in item.RequiredModel)
             namespaceTable.RegisterDependency(requiredModel);

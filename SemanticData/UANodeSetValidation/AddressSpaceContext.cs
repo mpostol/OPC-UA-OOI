@@ -117,8 +117,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     void IAddressSpaceContext.ValidateAndExportModel(Uri targetNamespace)
     {
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", targetNamespace)));
+      List<Uri> undefinedUriLists = new List<Uri>();
+      if (!m_NamespaceTable.ValidateNamesapceTable(x => undefinedUriLists.Add(x)))
+        foreach (Uri item in undefinedUriLists)
+          m_TraceEvent.TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.LackOfRequiredModel, $"I cannot find definition of the required model {item}"));
       int _nsIndex = m_NamespaceTable.GetURIIndex(targetNamespace);
-      //TODO This example doesn't work #583
+      //TODO This example doesn't work #583 - handle this exception
       if (_nsIndex == -1)
         throw new ArgumentOutOfRangeException("targetNamespace", $"Cannot find this {targetNamespace} namespace");
       ValidateAndExportModel(_nsIndex);
@@ -189,7 +193,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="namespaceIndex">Index of the namespace.</param>
     public string GetNamespace(ushort namespaceIndex)
     {
-      return m_NamespaceTable.GetModelTableEntry(namespaceIndex).ModelUri.ToString();
+      return m_NamespaceTable.GetModelTableEntry(namespaceIndex).ToString();
     }
 
     /// <summary>

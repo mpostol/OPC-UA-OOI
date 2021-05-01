@@ -279,6 +279,14 @@ namespace UAOOI.SemanticData.BuildingErrorsHandling
                     Identifier = "P6-0F03000000", 
                     Descriptor = "SymbolicName contains characters that are not allowed. Only letters, digits or the underscore (‘_’) are permitted." }; } }
     /// <summary>
+    /// Error: P6-0F02000000; Focus: XML; The required model is missing.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P6-0F02000000.</value>
+    public static BuildError LackOfRequiredModel { get { return new BuildError() 
+                  { Focus = Focus.XML, 
+                    Identifier = "P6-0F02000000", 
+                    Descriptor = "The required model is missing." }; } }
+    /// <summary>
     /// Error: P3-XXXXX00000; Focus: DataType; Abstract DataType of the field of a concrete structure is not permitted.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P3-XXXXX00000.</value>

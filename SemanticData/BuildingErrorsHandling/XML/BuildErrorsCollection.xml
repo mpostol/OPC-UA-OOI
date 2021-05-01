@@ -206,6 +206,12 @@
       <ns1:Name>WrongSymbolicName</ns1:Name>
     </ns1:NamedBuildError>
     <ns1:NamedBuildError>
+      <ns1:Focus>XML</ns1:Focus>
+      <ns1:Identifier>P6-0F02000000</ns1:Identifier>
+      <ns1:Descriptor>The required model is missing.</ns1:Descriptor>
+      <ns1:Name>LackOfRequiredModel</ns1:Name>
+    </ns1:NamedBuildError>
+    <ns1:NamedBuildError>
       <ns1:Focus>DataType</ns1:Focus>
       <ns1:Identifier>P3-XXXXX00000</ns1:Identifier>
       <ns1:Descriptor>Abstract DataType of the field of a concrete structure is not permitted.</ns1:Descriptor>

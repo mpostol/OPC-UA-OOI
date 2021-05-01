@@ -25,21 +25,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     {
       UANodeSet nodeSet = TestData.CreateNodeSetModel();
       Assert.IsNotNull(nodeSet);
-      Mock<INamespaceTable> asMock = new Mock<INamespaceTable>();
+      Mock<INamespaceTable> nsMock = new Mock<INamespaceTable>();
       List<TraceMessage> trace = new List<TraceMessage>();
       Action<TraceMessage> logMock = z => trace.Add(z);
-      Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(null, asMock.Object, logMock));
+      Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(null, nsMock.Object, logMock));
       Assert.AreEqual<int>(0, trace.Count);
       Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(nodeSet, null, logMock));
       Assert.AreEqual<int>(0, trace.Count);
-      Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, null));
+      Assert.ThrowsException<ArgumentNullException>(() => UAModelContext.ParseUANodeSetModelHeader(nodeSet, nsMock.Object, null));
       Assert.AreEqual<int>(0, trace.Count);
-      UAModelContext modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
+      UAModelContext modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, nsMock.Object, logMock);
       Assert.IsNotNull(modelContext);
       Assert.AreEqual<int>(1, trace.Count);
       Assert.AreEqual<string>("P0-0001030000", trace[0].BuildError.Identifier);
-      //TODO Import all dependencies for the model #575
-      //Assert.IsTrue(modelContext.ModelUri.ToString().StartsWith(@"http://cas.eu/UA/Demo/"));
     }
 
     [TestMethod]
@@ -129,6 +127,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<TraceEventType>(TraceEventType.Information, trace[0].TraceLevel);
     }
 
+    //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584 - this UT look useless
     [TestMethod]
     public void ModelUriTest()
     {
@@ -141,7 +140,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Mock<INamespaceTable> asMock = new Mock<INamespaceTable>();
       asMock.Setup<ushort>(x => x.GetURIIndexOrAppend(It.IsAny<Uri>())).Returns(10);
       Action<TraceMessage> logMock = z => Assert.Fail();
-      //TODO Import all dependencies for the model #575
       UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       //Assert.AreEqual<string>(nodeSet.Models[0].ModelUri, _modelContext.ModelUri.ToString());
     }
@@ -248,13 +246,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<string>("The BrowseName of a ReferenceType shall be unique.", trace[0].BuildError.Descriptor);
       Assert.AreEqual<string>("The UAReferenceType duplicated BrowseName=10:QualifiedName. It is not allowed that two different ReferenceTypes have the same BrowseName", trace[0].Message);
       Debug.WriteLine(trace[0].ToString());
-      //TODO Import all dependencies for the model #575
-      trace.Clear();
-      _modelContext.RegisterUAReferenceType(new QualifiedName("QualifiedName", 11));
-      //Assert.AreEqual<int>(1, trace.Count);
-      //Assert.AreEqual<string>(BuildError.BrowseNameReferenceTypeScope.Identifier, trace[0].BuildError.Identifier);
-      //Assert.AreEqual<string>("The BrowseName of a ReferenceType is defined outside of the model.", trace[0].BuildError.Descriptor);
-      //Assert.AreEqual<string>("Wrong NamespaceIndex of the 11:QualifiedName. The UAReferenceType should be defined by the default model 10", trace[0].Message);
     }
 
     [TestMethod]
@@ -277,6 +268,24 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
       asMock.Verify(x => x.RegisterModel(It.IsAny<IModelTableEntry>()), Times.Once);
       Assert.AreEqual<int>(0, trace.Count);
+    }
+
+    /// <summary>
+    /// Gets the default model table entry.
+    /// </summary>
+    /// <param name="modelUri">The model URI.</param>
+    /// <returns>IModelTableEntry.</returns>
+    private static IModelTableEntry GetDefaultModelTableEntry(string modelUri)
+    {
+      return new ModelTableEntry
+      {
+        AccessRestrictions = 0xC,
+        ModelUri = modelUri,
+        PublicationDate = DateTime.UtcNow.Date,
+        RequiredModel = null,
+        RolePermissions = new XML.RolePermission[] { new XML.RolePermission() },
+        Version = new Version(1, 0).ToString()
+      };
     }
   }
 }

@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using CommandLine;
 using System;
@@ -32,16 +32,19 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
         Console.WriteLine(string.Format("Program stopped by the exception: {0}", ex.Message));
       }
     }
+
     internal static void Run(string[] args)
     {
       args.Parse<Options>(Do, HandleErrors);
     }
+
     private static void HandleErrors(IEnumerable<Error> errors)
     {
       foreach (Error _item in errors)
       {
         string _processing = _item.StopsProcessing ? "and it stops processing" : "but the processing continues";
-        //TODO trace it to log Console.WriteLine($"The following tag has wrong value: {_item.Tag} {_processing}.");
+        //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
+        //Console.WriteLine($"The following tag has wrong value: {_item.Tag} {_processing}.");
       }
     }
 
@@ -65,13 +68,11 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
         FileInfo _fileToRead = new FileInfo(_path);
         if (!_fileToRead.Exists)
           throw new FileNotFoundException(string.Format($"FileNotFoundException - the file {_path} doesn't exist.", _fileToRead.FullName));
-        _as.ImportUANodeSet(_fileToRead); //Imports a part of the OPC UA Address Space contained in the file compliant with the `UANodeSet` schema.
+        _as.ImportUANodeSet(_fileToRead);
       }
-      //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
       if (string.IsNullOrEmpty(options.IMNamespace))
-        _as.ValidateAndExportModel();
-      else
-        _as.ValidateAndExportModel(new Uri(options.IMNamespace)); //Validates and exports the selected model.
+        throw new ArgumentOutOfRangeException("namespace", "A namespace must be provided to validate associated model");
+      _as.ValidateAndExportModel(new Uri(options.IMNamespace)); //Validates and exports the selected model.
       if (_exportModel)
         _exporter.ExportToXMLFile(options.ModelDesignFileName, options.Stylesheet); //Serializes the already generated model and writes the XML document to a file.
     }

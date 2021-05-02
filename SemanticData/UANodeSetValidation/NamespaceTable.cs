@@ -95,7 +95,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region Public Members
 
-    //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
     internal IEnumerable<IModelTableEntry> Models => modelsList;
 
     internal bool ValidateNamesapceTable(Action<Uri> add2UndefinedModelUriList)

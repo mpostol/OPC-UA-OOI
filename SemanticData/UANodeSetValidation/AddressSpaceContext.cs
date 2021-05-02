@@ -63,26 +63,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     /// <summary>
-    /// Imports a part of the OPC UA Address Space contained in the <see cref="UANodeSet" /> object model.
+    /// Imports all OPC UA Address Space models contained in the <see cref="UANodeSet" /> XML document, and populates internal OPC UA Address Space.
     /// </summary>
     /// <param name="model">The model to be imported.</param>
-    /// <exception cref="System.ArgumentNullException">model;the model cannot be null</exception>
-    void IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
+    /// <returns>Return a default <see cref="Uri" /> for the model defined in <see cref="UANodeSet" />.</returns>
+    /// <exception cref="ArgumentNullException">model - the model cannot be null</exception>
+    Uri IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
     {
       m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContextService.ImportUANodeSet - importing from object model."));
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
-      //return
-      //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
-      ImportNodeSet(model);
+      return ImportNodeSet(model);
     }
 
-    /// <summary>
-    /// Imports a part of the OPC UA Address Space contained in the file <see cref="FileInfo" />.
-    /// </summary>
-    /// <param name="model">The model to be imported.</param>
-    /// <exception cref="System.IO.FileNotFoundException">The imported file does not exist</exception>
-    void IAddressSpaceContext.ImportUANodeSet(FileInfo model)
+    Uri IAddressSpaceContext.ImportUANodeSet(FileInfo model)
     {
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
@@ -90,23 +84,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (!model.Exists)
         throw new FileNotFoundException("The imported file does not exist", model.FullName);
       UANodeSet _nodeSet = UANodeSet.ReadModelFile(model);
-      //return
-      //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
-      ImportNodeSet(_nodeSet);
-    }
-
-    /// <summary>
-    /// Validates and exports the selected model for the default namespace at index 1 if defined or standard OPC UA.
-    /// </summary>
-    //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
-    void IAddressSpaceContext.ValidateAndExportModel()
-    {
-      foreach (IModelTableEntry _nsi in m_NamespaceTable.Models)
-      {
-        int indes = m_NamespaceTable.GetURIIndex(_nsi.ModelUri);
-        m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage(string.Format("Entering AddressSpaceContext.ValidateAndExportModel - starting for the {0} namespace.", _nsi.ModelUri)));
-        ValidateAndExportModel(indes);
-      }
+      return ImportNodeSet(_nodeSet);
     }
 
     /// <summary>
@@ -292,9 +270,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     //methods
 
-    private void ImportNodeSet(UANodeSet model)
+    private Uri ImportNodeSet(UANodeSet model)
     {
-      IUAModelContext _modelContext = model.ParseUAModelContext(m_NamespaceTable, m_TraceEvent.TraceEvent);
+      Uri defaultModelUri = model.ParseUAModelContext(m_NamespaceTable, m_TraceEvent.TraceEvent);
       Dictionary<string, UANode> itemsDictionary = new Dictionary<string, UANode>();
       foreach (UANode node in model.Items)
       {
@@ -303,8 +281,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         else
           ImportUANode(node);
       }
-      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Finishing AddressSpaceContext.ImportNodeSet - imported {model.Items.Length} nodes."));
-      // return m_NamespaceTable.DefaultModelURI; //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
+      m_TraceEvent.TraceEvent(TraceMessage.DiagnosticTraceMessage($"Finished import UANodeSet for {defaultModelUri}; Imported {model.Items.Length} nodes."));
+      return defaultModelUri;
     }
 
     private void ImportUANode(UANode node)

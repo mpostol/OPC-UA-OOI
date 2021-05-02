@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
@@ -31,6 +31,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       context2Return.Parse(modelHeader, addressSpaceContext);
       return context2Return;
     }
+
+    internal Uri DefaultUri => new Uri(_namespaceUris[0]);
 
     #endregion API
 
@@ -74,13 +76,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     public void RegisterUAReferenceType(QualifiedName browseName)
     {
-      //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
-      //if (browseName.NamespaceIndex != _addressSpaceContext.DefaultModelIndex)
-      //{
-      //  string message = $"Wrong {nameof(QualifiedName.NamespaceIndex)} of the {browseName}. The {nameof(UAReferenceType)} should be defined by the default model {_addressSpaceContext.DefaultModelIndex}";
-      //  _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.BrowseNameReferenceTypeScope, message));
-      //}
-      //else
       if (UAReferenceTypNames.Contains(browseName))
       {
         string message = $"The {nameof(UAReferenceType)} duplicated BrowseName={browseName}. It is not allowed that two different ReferenceTypes have the same BrowseName";
@@ -99,8 +94,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     private readonly IUANodeSetModelHeader _modelHeader;
     private readonly Action<TraceMessage> _logTraceMessage;
     private readonly Dictionary<string, string> _aliasesDictionary = new Dictionary<string, string>();
-    private List<string> _namespaceUris = new List<string>();
+    private IList<string> _namespaceUris = new List<string>();
     private INamespaceTable _addressSpaceContext { get; }
+
     private readonly List<QualifiedName> UAReferenceTypNames = new List<QualifiedName>();
     private static Random _randomNumber = new Random();
 

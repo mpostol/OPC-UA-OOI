@@ -12,45 +12,48 @@ These instructions will get you a copy of the software up and running on your lo
 
 ## Syntax
 
-> asp \{ *filePath* \} [(-e | --export=)*filePath*] [ (-s | --stylesheet=)*stylesheetName* ] [ (-n | --namespace=)*ns* ] [ --nologo ]
->
-> asp [ --help ] [ --version ]
->
-> asp [ help ] [ version ]
+```txt
+asp { filePath } [(-e | --export=) filePath] [ (-s | --stylesheet=)*stylesheetName* ] (-n | --namespace=) ns [--nologo]
+
+asp [--help] [--version]
+
+asp [help] [version]
+
+```
 
 ### Argument
 
-|Argument|Description|
-|--------|-----------|
-|*filePath*| Specifies the input file to populate the internal `UA Address Space`. At least one file containing `UA Address Space` model compliant with `UANodeSet` schema must be specified. Many files can be entered at once.
+| Argument   | Description                                                                                                                                                                                                         |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| *filePath* | Specifies the input file to populate the internal `UA Address Space`. At least one file containing `UA Address Space` model compliant with `UANodeSet` schema must be specified. Many files can be entered at once. |
 
 ### General Options
 
-|Option|Description|
-|--------|-----------|
-|`help`|Displays command syntax and options for the tool. It halts processing and displays the help screen. The help screen is also displayed when the parsing process fails, along with the clear and explicit description of every error encountered. The switch or the built-in `help` verb can be used.|
-|`version`|Prints version information. The switch or the built-in `version` verb can be used.|
-|`nologo`|Suppresses the banner.|
+| Option    | Description                                                                                                                                                                                                                                                                                         |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `help`    | Displays command syntax and options for the tool. It halts processing and displays the help screen. The help screen is also displayed when the parsing process fails, along with the clear and explicit description of every error encountered. The switch or the built-in `help` verb can be used. |
+| `version` | Prints version information. The switch or the built-in `version` verb can be used.                                                                                                                                                                                                                  |
+| `nologo`  | Suppresses the banner.                                                                                                                                                                                                                                                                              |
 
 ### ModelDesign Options
 
-|Option|Description|
-|--------|-----------|
-|`e[xport]`*path*| Specifies the output file containing the ModelDesign XML document.|
-|`s[tylesheet]`*stylesheetName* | Name of the stylesheet document (XSLT - eXtensible Stylesheet Language Transformations). With XSLT you can transform an XML document into any text document.|
-|`n[amespace]`*ns*| Specifies the namespace for the generated types. If not specified last imported model is used for export.
+| Option                              | Description                                                                                                                                                  |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `e`[ `xport` ] *path*               | Specifies the output file containing the ModelDesign XML document.                                                                                           |
+| `s`[ `tylesheet` ] *stylesheetName* | Name of the stylesheet document (XSLT - eXtensible Stylesheet Language Transformations). With XSLT you can transform an XML document into any text document. |
+| `n`[ `amespace` ] *ns*              | Specifies the namespace of the model to be processed.                                                                                                        |
 
 ### Command-line Syntax
 
 The following table describes the notation used to indicate command-line syntax.
 
-|Notation| Description|
-|-|-|
-| Text without brackets or braces |Items you must type as shown |
-| Text Italic |Placeholder for which you must supply a value |
-| \[Text inside square brackets\] | Optional items |
-| \{Text inside braces\} |Items that can be repeated |
-| Vertical bar |Separator for mutually exclusive items; choose one|
+| Notation                        | Description                                        |
+| ------------------------------- | -------------------------------------------------- |
+| Text without brackets or braces | Items you must type as shown                       |
+| Text Italic                     | Placeholder for which you must supply a value      |
+| [Text inside square brackets]   | Optional items                                     |
+| {Text inside braces}            | Items that can be repeated                         |
+| \| Vertical bar                 | Separator for mutually exclusive items; choose one |
 
 ## Deployment
 

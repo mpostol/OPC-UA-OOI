@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using CommandLine;
 using CommandLine.Text;
@@ -25,7 +25,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax
     [Option('s', "stylesheet", HelpText = "Name of the stylesheet document (XSLT - eXtensible Stylesheet Language Transformations). With XSLT you can transform an XML document into any text document.", MetaValue = "stylesheetName")]
     public string Stylesheet { get; set; }
 
-    [Option('n', "namespace", HelpText = "Specifies the namespace for the generated types. If not specified last imported model is used for export.", MetaValue = "ns")]
+    [Option('n', "namespace", Required = true, HelpText = "Specifies the namespace for the generated types. If not specified last imported model is used for export.", MetaValue = "ns")]
     public string IMNamespace { get; set; }
 
     [Option("nologo", HelpText = "If present suppresses the banner.")]

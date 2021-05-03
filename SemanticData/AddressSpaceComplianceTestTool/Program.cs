@@ -48,33 +48,41 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       }
     }
 
-    private static void Do(Options options)
+    internal static void Do(Options options, IAddressSpaceContext addressSpace)
     {
-      PrintLogo(options);
-      BuildErrorsHandling.Log.TraceEventAction += z => Console.WriteLine(z.ToString());
-      IAddressSpaceContext _as = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
       ModelDesignExport _exporter = new ModelDesignExport(); //creates new instance of the ModelDesignExport class that captures functionality supporting export of the OPC UA Information Model represented
                                                              //by an XML file compliant with UAModelDesign schema.
       bool _exportModel = false;
       if (!string.IsNullOrEmpty(options.ModelDesignFileName))
       {
-        _as.InformationModelFactory = _exporter.GetFactory(BuildErrorsHandling.Log.TraceEvent);  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space.
+        addressSpace.InformationModelFactory = _exporter.GetFactory(BuildErrorsHandling.Log.TraceEvent);  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space.
         _exportModel = true;
       }
       if (options.Filenames == null)
         throw new ArgumentOutOfRangeException($"{nameof(options.Filenames)}", "List of input files to convert is incorrect. At least one file UANodeSet must be entered.");
+      if (string.IsNullOrEmpty(options.IMNamespace))
+        throw new ArgumentOutOfRangeException("namespace", "A namespace must be provided to validate associated model");
+      Uri uri = new Uri(options.IMNamespace);
       foreach (string _path in options.Filenames)
       {
         FileInfo _fileToRead = new FileInfo(_path);
         if (!_fileToRead.Exists)
           throw new FileNotFoundException(string.Format($"FileNotFoundException - the file {_path} doesn't exist.", _fileToRead.FullName));
-        _as.ImportUANodeSet(_fileToRead);
+        addressSpace.ImportUANodeSet(_fileToRead);
       }
-      if (string.IsNullOrEmpty(options.IMNamespace))
-        throw new ArgumentOutOfRangeException("namespace", "A namespace must be provided to validate associated model");
-      _as.ValidateAndExportModel(new Uri(options.IMNamespace)); //Validates and exports the selected model.
+      addressSpace.ValidateAndExportModel(uri); //Validates and exports the selected model.
       if (_exportModel)
         _exporter.ExportToXMLFile(options.ModelDesignFileName, options.Stylesheet); //Serializes the already generated model and writes the XML document to a file.
+    }
+
+    #region private
+
+    private static void Do(Options options)
+    {
+      PrintLogo(options);
+      BuildErrorsHandling.Log.TraceEventAction += z => Console.WriteLine(z.ToString());
+      IAddressSpaceContext _as = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
+      Do(options, _as);
     }
 
     private static void PrintLogo(Options options)
@@ -86,5 +94,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       Console.WriteLine("Copyright(c) 2021 Mariusz Postol");
       Console.WriteLine();
     }
+
+    #endregion private
   }
 }

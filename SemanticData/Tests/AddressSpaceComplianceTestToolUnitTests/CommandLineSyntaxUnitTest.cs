@@ -20,23 +20,22 @@ namespace UAOOI.SemanticData.AddressSpaceTestTool.UnitTests
     [TestMethod]
     public void EmptyLineTest()
     {
-      string[] _emptyLine = new string[] {"One file name must be specified" };
-      Options _return = null;
-      IEnumerable<Error> _errors = null;
-      _emptyLine.Parse<Options>(x => _return = x, y => _errors = y);
-      Assert.IsNotNull(_return);
-      Assert.IsNull(_errors);
-      Assert.IsNotNull(_return.Filenames);
-      Assert.AreEqual<int>(1, _return.Filenames.Count());
-      Assert.IsTrue(string.IsNullOrEmpty(_return.IMNamespace));
-      Assert.IsTrue(string.IsNullOrEmpty(_return.ModelDesignFileName));
-      Assert.IsFalse(_return.NoLogo);
-      Assert.IsTrue(string.IsNullOrEmpty(_return.Stylesheet));
+      string[] emptyLine = new string[] {"" };
+      Options options = null;
+      List<Error> errors = null;
+      int doCount = 0;
+      emptyLine.Parse<Options>(x => { options = x; doCount++; }, y => errors = y.ToList<Error>());
+      Assert.IsNull(options);
+      Assert.IsNotNull(errors);
+      Assert.AreEqual<int>(1, errors.Count<Error>());
+      Assert.AreEqual<string>("CommandLine.MissingRequiredOptionError", errors[0].ToString());
+      Assert.AreEqual<ErrorType>(ErrorType.MissingRequiredOptionError, errors[0].Tag);
+      Assert.AreEqual<int>(0, doCount);
     }
     [TestMethod]
     public void FilenamesTest()
     {
-      string[] _emptyLine = new string[] { "AssemblyInfo.cs", "myproject.csproj" };
+      string[] _emptyLine = new string[] { "AssemblyInfo.cs", "myproject.csproj", "-n", "http://a.b.c" };
       Options _return = null;
       IEnumerable<Error> _errors = null;
       _emptyLine.Parse<Options>(x => _return = x, y => _errors = y);
@@ -70,7 +69,7 @@ namespace UAOOI.SemanticData.AddressSpaceTestTool.UnitTests
     [TestMethod]
     public void AllShortSwitchesTest()
     {
-      string[] _emptyLine = new string[] { "App_Data/cachefile.json", "App_Data/cachefile2.json", "-n", "XSLTName", "-e", "ModelDesign.xml", "-s", "XMLstylesheet", "--nologo" };
+      string[] _emptyLine = new string[] { "App_Data/cachefile.json", "App_Data/cachefile2.json", "-n", "http://a.b.c", "-e", "ModelDesign.xml", "-s", "XMLstylesheet", "--nologo" };
       Options _return = null;
       IEnumerable<Error> _errors = null;
       _emptyLine.Parse<Options>(x => _return = x, y => _errors = y);
@@ -81,7 +80,7 @@ namespace UAOOI.SemanticData.AddressSpaceTestTool.UnitTests
       string[] _files = _return.Filenames.ToArray<string>();
       Assert.AreEqual<string>("App_Data/cachefile.json", _files[0]);
       Assert.AreEqual<string>("App_Data/cachefile2.json", _files[1]);
-      Assert.AreEqual<string>("XSLTName", _return.IMNamespace);
+      Assert.AreEqual<string>("http://a.b.c", _return.IMNamespace);
       Assert.AreEqual<string>("ModelDesign.xml", _return.ModelDesignFileName);
       Assert.IsTrue(_return.NoLogo);
       Assert.AreEqual<string>("XMLstylesheet", _return.Stylesheet);

@@ -11,8 +11,8 @@ string Url = "https://github.com/mpostol/OPC-UA-OOI";
 string Email = "mpostol@cas.eu";
 string Phone = "+48 608 619 899";
 string Owner = "Mariusz Postol";
-string RepositoryVersion = "6.1.3"; //increment on the same position as the group version
-string RepositoryVersionPrerelease = ""; //increment on the same position as the group version
+string RepositoryVersion = "6.2.0"; //increment on the same position as the group version
+string RepositoryVersionPrerelease = "Alpha"; //increment on the same position as the group version
 string Authors = "Mariusz Postol";
 string IconURLTag = "https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true";
 
@@ -29,13 +29,13 @@ string DataDiscoveryPrerelease = "";
 string DataDiscoveryProduct = "Object Oriented Internet";
 
 //UAOOI.SemanticData
-string SemanticDataVersion = "5.1.0";
-string SemanticDataPrerelease = "";
+string SemanticDataVersion = "6.0.0";
+string SemanticDataPrerelease = "Alpha";
 string SemanticDataProduct = "Object Oriented Internet";
 
 //UAOOI.SemanticData.UANodeSetValidation
-string SemanticDataUANodeSetValidationVersion = "5.2.1";
-string SemanticDataUANodeSetValidationPrerelease = "Alpha";
+string SemanticDataUANodeSetValidationVersion = "6.0.0";
+string SemanticDataUANodeSetValidationPrerelease = "Bravo";
 
 //UAOOI.SemanticData.UAModelDesignExport
 string SemanticDataUAModelDesignExportVersion = "5.2.3";

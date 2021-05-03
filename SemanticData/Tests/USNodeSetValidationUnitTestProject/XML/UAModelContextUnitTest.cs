@@ -127,9 +127,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<TraceEventType>(TraceEventType.Information, trace[0].TraceLevel);
     }
 
-    //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584 - this UT look useless
     [TestMethod]
-    public void ModelUriTest()
+    public void DefaultUriUriTest()
     {
       IUANodeSetModelHeader nodeSet = new UANodeSet
       {
@@ -141,7 +140,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       asMock.Setup<ushort>(x => x.GetURIIndexOrAppend(It.IsAny<Uri>())).Returns(10);
       Action<TraceMessage> logMock = z => Assert.Fail();
       UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);
-      //Assert.AreEqual<string>(nodeSet.Models[0].ModelUri, _modelContext.ModelUri.ToString());
+      Assert.AreEqual<string>(nodeSet.NamespaceUris[0], _modelContext.DefaultUri.ToString());
     }
 
     [TestMethod]
@@ -203,8 +202,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       addressSpaceMock.Setup(x => x.GetURIIndexOrAppend(new Uri(@"http://cas.eu/UA/Demo/"))).Returns<Uri>(x => 2);
       List<TraceMessage> _logsCache = new List<TraceMessage>();
       Action<TraceMessage> _logMock = z => _logsCache.Add(z);
-      IUAModelContext model = nodeSet.ParseUAModelContext(addressSpaceMock.Object, _logMock);
+      Uri model = nodeSet.ParseUAModelContext(addressSpaceMock.Object, _logMock);
       Assert.IsNotNull(model);
+      Assert.AreEqual<string>(nodeSet.NamespaceUris[0], model.ToString());
       addressSpaceMock.Verify(x => x.GetURIIndexOrAppend(new Uri(@"http://cas.eu/UA/Demo/")), Times.AtLeastOnce());
       Assert.AreEqual<string>("ns=2;i=24", nodeSet.Aliases[0].ValueNodeId.ToString());
       Assert.AreEqual<string>("Alias name", nodeSet.Aliases[0].Alias);
@@ -230,8 +230,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Uri randomURI = null;
       asMock.Setup(x => x.GetURIIndexOrAppend(It.Is<Uri>(z => z.ToString().Contains("github.com/mpostol/OPC-UA-OOI/NameUnknown")))).Returns<Uri>(x => { randomURI = x; return 20; });
       asMock.Setup(x => x.RegisterModel(It.IsAny<IModelTableEntry>()));
-      //TODO AddressSpacePrototyping - IMNamespace must be required in case of export #584
-      //asMock.Setup(x => x.DefaultModelIndex).Returns(10);
       List<TraceMessage> trace = new List<TraceMessage>();
       Action<TraceMessage> logMock = z => trace.Add(z);
       UAModelContext _modelContext = UAModelContext.ParseUANodeSetModelHeader(nodeSet, asMock.Object, logMock);

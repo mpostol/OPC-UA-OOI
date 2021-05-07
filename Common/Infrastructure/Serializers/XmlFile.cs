@@ -70,19 +70,29 @@ namespace UAOOI.Common.Infrastructure.Serializers
     /// <summary>
     /// Reads an XML document from the file <paramref name="path"/> and deserializes its content to returned object.
     /// </summary>
-    /// <typeparam name="type">The type of the object to be deserialized and saved in the file.</typeparam>
+    /// <typeparam name="type">The type of the object to be deserialized.</typeparam>
     /// <param name="path">A relative or absolute path for the file containing the serialized object.</param>
     /// <returns>An object containing working data retrieved from an XML file.</returns>
-    /// <exception cref="System.ArgumentNullException">path</exception>
+    /// <exception cref="ArgumentNullException"> path is null or empty</exception>
     public static type ReadXmlFile<type>(string path)
     {
       if (string.IsNullOrEmpty(path))
         throw new ArgumentNullException(nameof(path));
+      StreamReader _docStream = new StreamReader(path);
+      return ReadXmlFile<type>(_docStream);
+    }
+    /// <summary>
+    /// Reads an XML document from the <paramref name="reader"/> and deserializes its content to returned object.
+    /// </summary>
+    /// <typeparam name="type">The type of the object to be deserialized.</typeparam>
+    /// <param name="reader">The source of the stream to be deserialized.</param>
+    /// <returns>An object of type <typeparamref name="type"/> containing working data retrieved from an XML stream..</returns>
+    public static type ReadXmlFile<type>(StreamReader reader)
+    {
       type _content = default(type);
       XmlSerializer _xmlSerializer = new XmlSerializer(typeof(type));
-      FileStream _docStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-      using (XmlReader _writer = XmlReader.Create(_docStream))
-        _content = (type)_xmlSerializer.Deserialize(_writer);
+      using (XmlReader xmlReader = XmlReader.Create(reader))
+        _content = (type)_xmlSerializer.Deserialize(xmlReader);
       return _content;
     }
     #endregion

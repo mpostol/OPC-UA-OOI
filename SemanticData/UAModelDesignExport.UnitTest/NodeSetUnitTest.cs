@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using UAOOI.Common.Infrastructure.Serializers;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UAModelDesignExport.Instrumentation;
 using UAOOI.SemanticData.UAModelDesignExport.XML;
@@ -21,21 +22,11 @@ namespace UAOOI.SemanticData.UAModelDesignExport
   [DeploymentItem(@"Models\", @"Models\")]
   public class NodeSetIntegrationTest
   {
-    #region TestContext
-
-    private TestContext testContextInstance;
-
     /// <summary>
     ///Gets or sets the test context which provides
     ///information about and functionality for the current test run.
     ///</summary>
-    public TestContext TestContext
-    {
-      get => testContextInstance;
-      set => testContextInstance = value;
-    }
-
-    #endregion TestContext
+    //public TestContext TestContext { get; set; }
 
     #region TestMethod
 
@@ -60,7 +51,6 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       Assert.IsTrue(_testDataFileInfo.Exists);
       ModelDesign _expected = XmlFile.ReadXmlFile<ModelDesign>(@"Models\ReferenceTest.asp.xml");
       List<TraceMessage> _trace = new List<TraceMessage>();
-      int _diagnosticCounter = 0;
       string uri = "http://cas.eu/UA/CommServer/UnitTests/ReferenceTest";
       using (TracedAddressSpaceContext addressSpace = new Instrumentation.TracedAddressSpaceContext())
       {

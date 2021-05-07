@@ -15,7 +15,7 @@ namespace UAOOI.Common.Infrastructure.Serializers
   /// <summary>
   /// Provides static methods for serialization objects into XML documents and writing the XML document to a file.
   /// </summary>
-  internal static class XmlFile
+  public static class XmlFile
   {
 
     #region public

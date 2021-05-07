@@ -113,6 +113,10 @@
     <None Include="OPCUAOOIKey.snk" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj">
+      <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
+      <Name>Common.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj">
       <Project>{9ca2f05b-fb18-49ad-8520-1bcc838f748c}</Project>
       <Name>SemanticData.BuildingErrorsHandling</Name>

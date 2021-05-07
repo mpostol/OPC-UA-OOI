@@ -7,6 +7,7 @@
 
 using System;
 using System.IO;
+using UAOOI.Common.Infrastructure.Serializers;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
 
@@ -51,7 +52,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       if (String.IsNullOrEmpty(outputFilePtah))
         throw new ArgumentNullException(nameof(outputFilePtah), $"{nameof(outputFilePtah)} must be a valid file path.");
       XML.ModelDesign _model = m_Model.Export();
-      XML.XmlFile.WriteXmlFile<XML.ModelDesign>(_model, outputFilePtah, FileMode.Create, stylesheetName);
+      XmlFile.WriteXmlFile<XML.ModelDesign>(_model, outputFilePtah, FileMode.Create, stylesheetName);
       m_traceEvent(TraceMessage.DiagnosticTraceMessage($"The ModelDesign XML has been saved to file {outputFilePtah} and decorated with the stylesheet {stylesheetName}"));
     }
     /// <summary>

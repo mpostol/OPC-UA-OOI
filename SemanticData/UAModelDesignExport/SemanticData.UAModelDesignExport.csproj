@@ -53,6 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
     <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj" />
     <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
   </ItemGroup>

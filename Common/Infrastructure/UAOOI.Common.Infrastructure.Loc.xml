@@ -86,10 +86,18 @@
             <summary>
             Reads an XML document from the file <paramref name="path"/> and deserializes its content to returned object.
             </summary>
-            <typeparam name="type">The type of the object to be deserialized and saved in the file.</typeparam>
+            <typeparam name="type">The type of the object to be deserialized.</typeparam>
             <param name="path">A relative or absolute path for the file containing the serialized object.</param>
             <returns>An object containing working data retrieved from an XML file.</returns>
-            <exception cref="T:System.ArgumentNullException">path</exception>
+            <exception cref="T:System.ArgumentNullException"> path is null or empty</exception>
+        </member>
+        <member name="M:UAOOI.Common.Infrastructure.Serializers.XmlFile.ReadXmlFile``1(System.IO.StreamReader)">
+            <summary>
+            Reads an XML document from the <paramref name="reader"/> and deserializes its content to returned object.
+            </summary>
+            <typeparam name="type">The type of the object to be deserialized.</typeparam>
+            <param name="reader">The source of the stream to be deserialized.</param>
+            <returns>An object of type <typeparamref name="type"/> containing working data retrieved from an XML stream..</returns>
         </member>
     </members>
 </doc>

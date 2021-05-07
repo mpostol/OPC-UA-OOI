@@ -1,15 +1,15 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2921, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Xml.Serialization;
+using UAOOI.Common.Infrastructure.Serializers;
 
 namespace UAOOI.SemanticData.UAModelDesignExport.XML
 {
@@ -24,29 +24,18 @@ namespace UAOOI.SemanticData.UAModelDesignExport.XML
     /// <returns>An instance of <see cref="ModelDesign"/> representing  UA defined types</returns>
     public static ModelDesign LoadUADefinedTypes()
     {
-      return LoadResource<ModelDesign>(UADefinedTypesName);
-    }
-
-    private static string UADefinedTypesName => $"{typeof(UAResources).Namespace}.UA Defined Types.xml";
-
-    /// <summary>
-    /// Loads a schema from an embedded resource.
-    /// </summary>
-    private static type LoadResource<type>(string path)
-    {
       try
       {
         Assembly assembly = Assembly.GetExecutingAssembly();
-        using (StreamReader reader = new StreamReader(assembly.GetManifestResourceStream(path)))
-        {
-          XmlSerializer serializer = new XmlSerializer(typeof(type));
-          return (type)serializer.Deserialize(reader);
-        }
+        using (StreamReader reader = new StreamReader(assembly.GetManifestResourceStream(UADefinedTypesName)))
+          return XmlFile.ReadXmlFile<ModelDesign>(reader); 
       }
       catch (Exception e)
       {
-        throw new FileNotFoundException(string.Format(CultureInfo.InvariantCulture, "Could not load resource '{0}' because the exception {1} reports the error {2}.", path, e.GetType().Name, e.Message), e);
+        throw new FileNotFoundException(string.Format(CultureInfo.InvariantCulture, "Could not load resource '{0}' because the exception {1} reports the error {2}.", UADefinedTypesName, e.GetType().Name, e.Message), e);
       }
     }
+
+    private static string UADefinedTypesName => $"{typeof(UAResources).Namespace}.UA Defined Types.xml";
   }
 }

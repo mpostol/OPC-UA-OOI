@@ -22,7 +22,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport.XML
     /// Loads the OPC UA defined types.
     /// </summary>
     /// <returns>An instance of <see cref="ModelDesign"/> representing  UA defined types</returns>
-    public static ModelDesign LoadUADefinedTypes()
+    internal static ModelDesign LoadUADefinedTypes()
     {
       try
       {

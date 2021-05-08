@@ -1,14 +1,15 @@
-﻿//____________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/TP
-//____________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Linq;
 
 namespace UAOOI.Common.Infrastructure.Serializers
 {
@@ -17,8 +18,8 @@ namespace UAOOI.Common.Infrastructure.Serializers
   /// </summary>
   public static class XmlFile
   {
-
     #region public
+
     /// <summary>
     /// Serializes the specified <paramref name="dataObject"/> and writes the XML document to a file.
     /// </summary>
@@ -35,12 +36,14 @@ namespace UAOOI.Common.Infrastructure.Serializers
     /// stylesheetName
     /// </exception>
     public static void WriteXmlFile<type>(type dataObject, string path, FileMode mode, string stylesheetName)
+      where type : INamespaces
     {
       if (string.IsNullOrEmpty(path))
         throw new ArgumentNullException(nameof(path));
       if (dataObject == null)
         throw new ArgumentNullException(nameof(dataObject));
       XmlSerializer _xmlSerializer = new XmlSerializer(typeof(type));
+      XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces(dataObject.GetNamespaces().ToArray<XmlQualifiedName>());
       XmlWriterSettings _setting = new XmlWriterSettings()
       {
         Indent = true,
@@ -52,9 +55,10 @@ namespace UAOOI.Common.Infrastructure.Serializers
         XmlWriter _writer = XmlWriter.Create(_docStream, _setting);
         if (!string.IsNullOrEmpty(stylesheetName))
           _writer.WriteProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" " + string.Format("href=\"{0}\"", stylesheetName));
-        _xmlSerializer.Serialize(_writer, dataObject);
+        _xmlSerializer.Serialize(_writer, dataObject, namespaces);
       }
     }
+
     /// <summary>
     /// Serializes the specified <paramref name="dataObject"/> and writes the XML document to a file.
     /// </summary>
@@ -63,10 +67,11 @@ namespace UAOOI.Common.Infrastructure.Serializers
     /// <param name="path">A relative or absolute path for the file containing the serialized object.</param>
     /// <param name="mode">Specifies how the operating system should open a file.</param>
     public static void WriteXmlFile<type>(type dataObject, string path, FileMode mode)
-      where type : IStylesheetNameProvider
+      where type : IStylesheetNameProvider, INamespaces
     {
-      XmlFile.WriteXmlFile<type>(dataObject, path, mode, dataObject.StylesheetName);
+      WriteXmlFile(dataObject, path, mode, dataObject.StylesheetName);
     }
+
     /// <summary>
     /// Reads an XML document from the file <paramref name="path"/> and deserializes its content to returned object.
     /// </summary>
@@ -81,6 +86,7 @@ namespace UAOOI.Common.Infrastructure.Serializers
       FileStream _docStream = new FileStream(path, FileMode.Open);
       return ReadXmlFile<type>(_docStream);
     }
+
     /// <summary>
     /// Reads an XML document from the <paramref name="reader"/> and deserializes its content to returned object.
     /// </summary>
@@ -95,7 +101,7 @@ namespace UAOOI.Common.Infrastructure.Serializers
         _content = (type)_xmlSerializer.Deserialize(xmlReader);
       return _content;
     }
-    #endregion
 
+    #endregion public
   }
 }

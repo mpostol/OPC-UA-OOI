@@ -18,6 +18,7 @@ using UAOOI.SemanticData.UANodeSetValidation.XML;
 namespace UAOOI.SemanticData.AddressSpacePrototyping
 {
   [TestClass]
+  [DeploymentItem(@"XMLModels\", @"XMLModels\")]
   public class ProgramUnitTest
   {
     [TestMethod]

@@ -4,7 +4,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>UAOOI.Common.Infrastructure</id>
-    <version><#=CommonVersion#></version>
+    <version><#=CommonVersion#><#= CommonPrerelease#>
+    </version>
     <title><#=NetworkingDataProduct#> Common Infrastructure</title>
     <authors><#=AssemblyCompany#></authors>
     <owners><#=Owner#></owners>

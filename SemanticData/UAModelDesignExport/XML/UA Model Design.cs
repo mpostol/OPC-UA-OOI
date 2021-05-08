@@ -23,7 +23,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport.XML {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://opcfoundation.org/UA/ModelDesign.xsd")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://opcfoundation.org/UA/ModelDesign.xsd", IsNullable=false)]
-    internal partial class ModelDesign {
+    public partial class ModelDesign {
         
         private Namespace[] namespacesField;
         

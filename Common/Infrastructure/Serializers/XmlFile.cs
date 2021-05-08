@@ -78,7 +78,7 @@ namespace UAOOI.Common.Infrastructure.Serializers
     {
       if (string.IsNullOrEmpty(path))
         throw new ArgumentNullException(nameof(path));
-      StreamReader _docStream = new StreamReader(path);
+      FileStream _docStream = new FileStream(path, FileMode.Open);
       return ReadXmlFile<type>(_docStream);
     }
     /// <summary>
@@ -87,7 +87,7 @@ namespace UAOOI.Common.Infrastructure.Serializers
     /// <typeparam name="type">The type of the object to be deserialized.</typeparam>
     /// <param name="reader">The source of the stream to be deserialized.</param>
     /// <returns>An object of type <typeparamref name="type"/> containing working data retrieved from an XML stream..</returns>
-    public static type ReadXmlFile<type>(StreamReader reader)
+    public static type ReadXmlFile<type>(Stream reader)
     {
       type _content = default(type);
       XmlSerializer _xmlSerializer = new XmlSerializer(typeof(type));

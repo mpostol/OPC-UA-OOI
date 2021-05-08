@@ -1,14 +1,14 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using System.IO;
 using System.Reflection;
-using System.Xml.Serialization;
+using UAOOI.Common.Infrastructure.Serializers;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
@@ -30,7 +30,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     internal static UANodeSet ReadUADefinedTypes()
     {
-      UANodeSet uaDefinedTypes = LoadResource(m_UADefinedTypesName);
+      Assembly assembly = Assembly.GetExecutingAssembly();
+      UANodeSet uaDefinedTypes = XmlFile.ReadXmlFile<UANodeSet>(assembly.GetManifestResourceStream(m_UADefinedTypesName));
       if (uaDefinedTypes.Models is null || uaDefinedTypes.Models.Length == 0)
         throw new ArgumentNullException(nameof(UANodeSet.Models));
       if (uaDefinedTypes.NamespaceUris is null)
@@ -40,17 +41,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     internal static UANodeSet ReadModelFile(FileInfo path)
     {
-      XmlSerializer _serializer = new XmlSerializer(typeof(UANodeSet));
-      using (FileStream _stream = new FileStream(path.FullName, FileMode.Open, FileAccess.Read))
-        return (UANodeSet)_serializer.Deserialize(_stream);
+      return XmlFile.ReadXmlFile<UANodeSet>(path.OpenRead());
     }
-
-    //OPC UA standard NodeSet model resource folder.
-    private const string m_UADefinedTypesName = @"UAOOI.SemanticData.UANodeSetValidation.XML.Opc.Ua.NodeSet2.xml";
 
     #endregion static helpers
 
     #region private
+
+    private const string m_UADefinedTypesName = @"UAOOI.SemanticData.UANodeSetValidation.XML.Opc.Ua.NodeSet2.xml"; //OPC UA standard NodeSet model resource folder.
 
     private void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
@@ -60,17 +58,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       if (this.Items != null)
         foreach (UANode item in Items)
           item.RecalculateNodeIds(modelContext, trace);
-    }
-
-    /// <summary>
-    /// Loads a schema from an embedded resource.
-    /// </summary>
-    private static UANodeSet LoadResource(string path)
-    {
-      Assembly assembly = Assembly.GetExecutingAssembly();
-      XmlSerializer _serializer = new XmlSerializer(typeof(UANodeSet));
-      using (StreamReader _stream = new StreamReader(assembly.GetManifestResourceStream(path)))
-        return (UANodeSet)_serializer.Deserialize(_stream);
     }
 
     #endregion private

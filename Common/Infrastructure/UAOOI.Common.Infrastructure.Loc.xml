@@ -91,7 +91,7 @@
             <returns>An object containing working data retrieved from an XML file.</returns>
             <exception cref="T:System.ArgumentNullException"> path is null or empty</exception>
         </member>
-        <member name="M:UAOOI.Common.Infrastructure.Serializers.XmlFile.ReadXmlFile``1(System.IO.StreamReader)">
+        <member name="M:UAOOI.Common.Infrastructure.Serializers.XmlFile.ReadXmlFile``1(System.IO.Stream)">
             <summary>
             Reads an XML document from the <paramref name="reader"/> and deserializes its content to returned object.
             </summary>

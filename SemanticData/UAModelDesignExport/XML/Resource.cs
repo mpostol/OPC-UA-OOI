@@ -27,8 +27,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport.XML
       try
       {
         Assembly assembly = Assembly.GetExecutingAssembly();
-        using (StreamReader reader = new StreamReader(assembly.GetManifestResourceStream(UADefinedTypesName)))
-          return XmlFile.ReadXmlFile<ModelDesign>(reader); 
+        return XmlFile.ReadXmlFile<ModelDesign>(assembly.GetManifestResourceStream(UADefinedTypesName));
       }
       catch (Exception e)
       {

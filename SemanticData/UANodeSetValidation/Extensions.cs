@@ -226,29 +226,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return _ret;
     }
 
-    /// <summary>
-    /// Deserialize <see cref="XmlElement" /> object using <see cref="XmlSerializer" />
-    /// </summary>
-    /// <typeparam name="type">The type of the type.</typeparam>
-    /// <param name="xmlElement">The object to be deserialized.</param>
-    /// <returns>Deserialized object</returns>
-    internal static type GetObject<type>(this XmlElement xmlElement)
-    {
-      using (MemoryStream _memoryBuffer = new MemoryStream(1000))
-      {
-        XmlWriterSettings _settings = new XmlWriterSettings() { ConformanceLevel = ConformanceLevel.Fragment };
-        using (XmlWriter wrt = XmlWriter.Create(_memoryBuffer, _settings))
-          xmlElement.WriteTo(wrt);
-        _memoryBuffer.Flush();
-        _memoryBuffer.Position = 0;
-        type _Value;
-        XmlSerializer _serializer = new XmlSerializer(typeof(type));
-        using (XmlReader _reader = XmlReader.Create(_memoryBuffer))
-          _Value = (type)_serializer.Deserialize(_reader);
-        return _Value;
-      }
-    }
-
     internal static ReleaseStatus ConvertToReleaseStatus(this XML.ReleaseStatus releaseStatus)
     {
       ReleaseStatus _status = ReleaseStatus.Released;
@@ -340,9 +317,32 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return String.Compare(first, second) == 0;
     }
 
+    #region private
+
     private static string ConvertToString(XML.LocalizedText x)
     {
       return $"{ x.Locale}:{x.Value}";
     }
+
+    /// <summary>
+    /// Deserialize <see cref="XmlElement" /> object using <see cref="XmlSerializer" />
+    /// </summary>
+    /// <typeparam name="type">The type of the type.</typeparam>
+    /// <param name="xmlElement">The object to be deserialized.</param>
+    /// <returns>Deserialized object</returns>
+    private static type GetObject<type>(this XmlElement xmlElement)
+    {
+      using (MemoryStream _memoryBuffer = new MemoryStream(1000))
+      {
+        XmlWriterSettings _settings = new XmlWriterSettings() { ConformanceLevel = ConformanceLevel.Fragment };
+        using (XmlWriter wrt = XmlWriter.Create(_memoryBuffer, _settings))
+          xmlElement.WriteTo(wrt);
+        _memoryBuffer.Flush();
+        _memoryBuffer.Position = 0;
+        return UAOOI.Common.Infrastructure.Serializers.XmlFile.ReadXmlFile<type>(_memoryBuffer);
+      }
+    }
+
+    #endregion private
   }
 }

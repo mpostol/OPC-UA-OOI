@@ -22,13 +22,12 @@ namespace UAOOI.SemanticData.UAModelDesignExport.XML
     /// Loads the OPC UA defined types.
     /// </summary>
     /// <returns>An instance of <see cref="ModelDesign"/> representing  UA defined types</returns>
-    public static ModelDesign LoadUADefinedTypes()
+    internal static ModelDesign LoadUADefinedTypes()
     {
       try
       {
         Assembly assembly = Assembly.GetExecutingAssembly();
-        using (StreamReader reader = new StreamReader(assembly.GetManifestResourceStream(UADefinedTypesName)))
-          return XmlFile.ReadXmlFile<ModelDesign>(reader); 
+        return XmlFile.ReadXmlFile<ModelDesign>(assembly.GetManifestResourceStream(UADefinedTypesName));
       }
       catch (Exception e)
       {

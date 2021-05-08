@@ -41,6 +41,17 @@
             </summary>
             <value>The trace source instance of type <see cref="P:UAOOI.Common.Infrastructure.Diagnostic.TraceSourceBase.TraceSource"/>.</value>
         </member>
+        <member name="T:UAOOI.Common.Infrastructure.Serializers.INamespaces">
+            <summary>
+            Interface INamespaces - define functionality necessary to manage namespaces for the XML serialization
+            </summary>
+        </member>
+        <member name="M:UAOOI.Common.Infrastructure.Serializers.INamespaces.GetNamespaces">
+            <summary>
+            Gets the namespaces that is to be used to parametrize XML document.
+            </summary>
+            <returns>An instance of IEnumerable[XmlQualifiedName] containing the XML namespaces and prefixes that a serializer uses to generate qualified names in an XML-document instance.</returns>
+        </member>
         <member name="T:UAOOI.Common.Infrastructure.Serializers.IStylesheetNameProvider">
             <summary>
             Represents XML file style sheet name provider
@@ -91,7 +102,7 @@
             <returns>An object containing working data retrieved from an XML file.</returns>
             <exception cref="T:System.ArgumentNullException"> path is null or empty</exception>
         </member>
-        <member name="M:UAOOI.Common.Infrastructure.Serializers.XmlFile.ReadXmlFile``1(System.IO.StreamReader)">
+        <member name="M:UAOOI.Common.Infrastructure.Serializers.XmlFile.ReadXmlFile``1(System.IO.Stream)">
             <summary>
             Reads an XML document from the <paramref name="reader"/> and deserializes its content to returned object.
             </summary>

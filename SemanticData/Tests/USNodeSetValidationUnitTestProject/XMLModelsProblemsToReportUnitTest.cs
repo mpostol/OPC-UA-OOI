@@ -21,7 +21,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   [DeploymentItem(@"XMLModels\ProblemsToReport", @"ProblemsToReport\")]
   public class XMLModelsProblemsToReportUnitTest
   {
-    [TestMethod]
+    //[TestMethod]
     public void ADITest()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ProblemsToReport\ADI#509\Opc.Ua.Adi.NodeSet2.xml");
@@ -165,7 +165,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
 
-    [TestMethod]
+    //[TestMethod]
     public void MachineVisionTest()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ProblemsToReport\MachineVision\Opc.Ua.MachineVision.NodeSet2.xml");

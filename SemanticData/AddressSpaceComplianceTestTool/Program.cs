@@ -25,14 +25,20 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
   {
     public static void Main(string[] args)
     {
+      Program program = new Program();
       try
       {
-        Program program = new Program();
+        AssemblyName myAssembly = Assembly.GetExecutingAssembly().GetName();
+        AssemblyName = $"Address Space Prototyping (asp.exe) Version {myAssembly.Version}";
+        program.traceSource.TraceSource.TraceEvent(TraceEventType.Information, 1637887218, AssemblyName);
+        program.traceSource.TraceSource.TraceEvent(TraceEventType.Information, 1637887219, Copyright);
         program.Run(args);
       }
       catch (Exception ex)
       {
-        Console.WriteLine(string.Format("Program stopped by the exception: {0}", ex.Message));
+        string errorMessage = $"Program stopped by the exception: {ex.Message}";
+        Console.WriteLine(errorMessage);
+        program.traceSource.TraceSource.TraceEvent(TraceEventType.Critical, 828896092, errorMessage);
         Environment.Exit(1);
       }
     }
@@ -80,34 +86,36 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     #region private
 
     private readonly TraceSourceBase traceSource = new TraceSourceBase("AddressSpacePrototyping");
+    private const string Copyright = "Copyright(c) 2021 Mariusz Postol";
+    private static string AssemblyName = String.Empty;
 
     private void HandleErrors(IEnumerable<Error> errors)
     {
       foreach (Error _item in errors)
       {
-        //TOD Enhance/Improve the Program logging and tracing infrastructure. #590
         string _processing = _item.StopsProcessing ? "and it stops processing" : "but the processing continues";
-        //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
-        //Console.WriteLine($"The following tag has wrong value: {_item.Tag} {_processing}.");
+        string errorMessage = $"The list of command line parameters has the error: {_item.ToString()} {_processing}.";
+        traceSource.TraceSource.TraceEvent(TraceEventType.Error, 1230327407, errorMessage);
+        Console.WriteLine(errorMessage);
       }
     }
 
     private void Do(Options options)
     {
       //TOD Enhance/Improve the Program logging and tracing infrastructure. #590
-      PrintLogo(options);
+      PrintLogo(options.NoLogo);
       BuildErrorsHandling.Log.TraceEventAction += z => Console.WriteLine(z.ToString());
+      BuildErrorsHandling.Log.TraceEventAction += y => traceSource.TraceSource.TraceEvent(y.TraceLevel, 566981851, y.ToString());
       IAddressSpaceContext addressSpace = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
       Do(options, addressSpace);
     }
 
-    private void PrintLogo(Options options)
+    private void PrintLogo(bool nologo)
     {
-      if (options.NoLogo)
+      if (nologo)
         return;
-      AssemblyName _myAssembly = Assembly.GetExecutingAssembly().GetName();
-      Console.WriteLine($"Address Space Prototyping (asp.exe) {_myAssembly.Version}");
-      Console.WriteLine("Copyright(c) 2021 Mariusz Postol");
+      Console.WriteLine(AssemblyName);
+      Console.WriteLine(Copyright);
       Console.WriteLine();
     }
 

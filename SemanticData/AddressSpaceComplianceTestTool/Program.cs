@@ -27,21 +27,30 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     {
       try
       {
-        Run(args);
+        Program program = new Program();
+        program.Run(args);
       }
       catch (Exception ex)
       {
-        //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
         Console.WriteLine(string.Format("Program stopped by the exception: {0}", ex.Message));
+        Environment.Exit(1);
       }
     }
 
-    internal static void Run(string[] args)
+    internal void Run(string[] args)
     {
-      args.Parse<Options>(Do, HandleErrors);
+      try
+      {
+        args.Parse<Options>(Do, HandleErrors);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(string.Format("Program stopped by the exception: {0}", ex.Message));
+        throw;
+      }
     }
 
-    internal static void Do(Options options, IAddressSpaceContext addressSpace)
+    internal void Do(Options options, IAddressSpaceContext addressSpace)
     {
       ModelDesignExport exporter = new ModelDesignExport(); //creates new instance of the ModelDesignExport class that captures functionality supporting export of the OPC UA Information Model represented
                                                             //by an XML file compliant with UAModelDesign schema.
@@ -72,7 +81,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
 
     private readonly TraceSourceBase traceSource = new TraceSourceBase("AddressSpacePrototyping");
 
-    private static void HandleErrors(IEnumerable<Error> errors)
+    private void HandleErrors(IEnumerable<Error> errors)
     {
       foreach (Error _item in errors)
       {
@@ -83,7 +92,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       }
     }
 
-    private static void Do(Options options)
+    private void Do(Options options)
     {
       //TOD Enhance/Improve the Program logging and tracing infrastructure. #590
       PrintLogo(options);
@@ -92,7 +101,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       Do(options, addressSpace);
     }
 
-    private static void PrintLogo(Options options)
+    private void PrintLogo(Options options)
     {
       if (options.NoLogo)
         return;

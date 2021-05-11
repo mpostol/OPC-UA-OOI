@@ -83,7 +83,6 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Instrumentation\Class1.cs" />
     <Compile Include="Instrumentation\Extensions.cs" />
     <Compile Include="ProgramUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

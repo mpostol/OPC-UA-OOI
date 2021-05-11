@@ -83,6 +83,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Instrumentation\Class1.cs" />
+    <Compile Include="Instrumentation\Extensions.cs" />
     <Compile Include="ProgramUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
@@ -90,6 +92,7 @@
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
     <Compile Include="CommandLineSyntaxUnitTest.cs" />
+    <Compile Include="TraceSourceBaseUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\AddressSpaceComplianceTestTool\SemanticData.AddressSpaceComplianceTestTool.csproj">
@@ -110,6 +113,7 @@
       <Link>DependencyValidation1.layerdiagram</Link>
       <Visible>False</Visible>
     </AdditionalFiles>
+    <None Include="App.config" />
     <None Include="DoDisplayHelp.cmd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

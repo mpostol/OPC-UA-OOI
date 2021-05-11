@@ -12,7 +12,7 @@ namespace UAOOI.Common.Infrastructure.Diagnostic
   /// <summary>
   /// Interface IEventSourceProvider - if implemented returns an instance of <see cref="EventSource"/> to be registered by the logging infrastructure.
   /// </summary>
-  public interface INetworkingEventSourceProvider
+  public interface IEventSourceProvider
   {
     /// <summary>
     /// Gets the part event source.

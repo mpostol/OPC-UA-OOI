@@ -8,8 +8,10 @@
 using CommandLine;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
 using UAOOI.SemanticData.UAModelDesignExport;
 using UAOOI.SemanticData.UANodeSetValidation;
@@ -37,17 +39,6 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     internal static void Run(string[] args)
     {
       args.Parse<Options>(Do, HandleErrors);
-    }
-
-    private static void HandleErrors(IEnumerable<Error> errors)
-    {
-      foreach (Error _item in errors)
-      {
-        //TOD Enhance/Improve the Program logging and tracing infrastructure. #590
-        string _processing = _item.StopsProcessing ? "and it stops processing" : "but the processing continues";
-        //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
-        //Console.WriteLine($"The following tag has wrong value: {_item.Tag} {_processing}.");
-      }
     }
 
     internal static void Do(Options options, IAddressSpaceContext addressSpace)
@@ -79,6 +70,19 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
 
     #region private
 
+    private readonly TraceSourceBase traceSource = new TraceSourceBase("AddressSpacePrototyping");
+
+    private static void HandleErrors(IEnumerable<Error> errors)
+    {
+      foreach (Error _item in errors)
+      {
+        //TOD Enhance/Improve the Program logging and tracing infrastructure. #590
+        string _processing = _item.StopsProcessing ? "and it stops processing" : "but the processing continues";
+        //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
+        //Console.WriteLine($"The following tag has wrong value: {_item.Tag} {_processing}.");
+      }
+    }
+
     private static void Do(Options options)
     {
       //TOD Enhance/Improve the Program logging and tracing infrastructure. #590
@@ -99,5 +103,15 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     }
 
     #endregion private
+
+    #region DEBUG
+
+    [Conditional("DEBUG")]
+    internal void GetTraceSource(Action<TraceSource> geter)
+    {
+      geter(traceSource.TraceSource);
+    }
+
+    #endregion DEBUG
   }
 }

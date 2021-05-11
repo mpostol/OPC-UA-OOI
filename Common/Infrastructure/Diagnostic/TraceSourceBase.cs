@@ -13,9 +13,24 @@ namespace UAOOI.Common.Infrastructure.Diagnostic
   /// <summary>
   /// Class TraceSourceBase - default implementation of the <see cref="ITraceSource"/>
   /// </summary>
-  //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
   public class TraceSourceBase : ITraceSource
   {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TraceSourceBase"/> class provider of a named <see cref="ITraceSource"/>.
+    /// </summary>
+    /// <param name="TraceSourceName">Name of the <see cref="TraceSource"/>.</param>
+    public TraceSourceBase(string TraceSourceName)
+    {
+      m_TraceEventInternal = new Lazy<TraceSource>(() => new TraceSource(TraceSourceName));
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TraceSourceBase"/> class provider of a default <see cref="ITraceSource"/>.
+    /// </summary>
+    public TraceSourceBase() : this("UAOOI.Common")
+    {
+    }
+
     /// <summary>
     /// Writes trace data to the trace listeners in the <see cref="TraceSource.Listeners" /> collection using the specified <paramref name="eventType" />,
     /// event identifier <paramref name="id" />, and trace <paramref name="data" />.
@@ -34,6 +49,6 @@ namespace UAOOI.Common.Infrastructure.Diagnostic
     /// <value>The trace source instance of type <see cref="TraceSource"/>.</value>
     public TraceSource TraceSource => m_TraceEventInternal.Value;
 
-    private Lazy<TraceSource> m_TraceEventInternal = new Lazy<TraceSource>(() => new TraceSource("UAOOI.Common"));
+    private Lazy<TraceSource> m_TraceEventInternal = null;
   }
 }

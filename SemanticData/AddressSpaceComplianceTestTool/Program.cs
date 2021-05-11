@@ -29,6 +29,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       }
       catch (Exception ex)
       {
+        //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
         Console.WriteLine(string.Format("Program stopped by the exception: {0}", ex.Message));
       }
     }
@@ -42,6 +43,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     {
       foreach (Error _item in errors)
       {
+        //TOD Enhance/Improve the Program logging and tracing infrastructure. #590
         string _processing = _item.StopsProcessing ? "and it stops processing" : "but the processing continues";
         //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
         //Console.WriteLine($"The following tag has wrong value: {_item.Tag} {_processing}.");
@@ -50,12 +52,12 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
 
     internal static void Do(Options options, IAddressSpaceContext addressSpace)
     {
-      ModelDesignExport _exporter = new ModelDesignExport(); //creates new instance of the ModelDesignExport class that captures functionality supporting export of the OPC UA Information Model represented
-                                                             //by an XML file compliant with UAModelDesign schema.
+      ModelDesignExport exporter = new ModelDesignExport(); //creates new instance of the ModelDesignExport class that captures functionality supporting export of the OPC UA Information Model represented
+                                                            //by an XML file compliant with UAModelDesign schema.
       bool _exportModel = false;
       if (!string.IsNullOrEmpty(options.ModelDesignFileName))
       {
-        addressSpace.InformationModelFactory = _exporter.GetFactory(BuildErrorsHandling.Log.TraceEvent);  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space.
+        addressSpace.InformationModelFactory = exporter.GetFactory(BuildErrorsHandling.Log.TraceEvent);  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space.
         _exportModel = true;
       }
       if (options.Filenames == null)
@@ -72,17 +74,18 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       }
       addressSpace.ValidateAndExportModel(uri); //Validates and exports the selected model.
       if (_exportModel)
-        _exporter.ExportToXMLFile(options.ModelDesignFileName, options.Stylesheet); //Serializes the already generated model and writes the XML document to a file.
+        exporter.ExportToXMLFile(options.ModelDesignFileName, options.Stylesheet); //Serializes the already generated model and writes the XML document to a file.
     }
 
     #region private
 
     private static void Do(Options options)
     {
+      //TOD Enhance/Improve the Program logging and tracing infrastructure. #590
       PrintLogo(options);
       BuildErrorsHandling.Log.TraceEventAction += z => Console.WriteLine(z.ToString());
-      IAddressSpaceContext _as = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
-      Do(options, _as);
+      IAddressSpaceContext addressSpace = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
+      Do(options, addressSpace);
     }
 
     private static void PrintLogo(Options options)

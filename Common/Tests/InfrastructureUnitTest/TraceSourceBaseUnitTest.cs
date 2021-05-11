@@ -1,6 +1,11 @@
-﻿
+﻿//__________________________________________________________________________________________________
+//
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -15,11 +20,12 @@ namespace UAOOI.Common.Infrastructure.UnitTest
   public class TraceSourceBaseUnitTest
   {
     [TestMethod]
-    public void CreationStateTestMethod()
+    public void ConstructorStateTestMethod()
     {
       TraceSourceBase _trace = new TraceSourceBase();
       _trace.TraceData(TraceEventType.Critical, 0, "Message");
     }
+
     [TestMethod]
     public void AssemblyTraceEventTestMethod()
     {
@@ -48,16 +54,14 @@ namespace UAOOI.Common.Infrastructure.UnitTest
       Assert.IsNotNull(_listener);
       DelimitedListTraceListener _advancedListener = _listener as DelimitedListTraceListener;
       Assert.IsNotNull(_advancedListener);
-      Assert.IsFalse(String.IsNullOrEmpty(_advancedListener.GetFileName()));
+      Assert.IsFalse(string.IsNullOrEmpty(_advancedListener.GetFileName()));
       FileInfo _logFileInfo = new FileInfo(_advancedListener.GetFileName());
       long _startLength = _logFileInfo.Exists ? _logFileInfo.Length : 0;
       _tracer.TraceSource.TraceEvent(TraceEventType.Information, 0, "LogFileExistsTest is executed");
-      Assert.IsFalse(String.IsNullOrEmpty(_advancedListener.GetFileName()));
+      Assert.IsFalse(string.IsNullOrEmpty(_advancedListener.GetFileName()));
       _logFileInfo.Refresh();
       Assert.IsTrue(_logFileInfo.Exists);
       Assert.IsTrue(_logFileInfo.Length > _startLength);
     }
-
-
   }
 }

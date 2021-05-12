@@ -21,13 +21,11 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     [TestMethod]
     public void AssemblyTraceEventTestMethod()
     {
-      Program programInstance = new Program();
-      TraceSource tracer = null;
-      programInstance.GetTraceSource(x => tracer = x);
-      Assert.IsNotNull(tracer);
+      TraceSource tracer = new TraceSource("AddressSpacePrototyping");
       Assert.AreEqual<string>("AddressSpacePrototyping", tracer.Name, $"Actual tracer name: {tracer.Name}");
       //Assert.AreEqual(1, Trace.Listeners.Count);
       Dictionary<string, TraceListener> _listeners = tracer.Listeners.Cast<TraceListener>().ToDictionary<TraceListener, string>(x => x.Name);
+      Assert.IsNotNull(_listeners);
       Assert.IsTrue(_listeners.ContainsKey("LogFile"));
       TraceListener _listener = _listeners["LogFile"];
       Assert.IsNotNull(_listener);
@@ -44,11 +42,8 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     [TestMethod]
     public void LogFileExistsTest()
     {
-      Program programInstance = new Program();
-      TraceSource tracer = null;
-      programInstance.GetTraceSource(x => tracer = x);
+      TraceSource tracer = new TraceSource("AddressSpacePrototyping");
       TraceListener _listener = tracer.Listeners.Cast<TraceListener>().Where<TraceListener>(x => x.Name == "LogFile").First<TraceListener>();
-      Assert.IsNotNull(_listener);
       DelimitedListTraceListener _advancedListener = _listener as DelimitedListTraceListener;
       Assert.IsNotNull(_advancedListener);
       Assert.IsFalse(string.IsNullOrEmpty(_advancedListener.GetFileName()));

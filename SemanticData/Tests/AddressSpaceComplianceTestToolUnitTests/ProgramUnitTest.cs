@@ -9,7 +9,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation;
@@ -26,6 +28,25 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     {
       FileInfo _testDataFileInfo = new FileInfo(@"XMLModels\DataTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+    }
+
+    [TestMethod]
+    public void ConstructorTest()
+    {
+      Program programInstance = new Program();
+      ITraceSource currentLogger = null;
+      programInstance.GetTraceSource(x => currentLogger = x);
+      Assert.IsNotNull(currentLogger);
+    }
+    [TestMethod]
+    public void EmptyArgsTest()
+    {
+      Program programInstance = new Program();
+      Mock<ITraceSource> mockLogerr = new Mock<ITraceSource>();
+      mockLogerr.Setup(x => x.TraceData(It.IsAny<TraceEventType>(), It.IsAny<int>(), It.IsAny<string>()));
+      programInstance.DebugITraceSource = mockLogerr.Object;
+      programInstance.Run(new string[] { });
+      mockLogerr.Verify(x => x.TraceData(It.IsAny<TraceEventType>(), It.IsAny<int>(), It.IsAny<string>()), Times.Exactly(2));
     }
 
     [TestMethod]

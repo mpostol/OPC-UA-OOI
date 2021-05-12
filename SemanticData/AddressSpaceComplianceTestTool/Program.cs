@@ -30,15 +30,15 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       {
         AssemblyName myAssembly = Assembly.GetExecutingAssembly().GetName();
         AssemblyName = $"Address Space Prototyping (asp.exe) Version {myAssembly.Version}";
-        program.traceSource.TraceSource.TraceEvent(TraceEventType.Information, 1637887218, AssemblyName);
-        program.traceSource.TraceSource.TraceEvent(TraceEventType.Information, 1637887219, Copyright);
+        program.traceSource.TraceData(TraceEventType.Information, 1637887218, AssemblyName);
+        program.traceSource.TraceData(TraceEventType.Information, 1637887219, Copyright);
         program.Run(args);
       }
       catch (Exception ex)
       {
         string errorMessage = $"Program stopped by the exception: {ex.Message}";
         Console.WriteLine(errorMessage);
-        program.traceSource.TraceSource.TraceEvent(TraceEventType.Critical, 828896092, errorMessage);
+        program.traceSource.TraceData(TraceEventType.Critical, 828896092, errorMessage);
         Environment.Exit(1);
       }
     }
@@ -63,7 +63,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       bool _exportModel = false;
       if (!string.IsNullOrEmpty(options.ModelDesignFileName))
       {
-        addressSpace.InformationModelFactory = exporter.GetFactory(BuildErrorsHandling.Log.TraceEvent);  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space.
+        addressSpace.InformationModelFactory = exporter.GetFactory();  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space.
         _exportModel = true;
       }
       if (options.Filenames == null)
@@ -75,17 +75,28 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       {
         FileInfo _fileToRead = new FileInfo(_path);
         if (!_fileToRead.Exists)
-          throw new FileNotFoundException(string.Format($"FileNotFoundException - the file {_path} doesn't exist.", _fileToRead.FullName));
+        {
+          string message = $"The file {_fileToRead.FullName} doesn't exist.";
+          traceSource.TraceData(TraceEventType.Critical, 1637887215, message);
+          throw new FileNotFoundException(message, _path);
+        }
+        traceSource.TraceData(TraceEventType.Verbose, 1637887216, $"Importing UANodeSet document from file {_fileToRead.FullName}");
         addressSpace.ImportUANodeSet(_fileToRead);
       }
+      traceSource.TraceData(TraceEventType.Verbose, 1637887217, $"Validating and exporting a model from namespace {uri}");
       addressSpace.ValidateAndExportModel(uri); //Validates and exports the selected model.
       if (_exportModel)
+      {
+        traceSource.TraceData(TraceEventType.Verbose, 1637887217, $"Writing model to XML file {options.ModelDesignFileName}");
         exporter.ExportToXMLFile(options.ModelDesignFileName, options.Stylesheet); //Serializes the already generated model and writes the XML document to a file.
+      }
     }
+
+    internal ITraceSource DebugITraceSource { set => traceSource = value; }
 
     #region private
 
-    private readonly TraceSourceBase traceSource = new TraceSourceBase("AddressSpacePrototyping");
+    private ITraceSource traceSource = new TraceSourceBase("AddressSpacePrototyping");
     private const string Copyright = "Copyright(c) 2021 Mariusz Postol";
     private static string AssemblyName = String.Empty;
 
@@ -95,17 +106,15 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       {
         string _processing = _item.StopsProcessing ? "and it stops processing" : "but the processing continues";
         string errorMessage = $"The list of command line parameters has the error: {_item.ToString()} {_processing}.";
-        traceSource.TraceSource.TraceEvent(TraceEventType.Error, 1230327407, errorMessage);
+        traceSource.TraceData(TraceEventType.Error, 1230327407, errorMessage);
         Console.WriteLine(errorMessage);
       }
     }
 
     private void Do(Options options)
     {
-      //TOD Enhance/Improve the Program logging and tracing infrastructure. #590
       PrintLogo(options.NoLogo);
-      BuildErrorsHandling.Log.TraceEventAction += z => Console.WriteLine(z.ToString());
-      BuildErrorsHandling.Log.TraceEventAction += y => traceSource.TraceSource.TraceEvent(y.TraceLevel, 566981851, y.ToString());
+      traceSource.TraceData(TraceEventType.Verbose, 6710129, "Creating Address Space populated using Standard Model. It will take a while ...");
       IAddressSpaceContext addressSpace = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
       Do(options, addressSpace);
     }
@@ -124,9 +133,9 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     #region DEBUG
 
     [Conditional("DEBUG")]
-    internal void GetTraceSource(Action<TraceSource> geter)
+    internal void GetTraceSource(Action<ITraceSource> geter)
     {
-      geter(traceSource.TraceSource);
+      geter(traceSource);
     }
 
     #endregion DEBUG

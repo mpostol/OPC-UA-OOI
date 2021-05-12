@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     /// <param name="traceEvent">The trace event delegate capturing the action used to trace all event encountered during the model generation.</param>
     /// <returns>An instance of the <see cref="IModelFactory"/> to be used to generate the OPC UA Information Model captured as the <see cref="XML.ModelDesign"/>.</returns>
     /// <exception cref="ArgumentNullException">outputFilePtah</exception>
-    public IModelFactory GetFactory(Action<TraceMessage> traceEvent)
+    internal IModelFactory GetFactory(Action<TraceMessage> traceEvent)
     {
       if (traceEvent == null)
         traceEvent = x => { };
@@ -56,6 +56,12 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       XML.ModelDesign _model = m_Model.Export();
       XmlFile.WriteXmlFile<XML.ModelDesign>(_model, outputFilePtah, FileMode.Create, stylesheetName);
       m_traceEvent(TraceMessage.DiagnosticTraceMessage($"The ModelDesign XML has been saved to file {outputFilePtah} and decorated with the stylesheet {stylesheetName}"));
+    }
+
+    public IModelFactory GetFactory()
+    {
+      //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
+      throw new NotImplementedException();
     }
 
     /// <summary>

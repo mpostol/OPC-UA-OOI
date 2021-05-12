@@ -6,75 +6,105 @@
 //__________________________________________________________________________________________________
 
 using System;
+using System.Diagnostics;
 using System.IO;
+using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.Common.Infrastructure.Serializers;
-using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
+using UAOOI.SemanticData.UAModelDesignExport.Diagnostic;
 
 namespace UAOOI.SemanticData.UAModelDesignExport
 {
   /// <summary>
-  /// Class ModelDesignExport - captures functionality supporting export functionality of the OPC UA Information Model represented by an xml file compliant with UA Model Design.
+  /// Class ModelDesignExport - captures functionality supporting export functionality of the OPC UA Information Model represented by an XML file compliant with UA Model Design.
   /// </summary>
-  public class ModelDesignExport
+  public abstract class ModelDesignExportAPI
   {
-    /// <summary>
-    /// Gets the factory.
-    /// </summary>
-    /// <param name="traceEvent">The trace event delegate capturing the action used to trace all event encountered during the model generation.</param>
-    /// <returns>An instance of the <see cref="IModelFactory"/> to be used to generate the OPC UA Information Model captured as the <see cref="XML.ModelDesign"/>.</returns>
-    /// <exception cref="ArgumentNullException">outputFilePtah</exception>
-    internal IModelFactory GetFactory(Action<TraceMessage> traceEvent)
-    {
-      if (traceEvent == null)
-        traceEvent = x => { };
-      m_Model = new ModelFactory(traceEvent);
-      m_traceEvent = traceEvent;
-      return m_Model;
-    }
+    #region factory
 
     /// <summary>
-    ///  Serializes the already generated model using the interface <see cref="IModelFactory"/> and writes the XML document to a file.
+    /// Gets the model design export.
     /// </summary>
-    /// <param name="outputFilePtah">A relative or absolute path for the file containing the serialized object.</param>
-    public void ExportToXMLFile(string outputFilePtah)
+    /// <returns>An instance capturing model design export implemented using the <see cref="IModelDesignExport"/> interface.</returns>
+    public static IModelDesignExport GetModelDesignExport()
     {
-      ExportToXMLFile(outputFilePtah, string.Empty);
+      return new ModelDesignExport();
     }
 
-    /// <summary>
-    ///  Serializes the already generated model using the interface <see cref="IModelFactory"/> and writes the XML document to a file.
-    /// </summary>
-    /// <param name="outputFilePtah">A relative or absolute path for the file containing the serialized object.</param>
-    /// <param name="stylesheetName">Name of the stylesheet document.</param>
-    public void ExportToXMLFile(string outputFilePtah, string stylesheetName)
+    internal static IModelDesignExport GetModelDesignExport(ITraceSource traceSource)
     {
-      if (m_Model == null)
-        throw new ArgumentNullException("UAModelDesign", "The model must be generated first.");
-      if (string.IsNullOrEmpty(outputFilePtah))
-        throw new ArgumentNullException(nameof(outputFilePtah), $"{nameof(outputFilePtah)} must be a valid file path.");
-      XML.ModelDesign _model = m_Model.Export();
-      XmlFile.WriteXmlFile<XML.ModelDesign>(_model, outputFilePtah, FileMode.Create, stylesheetName);
-      m_traceEvent(TraceMessage.DiagnosticTraceMessage($"The ModelDesign XML has been saved to file {outputFilePtah} and decorated with the stylesheet {stylesheetName}"));
+      return new ModelDesignExport(traceSource);
     }
 
-    public IModelFactory GetFactory()
-    {
-      //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
-      throw new NotImplementedException();
-    }
+    #endregion factory
 
-    /// <summary>
-    /// Convert the UA Information Model to graph of objects
-    /// </summary>
-    /// <returns>Returns an instance of the type <see cref="XML.ModelDesign"/>.</returns>
-    internal XML.ModelDesign ExportToObject()
+    private class ModelDesignExport : IModelDesignExport
     {
-      m_traceEvent(TraceMessage.DiagnosticTraceMessage($"The ModelDesign a graph of objects is exporting"));
-      return m_Model.Export();
-    }
+      #region IModelDesignExport
 
-    private ModelFactory m_Model = null;
-    private Action<TraceMessage> m_traceEvent;
+      /// <summary>
+      /// Gets the factory.
+      /// </summary>
+      /// <returns>An instance of the <see cref="IModelFactory"/> to be used to generate the OPC UA Information Model captured as the <see cref="XML.ModelDesign"/>.</returns>
+      public IModelFactory GetFactory()
+      {
+        m_Model = new ModelFactory(m_traceEvent.WriteTraceMessage);
+        return m_Model;
+      }
+
+      /// <summary>
+      ///  Serializes the already generated model using the interface <see cref="IModelFactory"/> and writes the XML document to a file.
+      /// </summary>
+      /// <param name="outputFilePtah">A relative or absolute path for the file containing the serialized object.</param>
+      public void ExportToXMLFile(string outputFilePtah)
+      {
+        ExportToXMLFile(outputFilePtah, string.Empty);
+      }
+
+      /// <summary>
+      ///  Serializes the already generated model using the interface <see cref="IModelFactory"/> and writes the XML document to a file.
+      /// </summary>
+      /// <param name="outputFilePtah">A relative or absolute path for the file containing the serialized object.</param>
+      /// <param name="stylesheetName">Name of the stylesheet document.</param>
+      public void ExportToXMLFile(string outputFilePtah, string stylesheetName)
+      {
+        if (m_Model == null)
+          throw new ArgumentNullException("UAModelDesign", "The model must be generated first.");
+        if (string.IsNullOrEmpty(outputFilePtah))
+          throw new ArgumentNullException(nameof(outputFilePtah), $"{nameof(outputFilePtah)} must be a valid file path.");
+        XML.ModelDesign _model = m_Model.Export();
+        XmlFile.WriteXmlFile<XML.ModelDesign>(_model, outputFilePtah, FileMode.Create, stylesheetName);
+        m_traceEvent.TraceData(TraceEventType.Information, 279330276, $"The ModelDesign XML has been saved to file {outputFilePtah} and decorated with the stylesheet {stylesheetName}");
+      }
+
+      /// <summary>
+      /// Convert the UA Information Model to graph of objects
+      /// </summary>
+      /// <returns>Returns an instance of the type <see cref="XML.ModelDesign"/>.</returns>
+      public XML.ModelDesign ExportToObject()
+      {
+        m_traceEvent.TraceData(TraceEventType.Information, 52892026, $"The ModelDesign a graph of objects is exporting");
+        return m_Model.Export();
+      }
+
+      #endregion IModelDesignExport
+
+      #region private
+
+      private ModelFactory m_Model = null;
+      private readonly AssemblyTraceSource m_traceEvent;
+
+      internal ModelDesignExport(ITraceSource traceEvent)
+      {
+        m_traceEvent = new AssemblyTraceSource(traceEvent);
+      }
+
+      internal ModelDesignExport()
+      {
+        m_traceEvent = new AssemblyTraceSource();
+      }
+
+      #endregion private
+    }
   }
 }

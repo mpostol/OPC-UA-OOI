@@ -1,14 +1,17 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
 
@@ -20,16 +23,17 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     [TestMethod]
     public void ConstructorTestMethod()
     {
-      ModelDesignExport _exporter = new ModelDesignExport();
-      List<TraceMessage> _log = new List<TraceMessage>();
+      Mock<ITraceSource> mock = new Mock<ITraceSource>();
+      mock.Setup(x => x.TraceData(It.IsAny<TraceEventType>(), It.IsAny<int>(), It.IsAny<string>()));
+      IModelDesignExport _exporter = ModelDesignExportAPI.GetModelDesignExport(mock.Object);
       string _filePath = "ConstructorTestMethodPtah.xml";
-      IModelFactory _factory = _exporter.GetFactory(x => _log.Add(x));
+      IModelFactory _factory = _exporter.GetFactory();
       _factory.CreateNamespace("NameSpace1", String.Empty, String.Empty);
       _factory.CreateNamespace("NameSpace2", String.Empty, String.Empty);
       _exporter.ExportToXMLFile(_filePath);
       FileInfo _outputFile = new FileInfo(_filePath);
       Assert.IsTrue(_outputFile.Exists);
-      Assert.AreEqual<long>(1, _log.Count);
+      mock.Verify(x => x.TraceData(It.IsAny<TraceEventType>(), It.IsAny<int>(), It.IsAny<string>()), Times.Once);
       Assert.IsTrue(670 < _outputFile.Length, $"File length is {_outputFile.Length}");
     }
   }

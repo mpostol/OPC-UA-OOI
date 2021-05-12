@@ -58,8 +58,8 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
 
     internal void Do(Options options, IAddressSpaceContext addressSpace)
     {
-      ModelDesignExport exporter = new ModelDesignExport(); //creates new instance of the ModelDesignExport class that captures functionality supporting export of the OPC UA Information Model represented
-                                                            //by an XML file compliant with UAModelDesign schema.
+      IModelDesignExport exporter = ModelDesignExportAPI.GetModelDesignExport(); //creates new instance of the ModelDesignExport class that captures functionality supporting export of the OPC UA Information Model represented
+                                                                                 //by an XML file compliant with UAModelDesign schema.
       bool _exportModel = false;
       if (!string.IsNullOrEmpty(options.ModelDesignFileName))
       {

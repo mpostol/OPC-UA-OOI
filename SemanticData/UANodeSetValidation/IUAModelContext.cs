@@ -14,7 +14,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Interface IUAModelContext - represents an OPC UA Information Model
   /// </summary>
-  public interface IUAModelContext
+  internal interface IUAModelContext
   {
     /// <summary>
     /// Registers the <see cref="QualifiedName"/> of ReferenceType Node.

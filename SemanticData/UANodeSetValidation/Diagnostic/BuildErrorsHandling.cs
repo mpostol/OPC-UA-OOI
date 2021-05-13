@@ -12,9 +12,9 @@ using UAOOI.SemanticData.BuildingErrorsHandling;
 //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-  public class BuildErrorsHandling : IBuildErrorsHandling
+  internal class BuildErrorsHandling : IBuildErrorsHandling
   {
-    public static IBuildErrorsHandling Log => m_Instance.Value;
+    internal static IBuildErrorsHandling Log => m_Instance.Value;
 
     #region IBuildErrorsHandling
 

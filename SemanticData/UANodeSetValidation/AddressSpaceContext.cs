@@ -237,7 +237,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     private class ValidationBuildErrorsHandling : IBuildErrorsHandling
     {
-      public ValidationBuildErrorsHandling(Action<TraceMessage> traceEvent)
+      internal ValidationBuildErrorsHandling(Action<TraceMessage> traceEvent)
       {
         _TraceEvent = traceEvent ?? throw new ArgumentNullException("traceEvent", "traceEvent - cannot be null");
       }

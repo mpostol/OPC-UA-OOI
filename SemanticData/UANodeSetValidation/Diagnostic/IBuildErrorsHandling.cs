@@ -1,21 +1,27 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
-using System;
+using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.UANodeSetValidation.Diagnostic
 {
-  internal interface IBuildErrorsHandling
+  internal interface IBuildErrorsHandling : ITraceSource
   {
-    //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
-    //      BuildErrorsHandling.Log.TraceEventAction += y => traceSource.TraceSource.TraceEvent(y.TraceLevel, 566981851, y.ToString());
-    event Action<TraceMessage> TraceEventAction;
+    /// <summary>
+    /// Traces the event using <see cref="TraceMessage"/>.
+    /// </summary>
+    /// <param name="traceMessage">The message to be send to trace.</param>
+    void WriteTraceMessage(TraceMessage traceMessage);
 
-    void TraceEvent(TraceMessage traceMessage);
+    /// <summary>
+    /// Gets the number of traced errors.
+    /// </summary>
+    /// <value>The errors.</value>
+    int Errors { get; }
   }
 }

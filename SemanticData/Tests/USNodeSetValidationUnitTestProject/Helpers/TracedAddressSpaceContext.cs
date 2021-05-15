@@ -9,18 +9,18 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.UANodeSetValidation.Diagnostic;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
 {
-  internal class TracedAddressSpaceContext : IDisposable
+  internal class TracedAddressSpaceContext : IBuildErrorsHandling, IDisposable
   {
     internal IAddressSpaceContext CreateAddressSpaceContext()
     {
-      return new AddressSpaceContext(z => TraceDiagnostic(z, TraceList, ref _diagnosticCounter));
+      return new AddressSpaceContext(this);
     }
 
     internal readonly List<TraceMessage> TraceList = new List<TraceMessage>();
-    internal int _diagnosticCounter = 0;
 
     public void Dispose()
     {
@@ -28,17 +28,29 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
 
     internal void Clear()
     {
-      _diagnosticCounter = 0;
+      Errors = 0;
       TraceList.Clear();
     }
 
-    private void TraceDiagnostic(TraceMessage msg, List<TraceMessage> errors, ref int diagnosticCounter)
+    #region IBuildErrorsHandling
+
+    public int Errors { get; set; }
+
+    public void TraceData(TraceEventType eventType, int id, object data)
     {
-      Debug.WriteLine(msg.ToString());
-      if (msg.BuildError.Focus == Focus.Diagnostic)
-        diagnosticCounter++;
-      else
-        errors.Add(msg);
+      string message = $"TraceData eventType = {eventType}, id = {id}, {data}";
+      Console.WriteLine(message);
+      if (eventType == TraceEventType.Critical || eventType == TraceEventType.Error)
+        throw new ApplicationException(message);
     }
+
+    public void WriteTraceMessage(TraceMessage traceMessage)
+    {
+      Console.WriteLine(traceMessage.ToString());
+      if (traceMessage.BuildError.Focus != Focus.Diagnostic)
+        TraceList.Add(traceMessage);
+    }
+
+    #endregion IBuildErrorsHandling
   }
 }

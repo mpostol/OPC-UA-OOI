@@ -5,32 +5,70 @@
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
 
-using System;
+using System.Diagnostics;
+using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 
 //TODO BuildErrorsHandling - review the code #578
 //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.UANodeSetValidation.Diagnostic
 {
-  internal class BuildErrorsHandling : IBuildErrorsHandling
+  /// <summary>
+  /// Class AssemblyTraceSource. Implements the <see cref="ITraceSource" />
+  /// </summary>
+  /// <seealso cref="ITraceSource" />
+  internal class AssemblyTraceSource : IBuildErrorsHandling
   {
-    internal static IBuildErrorsHandling Log => m_Instance.Value;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AssemblyTraceSource"/> class using the default of the <see cref="ITraceSource"/>.
+    /// </summary>
+    internal AssemblyTraceSource()
+    {
+      traceSource = new TraceSourceBase("UANodeSetValidation");
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AssemblyTraceSource"/> class using a provided implementation of the <see cref="ITraceSource"/>.
+    /// </summary>
+    /// <param name="traceEvent">The provided implementation of the <see cref="ITraceSource"/>.</param>
+    internal AssemblyTraceSource(ITraceSource traceEvent)
+    {
+      traceSource = traceEvent;
+    }
 
     #region IBuildErrorsHandling
 
-    public event Action<TraceMessage> TraceEventAction;
-
-    public void TraceEvent(TraceMessage traceMessage)
+    /// <summary>
+    /// Writes the trace message.
+    /// </summary>
+    /// <param name="traceMessage">The trace message.</param>
+    public void WriteTraceMessage(TraceMessage traceMessage)
     {
-      TraceEventAction?.Invoke(traceMessage);
+      traceSource.TraceData(traceMessage.TraceLevel, 43988162, traceMessage.ToString());
+      if (traceMessage.BuildError.Focus != Focus.Diagnostic)
+        Errors++;
     }
+
+    public int Errors { get; private set; } = 0;
 
     #endregion IBuildErrorsHandling
 
-    private BuildErrorsHandling()
+    #region ITraceSource
+
+    /// <summary>
+    /// Writes trace data to the trace listeners in the <see cref="P:System.Diagnostics.TraceSource.Listeners" /> collection using the specified <paramref name="eventType" />,
+    /// event identifier <paramref name="id" />, and trace <paramref name="data" />.
+    /// </summary>
+    /// <param name="eventType">One of the enumeration values that specifies the event type of the trace data.</param>
+    /// <param name="id">A numeric identifier for the event.</param>
+    /// <param name="data">The trace data.</param>
+    public void TraceData(TraceEventType eventType, int id, object data)
     {
+      traceSource.TraceData(eventType, id, data);
     }
 
-    private static Lazy<BuildErrorsHandling> m_Instance = new Lazy<BuildErrorsHandling>(() => new BuildErrorsHandling());
+    #endregion ITraceSource
+
+    private readonly ITraceSource traceSource;
   }
 }

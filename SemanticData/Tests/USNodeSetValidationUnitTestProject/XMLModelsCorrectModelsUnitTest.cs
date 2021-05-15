@@ -6,11 +6,14 @@
 //___________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.UANodeSetValidation.Diagnostic;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -29,7 +32,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml");  //File not compliant with the schema.
       Assert.IsTrue(_testDataFileInfo.Exists);
       List<TraceMessage> _trace = new List<TraceMessage>();
-      IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace));
+      Mock<Diagnostic.IBuildErrorsHandling> mockTrace = new Mock<Diagnostic.IBuildErrorsHandling>();
+      IAddressSpaceContext _as = new AddressSpaceContext(mockTrace.Object);
       _as.ImportUANodeSet(_testDataFileInfo);
     }
 
@@ -82,17 +86,41 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
 
-    private void TraceDiagnostic(TraceMessage msg, List<TraceMessage> errors)
+    private class BuildErrorsHandling : IBuildErrorsHandling
     {
-      Console.WriteLine(msg.ToString());
-      if (msg.BuildError.Focus != Focus.Diagnostic)
-        errors.Add(msg);
+      internal BuildErrorsHandling(List<TraceMessage> listOfMessages)
+      {
+        ListOfMessages = listOfMessages;
+      }
+
+      #region IBuildErrorsHandling
+
+      public int Errors => throw new NotImplementedException();
+
+      public void TraceData(TraceEventType eventType, int id, object data)
+      {
+        string message = $"TraceData eventType = {eventType}, id = {id}, {data}";
+        Console.WriteLine(message);
+        if (eventType == TraceEventType.Critical || eventType == TraceEventType.Error)
+          throw new ApplicationException(message);
+      }
+
+      public void WriteTraceMessage(TraceMessage traceMessage)
+      {
+        Console.WriteLine(traceMessage.ToString());
+        if (traceMessage.BuildError.Focus != Focus.Diagnostic)
+          ListOfMessages.Add(traceMessage);
+      }
+
+      #endregion IBuildErrorsHandling
+
+      private readonly List<TraceMessage> ListOfMessages = null;
     }
 
     private List<IUANodeContext> ValidateAndExportModelUnitTest(FileInfo testDataFileInfo, int numberOfNodes, Uri model)
     {
       List<TraceMessage> _trace = new List<TraceMessage>();
-      IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace));
+      IAddressSpaceContext _as = new AddressSpaceContext(new BuildErrorsHandling(_trace));
       _trace.Clear();
       _as.ImportUANodeSet(testDataFileInfo);
       Assert.AreEqual<int>(0, _trace.Count);

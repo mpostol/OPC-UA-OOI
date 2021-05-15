@@ -6,12 +6,16 @@
 //___________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using UAOOI.SemanticData.UANodeSetValidation.Diagnostic;
+using UAOOI.SemanticData.UANodeSetValidation.Helpers;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
@@ -82,7 +86,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestCategory("AddressSpaceContext")]
     public void AddressSpaceContextImportUANodeSetNull()
     {
-      IAddressSpaceContext _as = new AddressSpaceContext(x => { });
+      Mock<IBuildErrorsHandling> mock = new Mock<IBuildErrorsHandling>();
+      IAddressSpaceContext _as = new AddressSpaceContext(mock.Object);
       UANodeSet _ns = null;
       Assert.ThrowsException<ArgumentNullException>(() => _as.ImportUANodeSet(_ns));
       FileInfo _fi = null;
@@ -121,19 +126,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           }
          }
       };
-      List<TraceMessage> _traceLog = new List<TraceMessage>();
-      AddressSpaceContext asp = new AddressSpaceContext(x => _traceLog.Add(x));
-      ((IAddressSpaceContext)asp).ImportUANodeSet(newNodeSet);
-      List<UAReferenceContext> references = new List<UAReferenceContext>();
-      asp.UTGetReferences(NodeId.Parse(newNodeSet.Items[0].NodeId), x => references.Add(x));
-      Assert.AreEqual<int>(1, references.Count);
-      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasProperty, references[0].ReferenceKind);
-      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasProperty, references[0].ReferenceKind);
-      references.Clear();
-      asp.UTGetReferences(NodeId.Parse(newNodeSet.Items[1].NodeId), x => references.Add(x));
-      Assert.AreEqual<int>(2, references.Count);
-      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasTypeDefinition, references[0].ReferenceKind);
-      Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasModellingRule, references[1].ReferenceKind);
+      using (TracedAddressSpaceContext tracedAddressSpace = new TracedAddressSpaceContext())
+      {
+        AddressSpaceContext asp = new AddressSpaceContext(tracedAddressSpace);
+        ((IAddressSpaceContext)asp).ImportUANodeSet(newNodeSet);
+        List<UAReferenceContext> references = new List<UAReferenceContext>();
+        asp.UTGetReferences(NodeId.Parse(newNodeSet.Items[0].NodeId), x => references.Add(x));
+        Assert.AreEqual<int>(1, references.Count);
+        Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasProperty, references[0].ReferenceKind);
+        Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasProperty, references[0].ReferenceKind);
+        references.Clear();
+        asp.UTGetReferences(NodeId.Parse(newNodeSet.Items[1].NodeId), x => references.Add(x));
+        Assert.AreEqual<int>(2, references.Count);
+        Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasTypeDefinition, references[0].ReferenceKind);
+        Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasModellingRule, references[1].ReferenceKind);
+      }
     }
 
     [TestMethod]
@@ -237,41 +244,51 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestMethod]
     public void GetBaseTypesTest()
     {
-      AddressSpaceWrapper asp = new AddressSpaceWrapper();
-      List<IUANodeContext> inheritanceChain = new List<IUANodeContext>();
-      IUANodeContext hasPropertyNode = asp.AddressSpaceContext.GetOrCreateNodeContext(ReferenceTypeIds.HasProperty, x => { Assert.Fail(); return null; });
-      asp.AddressSpaceContext.GetBaseTypes(hasPropertyNode, inheritanceChain);
-      Assert.AreEqual<int>(5, inheritanceChain.Count);
-      Assert.AreEqual<string>(ReferenceTypeIds.HasProperty.ToString(), inheritanceChain[0].NodeIdContext.ToString());
-      Assert.AreEqual<string>(ReferenceTypeIds.References.ToString(), inheritanceChain[4].NodeIdContext.ToString());
+      using (TracedAddressSpaceContext tasp = new TracedAddressSpaceContext())
+      {
+        AddressSpaceContext asp = (AddressSpaceContext)tasp.CreateAddressSpaceContext();
+        List<IUANodeContext> inheritanceChain = new List<IUANodeContext>();
+        IUANodeContext hasPropertyNode = asp.GetOrCreateNodeContext(ReferenceTypeIds.HasProperty, x => { Assert.Fail(); return null; });
+        asp.GetBaseTypes(hasPropertyNode, inheritanceChain);
+        Assert.AreEqual<int>(5, inheritanceChain.Count);
+        Assert.AreEqual<string>(ReferenceTypeIds.HasProperty.ToString(), inheritanceChain[0].NodeIdContext.ToString());
+        Assert.AreEqual<string>(ReferenceTypeIds.References.ToString(), inheritanceChain[4].NodeIdContext.ToString());
+      }
     }
 
     #region private
 
-    private class AddressSpaceWrapper
+    private class AddressSpaceWrapper : IBuildErrorsHandling
     {
       public AddressSpaceWrapper()
       {
-        AddressSpaceContext = new AddressSpaceContext(x => { TraceDiagnostic(x, TraceList, ref _diagnosticCounter); });
+        AddressSpaceContext = new AddressSpaceContext(this);
       }
 
       public void TestConsistency(int diagnosticCounter, int errorsCounter)
       {
-        Assert.AreEqual<int>(diagnosticCounter, _diagnosticCounter);
+        Assert.AreEqual<int>(diagnosticCounter, Errors);
         Assert.AreEqual<int>(errorsCounter, TraceList.Count);
       }
 
       internal List<TraceMessage> TraceList = new List<TraceMessage>();
       internal AddressSpaceContext AddressSpaceContext = null;
+      public int Errors { get; set; } = 0;
 
-      private int _diagnosticCounter = 0;
-
-      private void TraceDiagnostic(TraceMessage msg, List<TraceMessage> errors, ref int diagnosticCounter)
+      public void WriteTraceMessage(TraceMessage traceMessage)
       {
-        Console.WriteLine(msg.ToString());
-        diagnosticCounter++;
-        if (msg.BuildError.Focus != Focus.Diagnostic)
-          errors.Add(msg);
+        Console.WriteLine(traceMessage.ToString());
+        Errors++;
+        if (traceMessage.BuildError.Focus != Focus.Diagnostic)
+          TraceList.Add(traceMessage);
+      }
+
+      public void TraceData(TraceEventType eventType, int id, object data)
+      {
+        string message = $"TraceData eventType = {eventType}, id = {id}, {data}";
+        Console.WriteLine(message);
+        if (eventType == TraceEventType.Critical || eventType == TraceEventType.Error)
+          throw new ApplicationException(message);
       }
     }
 

@@ -92,8 +92,4 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
     </Compile>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Diagnostic\" />
-  </ItemGroup>
-
 </Project>

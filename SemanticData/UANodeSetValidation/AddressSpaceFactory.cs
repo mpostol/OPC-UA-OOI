@@ -7,6 +7,7 @@
 
 using System;
 using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.UANodeSetValidation.Diagnostic;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -16,19 +17,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   public static class AddressSpaceFactory
   {
     /// <summary>
-    /// Creates Address Space infrastructure exposed to the API clients as the <see cref="IAddressSpaceContext"/> interface using default
-    /// messages handler provided by the <see cref="BuildErrorsHandling"/> class.
+    /// Creates Address Space infrastructure exposed to the API clients as the <see cref="IAddressSpaceContext"/> interface using default tracing infrastructure.
     /// </summary>
-    public static IAddressSpaceContext AddressSpace => new AddressSpaceContext(BuildErrorsHandling.Log.TraceEvent);
+    public static IAddressSpaceContext AddressSpace => new AddressSpaceContext(new AssemblyTraceSource());
 
-    /// <summary>
-    /// Gets the address space.
-    /// </summary>
-    /// <param name="traceCallback">The trace callback.</param>
-    /// <returns>An instance of the <see cref="IAddressSpaceContext"/> type.</returns>
-    public static IAddressSpaceContext GetAddressSpace(Action<TraceMessage> traceCallback)
-    {
-      return new AddressSpaceContext(traceCallback);
-    }
+    ///// <summary>
+    ///// Gets the address space.
+    ///// </summary>
+    ///// <param name="traceCallback">The trace callback.</param>
+    ///// <returns>An instance of the <see cref="IAddressSpaceContext"/> type.</returns>
+    //public static IAddressSpaceContext GetAddressSpace(Action<TraceMessage> traceCallback)
+    //{
+    //  return new AddressSpaceContext(traceCallback);
+    //}
   }
 }

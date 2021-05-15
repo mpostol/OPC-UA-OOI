@@ -1,10 +1,11 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,18 +14,21 @@ using UAOOI.SemanticData.UANodeSetValidation.Diagnostic;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
 {
-  internal class TracedAddressSpaceContext : IBuildErrorsHandling, IDisposable
+  internal class TracedAddressSpaceContext : IBuildErrorsHandling
   {
-    internal IAddressSpaceContext CreateAddressSpaceContext()
+    public TracedAddressSpaceContext()
     {
-      return new AddressSpaceContext(this);
+      AddressSpaceContext = new AddressSpaceContext(this);
     }
 
+    public void TestConsistency(int diagnosticCounter, int errorsCounter)
+    {
+      Assert.AreEqual<int>(diagnosticCounter, Errors);
+      Assert.AreEqual<int>(errorsCounter, TraceList.Count);
+    }
+
+    internal AddressSpaceContext AddressSpaceContext = null;
     internal readonly List<TraceMessage> TraceList = new List<TraceMessage>();
-
-    public void Dispose()
-    {
-    }
 
     internal void Clear()
     {
@@ -34,7 +38,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
 
     #region IBuildErrorsHandling
 
-    public int Errors { get; set; }
+    public int Errors { get; set; } = 0;
 
     public void TraceData(TraceEventType eventType, int id, object data)
     {
@@ -47,6 +51,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
     public void WriteTraceMessage(TraceMessage traceMessage)
     {
       Console.WriteLine(traceMessage.ToString());
+      Errors++;
       if (traceMessage.BuildError.Focus != Focus.Diagnostic)
         TraceList.Add(traceMessage);
     }

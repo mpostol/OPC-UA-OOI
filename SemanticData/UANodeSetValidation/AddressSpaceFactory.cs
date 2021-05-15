@@ -21,6 +21,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     public static IAddressSpaceContext AddressSpace => new AddressSpaceContext(new AssemblyTraceSource());
 
+    //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
     ///// <summary>
     ///// Gets the address space.
     ///// </summary>

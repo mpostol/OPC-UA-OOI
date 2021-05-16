@@ -146,9 +146,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       TracedAddressSpaceContext _asp = new TracedAddressSpaceContext();
       ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel(new Uri(UAInformationModel.Namespaces.OpcUa));
-      _asp.TestConsistency(683, 2);
+      _asp.TestConsistency(683, 1);
       Assert.AreEqual<string>(BuildError.WrongReference2Property.Identifier, _asp.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.ModelContainsErrors.Identifier, _asp.TraceList[1].BuildError.Identifier);
     }
 
     [TestMethod]

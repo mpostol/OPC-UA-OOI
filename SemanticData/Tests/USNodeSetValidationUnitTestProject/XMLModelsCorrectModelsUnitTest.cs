@@ -9,11 +9,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UAOOI.SemanticData.BuildingErrorsHandling;
-using UAOOI.SemanticData.UANodeSetValidation.Diagnostic;
+using UAOOI.SemanticData.UANodeSetValidation.Helpers;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -86,51 +85,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
 
-    private class BuildErrorsHandling : IBuildErrorsHandling
-    {
-      internal BuildErrorsHandling(List<TraceMessage> listOfMessages)
-      {
-        ListOfMessages = listOfMessages;
-      }
-
-      #region IBuildErrorsHandling
-
-      public int Errors => throw new NotImplementedException();
-
-      public void TraceData(TraceEventType eventType, int id, object data)
-      {
-        string message = $"TraceData eventType = {eventType}, id = {id}, {data}";
-        Console.WriteLine(message);
-        if (eventType == TraceEventType.Critical || eventType == TraceEventType.Error)
-          throw new ApplicationException(message);
-      }
-
-      public void WriteTraceMessage(TraceMessage traceMessage)
-      {
-        Console.WriteLine(traceMessage.ToString());
-        if (traceMessage.BuildError.Focus != Focus.Diagnostic)
-          ListOfMessages.Add(traceMessage);
-      }
-
-      #endregion IBuildErrorsHandling
-
-      private readonly List<TraceMessage> ListOfMessages = null;
-    }
-
     private List<IUANodeContext> ValidateAndExportModelUnitTest(FileInfo testDataFileInfo, int numberOfNodes, Uri model)
     {
-      List<TraceMessage> _trace = new List<TraceMessage>();
-      IAddressSpaceContext _as = new AddressSpaceContext(new BuildErrorsHandling(_trace));
-      _trace.Clear();
+      TracedAddressSpaceContext tracedAddressSpaceContext = new TracedAddressSpaceContext();
+      IAddressSpaceContext _as = tracedAddressSpaceContext.AddressSpaceContext;
+      tracedAddressSpaceContext.Clear();
       _as.ImportUANodeSet(testDataFileInfo);
-      Assert.AreEqual<int>(0, _trace.Count);
+      Assert.AreEqual<int>(0, tracedAddressSpaceContext.TraceList.Count);
       ((AddressSpaceContext)_as).UTAddressSpaceCheckConsistency(x => { Assert.Fail(); });
       ((AddressSpaceContext)_as).UTReferencesCheckConsistency((x, y, z, v) => Assert.Fail());
       IEnumerable<IUANodeContext> _nodes = null;
       ((AddressSpaceContext)_as).UTValidateAndExportModel(1, x => _nodes = x);
       Assert.AreEqual<int>(numberOfNodes, _nodes.Count<IUANodeContext>());
       _as.ValidateAndExportModel(model);
-      Assert.AreEqual<int>(0, _trace.Count);
+      Assert.AreEqual<int>(0, tracedAddressSpaceContext.TraceList.Count);
       return _nodes.ToList<IUANodeContext>();
     }
 

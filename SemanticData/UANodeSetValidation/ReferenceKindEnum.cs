@@ -1,46 +1,51 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2019, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
+
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
-
   /// <summary>
   /// Enum ReferenceKindEnum
   /// </summary>
-  public enum ReferenceKindEnum 
+  internal enum ReferenceKindEnum
   {
     /// <summary>
     /// The custom reference
     /// </summary>
     Custom,
+
     /// <summary>
-    /// The HasComponent 
+    /// The HasComponent
     /// </summary>
     HasComponent,
+
     /// <summary>
     /// The HasModellingRule
     /// </summary>
     HasModellingRule,
+
     /// <summary>
     /// The HasTypeDefinition
     /// </summary>
     HasTypeDefinition,
+
     /// <summary>
     /// The HierarchicalReferences
     /// </summary>
     HierarchicalReferences,
+
     /// <summary>
     /// The HasSubtype
     /// </summary>
     HasSubtype,
+
     /// <summary>
     /// The HasProperty
     /// </summary>
-    HasProperty 
+    HasProperty
   };
-
 }

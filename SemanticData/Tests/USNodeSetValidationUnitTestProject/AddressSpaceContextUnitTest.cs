@@ -1,17 +1,20 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using UAOOI.SemanticData.UANodeSetValidation.Diagnostic;
+using UAOOI.SemanticData.UANodeSetValidation.Helpers;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 using UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
@@ -26,7 +29,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void AddressSpaceContextConstructorTest()
     {
       List<IUANodeBase> _invalidNodes = new List<IUANodeBase>();
-      AddressSpaceWrapper _asp = new AddressSpaceWrapper();
+      TracedAddressSpaceContext _asp = new TracedAddressSpaceContext();
       _asp.AddressSpaceContext.UTAddressSpaceCheckConsistency(x => _invalidNodes.Add(x));
       _asp.TestConsistency(4, 0);
     }
@@ -35,7 +38,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestCategory("AddressSpaceContext")]
     public void ReferencesCheckConsistencyTest()
     {
-      AddressSpaceWrapper _asp = new AddressSpaceWrapper();
+      TracedAddressSpaceContext _asp = new TracedAddressSpaceContext();
       _asp.AddressSpaceContext.UTReferencesCheckConsistency((x, y, z, v) => Assert.Fail());
       _asp.TestConsistency(4, 0);
     }
@@ -44,7 +47,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestCategory("AddressSpaceContext")]
     public void AddressSpaceContextContentCheck()
     {
-      AddressSpaceWrapper _asp = new AddressSpaceWrapper();
+      TracedAddressSpaceContext _asp = new TracedAddressSpaceContext();
       List<IUANodeContext> _content = new List<IUANodeContext>();
       _asp.AddressSpaceContext.UTTryGetUANodeContext(VariableTypes.PropertyType, x => _content.Add(x));
       Assert.AreEqual<int>(1, _content.Count);
@@ -67,7 +70,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestCategory("AddressSpaceContext")]
     public void AddressSpaceReferencesContentCheck()
     {
-      AddressSpaceWrapper _asp = new AddressSpaceWrapper();
+      TracedAddressSpaceContext _asp = new TracedAddressSpaceContext();
       List<UAReferenceContext> _content = new List<UAReferenceContext>();
       _asp.AddressSpaceContext.UTGetReferences(ObjectIds.RootFolder, x => _content.Add(x));
       Assert.AreEqual<int>(4, _content.Count);
@@ -82,7 +85,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestCategory("AddressSpaceContext")]
     public void AddressSpaceContextImportUANodeSetNull()
     {
-      IAddressSpaceContext _as = new AddressSpaceContext(x => { });
+      Mock<IBuildErrorsHandling> mock = new Mock<IBuildErrorsHandling>();
+      IAddressSpaceContext _as = new AddressSpaceContext(mock.Object);
       UANodeSet _ns = null;
       Assert.ThrowsException<ArgumentNullException>(() => _as.ImportUANodeSet(_ns));
       FileInfo _fi = null;
@@ -121,8 +125,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           }
          }
       };
-      List<TraceMessage> _traceLog = new List<TraceMessage>();
-      AddressSpaceContext asp = new AddressSpaceContext(x => _traceLog.Add(x));
+      Helpers.TracedAddressSpaceContext tracedAddressSpace = new Helpers.TracedAddressSpaceContext();
+      AddressSpaceContext asp = new AddressSpaceContext(tracedAddressSpace);
       ((IAddressSpaceContext)asp).ImportUANodeSet(newNodeSet);
       List<UAReferenceContext> references = new List<UAReferenceContext>();
       asp.UTGetReferences(NodeId.Parse(newNodeSet.Items[0].NodeId), x => references.Add(x));
@@ -140,11 +144,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestCategory("AddressSpaceContext")]
     public void AddressSpaceContextValidateAndExportModelOpcUa()
     {
-      AddressSpaceWrapper _asp = new AddressSpaceWrapper();
+      TracedAddressSpaceContext _asp = new TracedAddressSpaceContext();
       ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel(new Uri(UAInformationModel.Namespaces.OpcUa));
-      _asp.TestConsistency(683, 2);
+      _asp.TestConsistency(683, 1);
       Assert.AreEqual<string>(BuildError.WrongReference2Property.Identifier, _asp.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.ModelContainsErrors.Identifier, _asp.TraceList[1].BuildError.Identifier);
     }
 
     [TestMethod]
@@ -152,7 +155,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void AddressSpaceContextValidateAndExportModelWrongNamespace()
     {
-      AddressSpaceWrapper _asp = new AddressSpaceWrapper();
+      TracedAddressSpaceContext _asp = new TracedAddressSpaceContext();
       ((IAddressSpaceContext)_asp.AddressSpaceContext).ValidateAndExportModel(new Uri("http://www.example.com/afterthought/box"));
     }
 
@@ -160,7 +163,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestCategory("AddressSpaceContext")]
     public void AddressSpaceContextValidateAndExportIndex0()
     {
-      AddressSpaceWrapper _asp = new AddressSpaceWrapper();
+      TracedAddressSpaceContext _asp = new TracedAddressSpaceContext();
       IEnumerable<IUANodeContext> _returnValue = null;
       _asp.AddressSpaceContext.UTValidateAndExportModel(0, x => _returnValue = x);
       Assert.AreEqual<int>(3909, (_returnValue.Count<IUANodeContext>()));
@@ -174,7 +177,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestCategory("AddressSpaceContext")]
     public void ImportObjectTest()
     {
-      AddressSpaceWrapper _asp = new AddressSpaceWrapper();
+      TracedAddressSpaceContext _asp = new TracedAddressSpaceContext();
       UANodeSet _newNodeSet = TestData.CreateNodeSetModel();
       ((IAddressSpaceContext)_asp.AddressSpaceContext).ImportUANodeSet(_newNodeSet);
       _asp.TestConsistency(7, 1);
@@ -221,7 +224,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           }
          }
       };
-      AddressSpaceWrapper asp = new AddressSpaceWrapper();
+      TracedAddressSpaceContext asp = new TracedAddressSpaceContext();
       ((IAddressSpaceContext)asp.AddressSpaceContext).ImportUANodeSet(newNodeSet);
       IUANodeContext uaObjectType = asp.AddressSpaceContext.GetOrCreateNodeContext(NodeId.Parse(newNodeSet.Items[0].NodeId), x => { Assert.Fail(); return null; });
       Assert.IsNotNull(uaObjectType);
@@ -237,44 +240,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestMethod]
     public void GetBaseTypesTest()
     {
-      AddressSpaceWrapper asp = new AddressSpaceWrapper();
+      Helpers.TracedAddressSpaceContext tasp = new Helpers.TracedAddressSpaceContext();
+      AddressSpaceContext asp = (AddressSpaceContext)tasp.AddressSpaceContext;
       List<IUANodeContext> inheritanceChain = new List<IUANodeContext>();
-      IUANodeContext hasPropertyNode = asp.AddressSpaceContext.GetOrCreateNodeContext(ReferenceTypeIds.HasProperty, x => { Assert.Fail(); return null; });
-      asp.AddressSpaceContext.GetBaseTypes(hasPropertyNode, inheritanceChain);
+      IUANodeContext hasPropertyNode = asp.GetOrCreateNodeContext(ReferenceTypeIds.HasProperty, x => { Assert.Fail(); return null; });
+      asp.GetBaseTypes(hasPropertyNode, inheritanceChain);
       Assert.AreEqual<int>(5, inheritanceChain.Count);
       Assert.AreEqual<string>(ReferenceTypeIds.HasProperty.ToString(), inheritanceChain[0].NodeIdContext.ToString());
       Assert.AreEqual<string>(ReferenceTypeIds.References.ToString(), inheritanceChain[4].NodeIdContext.ToString());
     }
-
-    #region private
-
-    private class AddressSpaceWrapper
-    {
-      public AddressSpaceWrapper()
-      {
-        AddressSpaceContext = new AddressSpaceContext(x => { TraceDiagnostic(x, TraceList, ref _diagnosticCounter); });
-      }
-
-      public void TestConsistency(int diagnosticCounter, int errorsCounter)
-      {
-        Assert.AreEqual<int>(diagnosticCounter, _diagnosticCounter);
-        Assert.AreEqual<int>(errorsCounter, TraceList.Count);
-      }
-
-      internal List<TraceMessage> TraceList = new List<TraceMessage>();
-      internal AddressSpaceContext AddressSpaceContext = null;
-
-      private int _diagnosticCounter = 0;
-
-      private void TraceDiagnostic(TraceMessage msg, List<TraceMessage> errors, ref int diagnosticCounter)
-      {
-        Console.WriteLine(msg.ToString());
-        diagnosticCounter++;
-        if (msg.BuildError.Focus != Focus.Diagnostic)
-          errors.Add(msg);
-      }
-    }
-
-    #endregion private
   }
 }

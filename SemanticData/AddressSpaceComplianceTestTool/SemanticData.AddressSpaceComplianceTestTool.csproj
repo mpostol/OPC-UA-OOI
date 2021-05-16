@@ -119,9 +119,9 @@
     <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj">
-      <Project>{9ca2f05b-fb18-49ad-8520-1bcc838f748c}</Project>
-      <Name>SemanticData.BuildingErrorsHandling</Name>
+    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj">
+      <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
+      <Name>Common.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj">
       <Project>{6d20785d-0451-46a9-9ac2-ec66b7c0d18a}</Project>

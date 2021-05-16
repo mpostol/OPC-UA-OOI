@@ -8,8 +8,10 @@
 using CommandLine;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
 using UAOOI.SemanticData.UAModelDesignExport;
 using UAOOI.SemanticData.UANodeSetValidation;
@@ -23,39 +25,45 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
   {
     public static void Main(string[] args)
     {
+      Program program = new Program();
       try
       {
-        Run(args);
+        AssemblyName myAssembly = Assembly.GetExecutingAssembly().GetName();
+        AssemblyName = $"Address Space Prototyping (asp.exe) Version {myAssembly.Version}";
+        program.traceSource.TraceData(TraceEventType.Information, 1637887218, AssemblyName);
+        program.traceSource.TraceData(TraceEventType.Information, 1637887219, Copyright);
+        program.Run(args);
+      }
+      catch (Exception ex)
+      {
+        string errorMessage = $"Program stopped by the exception: {ex.Message}";
+        Console.WriteLine(errorMessage);
+        program.traceSource.TraceData(TraceEventType.Critical, 828896092, errorMessage);
+        Environment.Exit(1);
+      }
+    }
+
+    internal void Run(string[] args)
+    {
+      try
+      {
+        args.Parse<Options>(Do, HandleErrors);
       }
       catch (Exception ex)
       {
         Console.WriteLine(string.Format("Program stopped by the exception: {0}", ex.Message));
+        throw;
       }
     }
 
-    internal static void Run(string[] args)
+    internal void Do(Options options, IAddressSpaceContext addressSpace)
     {
-      args.Parse<Options>(Do, HandleErrors);
-    }
-
-    private static void HandleErrors(IEnumerable<Error> errors)
-    {
-      foreach (Error _item in errors)
-      {
-        string _processing = _item.StopsProcessing ? "and it stops processing" : "but the processing continues";
-        //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
-        //Console.WriteLine($"The following tag has wrong value: {_item.Tag} {_processing}.");
-      }
-    }
-
-    internal static void Do(Options options, IAddressSpaceContext addressSpace)
-    {
-      ModelDesignExport _exporter = new ModelDesignExport(); //creates new instance of the ModelDesignExport class that captures functionality supporting export of the OPC UA Information Model represented
-                                                             //by an XML file compliant with UAModelDesign schema.
+      IModelDesignExport exporter = ModelDesignExportAPI.GetModelDesignExport(); //creates new instance of the ModelDesignExport class that captures functionality supporting export of the OPC UA Information Model represented
+                                                                                 //by an XML file compliant with UAModelDesign schema.
       bool _exportModel = false;
       if (!string.IsNullOrEmpty(options.ModelDesignFileName))
       {
-        addressSpace.InformationModelFactory = _exporter.GetFactory(BuildErrorsHandling.Log.TraceEvent);  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space.
+        addressSpace.InformationModelFactory = exporter.GetFactory();  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space.
         _exportModel = true;
       }
       if (options.Filenames == null)
@@ -67,34 +75,69 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       {
         FileInfo _fileToRead = new FileInfo(_path);
         if (!_fileToRead.Exists)
-          throw new FileNotFoundException(string.Format($"FileNotFoundException - the file {_path} doesn't exist.", _fileToRead.FullName));
+        {
+          string message = $"The file {_fileToRead.FullName} doesn't exist.";
+          traceSource.TraceData(TraceEventType.Critical, 1637887215, message);
+          throw new FileNotFoundException(message, _path);
+        }
+        traceSource.TraceData(TraceEventType.Verbose, 1637887216, $"Importing UANodeSet document from file {_fileToRead.FullName}");
         addressSpace.ImportUANodeSet(_fileToRead);
       }
+      traceSource.TraceData(TraceEventType.Verbose, 1637887217, $"Validating and exporting a model from namespace {uri}");
       addressSpace.ValidateAndExportModel(uri); //Validates and exports the selected model.
       if (_exportModel)
-        _exporter.ExportToXMLFile(options.ModelDesignFileName, options.Stylesheet); //Serializes the already generated model and writes the XML document to a file.
+      {
+        traceSource.TraceData(TraceEventType.Verbose, 1637887217, $"Writing model to XML file {options.ModelDesignFileName}");
+        exporter.ExportToXMLFile(options.ModelDesignFileName, options.Stylesheet); //Serializes the already generated model and writes the XML document to a file.
+      }
     }
+
+    internal ITraceSource DebugITraceSource { set => traceSource = value; }
 
     #region private
 
-    private static void Do(Options options)
+    private ITraceSource traceSource = new TraceSourceBase("AddressSpacePrototyping");
+    private const string Copyright = "Copyright(c) 2021 Mariusz Postol";
+    private static string AssemblyName = String.Empty;
+
+    private void HandleErrors(IEnumerable<Error> errors)
     {
-      PrintLogo(options);
-      BuildErrorsHandling.Log.TraceEventAction += z => Console.WriteLine(z.ToString());
-      IAddressSpaceContext _as = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
-      Do(options, _as);
+      foreach (Error _item in errors)
+      {
+        string _processing = _item.StopsProcessing ? "and it stops processing" : "but the processing continues";
+        string errorMessage = $"The list of command line parameters has the error: {_item.ToString()} {_processing}.";
+        traceSource.TraceData(TraceEventType.Error, 1230327407, errorMessage);
+        Console.WriteLine(errorMessage);
+      }
     }
 
-    private static void PrintLogo(Options options)
+    private void Do(Options options)
     {
-      if (options.NoLogo)
+      PrintLogo(options.NoLogo);
+      traceSource.TraceData(TraceEventType.Verbose, 6710129, "Creating Address Space populated using Standard Model. It will take a while ...");
+      IAddressSpaceContext addressSpace = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
+      Do(options, addressSpace);
+    }
+
+    private void PrintLogo(bool nologo)
+    {
+      if (nologo)
         return;
-      AssemblyName _myAssembly = Assembly.GetExecutingAssembly().GetName();
-      Console.WriteLine($"Address Space Prototyping (asp.exe) {_myAssembly.Version}");
-      Console.WriteLine("Copyright(c) 2021 Mariusz Postol");
+      Console.WriteLine(AssemblyName);
+      Console.WriteLine(Copyright);
       Console.WriteLine();
     }
 
     #endregion private
+
+    #region DEBUG
+
+    [Conditional("DEBUG")]
+    internal void GetTraceSource(Action<ITraceSource> geter)
+    {
+      geter(traceSource);
+    }
+
+    #endregion DEBUG
   }
 }

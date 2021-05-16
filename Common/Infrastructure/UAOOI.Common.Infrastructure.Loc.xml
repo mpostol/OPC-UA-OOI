@@ -4,6 +4,17 @@
         <name>UAOOI.Common.Infrastructure.Loc</name>
     </assembly>
     <members>
+        <member name="T:UAOOI.Common.Infrastructure.Diagnostic.IEventSourceProvider">
+            <summary>
+            Interface IEventSourceProvider - if implemented returns an instance of <see cref="T:System.Diagnostics.Tracing.EventSource"/> to be registered by the logging infrastructure.
+            </summary>
+        </member>
+        <member name="M:UAOOI.Common.Infrastructure.Diagnostic.IEventSourceProvider.GetPartEventSource">
+            <summary>
+            Gets the part event source.
+            </summary>
+            <returns>Returns an instance of <see cref="T:System.Diagnostics.Tracing.EventSource"/>.</returns>
+        </member>
         <member name="T:UAOOI.Common.Infrastructure.Diagnostic.ITraceSource">
             <summary>
             Interface ITraceSource - defines trace source.
@@ -11,7 +22,7 @@
         </member>
         <member name="M:UAOOI.Common.Infrastructure.Diagnostic.ITraceSource.TraceData(System.Diagnostics.TraceEventType,System.Int32,System.Object)">
             <summary>
-            Writes trace data to the trace listeners in the <see cref="P:System.Diagnostics.TraceSource.Listeners"/> collection using the specified <paramref name="eventType"/>, 
+            Writes trace data to the trace listeners in the <see cref="P:System.Diagnostics.TraceSource.Listeners"/> collection using the specified <paramref name="eventType"/>,
             event identifier <paramref name="id"/>, and trace <paramref name="data"/>.
             </summary>
             <param name="eventType">One of the enumeration values that specifies the event type of the trace data.</param>
@@ -26,12 +37,23 @@
             Class TraceSourceBase - default implementation of the <see cref="T:UAOOI.Common.Infrastructure.Diagnostic.ITraceSource"/>
             </summary>
         </member>
+        <member name="M:UAOOI.Common.Infrastructure.Diagnostic.TraceSourceBase.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UAOOI.Common.Infrastructure.Diagnostic.TraceSourceBase"/> class provider of a named <see cref="T:UAOOI.Common.Infrastructure.Diagnostic.ITraceSource"/>.
+            </summary>
+            <param name="TraceSourceName">Name of the <see cref="P:UAOOI.Common.Infrastructure.Diagnostic.TraceSourceBase.TraceSource"/>.</param>
+        </member>
+        <member name="M:UAOOI.Common.Infrastructure.Diagnostic.TraceSourceBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UAOOI.Common.Infrastructure.Diagnostic.TraceSourceBase"/> class provider of a default <see cref="T:UAOOI.Common.Infrastructure.Diagnostic.ITraceSource"/>.
+            </summary>
+        </member>
         <member name="M:UAOOI.Common.Infrastructure.Diagnostic.TraceSourceBase.TraceData(System.Diagnostics.TraceEventType,System.Int32,System.Object)">
             <summary>
             Writes trace data to the trace listeners in the <see cref="P:System.Diagnostics.TraceSource.Listeners" /> collection using the specified <paramref name="eventType" />,
             event identifier <paramref name="id" />, and trace <paramref name="data" />.
             </summary>
-            <param name="eventType">One of the enumeration values that specifies the event type of the trace data.</param>
+            <param name="eventType">One of the enumeration values <see cref="T:System.Diagnostics.TraceEventType"/> that specifies the event type of the trace data.</param>
             <param name="id">A numeric identifier for the event.</param>
             <param name="data">The trace data.</param>
         </member>

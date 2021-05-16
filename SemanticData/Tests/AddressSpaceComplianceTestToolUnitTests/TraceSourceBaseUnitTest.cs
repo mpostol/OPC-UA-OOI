@@ -11,28 +11,21 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using UAOOI.Common.Infrastructure.Diagnostic;
-using UAOOI.Common.Infrastructure.UnitTest.Instrumentation;
+using UAOOI.SemanticData.AddressSpacePrototyping.Instrumentation;
 
-namespace UAOOI.Common.Infrastructure.UnitTest
+namespace UAOOI.SemanticData.AddressSpacePrototyping
 {
   [TestClass]
   public class TraceSourceBaseUnitTest
   {
     [TestMethod]
-    public void ConstructorStateTestMethod()
-    {
-      TraceSourceBase _trace = new TraceSourceBase();
-      _trace.TraceData(TraceEventType.Critical, 0, "Message");
-    }
-
-    [TestMethod]
     public void AssemblyTraceEventTestMethod()
     {
-      TraceSourceBase _tracer = new TraceSourceBase();
-      Assert.AreEqual<string>("UAOOI.Common", _tracer.TraceSource.Name, $"Actual tracer name: {_tracer.TraceSource.Name}");
-      Assert.AreEqual(1, _tracer.TraceSource.Listeners.Count);
-      Dictionary<string, TraceListener> _listeners = _tracer.TraceSource.Listeners.Cast<TraceListener>().ToDictionary<TraceListener, string>(x => x.Name);
+      TraceSource tracer = new TraceSource("AddressSpacePrototyping");
+      Assert.AreEqual<string>("AddressSpacePrototyping", tracer.Name, $"Actual tracer name: {tracer.Name}");
+      //Assert.AreEqual(1, Trace.Listeners.Count);
+      Dictionary<string, TraceListener> _listeners = tracer.Listeners.Cast<TraceListener>().ToDictionary<TraceListener, string>(x => x.Name);
+      Assert.IsNotNull(_listeners);
       Assert.IsTrue(_listeners.ContainsKey("LogFile"));
       TraceListener _listener = _listeners["LogFile"];
       Assert.IsNotNull(_listener);
@@ -43,21 +36,20 @@ namespace UAOOI.Common.Infrastructure.UnitTest
       EventTypeFilter _eventTypeFilter = _advancedListener.Filter as EventTypeFilter;
       Assert.AreEqual(SourceLevels.All, _eventTypeFilter.EventType);
       string _testPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-      Assert.AreEqual<string>(Path.Combine(_testPath, @"UAOOI.Common.log"), _advancedListener.GetFileName());
+      Assert.AreEqual<string>(Path.Combine(_testPath, @"asp.log"), _advancedListener.GetFileName());
     }
 
     [TestMethod]
     public void LogFileExistsTest()
     {
-      TraceSourceBase _tracer = new TraceSourceBase();
-      TraceListener _listener = _tracer.TraceSource.Listeners.Cast<TraceListener>().Where<TraceListener>(x => x.Name == "LogFile").First<TraceListener>();
-      Assert.IsNotNull(_listener);
+      TraceSource tracer = new TraceSource("AddressSpacePrototyping");
+      TraceListener _listener = tracer.Listeners.Cast<TraceListener>().Where<TraceListener>(x => x.Name == "LogFile").First<TraceListener>();
       DelimitedListTraceListener _advancedListener = _listener as DelimitedListTraceListener;
       Assert.IsNotNull(_advancedListener);
       Assert.IsFalse(string.IsNullOrEmpty(_advancedListener.GetFileName()));
       FileInfo _logFileInfo = new FileInfo(_advancedListener.GetFileName());
       long _startLength = _logFileInfo.Exists ? _logFileInfo.Length : 0;
-      _tracer.TraceSource.TraceEvent(TraceEventType.Information, 0, "LogFileExistsTest is executed");
+      tracer.TraceEvent(TraceEventType.Information, 0, "LogFileExistsTest is executed");
       Assert.IsFalse(string.IsNullOrEmpty(_advancedListener.GetFileName()));
       _logFileInfo.Refresh();
       Assert.IsTrue(_logFileInfo.Exists);

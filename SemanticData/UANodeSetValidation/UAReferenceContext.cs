@@ -20,7 +20,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class UAReferenceContext - encapsulates information about a reference
   /// </summary>
-  public class UAReferenceContext
+  internal class UAReferenceContext
   {
 
     #region constructor

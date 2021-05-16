@@ -1,16 +1,18 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.UANodeSetValidation.Helpers;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -29,7 +31,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml");  //File not compliant with the schema.
       Assert.IsTrue(_testDataFileInfo.Exists);
       List<TraceMessage> _trace = new List<TraceMessage>();
-      IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace));
+      Mock<Diagnostic.IBuildErrorsHandling> mockTrace = new Mock<Diagnostic.IBuildErrorsHandling>();
+      IAddressSpaceContext _as = new AddressSpaceContext(mockTrace.Object);
       _as.ImportUANodeSet(_testDataFileInfo);
     }
 
@@ -82,27 +85,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
 
-    private void TraceDiagnostic(TraceMessage msg, List<TraceMessage> errors)
-    {
-      Console.WriteLine(msg.ToString());
-      if (msg.BuildError.Focus != Focus.Diagnostic)
-        errors.Add(msg);
-    }
-
     private List<IUANodeContext> ValidateAndExportModelUnitTest(FileInfo testDataFileInfo, int numberOfNodes, Uri model)
     {
-      List<TraceMessage> _trace = new List<TraceMessage>();
-      IAddressSpaceContext _as = new AddressSpaceContext(z => TraceDiagnostic(z, _trace));
-      _trace.Clear();
+      TracedAddressSpaceContext tracedAddressSpaceContext = new TracedAddressSpaceContext();
+      IAddressSpaceContext _as = tracedAddressSpaceContext.AddressSpaceContext;
+      tracedAddressSpaceContext.Clear();
       _as.ImportUANodeSet(testDataFileInfo);
-      Assert.AreEqual<int>(0, _trace.Count);
+      Assert.AreEqual<int>(0, tracedAddressSpaceContext.TraceList.Count);
       ((AddressSpaceContext)_as).UTAddressSpaceCheckConsistency(x => { Assert.Fail(); });
       ((AddressSpaceContext)_as).UTReferencesCheckConsistency((x, y, z, v) => Assert.Fail());
       IEnumerable<IUANodeContext> _nodes = null;
       ((AddressSpaceContext)_as).UTValidateAndExportModel(1, x => _nodes = x);
       Assert.AreEqual<int>(numberOfNodes, _nodes.Count<IUANodeContext>());
       _as.ValidateAndExportModel(model);
-      Assert.AreEqual<int>(0, _trace.Count);
+      Assert.AreEqual<int>(0, tracedAddressSpaceContext.TraceList.Count);
       return _nodes.ToList<IUANodeContext>();
     }
 

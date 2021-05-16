@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
@@ -12,17 +12,18 @@ using System.IO;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UAModelDesignExport.XML;
 using UAOOI.SemanticData.UANodeSetValidation;
+using UAOOI.SemanticData.UANodeSetValidation.Diagnostic;
 
 namespace UAOOI.SemanticData.UAModelDesignExport.Instrumentation
 {
-  internal class TracedAddressSpaceContext : IDisposable
+  internal class TracedAddressSpaceContext : IBuildErrorsHandling, IDisposable
   {
     public ModelDesign CreateInstance(FileInfo filePath, string URI)
     {
       if (!filePath.Exists)
         throw new FileNotFoundException("The imported file does not exist", filePath.FullName);
-      IAddressSpaceContext _as = AddressSpaceFactory.GetAddressSpace(TraceDiagnostic);
-      ModelFactory _factory = new ModelFactory(TraceDiagnostic);
+      IAddressSpaceContext _as = new AddressSpaceContext(this);
+      ModelFactory _factory = new ModelFactory(WriteTraceMessage);
       _as.InformationModelFactory = _factory;
       _as.ImportUANodeSet(filePath);
       _as.ValidateAndExportModel(new Uri(URI));
@@ -30,7 +31,6 @@ namespace UAOOI.SemanticData.UAModelDesignExport.Instrumentation
     }
 
     internal readonly List<TraceMessage> TraceList = new List<TraceMessage>();
-    internal int _diagnosticCounter = 0;
 
     public void Dispose()
     {
@@ -38,17 +38,35 @@ namespace UAOOI.SemanticData.UAModelDesignExport.Instrumentation
 
     internal void Clear()
     {
-      _diagnosticCounter = 0;
+      Errors = 0;
       TraceList.Clear();
     }
 
-    private void TraceDiagnostic(TraceMessage msg)
+    #region IBuildErrorsHandling
+
+    public int Errors { get; private set; }
+
+    public void WriteTraceMessage(TraceMessage traceMessage)
     {
-      Debug.WriteLine(msg.ToString());
-      if (msg.BuildError.Focus == Focus.Diagnostic)
-        _diagnosticCounter++;
+      Debug.WriteLine(traceMessage.ToString());
+      if (traceMessage.BuildError.Focus == Focus.Diagnostic)
+        Errors++;
       else
-        TraceList.Add(msg);
+        TraceList.Add(traceMessage);
     }
+
+    public void TraceData(TraceEventType eventType, int id, object data)
+    {
+      if ((eventType == TraceEventType.Verbose) || (eventType == TraceEventType.Information))
+        Errors++;
+      else
+      {
+        string message = $"Unexpected error: eventType = {eventType} id = {id} data = {data}";
+        Debug.WriteLine(message);
+        throw new ApplicationException(message);
+      }
+    }
+
+    #endregion IBuildErrorsHandling
   }
 }

@@ -39,12 +39,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Diagnostic\**" />
-    <EmbeddedResource Remove="Diagnostic\**" />
-    <None Remove="Diagnostic\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="XML\UA Defined Types.xml" />
   </ItemGroup>
 

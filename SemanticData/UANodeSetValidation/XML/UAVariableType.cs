@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using UAOOI.SemanticData.BuildingErrorsHandling;
@@ -34,6 +34,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// Recalculates the node identifiers.
     /// </summary>
     /// <param name="modelContext">The model context.</param>
+    /// <param name="trace">The trace.</param>
     internal override void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
       base.RecalculateNodeIds(modelContext, trace);

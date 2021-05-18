@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
 //  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
@@ -230,7 +230,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public bool IsProperty { get; private set; } = false;
 
     /// <summary>
-    /// Exports the <see cref="UANodeContext.BrowseName"/> of a node recognized as <see cref="ReferenceKindEnum.HasSubtype"/> or <see cref="ReferenceKindEnum.HasTypeDefinition"/> target.
+    /// Exports the browse name of a node recognized as <see cref="ReferenceKindEnum.HasSubtype"/> or <see cref="ReferenceKindEnum.HasTypeDefinition"/> target.
     /// </summary>
     /// <returns>An instance of <see cref="XmlQualifiedName" /> encapsulating the base type name.</returns>
     public XmlQualifiedName ExportBaseTypeBrowseName()

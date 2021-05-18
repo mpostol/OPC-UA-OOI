@@ -9,7 +9,6 @@ using System.Diagnostics;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 
-//TODO BuildErrorsHandling - review the code #578
 namespace UAOOI.SemanticData.UANodeSetValidation.Diagnostic
 {
   /// <summary>

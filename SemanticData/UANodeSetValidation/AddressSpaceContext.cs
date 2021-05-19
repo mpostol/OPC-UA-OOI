@@ -336,12 +336,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       if (m_TraceEvent.Errors == 0)
       {
         message = $"Finishing Validator.ValidateExportModel - the model contains {nodes.Count} nodes and no errors/warnings reported";
-        m_TraceEvent.TraceData(TraceEventType.Warning, 711552454, message);
+        m_TraceEvent.TraceData(TraceEventType.Information, 711552454, message);
       }
       else
       {
         message = $"Finishing Validator.ValidateExportModel - the model contains {nodes.Count} nodes and {m_TraceEvent.Errors} errors reported.";
-        m_TraceEvent.TraceData(TraceEventType.Information, 226242104, message);
+        m_TraceEvent.TraceData(TraceEventType.Warning, 226242104, message);
       }
     }
 

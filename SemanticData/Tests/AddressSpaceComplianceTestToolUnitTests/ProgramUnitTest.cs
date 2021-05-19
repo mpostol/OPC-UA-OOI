@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
 using UAOOI.SemanticData.InformationModelFactory;
@@ -39,21 +40,21 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       Assert.IsNotNull(currentLogger);
     }
     [TestMethod]
-    public void EmptyArgsTest()
+    public async Task EmptyArgsTest()
     {
       Program programInstance = new Program();
       Mock<ITraceSource> mockLogerr = new Mock<ITraceSource>();
       mockLogerr.Setup(x => x.TraceData(It.IsAny<TraceEventType>(), It.IsAny<int>(), It.IsAny<string>()));
       programInstance.DebugITraceSource = mockLogerr.Object;
-      programInstance.Run(new string[] { });
+      await programInstance.Run(new string[] { });
       mockLogerr.Verify(x => x.TraceData(It.IsAny<TraceEventType>(), It.IsAny<int>(), It.IsAny<string>()), Times.Exactly(2));
     }
 
     [TestMethod]
-    public void RunTheApplicationTestMethod()
+    public async Task RunTheApplicationTestMethod()
     {
       Program program = new Program();
-      program.Run(new string[] { @"XMLModels\DataTypeTest.NodeSet2.xml" });
+      await program.Run(new string[] { @"XMLModels\DataTypeTest.NodeSet2.xml" });
     }
 
     [TestMethod]

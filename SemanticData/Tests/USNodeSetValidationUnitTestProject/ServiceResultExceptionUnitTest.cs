@@ -17,7 +17,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   public class ServiceResultExceptionUnitTest
   {
     [TestMethod]
-    [TestCategory("Code")]
     public void ServiceResultExceptionCreateTestMethod()
     {
       ServiceResultException _ex = new ServiceResultException();
@@ -28,7 +27,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Assert.IsTrue(_ex.Message.Contains("UAOOI.SemanticData.UANodeSetValidation.DataSerialization"));
     }
     [TestMethod]
-    [TestCategory("Code")]
     public void ServiceResultExceptionCreateWithMessageTestMethod()
     {
       TraceMessage traceMessage = TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdInvalidSyntax, "BuildError_BadNodeIdInvalid");
@@ -39,7 +37,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       Assert.AreEqual<string>("test message", _ex.Message);
       Assert.IsNotNull(_ex.TraceMessage);
       Assert.AreEqual<Focus>(BuildError.NodeIdInvalidSyntax.Focus, _ex.TraceMessage.BuildError.Focus);
-      Assert.AreEqual<TraceEventType>(TraceEventType.Information, _ex.TraceMessage.TraceLevel);
+      Assert.AreEqual<TraceEventType>(TraceEventType.Warning, _ex.TraceMessage.TraceLevel);
     }
 
   }

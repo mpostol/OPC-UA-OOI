@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
 using UAOOI.SemanticData.UAModelDesignExport;
@@ -23,31 +24,32 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
   /// </summary>
   public class Program
   {
+    #region public API
     public static void Main(string[] args)
     {
       Program program = new Program();
       try
       {
         AssemblyName myAssembly = Assembly.GetExecutingAssembly().GetName();
-        AssemblyName = $"Address Space Prototyping (asp.exe) Version {myAssembly.Version}";
-        program.traceSource.TraceData(TraceEventType.Information, 1637887218, AssemblyName);
-        program.traceSource.TraceData(TraceEventType.Information, 1637887219, Copyright);
-        program.Run(args);
+        program.AssemblyHeader = $"Address Space Prototyping (asp.exe) Version {myAssembly.Version}";
+        program.TraceSource.TraceData(TraceEventType.Information, 1637887218, program.AssemblyHeader);
+        program.TraceSource.TraceData(TraceEventType.Information, 1637887219, Copyright);
+        program.Execute(args);
       }
       catch (Exception ex)
       {
         string errorMessage = $"Program stopped by the exception: {ex.Message}";
         Console.WriteLine(errorMessage);
-        program.traceSource.TraceData(TraceEventType.Critical, 828896092, errorMessage);
+        program.TraceSource.TraceData(TraceEventType.Critical, 828896092, errorMessage);
         Environment.Exit(1);
       }
     }
 
-    internal void Run(string[] args)
+    internal async Task Run(string[] args)
     {
       try
       {
-        args.Parse<Options>(Do, HandleErrors);
+        await Task.Run(() => args.Parse<Options>(Do, HandleErrors));
       }
       catch (Exception ex)
       {
@@ -77,28 +79,43 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
         if (!_fileToRead.Exists)
         {
           string message = $"The file {_fileToRead.FullName} doesn't exist.";
-          traceSource.TraceData(TraceEventType.Critical, 1637887215, message);
+          TraceSource.TraceData(TraceEventType.Critical, 1637887215, message);
           throw new FileNotFoundException(message, _path);
         }
-        traceSource.TraceData(TraceEventType.Verbose, 1637887216, $"Importing UANodeSet document from file {_fileToRead.FullName}");
+        TraceSource.TraceData(TraceEventType.Verbose, 1637887216, $"Importing UANodeSet document from file {_fileToRead.FullName}");
         addressSpace.ImportUANodeSet(_fileToRead);
       }
-      traceSource.TraceData(TraceEventType.Verbose, 1637887217, $"Validating and exporting a model from namespace {uri}");
+      TraceSource.TraceData(TraceEventType.Verbose, 1637887217, $"Validating and exporting a model from namespace {uri}");
       addressSpace.ValidateAndExportModel(uri); //Validates and exports the selected model.
       if (_exportModel)
       {
-        traceSource.TraceData(TraceEventType.Verbose, 1637887217, $"Writing model to XML file {options.ModelDesignFileName}");
+        TraceSource.TraceData(TraceEventType.Verbose, 1637887217, $"Writing model to XML file {options.ModelDesignFileName}");
         exporter.ExportToXMLFile(options.ModelDesignFileName, options.Stylesheet); //Serializes the already generated model and writes the XML document to a file.
       }
     }
 
-    internal ITraceSource DebugITraceSource { set => traceSource = value; }
+    internal ITraceSource DebugITraceSource { set => TraceSource = value; } 
+    #endregion
 
     #region private
 
-    private ITraceSource traceSource = new TraceSourceBase("AddressSpacePrototyping");
+    private string AssemblyHeader = String.Empty;
+    private ITraceSource TraceSource = new TraceSourceBase("AddressSpacePrototyping");
     private const string Copyright = "Copyright(c) 2021 Mariusz Postol";
-    private static string AssemblyName = String.Empty;
+    private bool Running = true;
+
+    private void Execute(string[] args)
+    {
+      Task heartbeatTask = Heartbeat();
+      Run(args).Wait();
+      Running = false;
+      heartbeatTask.Wait();
+    }
+
+    private async Task Heartbeat()
+    {
+      await Task.Run(async () => { while (Running) { await Task.Delay(1000); Console.Write("."); } });
+    }
 
     private void HandleErrors(IEnumerable<Error> errors)
     {
@@ -106,7 +123,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       {
         string _processing = _item.StopsProcessing ? "and it stops processing" : "but the processing continues";
         string errorMessage = $"The list of command line parameters has the error: {_item.ToString()} {_processing}.";
-        traceSource.TraceData(TraceEventType.Error, 1230327407, errorMessage);
+        TraceSource.TraceData(TraceEventType.Error, 1230327407, errorMessage);
         Console.WriteLine(errorMessage);
       }
     }
@@ -114,7 +131,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     private void Do(Options options)
     {
       PrintLogo(options.NoLogo);
-      traceSource.TraceData(TraceEventType.Verbose, 6710129, "Creating Address Space populated using Standard Model. It will take a while ...");
+      TraceSource.TraceData(TraceEventType.Verbose, 6710129, "Creating Address Space populated using Standard Model. It will take a while ...");
       IAddressSpaceContext addressSpace = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
       Do(options, addressSpace);
     }
@@ -123,7 +140,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     {
       if (nologo)
         return;
-      Console.WriteLine(AssemblyName);
+      Console.WriteLine(AssemblyHeader);
       Console.WriteLine(Copyright);
       Console.WriteLine();
     }
@@ -135,7 +152,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     [Conditional("DEBUG")]
     internal void GetTraceSource(Action<ITraceSource> geter)
     {
-      geter(traceSource);
+      geter(TraceSource);
     }
 
     #endregion DEBUG

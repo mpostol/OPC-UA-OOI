@@ -9,8 +9,6 @@ using System.Diagnostics;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 
-//TODO BuildErrorsHandling - review the code #578
-//TODO Enhance/Improve the Program logging and tracing infrastructure. #590
 namespace UAOOI.SemanticData.UANodeSetValidation.Diagnostic
 {
   /// <summary>
@@ -19,6 +17,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Diagnostic
   /// <seealso cref="ITraceSource" />
   internal class AssemblyTraceSource : IBuildErrorsHandling
   {
+    #region constructors
+
     /// <summary>
     /// Initializes a new instance of the <see cref="AssemblyTraceSource"/> class using the default of the <see cref="ITraceSource"/>.
     /// </summary>
@@ -35,6 +35,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Diagnostic
     {
       traceSource = traceEvent;
     }
+
+    #endregion constructors
 
     #region IBuildErrorsHandling
 
@@ -69,6 +71,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Diagnostic
 
     #endregion ITraceSource
 
+    #region private
+
     private readonly ITraceSource traceSource;
+
+    #endregion private
   }
 }

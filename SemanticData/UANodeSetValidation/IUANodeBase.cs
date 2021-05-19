@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Exports the browse name of the wrapped node by this instance.
     /// </summary>
-    /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the <see cref="BrowseName"/> of the node.</returns>
+    /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the browse name of the node.</returns>
     XmlQualifiedName ExportNodeBrowseName();
     /// <summary>
     /// Gets a value indicating whether this instance is a property.

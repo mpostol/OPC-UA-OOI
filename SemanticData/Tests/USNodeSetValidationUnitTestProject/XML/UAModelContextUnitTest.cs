@@ -74,10 +74,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<int>(2, trace.Count);
       Assert.IsTrue(trace[0].Message.Contains("http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest"));
       Assert.AreEqual<string>("P0-0001030000", trace[0].BuildError.Identifier);
-      Assert.AreEqual<TraceEventType>(TraceEventType.Information, trace[0].TraceLevel);
+      Assert.AreEqual<TraceEventType>(TraceEventType.Warning, trace[0].TraceLevel);
       Assert.IsTrue(trace[1].Message.Contains(randomURI.ToString()));
       Assert.AreEqual<string>("P3-0802020000", trace[1].BuildError.Identifier);
-      Assert.AreEqual<TraceEventType>(TraceEventType.Information, trace[1].TraceLevel);
+      Assert.AreEqual<TraceEventType>(TraceEventType.Warning, trace[1].TraceLevel);
     }
 
     [TestMethod]
@@ -124,7 +124,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<int>(1, trace.Count);
       Assert.IsTrue(trace[0].Message.Contains(randomURI.ToString()));
       Assert.AreEqual<string>("P3-0802020000", trace[0].BuildError.Identifier);
-      Assert.AreEqual<TraceEventType>(TraceEventType.Information, trace[0].TraceLevel);
+      Assert.AreEqual<TraceEventType>(TraceEventType.Warning, trace[0].TraceLevel);
     }
 
     [TestMethod]
@@ -161,7 +161,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       //Assert.AreEqual<string>("http://opcfoundation.org/UA/ADI/", _modelContext.ModelUri.ToString());
       Assert.AreEqual<int>(1, trace.Count);
       Assert.AreEqual<string>("P0-0001030000", trace[0].BuildError.Identifier);
-      Assert.AreEqual<TraceEventType>(TraceEventType.Information, trace[0].TraceLevel);
+      Assert.AreEqual<TraceEventType>(TraceEventType.Warning, trace[0].TraceLevel);
       asMock.Verify(x => x.RegisterModel(It.IsAny<IModelTableEntry>()), Times.Once);
     }
 

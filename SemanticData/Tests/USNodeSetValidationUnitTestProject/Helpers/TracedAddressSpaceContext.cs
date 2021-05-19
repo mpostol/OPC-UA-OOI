@@ -21,10 +21,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
       AddressSpaceContext = new AddressSpaceContext(this);
     }
 
-    public void TestConsistency(int diagnosticCounter, int errorsCounter)
+    public void TestConsistency(int errorsCounter)
     {
-      //TODO Enhance/Improve the Program logging and tracing infrastructure. #590
-      //Assert.AreEqual<int>(diagnosticCounter, Errors);
       Assert.AreEqual<int>(errorsCounter, TraceList.Count);
     }
 

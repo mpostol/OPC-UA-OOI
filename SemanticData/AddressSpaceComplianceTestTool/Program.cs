@@ -25,6 +25,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
   public class Program
   {
     #region public API
+
     public static void Main(string[] args)
     {
       Program program = new Program();
@@ -94,8 +95,9 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       }
     }
 
-    internal ITraceSource DebugITraceSource { set => TraceSource = value; } 
-    #endregion
+    internal ITraceSource DebugITraceSource { set => TraceSource = value; }
+
+    #endregion public API
 
     #region private
 
@@ -114,7 +116,23 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
 
     private async Task Heartbeat()
     {
-      await Task.Run(async () => { while (Running) { await Task.Delay(1000); Console.Write("."); } });
+      await Task.Run(async () =>
+      {
+        int counter = 0;
+        while (Running)
+        {
+          await Task.Delay(1000);
+          Console.Write("\r");
+          if (counter % 2 == 0 )
+            Console.Write(@"\");
+          else
+            Console.Write("/");
+          counter++;
+        }
+        TraceSource.TraceData(TraceEventType.Verbose, 918215642, $"Execution time = {counter}s");
+        Console.WriteLine();
+        Console.WriteLine($"Execution time = {counter}s");
+      });
     }
 
     private void HandleErrors(IEnumerable<Error> errors)

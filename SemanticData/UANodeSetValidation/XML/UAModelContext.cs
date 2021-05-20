@@ -107,7 +107,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       if (modelHeader.ServerUris != null && modelHeader.ServerUris.Length > 0)
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "ServerUris is omitted during the import"));
       if (modelHeader.Extensions != null && modelHeader.Extensions.Length > 0)
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Extensions is omitted during the import"));
+        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "Extensions are omitted during the import"));
       _logTraceMessage = traceEvent ?? throw new ArgumentNullException(nameof(traceEvent));
       _addressSpaceContext = addressSpaceContext ?? throw new ArgumentNullException(nameof(addressSpaceContext));
     }

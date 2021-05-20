@@ -82,7 +82,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
-      m_TraceEvent.TraceData( TraceEventType.Information, 190380256, "Starting model import form file {model.Name}");
+      m_TraceEvent.TraceData( TraceEventType.Information, 190380256, $"Starting model import form file {model.Name}");
       if (!model.Exists)
         throw new FileNotFoundException("The imported file does not exist", model.FullName);
       UANodeSet _nodeSet = UANodeSet.ReadModelFile(model);

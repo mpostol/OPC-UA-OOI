@@ -26,13 +26,13 @@
     <dependencies>
       <group targetFramework=".NETStandard2.0" />
     </dependencies>
-    <releaseNotes>ModelDesign Export Release Candidate.</releaseNotes>
+    <releaseNotes>Maintenance release - unimportant changes.</releaseNotes>
     <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
   </metadata>
   <files>
     <file src="..\..\CommonResources\Media\Logo64.PNG" target=""/>
-    <file src="..\bin\Release\netstandard2.0\UAOOI.Common.Infrastructure.Loc.dll" target="lib\netstandard2.0\UAOOI.Common.Infrastructure.dll" />
-    <file src="..\bin\Release\netstandard2.0\UAOOI.Common.Infrastructure.Loc.xml" target="lib\netstandard2.0\UAOOI.Common.Infrastructure.xml" />
+    <file src="bin\Release\netstandard2.0\UAOOI.Common.Infrastructure.dll" target="lib\netstandard2.0\UAOOI.Common.Infrastructure.dll" />
+    <file src="bin\Release\netstandard2.0\UAOOI.Common.Infrastructure.xml" target="lib\netstandard2.0\UAOOI.Common.Infrastructure.xml" />
   </files>
 </package>
 

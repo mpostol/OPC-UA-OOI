@@ -23,7 +23,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <AssemblyName>UAOOI.Common.Infrastructure.Loc</AssemblyName>
+    <AssemblyName>UAOOI.Common.Infrastructure</AssemblyName>
     <RootNamespace>UAOOI.Common.Infrastructure</RootNamespace>
     <PackageId>UAOOI.Common.Infrastructure</PackageId>
     <Version>6.3.2</Version>
@@ -64,7 +64,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>C:\VS.git\UAOOI\OPC-UA-OOI\Common\Infrastructure\UAOOI.Common.Infrastructure.Loc.xml</DocumentationFile>
+    <DocumentationFile>.\bin\UAOOI.Common.Infrastructure.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard1.4|AnyCPU'">
     <DefineConstants>TRACE;DEBUG</DefineConstants>

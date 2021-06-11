@@ -17,9 +17,9 @@
     <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</PackageTags>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>5.1.0</AssemblyVersion>
-    <FileVersion>5.1.0</FileVersion>
-    <Version>5.1.0</Version>
+    <AssemblyVersion>6.3.2</AssemblyVersion>
+    <FileVersion>6.3.2</FileVersion>
+    <Version>6.3.2</Version>
     <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <ApplicationIcon>Logo.ico</ApplicationIcon>
@@ -35,6 +35,23 @@
     <None Update="BuildErrors.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BuildErrors.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\Common.Infrastructure.nuspec.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Common.Infrastructure.nuspec.nuspec</LastGenOutput>
+    </None>
+    <None Update="Properties\Common.Infrastructure.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Common.Infrastructure.nuspec</LastGenOutput>
+    </None>
+    <None Update="Properties\SemanticData.BuildingErrorsHandling.nuspec">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SemanticData.BuildingErrorsHandling.tt</DependentUpon>
+    </None>
+    <None Update="Properties\SemanticData.BuildingErrorsHandling.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SemanticData.BuildingErrorsHandling.nuspec</LastGenOutput>
     </None>
   </ItemGroup>
 

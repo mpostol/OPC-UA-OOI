@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-    <id>UAOOI.Common.Infrastructure</id>
+    <id>UAOOI.SemanticData.BuildingErrorsHandling</id>
     <version>6.3.2-Foxtrot
     </version>
     <title>Object Oriented Internet Common Infrastructure</title>
@@ -9,19 +9,16 @@
     <owners>Mariusz Postol</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
-    <projectUrl>https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/Core</projectUrl>
+    <projectUrl>https://commsvr.gitbook.io/ooi/readme</projectUrl>
     <icon>Logo64.PNG</icon>
     <description>
-      This library provides API for common infrastructure management functionality aimed at Object Oriented Internet application deployment including but not limited to:
-      - Common definitions
-      - Tracking
-      - Bootstrapper
+      It provides descriptions of building errors to be used for OPC UA Address Space consistency validation purpose.
     </description>
     <summary>
-      The core functionality of SemanticData Reactive Networking library based on OPC UA Part 14 Pub/Sub.
+      It provides descriptions of building errors to be used for OPC UA Address Space consistency validation purpose.
     </summary>
     <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
-    <tags>Object Oriented Internet, OPC UA, PubSub, Information Model, IoT, M2M, DOA,</tags>
+    <tags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA</tags>
     <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI" />
     <dependencies>
       <group targetFramework=".NETStandard2.0" />
@@ -30,9 +27,8 @@
     <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
   </metadata>
   <files>
-    <file src="..\..\CommonResources\Media\Logo64.PNG" target=""/>
-    <file src="..\bin\Release\netstandard2.0\UAOOI.Common.Infrastructure.Loc.dll" target="lib\netstandard2.0\UAOOI.Common.Infrastructure.dll" />
-    <file src="..\bin\Release\netstandard2.0\UAOOI.Common.Infrastructure.Loc.xml" target="lib\netstandard2.0\UAOOI.Common.Infrastructure.xml" />
+    <file src="..\..\..\CommonResources\Media\Logo64.PNG" target=""/>
+    <file src="..\bin\Release\netstandard2.0\UAOOI.SemanticData.BuildingErrorsHandling.dll" target="lib\netstandard2.0\UAOOI.SemanticData.BuildingErrorsHandling.dll" />
   </files>
 </package>
 

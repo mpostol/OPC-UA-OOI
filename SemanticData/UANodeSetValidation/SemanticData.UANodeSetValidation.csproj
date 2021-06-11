@@ -8,7 +8,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <PackageId>UAOOI.SemanticData.UANodeSetValidation</PackageId>
-    <Version>5.1.0</Version>
+    <Version>6.3.2</Version>
     <Authors>MPostol</Authors>
     <Product>commsvr.com</Product>
     <Description>This project supports validation of the OPC UA Address Space captured in the xml file against the OPC UA Specyfication. It is assumed that the Address Space is represented as a XML file compliant with the UANodeSet schema.
@@ -20,9 +20,9 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</PackageTags>
-    <AssemblyVersion>5.1.0</AssemblyVersion>
+    <AssemblyVersion>6.3.2</AssemblyVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <FileVersion>5.1.0</FileVersion>
+    <FileVersion>6.3.2</FileVersion>
     <Company>commsvr.com</Company>
     <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
   </PropertyGroup>
@@ -31,6 +31,10 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
     <NoWarn>1701;1702;1705;IDE0001, IDE0002,IDE0003,IDE0049</NoWarn>
     <DocumentationFile>bin\Debug\netstandard2.0\UAOOI.SemanticData.UANodeSetValidation.xml</DocumentationFile>
     <OutputPath>bin\Debug\netstandard2.0\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>..\bin\UAOOI.SemanticData.UANodeSetValidation.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

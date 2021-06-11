@@ -11,14 +11,14 @@ string Url = "https://github.com/mpostol/OPC-UA-OOI";
 string Email = "mpostol@cas.eu";
 string Phone = "+48 608 619 899";
 string Owner = "Mariusz Postol";
-string RepositoryVersion = "6.3.2"; //increment on the same position as the group version
-string RepositoryVersionPrerelease = "-Foxtrot"; //increment on the same position as the group version
+string RepositoryVersion = "6.3.3"; //increment on the same position as the group version
+string RepositoryVersionPrerelease = "-Golf"; //increment on the same position as the group version
 string Authors = "Mariusz Postol";
 string IconURLTag = "https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true";
 
 //UAOOI.Common
-string CommonVersion = "6.3.2";
-string CommonPrerelease = "-Foxtrot";
+string CommonVersion = "6.3.3";
+string CommonPrerelease = "-Golf";
 
 //UAOOI.DataDiscovery
 string DataDiscoveryTitle = "UAOOI.DataDiscovery";
@@ -27,17 +27,17 @@ string DataDiscoveryPrerelease = "";
 string DataDiscoveryProduct = "Object Oriented Internet";
 
 //UAOOI.SemanticData
-string SemanticDataVersion = "6.3.2";
-string SemanticDataPrerelease = "-Foxtrot";
+string SemanticDataVersion = "6.3.3";
+string SemanticDataPrerelease = "-Golf";
 string SemanticDataProduct = "Object Oriented Internet";
 
 //UAOOI.SemanticData.UANodeSetValidation
-string SemanticDataUANodeSetValidationVersion = "6.3.2";
-string SemanticDataUANodeSetValidationPrerelease = "-Foxtrot";
+string SemanticDataUANodeSetValidationVersion = "6.3.3";
+string SemanticDataUANodeSetValidationPrerelease = "-Golf";
 
 //UAOOI.SemanticData.UAModelDesignExport
-string SemanticDataUAModelDesignExportVersion = "6.3.2";
-string SemanticDataUAModelDesignExportPrerelease = "-Foxtrot";
+string SemanticDataUAModelDesignExportVersion = "6.3.3";
+string SemanticDataUAModelDesignExportPrerelease = "-Golf";
 
 //UAOOI.Configuration
 string ConfigurationVersion = "4.0.1";
@@ -50,7 +50,7 @@ string NetworkingDataPrerelease = "";
 string NetworkingDataProduct = "Object Oriented Internet";
 
 //Note: 
-//Alpha, Bravo, Charlie, Delta, Foxtrot, Foxtrot, Golf, Hotel, India, Juliet, 
+//Alpha, Bravo, Charlie, Delta, Golf, Golf, Golf, Hotel, India, Juliet, 
 //Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango,
 //Uniform, Victor, Whiskey, X-Ray, Yankee, Zulu 
 #>

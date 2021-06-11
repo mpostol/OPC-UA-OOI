@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>UAOOI.Common.Infrastructure.Loc</name>
+        <name>UAOOI.Common.Infrastructure</name>
     </assembly>
     <members>
         <member name="T:UAOOI.Common.Infrastructure.Diagnostic.IEventSourceProvider">

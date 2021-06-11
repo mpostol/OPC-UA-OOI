@@ -63,7 +63,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport.Instrumentation
       {
         string message = $"Unexpected error: eventType = {eventType} id = {id} data = {data}";
         Debug.WriteLine(message);
-        throw new ApplicationException(message);
+        //throw new ApplicationException(message);
       }
     }
 

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>UAOOI.SemanticData.UANodeSetValidation</id>
-    <version>6.3.2-Foxtrot</version>
+    <version>6.3.3-Golf</version>
     <title>Semantic-Data UANodeSet Validation</title>
     <authors>Mariusz Postol</authors>
     <owners>Mariusz Postol</owners>

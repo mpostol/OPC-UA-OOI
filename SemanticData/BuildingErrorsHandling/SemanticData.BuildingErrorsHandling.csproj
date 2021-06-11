@@ -18,8 +18,8 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <AssemblyVersion>6.3.2</AssemblyVersion>
-    <FileVersion>6.3.2</FileVersion>
-    <Version>6.3.2</Version>
+    <FileVersion>6.3.3</FileVersion>
+    <Version>6.3.3</Version>
     <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <ApplicationIcon>Logo.ico</ApplicationIcon>

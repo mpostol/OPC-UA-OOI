@@ -47,9 +47,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj" />
-    <ProjectReference Include="..\BuildingErrorsHandling\SemanticData.BuildingErrorsHandling.csproj" />
-    <ProjectReference Include="..\InformationModelFactory\SemanticData.InformationModelFactory.csproj" />
+    <PackageReference Include="UAOOI.Common.Infrastructure" Version="6.3.3-Golf" />
+    <PackageReference Include="UAOOI.SemanticData.BuildingErrorsHandling" Version="6.3.3-Golf" />
+    <PackageReference Include="UAOOI.SemanticData.InformationModelFactory" Version="5.1.0" />
   </ItemGroup>
 
   <ItemGroup>

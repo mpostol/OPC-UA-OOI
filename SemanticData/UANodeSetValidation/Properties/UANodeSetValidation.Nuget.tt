@@ -10,7 +10,8 @@
     <owners><#=Owner#></owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
-    <projectUrl>https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticData/UANodeSetValidation</projectUrl>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://commsvr.gitbook.io/ooi/readme</projectUrl>
     <icon>Logo64.PNG</icon>
     <description>
       This library supports validation of the OPC UA Address Space captured in the XML file against the OPC UA Specification. It is assumed that the Address Space is represented as an XML file compliant with the UANodeSet schema. This library is dedicated to creating a plug-in aimed at importing models based on the OPC UA Information Model. It is part of the project supporting Object-Oriented Internet paradigm.
@@ -25,9 +26,9 @@
     <copyright><#=AssemblyCopyright#></copyright>
     <dependencies>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="UAOOI.Common.Infrastructure" version="4.0.2" exclude="Build,Analyzers" />
-        <dependency id="UAOOI.SemanticData.BuildingErrorsHandling" version="6.3.2" exclude="Build,Analyzers" />
-        <dependency id="UAOOI.SemanticData.InformationModelFactory" version="6.3.2" exclude="Build,Analyzers" />
+        <dependency id="UAOOI.Common.Infrastructure" version="6.3.3" exclude="Build,Analyzers" />
+        <dependency id="UAOOI.SemanticData.BuildingErrorsHandling" version="6.3.3" exclude="Build,Analyzers" />
+        <dependency id="UAOOI.SemanticData.InformationModelFactory" version="5.1.0" exclude="Build,Analyzers" />
       </group>
     </dependencies>
   </metadata>

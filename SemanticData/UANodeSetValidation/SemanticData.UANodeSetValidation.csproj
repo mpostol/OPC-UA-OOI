@@ -34,7 +34,7 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>..\bin\UAOOI.SemanticData.UANodeSetValidation.xml</DocumentationFile>
+    <DocumentationFile>.\bin\UAOOI.SemanticData.UANodeSetValidation.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

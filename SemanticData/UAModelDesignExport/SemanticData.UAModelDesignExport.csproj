@@ -20,9 +20,9 @@
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
-    <Version>5.2.3</Version>
-    <AssemblyVersion>5.2.3</AssemblyVersion>
-    <FileVersion>5.2.3</FileVersion>
+    <Version>6.3.2</Version>
+    <AssemblyVersion>6.3.2</AssemblyVersion>
+    <FileVersion>6.3.2</FileVersion>
     <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
     <Title>Object-Oriented Internet Semantic-Data UAModelDesign Export</Title>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -35,7 +35,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>bin\UAOOI.SemanticData.UAModelDesignExport.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

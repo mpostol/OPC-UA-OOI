@@ -23,7 +23,8 @@
     <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
     <dependencies>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="UAOOI.SemanticData.BuildingErrorsHandling" version="5.1.0" exclude="Build,Analyzers" />
+        <dependency id="UAOOI.Common.Infrastructure" version="6.3.2" exclude="Build,Analyzers" />
+        <dependency id="UAOOI.SemanticData.BuildingErrorsHandling" version="6.3.2" exclude="Build,Analyzers" />
         <dependency id="UAOOI.SemanticData.InformationModelFactory" version="5.1.0" exclude="Build,Analyzers" />
       </group>
     </dependencies>
@@ -31,6 +32,7 @@
   <files>
     <file src="..\..\..\CommonResources\Media\Logo64.PNG" target=""/>
     <file src="..\bin\Release\netstandard2.0\UAOOI.SemanticData.UAModelDesignExport.dll" target="lib\netstandard2.0\UAOOI.SemanticData.UAModelDesignExport.dll" />
+    <file src="..\bin\Release\netstandard2.0\UAOOI.SemanticData.UAModelDesignExport.xml" target="lib\netstandard2.0\UAOOI.SemanticData.UAModelDesignExport.xml" />
   </files>
 </package>
 

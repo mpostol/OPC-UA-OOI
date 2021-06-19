@@ -217,6 +217,9 @@ The presented approach is a real proposal for a new technology wave based on the
 
 ### Publications
 
+- Postół M., Szymczak P. (2021) Object-Oriented Internet Cloud Interoperability. In: Paszynski M., Kranzlmüller D., Krzhizhanovskaya V.V., Dongarra J.J., Sloot P.M. (eds) Computational Science – ICCS 2021. ICCS 2021. Lecture Notes in Computer Science, vol 12745. Springer, Cham. <https://doi.org/10.1007/978-3-030-77970-2_43>
+  - Available on [ResearchGate](https://www.researchgate.net/publication/352289895_Object-Oriented_Internet_Cloud_Interoperability)
+  - ICCS 2021: INTERNATIONAL CONFERENCE ON COMPUTATIONAL Presentation is available on [YouTube](https://youtu.be/yXH09wuWEcA)
 - Postół M. (2020) Object-Oriented Internet Reactive Interoperability. In: Krzhizhanovskaya V. et al. (eds) Computational Science – ICCS 2020. ICCS 2020. Lecture Notes in Computer Science, vol 12141. Springer, Cham; [DOI: https://doi.org/10.1007/978-3-030-50426-7_31](https://doi.org/10.1007/978-3-030-50426-7_31)
   - Postół M. (2020) [Object-Oriented Internet Reactive Interoperability](https://www.researchgate.net/publication/341882427_Object-Oriented_Internet_Reactive_Interoperability), presentation, DOI: 10.13140/RG.2.2.33984.56323
 - Mariusz Postol, [Machine to Machine Semantic-Data Based Communication: Comprehensive Survey](https://www.researchgate.net/publication/341165347_Machine_to_Machine_Semantic-Data_Based_Communication_Comprehensive_Survey) chapter in book [Computer Game Innovations 2018](https://www.researchgate.net/publication/335524620_Computer_Game_Innovations_2018), Publisher: Lodz University of Technology Press; ISBN: 978-83-7283-999-2

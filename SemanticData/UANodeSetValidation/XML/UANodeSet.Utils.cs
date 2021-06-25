@@ -31,8 +31,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     internal static UANodeSet ReadUADefinedTypes()
     {
       Assembly assembly = Assembly.GetExecutingAssembly();
-      //TODO XmlFile.ReadXmlFile<type>(string) doesn't close the stream #619
-      UANodeSet uaDefinedTypes = XmlFile.ReadXmlFile<UANodeSet>(assembly.GetManifestResourceStream(m_UADefinedTypesName));
+      UANodeSet uaDefinedTypes = null;
+      using (Stream stream = assembly.GetManifestResourceStream(m_UADefinedTypesName))
+        uaDefinedTypes = XmlFile.ReadXmlFile<UANodeSet>(stream);
       if (uaDefinedTypes.Models is null || uaDefinedTypes.Models.Length == 0)
         throw new ArgumentNullException(nameof(UANodeSet.Models));
       if (uaDefinedTypes.NamespaceUris is null)
@@ -42,8 +43,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     internal static UANodeSet ReadModelFile(FileInfo path)
     {
-      //TODO XmlFile.ReadXmlFile<type>(string) doesn't close the stream #619
-      return XmlFile.ReadXmlFile<UANodeSet>(path.OpenRead());
+      using (Stream stream = path.OpenRead())
+        return XmlFile.ReadXmlFile<UANodeSet>(stream);
     }
 
     #endregion static helpers

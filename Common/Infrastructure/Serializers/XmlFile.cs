@@ -7,9 +7,9 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Linq;
 
 namespace UAOOI.Common.Infrastructure.Serializers
 {
@@ -83,8 +83,8 @@ namespace UAOOI.Common.Infrastructure.Serializers
     {
       if (string.IsNullOrEmpty(path))
         throw new ArgumentNullException(nameof(path));
-      FileStream _docStream = new FileStream(path, FileMode.Open);
-      return ReadXmlFile<type>(_docStream);
+      using (FileStream _docStream = new FileStream(path, FileMode.Open))
+        return ReadXmlFile<type>(_docStream);
     }
 
     /// <summary>

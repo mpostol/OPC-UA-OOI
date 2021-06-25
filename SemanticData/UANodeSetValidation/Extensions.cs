@@ -339,6 +339,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           xmlElement.WriteTo(wrt);
         _memoryBuffer.Flush();
         _memoryBuffer.Position = 0;
+        //TODO XmlFile.ReadXmlFile<type>(string) doesn't close the stream #619
         return UAOOI.Common.Infrastructure.Serializers.XmlFile.ReadXmlFile<type>(_memoryBuffer);
       }
     }

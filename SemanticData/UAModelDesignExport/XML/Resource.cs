@@ -27,6 +27,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport.XML
       try
       {
         Assembly assembly = Assembly.GetExecutingAssembly();
+        //TODO XmlFile.ReadXmlFile<type>(string) doesn't close the stream #619
         return XmlFile.ReadXmlFile<ModelDesign>(assembly.GetManifestResourceStream(UADefinedTypesName));
       }
       catch (Exception e)

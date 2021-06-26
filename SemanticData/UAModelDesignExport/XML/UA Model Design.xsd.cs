@@ -21,7 +21,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport.XML
     {
       List<XmlQualifiedName> ret = new List<XmlQualifiedName>();
       foreach (Namespace item in Namespaces)
-        ret.Add(new XmlQualifiedName(item.Prefix, item.XmlNamespace));
+        ret.Add(new XmlQualifiedName(item.XmlPrefix, item.XmlNamespace));
       return ret;
     }
   }

@@ -1,12 +1,24 @@
 # UA Model Design Semantics
 
+## `ModelDesign`
+
+The root element for the information model. This scheme allows information model designers to define UA types and instances in a machine readable form. This definition can be used to generate code and documentation.
+
+The file is expected to contain a number of types and their instance declarations. Objects which are unique in the address space can also be defined.
+
+A validator is available verify consistency of the model generator and to create suitable values or optional information. Once the design is validated it can be passed to a generator which creates different types of code or documentation.
+
+This XSD File contains comments describing the available scheme for defining models. The comments provide an explanation of the scheme, they do not explain the concept that is being model. It is assumed that the designer is familiar with these concepts via the UA specifications.
+
+A XML file used for generating a model must start with a  Model definition. The below list is a list of the valid constructs where each construct map to a model concept in UA definition using these construct must be assigned to a UA namespace, by the use of the TargetNamespace attribute, they can further be assigned to an XML namespace and have a default Locale assigned.
+
 ## `NamespaceTable`
 
-This defines the namespaces used in the model. Each namespace listed should also have a namespace prefix defined in the xs:schema element. The order of the namespaces is significant and used to assigned a numeric index to namespaces when they are used in BrowsePaths specified in the ModelDesign.
+This defines the namespaces used in the model. Each namespace listed should also have a namespace prefix defined in the `xs:schema` element. The order of the namespaces is significant and used to assigned a numeric index to namespaces when they are used in BrowsePaths specified in the ModelDesign.
 
 ## `Namespace` element
 
-Defines a single namespace along with identifiers for the namespace
+Defines a single namespace along with identifiers for the namespace. The following table contains an explanation of the attributes.
 
 | Attribute         | description |
 | ---------         | ----------- |

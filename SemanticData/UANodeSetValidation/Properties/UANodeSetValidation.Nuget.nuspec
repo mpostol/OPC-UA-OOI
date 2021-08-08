@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>UAOOI.SemanticData.UANodeSetValidation</id>
-    <version>6.4.1-Hotel</version>
+    <version>6.4.5-Hotel</version>
     <title>Semantic-Data UANodeSet Validation</title>
     <authors>Mariusz Postol</authors>
     <owners>Mariusz Postol</owners>
@@ -24,7 +24,7 @@
     <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
     <dependencies>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="UAOOI.Common.Infrastructure" version="6.3.3-Golf" exclude="Build,Analyzers" />
+        <dependency id="UAOOI.Common.Infrastructure" version="6.4.1-Hotel" exclude="Build,Analyzers" />
         <dependency id="UAOOI.SemanticData.BuildingErrorsHandling" version="6.3.3-Golf" exclude="Build,Analyzers" />
         <dependency id="UAOOI.SemanticData.InformationModelFactory" version="5.1.0" exclude="Build,Analyzers" />
       </group>

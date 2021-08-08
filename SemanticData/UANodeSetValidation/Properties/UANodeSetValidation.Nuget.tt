@@ -26,7 +26,7 @@
     <copyright><#=AssemblyCopyright#></copyright>
     <dependencies>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="UAOOI.Common.Infrastructure" version="6.3.3-Golf" exclude="Build,Analyzers" />
+        <dependency id="UAOOI.Common.Infrastructure" version="6.4.1-Hotel" exclude="Build,Analyzers" />
         <dependency id="UAOOI.SemanticData.BuildingErrorsHandling" version="6.3.3-Golf" exclude="Build,Analyzers" />
         <dependency id="UAOOI.SemanticData.InformationModelFactory" version="5.1.0" exclude="Build,Analyzers" />
       </group>

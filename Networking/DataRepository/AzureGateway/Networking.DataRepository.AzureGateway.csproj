@@ -28,12 +28,12 @@
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.8.0" />
     <PackageReference Include="CommonServiceLocator" Version="2.0.6" />
-    <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.34.0" />
+    <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.37.2" />
     <PackageReference Include="Microsoft.Azure.Devices.Provisioning.Client" Version="1.16.3" />
     <PackageReference Include="Microsoft.Azure.Devices.Provisioning.Transport.Amqp" Version="1.13.4" />
     <PackageReference Include="Microsoft.Azure.Devices.Provisioning.Transport.Http" Version="1.12.3" />
     <PackageReference Include="Microsoft.Azure.Devices.Provisioning.Transport.Mqtt" Version="1.14.0" />
-    <PackageReference Include="Microsoft.Azure.Devices.Shared" Version="1.27.0" />
+    <PackageReference Include="Microsoft.Azure.Devices.Shared" Version="1.28.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -217,6 +217,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     internal static List<DataSerialization.Argument> GetParameters(this XmlElement xmlElement)
     {
+      //TODO UANodeSetValidation.Extensions.GetObject - object reference not set #624
       ListOfExtensionObject _wrapper = xmlElement.GetObject<ListOfExtensionObject>();
       Debug.Assert(_wrapper != null);
       if (_wrapper.ExtensionObject.AsEnumerable<ExtensionObject>().Where<ExtensionObject>(x => !((string)x.TypeId.Identifier).Equals("i=297")).Any())
@@ -337,6 +338,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         XmlWriterSettings _settings = new XmlWriterSettings() { ConformanceLevel = ConformanceLevel.Fragment };
         using (XmlWriter wrt = XmlWriter.Create(_memoryBuffer, _settings))
+          //TODO UANodeSetValidation.Extensions.GetObject - object reference not set #624
           xmlElement.WriteTo(wrt);
         _memoryBuffer.Flush();
         _memoryBuffer.Position = 0;

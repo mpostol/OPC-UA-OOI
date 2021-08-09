@@ -49,7 +49,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="nodeContext">The node context to be validated and exported.</param>
     /// <param name="exportFactory">A model export factory.</param>
     /// <param name="parentReference">The reference to parent node.</param>
-    /// <exception cref="ApplicationException">In {nameof(ValidateExportNode)}</exception>
     public void ValidateExportNode(IUANodeBase nodeContext, INodeContainer exportFactory, UAReferenceContext parentReference)
     {
       Debug.Assert(nodeContext != null, "Validator.ValidateExportNode the argument nodeContext is null.");
@@ -205,8 +204,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.UserExecutable = !nodeSet.UserExecutable ? nodeSet.UserExecutable : new Nullable<bool>();
       nodeDesign.MethodDeclarationId = nodeSet.MethodDeclarationId;
       nodeDesign.ReleaseStatus = nodeSet.ReleaseStatus.ConvertToReleaseStatus();
+      //TODO UANodeSetValidation.Extensions.GetObject - object reference not set #624
       nodeDesign.AddInputArguments(x => GetParameters(x));
-      nodeDesign.AddOutputArguments(x => GetParameters(x));
+      //nodeDesign.AddOutputArguments(x => GetParameters(x));
     }
 
     private void Update(IViewInstanceFactory nodeDesign, UAView nodeSet)
@@ -321,6 +321,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private Parameter[] GetParameters(XmlElement arguments)
     {
       List<Parameter> _parameters = new List<Parameter>();
+      //TODO UANodeSetValidation.Extensions.GetObject - object reference not set #624
       foreach (DataSerialization.Argument _item in arguments.GetParameters())
         _parameters.Add(m_AddressSpace.ExportArgument(_item));
       return _parameters.ToArray();

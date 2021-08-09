@@ -117,6 +117,7 @@
     </AdditionalFiles>
     <Compile Include="UANodeContextUnitTest.cs" />
     <Compile Include="UAReferenceContextTestClass.cs" />
+    <Compile Include="ValidatorUnitTest.cs" />
     <Compile Include="XMLModelsProblemsToReportUnitTest.cs" />
     <Compile Include="XMLModelsCorrectModelsUnitTest.cs" />
     <Compile Include="XMLModelsModelsWithErrorsUnitTest.cs" />

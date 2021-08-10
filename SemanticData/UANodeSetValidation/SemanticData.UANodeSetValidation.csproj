@@ -8,7 +8,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <PackageId>UAOOI.SemanticData.UANodeSetValidation</PackageId>
-    <Version>6.4.5</Version>
+    <Version>6.4.6</Version>
     <Authors>MPostol</Authors>
     <Product>commsvr.com</Product>
     <Description>This project supports validation of the OPC UA Address Space captured in the xml file against the OPC UA Specyfication. It is assumed that the Address Space is represented as a XML file compliant with the UANodeSet schema.
@@ -20,7 +20,7 @@ It is part of the project supporting OPC UA Object Oriented Internet paradigm.</
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</PackageTags>
-    <AssemblyVersion>6.4.5</AssemblyVersion>
+    <AssemblyVersion>6.4.6</AssemblyVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <FileVersion>6.4.5</FileVersion>
     <Company>commsvr.com</Company>

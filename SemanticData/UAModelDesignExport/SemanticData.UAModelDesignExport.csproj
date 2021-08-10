@@ -20,9 +20,9 @@
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
-    <Version>6.4.5</Version>
-    <AssemblyVersion>6.4.3</AssemblyVersion>
-    <FileVersion>6.4.3</FileVersion>
+    <Version>6.4.6</Version>
+    <AssemblyVersion>6.4.6</AssemblyVersion>
+    <FileVersion>6.4.6</FileVersion>
     <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
     <Title>Object-Oriented Internet Semantic-Data UAModelDesign Export</Title>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>

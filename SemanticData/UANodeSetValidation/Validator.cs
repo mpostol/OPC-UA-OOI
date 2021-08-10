@@ -205,7 +205,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.MethodDeclarationId = nodeSet.MethodDeclarationId;
       nodeDesign.ReleaseStatus = nodeSet.ReleaseStatus.ConvertToReleaseStatus();
       //TODO UANodeSetValidation.Extensions.GetObject - object reference not set #624
-      nodeDesign.AddInputArguments(x => GetParameters(x));
+      //nodeDesign.AddInputArguments(x => GetParameters(x));
       //nodeDesign.AddOutputArguments(x => GetParameters(x));
     }
 

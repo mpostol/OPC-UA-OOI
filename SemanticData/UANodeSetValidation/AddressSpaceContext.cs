@@ -67,9 +67,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Imports all OPC UA Address Space models contained in the <see cref="UANodeSet" /> XML document, and populates internal OPC UA Address Space.
     /// </summary>
+    /// <remarks>
+    /// The input document must be compliant with the `UANodeSet` schema.
+    /// </remarks>
     /// <param name="model">The model to be imported.</param>
     /// <returns>Return a default <see cref="Uri" /> for the model defined in <see cref="UANodeSet" />.</returns>
     /// <exception cref="ArgumentNullException">model - the model cannot be null</exception>
+    //TODO IAddressSpaceContext.ImportUANodeSet(System.IO.FileInfo) returned result must be tested. #626
     Uri IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
     {
       m_TraceEvent.TraceData(TraceEventType.Verbose, 359517792, "Entering AddressSpaceContextService.ImportUANodeSet - importing from object model.");
@@ -78,14 +82,25 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return ImportNodeSet(model);
     }
 
-    Uri IAddressSpaceContext.ImportUANodeSet(FileInfo model)
+    /// <summary>
+    /// Imports all OPC UA Address Space models contained in the file <paramref name="document"/> described by the <see cref="FileInfo"/>, and populates internal OPC UA Address Space.
+    /// </summary>
+    /// <remarks>
+    /// The input document must be compliant with the `UANodeSet` schema.
+    /// </remarks>
+    /// <param name="document">The UANodeSet document to be imported, and described by the <see cref="FileInfo"/>.</param>
+    /// <returns>Return a default <see cref="Uri"/> for the model defined in a file represented by <see cref="FileInfo"/></returns>
+    /// <exception cref="ArgumentNullException">model - the model cannot be null</exception>
+    /// <exception cref="FileNotFoundException">The imported file does not exist</exception>
+    //TODO IAddressSpaceContext.ImportUANodeSet(System.IO.FileInfo) returned result must be tested. #626
+    Uri IAddressSpaceContext.ImportUANodeSet(FileInfo document)
     {
-      if (model == null)
+      m_TraceEvent.TraceData(TraceEventType.Information, 190380256, $"Entering {nameof(ImportNodeSet)} and starting model import form file {document.Name}");
+      if (document == null)
         throw new ArgumentNullException("model", "the model cannot be null");
-      m_TraceEvent.TraceData( TraceEventType.Information, 190380256, $"Starting model import form file {model.Name}");
-      if (!model.Exists)
-        throw new FileNotFoundException("The imported file does not exist", model.FullName);
-      UANodeSet _nodeSet = UANodeSet.ReadModelFile(model);
+      if (!document.Exists)
+        throw new FileNotFoundException("The imported file does not exist", document.FullName);
+      UANodeSet _nodeSet = UANodeSet.ReadModelFile(document);
       return ImportNodeSet(_nodeSet);
     }
 
@@ -96,7 +111,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="System.ArgumentOutOfRangeException">targetNamespace;Cannot find this namespace</exception>
     void IAddressSpaceContext.ValidateAndExportModel(Uri targetNamespace)
     {
-      m_TraceEvent.TraceData( TraceEventType.Information, 856488909, $"Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {targetNamespace} namespace.");
+      m_TraceEvent.TraceData(TraceEventType.Information, 856488909, $"Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {targetNamespace} namespace.");
       List<Uri> undefinedUriLists = new List<Uri>();
       if (!m_NamespaceTable.ValidateNamesapceTable(x => undefinedUriLists.Add(x)))
         foreach (Uri item in undefinedUriLists)

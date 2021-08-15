@@ -49,6 +49,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the kind of the reference.
     /// </summary>
     /// <value>The kind of the reference.</value>
+    //TODO NetworkIdentifier is missing in generated Model Design for DI model #51
     internal ReferenceKindEnum ReferenceKind
     {
       get
@@ -86,6 +87,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets a value indicating whether the reference has been derived form <see cref="ReferenceKindEnum.HasProperty"/> or <see cref="ReferenceKindEnum.HasComponent"/>.
     /// </summary>
     /// <value><c>true</c> if it is child reference; otherwise, <c>false</c>.</value>
+    //TODO NetworkIdentifier is missing in generated Model Design for DI model #51
     internal bool ChildConnector => (ReferenceKind == ReferenceKindEnum.HasProperty) || (ReferenceKind == ReferenceKindEnum.HasComponent);
 
     #endregion semantics

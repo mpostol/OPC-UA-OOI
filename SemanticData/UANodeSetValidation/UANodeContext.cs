@@ -155,6 +155,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         switch (_rfx.ReferenceKind)
         {
           case ReferenceKindEnum.Custom:
+            //TODO NetworkIdentifier is missing in generated Model Design for DI model #51
             XmlQualifiedName _ReferenceType = _rfx.GetReferenceTypeName();
             if (_ReferenceType == XmlQualifiedName.Empty)
             {
@@ -189,6 +190,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case ReferenceKindEnum.HasTypeDefinition: //TODO Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
             IsProperty = _rfx.TargetNode.IsPropertyVariableType;
             break;
+          case ReferenceKindEnum.HierarchicalReferences:
+            throw new ArgumentOutOfRangeException($"the {nameof(ReferenceKindEnum.HierarchicalReferences)} is not handled");
         }
       }
       Dictionary<string, IUANodeBase> _derivedChildren = m_BaseTypeNode == null ? new Dictionary<string, IUANodeBase>() : m_BaseTypeNode.GetDerivedInstances();
@@ -272,6 +275,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <returns>Dictionary&lt;System.String, IUANodeBase&gt;.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Circular loop in inheritance chain</exception>
+    //TODO NetworkIdentifier is missing in generated Model Design for DI model #51
     public Dictionary<string, IUANodeBase> GetDerivedInstances()
     {
       if (m_InGetDerivedInstances)

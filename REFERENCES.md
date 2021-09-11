@@ -4,6 +4,7 @@
 
 <!-- Publications -->
 
+- [Object-Oriented Internet](https://youtube.com/playlist?list=PLC7zPvgw-YbyWss-0j_waddacgroLFTzi) This playlist on YouTube addresses research results on the systematic approach to the design of the meaningful Machine to Machine (M2M) communication targeting distributed mobile applications in the context of new emerging disciplines, i.e. Industry 4.0 and Internet of Things.
 - Postół M., Szymczak P. (2021) Object-Oriented Internet Cloud Interoperability. In: Paszynski M., Kranzlmüller D., Krzhizhanovskaya V.V., Dongarra J.J., Sloot P.M. (eds) Computational Science – ICCS 2021. ICCS 2021. Lecture Notes in Computer Science, vol 12745. Springer, Cham. <https://doi.org/10.1007/978-3-030-77970-2_43>
   - Available on [ResearchGate](https://www.researchgate.net/publication/352289895_Object-Oriented_Internet_Cloud_Interoperability)
   - ICCS 2021: INTERNATIONAL CONFERENCE ON COMPUTATIONAL Presentation is available on [YouTube](https://youtu.be/yXH09wuWEcA)

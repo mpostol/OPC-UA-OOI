@@ -213,6 +213,20 @@ I hope it is a good place to prototype and converge the OPC UA communication tec
 
 The presented approach is a real proposal for a new technology wave based on the existing Internet infrastructure because it allows vendors to provide generic off-the-shelf products tested independently for interoperability.
 
+## Partnership Program
+
+I am a researcher and University associate who is passionate about applying knowledge and experience in building a Machine to Machine (M2M) meaningful interoperability based on OPC UA. Let's build it with you and for you. To join our effort and create an organizational context I have launched an open-access **Object-Oriented Internet Partnership Program**. Hence, maintenance of this repository and further development of the OPC UA Information Model Domain-Specific Language will be carried out under a broader concept described in the following article
+
+[Object-Oriented Internet Partnership Program][Sponsorship]
+
+**Consider joining**. Visit the section [How to be involved][SponsorshipToBeInvolved] to get more. I hope that thanks to this partnership program we will establish long-term mutually beneficial cooperation. Your participation is needed to make sure that the work will continue as expected. As a rule of thumb, the work priority is derived from community feedback.
+
+I strongly encourage community participation and contribution to this project. First, please fork the repository and commit your changes there. Once happy with your changes you can generate a 'pull request'.
+
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
+
+Please note we have a code of conduct, please follow it in all your interactions with the project.
+
 ## See Also
 
 ### Publications
@@ -229,8 +243,9 @@ The presented approach is a real proposal for a new technology wave based on the
 
 ### Partnership Program
 
-- [Object-Oriented Internet Partnership Program](https://github.commsvr.com/AboutPartnershipProgram.md.html)
-- [How to be involved](https://github.commsvr.com/AboutPartnershipProgram.md.html#how-to-be-involved)
+
+- [Object-Oriented Internet Partnership Program][Sponsorship]
+- [How to be involved][SponsorshipToBeInvolved]
 
 ### Related documents
 
@@ -247,6 +262,8 @@ The presented approach is a real proposal for a new technology wave based on the
 - [OPC Foundation](https://opcfoundation.org/)
 - [Sponsored by commsvr.com](http://www.commsvr.com/)
 
+[Sponsorship]: https://github.commsvr.com/AboutPartnershipProgram.md.html
+[SponsorshipToBeInvolved]: https://github.commsvr.com/AboutPartnershipProgram.md.html#how-to-be-involved
 [wordpress.OPCUAMTF]: https://mpostol.wordpress.com/2013/08/04/opc-unified-architecture-main-technological-features/
 [ASMD]:https://github.com/mpostol/ASMD
 [DDSupport]:SemanticData/DesignDeploymentSupport.md

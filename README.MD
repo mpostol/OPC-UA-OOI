@@ -32,12 +32,11 @@ In this project, C\# deliverables supporting a new Machine To Machine \(M2M\) co
 
 The [Object Oriented Internet](https://fedcsis.org/proceedings/2015/pliks/160.pdf) article published in **Proceedings of the Federated Conference on Computer Science and Information Systems** captures description of this idea.
 
-|                                                                                                            Go To                                                                                                            | Description                                                                                                                                               |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|                                           [![Release](https://img.shields.io/github/release/mpostol/OPC-UA-OOI.svg?style=popout)](https://github.com/mpostol/OPC-UA-OOI/releases)                                           | latest release                                                                                                                                            |
-|                                                        [![ebook](https://img.shields.io/badge/OOI-read_on_Gitbook-brightgreen.svg)](https://commsvr.gitbook.io/ooi)                                                         | the ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files from this repository. |
-| [![Join the chat at https://gitter.im/mpostol/OPC-UA-OOI](https://badges.gitter.im/mpostol/OPC-UA-OOI.svg)](https://gitter.im/mpostol/OPC-UA-OOI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) | join the project chat                                                                                                                                     |
-|                                                          [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1198852.svg)](https://doi.org/10.5281/zenodo.1198852)                                                          | you can cite all versions by using the DOI 10.5281/zenodo.1198852. This DOI represents all versions, and will always resolve to the latest one.           |
+|                                                                  Go To                                                                  | Description                                                                                                                                               |
+| :-------------------------------------------------------------------------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![Release](https://img.shields.io/github/release/mpostol/OPC-UA-OOI.svg?style=popout)](https://github.com/mpostol/OPC-UA-OOI/releases) | latest release                                                                                                                                            |
+|              [![ebook](https://img.shields.io/badge/OOI-read_on_Gitbook-brightgreen.svg)](https://commsvr.gitbook.io/ooi)               | the ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files from this repository. |
+|                [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1198852.svg)](https://doi.org/10.5281/zenodo.1198852)                | you can cite all versions by using the DOI 10.5281/zenodo.1198852. This DOI represents all versions, and will always resolve to the latest one.           |
 
 > Note: the DOI number is a unique identifying number associated with the repository version. Visit the section `How to cite the software and associated documentation files` to learn how to create derived works and cite the origin.
 
@@ -51,14 +50,14 @@ We use [Semantic Versioning](http://semver.org/) for versioning. For the version
 
 #### Repository
 
-|   Version   | Milestone                                                                                                                                                                                                             |          DOI           |     Date     |
-| :---------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------: | :----------: |
-|    6.1.2    | Azure Gateway Implementation 1.0|[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4361640.svg)](https://doi.org/10.5281/zenodo.4361640) | Dec 18, 2020|
-|    5.1.0    | Semantic-Data ModelDesign Export 5.1.0                                                                                                                                                                                | 10.5281/zenodo.3345043 | Jul 21, 2019 |
-| 5.0.2-Alpha | Updated the UA Address Space build against OPC UA Specification 1.04; updated UANodeSet schema; added export to ModelDesign [OPC UA Address Space Prototyping](SemanticData/AddressSpaceComplianceTestTool/README.md) | 10.5281/zenodo.2636426 | Apr 11, 2019 |
-|    4.0.1    | .NET Standard implementation, documentation improved, new code help documentation available, tested against Xamarin.Android                                                                                           | 10.5281/zenodo.2555407 | Feb 1, 2019  |
-|    3.1.0    | New version of the UAOOI.Networking.ReferenceApplication, documentation has been improved.                                                                                                                            | 10.5281/zenodo.1291549 | Jun 17, 2018 |
-|    3.0.0    | DOI creation for the publication purpose.                                                                                                                                                                             | 10.5281/zenodo.1198853 | Mar 14, 2018 |
+|   Version   | Milestone                                                                                                                                                                                                             |                                                    DOI                                                    |     Date     |
+| :---------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------: | :----------: |
+|    6.1.2    | Azure Gateway Implementation 1.0                                                                                                                                                                                      | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4361640.svg)](https://doi.org/10.5281/zenodo.4361640) | Dec 18, 2020 |
+|    5.1.0    | Semantic-Data ModelDesign Export 5.1.0                                                                                                                                                                                |                                          10.5281/zenodo.3345043                                           | Jul 21, 2019 |
+| 5.0.2-Alpha | Updated the UA Address Space build against OPC UA Specification 1.04; updated UANodeSet schema; added export to ModelDesign [OPC UA Address Space Prototyping](SemanticData/AddressSpaceComplianceTestTool/README.md) |                                          10.5281/zenodo.2636426                                           | Apr 11, 2019 |
+|    4.0.1    | .NET Standard implementation, documentation improved, new code help documentation available, tested against Xamarin.Android                                                                                           |                                          10.5281/zenodo.2555407                                           | Feb 1, 2019  |
+|    3.1.0    | New version of the UAOOI.Networking.ReferenceApplication, documentation has been improved.                                                                                                                            |                                          10.5281/zenodo.1291549                                           | Jun 17, 2018 |
+|    3.0.0    | DOI creation for the publication purpose.                                                                                                                                                                             |                                          10.5281/zenodo.1198853                                           | Mar 14, 2018 |
 
 #### Tools
 
@@ -79,7 +78,7 @@ The table below lists the latest versions of the published NuGet packages.
 | [UAOOI.Configuration.Core](https://www.nuget.org/packages/UAOOI.Configuration.Core)                                      |  4.0.1  | The library contains a shared interfaces for server configuration which OPC UA applications can reference. The library provides an abstraction over any OPC UA Server configuration plug-in. Using the library allows an application to indirectly access the server configuration attributes without relying on hard references. The hope is that using this library, third-party applications and frameworks can begin to leverage server configuration management without tying themselves down to a specific implementation. |
 | [UAOOI.Configuration.DataBindings](https://www.nuget.org/packages/UAOOI.Configuration.DataBindings)                      |  4.0.1  | OPC UA Object Oriented Internet (UAOOI) DataBindings library is dedicated to create a plug-in aimed at editing of the configuration of any application based on OPC UA Information Model. It allows also to add data binding to the configuration.                                                                                                                                                                                                                                                                               |
 | [UAOOI.Configuration.Networking](https://www.nuget.org/packages/UAOOI.Configuration.Networking)                          |  4.0.1  | OPC UA Object Oriented Internet (UAOOI) UAOOI.Configuration.Networking library is dedicated to create a plug-in aimed at provisioning configuration of any application based on OPC UA Information Model.                                                                                                                                                                                                                                                                                                                        |
-| [UAOOI.Networking.Core](https://www.nuget.org/packages/UAOOI.Networking.Core)                                            | 4.0.2  | The core functionality of `Semantic-Data` reactive networking library based on OPC UA Part 14 Pub/Sub.                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| [UAOOI.Networking.Core](https://www.nuget.org/packages/UAOOI.Networking.Core)                                            |  4.0.2  | The core functionality of `Semantic-Data` reactive networking library based on OPC UA Part 14 Pub/Sub.                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | [UAOOI.Networking.Encoding](https://www.nuget.org/packages/UAOOI.Networking.Encoding)                                    |  4.0.2  | This package provides functionality to lookup a dictionary containing value converters. The interface is used for late binding to inject dependency on the external library.  This library provides IEncodingFactory functionality limited to encoding simple data types only for the testing purpose only.                                                                                                                                                                                                                      |
 | [UAOOI.Networking.SemanticData](https://www.nuget.org/packages/UAOOI.Networking.SemanticData)                            |  4.0.2  | SemanticData Reactive Networking library based on OPC UA Part 14 Pub/Sub.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | [UAOOI.Networking.UDPMessageHandler](https://www.nuget.org/packages/UAOOI.Networking.UDPMessageHandler)                  |  4.0.2  | OOI Reactive Networking: UDP IMessageHandlerFactory Implementation                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -207,6 +206,19 @@ DOI: [http://doi.org/10.5281/zenodo.1198852](http://doi.org/10.5281/zenodo.11988
 
 Replace [year] with the current year and [Target Part Name] with the name (or names) of the files you are referring to.
 
+## How to follow up?
+
+GitHub offers `Discussions` as a space to connect with other members of the community. I hope that using the `Discussion` space you:
+
+- ask questions you’re wondering about
+- share ideas
+- engage with other community members
+- welcome others and are open-minded; remember that this is a community we build together
+
+I have activated the [Discussion][Discussion] space for this repository. Follow the  [Discussion][Discussion] to be in touch.
+
+To follow any activity in the repository, switch on the `Watch` functionality. If you find the project interesting, please star the repository. Starring a repository also shows appreciation to the repository maintainer for their work. You can star repositories and topics to keep track of projects you find interesting and discover related content in your news feed. Check out [Saving repositories with stars](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars) to get more.
+
 ## Conclusion
 
 I hope it is a good place to prototype and converge the OPC UA communication technology with `Semantic-Data`, Industry 4.0, Internet Of Things, Data Oriented Architecture, Plug and Play, Global Data Discovery, Selective Availability, etc. concepts. My goal is to bridge a gap between OPC UA technology and Industrial IT Application Domains.
@@ -241,14 +253,10 @@ Please note we have a code of conduct, please follow it in all your interactions
 - ebook **Object Oriented Internet** contains description of this project - it is auto-generated content gathered from *.md files [![ebook](https://img.shields.io/badge/Gitbook-Release-brightgreen.svg)](https://commsvr.gitbook.io/ooi/tableofcontent)
 - Mariusz Postol, [Object Oriented Internet][OOI.ieeexplore], [3rd International Conference on Innovative Network Systems and Applications](https://fedcsis.org/2015/inetsapp), 2015, [IEEE Xplore Digital Library][OOI.ieeexplore] [![DOI](https://img.shields.io/badge/DOI-10.15439%2F015F160-blue)](https://fedcsis.org/proceedings/2015/pliks/160.pdf)
 
-### Partnership Program
-
+### Related documents
 
 - [Object-Oriented Internet Partnership Program][Sponsorship]
 - [How to be involved][SponsorshipToBeInvolved]
-
-### Related documents
-
 - [WIKI of this project](https://github.com/mpostol/OPC-UA-OOI/wiki)
 - [API Browser (is available for sponsors - consider joining)](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 - [OPC UA Address Space Model Designer (ASMD)][ASMD]
@@ -275,3 +283,4 @@ Please note we have a code of conduct, please follow it in all your interactions
 [OOIBookToC]: TableOfContent.md#reactive-communication
 [OOI.ieeexplore]:https://ieeexplore.ieee.org/abstract/document/7321562
 [OOI.PO]:https://github.com/mpostol/ProcessObserver#process-observer
+[Discussion]: https://github.com/mpostol/OPC-UA-OOI/discussions

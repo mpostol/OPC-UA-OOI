@@ -111,10 +111,6 @@
     <Compile Include="InformationModelFactoryUnitTest.cs" />
     <Compile Include="NamespaceTableUnitTest.cs" />
     <Compile Include="ExtensionsUnitTest.cs" />
-    <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
-      <Link>DependencyValidation1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
     <Compile Include="UANodeContextUnitTest.cs" />
     <Compile Include="UAReferenceContextTestClass.cs" />
     <Compile Include="ValidatorUnitTest.cs" />
@@ -278,10 +274,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-    <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

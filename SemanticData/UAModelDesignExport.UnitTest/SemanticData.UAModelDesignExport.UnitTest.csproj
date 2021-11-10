@@ -93,12 +93,6 @@
     <None Include="UAResourcesUnitTestUnitTest.cs.md" />
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
-      <Link>DependencyValidation1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Models\DataTypeTest.csv" />
     <None Include="Models\DataTypeTest\DataTypeTest.PredefinedNodes.uanodes" />
     <None Include="Models\DataTypeTest\DataTypeTest.Types.bsd" />
@@ -196,10 +190,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Models\VariableTypeTest\VariableTypeTest.PredefinedNodes.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

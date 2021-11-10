@@ -17,7 +17,7 @@ string Authors = "Mariusz Postol";
 string IconURLTag = "https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true";
 
 //UAOOI.Common
-string CommonVersion = "6.4.7";
+string CommonVersion = "6.4.8";
 string CommonPrerelease = "";
 
 //UAOOI.DataDiscovery
@@ -40,7 +40,7 @@ string SemanticDataUAModelDesignExportVersion = "6.4.6";
 string SemanticDataUAModelDesignExportPrerelease = "-India";
 
 //UAOOI.Configuration
-string ConfigurationVersion = "4.0.2";
+string ConfigurationVersion = "6.4.8";
 string ConfigurationPrerelease = "";
 string ConfigurationProduct = "Object Oriented Internet";
 

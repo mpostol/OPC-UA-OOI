@@ -4,10 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>UAOOI.Configuration.Networking</AssemblyName>
     <RootNamespace>UAOOI.Configuration.Networking</RootNamespace>
-    <Version>4.0.1</Version>
+    <Version>6.4.7</Version>
     <id>UAOOI.Configuration.Networking</id>
     <title>UAOOI.Configuration.Networking - UA Data Application Configuration</title>
-    <authors>MPostol</authors>
+    <authors>Mariusz Postol</authors>
     <owners>cas.eu</owners>
     <projectUrl>https://github.com/mpostol/OPC-UA-OOI/tree/master/Configuration/Networking</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -18,11 +18,11 @@
     </summary>
     <releaseNotes>
     </releaseNotes>
-    <copyright>Copyright MPostol (c) 2018</copyright>
+    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
     <tags>Object Oriented Internet, OPC UA, CommServer, ASMD, Address Space Model Designer.</tags>
     <Company>commsvr.com</Company>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <PackageLicenseUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
@@ -30,11 +30,19 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <Product>Object Oriented Internet</Product>
-    <AssemblyVersion>4.0.1.1</AssemblyVersion>
+    <AssemblyVersion>6.4.7.1</AssemblyVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>Logo64.PNG</PackageIcon>
+    <PackageIconUrl />
+    <PackageReleaseNotes>VS2022 compatibility</PackageReleaseNotes>
 
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;1705;IDE0001;IDE0002;IDE0003</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>bin\Release\UAOOI.Configuration.Networking.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.6" />
@@ -52,5 +60,25 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\CommonResources\Media\Logo64.PNG">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Configuration.Networking.nuspec">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Configuration.Networking.tt</DependentUpon>
+    </None>
+    <None Update="Configuration.Networking.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Configuration.Networking.nuspec</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 </Project>

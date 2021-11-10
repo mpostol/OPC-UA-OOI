@@ -23,7 +23,7 @@
     <NoWarn>1701;1702;1705;IDE0001;IDE002;IDE003</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.ComponentModel.Composition" Version="5.0.0" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Configuration\Networking\Configuration.Networking.csproj" />

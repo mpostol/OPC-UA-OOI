@@ -23,7 +23,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <AssemblyName>UAOOI.Common.Infrastructure</AssemblyName>
+    <AssemblyName>UAOOI.Common.Infrastructure647</AssemblyName>
     <RootNamespace>UAOOI.Common.Infrastructure</RootNamespace>
     <PackageId>UAOOI.Common.Infrastructure</PackageId>
     <Version>6.4.6</Version>

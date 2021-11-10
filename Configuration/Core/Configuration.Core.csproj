@@ -6,7 +6,7 @@
     <RootNamespace>UAOOI.Configuration.Core</RootNamespace>
     <Description>The library contains a shared interfaces for server configuration which OPC UA applications can reference.
 The library provides an abstraction over any OPC UA Server configuration plug-in. Using the library allows an application to indirectly access the server configuration attributes without relying on hard references. The hope is that using this library, third-party applications and frameworks can begin to leverage server configuration management without tying themselves down to a specific     implementation.</Description>
-    <Version>4.0.1</Version>
+    <Version>6.4.7</Version>
     <Authors>MPostol</Authors>
     <Company>commsvr.com</Company>
     <Product>Object Oriented Internet</Product>
@@ -19,11 +19,40 @@ The library provides an abstraction over any OPC UA Server configuration plug-in
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <AssemblyVersion>4.0.1.1</AssemblyVersion>
+    <AssemblyVersion>6.4.7.1</AssemblyVersion>
+    <PackageIcon>Logo64.PNG</PackageIcon>
+    <PackageIconUrl />
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReleaseNotes>VS2022 compatibility</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;1705;IDE0001;IDE0002;IDE0003</NoWarn>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\UAOOI.Configuration.Core.xml</DocumentationFile>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="ConfigurationCore.nuspec">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ConfigurationCore.tt</DependentUpon>
+    </None>
+    <None Update="ConfigurationCore.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ConfigurationCore.nuspec</LastGenOutput>
+    </None>
+    <None Include="..\..\CommonResources\Media\Logo64.PNG">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
 
 </Project>

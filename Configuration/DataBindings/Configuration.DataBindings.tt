@@ -1,0 +1,44 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".nuspec" #>
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>UAOOI.Configuration.DataBindings</id>
+    <version><#=CommonVersion#><#= CommonPrerelease#></version>
+    <title><#=NetworkingDataProduct#> Common Infrastructure</title>
+    <authors><#=AssemblyCompany#></authors>
+    <owners><#=Owner#></owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://commsvr.gitbook.io/ooi/</projectUrl>
+    <icon>Logo64.PNG</icon>
+    <description>
+      OPC UA Object Oriented Internet (UAOOI) DataBindings library is dedicated to create a plug-in aimed at editing of the configuration of any application based on OPC UA Information Model.
+	  It allows also to add data binding to the configuration. It is part of the project supporting OPC UA Object Oriented Internet paradigm.
+	</description>
+    <summary>
+       DataBindings library is dedicated to create a plug-in aimed at editing of the configuration of any application based on OPC UA Information Model
+	</summary>
+    <copyright><#=AssemblyCopyright#></copyright>
+    <tags>Object Oriented Internet, OPC UA, PubSub, Information Model, IoT, M2M, DOA,</tags>
+    <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI" />
+    <releaseNotes>VS 2022 compatibility.</releaseNotes>
+    <copyright><#=AssemblyCopyright#></copyright>
+	<dependencies>
+	  <group targetFramework=".NETStandard2.0">
+		<dependency id="CommonServiceLocator" version="2.0.6" exclude="Build,Analyzers" />
+		<dependency id="System.ComponentModel.Composition" version="6.0.0" exclude="Build,Analyzers" />
+		<dependency id="UAOOI.Common.Infrastructure" version="6.4.7" exclude="Build,Analyzers" />
+		<dependency id="UAOOI.Configuration.Core" version="6.4.8" exclude="Build,Analyzers" />
+		<dependency id="UAOOI.Configuration.Networking" version="6.4.8" exclude="Build,Analyzers" />
+      </group>
+	</dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\CommonResources\Media\Logo64.PNG" target=""/>
+    <file src="bin\Release\netstandard2.0\UAOOI.Configuration.DataBindings.dll" target="lib\netstandard2.0\UAOOI.Configuration.DataBindings.dll" />
+    <file src="bin\Release\netstandard2.0\UAOOI.Configuration.DataBindings.xml" target="lib\netstandard2.0\UAOOI.Configuration.DataBindings.xml" />
+  </files>
+</package>
+
+<#@ include file = "..\..\CommonResources\T4Definitions\Model.t4" #>

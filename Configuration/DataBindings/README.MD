@@ -8,13 +8,11 @@ The schema of the configuration files is available at:  [ConfigurationData.xsd](
 
 The code help documentation is [available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 
-The main changes and Version History are provided by the document [ReadMe.txt](./ReadMe.txt)
-
 The NuGet package is available here: [OPC UA DataBindings Library](https://www.nuget.org/packages/UAOOI.DataBindings/).
 
-To install OPC UA DataBindings Library, run the following command in the  Package Manager Console  
+To install OPC UA DataBindings Library, run the following command in the  Package Manager Console
 
-> PM>  Install-Package UAOOI.DataBindings
+> `PM>  Install-Package UAOOI.DataBindings`
 
 ## Getting Started Tutorial
 
@@ -22,10 +20,14 @@ The topics contained in this section are intended to give you quick exposure to 
 
 The configuration files are managed using the `UAOOI.Configuration.Networking` component.
 
-### How to implement the custom editor
+____________________________________________________________________________________________
+For assistance, contact:
 
-This section provides hints how to implement a custom editor of any `OOI Reactive Application` processing data. For example the following applications are good candidate to support this role:
+Mariusz Postol
+CAS
+mailto://mpostol@cas.eu
 
-- HMI device - displaying incoming data on the screen;
-- Supervisory Control and Data Acquisition (SCADA) - equipped with the driver compliant with the standard
-- PLC - updating the internal registers using data recovered from the incoming messages.
+Copyright (C) 2018, commsvr.com LODZ POLAND
+
+mailto://commserver@cas.eu
+http://www.commsvr.com/

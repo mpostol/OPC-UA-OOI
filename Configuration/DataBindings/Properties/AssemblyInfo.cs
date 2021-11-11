@@ -1,12 +1,9 @@
-﻿//_______________________________________________________________
-//  Title   : Assembly info for: UAOOI.Configuration.DataBindings
-//  System  : Microsoft VisualStudio 2015 / C#
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright MPostol (c) 2018
-//  +48 608 619 899
-//  commserver@cas.eu
-//  https://github.com/mpostol/OPC-UA-OOI
-//_______________________________________________________________
+//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System.Reflection;
 using System.Runtime.InteropServices;

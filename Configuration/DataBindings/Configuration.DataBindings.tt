@@ -14,8 +14,8 @@
     <icon>Logo64.PNG</icon>
     <description>
       OPC UA Object Oriented Internet (UAOOI) DataBindings library is dedicated to create a plug-in aimed at editing of the configuration of any application based on OPC UA Information Model.
-	  It allows also to add data binding to the configuration. It is part of the project supporting OPC UA Object Oriented Internet paradigm.
-	</description>
+      It allows also to add data binding to the configuration. It is part of the project supporting OPC UA Object Oriented Internet paradigm.
+    </description>
     <summary>
        DataBindings library is dedicated to create a plug-in aimed at editing of the configuration of any application based on OPC UA Information Model
 	</summary>

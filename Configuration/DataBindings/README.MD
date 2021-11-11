@@ -2,13 +2,13 @@
 
 ## Introduction
 
-This project is aimed at implementing an editor of the `OOI Reactive Application` configuration file. For more extensive examples, see the [Semantic-Data Processing Architecture](../../SemanticData/README.MD).
+This project is aimed at implementing an editor of the `OOI Reactive Application` configuration file. For more extensive examples, see the [Semantic-Data Message Centric Communication](https://commsvr.gitbook.io/ooi/internet-of-things-iot-archetype/readme.messagecentriccommunication).
 
 The schema of the configuration files is available at:  [ConfigurationData.xsd](../../Configuration/Networking/Serialization/ConfigurationData.xsd) and detailed description of the configuration is captured in the document [UA Data Networking Configuration](../../Configuration/Networking/README.MD#ua-data-networking-configuration).
 
-The code help documentation is [available for sponsors- consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
+The code help documentation is [available for sponsors - consider joining](https://github.commsvr.com/AboutPartnershipProgram.md.html)
 
-The NuGet package is available here: [OPC UA DataBindings Library](https://www.nuget.org/packages/UAOOI.DataBindings/).
+The NuGet package is available here: [OPC UA DataBindings Library](https://www.nuget.org/packages/UAOOI.Configuration.DataBindings).
 
 To install OPC UA DataBindings Library, run the following command in the  Package Manager Console
 
@@ -20,14 +20,10 @@ The topics contained in this section are intended to give you quick exposure to 
 
 The configuration files are managed using the `UAOOI.Configuration.Networking` component.
 
-____________________________________________________________________________________________
 For assistance, contact:
 
+<https://github.com/mpostol>
+
 Mariusz Postol
-CAS
-mailto://mpostol@cas.eu
 
-Copyright (C) 2018, commsvr.com LODZ POLAND
-
-mailto://commserver@cas.eu
-http://www.commsvr.com/
+Copyright (C) 2021 Mariusz Postol LODZ POLAND

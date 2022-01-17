@@ -57,6 +57,9 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.XML" />
+    <Reference Include="UAOOI.Common.Infrastructure, Version=6.4.6.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Common.Infrastructure.6.4.7\lib\netstandard2.0\UAOOI.Common.Infrastructure.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -89,10 +92,6 @@
     <Compile Include="UANetworkingConfigurationEditorUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Infrastructure\Common.Infrastructure.csproj">
-      <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
-      <Name>Common.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Core\Configuration.Core.csproj">
       <Project>{0a2fb856-d50c-463d-8218-063a36942188}</Project>
       <Name>Configuration.Core</Name>
@@ -107,10 +106,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
-      <Link>DependencyValidation1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
@@ -125,10 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-    <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

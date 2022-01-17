@@ -49,17 +49,4 @@
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Validate Include="DependencyValidation1.layerdiagram">
-      <SubType>Content</SubType>
-    </Validate>
-    <Validate Include="DependencyValidation1.layerdiagram.layout">
-      <SubType>Content</SubType>
-      <DependentUpon>DependencyValidation1.layerdiagram</DependentUpon>
-    </Validate>
-    <Validate Include="DependencyValidation1.layerdiagram.suppressions">
-      <SubType>Content</SubType>
-      <DependentUpon>DependencyValidation1.layerdiagram</DependentUpon>
-    </Validate>
-  </ItemGroup>
 </Project>

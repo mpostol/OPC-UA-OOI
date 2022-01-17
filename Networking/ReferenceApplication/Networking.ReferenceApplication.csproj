@@ -98,8 +98,8 @@
     <Reference Include="System.Reactive.Linq, Version=3.0.6000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Reactive.Linq.5.0.0\lib\net472\System.Reactive.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -118,6 +118,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UAOOI.Common.Infrastructure, Version=6.4.6.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UAOOI.Common.Infrastructure.6.4.7\lib\netstandard2.0\UAOOI.Common.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -176,10 +179,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <AdditionalFiles Include="..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
-      <Link>DependencyValidation1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
     <Content Include="App.BilersSet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -236,10 +235,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Infrastructure\Common.Infrastructure.csproj">
-      <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
-      <Name>Common.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Configuration\Core\Configuration.Core.csproj">
       <Project>{0a2fb856-d50c-463d-8218-063a36942188}</Project>
       <Name>Configuration.Core</Name>
@@ -272,10 +267,6 @@
       <Project>{D2EB89F9-321E-46E4-BA79-679138B82B23}</Project>
       <Name>Networking.UDPMessageHandler</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-    <Analyzer Include="..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,35 +5,63 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>UAOOI.Configuration.DataBindings</AssemblyName>
     <RootNamespace>UAOOI.Configuration.DataBindings</RootNamespace>
-    <Version>4.0.1</Version>
-    <Authors>commsvr.com</Authors>
+    <Version>6.4.8</Version>
+    <Authors>Mariusz Postol</Authors>
     <Product>Object Oriented Internet</Product>
     <Description>OPC UA Object Oriented Internet (UAOOI) DataBindings library is dedicated to create a plug-in aimed at editing of the configuration of any application based on OPC UA Information Model.
 It allows also to add data binding to the configuration. It is part of the project supporting OPC UA Object Oriented Internet paradigm.
 </Description>
-    <Copyright>Copyright MPostol (c) 2018</Copyright>
+    <Copyright>Copyright MPostol (c) 2021</Copyright>
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Object Oriented Internet, OPC UA, CommServer, Reactive Networking.</PackageTags>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>OPCUAOOIKey.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>4.0.1.1</AssemblyVersion>
+    <AssemblyVersion>6.4.8.1</AssemblyVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Company>Mariusz Postol</Company>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReleaseNotes>2022 compatibility</PackageReleaseNotes>
+    <PackageIcon>Logo64.PNG</PackageIcon>
+    <PackageIconUrl />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>bin\Release\UAOOI.Configuration.DataBindings.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="packages.config" />
+    <None Include="..\..\CommonResources\Media\Logo64.PNG">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.6" />
-    <PackageReference Include="System.ComponentModel.Composition" Version="5.0.0" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
+    <PackageReference Include="UAOOI.Common.Infrastructure" Version="6.4.7" />
+    <PackageReference Include="UAOOI.Configuration.Core" Version="6.4.8" />
+    <PackageReference Include="UAOOI.Configuration.Networking" Version="6.4.8" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\Configuration.Core.csproj" />
-    <ProjectReference Include="..\Networking\Configuration.Networking.csproj" />
+    <None Update="Configuration.DataBindings.nuspec">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Configuration.DataBindings.tt</DependentUpon>
+    </None>
+    <None Update="Configuration.DataBindings.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Configuration.DataBindings.nuspec</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
 </Project>

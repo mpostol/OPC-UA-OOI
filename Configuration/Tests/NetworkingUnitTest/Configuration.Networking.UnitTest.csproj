@@ -56,6 +56,9 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
+    <Reference Include="UAOOI.Common.Infrastructure, Version=6.4.6.0, Culture=neutral, PublicKeyToken=deede3c2df331bb0, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\UAOOI.Common.Infrastructure.6.4.7\lib\netstandard2.0\UAOOI.Common.Infrastructure.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -90,18 +93,10 @@
     <Compile Include="XmlDataContractSerializersUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
-      <Link>DependencyValidation1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
     <None Include="Instrumentation\GoXSD.cmd" />
     <None Include="OPCUAOOIKey.snk" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\Infrastructure\Common.Infrastructure.csproj">
-      <Project>{8817a671-abb8-463a-a8a3-ddcfe781a6b6}</Project>
-      <Name>Common.Infrastructure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Networking\Configuration.Networking.csproj">
       <Project>{e28e0880-03aa-4d1b-a820-41b04e766019}</Project>
       <Name>Configuration.Networking</Name>
@@ -126,10 +121,6 @@
     <None Include="TestData\ConsumerConfigurationDataWrapper.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-    <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TestData\CustomConfigurationData.xml">

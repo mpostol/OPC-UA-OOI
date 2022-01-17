@@ -74,8 +74,8 @@
     <Reference Include="System.Reactive.Interfaces, Version=3.0.6000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Reactive.Interfaces.5.0.0\lib\net472\System.Reactive.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -131,10 +131,6 @@
     <Compile Include="MessageWriterBaseTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="..\..\..\CommonResources\ModelingProject\UANetworkingArchitecture\DependencyValidation1.layerdiagram">
-      <Link>DependencyValidation1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
     <None Include="app.config" />
     <None Include="OPCUAOOIKey.snk" />
     <None Include="packages.config" />
@@ -153,10 +149,6 @@
       <Project>{7f4ded4e-5933-4229-b9cc-51da49678904}</Project>
       <Name>Networking.SemanticData</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-    <Analyzer Include="..\..\..\packages\Microsoft.DependencyValidation.Analyzers.0.11.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

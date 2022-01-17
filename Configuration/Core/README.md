@@ -1,3 +1,3 @@
 ﻿# Core definitions
 
-Core definitions
+Configuration core definitions

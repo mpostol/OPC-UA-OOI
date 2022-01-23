@@ -1,70 +1,18 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Networking.ProcessObserverProducer.md</title>
-  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="refresh"
+    content="0;URL=https://mpostol.github.io/.github/Projects/Networking.ProcessObserverProducer.html" />
+  <title>Redirect to Machine to Sensors (M2S) connectivity based on Process-Observer</title>
 </head>
 
-<body class="stackedit">
-  <div class="stackedit__left">
-    <div class="stackedit__toc">
-      
-<ul>
-<li><a href="#machine-to-sensors-m2s-connectivity-based-on-process-observer">Machine to Sensors (M2S) connectivity based on Process-Observer</a>
-<ul>
-<li><a href="#back-to-github">Back to GitHub</a></li>
-<li><a href="#keywords">Keywords</a></li>
-<li><a href="#subject">Subject</a></li>
-<li><a href="#goal">Goal</a></li>
-<li><a href="#scope">Scope</a></li>
-<li><a href="#related-work">Related work</a></li>
-<li><a href="#see-also">See also</a></li>
-</ul>
-</li>
-</ul>
-
-    </div>
-  </div>
-  <div class="stackedit__right">
-    <div class="stackedit__html">
-      <h1 id="machine-to-sensors-m2s-connectivity-based-on-process-observer">Machine to Sensors (M2S) connectivity based on Process-Observer</h1>
-<h2 id="back-to-github"><a href="https://github.com/mpostol/OPC-UA-OOI">Back to GitHub</a></h2>
-<h2 id="keywords">Keywords</h2>
-<p>OPCUA, Process-Observer, PubSub, Producer, Reactive communication, ReactiveX</p>
-<h2 id="subject">Subject</h2>
-<p>According to the <a href="https://commsvr.gitbook.io/ooi/reactive-communication/semanticdata">Reactive Networking of Semantic-Data Library</a> architecture, the bindings between the local repository <code>DataRepository</code> (i.e. a real-time process replica) and the message content items are provided by the <code>IBinding</code> interface and its basic implementation <code>Binding</code> class. This class is responsible to decode the data from the format used to construct the message to the syntax required by the local type. It is assumed that <code>IBinding</code> abstraction can be applied to provide interconnection with a vast variety of data sources and destinations, including plant floor devices.</p>
-<p>Process-Observer is an archetype that allows creation consistent, homogeneous real-time representation of the underlying process. This representation is a kind of a process state and behavior replica, which exposes real-time process data to the network using standardized interfaces like OPC Classic, OPC Unified Architecture, OPC PubSub, AMQP, MQTT, etc. In other words, it supports Machine to Sensors Connectivity (M2S) paradigms, i.e. it allows an open, uniform, secure and standards-based communication solution between sensors, actuators, controllers and the upper layer applications.</p>
-<p>Process-Observer has been implemented and published as the <a href="https://github.com/mpostol/ProcessObserver">Open-Source Software</a> (#OSS). This implementation of the Process-Observer was deployed by <a href="https://ieeexplore.ieee.org/abstract/document/7321562">CAS in many highly distributed and demanding applications</a> in the production environment. Therefore it is a good candidate to be used as the data source for reactive communications implemented in this library according to the OPC UA PubSub.</p>
-<h2 id="goal">Goal</h2>
-<p>The main goal of this project is to prove that the implementation of the <code>Producer</code> role fetching data from <code>Process-Observer</code> will make the OPC UA Machine to Sensors Connectivity (M2S) possible. Converging results of this project and <a href="https://github.com/mpostol/OPC-UA-OOI/projects/15">Networking.Gateway2Azure</a> will make Cloud to Sensors (C2S) connectivity possible.</p>
-<h2 id="scope">Scope</h2>
-<ul>
-<li>create a VS project encapsulating the implementation of the <code>Process-Observer</code> connectivity</li>
-<li>define an interface representing <code>Process-Observer</code> API</li>
-<li>implement the <code>Producer</code> against this interface to provide <code>Process-Observer</code> connectivity</li>
-<li>adopt the implementation of the <code>Process-Observer</code> to be compliant with this project, e.g. harmonize target framework</li>
-<li>publish the <code>Process-Observer</code> as the NuGet package</li>
-<li>consider using <a href="http://reactivex.io/">The Reactive Extensions for .NET ( ReactiveX)</a> to push data from <code>Process-Observer</code> to the <code>Producer</code> instance using the observer pattern</li>
-<li>harmonize the configuration of both frameworks</li>
-<li>update existing documentation and add a relevant description to the project eBook</li>
-</ul>
-<h2 id="related-work">Related work</h2>
-<ul>
-<li><a href="https://commsvr-com.github.io/Documentation/CommServer">Process Observer - Main Technology Features</a></li>
-<li><a href="https://github.com/mpostol/ProcessObserver">Process Observer GitHub Repository</a></li>
-</ul>
-<h2 id="see-also">See also</h2>
-<ul>
-<li>Mariusz Postol, <a href="https://ieeexplore.ieee.org/abstract/document/7321562">Object Oriented Internet</a>, <a href="https://fedcsis.org/2015/inetsapp">3rd International Conference on Innovative Network Systems and Applications</a>, 2015, <a href="https://ieeexplore.ieee.org/abstract/document/7321562">IEEE Xplore Digital Library</a> <a href="https://fedcsis.org/proceedings/2015/pliks/160.pdf"><img src="https://img.shields.io/badge/DOI-10.15439%2F2015F160-blue" alt="DOI"></a></li>
-<li><a href="https://github.com/mpostol/OPC-UA-OOI/projects/15">Object-Oriented Internet - reactive visualization of asynchronous data using AZURE services (Networking.Gateway2Azure)</a></li>
-<li><a href="http://reactivex.io/">The Reactive Extensions for .NET ( ReactiveX)</a></li>
-</ul>
-
-    </div>
-  </div>
+<body>
+  <h1>Re-directing...</h1>
+  <p>You are being re-directed, if nothing happens, please <a
+      href="https://mpostol.github.io/.github/Projects/Networking.ProcessObserverProducer.html"> follow this link</a>
+  </p>
 </body>
 
 </html>

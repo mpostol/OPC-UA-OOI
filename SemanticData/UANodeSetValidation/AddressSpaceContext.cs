@@ -262,7 +262,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     //methods
 
-    // TODO Define independent Address Space API #645
+    //TODO Define independent Address Space API #645
     private Uri ImportNodeSet(UANodeSet model)
     {
       Uri defaultModelUri = model.ParseUAModelContext(m_NamespaceTable, m_TraceEvent.WriteTraceMessage);

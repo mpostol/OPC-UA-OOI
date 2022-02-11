@@ -23,6 +23,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="model">The model to be imported.</param>
     /// <returns>Return a default <see cref="Uri"/> for the model defined in <see cref="UANodeSet"/>.</returns>
+    //TODO Define independent Address Space API #645 - remove dependency on UANodeSet
     Uri ImportUANodeSet(UANodeSet model);
 
     /// <summary>

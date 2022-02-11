@@ -24,6 +24,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// <summary>
   /// Class AddressSpaceContext - responsible to manage all nodes in the OPC UA Address Space.
   /// </summary>
+  // TODO Define independent Address Space API #645
   internal class AddressSpaceContext : IAddressSpaceContext, IAddressSpaceBuildContext
   {
     #region constructor
@@ -261,6 +262,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     //methods
 
+    // TODO Define independent Address Space API #645
     private Uri ImportNodeSet(UANodeSet model)
     {
       Uri defaultModelUri = model.ParseUAModelContext(m_NamespaceTable, m_TraceEvent.WriteTraceMessage);

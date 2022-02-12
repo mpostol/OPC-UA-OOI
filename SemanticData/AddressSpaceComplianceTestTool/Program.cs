@@ -1,6 +1,6 @@
 ﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
@@ -50,6 +50,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     {
       try
       {
+        //TODO Integrate with the UA-ModelCompiler #648 https://github.com/commandlineparser/commandline/wiki/Verbs
         await Task.Run(() => args.Parse<Options>(Do, HandleErrors));
       }
       catch (Exception ex)
@@ -103,7 +104,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
 
     private string AssemblyHeader = String.Empty;
     private ITraceSource TraceSource = new TraceSourceBase("AddressSpacePrototyping");
-    private const string Copyright = "Copyright(c) 2021 Mariusz Postol";
+    private const string Copyright = "Copyright(c) 2022 Mariusz Postol";
     private bool Running = true;
 
     private void Execute(string[] args)
@@ -123,7 +124,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
         {
           await Task.Delay(1000);
           Console.Write("\r");
-          if (counter % 2 == 0 )
+          if (counter % 2 == 0)
             Console.Write(@"\");
           else
             Console.Write("/");
@@ -150,8 +151,14 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
     {
       PrintLogo(options.NoLogo);
       TraceSource.TraceData(TraceEventType.Verbose, 6710129, "Creating Address Space populated using Standard Model. It will take a while ...");
-      IAddressSpaceContext addressSpace = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
-      Do(options, addressSpace);
+      //TODO Integrate with the UA-ModelCompiler #648
+      if (true)
+      {
+        IAddressSpaceContext addressSpace = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
+        Do(options, addressSpace);
+      }
+      else
+        ;
     }
 
     private void PrintLogo(bool nologo)

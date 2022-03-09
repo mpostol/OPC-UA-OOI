@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   /// </summary>
   internal class UAReferenceContext
   {
-
     #region constructor
 
     internal UAReferenceContext(Reference reference, IAddressSpaceBuildContext addressSpaceContext, IUANodeContext parentNode)
@@ -49,7 +48,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the kind of the reference.
     /// </summary>
     /// <value>The kind of the reference.</value>
-    //TODO NetworkIdentifier is missing in generated Model Design for DI model #51
+    //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
     internal ReferenceKindEnum ReferenceKind
     {
       get
@@ -87,7 +86,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets a value indicating whether the reference has been derived form <see cref="ReferenceKindEnum.HasProperty"/> or <see cref="ReferenceKindEnum.HasComponent"/>.
     /// </summary>
     /// <value><c>true</c> if it is child reference; otherwise, <c>false</c>.</value>
-    //TODO NetworkIdentifier is missing in generated Model Design for DI model #51
+    //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
     internal bool ChildConnector => (ReferenceKind == ReferenceKindEnum.HasProperty) || (ReferenceKind == ReferenceKindEnum.HasComponent);
 
     #endregion semantics

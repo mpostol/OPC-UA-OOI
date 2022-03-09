@@ -1,6 +1,6 @@
 ﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
@@ -217,7 +217,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="node">The root node of the requested children.</param>
     /// <returns>Return an instance of <see cref="IEnumerable{IUANodeBase}" /> capturing all children of the selected node.</returns>
-    //TODO NetworkIdentifier is missing in generated Model Design for DI model #51
+    //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
     public IEnumerable<IUANodeBase> GetChildren(IUANodeBase node)
     {
       return m_References.Values.Where<UAReferenceContext>(x => Object.ReferenceEquals(x.SourceNode, node)).

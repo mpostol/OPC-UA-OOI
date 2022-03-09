@@ -1,6 +1,6 @@
 ﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
@@ -155,7 +155,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         switch (_rfx.ReferenceKind)
         {
           case ReferenceKindEnum.Custom:
-            //TODO NetworkIdentifier is missing in generated Model Design for DI model #51
+            //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
             XmlQualifiedName _ReferenceType = _rfx.GetReferenceTypeName();
             if (_ReferenceType == XmlQualifiedName.Empty)
             {
@@ -191,6 +191,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             IsProperty = _rfx.TargetNode.IsPropertyVariableType;
             break;
           case ReferenceKindEnum.HierarchicalReferences:
+            //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
             throw new ArgumentOutOfRangeException($"the {nameof(ReferenceKindEnum.HierarchicalReferences)} is not handled");
         }
       }
@@ -275,7 +276,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <returns>Dictionary&lt;System.String, IUANodeBase&gt;.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Circular loop in inheritance chain</exception>
-    //TODO NetworkIdentifier is missing in generated Model Design for DI model #51
+    //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
     public Dictionary<string, IUANodeBase> GetDerivedInstances()
     {
       if (m_InGetDerivedInstances)

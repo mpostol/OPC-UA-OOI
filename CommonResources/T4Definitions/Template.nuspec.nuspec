@@ -12,7 +12,7 @@
     <icon>logo.png</icon>
     <description>description must be added</description>
     <summary>summary must be added.</summary>    
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
     <tags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</tags>
     <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI" />
     <dependencies>
@@ -21,7 +21,7 @@
     <releaseNotes>
       Add releaseNotes if needed.
     </releaseNotes>
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
   </metadata>
   <files>
     <file src="logo.png" target=""/>

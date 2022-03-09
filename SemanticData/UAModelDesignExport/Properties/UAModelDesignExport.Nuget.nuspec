@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>UAOOI.SemanticData.UAModelDesignExport</id>
-    <version>6.4.6-India</version>
+    <version>6.5.0-Kilo</version>
     <title>Semantic-Data UAModelDesign Export</title>
     <authors>Mariusz Postol</authors>
     <owners>Mariusz Postol</owners>
@@ -16,11 +16,11 @@
     <summary>
       Object-Oriented Internet Semantic-Data UAModelDesign Export Library.
     </summary>    
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
     <tags>Object Oriented Internet, OOI, OPC UA, Information Model, IoT, M2M, DOA</tags>
     <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI" />
     <releaseNotes>Updated against OPC UA Rel 1.04</releaseNotes>
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
     <dependencies>
       <group targetFramework=".NETStandard2.0">
         <dependency id="UAOOI.Common.Infrastructure" version="6.3.3-Golf" exclude="Build,Analyzers" />

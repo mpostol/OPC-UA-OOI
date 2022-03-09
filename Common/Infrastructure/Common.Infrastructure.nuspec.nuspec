@@ -20,14 +20,14 @@
     <summary>
       The core functionality of SemanticData Reactive Networking library based on OPC UA Part 14 Pub/Sub.
     </summary>
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
     <tags>Object Oriented Internet, OPC UA, PubSub, Information Model, IoT, M2M, DOA,</tags>
     <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI" />
     <dependencies>
       <group targetFramework=".NETStandard2.0" />
     </dependencies>
     <releaseNotes>Maintenance release - unimportant changes.</releaseNotes>
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
   </metadata>
   <files>
     <file src="..\..\CommonResources\Media\Logo64.PNG" target=""/>

@@ -14,15 +14,15 @@
     <Description>This project supports validation of the OPC UA Address Space captured in the xml file against the OPC UA Specyfication. It is assumed that the Address Space is represented as a XML file compliant with the UANodeSet schema.
 This library is dedicated to create a plug-in aimed at importing models based on the OPC UA Information Model.
 It is part of the project supporting OPC UA Object Oriented Internet paradigm.</Description>
-    <Copyright>Copyright (C) 2019 Mariusz Postol LODZ POLAND</Copyright>
+    <Copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://commsvr.gitbook.io/ooi/readme</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mpostol/OPC-UA-OOI</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</PackageTags>
-    <AssemblyVersion>6.4.6</AssemblyVersion>
+    <AssemblyVersion>6.5.0</AssemblyVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <FileVersion>6.4.5</FileVersion>
+    <FileVersion>6.5.0</FileVersion>
     <Company>commsvr.com</Company>
     <PackageIconUrl>https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true</PackageIconUrl>
   </PropertyGroup>

@@ -17,14 +17,14 @@
     <summary>
 		The library contains a shared interfaces for server configuration which OPC UA applications can reference.
 	</summary>
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
     <tags>Object Oriented Internet, OPC UA, PubSub, Information Model, IoT, M2M, DOA,</tags>
     <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI" />
     <dependencies>
       <group targetFramework=".NETStandard2.0" />
     </dependencies>
     <releaseNotes>VS2022 compatibility</releaseNotes>
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
   </metadata>
   <files>
     <file src="..\..\CommonResources\Media\Logo64.PNG" target=""/>

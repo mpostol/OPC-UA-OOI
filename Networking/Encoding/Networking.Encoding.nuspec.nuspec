@@ -13,7 +13,7 @@
     <description>This part provides implementation of the IEncodingFactory to lookup a dictionary containing value converters. The interface is used for late binding to inject dependency on the external library. This library provides IEncodingFactory functionality limited to encoding simple data types only for the testing purpose only.</description>
     <releaseNotes>Main purpose of this release is to support implementation of the interoperability tests defined by the OPC Foundation. In the production environment, you may simply replace this library by a custom one providing unlimited encoding functionality.</releaseNotes>
     <summary>IEncodingFactory implementation.</summary>    
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
     <tags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</tags>
     <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI/tree/master/Networking/Encoding#encoding-library" />
     <dependencies>
@@ -23,7 +23,7 @@
         <dependency id="UAOOI.Networking.SemanticData" version="4.0.2" exclude="Build,Analyzers" />
       </group>
     </dependencies>
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
   </metadata>
   <files>
     <file src="logo.png" target=""/>

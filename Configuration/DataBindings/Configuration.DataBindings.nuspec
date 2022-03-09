@@ -12,16 +12,16 @@
     <icon>Logo64.PNG</icon>
     <description>
       OPC UA Object Oriented Internet (UAOOI) DataBindings library is dedicated to create a plug-in aimed at editing of the configuration of any application based on OPC UA Information Model.
-	  It allows also to add data binding to the configuration. It is part of the project supporting OPC UA Object Oriented Internet paradigm.
-	</description>
+      It allows also to add data binding to the configuration. It is part of the project supporting OPC UA Object Oriented Internet paradigm.
+    </description>
     <summary>
        DataBindings library is dedicated to create a plug-in aimed at editing of the configuration of any application based on OPC UA Information Model
 	</summary>
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
     <tags>Object Oriented Internet, OPC UA, PubSub, Information Model, IoT, M2M, DOA,</tags>
     <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI" />
     <releaseNotes>VS 2022 compatibility.</releaseNotes>
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
 	<dependencies>
 	  <group targetFramework=".NETStandard2.0">
 		<dependency id="CommonServiceLocator" version="2.0.6" exclude="Build,Analyzers" />

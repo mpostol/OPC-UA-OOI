@@ -12,7 +12,7 @@
     <icon>Logo64.PNG</icon>
     <description>OOI Reactive Networking: UDP IMessageHandlerFactory Implementation</description>
     <summary>UDP IMessageHandlerFactory Implementation.</summary>    
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
     <tags>Object Oriented Internet, OPC UA, Information Model, IoT, M2M, DOA,</tags>
     <repository type="GitHub" url="https://github.com/mpostol/OPC-UA-OOI" />
     <dependencies>
@@ -22,7 +22,7 @@
       </group>
     </dependencies>
     <releaseNotes>Maintenance release - unimportant changes.</releaseNotes>
-    <copyright>Copyright (C) 2021 Mariusz Postol LODZ POLAND</copyright>
+    <copyright>Copyright (C) 2022 Mariusz Postol LODZ POLAND</copyright>
   </metadata>
   <files>
     <file src="Logo64.PNG" target=""/>

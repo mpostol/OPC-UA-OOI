@@ -190,9 +190,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case ReferenceKindEnum.HasTypeDefinition: //TODO Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
             IsProperty = _rfx.TargetNode.IsPropertyVariableType;
             break;
+
           case ReferenceKindEnum.HierarchicalReferences:
             //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
-            throw new ArgumentOutOfRangeException($"the {nameof(ReferenceKindEnum.HierarchicalReferences)} is not handled");
+            XmlQualifiedName referenceType = _rfx.GetReferenceTypeName();
+            _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DiagnosticInformation, $"Id = D290E7B4-F77C-4EF0-883B-844F66471DB6; Reference {nameof(ReferenceKindEnum.HierarchicalReferences)} not supported. Removed the graph at {referenceType.ToString()} of nodes from the model"));
+            break;
         }
       }
       Dictionary<string, IUANodeBase> _derivedChildren = m_BaseTypeNode == null ? new Dictionary<string, IUANodeBase>() : m_BaseTypeNode.GetDerivedInstances();

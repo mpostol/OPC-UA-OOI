@@ -95,6 +95,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case ReferenceKindEnum.Custom:
           case ReferenceKindEnum.HasComponent:
           case ReferenceKindEnum.HasProperty:
+          //NetworkIdentifier is missing in generated Model Design for DI model #629
+          case ReferenceKindEnum.HierarchicalReferences:
             break;
 
           case ReferenceKindEnum.HasModellingRule:
@@ -194,7 +196,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case ReferenceKindEnum.HierarchicalReferences:
             //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
             XmlQualifiedName referenceType = _rfx.GetReferenceTypeName();
-            string message = 
+            string message =
               $"Id = D290E7B4-F77C-4EF0-883B-844F66471DB6; Reference {nameof(ReferenceKindEnum.HierarchicalReferences)} is not supported. Removed the graph at {referenceType.ToString()} of nodes from the model";
             _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DiagnosticInformation, message));
             break;
@@ -285,6 +287,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public Dictionary<string, IUANodeBase> GetDerivedInstances()
     {
       if (m_InGetDerivedInstances)
+        //Improve GetDerivedInstances to log a message instead of throwing exception #651
         throw new ArgumentOutOfRangeException($"Circular loop in {nameof(GetDerivedInstances)}"); //TODO replace by the message - it is just model error.
       try
       {

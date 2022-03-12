@@ -188,27 +188,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void CalculateNodeReferencesNullFactoryTest()
-    {
-      Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
-      Mock<IValidator> _validatorMoc = new Mock<IValidator>();
-      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
-      IUANodeBase _first = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object, x => _traceBuffer.Add(x));
-      _first.CalculateNodeReferences(null, _validatorMoc.Object);
-      Assert.AreEqual<int>(0, _traceBuffer.Count);
-    }
-
-    [TestMethod]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void CalculateNodeReferencesValidatorIsNullTest()
+    public void CalculateNodeReferencesNullArguments()
     {
       Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
       Mock<INodeFactory> _mockNodeFactory = new Mock<INodeFactory>();
+      Mock<IValidator> _validatorMoc = new Mock<IValidator>();
       List<TraceMessage> _traceBuffer = new List<TraceMessage>();
       IUANodeBase _first = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object, x => _traceBuffer.Add(x));
-      _first.CalculateNodeReferences(_mockNodeFactory.Object, null);
-      Assert.AreEqual<int>(0, _traceBuffer.Count);
+      Assert.ThrowsException<ArgumentNullException>(() => _first.CalculateNodeReferences(null, _validatorMoc.Object));
+      Assert.ThrowsException<ArgumentNullException>(() => _first.CalculateNodeReferences(_mockNodeFactory.Object, null));
     }
 
     [TestMethod]

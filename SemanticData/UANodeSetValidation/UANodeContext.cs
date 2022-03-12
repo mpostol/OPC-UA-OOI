@@ -194,7 +194,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case ReferenceKindEnum.HierarchicalReferences:
             //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
             XmlQualifiedName referenceType = _rfx.GetReferenceTypeName();
-            _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DiagnosticInformation, $"Id = D290E7B4-F77C-4EF0-883B-844F66471DB6; Reference {nameof(ReferenceKindEnum.HierarchicalReferences)} not supported. Removed the graph at {referenceType.ToString()} of nodes from the model"));
+            string message = 
+              $"Id = D290E7B4-F77C-4EF0-883B-844F66471DB6; Reference {nameof(ReferenceKindEnum.HierarchicalReferences)} is not supported. Removed the graph at {referenceType.ToString()} of nodes from the model";
+            _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DiagnosticInformation, message));
             break;
         }
       }

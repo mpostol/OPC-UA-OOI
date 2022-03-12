@@ -189,6 +189,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _ret = ReferenceKindEnum.HasComponent;
       else if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HasSubtype).Any<IUANodeContext>())
         _ret = ReferenceKindEnum.HasSubtype;
+      //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
       else if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HierarchicalReferences).Any<IUANodeContext>())
         _ret = ReferenceKindEnum.HierarchicalReferences;
       else if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HasTypeDefinition).Any<IUANodeContext>())

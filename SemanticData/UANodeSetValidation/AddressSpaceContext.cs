@@ -96,9 +96,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //TODO IAddressSpaceContext.ImportUANodeSet(System.IO.FileInfo) returned result must be tested. #626
     Uri IAddressSpaceContext.ImportUANodeSet(FileInfo document)
     {
-      m_TraceEvent.TraceData(TraceEventType.Information, 190380256, $"Entering {nameof(ImportNodeSet)} and starting model import form file {document.Name}");
       if (document == null)
         throw new ArgumentNullException("model", "the model cannot be null");
+      m_TraceEvent.TraceData(TraceEventType.Information, 190380256, $"Entering {nameof(IAddressSpaceContext.ImportUANodeSet)} and starting model import form file {document.Name}");
       if (!document.Exists)
         throw new FileNotFoundException("The imported file does not exist", document.FullName);
       UANodeSet _nodeSet = UANodeSet.ReadModelFile(document);

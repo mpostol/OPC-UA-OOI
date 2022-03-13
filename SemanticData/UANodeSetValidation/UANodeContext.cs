@@ -173,6 +173,29 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             _or.IsInverse = !_rfx.IsForward;
             _or.ReferenceType = _ReferenceType;
             _or.TargetId = _rfx.BrowsePath();
+            //switch (_rfx.TargetNode.UANode.NodeClassEnum)
+            switch (_rfx.TargetNode.UANode.NodeClassEnum)
+            {
+              case NodeClassEnum.UADataType:
+              case NodeClassEnum.UAObjectType:
+              case NodeClassEnum.UAReferenceType:
+              case NodeClassEnum.UAVariableType:
+                break;
+              case NodeClassEnum.UAMethod:
+                //validator..ValidateExportNode(_rc.TargetNode, nodeFactory, _rc);
+                break;
+              case NodeClassEnum.UAObject:
+                break;
+              case NodeClassEnum.UAVariable:
+                break;
+              case NodeClassEnum.UAView:
+                break;
+              case NodeClassEnum.Unknown:
+
+                break;
+              default:
+                break;
+            }
             break;
 
           case ReferenceKindEnum.HasComponent:

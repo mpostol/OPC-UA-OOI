@@ -202,17 +202,46 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestMethod]
     public void CalculateNodeReferencesNullUANodeTest()
     {
-      Mock<IAddressSpaceBuildContext> _addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
-      _addressSpaceMock.Setup(x => x.GetMyReferences(It.IsAny<IUANodeBase>())).Returns(new List<UAReferenceContext>());
+      Reference reference = new Reference() { IsForward = true, ReferenceType = ReferenceTypeIds.Organizes.ToString(), Value = ObjectTypeIds.BaseObjectType.ToString() };
+      reference.RecalculateNodeIds(x => NodeId.Parse(x));
+
+      Mock<IUANodeContext> typeMock = new Mock<IUANodeContext>();
+      typeMock.Setup(x => x.NodeIdContext).Returns(ReferenceTypeIds.Organizes);
+      Mock<IUANodeContext> targetMock = new Mock<IUANodeContext>();
+      targetMock.Setup(x => x.NodeIdContext).Returns(new NodeId("ns=1;i=12"));
+      targetMock.Setup(x => x.UANode).Returns(
+        new UAObject()
+        {
+          NodeId = "ns=1;i=6599",
+          BrowseName = "1:<NetworkIdentifier>",
+          SymbolicName = "NetworkIdentifier",
+          ParentNodeId = "ns=1;i=6308",
+          DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "<NetworkIdentifier>" } }
+        });
+
+      Mock<IAddressSpaceBuildContext> addressSpaceMock = new Mock<IAddressSpaceBuildContext>();
+      addressSpaceMock.Setup(x => x.GetOrCreateNodeContext(It.IsAny<NodeId>(), It.IsAny<Func<NodeId, IUANodeContext>>())).Returns(typeMock.Object);
+      addressSpaceMock.Setup(x => x.GetOrCreateNodeContext(It.Is<NodeId>(z => z == reference.ValueNodeId), It.IsAny<Func<NodeId, IUANodeContext>>())).Returns(targetMock.Object);
+
+      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
+      UANodeContext node2Test = new UANodeContext(NodeId.Parse("ns=1;i=11"), addressSpaceMock.Object, x => _traceBuffer.Add(x));
+      List<UAReferenceContext> listOfReferences = new List<UAReferenceContext>() { new UAReferenceContext(reference, addressSpaceMock.Object, node2Test) };
+      addressSpaceMock.Setup(x => x.GetMyReferences(It.IsAny<IUANodeBase>())).Returns(listOfReferences);
+      addressSpaceMock.Setup(x => x.ExportBrowseName(It.IsAny<NodeId>(), It.IsAny<NodeId>())).Returns(new XmlQualifiedName("name", "ns"));
+
+      Mock<IReferenceFactory> referenceFactoryMock = new Mock<IReferenceFactory>();
       Mock<INodeFactory> _mockNodeFactory = new Mock<INodeFactory>();
+      _mockNodeFactory.Setup(x => x.NewReference()).Returns(referenceFactoryMock.Object);
       Mock<IValidator> _validatorMoc = new Mock<IValidator>();
       _validatorMoc.Setup(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()));
-      List<TraceMessage> _traceBuffer = new List<TraceMessage>();
-      IUANodeBase _node = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object, x => _traceBuffer.Add(x));
-      _node.CalculateNodeReferences(_mockNodeFactory.Object, _validatorMoc.Object);
-      _addressSpaceMock.Verify(x => x.GetMyReferences(It.IsAny<IUANodeBase>()), Times.Once);
+
+      //testing
+      ((IUANodeBase)node2Test).CalculateNodeReferences(_mockNodeFactory.Object, _validatorMoc.Object);
+      //validation
+      addressSpaceMock.Verify(x => x.GetMyReferences(It.IsAny<IUANodeBase>()), Times.Once);
+      addressSpaceMock.Verify(x => x.ExportBrowseName(It.IsAny<NodeId>(), It.IsAny<NodeId>()), Times.Once);
       _validatorMoc.Verify(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()), Times.Never);
-      Assert.AreEqual<int>(0, _traceBuffer.Count);
+      Assert.AreEqual<int>(0, _traceBuffer.Count, _traceBuffer.Count == 0 ? "" : _traceBuffer[0].Message);
     }
 
     [TestMethod]

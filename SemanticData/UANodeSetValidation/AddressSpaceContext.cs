@@ -312,16 +312,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return _ret;
     }
 
+    //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
     private void ValidateAndExportModel(int nameSpaceIndex)
     {
       IValidator validator = new Validator(this, m_TraceEvent);
-      IEnumerable<IUANodeContext> stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
-      IEnumerable<IUANodeContext> undefindNodes = from node in stubs
-                                                  where Object.ReferenceEquals(node.UANode, null)
-                                                  select node;
-      foreach (IUANodeContext item in undefindNodes)
+      IEnumerable<IUANodeBase> stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
+      IEnumerable<IUANodeBase> undefindNodes = from node in stubs
+                                               where Object.ReferenceEquals(node.UANode, null)
+                                               select node;
+      foreach (IUANodeBase item in undefindNodes)
         m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NodeCannotBeNull, $"the node {item.ToString()} is not defined in the UANodeSet model"));
-      List<IUANodeContext> nodes = (from _node in stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
+      List<IUANodeBase> nodes = (from _node in stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
       m_TraceEvent.TraceData(TraceEventType.Verbose, 938023414, $"Selected {nodes.Count} types to be validated.");
       IUANodeBase _objects = TryGetUANodeContext(UAInformationModel.ObjectIds.ObjectsFolder);
       if (_objects is null)
@@ -338,18 +339,24 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         string _version = modelTableEntry.Version;
         InformationModelFactory.CreateNamespace(modelTableEntry.ModelUri.ToString(), _publicationDate, _version);
       }
-      foreach (IUANodeBase item in nodes)
+      //NetworkIdentifier is missing in generated Model Design for DI model #629
+      do
       {
-        try
+        NodesCollection embededNodes = new NodesCollection();
+        foreach (IUANodeBase item in nodes)
         {
-          validator.ValidateExportNode(item, InformationModelFactory);
+          try
+          {
+            validator.ValidateExportNode(item, InformationModelFactory, y => { if (y.NodeIdContext.NamespaceIndex == nameSpaceIndex) embededNodes.AddOrReplace(y, false); });
+          }
+          catch (Exception ex)
+          {
+            string msg = string.Format("Error caught while processing the node {0}. The message: {1} at {2}.", item.UANode.NodeId, ex.Message, ex.StackTrace);
+            m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, msg));
+          }
         }
-        catch (Exception ex)
-        {
-          string msg = string.Format("Error caught while processing the node {0}. The message: {1} at {2}.", item.UANode.NodeId, ex.Message, ex.StackTrace);
-          m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, msg));
-        }
-      }
+        nodes = embededNodes.ToList();
+      } while (nodes.Count > 0);
       string message = null;
       if (m_TraceEvent.Errors == 0)
       {

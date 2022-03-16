@@ -1,6 +1,6 @@
 ﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
@@ -31,16 +31,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_buildErrorsHandling = traceBuildErrorsHandling;
     }
 
-    #region internal API
+    #region IValidator
 
     /// <summary>
     /// Validates <paramref name="nodeContext" /> and exports it using an object of <see cref="IModelFactory" />  type.
     /// </summary>
     /// <param name="nodeContext">The node context to be validated and exported.</param>
     /// <param name="exportFactory">A model export factory.</param>
-    public void ValidateExportNode(IUANodeBase nodeContext, INodeContainer exportFactory)
+    /// <param name="validateExportNode2Model">It creates the node at the top level of the model. Called if the node has reference to another node that cannot be defined as a child.</param>
+    public void ValidateExportNode(IUANodeBase nodeContext, INodeContainer exportFactory, Action<IUANodeContext> validateExportNode2Model)
     {
-      ValidateExportNode(nodeContext, exportFactory, null);
+      ValidateExportNode(nodeContext, exportFactory, validateExportNode2Model, null);
     }
 
     /// <summary>
@@ -49,7 +50,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="nodeContext">The node context to be validated and exported.</param>
     /// <param name="exportFactory">A model export factory.</param>
     /// <param name="parentReference">The reference to parent node.</param>
-    public void ValidateExportNode(IUANodeBase nodeContext, INodeContainer exportFactory, UAReferenceContext parentReference)
+    /// <param name="validateExportNode2Model">It creates the node at the top level of the model. Called if the node has reference to another node that cannot be defined as a child.</param>
+    public void ValidateExportNode(IUANodeBase nodeContext, INodeContainer exportFactory, Action<IUANodeContext> validateExportNode2Model, UAReferenceContext parentReference)
     {
       Debug.Assert(nodeContext != null, "Validator.ValidateExportNode the argument nodeContext is null.");
       //TODO Handle HasComponent ReferenceType errors. #42
@@ -70,38 +72,38 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         switch (nodeContext.UANode.NodeClassEnum)
         {
           case NodeClassEnum.UADataType:
-            CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType);
+            CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType, validateExportNode2Model);
             break;
 
           case NodeClassEnum.UAMethod:
-            CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.AddNodeFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference), UpdateInstance);
+            CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.AddNodeFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference), UpdateInstance, validateExportNode2Model);
             break;
 
           case NodeClassEnum.UAObject:
-            CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.AddNodeFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y), UpdateInstance);
+            CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.AddNodeFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y), UpdateInstance, validateExportNode2Model);
             break;
 
           case NodeClassEnum.UAObjectType:
-            CreateNode<IObjectTypeFactory, UAObjectType>(exportFactory.AddNodeFactory<IObjectTypeFactory>, nodeContext, Update, UpdateType);
+            CreateNode<IObjectTypeFactory, UAObjectType>(exportFactory.AddNodeFactory<IObjectTypeFactory>, nodeContext, Update, UpdateType, validateExportNode2Model);
             break;
 
           case NodeClassEnum.UAReferenceType:
-            CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.AddNodeFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType);
+            CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.AddNodeFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType, validateExportNode2Model);
             break;
 
           case NodeClassEnum.UAVariable:
             if (parentReference.ReferenceKind == ReferenceKindEnum.HasProperty)
-              CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance);
+              CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance, validateExportNode2Model);
             else
-              CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance);
+              CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance, validateExportNode2Model);
             break;
 
           case NodeClassEnum.UAVariableType:
-            CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.AddNodeFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType);
+            CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.AddNodeFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType, validateExportNode2Model);
             break;
 
           case NodeClassEnum.UAView:
-            CreateNode<IViewInstanceFactory, UAView>(exportFactory.AddNodeFactory<IViewInstanceFactory>, nodeContext, (x, y) => Update(x, y), UpdateInstance);
+            CreateNode<IViewInstanceFactory, UAView>(exportFactory.AddNodeFactory<IViewInstanceFactory>, nodeContext, (x, y) => Update(x, y), UpdateInstance, validateExportNode2Model);
             break;
 
           case NodeClassEnum.Unknown:
@@ -110,7 +112,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
 
-    #endregion internal API
+    #endregion IValidator
 
     #region private
 
@@ -245,13 +247,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Func<FactoryType> createNode,
         IUANodeBase nodeContext,
         Action<FactoryType, NodeSetType> updateNode,
-        Action<FactoryType, NodeSetType, IUANodeBase> updateBase
+        Action<FactoryType, NodeSetType, IUANodeBase> updateBase,
+        Action<IUANodeContext> validateExportNode2Model
       )
       where FactoryType : INodeFactory
       where NodeSetType : UANode
     {
       FactoryType _nodeFactory = createNode();
-      nodeContext.CalculateNodeReferences(_nodeFactory, this);
+      nodeContext.CalculateNodeReferences(_nodeFactory, this, validateExportNode2Model);
       NodeSetType _nodeSet = (NodeSetType)nodeContext.UANode;
       XmlQualifiedName _browseName = nodeContext.ExportNodeBrowseName();
       string _symbolicName;

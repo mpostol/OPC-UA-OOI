@@ -47,6 +47,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Builds the symbolic identifier.
     /// </summary>
     /// <param name="path">The browse path.</param>
+    //NetworkIdentifier is missing in generated Model Design for DI model #629
     public void BuildSymbolicId(List<string> path)
     {
       if (this.UANode == null)
@@ -95,8 +96,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case ReferenceKindEnum.Custom:
           case ReferenceKindEnum.HasComponent:
           case ReferenceKindEnum.HasProperty:
-          //NetworkIdentifier is missing in generated Model Design for DI model #629
-          case ReferenceKindEnum.HierarchicalReferences:
             break;
 
           case ReferenceKindEnum.HasModellingRule:
@@ -134,18 +133,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     /// <summary>
-    /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent models.
+    /// Calculates the node references.
     /// </summary>
-    /// <param name="nodeFactory">The node container.</param>
+    /// <param name="nodeFactory">The node factory.</param>
     /// <param name="validator">The validator.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="nodeFactory"/> must not be null.</exception>
+    /// <param name="validateExportNode2Model">It creates the node at the top level of the model. Called if the node has reference to another node that cannot be defined as a child.</param>
     //TODO Import simple NodeSet2 file is incomplete #510
-    void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, IValidator validator)
+    void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, IValidator validator, Action<IUANodeContext> validateExportNode2Model)
     {
       if (nodeFactory == null)
         throw new ArgumentNullException(nameof(nodeFactory), $"{nodeFactory} must not be null in {nameof(IUANodeBase.CalculateNodeReferences)}");
       if (validator is null)
         throw new ArgumentNullException(nameof(validator), $"{nameof(validator)} must not be null in {nameof(IUANodeBase.CalculateNodeReferences)}");
+      if (validateExportNode2Model == null)
+        throw new ArgumentNullException(nameof(validateExportNode2Model), $"The parameter must not be null in {nameof(IUANodeBase.CalculateNodeReferences)}");
       List<UAReferenceContext> _children = new List<UAReferenceContext>();
       foreach (UAReferenceContext _rfx in m_AddressSpaceContext.GetMyReferences(this))
       {
@@ -157,7 +158,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         switch (_rfx.ReferenceKind)
         {
           case ReferenceKindEnum.Custom:
-            //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
             XmlQualifiedName _ReferenceType = _rfx.GetReferenceTypeName();
             if (_ReferenceType == XmlQualifiedName.Empty)
             {
@@ -172,8 +172,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             IReferenceFactory _or = nodeFactory.NewReference();
             _or.IsInverse = !_rfx.IsForward;
             _or.ReferenceType = _ReferenceType;
+            //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
             _or.TargetId = _rfx.BrowsePath();
-            //switch (_rfx.TargetNode.UANode.NodeClassEnum)
             switch (_rfx.TargetNode.UANode.NodeClassEnum)
             {
               case NodeClassEnum.UADataType:
@@ -181,20 +181,32 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               case NodeClassEnum.UAReferenceType:
               case NodeClassEnum.UAVariableType:
                 break;
+
               case NodeClassEnum.UAMethod:
+                _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_rfx.TargetNode} from the model"));
                 //validator..ValidateExportNode(_rc.TargetNode, nodeFactory, _rc);
                 break;
-              case NodeClassEnum.UAObject:
-                break;
-              case NodeClassEnum.UAVariable:
-                break;
-              case NodeClassEnum.UAView:
-                break;
-              case NodeClassEnum.Unknown:
 
+              case NodeClassEnum.UAObject:
+                validateExportNode2Model(_rfx.TargetNode);
+                //validator.ValidateExportNode(_rfx.TargetNode, nodeFactory, _rfx);
                 break;
+
+              //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
+              case NodeClassEnum.UAVariable:
+                _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_rfx.TargetNode} from the model"));
+                break;
+
+              case NodeClassEnum.UAView:
+                _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_rfx.TargetNode} from the model"));
+                break;
+
+              case NodeClassEnum.Unknown:
+                _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_rfx.TargetNode} from the model"));
+                break;
+
               default:
-                break;
+                throw new ArgumentOutOfRangeException(nameof(_rfx.TargetNode.UANode.NodeClassEnum));
             }
             break;
 
@@ -215,14 +227,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case ReferenceKindEnum.HasTypeDefinition: //TODO Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
             IsProperty = _rfx.TargetNode.IsPropertyVariableType;
             break;
-
-          case ReferenceKindEnum.HierarchicalReferences:
-            //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
-            XmlQualifiedName referenceType = _rfx.GetReferenceTypeName();
-            string message =
-              $"Id = D290E7B4-F77C-4EF0-883B-844F66471DB6; Reference {nameof(ReferenceKindEnum.HierarchicalReferences)} is not supported. Removed the graph at {referenceType.ToString()} of nodes from the model";
-            _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DiagnosticInformation, message));
-            break;
         }
       }
       Dictionary<string, IUANodeBase> _derivedChildren = m_BaseTypeNode == null ? new Dictionary<string, IUANodeBase>() : m_BaseTypeNode.GetDerivedInstances();
@@ -239,7 +243,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             continue;
           }
           _rc.TargetNode.RemoveInheritedValues(_instanceDeclaration);
-          validator.ValidateExportNode(_rc.TargetNode, nodeFactory, _rc);
+          validator.ValidateExportNode(_rc.TargetNode, nodeFactory, validateExportNode2Model, _rc);
         }
         catch (Exception) { throw; }
       }
@@ -307,7 +311,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>Dictionary&lt;System.String, IUANodeBase&gt;.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Circular loop in inheritance chain</exception>
     //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
-    public Dictionary<string, IUANodeBase> GetDerivedInstances()
+    public NodesCollection GetDerivedInstances()
     {
       if (m_InGetDerivedInstances)
         //Improve GetDerivedInstances to log a message instead of throwing exception #651
@@ -316,15 +320,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         m_InGetDerivedInstances = true;
         IEnumerable<IUANodeBase> _myChildren = m_AddressSpaceContext.GetChildren(this);
-        Dictionary<string, IUANodeBase> _instanceDeclarations = m_BaseTypeNode == null ? new Dictionary<string, IUANodeBase>() : m_BaseTypeNode.GetDerivedInstances();
-        foreach (UANodeContext item in _myChildren)
-        {
-          string _key = item.UANode.BrowseNameQualifiedName.Name;
-          if (_instanceDeclarations.ContainsKey(_key))
-            _instanceDeclarations[_key] = item; //replace by current item that overrides the base one
-          else
-            _instanceDeclarations.Add(_key, item); //add derived item
-        }
+        NodesCollection _instanceDeclarations = m_BaseTypeNode == null ? new NodesCollection() : m_BaseTypeNode.GetDerivedInstances();
+        foreach (IUANodeBase item in _myChildren)
+          _instanceDeclarations.AddOrReplace(item, true);
         return _instanceDeclarations;
       }
       finally

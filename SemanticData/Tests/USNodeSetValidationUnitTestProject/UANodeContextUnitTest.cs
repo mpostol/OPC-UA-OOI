@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -195,8 +195,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Mock<IValidator> _validatorMoc = new Mock<IValidator>();
       List<TraceMessage> _traceBuffer = new List<TraceMessage>();
       IUANodeBase _first = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object, x => _traceBuffer.Add(x));
-      Assert.ThrowsException<ArgumentNullException>(() => _first.CalculateNodeReferences(null, _validatorMoc.Object));
-      Assert.ThrowsException<ArgumentNullException>(() => _first.CalculateNodeReferences(_mockNodeFactory.Object, null));
+      Assert.ThrowsException<ArgumentNullException>(() => _first.CalculateNodeReferences(null, _validatorMoc.Object, y => { }));
+      Assert.ThrowsException<ArgumentNullException>(() => _first.CalculateNodeReferences(_mockNodeFactory.Object, null, y => { }));
+      Assert.ThrowsException<ArgumentNullException>(() => _first.CalculateNodeReferences(_mockNodeFactory.Object, _validatorMoc.Object, null));
     }
 
     [TestMethod]
@@ -233,14 +234,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Mock<INodeFactory> _mockNodeFactory = new Mock<INodeFactory>();
       _mockNodeFactory.Setup(x => x.NewReference()).Returns(referenceFactoryMock.Object);
       Mock<IValidator> _validatorMoc = new Mock<IValidator>();
-      _validatorMoc.Setup(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()));
+      _validatorMoc.Setup(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<Action<IUANodeContext>>(), It.IsAny<UAReferenceContext>()));
 
       //testing
-      ((IUANodeBase)node2Test).CalculateNodeReferences(_mockNodeFactory.Object, _validatorMoc.Object);
+      int counter = 0;
+      ((IUANodeBase)node2Test).CalculateNodeReferences(_mockNodeFactory.Object, _validatorMoc.Object, y => counter++);
+      
       //validation
+      Assert.AreEqual<int>(1, counter);
       addressSpaceMock.Verify(x => x.GetMyReferences(It.IsAny<IUANodeBase>()), Times.Once);
       addressSpaceMock.Verify(x => x.ExportBrowseName(It.IsAny<NodeId>(), It.IsAny<NodeId>()), Times.Once);
-      _validatorMoc.Verify(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<UAReferenceContext>()), Times.Never);
+      _validatorMoc.Verify(x => x.ValidateExportNode(It.Is<IUANodeBase>(z => z == targetMock.Object), _mockNodeFactory.Object, It.IsAny<Action<IUANodeContext>>(), It.Is<UAReferenceContext>(y => y == listOfReferences[0])), Times.Never);
       Assert.AreEqual<int>(0, _traceBuffer.Count, _traceBuffer.Count == 0 ? "" : _traceBuffer[0].Message);
     }
 

@@ -217,7 +217,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="node">The root node of the requested children.</param>
     /// <returns>Return an instance of <see cref="IEnumerable{IUANodeBase}" /> capturing all children of the selected node.</returns>
-    //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
     public IEnumerable<IUANodeBase> GetChildren(IUANodeBase node)
     {
       return m_References.Values.Where<UAReferenceContext>(x => Object.ReferenceEquals(x.SourceNode, node)).
@@ -312,7 +311,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return _ret;
     }
 
-    //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
     private void ValidateAndExportModel(int nameSpaceIndex)
     {
       IValidator validator = new Validator(this, m_TraceEvent);
@@ -340,8 +338,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         InformationModelFactory.CreateNamespace(modelTableEntry.ModelUri.ToString(), _publicationDate, _version);
       }
       //NetworkIdentifier is missing in generated Model Design for DI model #629
+      int nodesCount = nodes.Count;
       do
       {
+        string doMessage = $"Do Validator.ValidateExportModel - now the model contains {nodesCount} nodes";
+        m_TraceEvent.TraceData(TraceEventType.Information, 1606585634, doMessage);
         NodesCollection embededNodes = new NodesCollection();
         foreach (IUANodeBase item in nodes)
         {
@@ -356,16 +357,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           }
         }
         nodes = embededNodes.ToList();
+        nodesCount += nodes.Count;
       } while (nodes.Count > 0);
       string message = null;
       if (m_TraceEvent.Errors == 0)
       {
-        message = $"Finishing Validator.ValidateExportModel - the model contains {nodes.Count} nodes and no errors/warnings reported";
+        message = $"Finishing Validator.ValidateExportModel - the model contains {nodesCount} nodes and no errors/warnings reported";
         m_TraceEvent.TraceData(TraceEventType.Information, 711552454, message);
       }
       else
       {
-        message = $"Finishing Validator.ValidateExportModel - the model contains {nodes.Count} nodes and {m_TraceEvent.Errors} errors reported.";
+        message = $"Finishing Validator.ValidateExportModel - the model contains {nodesCount} nodes and {m_TraceEvent.Errors} errors reported.";
         m_TraceEvent.TraceData(TraceEventType.Warning, 226242104, message);
       }
     }

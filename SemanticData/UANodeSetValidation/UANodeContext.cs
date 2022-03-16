@@ -187,14 +187,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                 //validator..ValidateExportNode(_rc.TargetNode, nodeFactory, _rc);
                 break;
 
+              //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
               case NodeClassEnum.UAObject:
+              case NodeClassEnum.UAVariable:
                 validateExportNode2Model(_rfx.TargetNode);
                 //validator.ValidateExportNode(_rfx.TargetNode, nodeFactory, _rfx);
-                break;
-
-              //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
-              case NodeClassEnum.UAVariable:
-                _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_rfx.TargetNode} from the model"));
                 break;
 
               case NodeClassEnum.UAView:

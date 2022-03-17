@@ -34,7 +34,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="ArgumentNullException">traceMessageCallback</exception>
     internal UANodeContext(NodeId nodeId, IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceMessageCallback)
     {
-      _TraceEvent = traceMessageCallback ?? throw new ArgumentNullException(nameof(traceMessageCallback));
+      TraceEvent = traceMessageCallback ?? throw new ArgumentNullException(nameof(traceMessageCallback));
       NodeIdContext = nodeId;
       this.m_AddressSpaceContext = addressSpaceContext;
     }
@@ -52,7 +52,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (this.UANode == null)
       {
-        _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The target node NodeId={this.NodeIdContext}, current path {string.Join(", ", path)}"));
+        TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The target node NodeId={this.NodeIdContext}, current path {string.Join(", ", path)}"));
         return;
       }
       IEnumerable<UAReferenceContext> _parentConnector = m_AddressSpaceContext.GetReferences2Me(this).Where<UAReferenceContext>(x => x.ChildConnector);
@@ -82,7 +82,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         throw new ArgumentException(nameof(node), $"Argument must not be null at {nameof(Update)} ");
       if (this.UANode != null)
       {
-        _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, string.Format("The {0} is already defined and is removed from further processing.", node.NodeId.ToString())));
+        TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, string.Format("The {0} is already defined and is removed from further processing.", node.NodeId.ToString())));
         return;
       }
       UANode = node;
@@ -116,7 +116,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     public IUANodeContext CreateUANodeContext(NodeId id)
     {
-      return new UANodeContext(id, m_AddressSpaceContext, _TraceEvent);
+      return new UANodeContext(id, m_AddressSpaceContext, TraceEvent);
     }
 
     #endregion IUANodeContext
@@ -152,7 +152,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         if (_rfx.TargetNode.UANode == null)
         {
-          _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The Node {_rfx.TargetNode} has not been defined and is excluded from further model processing."));
+          TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The Node {_rfx.TargetNode} has not been defined and is excluded from further model processing."));
           continue;
         }
         switch (_rfx.ReferenceKind)
@@ -162,11 +162,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             if (_ReferenceType == XmlQualifiedName.Empty)
             {
               BuildError _err = BuildError.DanglingReferenceTarget;
-              _TraceEvent(TraceMessage.BuildErrorTraceMessage(_err, "Information"));
+              TraceEvent(TraceMessage.BuildErrorTraceMessage(_err, "Information"));
             }
             else if (_ReferenceType == new XmlQualifiedName(BrowseNames.HasEncoding, Namespaces.OpcUa))
             {
-              _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_ReferenceType.ToString()} from the model"));
+              TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_ReferenceType.ToString()} from the model"));
               return;
             }
             IReferenceFactory _or = nodeFactory.NewReference();
@@ -183,7 +183,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                 break;
 
               case NodeClassEnum.UAMethod:
-                _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_rfx.TargetNode} from the model"));
+                TraceEvent(TraceMessage.DiagnosticTraceMessage($"{1560148160} - Removed the graph of nodes at {_rfx.TargetNode} from the model"));
                 //validator..ValidateExportNode(_rc.TargetNode, nodeFactory, _rc);
                 break;
 
@@ -195,11 +195,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                 break;
 
               case NodeClassEnum.UAView:
-                _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_rfx.TargetNode} from the model"));
+                TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_rfx.TargetNode} from the model"));
                 break;
 
               case NodeClassEnum.Unknown:
-                _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_rfx.TargetNode} from the model"));
+                TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_rfx.TargetNode} from the model"));
                 break;
 
               default:
@@ -226,7 +226,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             break;
         }
       }
-      Dictionary<string, IUANodeBase> _derivedChildren = m_BaseTypeNode == null ? new Dictionary<string, IUANodeBase>() : m_BaseTypeNode.GetDerivedInstances();
+      NodesCollection _derivedChildren = m_BaseTypeNode == null ? new NodesCollection() : m_BaseTypeNode.GetDerivedInstances();
       foreach (UAReferenceContext _rc in _children)
       {
         try
@@ -236,7 +236,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             _instanceDeclaration = _derivedChildren.ContainsKey(_rc.TargetNode.UANode.BrowseNameQualifiedName.Name) ? _derivedChildren[_rc.TargetNode.UANode.BrowseNameQualifiedName.Name] : null;
           if (_rc.TargetNode.Equals(_instanceDeclaration))
           {
-            //_TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removing instance declaration {_rc.TargetNode.ToString()}"));
+            TraceEvent(TraceMessage.DiagnosticTraceMessage($" {2054200566} - Removing instance declaration {_rc.TargetNode.ToString()}"));
             continue;
           }
           _rc.TargetNode.RemoveInheritedValues(_instanceDeclaration);
@@ -271,7 +271,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public XmlQualifiedName ExportBaseTypeBrowseName()
     {
       bool type = UANode is UAType;
-      return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type, _TraceEvent));
+      return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type));
     }
 
     /// <summary>
@@ -305,14 +305,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Gets the derived instances.
     /// </summary>
-    /// <returns>Dictionary&lt;System.String, IUANodeBase&gt;.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">Circular loop in inheritance chain</exception>
+    /// <returns>An instance of <see cref="NodesCollection"/> or null if there is nothing to return</returns>
     //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
     public NodesCollection GetDerivedInstances()
     {
       if (m_InGetDerivedInstances)
-        //Improve GetDerivedInstances to log a message instead of throwing exception #651
-        throw new ArgumentOutOfRangeException($"Circular loop in {nameof(GetDerivedInstances)}"); //TODO replace by the message - it is just model error.
+      {
+        TraceMessage errorToLog = TraceMessage.BuildErrorTraceMessage(BuildError.NotValidLoopingHierarchy, $"Circular loop in {nameof(GetDerivedInstances)}");
+        TraceEvent(errorToLog);
+        return null;
+      }
       try
       {
         m_InGetDerivedInstances = true;
@@ -373,23 +375,22 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private IUANodeBase m_BaseTypeNode;
     private readonly IAddressSpaceBuildContext m_AddressSpaceContext = null;
     private bool m_InGetDerivedInstances = false;
+    private readonly Action<TraceMessage> TraceEvent = null;
 
     //methods
-    private void TraceErrorUndefinedBaseType(NodeId target, bool type, Action<TraceMessage> traceEvent)
+    private void TraceErrorUndefinedBaseType(NodeId target, bool type)
     {
       if (type)
       {
         string _msg = string.Format("BaseType of Id={0} for node {1}", target, this.UANode.BrowseNameQualifiedName);
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasSubtypeTarget, _msg));
+        TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasSubtypeTarget, _msg));
       }
       else
       {
         string _msg = string.Format("TypeDefinition of Id={0} for node {1}", target, this.UANode.BrowseNameQualifiedName);
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
+        TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
       }
     }
-
-    private readonly Action<TraceMessage> _TraceEvent = null;
 
     #endregion private
   }

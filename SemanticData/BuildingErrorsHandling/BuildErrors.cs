@@ -14,6 +14,14 @@ namespace UAOOI.SemanticData.BuildingErrorsHandling
   public partial class BuildError
   {
     /// <summary>
+    /// Error: P3-0305000000; Focus: Reference; It is not allowed that References are used to create a looping hierarchy.
+    /// </summary>
+    /// <value>An instance of <see cref="BuildError"/> describing the error P3-0305000000.</value>
+    public static BuildError NotValidLoopingHierarchy { get { return new BuildError() 
+                  { Focus = Focus.Reference, 
+                    Identifier = "P3-0305000000", 
+                    Descriptor = "It is not allowed that References are used to create a looping hierarchy." }; } }
+    /// <summary>
     /// Error: P0-0001010000; Focus: Diagnostic; The XML attribute or element is not supported and neglected.
     /// </summary>
     /// <value>An instance of <see cref="BuildError"/> describing the error P0-0001010000.</value>

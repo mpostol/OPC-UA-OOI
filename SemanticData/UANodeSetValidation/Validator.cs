@@ -92,7 +92,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             break;
 
           case NodeClassEnum.UAVariable:
-            if (parentReference.ReferenceKind == ReferenceKindEnum.HasProperty)
+            if ((parentReference != null) && (parentReference.ReferenceKind == ReferenceKindEnum.HasProperty))
               CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance, validateExportNode2Model);
             else
               CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance, validateExportNode2Model);
@@ -162,6 +162,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Update(variableInstance, nodeSet);
         variableInstance.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName();
         if (nodeContext.IsProperty)
+          //TODO NetworkIdentifier is missing in generated Model Design for DI model #629 parentReference System.NullReferenceException
           m_buildErrorsHandling.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Variable, string.Format("Creating Variable - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
       }
       catch (Exception _ex)

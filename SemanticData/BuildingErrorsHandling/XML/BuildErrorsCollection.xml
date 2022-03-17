@@ -1,263 +1,269 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ns1:BuildErrorsCollection xmlns:ns1="http://commsvr.com/UAOOI/SemanticData/UANodeSetValidation/BuildErrorsCollection.xsd">
-  <ns1:ListOfBuildErrors>
-    <ns1:NamedBuildError>
-      <ns1:Focus>Diagnostic</ns1:Focus>
-      <ns1:Identifier>P0-0001010000</ns1:Identifier>
-      <ns1:Descriptor>The XML attribute or element is not supported and neglected.</ns1:Descriptor>
-      <ns1:Name>NotSupportedFeature</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>XML</ns1:Focus>
-      <ns1:Identifier>P0-0001020000</ns1:Identifier>
-      <ns1:Descriptor>Node cannot be null</ns1:Descriptor>
-      <ns1:Name>NodeCannotBeNull</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>XML</ns1:Focus>
-      <ns1:Identifier>P0-0001030000</ns1:Identifier>
-      <ns1:Descriptor>Models element cannot be null or empty</ns1:Descriptor>
-      <ns1:Name>ModelsCannotBeNull</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>XML</ns1:Focus>
-      <ns1:Identifier>P0-0001040000</ns1:Identifier>
-      <ns1:Descriptor>NamespaceUris element cannot be null or empty</ns1:Descriptor>
-      <ns1:Name>NamespaceUrisCannotBeNull</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>XML</ns1:Focus>
-      <ns1:Identifier>P0-0001050000</ns1:Identifier>
-      <ns1:Descriptor>Selected model contains errors.</ns1:Descriptor>
-      <ns1:Name>ModelContainsErrors</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NonCategorized</ns1:Focus>
-      <ns1:Identifier>P0-0002010000</ns1:Identifier>
-      <ns1:Descriptor>General processing error see trace for details.</ns1:Descriptor>
-      <ns1:Name>NonCategorized</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>Diagnostic</ns1:Focus>
-      <ns1:Identifier>P0-0003010000</ns1:Identifier>
-      <ns1:Descriptor>It is diagnostic information</ns1:Descriptor>
-      <ns1:Name>DiagnosticInformation</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P0-0605020209</ns1:Identifier>
-      <ns1:Descriptor>The syntax of the NodeId is not valid.</ns1:Descriptor>
-      <ns1:Name>NodeIdInvalidSyntax</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P0-0605020210</ns1:Identifier>
-      <ns1:Descriptor>The syntax of the ExpandedNodeId is not valid.</ns1:Descriptor>
-      <ns1:Name>ExpandedNodeIdInvalidSyntax</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>DataEncoding</ns1:Focus>
-      <ns1:Identifier>P6-0503021400</ns1:Identifier>
-      <ns1:Descriptor>The syntax of the QualifiedName is not valid.</ns1:Descriptor>
-      <ns1:Name>QualifiedNameInvalidSyntax</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P3-0403040000</ns1:Identifier>
-      <ns1:Descriptor>The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist.</ns1:Descriptor>
-      <ns1:Name>DanglingReferenceTarget</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P3-0502020000</ns1:Identifier>
-      <ns1:Descriptor>Nodes shall be unambiguously identified using NodeId</ns1:Descriptor>
-      <ns1:Name>NodeIdDuplicated</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P3-0502020001</ns1:Identifier>
-      <ns1:Descriptor>NodeId is not defined.</ns1:Descriptor>
-      <ns1:Name>NodeIdNotDefined</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P3-0502050000</ns1:Identifier>
-      <ns1:Descriptor>The string part of the DisplayName is restricted to 512 characters.</ns1:Descriptor>
-      <ns1:Name>WrongDisplayNameLength</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P3-0502070000</ns1:Identifier>
-      <ns1:Descriptor>The value must be less than 0x200000 for the UAVariable and less than 0x400000 for other node types.</ns1:Descriptor>
-      <ns1:Name>WrongWriteMaskValue</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P3-0856000000</ns1:Identifier>
-      <ns1:Descriptor>The value must be less than 0x7.</ns1:Descriptor>
-      <ns1:Name>WrongAccessRestriction</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P3-0503020000</ns1:Identifier>
-      <ns1:Descriptor>Unexpected value of the InverseName.</ns1:Descriptor>
-      <ns1:Name>WrongInverseName</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P3-0503020001</ns1:Identifier>
-      <ns1:Descriptor>The BrowseName of a ReferenceType shall be unique.</ns1:Descriptor>
-      <ns1:Name>DuplicatedReferenceType</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P3-0503020002</ns1:Identifier>
-      <ns1:Descriptor>The BrowseName of a ReferenceType is defined outside of the model.</ns1:Descriptor>
-      <ns1:Name>BrowseNameReferenceTypeScope</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>Reference</ns1:Focus>
-      <ns1:Identifier>P3-0503030201</ns1:Identifier>
-      <ns1:Descriptor>Wrong Reference type targeting the Property component.</ns1:Descriptor>
-      <ns1:Name>WrongReference2Property</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P3-0505010000</ns1:Identifier>
-      <ns1:Descriptor>Object NodeClass: EventNotifier is out of range.</ns1:Descriptor>
-      <ns1:Name>WrongEventNotifier</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P3-0505010001</ns1:Identifier>
-      <ns1:Descriptor>Object NodeClass: Value of the EventNotifier attribute is not supported.</ns1:Descriptor>
-      <ns1:Name>EventNotifierValueNotSupported</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P3-0506020000</ns1:Identifier>
-      <ns1:Descriptor>ValueRank value is out of range.</ns1:Descriptor>
-      <ns1:Name>WrongValueRank</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P3-0506040000</ns1:Identifier>
-      <ns1:Descriptor>AccessLevel value is out of range.</ns1:Descriptor>
-      <ns1:Name>WrongAccessLevel</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>Reference</ns1:Focus>
-      <ns1:Identifier>P3-0707000000</ns1:Identifier>
-      <ns1:Descriptor>Wrong Reference type targeting the DataVariable component.</ns1:Descriptor>
-      <ns1:Name>WrongReference2Variable</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>Reference</ns1:Focus>
-      <ns1:Identifier>P3-0707000001</ns1:Identifier>
-      <ns1:Descriptor>Wrong Reference type targeting the Method component.</ns1:Descriptor>
-      <ns1:Name>WrongReference2Method</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>Reference</ns1:Focus>
-      <ns1:Identifier>P3-0707000002</ns1:Identifier>
-      <ns1:Descriptor>Dangling reference - undefined target of the HasComponent reference.</ns1:Descriptor>
-      <ns1:Name>UndefinedHasComponentTarget</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>Reference</ns1:Focus>
-      <ns1:Identifier>P3-0708000000</ns1:Identifier>
-      <ns1:Descriptor>Dangling reference - undefined target of the HasProperty reference.</ns1:Descriptor>
-      <ns1:Name>UndefinedHasPropertyTarget</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>Reference</ns1:Focus>
-      <ns1:Identifier>P3-0710000000</ns1:Identifier>
-      <ns1:Descriptor>Each Node shall be the TargetNode of at most one Reference of type HasSubtype.</ns1:Descriptor>
-      <ns1:Name>HasSubtypeMulitarget</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>Reference</ns1:Focus>
-      <ns1:Identifier>P3-0710000001</ns1:Identifier>
-      <ns1:Descriptor>Dangling reference - undefined target of the HasSubtype reference.</ns1:Descriptor>
-      <ns1:Name>UndefinedHasSubtypeTarget</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>Reference</ns1:Focus>
-      <ns1:Identifier>P3-0713000000</ns1:Identifier>
-      <ns1:Descriptor>Undefined HasTypeDefinition - each Variable and each Object shall be the SourceNode of exactly one HasTypeDefinition Reference.</ns1:Descriptor>
-      <ns1:Name>UndefinedHasTypeDefinition</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>Naming</ns1:Focus>
-      <ns1:Identifier>P3-0802020000</ns1:Identifier>
-      <ns1:Descriptor>Undefined namespace index - The numeric values used to identify namespaces correspond to the index into the NamespaceArray.</ns1:Descriptor>
-      <ns1:Name>UndefinedNamespaceIndex</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P6-0503011400</ns1:Identifier>
-      <ns1:Descriptor>BrowseName cannot be null string.</ns1:Descriptor>
-      <ns1:Name>EmptyBrowseName</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>NodeClass</ns1:Focus>
-      <ns1:Identifier>P6-0F03000000</ns1:Identifier>
-      <ns1:Descriptor>SymbolicName contains characters that are not allowed. Only letters, digits or the underscore (‘_’) are permitted.</ns1:Descriptor>
-      <ns1:Name>WrongSymbolicName</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>XML</ns1:Focus>
-      <ns1:Identifier>P6-0F02000000</ns1:Identifier>
-      <ns1:Descriptor>The required model is missing.</ns1:Descriptor>
-      <ns1:Name>LackOfRequiredModel</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>DataType</ns1:Focus>
-      <ns1:Identifier>P3-XXXXX00000</ns1:Identifier>
-      <ns1:Descriptor>Abstract DataType of the field of a concrete structure is not permitted.</ns1:Descriptor>
-      <ns1:Name>FieldAbstractDataType</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>DataType</ns1:Focus>
-      <ns1:Identifier>P3-XXXXX00000</ns1:Identifier>
-      <ns1:Descriptor>All fields must be present in derived Structure DataType.</ns1:Descriptor>
-      <ns1:Name>MissingFieldInDerivedStructure</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>DataType</ns1:Focus>
-      <ns1:Identifier>P3-XXXXX00000</ns1:Identifier>
-      <ns1:Descriptor>Wrong DataType of field derived from Structure.</ns1:Descriptor>
-      <ns1:Name>WrongDerivedFieldData</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>DataType</ns1:Focus>
-      <ns1:Identifier>P3-0508010000</ns1:Identifier>
-      <ns1:Descriptor>It is not permitted for two DataTypes to point to the same DataTypeEncoding.</ns1:Descriptor>
-      <ns1:Name>WrongDataType2DataTypeEncodingReference</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>DataType</ns1:Focus>
-      <ns1:Identifier>P3-0508010000</ns1:Identifier>
-      <ns1:Descriptor>The DataTypeEncoding Object shall point to exactly one Variable of type DataTypeDescriptionType</ns1:Descriptor>
-      <ns1:Name>WrongDataTypeEncoding2DataTypeDescriptionReference</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>DataType</ns1:Focus>
-      <ns1:Identifier>P3-0508010000</ns1:Identifier>
-      <ns1:Descriptor>The DataTypeDescription Variable shall belong to a DataTypeDictionary Variable.</ns1:Descriptor>
-      <ns1:Name>WrongDataTypeDescription2DataTypeDictionaryReference</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>DataType</ns1:Focus>
-      <ns1:Identifier>P3-0508030000</ns1:Identifier>
-      <ns1:Descriptor>Only concrete Structured DataTypes may use HasEncoding References. Abstract, Built-in, Enumeration, and Simple DataTypes are not allowed to be the SourceNode of a HasEncoding Reference.</ns1:Descriptor>
-      <ns1:Name>AbstractDataType2HasEncodingReference</ns1:Name>
-    </ns1:NamedBuildError>
-    <ns1:NamedBuildError>
-      <ns1:Focus>DataType</ns1:Focus>
-      <ns1:Identifier>P3-0508030000</ns1:Identifier>
-      <ns1:Descriptor>Each concrete Structured DataType shall point to at least one DataTypeEncoding Object with the BrowseName “Default Binary” or “Default XML” having the NamespaceIndex 0.</ns1:Descriptor>
-      <ns1:Name>ConcreteDataType2HasEncodingReference</ns1:Name>
-    </ns1:NamedBuildError>
-  </ns1:ListOfBuildErrors>
+	<ns1:ListOfBuildErrors>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0305000000</ns1:Identifier>
+			<ns1:Descriptor>It is not allowed that References are used to create a looping hierarchy.</ns1:Descriptor>
+			<ns1:Name>NotValidLoopingHierarchy</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Diagnostic</ns1:Focus>
+			<ns1:Identifier>P0-0001010000</ns1:Identifier>
+			<ns1:Descriptor>The XML attribute or element is not supported and neglected.</ns1:Descriptor>
+			<ns1:Name>NotSupportedFeature</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>XML</ns1:Focus>
+			<ns1:Identifier>P0-0001020000</ns1:Identifier>
+			<ns1:Descriptor>Node cannot be null</ns1:Descriptor>
+			<ns1:Name>NodeCannotBeNull</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>XML</ns1:Focus>
+			<ns1:Identifier>P0-0001030000</ns1:Identifier>
+			<ns1:Descriptor>Models element cannot be null or empty</ns1:Descriptor>
+			<ns1:Name>ModelsCannotBeNull</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>XML</ns1:Focus>
+			<ns1:Identifier>P0-0001040000</ns1:Identifier>
+			<ns1:Descriptor>NamespaceUris element cannot be null or empty</ns1:Descriptor>
+			<ns1:Name>NamespaceUrisCannotBeNull</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>XML</ns1:Focus>
+			<ns1:Identifier>P0-0001050000</ns1:Identifier>
+			<ns1:Descriptor>Selected model contains errors.</ns1:Descriptor>
+			<ns1:Name>ModelContainsErrors</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NonCategorized</ns1:Focus>
+			<ns1:Identifier>P0-0002010000</ns1:Identifier>
+			<ns1:Descriptor>General processing error see trace for details.</ns1:Descriptor>
+			<ns1:Name>NonCategorized</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Diagnostic</ns1:Focus>
+			<ns1:Identifier>P0-0003010000</ns1:Identifier>
+			<ns1:Descriptor>It is diagnostic information</ns1:Descriptor>
+			<ns1:Name>DiagnosticInformation</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P0-0605020209</ns1:Identifier>
+			<ns1:Descriptor>The syntax of the NodeId is not valid.</ns1:Descriptor>
+			<ns1:Name>NodeIdInvalidSyntax</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P0-0605020210</ns1:Identifier>
+			<ns1:Descriptor>The syntax of the ExpandedNodeId is not valid.</ns1:Descriptor>
+			<ns1:Name>ExpandedNodeIdInvalidSyntax</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>DataEncoding</ns1:Focus>
+			<ns1:Identifier>P6-0503021400</ns1:Identifier>
+			<ns1:Descriptor>The syntax of the QualifiedName is not valid.</ns1:Descriptor>
+			<ns1:Name>QualifiedNameInvalidSyntax</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0403040000</ns1:Identifier>
+			<ns1:Descriptor>The reference target doesn't exist. OPC UA does not require that the TargetNode exists, thus References may point to a Node that does not exist.</ns1:Descriptor>
+			<ns1:Name>DanglingReferenceTarget</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0502020000</ns1:Identifier>
+			<ns1:Descriptor>Nodes shall be unambiguously identified using NodeId</ns1:Descriptor>
+			<ns1:Name>NodeIdDuplicated</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0502020001</ns1:Identifier>
+			<ns1:Descriptor>NodeId is not defined.</ns1:Descriptor>
+			<ns1:Name>NodeIdNotDefined</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0502050000</ns1:Identifier>
+			<ns1:Descriptor>The string part of the DisplayName is restricted to 512 characters.</ns1:Descriptor>
+			<ns1:Name>WrongDisplayNameLength</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0502070000</ns1:Identifier>
+			<ns1:Descriptor>The value must be less than 0x200000 for the UAVariable and less than 0x400000 for other node types.</ns1:Descriptor>
+			<ns1:Name>WrongWriteMaskValue</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0856000000</ns1:Identifier>
+			<ns1:Descriptor>The value must be less than 0x7.</ns1:Descriptor>
+			<ns1:Name>WrongAccessRestriction</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0503020000</ns1:Identifier>
+			<ns1:Descriptor>Unexpected value of the InverseName.</ns1:Descriptor>
+			<ns1:Name>WrongInverseName</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0503020001</ns1:Identifier>
+			<ns1:Descriptor>The BrowseName of a ReferenceType shall be unique.</ns1:Descriptor>
+			<ns1:Name>DuplicatedReferenceType</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0503020002</ns1:Identifier>
+			<ns1:Descriptor>The BrowseName of a ReferenceType is defined outside of the model.</ns1:Descriptor>
+			<ns1:Name>BrowseNameReferenceTypeScope</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0503030201</ns1:Identifier>
+			<ns1:Descriptor>Wrong Reference type targeting the Property component.</ns1:Descriptor>
+			<ns1:Name>WrongReference2Property</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0505010000</ns1:Identifier>
+			<ns1:Descriptor>Object NodeClass: EventNotifier is out of range.</ns1:Descriptor>
+			<ns1:Name>WrongEventNotifier</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0505010001</ns1:Identifier>
+			<ns1:Descriptor>Object NodeClass: Value of the EventNotifier attribute is not supported.</ns1:Descriptor>
+			<ns1:Name>EventNotifierValueNotSupported</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0506020000</ns1:Identifier>
+			<ns1:Descriptor>ValueRank value is out of range.</ns1:Descriptor>
+			<ns1:Name>WrongValueRank</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P3-0506040000</ns1:Identifier>
+			<ns1:Descriptor>AccessLevel value is out of range.</ns1:Descriptor>
+			<ns1:Name>WrongAccessLevel</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0707000000</ns1:Identifier>
+			<ns1:Descriptor>Wrong Reference type targeting the DataVariable component.</ns1:Descriptor>
+			<ns1:Name>WrongReference2Variable</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0707000001</ns1:Identifier>
+			<ns1:Descriptor>Wrong Reference type targeting the Method component.</ns1:Descriptor>
+			<ns1:Name>WrongReference2Method</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0707000002</ns1:Identifier>
+			<ns1:Descriptor>Dangling reference - undefined target of the HasComponent reference.</ns1:Descriptor>
+			<ns1:Name>UndefinedHasComponentTarget</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0708000000</ns1:Identifier>
+			<ns1:Descriptor>Dangling reference - undefined target of the HasProperty reference.</ns1:Descriptor>
+			<ns1:Name>UndefinedHasPropertyTarget</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0710000000</ns1:Identifier>
+			<ns1:Descriptor>Each Node shall be the TargetNode of at most one Reference of type HasSubtype.</ns1:Descriptor>
+			<ns1:Name>HasSubtypeMulitarget</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0710000001</ns1:Identifier>
+			<ns1:Descriptor>Dangling reference - undefined target of the HasSubtype reference.</ns1:Descriptor>
+			<ns1:Name>UndefinedHasSubtypeTarget</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Reference</ns1:Focus>
+			<ns1:Identifier>P3-0713000000</ns1:Identifier>
+			<ns1:Descriptor>Undefined HasTypeDefinition - each Variable and each Object shall be the SourceNode of exactly one HasTypeDefinition Reference.</ns1:Descriptor>
+			<ns1:Name>UndefinedHasTypeDefinition</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>Naming</ns1:Focus>
+			<ns1:Identifier>P3-0802020000</ns1:Identifier>
+			<ns1:Descriptor>Undefined namespace index - The numeric values used to identify namespaces correspond to the index into the NamespaceArray.</ns1:Descriptor>
+			<ns1:Name>UndefinedNamespaceIndex</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P6-0503011400</ns1:Identifier>
+			<ns1:Descriptor>BrowseName cannot be null string.</ns1:Descriptor>
+			<ns1:Name>EmptyBrowseName</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>NodeClass</ns1:Focus>
+			<ns1:Identifier>P6-0F03000000</ns1:Identifier>
+			<ns1:Descriptor>SymbolicName contains characters that are not allowed. Only letters, digits or the underscore (‘_’) are permitted.</ns1:Descriptor>
+			<ns1:Name>WrongSymbolicName</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>XML</ns1:Focus>
+			<ns1:Identifier>P6-0F02000000</ns1:Identifier>
+			<ns1:Descriptor>The required model is missing.</ns1:Descriptor>
+			<ns1:Name>LackOfRequiredModel</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>DataType</ns1:Focus>
+			<ns1:Identifier>P3-XXXXX00000</ns1:Identifier>
+			<ns1:Descriptor>Abstract DataType of the field of a concrete structure is not permitted.</ns1:Descriptor>
+			<ns1:Name>FieldAbstractDataType</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>DataType</ns1:Focus>
+			<ns1:Identifier>P3-XXXXX00000</ns1:Identifier>
+			<ns1:Descriptor>All fields must be present in derived Structure DataType.</ns1:Descriptor>
+			<ns1:Name>MissingFieldInDerivedStructure</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>DataType</ns1:Focus>
+			<ns1:Identifier>P3-XXXXX00000</ns1:Identifier>
+			<ns1:Descriptor>Wrong DataType of field derived from Structure.</ns1:Descriptor>
+			<ns1:Name>WrongDerivedFieldData</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>DataType</ns1:Focus>
+			<ns1:Identifier>P3-0508010000</ns1:Identifier>
+			<ns1:Descriptor>It is not permitted for two DataTypes to point to the same DataTypeEncoding.</ns1:Descriptor>
+			<ns1:Name>WrongDataType2DataTypeEncodingReference</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>DataType</ns1:Focus>
+			<ns1:Identifier>P3-0508010000</ns1:Identifier>
+			<ns1:Descriptor>The DataTypeEncoding Object shall point to exactly one Variable of type DataTypeDescriptionType</ns1:Descriptor>
+			<ns1:Name>WrongDataTypeEncoding2DataTypeDescriptionReference</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>DataType</ns1:Focus>
+			<ns1:Identifier>P3-0508010000</ns1:Identifier>
+			<ns1:Descriptor>The DataTypeDescription Variable shall belong to a DataTypeDictionary Variable.</ns1:Descriptor>
+			<ns1:Name>WrongDataTypeDescription2DataTypeDictionaryReference</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>DataType</ns1:Focus>
+			<ns1:Identifier>P3-0508030000</ns1:Identifier>
+			<ns1:Descriptor>Only concrete Structured DataTypes may use HasEncoding References. Abstract, Built-in, Enumeration, and Simple DataTypes are not allowed to be the SourceNode of a HasEncoding Reference.</ns1:Descriptor>
+			<ns1:Name>AbstractDataType2HasEncodingReference</ns1:Name>
+		</ns1:NamedBuildError>
+		<ns1:NamedBuildError>
+			<ns1:Focus>DataType</ns1:Focus>
+			<ns1:Identifier>P3-0508030000</ns1:Identifier>
+			<ns1:Descriptor>Each concrete Structured DataType shall point to at least one DataTypeEncoding Object with the BrowseName “Default Binary” or “Default XML” having the NamespaceIndex 0.</ns1:Descriptor>
+			<ns1:Name>ConcreteDataType2HasEncodingReference</ns1:Name>
+		</ns1:NamedBuildError>
+	</ns1:ListOfBuildErrors>
 </ns1:BuildErrorsCollection>

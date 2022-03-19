@@ -131,20 +131,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(m_buildErrorsHandling.WriteTraceMessage);
     }
 
-    private void Update(IPropertyInstanceFactory propertyInstance, UAVariable nodeSet, IUANodeBase nodeContext, UAReferenceContext parentReference)
+    private void Update(IPropertyInstanceFactory nodeDesign, UAVariable nodeSet, IUANodeBase nodeContext, UAReferenceContext parentReference)
     {
       try
       {
-        Update(propertyInstance, nodeSet);
-        propertyInstance.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName();
-        if (!nodeContext.IsProperty)
+        Update(nodeDesign, nodeSet, parentReference);
+        if (!nodeContext.IsProperty && ! Object.ReferenceEquals(parentReference, null))
         {
           XmlQualifiedName baseType = nodeContext.ExportBaseTypeBrowseName();
           string baseTypeName = baseType == null ? "a base type" : $"the {baseType.ToString()} type.";
           m_buildErrorsHandling.WriteTraceMessage
             (
               TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property,
-                $"Target node of the {parentReference.ReferenceKind.ToString()} reference cannot be {nodeContext.UANode.BrowseNameQualifiedName} of {baseTypeName}.")
+                $"Target node of the {parentReference.ReferenceKind} reference cannot be {nodeContext.UANode.BrowseNameQualifiedName} of {baseTypeName}.")
             );
         }
       }
@@ -155,15 +154,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
 
-    private void Update(IVariableInstanceFactory variableInstance, UAVariable nodeSet, IUANodeBase nodeContext, UAReferenceContext parentReference)
+    private void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet, IUANodeBase nodeContext, UAReferenceContext parentReference)
     {
       try
       {
-        Update(variableInstance, nodeSet);
-        variableInstance.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName();
-        if (nodeContext.IsProperty)
-          //TODO NetworkIdentifier is missing in generated Model Design for DI model #629 parentReference System.NullReferenceException
-          m_buildErrorsHandling.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Variable, string.Format("Creating Variable - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
+        Update(nodeDesign, nodeSet, parentReference);
+        //if (nodeContext.IsProperty)
+        //  //TODO NetworkIdentifier is missing in generated Model Design for DI model #629 parentReference System.NullReferenceException
+        //  m_buildErrorsHandling.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Variable, string.Format("Creating Variable - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
       }
       catch (Exception _ex)
       {
@@ -172,8 +170,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
 
-    private void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet)
+    private void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet, UAReferenceContext parentReference)
     {
+      nodeDesign.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName();
       nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(m_buildErrorsHandling.WriteTraceMessage);
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(string.Empty);
       nodeDesign.DataType = string.IsNullOrEmpty(nodeSet.DataType) ? null : m_AddressSpace.ExportBrowseName(nodeSet.DataTypeNodeId, DataTypes.Number);//TODO add test case must be DataType, must not be abstract

@@ -159,8 +159,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       try
       {
         Update(nodeDesign, nodeSet, parentReference);
+        //TODO NetworkIdentifier is missing in generated Model Design for DI model #629 parentReference System.NullReferenceException
+        //TODO The exported model doesn't contain all nodes #653
         //if (nodeContext.IsProperty)
-        //  //TODO NetworkIdentifier is missing in generated Model Design for DI model #629 parentReference System.NullReferenceException
         //  m_buildErrorsHandling.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Variable, string.Format("Creating Variable - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
       }
       catch (Exception _ex)

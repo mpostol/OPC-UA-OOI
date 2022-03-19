@@ -86,6 +86,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <value><c>true</c> if it is child reference; otherwise, <c>false</c>.</value>
     //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
+    //TODO The exported model doesn't contain all nodes #653
     internal bool ChildConnector => (ReferenceKind == ReferenceKindEnum.HasProperty) || (ReferenceKind == ReferenceKindEnum.HasComponent);
 
     #endregion semantics

@@ -172,6 +172,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             IReferenceFactory _or = nodeFactory.NewReference();
             _or.IsInverse = !_rfx.IsForward;
             _or.ReferenceType = _ReferenceType;
+            //TODO The exported model doesn't contain all nodes #653
             //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
             _or.TargetId = _rfx.BrowsePath();
             switch (_rfx.TargetNode.UANode.NodeClassEnum)
@@ -188,6 +189,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                 break;
 
               //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
+              //TODO The exported model doesn't contain all nodes #653
               case NodeClassEnum.UAObject:
               case NodeClassEnum.UAVariable:
                 validateExportNode2Model(_rfx.TargetNode);
@@ -307,6 +309,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <returns>An instance of <see cref="NodesCollection"/> or null if there is nothing to return</returns>
     //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
+    //TODOD The exported model doesn't contain all nodes #653
     public NodesCollection GetDerivedInstances()
     {
       if (m_InGetDerivedInstances)

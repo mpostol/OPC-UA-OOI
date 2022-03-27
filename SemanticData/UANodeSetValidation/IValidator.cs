@@ -6,6 +6,7 @@
 //__________________________________________________________________________________________________
 
 using System;
+using System.Collections.Generic;
 using UAOOI.SemanticData.InformationModelFactory;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -19,17 +20,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Validates <paramref name="nodeContext" /> and exports it using an object of <see cref="IModelFactory" />  type.
     /// </summary>
     /// <param name="nodeContext">The node context to be validated and exported.</param>
+    /// <param name="allNodesInConcern">list of selected members to export.</param>
     /// <param name="exportFactory">A model export factory.</param>
     /// <param name="parentReference">The reference to parent node.</param>
     /// <param name="validateExportNode2Model">It creates the node at the top level of the model. Called if the node has reference to another node that cannot be defined as a child.</param>
-    void ValidateExportNode(IUANodeBase nodeContext, INodeContainer exportFactory, Action<IUANodeContext> validateExportNode2Model, UAReferenceContext parentReference);
+    void ValidateExportNode(IUANodeBase nodeContext, List<IUANodeBase> allNodesInConcern, INodeContainer exportFactory, Action<IUANodeContext> validateExportNode2Model, UAReferenceContext parentReference);
 
     /// <summary>
     /// Validates <paramref name="nodeContext" /> and exports it using an object of <see cref="IModelFactory" />  type.
     /// </summary>
     /// <param name="nodeContext">The node context to be validated and exported.</param>
+    /// <param name="allNodesInConcern">list of selected members to export.</param>
     /// <param name="exportFactory">A model export factory.</param>
     /// <param name="validateExportNode2Model">It creates the node at the top level of the model. Called if the node has reference to another node that cannot be defined as a child.</param>
-    void ValidateExportNode(IUANodeBase nodeContext, INodeContainer exportFactory, Action<IUANodeContext> validateExportNode2Model);
+    void ValidateExportNode(IUANodeBase nodeContext, List<IUANodeBase> allNodesInConcern, INodeContainer exportFactory, Action<IUANodeContext> validateExportNode2Model);
   }
 }

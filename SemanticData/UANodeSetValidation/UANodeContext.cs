@@ -136,10 +136,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Calculates the node references.
     /// </summary>
     /// <param name="nodeFactory">The node factory.</param>
+    /// <param name="allNodesInConcern">list of selected members to export.</param>
     /// <param name="validator">The validator.</param>
     /// <param name="validateExportNode2Model">It creates the node at the top level of the model. Called if the node has reference to another node that cannot be defined as a child.</param>
     //TODO Import simple NodeSet2 file is incomplete #510
-    void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, IValidator validator, Action<IUANodeContext> validateExportNode2Model)
+    void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, List<IUANodeBase> allNodesInConcern, IValidator validator, Action<IUANodeContext> validateExportNode2Model)
     {
       if (nodeFactory == null)
         throw new ArgumentNullException(nameof(nodeFactory), $"{nodeFactory} must not be null in {nameof(IUANodeBase.CalculateNodeReferences)}");
@@ -183,17 +184,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
               case NodeClassEnum.UAVariableType:
                 break;
 
-              case NodeClassEnum.UAMethod:
-                TraceEvent(TraceMessage.DiagnosticTraceMessage($"{1560148160} - Removed the graph of nodes at {_rfx.TargetNode} from the model"));
-                //validator..ValidateExportNode(_rc.TargetNode, nodeFactory, _rc);
-                break;
-
               //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
               //TODO The exported model doesn't contain all nodes #653
               case NodeClassEnum.UAObject:
               case NodeClassEnum.UAVariable:
+              case NodeClassEnum.UAMethod:
+                //validator.ValidateExportNode(_rfx.TargetNode, allNodesInConcern, nodeFactory, validateExportNode2Model, _rfx);
                 validateExportNode2Model(_rfx.TargetNode);
-                //validator.ValidateExportNode(_rfx.TargetNode, nodeFactory, _rfx);
                 break;
 
               case NodeClassEnum.UAView:
@@ -228,23 +225,29 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             break;
         }
       }
-      NodesCollection _derivedChildren = m_BaseTypeNode == null ? new NodesCollection() : m_BaseTypeNode.GetDerivedInstances();
-      foreach (UAReferenceContext _rc in _children)
+      //TODO The exported model doesn't contain all nodes #653
+      RemoveDerivedChildren(nodeFactory, allNodesInConcern, validator, validateExportNode2Model, _children);
+    }
+
+    private void RemoveDerivedChildren(INodeFactory nodeFactory, List<IUANodeBase> allNodesInConcern, IValidator validator, Action<IUANodeContext> validateExportNode2Model, List<UAReferenceContext> children)
+    {
+      Dictionary<IUANodeBase, UAReferenceContext> referencedChildren = children.ToDictionary<UAReferenceContext, IUANodeBase>(x => x.TargetNode);
+      NodesCollection derivedChildren = m_BaseTypeNode == null ? new NodesCollection() : m_BaseTypeNode.GetDerivedInstances();
+      foreach (var _rc in referencedChildren)
       {
-        try
+        IUANodeBase _instanceDeclaration = null;
+        string name = _rc.Key.UANode.BrowseNameQualifiedName.Name;
+        if (!string.IsNullOrEmpty(name))
+          _instanceDeclaration = derivedChildren.ContainsKey(name) ? derivedChildren[name] : null;
+        if (_rc.Key.Equals(_instanceDeclaration))
         {
-          IUANodeBase _instanceDeclaration = null;
-          if (!string.IsNullOrEmpty(_rc.TargetNode.UANode.BrowseNameQualifiedName.Name))
-            _instanceDeclaration = _derivedChildren.ContainsKey(_rc.TargetNode.UANode.BrowseNameQualifiedName.Name) ? _derivedChildren[_rc.TargetNode.UANode.BrowseNameQualifiedName.Name] : null;
-          if (_rc.TargetNode.Equals(_instanceDeclaration))
-          {
-            TraceEvent(TraceMessage.DiagnosticTraceMessage($" {2054200566} - Removing instance declaration {_rc.TargetNode.ToString()}"));
-            continue;
-          }
-          _rc.TargetNode.RemoveInheritedValues(_instanceDeclaration);
-          validator.ValidateExportNode(_rc.TargetNode, nodeFactory, validateExportNode2Model, _rc);
+          TraceEvent(TraceMessage.DiagnosticTraceMessage($"{2054200566} - Removing instance declaration {_rc.Key}"));
+          if (!allNodesInConcern.Remove(_rc.Key))
+            TraceEvent(TraceMessage.DiagnosticTraceMessage($"{2064801864} - Derived node {_rc.Key} doesn't exist in all nodes"));
+          continue;
         }
-        catch (Exception) { throw; }
+        _rc.Key.RemoveInheritedValues(_instanceDeclaration);
+        validator.ValidateExportNode(_rc.Key, allNodesInConcern, nodeFactory, validateExportNode2Model, _rc.Value);
       }
     }
 
@@ -309,7 +312,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <returns>An instance of <see cref="NodesCollection"/> or null if there is nothing to return</returns>
     //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
-    //TODOD The exported model doesn't contain all nodes #653
+    //TODO The exported model doesn't contain all nodes #653
     public NodesCollection GetDerivedInstances()
     {
       if (m_InGetDerivedInstances)
@@ -333,8 +336,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
 
+    /// <summary>
+    /// Gets a value indicating whether this instance is property variable type.
+    /// </summary>
+    /// <value><c>true</c> if this instance is property variable type; otherwise, <c>false</c>.</value>
     bool IUANodeBase.IsPropertyVariableType => this.NodeIdContext == VariableTypeIds.PropertyType;
 
+    /// <summary>
+    /// Removes the inherited values.
+    /// </summary>
+    /// <param name="instanceDeclaration">The instance declaration.</param>
+    /// <remarks>If a member is overridden all inherited values of the node attributes must be removed.</remarks>
     void IUANodeBase.RemoveInheritedValues(IUANodeBase instanceDeclaration)
     {
       if (instanceDeclaration is null)
@@ -367,8 +379,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     public override string ToString()
     {
-      string browseName = this.UANode == null ? String.Empty : $", BrowseName = {this.UANode.BrowseName}";
-      return $"NodeId={this.NodeIdContext}{browseName}";
+      string browseName = this.UANode == null ? " ???? " : $"{this.UANode.BrowseName}";
+      return $"NodeId=\"{this.NodeIdContext}\", BrowseName=\"{browseName}\", ModellingRule=\"{ModelingRule}\"";
     }
 
     #endregion object

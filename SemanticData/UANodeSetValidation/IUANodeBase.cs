@@ -6,6 +6,7 @@
 //__________________________________________________________________________________________________
 
 using System;
+using System.Collections.Generic;
 using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
@@ -22,9 +23,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Calculates the node references.
     /// </summary>
     /// <param name="nodeFactory">The node factory.</param>
+    /// <param name="allNodesInConcern">list of selected members to export.</param>
     /// <param name="validator">The validator.</param>
     /// <param name="validateExportNode2Model">It creates the node at the top level of the model. Called if the node has reference to another node that cannot be defined as a child.</param>
-    void CalculateNodeReferences(INodeFactory nodeFactory, IValidator validator, Action<IUANodeContext> validateExportNode2Model);
+    void CalculateNodeReferences(INodeFactory nodeFactory, List<IUANodeBase> allNodesInConcern, IValidator validator, Action<IUANodeContext> validateExportNode2Model);
 
     /// <summary>
     /// Gets the node identifier.

@@ -34,7 +34,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.IsNotNull(_toTest.NodeIdContext);
       Assert.AreEqual<string>("ns=1;i=11", _toTest.NodeIdContext.ToString());
       Assert.IsNull(_toTest.UANode);
-      Assert.AreEqual<string>("NodeId=ns=1;i=11", _toTest.ToString());
+      Assert.AreEqual<string>("NodeId=\"ns=1;i=11\", BrowseName=\" ???? \", ModellingRule=\"\"", _toTest.ToString());
     }
 
     [TestMethod]
@@ -195,14 +195,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Mock<IValidator> _validatorMoc = new Mock<IValidator>();
       List<TraceMessage> _traceBuffer = new List<TraceMessage>();
       IUANodeBase _first = new UANodeContext(NodeId.Parse("ns=1;i=11"), _addressSpaceMock.Object, x => _traceBuffer.Add(x));
-      Assert.ThrowsException<ArgumentNullException>(() => _first.CalculateNodeReferences(null, _validatorMoc.Object, y => { }));
-      Assert.ThrowsException<ArgumentNullException>(() => _first.CalculateNodeReferences(_mockNodeFactory.Object, null, y => { }));
-      Assert.ThrowsException<ArgumentNullException>(() => _first.CalculateNodeReferences(_mockNodeFactory.Object, _validatorMoc.Object, null));
+      Assert.ThrowsException<ArgumentNullException>(() => _first.CalculateNodeReferences(null, null, _validatorMoc.Object, y => { }));
+      Assert.ThrowsException<ArgumentNullException>(() => _first.CalculateNodeReferences(_mockNodeFactory.Object, null, null, y => { }));
+      Assert.ThrowsException<ArgumentNullException>(() => _first.CalculateNodeReferences(_mockNodeFactory.Object, null, _validatorMoc.Object, null));
     }
 
     [TestMethod]
     public void CalculateNodeReferencesNullUANodeTest()
     {
+      //TODO The exported model doesn't contain all nodes #653
+      //Assert.Inconclusive("The exported model doesn't contain all nodes #653");
       Reference reference = new Reference() { IsForward = true, ReferenceType = ReferenceTypeIds.Organizes.ToString(), Value = ObjectTypeIds.BaseObjectType.ToString() };
       reference.RecalculateNodeIds(x => NodeId.Parse(x));
 
@@ -234,17 +236,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Mock<INodeFactory> _mockNodeFactory = new Mock<INodeFactory>();
       _mockNodeFactory.Setup(x => x.NewReference()).Returns(referenceFactoryMock.Object);
       Mock<IValidator> _validatorMoc = new Mock<IValidator>();
-      _validatorMoc.Setup(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), _mockNodeFactory.Object, It.IsAny<Action<IUANodeContext>>(), It.IsAny<UAReferenceContext>()));
+      _validatorMoc.Setup(x => x.ValidateExportNode(It.IsAny<IUANodeBase>(), null, _mockNodeFactory.Object, It.IsAny<Action<IUANodeContext>>(), It.IsAny<UAReferenceContext>()));
 
       //testing
       int counter = 0;
-      ((IUANodeBase)node2Test).CalculateNodeReferences(_mockNodeFactory.Object, _validatorMoc.Object, y => counter++);
-      
+      ((IUANodeBase)node2Test).CalculateNodeReferences(_mockNodeFactory.Object, null, _validatorMoc.Object, y => counter++);
+
       //validation
       Assert.AreEqual<int>(1, counter);
       addressSpaceMock.Verify(x => x.GetMyReferences(It.IsAny<IUANodeBase>()), Times.Once);
       addressSpaceMock.Verify(x => x.ExportBrowseName(It.IsAny<NodeId>(), It.IsAny<NodeId>()), Times.Once);
-      _validatorMoc.Verify(x => x.ValidateExportNode(It.Is<IUANodeBase>(z => z == targetMock.Object), _mockNodeFactory.Object, It.IsAny<Action<IUANodeContext>>(), It.Is<UAReferenceContext>(y => y == listOfReferences[0])), Times.Never);
+      _validatorMoc.Verify(x => x.ValidateExportNode(It.Is<IUANodeBase>(z => z == targetMock.Object), null, _mockNodeFactory.Object, It.IsAny<Action<IUANodeContext>>(), It.Is<UAReferenceContext>(y => y == listOfReferences[0])), Times.Never);
       Assert.AreEqual<int>(0, _traceBuffer.Count, _traceBuffer.Count == 0 ? "" : _traceBuffer[0].Message);
     }
 
@@ -365,7 +367,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         NodeId = "ns=1;i=47",
         BrowseName = "EURange",
         ParentNodeId = "ns=1;i=43",
-        DataType = "i=884",
+        DataType = "i=884",  //Range
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
       UANode _baseNode = new UAVariable()
@@ -373,7 +375,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         NodeId = "i=17568",
         BrowseName = "EURange",
         ParentNodeId = "i=15318",
-        DataType = "i=884",
+        DataType = "i=884", //Range
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();

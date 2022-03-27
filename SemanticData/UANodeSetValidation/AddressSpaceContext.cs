@@ -320,7 +320,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                                                select node;
       foreach (IUANodeBase item in undefindNodes)
         m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NodeCannotBeNull, $"the node {item.ToString()} is not defined in the UANodeSet model"));
-      List<IUANodeBase> nodes = (from _node in stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
+      List<IUANodeBase> allNodesInConcern = (from _node in stubs where _node.UANode != null select _node).ToList<IUANodeBase>();
+      List<IUANodeBase> nodes = (from _node in stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList<IUANodeBase>();
       m_TraceEvent.TraceData(TraceEventType.Verbose, 938023414, $"Selected {nodes.Count} types to be validated.");
       IUANodeBase _objects = TryGetUANodeContext(UAInformationModel.ObjectIds.ObjectsFolder);
       if (_objects is null)
@@ -337,7 +338,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         string _version = modelTableEntry.Version;
         InformationModelFactory.CreateNamespace(modelTableEntry.ModelUri.ToString(), _publicationDate, _version);
       }
-      //NetworkIdentifier is missing in generated Model Design for DI model #629
       int nodesCount = nodes.Count;
       do
       {
@@ -348,7 +348,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         {
           try
           {
-            validator.ValidateExportNode(item, InformationModelFactory, y => { if (y.NodeIdContext.NamespaceIndex == nameSpaceIndex) embededNodes.AddOrReplace(y, false); });
+            validator.ValidateExportNode(item, allNodesInConcern, InformationModelFactory, y => { if (y.NodeIdContext.NamespaceIndex == nameSpaceIndex) embededNodes.AddOrReplace(y, false); });
           }
           catch (Exception ex)
           {
@@ -356,10 +356,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, msg));
           }
         }
-        nodes = embededNodes.ToList();
+        //TODO The exported model doesn't contain all nodes #653
+        nodes.Clear();// = embededNodes.ToList();
         nodesCount += nodes.Count;
       } while (nodes.Count > 0);
       string message = null;
+      foreach (IUANodeBase node in allNodesInConcern)
+      {
+        message = $"Finishing Validator.ValidateExportModel - the {node} is not added to the exported model";
+        m_TraceEvent.TraceData(TraceEventType.Warning, 1594962400, message);
+      }
       if (m_TraceEvent.Errors == 0)
       {
         message = $"Finishing Validator.ValidateExportModel - the model contains {nodesCount} nodes and no errors/warnings reported";

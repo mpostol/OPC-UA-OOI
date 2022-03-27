@@ -29,6 +29,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestMethod]
     public void UAMethodTest()
     {
+      //TODO The exported model doesn't contain all nodes #653
+      //Assert.Inconclusive("The exported model doesn't contain all nodes #653");
+
       Mock<IAddressSpaceBuildContext> addressSpaceBuildContextMock = new Mock<IAddressSpaceBuildContext>();
       Mock<IBuildErrorsHandling> buildErrorsHandlingNock = new Mock<IBuildErrorsHandling>();
       Validator _i2t = new Validator(addressSpaceBuildContextMock.Object, buildErrorsHandlingNock.Object);
@@ -64,7 +67,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeContainerMock.Setup(x => x.AddNodeFactory<IMethodInstanceFactory>()).Returns(methodInstanceFactory.Object);
       //TODO UANodeSetValidation.Extensions.GetObject - object reference not set #624
       Assert.Inconclusive("UANodeSetValidation.Extensions.GetObject - object reference not set #624");
-      _i2t.ValidateExportNode(nodeContext, nodeContainerMock.Object, z => { });
+      _i2t.ValidateExportNode(nodeContext, null, nodeContainerMock.Object,  z => { });
       Assert.AreEqual<int>(0, traceBuffer.Count);
     }
   }

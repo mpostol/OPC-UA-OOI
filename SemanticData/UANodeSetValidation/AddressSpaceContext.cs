@@ -363,8 +363,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       string message = null;
       foreach (IUANodeBase node in allNodesInConcern)
       {
-        message = $"Finishing Validator.ValidateExportModel - the {node} is not added to the exported model";
-        m_TraceEvent.TraceData(TraceEventType.Warning, 1594962400, message);
+        message = $"{1594962400} - Finishing Validator.ValidateExportModel - the {node} is not added to the exported model";
+        TraceMessage traceMessage = TraceMessage.DiagnosticTraceMessage(message);
+        m_TraceEvent.WriteTraceMessage(traceMessage);
       }
       if (m_TraceEvent.Errors == 0)
       {

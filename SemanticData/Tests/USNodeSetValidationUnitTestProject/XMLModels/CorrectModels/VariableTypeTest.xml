@@ -1,20 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="OPCUAModelDesign.xslt"?>
-<ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+<ModelDesign xmlns:cas="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:ua="http://opcfoundation.org/UA/" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
   <Namespaces>
     <Namespace Name="cas" Prefix="VariableTypeTest" XmlPrefix="cas">http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest</Namespace>
     <Namespace Name="ua" XmlPrefix="ua">http://opcfoundation.org/UA/</Namespace>
   </Namespaces>
-  <VariableType xmlns:q1="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" SymbolicName="q1:ComplexVariableType" xmlns:q2="http://opcfoundation.org/UA/" BaseType="q2:AnalogItemType">
+  <VariableType SymbolicName="cas:ComplexVariableType" BaseType="ua:AnalogItemType">
     <Children>
-      <Property SymbolicName="q1:VariableChild" ModellingRule="Mandatory" DataType="q2:Int32" AccessLevel="Write" />
-      <Property SymbolicName="q2:EURange">
+      <Property SymbolicName="cas:VariableChild" ModellingRule="Mandatory" DataType="ua:Int32" AccessLevel="Write" />
+      <Property SymbolicName="ua:EURange">
         <DisplayName> NewDisplayName</DisplayName>
       </Property>
     </Children>
   </VariableType>
-  <VariableType xmlns:q3="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" SymbolicName="q3:ArrayVariableType" xmlns:q4="http://opcfoundation.org/UA/" DataType="q4:Int32" ValueRank="OneOrMoreDimensions" ArrayDimensions="0,0,0" />
-  <VariableType xmlns:q5="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" SymbolicName="q5:SimpleVariableWithValueType" xmlns:q6="http://opcfoundation.org/UA/" DataType="q6:Int32">
+  <VariableType SymbolicName="cas:ArrayVariableType" DataType="ua:Int32" ValueRank="OneOrMoreDimensions" ArrayDimensions="0,0,0" />
+  <VariableType SymbolicName="cas:SimpleVariableWithValueType" DataType="ua:Int32">
     <DefaultValue>
       <Int32 xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">1</Int32>
     </DefaultValue>

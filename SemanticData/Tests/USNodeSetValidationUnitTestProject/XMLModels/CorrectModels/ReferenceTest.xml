@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="OPCUAModelDesign.xslt"?>
-<ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+<ModelDesign xmlns:cas="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:ua="http://opcfoundation.org/UA/" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
   <Namespaces>
     <Namespace Name="cas" Prefix="ReferenceTest" XmlPrefix="cas">http://cas.eu/UA/CommServer/UnitTests/ReferenceTest</Namespace>
     <Namespace Name="ua" XmlPrefix="ua">http://opcfoundation.org/UA/</Namespace>
   </Namespaces>
-  <ReferenceType xmlns:q1="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" SymbolicName="q1:ReferenceTypeTest" xmlns:q2="http://opcfoundation.org/UA/" BaseType="q2:HasProperty" Symmetric="false">
+  <ReferenceType SymbolicName="cas:ReferenceTypeTest" BaseType="ua:HasProperty" Symmetric="false">
     <InverseName>FromSomwhere</InverseName>
   </ReferenceType>
 </ModelDesign>

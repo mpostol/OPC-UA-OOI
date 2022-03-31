@@ -1,31 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="OPCUAModelDesign.xslt"?>
-<ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+<ModelDesign xmlns:cas="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:ua="http://opcfoundation.org/UA/" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
   <Namespaces>
     <Namespace Name="cas" Prefix="DataTypeTest" XmlPrefix="cas">http://cas.eu/UA/CommServer/UnitTests/DataTypeTest</Namespace>
     <Namespace Name="ua" XmlPrefix="ua">http://opcfoundation.org/UA/</Namespace>
   </Namespaces>
-  <DataType xmlns:q1="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" SymbolicName="q1:AbstractEnumerationDataType" xmlns:q2="http://opcfoundation.org/UA/" BaseType="q2:Enumeration" IsAbstract="true">
+  <DataType SymbolicName="cas:AbstractEnumerationDataType" BaseType="ua:Enumeration" IsAbstract="true">
     <Fields>
       <Field Name="Field1" Identifier="0" />
       <Field Name="Field2" Identifier="1" />
     </Fields>
   </DataType>
-  <DataType xmlns:q3="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" SymbolicName="q3:EnumerationDataType" BaseType="q3:AbstractEnumerationDataType">
+  <DataType SymbolicName="cas:EnumerationDataType" BaseType="cas:AbstractEnumerationDataType">
     <Description>Enumeration DataType derived from abstract type</Description>
     <Fields>
-      <Field Name="Field3" xmlns:q4="http://opcfoundation.org/UA/" DataType="q4:Int32" />
+      <Field Name="Field3" DataType="ua:Int32" />
     </Fields>
   </DataType>
-  <DataType xmlns:q5="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" SymbolicName="q5:AbstractStructure" xmlns:q6="http://opcfoundation.org/UA/" BaseType="q6:Structure" IsAbstract="true">
+  <DataType SymbolicName="cas:AbstractStructure" BaseType="ua:Structure" IsAbstract="true">
     <Description>Abstract structure</Description>
     <Fields>
-      <Field Name="Number" DataType="q6:Number" />
+      <Field Name="Number" DataType="ua:Number" />
     </Fields>
   </DataType>
-  <DataType xmlns:q7="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" SymbolicName="q7:DerivedStructure" BaseType="q7:AbstractStructure">
+  <DataType SymbolicName="cas:DerivedStructure" BaseType="cas:AbstractStructure">
     <Fields>
-      <Field Name="Number" xmlns:q8="http://opcfoundation.org/UA/" DataType="q8:Int32">
+      <Field Name="Number" DataType="ua:Int32">
         <Description>Derived from Number</Description>
       </Field>
     </Fields>

@@ -159,7 +159,6 @@
         <uax:Name>ChildMethod</uax:Name>
       </uax:BrowseName>
       <uax:DisplayName>
-        <uax:Locale></uax:Locale>
         <uax:Text>ChildMethodNewName</uax:Text>
       </uax:DisplayName>
       <uax:ReferenceTypeId>
@@ -282,7 +281,6 @@
         <uax:Name>ChildMethod</uax:Name>
       </uax:BrowseName>
       <uax:DisplayName>
-        <uax:Locale></uax:Locale>
         <uax:Text>ChildMethodNewName</uax:Text>
       </uax:DisplayName>
       <uax:ReferenceTypeId>

@@ -1,0 +1,12 @@
+AbstractEnumerationDataType,9,DataType
+AbstractStructure,13,DataType
+AbstractStructure_Encoding_DefaultBinary,18,Object
+AbstractStructure_Encoding_DefaultJson,31,Object
+AbstractStructure_Encoding_DefaultXml,14,Object
+cas_BinarySchema,5,Variable
+cas_XmlSchema,2,Variable
+DerivedStructure,22,DataType
+DerivedStructure_Encoding_DefaultBinary,27,Object
+DerivedStructure_Encoding_DefaultJson,32,Object
+DerivedStructure_Encoding_DefaultXml,23,Object
+EnumerationDataType,11,DataType

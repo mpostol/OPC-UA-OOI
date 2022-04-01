@@ -16,7 +16,6 @@
       <uax:Identifier>i=46</uax:Identifier>
     </uax:SuperTypeId>
     <uax:InverseName>
-      <uax:Locale></uax:Locale>
       <uax:Text>FromSomwhere</uax:Text>
     </uax:InverseName>
   </ReferenceTypeTest>

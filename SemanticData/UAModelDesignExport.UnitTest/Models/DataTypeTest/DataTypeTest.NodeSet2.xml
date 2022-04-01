@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<UANodeSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
   <NamespaceUris>
     <Uri>http://cas.eu/UA/CommServer/UnitTests/DataTypeTest</Uri>
   </NamespaceUris>
   <Models>
     <Model ModelUri="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest">
-      <RequiredModel ModelUri="http://opcfoundation.org/UA/" Version="1.04" PublicationDate="2016-12-31T00:00:00Z" />
+      <RequiredModel ModelUri="http://opcfoundation.org/UA/" XmlSchemaUri="http://opcfoundation.org/UA/2008/02/Types.xsd" Version="1.04.10" PublicationDate="2021-09-15T00:00:00Z" />
     </Model>
   </Models>
   <Aliases>
@@ -44,6 +44,17 @@
     <Alias Alias="HasModellingRule">i=37</Alias>
     <Alias Alias="HasEncoding">i=38</Alias>
     <Alias Alias="HasDescription">i=39</Alias>
+    <Alias Alias="HasCause">i=53</Alias>
+    <Alias Alias="ToState">i=52</Alias>
+    <Alias Alias="FromState">i=51</Alias>
+    <Alias Alias="HasEffect">i=54</Alias>
+    <Alias Alias="HasTrueSubState">i=9004</Alias>
+    <Alias Alias="HasFalseSubState">i=9005</Alias>
+    <Alias Alias="HasDictionaryEntry">i=17597</Alias>
+    <Alias Alias="HasCondition">i=9006</Alias>
+    <Alias Alias="HasGuard">i=15112</Alias>
+    <Alias Alias="HasAddIn">i=17604</Alias>
+    <Alias Alias="HasInterface">i=17603</Alias>
   </Aliases>
   <UADataType NodeId="ns=1;i=9" BrowseName="1:AbstractEnumerationDataType" IsAbstract="true">
     <DisplayName>AbstractEnumerationDataType</DisplayName>
@@ -51,28 +62,23 @@
       <Reference ReferenceType="HasProperty">ns=1;i=10</Reference>
       <Reference ReferenceType="HasSubtype" IsForward="false">i=29</Reference>
     </References>
-    <Definition Name="AbstractEnumerationDataType">
+    <Definition Name="1:AbstractEnumerationDataType">
       <Field Name="Field1" Value="0" />
       <Field Name="Field2" Value="1" />
     </Definition>
   </UADataType>
-  <UAVariable NodeId="ns=1;i=10" BrowseName="EnumStrings" ParentNodeId="ns=1;i=9" DataType="LocalizedText" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=10" BrowseName="EnumStrings" ParentNodeId="ns=1;i=9" DataType="LocalizedText" ValueRank="1" ArrayDimensions="0">
     <DisplayName>EnumStrings</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-      <Reference ReferenceType="HasModellingRule">i=78</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=9</Reference>
     </References>
     <Value>
       <ListOfLocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
         <LocalizedText>
-          <Locale>
-          </Locale>
           <Text>Field1</Text>
         </LocalizedText>
         <LocalizedText>
-          <Locale>
-          </Locale>
           <Text>Field2</Text>
         </LocalizedText>
       </ListOfLocalizedText>
@@ -85,15 +91,14 @@
       <Reference ReferenceType="HasProperty">ns=1;i=12</Reference>
       <Reference ReferenceType="HasSubtype" IsForward="false">ns=1;i=9</Reference>
     </References>
-    <Definition Name="EnumerationDataType">
+    <Definition Name="1:EnumerationDataType">
       <Field Name="Field3" Value="1" />
     </Definition>
   </UADataType>
-  <UAVariable NodeId="ns=1;i=12" BrowseName="EnumValues" ParentNodeId="ns=1;i=11" DataType="i=7594" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=12" BrowseName="EnumValues" ParentNodeId="ns=1;i=11" DataType="i=7594" ValueRank="1" ArrayDimensions="0">
     <DisplayName>EnumValues</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-      <Reference ReferenceType="HasModellingRule">i=78</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=11</Reference>
     </References>
     <Value>
@@ -106,11 +111,8 @@
             <EnumValueType>
               <Value>1</Value>
               <DisplayName>
-                <Locale>
-                </Locale>
                 <Text>Field3</Text>
               </DisplayName>
-              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
             </EnumValueType>
           </Body>
         </ExtensionObject>
@@ -123,7 +125,7 @@
     <References>
       <Reference ReferenceType="HasSubtype" IsForward="false">i=22</Reference>
     </References>
-    <Definition Name="AbstractStructure">
+    <Definition Name="1:AbstractStructure">
       <Field Name="Number" DataType="i=26" />
     </Definition>
   </UADataType>
@@ -132,12 +134,110 @@
     <References>
       <Reference ReferenceType="HasSubtype" IsForward="false">ns=1;i=13</Reference>
     </References>
-    <Definition Name="DerivedStructure">
+    <Definition Name="1:DerivedStructure">
       <Field Name="Number" DataType="i=6">
         <Description>Derived from Number</Description>
       </Field>
     </Definition>
   </UADataType>
+  <UAObject NodeId="ns=1;i=18" BrowseName="Default Binary" SymbolicName="DefaultBinary">
+    <DisplayName>Default Binary</DisplayName>
+    <References>
+      <Reference ReferenceType="HasEncoding" IsForward="false">ns=1;i=13</Reference>
+      <Reference ReferenceType="HasDescription">ns=1;i=19</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=76</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=1;i=27" BrowseName="Default Binary" SymbolicName="DefaultBinary">
+    <DisplayName>Default Binary</DisplayName>
+    <References>
+      <Reference ReferenceType="HasEncoding" IsForward="false">ns=1;i=22</Reference>
+      <Reference ReferenceType="HasDescription">ns=1;i=28</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=76</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=1;i=5" BrowseName="1:DataTypeTest" SymbolicName="cas_BinarySchema" ReleaseStatus="Deprecated" DataType="ByteString">
+    <DisplayName>DataTypeTest</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=7</Reference>
+      <Reference ReferenceType="HasProperty">ns=1;i=1</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=19</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=28</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=93</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=72</Reference>
+    </References>
+    <Value>
+      <ByteString xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">PG9wYzpUeXBlRGljdGlvbmFyeQ0KICB4bWxuczpvcGM9Imh0dHA6Ly9vcGNmb3VuZGF0aW9uLm9y
+Zy9CaW5hcnlTY2hlbWEvIg0KICB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1M
+U2NoZW1hLWluc3RhbmNlIg0KICB4bWxuczp1YT0iaHR0cDovL29wY2ZvdW5kYXRpb24ub3JnL1VB
+LyINCiAgeG1sbnM6dG5zPSJodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL0Rh
+dGFUeXBlVGVzdCINCiAgRGVmYXVsdEJ5dGVPcmRlcj0iTGl0dGxlRW5kaWFuIg0KICBUYXJnZXRO
+YW1lc3BhY2U9Imh0dHA6Ly9jYXMuZXUvVUEvQ29tbVNlcnZlci9Vbml0VGVzdHMvRGF0YVR5cGVU
+ZXN0Ig0KPg0KICA8IS0tIFRoaXMgRmlsZSB3YXMgZ2VuZXJhdGVkIG9uIDIwMjItMDMtMzEgYW5k
+IHN1cHBvcnRzIHRoZSBzcGVjaWZpY2F0aW9ucyBzdXBwb3J0ZWQgYnkgdmVyc2lvbiAxLjExLjMz
+NS4xMCBvZiB0aGUgT1BDIFVBIGRlbGl2ZXJhYmxlcy4gLS0+DQogIDxvcGM6SW1wb3J0IE5hbWVz
+cGFjZT0iaHR0cDovL29wY2ZvdW5kYXRpb24ub3JnL1VBLyIgTG9jYXRpb249Ii5CaW5hcnlTY2hl
+bWEuYnNkIi8+DQoNCiAgPG9wYzpFbnVtZXJhdGVkVHlwZSBOYW1lPSJBYnN0cmFjdEVudW1lcmF0
+aW9uRGF0YVR5cGUiIExlbmd0aEluQml0cz0iMzIiPg0KICAgIDxvcGM6RW51bWVyYXRlZFZhbHVl
+IE5hbWU9IkZpZWxkMSIgVmFsdWU9IjAiIC8+DQogICAgPG9wYzpFbnVtZXJhdGVkVmFsdWUgTmFt
+ZT0iRmllbGQyIiBWYWx1ZT0iMSIgLz4NCiAgPC9vcGM6RW51bWVyYXRlZFR5cGU+DQoNCiAgPG9w
+YzpFbnVtZXJhdGVkVHlwZSBOYW1lPSJFbnVtZXJhdGlvbkRhdGFUeXBlIiBMZW5ndGhJbkJpdHM9
+IjMyIj4NCiAgICA8b3BjOkRvY3VtZW50YXRpb24+RW51bWVyYXRpb24gRGF0YVR5cGUgZGVyaXZl
+ZCBmcm9tIGFic3RyYWN0IHR5cGU8L29wYzpEb2N1bWVudGF0aW9uPg0KICAgIDxvcGM6RW51bWVy
+YXRlZFZhbHVlIE5hbWU9IkZpZWxkMSIgVmFsdWU9IjAiIC8+DQogICAgPG9wYzpFbnVtZXJhdGVk
+VmFsdWUgTmFtZT0iRmllbGQyIiBWYWx1ZT0iMSIgLz4NCiAgICA8b3BjOkVudW1lcmF0ZWRWYWx1
+ZSBOYW1lPSJGaWVsZDMiIFZhbHVlPSIxIiAvPg0KICA8L29wYzpFbnVtZXJhdGVkVHlwZT4NCg0K
+ICA8b3BjOlN0cnVjdHVyZWRUeXBlIE5hbWU9IkFic3RyYWN0U3RydWN0dXJlIiBCYXNlVHlwZT0i
+dWE6RXh0ZW5zaW9uT2JqZWN0Ij4NCiAgICA8b3BjOkRvY3VtZW50YXRpb24+QWJzdHJhY3Qgc3Ry
+dWN0dXJlPC9vcGM6RG9jdW1lbnRhdGlvbj4NCiAgICA8b3BjOkZpZWxkIE5hbWU9Ik51bWJlciIg
+VHlwZU5hbWU9InVhOlZhcmlhbnQiIC8+DQogIDwvb3BjOlN0cnVjdHVyZWRUeXBlPg0KDQogIDxv
+cGM6U3RydWN0dXJlZFR5cGUgTmFtZT0iRGVyaXZlZFN0cnVjdHVyZSIgQmFzZVR5cGU9InRuczpB
+YnN0cmFjdFN0cnVjdHVyZSI+DQogICAgPG9wYzpGaWVsZCBOYW1lPSJOdW1iZXIiIFR5cGVOYW1l
+PSJ1YTpWYXJpYW50IiBTb3VyY2VUeXBlPSJ0bnM6QWJzdHJhY3RTdHJ1Y3R1cmUiIC8+DQogICAg
+PG9wYzpGaWVsZCBOYW1lPSJOdW1iZXIiIFR5cGVOYW1lPSJvcGM6SW50MzIiIC8+DQogIDwvb3Bj
+OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=7" BrowseName="NamespaceUri" ReleaseStatus="Deprecated" ParentNodeId="ns=1;i=5" DataType="String">
+    <DisplayName>NamespaceUri</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=5</Reference>
+    </References>
+    <Value>
+      <String xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">http://cas.eu/UA/CommServer/UnitTests/DataTypeTest</String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=1" BrowseName="Deprecated" ReleaseStatus="Deprecated" ParentNodeId="ns=1;i=5" DataType="Boolean">
+    <DisplayName>Deprecated</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=5</Reference>
+    </References>
+    <Value>
+      <Boolean xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">true</Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=19" BrowseName="1:AbstractStructure" ReleaseStatus="Deprecated" ParentNodeId="ns=1;i=5" DataType="String">
+    <DisplayName>AbstractStructure</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=69</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=5</Reference>
+    </References>
+    <Value>
+      <String xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">AbstractStructure</String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=28" BrowseName="1:DerivedStructure" ReleaseStatus="Deprecated" ParentNodeId="ns=1;i=5" DataType="String">
+    <DisplayName>DerivedStructure</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=69</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=5</Reference>
+    </References>
+    <Value>
+      <String xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">DerivedStructure</String>
+    </Value>
+  </UAVariable>
   <UAObject NodeId="ns=1;i=14" BrowseName="Default XML" SymbolicName="DefaultXml">
     <DisplayName>Default XML</DisplayName>
     <References>
@@ -154,10 +254,11 @@
       <Reference ReferenceType="HasTypeDefinition">i=76</Reference>
     </References>
   </UAObject>
-  <UAVariable NodeId="ns=1;i=2" BrowseName="1:DataTypeTest" SymbolicName="cas_XmlSchema" DataType="ByteString">
+  <UAVariable NodeId="ns=1;i=2" BrowseName="1:DataTypeTest" SymbolicName="cas_XmlSchema" ReleaseStatus="Deprecated" DataType="ByteString">
     <DisplayName>DataTypeTest</DisplayName>
     <References>
       <Reference ReferenceType="HasProperty">ns=1;i=4</Reference>
+      <Reference ReferenceType="HasProperty">ns=1;i=8</Reference>
       <Reference ReferenceType="HasComponent">ns=1;i=15</Reference>
       <Reference ReferenceType="HasComponent">ns=1;i=24</Reference>
       <Reference ReferenceType="HasComponent" IsForward="false">i=92</Reference>
@@ -223,9 +324,8 @@ YW1lPSJMaXN0T2ZEZXJpdmVkU3RydWN0dXJlIiB0eXBlPSJ0bnM6TGlzdE9mRGVyaXZlZFN0cnVj
 dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</ByteString>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=4" BrowseName="NamespaceUri" ParentNodeId="ns=1;i=2" DataType="String">
+  <UAVariable NodeId="ns=1;i=4" BrowseName="NamespaceUri" ReleaseStatus="Deprecated" ParentNodeId="ns=1;i=2" DataType="String">
     <DisplayName>NamespaceUri</DisplayName>
-    <Description>A URI that uniquely identifies the dictionary.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=2</Reference>
@@ -234,7 +334,17 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</ByteString
       <String xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">http://cas.eu/UA/CommServer/UnitTests/DataTypeTest</String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=15" BrowseName="1:AbstractStructure" ParentNodeId="ns=1;i=2" DataType="String">
+  <UAVariable NodeId="ns=1;i=8" BrowseName="Deprecated" ReleaseStatus="Deprecated" ParentNodeId="ns=1;i=2" DataType="Boolean">
+    <DisplayName>Deprecated</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=2</Reference>
+    </References>
+    <Value>
+      <Boolean xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">true</Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=15" BrowseName="1:AbstractStructure" ReleaseStatus="Deprecated" ParentNodeId="ns=1;i=2" DataType="String">
     <DisplayName>AbstractStructure</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=69</Reference>
@@ -244,7 +354,7 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</ByteString
       <String xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">//xs:element[@name='AbstractStructure']</String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=24" BrowseName="1:DerivedStructure" ParentNodeId="ns=1;i=2" DataType="String">
+  <UAVariable NodeId="ns=1;i=24" BrowseName="1:DerivedStructure" ReleaseStatus="Deprecated" ParentNodeId="ns=1;i=2" DataType="String">
     <DisplayName>DerivedStructure</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=69</Reference>
@@ -254,92 +364,18 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</ByteString
       <String xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">//xs:element[@name='DerivedStructure']</String>
     </Value>
   </UAVariable>
-  <UAObject NodeId="ns=1;i=18" BrowseName="Default Binary" SymbolicName="DefaultBinary">
-    <DisplayName>Default Binary</DisplayName>
+  <UAObject NodeId="ns=1;i=31" BrowseName="Default JSON" SymbolicName="DefaultJson">
+    <DisplayName>Default JSON</DisplayName>
     <References>
       <Reference ReferenceType="HasEncoding" IsForward="false">ns=1;i=13</Reference>
-      <Reference ReferenceType="HasDescription">ns=1;i=19</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=76</Reference>
     </References>
   </UAObject>
-  <UAObject NodeId="ns=1;i=27" BrowseName="Default Binary" SymbolicName="DefaultBinary">
-    <DisplayName>Default Binary</DisplayName>
+  <UAObject NodeId="ns=1;i=32" BrowseName="Default JSON" SymbolicName="DefaultJson">
+    <DisplayName>Default JSON</DisplayName>
     <References>
       <Reference ReferenceType="HasEncoding" IsForward="false">ns=1;i=22</Reference>
-      <Reference ReferenceType="HasDescription">ns=1;i=28</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=76</Reference>
     </References>
   </UAObject>
-  <UAVariable NodeId="ns=1;i=5" BrowseName="1:DataTypeTest" SymbolicName="cas_BinarySchema" DataType="ByteString">
-    <DisplayName>DataTypeTest</DisplayName>
-    <References>
-      <Reference ReferenceType="HasProperty">ns=1;i=7</Reference>
-      <Reference ReferenceType="HasComponent">ns=1;i=19</Reference>
-      <Reference ReferenceType="HasComponent">ns=1;i=28</Reference>
-      <Reference ReferenceType="HasComponent" IsForward="false">i=93</Reference>
-      <Reference ReferenceType="HasTypeDefinition">i=72</Reference>
-    </References>
-    <Value>
-      <ByteString xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">PG9wYzpUeXBlRGljdGlvbmFyeQ0KICB4bWxuczpvcGM9Imh0dHA6Ly9vcGNmb3VuZGF0aW9uLm9y
-Zy9CaW5hcnlTY2hlbWEvIg0KICB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1M
-U2NoZW1hLWluc3RhbmNlIg0KICB4bWxuczp1YT0iaHR0cDovL29wY2ZvdW5kYXRpb24ub3JnL1VB
-LyINCiAgeG1sbnM6dG5zPSJodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL0Rh
-dGFUeXBlVGVzdCINCiAgRGVmYXVsdEJ5dGVPcmRlcj0iTGl0dGxlRW5kaWFuIg0KICBUYXJnZXRO
-YW1lc3BhY2U9Imh0dHA6Ly9jYXMuZXUvVUEvQ29tbVNlcnZlci9Vbml0VGVzdHMvRGF0YVR5cGVU
-ZXN0Ig0KPg0KICA8IS0tIFRoaXMgRmlsZSB3YXMgZ2VuZXJhdGVkIG9uIDIwMjItMDMtMzEgYW5k
-IHN1cHBvcnRzIHRoZSBzcGVjaWZpY2F0aW9ucyBzdXBwb3J0ZWQgYnkgdmVyc2lvbiAxLjExLjMz
-NS4xMCBvZiB0aGUgT1BDIFVBIGRlbGl2ZXJhYmxlcy4gLS0+DQogIDxvcGM6SW1wb3J0IE5hbWVz
-cGFjZT0iaHR0cDovL29wY2ZvdW5kYXRpb24ub3JnL1VBLyIgTG9jYXRpb249Ii5CaW5hcnlTY2hl
-bWEuYnNkIi8+DQoNCiAgPG9wYzpFbnVtZXJhdGVkVHlwZSBOYW1lPSJBYnN0cmFjdEVudW1lcmF0
-aW9uRGF0YVR5cGUiIExlbmd0aEluQml0cz0iMzIiPg0KICAgIDxvcGM6RW51bWVyYXRlZFZhbHVl
-IE5hbWU9IkZpZWxkMSIgVmFsdWU9IjAiIC8+DQogICAgPG9wYzpFbnVtZXJhdGVkVmFsdWUgTmFt
-ZT0iRmllbGQyIiBWYWx1ZT0iMSIgLz4NCiAgPC9vcGM6RW51bWVyYXRlZFR5cGU+DQoNCiAgPG9w
-YzpFbnVtZXJhdGVkVHlwZSBOYW1lPSJFbnVtZXJhdGlvbkRhdGFUeXBlIiBMZW5ndGhJbkJpdHM9
-IjMyIj4NCiAgICA8b3BjOkRvY3VtZW50YXRpb24+RW51bWVyYXRpb24gRGF0YVR5cGUgZGVyaXZl
-ZCBmcm9tIGFic3RyYWN0IHR5cGU8L29wYzpEb2N1bWVudGF0aW9uPg0KICAgIDxvcGM6RW51bWVy
-YXRlZFZhbHVlIE5hbWU9IkZpZWxkMSIgVmFsdWU9IjAiIC8+DQogICAgPG9wYzpFbnVtZXJhdGVk
-VmFsdWUgTmFtZT0iRmllbGQyIiBWYWx1ZT0iMSIgLz4NCiAgICA8b3BjOkVudW1lcmF0ZWRWYWx1
-ZSBOYW1lPSJGaWVsZDMiIFZhbHVlPSIxIiAvPg0KICA8L29wYzpFbnVtZXJhdGVkVHlwZT4NCg0K
-ICA8b3BjOlN0cnVjdHVyZWRUeXBlIE5hbWU9IkFic3RyYWN0U3RydWN0dXJlIiBCYXNlVHlwZT0i
-dWE6RXh0ZW5zaW9uT2JqZWN0Ij4NCiAgICA8b3BjOkRvY3VtZW50YXRpb24+QWJzdHJhY3Qgc3Ry
-dWN0dXJlPC9vcGM6RG9jdW1lbnRhdGlvbj4NCiAgICA8b3BjOkZpZWxkIE5hbWU9Ik51bWJlciIg
-VHlwZU5hbWU9InVhOlZhcmlhbnQiIC8+DQogIDwvb3BjOlN0cnVjdHVyZWRUeXBlPg0KDQogIDxv
-cGM6U3RydWN0dXJlZFR5cGUgTmFtZT0iRGVyaXZlZFN0cnVjdHVyZSIgQmFzZVR5cGU9InRuczpB
-YnN0cmFjdFN0cnVjdHVyZSI+DQogICAgPG9wYzpGaWVsZCBOYW1lPSJOdW1iZXIiIFR5cGVOYW1l
-PSJ1YTpWYXJpYW50IiBTb3VyY2VUeXBlPSJ0bnM6QWJzdHJhY3RTdHJ1Y3R1cmUiIC8+DQogICAg
-PG9wYzpGaWVsZCBOYW1lPSJOdW1iZXIiIFR5cGVOYW1lPSJvcGM6SW50MzIiIC8+DQogIDwvb3Bj
-OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
-    </Value>
-  </UAVariable>
-  <UAVariable NodeId="ns=1;i=7" BrowseName="NamespaceUri" ParentNodeId="ns=1;i=5" DataType="String">
-    <DisplayName>NamespaceUri</DisplayName>
-    <Description>A URI that uniquely identifies the dictionary.</Description>
-    <References>
-      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=5</Reference>
-    </References>
-    <Value>
-      <String xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">http://cas.eu/UA/CommServer/UnitTests/DataTypeTest</String>
-    </Value>
-  </UAVariable>
-  <UAVariable NodeId="ns=1;i=19" BrowseName="1:AbstractStructure" ParentNodeId="ns=1;i=5" DataType="String">
-    <DisplayName>AbstractStructure</DisplayName>
-    <References>
-      <Reference ReferenceType="HasTypeDefinition">i=69</Reference>
-      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=5</Reference>
-    </References>
-    <Value>
-      <String xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">AbstractStructure</String>
-    </Value>
-  </UAVariable>
-  <UAVariable NodeId="ns=1;i=28" BrowseName="1:DerivedStructure" ParentNodeId="ns=1;i=5" DataType="String">
-    <DisplayName>DerivedStructure</DisplayName>
-    <References>
-      <Reference ReferenceType="HasTypeDefinition">i=69</Reference>
-      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=5</Reference>
-    </References>
-    <Value>
-      <String xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">DerivedStructure</String>
-    </Value>
-  </UAVariable>
 </UANodeSet>

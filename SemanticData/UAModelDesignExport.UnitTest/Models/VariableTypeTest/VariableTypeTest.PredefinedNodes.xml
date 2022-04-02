@@ -29,7 +29,6 @@
         <uax:Name>EURange</uax:Name>
       </uax:BrowseName>
       <uax:DisplayName>
-        <uax:Locale></uax:Locale>
         <uax:Text>NewDisplayName</uax:Text>
       </uax:DisplayName>
       <uax:ReferenceTypeId>

@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2021 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  *
@@ -378,10 +378,14 @@ namespace ObjectTypeTest
         /// </summary>
         protected override void Initialize(ISystemContext context)
         {
+            base.Initialize(context);
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
         }
 
+        /// <summary>
+        /// Initializes the instance with a node.
+        /// </summary>
         protected override void Initialize(ISystemContext context, NodeState source)
         {
             InitializeOptionalChildren(context);
@@ -399,19 +403,17 @@ namespace ObjectTypeTest
         #region Initialization String
         private const string InitializationString =
            "AQAAADQAAABodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL09iamVjdFR5cGVUZXN0" +
-           "/////wRggAABAAAAAQAZAAAAQ29tcGxleE9iamVjdFR5cGVJbnN0YW5jZQEBAQABAQEA/////wMAAAAV" +
-           "YMkKAgAAABEAAABCcm93c2VOYW1lNG5vZGU2NgEADQAAAENoaWxkUHJvcGVydHkBAQMAAC4ARAMAAAAA" +
-           "Ff////8BAf////8AAAAAFWCJCgIAAAABAA0AAABDaGlsZFZhcmlhYmxlAQErAAAvAQBACSsAAAAAGv//" +
-           "//8BAf////8BAAAAFWCJCgIAAAAAAAcAAABFVVJhbmdlAQEvAAAuAEQvAAAAAQB0A/////8BAf////8A" +
-           "AAAABGGCCgQAAAABAAsAAABDaGlsZE1ldGhvZAEBCgAALwEBCgAKAAAAAQH/////AAAAAA==";
+           "/////wRggAIBAAAAAQAZAAAAQ29tcGxleE9iamVjdFR5cGVJbnN0YW5jZQEBAQABAQEAAQAAAP////8D" +
+           "AAAAFWDJCgIAAAARAAAAQnJvd3NlTmFtZTRub2RlNjYBAA0AAABDaGlsZFByb3BlcnR5AQEDAAAuAEQD" +
+           "AAAAABX/////AQH/////AAAAABVgiQoCAAAAAQANAAAAQ2hpbGRWYXJpYWJsZQEBKwAALwEAQAkrAAAA" +
+           "ABr/////AQH/////AQAAABVgiQoCAAAAAAAHAAAARVVSYW5nZQEBLwAALgBELwAAAAEAdAP/////AQH/" +
+           "////AAAAAARhggoEAAAAAQALAAAAQ2hpbGRNZXRob2QBAQoAAC8BAQoACgAAAAEB/////wAAAAA=";
         #endregion
         #endif
         #endregion
 
         #region Public Properties
-        /// <summary>
-        /// A description for the ChildProperty Property.
-        /// </summary>
+        /// <remarks />
         public PropertyState<LocalizedText> BrowseName4node66
         {
             get
@@ -430,9 +432,7 @@ namespace ObjectTypeTest
             }
         }
 
-        /// <summary>
-        /// A description for the ChildVariable Variable.
-        /// </summary>
+        /// <remarks />
         public AnalogItemState ChildVariable
         {
             get
@@ -451,9 +451,7 @@ namespace ObjectTypeTest
             }
         }
 
-        /// <summary>
-        /// A description for the ChildMethod Method.
-        /// </summary>
+        /// <remarks />
         public ChildMethodMethodState ChildMethod
         {
             get
@@ -632,10 +630,14 @@ namespace ObjectTypeTest
         /// </summary>
         protected override void Initialize(ISystemContext context)
         {
+            base.Initialize(context);
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
         }
 
+        /// <summary>
+        /// Initializes the instance with a node.
+        /// </summary>
         protected override void Initialize(ISystemContext context, NodeState source)
         {
             InitializeOptionalChildren(context);
@@ -653,12 +655,12 @@ namespace ObjectTypeTest
         #region Initialization String
         private const string InitializationString =
            "AQAAADQAAABodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL09iamVjdFR5cGVUZXN0" +
-           "/////wRggAABAAAAAQAkAAAARGVyaXZlZEZyb21Db21wbGV4T2JqZWN0VHlwZUluc3RhbmNlAQEQAAEB" +
-           "EAD/////AwAAABVgyQoCAAAAEQAAAEJyb3dzZU5hbWU0bm9kZTY2AQANAAAAQ2hpbGRQcm9wZXJ0eQEB" +
-           "EgAALgBEEgAAAAAV/////wEB/////wAAAAAVYIkKAgAAAAEADQAAAENoaWxkVmFyaWFibGUBATEAAC8B" +
-           "AEAJMQAAAAAa/////wEB/////wEAAAAVYIkKAgAAAAAABwAAAEVVUmFuZ2UBATUAAC4ARDUAAAABAHQD" +
-           "/////wEB/////wAAAABEYYIKBAAAAAEACwAAAENoaWxkTWV0aG9kAQEZAAMAAAAAEgAAAENoaWxkTWV0" +
-           "aG9kTmV3TmFtZQAvAQEKABkAAAABAf////8AAAAA";
+           "/////wRggAIBAAAAAQAkAAAARGVyaXZlZEZyb21Db21wbGV4T2JqZWN0VHlwZUluc3RhbmNlAQEQAAEB" +
+           "EAAQAAAA/////wMAAAAVYMkKAgAAABEAAABCcm93c2VOYW1lNG5vZGU2NgEADQAAAENoaWxkUHJvcGVy" +
+           "dHkBARIAAC4ARBIAAAAAFf////8BAf////8AAAAAFWCJCgIAAAABAA0AAABDaGlsZFZhcmlhYmxlAQEx" +
+           "AAAvAQBACTEAAAAAGv////8BAf////8BAAAAFWCJCgIAAAAAAAcAAABFVVJhbmdlAQE1AAAuAEQ1AAAA" +
+           "AQB0A/////8BAf////8AAAAARGGCCgQAAAABAAsAAABDaGlsZE1ldGhvZAEBGQADAAAAABIAAABDaGls" +
+           "ZE1ldGhvZE5ld05hbWUALwEBCgAZAAAAAQH/////AAAAAA==";
         #endregion
         #endif
         #endregion

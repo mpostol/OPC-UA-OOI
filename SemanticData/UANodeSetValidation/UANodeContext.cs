@@ -34,7 +34,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="ArgumentNullException">traceMessageCallback</exception>
     internal UANodeContext(NodeId nodeId, IAddressSpaceBuildContext addressSpaceContext, Action<TraceMessage> traceMessageCallback)
     {
-      _TraceEvent = traceMessageCallback ?? throw new ArgumentNullException(nameof(traceMessageCallback));
+      TraceEvent = traceMessageCallback ?? throw new ArgumentNullException(nameof(traceMessageCallback));
       NodeIdContext = nodeId;
       this.m_AddressSpaceContext = addressSpaceContext;
     }
@@ -47,11 +47,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Builds the symbolic identifier.
     /// </summary>
     /// <param name="path">The browse path.</param>
+    //NetworkIdentifier is missing in generated Model Design for DI model #629
     public void BuildSymbolicId(List<string> path)
     {
       if (this.UANode == null)
       {
-        _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The target node NodeId={this.NodeIdContext}, current path {string.Join(", ", path)}"));
+        TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The target node NodeId={this.NodeIdContext}, current path {string.Join(", ", path)}"));
         return;
       }
       IEnumerable<UAReferenceContext> _parentConnector = m_AddressSpaceContext.GetReferences2Me(this).Where<UAReferenceContext>(x => x.ChildConnector);
@@ -81,7 +82,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         throw new ArgumentException(nameof(node), $"Argument must not be null at {nameof(Update)} ");
       if (this.UANode != null)
       {
-        _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, string.Format("The {0} is already defined and is removed from further processing.", node.NodeId.ToString())));
+        TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.NodeIdDuplicated, string.Format("The {0} is already defined and is removed from further processing.", node.NodeId.ToString())));
         return;
       }
       UANode = node;
@@ -115,7 +116,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     public IUANodeContext CreateUANodeContext(NodeId id)
     {
-      return new UANodeContext(id, m_AddressSpaceContext, _TraceEvent);
+      return new UANodeContext(id, m_AddressSpaceContext, TraceEvent);
     }
 
     #endregion IUANodeContext
@@ -132,45 +133,77 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     /// <summary>
-    /// Processes the node references to calculate all relevant properties. Must be called after finishing import of all the parent models.
+    /// Calculates the node references.
     /// </summary>
-    /// <param name="nodeFactory">The node container.</param>
+    /// <param name="nodeFactory">The node factory.</param>
+    /// <param name="allNodesInConcern">list of selected members to export.</param>
     /// <param name="validator">The validator.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="nodeFactory"/> must not be null.</exception>
+    /// <param name="validateExportNode2Model">It creates the node at the top level of the model. Called if the node has reference to another node that cannot be defined as a child.</param>
     //TODO Import simple NodeSet2 file is incomplete #510
-    void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, IValidator validator)
+    void IUANodeBase.CalculateNodeReferences(INodeFactory nodeFactory, List<IUANodeBase> allNodesInConcern, IValidator validator, Action<IUANodeContext> validateExportNode2Model)
     {
       if (nodeFactory == null)
         throw new ArgumentNullException(nameof(nodeFactory), $"{nodeFactory} must not be null in {nameof(IUANodeBase.CalculateNodeReferences)}");
       if (validator is null)
         throw new ArgumentNullException(nameof(validator), $"{nameof(validator)} must not be null in {nameof(IUANodeBase.CalculateNodeReferences)}");
+      if (validateExportNode2Model == null)
+        throw new ArgumentNullException(nameof(validateExportNode2Model), $"The parameter must not be null in {nameof(IUANodeBase.CalculateNodeReferences)}");
       List<UAReferenceContext> _children = new List<UAReferenceContext>();
       foreach (UAReferenceContext _rfx in m_AddressSpaceContext.GetMyReferences(this))
       {
         if (_rfx.TargetNode.UANode == null)
         {
-          _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The Node {_rfx.TargetNode} has not been defined and is excluded from further model processing."));
+          TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DanglingReferenceTarget, $"The Node {_rfx.TargetNode} has not been defined and is excluded from further model processing."));
           continue;
         }
         switch (_rfx.ReferenceKind)
         {
           case ReferenceKindEnum.Custom:
-            //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
             XmlQualifiedName _ReferenceType = _rfx.GetReferenceTypeName();
             if (_ReferenceType == XmlQualifiedName.Empty)
             {
               BuildError _err = BuildError.DanglingReferenceTarget;
-              _TraceEvent(TraceMessage.BuildErrorTraceMessage(_err, "Information"));
+              TraceEvent(TraceMessage.BuildErrorTraceMessage(_err, "Information"));
             }
             else if (_ReferenceType == new XmlQualifiedName(BrowseNames.HasEncoding, Namespaces.OpcUa))
             {
-              _TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_ReferenceType.ToString()} from the model"));
+              TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_ReferenceType.ToString()} from the model"));
               return;
             }
             IReferenceFactory _or = nodeFactory.NewReference();
             _or.IsInverse = !_rfx.IsForward;
             _or.ReferenceType = _ReferenceType;
+            //TODO The exported model doesn't contain all nodes #653
+            //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
             _or.TargetId = _rfx.BrowsePath();
+            switch (_rfx.TargetNode.UANode.NodeClassEnum)
+            {
+              case NodeClassEnum.UADataType:
+              case NodeClassEnum.UAObjectType:
+              case NodeClassEnum.UAReferenceType:
+              case NodeClassEnum.UAVariableType:
+                break;
+
+              //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
+              //TODO The exported model doesn't contain all nodes #653
+              case NodeClassEnum.UAObject:
+              case NodeClassEnum.UAVariable:
+              case NodeClassEnum.UAMethod:
+                //validator.ValidateExportNode(_rfx.TargetNode, allNodesInConcern, nodeFactory, validateExportNode2Model, _rfx);
+                validateExportNode2Model(_rfx.TargetNode);
+                break;
+
+              case NodeClassEnum.UAView:
+                TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_rfx.TargetNode} from the model"));
+                break;
+
+              case NodeClassEnum.Unknown:
+                TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removed the graph of nodes at {_rfx.TargetNode} from the model"));
+                break;
+
+              default:
+                throw new ArgumentOutOfRangeException(nameof(_rfx.TargetNode.UANode.NodeClassEnum));
+            }
             break;
 
           case ReferenceKindEnum.HasComponent:
@@ -190,31 +223,31 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           case ReferenceKindEnum.HasTypeDefinition: //TODO Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
             IsProperty = _rfx.TargetNode.IsPropertyVariableType;
             break;
-
-          case ReferenceKindEnum.HierarchicalReferences:
-            //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
-            XmlQualifiedName referenceType = _rfx.GetReferenceTypeName();
-            _TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.DiagnosticInformation, $"Id = D290E7B4-F77C-4EF0-883B-844F66471DB6; Reference {nameof(ReferenceKindEnum.HierarchicalReferences)} not supported. Removed the graph at {referenceType.ToString()} of nodes from the model"));
-            break;
         }
       }
-      Dictionary<string, IUANodeBase> _derivedChildren = m_BaseTypeNode == null ? new Dictionary<string, IUANodeBase>() : m_BaseTypeNode.GetDerivedInstances();
-      foreach (UAReferenceContext _rc in _children)
+      //TODO The exported model doesn't contain all nodes #653
+      RemoveDerivedChildren(nodeFactory, allNodesInConcern, validator, validateExportNode2Model, _children);
+    }
+
+    private void RemoveDerivedChildren(INodeFactory nodeFactory, List<IUANodeBase> allNodesInConcern, IValidator validator, Action<IUANodeContext> validateExportNode2Model, List<UAReferenceContext> children)
+    {
+      Dictionary<IUANodeBase, UAReferenceContext> referencedChildren = children.ToDictionary<UAReferenceContext, IUANodeBase>(x => x.TargetNode);
+      NodesCollection derivedChildren = m_BaseTypeNode == null ? new NodesCollection() : m_BaseTypeNode.GetDerivedInstances();
+      foreach (var _rc in referencedChildren)
       {
-        try
+        IUANodeBase _instanceDeclaration = null;
+        string name = _rc.Key.UANode.BrowseNameQualifiedName.Name;
+        if (!string.IsNullOrEmpty(name))
+          _instanceDeclaration = derivedChildren.ContainsKey(name) ? derivedChildren[name] : null;
+        if (_rc.Key.Equals(_instanceDeclaration))
         {
-          IUANodeBase _instanceDeclaration = null;
-          if (!string.IsNullOrEmpty(_rc.TargetNode.UANode.BrowseNameQualifiedName.Name))
-            _instanceDeclaration = _derivedChildren.ContainsKey(_rc.TargetNode.UANode.BrowseNameQualifiedName.Name) ? _derivedChildren[_rc.TargetNode.UANode.BrowseNameQualifiedName.Name] : null;
-          if (_rc.TargetNode.Equals(_instanceDeclaration))
-          {
-            //_TraceEvent(TraceMessage.DiagnosticTraceMessage($"Removing instance declaration {_rc.TargetNode.ToString()}"));
-            continue;
-          }
-          _rc.TargetNode.RemoveInheritedValues(_instanceDeclaration);
-          validator.ValidateExportNode(_rc.TargetNode, nodeFactory, _rc);
+          TraceEvent(TraceMessage.DiagnosticTraceMessage($"{2054200566} - Removing instance declaration {_rc.Key}"));
+          if (!allNodesInConcern.Remove(_rc.Key))
+            TraceEvent(TraceMessage.DiagnosticTraceMessage($"{2064801864} - Derived node {_rc.Key} doesn't exist in all nodes"));
+          continue;
         }
-        catch (Exception) { throw; }
+        _rc.Key.RemoveInheritedValues(_instanceDeclaration);
+        validator.ValidateExportNode(_rc.Key, allNodesInConcern, nodeFactory, validateExportNode2Model, _rc.Value);
       }
     }
 
@@ -243,7 +276,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public XmlQualifiedName ExportBaseTypeBrowseName()
     {
       bool type = UANode is UAType;
-      return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type, _TraceEvent));
+      return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type));
     }
 
     /// <summary>
@@ -277,26 +310,24 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Gets the derived instances.
     /// </summary>
-    /// <returns>Dictionary&lt;System.String, IUANodeBase&gt;.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">Circular loop in inheritance chain</exception>
+    /// <returns>An instance of <see cref="NodesCollection"/> or null if there is nothing to return</returns>
     //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
-    public Dictionary<string, IUANodeBase> GetDerivedInstances()
+    //TODO The exported model doesn't contain all nodes #653
+    public NodesCollection GetDerivedInstances()
     {
       if (m_InGetDerivedInstances)
-        throw new ArgumentOutOfRangeException($"Circular loop in {nameof(GetDerivedInstances)}"); //TODO replace by the message - it is just model error.
+      {
+        TraceMessage errorToLog = TraceMessage.BuildErrorTraceMessage(BuildError.NotValidLoopingHierarchy, $"Circular loop in {nameof(GetDerivedInstances)}");
+        TraceEvent(errorToLog);
+        return null;
+      }
       try
       {
         m_InGetDerivedInstances = true;
         IEnumerable<IUANodeBase> _myChildren = m_AddressSpaceContext.GetChildren(this);
-        Dictionary<string, IUANodeBase> _instanceDeclarations = m_BaseTypeNode == null ? new Dictionary<string, IUANodeBase>() : m_BaseTypeNode.GetDerivedInstances();
-        foreach (UANodeContext item in _myChildren)
-        {
-          string _key = item.UANode.BrowseNameQualifiedName.Name;
-          if (_instanceDeclarations.ContainsKey(_key))
-            _instanceDeclarations[_key] = item; //replace by current item that overrides the base one
-          else
-            _instanceDeclarations.Add(_key, item); //add derived item
-        }
+        NodesCollection _instanceDeclarations = m_BaseTypeNode == null ? new NodesCollection() : m_BaseTypeNode.GetDerivedInstances();
+        foreach (IUANodeBase item in _myChildren)
+          _instanceDeclarations.AddOrReplace(item, true);
         return _instanceDeclarations;
       }
       finally
@@ -305,8 +336,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
 
+    /// <summary>
+    /// Gets a value indicating whether this instance is property variable type.
+    /// </summary>
+    /// <value><c>true</c> if this instance is property variable type; otherwise, <c>false</c>.</value>
     bool IUANodeBase.IsPropertyVariableType => this.NodeIdContext == VariableTypeIds.PropertyType;
 
+    /// <summary>
+    /// Removes the inherited values.
+    /// </summary>
+    /// <param name="instanceDeclaration">The instance declaration.</param>
+    /// <remarks>If a member is overridden all inherited values of the node attributes must be removed.</remarks>
     void IUANodeBase.RemoveInheritedValues(IUANodeBase instanceDeclaration)
     {
       if (instanceDeclaration is null)
@@ -339,8 +379,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     public override string ToString()
     {
-      string browseName = this.UANode == null ? String.Empty : $", BrowseName = {this.UANode.BrowseName}";
-      return $"NodeId={this.NodeIdContext}{browseName}";
+      string browseName = this.UANode == null ? " ???? " : $"{this.UANode.BrowseName}";
+      return $"NodeId=\"{this.NodeIdContext}\", BrowseName=\"{browseName}\", ModellingRule=\"{ModelingRule}\"";
     }
 
     #endregion object
@@ -350,23 +390,22 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private IUANodeBase m_BaseTypeNode;
     private readonly IAddressSpaceBuildContext m_AddressSpaceContext = null;
     private bool m_InGetDerivedInstances = false;
+    private readonly Action<TraceMessage> TraceEvent = null;
 
     //methods
-    private void TraceErrorUndefinedBaseType(NodeId target, bool type, Action<TraceMessage> traceEvent)
+    private void TraceErrorUndefinedBaseType(NodeId target, bool type)
     {
       if (type)
       {
         string _msg = string.Format("BaseType of Id={0} for node {1}", target, this.UANode.BrowseNameQualifiedName);
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasSubtypeTarget, _msg));
+        TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasSubtypeTarget, _msg));
       }
       else
       {
         string _msg = string.Format("TypeDefinition of Id={0} for node {1}", target, this.UANode.BrowseNameQualifiedName);
-        traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
+        TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
       }
     }
-
-    private readonly Action<TraceMessage> _TraceEvent = null;
 
     #endregion private
   }

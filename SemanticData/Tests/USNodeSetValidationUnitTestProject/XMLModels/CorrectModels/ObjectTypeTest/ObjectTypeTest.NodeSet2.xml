@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<UANodeSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
   <NamespaceUris>
     <Uri>http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest</Uri>
   </NamespaceUris>
   <Models>
     <Model ModelUri="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest">
-      <RequiredModel ModelUri="http://opcfoundation.org/UA/" Version="1.04" PublicationDate="2016-12-31T00:00:00Z" />
+      <RequiredModel ModelUri="http://opcfoundation.org/UA/" XmlSchemaUri="http://opcfoundation.org/UA/2008/02/Types.xsd" Version="1.04.10" PublicationDate="2021-09-15T00:00:00Z" />
     </Model>
   </Models>
   <Aliases>
@@ -44,6 +44,17 @@
     <Alias Alias="HasModellingRule">i=37</Alias>
     <Alias Alias="HasEncoding">i=38</Alias>
     <Alias Alias="HasDescription">i=39</Alias>
+    <Alias Alias="HasCause">i=53</Alias>
+    <Alias Alias="ToState">i=52</Alias>
+    <Alias Alias="FromState">i=51</Alias>
+    <Alias Alias="HasEffect">i=54</Alias>
+    <Alias Alias="HasTrueSubState">i=9004</Alias>
+    <Alias Alias="HasFalseSubState">i=9005</Alias>
+    <Alias Alias="HasDictionaryEntry">i=17597</Alias>
+    <Alias Alias="HasCondition">i=9006</Alias>
+    <Alias Alias="HasGuard">i=15112</Alias>
+    <Alias Alias="HasAddIn">i=17604</Alias>
+    <Alias Alias="HasInterface">i=17603</Alias>
   </Aliases>
   <UAObjectType NodeId="ns=1;i=196" BrowseName="1:ComplexObjectType">
     <DisplayName>ComplexObjectType</DisplayName>
@@ -59,7 +70,6 @@
   </UAObjectType>
   <UAObject NodeId="ns=1;i=214" BrowseName="ServerCapabilities" ParentNodeId="ns=1;i=196">
     <DisplayName>ServerCapabilities</DisplayName>
-    <Description>Describes capabilities supported by the server.</Description>
     <References>
       <Reference ReferenceType="HasProperty">ns=1;i=215</Reference>
       <Reference ReferenceType="HasProperty">ns=1;i=216</Reference>
@@ -75,18 +85,16 @@
       <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=196</Reference>
     </References>
   </UAObject>
-  <UAVariable NodeId="ns=1;i=215" BrowseName="ServerProfileArray" ParentNodeId="ns=1;i=214" DataType="String" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=215" BrowseName="ServerProfileArray" ParentNodeId="ns=1;i=214" DataType="String" ValueRank="1" ArrayDimensions="0">
     <DisplayName>ServerProfileArray</DisplayName>
-    <Description>A list of profiles supported by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=214</Reference>
     </References>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=216" BrowseName="LocaleIdArray" ParentNodeId="ns=1;i=214" DataType="i=295" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=216" BrowseName="LocaleIdArray" ParentNodeId="ns=1;i=214" DataType="i=295" ValueRank="1" ArrayDimensions="0">
     <DisplayName>LocaleIdArray</DisplayName>
-    <Description>A list of locales supported by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
@@ -95,7 +103,6 @@
   </UAVariable>
   <UAVariable NodeId="ns=1;i=217" BrowseName="MinSupportedSampleRate" ParentNodeId="ns=1;i=214" DataType="i=290">
     <DisplayName>MinSupportedSampleRate</DisplayName>
-    <Description>The minimum sampling interval supported by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
@@ -104,7 +111,6 @@
   </UAVariable>
   <UAVariable NodeId="ns=1;i=218" BrowseName="MaxBrowseContinuationPoints" ParentNodeId="ns=1;i=214" DataType="UInt16">
     <DisplayName>MaxBrowseContinuationPoints</DisplayName>
-    <Description>The maximum number of continuation points for Browse operations per session.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
@@ -113,7 +119,6 @@
   </UAVariable>
   <UAVariable NodeId="ns=1;i=219" BrowseName="MaxQueryContinuationPoints" ParentNodeId="ns=1;i=214" DataType="UInt16">
     <DisplayName>MaxQueryContinuationPoints</DisplayName>
-    <Description>The maximum number of continuation points for Query operations per session.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
@@ -122,16 +127,14 @@
   </UAVariable>
   <UAVariable NodeId="ns=1;i=220" BrowseName="MaxHistoryContinuationPoints" ParentNodeId="ns=1;i=214" DataType="UInt16">
     <DisplayName>MaxHistoryContinuationPoints</DisplayName>
-    <Description>The maximum number of continuation points for ReadHistory operations per session.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=214</Reference>
     </References>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=221" BrowseName="SoftwareCertificates" ParentNodeId="ns=1;i=214" DataType="i=344" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=221" BrowseName="SoftwareCertificates" ParentNodeId="ns=1;i=214" DataType="i=344" ValueRank="1" ArrayDimensions="0">
     <DisplayName>SoftwareCertificates</DisplayName>
-    <Description>The software certificates owned by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
@@ -140,7 +143,6 @@
   </UAVariable>
   <UAObject NodeId="ns=1;i=237" BrowseName="ModellingRules" ParentNodeId="ns=1;i=214">
     <DisplayName>ModellingRules</DisplayName>
-    <Description>A folder for the modelling rules supported by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
@@ -149,7 +151,6 @@
   </UAObject>
   <UAObject NodeId="ns=1;i=238" BrowseName="AggregateFunctions" ParentNodeId="ns=1;i=214">
     <DisplayName>AggregateFunctions</DisplayName>
-    <Description>A folder for the real time aggregates supported by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
@@ -200,7 +201,7 @@
       <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=196</Reference>
     </References>
   </UAMethod>
-  <UAVariable NodeId="ns=1;i=299" BrowseName="InputArguments" ParentNodeId="ns=1;i=295" DataType="i=296" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=299" BrowseName="InputArguments" ParentNodeId="ns=1;i=295" DataType="i=296" ValueRank="1" ArrayDimensions="0">
     <DisplayName>InputArguments</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
@@ -221,7 +222,6 @@
               </DataType>
               <ValueRank>-1</ValueRank>
               <ArrayDimensions />
-              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
             </Argument>
           </Body>
         </ExtensionObject>
@@ -237,14 +237,13 @@
               </DataType>
               <ValueRank>-1</ValueRank>
               <ArrayDimensions />
-              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
             </Argument>
           </Body>
         </ExtensionObject>
       </ListOfExtensionObject>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=300" BrowseName="OutputArguments" ParentNodeId="ns=1;i=295" DataType="i=296" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=300" BrowseName="OutputArguments" ParentNodeId="ns=1;i=295" DataType="i=296" ValueRank="1" ArrayDimensions="0">
     <DisplayName>OutputArguments</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
@@ -265,7 +264,6 @@
               </DataType>
               <ValueRank>-1</ValueRank>
               <ArrayDimensions />
-              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
             </Argument>
           </Body>
         </ExtensionObject>
@@ -294,7 +292,7 @@
       <Reference ReferenceType="HasProperty">ns=1;i=305</Reference>
     </References>
   </UAMethod>
-  <UAVariable NodeId="ns=1;i=304" BrowseName="InputArguments" ParentNodeId="ns=1;i=303" DataType="i=296" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=304" BrowseName="InputArguments" ParentNodeId="ns=1;i=303" DataType="i=296" ValueRank="1" ArrayDimensions="0">
     <DisplayName>InputArguments</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
@@ -314,7 +312,6 @@
               </DataType>
               <ValueRank>-1</ValueRank>
               <ArrayDimensions />
-              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
             </Argument>
           </Body>
         </ExtensionObject>
@@ -330,14 +327,13 @@
               </DataType>
               <ValueRank>-1</ValueRank>
               <ArrayDimensions />
-              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
             </Argument>
           </Body>
         </ExtensionObject>
       </ListOfExtensionObject>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=305" BrowseName="OutputArguments" ParentNodeId="ns=1;i=303" DataType="i=296" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=305" BrowseName="OutputArguments" ParentNodeId="ns=1;i=303" DataType="i=296" ValueRank="1" ArrayDimensions="0">
     <DisplayName>OutputArguments</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
@@ -357,7 +353,6 @@
               </DataType>
               <ValueRank>-1</ValueRank>
               <ArrayDimensions />
-              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
             </Argument>
           </Body>
         </ExtensionObject>
@@ -384,7 +379,7 @@
       <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=310</Reference>
     </References>
   </UAMethod>
-  <UAVariable NodeId="ns=1;i=410" BrowseName="InputArguments" ParentNodeId="ns=1;i=409" DataType="i=296" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=410" BrowseName="InputArguments" ParentNodeId="ns=1;i=409" DataType="i=296" ValueRank="1" ArrayDimensions="0">
     <DisplayName>InputArguments</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
@@ -405,7 +400,6 @@
               </DataType>
               <ValueRank>-1</ValueRank>
               <ArrayDimensions />
-              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
             </Argument>
           </Body>
         </ExtensionObject>
@@ -421,14 +415,13 @@
               </DataType>
               <ValueRank>-1</ValueRank>
               <ArrayDimensions />
-              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
             </Argument>
           </Body>
         </ExtensionObject>
       </ListOfExtensionObject>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=411" BrowseName="OutputArguments" ParentNodeId="ns=1;i=409" DataType="i=296" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=411" BrowseName="OutputArguments" ParentNodeId="ns=1;i=409" DataType="i=296" ValueRank="1" ArrayDimensions="0">
     <DisplayName>OutputArguments</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
@@ -449,7 +442,6 @@
               </DataType>
               <ValueRank>-1</ValueRank>
               <ArrayDimensions />
-              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
             </Argument>
           </Body>
         </ExtensionObject>
@@ -476,17 +468,15 @@
       <Reference ReferenceType="HasTypeDefinition">ns=1;i=310</Reference>
     </References>
   </UAObject>
-  <UAVariable NodeId="ns=1;i=414" BrowseName="ServerArray" ParentNodeId="ns=1;i=413" DataType="String" ValueRank="1" MinimumSamplingInterval="1000">
+  <UAVariable NodeId="ns=1;i=414" BrowseName="ServerArray" ParentNodeId="ns=1;i=413" DataType="String" ValueRank="1" ArrayDimensions="0" MinimumSamplingInterval="1000">
     <DisplayName>ServerArray</DisplayName>
-    <Description>The list of server URIs used by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=413</Reference>
     </References>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=415" BrowseName="NamespaceArray" ParentNodeId="ns=1;i=413" DataType="String" ValueRank="1" MinimumSamplingInterval="1000">
+  <UAVariable NodeId="ns=1;i=415" BrowseName="NamespaceArray" ParentNodeId="ns=1;i=413" DataType="String" ValueRank="1" ArrayDimensions="0" MinimumSamplingInterval="1000">
     <DisplayName>NamespaceArray</DisplayName>
-    <Description>The list of namespace URIs used by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=413</Reference>
@@ -494,7 +484,6 @@
   </UAVariable>
   <UAVariable NodeId="ns=1;i=416" BrowseName="ServerStatus" ParentNodeId="ns=1;i=413" DataType="i=862" MinimumSamplingInterval="1000">
     <DisplayName>ServerStatus</DisplayName>
-    <Description>The current status of the server.</Description>
     <References>
       <Reference ReferenceType="HasComponent">ns=1;i=417</Reference>
       <Reference ReferenceType="HasComponent">ns=1;i=418</Reference>
@@ -598,7 +587,6 @@
   </UAVariable>
   <UAVariable NodeId="ns=1;i=429" BrowseName="ServiceLevel" ParentNodeId="ns=1;i=413" DataType="Byte" MinimumSamplingInterval="1000">
     <DisplayName>ServiceLevel</DisplayName>
-    <Description>A value indicating the level of service the server can provide. 255 indicates the best.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=413</Reference>
@@ -606,7 +594,6 @@
   </UAVariable>
   <UAVariable NodeId="ns=1;i=430" BrowseName="Auditing" ParentNodeId="ns=1;i=413" DataType="Boolean" MinimumSamplingInterval="1000">
     <DisplayName>Auditing</DisplayName>
-    <Description>A flag indicating whether the server is currently generating audit events.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=413</Reference>
@@ -614,7 +601,6 @@
   </UAVariable>
   <UAObject NodeId="ns=1;i=431" BrowseName="ServerCapabilities" ParentNodeId="ns=1;i=413">
     <DisplayName>ServerCapabilities</DisplayName>
-    <Description>Describes capabilities supported by the server.</Description>
     <References>
       <Reference ReferenceType="HasProperty">ns=1;i=432</Reference>
       <Reference ReferenceType="HasProperty">ns=1;i=433</Reference>
@@ -629,17 +615,15 @@
       <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=413</Reference>
     </References>
   </UAObject>
-  <UAVariable NodeId="ns=1;i=432" BrowseName="ServerProfileArray" ParentNodeId="ns=1;i=431" DataType="String" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=432" BrowseName="ServerProfileArray" ParentNodeId="ns=1;i=431" DataType="String" ValueRank="1" ArrayDimensions="0">
     <DisplayName>ServerProfileArray</DisplayName>
-    <Description>A list of profiles supported by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=431</Reference>
     </References>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=433" BrowseName="LocaleIdArray" ParentNodeId="ns=1;i=431" DataType="i=295" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=433" BrowseName="LocaleIdArray" ParentNodeId="ns=1;i=431" DataType="i=295" ValueRank="1" ArrayDimensions="0">
     <DisplayName>LocaleIdArray</DisplayName>
-    <Description>A list of locales supported by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=431</Reference>
@@ -647,7 +631,6 @@
   </UAVariable>
   <UAVariable NodeId="ns=1;i=434" BrowseName="MinSupportedSampleRate" ParentNodeId="ns=1;i=431" DataType="i=290">
     <DisplayName>MinSupportedSampleRate</DisplayName>
-    <Description>The minimum sampling interval supported by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=431</Reference>
@@ -655,7 +638,6 @@
   </UAVariable>
   <UAVariable NodeId="ns=1;i=435" BrowseName="MaxBrowseContinuationPoints" ParentNodeId="ns=1;i=431" DataType="UInt16">
     <DisplayName>MaxBrowseContinuationPoints</DisplayName>
-    <Description>The maximum number of continuation points for Browse operations per session.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=431</Reference>
@@ -663,7 +645,6 @@
   </UAVariable>
   <UAVariable NodeId="ns=1;i=436" BrowseName="MaxQueryContinuationPoints" ParentNodeId="ns=1;i=431" DataType="UInt16">
     <DisplayName>MaxQueryContinuationPoints</DisplayName>
-    <Description>The maximum number of continuation points for Query operations per session.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=431</Reference>
@@ -671,15 +652,13 @@
   </UAVariable>
   <UAVariable NodeId="ns=1;i=437" BrowseName="MaxHistoryContinuationPoints" ParentNodeId="ns=1;i=431" DataType="UInt16">
     <DisplayName>MaxHistoryContinuationPoints</DisplayName>
-    <Description>The maximum number of continuation points for ReadHistory operations per session.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=431</Reference>
     </References>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=438" BrowseName="SoftwareCertificates" ParentNodeId="ns=1;i=431" DataType="i=344" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=438" BrowseName="SoftwareCertificates" ParentNodeId="ns=1;i=431" DataType="i=344" ValueRank="1" ArrayDimensions="0">
     <DisplayName>SoftwareCertificates</DisplayName>
-    <Description>The software certificates owned by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=431</Reference>
@@ -687,7 +666,6 @@
   </UAVariable>
   <UAObject NodeId="ns=1;i=454" BrowseName="ModellingRules" ParentNodeId="ns=1;i=431">
     <DisplayName>ModellingRules</DisplayName>
-    <Description>A folder for the modelling rules supported by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
       <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=431</Reference>
@@ -695,7 +673,6 @@
   </UAObject>
   <UAObject NodeId="ns=1;i=455" BrowseName="AggregateFunctions" ParentNodeId="ns=1;i=431">
     <DisplayName>AggregateFunctions</DisplayName>
-    <Description>A folder for the real time aggregates supported by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
       <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=431</Reference>
@@ -703,7 +680,6 @@
   </UAObject>
   <UAObject NodeId="ns=1;i=456" BrowseName="ServerDiagnostics" ParentNodeId="ns=1;i=413">
     <DisplayName>ServerDiagnostics</DisplayName>
-    <Description>Reports diagnostics about the server.</Description>
     <References>
       <Reference ReferenceType="HasComponent">ns=1;i=457</Reference>
       <Reference ReferenceType="HasComponent">ns=1;i=471</Reference>
@@ -715,7 +691,6 @@
   </UAObject>
   <UAVariable NodeId="ns=1;i=457" BrowseName="ServerDiagnosticsSummary" ParentNodeId="ns=1;i=456" DataType="i=859">
     <DisplayName>ServerDiagnosticsSummary</DisplayName>
-    <Description>A summary of server level diagnostics.</Description>
     <References>
       <Reference ReferenceType="HasComponent">ns=1;i=458</Reference>
       <Reference ReferenceType="HasComponent">ns=1;i=459</Reference>
@@ -817,9 +792,8 @@
       <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=457</Reference>
     </References>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=471" BrowseName="SubscriptionDiagnosticsArray" ParentNodeId="ns=1;i=456" DataType="i=874" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=471" BrowseName="SubscriptionDiagnosticsArray" ParentNodeId="ns=1;i=456" DataType="i=874" ValueRank="1" ArrayDimensions="0">
     <DisplayName>SubscriptionDiagnosticsArray</DisplayName>
-    <Description>A list of diagnostics for each active subscription.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=2171</Reference>
       <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=456</Reference>
@@ -827,7 +801,6 @@
   </UAVariable>
   <UAObject NodeId="ns=1;i=472" BrowseName="SessionsDiagnosticsSummary" ParentNodeId="ns=1;i=456">
     <DisplayName>SessionsDiagnosticsSummary</DisplayName>
-    <Description>A summary of session level diagnostics.</Description>
     <References>
       <Reference ReferenceType="HasComponent">ns=1;i=473</Reference>
       <Reference ReferenceType="HasComponent">ns=1;i=474</Reference>
@@ -835,17 +808,15 @@
       <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=456</Reference>
     </References>
   </UAObject>
-  <UAVariable NodeId="ns=1;i=473" BrowseName="SessionDiagnosticsArray" ParentNodeId="ns=1;i=472" DataType="i=865" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=473" BrowseName="SessionDiagnosticsArray" ParentNodeId="ns=1;i=472" DataType="i=865" ValueRank="1" ArrayDimensions="0">
     <DisplayName>SessionDiagnosticsArray</DisplayName>
-    <Description>A list of diagnostics for each active session.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=2196</Reference>
       <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=472</Reference>
     </References>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=474" BrowseName="SessionSecurityDiagnosticsArray" ParentNodeId="ns=1;i=472" DataType="i=868" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=474" BrowseName="SessionSecurityDiagnosticsArray" ParentNodeId="ns=1;i=472" DataType="i=868" ValueRank="1" ArrayDimensions="0">
     <DisplayName>SessionSecurityDiagnosticsArray</DisplayName>
-    <Description>A list of security related diagnostics for each active session.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=2243</Reference>
       <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=472</Reference>
@@ -853,7 +824,6 @@
   </UAVariable>
   <UAVariable NodeId="ns=1;i=475" BrowseName="EnabledFlag" ParentNodeId="ns=1;i=456" DataType="Boolean" AccessLevel="3">
     <DisplayName>EnabledFlag</DisplayName>
-    <Description>If TRUE the diagnostics collection is enabled.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=456</Reference>
@@ -861,7 +831,6 @@
   </UAVariable>
   <UAObject NodeId="ns=1;i=476" BrowseName="VendorServerInfo" ParentNodeId="ns=1;i=413">
     <DisplayName>VendorServerInfo</DisplayName>
-    <Description>Server information provided by the vendor.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=2033</Reference>
       <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=413</Reference>
@@ -869,7 +838,6 @@
   </UAObject>
   <UAObject NodeId="ns=1;i=477" BrowseName="ServerRedundancy" ParentNodeId="ns=1;i=413">
     <DisplayName>ServerRedundancy</DisplayName>
-    <Description>Describes the redundancy capabilities of the server.</Description>
     <References>
       <Reference ReferenceType="HasProperty">ns=1;i=478</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=2034</Reference>
@@ -878,7 +846,6 @@
   </UAObject>
   <UAVariable NodeId="ns=1;i=478" BrowseName="RedundancySupport" ParentNodeId="ns=1;i=477" DataType="i=851">
     <DisplayName>RedundancySupport</DisplayName>
-    <Description>Indicates what style of redundancy is supported by the server.</Description>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=477</Reference>
@@ -916,7 +883,7 @@
       <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=413</Reference>
     </References>
   </UAMethod>
-  <UAVariable NodeId="ns=1;i=513" BrowseName="InputArguments" ParentNodeId="ns=1;i=512" DataType="i=296" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=513" BrowseName="InputArguments" ParentNodeId="ns=1;i=512" DataType="i=296" ValueRank="1" ArrayDimensions="0">
     <DisplayName>InputArguments</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
@@ -936,7 +903,6 @@
               </DataType>
               <ValueRank>-1</ValueRank>
               <ArrayDimensions />
-              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
             </Argument>
           </Body>
         </ExtensionObject>
@@ -952,14 +918,13 @@
               </DataType>
               <ValueRank>-1</ValueRank>
               <ArrayDimensions />
-              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
             </Argument>
           </Body>
         </ExtensionObject>
       </ListOfExtensionObject>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="ns=1;i=514" BrowseName="OutputArguments" ParentNodeId="ns=1;i=512" DataType="i=296" ValueRank="1">
+  <UAVariable NodeId="ns=1;i=514" BrowseName="OutputArguments" ParentNodeId="ns=1;i=512" DataType="i=296" ValueRank="1" ArrayDimensions="0">
     <DisplayName>OutputArguments</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
@@ -979,7 +944,6 @@
               </DataType>
               <ValueRank>-1</ValueRank>
               <ArrayDimensions />
-              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
             </Argument>
           </Body>
         </ExtensionObject>

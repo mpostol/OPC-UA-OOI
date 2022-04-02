@@ -60,6 +60,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     }
 
     [TestMethod]
+    //TODO The exported model doesn't contain all nodes #653
     public void UAObjectTypeTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"Models\ObjectTypeTest\ObjectTypeTest.NodeSet2.xml");

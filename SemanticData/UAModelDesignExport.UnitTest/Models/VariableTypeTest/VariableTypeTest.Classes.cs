@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2021 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  *
@@ -219,10 +219,14 @@ namespace VariableTypeTest
         /// </summary>
         protected override void Initialize(ISystemContext context)
         {
+            base.Initialize(context);
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
         }
 
+        /// <summary>
+        /// Initializes the instance with a node.
+        /// </summary>
         protected override void Initialize(ISystemContext context, NodeState source)
         {
             InitializeOptionalChildren(context);
@@ -240,18 +244,16 @@ namespace VariableTypeTest
         #region Initialization String
         private const string InitializationString =
            "AQAAADYAAABodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL1ZhcmlhYmxlVHlwZVRl" +
-           "c3T/////FWCJAAIAAAABABsAAABDb21wbGV4VmFyaWFibGVUeXBlSW5zdGFuY2UBAQgAAQEIAAAa////" +
-           "/wEB/////wIAAABVYIkKAgAAAAAABwAAAEVVUmFuZ2UBAQwAAwAAAAAOAAAATmV3RGlzcGxheU5hbWUA" +
-           "LgBEDAAAAAEAdAP/////AQH/////AAAAABVgiQoCAAAAAQANAAAAVmFyaWFibGVDaGlsZAEBDgAALgBE" +
-           "DgAAAAAG/////wIC/////wAAAAA=";
+           "c3T/////FWCJAgIAAAABABsAAABDb21wbGV4VmFyaWFibGVUeXBlSW5zdGFuY2UBAQgAAQEIAAgAAAAA" +
+           "Gv////8BAf////8CAAAAVWCJCgIAAAAAAAcAAABFVVJhbmdlAQEMAAMAAAAADgAAAE5ld0Rpc3BsYXlO" +
+           "YW1lAC4ARAwAAAABAHQD/////wEB/////wAAAAAVYIkKAgAAAAEADQAAAFZhcmlhYmxlQ2hpbGQBAQ4A" +
+           "AC4ARA4AAAAABv////8CAv////8AAAAA";
         #endregion
         #endif
         #endregion
 
         #region Public Properties
-        /// <summary>
-        /// A description for the VariableChild Property.
-        /// </summary>
+        /// <remarks />
         public PropertyState<int> VariableChild
         {
             get
@@ -372,6 +374,9 @@ namespace VariableTypeTest
             ValueRank = TypeInfo.GetValueRank(typeof(T));
         }
 
+        /// <summary>
+        /// Initializes the instance with a node.
+        /// </summary>
         protected override void Initialize(ISystemContext context, NodeState source)
         {
             InitializeOptionalChildren(context);
@@ -448,10 +453,14 @@ namespace VariableTypeTest
         /// </summary>
         protected override void Initialize(ISystemContext context)
         {
+            base.Initialize(context);
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
         }
 
+        /// <summary>
+        /// Initializes the instance with a node.
+        /// </summary>
         protected override void Initialize(ISystemContext context, NodeState source)
         {
             InitializeOptionalChildren(context);
@@ -469,8 +478,8 @@ namespace VariableTypeTest
         #region Initialization String
         private const string InitializationString =
            "AQAAADYAAABodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL1ZhcmlhYmxlVHlwZVRl" +
-           "c3T/////F2CJAAIAAAABABkAAABBcnJheVZhcmlhYmxlVHlwZUluc3RhbmNlAQEPAAEBDwAABgMAAAAD" +
-           "AAAAAAAAAAAAAAAAAAAAAQH/////AAAAAA==";
+           "c3T/////F2CJAgIAAAABABkAAABBcnJheVZhcmlhYmxlVHlwZUluc3RhbmNlAQEPAAEBDwAPAAAAAAYD" +
+           "AAAAAwAAAAAAAAAAAAAAAAAAAAEB/////wAAAAA=";
         #endregion
         #endif
         #endregion
@@ -534,10 +543,14 @@ namespace VariableTypeTest
         /// </summary>
         protected override void Initialize(ISystemContext context)
         {
+            base.Initialize(context);
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
         }
 
+        /// <summary>
+        /// Initializes the instance with a node.
+        /// </summary>
         protected override void Initialize(ISystemContext context, NodeState source)
         {
             InitializeOptionalChildren(context);
@@ -555,8 +568,8 @@ namespace VariableTypeTest
         #region Initialization String
         private const string InitializationString =
            "AQAAADYAAABodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL1ZhcmlhYmxlVHlwZVRl" +
-           "c3T/////FWCpAAIAAAABACMAAABTaW1wbGVWYXJpYWJsZVdpdGhWYWx1ZVR5cGVJbnN0YW5jZQEBEAAB" +
-           "ARAABgEAAAAABv////8BAf////8AAAAA";
+           "c3T/////FWCpAgIAAAABACMAAABTaW1wbGVWYXJpYWJsZVdpdGhWYWx1ZVR5cGVJbnN0YW5jZQEBEAAB" +
+           "ARAAEAAAAAYBAAAAAAb/////AQH/////AAAAAA==";
         #endregion
         #endif
         #endregion

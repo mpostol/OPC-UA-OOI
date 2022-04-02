@@ -1,9 +1,11 @@
+cas_BinarySchema_Deprecated,1,Variable
 cas_XmlSchema,2,Variable
 cas_XmlSchema_DataTypeVersion,3,Variable
 cas_XmlSchema_NamespaceUri,4,Variable
 cas_BinarySchema,5,Variable
 cas_BinarySchema_DataTypeVersion,6,Variable
 cas_BinarySchema_NamespaceUri,7,Variable
+cas_XmlSchema_Deprecated,8,Variable
 AbstractEnumerationDataType,9,DataType
 AbstractEnumerationDataType_EnumStrings,10,Variable
 EnumerationDataType,11,DataType
@@ -26,3 +28,5 @@ DerivedStructure_Encoding_DefaultBinary,27,Object
 cas_BinarySchema_DerivedStructure,28,Variable
 cas_BinarySchema_DerivedStructure_DataTypeVersion,29,Variable
 cas_BinarySchema_DerivedStructure_DictionaryFragment,30,Variable
+AbstractStructure_Encoding_DefaultJson,31,Object
+DerivedStructure_Encoding_DefaultJson,32,Object

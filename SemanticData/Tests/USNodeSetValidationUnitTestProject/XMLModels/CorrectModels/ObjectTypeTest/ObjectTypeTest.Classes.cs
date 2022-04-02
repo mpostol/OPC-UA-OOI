@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2021 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  *
@@ -45,14 +45,14 @@ namespace ObjectTypeTest
     public static partial class Methods
     {
         /// <summary>
-        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_AddRole Method.
+        /// The identifier for the ComplexObjectType_ServerCapabilities_RoleSet_AddRole Method.
         /// </summary>
-        public const uint ComplexObjectType_ServerCapabilities_Roles_AddRole = 520;
+        public const uint ComplexObjectType_ServerCapabilities_RoleSet_AddRole = 3;
 
         /// <summary>
-        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_RemoveRole Method.
+        /// The identifier for the ComplexObjectType_ServerCapabilities_RoleSet_RemoveRole Method.
         /// </summary>
-        public const uint ComplexObjectType_ServerCapabilities_Roles_RemoveRole = 523;
+        public const uint ComplexObjectType_ServerCapabilities_RoleSet_RemoveRole = 6;
 
         /// <summary>
         /// The identifier for the ComplexObjectType_ChildMethod Method.
@@ -75,14 +75,14 @@ namespace ObjectTypeTest
         public const uint NonExecutableMethodComplexObjectType = 307;
 
         /// <summary>
-        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole Method.
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole Method.
         /// </summary>
-        public const uint DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole = 536;
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole = 10;
 
         /// <summary>
-        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole Method.
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_RoleSet_RemoveRole Method.
         /// </summary>
-        public const uint DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole = 539;
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_RoleSet_RemoveRole = 13;
 
         /// <summary>
         /// The identifier for the DerivedFromComplexObjectType_ChildMethod Method.
@@ -90,14 +90,14 @@ namespace ObjectTypeTest
         public const uint DerivedFromComplexObjectType_ChildMethod = 409;
 
         /// <summary>
-        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_AddRole Method.
+        /// The identifier for the NameNotSet6_ServerCapabilities_RoleSet_AddRole Method.
         /// </summary>
-        public const uint NameNotSet6_ServerCapabilities_Roles_AddRole = 552;
+        public const uint NameNotSet6_ServerCapabilities_RoleSet_AddRole = 17;
 
         /// <summary>
-        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_RemoveRole Method.
+        /// The identifier for the NameNotSet6_ServerCapabilities_RoleSet_RemoveRole Method.
         /// </summary>
-        public const uint NameNotSet6_ServerCapabilities_Roles_RemoveRole = 555;
+        public const uint NameNotSet6_ServerCapabilities_RoleSet_RemoveRole = 20;
 
         /// <summary>
         /// The identifier for the NameNotSet6_ChildMethod Method.
@@ -340,19 +340,19 @@ namespace ObjectTypeTest
         public const uint ComplexObjectType_ServerCapabilities_SoftwareCertificates = 221;
 
         /// <summary>
-        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// The identifier for the ComplexObjectType_ServerCapabilities_RoleSet_AddRole_InputArguments Variable.
         /// </summary>
-        public const uint ComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments = 521;
+        public const uint ComplexObjectType_ServerCapabilities_RoleSet_AddRole_InputArguments = 4;
 
         /// <summary>
-        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// The identifier for the ComplexObjectType_ServerCapabilities_RoleSet_AddRole_OutputArguments Variable.
         /// </summary>
-        public const uint ComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments = 522;
+        public const uint ComplexObjectType_ServerCapabilities_RoleSet_AddRole_OutputArguments = 5;
 
         /// <summary>
-        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// The identifier for the ComplexObjectType_ServerCapabilities_RoleSet_RemoveRole_InputArguments Variable.
         /// </summary>
-        public const uint ComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments = 524;
+        public const uint ComplexObjectType_ServerCapabilities_RoleSet_RemoveRole_InputArguments = 7;
 
         /// <summary>
         /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary Variable.
@@ -605,19 +605,19 @@ namespace ObjectTypeTest
         public const uint DerivedFromComplexObjectType_ServerCapabilities_SoftwareCertificates = 335;
 
         /// <summary>
-        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole_InputArguments Variable.
         /// </summary>
-        public const uint DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments = 537;
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole_InputArguments = 11;
 
         /// <summary>
-        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole_OutputArguments Variable.
         /// </summary>
-        public const uint DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments = 538;
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole_OutputArguments = 12;
 
         /// <summary>
-        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_RoleSet_RemoveRole_InputArguments Variable.
         /// </summary>
-        public const uint DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments = 540;
+        public const uint DerivedFromComplexObjectType_ServerCapabilities_RoleSet_RemoveRole_InputArguments = 14;
 
         /// <summary>
         /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary Variable.
@@ -885,19 +885,19 @@ namespace ObjectTypeTest
         public const uint NameNotSet6_ServerCapabilities_SoftwareCertificates = 438;
 
         /// <summary>
-        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// The identifier for the NameNotSet6_ServerCapabilities_RoleSet_AddRole_InputArguments Variable.
         /// </summary>
-        public const uint NameNotSet6_ServerCapabilities_Roles_AddRole_InputArguments = 553;
+        public const uint NameNotSet6_ServerCapabilities_RoleSet_AddRole_InputArguments = 18;
 
         /// <summary>
-        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// The identifier for the NameNotSet6_ServerCapabilities_RoleSet_AddRole_OutputArguments Variable.
         /// </summary>
-        public const uint NameNotSet6_ServerCapabilities_Roles_AddRole_OutputArguments = 554;
+        public const uint NameNotSet6_ServerCapabilities_RoleSet_AddRole_OutputArguments = 19;
 
         /// <summary>
-        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// The identifier for the NameNotSet6_ServerCapabilities_RoleSet_RemoveRole_InputArguments Variable.
         /// </summary>
-        public const uint NameNotSet6_ServerCapabilities_Roles_RemoveRole_InputArguments = 556;
+        public const uint NameNotSet6_ServerCapabilities_RoleSet_RemoveRole_InputArguments = 21;
 
         /// <summary>
         /// The identifier for the NameNotSet6_ServerDiagnostics_ServerDiagnosticsSummary Variable.
@@ -1055,14 +1055,14 @@ namespace ObjectTypeTest
     public static partial class MethodIds
     {
         /// <summary>
-        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_AddRole Method.
+        /// The identifier for the ComplexObjectType_ServerCapabilities_RoleSet_AddRole Method.
         /// </summary>
-        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_Roles_AddRole = new ExpandedNodeId(ObjectTypeTest.Methods.ComplexObjectType_ServerCapabilities_Roles_AddRole, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_RoleSet_AddRole = new ExpandedNodeId(ObjectTypeTest.Methods.ComplexObjectType_ServerCapabilities_RoleSet_AddRole, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_RemoveRole Method.
+        /// The identifier for the ComplexObjectType_ServerCapabilities_RoleSet_RemoveRole Method.
         /// </summary>
-        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_Roles_RemoveRole = new ExpandedNodeId(ObjectTypeTest.Methods.ComplexObjectType_ServerCapabilities_Roles_RemoveRole, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_RoleSet_RemoveRole = new ExpandedNodeId(ObjectTypeTest.Methods.ComplexObjectType_ServerCapabilities_RoleSet_RemoveRole, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
         /// The identifier for the ComplexObjectType_ChildMethod Method.
@@ -1085,14 +1085,14 @@ namespace ObjectTypeTest
         public static readonly ExpandedNodeId NonExecutableMethodComplexObjectType = new ExpandedNodeId(ObjectTypeTest.Methods.NonExecutableMethodComplexObjectType, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole Method.
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole Method.
         /// </summary>
-        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole = new ExpandedNodeId(ObjectTypeTest.Methods.DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole = new ExpandedNodeId(ObjectTypeTest.Methods.DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole Method.
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_RoleSet_RemoveRole Method.
         /// </summary>
-        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole = new ExpandedNodeId(ObjectTypeTest.Methods.DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_RoleSet_RemoveRole = new ExpandedNodeId(ObjectTypeTest.Methods.DerivedFromComplexObjectType_ServerCapabilities_RoleSet_RemoveRole, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
         /// The identifier for the DerivedFromComplexObjectType_ChildMethod Method.
@@ -1100,14 +1100,14 @@ namespace ObjectTypeTest
         public static readonly ExpandedNodeId DerivedFromComplexObjectType_ChildMethod = new ExpandedNodeId(ObjectTypeTest.Methods.DerivedFromComplexObjectType_ChildMethod, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_AddRole Method.
+        /// The identifier for the NameNotSet6_ServerCapabilities_RoleSet_AddRole Method.
         /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_Roles_AddRole = new ExpandedNodeId(ObjectTypeTest.Methods.NameNotSet6_ServerCapabilities_Roles_AddRole, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_RoleSet_AddRole = new ExpandedNodeId(ObjectTypeTest.Methods.NameNotSet6_ServerCapabilities_RoleSet_AddRole, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_RemoveRole Method.
+        /// The identifier for the NameNotSet6_ServerCapabilities_RoleSet_RemoveRole Method.
         /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_Roles_RemoveRole = new ExpandedNodeId(ObjectTypeTest.Methods.NameNotSet6_ServerCapabilities_Roles_RemoveRole, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_RoleSet_RemoveRole = new ExpandedNodeId(ObjectTypeTest.Methods.NameNotSet6_ServerCapabilities_RoleSet_RemoveRole, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
         /// The identifier for the NameNotSet6_ChildMethod Method.
@@ -1350,19 +1350,19 @@ namespace ObjectTypeTest
         public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_SoftwareCertificates = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_SoftwareCertificates, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// The identifier for the ComplexObjectType_ServerCapabilities_RoleSet_AddRole_InputArguments Variable.
         /// </summary>
-        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_RoleSet_AddRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_RoleSet_AddRole_InputArguments, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// The identifier for the ComplexObjectType_ServerCapabilities_RoleSet_AddRole_OutputArguments Variable.
         /// </summary>
-        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_RoleSet_AddRole_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_RoleSet_AddRole_OutputArguments, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the ComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// The identifier for the ComplexObjectType_ServerCapabilities_RoleSet_RemoveRole_InputArguments Variable.
         /// </summary>
-        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId ComplexObjectType_ServerCapabilities_RoleSet_RemoveRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.ComplexObjectType_ServerCapabilities_RoleSet_RemoveRole_InputArguments, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
         /// The identifier for the ComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary Variable.
@@ -1615,19 +1615,19 @@ namespace ObjectTypeTest
         public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_SoftwareCertificates = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_SoftwareCertificates, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole_InputArguments Variable.
         /// </summary>
-        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_InputArguments, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole_InputArguments, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole_OutputArguments Variable.
         /// </summary>
-        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_Roles_AddRole_OutputArguments, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_RoleSet_AddRole_OutputArguments, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// The identifier for the DerivedFromComplexObjectType_ServerCapabilities_RoleSet_RemoveRole_InputArguments Variable.
         /// </summary>
-        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_Roles_RemoveRole_InputArguments, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId DerivedFromComplexObjectType_ServerCapabilities_RoleSet_RemoveRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.DerivedFromComplexObjectType_ServerCapabilities_RoleSet_RemoveRole_InputArguments, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
         /// The identifier for the DerivedFromComplexObjectType_ServerDiagnostics_ServerDiagnosticsSummary Variable.
@@ -1895,19 +1895,19 @@ namespace ObjectTypeTest
         public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_SoftwareCertificates = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ServerCapabilities_SoftwareCertificates, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// The identifier for the NameNotSet6_ServerCapabilities_RoleSet_AddRole_InputArguments Variable.
         /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_Roles_AddRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ServerCapabilities_Roles_AddRole_InputArguments, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_RoleSet_AddRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ServerCapabilities_RoleSet_AddRole_InputArguments, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// The identifier for the NameNotSet6_ServerCapabilities_RoleSet_AddRole_OutputArguments Variable.
         /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_Roles_AddRole_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ServerCapabilities_Roles_AddRole_OutputArguments, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_RoleSet_AddRole_OutputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ServerCapabilities_RoleSet_AddRole_OutputArguments, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the NameNotSet6_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// The identifier for the NameNotSet6_ServerCapabilities_RoleSet_RemoveRole_InputArguments Variable.
         /// </summary>
-        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_Roles_RemoveRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ServerCapabilities_Roles_RemoveRole_InputArguments, ObjectTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId NameNotSet6_ServerCapabilities_RoleSet_RemoveRole_InputArguments = new ExpandedNodeId(ObjectTypeTest.Variables.NameNotSet6_ServerCapabilities_RoleSet_RemoveRole_InputArguments, ObjectTypeTest.Namespaces.cas);
 
         /// <summary>
         /// The identifier for the NameNotSet6_ServerDiagnostics_ServerDiagnosticsSummary Variable.
@@ -2168,10 +2168,14 @@ namespace ObjectTypeTest
         /// </summary>
         protected override void Initialize(ISystemContext context)
         {
+            base.Initialize(context);
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
         }
 
+        /// <summary>
+        /// Initializes the instance with a node.
+        /// </summary>
         protected override void Initialize(ISystemContext context, NodeState source)
         {
             InitializeOptionalChildren(context);
@@ -2189,101 +2193,74 @@ namespace ObjectTypeTest
         #region Initialization String
         private const string InitializationString =
            "AQAAADQAAABodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL09iamVjdFR5cGVUZXN0" +
-           "/////wRggAABAAAAAQAZAAAAQ29tcGxleE9iamVjdFR5cGVJbnN0YW5jZQEBxAABAcQA/////w0AAAA1" +
-           "cIkKAgAAAAAACwAAAFNlcnZlckFycmF5AQHFAAMAAAAAKwAAAFRoZSBsaXN0IG9mIHNlcnZlciBVUklz" +
-           "IHVzZWQgYnkgdGhlIHNlcnZlci4ALgBExQAAAAAMAQAAAAEBAAAAAABAj0D/////AAAAADVwiQoCAAAA" +
-           "AAAOAAAATmFtZXNwYWNlQXJyYXkBAcYAAwAAAAAuAAAAVGhlIGxpc3Qgb2YgbmFtZXNwYWNlIFVSSXMg" +
-           "dXNlZCBieSB0aGUgc2VydmVyLgAuAETGAAAAAAwBAAAAAQEAAAAAAECPQP////8AAAAANXCJCgIAAAAA" +
-           "AAwAAABTZXJ2ZXJTdGF0dXMBAccAAwAAAAAhAAAAVGhlIGN1cnJlbnQgc3RhdHVzIG9mIHRoZSBzZXJ2" +
-           "ZXIuAC8BAFoIxwAAAAEAXgP/////AQEAAAAAAECPQP////8GAAAAFWCJCgIAAAAAAAkAAABTdGFydFRp" +
-           "bWUBAcgAAC8AP8gAAAABACYB/////wEB/////wAAAAAVYIkKAgAAAAAACwAAAEN1cnJlbnRUaW1lAQHJ" +
-           "AAAvAD/JAAAAAQAmAf////8BAf////8AAAAAFWCJCgIAAAAAAAUAAABTdGF0ZQEBygAALwA/ygAAAAEA" +
-           "VAP/////AQH/////AAAAABVgiQoCAAAAAAAJAAAAQnVpbGRJbmZvAQHLAAAvAQDrC8sAAAABAFIB////" +
-           "/wEB/////wYAAAAVcIkKAgAAAAAACgAAAFByb2R1Y3RVcmkBAcwAAC8AP8wAAAAADP////8BAQAAAAAA" +
-           "QI9A/////wAAAAAVcIkKAgAAAAAAEAAAAE1hbnVmYWN0dXJlck5hbWUBAc0AAC8AP80AAAAADP////8B" +
-           "AQAAAAAAQI9A/////wAAAAAVcIkKAgAAAAAACwAAAFByb2R1Y3ROYW1lAQHOAAAvAD/OAAAAAAz/////" +
-           "AQEAAAAAAECPQP////8AAAAAFXCJCgIAAAAAAA8AAABTb2Z0d2FyZVZlcnNpb24BAc8AAC8AP88AAAAA" +
-           "DP////8BAQAAAAAAQI9A/////wAAAAAVcIkKAgAAAAAACwAAAEJ1aWxkTnVtYmVyAQHQAAAvAD/QAAAA" +
-           "AAz/////AQEAAAAAAECPQP////8AAAAAFXCJCgIAAAAAAAkAAABCdWlsZERhdGUBAdEAAC8AP9EAAAAB" +
-           "ACYB/////wEBAAAAAABAj0D/////AAAAABVgiQoCAAAAAAATAAAAU2Vjb25kc1RpbGxTaHV0ZG93bgEB" +
-           "0gAALwA/0gAAAAAH/////wEB/////wAAAAAVYIkKAgAAAAAADgAAAFNodXRkb3duUmVhc29uAQHTAAAv" +
-           "AD/TAAAAABX/////AQH/////AAAAADVwiQoCAAAAAAAMAAAAU2VydmljZUxldmVsAQHUAAMAAAAAVwAA" +
-           "AEEgdmFsdWUgaW5kaWNhdGluZyB0aGUgbGV2ZWwgb2Ygc2VydmljZSB0aGUgc2VydmVyIGNhbiBwcm92" +
-           "aWRlLiAyNTUgaW5kaWNhdGVzIHRoZSBiZXN0LgAuAETUAAAAAAP/////AQEAAAAAAECPQP////8AAAAA" +
-           "NXCJCgIAAAAAAAgAAABBdWRpdGluZwEB1QADAAAAAEoAAABBIGZsYWcgaW5kaWNhdGluZyB3aGV0aGVy" +
-           "IHRoZSBzZXJ2ZXIgaXMgY3VycmVudGx5IGdlbmVyYXRpbmcgYXVkaXQgZXZlbnRzLgAuAETVAAAAAAH/" +
-           "////AQEAAAAAAECPQP////8AAAAAJGCACgEAAAAAABIAAABTZXJ2ZXJDYXBhYmlsaXRpZXMBAdYAAwAA" +
-           "AAAvAAAARGVzY3JpYmVzIGNhcGFiaWxpdGllcyBzdXBwb3J0ZWQgYnkgdGhlIHNlcnZlci4ALwEA3QfW" +
-           "AAAA/////wkAAAA1YIkKAgAAAAAAEgAAAFNlcnZlclByb2ZpbGVBcnJheQEB1wADAAAAACsAAABBIGxp" +
-           "c3Qgb2YgcHJvZmlsZXMgc3VwcG9ydGVkIGJ5IHRoZSBzZXJ2ZXIuAC4ARNcAAAAADAEAAAABAf////8A" +
-           "AAAANWCJCgIAAAAAAA0AAABMb2NhbGVJZEFycmF5AQHYAAMAAAAAKgAAAEEgbGlzdCBvZiBsb2NhbGVz" +
-           "IHN1cHBvcnRlZCBieSB0aGUgc2VydmVyLgAuAETYAAAAAQAnAQEAAAABAf////8AAAAANWCJCgIAAAAA" +
-           "ABYAAABNaW5TdXBwb3J0ZWRTYW1wbGVSYXRlAQHZAAMAAAAANgAAAFRoZSBtaW5pbXVtIHNhbXBsaW5n" +
-           "IGludGVydmFsIHN1cHBvcnRlZCBieSB0aGUgc2VydmVyLgAuAETZAAAAAQAiAf////8BAf////8AAAAA" +
-           "NWCJCgIAAAAAABsAAABNYXhCcm93c2VDb250aW51YXRpb25Qb2ludHMBAdoAAwAAAABMAAAAVGhlIG1h" +
-           "eGltdW0gbnVtYmVyIG9mIGNvbnRpbnVhdGlvbiBwb2ludHMgZm9yIEJyb3dzZSBvcGVyYXRpb25zIHBl" +
-           "ciBzZXNzaW9uLgAuAETaAAAAAAX/////AQH/////AAAAADVgiQoCAAAAAAAaAAAATWF4UXVlcnlDb250" +
-           "aW51YXRpb25Qb2ludHMBAdsAAwAAAABLAAAAVGhlIG1heGltdW0gbnVtYmVyIG9mIGNvbnRpbnVhdGlv" +
-           "biBwb2ludHMgZm9yIFF1ZXJ5IG9wZXJhdGlvbnMgcGVyIHNlc3Npb24uAC4ARNsAAAAABf////8BAf//" +
-           "//8AAAAANWCJCgIAAAAAABwAAABNYXhIaXN0b3J5Q29udGludWF0aW9uUG9pbnRzAQHcAAMAAAAAUQAA" +
-           "AFRoZSBtYXhpbXVtIG51bWJlciBvZiBjb250aW51YXRpb24gcG9pbnRzIGZvciBSZWFkSGlzdG9yeSBv" +
-           "cGVyYXRpb25zIHBlciBzZXNzaW9uLgAuAETcAAAAAAX/////AQH/////AAAAADVgiQoCAAAAAAAUAAAA" +
-           "U29mdHdhcmVDZXJ0aWZpY2F0ZXMBAd0AAwAAAAAuAAAAVGhlIHNvZnR3YXJlIGNlcnRpZmljYXRlcyBv" +
-           "d25lZCBieSB0aGUgc2VydmVyLgAuAETdAAAAAQBYAQEAAAABAf////8AAAAAJGCACgEAAAAAAA4AAABN" +
-           "b2RlbGxpbmdSdWxlcwEB7QADAAAAADkAAABBIGZvbGRlciBmb3IgdGhlIG1vZGVsbGluZyBydWxlcyBz" +
-           "dXBwb3J0ZWQgYnkgdGhlIHNlcnZlci4ALwA97QAAAP////8AAAAAJGCACgEAAAAAABIAAABBZ2dyZWdh" +
-           "dGVGdW5jdGlvbnMBAe4AAwAAAAA+AAAAQSBmb2xkZXIgZm9yIHRoZSByZWFsIHRpbWUgYWdncmVnYXRl" +
-           "cyBzdXBwb3J0ZWQgYnkgdGhlIHNlcnZlci4ALwA97gAAAP////8AAAAAJGCACgEAAAAAABEAAABTZXJ2" +
-           "ZXJEaWFnbm9zdGljcwEB7wADAAAAACUAAABSZXBvcnRzIGRpYWdub3N0aWNzIGFib3V0IHRoZSBzZXJ2" +
-           "ZXIuAC8BAOQH7wAAAP////8EAAAANWCJCgIAAAAAABgAAABTZXJ2ZXJEaWFnbm9zdGljc1N1bW1hcnkB" +
-           "AfAAAwAAAAAmAAAAQSBzdW1tYXJ5IG9mIHNlcnZlciBsZXZlbCBkaWFnbm9zdGljcy4ALwEAZgjwAAAA" +
-           "AQBbA/////8BAf////8MAAAAFWCJCgIAAAAAAA8AAABTZXJ2ZXJWaWV3Q291bnQBAfEAAC8AP/EAAAAA" +
-           "B/////8BAf////8AAAAAFWCJCgIAAAAAABMAAABDdXJyZW50U2Vzc2lvbkNvdW50AQHyAAAvAD/yAAAA" +
-           "AAf/////AQH/////AAAAABVgiQoCAAAAAAAVAAAAQ3VtdWxhdGVkU2Vzc2lvbkNvdW50AQHzAAAvAD/z" +
-           "AAAAAAf/////AQH/////AAAAABVgiQoCAAAAAAAcAAAAU2VjdXJpdHlSZWplY3RlZFNlc3Npb25Db3Vu" +
-           "dAEB9AAALwA/9AAAAAAH/////wEB/////wAAAAAVYIkKAgAAAAAAFAAAAFJlamVjdGVkU2Vzc2lvbkNv" +
-           "dW50AQH1AAAvAD/1AAAAAAf/////AQH/////AAAAABVgiQoCAAAAAAATAAAAU2Vzc2lvblRpbWVvdXRD" +
-           "b3VudAEB9gAALwA/9gAAAAAH/////wEB/////wAAAAAVYIkKAgAAAAAAEQAAAFNlc3Npb25BYm9ydENv" +
-           "dW50AQH3AAAvAD/3AAAAAAf/////AQH/////AAAAABVgiQoCAAAAAAAXAAAAUHVibGlzaGluZ0ludGVy" +
-           "dmFsQ291bnQBAfgAAC8AP/gAAAAAB/////8BAf////8AAAAAFWCJCgIAAAAAABgAAABDdXJyZW50U3Vi" +
-           "c2NyaXB0aW9uQ291bnQBAfkAAC8AP/kAAAAAB/////8BAf////8AAAAAFWCJCgIAAAAAABoAAABDdW11" +
-           "bGF0ZWRTdWJzY3JpcHRpb25Db3VudAEB+gAALwA/+gAAAAAH/////wEB/////wAAAAAVYIkKAgAAAAAA" +
-           "HQAAAFNlY3VyaXR5UmVqZWN0ZWRSZXF1ZXN0c0NvdW50AQH7AAAvAD/7AAAAAAf/////AQH/////AAAA" +
-           "ABVgiQoCAAAAAAAVAAAAUmVqZWN0ZWRSZXF1ZXN0c0NvdW50AQH8AAAvAD/8AAAAAAf/////AQH/////" +
-           "AAAAADVgiQoCAAAAAAAcAAAAU3Vic2NyaXB0aW9uRGlhZ25vc3RpY3NBcnJheQEB/gADAAAAADMAAABB" +
-           "IGxpc3Qgb2YgZGlhZ25vc3RpY3MgZm9yIGVhY2ggYWN0aXZlIHN1YnNjcmlwdGlvbi4ALwEAewj+AAAA" +
-           "AQBqAwEAAAABAf////8AAAAAJGCACgEAAAAAABoAAABTZXNzaW9uc0RpYWdub3N0aWNzU3VtbWFyeQEB" +
-           "/wADAAAAACcAAABBIHN1bW1hcnkgb2Ygc2Vzc2lvbiBsZXZlbCBkaWFnbm9zdGljcy4ALwEA6gf/AAAA" +
-           "/////wIAAAA1YIkKAgAAAAAAFwAAAFNlc3Npb25EaWFnbm9zdGljc0FycmF5AQEAAQMAAAAALgAAAEEg" +
-           "bGlzdCBvZiBkaWFnbm9zdGljcyBmb3IgZWFjaCBhY3RpdmUgc2Vzc2lvbi4ALwEAlAgAAQAAAQBhAwEA" +
-           "AAABAf////8AAAAANWCJCgIAAAAAAB8AAABTZXNzaW9uU2VjdXJpdHlEaWFnbm9zdGljc0FycmF5AQEB" +
-           "AQMAAAAAPwAAAEEgbGlzdCBvZiBzZWN1cml0eSByZWxhdGVkIGRpYWdub3N0aWNzIGZvciBlYWNoIGFj" +
-           "dGl2ZSBzZXNzaW9uLgAvAQDDCAEBAAABAGQDAQAAAAEB/////wAAAAA1YIkKAgAAAAAACwAAAEVuYWJs" +
-           "ZWRGbGFnAQECAQMAAAAALgAAAElmIFRSVUUgdGhlIGRpYWdub3N0aWNzIGNvbGxlY3Rpb24gaXMgZW5h" +
-           "YmxlZC4ALgBEAgEAAAAB/////wMD/////wAAAAAkYIAKAQAAAAAAEAAAAFZlbmRvclNlcnZlckluZm8B" +
-           "AQMBAwAAAAAqAAAAU2VydmVyIGluZm9ybWF0aW9uIHByb3ZpZGVkIGJ5IHRoZSB2ZW5kb3IuAC8BAPEH" +
-           "AwEAAP////8AAAAAJGCACgEAAAAAABAAAABTZXJ2ZXJSZWR1bmRhbmN5AQEEAQMAAAAANAAAAERlc2Ny" +
-           "aWJlcyB0aGUgcmVkdW5kYW5jeSBjYXBhYmlsaXRpZXMgb2YgdGhlIHNlcnZlci4ALwEA8gcEAQAA////" +
-           "/wEAAAA1YIkKAgAAAAAAEQAAAFJlZHVuZGFuY3lTdXBwb3J0AQEFAQMAAAAAPgAAAEluZGljYXRlcyB3" +
-           "aGF0IHN0eWxlIG9mIHJlZHVuZGFuY3kgaXMgc3VwcG9ydGVkIGJ5IHRoZSBzZXJ2ZXIuAC4ARAUBAAAB" +
-           "AFMD/////wEB/////wAAAAAVYMkKAgAAABEAAABCcm93c2VOYW1lNG5vZGU2NgEADQAAAENoaWxkUHJv" +
-           "cGVydHkBATUBAC4ARDUBAAAAFf////8BAQEAAAABAcMAAQEBIQEAAAAAFWDJCgIAAAAOAAAATmFtZU5v" +
-           "dFNldDExMDkBABMAAABCcm93c2VOYW1lNG5vZGUxMTA5AQEhAQAvAQBACSEBAAAAGv////8BAQEAAAAB" +
-           "AcMAAAEBNQEBAAAAFWCJCgIAAAAAAAcAAABFVVJhbmdlAQElAQAuAEQlAQAAAQB0A/////8BAf////8A" +
-           "AAAABGGCCgQAAAABAAsAAABDaGlsZE1ldGhvZAEBJwEALwEBJwEnAQAAAQH/////AgAAABVgqQoCAAAA" +
-           "AAAOAAAASW5wdXRBcmd1bWVudHMBASsBAC4ARCsBAACWAgAAAAEAKgEBFQAAAAYAAABJbnB1dDEABv//" +
-           "//8AAAAAAAEAKgEBFQAAAAYAAABJbnB1dDIABv////8AAAAAAAEAKAEBAAAAAQH/////AAAAABVgqQoC" +
-           "AAAAAAAPAAAAT3V0cHV0QXJndW1lbnRzAQEsAQAuAEQsAQAAlgEAAAABACoBARYAAAAHAAAAT3V0cHV0" +
-           "MQAG/////wAAAAAAAQAoAQEAAAABAf////8AAAAABGGCCgQAAAABABMAAABOb25FeGVjdXRhYmxlTWV0" +
-           "aG9kAQEyAQAvAQEyATIBAAABAf////8AAAAA";
+           "/////wRggAIBAAAAAQAZAAAAQ29tcGxleE9iamVjdFR5cGVJbnN0YW5jZQEBxAABAcQAxAAAAP////8N" +
+           "AAAAF3CJCgIAAAAAAAsAAABTZXJ2ZXJBcnJheQEBxQAALgBExQAAAAAMAQAAAAEAAAAAAAAAAQEAAAAA" +
+           "AECPQP////8AAAAAF3CJCgIAAAAAAA4AAABOYW1lc3BhY2VBcnJheQEBxgAALgBExgAAAAAMAQAAAAEA" +
+           "AAAAAAAAAQEAAAAAAECPQP////8AAAAAFXCJCgIAAAAAAAwAAABTZXJ2ZXJTdGF0dXMBAccAAC8BAFoI" +
+           "xwAAAAEAXgP/////AQEAAAAAAECPQP////8GAAAAFWCJCgIAAAAAAAkAAABTdGFydFRpbWUBAcgAAC8A" +
+           "P8gAAAABACYB/////wEB/////wAAAAAVYIkKAgAAAAAACwAAAEN1cnJlbnRUaW1lAQHJAAAvAD/JAAAA" +
+           "AQAmAf////8BAf////8AAAAAFWCJCgIAAAAAAAUAAABTdGF0ZQEBygAALwA/ygAAAAEAVAP/////AQH/" +
+           "////AAAAABVgiQoCAAAAAAAJAAAAQnVpbGRJbmZvAQHLAAAvAQDrC8sAAAABAFIB/////wEB/////wYA" +
+           "AAAVcIkKAgAAAAAACgAAAFByb2R1Y3RVcmkBAcwAAC8AP8wAAAAADP////8BAQAAAAAAQI9A/////wAA" +
+           "AAAVcIkKAgAAAAAAEAAAAE1hbnVmYWN0dXJlck5hbWUBAc0AAC8AP80AAAAADP////8BAQAAAAAAQI9A" +
+           "/////wAAAAAVcIkKAgAAAAAACwAAAFByb2R1Y3ROYW1lAQHOAAAvAD/OAAAAAAz/////AQEAAAAAAECP" +
+           "QP////8AAAAAFXCJCgIAAAAAAA8AAABTb2Z0d2FyZVZlcnNpb24BAc8AAC8AP88AAAAADP////8BAQAA" +
+           "AAAAQI9A/////wAAAAAVcIkKAgAAAAAACwAAAEJ1aWxkTnVtYmVyAQHQAAAvAD/QAAAAAAz/////AQEA" +
+           "AAAAAECPQP////8AAAAAFXCJCgIAAAAAAAkAAABCdWlsZERhdGUBAdEAAC8AP9EAAAABACYB/////wEB" +
+           "AAAAAABAj0D/////AAAAABVgiQoCAAAAAAATAAAAU2Vjb25kc1RpbGxTaHV0ZG93bgEB0gAALwA/0gAA" +
+           "AAAH/////wEB/////wAAAAAVYIkKAgAAAAAADgAAAFNodXRkb3duUmVhc29uAQHTAAAvAD/TAAAAABX/" +
+           "////AQH/////AAAAABVwiQoCAAAAAAAMAAAAU2VydmljZUxldmVsAQHUAAAuAETUAAAAAAP/////AQEA" +
+           "AAAAAECPQP////8AAAAAFXCJCgIAAAAAAAgAAABBdWRpdGluZwEB1QAALgBE1QAAAAAB/////wEBAAAA" +
+           "AABAj0D/////AAAAAARggAoBAAAAAAASAAAAU2VydmVyQ2FwYWJpbGl0aWVzAQHWAAAvAQDdB9YAAAD/" +
+           "////CQAAABdgiQoCAAAAAAASAAAAU2VydmVyUHJvZmlsZUFycmF5AQHXAAAuAETXAAAAAAwBAAAAAQAA" +
+           "AAAAAAABAf////8AAAAAF2CJCgIAAAAAAA0AAABMb2NhbGVJZEFycmF5AQHYAAAuAETYAAAAAQAnAQEA" +
+           "AAABAAAAAAAAAAEB/////wAAAAAVYIkKAgAAAAAAFgAAAE1pblN1cHBvcnRlZFNhbXBsZVJhdGUBAdkA" +
+           "AC4ARNkAAAABACIB/////wEB/////wAAAAAVYIkKAgAAAAAAGwAAAE1heEJyb3dzZUNvbnRpbnVhdGlv" +
+           "blBvaW50cwEB2gAALgBE2gAAAAAF/////wEB/////wAAAAAVYIkKAgAAAAAAGgAAAE1heFF1ZXJ5Q29u" +
+           "dGludWF0aW9uUG9pbnRzAQHbAAAuAETbAAAAAAX/////AQH/////AAAAABVgiQoCAAAAAAAcAAAATWF4" +
+           "SGlzdG9yeUNvbnRpbnVhdGlvblBvaW50cwEB3AAALgBE3AAAAAAF/////wEB/////wAAAAAXYIkKAgAA" +
+           "AAAAFAAAAFNvZnR3YXJlQ2VydGlmaWNhdGVzAQHdAAAuAETdAAAAAQBYAQEAAAABAAAAAAAAAAEB////" +
+           "/wAAAAAEYIAKAQAAAAAADgAAAE1vZGVsbGluZ1J1bGVzAQHtAAAvAD3tAAAA/////wAAAAAEYIAKAQAA" +
+           "AAAAEgAAAEFnZ3JlZ2F0ZUZ1bmN0aW9ucwEB7gAALwA97gAAAP////8AAAAABGCACgEAAAAAABEAAABT" +
+           "ZXJ2ZXJEaWFnbm9zdGljcwEB7wAALwEA5AfvAAAA/////wQAAAAVYIkKAgAAAAAAGAAAAFNlcnZlckRp" +
+           "YWdub3N0aWNzU3VtbWFyeQEB8AAALwEAZgjwAAAAAQBbA/////8BAf////8MAAAAFWCJCgIAAAAAAA8A" +
+           "AABTZXJ2ZXJWaWV3Q291bnQBAfEAAC8AP/EAAAAAB/////8BAf////8AAAAAFWCJCgIAAAAAABMAAABD" +
+           "dXJyZW50U2Vzc2lvbkNvdW50AQHyAAAvAD/yAAAAAAf/////AQH/////AAAAABVgiQoCAAAAAAAVAAAA" +
+           "Q3VtdWxhdGVkU2Vzc2lvbkNvdW50AQHzAAAvAD/zAAAAAAf/////AQH/////AAAAABVgiQoCAAAAAAAc" +
+           "AAAAU2VjdXJpdHlSZWplY3RlZFNlc3Npb25Db3VudAEB9AAALwA/9AAAAAAH/////wEB/////wAAAAAV" +
+           "YIkKAgAAAAAAFAAAAFJlamVjdGVkU2Vzc2lvbkNvdW50AQH1AAAvAD/1AAAAAAf/////AQH/////AAAA" +
+           "ABVgiQoCAAAAAAATAAAAU2Vzc2lvblRpbWVvdXRDb3VudAEB9gAALwA/9gAAAAAH/////wEB/////wAA" +
+           "AAAVYIkKAgAAAAAAEQAAAFNlc3Npb25BYm9ydENvdW50AQH3AAAvAD/3AAAAAAf/////AQH/////AAAA" +
+           "ABVgiQoCAAAAAAAXAAAAUHVibGlzaGluZ0ludGVydmFsQ291bnQBAfgAAC8AP/gAAAAAB/////8BAf//" +
+           "//8AAAAAFWCJCgIAAAAAABgAAABDdXJyZW50U3Vic2NyaXB0aW9uQ291bnQBAfkAAC8AP/kAAAAAB///" +
+           "//8BAf////8AAAAAFWCJCgIAAAAAABoAAABDdW11bGF0ZWRTdWJzY3JpcHRpb25Db3VudAEB+gAALwA/" +
+           "+gAAAAAH/////wEB/////wAAAAAVYIkKAgAAAAAAHQAAAFNlY3VyaXR5UmVqZWN0ZWRSZXF1ZXN0c0Nv" +
+           "dW50AQH7AAAvAD/7AAAAAAf/////AQH/////AAAAABVgiQoCAAAAAAAVAAAAUmVqZWN0ZWRSZXF1ZXN0" +
+           "c0NvdW50AQH8AAAvAD/8AAAAAAf/////AQH/////AAAAABdgiQoCAAAAAAAcAAAAU3Vic2NyaXB0aW9u" +
+           "RGlhZ25vc3RpY3NBcnJheQEB/gAALwEAewj+AAAAAQBqAwEAAAABAAAAAAAAAAEB/////wAAAAAEYIAK" +
+           "AQAAAAAAGgAAAFNlc3Npb25zRGlhZ25vc3RpY3NTdW1tYXJ5AQH/AAAvAQDqB/8AAAD/////AgAAABdg" +
+           "iQoCAAAAAAAXAAAAU2Vzc2lvbkRpYWdub3N0aWNzQXJyYXkBAQABAC8BAJQIAAEAAAEAYQMBAAAAAQAA" +
+           "AAAAAAABAf////8AAAAAF2CJCgIAAAAAAB8AAABTZXNzaW9uU2VjdXJpdHlEaWFnbm9zdGljc0FycmF5" +
+           "AQEBAQAvAQDDCAEBAAABAGQDAQAAAAEAAAAAAAAAAQH/////AAAAABVgiQoCAAAAAAALAAAARW5hYmxl" +
+           "ZEZsYWcBAQIBAC4ARAIBAAAAAf////8DA/////8AAAAABGCACgEAAAAAABAAAABWZW5kb3JTZXJ2ZXJJ" +
+           "bmZvAQEDAQAvAQDxBwMBAAD/////AAAAAARggAoBAAAAAAAQAAAAU2VydmVyUmVkdW5kYW5jeQEBBAEA" +
+           "LwEA8gcEAQAA/////wEAAAAVYIkKAgAAAAAAEQAAAFJlZHVuZGFuY3lTdXBwb3J0AQEFAQAuAEQFAQAA" +
+           "AQBTA/////8BAf////8AAAAAFWDJCgIAAAARAAAAQnJvd3NlTmFtZTRub2RlNjYBAA0AAABDaGlsZFBy" +
+           "b3BlcnR5AQE1AQAuAEQ1AQAAABX/////AQEBAAAAAQHDAAEBASEBAAAAABVgyQoCAAAADgAAAE5hbWVO" +
+           "b3RTZXQxMTA5AQATAAAAQnJvd3NlTmFtZTRub2RlMTEwOQEBIQEALwEAQAkhAQAAABr/////AQEBAAAA" +
+           "AQHDAAABATUBAQAAABVgiQoCAAAAAAAHAAAARVVSYW5nZQEBJQEALgBEJQEAAAEAdAP/////AQH/////" +
+           "AAAAAARhggoEAAAAAQALAAAAQ2hpbGRNZXRob2QBAScBAC8BAScBJwEAAAEB/////wIAAAAXYKkKAgAA" +
+           "AAAADgAAAElucHV0QXJndW1lbnRzAQErAQAuAEQrAQAAlgIAAAABACoBARUAAAAGAAAASW5wdXQxAAb/" +
+           "////AAAAAAABACoBARUAAAAGAAAASW5wdXQyAAb/////AAAAAAABACgBAQAAAAEAAAAAAAAAAQH/////" +
+           "AAAAABdgqQoCAAAAAAAPAAAAT3V0cHV0QXJndW1lbnRzAQEsAQAuAEQsAQAAlgEAAAABACoBARYAAAAH" +
+           "AAAAT3V0cHV0MQAG/////wAAAAAAAQAoAQEAAAABAAAAAAAAAAEB/////wAAAAAEYYIKBAAAAAEAEwAA" +
+           "AE5vbkV4ZWN1dGFibGVNZXRob2QBATIBAC8BATIBMgEAAAEB/////wAAAAA=";
         #endregion
         #endif
         #endregion
 
         #region Public Properties
-        /// <summary>
-        /// A description for the ChildProperty Property.
-        /// </summary>
+        /// <remarks />
         public PropertyState<LocalizedText> BrowseName4node66
         {
             get
@@ -2302,9 +2279,7 @@ namespace ObjectTypeTest
             }
         }
 
-        /// <summary>
-        /// A description for the BrowseName4node1109 Variable.
-        /// </summary>
+        /// <remarks />
         public AnalogItemState NameNotSet1109
         {
             get
@@ -2323,9 +2298,7 @@ namespace ObjectTypeTest
             }
         }
 
-        /// <summary>
-        /// A description for the ChildMethodComplexObjectType Method.
-        /// </summary>
+        /// <remarks />
         public ChildMethodComplexObjectMethodState ChildMethod
         {
             get
@@ -2344,9 +2317,7 @@ namespace ObjectTypeTest
             }
         }
 
-        /// <summary>
-        /// A description for the NonExecutableMethodComplexObjectType Method.
-        /// </summary>
+        /// <remarks />
         public MethodState NonExecutableMethod
         {
             get
@@ -2554,6 +2525,7 @@ namespace ObjectTypeTest
         /// </summary>
         protected override void Initialize(ISystemContext context)
         {
+            base.Initialize(context);
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
         }
@@ -2570,10 +2542,11 @@ namespace ObjectTypeTest
         private const string InitializationString =
            "AQAAADQAAABodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL09iamVjdFR5cGVUZXN0" +
            "/////wRhggoEAAAAAQAcAAAAQ2hpbGRNZXRob2RDb21wbGV4T2JqZWN0VHlwZQEBLwEALwEBLwEvAQAA" +
-           "AQH/////AgAAABVgqQoCAAAAAAAOAAAASW5wdXRBcmd1bWVudHMBATABAC4ARDABAACWAgAAAAEAKgEB" +
+           "AQH/////AgAAABdgqQoCAAAAAAAOAAAASW5wdXRBcmd1bWVudHMBATABAC4ARDABAACWAgAAAAEAKgEB" +
            "FQAAAAYAAABJbnB1dDEABv////8AAAAAAAEAKgEBFQAAAAYAAABJbnB1dDIABv////8AAAAAAAEAKAEB" +
-           "AAAAAQH/////AAAAABVgqQoCAAAAAAAPAAAAT3V0cHV0QXJndW1lbnRzAQExAQAuAEQxAQAAlgEAAAAB" +
-           "ACoBARYAAAAHAAAAT3V0cHV0MQAG/////wAAAAAAAQAoAQEAAAABAf////8AAAAA";
+           "AAAAAQAAAAAAAAABAf////8AAAAAF2CpCgIAAAAAAA8AAABPdXRwdXRBcmd1bWVudHMBATEBAC4ARDEB" +
+           "AACWAQAAAAEAKgEBFgAAAAcAAABPdXRwdXQxAAb/////AAAAAAABACgBAQAAAAEAAAAAAAAAAQH/////" +
+           "AAAAAA==";
         #endregion
         #endif
         #endregion
@@ -2592,41 +2565,36 @@ namespace ObjectTypeTest
         /// <summary>
         /// Invokes the method, returns the result and output argument.
         /// </summary>
-        /// <param name="context">The current context.</param>
-        /// <param name="objectId">The id of the object.</param>
-        /// <param name="inputArguments">The input arguments which have been already validated.</param>
-        /// <param name="outputArguments">The output arguments which have initialized with thier default values.</param>
-        /// <returns></returns>
         protected override ServiceResult Call(
-            ISystemContext context,
-            NodeId objectId,
-            IList<object> inputArguments,
-            IList<object> outputArguments)
+            ISystemContext _context,
+            NodeId _objectId,
+            IList<object> _inputArguments,
+            IList<object> _outputArguments)
         {
             if (OnCall == null)
             {
-                return base.Call(context, objectId, inputArguments, outputArguments);
+                return base.Call(_context, _objectId, _inputArguments, _outputArguments);
             }
 
             ServiceResult result = null;
 
-            int input1 = (int)inputArguments[0];
-            int input2 = (int)inputArguments[1];
+            int input1 = (int)_inputArguments[0];
+            int input2 = (int)_inputArguments[1];
 
-            int output1 = (int)outputArguments[0];
+            int output1 = (int)_outputArguments[0];
 
             if (OnCall != null)
             {
                 result = OnCall(
-                    context,
+                    _context,
                     this,
-                    objectId,
+                    _objectId,
                     input1,
                     input2,
                     ref output1);
             }
 
-            outputArguments[0] = output1;
+            _outputArguments[0] = output1;
 
             return result;
         }
@@ -2641,9 +2609,9 @@ namespace ObjectTypeTest
     /// </summary>
     /// <exclude />
     public delegate ServiceResult ChildMethodComplexObjectMethodStateMethodCallHandler(
-        ISystemContext context,
-        MethodState method,
-        NodeId objectId,
+        ISystemContext _context,
+        MethodState _method,
+        NodeId _objectId,
         int input1,
         int input2,
         ref int output1);
@@ -2681,10 +2649,14 @@ namespace ObjectTypeTest
         /// </summary>
         protected override void Initialize(ISystemContext context)
         {
+            base.Initialize(context);
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
         }
 
+        /// <summary>
+        /// Initializes the instance with a node.
+        /// </summary>
         protected override void Initialize(ISystemContext context, NodeState source)
         {
             InitializeOptionalChildren(context);
@@ -2702,93 +2674,68 @@ namespace ObjectTypeTest
         #region Initialization String
         private const string InitializationString =
            "AQAAADQAAABodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL09iamVjdFR5cGVUZXN0" +
-           "/////wRggAABAAAAAQAkAAAARGVyaXZlZEZyb21Db21wbGV4T2JqZWN0VHlwZUluc3RhbmNlAQE2AQEB" +
-           "NgH/////DQAAADVwiQoCAAAAAAALAAAAU2VydmVyQXJyYXkBATcBAwAAAAArAAAAVGhlIGxpc3Qgb2Yg" +
-           "c2VydmVyIFVSSXMgdXNlZCBieSB0aGUgc2VydmVyLgAuAEQ3AQAAAAwBAAAAAQEAAAAAAECPQP////8A" +
-           "AAAANXCJCgIAAAAAAA4AAABOYW1lc3BhY2VBcnJheQEBOAEDAAAAAC4AAABUaGUgbGlzdCBvZiBuYW1l" +
-           "c3BhY2UgVVJJcyB1c2VkIGJ5IHRoZSBzZXJ2ZXIuAC4ARDgBAAAADAEAAAABAQAAAAAAQI9A/////wAA" +
-           "AAA1cIkKAgAAAAAADAAAAFNlcnZlclN0YXR1cwEBOQEDAAAAACEAAABUaGUgY3VycmVudCBzdGF0dXMg" +
-           "b2YgdGhlIHNlcnZlci4ALwEAWgg5AQAAAQBeA/////8BAQAAAAAAQI9A/////wYAAAAVYIkKAgAAAAAA" +
-           "CQAAAFN0YXJ0VGltZQEBOgEALwA/OgEAAAEAJgH/////AQH/////AAAAABVgiQoCAAAAAAALAAAAQ3Vy" +
-           "cmVudFRpbWUBATsBAC8APzsBAAABACYB/////wEB/////wAAAAAVYIkKAgAAAAAABQAAAFN0YXRlAQE8" +
-           "AQAvAD88AQAAAQBUA/////8BAf////8AAAAAFWCJCgIAAAAAAAkAAABCdWlsZEluZm8BAT0BAC8BAOsL" +
-           "PQEAAAEAUgH/////AQH/////BgAAABVwiQoCAAAAAAAKAAAAUHJvZHVjdFVyaQEBPgEALwA/PgEAAAAM" +
-           "/////wEBAAAAAABAj0D/////AAAAABVwiQoCAAAAAAAQAAAATWFudWZhY3R1cmVyTmFtZQEBPwEALwA/" +
-           "PwEAAAAM/////wEBAAAAAABAj0D/////AAAAABVwiQoCAAAAAAALAAAAUHJvZHVjdE5hbWUBAUABAC8A" +
-           "P0ABAAAADP////8BAQAAAAAAQI9A/////wAAAAAVcIkKAgAAAAAADwAAAFNvZnR3YXJlVmVyc2lvbgEB" +
-           "QQEALwA/QQEAAAAM/////wEBAAAAAABAj0D/////AAAAABVwiQoCAAAAAAALAAAAQnVpbGROdW1iZXIB" +
-           "AUIBAC8AP0IBAAAADP////8BAQAAAAAAQI9A/////wAAAAAVcIkKAgAAAAAACQAAAEJ1aWxkRGF0ZQEB" +
-           "QwEALwA/QwEAAAEAJgH/////AQEAAAAAAECPQP////8AAAAAFWCJCgIAAAAAABMAAABTZWNvbmRzVGls" +
-           "bFNodXRkb3duAQFEAQAvAD9EAQAAAAf/////AQH/////AAAAABVgiQoCAAAAAAAOAAAAU2h1dGRvd25S" +
-           "ZWFzb24BAUUBAC8AP0UBAAAAFf////8BAf////8AAAAANXCJCgIAAAAAAAwAAABTZXJ2aWNlTGV2ZWwB" +
-           "AUYBAwAAAABXAAAAQSB2YWx1ZSBpbmRpY2F0aW5nIHRoZSBsZXZlbCBvZiBzZXJ2aWNlIHRoZSBzZXJ2" +
-           "ZXIgY2FuIHByb3ZpZGUuIDI1NSBpbmRpY2F0ZXMgdGhlIGJlc3QuAC4AREYBAAAAA/////8BAQAAAAAA" +
-           "QI9A/////wAAAAA1cIkKAgAAAAAACAAAAEF1ZGl0aW5nAQFHAQMAAAAASgAAAEEgZmxhZyBpbmRpY2F0" +
-           "aW5nIHdoZXRoZXIgdGhlIHNlcnZlciBpcyBjdXJyZW50bHkgZ2VuZXJhdGluZyBhdWRpdCBldmVudHMu" +
-           "AC4AREcBAAAAAf////8BAQAAAAAAQI9A/////wAAAAAkYIAKAQAAAAAAEgAAAFNlcnZlckNhcGFiaWxp" +
-           "dGllcwEBSAEDAAAAAC8AAABEZXNjcmliZXMgY2FwYWJpbGl0aWVzIHN1cHBvcnRlZCBieSB0aGUgc2Vy" +
-           "dmVyLgAvAQDdB0gBAAD/////CQAAADVgiQoCAAAAAAASAAAAU2VydmVyUHJvZmlsZUFycmF5AQFJAQMA" +
-           "AAAAKwAAAEEgbGlzdCBvZiBwcm9maWxlcyBzdXBwb3J0ZWQgYnkgdGhlIHNlcnZlci4ALgBESQEAAAAM" +
-           "AQAAAAEB/////wAAAAA1YIkKAgAAAAAADQAAAExvY2FsZUlkQXJyYXkBAUoBAwAAAAAqAAAAQSBsaXN0" +
-           "IG9mIGxvY2FsZXMgc3VwcG9ydGVkIGJ5IHRoZSBzZXJ2ZXIuAC4AREoBAAABACcBAQAAAAEB/////wAA" +
-           "AAA1YIkKAgAAAAAAFgAAAE1pblN1cHBvcnRlZFNhbXBsZVJhdGUBAUsBAwAAAAA2AAAAVGhlIG1pbmlt" +
-           "dW0gc2FtcGxpbmcgaW50ZXJ2YWwgc3VwcG9ydGVkIGJ5IHRoZSBzZXJ2ZXIuAC4AREsBAAABACIB////" +
-           "/wEB/////wAAAAA1YIkKAgAAAAAAGwAAAE1heEJyb3dzZUNvbnRpbnVhdGlvblBvaW50cwEBTAEDAAAA" +
-           "AEwAAABUaGUgbWF4aW11bSBudW1iZXIgb2YgY29udGludWF0aW9uIHBvaW50cyBmb3IgQnJvd3NlIG9w" +
-           "ZXJhdGlvbnMgcGVyIHNlc3Npb24uAC4AREwBAAAABf////8BAf////8AAAAANWCJCgIAAAAAABoAAABN" +
-           "YXhRdWVyeUNvbnRpbnVhdGlvblBvaW50cwEBTQEDAAAAAEsAAABUaGUgbWF4aW11bSBudW1iZXIgb2Yg" +
-           "Y29udGludWF0aW9uIHBvaW50cyBmb3IgUXVlcnkgb3BlcmF0aW9ucyBwZXIgc2Vzc2lvbi4ALgBETQEA" +
-           "AAAF/////wEB/////wAAAAA1YIkKAgAAAAAAHAAAAE1heEhpc3RvcnlDb250aW51YXRpb25Qb2ludHMB" +
-           "AU4BAwAAAABRAAAAVGhlIG1heGltdW0gbnVtYmVyIG9mIGNvbnRpbnVhdGlvbiBwb2ludHMgZm9yIFJl" +
-           "YWRIaXN0b3J5IG9wZXJhdGlvbnMgcGVyIHNlc3Npb24uAC4ARE4BAAAABf////8BAf////8AAAAANWCJ" +
-           "CgIAAAAAABQAAABTb2Z0d2FyZUNlcnRpZmljYXRlcwEBTwEDAAAAAC4AAABUaGUgc29mdHdhcmUgY2Vy" +
-           "dGlmaWNhdGVzIG93bmVkIGJ5IHRoZSBzZXJ2ZXIuAC4ARE8BAAABAFgBAQAAAAEB/////wAAAAAkYIAK" +
-           "AQAAAAAADgAAAE1vZGVsbGluZ1J1bGVzAQFfAQMAAAAAOQAAAEEgZm9sZGVyIGZvciB0aGUgbW9kZWxs" +
-           "aW5nIHJ1bGVzIHN1cHBvcnRlZCBieSB0aGUgc2VydmVyLgAvAD1fAQAA/////wAAAAAkYIAKAQAAAAAA" +
-           "EgAAAEFnZ3JlZ2F0ZUZ1bmN0aW9ucwEBYAEDAAAAAD4AAABBIGZvbGRlciBmb3IgdGhlIHJlYWwgdGlt" +
-           "ZSBhZ2dyZWdhdGVzIHN1cHBvcnRlZCBieSB0aGUgc2VydmVyLgAvAD1gAQAA/////wAAAAAkYIAKAQAA" +
-           "AAAAEQAAAFNlcnZlckRpYWdub3N0aWNzAQFhAQMAAAAAJQAAAFJlcG9ydHMgZGlhZ25vc3RpY3MgYWJv" +
-           "dXQgdGhlIHNlcnZlci4ALwEA5AdhAQAA/////wQAAAA1YIkKAgAAAAAAGAAAAFNlcnZlckRpYWdub3N0" +
-           "aWNzU3VtbWFyeQEBYgEDAAAAACYAAABBIHN1bW1hcnkgb2Ygc2VydmVyIGxldmVsIGRpYWdub3N0aWNz" +
-           "LgAvAQBmCGIBAAABAFsD/////wEB/////wwAAAAVYIkKAgAAAAAADwAAAFNlcnZlclZpZXdDb3VudAEB" +
-           "YwEALwA/YwEAAAAH/////wEB/////wAAAAAVYIkKAgAAAAAAEwAAAEN1cnJlbnRTZXNzaW9uQ291bnQB" +
-           "AWQBAC8AP2QBAAAAB/////8BAf////8AAAAAFWCJCgIAAAAAABUAAABDdW11bGF0ZWRTZXNzaW9uQ291" +
-           "bnQBAWUBAC8AP2UBAAAAB/////8BAf////8AAAAAFWCJCgIAAAAAABwAAABTZWN1cml0eVJlamVjdGVk" +
-           "U2Vzc2lvbkNvdW50AQFmAQAvAD9mAQAAAAf/////AQH/////AAAAABVgiQoCAAAAAAAUAAAAUmVqZWN0" +
-           "ZWRTZXNzaW9uQ291bnQBAWcBAC8AP2cBAAAAB/////8BAf////8AAAAAFWCJCgIAAAAAABMAAABTZXNz" +
-           "aW9uVGltZW91dENvdW50AQFoAQAvAD9oAQAAAAf/////AQH/////AAAAABVgiQoCAAAAAAARAAAAU2Vz" +
-           "c2lvbkFib3J0Q291bnQBAWkBAC8AP2kBAAAAB/////8BAf////8AAAAAFWCJCgIAAAAAABcAAABQdWJs" +
-           "aXNoaW5nSW50ZXJ2YWxDb3VudAEBagEALwA/agEAAAAH/////wEB/////wAAAAAVYIkKAgAAAAAAGAAA" +
-           "AEN1cnJlbnRTdWJzY3JpcHRpb25Db3VudAEBawEALwA/awEAAAAH/////wEB/////wAAAAAVYIkKAgAA" +
-           "AAAAGgAAAEN1bXVsYXRlZFN1YnNjcmlwdGlvbkNvdW50AQFsAQAvAD9sAQAAAAf/////AQH/////AAAA" +
-           "ABVgiQoCAAAAAAAdAAAAU2VjdXJpdHlSZWplY3RlZFJlcXVlc3RzQ291bnQBAW0BAC8AP20BAAAAB///" +
-           "//8BAf////8AAAAAFWCJCgIAAAAAABUAAABSZWplY3RlZFJlcXVlc3RzQ291bnQBAW4BAC8AP24BAAAA" +
-           "B/////8BAf////8AAAAANWCJCgIAAAAAABwAAABTdWJzY3JpcHRpb25EaWFnbm9zdGljc0FycmF5AQFw" +
-           "AQMAAAAAMwAAAEEgbGlzdCBvZiBkaWFnbm9zdGljcyBmb3IgZWFjaCBhY3RpdmUgc3Vic2NyaXB0aW9u" +
-           "LgAvAQB7CHABAAABAGoDAQAAAAEB/////wAAAAAkYIAKAQAAAAAAGgAAAFNlc3Npb25zRGlhZ25vc3Rp" +
-           "Y3NTdW1tYXJ5AQFxAQMAAAAAJwAAAEEgc3VtbWFyeSBvZiBzZXNzaW9uIGxldmVsIGRpYWdub3N0aWNz" +
-           "LgAvAQDqB3EBAAD/////AgAAADVgiQoCAAAAAAAXAAAAU2Vzc2lvbkRpYWdub3N0aWNzQXJyYXkBAXIB" +
-           "AwAAAAAuAAAAQSBsaXN0IG9mIGRpYWdub3N0aWNzIGZvciBlYWNoIGFjdGl2ZSBzZXNzaW9uLgAvAQCU" +
-           "CHIBAAABAGEDAQAAAAEB/////wAAAAA1YIkKAgAAAAAAHwAAAFNlc3Npb25TZWN1cml0eURpYWdub3N0" +
-           "aWNzQXJyYXkBAXMBAwAAAAA/AAAAQSBsaXN0IG9mIHNlY3VyaXR5IHJlbGF0ZWQgZGlhZ25vc3RpY3Mg" +
-           "Zm9yIGVhY2ggYWN0aXZlIHNlc3Npb24uAC8BAMMIcwEAAAEAZAMBAAAAAQH/////AAAAADVgiQoCAAAA" +
-           "AAALAAAARW5hYmxlZEZsYWcBAXQBAwAAAAAuAAAASWYgVFJVRSB0aGUgZGlhZ25vc3RpY3MgY29sbGVj" +
-           "dGlvbiBpcyBlbmFibGVkLgAuAER0AQAAAAH/////AwP/////AAAAACRggAoBAAAAAAAQAAAAVmVuZG9y" +
-           "U2VydmVySW5mbwEBdQEDAAAAACoAAABTZXJ2ZXIgaW5mb3JtYXRpb24gcHJvdmlkZWQgYnkgdGhlIHZl" +
-           "bmRvci4ALwEA8Qd1AQAA/////wAAAAAkYIAKAQAAAAAAEAAAAFNlcnZlclJlZHVuZGFuY3kBAXYBAwAA" +
-           "AAA0AAAARGVzY3JpYmVzIHRoZSByZWR1bmRhbmN5IGNhcGFiaWxpdGllcyBvZiB0aGUgc2VydmVyLgAv" +
-           "AQDyB3YBAAD/////AQAAADVgiQoCAAAAAAARAAAAUmVkdW5kYW5jeVN1cHBvcnQBAXcBAwAAAAA+AAAA" +
-           "SW5kaWNhdGVzIHdoYXQgc3R5bGUgb2YgcmVkdW5kYW5jeSBpcyBzdXBwb3J0ZWQgYnkgdGhlIHNlcnZl" +
-           "ci4ALgBEdwEAAAEAUwP/////AQH/////AAAAABVgyQoCAAAAEQAAAEJyb3dzZU5hbWU0bm9kZTY2AQAN" +
-           "AAAAQ2hpbGRQcm9wZXJ0eQEBkgEALgBEkgEAAAAV/////wEBAQAAAAEBwwABAQGTAQAAAAAVYMkKAgAA" +
-           "AA4AAABOYW1lTm90U2V0MTEwOQEAEwAAAEJyb3dzZU5hbWU0bm9kZTExMDkBAZMBAC8BAEAJkwEAAAAa" +
-           "/////wEBAQAAAAEBwwAAAQGSAQEAAAAVYIkKAgAAAAAABwAAAEVVUmFuZ2UBAZcBAC4ARJcBAAABAHQD" +
-           "/////wEB/////wAAAAAEYYIKBAAAAAEACwAAAENoaWxkTWV0aG9kAQGZAQAvAQEnAZkBAAABAf////8C" +
-           "AAAAFWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEBmgEALgBEmgEAAJYCAAAAAQAqAQEVAAAABgAA" +
-           "AElucHV0MQAG/////wAAAAAAAQAqAQEVAAAABgAAAElucHV0MgAG/////wAAAAAAAQAoAQEAAAABAf//" +
-           "//8AAAAAFWCpCgIAAAAAAA8AAABPdXRwdXRBcmd1bWVudHMBAZsBAC4ARJsBAACWAQAAAAEAKgEBFgAA" +
-           "AAcAAABPdXRwdXQxAAb/////AAAAAAABACgBAQAAAAEB/////wAAAAAEYYIKBAAAAAEAEwAAAE5vbkV4" +
-           "ZWN1dGFibGVNZXRob2QBAZwBAC8BATIBnAEAAAEB/////wAAAAA=";
+           "/////wRggAIBAAAAAQAkAAAARGVyaXZlZEZyb21Db21wbGV4T2JqZWN0VHlwZUluc3RhbmNlAQE2AQEB" +
+           "NgE2AQAA/////w0AAAAXcIkKAgAAAAAACwAAAFNlcnZlckFycmF5AQE3AQAuAEQ3AQAAAAwBAAAAAQAA" +
+           "AAAAAAABAQAAAAAAQI9A/////wAAAAAXcIkKAgAAAAAADgAAAE5hbWVzcGFjZUFycmF5AQE4AQAuAEQ4" +
+           "AQAAAAwBAAAAAQAAAAAAAAABAQAAAAAAQI9A/////wAAAAAVcIkKAgAAAAAADAAAAFNlcnZlclN0YXR1" +
+           "cwEBOQEALwEAWgg5AQAAAQBeA/////8BAQAAAAAAQI9A/////wYAAAAVYIkKAgAAAAAACQAAAFN0YXJ0" +
+           "VGltZQEBOgEALwA/OgEAAAEAJgH/////AQH/////AAAAABVgiQoCAAAAAAALAAAAQ3VycmVudFRpbWUB" +
+           "ATsBAC8APzsBAAABACYB/////wEB/////wAAAAAVYIkKAgAAAAAABQAAAFN0YXRlAQE8AQAvAD88AQAA" +
+           "AQBUA/////8BAf////8AAAAAFWCJCgIAAAAAAAkAAABCdWlsZEluZm8BAT0BAC8BAOsLPQEAAAEAUgH/" +
+           "////AQH/////BgAAABVwiQoCAAAAAAAKAAAAUHJvZHVjdFVyaQEBPgEALwA/PgEAAAAM/////wEBAAAA" +
+           "AABAj0D/////AAAAABVwiQoCAAAAAAAQAAAATWFudWZhY3R1cmVyTmFtZQEBPwEALwA/PwEAAAAM////" +
+           "/wEBAAAAAABAj0D/////AAAAABVwiQoCAAAAAAALAAAAUHJvZHVjdE5hbWUBAUABAC8AP0ABAAAADP//" +
+           "//8BAQAAAAAAQI9A/////wAAAAAVcIkKAgAAAAAADwAAAFNvZnR3YXJlVmVyc2lvbgEBQQEALwA/QQEA" +
+           "AAAM/////wEBAAAAAABAj0D/////AAAAABVwiQoCAAAAAAALAAAAQnVpbGROdW1iZXIBAUIBAC8AP0IB" +
+           "AAAADP////8BAQAAAAAAQI9A/////wAAAAAVcIkKAgAAAAAACQAAAEJ1aWxkRGF0ZQEBQwEALwA/QwEA" +
+           "AAEAJgH/////AQEAAAAAAECPQP////8AAAAAFWCJCgIAAAAAABMAAABTZWNvbmRzVGlsbFNodXRkb3du" +
+           "AQFEAQAvAD9EAQAAAAf/////AQH/////AAAAABVgiQoCAAAAAAAOAAAAU2h1dGRvd25SZWFzb24BAUUB" +
+           "AC8AP0UBAAAAFf////8BAf////8AAAAAFXCJCgIAAAAAAAwAAABTZXJ2aWNlTGV2ZWwBAUYBAC4AREYB" +
+           "AAAAA/////8BAQAAAAAAQI9A/////wAAAAAVcIkKAgAAAAAACAAAAEF1ZGl0aW5nAQFHAQAuAERHAQAA" +
+           "AAH/////AQEAAAAAAECPQP////8AAAAABGCACgEAAAAAABIAAABTZXJ2ZXJDYXBhYmlsaXRpZXMBAUgB" +
+           "AC8BAN0HSAEAAP////8JAAAAF2CJCgIAAAAAABIAAABTZXJ2ZXJQcm9maWxlQXJyYXkBAUkBAC4AREkB" +
+           "AAAADAEAAAABAAAAAAAAAAEB/////wAAAAAXYIkKAgAAAAAADQAAAExvY2FsZUlkQXJyYXkBAUoBAC4A" +
+           "REoBAAABACcBAQAAAAEAAAAAAAAAAQH/////AAAAABVgiQoCAAAAAAAWAAAATWluU3VwcG9ydGVkU2Ft" +
+           "cGxlUmF0ZQEBSwEALgBESwEAAAEAIgH/////AQH/////AAAAABVgiQoCAAAAAAAbAAAATWF4QnJvd3Nl" +
+           "Q29udGludWF0aW9uUG9pbnRzAQFMAQAuAERMAQAAAAX/////AQH/////AAAAABVgiQoCAAAAAAAaAAAA" +
+           "TWF4UXVlcnlDb250aW51YXRpb25Qb2ludHMBAU0BAC4ARE0BAAAABf////8BAf////8AAAAAFWCJCgIA" +
+           "AAAAABwAAABNYXhIaXN0b3J5Q29udGludWF0aW9uUG9pbnRzAQFOAQAuAEROAQAAAAX/////AQH/////" +
+           "AAAAABdgiQoCAAAAAAAUAAAAU29mdHdhcmVDZXJ0aWZpY2F0ZXMBAU8BAC4ARE8BAAABAFgBAQAAAAEA" +
+           "AAAAAAAAAQH/////AAAAAARggAoBAAAAAAAOAAAATW9kZWxsaW5nUnVsZXMBAV8BAC8APV8BAAD/////" +
+           "AAAAAARggAoBAAAAAAASAAAAQWdncmVnYXRlRnVuY3Rpb25zAQFgAQAvAD1gAQAA/////wAAAAAEYIAK" +
+           "AQAAAAAAEQAAAFNlcnZlckRpYWdub3N0aWNzAQFhAQAvAQDkB2EBAAD/////BAAAABVgiQoCAAAAAAAY" +
+           "AAAAU2VydmVyRGlhZ25vc3RpY3NTdW1tYXJ5AQFiAQAvAQBmCGIBAAABAFsD/////wEB/////wwAAAAV" +
+           "YIkKAgAAAAAADwAAAFNlcnZlclZpZXdDb3VudAEBYwEALwA/YwEAAAAH/////wEB/////wAAAAAVYIkK" +
+           "AgAAAAAAEwAAAEN1cnJlbnRTZXNzaW9uQ291bnQBAWQBAC8AP2QBAAAAB/////8BAf////8AAAAAFWCJ" +
+           "CgIAAAAAABUAAABDdW11bGF0ZWRTZXNzaW9uQ291bnQBAWUBAC8AP2UBAAAAB/////8BAf////8AAAAA" +
+           "FWCJCgIAAAAAABwAAABTZWN1cml0eVJlamVjdGVkU2Vzc2lvbkNvdW50AQFmAQAvAD9mAQAAAAf/////" +
+           "AQH/////AAAAABVgiQoCAAAAAAAUAAAAUmVqZWN0ZWRTZXNzaW9uQ291bnQBAWcBAC8AP2cBAAAAB///" +
+           "//8BAf////8AAAAAFWCJCgIAAAAAABMAAABTZXNzaW9uVGltZW91dENvdW50AQFoAQAvAD9oAQAAAAf/" +
+           "////AQH/////AAAAABVgiQoCAAAAAAARAAAAU2Vzc2lvbkFib3J0Q291bnQBAWkBAC8AP2kBAAAAB///" +
+           "//8BAf////8AAAAAFWCJCgIAAAAAABcAAABQdWJsaXNoaW5nSW50ZXJ2YWxDb3VudAEBagEALwA/agEA" +
+           "AAAH/////wEB/////wAAAAAVYIkKAgAAAAAAGAAAAEN1cnJlbnRTdWJzY3JpcHRpb25Db3VudAEBawEA" +
+           "LwA/awEAAAAH/////wEB/////wAAAAAVYIkKAgAAAAAAGgAAAEN1bXVsYXRlZFN1YnNjcmlwdGlvbkNv" +
+           "dW50AQFsAQAvAD9sAQAAAAf/////AQH/////AAAAABVgiQoCAAAAAAAdAAAAU2VjdXJpdHlSZWplY3Rl" +
+           "ZFJlcXVlc3RzQ291bnQBAW0BAC8AP20BAAAAB/////8BAf////8AAAAAFWCJCgIAAAAAABUAAABSZWpl" +
+           "Y3RlZFJlcXVlc3RzQ291bnQBAW4BAC8AP24BAAAAB/////8BAf////8AAAAAF2CJCgIAAAAAABwAAABT" +
+           "dWJzY3JpcHRpb25EaWFnbm9zdGljc0FycmF5AQFwAQAvAQB7CHABAAABAGoDAQAAAAEAAAAAAAAAAQH/" +
+           "////AAAAAARggAoBAAAAAAAaAAAAU2Vzc2lvbnNEaWFnbm9zdGljc1N1bW1hcnkBAXEBAC8BAOoHcQEA" +
+           "AP////8CAAAAF2CJCgIAAAAAABcAAABTZXNzaW9uRGlhZ25vc3RpY3NBcnJheQEBcgEALwEAlAhyAQAA" +
+           "AQBhAwEAAAABAAAAAAAAAAEB/////wAAAAAXYIkKAgAAAAAAHwAAAFNlc3Npb25TZWN1cml0eURpYWdu" +
+           "b3N0aWNzQXJyYXkBAXMBAC8BAMMIcwEAAAEAZAMBAAAAAQAAAAAAAAABAf////8AAAAAFWCJCgIAAAAA" +
+           "AAsAAABFbmFibGVkRmxhZwEBdAEALgBEdAEAAAAB/////wMD/////wAAAAAEYIAKAQAAAAAAEAAAAFZl" +
+           "bmRvclNlcnZlckluZm8BAXUBAC8BAPEHdQEAAP////8AAAAABGCACgEAAAAAABAAAABTZXJ2ZXJSZWR1" +
+           "bmRhbmN5AQF2AQAvAQDyB3YBAAD/////AQAAABVgiQoCAAAAAAARAAAAUmVkdW5kYW5jeVN1cHBvcnQB" +
+           "AXcBAC4ARHcBAAABAFMD/////wEB/////wAAAAAVYMkKAgAAABEAAABCcm93c2VOYW1lNG5vZGU2NgEA" +
+           "DQAAAENoaWxkUHJvcGVydHkBAZIBAC4ARJIBAAAAFf////8BAQEAAAABAcMAAQEBkwEAAAAAFWDJCgIA" +
+           "AAAOAAAATmFtZU5vdFNldDExMDkBABMAAABCcm93c2VOYW1lNG5vZGUxMTA5AQGTAQAvAQBACZMBAAAA" +
+           "Gv////8BAQEAAAABAcMAAAEBkgEBAAAAFWCJCgIAAAAAAAcAAABFVVJhbmdlAQGXAQAuAESXAQAAAQB0" +
+           "A/////8BAf////8AAAAABGGCCgQAAAABAAsAAABDaGlsZE1ldGhvZAEBmQEALwEBJwGZAQAAAQH/////" +
+           "AgAAABdgqQoCAAAAAAAOAAAASW5wdXRBcmd1bWVudHMBAZoBAC4ARJoBAACWAgAAAAEAKgEBFQAAAAYA" +
+           "AABJbnB1dDEABv////8AAAAAAAEAKgEBFQAAAAYAAABJbnB1dDIABv////8AAAAAAAEAKAEBAAAAAQAA" +
+           "AAAAAAABAf////8AAAAAF2CpCgIAAAAAAA8AAABPdXRwdXRBcmd1bWVudHMBAZsBAC4ARJsBAACWAQAA" +
+           "AAEAKgEBFgAAAAcAAABPdXRwdXQxAAb/////AAAAAAABACgBAQAAAAEAAAAAAAAAAQH/////AAAAAARh" +
+           "ggoEAAAAAQATAAAATm9uRXhlY3V0YWJsZU1ldGhvZAEBnAEALwEBMgGcAQAAAQH/////AAAAAA==";
         #endregion
         #endif
         #endregion

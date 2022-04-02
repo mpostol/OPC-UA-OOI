@@ -1,6 +1,6 @@
 ﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
@@ -29,6 +29,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestMethod]
     public void UAMethodTest()
     {
+      //TODO The exported model doesn't contain all nodes #653
+      //Assert.Inconclusive("The exported model doesn't contain all nodes #653");
+
       Mock<IAddressSpaceBuildContext> addressSpaceBuildContextMock = new Mock<IAddressSpaceBuildContext>();
       Mock<IBuildErrorsHandling> buildErrorsHandlingNock = new Mock<IBuildErrorsHandling>();
       Validator _i2t = new Validator(addressSpaceBuildContextMock.Object, buildErrorsHandlingNock.Object);
@@ -56,7 +59,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DisplayName = new LocalizedText[] { new LocalizedText() { Value = "Start" } },
         References = new Reference[] { }
       };
-      List<TraceMessage> traceBuffer = new List<TraceMessage>(); 
+      List<TraceMessage> traceBuffer = new List<TraceMessage>();
       UANodeContext nodeContext = new UANodeContext(DataSerialization.NodeId.Parse(method.NodeId), addressSpaceBuildContextMock.Object, x => traceBuffer.Add(x));
       nodeContext.Update(method, x => { });
       Mock<INodeContainer> nodeContainerMock = new Mock<INodeContainer>();
@@ -64,7 +67,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeContainerMock.Setup(x => x.AddNodeFactory<IMethodInstanceFactory>()).Returns(methodInstanceFactory.Object);
       //TODO UANodeSetValidation.Extensions.GetObject - object reference not set #624
       Assert.Inconclusive("UANodeSetValidation.Extensions.GetObject - object reference not set #624");
-      _i2t.ValidateExportNode(nodeContext, nodeContainerMock.Object);
+      _i2t.ValidateExportNode(nodeContext, null, nodeContainerMock.Object,  z => { });
       Assert.AreEqual<int>(0, traceBuffer.Count);
     }
   }

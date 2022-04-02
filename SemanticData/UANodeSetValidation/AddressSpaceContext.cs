@@ -96,9 +96,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //TODO IAddressSpaceContext.ImportUANodeSet(System.IO.FileInfo) returned result must be tested. #626
     Uri IAddressSpaceContext.ImportUANodeSet(FileInfo document)
     {
-      m_TraceEvent.TraceData(TraceEventType.Information, 190380256, $"Entering {nameof(ImportNodeSet)} and starting model import form file {document.Name}");
       if (document == null)
         throw new ArgumentNullException("model", "the model cannot be null");
+      m_TraceEvent.TraceData(TraceEventType.Information, 190380256, $"Entering {nameof(IAddressSpaceContext.ImportUANodeSet)} and starting model import form file {document.Name}");
       if (!document.Exists)
         throw new FileNotFoundException("The imported file does not exist", document.FullName);
       UANodeSet _nodeSet = UANodeSet.ReadModelFile(document);
@@ -217,7 +217,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="node">The root node of the requested children.</param>
     /// <returns>Return an instance of <see cref="IEnumerable{IUANodeBase}" /> capturing all children of the selected node.</returns>
-    //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
     public IEnumerable<IUANodeBase> GetChildren(IUANodeBase node)
     {
       return m_References.Values.Where<UAReferenceContext>(x => Object.ReferenceEquals(x.SourceNode, node)).
@@ -315,13 +314,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private void ValidateAndExportModel(int nameSpaceIndex)
     {
       IValidator validator = new Validator(this, m_TraceEvent);
-      IEnumerable<IUANodeContext> stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
-      IEnumerable<IUANodeContext> undefindNodes = from node in stubs
-                                                  where Object.ReferenceEquals(node.UANode, null)
-                                                  select node;
-      foreach (IUANodeContext item in undefindNodes)
+      IEnumerable<IUANodeBase> stubs = from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key;
+      IEnumerable<IUANodeBase> undefindNodes = from node in stubs
+                                               where Object.ReferenceEquals(node.UANode, null)
+                                               select node;
+      foreach (IUANodeBase item in undefindNodes)
         m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NodeCannotBeNull, $"the node {item.ToString()} is not defined in the UANodeSet model"));
-      List<IUANodeContext> nodes = (from _node in stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList();
+      List<IUANodeBase> allNodesInConcern = (from _node in stubs where _node.UANode != null select _node).ToList<IUANodeBase>();
+      List<IUANodeBase> nodes = (from _node in stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList<IUANodeBase>();
       m_TraceEvent.TraceData(TraceEventType.Verbose, 938023414, $"Selected {nodes.Count} types to be validated.");
       IUANodeBase _objects = TryGetUANodeContext(UAInformationModel.ObjectIds.ObjectsFolder);
       if (_objects is null)
@@ -338,27 +338,43 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         string _version = modelTableEntry.Version;
         InformationModelFactory.CreateNamespace(modelTableEntry.ModelUri.ToString(), _publicationDate, _version);
       }
-      foreach (IUANodeBase item in nodes)
+      int nodesCount = nodes.Count;
+      do
       {
-        try
+        string doMessage = $"Do Validator.ValidateExportModel - now the model contains {nodesCount} nodes";
+        m_TraceEvent.TraceData(TraceEventType.Information, 1606585634, doMessage);
+        NodesCollection embededNodes = new NodesCollection();
+        foreach (IUANodeBase item in nodes)
         {
-          validator.ValidateExportNode(item, InformationModelFactory);
+          try
+          {
+            validator.ValidateExportNode(item, allNodesInConcern, InformationModelFactory, y => { if (y.NodeIdContext.NamespaceIndex == nameSpaceIndex) embededNodes.AddOrReplace(y, false); });
+          }
+          catch (Exception ex)
+          {
+            string msg = string.Format("Error caught while processing the node {0}. The message: {1} at {2}.", item.UANode.NodeId, ex.Message, ex.StackTrace);
+            m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, msg));
+          }
         }
-        catch (Exception ex)
-        {
-          string msg = string.Format("Error caught while processing the node {0}. The message: {1} at {2}.", item.UANode.NodeId, ex.Message, ex.StackTrace);
-          m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, msg));
-        }
-      }
+        //TODO The exported model doesn't contain all nodes #653
+        nodes.Clear();// = embededNodes.ToList();
+        nodesCount += nodes.Count;
+      } while (nodes.Count > 0);
       string message = null;
+      foreach (IUANodeBase node in allNodesInConcern)
+      {
+        message = $"{1594962400} - Finishing Validator.ValidateExportModel - the {node} is not added to the exported model";
+        TraceMessage traceMessage = TraceMessage.DiagnosticTraceMessage(message);
+        m_TraceEvent.WriteTraceMessage(traceMessage);
+      }
       if (m_TraceEvent.Errors == 0)
       {
-        message = $"Finishing Validator.ValidateExportModel - the model contains {nodes.Count} nodes and no errors/warnings reported";
+        message = $"Finishing Validator.ValidateExportModel - the model contains {nodesCount} nodes and no errors/warnings reported";
         m_TraceEvent.TraceData(TraceEventType.Information, 711552454, message);
       }
       else
       {
-        message = $"Finishing Validator.ValidateExportModel - the model contains {nodes.Count} nodes and {m_TraceEvent.Errors} errors reported.";
+        message = $"Finishing Validator.ValidateExportModel - the model contains {nodesCount} nodes and {m_TraceEvent.Errors} errors reported.";
         m_TraceEvent.TraceData(TraceEventType.Warning, 226242104, message);
       }
     }

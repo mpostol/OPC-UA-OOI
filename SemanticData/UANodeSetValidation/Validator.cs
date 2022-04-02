@@ -1,6 +1,6 @@
 ﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
@@ -31,25 +31,29 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       m_buildErrorsHandling = traceBuildErrorsHandling;
     }
 
-    #region internal API
+    #region IValidator
 
     /// <summary>
     /// Validates <paramref name="nodeContext" /> and exports it using an object of <see cref="IModelFactory" />  type.
     /// </summary>
     /// <param name="nodeContext">The node context to be validated and exported.</param>
+    /// <param name="allNodesInConcern">list of selected members to export.</param>
     /// <param name="exportFactory">A model export factory.</param>
-    public void ValidateExportNode(IUANodeBase nodeContext, INodeContainer exportFactory)
+    /// <param name="validateExportNode2Model">It creates the node at the top level of the model. Called if the node has reference to another node that cannot be defined as a child.</param>
+    public void ValidateExportNode(IUANodeBase nodeContext, List<IUANodeBase> allNodesInConcern, INodeContainer exportFactory, Action<IUANodeContext> validateExportNode2Model)
     {
-      ValidateExportNode(nodeContext, exportFactory, null);
+      ValidateExportNode(nodeContext, allNodesInConcern, exportFactory, validateExportNode2Model, null);
     }
 
     /// <summary>
     /// Validates <paramref name="nodeContext" /> and exports it using an object of <see cref="IModelFactory" />  type.
     /// </summary>
     /// <param name="nodeContext">The node context to be validated and exported.</param>
+    /// <param name="allNodesInConcern">list of selected members to export.</param>
     /// <param name="exportFactory">A model export factory.</param>
     /// <param name="parentReference">The reference to parent node.</param>
-    public void ValidateExportNode(IUANodeBase nodeContext, INodeContainer exportFactory, UAReferenceContext parentReference)
+    /// <param name="validateExportNode2Model">It creates the node at the top level of the model. Called if the node has reference to another node that cannot be defined as a child.</param>
+    public void ValidateExportNode(IUANodeBase nodeContext, List<IUANodeBase> allNodesInConcern, INodeContainer exportFactory, Action<IUANodeContext> validateExportNode2Model, UAReferenceContext parentReference)
     {
       Debug.Assert(nodeContext != null, "Validator.ValidateExportNode the argument nodeContext is null.");
       //TODO Handle HasComponent ReferenceType errors. #42
@@ -70,38 +74,38 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         switch (nodeContext.UANode.NodeClassEnum)
         {
           case NodeClassEnum.UADataType:
-            CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType);
+            CreateNode<IDataTypeFactory, UADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType, validateExportNode2Model, allNodesInConcern);
             break;
 
           case NodeClassEnum.UAMethod:
-            CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.AddNodeFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference), UpdateInstance);
+            CreateNode<IMethodInstanceFactory, UAMethod>(exportFactory.AddNodeFactory<IMethodInstanceFactory>, nodeContext, (x, y) => Update(x, y, parentReference), UpdateInstance, validateExportNode2Model, allNodesInConcern);
             break;
 
           case NodeClassEnum.UAObject:
-            CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.AddNodeFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y), UpdateInstance);
+            CreateNode<IObjectInstanceFactory, UAObject>(exportFactory.AddNodeFactory<IObjectInstanceFactory>, nodeContext, (x, y) => Update(x, y), UpdateInstance, validateExportNode2Model, allNodesInConcern);
             break;
 
           case NodeClassEnum.UAObjectType:
-            CreateNode<IObjectTypeFactory, UAObjectType>(exportFactory.AddNodeFactory<IObjectTypeFactory>, nodeContext, Update, UpdateType);
+            CreateNode<IObjectTypeFactory, UAObjectType>(exportFactory.AddNodeFactory<IObjectTypeFactory>, nodeContext, Update, UpdateType, validateExportNode2Model, allNodesInConcern);
             break;
 
           case NodeClassEnum.UAReferenceType:
-            CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.AddNodeFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType);
+            CreateNode<IReferenceTypeFactory, UAReferenceType>(exportFactory.AddNodeFactory<IReferenceTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType, validateExportNode2Model, allNodesInConcern);
             break;
 
           case NodeClassEnum.UAVariable:
-            if (parentReference.ReferenceKind == ReferenceKindEnum.HasProperty)
-              CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance);
+            if ((parentReference != null) && (parentReference.ReferenceKind == ReferenceKindEnum.HasProperty))
+              CreateNode<IPropertyInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IPropertyInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance, validateExportNode2Model, allNodesInConcern);
             else
-              CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance);
+              CreateNode<IVariableInstanceFactory, UAVariable>(exportFactory.AddNodeFactory<IVariableInstanceFactory>, nodeContext, (x, y) => Update(x, y, nodeContext, parentReference), UpdateInstance, validateExportNode2Model, allNodesInConcern);
             break;
 
           case NodeClassEnum.UAVariableType:
-            CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.AddNodeFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType);
+            CreateNode<IVariableTypeFactory, UAVariableType>(exportFactory.AddNodeFactory<IVariableTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType, validateExportNode2Model, allNodesInConcern);
             break;
 
           case NodeClassEnum.UAView:
-            CreateNode<IViewInstanceFactory, UAView>(exportFactory.AddNodeFactory<IViewInstanceFactory>, nodeContext, (x, y) => Update(x, y), UpdateInstance);
+            CreateNode<IViewInstanceFactory, UAView>(exportFactory.AddNodeFactory<IViewInstanceFactory>, nodeContext, (x, y) => Update(x, y), UpdateInstance, validateExportNode2Model, allNodesInConcern);
             break;
 
           case NodeClassEnum.Unknown:
@@ -110,7 +114,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
 
-    #endregion internal API
+    #endregion IValidator
 
     #region private
 
@@ -129,20 +133,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(m_buildErrorsHandling.WriteTraceMessage);
     }
 
-    private void Update(IPropertyInstanceFactory propertyInstance, UAVariable nodeSet, IUANodeBase nodeContext, UAReferenceContext parentReference)
+    private void Update(IPropertyInstanceFactory nodeDesign, UAVariable nodeSet, IUANodeBase nodeContext, UAReferenceContext parentReference)
     {
       try
       {
-        Update(propertyInstance, nodeSet);
-        propertyInstance.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName();
-        if (!nodeContext.IsProperty)
+        Update(nodeDesign, nodeSet, parentReference);
+        if (!nodeContext.IsProperty && ! Object.ReferenceEquals(parentReference, null))
         {
           XmlQualifiedName baseType = nodeContext.ExportBaseTypeBrowseName();
           string baseTypeName = baseType == null ? "a base type" : $"the {baseType.ToString()} type.";
           m_buildErrorsHandling.WriteTraceMessage
             (
               TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property,
-                $"Target node of the {parentReference.ReferenceKind.ToString()} reference cannot be {nodeContext.UANode.BrowseNameQualifiedName} of {baseTypeName}.")
+                $"Target node of the {parentReference.ReferenceKind} reference cannot be {nodeContext.UANode.BrowseNameQualifiedName} of {baseTypeName}.")
             );
         }
       }
@@ -153,14 +156,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
 
-    private void Update(IVariableInstanceFactory variableInstance, UAVariable nodeSet, IUANodeBase nodeContext, UAReferenceContext parentReference)
+    private void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet, IUANodeBase nodeContext, UAReferenceContext parentReference)
     {
       try
       {
-        Update(variableInstance, nodeSet);
-        variableInstance.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName();
-        if (nodeContext.IsProperty)
-          m_buildErrorsHandling.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Variable, string.Format("Creating Variable - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
+        Update(nodeDesign, nodeSet, parentReference);
+        //TODO NetworkIdentifier is missing in generated Model Design for DI model #629 parentReference System.NullReferenceException
+        //TODO The exported model doesn't contain all nodes #653 review WrongReference2PropertyTestMethod
+        //if (nodeContext.IsProperty)
+        //  m_buildErrorsHandling.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Variable, string.Format("Creating Variable - wrong reference type {0}", parentReference.ReferenceKind.ToString())));
       }
       catch (Exception _ex)
       {
@@ -169,8 +173,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
 
-    private void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet)
+    private void Update(IVariableInstanceFactory nodeDesign, UAVariable nodeSet, UAReferenceContext parentReference)
     {
+      nodeDesign.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName();
       nodeDesign.AccessLevel = nodeSet.AccessLevel.GetAccessLevel(m_buildErrorsHandling.WriteTraceMessage);
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(string.Empty);
       nodeDesign.DataType = string.IsNullOrEmpty(nodeSet.DataType) ? null : m_AddressSpace.ExportBrowseName(nodeSet.DataTypeNodeId, DataTypes.Number);//TODO add test case must be DataType, must not be abstract
@@ -245,13 +250,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Func<FactoryType> createNode,
         IUANodeBase nodeContext,
         Action<FactoryType, NodeSetType> updateNode,
-        Action<FactoryType, NodeSetType, IUANodeBase> updateBase
+        Action<FactoryType, NodeSetType, IUANodeBase> updateBase,
+        Action<IUANodeContext> validateExportNode2Model,
+        List<IUANodeBase> allNodesInConcern
       )
       where FactoryType : INodeFactory
       where NodeSetType : UANode
     {
+      if (!allNodesInConcern.Remove(nodeContext))
+        return;
       FactoryType _nodeFactory = createNode();
-      nodeContext.CalculateNodeReferences(_nodeFactory, this);
+      nodeContext.CalculateNodeReferences(_nodeFactory, allNodesInConcern, this, validateExportNode2Model);
       NodeSetType _nodeSet = (NodeSetType)nodeContext.UANode;
       XmlQualifiedName _browseName = nodeContext.ExportNodeBrowseName();
       string _symbolicName;

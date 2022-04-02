@@ -183,10 +183,7 @@
       </References>
       <Value>
         <Value>
-          <LocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
-            <Locale p2:nil="true" xmlns:p2="http://www.w3.org/2001/XMLSchema-instance" />
-            <Text p2:nil="true" xmlns:p2="http://www.w3.org/2001/XMLSchema-instance" />
-          </LocalizedText>
+          <LocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd" />
         </Value>
       </Value>
       <DataType>
@@ -227,15 +224,6 @@
           <IsInverse>true</IsInverse>
           <TargetId>
             <Identifier>ns=1;i=1</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=10</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -319,15 +307,6 @@
           <IsInverse>true</IsInverse>
           <TargetId>
             <Identifier>ns=1;i=16</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=10</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -452,10 +431,7 @@
       </References>
       <Value>
         <Value>
-          <LocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
-            <Locale p2:nil="true" xmlns:p2="http://www.w3.org/2001/XMLSchema-instance" />
-            <Text p2:nil="true" xmlns:p2="http://www.w3.org/2001/XMLSchema-instance" />
-          </LocalizedText>
+          <LocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd" />
         </Value>
       </Value>
       <DataType>
@@ -496,15 +472,6 @@
           <IsInverse>true</IsInverse>
           <TargetId>
             <Identifier>ns=1;i=30</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=10</Identifier>
           </TargetId>
         </ReferenceNode>
       </References>

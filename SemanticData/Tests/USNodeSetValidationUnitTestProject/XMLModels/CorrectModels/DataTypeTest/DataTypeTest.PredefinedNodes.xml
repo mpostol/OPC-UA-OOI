@@ -16,6 +16,31 @@
       <uax:Identifier>i=29</uax:Identifier>
     </uax:SuperTypeId>
     <uax:IsAbstract>true</uax:IsAbstract>
+    <uax:DataTypeDefinition>
+      <uax:TypeId>
+        <uax:Identifier>i=14799</uax:Identifier>
+      </uax:TypeId>
+      <uax:Body>
+        <uax:EnumDefinition>
+          <uax:Fields>
+            <uax:EnumField>
+              <uax:Value>0</uax:Value>
+              <uax:DisplayName>
+                <uax:Text>Field1</uax:Text>
+              </uax:DisplayName>
+              <uax:Name>Field1</uax:Name>
+            </uax:EnumField>
+            <uax:EnumField>
+              <uax:Value>1</uax:Value>
+              <uax:DisplayName>
+                <uax:Text>Field2</uax:Text>
+              </uax:DisplayName>
+              <uax:Name>Field2</uax:Name>
+            </uax:EnumField>
+          </uax:Fields>
+        </uax:EnumDefinition>
+      </uax:Body>
+    </uax:DataTypeDefinition>
     <EnumStrings xmlns="http://opcfoundation.org/UA/">
       <uax:NodeClass>Variable_2</uax:NodeClass>
       <uax:NodeId>
@@ -31,19 +56,14 @@
       <uax:TypeDefinitionId>
         <uax:Identifier>i=68</uax:Identifier>
       </uax:TypeDefinitionId>
-      <uax:ModellingRuleId>
-        <uax:Identifier>i=78</uax:Identifier>
-      </uax:ModellingRuleId>
       <uax:NumericId>10</uax:NumericId>
       <uax:Value>
         <uax:Value>
           <uax:ListOfLocalizedText>
             <uax:LocalizedText>
-              <uax:Locale></uax:Locale>
               <uax:Text>Field1</uax:Text>
             </uax:LocalizedText>
             <uax:LocalizedText>
-              <uax:Locale></uax:Locale>
               <uax:Text>Field2</uax:Text>
             </uax:LocalizedText>
           </uax:ListOfLocalizedText>
@@ -53,6 +73,7 @@
         <uax:Identifier>i=21</uax:Identifier>
       </uax:DataType>
       <uax:ValueRank>1</uax:ValueRank>
+      <uax:ArrayDimensions>0</uax:ArrayDimensions>
       <uax:AccessLevel>1</uax:AccessLevel>
       <uax:UserAccessLevel>1</uax:UserAccessLevel>
     </EnumStrings>
@@ -67,12 +88,29 @@
       <uax:Name>EnumerationDataType</uax:Name>
     </uax:BrowseName>
     <uax:Description>
-      <uax:Locale></uax:Locale>
       <uax:Text>Enumeration DataType derived from abstract type</uax:Text>
     </uax:Description>
     <uax:SuperTypeId>
       <uax:Identifier>ns=1;i=9</uax:Identifier>
     </uax:SuperTypeId>
+    <uax:DataTypeDefinition>
+      <uax:TypeId>
+        <uax:Identifier>i=14799</uax:Identifier>
+      </uax:TypeId>
+      <uax:Body>
+        <uax:EnumDefinition>
+          <uax:Fields>
+            <uax:EnumField>
+              <uax:Value>1</uax:Value>
+              <uax:DisplayName>
+                <uax:Text>Field3</uax:Text>
+              </uax:DisplayName>
+              <uax:Name>Field3</uax:Name>
+            </uax:EnumField>
+          </uax:Fields>
+        </uax:EnumDefinition>
+      </uax:Body>
+    </uax:DataTypeDefinition>
     <EnumValues xmlns="http://opcfoundation.org/UA/">
       <uax:NodeClass>Variable_2</uax:NodeClass>
       <uax:NodeId>
@@ -88,9 +126,6 @@
       <uax:TypeDefinitionId>
         <uax:Identifier>i=68</uax:Identifier>
       </uax:TypeDefinitionId>
-      <uax:ModellingRuleId>
-        <uax:Identifier>i=78</uax:Identifier>
-      </uax:ModellingRuleId>
       <uax:NumericId>12</uax:NumericId>
       <uax:Value>
         <uax:Value>
@@ -103,10 +138,8 @@
                 <uax:EnumValueType>
                   <uax:Value>1</uax:Value>
                   <uax:DisplayName>
-                    <uax:Locale></uax:Locale>
                     <uax:Text>Field3</uax:Text>
                   </uax:DisplayName>
-                  <uax:Description xsi:nil="true" />
                 </uax:EnumValueType>
               </uax:Body>
             </uax:ExtensionObject>
@@ -117,6 +150,7 @@
         <uax:Identifier>i=7594</uax:Identifier>
       </uax:DataType>
       <uax:ValueRank>1</uax:ValueRank>
+      <uax:ArrayDimensions>0</uax:ArrayDimensions>
       <uax:AccessLevel>1</uax:AccessLevel>
       <uax:UserAccessLevel>1</uax:UserAccessLevel>
     </EnumValues>
@@ -131,13 +165,37 @@
       <uax:Name>AbstractStructure</uax:Name>
     </uax:BrowseName>
     <uax:Description>
-      <uax:Locale></uax:Locale>
       <uax:Text>Abstract structure</uax:Text>
     </uax:Description>
     <uax:SuperTypeId>
       <uax:Identifier>i=22</uax:Identifier>
     </uax:SuperTypeId>
     <uax:IsAbstract>true</uax:IsAbstract>
+    <uax:DataTypeDefinition>
+      <uax:TypeId>
+        <uax:Identifier>i=14798</uax:Identifier>
+      </uax:TypeId>
+      <uax:Body>
+        <uax:StructureDefinition>
+          <uax:BaseDataType>
+            <uax:Identifier>i=22</uax:Identifier>
+          </uax:BaseDataType>
+          <uax:StructureType>Structure_0</uax:StructureType>
+          <uax:Fields>
+            <uax:StructureField>
+              <uax:Name>Number</uax:Name>
+              <uax:DataType>
+                <uax:Identifier>i=26</uax:Identifier>
+              </uax:DataType>
+              <uax:ValueRank>-1</uax:ValueRank>
+              <uax:ArrayDimensions />
+              <uax:MaxStringLength>0</uax:MaxStringLength>
+              <uax:IsOptional>false</uax:IsOptional>
+            </uax:StructureField>
+          </uax:Fields>
+        </uax:StructureDefinition>
+      </uax:Body>
+    </uax:DataTypeDefinition>
   </AbstractStructure>
   <DerivedStructure xmlns="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest">
     <uax:NodeClass>DataType_64</uax:NodeClass>
@@ -151,7 +209,285 @@
     <uax:SuperTypeId>
       <uax:Identifier>ns=1;i=13</uax:Identifier>
     </uax:SuperTypeId>
+    <uax:DataTypeDefinition>
+      <uax:TypeId>
+        <uax:Identifier>i=14798</uax:Identifier>
+      </uax:TypeId>
+      <uax:Body>
+        <uax:StructureDefinition>
+          <uax:BaseDataType>
+            <uax:Identifier>ns=1;i=13</uax:Identifier>
+          </uax:BaseDataType>
+          <uax:StructureType>Structure_0</uax:StructureType>
+          <uax:Fields>
+            <uax:StructureField>
+              <uax:Name>Number</uax:Name>
+              <uax:DataType>
+                <uax:Identifier>i=26</uax:Identifier>
+              </uax:DataType>
+              <uax:ValueRank>-1</uax:ValueRank>
+              <uax:ArrayDimensions />
+              <uax:MaxStringLength>0</uax:MaxStringLength>
+              <uax:IsOptional>false</uax:IsOptional>
+            </uax:StructureField>
+            <uax:StructureField>
+              <uax:Name>Number</uax:Name>
+              <uax:Description>
+                <uax:Text>Derived from Number</uax:Text>
+              </uax:Description>
+              <uax:DataType>
+                <uax:Identifier>i=6</uax:Identifier>
+              </uax:DataType>
+              <uax:ValueRank>-1</uax:ValueRank>
+              <uax:ArrayDimensions />
+              <uax:MaxStringLength>0</uax:MaxStringLength>
+              <uax:IsOptional>false</uax:IsOptional>
+            </uax:StructureField>
+          </uax:Fields>
+        </uax:StructureDefinition>
+      </uax:Body>
+    </uax:DataTypeDefinition>
   </DerivedStructure>
+  <DefaultBinary xmlns="http://opcfoundation.org/UA/">
+    <uax:NodeClass>Object_1</uax:NodeClass>
+    <uax:NodeId>
+      <uax:Identifier>ns=1;i=18</uax:Identifier>
+    </uax:NodeId>
+    <uax:BrowseName>
+      <uax:NamespaceIndex>0</uax:NamespaceIndex>
+      <uax:Name>Default Binary</uax:Name>
+    </uax:BrowseName>
+    <uax:TypeDefinitionId>
+      <uax:Identifier>i=76</uax:Identifier>
+    </uax:TypeDefinitionId>
+    <uax:NumericId>18</uax:NumericId>
+    <uax:References>
+      <uax:Reference>
+        <uax:ReferenceTypeId>
+          <uax:Identifier>i=38</uax:Identifier>
+        </uax:ReferenceTypeId>
+        <uax:IsInverse>true</uax:IsInverse>
+        <uax:TargetId>
+          <uax:Identifier>ns=1;i=13</uax:Identifier>
+        </uax:TargetId>
+      </uax:Reference>
+      <uax:Reference>
+        <uax:ReferenceTypeId>
+          <uax:Identifier>i=39</uax:Identifier>
+        </uax:ReferenceTypeId>
+        <uax:TargetId>
+          <uax:Identifier>ns=1;i=19</uax:Identifier>
+        </uax:TargetId>
+      </uax:Reference>
+    </uax:References>
+  </DefaultBinary>
+  <DefaultBinary xmlns="http://opcfoundation.org/UA/">
+    <uax:NodeClass>Object_1</uax:NodeClass>
+    <uax:NodeId>
+      <uax:Identifier>ns=1;i=27</uax:Identifier>
+    </uax:NodeId>
+    <uax:BrowseName>
+      <uax:NamespaceIndex>0</uax:NamespaceIndex>
+      <uax:Name>Default Binary</uax:Name>
+    </uax:BrowseName>
+    <uax:TypeDefinitionId>
+      <uax:Identifier>i=76</uax:Identifier>
+    </uax:TypeDefinitionId>
+    <uax:NumericId>27</uax:NumericId>
+    <uax:References>
+      <uax:Reference>
+        <uax:ReferenceTypeId>
+          <uax:Identifier>i=38</uax:Identifier>
+        </uax:ReferenceTypeId>
+        <uax:IsInverse>true</uax:IsInverse>
+        <uax:TargetId>
+          <uax:Identifier>ns=1;i=22</uax:Identifier>
+        </uax:TargetId>
+      </uax:Reference>
+      <uax:Reference>
+        <uax:ReferenceTypeId>
+          <uax:Identifier>i=39</uax:Identifier>
+        </uax:ReferenceTypeId>
+        <uax:TargetId>
+          <uax:Identifier>ns=1;i=28</uax:Identifier>
+        </uax:TargetId>
+      </uax:Reference>
+    </uax:References>
+  </DefaultBinary>
+  <cas_BinarySchema xmlns="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest">
+    <uax:NodeClass>Variable_2</uax:NodeClass>
+    <uax:NodeId>
+      <uax:Identifier>ns=1;i=5</uax:Identifier>
+    </uax:NodeId>
+    <uax:BrowseName>
+      <uax:NamespaceIndex>1</uax:NamespaceIndex>
+      <uax:Name>DataTypeTest</uax:Name>
+    </uax:BrowseName>
+    <uax:TypeDefinitionId>
+      <uax:Identifier>i=72</uax:Identifier>
+    </uax:TypeDefinitionId>
+    <uax:NumericId>5</uax:NumericId>
+    <uax:Value>
+      <uax:Value>
+        <uax:ByteString>PG9wYzpUeXBlRGljdGlvbmFyeQ0KICB4bWxuczpvcGM9Imh0dHA6Ly9vcGNmb3VuZGF0aW9uLm9y
+Zy9CaW5hcnlTY2hlbWEvIg0KICB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1M
+U2NoZW1hLWluc3RhbmNlIg0KICB4bWxuczp1YT0iaHR0cDovL29wY2ZvdW5kYXRpb24ub3JnL1VB
+LyINCiAgeG1sbnM6dG5zPSJodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL0Rh
+dGFUeXBlVGVzdCINCiAgRGVmYXVsdEJ5dGVPcmRlcj0iTGl0dGxlRW5kaWFuIg0KICBUYXJnZXRO
+YW1lc3BhY2U9Imh0dHA6Ly9jYXMuZXUvVUEvQ29tbVNlcnZlci9Vbml0VGVzdHMvRGF0YVR5cGVU
+ZXN0Ig0KPg0KICA8b3BjOkltcG9ydCBOYW1lc3BhY2U9Imh0dHA6Ly9vcGNmb3VuZGF0aW9uLm9y
+Zy9VQS8iIExvY2F0aW9uPSIuQmluYXJ5U2NoZW1hLmJzZCIvPg0KDQogIDxvcGM6RW51bWVyYXRl
+ZFR5cGUgTmFtZT0iQWJzdHJhY3RFbnVtZXJhdGlvbkRhdGFUeXBlIiBMZW5ndGhJbkJpdHM9IjMy
+Ij4NCiAgICA8b3BjOkVudW1lcmF0ZWRWYWx1ZSBOYW1lPSJGaWVsZDEiIFZhbHVlPSIwIiAvPg0K
+ICAgIDxvcGM6RW51bWVyYXRlZFZhbHVlIE5hbWU9IkZpZWxkMiIgVmFsdWU9IjEiIC8+DQogIDwv
+b3BjOkVudW1lcmF0ZWRUeXBlPg0KDQogIDxvcGM6RW51bWVyYXRlZFR5cGUgTmFtZT0iRW51bWVy
+YXRpb25EYXRhVHlwZSIgTGVuZ3RoSW5CaXRzPSIzMiI+DQogICAgPG9wYzpEb2N1bWVudGF0aW9u
+PkVudW1lcmF0aW9uIERhdGFUeXBlIGRlcml2ZWQgZnJvbSBhYnN0cmFjdCB0eXBlPC9vcGM6RG9j
+dW1lbnRhdGlvbj4NCiAgICA8b3BjOkVudW1lcmF0ZWRWYWx1ZSBOYW1lPSJGaWVsZDEiIFZhbHVl
+PSIwIiAvPg0KICAgIDxvcGM6RW51bWVyYXRlZFZhbHVlIE5hbWU9IkZpZWxkMiIgVmFsdWU9IjEi
+IC8+DQogICAgPG9wYzpFbnVtZXJhdGVkVmFsdWUgTmFtZT0iRmllbGQzIiBWYWx1ZT0iMSIgLz4N
+CiAgPC9vcGM6RW51bWVyYXRlZFR5cGU+DQoNCiAgPG9wYzpTdHJ1Y3R1cmVkVHlwZSBOYW1lPSJB
+YnN0cmFjdFN0cnVjdHVyZSIgQmFzZVR5cGU9InVhOkV4dGVuc2lvbk9iamVjdCI+DQogICAgPG9w
+YzpEb2N1bWVudGF0aW9uPkFic3RyYWN0IHN0cnVjdHVyZTwvb3BjOkRvY3VtZW50YXRpb24+DQog
+ICAgPG9wYzpGaWVsZCBOYW1lPSJOdW1iZXIiIFR5cGVOYW1lPSJ1YTpWYXJpYW50IiAvPg0KICA8
+L29wYzpTdHJ1Y3R1cmVkVHlwZT4NCg0KICA8b3BjOlN0cnVjdHVyZWRUeXBlIE5hbWU9IkRlcml2
+ZWRTdHJ1Y3R1cmUiIEJhc2VUeXBlPSJ0bnM6QWJzdHJhY3RTdHJ1Y3R1cmUiPg0KICAgIDxvcGM6
+RmllbGQgTmFtZT0iTnVtYmVyIiBUeXBlTmFtZT0idWE6VmFyaWFudCIgU291cmNlVHlwZT0idG5z
+OkFic3RyYWN0U3RydWN0dXJlIiAvPg0KICAgIDxvcGM6RmllbGQgTmFtZT0iTnVtYmVyIiBUeXBl
+TmFtZT0ib3BjOkludDMyIiAvPg0KICA8L29wYzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlw
+ZURpY3Rpb25hcnk+</uax:ByteString>
+      </uax:Value>
+    </uax:Value>
+    <uax:DataType>
+      <uax:Identifier>i=15</uax:Identifier>
+    </uax:DataType>
+    <uax:ValueRank>-1</uax:ValueRank>
+    <uax:AccessLevel>1</uax:AccessLevel>
+    <uax:UserAccessLevel>1</uax:UserAccessLevel>
+    <uax:References>
+      <uax:Reference>
+        <uax:ReferenceTypeId>
+          <uax:Identifier>i=47</uax:Identifier>
+        </uax:ReferenceTypeId>
+        <uax:IsInverse>true</uax:IsInverse>
+        <uax:TargetId>
+          <uax:Identifier>i=93</uax:Identifier>
+        </uax:TargetId>
+      </uax:Reference>
+    </uax:References>
+    <NamespaceUri xmlns="http://opcfoundation.org/UA/">
+      <uax:NodeClass>Variable_2</uax:NodeClass>
+      <uax:NodeId>
+        <uax:Identifier>ns=1;i=7</uax:Identifier>
+      </uax:NodeId>
+      <uax:BrowseName>
+        <uax:NamespaceIndex>0</uax:NamespaceIndex>
+        <uax:Name>NamespaceUri</uax:Name>
+      </uax:BrowseName>
+      <uax:ReferenceTypeId>
+        <uax:Identifier>i=46</uax:Identifier>
+      </uax:ReferenceTypeId>
+      <uax:TypeDefinitionId>
+        <uax:Identifier>i=68</uax:Identifier>
+      </uax:TypeDefinitionId>
+      <uax:NumericId>7</uax:NumericId>
+      <uax:Value>
+        <uax:Value>
+          <uax:String>http://cas.eu/UA/CommServer/UnitTests/DataTypeTest</uax:String>
+        </uax:Value>
+      </uax:Value>
+      <uax:DataType>
+        <uax:Identifier>i=12</uax:Identifier>
+      </uax:DataType>
+      <uax:ValueRank>-1</uax:ValueRank>
+      <uax:AccessLevel>1</uax:AccessLevel>
+      <uax:UserAccessLevel>1</uax:UserAccessLevel>
+    </NamespaceUri>
+    <Deprecated xmlns="http://opcfoundation.org/UA/">
+      <uax:NodeClass>Variable_2</uax:NodeClass>
+      <uax:NodeId>
+        <uax:Identifier>ns=1;i=1</uax:Identifier>
+      </uax:NodeId>
+      <uax:BrowseName>
+        <uax:NamespaceIndex>0</uax:NamespaceIndex>
+        <uax:Name>Deprecated</uax:Name>
+      </uax:BrowseName>
+      <uax:ReferenceTypeId>
+        <uax:Identifier>i=46</uax:Identifier>
+      </uax:ReferenceTypeId>
+      <uax:TypeDefinitionId>
+        <uax:Identifier>i=68</uax:Identifier>
+      </uax:TypeDefinitionId>
+      <uax:NumericId>1</uax:NumericId>
+      <uax:Value>
+        <uax:Value>
+          <uax:Boolean>true</uax:Boolean>
+        </uax:Value>
+      </uax:Value>
+      <uax:DataType>
+        <uax:Identifier>i=1</uax:Identifier>
+      </uax:DataType>
+      <uax:ValueRank>-1</uax:ValueRank>
+      <uax:AccessLevel>1</uax:AccessLevel>
+      <uax:UserAccessLevel>1</uax:UserAccessLevel>
+    </Deprecated>
+    <AbstractStructure>
+      <uax:NodeClass>Variable_2</uax:NodeClass>
+      <uax:NodeId>
+        <uax:Identifier>ns=1;i=19</uax:Identifier>
+      </uax:NodeId>
+      <uax:BrowseName>
+        <uax:NamespaceIndex>1</uax:NamespaceIndex>
+        <uax:Name>AbstractStructure</uax:Name>
+      </uax:BrowseName>
+      <uax:ReferenceTypeId>
+        <uax:Identifier>i=47</uax:Identifier>
+      </uax:ReferenceTypeId>
+      <uax:TypeDefinitionId>
+        <uax:Identifier>i=69</uax:Identifier>
+      </uax:TypeDefinitionId>
+      <uax:NumericId>19</uax:NumericId>
+      <uax:Value>
+        <uax:Value>
+          <uax:String>AbstractStructure</uax:String>
+        </uax:Value>
+      </uax:Value>
+      <uax:DataType>
+        <uax:Identifier>i=12</uax:Identifier>
+      </uax:DataType>
+      <uax:ValueRank>-1</uax:ValueRank>
+      <uax:AccessLevel>1</uax:AccessLevel>
+      <uax:UserAccessLevel>1</uax:UserAccessLevel>
+    </AbstractStructure>
+    <DerivedStructure>
+      <uax:NodeClass>Variable_2</uax:NodeClass>
+      <uax:NodeId>
+        <uax:Identifier>ns=1;i=28</uax:Identifier>
+      </uax:NodeId>
+      <uax:BrowseName>
+        <uax:NamespaceIndex>1</uax:NamespaceIndex>
+        <uax:Name>DerivedStructure</uax:Name>
+      </uax:BrowseName>
+      <uax:ReferenceTypeId>
+        <uax:Identifier>i=47</uax:Identifier>
+      </uax:ReferenceTypeId>
+      <uax:TypeDefinitionId>
+        <uax:Identifier>i=69</uax:Identifier>
+      </uax:TypeDefinitionId>
+      <uax:NumericId>28</uax:NumericId>
+      <uax:Value>
+        <uax:Value>
+          <uax:String>DerivedStructure</uax:String>
+        </uax:Value>
+      </uax:Value>
+      <uax:DataType>
+        <uax:Identifier>i=12</uax:Identifier>
+      </uax:DataType>
+      <uax:ValueRank>-1</uax:ValueRank>
+      <uax:AccessLevel>1</uax:AccessLevel>
+      <uax:UserAccessLevel>1</uax:UserAccessLevel>
+    </DerivedStructure>
+  </cas_BinarySchema>
   <DefaultXml xmlns="http://opcfoundation.org/UA/">
     <uax:NodeClass>Object_1</uax:NodeClass>
     <uax:NodeId>
@@ -318,10 +654,6 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</uax:ByteSt
         <uax:NamespaceIndex>0</uax:NamespaceIndex>
         <uax:Name>NamespaceUri</uax:Name>
       </uax:BrowseName>
-      <uax:Description>
-        <uax:Locale></uax:Locale>
-        <uax:Text>A URI that uniquely identifies the dictionary.</uax:Text>
-      </uax:Description>
       <uax:ReferenceTypeId>
         <uax:Identifier>i=46</uax:Identifier>
       </uax:ReferenceTypeId>
@@ -341,6 +673,34 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</uax:ByteSt
       <uax:AccessLevel>1</uax:AccessLevel>
       <uax:UserAccessLevel>1</uax:UserAccessLevel>
     </NamespaceUri>
+    <Deprecated xmlns="http://opcfoundation.org/UA/">
+      <uax:NodeClass>Variable_2</uax:NodeClass>
+      <uax:NodeId>
+        <uax:Identifier>ns=1;i=8</uax:Identifier>
+      </uax:NodeId>
+      <uax:BrowseName>
+        <uax:NamespaceIndex>0</uax:NamespaceIndex>
+        <uax:Name>Deprecated</uax:Name>
+      </uax:BrowseName>
+      <uax:ReferenceTypeId>
+        <uax:Identifier>i=46</uax:Identifier>
+      </uax:ReferenceTypeId>
+      <uax:TypeDefinitionId>
+        <uax:Identifier>i=68</uax:Identifier>
+      </uax:TypeDefinitionId>
+      <uax:NumericId>8</uax:NumericId>
+      <uax:Value>
+        <uax:Value>
+          <uax:Boolean>true</uax:Boolean>
+        </uax:Value>
+      </uax:Value>
+      <uax:DataType>
+        <uax:Identifier>i=1</uax:Identifier>
+      </uax:DataType>
+      <uax:ValueRank>-1</uax:ValueRank>
+      <uax:AccessLevel>1</uax:AccessLevel>
+      <uax:UserAccessLevel>1</uax:UserAccessLevel>
+    </Deprecated>
     <AbstractStructure>
       <uax:NodeClass>Variable_2</uax:NodeClass>
       <uax:NodeId>
@@ -398,19 +758,19 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</uax:ByteSt
       <uax:UserAccessLevel>1</uax:UserAccessLevel>
     </DerivedStructure>
   </cas_XmlSchema>
-  <DefaultBinary xmlns="http://opcfoundation.org/UA/">
+  <DefaultJson xmlns="http://opcfoundation.org/UA/">
     <uax:NodeClass>Object_1</uax:NodeClass>
     <uax:NodeId>
-      <uax:Identifier>ns=1;i=18</uax:Identifier>
+      <uax:Identifier>ns=1;i=31</uax:Identifier>
     </uax:NodeId>
     <uax:BrowseName>
       <uax:NamespaceIndex>0</uax:NamespaceIndex>
-      <uax:Name>Default Binary</uax:Name>
+      <uax:Name>Default JSON</uax:Name>
     </uax:BrowseName>
     <uax:TypeDefinitionId>
       <uax:Identifier>i=76</uax:Identifier>
     </uax:TypeDefinitionId>
-    <uax:NumericId>18</uax:NumericId>
+    <uax:NumericId>31</uax:NumericId>
     <uax:References>
       <uax:Reference>
         <uax:ReferenceTypeId>
@@ -421,29 +781,21 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</uax:ByteSt
           <uax:Identifier>ns=1;i=13</uax:Identifier>
         </uax:TargetId>
       </uax:Reference>
-      <uax:Reference>
-        <uax:ReferenceTypeId>
-          <uax:Identifier>i=39</uax:Identifier>
-        </uax:ReferenceTypeId>
-        <uax:TargetId>
-          <uax:Identifier>ns=1;i=19</uax:Identifier>
-        </uax:TargetId>
-      </uax:Reference>
     </uax:References>
-  </DefaultBinary>
-  <DefaultBinary xmlns="http://opcfoundation.org/UA/">
+  </DefaultJson>
+  <DefaultJson xmlns="http://opcfoundation.org/UA/">
     <uax:NodeClass>Object_1</uax:NodeClass>
     <uax:NodeId>
-      <uax:Identifier>ns=1;i=27</uax:Identifier>
+      <uax:Identifier>ns=1;i=32</uax:Identifier>
     </uax:NodeId>
     <uax:BrowseName>
       <uax:NamespaceIndex>0</uax:NamespaceIndex>
-      <uax:Name>Default Binary</uax:Name>
+      <uax:Name>Default JSON</uax:Name>
     </uax:BrowseName>
     <uax:TypeDefinitionId>
       <uax:Identifier>i=76</uax:Identifier>
     </uax:TypeDefinitionId>
-    <uax:NumericId>27</uax:NumericId>
+    <uax:NumericId>32</uax:NumericId>
     <uax:References>
       <uax:Reference>
         <uax:ReferenceTypeId>
@@ -454,166 +806,6 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</uax:ByteSt
           <uax:Identifier>ns=1;i=22</uax:Identifier>
         </uax:TargetId>
       </uax:Reference>
-      <uax:Reference>
-        <uax:ReferenceTypeId>
-          <uax:Identifier>i=39</uax:Identifier>
-        </uax:ReferenceTypeId>
-        <uax:TargetId>
-          <uax:Identifier>ns=1;i=28</uax:Identifier>
-        </uax:TargetId>
-      </uax:Reference>
     </uax:References>
-  </DefaultBinary>
-  <cas_BinarySchema xmlns="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest">
-    <uax:NodeClass>Variable_2</uax:NodeClass>
-    <uax:NodeId>
-      <uax:Identifier>ns=1;i=5</uax:Identifier>
-    </uax:NodeId>
-    <uax:BrowseName>
-      <uax:NamespaceIndex>1</uax:NamespaceIndex>
-      <uax:Name>DataTypeTest</uax:Name>
-    </uax:BrowseName>
-    <uax:TypeDefinitionId>
-      <uax:Identifier>i=72</uax:Identifier>
-    </uax:TypeDefinitionId>
-    <uax:NumericId>5</uax:NumericId>
-    <uax:Value>
-      <uax:Value>
-        <uax:ByteString>PG9wYzpUeXBlRGljdGlvbmFyeQ0KICB4bWxuczpvcGM9Imh0dHA6Ly9vcGNmb3VuZGF0aW9uLm9y
-Zy9CaW5hcnlTY2hlbWEvIg0KICB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1M
-U2NoZW1hLWluc3RhbmNlIg0KICB4bWxuczp1YT0iaHR0cDovL29wY2ZvdW5kYXRpb24ub3JnL1VB
-LyINCiAgeG1sbnM6dG5zPSJodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL0Rh
-dGFUeXBlVGVzdCINCiAgRGVmYXVsdEJ5dGVPcmRlcj0iTGl0dGxlRW5kaWFuIg0KICBUYXJnZXRO
-YW1lc3BhY2U9Imh0dHA6Ly9jYXMuZXUvVUEvQ29tbVNlcnZlci9Vbml0VGVzdHMvRGF0YVR5cGVU
-ZXN0Ig0KPg0KICA8IS0tIFRoaXMgRmlsZSB3YXMgZ2VuZXJhdGVkIG9uIDIwMjEtMDItMTEgYW5k
-IHN1cHBvcnRzIHRoZSBzcGVjaWZpY2F0aW9ucyBzdXBwb3J0ZWQgYnkgdmVyc2lvbiAxLjExLjMz
-NS4xMCBvZiB0aGUgT1BDIFVBIGRlbGl2ZXJhYmxlcy4gLS0+DQogIDxvcGM6SW1wb3J0IE5hbWVz
-cGFjZT0iaHR0cDovL29wY2ZvdW5kYXRpb24ub3JnL1VBLyIgTG9jYXRpb249Ii5CaW5hcnlTY2hl
-bWEuYnNkIi8+DQoNCiAgPG9wYzpFbnVtZXJhdGVkVHlwZSBOYW1lPSJBYnN0cmFjdEVudW1lcmF0
-aW9uRGF0YVR5cGUiIExlbmd0aEluQml0cz0iMzIiPg0KICAgIDxvcGM6RW51bWVyYXRlZFZhbHVl
-IE5hbWU9IkZpZWxkMSIgVmFsdWU9IjAiIC8+DQogICAgPG9wYzpFbnVtZXJhdGVkVmFsdWUgTmFt
-ZT0iRmllbGQyIiBWYWx1ZT0iMSIgLz4NCiAgPC9vcGM6RW51bWVyYXRlZFR5cGU+DQoNCiAgPG9w
-YzpFbnVtZXJhdGVkVHlwZSBOYW1lPSJFbnVtZXJhdGlvbkRhdGFUeXBlIiBMZW5ndGhJbkJpdHM9
-IjMyIj4NCiAgICA8b3BjOkRvY3VtZW50YXRpb24+RW51bWVyYXRpb24gRGF0YVR5cGUgZGVyaXZl
-ZCBmcm9tIGFic3RyYWN0IHR5cGU8L29wYzpEb2N1bWVudGF0aW9uPg0KICAgIDxvcGM6RW51bWVy
-YXRlZFZhbHVlIE5hbWU9IkZpZWxkMSIgVmFsdWU9IjAiIC8+DQogICAgPG9wYzpFbnVtZXJhdGVk
-VmFsdWUgTmFtZT0iRmllbGQyIiBWYWx1ZT0iMSIgLz4NCiAgICA8b3BjOkVudW1lcmF0ZWRWYWx1
-ZSBOYW1lPSJGaWVsZDMiIFZhbHVlPSIxIiAvPg0KICA8L29wYzpFbnVtZXJhdGVkVHlwZT4NCg0K
-ICA8b3BjOlN0cnVjdHVyZWRUeXBlIE5hbWU9IkFic3RyYWN0U3RydWN0dXJlIiBCYXNlVHlwZT0i
-dWE6RXh0ZW5zaW9uT2JqZWN0Ij4NCiAgICA8b3BjOkRvY3VtZW50YXRpb24+QWJzdHJhY3Qgc3Ry
-dWN0dXJlPC9vcGM6RG9jdW1lbnRhdGlvbj4NCiAgICA8b3BjOkZpZWxkIE5hbWU9Ik51bWJlciIg
-VHlwZU5hbWU9InVhOlZhcmlhbnQiIC8+DQogIDwvb3BjOlN0cnVjdHVyZWRUeXBlPg0KDQogIDxv
-cGM6U3RydWN0dXJlZFR5cGUgTmFtZT0iRGVyaXZlZFN0cnVjdHVyZSIgQmFzZVR5cGU9InRuczpB
-YnN0cmFjdFN0cnVjdHVyZSI+DQogICAgPG9wYzpGaWVsZCBOYW1lPSJOdW1iZXIiIFR5cGVOYW1l
-PSJ1YTpWYXJpYW50IiBTb3VyY2VUeXBlPSJ0bnM6QWJzdHJhY3RTdHJ1Y3R1cmUiIC8+DQogICAg
-PG9wYzpGaWVsZCBOYW1lPSJOdW1iZXIiIFR5cGVOYW1lPSJvcGM6SW50MzIiIC8+DQogIDwvb3Bj
-OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</uax:ByteString>
-      </uax:Value>
-    </uax:Value>
-    <uax:DataType>
-      <uax:Identifier>i=15</uax:Identifier>
-    </uax:DataType>
-    <uax:ValueRank>-1</uax:ValueRank>
-    <uax:AccessLevel>1</uax:AccessLevel>
-    <uax:UserAccessLevel>1</uax:UserAccessLevel>
-    <uax:References>
-      <uax:Reference>
-        <uax:ReferenceTypeId>
-          <uax:Identifier>i=47</uax:Identifier>
-        </uax:ReferenceTypeId>
-        <uax:IsInverse>true</uax:IsInverse>
-        <uax:TargetId>
-          <uax:Identifier>i=93</uax:Identifier>
-        </uax:TargetId>
-      </uax:Reference>
-    </uax:References>
-    <NamespaceUri xmlns="http://opcfoundation.org/UA/">
-      <uax:NodeClass>Variable_2</uax:NodeClass>
-      <uax:NodeId>
-        <uax:Identifier>ns=1;i=7</uax:Identifier>
-      </uax:NodeId>
-      <uax:BrowseName>
-        <uax:NamespaceIndex>0</uax:NamespaceIndex>
-        <uax:Name>NamespaceUri</uax:Name>
-      </uax:BrowseName>
-      <uax:Description>
-        <uax:Locale></uax:Locale>
-        <uax:Text>A URI that uniquely identifies the dictionary.</uax:Text>
-      </uax:Description>
-      <uax:ReferenceTypeId>
-        <uax:Identifier>i=46</uax:Identifier>
-      </uax:ReferenceTypeId>
-      <uax:TypeDefinitionId>
-        <uax:Identifier>i=68</uax:Identifier>
-      </uax:TypeDefinitionId>
-      <uax:NumericId>7</uax:NumericId>
-      <uax:Value>
-        <uax:Value>
-          <uax:String>http://cas.eu/UA/CommServer/UnitTests/DataTypeTest</uax:String>
-        </uax:Value>
-      </uax:Value>
-      <uax:DataType>
-        <uax:Identifier>i=12</uax:Identifier>
-      </uax:DataType>
-      <uax:ValueRank>-1</uax:ValueRank>
-      <uax:AccessLevel>1</uax:AccessLevel>
-      <uax:UserAccessLevel>1</uax:UserAccessLevel>
-    </NamespaceUri>
-    <AbstractStructure>
-      <uax:NodeClass>Variable_2</uax:NodeClass>
-      <uax:NodeId>
-        <uax:Identifier>ns=1;i=19</uax:Identifier>
-      </uax:NodeId>
-      <uax:BrowseName>
-        <uax:NamespaceIndex>1</uax:NamespaceIndex>
-        <uax:Name>AbstractStructure</uax:Name>
-      </uax:BrowseName>
-      <uax:ReferenceTypeId>
-        <uax:Identifier>i=47</uax:Identifier>
-      </uax:ReferenceTypeId>
-      <uax:TypeDefinitionId>
-        <uax:Identifier>i=69</uax:Identifier>
-      </uax:TypeDefinitionId>
-      <uax:NumericId>19</uax:NumericId>
-      <uax:Value>
-        <uax:Value>
-          <uax:String>AbstractStructure</uax:String>
-        </uax:Value>
-      </uax:Value>
-      <uax:DataType>
-        <uax:Identifier>i=12</uax:Identifier>
-      </uax:DataType>
-      <uax:ValueRank>-1</uax:ValueRank>
-      <uax:AccessLevel>1</uax:AccessLevel>
-      <uax:UserAccessLevel>1</uax:UserAccessLevel>
-    </AbstractStructure>
-    <DerivedStructure>
-      <uax:NodeClass>Variable_2</uax:NodeClass>
-      <uax:NodeId>
-        <uax:Identifier>ns=1;i=28</uax:Identifier>
-      </uax:NodeId>
-      <uax:BrowseName>
-        <uax:NamespaceIndex>1</uax:NamespaceIndex>
-        <uax:Name>DerivedStructure</uax:Name>
-      </uax:BrowseName>
-      <uax:ReferenceTypeId>
-        <uax:Identifier>i=47</uax:Identifier>
-      </uax:ReferenceTypeId>
-      <uax:TypeDefinitionId>
-        <uax:Identifier>i=69</uax:Identifier>
-      </uax:TypeDefinitionId>
-      <uax:NumericId>28</uax:NumericId>
-      <uax:Value>
-        <uax:Value>
-          <uax:String>DerivedStructure</uax:String>
-        </uax:Value>
-      </uax:Value>
-      <uax:DataType>
-        <uax:Identifier>i=12</uax:Identifier>
-      </uax:DataType>
-      <uax:ValueRank>-1</uax:ValueRank>
-      <uax:AccessLevel>1</uax:AccessLevel>
-      <uax:UserAccessLevel>1</uax:UserAccessLevel>
-    </DerivedStructure>
-  </cas_BinarySchema>
+  </DefaultJson>
 </uax:ListOfNodeState>

@@ -48,7 +48,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the kind of the reference.
     /// </summary>
     /// <value>The kind of the reference.</value>
-    //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
     internal ReferenceKindEnum ReferenceKind
     {
       get
@@ -87,6 +86,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <value><c>true</c> if it is child reference; otherwise, <c>false</c>.</value>
     //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
+    //TODO The exported model doesn't contain all nodes #653
     internal bool ChildConnector => (ReferenceKind == ReferenceKindEnum.HasProperty) || (ReferenceKind == ReferenceKindEnum.HasComponent);
 
     #endregion semantics
@@ -116,7 +116,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     /// <summary>
-    /// Ir recursively builds the symbolic identifier.
+    /// It recursively builds the symbolic identifier.
     /// </summary>
     /// <param name="path">The browse path.</param>
     internal void BuildSymbolicId(List<string> path)
@@ -189,8 +189,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _ret = ReferenceKindEnum.HasComponent;
       else if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HasSubtype).Any<IUANodeContext>())
         _ret = ReferenceKindEnum.HasSubtype;
-      else if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HierarchicalReferences).Any<IUANodeContext>())
-        _ret = ReferenceKindEnum.HierarchicalReferences;
       else if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HasTypeDefinition).Any<IUANodeContext>())
         _ret = ReferenceKindEnum.HasTypeDefinition;
       else if (inheritanceChain.Where<IUANodeContext>(x => x.NodeIdContext == ReferenceTypeIds.HasModellingRule).Any<IUANodeContext>())

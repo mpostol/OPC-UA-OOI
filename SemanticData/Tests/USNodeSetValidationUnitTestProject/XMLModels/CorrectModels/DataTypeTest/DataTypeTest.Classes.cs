@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2021 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  *
@@ -75,6 +75,16 @@ namespace DataTypeTest
     public static partial class Objects
     {
         /// <summary>
+        /// The identifier for the AbstractStructure_Encoding_DefaultBinary Object.
+        /// </summary>
+        public const uint AbstractStructure_Encoding_DefaultBinary = 18;
+
+        /// <summary>
+        /// The identifier for the DerivedStructure_Encoding_DefaultBinary Object.
+        /// </summary>
+        public const uint DerivedStructure_Encoding_DefaultBinary = 27;
+
+        /// <summary>
         /// The identifier for the AbstractStructure_Encoding_DefaultXml Object.
         /// </summary>
         public const uint AbstractStructure_Encoding_DefaultXml = 14;
@@ -85,14 +95,14 @@ namespace DataTypeTest
         public const uint DerivedStructure_Encoding_DefaultXml = 23;
 
         /// <summary>
-        /// The identifier for the AbstractStructure_Encoding_DefaultBinary Object.
+        /// The identifier for the AbstractStructure_Encoding_DefaultJson Object.
         /// </summary>
-        public const uint AbstractStructure_Encoding_DefaultBinary = 18;
+        public const uint AbstractStructure_Encoding_DefaultJson = 31;
 
         /// <summary>
-        /// The identifier for the DerivedStructure_Encoding_DefaultBinary Object.
+        /// The identifier for the DerivedStructure_Encoding_DefaultJson Object.
         /// </summary>
-        public const uint DerivedStructure_Encoding_DefaultBinary = 27;
+        public const uint DerivedStructure_Encoding_DefaultJson = 32;
     }
     #endregion
 
@@ -115,26 +125,6 @@ namespace DataTypeTest
         public const uint EnumerationDataType_EnumValues = 12;
 
         /// <summary>
-        /// The identifier for the cas_XmlSchema Variable.
-        /// </summary>
-        public const uint cas_XmlSchema = 2;
-
-        /// <summary>
-        /// The identifier for the cas_XmlSchema_NamespaceUri Variable.
-        /// </summary>
-        public const uint cas_XmlSchema_NamespaceUri = 4;
-
-        /// <summary>
-        /// The identifier for the cas_XmlSchema_AbstractStructure Variable.
-        /// </summary>
-        public const uint cas_XmlSchema_AbstractStructure = 15;
-
-        /// <summary>
-        /// The identifier for the cas_XmlSchema_DerivedStructure Variable.
-        /// </summary>
-        public const uint cas_XmlSchema_DerivedStructure = 24;
-
-        /// <summary>
         /// The identifier for the cas_BinarySchema Variable.
         /// </summary>
         public const uint cas_BinarySchema = 5;
@@ -145,6 +135,11 @@ namespace DataTypeTest
         public const uint cas_BinarySchema_NamespaceUri = 7;
 
         /// <summary>
+        /// The identifier for the cas_BinarySchema_Deprecated Variable.
+        /// </summary>
+        public const uint cas_BinarySchema_Deprecated = 1;
+
+        /// <summary>
         /// The identifier for the cas_BinarySchema_AbstractStructure Variable.
         /// </summary>
         public const uint cas_BinarySchema_AbstractStructure = 19;
@@ -153,6 +148,31 @@ namespace DataTypeTest
         /// The identifier for the cas_BinarySchema_DerivedStructure Variable.
         /// </summary>
         public const uint cas_BinarySchema_DerivedStructure = 28;
+
+        /// <summary>
+        /// The identifier for the cas_XmlSchema Variable.
+        /// </summary>
+        public const uint cas_XmlSchema = 2;
+
+        /// <summary>
+        /// The identifier for the cas_XmlSchema_NamespaceUri Variable.
+        /// </summary>
+        public const uint cas_XmlSchema_NamespaceUri = 4;
+
+        /// <summary>
+        /// The identifier for the cas_XmlSchema_Deprecated Variable.
+        /// </summary>
+        public const uint cas_XmlSchema_Deprecated = 8;
+
+        /// <summary>
+        /// The identifier for the cas_XmlSchema_AbstractStructure Variable.
+        /// </summary>
+        public const uint cas_XmlSchema_AbstractStructure = 15;
+
+        /// <summary>
+        /// The identifier for the cas_XmlSchema_DerivedStructure Variable.
+        /// </summary>
+        public const uint cas_XmlSchema_DerivedStructure = 24;
     }
     #endregion
 
@@ -195,6 +215,16 @@ namespace DataTypeTest
     public static partial class ObjectIds
     {
         /// <summary>
+        /// The identifier for the AbstractStructure_Encoding_DefaultBinary Object.
+        /// </summary>
+        public static readonly ExpandedNodeId AbstractStructure_Encoding_DefaultBinary = new ExpandedNodeId(DataTypeTest.Objects.AbstractStructure_Encoding_DefaultBinary, DataTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the DerivedStructure_Encoding_DefaultBinary Object.
+        /// </summary>
+        public static readonly ExpandedNodeId DerivedStructure_Encoding_DefaultBinary = new ExpandedNodeId(DataTypeTest.Objects.DerivedStructure_Encoding_DefaultBinary, DataTypeTest.Namespaces.cas);
+
+        /// <summary>
         /// The identifier for the AbstractStructure_Encoding_DefaultXml Object.
         /// </summary>
         public static readonly ExpandedNodeId AbstractStructure_Encoding_DefaultXml = new ExpandedNodeId(DataTypeTest.Objects.AbstractStructure_Encoding_DefaultXml, DataTypeTest.Namespaces.cas);
@@ -205,14 +235,14 @@ namespace DataTypeTest
         public static readonly ExpandedNodeId DerivedStructure_Encoding_DefaultXml = new ExpandedNodeId(DataTypeTest.Objects.DerivedStructure_Encoding_DefaultXml, DataTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the AbstractStructure_Encoding_DefaultBinary Object.
+        /// The identifier for the AbstractStructure_Encoding_DefaultJson Object.
         /// </summary>
-        public static readonly ExpandedNodeId AbstractStructure_Encoding_DefaultBinary = new ExpandedNodeId(DataTypeTest.Objects.AbstractStructure_Encoding_DefaultBinary, DataTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId AbstractStructure_Encoding_DefaultJson = new ExpandedNodeId(DataTypeTest.Objects.AbstractStructure_Encoding_DefaultJson, DataTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the DerivedStructure_Encoding_DefaultBinary Object.
+        /// The identifier for the DerivedStructure_Encoding_DefaultJson Object.
         /// </summary>
-        public static readonly ExpandedNodeId DerivedStructure_Encoding_DefaultBinary = new ExpandedNodeId(DataTypeTest.Objects.DerivedStructure_Encoding_DefaultBinary, DataTypeTest.Namespaces.cas);
+        public static readonly ExpandedNodeId DerivedStructure_Encoding_DefaultJson = new ExpandedNodeId(DataTypeTest.Objects.DerivedStructure_Encoding_DefaultJson, DataTypeTest.Namespaces.cas);
     }
     #endregion
 
@@ -235,26 +265,6 @@ namespace DataTypeTest
         public static readonly ExpandedNodeId EnumerationDataType_EnumValues = new ExpandedNodeId(DataTypeTest.Variables.EnumerationDataType_EnumValues, DataTypeTest.Namespaces.cas);
 
         /// <summary>
-        /// The identifier for the cas_XmlSchema Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId cas_XmlSchema = new ExpandedNodeId(DataTypeTest.Variables.cas_XmlSchema, DataTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the cas_XmlSchema_NamespaceUri Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId cas_XmlSchema_NamespaceUri = new ExpandedNodeId(DataTypeTest.Variables.cas_XmlSchema_NamespaceUri, DataTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the cas_XmlSchema_AbstractStructure Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId cas_XmlSchema_AbstractStructure = new ExpandedNodeId(DataTypeTest.Variables.cas_XmlSchema_AbstractStructure, DataTypeTest.Namespaces.cas);
-
-        /// <summary>
-        /// The identifier for the cas_XmlSchema_DerivedStructure Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId cas_XmlSchema_DerivedStructure = new ExpandedNodeId(DataTypeTest.Variables.cas_XmlSchema_DerivedStructure, DataTypeTest.Namespaces.cas);
-
-        /// <summary>
         /// The identifier for the cas_BinarySchema Variable.
         /// </summary>
         public static readonly ExpandedNodeId cas_BinarySchema = new ExpandedNodeId(DataTypeTest.Variables.cas_BinarySchema, DataTypeTest.Namespaces.cas);
@@ -265,6 +275,11 @@ namespace DataTypeTest
         public static readonly ExpandedNodeId cas_BinarySchema_NamespaceUri = new ExpandedNodeId(DataTypeTest.Variables.cas_BinarySchema_NamespaceUri, DataTypeTest.Namespaces.cas);
 
         /// <summary>
+        /// The identifier for the cas_BinarySchema_Deprecated Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId cas_BinarySchema_Deprecated = new ExpandedNodeId(DataTypeTest.Variables.cas_BinarySchema_Deprecated, DataTypeTest.Namespaces.cas);
+
+        /// <summary>
         /// The identifier for the cas_BinarySchema_AbstractStructure Variable.
         /// </summary>
         public static readonly ExpandedNodeId cas_BinarySchema_AbstractStructure = new ExpandedNodeId(DataTypeTest.Variables.cas_BinarySchema_AbstractStructure, DataTypeTest.Namespaces.cas);
@@ -273,6 +288,31 @@ namespace DataTypeTest
         /// The identifier for the cas_BinarySchema_DerivedStructure Variable.
         /// </summary>
         public static readonly ExpandedNodeId cas_BinarySchema_DerivedStructure = new ExpandedNodeId(DataTypeTest.Variables.cas_BinarySchema_DerivedStructure, DataTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the cas_XmlSchema Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId cas_XmlSchema = new ExpandedNodeId(DataTypeTest.Variables.cas_XmlSchema, DataTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the cas_XmlSchema_NamespaceUri Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId cas_XmlSchema_NamespaceUri = new ExpandedNodeId(DataTypeTest.Variables.cas_XmlSchema_NamespaceUri, DataTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the cas_XmlSchema_Deprecated Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId cas_XmlSchema_Deprecated = new ExpandedNodeId(DataTypeTest.Variables.cas_XmlSchema_Deprecated, DataTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the cas_XmlSchema_AbstractStructure Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId cas_XmlSchema_AbstractStructure = new ExpandedNodeId(DataTypeTest.Variables.cas_XmlSchema_AbstractStructure, DataTypeTest.Namespaces.cas);
+
+        /// <summary>
+        /// The identifier for the cas_XmlSchema_DerivedStructure Variable.
+        /// </summary>
+        public static readonly ExpandedNodeId cas_XmlSchema_DerivedStructure = new ExpandedNodeId(DataTypeTest.Variables.cas_XmlSchema_DerivedStructure, DataTypeTest.Namespaces.cas);
     }
     #endregion
 
@@ -335,22 +375,18 @@ namespace DataTypeTest
     #region AbstractEnumerationDataType Enumeration
     #if (!OPCUA_EXCLUDE_AbstractEnumerationDataType)
     /// <summary>
-    /// A description for the AbstractEnumerationDataType DataType.
+    /// 
     /// </summary>
     /// <exclude />
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
     [DataContract(Namespace = DataTypeTest.Namespaces.cas)]
     public enum AbstractEnumerationDataType
     {
-        /// <summary>
-        /// A description for the Field1 field.
-        /// </summary>
+        /// <remarks />
         [EnumMember(Value = "Field1_0")]
         Field1 = 0,
 
-        /// <summary>
-        /// A description for the Field2 field.
-        /// </summary>
+        /// <remarks />
         [EnumMember(Value = "Field2_1")]
         Field2 = 1,
     }
@@ -452,9 +488,7 @@ namespace DataTypeTest
     [DataContract(Namespace = DataTypeTest.Namespaces.cas)]
     public enum EnumerationDataType
     {
-        /// <summary>
-        /// A description for the Field3 field.
-        /// </summary>
+        /// <remarks />
         [EnumMember(Value = "Field3_1")]
         Field3 = 1,
     }
@@ -584,9 +618,7 @@ namespace DataTypeTest
         #endregion
 
         #region Public Properties
-        /// <summary>
-        /// A description for the Number field.
-        /// </summary>
+        /// <remarks />
         [DataMember(Name = "Number", IsRequired = false, Order = 1)]
         public Variant Number
         {
@@ -768,7 +800,7 @@ namespace DataTypeTest
     #region DerivedStructure Class
     #if (!OPCUA_EXCLUDE_DerivedStructure)
     /// <summary>
-    /// A description for the DerivedStructure DataType.
+    /// 
     /// </summary>
     /// <exclude />
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
@@ -803,9 +835,7 @@ namespace DataTypeTest
         #endregion
 
         #region Public Properties
-        /// <summary>
-        /// Derived from Number
-        /// </summary>
+        /// <remarks />
         [DataMember(Name = "Number", IsRequired = false, Order = 1)]
         public int Number
         {

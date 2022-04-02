@@ -1,55 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="OPCUAModelDesign.xslt"?>
-<ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+<ModelDesign xmlns:cas="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:ua="http://opcfoundation.org/UA/" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
   <Namespaces>
     <Namespace Name="cas" Prefix="ObjectTypeTest" XmlPrefix="cas">http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest</Namespace>
     <Namespace Name="ua" XmlPrefix="ua">http://opcfoundation.org/UA/</Namespace>
   </Namespaces>
-  <ObjectType xmlns:q1="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" SymbolicName="q1:ComplexObjectType" xmlns:q2="http://opcfoundation.org/UA/" BaseType="q2:ServerType">
+  <ObjectType SymbolicName="cas:ComplexObjectType" BaseType="ua:ServerType">
     <Children>
-      <Object SymbolicName="q1:ChildObject" ModellingRule="MandatoryPlaceholder" SupportsEvents="true" />
-      <Property SymbolicName="q1:BrowseName4node66" ModellingRule="Mandatory" DataType="q2:LocalizedText">
+      <Object SymbolicName="cas:ChildObject" ModellingRule="MandatoryPlaceholder" SupportsEvents="true" />
+      <Property SymbolicName="cas:BrowseName4node66" ModellingRule="Mandatory" DataType="ua:LocalizedText">
         <BrowseName>ChildProperty</BrowseName>
         <References>
           <Reference IsInverse="true" IsOneWay="true">
-            <ReferenceType>q1:FlowTo</ReferenceType>
-            <TargetId>q1:ComplexObjectType_NameNotSet1109</TargetId>
+            <ReferenceType>cas:FlowTo</ReferenceType>
+            <TargetId>cas:ComplexObjectType_NameNotSet1109</TargetId>
           </Reference>
         </References>
       </Property>
-      <Variable SymbolicName="q1:NameNotSet1109" TypeDefinition="q2:AnalogItemType" ModellingRule="Mandatory">
+      <Variable SymbolicName="cas:NameNotSet1109" TypeDefinition="ua:AnalogItemType" ModellingRule="Mandatory">
         <BrowseName>BrowseName4node1109</BrowseName>
       </Variable>
-      <Method SymbolicName="q1:ChildMethod" TypeDefinition="q1:ChildMethodComplexObjectType" ModellingRule="Mandatory" />
-      <Method SymbolicName="q1:NonExecutableMethod" TypeDefinition="q1:NonExecutableMethodComplexObjectType" ModellingRule="Mandatory" />
-      <Object SymbolicName="q2:ServerCapabilities" ModellingRule="Mandatory" />
+      <Method SymbolicName="cas:ChildMethod" TypeDefinition="cas:ChildMethodComplexObjectType" ModellingRule="Mandatory" />
+      <Method SymbolicName="cas:NonExecutableMethod" TypeDefinition="cas:NonExecutableMethodComplexObjectType" ModellingRule="Mandatory" />
+      <Object SymbolicName="ua:ServerCapabilities" ModellingRule="Mandatory" />
     </Children>
   </ObjectType>
-  <ReferenceType xmlns:q3="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" SymbolicName="q3:FlowTo" xmlns:q4="http://opcfoundation.org/UA/" BaseType="q4:NonHierarchicalReferences" Symmetric="false">
+  <ReferenceType SymbolicName="cas:FlowTo" BaseType="ua:NonHierarchicalReferences" Symmetric="false">
     <DisplayName>Flow to type</DisplayName>
     <Description>It is test ReferenceType</Description>
     <InverseName>FlowFrom</InverseName>
   </ReferenceType>
-  <Method xmlns:q5="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" SymbolicName="q5:ChildMethodComplexObjectType">
+  <Method SymbolicName="cas:ChildMethodComplexObjectType">
     <InputArguments>
-      <Argument Name="Input1" xmlns:q6="http://opcfoundation.org/UA/" DataType="q6:Int32" />
-      <Argument Name="Input2" xmlns:q7="http://opcfoundation.org/UA/" DataType="q7:Int32" />
+      <Argument Name="Input1" DataType="ua:Int32" />
+      <Argument Name="Input2" DataType="ua:Int32" />
     </InputArguments>
     <OutputArguments>
-      <Argument Name="Output1" xmlns:q8="http://opcfoundation.org/UA/" DataType="q8:Int32" />
+      <Argument Name="Output1" DataType="ua:Int32" />
     </OutputArguments>
   </Method>
-  <Method xmlns:q9="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" SymbolicName="q9:NonExecutableMethodComplexObjectType" NonExecutable="true" />
-  <ObjectType xmlns:q10="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" SymbolicName="q10:DerivedFromComplexObjectType" BaseType="q10:ComplexObjectType">
+  <Method SymbolicName="cas:NonExecutableMethodComplexObjectType" NonExecutable="true" />
+  <ObjectType SymbolicName="cas:DerivedFromComplexObjectType" BaseType="cas:ComplexObjectType">
     <Children>
-      <Method SymbolicName="q10:ChildMethod" />
+      <Method SymbolicName="cas:ChildMethod" />
     </Children>
   </ObjectType>
-  <Object xmlns:q11="http://cas.eu/UA/CommServer/UnitTests/ObjectTypeTest" SymbolicName="q11:NameNotSet6" TypeDefinition="q11:DerivedFromComplexObjectType">
+  <Object SymbolicName="cas:NameNotSet6" TypeDefinition="cas:DerivedFromComplexObjectType">
     <References>
       <Reference IsInverse="true">
-        <ReferenceType xmlns:q12="http://opcfoundation.org/UA/">q12:Organizes</ReferenceType>
-        <TargetId xmlns:q13="http://opcfoundation.org/UA/">q13:ObjectsFolder</TargetId>
+        <ReferenceType>ua:Organizes</ReferenceType>
+        <TargetId>ua:ObjectsFolder</TargetId>
       </Reference>
     </References>
   </Object>

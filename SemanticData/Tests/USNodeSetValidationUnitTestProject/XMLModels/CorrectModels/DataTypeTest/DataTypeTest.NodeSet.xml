@@ -8,6 +8,61 @@
   <Nodes>
     <Node i:type="VariableNode">
       <NodeId>
+        <Identifier>ns=1;i=1</Identifier>
+      </NodeId>
+      <NodeClass>Variable_2</NodeClass>
+      <BrowseName>
+        <NamespaceIndex>0</NamespaceIndex>
+        <Name>Deprecated</Name>
+      </BrowseName>
+      <DisplayName>
+        <Locale></Locale>
+        <Text>Deprecated</Text>
+      </DisplayName>
+      <Description i:nil="true" />
+      <WriteMask>0</WriteMask>
+      <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
+      <References>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=46</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>true</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=5</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=40</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>i=68</Identifier>
+          </TargetId>
+        </ReferenceNode>
+      </References>
+      <Value>
+        <Value>
+          <Boolean xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">true</Boolean>
+        </Value>
+      </Value>
+      <DataType>
+        <Identifier>i=1</Identifier>
+      </DataType>
+      <ValueRank>-1</ValueRank>
+      <ArrayDimensions />
+      <AccessLevel>1</AccessLevel>
+      <UserAccessLevel>1</UserAccessLevel>
+      <MinimumSamplingInterval>0</MinimumSamplingInterval>
+      <Historizing>false</Historizing>
+      <AccessLevelEx>0</AccessLevelEx>
+    </Node>
+    <Node i:type="VariableNode">
+      <NodeId>
         <Identifier>ns=1;i=2</Identifier>
       </NodeId>
       <NodeClass>Variable_2</NodeClass>
@@ -51,6 +106,15 @@
           <IsInverse>false</IsInverse>
           <TargetId>
             <Identifier>ns=1;i=4</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=46</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=8</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -157,10 +221,7 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</ByteString
         <Locale></Locale>
         <Text>NamespaceUri</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A URI that uniquely identifies the dictionary.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -251,6 +312,15 @@ dHVyZSIgbmlsbGFibGU9InRydWUiPjwveHM6ZWxlbWVudD4NCg0KPC94czpzY2hlbWE+</ByteString
         </ReferenceNode>
         <ReferenceNode>
           <ReferenceTypeId>
+            <Identifier>i=46</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=1</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
             <Identifier>i=47</Identifier>
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
@@ -276,29 +346,27 @@ U2NoZW1hLWluc3RhbmNlIg0KICB4bWxuczp1YT0iaHR0cDovL29wY2ZvdW5kYXRpb24ub3JnL1VB
 LyINCiAgeG1sbnM6dG5zPSJodHRwOi8vY2FzLmV1L1VBL0NvbW1TZXJ2ZXIvVW5pdFRlc3RzL0Rh
 dGFUeXBlVGVzdCINCiAgRGVmYXVsdEJ5dGVPcmRlcj0iTGl0dGxlRW5kaWFuIg0KICBUYXJnZXRO
 YW1lc3BhY2U9Imh0dHA6Ly9jYXMuZXUvVUEvQ29tbVNlcnZlci9Vbml0VGVzdHMvRGF0YVR5cGVU
-ZXN0Ig0KPg0KICA8IS0tIFRoaXMgRmlsZSB3YXMgZ2VuZXJhdGVkIG9uIDIwMjEtMDItMTEgYW5k
-IHN1cHBvcnRzIHRoZSBzcGVjaWZpY2F0aW9ucyBzdXBwb3J0ZWQgYnkgdmVyc2lvbiAxLjExLjMz
-NS4xMCBvZiB0aGUgT1BDIFVBIGRlbGl2ZXJhYmxlcy4gLS0+DQogIDxvcGM6SW1wb3J0IE5hbWVz
-cGFjZT0iaHR0cDovL29wY2ZvdW5kYXRpb24ub3JnL1VBLyIgTG9jYXRpb249Ii5CaW5hcnlTY2hl
-bWEuYnNkIi8+DQoNCiAgPG9wYzpFbnVtZXJhdGVkVHlwZSBOYW1lPSJBYnN0cmFjdEVudW1lcmF0
-aW9uRGF0YVR5cGUiIExlbmd0aEluQml0cz0iMzIiPg0KICAgIDxvcGM6RW51bWVyYXRlZFZhbHVl
-IE5hbWU9IkZpZWxkMSIgVmFsdWU9IjAiIC8+DQogICAgPG9wYzpFbnVtZXJhdGVkVmFsdWUgTmFt
-ZT0iRmllbGQyIiBWYWx1ZT0iMSIgLz4NCiAgPC9vcGM6RW51bWVyYXRlZFR5cGU+DQoNCiAgPG9w
-YzpFbnVtZXJhdGVkVHlwZSBOYW1lPSJFbnVtZXJhdGlvbkRhdGFUeXBlIiBMZW5ndGhJbkJpdHM9
-IjMyIj4NCiAgICA8b3BjOkRvY3VtZW50YXRpb24+RW51bWVyYXRpb24gRGF0YVR5cGUgZGVyaXZl
-ZCBmcm9tIGFic3RyYWN0IHR5cGU8L29wYzpEb2N1bWVudGF0aW9uPg0KICAgIDxvcGM6RW51bWVy
-YXRlZFZhbHVlIE5hbWU9IkZpZWxkMSIgVmFsdWU9IjAiIC8+DQogICAgPG9wYzpFbnVtZXJhdGVk
-VmFsdWUgTmFtZT0iRmllbGQyIiBWYWx1ZT0iMSIgLz4NCiAgICA8b3BjOkVudW1lcmF0ZWRWYWx1
-ZSBOYW1lPSJGaWVsZDMiIFZhbHVlPSIxIiAvPg0KICA8L29wYzpFbnVtZXJhdGVkVHlwZT4NCg0K
-ICA8b3BjOlN0cnVjdHVyZWRUeXBlIE5hbWU9IkFic3RyYWN0U3RydWN0dXJlIiBCYXNlVHlwZT0i
-dWE6RXh0ZW5zaW9uT2JqZWN0Ij4NCiAgICA8b3BjOkRvY3VtZW50YXRpb24+QWJzdHJhY3Qgc3Ry
-dWN0dXJlPC9vcGM6RG9jdW1lbnRhdGlvbj4NCiAgICA8b3BjOkZpZWxkIE5hbWU9Ik51bWJlciIg
-VHlwZU5hbWU9InVhOlZhcmlhbnQiIC8+DQogIDwvb3BjOlN0cnVjdHVyZWRUeXBlPg0KDQogIDxv
-cGM6U3RydWN0dXJlZFR5cGUgTmFtZT0iRGVyaXZlZFN0cnVjdHVyZSIgQmFzZVR5cGU9InRuczpB
-YnN0cmFjdFN0cnVjdHVyZSI+DQogICAgPG9wYzpGaWVsZCBOYW1lPSJOdW1iZXIiIFR5cGVOYW1l
-PSJ1YTpWYXJpYW50IiBTb3VyY2VUeXBlPSJ0bnM6QWJzdHJhY3RTdHJ1Y3R1cmUiIC8+DQogICAg
-PG9wYzpGaWVsZCBOYW1lPSJOdW1iZXIiIFR5cGVOYW1lPSJvcGM6SW50MzIiIC8+DQogIDwvb3Bj
-OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
+ZXN0Ig0KPg0KICA8b3BjOkltcG9ydCBOYW1lc3BhY2U9Imh0dHA6Ly9vcGNmb3VuZGF0aW9uLm9y
+Zy9VQS8iIExvY2F0aW9uPSIuQmluYXJ5U2NoZW1hLmJzZCIvPg0KDQogIDxvcGM6RW51bWVyYXRl
+ZFR5cGUgTmFtZT0iQWJzdHJhY3RFbnVtZXJhdGlvbkRhdGFUeXBlIiBMZW5ndGhJbkJpdHM9IjMy
+Ij4NCiAgICA8b3BjOkVudW1lcmF0ZWRWYWx1ZSBOYW1lPSJGaWVsZDEiIFZhbHVlPSIwIiAvPg0K
+ICAgIDxvcGM6RW51bWVyYXRlZFZhbHVlIE5hbWU9IkZpZWxkMiIgVmFsdWU9IjEiIC8+DQogIDwv
+b3BjOkVudW1lcmF0ZWRUeXBlPg0KDQogIDxvcGM6RW51bWVyYXRlZFR5cGUgTmFtZT0iRW51bWVy
+YXRpb25EYXRhVHlwZSIgTGVuZ3RoSW5CaXRzPSIzMiI+DQogICAgPG9wYzpEb2N1bWVudGF0aW9u
+PkVudW1lcmF0aW9uIERhdGFUeXBlIGRlcml2ZWQgZnJvbSBhYnN0cmFjdCB0eXBlPC9vcGM6RG9j
+dW1lbnRhdGlvbj4NCiAgICA8b3BjOkVudW1lcmF0ZWRWYWx1ZSBOYW1lPSJGaWVsZDEiIFZhbHVl
+PSIwIiAvPg0KICAgIDxvcGM6RW51bWVyYXRlZFZhbHVlIE5hbWU9IkZpZWxkMiIgVmFsdWU9IjEi
+IC8+DQogICAgPG9wYzpFbnVtZXJhdGVkVmFsdWUgTmFtZT0iRmllbGQzIiBWYWx1ZT0iMSIgLz4N
+CiAgPC9vcGM6RW51bWVyYXRlZFR5cGU+DQoNCiAgPG9wYzpTdHJ1Y3R1cmVkVHlwZSBOYW1lPSJB
+YnN0cmFjdFN0cnVjdHVyZSIgQmFzZVR5cGU9InVhOkV4dGVuc2lvbk9iamVjdCI+DQogICAgPG9w
+YzpEb2N1bWVudGF0aW9uPkFic3RyYWN0IHN0cnVjdHVyZTwvb3BjOkRvY3VtZW50YXRpb24+DQog
+ICAgPG9wYzpGaWVsZCBOYW1lPSJOdW1iZXIiIFR5cGVOYW1lPSJ1YTpWYXJpYW50IiAvPg0KICA8
+L29wYzpTdHJ1Y3R1cmVkVHlwZT4NCg0KICA8b3BjOlN0cnVjdHVyZWRUeXBlIE5hbWU9IkRlcml2
+ZWRTdHJ1Y3R1cmUiIEJhc2VUeXBlPSJ0bnM6QWJzdHJhY3RTdHJ1Y3R1cmUiPg0KICAgIDxvcGM6
+RmllbGQgTmFtZT0iTnVtYmVyIiBUeXBlTmFtZT0idWE6VmFyaWFudCIgU291cmNlVHlwZT0idG5z
+OkFic3RyYWN0U3RydWN0dXJlIiAvPg0KICAgIDxvcGM6RmllbGQgTmFtZT0iTnVtYmVyIiBUeXBl
+TmFtZT0ib3BjOkludDMyIiAvPg0KICA8L29wYzpTdHJ1Y3R1cmVkVHlwZT4NCg0KPC9vcGM6VHlw
+ZURpY3Rpb25hcnk+</ByteString>
         </Value>
       </Value>
       <DataType>
@@ -325,10 +393,7 @@ OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
         <Locale></Locale>
         <Text>NamespaceUri</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A URI that uniquely identifies the dictionary.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -361,6 +426,61 @@ OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
       </Value>
       <DataType>
         <Identifier>i=12</Identifier>
+      </DataType>
+      <ValueRank>-1</ValueRank>
+      <ArrayDimensions />
+      <AccessLevel>1</AccessLevel>
+      <UserAccessLevel>1</UserAccessLevel>
+      <MinimumSamplingInterval>0</MinimumSamplingInterval>
+      <Historizing>false</Historizing>
+      <AccessLevelEx>0</AccessLevelEx>
+    </Node>
+    <Node i:type="VariableNode">
+      <NodeId>
+        <Identifier>ns=1;i=8</Identifier>
+      </NodeId>
+      <NodeClass>Variable_2</NodeClass>
+      <BrowseName>
+        <NamespaceIndex>0</NamespaceIndex>
+        <Name>Deprecated</Name>
+      </BrowseName>
+      <DisplayName>
+        <Locale></Locale>
+        <Text>Deprecated</Text>
+      </DisplayName>
+      <Description i:nil="true" />
+      <WriteMask>0</WriteMask>
+      <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
+      <References>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=46</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>true</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=2</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=40</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>i=68</Identifier>
+          </TargetId>
+        </ReferenceNode>
+      </References>
+      <Value>
+        <Value>
+          <Boolean xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">true</Boolean>
+        </Value>
+      </Value>
+      <DataType>
+        <Identifier>i=1</Identifier>
       </DataType>
       <ValueRank>-1</ValueRank>
       <ArrayDimensions />
@@ -459,25 +579,14 @@ OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
             <Identifier>i=68</Identifier>
           </TargetId>
         </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=37</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>i=78</Identifier>
-          </TargetId>
-        </ReferenceNode>
       </References>
       <Value>
         <Value>
           <ListOfLocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
             <LocalizedText>
-              <Locale></Locale>
               <Text>Field1</Text>
             </LocalizedText>
             <LocalizedText>
-              <Locale></Locale>
               <Text>Field2</Text>
             </LocalizedText>
           </ListOfLocalizedText>
@@ -487,7 +596,9 @@ OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
         <Identifier>i=21</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -577,15 +688,6 @@ OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
             <Identifier>i=68</Identifier>
           </TargetId>
         </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=37</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>i=78</Identifier>
-          </TargetId>
-        </ReferenceNode>
       </References>
       <Value>
         <Value>
@@ -598,10 +700,8 @@ OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
                 <EnumValueType>
                   <Value>1</Value>
                   <DisplayName>
-                    <Locale></Locale>
                     <Text>Field3</Text>
                   </DisplayName>
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
                 </EnumValueType>
               </Body>
             </ExtensionObject>
@@ -612,7 +712,9 @@ OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
         <Identifier>i=7594</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -666,6 +768,15 @@ OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
+            <Identifier>ns=1;i=18</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=38</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
             <Identifier>ns=1;i=14</Identifier>
           </TargetId>
         </ReferenceNode>
@@ -675,7 +786,7 @@ OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=18</Identifier>
+            <Identifier>ns=1;i=31</Identifier>
           </TargetId>
         </ReferenceNode>
       </References>
@@ -927,6 +1038,15 @@ OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
+            <Identifier>ns=1;i=27</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=38</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
             <Identifier>ns=1;i=23</Identifier>
           </TargetId>
         </ReferenceNode>
@@ -936,7 +1056,7 @@ OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
           <TargetId>
-            <Identifier>ns=1;i=27</Identifier>
+            <Identifier>ns=1;i=32</Identifier>
           </TargetId>
         </ReferenceNode>
       </References>
@@ -1152,6 +1272,88 @@ OlN0cnVjdHVyZWRUeXBlPg0KDQo8L29wYzpUeXBlRGljdGlvbmFyeT4=</ByteString>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
       <Historizing>false</Historizing>
       <AccessLevelEx>0</AccessLevelEx>
+    </Node>
+    <Node i:type="ObjectNode">
+      <NodeId>
+        <Identifier>ns=1;i=31</Identifier>
+      </NodeId>
+      <NodeClass>Object_1</NodeClass>
+      <BrowseName>
+        <NamespaceIndex>0</NamespaceIndex>
+        <Name>Default JSON</Name>
+      </BrowseName>
+      <DisplayName>
+        <Locale></Locale>
+        <Text>Default JSON</Text>
+      </DisplayName>
+      <Description i:nil="true" />
+      <WriteMask>0</WriteMask>
+      <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
+      <References>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=40</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>i=76</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=38</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>true</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=13</Identifier>
+          </TargetId>
+        </ReferenceNode>
+      </References>
+      <EventNotifier>0</EventNotifier>
+    </Node>
+    <Node i:type="ObjectNode">
+      <NodeId>
+        <Identifier>ns=1;i=32</Identifier>
+      </NodeId>
+      <NodeClass>Object_1</NodeClass>
+      <BrowseName>
+        <NamespaceIndex>0</NamespaceIndex>
+        <Name>Default JSON</Name>
+      </BrowseName>
+      <DisplayName>
+        <Locale></Locale>
+        <Text>Default JSON</Text>
+      </DisplayName>
+      <Description i:nil="true" />
+      <WriteMask>0</WriteMask>
+      <UserWriteMask>0</UserWriteMask>
+      <RolePermissions />
+      <UserRolePermissions />
+      <AccessRestrictions>0</AccessRestrictions>
+      <References>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=40</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>false</IsInverse>
+          <TargetId>
+            <Identifier>i=76</Identifier>
+          </TargetId>
+        </ReferenceNode>
+        <ReferenceNode>
+          <ReferenceTypeId>
+            <Identifier>i=38</Identifier>
+          </ReferenceTypeId>
+          <IsInverse>true</IsInverse>
+          <TargetId>
+            <Identifier>ns=1;i=22</Identifier>
+          </TargetId>
+        </ReferenceNode>
+      </References>
+      <EventNotifier>0</EventNotifier>
     </Node>
   </Nodes>
 </NodeSet>

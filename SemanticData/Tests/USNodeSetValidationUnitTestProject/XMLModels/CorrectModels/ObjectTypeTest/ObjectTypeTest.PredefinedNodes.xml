@@ -24,10 +24,6 @@
         <uax:NamespaceIndex>0</uax:NamespaceIndex>
         <uax:Name>ServerCapabilities</uax:Name>
       </uax:BrowseName>
-      <uax:Description>
-        <uax:Locale></uax:Locale>
-        <uax:Text>Describes capabilities supported by the server.</uax:Text>
-      </uax:Description>
       <uax:ReferenceTypeId>
         <uax:Identifier>i=47</uax:Identifier>
       </uax:ReferenceTypeId>
@@ -47,10 +43,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>ServerProfileArray</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>A list of profiles supported by the server.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -65,6 +57,7 @@
           <uax:Identifier>i=12</uax:Identifier>
         </uax:DataType>
         <uax:ValueRank>1</uax:ValueRank>
+        <uax:ArrayDimensions>0</uax:ArrayDimensions>
         <uax:AccessLevel>1</uax:AccessLevel>
         <uax:UserAccessLevel>1</uax:UserAccessLevel>
       </ServerProfileArray>
@@ -77,10 +70,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>LocaleIdArray</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>A list of locales supported by the server.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -95,6 +84,7 @@
           <uax:Identifier>i=295</uax:Identifier>
         </uax:DataType>
         <uax:ValueRank>1</uax:ValueRank>
+        <uax:ArrayDimensions>0</uax:ArrayDimensions>
         <uax:AccessLevel>1</uax:AccessLevel>
         <uax:UserAccessLevel>1</uax:UserAccessLevel>
       </LocaleIdArray>
@@ -107,10 +97,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>MinSupportedSampleRate</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>The minimum sampling interval supported by the server.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -137,10 +123,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>MaxBrowseContinuationPoints</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>The maximum number of continuation points for Browse operations per session.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -167,10 +149,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>MaxQueryContinuationPoints</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>The maximum number of continuation points for Query operations per session.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -197,10 +175,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>MaxHistoryContinuationPoints</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>The maximum number of continuation points for ReadHistory operations per session.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -227,10 +201,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>SoftwareCertificates</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>The software certificates owned by the server.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -245,6 +215,7 @@
           <uax:Identifier>i=344</uax:Identifier>
         </uax:DataType>
         <uax:ValueRank>1</uax:ValueRank>
+        <uax:ArrayDimensions>0</uax:ArrayDimensions>
         <uax:AccessLevel>1</uax:AccessLevel>
         <uax:UserAccessLevel>1</uax:UserAccessLevel>
       </SoftwareCertificates>
@@ -257,10 +228,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>ModellingRules</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>A folder for the modelling rules supported by the server.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=47</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -281,10 +248,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>AggregateFunctions</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>A folder for the real time aggregates supported by the server.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=47</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -472,7 +435,6 @@
                     </uax:DataType>
                     <uax:ValueRank>-1</uax:ValueRank>
                     <uax:ArrayDimensions />
-                    <uax:Description xsi:nil="true" />
                   </uax:Argument>
                 </uax:Body>
               </uax:ExtensionObject>
@@ -488,7 +450,6 @@
                     </uax:DataType>
                     <uax:ValueRank>-1</uax:ValueRank>
                     <uax:ArrayDimensions />
-                    <uax:Description xsi:nil="true" />
                   </uax:Argument>
                 </uax:Body>
               </uax:ExtensionObject>
@@ -499,6 +460,7 @@
           <uax:Identifier>i=296</uax:Identifier>
         </uax:DataType>
         <uax:ValueRank>1</uax:ValueRank>
+        <uax:ArrayDimensions>0</uax:ArrayDimensions>
         <uax:AccessLevel>1</uax:AccessLevel>
         <uax:UserAccessLevel>1</uax:UserAccessLevel>
       </InputArguments>
@@ -536,7 +498,6 @@
                     </uax:DataType>
                     <uax:ValueRank>-1</uax:ValueRank>
                     <uax:ArrayDimensions />
-                    <uax:Description xsi:nil="true" />
                   </uax:Argument>
                 </uax:Body>
               </uax:ExtensionObject>
@@ -547,6 +508,7 @@
           <uax:Identifier>i=296</uax:Identifier>
         </uax:DataType>
         <uax:ValueRank>1</uax:ValueRank>
+        <uax:ArrayDimensions>0</uax:ArrayDimensions>
         <uax:AccessLevel>1</uax:AccessLevel>
         <uax:UserAccessLevel>1</uax:UserAccessLevel>
       </OutputArguments>
@@ -584,18 +546,15 @@
       <uax:Name>FlowTo</uax:Name>
     </uax:BrowseName>
     <uax:DisplayName>
-      <uax:Locale></uax:Locale>
       <uax:Text>Flow to type</uax:Text>
     </uax:DisplayName>
     <uax:Description>
-      <uax:Locale></uax:Locale>
       <uax:Text>It is test ReferenceType</uax:Text>
     </uax:Description>
     <uax:SuperTypeId>
       <uax:Identifier>i=32</uax:Identifier>
     </uax:SuperTypeId>
     <uax:InverseName>
-      <uax:Locale></uax:Locale>
       <uax:Text>FlowFrom</uax:Text>
     </uax:InverseName>
   </FlowTo>
@@ -648,7 +607,6 @@
                   </uax:DataType>
                   <uax:ValueRank>-1</uax:ValueRank>
                   <uax:ArrayDimensions />
-                  <uax:Description xsi:nil="true" />
                 </uax:Argument>
               </uax:Body>
             </uax:ExtensionObject>
@@ -664,7 +622,6 @@
                   </uax:DataType>
                   <uax:ValueRank>-1</uax:ValueRank>
                   <uax:ArrayDimensions />
-                  <uax:Description xsi:nil="true" />
                 </uax:Argument>
               </uax:Body>
             </uax:ExtensionObject>
@@ -675,6 +632,7 @@
         <uax:Identifier>i=296</uax:Identifier>
       </uax:DataType>
       <uax:ValueRank>1</uax:ValueRank>
+      <uax:ArrayDimensions>0</uax:ArrayDimensions>
       <uax:AccessLevel>1</uax:AccessLevel>
       <uax:UserAccessLevel>1</uax:UserAccessLevel>
     </InputArguments>
@@ -709,7 +667,6 @@
                   </uax:DataType>
                   <uax:ValueRank>-1</uax:ValueRank>
                   <uax:ArrayDimensions />
-                  <uax:Description xsi:nil="true" />
                 </uax:Argument>
               </uax:Body>
             </uax:ExtensionObject>
@@ -720,6 +677,7 @@
         <uax:Identifier>i=296</uax:Identifier>
       </uax:DataType>
       <uax:ValueRank>1</uax:ValueRank>
+      <uax:ArrayDimensions>0</uax:ArrayDimensions>
       <uax:AccessLevel>1</uax:AccessLevel>
       <uax:UserAccessLevel>1</uax:UserAccessLevel>
     </OutputArguments>
@@ -808,7 +766,6 @@
                     </uax:DataType>
                     <uax:ValueRank>-1</uax:ValueRank>
                     <uax:ArrayDimensions />
-                    <uax:Description xsi:nil="true" />
                   </uax:Argument>
                 </uax:Body>
               </uax:ExtensionObject>
@@ -824,7 +781,6 @@
                     </uax:DataType>
                     <uax:ValueRank>-1</uax:ValueRank>
                     <uax:ArrayDimensions />
-                    <uax:Description xsi:nil="true" />
                   </uax:Argument>
                 </uax:Body>
               </uax:ExtensionObject>
@@ -835,6 +791,7 @@
           <uax:Identifier>i=296</uax:Identifier>
         </uax:DataType>
         <uax:ValueRank>1</uax:ValueRank>
+        <uax:ArrayDimensions>0</uax:ArrayDimensions>
         <uax:AccessLevel>1</uax:AccessLevel>
         <uax:UserAccessLevel>1</uax:UserAccessLevel>
       </InputArguments>
@@ -872,7 +829,6 @@
                     </uax:DataType>
                     <uax:ValueRank>-1</uax:ValueRank>
                     <uax:ArrayDimensions />
-                    <uax:Description xsi:nil="true" />
                   </uax:Argument>
                 </uax:Body>
               </uax:ExtensionObject>
@@ -883,6 +839,7 @@
           <uax:Identifier>i=296</uax:Identifier>
         </uax:DataType>
         <uax:ValueRank>1</uax:ValueRank>
+        <uax:ArrayDimensions>0</uax:ArrayDimensions>
         <uax:AccessLevel>1</uax:AccessLevel>
         <uax:UserAccessLevel>1</uax:UserAccessLevel>
       </OutputArguments>
@@ -924,10 +881,6 @@
         <uax:NamespaceIndex>0</uax:NamespaceIndex>
         <uax:Name>ServerArray</uax:Name>
       </uax:BrowseName>
-      <uax:Description>
-        <uax:Locale></uax:Locale>
-        <uax:Text>The list of server URIs used by the server.</uax:Text>
-      </uax:Description>
       <uax:ReferenceTypeId>
         <uax:Identifier>i=46</uax:Identifier>
       </uax:ReferenceTypeId>
@@ -939,6 +892,7 @@
         <uax:Identifier>i=12</uax:Identifier>
       </uax:DataType>
       <uax:ValueRank>1</uax:ValueRank>
+      <uax:ArrayDimensions>0</uax:ArrayDimensions>
       <uax:AccessLevel>1</uax:AccessLevel>
       <uax:UserAccessLevel>1</uax:UserAccessLevel>
       <uax:MinimumSamplingInterval>1000</uax:MinimumSamplingInterval>
@@ -952,10 +906,6 @@
         <uax:NamespaceIndex>0</uax:NamespaceIndex>
         <uax:Name>NamespaceArray</uax:Name>
       </uax:BrowseName>
-      <uax:Description>
-        <uax:Locale></uax:Locale>
-        <uax:Text>The list of namespace URIs used by the server.</uax:Text>
-      </uax:Description>
       <uax:ReferenceTypeId>
         <uax:Identifier>i=46</uax:Identifier>
       </uax:ReferenceTypeId>
@@ -967,6 +917,7 @@
         <uax:Identifier>i=12</uax:Identifier>
       </uax:DataType>
       <uax:ValueRank>1</uax:ValueRank>
+      <uax:ArrayDimensions>0</uax:ArrayDimensions>
       <uax:AccessLevel>1</uax:AccessLevel>
       <uax:UserAccessLevel>1</uax:UserAccessLevel>
       <uax:MinimumSamplingInterval>1000</uax:MinimumSamplingInterval>
@@ -980,10 +931,6 @@
         <uax:NamespaceIndex>0</uax:NamespaceIndex>
         <uax:Name>ServerStatus</uax:Name>
       </uax:BrowseName>
-      <uax:Description>
-        <uax:Locale></uax:Locale>
-        <uax:Text>The current status of the server.</uax:Text>
-      </uax:Description>
       <uax:ReferenceTypeId>
         <uax:Identifier>i=47</uax:Identifier>
       </uax:ReferenceTypeId>
@@ -1290,10 +1237,6 @@
         <uax:NamespaceIndex>0</uax:NamespaceIndex>
         <uax:Name>ServiceLevel</uax:Name>
       </uax:BrowseName>
-      <uax:Description>
-        <uax:Locale></uax:Locale>
-        <uax:Text>A value indicating the level of service the server can provide. 255 indicates the best.</uax:Text>
-      </uax:Description>
       <uax:ReferenceTypeId>
         <uax:Identifier>i=46</uax:Identifier>
       </uax:ReferenceTypeId>
@@ -1318,10 +1261,6 @@
         <uax:NamespaceIndex>0</uax:NamespaceIndex>
         <uax:Name>Auditing</uax:Name>
       </uax:BrowseName>
-      <uax:Description>
-        <uax:Locale></uax:Locale>
-        <uax:Text>A flag indicating whether the server is currently generating audit events.</uax:Text>
-      </uax:Description>
       <uax:ReferenceTypeId>
         <uax:Identifier>i=46</uax:Identifier>
       </uax:ReferenceTypeId>
@@ -1346,10 +1285,6 @@
         <uax:NamespaceIndex>0</uax:NamespaceIndex>
         <uax:Name>ServerCapabilities</uax:Name>
       </uax:BrowseName>
-      <uax:Description>
-        <uax:Locale></uax:Locale>
-        <uax:Text>Describes capabilities supported by the server.</uax:Text>
-      </uax:Description>
       <uax:ReferenceTypeId>
         <uax:Identifier>i=47</uax:Identifier>
       </uax:ReferenceTypeId>
@@ -1366,10 +1301,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>ServerProfileArray</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>A list of profiles supported by the server.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -1381,6 +1312,7 @@
           <uax:Identifier>i=12</uax:Identifier>
         </uax:DataType>
         <uax:ValueRank>1</uax:ValueRank>
+        <uax:ArrayDimensions>0</uax:ArrayDimensions>
         <uax:AccessLevel>1</uax:AccessLevel>
         <uax:UserAccessLevel>1</uax:UserAccessLevel>
       </ServerProfileArray>
@@ -1393,10 +1325,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>LocaleIdArray</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>A list of locales supported by the server.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -1408,6 +1336,7 @@
           <uax:Identifier>i=295</uax:Identifier>
         </uax:DataType>
         <uax:ValueRank>1</uax:ValueRank>
+        <uax:ArrayDimensions>0</uax:ArrayDimensions>
         <uax:AccessLevel>1</uax:AccessLevel>
         <uax:UserAccessLevel>1</uax:UserAccessLevel>
       </LocaleIdArray>
@@ -1420,10 +1349,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>MinSupportedSampleRate</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>The minimum sampling interval supported by the server.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -1447,10 +1372,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>MaxBrowseContinuationPoints</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>The maximum number of continuation points for Browse operations per session.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -1474,10 +1395,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>MaxQueryContinuationPoints</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>The maximum number of continuation points for Query operations per session.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -1501,10 +1418,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>MaxHistoryContinuationPoints</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>The maximum number of continuation points for ReadHistory operations per session.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -1528,10 +1441,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>SoftwareCertificates</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>The software certificates owned by the server.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -1543,6 +1452,7 @@
           <uax:Identifier>i=344</uax:Identifier>
         </uax:DataType>
         <uax:ValueRank>1</uax:ValueRank>
+        <uax:ArrayDimensions>0</uax:ArrayDimensions>
         <uax:AccessLevel>1</uax:AccessLevel>
         <uax:UserAccessLevel>1</uax:UserAccessLevel>
       </SoftwareCertificates>
@@ -1555,10 +1465,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>ModellingRules</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>A folder for the modelling rules supported by the server.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=47</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -1576,10 +1482,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>AggregateFunctions</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>A folder for the real time aggregates supported by the server.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=47</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -1598,10 +1500,6 @@
         <uax:NamespaceIndex>0</uax:NamespaceIndex>
         <uax:Name>ServerDiagnostics</uax:Name>
       </uax:BrowseName>
-      <uax:Description>
-        <uax:Locale></uax:Locale>
-        <uax:Text>Reports diagnostics about the server.</uax:Text>
-      </uax:Description>
       <uax:ReferenceTypeId>
         <uax:Identifier>i=47</uax:Identifier>
       </uax:ReferenceTypeId>
@@ -1618,10 +1516,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>ServerDiagnosticsSummary</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>A summary of server level diagnostics.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=47</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -1921,10 +1815,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>SubscriptionDiagnosticsArray</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>A list of diagnostics for each active subscription.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=47</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -1936,6 +1826,7 @@
           <uax:Identifier>i=874</uax:Identifier>
         </uax:DataType>
         <uax:ValueRank>1</uax:ValueRank>
+        <uax:ArrayDimensions>0</uax:ArrayDimensions>
         <uax:AccessLevel>1</uax:AccessLevel>
         <uax:UserAccessLevel>1</uax:UserAccessLevel>
       </SubscriptionDiagnosticsArray>
@@ -1948,10 +1839,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>SessionsDiagnosticsSummary</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>A summary of session level diagnostics.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=47</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -1968,10 +1855,6 @@
             <uax:NamespaceIndex>0</uax:NamespaceIndex>
             <uax:Name>SessionDiagnosticsArray</uax:Name>
           </uax:BrowseName>
-          <uax:Description>
-            <uax:Locale></uax:Locale>
-            <uax:Text>A list of diagnostics for each active session.</uax:Text>
-          </uax:Description>
           <uax:ReferenceTypeId>
             <uax:Identifier>i=47</uax:Identifier>
           </uax:ReferenceTypeId>
@@ -1983,6 +1866,7 @@
             <uax:Identifier>i=865</uax:Identifier>
           </uax:DataType>
           <uax:ValueRank>1</uax:ValueRank>
+          <uax:ArrayDimensions>0</uax:ArrayDimensions>
           <uax:AccessLevel>1</uax:AccessLevel>
           <uax:UserAccessLevel>1</uax:UserAccessLevel>
         </SessionDiagnosticsArray>
@@ -1995,10 +1879,6 @@
             <uax:NamespaceIndex>0</uax:NamespaceIndex>
             <uax:Name>SessionSecurityDiagnosticsArray</uax:Name>
           </uax:BrowseName>
-          <uax:Description>
-            <uax:Locale></uax:Locale>
-            <uax:Text>A list of security related diagnostics for each active session.</uax:Text>
-          </uax:Description>
           <uax:ReferenceTypeId>
             <uax:Identifier>i=47</uax:Identifier>
           </uax:ReferenceTypeId>
@@ -2010,6 +1890,7 @@
             <uax:Identifier>i=868</uax:Identifier>
           </uax:DataType>
           <uax:ValueRank>1</uax:ValueRank>
+          <uax:ArrayDimensions>0</uax:ArrayDimensions>
           <uax:AccessLevel>1</uax:AccessLevel>
           <uax:UserAccessLevel>1</uax:UserAccessLevel>
         </SessionSecurityDiagnosticsArray>
@@ -2023,10 +1904,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>EnabledFlag</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>If TRUE the diagnostics collection is enabled.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -2051,10 +1928,6 @@
         <uax:NamespaceIndex>0</uax:NamespaceIndex>
         <uax:Name>VendorServerInfo</uax:Name>
       </uax:BrowseName>
-      <uax:Description>
-        <uax:Locale></uax:Locale>
-        <uax:Text>Server information provided by the vendor.</uax:Text>
-      </uax:Description>
       <uax:ReferenceTypeId>
         <uax:Identifier>i=47</uax:Identifier>
       </uax:ReferenceTypeId>
@@ -2072,10 +1945,6 @@
         <uax:NamespaceIndex>0</uax:NamespaceIndex>
         <uax:Name>ServerRedundancy</uax:Name>
       </uax:BrowseName>
-      <uax:Description>
-        <uax:Locale></uax:Locale>
-        <uax:Text>Describes the redundancy capabilities of the server.</uax:Text>
-      </uax:Description>
       <uax:ReferenceTypeId>
         <uax:Identifier>i=47</uax:Identifier>
       </uax:ReferenceTypeId>
@@ -2092,10 +1961,6 @@
           <uax:NamespaceIndex>0</uax:NamespaceIndex>
           <uax:Name>RedundancySupport</uax:Name>
         </uax:BrowseName>
-        <uax:Description>
-          <uax:Locale></uax:Locale>
-          <uax:Text>Indicates what style of redundancy is supported by the server.</uax:Text>
-        </uax:Description>
         <uax:ReferenceTypeId>
           <uax:Identifier>i=46</uax:Identifier>
         </uax:ReferenceTypeId>
@@ -2250,7 +2115,6 @@
                     </uax:DataType>
                     <uax:ValueRank>-1</uax:ValueRank>
                     <uax:ArrayDimensions />
-                    <uax:Description xsi:nil="true" />
                   </uax:Argument>
                 </uax:Body>
               </uax:ExtensionObject>
@@ -2266,7 +2130,6 @@
                     </uax:DataType>
                     <uax:ValueRank>-1</uax:ValueRank>
                     <uax:ArrayDimensions />
-                    <uax:Description xsi:nil="true" />
                   </uax:Argument>
                 </uax:Body>
               </uax:ExtensionObject>
@@ -2277,6 +2140,7 @@
           <uax:Identifier>i=296</uax:Identifier>
         </uax:DataType>
         <uax:ValueRank>1</uax:ValueRank>
+        <uax:ArrayDimensions>0</uax:ArrayDimensions>
         <uax:AccessLevel>1</uax:AccessLevel>
         <uax:UserAccessLevel>1</uax:UserAccessLevel>
       </InputArguments>
@@ -2311,7 +2175,6 @@
                     </uax:DataType>
                     <uax:ValueRank>-1</uax:ValueRank>
                     <uax:ArrayDimensions />
-                    <uax:Description xsi:nil="true" />
                   </uax:Argument>
                 </uax:Body>
               </uax:ExtensionObject>
@@ -2322,6 +2185,7 @@
           <uax:Identifier>i=296</uax:Identifier>
         </uax:DataType>
         <uax:ValueRank>1</uax:ValueRank>
+        <uax:ArrayDimensions>0</uax:ArrayDimensions>
         <uax:AccessLevel>1</uax:AccessLevel>
         <uax:UserAccessLevel>1</uax:UserAccessLevel>
       </OutputArguments>

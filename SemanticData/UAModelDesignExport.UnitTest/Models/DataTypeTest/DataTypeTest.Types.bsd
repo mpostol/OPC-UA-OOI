@@ -6,7 +6,6 @@
   DefaultByteOrder="LittleEndian"
   TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest"
 >
-  <!-- This File was generated on 2021-02-20 and supports the specifications supported by version 1.11.335.10 of the OPC UA deliverables. -->
   <opc:Import Namespace="http://opcfoundation.org/UA/" Location=".BinarySchema.bsd"/>
 
   <opc:EnumeratedType Name="AbstractEnumerationDataType" LengthInBits="32">

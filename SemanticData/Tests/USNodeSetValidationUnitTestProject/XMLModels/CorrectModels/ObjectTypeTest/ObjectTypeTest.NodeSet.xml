@@ -154,10 +154,7 @@
         <Locale></Locale>
         <Text>ServerCapabilities</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>Describes capabilities supported by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -288,10 +285,7 @@
         <Locale></Locale>
         <Text>ServerProfileArray</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A list of profiles supported by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -335,7 +329,9 @@
         <Identifier>i=12</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -355,10 +351,7 @@
         <Locale></Locale>
         <Text>LocaleIdArray</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A list of locales supported by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -402,7 +395,9 @@
         <Identifier>i=295</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -422,10 +417,7 @@
         <Locale></Locale>
         <Text>MinSupportedSampleRate</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>The minimum sampling interval supported by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -489,10 +481,7 @@
         <Locale></Locale>
         <Text>MaxBrowseContinuationPoints</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>The maximum number of continuation points for Browse operations per session.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -556,10 +545,7 @@
         <Locale></Locale>
         <Text>MaxQueryContinuationPoints</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>The maximum number of continuation points for Query operations per session.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -623,10 +609,7 @@
         <Locale></Locale>
         <Text>MaxHistoryContinuationPoints</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>The maximum number of continuation points for ReadHistory operations per session.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -690,10 +673,7 @@
         <Locale></Locale>
         <Text>SoftwareCertificates</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>The software certificates owned by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -737,7 +717,9 @@
         <Identifier>i=344</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -757,10 +739,7 @@
         <Locale></Locale>
         <Text>ModellingRules</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A folder for the modelling rules supported by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -810,10 +789,7 @@
         <Locale></Locale>
         <Text>AggregateFunctions</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A folder for the real time aggregates supported by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -1027,15 +1003,6 @@
         </ReferenceNode>
         <ReferenceNode>
           <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=295</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
             <Identifier>i=37</Identifier>
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
@@ -1128,7 +1095,6 @@
                   </DataType>
                   <ValueRank>-1</ValueRank>
                   <ArrayDimensions />
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
                 </Argument>
               </Body>
             </ExtensionObject>
@@ -1144,7 +1110,6 @@
                   </DataType>
                   <ValueRank>-1</ValueRank>
                   <ArrayDimensions />
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
                 </Argument>
               </Body>
             </ExtensionObject>
@@ -1155,7 +1120,9 @@
         <Identifier>i=296</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -1225,7 +1192,6 @@
                   </DataType>
                   <ValueRank>-1</ValueRank>
                   <ArrayDimensions />
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
                 </Argument>
               </Body>
             </ExtensionObject>
@@ -1236,7 +1202,9 @@
         <Identifier>i=296</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -1263,15 +1231,6 @@
       <UserRolePermissions />
       <AccessRestrictions>0</AccessRestrictions>
       <References>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=303</Identifier>
-          </TargetId>
-        </ReferenceNode>
         <ReferenceNode>
           <ReferenceTypeId>
             <Identifier>i=46</Identifier>
@@ -1348,7 +1307,6 @@
                   </DataType>
                   <ValueRank>-1</ValueRank>
                   <ArrayDimensions />
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
                 </Argument>
               </Body>
             </ExtensionObject>
@@ -1364,7 +1322,6 @@
                   </DataType>
                   <ValueRank>-1</ValueRank>
                   <ArrayDimensions />
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
                 </Argument>
               </Body>
             </ExtensionObject>
@@ -1375,7 +1332,9 @@
         <Identifier>i=296</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -1436,7 +1395,6 @@
                   </DataType>
                   <ValueRank>-1</ValueRank>
                   <ArrayDimensions />
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
                 </Argument>
               </Body>
             </ExtensionObject>
@@ -1447,7 +1405,9 @@
         <Identifier>i=296</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -1485,15 +1445,6 @@
         </ReferenceNode>
         <ReferenceNode>
           <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=306</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
             <Identifier>i=37</Identifier>
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
@@ -1524,17 +1475,7 @@
       <RolePermissions />
       <UserRolePermissions />
       <AccessRestrictions>0</AccessRestrictions>
-      <References>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=307</Identifier>
-          </TargetId>
-        </ReferenceNode>
-      </References>
+      <References />
       <Executable>false</Executable>
       <UserExecutable>false</UserExecutable>
     </Node>
@@ -1647,10 +1588,7 @@
       </References>
       <Value>
         <Value>
-          <LocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
-            <Locale p2:nil="true" xmlns:p2="http://www.w3.org/2001/XMLSchema-instance" />
-            <Text p2:nil="true" xmlns:p2="http://www.w3.org/2001/XMLSchema-instance" />
-          </LocalizedText>
+          <LocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd" />
         </Value>
       </Value>
       <DataType>
@@ -1732,15 +1670,6 @@
           <IsInverse>true</IsInverse>
           <TargetId>
             <Identifier>ns=1;i=310</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=295</Identifier>
           </TargetId>
         </ReferenceNode>
         <ReferenceNode>
@@ -1837,7 +1766,6 @@
                   </DataType>
                   <ValueRank>-1</ValueRank>
                   <ArrayDimensions />
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
                 </Argument>
               </Body>
             </ExtensionObject>
@@ -1853,7 +1781,6 @@
                   </DataType>
                   <ValueRank>-1</ValueRank>
                   <ArrayDimensions />
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
                 </Argument>
               </Body>
             </ExtensionObject>
@@ -1864,7 +1791,9 @@
         <Identifier>i=296</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -1934,7 +1863,6 @@
                   </DataType>
                   <ValueRank>-1</ValueRank>
                   <ArrayDimensions />
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
                 </Argument>
               </Body>
             </ExtensionObject>
@@ -1945,7 +1873,9 @@
         <Identifier>i=296</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -2123,10 +2053,7 @@
         <Locale></Locale>
         <Text>ServerArray</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>The list of server URIs used by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -2161,7 +2088,9 @@
         <Identifier>i=12</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>1000</MinimumSamplingInterval>
@@ -2181,10 +2110,7 @@
         <Locale></Locale>
         <Text>NamespaceArray</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>The list of namespace URIs used by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -2219,7 +2145,9 @@
         <Identifier>i=12</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>1000</MinimumSamplingInterval>
@@ -2239,10 +2167,7 @@
         <Locale></Locale>
         <Text>ServerStatus</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>The current status of the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3038,10 +2963,7 @@
       </References>
       <Value>
         <Value>
-          <LocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
-            <Locale p2:nil="true" xmlns:p2="http://www.w3.org/2001/XMLSchema-instance" />
-            <Text p2:nil="true" xmlns:p2="http://www.w3.org/2001/XMLSchema-instance" />
-          </LocalizedText>
+          <LocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd" />
         </Value>
       </Value>
       <DataType>
@@ -3068,10 +2990,7 @@
         <Locale></Locale>
         <Text>ServiceLevel</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A value indicating the level of service the server can provide. 255 indicates the best.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3126,10 +3045,7 @@
         <Locale></Locale>
         <Text>Auditing</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A flag indicating whether the server is currently generating audit events.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3184,10 +3100,7 @@
         <Locale></Locale>
         <Text>ServerCapabilities</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>Describes capabilities supported by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3309,10 +3222,7 @@
         <Locale></Locale>
         <Text>ServerProfileArray</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A list of profiles supported by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3347,7 +3257,9 @@
         <Identifier>i=12</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -3367,10 +3279,7 @@
         <Locale></Locale>
         <Text>LocaleIdArray</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A list of locales supported by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3405,7 +3314,9 @@
         <Identifier>i=295</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -3425,10 +3336,7 @@
         <Locale></Locale>
         <Text>MinSupportedSampleRate</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>The minimum sampling interval supported by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3483,10 +3391,7 @@
         <Locale></Locale>
         <Text>MaxBrowseContinuationPoints</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>The maximum number of continuation points for Browse operations per session.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3541,10 +3446,7 @@
         <Locale></Locale>
         <Text>MaxQueryContinuationPoints</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>The maximum number of continuation points for Query operations per session.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3599,10 +3501,7 @@
         <Locale></Locale>
         <Text>MaxHistoryContinuationPoints</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>The maximum number of continuation points for ReadHistory operations per session.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3657,10 +3556,7 @@
         <Locale></Locale>
         <Text>SoftwareCertificates</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>The software certificates owned by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3695,7 +3591,9 @@
         <Identifier>i=344</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -3715,10 +3613,7 @@
         <Locale></Locale>
         <Text>ModellingRules</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A folder for the modelling rules supported by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3759,10 +3654,7 @@
         <Locale></Locale>
         <Text>AggregateFunctions</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A folder for the real time aggregates supported by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3803,10 +3695,7 @@
         <Locale></Locale>
         <Text>ServerDiagnostics</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>Reports diagnostics about the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -3883,10 +3772,7 @@
         <Locale></Locale>
         <Text>ServerDiagnosticsSummary</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A summary of server level diagnostics.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -4709,10 +4595,7 @@
         <Locale></Locale>
         <Text>SubscriptionDiagnosticsArray</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A list of diagnostics for each active subscription.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -4747,7 +4630,9 @@
         <Identifier>i=874</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -4767,10 +4652,7 @@
         <Locale></Locale>
         <Text>SessionsDiagnosticsSummary</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A summary of session level diagnostics.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -4829,10 +4711,7 @@
         <Locale></Locale>
         <Text>SessionDiagnosticsArray</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A list of diagnostics for each active session.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -4867,7 +4746,9 @@
         <Identifier>i=865</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -4887,10 +4768,7 @@
         <Locale></Locale>
         <Text>SessionSecurityDiagnosticsArray</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>A list of security related diagnostics for each active session.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -4925,7 +4803,9 @@
         <Identifier>i=868</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -4945,10 +4825,7 @@
         <Locale></Locale>
         <Text>EnabledFlag</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>If TRUE the diagnostics collection is enabled.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -5003,10 +4880,7 @@
         <Locale></Locale>
         <Text>VendorServerInfo</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>Server information provided by the vendor.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -5047,10 +4921,7 @@
         <Locale></Locale>
         <Text>ServerRedundancy</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>Describes the redundancy capabilities of the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -5100,10 +4971,7 @@
         <Locale></Locale>
         <Text>RedundancySupport</Text>
       </DisplayName>
-      <Description>
-        <Locale></Locale>
-        <Text>Indicates what style of redundancy is supported by the server.</Text>
-      </Description>
+      <Description i:nil="true" />
       <WriteMask>0</WriteMask>
       <UserWriteMask>0</UserWriteMask>
       <RolePermissions />
@@ -5195,10 +5063,7 @@
       </References>
       <Value>
         <Value>
-          <LocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
-            <Locale p2:nil="true" xmlns:p2="http://www.w3.org/2001/XMLSchema-instance" />
-            <Text p2:nil="true" xmlns:p2="http://www.w3.org/2001/XMLSchema-instance" />
-          </LocalizedText>
+          <LocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd" />
         </Value>
       </Value>
       <DataType>
@@ -5371,15 +5236,6 @@
         </ReferenceNode>
         <ReferenceNode>
           <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=295</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
             <Identifier>i=46</Identifier>
           </ReferenceTypeId>
           <IsInverse>false</IsInverse>
@@ -5454,7 +5310,6 @@
                   </DataType>
                   <ValueRank>-1</ValueRank>
                   <ArrayDimensions />
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
                 </Argument>
               </Body>
             </ExtensionObject>
@@ -5470,7 +5325,6 @@
                   </DataType>
                   <ValueRank>-1</ValueRank>
                   <ArrayDimensions />
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
                 </Argument>
               </Body>
             </ExtensionObject>
@@ -5481,7 +5335,9 @@
         <Identifier>i=296</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -5542,7 +5398,6 @@
                   </DataType>
                   <ValueRank>-1</ValueRank>
                   <ArrayDimensions />
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
                 </Argument>
               </Body>
             </ExtensionObject>
@@ -5553,7 +5408,9 @@
         <Identifier>i=296</Identifier>
       </DataType>
       <ValueRank>1</ValueRank>
-      <ArrayDimensions />
+      <ArrayDimensions>
+        <UInt32>0</UInt32>
+      </ArrayDimensions>
       <AccessLevel>1</AccessLevel>
       <UserAccessLevel>1</UserAccessLevel>
       <MinimumSamplingInterval>0</MinimumSamplingInterval>
@@ -5587,15 +5444,6 @@
           <IsInverse>true</IsInverse>
           <TargetId>
             <Identifier>ns=1;i=413</Identifier>
-          </TargetId>
-        </ReferenceNode>
-        <ReferenceNode>
-          <ReferenceTypeId>
-            <Identifier>i=40</Identifier>
-          </ReferenceTypeId>
-          <IsInverse>false</IsInverse>
-          <TargetId>
-            <Identifier>ns=1;i=306</Identifier>
           </TargetId>
         </ReferenceNode>
       </References>

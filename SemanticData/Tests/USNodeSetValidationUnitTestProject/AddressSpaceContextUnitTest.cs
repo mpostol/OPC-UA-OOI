@@ -166,7 +166,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       TracedAddressSpaceContext _asp = new TracedAddressSpaceContext();
       IEnumerable<IUANodeContext> _returnValue = null;
       _asp.AddressSpaceContext.UTValidateAndExportModel(0, x => _returnValue = x);
-      Assert.AreEqual<int>(3909, (_returnValue.Count<IUANodeContext>()));
+      Assert.AreEqual<int>(4071, (_returnValue.Count<IUANodeContext>()));
       _asp.TestConsistency(0);
       _asp.AddressSpaceContext.UTValidateAndExportModel(1, x => _returnValue = x);
       Assert.AreEqual<int>(0, _returnValue.Count<IUANodeContext>());

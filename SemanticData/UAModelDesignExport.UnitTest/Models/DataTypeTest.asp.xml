@@ -1,24 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="XMLstylesheet"?>
-<ModelDesign xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" TargetVersion="" TargetPublicationDate="2021-02-21T00:00:00+01:00" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+<ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Prefix1="http://opcfoundation.org/UA/" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:Prefix3="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" TargetVersion="" TargetPublicationDate="2022-04-06T00:00:00+02:00" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
   <Namespaces>
-    <Namespace Name="Name0" Prefix="Prefix0" InternalPrefix="http://opcfoundation.org/UA/" XmlNamespace="http://opcfoundation.org/UA/" XmlPrefix="Prefix1" FilePath="" Version="1.04.8" PublicationDate="20.11.2020">http://opcfoundation.org/UA/</Namespace>
-    <Namespace Name="Name2" Prefix="Prefix2" InternalPrefix="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" XmlNamespace="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" XmlPrefix="Prefix3" FilePath="" PublicationDate="21.02.2021">http://cas.eu/UA/CommServer/UnitTests/DataTypeTest</Namespace>
+    <Namespace Name="Name0" Prefix="Prefix0" InternalPrefix="http://opcfoundation.org/UA/" XmlNamespace="http://opcfoundation.org/UA/" XmlPrefix="Prefix1" FilePath="" Version="v104" PublicationDate="15.09.2021">http://opcfoundation.org/UA/</Namespace>
+    <Namespace Name="Name2" Prefix="Prefix2" InternalPrefix="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" XmlNamespace="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" XmlPrefix="Prefix3" FilePath="" PublicationDate="06.04.2022">http://cas.eu/UA/CommServer/UnitTests/DataTypeTest</Namespace>
   </Namespaces>
-  <DataType xmlns:q1="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" SymbolicName="q1:AbstractEnumerationDataType" xmlns:q2="http://opcfoundation.org/UA/" BaseType="q2:Enumeration" IsAbstract="true">
+  <DataType SymbolicName="Prefix3:AbstractEnumerationDataType" BaseType="Prefix1:Enumeration" IsAbstract="true">
     <Children>
-      <Property SymbolicName="q2:EnumStrings" ModellingRule="Mandatory" DataType="q2:LocalizedText" ValueRank="Array">
+      <Property SymbolicName="Prefix1:EnumStrings" DataType="Prefix1:LocalizedText" ValueRank="Array" ArrayDimensions="0">
         <DefaultValue>
           <ListOfLocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
-            <LocalizedText>
-              <Locale></Locale>
-              <Text>Field1</Text>
-            </LocalizedText>
-            <LocalizedText>
-              <Locale></Locale>
-              <Text>Field2</Text>
-            </LocalizedText>
-          </ListOfLocalizedText>
+        <LocalizedText>
+          <Text>Field1</Text>
+        </LocalizedText>
+        <LocalizedText>
+          <Text>Field2</Text>
+        </LocalizedText>
+      </ListOfLocalizedText>
         </DefaultValue>
       </Property>
     </Children>
@@ -28,28 +26,26 @@
       <Field Name="Field2" Identifier="1" BitMask="" ArrayDimensions="" />
     </Fields>
   </DataType>
-  <DataType xmlns:q3="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" SymbolicName="q3:EnumerationDataType" BaseType="q3:AbstractEnumerationDataType">
+  <DataType SymbolicName="Prefix3:EnumerationDataType" BaseType="Prefix3:AbstractEnumerationDataType">
     <Description>Enumeration DataType derived from abstract type</Description>
     <Children>
-      <Property xmlns:q4="http://opcfoundation.org/UA/" SymbolicName="q4:EnumValues" ModellingRule="Mandatory" DataType="q4:EnumValueType" ValueRank="Array">
+      <Property SymbolicName="Prefix1:EnumValues" DataType="Prefix1:EnumValueType" ValueRank="Array" ArrayDimensions="0">
         <DefaultValue>
           <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
-            <ExtensionObject>
-              <TypeId>
-                <Identifier>i=7616</Identifier>
-              </TypeId>
-              <Body>
-                <EnumValueType>
-                  <Value>1</Value>
-                  <DisplayName>
-                    <Locale></Locale>
-                    <Text>Field3</Text>
-                  </DisplayName>
-                  <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
-                </EnumValueType>
-              </Body>
-            </ExtensionObject>
-          </ListOfExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=7616</Identifier>
+          </TypeId>
+          <Body>
+            <EnumValueType>
+              <Value>1</Value>
+              <DisplayName>
+                <Text>Field3</Text>
+              </DisplayName>
+            </EnumValueType>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
         </DefaultValue>
       </Property>
     </Children>
@@ -58,17 +54,17 @@
       <Field Name="Field3" Identifier="1" BitMask="" ArrayDimensions="" />
     </Fields>
   </DataType>
-  <DataType xmlns:q5="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" SymbolicName="q5:AbstractStructure" xmlns:q6="http://opcfoundation.org/UA/" BaseType="q6:Structure" IsAbstract="true">
+  <DataType SymbolicName="Prefix3:AbstractStructure" BaseType="Prefix1:Structure" IsAbstract="true">
     <Description>Abstract structure</Description>
     <ClassName />
     <Fields>
-      <Field Name="Number" BitMask="" DataType="q6:Number" ArrayDimensions="" />
+      <Field Name="Number" BitMask="" DataType="Prefix1:Number" ArrayDimensions="" />
     </Fields>
   </DataType>
-  <DataType xmlns:q7="http://cas.eu/UA/CommServer/UnitTests/DataTypeTest" SymbolicName="q7:DerivedStructure" BaseType="q7:AbstractStructure">
+  <DataType SymbolicName="Prefix3:DerivedStructure" BaseType="Prefix3:AbstractStructure">
     <ClassName />
     <Fields>
-      <Field Name="Number" BitMask="" xmlns:q8="http://opcfoundation.org/UA/" DataType="q8:Int32" ArrayDimensions="">
+      <Field Name="Number" BitMask="" DataType="Prefix1:Int32" ArrayDimensions="">
         <Description>Derived from Number</Description>
       </Field>
     </Fields>

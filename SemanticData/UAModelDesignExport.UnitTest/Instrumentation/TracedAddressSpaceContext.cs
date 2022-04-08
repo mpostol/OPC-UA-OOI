@@ -1,6 +1,6 @@
 ﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
@@ -50,13 +50,14 @@ namespace UAOOI.SemanticData.UAModelDesignExport.Instrumentation
     {
       Debug.WriteLine(traceMessage.ToString());
       if (traceMessage.BuildError.Focus == Focus.Diagnostic)
-        Errors++;
-      else
-        TraceList.Add(traceMessage);
+        return;
+      Errors++;
+      TraceList.Add(traceMessage);
     }
 
     public void TraceData(TraceEventType eventType, int id, object data)
     {
+      throw new NotImplementedException("It is intentionally not implemented");
       if ((eventType == TraceEventType.Verbose) || (eventType == TraceEventType.Information))
         Errors++;
       else

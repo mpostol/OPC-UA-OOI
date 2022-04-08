@@ -60,7 +60,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.AreEqual<int>(0, traceContext.TraceList.Count);
       traceContext.Clear();
       addressSpace.ValidateAndExportModel(new UriBuilder("http://tricycleTypeV1").Uri);
-      Assert.AreEqual<int>(1, traceContext.TraceList.Count);
+      Assert.AreEqual<int>(2, traceContext.TraceList.Count);
       IEnumerable<NodeFactoryBase> nodes = testingModelFixture.Export();
       Assert.AreEqual(3, nodes.Count<NodeFactoryBase>());
       Dictionary<string, NodeFactoryBase> nodesDictionary = nodes.ToDictionary<NodeFactoryBase, string>(x => x.SymbolicName.Name);
@@ -99,7 +99,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.AreEqual<int>(0, traceContext.TraceList.Count);
       traceContext.Clear();
       addressSpace.ValidateAndExportModel(new UriBuilder("http://tricycleTypeV1").Uri);
-      Assert.AreEqual<int>(4, traceContext.TraceList.Count);
+      Assert.AreEqual<int>(5, traceContext.TraceList.Count);
       IEnumerable<NodeFactoryBase> nodes = testingModelFixture.Export();
       Assert.AreEqual(22, nodes.Count<NodeFactoryBase>());
       Dictionary<string, NodeFactoryBase> nodesDictionary = nodes.ToDictionary<NodeFactoryBase, string>(x => x.SymbolicName.Name);

@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="XMLstylesheet"?>
-<ModelDesign xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" TargetVersion="" TargetPublicationDate="2021-02-21T00:00:00+01:00" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+<ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Prefix1="http://opcfoundation.org/UA/" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:Prefix3="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" TargetVersion="" TargetPublicationDate="2022-04-06T00:00:00+02:00" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
   <Namespaces>
-    <Namespace Name="Name0" Prefix="Prefix0" InternalPrefix="http://opcfoundation.org/UA/" XmlNamespace="http://opcfoundation.org/UA/" XmlPrefix="Prefix1" FilePath="" Version="1.04.8" PublicationDate="20.11.2020">http://opcfoundation.org/UA/</Namespace>
-    <Namespace Name="Name2" Prefix="Prefix2" InternalPrefix="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" XmlNamespace="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" XmlPrefix="Prefix3" FilePath="" PublicationDate="21.02.2021">http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest</Namespace>
+    <Namespace Name="Name0" Prefix="Prefix0" InternalPrefix="http://opcfoundation.org/UA/" XmlNamespace="http://opcfoundation.org/UA/" XmlPrefix="Prefix1" FilePath="" Version="v104" PublicationDate="15.09.2021">http://opcfoundation.org/UA/</Namespace>
+    <Namespace Name="Name2" Prefix="Prefix2" InternalPrefix="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" XmlNamespace="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" XmlPrefix="Prefix3" FilePath="" PublicationDate="06.04.2022">http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest</Namespace>
   </Namespaces>
-  <VariableType xmlns:q1="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" SymbolicName="q1:ComplexVariableType" xmlns:q2="http://opcfoundation.org/UA/" BaseType="q2:AnalogItemType">
+  <VariableType SymbolicName="Prefix3:ComplexVariableType" BaseType="Prefix1:AnalogItemType">
     <Children>
-      <Property SymbolicName="q2:EURange">
+      <Property SymbolicName="Prefix1:EURange">
         <DisplayName>NewDisplayName</DisplayName>
       </Property>
-      <Property SymbolicName="q1:VariableChild" ModellingRule="Mandatory" DataType="q2:Int32" AccessLevel="Write" />
+      <Property SymbolicName="Prefix3:VariableChild" ModellingRule="Mandatory" DataType="Prefix1:Int32" AccessLevel="Write" />
     </Children>
     <ClassName />
   </VariableType>
-  <VariableType xmlns:q3="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" SymbolicName="q3:ArrayVariableType" xmlns:q4="http://opcfoundation.org/UA/" DataType="q4:Int32" ValueRank="OneOrMoreDimensions" ArrayDimensions="0,0,0">
+  <VariableType SymbolicName="Prefix3:ArrayVariableType" DataType="Prefix1:Int32" ValueRank="OneOrMoreDimensions" ArrayDimensions="0,0,0">
     <ClassName />
   </VariableType>
-  <VariableType xmlns:q5="http://cas.eu/UA/CommServer/UnitTests/VariableTypeTest" SymbolicName="q5:SimpleVariableWithValueType" xmlns:q6="http://opcfoundation.org/UA/" DataType="q6:Int32">
+  <VariableType SymbolicName="Prefix3:SimpleVariableWithValueType" DataType="Prefix1:Int32">
     <ClassName />
     <DefaultValue>
       <Int32 xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">1</Int32>

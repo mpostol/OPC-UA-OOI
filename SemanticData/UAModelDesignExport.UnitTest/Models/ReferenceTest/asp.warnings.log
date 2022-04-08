@@ -1,0 +1,7 @@
+"AddressSpacePrototyping";Information;1637887218;;"Address Space Prototyping (asp.exe) Version 6.5.3.25316";;;;"2022-04-06T13:20:59.8292885Z";;
+"AddressSpacePrototyping";Information;1637887219;;"Copyright(c) 2022 Mariusz Postol";;;;"2022-04-06T13:20:59.8292885Z";;
+"UANodeSetValidation";Information;190380256;;"Entering ImportUANodeSet and starting model import form file ReferenceTest.NodeSet2.xml";;;;"2022-04-06T13:22:10.9430384Z";;
+"UANodeSetValidation";Information;856488909;;"Entering IAddressSpaceContext.ValidateAndExportModel - starting for the http://cas.eu/UA/CommServer/UnitTests/ReferenceTest namespace.";;;;"2022-04-06T13:22:10.9560339Z";;
+"UANodeSetValidation";Information;1606585634;;"Do Validator.ValidateExportModel - now the model contains 1 nodes";;;;"2022-04-06T13:22:10.9810352Z";;
+"UANodeSetValidation";Information;711552454;;"Finishing Validator.ValidateExportModel - the model contains 1 nodes and no errors/warnings reported";;;;"2022-04-06T13:22:10.9990342Z";;
+"UAModelDesignExport";Information;279330276;;"The ModelDesign XML has been saved to file ReferenceTest.asp.xml and decorated with the stylesheet XMLstylesheet";;;;"2022-04-06T13:22:11.1262138Z";;

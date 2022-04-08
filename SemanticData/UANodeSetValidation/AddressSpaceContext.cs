@@ -77,7 +77,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     //TODO IAddressSpaceContext.ImportUANodeSet(System.IO.FileInfo) returned result must be tested. #626
     Uri IAddressSpaceContext.ImportUANodeSet(UANodeSet model)
     {
-      m_TraceEvent.TraceData(TraceEventType.Verbose, 359517792, "Entering AddressSpaceContextService.ImportUANodeSet - importing from object model.");
+      m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage($"{359517792}, Entering {nameof(IAddressSpaceContext.ImportUANodeSet)} - importing from object model."));
       if (model == null)
         throw new ArgumentNullException("model", "the model cannot be null");
       return ImportNodeSet(model);
@@ -98,7 +98,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (document == null)
         throw new ArgumentNullException("model", "the model cannot be null");
-      m_TraceEvent.TraceData(TraceEventType.Information, 190380256, $"Entering {nameof(IAddressSpaceContext.ImportUANodeSet)} and starting model import form file {document.Name}");
+      m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage($"190380256, Entering {nameof(IAddressSpaceContext.ImportUANodeSet)} and starting model import form file {document.Name}"));
       if (!document.Exists)
         throw new FileNotFoundException("The imported file does not exist", document.FullName);
       UANodeSet _nodeSet = UANodeSet.ReadModelFile(document);
@@ -112,7 +112,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <exception cref="System.ArgumentOutOfRangeException">targetNamespace;Cannot find this namespace</exception>
     void IAddressSpaceContext.ValidateAndExportModel(Uri targetNamespace)
     {
-      m_TraceEvent.TraceData(TraceEventType.Information, 856488909, $"Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {targetNamespace} namespace.");
+      m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage($"{856488909}, Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {targetNamespace} namespace."));
       List<Uri> undefinedUriLists = new List<Uri>();
       if (!m_NamespaceTable.ValidateNamesapceTable(x => undefinedUriLists.Add(x)))
         foreach (Uri item in undefinedUriLists)
@@ -322,7 +322,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NodeCannotBeNull, $"the node {item.ToString()} is not defined in the UANodeSet model"));
       List<IUANodeBase> allNodesInConcern = (from _node in stubs where _node.UANode != null select _node).ToList<IUANodeBase>();
       List<IUANodeBase> nodes = (from _node in stubs where _node.UANode != null && (_node.UANode is UAType) select _node).ToList<IUANodeBase>();
-      m_TraceEvent.TraceData(TraceEventType.Verbose, 938023414, $"Selected {nodes.Count} types to be validated.");
+      m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage($"938023414, Selected {nodes.Count} types to be validated."));
       IUANodeBase _objects = TryGetUANodeContext(UAInformationModel.ObjectIds.ObjectsFolder);
       if (_objects is null)
         throw new ArgumentNullException("Cannot find ObjectsFolder in the standard information model");
@@ -330,7 +330,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                                                                                                      (x.TypeNode.NodeIdContext == ReferenceTypeIds.Organizes) &&
                                                                                                      (x.TargetNode.NodeIdContext.NamespaceIndex == nameSpaceIndex))
                                                                                                      .Select<UAReferenceContext, IUANodeContext>(x => x.TargetNode);
-      m_TraceEvent.TraceData(TraceEventType.Verbose, 863907859, $"Selected {_allInstances.Count<IUANodeContext>()} instances referenced by the ObjectsFolder to be validated.");
+      m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage($"863907859, Selected {_allInstances.Count<IUANodeContext>()} instances referenced by the ObjectsFolder to be validated."));
       nodes.AddRange(_allInstances);
       foreach (IModelTableEntry modelTableEntry in m_NamespaceTable.Models)
       {
@@ -341,8 +341,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       int nodesCount = nodes.Count;
       do
       {
-        string doMessage = $"Do Validator.ValidateExportModel - now the model contains {nodesCount} nodes";
-        m_TraceEvent.TraceData(TraceEventType.Information, 1606585634, doMessage);
+        string doMessage = $"1606585634, Do Validator.ValidateExportModel - now the model contains {nodesCount} nodes";
+        m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage(doMessage));
         NodesCollection embededNodes = new NodesCollection();
         foreach (IUANodeBase item in nodes)
         {
@@ -357,25 +357,26 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           }
         }
         //TODO The exported model doesn't contain all nodes #653
+        List<IUANodeBase> notReferencedNodes = embededNodes.Values.ToList<IUANodeBase>(); //.ToList<IUANodeContext>();
         nodes.Clear();// = embededNodes.ToList();
         nodesCount += nodes.Count;
       } while (nodes.Count > 0);
       string message = null;
-      foreach (IUANodeBase node in allNodesInConcern)
-      {
-        message = $"{1594962400} - Finishing Validator.ValidateExportModel - the {node} is not added to the exported model";
-        TraceMessage traceMessage = TraceMessage.DiagnosticTraceMessage(message);
-        m_TraceEvent.WriteTraceMessage(traceMessage);
-      }
+      //TODO The exported model doesn't contain all nodes #653 - uncomment and check all UT
+      //foreach (IUANodeBase node in allNodesInConcern)
+      //{
+      //  message = $"{1594962400} the {node} is not added to the exported model";
+      //  m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, message));
+      //}
       if (m_TraceEvent.Errors == 0)
       {
-        message = $"Finishing Validator.ValidateExportModel - the model contains {nodesCount} nodes and no errors/warnings reported";
-        m_TraceEvent.TraceData(TraceEventType.Information, 711552454, message);
+        message = $"711552454, Finishing Validator.ValidateExportModel - the model contains {nodesCount} nodes and no errors/warnings reported";
+        m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage(message));
       }
       else
       {
-        message = $"Finishing Validator.ValidateExportModel - the model contains {nodesCount} nodes and {m_TraceEvent.Errors} errors reported.";
-        m_TraceEvent.TraceData(TraceEventType.Warning, 226242104, message);
+        message = $"226242104, Finishing Validator.ValidateExportModel - the model contains {nodesCount} nodes and {m_TraceEvent.Errors} errors reported.";
+        m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, message));
       }
     }
 

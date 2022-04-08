@@ -41,6 +41,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
 
     public void TraceData(TraceEventType eventType, int id, object data)
     {
+      throw new NotImplementedException($"{nameof(TraceData)} must not be used");
       string message = $"TraceData eventType = {eventType}, id = {id}, {data}";
       Console.WriteLine(message);
       if (eventType == TraceEventType.Critical || eventType == TraceEventType.Error)
@@ -50,9 +51,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
     public void WriteTraceMessage(TraceMessage traceMessage)
     {
       Console.WriteLine(traceMessage.ToString());
+      if (traceMessage.BuildError.Focus == Focus.Diagnostic)
+        return;
       Errors++;
-      if (traceMessage.BuildError.Focus != Focus.Diagnostic)
-        TraceList.Add(traceMessage);
+      TraceList.Add(traceMessage);
     }
 
     #endregion IBuildErrorsHandling

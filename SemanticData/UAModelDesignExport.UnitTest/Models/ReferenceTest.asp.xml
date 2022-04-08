@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="XMLstylesheet"?>
-<ModelDesign xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" TargetVersion="" TargetPublicationDate="2021-02-21T00:00:00+01:00" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+<ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Prefix1="http://opcfoundation.org/UA/" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:Prefix3="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" TargetNamespace="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" TargetVersion="" TargetPublicationDate="2022-04-06T00:00:00+02:00" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
   <Namespaces>
-    <Namespace Name="Name0" Prefix="Prefix0" InternalPrefix="http://opcfoundation.org/UA/" XmlNamespace="http://opcfoundation.org/UA/" XmlPrefix="Prefix1" FilePath="" Version="1.04.8" PublicationDate="20.11.2020">http://opcfoundation.org/UA/</Namespace>
-    <Namespace Name="Name2" Prefix="Prefix2" InternalPrefix="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" XmlNamespace="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" XmlPrefix="Prefix3" FilePath="" PublicationDate="21.02.2021">http://cas.eu/UA/CommServer/UnitTests/ReferenceTest</Namespace>
+    <Namespace Name="Name0" Prefix="Prefix0" InternalPrefix="http://opcfoundation.org/UA/" XmlNamespace="http://opcfoundation.org/UA/" XmlPrefix="Prefix1" FilePath="" Version="v104" PublicationDate="15.09.2021">http://opcfoundation.org/UA/</Namespace>
+    <Namespace Name="Name2" Prefix="Prefix2" InternalPrefix="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" XmlNamespace="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" XmlPrefix="Prefix3" FilePath="" PublicationDate="06.04.2022">http://cas.eu/UA/CommServer/UnitTests/ReferenceTest</Namespace>
   </Namespaces>
-  <ReferenceType xmlns:q1="http://cas.eu/UA/CommServer/UnitTests/ReferenceTest" SymbolicName="q1:ReferenceTypeTest" xmlns:q2="http://opcfoundation.org/UA/" BaseType="q2:HasProperty">
+  <ReferenceType SymbolicName="Prefix3:ReferenceTypeTest" BaseType="Prefix1:HasProperty">
     <ClassName />
     <InverseName>FromSomwhere</InverseName>
   </ReferenceType>

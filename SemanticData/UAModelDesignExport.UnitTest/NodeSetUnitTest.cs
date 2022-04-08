@@ -71,7 +71,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       {
         ModelDesign _actual = addressSpace.CreateInstance(_testDataFileInfo, uri);
         CompareModelDesign(_expected, _actual);
-        Assert.AreEqual<int>(0, addressSpace.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+        Assert.AreEqual<int>(0, addressSpace.TraceList.Count);
         Assert.AreEqual<int>(3, _expected.Items.Length);
         CompareModelDesign(_expected, _actual);
       }
@@ -105,7 +105,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       {
         ModelDesign _actual = addressSpace.CreateInstance(_testDataFileInfo, uri);
         CompareModelDesign(_expected, _actual);
-        Assert.AreEqual<int>(0, addressSpace.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+        Assert.AreEqual<int>(0, addressSpace.TraceList.Count);
         Assert.AreEqual<int>(4, _expected.Items.Length);
         Assert.AreEqual<int>(4, _actual.Items.Length);
         CompareModelDesign(_expected, _actual);

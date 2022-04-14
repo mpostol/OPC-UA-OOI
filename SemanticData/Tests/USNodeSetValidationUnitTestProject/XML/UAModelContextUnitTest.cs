@@ -280,6 +280,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         AccessRestrictions = 0xC,
         ModelUri = modelUri,
         PublicationDate = DateTime.UtcNow.Date,
+        PublicationDateSpecified = true,  
         RequiredModel = null,
         RolePermissions = new XML.RolePermission[] { new XML.RolePermission() },
         Version = new Version(1, 0).ToString()

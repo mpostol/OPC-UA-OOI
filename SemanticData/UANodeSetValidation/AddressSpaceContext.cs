@@ -334,9 +334,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodes.AddRange(_allInstances);
       foreach (IModelTableEntry modelTableEntry in m_NamespaceTable.Models)
       {
-        string _publicationDate = modelTableEntry.PublicationDate.HasValue ? modelTableEntry.PublicationDate.Value.ToShortDateString() : DateTime.UtcNow.ToShortDateString();
-        string _version = modelTableEntry.Version;
-        InformationModelFactory.CreateNamespace(modelTableEntry.ModelUri.ToString(), _publicationDate, _version);
+        DateTime _publicationDate = modelTableEntry.PublicationDate.HasValue ? modelTableEntry.PublicationDate.Value : DateTime.UtcNow;
+        Version _version = modelTableEntry.Version;
+        InformationModelFactory.CreateNamespace(modelTableEntry.ModelUri, _publicationDate, _version);
       }
       int nodesCount = nodes.Count;
       do
@@ -356,26 +356,29 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, msg));
           }
         }
-        //TODO The exported model doesn't contain all nodes #653
         List<IUANodeBase> notReferencedNodes = embededNodes.Values.ToList<IUANodeBase>(); //.ToList<IUANodeContext>();
+        //foreach (IUANodeBase node in notReferencedNodes)
+        //{
+        //  string message = $"{514697109} the {node} is reported as orphan";
+        //  m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, message));
+        //}
         nodes.Clear();// = embededNodes.ToList();
         nodesCount += nodes.Count;
       } while (nodes.Count > 0);
-      string message = null;
       //TODO The exported model doesn't contain all nodes #653 - uncomment and check all UT
       //foreach (IUANodeBase node in allNodesInConcern)
       //{
-      //  message = $"{1594962400} the {node} is not added to the exported model";
+      //  string message = $"{1594962400} the {node} is not added to the exported model";
       //  m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, message));
       //}
       if (m_TraceEvent.Errors == 0)
       {
-        message = $"711552454, Finishing Validator.ValidateExportModel - the model contains {nodesCount} nodes and no errors/warnings reported";
+        string message = $"711552454, Finishing Validator.ValidateExportModel - the model contains {nodesCount} nodes and no errors/warnings reported";
         m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage(message));
       }
       else
       {
-        message = $"226242104, Finishing Validator.ValidateExportModel - the model contains {nodesCount} nodes and {m_TraceEvent.Errors} errors reported.";
+        string message = $"226242104, Finishing Validator.ValidateExportModel - the model contains {nodesCount} nodes and {m_TraceEvent.Errors} errors reported.";
         m_TraceEvent.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NonCategorized, message));
       }
     }

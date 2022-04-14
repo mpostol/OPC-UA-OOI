@@ -10,7 +10,7 @@ using System;
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
   /// <summary>
-  /// Interface IAddressSpaceURIRecalculate is used to recalculate indexes in the imported model
+  /// The INamespaceTable interface to decouple the code from implementation of the <see cref="NamespaceTable"/>.
   /// </summary>
   public interface INamespaceTable
   {

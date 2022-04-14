@@ -24,8 +24,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       IEnumerable<IModelTableEntry> models = _instance.Models;
       Assert.IsNotNull(models);
       List<IModelTableEntry> listOfExportedNamespaceTable = models.ToList<IModelTableEntry>();
+      Assert.AreEqual<byte>(0xC, listOfExportedNamespaceTable[0].AccessRestrictions);
       Assert.AreEqual<int>(1, listOfExportedNamespaceTable.Count);
       Assert.AreEqual<Uri>(new Uri("http://opcfoundation.org/UA/"), listOfExportedNamespaceTable[0].ModelUri);
+      Assert.IsTrue(listOfExportedNamespaceTable[0].PublicationDate.HasValue);
+      Assert.IsNotNull(listOfExportedNamespaceTable[0].RolePermissions);
+      Assert.AreEqual<int>(1, listOfExportedNamespaceTable[0].RolePermissions.Length);
+      Assert.AreEqual<int>(0, listOfExportedNamespaceTable[0].Version.CompareTo(new Version()));
     }
 
     [TestMethod]
@@ -104,6 +109,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         AccessRestrictions = 0xC,
         ModelUri = modelUri,
         PublicationDate = DateTime.UtcNow.Date,
+        PublicationDateSpecified = true,
         RequiredModel = null,
         RolePermissions = new XML.RolePermission[] { new XML.RolePermission() },
         Version = new Version(1, 0).ToString()

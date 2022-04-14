@@ -51,7 +51,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// Gets or sets the version. The version of the model defined in the UANodeSet. This is a human readable string and not intended for programmatic comparisons.
     /// </summary>
     /// <value>The version.</value>
-    string IModelTableEntry.Version => Version;
-
+    Version IModelTableEntry.Version
+    {
+      get
+      {
+        Version version = null;
+        System.Version.TryParse(this.Version, out version);
+        return version;
+      }
+    }
   }
 }

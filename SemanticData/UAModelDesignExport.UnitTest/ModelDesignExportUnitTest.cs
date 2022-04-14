@@ -8,11 +8,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using UAOOI.Common.Infrastructure.Diagnostic;
-using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
 
 namespace UAOOI.SemanticData.UAModelDesignExport
@@ -28,8 +26,8 @@ namespace UAOOI.SemanticData.UAModelDesignExport
       IModelDesignExport _exporter = ModelDesignExportAPI.GetModelDesignExport(mock.Object);
       string _filePath = "ConstructorTestMethodPtah.xml";
       IModelFactory _factory = _exporter.GetFactory();
-      _factory.CreateNamespace("NameSpace1", String.Empty, String.Empty);
-      _factory.CreateNamespace("NameSpace2", String.Empty, String.Empty);
+      _factory.CreateNamespace(new Uri("NameSpace1", UriKind.Relative), DateTime.UtcNow, null);
+      _factory.CreateNamespace(new Uri("NameSpace2", UriKind.Relative), DateTime.UtcNow, null);
       _exporter.ExportToXMLFile(_filePath);
       FileInfo _outputFile = new FileInfo(_filePath);
       Assert.IsTrue(_outputFile.Exists);

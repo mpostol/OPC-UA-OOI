@@ -28,7 +28,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #endregion Constructors
 
-    #region IAddressSpaceURIRecalculate
+    #region INamespaceTable
 
     /// <summary>
     /// Searches for an index that matches the <paramref name="URI" />, and returns the zero-based index of the first occurrence within the namespace table.
@@ -91,7 +91,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return modelsList.FindIndex(x => x.ModelUri == URI);
     }
 
-    #endregion IAddressSpaceURIRecalculate
+    #endregion INamespaceTable
 
     #region Public Members
 
@@ -134,12 +134,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         Version = modelTableEntry.Version;
       }
 
+      #region IModelTableEntry
+
       public byte AccessRestrictions { get; private set; } = 0xC;
       public Uri ModelUri { get; private set; }
       public DateTime? PublicationDate { get; private set; } = DateTime.UtcNow.Date;
       public IModelTableEntry[] RequiredModel { get; private set; }
       public IRolePermission[] RolePermissions { get; } = new XML.RolePermission[] { new XML.RolePermission() };
-      public string Version { get; } = new Version().ToString();
+      public Version Version { get; } = new Version();
+
+      #endregion IModelTableEntry
     }
 
     private List<IModelTableEntry> modelsList = new List<IModelTableEntry>();

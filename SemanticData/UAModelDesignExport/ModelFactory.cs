@@ -1,13 +1,14 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UAModelDesignExport.XML;
 using TraceMessage = UAOOI.SemanticData.BuildingErrorsHandling.TraceMessage;
@@ -33,25 +34,26 @@ namespace UAOOI.SemanticData.UAModelDesignExport
 
     //IModelFactory
     /// <summary>
-    /// Creates the namespace description for the provided uri.
+    /// Creates the namespace description for the provided <see cref="Uri"/>.
     /// </summary>
-    /// <param name="uri">The URI.</param>
-    /// <param name="publicationDate">The publication date - when the model was published. This value is used for comparisons if the Model is defined in multiple UANodeSet files.</param>
-    /// <param name="version">The version of the model defined in the UANodeSet. This is a human readable string and not intended for programmatic comparisons.</param>
+    /// <param name="uri">The <see cref="Uri"/>.</param>
+    /// <param name="publicationDate">The publication <seealso cref="DateTime"/>- when the model was published. This value is used for comparisons if the Model is defined in multiple files.</param>
+    /// <param name="version">The <seealso cref="Version"/> of the model. This is a human readable string and not intended for programmatic comparisons.</param>
     /// <remarks>The set of objects that the OPC Unified Architecture server makes available to clients is referred to as its Address Space. The namespace is provided to make the BrowseName unique in the Address Space.</remarks>
-    void IModelFactory.CreateNamespace(string uri, string publicationDate, string version)
+    void IModelFactory.CreateNamespace(Uri uri, DateTime? publicationDate, Version version)
     {
+      string uriString = uri == null ? string.Empty : uri.ToString();
       Namespace _new = new Namespace()
       {
         FilePath = string.Empty,
-        InternalPrefix = uri,
+        InternalPrefix = uriString,
         Name = string.Format("Name{0}", m_Count),
         Prefix = string.Format("Prefix{0}", m_Count++),
-        Value = uri,
-        XmlNamespace = uri,
+        Value = uriString,
+        XmlNamespace = uriString,
         XmlPrefix = string.Format("Prefix{0}", m_Count++),
-        PublicationDate = publicationDate,
-        Version = version
+        PublicationDate = publicationDate.HasValue ? XmlConvert.ToString(publicationDate.Value, XmlDateTimeSerializationMode.Utc): null,
+        Version = version == null ? String.Empty : version.ToString()
       };
       m_Namespaces.Add(_new);
     }

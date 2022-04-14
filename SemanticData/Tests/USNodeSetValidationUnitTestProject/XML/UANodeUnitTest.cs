@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -18,8 +18,30 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   public class UANodeUnitTest
   {
     [TestMethod]
+    public void ModelTableEntryTest()
+    {
+      ModelTableEntry item2Test = new ModelTableEntry()
+      {
+        AccessRestrictions = 0xC,
+        ModelUri = "http://www.commsvr.com/",
+        PublicationDate = DateTime.UtcNow.Date,
+        PublicationDateSpecified = false,
+        RequiredModel = null,
+        RolePermissions = null,
+        Version = "1.04"
+      };
+      IModelTableEntry itemToCheck = item2Test;
+      Assert.AreEqual<byte>(0xC, itemToCheck.AccessRestrictions);
+      Assert.IsTrue(itemToCheck.ModelUri == new Uri("http://www.commsvr.com/"));
+      Assert.IsFalse(itemToCheck.PublicationDate.HasValue);
+      Assert.ThrowsException<InvalidOperationException>(() => itemToCheck.PublicationDate.Value);
+      Assert.IsNull(itemToCheck.RequiredModel);
+      itemToCheck.Version.CompareTo(new Version(1, 4));
+    }
+
+    [TestMethod]
     [ExpectedException(typeof(NotImplementedException))]
-    public void UANodeEqualsTest()
+    public void UAReferenceTypeEqualsTest()
     {
       UAReferenceType _first = TestData.CreateUAReferenceType();
       UAReferenceType _second = TestData.CreateUAReferenceType();

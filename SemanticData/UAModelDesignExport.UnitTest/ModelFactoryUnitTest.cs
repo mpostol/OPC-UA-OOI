@@ -31,8 +31,9 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     {
       List<TraceMessage> _traceBuffer = new List<TraceMessage>();
       ModelFactory _instance = new ModelFactory(_message => _traceBuffer.Add(_message));
-      ((IModelFactory)_instance).CreateNamespace("NameSpace1", String.Empty, String.Empty);
-      ((IModelFactory)_instance).CreateNamespace("NameSpace2", String.Empty, String.Empty);
+      ((IModelFactory)_instance).CreateNamespace(new Uri("NameSpace1", UriKind.Relative), DateTime.UtcNow, null);
+      ((IModelFactory)_instance).CreateNamespace(new Uri("NameSpace2", UriKind.Relative), DateTime.UtcNow, null);
+
       ModelDesign _createdModel = _instance.Export();
       Assert.IsNotNull(_createdModel);
       Assert.IsNotNull(_createdModel.Items);
@@ -50,8 +51,8 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     {
       List<TraceMessage> _traceBuffer = new List<TraceMessage>();
       ModelFactory _instance = new ModelFactory(_message => _traceBuffer.Add(_message));
-      ((IModelFactory)_instance).CreateNamespace("NameSpace1", String.Empty, new Version(1, 0, 0).ToString());
-      ((IModelFactory)_instance).CreateNamespace("NameSpace2", String.Empty, new Version(1, 0, 0).ToString());
+      ((IModelFactory)_instance).CreateNamespace(new Uri("NameSpace1", UriKind.Relative), DateTime.UtcNow, new Version(1, 0, 0));
+      ((IModelFactory)_instance).CreateNamespace(new Uri("NameSpace2", UriKind.Relative), DateTime.UtcNow, new Version(1, 0, 0));
       ModelDesign model = _instance.Export();
       Assert.AreEqual<int>(2, model.Namespaces.Length);
       Assert.AreEqual<int>(0, _traceBuffer.Count);
@@ -64,8 +65,8 @@ namespace UAOOI.SemanticData.UAModelDesignExport
     {
       List<TraceMessage> _traceBuffer = new List<TraceMessage>();
       ModelFactory _instance = new ModelFactory(_message => _traceBuffer.Add(_message));
-      ((IModelFactory)_instance).CreateNamespace("NameSpace1", String.Empty, new Version(1, 0, 0).ToString());
-      ((IModelFactory)_instance).CreateNamespace("NameSpace2", String.Empty, new Version(1, 0, 0).ToString());
+      ((IModelFactory)_instance).CreateNamespace(new Uri("NameSpace1", UriKind.Relative), DateTime.UtcNow, new Version(1, 0, 0));
+      ((IModelFactory)_instance).CreateNamespace(new Uri("NameSpace2", UriKind.Relative), DateTime.UtcNow, new Version(1, 0, 0));
 
       IObjectInstanceFactory objectInstanceFactory = ((IModelFactory)_instance).AddNodeFactory<IObjectInstanceFactory>();
       objectInstanceFactory.SymbolicName = new XmlQualifiedName("objectInstanceFactory", "http://a.b.c");

@@ -34,6 +34,6 @@ using System.Xml;
 using System.Runtime.Serialization;
 using ;
 
-namespace ReferenceTest
+namespace ObjectTypeTest
 {
 }

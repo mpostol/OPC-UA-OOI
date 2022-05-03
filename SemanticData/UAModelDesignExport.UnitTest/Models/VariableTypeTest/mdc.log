@@ -1,0 +1,4 @@
+"ModelCompilerUI";Verbose;716624168;;"Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information ModelDesign Compiler (mdc.exe) Version: 3.0.0.16457";;;;;;
+"ModelCompilerUI";Verbose;716624169;;"Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information Copyright(c) 2022 Mariusz Postol";;;;;;
+"ModelCompilerUI";Verbose;499457465;;"Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information Started Compile with parameters compile -c VariableTypeTest.csv --d2 VariableTypeTest.xml --o2 VariableTypeTest --spec v104";;;;;;
+"ModelCompilerUI";Verbose;1560515041;;"Trace: Verbose, Error Focus:Diagnostic, ErrorID: P0-0003010000 Info: It is diagnostic information Execution time = 2s";;;;;;

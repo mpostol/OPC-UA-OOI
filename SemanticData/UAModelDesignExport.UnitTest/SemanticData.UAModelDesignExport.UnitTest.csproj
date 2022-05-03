@@ -84,6 +84,7 @@
     <Compile Include="UAResourcesUnitTestUnitTest.cs" />
     <None Include="app.config" />
     <None Include="Models\DataTypeTest\DataTypeTest.Classes.cs" />
+    <None Include="Models\GoNodeSet.cmd" />
     <None Include="Models\ObjectTypeTest\ObjectTypeTest.Classes.cs" />
     <None Include="Models\ReferenceTest\ReferenceTest.Classes.cs" />
     <None Include="Models\VariableTypeTest\VariableTypeTest.Classes.cs" />

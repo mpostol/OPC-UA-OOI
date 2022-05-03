@@ -32,8 +32,8 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       try
       {
         AssemblyName myAssembly = Assembly.GetExecutingAssembly().GetName();
-        program.AssemblyHeader = $"Address Space Prototyping (asp.exe) Version {myAssembly.Version}";
-        program.TraceSource.TraceData(TraceEventType.Information, 1637887218, program.AssemblyHeader);
+        string assemblyHeader = $"Address Space Prototyping (asp.exe) Version {myAssembly.Version}";
+        program.TraceSource.TraceData(TraceEventType.Information, 1637887218, assemblyHeader);
         program.TraceSource.TraceData(TraceEventType.Information, 1637887219, Copyright);
         program.Execute(args);
       }
@@ -102,7 +102,6 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
 
     #region private
 
-    private string AssemblyHeader = String.Empty;
     private ITraceSource TraceSource = new TraceSourceBase("AddressSpacePrototyping");
     private const string Copyright = "Copyright(c) 2022 Mariusz Postol";
     private bool Running = true;

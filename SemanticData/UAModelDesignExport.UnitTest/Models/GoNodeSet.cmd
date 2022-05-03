@@ -23,3 +23,4 @@ del %1\mdc.warnings.log /q
 "%1\%COMPILER%" compile --d2 "DataTypeTest.xml" -c "DataTypeTest.csv" --o2 "DataTypeTest"
 xcopy %1\mdc.log .\DataTypeTest\mdc.log /y /i
 xcopy %1\mdc.warnings.log .\DataTypeTest\mdc.warnings.log /y /i
+

@@ -48,7 +48,7 @@ The main functions of the compiler are:
 
 From the model developer point of view, the compilation process may be recognized as an obfuscation process making the result hard to read and modify.
 
-Available in the open source domain [OPCFoundation/UA-ModelCompiler][OPC.UA.ModelCompiler] tool is an example of this kind of tools. As the `Information Model` - an input for compilation process - it uses a set of XML files compliant with the `ModelDesign` schema.  In this case, the `Address Space Model` represents a variety of generated files including XML file compliant with the UANodeSet schema defined in [Part 6][OPC.UA.Part6] of the OPC UA specification. The main purpose of this specification is to provide a standard syntax that designers can use to formally represent their models in a form that can be read by a computer program. Unfortunately, this format is not well suited to be used directly by designers at the very beginning of the information model development and adoption stage. It is also worth stressing that `ModelDesign` schema - a foundation of the `Model Language` - is not formally defined by the OPC UA specification, so must be recognized as a proprietary solution.
+Available in the open source domain [OPC UA Information Model Compiler][OPC.UA.ModelCompiler] tool is an example of this kind of tools. As the `Information Model` - an input for compilation process - it uses a set of XML files compliant with the `ModelDesign` schema.  In this case, the `Address Space Model` represents a variety of generated files including XML file compliant with the UANodeSet schema defined in [Part 6][OPC.UA.Part6] of the OPC UA specification. The main purpose of this specification is to provide a standard syntax that designers can use to formally represent their models in a form that can be read by a computer program. Unfortunately, this format is not well suited to be used directly by designers at the very beginning of the information model development and adoption stage. It is also worth stressing that `ModelDesign` schema - a foundation of the `Model Language` - is not formally defined by the OPC UA specification, so must be recognized as a proprietary solution.
 
 Because UANodeSet is standardized it must be considered as the out-of-band interchange format of the models to leverage reusability. In any case that `Informal Model` and `Information Model` must be harmonized, the design process must return to a point where it is human-centric and based on the selected `Model Language`. In case an existing model expressed using standard description compliant with UANodeSet is to be reused a recovery process must be applied. It can be accomplished using `asp.exe` tool described in the document [*Address Space Prototyping Tool (ase.exe)*][ASEEXE].
 
@@ -68,11 +68,11 @@ In any case, we cannot avoid the `Information Model` design phase. It is the fir
 - [Information Models Development][IMD]
 - [Adopting Companion Standard Models - Analyzer Devices Integration][CSMADI]
 - [ReferenceApplication` Producer - Boilers Set Simulator][Boiler]
-- [OPCFoundation/UA-ModelCompiler][OPC.UA.ModelCompiler]
+- [OPC UA Information Model Compiler][OPC.UA.ModelCompiler]
 - [Address Space Prototyping Tool (ase.exe)][ASEEXE]
 
 [Opc.UA.Part6]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-6-mappings/
-[OPC.UA.ModelCompiler]:https://github.com/OPCFoundation/UA-ModelCompiler
+[OPC.UA.ModelCompiler]:https://github.com/mpostol/UA-ModelCompiler#opc-ua-information-model-compiler-
 [Opc.UA.Part4]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-4-services/
 [ASASM]:AddressSpaceAddressSpaceModel.md
 [IMConcept]:InformationModelConcept.md

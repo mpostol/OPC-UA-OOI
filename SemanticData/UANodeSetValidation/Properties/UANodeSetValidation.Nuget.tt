@@ -4,7 +4,9 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id><#=m_AssemblyTitle#></id>
-    <version><#= SemanticDataUANodeSetValidationVersion #><#= SemanticDataUANodeSetValidationPrerelease #></version>
+    <version>
+      <#= SemanticDataUANodeSetValidationVersion #><#= SemanticDataUANodeSetValidationPrerelease #>
+    </version>
     <title>Semantic-Data UANodeSet Validation</title>
     <authors><#=Authors#></authors>
     <owners><#=Owner#></owners>

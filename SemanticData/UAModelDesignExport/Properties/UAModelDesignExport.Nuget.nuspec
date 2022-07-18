@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>UAOOI.SemanticData.UAModelDesignExport</id>
-    <version>6.5.5-November</version>
+    <version>6.5.6-Oscar</version>
     <title>Semantic-Data UAModelDesign Export</title>
     <authors>Mariusz Postol</authors>
     <owners>Mariusz Postol</owners>

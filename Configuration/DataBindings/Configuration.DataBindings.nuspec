@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>UAOOI.Configuration.DataBindings</id>
-    <version>6.4.8</version>
+    <version>6.4.9</version>
     <title>Object Oriented Internet Common Infrastructure</title>
     <authors>Mariusz Postol</authors>
     <owners>Mariusz Postol</owners>

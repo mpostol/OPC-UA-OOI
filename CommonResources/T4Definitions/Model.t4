@@ -11,41 +11,41 @@ string Url = "https://github.com/mpostol/OPC-UA-OOI";
 string Email = "mpostol@cas.eu";
 string Phone = "+48 608 619 899";
 string Owner = "Mariusz Postol";
-string RepositoryVersion = "6.5.5"; //increment on the same position as the group version
-string RepositoryVersionPrerelease = "-November"; //increment on the same position as the group version
+string RepositoryVersion = "6.5.6"; //increment on the same position as the group version
+string RepositoryVersionPrerelease = "-Oscar"; //increment on the same position as the group version
 string Authors = "Mariusz Postol";
 string IconURLTag = "https://github.com/mpostol/OPC-UA-OOI/blob/master/CommonResources/Media/Logo64.PNG?raw=true";
 
 //UAOOI.Common
-string CommonVersion = "6.4.8";
+string CommonVersion = "6.4.9";
 string CommonPrerelease = "";
 
 //UAOOI.DataDiscovery
 string DataDiscoveryTitle = "UAOOI.DataDiscovery";
-string DataDiscoveryVersion = "4.0.2";
+string DataDiscoveryVersion = "4.0.3";
 string DataDiscoveryPrerelease = "";
 string DataDiscoveryProduct = "Object Oriented Internet";
 
 //UAOOI.SemanticData
-string SemanticDataVersion = "6.5.5";
-string SemanticDataPrerelease = "-November";
+string SemanticDataVersion = "6.5.6";
+string SemanticDataPrerelease = "-Oscar";
 string SemanticDataProduct = "Object Oriented Internet";
 
 //UAOOI.SemanticData.UANodeSetValidation
-string SemanticDataUANodeSetValidationVersion = "6.5.5";
-string SemanticDataUANodeSetValidationPrerelease = "-https://github.com/mpostol/OPC-UA-OOI.git";
+string SemanticDataUANodeSetValidationVersion = "6.5.6";
+string SemanticDataUANodeSetValidationPrerelease = "-Oscar";
 
 //UAOOI.SemanticData.UAModelDesignExport
-string SemanticDataUAModelDesignExportVersion = "6.5.5";
-string SemanticDataUAModelDesignExportPrerelease = "-November";
+string SemanticDataUAModelDesignExportVersion = "6.5.6";
+string SemanticDataUAModelDesignExportPrerelease = "-Oscar";
 
 //UAOOI.Configuration
-string ConfigurationVersion = "6.4.8";
+string ConfigurationVersion = "6.4.9";
 string ConfigurationPrerelease = "";
 string ConfigurationProduct = "Object Oriented Internet";
 
 //UAOOI.Networking
-string NetworkingDataVersion = "4.0.1";
+string NetworkingDataVersion = "4.0.2";
 string NetworkingDataPrerelease = "";
 string NetworkingDataProduct = "Object Oriented Internet";
 

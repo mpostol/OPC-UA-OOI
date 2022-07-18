@@ -2,7 +2,9 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>UAOOI.SemanticData.UANodeSetValidation</id>
-    <version>6.5.5-https://github.com/mpostol/OPC-UA-OOI.git</version>
+    <version>
+      6.5.6-Oscar
+    </version>
     <title>Semantic-Data UANodeSet Validation</title>
     <authors>Mariusz Postol</authors>
     <owners>Mariusz Postol</owners>

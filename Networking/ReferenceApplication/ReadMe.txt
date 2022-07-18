@@ -7,8 +7,8 @@ Assembly Company:       Mariusz Postol
 Assembly Product:       Object Oriented Internet
 Assembly Copyright:     Copyright (C) 2022 Mariusz Postol LODZ POLAND
 Assembly Trademark:     Object Oriented Internet
-Assembly Version:       4.0.1
-Assembly Date:          08.04.2022
+Assembly Version:       4.0.2
+Assembly Date:          7/18/2022
 
 The main changes and new functionalities are listed below:
 

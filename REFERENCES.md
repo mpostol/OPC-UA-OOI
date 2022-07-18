@@ -141,9 +141,9 @@
 
 [OPC.UA.ADI]:https://opcfoundation.org/developer-tools/specifications-opc-ua-information-models/opc-unified-architecture-for-analyzer-devices-adi/
 
-- [OPCFoundation/UA-ModelCompiler][OPC.UA.ModelCompiler]
+- [mpostol/UA-ModelCompiler][OPC.UA.ModelCompiler]
 
-[OPC.UA.ModelCompiler]:https://github.com/OPCFoundation/UA-ModelCompiler
+[OPC.UA.ModelCompiler]:https://github.com/mpostol/UA-ModelCompiler
 
 ## OASIS
 

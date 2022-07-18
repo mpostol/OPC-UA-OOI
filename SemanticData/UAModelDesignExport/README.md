@@ -71,9 +71,9 @@ A more detailed description of this topic is captured in the section [Address Sp
 
 In the next sections, two tools supporting the OPC UA Information Model deployment process are described. Both use the `UAModelDesign` files format as the input for further processing.
 
-### OPC Foundation UA-ModelCompiler
+### UA-ModelCompiler
 
-XML documents compliant with the `UAModelDesign` schema may be used as the input for the compiler tool [`OPC Foundation UA-ModelCompiler`](https://github.com/OPCFoundation/UA-ModelCompiler). This compiler generates XML files that may be used to instantiate the UA Address Space complaint wit the [OPC UA Part 3][Opc.UA.Part3]. It also creates the C# and ANSI C source code files which include the UA Services, data-types, error codes, etc.; and variety of the CSV files that contain NodeIds, error codes, and attributes, etc. Visit the above-mentioned home page of this tool to learn more. It is command-line tools and doesn't provide any UA Information Model design functionality.
+XML documents compliant with the `UAModelDesign` schema may be used as the input for the compiler tool [OPC UA Information Model Compiler][OPC.UA.ModelCompiler]. This compiler generates XML files that may be used to instantiate the UA Address Space complaint wit the [OPC UA Part 3][Opc.UA.Part3]. It also creates the C# and ANSI C source code files which include the UA Services, data-types, error codes, etc.; and variety of the CSV files that contain NodeIds, error codes, and attributes, etc. Visit the above-mentioned home page of this tool to learn more. It is command-line tools and doesn't provide any UA Information Model design functionality.
 
 ### Address Space Model Designer
 
@@ -149,7 +149,7 @@ This library is available as the NuGet package `UAOOI.SemanticData.UAModelDesign
 
 - [Index of /UA/schemas/1.04](https://opcfoundation.org/UA/schemas/1.04/)
 - [UAModelDesignExport](https://github.com/mpostol/OPC-UA-OOI/tree/master/SemanticData/UAModelDesignExport)
-- [UA-ModelCompiler](https://github.com/OPCFoundation/UA-ModelCompiler)
+- [OPC UA Information Model Compiler][OPC.UA.ModelCompiler]
 
 # TODO
 
@@ -179,3 +179,4 @@ This library is available as the NuGet package `UAOOI.SemanticData.UAModelDesign
 [Opc.UA.Part6]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-6-mappings/
 [Opc.UA.Part4]:https://opcfoundation.org/developer-tools/specifications-unified-architecture/part-4-services/
 [DDSupport]:../../SemanticData/DesignDeploymentSupport.md
+[OPC.UA.ModelCompiler]:https://github.com/mpostol/UA-ModelCompiler#opc-ua-information-model-compiler-

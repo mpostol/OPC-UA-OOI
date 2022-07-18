@@ -6,7 +6,7 @@ The **OPC UA Address Space Prototyping** (asp.exe) is an engineering tool and ca
 
 - creates `UA Address Space` populated using input XML files compliant with the `UANodeSet` schema defined in Part 6 Annex F.
 - validates an instance of the `UA Address Space` against the OPC UA specification 1.04.
-- exports XML file compliant with the `ModelDesign` schema that may be used as the input for the [OPCFoundation/UA-ModelCompiler][OPCFoundation/UA-ModelCompiler].
+- exports XML file compliant with the `ModelDesign` schema that may be used as the input for the [OPC UA Information Model Compiler][OPC.UA.ModelCompiler].
 
 These instructions will get you a copy of the software up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
@@ -148,27 +148,17 @@ This software is licensed under the MIT License - see the [LICENSE.md][LICENSE.m
 - [OPC UA Makes Complex Data Processing Possible][wordpress.OPCUACD]
 - [OPC UA Address Space Model Designer][CAS.ASMD]
 - [XSLT Introduction][XSLT Introduction]
-- [OPCFoundation/UA-ModelCompiler] - `ModelCompiler` converts XML files into C# and ANSI C
+- [OPC UA Information Model Compiler][OPC.UA.ModelCompiler]
 - [How to contribute][CONTRIBUTING.md]
 
 [CAS.OPCUAIMD]: https://zenodo.org/record/2586616#.XdAT5FdKiUk
-
 [wordpress.opc-ua]: https://mpostol.wordpress.com/opc-ua/
-
 [wordpress.OPCUAMTF]: https://mpostol.wordpress.com/2013/08/04/opc-unified-architecture-main-technological-features/
-
-[wordpress.OPCUACD]:https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/
-
-[LICENSE.md]:https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md
-
-[CONTRIBUTING.md]:https://github.com/mpostol/OPC-UA-OOI/blob/master/CONTRIBUTING.md
-
-[OPC-UA-OOI]:https://github.com/mpostol/OPC-UA-OOI
-
-[OOI.Releases]:https://github.com/mpostol/OPC-UA-OOI/releases
-
+[wordpress.OPCUACD]: https://mpostol.wordpress.com/2014/05/08/opc-ua-makes-complex-data-access-possible/
+[LICENSE.md]: https://github.com/mpostol/OPC-UA-OOI/blob/master/license.md
+[CONTRIBUTING.md]: https://github.com/mpostol/OPC-UA-OOI/blob/master/CONTRIBUTING.md
+[OPC-UA-OOI]: https://github.com/mpostol/OPC-UA-OOI
+[OOI.Releases]: https://github.com/mpostol/OPC-UA-OOI/releases
 [CAS.ASMD]: https://github.com/mpostol/ASMD
-
-[OPCFoundation/UA-ModelCompiler]:https://github.com/OPCFoundation/UA-ModelCompiler
-
-[XSLT Introduction]:https://www.w3schools.com/xml/xsl_intro.asp
+[OPC.UA.ModelCompiler]: https://github.com/mpostol/UA-ModelCompiler#opc-ua-information-model-compiler-
+[XSLT Introduction]: https://www.w3schools.com/xml/xsl_intro.asp

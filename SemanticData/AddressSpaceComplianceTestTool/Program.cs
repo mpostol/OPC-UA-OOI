@@ -13,10 +13,10 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using UAOOI.Common.Infrastructure.Diagnostic;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
 using UAOOI.SemanticData.UAModelDesignExport;
 using UAOOI.SemanticData.UANodeSetValidation;
-using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.AddressSpacePrototyping
 {

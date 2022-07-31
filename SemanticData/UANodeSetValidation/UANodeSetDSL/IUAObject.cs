@@ -5,9 +5,9 @@
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
 
-namespace UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL
+namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
-  public interface IUAObject: IUAInstance
+  public interface IUAObject : IUAInstance
   {
     byte EventNotifier { get; set; }
   }

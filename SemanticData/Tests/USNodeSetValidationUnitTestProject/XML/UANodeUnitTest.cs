@@ -8,6 +8,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers;

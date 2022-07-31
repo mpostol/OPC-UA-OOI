@@ -7,8 +7,8 @@
 
 using System;
 using System.Collections.Generic;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
-using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {

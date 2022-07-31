@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
@@ -134,7 +135,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       if (namespaceUris is null || namespaceUris.Length == 0)
       {
         namespaceUris = new string[] { RandomUri().ToString() };
-        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NamespaceUrisCannotBeNull, $"Added a random URI { namespaceUris[0] } to NamespaceUris."));
+        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NamespaceUrisCannotBeNull, $"Added a random URI {namespaceUris[0]} to NamespaceUris."));
       }
       for (int i = 0; i < namespaceUris.Length; i++)
         list2Return.Add(namespaceUris[i]);

@@ -9,12 +9,12 @@ using System;
 using System.IO;
 using System.Reflection;
 using UAOOI.Common.Infrastructure.Serializers;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
-using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  public partial class UANodeSet :IUANodeSet, IUANodeSetModelHeader 
+  public partial class UANodeSet : IUANodeSet, IUANodeSetModelHeader
   {
     #region API
 

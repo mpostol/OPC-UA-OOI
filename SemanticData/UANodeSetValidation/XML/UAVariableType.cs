@@ -6,9 +6,9 @@
 //__________________________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
-using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {

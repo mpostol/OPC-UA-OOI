@@ -8,7 +8,7 @@
 using System.Xml;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL
+namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
   /// <summary>
   /// Interface IUAVariableType - In the OPC UA Address Space the Variable NodeClass is used to provide a value, which may be simple or complex.

@@ -8,9 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
-using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {

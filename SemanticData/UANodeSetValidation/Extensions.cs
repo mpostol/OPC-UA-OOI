@@ -14,11 +14,11 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 using UAOOI.Common.Infrastructure.Serializers;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
-using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {

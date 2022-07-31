@@ -5,7 +5,7 @@
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
 
-using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {

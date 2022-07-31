@@ -7,7 +7,7 @@
 
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL
+namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
   /// <summary>
   /// Interface IUAMethod representing a Method in the Information Model. Methods are lightweight functions, whose scope is bounded by an owning object,
@@ -69,7 +69,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL
     public string Name { set; get; }
 
     /// <remarks/>
-
+    //TODO Define independent Address Space API #645 - move the LocalizedText definition to OPCUA.Common
     public LocalizedText[] Description { set; get; }
   }
 }

@@ -7,9 +7,8 @@
 
 using System;
 using UAOOI.SemanticData.InformationModelFactory;
-using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
   /// <summary>
   /// Interface IAddressSpaceContext - represents a service used to buildup OPc UA Address Space

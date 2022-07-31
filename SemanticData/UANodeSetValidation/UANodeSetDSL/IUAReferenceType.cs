@@ -7,7 +7,7 @@
 
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL
+namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
   public interface IUAReferenceType : IUAType
   {

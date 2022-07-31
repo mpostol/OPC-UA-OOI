@@ -1,6 +1,6 @@
 ﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
@@ -10,6 +10,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
@@ -280,7 +281,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         AccessRestrictions = 0xC,
         ModelUri = modelUri,
         PublicationDate = DateTime.UtcNow.Date,
-        PublicationDateSpecified = true,  
+        PublicationDateSpecified = true,
         RequiredModel = null,
         RolePermissions = new XML.RolePermission[] { new XML.RolePermission() },
         Version = new Version(1, 0).ToString()

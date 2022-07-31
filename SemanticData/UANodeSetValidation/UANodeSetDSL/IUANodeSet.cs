@@ -7,9 +7,10 @@
 
 using System;
 using System.Xml;
+//TODO Define independent Address Space API #645 - this dependency must be removed
 using UAOOI.SemanticData.BuildingErrorsHandling;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL
+namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
   public interface IUANodeSet
   {

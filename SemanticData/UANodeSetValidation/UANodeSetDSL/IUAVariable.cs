@@ -8,7 +8,7 @@
 using System.Xml;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL
+namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
   internal interface IUAVariable : IUAInstance
   {

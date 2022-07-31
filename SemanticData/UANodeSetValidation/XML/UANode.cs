@@ -6,9 +6,9 @@
 //__________________________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
-using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 using OOIReleaseStatus = UAOOI.SemanticData.InformationModelFactory.ReleaseStatus;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
@@ -54,6 +54,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     #endregion IEquatable
 
     //TODO Define independent Address Space API #645 LocalizedText conversion must be implemented.
+
     #region IUANode
 
     public NodeId NodeIdNodeId { get; private set; }

@@ -1,6 +1,6 @@
 ﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
@@ -13,9 +13,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using UAOOI.Common.Infrastructure.Diagnostic;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
 using UAOOI.SemanticData.InformationModelFactory;
-using UAOOI.SemanticData.UANodeSetValidation;
 using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.AddressSpacePrototyping
@@ -39,6 +39,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       programInstance.GetTraceSource(x => currentLogger = x);
       Assert.IsNotNull(currentLogger);
     }
+
     [TestMethod]
     public async Task EmptyArgsTest()
     {

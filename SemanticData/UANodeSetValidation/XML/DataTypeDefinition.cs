@@ -6,16 +6,16 @@
 //__________________________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
-using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   public partial class DataTypeDefinition : IDataTypeDefinition
   {
-    IDataTypeField[] IDataTypeDefinition.Field 
-    { 
-      get => this.Field; 
+    IDataTypeField[] IDataTypeDefinition.Field
+    {
+      get => this.Field;
     }
 
     internal void RecalculateNodeIds(Func<string, NodeId> importNodeId)

@@ -7,11 +7,12 @@
 
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL
+namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
   public interface IReference
   {
     bool IsForward { get; set; }
+    //TODO Define independent Address Space API #645 move NodeId definition to the OPCUA.Common
     NodeId ReferenceTypeNodeid { get; }
     NodeId ValueNodeId { get; }
   }

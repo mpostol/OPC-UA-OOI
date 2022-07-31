@@ -8,7 +8,7 @@
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL
+namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
   /// <summary>
   /// Interface INodeFactory -  a base type that defines a set of fields representing attributes and references of any node in the Address Space.

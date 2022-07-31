@@ -7,9 +7,9 @@
 
 using System;
 using System.Collections.Generic;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
-using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
@@ -28,16 +28,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     internal NodeId MethodDeclarationNodeId { get; private set; }
 
-    UANodeSetDSL.UAMethodArgument[] IUAMethod.ArgumentDescription
+    AddressSpace.Abstractions.UAMethodArgument[] IUAMethod.ArgumentDescription
     {
       get
       {
         if (this.ArgumentDescription == null)
           return null;
-        List<UANodeSetDSL.UAMethodArgument> retValu = new List<UANodeSetDSL.UAMethodArgument>();
+        List<AddressSpace.Abstractions.UAMethodArgument> retValu = new List<AddressSpace.Abstractions.UAMethodArgument>();
         foreach (UAMethodArgument item in this.ArgumentDescription)
         {
-          UANodeSetDSL.UAMethodArgument newItem = new UANodeSetDSL.UAMethodArgument() { Name = item.Name };
+          AddressSpace.Abstractions.UAMethodArgument newItem = new AddressSpace.Abstractions.UAMethodArgument() { Name = item.Name };
           if (item.Description == null)
             continue;
           List<DataSerialization.LocalizedText> descriptionList = new List<DataSerialization.LocalizedText>();

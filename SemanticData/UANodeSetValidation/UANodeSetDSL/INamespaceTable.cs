@@ -7,7 +7,7 @@
 
 using System;
 
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
   /// <summary>
   /// The INamespaceTable interface to decouple the code from implementation of the <see cref="NamespaceTable"/>.

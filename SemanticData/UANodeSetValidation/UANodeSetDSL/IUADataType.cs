@@ -5,9 +5,10 @@
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
 
+//TODO Define independent Address Space API #645 - Remove dependency on InformationModelFactory
 using UAOOI.SemanticData.InformationModelFactory;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL
+namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
   public interface IUADataType : IUAType
   {

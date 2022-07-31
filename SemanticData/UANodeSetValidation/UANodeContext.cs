@@ -14,7 +14,7 @@ using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
-using UAOOI.SemanticData.UANodeSetValidation.XML;
+using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -76,7 +76,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="node">The node <see cref="UANode" /> containing definition to be added to the model.</param>
     /// <param name="addReference">Used to add new reference to the common collection of references.</param>
     /// <exception cref="ArgumentException">node - Argument must not be null</exception>
-    public void Update(UANode node, Action<UAReferenceContext> addReference)
+    public void Update(IUANode node, Action<UAReferenceContext> addReference)
     {
       if (node == null)
         throw new ArgumentException(nameof(node), $"Argument must not be null at {nameof(Update)} ");
@@ -88,7 +88,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UANode = node;
       if (node.References == null)
         return;
-      foreach (Reference _reference in node.References)
+      foreach (IReference _reference in node.References)
       {
         UAReferenceContext _newReference = new UAReferenceContext(_reference, this.m_AddressSpaceContext, this);
         switch (_newReference.ReferenceKind)
@@ -229,7 +229,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       RemoveDerivedChildren(nodeFactory, allNodesInConcern, validator, validateExportNode2Model, _children);
     }
 
-    private void RemoveDerivedChildren(INodeFactory nodeFactory, List<IUANodeBase> allNodesInConcern, IValidator validator, Action<IUANodeContext> validateExportNode2Model, List<UAReferenceContext> children)
+    private void RemoveDerivedChildren(INodeFactory nodeFactory, List<IUANodeBase> allNodesInConcern, IValidator validator, Action<IUANodeContext> validateExportNode2Model,
+                                       List<UAReferenceContext> children)
     {
       Dictionary<IUANodeBase, UAReferenceContext> referencedChildren = children.ToDictionary<UAReferenceContext, IUANodeBase>(x => x.TargetNode);
       NodesCollection derivedChildren = m_BaseTypeNode == null ? new NodesCollection() : m_BaseTypeNode.GetDerivedInstances();
@@ -255,7 +256,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the instance of <see cref="UANode" /> of this context source
     /// </summary>
     /// <value>The source UA node from the model.</value>
-    public UANode UANode { get; private set; } = null;
+    public IUANode UANode { get; private set; } = null;
 
     /// <summary>
     /// Gets the node identifier.
@@ -275,7 +276,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>An instance of <see cref="XmlQualifiedName" /> encapsulating the base type name.</returns>
     public XmlQualifiedName ExportBaseTypeBrowseName()
     {
-      bool type = UANode is UAType;
+      bool type = UANode is IUAType;
       return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type));
     }
 

@@ -5,22 +5,13 @@
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
 
-using System;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
-using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
-namespace UAOOI.SemanticData.UANodeSetValidation.XML
+namespace UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL
 {
-  /// <summary>
-  /// Class RolePermission.
-  /// </summary>
-  public partial class RolePermission : IRolePermission
+  public interface IUAReferenceType : IUAType
   {
-    internal void RecalculateNodeIds(Func<string, NodeId> importNodeId)
-    {
-      ValueNodeId = importNodeId(Value);
-    }
-
-    internal NodeId ValueNodeId { get; private set; }
+    LocalizedText[] InverseName { get; }
+    bool Symmetric { get; set; }
   }
 }

@@ -13,7 +13,7 @@ using System.Xml;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
-using UAOOI.SemanticData.UANodeSetValidation.XML;
+using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   {
     #region constructor
 
-    internal UAReferenceContext(Reference reference, IAddressSpaceBuildContext addressSpaceContext, IUANodeContext parentNode)
+    internal UAReferenceContext(IReference reference, IAddressSpaceBuildContext addressSpaceContext, IUANodeContext parentNode)
     {
       if (reference == null)
         throw new ArgumentNullException(nameof(reference));

@@ -16,6 +16,7 @@ using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
 using UAOOI.SemanticData.UAModelDesignExport;
 using UAOOI.SemanticData.UANodeSetValidation;
+using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.AddressSpacePrototyping
 {
@@ -60,7 +61,13 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       }
     }
 
-    internal void Do(Options options, IAddressSpaceContext addressSpace)
+    private void DoValidateAndExportModel(Options options)
+    {
+      IAddressSpaceContext addressSpace = AddressSpaceFactory.AddressSpace();
+      DoValidateAndExportModel(options, addressSpace);
+    }
+
+    internal void DoValidateAndExportModel(Options options, IAddressSpaceContext addressSpace)
     {
       IModelDesignExport exporter = ModelDesignExportAPI.GetModelDesignExport(); //creates new instance of the ModelDesignExport class that captures functionality supporting export of the OPC UA Information Model represented
                                                                                  //by an XML file compliant with UAModelDesign schema.
@@ -75,6 +82,10 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       if (string.IsNullOrEmpty(options.IMNamespace))
         throw new ArgumentOutOfRangeException("namespace", "A namespace must be provided to validate associated model");
       Uri uri = new Uri(options.IMNamespace);
+      //m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting creation the OPC UA Address Space."));
+      IUANodeSet _standard = UANodeSetValidation.XML.UANodeSet.ReadUADefinedTypes();
+      //m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage("Address Space - the OPC UA defined has been uploaded."));
+      addressSpace.ImportUANodeSet(_standard);
       foreach (string _path in options.Filenames)
       {
         FileInfo _fileToRead = new FileInfo(_path);
@@ -85,7 +96,8 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
           throw new FileNotFoundException(message, _path);
         }
         TraceSource.TraceData(TraceEventType.Verbose, 1637887216, $"Importing UANodeSet document from file {_fileToRead.FullName}");
-        addressSpace.ImportUANodeSet(_fileToRead);
+        IUANodeSet nodeSet = UANodeSetValidation.XML.UANodeSet.ReadModelFile(_fileToRead);
+        addressSpace.ImportUANodeSet(nodeSet);
       }
       TraceSource.TraceData(TraceEventType.Verbose, 1637887217, $"Validating and exporting a model from namespace {uri}");
       addressSpace.ValidateAndExportModel(uri); //Validates and exports the selected model.
@@ -147,6 +159,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       }
     }
 
+    //TODO
     private void Do(Options options)
     {
       PrintLogo(options.NoLogo);
@@ -154,8 +167,13 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       //TODO Integrate with the UA-ModelCompiler #648
       if (true)
       {
-        IAddressSpaceContext addressSpace = AddressSpaceFactory.AddressSpace;  //Creates Address Space infrastructure exposed to the API clients using default messages handler.
-        Do(options, addressSpace);
+        //TODO Define independent Address Space API #645
+        ////m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting creation the OPC UA Address Space."));
+        //IUANodeSet _standard = UANodeSetValidation.XML.UANodeSet.ReadUADefinedTypes();
+        ////m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage("Address Space - the OPC UA defined has been uploaded."));
+        //IAddressSpaceContext addressSpace = AddressSpaceFactory.AddressSpace();
+        //addressSpace.ImportUANodeSet(_standard);
+        DoValidateAndExportModel(options); //, addressSpace);
       }
       else
         ;

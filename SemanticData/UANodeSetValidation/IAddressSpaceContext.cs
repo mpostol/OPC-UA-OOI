@@ -6,9 +6,8 @@
 //__________________________________________________________________________________________________
 
 using System;
-using System.IO;
 using UAOOI.SemanticData.InformationModelFactory;
-using UAOOI.SemanticData.UANodeSetValidation.XML;
+using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -19,12 +18,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   public interface IAddressSpaceContext
   {
     /// <summary>
-    /// Imports all OPC UA Address Space models contained in the <see cref="UANodeSet" /> XML document, and populates internal OPC UA Address Space.
+    /// Imports all OPC UA Address Space models contained in the <see cref="IUANodeSet" /> XML document, and populates internal OPC UA Address Space.
     /// </summary>
     /// <param name="model">The model to be imported.</param>
-    /// <returns>Return a default <see cref="Uri"/> for the model defined in <see cref="UANodeSet"/>.</returns>
-    //TODO Define independent Address Space API #645 - remove dependency on UANodeSet
-    Uri ImportUANodeSet(UANodeSet model);
+    /// <returns>Return a default <see cref="Uri"/> for the model defined in <see cref="IUANodeSet"/>.</returns>
+    Uri ImportUANodeSet(IUANodeSet model);
 
     /// <summary>
     /// Imports all OPC UA Address Space models contained in the file <paramref name="document"/> described by the <see cref="FileInfo"/>, and populates internal OPC UA Address Space.
@@ -34,7 +32,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </remarks>
     /// <param name="document">The UANodeSet document to be imported, and described by the <see cref="FileInfo"/>.</param>
     /// <returns>Return a default <see cref="Uri"/> for the model defined in a file represented by <see cref="FileInfo"/></returns>
-    Uri ImportUANodeSet(FileInfo document);
+    //Uri ImportUANodeSet(FileInfo document, Func<FileInfo, IUANodeSet> readModelFile);
 
     /// <summary>
     /// Sets the information model factory, which can be used to export a part of the OPC UA Address Space using a selected language. If not set or set to null an internal stub implementation will be used.

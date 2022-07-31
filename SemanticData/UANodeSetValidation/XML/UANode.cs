@@ -8,6 +8,8 @@
 using System;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
+using OOIReleaseStatus = UAOOI.SemanticData.InformationModelFactory.ReleaseStatus;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
@@ -16,7 +18,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   /// Implements the <see cref="IEquatable{UANode}"/>
   /// </summary>
   /// <seealso cref="IEquatable{UANode}" />
-  public abstract partial class UANode : IEquatable<UANode>
+  public abstract partial class UANode : IEquatable<IUANode>, IUANode
   {
     #region IEquatable
 
@@ -25,7 +27,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// </summary>
     /// <param name="other">An object to compare with this object.</param>
     /// <returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
-    public virtual bool Equals(UANode other)
+    public virtual bool Equals(IUANode other)
     {
       if (object.ReferenceEquals(other, null))
         return false;
@@ -33,43 +35,37 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         return true;
       if (other.GetType() != this.GetType())
         return false;
+      IUANode thisNode = this;
       return
         ParentEquals(other) &&
-        this.AccessRestrictions == other.AccessRestrictions &&
-        this.BrowseNameQualifiedName.Equals(other.BrowseNameQualifiedName) &&
-        this.Description.LocalizedTextArraysEqual(other.Description) &&
-        this.DisplayName.LocalizedTextArraysEqual(other.DisplayName) &&
-        this.Documentation.AreEqual(other.Documentation) &&
-        this.ReleaseStatus == ReleaseStatus &&
-        this.RolePermissions.RolePermissionsEquals(other.RolePermissions) &&
-        this.SymbolicName.AreEqual(other.SymbolicName) &&
-        this.UserWriteMask == other.UserWriteMask &&
-        this.WriteMask == other.WriteMask &&
-        this.References.ReferencesEquals(other.References);
+        thisNode.AccessRestrictions == other.AccessRestrictions &&
+        thisNode.BrowseNameQualifiedName.Equals(other.BrowseNameQualifiedName) &&
+        thisNode.Description.LocalizedTextArraysEqual(other.Description) &&
+        thisNode.DisplayName.LocalizedTextArraysEqual(other.DisplayName) &&
+        thisNode.Documentation.AreEqual(other.Documentation) &&
+        thisNode.ReleaseStatus == other.ReleaseStatus &&
+        thisNode.RolePermissions.RolePermissionsEquals(other.RolePermissions) &&
+        thisNode.SymbolicName.AreEqual(other.SymbolicName) &&
+        thisNode.UserWriteMask == other.UserWriteMask &&
+        thisNode.WriteMask == other.WriteMask &&
+        thisNode.References.ReferencesEquals(other.References);
     }
 
     #endregion IEquatable
 
-    #region API
+    //TODO Define independent Address Space API #645 LocalizedText conversion must be implemented.
+    #region IUANode
 
-    internal QualifiedName BrowseNameQualifiedName { get; private set; }
-    internal NodeId NodeIdNodeId { get; private set; }
+    public NodeId NodeIdNodeId { get; private set; }
+    public QualifiedName BrowseNameQualifiedName { get; private set; }
+    IReference[] IUANode.References { get => References; }
 
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>UANode.</returns>
-    public virtual UANode Clone()
-    {
-      return ParentClone();
-    }
-
-    internal virtual void RemoveInheritedValues(UANode baseNode)
+    public virtual void RemoveInheritedValues(IUANode baseNode)
     {
       //BrowseName
-      if (this.DisplayName.LocalizedTextArraysEqual(baseNode.DisplayName))
+      if (((IUANode)this).DisplayName.LocalizedTextArraysEqual(baseNode.DisplayName))
         this.DisplayName = null;
-      if (this.Description.LocalizedTextArraysEqual(baseNode.Description))
+      if (((IUANode)this).Description.LocalizedTextArraysEqual(baseNode.Description))
         this.Description = null;
       //Category
       //References
@@ -83,6 +79,52 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       //AccessRestrictions
       //SymbolicName is not inherited
       //ReleaseStatus
+    }
+
+    OOIReleaseStatus IUANode.ReleaseStatus
+    {
+      get
+      {
+        OOIReleaseStatus retValue = default(OOIReleaseStatus);
+        switch (this.ReleaseStatus)
+        {
+          case ReleaseStatus.Released:
+            retValue = OOIReleaseStatus.Released;
+            break;
+
+          case ReleaseStatus.Draft:
+            retValue = OOIReleaseStatus.Draft;
+            break;
+
+          case ReleaseStatus.Deprecated:
+            retValue = OOIReleaseStatus.Deprecated;
+            break;
+
+          default:
+            break;
+        }
+        return retValue;
+      }
+      set { throw new NotImplementedException(); }
+    }
+
+    DataSerialization.LocalizedText[] IUANode.DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    DataSerialization.LocalizedText[] IUANode.Description { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    IRolePermission[] IUANode.RolePermissions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    //public uint WriteAccess { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    #endregion IUANode
+
+    #region API
+
+    /// <summary>
+    /// Clones this instance.
+    /// </summary>
+    /// <returns>UANode.</returns>
+    public virtual UANode Clone()
+    {
+      return ParentClone();
     }
 
     /// <summary>
@@ -115,7 +157,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// Gets the node class enum based on the type of this instance.
     /// </summary>
     /// <value>The node class enum.</value>
-    internal NodeClassEnum NodeClassEnum
+    public NodeClassEnum NodeClassEnum
     {
       get
       {
@@ -208,11 +250,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     }
 
     /// <summary>
-    /// Indicates whether the the inherited parent object is also equal to another object.
+    /// Indicates whether the inherited parent object is also equal to another object.
     /// </summary>
     /// <param name="other">An object to compare with this object.</param>
     /// <returns><c>true</c> if the current object is equal to the <paramref name="other">other</paramref>; otherwise,, <c>false</c> otherwise.</returns>
-    protected abstract bool ParentEquals(UANode other);
+    protected abstract bool ParentEquals(IUANode other);
 
     /// <summary>
     /// Get the clone from the types derived from this one.

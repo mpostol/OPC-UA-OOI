@@ -1,16 +1,17 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  public partial class Reference : IEquatable<Reference>
+  public partial class Reference : IEquatable<Reference>, IReference
   {
     /// <summary>
     /// Indicates whether the current object is equal to another object of the same type.
@@ -37,7 +38,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       ValueNodeId = importNodeId(Value);
     }
 
-    internal NodeId ReferenceTypeNodeid { get; private set; }
-    internal NodeId ValueNodeId { get; private set; }
+    #region IReference
+
+    public NodeId ReferenceTypeNodeid { get; private set; }
+    public NodeId ValueNodeId { get; private set; }
+
+    #endregion IReference
   }
 }

@@ -14,6 +14,8 @@ using System.Linq;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.Helpers;
 using UAOOI.SemanticData.UANodeSetValidation.ModelFactoryTestingFixture;
+using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
+using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -26,9 +28,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ProblemsToReport\ADI#509\Opc.Ua.Adi.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext();
       IAddressSpaceContext addressSpace = traceContext.AddressSpaceContext;
-      addressSpace.ImportUANodeSet(_testDataFileInfo);
+      addressSpace.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(1, traceContext.TraceList.Count);
       Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, traceContext.TraceList[0].BuildError.Identifier);
       traceContext.Clear();
@@ -52,11 +55,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ProblemsToReport\BrowseNameInheritedFrom0\BrowseNameInheritedFrom0.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext();
       IAddressSpaceContext addressSpace = traceContext.AddressSpaceContext;
       ModelFactoryTestingFixture.InformationModelFactoryBase testingModelFixture = new InformationModelFactoryBase();
       addressSpace.InformationModelFactory = testingModelFixture;
-      addressSpace.ImportUANodeSet(_testDataFileInfo);
+      addressSpace.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(0, traceContext.TraceList.Count);
       traceContext.Clear();
       addressSpace.ValidateAndExportModel(new UriBuilder("http://tricycleTypeV1").Uri);
@@ -91,11 +95,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ProblemsToReport\eoursel510\Opc.Ua.NodeSet2.TriCycleType_V1.1.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext();
       IAddressSpaceContext addressSpace = traceContext.AddressSpaceContext;
       ModelFactoryTestingFixture.InformationModelFactoryBase testingModelFixture = new InformationModelFactoryBase();
       addressSpace.InformationModelFactory = testingModelFixture;
-      addressSpace.ImportUANodeSet(_testDataFileInfo);
+      addressSpace.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(0, traceContext.TraceList.Count);
       traceContext.Clear();
       addressSpace.ValidateAndExportModel(new UriBuilder("http://tricycleTypeV1").Uri);
@@ -130,9 +135,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ProblemsToReport\fgolra177\Opc.Ua.Semi.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext();
       IAddressSpaceContext addressSpace = traceContext.AddressSpaceContext;
-      addressSpace.ImportUANodeSet(_testDataFileInfo);
+      addressSpace.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(0, traceContext.TraceList.Count);
       traceContext.Clear();
       addressSpace.ValidateAndExportModel(new UriBuilder("https://agileo-automation.com/UA/Semi/").Uri);
@@ -144,9 +150,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ProblemsToReport\HasOrderedComponent\Opc.Ua.NodeSet2.TriCycleType_V1.1.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext();
       IAddressSpaceContext addressSpace = traceContext.AddressSpaceContext;
-      addressSpace.ImportUANodeSet(_testDataFileInfo);
+      addressSpace.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(0, traceContext.TraceList.Count);
       traceContext.Clear();
       addressSpace.ValidateAndExportModel(new UriBuilder("http://tricycleTypeV1").Uri);
@@ -158,9 +165,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ProblemsToReport\MachineVision\Opc.Ua.MachineVision.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext traceContext = new TracedAddressSpaceContext();
       IAddressSpaceContext addressSpace = traceContext.AddressSpaceContext;
-      addressSpace.ImportUANodeSet(_testDataFileInfo);
+      addressSpace.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(0, traceContext.TraceList.Count);
       traceContext.Clear();
       addressSpace.ValidateAndExportModel(new UriBuilder("http://opcfoundation.org/UA/MachineVision").Uri);

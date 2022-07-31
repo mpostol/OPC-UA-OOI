@@ -6,12 +6,12 @@
 //__________________________________________________________________________________________________
 
 using System;
-using UAOOI.SemanticData.UANodeSetValidation.XML;
+using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
   /// <summary>
-  /// Interface IModelTableEntry - instance of this interface is defined in the <see cref="UANodeSet"/>
+  /// Interface IModelTableEntry - instance of this interface is defined in the <see cref="IUANodeSet"/>
   /// along with any dependencies these models have.
   /// </summary>
   public interface IModelTableEntry

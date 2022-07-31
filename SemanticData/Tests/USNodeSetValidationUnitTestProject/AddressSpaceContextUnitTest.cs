@@ -90,10 +90,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UANodeSet _ns = null;
       Assert.ThrowsException<ArgumentNullException>(() => _as.ImportUANodeSet(_ns));
       FileInfo _fi = null;
-      Assert.ThrowsException<ArgumentNullException>(() => _as.ImportUANodeSet(_fi));
+      Assert.ThrowsException<ArgumentNullException>(() => UANodeSet.ReadModelFile(_fi));
       _fi = new FileInfo("NotExistingFileName.xml");
       Assert.IsFalse(_fi.Exists);
-      Assert.ThrowsException<FileNotFoundException>(() => _as.ImportUANodeSet(_fi));
+      Assert.ThrowsException<FileNotFoundException>(() => UANodeSet.ReadModelFile(_fi));
     }
 
     [TestMethod]

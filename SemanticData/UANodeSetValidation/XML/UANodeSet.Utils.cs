@@ -10,14 +10,15 @@ using System.IO;
 using System.Reflection;
 using UAOOI.Common.Infrastructure.Serializers;
 using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  public partial class UANodeSet : IUANodeSetModelHeader
+  public partial class UANodeSet :IUANodeSet, IUANodeSetModelHeader 
   {
     #region API
 
-    internal Uri ParseUAModelContext(INamespaceTable addressSpaceContext, Action<TraceMessage> traceEvent)
+    public Uri ParseUAModelContext(INamespaceTable addressSpaceContext, Action<TraceMessage> traceEvent)
     {
       UAModelContext model = UAModelContext.ParseUANodeSetModelHeader(this, addressSpaceContext, traceEvent);
       this.RecalculateNodeIds(model, traceEvent);
@@ -28,7 +29,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     #region static helpers
 
-    internal static UANodeSet ReadUADefinedTypes()
+    public static UANodeSet ReadUADefinedTypes()
     {
       Assembly assembly = Assembly.GetExecutingAssembly();
       UANodeSet uaDefinedTypes = null;
@@ -41,7 +42,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return uaDefinedTypes;
     }
 
-    internal static UANodeSet ReadModelFile(FileInfo path)
+    public static UANodeSet ReadModelFile(FileInfo path)
     {
       using (Stream stream = path.OpenRead())
         return XmlFile.ReadXmlFile<UANodeSet>(stream);
@@ -52,6 +53,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     #region private
 
     private const string m_UADefinedTypesName = @"UAOOI.SemanticData.UANodeSetValidation.XML.Opc.Ua.NodeSet2.xml"; //OPC UA standard NodeSet model resource folder.
+
+    IUANode[] IUANodeSet.Items { get => Items; }
 
     private void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {

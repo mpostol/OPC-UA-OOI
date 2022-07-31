@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.Helpers;
+using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -26,10 +27,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongEventNotifier.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      Assert.IsNotNull(_as);
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(1, _log.TraceList.Count());
       Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
       _log.Clear();
@@ -45,10 +46,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongReference2Property.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      Assert.IsNotNull(_as);
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(1, _log.TraceList.Count());
       _log.Clear();
       _as.ValidateAndExportModel(m_NameSpace);
@@ -64,11 +65,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongValueRank.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      Assert.IsNotNull(_as);
-      Assert.IsNotNull(_as);
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(1, _log.TraceList.Count);
       _log.Clear();
       _as.ValidateAndExportModel(m_NameSpace);
@@ -86,9 +86,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongAccessLevel.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(1, _log.TraceList.Count());
       Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
       _log.Clear();
@@ -104,9 +105,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongInverseName.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(1, _log.TraceList.Count());
       Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
       _log.Clear();
@@ -124,9 +126,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\DuplicatedNodeId.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(2, _log.TraceList.Count());
       Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
       Assert.AreEqual<string>(BuildError.NodeIdDuplicated.Identifier, _log.TraceList[1].BuildError.Identifier);
@@ -141,9 +144,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongDisplayNameLength.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(1, _log.TraceList.Count());
       Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
       _log.Clear();
@@ -159,9 +163,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongWriteMask.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(1, _log.TraceList.Count());
       Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
       _log.Clear();
@@ -178,9 +183,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\NotSupportedFeature.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(1, _log.TraceList.Count());
       Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
       _log.Clear();
@@ -194,9 +200,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongBrowseName.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(2, _log.TraceList.Count());
       Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
       Assert.AreEqual<string>(BuildError.EmptyBrowseName.Identifier, _log.TraceList[1].BuildError.Identifier);
@@ -213,9 +220,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongNodeId.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(1, _log.TraceList.Count());
       Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
       _log.Clear();
@@ -231,9 +239,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasSubtype.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       //Assert.AreEqual<int>(1, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
       Assert.AreEqual<int>(1, _log.TraceList.Count());
       Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
@@ -250,9 +259,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasTypeDefinition.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(1, _log.TraceList.Count());
       Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
       _log.Clear();
@@ -270,9 +280,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasChildren.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = XML.UANodeSet.ReadModelFile(_testDataFileInfo);
       TracedAddressSpaceContext _log = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = _log.AddressSpaceContext;
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(iUANodeSet);
       Assert.AreEqual<int>(1, _log.TraceList.Count());
       Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
       _log.Clear();

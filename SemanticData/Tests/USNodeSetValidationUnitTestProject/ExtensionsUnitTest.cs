@@ -6,6 +6,7 @@
 //___________________________________________________________________________________
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -22,14 +23,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestMethod]
     public void LocalizedTextArraysEqualTest()
     {
-      XML.LocalizedText[] _first = null;
+      LocalizedText[] _first = null;
       Assert.IsTrue(_first.LocalizedTextArraysEqual(_first));
-      Assert.IsFalse(_first.LocalizedTextArraysEqual(new XML.LocalizedText[] { }));
-      Assert.IsFalse((new XML.LocalizedText[] { }).LocalizedTextArraysEqual(null));
-      _first = new XML.LocalizedText[] { };
-      Assert.IsTrue(_first.LocalizedTextArraysEqual(new XML.LocalizedText[] { }));
-      _first = new XML.LocalizedText[] { new XML.LocalizedText() { Locale = "Locale1", Value = "Value1" }, new XML.LocalizedText() { Locale = "Locale2", Value = "Value2" } };
-      Assert.IsTrue(_first.LocalizedTextArraysEqual(new XML.LocalizedText[] { new XML.LocalizedText() { Locale = "Locale2", Value = "Value2" }, new XML.LocalizedText() { Locale = "Locale1", Value = "Value1" } }));
+      Assert.IsFalse(_first.LocalizedTextArraysEqual(new LocalizedText[] { }));
+      Assert.IsFalse((new LocalizedText[] { }).LocalizedTextArraysEqual(null));
+      _first = new LocalizedText[] { };
+      Assert.IsTrue(_first.LocalizedTextArraysEqual(new LocalizedText[] { }));
+      _first = new LocalizedText[] { new LocalizedText() { Locale = "Locale1", Text = "Value1" }, new LocalizedText() { Locale = "Locale2", Text = "Value2" } };
+      Assert.IsTrue(_first.LocalizedTextArraysEqual(new LocalizedText[] { new LocalizedText() { Locale = "Locale2", Text = "Value2" }, new LocalizedText() { Locale = "Locale1", Text = "Value1" } }));
     }
     [TestMethod]
     public void RolePermissionsEqualsTest()

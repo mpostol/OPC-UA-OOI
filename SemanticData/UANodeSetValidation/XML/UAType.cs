@@ -6,6 +6,7 @@
 //___________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.UANodeSetValidation.UANodeSetDSL;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
@@ -14,7 +15,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   /// Implements the <see cref="UANode" />
   /// </summary>
   /// <seealso cref="UANode" />
-  public abstract partial class UAType
+  public abstract partial class UAType: IUAType
   {
     /// <summary>
     /// Indicates whether the inherited parent object is also equal to another object.
@@ -22,7 +23,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// <param name="other">An object to compare with this object.</param>
     /// <returns><c>true</c> if the current object is equal to the <paramref name="other">other</paramref>; otherwise,, <c>false</c> otherwise.</returns>
     /// <exception cref="NotImplementedException">Intentionally not implemented</exception>
-    protected override bool ParentEquals(UANode other)
+    protected override bool ParentEquals(IUANode other)
     {
       throw new NotImplementedException("Intentionally not implemented");
     }

@@ -30,10 +30,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       FileInfo _testDataFileInfo = new FileInfo(@"CorrectModels\ReferenceTest\ReferenceTest.NodeSet.xml");  //File not compliant with the schema.
       Assert.IsTrue(_testDataFileInfo.Exists);
+      UANodeSet instance = UANodeSet.ReadModelFile(_testDataFileInfo);
       List<TraceMessage> _trace = new List<TraceMessage>();
       Mock<Diagnostic.IBuildErrorsHandling> mockTrace = new Mock<Diagnostic.IBuildErrorsHandling>();
       IAddressSpaceContext _as = new AddressSpaceContext(mockTrace.Object);
-      _as.ImportUANodeSet(_testDataFileInfo);
+      _as.ImportUANodeSet(instance);
     }
 
     [TestMethod]
@@ -92,7 +93,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       TracedAddressSpaceContext tracedAddressSpaceContext = new TracedAddressSpaceContext();
       IAddressSpaceContext _as = tracedAddressSpaceContext.AddressSpaceContext;
       tracedAddressSpaceContext.Clear();
-      _as.ImportUANodeSet(testDataFileInfo);
+      UANodeSet instance = UANodeSet.ReadModelFile(testDataFileInfo);
+      _as.ImportUANodeSet(instance);
       Assert.AreEqual<int>(0, tracedAddressSpaceContext.TraceList.Count);
       ((AddressSpaceContext)_as).UTAddressSpaceCheckConsistency(x => { Assert.Fail(); });
       ((AddressSpaceContext)_as).UTReferencesCheckConsistency((x, y, z, v) => Assert.Fail());

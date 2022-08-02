@@ -33,36 +33,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// </summary>
     /// <param name="traceEvent">Encapsulates an action to trace the progress and validation issues.</param>
     /// <exception cref="ArgumentNullException">traceEvent - traceEvent - cannot be null</exception>
-    public AddressSpaceContext(IBuildErrorsHandling traceEvent)//, Func<IUANodeSet> ReadUADefinedTypes)
+    internal AddressSpaceContext(IBuildErrorsHandling traceEvent)
     {
-      m_TraceEvent = traceEvent;
-      //m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage("Entering AddressSpaceContext creator - starting creation the OPC UA Address Space."));
-      //IUANodeSet _standard = ReadUADefinedTypes();
-      //m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage("Address Space - the OPC UA defined has been uploaded."));
-      //ImportNodeSet(_standard);
+      m_TraceEvent = traceEvent ?? throw new ArgumentNullException(nameof(traceEvent), $"{nameof(traceEvent)} cannot be null");
       m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage("Address Space - has bee created successfully."));
     }
 
     #endregion constructor
 
     #region IAddressSpaceContext
-
-    /// <summary>
-    /// Sets the information model factory, which can be used to export a part of the OPC UA Address Space. If not set or set null an internal stub implementation will be used.
-    /// </summary>
-    /// <value>The information model factory.</value>
-    /// <remarks>It is defined to handle dependency injection.</remarks>
-    public IModelFactory InformationModelFactory
-    {
-      set
-      {
-        if (value == null)
-          m_InformationModelFactory = new InformationModelFactoryBase();
-        else
-          m_InformationModelFactory = value;
-      }
-      private get => m_InformationModelFactory;
-    }
 
     /// <summary>
     /// Imports all OPC UA Address Space models contained in the <see cref="IUANodeSet" /> XML document, and populates internal OPC UA Address Space.
@@ -83,35 +62,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     }
 
     /// <summary>
-    /// Imports all OPC UA Address Space models contained in the file <paramref name="document"/> described by the <see cref="FileInfo"/>, and populates internal OPC UA Address Space.
+    /// Validates and exports the selected model using <see cref="IModelFactory"/>, or alternatively a stub embedded implementation.
     /// </summary>
-    /// <remarks>
-    /// The input document must be compliant with the `UANodeSet` schema.
-    /// </remarks>
-    /// <param name="document">The UANodeSet document to be imported, and described by the <see cref="FileInfo"/>.</param>
-    /// <returns>Return a default <see cref="Uri"/> for the model defined in a file represented by <see cref="FileInfo"/></returns>
-    /// <exception cref="ArgumentNullException">model - the model cannot be null</exception>
-    /// <exception cref="FileNotFoundException">The imported file does not exist</exception>
-    //TODO IAddressSpaceContext.ImportUANodeSet(System.IO.FileInfo) returned result must be tested. #626
-    //Uri IAddressSpaceContext.ImportUANodeSet(FileInfo document, Func <FileInfo, IUANodeSet> readModelFile)
-    //{
-    //  if (document == null)
-    //    throw new ArgumentNullException("model", "the model cannot be null");
-    //  m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage($"190380256, Entering {nameof(IAddressSpaceContext.ImportUANodeSet)} and starting model import form file {document.Name}"));
-    //  if (!document.Exists)
-    //    throw new FileNotFoundException("The imported file does not exist", document.FullName);
-    //  IUANodeSet _nodeSet = readModelFile(document);
-    //  return ImportNodeSet(_nodeSet);
-    //}
-
-    /// <summary>
-    /// Validates and exports the selected model.
-    /// </summary>
+    /// <param name="informationModelFactory">
+    /// Information model factory, which can be used to export a part of the OPC UA Address Space using a selected language.
+    /// </param>
     /// <param name="targetNamespace">The target namespace of the validated model.</param>
-    /// <exception cref="System.ArgumentOutOfRangeException">targetNamespace;Cannot find this namespace</exception>
-    void IAddressSpaceContext.ValidateAndExportModel(Uri targetNamespace)
+    void IAddressSpaceContext.ValidateAndExportModel(Uri targetNamespace, IModelFactory informationModelFactory)
     {
       m_TraceEvent.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage($"{856488909}, Entering IAddressSpaceContext.ValidateAndExportModel - starting for the {targetNamespace} namespace."));
+      m_InformationModelFactory = informationModelFactory ?? new InformationModelFactoryBase();
       List<Uri> undefinedUriLists = new List<Uri>();
       if (!m_NamespaceTable.ValidateNamesapceTable(x => undefinedUriLists.Add(x)))
         foreach (Uri item in undefinedUriLists)
@@ -335,7 +295,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         DateTime _publicationDate = modelTableEntry.PublicationDate.HasValue ? modelTableEntry.PublicationDate.Value : DateTime.UtcNow;
         Version _version = modelTableEntry.Version;
-        InformationModelFactory.CreateNamespace(modelTableEntry.ModelUri, _publicationDate, _version);
+        m_InformationModelFactory.CreateNamespace(modelTableEntry.ModelUri, _publicationDate, _version);
       }
       int nodesCount = nodes.Count;
       do
@@ -347,7 +307,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         {
           try
           {
-            validator.ValidateExportNode(item, allNodesInConcern, InformationModelFactory, y => { if (y.NodeIdContext.NamespaceIndex == nameSpaceIndex) embededNodes.AddOrReplace(y, false); });
+            validator.ValidateExportNode(item, allNodesInConcern, m_InformationModelFactory, y => { if (y.NodeIdContext.NamespaceIndex == nameSpaceIndex) embededNodes.AddOrReplace(y, false); });
           }
           catch (Exception ex)
           {

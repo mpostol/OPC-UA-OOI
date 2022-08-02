@@ -91,18 +91,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     private List<IUANodeContext> ValidateAndExportModelUnitTest(FileInfo testDataFileInfo, int numberOfNodes, Uri model)
     {
-      TracedAddressSpaceContext tracedAddressSpaceContext = new TracedAddressSpaceContext();
-      IAddressSpaceContext _as = tracedAddressSpaceContext.AddressSpaceContext;
+      TracedAddressSpaceContext tracedAddressSpaceContext = new TracedAddressSpaceContext(testDataFileInfo);
       tracedAddressSpaceContext.Clear();
-      UANodeSet instance = UANodeSet.ReadModelFile(testDataFileInfo);
-      _as.ImportUANodeSet(instance);
       Assert.AreEqual<int>(0, tracedAddressSpaceContext.TraceList.Count);
-      ((AddressSpaceContext)_as).UTAddressSpaceCheckConsistency(x => { Assert.Fail(); });
-      ((AddressSpaceContext)_as).UTReferencesCheckConsistency((x, y, z, v) => Assert.Fail());
+      tracedAddressSpaceContext.UTAddressSpaceCheckConsistency(x => { Assert.Fail(); });
+      tracedAddressSpaceContext.UTReferencesCheckConsistency((x, y, z, v) => Assert.Fail());
       IEnumerable<IUANodeContext> _nodes = null;
-      ((AddressSpaceContext)_as).UTValidateAndExportModel(1, x => _nodes = x);
+      tracedAddressSpaceContext.UTValidateAndExportModel(1, x => _nodes = x);
       Assert.AreEqual<int>(numberOfNodes, _nodes.Count<IUANodeContext>());
-      _as.ValidateAndExportModel(model);
+      tracedAddressSpaceContext.ValidateAndExportModel(model);
       Assert.AreEqual<int>(0, tracedAddressSpaceContext.TraceList.Count);
       return _nodes.ToList<IUANodeContext>();
     }

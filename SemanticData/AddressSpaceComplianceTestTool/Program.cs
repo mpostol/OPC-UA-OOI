@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using UAOOI.Common.Infrastructure.Diagnostic;
 using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.AddressSpacePrototyping.CommandLineSyntax;
+using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UAModelDesignExport;
 using UAOOI.SemanticData.UANodeSetValidation;
 
@@ -72,9 +73,10 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
       IModelDesignExport exporter = ModelDesignExportAPI.GetModelDesignExport(); //creates new instance of the ModelDesignExport class that captures functionality supporting export of the OPC UA Information Model represented
                                                                                  //by an XML file compliant with UAModelDesign schema.
       bool _exportModel = false;
+      IModelFactory modelFactory = null;
       if (!string.IsNullOrEmpty(options.ModelDesignFileName))
       {
-        addressSpace.InformationModelFactory = exporter.GetFactory();  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space.
+        modelFactory = exporter.GetFactory();  //Sets the information model factory, which can be used to export a part of the OPC UA Address Space.
         _exportModel = true;
       }
       if (options.Filenames == null)
@@ -100,7 +102,7 @@ namespace UAOOI.SemanticData.AddressSpacePrototyping
         addressSpace.ImportUANodeSet(nodeSet);
       }
       TraceSource.TraceData(TraceEventType.Verbose, 1637887217, $"Validating and exporting a model from namespace {uri}");
-      addressSpace.ValidateAndExportModel(uri); //Validates and exports the selected model.
+      addressSpace.ValidateAndExportModel(uri, modelFactory); //Validates and exports the selected model.
       if (_exportModel)
       {
         TraceSource.TraceData(TraceEventType.Verbose, 1637887217, $"Writing model to XML file {options.ModelDesignFileName}");

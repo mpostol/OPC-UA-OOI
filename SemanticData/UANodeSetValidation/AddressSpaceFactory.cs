@@ -23,5 +23,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       return new AddressSpaceContext(new AssemblyTraceSource());
     }
+
+    /// <summary>
+    /// Creates Address Space infrastructure exposed to the API clients as the <see cref="IAddressSpaceContext"/> interface using default tracing infrastructure.
+    /// </summary>
+    internal static IAddressSpaceContext AddressSpace(IBuildErrorsHandling traceEvent)
+    {
+      return new AddressSpaceContext(traceEvent);
+    }
   }
 }

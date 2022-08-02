@@ -31,13 +31,13 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     /// <value>The symbolic name for the node.</value>
     string SymbolicName { set; get; }
 
-    /// <summary>
-    /// Sets the write mask. The optional WriteMask attribute represents the WriteMask attribute of the Basic NodeClass, which exposes the possibilities of a client
-    /// to write the attributes of the node. The WriteMask attribute does not take any user access rights into account, that is, although an attribute is writable
-    /// this may be restricted to a certain user/user group.
-    /// </summary>
-    /// <remarks>Default Value "0"</remarks>
-    /// <value>The write access.</value>
+    ///// <summary>
+    ///// Sets the write mask. The optional WriteMask attribute represents the WriteMask attribute of the Basic NodeClass, which exposes the possibilities of a client
+    ///// to write the attributes of the node. The WriteMask attribute does not take any user access rights into account, that is, although an attribute is writable
+    ///// this may be restricted to a certain user/user group.
+    ///// </summary>
+    ///// <remarks>Default Value "0"</remarks>
+    ///// <value>The write access.</value>
     //uint WriteAccess { set; get; }
 
     /// <summary>

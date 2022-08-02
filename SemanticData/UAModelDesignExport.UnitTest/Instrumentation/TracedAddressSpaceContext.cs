@@ -28,10 +28,9 @@ namespace UAOOI.SemanticData.UAModelDesignExport.Instrumentation
       IAddressSpaceContext _as = new AddressSpaceContext(this);
       IUANodeSet uaDefinedTypes = UANodeSet.ReadUADefinedTypes();
       ModelFactory _factory = new ModelFactory(WriteTraceMessage);
-      _as.InformationModelFactory = _factory;
       _as.ImportUANodeSet(uaDefinedTypes);
       _as.ImportUANodeSet(iUANodeSet);
-      _as.ValidateAndExportModel(new Uri(URI));
+      _as.ValidateAndExportModel(new Uri(URI), _factory);
       return _factory.Export();
     }
 

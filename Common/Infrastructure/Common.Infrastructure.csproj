@@ -56,10 +56,11 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <AssemblyVersion>6.4.6.0</AssemblyVersion>
     <FileVersion>6.3.6.0</FileVersion>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>C:\VS.git\UAOOI\OPC-UA-OOI\Common\Infrastructure\UAOOI.Common.Infrastructure.Loc.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
     <NoWarn>1701;1702; IDE0001</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">

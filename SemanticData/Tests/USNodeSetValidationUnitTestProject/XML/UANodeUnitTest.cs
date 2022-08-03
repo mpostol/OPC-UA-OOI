@@ -58,8 +58,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       //modelMock.Setup(x => x.ModelUri);
       UAObject toTest = TestData.CreateUAObject();
       toTest.RecalculateNodeIds(modelMock.Object, XML => Assert.Fail());
-      Assert.IsNotNull(toTest.NodeIdNodeId);
-      Assert.AreEqual<string>("ns=1;i=1", toTest.NodeIdNodeId.ToString());
+      Assert.IsNotNull(toTest.GetIUANode().NodeId);
+      Assert.AreEqual<string>("ns=1;i=1", toTest.GetIUANode().NodeId.ToString());
       Assert.IsNotNull(toTest.BrowseNameQualifiedName);
       Assert.AreEqual<string>("1:NewUAObject", toTest.BrowseNameQualifiedName.ToString());
       modelMock.Verify(x => x.ImportBrowseName(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Action<TraceMessage>>()), Times.Once);

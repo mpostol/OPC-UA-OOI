@@ -57,7 +57,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     #region IUANode
 
-    public NodeId NodeIdNodeId { get; private set; }
+    NodeId IUANode.NodeId { get; }
+    private NodeId m_NodeIdNodeId = null;
     public QualifiedName BrowseNameQualifiedName { get; private set; }
     IReference[] IUANode.References { get => References; }
 
@@ -184,7 +185,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     internal virtual void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
-      (BrowseNameQualifiedName, NodeIdNodeId) = modelContext.ImportBrowseName(BrowseName, this.NodeId, trace);
+      (BrowseNameQualifiedName, m_NodeIdNodeId) = modelContext.ImportBrowseName(BrowseName, this.NodeId, trace);
       if (!(this.References is null))
         foreach (Reference _reference in this.References)
           _reference.RecalculateNodeIds(x => modelContext.ImportNodeId(x, trace));

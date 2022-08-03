@@ -209,7 +209,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       addressSpaceMock.Verify(x => x.GetURIIndexOrAppend(new Uri(@"http://cas.eu/UA/Demo/")), Times.AtLeastOnce());
       Assert.AreEqual<string>("ns=2;i=24", nodeSet.Aliases[0].ValueNodeId.ToString());
       Assert.AreEqual<string>("Alias name", nodeSet.Aliases[0].Alias);
-      Assert.AreEqual<string>("ns=2;i=24", nodeSet.Items[0].NodeIdNodeId.ToString());
+      Assert.AreEqual<string>("ns=2;i=24", nodeSet.Items[0].GetIUANode().NodeId.ToString());
       Assert.AreEqual<string>("2:NewUAObject", nodeSet.Items[0].BrowseNameQualifiedName.ToString());
       Assert.AreEqual<string>("ns=2;i=2", ((UAVariableType)nodeSet.Items[1]).DataTypeNodeId.ToString());
       Assert.AreEqual<string>("2:NewUAObject", ((UAVariableType)nodeSet.Items[1]).BrowseNameQualifiedName.ToString());
@@ -288,4 +288,5 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       };
     }
   }
+
 }

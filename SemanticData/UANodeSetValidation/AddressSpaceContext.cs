@@ -224,7 +224,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private Uri ImportNodeSet(IUANodeSet model)
     {
       Uri defaultModelUri = model.ParseUAModelContext(m_NamespaceTable, m_TraceEvent.WriteTraceMessage);
-      Dictionary<string, IUANode> itemsDictionary = new Dictionary<string, IUANode>();
+      Dictionary<NodeId, IUANode> itemsDictionary = new Dictionary<NodeId, IUANode>();
       foreach (IUANode node in model.Items)
       {
         if (itemsDictionary.ContainsKey(node.NodeId))
@@ -240,7 +240,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       try
       {
-        NodeId _nodeId = node.NodeIdNodeId;
+        NodeId _nodeId = node.NodeId;
         IUANodeContext _newNode = GetOrCreateNodeContext(_nodeId, x => new UANodeContext(_nodeId, this, m_TraceEvent.WriteTraceMessage));
         _newNode.Update(node, _reference =>
               {

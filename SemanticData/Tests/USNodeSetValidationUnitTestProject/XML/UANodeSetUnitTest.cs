@@ -179,8 +179,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<string>("1:EnumerationDataType", _enumeration.BrowseName);
       Assert.AreEqual<string>("ns=1;i=11", _enumeration.NodeId);
       Assert.IsNotNull(_enumeration.BrowseNameQualifiedName);
-      Assert.IsNotNull(_enumeration.NodeIdNodeId);
-      Assert.AreEqual<int>(1, _enumeration.NodeIdNodeId.NamespaceIndex);
+      Assert.IsNotNull(_enumeration.GetIUANode().NodeId);
+      Assert.AreEqual<int>(1, _enumeration.GetIUANode().NodeId.NamespaceIndex);
       Assert.IsTrue(_enumeration.BrowseNameQualifiedName.NamespaceIndexSpecified);
 
       Assert.AreEqual<int>(1, _enumeration.References[0].ValueNodeId.NamespaceIndex);

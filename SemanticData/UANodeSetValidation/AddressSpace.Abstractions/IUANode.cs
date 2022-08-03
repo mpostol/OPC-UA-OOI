@@ -76,23 +76,26 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     string[] Category { set; get; }
   }
 
+  /// <summary>
+  /// see Part3 5.2 Base NodeClass
+  /// </summary>
   public partial interface IUANode
   {
-    string NodeId { get; set; }
-    IReference[] References { get; }
+    NodeId NodeId { get; }
+    NodeClassEnum NodeClassEnum { get; }
+    QualifiedName BrowseNameQualifiedName { get; } //Change name to BrowseName implicit implementation
     LocalizedText[] DisplayName { get; set; }
     LocalizedText[] Description { get; set; }
-    IRolePermission[] RolePermissions { get; set; }
-    string Documentation { get; set; }
     uint WriteMask { set; get; }
     uint UserWriteMask { set; get; }
+    IRolePermission[] RolePermissions { get; set; }
+    IReference[] References { get; }
   }
 
   public partial interface IUANode
   {
-    NodeId NodeIdNodeId { get; }
-    QualifiedName BrowseNameQualifiedName { get; }
-    NodeClassEnum NodeClassEnum { get; }
+    //string NodeId { get; set; }
+    string Documentation { get; set; }
 
     void RemoveInheritedValues(IUANode baseNode);
   }

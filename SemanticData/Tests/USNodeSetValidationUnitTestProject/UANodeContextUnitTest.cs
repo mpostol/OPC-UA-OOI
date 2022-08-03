@@ -184,7 +184,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       };
       _newNode.Update(_nodeFactory, x => Assert.Fail()); // Update has different NodeId - no change is expected.
       Assert.AreEqual<string>("ns=1;i=11", _newNode.NodeIdContext.ToString());
-      Assert.AreEqual<string>("ns=1;i=47", _newNode.UANode.NodeId);
+      Assert.AreEqual<string>("ns=1;i=47", _newNode.UANode.NodeId.ToString());
       Assert.AreEqual<int>(0, _traceBuffer.Count);
     }
 

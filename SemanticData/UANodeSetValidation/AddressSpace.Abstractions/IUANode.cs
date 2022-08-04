@@ -16,13 +16,6 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
   public partial interface IUANode
   {
     /// <summary>
-    /// It holds the value of the BrowseName attribute of modes in the Address Space. The BrowseName is the name used in the information model.
-    /// The BrowseName is qualified by the namespace used for the SymbolicName
-    /// </summary>
-    /// <value>The BrowseName of the node.</value>
-    string BrowseName { set; get; }
-
-    /// <summary>
     /// Sets the a symbolic name for the node that can be used as a class/field name by a design tools to enhance auto-generated code.
     /// It should only be specified if the BrowseName cannot be used for this purpose. This field is not used directly to instantiate
     /// Address Space and is intended for use by design tools. Only letters, digits or the underscore (‘_’) are permitted.
@@ -40,14 +33,6 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     ///// <value>The write access.</value>
     //uint WriteAccess { set; get; }
 
-    /// <summary>
-    /// Sets the access restrictions.
-    /// </summary>
-    /// <remarks>
-    /// Part 6 Table F.1 – UANodeSet The default AccessRestrictions that apply to all Nodes in the model.
-    /// </remarks>
-    /// <value>The access restrictions.</value>
-    byte AccessRestrictions { set; get; }
 
     /// <summary>
     /// Sets the release status of the node.
@@ -81,14 +66,98 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
   /// </summary>
   public partial interface IUANode
   {
+    /// <summary>
+    /// Nodes are unambiguously identified using a constructed identifier called the <see cref="NodeId"/> . Some implementations may accept alternative NodeIds in addition to the canonical
+    /// NodeId represented in this Attribute. An application shall persist the identifierType and identifier NodeId elements of a Node as well as the Namespace Uri which the
+    /// namespaceIndex NodeId element references. An application may change the namespaceIndex NodeId element of a Node with future address space instantiation and therefore a user shall
+    /// not assume the namespaceIndex will not change.
+    /// </summary>
     NodeId NodeId { get; }
+
+    /// <summary>
+    /// The NodeClass identifies the NodeClass of a Node.
+    /// </summary>
+    /// <value>Returns NodeClassEnum</value>
     NodeClassEnum NodeClassEnum { get; }
-    QualifiedName BrowseNameQualifiedName { get; } //Change name to BrowseName implicit implementation
-    LocalizedText[] DisplayName { get; set; }
-    LocalizedText[] Description { get; set; }
+
+    /// <summary>
+    /// It holds the value of the BrowseName attribute of modes in the Address Space. The BrowseName is the name used in the information model.
+    /// The BrowseName is qualified by the namespace used for the SymbolicName
+    ///
+    /// Nodes have a BrowseName Attribute that is used as a non-localized human-readable name when browsing the AddressSpace to create paths out of BrowseNames.
+    /// The TranslateBrowsePathsToNodeIds Service defined in OPC 10000-4 can be used to follow a path constructed of BrowseNames.
+    ///
+    /// A BrowseName should never be used to display the name of a Node.The DisplayName should be used instead for this purpose.
+    ///
+    /// Unlike NodeIds, the BrowseName cannot be used to unambiguously identify a Node. Different Nodes may have the same BrowseName.
+    /// Section 8.3 defines the structure of the BrowseName.It contains a namespace and a string. The namespace is provided to make the BrowseName unique in some cases in the context
+    /// of a Node (e.g.Properties of a Node) although not unique in the context of the Server.If different organizations define BrowseNames for Properties, the namespace of the BrowseName
+    /// provided by the organization makes the BrowseName unique, although different organizations may use the same string having a slightly different meaning.
+    ///
+    /// Applications may often choose to use the same namespace for the NodeId and the BrowseName.However, if they want to provide a standard Property, its BrowseName shall have the namespace
+    /// of the standards body although the namespace of the NodeId reflects something else, for example the local Server.
+    ///
+    /// Standards bodies defining standard type definitions shall use their namespace(s) for the NodeId of the TypeDefinitionNode as well as for the BrowseName of the TypeDefinitionNode.
+    /// BrowseNames of TypeDefinitionNodes, ReferenceTypes, and DataTypes shall be unique. Any well-known instances used as entry points shall also be unique. For example, the Root Node defined in
+    /// OPC 10000-5.
+    /// The string-part of the BrowseName is case sensitive. That is, users shall consider them case sensitive.Servers are allowed to handle BrowseNames passed in Service requests as case
+    /// insensitive. Examples are the TranslateBrowsePathsToNodeIds Service or Event filter. If a Server accepts a case insensitive BrowseName it needs to ensure that the uniqueness of the BrowseName
+    /// does not depend on case.
+    /// </summary>
+    QualifiedName BrowseName { get; }
+
+    /// <summary>
+    /// The DisplayName Attribute contains the localized name of the Node. Users should use this property if they want to display the name of the Node. They should not use the BrowseName for this purpose.
+    /// The application may maintain one or more localized representations for each DisplayName. The API user selects the locale to be returned when they open a session with the Server.
+    /// Refer to OPC 10000-4 for a description of session establishment and locales. Section 8.5 defines the structure of the DisplayName.
+    /// The string part of the DisplayName is restricted to 512 characters.
+    /// </summary>
+    LocalizedText[] DisplayName { get; }
+
+    /// <summary>
+    /// The optional Description Attribute shall explain the meaning of the Node in a localised text using the same mechanisms for localization as described for the DisplayName
+    /// </summary>
+    LocalizedText[] Description { get; }
+
+    /// <summary>
+    /// The optional WriteMask Attribute exposes the possibilities of a client to write the Attributes of the Node. The WriteMask Attribute does not take any user access rights into account,
+    /// that is, although an Attribute is writable this may be restricted to a certain user/user group.
+    ///
+    /// If the OPC UA Server does not have the ability to get the WriteMask information for a specific Attribute from the underlying system, it should state that it is writable.If a write
+    /// operation is called on the Attribute, the Server should transfer this request and return the corresponding StatusCode if such a request is rejected.StatusCodes are defined in OPC 10000-4.
+    ///
+    /// The AttributeWriteMask DataType is defined in 8.60.
+    /// </summary>
     uint WriteMask { set; get; }
+
+    /// <summary>
+    /// The optional UserWriteMask Attribute exposes the possibilities of a client to write the Attributes of the Node taking user access rights into account. It uses the AttributeWriteMask
+    /// DataType which is defined in 8.60.
+    ///
+    /// The UserWriteMask Attribute can only further restrict the WriteMask Attribute, when it is set to not writable in the general case that applies for every user.
+    /// Clients cannot assume an Attribute can be written based on the UserWriteMask Attribute.It is possible that the Server may return an access denied error due to some server
+    /// specific change which was not reflected in the state of this Attribute at the time the Client accessed it.
+    /// </summary>
     uint UserWriteMask { set; get; }
+
+    /// <summary>
+    /// The optional RolePermissions Attribute specifies the Permissions that apply to a Node for all Roles which have access to the Node. The value of the Attribute is an array of
+    /// RolePermissionType Structures
+    /// </summary>
     IRolePermission[] RolePermissions { get; set; }
+
+    //UserRolePermissions
+    //AccessRestrictions
+
+    /// <summary>
+    /// Sets the access restrictions.
+    /// </summary>
+    /// <remarks>
+    /// Part 6 Table F.1 – UANodeSet The default AccessRestrictions that apply to all Nodes in the model.
+    /// </remarks>
+    /// <value>The access restrictions.</value>
+    byte AccessRestrictions { set; get; }
+
     IReference[] References { get; }
   }
 

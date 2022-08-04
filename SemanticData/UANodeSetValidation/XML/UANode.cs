@@ -39,7 +39,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return
         ParentEquals(other) &&
         thisNode.AccessRestrictions == other.AccessRestrictions &&
-        thisNode.BrowseNameQualifiedName.Equals(other.BrowseNameQualifiedName) &&
+        thisNode.BrowseName.Equals(other.BrowseName) &&
         thisNode.Description.LocalizedTextArraysEqual(other.Description) &&
         thisNode.DisplayName.LocalizedTextArraysEqual(other.DisplayName) &&
         thisNode.Documentation.AreEqual(other.Documentation) &&
@@ -57,10 +57,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     #region IUANode
 
-    NodeId IUANode.NodeId { get; }
-    private NodeId m_NodeIdNodeId = null;
-    public QualifiedName BrowseNameQualifiedName { get; private set; }
+    NodeId IUANode.NodeId { get => m_NodeIdNodeId; }
+    QualifiedName IUANode.BrowseName { get => m_BrowseName; }
     IReference[] IUANode.References { get => References; }
+    DataSerialization.LocalizedText[] IUANode.DisplayName 
+    { 
+      get => DisplayName.GetLocalizedTextArray(); 
+    }
+    DataSerialization.LocalizedText[] IUANode.Description 
+    { 
+      get => Description.GetLocalizedTextArray();  
+    }
+    private NodeId m_NodeIdNodeId = null;
+    private QualifiedName m_BrowseName = null;
 
     public virtual void RemoveInheritedValues(IUANode baseNode)
     {
@@ -110,8 +119,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       set { throw new NotImplementedException(); }
     }
 
-    DataSerialization.LocalizedText[] IUANode.DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    DataSerialization.LocalizedText[] IUANode.Description { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
     IRolePermission[] IUANode.RolePermissions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     //public uint WriteAccess { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -156,9 +164,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     }
 
     /// <summary>
-    /// Gets the node class enum based on the type of this instance.
+    /// Gets the node class of a Node.
     /// </summary>
-    /// <value>The node class enum.</value>
+    /// <value>The < node class enum.</value>
     public NodeClassEnum NodeClassEnum
     {
       get
@@ -185,7 +193,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     internal virtual void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
-      (BrowseNameQualifiedName, m_NodeIdNodeId) = modelContext.ImportBrowseName(BrowseName, this.NodeId, trace);
+      (m_BrowseName, m_NodeIdNodeId) = modelContext.ImportBrowseName(BrowseName, this.NodeId, trace);
       if (!(this.References is null))
         foreach (Reference _reference in this.References)
           _reference.RecalculateNodeIds(x => modelContext.ImportNodeId(x, trace));

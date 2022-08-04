@@ -130,9 +130,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     internal static string NodeIdentifier(this IUANode node)
     {
-      if (string.IsNullOrEmpty(node.BrowseName))
+      if (node.BrowseName == null)
         return node.SymbolicName;
-      return node.BrowseName;
+      return node.BrowseName.ToString();
     }
 
     internal static string ConvertToString(this LocalizedText localizedText)
@@ -203,21 +203,22 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (localizedText == null || localizedText.Length == 0)
         return null;
-      List<XML.LocalizedText> _ret = new List<XML.LocalizedText>();
+      List<LocalizedText> _ret = new List<LocalizedText>();
       foreach (LocalizedText _item in localizedText)
       {
         if (_item.Text.Length > maxLength)
         {
           reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongDisplayNameLength, string.Format
             ("The localized text starting with '{0}:{1}' of length {2} is too long.", _item.Locale, _item.Text.Substring(0, 20), _item.Text.Length)));
-          XML.LocalizedText _localizedText = new XML.LocalizedText()
+          LocalizedText _localizedText = new LocalizedText()
           {
             Locale = _item.Locale,
-            Value = _item.Text.Substring(0, maxLength)
+            Text = _item.Text.Substring(0, maxLength)
           };
+          _ret.Add(_localizedText);
         }
       }
-      return localizedText;
+      return _ret.ToArray();
     }
 
     internal static List<DataSerialization.Argument> GetParameters(this XmlElement xmlElement)

@@ -60,7 +60,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UAReferenceContext _connector = _parentConnector.FirstOrDefault<UAReferenceContext>();
       if (_connector != null)
         _connector.BuildSymbolicId(path);
-      string _BranchName = string.IsNullOrEmpty(this.UANode.SymbolicName) ? this.UANode.BrowseNameQualifiedName.Name : this.UANode.SymbolicName;
+      string _BranchName = string.IsNullOrEmpty(this.UANode.SymbolicName) ? this.UANode.BrowseName.Name : this.UANode.SymbolicName;
       path.Add(_BranchName);
     }
 
@@ -129,7 +129,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the BrowseName of the node.</returns>
     public XmlQualifiedName ExportNodeBrowseName()
     {
-      return new XmlQualifiedName(UANode.BrowseNameQualifiedName.Name, m_AddressSpaceContext.GetNamespace(UANode.BrowseNameQualifiedName.NamespaceIndex));
+      return new XmlQualifiedName(UANode.BrowseName.Name, m_AddressSpaceContext.GetNamespace(UANode.BrowseName.NamespaceIndex));
     }
 
     /// <summary>
@@ -237,7 +237,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       foreach (var _rc in referencedChildren)
       {
         IUANodeBase _instanceDeclaration = null;
-        string name = _rc.Key.UANode.BrowseNameQualifiedName.Name;
+        string name = _rc.Key.UANode.BrowseName.Name;
         if (!string.IsNullOrEmpty(name))
           _instanceDeclaration = derivedChildren.ContainsKey(name) ? derivedChildren[name] : null;
         if (_rc.Key.Equals(_instanceDeclaration))
@@ -398,12 +398,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (type)
       {
-        string _msg = string.Format("BaseType of Id={0} for node {1}", target, this.UANode.BrowseNameQualifiedName);
+        string _msg = string.Format("BaseType of Id={0} for node {1}", target, this.UANode.BrowseName);
         TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasSubtypeTarget, _msg));
       }
       else
       {
-        string _msg = string.Format("TypeDefinition of Id={0} for node {1}", target, this.UANode.BrowseNameQualifiedName);
+        string _msg = string.Format("TypeDefinition of Id={0} for node {1}", target, this.UANode.BrowseName);
         TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
       }
     }

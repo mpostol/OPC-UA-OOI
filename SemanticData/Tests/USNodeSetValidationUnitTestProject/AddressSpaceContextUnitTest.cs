@@ -227,9 +227,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       IEnumerable<UAReferenceContext> myReferences = ((IAddressSpaceBuildContext)asp.AddressSpace).GetMyReferences(uaObjectType);
       Assert.AreEqual<int>(1, myReferences.Count<UAReferenceContext>());
       List<UAReferenceContext> _listOfMyReferences = myReferences.ToList<UAReferenceContext>();
-      Assert.AreEqual<string>("buildDate", _listOfMyReferences[0].TargetNode.UANode.BrowseNameQualifiedName.Name);
-      Assert.AreEqual<string>("buildDate", _listOfMyReferences[0].ParentNode.UANode.BrowseNameQualifiedName.Name);
-      Assert.AreEqual<string>("VehicleType", _listOfMyReferences[0].SourceNode.UANode.BrowseNameQualifiedName.Name);
+      Assert.AreEqual<string>("buildDate", _listOfMyReferences[0].TargetNode.UANode.BrowseName.Name);
+      Assert.AreEqual<string>("buildDate", _listOfMyReferences[0].ParentNode.UANode.BrowseName.Name);
+      Assert.AreEqual<string>("VehicleType", _listOfMyReferences[0].SourceNode.UANode.BrowseName.Name);
       Assert.AreEqual<ReferenceKindEnum>(ReferenceKindEnum.HasProperty, _listOfMyReferences[0].ReferenceKind);
     }
 

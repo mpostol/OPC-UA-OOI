@@ -145,7 +145,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           m_buildErrorsHandling.WriteTraceMessage
             (
               TraceMessage.BuildErrorTraceMessage(BuildError.WrongReference2Property,
-                $"Target node of the {parentReference.ReferenceKind} reference cannot be {nodeContext.UANode.BrowseNameQualifiedName} of {baseTypeName}.")
+                $"Target node of the {parentReference.ReferenceKind} reference cannot be {nodeContext.UANode.BrowseName} of {baseTypeName}.")
             );
         }
       }

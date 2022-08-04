@@ -266,7 +266,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       AddressSpaceBuildContext _as = new AddressSpaceBuildContext(x => { });
       UANodeContext _testInstance = _as.InstanceToTest;
       Assert.IsTrue(_testInstance.UANode.GetType() == typeof(UAObject));
-      Assert.AreEqual<string>("1:InstanceOfDerivedFromComplexObjectType", _testInstance.UANode.BrowseNameQualifiedName.ToString());
+      Assert.AreEqual<string>("1:InstanceOfDerivedFromComplexObjectType", _testInstance.UANode.BrowseName.ToString());
       Dictionary<string, IUANodeBase> _result = _testInstance.GetDerivedInstances();
       Assert.IsNotNull(_result);
       Assert.AreEqual<int>(4, _result.Count);
@@ -279,7 +279,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UANodeContext _testType = _as.TypeToTest;
       Assert.IsNotNull(_testType);
       Assert.IsInstanceOfType(_testType.UANode, typeof(UAObjectType));
-      Assert.AreEqual<string>("1:DerivedFromComplexObjectType", _testType.UANode.BrowseNameQualifiedName.ToString());
+      Assert.AreEqual<string>("1:DerivedFromComplexObjectType", _testType.UANode.BrowseName.ToString());
       Dictionary<string, IUANodeBase> _result = _testType.GetDerivedInstances();
       Assert.IsNotNull(_result);
       Assert.AreEqual<int>(4, _result.Count);
@@ -339,7 +339,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
       _derivedNode.RecalculateNodeIds(modelMock, x => Assert.Fail());
-      Assert.IsNotNull(_derivedNode.BrowseNameQualifiedName);
+      Assert.IsNotNull(_derivedNode.BrowseName);
       UANode _baseNode = new UAVariable()
       {
         NodeId = "i=17568",
@@ -349,7 +349,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
       _baseNode.RecalculateNodeIds(modelMock, x => Assert.Fail());
-      Assert.IsNotNull(_baseNode.BrowseNameQualifiedName);
+      Assert.IsNotNull(_baseNode.BrowseName);
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
       IUANodeContext _derivedNodeContext = new UANodeContext(NodeId.Parse("ns=1;i=47"), _asMock.Object, x => { });
       _derivedNodeContext.Update(_derivedNode, x => Assert.Fail());

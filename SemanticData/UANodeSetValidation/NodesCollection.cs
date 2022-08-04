@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="replaceIfExist">if set to <c>true</c> replace the existing entity in the collection</param>
     internal void AddOrReplace(IUANodeBase item, bool replaceIfExist)
     {
-      string _key = item.UANode.BrowseNameQualifiedName.Name;
+      string _key = item.UANode.BrowseName.Name;
       if (!this.ContainsKey(_key))
       {
         this.Add(_key, item); //add derived item

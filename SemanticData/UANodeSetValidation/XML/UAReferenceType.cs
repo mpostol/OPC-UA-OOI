@@ -45,7 +45,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     internal override void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
       base.RecalculateNodeIds(modelContext, trace);
-      modelContext.RegisterUAReferenceType(BrowseNameQualifiedName);
+      modelContext.RegisterUAReferenceType(BrowseName);
     }
   }
 }

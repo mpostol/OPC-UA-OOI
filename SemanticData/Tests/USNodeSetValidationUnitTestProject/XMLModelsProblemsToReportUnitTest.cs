@@ -68,7 +68,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       List<IUANodeContext> processedNodes = new List<IUANodeContext>();
       foreach (IUANodeContext item in allNodes)
       {
-        if (!nodesDictionary.ContainsKey(item.UANode.BrowseNameQualifiedName.Name))
+        if (!nodesDictionary.ContainsKey(item.UANode.BrowseName.Name))
         {
           orphanedNodes.Add(item);
           Debug.WriteLine($"The following node has been removed from the model: {item.ToString()}");
@@ -104,7 +104,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       List<IUANodeContext> processedNodes = new List<IUANodeContext>();
       foreach (IUANodeContext item in allNodes)
       {
-        if (!nodesDictionary.ContainsKey(item.UANode.BrowseNameQualifiedName.Name))
+        if (!nodesDictionary.ContainsKey(item.UANode.BrowseName.Name))
         {
           orphanedNodes.Add(item);
           Debug.WriteLine($"The following node has been removed from the model: {item.ToString()}");

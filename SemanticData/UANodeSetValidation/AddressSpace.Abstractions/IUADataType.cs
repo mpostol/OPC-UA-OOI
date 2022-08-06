@@ -14,5 +14,7 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
   {
     IDataTypeDefinition Definition { get; }
     DataTypePurpose Purpose { get; }
+
+    
   }
 }

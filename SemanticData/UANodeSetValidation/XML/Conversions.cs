@@ -5,8 +5,11 @@
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
 
+using System;
 using System.Collections.Generic;
 using UAOOI.SemanticData.AddressSpace.Abstractions;
+using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
@@ -25,6 +28,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       foreach (LocalizedText item in value)
         ret.Add(new DataSerialization.LocalizedText() { Locale = item.Locale, Text = item.Value });
       return ret.ToArray();
+    }
+
+    internal static AccessRestrictions GetAccessRestrictions(this byte accessRestrictions, NodeClassEnum typeName, Action<TraceMessage> buildErrorsHandling)
+    {
+      if (accessRestrictions > 7)
+      {
+        buildErrorsHandling(TraceMessage.BuildErrorTraceMessage(BuildError.WrongAccessLevel, $"The current value is {accessRestrictions} of the node type {typeName}. Assigned max value"));
+        return AccessRestrictions.EncryptionRequired & AccessRestrictions.SessionRequired & AccessRestrictions.SigningRequired;
+      }
+      return (AccessRestrictions)accessRestrictions;
     }
   }
 }

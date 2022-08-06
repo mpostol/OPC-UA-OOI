@@ -13,7 +13,6 @@ using System.Xml;
 using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
-using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.Diagnostic;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
@@ -279,7 +278,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_buildErrorsHandling.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.WrongWriteMaskValue, string.Format("The current value is {0:x} of the node type {1}.", x, y)));
       };
       _nodeFactory.WriteAccess = _nodeSet is IUAVariable ? _nodeSet.WriteMask.Validate(0x200000, x => _doReport(x, _nodeSet.GetType().Name)) : _nodeSet.WriteMask.Validate(0x400000, x => _doReport(x, _nodeSet.GetType().Name));
-      _nodeFactory.AccessRestrictions = ConvertToAccessRestrictions(_nodeSet.AccessRestrictions, _nodeSet.GetType().Name);
+      _nodeFactory.AccessRestrictions = _nodeSet.AccessRestrictions;
       _nodeFactory.Category = _nodeSet.Category;
       if (_nodeSet.RolePermissions != null)
         m_buildErrorsHandling.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage("RolePermissions is not supported. You must fix it manually."));
@@ -287,16 +286,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         m_buildErrorsHandling.WriteTraceMessage(TraceMessage.DiagnosticTraceMessage("Documentation is not supported. You must fix it manually."));
       updateBase(_nodeFactory, _nodeSet, nodeContext);
       updateNode(_nodeFactory, _nodeSet);
-    }
-
-    private AccessRestrictions ConvertToAccessRestrictions(byte accessRestrictions, string typeName)
-    {
-      if (accessRestrictions > 7)
-      {
-        m_buildErrorsHandling.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.WrongAccessLevel, $"The current value is {accessRestrictions} of the node type {typeName}. Assigned max value"));
-        return AccessRestrictions.EncryptionRequired & AccessRestrictions.SessionRequired & AccessRestrictions.SigningRequired;
-      }
-      return (AccessRestrictions)accessRestrictions;
     }
 
     private void UpdateType(ITypeFactory nodeDesign, IUAType nodeSet, IUANodeBase nodeContext)

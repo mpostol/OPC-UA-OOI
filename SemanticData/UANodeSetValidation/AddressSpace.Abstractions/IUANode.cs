@@ -6,33 +6,26 @@
 //__________________________________________________________________________________________________
 
 using UAOOI.SemanticData.InformationModelFactory;
+using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
   /// <summary>
-  /// Interface INodeFactory -  a base type that defines a set of fields representing attributes and references of any node in the Address Space.
+  /// Interface IUANode -  a base type that defines a set of fields representing attributes and references of any node in the Address Space.
   /// </summary>
   public partial interface IUANode
   {
     /// <summary>
-    /// Sets the a symbolic name for the node that can be used as a class/field name by a design tools to enhance auto-generated code.
+    /// Sets or gets a symbolic name for the node that can be used as a class/field name by a design tools to enhance auto-generated code.
     /// It should only be specified if the BrowseName cannot be used for this purpose. This field is not used directly to instantiate
     /// Address Space and is intended for use by design tools. Only letters, digits or the underscore (‘_’) are permitted.
-    /// This attribute is not exposed in the Address Space.
     /// </summary>
+    /// <remarks>
+    /// This attribute is not exposed in the Address Space.
+    /// </remarks>
     /// <value>The symbolic name for the node.</value>
     string SymbolicName { set; get; }
-
-    ///// <summary>
-    ///// Sets the write mask. The optional WriteMask attribute represents the WriteMask attribute of the Basic NodeClass, which exposes the possibilities of a client
-    ///// to write the attributes of the node. The WriteMask attribute does not take any user access rights into account, that is, although an attribute is writable
-    ///// this may be restricted to a certain user/user group.
-    ///// </summary>
-    ///// <remarks>Default Value "0"</remarks>
-    ///// <value>The write access.</value>
-    //uint WriteAccess { set; get; }
-
 
     /// <summary>
     /// Sets the release status of the node.
@@ -44,25 +37,19 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     /// <value>The release status.</value>
     ReleaseStatus ReleaseStatus { set; get; }
 
-    //TODO Mantis - report error
-    /// <summary>
-    /// Sets the data type purpose.
-    /// </summary>
-    /// <remarks>
-    /// Not defined in the specification Part 2, 5, 6 and Errata Release 1.04.2 September 25, 2018
-    /// This field is defined in the UADataType in the <c>UADataType</c> but in UA Model Design in the <c>NodeDesign</c>
-    /// </remarks>
-    /// <value>The data type purpose.</value>
-    //DataTypePurpose DataTypePurpose { set; }
     /// <summary>
     /// Sets the category. A list of identifiers used to group related UANodes together for use by tools that create/edit UANodeSet files.
     /// </summary>
     /// <value>The category.</value>
     string[] Category { set; get; }
+
+    string Documentation { get; set; }
+
+    void RemoveInheritedValues(IUANode baseNode);
   }
 
   /// <summary>
-  /// see Part3 5.2 Base NodeClass
+  /// This part is defined according to Part3 5.2 Base NodeClass
   /// </summary>
   public partial interface IUANode
   {
@@ -147,25 +134,23 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     IRolePermission[] RolePermissions { get; set; }
 
     //UserRolePermissions
-    //AccessRestrictions
 
     /// <summary>
-    /// Sets the access restrictions.
+    /// Sets or gets the access restrictions. See also Part 3 section 5.2.11
     /// </summary>
     /// <remarks>
-    /// Part 6 Table F.1 – UANodeSet The default AccessRestrictions that apply to all Nodes in the model.
+    /// The optional AccessRestrictions attribute specifies the AccessRestrictions that apply to a node. If a hosting application supports AccessRestrictions
+    /// for a particular namespace it adds the DefaultAccessRestrictions Property to the NamespaceMetadata Object for that Namespace. If a particular node in the
+    /// Namespace needs to override the default value the hosting application adds the AccessRestrictions attribute to the node.
+    ///
+    /// If a Server implements a vendor specific access restriction model for a Namespace, it does not add the DefaultAccessRestrictions Property to the NamespaceMetadata Object.
     /// </remarks>
     /// <value>The access restrictions.</value>
-    byte AccessRestrictions { set; get; }
+    AccessRestrictions AccessRestrictions { set; get; }
 
+    /// <summary>
+    /// Reference of the node.
+    /// </summary>
     IReference[] References { get; }
-  }
-
-  public partial interface IUANode
-  {
-    //string NodeId { get; set; }
-    string Documentation { get; set; }
-
-    void RemoveInheritedValues(IUANode baseNode);
   }
 }

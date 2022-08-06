@@ -8,6 +8,7 @@
 using System;
 using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using OOIReleaseStatus = UAOOI.SemanticData.InformationModelFactory.ReleaseStatus;
 
@@ -124,6 +125,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     //public uint WriteAccess { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+    AccessRestrictions IUANode.AccessRestrictions 
+    { 
+      get => this.AccessRestrictions.GetAccessRestrictions(NodeClassEnum, Trace);
+      set => throw new NotImplementedException(); 
+    }
+
+
     #endregion IUANode
 
     #region API
@@ -191,15 +199,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       }
     }
 
+
     internal virtual void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
+      Trace = trace ?? throw new ArgumentNullException(nameof(trace));
       (m_BrowseName, m_NodeIdNodeId) = modelContext.ImportBrowseName(BrowseName, this.NodeId, trace);
       if (!(this.References is null))
         foreach (Reference _reference in this.References)
           _reference.RecalculateNodeIds(x => modelContext.ImportNodeId(x, trace));
       ImportNodeId(this.RolePermissions, x => modelContext.ImportNodeId(x, trace));
     }
-
+    private Action<TraceMessage> Trace = null;
     #endregion API
 
     #region override Object

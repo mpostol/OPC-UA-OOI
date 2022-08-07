@@ -39,5 +39,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       }
       return (AccessRestrictions)accessRestrictions;
     }
+
+    internal static AttributeWriteMask GetAttributeWriteMask(this UInt32 value)
+    {
+      return (AttributeWriteMask)value;
+    }
   }
 }

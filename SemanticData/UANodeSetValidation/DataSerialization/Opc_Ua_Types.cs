@@ -3720,83 +3720,84 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     }
   }
 
+  //TODO Define independent Address Space API #645 - must be updated
   /// <uwagi/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute( "xsd", "2.0.50727.42" )]
-  [System.SerializableAttribute()]
-  [System.Xml.Serialization.XmlTypeAttribute( Namespace = "http://opcfoundation.org/UA/2008/02/Types.xsd" )]
-  [System.Xml.Serialization.XmlRootAttribute( Namespace = "http://opcfoundation.org/UA/2008/02/Types.xsd", IsNullable = false )]
-  public enum AttributeWriteMask
-  {
+  //[System.CodeDom.Compiler.GeneratedCodeAttribute( "xsd", "2.0.50727.42" )]
+  //[System.SerializableAttribute()]
+  //[System.Xml.Serialization.XmlTypeAttribute( Namespace = "http://opcfoundation.org/UA/2008/02/Types.xsd" )]
+  //[System.Xml.Serialization.XmlRootAttribute( Namespace = "http://opcfoundation.org/UA/2008/02/Types.xsd", IsNullable = false )]
+  //public enum AttributeWriteMask
+  //{
 
-    /// <uwagi/>
-    None_0,
+  //  /// <uwagi/>
+  //  None_0,
 
-    /// <uwagi/>
-    AccessLevel_1,
+  //  /// <uwagi/>
+  //  AccessLevel_1,
 
-    /// <uwagi/>
-    ArrayDimensions_2,
+  //  /// <uwagi/>
+  //  ArrayDimensions_2,
 
-    /// <uwagi/>
-    BrowseName_4,
+  //  /// <uwagi/>
+  //  BrowseName_4,
 
-    /// <uwagi/>
-    ContainsNoLoops_8,
+  //  /// <uwagi/>
+  //  ContainsNoLoops_8,
 
-    /// <uwagi/>
-    DataType_16,
+  //  /// <uwagi/>
+  //  DataType_16,
 
-    /// <uwagi/>
-    Description_32,
+  //  /// <uwagi/>
+  //  Description_32,
 
-    /// <uwagi/>
-    DisplayName_64,
+  //  /// <uwagi/>
+  //  DisplayName_64,
 
-    /// <uwagi/>
-    EventNotifier_128,
+  //  /// <uwagi/>
+  //  EventNotifier_128,
 
-    /// <uwagi/>
-    Executable_256,
+  //  /// <uwagi/>
+  //  Executable_256,
 
-    /// <uwagi/>
-    Historizing_512,
+  //  /// <uwagi/>
+  //  Historizing_512,
 
-    /// <uwagi/>
-    InverseName_1024,
+  //  /// <uwagi/>
+  //  InverseName_1024,
 
-    /// <uwagi/>
-    IsAbstract_2048,
+  //  /// <uwagi/>
+  //  IsAbstract_2048,
 
-    /// <uwagi/>
-    MinimumSamplingInterval_4096,
+  //  /// <uwagi/>
+  //  MinimumSamplingInterval_4096,
 
-    /// <uwagi/>
-    NodeClass_8192,
+  //  /// <uwagi/>
+  //  NodeClass_8192,
 
-    /// <uwagi/>
-    NodeId_16384,
+  //  /// <uwagi/>
+  //  NodeId_16384,
 
-    /// <uwagi/>
-    Symmetric_32768,
+  //  /// <uwagi/>
+  //  Symmetric_32768,
 
-    /// <uwagi/>
-    UserAccessLevel_65536,
+  //  /// <uwagi/>
+  //  UserAccessLevel_65536,
 
-    /// <uwagi/>
-    UserExecutable_131072,
+  //  /// <uwagi/>
+  //  UserExecutable_131072,
 
-    /// <uwagi/>
-    UserWriteMask_262144,
+  //  /// <uwagi/>
+  //  UserWriteMask_262144,
 
-    /// <uwagi/>
-    ValueRank_524288,
+  //  /// <uwagi/>
+  //  ValueRank_524288,
 
-    /// <uwagi/>
-    WriteMask_1048576,
+  //  /// <uwagi/>
+  //  WriteMask_1048576,
 
-    /// <uwagi/>
-    ValueForVariableType_2097152,
-  }
+  //  /// <uwagi/>
+  //  ValueForVariableType_2097152,
+  //}
 
   /// <uwagi/>
   [System.CodeDom.Compiler.GeneratedCodeAttribute( "xsd", "2.0.50727.42" )]

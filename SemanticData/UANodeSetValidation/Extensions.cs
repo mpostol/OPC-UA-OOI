@@ -71,7 +71,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return !value.Equals(defaultValue) ? Convert.ToInt32(value) : new Nullable<int>();
     }
 
-    internal static uint Validate(this uint value, uint maxValue, Action<uint> reportError)
+    internal static AttributeWriteMask Validate(this AttributeWriteMask value, AttributeWriteMask maxValue, Action<AttributeWriteMask> reportError)
     {
       if (value.CompareTo(maxValue) >= 0)
         reportError(value);

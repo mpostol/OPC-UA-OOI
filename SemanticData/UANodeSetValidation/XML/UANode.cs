@@ -61,14 +61,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     NodeId IUANode.NodeId { get => m_NodeIdNodeId; }
     QualifiedName IUANode.BrowseName { get => m_BrowseName; }
     IReference[] IUANode.References { get => References; }
-    DataSerialization.LocalizedText[] IUANode.DisplayName 
-    { 
-      get => DisplayName.GetLocalizedTextArray(); 
+
+    DataSerialization.LocalizedText[] IUANode.DisplayName
+    {
+      get => DisplayName.GetLocalizedTextArray();
     }
-    DataSerialization.LocalizedText[] IUANode.Description 
-    { 
-      get => Description.GetLocalizedTextArray();  
+
+    DataSerialization.LocalizedText[] IUANode.Description
+    {
+      get => Description.GetLocalizedTextArray();
     }
+
     private NodeId m_NodeIdNodeId = null;
     private QualifiedName m_BrowseName = null;
 
@@ -120,17 +123,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       set { throw new NotImplementedException(); }
     }
 
-
-    IRolePermission[] IUANode.RolePermissions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    IRolePermission[] IUANode.RolePermissions { get => this.RolePermissions; set => throw new NotImplementedException(); }
+    IRolePermission[] IUANode.UserRolePermissions { get => null; set => throw new NotImplementedException(); }
 
     //public uint WriteAccess { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-    AccessRestrictions IUANode.AccessRestrictions 
-    { 
+    AccessRestrictions IUANode.AccessRestrictions
+    {
       get => this.AccessRestrictions.GetAccessRestrictions(NodeClassEnum, Trace);
-      set => throw new NotImplementedException(); 
+      set => throw new NotImplementedException();
     }
 
+    AttributeWriteMask IUANode.WriteMask { get => this.WriteMask.GetAttributeWriteMask(); set => throw new NotImplementedException(); }
+    AttributeWriteMask IUANode.UserWriteMask { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     #endregion IUANode
 
@@ -199,7 +204,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       }
     }
 
-
     internal virtual void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
       Trace = trace ?? throw new ArgumentNullException(nameof(trace));
@@ -209,7 +213,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
           _reference.RecalculateNodeIds(x => modelContext.ImportNodeId(x, trace));
       ImportNodeId(this.RolePermissions, x => modelContext.ImportNodeId(x, trace));
     }
+
     private Action<TraceMessage> Trace = null;
+
     #endregion API
 
     #region override Object

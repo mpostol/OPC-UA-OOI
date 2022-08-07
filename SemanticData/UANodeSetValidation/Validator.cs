@@ -273,11 +273,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       _nodeSet.Description.ExportLocalizedTextArray(_nodeFactory.AddDescription);
       _nodeSet.DisplayName.Truncate(512, m_buildErrorsHandling.WriteTraceMessage).ExportLocalizedTextArray(_nodeFactory.AddDisplayName);
       _nodeFactory.SymbolicName = new XmlQualifiedName(_symbolicName, _browseName.Namespace);
-      Action<uint, string> _doReport = (x, y) =>
+      Action<AttributeWriteMask, NodeClassEnum> _doReport = (AttributeWriteMask x, NodeClassEnum y) =>
       {
         m_buildErrorsHandling.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.WrongWriteMaskValue, string.Format("The current value is {0:x} of the node type {1}.", x, y)));
       };
-      _nodeFactory.WriteAccess = _nodeSet is IUAVariable ? _nodeSet.WriteMask.Validate(0x200000, x => _doReport(x, _nodeSet.GetType().Name)) : _nodeSet.WriteMask.Validate(0x400000, x => _doReport(x, _nodeSet.GetType().Name));
+      _nodeFactory.WriteAccess = _nodeSet.NodeClassEnum == NodeClassEnum.UAVariable ?
+        (UInt32)_nodeSet.WriteMask.Validate( AttributeWriteMask.ValueForVariableType, x => _doReport(x, _nodeSet.NodeClassEnum)) :
+        (UInt32)_nodeSet.WriteMask.Validate(AttributeWriteMask.AccessLevelEx, x => _doReport(x, _nodeSet.NodeClassEnum));
       _nodeFactory.AccessRestrictions = _nodeSet.AccessRestrictions;
       _nodeFactory.Category = _nodeSet.Category;
       if (_nodeSet.RolePermissions != null)

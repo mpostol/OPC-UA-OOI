@@ -115,7 +115,7 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     ///
     /// The AttributeWriteMask DataType is defined in 8.60.
     /// </summary>
-    uint WriteMask { set; get; }
+    AttributeWriteMask WriteMask { set; get; }
 
     /// <summary>
     /// The optional UserWriteMask Attribute exposes the possibilities of a client to write the Attributes of the Node taking user access rights into account. It uses the AttributeWriteMask
@@ -125,7 +125,7 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     /// Clients cannot assume an Attribute can be written based on the UserWriteMask Attribute.It is possible that the Server may return an access denied error due to some server
     /// specific change which was not reflected in the state of this Attribute at the time the Client accessed it.
     /// </summary>
-    uint UserWriteMask { set; get; }
+    AttributeWriteMask UserWriteMask { set; get; }
 
     /// <summary>
     /// The optional RolePermissions Attribute specifies the Permissions that apply to a Node for all Roles which have access to the Node. The value of the Attribute is an array of
@@ -133,7 +133,21 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     /// </summary>
     IRolePermission[] RolePermissions { get; set; }
 
-    //UserRolePermissions
+    /// <summary>
+    /// The optional UserRolePermissions attribute specifies the permissions that apply to a node for all roles granted to current Session. The value of the Attribute is an array of
+    /// RolePermissionType Structures (see Table 8).
+    ///
+    /// Clients may determine their effective permissions by performing a logical OR of permissions for each role in the array.
+    ///
+    /// The value of this Attribute is derived from the rules used by the hosting application to map sessions to roles. This mapping may be vendor specific or it may use the standard
+    /// role model defined in Part 3 Section 4.8.
+    ///
+    /// This Attribute shall not be writeable.
+    ///
+    /// If not specified, the value of DefaultUserRolePermissions property from the Namespace Metadata Object associated with the node is used instead. If the NamespaceMetadata Object does not
+    /// define the Property or does not exist, then the hosting application does not publish any information about roles mapped to the current Session.
+    /// </summary>
+    IRolePermission[] UserRolePermissions { get; set; }
 
     /// <summary>
     /// Sets or gets the access restrictions. See also Part 3 section 5.2.11

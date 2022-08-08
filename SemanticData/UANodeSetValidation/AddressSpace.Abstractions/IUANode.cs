@@ -65,7 +65,7 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     /// The NodeClass identifies the NodeClass of a Node.
     /// </summary>
     /// <value>Returns NodeClassEnum</value>
-    NodeClassEnum NodeClassEnum { get; }
+    NodeClassEnum NodeClass { get; }
 
     /// <summary>
     /// It holds the value of the BrowseName attribute of modes in the Address Space. The BrowseName is the name used in the information model.

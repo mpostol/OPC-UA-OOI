@@ -14,6 +14,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   public partial class UAVariableType : IUAVariableType
   {
+    public override NodeClassEnum NodeClass => NodeClassEnum.UAVariableType;
+
     /// <summary>
     /// Get the clone from the types derived from this one.
     /// </summary>

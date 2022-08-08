@@ -70,7 +70,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
       else
       {
-        switch (nodeContext.UANode.NodeClassEnum)
+        switch (nodeContext.UANode.NodeClass)
         {
           case NodeClassEnum.UADataType:
             CreateNode<IDataTypeFactory, IUADataType>(exportFactory.AddNodeFactory<IDataTypeFactory>, nodeContext, (x, y) => Update(x, y), UpdateType, validateExportNode2Model, allNodesInConcern);
@@ -277,9 +277,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       {
         m_buildErrorsHandling.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.WrongWriteMaskValue, string.Format("The current value is {0:x} of the node type {1}.", x, y)));
       };
-      _nodeFactory.WriteAccess = _nodeSet.NodeClassEnum == NodeClassEnum.UAVariable ?
-        (UInt32)_nodeSet.WriteMask.Validate( AttributeWriteMask.ValueForVariableType, x => _doReport(x, _nodeSet.NodeClassEnum)) :
-        (UInt32)_nodeSet.WriteMask.Validate(AttributeWriteMask.AccessLevelEx, x => _doReport(x, _nodeSet.NodeClassEnum));
+      _nodeFactory.WriteAccess = _nodeSet.NodeClass == NodeClassEnum.UAVariable ?
+        (UInt32)_nodeSet.WriteMask.Validate( AttributeWriteMask.ValueForVariableType, x => _doReport(x, _nodeSet.NodeClass)) :
+        (UInt32)_nodeSet.WriteMask.Validate(AttributeWriteMask.AccessLevelEx, x => _doReport(x, _nodeSet.NodeClass));
       _nodeFactory.AccessRestrictions = _nodeSet.AccessRestrictions;
       _nodeFactory.Category = _nodeSet.Category;
       if (_nodeSet.RolePermissions != null)

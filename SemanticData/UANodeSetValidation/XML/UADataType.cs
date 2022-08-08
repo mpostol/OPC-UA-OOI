@@ -15,6 +15,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   {
     #region IUADataType
 
+    public override NodeClassEnum NodeClass => NodeClassEnum.UADataType;
+
     UAOOI.SemanticData.InformationModelFactory.DataTypePurpose IUADataType.Purpose
     {
       get

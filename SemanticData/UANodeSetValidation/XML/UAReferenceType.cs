@@ -14,6 +14,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   public partial class UAReferenceType : IUAReferenceType
   {
+    public override NodeClassEnum NodeClass => NodeClassEnum.UAReferenceType;
+
     DataSerialization.LocalizedText[] IUAReferenceType.InverseName
     {
       get

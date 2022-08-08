@@ -51,6 +51,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       set => throw new NotImplementedException();
     }
 
+    public override NodeClassEnum NodeClass => NodeClassEnum.UAMethod;
+
     /// <summary>
     /// Indicates whether the inherited parent object is also equal to another object.
     /// </summary>

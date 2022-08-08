@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory.UAConstants;
+using OOIReleaseStatus = UAOOI.SemanticData.InformationModelFactory.ReleaseStatus;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
@@ -43,6 +44,29 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     internal static AttributeWriteMask GetAttributeWriteMask(this UInt32 value)
     {
       return (AttributeWriteMask)value;
+    }
+
+    internal static OOIReleaseStatus GetReleaseStatus(this ReleaseStatus value)
+    {
+      OOIReleaseStatus retValue = default(OOIReleaseStatus);
+      switch (value)
+      {
+        case ReleaseStatus.Released:
+          retValue = OOIReleaseStatus.Released;
+          break;
+
+        case ReleaseStatus.Draft:
+          retValue = OOIReleaseStatus.Draft;
+          break;
+
+        case ReleaseStatus.Deprecated:
+          retValue = OOIReleaseStatus.Deprecated;
+          break;
+
+        default:
+          break;
+      }
+      return retValue;
     }
   }
 }

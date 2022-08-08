@@ -176,7 +176,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             //TODO The exported model doesn't contain all nodes #653
             //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
             _or.TargetId = _rfx.BrowsePath();
-            switch (_rfx.TargetNode.UANode.NodeClassEnum)
+            switch (_rfx.TargetNode.UANode.NodeClass)
             {
               case NodeClassEnum.UADataType:
               case NodeClassEnum.UAObjectType:
@@ -202,7 +202,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                 break;
 
               default:
-                throw new ArgumentOutOfRangeException(nameof(_rfx.TargetNode.UANode.NodeClassEnum));
+                throw new ArgumentOutOfRangeException(nameof(_rfx.TargetNode.UANode.NodeClass));
             }
             break;
 

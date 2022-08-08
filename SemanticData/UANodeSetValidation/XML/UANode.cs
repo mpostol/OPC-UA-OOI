@@ -59,8 +59,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     #region IUANode
 
     NodeId IUANode.NodeId { get => m_NodeIdNodeId; }
+
+    /// <summary>
+    /// Gets the node class of a Node.
+    /// </summary>
+    /// <value>The node class enum.</value>
+    public abstract NodeClassEnum NodeClass { get; }
+
     QualifiedName IUANode.BrowseName { get => m_BrowseName; }
-    IReference[] IUANode.References { get => References; }
 
     DataSerialization.LocalizedText[] IUANode.DisplayName
     {
@@ -72,8 +78,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       get => Description.GetLocalizedTextArray();
     }
 
-    private NodeId m_NodeIdNodeId = null;
-    private QualifiedName m_BrowseName = null;
+    AttributeWriteMask IUANode.WriteMask { get => this.WriteMask.GetAttributeWriteMask(); set => throw new NotImplementedException(); }
+    AttributeWriteMask IUANode.UserWriteMask { get => this.UserWriteMask.GetAttributeWriteMask(); set => throw new NotImplementedException(); }
+    IRolePermission[] IUANode.RolePermissions { get => this.RolePermissions; set => throw new NotImplementedException(); }
+    IRolePermission[] IUANode.UserRolePermissions { get => null; set => throw new NotImplementedException(); }
+
+    AccessRestrictions IUANode.AccessRestrictions
+    {
+      get => this.AccessRestrictions.GetAccessRestrictions(NodeClass, Trace);
+      set => throw new NotImplementedException();
+    }
+
+    IReference[] IUANode.References { get => References; }
 
     public virtual void RemoveInheritedValues(IUANode baseNode)
     {
@@ -98,44 +114,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     OOIReleaseStatus IUANode.ReleaseStatus
     {
-      get
-      {
-        OOIReleaseStatus retValue = default(OOIReleaseStatus);
-        switch (this.ReleaseStatus)
-        {
-          case ReleaseStatus.Released:
-            retValue = OOIReleaseStatus.Released;
-            break;
-
-          case ReleaseStatus.Draft:
-            retValue = OOIReleaseStatus.Draft;
-            break;
-
-          case ReleaseStatus.Deprecated:
-            retValue = OOIReleaseStatus.Deprecated;
-            break;
-
-          default:
-            break;
-        }
-        return retValue;
-      }
+      get { return this.ReleaseStatus.GetReleaseStatus(); }
       set { throw new NotImplementedException(); }
     }
-
-    IRolePermission[] IUANode.RolePermissions { get => this.RolePermissions; set => throw new NotImplementedException(); }
-    IRolePermission[] IUANode.UserRolePermissions { get => null; set => throw new NotImplementedException(); }
-
-    //public uint WriteAccess { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    AccessRestrictions IUANode.AccessRestrictions
-    {
-      get => this.AccessRestrictions.GetAccessRestrictions(NodeClassEnum, Trace);
-      set => throw new NotImplementedException();
-    }
-
-    AttributeWriteMask IUANode.WriteMask { get => this.WriteMask.GetAttributeWriteMask(); set => throw new NotImplementedException(); }
-    AttributeWriteMask IUANode.UserWriteMask { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     #endregion IUANode
 
@@ -174,34 +155,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       if (Object.ReferenceEquals(value1, null))
         return !Object.ReferenceEquals(value2, null);
       return !value1.Equals(value2);
-    }
-
-    /// <summary>
-    /// Gets the node class of a Node.
-    /// </summary>
-    /// <value>The < node class enum.</value>
-    public NodeClassEnum NodeClassEnum
-    {
-      get
-      {
-        if (this.GetType() == typeof(UAReferenceType))
-          return NodeClassEnum.UAReferenceType;
-        if (this.GetType() == typeof(UADataType))
-          return NodeClassEnum.UADataType;
-        if (this.GetType() == typeof(UAVariableType))
-          return NodeClassEnum.UAVariableType;
-        if (this.GetType() == typeof(UAObjectType))
-          return NodeClassEnum.UAObjectType;
-        if (this.GetType() == typeof(UAView))
-          return NodeClassEnum.UAView;
-        if (this.GetType() == typeof(UAMethod))
-          return NodeClassEnum.UAMethod;
-        if (this.GetType() == typeof(UAVariable))
-          return NodeClassEnum.UAVariable;
-        if (this.GetType() == typeof(UAObject))
-          return NodeClassEnum.UAObject;
-        return NodeClassEnum.Unknown;
-      }
     }
 
     internal virtual void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
@@ -244,6 +197,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     #endregion override Object
 
     #region private
+
+    private NodeId m_NodeIdNodeId = null;
+    private QualifiedName m_BrowseName = null;
 
     private void ImportNodeId(RolePermission[] rolePermissions, Func<string, NodeId> importNodeId)
     {

@@ -14,6 +14,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   public partial class UAVariable : IUAVariable
   {
+    public override NodeClassEnum NodeClass => NodeClassEnum.UAVariable;
+
     /// <summary>
     /// Indicates whether the inherited parent object is also equal to another object.
     /// </summary>

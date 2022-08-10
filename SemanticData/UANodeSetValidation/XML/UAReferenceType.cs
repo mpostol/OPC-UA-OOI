@@ -6,7 +6,6 @@
 //__________________________________________________________________________________________________
 
 using System;
-using System.Collections.Generic;
 using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 
@@ -18,15 +17,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     DataSerialization.LocalizedText[] IUAReferenceType.InverseName
     {
-      get
-      {
-        if (this.InverseName == null || this.InverseName.Length == 0)
-          return null;
-        List<DataSerialization.LocalizedText> ret = new List<DataSerialization.LocalizedText>();
-        foreach (XML.LocalizedText item in this.InverseName)
-          ret.Add(new DataSerialization.LocalizedText() { Locale = item.Locale, Text = item.Value });
-        return ret.ToArray();
-      }
+      get { return this.InverseName.GetLocalizedTextArray(); }
     }
 
     /// <summary>

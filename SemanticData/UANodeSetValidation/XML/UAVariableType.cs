@@ -41,13 +41,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     internal override void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
       base.RecalculateNodeIds(modelContext, trace);
-      DataTypeNodeId = modelContext.ImportNodeId(DataType, trace);
+      m_DataTypeNodeId = modelContext.ImportNodeId(this.DataType, trace);
     }
 
     #region IUAVariableType
 
-    public NodeId DataTypeNodeId { get; private set; }
+    NodeId IUAVariableType.DataType => m_DataTypeNodeId;
 
     #endregion IUAVariableType
+
+    private NodeId m_DataTypeNodeId;
   }
 }

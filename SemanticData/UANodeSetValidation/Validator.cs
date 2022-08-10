@@ -189,7 +189,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private void Update(IVariableTypeFactory nodeDesign, IUAVariableType nodeSet)
     {
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(string.Empty);
-      nodeDesign.DataType = m_AddressSpace.ExportBrowseName(nodeSet.DataTypeNodeId, DataTypes.Number);
+      nodeDesign.DataType = m_AddressSpace.ExportBrowseName(nodeSet.DataType, DataTypes.Number);
       nodeDesign.DefaultValue = nodeSet.Value;
       nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(m_buildErrorsHandling.WriteTraceMessage);
     }

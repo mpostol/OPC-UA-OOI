@@ -13,12 +13,10 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
   public interface IUAType : IUANode
   {
     /// <summary>
-    /// Sets the base type of the node.
-    /// </summary>
-    /// <value>The base type represented by the <see cref="XmlQualifiedName"/>.</value>
-    //XmlQualifiedName BaseType { set; }
-    /// <summary>
     /// Sets a value indicating whether this instance is abstract.
+    /// A boolean Attribute with the following values:
+    ///   TRUE it is an abstract DataType.
+    ///   FALSE it is not an abstract DataType.
     /// </summary>
     /// <remarks>Default Value is false</remarks>
     /// <value><c>true</c> if this instance is abstract; otherwise, <c>false</c>.</value>

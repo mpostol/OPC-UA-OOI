@@ -60,6 +60,7 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     /// Exposed using the type AccessLevelType. The AccessLevelType is defined in P 3 8.57. as the Standard DataType.
     /// </remarks>
     /// <value>The access level.</value>
+    //TODO AccessLevelType must be defined for IUAVariable and IUAVariableType #673
     uint? AccessLevel
     {
       set; get;
@@ -75,6 +76,7 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     /// Exposed using the type AccessLevelType. The AccessLevelType is defined in P 3 8.57. as the Standard DataType.
     /// </remarks>
     /// <value>The user access level.</value>
+    //TODO AccessLevelType must be defined for IUAVariable and IUAVariableType #673
     byte? UserAccessLevel
     {
       set; get;

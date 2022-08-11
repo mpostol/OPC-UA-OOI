@@ -177,7 +177,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.ReferenceType = parentReference == null ? null : parentReference.GetReferenceTypeName();
       nodeDesign.AccessLevel = nodeSet.AccessLevel; //.GetAccessLevel(m_buildErrorsHandling.WriteTraceMessage);
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(string.Empty);
-      nodeDesign.DataType = string.IsNullOrEmpty(nodeSet.DataType) ? null : m_AddressSpace.ExportBrowseName(nodeSet.DataTypeNodeId, DataTypes.Number);//TODO add test case must be DataType, must not be abstract
+      nodeDesign.DataType = m_AddressSpace.ExportBrowseName(nodeSet.DataType, DataTypes.Number);//TODO add test case must be DataType, must not be abstract
       nodeDesign.DefaultValue = nodeSet.Value; //TODO add test case must be of type defined by DataType
       nodeDesign.Historizing = nodeSet.Historizing.Export(false);
       nodeDesign.MinimumSamplingInterval = nodeSet.MinimumSamplingInterval.Export(0D);

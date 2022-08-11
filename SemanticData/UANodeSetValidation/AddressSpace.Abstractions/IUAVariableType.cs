@@ -20,7 +20,7 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     /// Sets the default value. The value of the Variable node that the server assigns while instantiating the node. Its data type is defined by the <see cref="IDataDescriptor.DataType"/>.
     /// </summary>
     /// <value>The default value.</value>
-    XmlElement /*Default */ Value
+    XmlElement Value
     {
       set; get;
     }
@@ -29,15 +29,6 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     /// NodeId of the data type definition for instances of this type.
     /// </summary>
     NodeId DataType { get; }
-
-    /// <summary>
-    /// This Attribute specifies the length of each dimension for an array value. The Attribute specifies the maximum supported length of each dimension. If the maximum is unknown the value is 0.
-    /// The number of elements shall be equal to the value of the ValueRank Attribute.This Attribute shall be null if ValueRank ≤ 0.
-    /// For example, if a VariableType is defined by the following C array:
-    ///   Int32 myArray[346];
-    /// then this VariableType’s DataType would point to an Int32, the VariableType’s ValueRank has the value 1 and the ArrayDimensions is an array with one entry having the value 346.
-    /// </summary>
-    string ArrayDimensions { get; set; }
 
     /// <summary>
     /// This Attribute indicates whether the Value Attribute of the VariableType is an array and how many dimensions the array has.
@@ -51,5 +42,14 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     /// NOTE All DataTypes are considered to be scalar, even if they have array-like semantics like ByteString and String.
     /// </summary>
     int ValueRank { get; set; }
+
+    /// <summary>
+    /// This Attribute specifies the length of each dimension for an array value. The Attribute specifies the maximum supported length of each dimension. If the maximum is unknown the value is 0.
+    /// The number of elements shall be equal to the value of the ValueRank Attribute.This Attribute shall be null if ValueRank ≤ 0.
+    /// For example, if a VariableType is defined by the following C array:
+    ///   Int32 myArray[346];
+    /// then this VariableType’s DataType would point to an Int32, the VariableType’s ValueRank has the value 1 and the ArrayDimensions is an array with one entry having the value 346.
+    /// </summary>
+    string ArrayDimensions { get; set; }
   }
 }

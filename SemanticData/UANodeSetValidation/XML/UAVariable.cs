@@ -30,7 +30,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return
         base.ParentEquals(_other) &&
         //TODO compare Value, Translation
-        this.DataTypeNodeId == _other.DataTypeNodeId &&
+        this.DataType == _other.DataType &&
         this.ValueRank == _other.ValueRank &&
         this.ArrayDimensions == _other.ArrayDimensions &&
         this.AccessLevel == _other.AccessLevel &&
@@ -59,7 +59,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     #region IUAVariable
 
-    public NodeId DataTypeNodeId { get; private set; }
+    NodeId IUAVariable.DataType { get; }
+
+    private NodeId DataTypeNodeId = null;
 
     #endregion IUAVariable
 
@@ -89,7 +91,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         Value = this.Value,
         Translation = this.Translation,
         DataType = this.DataType,
-        DataTypeNodeId = new NodeId(this.DataTypeNodeId),
         ValueRank = this.ValueRank,
         ArrayDimensions = this.ArrayDimensions,
         AccessLevel = this.AccessLevel,

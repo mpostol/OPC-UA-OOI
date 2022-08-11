@@ -14,6 +14,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   public partial class UAVariableType : IUAVariableType
   {
+    /// <summary>
+    /// The NodeClass identifies the NodeClass of a Node.
+    /// </summary>
     public override NodeClassEnum NodeClass => NodeClassEnum.UAVariableType;
 
     /// <summary>

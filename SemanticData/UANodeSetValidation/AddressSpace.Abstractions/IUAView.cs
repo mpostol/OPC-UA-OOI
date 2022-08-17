@@ -20,13 +20,14 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     /// <value><c>true</c> if the part of the Address Space represented by View contains no loops; otherwise, <c>false</c>.</value>
     bool ContainsNoLoops { get; set; }
 
-    //TODO Description
     /// <summary>
     /// Sets a value indicating whether the events are supported.
     /// </summary>
     /// <remarks>
+    /// The EventNotifier is used to indicate if the node can be used to subscribe to events or the read/write historic events.
     /// Must return EventNotifierType defined in the P 3 8.59
     /// </remarks>
+    //TODO UANodeSetValidation - Define independent Address Space API #672 - replace byte by the EventNotifierType according to the definition in the spec
     byte EventNotifier { get; set; }
   }
 }

@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
   /// <summary>
   /// Objects are used to represent systems, system components, real-world objects and software objects. Objects are defined using the Object NodeClass.
   /// </summary>
-  public interface IUAObject : IUAInstance
+  public interface IUAObject : IUANode
   {
     /// <summary>
     /// The EventNotifier is used to indicate if the node can be used to subscribe to events or the read/write historic Events.

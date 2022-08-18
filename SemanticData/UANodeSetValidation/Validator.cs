@@ -296,7 +296,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.IsAbstract = nodeSet.IsAbstract;
     }
 
-    private static void UpdateInstance(IInstanceFactory nodeDesign, IUAInstance nodeSet, IUANodeBase nodeContext)
+    private static void UpdateInstance(IInstanceFactory nodeDesign, IUANode nodeSet, IUANodeBase nodeContext)
     {
       if (nodeContext.ModelingRule.HasValue)
         nodeDesign.ModelingRule = nodeContext.ModelingRule.Value;

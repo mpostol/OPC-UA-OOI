@@ -10,7 +10,7 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
   /// <summary>
   /// Interface IUAView - encapsulates definition of a View NodeClass
   /// </summary>
-  public interface IUAView : IUAInstance
+  public interface IUAView : IUANode
   {
     /// <summary>
     /// If set to “TRUE” this Attribute indicates that by following the References in the context of the View there are no loops, i.e. starting from a Node “A” contained in the View and following the forward References in the context of the View Node “A” will not be reached again. It does not specify that there is only one path starting from the View Node to reach a Node contained in the View.If set to FALSE this Attribute indicates that following References in the context of the View may lead to loops.

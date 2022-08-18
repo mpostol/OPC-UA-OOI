@@ -7,7 +7,9 @@
 
 namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
+  /// <summary>
+  /// ObjectTypes provide definitions for objects. ObjectTypes are defined using the ObjectType NodeClass.
+  /// </summary>
   public interface IUAObjectType : IUAType
-  {
-  }
+  { }
 }

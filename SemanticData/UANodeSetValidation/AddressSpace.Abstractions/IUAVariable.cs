@@ -10,7 +10,7 @@ using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
-  internal interface IUAVariable : IUAInstance
+  internal interface IUAVariable : IUANode
   {
     /// <summary>
     /// The most recent value of the Variable that the Server has. Its data type is defined by the DataType Attribute. It is the only Attribute that does not have a data type associated with it.

@@ -12,7 +12,7 @@ using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  public abstract partial class UAInstance : IUAInstance
+  public abstract partial class UAInstance
   {
     /// <summary>
     /// Indicates whether the inherited parent object is also equal to another object.
@@ -43,7 +43,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       ParentNodeIdNodeId = modelContext.ImportNodeId(ParentNodeId, trace);
       base.RecalculateNodeIds(modelContext, trace);
     }
-
+    /// <summary>
+    /// The NodeId of the Node that is the parent of the Node within the information model. This field is used to indicate that a tight coupling exists between 
+    /// the Node and its parent (e.g. when the parent is deleted the child is deleted as well). 
+    /// </summary>
+    /// <remarks>
+    /// This information does not appear in the AddressSpace and is intended for use by design tools.
+    /// </remarks>
     internal NodeId ParentNodeIdNodeId { get; private set; }
   }
 }

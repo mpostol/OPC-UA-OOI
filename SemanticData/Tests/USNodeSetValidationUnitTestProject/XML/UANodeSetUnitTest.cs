@@ -189,8 +189,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<int>(1, _enumeration.References[1].ValueNodeId.NamespaceIndex);
       Assert.AreEqual<int>(0, _enumeration.References[1].ReferenceTypeNodeid.NamespaceIndex);
 
-      Assert.AreEqual<string>("i=24", _enumeration.Definition.Field[0].DataTypeNodeId.ToString());
-      Assert.AreEqual<string>("ns=1;i=24", _enumeration.Definition.Field[1].DataTypeNodeId.ToString());
+      Assert.AreEqual<string>("i=24", ((IUADataType)_enumeration).Definition.Field[0].DataTypeNodeId.ToString());
+      Assert.AreEqual<string>("ns=1;i=24", ((IUADataType)_enumeration).Definition.Field[1].DataTypeNodeId.ToString());
     }
 
     #endregion tests

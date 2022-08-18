@@ -40,7 +40,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       }
     }
 
-    IDataTypeDefinition IUADataType.Definition
+    IDataTypeDefinition IUADataTypeNodeClass.Definition
     {
       get { return this.Definition; }
       //TODO Define independent Address Space API #645 - must be implemented

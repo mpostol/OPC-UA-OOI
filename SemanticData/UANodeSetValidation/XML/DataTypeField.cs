@@ -18,15 +18,23 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   {
     internal void RecalculateNodeIds(Func<string, NodeId> importNodeId)
     {
-      DataTypeNodeId = importNodeId(DataType);
+      DataTypeNodeIdBackingField = importNodeId(DataType);
     }
 
-    public NodeId DataTypeNodeId { get; private set; }
+    NodeId IDataTypeField.DataTypeNodeId
+    {
+      get { return DataTypeNodeIdBackingField; }
+    }
+
+    private NodeId DataTypeNodeIdBackingField;
 
     #region IDataTypeField
 
-    DataSerialization.LocalizedText[] IDataTypeField.DisplayName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    DataSerialization.LocalizedText[] IDataTypeField.Description { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    DataSerialization.LocalizedText[] IDataTypeField.DisplayName
+    { get => this.DisplayName.GetLocalizedTextArray(); set => throw new NotImplementedException(); }
+
+    DataSerialization.LocalizedText[] IDataTypeField.Description
+    { get => this.Description.GetLocalizedTextArray(); set => throw new NotImplementedException(); }
 
     #endregion IDataTypeField
   }

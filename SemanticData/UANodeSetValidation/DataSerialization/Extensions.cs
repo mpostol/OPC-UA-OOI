@@ -17,7 +17,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   {
     internal static QualifiedName ParseBrowseName(this string qualifiedName, NodeId nodeId, Action<TraceMessage> traceEvent)
     {
-      if ((nodeId == null) || nodeId == NodeId.Null) throw new ArgumentNullException(nameof(NodeId));
+      if ((nodeId == null) || nodeId == NodeId.Null) throw new ArgumentNullException(nameof(nodeId));
       QualifiedName qualifiedNameToReturn = null;
       if (string.IsNullOrEmpty(qualifiedName))
       {

@@ -19,7 +19,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   /// Implements the <see cref="IEquatable{UANode}"/>
   /// </summary>
   /// <seealso cref="IEquatable{UANode}" />
-  public abstract partial class UANode : IEquatable<IUANode>, IUANode
+  public abstract partial class UANode : IUANode
   {
     #region IEquatable
 
@@ -55,6 +55,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     #endregion IEquatable
 
     //TODO Define independent Address Space API #645 LocalizedText conversion must be implemented.
+    //public UANode()
+    //{
+    //  m_NodeIdNodeId = DataSerialization.NodeId.Parse(NodeId);
+    //  m_BrowseName = BrowseName.ParseBrowseName(m_NodeIdNodeId, x => { });
+    //}
 
     #region IUANode
 

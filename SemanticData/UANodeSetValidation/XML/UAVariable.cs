@@ -59,7 +59,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     #region IUAVariable
 
-    NodeId IUAVariable.DataType { get; }
+    NodeId IUAVariable.DataType
+    {
+      get { return DataTypeNodeId; }
+    }
 
     private NodeId DataTypeNodeId = null;
 

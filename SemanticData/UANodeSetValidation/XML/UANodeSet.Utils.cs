@@ -1,9 +1,12 @@
-﻿//__________________________________________________________________________________________________
+﻿//__________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright 2022 Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
-//__________________________________________________________________________________________________
+//  To be in touch join the community by pressing the `Watch` button and to get started
+//  comment using the discussion panel at
+//  https://github.com/mpostol/TP/discussions/182
+//  with an introduction of yourself and tell us about what you do with this community.
+//__________________________________________________________________________________________
 
 using System;
 using System.IO;
@@ -16,7 +19,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   public partial class UANodeSet : IUANodeSet, IUANodeSetModelHeader
   {
-    #region API
+    #region IUANodeSet
 
     public Uri ParseUAModelContext(INamespaceTable addressSpaceContext, Action<TraceMessage> traceEvent)
     {
@@ -25,7 +28,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return model.DefaultUri;
     }
 
-    #endregion API
+    #endregion IUANodeSet
 
     #region static helpers
 
@@ -44,6 +47,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     public static UANodeSet ReadModelFile(FileInfo path)
     {
+      if (path == null)
+        throw new ArgumentNullException($"{nameof(path)}");
       using (Stream stream = path.OpenRead())
         return XmlFile.ReadXmlFile<UANodeSet>(stream);
     }

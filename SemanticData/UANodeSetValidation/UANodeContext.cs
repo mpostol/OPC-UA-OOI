@@ -370,8 +370,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (Object.ReferenceEquals(other, null))
         return false;
-      return
-        this.UANode.Equals(other.UANode);
+      return this.UANode.Equals(other.UANode);
     }
 
     #endregion IEquatable<IUANodeBase>

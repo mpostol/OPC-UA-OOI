@@ -5,6 +5,7 @@
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
 
+using System;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
@@ -14,7 +15,7 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
   /// <summary>
   /// Interface IUANode -  a base type that defines a set of fields representing attributes and references of any node in the Address Space.
   /// </summary>
-  public partial interface IUANode
+  public partial interface IUANode: IEquatable<IUANode>
   {
     /// <summary>
     /// Sets or gets a symbolic name for the node that can be used as a class/field name by a design tools to enhance auto-generated code.
@@ -142,7 +143,7 @@ namespace UAOOI.SemanticData.AddressSpace.Abstractions
     /// The value of this Attribute is derived from the rules used by the hosting application to map sessions to roles. This mapping may be vendor specific or it may use the standard
     /// role model defined in Part 3 Section 4.8.
     ///
-    /// This Attribute shall not be writeable.
+    /// This Attribute shall not be writable.
     ///
     /// If not specified, the value of DefaultUserRolePermissions property from the Namespace Metadata Object associated with the node is used instead. If the NamespaceMetadata Object does not
     /// define the Property or does not exist, then the hosting application does not publish any information about roles mapped to the current Session.

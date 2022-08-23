@@ -40,7 +40,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     #region IReference
 
+    [System.Xml.Serialization.XmlIgnore]
     public NodeId ReferenceTypeNodeid { get; private set; }
+
+    [System.Xml.Serialization.XmlIgnore]
     public NodeId ValueNodeId { get; private set; }
 
     #endregion IReference

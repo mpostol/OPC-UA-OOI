@@ -66,8 +66,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     private NodeId DataTypeNodeId = null;
 
-    #endregion IUAVariable
-
     uint? IUAVariable.AccessLevel
     {
       get { return this.AccessLevel; }
@@ -82,6 +80,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 
     byte? IUAVariable.UserAccessLevel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     bool IUAVariable.Translation { get => this.Translation != null; }
+
+    #endregion IUAVariable
 
     /// <summary>
     /// Get the clone from the types derived from this one.

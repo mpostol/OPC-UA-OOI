@@ -21,12 +21,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   {
     #region IUANodeSet
 
-    public Uri ParseUAModelContext(INamespaceTable addressSpaceContext, Action<TraceMessage> traceEvent)
+    public Uri ParseUAModelContext(INamespaceTable namespaceTable, Action<TraceMessage> traceEvent)
     {
-      UAModelContext model = UAModelContext.ParseUANodeSetModelHeader(this, addressSpaceContext, traceEvent);
+      UAModelContext model = UAModelContext.ParseUANodeSetModelHeader(this, namespaceTable, traceEvent);
       this.RecalculateNodeIds(model, traceEvent);
       return model.DefaultUri;
     }
+
+    IUANode[] IUANodeSet.Items { get => Items; }
 
     #endregion IUANodeSet
 
@@ -58,8 +60,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     #region private
 
     private const string m_UADefinedTypesName = @"UAOOI.SemanticData.UANodeSetValidation.XML.Opc.Ua.NodeSet2.xml"; //OPC UA standard NodeSet model resource folder.
-
-    IUANode[] IUANodeSet.Items { get => Items; }
 
     private void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {

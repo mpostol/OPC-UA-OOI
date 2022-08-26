@@ -118,7 +118,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DataType = dataType,
         Identifier = new Nullable<int>(),
         Name = argument.Name,
-        ValueRank = argument.ValueRank.GetValueRank(m_TraceEvent.WriteTraceMessage)
+        ValueRank = argument.ValueRank.ParseValueRank(m_TraceEvent.WriteTraceMessage)
       };
       if (argument.Description != null)
         _ret.AddDescription(argument.Description.Locale, argument.Description.Text);

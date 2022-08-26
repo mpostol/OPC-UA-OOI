@@ -103,5 +103,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       };
       return _ret;
     }
-  }
+
+        internal void Deserialize()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

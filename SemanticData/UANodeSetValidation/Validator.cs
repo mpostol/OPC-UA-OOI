@@ -129,7 +129,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     private void Update(IObjectInstanceFactory nodeDesign, IUAObject nodeSet)
     {
-      nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(m_buildErrorsHandling.WriteTraceMessage);
+      nodeDesign.SupportsEvents = nodeSet.EventNotifier.ParseSupportsEvents(m_buildErrorsHandling.WriteTraceMessage);
     }
 
     private void Update(IPropertyInstanceFactory nodeDesign, IUAVariable nodeSet, IUANodeBase nodeContext, UAReferenceContext parentReference)
@@ -181,7 +181,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.DefaultValue = nodeSet.Value; //TODO add test case must be of type defined by DataType
       nodeDesign.Historizing = nodeSet.Historizing.Export(false);
       nodeDesign.MinimumSamplingInterval = nodeSet.MinimumSamplingInterval.Export(0D);
-      nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(m_buildErrorsHandling.WriteTraceMessage);
+      nodeDesign.ValueRank = nodeSet.ValueRank.ParseValueRank(m_buildErrorsHandling.WriteTraceMessage);
       if (nodeSet.Translation)
         m_buildErrorsHandling.WriteTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NotSupportedFeature, "- the Translation element for the UAVariable"));
     }
@@ -191,7 +191,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       nodeDesign.ArrayDimensions = nodeSet.ArrayDimensions.ExportString(string.Empty);
       nodeDesign.DataType = m_AddressSpace.ExportBrowseName(nodeSet.DataType, DataTypes.Number);
       nodeDesign.DefaultValue = nodeSet.Value;
-      nodeDesign.ValueRank = nodeSet.ValueRank.GetValueRank(m_buildErrorsHandling.WriteTraceMessage);
+      nodeDesign.ValueRank = nodeSet.ValueRank.ParseValueRank(m_buildErrorsHandling.WriteTraceMessage);
     }
 
     private void Update(IMethodInstanceFactory nodeDesign, IUAMethod nodeSet, UAReferenceContext parentReference)
@@ -216,7 +216,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     private void Update(IViewInstanceFactory nodeDesign, IUAView nodeSet)
     {
       nodeDesign.ContainsNoLoops = nodeSet.ContainsNoLoops;//TODO add test case against the loops in the model.
-      nodeDesign.SupportsEvents = nodeSet.EventNotifier.GetSupportsEvents(m_buildErrorsHandling.WriteTraceMessage);
+      nodeDesign.SupportsEvents = nodeSet.EventNotifier.ParseSupportsEvents(m_buildErrorsHandling.WriteTraceMessage);
     }
 
     private void Update(IDataTypeFactory nodeDesign, IUADataType nodeSet)

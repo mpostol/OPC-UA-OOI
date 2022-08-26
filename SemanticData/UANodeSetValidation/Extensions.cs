@@ -181,7 +181,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         _nP.SymbolicName = _item.SymbolicName;
         _item.DisplayName.ExportLocalizedTextArray(_nP.AddDisplayName);
         _nP.DataType = nodeContext.ExportBrowseName(_item.DataTypeNodeId, DataTypes.BaseDataType);
-        _nP.ValueRank = _item.ValueRank.GetValueRank(traceEvent);
+        _nP.ValueRank = _item.ValueRank.ParseValueRank(traceEvent);
         _nP.ArrayDimensions = _item.ArrayDimensions;
         _nP.MaxStringLength = _item.MaxStringLength;
         _item.Description.ExportLocalizedTextArray(_nP.AddDescription);

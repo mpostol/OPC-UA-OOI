@@ -81,6 +81,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DataType = "i=884",
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
+      _nodeFactory.Deserialize();
       _newNode.Update(_nodeFactory, x => Assert.Fail());
       _newNode.Update(_nodeFactory, x => Assert.Fail());
       Assert.AreEqual<int>(1, _traceBuffer.Count);

@@ -1,6 +1,6 @@
 ﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
@@ -10,6 +10,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
@@ -208,10 +209,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       addressSpaceMock.Verify(x => x.GetURIIndexOrAppend(new Uri(@"http://cas.eu/UA/Demo/")), Times.AtLeastOnce());
       Assert.AreEqual<string>("ns=2;i=24", nodeSet.Aliases[0].ValueNodeId.ToString());
       Assert.AreEqual<string>("Alias name", nodeSet.Aliases[0].Alias);
-      Assert.AreEqual<string>("ns=2;i=24", nodeSet.Items[0].NodeIdNodeId.ToString());
-      Assert.AreEqual<string>("2:NewUAObject", nodeSet.Items[0].BrowseNameQualifiedName.ToString());
-      Assert.AreEqual<string>("ns=2;i=2", ((UAVariableType)nodeSet.Items[1]).DataTypeNodeId.ToString());
-      Assert.AreEqual<string>("2:NewUAObject", ((UAVariableType)nodeSet.Items[1]).BrowseNameQualifiedName.ToString());
+      Assert.AreEqual<string>("ns=2;i=24", nodeSet.Items[0].GetIUANode().NodeId.ToString());
+      Assert.AreEqual<string>("2:NewUAObject", nodeSet.Items[0].BrowseName.ToString());
+      Assert.AreEqual<string>("ns=2;i=2", ((UAVariableType)nodeSet.Items[1]).DataType.ToString());
+      Assert.AreEqual<string>("2:NewUAObject", ((UAVariableType)nodeSet.Items[1]).BrowseName.ToString());
     }
 
     [TestMethod]
@@ -280,11 +281,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         AccessRestrictions = 0xC,
         ModelUri = modelUri,
         PublicationDate = DateTime.UtcNow.Date,
-        PublicationDateSpecified = true,  
+        PublicationDateSpecified = true,
         RequiredModel = null,
         RolePermissions = new XML.RolePermission[] { new XML.RolePermission() },
         Version = new Version(1, 0).ToString()
       };
     }
   }
+
 }

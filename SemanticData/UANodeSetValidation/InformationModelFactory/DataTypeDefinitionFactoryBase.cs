@@ -34,7 +34,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.InformationModelFactory
     /// A symbolic name for the data type. It should only be specified if the Name cannot be used for this purpose.
     /// Only letters, digits or the underscore (‘_’) are permitted.
     /// </summary>
-    /// <value>The symbolic name of thi entity.</value>
+    /// <value>The symbolic name of this entity.</value>
     public string SymbolicName { set { } }
     /// <summary>
     /// Sets a value indicating whether this instance is option set. This flag indicates that the data type defines the OptionSetValues Property.

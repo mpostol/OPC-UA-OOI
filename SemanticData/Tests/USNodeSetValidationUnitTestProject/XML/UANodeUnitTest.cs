@@ -8,6 +8,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UnitTest.Helpers;
@@ -57,10 +58,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       //modelMock.Setup(x => x.ModelUri);
       UAObject toTest = TestData.CreateUAObject();
       toTest.RecalculateNodeIds(modelMock.Object, XML => Assert.Fail());
-      Assert.IsNotNull(toTest.NodeIdNodeId);
-      Assert.AreEqual<string>("ns=1;i=1", toTest.NodeIdNodeId.ToString());
-      Assert.IsNotNull(toTest.BrowseNameQualifiedName);
-      Assert.AreEqual<string>("1:NewUAObject", toTest.BrowseNameQualifiedName.ToString());
+      Assert.IsNotNull(toTest.GetIUANode().NodeId);
+      Assert.AreEqual<string>("ns=1;i=1", toTest.GetIUANode().NodeId.ToString());
+      Assert.IsNotNull(((IUANode)toTest).BrowseName);
+      Assert.AreEqual<string>("1:NewUAObject", ((IUANode)toTest).BrowseName.ToString());
       modelMock.Verify(x => x.ImportBrowseName(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Action<TraceMessage>>()), Times.Once);
       modelMock.Verify(x => x.ImportNodeId(It.IsAny<string>(), It.IsAny<Action<TraceMessage>>()), Times.Exactly(5));
       //modelMock.Verify(x => x.ModelUri, Times.Never);

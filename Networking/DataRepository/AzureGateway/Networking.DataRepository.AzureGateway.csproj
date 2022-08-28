@@ -18,10 +18,11 @@
     <Product>Object Oriented Internet</Product>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <DelaySign>false</DelaySign>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\VS.git\UAOOI\OPC-UA-OOI\Networking\DataRepository\AzureGateway\Properties\UAOOI.Networking.DataRepository.AzureGateway.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
     <NoWarn>1701;1702; IDE0049,IDE0001</NoWarn>
   </PropertyGroup>
 

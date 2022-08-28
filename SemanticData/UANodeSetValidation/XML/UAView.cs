@@ -1,20 +1,24 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
+
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  public partial class UAView
+  public partial class UAView : IUAView
   {
+    public override NodeClassEnum NodeClass => NodeClassEnum.UAView;
+
     /// <summary>
     /// Indicates whether the inherited parent object is also equal to another object.
     /// </summary>
     /// <param name="other">An object to compare with this object.</param>
     /// <returns><c>true</c> if the current object is equal to the <paramref name="other">other</paramref>; otherwise,, <c>false</c> otherwise.</returns>
-    protected override bool ParentEquals(UANode other)
+    protected override bool ParentEquals(IUANode other)
     {
       UAView _other = other as UAView;
       if (_other == null)

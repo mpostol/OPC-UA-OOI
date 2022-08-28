@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 using UAOOI.Common.Infrastructure.Serializers;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
@@ -70,7 +71,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return !value.Equals(defaultValue) ? Convert.ToInt32(value) : new Nullable<int>();
     }
 
-    internal static uint Validate(this uint value, uint maxValue, Action<uint> reportError)
+    internal static AttributeWriteMask Validate(this AttributeWriteMask value, AttributeWriteMask maxValue, Action<AttributeWriteMask> reportError)
     {
       if (value.CompareTo(maxValue) >= 0)
         reportError(value);
@@ -127,18 +128,18 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return name;
     }
 
-    internal static string NodeIdentifier(this XML.UANode node)
+    internal static string NodeIdentifier(this IUANode node)
     {
-      if (string.IsNullOrEmpty(node.BrowseName))
+      if (node.BrowseName == null)
         return node.SymbolicName;
-      return node.BrowseName;
+      return node.BrowseName.ToString();
     }
 
-    internal static string ConvertToString(this XML.LocalizedText[] localizedText)
+    internal static string ConvertToString(this LocalizedText localizedText)
     {
-      if (localizedText == null || localizedText.Length == 0)
+      if (localizedText == null)
         return "Empty LocalizedText";
-      return string.Format("{0}:{1}", localizedText[0].Locale, localizedText[0].Value);
+      return string.Format("{0}:{1}", localizedText.Locale, localizedText.Text);
     }
 
     /// <summary>
@@ -158,7 +159,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return string.Join(", ", arrayDimensions);
     }
 
-    internal static void GetParameters(this XML.DataTypeDefinition dataTypeDefinition, IDataTypeDefinitionFactory dataTypeDefinitionFactory, IAddressSpaceBuildContext nodeContext, Action<TraceMessage> traceEvent)
+    internal static void GetParameters(this IDataTypeDefinition dataTypeDefinition,
+                                            IDataTypeDefinitionFactory dataTypeDefinitionFactory,
+                                            IAddressSpaceBuildContext nodeContext,
+                                            Action<TraceMessage> traceEvent)
     {
       if (dataTypeDefinition is null)
         return;
@@ -170,14 +174,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       dataTypeDefinitionFactory.SymbolicName = dataTypeDefinition.SymbolicName;
       if (dataTypeDefinition.Field == null || dataTypeDefinition.Field.Length == 0)
         return;
-      foreach (XML.DataTypeField _item in dataTypeDefinition.Field)
+      foreach (IDataTypeField _item in dataTypeDefinition.Field)
       {
         IDataTypeFieldFactory _nP = dataTypeDefinitionFactory.NewField();
         _nP.Name = _item.Name;
         _nP.SymbolicName = _item.SymbolicName;
         _item.DisplayName.ExportLocalizedTextArray(_nP.AddDisplayName);
         _nP.DataType = nodeContext.ExportBrowseName(_item.DataTypeNodeId, DataTypes.BaseDataType);
-        _nP.ValueRank = _item.ValueRank.GetValueRank(traceEvent);
+        _nP.ValueRank = _item.ValueRank.ParseValueRank(traceEvent);
         _nP.ArrayDimensions = _item.ArrayDimensions;
         _nP.MaxStringLength = _item.MaxStringLength;
         _item.Description.ExportLocalizedTextArray(_nP.AddDescription);
@@ -186,33 +190,35 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       }
     }
 
-    internal static void ExportLocalizedTextArray(this XML.LocalizedText[] text, LocalizedTextFactory createLocalizedText)
+    //TODO Define independent Address Space API #645 - move it to the InformationModelFactory
+    internal static void ExportLocalizedTextArray(this LocalizedText[] text, LocalizedTextFactory createLocalizedText)
     {
       if (text == null || text.Length == 0)
         return;
-      foreach (XML.LocalizedText item in text)
-        createLocalizedText(item.Locale, item.Value);
+      foreach (LocalizedText item in text)
+        createLocalizedText(item.Locale, item.Text);
     }
 
-    internal static XML.LocalizedText[] Truncate(this XML.LocalizedText[] localizedText, int maxLength, Action<TraceMessage> reportError)
+    internal static LocalizedText[] Truncate(this LocalizedText[] localizedText, int maxLength, Action<TraceMessage> reportError)
     {
       if (localizedText == null || localizedText.Length == 0)
         return null;
-      List<XML.LocalizedText> _ret = new List<XML.LocalizedText>();
-      foreach (XML.LocalizedText _item in localizedText)
+      List<LocalizedText> _ret = new List<LocalizedText>();
+      foreach (LocalizedText _item in localizedText)
       {
-        if (_item.Value.Length > maxLength)
+        if (_item.Text.Length > maxLength)
         {
           reportError(TraceMessage.BuildErrorTraceMessage(BuildError.WrongDisplayNameLength, string.Format
-            ("The localized text starting with '{0}:{1}' of length {2} is too long.", _item.Locale, _item.Value.Substring(0, 20), _item.Value.Length)));
-          XML.LocalizedText _localizedText = new XML.LocalizedText()
+            ("The localized text starting with '{0}:{1}' of length {2} is too long.", _item.Locale, _item.Text.Substring(0, 20), _item.Text.Length)));
+          LocalizedText _localizedText = new LocalizedText()
           {
             Locale = _item.Locale,
-            Value = _item.Value.Substring(0, maxLength)
+            Text = _item.Text.Substring(0, maxLength)
           };
+          _ret.Add(_localizedText);
         }
       }
-      return localizedText;
+      return _ret.ToArray();
     }
 
     internal static List<DataSerialization.Argument> GetParameters(this XmlElement xmlElement)
@@ -228,47 +234,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return _ret;
     }
 
-    internal static ReleaseStatus ConvertToReleaseStatus(this XML.ReleaseStatus releaseStatus)
-    {
-      ReleaseStatus _status = ReleaseStatus.Released;
-      switch (releaseStatus)
-      {
-        case XML.ReleaseStatus.Released:
-          _status = ReleaseStatus.Released;
-          break;
-
-        case XML.ReleaseStatus.Draft:
-          _status = ReleaseStatus.Draft;
-          break;
-
-        case XML.ReleaseStatus.Deprecated:
-          _status = ReleaseStatus.Deprecated;
-          break;
-      }
-      return _status;
-    }
-
-    internal static DataTypePurpose ConvertToDataTypePurpose(this XML.DataTypePurpose releaseStatus)
-    {
-      DataTypePurpose _status = DataTypePurpose.Normal;
-      switch (releaseStatus)
-      {
-        case XML.DataTypePurpose.Normal:
-          _status = DataTypePurpose.Normal;
-          break;
-
-        case XML.DataTypePurpose.CodeGenerator:
-          _status = DataTypePurpose.CodeGenerator;
-          break;
-
-        case XML.DataTypePurpose.ServicesOnly:
-          _status = DataTypePurpose.ServicesOnly;
-          break;
-      }
-      return _status;
-    }
-
-    internal static bool LocalizedTextArraysEqual(this XML.LocalizedText[] first, XML.LocalizedText[] second)
+    internal static bool LocalizedTextArraysEqual(this LocalizedText[] first, LocalizedText[] second)
     {
       if (Object.ReferenceEquals(first, null))
         return Object.ReferenceEquals(second, null);
@@ -278,8 +244,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         return false;
       try
       {
-        Dictionary<string, XML.LocalizedText> _dictionaryForFirst = first.ToDictionary(x => ConvertToString(x));
-        foreach (XML.LocalizedText _text in second)
+        Dictionary<string, LocalizedText> _dictionaryForFirst = first.ToDictionary(x => ConvertToString(x));
+        foreach (LocalizedText _text in second)
           if (!_dictionaryForFirst.ContainsKey(ConvertToString(_text)))
             return false;
       }
@@ -290,14 +256,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return true;
     }
 
-    internal static bool RolePermissionsEquals(this XML.RolePermission[] first, XML.RolePermission[] second)
+    internal static bool RolePermissionsEquals(this IRolePermission[] first, IRolePermission[] second)
     {
       if (Object.ReferenceEquals(first, null))
         return Object.ReferenceEquals(second, null);
       if (first.Length != second.Length)
         return false;
-      Dictionary<uint, XML.RolePermission> _dictionaryForFirst = first.ToDictionary<XML.RolePermission, uint>(x => x.Permissions);
-      foreach (XML.RolePermission _permission in second)
+      Dictionary<uint, IRolePermission> _dictionaryForFirst = first.ToDictionary<IRolePermission, uint>(x => x.Permissions);
+      foreach (IRolePermission _permission in second)
       {
         if (!_dictionaryForFirst.ContainsKey(_permission.Permissions))
           return false;
@@ -307,7 +273,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       return true;
     }
 
-    internal static bool ReferencesEquals(this XML.Reference[] first, XML.Reference[] second)
+    internal static bool ReferencesEquals(this IReference[] first, IReference[] second)
     {
       return true;
     }
@@ -321,10 +287,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
 
-    private static string ConvertToString(XML.LocalizedText x)
-    {
-      return $"{ x.Locale}:{x.Value}";
-    }
+    //private static string ConvertToString(LocalizedText x)
+    //{
+    //  return $"{x.Locale}:{x.Text}";
+    //}
 
     /// <summary>
     /// Deserialize <see cref="XmlElement" /> object using <see cref="XmlSerializer" />

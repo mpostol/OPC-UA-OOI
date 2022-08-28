@@ -1,11 +1,12 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
@@ -18,7 +19,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// </summary>
     /// <param name="other">An object to compare with this object.</param>
     /// <returns><c>true</c> if the current object is equal to the <paramref name="other">other</paramref>; otherwise,, <c>false</c> otherwise.</returns>
-    protected override bool ParentEquals(UANode other)
+    protected override bool ParentEquals(IUANode other)
     {
       UAInstance _other = other as UAInstance;
       if (Object.ReferenceEquals(_other, null))
@@ -42,7 +43,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       ParentNodeIdNodeId = modelContext.ImportNodeId(ParentNodeId, trace);
       base.RecalculateNodeIds(modelContext, trace);
     }
-
+    /// <summary>
+    /// The NodeId of the Node that is the parent of the Node within the information model. This field is used to indicate that a tight coupling exists between 
+    /// the Node and its parent (e.g. when the parent is deleted the child is deleted as well). 
+    /// </summary>
+    /// <remarks>
+    /// This information does not appear in the AddressSpace and is intended for use by design tools.
+    /// </remarks>
     internal NodeId ParentNodeIdNodeId { get; private set; }
   }
 }

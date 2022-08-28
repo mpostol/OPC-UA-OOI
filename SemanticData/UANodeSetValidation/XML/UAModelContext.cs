@@ -1,12 +1,16 @@
-﻿//__________________________________________________________________________________________________
+﻿//__________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright 2022 Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
-//__________________________________________________________________________________________________
+//  To be in touch join the community by pressing the `Watch` button and to get started
+//  comment using the discussion panel at
+//  https://github.com/mpostol/TP/discussions/182
+//  with an introduction of yourself and tell us about what you do with this community.
+//__________________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
@@ -20,15 +24,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// Initializes a new instance of the <see cref="UAModelContext" /> class.
     /// </summary>
     /// <param name="modelHeader">The model header of the <see cref="UANodeSet"/> represented as an instance of <see cref="IUANodeSetModelHeader"/>.</param>
-    /// <param name="addressSpaceContext">The address space context represented by an instance of <see cref="IAddressSpaceBuildContext" />.</param>
+    /// <param name="namespaceTable">The address space context represented by an instance of <see cref="IAddressSpaceBuildContext" />.</param>
     /// <param name="traceEvent">The trace event call back delegate.</param>
     /// <exception cref="ArgumentNullException">buildErrorsHandlingLog
     /// or
     /// addressSpaceContext</exception>
-    internal static UAModelContext ParseUANodeSetModelHeader(IUANodeSetModelHeader modelHeader, INamespaceTable addressSpaceContext, Action<TraceMessage> traceEvent)
+    internal static UAModelContext ParseUANodeSetModelHeader(IUANodeSetModelHeader modelHeader, INamespaceTable namespaceTable, Action<TraceMessage> traceEvent)
     {
-      UAModelContext context2Return = new UAModelContext(modelHeader, addressSpaceContext, traceEvent);
-      context2Return.Parse(modelHeader, addressSpaceContext);
+      UAModelContext context2Return = new UAModelContext(modelHeader, namespaceTable, traceEvent);
+      context2Return.Parse(modelHeader, namespaceTable);
       return context2Return;
     }
 
@@ -134,7 +138,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       if (namespaceUris is null || namespaceUris.Length == 0)
       {
         namespaceUris = new string[] { RandomUri().ToString() };
-        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NamespaceUrisCannotBeNull, $"Added a random URI { namespaceUris[0] } to NamespaceUris."));
+        _logTraceMessage(TraceMessage.BuildErrorTraceMessage(BuildError.NamespaceUrisCannotBeNull, $"Added a random URI {namespaceUris[0]} to NamespaceUris."));
       }
       for (int i = 0; i < namespaceUris.Length; i++)
         list2Return.Add(namespaceUris[i]);

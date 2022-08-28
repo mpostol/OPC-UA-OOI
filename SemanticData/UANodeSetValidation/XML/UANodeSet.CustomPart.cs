@@ -1,34 +1,40 @@
-﻿//__________________________________________________________________________________________________
+﻿//__________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright 2022 Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
-//__________________________________________________________________________________________________
+//  To be in touch join the community by pressing the `Watch` button and to get started
+//  comment using the discussion panel at
+//  https://github.com/mpostol/TP/discussions/182
+//  with an introduction of yourself and tell us about what you do with this community.
+//__________________________________________________________________________________________
 
 using System;
 using System.IO;
 using System.Reflection;
 using UAOOI.Common.Infrastructure.Serializers;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  public partial class UANodeSet : IUANodeSetModelHeader
+  public partial class UANodeSet : IUANodeSet, IUANodeSetModelHeader
   {
-    #region API
+    #region IUANodeSet
 
-    internal Uri ParseUAModelContext(INamespaceTable addressSpaceContext, Action<TraceMessage> traceEvent)
+    public Uri ParseUAModelContext(INamespaceTable namespaceTable, Action<TraceMessage> traceEvent)
     {
-      UAModelContext model = UAModelContext.ParseUANodeSetModelHeader(this, addressSpaceContext, traceEvent);
+      UAModelContext model = UAModelContext.ParseUANodeSetModelHeader(this, namespaceTable, traceEvent);
       this.RecalculateNodeIds(model, traceEvent);
       return model.DefaultUri;
     }
 
-    #endregion API
+    IUANode[] IUANodeSet.Items { get => Items; }
+
+    #endregion IUANodeSet
 
     #region static helpers
 
-    internal static UANodeSet ReadUADefinedTypes()
+    public static UANodeSet ReadUADefinedTypes()
     {
       Assembly assembly = Assembly.GetExecutingAssembly();
       UANodeSet uaDefinedTypes = null;
@@ -41,8 +47,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return uaDefinedTypes;
     }
 
-    internal static UANodeSet ReadModelFile(FileInfo path)
+    public static UANodeSet ReadModelFile(FileInfo path)
     {
+      if (path == null)
+        throw new ArgumentNullException($"{nameof(path)}");
       using (Stream stream = path.OpenRead())
         return XmlFile.ReadXmlFile<UANodeSet>(stream);
     }

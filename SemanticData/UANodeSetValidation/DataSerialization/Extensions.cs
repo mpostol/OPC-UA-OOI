@@ -1,9 +1,9 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
 using UAOOI.SemanticData.BuildingErrorsHandling;
@@ -17,8 +17,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
   {
     internal static QualifiedName ParseBrowseName(this string qualifiedName, NodeId nodeId, Action<TraceMessage> traceEvent)
     {
-      if ((nodeId == null) || nodeId == NodeId.Null) throw new ArgumentNullException(nameof(NodeId));
-      QualifiedName qualifiedNameToReturn = null;
+      if ((nodeId == null) || nodeId == NodeId.Null) throw new ArgumentNullException(nameof(nodeId));
+      QualifiedName qualifiedNameToReturn;
       if (string.IsNullOrEmpty(qualifiedName))
       {
         qualifiedNameToReturn = nodeId.RandomQualifiedName();
@@ -84,7 +84,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// the object can be used to subscribe to events or to read and write the history of the events.</param>
     /// <param name="traceEvent">The trace event.</param>
     /// <returns><c>true</c> if supports events, <c>false</c> otherwise.</returns>
-    internal static bool? GetSupportsEvents(this byte eventNotifier, Action<TraceMessage> traceEvent)
+    internal static bool? ParseSupportsEvents(this byte eventNotifier, Action<TraceMessage> traceEvent)
     {
       if (eventNotifier > EventNotifiers.SubscribeToEvents + EventNotifiers.HistoryRead + EventNotifiers.HistoryWrite)
         traceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.WrongEventNotifier, String.Format("EventNotifier value: {0}", eventNotifier)));
@@ -93,7 +93,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
       return eventNotifier != 0 ? (eventNotifier & EventNotifiers.SubscribeToEvents) != 0 : new Nullable<bool>();
     }
 
-    internal static uint? GetAccessLevel(this uint accessLevel, Action<TraceMessage> traceEvent)
+    internal static uint? ParseAccessLevel(this uint accessLevel, Action<TraceMessage> traceEvent)
     {
       uint? _ret = new Nullable<byte>();
       if (accessLevel <= 0x7F)
@@ -109,7 +109,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     /// <param name="valueRank">The value rank.</param>
     /// <param name="traceEvent">An <see cref="Action" /> delegate is used to trace event as the <see cref="TraceMessage" />.</param>
     /// <returns>Returns validated value.</returns>
-    internal static int? GetValueRank(this int valueRank, Action<TraceMessage> traceEvent)
+    internal static int? ParseValueRank(this int valueRank, Action<TraceMessage> traceEvent)
     {
       int? _vr = new Nullable<int>();
       if (valueRank < -2)
@@ -127,13 +127,13 @@ namespace UAOOI.SemanticData.UANodeSetValidation.DataSerialization
     {
       return new QualifiedName()
       {
-        Name = $"EmptyBrowseName_{nodeId.IdentifierPart.ToString()}_{ _RandomNumber.Next(-9999, 0)}",
+        Name = $"EmptyBrowseName_{nodeId.IdentifierPart.ToString()}_{RandomNumber.Next(-9999, 0)}",
         NamespaceIndex = nodeId.NamespaceIndex,
         NamespaceIndexSpecified = true,
       };
     }
 
-    private static Random _RandomNumber = new Random();
+    private static Random RandomNumber = new Random();
 
     #endregion private
   }

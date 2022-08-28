@@ -10,10 +10,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
-using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -24,7 +24,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
   {
     #region constructor
 
-    internal UAReferenceContext(Reference reference, IAddressSpaceBuildContext addressSpaceContext, IUANodeContext parentNode)
+    internal UAReferenceContext(IReference reference, IAddressSpaceBuildContext addressSpaceContext, IUANodeContext parentNode)
     {
       if (reference == null)
         throw new ArgumentNullException(nameof(reference));

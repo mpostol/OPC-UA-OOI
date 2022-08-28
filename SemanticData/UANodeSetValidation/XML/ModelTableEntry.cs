@@ -1,11 +1,12 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
@@ -13,7 +14,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   /// Class ModelTableEntry.
   /// Implements the <see cref="UAOOI.SemanticData.UANodeSetValidation.IModelTableEntry" />
   /// </summary>
-  /// <seealso cref="UAOOI.SemanticData.UANodeSetValidation.IModelTableEntry" />
+  /// <seealso cref="UAOOI.SemanticData.AddressSpace.Abstractions.IModelTableEntry" />
   public partial class ModelTableEntry : IModelTableEntry
   {
     /// <summary>

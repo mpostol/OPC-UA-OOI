@@ -1,18 +1,24 @@
 ﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  public partial class UAVariableType
+  public partial class UAVariableType : IUAVariableType
   {
+    /// <summary>
+    /// The NodeClass identifies the NodeClass of a Node.
+    /// </summary>
+    public override NodeClassEnum NodeClass => NodeClassEnum.UAVariableType;
+
     /// <summary>
     /// Get the clone from the types derived from this one.
     /// </summary>
@@ -38,9 +44,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     internal override void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
       base.RecalculateNodeIds(modelContext, trace);
-      DataTypeNodeId = modelContext.ImportNodeId(DataType, trace);
+      m_DataTypeNodeId = modelContext.ImportNodeId(this.DataType, trace);
     }
 
-    internal NodeId DataTypeNodeId { get; private set; }
+    #region IUAVariableType
+
+    NodeId IUAVariableType.DataType => m_DataTypeNodeId;
+
+    #endregion IUAVariableType
+
+    private NodeId m_DataTypeNodeId;
   }
 }

@@ -10,11 +10,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
-using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -60,7 +60,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UAReferenceContext _connector = _parentConnector.FirstOrDefault<UAReferenceContext>();
       if (_connector != null)
         _connector.BuildSymbolicId(path);
-      string _BranchName = string.IsNullOrEmpty(this.UANode.SymbolicName) ? this.UANode.BrowseNameQualifiedName.Name : this.UANode.SymbolicName;
+      string _BranchName = string.IsNullOrEmpty(this.UANode.SymbolicName) ? this.UANode.BrowseName.Name : this.UANode.SymbolicName;
       path.Add(_BranchName);
     }
 
@@ -76,7 +76,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <param name="node">The node <see cref="UANode" /> containing definition to be added to the model.</param>
     /// <param name="addReference">Used to add new reference to the common collection of references.</param>
     /// <exception cref="ArgumentException">node - Argument must not be null</exception>
-    public void Update(UANode node, Action<UAReferenceContext> addReference)
+    public void Update(IUANode node, Action<UAReferenceContext> addReference)
     {
       if (node == null)
         throw new ArgumentException(nameof(node), $"Argument must not be null at {nameof(Update)} ");
@@ -88,7 +88,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       UANode = node;
       if (node.References == null)
         return;
-      foreach (Reference _reference in node.References)
+      foreach (IReference _reference in node.References)
       {
         UAReferenceContext _newReference = new UAReferenceContext(_reference, this.m_AddressSpaceContext, this);
         switch (_newReference.ReferenceKind)
@@ -129,7 +129,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>An instance of <see cref="XmlQualifiedName" /> representing the BrowseName of the node.</returns>
     public XmlQualifiedName ExportNodeBrowseName()
     {
-      return new XmlQualifiedName(UANode.BrowseNameQualifiedName.Name, m_AddressSpaceContext.GetNamespace(UANode.BrowseNameQualifiedName.NamespaceIndex));
+      return new XmlQualifiedName(UANode.BrowseName.Name, m_AddressSpaceContext.GetNamespace(UANode.BrowseName.NamespaceIndex));
     }
 
     /// <summary>
@@ -176,7 +176,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
             //TODO The exported model doesn't contain all nodes #653
             //TODO NetworkIdentifier is missing in generated Model Design for DI model #629
             _or.TargetId = _rfx.BrowsePath();
-            switch (_rfx.TargetNode.UANode.NodeClassEnum)
+            switch (_rfx.TargetNode.UANode.NodeClass)
             {
               case NodeClassEnum.UADataType:
               case NodeClassEnum.UAObjectType:
@@ -202,7 +202,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
                 break;
 
               default:
-                throw new ArgumentOutOfRangeException(nameof(_rfx.TargetNode.UANode.NodeClassEnum));
+                throw new ArgumentOutOfRangeException(nameof(_rfx.TargetNode.UANode.NodeClass));
             }
             break;
 
@@ -229,14 +229,15 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       RemoveDerivedChildren(nodeFactory, allNodesInConcern, validator, validateExportNode2Model, _children);
     }
 
-    private void RemoveDerivedChildren(INodeFactory nodeFactory, List<IUANodeBase> allNodesInConcern, IValidator validator, Action<IUANodeContext> validateExportNode2Model, List<UAReferenceContext> children)
+    private void RemoveDerivedChildren(INodeFactory nodeFactory, List<IUANodeBase> allNodesInConcern, IValidator validator, Action<IUANodeContext> validateExportNode2Model,
+                                       List<UAReferenceContext> children)
     {
       Dictionary<IUANodeBase, UAReferenceContext> referencedChildren = children.ToDictionary<UAReferenceContext, IUANodeBase>(x => x.TargetNode);
       NodesCollection derivedChildren = m_BaseTypeNode == null ? new NodesCollection() : m_BaseTypeNode.GetDerivedInstances();
       foreach (var _rc in referencedChildren)
       {
         IUANodeBase _instanceDeclaration = null;
-        string name = _rc.Key.UANode.BrowseNameQualifiedName.Name;
+        string name = _rc.Key.UANode.BrowseName.Name;
         if (!string.IsNullOrEmpty(name))
           _instanceDeclaration = derivedChildren.ContainsKey(name) ? derivedChildren[name] : null;
         if (_rc.Key.Equals(_instanceDeclaration))
@@ -255,7 +256,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// Gets the instance of <see cref="UANode" /> of this context source
     /// </summary>
     /// <value>The source UA node from the model.</value>
-    public UANode UANode { get; private set; } = null;
+    public IUANode UANode { get; private set; } = null;
 
     /// <summary>
     /// Gets the node identifier.
@@ -275,7 +276,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <returns>An instance of <see cref="XmlQualifiedName" /> encapsulating the base type name.</returns>
     public XmlQualifiedName ExportBaseTypeBrowseName()
     {
-      bool type = UANode is UAType;
+      bool type = UANode is IUAType;
       return m_BaseTypeNode == null ? null : m_BaseTypeNode.ExportBrowseNameBaseType(x => TraceErrorUndefinedBaseType(x, type));
     }
 
@@ -369,8 +370,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (Object.ReferenceEquals(other, null))
         return false;
-      return
-        this.UANode.Equals(other.UANode);
+      return this.UANode.Equals(other.UANode);
     }
 
     #endregion IEquatable<IUANodeBase>
@@ -397,12 +397,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     {
       if (type)
       {
-        string _msg = string.Format("BaseType of Id={0} for node {1}", target, this.UANode.BrowseNameQualifiedName);
+        string _msg = string.Format("BaseType of Id={0} for node {1}", target, this.UANode.BrowseName);
         TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasSubtypeTarget, _msg));
       }
       else
       {
-        string _msg = string.Format("TypeDefinition of Id={0} for node {1}", target, this.UANode.BrowseNameQualifiedName);
+        string _msg = string.Format("TypeDefinition of Id={0} for node {1}", target, this.UANode.BrowseName);
         TraceEvent(TraceMessage.BuildErrorTraceMessage(BuildError.UndefinedHasTypeDefinition, _msg));
       }
     }

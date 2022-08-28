@@ -1,25 +1,28 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  public partial class UAVariable
+  public partial class UAVariable : IUAVariable
   {
+    public override NodeClassEnum NodeClass => NodeClassEnum.UAVariable;
+
     /// <summary>
     /// Indicates whether the inherited parent object is also equal to another object.
     /// </summary>
     /// <param name="other">An object to compare with this object.</param>
     /// <returns>
     ///   <c>true</c> if the current object is equal to the <paramref name="other">other</paramref>; otherwise,, <c>false</c> otherwise.</returns>
-    protected override bool ParentEquals(UANode other)
+    protected override bool ParentEquals(IUANode other)
     {
       UAVariable _other = other as UAVariable;
       if (_other == null)
@@ -27,7 +30,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return
         base.ParentEquals(_other) &&
         //TODO compare Value, Translation
-        this.DataTypeNodeId == _other.DataTypeNodeId &&
+        this.DataType == _other.DataType &&
         this.ValueRank == _other.ValueRank &&
         this.ArrayDimensions == _other.ArrayDimensions &&
         this.AccessLevel == _other.AccessLevel &&
@@ -36,7 +39,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         this.Historizing == _other.Historizing;
     }
 
-    internal override void RemoveInheritedValues(UANode baseNode)
+    public override void RemoveInheritedValues(IUANode baseNode)
     {
       base.RemoveInheritedValues(baseNode);
       UAVariable _other = baseNode as UAVariable;
@@ -54,7 +57,31 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       base.RecalculateNodeIds(modelContext, trace);
     }
 
-    internal NodeId DataTypeNodeId { get; private set; }
+    #region IUAVariable
+
+    NodeId IUAVariable.DataType
+    {
+      get { return DataTypeNodeId; }
+    }
+
+    private NodeId DataTypeNodeId = null;
+
+    uint? IUAVariable.AccessLevel
+    {
+      get { return this.AccessLevel; }
+      set { this.AccessLevel = value.HasValue ? value.Value : 1; }
+    }
+
+    //bool? IUAVariable.Historizing
+    //{
+    //  get { return this.Historizing; }
+    //  set { this.Historizing = value.HasValue ? value.Value : false; }
+    //}
+
+    byte? IUAVariable.UserAccessLevel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    bool IUAVariable.Translation { get => this.Translation != null; }
+
+    #endregion IUAVariable
 
     /// <summary>
     /// Get the clone from the types derived from this one.
@@ -67,7 +94,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         Value = this.Value,
         Translation = this.Translation,
         DataType = this.DataType,
-        DataTypeNodeId = new NodeId(this.DataTypeNodeId),
         ValueRank = this.ValueRank,
         ArrayDimensions = this.ArrayDimensions,
         AccessLevel = this.AccessLevel,
@@ -77,5 +103,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       };
       return _ret;
     }
+
   }
 }

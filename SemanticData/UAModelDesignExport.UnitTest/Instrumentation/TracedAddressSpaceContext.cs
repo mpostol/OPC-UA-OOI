@@ -9,10 +9,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UAModelDesignExport.XML;
 using UAOOI.SemanticData.UANodeSetValidation;
 using UAOOI.SemanticData.UANodeSetValidation.Diagnostic;
+using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UAModelDesignExport.Instrumentation
 {
@@ -22,11 +24,13 @@ namespace UAOOI.SemanticData.UAModelDesignExport.Instrumentation
     {
       if (!filePath.Exists)
         throw new FileNotFoundException("The imported file does not exist", filePath.FullName);
+      IUANodeSet iUANodeSet = UANodeSet.ReadModelFile(filePath);
       IAddressSpaceContext _as = new AddressSpaceContext(this);
+      IUANodeSet uaDefinedTypes = UANodeSet.ReadUADefinedTypes();
       ModelFactory _factory = new ModelFactory(WriteTraceMessage);
-      _as.InformationModelFactory = _factory;
-      _as.ImportUANodeSet(filePath);
-      _as.ValidateAndExportModel(new Uri(URI));
+      _as.ImportUANodeSet(uaDefinedTypes);
+      _as.ImportUANodeSet(iUANodeSet);
+      _as.ValidateAndExportModel(new Uri(URI), _factory);
       return _factory.Export();
     }
 

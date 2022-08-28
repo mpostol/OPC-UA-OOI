@@ -1,12 +1,13 @@
 //__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
 
 using System;
 using System.Collections.Generic;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
@@ -117,6 +118,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region private
 
+    private class RolePermission : IRolePermission
+    {
+      public uint Permissions { get; set; }
+      public string Value { get; set; }
+    }
+
     private class ModelTableEntryFixture : IModelTableEntry
     {
       public ModelTableEntryFixture(Uri URI)
@@ -140,7 +147,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       public Uri ModelUri { get; private set; }
       public DateTime? PublicationDate { get; private set; } = DateTime.UtcNow.Date;
       public IModelTableEntry[] RequiredModel { get; private set; }
-      public IRolePermission[] RolePermissions { get; } = new XML.RolePermission[] { new XML.RolePermission() };
+      public IRolePermission[] RolePermissions { get; } = new RolePermission[] { new RolePermission() };
       public Version Version { get; } = new Version();
 
       #endregion IModelTableEntry

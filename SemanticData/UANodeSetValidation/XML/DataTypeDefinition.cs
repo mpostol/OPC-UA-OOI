@@ -1,17 +1,23 @@
-﻿//___________________________________________________________________________________
+﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
-//  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
-//___________________________________________________________________________________
+//  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
+//__________________________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  public partial class DataTypeDefinition
+  public partial class DataTypeDefinition : IDataTypeDefinition
   {
+    IDataTypeField[] IDataTypeDefinition.Field
+    {
+      get => this.Field;
+    }
+
     internal void RecalculateNodeIds(Func<string, NodeId> importNodeId)
     {
       //BaseType - is obsolete and no longer used. Left in for backwards compatibility.

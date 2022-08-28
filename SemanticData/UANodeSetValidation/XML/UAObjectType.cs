@@ -5,11 +5,14 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/OPC-UA-OOI
 //___________________________________________________________________________________
 
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
-  public partial class UAObjectType
+  public partial class UAObjectType : IUAObjectType
   {
+    public override NodeClassEnum NodeClass => NodeClassEnum.UAObjectType;
+
     /// <summary>
     /// Get the clone from the types derived from this one.
     /// </summary>

@@ -1,6 +1,6 @@
 ﻿//__________________________________________________________________________________________________
 //
-//  Copyright (C) 2021, Mariusz Postol LODZ POLAND.
+//  Copyright (C) 2022, Mariusz Postol LODZ POLAND.
 //
 //  To be in touch join the community at GitHub: https://github.com/mpostol/OPC-UA-OOI/discussions
 //__________________________________________________________________________________________________
@@ -10,6 +10,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
 using UAOOI.SemanticData.UANodeSetValidation.UAInformationModel;
@@ -62,21 +63,21 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     public void NodeClassEnumTest()
     {
       UANode _toTest = new UADataType();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UADataType, _toTest.NodeClassEnum);
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UADataType, _toTest.NodeClass);
       _toTest = new UAObject();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAObject, _toTest.NodeClassEnum);
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAObject, _toTest.NodeClass);
       _toTest = new UAObjectType();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAObjectType, _toTest.NodeClassEnum);
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAObjectType, _toTest.NodeClass);
       _toTest = new UAReferenceType();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAReferenceType, _toTest.NodeClassEnum);
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAReferenceType, _toTest.NodeClass);
       _toTest = new UAVariable();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAVariable, _toTest.NodeClassEnum);
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAVariable, _toTest.NodeClass);
       _toTest = new UAVariableType();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAVariableType, _toTest.NodeClassEnum);
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAVariableType, _toTest.NodeClass);
       _toTest = new UAView();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAView, _toTest.NodeClassEnum);
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAView, _toTest.NodeClass);
       _toTest = new UAMethod();
-      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAMethod, _toTest.NodeClassEnum);
+      Assert.AreEqual<NodeClassEnum>(NodeClassEnum.UAMethod, _toTest.NodeClass);
     }
 
     [TestMethod]
@@ -177,10 +178,10 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       _enumeration.RecalculateNodeIds(new ModelContextMock(), x => Assert.Fail());
       Assert.AreEqual<string>("1:EnumerationDataType", _enumeration.BrowseName);
       Assert.AreEqual<string>("ns=1;i=11", _enumeration.NodeId);
-      Assert.IsNotNull(_enumeration.BrowseNameQualifiedName);
-      Assert.IsNotNull(_enumeration.NodeIdNodeId);
-      Assert.AreEqual<int>(1, _enumeration.NodeIdNodeId.NamespaceIndex);
-      Assert.IsTrue(_enumeration.BrowseNameQualifiedName.NamespaceIndexSpecified);
+      Assert.IsNotNull(_enumeration.BrowseName);
+      Assert.IsNotNull(_enumeration.GetIUANode().NodeId);
+      Assert.AreEqual<int>(1, _enumeration.GetIUANode().NodeId.NamespaceIndex);
+      Assert.IsTrue(((IUANode)_enumeration).BrowseName.NamespaceIndexSpecified);
 
       Assert.AreEqual<int>(1, _enumeration.References[0].ValueNodeId.NamespaceIndex);
       Assert.AreEqual<int>(0, _enumeration.References[0].ReferenceTypeNodeid.NamespaceIndex);
@@ -188,8 +189,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<int>(1, _enumeration.References[1].ValueNodeId.NamespaceIndex);
       Assert.AreEqual<int>(0, _enumeration.References[1].ReferenceTypeNodeid.NamespaceIndex);
 
-      Assert.AreEqual<string>("i=24", _enumeration.Definition.Field[0].DataTypeNodeId.ToString());
-      Assert.AreEqual<string>("ns=1;i=24", _enumeration.Definition.Field[1].DataTypeNodeId.ToString());
+      Assert.AreEqual<string>("i=24", ((IUADataType)_enumeration).Definition.Field[0].DataTypeNodeId.ToString());
+      Assert.AreEqual<string>("ns=1;i=24", ((IUADataType)_enumeration).Definition.Field[1].DataTypeNodeId.ToString());
     }
 
     #endregion tests

@@ -6,8 +6,11 @@
 //__________________________________________________________________________________________________
 
 using System;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
+using UAOOI.SemanticData.InformationModelFactory.UAConstants;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
+using OOIReleaseStatus = UAOOI.SemanticData.InformationModelFactory.ReleaseStatus;
 
 namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
@@ -16,7 +19,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
   /// Implements the <see cref="IEquatable{UANode}"/>
   /// </summary>
   /// <seealso cref="IEquatable{UANode}" />
-  public abstract partial class UANode : IEquatable<UANode>
+  public abstract partial class UANode : IUANode
   {
     #region IEquatable
 
@@ -25,7 +28,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     /// </summary>
     /// <param name="other">An object to compare with this object.</param>
     /// <returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
-    public virtual bool Equals(UANode other)
+    public virtual bool Equals(IUANode other)
     {
       if (object.ReferenceEquals(other, null))
         return false;
@@ -33,43 +36,72 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
         return true;
       if (other.GetType() != this.GetType())
         return false;
+      IUANode thisNode = this;
       return
         ParentEquals(other) &&
-        this.AccessRestrictions == other.AccessRestrictions &&
-        this.BrowseNameQualifiedName.Equals(other.BrowseNameQualifiedName) &&
-        this.Description.LocalizedTextArraysEqual(other.Description) &&
-        this.DisplayName.LocalizedTextArraysEqual(other.DisplayName) &&
-        this.Documentation.AreEqual(other.Documentation) &&
-        this.ReleaseStatus == ReleaseStatus &&
-        this.RolePermissions.RolePermissionsEquals(other.RolePermissions) &&
-        this.SymbolicName.AreEqual(other.SymbolicName) &&
-        this.UserWriteMask == other.UserWriteMask &&
-        this.WriteMask == other.WriteMask &&
-        this.References.ReferencesEquals(other.References);
+        thisNode.AccessRestrictions == other.AccessRestrictions &&
+        thisNode.BrowseName.Equals(other.BrowseName) &&
+        thisNode.Description.LocalizedTextArraysEqual(other.Description) &&
+        thisNode.DisplayName.LocalizedTextArraysEqual(other.DisplayName) &&
+        thisNode.Documentation.AreEqual(other.Documentation) &&
+        thisNode.ReleaseStatus == other.ReleaseStatus &&
+        thisNode.RolePermissions.RolePermissionsEquals(other.RolePermissions) &&
+        thisNode.SymbolicName.AreEqual(other.SymbolicName) &&
+        thisNode.UserWriteMask == other.UserWriteMask &&
+        thisNode.WriteMask == other.WriteMask &&
+        thisNode.References.ReferencesEquals(other.References);
     }
 
     #endregion IEquatable
 
-    #region API
+    //TODO Define independent Address Space API #645 LocalizedText conversion must be implemented.
+    //public UANode()
+    //{
+    //  m_NodeIdNodeId = DataSerialization.NodeId.Parse(NodeId);
+    //  m_BrowseName = BrowseName.ParseBrowseName(m_NodeIdNodeId, x => { });
+    //}
 
-    internal QualifiedName BrowseNameQualifiedName { get; private set; }
-    internal NodeId NodeIdNodeId { get; private set; }
+    #region IUANode
+
+    NodeId IUANode.NodeId { get => m_NodeIdNodeId; }
 
     /// <summary>
-    /// Clones this instance.
+    /// Gets the node class of a Node.
     /// </summary>
-    /// <returns>UANode.</returns>
-    public virtual UANode Clone()
+    /// <value>The node class enum.</value>
+    public abstract NodeClassEnum NodeClass { get; }
+
+    QualifiedName IUANode.BrowseName { get => m_BrowseName; }
+
+    DataSerialization.LocalizedText[] IUANode.DisplayName
     {
-      return ParentClone();
+      get => DisplayName.GetLocalizedTextArray();
     }
 
-    internal virtual void RemoveInheritedValues(UANode baseNode)
+    DataSerialization.LocalizedText[] IUANode.Description
+    {
+      get => Description.GetLocalizedTextArray();
+    }
+
+    AttributeWriteMask IUANode.WriteMask { get => this.WriteMask.GetAttributeWriteMask(); set => throw new NotImplementedException(); }
+    AttributeWriteMask IUANode.UserWriteMask { get => this.UserWriteMask.GetAttributeWriteMask(); set => throw new NotImplementedException(); }
+    IRolePermission[] IUANode.RolePermissions { get => this.RolePermissions; set => throw new NotImplementedException(); }
+    IRolePermission[] IUANode.UserRolePermissions { get => null; set => throw new NotImplementedException(); }
+
+    AccessRestrictions IUANode.AccessRestrictions
+    {
+      get => this.AccessRestrictions.GetAccessRestrictions(NodeClass, Trace);
+      set => throw new NotImplementedException();
+    }
+
+    IReference[] IUANode.References { get => References; }
+
+    public virtual void RemoveInheritedValues(IUANode baseNode)
     {
       //BrowseName
-      if (this.DisplayName.LocalizedTextArraysEqual(baseNode.DisplayName))
+      if (((IUANode)this).DisplayName.LocalizedTextArraysEqual(baseNode.DisplayName))
         this.DisplayName = null;
-      if (this.Description.LocalizedTextArraysEqual(baseNode.Description))
+      if (((IUANode)this).Description.LocalizedTextArraysEqual(baseNode.Description))
         this.Description = null;
       //Category
       //References
@@ -83,6 +115,25 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       //AccessRestrictions
       //SymbolicName is not inherited
       //ReleaseStatus
+    }
+
+    OOIReleaseStatus IUANode.ReleaseStatus
+    {
+      get { return this.ReleaseStatus.GetReleaseStatus(); }
+      set { throw new NotImplementedException(); }
+    }
+
+    #endregion IUANode
+
+    #region API
+
+    /// <summary>
+    /// Clones this instance.
+    /// </summary>
+    /// <returns>UANode.</returns>
+    public virtual UANode Clone()
+    {
+      return ParentClone();
     }
 
     /// <summary>
@@ -111,42 +162,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       return !value1.Equals(value2);
     }
 
-    /// <summary>
-    /// Gets the node class enum based on the type of this instance.
-    /// </summary>
-    /// <value>The node class enum.</value>
-    internal NodeClassEnum NodeClassEnum
-    {
-      get
-      {
-        if (this.GetType() == typeof(UAReferenceType))
-          return NodeClassEnum.UAReferenceType;
-        if (this.GetType() == typeof(UADataType))
-          return NodeClassEnum.UADataType;
-        if (this.GetType() == typeof(UAVariableType))
-          return NodeClassEnum.UAVariableType;
-        if (this.GetType() == typeof(UAObjectType))
-          return NodeClassEnum.UAObjectType;
-        if (this.GetType() == typeof(UAView))
-          return NodeClassEnum.UAView;
-        if (this.GetType() == typeof(UAMethod))
-          return NodeClassEnum.UAMethod;
-        if (this.GetType() == typeof(UAVariable))
-          return NodeClassEnum.UAVariable;
-        if (this.GetType() == typeof(UAObject))
-          return NodeClassEnum.UAObject;
-        return NodeClassEnum.Unknown;
-      }
-    }
-
     internal virtual void RecalculateNodeIds(IUAModelContext modelContext, Action<TraceMessage> trace)
     {
-      (BrowseNameQualifiedName, NodeIdNodeId) = modelContext.ImportBrowseName(BrowseName, this.NodeId, trace);
+      Trace = trace ?? throw new ArgumentNullException(nameof(trace));
+      (m_BrowseName, m_NodeIdNodeId) = modelContext.ImportBrowseName(BrowseName, this.NodeId, trace);
       if (!(this.References is null))
         foreach (Reference _reference in this.References)
           _reference.RecalculateNodeIds(x => modelContext.ImportNodeId(x, trace));
       ImportNodeId(this.RolePermissions, x => modelContext.ImportNodeId(x, trace));
     }
+
+    private Action<TraceMessage> Trace = null;
 
     #endregion API
 
@@ -176,6 +202,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     #endregion override Object
 
     #region private
+
+    private NodeId m_NodeIdNodeId = null;
+    private QualifiedName m_BrowseName = null;
 
     private void ImportNodeId(RolePermission[] rolePermissions, Func<string, NodeId> importNodeId)
     {
@@ -208,11 +237,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     }
 
     /// <summary>
-    /// Indicates whether the the inherited parent object is also equal to another object.
+    /// Indicates whether the inherited parent object is also equal to another object.
     /// </summary>
     /// <param name="other">An object to compare with this object.</param>
     /// <returns><c>true</c> if the current object is equal to the <paramref name="other">other</paramref>; otherwise,, <c>false</c> otherwise.</returns>
-    protected abstract bool ParentEquals(UANode other);
+    protected abstract bool ParentEquals(IUANode other);
 
     /// <summary>
     /// Get the clone from the types derived from this one.
@@ -221,5 +250,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     protected abstract UANode ParentClone();
 
     #endregion private
+
+    #region debug
+
+    [System.Diagnostics.Conditional("DEBUG")]
+    internal virtual void Deserialize()
+    {
+      m_BrowseName = DataSerialization.QualifiedName.Parse(BrowseName);
+      m_NodeIdNodeId = DataSerialization.NodeId.Parse(this.NodeId);
+    }
+
+    #endregion debug
   }
 }

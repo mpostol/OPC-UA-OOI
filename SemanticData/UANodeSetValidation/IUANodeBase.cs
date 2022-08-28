@@ -8,9 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.InformationModelFactory;
 using UAOOI.SemanticData.UANodeSetValidation.DataSerialization;
-using UAOOI.SemanticData.UANodeSetValidation.XML;
 
 namespace UAOOI.SemanticData.UANodeSetValidation
 {
@@ -37,7 +37,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     /// <summary>
     /// Gets the wrapped node described by the <see cref="UANode"/> type.
     /// </summary>
-    UANode UANode { get; }
+    IUANode UANode { get; }
 
     /// <summary>
     /// Exports the browse name of the wrapped node by this instance.

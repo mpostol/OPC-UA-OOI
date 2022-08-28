@@ -6,13 +6,11 @@
 //__________________________________________________________________________________________________
 
 using System;
-using UAOOI.SemanticData.UANodeSetValidation.XML;
 
-namespace UAOOI.SemanticData.UANodeSetValidation
+namespace UAOOI.SemanticData.AddressSpace.Abstractions
 {
   /// <summary>
-  /// Interface IModelTableEntry - instance of this interface is defined in the <see cref="UANodeSet"/>
-  /// along with any dependencies these models have.
+  /// Interface IModelTableEntry 
   /// </summary>
   public interface IModelTableEntry
   {

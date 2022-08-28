@@ -250,5 +250,16 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     protected abstract UANode ParentClone();
 
     #endregion private
+
+    #region debug
+
+    [System.Diagnostics.Conditional("DEBUG")]
+    internal virtual void Deserialize()
+    {
+      m_BrowseName = DataSerialization.QualifiedName.Parse(BrowseName);
+      m_NodeIdNodeId = DataSerialization.NodeId.Parse(this.NodeId);
+    }
+
+    #endregion debug
   }
 }

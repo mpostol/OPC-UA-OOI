@@ -52,8 +52,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation
       Assert.AreEqual<string>("ns=1;i=11", _toTest.NodeIdContext.ToString());
       Assert.IsNull(_toTest.UANode);
       XML.UANode _node = UnitTest.Helpers.TestData.CreateUAObject();
-      string browseName = _node.BrowseName;
-      string nodeId = _node.NodeId;
+      _node.Deserialize();
+      QualifiedName browseName = QualifiedName.Parse(_node.BrowseName);
+      NodeId nodeId = NodeId.Parse(_node.NodeId);
       int _registerReferenceCounter = 0;
       _toTest.Update(_node, x => _registerReferenceCounter++);
       Assert.AreEqual<int>(2, _registerReferenceCounter);
@@ -148,7 +149,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         // UAObject
         EventNotifier = 0x01,
       };
-      _node.RecalculateNodeIds(new ModelContextMock(), x => Assert.Fail());
+      _node.Deserialize();
       List<UAReferenceContext> _registerReference = new List<UAReferenceContext>();
       toTest.Update(_node, x => _registerReference.Add(x));
       addressSpaceMock.Verify(x => x.GetOrCreateNodeContext(It.IsAny<NodeId>(), It.IsAny<Func<NodeId, UANodeContext>>()), Times.Never);
@@ -184,6 +185,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DataType = "i=884",
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
+      _nodeFactory.Deserialize();
       _newNode.Update(_nodeFactory, x => Assert.Fail()); // Update has different NodeId - no change is expected.
       Assert.AreEqual<string>("ns=1;i=11", _newNode.NodeIdContext.ToString());
       Assert.AreEqual<string>("ns=1;i=47", _newNode.UANode.NodeId.ToString());
@@ -316,7 +318,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DataType = "i=884",
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
-      _nodeFactory.RecalculateNodeIds(new ModelContextMock(), x => Assert.Fail());
+      _nodeFactory.Deserialize();
       List<TraceMessage> _traceBuffer = new List<TraceMessage>();
       UANodeContext _node = new UANodeContext(NodeId.Parse("ns=1;i=47"), _asMock.Object, x => _traceBuffer.Add(x));
       _node.Update(_nodeFactory, x => Assert.Fail());
@@ -331,7 +333,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestMethod]
     public void EqualsUAVariableTestMethod()
     {
-      IUAModelContext modelMock = new ModelContextMock();
       UAVariable _derivedNode = new UAVariable()
       {
         NodeId = "ns=1;i=47",
@@ -340,7 +341,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DataType = "i=884",
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
-      _derivedNode.RecalculateNodeIds(modelMock, x => Assert.Fail());
+      _derivedNode.Deserialize();
+      //_derivedNode.RecalculateNodeIds(modelMock, x => Assert.Fail());
       Assert.IsNotNull(_derivedNode.BrowseName);
       UANode _baseNode = new UAVariable()
       {
@@ -350,7 +352,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
         DataType = "i=884",
         DisplayName = new XML.LocalizedText[] { new XML.LocalizedText() { Value = "EURange" } }
       };
-      _baseNode.RecalculateNodeIds(modelMock, x => Assert.Fail());
+      _baseNode.Deserialize();
+      //_baseNode.RecalculateNodeIds(modelMock, x => Assert.Fail());
       Assert.IsNotNull(_baseNode.BrowseName);
       Mock<IAddressSpaceBuildContext> _asMock = new Mock<IAddressSpaceBuildContext>();
       IUANodeContext _derivedNodeContext = new UANodeContext(NodeId.Parse("ns=1;i=47"), _asMock.Object, x => { });
@@ -394,7 +397,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region instrumentation
 
-    private class ModelContextMock : IUAModelContext
+    private class ModelContextFixture : IUAModelContext
     {
       public Uri ModelUri => throw new NotImplementedException();
 
@@ -512,7 +515,8 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
       private UANodeContext NewNode(UANode newNode, Action<TraceMessage> traceMessageCallback)
       {
-        newNode.RecalculateNodeIds(new ModelContextMock(), traceMessageCallback);
+        //newNode.Deserialize();
+        newNode.RecalculateNodeIds(new ModelContextFixture(), traceMessageCallback);
         UANodeContext _newNode = new UANodeContext(NodeId.Parse(newNode.NodeId), this, traceMessageCallback);
         _newNode.Update(newNode, x => { m_References.Add(x.Key, x); });
         Add2mNodesDictionary(_newNode);

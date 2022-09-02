@@ -210,9 +210,9 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
       Assert.AreEqual<string>("ns=2;i=24", nodeSet.Aliases[0].ValueNodeId.ToString());
       Assert.AreEqual<string>("Alias name", nodeSet.Aliases[0].Alias);
       Assert.AreEqual<string>("ns=2;i=24", nodeSet.Items[0].GetIUANode().NodeId.ToString());
-      Assert.AreEqual<string>("2:NewUAObject", nodeSet.Items[0].BrowseName.ToString());
-      Assert.AreEqual<string>("ns=2;i=2", ((UAVariableType)nodeSet.Items[1]).DataType.ToString());
-      Assert.AreEqual<string>("2:NewUAObject", ((UAVariableType)nodeSet.Items[1]).BrowseName.ToString());
+      Assert.AreEqual<string>("2:NewUAObject", nodeSet.Items[0].GetIUANode().BrowseName.ToString());
+      Assert.AreEqual<string>("ns=2;i=2", ((IUAVariableType)nodeSet.Items[1]).DataType.ToString());
+      Assert.AreEqual<string>("2:NewUAObject", ((IUAVariableType)nodeSet.Items[1]).BrowseName.ToString());
     }
 
     [TestMethod]
@@ -289,4 +289,11 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
     }
   }
 
+  internal static class Conversions
+  {
+    internal static IUANode GetIUANode(this UANode node)
+    {
+      return node;
+    }
+  }
 }

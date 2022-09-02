@@ -16,11 +16,6 @@ namespace UAOOI.SemanticData.UANodeSetValidation.XML
 {
   internal static class Conversions
   {
-    internal static IUANode GetIUANode(this UANode node)
-    {
-      return node;
-    }
-
     internal static DataSerialization.LocalizedText[] GetLocalizedTextArray(this LocalizedText[] value)
     {
       if (value == null || value.Length == 0)

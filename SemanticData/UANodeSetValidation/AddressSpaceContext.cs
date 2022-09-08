@@ -346,14 +346,14 @@ namespace UAOOI.SemanticData.UANodeSetValidation
 
     #region Unit Test
 
-    [System.Diagnostics.Conditional("DEBUG")]
+    [Conditional("DEBUG")]
     internal void UTAddressSpaceCheckConsistency(Action<IUANodeContext> returnValue)
     {
       foreach (IUANodeContext _node in m_NodesDictionary.Values.Where<IUANodeBase>(x => x.UANode is null))
         returnValue(_node);
     }
 
-    [System.Diagnostics.Conditional("DEBUG")]
+    [Conditional("DEBUG")]
     internal void UTReferencesCheckConsistency(Action<IUANodeContext, IUANodeContext, IUANodeContext, IUANodeContext> returnValue)
     {
       foreach (UAReferenceContext _node in m_References.Values)
@@ -361,20 +361,20 @@ namespace UAOOI.SemanticData.UANodeSetValidation
           returnValue(_node?.SourceNode, _node?.ParentNode, _node?.TargetNode, _node?.TargetNode);
     }
 
-    [System.Diagnostics.Conditional("DEBUG")]
+    [Conditional("DEBUG")]
     internal void UTTryGetUANodeContext(NodeId nodeId, Action<IUANodeContext> returnValue)
     {
       returnValue(TryGetUANodeContext(nodeId));
     }
 
-    [System.Diagnostics.Conditional("DEBUG")]
+    [Conditional("DEBUG")]
     internal void UTGetReferences(NodeId source, Action<UAReferenceContext> returnValue)
     {
       foreach (UAReferenceContext _ref in m_References.Values.Where<UAReferenceContext>(x => (x.SourceNode.NodeIdContext == source)))
         returnValue(_ref);
     }
 
-    [System.Diagnostics.Conditional("DEBUG")]
+    [Conditional("DEBUG")]
     internal void UTValidateAndExportModel(int nameSpaceIndex, Action<IEnumerable<IUANodeContext>> returnValue)
     {
       returnValue((from _key in m_NodesDictionary.Values where _key.NodeIdContext.NamespaceIndex == nameSpaceIndex select _key));

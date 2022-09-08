@@ -24,184 +24,171 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestCategory("Incorrect Model")]
     public void ObjectEventNotifierOutOfRangeTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongEventNotifier.xml");
-
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(1, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\WrongEventNotifier.xml");
+      _log.TestConsistency(1);
+      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log[0].BuildError.Identifier);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(2, _log.TraceList.Count);
-      Assert.AreEqual<string>(BuildError.WrongEventNotifier.Identifier, _log.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log.TraceList[1].BuildError.Identifier);
+      _log.TestConsistency(2);
+      Assert.AreEqual<string>(BuildError.WrongEventNotifier.Identifier, _log[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log[1].BuildError.Identifier);
     }
 
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongReference2PropertyTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongReference2Property.xml");
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(1, _log.TraceList.Count());
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\WrongReference2Property.xml");
+      _log.TestConsistency(1);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(2, _log.TraceList.Count());
+      _log.TestConsistency(2);
       //TODO The exported model doesn't contain all nodes #653 review WrongReference2PropertyTestMethod
-      Assert.AreEqual<string>(BuildError.WrongReference2Property.Identifier, _log.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log.TraceList[1].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.WrongReference2Property.Identifier, _log[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log[1].BuildError.Identifier);
     }
 
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongValueRankTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongValueRank.xml");
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(1, _log.TraceList.Count);
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\WrongValueRank.xml");
+      _log.TestConsistency(1);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(3, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.WrongValueRank.Identifier, _log.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.WrongValueRank.Identifier, _log.TraceList[1].BuildError.Identifier);
-      Assert.AreEqual<string>(_log.TraceList[0].Message, _log.TraceList[1].Message); //Duplicated log entry
-      Assert.AreEqual<string>("The value -4 is not supported", _log.TraceList[0].Message);
-      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log.TraceList[2].BuildError.Identifier);
+      _log.TestConsistency(3);
+      Assert.AreEqual<string>(BuildError.WrongValueRank.Identifier, _log[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.WrongValueRank.Identifier, _log[1].BuildError.Identifier);
+      Assert.AreEqual<string>(_log[0].Message, _log[1].Message); //Duplicated log entry
+      Assert.AreEqual<string>("The value -4 is not supported", _log[0].Message);
+      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log[2].BuildError.Identifier);
     }
 
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongAccessLevelTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongAccessLevel.xml");
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(1, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\WrongAccessLevel.xml");
+      _log.TestConsistency(1);
+      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log[0].BuildError.Identifier);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(2, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.WrongAccessLevel.Identifier, _log.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log.TraceList[1].BuildError.Identifier);
+      _log.TestConsistency(2);
+      Assert.AreEqual<string>(BuildError.WrongAccessLevel.Identifier, _log[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log[1].BuildError.Identifier);
     }
 
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongInverseNameTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongInverseName.xml");
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(1, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\WrongInverseName.xml");
+      _log.TestConsistency(1);
+      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log[0].BuildError.Identifier);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(4, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.WrongInverseName.Identifier, _log.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.WrongInverseName.Identifier, _log.TraceList[1].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.WrongInverseName.Identifier, _log.TraceList[2].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log.TraceList[3].BuildError.Identifier);
+      _log.TestConsistency(4);
+      Assert.AreEqual<string>(BuildError.WrongInverseName.Identifier, _log[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.WrongInverseName.Identifier, _log[1].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.WrongInverseName.Identifier, _log[2].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log[3].BuildError.Identifier);
     }
 
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void DuplicatedNodeIdTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\DuplicatedNodeId.xml");
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(2, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.NodeIdDuplicated.Identifier, _log.TraceList[1].BuildError.Identifier);
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\DuplicatedNodeId.xml");
+      _log.TestConsistency(2);
+      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.NodeIdDuplicated.Identifier, _log[1].BuildError.Identifier);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(0, _log.TraceList.Count);
+      _log.TestConsistency(0);
     }
 
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongDisplayNameLength()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongDisplayNameLength.xml");
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(1, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\WrongDisplayNameLength.xml");
+      _log.TestConsistency(1);
+      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log[0].BuildError.Identifier);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(2, _log.TraceList.Count);
-      Assert.AreEqual<string>(BuildError.WrongDisplayNameLength.Identifier, _log.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log.TraceList[1].BuildError.Identifier);
+      _log.TestConsistency(2);
+      Assert.AreEqual<string>(BuildError.WrongDisplayNameLength.Identifier, _log[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log[1].BuildError.Identifier);
     }
 
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongWriteMaskValue()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongWriteMask.xml");
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(1, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\WrongWriteMask.xml");
+      _log.TestConsistency(1);
+      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log[0].BuildError.Identifier);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(3, _log.TraceList.Count);
-      Assert.AreEqual<string>(BuildError.WrongWriteMaskValue.Identifier, _log.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.WrongWriteMaskValue.Identifier, _log.TraceList[1].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log.TraceList[2].BuildError.Identifier);
+      _log.TestConsistency(3);
+      Assert.AreEqual<string>(BuildError.WrongWriteMaskValue.Identifier, _log[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.WrongWriteMaskValue.Identifier, _log[1].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log[2].BuildError.Identifier);
     }
 
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void NotSupportedFeature()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\NotSupportedFeature.xml");
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(1, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\NotSupportedFeature.xml");
+      _log.TestConsistency(1);
+      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log[0].BuildError.Identifier);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(0, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
+      _log.TestConsistency(0);
+      //Assert.AreEqual<int>(0, _log.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
     }
 
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongBrowseName()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongBrowseName.xml");
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(2, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.EmptyBrowseName.Identifier, _log.TraceList[1].BuildError.Identifier);
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\WrongBrowseName.xml");
+      _log.TestConsistency(2);
+      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.EmptyBrowseName.Identifier, _log[1].BuildError.Identifier);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(2, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<string>(BuildError.WrongSymbolicName.Identifier, _log.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log.TraceList[1].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.WrongSymbolicName.Identifier, _log[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log[1].BuildError.Identifier);
     }
 
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void WrongNodeId()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\WrongNodeId.xml");
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(1, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\WrongNodeId.xml");
+      _log.TestConsistency(1);
+      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log[0].BuildError.Identifier);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(2, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.NodeIdNotDefined.Identifier, _log.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log.TraceList[1].BuildError.Identifier);
+      _log.TestConsistency(2);
+      Assert.AreEqual<string>(BuildError.NodeIdNotDefined.Identifier, _log[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log[1].BuildError.Identifier);
     }
 
     [TestMethod]
     [TestCategory("Incorrect Model")]
     public void UndefinedHasSubtypeTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasSubtype.xml");
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(1, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\UndefinedHasSubtype.xml");
+      _log.TestConsistency(1);
+      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log[0].BuildError.Identifier);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(2, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.UndefinedHasSubtypeTarget.Identifier, _log.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log.TraceList[1].BuildError.Identifier);
+      _log.TestConsistency(2);
+      Assert.AreEqual<string>(BuildError.UndefinedHasSubtypeTarget.Identifier, _log[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log[1].BuildError.Identifier);
     }
 
     [TestMethod]
@@ -209,12 +196,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     public void UndefinedHasTypeDefinitionTestMethod()
     {
       FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasTypeDefinition.xml");
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(1, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\UndefinedHasTypeDefinition.xml");
+      _log.TestConsistency(1);
+      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log[0].BuildError.Identifier);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(0, _log.TraceList.Count());
+      _log.TestConsistency(0);
       //TODO Recognize problems with P3.7.13 HasTypeDefinition ReferenceType #39
     }
 
@@ -225,18 +212,17 @@ namespace UAOOI.SemanticData.UANodeSetValidation
     [TestCategory("Incorrect Model")]
     public void UndefinedHasComponentTargetTestMethod()
     {
-      FileInfo _testDataFileInfo = new FileInfo(@"ModelsWithErrors\UndefinedHasChildren.xml");
-      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(_testDataFileInfo);
-      Assert.AreEqual<int>(1, _log.TraceList.Count());
-      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
+      TracedAddressSpaceContext _log = new TracedAddressSpaceContext(@"ModelsWithErrors\UndefinedHasChildren.xml");
+      _log.TestConsistency(1);
+      Assert.AreEqual<string>(BuildError.ModelsCannotBeNull.Identifier, _log[0].BuildError.Identifier);
       _log.Clear();
       _log.ValidateAndExportModel(m_NameSpace);
-      Assert.AreEqual<int>(5, _log.TraceList.Where<TraceMessage>(x => x.BuildError.Focus != Focus.Diagnostic).Count<TraceMessage>());
-      Assert.AreEqual<string>(BuildError.NodeCannotBeNull.Identifier, _log.TraceList[0].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.NodeCannotBeNull.Identifier, _log.TraceList[1].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.DanglingReferenceTarget.Identifier, _log.TraceList[2].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.DanglingReferenceTarget.Identifier, _log.TraceList[3].BuildError.Identifier);
-      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log.TraceList[4].BuildError.Identifier);
+      _log.TestConsistency(5);
+      Assert.AreEqual<string>(BuildError.NodeCannotBeNull.Identifier, _log[0].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.NodeCannotBeNull.Identifier, _log[1].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.DanglingReferenceTarget.Identifier, _log[2].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.DanglingReferenceTarget.Identifier, _log[3].BuildError.Identifier);
+      Assert.AreEqual<string>(BuildError.NonCategorized.Identifier, _log[4].BuildError.Identifier);
     }
 
     #endregion TestMethod

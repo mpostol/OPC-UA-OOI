@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using UAOOI.SemanticData.AddressSpace.Abstractions;
 using UAOOI.SemanticData.BuildingErrorsHandling;
 using UAOOI.SemanticData.InformationModelFactory;
@@ -24,30 +25,89 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
   /// Implements the <seealso cref="IBuildErrorsHandling"/> interface
   /// </summary>
   ///
-  internal class TracedAddressSpaceContext : IBuildErrorsHandling
+  internal class TracedAddressSpaceContext
   {
     /// <summary>
     /// Setup new instance
     /// - creates <see cref="IAddressSpaceContext"/>
     /// - reads standard model
-    /// - reads custom model if not null
+    /// - reads custom model
     /// </summary>
-    /// <param name="testDataFileInfo">Custom model for testing purpose</param>
-    internal TracedAddressSpaceContext(FileInfo testDataFileInfo)
+    /// <param name="iUANodeSet">Custom model for testing purpose</param>
+    internal TracedAddressSpaceContext(IUANodeSet iUANodeSet) : this()
     {
-      AddressSpace = AddressSpaceFactory.AddressSpace(this);
-      IUANodeSet iUANodeSet = UANodeSet.ReadUADefinedTypes();
+      Assert.IsNotNull(iUANodeSet);
       AddressSpace.ImportUANodeSet(iUANodeSet);
-      if (testDataFileInfo != null)
-      {
-        Assert.IsTrue(testDataFileInfo.Exists);
-        iUANodeSet = UANodeSet.ReadModelFile(testDataFileInfo);
-        AddressSpace.ImportUANodeSet(iUANodeSet);
-      }
     }
 
+    /// <summary>
+    /// Setup new instance
+    /// - creates <see cref="IAddressSpaceContext"/>
+    /// - reads standard model
+    /// - reads custom model
+    /// </summary>
+    /// <param name="path">Custom model for testing purpose</param>
+    internal TracedAddressSpaceContext(string path) : this()
+    {
+      FileInfo testDataFileInfo = new FileInfo(path);
+      Assert.IsTrue(testDataFileInfo.Exists);
+      IUANodeSet iUANodeSet = UANodeSet.ReadModelFile(testDataFileInfo);
+      AddressSpace.ImportUANodeSet(iUANodeSet);
+    }
+
+    /// <summary>
+    /// Setup new instance
+    /// - creates <see cref="IAddressSpaceContext"/>
+    /// - reads standard model
+    /// </summary>
+    internal TracedAddressSpaceContext()
+    {
+      Log.Clear();
+      AddressSpace = addressSpaceContext.Value;
+    }
+
+    private class BuildErrorsHandling : IBuildErrorsHandling
+    {
+      internal void Clear()
+      {
+        Errors = 0;
+        TraceList.Clear();
+      }
+
+      internal List<TraceMessage> TraceList = new List<TraceMessage>();
+
+      #region IBuildErrorsHandling
+
+      public int Errors { get; set; } = 0;
+
+      public void TraceData(TraceEventType eventType, int id, object data)
+      {
+        throw new NotImplementedException($"{nameof(TraceData)} must not be used");
+      }
+
+      public void WriteTraceMessage(TraceMessage traceMessage)
+      {
+        Console.WriteLine(traceMessage.ToString());
+        if (traceMessage.BuildError.Focus == Focus.Diagnostic)
+          return;
+        Errors++;
+        TraceList.Add(traceMessage);
+      }
+
+      #endregion IBuildErrorsHandling
+    }
+
+    private static BuildErrorsHandling Log = new BuildErrorsHandling();
+
+    private static Lazy<IAddressSpaceContext> addressSpaceContext = new Lazy<IAddressSpaceContext>(() =>
+    {
+      var x = AddressSpaceFactory.AddressSpace(Log);
+      x.ImportUANodeSet(UANodeSet.ReadUADefinedTypes());
+      return x;
+    });
+
+    internal TraceMessage this[int i] => Log.TraceList[i];
     internal IAddressSpaceContext AddressSpace = null;
-    internal readonly List<TraceMessage> TraceList = new List<TraceMessage>();
 
     internal void UTAddressSpaceCheckConsistency(Action<IUANodeContext> action)
     {
@@ -89,35 +149,19 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
       ((AddressSpaceContext)AddressSpace).GetBaseTypes(hasPropertyNode, inheritanceChain);
     }
 
+    internal int Where(Func<TraceMessage, bool> predicate)
+    {
+      return Log.TraceList.Where<TraceMessage>(predicate).Count<TraceMessage>();
+    }
+
     internal void TestConsistency(int errorsCounter)
     {
-      Assert.AreEqual<int>(errorsCounter, TraceList.Count);
+      Assert.AreEqual<int>(errorsCounter, Log.TraceList.Count);
     }
 
     internal void Clear()
     {
-      Errors = 0;
-      TraceList.Clear();
+      Log.Clear();
     }
-
-    #region IBuildErrorsHandling
-
-    public int Errors { get; set; } = 0;
-
-    public void TraceData(TraceEventType eventType, int id, object data)
-    {
-      throw new NotImplementedException($"{nameof(TraceData)} must not be used");
-    }
-
-    public void WriteTraceMessage(TraceMessage traceMessage)
-    {
-      Console.WriteLine(traceMessage.ToString());
-      if (traceMessage.BuildError.Focus == Focus.Diagnostic)
-        return;
-      Errors++;
-      TraceList.Add(traceMessage);
-    }
-
-    #endregion IBuildErrorsHandling
   }
 }

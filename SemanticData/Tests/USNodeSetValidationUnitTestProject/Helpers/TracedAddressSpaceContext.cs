@@ -52,6 +52,7 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
       FileInfo testDataFileInfo = new FileInfo(path);
       Assert.IsTrue(testDataFileInfo.Exists);
       IUANodeSet iUANodeSet = UANodeSet.ReadModelFile(testDataFileInfo);
+      Assert.IsNotNull(iUANodeSet);
       AddressSpace.ImportUANodeSet(iUANodeSet);
     }
 
@@ -62,52 +63,12 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
     /// </summary>
     internal TracedAddressSpaceContext()
     {
-      Log.Clear();
-      AddressSpace = addressSpaceContext.Value;
+      AddressSpace = AddressSpaceFactory.AddressSpace(Log);
+      AddressSpace.ImportUANodeSet(UANodeSet.ReadUADefinedTypes());
     }
-
-    private class BuildErrorsHandling : IBuildErrorsHandling
-    {
-      internal void Clear()
-      {
-        Errors = 0;
-        TraceList.Clear();
-      }
-
-      internal List<TraceMessage> TraceList = new List<TraceMessage>();
-
-      #region IBuildErrorsHandling
-
-      public int Errors { get; set; } = 0;
-
-      public void TraceData(TraceEventType eventType, int id, object data)
-      {
-        throw new NotImplementedException($"{nameof(TraceData)} must not be used");
-      }
-
-      public void WriteTraceMessage(TraceMessage traceMessage)
-      {
-        Console.WriteLine(traceMessage.ToString());
-        if (traceMessage.BuildError.Focus == Focus.Diagnostic)
-          return;
-        Errors++;
-        TraceList.Add(traceMessage);
-      }
-
-      #endregion IBuildErrorsHandling
-    }
-
-    private static BuildErrorsHandling Log = new BuildErrorsHandling();
-
-    private static Lazy<IAddressSpaceContext> addressSpaceContext = new Lazy<IAddressSpaceContext>(() =>
-    {
-      var x = AddressSpaceFactory.AddressSpace(Log);
-      x.ImportUANodeSet(UANodeSet.ReadUADefinedTypes());
-      return x;
-    });
 
     internal TraceMessage this[int i] => Log.TraceList[i];
-    internal IAddressSpaceContext AddressSpace = null;
+    internal IAddressSpaceContext AddressSpace { get; private set; }
 
     internal void UTAddressSpaceCheckConsistency(Action<IUANodeContext> action)
     {
@@ -163,5 +124,42 @@ namespace UAOOI.SemanticData.UANodeSetValidation.Helpers
     {
       Log.Clear();
     }
+
+    #region private instrumentation
+
+    private class BuildErrorsHandling : IBuildErrorsHandling
+    {
+      internal void Clear()
+      {
+        Errors = 0;
+        TraceList.Clear();
+      }
+
+      internal List<TraceMessage> TraceList = new List<TraceMessage>();
+
+      #region IBuildErrorsHandling
+
+      public int Errors { get; set; } = 0;
+
+      public void TraceData(TraceEventType eventType, int id, object data)
+      {
+        throw new NotImplementedException($"{nameof(TraceData)} must not be used");
+      }
+
+      public void WriteTraceMessage(TraceMessage traceMessage)
+      {
+        Console.WriteLine(traceMessage.ToString());
+        if (traceMessage.BuildError.Focus == Focus.Diagnostic)
+          return;
+        Errors++;
+        TraceList.Add(traceMessage);
+      }
+
+      #endregion IBuildErrorsHandling
+    }
+
+    private BuildErrorsHandling Log = new BuildErrorsHandling();
+
+    #endregion private instrumentation
   }
 }

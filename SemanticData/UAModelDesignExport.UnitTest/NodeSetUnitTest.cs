@@ -79,6 +79,7 @@ namespace UAOOI.SemanticData.UAModelDesignExport
 
     [TestMethod]
     public void UAVariableTypeTestMethod()
+    //TODO UAVariableTypeTestMethod - fix UT errors #680 UT error
     {
       FileInfo _testDataFileInfo = new FileInfo(@"Models\VariableTypeTest\VariableTypeTest.NodeSet2.xml");
       Assert.IsTrue(_testDataFileInfo.Exists);
